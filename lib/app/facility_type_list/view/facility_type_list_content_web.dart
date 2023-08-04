@@ -4,6 +4,7 @@ import 'package:cmms/app/constant/constant.dart';
 import 'package:cmms/app/facility_type_list/facility_type_list_controller.dart';
 import 'package:cmms/app/widgets/custom_swich_toggle.dart';
 import 'package:cmms/app/widgets/dropdown.dart';
+import 'package:cmms/app/widgets/dropdown_web.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:cmms/app/widgets/custom_textfield.dart';
@@ -225,7 +226,26 @@ class FacilityTypeListContentWeb extends GetView<FacilityTypeListController> {
                                                                 .size
                                                                 .width *
                                                             .3),
-                                                    child: DropdownWidget(
+                                                    child: DropdownWebWidget(
+                                                      boxShadow: [
+                                                        BoxShadow(
+                                                          color: Colors.black26,
+                                                          offset: const Offset(
+                                                            5.0,
+                                                            5.0,
+                                                          ),
+                                                          blurRadius: 5.0,
+                                                          spreadRadius: 1.0,
+                                                        ),
+                                                        BoxShadow(
+                                                          color: ColorValues
+                                                              .whiteColor,
+                                                          offset: const Offset(
+                                                              0.0, 0.0),
+                                                          blurRadius: 0.0,
+                                                          spreadRadius: 0.0,
+                                                        ),
+                                                      ],
                                                       controller: controller,
                                                       dropdownList:
                                                           controller.ownerList,
@@ -300,7 +320,26 @@ class FacilityTypeListContentWeb extends GetView<FacilityTypeListController> {
                                                                 .size
                                                                 .width *
                                                             .3),
-                                                    child: DropdownWidget(
+                                                    child: DropdownWebWidget(
+                                                      boxShadow: [
+                                                        BoxShadow(
+                                                          color: Colors.black26,
+                                                          offset: const Offset(
+                                                            5.0,
+                                                            5.0,
+                                                          ),
+                                                          blurRadius: 5.0,
+                                                          spreadRadius: 1.0,
+                                                        ),
+                                                        BoxShadow(
+                                                          color: ColorValues
+                                                              .whiteColor,
+                                                          offset: const Offset(
+                                                              0.0, 0.0),
+                                                          blurRadius: 0.0,
+                                                          spreadRadius: 0.0,
+                                                        ),
+                                                      ],
                                                       controller: controller,
                                                       dropdownList: controller
                                                           .customerList,
@@ -378,7 +417,26 @@ class FacilityTypeListContentWeb extends GetView<FacilityTypeListController> {
                                                                 .size
                                                                 .width *
                                                             .3),
-                                                    child: DropdownWidget(
+                                                    child: DropdownWebWidget(
+                                                      boxShadow: [
+                                                        BoxShadow(
+                                                          color: Colors.black26,
+                                                          offset: const Offset(
+                                                            5.0,
+                                                            5.0,
+                                                          ),
+                                                          blurRadius: 5.0,
+                                                          spreadRadius: 1.0,
+                                                        ),
+                                                        BoxShadow(
+                                                          color: ColorValues
+                                                              .whiteColor,
+                                                          offset: const Offset(
+                                                              0.0, 0.0),
+                                                          blurRadius: 0.0,
+                                                          spreadRadius: 0.0,
+                                                        ),
+                                                      ],
                                                       controller: controller,
                                                       dropdownList: controller
                                                           .operatorList,
@@ -455,7 +513,26 @@ class FacilityTypeListContentWeb extends GetView<FacilityTypeListController> {
                                                                 .size
                                                                 .height *
                                                             0.040,
-                                                    child: DropdownWidget(
+                                                    child: DropdownWebWidget(
+                                                      boxShadow: [
+                                                        BoxShadow(
+                                                          color: Colors.black26,
+                                                          offset: const Offset(
+                                                            5.0,
+                                                            5.0,
+                                                          ),
+                                                          blurRadius: 5.0,
+                                                          spreadRadius: 1.0,
+                                                        ),
+                                                        BoxShadow(
+                                                          color: ColorValues
+                                                              .whiteColor,
+                                                          offset: const Offset(
+                                                              0.0, 0.0),
+                                                          blurRadius: 0.0,
+                                                          spreadRadius: 0.0,
+                                                        ),
+                                                      ],
                                                       controller: controller,
                                                       dropdownList:
                                                           controller.SpvList,
@@ -587,7 +664,29 @@ class FacilityTypeListContentWeb extends GetView<FacilityTypeListController> {
                                                                 .size
                                                                 .width *
                                                             .3),
-                                                    child: DropdownWidget(
+                                                    child: DropdownWebWidget(
+                                                        boxShadow: [
+                                                          BoxShadow(
+                                                            color:
+                                                                Colors.black26,
+                                                            offset:
+                                                                const Offset(
+                                                              5.0,
+                                                              5.0,
+                                                            ),
+                                                            blurRadius: 5.0,
+                                                            spreadRadius: 1.0,
+                                                          ),
+                                                          BoxShadow(
+                                                            color: ColorValues
+                                                                .whiteColor,
+                                                            offset:
+                                                                const Offset(
+                                                                    0.0, 0.0),
+                                                            blurRadius: 0.0,
+                                                            spreadRadius: 0.0,
+                                                          ),
+                                                        ],
                                                         controller: controller,
                                                         dropdownList: controller
                                                             .countryList,
@@ -654,7 +753,29 @@ class FacilityTypeListContentWeb extends GetView<FacilityTypeListController> {
                                                                 .size
                                                                 .width *
                                                             .3),
-                                                    child: DropdownWidget(
+                                                    child: DropdownWebWidget(
+                                                        boxShadow: [
+                                                          BoxShadow(
+                                                            color:
+                                                                Colors.black26,
+                                                            offset:
+                                                                const Offset(
+                                                              5.0,
+                                                              5.0,
+                                                            ),
+                                                            blurRadius: 5.0,
+                                                            spreadRadius: 1.0,
+                                                          ),
+                                                          BoxShadow(
+                                                            color: ColorValues
+                                                                .whiteColor,
+                                                            offset:
+                                                                const Offset(
+                                                                    0.0, 0.0),
+                                                            blurRadius: 0.0,
+                                                            spreadRadius: 0.0,
+                                                          ),
+                                                        ],
                                                         controller: controller,
                                                         dropdownList: controller
                                                             .stateList,
@@ -730,7 +851,29 @@ class FacilityTypeListContentWeb extends GetView<FacilityTypeListController> {
                                                                 .size
                                                                 .width *
                                                             .3),
-                                                    child: DropdownWidget(
+                                                    child: DropdownWebWidget(
+                                                        boxShadow: [
+                                                          BoxShadow(
+                                                            color:
+                                                                Colors.black26,
+                                                            offset:
+                                                                const Offset(
+                                                              5.0,
+                                                              5.0,
+                                                            ),
+                                                            blurRadius: 5.0,
+                                                            spreadRadius: 1.0,
+                                                          ),
+                                                          BoxShadow(
+                                                            color: ColorValues
+                                                                .whiteColor,
+                                                            offset:
+                                                                const Offset(
+                                                                    0.0, 0.0),
+                                                            blurRadius: 0.0,
+                                                            spreadRadius: 0.0,
+                                                          ),
+                                                        ],
                                                         controller: controller,
                                                         dropdownList:
                                                             controller.cityList,
@@ -909,7 +1052,7 @@ class FacilityTypeListContentWeb extends GetView<FacilityTypeListController> {
                                                             .issuccessCreatechecklist();
                                                     });
                                                   },
-                                                  text: 'Create BusinessType ')
+                                                  text: 'Create Facility ')
                                               : CustomElevatedButton(
                                                   backgroundColor: ColorValues
                                                       .appDarkBlueColor,
@@ -1161,8 +1304,10 @@ class FacilityTypeListContentWeb extends GetView<FacilityTypeListController> {
                                                             : (value ==
                                                                     "Action")
                                                                 ? Wrap(
+                                                                      alignment: WrapAlignment.center, // Align buttons to the center
                                                                     children: [
-                                                                        // varUserAccessModel.value.access_list!.where((e) => e.feature_id == 5 && e.edit == 1).length >
+
+                                                                      // varUserAccessModel.value.access_list!.where((e) => e.feature_id == 5 && e.edit == 1).length >
                                                                         //         0
                                                                         //     ?
                                                                         Container(
@@ -1173,7 +1318,10 @@ class FacilityTypeListContentWeb extends GetView<FacilityTypeListController> {
                                                                             children: [
                                                                               Container(
                                                                                 padding: EdgeInsets.only(bottom: 10),
-                                                                                child: Row(children: [
+                                                                                child: Row(
+                                                                                    mainAxisAlignment:
+                                                                                    MainAxisAlignment.center,
+                                                                                    children: [
                                                                                   TableActionButton(
                                                                                     color: ColorValues.appLightBlueColor,
                                                                                     icon: Icons.visibility,
@@ -1181,7 +1329,7 @@ class FacilityTypeListContentWeb extends GetView<FacilityTypeListController> {
                                                                                     onPress: () {},
                                                                                   ),
                                                                                   TableActionButton(
-                                                                                    color: ColorValues.appLightBlueColor,
+                                                                                    color: ColorValues.editColor,
                                                                                     icon: Icons.edit,
                                                                                     message: 'Edit',
                                                                                     onPress: () {
@@ -1205,7 +1353,7 @@ class FacilityTypeListContentWeb extends GetView<FacilityTypeListController> {
                                                                                     },
                                                                                   ),
                                                                                   TableActionButton(
-                                                                                    color: ColorValues.appRedColor,
+                                                                                    color: ColorValues.deleteColor,
                                                                                     icon: Icons.delete,
                                                                                     message: 'Delete',
                                                                                     onPress: () {
@@ -1220,9 +1368,12 @@ class FacilityTypeListContentWeb extends GetView<FacilityTypeListController> {
                                                                         ),
                                                                         // : Container()
                                                                       ])
-                                                                : Text(
-                                                                    value,
-                                                                  ));
+                                                                : Align(
+                                                          // Align the text in the center
+                                                          alignment: Alignment.center,
+                                                          child: Text(value),
+                                                        ),
+                                                    );
                                                   }).toList());
                                             }).toList(),
                                           ),

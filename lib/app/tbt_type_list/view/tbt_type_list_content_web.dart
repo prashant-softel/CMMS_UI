@@ -4,6 +4,7 @@ import 'package:cmms/app/constant/constant.dart';
 import 'package:cmms/app/tbt_type_list/tbt_type_list_controller.dart';
 import 'package:cmms/app/widgets/custom_swich_toggle.dart';
 import 'package:cmms/app/widgets/dropdown.dart';
+import 'package:cmms/app/widgets/dropdown_web.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:cmms/app/widgets/custom_textfield.dart';
@@ -117,7 +118,26 @@ class TBTTypeListContentWeb extends GetView<TBTTypeListController> {
                                                           .width *
                                                       .2) -
                                                   30,
-                                              child: DropdownWidget(
+                                              child: DropdownWebWidget(
+                                                boxShadow: [
+                                                  BoxShadow(
+                                                    color: Colors.black26,
+                                                    offset: const Offset(
+                                                      5.0,
+                                                      5.0,
+                                                    ),
+                                                    blurRadius: 5.0,
+                                                    spreadRadius: 1.0,
+                                                  ),
+                                                  BoxShadow(
+                                                    color:
+                                                        ColorValues.whiteColor,
+                                                    offset:
+                                                        const Offset(0.0, 0.0),
+                                                    blurRadius: 0.0,
+                                                    spreadRadius: 0.0,
+                                                  ),
+                                                ],
                                                 dropdownList:
                                                     controller.facilityList,
                                                 isValueSelected: controller
@@ -477,13 +497,14 @@ class TBTTypeListContentWeb extends GetView<TBTTypeListController> {
                                                             : (value ==
                                                                     "Action")
                                                                 ? Wrap(
+                                                          alignment: WrapAlignment.center,
                                                                     children: [
                                                                         // varUserAccessModel.value.access_list!.where((e) => e.feature_id == 5 && e.edit == 1).length >
                                                                         //         0
                                                                         //     ?
                                                                         TableActionButton(
                                                                           color:
-                                                                              ColorValues.appLightBlueColor,
+                                                                              ColorValues.editColor,
                                                                           icon:
                                                                               Icons.edit,
                                                                           message:
@@ -498,7 +519,7 @@ class TBTTypeListContentWeb extends GetView<TBTTypeListController> {
                                                                         //     ?
                                                                         TableActionButton(
                                                                           color:
-                                                                              ColorValues.appRedColor,
+                                                                              ColorValues.deleteColor,
                                                                           icon:
                                                                               Icons.delete,
                                                                           message:

@@ -1,5 +1,6 @@
 import 'package:cmms/app/app.dart';
 import 'package:cmms/app/constant/constant.dart';
+import 'package:cmms/app/widgets/dropdown_web.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -55,7 +56,24 @@ class HeaderWidget extends GetView<HomeController> {
                 () => Container(
                   width: Get.width * .2,
                   height: 35,
-                  child: DropdownWidget(
+                  child: DropdownWebWidget(
+                    boxShadow: [
+                      BoxShadow(
+                        color: Colors.black26,
+                        offset: const Offset(
+                          5.0,
+                          5.0,
+                        ),
+                        blurRadius: 5.0,
+                        spreadRadius: 1.0,
+                      ),
+                      BoxShadow(
+                        color: ColorValues.whiteColor,
+                        offset: const Offset(0.0, 0.0),
+                        blurRadius: 0.0,
+                        spreadRadius: 0.0,
+                      ),
+                    ],
                     controller: controller,
                     dropdownList: controller.facilityList,
                     isValueSelected: controller.isFacilitySelected.value,

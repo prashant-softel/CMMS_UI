@@ -606,10 +606,16 @@ class ConnectHelper {
     bool? isLoading,
     int? facilityId,
     int? userId,
+    String? start_date,
+    required String end_date,
   }) async {
     // facilityId = 45;
+     var startDateParam = (start_date != null) ? 'start_date=$start_date&' : '';
+    var endDateParam = (end_date != '') ? 'end_date=$end_date' : '';
     var responseModel = await apiWrapper.makeRequest(
-      'Permit/GetPermitList?facility_id=$facilityId&userId=$userId',
+      'Permit/GetPermitList?facility_id=$facilityId&userId=$userId' +
+      startDateParam +
+      endDateParam,
       Request.get,
       null,
       isLoading ?? false,

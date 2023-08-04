@@ -42,7 +42,7 @@ class BusinessListController extends GetxController {
   RxList<BusinessTypeModel?>  businessCategoryList =
       <BusinessTypeModel>[].obs;
 
-  Rx<String> selectedBusinessType = ''.obs;
+  Rx<String?> selectedBusinessType = ''.obs;
   Rx<String> selectedCountry = ''.obs;
   Rx<String> selectedState = ''.obs;
   Rx<String> selectedCity = ''.obs;
@@ -50,7 +50,7 @@ class BusinessListController extends GetxController {
   Rx<bool> isSelectedCountryType = true.obs;
   Rx<bool> isSelectedStateType = true.obs;
   Rx<bool> isSelectedCityType = true.obs;
-  int selectedBusinessTypeId = 1;
+  int? selectedBusinessTypeId = 1;
   int selectedCountryId = 0;
   int selectedStateId = 0;
   int selectedCityId = 0;
@@ -134,14 +134,17 @@ class BusinessListController extends GetxController {
           businessCategoryList.add(_equipmentCategoryList);
         }
       }
-      // if(selectedBusinessType.value != '') {
+      // if(selectedBusinessType.value != '')
+
       //   print("$selectedBusinessTypeId");
       //
       //   getBusinessList(selectedBusinessTypeId, true);
       // }
     print("$selectedBusinessTypeId");
     // }
-
+    selectedBusinessType.value = businessCategoryList[0]?.name!;
+    selectedBusinessTypeId = businessCategoryList[0]?.id! ;
+    getBusinessList(selectedBusinessTypeId,true);
   }
 
 
@@ -208,7 +211,7 @@ class BusinessListController extends GetxController {
           businessCategoryList.indexWhere((x) => x?.name == value);
           selectedBusinessTypeId = businessCategoryList[equipmentIndex]?.id ?? 0;
           selectedBusinessType.value = value;
-          getBusinessList(selectedBusinessTypeId, true);
+          getBusinessList(selectedBusinessTypeId!, true);
         }
 
         break;
@@ -279,12 +282,12 @@ class BusinessListController extends GetxController {
     return selectedBusinessType.value;
   }
 
-  Future<void> getBusinessList(int type , bool isLoading)
+  Future<void> getBusinessList(selectedBusinessTypeId , bool isLoading)
   async {
       moduleList?.value = <BusinessListModel>[];
       final _moduleList =
       await businessListPresenter.getBusinessList(
-          businessType: type, isLoading: isLoading);
+          businessType: selectedBusinessTypeId, isLoading: isLoading);
 
       if (_moduleList != null) {
         moduleList!.value = _moduleList;
@@ -388,7 +391,7 @@ class BusinessListController extends GetxController {
     locationCtrlr.text = '';
     addressCtrlr.text = '';
     zipCtrlr.text = '';
-    selectedBusinessType.value = '';
+    // selectedBusinessType.value = '';
     selectedCountry.value = '';
     selectedCity.value = '';
     selectedState.value = '';

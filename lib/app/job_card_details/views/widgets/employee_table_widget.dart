@@ -1,3 +1,4 @@
+import 'package:cmms/app/widgets/dropdown_web.dart';
 import 'package:data_table_2/data_table_2.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -161,7 +162,24 @@ class AddEmployeeDialog extends StatelessWidget {
                           ]),
                     ),
                   ),
-                  DropdownWidget(
+                  DropdownWebWidget(
+                    boxShadow: [
+                      BoxShadow(
+                        color: Colors.black26,
+                        offset: const Offset(
+                          5.0,
+                          5.0,
+                        ),
+                        blurRadius: 5.0,
+                        spreadRadius: 1.0,
+                      ),
+                      BoxShadow(
+                        color: ColorValues.whiteColor,
+                        offset: const Offset(0.0, 0.0),
+                        blurRadius: 0.0,
+                        spreadRadius: 0.0,
+                      ),
+                    ],
                     controller: controller,
                     dropdownList: controller.employeeList,
                     isValueSelected: controller.isEmployeeSelected.value,

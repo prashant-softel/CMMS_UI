@@ -12,10 +12,12 @@ import '../../domain/models/inventory_category_model.dart';
 import '../navigators/app_pages.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 
+import '../widgets/custom_elevated_button.dart';
+
 class PreventiveListController extends GetxController {
   PreventiveListController(
-      this.preventiveListPresenter,
-      );
+    this.preventiveListPresenter,
+  );
   PreventiveListPresenter preventiveListPresenter;
   final HomeController homecontroller = Get.find();
   // final HomeController homecontroller = Get.put( HomeController.new);
@@ -84,8 +86,8 @@ class PreventiveListController extends GetxController {
       int facilityId, int type, bool isLoading) async {
     preventiveCheckList?.value = <PreventiveCheckListModel>[];
     final _preventiveCheckList =
-    await preventiveListPresenter.getPreventiveCheckList(
-        facilityId: facilityId, type: type, isLoading: isLoading);
+        await preventiveListPresenter.getPreventiveCheckList(
+            facilityId: facilityId, type: type, isLoading: isLoading);
 
     if (_preventiveCheckList != null) {
       preventiveCheckList!.value = _preventiveCheckList;
@@ -116,7 +118,7 @@ class PreventiveListController extends GetxController {
       case RxList<InventoryCategoryModel>:
         {
           int equipmentIndex =
-          equipmentCategoryList.indexWhere((x) => x?.name == value);
+              equipmentCategoryList.indexWhere((x) => x?.name == value);
           selectedEquipmentId = equipmentCategoryList[equipmentIndex]?.id ?? 0;
         }
 
@@ -124,7 +126,7 @@ class PreventiveListController extends GetxController {
       case RxList<FrequencyModel>:
         {
           int frequencyIndex =
-          frequencyList.indexWhere((x) => x?.name == value);
+              frequencyList.indexWhere((x) => x?.name == value);
           selectedfrequencyId = frequencyList[frequencyIndex]?.id ?? 0;
         }
         break;
@@ -177,6 +179,17 @@ class PreventiveListController extends GetxController {
     await {_cleardata()};
   }
 
+  cleardata() {
+    checklistNumberCtrlr.text = '';
+    durationCtrlr.text = '';
+    manpowerCtrlr.text = '';
+
+    selectedequipment.value = '';
+
+    selectedfrequency.value = '';
+    selectedItem = null;
+  }
+
   _cleardata() {
     checklistNumberCtrlr.text = '';
     durationCtrlr.text = '';
@@ -198,47 +211,52 @@ class PreventiveListController extends GetxController {
   void isDeleteDialog({String? checklist_id, String? checklist}) {
     Get.dialog(
       AlertDialog(
-        content: Column(mainAxisSize: MainAxisSize.min, children: [
-          Icon(Icons.delete, size: 35, color: ColorValues.redColor),
-          SizedBox(
-            height: 10,
-          ),
-          RichText(
-            text: TextSpan(
-                text: 'Are you sure you want to delete the checkpoint ',
-                style: Styles.blackBold16,
-                children: [
-                  TextSpan(
-                    text: checklist,
-                    style: TextStyle(
-                      color: ColorValues.orangeColor,
-                      fontWeight: FontWeight.bold,
-                    ),
-                  ),
-                ]),
-          ),
-        ]),
+        content: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              Text("${checklist}", style: Styles.blackBold16),
+              Divider(
+                color: ColorValues.appLightGreyColor,
+              ),
+              Dimens.boxHeight5,
+              RichText(
+                text: TextSpan(
+                    text: 'Are you sure you want to delete the checklist ',
+                    style: Styles.blackBold16,
+                    children: [
+                      TextSpan(
+                        text: checklist,
+                        style: TextStyle(
+                          color: ColorValues.orangeColor,
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
+                    ]),
+              ),
+            ]),
         actions: [
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: [
-              TextButton(
-                onPressed: () {
-                  Get.back();
-                },
-                child: Text('NO'),
-              ),
-              TextButton(
-                onPressed: () {
-                  deleteCkecklist(checklist_id).then((value) {
+              CustomElevatedButton(
+                  backgroundColor: ColorValues.appRedColor,
+                  onPressed: () {
                     Get.back();
-                    getPreventiveCheckList(facilityId, type, true);
-                  });
-                },
-                child: Text('YES'),
-              ),
+                  },
+                  text: 'No'),
+              CustomElevatedButton(
+                  backgroundColor: ColorValues.appGreenColor,
+                  onPressed: () {
+                    deleteCkecklist(checklist_id).then((value) {
+                      Get.back();
+                      getPreventiveCheckList(facilityId, type, true);
+                    });
+                  },
+                  text: 'Yes'),
             ],
-          )
+          ),
+          Dimens.boxHeight5
         ],
       ),
     );
@@ -269,7 +287,7 @@ class PreventiveListController extends GetxController {
         id: checklistId,
         checklist_number: _checklistNumber);
     var checklistJsonString =
-    createChecklist.toJson(); //createCheckListToJson([createChecklist]);
+        createChecklist.toJson(); //createCheckListToJson([createChecklist]);
 
     print({"checklistJsonString", checklistJsonString});
     await preventiveListPresenter.updateChecklistNumber(

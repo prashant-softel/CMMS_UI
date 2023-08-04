@@ -93,11 +93,11 @@ class InventoryStatusListContentWeb
                                           CrossAxisAlignment.start,
                                       children: [
                                         Text(
-                                          "Create Inventory Type",
+                                          "Create Inventory Status",
                                           style: Styles.blackBold16,
                                         ),
                                         SizedBox(
-                                          height: 30,
+                                          height: 20,
                                         ),
                                         Visibility(
                                           visible: controller.isSuccess.value,
@@ -125,10 +125,7 @@ class InventoryStatusListContentWeb
                                           mainAxisAlignment:
                                               MainAxisAlignment.spaceBetween,
                                           children: [
-                                            CustomRichText(title: 'RiskType: '),
-                                            SizedBox(
-                                              width: 70,
-                                            ),
+                                            Expanded(child: CustomRichText(title: 'Name: ')),
                                             Expanded(
                                               child: Container(
                                                   width: (MediaQuery.of(context)
@@ -170,16 +167,15 @@ class InventoryStatusListContentWeb
                                           ],
                                         ),
                                         SizedBox(
-                                          height: 20,
+                                          height: 10,
                                         ),
                                         Row(
                                           mainAxisAlignment:
                                               MainAxisAlignment.spaceBetween,
                                           children: [
-                                            CustomRichText(
-                                                title: 'Description: '),
-                                            SizedBox(
-                                              width: 70,
+                                            Expanded(
+                                              child: CustomRichText(
+                                                  title: 'Description: '),
                                             ),
                                             Expanded(
                                               child: Container(
@@ -257,7 +253,7 @@ class InventoryStatusListContentWeb
                                                           .issuccessCreatechecklist();
                                                   });
                                                 },
-                                                text: 'Create Inventory Type')
+                                                text: 'Create Inventory Status')
                                             : CustomElevatedButton(
                                                 backgroundColor: ColorValues
                                                     .appDarkBlueColor,
@@ -313,7 +309,6 @@ class InventoryStatusListContentWeb
                                     children: [
                                       Container(
                                         height: 35,
-                                        width: (Get.width * .1) - 60,
                                         margin: EdgeInsets.only(left: 10),
                                         child: CustomElevatedButton(
                                             backgroundColor:
@@ -329,7 +324,6 @@ class InventoryStatusListContentWeb
                                             text: 'Copy'),
                                       ),
                                       Container(
-                                        width: (Get.width * .1) - 60,
                                         height: 35,
                                         margin: EdgeInsets.only(left: 10),
                                         child: CustomElevatedButton(
@@ -339,7 +333,6 @@ class InventoryStatusListContentWeb
                                             text: 'Excel'),
                                       ),
                                       Container(
-                                        width: (Get.width * .1) - 70,
                                         height: 35,
                                         margin: EdgeInsets.only(left: 10),
                                         child: CustomElevatedButton(
@@ -349,7 +342,6 @@ class InventoryStatusListContentWeb
                                             text: 'PDF'),
                                       ),
                                       Container(
-                                        width: (Get.width * .2) - 200,
                                         height: 35,
                                         margin: EdgeInsets.only(left: 10),
                                         child: CustomElevatedButton(
@@ -437,7 +429,7 @@ class InventoryStatusListContentWeb
                                             paginationController:
                                                 controller.paginationController,
                                             columns: [
-                                              "Status Type Id",
+                                              "Status Id",
                                               "Name",
                                               "Description",
                                               "Action",
@@ -490,7 +482,7 @@ class InventoryStatusListContentWeb
                                                                         //     ?
                                                                         TableActionButton(
                                                                           color:
-                                                                              ColorValues.appLightBlueColor,
+                                                                              ColorValues.editColor,
                                                                           icon:
                                                                               Icons.edit,
                                                                           message:
@@ -517,7 +509,7 @@ class InventoryStatusListContentWeb
                                                                         //     ?
                                                                         TableActionButton(
                                                                           color:
-                                                                              ColorValues.appRedColor,
+                                                                              ColorValues.deleteColor,
                                                                           icon:
                                                                               Icons.delete,
                                                                           message:

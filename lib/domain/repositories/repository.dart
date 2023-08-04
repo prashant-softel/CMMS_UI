@@ -1886,10 +1886,12 @@ class Repository {
     }
   }
 
-  Future<List<NewPermitModel?>?> getNewPermitList(
+  Future<List<NewPermitModel>> getNewPermitList(
     String auth,
     int? facilityId,
     bool? isLoading,
+    String? start_date,
+     String end_date,
   ) async {
     try {
       final auth = await getSecuredValue(LocalKeys.authToken);
@@ -1904,6 +1906,8 @@ class Repository {
         // facilityId: 45,
         // userId: 33,
         facilityId: facilityId,
+         start_date: start_date,
+        end_date: end_date,
         userId: userId,
         // userId: 33,
         isLoading: isLoading ?? false,

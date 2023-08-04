@@ -54,6 +54,9 @@ class HomeDrawer extends GetView<HomeController> {
                                         controller.toggleExpansion();
                                       },
                                       child: Column(
+                                          crossAxisAlignment:
+                                              CrossAxisAlignment.start,
+                                          // mainAxisAlignment : MainAxisAlignment.start,
                                           //
                                           //shrinkWrap: true,
                                           children: [
@@ -66,15 +69,7 @@ class HomeDrawer extends GetView<HomeController> {
                                                 Get.offNamed(Routes.home);
                                               },
                                             ),
-                                            MenuItem(
-                                              isexpand:
-                                                  controller.isExpanded.value,
-                                              title: "Assets",
-                                              icon: "assets/files/warranty.png",
-                                              press: () {
-                                                Get.offNamed(Routes.inventory);
-                                              },
-                                            ),
+
                                             MenuItem(
                                               isexpand:
                                                   controller.isExpanded.value,
@@ -133,6 +128,15 @@ class HomeDrawer extends GetView<HomeController> {
                                             MenuItem(
                                               isexpand:
                                                   controller.isExpanded.value,
+                                              title: "Assets",
+                                              icon: "assets/files/warranty.png",
+                                              press: () {
+                                                Get.offNamed(Routes.inventory);
+                                              },
+                                            ),
+                                            MenuItem(
+                                              isexpand:
+                                                  controller.isExpanded.value,
                                               title: "Incident Report",
                                               icon:
                                                   "assets/files/reportins.png",
@@ -178,7 +182,7 @@ class HomeDrawer extends GetView<HomeController> {
                                               title: "Settings",
                                               icon: "assets/files/setting.png",
                                               press: () {
-                                                Get.offNamed(Routes.userList);
+                                                Get.offNamed(Routes.setting);
                                               },
                                             ),
                                             MenuItem(
@@ -260,11 +264,14 @@ class MenuItem extends StatelessWidget {
       padding: const EdgeInsets.only(left: 10),
       child: Container(
           child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        //  mainAxisAlignment: MainAxisAlignment.start,
         children: [
           Dimens.boxHeight15,
           GestureDetector(
             onTap: press,
             child: Row(
+              mainAxisAlignment: MainAxisAlignment.start,
               children: [
                 Image.asset(
                   icon,

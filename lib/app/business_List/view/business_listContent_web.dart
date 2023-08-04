@@ -1,6 +1,7 @@
 import 'package:clipboard/clipboard.dart';
 import 'package:cmms/app/app.dart';
 import 'package:cmms/app/constant/constant.dart';
+import 'package:cmms/app/widgets/dropdown_web.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:cmms/app/widgets/custom_textfield.dart';
@@ -168,7 +169,29 @@ class BusinessListContentWeb extends GetView<BusinessListController> {
                                                                   .size
                                                                   .height *
                                                               0.040,
-                                                      child: DropdownWidget(
+                                                      child: DropdownWebWidget(
+                                                        boxShadow: [
+                                                          BoxShadow(
+                                                            color:
+                                                                Colors.black26,
+                                                            offset:
+                                                                const Offset(
+                                                              5.0,
+                                                              5.0,
+                                                            ),
+                                                            blurRadius: 5.0,
+                                                            spreadRadius: 1.0,
+                                                          ),
+                                                          BoxShadow(
+                                                            color: ColorValues
+                                                                .whiteColor,
+                                                            offset:
+                                                                const Offset(
+                                                                    0.0, 0.0),
+                                                            blurRadius: 0.0,
+                                                            spreadRadius: 0.0,
+                                                          ),
+                                                        ],
                                                         controller: controller,
                                                         dropdownList: controller
                                                             .businessCategoryList,
@@ -618,7 +641,29 @@ class BusinessListContentWeb extends GetView<BusinessListController> {
                                                                   .width *
                                                               .2) -
                                                           35,
-                                                      child: DropdownWidget(
+                                                      child: DropdownWebWidget(
+                                                        boxShadow: [
+                                                          BoxShadow(
+                                                            color:
+                                                                Colors.black26,
+                                                            offset:
+                                                                const Offset(
+                                                              5.0,
+                                                              5.0,
+                                                            ),
+                                                            blurRadius: 5.0,
+                                                            spreadRadius: 1.0,
+                                                          ),
+                                                          BoxShadow(
+                                                            color: ColorValues
+                                                                .whiteColor,
+                                                            offset:
+                                                                const Offset(
+                                                                    0.0, 0.0),
+                                                            blurRadius: 0.0,
+                                                            spreadRadius: 0.0,
+                                                          ),
+                                                        ],
                                                         controller: controller,
                                                         dropdownList: controller
                                                             .countryList,
@@ -662,7 +707,29 @@ class BusinessListContentWeb extends GetView<BusinessListController> {
                                                                   .width *
                                                               .2) -
                                                           35,
-                                                      child: DropdownWidget(
+                                                      child: DropdownWebWidget(
+                                                        boxShadow: [
+                                                          BoxShadow(
+                                                            color:
+                                                                Colors.black26,
+                                                            offset:
+                                                                const Offset(
+                                                              5.0,
+                                                              5.0,
+                                                            ),
+                                                            blurRadius: 5.0,
+                                                            spreadRadius: 1.0,
+                                                          ),
+                                                          BoxShadow(
+                                                            color: ColorValues
+                                                                .whiteColor,
+                                                            offset:
+                                                                const Offset(
+                                                                    0.0, 0.0),
+                                                            blurRadius: 0.0,
+                                                            spreadRadius: 0.0,
+                                                          ),
+                                                        ],
                                                         controller: controller,
                                                         dropdownList: controller
                                                             .stateList,
@@ -705,7 +772,29 @@ class BusinessListContentWeb extends GetView<BusinessListController> {
                                                                   .size
                                                                   .height *
                                                               0.040,
-                                                      child: DropdownWidget(
+                                                      child: DropdownWebWidget(
+                                                        boxShadow: [
+                                                          BoxShadow(
+                                                            color:
+                                                                Colors.black26,
+                                                            offset:
+                                                                const Offset(
+                                                              5.0,
+                                                              5.0,
+                                                            ),
+                                                            blurRadius: 5.0,
+                                                            spreadRadius: 1.0,
+                                                          ),
+                                                          BoxShadow(
+                                                            color: ColorValues
+                                                                .whiteColor,
+                                                            offset:
+                                                                const Offset(
+                                                                    0.0, 0.0),
+                                                            blurRadius: 0.0,
+                                                            spreadRadius: 0.0,
+                                                          ),
+                                                        ],
                                                         controller: controller,
                                                         dropdownList:
                                                             controller.cityList,
@@ -824,7 +913,7 @@ class BusinessListContentWeb extends GetView<BusinessListController> {
                                                           .issuccessCreatebusinesslist();
                                                   });
                                                 },
-                                                text: 'Create Business List')
+                                                text: 'Create Business')
                                             : CustomElevatedButton(
                                                 backgroundColor: ColorValues
                                                     .appDarkBlueColor,
@@ -1096,13 +1185,14 @@ class BusinessListContentWeb extends GetView<BusinessListController> {
                                                             : (value ==
                                                                     "Action")
                                                                 ? Row(
+                                                                    mainAxisAlignment: MainAxisAlignment.center,
                                                                     children: [
                                                                         // varUserAccessModel.value.access_list!.where((e) => e.feature_id == 5 && e.edit == 1).length >
                                                                         //     0
                                                                         //     ?
                                                                         TableActionButton(
                                                                           color:
-                                                                              ColorValues.appLightBlueColor,
+                                                                              ColorValues.editColor,
                                                                           icon:
                                                                               Icons.edit,
                                                                           message:
@@ -1147,7 +1237,7 @@ class BusinessListContentWeb extends GetView<BusinessListController> {
                                                                         //     ?
                                                                         TableActionButton(
                                                                           color:
-                                                                              ColorValues.appRedColor,
+                                                                              ColorValues.deleteColor,
                                                                           icon:
                                                                               Icons.delete,
                                                                           message:
@@ -1161,9 +1251,11 @@ class BusinessListContentWeb extends GetView<BusinessListController> {
                                                                         )
                                                                         // : Container()
                                                                       ])
-                                                                : Text(
-                                                                    value,
-                                                                  ));
+                                                                : Align(
+                                                          // Align the text in the center
+                                                          alignment: Alignment.center,
+                                                          child: Text(value),
+                                                        ),);
                                                   }).toList());
                                             }).toList(),
                                           ),

@@ -581,7 +581,7 @@ class FacilityTypeListController extends GetxController {
           ),
           RichText(
             text: TextSpan(
-                text: 'Are you sure you want to delete the Business ',
+                text: 'Are you sure you want to delete the Facility ',
                 style: Styles.blackBold16,
                 children: [
                   TextSpan(

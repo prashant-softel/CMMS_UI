@@ -1560,14 +1560,14 @@ class NewPermitScreen extends GetView<NewPermitController> {
                                                   CustomRichText(
                                                       title: 'Block/Plot: '),
                                                   SizedBox(
-                                                    width: 10,
+                                                    width: 13,
                                                   ),
                                                   SizedBox(
                                                     width:
                                                         MediaQuery.of(context)
                                                                 .size
                                                                 .width /
-                                                            3.75,
+                                                            3.70,
 
                                                     child: Obx(
                                                       () => DropdownWebWidget(
@@ -1589,7 +1589,7 @@ class NewPermitScreen extends GetView<NewPermitController> {
                                                     // LoginCustomTextfield(),
                                                   ),
                                                   SizedBox(
-                                                    width: 50,
+                                                    width: 40,
                                                   ),
                                                   CustomRichText(
                                                       title:
@@ -1686,7 +1686,7 @@ class NewPermitScreen extends GetView<NewPermitController> {
                                               ),
                                               Padding(
                                                 padding: const EdgeInsets.only(
-                                                    left: 10, top: 20),
+                                                    left: 10,),
                                                 child: Row(
                                                   mainAxisAlignment:
                                                       MainAxisAlignment.start,
@@ -1713,14 +1713,14 @@ class NewPermitScreen extends GetView<NewPermitController> {
                                                         title:
                                                             'Type of permit: '),
                                                     SizedBox(
-                                                      width: 10,
+                                                      width: 13,
                                                     ),
                                                     SizedBox(
                                                       width:
                                                           MediaQuery.of(context)
                                                                   .size
                                                                   .width /
-                                                              3.75,
+                                                              3.70,
                                                       child: Obx(
                                                         () => DropdownWebWidget(
                                                           dropdownList: controller
@@ -1745,14 +1745,14 @@ class NewPermitScreen extends GetView<NewPermitController> {
                                                 ),
                                               ),
                                               SizedBox(
-                                                height: 25,
+                                                height: 10,
                                               ),
                                               Row(
                                                 mainAxisAlignment:
                                                     MainAxisAlignment.start,
                                                 children: [
                                                   SizedBox(
-                                                    width: 35,
+                                                    width: 40,
                                                   ),
                                                   CustomRichText(
                                                       title: 'Start Date: '),
@@ -1761,7 +1761,7 @@ class NewPermitScreen extends GetView<NewPermitController> {
                                                     0,
                                                   ),
                                                   SizedBox(
-                                                    width: 125,
+                                                    width: 120,
                                                   ),
                                                   CustomRichText(
                                                       title: 'Valid Till: '),
@@ -1771,9 +1771,7 @@ class NewPermitScreen extends GetView<NewPermitController> {
                                                   //     context),
                                                 ],
                                               ),
-                                              SizedBox(
-                                                height: 10,
-                                              ),
+                                              
                                               Row(
                                                 children: [
                                                   SizedBox(
@@ -1788,9 +1786,7 @@ class NewPermitScreen extends GetView<NewPermitController> {
                                                       context),
                                                 ],
                                               ),
-                                              SizedBox(
-                                                height: 10,
-                                              ),
+                                             
                                               Row(
                                                 children: [
                                                   SizedBox(
@@ -1809,9 +1805,7 @@ class NewPermitScreen extends GetView<NewPermitController> {
                                                       context),
                                                 ],
                                               ),
-                                              SizedBox(
-                                                height: 10,
-                                              ),
+                                              
                                               Row(
                                                 children: [
                                                   SizedBox(
@@ -1830,7 +1824,7 @@ class NewPermitScreen extends GetView<NewPermitController> {
                                                 ],
                                               ),
                                               SizedBox(
-                                                height: 20,
+                                                height: 10,
                                               ),
                                               Row(
                                                 children: [
@@ -2929,7 +2923,7 @@ class NewPermitScreen extends GetView<NewPermitController> {
 
                                               //Tool box talk
                                               SizedBox(
-                                                height: 480,
+                                                height: 380,
                                                 width: MediaQuery.of(context)
                                                         .size
                                                         .width /
@@ -3062,80 +3056,81 @@ class NewPermitScreen extends GetView<NewPermitController> {
                                                                   SizedBox(
                                                                     height: 22,
                                                                   ),
-                                                                  Row(
-                                                                    mainAxisAlignment:
-                                                                        MainAxisAlignment
-                                                                            .spaceEvenly,
-                                                                    children: [
-                                                                      CustomRichText(
-                                                                          title:
-                                                                              'Permit Issuer: '),
-                                                                      SizedBox(
-                                                                        width: MediaQuery.of(context).size.width /
-                                                                            4.5,
-                                                                        child:
-                                                                            Obx(
-                                                                          () =>
-                                                                              DropdownWebWidget(
-                                                                            dropdownList:
-                                                                                controller.permitIssuerList,
-                                                                            isValueSelected:
-                                                                                controller.isPermitIssuerListSelected.value,
-                                                                            selectedValue:
-                                                                                controller.selectedPermitIssuerLists.value,
-                                                                            onValueChanged:
-                                                                                controller.onValueChanged,
-                                                                          ),
-                                                                        ),
-                                                                        // CustomMultiSelectDialogField(
-                                                                        //   buttonText: 'Permit Issuer',
-                                                                        //   title: 'Select Permit Issuer',
-                                                                        //   initialValue:
-                                                                        //       (controller.selectedPermitIssuerList.isNotEmpty)
-                                                                        //           ? controller.selectedPermitIssuerIdList
-                                                                        //           : [],
-                                                                        //   items: controller.permitIssuerList
-                                                                        //       .map(
-                                                                        //         (permitIssuer) => MultiSelectItem(
-                                                                        //           permitIssuer?.id,
-                                                                        //           permitIssuer?.name ?? '',
-                                                                        //         ),
-                                                                        //       )
-                                                                        //       .toList(),
-                                                                        //   onConfirm: (selectedOptionsList) => {
-                                                                        //     controller.permitIssuerSelected(selectedOptionsList),
-                                                                        //     print(
-                                                                        //         'Permit Issuer list50: ${controller.selectedEmployeeNameIdList}')
-                                                                        //   },
-                                                                        // ),
-                                                                      ),
-                                                                      CustomRichText(
-                                                                          title:
-                                                                              'Permit Approver: '),
-                                                                      SizedBox(
-                                                                        width: MediaQuery.of(context).size.width /
-                                                                            4.5,
-                                                                        child:
-                                                                            Obx(
-                                                                          () =>
-                                                                              DropdownWebWidget(
-                                                                            dropdownList:
-                                                                                controller.permitApproverList,
-                                                                            isValueSelected:
-                                                                                controller.isPermitApproverListSelected.value,
-                                                                            selectedValue:
-                                                                                controller.selectedPermitApproverLists.value,
-                                                                            onValueChanged:
-                                                                                controller.onValueChanged,
-                                                                          ),
-                                                                        ),
-                                                                        // LoginCustomTextfield(),
-                                                                      ),
-                                                                    ],
-                                                                  ),
-                                                                  SizedBox(
-                                                                    height: 40,
-                                                                  ),
+                                                                  // Row(
+                                                                  //   mainAxisAlignment:
+                                                                  //       MainAxisAlignment
+                                                                  //           .spaceEvenly,
+                                                                  //   children: [
+                                                                  //     CustomRichText(
+                                                                  //         title:
+                                                                  //             'Permit Issuer: '),
+                                                                  //     SizedBox(
+                                                                  //       width: MediaQuery.of(context).size.width /
+                                                                  //           4.5,
+                                                                  //       child:
+                                                                  //           Obx(
+                                                                  //         () =>
+                                                                  //             DropdownWebWidget(
+                                                                  //           dropdownList:
+                                                                  //               controller.permitIssuerList,
+                                                                  //           isValueSelected:
+                                                                  //               controller.isPermitIssuerListSelected.value,
+                                                                  //           selectedValue:
+                                                                  //               controller.selectedPermitIssuerLists.value,
+                                                                  //           onValueChanged:
+                                                                  //               controller.onValueChanged,
+                                                                  //         ),
+                                                                  //       ),
+                                                                  //       // CustomMultiSelectDialogField(
+                                                                  //       //   buttonText: 'Permit Issuer',
+                                                                  //       //   title: 'Select Permit Issuer',
+                                                                  //       //   initialValue:
+                                                                  //       //       (controller.selectedPermitIssuerList.isNotEmpty)
+                                                                  //       //           ? controller.selectedPermitIssuerIdList
+                                                                  //       //           : [],
+                                                                  //       //   items: controller.permitIssuerList
+                                                                  //       //       .map(
+                                                                  //       //         (permitIssuer) => MultiSelectItem(
+                                                                  //       //           permitIssuer?.id,
+                                                                  //       //           permitIssuer?.name ?? '',
+                                                                  //       //         ),
+                                                                  //       //       )
+                                                                  //       //       .toList(),
+                                                                  //       //   onConfirm: (selectedOptionsList) => {
+                                                                  //       //     controller.permitIssuerSelected(selectedOptionsList),
+                                                                  //       //     print(
+                                                                  //       //         'Permit Issuer list50: ${controller.selectedEmployeeNameIdList}')
+                                                                  //       //   },
+                                                                  //       // ),
+                                                                  //     ),
+                                                                  //     CustomRichText(
+                                                                  //         title:
+                                                                  //             'Permit Approver: '),
+                                                                  //     SizedBox(
+                                                                  //       width: MediaQuery.of(context).size.width /
+                                                                  //           4.5,
+                                                                  //       child:
+                                                                  //           Obx(
+                                                                  //         () =>
+                                                                  //             DropdownWebWidget(
+                                                                  //           dropdownList:
+                                                                  //               controller.permitApproverList,
+                                                                  //           isValueSelected:
+                                                                  //               controller.isPermitApproverListSelected.value,
+                                                                  //           selectedValue:
+                                                                  //               controller.selectedPermitApproverLists.value,
+                                                                  //           onValueChanged:
+                                                                  //               controller.onValueChanged,
+                                                                  //         ),
+                                                                  //       ),
+                                                                  //       // LoginCustomTextfield(),
+                                                                  //     ),
+                                                                  //   ],
+                                                                  // ),
+                                                                
+                                                                  // SizedBox(
+                                                                  //   height: 40,
+                                                                  // ),
                                                                   //Button
 
                                                                   // Wrap(

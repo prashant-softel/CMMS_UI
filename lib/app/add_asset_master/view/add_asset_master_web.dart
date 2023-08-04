@@ -10,6 +10,7 @@ import '../../widgets/custom_multiselect_dialog_field.dart';
 import '../../widgets/custom_richtext.dart';
 import '../../widgets/custom_textField.dart';
 import '../../widgets/dropdown.dart';
+import '../../widgets/dropdown_web.dart';
 import '../add_asset_master_controller.dart';
 
 class AddAssetMasterWeb extends GetView<AddAssetMasterController> {
@@ -94,7 +95,6 @@ class AddAssetMasterWeb extends GetView<AddAssetMasterController> {
                   //   margin: Dimens.edgeInsets20,
                   color: Color.fromARGB(255, 245, 248, 250),
                   child: Column(
-
                     children: [
                       Container(
                         height: 60,
@@ -122,7 +122,6 @@ class AddAssetMasterWeb extends GetView<AddAssetMasterController> {
                                 "Asset Material",
                                 style: Styles.blackBold18,
                               ),
-
                             ],
                           ),
                         ),
@@ -136,13 +135,12 @@ class AddAssetMasterWeb extends GetView<AddAssetMasterController> {
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
                             Container(
-                                margin: Dimens.edgeInsets30_0_0_0,
-                                child:
-                            Dimens.boxWidth30,
-                        ),
+                              margin: Dimens.edgeInsets30_0_0_0,
+                              child: Dimens.boxWidth30,
+                            ),
                             Column(
                               crossAxisAlignment: CrossAxisAlignment.end,
-                              children: [       
+                              children: [
                                 Row(
                                   children: [
                                     CustomRichText(title: 'Material Name: '),
@@ -191,37 +189,32 @@ class AddAssetMasterWeb extends GetView<AddAssetMasterController> {
                                     Dimens.boxWidth10,
                                     Container(
                                       width:
-                                      (MediaQuery.of(context).size.width *
-                                          .2),
-                                      child: DropdownWidget(
-                                        controller: controller,
-                                        dropdownList: controller.countryList,
-                                        isValueSelected:
-                                        controller.isSelectedMaterialType.value,
-                                        selectedValue:
-                                        controller.selectedMaterialType.value,
-                                        onValueChanged:
-                                        controller.onValueChanged,
-                                      ),
-                                    ),
-                                  ],
-                                ),
-                                Dimens.boxHeight8,
-                                Row(
-                                  children: [
-                                    CustomRichText(title: 'Unit of Measurement: '),
-                                    Dimens.boxWidth10,
-                                    Container(
-                                      width:
                                           (MediaQuery.of(context).size.width *
                                               .2),
-                                      child: DropdownWidget(
+                                      child: DropdownWebWidget(
+                                        boxShadow: [
+                                          BoxShadow(
+                                            color: Colors.black26,
+                                            offset: const Offset(
+                                              5.0,
+                                              5.0,
+                                            ),
+                                            blurRadius: 5.0,
+                                            spreadRadius: 1.0,
+                                          ),
+                                          BoxShadow(
+                                            color: ColorValues.whiteColor,
+                                            offset: const Offset(0.0, 0.0),
+                                            blurRadius: 0.0,
+                                            spreadRadius: 0.0,
+                                          ),
+                                        ],
                                         controller: controller,
                                         dropdownList: controller.countryList,
-                                        isValueSelected:
-                                            controller.isSelectedUnitOfMeasurement.value,
-                                        selectedValue:
-                                            controller.selectedUnitOfMeasurement.value,
+                                        isValueSelected: controller
+                                            .isSelectedMaterialType.value,
+                                        selectedValue: controller
+                                            .selectedMaterialType.value,
                                         onValueChanged:
                                             controller.onValueChanged,
                                       ),
@@ -231,19 +224,77 @@ class AddAssetMasterWeb extends GetView<AddAssetMasterController> {
                                 Dimens.boxHeight8,
                                 Row(
                                   children: [
-                                    CustomRichText(title: 'Min. Required Qty : '),
+                                    CustomRichText(
+                                        title: 'Unit of Measurement: '),
                                     Dimens.boxWidth10,
                                     Container(
                                       width:
                                           (MediaQuery.of(context).size.width *
                                               .2),
-                                      child: DropdownWidget(
+                                      child: DropdownWebWidget(
+                                        boxShadow: [
+                                          BoxShadow(
+                                            color: Colors.black26,
+                                            offset: const Offset(
+                                              5.0,
+                                              5.0,
+                                            ),
+                                            blurRadius: 5.0,
+                                            spreadRadius: 1.0,
+                                          ),
+                                          BoxShadow(
+                                            color: ColorValues.whiteColor,
+                                            offset: const Offset(0.0, 0.0),
+                                            blurRadius: 0.0,
+                                            spreadRadius: 0.0,
+                                          ),
+                                        ],
+                                        controller: controller,
+                                        dropdownList: controller.countryList,
+                                        isValueSelected: controller
+                                            .isSelectedUnitOfMeasurement.value,
+                                        selectedValue: controller
+                                            .selectedUnitOfMeasurement.value,
+                                        onValueChanged:
+                                            controller.onValueChanged,
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                                Dimens.boxHeight8,
+                                Row(
+                                  children: [
+                                    CustomRichText(
+                                        title: 'Min. Required Qty : '),
+                                    Dimens.boxWidth10,
+                                    Container(
+                                      width:
+                                          (MediaQuery.of(context).size.width *
+                                              .2),
+                                      child: DropdownWebWidget(
+                                        boxShadow: [
+                                          BoxShadow(
+                                            color: Colors.black26,
+                                            offset: const Offset(
+                                              5.0,
+                                              5.0,
+                                            ),
+                                            blurRadius: 5.0,
+                                            spreadRadius: 1.0,
+                                          ),
+                                          BoxShadow(
+                                            color: ColorValues.whiteColor,
+                                            offset: const Offset(0.0, 0.0),
+                                            blurRadius: 0.0,
+                                            spreadRadius: 0.0,
+                                          ),
+                                        ],
                                         controller: controller,
                                         dropdownList: controller.cityList,
-                                        isValueSelected:
-                                            controller.isSelectedMinRequiredQty.value,
-                                        selectedValue:
-                                            controller.selectedMinRequiredQty.value,
+                                        isValueSelected: controller
+                                            .isSelectedMinRequiredQty.value,
+                                        selectedValue: controller
+                                            .selectedMinRequiredQty.value,
                                         onValueChanged:
                                             controller.onValueChanged,
                                       ),
@@ -344,21 +395,39 @@ class AddAssetMasterWeb extends GetView<AddAssetMasterController> {
                                 Dimens.boxHeight8,
                                 Row(
                                   children: [
-                                    CustomRichText(title: 'Material Category: '),
+                                    CustomRichText(
+                                        title: 'Material Category: '),
                                     Dimens.boxWidth10,
                                     Container(
                                       width:
-                                      (MediaQuery.of(context).size.width *
-                                          .2),
-                                      child: DropdownWidget(
+                                          (MediaQuery.of(context).size.width *
+                                              .2),
+                                      child: DropdownWebWidget(
+                                        boxShadow: [
+                                          BoxShadow(
+                                            color: Colors.black26,
+                                            offset: const Offset(
+                                              5.0,
+                                              5.0,
+                                            ),
+                                            blurRadius: 5.0,
+                                            spreadRadius: 1.0,
+                                          ),
+                                          BoxShadow(
+                                            color: ColorValues.whiteColor,
+                                            offset: const Offset(0.0, 0.0),
+                                            blurRadius: 0.0,
+                                            spreadRadius: 0.0,
+                                          ),
+                                        ],
                                         controller: controller,
                                         dropdownList: controller.countryList,
-                                        isValueSelected:
-                                        controller.isSelectedMaterialCategory.value,
-                                        selectedValue:
-                                        controller.selectedMaterialCategory.value,
+                                        isValueSelected: controller
+                                            .isSelectedMaterialCategory.value,
+                                        selectedValue: controller
+                                            .selectedMaterialCategory.value,
                                         onValueChanged:
-                                        controller.onValueChanged,
+                                            controller.onValueChanged,
                                       ),
                                     ),
                                   ],
@@ -370,17 +439,34 @@ class AddAssetMasterWeb extends GetView<AddAssetMasterController> {
                                     Dimens.boxWidth10,
                                     Container(
                                       width:
-                                      (MediaQuery.of(context).size.width *
-                                          .2),
-                                      child: DropdownWidget(
+                                          (MediaQuery.of(context).size.width *
+                                              .2),
+                                      child: DropdownWebWidget(
+                                        boxShadow: [
+                                          BoxShadow(
+                                            color: Colors.black26,
+                                            offset: const Offset(
+                                              5.0,
+                                              5.0,
+                                            ),
+                                            blurRadius: 5.0,
+                                            spreadRadius: 1.0,
+                                          ),
+                                          BoxShadow(
+                                            color: ColorValues.whiteColor,
+                                            offset: const Offset(0.0, 0.0),
+                                            blurRadius: 0.0,
+                                            spreadRadius: 0.0,
+                                          ),
+                                        ],
                                         controller: controller,
                                         dropdownList: controller.countryList,
                                         isValueSelected:
-                                        controller.isSelectedACDC.value,
+                                            controller.isSelectedACDC.value,
                                         selectedValue:
-                                        controller.selectedACDC.value,
+                                            controller.selectedACDC.value,
                                         onValueChanged:
-                                        controller.onValueChanged,
+                                            controller.onValueChanged,
                                       ),
                                     ),
                                   ],
@@ -388,28 +474,45 @@ class AddAssetMasterWeb extends GetView<AddAssetMasterController> {
                                 Dimens.boxHeight8,
                                 Row(
                                   children: [
-                                    CustomRichText(title: 'Min. Reorder Qty : '),
+                                    CustomRichText(
+                                        title: 'Min. Reorder Qty : '),
                                     Dimens.boxWidth10,
                                     Container(
                                       width:
-                                      (MediaQuery.of(context).size.width *
-                                          .2),
-                                      child: DropdownWidget(
+                                          (MediaQuery.of(context).size.width *
+                                              .2),
+                                      child: DropdownWebWidget(
+                                        boxShadow: [
+                                          BoxShadow(
+                                            color: Colors.black26,
+                                            offset: const Offset(
+                                              5.0,
+                                              5.0,
+                                            ),
+                                            blurRadius: 5.0,
+                                            spreadRadius: 1.0,
+                                          ),
+                                          BoxShadow(
+                                            color: ColorValues.whiteColor,
+                                            offset: const Offset(0.0, 0.0),
+                                            blurRadius: 0.0,
+                                            spreadRadius: 0.0,
+                                          ),
+                                        ],
                                         controller: controller,
                                         dropdownList: controller.cityList,
-                                        isValueSelected:
-                                        controller.isSelectedMinReorderQty.value,
-                                        selectedValue:
-                                        controller.selectedMinReorderQty.value,
+                                        isValueSelected: controller
+                                            .isSelectedMinReorderQty.value,
+                                        selectedValue: controller
+                                            .selectedMinReorderQty.value,
                                         onValueChanged:
-                                        controller.onValueChanged,
+                                            controller.onValueChanged,
                                       ),
                                     ),
                                   ],
                                 ),
                               ],
                             ),
-
                           ],
                         ),
                       ),
@@ -420,64 +523,58 @@ class AddAssetMasterWeb extends GetView<AddAssetMasterController> {
                           children: [
                             Container(
                               margin: Dimens.edgeInsets30_0_0_0,
-                              child:
-                              Dimens.boxWidth30,
-                            ),
-                            Container(
-                          margin: Dimens.edgeInsets10,
-                          child:
-                            Row(
-                              children: [
-                                CustomRichText(title: 'Asset Description: '),
-                                Dimens.boxWidth10,
-                                Container(
-                                    width: (Get.width * .5),
-                                    decoration: BoxDecoration(
-                                      boxShadow: [
-                                        BoxShadow(
-                                          color: Colors.black26,
-                                          offset: const Offset(
-                                            5.0,
-                                            5.0,
-                                          ),
-                                          blurRadius: 5.0,
-                                          spreadRadius: 1.0,
-                                        ),
-                                        BoxShadow(
-                                          color: ColorValues.whiteColor,
-                                          offset: const Offset(0.0, 0.0),
-                                          blurRadius: 0.0,
-                                          spreadRadius: 0.0,
-                                        ),
-                                      ],
-                                      color: ColorValues.whiteColor,
-                                      borderRadius:
-                                      BorderRadius.circular(5),
-                                    ),
-                                    child: LoginCustomTextfield(
-                                      maxLine: 5,
-                                    )),
-                              ],
-                            ),
-                        )
-                          ],
-                        ),
-                      ),
-                      Container(
-                        margin: Dimens.edgeInsets20,
-                        child: Row(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Container(
-                              margin: Dimens.edgeInsets30_0_0_0,
-                              child:
-                              Dimens.boxWidth30,
+                              child: Dimens.boxWidth30,
                             ),
                             Container(
                               margin: Dimens.edgeInsets10,
-
-                              child:
-                              Row(
+                              child: Row(
+                                children: [
+                                  CustomRichText(title: 'Asset Description: '),
+                                  Dimens.boxWidth10,
+                                  Container(
+                                      width: (Get.width * .5),
+                                      decoration: BoxDecoration(
+                                        boxShadow: [
+                                          BoxShadow(
+                                            color: Colors.black26,
+                                            offset: const Offset(
+                                              5.0,
+                                              5.0,
+                                            ),
+                                            blurRadius: 5.0,
+                                            spreadRadius: 1.0,
+                                          ),
+                                          BoxShadow(
+                                            color: ColorValues.whiteColor,
+                                            offset: const Offset(0.0, 0.0),
+                                            blurRadius: 0.0,
+                                            spreadRadius: 0.0,
+                                          ),
+                                        ],
+                                        color: ColorValues.whiteColor,
+                                        borderRadius: BorderRadius.circular(5),
+                                      ),
+                                      child: LoginCustomTextfield(
+                                        maxLine: 5,
+                                      )),
+                                ],
+                              ),
+                            )
+                          ],
+                        ),
+                      ),
+                      Container(
+                        margin: Dimens.edgeInsets20,
+                        child: Row(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Container(
+                              margin: Dimens.edgeInsets30_0_0_0,
+                              child: Dimens.boxWidth30,
+                            ),
+                            Container(
+                              margin: Dimens.edgeInsets10,
+                              child: Row(
                                 children: [
                                   CustomRichText(title: 'Material Image: '),
                                   Dimens.boxWidth10,
@@ -485,54 +582,62 @@ class AddAssetMasterWeb extends GetView<AddAssetMasterController> {
                                     height: 210,
                                     child: Stack(
                                       children: [
-                                        controller.selectedImagePath.value.isNotEmpty
+                                        controller.selectedImagePath.value
+                                                .isNotEmpty
                                             ? GestureDetector(
-                                          onTap: () => controller
-                                              .getImage(ImageSource.gallery),
-                                          child: Container(
-                                            height: controller.thumbnailSize,
-                                            width: controller.thumbnailSize,
-                                            child: ClipRRect(
-                                              borderRadius:
-                                              BorderRadius.circular(100),
-                                              child: Image.memory(
-                                                controller
-                                                    .selectedImageBytes.value,
-                                                fit: BoxFit.cover,
-                                              ),
-                                            ),
-                                          ),
-                                        )
+                                                onTap: () =>
+                                                    controller.getImage(
+                                                        ImageSource.gallery),
+                                                child: Container(
+                                                  height:
+                                                      controller.thumbnailSize,
+                                                  width:
+                                                      controller.thumbnailSize,
+                                                  child: ClipRRect(
+                                                    borderRadius:
+                                                        BorderRadius.circular(
+                                                            100),
+                                                    child: Image.memory(
+                                                      controller
+                                                          .selectedImageBytes
+                                                          .value,
+                                                      fit: BoxFit.cover,
+                                                    ),
+                                                  ),
+                                                ),
+                                              )
                                             : Container(
-                                          height: controller.thumbnailSize,
-                                          width: controller.thumbnailSize,
-                                          decoration: BoxDecoration(
-                                            color: Color.fromARGB(
-                                                255, 195, 192, 192),
-                                            border: Border.all(
-                                              color:
-                                              ColorValues.appLightGreyColor,
-                                            ),
-                                            borderRadius:
-                                            BorderRadius.circular(100),
-                                          ),
-                                          child: Column(
-                                            mainAxisAlignment:
-                                            MainAxisAlignment.center,
-                                            children: [
-                                              Icon(
-                                                Icons.image,
-                                                size: 70,
-                                                color: Color.fromARGB(
-                                                    255, 215, 192, 141),
+                                                height:
+                                                    controller.thumbnailSize,
+                                                width: controller.thumbnailSize,
+                                                decoration: BoxDecoration(
+                                                  color: Color.fromARGB(
+                                                      255, 195, 192, 192),
+                                                  border: Border.all(
+                                                    color: ColorValues
+                                                        .appLightGreyColor,
+                                                  ),
+                                                  borderRadius:
+                                                      BorderRadius.circular(
+                                                          100),
+                                                ),
+                                                child: Column(
+                                                  mainAxisAlignment:
+                                                      MainAxisAlignment.center,
+                                                  children: [
+                                                    Icon(
+                                                      Icons.image,
+                                                      size: 70,
+                                                      color: Color.fromARGB(
+                                                          255, 215, 192, 141),
+                                                    ),
+                                                    Dimens.boxHeight10,
+                                                    Text("Upload Photo",
+                                                        style: Styles
+                                                            .greyMediumLight12)
+                                                  ],
+                                                ),
                                               ),
-                                              Dimens.boxHeight10,
-                                              Text("Upload Photo",
-                                                  style:
-                                                  Styles.greyMediumLight12)
-                                            ],
-                                          ),
-                                        ),
                                         Positioned(
                                           top: 150,
                                           left: 100,
@@ -540,26 +645,28 @@ class AddAssetMasterWeb extends GetView<AddAssetMasterController> {
                                           child: Center(
                                             child: GestureDetector(
                                               onTap: () {
-                                                controller
-                                                    .getImage(ImageSource.gallery);
+                                                controller.getImage(
+                                                    ImageSource.gallery);
                                               },
                                               child: Container(
                                                 height: 45,
                                                 width: 40,
                                                 decoration: BoxDecoration(
-                                                  color: ColorValues.appDarkBlueColor,
+                                                  color: ColorValues
+                                                      .appDarkBlueColor,
                                                   border: Border.all(
-                                                    color:
-                                                    ColorValues.appDarkBlueColor,
+                                                    color: ColorValues
+                                                        .appDarkBlueColor,
                                                   ),
                                                   borderRadius:
-                                                  BorderRadius.circular(50),
+                                                      BorderRadius.circular(50),
                                                 ),
                                                 child: Center(
                                                   child: Icon(
                                                     Icons.add,
                                                     size: 40,
-                                                    color: ColorValues.whiteColor,
+                                                    color:
+                                                        ColorValues.whiteColor,
                                                   ), //Circ
                                                 ),
                                               ),
@@ -571,61 +678,64 @@ class AddAssetMasterWeb extends GetView<AddAssetMasterController> {
                                   ),
                                   Container(
                                     margin: Dimens.edgeInsets30_0_0_0,
-                                    child:
-                                    Dimens.boxWidth30,
+                                    child: Dimens.boxWidth30,
                                   ),
                                   Container(
-                                decoration: BoxDecoration(
-                                  border: Border.all(
-                                    color: Colors.grey,
-                                    width: 1.0,
+                                    decoration: BoxDecoration(
+                                      border: Border.all(
+                                        color: Colors.grey,
+                                        width: 1.0,
+                                      ),
+                                    ),
+                                    child: DataTable(
+                                      dataRowHeight:
+                                          60.0, // Adjust the row height as needed
+                                      horizontalMargin: 10.0,
+                                      columnSpacing: 45.0,
+                                      columns: [
+                                        DataColumn(
+                                          label: Text('ID'),
+                                        ),
+                                        DataColumn(label: Text('Name')),
+                                        DataColumn(
+                                            label: Text('Upload Progress')),
+                                        DataColumn(label: Text('Status')),
+                                        DataColumn(label: Text('Description')),
+                                        DataColumn(label: Text('Remove')),
+                                      ],
+                                      rows: [
+                                        // DataRow(cells: [
+                                        //   DataCell(Text('1')),
+                                        //   DataCell(Text('John')),
+                                        //   DataCell(Text('80%')),
+                                        //   DataCell(Text('Complete')),
+                                        //   DataCell(Text('Lorem ipsum')),
+                                        //   DataCell(IconButton(
+                                        //     icon: Icon(Icons.delete),
+                                        //     onPressed: () {
+                                        //       // Handle remove action
+                                        //     },
+                                        //   )),
+                                        // ]),
+                                        // DataRow(cells: [
+                                        //   DataCell(Text('2')),
+                                        //   DataCell(Text('Jane')),
+                                        //   DataCell(Text('50%')),
+                                        //   DataCell(Text('In Progress')),
+                                        //   DataCell(Text('Dolor sit amet')),
+                                        //   DataCell(IconButton(
+                                        //     icon: Icon(Icons.delete),
+                                        //     onPressed: () {
+                                        //       // Handle remove action
+                                        //     },
+                                        //   )),
+                                        // ]),
+                                        // Add more rows as needed
+                                      ],
+                                    ),
                                   ),
-                                ),
-                                child: DataTable(
-                                    dataRowHeight: 60.0, // Adjust the row height as needed
-                                    horizontalMargin: 10.0,   
-                                  columnSpacing: 45.0,
-                                  columns: [
-                                    DataColumn(label: Text('ID'),),
-                                    DataColumn(label: Text('Name')),
-                                    DataColumn(label: Text('Upload Progress')),
-                                    DataColumn(label: Text('Status')),
-                                    DataColumn(label: Text('Description')),
-                                    DataColumn(label: Text('Remove')),
-                                  ],
-                                  rows: [
-                                    // DataRow(cells: [
-                                    //   DataCell(Text('1')),
-                                    //   DataCell(Text('John')),
-                                    //   DataCell(Text('80%')),
-                                    //   DataCell(Text('Complete')),
-                                    //   DataCell(Text('Lorem ipsum')),
-                                    //   DataCell(IconButton(
-                                    //     icon: Icon(Icons.delete),
-                                    //     onPressed: () {
-                                    //       // Handle remove action
-                                    //     },
-                                    //   )),
-                                    // ]),
-                                    // DataRow(cells: [
-                                    //   DataCell(Text('2')),
-                                    //   DataCell(Text('Jane')),
-                                    //   DataCell(Text('50%')),
-                                    //   DataCell(Text('In Progress')),
-                                    //   DataCell(Text('Dolor sit amet')),
-                                    //   DataCell(IconButton(
-                                    //     icon: Icon(Icons.delete),
-                                    //     onPressed: () {
-                                    //       // Handle remove action
-                                    //     },
-                                    //   )),
-                                    // ]),
-                                    // Add more rows as needed
-                                  ],
-                                ),
-                              ),
 
-                              // Center(
+                                  // Center(
                                   //   child: ScrollableTableView(
                                   //     columns: [
                                   //       "Name",
@@ -657,9 +767,7 @@ class AddAssetMasterWeb extends GetView<AddAssetMasterController> {
                                   // ),
                                 ],
                               ),
-
                             )
-
                           ],
                         ),
                       ),
@@ -668,28 +776,26 @@ class AddAssetMasterWeb extends GetView<AddAssetMasterController> {
                         color: ColorValues.whiteColor,
                         margin: Dimens.edgeInsets20,
 
-                            // Text(" / MASTER MATERIAL", style: Styles.greyMediumLight12),
-                           child: Container(
-                              height: 300,
-                              margin: Dimens.edgeInsets20,
-                              decoration: BoxDecoration(
-                                borderRadius:
-                                BorderRadius.circular(5),
-                                border: Border.all(
-                                  color:
-                                  ColorValues.lightGreyColorWithOpacity35,
-                                  width: 4,
-                                ),
-                                boxShadow: [
-                                  BoxShadow(
-                                    color: ColorValues.appBlueBackgroundColor,
-                                    spreadRadius: 2,
-                                    blurRadius: 5,
-                                    offset: Offset(0, 2),
-                                  ),
-                                ],
+                        // Text(" / MASTER MATERIAL", style: Styles.greyMediumLight12),
+                        child: Container(
+                            height: 300,
+                            margin: Dimens.edgeInsets20,
+                            decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(5),
+                              border: Border.all(
+                                color: ColorValues.lightGreyColorWithOpacity35,
+                                width: 4,
                               ),
-                              child: ScrollableTableView(
+                              boxShadow: [
+                                BoxShadow(
+                                  color: ColorValues.appBlueBackgroundColor,
+                                  spreadRadius: 2,
+                                  blurRadius: 5,
+                                  offset: Offset(0, 2),
+                                ),
+                              ],
+                            ),
+                            child: ScrollableTableView(
                                 // paginationController:
                                 // controller.schedulePaginationController,
                                 columns: [
@@ -703,121 +809,136 @@ class AddAssetMasterWeb extends GetView<AddAssetMasterController> {
                                     minWidth: Get.width * 0.18,
                                   );
                                 }).toList(),
-                                rows:
-                                 [
-                                   TableViewRow(height: 150, cells: [
-                                TableViewCell(
-                                  child:Container(
-                                    width:
-                                    (MediaQuery.of(context).size.width *
-                                        .12),
-                                    child: DropdownWidget(
-                                      controller: controller,
-                                      dropdownList: controller.countryList,
-                                      isValueSelected:
-                                      controller.isSelectedDocumentType.value,
-                                      selectedValue:
-                                      controller.selectedDocumentType.value,
-                                      onValueChanged:
-                                      controller.onValueChanged,
-                                    ),
-                                  ),
-                                ),
-                                TableViewCell(
-                                  child: Container(
-                                      decoration: BoxDecoration(
-                                        borderRadius:
-                                        BorderRadius.circular(10),
-                                        border: Border.all(
-                                          color: Color.fromARGB(
-                                              255, 227, 224, 224),
-                                          width: 1,
+                                rows: [
+                                  TableViewRow(height: 150, cells: [
+                                    TableViewCell(
+                                      child: Container(
+                                        width:
+                                            (MediaQuery.of(context).size.width *
+                                                .12),
+                                        child: DropdownWebWidget(
+                                          boxShadow: [
+                                            BoxShadow(
+                                              color: Colors.black26,
+                                              offset: const Offset(
+                                                5.0,
+                                                5.0,
+                                              ),
+                                              blurRadius: 5.0,
+                                              spreadRadius: 1.0,
+                                            ),
+                                            BoxShadow(
+                                              color: ColorValues.whiteColor,
+                                              offset: const Offset(0.0, 0.0),
+                                              blurRadius: 0.0,
+                                              spreadRadius: 0.0,
+                                            ),
+                                          ],
+                                          controller: controller,
+                                          dropdownList: controller.countryList,
+                                          isValueSelected: controller
+                                              .isSelectedDocumentType.value,
+                                          selectedValue: controller
+                                              .selectedDocumentType.value,
+                                          onValueChanged:
+                                              controller.onValueChanged,
                                         ),
-                                        boxShadow: [
-                                          BoxShadow(
-                                            color: Colors.black26,
-                                            offset: const Offset(
-                                              5.0,
-                                              5.0,
-                                            ),
-                                            blurRadius: 5.0,
-                                            spreadRadius: 1.0,
-                                          ),
-                                          BoxShadow(
-                                            color: ColorValues.whiteColor,
-                                            offset: const Offset(0.0, 0.0),
-                                            blurRadius: 0.0,
-                                            spreadRadius: 0.0,
-                                          ),
-                                        ],
                                       ),
+                                    ),
+                                    TableViewCell(
+                                      child: Container(
+                                          decoration: BoxDecoration(
+                                            borderRadius:
+                                                BorderRadius.circular(10),
+                                            border: Border.all(
+                                              color: Color.fromARGB(
+                                                  255, 227, 224, 224),
+                                              width: 1,
+                                            ),
+                                            boxShadow: [
+                                              BoxShadow(
+                                                color: Colors.black26,
+                                                offset: const Offset(
+                                                  5.0,
+                                                  5.0,
+                                                ),
+                                                blurRadius: 5.0,
+                                                spreadRadius: 1.0,
+                                              ),
+                                              BoxShadow(
+                                                color: ColorValues.whiteColor,
+                                                offset: const Offset(0.0, 0.0),
+                                                blurRadius: 0.0,
+                                                spreadRadius: 0.0,
+                                              ),
+                                            ],
+                                          ),
+                                          width: (MediaQuery.of(context)
+                                                  .size
+                                                  .width *
+                                              .12),
+                                          child: LoginCustomTextfield(
+                                            ishint: '',
+                                            textController:
+                                                controller.loginIdCtrlr,
+                                          )),
+                                    ),
+                                    TableViewCell(
+                                      child: Container(
+                                          width: (Get.width * .12),
+                                          decoration: BoxDecoration(
+                                            boxShadow: [
+                                              BoxShadow(
+                                                color: Colors.black26,
+                                                offset: const Offset(
+                                                  5.0,
+                                                  5.0,
+                                                ),
+                                                blurRadius: 5.0,
+                                                spreadRadius: 1.0,
+                                              ),
+                                              BoxShadow(
+                                                color: ColorValues.whiteColor,
+                                                offset: const Offset(0.0, 0.0),
+                                                blurRadius: 0.0,
+                                                spreadRadius: 0.0,
+                                              ),
+                                            ],
+                                            color: ColorValues.whiteColor,
+                                            borderRadius:
+                                                BorderRadius.circular(5),
+                                          ),
+                                          child: LoginCustomTextfield(
+                                            maxLine: 3,
+                                          )),
+                                    ),
+                                    TableViewCell(
+                                        child: Container(
                                       width:
-                                      (MediaQuery.of(context).size.width *
-                                          .12),
-                                      child: LoginCustomTextfield(
-                                        ishint: '',
-                                        textController:
-                                        controller.loginIdCtrlr,
-                                      )),
-                                ),
-                                TableViewCell(
-                                  child: Container(
-                                      width: (Get.width * .12),
-                                      decoration: BoxDecoration(
-                                        boxShadow: [
-                                          BoxShadow(
-                                            color: Colors.black26,
-                                            offset: const Offset(
-                                              5.0,
-                                              5.0,
-                                            ),
-                                            blurRadius: 5.0,
-                                            spreadRadius: 1.0,
-                                          ),
-                                          BoxShadow(
-                                            color: ColorValues.whiteColor,
-                                            offset: const Offset(0.0, 0.0),
-                                            blurRadius: 0.0,
-                                            spreadRadius: 0.0,
-                                          ),
-                                        ],
-                                        color: ColorValues.whiteColor,
-                                        borderRadius:
-                                        BorderRadius.circular(5),
-                                      ),
-                                      child: LoginCustomTextfield(
-                                        maxLine: 3,
-                                      )),
-                                ),
-                                TableViewCell(
-                                    child: Container(
-                                      width: (MediaQuery.of(context).size.width *
-                                          .12),
+                                          (MediaQuery.of(context).size.width *
+                                              .12),
                                       child: ActionButton(
                                         label: 'Upload file',
                                         onPressed: () {},
                                         icon: Icons.file_upload_outlined,
                                         color: Colors.blue,
                                       ),
-                                    )
-                                ),
-                              ]),
-                                 ])
+                                    )),
+                                  ]),
+                                ])
 
-                                    // .toList()
+                            // .toList()
 
-                              ),
                             ),
-
+                      ),
 
                       // ),
-
 
                       // SizedBox(
                       //   // width: MediaQuery.of(context).size.width / 2,
                       //   child: Column(
                       //     children: [
-                                                     //         children: [
+                      //         children: [
                       //           Column(
                       //             children: [
                       //               SizedBox(
@@ -1542,34 +1663,34 @@ class AddAssetMasterWeb extends GetView<AddAssetMasterController> {
                             children: [
                               controller.userId == null
                                   ? Container(
-                                height: 35,
-                                child: CustomElevatedButton(
-                                  backgroundColor: ColorValues.greenColor,
-                                  text: 'Submit',
-                                  onPressed: () {
-                                    controller.addUser();
-                                    //  controller.saveAccessLevel();
-                                  },
-                                ),
-                              )
+                                      height: 35,
+                                      child: CustomElevatedButton(
+                                        backgroundColor: ColorValues.greenColor,
+                                        text: 'Submit',
+                                        onPressed: () {
+                                          controller.addUser();
+                                          //  controller.saveAccessLevel();
+                                        },
+                                      ),
+                                    )
                                   : Container(
-                                height: 35,
-                                child: CustomElevatedButton(
-                                  backgroundColor:
-                                  ColorValues.appDarkBlueColor,
-                                  text: 'Update',
-                                  onPressed: () {
-                                    controller.updateUser().then((value) {
-                                      if (value == true) {
-                                        // controller.userId = 0;
-                                        controller.saveAccessLevel();
-                                        //   controller.saveNotification();
-                                      }
-                                    });
-                                    //  controller.saveAccessLevel();
-                                  },
-                                ),
-                              ),
+                                      height: 35,
+                                      child: CustomElevatedButton(
+                                        backgroundColor:
+                                            ColorValues.appDarkBlueColor,
+                                        text: 'Update',
+                                        onPressed: () {
+                                          controller.updateUser().then((value) {
+                                            if (value == true) {
+                                              // controller.userId = 0;
+                                              controller.saveAccessLevel();
+                                              //   controller.saveNotification();
+                                            }
+                                          });
+                                          //  controller.saveAccessLevel();
+                                        },
+                                      ),
+                                    ),
                               Dimens.boxWidth20,
                               Container(
                                 height: 35,
@@ -1583,7 +1704,6 @@ class AddAssetMasterWeb extends GetView<AddAssetMasterController> {
                           ),
                         ),
                       ),
-
                     ],
                   ),
                 ),

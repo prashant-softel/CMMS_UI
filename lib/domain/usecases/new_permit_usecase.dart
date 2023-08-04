@@ -29,17 +29,17 @@ class NewPermitUsecase {
         isLoading,
       );
 
-  Future<List<NewPermitModel?>?> getNewPermitList({
-    required String auth,
-    int? facilityId,
-    int? userId,
-    bool? isLoading,
-  }) async =>
-      await repository.getNewPermitList(
-        auth,
-        facilityId,
-        isLoading,
-      );
+  // Future<List<NewPermitModel?>?> getNewPermitList({
+  //   required String auth,
+  //   int? facilityId,
+  //   int? userId,
+  //   bool? isLoading,
+  // }) async =>
+  //     await repository.getNewPermitList(
+  //       auth,
+  //       facilityId,
+  //       isLoading,
+  //     );
 
   Future<List<EmployeeListModel>> getEmployeePermitList(
       {required bool isLoading, required int? facility_id}) async {
