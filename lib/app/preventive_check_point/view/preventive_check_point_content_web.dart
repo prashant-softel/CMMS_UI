@@ -1,5 +1,6 @@
 import 'package:cmms/app/app.dart';
 import 'package:cmms/app/widgets/custom_swich_toggle.dart';
+import 'package:cmms/app/widgets/dropdown_web.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:scrollable_table_view/scrollable_table_view.dart';
@@ -152,41 +153,74 @@ class PreventiveCheckPointContentWeb
                                                   padding:
                                                       const EdgeInsets.only(
                                                           left: 5.0),
-                                                  child: CustomDropDownButton(
-                                                    value: controller
+                                                  child: DropdownWebWidget(
+                                                    boxShadow: [
+                                                      BoxShadow(
+                                                        color: Colors.black26,
+                                                        offset: const Offset(
+                                                          5.0,
+                                                          5.0,
+                                                        ),
+                                                        blurRadius: 5.0,
+                                                        spreadRadius: 1.0,
+                                                      ),
+                                                      BoxShadow(
+                                                        color: ColorValues
+                                                            .whiteColor,
+                                                        offset: const Offset(
+                                                            0.0, 0.0),
+                                                        blurRadius: 0.0,
+                                                        spreadRadius: 0.0,
+                                                      ),
+                                                    ],
+                                                    controller: controller,
+                                                    dropdownList:
+                                                        controller.checkList,
+                                                    isValueSelected: controller
+                                                        .isSelectedchecklist
+                                                        .value,
+                                                    selectedValue: controller
                                                         .selectedchecklist
                                                         .value,
-                                                    onChange: (String?
-                                                        selectedValue) {
-                                                      controller
-                                                          .isSelectedchecklist
-                                                          .value = true;
-                                                      controller
-                                                              .selectedchecklist
-                                                              .value =
-                                                          selectedValue ?? '';
-
-                                                      controller.getCheckPointlist(
-                                                          selectedchecklistId:
-                                                              selectedValue
-                                                                  .toString());
-                                                    },
-                                                    item: controller.checkList
-                                                        .map<
-                                                            DropdownMenuItem<
-                                                                String>>((list) {
-                                                      return DropdownMenuItem<
-                                                          String>(
-                                                        value: list?.id
-                                                                .toString() ??
-                                                            '',
-                                                        child: Text(list
-                                                                ?.checklist_number
-                                                                .toString() ??
-                                                            ''),
-                                                      );
-                                                    }).toList(),
+                                                    onValueChanged: controller
+                                                        .onValueChanged,
                                                   ),
+
+                                                  // CustomDropDownButton(
+                                                  //   value: controller
+                                                  //       .selectedchecklist
+                                                  //       .value,
+                                                  //   onChange: (String?
+                                                  //       selectedValue) {
+                                                  //     controller
+                                                  //         .isSelectedchecklist
+                                                  //         .value = true;
+                                                  //     controller
+                                                  //             .selectedchecklist
+                                                  //             .value =
+                                                  //         selectedValue ?? '';
+
+                                                  //     controller.getCheckPointlist(
+                                                  //         selectedchecklistId:
+                                                  //             selectedValue
+                                                  //                 .toString());
+                                                  //   },
+                                                  //   item: controller.checkList
+                                                  //       .map<
+                                                  //           DropdownMenuItem<
+                                                  //               String>>((list) {
+                                                  //     return DropdownMenuItem<
+                                                  //         String>(
+                                                  //       value: list?.id
+                                                  //               .toString() ??
+                                                  //           '',
+                                                  //       child: Text(list
+                                                  //               ?.checklist_number
+                                                  //               .toString() ??
+                                                  //           ''),
+                                                  //     );
+                                                  //   }).toList(),
+                                                  // ),
                                                 ),
                                               ),
                                             )
@@ -324,7 +358,9 @@ class PreventiveCheckPointContentWeb
                                       child: CustomElevatedButton(
                                           backgroundColor:
                                               ColorValues.appRedColor,
-                                          onPressed: () {},
+                                          onPressed: () {
+                                            controller.cleardata();
+                                          },
                                           text: 'Cancel'),
                                     ),
                                     SizedBox(

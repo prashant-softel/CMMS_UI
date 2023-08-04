@@ -49,7 +49,6 @@ class PreventiveScreen extends GetView<PreventiveController> {
               child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   mainAxisAlignment: MainAxisAlignment.start,
-
                   children: [
                     if (Responsive.isMobile(context))
                       Obx(
@@ -62,7 +61,6 @@ class PreventiveScreen extends GetView<PreventiveController> {
                               elevation: 1,
                               child: Padding(
                                 padding: const EdgeInsets.all(3.0),
-
                                 child: DropdownButtonHideUnderline(
                                   child: DropdownButton(
                                     // isExpanded: true,
@@ -96,28 +94,28 @@ class PreventiveScreen extends GetView<PreventiveController> {
                       Container(
                         margin: EdgeInsets.only(left: 20),
                         child: Row(
-                      children: [
-                      Text(
-                      "Masters",
-                        style: TextStyle(
-                          color: Color.fromARGB(255, 159, 156, 156),
-                          fontSize: 16,
-                          fontWeight: FontWeight.w400,
+                          children: [
+                            Text(
+                              "Masters",
+                              style: TextStyle(
+                                color: Color.fromARGB(255, 159, 156, 156),
+                                fontSize: 16,
+                                fontWeight: FontWeight.w400,
+                              ),
+                            ),
+                            SizedBox(
+                                width:
+                                    10), // Add some space between the text and the line
+                            Expanded(
+                              child: Divider(
+                                color: Colors
+                                    .grey, // Customize the color of the line if needed
+                                height:
+                                    1, // Adjust the height of the line if needed
+                              ),
+                            ),
+                          ],
                         ),
-                      ),
-                    SizedBox(
-                        width:
-                        10), // Add some space between the text and the line
-                    Expanded(
-                      child: Divider(
-                        color: Colors
-                            .grey, // Customize the color of the line if needed
-                        height:
-                        1, // Adjust the height of the line if needed
-                      ),
-                    ),
-                  ],
-              ),
                       ),
                     GridView.count(
                       shrinkWrap: true,
@@ -125,7 +123,7 @@ class PreventiveScreen extends GetView<PreventiveController> {
                       padding: const EdgeInsets.all(16),
                       crossAxisSpacing: 40,
                       mainAxisSpacing: 6,
-                      crossAxisCount: Responsive.isMobile(context) ? 2 : 5 ,
+                      crossAxisCount: Responsive.isMobile(context) ? 2 : 5,
                       childAspectRatio: Responsive.isMobile(context)
                           ? (itemWidth / itemHeight)
                           : (itemWidth / itemHeightWeb),
@@ -160,12 +158,11 @@ class PreventiveScreen extends GetView<PreventiveController> {
                       padding: const EdgeInsets.all(16),
                       crossAxisSpacing: 40,
                       mainAxisSpacing: 6,
-                      crossAxisCount: Responsive.isMobile(context) ? 2 : 5 ,
+                      crossAxisCount: Responsive.isMobile(context) ? 2 : 5,
                       childAspectRatio: Responsive.isMobile(context)
                           ? (itemWidth / itemHeight)
                           : (itemWidth / itemHeightWeb),
                       children: <Widget>[
-
                         _priventiveList(
                             tittle: "PM Schedule",
                             ontap: () {
@@ -177,11 +174,11 @@ class PreventiveScreen extends GetView<PreventiveController> {
                               controller.pmTask();
                             }),
                         _priventiveList(tittle: "PM Report"),
-                        _priventiveList(
-                            tittle: "PM Execution",
-                            ontap: () {
-                              controller.pmExecution();
-                            }),
+                        // _priventiveList(
+                        //     tittle: "PM Execution",
+                        //     ontap: () {
+                        //       controller.pmExecution();
+                        //     }),
                         _priventiveList(tittle: "Maintenance Report"),
                       ],
                     )
@@ -194,9 +191,8 @@ class PreventiveScreen extends GetView<PreventiveController> {
   }
 
   _priventiveList({required String tittle, Function()? ontap}) {
-    return  MouseRegion(
+    return MouseRegion(
       cursor: SystemMouseCursors.click,
-
       child: GestureDetector(
         onTap: ontap,
         child: Container(
@@ -218,7 +214,6 @@ class PreventiveScreen extends GetView<PreventiveController> {
                       fontWeight: FontWeight.w700),
                   textAlign: TextAlign.center,
                 ),
-
               ),
             ],
           ),
@@ -227,4 +222,3 @@ class PreventiveScreen extends GetView<PreventiveController> {
     );
   }
 }
-

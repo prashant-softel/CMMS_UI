@@ -6,18 +6,18 @@ import '../theme/dimens.dart';
 
 /// DO NOT CHANGE THI FILE FOR THE TOP DROPDOWN. CREATE A NEW WIDGET.
 class DropdownWebWidget extends StatelessWidget {
-  DropdownWebWidget({
-    super.key,
-    this.selectedValue,
-    this.isValueSelected,
-    this.dropdownList,
-    this.isEditable,
-    required this.onValueChanged,
-    this.controller,
-    this.focusNode,
-    this.width,
-    this.margin,
-  });
+  DropdownWebWidget(
+      {super.key,
+      this.selectedValue,
+      this.isValueSelected,
+      this.dropdownList,
+      this.isEditable,
+      required this.onValueChanged,
+      this.controller,
+      this.focusNode,
+      this.width,
+      this.margin,
+      this.boxShadow});
 
   String? selectedValue;
   bool? isValueSelected;
@@ -28,6 +28,7 @@ class DropdownWebWidget extends StatelessWidget {
   final FocusNode? focusNode;
   double? width;
   EdgeInsetsGeometry? margin;
+  List<BoxShadow>? boxShadow;
 
   ///
   @override
@@ -36,33 +37,17 @@ class DropdownWebWidget extends StatelessWidget {
     return //
 
         Obx(
-          ()=> Container(
-              height: MediaQuery.of(context).size.height * 0.040,
-              width: width,
-              margin: margin,
-              decoration: BoxDecoration(
-          boxShadow: [
-            BoxShadow(
-              color: Colors.black26,
-              // offset: const Offset(
-              //   5.0,
-              //   5.0,
-              // ),
-              // blurRadius: 5.0,
-              // spreadRadius: 1.0,
-            ),
-            BoxShadow(
-                // color: ColorValues.whiteColor,
-                // offset: const Offset(0.0, 0.0),
-                // blurRadius: 0.0,
-                // spreadRadius: 0.0,
-                ),
-          ],
+      () => Container(
+        height: MediaQuery.of(context).size.height * 0.040,
+        width: width,
+        margin: margin,
+        decoration: BoxDecoration(
+          boxShadow: boxShadow,
           color: ColorValues.whiteColor,
           borderRadius: BorderRadius.circular(5),
-              ),
-              child: //
-        
+        ),
+        child: //
+
             DropdownSearch<String>(
           autoValidateMode: AutovalidateMode.always,
           validator: (String? item) {
@@ -115,9 +100,9 @@ class DropdownWebWidget extends StatelessWidget {
             onValueChanged(dropdownList, selectedValue);
           },
           selectedItem: selectedValue,
-              ),
-            ),
-        );
+        ),
+      ),
+    );
   }
 }
   //  popupProps: PopupProps.menu(menuProps: MenuProps()),
