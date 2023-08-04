@@ -328,12 +328,17 @@ class NewPermitController extends GetxController {
   int userId = varUserAccessModel.value.user_id ?? 0;
   bool isFromJobDetails = false;
   Rx<int> permitId = 0.obs;
+  bool isChecked = false;
 
+  
   ///
   @override
   void onInit() async {
     try {
       final arguments = Get.arguments;
+      // Map<String, dynamic> jsonData = json.decode(arguments);
+      // isChecked = jsonData['isChecked'];
+      // print('Edit Data:${isChecked}');
       JobDetailsModel? jobModel = JobDetailsModel();
       if (arguments != null) {
         if (arguments.containsKey('permitId')) {
