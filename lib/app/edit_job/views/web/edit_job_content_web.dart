@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
 import '../../../theme/dimens.dart';
@@ -61,6 +62,9 @@ class _EditJobContentWebState extends State<EditJobContentWeb> {
                       ),
                       GestureDetector(
                         onTap: () {
+                          final _flutterSecureStorage =
+                              const FlutterSecureStorage();
+                          _flutterSecureStorage.delete(key: "jobId");
                           Get.back();
                         },
                         child: Text(" / BREAKDOWN MAINTENANCE",

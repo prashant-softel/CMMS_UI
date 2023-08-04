@@ -1741,8 +1741,6 @@ class Repository {
     }
   }
 
-
-  
   ///Module Cleaning Task List
   Future<List<MCTaskListModel>> getMCTaskList({
     required int? facility_id,
@@ -1772,7 +1770,6 @@ class Repository {
       return [];
     }
   }
-
 
   Future<List<WorkTypeModel>> getWorkTypeList(
     bool? isLoading,
@@ -3206,6 +3203,34 @@ class Repository {
     }
   }
 
+  Future<Map<String, dynamic>> startJobCard(
+    auth,
+    jcCard,
+    bool? isLoading,
+  ) async {
+    try {
+      final auth = await getSecuredValue(LocalKeys.authToken);
+      final res = await _dataRepository.startJobCard(
+        auth: auth,
+        jcCard: jcCard,
+        isLoading: isLoading,
+      );
+
+      if (!res.hasError) {
+        if (res.errorCode == 200) {
+          var responseMap = json.decode(res.data);
+          return responseMap;
+        }
+      } else {
+        Utility.showDialog(res.errorCode.toString() + 'startJobCard');
+      }
+      return Map();
+    } catch (error) {
+      print(error.toString());
+      return Map();
+    }
+  }
+
   Future<PermitDetailsModel?> getPermitDetails(
     int? permitId,
     bool? isLoading,
@@ -3316,7 +3341,7 @@ class Repository {
       final auth = await getSecuredValue(LocalKeys.authToken);
       final res = await _dataRepository.updateJobCard(
         auth: auth,
-        jobCard: jobCard,
+        jobCard: json.encode(jobCard),
         isLoading: isLoading,
       );
 

@@ -180,7 +180,8 @@ class JobCardDetailsContentMobile extends GetView<JobCardDetailsController> {
                           children: [
                               CustomElevatedButton(
                                 text: 'Start Job Card',
-                                onPressed: () => controller.createJobCard(),
+                                onPressed: () {},
+                                // => controller.createJobCard(),
                                 backgroundColor: ColorValues.appGreenColor,
                               ),
                               Dimens.boxWidth10,

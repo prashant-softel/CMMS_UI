@@ -19,14 +19,15 @@ class StockManagementGoodsOrdersController extends GetxController {
   final HomeController homecontroller = Get.find();
   RxList<GoodsOrdersListModel?>? goodsOrdersList =
       <GoodsOrdersListModel?>[].obs;
-  Rx<DateTime> fromDate = DateTime.now().obs;
+  Rx<DateTime> fromDate = DateTime.now().subtract(Duration(days: 7)).obs;
   Rx<DateTime> toDate = DateTime.now().obs;
+
   String get formattedFromdate =>
       DateFormat('dd/MM/yyyy').format(fromDate.value);
   String get formattedTodate => DateFormat('dd/MM/yyyy').format(toDate.value);
   String get formattedTodate1 => DateFormat('yyyy-MM-dd').format(toDate.value);
   String get formattedFromdate1 =>
-      DateFormat('yyyy-MM-dd').format(toDate.value);
+      DateFormat('yyyy-MM-dd').format(fromDate.value);
 
   GoodsOrdersListModel? goodsOrdersListModel;
   RxList<String> goodsOrdersListTableColumns = <String>[].obs;
@@ -38,13 +39,18 @@ class StockManagementGoodsOrdersController extends GetxController {
   );
   StreamSubscription<int>? facilityIdStreamSubscription;
   int facilityId = 0;
+
   @override
   void onInit() async {
     facilityIdStreamSubscription = homecontroller.facilityId$.listen((event) {
       facilityId = event;
-      Future.delayed(Duration(seconds: 2), () {
-        getGoodsOrdersList(
-            facilityId, formattedTodate1, formattedFromdate1, false);
+      Future.delayed(Duration(seconds: 2), () async {
+        await getGoodsOrdersList(
+          facilityId,
+          formattedTodate1,
+          formattedFromdate1,
+          false,
+        );
       });
     });
     super.onInit();
@@ -55,10 +61,11 @@ class StockManagementGoodsOrdersController extends GetxController {
     goodsOrdersList!.value = <GoodsOrdersListModel>[];
     final _goodsordersList =
         await stockManagementGoodsOrdersPresenter.getGoodsOrdersList(
-            isLoading: true,
-            start_date: startDate,
-            end_date: endDate,
-            facility_id: facilityId);
+      isLoading: true,
+      start_date: startDate,
+      end_date: endDate,
+      facility_id: facilityId,
+    );
     if (_goodsordersList != null) {
       goodsOrdersList!.value = _goodsordersList;
       paginationController = PaginationController(
@@ -107,17 +114,18 @@ class StockManagementGoodsOrdersController extends GetxController {
           ),
           RichText(
             text: TextSpan(
-                text: 'Are you sure you want to delete the SPV ',
-                style: Styles.blackBold16,
-                children: [
-                  TextSpan(
-                    text: generatedBy,
-                    style: TextStyle(
-                      color: ColorValues.orangeColor,
-                      fontWeight: FontWeight.bold,
-                    ),
+              text: 'Are you sure you want to delete the SPV ',
+              style: Styles.blackBold16,
+              children: [
+                TextSpan(
+                  text: generatedBy,
+                  style: TextStyle(
+                    color: ColorValues.orangeColor,
+                    fontWeight: FontWeight.bold,
                   ),
-                ]),
+                ),
+              ],
+            ),
           ),
         ]),
         actions: [
@@ -135,7 +143,11 @@ class StockManagementGoodsOrdersController extends GetxController {
                   deleteGoodsOrders(id).then((value) {
                     Get.back();
                     getGoodsOrdersList(
-                        facilityId, formattedTodate, formattedFromdate, false);
+                      facilityId,
+                      formattedTodate,
+                      formattedFromdate,
+                      false,
+                    );
                   });
                 },
                 child: Text('YES'),
@@ -148,11 +160,9 @@ class StockManagementGoodsOrdersController extends GetxController {
   }
 
   Future<void> deleteGoodsOrders(String? id) async {
-    {
-      await stockManagementGoodsOrdersPresenter.deleteFacility(
-        id,
-        isLoading: true,
-      );
-    }
+    await stockManagementGoodsOrdersPresenter.deleteFacility(
+      id,
+      isLoading: true,
+    );
   }
 }

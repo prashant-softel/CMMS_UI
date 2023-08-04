@@ -115,7 +115,7 @@ class _PreventiveMaintenanceTaskContentWebState
                                                 ['PreventiveMaintenanceTask']);
                                           },
                                           hintText:
-                                              '${controller.formattedTodate.toString()} To ${controller.formattedFromdate.toString()}',
+                                              '${controller.formattedFromdate.toString()} To ${controller.formattedTodate.toString()}',
                                         ),
                                       ],
                                     ),

@@ -44,4 +44,14 @@ class JobDetailsPresenter {
         permitId: permitId,
         isLoading: isLoading,
       );
+  Future<Map<String, dynamic>?> createJobCard({
+    String? auth,
+    int? jobId,
+    bool? isLoading,
+  }) async =>
+      await jobDetailsUsecase.createJobCard(
+        auth: auth,
+        jobId: jobId,
+        isLoading: isLoading,
+      );
 }

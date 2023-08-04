@@ -1364,6 +1364,16 @@ class DataRepository extends DomainRepository {
         jobId: jobId,
         isLoading: isLoading ?? false,
       );
+  Future<ResponseModel> startJobCard({
+    String? auth,
+    jcCard,
+    bool? isLoading,
+  }) async =>
+      await connectHelper.startJobCard(
+        auth: auth,
+        jcCard: jcCard,
+        isLoading: isLoading ?? false,
+      );
 
   ///
   Future<ResponseModel> getJobCardDetails({

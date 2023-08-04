@@ -26,12 +26,15 @@ class MrsListController extends GetxController {
   MrsListModel? mrsListModel;
   MrsListModel? selectedItem;
   RxList<String> mrsTableColumns = <String>[].obs;
-  Rx<DateTime> fromDate = DateTime.now().obs;
+  Rx<DateTime> fromDate = DateTime.now().subtract(Duration(days: 7)).obs;
   Rx<DateTime> toDate = DateTime.now().obs;
   bool openFromDateToStartDatePicker = false;
   String get formattedFromdate =>
+      DateFormat('dd/MM/yyyy').format(fromDate.value);
+  String get formattedTodate => DateFormat('dd/MM/yyyy').format(toDate.value);
+  String get formattedTodate1 => DateFormat('yyyy-MM-dd').format(toDate.value);
+  String get formattedFromdate1 =>
       DateFormat('yyyy-MM-dd').format(fromDate.value);
-  String get formattedTodate => DateFormat('yyyy-MM-dd').format(toDate.value);
 
   ///
   @override
@@ -39,7 +42,7 @@ class MrsListController extends GetxController {
     facilityIdStreamSubscription = homecontroller.facilityId$.listen((event) {
       facilityId = event;
       Future.delayed(Duration(seconds: 2), () {
-        getMrsList(facilityId, formattedTodate, formattedFromdate, true);
+        getMrsList(facilityId, formattedTodate1, formattedFromdate1, true);
       });
     });
     super.onInit();

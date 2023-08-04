@@ -14,7 +14,7 @@ class JobCardUpdatedDialog extends GetView<JobCardDetailsController> {
   });
 
   ///
-  final int? jobId;
+  final List<dynamic>? jobId;
   final String? message;
 
   ///
@@ -27,7 +27,7 @@ class JobCardUpdatedDialog extends GetView<JobCardDetailsController> {
       insetPadding: Dimens.edgeInsets10_0_10_0,
       contentPadding: EdgeInsets.zero,
       title: Text(
-        'Job Card Updated',
+        (message ?? ''),
         textAlign: TextAlign.center,
       ),
       content: Builder(builder: (context) {
@@ -43,7 +43,8 @@ class JobCardUpdatedDialog extends GetView<JobCardDetailsController> {
                   thickness: 1,
                 ),
                 Dimens.boxHeight20,
-                Center(child: Text(message ?? '')),
+                Center(
+                    child: Text("Job Card Added Succesfully With ID $jobId ")),
                 Dimens.boxHeight25,
                 Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween, //
