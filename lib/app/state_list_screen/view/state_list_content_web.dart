@@ -1,6 +1,7 @@
 import 'package:cmms/app/app.dart';
 import 'package:cmms/app/pm_schedule/pm_schedule_controller.dart';
 import 'package:cmms/app/widgets/custom_textField.dart';
+import 'package:cmms/app/widgets/dropdown_web.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:scrollable_table_view/scrollable_table_view.dart';
@@ -81,7 +82,7 @@ class StateListContentWeb extends GetView<StateListController> {
               ],
             ),
             child: Obx(
-                  () => Container(
+              () => Container(
                 // margin: EdgeInsets.all(10),
                 width: MediaQuery.of(context).size.width,
                 //color: ColorValues.greyLightColor,
@@ -124,13 +125,29 @@ class StateListContentWeb extends GetView<StateListController> {
                             // ),
                             Container(
                               width: (MediaQuery.of(context).size.width * .3),
-                              child: DropdownWidget(
+                              child: DropdownWebWidget(
+                                boxShadow: [
+                                  BoxShadow(
+                                    color: Colors.black26,
+                                    offset: const Offset(
+                                      5.0,
+                                      5.0,
+                                    ),
+                                    blurRadius: 5.0,
+                                    spreadRadius: 1.0,
+                                  ),
+                                  BoxShadow(
+                                    color: ColorValues.whiteColor,
+                                    offset: const Offset(0.0, 0.0),
+                                    blurRadius: 0.0,
+                                    spreadRadius: 0.0,
+                                  ),
+                                ],
                                 controller: controller,
                                 dropdownList: controller.countryList,
                                 isValueSelected:
-                                controller.isSelectedcountry.value,
-                                selectedValue:
-                                controller.selectedcountry.value,
+                                    controller.isSelectedcountry.value,
+                                selectedValue: controller.selectedcountry.value,
                                 onValueChanged: controller.onValueChanged,
                               ),
                             ),
@@ -193,13 +210,13 @@ class StateListContentWeb extends GetView<StateListController> {
                             decoration: BoxDecoration(
                               color: ColorValues.appLightBlueColor,
                               borderRadius:
-                              const BorderRadius.all(Radius.circular(8)),
+                                  const BorderRadius.all(Radius.circular(8)),
                             ),
                             textStyle: TextStyle(color: Colors.white),
                             preferBelow: true,
                             verticalOffset: 20,
                             message:
-                            "Note: Date Should be ${'"YYYY-MM-DD"'} Format in Excel File\nPM Execution will be scheduled for mapped frequencies only",
+                                "Note: Date Should be ${'"YYYY-MM-DD"'} Format in Excel File\nPM Execution will be scheduled for mapped frequencies only",
                             child: TextField(
                               decoration: InputDecoration(
                                 enabledBorder: const OutlineInputBorder(
@@ -243,7 +260,7 @@ class StateListContentWeb extends GetView<StateListController> {
                                 height: 500,
                                 child: ScrollableTableView(
                                   paginationController:
-                                  controller.paginationController,
+                                      controller.paginationController,
                                   columns: [
                                     "Id",
                                     "States",
@@ -256,10 +273,9 @@ class StateListContentWeb extends GetView<StateListController> {
                                   rows: [
                                     ...List.generate(
                                       controller.stateList?.length ?? 0,
-                                          (index) {
+                                      (index) {
                                         var stateListDetails =
-                                        controller
-                                            .stateList?[index];
+                                            controller.stateList?[index];
                                         return [
                                           '${stateListDetails?.id}',
                                           '${stateListDetails?.name ?? ''}',
@@ -283,14 +299,14 @@ class StateListContentWeb extends GetView<StateListController> {
                                                 //   _selectDate(context, value);
                                                 // },
                                                 textController: (value
-                                                as FrequencyDates)
+                                                        as FrequencyDates)
                                                     .schedule_date_value_controller,
                                                 enabled:
-                                                (value as FrequencyDates)
-                                                    .schedule_date !=
-                                                    null
-                                                    ? true
-                                                    : false,
+                                                    (value as FrequencyDates)
+                                                                .schedule_date !=
+                                                            null
+                                                        ? true
+                                                        : false,
                                               )),
                                         );
                                       }).toList(),
@@ -300,10 +316,10 @@ class StateListContentWeb extends GetView<StateListController> {
                               ),
                               Padding(
                                 padding:
-                                const EdgeInsets.symmetric(horizontal: 25),
+                                    const EdgeInsets.symmetric(horizontal: 25),
                                 child: ValueListenableBuilder(
                                     valueListenable:
-                                    controller.paginationController,
+                                        controller.paginationController,
                                     builder: (context, value, child) {
                                       return Row(children: [
                                         Text(
@@ -311,54 +327,54 @@ class StateListContentWeb extends GetView<StateListController> {
                                         Row(children: [
                                           IconButton(
                                             onPressed: controller
-                                                .paginationController
-                                                .currentPage <=
-                                                1
+                                                        .paginationController
+                                                        .currentPage <=
+                                                    1
                                                 ? null
                                                 : () {
-                                              controller
-                                                  .paginationController
-                                                  .previous();
-                                            },
+                                                    controller
+                                                        .paginationController
+                                                        .previous();
+                                                  },
                                             iconSize: 20,
                                             splashRadius: 20,
                                             icon: Icon(
                                               Icons.arrow_back_ios_new_rounded,
                                               color: controller
-                                                  .paginationController
-                                                  .currentPage <=
-                                                  1
+                                                          .paginationController
+                                                          .currentPage <=
+                                                      1
                                                   ? Colors.black26
                                                   : Theme.of(context)
-                                                  .primaryColor,
+                                                      .primaryColor,
                                             ),
                                           ),
                                           IconButton(
                                             onPressed: controller
-                                                .paginationController
-                                                .currentPage >=
-                                                controller
-                                                    .paginationController
-                                                    .pageCount
+                                                        .paginationController
+                                                        .currentPage >=
+                                                    controller
+                                                        .paginationController
+                                                        .pageCount
                                                 ? null
                                                 : () {
-                                              controller
-                                                  .paginationController
-                                                  .next();
-                                            },
+                                                    controller
+                                                        .paginationController
+                                                        .next();
+                                                  },
                                             iconSize: 20,
                                             splashRadius: 20,
                                             icon: Icon(
                                               Icons.arrow_forward_ios_rounded,
                                               color: controller
-                                                  .paginationController
-                                                  .currentPage >=
-                                                  controller
-                                                      .paginationController
-                                                      .pageCount
+                                                          .paginationController
+                                                          .currentPage >=
+                                                      controller
+                                                          .paginationController
+                                                          .pageCount
                                                   ? Colors.black26
                                                   : Theme.of(context)
-                                                  .primaryColor,
+                                                      .primaryColor,
                                             ),
                                           ),
                                         ]),

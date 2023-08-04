@@ -74,7 +74,7 @@ class PreventiveChecklistListContentMobile
                                     ),
                                     Expanded(
                                       child: Text(
-                                        '${preventiveCheckListModel?.checklist_number}'
+                                        '${preventiveCheckListModel?.name}'
                                         '',
                                         style: const TextStyle(
                                           color: ColorValues.navyBlueColor,

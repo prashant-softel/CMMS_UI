@@ -1,6 +1,7 @@
 import 'package:clipboard/clipboard.dart';
 import 'package:cmms/app/app.dart';
 import 'package:cmms/app/constant/constant.dart';
+import 'package:cmms/app/widgets/dropdown_web.dart';
 import 'package:cmms/domain/models/preventive_checklist_model.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -69,7 +70,7 @@ class PreventiveChecklistListContentWeb
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   varUserAccessModel.value.access_list!
-                              .where((e) => e.feature_id == 5 && e.add == 0)
+                              .where((e) => e.feature_id == 5 && e.add == 1)
                               .length >
                           0
                       ? Container(
@@ -190,7 +191,26 @@ class PreventiveChecklistListContentWeb
                                                         .size
                                                         .height *
                                                     0.040,
-                                                child: DropdownWidget(
+                                                child: DropdownWebWidget(
+                                                  boxShadow: [
+                                                    BoxShadow(
+                                                      color: Colors.black26,
+                                                      offset: const Offset(
+                                                        5.0,
+                                                        5.0,
+                                                      ),
+                                                      blurRadius: 5.0,
+                                                      spreadRadius: 1.0,
+                                                    ),
+                                                    BoxShadow(
+                                                      color: ColorValues
+                                                          .whiteColor,
+                                                      offset: const Offset(
+                                                          0.0, 0.0),
+                                                      blurRadius: 0.0,
+                                                      spreadRadius: 0.0,
+                                                    ),
+                                                  ],
                                                   controller: controller,
                                                   dropdownList: controller
                                                       .equipmentCategoryList,
@@ -229,8 +249,27 @@ class PreventiveChecklistListContentWeb
                                                             .width *
                                                         .2) -
                                                     30,
-                                                child: DropdownWidget(
+                                                child: DropdownWebWidget(
                                                   controller: controller,
+                                                  boxShadow: [
+                                                    BoxShadow(
+                                                      color: Colors.black26,
+                                                      offset: const Offset(
+                                                        5.0,
+                                                        5.0,
+                                                      ),
+                                                      blurRadius: 5.0,
+                                                      spreadRadius: 1.0,
+                                                    ),
+                                                    BoxShadow(
+                                                      color: ColorValues
+                                                          .whiteColor,
+                                                      offset: const Offset(
+                                                          0.0, 0.0),
+                                                      blurRadius: 0.0,
+                                                      spreadRadius: 0.0,
+                                                    ),
+                                                  ],
                                                   dropdownList:
                                                       controller.frequencyList,
                                                   isValueSelected: controller
@@ -366,7 +405,9 @@ class PreventiveChecklistListContentWeb
                                         child: CustomElevatedButton(
                                             backgroundColor:
                                                 ColorValues.appRedColor,
-                                            onPressed: () {},
+                                            onPressed: () {
+                                              controller.cleardata();
+                                            },
                                             text: 'Cancel')),
                                     SizedBox(
                                       width: 10,
@@ -412,7 +453,7 @@ class PreventiveChecklistListContentWeb
                         )
                       : Container(),
                   varUserAccessModel.value.access_list!
-                              .where((e) => e.feature_id == 5 && e.view == 0)
+                              .where((e) => e.feature_id == 5 && e.view == 1)
                               .length >
                           0
                       ? Expanded(
@@ -570,7 +611,7 @@ class PreventiveChecklistListContentWeb
                                                   return [
                                                     '${preventiveCheckListModelListDetails?.id}',
 
-                                                    '${preventiveCheckListModelListDetails?.checklist_number}',
+                                                    '${preventiveCheckListModelListDetails?.name}',
                                                     "No", //'${preventiveCheckListModelListDetails?.status ?? ''}',
                                                     '${preventiveCheckListModelListDetails?.category_name}',
                                                     '${preventiveCheckListModelListDetails?.frequency_name}',
@@ -599,7 +640,7 @@ class PreventiveChecklistListContentWeb
                                                                     "Action")
                                                                 ? Wrap(
                                                                     children: [
-                                                                        varUserAccessModel.value.access_list!.where((e) => e.feature_id == 5 && e.edit == 0).length >
+                                                                        varUserAccessModel.value.access_list!.where((e) => e.feature_id == 5 && e.edit == 1).length >
                                                                                 0
                                                                             ? TableActionButton(
                                                                                 color: ColorValues.editColor,
@@ -608,7 +649,7 @@ class PreventiveChecklistListContentWeb
                                                                                 onPress: () {
                                                                                   controller.selectedItem = controller.preventiveCheckList!.firstWhere((element) => "${element?.id}" == _preventiveCheckList[0]);
 
-                                                                                  controller.checklistNumberCtrlr.text = controller.selectedItem?.checklist_number ?? '';
+                                                                                  controller.checklistNumberCtrlr.text = controller.selectedItem?.name ?? '';
                                                                                   controller.durationCtrlr.text = "${controller.selectedItem?.duration}";
                                                                                   controller.manpowerCtrlr.text = "${controller.selectedItem?.manPower}";
                                                                                   controller.selectedfrequency.value = controller.selectedItem?.frequency_name ?? "";
@@ -618,7 +659,7 @@ class PreventiveChecklistListContentWeb
                                                                                 },
                                                                               )
                                                                             : Container(),
-                                                                        varUserAccessModel.value.access_list!.where((e) => e.feature_id == 5 && e.delete == 0).length >
+                                                                        varUserAccessModel.value.access_list!.where((e) => e.feature_id == 5 && e.delete == 1).length >
                                                                                 0
                                                                             ? TableActionButton(
                                                                                 color: ColorValues.deleteColor,

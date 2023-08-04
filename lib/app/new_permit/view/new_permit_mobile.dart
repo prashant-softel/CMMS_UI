@@ -25,6 +25,7 @@ import 'package:cmms/app/widgets/dropdown.dart';
 import 'package:cmms/app/new_permit/new_permit_controller.dart';
 import 'package:cmms/app/new_permit/view/new_permit_mobile.dart';
 import 'package:cmms/app/new_permit/view/new_permit_web.dart';
+import 'package:cmms/app/widgets/dropdown_web.dart';
 import 'package:cmms/app/widgets/file_upload_with_dropzone_widget.dart';
 import 'package:cmms/app/widgets/view_sop_dialog.dart';
 import 'package:cmms/app/widgets/view_jsa_dialog.dart';
@@ -95,7 +96,26 @@ class NewPermitScreen extends GetView<NewPermitController> {
                             child: Row(
                               children: [
                                 //  Text('Select Plantss:'),
-                                // DropdownWidget(
+                                //  DropdownWebWidget(
+                                // boxShadow: [
+                                //   BoxShadow(
+                                //     color: Colors.black26,
+                                //     offset: const Offset(
+                                //       5.0,
+                                //       5.0,
+                                //     ),
+                                //     blurRadius: 5.0,
+                                //     spreadRadius: 1.0,
+                                //   ),
+                                //   BoxShadow(
+                                //     color: ColorValues
+                                //         .whiteColor,
+                                //     offset: const Offset(
+                                //         0.0, 0.0),
+                                //     blurRadius: 0.0,
+                                //     spreadRadius: 0.0,
+                                //   ),
+                                // ],
                                 //   // controller: controller,
                                 //   dropdownList: controller.facilityList,
                                 //   isValueSelected: controller.isFacilitySelected.value,
@@ -113,7 +133,24 @@ class NewPermitScreen extends GetView<NewPermitController> {
                                         elevation: 1,
                                         child: Padding(
                                           padding: const EdgeInsets.all(1.0),
-                                          child: DropdownWidget(
+                                          child: DropdownWebWidget(
+                                            boxShadow: [
+                                              BoxShadow(
+                                                color: Colors.black26,
+                                                offset: const Offset(
+                                                  5.0,
+                                                  5.0,
+                                                ),
+                                                blurRadius: 5.0,
+                                                spreadRadius: 1.0,
+                                              ),
+                                              BoxShadow(
+                                                color: ColorValues.whiteColor,
+                                                offset: const Offset(0.0, 0.0),
+                                                blurRadius: 0.0,
+                                                spreadRadius: 0.0,
+                                              ),
+                                            ],
                                             dropdownList:
                                                 controller.facilityList,
                                             isValueSelected: controller
@@ -212,7 +249,29 @@ class NewPermitScreen extends GetView<NewPermitController> {
                                                                   .width /
                                                               1.6,
                                                       child: Obx(
-                                                        () => DropdownWidget(
+                                                        () => DropdownWebWidget(
+                                                          boxShadow: [
+                                                            BoxShadow(
+                                                              color: Colors
+                                                                  .black26,
+                                                              offset:
+                                                                  const Offset(
+                                                                5.0,
+                                                                5.0,
+                                                              ),
+                                                              blurRadius: 5.0,
+                                                              spreadRadius: 1.0,
+                                                            ),
+                                                            BoxShadow(
+                                                              color: ColorValues
+                                                                  .whiteColor,
+                                                              offset:
+                                                                  const Offset(
+                                                                      0.0, 0.0),
+                                                              blurRadius: 0.0,
+                                                              spreadRadius: 0.0,
+                                                            ),
+                                                          ],
                                                           dropdownList:
                                                               controller
                                                                   .blockList,
@@ -254,7 +313,26 @@ class NewPermitScreen extends GetView<NewPermitController> {
                                                                 .size
                                                                 .width /
                                                             1.82,
-                                                    child: DropdownWidget(
+                                                    child: DropdownWebWidget(
+                                                      boxShadow: [
+                                                        BoxShadow(
+                                                          color: Colors.black26,
+                                                          offset: const Offset(
+                                                            5.0,
+                                                            5.0,
+                                                          ),
+                                                          blurRadius: 5.0,
+                                                          spreadRadius: 1.0,
+                                                        ),
+                                                        BoxShadow(
+                                                          color: ColorValues
+                                                              .whiteColor,
+                                                          offset: const Offset(
+                                                              0.0, 0.0),
+                                                          blurRadius: 0.0,
+                                                          spreadRadius: 0.0,
+                                                        ),
+                                                      ],
                                                       dropdownList: controller
                                                           .typePermitList,
                                                       isValueSelected: controller
@@ -432,7 +510,29 @@ class NewPermitScreen extends GetView<NewPermitController> {
                                                                 .width /
                                                             3.75,
                                                     child: Obx(
-                                                      () => DropdownWidget(
+                                                      () => DropdownWebWidget(
+                                                        boxShadow: [
+                                                          BoxShadow(
+                                                            color:
+                                                                Colors.black26,
+                                                            offset:
+                                                                const Offset(
+                                                              5.0,
+                                                              5.0,
+                                                            ),
+                                                            blurRadius: 5.0,
+                                                            spreadRadius: 1.0,
+                                                          ),
+                                                          BoxShadow(
+                                                            color: ColorValues
+                                                                .whiteColor,
+                                                            offset:
+                                                                const Offset(
+                                                                    0.0, 0.0),
+                                                            blurRadius: 0.0,
+                                                            spreadRadius: 0.0,
+                                                          ),
+                                                        ],
                                                         dropdownList: controller
                                                             .blockList,
                                                         isValueSelected:
@@ -518,7 +618,26 @@ class NewPermitScreen extends GetView<NewPermitController> {
                                                     // SizedBox(
                                                     //   width: MediaQuery.of(context).size.width / 3.5,
                                                     //   child: Obx(
-                                                    //     ()=> DropdownWidget(
+                                                    //     ()=>  DropdownWebWidget(
+                                                    // boxShadow: [
+                                                    //   BoxShadow(
+                                                    //     color: Colors.black26,
+                                                    //     offset: const Offset(
+                                                    //       5.0,
+                                                    //       5.0,
+                                                    //     ),
+                                                    //     blurRadius: 5.0,
+                                                    //     spreadRadius: 1.0,
+                                                    //   ),
+                                                    //   BoxShadow(
+                                                    //     color: ColorValues
+                                                    //         .whiteColor,
+                                                    //     offset: const Offset(
+                                                    //         0.0, 0.0),
+                                                    //     blurRadius: 0.0,
+                                                    //     spreadRadius: 0.0,
+                                                    //   ),
+                                                    // ],
                                                     //       dropdownList:controller.blockList,
                                                     //       isValueSelected: controller.isBlockSelected.value,
                                                     //       selectedValue: controller.selectedBlock.value,
@@ -541,7 +660,29 @@ class NewPermitScreen extends GetView<NewPermitController> {
                                                                   .width /
                                                               3.75,
                                                       child: Obx(
-                                                        () => DropdownWidget(
+                                                        () => DropdownWebWidget(
+                                                          boxShadow: [
+                                                            BoxShadow(
+                                                              color: Colors
+                                                                  .black26,
+                                                              offset:
+                                                                  const Offset(
+                                                                5.0,
+                                                                5.0,
+                                                              ),
+                                                              blurRadius: 5.0,
+                                                              spreadRadius: 1.0,
+                                                            ),
+                                                            BoxShadow(
+                                                              color: ColorValues
+                                                                  .whiteColor,
+                                                              offset:
+                                                                  const Offset(
+                                                                      0.0, 0.0),
+                                                              blurRadius: 0.0,
+                                                              spreadRadius: 0.0,
+                                                            ),
+                                                          ],
                                                           dropdownList: controller
                                                               .typePermitList,
                                                           isValueSelected:
@@ -1663,7 +1804,24 @@ class NewPermitScreen extends GetView<NewPermitController> {
                                                                         child:
                                                                             Obx(
                                                                           () =>
-                                                                              DropdownWidget(
+                                                                              DropdownWebWidget(
+                                                                            boxShadow: [
+                                                                              BoxShadow(
+                                                                                color: Colors.black26,
+                                                                                offset: const Offset(
+                                                                                  5.0,
+                                                                                  5.0,
+                                                                                ),
+                                                                                blurRadius: 5.0,
+                                                                                spreadRadius: 1.0,
+                                                                              ),
+                                                                              BoxShadow(
+                                                                                color: ColorValues.whiteColor,
+                                                                                offset: const Offset(0.0, 0.0),
+                                                                                blurRadius: 0.0,
+                                                                                spreadRadius: 0.0,
+                                                                              ),
+                                                                            ],
                                                                             dropdownList:
                                                                                 controller.jobTypeList,
                                                                             isValueSelected:
@@ -1691,7 +1849,24 @@ class NewPermitScreen extends GetView<NewPermitController> {
                                                                         child:
                                                                             Obx(
                                                                           () =>
-                                                                              DropdownWidget(
+                                                                              DropdownWebWidget(
+                                                                            boxShadow: [
+                                                                              BoxShadow(
+                                                                                color: Colors.black26,
+                                                                                offset: const Offset(
+                                                                                  5.0,
+                                                                                  5.0,
+                                                                                ),
+                                                                                blurRadius: 5.0,
+                                                                                spreadRadius: 1.0,
+                                                                              ),
+                                                                              BoxShadow(
+                                                                                color: ColorValues.whiteColor,
+                                                                                offset: const Offset(0.0, 0.0),
+                                                                                blurRadius: 0.0,
+                                                                                spreadRadius: 0.0,
+                                                                              ),
+                                                                            ],
                                                                             dropdownList:
                                                                                 controller.sopPermitList,
                                                                             isValueSelected:
@@ -1772,7 +1947,24 @@ class NewPermitScreen extends GetView<NewPermitController> {
                                                                         child:
                                                                             Obx(
                                                                           () =>
-                                                                              DropdownWidget(
+                                                                              DropdownWebWidget(
+                                                                            boxShadow: [
+                                                                              BoxShadow(
+                                                                                color: Colors.black26,
+                                                                                offset: const Offset(
+                                                                                  5.0,
+                                                                                  5.0,
+                                                                                ),
+                                                                                blurRadius: 5.0,
+                                                                                spreadRadius: 1.0,
+                                                                              ),
+                                                                              BoxShadow(
+                                                                                color: ColorValues.whiteColor,
+                                                                                offset: const Offset(0.0, 0.0),
+                                                                                blurRadius: 0.0,
+                                                                                spreadRadius: 0.0,
+                                                                              ),
+                                                                            ],
                                                                             dropdownList:
                                                                                 controller.permitIssuerList,
                                                                             isValueSelected:
@@ -1823,7 +2015,24 @@ class NewPermitScreen extends GetView<NewPermitController> {
                                                                         child:
                                                                             Obx(
                                                                           () =>
-                                                                              DropdownWidget(
+                                                                              DropdownWebWidget(
+                                                                            boxShadow: [
+                                                                              BoxShadow(
+                                                                                color: Colors.black26,
+                                                                                offset: const Offset(
+                                                                                  5.0,
+                                                                                  5.0,
+                                                                                ),
+                                                                                blurRadius: 5.0,
+                                                                                spreadRadius: 1.0,
+                                                                              ),
+                                                                              BoxShadow(
+                                                                                color: ColorValues.whiteColor,
+                                                                                offset: const Offset(0.0, 0.0),
+                                                                                blurRadius: 0.0,
+                                                                                spreadRadius: 0.0,
+                                                                              ),
+                                                                            ],
                                                                             dropdownList:
                                                                                 controller.permitApproverList,
                                                                             isValueSelected:
