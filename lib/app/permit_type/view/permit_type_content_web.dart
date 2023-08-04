@@ -56,9 +56,9 @@ class PermitTypeContentWeb extends GetView<PermitTypeController> {
                     onTap: () {
                       Get.back();
                     },
-                    child: Text(" / Masters", style: Styles.greyMediumLight12),
+                    child: Text(" / MASTERS", style: Styles.greyMediumLight12),
                   ),
-                  Text(" / Permit Type", style: Styles.greyMediumLight12)
+                  Text(" / PERMIT TYPE", style: Styles.greyMediumLight12)
                 ],
               ),
             ),
@@ -124,12 +124,11 @@ class PermitTypeContentWeb extends GetView<PermitTypeController> {
                                           mainAxisAlignment:
                                               MainAxisAlignment.spaceBetween,
                                           children: [
-                                            Text(
-                                              "Facility: ",
-                                              style: Styles.blackBold16,
-                                            ),
-                                            SizedBox(
-                                              width: 64,
+                                            Expanded(
+                                              child: Text(
+                                                "Facility: ",
+                                                style: Styles.blackBold16,
+                                              ),
                                             ),
                                             Expanded(
                                               child: Container(
@@ -183,12 +182,11 @@ class PermitTypeContentWeb extends GetView<PermitTypeController> {
                                           mainAxisAlignment:
                                               MainAxisAlignment.spaceBetween,
                                           children: [
-                                            Text(
-                                              "Title: ",
-                                              style: Styles.blackBold16,
-                                            ),
-                                            SizedBox(
-                                              width: 60,
+                                            Expanded(
+                                              child: Text(
+                                                "Title: ",
+                                                style: Styles.blackBold16,
+                                              ),
                                             ),
                                             Expanded(
                                               child: Container(
@@ -237,12 +235,11 @@ class PermitTypeContentWeb extends GetView<PermitTypeController> {
                                           mainAxisAlignment:
                                               MainAxisAlignment.spaceBetween,
                                           children: [
-                                            Text(
-                                              "Description ",
-                                              style: Styles.blackBold16,
-                                            ),
-                                            SizedBox(
-                                              width: 15,
+                                            Expanded(
+                                              child: Text(
+                                                "Description ",
+                                                style: Styles.blackBold16,
+                                              ),
                                             ),
                                             Expanded(
                                               child: Container(
@@ -377,6 +374,7 @@ class PermitTypeContentWeb extends GetView<PermitTypeController> {
                                   Row(
                                     children: [
                                       Container(
+                                        height: 45,
                                         margin: EdgeInsets.only(left: 10),
                                         child: CustomElevatedButton(
                                             backgroundColor:
@@ -392,6 +390,7 @@ class PermitTypeContentWeb extends GetView<PermitTypeController> {
                                             text: 'Copy'),
                                       ),
                                       Container(
+                                        height: 45,
                                         margin: EdgeInsets.only(left: 10),
                                         child: CustomElevatedButton(
                                             backgroundColor:
@@ -400,6 +399,7 @@ class PermitTypeContentWeb extends GetView<PermitTypeController> {
                                             text: 'Excel'),
                                       ),
                                       Container(
+                                        height: 45,
                                         margin: EdgeInsets.only(left: 10),
                                         child: CustomElevatedButton(
                                             backgroundColor:
@@ -408,6 +408,7 @@ class PermitTypeContentWeb extends GetView<PermitTypeController> {
                                             text: 'PDF'),
                                       ),
                                       Container(
+                                        height: 45,
                                         margin: EdgeInsets.only(left: 10),
                                         child: CustomElevatedButton(
                                           backgroundColor:
@@ -522,7 +523,7 @@ class PermitTypeContentWeb extends GetView<PermitTypeController> {
                                                                         //     ?
                                                                         TableActionButton(
                                                                           color:
-                                                                              ColorValues.appLightBlueColor,
+                                                                              ColorValues.editColor,
                                                                           icon:
                                                                               Icons.edit,
                                                                           message:
@@ -543,7 +544,7 @@ class PermitTypeContentWeb extends GetView<PermitTypeController> {
 
                                                                         TableActionButton(
                                                                           color:
-                                                                              ColorValues.appRedColor,
+                                                                              ColorValues.deleteColor,
                                                                           icon:
                                                                               Icons.delete,
                                                                           message:

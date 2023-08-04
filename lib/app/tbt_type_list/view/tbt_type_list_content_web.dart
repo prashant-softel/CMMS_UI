@@ -497,13 +497,14 @@ class TBTTypeListContentWeb extends GetView<TBTTypeListController> {
                                                             : (value ==
                                                                     "Action")
                                                                 ? Wrap(
+                                                          alignment: WrapAlignment.center,
                                                                     children: [
                                                                         // varUserAccessModel.value.access_list!.where((e) => e.feature_id == 5 && e.edit == 1).length >
                                                                         //         0
                                                                         //     ?
                                                                         TableActionButton(
                                                                           color:
-                                                                              ColorValues.appLightBlueColor,
+                                                                              ColorValues.editColor,
                                                                           icon:
                                                                               Icons.edit,
                                                                           message:
@@ -518,7 +519,7 @@ class TBTTypeListContentWeb extends GetView<TBTTypeListController> {
                                                                         //     ?
                                                                         TableActionButton(
                                                                           color:
-                                                                              ColorValues.appRedColor,
+                                                                              ColorValues.deleteColor,
                                                                           icon:
                                                                               Icons.delete,
                                                                           message:

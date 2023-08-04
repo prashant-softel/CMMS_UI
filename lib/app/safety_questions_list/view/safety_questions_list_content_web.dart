@@ -421,6 +421,7 @@ class SafetyQuestionsListContentWeb
                                   Row(
                                     children: [
                                       Container(
+                                        height: 45,
                                         margin: EdgeInsets.only(left: 10),
                                         child: CustomElevatedButton(
                                             backgroundColor:
@@ -436,6 +437,7 @@ class SafetyQuestionsListContentWeb
                                             text: 'Copy'),
                                       ),
                                       Container(
+                                        height: 45,
                                         margin: EdgeInsets.only(left: 10),
                                         child: CustomElevatedButton(
                                             backgroundColor:
@@ -444,6 +446,7 @@ class SafetyQuestionsListContentWeb
                                             text: 'Excel'),
                                       ),
                                       Container(
+                                        height: 45,
                                         margin: EdgeInsets.only(left: 10),
                                         child: CustomElevatedButton(
                                             backgroundColor:
@@ -452,6 +455,7 @@ class SafetyQuestionsListContentWeb
                                             text: 'PDF'),
                                       ),
                                       Container(
+                                        height: 45,
                                         margin: EdgeInsets.only(left: 10),
                                         child: CustomElevatedButton(
                                           backgroundColor:
@@ -602,6 +606,16 @@ class SafetyQuestionsListContentWeb
                                             }).toList(),
                                           ),
                                         ),
+                                  //     ? CustomSwitchTroggle(
+                                  //         value: value ==
+                                  //                 'No'
+                                  //             ? true
+                                  //             : false,
+                                  //         onChanged:
+                                  //             (value) {},
+                                  //       )
+                                  //     :
+
                                   Padding(
                                     padding: const EdgeInsets.symmetric(
                                         horizontal: 25),

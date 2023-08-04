@@ -15,7 +15,7 @@ class InventoryListContentWeb extends GetView<InventoryListController> {
     return Container(
       color: ColorValues.appBackgroundColor,
       child: DefaultTabController(
-        length: 3,
+        length: 1,
         child: Column(children: [
           Container(
             height: 45,
@@ -130,9 +130,10 @@ class InventoryListContentWeb extends GetView<InventoryListController> {
               ),
               Container(
                 width: 200,
-                height: 40,
+                height: 35,
                 margin: Dimens.edgeInsets0_0_16_0,
                 child: TextField(
+                  onChanged: (value) => controller.search(value),
                   decoration: InputDecoration(
                     enabledBorder: const OutlineInputBorder(
                       borderSide:
@@ -330,7 +331,7 @@ class InventoryListContentWeb extends GetView<InventoryListController> {
                               : Expanded(
                                   child: ScrollableTableView(
                                     paginationController:
-                                        controller.paginationController,
+                                        _controller.paginationController,
                                     columns: [
                                       'assetName'.tr,
                                       'serialNo'.tr,
@@ -350,14 +351,14 @@ class InventoryListContentWeb extends GetView<InventoryListController> {
                                         _controller.inventoryList.length,
                                         (index) => [
                                           AssetName(
-                                            '${_controller.inventoryList[index].name}',
+                                            '${_controller.inventoryList[index]!.name}',
                                             1,
                                           ),
                                           index + 1,
-                                          '${controller.inventoryList[index].id}',
-                                          '${_controller.inventoryList[index].parentName}',
-                                          '${_controller.inventoryList[index].categoryName}',
-                                          '${_controller.inventoryList[index].operatorName}',
+                                          '${controller.inventoryList[index]!.id}',
+                                          '${_controller.inventoryList[index]!.parentName}',
+                                          '${_controller.inventoryList[index]!.categoryName}',
+                                          '${_controller.inventoryList[index]!.operatorName}',
                                           'Actions'
                                         ],
                                       ),

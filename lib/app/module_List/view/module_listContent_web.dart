@@ -694,13 +694,14 @@ class ModuleListContentWeb extends GetView<ModuleListController> {
                                                             : (value ==
                                                                     "Action")
                                                                 ? Row(
+                                                          mainAxisAlignment: MainAxisAlignment.center,
                                                                     children: [
                                                                         // varUserAccessModel.value.access_list!.where((e) => e.feature_id == 5 && e.edit == 1).length >
                                                                         //     0
                                                                         //     ?
                                                                         TableActionButton(
                                                                           color:
-                                                                              ColorValues.appLightBlueColor,
+                                                                              ColorValues.editColor,
                                                                           icon:
                                                                               Icons.edit,
                                                                           message:
@@ -756,7 +757,7 @@ class ModuleListContentWeb extends GetView<ModuleListController> {
                                                                         //     ?
                                                                         TableActionButton(
                                                                           color:
-                                                                              ColorValues.appRedColor,
+                                                                              ColorValues.deleteColor,
                                                                           icon:
                                                                               Icons.delete,
                                                                           message:

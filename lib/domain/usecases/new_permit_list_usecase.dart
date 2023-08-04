@@ -16,11 +16,15 @@ class NewPermitListUsecase {
     int? facilityId,
     int? userId,
     bool? isLoading,
+    String? start_date,
+    required String end_date,
   }) async =>
       await repository.getNewPermitList(
         auth,
         facilityId,
         isLoading,
+        start_date,
+        end_date
       );
 
   Future<void> permitIssueButton({

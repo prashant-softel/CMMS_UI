@@ -124,10 +124,7 @@ class InventoryTypeListContentWeb extends GetView<InventoryTypeListController> {
                                           mainAxisAlignment:
                                               MainAxisAlignment.spaceBetween,
                                           children: [
-                                            CustomRichText(title: 'Name: '),
-                                            SizedBox(
-                                              width: 70,
-                                            ),
+                                            Expanded(child: CustomRichText(title: 'Name: ')),
                                             Expanded(
                                               child: Container(
                                                   width: (MediaQuery.of(context)
@@ -175,10 +172,9 @@ class InventoryTypeListContentWeb extends GetView<InventoryTypeListController> {
                                           mainAxisAlignment:
                                               MainAxisAlignment.spaceBetween,
                                           children: [
-                                            CustomRichText(
-                                                title: 'Description: '),
-                                            SizedBox(
-                                              width: 70,
+                                            Expanded(
+                                              child: CustomRichText(
+                                                  title: 'Description: '),
                                             ),
                                             Expanded(
                                               child: Container(
@@ -313,7 +309,6 @@ class InventoryTypeListContentWeb extends GetView<InventoryTypeListController> {
                                     children: [
                                       Container(
                                         height: 35,
-                                        width: (Get.width * .1) - 60,
                                         margin: EdgeInsets.only(left: 10),
                                         child: CustomElevatedButton(
                                             backgroundColor:
@@ -329,7 +324,6 @@ class InventoryTypeListContentWeb extends GetView<InventoryTypeListController> {
                                             text: 'Copy'),
                                       ),
                                       Container(
-                                        width: (Get.width * .1) - 60,
                                         height: 35,
                                         margin: EdgeInsets.only(left: 10),
                                         child: CustomElevatedButton(
@@ -339,7 +333,6 @@ class InventoryTypeListContentWeb extends GetView<InventoryTypeListController> {
                                             text: 'Excel'),
                                       ),
                                       Container(
-                                        width: (Get.width * .1) - 70,
                                         height: 35,
                                         margin: EdgeInsets.only(left: 10),
                                         child: CustomElevatedButton(
@@ -349,7 +342,6 @@ class InventoryTypeListContentWeb extends GetView<InventoryTypeListController> {
                                             text: 'PDF'),
                                       ),
                                       Container(
-                                        width: (Get.width * .2) - 200,
                                         height: 35,
                                         margin: EdgeInsets.only(left: 10),
                                         child: CustomElevatedButton(
@@ -492,7 +484,7 @@ class InventoryTypeListContentWeb extends GetView<InventoryTypeListController> {
                                                                         varUserAccessModel.value.access_list!.where((e) => e.feature_id == 5 && e.edit == 0).length >
                                                                                 0
                                                                             ? TableActionButton(
-                                                                                color: ColorValues.appLightBlueColor,
+                                                                                color: ColorValues.editColor,
                                                                                 icon: Icons.edit,
                                                                                 message: 'Edit',
                                                                                 onPress: () {
@@ -511,7 +503,7 @@ class InventoryTypeListContentWeb extends GetView<InventoryTypeListController> {
                                                                         varUserAccessModel.value.access_list!.where((e) => e.feature_id == 5 && e.delete == 0).length >
                                                                                 0
                                                                             ? TableActionButton(
-                                                                                color: ColorValues.appRedColor,
+                                                                                color: ColorValues.deleteColor,
                                                                                 icon: Icons.delete,
                                                                                 message: 'Delete',
                                                                                 onPress: () {

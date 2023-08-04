@@ -77,7 +77,7 @@ class SPVListContentWeb extends GetView<SPVListController> {
                       ? Container(
                           width: (Get.width * .3),
                           margin: EdgeInsets.only(left: 30, top: 30),
-                          height: Get.height / 2.0,
+                          height: Get.height / 2.4,
                           child: Card(
                             color: Color.fromARGB(255, 251, 252, 253),
                             elevation: 10,
@@ -100,7 +100,7 @@ class SPVListContentWeb extends GetView<SPVListController> {
                                           style: Styles.blackBold16,
                                         ),
                                         SizedBox(
-                                          height: 40,
+                                          height: 20,
                                         ),
                                         Visibility(
                                           visible: controller.isSuccess.value,
@@ -317,7 +317,7 @@ class SPVListContentWeb extends GetView<SPVListController> {
                                   Row(
                                     children: [
                                       Container(
-                                        width: (Get.width * .1) - 60,
+                                        height: 45,
                                         margin: EdgeInsets.only(left: 10),
                                         child: CustomElevatedButton(
                                             backgroundColor:
@@ -333,7 +333,7 @@ class SPVListContentWeb extends GetView<SPVListController> {
                                             text: 'Copy'),
                                       ),
                                       Container(
-                                        width: (Get.width * .1) - 60,
+                                        height: 45,
                                         margin: EdgeInsets.only(left: 10),
                                         child: CustomElevatedButton(
                                             backgroundColor:
@@ -342,7 +342,7 @@ class SPVListContentWeb extends GetView<SPVListController> {
                                             text: 'Excel'),
                                       ),
                                       Container(
-                                        width: (Get.width * .1) - 70,
+                                        height: 45,
                                         margin: EdgeInsets.only(left: 10),
                                         child: CustomElevatedButton(
                                             backgroundColor:
@@ -351,7 +351,7 @@ class SPVListContentWeb extends GetView<SPVListController> {
                                             text: 'PDF'),
                                       ),
                                       Container(
-                                        width: (Get.width * .2) - 150,
+                                        height: 45,
                                         margin: EdgeInsets.only(left: 10),
                                         child: CustomElevatedButton(
                                           backgroundColor:
@@ -473,7 +473,8 @@ class SPVListContentWeb extends GetView<SPVListController> {
                                                             : (value ==
                                                                     "Action")
                                                                 ? Wrap(
-                                                                    children: [
+                                                            alignment: WrapAlignment.center, // Align buttons to the center
+                                                            children: [
                                                                         // varUserAccessModel.value.access_list!.where((e) => e.feature_id == 5 && e.edit == 1).length >
                                                                         //         0
                                                                         //     ?
@@ -483,9 +484,11 @@ class SPVListContentWeb extends GetView<SPVListController> {
                                                                           child:
                                                                               Column(
                                                                             children: [
-                                                                              Row(children: [
+                                                                              Row(
+                                                                                  mainAxisAlignment: MainAxisAlignment.center,
+                                                                                  children: [
                                                                                 TableActionButton(
-                                                                                  color: ColorValues.appLightBlueColor,
+                                                                                  color: ColorValues.editColor,
                                                                                   icon: Icons.edit,
                                                                                   message: 'Edit',
                                                                                   onPress: () {
@@ -493,10 +496,10 @@ class SPVListContentWeb extends GetView<SPVListController> {
 
                                                                                     controller.titleCtrlr.text = controller.selectedItem?.name ?? '';
                                                                                     controller.descriptionCtrlr.text = controller.selectedItem?.description ?? '';
-                                                                                  },
+                                                                                   },
                                                                                 ),
                                                                                 TableActionButton(
-                                                                                  color: ColorValues.appRedColor,
+                                                                                  color: ColorValues.deleteColor,
                                                                                   icon: Icons.delete,
                                                                                   message: 'Delete',
                                                                                   onPress: () {
@@ -515,9 +518,11 @@ class SPVListContentWeb extends GetView<SPVListController> {
                                                                         ),
                                                                         // : Container()
                                                                       ])
-                                                                : Text(
-                                                                    value,
-                                                                  ));
+                                                                : Align(
+                                                          // Align the text in the center
+                                                          alignment: Alignment.center,
+                                                          child: Text(value),
+                                                        ),);
                                                   }).toList());
                                             }).toList(),
                                           ),

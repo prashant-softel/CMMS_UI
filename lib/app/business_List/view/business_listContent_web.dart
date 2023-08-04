@@ -913,7 +913,7 @@ class BusinessListContentWeb extends GetView<BusinessListController> {
                                                           .issuccessCreatebusinesslist();
                                                   });
                                                 },
-                                                text: 'Create Business List')
+                                                text: 'Create Business')
                                             : CustomElevatedButton(
                                                 backgroundColor: ColorValues
                                                     .appDarkBlueColor,
@@ -1185,13 +1185,14 @@ class BusinessListContentWeb extends GetView<BusinessListController> {
                                                             : (value ==
                                                                     "Action")
                                                                 ? Row(
+                                                                    mainAxisAlignment: MainAxisAlignment.center,
                                                                     children: [
                                                                         // varUserAccessModel.value.access_list!.where((e) => e.feature_id == 5 && e.edit == 1).length >
                                                                         //     0
                                                                         //     ?
                                                                         TableActionButton(
                                                                           color:
-                                                                              ColorValues.appLightBlueColor,
+                                                                              ColorValues.editColor,
                                                                           icon:
                                                                               Icons.edit,
                                                                           message:
@@ -1236,7 +1237,7 @@ class BusinessListContentWeb extends GetView<BusinessListController> {
                                                                         //     ?
                                                                         TableActionButton(
                                                                           color:
-                                                                              ColorValues.appRedColor,
+                                                                              ColorValues.deleteColor,
                                                                           icon:
                                                                               Icons.delete,
                                                                           message:
@@ -1250,9 +1251,11 @@ class BusinessListContentWeb extends GetView<BusinessListController> {
                                                                         )
                                                                         // : Container()
                                                                       ])
-                                                                : Text(
-                                                                    value,
-                                                                  ));
+                                                                : Align(
+                                                          // Align the text in the center
+                                                          alignment: Alignment.center,
+                                                          child: Text(value),
+                                                        ),);
                                                   }).toList());
                                             }).toList(),
                                           ),

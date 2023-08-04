@@ -1,3 +1,5 @@
+import 'package:cmms/app/home/widgets/header_widget.dart';
+import 'package:cmms/app/home/widgets/home_drawer.dart';
 import 'package:cmms/app/job_list/job_list_controller.dart';
 import 'package:cmms/app/job_list/views/mobile/job_list_content_mobile.dart';
 import 'package:cmms/app/utils/responsive.dart';
@@ -18,10 +20,25 @@ class NewPermitListScreen extends GetView<NewPermitListController> {
   {
     return //
         Scaffold(
-      body:
-          //   Obx(
-          // () => //
-          Container(
+          appBar: Responsive.isDesktop(context)
+          ? AppBar(
+              title: HeaderWidget(),
+              elevation: 0,
+              toolbarHeight: 60,
+              automaticallyImplyLeading: false,
+            )
+          : AppBar(
+              title: Text('Prmit List'),
+              centerTitle: true,
+              elevation: 0,
+            ),
+      drawer: //
+          (Responsive.isMobile(context) || Responsive.isTablet(context))
+              ? HomeDrawer() //ResponsiveSideMenu()
+              : null,
+      body: Container(
+         width: Get.width,
+        height: Get.height,
         child: Column(
             //
             children: [

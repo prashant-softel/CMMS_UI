@@ -93,7 +93,7 @@ class InventoryCategoryListContentWeb
                                           CrossAxisAlignment.start,
                                       children: [
                                         Text(
-                                          "Create Inventory Type",
+                                          "Create Inventory Category",
                                           style: Styles.blackBold16,
                                         ),
                                         SizedBox(
@@ -128,9 +128,6 @@ class InventoryCategoryListContentWeb
                                             Expanded(
                                                 child: CustomRichText(
                                                     title: 'Name: ')),
-                                            SizedBox(
-                                              width: 70,
-                                            ),
                                             Expanded(
                                               child: Container(
                                                   width: (MediaQuery.of(context)
@@ -181,9 +178,6 @@ class InventoryCategoryListContentWeb
                                             Expanded(
                                               child: CustomRichText(
                                                   title: 'Description: '),
-                                            ),
-                                            SizedBox(
-                                              width: 70,
                                             ),
                                             Expanded(
                                               child: Container(
@@ -261,7 +255,7 @@ class InventoryCategoryListContentWeb
                                                           .issuccessCreatechecklist();
                                                   });
                                                 },
-                                                text: 'Create Inventory Type')
+                                                text: 'Create Inventory Category')
                                             : CustomElevatedButton(
                                                 backgroundColor: ColorValues
                                                     .appDarkBlueColor,
@@ -317,7 +311,6 @@ class InventoryCategoryListContentWeb
                                     children: [
                                       Container(
                                         height: 45,
-                                        width: (Get.width * .1) - 60,
                                         margin: EdgeInsets.only(left: 10),
                                         child: CustomElevatedButton(
                                             backgroundColor:
@@ -333,7 +326,6 @@ class InventoryCategoryListContentWeb
                                             text: 'Copy'),
                                       ),
                                       Container(
-                                        width: (Get.width * .1) - 60,
                                         height: 45,
                                         margin: EdgeInsets.only(left: 10),
                                         child: CustomElevatedButton(
@@ -343,7 +335,6 @@ class InventoryCategoryListContentWeb
                                             text: 'Excel'),
                                       ),
                                       Container(
-                                        width: (Get.width * .1) - 70,
                                         height: 45,
                                         margin: EdgeInsets.only(left: 10),
                                         child: CustomElevatedButton(
@@ -353,7 +344,6 @@ class InventoryCategoryListContentWeb
                                             text: 'PDF'),
                                       ),
                                       Container(
-                                        width: (Get.width * .2) - 200,
                                         height: 45,
                                         margin: EdgeInsets.only(left: 10),
                                         child: CustomElevatedButton(
@@ -441,7 +431,7 @@ class InventoryCategoryListContentWeb
                                             paginationController:
                                                 controller.paginationController,
                                             columns: [
-                                              "Category Type Id",
+                                              "Category Id",
                                               "Name",
                                               "Description",
                                               "Action",
@@ -494,7 +484,7 @@ class InventoryCategoryListContentWeb
                                                                         //     ?
                                                                         TableActionButton(
                                                                           color:
-                                                                              ColorValues.appLightBlueColor,
+                                                                              ColorValues.editColor,
                                                                           icon:
                                                                               Icons.edit,
                                                                           message:

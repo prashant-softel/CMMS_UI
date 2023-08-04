@@ -58,7 +58,12 @@ class BlockTypeListContentWeb extends GetView<BlockTypeListController> {
                     },
                     child: Text(" / MASTERS", style: Styles.greyMediumLight12),
                   ),
-                  Text(" / BLOCK LIST", style: Styles.greyMediumLight12)
+                  GestureDetector(
+                    onTap: () {
+                      Get.back();
+                    },
+                    child: Text(" / BLOCK LIST", style: Styles.greyMediumLight12),
+                  ),
                 ],
               ),
             ),
@@ -73,7 +78,7 @@ class BlockTypeListContentWeb extends GetView<BlockTypeListController> {
                       ? Container(
                           width: (Get.width * .3),
                           margin: EdgeInsets.only(left: 30, top: 30),
-                          height: Get.height / 2,
+                          height: Get.height / 2.25,
                           child: Card(
                             color: Color.fromARGB(255, 251, 252, 253),
                             elevation: 10,
@@ -96,7 +101,87 @@ class BlockTypeListContentWeb extends GetView<BlockTypeListController> {
                                           style: Styles.blackBold16,
                                         ),
                                         SizedBox(
-                                          height: 40,
+                                          height: 20,
+                                        ),
+
+                                        Row(
+                                          mainAxisAlignment:
+                                          MainAxisAlignment.start,
+                                          children: [
+                                            Expanded(
+                                              child: CustomRichText(
+                                                  title: 'Facility '),
+                                            ),
+                                            Expanded(
+                                              child: Container(
+
+                                                height: MediaQuery.of(context)
+                                                    .size
+                                                    .height *
+                                                    0.040,
+                                                margin: Dimens.edgeInsets5,
+                                                decoration: BoxDecoration(
+                                                  boxShadow: [
+                                                    BoxShadow(
+                                                      color: Colors.black26,
+                                                      offset: const Offset(
+                                                        5.0,
+                                                        5.0,
+                                                      ),
+                                                      blurRadius: 5.0,
+                                                      spreadRadius: 1.0,
+                                                    ),
+                                                    BoxShadow(
+                                                      color: ColorValues
+                                                          .whiteColor,
+                                                      offset: const Offset(
+                                                          0.0, 0.0),
+                                                      blurRadius: 0.0,
+                                                      spreadRadius: 0.0,
+                                                    ),
+                                                  ],
+                                                  color: ColorValues.whiteColor,
+                                                  borderRadius:
+                                                  BorderRadius.circular(5),
+                                                ),
+                                                width: (MediaQuery.of(context)
+                                                    .size
+                                                    .width *
+                                                    .2) -
+                                                    45,
+                                                child: Container(
+                                                  height: MediaQuery.of(context)
+                                                      .size
+                                                      .height *
+                                                      0.040,
+                                                  width: (MediaQuery.of(context)
+                                                      .size
+                                                      .width *
+                                                      .4),
+                                                  child: DropdownWidget(
+                                                    controller: controller,
+                                                    dropdownList: controller
+                                                        .facilityTypeList,
+                                                    isValueSelected: controller
+                                                        .isSelectedfacility
+                                                        .value,
+                                                    selectedValue: controller
+                                                        .selectedfacility.value,
+                                                    onValueChanged:
+                                                        (selectedValue,
+                                                        isValueSelected) {
+                                                      controller.onValueChanged(
+                                                          selectedValue,
+                                                          isValueSelected);
+                                                    },
+                                                  ),
+                                                ),
+                                              ),
+                                            ),
+                                          ],
+                                        ),
+                                        SizedBox(
+                                          height: 5,
                                         ),
                                         Row(
                                           mainAxisAlignment:
@@ -319,9 +404,6 @@ class BlockTypeListContentWeb extends GetView<BlockTypeListController> {
                                         //     ),
                                         //   ],
                                         // ),
-                                        SizedBox(
-                                          height: 20,
-                                        ),
                                       ]),
                                 ),
                                 Row(
@@ -400,40 +482,12 @@ class BlockTypeListContentWeb extends GetView<BlockTypeListController> {
                               child: Column(
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
-                                  Row(
-                                    mainAxisAlignment:
-                                        MainAxisAlignment.spaceEvenly,
-                                    children: [
-                                      // Spacer(),
-                                      // Text(
-                                      //   "Facility Type:",
-                                      //   style: Styles.black16W500,
-                                      // ),
-                                      // SizedBox(
-                                      //   width: 5,
-                                      // ),
-                                      // Container(
-                                      //   width:
-                                      //       (MediaQuery.of(context).size.width *
-                                      //           .3),
-                                      //   child: DropdownWidget(
-                                      //     controller: controller,
-                                      //     dropdownList:
-                                      //         controller.facilityTypeList,
-                                      //     isValueSelected: controller
-                                      //         .isSelectedfacility.value,
-                                      //     selectedValue:
-                                      //         controller.selectedfacility.value,
-                                      //     // onValueChanged:
-                                      //     //     controller.onValueChanged(46, 46),
-                                      //     onValueChanged:
-                                      //         (selectedValue, isValueSelected) {
-                                      //       controller.onValueChanged(
-                                      //           selectedValue, isValueSelected);
-                                      //     },
-                                      //   ),
-                                      // ),
-                                    ],
+                                  Padding(
+                                    padding: const EdgeInsets.all(10.0),
+                                    child: Text(
+                                      "List of Blocks",
+                                      style: Styles.blackBold16,
+                                    ),
                                   ),
                                   Divider(
                                     color: ColorValues.greyLightColour,
@@ -441,7 +495,7 @@ class BlockTypeListContentWeb extends GetView<BlockTypeListController> {
                                   Row(
                                     children: [
                                       Container(
-                                        width: (Get.width * .1) - 60,
+                                        height: 45,
                                         margin: EdgeInsets.only(left: 10),
                                         child: CustomElevatedButton(
                                             backgroundColor:
@@ -457,7 +511,7 @@ class BlockTypeListContentWeb extends GetView<BlockTypeListController> {
                                             text: 'Copy'),
                                       ),
                                       Container(
-                                        width: (Get.width * .1) - 60,
+                                        height: 45,
                                         margin: EdgeInsets.only(left: 10),
                                         child: CustomElevatedButton(
                                             backgroundColor:
@@ -466,7 +520,7 @@ class BlockTypeListContentWeb extends GetView<BlockTypeListController> {
                                             text: 'Excel'),
                                       ),
                                       Container(
-                                        width: (Get.width * .1) - 70,
+                                        height: 45,
                                         margin: EdgeInsets.only(left: 10),
                                         child: CustomElevatedButton(
                                             backgroundColor:
@@ -475,7 +529,7 @@ class BlockTypeListContentWeb extends GetView<BlockTypeListController> {
                                             text: 'PDF'),
                                       ),
                                       Container(
-                                        width: (Get.width * .2) - 100,
+                                        height: 45,
                                         margin: EdgeInsets.only(left: 10),
                                         child: CustomElevatedButton(
                                           backgroundColor:
@@ -600,7 +654,9 @@ class BlockTypeListContentWeb extends GetView<BlockTypeListController> {
                                                             : (value ==
                                                                     "Action")
                                                                 ? Wrap(
-                                                                    children: [
+                                                            alignment: WrapAlignment.center, // Align buttons in the center
+
+                                                            children: [
                                                                         // varUserAccessModel.value.access_list!.where((e) => e.feature_id == 5 && e.edit == 1).length >
                                                                         //         0
                                                                         //     ?
@@ -612,9 +668,11 @@ class BlockTypeListContentWeb extends GetView<BlockTypeListController> {
                                                                             children: [
                                                                               Container(
                                                                                 padding: EdgeInsets.only(bottom: 10),
-                                                                                child: Row(children: [
+                                                                                child: Row(
+                                                                                  mainAxisAlignment: MainAxisAlignment.center,
+                                                                                    children: [
                                                                                   TableActionButton(
-                                                                                    color: ColorValues.appLightBlueColor,
+                                                                                    color: ColorValues.editColor,
                                                                                     icon: Icons.edit,
                                                                                     message: 'Edit',
                                                                                     onPress: () {
@@ -629,7 +687,7 @@ class BlockTypeListContentWeb extends GetView<BlockTypeListController> {
                                                                                     },
                                                                                   ),
                                                                                   TableActionButton(
-                                                                                    color: ColorValues.appRedColor,
+                                                                                    color: ColorValues.deleteColor,
                                                                                     icon: Icons.delete,
                                                                                     message: 'Delete',
                                                                                     onPress: () {
@@ -643,9 +701,12 @@ class BlockTypeListContentWeb extends GetView<BlockTypeListController> {
                                                                         ),
                                                                         // : Container()
                                                                       ])
-                                                                : Text(
-                                                                    value,
-                                                                  ));
+                                                            : Align( // Align the text in the center
+                                                          alignment: Alignment.center,
+                                                          child: Text(
+                                                            value,
+                                                          ),
+                                                        ),);
                                                   }).toList());
                                             }).toList(),
                                           ),
