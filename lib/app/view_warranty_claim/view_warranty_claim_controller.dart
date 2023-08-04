@@ -174,6 +174,10 @@ int? wc_id = 0;
     });
 
    }
+
+    Future.delayed(Duration(seconds: 1), () {
+      getWarrantyClaimHistory(id: wc_id!);
+    });
    
     super.onInit();
   }
@@ -189,6 +193,23 @@ int? wc_id = 0;
       selectedFacility.value = facilityList[0]?.name ?? '';
       _facilityId.sink.add(facilityList[0]?.id ?? 0);
     }
+  }
+
+  Future<void> getWarrantyClaimHistory({required int id}) async {
+    /// TODO: CHANGE THESE VALUES
+    int moduleType = 121;
+    // int tempModuleType = 21;
+    int id = wc_id!;
+    //
+    historyList?.value = await viewWarrantyClaimPresenter.getWarrantyClaimHistory(
+          // tempModuleType,
+          // tempJobCardId,
+          moduleType,
+          id,
+          true,
+        ) ??
+        [];
+    update(["historyList"]);
   }
 
   Future<void> getuserAccessData() async {

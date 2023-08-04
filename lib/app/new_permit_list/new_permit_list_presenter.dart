@@ -17,13 +17,16 @@ class NewPermitListPresenter {
     String? auth,
     int? facilityId,
     int? userId,
-    bool? isLoading,
+    required bool isLoading,
+    String? start_date,
+    required String end_date,
   }) async =>
       await newPermitListUsecase.getNewPermitList(
         auth: auth ?? "",
         facilityId: facilityId,
-        // facilityId: facilityId ?? 0,
-        isLoading: isLoading ?? false,
+        start_date: start_date,
+        end_date: end_date,
+        isLoading: isLoading,
       );
 
   Future<void> permitIssueButton({
@@ -85,7 +88,7 @@ class NewPermitListPresenter {
         isLoading: isLoading ?? false,
       );
 
-Future<void> permitExtendButton({
+  Future<void> permitExtendButton({
     String? comment,
     String? Time,
     String? id,
@@ -98,7 +101,6 @@ Future<void> permitExtendButton({
         isLoading: isLoading ?? false,
       );
 
-
   Future<void> permitCloseButton({
     String? comment,
     String? id,
@@ -110,7 +112,7 @@ Future<void> permitExtendButton({
         isLoading: isLoading ?? false,
       );
 
-   Future<void> permitRejectButton({
+  Future<void> permitRejectButton({
     String? comment,
     String? id,
     bool? isLoading,
@@ -120,7 +122,6 @@ Future<void> permitExtendButton({
         id: id,
         isLoading: isLoading ?? false,
       );
-
 
   // Future<List<NewPermitListModel>>getNewPermitList({
   //   required bool isLoading,

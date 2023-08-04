@@ -511,12 +511,16 @@ class DataRepository extends DomainRepository {
     int? facilityId,
     int? userId,
     bool? isLoading,
+     String? start_date,
+    required String end_date,
   }) async =>
       await connectHelper.getNewPermitList(
         auth: auth,
         facilityId: facilityId,
         // facilityId: facilityId ?? 0,
         // userId: 33,
+        start_date: start_date,
+      end_date: end_date,
         userId: userId,
         isLoading: isLoading ?? false,
       );

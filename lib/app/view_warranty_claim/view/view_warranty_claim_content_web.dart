@@ -7,6 +7,7 @@ import 'package:cmms/app/widgets/new_warranty_claim_dialog.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
+import 'package:scrollable_table_view/scrollable_table_view.dart';
 
 class ViewWarrantyClaimWeb extends GetView<ViewWarrantyClaimController> {
   ViewWarrantyClaimWeb({super.key});
@@ -1019,126 +1020,102 @@ class ViewWarrantyClaimWeb extends GetView<ViewWarrantyClaimController> {
                                 ),
 
                                 ///Warranty Claim History
-                                Padding(
-                                  padding: const EdgeInsets.only(
-                                      left: 15, top: 20, right: 15),
-                                  child: SizedBox(
-                                    width:
-                                        MediaQuery.of(context).size.width / 1.2,
-                                    child: Container(
-                                      // margin: Dimens.edgeInsets20,
-                                      constraints: BoxConstraints(
-                                        maxHeight: 100,
-                                        minHeight: 100,
-                                      ),
-                                      child: //
-                                          HistoryTableWidgetWeb(
-                                        historyList: controller.historyList,
-                                      ),
-                                    ),
-                                  ),
-                                ),
-                                // SizedBox(
-                                //   height: 200,
-                                //   width:
-                                //       MediaQuery.of(context).size.width / 1.33,
-                                //   child: Center(
-                                //     child: Container(
-                                //       margin: Dimens.edgeInsets16,
-                                //       height: Get.height,
-                                //       decoration: BoxDecoration(
-                                //         border: Border.all(
-                                //             color: Colors.grey.withOpacity(.3)),
-                                //       ),
-                                //       constraints: BoxConstraints(
-                                //         maxWidth: 1100,
-                                //       ),
-                                //       child: SingleChildScrollView(
-                                //         child: Column(
-                                //           children: [
-                                //             CustomAppBar(
-                                //               title:
-                                //                   'Warranty Claim History'.tr,
-                                //             ),
-                                //             Dimens.boxHeight10,
-                                //             Wrap(
-                                //               children: [
-                                //                 Row(
-                                //                   mainAxisAlignment:
-                                //                       MainAxisAlignment
-                                //                           .spaceBetween,
-                                //                   children: [
-                                //                     SizedBox(
-                                //                       width: 30,
-                                //                     ),
-                                //                     Text('Sr.No'),
-                                //                     SizedBox(
-                                //                       width: 50,
-                                //                     ),
-                                //                     Text('Comment'),
-                                //                     SizedBox(
-                                //                       height: 10,
-                                //                     ),
-                                //                     Text('Posted By'),
-                                //                     SizedBox(
-                                //                       height: 10,
-                                //                     ),
-                                //                     Text('Time Stamp'),
-                                //                     SizedBox(
-                                //                       height: 10,
-                                //                     ),
-                                //                     Text('Status'),
-                                //                     SizedBox(
-                                //                       height: 30,
-                                //                     ),
-                                //                   ],
-                                //                 ),
-                                //                 Container(
-                                //                   height: 0.25,
-                                //                   width: MediaQuery.of(context)
-                                //                           .size
-                                //                           .width /
-                                //                       1.2,
-                                //                   decoration: BoxDecoration(
-                                //                       color: Colors.black),
-                                //                 ),
-                                //                 SizedBox(
-                                //                   height: 30,
-                                //                 ),
-                                //                 Row(
-                                //                   children: [
-                                //                     SizedBox(
-                                //                       width: 100,
-                                //                     ),
-                                //                     Text('1'),
-                                //                     SizedBox(
-                                //                       width: 50,
-                                //                     ),
-                                //                     Text(
-                                //                         'Warranty Claim has Been created'),
-                                //                     SizedBox(
-                                //                       width: 50,
-                                //                     ),
-                                //                     Text(
-                                //                         'Amit Purchase Manager'),
-                                //                     SizedBox(
-                                //                       width: 50,
-                                //                     ),
-                                //                     Text('2012-12-03 16:19'),
-                                //                     SizedBox(
-                                //                       width: 100,
-                                //                     ),
-                                //                     Text('Created'),
-                                //                   ],
-                                //                 )
-                                //               ],
-                                //             ),
-                                //           ],
-                                //         ),
-                                //       ),
-                                //     ),
-                                //   ),
-                                // ),
+                                 ///Incident Report History
+                                              Container(
+                                                margin: Dimens.edgeInsets20,
+                                                height: 200,
+                                                decoration: BoxDecoration(
+                                                  border: Border.all(
+                                                    color: ColorValues
+                                                        .lightGreyColorWithOpacity35,
+                                                    width: 1,
+                                                  ),
+                                                  boxShadow: [
+                                                    BoxShadow(
+                                                      color: ColorValues
+                                                          .appBlueBackgroundColor,
+                                                      spreadRadius: 2,
+                                                      blurRadius: 5,
+                                                      offset: Offset(0, 2),
+                                                    ),
+                                                  ],
+                                                ),
+                                                child: Column(
+                                                  children: [
+                                                    Padding(
+                                                      padding:
+                                                          const EdgeInsets.all(
+                                                              10.0),
+                                                      child: Row(
+                                                        children: [
+                                                          Text(
+                                                            "Warranty Claim History ",
+                                                            style:
+                                                                Styles.blue700,
+                                                          ),
+                                                        ],
+                                                      ),
+                                                    ),
+                                                    Divider(
+                                                      color: ColorValues
+                                                          .greyLightColour,
+                                                    ),
+                                                    Expanded(
+                                                      child:
+                                                          ScrollableTableView(
+                                                        columns: [
+                                                          "Time Stamp",
+                                                          "Module Ref ID",
+                                                          "Comment",
+                                                          "Module Type",
+                                                          "Status",
+                                                        ].map((column) {
+                                                          return TableViewColumn(
+                                                            label: column,
+                                                            minWidth:
+                                                                Get.width *
+                                                                    0.15,
+                                                          );
+                                                        }).toList(),
+                                                        rows: [
+                                                          ...List.generate(
+                                                            controller
+                                                                    .historyList
+                                                                    ?.length ??
+                                                                0,
+                                                            (index) {
+                                                              var getHistoryListDetails =
+                                                                  controller
+                                                                          .historyList?[
+                                                                      index];
+                                                              return [
+                                                                '${getHistoryListDetails?.createdAt}',
+                                                                '${getHistoryListDetails?.moduleRefId ?? ''}',
+                                                                '${getHistoryListDetails?.comment ?? ''}',
+                                                                '${getHistoryListDetails?.moduleType ?? ''}',
+                                                                '${getHistoryListDetails?.status_name ?? ''}',
+                                                              ];
+                                                            },
+                                                          ),
+                                                          // [
+                                                        ].map((record) {
+                                                          return TableViewRow(
+                                                            height: 30,
+                                                            cells: record
+                                                                .map((value) {
+                                                              return TableViewCell(
+                                                                child:
+                                                                    Text(value),
+                                                              );
+                                                            }).toList(),
+                                                          );
+                                                        }).toList(),
+                                                      ),
+                                                    ),
+                                                  ],
+                                                ),
+                                              ),
+                               
 
                                 Row(
                                   mainAxisAlignment: MainAxisAlignment.center,

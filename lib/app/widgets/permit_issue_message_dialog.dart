@@ -27,9 +27,9 @@ class PermitMessageIssueDialog extends GetView {
         insetPadding: Dimens.edgeInsets10_0_10_0,
         contentPadding: EdgeInsets.zero,
         title: Text(
-          '${data}',
+          'Permit Issue',
           textAlign: TextAlign.center,
-          style: TextStyle(color: Colors.green),
+          style: TextStyle(color: Colors.black),
         ),
         content: Builder(builder: (context) {
           var height = MediaQuery.of(context).size.height;
@@ -45,9 +45,9 @@ class PermitMessageIssueDialog extends GetView {
                     color: ColorValues.greyLightColour,
                     thickness: 1,
                   ),
-                  // Text(
-                  //     'New Permit Created Successfully.\nPlease wait for Approval, you can start \nthe job only after PTW is approved '),
-                  //     SizedBox(height: 20,),
+                  Text(
+                      '${data}', style: TextStyle(color: Colors.green),textAlign: TextAlign.center),
+                      // SizedBox(height: 20,),
                   // Row(
                   //     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   //     children: [
@@ -82,7 +82,7 @@ class PermitMessageIssueDialog extends GetView {
               style: Styles.darkBlueElevatedButtonStyle,
               onPressed: () {
                 Get.offAllNamed(Routes.newPermitList);
-                _controller.getNewPermitList(_controller.facilityId, _controller.userId);
+                _controller.getNewPermitList(_controller.facilityId, _controller.userId,_controller.formattedTodate, _controller.formattedFromdate, false);
                 Get.back();
                 
               },
