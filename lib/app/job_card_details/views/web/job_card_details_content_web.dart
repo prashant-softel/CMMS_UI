@@ -131,7 +131,7 @@ class JobCardDetailsContentWeb extends GetView<JobCardDetailsController> {
                       Dimens.box0,
 
                   /// DESCRIPTION OF WORK DONE
-                  (controller.isJobCardStarted == false)
+                  (controller.isJobCardStarted == true)
                       ? Container()
                       : Row(children: [
                           Text('Description of work done: '),
@@ -169,7 +169,7 @@ class JobCardDetailsContentWeb extends GetView<JobCardDetailsController> {
 
                   /// START JOB CARD BUTTON
                   // (controller.isJobCardStarted == false)
-                  controller.jobCardDetailsModel.value?.currentStatus == 152
+                  controller.jobCardList[0]!.status == 151
                       ? //
                       Row(
                           mainAxisAlignment: MainAxisAlignment.center, //
@@ -187,36 +187,79 @@ class JobCardDetailsContentWeb extends GetView<JobCardDetailsController> {
                               // ),
                             ])
                       : //
-                      Row(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          //
-                          children: [
-                              CustomElevatedButton(
-                                text: 'Cancel',
-                                onPressed: () => controller.startStopJobCard(),
-                                backgroundColor: ColorValues.appRedColor,
-                              ),
-                              Dimens.boxWidth10,
-                              CustomElevatedButton(
-                                text: 'Update',
-                                onPressed: () => controller.updateJobCard(),
-                                backgroundColor: ColorValues.appYellowColor,
-                              ),
-                              Dimens.boxWidth10,
-                              CustomElevatedButton(
-                                text: 'Close Job',
-                                onPressed: () => controller.startStopJobCard(),
-                                backgroundColor: ColorValues.appGreenColor,
-                              ),
-                              Dimens.boxWidth10,
-                              CustomElevatedButton(
-                                text: 'Carry Forward Job',
-                                onPressed: () =>
-                                    controller.carryForwardJob(context),
-                                backgroundColor: ColorValues.appLightBlueColor,
-                              ),
-                              Dimens.boxWidth10,
-                            ]),
+                      controller.jobCardList[0]!.status == 152
+                          ? Row(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              //
+                              children: [
+                                  CustomElevatedButton(
+                                    text: 'Cancel',
+                                    onPressed: () =>
+                                        controller.startStopJobCard(),
+                                    backgroundColor: ColorValues.appRedColor,
+                                  ),
+                                  Dimens.boxWidth10,
+                                  CustomElevatedButton(
+                                    text: 'Update',
+                                    onPressed: () => controller.updateJobCard(),
+                                    backgroundColor: ColorValues.appYellowColor,
+                                  ),
+                                  Dimens.boxWidth10,
+                                  CustomElevatedButton(
+                                    text: 'Close Job',
+                                    onPressed: () => controller.closeJob(),
+                                    backgroundColor: ColorValues.appGreenColor,
+                                  ),
+                                  Dimens.boxWidth10,
+                                  CustomElevatedButton(
+                                    text: 'Carry Forward Job',
+                                    onPressed: () =>
+                                        controller.carryForwardJob(),
+                                    backgroundColor:
+                                        ColorValues.appLightBlueColor,
+                                  ),
+                                  Dimens.boxWidth10,
+                                ])
+                          : controller.jobCardList[0]!.status == 153 ||
+                                  controller.jobCardList[0]!.status == 154
+                              ? Row(
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  //
+                                  children: [
+                                      CustomElevatedButton(
+                                        text: 'Cancel',
+                                        onPressed: () =>
+                                            controller.startStopJobCard(),
+                                        backgroundColor:
+                                            ColorValues.appRedColor,
+                                      ),
+                                      Dimens.boxWidth10,
+                                      CustomElevatedButton(
+                                        text: 'Update',
+                                        onPressed: () =>
+                                            controller.updateJobCard(),
+                                        backgroundColor:
+                                            ColorValues.appYellowColor,
+                                      ),
+                                      Dimens.boxWidth10,
+                                      CustomElevatedButton(
+                                        text: 'Approve',
+                                        onPressed: () =>
+                                            controller.approveJobCard(),
+                                        backgroundColor:
+                                            ColorValues.approveColor,
+                                      ),
+                                      Dimens.boxWidth10,
+                                      CustomElevatedButton(
+                                        text: 'Reject',
+                                        onPressed: () =>
+                                            controller.rejectJobCard(),
+                                        backgroundColor:
+                                            ColorValues.rejectColor,
+                                      ),
+                                    ])
+                              : Dimens.box0,
+
                   Dimens.boxHeight20,
                 ]),
           );

@@ -72,6 +72,22 @@ class JobCardDetailsUsecase {
         jobCard,
         isLoading,
       );
+  Future<Map<String, dynamic>?> carryForwardJob({
+    jobCard,
+    bool? isLoading,
+  }) async =>
+      await repository.carryForwardJob(
+        jobCard,
+        isLoading,
+      );
+  Future<Map<String, dynamic>?> closeJob({
+    jobCard,
+    bool? isLoading,
+  }) async =>
+      await repository.closeJob(
+        jobCard,
+        isLoading,
+      );
 
   ///
   Future<List<HistoryModel>?> getJobCardHistory({
@@ -86,7 +102,7 @@ class JobCardDetailsUsecase {
       );
 
   ///
-  Future<dynamic> approveJobCard({
+  Future<Map<String, dynamic>?> approveJobCard({
     jobCardId,
     comment,
     bool? isLoading,
@@ -98,13 +114,13 @@ class JobCardDetailsUsecase {
       );
 
   ///
-  Future<dynamic> rejectJobCard({
-    jobCardId,
+  Future<Map<String, dynamic>?> rejectJobCard({
+    int? id,
     comment,
     bool? isLoading,
   }) async =>
       await repository.rejectJobCard(
-        jobCardId,
+        id,
         comment,
         isLoading,
       );
