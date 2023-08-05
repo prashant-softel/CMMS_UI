@@ -289,7 +289,7 @@ class MastersDashboard extends GetView<MastersController> {
                             shrinkWrap: true,
                             primary: false,
                             padding: Dimens.edgeInsets15,
-                            crossAxisSpacing: 40,
+                            crossAxisSpacing: 70,
                             mainAxisSpacing: 6,
                             crossAxisCount:
                                 Responsive.isMobile(context) ? 2 : 5,
@@ -350,7 +350,7 @@ class MastersDashboard extends GetView<MastersController> {
                             shrinkWrap: true,
                             primary: false,
                             padding: Dimens.edgeInsets15,
-                            crossAxisSpacing: 40,
+                            crossAxisSpacing: 70,
                             mainAxisSpacing: 6,
                             crossAxisCount:
                                 Responsive.isMobile(context) ? 2 : 5,
@@ -405,7 +405,7 @@ class MastersDashboard extends GetView<MastersController> {
                             shrinkWrap: true,
                             primary: false,
                             padding: Dimens.edgeInsets15,
-                            crossAxisSpacing: 40,
+                            crossAxisSpacing: 70,
                             mainAxisSpacing: 6,
                             crossAxisCount:
                                 Responsive.isMobile(context) ? 2 : 5,
@@ -456,7 +456,7 @@ class MastersDashboard extends GetView<MastersController> {
                             shrinkWrap: true,
                             primary: false,
                             padding: Dimens.edgeInsets15,
-                            crossAxisSpacing: 40,
+                            crossAxisSpacing: 70,
                             mainAxisSpacing: 6,
                             crossAxisCount:
                                 Responsive.isMobile(context) ? 2 : 5,
@@ -532,7 +532,7 @@ class MastersDashboard extends GetView<MastersController> {
                             shrinkWrap: true,
                             primary: false,
                             padding: Dimens.edgeInsets15,
-                            crossAxisSpacing: 40,
+                            crossAxisSpacing: 70,
                             mainAxisSpacing: 6,
                             crossAxisCount:
                                 Responsive.isMobile(context) ? 2 : 5,
@@ -683,7 +683,7 @@ class MastersDashboard extends GetView<MastersController> {
                             shrinkWrap: true,
                             primary: false,
                             padding: Dimens.edgeInsets15,
-                            crossAxisSpacing: 40,
+                            crossAxisSpacing: 70,
                             mainAxisSpacing: 6,
                             crossAxisCount:
                                 Responsive.isMobile(context) ? 2 : 5,

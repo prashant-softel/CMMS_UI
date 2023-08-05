@@ -50,6 +50,9 @@ class InventoryScreen extends GetView<InventoryController> {
               child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
+                    SizedBox(
+                      height: 40,
+                    ),
                     if (Responsive.isDesktop(context))
                       Container(
                         margin: EdgeInsets.only(left: 20),
@@ -81,7 +84,7 @@ class InventoryScreen extends GetView<InventoryController> {
                       shrinkWrap: true,
                       primary: false,
                       padding: const EdgeInsets.all(16),
-                      crossAxisSpacing: 40,
+                      crossAxisSpacing: 70,
                       mainAxisSpacing: 6,
                       crossAxisCount: Responsive.isMobile(context) ? 2 : 5,
                       childAspectRatio: Responsive.isMobile(context)
@@ -135,7 +138,7 @@ class InventoryScreen extends GetView<InventoryController> {
                       shrinkWrap: true,
                       primary: false,
                       padding: const EdgeInsets.all(16),
-                      crossAxisSpacing: 40,
+                      crossAxisSpacing: 70,
                       mainAxisSpacing: 6,
                       crossAxisCount: Responsive.isMobile(context) ? 2 : 5,
                       childAspectRatio: Responsive.isMobile(context)
@@ -187,7 +190,7 @@ class InventoryScreen extends GetView<InventoryController> {
                       shrinkWrap: true,
                       primary: false,
                       padding: const EdgeInsets.all(16),
-                      crossAxisSpacing: 40,
+                      crossAxisSpacing: 70,
                       mainAxisSpacing: 6,
                       crossAxisCount: Responsive.isMobile(context) ? 2 : 5,
                       childAspectRatio: Responsive.isMobile(context)
@@ -261,7 +264,7 @@ class InventoryScreen extends GetView<InventoryController> {
                       shrinkWrap: true,
                       primary: false,
                       padding: const EdgeInsets.all(16),
-                      crossAxisSpacing: 40,
+                      crossAxisSpacing: 70,
                       mainAxisSpacing: 6,
                       crossAxisCount: Responsive.isMobile(context) ? 2 : 5,
                       childAspectRatio: Responsive.isMobile(context)

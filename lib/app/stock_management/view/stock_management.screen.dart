@@ -41,6 +41,9 @@ class StockManagementDashboardScreen
         height: Get.height,
         child: Row(
           children: [
+            SizedBox(
+              height: 40,
+            ),
             (Responsive.isMobile(context) || Responsive.isTablet(context))
                 ? Dimens.box0
                 :
@@ -87,19 +90,35 @@ class StockManagementDashboardScreen
                     if (Responsive.isDesktop(context))
                       Container(
                         margin: EdgeInsets.only(left: 20),
-                        child: Text(
-                          " Dashboard / Stock Management",
-                          style: TextStyle(
-                              color: Color.fromARGB(255, 159, 156, 156),
-                              fontSize: 24,
-                              fontWeight: FontWeight.w400),
+                        child: Row(
+                          children: [
+                            Text(
+                              "Stock Management",
+                              style: TextStyle(
+                                color: Color.fromARGB(255, 159, 156, 156),
+                                fontSize: 16,
+                                fontWeight: FontWeight.w400,
+                              ),
+                            ),
+                            SizedBox(
+                                width:
+                                10), // Add some space between the text and the line
+                            Expanded(
+                              child: Divider(
+                                color: Colors
+                                    .grey, // Customize the color of the line if needed
+                                height:
+                                1, // Adjust the height of the line if needed
+                              ),
+                            ),
+                          ],
                         ),
                       ),
                     GridView.count(
                       shrinkWrap: true,
                       primary: false,
                       padding: const EdgeInsets.all(16),
-                      crossAxisSpacing: 40,
+                      crossAxisSpacing: 70,
                       mainAxisSpacing: 6,
                       crossAxisCount: Responsive.isMobile(context) ? 2 : 5,
                       childAspectRatio: Responsive.isMobile(context)
@@ -111,6 +130,8 @@ class StockManagementDashboardScreen
                             ontap: () {
                               controller.createChecklist();
                             }),
+                        _stockManagementList(tittle: "Plant Stock"),
+
                         //  if (Responsive.isDesktop(context))
                         _stockManagementList(
                             tittle: "Goods Order  List",
@@ -120,6 +141,61 @@ class StockManagementDashboardScreen
                               );
                               controller.checkPoint();
                             }),
+                        // _stockManagementList(
+                        //     tittle: "MRS List",
+                        //     ontap: () {
+                        //       Get.offNamed(Routes.mrsListScreen);
+                        //
+                        //       // Get.toNamed(
+                        //       //     Routes.preventiveMaintenanceMapping,
+                        //       //     );
+                        //       //    controller.pmMapping();
+                        //     }),
+                        // _stockManagementList(
+                        //     tittle: "MRS Return",
+                        //     ontap: () {
+                        //       Get.offNamed(Routes.returnMrsList);
+                        //     }),
+                        // _stockManagementList(
+                        //   tittle: "S2S Material Transfer",
+                        //   // ontap: () {
+                        //   //   controller.pmTask();
+                        //   // }
+                        // ),
+                        // _stockManagementList(
+                        //     tittle: "Purchase Orders Request",
+                        //     ontap: () {
+                        //       Get.offNamed(Routes.GoodsOrdersReqDetailsScreen);
+                        //     }),
+                      ],
+                    ),
+                    GridView.count(
+                      shrinkWrap: true,
+                      primary: false,
+                      padding: const EdgeInsets.all(16),
+                      crossAxisSpacing: 70,
+                      mainAxisSpacing: 6,
+                      crossAxisCount: Responsive.isMobile(context) ? 2 : 5,
+                      childAspectRatio: Responsive.isMobile(context)
+                          ? (itemWidth / itemHeight)
+                          : (itemWidth / itemHeightWeb),
+                      children: <Widget>[
+                        // _stockManagementList(
+                        //     tittle: "Stock List",
+                        //     ontap: () {
+                        //       controller.createChecklist();
+                        //     }),
+                        // _stockManagementList(tittle: "Plant Stock"),
+                        //
+                        // //  if (Responsive.isDesktop(context))
+                        // _stockManagementList(
+                        //     tittle: "Goods Order  List",
+                        //     ontap: () {
+                        //       Get.toNamed(
+                        //         Routes.stockManagementGoodsOrdersScreen,
+                        //       );
+                        //       controller.checkPoint();
+                        //     }),
                         _stockManagementList(
                             tittle: "MRS List",
                             ontap: () {
@@ -146,24 +222,41 @@ class StockManagementDashboardScreen
                             ontap: () {
                               Get.offNamed(Routes.GoodsOrdersReqDetailsScreen);
                             }),
-                        _stockManagementList(tittle: "Plant Stock"),
                       ],
                     ),
+
                     Container(
                       margin: EdgeInsets.only(left: 20),
-                      child: Text(
-                        "Masters",
-                        style: TextStyle(
-                            color: Color.fromARGB(255, 159, 156, 156),
-                            fontSize: 24,
-                            fontWeight: FontWeight.w400),
+                      child: Row(
+                        children: [
+                          Text(
+                            "Masters",
+                            style: TextStyle(
+                              color: Color.fromARGB(255, 159, 156, 156),
+                              fontSize: 16,
+                              fontWeight: FontWeight.w400,
+                            ),
+                          ),
+                          SizedBox(
+                              width:
+                              10), // Add some space between the text and the line
+                          Expanded(
+                            child: Divider(
+                              color: Colors
+                                  .grey, // Customize the color of the line if needed
+                              height:
+                              1, // Adjust the height of the line if needed
+                            ),
+                          ),
+                        ],
                       ),
+
                     ),
                     GridView.count(
                       shrinkWrap: true,
                       primary: false,
                       padding: const EdgeInsets.all(16),
-                      crossAxisSpacing: 40,
+                      crossAxisSpacing: 70,
                       mainAxisSpacing: 6,
                       crossAxisCount: Responsive.isMobile(context) ? 2 : 5,
                       childAspectRatio: Responsive.isMobile(context)
