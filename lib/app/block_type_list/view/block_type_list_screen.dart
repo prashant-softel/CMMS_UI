@@ -7,6 +7,7 @@ import '../../home/widgets/header_widget.dart';
 import '../../home/widgets/home_drawer.dart';
 import '../../theme/dimens.dart';
 import '../../utils/responsive.dart';
+import 'block_type_list_mobile.dart';
 
 class BlockTypeListScreen extends GetView<BlockTypeListController> {
   BlockTypeListScreen({super.key});
@@ -23,7 +24,7 @@ class BlockTypeListScreen extends GetView<BlockTypeListController> {
               automaticallyImplyLeading: false,
             )
           : AppBar(
-              title: Text('Facility Type List'),
+              title: Text('Block Type List'),
               centerTitle: true,
               elevation: 0,
             ),
@@ -38,11 +39,11 @@ class BlockTypeListScreen extends GetView<BlockTypeListController> {
               Expanded(
                 child: Column(
                   children: [
-                    // if (Responsive.isMobile(context) ||
-                    //     Responsive.isTablet(context))
-                    //   Expanded(
-                    //     child: PreventiveChecklistListContentMobile(),
-                    //   ),
+                    if (Responsive.isMobile(context) ||
+                        Responsive.isTablet(context))
+                      Expanded(
+                        child: BlockTypeListMobile(),
+                      ),
                     if (Responsive.isDesktop(context))
                       Expanded(
                         child: BlockTypeListContentWeb(),
