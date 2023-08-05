@@ -6,8 +6,8 @@ import '../../../theme/dimens.dart';
 import '../../../theme/styles.dart';
 import '../../job_card_details_controller.dart';
 
-class JobCardUpdatedDialog extends GetView<JobCardDetailsController> {
-  const JobCardUpdatedDialog({
+class carryForwardJobDialog extends GetView<JobCardDetailsController> {
+  const carryForwardJobDialog({
     this.jobId,
     this.message,
     super.key,
@@ -43,8 +43,7 @@ class JobCardUpdatedDialog extends GetView<JobCardDetailsController> {
                   thickness: 1,
                 ),
                 Dimens.boxHeight20,
-                Center(
-                    child: Text("Job Card Added Succesfully With ID $jobId ")),
+                Center(child: Text("carry Forward Job  With ID $jobId ")),
                 Dimens.boxHeight25,
                 Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween, //

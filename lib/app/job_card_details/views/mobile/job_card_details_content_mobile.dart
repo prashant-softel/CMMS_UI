@@ -180,7 +180,8 @@ class JobCardDetailsContentMobile extends GetView<JobCardDetailsController> {
                           children: [
                               CustomElevatedButton(
                                 text: 'Start Job Card',
-                                onPressed: () => controller.createJobCard(),
+                                onPressed: () {},
+                                // => controller.createJobCard(),
                                 backgroundColor: ColorValues.appGreenColor,
                               ),
                               Dimens.boxWidth10,
@@ -207,8 +208,7 @@ class JobCardDetailsContentMobile extends GetView<JobCardDetailsController> {
                           Dimens.boxWidth10,
                           CustomElevatedButton(
                             text: 'Carry Forward Job',
-                            onPressed: () =>
-                                controller.carryForwardJob(context),
+                            onPressed: () => controller.carryForwardJob(),
                             backgroundColor: ColorValues.appLightBlueColor,
                           ),
                           Dimens.boxWidth10,

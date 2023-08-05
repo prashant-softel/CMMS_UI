@@ -7,6 +7,7 @@ import 'package:get/get.dart';
 import 'package:scrollable_table_view/scrollable_table_view.dart';
 
 import '../../widgets/custom_swich_toggle.dart';
+import '../../widgets/dropdown_web.dart';
 
 class RoleNotificationContentWeb extends GetView<RoleNotificationController> {
   RoleNotificationContentWeb({Key? key}) : super(key: key);
@@ -115,7 +116,24 @@ class RoleNotificationContentWeb extends GetView<RoleNotificationController> {
                               Dimens.boxWidth20,
                               Container(
                                 width: (MediaQuery.of(context).size.width * .2),
-                                child: DropdownWidget(
+                                child: DropdownWebWidget(
+                                  boxShadow: [
+                                    BoxShadow(
+                                      color: Colors.black26,
+                                      offset: const Offset(
+                                        5.0,
+                                        5.0,
+                                      ),
+                                      blurRadius: 5.0,
+                                      spreadRadius: 1.0,
+                                    ),
+                                    BoxShadow(
+                                      color: ColorValues.whiteColor,
+                                      offset: const Offset(0.0, 0.0),
+                                      blurRadius: 0.0,
+                                      spreadRadius: 0.0,
+                                    ),
+                                  ],
                                   controller: controller,
                                   dropdownList: controller.roleList,
                                   isValueSelected:

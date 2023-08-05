@@ -45,4 +45,14 @@ class JobDetailsUsecase {
         permitId,
         isLoading,
       );
+  Future<Map<String, dynamic>?> createJobCard({
+    String? auth,
+    int? jobId,
+    bool? isLoading,
+  }) async =>
+      await repository.createJobCard(
+        auth,
+        jobId,
+        isLoading,
+      );
 }

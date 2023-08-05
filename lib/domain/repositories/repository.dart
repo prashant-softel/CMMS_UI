@@ -1743,8 +1743,6 @@ class Repository {
     }
   }
 
-
-  
   ///Module Cleaning Task List
   Future<List<MCTaskListModel>> getMCTaskList({
     required int? facility_id,
@@ -1774,7 +1772,6 @@ class Repository {
       return [];
     }
   }
-
 
   Future<List<WorkTypeModel>> getWorkTypeList(
     bool? isLoading,
@@ -1896,7 +1893,7 @@ class Repository {
     int? facilityId,
     bool? isLoading,
     String? start_date,
-     String end_date,
+    String end_date,
   ) async {
     try {
       final auth = await getSecuredValue(LocalKeys.authToken);
@@ -1911,7 +1908,7 @@ class Repository {
         // facilityId: 45,
         // userId: 33,
         facilityId: facilityId,
-         start_date: start_date,
+        start_date: start_date,
         end_date: end_date,
         userId: userId,
         // userId: 33,
@@ -3208,6 +3205,34 @@ class Repository {
     }
   }
 
+  Future<Map<String, dynamic>> startJobCard(
+    auth,
+    jcCard,
+    bool? isLoading,
+  ) async {
+    try {
+      final auth = await getSecuredValue(LocalKeys.authToken);
+      final res = await _dataRepository.startJobCard(
+        auth: auth,
+        jcCard: jcCard,
+        isLoading: isLoading,
+      );
+
+      if (!res.hasError) {
+        if (res.errorCode == 200) {
+          var responseMap = json.decode(res.data);
+          return responseMap;
+        }
+      } else {
+        Utility.showDialog(res.errorCode.toString() + 'startJobCard');
+      }
+      return Map();
+    } catch (error) {
+      print(error.toString());
+      return Map();
+    }
+  }
+
   Future<PermitDetailsModel?> getPermitDetails(
     int? permitId,
     bool? isLoading,
@@ -3318,7 +3343,7 @@ class Repository {
       final auth = await getSecuredValue(LocalKeys.authToken);
       final res = await _dataRepository.updateJobCard(
         auth: auth,
-        jobCard: jobCard,
+        jobCard: json.encode(jobCard),
         isLoading: isLoading,
       );
 
@@ -3336,6 +3361,69 @@ class Repository {
     catch (error) {
       print(error.toString());
       Utility.showDialog(error.toString() + ' repo - updateJobCard');
+      return Map();
+    }
+  }
+
+  Future<Map<String, dynamic>> carryForwardJob(
+    jobCard,
+    bool? isLoading,
+  ) async {
+    // final res = ResponseModel(data: '', hasError: false);
+    try {
+      final auth = await getSecuredValue(LocalKeys.authToken);
+      final res = await _dataRepository.carryForwardJob(
+        auth: auth,
+        jobCard: json.encode(jobCard),
+        isLoading: isLoading,
+      );
+
+      if (!res.hasError) {
+        if (res.errorCode == 200) {
+          var responseMap = json.decode(res.data);
+          return responseMap;
+        }
+      } //
+      else {
+        Utility.showDialog(
+            res.errorCode.toString() + ' repo- carryForwardJobCard');
+      }
+      return Map();
+    } //
+    catch (error) {
+      print(error.toString());
+      Utility.showDialog(error.toString() + ' repo - carryForwardJobCard');
+      return Map();
+    }
+  }
+
+  Future<Map<String, dynamic>> closeJob(
+    jobCard,
+    bool? isLoading,
+  ) async {
+    // final res = ResponseModel(data: '', hasError: false);
+    try {
+      final auth = await getSecuredValue(LocalKeys.authToken);
+      final res = await _dataRepository.closeJob(
+        auth: auth,
+        jobCard: json.encode(jobCard),
+        isLoading: isLoading,
+      );
+
+      if (!res.hasError) {
+        if (res.errorCode == 200) {
+          var responseMap = json.decode(res.data);
+          return responseMap;
+        }
+      } //
+      else {
+        Utility.showDialog(res.errorCode.toString() + ' repo- closeJobCard');
+      }
+      return Map();
+    } //
+    catch (error) {
+      print(error.toString());
+      Utility.showDialog(error.toString() + ' repo - closeJobCard');
       return Map();
     }
   }
@@ -3373,7 +3461,7 @@ class Repository {
 
   ///
   Future<Map<String, dynamic>> rejectJobCard(
-    jobCardId,
+    int? id,
     comment,
     bool? isLoading,
   ) async {
@@ -3381,7 +3469,7 @@ class Repository {
       final auth = await getSecuredValue(LocalKeys.authToken);
       final res = await _dataRepository.rejectJobCard(
         auth: auth,
-        jobCardId: jobCardId,
+        id: id,
         comment: comment,
         isLoading: isLoading,
       );

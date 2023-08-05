@@ -9,7 +9,7 @@ String preventiveCheckListModelToJson(List<PreventiveCheckListModel> data) =>
 
 class PreventiveCheckListModel {
   int? id;
-  String? checklist_number;
+  String? name;
   int? type;
   int? facility_id;
   String? facility_name;
@@ -30,7 +30,7 @@ class PreventiveCheckListModel {
     this.id,
     this.category_id,
     this.category_name,
-    this.checklist_number,
+    this.name,
     this.createdAt,
     this.createdById,
     this.createdByName,
@@ -59,7 +59,7 @@ class PreventiveCheckListModel {
         manPower: json['manPower'],
         duration: json['duration'],
         status: json['status'],
-        checklist_number: json['checklist_number'],
+        name: json['checklist_number'],
         createdAt: json['createdAt'],
         createdById: json['createdById'],
         createdByName: json['createdByName'],
@@ -75,7 +75,7 @@ class PreventiveCheckListModel {
         "updatedById": updatedById,
         "type": type,
         "frequency_id": frequency_id,
-        "checklist_number": checklist_number,
+        "checklist_number": name,
         "frequency_name": frequency_name,
         "createdByName": createdByName,
         "createdById": createdById,

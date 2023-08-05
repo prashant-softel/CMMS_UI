@@ -10,6 +10,7 @@ import '../../widgets/custom_elevated_button.dart';
 import '../../widgets/custom_richtext.dart';
 import '../../widgets/custom_swich_toggle.dart';
 import '../../widgets/dropdown.dart';
+import '../../widgets/dropdown_web.dart';
 
 class PermitTypeContentWeb extends GetView<PermitTypeController> {
   PermitTypeContentWeb({Key? key}) : super(key: key);
@@ -140,7 +141,26 @@ class PermitTypeContentWeb extends GetView<PermitTypeController> {
                                                         .size
                                                         .height *
                                                     0.040,
-                                                child: DropdownWidget(
+                                                child: DropdownWebWidget(
+                                                  boxShadow: [
+                                                    BoxShadow(
+                                                      color: Colors.black26,
+                                                      offset: const Offset(
+                                                        5.0,
+                                                        5.0,
+                                                      ),
+                                                      blurRadius: 5.0,
+                                                      spreadRadius: 1.0,
+                                                    ),
+                                                    BoxShadow(
+                                                      color: ColorValues
+                                                          .whiteColor,
+                                                      offset: const Offset(
+                                                          0.0, 0.0),
+                                                      blurRadius: 0.0,
+                                                      spreadRadius: 0.0,
+                                                    ),
+                                                  ],
                                                   controller: controller,
                                                   dropdownList:
                                                       controller.facilityList,

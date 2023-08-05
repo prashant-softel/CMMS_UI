@@ -31,18 +31,21 @@ class PreventiveMaintenanceTaskController extends GetxController {
     rowCount: 0,
     rowsPerPage: 10,
   );
-  Rx<DateTime> fromDate = DateTime.now().obs;
+  Rx<DateTime> fromDate = DateTime.now().subtract(Duration(days: 7)).obs;
   Rx<DateTime> toDate = DateTime.now().obs;
   String get formattedFromdate =>
+      DateFormat('dd/MM/yyyy').format(fromDate.value);
+  String get formattedTodate => DateFormat('dd/MM/yyyy').format(toDate.value);
+  String get formattedTodate1 => DateFormat('yyyy-MM-dd').format(toDate.value);
+  String get formattedFromdate1 =>
       DateFormat('yyyy-MM-dd').format(fromDate.value);
-  String get formattedTodate => DateFormat('yyyy-MM-dd').format(toDate.value);
   PmTaskListModel? selectedItem;
   @override
   void onInit() async {
     facilityIdStreamSubscription = homecontroller.facilityId$.listen((event) {
       facilityId = event;
       Future.delayed(Duration(seconds: 2), () async {
-        getPmTaskList(facilityId, formattedTodate, formattedFromdate, false);
+        getPmTaskList(facilityId, formattedTodate1, formattedFromdate1, false);
       });
       // Future.delayed(Duration(seconds: 2), () async {
       // });

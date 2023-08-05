@@ -7,6 +7,7 @@ import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:get/get.dart';
 import 'package:html_unescape/html_unescape.dart';
 import '../../domain/models/history_model.dart';
+import '../../domain/models/job_card_details_model.dart';
 import '../../domain/models/job_details_model.dart';
 import '../../domain/usecases/job_details_usecase.dart';
 import '../controllers/file_upload_controller.dart';
@@ -14,6 +15,7 @@ import '../controllers/history_controller.dart';
 import '../job_details/job_details_presenter.dart';
 import '../navigators/app_pages.dart';
 import '../theme/color_values.dart';
+import '../utils/utility.dart';
 import '../widgets/custom_elevated_button.dart';
 import 'job_card_details_presenter.dart';
 import 'views/widgets/job_card_updated_dialog.dart';
@@ -55,7 +57,7 @@ class JobCardDetailsController extends GetxController {
   /// Permit Details
   int? permitId = 0;
   RxMap permitDetails = {}.obs;
-  RxList<AssociatedPermit>? permitList = <AssociatedPermit>[].obs;
+  RxList<LstPermitDetailList>? permitList = <LstPermitDetailList>[].obs;
 
   /// Job Details
   Rx<int?> jobId = 0.obs;
@@ -67,8 +69,8 @@ class JobCardDetailsController extends GetxController {
   List<String> workTypeNames = [];
   List<String> toolsRequiredNames = [];
   List<String> equipmentCategoryNames = [];
-  RxList<JobDetailsModel?> jobList = <JobDetailsModel?>[].obs;
-  Rx<JobDetailsModel?> jobDetailsModel = JobDetailsModel().obs;
+  RxList<JobCardDetailsModel?> jobCardList = <JobCardDetailsModel?>[].obs;
+  Rx<JobCardDetailsModel?> jobCardDetailsModel = JobCardDetailsModel().obs;
 
   /// Plant Details
   int userId = 35;
@@ -91,25 +93,22 @@ class JobCardDetailsController extends GetxController {
     try {
       Get.put(FileUploadController());
 
-      jobDetailsPresenter = Get.put(
-        JobDetailsPresenter(
-          JobDetailsUsecase(
-            Get.find(),
-          ),
-        ),
-      );
-      await setJobId();
+      await setJcId();
 
-      jobList.value = await jobDetailsPresenter.getJobDetails(
-            jobId: jobId.value,
+      jobCardList.value = await jobCardDetailsPresenter.getJobCardDetails(
+            jobCardId: jobCardId.value,
             isLoading: true,
           ) ??
           [];
+      getHistory();
       createPlantDetailsTableData();
+
       createJobDetailsTableData();
-      createPermitDetailsTableData();
+      // createPermitDetailsTableData();
+      //  createJcDetailsTableData();
       getEmployeeList();
-      getPermitDetails();
+      // getPermitDetails();
+
       // responsibilityCtrlrs.add(TextEditingController());
       currentIndex.value = -1;
       super.onInit();
@@ -118,22 +117,27 @@ class JobCardDetailsController extends GetxController {
     }
   }
 
-  Future<void> setJobId() async {
-    final _flutterSecureStorage = const FlutterSecureStorage();
-    // Read jobId
-    String? _jobId = await _flutterSecureStorage.read(key: "jobId");
-    if (_jobId == null || _jobId == '' || _jobId == "null") {
-      var dataFromPreviousScreen = Get.arguments;
+  Future<void> setJcId() async {
+    try {
+      final _flutterSecureStorage = const FlutterSecureStorage();
+      // Read jobId
+      String? _jobCardId = await _flutterSecureStorage.read(key: "JcId");
+      if (_jobCardId == null || _jobCardId == '' || _jobCardId == "null") {
+        var dataFromPreviousScreen = Get.arguments;
 
-      jobId.value = dataFromPreviousScreen['jobId'];
-      await _flutterSecureStorage.write(
-        key: "jobId",
-        value: jobId.value == null ? '' : jobId.value.toString(),
-      );
-    } else {
-      jobId.value = int.tryParse(_jobId) ?? 0;
+        jobCardId.value = dataFromPreviousScreen['JcId'];
+        await _flutterSecureStorage.write(
+          key: "JcId",
+          value: jobCardId.value == null ? '' : jobCardId.value.toString(),
+        );
+      } else {
+        jobCardId.value = int.tryParse(_jobCardId) ?? 0;
+      }
+      await _flutterSecureStorage.delete(key: "JcId");
+    } catch (e) {
+      Utility.showDialog(e.toString() + 'JcId');
     }
-    // return jobId;
+    // return jobId.value;
   }
 
   @override
@@ -158,8 +162,8 @@ class JobCardDetailsController extends GetxController {
   Future<void> getHistory() async {
     /// TODO: CHANGE THESE VALUES
     int moduleType = 4;
-    int tempModuleType = 21;
-    int tempJobCardId = 5326;
+    // int tempModuleType = 21;
+    // int tempJobCardId = 5326;
     //
     historyList?.value = await jobCardDetailsPresenter.getJobCardHistory(
           // tempModuleType,
@@ -173,77 +177,80 @@ class JobCardDetailsController extends GetxController {
   }
 
   void createPlantDetailsTableData() {
-    if (jobList.isNotEmpty) {
-      jobDetailsModel.value = jobList[0];
+    if (jobCardList.isNotEmpty) {
+      jobCardDetailsModel.value = jobCardList[0];
       equipmentCategoryNames = <String>[];
-      for (var eC in jobDetailsModel.value?.equipmentCatList ?? []) {
-        equipmentCategoryNames.add(eC.equipmentCatName);
+      for (var eC in jobCardDetailsModel.value?.lstPermitDetailList ?? []) {
+        // equipmentCategoryNames.add(eC.);
       }
       strEquipmentCategories.value = equipmentCategoryNames.join(', ');
       plantDetails.value = {
-        "Plant Details": jobDetailsModel.value?.facilityName,
-        "Block": jobDetailsModel.value?.blockName,
+        "Plant Details": jobCardDetailsModel.value?.plantName,
+        "Block": jobCardDetailsModel.value?.plantName,
         "Equipment Categories": strEquipmentCategories.value,
       };
     }
   }
 
   void createJobDetailsTableData() {
-    try {
-      if (jobList.isNotEmpty) {
-        jobDetailsModel.value = jobList[0];
+    print({'status to start job', jobCardList[0]!.status});
 
-        // Convert tools required to comma separated list
-        toolsRequiredNames = <String>[];
-        for (var toolRequired
-            in jobDetailsModel.value?.lstToolsRequired ?? []) {
-          toolsRequiredNames.add(toolRequired.name);
-        }
-        strToolsRequired.value = toolsRequiredNames.join(', ');
-        //remove extra comma at the end
-        if (strToolsRequired.value.length > 0) {
-          strToolsRequired.value = strToolsRequired.substring(
-            0,
-            strToolsRequired.value.length - 1,
-          );
-        }
-        // Convert work type(s) to comma separated list
-        workTypeNames = <String>[];
-        for (var workType in jobDetailsModel.value?.workType ?? []) {
-          workTypeNames.add(workType.name);
-        }
-        strWorkTypes.value = workTypeNames.join(', ');
-        //remove extra comma at the end
-        if (strWorkTypes.value.length > 0) {
-          strWorkTypes.value = strWorkTypes.substring(
-            0,
-            strWorkTypes.value.length - 1,
-          );
-        }
+    try {
+      if (jobCardList.isNotEmpty) {
+        //   // jobCardDetailsModel.value = jobCardList[0];
+
+        //   // Convert tools required to comma separated list
+        //   toolsRequiredNames = <String>[];
+        //   // for (var toolRequired
+        //   //     in jobCardDetailsModel.value?.lstToolsRequired ?? []) {
+        //   //   toolsRequiredNames.add(toolRequired.name);
+        //   //  }
+        //   strToolsRequired.value = toolsRequiredNames.join(', ');
+        //   //remove extra comma at the end
+        //   if (strToolsRequired.value.length > 0) {
+        //     strToolsRequired.value = strToolsRequired.substring(
+        //       0,
+        //       strToolsRequired.value.length - 1,
+        //     );
+        //   }
+        //   // Convert work type(s) to comma separated list
+        //   workTypeNames = <String>[];
+        //   for (var workType
+        //       in jobCardDetailsModel.value?.lstCmjcIsolatedDetailList ?? []) {
+        //     workTypeNames.add(workType.name);
+        //   }
+        //   strWorkTypes.value = workTypeNames.join(', ');
+        //   //remove extra comma at the end
+        //   if (strWorkTypes.value.length > 0) {
+        //     strWorkTypes.value = strWorkTypes.substring(
+        //       0,
+        //       strWorkTypes.value.length - 1,
+        //     );
+        //   }
 
         // Convert work area(s)/equipment(s) to comma separated list
-        var workAreaNames = <String>[];
-        for (var workArea in jobDetailsModel.value?.workingAreaList ?? []) {
-          workAreaNames.add(workArea.workingAreaName);
-        }
-        strWorkAreasOrEquipments.value = workAreaNames.join(', ');
-        //remove extra comma at the end
-        if (strWorkAreasOrEquipments.value.length > 0) {
-          strWorkAreasOrEquipments.value = strWorkAreasOrEquipments.substring(
-            0,
-            strWorkAreasOrEquipments.value.length - 1,
-          );
-        }
+        //   var workAreaNames = <String>[];
+        // // for (var workArea in jobCardDetailsModel.value?.workingAreaList ?? []) {
+        // //   workAreaNames.add(workArea.workingAreaName);
+        // // }
+        // strWorkAreasOrEquipments.value = workAreaNames.join(', ');
+        // //remove extra comma at the end
+        // if (strWorkAreasOrEquipments.value.length > 0) {
+        //   strWorkAreasOrEquipments.value = strWorkAreasOrEquipments.substring(
+        //     0,
+        //     strWorkAreasOrEquipments.value.length - 1,
+        //   );
+        // }
 
         jobDetails.value = {
-          "Job ID": jobDetailsModel.value?.id.toString(),
-          "Job Title": jobDetailsModel.value?.jobTitle,
-          "Job Description": jobDetailsModel.value?.jobDescription,
-          "Job Assigned To": jobDetailsModel.value?.assignedName,
+          "Job ID": jobCardDetailsModel.value?.jobId.toString(),
+          "Job Title": jobCardDetailsModel.value?.title,
+          "Job Description": jobCardDetailsModel.value?.description,
+          "Job Assigned To": "asign", //jobCardDetailsModel.value?.,
           "Work Area / Equipments": strWorkAreasOrEquipments.value,
           "Work Type": strWorkTypes.value,
           "Linked Tool To  Work Type": strToolsRequired.value,
-          "Job Created By": jobDetailsModel.value?.createdByName,
+          "Job Created By": jobCardDetailsModel.value?.created_by,
         };
       }
     } //
@@ -254,26 +261,28 @@ class JobCardDetailsController extends GetxController {
 
   void createPermitDetailsTableData() {
     try {
-      if (jobList.isNotEmpty) {
-        jobDetailsModel.value = jobList[0];
+      if (jobCardList.isNotEmpty) {
+        jobCardDetailsModel.value = jobCardList[0];
 
-        permitList?.value = jobDetailsModel.value?.associatedPermitList ?? [];
+        permitList?.value =
+            jobCardDetailsModel.value!.lstPermitDetailList ?? [];
+        //jobCardDetailsModel.value?.associatedPermitList ?? [];
 
-        AssociatedPermit? permit = permitList?[0];
+        LstPermitDetailList? permit = permitList?[0];
 
         if (permit != null) {
           permitId = permit.permitId;
         }
 
-        String decodedPermitDescription = unescape.convert(
-          permit?.title ?? '',
-        );
+        // String decodedPermitDescription = unescape.convert(
+        //   permit?.t ?? '',
+        // );
         permitDetails.value = {
           "Permit ID": permit?.permitId.toString(),
           "Site Permit No.": permit?.sitePermitNo,
-          "Permit Type": permit?.permitTypeName,
-          "Permit Description": decodedPermitDescription,
-          "Permit Issued By": permit?.issuedByName,
+          "Permit Type": permit?.permitType,
+          "Permit Description": permit?.permitDescription,
+          "Permit Issued By": permit?.permitIssuedByName,
         };
         //var x = jobDetails.value;
       }
@@ -342,8 +351,8 @@ class JobCardDetailsController extends GetxController {
         if (responseMapJobCardUpdated["message"] != null) {
           _message = responseMapJobCardUpdated["message"];
         }
-        showAlertDialog(
-            jobId: _jobId, message: _message, dialog: JobCardUpdatedDialog());
+        // showAlertDialog(
+        //     jobId: _jobId, message: _message, dialog: JobCardUpdatedDialog());
       }
     } //
     catch (e) {
@@ -359,14 +368,14 @@ class JobCardDetailsController extends GetxController {
     isJobCardStarted.value = !isJobCardStarted.value;
   }
 
-  Future<void> createJobCard() async {
+  Future<void> createJobCard(int jobId) async {
     await startStopJobCard();
 
     ///
     if (isJobCardStarted.value == true) {
       Map<String, dynamic>? responseMapJobCardStarted =
           await jobCardDetailsPresenter.createJobCard(
-        jobId: jobId.value,
+        jobId: jobId,
         isLoading: false,
       );
 
@@ -374,6 +383,28 @@ class JobCardDetailsController extends GetxController {
           responseMapJobCardStarted.length > 0) {
         final _jobCardId = responseMapJobCardStarted["id"][0];
         jobCardId.value = _jobCardId;
+      }
+    }
+
+    /// Get History
+    getHistory();
+  }
+
+  Future<void> startJobCard(int jcCard) async {
+    await startStopJobCard();
+
+    ///
+    if (isJobCardStarted.value == true) {
+      Map<String, dynamic>? responseMapJobCardStarted =
+          await jobCardDetailsPresenter.startJobCard(
+        jcCard: jcCard,
+        isLoading: false,
+      );
+
+      if (responseMapJobCardStarted != null &&
+          responseMapJobCardStarted.length > 0) {
+        //   final _jobCardId = responseMapJobCardStarted["id"][0];
+        //   jobCardId.value = _jobCardId;
       }
     }
 
@@ -404,42 +435,128 @@ class JobCardDetailsController extends GetxController {
     lotoAppliedAssets.value = _permitDetails?.lstLoto ?? [];
   }
 
-  void carryForwardJob(context) {
-    showDialog(
-      context: context,
-      builder: (BuildContext context) {
-        return AlertDialog(
-          title: Text('Title'),
-          content: Text('Text at the center'),
-          actions: [
-            CustomElevatedButton(
-              text: 'Permit Details',
-              onPressed: () {
-                // Action for button 1
-              },
-              backgroundColor: ColorValues.appGreenColor,
-            ),
-            CustomElevatedButton(
-              text: 'Job Card Details',
-              onPressed: () {
-                // Action for button 2
-              },
-              backgroundColor: ColorValues.appDarkBlueColor,
-            ),
-            CustomElevatedButton(
-              text: 'Job Details',
-              onPressed: () {
-                // Action for button 3
-              },
-              backgroundColor: ColorValues.appLightBlueColor,
-            ),
-          ],
-        );
-      },
+  void closeJob() async {
+    int isolationId = 0;
+    for (IsolationAssetsCategory isolationAssetsCategory
+        in isolationAssetsCategoryList) {
+      isolationId = isolationAssetsCategory.isolationAssetsCatId ?? 0;
+    }
+    // lots assets
+    int lotoStatus = 0;
+    int lotoId = 0;
+
+    for (LotoAsset lotoAsset in lotoAppliedAssets) {
+      lotoStatus = lotoAsset.removedStatus ?? 0;
+      lotoId = lotoAsset.lotoId ?? 0;
+    }
+    int _employeeId = 0;
+
+    for (EmployeeModel employee in selectedEmployeeList ?? []) {
+      _employeeId = employee.id ?? 0;
+    }
+    var _comment = descriptionOfWorkDoneCtrlr.text.trim();
+
+    var jobCard = {
+      "id": jobCardId.value,
+      "isolationId": isolationId,
+      "lotoId": lotoId,
+      "comment": _comment,
+      "employee_id": _employeeId,
+      "normalisedStatus": 1,
+      "lotoStatus": lotoStatus,
+    };
+    Map<String, dynamic>? responseCarryForwardJCModel =
+        await jobCardDetailsPresenter.closeJob(
+      jobCard,
+      false,
     );
+
+    if (responseCarryForwardJCModel == null) {
+      //  CreateNewPermitDialog();
+      // showAlertDialog();
+    }
+    // print('update  Create GO  data: $carryForwardJCModelJsonString');
   }
 
-  void approveJob() async {
+  void carryForwardJob() async {
+    int isolationId = 0;
+    for (IsolationAssetsCategory isolationAssetsCategory
+        in isolationAssetsCategoryList) {
+      isolationId = isolationAssetsCategory.isolationAssetsCatId ?? 0;
+    }
+    // lots assets
+    int lotoStatus = 0;
+    int lotoId = 0;
+
+    for (LotoAsset lotoAsset in lotoAppliedAssets) {
+      lotoStatus = lotoAsset.removedStatus ?? 0;
+      lotoId = lotoAsset.lotoId ?? 0;
+    }
+    int _employeeId = 0;
+
+    for (EmployeeModel employee in selectedEmployeeList ?? []) {
+      _employeeId = employee.id ?? 0;
+    }
+    var _comment = descriptionOfWorkDoneCtrlr.text.trim();
+
+    var jobCard = {
+      "id": jobCardId.value,
+      "isolationId": isolationId,
+      "lotoId": lotoId,
+      "comment": _comment,
+      "employee_id": _employeeId,
+      "normalisedStatus": 1,
+      "lotoStatus": lotoStatus,
+    };
+    Map<String, dynamic>? responseCarryForwardJCModel =
+        await jobCardDetailsPresenter.carryForwardJob(
+      jobCard,
+      false,
+    );
+
+    if (responseCarryForwardJCModel == null) {
+      //  CreateNewPermitDialog();
+      // showAlertDialog();
+    }
+    // print('update  Create GO  data: $carryForwardJCModelJsonString');
+  }
+
+  // void carryForwardJob(context) {
+  //   showDialog(
+  //     context: context,
+  //     builder: (BuildContext context) {
+  //       return AlertDialog(
+  //         title: Text('Title'),
+  //         content: Text('Text at the center'),
+  //         actions: [
+  //           CustomElevatedButton(
+  //             text: 'Permit Details',
+  //             onPressed: () {
+  //               // Action for button 1
+  //             },
+  //             backgroundColor: ColorValues.appGreenColor,
+  //           ),
+  //           CustomElevatedButton(
+  //             text: 'Job Card Details',
+  //             onPressed: () {
+  //               // Action for button 2
+  //             },
+  //             backgroundColor: ColorValues.appDarkBlueColor,
+  //           ),
+  //           CustomElevatedButton(
+  //             text: 'Job Details',
+  //             onPressed: () {
+  //               // Action for button 3
+  //             },
+  //             backgroundColor: ColorValues.appLightBlueColor,
+  //           ),
+  //         ],
+  //       );
+  //     },
+  //   );
+  // }
+
+  void approveJobCard() async {
     final response = await jobCardDetailsPresenter.approveJobCard(
       jobCardId: jobCardId.value,
       comment: comment,
@@ -447,7 +564,7 @@ class JobCardDetailsController extends GetxController {
     );
   }
 
-  void rejectJob() async {
+  void rejectJobCard() async {
     final response = await jobCardDetailsPresenter.rejectJobCard(
         jobCardId.value, comment, true);
   }
@@ -461,11 +578,15 @@ class JobCardDetailsController extends GetxController {
 
   goToJobCardListScreen() {
     Get.back();
-    Get.toNamed(Routes.jobCardList);
+    final _flutterSecureStorage = const FlutterSecureStorage();
+    _flutterSecureStorage.delete(key: "jobId");
+    Get.offAllNamed(Routes.jobList);
   }
 
   void goToJobCardScreen() {
-    Get.toNamed(Routes.jobCard, arguments: {'jobId': jobId.value});
+    Get.back();
+
+    //  Get.toNamed(Routes.jobCard, arguments: {'jobId': jobId.value});
   }
 
   goToAddJobScreen() {

@@ -13,6 +13,7 @@ import 'package:cmms/app/widgets/custom_textfield.dart';
 import 'package:scrollable_table_view/scrollable_table_view.dart';
 import '../../widgets/custom_elevated_button.dart';
 import '../../widgets/custom_richtext.dart';
+import '../../widgets/dropdown_web.dart';
 
 class TBTSOPListContentWeb extends GetView<TBTSOPListController> {
   TBTSOPListContentWeb({Key? key}) : super(key: key);
@@ -119,7 +120,25 @@ class TBTSOPListContentWeb extends GetView<TBTSOPListController> {
                                               2,
 
                                           child: Obx(
-                                            () => DropdownWidget(
+                                            () => DropdownWebWidget(
+                                              boxShadow: [
+                                                BoxShadow(
+                                                  color: Colors.black26,
+                                                  offset: const Offset(
+                                                    5.0,
+                                                    5.0,
+                                                  ),
+                                                  blurRadius: 5.0,
+                                                  spreadRadius: 1.0,
+                                                ),
+                                                BoxShadow(
+                                                  color: ColorValues.whiteColor,
+                                                  offset:
+                                                      const Offset(0.0, 0.0),
+                                                  blurRadius: 0.0,
+                                                  spreadRadius: 0.0,
+                                                ),
+                                              ],
                                               dropdownList:
                                                   controller.jobTypeList,
                                               isValueSelected: controller
@@ -192,7 +211,26 @@ class TBTSOPListContentWeb extends GetView<TBTSOPListController> {
                                         //           .size
                                         //           .width /
                                         //       1.82,
-                                        //   child: DropdownWidget(
+                                        //   child: DropdownWebWidget(
+                                        // boxShadow: [
+                                        //   BoxShadow(
+                                        //     color: Colors.black26,
+                                        //     offset: const Offset(
+                                        //       5.0,
+                                        //       5.0,
+                                        //     ),
+                                        //     blurRadius: 5.0,
+                                        //     spreadRadius: 1.0,
+                                        //   ),
+                                        //   BoxShadow(
+                                        //     color: ColorValues
+                                        //         .whiteColor,
+                                        //     offset: const Offset(
+                                        //         0.0, 0.0),
+                                        //     blurRadius: 0.0,
+                                        //     spreadRadius: 0.0,
+                                        //   ),
+                                        // ],
                                         //     dropdownList:
                                         //         controller.facilityList,
                                         //     isValueSelected: controller

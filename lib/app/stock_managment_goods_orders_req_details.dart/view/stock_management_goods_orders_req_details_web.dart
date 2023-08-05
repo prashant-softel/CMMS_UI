@@ -327,7 +327,7 @@ class GoodsOrdersReqDetailsWeb extends GetView<GoodsOrdersReqDetailController> {
                             Spacer(),
                             CustomElevatedButton(
                               backgroundColor: ColorValues.appRedColor,
-                              text: 'Cancle',
+                              text: 'cancel',
                               onPressed: () {
                                 // controller.AddInventory();
                               },

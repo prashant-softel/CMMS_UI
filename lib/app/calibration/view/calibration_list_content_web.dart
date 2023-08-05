@@ -1,5 +1,6 @@
 import 'package:cmms/app/theme/dimens.dart';
 import 'package:cmms/app/widgets/custom_textField.dart';
+import 'package:cmms/app/widgets/dropdown_web.dart';
 import 'package:cmms/domain/models/calibration_list_model.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
@@ -836,7 +837,24 @@ class CalibrationListContentWeb extends GetView<CalibrationListController> {
                           borderRadius: BorderRadius.circular(5),
                         ),
                         width: Get.width / 5,
-                        child: DropdownWidget(
+                        child: DropdownWebWidget(
+                          boxShadow: [
+                            BoxShadow(
+                              color: Colors.black26,
+                              offset: const Offset(
+                                5.0,
+                                5.0,
+                              ),
+                              blurRadius: 5.0,
+                              spreadRadius: 1.0,
+                            ),
+                            BoxShadow(
+                              color: ColorValues.whiteColor,
+                              offset: const Offset(0.0, 0.0),
+                              blurRadius: 0.0,
+                              spreadRadius: 0.0,
+                            ),
+                          ],
                           dropdownList: controller.venderNameList,
                           isValueSelected:
                               controller.isVenderNameSelected.value,

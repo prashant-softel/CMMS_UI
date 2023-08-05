@@ -1,3 +1,5 @@
+import 'package:cmms/app/theme/color_values.dart';
+import 'package:cmms/app/widgets/dropdown_web.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import '../../../theme/dimens.dart';
@@ -36,7 +38,24 @@ class AssignedToWidget extends StatelessWidget {
           ),
         ),
         Dimens.boxHeight5,
-        DropdownWidget(
+        DropdownWebWidget(
+          boxShadow: [
+            BoxShadow(
+              color: Colors.black26,
+              offset: const Offset(
+                5.0,
+                5.0,
+              ),
+              blurRadius: 5.0,
+              spreadRadius: 1.0,
+            ),
+            BoxShadow(
+              color: ColorValues.whiteColor,
+              offset: const Offset(0.0, 0.0),
+              blurRadius: 0.0,
+              spreadRadius: 0.0,
+            ),
+          ],
           controller: controller,
           dropdownList: controller.assignedToList,
           isValueSelected: controller.isAssignedToSelected.value,

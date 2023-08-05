@@ -1,18 +1,12 @@
 import 'dart:async';
 
 import 'package:cmms/app/app.dart';
-import 'package:cmms/app/preventive_List/preventive_list_presenter.dart';
 import 'package:cmms/app/role_List/role_list_presenter.dart';
-import 'package:cmms/domain/models/create_checklist_model.dart';
-import 'package:cmms/domain/models/preventive_checklist_model.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:scrollable_table_view/scrollable_table_view.dart';
-import '../../domain/models/create_modulelist_model.dart';
 import '../../domain/models/create_role_model.dart';
 import '../../domain/models/frequency_model.dart';
-import '../../domain/models/inventory_category_model.dart';
-import '../../domain/models/modulelist_model.dart';
 import '../../domain/models/role_model.dart';
 import '../navigators/app_pages.dart';
 import 'package:fluttertoast/fluttertoast.dart';
@@ -20,7 +14,9 @@ import 'package:fluttertoast/fluttertoast.dart';
 // import 'module_list_presenter.dart';
 
 class RoleListController extends GetxController {
-  RoleListController(this.roleListPresenter,);
+  RoleListController(
+    this.roleListPresenter,
+  );
 
   RoleListPresenter roleListPresenter;
   final HomeController homecontroller = Get.find();
@@ -31,9 +27,7 @@ class RoleListController extends GetxController {
   // Rx<String> selectedequipment = ''.obs;
   // Rx<bool> isSelectedequipment = true.obs;
   // RxList<int> selectedEquipmentCategoryIdList = <int>[].obs;
-  RxList<RoleModel?>?
-  roleList =
-      <RoleModel?>[].obs;
+  RxList<RoleModel?>? roleList = <RoleModel?>[].obs;
   int facilityId = 0;
   int type = 1;
   PaginationController paginationController = PaginationController(
@@ -41,10 +35,8 @@ class RoleListController extends GetxController {
     rowsPerPage: 10,
   );
 
-
   RoleModel? roleModel;
   final isSuccess = false.obs;
-
 
   RxList<String> moduleListTableColumns = <String>[].obs;
   RxList<FrequencyModel?> frequencyList = <FrequencyModel>[].obs;
@@ -60,7 +52,7 @@ class RoleListController extends GetxController {
     facilityIdStreamSubscription = homecontroller.facilityId$.listen((event) {
       facilityId = event;
       Future.delayed(Duration(seconds: 2), () {
-        getRoleList( true);
+        getRoleList(true);
       });
     });
     super.onInit();
@@ -69,7 +61,7 @@ class RoleListController extends GetxController {
   Future<void> getRoleList(bool isLoading) async {
     roleList?.value = <RoleModel>[];
     final _moduleList =
-    await roleListPresenter.getRoleList(isLoading: isLoading);
+        await roleListPresenter.getRoleList(isLoading: isLoading);
 
     if (_moduleList != null) {
       roleList!.value = _moduleList.cast<RoleModel?>();
@@ -89,14 +81,11 @@ class RoleListController extends GetxController {
     }
   }
 
-
-
   Future<void> createModulelist() async {
     Get.toNamed(
       Routes.createCheckList,
     );
   }
-
 
   Future<bool> createRoleList() async {
     if (rolelistNumberCtrlr.text.trim() == '') {
@@ -106,11 +95,11 @@ class RoleListController extends GetxController {
       String _role = rolelistNumberCtrlr.text.trim();
 
       CreateRoleModel createModuleList = CreateRoleModel(
-        name : _role,
+        name: _role,
       );
 
       var moduleListJsonString =
-      createModuleList.toJson(); //createCheckListToJson([createChecklist]);
+          createModuleList.toJson(); //createCheckListToJson([createChecklist]);
 
       print({"checklistJsonString", moduleListJsonString});
       await roleListPresenter.createRoleList(
@@ -129,6 +118,7 @@ class RoleListController extends GetxController {
     // isToggleOn.value = false;
     await {_cleardata()};
   }
+
   _cleardata() {
     rolelistNumberCtrlr.text = '';
     selectedItem = null;
@@ -201,21 +191,15 @@ class RoleListController extends GetxController {
   Future<bool> updateRoleList(moduleId) async {
     String _name = rolelistNumberCtrlr.text.trim();
 
-    RoleModel createModulelist = RoleModel(
-      id:moduleId,
-      name: _name
-    );
+    RoleModel createModulelist = RoleModel(id: moduleId, name: _name);
     var modulelistJsonString =
-    createModulelist.toJson(); //createCheckListToJson([createChecklist]);
+        createModulelist.toJson(); //createCheckListToJson([createChecklist]);
 
     print({"modulelistJsonString", modulelistJsonString});
     await roleListPresenter.updateRoleList(
       modulelistJsonString: modulelistJsonString,
       isLoading: true,
-
     );
     return true;
   }
-  
 }
-

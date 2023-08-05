@@ -35,7 +35,7 @@ class TableActionButton extends StatelessWidget {
                   ? Tooltip(
                       //height: 10,
                       message: message, //'Text',
-                      showDuration: const Duration(seconds: 1),
+                      showDuration: const Duration(microseconds: 10),
                       decoration: BoxDecoration(
                         color: color,
                         borderRadius:
@@ -45,7 +45,8 @@ class TableActionButton extends StatelessWidget {
                         color: Colors.white,
                       ),
                       // preferBelow: true,
-                      verticalOffset: 0.01,
+
+                      verticalOffset: 25,
                       child: Icon(icon, color: Colors.white, size: 14))
                   : SizedBox.shrink(),
               icon != null ? Dimens.boxWidth2 : SizedBox.shrink(),

@@ -32,7 +32,7 @@ abstract class ColorValues {
   static const Color deleteColor = appRedColor;
   static const Color addNewColor = appGreenColor;
   static const Color submitColor = appGreenColor;
-  static const Color closeColor = appRedColor;
+  static const Color closeColor = appcloseRedColor;
   static const Color cancelColor = appRedColor;
   static const Color printColor = appDarkBlueColor;
   static const Color updateColor = appDarkBlueColor;
@@ -101,6 +101,7 @@ abstract class ColorValues {
   static const Color appLightGreyColor = Color(appLightGreyColorHex);
   static const Color appPurpleColor = Color(appPurpleColorHex);
   static const Color apptabColor = Color(appTabsColorHex);
+  static const Color appcloseRedColor = Color.fromARGB(255, 75, 25, 22);
 
   static Color appBackgroundColor = appLightBlueColor.withOpacity(0.1);
   static const Color appDarkGreyColor = Color(appDarkGreyColorHex);

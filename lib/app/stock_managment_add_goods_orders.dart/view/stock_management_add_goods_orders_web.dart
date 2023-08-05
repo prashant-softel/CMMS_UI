@@ -1097,7 +1097,7 @@ class _AddGoodsOrdersWebState extends State<AddGoodsOrdersWeb> {
                   height: 40,
                   child: CustomElevatedButton(
                     backgroundColor: ColorValues.cancelColor,
-                    text: 'Cancle',
+                    text: 'Cancel',
                     onPressed: () {
                       // controller.AddInventory();
                     },
