@@ -1,21 +1,22 @@
 import 'package:cmms/app/app.dart';
+import 'package:cmms/app/new_permit/new_permit_controller.dart';
 import 'package:cmms/app/new_permit_list/new_permit_list_controller.dart';
+
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 import '../navigators/app_pages.dart';
 // import '../theme/colors_value.dart';
-import '../theme/dimens.dart';
-import '../theme/styles.dart';
 
 class CreateNewPermitDialog extends GetView {
   String? createPermitData;
   String? data;
   List<dynamic>? PtwId;
 
-  CreateNewPermitDialog({super.key, this.createPermitData, this.data, this.PtwId});
-  // final NewPermitListController _controller = Get.find();
+  CreateNewPermitDialog(
+      {super.key, this.createPermitData, this.data, this.PtwId});
 
+  final NewPermitController controller = Get.find();
 
   @override
   Widget build(BuildContext context) {
@@ -45,23 +46,28 @@ class CreateNewPermitDialog extends GetView {
                     color: ColorValues.greyLightColour,
                     thickness: 1,
                   ),
-              RichText(
-      text: TextSpan(
-        text: 'Permit Generated with Permit Id ',
-        style: DefaultTextStyle.of(context).style,
-        children: <TextSpan>[
-          TextSpan(
-            text: '$PtwId',
-            style: TextStyle(
-              color: Colors.blue, // Set the desired text color
-              fontWeight: FontWeight.bold, // Set any additional styles as needed
-            ),
-          ),
-          TextSpan(text: '. Please wait for Approval, you can start \nthe job only after PTW is approved'),
-        ],
-      ),
-    ),
-                      SizedBox(height: 20,),
+                  RichText(
+                    text: TextSpan(
+                      text: 'Permit Generated with Permit Id ',
+                      style: DefaultTextStyle.of(context).style,
+                      children: <TextSpan>[
+                        TextSpan(
+                          text: '$PtwId',
+                          style: TextStyle(
+                            color: Colors.blue, // Set the desired text color
+                            fontWeight: FontWeight
+                                .bold, // Set any additional styles as needed
+                          ),
+                        ),
+                        TextSpan(
+                            text:
+                                '. Please wait for Approval, you can start \nthe job only after PTW is approved'),
+                      ],
+                    ),
+                  ),
+                  SizedBox(
+                    height: 20,
+                  ),
                   Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
@@ -73,15 +79,16 @@ class CreateNewPermitDialog extends GetView {
                           onPressed: () {
                             Get.offAllNamed(Routes.newPermitList);
                             // _controller.getNewPermitList(_controller.facilityId, _controller.userId);
-                            
                           },
                           child: const Text('Permit List'),
                         ),
                         Dimens.boxWidth10,
                         ElevatedButton(
                           style: Styles.blueElevatedButtonStyle,
-                          onPressed: () {},
-                          //  Get.offAndToNamed(Routes.newPermitList),
+                          onPressed: () {
+                            // Get.offAndToNamed(Routes.viewPermitWebScreen);
+                            controller.viewNewPermitList(permitId: PtwId![0]);
+                          },
                           child: const Text('View This Permit'),
                         ),
                         Dimens.boxWidth10,

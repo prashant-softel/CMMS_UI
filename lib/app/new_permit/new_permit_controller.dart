@@ -1198,5 +1198,9 @@ class NewPermitController extends GetxController {
     print("Selected Block Name:${selectedBlock}");
   }
 
+  Future<void> viewNewPermitList({int? permitId}) async {
+    Get.toNamed(Routes.viewPermitWebScreen, arguments: permitId);
+  }
+
   /// class ends
 }
