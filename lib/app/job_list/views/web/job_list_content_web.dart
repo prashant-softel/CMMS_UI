@@ -1,6 +1,7 @@
 import 'package:data_table_2/data_table_2.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:get/get.dart';
 
 import '../../../../domain/models/job_model.dart';
@@ -335,6 +336,11 @@ class JobDataSource extends DataTableSource {
                                     icon: Icons.visibility,
                                     message: 'View',
                                     onPress: () {
+                                      final _flutterSecureStorage =
+                                          const FlutterSecureStorage();
+
+                                      _flutterSecureStorage.delete(
+                                          key: "jobId");
                                       controller.goToJobDetailsScreen(
                                         int.tryParse('${jobDetails?.id}'),
                                       );
@@ -367,6 +373,11 @@ class JobDataSource extends DataTableSource {
                                       icon: Icons.link,
                                       message: 'Link Permit',
                                       onPress: () {
+                                        final _flutterSecureStorage =
+                                            const FlutterSecureStorage();
+
+                                        _flutterSecureStorage.delete(
+                                            key: "jobId");
                                         controller.goToJobDetailsScreen(
                                             int.tryParse('${jobDetails?.id}'));
                                       },
@@ -402,6 +413,9 @@ class JobDataSource extends DataTableSource {
         }).toList(),
       ],
       onSelectChanged: (_) {
+        final _flutterSecureStorage = const FlutterSecureStorage();
+
+        _flutterSecureStorage.delete(key: "jobId");
         controller.goToJobDetailsScreen(int.tryParse('${jobDetails?.id}'));
       },
     );

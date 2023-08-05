@@ -31,8 +31,7 @@ class EditWarrantyClaimController extends GetxController {
 
   final HomeController homeController = Get.find();
 
-
-   ///Radio
+  ///Radio
   RxString selectedSeverity = RxString('');
   void setSelectedSeverity(String severity) {
     selectedSeverity.value = severity;
@@ -204,16 +203,16 @@ class EditWarrantyClaimController extends GetxController {
       <ViewWarrantyClaimModel?>[].obs;
 
   ///External Emails list from api
-  RxList<ExternalsEmailsList?>? externalEmailsList = <ExternalsEmailsList?>[].obs;
+  RxList<ExternalsEmailsList?>? externalEmailsList =
+      <ExternalsEmailsList?>[].obs;
 
   ///Supplier ACtion
-  RxList<SuppliersActionsList?>? supplierActionsList = <SuppliersActionsList?>[].obs;
+  RxList<SuppliersActionsList?>? supplierActionsList =
+      <SuppliersActionsList?>[].obs;
 
   ///AdditioanlEmailEmployees
-  RxList<AdditionalEmailsEmployeesList?>? additionalEmailEmployeesList = <AdditionalEmailsEmployeesList?>[].obs;
-  
-  
-
+  RxList<AdditionalEmailsEmployeesList?>? additionalEmailEmployeesList =
+      <AdditionalEmailsEmployeesList?>[].obs;
 
   RxList<FacilityModel?> facilityList = <FacilityModel>[].obs;
   Rx<bool> isFacilitySelected = true.obs;
@@ -235,7 +234,7 @@ class EditWarrantyClaimController extends GetxController {
 
   /// SIDE MENU WEB
   Rx<int> selectedIndex = 0.obs;
- 
+
   ///
   int? wc_id = 0;
   @override
@@ -338,15 +337,16 @@ class EditWarrantyClaimController extends GetxController {
       selectedCurrencyId = editWarrantyClaimDetailsModel.value?.currencyId ?? 0;
       // selectedApproverId = editWarrantyClaimDetailsModel.value?.approverId ?? 0;
 
-      externalEmailsList?.value = editWarrantyClaimDetailsModel.value?.externalEmails ?? [];
-      supplierActionsList?.value = editWarrantyClaimDetailsModel.value?.supplierActions ?? [];
-      additionalEmailEmployeesList?.value = editWarrantyClaimDetailsModel.value?.additionalEmailEmployees ?? [];
-       List<int?> idList = additionalEmailEmployeesList!
-          .map((obj) => obj!.user_id)
-          .toList();
+      externalEmailsList?.value =
+          editWarrantyClaimDetailsModel.value?.externalEmails ?? [];
+      supplierActionsList?.value =
+          editWarrantyClaimDetailsModel.value?.supplierActions ?? [];
+      additionalEmailEmployeesList?.value =
+          editWarrantyClaimDetailsModel.value?.additionalEmailEmployees ?? [];
+      List<int?> idList =
+          additionalEmailEmployeesList!.map((obj) => obj!.user_id).toList();
       selectedEmployeeNameIdList.value = idList;
       print('Additioanl Email Employees${selectedEmployeeNameIdList}');
-      
 
       // listEmployee?.value = viewPermitDetailsModel.value?.employee_list ?? [];
       // safetyList?.value = viewPermitDetailsModel.value?.safety_question_list ?? [];
@@ -895,13 +895,13 @@ class EditWarrantyClaimController extends GetxController {
       // int? id = selectedEquipmentName.value
       print('EquipmentCategoryId:$idList');
 
-     late List<ExternalsEmails> external_emails_list = [];
+      late List<ExternalsEmails> external_emails_list = [];
 
       externalEmails.forEach((e) {
         external_emails_list.add(ExternalsEmails(name: e.name, email: e.email));
       });
 
-       late List<SuppliersActions> supplier_action_list = [];
+      late List<SuppliersActions> supplier_action_list = [];
 
       supplierActions.forEach((e) {
         supplier_action_list.add(SuppliersActions(
@@ -911,87 +911,87 @@ class EditWarrantyClaimController extends GetxController {
         ));
       });
 
-      UpdateWarrantyClaimModel updatewarrantyClaimModel = UpdateWarrantyClaimModel(
-          id: wc_id,
-          facilityId: facilityId,
-          equipmentId: selectedEquipmentnameId,
-          // equipmentId: selectedEquipmentNameId.value,
-          goodsOrderId: 14205,
-          affectedPart: selectedAffectedPart.value,
-          // affectedPart: "SWITCH",
-          orderReference: _orderReferenceNo,
-          affectedSrNo: _affectedSerialNo,
-          costOfReplacement: costOfReplacement,
-          currencyId: selectedCurrencyId,
-          warrantyStartAt: warrantyStartDateTimeCtrlrWeb.text,
-          warrantyEndAt: warrantyEndDateTimeCtrlrWeb.text,
-          warrantyClaimTitle: _warrantyClaimTitle,
-          warrantyDescription: _description,
-          correctiveActionByBuyer: _immediateCorrectiveByBuyer,
-          requestToSupplier: _requestToBuyer,
-          approverId: selectedApproverId, // need id from backend
-          failureTime: failureDateTimeCtrlrWeb.text,
-          additionalEmailEmployees: selectedEmployeeNameIdList,
-          // [
-          //   5
-          // ],
-          externalEmails: external_emails_list,
-          // [
-          //   ExternalsEmails(name: "Himanshu Seth", email: "himanshu@gmail.com")
-          // ],
-          supplierActions: supplier_action_list,
-          // [
-          //   SuppliersActions(
-          //       name: "Root Cause Analysis Report",
-          //       // is_required: 1,
-          //       required_by_date: "2023-06-02")
-          //   // {
-          //   //     name: "Root Cause Analysis Report",
-          //   //     is_required: true,
-          //   //     required_by_date: "2023-06-02"
-          //   // }
-          // ]
+      UpdateWarrantyClaimModel updatewarrantyClaimModel =
+          UpdateWarrantyClaimModel(
+        id: wc_id,
+        facilityId: facilityId,
+        equipmentId: selectedEquipmentnameId,
+        // equipmentId: selectedEquipmentNameId.value,
+        goodsOrderId: 14205,
+        affectedPart: selectedAffectedPart.value,
+        // affectedPart: "SWITCH",
+        orderReference: _orderReferenceNo,
+        affectedSrNo: _affectedSerialNo,
+        costOfReplacement: costOfReplacement,
+        currencyId: selectedCurrencyId,
+        warrantyStartAt: warrantyStartDateTimeCtrlrWeb.text,
+        warrantyEndAt: warrantyEndDateTimeCtrlrWeb.text,
+        warrantyClaimTitle: _warrantyClaimTitle,
+        warrantyDescription: _description,
+        correctiveActionByBuyer: _immediateCorrectiveByBuyer,
+        requestToSupplier: _requestToBuyer,
+        approverId: selectedApproverId, // need id from backend
+        failureTime: failureDateTimeCtrlrWeb.text,
+        additionalEmailEmployees: selectedEmployeeNameIdList,
+        // [
+        //   5
+        // ],
+        externalEmails: external_emails_list,
+        // [
+        //   ExternalsEmails(name: "Himanshu Seth", email: "himanshu@gmail.com")
+        // ],
+        supplierActions: supplier_action_list,
+        // [
+        //   SuppliersActions(
+        //       name: "Root Cause Analysis Report",
+        //       // is_required: 1,
+        //       required_by_date: "2023-06-02")
+        //   // {
+        //   //     name: "Root Cause Analysis Report",
+        //   //     is_required: true,
+        //   //     required_by_date: "2023-06-02"
+        //   // }
+        // ]
 
-          //        id: 107,
-          //   facilityId: 45,
-          //   equipmentId: 13221,
-          //   goodsOrderId: 14205,
-          //   affectedPart: "Switch",
-          //   orderReference: "ORDER14205",
-          //   affectedSrNo: "25518/09/SWITCH",
-          //   costOfReplacement: 5000,
-          //   currencyId: 69,
-          //   warrantyStartAt: "2018-04-01",
-          //   warrantyEndAt: "2023-04-01",
-          //   warrantyClaimTitle: "Burnt Switch Replacement",
-          //  warrantyDescription: "A switch in the ACDB is burnt. Please replace it.",
-          //   correctiveActionByBuyer: "Buyer will have to replace the switch.",
-          //   requestToSupplier: "Please give another switch at a discount.",
-          //   approverId: 1,
-          //   failureTime: "2023-05-29",
-          //   additionalEmailEmployees: [5],
-          //   externalEmails: [
-          //     ExternalsEmails(
-          //       name: "Himanshu Seth",
-          //       email: "himanshu@gmail.com"
-          //     )
+        //        id: 107,
+        //   facilityId: 45,
+        //   equipmentId: 13221,
+        //   goodsOrderId: 14205,
+        //   affectedPart: "Switch",
+        //   orderReference: "ORDER14205",
+        //   affectedSrNo: "25518/09/SWITCH",
+        //   costOfReplacement: 5000,
+        //   currencyId: 69,
+        //   warrantyStartAt: "2018-04-01",
+        //   warrantyEndAt: "2023-04-01",
+        //   warrantyClaimTitle: "Burnt Switch Replacement",
+        //  warrantyDescription: "A switch in the ACDB is burnt. Please replace it.",
+        //   correctiveActionByBuyer: "Buyer will have to replace the switch.",
+        //   requestToSupplier: "Please give another switch at a discount.",
+        //   approverId: 1,
+        //   failureTime: "2023-05-29",
+        //   additionalEmailEmployees: [5],
+        //   externalEmails: [
+        //     ExternalsEmails(
+        //       name: "Himanshu Seth",
+        //       email: "himanshu@gmail.com"
+        //     )
 
-          //   ],
-          //   supplierActions: [
-          //     SuppliersActions(
-          //        name: "Root Cause Analysis Report",
-          //        is_required: true,
-          //        required_by_date: "2023-06-02"
+        //   ],
+        //   supplierActions: [
+        //     SuppliersActions(
+        //        name: "Root Cause Analysis Report",
+        //        is_required: true,
+        //        required_by_date: "2023-06-02"
 
-          //     )
-          //       // {
-          //       //     name: "Root Cause Analysis Report",
-          //       //     is_required: true,
-          //       //     required_by_date: "2023-06-02"
-          //       // }
-          //   ]
-
-          );
+        //     )
+        //       // {
+        //       //     name: "Root Cause Analysis Report",
+        //       //     is_required: true,
+        //       //     required_by_date: "2023-06-02"
+        //       // }
+        //   ]
+      );
 
       var warrantyClaimJsonString = updatewarrantyClaimModel.toJson();
       Map<String, dynamic>? responseUpdateWarrantyClaim =

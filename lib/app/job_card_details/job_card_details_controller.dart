@@ -128,7 +128,7 @@ class JobCardDetailsController extends GetxController {
         jobCardId.value = dataFromPreviousScreen['JcId'];
         await _flutterSecureStorage.write(
           key: "JcId",
-          value: jobCardId.value == null ? '' : jobId.value.toString(),
+          value: jobCardId.value == null ? '' : jobCardId.value.toString(),
         );
       } else {
         jobCardId.value = int.tryParse(_jobCardId) ?? 0;
@@ -193,6 +193,8 @@ class JobCardDetailsController extends GetxController {
   }
 
   void createJobDetailsTableData() {
+    print({'status to start job', jobCardList[0]!.status});
+
     try {
       if (jobCardList.isNotEmpty) {
         //   // jobCardDetailsModel.value = jobCardList[0];
@@ -433,42 +435,128 @@ class JobCardDetailsController extends GetxController {
     lotoAppliedAssets.value = _permitDetails?.lstLoto ?? [];
   }
 
-  void carryForwardJob(context) {
-    showDialog(
-      context: context,
-      builder: (BuildContext context) {
-        return AlertDialog(
-          title: Text('Title'),
-          content: Text('Text at the center'),
-          actions: [
-            CustomElevatedButton(
-              text: 'Permit Details',
-              onPressed: () {
-                // Action for button 1
-              },
-              backgroundColor: ColorValues.appGreenColor,
-            ),
-            CustomElevatedButton(
-              text: 'Job Card Details',
-              onPressed: () {
-                // Action for button 2
-              },
-              backgroundColor: ColorValues.appDarkBlueColor,
-            ),
-            CustomElevatedButton(
-              text: 'Job Details',
-              onPressed: () {
-                // Action for button 3
-              },
-              backgroundColor: ColorValues.appLightBlueColor,
-            ),
-          ],
-        );
-      },
+  void closeJob() async {
+    int isolationId = 0;
+    for (IsolationAssetsCategory isolationAssetsCategory
+        in isolationAssetsCategoryList) {
+      isolationId = isolationAssetsCategory.isolationAssetsCatId ?? 0;
+    }
+    // lots assets
+    int lotoStatus = 0;
+    int lotoId = 0;
+
+    for (LotoAsset lotoAsset in lotoAppliedAssets) {
+      lotoStatus = lotoAsset.removedStatus ?? 0;
+      lotoId = lotoAsset.lotoId ?? 0;
+    }
+    int _employeeId = 0;
+
+    for (EmployeeModel employee in selectedEmployeeList ?? []) {
+      _employeeId = employee.id ?? 0;
+    }
+    var _comment = descriptionOfWorkDoneCtrlr.text.trim();
+
+    var jobCard = {
+      "id": jobCardId.value,
+      "isolationId": isolationId,
+      "lotoId": lotoId,
+      "comment": _comment,
+      "employee_id": _employeeId,
+      "normalisedStatus": 1,
+      "lotoStatus": lotoStatus,
+    };
+    Map<String, dynamic>? responseCarryForwardJCModel =
+        await jobCardDetailsPresenter.closeJob(
+      jobCard,
+      false,
     );
+
+    if (responseCarryForwardJCModel == null) {
+      //  CreateNewPermitDialog();
+      // showAlertDialog();
+    }
+    // print('update  Create GO  data: $carryForwardJCModelJsonString');
   }
 
-  void approveJob() async {
+  void carryForwardJob() async {
+    int isolationId = 0;
+    for (IsolationAssetsCategory isolationAssetsCategory
+        in isolationAssetsCategoryList) {
+      isolationId = isolationAssetsCategory.isolationAssetsCatId ?? 0;
+    }
+    // lots assets
+    int lotoStatus = 0;
+    int lotoId = 0;
+
+    for (LotoAsset lotoAsset in lotoAppliedAssets) {
+      lotoStatus = lotoAsset.removedStatus ?? 0;
+      lotoId = lotoAsset.lotoId ?? 0;
+    }
+    int _employeeId = 0;
+
+    for (EmployeeModel employee in selectedEmployeeList ?? []) {
+      _employeeId = employee.id ?? 0;
+    }
+    var _comment = descriptionOfWorkDoneCtrlr.text.trim();
+
+    var jobCard = {
+      "id": jobCardId.value,
+      "isolationId": isolationId,
+      "lotoId": lotoId,
+      "comment": _comment,
+      "employee_id": _employeeId,
+      "normalisedStatus": 1,
+      "lotoStatus": lotoStatus,
+    };
+    Map<String, dynamic>? responseCarryForwardJCModel =
+        await jobCardDetailsPresenter.carryForwardJob(
+      jobCard,
+      false,
+    );
+
+    if (responseCarryForwardJCModel == null) {
+      //  CreateNewPermitDialog();
+      // showAlertDialog();
+    }
+    // print('update  Create GO  data: $carryForwardJCModelJsonString');
+  }
+
+  // void carryForwardJob(context) {
+  //   showDialog(
+  //     context: context,
+  //     builder: (BuildContext context) {
+  //       return AlertDialog(
+  //         title: Text('Title'),
+  //         content: Text('Text at the center'),
+  //         actions: [
+  //           CustomElevatedButton(
+  //             text: 'Permit Details',
+  //             onPressed: () {
+  //               // Action for button 1
+  //             },
+  //             backgroundColor: ColorValues.appGreenColor,
+  //           ),
+  //           CustomElevatedButton(
+  //             text: 'Job Card Details',
+  //             onPressed: () {
+  //               // Action for button 2
+  //             },
+  //             backgroundColor: ColorValues.appDarkBlueColor,
+  //           ),
+  //           CustomElevatedButton(
+  //             text: 'Job Details',
+  //             onPressed: () {
+  //               // Action for button 3
+  //             },
+  //             backgroundColor: ColorValues.appLightBlueColor,
+  //           ),
+  //         ],
+  //       );
+  //     },
+  //   );
+  // }
+
+  void approveJobCard() async {
     final response = await jobCardDetailsPresenter.approveJobCard(
       jobCardId: jobCardId.value,
       comment: comment,
@@ -476,7 +564,7 @@ class JobCardDetailsController extends GetxController {
     );
   }
 
-  void rejectJob() async {
+  void rejectJobCard() async {
     final response = await jobCardDetailsPresenter.rejectJobCard(
         jobCardId.value, comment, true);
   }

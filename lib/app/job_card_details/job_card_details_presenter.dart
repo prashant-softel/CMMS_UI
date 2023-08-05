@@ -72,6 +72,22 @@ class JobCardDetailsPresenter {
         jobCard: jobCard,
         isLoading: isLoading,
       );
+  Future<Map<String, dynamic>?> carryForwardJob(
+    jobCard,
+    isLoading,
+  ) async =>
+      await jobCardDetailsUsecase.carryForwardJob(
+        jobCard: jobCard,
+        isLoading: isLoading,
+      );
+  Future<Map<String, dynamic>?> closeJob(
+    jobCard,
+    isLoading,
+  ) async =>
+      await jobCardDetailsUsecase.closeJob(
+        jobCard: jobCard,
+        isLoading: isLoading,
+      );
 
   ///
   Future<List<HistoryModel>?> getJobCardHistory(
@@ -86,7 +102,7 @@ class JobCardDetailsPresenter {
       );
 
   ///
-  Future<dynamic> approveJobCard({
+  Future<Map<String, dynamic>?> approveJobCard({
     int? jobCardId,
     String? comment,
     bool? isLoading,
@@ -98,13 +114,13 @@ class JobCardDetailsPresenter {
       );
 
   ///
-  Future<dynamic> rejectJobCard(
-    jobCardId,
+  Future<Map<String, dynamic>?> rejectJobCard(
+    int? id,
     comment,
     isLoading,
   ) async =>
-      await jobCardDetailsUsecase.approveJobCard(
-        jobCardId: jobCardId,
+      await jobCardDetailsUsecase.rejectJobCard(
+        id: id,
         comment: comment,
         isLoading: isLoading,
       );
