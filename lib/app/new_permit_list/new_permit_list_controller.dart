@@ -302,6 +302,11 @@ class NewPermitListController extends GetxController {
         facilityId, userId, formattedFromdate, formattedTodate, false);
   }
 
+  //  Future<void> viewPermit({int? id}) async {
+  //   Get.toNamed(Routes.viewPermitWebScreen, arguments: id);
+  //   print('Argument$id');
+  // }
+
   //  static void showAlertPermitIssueDialog({
   //   String? comment,
   //   int? employee_id,
