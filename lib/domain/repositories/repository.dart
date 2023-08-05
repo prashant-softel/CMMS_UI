@@ -330,6 +330,7 @@ class Repository {
   Future<Map<String, dynamic>> updateNewPermit(
     newPermit,
     bool? isLoading,
+    bool? resubmit
   ) async {
     try {
       final auth = await getSecuredValue(LocalKeys.authToken);
@@ -337,6 +338,7 @@ class Repository {
         auth: auth,
         newPermit: newPermit,
         isLoading: isLoading ?? false,
+        resubmit: resubmit,
       );
 
       var resourceData = res.data;
