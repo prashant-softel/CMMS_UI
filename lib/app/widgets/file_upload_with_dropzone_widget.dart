@@ -26,13 +26,14 @@ class FileUploadWidgetWithDropzone extends StatelessWidget {
       () => //
           (Responsive.isDesktop(context))
               ? Container(
-                  height: Get.height * 0.2,
+                  height: Get.height * 3,
                   child: //
                       ClipRRect(
-                    borderRadius: BorderRadius.circular(12),
+                    borderRadius: BorderRadius.circular(10),
                     child: //
                         Container(
-                      padding: EdgeInsets.all(10),
+                          
+                      padding: EdgeInsets.all(3),
                       child: DottedBorder(
                         borderType: BorderType.RRect,
                         color: Colors.white,

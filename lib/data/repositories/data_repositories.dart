@@ -511,7 +511,7 @@ class DataRepository extends DomainRepository {
     int? facilityId,
     int? userId,
     bool? isLoading,
-     String? start_date,
+    String? start_date,
     required String end_date,
   }) async =>
       await connectHelper.getNewPermitList(
@@ -520,7 +520,7 @@ class DataRepository extends DomainRepository {
         // facilityId: facilityId ?? 0,
         // userId: 33,
         start_date: start_date,
-      end_date: end_date,
+        end_date: end_date,
         userId: userId,
         isLoading: isLoading ?? false,
       );
@@ -1006,11 +1006,13 @@ class DataRepository extends DomainRepository {
     required String auth,
     newPermit,
     bool? isLoading,
+    bool? resubmit
   }) async =>
       await connectHelper.updateNewPermit(
         auth: auth,
         newPermit: newPermit,
         isLoading: isLoading ?? false,
+        resubmit: resubmit
       );
 
   Future<ResponseModel> createSOP({
@@ -1264,6 +1266,30 @@ class DataRepository extends DomainRepository {
     );
   }
 
+  Future<ResponseModel> carryForwardJob({
+    String? auth,
+    jobCard,
+    bool? isLoading,
+  }) async {
+    return await connectHelper.carryForwardJob(
+      auth: auth,
+      jobCard: jobCard,
+      isLoading: isLoading,
+    );
+  }
+
+  Future<ResponseModel> closeJob({
+    String? auth,
+    jobCard,
+    bool? isLoading,
+  }) async {
+    return await connectHelper.closeJob(
+      auth: auth,
+      jobCard: jobCard,
+      isLoading: isLoading,
+    );
+  }
+
   Future<ResponseModel> approveJobCard({
     String? auth,
     jobCardId,
@@ -1279,13 +1305,13 @@ class DataRepository extends DomainRepository {
 
   Future<ResponseModel> rejectJobCard({
     String? auth,
-    jobCardId,
+    int? id,
     comment,
     bool? isLoading,
   }) async {
     return await connectHelper.rejectJobCard(
       auth: auth,
-      jobCardId: jobCardId,
+      id: id,
       isLoading: isLoading,
     );
   }

@@ -183,10 +183,12 @@ class NewPermitUsecase {
   Future<Map<String, dynamic>> updateNewPermit({
     newPermit,
     bool? isLoading,
+    required bool resubmit
   }) async =>
       await repository.updateNewPermit(
         newPermit,
         isLoading,
+        resubmit
       );
 
   Future<NewPermitDetailModel?> getNewPermitDetail({

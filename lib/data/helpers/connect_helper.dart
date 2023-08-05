@@ -3,6 +3,8 @@
 import 'dart:convert';
 import 'dart:typed_data';
 
+import 'package:cmms/app/job_card_details/views/widgets/carry_forward_Job_dialog.dart';
+import 'package:cmms/app/job_card_details/views/widgets/close_job_dialog.dart';
 import 'package:cmms/app/job_card_details/views/widgets/job_card_updated_dialog.dart';
 import 'package:cmms/app/widgets/create_escalation_matrix_dialog.dart';
 import 'package:cmms/app/widgets/create_incident_report_dialog.dart';
@@ -610,12 +612,12 @@ class ConnectHelper {
     required String end_date,
   }) async {
     // facilityId = 45;
-     var startDateParam = (start_date != null) ? 'start_date=$start_date&' : '';
+    var startDateParam = (start_date != null) ? 'start_date=$start_date&' : '';
     var endDateParam = (end_date != '') ? 'end_date=$end_date' : '';
     var responseModel = await apiWrapper.makeRequest(
       'Permit/GetPermitList?facility_id=$facilityId&userId=$userId' +
-      startDateParam +
-      endDateParam,
+          startDateParam +
+          endDateParam,
       Request.get,
       null,
       isLoading ?? false,
@@ -1506,9 +1508,10 @@ class ConnectHelper {
     required String auth,
     newPermit,
     bool? isLoading,
+    bool? resubmit,
   }) async {
     var responseModel = await apiWrapper.makeRequest(
-      'Permit/UpdatePermit',
+      'Permit/UpdatePermit?resubmit=$resubmit',
       Request.patch,
       newPermit,
       isLoading ?? false,
@@ -2120,6 +2123,54 @@ class ConnectHelper {
     return responseModel;
   }
 
+  Future<ResponseModel> carryForwardJob({
+    String? auth,
+    jobCard,
+    bool? isLoading,
+  }) async {
+    var responseModel = await apiWrapper.makeRequest(
+      'JC/CarryForwardJC',
+      Request.put,
+      jobCard,
+      isLoading ?? false,
+      {
+        'Content-Type': 'application/json',
+        'Authorization': 'Bearer $auth',
+      },
+    );
+    var res = responseModel.data;
+    var parsedJson = json.decode(res);
+    Get.dialog<void>(carryForwardJobDialog(
+      message: parsedJson['message'],
+      jobId: parsedJson['id'],
+    ));
+    return responseModel;
+  }
+
+  Future<ResponseModel> closeJob({
+    String? auth,
+    jobCard,
+    bool? isLoading,
+  }) async {
+    var responseModel = await apiWrapper.makeRequest(
+      'JC/CloseJC',
+      Request.put,
+      jobCard,
+      isLoading ?? false,
+      {
+        'Content-Type': 'application/json',
+        'Authorization': 'Bearer $auth',
+      },
+    );
+    var res = responseModel.data;
+    var parsedJson = json.decode(res);
+    Get.dialog<void>(closeJobDialog(
+      message: parsedJson['message'],
+      jobId: parsedJson['id'],
+    ));
+    return responseModel;
+  }
+
   Future<ResponseModel> approveJobCard({
     String? auth,
     jobCardId,
@@ -2141,7 +2192,7 @@ class ConnectHelper {
 
   Future<ResponseModel> rejectJobCard({
     String? auth,
-    jobCardId,
+    int? id,
     comment,
     bool? isLoading,
   }) async {

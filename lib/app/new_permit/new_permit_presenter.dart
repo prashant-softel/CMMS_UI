@@ -196,10 +196,12 @@ class NewPermitPresenter {
    Future<Map<String, dynamic>?> updateNewPermit({
      newPermit,
     required bool isLoading,
+    required bool resubmit,
   }) async {
     return newPermitUsecase.updateNewPermit(
        newPermit: newPermit,
       isLoading: isLoading,
+      resubmit: resubmit
     );
   }
 

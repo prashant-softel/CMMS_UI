@@ -22,6 +22,7 @@ class CreatePermitModel {
   int? approver_id;
   int? user_id;
   bool? is_isolation_required;
+  bool? resubmit;
   String? start_datetime;
   String? end_datetime;
   String? description;
@@ -49,6 +50,7 @@ class CreatePermitModel {
       this.end_datetime,
       this.facility_id,
       this.is_isolation_required,
+      this.resubmit,
       this.isolated_category_ids,
       this.issuer_id,
       this.lotoId,
@@ -79,6 +81,7 @@ class CreatePermitModel {
         description: json["description"],
         title: json["title"],
         is_isolation_required: json["is_isolation_required"],
+        resubmit: json['resubmit'],
         Loto_list: json["Loto_list"]!=null? List<LotoList>.from(
             json["Loto_list"]?.map((x) => LotoList.fromJson(x))):[],
         employee_list: json["employee_list"]!=null? List<Employeelist>.from(
@@ -109,6 +112,7 @@ class CreatePermitModel {
         "description": description,
         "title": title,
         "is_isolation_required": is_isolation_required,
+        "resubmit": resubmit,
         "Loto_list": List<dynamic>.from(Loto_list!.map((x) => x.toJson())),
         "employee_list": List<dynamic>.from(employee_list!.map((x) => x)),
         "safety_question_list": List<dynamic>.from(safety_question_list!.map((x) => x)),
