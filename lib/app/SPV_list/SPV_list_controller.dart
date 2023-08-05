@@ -124,6 +124,7 @@ class SPVListController extends GetxController {
     if (titleCtrlr.text.trim() == '' || descriptionCtrlr.text.trim() == '') {
       Fluttertoast.showToast(
           msg: "Please enter required field", fontSize: 16.0);
+      isSuccess.value = false;
     } else {
       String _title = titleCtrlr.text.trim();
       String _description = descriptionCtrlr.text.trim();

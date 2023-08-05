@@ -22,7 +22,7 @@ class ImportInventoryScreen extends GetView<ImportInventoryController> {
               automaticallyImplyLeading: false,
             )
           : AppBar(
-              title: Text('Calibration History'),
+              title: Text('IMPORT'),
               centerTitle: true,
               elevation: 0,
             ),

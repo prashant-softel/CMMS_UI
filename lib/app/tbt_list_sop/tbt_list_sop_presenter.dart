@@ -24,11 +24,11 @@ class TBTSOPListPresenter {
     // return true;
   }
 
-  Future<bool> browseTBTSOPFiles(
-      Uint8List? fileBytes, String fileName, bool isLoading) async {
-    await tbtSOPListUsecase.browseTBTSOPFiles(fileBytes, fileName, isLoading);
-    return true;
-  }
+  // Future<bool> browseTBTSOPFiles(
+  //     Uint8List? fileBytes, String fileName, bool isLoading) async {
+  //   await tbtSOPListUsecase.browseTBTSOPFiles(fileBytes, fileName, isLoading);
+  //   return true;
+  // }
 
  Future<Map<String, dynamic>?> createSOP({
      createSop,

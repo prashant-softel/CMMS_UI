@@ -9,11 +9,12 @@ class ImportInventoryUsecase {
   ImportInventoryUsecase(this.repository);
 
   Future<bool> browseFiles(
-      Uint8List? fileBytes, String fileName, bool isLoading) async {
+      Uint8List? fileBytes, String fileName, bool isLoading, int importType) async {
     await repository.browseFiles(
       fileBytes,
       fileName,
       isLoading,
+      importType
     );
     return true;
   }

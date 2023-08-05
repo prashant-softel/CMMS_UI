@@ -112,12 +112,13 @@ class BlockTypeListContentWeb extends GetView<BlockTypeListController> {
                                                   title: 'Facility '),
                                             ),
                                             Expanded(
-                                              child: Container(
+                                              child:
+                                              Container(
 
                                                 height: MediaQuery.of(context)
                                                     .size
                                                     .height *
-                                                    0.040,
+                                                    0.045,
                                                 margin: Dimens.edgeInsets5,
                                                 decoration: BoxDecoration(
                                                   boxShadow: [
@@ -152,7 +153,7 @@ class BlockTypeListContentWeb extends GetView<BlockTypeListController> {
                                                   height: MediaQuery.of(context)
                                                       .size
                                                       .height *
-                                                      0.040,
+                                                      0.045,
                                                   width: (MediaQuery.of(context)
                                                       .size
                                                       .width *

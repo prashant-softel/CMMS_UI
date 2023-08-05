@@ -56,6 +56,28 @@ class ImportInventoryContentWeb extends GetView<ImportInventoryController> {
                             style: Styles.greyMediumLight12),
                       ],
                     )
+                  : controller.type == 2
+                  ?Row(
+                children: [
+                  Icon(
+                    Icons.home,
+                    color: ColorValues.greyLightColor,
+                  ),
+                  Text(
+                    "DASHBOARD",
+                    style: Styles.greyLight14,
+                  ),
+                  GestureDetector(
+                    onTap: () {
+                      Get.back();
+                    },
+                    child:
+                    Text(" / MASTERS", style: Styles.greyMediumLight12),
+                  ),
+                  Text(" / IMPORT USERS",
+                      style: Styles.greyMediumLight12),
+                ],
+              )
                   : Row(
                       children: [
                         Icon(
@@ -92,8 +114,13 @@ class ImportInventoryContentWeb extends GetView<ImportInventoryController> {
                   children: [
                     Padding(
                       padding: const EdgeInsets.all(10.0),
-                      child: Text(
+                      child: controller.type == 1 ?
+                      Text(
                         "Import Assets file",
+                        style: Styles.blackBold16,
+                      ) :
+                      Text(
+                        "Import Users file",
                         style: Styles.blackBold16,
                       ),
                     ),

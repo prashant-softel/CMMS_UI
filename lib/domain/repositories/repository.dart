@@ -3871,7 +3871,7 @@ class Repository {
   }
 
   Future<CreateSOPModel?> browseFiles(
-      Uint8List? fileBytes, String fileName, bool isLoading) async {
+      Uint8List? fileBytes, String fileName, bool isLoading, int? importType) async {
     try {
       final auth = await getSecuredValue(LocalKeys.authToken);
       final res = await _dataRepository.browseFiles(
@@ -3879,6 +3879,7 @@ class Repository {
         fileBytes: fileBytes,
         fileName: fileName,
         isLoading: isLoading,
+        importType : importType
       );
       if (res != null) {
         print("file upload");

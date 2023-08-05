@@ -19,19 +19,20 @@ class TBTSOPListUsecase {
       fileBytes,
       fileName,
       isLoading,
+      0
     );
     // return true;
   }
 
-Future<bool> browseTBTSOPFiles(
-      Uint8List? fileBytes, String fileName, bool isLoading) async {
-    await repository.browseFiles(
-      fileBytes,
-      fileName,
-      isLoading,
-    );
-    return true;
-  }
+// Future<bool> browseTBTSOPFiles(
+//       Uint8List? fileBytes, String fileName, bool isLoading) async {
+//     await repository.browseFiles(
+//       fileBytes,
+//       fileName,
+//       isLoading,
+//     );
+//     return true;
+//   }
 
    Future<List<JobTypeListModel>> getJobTypePermitList(
       {required bool isLoading, required int? facility_id}) async {

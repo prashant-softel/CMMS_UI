@@ -480,6 +480,13 @@ class MastersDashboard extends GetView<MastersController> {
                               }))),
                               OnHover(builder: (((isHovered) {
                                 return createContentTile(
+                                    title: "Import User",
+                                    onTap: () {
+                                      controller.goToImportUser();
+                                    });
+                              }))),
+                              OnHover(builder: (((isHovered) {
+                                return createContentTile(
                                     title: "Designation",
                                     onTap: () {
                                       controller.goToDesignationScreen();

@@ -234,4 +234,10 @@ class MastersController extends GetxController {
       Routes.addUser,
     );
   }
+
+  Future<void> goToImportUser() async {
+    Get.toNamed(
+      Routes.importInventory,arguments: 2
+    );
+  }
 }

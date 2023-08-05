@@ -2430,7 +2430,9 @@ class ConnectHelper {
     Uint8List? fileBytes,
     required String fileName,
     bool? isLoading,
+     int? importType
   }) async {
+    print(importType);
     final request = http.MultipartRequest('POST',
         Uri.parse('http://65.0.20.19/CMMS_API/api/FileUpload/UploadFile'));
 
@@ -2445,10 +2447,18 @@ class ConnectHelper {
 
     // Check if the upload was successful
     if (response.statusCode == 200) {
-      importInventory(
-          auth: auth,
-          fileId: jsonResponse["id"][0].toString(),
-          isLoading: true);
+      if(importType==1){
+        importInventory(
+            auth: auth,
+            fileId: jsonResponse["id"][0].toString(),
+            isLoading: true);
+      }
+      else if(importType==2){
+        importUsers(
+            auth: auth,
+            fileId: jsonResponse["id"][0].toString(),
+            isLoading: true);
+      }
     }
 
     CreateSOPModel createSOPModel = CreateSOPModel(
@@ -4142,6 +4152,24 @@ class ConnectHelper {
       },
     );
 
+    return responseModel;
+  }
+
+  Future<ResponseModel> importUsers({
+    required String auth,
+    required String fileId,
+    required bool isLoading,
+  }) async {
+    var responseModel = await apiWrapper.makeRequest(
+      'Users/ImportUsers?file_id=$fileId',
+      Request.post,
+      null,
+      false,
+      {
+        'Content-Type': 'application/json',
+        'Authorization': 'Bearer $auth',
+      },
+    );
     return responseModel;
   }
 }
