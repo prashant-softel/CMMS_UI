@@ -1508,9 +1508,10 @@ class ConnectHelper {
     required String auth,
     newPermit,
     bool? isLoading,
+    bool? resubmit,
   }) async {
     var responseModel = await apiWrapper.makeRequest(
-      'Permit/UpdatePermit',
+      'Permit/UpdatePermit?resubmit=$resubmit',
       Request.patch,
       newPermit,
       isLoading ?? false,

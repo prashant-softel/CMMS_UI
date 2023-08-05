@@ -3300,11 +3300,11 @@ class ViewPermitWebScreen extends GetView<ViewPermitController> {
               ),
 
               ///Reject Button
-              varUserAccessModel.value.access_list!
-                                  .where(
-                                      (e) => e.feature_id == 3 && e.issue == 1)
-                                  .length >
-                              0 &&
+              // varUserAccessModel.value.access_list!
+              //                     .where(
+              //                         (e) => e.feature_id == 3 && e.issue == 1)
+              //                     .length >
+              //                 0 &&
                           controller.viewPermitDetailsModel.value?.ptwStatus ==
                               121 ||
                       varUserAccessModel.value.access_list!

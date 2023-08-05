@@ -83,6 +83,7 @@ class PermitMessageRejectDialog extends GetView {
             child: ElevatedButton(
               style: Styles.darkBlueElevatedButtonStyle,
               onPressed: () {
+                Get.offAllNamed(Routes.newPermitList);
                 _controller.getNewPermitList(
                     _controller.facilityId, _controller.userId,_controller.formattedTodate, _controller.formattedFromdate, false);
                 Get.back();

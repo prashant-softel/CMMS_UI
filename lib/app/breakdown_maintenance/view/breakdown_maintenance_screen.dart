@@ -172,7 +172,7 @@ class BreakdownMaintenanceScreen
                       children: <Widget>[
                         varUserAccessModel.value.access_list!
                                       .where((e) =>
-                                          e.feature_id == 3 && e.add == 1)
+                                          e.feature_id == 3 && e.view == 1)
                                       .length >
                                   0
                               ?

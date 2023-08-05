@@ -334,16 +334,19 @@ class NewPermitController extends GetxController {
   ///
   @override
   void onInit() async {
+    
+
     try {
       final arguments = Get.arguments;
-      // Map<String, dynamic> jsonData = json.decode(arguments);
-      // isChecked = jsonData['isChecked'];
-      // print('Edit Data:${isChecked}');
       JobDetailsModel? jobModel = JobDetailsModel();
       if (arguments != null) {
         if (arguments.containsKey('permitId')) {
           permitId.value = arguments['permitId'];
         }
+        if (arguments.containsKey('isChecked')) {
+          isChecked = arguments['isChecked'];
+        }
+        print('Edit Data:${isChecked}');
 
         if (arguments.containsKey('jobModel')) {
           jobModel = arguments['jobModel'];
@@ -378,9 +381,12 @@ class NewPermitController extends GetxController {
       await getJobTypePermitList();
       await getPermitIssuerList();
       await getPermitApproverList();
+
+     
     } catch (e) {
       print('jobModelError: $e');
     }
+     
     super.onInit();
   }
 
@@ -404,7 +410,7 @@ class NewPermitController extends GetxController {
 
       startDateTimeCtrlrBuffer =
           '${newPermitDetailsModel.value?.start_datetime}';
-
+        
       ///
 
       ///End date Time
@@ -413,7 +419,7 @@ class NewPermitController extends GetxController {
 
       validTillTimeCtrlrBuffer =
           newPermitDetailsModel.value?.end_datetime ?? '';
-
+        
       ///
       selectedBlock.value = newPermitDetailsModel.value?.blockName ?? "";
       selectedTypePermit.value =
@@ -1153,11 +1159,13 @@ class NewPermitController extends GetxController {
         Loto_list: loto_map_list,
         employee_list: employee_map_list,
         safety_question_list: safety_measure_map_list,
+        resubmit: isChecked
       );
       var jobJsonString = updatePermitModel.toJson();
       Map<String, dynamic>? responseUpdatePermit =
           await permitPresenter.updateNewPermit(
         newPermit: jobJsonString,
+        resubmit: isChecked,
         isLoading: true,
       );
       if (responseUpdatePermit != null) {
