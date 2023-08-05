@@ -116,8 +116,8 @@ class JobCardDetailsPresenter {
   ///
   Future<Map<String, dynamic>?> rejectJobCard(
     int? id,
-    comment,
-    isLoading,
+    String? comment,
+    bool? isLoading,
   ) async =>
       await jobCardDetailsUsecase.rejectJobCard(
         id: id,

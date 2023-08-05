@@ -521,41 +521,6 @@ class JobCardDetailsController extends GetxController {
     // print('update  Create GO  data: $carryForwardJCModelJsonString');
   }
 
-  // void carryForwardJob(context) {
-  //   showDialog(
-  //     context: context,
-  //     builder: (BuildContext context) {
-  //       return AlertDialog(
-  //         title: Text('Title'),
-  //         content: Text('Text at the center'),
-  //         actions: [
-  //           CustomElevatedButton(
-  //             text: 'Permit Details',
-  //             onPressed: () {
-  //               // Action for button 1
-  //             },
-  //             backgroundColor: ColorValues.appGreenColor,
-  //           ),
-  //           CustomElevatedButton(
-  //             text: 'Job Card Details',
-  //             onPressed: () {
-  //               // Action for button 2
-  //             },
-  //             backgroundColor: ColorValues.appDarkBlueColor,
-  //           ),
-  //           CustomElevatedButton(
-  //             text: 'Job Details',
-  //             onPressed: () {
-  //               // Action for button 3
-  //             },
-  //             backgroundColor: ColorValues.appLightBlueColor,
-  //           ),
-  //         ],
-  //       );
-  //     },
-  //   );
-  // }
-
   void approveJobCard() async {
     final response = await jobCardDetailsPresenter.approveJobCard(
       jobCardId: jobCardId.value,
@@ -565,8 +530,9 @@ class JobCardDetailsController extends GetxController {
   }
 
   void rejectJobCard() async {
+    var _comment = descriptionOfWorkDoneCtrlr.text.trim();
     final response = await jobCardDetailsPresenter.rejectJobCard(
-        jobCardId.value, comment, true);
+        jobCardId.value, _comment, true);
   }
 
   String? getResponsibility(index) {
