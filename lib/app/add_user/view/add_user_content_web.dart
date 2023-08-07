@@ -4,6 +4,7 @@ import 'package:cmms/app/widgets/date_picker.dart';
 import 'package:cmms/app/widgets/dropdown_web.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:intl/intl.dart';
@@ -66,6 +67,11 @@ class _AddUserContentWebState extends State<AddUserContentWeb> {
                           ),
                           GestureDetector(
                             onTap: () {
+                              final _flutterSecureStorage =
+                                  const FlutterSecureStorage();
+
+                              _flutterSecureStorage.delete(key: "userId");
+
                               Get.back();
                             },
                             child: Text(" / MASTER",
@@ -73,15 +79,22 @@ class _AddUserContentWebState extends State<AddUserContentWeb> {
                           ),
                           GestureDetector(
                               onTap: () {
+                                final _flutterSecureStorage =
+                                    const FlutterSecureStorage();
+
+                                _flutterSecureStorage.delete(key: "userId");
+
                                 Get.back();
                               },
                               child: Text(" / USER LIST",
                                   style: Styles.greyMediumLight12)),
-                          Text(
-                              controller.userId == 0
-                                  ? " / ADD USER"
-                                  : " / EDIT USER",
-                              style: Styles.greyMediumLight12)
+                          Obx(
+                            () => Text(
+                                controller.userId.value == 0
+                                    ? " / ADD USER"
+                                    : " / EDIT USER",
+                                style: Styles.greyMediumLight12),
+                          )
                         ],
                       ),
                     ),
@@ -98,7 +111,7 @@ class _AddUserContentWebState extends State<AddUserContentWeb> {
                                   child: Row(
                                     children: [
                                       Text(
-                                        controller.userId == 0
+                                        controller.userId.value == 0
                                             ? "Add User "
                                             : "Edit User",
                                         style: Styles.blackBold16,
@@ -108,7 +121,11 @@ class _AddUserContentWebState extends State<AddUserContentWeb> {
                                         icon: Icons.menu,
                                         label: "User List",
                                         onPressed: () {
-                                          controller.userId = 0;
+                                          final _flutterSecureStorage =
+                                              const FlutterSecureStorage();
+
+                                          _flutterSecureStorage.delete(
+                                              key: "userId");
 
                                           Get.offNamed(Routes.userList);
                                         },
@@ -1306,7 +1323,7 @@ class _AddUserContentWebState extends State<AddUserContentWeb> {
                                                                                     }).toList(),
                                                                                     rows: true
                                                                                         ? controller.plantListModel
-                                                                                            .map((plants) => TableViewRow(height: 90, cells: [
+                                                                                            .map((plants) => TableViewRow(height: 60, cells: [
                                                                                                   TableViewCell(child: Text("${plants?.plant_name ?? ""}")),
                                                                                                   TableViewCell(child: Text("${plants?.spv_name ?? ""}")),
                                                                                                   TableViewCell(child: Text("----")),
@@ -1432,7 +1449,7 @@ class _AddUserContentWebState extends State<AddUserContentWeb> {
                                                                                       }).toList(),
                                                                                       rows: true
                                                                                           ? controller.accesslevel
-                                                                                              .map((getAccesslevelDetails) => TableViewRow(height: 90, cells: [
+                                                                                              .map((getAccesslevelDetails) => TableViewRow(height: 60, cells: [
                                                                                                     TableViewCell(
                                                                                                       child: Obx(() {
                                                                                                         return Row(
@@ -1545,7 +1562,7 @@ class _AddUserContentWebState extends State<AddUserContentWeb> {
                                                                                       }).toList(),
                                                                                       rows: true
                                                                                           ? controller.accessList
-                                                                                              .map((getAccesslistDetails) => TableViewRow(height: 90, cells: [
+                                                                                              .map((getAccesslistDetails) => TableViewRow(height: 60, cells: [
                                                                                                     TableViewCell(
                                                                                                       child: Obx(() {
                                                                                                         return Row(
@@ -1660,7 +1677,7 @@ class _AddUserContentWebState extends State<AddUserContentWeb> {
                                                                                       }).toList(),
                                                                                       rows: true
                                                                                           ? controller.notificationList
-                                                                                              .map((getnotificationListDetails) => TableViewRow(height: 70, cells: [
+                                                                                              .map((getnotificationListDetails) => TableViewRow(height: 60, cells: [
                                                                                                     TableViewCell(child: Text("${getnotificationListDetails?.feature_name}" " " "${getnotificationListDetails?.notification_name.value}")),
                                                                                                     TableViewCell(
                                                                                                       child: Obx(() {
@@ -1718,7 +1735,7 @@ class _AddUserContentWebState extends State<AddUserContentWeb> {
                                                                                       }).toList(),
                                                                                       rows: true
                                                                                           ? controller.notificationListByUserId
-                                                                                              .map((getnotificationListDetails) => TableViewRow(height: 70, cells: [
+                                                                                              .map((getnotificationListDetails) => TableViewRow(height: 60, cells: [
                                                                                                     TableViewCell(child: Text("${getnotificationListDetails?.feature_name}" " " "${getnotificationListDetails?.notification_name.value}")),
                                                                                                     TableViewCell(
                                                                                                       child: Obx(() {
@@ -1764,7 +1781,7 @@ class _AddUserContentWebState extends State<AddUserContentWeb> {
                                   child: Row(
                                     mainAxisAlignment: MainAxisAlignment.center,
                                     children: [
-                                      controller.userId == 0
+                                      controller.userId.value == 0
                                           ? Container(
                                               height: 35,
                                               child: CustomElevatedButton(
@@ -1788,7 +1805,7 @@ class _AddUserContentWebState extends State<AddUserContentWeb> {
                                                       .updateUser()
                                                       .then((value) {
                                                     if (value == true) {
-                                                      // controller.userId = 0;
+                                                      // controller.userId.value = 0;
                                                       controller
                                                           .saveAccessLevel();
                                                       //   controller.saveNotification();
@@ -1804,7 +1821,15 @@ class _AddUserContentWebState extends State<AddUserContentWeb> {
                                         child: CustomElevatedButton(
                                           backgroundColor: ColorValues.redColor,
                                           text: "Cancel",
-                                          onPressed: () {},
+                                          onPressed: () {
+                                            final _flutterSecureStorage =
+                                                const FlutterSecureStorage();
+
+                                            _flutterSecureStorage.delete(
+                                                key: "userId");
+
+                                            Get.back();
+                                          },
                                         ),
                                       ),
                                     ],

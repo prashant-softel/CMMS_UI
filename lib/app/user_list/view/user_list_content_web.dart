@@ -1,6 +1,7 @@
 import 'package:cmms/app/theme/dimens.dart';
 import 'package:cmms/domain/models/user_list_model.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:get/get.dart';
 import 'package:scrollable_table_view/scrollable_table_view.dart';
 import '../../navigators/app_pages.dart';
@@ -386,6 +387,13 @@ class _UserListContentWebState extends State<UserListContentWeb> {
                                                                     .remove_red_eye_outlined,
                                                                 message: 'view',
                                                                 onPress: () {
+                                                                  final _flutterSecureStorage =
+                                                                      const FlutterSecureStorage();
+
+                                                                  _flutterSecureStorage
+                                                                      .delete(
+                                                                          key:
+                                                                              "userId");
                                                                   controller.selectedItem = controller
                                                                       .filteredData
                                                                       .firstWhere((element) =>
@@ -402,8 +410,10 @@ class _UserListContentWebState extends State<UserListContentWeb> {
                                                                     Get.toNamed(
                                                                         Routes
                                                                             .viewUserDetail,
-                                                                        arguments:
-                                                                            userId);
+                                                                        arguments: {
+                                                                          'userId':
+                                                                              userId
+                                                                        });
                                                                   }
                                                                 },
                                                               ),
@@ -414,6 +424,13 @@ class _UserListContentWebState extends State<UserListContentWeb> {
                                                                     Icons.edit,
                                                                 message: 'Edit',
                                                                 onPress: () {
+                                                                  final _flutterSecureStorage =
+                                                                      const FlutterSecureStorage();
+
+                                                                  _flutterSecureStorage
+                                                                      .delete(
+                                                                          key:
+                                                                              "userId");
                                                                   controller.selectedItem = controller
                                                                       .filteredData
                                                                       .firstWhere((element) =>
@@ -430,8 +447,10 @@ class _UserListContentWebState extends State<UserListContentWeb> {
                                                                     Get.toNamed(
                                                                         Routes
                                                                             .addUser,
-                                                                        arguments:
-                                                                            userId);
+                                                                        arguments: {
+                                                                          'userId':
+                                                                              userId
+                                                                        });
                                                                   }
                                                                 },
                                                               ),

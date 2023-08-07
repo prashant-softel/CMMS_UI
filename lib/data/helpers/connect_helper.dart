@@ -610,12 +610,12 @@ class ConnectHelper {
     required String end_date,
   }) async {
     // facilityId = 45;
-     var startDateParam = (start_date != null) ? 'start_date=$start_date&' : '';
+    var startDateParam = (start_date != null) ? 'start_date=$start_date&' : '';
     var endDateParam = (end_date != '') ? 'end_date=$end_date' : '';
     var responseModel = await apiWrapper.makeRequest(
       'Permit/GetPermitList?facility_id=$facilityId&userId=$userId' +
-      startDateParam +
-      endDateParam,
+          startDateParam +
+          endDateParam,
       Request.get,
       null,
       isLoading ?? false,
@@ -2424,7 +2424,7 @@ class ConnectHelper {
       dynamic startDate,
       dynamic endDate}) async {
     var responseModel = await apiWrapper.makeRequest(
-      'PMScheduleView/GetPMTaskList?facility_id=${facilityId}&start_date=${startDate}&end_date=${endDate}',
+      'PMScheduleView/GetPMTaskList?facility_id=${facilityId}&start_date=${endDate}&end_date=${startDate}',
       Request.get,
       null,
       isLoading ?? true,

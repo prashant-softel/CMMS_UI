@@ -4,6 +4,7 @@ import 'package:cmms/app/widgets/custom_elevated_button.dart';
 import 'package:cmms/app/widgets/custom_richtext.dart';
 import 'package:cmms/app/widgets/custom_textField.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:get/get.dart';
 import 'package:scrollable_table_view/scrollable_table_view.dart';
 
@@ -48,6 +49,10 @@ class MrsApproveContentWeb extends GetView<MrsApproveController> {
                   ),
                   GestureDetector(
                     onTap: () {
+                      final _flutterSecureStorage =
+                          const FlutterSecureStorage();
+
+                      _flutterSecureStorage.delete(key: "mrsId");
                       Get.back();
                     },
                     child: Text(" / STOCK MANAGEMENT ",

@@ -22,7 +22,7 @@ class PmScheduleContentWeb extends GetView<PmScheduleController> {
         Container(
           height: 45,
           decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(10),
+            // borderRadius: BorderRadius.circular(10),
             border: Border.all(
               color: Color.fromARGB(255, 227, 224, 224),
               width: 1,

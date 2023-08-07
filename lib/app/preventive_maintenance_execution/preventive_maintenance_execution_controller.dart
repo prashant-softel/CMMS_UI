@@ -2,15 +2,16 @@ import 'package:cmms/app/navigators/app_pages.dart';
 import 'package:cmms/app/theme/color_values.dart';
 import 'package:cmms/app/theme/dimens.dart';
 import 'package:cmms/app/theme/styles.dart';
+import 'package:cmms/app/utils/utility.dart';
 import 'package:cmms/app/widgets/custom_elevated_button.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:get/get.dart';
 import 'package:scrollable_table_view/scrollable_table_view.dart';
 
 import '../../domain/models/pm_task_view_list_model.dart';
 import '../../domain/models/update_pm_task_execution_model.dart';
 import 'preventive_maintenance_execution_presenter.dart';
-import 'package:fluttertoast/fluttertoast.dart';
 
 class PreventiveMaintenanceExecutionController extends GetxController {
   ///
@@ -19,7 +20,7 @@ class PreventiveMaintenanceExecutionController extends GetxController {
   );
   PreventiveMaintenanceExecutionPresenter
       preventiveMaintenanceExecutionPresenter;
-  int scheduleId = 0;
+  Rx<int> scheduleId = 0.obs;
   RxBool isTouchable = true.obs;
   var isToggleOn = false.obs;
 
@@ -36,11 +37,37 @@ class PreventiveMaintenanceExecutionController extends GetxController {
   HistoryLog? historyLogModel;
   @override
   void onInit() async {
-    scheduleId = Get.arguments;
-    if (scheduleId != 0) {
-      await getPmtaskViewList(scheduleId: scheduleId, isloading: true);
+    try {
+      await setScheduleId();
+      if (scheduleId != 0) {
+        await getPmtaskViewList(scheduleId: scheduleId.value, isloading: true);
+      }
+      super.onInit();
+    } catch (e) {
+      print(e);
     }
-    super.onInit();
+  }
+
+  Future<void> setScheduleId() async {
+    try {
+      final _flutterSecureStorage = const FlutterSecureStorage();
+      // Read jobId
+      String? _scheduleId = await _flutterSecureStorage.read(key: "scheduleId");
+      if (_scheduleId == null || _scheduleId == '' || _scheduleId == "null") {
+        var dataFromPreviousScreen = Get.arguments;
+
+        scheduleId.value = dataFromPreviousScreen['scheduleId'];
+        await _flutterSecureStorage.write(
+          key: "scheduleId",
+          value: scheduleId.value == null ? '' : scheduleId.value.toString(),
+        );
+      } else {
+        scheduleId.value = int.tryParse(_scheduleId) ?? 0;
+      }
+      //  await _flutterSecureStorage.delete(key: "scheduleId");
+    } catch (e) {
+      Utility.showDialog(e.toString() + 'scheduleId');
+    }
   }
 
   void toggleTouch() {

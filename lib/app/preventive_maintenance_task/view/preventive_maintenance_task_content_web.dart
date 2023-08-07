@@ -3,6 +3,7 @@ import 'package:cmms/app/theme/dimens.dart';
 import 'package:cmms/app/widgets/custom_richtext.dart';
 import 'package:cmms/app/widgets/date_picker.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:get/get.dart';
 import 'package:scrollable_table_view/scrollable_table_view.dart';
 import 'package:syncfusion_flutter_datepicker/datepicker.dart';
@@ -320,13 +321,22 @@ class _PreventiveMaintenanceTaskContentWebState
                                                                           .selectedItem
                                                                           ?.id ??
                                                                       0;
+                                                              final _flutterSecureStorage =
+                                                                  const FlutterSecureStorage();
+
+                                                              _flutterSecureStorage
+                                                                  .delete(
+                                                                      key:
+                                                                          "scheduleId");
                                                               if (scheduleId !=
                                                                   null) {
                                                                 Get.toNamed(
                                                                     Routes
                                                                         .pmTaskView,
-                                                                    arguments:
-                                                                        scheduleId);
+                                                                    arguments: {
+                                                                      'scheduleId':
+                                                                          scheduleId
+                                                                    });
                                                               }
                                                               // controller.pmTaskView();
                                                             },
@@ -353,6 +363,13 @@ class _PreventiveMaintenanceTaskContentWebState
                                                                 .remove_red_eye_outlined,
                                                             message: 'Execute',
                                                             onPress: () {
+                                                              final _flutterSecureStorage =
+                                                                  const FlutterSecureStorage();
+
+                                                              _flutterSecureStorage
+                                                                  .delete(
+                                                                      key:
+                                                                          "scheduleId");
                                                               controller.selectedItem = controller
                                                                   .pmTaskList
                                                                   .firstWhere(
@@ -370,8 +387,10 @@ class _PreventiveMaintenanceTaskContentWebState
                                                                 Get.toNamed(
                                                                     Routes
                                                                         .pmExecution,
-                                                                    arguments:
-                                                                        scheduleId);
+                                                                    arguments: {
+                                                                      'scheduleId':
+                                                                          scheduleId
+                                                                    });
                                                               }
                                                             },
                                                           ),

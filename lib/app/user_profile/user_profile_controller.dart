@@ -1,3 +1,4 @@
+import 'package:cmms/app/constant/constant.dart';
 import 'package:cmms/app/user_profile/user_profile_presenter.dart';
 import 'package:cmms/app/view_user_detail/view_user_detail_presenter.dart';
 import 'package:cmms/domain/models/get_notification_by_userid_model.dart';
@@ -27,7 +28,7 @@ class UserProfileController extends GetxController {
 
   @override
   void onInit() async {
-    userId = Get.arguments;
+    userId = varUserAccessModel.value.user_id ?? 0; //Get.arguments;
     print('userId:$userId');
     if (userId != 0) {
       await getUserDetails(userId: userId, isloading: true);

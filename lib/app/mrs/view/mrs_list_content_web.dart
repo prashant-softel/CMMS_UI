@@ -8,6 +8,7 @@ import 'package:cmms/app/widgets/date_picker.dart';
 import 'package:cmms/app/widgets/table_action_button.dart';
 import 'package:cmms/domain/models/get_mrs_list_model.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 
 import 'package:get/get.dart';
 import 'package:scrollable_table_view/scrollable_table_view.dart';
@@ -112,7 +113,7 @@ class _MrsListContentWebState extends State<MrsListContentWeb> {
                                             .update(['stock_Mangement_Date']);
                                       },
                                       hintText:
-                                          '${controller.formattedTodate.toString()} To ${controller.formattedFromdate.toString()}',
+                                          '${controller.formattedFromdate.toString()} To ${controller.formattedTodate.toString()}',
                                     ),
                                   ],
                                 ),
@@ -121,6 +122,10 @@ class _MrsListContentWebState extends State<MrsListContentWeb> {
                                   icon: Icons.add,
                                   label: "Add New",
                                   onPressed: () {
+                                    final _flutterSecureStorage =
+                                        const FlutterSecureStorage();
+
+                                    _flutterSecureStorage.delete(key: "mrsId");
                                     Get.toNamed(Routes.createMrs);
                                   },
                                   color: ColorValues.addNewColor,
@@ -393,8 +398,10 @@ class _MrsListContentWebState extends State<MrsListContentWeb> {
                                                                       Get.toNamed(
                                                                           Routes
                                                                               .mrsViewScreen,
-                                                                          arguments:
-                                                                              mrsId);
+                                                                          arguments: {
+                                                                            'mrsId':
+                                                                                mrsId
+                                                                          });
                                                                     }
                                                                   },
                                                                 ),
@@ -406,6 +413,13 @@ class _MrsListContentWebState extends State<MrsListContentWeb> {
                                                                   message:
                                                                       'edit',
                                                                   onPress: () {
+                                                                    final _flutterSecureStorage =
+                                                                        const FlutterSecureStorage();
+
+                                                                    _flutterSecureStorage
+                                                                        .delete(
+                                                                            key:
+                                                                                "mrsId");
                                                                     int mrsId =
                                                                         mrsListDetails?.id ??
                                                                             0;
@@ -414,8 +428,10 @@ class _MrsListContentWebState extends State<MrsListContentWeb> {
                                                                       Get.toNamed(
                                                                           Routes
                                                                               .editMrs,
-                                                                          arguments:
-                                                                              mrsId);
+                                                                          arguments: {
+                                                                            'mrsId':
+                                                                                mrsId
+                                                                          });
                                                                     }
                                                                   },
                                                                 ),
@@ -442,12 +458,18 @@ class _MrsListContentWebState extends State<MrsListContentWeb> {
                                                                             'Approve',
                                                                         onPress:
                                                                             () {
+                                                                          final _flutterSecureStorage =
+                                                                              const FlutterSecureStorage();
+
+                                                                          _flutterSecureStorage.delete(
+                                                                              key: "mrsId");
                                                                           int mrsId =
                                                                               mrsListDetails?.id ?? 0;
                                                                           if (mrsId !=
                                                                               null) {
-                                                                            Get.toNamed(Routes.mrsApprovalScreen,
-                                                                                arguments: mrsId);
+                                                                            Get.toNamed(Routes.mrsApprovalScreen, arguments: {
+                                                                              'mrsId': mrsId
+                                                                            });
                                                                           }
                                                                         },
                                                                       )
@@ -468,12 +490,18 @@ class _MrsListContentWebState extends State<MrsListContentWeb> {
                                                                             'issue',
                                                                         onPress:
                                                                             () {
+                                                                          final _flutterSecureStorage =
+                                                                              const FlutterSecureStorage();
+
+                                                                          _flutterSecureStorage.delete(
+                                                                              key: "mrsId");
                                                                           int mrsId =
                                                                               mrsListDetails?.id ?? 0;
                                                                           if (mrsId !=
                                                                               null) {
-                                                                            Get.toNamed(Routes.mrsIssueScreen,
-                                                                                arguments: mrsId);
+                                                                            Get.toNamed(Routes.mrsIssueScreen, arguments: {
+                                                                              'mrsId': mrsId
+                                                                            });
                                                                           }
                                                                         },
                                                                       )
@@ -501,12 +529,18 @@ class _MrsListContentWebState extends State<MrsListContentWeb> {
                                                                             'Reject',
                                                                         onPress:
                                                                             () {
+                                                                          final _flutterSecureStorage =
+                                                                              const FlutterSecureStorage();
+
+                                                                          _flutterSecureStorage.delete(
+                                                                              key: "mrsId");
                                                                           int mrsId =
                                                                               mrsListDetails?.id ?? 0;
                                                                           if (mrsId !=
                                                                               null) {
-                                                                            Get.toNamed(Routes.mrsApprovalScreen,
-                                                                                arguments: mrsId);
+                                                                            Get.toNamed(Routes.mrsApprovalScreen, arguments: {
+                                                                              'mrsId': mrsId
+                                                                            });
                                                                           }
                                                                         },
                                                                       )
@@ -524,15 +558,21 @@ class _MrsListContentWebState extends State<MrsListContentWeb> {
                                                                         icon: Icons
                                                                             .approval,
                                                                         message:
-                                                                            'issue',
+                                                                            'approval',
                                                                         onPress:
                                                                             () {
+                                                                          final _flutterSecureStorage =
+                                                                              const FlutterSecureStorage();
+
+                                                                          _flutterSecureStorage.delete(
+                                                                              key: "mrsId");
                                                                           int mrsId =
                                                                               mrsListDetails?.id ?? 0;
                                                                           if (mrsId !=
                                                                               null) {
-                                                                            Get.toNamed(Routes.issueMrsApprove,
-                                                                                arguments: mrsId);
+                                                                            Get.toNamed(Routes.issueMrsApprove, arguments: {
+                                                                              'mrsId': mrsId
+                                                                            });
                                                                           }
                                                                         },
                                                                       )
@@ -553,12 +593,18 @@ class _MrsListContentWebState extends State<MrsListContentWeb> {
                                                                             'issue',
                                                                         onPress:
                                                                             () {
+                                                                          final _flutterSecureStorage =
+                                                                              const FlutterSecureStorage();
+
+                                                                          _flutterSecureStorage.delete(
+                                                                              key: "mrsId");
                                                                           int mrsId =
                                                                               mrsListDetails?.id ?? 0;
                                                                           if (mrsId !=
                                                                               null) {
-                                                                            Get.toNamed(Routes.issueMrsApprove,
-                                                                                arguments: mrsId);
+                                                                            Get.toNamed(Routes.issueMrsApprove, arguments: {
+                                                                              'mrsId': mrsId
+                                                                            });
                                                                           }
                                                                         },
                                                                       )
