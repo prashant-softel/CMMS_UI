@@ -170,31 +170,31 @@ class BreakdownMaintenanceScreen
                           ? (itemWidth / itemHeight)
                           : (itemWidth / itemHeightWeb),
                       children: <Widget>[
-                        // varUserAccessModel.value.access_list!
-                        //               .where((e) =>
-                        //                   e.feature_id == 3 && e.add == 1)
-                        //               .length >
-                        //           0
-                        //       ?
+                        varUserAccessModel.value.access_list!
+                                      .where((e) =>
+                                          e.feature_id == 3 && e.view == 1)
+                                      .length >
+                                  0
+                              ?
                         createContentTile(
                             title: "Permit List",
                             onTap: () {
                               controller.newPermitList();
-                            }),
-                            // : Container(),
+                            })
+                            : Container(),
 
-                            // varUserAccessModel.value.access_list!
-                            //           .where((e) =>
-                            //               e.feature_id == 3 && e.add == 1)
-                            //           .length >
-                            //       0
-                            //   ?
+                            varUserAccessModel.value.access_list!
+                                      .where((e) =>
+                                          e.feature_id == 3 && e.add == 1)
+                                      .length >
+                                  0
+                              ?
                         createContentTile(
                             title: "Add New Permit",
                             onTap: () {
                               controller.createNewPermit();
                             })
-                            // : Container(),
+                            : Container(),
 
                       ],
                     ),

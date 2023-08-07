@@ -12,6 +12,7 @@ import 'package:cmms/app/widgets/history_table_widget_web.dart';
 import 'package:cmms/app/widgets/permit_approved_dialog.dart';
 import 'package:cmms/app/widgets/permit_cancel_by_approver_dialog.dart';
 import 'package:cmms/app/widgets/permit_cancel_dialog.dart';
+import 'package:cmms/app/widgets/permit_extend_dialog.dart';
 import 'package:cmms/app/widgets/permit_reject_dialog.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -3334,26 +3335,26 @@ class ViewPermitWebScreen extends GetView<ViewPermitController> {
               ),
 
               ///Permit cancel by Issuer
-              varUserAccessModel.value.access_list!
-                              .where((e) => e.feature_id == 3 && e.issue == 1)
-                              .length >
-                          0 &&
-                      controller.viewPermitDetailsModel.value?.ptwStatus == 121
-                  ? Container(
-                      height: 45,
-                      child: CustomElevatedButton(
-                        backgroundColor: ColorValues.appRedColor,
-                        text: "Cancel",
-                        icon: Icons.close,
-                        onPressed: () {
-                          // controller
-                          //     .createNewPermit();
-                          Get.dialog(PermitCancelByIssuerDialog(
-                              permitId:
-                                  '${controller.viewPermitDetailsModel.value?.permitNo}'));
-                        },
-                      ))
-                  : Container(),
+              // varUserAccessModel.value.access_list!
+              //                 .where((e) => e.feature_id == 3 && e.issue == 1)
+              //                 .length >
+              //             0 &&
+              //         controller.viewPermitDetailsModel.value?.ptwStatus == 121
+              //     ? Container(
+              //         height: 45,
+              //         child: CustomElevatedButton(
+              //           backgroundColor: ColorValues.appRedColor,
+              //           text: "Cancel",
+              //           icon: Icons.close,
+              //           onPressed: () {
+              //             // controller
+              //             //     .createNewPermit();
+              //             Get.dialog(PermitCancelByIssuerDialog(
+              //                 permitId:
+              //                     '${controller.viewPermitDetailsModel.value?.permitNo}'));
+              //           },
+              //         ))
+              //     : Container(),
 
               /// Permit Cancel By approver & Permit Request
               varUserAccessModel.value.access_list!
@@ -3383,22 +3384,39 @@ class ViewPermitWebScreen extends GetView<ViewPermitController> {
                         },
                       ))
                   : Container(),
+
+              // // //Permit Extend Approve
               // varUserAccessModel.value.access_list!
-              //                 .where((e) => e.feature_id == 3 && e.approve == 1)
+              //                 .where((e) => e.feature_id == 3 && e.approve == 0)
               //                 .length >
               //             0 &&
               //         controller.viewPermitDetailsModel.value?.ptwStatus == 133
-              // ?TableActionButton(
-              //   color: ColorValues.appDarkBlueColor,
-              //   icon: Icons.expand_outlined,
-              //   label: 'Extend Approve',
-              //   onPress: () {
+              // ?
+              // Container(
+              //         height: 45,
+              //         child: CustomElevatedButton(
+              //           backgroundColor: ColorValues.appGreenColor,
+              //           text: "Extend Approve",
+              //           icon: Icons.expand_outlined,
+              //           onPressed: () {
+              //             // controller
+              //             //     .createNewPermit();
+              //             Get.dialog(PermitExtendDialog(
+              //                 permitId:
+              //                     '${controller.viewPermitDetailsModel.value?.permitNo}'));
+              //           },
+              //         ))
+              // // TableActionButton(
+              // //   color: ColorValues.appDarkBlueColor,
+              // //   icon: Icons.expand_outlined,
+              // //   label: 'Extend Approve',
+              // //   onPress: () {
 
-              //     // Get.dialog(PermitExtendDialog(
-              //     //     permitId:
-              //     //         _newPermitList[0]));
-              //   },
-              // )
+              // //     // Get.dialog(PermitExtendDialog(
+              // //     //     permitId:
+              // //     //         '${controller.viewPermitDetailsModel.value?.permitNo}'));
+              // //   },
+              // // )
               // : Container()
             ],
           ),

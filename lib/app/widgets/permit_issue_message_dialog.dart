@@ -82,7 +82,7 @@ class PermitMessageIssueDialog extends GetView {
               style: Styles.darkBlueElevatedButtonStyle,
               onPressed: () {
                 Get.offAllNamed(Routes.newPermitList);
-                _controller.getNewPermitList(_controller.facilityId, _controller.userId,_controller.formattedTodate, _controller.formattedFromdate, false);
+                _controller.getNewPermitList(_controller.facilityId, _controller.userId,_controller.formattedTodate, _controller.formattedFromdate, false, false);
                 Get.back();
                 
               },

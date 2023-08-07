@@ -18,15 +18,18 @@ class NewPermitListPresenter {
     int? facilityId,
     int? userId,
     required bool isLoading,
+    required bool self_view,
     String? start_date,
     required String end_date,
   }) async =>
       await newPermitListUsecase.getNewPermitList(
         auth: auth ?? "",
         facilityId: facilityId,
+        isLoading: isLoading,
+        self_view: self_view,
         start_date: start_date,
         end_date: end_date,
-        isLoading: isLoading,
+        
       );
 
   Future<void> permitIssueButton({
