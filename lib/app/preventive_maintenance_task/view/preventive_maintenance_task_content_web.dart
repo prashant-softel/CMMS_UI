@@ -297,7 +297,7 @@ class _PreventiveMaintenanceTaskContentWebState
                                             ),
                                           ].map((record) {
                                             return TableViewRow(
-                                              height: 90,
+                                              height: 50,
                                               cells: record.map((value) {
                                                 return TableViewCell(
                                                   child: (value == "Action")

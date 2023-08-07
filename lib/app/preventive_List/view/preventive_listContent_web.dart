@@ -553,7 +553,7 @@ class PreventiveChecklistListContentWeb
                                               ),
                                             ].map((record) {
                                               return TableViewRow(
-                                                height: 60,
+                                                height: 50,
                                                 cells: record.map((value) {
                                                   return TableViewCell(
                                                     child: Text(value),
@@ -608,7 +608,7 @@ class PreventiveChecklistListContentWeb
                                               ),
                                             ].map((_preventiveCheckList) {
                                               return TableViewRow(
-                                                  height: 60,
+                                                  height: 50,
                                                   cells: _preventiveCheckList
                                                       .map((value) {
                                                     return TableViewCell(

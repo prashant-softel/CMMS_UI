@@ -311,7 +311,7 @@ class PmScheduleContentWeb extends GetView<PmScheduleController> {
                                           ),
                                         ].map((record) {
                                           return TableViewRow(
-                                            height: 80,
+                                            height: 60,
                                             cells: record.map((value) {
                                               if (value == record[0] ||
                                                   value == record[1])
