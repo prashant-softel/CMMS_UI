@@ -115,7 +115,7 @@ class UpdateNewPermitDialog extends GetView {
                 Get.back();
                 Get.offAndToNamed(Routes.newPermitList);
                 _controller.getNewPermitList(
-                    _controller.facilityId, _controller.userId,_controller.formattedTodate, _controller.formattedFromdate, false);
+                    _controller.facilityId, _controller.userId,_controller.formattedTodate, _controller.formattedFromdate, false, false);
               },
               child: const Text('Ok'),
             ),

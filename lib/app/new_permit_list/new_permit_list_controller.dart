@@ -3,23 +3,18 @@ import 'dart:async';
 import 'package:cmms/app/constant/constant.dart';
 import 'package:cmms/app/home/home_controller.dart';
 import 'package:cmms/app/navigators/app_pages.dart';
-import 'package:cmms/app/widgets/permit_approve_message_dialog.dart';
-import 'package:cmms/app/widgets/permit_issue_message_dialog.dart';
 import 'package:cmms/domain/models/facility_model.dart';
-import 'package:cmms/domain/models/job_model.dart';
 import 'package:cmms/domain/models/new_permit_list_model.dart';
 import 'package:cmms/app/new_permit_list/new_permit_list_presenter.dart';
 import 'package:cmms/domain/models/permit_issue_model.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
-import 'package:pull_to_refresh/pull_to_refresh.dart';
 import 'package:rxdart/subjects.dart';
 import 'package:scrollable_table_view/scrollable_table_view.dart';
 
 import '../../../domain/models/block_model.dart';
-// import '../navigators/app_pages.dart';
-// import 'job_list_presenter.dart';
+
 
 class NewPermitListController extends GetxController {
   ///
@@ -95,16 +90,13 @@ class NewPermitListController extends GetxController {
     facilityIdStreamSubscription = controller.facilityId$.listen((event) {
       facilityId = event;
       Future.delayed(Duration(seconds: 1), () {
-        getNewPermitList(facilityId, userId,formattedTodate, formattedFromdate, false);
+        getNewPermitList(facilityId, userId,formattedTodate, formattedFromdate, true, false);
       });
     });
 
     Future.delayed(Duration(seconds: 1), () {
       getFacilityList(isLoading: true);
 
-      // Future.delayed(Duration(milliseconds: 500), () {
-      //   getPermitIssueButton();
-      // });
     });
 
     super.onInit();
@@ -113,7 +105,7 @@ class NewPermitListController extends GetxController {
   void switchFacility(String? facilityName) {
     facilityId =
         facilityList.indexWhere((facility) => facility?.name == facilityName);
-    getNewPermitList(facilityId, userId,formattedTodate, formattedFromdate, false);
+    // getNewPermitList(facilityId, userId,formattedTodate, formattedFromdate, false, false);
   }
 
   Future<void> getFacilityList({bool? isLoading}) async {
@@ -143,14 +135,18 @@ class NewPermitListController extends GetxController {
   }
 
   Future<void> getNewPermitList(int facilityId, int userId,dynamic startDate,
-      dynamic endDate, bool isLoading) async {
+      dynamic endDate, bool isLoading, bool self_view) async {
     newPermitList!.value = <NewPermitModel>[];
     final _newPermitList = await newPermitListPresenter.getNewPermitList(
         facilityId: facilityId,
         isLoading: isLoading,
         start_date: startDate, //// "2020-01-01",
         end_date: endDate,
-        userId: userId);
+        userId: userId,
+        self_view:  varUserAccessModel.value.access_list!.where((e) =>
+         e.feature_id == 3 && 
+         e.selfView == 1).length > 0 ? true : false
+        );
 
     if (_newPermitList != null) {
       newPermitList!.value = _newPermitList;
@@ -299,7 +295,7 @@ class NewPermitListController extends GetxController {
 
   void getNewPermitListByDate() {
     getNewPermitList(
-        facilityId, userId, formattedFromdate, formattedTodate, false);
+        facilityId, userId, formattedFromdate, formattedTodate, false, false);
   }
 
   //  Future<void> viewPermit({int? id}) async {
