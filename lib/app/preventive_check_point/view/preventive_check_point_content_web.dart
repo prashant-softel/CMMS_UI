@@ -528,7 +528,7 @@ class PreventiveCheckPointContentWeb
                                               ),
                                             ].map((record) {
                                               return TableViewRow(
-                                                height: 60,
+                                                height: 50,
                                                 cells: record.map((value) {
                                                   return TableViewCell(
                                                     child: Text(value),
@@ -577,7 +577,7 @@ class PreventiveCheckPointContentWeb
                                             ),
                                           ].map((record) {
                                             return TableViewRow(
-                                              height: 60,
+                                              height: 50,
                                               cells: record.map((value) {
                                                 return TableViewCell(
                                                   child: (value == "Action")

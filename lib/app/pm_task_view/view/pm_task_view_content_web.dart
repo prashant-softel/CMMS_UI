@@ -296,79 +296,79 @@ class PreventiveMaintenanceTaskViewContentWeb
                                       )
                                     : Dimens.box0,
                                 Dimens.boxHeight30,
-                                Container(
-                                  margin: Dimens.edgeInsets20,
-                                  height: 200,
-                                  decoration: BoxDecoration(
-                                    border: Border.all(
-                                      color: ColorValues
-                                          .lightGreyColorWithOpacity35,
-                                      width: 1,
-                                    ),
-                                    boxShadow: [
-                                      BoxShadow(
-                                        color:
-                                            ColorValues.appBlueBackgroundColor,
-                                        spreadRadius: 2,
-                                        blurRadius: 5,
-                                        offset: Offset(0, 2),
-                                      ),
-                                    ],
-                                  ),
-                                  child: Column(
-                                    children: [
-                                      Padding(
-                                        padding: const EdgeInsets.all(10.0),
-                                        child: Row(
-                                          children: [
-                                            Text(
-                                              "Associated Job(s) ",
-                                              style: Styles.blue700,
-                                            ),
-                                          ],
-                                        ),
-                                      ),
-                                      Divider(
-                                        color: ColorValues.greyLightColour,
-                                      ),
-                                      Expanded(
-                                        child: ScrollableTableView(
-                                          columns: [
-                                            "Job ID",
-                                            "Check Point No.",
-                                            "Job Title",
-                                            "Job Date",
-                                            "Job Status",
-                                          ].map((column) {
-                                            return TableViewColumn(
-                                              label: column,
-                                              minWidth: Get.width * 0.15,
-                                            );
-                                          }).toList(),
-                                          rows: [
-                                            [
-                                              "JQ325890",
-                                              "2234",
-                                              "Check and clean charging module",
-                                              "2022-04-05",
-                                              "In Progress",
-                                            ],
-                                          ].map((record) {
-                                            return TableViewRow(
-                                              height: 90,
-                                              cells: record.map((value) {
-                                                return TableViewCell(
-                                                  child: Text(value),
-                                                );
-                                              }).toList(),
-                                            );
-                                          }).toList(),
-                                        ),
-                                      ),
-                                    ],
-                                  ),
-                                ),
-                                Dimens.boxHeight30,
+                                // Container(
+                                //   margin: Dimens.edgeInsets20,
+                                //   height: 200,
+                                //   decoration: BoxDecoration(
+                                //     border: Border.all(
+                                //       color: ColorValues
+                                //           .lightGreyColorWithOpacity35,
+                                //       width: 1,
+                                //     ),
+                                //     boxShadow: [
+                                //       BoxShadow(
+                                //         color:
+                                //             ColorValues.appBlueBackgroundColor,
+                                //         spreadRadius: 2,
+                                //         blurRadius: 5,
+                                //         offset: Offset(0, 2),
+                                //       ),
+                                //     ],
+                                //   ),
+                                //   child: Column(
+                                //     children: [
+                                //       Padding(
+                                //         padding: const EdgeInsets.all(10.0),
+                                //         child: Row(
+                                //           children: [
+                                //             Text(
+                                //               "Associated Job(s) ",
+                                //               style: Styles.blue700,
+                                //             ),
+                                //           ],
+                                //         ),
+                                //       ),
+                                //       Divider(
+                                //         color: ColorValues.greyLightColour,
+                                //       ),
+                                //       Expanded(
+                                //         child: ScrollableTableView(
+                                //           columns: [
+                                //             "Job ID",
+                                //             "Check Point No.",
+                                //             "Job Title",
+                                //             "Job Date",
+                                //             "Job Status",
+                                //           ].map((column) {
+                                //             return TableViewColumn(
+                                //               label: column,
+                                //               minWidth: Get.width * 0.15,
+                                //             );
+                                //           }).toList(),
+                                //           rows: [
+                                //             [
+                                //               "JQ325890",
+                                //               "2234",
+                                //               "Check and clean charging module",
+                                //               "2022-04-05",
+                                //               "In Progress",
+                                //             ],
+                                //           ].map((record) {
+                                //             return TableViewRow(
+                                //               height: 90,
+                                //               cells: record.map((value) {
+                                //                 return TableViewCell(
+                                //                   child: Text(value),
+                                //                 );
+                                //               }).toList(),
+                                //             );
+                                //           }).toList(),
+                                //         ),
+                                //       ),
+                                //     ],
+                                //   ),
+                                // ),
+                                // Dimens.boxHeight30,
                                 (controller.historyLog != null &&
                                         controller.historyLog!.isNotEmpty)
                                     ? Container(
