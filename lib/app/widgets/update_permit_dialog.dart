@@ -26,17 +26,20 @@ class UpdateNewPermitDialog extends GetView {
         ),
         insetPadding: Dimens.edgeInsets10_0_10_0,
         contentPadding: EdgeInsets.zero,
-        title: Text(
-          '$data',
-          textAlign: TextAlign.center,
-          style: TextStyle(color: Colors.green),
-        ),
+        title: data == "Permit Updated Successfully"
+         ? Text("Permit Updation !!", textAlign: TextAlign.center, style: TextStyle(color: Colors.black))
+          : Text('Permit Re-Submission !!', textAlign: TextAlign.center, style: TextStyle(color: Colors.black)),
+        // Text(
+        //   '${data == }',
+        //   textAlign: TextAlign.center,
+        //   style: TextStyle(color: Colors.black),
+        // ),
         content: Builder(builder: (context) {
           var height = MediaQuery.of(context).size.height;
 
           return Container(
             padding: Dimens.edgeInsets05_0_5_0,
-            height: Responsive.isDesktop(context) ? 120 : 160,
+            height: Responsive.isDesktop(context) ? 100 : 160,
             width: double.infinity,
             child: Column(
                 crossAxisAlignment: CrossAxisAlignment.stretch,
@@ -47,11 +50,18 @@ class UpdateNewPermitDialog extends GetView {
                   ),
                   RichText(
                     text: TextSpan(
-                      text: 'Permit Updated Successfully with Permit Id ',
+                      text: 'The ',
                       style: DefaultTextStyle.of(context).style,
                       children: <TextSpan>[
+          TextSpan(text: '$data',
+           style: TextStyle(
+              color: Colors.green, // Set the desired text color
+              fontWeight: FontWeight.bold, // Set any additional styles as needed
+            ),
+          ),
+          TextSpan(text: ' with Permit Id '),
                         TextSpan(
-                          text: '$PtwId',
+                          text: '$PtwId.',
                           style: TextStyle(
                             color: Colors.blue, // Set the desired text color
                             fontWeight: FontWeight
@@ -59,7 +69,7 @@ class UpdateNewPermitDialog extends GetView {
                           ),
                         ),
                         TextSpan(
-                            text: '. Please Click on OK button to go back.'),
+                            text: '\n Please Click on OK button to go back.'),
                       ],
                     ),
                   ),

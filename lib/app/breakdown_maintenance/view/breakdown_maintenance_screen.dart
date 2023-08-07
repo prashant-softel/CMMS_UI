@@ -135,7 +135,7 @@ class BreakdownMaintenanceScreen
                       shrinkWrap: true,
                       primary: false,
                       padding: Dimens.edgeInsets15,
-                      crossAxisSpacing: 40,
+                      crossAxisSpacing: 70,
                       mainAxisSpacing: 6,
                       crossAxisCount: Responsive.isMobile(context) ? 2 : 5,
                       childAspectRatio: Responsive.isMobile(context)
@@ -163,38 +163,38 @@ class BreakdownMaintenanceScreen
                       shrinkWrap: true,
                       primary: false,
                       padding: Dimens.edgeInsets15,
-                      crossAxisSpacing: 40,
+                      crossAxisSpacing: 70,
                       mainAxisSpacing: 6,
                       crossAxisCount: Responsive.isMobile(context) ? 2 : 5,
                       childAspectRatio: Responsive.isMobile(context)
                           ? (itemWidth / itemHeight)
                           : (itemWidth / itemHeightWeb),
                       children: <Widget>[
-                        varUserAccessModel.value.access_list!
-                                      .where((e) =>
-                                          e.feature_id == 3 && e.add == 1)
-                                      .length >
-                                  0
-                              ?
+                        // varUserAccessModel.value.access_list!
+                        //               .where((e) =>
+                        //                   e.feature_id == 3 && e.add == 1)
+                        //               .length >
+                        //           0
+                        //       ?
                         createContentTile(
                             title: "Permit List",
                             onTap: () {
                               controller.newPermitList();
-                            })
-                            : Container(),
+                            }),
+                            // : Container(),
 
-                            varUserAccessModel.value.access_list!
-                                      .where((e) =>
-                                          e.feature_id == 3 && e.add == 1)
-                                      .length >
-                                  0
-                              ?
+                            // varUserAccessModel.value.access_list!
+                            //           .where((e) =>
+                            //               e.feature_id == 3 && e.add == 1)
+                            //           .length >
+                            //       0
+                            //   ?
                         createContentTile(
                             title: "Add New Permit",
                             onTap: () {
                               controller.createNewPermit();
                             })
-                            : Container(),
+                            // : Container(),
 
                       ],
                     ),
@@ -229,7 +229,7 @@ class BreakdownMaintenanceScreen
                       shrinkWrap: true,
                       primary: false,
                       padding: Dimens.edgeInsets15,
-                      crossAxisSpacing: 40,
+                      crossAxisSpacing: 70,
                       mainAxisSpacing: 6,
                       crossAxisCount: Responsive.isMobile(context) ? 2 : 5,
                       childAspectRatio: Responsive.isMobile(context)

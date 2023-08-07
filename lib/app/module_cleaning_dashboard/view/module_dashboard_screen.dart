@@ -19,7 +19,7 @@ class ModuleCleaningDashboardScreen
     final double itemHeight = (size.height - kToolbarHeight - 50) / 9;
     final double itemHeightWeb = (size.height - kToolbarHeight - 70) / 4;
 
-    final double itemWidth = size.width / 3;
+    final double itemWidth = size.width / 2;
 
     return Scaffold(
       appBar: Responsive.isDesktop(context)
@@ -42,6 +42,9 @@ class ModuleCleaningDashboardScreen
         height: Get.height,
         child: Row(
           children: [
+            SizedBox(
+              height: 40,
+            ),
             (Responsive.isMobile(context) || Responsive.isTablet(context))
                 ? Dimens.box0
                 :
@@ -63,19 +66,35 @@ class ModuleCleaningDashboardScreen
                     if (Responsive.isDesktop(context))
                       Container(
                         margin: EdgeInsets.only(left: 20),
-                        child: Text(
-                          " Dashboard /  MODULE CLEANING",
-                          style: TextStyle(
-                              color: Color.fromARGB(255, 159, 156, 156),
-                              fontSize: 24,
-                              fontWeight: FontWeight.w400),
+                        child: Row(
+                          children: [
+                            Text(
+                              "Module Cleaning",
+                              style: TextStyle(
+                                color: Color.fromARGB(255, 159, 156, 156),
+                                fontSize: 16,
+                                fontWeight: FontWeight.w400,
+                              ),
+                            ),
+                            SizedBox(
+                                width:
+                                10), // Add some space between the text and the line
+                            Expanded(
+                              child: Divider(
+                                color: Colors
+                                    .grey, // Customize the color of the line if needed
+                                height:
+                                1, // Adjust the height of the line if needed
+                              ),
+                            ),
+                          ],
                         ),
                       ),
                     GridView.count(
                       shrinkWrap: true,
                       primary: false,
                       padding: const EdgeInsets.all(16),
-                      crossAxisSpacing: 40,
+                      crossAxisSpacing: 70,
                       mainAxisSpacing: 6,
                       crossAxisCount: Responsive.isMobile(context) ? 2 : 5,
                       childAspectRatio: Responsive.isMobile(context)

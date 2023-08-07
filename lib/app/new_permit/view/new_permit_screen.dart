@@ -485,247 +485,245 @@ class NewPermitScreen extends GetView<NewPermitController> {
                                                               BoxConstraints(
                                                             maxWidth: 1100,
                                                           ),
-                                                          child:
-                                                              SingleChildScrollView(
-                                                            child: Column(
-                                                              children: [
-                                                                CustomAppBar(
-                                                                  title: ''.tr,
-                                                                  action:
-                                                                      ActionButton(
-                                                                    label:
-                                                                        'Add New',
-                                                                    icon: Icons
-                                                                        .add,
-                                                                    onPressed:
-                                                                        () {
-                                                                      //  showEquipmentNameAlertBox();
+                                                          child: Column(
+                                                            children: [
+                                                              CustomAppBar(
+                                                                title: ''.tr,
+                                                                action:
+                                                                    ActionButton(
+                                                                  label:
+                                                                      'Add New',
+                                                                  icon:
+                                                                      Icons.add,
+                                                                  onPressed:
+                                                                      () {
+                                                                    //  showEquipmentNameAlertBox();
 
-                                                                      Get.dialog<
-                                                                              void>(
-                                                                          showEquipmentNameAlertBox());
-                                                                    },
-                                                                    color: Colors
-                                                                        .green,
-                                                                  ),
+                                                                    Get.dialog<
+                                                                            void>(
+                                                                        showEquipmentNameAlertBox());
+                                                                  },
+                                                                  color: Colors
+                                                                      .green,
                                                                 ),
-                                                                Dimens
-                                                                    .boxHeight10,
-                                                                Wrap(
-                                                                  children: [
-                                                                    Column(
-                                                                      children: [
-                                                                        ///Put Loto applied here
+                                                              ),
+                                                              Dimens
+                                                                  .boxHeight10,
+                                                              Wrap(
+                                                                children: [
+                                                                  Column(
+                                                                    children: [
+                                                                      ///Put Loto applied here
 
-                                                                        // SizedBox(
-                                                                        //   width: MediaQuery.of(context)
-                                                                        //           .size
-                                                                        //           .width /
-                                                                        //       1.2,
-                                                                        //   child:
-                                                                        //       Divider(
-                                                                        //     thickness:
-                                                                        //         2,
-                                                                        //   ),
-                                                                        // ),
-                                                                        SizedBox(
-                                                                          width:
-                                                                              MediaQuery.of(context).size.height * 2,
-                                                                          child:
-                                                                              Container(
-                                                                            height:
-                                                                                Get.height,
-                                                                            child: Column(
-                                                                                //
-                                                                                children: [
-                                                                                  Expanded(
-                                                                                    child: //
-                                                                                        ScrollableTableView(
-                                                                                      // paginationController: controller.equipmentNamepaginationController,
-                                                                                      columns: [
-                                                                                        'name',
-                                                                                        'serialNumber',
-                                                                                        // 'approved_datetime',
-                                                                                        // 'equipment',
-                                                                                        // 'workingAreaId',
-                                                                                        // 'description',
-                                                                                        // 'permitTypeName',
-                                                                                        // 'raisedByName',
-                                                                                        // 'breakdownTime',
-                                                                                        // 'breakdownType',
-                                                                                        // 'permitId',
-                                                                                        // 'assignedToName',
-                                                                                        // 'status',
-                                                                                        'action'.tr,
-                                                                                      ].map((column) {
-                                                                                        return TableViewColumn(
-                                                                                          minWidth: Get.width * 0.25,
-                                                                                          label: column == "name"
-                                                                                              ? "Loto Applied On"
-                                                                                              : column == "serialNumber"
-                                                                                                  ? "Serial Number"
-                                                                                                  //     : column == "approved_datetime"
-                                                                                                  //         ? "Approved Time"
-                                                                                                  //         : column == "equipment"
-                                                                                                  //             ? "Equipment" //
-                                                                                                  //             : column == "workingAreaId"
-                                                                                                  //                 ? "Working Area Id"
-                                                                                                  //                 : column == "description"
-                                                                                                  //                     ? "Description"
-                                                                                                  //                     : column == "permitTypeName"
-                                                                                                  //                         ? "Work Type"
-
-                                                                                                  : "Action",
-                                                                                        );
-                                                                                      }).toList(),
-                                                                                      rows: //
-                                                                                          [
-                                                                                        ...List.generate(
-                                                                                          ///controller.selectedEquipmentNameIdList
-                                                                                          controller.filteredEquipmentNameList.length,
-
-                                                                                          (index) {
-                                                                                            var inventoryEquipmentName = controller.filteredEquipmentNameList[index];
-
-                                                                                            //_jobId = jobDetails?.id;
-
-                                                                                            controller.id.value = inventoryEquipmentName?.id ?? 0;
-                                                                                            print('Equipment Isss5:${controller.id.value}');
-                                                                                            return [
-                                                                                              '${inventoryEquipmentName?.name ?? ''}',
-                                                                                              '${inventoryEquipmentName?.serialNumber ?? ''}',
-                                                                                              // '${newPermitDetails?.approved_datetime}',
-                                                                                              // '${newPermitDetails?.equipment}',
-                                                                                              // '${newPermitDetails?.workingAreaId}',
-                                                                                              // '${newPermitDetails?.description}',
-                                                                                              // '${newPermitDetails?.permitTypeName}',
-                                                                                              // '${jobDetails?.workType}',
-                                                                                              // '${jobDetails?.raisedByName}',
-                                                                                              // '${jobDetails?.breakdownTime ?? ''}',
-                                                                                              // '${jobDetails?.breakdownType}',
-                                                                                              // '${jobDetails?.permitId}',
-                                                                                              // '${jobDetails?.assignedToName}',
-                                                                                              // '${jobDetails?.status}',
-                                                                                              'Actions'
-                                                                                            ];
-                                                                                          },
-                                                                                        ),
-                                                                                      ].map((_inventoryDetailList) {
-                                                                                        return TableViewRow(
-                                                                                            onTap: () => {
-                                                                                                  print('ZERO = ${_inventoryDetailList[0]}')
-                                                                                                },
-                                                                                            height: 45,
-                                                                                            cells: _inventoryDetailList.map((value) {
-                                                                                              return TableViewCell(
-                                                                                                //key: ,
-                                                                                                child: (value == 'Actions')
-                                                                                                    ? Wrap(
-                                                                                                        children: [
-                                                                                                          TableActionButton(
-                                                                                                            color: Colors.red,
-                                                                                                            icon: Icons.delete_outline,
-                                                                                                            message: 'Delete',
-                                                                                                            onPress: () {
-                                                                                                              // controller.showNewPermitListDetails(
-                                                                                                              //     controller.permitId.value);
-                                                                                                            },
-                                                                                                          ),
-                                                                                                          // TableActionButton(
-                                                                                                          //   color: ColorValues.purpleColor,
-                                                                                                          //   icon: Icons.add,
-                                                                                                          //   label: 'Job Card',
-                                                                                                          //   onPress: () {
-                                                                                                          //     // controller.goToJobCardScreen(
-                                                                                                          //     //   int.tryParse(_newPermitList[0]),
-                                                                                                          //     // );
-                                                                                                          //   },
-                                                                                                          // ),
-                                                                                                          // TableActionButton(
-                                                                                                          //   color: Colors.blue,
-                                                                                                          //   icon: Icons.edit,
-                                                                                                          //   label: 'Edit PTW',
-                                                                                                          //   onPress: () {},
-                                                                                                          // ),
-                                                                                                          // TableActionButton(
-                                                                                                          //   color: Colors.green,
-                                                                                                          //   icon: Icons.visibility,
-                                                                                                          //   label: 'Approve Request',
-                                                                                                          //   onPress: () {},
-                                                                                                          // ),
-                                                                                                          // TableActionButton(
-                                                                                                          //   color: Colors.red,
-                                                                                                          //   icon: Icons.visibility,
-                                                                                                          //   label: 'Reject Request',
-                                                                                                          //   onPress: () {},
-                                                                                                          // ),
-                                                                                                        ],
-                                                                                                      )
-                                                                                                    : Text(value.toString()),
-                                                                                              );
-                                                                                            }).toList());
-                                                                                      }).toList(),
-                                                                                    ),
-                                                                                  ),
-
-                                                                                  /// PAGINATION
-                                                                                  Padding(
-                                                                                    padding: const EdgeInsets.symmetric(horizontal: 25),
-                                                                                    child: ValueListenableBuilder(
-                                                                                        valueListenable: controller.inventoryDetailPaginationController,
-                                                                                        builder: (context, value, child) {
-                                                                                          return Row(children: [
-                                                                                            Text("${controller.inventoryDetailPaginationController.currentPage}  of ${controller.inventoryDetailPaginationController.pageCount}"),
-                                                                                            Row(children: [
-                                                                                              IconButton(
-                                                                                                onPressed: controller.inventoryDetailPaginationController.currentPage <= 1
-                                                                                                    ? null
-                                                                                                    : () {
-                                                                                                        controller.inventoryDetailPaginationController.previous();
-                                                                                                      },
-                                                                                                iconSize: 20,
-                                                                                                splashRadius: 20,
-                                                                                                icon: Icon(
-                                                                                                  Icons.arrow_back_ios_new_rounded,
-                                                                                                  color: controller.inventoryDetailPaginationController.currentPage <= 1 ? Colors.black26 : Theme.of(context).primaryColor,
-                                                                                                ),
-                                                                                              ),
-                                                                                              IconButton(
-                                                                                                onPressed: controller.inventoryDetailPaginationController.currentPage >= controller.inventoryDetailPaginationController.pageCount
-                                                                                                    ? null
-                                                                                                    : () {
-                                                                                                        controller.inventoryDetailPaginationController.next();
-                                                                                                      },
-                                                                                                iconSize: 20,
-                                                                                                splashRadius: 20,
-                                                                                                icon: Icon(
-                                                                                                  Icons.arrow_forward_ios_rounded,
-                                                                                                  color: controller.inventoryDetailPaginationController.currentPage >= controller.inventoryDetailPaginationController.pageCount ? Colors.black26 : Theme.of(context).primaryColor,
-                                                                                                ),
-                                                                                              ),
-                                                                                            ]),
-                                                                                          ]);
-                                                                                        }),
-                                                                                  ),
-                                                                                ]),
-                                                                          ),
-                                                                        ),
-
-                                                                        SizedBox(
-                                                                          width:
-                                                                              MediaQuery.of(context).size.width / 1.2,
-                                                                          child:
-                                                                              Divider(
-                                                                            thickness:
+                                                                      // SizedBox(
+                                                                      //   width: MediaQuery.of(context)
+                                                                      //           .size
+                                                                      //           .width /
+                                                                      //       1.2,
+                                                                      //   child:
+                                                                      //       Divider(
+                                                                      //     thickness:
+                                                                      //         2,
+                                                                      //   ),
+                                                                      // ),
+                                                                      SizedBox(
+                                                                        width:
+                                                                            MediaQuery.of(context).size.height *
                                                                                 2,
-                                                                          ),
+                                                                        child:
+                                                                            Container(
+                                                                          height:
+                                                                              Get.height,
+                                                                          child: Column(
+                                                                              //
+                                                                              children: [
+                                                                                Expanded(
+                                                                                  child: //
+                                                                                      ScrollableTableView(
+                                                                                    // paginationController: controller.equipmentNamepaginationController,
+                                                                                    columns: [
+                                                                                      'name',
+                                                                                      'serialNumber',
+                                                                                      // 'approved_datetime',
+                                                                                      // 'equipment',
+                                                                                      // 'workingAreaId',
+                                                                                      // 'description',
+                                                                                      // 'permitTypeName',
+                                                                                      // 'raisedByName',
+                                                                                      // 'breakdownTime',
+                                                                                      // 'breakdownType',
+                                                                                      // 'permitId',
+                                                                                      // 'assignedToName',
+                                                                                      // 'status',
+                                                                                      'action'.tr,
+                                                                                    ].map((column) {
+                                                                                      return TableViewColumn(
+                                                                                        minWidth: Get.width * 0.25,
+                                                                                        label: column == "name"
+                                                                                            ? "Loto Applied On"
+                                                                                            : column == "serialNumber"
+                                                                                                ? "Serial Number"
+                                                                                                //     : column == "approved_datetime"
+                                                                                                //         ? "Approved Time"
+                                                                                                //         : column == "equipment"
+                                                                                                //             ? "Equipment" //
+                                                                                                //             : column == "workingAreaId"
+                                                                                                //                 ? "Working Area Id"
+                                                                                                //                 : column == "description"
+                                                                                                //                     ? "Description"
+                                                                                                //                     : column == "permitTypeName"
+                                                                                                //                         ? "Work Type"
+
+                                                                                                : "Action",
+                                                                                      );
+                                                                                    }).toList(),
+                                                                                    rows: //
+                                                                                        [
+                                                                                      ...List.generate(
+                                                                                        ///controller.selectedEquipmentNameIdList
+                                                                                        controller.filteredEquipmentNameList.length,
+
+                                                                                        (index) {
+                                                                                          var inventoryEquipmentName = controller.filteredEquipmentNameList[index];
+
+                                                                                          //_jobId = jobDetails?.id;
+
+                                                                                          controller.id.value = inventoryEquipmentName?.id ?? 0;
+                                                                                          print('Equipment Isss5:${controller.id.value}');
+                                                                                          return [
+                                                                                            '${inventoryEquipmentName?.name ?? ''}',
+                                                                                            '${inventoryEquipmentName?.serialNumber ?? ''}',
+                                                                                            // '${newPermitDetails?.approved_datetime}',
+                                                                                            // '${newPermitDetails?.equipment}',
+                                                                                            // '${newPermitDetails?.workingAreaId}',
+                                                                                            // '${newPermitDetails?.description}',
+                                                                                            // '${newPermitDetails?.permitTypeName}',
+                                                                                            // '${jobDetails?.workType}',
+                                                                                            // '${jobDetails?.raisedByName}',
+                                                                                            // '${jobDetails?.breakdownTime ?? ''}',
+                                                                                            // '${jobDetails?.breakdownType}',
+                                                                                            // '${jobDetails?.permitId}',
+                                                                                            // '${jobDetails?.assignedToName}',
+                                                                                            // '${jobDetails?.status}',
+                                                                                            'Actions'
+                                                                                          ];
+                                                                                        },
+                                                                                      ),
+                                                                                    ].map((_inventoryDetailList) {
+                                                                                      return TableViewRow(
+                                                                                          onTap: () => {
+                                                                                                print('ZERO = ${_inventoryDetailList[0]}')
+                                                                                              },
+                                                                                          height: 45,
+                                                                                          cells: _inventoryDetailList.map((value) {
+                                                                                            return TableViewCell(
+                                                                                              //key: ,
+                                                                                              child: (value == 'Actions')
+                                                                                                  ? Wrap(
+                                                                                                      children: [
+                                                                                                        TableActionButton(
+                                                                                                          color: Colors.red,
+                                                                                                          icon: Icons.delete_outline,
+                                                                                                          message: 'Delete',
+                                                                                                          onPress: () {
+                                                                                                            // controller.showNewPermitListDetails(
+                                                                                                            //     controller.permitId.value);
+                                                                                                          },
+                                                                                                        ),
+                                                                                                        // TableActionButton(
+                                                                                                        //   color: ColorValues.purpleColor,
+                                                                                                        //   icon: Icons.add,
+                                                                                                        //   label: 'Job Card',
+                                                                                                        //   onPress: () {
+                                                                                                        //     // controller.goToJobCardScreen(
+                                                                                                        //     //   int.tryParse(_newPermitList[0]),
+                                                                                                        //     // );
+                                                                                                        //   },
+                                                                                                        // ),
+                                                                                                        // TableActionButton(
+                                                                                                        //   color: Colors.blue,
+                                                                                                        //   icon: Icons.edit,
+                                                                                                        //   label: 'Edit PTW',
+                                                                                                        //   onPress: () {},
+                                                                                                        // ),
+                                                                                                        // TableActionButton(
+                                                                                                        //   color: Colors.green,
+                                                                                                        //   icon: Icons.visibility,
+                                                                                                        //   label: 'Approve Request',
+                                                                                                        //   onPress: () {},
+                                                                                                        // ),
+                                                                                                        // TableActionButton(
+                                                                                                        //   color: Colors.red,
+                                                                                                        //   icon: Icons.visibility,
+                                                                                                        //   label: 'Reject Request',
+                                                                                                        //   onPress: () {},
+                                                                                                        // ),
+                                                                                                      ],
+                                                                                                    )
+                                                                                                  : Text(value.toString()),
+                                                                                            );
+                                                                                          }).toList());
+                                                                                    }).toList(),
+                                                                                  ),
+                                                                                ),
+
+                                                                                /// PAGINATION
+                                                                                Padding(
+                                                                                  padding: const EdgeInsets.symmetric(horizontal: 25),
+                                                                                  child: ValueListenableBuilder(
+                                                                                      valueListenable: controller.inventoryDetailPaginationController,
+                                                                                      builder: (context, value, child) {
+                                                                                        return Row(children: [
+                                                                                          Text("${controller.inventoryDetailPaginationController.currentPage}  of ${controller.inventoryDetailPaginationController.pageCount}"),
+                                                                                          Row(children: [
+                                                                                            IconButton(
+                                                                                              onPressed: controller.inventoryDetailPaginationController.currentPage <= 1
+                                                                                                  ? null
+                                                                                                  : () {
+                                                                                                      controller.inventoryDetailPaginationController.previous();
+                                                                                                    },
+                                                                                              iconSize: 20,
+                                                                                              splashRadius: 20,
+                                                                                              icon: Icon(
+                                                                                                Icons.arrow_back_ios_new_rounded,
+                                                                                                color: controller.inventoryDetailPaginationController.currentPage <= 1 ? Colors.black26 : Theme.of(context).primaryColor,
+                                                                                              ),
+                                                                                            ),
+                                                                                            IconButton(
+                                                                                              onPressed: controller.inventoryDetailPaginationController.currentPage >= controller.inventoryDetailPaginationController.pageCount
+                                                                                                  ? null
+                                                                                                  : () {
+                                                                                                      controller.inventoryDetailPaginationController.next();
+                                                                                                    },
+                                                                                              iconSize: 20,
+                                                                                              splashRadius: 20,
+                                                                                              icon: Icon(
+                                                                                                Icons.arrow_forward_ios_rounded,
+                                                                                                color: controller.inventoryDetailPaginationController.currentPage >= controller.inventoryDetailPaginationController.pageCount ? Colors.black26 : Theme.of(context).primaryColor,
+                                                                                              ),
+                                                                                            ),
+                                                                                          ]),
+                                                                                        ]);
+                                                                                      }),
+                                                                                ),
+                                                                              ]),
                                                                         ),
-                                                                      ],
-                                                                    )
-                                                                  ],
-                                                                ),
-                                                              ],
-                                                            ),
+                                                                      ),
+
+                                                                      SizedBox(
+                                                                        width: MediaQuery.of(context).size.width /
+                                                                            1.2,
+                                                                        child:
+                                                                            Divider(
+                                                                          thickness:
+                                                                              2,
+                                                                        ),
+                                                                      ),
+                                                                    ],
+                                                                  )
+                                                                ],
+                                                              ),
+                                                            ],
                                                           ),
                                                         ),
                                                       ),
@@ -1549,25 +1547,27 @@ class NewPermitScreen extends GetView<NewPermitController> {
                                                           FontWeight.bold),
                                                 ),
                                               ),
+
                                               SizedBox(
                                                 height: 20,
                                               ),
                                               Row(
                                                 children: [
-                                                  SizedBox(
-                                                    width: 35,
-                                                  ),
-                                                  CustomRichText(
-                                                      title: 'Block/Plot: '),
-                                                  SizedBox(
-                                                    width: 13,
+                                                  Container(
+                                                    margin: EdgeInsets.only(
+                                                        right: 13),
+                                                    alignment:
+                                                        Alignment.centerRight,
+                                                    width: 172,
+                                                    child: CustomRichText(
+                                                        title: 'Block/Plot: '),
                                                   ),
                                                   SizedBox(
                                                     width:
                                                         MediaQuery.of(context)
                                                                 .size
                                                                 .width /
-                                                            3.70,
+                                                            5,
 
                                                     child: Obx(
                                                       () => DropdownWebWidget(
@@ -1589,7 +1589,7 @@ class NewPermitScreen extends GetView<NewPermitController> {
                                                     // LoginCustomTextfield(),
                                                   ),
                                                   SizedBox(
-                                                    width: 40,
+                                                    width: 20,
                                                   ),
                                                   CustomRichText(
                                                       title:
@@ -1603,7 +1603,7 @@ class NewPermitScreen extends GetView<NewPermitController> {
                                                                       context)
                                                                   .size
                                                                   .width /
-                                                              3.7,
+                                                              5,
                                                           child:
                                                               CustomMultiSelectDialogField(
                                                             title:
@@ -1645,7 +1645,7 @@ class NewPermitScreen extends GetView<NewPermitController> {
                                                                       context)
                                                                   .size
                                                                   .width /
-                                                              3.7,
+                                                              5,
                                                           child:
                                                               CustomMultiSelectDialogField(
                                                             title:
@@ -1684,65 +1684,49 @@ class NewPermitScreen extends GetView<NewPermitController> {
                                                         ),
                                                 ],
                                               ),
-                                              Padding(
-                                                padding: const EdgeInsets.only(
-                                                    left: 10,),
-                                                child: Row(
-                                                  mainAxisAlignment:
-                                                      MainAxisAlignment.start,
-                                                  children: [
-                                                    // CustomRichText(
-                                                    //     title: 'Block/Plot: '),
-                                                    // // SizedBox(
-                                                    // //   width: 5,
-                                                    // // ),
-                                                    // SizedBox(
-                                                    //   width: MediaQuery.of(context).size.width / 3.5,
-                                                    //   child: Obx(
-                                                    //     ()=> DropdownWebWidget(
-                                                    //       dropdownList:controller.blockList,
-                                                    //       isValueSelected: controller.isBlockSelected.value,
-                                                    //       selectedValue: controller.selectedBlock.value,
-                                                    //       onValueChanged:controller.onValueChanged,
-                                                    //     ),
-                                                    //   ),
-                                                    //   // LoginCustomTextfield(),
-                                                    // ),
-
-                                                    CustomRichText(
+                                              SizedBox(
+                                                height: 10,
+                                              ),
+                                              Row(
+                                                mainAxisAlignment:
+                                                    MainAxisAlignment.start,
+                                                children: [
+                                                  Container(
+                                                    margin: EdgeInsets.only(
+                                                        right: 13),
+                                                    alignment:
+                                                        Alignment.centerRight,
+                                                    width: 172,
+                                                    child: CustomRichText(
                                                         title:
                                                             'Type of permit: '),
-                                                    SizedBox(
-                                                      width: 13,
-                                                    ),
-                                                    SizedBox(
-                                                      width:
-                                                          MediaQuery.of(context)
-                                                                  .size
-                                                                  .width /
-                                                              3.70,
-                                                      child: Obx(
-                                                        () => DropdownWebWidget(
-                                                          dropdownList: controller
-                                                              .typePermitList,
-                                                          isValueSelected:
-                                                              controller
-                                                                  .isTypePermitSelected
-                                                                  .value,
-                                                          selectedValue: controller
-                                                              .selectedTypePermit
-                                                              .value,
-                                                          onValueChanged:
-                                                              controller
-                                                                  .onValueChanged,
-                                                        ),
+                                                  ),
+                                                  SizedBox(
+                                                    width:
+                                                        MediaQuery.of(context)
+                                                                .size
+                                                                .width /
+                                                            5,
+                                                    child: Obx(
+                                                      () => DropdownWebWidget(
+                                                        dropdownList: controller
+                                                            .typePermitList,
+                                                        isValueSelected: controller
+                                                            .isTypePermitSelected
+                                                            .value,
+                                                        selectedValue: controller
+                                                            .selectedTypePermit
+                                                            .value,
+                                                        onValueChanged:
+                                                            controller
+                                                                .onValueChanged,
                                                       ),
                                                     ),
-                                                    SizedBox(
-                                                      width: 60,
-                                                    ),
-                                                  ],
-                                                ),
+                                                  ),
+                                                  SizedBox(
+                                                    width: 60,
+                                                  ),
+                                                ],
                                               ),
                                               SizedBox(
                                                 height: 10,
@@ -1751,17 +1735,22 @@ class NewPermitScreen extends GetView<NewPermitController> {
                                                 mainAxisAlignment:
                                                     MainAxisAlignment.start,
                                                 children: [
-                                                  SizedBox(
-                                                    width: 40,
+                                                  Container(
+                                                    margin: EdgeInsets.only(
+                                                        right: 13),
+                                                    alignment:
+                                                        Alignment.centerRight,
+                                                    width: 172,
+                                                    child: CustomRichText(
+                                                        title: 'Start Date: '),
                                                   ),
-                                                  CustomRichText(
-                                                      title: 'Start Date: '),
+
                                                   _buildStartValidTillDateField_web(
                                                     context,
                                                     0,
                                                   ),
                                                   SizedBox(
-                                                    width: 120,
+                                                    width: 95,
                                                   ),
                                                   CustomRichText(
                                                       title: 'Valid Till: '),
@@ -1771,53 +1760,57 @@ class NewPermitScreen extends GetView<NewPermitController> {
                                                   //     context),
                                                 ],
                                               ),
-                                              
+
                                               Row(
                                                 children: [
-                                                  SizedBox(
-                                                    width: 70,
-                                                  ),
-                                                  CustomRichText(
-                                                      title: 'Title: '),
-                                                  SizedBox(
-                                                    width: 5,
+                                                  Container(
+                                                    margin: EdgeInsets.only(
+                                                        right: 13),
+                                                    alignment:
+                                                        Alignment.centerRight,
+                                                    width: 172,
+                                                    child: CustomRichText(
+                                                        title: 'Title: '),
                                                   ),
                                                   _buildTitleTextField_web(
                                                       context),
                                                 ],
                                               ),
-                                             
+                                              SizedBox(
+                                                height: 10,
+                                              ),
+
                                               Row(
                                                 children: [
-                                                  SizedBox(
-                                                    width: 20,
-                                                  ),
-                                                  SizedBox(
-                                                    width: 90,
+                                                  Container(
+                                                    margin: EdgeInsets.only(
+                                                        right: 13),
+                                                    alignment:
+                                                        Alignment.centerRight,
+                                                    width: 172,
                                                     child: CustomRichText(
                                                         title:
-                                                            'Work Permit Ref. No.: '),
-                                                  ),
-                                                  SizedBox(
-                                                    width: 5,
+                                                            'Permit Ref. No:'),
                                                   ),
                                                   _buildWorkPermitReferenceTextField_web(
                                                       context),
                                                 ],
                                               ),
-                                              
+
                                               Row(
                                                 children: [
                                                   SizedBox(
-                                                    width: 25,
+                                                    width: 10,
                                                   ),
-                                                  SizedBox(
-                                                      width: 90,
-                                                      child: CustomRichText(
-                                                          title:
-                                                              'Work Description: ')),
-                                                  SizedBox(
-                                                    width: 8,
+                                                  Container(
+                                                    margin: EdgeInsets.only(
+                                                        right: 13),
+                                                    alignment:
+                                                        Alignment.centerRight,
+                                                    width: 165,
+                                                    child: CustomRichText(
+                                                        title:
+                                                            'Permit Description:'),
                                                   ),
                                                   _buildPermitDescriptionField_web(
                                                       context),
@@ -1873,7 +1866,7 @@ class NewPermitScreen extends GetView<NewPermitController> {
                                                                             context)
                                                                         .size
                                                                         .width /
-                                                                    2.5,
+                                                                    5,
                                                                 child:
                                                                     CustomMultiSelectDialogField(
                                                                   buttonText:
@@ -1914,7 +1907,7 @@ class NewPermitScreen extends GetView<NewPermitController> {
                                                                             context)
                                                                         .size
                                                                         .width /
-                                                                    2.5,
+                                                                    5,
                                                                 child:
                                                                     CustomMultiSelectDialogField(
                                                                   buttonText:
@@ -1989,328 +1982,325 @@ class NewPermitScreen extends GetView<NewPermitController> {
                                                               BoxConstraints(
                                                             maxWidth: 1100,
                                                           ),
-                                                          child:
-                                                              SingleChildScrollView(
-                                                            child: Column(
-                                                              children: [
-                                                                CustomAppBar(
-                                                                  title: ''.tr,
-                                                                  action:
-                                                                      ActionButton(
-                                                                    label:
-                                                                        'Add New',
-                                                                    icon: Icons
-                                                                        .add,
-                                                                    onPressed:
-                                                                        () {
-                                                                      //  showEquipmentNameAlertBox();
-                                                                      Get.dialog<
-                                                                              void>(
-                                                                          showEquipmentNameAlertBox());
-                                                                    },
-                                                                    color: Colors
-                                                                        .green,
-                                                                  ),
+                                                          child: Column(
+                                                            children: [
+                                                              CustomAppBar(
+                                                                title: ''.tr,
+                                                                action:
+                                                                    ActionButton(
+                                                                  label:
+                                                                      'Add New',
+                                                                  icon:
+                                                                      Icons.add,
+                                                                  onPressed:
+                                                                      () {
+                                                                    //  showEquipmentNameAlertBox();
+                                                                    Get.dialog<
+                                                                            void>(
+                                                                        showEquipmentNameAlertBox());
+                                                                  },
+                                                                  color: Colors
+                                                                      .green,
                                                                 ),
-                                                                Dimens
-                                                                    .boxHeight10,
-                                                                Wrap(
-                                                                  children: [
-                                                                    Column(
-                                                                      children: [
-                                                                        ///Put Loto applied here
+                                                              ),
+                                                              Dimens
+                                                                  .boxHeight10,
+                                                              Wrap(
+                                                                children: [
+                                                                  Column(
+                                                                    children: [
+                                                                      ///Put Loto applied here
 
-                                                                        // SizedBox(
-                                                                        //   width: MediaQuery.of(context)
-                                                                        //           .size
-                                                                        //           .width /
-                                                                        //       1.2,
-                                                                        //   child:
-                                                                        //       Divider(
-                                                                        //     thickness:
-                                                                        //         2,
-                                                                        //   ),
-                                                                        // ),
-                                                                        controller.permitId.value >
-                                                                                0
-                                                                            ? SizedBox(
-                                                                                width: MediaQuery.of(context).size.width * 2,
-                                                                                child: Container(
-                                                                                  height: 210,
-                                                                                  child: Column(
-                                                                                      //
-                                                                                      children: [
-                                                                                        Expanded(
-                                                                                          child: //
-                                                                                              ScrollableTableView(
-                                                                                            // paginationController: controller.equipmentNamepaginationController,
-                                                                                            columns: [
-                                                                                              'name',
-                                                                                              'serialNumber',
-                                                                                              'action'.tr,
-                                                                                            ].map((column) {
-                                                                                              return TableViewColumn(
-                                                                                                minWidth: Get.width * 0.25,
-                                                                                                label: column == "name"
-                                                                                                    ? "Loto Applied On"
-                                                                                                    : column == "serialNumber"
-                                                                                                        ? "Serial Number"
-                                                                                                        : "Action",
-                                                                                              );
-                                                                                            }).toList(),
-                                                                                            rows: //
-                                                                                                [
-                                                                                              ...List.generate(
-                                                                                                ///controller.selectedEquipmentNameIdList
-                                                                                                controller.listLoto!.length,
+                                                                      // SizedBox(
+                                                                      //   width: MediaQuery.of(context)
+                                                                      //           .size
+                                                                      //           .width /
+                                                                      //       1.2,
+                                                                      //   child:
+                                                                      //       Divider(
+                                                                      //     thickness:
+                                                                      //         2,
+                                                                      //   ),
+                                                                      // ),
+                                                                      controller.permitId.value >
+                                                                              0
+                                                                          ? SizedBox(
+                                                                              width: MediaQuery.of(context).size.width * 2,
+                                                                              child: Container(
+                                                                                height: 210,
+                                                                                child: Column(
+                                                                                    //
+                                                                                    children: [
+                                                                                      Expanded(
+                                                                                        child: //
+                                                                                            ScrollableTableView(
+                                                                                          // paginationController: controller.equipmentNamepaginationController,
+                                                                                          columns: [
+                                                                                            'name',
+                                                                                            'serialNumber',
+                                                                                            'action'.tr,
+                                                                                          ].map((column) {
+                                                                                            return TableViewColumn(
+                                                                                              minWidth: Get.width * 0.25,
+                                                                                              label: column == "name"
+                                                                                                  ? "Loto Applied On"
+                                                                                                  : column == "serialNumber"
+                                                                                                      ? "Serial Number"
+                                                                                                      : "Action",
+                                                                                            );
+                                                                                          }).toList(),
+                                                                                          rows: //
+                                                                                              [
+                                                                                            ...List.generate(
+                                                                                              ///controller.selectedEquipmentNameIdList
+                                                                                              controller.listLoto!.length,
 
-                                                                                                (index) {
-                                                                                                  var inventoryEquipmentName = controller.listLoto![index];
+                                                                                              (index) {
+                                                                                                var inventoryEquipmentName = controller.listLoto![index];
 
-                                                                                                  //_jobId = jobDetails?.id;
+                                                                                                //_jobId = jobDetails?.id;
 
-                                                                                                  // controller.id.value = inventoryEquipmentName?.id ?? 0;
-                                                                                                  print('Equipment Isss5:${controller.id.value}');
-                                                                                                  return [
-                                                                                                    '${inventoryEquipmentName?.asset_name ?? ''}',
-                                                                                                    '${inventoryEquipmentName?.locksrno ?? ''}',
-                                                                                                    'Actions'
-                                                                                                  ];
-                                                                                                },
-                                                                                              ),
-                                                                                            ].map((_inventoryDetailList) {
-                                                                                              return TableViewRow(
-                                                                                                  onTap: () => {
-                                                                                                        print('ZERO = ${_inventoryDetailList[0]}')
-                                                                                                      },
-                                                                                                  // height: 45,
-                                                                                                  cells: _inventoryDetailList.map((value) {
-                                                                                                    return TableViewCell(
-                                                                                                      //key: ,
-                                                                                                      child: (value == 'Actions')
-                                                                                                          ? Wrap(
-                                                                                                              children: [
-                                                                                                                TableActionButton(
-                                                                                                                  color: Colors.red,
-                                                                                                                  icon: Icons.delete_outline,
-                                                                                                                  message: 'Remove',
-                                                                                                                  onPress: () {
-                                                                                                                    // controller.showNewPermitListDetails(
-                                                                                                                    //     controller.permitId.value);
-                                                                                                                  },
-                                                                                                                ),
-                                                                                                              ],
-                                                                                                            )
-                                                                                                          : Text(value.toString()),
-                                                                                                    );
-                                                                                                  }).toList());
-                                                                                            }).toList(),
-                                                                                          ),
+                                                                                                // controller.id.value = inventoryEquipmentName?.id ?? 0;
+                                                                                                print('Equipment Isss5:${controller.id.value}');
+                                                                                                return [
+                                                                                                  '${inventoryEquipmentName?.asset_name ?? ''}',
+                                                                                                  '${inventoryEquipmentName?.locksrno ?? ''}',
+                                                                                                  'Actions'
+                                                                                                ];
+                                                                                              },
+                                                                                            ),
+                                                                                          ].map((_inventoryDetailList) {
+                                                                                            return TableViewRow(
+                                                                                                onTap: () => {
+                                                                                                      print('ZERO = ${_inventoryDetailList[0]}')
+                                                                                                    },
+                                                                                                // height: 45,
+                                                                                                cells: _inventoryDetailList.map((value) {
+                                                                                                  return TableViewCell(
+                                                                                                    //key: ,
+                                                                                                    child: (value == 'Actions')
+                                                                                                        ? Wrap(
+                                                                                                            children: [
+                                                                                                              TableActionButton(
+                                                                                                                color: Colors.red,
+                                                                                                                icon: Icons.delete_outline,
+                                                                                                                message: 'Remove',
+                                                                                                                onPress: () {
+                                                                                                                  // controller.showNewPermitListDetails(
+                                                                                                                  //     controller.permitId.value);
+                                                                                                                },
+                                                                                                              ),
+                                                                                                            ],
+                                                                                                          )
+                                                                                                        : Text(value.toString()),
+                                                                                                  );
+                                                                                                }).toList());
+                                                                                          }).toList(),
                                                                                         ),
+                                                                                      ),
 
-                                                                                        /// PAGINATION
-                                                                                        // Padding(
-                                                                                        //   padding: const EdgeInsets.symmetric(horizontal: 25),
-                                                                                        //   child: ValueListenableBuilder(
-                                                                                        //       valueListenable: controller.inventoryDetailPaginationController,
-                                                                                        //       builder: (context, value, child) {
-                                                                                        //         return Row(children: [
-                                                                                        //           Text("${controller.inventoryDetailPaginationController.currentPage}  of ${controller.inventoryDetailPaginationController.pageCount}"),
-                                                                                        //           Row(children: [
-                                                                                        //             IconButton(
-                                                                                        //               onPressed: controller.inventoryDetailPaginationController.currentPage <= 1
-                                                                                        //                   ? null
-                                                                                        //                   : () {
-                                                                                        //                       controller.inventoryDetailPaginationController.previous();
-                                                                                        //                     },
-                                                                                        //               iconSize: 20,
-                                                                                        //               splashRadius: 20,
-                                                                                        //               icon: Icon(
-                                                                                        //                 Icons.arrow_back_ios_new_rounded,
-                                                                                        //                 color: controller.inventoryDetailPaginationController.currentPage <= 1 ? Colors.black26 : Theme.of(context).primaryColor,
-                                                                                        //               ),
-                                                                                        //             ),
-                                                                                        //             IconButton(
-                                                                                        //               onPressed: controller.inventoryDetailPaginationController.currentPage >= controller.inventoryDetailPaginationController.pageCount
-                                                                                        //                   ? null
-                                                                                        //                   : () {
-                                                                                        //                       controller.inventoryDetailPaginationController.next();
-                                                                                        //                     },
-                                                                                        //               iconSize: 20,
-                                                                                        //               splashRadius: 20,
-                                                                                        //               icon: Icon(
-                                                                                        //                 Icons.arrow_forward_ios_rounded,
-                                                                                        //                 color: controller.inventoryDetailPaginationController.currentPage >= controller.inventoryDetailPaginationController.pageCount ? Colors.black26 : Theme.of(context).primaryColor,
-                                                                                        //               ),
-                                                                                        //             ),
-                                                                                        //           ]),
-                                                                                        //         ]);
-                                                                                        //       }),
-                                                                                        // ),
-                                                                                      ]),
-                                                                                ),
-                                                                              )
-                                                                            : SizedBox(
-                                                                                width: MediaQuery.of(context).size.width * 2,
-                                                                                child: Container(
-                                                                                  height: 210,
-                                                                                  child: Column(
-                                                                                      //
-                                                                                      children: [
-                                                                                        Expanded(
-                                                                                          child: //
-                                                                                              ScrollableTableView(
-                                                                                            // paginationController: controller.equipmentNamepaginationController,
-                                                                                            columns: [
-                                                                                              'name',
-                                                                                              'serialNumber',
-                                                                                              'action'.tr,
-                                                                                            ].map((column) {
-                                                                                              return TableViewColumn(
-                                                                                                minWidth: Get.width * 0.25,
-                                                                                                label: column == "name"
-                                                                                                    ? "Loto Applied On"
-                                                                                                    : column == "serialNumber"
-                                                                                                        ? "Serial Number"
-                                                                                                        : "Action",
-                                                                                              );
-                                                                                            }).toList(),
-                                                                                            rows: //
-                                                                                                [
-                                                                                              ...List.generate(
-                                                                                                ///controller.selectedEquipmentNameIdList
-                                                                                                controller.filteredEquipmentNameList.length,
-
-                                                                                                (index) {
-                                                                                                  var inventoryEquipmentName = controller.filteredEquipmentNameList[index];
-
-                                                                                                  //_jobId = jobDetails?.id;
-
-                                                                                                  controller.id.value = inventoryEquipmentName?.id ?? 0;
-                                                                                                  print('Equipment Isss5:${controller.id.value}');
-                                                                                                  return [
-                                                                                                    '${inventoryEquipmentName?.name ?? ''}',
-                                                                                                    '${inventoryEquipmentName?.serialNumber ?? ''}',
-                                                                                                    'Actions'
-                                                                                                  ];
-                                                                                                },
-                                                                                              ),
-                                                                                            ].map((_inventoryDetailList) {
-                                                                                              return TableViewRow(
-                                                                                                  onTap: () => {
-                                                                                                        print('ZERO = ${_inventoryDetailList[0]}')
-                                                                                                      },
-                                                                                                  height: 45,
-                                                                                                  cells: _inventoryDetailList.map((value) {
-                                                                                                    return TableViewCell(
-                                                                                                      //key: ,
-                                                                                                      child: (value == 'Actions')
-                                                                                                          ? Wrap(
-                                                                                                              children: [
-                                                                                                                TableActionButton(
-                                                                                                                  color: Colors.red,
-                                                                                                                  icon: Icons.delete_outline,
-                                                                                                                  message: 'Remove',
-                                                                                                                  onPress: () {
-                                                                                                                    // controller.showNewPermitListDetails(
-                                                                                                                    //     controller.permitId.value);
-                                                                                                                  },
-                                                                                                                ),
-                                                                                                                // TableActionButton(
-                                                                                                                //   color: ColorValues.purpleColor,
-                                                                                                                //   icon: Icons.add,
-                                                                                                                //   label: 'Job Card',
-                                                                                                                //   onPress: () {
-                                                                                                                //     // controller.goToJobCardScreen(
-                                                                                                                //     //   int.tryParse(_newPermitList[0]),
-                                                                                                                //     // );
-                                                                                                                //   },
-                                                                                                                // ),
-                                                                                                                // TableActionButton(
-                                                                                                                //   color: Colors.blue,
-                                                                                                                //   icon: Icons.edit,
-                                                                                                                //   label: 'Edit PTW',
-                                                                                                                //   onPress: () {},
-                                                                                                                // ),
-                                                                                                                // TableActionButton(
-                                                                                                                //   color: Colors.green,
-                                                                                                                //   icon: Icons.visibility,
-                                                                                                                //   label: 'Approve Request',
-                                                                                                                //   onPress: () {},
-                                                                                                                // ),
-                                                                                                                // TableActionButton(
-                                                                                                                //   color: Colors.red,
-                                                                                                                //   icon: Icons.visibility,
-                                                                                                                //   label: 'Reject Request',
-                                                                                                                //   onPress: () {},
-                                                                                                                // ),
-                                                                                                              ],
-                                                                                                            )
-                                                                                                          : Text(value.toString()),
-                                                                                                    );
-                                                                                                  }).toList());
-                                                                                            }).toList(),
-                                                                                          ),
-                                                                                        ),
-
-                                                                                        /// PAGINATION
-                                                                                        // Padding(
-                                                                                        //   padding: const EdgeInsets.symmetric(horizontal: 25),
-                                                                                        //   child: ValueListenableBuilder(
-                                                                                        //       valueListenable: controller.inventoryDetailPaginationController,
-                                                                                        //       builder: (context, value, child) {
-                                                                                        //         return Row(children: [
-                                                                                        //           Text("${controller.inventoryDetailPaginationController.currentPage}  of ${controller.inventoryDetailPaginationController.pageCount}"),
-                                                                                        //           Row(children: [
-                                                                                        //             IconButton(
-                                                                                        //               onPressed: controller.inventoryDetailPaginationController.currentPage <= 1
-                                                                                        //                   ? null
-                                                                                        //                   : () {
-                                                                                        //                       controller.inventoryDetailPaginationController.previous();
-                                                                                        //                     },
-                                                                                        //               iconSize: 20,
-                                                                                        //               splashRadius: 20,
-                                                                                        //               icon: Icon(
-                                                                                        //                 Icons.arrow_back_ios_new_rounded,
-                                                                                        //                 color: controller.inventoryDetailPaginationController.currentPage <= 1 ? Colors.black26 : Theme.of(context).primaryColor,
-                                                                                        //               ),
-                                                                                        //             ),
-                                                                                        //             IconButton(
-                                                                                        //               onPressed: controller.inventoryDetailPaginationController.currentPage >= controller.inventoryDetailPaginationController.pageCount
-                                                                                        //                   ? null
-                                                                                        //                   : () {
-                                                                                        //                       controller.inventoryDetailPaginationController.next();
-                                                                                        //                     },
-                                                                                        //               iconSize: 20,
-                                                                                        //               splashRadius: 20,
-                                                                                        //               icon: Icon(
-                                                                                        //                 Icons.arrow_forward_ios_rounded,
-                                                                                        //                 color: controller.inventoryDetailPaginationController.currentPage >= controller.inventoryDetailPaginationController.pageCount ? Colors.black26 : Theme.of(context).primaryColor,
-                                                                                        //               ),
-                                                                                        //             ),
-                                                                                        //           ]),
-                                                                                        //         ]);
-                                                                                        //       }),
-                                                                                        // ),
-                                                                                      ]),
-                                                                                ),
+                                                                                      /// PAGINATION
+                                                                                      // Padding(
+                                                                                      //   padding: const EdgeInsets.symmetric(horizontal: 25),
+                                                                                      //   child: ValueListenableBuilder(
+                                                                                      //       valueListenable: controller.inventoryDetailPaginationController,
+                                                                                      //       builder: (context, value, child) {
+                                                                                      //         return Row(children: [
+                                                                                      //           Text("${controller.inventoryDetailPaginationController.currentPage}  of ${controller.inventoryDetailPaginationController.pageCount}"),
+                                                                                      //           Row(children: [
+                                                                                      //             IconButton(
+                                                                                      //               onPressed: controller.inventoryDetailPaginationController.currentPage <= 1
+                                                                                      //                   ? null
+                                                                                      //                   : () {
+                                                                                      //                       controller.inventoryDetailPaginationController.previous();
+                                                                                      //                     },
+                                                                                      //               iconSize: 20,
+                                                                                      //               splashRadius: 20,
+                                                                                      //               icon: Icon(
+                                                                                      //                 Icons.arrow_back_ios_new_rounded,
+                                                                                      //                 color: controller.inventoryDetailPaginationController.currentPage <= 1 ? Colors.black26 : Theme.of(context).primaryColor,
+                                                                                      //               ),
+                                                                                      //             ),
+                                                                                      //             IconButton(
+                                                                                      //               onPressed: controller.inventoryDetailPaginationController.currentPage >= controller.inventoryDetailPaginationController.pageCount
+                                                                                      //                   ? null
+                                                                                      //                   : () {
+                                                                                      //                       controller.inventoryDetailPaginationController.next();
+                                                                                      //                     },
+                                                                                      //               iconSize: 20,
+                                                                                      //               splashRadius: 20,
+                                                                                      //               icon: Icon(
+                                                                                      //                 Icons.arrow_forward_ios_rounded,
+                                                                                      //                 color: controller.inventoryDetailPaginationController.currentPage >= controller.inventoryDetailPaginationController.pageCount ? Colors.black26 : Theme.of(context).primaryColor,
+                                                                                      //               ),
+                                                                                      //             ),
+                                                                                      //           ]),
+                                                                                      //         ]);
+                                                                                      //       }),
+                                                                                      // ),
+                                                                                    ]),
                                                                               ),
+                                                                            )
+                                                                          : SizedBox(
+                                                                              width: MediaQuery.of(context).size.width * 2,
+                                                                              child: Container(
+                                                                                height: 210,
+                                                                                child: Column(
+                                                                                    //
+                                                                                    children: [
+                                                                                      Expanded(
+                                                                                        child: //
+                                                                                            ScrollableTableView(
+                                                                                          // paginationController: controller.equipmentNamepaginationController,
+                                                                                          columns: [
+                                                                                            'name',
+                                                                                            'serialNumber',
+                                                                                            'action'.tr,
+                                                                                          ].map((column) {
+                                                                                            return TableViewColumn(
+                                                                                              minWidth: Get.width * 0.25,
+                                                                                              label: column == "name"
+                                                                                                  ? "Loto Applied On"
+                                                                                                  : column == "serialNumber"
+                                                                                                      ? "Serial Number"
+                                                                                                      : "Action",
+                                                                                            );
+                                                                                          }).toList(),
+                                                                                          rows: //
+                                                                                              [
+                                                                                            ...List.generate(
+                                                                                              ///controller.selectedEquipmentNameIdList
+                                                                                              controller.filteredEquipmentNameList.length,
 
-                                                                        // SizedBox(
-                                                                        //   width:
-                                                                        //       MediaQuery.of(context).size.width / 1.2,
-                                                                        //   child:
-                                                                        //       Divider(
-                                                                        //     thickness:
-                                                                        //         2,
-                                                                        //   ),
-                                                                        // ),
-                                                                      ],
-                                                                    )
-                                                                  ],
-                                                                ),
-                                                              ],
-                                                            ),
+                                                                                              (index) {
+                                                                                                var inventoryEquipmentName = controller.filteredEquipmentNameList[index];
+
+                                                                                                //_jobId = jobDetails?.id;
+
+                                                                                                controller.id.value = inventoryEquipmentName?.id ?? 0;
+                                                                                                print('Equipment Isss5:${controller.id.value}');
+                                                                                                return [
+                                                                                                  '${inventoryEquipmentName?.name ?? ''}',
+                                                                                                  '${inventoryEquipmentName?.serialNumber ?? ''}',
+                                                                                                  'Actions'
+                                                                                                ];
+                                                                                              },
+                                                                                            ),
+                                                                                          ].map((_inventoryDetailList) {
+                                                                                            return TableViewRow(
+                                                                                                onTap: () => {
+                                                                                                      print('ZERO = ${_inventoryDetailList[0]}')
+                                                                                                    },
+                                                                                                height: 45,
+                                                                                                cells: _inventoryDetailList.map((value) {
+                                                                                                  return TableViewCell(
+                                                                                                    //key: ,
+                                                                                                    child: (value == 'Actions')
+                                                                                                        ? Wrap(
+                                                                                                            children: [
+                                                                                                              TableActionButton(
+                                                                                                                color: Colors.red,
+                                                                                                                icon: Icons.delete_outline,
+                                                                                                                message: 'Remove',
+                                                                                                                onPress: () {
+                                                                                                                  // controller.showNewPermitListDetails(
+                                                                                                                  //     controller.permitId.value);
+                                                                                                                },
+                                                                                                              ),
+                                                                                                              // TableActionButton(
+                                                                                                              //   color: ColorValues.purpleColor,
+                                                                                                              //   icon: Icons.add,
+                                                                                                              //   label: 'Job Card',
+                                                                                                              //   onPress: () {
+                                                                                                              //     // controller.goToJobCardScreen(
+                                                                                                              //     //   int.tryParse(_newPermitList[0]),
+                                                                                                              //     // );
+                                                                                                              //   },
+                                                                                                              // ),
+                                                                                                              // TableActionButton(
+                                                                                                              //   color: Colors.blue,
+                                                                                                              //   icon: Icons.edit,
+                                                                                                              //   label: 'Edit PTW',
+                                                                                                              //   onPress: () {},
+                                                                                                              // ),
+                                                                                                              // TableActionButton(
+                                                                                                              //   color: Colors.green,
+                                                                                                              //   icon: Icons.visibility,
+                                                                                                              //   label: 'Approve Request',
+                                                                                                              //   onPress: () {},
+                                                                                                              // ),
+                                                                                                              // TableActionButton(
+                                                                                                              //   color: Colors.red,
+                                                                                                              //   icon: Icons.visibility,
+                                                                                                              //   label: 'Reject Request',
+                                                                                                              //   onPress: () {},
+                                                                                                              // ),
+                                                                                                            ],
+                                                                                                          )
+                                                                                                        : Text(value.toString()),
+                                                                                                  );
+                                                                                                }).toList());
+                                                                                          }).toList(),
+                                                                                        ),
+                                                                                      ),
+
+                                                                                      /// PAGINATION
+                                                                                      // Padding(
+                                                                                      //   padding: const EdgeInsets.symmetric(horizontal: 25),
+                                                                                      //   child: ValueListenableBuilder(
+                                                                                      //       valueListenable: controller.inventoryDetailPaginationController,
+                                                                                      //       builder: (context, value, child) {
+                                                                                      //         return Row(children: [
+                                                                                      //           Text("${controller.inventoryDetailPaginationController.currentPage}  of ${controller.inventoryDetailPaginationController.pageCount}"),
+                                                                                      //           Row(children: [
+                                                                                      //             IconButton(
+                                                                                      //               onPressed: controller.inventoryDetailPaginationController.currentPage <= 1
+                                                                                      //                   ? null
+                                                                                      //                   : () {
+                                                                                      //                       controller.inventoryDetailPaginationController.previous();
+                                                                                      //                     },
+                                                                                      //               iconSize: 20,
+                                                                                      //               splashRadius: 20,
+                                                                                      //               icon: Icon(
+                                                                                      //                 Icons.arrow_back_ios_new_rounded,
+                                                                                      //                 color: controller.inventoryDetailPaginationController.currentPage <= 1 ? Colors.black26 : Theme.of(context).primaryColor,
+                                                                                      //               ),
+                                                                                      //             ),
+                                                                                      //             IconButton(
+                                                                                      //               onPressed: controller.inventoryDetailPaginationController.currentPage >= controller.inventoryDetailPaginationController.pageCount
+                                                                                      //                   ? null
+                                                                                      //                   : () {
+                                                                                      //                       controller.inventoryDetailPaginationController.next();
+                                                                                      //                     },
+                                                                                      //               iconSize: 20,
+                                                                                      //               splashRadius: 20,
+                                                                                      //               icon: Icon(
+                                                                                      //                 Icons.arrow_forward_ios_rounded,
+                                                                                      //                 color: controller.inventoryDetailPaginationController.currentPage >= controller.inventoryDetailPaginationController.pageCount ? Colors.black26 : Theme.of(context).primaryColor,
+                                                                                      //               ),
+                                                                                      //             ),
+                                                                                      //           ]),
+                                                                                      //         ]);
+                                                                                      //       }),
+                                                                                      // ),
+                                                                                    ]),
+                                                                              ),
+                                                                            ),
+
+                                                                      // SizedBox(
+                                                                      //   width:
+                                                                      //       MediaQuery.of(context).size.width / 1.2,
+                                                                      //   child:
+                                                                      //       Divider(
+                                                                      //     thickness:
+                                                                      //         2,
+                                                                      //   ),
+                                                                      // ),
+                                                                    ],
+                                                                  )
+                                                                ],
+                                                              ),
+                                                            ],
                                                           ),
                                                         ),
                                                       ),
@@ -2534,7 +2524,7 @@ class NewPermitScreen extends GetView<NewPermitController> {
 
                                                                                                     //_jobId = jobDetails?.id;
 
-                                                                                                    controller.id.value = employeeNameDetails?.id ?? 0;
+                                                                                                    // controller.id.value = employeeNameDetails?.id ?? 0;
                                                                                                     print('Employee Idss5:${controller.id.value}');
                                                                                                     return [
                                                                                                       '${employeeNameDetails?.id ?? ''}',
@@ -2705,218 +2695,216 @@ class NewPermitScreen extends GetView<NewPermitController> {
                                                             maxWidth: 1100,
                                                           ),
                                                           child:
-                                                              SingleChildScrollView(
-                                                            child: Column(
-                                                                children: [
-                                                                  CustomAppBar(
-                                                                    title:
-                                                                        'Team Deploying to carry out the job'
-                                                                            .tr,
-                                                                    action:
-                                                                        ActionButton(
-                                                                      label:
-                                                                          'Add Employee',
-                                                                      icon: Icons
-                                                                          .add,
-                                                                      onPressed:
-                                                                          () {
-                                                                        Get.dialog<void>(
-                                                                            AddEmployeeListAlertBox());
-                                                                      },
-                                                                      color: Colors
-                                                                          .green,
-                                                                    ),
-                                                                  ),
-                                                                  Dimens
-                                                                      .boxHeight10,
-                                                                  Wrap(
-                                                                      children: [
-                                                                        Column(
-                                                                            children: [
-                                                                              // Row(
-                                                                              //   mainAxisAlignment:
-                                                                              //       MainAxisAlignment
-                                                                              //           .spaceEvenly,
-                                                                              //   children: [
-                                                                              //     Text(
-                                                                              //         'Name'),
-                                                                              //     Text(
-                                                                              //         'Designation'),
-                                                                              //     Text(
-                                                                              //         'Responsibility'),
-                                                                              //     Text(
-                                                                              //         'Competeness'),
-                                                                              //     Text(
-                                                                              //         'Remove'),
-                                                                              //   ],
-                                                                              // ),
+                                                              Column(children: [
+                                                            CustomAppBar(
+                                                              title:
+                                                                  'Team Deploying to carry out the job'
+                                                                      .tr,
+                                                              action:
+                                                                  ActionButton(
+                                                                label:
+                                                                    'Add Employee',
+                                                                icon: Icons.add,
+                                                                onPressed: () {
+                                                                  Get.dialog<
+                                                                          void>(
+                                                                      AddEmployeeListAlertBox());
+                                                                },
+                                                                color: Colors
+                                                                    .green,
+                                                              ),
+                                                            ),
+                                                            Dimens.boxHeight10,
+                                                            Wrap(children: [
+                                                              Column(children: [
+                                                                // Row(
+                                                                //   mainAxisAlignment:
+                                                                //       MainAxisAlignment
+                                                                //           .spaceEvenly,
+                                                                //   children: [
+                                                                //     Text(
+                                                                //         'Name'),
+                                                                //     Text(
+                                                                //         'Designation'),
+                                                                //     Text(
+                                                                //         'Responsibility'),
+                                                                //     Text(
+                                                                //         'Competeness'),
+                                                                //     Text(
+                                                                //         'Remove'),
+                                                                //   ],
+                                                                // ),
 
-                                                                              SizedBox(
-                                                                                width: MediaQuery.of(context).size.width * 1.5,
-                                                                                child: Container(
-                                                                                  height: 180,
-                                                                                  child: Column(
-                                                                                      //
-                                                                                      children: [
-                                                                                        Expanded(
-                                                                                          child: //
-                                                                                              ScrollableTableView(
-                                                                                            // paginationController: controller.equipmentNamepaginationController,
-                                                                                            columns: [
-                                                                                              'empName',
-                                                                                              'resp',
-                                                                                              'action'.tr,
-                                                                                            ].map((column) {
-                                                                                              return TableViewColumn(
-                                                                                                minWidth: Get.width * 0.19,
-                                                                                                label: column == "empName"
-                                                                                                    ? "Employee Name"
-                                                                                                    : column == "resp"
-                                                                                                        ? "Responsibility"
-                                                                                                        : "Action",
-                                                                                              );
-                                                                                            }).toList(),
-                                                                                            rows: //
-                                                                                                [
-                                                                                              ...List.generate(
-                                                                                                ///controller.selectedEquipmentNameIdList
-                                                                                                controller.listEmployee!.length,
+                                                                SizedBox(
+                                                                  width: MediaQuery.of(
+                                                                              context)
+                                                                          .size
+                                                                          .width *
+                                                                      1.5,
+                                                                  child:
+                                                                      Container(
+                                                                    height: 180,
+                                                                    child: Column(
+                                                                        //
+                                                                        children: [
+                                                                          Expanded(
+                                                                            child: //
+                                                                                ScrollableTableView(
+                                                                              // paginationController: controller.equipmentNamepaginationController,
+                                                                              columns: [
+                                                                                'empName',
+                                                                                'resp',
+                                                                                'action'.tr,
+                                                                              ].map((column) {
+                                                                                return TableViewColumn(
+                                                                                  minWidth: Get.width * 0.19,
+                                                                                  label: column == "empName"
+                                                                                      ? "Employee Name"
+                                                                                      : column == "resp"
+                                                                                          ? "Responsibility"
+                                                                                          : "Action",
+                                                                                );
+                                                                              }).toList(),
+                                                                              rows: //
+                                                                                  [
+                                                                                ...List.generate(
+                                                                                  ///controller.selectedEquipmentNameIdList
+                                                                                  controller.listEmployee!.length,
 
-                                                                                                (index) {
-                                                                                                  var employeeNameDetails = controller.listEmployee![index];
+                                                                                  (index) {
+                                                                                    var employeeNameDetails = controller.listEmployee![index];
 
-                                                                                                  //_jobId = jobDetails?.id;
+                                                                                    //_jobId = jobDetails?.id;
 
-                                                                                                  // controller.id.value = employeeNameDetails?.empName ?? 0;
-                                                                                                  print('Employee Idss5:${controller.id.value}');
-                                                                                                  return [
-                                                                                                    '${employeeNameDetails?.empName ?? ''}',
-                                                                                                    '${employeeNameDetails?.resp ?? ''}',
-                                                                                                    'Actions'
-                                                                                                  ];
-                                                                                                },
-                                                                                              ),
-                                                                                            ].map((_inventoryDetailList) {
-                                                                                              return TableViewRow(
-                                                                                                  onTap: () => {
-                                                                                                        print('ZERO = ${_inventoryDetailList[0]}')
-                                                                                                      },
-                                                                                                  height: 45,
-                                                                                                  cells: _inventoryDetailList.map((value) {
-                                                                                                    return TableViewCell(
-                                                                                                      //key: ,
-                                                                                                      child: (value == 'Actions')
-                                                                                                          ? Wrap(children: [
-                                                                                                              TableActionButton(
-                                                                                                                color: Colors.red,
-                                                                                                                icon: Icons.delete_outline,
-                                                                                                                message: 'Remove',
-                                                                                                                onPress: () {
-                                                                                                                  // controller.showNewPermitListDetails(
-                                                                                                                  //     controller.permitId.value);
-                                                                                                                },
-                                                                                                              ),
-                                                                                                              // TableActionButton(
-                                                                                                              //   color: ColorValues.purpleColor,
-                                                                                                              //   icon: Icons.add,
-                                                                                                              //   label: 'Job Card',
-                                                                                                              //   onPress: () {
-                                                                                                              //     // controller.goToJobCardScreen(
-                                                                                                              //     //   int.tryParse(_newPermitList[0]),
-                                                                                                              //     // );
-                                                                                                              //   },
-                                                                                                              // ),
-                                                                                                              // TableActionButton(
-                                                                                                              //   color: Colors.blue,
-                                                                                                              //   icon: Icons.edit,
-                                                                                                              //   label: 'Edit PTW',
-                                                                                                              //   onPress: () {},
-                                                                                                              // ),
-                                                                                                              // TableActionButton(
-                                                                                                              //   color: Colors.green,
-                                                                                                              //   icon: Icons.visibility,
-                                                                                                              //   label: 'Approve Request',
-                                                                                                              //   onPress: () {},
-                                                                                                              // ),
-                                                                                                              // TableActionButton(
-                                                                                                              //   color: Colors.red,
-                                                                                                              //   icon: Icons.visibility,
-                                                                                                              //   label: 'Reject Request',
-                                                                                                              //   onPress: () {},
-                                                                                                              // ),
-                                                                                                            ])
-                                                                                                          : Text(value.toString()),
-                                                                                                    );
-                                                                                                  }).toList());
-                                                                                            }).toList(),
-                                                                                          ),
-                                                                                        ),
-
-                                                                                        /// PAGINATION
-                                                                                        // Padding(
-                                                                                        //   padding: const EdgeInsets.symmetric(horizontal: 25),
-                                                                                        //   child: ValueListenableBuilder(
-                                                                                        //       valueListenable: controller.employeeNamepaginationController,
-                                                                                        //       builder: (context, value, child) {
-                                                                                        //         return Row(children: [
-                                                                                        //           Text("${controller.employeeNamepaginationController.currentPage}  of ${controller.employeeNamepaginationController.pageCount}"),
-                                                                                        //           Row(children: [
-                                                                                        //             IconButton(
-                                                                                        //               onPressed: controller.employeeNamepaginationController.currentPage <= 1
-                                                                                        //                   ? null
-                                                                                        //                   : () {
-                                                                                        //                       controller.employeeNamepaginationController.previous();
-                                                                                        //                     },
-                                                                                        //               iconSize: 20,
-                                                                                        //               splashRadius: 20,
-                                                                                        //               icon: Icon(
-                                                                                        //                 Icons.arrow_back_ios_new_rounded,
-                                                                                        //                 color: controller.employeeNamepaginationController.currentPage <= 1 ? Colors.black26 : Theme.of(context).primaryColor,
-                                                                                        //               ),
-                                                                                        //             ),
-                                                                                        //             IconButton(
-                                                                                        //               onPressed: controller.employeeNamepaginationController.currentPage >= controller.employeeNamepaginationController.pageCount
-                                                                                        //                   ? null
-                                                                                        //                   : () {
-                                                                                        //                       controller.employeeNamepaginationController.next();
-                                                                                        //                     },
-                                                                                        //               iconSize: 20,
-                                                                                        //               splashRadius: 20,
-                                                                                        //               icon: Icon(
-                                                                                        //                 Icons.arrow_forward_ios_rounded,
-                                                                                        //                 color: controller.employeeNamepaginationController.currentPage >= controller.employeeNamepaginationController.pageCount ? Colors.black26 : Theme.of(context).primaryColor,
-                                                                                        //               ),
-                                                                                        //             ),
-                                                                                        //           ]),
-                                                                                        //         ]);
-                                                                                        //       }),
-                                                                                        // ),
-                                                                                      ]),
+                                                                                    // controller.id.value = employeeNameDetails?.empName ?? 0;
+                                                                                    print('Employee Idss5:${controller.id.value}');
+                                                                                    return [
+                                                                                      '${employeeNameDetails?.empName ?? ''}',
+                                                                                      '${employeeNameDetails?.resp ?? ''}',
+                                                                                      'Actions'
+                                                                                    ];
+                                                                                  },
                                                                                 ),
-                                                                              ),
+                                                                              ].map((_inventoryDetailList) {
+                                                                                return TableViewRow(
+                                                                                    onTap: () => {
+                                                                                          print('ZERO = ${_inventoryDetailList[0]}')
+                                                                                        },
+                                                                                    height: 45,
+                                                                                    cells: _inventoryDetailList.map((value) {
+                                                                                      return TableViewCell(
+                                                                                        //key: ,
+                                                                                        child: (value == 'Actions')
+                                                                                            ? Wrap(children: [
+                                                                                                TableActionButton(
+                                                                                                  color: Colors.red,
+                                                                                                  icon: Icons.delete_outline,
+                                                                                                  message: 'Remove',
+                                                                                                  onPress: () {
+                                                                                                    // controller.showNewPermitListDetails(
+                                                                                                    //     controller.permitId.value);
+                                                                                                  },
+                                                                                                ),
+                                                                                                // TableActionButton(
+                                                                                                //   color: ColorValues.purpleColor,
+                                                                                                //   icon: Icons.add,
+                                                                                                //   label: 'Job Card',
+                                                                                                //   onPress: () {
+                                                                                                //     // controller.goToJobCardScreen(
+                                                                                                //     //   int.tryParse(_newPermitList[0]),
+                                                                                                //     // );
+                                                                                                //   },
+                                                                                                // ),
+                                                                                                // TableActionButton(
+                                                                                                //   color: Colors.blue,
+                                                                                                //   icon: Icons.edit,
+                                                                                                //   label: 'Edit PTW',
+                                                                                                //   onPress: () {},
+                                                                                                // ),
+                                                                                                // TableActionButton(
+                                                                                                //   color: Colors.green,
+                                                                                                //   icon: Icons.visibility,
+                                                                                                //   label: 'Approve Request',
+                                                                                                //   onPress: () {},
+                                                                                                // ),
+                                                                                                // TableActionButton(
+                                                                                                //   color: Colors.red,
+                                                                                                //   icon: Icons.visibility,
+                                                                                                //   label: 'Reject Request',
+                                                                                                //   onPress: () {},
+                                                                                                // ),
+                                                                                              ])
+                                                                                            : Text(value.toString()),
+                                                                                      );
+                                                                                    }).toList());
+                                                                              }).toList(),
+                                                                            ),
+                                                                          ),
 
-                                                                              // SizedBox(
-                                                                              //   width: MediaQuery.of(context)
-                                                                              //           .size
-                                                                              //           .width /
-                                                                              //       1.2,
-                                                                              //   child:
-                                                                              //       Divider(
-                                                                              //     thickness:
-                                                                              //         2,
-                                                                              //   ),
-                                                                              // ),
-                                                                              // SizedBox(
-                                                                              //   height: 50,
-                                                                              // ),
-                                                                              // Center(
-                                                                              //     child: Text(
-                                                                              //         'List will appear here')
-                                                                              //         )
-                                                                            ])
-                                                                      ]),
-                                                                ]),
-                                                          ),
+                                                                          /// PAGINATION
+                                                                          // Padding(
+                                                                          //   padding: const EdgeInsets.symmetric(horizontal: 25),
+                                                                          //   child: ValueListenableBuilder(
+                                                                          //       valueListenable: controller.employeeNamepaginationController,
+                                                                          //       builder: (context, value, child) {
+                                                                          //         return Row(children: [
+                                                                          //           Text("${controller.employeeNamepaginationController.currentPage}  of ${controller.employeeNamepaginationController.pageCount}"),
+                                                                          //           Row(children: [
+                                                                          //             IconButton(
+                                                                          //               onPressed: controller.employeeNamepaginationController.currentPage <= 1
+                                                                          //                   ? null
+                                                                          //                   : () {
+                                                                          //                       controller.employeeNamepaginationController.previous();
+                                                                          //                     },
+                                                                          //               iconSize: 20,
+                                                                          //               splashRadius: 20,
+                                                                          //               icon: Icon(
+                                                                          //                 Icons.arrow_back_ios_new_rounded,
+                                                                          //                 color: controller.employeeNamepaginationController.currentPage <= 1 ? Colors.black26 : Theme.of(context).primaryColor,
+                                                                          //               ),
+                                                                          //             ),
+                                                                          //             IconButton(
+                                                                          //               onPressed: controller.employeeNamepaginationController.currentPage >= controller.employeeNamepaginationController.pageCount
+                                                                          //                   ? null
+                                                                          //                   : () {
+                                                                          //                       controller.employeeNamepaginationController.next();
+                                                                          //                     },
+                                                                          //               iconSize: 20,
+                                                                          //               splashRadius: 20,
+                                                                          //               icon: Icon(
+                                                                          //                 Icons.arrow_forward_ios_rounded,
+                                                                          //                 color: controller.employeeNamepaginationController.currentPage >= controller.employeeNamepaginationController.pageCount ? Colors.black26 : Theme.of(context).primaryColor,
+                                                                          //               ),
+                                                                          //             ),
+                                                                          //           ]),
+                                                                          //         ]);
+                                                                          //       }),
+                                                                          // ),
+                                                                        ]),
+                                                                  ),
+                                                                ),
+
+                                                                // SizedBox(
+                                                                //   width: MediaQuery.of(context)
+                                                                //           .size
+                                                                //           .width /
+                                                                //       1.2,
+                                                                //   child:
+                                                                //       Divider(
+                                                                //     thickness:
+                                                                //         2,
+                                                                //   ),
+                                                                // ),
+                                                                // SizedBox(
+                                                                //   height: 50,
+                                                                // ),
+                                                                // Center(
+                                                                //     child: Text(
+                                                                //         'List will appear here')
+                                                                //         )
+                                                              ])
+                                                            ]),
+                                                          ]),
                                                         ),
                                                       ),
                                                     ),
@@ -2963,8 +2951,9 @@ class NewPermitScreen extends GetView<NewPermitController> {
                                                                           title:
                                                                               'TBT Type: '),
                                                                       SizedBox(
-                                                                        width: MediaQuery.of(context).size.width /
-                                                                            4.5,
+                                                                        width:
+                                                                            MediaQuery.of(context).size.width /
+                                                                                5,
                                                                         child:
                                                                             Obx(
                                                                           () =>
@@ -2990,8 +2979,9 @@ class NewPermitScreen extends GetView<NewPermitController> {
                                                                           title:
                                                                               'SOP: '),
                                                                       SizedBox(
-                                                                        width: MediaQuery.of(context).size.width /
-                                                                            4.5,
+                                                                        width:
+                                                                            MediaQuery.of(context).size.width /
+                                                                                5,
                                                                         child:
                                                                             Obx(
                                                                           () =>
@@ -3127,7 +3117,7 @@ class NewPermitScreen extends GetView<NewPermitController> {
                                                                   //     ),
                                                                   //   ],
                                                                   // ),
-                                                                
+
                                                                   // SizedBox(
                                                                   //   height: 40,
                                                                   // ),
@@ -3769,80 +3759,77 @@ class NewPermitScreen extends GetView<NewPermitController> {
       //       ),
       //     )),
       Dimens.boxHeight5,
-      Padding(
-        padding: const EdgeInsets.only(left: 10),
-        child: Container(
-          height: MediaQuery.of(context).size.height * 0.050,
-          decoration: BoxDecoration(
-            boxShadow: [
-              BoxShadow(
-                color: Colors.black26,
-                offset: const Offset(
-                  5.0,
-                  5.0,
-                ),
-                blurRadius: 5.0,
-                spreadRadius: 1.0,
-              ), //BoxShadow
-              BoxShadow(
-                color: ColorValues.whiteColor,
-                offset: const Offset(0.0, 0.0),
-                blurRadius: 0.0,
-                spreadRadius: 0.0,
-              ), //BoxShadow
-            ],
-            color: ColorValues.whiteColor,
-            borderRadius: BorderRadius.circular(5),
-          ),
-          child: SizedBox(
-            width: Responsive.isDesktop(context)
-                ? MediaQuery.of(context).size.width / 3.7
-                : MediaQuery.of(context).size.width / 1.0,
-            child: TextField(
-              onTap: () {
-                position == 0
-                    ? pickDateTime_web(context, 0)
-                    : pickDateTime_web(context, 1);
-                // : null;
-              },
-              controller: position == 0
-                  ? controller.startDateTimeCtrlr
-                  : controller.validTillTimeCtrlr,
-
-              // :null,
-              autofocus: false,
-              decoration: InputDecoration(
-                fillColor: ColorValues.whiteColor,
-                filled: true,
-                contentPadding: EdgeInsets.fromLTRB(5.0, 10.0, 5.0, 10.0),
-                border: InputBorder.none,
-                enabledBorder: InputBorder.none,
-                focusedBorder: InputBorder.none,
-                // focusedErrorBorder:
-                // hintText: '${position == 1 ? DateFormat.yMEd() : ''}',
-                //     controller.isJobTitleInvalid.value
-                //         ? OutlineInputBorder(
-                //             borderRadius:
-                //                 BorderRadius.circular(5),
-                //             borderSide: BorderSide(
-                //               color: ColorsValue.redColorDark,
-                //             ),
-                //           )
-                //         : InputBorder.none,
-                // errorBorder:
-                //     controller.isJobTitleInvalid.value
-                //         ? OutlineInputBorder(
-                //             borderRadius:
-                //                 BorderRadius.circular(5),
-                //             borderSide: BorderSide(
-                //               color: ColorsValue.redColorDark,
-                //             ),
-                //           )
-                //         : null,
-                // errorText: controller.isJobTitleInvalid.value
-                //     ? "Required field"
-                //     : null,
+      Container(
+        height: MediaQuery.of(context).size.height * 0.050,
+        decoration: BoxDecoration(
+          boxShadow: [
+            BoxShadow(
+              color: Colors.black26,
+              offset: const Offset(
+                5.0,
+                5.0,
               ),
+              blurRadius: 5.0,
+              spreadRadius: 1.0,
+            ), //BoxShadow
+            BoxShadow(
+              color: ColorValues.whiteColor,
+              offset: const Offset(0.0, 0.0),
+              blurRadius: 0.0,
+              spreadRadius: 0.0,
+            ), //BoxShadow
+          ],
+          color: ColorValues.whiteColor,
+          borderRadius: BorderRadius.circular(5),
+        ),
+        child: SizedBox(
+          width: Responsive.isDesktop(context)
+              ? MediaQuery.of(context).size.width / 5
+              : MediaQuery.of(context).size.width / 1.0,
+          child: TextField(
+            onTap: () {
+              position == 0
+                  ? pickDateTime_web(context, 0)
+                  : pickDateTime_web(context, 1);
+              // : null;
+            },
+            controller: position == 0
+                ? controller.startDateTimeCtrlr
+                : controller.validTillTimeCtrlr,
+
+            // :null,
+            autofocus: false,
+            decoration: InputDecoration(
+              fillColor: ColorValues.whiteColor,
+              filled: true,
+              contentPadding: EdgeInsets.fromLTRB(5.0, 10.0, 5.0, 10.0),
+              border: InputBorder.none,
+              enabledBorder: InputBorder.none,
+              focusedBorder: InputBorder.none,
+              // focusedErrorBorder:
+              // hintText: '${position == 1 ? DateFormat.yMEd() : ''}',
+              //     controller.isJobTitleInvalid.value
+              //         ? OutlineInputBorder(
+              //             borderRadius:
+              //                 BorderRadius.circular(5),
+              //             borderSide: BorderSide(
+              //               color: ColorsValue.redColorDark,
+              //             ),
+              //           )
+              //         : InputBorder.none,
+              // errorBorder:
+              //     controller.isJobTitleInvalid.value
+              //         ? OutlineInputBorder(
+              //             borderRadius:
+              //                 BorderRadius.circular(5),
+              //             borderSide: BorderSide(
+              //               color: ColorsValue.redColorDark,
+              //             ),
+              //           )
+              //         : null,
+              // errorText: controller.isJobTitleInvalid.value
+              //     ? "Required field"
+              //     : null,
             ),
           ),
         ),
@@ -3960,73 +3947,70 @@ class NewPermitScreen extends GetView<NewPermitController> {
       //   ),
       // ),
 
-      Padding(
-        padding: const EdgeInsets.only(left: 1),
-        child: Container(
-          width: MediaQuery.of(context).size.width / 1.46,
-          decoration: BoxDecoration(
-            boxShadow: [
-              BoxShadow(
-                color: Colors.black26,
-                offset: const Offset(
-                  5.0,
-                  5.0,
-                ),
-                blurRadius: 5.0,
-                spreadRadius: 1.0,
+      Container(
+        width: MediaQuery.of(context).size.width / 1.9,
+        decoration: BoxDecoration(
+          boxShadow: [
+            BoxShadow(
+              color: Colors.black26,
+              offset: const Offset(
+                5.0,
+                5.0,
               ),
-              BoxShadow(
-                color: ColorValues.whiteColor,
-                offset: const Offset(0.0, 0.0),
-                blurRadius: 0.0,
-                spreadRadius: 0.0,
-              ),
-            ],
-            color: ColorValues.whiteColor,
-            borderRadius: BorderRadius.circular(5),
-          ),
-          child: SizedBox(
-            width: MediaQuery.of(context).size.width / 1.4,
-            child: TextField(
-              controller: controller.permitDescriptionCtrlr,
-              keyboardType: TextInputType.multiline,
-              maxLines: 5,
-              autofocus: false,
-              decoration: InputDecoration(
-                fillColor: ColorValues.whiteColor,
-                filled: true,
-                contentPadding: Dimens.edgeInsets05_10,
-                border: InputBorder.none,
-                enabledBorder: InputBorder.none,
-                focusedBorder: InputBorder.none,
-                focusedErrorBorder: controller.isJobDescriptionInvalid.value
-                    ? OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(5),
-                        borderSide: BorderSide(
-                          color: ColorValues.redColorDark,
-                        ),
-                      )
-                    : InputBorder.none,
-                errorBorder: controller.isJobDescriptionInvalid.value
-                    ? OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(5),
-                        borderSide: BorderSide(
-                          color: ColorValues.redColorDark,
-                        ),
-                      )
-                    : null,
-                errorText: controller.isJobDescriptionInvalid.value
-                    ? "Required field"
-                    : null,
-              ),
-              onChanged: (value) {
-                if (value.trim().length > 3) {
-                  controller.isJobDescriptionInvalid.value = false;
-                } else {
-                  controller.isJobDescriptionInvalid.value = true;
-                }
-              },
+              blurRadius: 5.0,
+              spreadRadius: 1.0,
             ),
+            BoxShadow(
+              color: ColorValues.whiteColor,
+              offset: const Offset(0.0, 0.0),
+              blurRadius: 0.0,
+              spreadRadius: 0.0,
+            ),
+          ],
+          color: ColorValues.whiteColor,
+          borderRadius: BorderRadius.circular(5),
+        ),
+        child: SizedBox(
+          width: MediaQuery.of(context).size.width / 1.4,
+          child: TextField(
+            controller: controller.permitDescriptionCtrlr,
+            keyboardType: TextInputType.multiline,
+            maxLines: 5,
+            autofocus: false,
+            decoration: InputDecoration(
+              fillColor: ColorValues.whiteColor,
+              filled: true,
+              contentPadding: Dimens.edgeInsets05_10,
+              border: InputBorder.none,
+              enabledBorder: InputBorder.none,
+              focusedBorder: InputBorder.none,
+              focusedErrorBorder: controller.isJobDescriptionInvalid.value
+                  ? OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(5),
+                      borderSide: BorderSide(
+                        color: ColorValues.redColorDark,
+                      ),
+                    )
+                  : InputBorder.none,
+              errorBorder: controller.isJobDescriptionInvalid.value
+                  ? OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(5),
+                      borderSide: BorderSide(
+                        color: ColorValues.redColorDark,
+                      ),
+                    )
+                  : null,
+              errorText: controller.isJobDescriptionInvalid.value
+                  ? "Required field"
+                  : null,
+            ),
+            onChanged: (value) {
+              if (value.trim().length > 3) {
+                controller.isJobDescriptionInvalid.value = false;
+              } else {
+                controller.isJobDescriptionInvalid.value = true;
+              }
+            },
           ),
         ),
       ),
@@ -4056,75 +4040,71 @@ class NewPermitScreen extends GetView<NewPermitController> {
       //   ),
       // ),
 
-      Padding(
-        padding: const EdgeInsets.only(left: 10),
-        child: Container(
-          height: MediaQuery.of(context).size.height * 0.050,
-          width: Responsive.isDesktop(context)
-              ? MediaQuery.of(context).size.width / 1.46
-              : MediaQuery.of(context).size.width / 1.1,
-          decoration: BoxDecoration(
-            boxShadow: [
-              BoxShadow(
-                color: Colors.black26,
-                offset: const Offset(
-                  5.0,
-                  5.0,
-                ),
-                blurRadius: 5.0,
-                spreadRadius: 1.0,
+      Container(
+        height: MediaQuery.of(context).size.height * 0.050,
+        width: Responsive.isDesktop(context)
+            ? MediaQuery.of(context).size.width / 1.9
+            : MediaQuery.of(context).size.width / 1.1,
+        decoration: BoxDecoration(
+          boxShadow: [
+            BoxShadow(
+              color: Colors.black26,
+              offset: const Offset(
+                5.0,
+                5.0,
               ),
-              BoxShadow(
-                color: ColorValues.whiteColor,
-                offset: const Offset(0.0, 0.0),
-                blurRadius: 0.0,
-                spreadRadius: 0.0,
-              ),
-            ],
-            color: ColorValues.whiteColor,
-            borderRadius: BorderRadius.circular(5),
-          ),
-          child: SizedBox(
-            width: MediaQuery.of(context).size.width / 1.4,
-            child: TextField(
-              controller: controller.titleTextCtrlr,
-              keyboardType: TextInputType.multiline,
-              autofocus: false,
-              decoration: InputDecoration(
-                fillColor: ColorValues.whiteColor,
-                filled: true,
-                contentPadding: Dimens.edgeInsets05_10,
-                border: InputBorder.none,
-                enabledBorder: InputBorder.none,
-                focusedBorder: InputBorder.none,
-                focusedErrorBorder: controller.isTitleTextInvalid.value
-                    ? OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(5),
-                        borderSide: BorderSide(
-                          color: ColorValues.redColorDark,
-                        ),
-                      )
-                    : InputBorder.none,
-                errorBorder: controller.isTitleTextInvalid.value
-                    ? OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(5),
-                        borderSide: BorderSide(
-                          color: ColorValues.redColorDark,
-                        ),
-                      )
-                    : null,
-                errorText: controller.isTitleTextInvalid.value
-                    ? "Required field"
-                    : null,
-              ),
-              onChanged: (value) {
-                if (value.trim().length > 3) {
-                  controller.isTitleTextInvalid.value = false;
-                } else {
-                  controller.isTitleTextInvalid.value = true;
-                }
-              },
+              blurRadius: 5.0,
+              spreadRadius: 1.0,
             ),
+            BoxShadow(
+              color: ColorValues.whiteColor,
+              offset: const Offset(0.0, 0.0),
+              blurRadius: 0.0,
+              spreadRadius: 0.0,
+            ),
+          ],
+          color: ColorValues.whiteColor,
+          borderRadius: BorderRadius.circular(5),
+        ),
+        child: SizedBox(
+          width: MediaQuery.of(context).size.width / 1.4,
+          child: TextField(
+            controller: controller.titleTextCtrlr,
+            keyboardType: TextInputType.multiline,
+            autofocus: false,
+            decoration: InputDecoration(
+              fillColor: ColorValues.whiteColor,
+              filled: true,
+              contentPadding: Dimens.edgeInsets05_10,
+              border: InputBorder.none,
+              enabledBorder: InputBorder.none,
+              focusedBorder: InputBorder.none,
+              focusedErrorBorder: controller.isTitleTextInvalid.value
+                  ? OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(5),
+                      borderSide: BorderSide(
+                        color: ColorValues.redColorDark,
+                      ),
+                    )
+                  : InputBorder.none,
+              errorBorder: controller.isTitleTextInvalid.value
+                  ? OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(5),
+                      borderSide: BorderSide(
+                        color: ColorValues.redColorDark,
+                      ),
+                    )
+                  : null,
+              errorText:
+                  controller.isTitleTextInvalid.value ? "Required field" : null,
+            ),
+            onChanged: (value) {
+              if (value.trim().length > 3) {
+                controller.isTitleTextInvalid.value = false;
+              } else {
+                controller.isTitleTextInvalid.value = true;
+              }
+            },
           ),
         ),
       ),
@@ -4153,76 +4133,72 @@ class NewPermitScreen extends GetView<NewPermitController> {
       //   ),
       // ),
 
-      Padding(
-        padding: const EdgeInsets.only(left: 10),
-        child: Container(
-          height: MediaQuery.of(context).size.height * 0.050,
-          width: Responsive.isDesktop(context)
-              ? MediaQuery.of(context).size.width / 1.46
-              : MediaQuery.of(context).size.width / 1.1,
-          decoration: BoxDecoration(
-            boxShadow: [
-              BoxShadow(
-                color: Colors.black26,
-                offset: const Offset(
-                  5.0,
-                  5.0,
-                ),
-                blurRadius: 5.0,
-                spreadRadius: 1.0,
+      Container(
+        height: MediaQuery.of(context).size.height * 0.050,
+        width: Responsive.isDesktop(context)
+            ? MediaQuery.of(context).size.width / 1.9
+            : MediaQuery.of(context).size.width / 1.1,
+        decoration: BoxDecoration(
+          boxShadow: [
+            BoxShadow(
+              color: Colors.black26,
+              offset: const Offset(
+                5.0,
+                5.0,
               ),
-              BoxShadow(
-                color: ColorValues.whiteColor,
-                offset: const Offset(0.0, 0.0),
-                blurRadius: 0.0,
-                spreadRadius: 0.0,
-              ),
-            ],
-            color: ColorValues.whiteColor,
-            borderRadius: BorderRadius.circular(5),
-          ),
-          child: SizedBox(
-            width: MediaQuery.of(context).size.width / 1.44,
-            child: TextField(
-              controller: controller.workPermitNumberTextCtrlr,
-              keyboardType: TextInputType.multiline,
-              autofocus: false,
-              decoration: InputDecoration(
-                fillColor: ColorValues.whiteColor,
-                filled: true,
-                contentPadding: Dimens.edgeInsets05_10,
-                border: InputBorder.none,
-                enabledBorder: InputBorder.none,
-                focusedBorder: InputBorder.none,
-                focusedErrorBorder:
-                    controller.isWorPermitNumberTextInvalid.value
-                        ? OutlineInputBorder(
-                            borderRadius: BorderRadius.circular(5),
-                            borderSide: BorderSide(
-                              color: ColorValues.redColorDark,
-                            ),
-                          )
-                        : InputBorder.none,
-                errorBorder: controller.isWorPermitNumberTextInvalid.value
-                    ? OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(5),
-                        borderSide: BorderSide(
-                          color: ColorValues.redColorDark,
-                        ),
-                      )
-                    : null,
-                errorText: controller.isWorPermitNumberTextInvalid.value
-                    ? "Required field"
-                    : null,
-              ),
-              onChanged: (value) {
-                if (value.trim().length > 3) {
-                  controller.isWorPermitNumberTextInvalid.value = false;
-                } else {
-                  controller.isWorPermitNumberTextInvalid.value = true;
-                }
-              },
+              blurRadius: 5.0,
+              spreadRadius: 1.0,
             ),
+            BoxShadow(
+              color: ColorValues.whiteColor,
+              offset: const Offset(0.0, 0.0),
+              blurRadius: 0.0,
+              spreadRadius: 0.0,
+            ),
+          ],
+          color: ColorValues.whiteColor,
+          borderRadius: BorderRadius.circular(5),
+        ),
+        child: SizedBox(
+          width: MediaQuery.of(context).size.width / 1.44,
+          child: TextField(
+            controller: controller.workPermitNumberTextCtrlr,
+            keyboardType: TextInputType.multiline,
+            autofocus: false,
+            decoration: InputDecoration(
+              fillColor: ColorValues.whiteColor,
+              filled: true,
+              contentPadding: Dimens.edgeInsets05_10,
+              border: InputBorder.none,
+              enabledBorder: InputBorder.none,
+              focusedBorder: InputBorder.none,
+              focusedErrorBorder: controller.isWorPermitNumberTextInvalid.value
+                  ? OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(5),
+                      borderSide: BorderSide(
+                        color: ColorValues.redColorDark,
+                      ),
+                    )
+                  : InputBorder.none,
+              errorBorder: controller.isWorPermitNumberTextInvalid.value
+                  ? OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(5),
+                      borderSide: BorderSide(
+                        color: ColorValues.redColorDark,
+                      ),
+                    )
+                  : null,
+              errorText: controller.isWorPermitNumberTextInvalid.value
+                  ? "Required field"
+                  : null,
+            ),
+            onChanged: (value) {
+              if (value.trim().length > 3) {
+                controller.isWorPermitNumberTextInvalid.value = false;
+              } else {
+                controller.isWorPermitNumberTextInvalid.value = true;
+              }
+            },
           ),
         ),
       ),

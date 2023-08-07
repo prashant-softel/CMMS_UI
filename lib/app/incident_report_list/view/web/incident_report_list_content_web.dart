@@ -340,7 +340,7 @@ class _IncidentReportListWebState extends State<IncidentReportListWeb> {
                                                                                     // ),
                                                                                     //),
                                                                                   ]),
-                                                                                  varUserAccessModel.value.access_list!.where((e) => e.feature_id == 34 && e.approve == 0).length > 0 && record[8] == "Submitted"
+                                                                                  varUserAccessModel.value.access_list!.where((e) => e.feature_id == 34 && e.approve == 1).length > 0 && record[8] == "Submitted"
                                                                                       ? Padding(
                                                                                           padding: const EdgeInsets.only(left: 15, top: 5),
                                                                                           child: TableActionButton(

@@ -137,8 +137,10 @@ class JobDetailsController extends GetxController {
       jobCardId.value = _jobCardId;
       final _flutterSecureStorage = const FlutterSecureStorage();
 
-      await _flutterSecureStorage.delete(key: "jobId");
+      await _flutterSecureStorage.delete(key: "JcId");
+      final _flutterSecureStoragejc = const FlutterSecureStorage();
 
+      _flutterSecureStoragejc.delete(key: "jobId");
       Get.toNamed(Routes.jobCard, arguments: {'JcId': jobCardId.value});
 
       //  }

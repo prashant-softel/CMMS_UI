@@ -1091,7 +1091,7 @@ class NewWarrantyClaimWeb extends GetView<WarrantyClaimController> {
                                         Row(
                                           children: [
                                            
-                                            /// FILE UPLOAD WIDGET
+                                            /// File Upload Widget
                                                           Container(
                                                             height: Get.height * 0.2,
                                                             width: Get.width / 1.3,

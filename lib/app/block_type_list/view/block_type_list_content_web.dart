@@ -234,100 +234,100 @@ class BlockTypeListContentWeb extends GetView<BlockTypeListController> {
                                         SizedBox(
                                           height: 5,
                                         ),
-                                        Row(
-                                          mainAxisAlignment:
-                                              MainAxisAlignment.start,
-                                          children: [
-                                            Expanded(
-                                              child: CustomRichText(
-                                                  title: 'Facility'),
-                                            ),
-                                            Expanded(
-                                              child: Container(
-                                                height: MediaQuery.of(context)
-                                                        .size
-                                                        .height *
-                                                    0.040,
-                                                margin: Dimens.edgeInsets5,
-                                                decoration: BoxDecoration(
-                                                  boxShadow: [
-                                                    BoxShadow(
-                                                      color: Colors.black26,
-                                                      offset: const Offset(
-                                                        5.0,
-                                                        5.0,
-                                                      ),
-                                                      blurRadius: 5.0,
-                                                      spreadRadius: 1.0,
-                                                    ),
-                                                    BoxShadow(
-                                                      color: ColorValues
-                                                          .whiteColor,
-                                                      offset: const Offset(
-                                                          0.0, 0.0),
-                                                      blurRadius: 0.0,
-                                                      spreadRadius: 0.0,
-                                                    ),
-                                                  ],
-                                                  color: ColorValues.whiteColor,
-                                                  borderRadius:
-                                                      BorderRadius.circular(5),
-                                                ),
-                                                width: (MediaQuery.of(context)
-                                                            .size
-                                                            .width *
-                                                        .2) -
-                                                    45,
-                                                child: Container(
-                                                  height: MediaQuery.of(context)
-                                                          .size
-                                                          .height *
-                                                      0.040,
-                                                  width: (MediaQuery.of(context)
-                                                          .size
-                                                          .width *
-                                                      .3),
-                                                  child: DropdownWebWidget(
-                                                    boxShadow: [
-                                                      BoxShadow(
-                                                        color: Colors.black26,
-                                                        offset: const Offset(
-                                                          5.0,
-                                                          5.0,
-                                                        ),
-                                                        blurRadius: 5.0,
-                                                        spreadRadius: 1.0,
-                                                      ),
-                                                      BoxShadow(
-                                                        color: ColorValues
-                                                            .whiteColor,
-                                                        offset: const Offset(
-                                                            0.0, 0.0),
-                                                        blurRadius: 0.0,
-                                                        spreadRadius: 0.0,
-                                                      ),
-                                                    ],
-                                                    controller: controller,
-                                                    dropdownList: controller
-                                                        .facilityTypeList,
-                                                    isValueSelected: controller
-                                                        .isSelectedfacility
-                                                        .value,
-                                                    selectedValue: controller
-                                                        .selectedfacility.value,
-                                                    onValueChanged:
-                                                        (selectedValue,
-                                                            isValueSelected) {
-                                                      controller.onValueChanged(
-                                                          selectedValue,
-                                                          isValueSelected);
-                                                    },
-                                                  ),
-                                                ),
-                                              ),
-                                            ),
-                                          ],
-                                        ),
+                                        // Row(
+                                        //   mainAxisAlignment:
+                                        //       MainAxisAlignment.start,
+                                        //   children: [
+                                        //     Expanded(
+                                        //       child: CustomRichText(
+                                        //           title: 'Facility'),
+                                        //     ),
+                                        //     Expanded(
+                                        //       child: Container(
+                                        //         height: MediaQuery.of(context)
+                                        //                 .size
+                                        //                 .height *
+                                        //             0.040,
+                                        //         margin: Dimens.edgeInsets5,
+                                        //         decoration: BoxDecoration(
+                                        //           boxShadow: [
+                                        //             BoxShadow(
+                                        //               color: Colors.black26,
+                                        //               offset: const Offset(
+                                        //                 5.0,
+                                        //                 5.0,
+                                        //               ),
+                                        //               blurRadius: 5.0,
+                                        //               spreadRadius: 1.0,
+                                        //             ),
+                                        //             BoxShadow(
+                                        //               color: ColorValues
+                                        //                   .whiteColor,
+                                        //               offset: const Offset(
+                                        //                   0.0, 0.0),
+                                        //               blurRadius: 0.0,
+                                        //               spreadRadius: 0.0,
+                                        //             ),
+                                        //           ],
+                                        //           color: ColorValues.whiteColor,
+                                        //           borderRadius:
+                                        //               BorderRadius.circular(5),
+                                        //         ),
+                                        //         width: (MediaQuery.of(context)
+                                        //                     .size
+                                        //                     .width *
+                                        //                 .2) -
+                                        //             45,
+                                        //         child: Container(
+                                        //           height: MediaQuery.of(context)
+                                        //                   .size
+                                        //                   .height *
+                                        //               0.040,
+                                        //           width: (MediaQuery.of(context)
+                                        //                   .size
+                                        //                   .width *
+                                        //               .3),
+                                        //           child: DropdownWebWidget(
+                                        //             boxShadow: [
+                                        //               BoxShadow(
+                                        //                 color: Colors.black26,
+                                        //                 offset: const Offset(
+                                        //                   5.0,
+                                        //                   5.0,
+                                        //                 ),
+                                        //                 blurRadius: 5.0,
+                                        //                 spreadRadius: 1.0,
+                                        //               ),
+                                        //               BoxShadow(
+                                        //                 color: ColorValues
+                                        //                     .whiteColor,
+                                        //                 offset: const Offset(
+                                        //                     0.0, 0.0),
+                                        //                 blurRadius: 0.0,
+                                        //                 spreadRadius: 0.0,
+                                        //               ),
+                                        //             ],
+                                        //             controller: controller,
+                                        //             dropdownList: controller
+                                        //                 .facilityTypeList,
+                                        //             isValueSelected: controller
+                                        //                 .isSelectedfacility
+                                        //                 .value,
+                                        //             selectedValue: controller
+                                        //                 .selectedfacility.value,
+                                        //             onValueChanged:
+                                        //                 (selectedValue,
+                                        //                     isValueSelected) {
+                                        //               controller.onValueChanged(
+                                        //                   selectedValue,
+                                        //                   isValueSelected);
+                                        //             },
+                                        //           ),
+                                        //         ),
+                                        //       ),
+                                        //     ),
+                                        //   ],
+                                        // ),
                                         Row(
                                           mainAxisAlignment:
                                               MainAxisAlignment.start,
