@@ -5,6 +5,7 @@ import 'package:cmms/app/app.dart';
 import 'package:cmms/domain/models/facility_model.dart';
 import 'package:cmms/domain/models/job_model.dart';
 import 'package:excel/excel.dart';
+import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
 import 'package:scrollable_table_view/scrollable_table_view.dart';
@@ -136,6 +137,9 @@ class JobListController extends GetxController {
   }
 
   void goToJobDetailsScreen(int? _jobId) {
+    final _flutterSecureStorage = const FlutterSecureStorage();
+
+    _flutterSecureStorage.delete(key: "jobId");
     Get.toNamed(Routes.jobDetails, arguments: {'jobId': _jobId});
   }
 

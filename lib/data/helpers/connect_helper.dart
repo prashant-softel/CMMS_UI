@@ -2171,16 +2171,33 @@ class ConnectHelper {
     return responseModel;
   }
 
-  Future<ResponseModel> approveJobCard({
-    String? auth,
-    jobCardId,
-    comment,
+  // Future<ResponseModel> approveJobCard({
+  //   String? auth,
+  //   jobCardId,
+  //   comment,
+  //   bool? isLoading,
+  // }) async {
+  //   var responseModel = await apiWrapper.makeRequest(
+  //     'JC/ApproveJC?status=3&ptw_id=59590',
+  //     Request.put,
+  //     null,
+  //     isLoading ?? false,
+  //     {
+  //       'Content-Type': 'application/json',
+  //       'Authorization': 'Bearer $auth',
+  //     },
+  //   );
+  //   return responseModel;
+  // }
+  Future<ResponseModel> approveJobCards({
+    required String auth,
+    approveJsonString,
     bool? isLoading,
   }) async {
     var responseModel = await apiWrapper.makeRequest(
       'JC/ApproveJC',
       Request.put,
-      null,
+      approveJsonString,
       isLoading ?? false,
       {
         'Content-Type': 'application/json',
@@ -2190,16 +2207,16 @@ class ConnectHelper {
     return responseModel;
   }
 
+//
   Future<ResponseModel> rejectJobCard({
-    String? auth,
-    int? id,
-    comment,
+    required String auth,
+    rejectJsonString,
     bool? isLoading,
   }) async {
     var responseModel = await apiWrapper.makeRequest(
       'JC/RejectJC',
       Request.put,
-      null,
+      rejectJsonString,
       isLoading ?? false,
       {
         'Content-Type': 'application/json',

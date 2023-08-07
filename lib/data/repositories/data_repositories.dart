@@ -1002,18 +1002,16 @@ class DataRepository extends DomainRepository {
         isLoading: isLoading ?? false,
       );
 
-  Future<ResponseModel> updateNewPermit({
-    required String auth,
-    newPermit,
-    bool? isLoading,
-    bool? resubmit
-  }) async =>
+  Future<ResponseModel> updateNewPermit(
+          {required String auth,
+          newPermit,
+          bool? isLoading,
+          bool? resubmit}) async =>
       await connectHelper.updateNewPermit(
-        auth: auth,
-        newPermit: newPermit,
-        isLoading: isLoading ?? false,
-        resubmit: resubmit
-      );
+          auth: auth,
+          newPermit: newPermit,
+          isLoading: isLoading ?? false,
+          resubmit: resubmit);
 
   Future<ResponseModel> createSOP({
     required String auth,
@@ -1290,30 +1288,37 @@ class DataRepository extends DomainRepository {
     );
   }
 
-  Future<ResponseModel> approveJobCard({
-    String? auth,
-    jobCardId,
-    comment,
+  // Future<ResponseModel> approveJobCard({
+  //   String? auth,
+  //   jobCardId,
+  //   comment,
+  //   bool? isLoading,
+  // }) async {
+  //   return await connectHelper.approveJobCard(
+  //     auth: auth,
+  //     jobCardId: jobCardId,
+  //     isLoading: isLoading,
+  //   );
+  // }
+  Future<ResponseModel> approveJobCards({
+    auth,
     bool? isLoading,
+    approveJsonString,
   }) async {
-    return await connectHelper.approveJobCard(
-      auth: auth,
-      jobCardId: jobCardId,
-      isLoading: isLoading,
-    );
+    var response = await connectHelper.approveJobCards(
+        auth: auth, isLoading: isLoading, approveJsonString: approveJsonString);
+    return response;
   }
 
+//
   Future<ResponseModel> rejectJobCard({
-    String? auth,
-    int? id,
-    comment,
+    auth,
     bool? isLoading,
+    rejectJsonString,
   }) async {
-    return await connectHelper.rejectJobCard(
-      auth: auth,
-      id: id,
-      isLoading: isLoading,
-    );
+    var response = await connectHelper.rejectJobCard(
+        auth: auth, isLoading: isLoading, rejectJsonString: rejectJsonString);
+    return response;
   }
 
   // Future<ResponseModel> getPreventiveCheckList({

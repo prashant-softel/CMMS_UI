@@ -6,7 +6,6 @@ import 'package:get/get.dart';
 import '../../../theme/color_values.dart';
 import '../../../theme/dimens.dart';
 import '../../../theme/styles.dart';
-import '../../../widgets/dropdown.dart';
 import '../../job_card_details_controller.dart';
 
 class EmployeeTableWidget extends StatelessWidget {
@@ -127,149 +126,150 @@ class AddEmployeeDialog extends StatelessWidget {
         borderRadius: BorderRadius.all(Radius.circular(15.0)),
       ),
       insetPadding: Dimens.edgeInsets10_0_10_0,
-      contentPadding: EdgeInsets.zero,
+      // contentPadding: EdgeInsets.zero,
       title: Text(
         'Add Employee',
-        textAlign: TextAlign.center,
+        style: Styles.blackBold16,
       ),
-      content: //
-          Builder(builder: (context) {
-        return //
-            SingleChildScrollView(
-          child: //
-              Container(
-            width: Get.width * 0.9,
-            margin: Dimens.edgeInsets5,
-            child: //
-                Column(
-                    //
-                    mainAxisAlignment: MainAxisAlignment.start,
-                    children: [
-                  Align(
-                    alignment: Alignment.centerLeft,
-                    child: RichText(
-                      text: TextSpan(
-                          text: 'Select: ',
-                          style: Styles.blackBold16,
-                          children: [
-                            // TextSpan(
-                            //   text: '*',
-                            //   style: TextStyle(
-                            //     color: ColorValues.orangeColor,
-                            //     fontWeight: FontWeight.bold,
-                            //   ),
-                            // ),
-                          ]),
-                    ),
-                  ),
-                  DropdownWebWidget(
-                    boxShadow: [
-                      BoxShadow(
-                        color: Colors.black26,
-                        offset: const Offset(
-                          5.0,
-                          5.0,
-                        ),
-                        blurRadius: 5.0,
-                        spreadRadius: 1.0,
-                      ),
-                      BoxShadow(
-                        color: ColorValues.whiteColor,
-                        offset: const Offset(0.0, 0.0),
-                        blurRadius: 0.0,
-                        spreadRadius: 0.0,
-                      ),
-                    ],
-                    controller: controller,
-                    dropdownList: controller.employeeList,
-                    isValueSelected: controller.isEmployeeSelected.value,
-                    selectedValue: controller.selectedEmployeeName.value,
-                    onValueChanged: controller.onDropdownValueChanged,
-                  ),
-                  Dimens.boxHeight20,
-                  Align(
-                    alignment: Alignment.centerLeft,
-                    child: RichText(
-                      text: TextSpan(
-                          text: 'Responsibility: ',
-                          style: Styles.blackBold16,
-                          children: [
-                            // TextSpan(
-                            //   text: '*',
-                            //   style: TextStyle(
-                            //     color: ColorValues.orangeColor,
-                            //     fontWeight: FontWeight.bold,
-                            //   ),
-                            // ),
-                          ]),
-                    ),
-                  ),
-                  Dimens.boxHeight5,
-                  Container(
-                    decoration: BoxDecoration(
-                      boxShadow: [
-                        BoxShadow(
-                          color: Colors.black26,
-                          offset: const Offset(
-                            5.0,
-                            5.0,
+      content: Builder(builder: (context) {
+        var height = MediaQuery.of(context).size.height;
+
+        return Container(
+          decoration: BoxDecoration(
+            borderRadius: BorderRadius.circular(10),
+            border: Border.all(
+              color: ColorValues.lightGreyColorWithOpacity35,
+              width: 1,
+            ),
+            boxShadow: [
+              BoxShadow(
+                color: ColorValues.appBlueBackgroundColor,
+                spreadRadius: 2,
+                blurRadius: 5,
+                offset: Offset(0, 2),
+              ),
+            ],
+          ),
+          padding: EdgeInsets.only(right: 30, top: 10),
+          height: height / 4,
+          width: double.infinity,
+          child: Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 10),
+            child: Column(
+              children: [
+                Row(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Column(
+                      crossAxisAlignment: CrossAxisAlignment.end,
+                      children: [
+                        Dimens.boxHeight5,
+                        RichText(
+                          text: TextSpan(
+                            text: 'Select: ',
+                            style: Styles.blackBold16,
                           ),
-                          blurRadius: 5.0,
-                          spreadRadius: 1.0,
-                        ), //BoxShadow
-                        BoxShadow(
-                          color: ColorValues.whiteColor,
-                          offset: const Offset(0.0, 0.0),
-                          blurRadius: 0.0,
-                          spreadRadius: 0.0,
-                        ), //BoxShadow
+                        ),
+                        Dimens.boxHeight35,
+                        RichText(
+                          text: TextSpan(
+                            text: 'Responsibility: ',
+                            style: Styles.blackBold16,
+                          ),
+                        ),
                       ],
-                      color: ColorValues.whiteColor,
-                      borderRadius: BorderRadius.circular(5),
                     ),
-                    child: TextField(
-                      minLines: 3,
-                      maxLines: 5,
-                      controller: controller.responsibilityCtrlr,
-                      autofocus: false,
-                      decoration: InputDecoration(
-                        fillColor: ColorValues.whiteColor,
-                        filled: true,
-                        contentPadding:
-                            EdgeInsets.fromLTRB(5.0, 10.0, 5.0, 10.0),
-                        border: InputBorder.none,
-                        enabledBorder: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(10.0),
-                          borderSide: BorderSide(color: Colors.transparent),
+                    Dimens.boxWidth30,
+                    Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        DropdownWebWidget(
+                          width: MediaQuery.of(context).size.width / 5,
+                          boxShadow: [
+                            BoxShadow(
+                              color: Colors.black26,
+                              offset: const Offset(
+                                5.0,
+                                5.0,
+                              ),
+                              blurRadius: 5.0,
+                              spreadRadius: 1.0,
+                            ),
+                            BoxShadow(
+                              color: ColorValues.whiteColor,
+                              offset: const Offset(0.0, 0.0),
+                              blurRadius: 0.0,
+                              spreadRadius: 0.0,
+                            ),
+                          ],
+                          controller: controller,
+                          dropdownList: controller.employeeList,
+                          isValueSelected: controller.isEmployeeSelected.value,
+                          selectedValue: controller.selectedEmployeeName.value,
+                          onValueChanged: controller.onDropdownValueChanged,
                         ),
-                        focusedBorder: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(10.0),
-                          borderSide: BorderSide(color: Colors.transparent),
+                        Dimens.boxHeight10,
+                        SizedBox(
+                          height: 100,
+                          width: MediaQuery.of(context).size.width / 5,
+                          child: TextField(
+                            minLines: 3,
+                            maxLines: 5,
+                            controller: controller.responsibilityCtrlr,
+                            autofocus: false,
+                            decoration: InputDecoration(
+                              fillColor: ColorValues.whiteColor,
+                              filled: true,
+                              contentPadding:
+                                  EdgeInsets.fromLTRB(5.0, 10.0, 5.0, 10.0),
+                              border: InputBorder.none,
+                              enabledBorder: OutlineInputBorder(
+                                borderRadius: BorderRadius.circular(10.0),
+                                borderSide:
+                                    BorderSide(color: Colors.transparent),
+                              ),
+                              focusedBorder: OutlineInputBorder(
+                                borderRadius: BorderRadius.circular(10.0),
+                                borderSide:
+                                    BorderSide(color: Colors.transparent),
+                              ),
+                            ),
+                            // onChanged: (value) {
+                            //   if (value.trim().length > 3) {
+                            //     controller.isJobTitleInvalid.value = false;
+                            //   } else {
+                            //     controller.isJobTitleInvalid.value = true;
+                            //   }
+                            // },
+                          ),
                         ),
-                      ),
-                      // onChanged: (value) {
-                      //   if (value.trim().length > 3) {
-                      //     controller.isJobTitleInvalid.value = false;
-                      //   } else {
-                      //     controller.isJobTitleInvalid.value = true;
-                      //   }
-                      // },
+                      ],
                     ),
+                  ],
+                ),
+                SizedBox(height: 5),
+                Spacer(),
+                ElevatedButton(
+                  onPressed: () {
+                    //if (_formKey.currentState!.validate()) {
+                    controller.addNewEmployee(
+                      controller.selectedEmployee.value,
+                      controller.responsibilityCtrlr.text,
+                    );
+                    Get.back();
+                    //}
+                  },
+                  style: ElevatedButton.styleFrom(
+                    foregroundColor: ColorValues.whiteColor,
+                    backgroundColor: ColorValues.addNewColor,
                   ),
-                  Dimens.boxHeight20,
-                  ElevatedButton(
-                    onPressed: () {
-                      //if (_formKey.currentState!.validate()) {
-                      controller.addNewEmployee(
-                        controller.selectedEmployee.value,
-                        controller.responsibilityCtrlr.text,
-                      );
-                      Get.back();
-                      //}
-                    },
-                    child: Text('Add'),
+                  child: Text(
+                    'Add',
                   ),
-                ]),
+                ),
+                Spacer(),
+              ],
+            ),
           ),
         );
       }),

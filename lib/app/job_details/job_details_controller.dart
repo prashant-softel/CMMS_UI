@@ -63,16 +63,6 @@ class JobDetailsController extends GetxController {
   @override
   void onInit() async {
     try {
-      super.onInit();
-    } //
-    catch (e) {
-      print(e);
-    }
-  }
-
-  @override
-  void onReady() async {
-    try {
       await setJobId();
       getJobDetails(jobId.value);
       isDataLoading.value = false;
@@ -84,8 +74,25 @@ class JobDetailsController extends GetxController {
       Utility.showDialog(e.toString() + 'onReady');
       print(e);
     }
-    super.onReady();
+    super.onInit();
   }
+
+  // @override
+  // void onReady() async {
+  //   try {
+  //     await setJobId();
+  //     getJobDetails(jobId.value);
+  //     isDataLoading.value = false;
+  //     textControllers =
+  //         List.generate(permitValuesCount, (_) => TextEditingController());
+  //     permitValues = RxList<String>.filled(permitValuesCount, '');
+  //   } //
+  //   catch (e) {
+  //     Utility.showDialog(e.toString() + 'onReady');
+  //     print(e);
+  //   }
+  //   super.onReady();
+  // }
 
   Future<void> setJobId() async {
     try {
@@ -133,14 +140,12 @@ class JobDetailsController extends GetxController {
 
     if (responseMapJobCardStarted != null &&
         responseMapJobCardStarted.length > 0) {
-      final _jobCardId = responseMapJobCardStarted["id"][0];
-      jobCardId.value = _jobCardId;
       final _flutterSecureStorage = const FlutterSecureStorage();
 
-      await _flutterSecureStorage.delete(key: "JcId");
-      final _flutterSecureStoragejc = const FlutterSecureStorage();
+      await _flutterSecureStorage.delete(key: "jobId");
+      final _jobCardId = responseMapJobCardStarted["id"][0];
+      jobCardId.value = _jobCardId;
 
-      _flutterSecureStoragejc.delete(key: "jobId");
       Get.toNamed(Routes.jobCard, arguments: {'JcId': jobCardId.value});
 
       //  }
@@ -207,6 +212,9 @@ class JobDetailsController extends GetxController {
   }
 
   void goToJobCardScreen() {
+    final _flutterSecureStoragejc = const FlutterSecureStorage();
+
+    _flutterSecureStoragejc.delete(key: "JcId");
     createJobCard();
   }
 
