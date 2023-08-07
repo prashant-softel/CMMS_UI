@@ -1,9 +1,9 @@
 import 'package:cmms/domain/models/history_model.dart';
+import 'package:cmms/domain/usecases/job_card_details_usecase.dart';
 
 import '../../domain/models/employee_model.dart';
 import '../../domain/models/job_card_details_model.dart';
 import '../../domain/models/permit_details_model.dart';
-import '../../domain/usecases/job_card_details_usecase.dart';
 
 class JobCardDetailsPresenter {
   JobCardDetailsPresenter(this.jobCardDetailsUsecase);
@@ -102,28 +102,36 @@ class JobCardDetailsPresenter {
       );
 
   ///
-  Future<Map<String, dynamic>?> approveJobCard({
-    int? jobCardId,
-    String? comment,
-    bool? isLoading,
-  }) async =>
-      await jobCardDetailsUsecase.approveJobCard(
-        jobCardId: jobCardId,
-        comment: comment,
-        isLoading: isLoading,
-      );
+  // Future<Map<String, dynamic>?> approveJobCard({
+  //   int? jobCardId,
+  //   String? comment,
+  //   bool? isLoading,
+  // }) async =>
+  //     await jobCardDetailsUsecase.approveJobCard(
+  //       jobCardId: jobCardId,
+  //       comment: comment,
+  //       isLoading: isLoading,
+  //     );
+  Future<bool> approveJobCards({
+    approveJsonString,
+    required bool isLoading,
+  }) async {
+    return jobCardDetailsUsecase.approveJobCards(
+      approveJsonString: approveJsonString,
+      isLoading: isLoading,
+    );
+  }
 
   ///
-  Future<Map<String, dynamic>?> rejectJobCard(
-    int? id,
-    String? comment,
-    bool? isLoading,
-  ) async =>
-      await jobCardDetailsUsecase.rejectJobCard(
-        id: id,
-        comment: comment,
-        isLoading: isLoading,
-      );
+  Future<bool> rejectJobCard({
+    rejectJsonString,
+    required bool isLoading,
+  }) async {
+    return jobCardDetailsUsecase.rejectJobCard(
+      rejectJsonString: rejectJsonString,
+      isLoading: isLoading,
+    );
+  }
 
   ///
 }

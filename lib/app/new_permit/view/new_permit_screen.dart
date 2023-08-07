@@ -150,7 +150,7 @@ class NewPermitScreen extends GetView<NewPermitController> {
                             width: MediaQuery.of(context).size.width,
                             //  height: MediaQuery.of(context).size.height,
                             child: Card(
-                              color: Colors.lightBlue.shade50,
+                              color: Color.fromARGB(255, 245, 248, 250),
                               elevation: 20,
                               shadowColor: Colors.black,
                               shape: RoundedRectangleBorder(
