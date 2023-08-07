@@ -1,21 +1,16 @@
-import 'package:cmms/app/home/home_screen.dart';
 import 'package:cmms/app/navigators/app_pages.dart';
 import 'package:cmms/app/return_mrs/return_mrs_controller.dart';
 import 'package:cmms/app/theme/dimens.dart';
 import 'package:cmms/app/widgets/action_button.dart';
-import 'package:cmms/app/widgets/date_picker.dart';
 import 'package:cmms/app/widgets/table_action_button.dart';
-import 'package:cmms/domain/models/get_mrs_list_model.dart';
 import 'package:flutter/material.dart';
 
 import 'package:get/get.dart';
 import 'package:scrollable_table_view/scrollable_table_view.dart';
-import 'package:syncfusion_flutter_datepicker/datepicker.dart';
 import '../../../domain/models/get_return_mrs_list.dart';
 import '../../theme/color_values.dart';
 import '../../theme/styles.dart';
 import '../../widgets/custom_elevated_button.dart';
-import '../../widgets/custom_richtext.dart';
 
 class ReturnMrsListContentWeb extends StatefulWidget {
   ReturnMrsListContentWeb({
@@ -293,59 +288,62 @@ class _ReturnMrsListContentWebState extends State<ReturnMrsListContentWeb> {
                                                                   .edgeInsets8_2_8_2,
                                                               decoration:
                                                                   BoxDecoration(
-                                                                color: controller
-                                                                            .mrsList!
-                                                                            .firstWhere(
-                                                                              (e) => e?.id == mrsListDetails!.id,
-                                                                              orElse: () => ReturnMrsListModel(id: 00),
-                                                                            )
-                                                                            ?.status ==
-                                                                        322
-                                                                    ? ColorValues
-                                                                        .rejectedStatusColor
-                                                                    : controller
-                                                                                .mrsList!
-                                                                                .firstWhere(
-                                                                                  (e) => e?.id == mrsListDetails!.id,
-                                                                                  orElse: () => ReturnMrsListModel(id: 00),
-                                                                                )
-                                                                                ?.status ==
-                                                                            321
-                                                                        ? ColorValues
-                                                                            .submitColor
-                                                                        : controller.mrsList!
-                                                                                    .firstWhere(
-                                                                                      (e) => e?.id == mrsListDetails!.id,
-                                                                                      orElse: () => ReturnMrsListModel(id: 00),
-                                                                                    )
-                                                                                    ?.status ==
-                                                                                323
-                                                                            ? ColorValues.approveStatusColor
-                                                                            : controller.mrsList!
-                                                                                        .firstWhere(
-                                                                                          (e) => e?.id == mrsListDetails!.id,
-                                                                                          orElse: () => ReturnMrsListModel(id: 00),
-                                                                                        )
-                                                                                        ?.status ==
-                                                                                    324
-                                                                                ? ColorValues.issueStatusColor
-                                                                                : controller.mrsList!
-                                                                                            .firstWhere(
-                                                                                              (e) => e?.id == mrsListDetails!.id,
-                                                                                              orElse: () => ReturnMrsListModel(id: 00),
-                                                                                            )
-                                                                                            ?.status ==
-                                                                                        326
-                                                                                    ? ColorValues.approveStatusColor
-                                                                                    : controller.mrsList!
-                                                                                                .firstWhere(
-                                                                                                  (e) => e?.id == mrsListDetails!.id,
-                                                                                                  orElse: () => ReturnMrsListModel(id: 00),
-                                                                                                )
-                                                                                                ?.status ==
-                                                                                            325
-                                                                                        ? ColorValues.rejectedStatusColor
-                                                                                        : ColorValues.addNewColor,
+                                                                color:
+                                                                    // controller
+                                                                    //             .mrsList!
+                                                                    //             .firstWhere(
+                                                                    //               (e) => e?.id == mrsListDetails!.id,
+                                                                    //               orElse: () => ReturnMrsListModel(id: 00),
+                                                                    //             )
+                                                                    //             ?.status ==
+                                                                    //         322
+                                                                    //     ? ColorValues
+                                                                    //         .rejectedStatusColor
+                                                                    //     : controller
+                                                                    //                 .mrsList!
+                                                                    //                 .firstWhere(
+                                                                    //                   (e) => e?.id == mrsListDetails!.id,
+                                                                    //                   orElse: () => ReturnMrsListModel(id: 00),
+                                                                    //                 )
+                                                                    //                 ?.status ==
+                                                                    //             321
+                                                                    //         ? ColorValues
+                                                                    //             .submitColor
+                                                                    //         : controller.mrsList!
+                                                                    //                     .firstWhere(
+                                                                    //                       (e) => e?.id == mrsListDetails!.id,
+                                                                    //                       orElse: () => ReturnMrsListModel(id: 00),
+                                                                    //                     )
+                                                                    //                     ?.status ==
+                                                                    //                 323
+                                                                    //             ? ColorValues.approveStatusColor
+                                                                    //             : controller.mrsList!
+                                                                    //                         .firstWhere(
+                                                                    //                           (e) => e?.id == mrsListDetails!.id,
+                                                                    //                           orElse: () => ReturnMrsListModel(id: 00),
+                                                                    //                         )
+                                                                    //                         ?.status ==
+                                                                    //                     324
+                                                                    //                 ? ColorValues.issueStatusColor
+                                                                    //                 : controller.mrsList!
+                                                                    //                             .firstWhere(
+                                                                    //                               (e) => e?.id == mrsListDetails!.id,
+                                                                    //                               orElse: () => ReturnMrsListModel(id: 00),
+                                                                    //                             )
+                                                                    //                             ?.status ==
+                                                                    //                         326
+                                                                    //                     ? ColorValues.approveStatusColor
+                                                                    //                     : controller.mrsList!
+                                                                    //                                 .firstWhere(
+                                                                    //                                   (e) => e?.id == mrsListDetails!.id,
+                                                                    //                                   orElse: () => ReturnMrsListModel(id: 00),
+                                                                    //                                 )
+                                                                    //                                 ?.status ==
+                                                                    //                             325
+                                                                    //                         ? ColorValues.rejectedStatusColor
+                                                                    //  :
+                                                                    ColorValues
+                                                                        .addNewColor,
                                                                 borderRadius:
                                                                     BorderRadius
                                                                         .circular(
@@ -404,7 +402,7 @@ class _ReturnMrsListContentWebState extends State<ReturnMrsListContentWeb> {
                                                           color: ColorValues
                                                               .editColor,
                                                           icon: Icons.edit,
-                                                          // message: 'edit',
+                                                          message: 'edit',
                                                           onPress: () {
                                                             int mrsId =
                                                                 mrsListDetails
@@ -516,64 +514,6 @@ class _ReturnMrsListContentWebState extends State<ReturnMrsListContentWeb> {
                                                             }
                                                           },
                                                         ),
-                                                        //  : Dimens.box0,
-                                                        // controller.mrsList!
-                                                        //             .firstWhere(
-                                                        //               (e) => e?.id == mrsListDetails!.id,
-                                                        //               orElse: () => MrsListModel(id: 00),
-                                                        //             )
-                                                        //             ?.status ==
-                                                        //         324
-                                                        //     ?
-                                                        TableActionButton(
-                                                          color: ColorValues
-                                                              .approveColor,
-                                                          icon: Icons.approval,
-                                                          message: 'issue',
-                                                          onPress: () {
-                                                            int mrsId =
-                                                                mrsListDetails
-                                                                        ?.id ??
-                                                                    0;
-                                                            if (mrsId != null) {
-                                                              Get.toNamed(
-                                                                  Routes
-                                                                      .issueMrsApprove,
-                                                                  arguments:
-                                                                      mrsId);
-                                                            }
-                                                          },
-                                                        ),
-                                                        //  : Dimens.box0,
-                                                        // controller.mrsList!
-                                                        //             .firstWhere(
-                                                        //               (e) => e?.id == mrsListDetails!.id,
-                                                        //               orElse: () => MrsListModel(id: 00),
-                                                        //             )
-                                                        //             ?.status ==
-                                                        //         324
-                                                        //     ?
-                                                        TableActionButton(
-                                                          color: ColorValues
-                                                              .rejectColor,
-                                                          icon: Icons
-                                                              .close_fullscreen,
-                                                          message: 'issue',
-                                                          onPress: () {
-                                                            int mrsId =
-                                                                mrsListDetails
-                                                                        ?.id ??
-                                                                    0;
-                                                            if (mrsId != null) {
-                                                              Get.toNamed(
-                                                                  Routes
-                                                                      .issueMrsApprove,
-                                                                  arguments:
-                                                                      mrsId);
-                                                            }
-                                                          },
-                                                        )
-                                                        //  : Dimens.box0,
                                                       ]))
                                                     ]))
                                             .toList()),

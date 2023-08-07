@@ -6,9 +6,11 @@ import 'package:cmms/domain/models/create_mrs_model.dart';
 import 'package:cmms/domain/models/get_asset_items_model.dart';
 import 'package:cmms/domain/models/mrs_detail_model.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
 import '../home/home_controller.dart';
+import '../utils/utility.dart';
 
 class EditMrsController extends GetxController {
   ///
@@ -28,7 +30,7 @@ class EditMrsController extends GetxController {
   var remarkCtrlr = TextEditingController();
   var whereUsedCtrlr = TextEditingController();
 
-  int mrsId = 0;
+  Rx<int> mrsId = 0.obs;
   var isSetTemplate = false.obs;
   int whereUsedId = 0;
   void setTemplatetoggle() {
@@ -38,20 +40,45 @@ class EditMrsController extends GetxController {
   ///
   @override
   void onInit() async {
-    mrsId = Get.arguments;
-    print('mrsId:$mrsId');
-    if (mrsId != 0) {
-      await getMrsDetails(mrsId: mrsId, isloading: true);
-    }
-    facilityIdStreamSubscription = homecontroller.facilityId$.listen((event) {
-      facilityId = event;
-      Future.delayed(Duration(seconds: 1), () {
-        getEquipmentList(
-          facilityId,
-        );
+    try {
+      await setMrsId();
+      if (mrsId != 0) {
+        await getMrsDetails(mrsId: mrsId.value, isloading: true);
+      }
+      facilityIdStreamSubscription = homecontroller.facilityId$.listen((event) {
+        facilityId = event;
+        Future.delayed(Duration(seconds: 1), () {
+          getEquipmentList(
+            facilityId,
+          );
+        });
       });
-    });
-    super.onInit();
+      super.onInit();
+    } catch (e) {
+      print(e);
+    }
+  }
+
+  Future<void> setMrsId() async {
+    try {
+      final _flutterSecureStorage = const FlutterSecureStorage();
+      // Read jobId
+      String? _mrsId = await _flutterSecureStorage.read(key: "mrsId");
+      if (_mrsId == null || _mrsId == '' || _mrsId == "null") {
+        var dataFromPreviousScreen = Get.arguments;
+
+        mrsId.value = dataFromPreviousScreen['mrsId'];
+        await _flutterSecureStorage.write(
+          key: "mrsId",
+          value: mrsId.value == null ? '' : mrsId.value.toString(),
+        );
+      } else {
+        mrsId.value = int.tryParse(_mrsId) ?? 0;
+      }
+      //  await _flutterSecureStorage.delete(key: "mrsId");
+    } catch (e) {
+      Utility.showDialog(e.toString() + 'mrsId');
+    }
   }
 
   Future<void> getMrsDetails({int? mrsId, bool? isloading}) async {
@@ -124,7 +151,7 @@ class EditMrsController extends GetxController {
       items.add(item);
     });
     CreateMrsModel editMrs = CreateMrsModel(
-        ID: mrsId,
+        ID: mrsId.value,
         isEditMode: 1,
         facility_ID: facilityId,
         //  requestd_date: formattedFromdate,

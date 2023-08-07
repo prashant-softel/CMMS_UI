@@ -1,6 +1,7 @@
 import 'package:cmms/app/pm_task_view/pm_task_view_controller.dart';
 import 'package:cmms/app/theme/dimens.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:get/get.dart';
 import 'package:scrollable_table_view/scrollable_table_view.dart';
 import '../../theme/color_values.dart';
@@ -50,6 +51,10 @@ class PreventiveMaintenanceTaskViewContentWeb
                 ),
                 GestureDetector(
                   onTap: () {
+                    final _flutterSecureStorage = const FlutterSecureStorage();
+
+                    _flutterSecureStorage.delete(key: "scheduleId");
+
                     Get.back();
                   },
                   child: Text(" / Preventive Maintenance".toUpperCase(),
@@ -465,35 +470,35 @@ class PreventiveMaintenanceTaskViewContentWeb
             ),
           ),
           Dimens.boxHeight20,
-          Container(
-            margin: EdgeInsets.only(bottom: 30, top: 20),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                Container(
-                  height: 35,
-                  child: CustomElevatedButton(
-                    icon: Icons.print_outlined,
-                    backgroundColor: ColorValues.appDarkBlueColor,
-                    text: "Print",
-                    onPressed: () {
-                      controller.printScreen();
-                    },
-                  ),
-                ),
-                Dimens.boxWidth50,
-                Container(
-                  height: 35,
-                  child: CustomElevatedButton(
-                    icon: Icons.close,
-                    backgroundColor: ColorValues.appRedColor,
-                    text: "Close",
-                    onPressed: () {},
-                  ),
-                ),
-              ],
-            ),
-          )
+          // Container(
+          //   margin: EdgeInsets.only(bottom: 30, top: 20),
+          //   child: Row(
+          //     mainAxisAlignment: MainAxisAlignment.center,
+          //     children: [
+          //       Container(
+          //         height: 35,
+          //         child: CustomElevatedButton(
+          //           icon: Icons.print_outlined,
+          //           backgroundColor: ColorValues.appDarkBlueColor,
+          //           text: "Print",
+          //           onPressed: () {
+          //             controller.printScreen();
+          //           },
+          //         ),
+          //       ),
+          //       Dimens.boxWidth50,
+          //       Container(
+          //         height: 35,
+          //         child: CustomElevatedButton(
+          //           icon: Icons.close,
+          //           backgroundColor: ColorValues.appRedColor,
+          //           text: "Close",
+          //           onPressed: () {},
+          //         ),
+          //       ),
+          //     ],
+          //   ),
+          // )
         ],
       ),
     );

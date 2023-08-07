@@ -1,10 +1,12 @@
 import 'package:cmms/app/theme/dimens.dart';
+import 'package:cmms/app/utils/utility.dart';
 import 'package:cmms/app/widgets/custom_elevated_button.dart';
 import 'package:cmms/domain/models/facility_model.dart';
 import 'package:cmms/domain/models/get_notification_model.dart';
 import 'package:cmms/domain/models/getuser_access_byId_model.dart';
 import 'package:cmms/domain/models/save_user_notification_model.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:image_picker/image_picker.dart';
 
 import 'package:cmms/app/add_user/add_user_presenter.dart';
@@ -91,7 +93,7 @@ class AddUserController extends GetxController {
   var joingdateCtrlr = TextEditingController();
   bool openDobDatePicker = false;
   bool openDoJDatePicker = false;
-  int userId = 0;
+  Rx<int> userId = 0.obs;
   double thumbnailSize = Get.height * 0.25;
   RxList<String?> selectedfacilityDataList = <String>[].obs;
   RxList<int?> selectedfacilityIdList = <int>[].obs;
@@ -107,23 +109,50 @@ class AddUserController extends GetxController {
 
   ///
   void onInit() async {
-    userId = Get.arguments;
-    Future.delayed(Duration(seconds: 1), () {
-      getBloodList();
-    });
-    Future.delayed(Duration(seconds: 1), () {
-      getCountryList();
-    });
-    Future.delayed(Duration(seconds: 1), () {
-      getRoleList();
-    });
-    Future.delayed(Duration(seconds: 1), () {
-      getFacilityList();
-    });
-    if (userId != null) {
-      await getUserDetails(userId: userId, isloading: true);
+    try {
+      await setUserId();
+      Future.delayed(Duration(seconds: 1), () {
+        getBloodList();
+      });
+      Future.delayed(Duration(seconds: 1), () {
+        getCountryList();
+      });
+      Future.delayed(Duration(seconds: 1), () {
+        getRoleList();
+      });
+      Future.delayed(Duration(seconds: 1), () {
+        getFacilityList();
+      });
+      if (userId.value != 0) {
+        await getUserDetails(userId: userId.value, isloading: true);
+      }
+      super.onInit();
+    } catch (e) {
+      print(e);
     }
-    super.onInit();
+  }
+
+  Future<void> setUserId() async {
+    try {
+      final _flutterSecureStorage = const FlutterSecureStorage();
+      // Read jobId
+      String? _userId = await _flutterSecureStorage.read(key: "userId");
+      if (_userId == null || _userId == '' || _userId == "null") {
+        var dataFromPreviousScreen = Get.arguments;
+
+        userId.value = dataFromPreviousScreen['userId'];
+        await _flutterSecureStorage.write(
+          key: "userId",
+          value: userId.value == null ? '' : userId.value.toString(),
+        );
+      } else {
+        userId.value = int.tryParse(_userId) ?? 0;
+      }
+      //  await _flutterSecureStorage.delete(key: "userId");
+    } catch (e) {
+      print(e.toString() + 'userId');
+      //  Utility.showDialog(e.toString() + 'userId');
+    }
   }
 
   var selectedImagePath = ''.obs;
@@ -439,7 +468,7 @@ class AddUserController extends GetxController {
                 view: e?.view.value ?? 0));
           });
     SaveAccessLevelModel saveAccessLevelModel = SaveAccessLevelModel(
-        user_id: userId, // varUserAccessModel.value.user_id ?? 0,
+        user_id: userId.value, // varUserAccessModel.value.user_id ?? 0,
         access_list: accesslist);
     var accessLevelJsonString = saveAccessLevelModel.toJson();
     print({"accessLevelJsonString", accessLevelJsonString});
@@ -477,7 +506,7 @@ class AddUserController extends GetxController {
           });
     SaveUserNotificationModel saveUserNotificationModel =
         SaveUserNotificationModel(
-            user_id: userId, // varUserAccessModel.value.user_id ?? 0,
+            user_id: userId.value, // varUserAccessModel.value.user_id ?? 0,
             notification_list: notificationlist);
     var saveNotificationJsonString = saveUserNotificationModel.toJson();
     print({"saveNotificationJsonString", saveNotificationJsonString});
@@ -488,7 +517,9 @@ class AddUserController extends GetxController {
         isLoading: true,
       );
       if (responseSaveNotification != null) {
-        userId = 0;
+        final _flutterSecureStorage = const FlutterSecureStorage();
+
+        _flutterSecureStorage.delete(key: "userId");
         Get.offAllNamed(
           Routes.userList,
         );

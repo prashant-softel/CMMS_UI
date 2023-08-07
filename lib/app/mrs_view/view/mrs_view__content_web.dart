@@ -1,12 +1,10 @@
 import 'package:cmms/app/app.dart';
 import 'package:cmms/app/mrs_view/mrs_view_controller.dart';
-import 'package:cmms/app/view_user_detail/view_user_detail_controller.dart';
 import 'package:cmms/app/widgets/custom_elevated_button.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:get/get.dart';
 import 'package:scrollable_table_view/scrollable_table_view.dart';
-
-import '../../navigators/app_pages.dart';
 
 class MrsViewContentWeb extends GetView<MrsViewController> {
   MrsViewContentWeb({Key? key}) : super(key: key);
@@ -49,6 +47,10 @@ class MrsViewContentWeb extends GetView<MrsViewController> {
                   ),
                   GestureDetector(
                     onTap: () {
+                      final _flutterSecureStorage =
+                          const FlutterSecureStorage();
+
+                      _flutterSecureStorage.delete(key: "mrsId");
                       Get.back();
                     },
                     child: Text(" / STOCK MANAGEMENT ",

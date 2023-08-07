@@ -54,7 +54,7 @@ class ApproveReturnMrsContentWeb extends GetView<ApproveReturnMrsController> {
                     child: Text(" / STOCK MANAGEMENT ",
                         style: Styles.greyMediumLight12),
                   ),
-                  Text(" / MATERIAL REQUISITION  APPROVAL AND REJECT",
+                  Text(" / RETURN EQUIPMENT  APPROVAL AND REJECT",
                       style: Styles.greyMediumLight12)
                 ],
               ),
@@ -71,7 +71,7 @@ class ApproveReturnMrsContentWeb extends GetView<ApproveReturnMrsController> {
                         child: Row(
                           children: [
                             Text(
-                              "Material Requisition Approval And Reject ",
+                              "Return Equipment Approval And Reject ",
                               style: Styles.blackBold16,
                             ),
                             Spacer(),
@@ -174,94 +174,83 @@ class ApproveReturnMrsContentWeb extends GetView<ApproveReturnMrsController> {
                           ],
                         ),
                       ),
-                      ConstrainedBox(
-                        constraints: BoxConstraints(
-                          maxHeight: controller
-                              .mrsDetailsModel.value!.cmmrsItems!.length
-                              .toDouble(),
-                        ),
-                        // LimitedBox(
-                        //   maxHeight: controller
-                        //       .mrsDetailsModel.value!.cmmrsItems!.length
-                        //       .toDouble(),
-                        child: Container(
-                          // height: Get.height, //300,
-                          margin: Dimens.edgeInsets20,
-                          decoration: BoxDecoration(
-                            border: Border.all(
-                              color: ColorValues.lightGreyColorWithOpacity35,
-                              width: 1,
+                      Container(
+                        height: Get.height, //300,
+                        margin: Dimens.edgeInsets20,
+                        decoration: BoxDecoration(
+                          border: Border.all(
+                            color: ColorValues.lightGreyColorWithOpacity35,
+                            width: 1,
+                          ),
+                          boxShadow: [
+                            BoxShadow(
+                              color: ColorValues.appBlueBackgroundColor,
+                              spreadRadius: 2,
+                              blurRadius: 5,
+                              offset: Offset(0, 2),
                             ),
-                            boxShadow: [
-                              BoxShadow(
-                                color: ColorValues.appBlueBackgroundColor,
-                                spreadRadius: 2,
-                                blurRadius: 5,
-                                offset: Offset(0, 2),
+                          ],
+                        ),
+                        child: Column(
+                          children: [
+                            Padding(
+                              padding: const EdgeInsets.all(10.0),
+                              child: Row(
+                                children: [
+                                  Text(
+                                    //  "${controller.mrsDetailsModel.value!.cmmrsItems!.length - 1.toDouble()}",
+                                    "Equipments",
+                                    style: Styles.blue700,
+                                  ),
+                                ],
                               ),
-                            ],
-                          ),
-                          child: Column(
-                            children: [
-                              Padding(
-                                padding: const EdgeInsets.all(10.0),
-                                child: Row(
-                                  children: [
-                                    Text(
-                                      "${controller.mrsDetailsModel.value!.cmmrsItems!.length - 1.toDouble()}",
-                                      // "Equipments",
-                                      style: Styles.blue700,
-                                    ),
-                                  ],
-                                ),
+                            ),
+                            Divider(
+                              color: ColorValues.greyLightColour,
+                            ),
+                            Expanded(
+                              child: ScrollableTableView(
+                                columns: [
+                                  "Equipment Name",
+                                  "Asset Type",
+                                  "Serial Number",
+                                  "Available Qyt.",
+                                  "Return Qty.",
+                                ].map((column) {
+                                  return TableViewColumn(
+                                    label: column,
+                                    minWidth: Get.width * 0.15,
+                                  );
+                                }).toList(),
+                                rows: [
+                                  ...List.generate(
+                                    controller.mrsDetailsModel.value!
+                                        .cmmrsItems!.length,
+                                    (index) {
+                                      var equipmentModelListDetails = controller
+                                          .mrsDetailsModel
+                                          .value!
+                                          .cmmrsItems![index];
+                                      return [
+                                        '${equipmentModelListDetails.asset_name}',
+                                        '${equipmentModelListDetails.asset_type}',
+                                        "", //'${equipmentModelListDetails.file_path}',
+                                        '${equipmentModelListDetails.available_qty}',
+                                        '${equipmentModelListDetails.requested_qty}',
+                                      ];
+                                    },
+                                  ),
+                                ].map((record) {
+                                  return TableViewRow(
+                                    height: 50,
+                                    cells: record.map((value) {
+                                      return TableViewCell(child: Text(value));
+                                    }).toList(),
+                                  );
+                                }).toList(),
                               ),
-                              Divider(
-                                color: ColorValues.greyLightColour,
-                              ),
-                              Expanded(
-                                child: ScrollableTableView(
-                                  columns: [
-                                    "Equipment Name",
-                                    "Asset Type",
-                                    "Serial Number",
-                                    "Available Qyt.",
-                                    "Return Qty.",
-                                  ].map((column) {
-                                    return TableViewColumn(
-                                      label: column,
-                                      minWidth: Get.width * 0.15,
-                                    );
-                                  }).toList(),
-                                  rows: [
-                                    ...List.generate(
-                                      controller.mrsDetailsModel.value!
-                                          .cmmrsItems!.length,
-                                      (index) {
-                                        var equipmentModelListDetails =
-                                            controller.mrsDetailsModel.value!
-                                                .cmmrsItems![index];
-                                        return [
-                                          '${equipmentModelListDetails.asset_name}',
-                                          '${equipmentModelListDetails.asset_type}',
-                                          "", //'${equipmentModelListDetails.file_path}',
-                                          '${equipmentModelListDetails.available_qty}',
-                                          '${equipmentModelListDetails.requested_qty}',
-                                        ];
-                                      },
-                                    ),
-                                  ].map((record) {
-                                    return TableViewRow(
-                                      height: 50,
-                                      cells: record.map((value) {
-                                        return TableViewCell(
-                                            child: Text(value));
-                                      }).toList(),
-                                    );
-                                  }).toList(),
-                                ),
-                              ),
-                            ],
-                          ),
+                            ),
+                          ],
                         ),
                       ),
                       Container(

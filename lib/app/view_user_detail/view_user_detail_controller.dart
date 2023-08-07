@@ -1,6 +1,8 @@
+import 'package:cmms/app/utils/utility.dart';
 import 'package:cmms/app/view_user_detail/view_user_detail_presenter.dart';
 import 'package:cmms/domain/models/get_notification_by_userid_model.dart';
 import 'package:cmms/domain/models/getuser_access_byId_model.dart';
+import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:get/get.dart';
 
 import '../../domain/models/user_detail_model.dart';
@@ -10,7 +12,7 @@ class ViewUserDetailController extends GetxController {
     this.viewUserDetailPresenter,
   );
   ViewUserDetailPresenter viewUserDetailPresenter;
-  int userId = 0;
+  Rx<int> userId = 0.obs;
   Rx<UserDetailsModel?> userDetailModel = UserDetailsModel().obs;
   RxList<PlantList?> plantListModel = <PlantList?>[].obs;
   Rx<GetAccessLevelByIdModel?> accessListModel = GetAccessLevelByIdModel().obs;
@@ -26,13 +28,39 @@ class ViewUserDetailController extends GetxController {
 
   @override
   void onInit() async {
-    userId = Get.arguments;
-    print('userId:$userId');
-    if (userId != 0) {
-      await getUserDetails(userId: userId, isloading: true);
-    }
+    try {
+      await setUserId();
 
-    super.onInit();
+      if (userId.value != 0) {
+        await getUserDetails(userId: userId.value, isloading: true);
+      }
+
+      super.onInit();
+    } catch (e) {
+      print(e);
+    }
+  }
+
+  Future<void> setUserId() async {
+    try {
+      final _flutterSecureStorage = const FlutterSecureStorage();
+      // Read jobId
+      String? _userId = await _flutterSecureStorage.read(key: "userId");
+      if (_userId == null || _userId == '' || _userId == "null") {
+        var dataFromPreviousScreen = Get.arguments;
+
+        userId.value = dataFromPreviousScreen['userId'];
+        await _flutterSecureStorage.write(
+          key: "userId",
+          value: userId.value == null ? '' : userId.value.toString(),
+        );
+      } else {
+        userId.value = int.tryParse(_userId) ?? 0;
+      }
+      //  await _flutterSecureStorage.delete(key: "userId");
+    } catch (e) {
+      Utility.showDialog(e.toString() + 'userId');
+    }
   }
 
   Future<void> getUserDetails({int? userId, bool? isloading}) async {

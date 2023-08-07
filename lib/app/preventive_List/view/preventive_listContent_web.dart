@@ -124,279 +124,264 @@ class PreventiveChecklistListContentWeb
                                           ),
                                         ),
                                         Row(
-                                          mainAxisAlignment:
-                                              MainAxisAlignment.spaceBetween,
+                                          crossAxisAlignment:
+                                              CrossAxisAlignment.center,
                                           children: [
-                                            CustomRichText(title: 'CheckList:'),
-                                            SizedBox(
-                                              width: 70,
-                                            ),
                                             Expanded(
-                                              child: Container(
-                                                  width: (MediaQuery.of(context)
-                                                              .size
-                                                              .width *
-                                                          .2) -
-                                                      30,
-                                                  decoration: BoxDecoration(
-                                                    boxShadow: [
-                                                      BoxShadow(
-                                                        color: Colors.black26,
-                                                        offset: const Offset(
-                                                          5.0,
-                                                          5.0,
-                                                        ),
-                                                        blurRadius: 5.0,
-                                                        spreadRadius: 1.0,
-                                                      ),
-                                                      BoxShadow(
+                                              child: Column(
+                                                crossAxisAlignment:
+                                                    CrossAxisAlignment.end,
+                                                children: [
+                                                  CustomRichText(
+                                                      title: 'CheckList:'),
+                                                  Dimens.boxHeight15,
+                                                  CustomRichText(
+                                                      title:
+                                                          'Equipment Category: '),
+                                                  Dimens.boxHeight20,
+                                                  CustomRichText(
+                                                      title: 'Frequency: '),
+                                                  Dimens.boxHeight20,
+                                                  Text(
+                                                    "Manpower: ",
+                                                    style: Styles.blackBold16,
+                                                  ),
+                                                  Dimens.boxHeight20,
+                                                  Text(
+                                                    "Duration(in Min.): ",
+                                                    style: Styles.blackBold16,
+                                                  ),
+                                                ],
+                                              ),
+                                            ),
+                                            Dimens.boxWidth30,
+                                            Expanded(
+                                              child: Column(
+                                                crossAxisAlignment:
+                                                    CrossAxisAlignment.start,
+                                                children: [
+                                                  Container(
+                                                      width:
+                                                          MediaQuery.of(context)
+                                                                  .size
+                                                                  .width /
+                                                              6,
+                                                      decoration: BoxDecoration(
+                                                        boxShadow: [
+                                                          BoxShadow(
+                                                            color:
+                                                                Colors.black26,
+                                                            offset:
+                                                                const Offset(
+                                                              5.0,
+                                                              5.0,
+                                                            ),
+                                                            blurRadius: 5.0,
+                                                            spreadRadius: 1.0,
+                                                          ),
+                                                          BoxShadow(
+                                                            color: ColorValues
+                                                                .whiteColor,
+                                                            offset:
+                                                                const Offset(
+                                                                    0.0, 0.0),
+                                                            blurRadius: 0.0,
+                                                            spreadRadius: 0.0,
+                                                          ),
+                                                        ],
                                                         color: ColorValues
                                                             .whiteColor,
-                                                        offset: const Offset(
-                                                            0.0, 0.0),
-                                                        blurRadius: 0.0,
-                                                        spreadRadius: 0.0,
+                                                        borderRadius:
+                                                            BorderRadius
+                                                                .circular(5),
                                                       ),
-                                                    ],
-                                                    color:
-                                                        ColorValues.whiteColor,
-                                                    borderRadius:
-                                                        BorderRadius.circular(
-                                                            5),
+                                                      child:
+                                                          LoginCustomTextfield(
+                                                        textController: controller
+                                                            .checklistNumberCtrlr,
+                                                      )),
+                                                  Dimens.boxHeight10,
+                                                  Container(
+                                                    width:
+                                                        MediaQuery.of(context)
+                                                                .size
+                                                                .width /
+                                                            6,
+                                                    height:
+                                                        MediaQuery.of(context)
+                                                                .size
+                                                                .height *
+                                                            0.040,
+                                                    child: DropdownWebWidget(
+                                                      boxShadow: [
+                                                        BoxShadow(
+                                                          color: Colors.black26,
+                                                          offset: const Offset(
+                                                            5.0,
+                                                            5.0,
+                                                          ),
+                                                          blurRadius: 5.0,
+                                                          spreadRadius: 1.0,
+                                                        ),
+                                                        BoxShadow(
+                                                          color: ColorValues
+                                                              .whiteColor,
+                                                          offset: const Offset(
+                                                              0.0, 0.0),
+                                                          blurRadius: 0.0,
+                                                          spreadRadius: 0.0,
+                                                        ),
+                                                      ],
+                                                      controller: controller,
+                                                      dropdownList: controller
+                                                          .equipmentCategoryList,
+                                                      isValueSelected: controller
+                                                          .isSelectedequipment
+                                                          .value,
+                                                      selectedValue: controller
+                                                          .selectedequipment
+                                                          .value,
+                                                      onValueChanged: controller
+                                                          .onValueChanged,
+                                                    ),
                                                   ),
-                                                  child: LoginCustomTextfield(
-                                                    textController: controller
-                                                        .checklistNumberCtrlr,
-                                                  )),
-                                            ),
-                                          ],
-                                        ),
-                                        SizedBox(
-                                          height: 10,
-                                        ),
-                                        Row(
-                                          mainAxisAlignment:
-                                              MainAxisAlignment.spaceBetween,
-                                          children: [
-                                            CustomRichText(
-                                                title: 'Equipment Category: '),
-                                            Expanded(
-                                              child: Container(
-                                                width: (MediaQuery.of(context)
-                                                            .size
-                                                            .width *
-                                                        .2) -
-                                                    35,
-                                                height: MediaQuery.of(context)
-                                                        .size
-                                                        .height *
-                                                    0.040,
-                                                child: DropdownWebWidget(
-                                                  boxShadow: [
-                                                    BoxShadow(
-                                                      color: Colors.black26,
-                                                      offset: const Offset(
-                                                        5.0,
-                                                        5.0,
+                                                  Dimens.boxHeight10,
+                                                  Container(
+                                                    height:
+                                                        MediaQuery.of(context)
+                                                                .size
+                                                                .height *
+                                                            0.040,
+                                                    width:
+                                                        MediaQuery.of(context)
+                                                                .size
+                                                                .width /
+                                                            6,
+                                                    child: DropdownWebWidget(
+                                                      controller: controller,
+                                                      boxShadow: [
+                                                        BoxShadow(
+                                                          color: Colors.black26,
+                                                          offset: const Offset(
+                                                            5.0,
+                                                            5.0,
+                                                          ),
+                                                          blurRadius: 5.0,
+                                                          spreadRadius: 1.0,
+                                                        ),
+                                                        BoxShadow(
+                                                          color: ColorValues
+                                                              .whiteColor,
+                                                          offset: const Offset(
+                                                              0.0, 0.0),
+                                                          blurRadius: 0.0,
+                                                          spreadRadius: 0.0,
+                                                        ),
+                                                      ],
+                                                      dropdownList: controller
+                                                          .frequencyList,
+                                                      isValueSelected: controller
+                                                          .isSelectedfrequency
+                                                          .value,
+                                                      selectedValue: controller
+                                                          .selectedfrequency
+                                                          .value,
+                                                      onValueChanged: controller
+                                                          .onValueChanged,
+                                                    ),
+                                                  ),
+                                                  Dimens.boxHeight10,
+                                                  Container(
+                                                      decoration: BoxDecoration(
+                                                        boxShadow: [
+                                                          BoxShadow(
+                                                            color:
+                                                                Colors.black26,
+                                                            offset:
+                                                                const Offset(
+                                                              5.0,
+                                                              5.0,
+                                                            ),
+                                                            blurRadius: 5.0,
+                                                            spreadRadius: 1.0,
+                                                          ),
+                                                          BoxShadow(
+                                                            color: ColorValues
+                                                                .whiteColor,
+                                                            offset:
+                                                                const Offset(
+                                                                    0.0, 0.0),
+                                                            blurRadius: 0.0,
+                                                            spreadRadius: 0.0,
+                                                          ),
+                                                        ],
+                                                        color: ColorValues
+                                                            .whiteColor,
+                                                        borderRadius:
+                                                            BorderRadius
+                                                                .circular(5),
                                                       ),
-                                                      blurRadius: 5.0,
-                                                      spreadRadius: 1.0,
-                                                    ),
-                                                    BoxShadow(
-                                                      color: ColorValues
-                                                          .whiteColor,
-                                                      offset: const Offset(
-                                                          0.0, 0.0),
-                                                      blurRadius: 0.0,
-                                                      spreadRadius: 0.0,
-                                                    ),
-                                                  ],
-                                                  controller: controller,
-                                                  dropdownList: controller
-                                                      .equipmentCategoryList,
-                                                  isValueSelected: controller
-                                                      .isSelectedequipment
-                                                      .value,
-                                                  selectedValue: controller
-                                                      .selectedequipment.value,
-                                                  onValueChanged:
-                                                      controller.onValueChanged,
-                                                ),
+                                                      width:
+                                                          MediaQuery.of(context)
+                                                                  .size
+                                                                  .width /
+                                                              6,
+                                                      child:
+                                                          LoginCustomTextfield(
+                                                        textController:
+                                                            controller
+                                                                .manpowerCtrlr,
+                                                      )),
+                                                  Dimens.boxHeight10,
+                                                  Container(
+                                                      decoration: BoxDecoration(
+                                                        boxShadow: [
+                                                          BoxShadow(
+                                                            color:
+                                                                Colors.black26,
+                                                            offset:
+                                                                const Offset(
+                                                              5.0,
+                                                              5.0,
+                                                            ),
+                                                            blurRadius: 5.0,
+                                                            spreadRadius: 1.0,
+                                                          ),
+                                                          BoxShadow(
+                                                            color: ColorValues
+                                                                .whiteColor,
+                                                            offset:
+                                                                const Offset(
+                                                                    0.0, 0.0),
+                                                            blurRadius: 0.0,
+                                                            spreadRadius: 0.0,
+                                                          ),
+                                                        ],
+                                                        color: ColorValues
+                                                            .whiteColor,
+                                                        borderRadius:
+                                                            BorderRadius
+                                                                .circular(5),
+                                                      ),
+                                                      width:
+                                                          MediaQuery.of(context)
+                                                                  .size
+                                                                  .width /
+                                                              6,
+                                                      child:
+                                                          LoginCustomTextfield(
+                                                        textController:
+                                                            controller
+                                                                .durationCtrlr,
+                                                      )),
+                                                ],
                                               ),
                                             ),
                                           ],
-                                        ),
-                                        SizedBox(
-                                          height: 10,
-                                        ),
-                                        Row(
-                                          mainAxisAlignment:
-                                              MainAxisAlignment.spaceBetween,
-                                          children: [
-                                            CustomRichText(
-                                                title: 'Frequency: '),
-                                            SizedBox(
-                                              width: 64,
-                                            ),
-                                            Expanded(
-                                              child: Container(
-                                                height: MediaQuery.of(context)
-                                                        .size
-                                                        .height *
-                                                    0.040,
-                                                width: (MediaQuery.of(context)
-                                                            .size
-                                                            .width *
-                                                        .2) -
-                                                    30,
-                                                child: DropdownWebWidget(
-                                                  controller: controller,
-                                                  boxShadow: [
-                                                    BoxShadow(
-                                                      color: Colors.black26,
-                                                      offset: const Offset(
-                                                        5.0,
-                                                        5.0,
-                                                      ),
-                                                      blurRadius: 5.0,
-                                                      spreadRadius: 1.0,
-                                                    ),
-                                                    BoxShadow(
-                                                      color: ColorValues
-                                                          .whiteColor,
-                                                      offset: const Offset(
-                                                          0.0, 0.0),
-                                                      blurRadius: 0.0,
-                                                      spreadRadius: 0.0,
-                                                    ),
-                                                  ],
-                                                  dropdownList:
-                                                      controller.frequencyList,
-                                                  isValueSelected: controller
-                                                      .isSelectedfrequency
-                                                      .value,
-                                                  selectedValue: controller
-                                                      .selectedfrequency.value,
-                                                  onValueChanged:
-                                                      controller.onValueChanged,
-                                                ),
-                                              ),
-                                            ),
-                                          ],
-                                        ),
-                                        SizedBox(
-                                          height: 10,
-                                        ),
-                                        Row(
-                                          mainAxisAlignment:
-                                              MainAxisAlignment.spaceBetween,
-                                          children: [
-                                            Text(
-                                              "Manpower: ",
-                                              style: Styles.blackBold16,
-                                            ),
-                                            SizedBox(
-                                              width: 60,
-                                            ),
-                                            Expanded(
-                                              child: Container(
-                                                  decoration: BoxDecoration(
-                                                    boxShadow: [
-                                                      BoxShadow(
-                                                        color: Colors.black26,
-                                                        offset: const Offset(
-                                                          5.0,
-                                                          5.0,
-                                                        ),
-                                                        blurRadius: 5.0,
-                                                        spreadRadius: 1.0,
-                                                      ),
-                                                      BoxShadow(
-                                                        color: ColorValues
-                                                            .whiteColor,
-                                                        offset: const Offset(
-                                                            0.0, 0.0),
-                                                        blurRadius: 0.0,
-                                                        spreadRadius: 0.0,
-                                                      ),
-                                                    ],
-                                                    color:
-                                                        ColorValues.whiteColor,
-                                                    borderRadius:
-                                                        BorderRadius.circular(
-                                                            5),
-                                                  ),
-                                                  width: (MediaQuery.of(context)
-                                                              .size
-                                                              .width *
-                                                          .2) -
-                                                      30,
-                                                  child: LoginCustomTextfield(
-                                                    textController: controller
-                                                        .manpowerCtrlr,
-                                                  )),
-                                            ),
-                                          ],
-                                        ),
-                                        SizedBox(
-                                          height: 10,
-                                        ),
-                                        Row(
-                                          mainAxisAlignment:
-                                              MainAxisAlignment.spaceBetween,
-                                          children: [
-                                            Text(
-                                              "Duration(in Min.): ",
-                                              style: Styles.blackBold16,
-                                            ),
-                                            SizedBox(
-                                              width: 15,
-                                            ),
-                                            Expanded(
-                                              child: Container(
-                                                  decoration: BoxDecoration(
-                                                    boxShadow: [
-                                                      BoxShadow(
-                                                        color: Colors.black26,
-                                                        offset: const Offset(
-                                                          5.0,
-                                                          5.0,
-                                                        ),
-                                                        blurRadius: 5.0,
-                                                        spreadRadius: 1.0,
-                                                      ),
-                                                      BoxShadow(
-                                                        color: ColorValues
-                                                            .whiteColor,
-                                                        offset: const Offset(
-                                                            0.0, 0.0),
-                                                        blurRadius: 0.0,
-                                                        spreadRadius: 0.0,
-                                                      ),
-                                                    ],
-                                                    color:
-                                                        ColorValues.whiteColor,
-                                                    borderRadius:
-                                                        BorderRadius.circular(
-                                                            5),
-                                                  ),
-                                                  width: (MediaQuery.of(context)
-                                                              .size
-                                                              .width *
-                                                          .2) -
-                                                      45,
-                                                  child: LoginCustomTextfield(
-                                                    textController: controller
-                                                        .durationCtrlr,
-                                                  )),
-                                            ),
-                                          ],
-                                        ),
-                                        SizedBox(
-                                          height: 20,
                                         ),
                                       ]),
                                 ),
+                                Dimens.boxHeight20,
                                 Row(
                                   mainAxisAlignment: MainAxisAlignment.center,
                                   children: [

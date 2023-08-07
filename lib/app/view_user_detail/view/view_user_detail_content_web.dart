@@ -1,6 +1,7 @@
 import 'package:cmms/app/app.dart';
 import 'package:cmms/app/view_user_detail/view_user_detail_controller.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:get/get.dart';
 import 'package:scrollable_table_view/scrollable_table_view.dart';
 
@@ -53,6 +54,10 @@ class ViewUserDetailContentWeb extends GetView<ViewUserDetailController> {
                   ),
                   GestureDetector(
                       onTap: () {
+                        final _flutterSecureStorage =
+                            const FlutterSecureStorage();
+
+                        _flutterSecureStorage.delete(key: "userId");
                         Get.back();
                       },
                       child: Text(" / USER LIST",

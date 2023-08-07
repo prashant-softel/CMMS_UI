@@ -1,5 +1,7 @@
 import 'package:cmms/app/mrs_view/mrs_view_presenter.dart';
+import 'package:cmms/app/utils/utility.dart';
 import 'package:cmms/domain/models/mrs_detail_model.dart';
+import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:get/get.dart';
 import '../home/home_controller.dart';
 
@@ -11,19 +13,44 @@ class MrsViewController extends GetxController {
   MrsViewPresenter mrsViewPresenter;
   final HomeController homecontroller = Get.find();
 
-  int mrsId = 0;
+  Rx<int> mrsId = 0.obs;
   Rx<MrsDetailsModel?> mrsDetailsModel = MrsDetailsModel().obs;
   String whereUsedType = "";
 
   ///
   @override
   void onInit() async {
-    mrsId = Get.arguments;
-    print('mrsId:$mrsId');
-    if (mrsId != 0) {
-      await getMrsDetails(mrsId: mrsId, isloading: true);
+    try {
+      await setMrsId();
+      if (mrsId != 0) {
+        await getMrsDetails(mrsId: mrsId.value, isloading: true);
+      }
+      super.onInit();
+    } catch (e) {
+      print(e);
     }
-    super.onInit();
+  }
+
+  Future<void> setMrsId() async {
+    try {
+      final _flutterSecureStorage = const FlutterSecureStorage();
+      // Read jobId
+      String? _mrsId = await _flutterSecureStorage.read(key: "mrsId");
+      if (_mrsId == null || _mrsId == '' || _mrsId == "null") {
+        var dataFromPreviousScreen = Get.arguments;
+
+        mrsId.value = dataFromPreviousScreen['mrsId'];
+        await _flutterSecureStorage.write(
+          key: "mrsId",
+          value: mrsId.value == null ? '' : mrsId.value.toString(),
+        );
+      } else {
+        mrsId.value = int.tryParse(_mrsId) ?? 0;
+      }
+      //  await _flutterSecureStorage.delete(key: "mrsId");
+    } catch (e) {
+      Utility.showDialog(e.toString() + 'mrsId');
+    }
   }
 
   Future<void> getMrsDetails({int? mrsId, bool? isloading}) async {
