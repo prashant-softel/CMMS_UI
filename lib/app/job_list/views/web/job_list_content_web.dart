@@ -413,8 +413,9 @@ class JobDataSource extends DataTableSource {
         }).toList(),
       ],
       onSelectChanged: (_) {
-    
+        final _flutterSecureStorage = const FlutterSecureStorage();
 
+        _flutterSecureStorage.delete(key: "jobId");
         controller.goToJobDetailsScreen(int.tryParse('${jobDetails?.id}'));
       },
     );
