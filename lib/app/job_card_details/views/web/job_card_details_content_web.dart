@@ -273,13 +273,13 @@ class JobCardDetailsContentWeb extends GetView<JobCardDetailsController> {
                                       bool? confirmed =
                                           await showConfirmationDialog(
                                         context,
-                                        'Are you sure you want to Carry Forward Jo ?',
+                                        'Are you sure you want to Carry Forward Job ?',
                                       );
                                       if (confirmed == true) {
                                         controller.carryForwardJob();
 
                                         Text(
-                                            'Are you sure you want to Carry Forward Jo ?');
+                                            'Are you sure you want to Carry Forward Job ?');
                                       }
                                     },
                                   ),
@@ -356,7 +356,7 @@ class JobCardDetailsContentWeb extends GetView<JobCardDetailsController> {
                                         },
                                       ),
                                     ])
-                              : Dimens.box0,
+                              : Container(),
 
                   Dimens.boxHeight20,
                 ]),
