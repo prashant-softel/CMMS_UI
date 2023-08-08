@@ -88,6 +88,8 @@ import 'package:cmms/app/view_add_inventory/view_add_inventory_binding.dart';
 import 'package:cmms/app/view_add_inventory/view_add_inventory_ui.dart';
 import 'package:cmms/app/view_escalation_matrix/view_escalation_matrix_binding.dart';
 import 'package:cmms/app/view_escalation_matrix/view_escalation_matrix_screen.dart';
+import 'package:cmms/app/view_module_cleaning_execution/view_module_cleaning_execution_binding.dart';
+import 'package:cmms/app/view_module_cleaning_execution/view_module_cleaning_execution_screen.dart';
 import 'package:cmms/app/view_permit/view_permit_binding.dart';
 import 'package:cmms/app/view_permit/view/web/view_permit_screen_web.dart';
 import 'package:cmms/app/inventory/view/inventory_screen.dart';
@@ -713,6 +715,11 @@ class AppPages {
       name: _Paths.addModuleCleaningExecutionContentWeb,
       page: AddModuleCleaningExecutionScreen.new,
       binding: AddModuleCleaningExecutionBinding(),
+    ),
+    GetPage<dynamic>(
+      name: _Paths.viewModuleCleaningExecutionScreen,
+      page: ViewModuleCleaningExecutionScreen.new,
+      binding: ViewModuleCleaningExecutionBinding(),
     ),
     GetPage<dynamic>(
       name: _Paths.roleNotification,
