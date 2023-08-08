@@ -69,6 +69,8 @@ class JobCardDetailsController extends GetxController {
   Rx<JobCardDetailsModel?> jobCardDetailsModel = JobCardDetailsModel().obs;
 
   TextEditingController approveCommentTextFieldCtrlr = TextEditingController();
+  TextEditingController rejectCommentTextFieldCtrlr = TextEditingController();
+
 
 
   /// Plant Details
@@ -571,7 +573,7 @@ class JobCardDetailsController extends GetxController {
 
   void rejectJobCard() async {
     {
-      String _comment = descriptionOfWorkDoneCtrlr.text.trim();
+      String _comment = rejectCommentTextFieldCtrlr.text.trim();
 
       CommentModel commentCalibrationModel =
           CommentModel(id: jobCardId.value, comment: _comment);

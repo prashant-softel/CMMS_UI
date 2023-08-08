@@ -2,10 +2,10 @@ import 'package:cmms/domain/domain.dart';
 
 import '../models/facility_model.dart';
 
-class AddModuleCleaningExecutionUsecase {
+class ViewModuleCleaningExecutionUsecase {
   final Repository _repository;
 
-  AddModuleCleaningExecutionUsecase(this._repository);
+  ViewModuleCleaningExecutionUsecase(this._repository);
 
   Future<void> generateToken() async {
     return await _repository.generateToken();

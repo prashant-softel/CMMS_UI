@@ -1,11 +1,11 @@
 
-import 'package:cmms/domain/usecases/add_module_cleaning_execution_usecase.dart';
 
-import '../../domain/models/facility_model.dart';
+
+import 'package:cmms/domain/usecases/view_module_cleaning_execution_usecase.dart';
 
 class ViewModuleCleaningExecutionPresenter {
-  // ViewModuleCleaningExecutionPresenter(this.viewModuleCleaningExecutionUsecase);
-  // ViewModuleCleaningExecutionUsecase viewModuleCleaningExecutionUsecase;
+  ViewModuleCleaningExecutionPresenter(this.viewModuleCleaningExecutionUsecase);
+  ViewModuleCleaningExecutionUsecase viewModuleCleaningExecutionUsecase;
 
  
 

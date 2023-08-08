@@ -212,7 +212,7 @@ class ModuleCleaningListExecution
                                      varUserAccessModel.value.access_list!
                                                       .where((e) =>
                                                           e.feature_id == 34 &&
-                                                          e.add == 0)
+                                                          e.add == 1)
                                                       .length >
                                                   0
                                    ? ActionButton(
@@ -345,8 +345,10 @@ class ModuleCleaningListExecution
                                                                     .remove_red_eye_outlined,
                                                                 message: 'View',
                                                                 onPress: () {
-                                                                  //   Get.toNamed(Routes
-                                                                  // .calibrationViewScreen);
+                                                                  controller
+                                                                      .viewMCExecution(
+                                                                          id: int.tryParse(
+                                                                              '${record[0]}'));
                                                                 },
                                                               ),
                                                               TableActionButton(

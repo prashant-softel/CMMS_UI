@@ -1,5 +1,6 @@
 import 'package:cmms/app/constant/constant.dart';
 import 'package:cmms/app/widgets/job_card_approve_dialog.dart';
+import 'package:cmms/app/widgets/job_card_reject_dialog.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -249,7 +250,13 @@ class JobCardDetailsContentWeb extends GetView<JobCardDetailsController> {
                                     },
                                   ),
                                   Dimens.boxWidth10,
-                                  CustomElevatedButton(
+                                   varUserAccessModel.value.access_list!
+                                                  .where((e) =>
+                                                      e.feature_id == 4 &&
+                                                      e.add == 1)
+                                                  .length >
+                                              0
+                                  ?CustomElevatedButton(
                                     backgroundColor: ColorValues.appGreenColor,
                                     text: 'Close Job',
                                     onPressed: () async {
@@ -265,7 +272,8 @@ class JobCardDetailsContentWeb extends GetView<JobCardDetailsController> {
                                             'Are you sure you want to Close Job ?');
                                       }
                                     },
-                                  ),
+                                  )
+                                  :Container(),
                                   Dimens.boxWidth10,
                                   CustomElevatedButton(
                                     backgroundColor:
@@ -331,7 +339,7 @@ class JobCardDetailsContentWeb extends GetView<JobCardDetailsController> {
                                       //       'Are you sure you want to Approve ?',
                                       //     );
                                       //     if (confirmed == true) {
-                                            // controller.approveJobCards();
+                                      // controller.approveJobCards();
 
                                       //       Text(
                                       //           'Are you sure you want to Approve ?');
@@ -339,51 +347,77 @@ class JobCardDetailsContentWeb extends GetView<JobCardDetailsController> {
                                       //   },
                                       // ),
 
-                                       varUserAccessModel.value.access_list!
-                                  .where((e) =>
-                                      e.feature_id == 3 && e.approve == 1)
-                                  .length >
-                              0 
-                           
-                  ? 
-                  Container(
-                      height: 30,
-                      child: CustomElevatedButton(
-                        backgroundColor: ColorValues.appGreenColor,
-                        text: "Approve",
-                        icon: Icons.add,
-                        onPressed: () {
-                          // controller
-                          //     .createNewPermit();
-                          Get.dialog(JobCardApproveDialog(
-                              JobCardId:
-                                  '${controller.jobCardId.value}',
-                              // ptwStatus:
-                              //     '${controller.viewPermitDetailsModel.value?.ptwStatus}'
-                                  )
-                                  );
-                        },
-                      ))
-                  : Container(),
+                                      varUserAccessModel.value.access_list!
+                                                  .where((e) =>
+                                                      e.feature_id == 4 &&
+                                                      e.approve == 1)
+                                                  .length >
+                                              0
+                                          ? Container(
+                                              height: 30,
+                                              child: CustomElevatedButton(
+                                                backgroundColor:
+                                                    ColorValues.appGreenColor,
+                                                text: "Approve",
+                                                icon: Icons.add,
+                                                onPressed: () {
+                                                  // controller
+                                                  //     .createNewPermit();
+                                                  Get.dialog(
+                                                      JobCardApproveDialog(
+                                                    JobCardId:
+                                                        '${controller.jobCardId.value}',
+                                                    // ptwStatus:
+                                                    //     '${controller.viewPermitDetailsModel.value?.ptwStatus}'
+                                                  ));
+                                                },
+                                              ))
+                                          : Container(),
                                       Dimens.boxWidth10,
-                                      CustomElevatedButton(
-                                        backgroundColor:
-                                            ColorValues.rejectColor,
-                                        text: 'Reject',
-                                        onPressed: () async {
-                                          bool? confirmed =
-                                              await showConfirmationDialog(
-                                            context,
-                                            'Are you sure you want to Reject ?',
-                                          );
-                                          if (confirmed == true) {
-                                            controller.rejectJobCard();
+                                      // CustomElevatedButton(
+                                      //   backgroundColor:
+                                      //       ColorValues.rejectColor,
+                                      //   text: 'Reject',
+                                      //   onPressed: () async {
+                                      //     bool? confirmed =
+                                      //         await showConfirmationDialog(
+                                      //       context,
+                                      //       'Are you sure you want to Reject ?',
+                                      //     );
+                                      //     if (confirmed == true) {
+                                      //       controller.rejectJobCard();
 
-                                            Text(
-                                                'Are you sure you want to Reject ?');
-                                          }
-                                        },
-                                      ),
+                                      //       Text(
+                                      //           'Are you sure you want to Reject ?');
+                                      //     }
+                                      //   },
+                                      // ),
+                                      varUserAccessModel.value.access_list!
+                                                  .where((e) =>
+                                                      e.feature_id == 4 &&
+                                                      e.approve == 1)
+                                                  .length >
+                                              0
+                                          ? Container(
+                                              height: 30,
+                                              child: CustomElevatedButton(
+                                                backgroundColor:
+                                                    ColorValues.rejectColor,
+                                                text: "Reject",
+                                                icon: Icons.add,
+                                                onPressed: () {
+                                                  // controller
+                                                  //     .createNewPermit();
+                                                  Get.dialog(
+                                                      JobCardRejectDialog(
+                                                    JobCardId:
+                                                        '${controller.jobCardId.value}',
+                                                    // ptwStatus:
+                                                    //     '${controller.viewPermitDetailsModel.value?.ptwStatus}'
+                                                  ));
+                                                },
+                                              ))
+                                          : Container(),
                                     ])
                               : Container(),
 

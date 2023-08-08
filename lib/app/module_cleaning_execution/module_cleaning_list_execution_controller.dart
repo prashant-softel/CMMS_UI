@@ -2,6 +2,7 @@ import 'dart:async';
 
 import 'package:cmms/app/home/home_controller.dart';
 import 'package:cmms/app/module_cleaning_execution/module_cleaning_list_execution_presenter.dart';
+import 'package:cmms/app/navigators/app_pages.dart';
 
 import 'package:cmms/domain/models/facility_model.dart';
 import 'package:cmms/domain/models/mc_task_list_model.dart';
@@ -116,6 +117,11 @@ class ModuleCleaningListExecutionController extends GetxController {
   void getMCListByDate() {
     getMCTaskList(
         facilityId, formattedFromdate, formattedTodate, false);
+  }
+
+   Future<void> viewMCExecution({int? id}) async {
+    Get.toNamed(Routes.viewModuleCleaningExecutionScreen, arguments: id);
+    print('Argument$id');
   }
 
 }
