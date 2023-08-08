@@ -62,6 +62,23 @@ class JobDetailsController extends GetxController {
   ///
   @override
   void onInit() async {
+    // try {
+    //   await setJobId();
+    //   getJobDetails(jobId.value);
+    //   isDataLoading.value = false;
+    //   textControllers =
+    //       List.generate(permitValuesCount, (_) => TextEditingController());
+    //   permitValues = RxList<String>.filled(permitValuesCount, '');
+    // } //
+    // catch (e) {
+    //   Utility.showDialog(e.toString() + 'onReady');
+    //   print(e);
+    // }
+    super.onInit();
+  }
+
+  @override
+  void onReady() async {
     try {
       await setJobId();
       getJobDetails(jobId.value);
@@ -74,55 +91,29 @@ class JobDetailsController extends GetxController {
       Utility.showDialog(e.toString() + 'onReady');
       print(e);
     }
-    super.onInit();
+    super.onReady();
   }
-
-  // @override
-  // void onReady() async {
-  //   try {
-  //     await setJobId();
-  //     getJobDetails(jobId.value);
-  //     isDataLoading.value = false;
-  //     textControllers =
-  //         List.generate(permitValuesCount, (_) => TextEditingController());
-  //     permitValues = RxList<String>.filled(permitValuesCount, '');
-  //   } //
-  //   catch (e) {
-  //     Utility.showDialog(e.toString() + 'onReady');
-  //     print(e);
-  //   }
-  //   super.onReady();
-  // }
 
   Future<void> setJobId() async {
-    try {
-      final _flutterSecureStorage = const FlutterSecureStorage();
-      String? _jobId = '';
-      jobId.value = 0;
+    final _flutterSecureStorage = const FlutterSecureStorage();
+    String? _jobId = '';
+    // Read jobId from storage
+    _jobId = await _flutterSecureStorage.read(key: "jobId");
 
-      // Read jobId from storage
-      _jobId = await _flutterSecureStorage.read(key: "jobId");
-
-      // If jobId is unavailable, take it from the arguments received
-      if (_jobId == null || _jobId == '' || _jobId == "null") {
-        var data = Get.arguments;
-        if (data != null) {
-          jobId.value = data["jobId"];
-          // Update jobId in storage with the new value
-          await _flutterSecureStorage.write(
-            key: "jobId",
-            value: jobId.value == null ? '' : jobId.value.toString(),
-          );
-        }
-      } else {
-        jobId.value = int.tryParse(_jobId) ?? 0;
-      }
-      // await _flutterSecureStorage.delete(key: "jobId");
-    } catch (e) {
-      Utility.showDialog(e.toString() + 'setJobId');
+    // If jobId is unavailable, take it from the arguments received
+    if (_jobId == null || _jobId == '' || _jobId == "null") {
+      var data = Get.arguments;
+      jobId.value = data["jobId"];
+      // Update jobId in storage with the new value
+      await _flutterSecureStorage.write(
+        key: "jobId",
+        value: jobId.value == null ? '' : jobId.value.toString(),
+      );
+    } else {
+      jobId.value = int.tryParse(_jobId) ?? 0;
     }
+    await _flutterSecureStorage.delete(key: "jobId");
   }
-
   // startStopJobCard() {
   //   isJobCardStarted.value = !isJobCardStarted.value;
   // }
