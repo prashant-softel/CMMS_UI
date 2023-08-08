@@ -102,80 +102,105 @@ class AddModuleCleaningExecutionContentWeb
                                         ),
                                         Dimens.boxHeight20,
                                         Row(
-                                          mainAxisAlignment:
-                                              MainAxisAlignment.center,
+                                          crossAxisAlignment:
+                                                        CrossAxisAlignment
+                                                            .start,
+                                          mainAxisAlignment: MainAxisAlignment.center,
                                           children: [
-                                            CustomRichText(
-                                                title: 'Plan Title:'),
-                                            Dimens.boxWidth10,
-                                            Text(
-                                              'All Inverter Acid Wash',
+                                            Column(
+                                              crossAxisAlignment:
+                                                            CrossAxisAlignment
+                                                                .end,
+                                              children: [
+                                                CustomRichText(
+                                                title: 'Plan Title: '),
+                                                Dimens.boxHeight10,
+                                                CustomRichText(
+                                                  title: 'Frequency: '),
+
+                                              ],
+                                            ),
+                                            Column(
+                                              crossAxisAlignment: CrossAxisAlignment.start,
+                                              children: [
+                                                Text(
+                                              ' All Inverter Acid Wash',
                                               style: TextStyle(
                                                   color: Color.fromARGB(
                                                       255, 5, 92, 163)),
                                             ),
-                                            Dimens.boxWidth30,
-                                            CustomRichText(
-                                                title: 'Planned By:'),
+                                             Text(
+                                                ' Yearly',
+                                                style: TextStyle(
+                                                    color: Color.fromARGB(
+                                                        255, 5, 92, 163)),
+                                              ),
+
+                                              ],
+                                            ),
                                             Dimens.boxWidth10,
-                                            Text(
-                                              'Prashant Shethya',
+
+                                            Column(
+                                              crossAxisAlignment: CrossAxisAlignment.end,
+                                              children: [
+                                                CustomRichText(
+                                                title: 'Planned By: '),
+                                                Dimens.boxHeight10,
+                                                CustomRichText(
+                                                  title: 'Start Date: '),
+
+                                              ],
+                                            ),
+                                            Column(
+                                              crossAxisAlignment : CrossAxisAlignment.start,
+                                            children: [
+                                               Text(
+                                              ' Prashant Shethya',
                                               style: TextStyle(
                                                   color: Color.fromARGB(
                                                       255, 5, 92, 163)),
                                             ),
-                                             Dimens.boxWidth30,
-                                            CustomRichText(
-                                                title: 'Planning Date & Time:'),
-                                            Dimens.boxWidth10,
-                                            Text(
-                                              '16/04/2023 11:00:00',
-                                              style: TextStyle(
-                                                  color: Color.fromARGB(
-                                                      255, 5, 92, 163)),
-                                            ),
-                                          ],
-                                        ),
-                                        Dimens.boxHeight15,
-                                         Padding(
-                                           padding: const EdgeInsets.only(left: 153),
-                                           child: Row(
-                                            
+                                             Text(
+                                                ' 05/05/2023',
+                                                style: TextStyle(
+                                                    color: Color.fromARGB(
+                                                        255, 5, 92, 163)),
+                                              ),
+
+                                            ],),
+                                             Dimens.boxWidth10,
+                                            Column(
+                                              crossAxisAlignment : CrossAxisAlignment.end,
                                             children: [
                                               CustomRichText(
-                                                  title: 'Frequency:'),
-                                              Dimens.boxWidth10,
-                                              Text(
-                                                'Yearly',
-                                                style: TextStyle(
-                                                    color: Color.fromARGB(
-                                                        255, 5, 92, 163)),
-                                              ),
-                                              Dimens.boxWidth150,
+                                                title: 'Planning Date & Time: '),
+                                                Dimens.boxHeight10,
                                               CustomRichText(
-                                                  title: 'Start Date:'),
-                                              Dimens.boxWidth10,
-                                              Text(
-                                                '05/05/2023',
+                                                  title: 'Execution started by: '),
+
+                                            ],),
+                                            Column(
+                                              crossAxisAlignment : CrossAxisAlignment.start,
+                                              children: [
+                                                Text(
+                                              ' 16/04/2023 11:00:00',
+                                              style: TextStyle(
+                                                  color: Color.fromARGB(
+                                                      255, 5, 92, 163)),
+                                            ),
+                                            Text(
+                                                ' Sujit Kumar',
                                                 style: TextStyle(
                                                     color: Color.fromARGB(
                                                         255, 5, 92, 163)),
                                               ),
-                                               Dimens.boxWidth85,
-                                              CustomRichText(
-                                                  title: 'Execution started by:'),
-                                              Dimens.boxWidth10,
-                                              Text(
-                                                'Sujit Kumar',
-                                                style: TextStyle(
-                                                    color: Color.fromARGB(
-                                                        255, 5, 92, 163)),
-                                              ),
-                                            ],
-                                                                                 ),
-                                         ),
-                                       
-                                       
+
+                                              ],
+                                            )
+
+                                          ],
+                                        ),
+                                      
                                         Dimens.boxHeight50,
 
                                         ///Escalation Matrix Roles

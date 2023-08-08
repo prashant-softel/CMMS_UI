@@ -442,7 +442,7 @@ class ViewPermitWebScreen extends GetView<ViewPermitController> {
 
                                                   ///Loto Applied List
                                                   SizedBox(
-                                                    height: 230,
+                                                    // height: 230,
                                                     width:
                                                         MediaQuery.of(context)
                                                                 .size
@@ -519,7 +519,7 @@ class ViewPermitWebScreen extends GetView<ViewPermitController> {
                                                                         ),
                                                                         SizedBox(
                                                                           width:
-                                                                              MediaQuery.of(context).size.height *
+                                                                              MediaQuery.of(context).size.width *
                                                                                   2,
                                                                           child:
                                                                               Container(
@@ -2087,7 +2087,7 @@ class ViewPermitWebScreen extends GetView<ViewPermitController> {
 
                                                   ///Loto Applied List
                                                   SizedBox(
-                                                    height: 270,
+                                                    height: 290,
                                                     width:
                                                         MediaQuery.of(context)
                                                                 .size
@@ -2115,49 +2115,43 @@ class ViewPermitWebScreen extends GetView<ViewPermitController> {
                                                                 CustomAppBar(
                                                                     title: '',
                                                                     action:
-                                                                        Padding(
-                                                                      padding: const EdgeInsets
-                                                                              .only(
-                                                                          right:
-                                                                              120),
-                                                                      child: Row(
-                                                                        children: [
-                                                                          CustomRichText(
-                                                                              title:
-                                                                                  'Isolation Required '),
-                                                                          Checkbox(
-                                                                            value: controller
-                                                                                .isCheckedLoto
-                                                                                .value,
-                                                                            onChanged:
-                                                                                (value) {},
-                                                                          ),
-                                                                          SizedBox(
-                                                                            width:
-                                                                                230,
-                                                                          ),
-                                                                          CustomRichText(
-                                                                              title:
-                                                                                  'Loto Applied '),
-                                                                          Checkbox(
-                                                                            value: controller
-                                                                                .isCheckedLoto
-                                                                                .value,
-                                                                            onChanged:
-                                                                                (value) {},
-                                                                          ),
-                                                                          SizedBox(
-                                                                            width:
-                                                                                180,
-                                                                          ),
-                                                                          CustomRichText(
-                                                                              title:
-                                                                                  'Isolated Equipments: '),
-                                                                          Text(
-                                                                              'Inverter'),
-                                                                        ],
-                                                                      ),
-                                                                    )),
+                                                                        Row(
+                                                                          children: [
+                                                                            CustomRichText(
+                                                                                title:
+                                                                                    'Isolation Required '),
+                                                                            Checkbox(
+                                                                              value: controller
+                                                                                  .isCheckedLoto
+                                                                                  .value,
+                                                                              onChanged:
+                                                                                  (value) {},
+                                                                            ),
+                                                                            SizedBox(
+                                                                              width:
+                                                                                  230,
+                                                                            ),
+                                                                            CustomRichText(
+                                                                                title:
+                                                                                    'Loto Applied '),
+                                                                            Checkbox(
+                                                                              value: controller
+                                                                                  .isCheckedLoto
+                                                                                  .value,
+                                                                              onChanged:
+                                                                                  (value) {},
+                                                                            ),
+                                                                            SizedBox(
+                                                                              width:
+                                                                                  150,
+                                                                            ),
+                                                                            CustomRichText(
+                                                                                title:
+                                                                                    'Isolated Equipments: '),
+                                                                            Text(
+                                                                                'Inverter'),
+                                                                          ],
+                                                                        )),
                                                                 Dimens
                                                                     .boxHeight10,
                                                                 Wrap(
@@ -2324,7 +2318,7 @@ class ViewPermitWebScreen extends GetView<ViewPermitController> {
 
                                                   ///Team Deployed
                                                   SizedBox(
-                                                    height: 270,
+                                                    height: 290,
                                                     width:
                                                         MediaQuery.of(context)
                                                                 .size

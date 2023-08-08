@@ -534,15 +534,17 @@ class ConnectHelper {
     required bool isLoading,
     required String auth,
     int? facility_id,
+     String? start_date,
+    required String end_date,
   }) async {
-    // var startDateParam = (start_date != null) ? 'start_date=$start_date&' : '';
-    // var endDateParam = (end_date != '') ? 'end_date=$end_date' : '';
+    var startDateParam = (start_date != null) ? 'start_date=$start_date&' : '';
+    var endDateParam = (end_date != '') ? 'end_date=$end_date' : '';
 //var statusParam = (status!=null status!='')?'status=1':'';
     // var statusParam = 'status=1';
     ResponseModel responseModel = await apiWrapper.makeRequest(
-      'MC/GetMCTaskList?facility_id=$facility_id',
-      // startDateParam +
-      // endDateParam,
+      'MC/GetMCTaskList?facility_id=$facility_id&' +
+      startDateParam +
+      endDateParam,
       Request.getMultiparts,
       null,
       isLoading,
@@ -2205,7 +2207,9 @@ class ConnectHelper {
         'Authorization': 'Bearer $auth',
       },
     );
+    print('JobCard Response $responseModel');
     return responseModel;
+    
   }
 
 //

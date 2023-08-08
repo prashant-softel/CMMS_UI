@@ -1,3 +1,5 @@
+import 'package:cmms/app/constant/constant.dart';
+import 'package:cmms/app/widgets/job_card_approve_dialog.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -318,24 +320,51 @@ class JobCardDetailsContentWeb extends GetView<JobCardDetailsController> {
                                         },
                                       ),
                                       Dimens.boxWidth10,
-                                      CustomElevatedButton(
-                                        backgroundColor:
-                                            ColorValues.approveColor,
-                                        text: 'Approve',
-                                        onPressed: () async {
-                                          bool? confirmed =
-                                              await showConfirmationDialog(
-                                            context,
-                                            'Are you sure you want to Approve ?',
-                                          );
-                                          if (confirmed == true) {
-                                            controller.approveJobCards();
+                                      // CustomElevatedButton(
+                                      //   backgroundColor:
+                                      //       ColorValues.approveColor,
+                                      //   text: 'Approve',
+                                      //   onPressed: () async {
+                                      //     bool? confirmed =
+                                      //         await showConfirmationDialog(
+                                      //       context,
+                                      //       'Are you sure you want to Approve ?',
+                                      //     );
+                                      //     if (confirmed == true) {
+                                            // controller.approveJobCards();
 
-                                            Text(
-                                                'Are you sure you want to Approve ?');
-                                          }
-                                        },
-                                      ),
+                                      //       Text(
+                                      //           'Are you sure you want to Approve ?');
+                                      //     }
+                                      //   },
+                                      // ),
+
+                                       varUserAccessModel.value.access_list!
+                                  .where((e) =>
+                                      e.feature_id == 3 && e.approve == 1)
+                                  .length >
+                              0 
+                           
+                  ? 
+                  Container(
+                      height: 30,
+                      child: CustomElevatedButton(
+                        backgroundColor: ColorValues.appGreenColor,
+                        text: "Approve",
+                        icon: Icons.add,
+                        onPressed: () {
+                          // controller
+                          //     .createNewPermit();
+                          Get.dialog(JobCardApproveDialog(
+                              JobCardId:
+                                  '${controller.jobCardId.value}',
+                              // ptwStatus:
+                              //     '${controller.viewPermitDetailsModel.value?.ptwStatus}'
+                                  )
+                                  );
+                        },
+                      ))
+                  : Container(),
                                       Dimens.boxWidth10,
                                       CustomElevatedButton(
                                         backgroundColor:

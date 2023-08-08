@@ -421,11 +421,15 @@ class DataRepository extends DomainRepository {
     int? facility_id,
     required bool isLoading,
     required String auth,
+     String? start_date,
+    required String end_date,
   }) async {
     return await connectHelper.getMCTaskList(
       isLoading: isLoading,
       auth: auth,
       facility_id: facility_id,
+       start_date: start_date,
+      end_date: end_date,
     );
   }
 
