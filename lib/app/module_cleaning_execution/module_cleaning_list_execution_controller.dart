@@ -6,6 +6,7 @@ import 'package:cmms/app/module_cleaning_execution/module_cleaning_list_executio
 import 'package:cmms/domain/models/facility_model.dart';
 import 'package:cmms/domain/models/mc_task_list_model.dart';
 import 'package:get/get.dart';
+import 'package:intl/intl.dart';
 import 'package:scrollable_table_view/scrollable_table_view.dart';
 
 class ModuleCleaningListExecutionController extends GetxController {
@@ -22,6 +23,15 @@ class ModuleCleaningListExecutionController extends GetxController {
   MCTaskListModel? mcTaskModelList;
   RxList<String> mcTaskListTableColumns = <String>[].obs;
 
+///Date Range
+ Rx<DateTime> fromDate = DateTime.now().obs;
+  Rx<DateTime> toDate = DateTime.now().obs;
+  bool openFromDateToStartDatePicker = false;
+  String get formattedFromdate =>
+      DateFormat('yyyy-MM-dd').format(fromDate.value);
+  String get formattedTodate => DateFormat('yyyy-MM-dd').format(toDate.value);
+
+
 
 
   PaginationController paginationController = PaginationController(
@@ -36,7 +46,7 @@ class ModuleCleaningListExecutionController extends GetxController {
   void onInit() async {
     facilityIdStreamSubscription = homecontroller.facilityId$.listen((event) {
       facilityId = event;
-      getMCTaskList(facilityId, true);
+      getMCTaskList(facilityId, formattedTodate, formattedFromdate, true);
       super.onInit();
     });
   }
@@ -68,11 +78,14 @@ class ModuleCleaningListExecutionController extends GetxController {
     update(['mc_task_list']);
   }
 
-    Future<void> getMCTaskList(int facilityId, bool isLoading) async {
+    Future<void> getMCTaskList(int facilityId, dynamic startDate,
+      dynamic endDate, bool isLoading) async {
     mcTaskList.value = <MCTaskListModel>[];
 
     final list = await moduleCleaningListExecutionPresenter.getMCTaskList(
         isLoading: isLoading, 
+        start_date: startDate, //// "2020-01-01",
+        end_date: endDate,
         facility_id: facilityId
         );
     
@@ -99,4 +112,10 @@ class ModuleCleaningListExecutionController extends GetxController {
 
     update(['mc_task_list']);
   }
+
+  void getMCListByDate() {
+    getMCTaskList(
+        facilityId, formattedFromdate, formattedTodate, false);
+  }
+
 }

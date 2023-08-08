@@ -68,6 +68,9 @@ class JobCardDetailsController extends GetxController {
   RxList<JobCardDetailsModel?> jobCardList = <JobCardDetailsModel?>[].obs;
   Rx<JobCardDetailsModel?> jobCardDetailsModel = JobCardDetailsModel().obs;
 
+  TextEditingController approveCommentTextFieldCtrlr = TextEditingController();
+
+
   /// Plant Details
   int userId = 35;
   int facilityId = 46;
@@ -88,6 +91,7 @@ class JobCardDetailsController extends GetxController {
   void onInit() async {
     try {
       Get.put(FileUploadController());
+      
       final _flutterSecureStorage = const FlutterSecureStorage();
 
       await _flutterSecureStorage.delete(key: "JcId");
@@ -548,7 +552,7 @@ class JobCardDetailsController extends GetxController {
   // // }
   void approveJobCards() async {
     {
-      String _comment = descriptionOfWorkDoneCtrlr.text.trim();
+      String _comment = approveCommentTextFieldCtrlr.text.trim();
 
       CommentModel commentCalibrationModel =
           CommentModel(id: jobCardId.value, comment: _comment);

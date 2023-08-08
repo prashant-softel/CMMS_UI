@@ -1744,6 +1744,8 @@ class Repository {
   Future<List<MCTaskListModel>> getMCTaskList({
     required int? facility_id,
     required bool isLoading,
+     String? start_date,
+    required String end_date,
   }) async {
     try {
       final auth = await getSecuredValue(LocalKeys.authToken);
@@ -1752,6 +1754,8 @@ class Repository {
       final res = await _dataRepository.getMCTaskList(
         facility_id: facility_id,
         isLoading: isLoading,
+        start_date: start_date,
+        end_date: end_date,
         auth: auth,
       );
       print('MCTaskList: ${res.data}');
