@@ -1,3 +1,4 @@
+import 'package:cmms/app/constant/constant.dart';
 import 'package:data_table_2/data_table_2.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
@@ -58,6 +59,13 @@ class JobListContentWeb extends StatelessWidget {
             color: ColorValues.appGreenColor,
           ),
           Dimens.boxWidth10,
+
+           varUserAccessModel.value.access_list!
+                                      .where((e) =>
+                                          e.feature_id == 2 && e.add == 1)
+                                      .length >
+                                  0
+                              ?
           ActionButton(
             icon: Icons.upload,
             label: 'Add New Job',
@@ -65,7 +73,8 @@ class JobListContentWeb extends StatelessWidget {
               controller.goToAddJobScreen();
             },
             color: ColorValues.appDarkBlueColor,
-          ),
+          ): Container(),
+          
           Dimens.boxWidth10,
         ]),
       ),

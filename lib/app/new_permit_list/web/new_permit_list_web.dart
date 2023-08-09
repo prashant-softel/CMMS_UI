@@ -591,7 +591,7 @@ class NewPermitListWeb extends GetView<NewPermitListController> {
                                                                                 ///Close Permit
                                                                                 varUserAccessModel.value.access_list!.where((e) => e.feature_id == 3 && e.add == 1).length > 0
                                                                                     ? TableActionButton(
-                                                                                        color: ColorValues.appRedColor,
+                                                                                        color: ColorValues.appcloseRedColor,
                                                                                         icon: Icons.close,
                                                                                         message: 'Close Permit',
                                                                                         onPress: () {

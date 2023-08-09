@@ -142,21 +142,45 @@ class BreakdownMaintenanceScreen
                           ? (itemWidth / itemHeight)
                           : (itemWidth / itemHeightWeb),
                       children: <Widget>[
+
+                        varUserAccessModel.value.access_list!
+                                      .where((e) =>
+                                          e.feature_id == 2 && e.view == 1)
+                                      .length >
+                                  0
+                              ?
                         createContentTile(
                             title: "Job List",
                             onTap: () {
                               controller.goToJobListScreen();
-                            }),
+                            }):
+                            Container(),
+
+                             varUserAccessModel.value.access_list!
+                                      .where((e) =>
+                                          e.feature_id == 2 && e.add == 1)
+                                      .length >
+                                  0
+                              ?
                         createContentTile(
                             title: 'Add New Job',
                             onTap: () {
                               controller.addNewJob();
-                            }),
+                            })
+                            :Container(),
+
+                         varUserAccessModel.value.access_list!
+                                      .where((e) =>
+                                          e.feature_id == 4 && e.view == 1)
+                                      .length >
+                                  0
+                              ?
                         createContentTile(
                             title: "JobCard List",
                             onTap: () {
                               controller.goToJobCardList();
-                            }),
+                            }):Container(),
+                            
                       ],
                     ),
                     GridView.count(

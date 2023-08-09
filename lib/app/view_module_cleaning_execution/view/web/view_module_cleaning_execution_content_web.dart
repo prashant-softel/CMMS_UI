@@ -1,6 +1,5 @@
 // import 'package:cmms/app/add_job/views/widgets/work_area_widget.dart';
 
-import 'package:cmms/app/add_module_cleaning_execution/add_module_cleaning_execution_controller.dart';
 import 'package:cmms/app/app.dart';
 import 'package:cmms/app/view_module_cleaning_execution/view_module_cleaning_execution_controller.dart';
 import 'package:cmms/app/widgets/custom_elevated_button.dart';
@@ -82,7 +81,7 @@ class ViewModuleCleaningExecutionContentWeb
                     ),
                     SizedBox(
                       width: MediaQuery.of(context).size.width / 1,
-                      height: MediaQuery.of(context).size.height / 1,
+                      height: MediaQuery.of(context).size.height / 0.8,
                       child: Card(
                         color: Colors.lightBlue.shade50,
                         child: Wrap(
@@ -202,7 +201,6 @@ class ViewModuleCleaningExecutionContentWeb
                                         Dimens.boxHeight50,
 
                                         ///Escalation Matrix Roles
-
                                         Wrap(
                                           children: [
                                             Container(
@@ -239,6 +237,21 @@ class ViewModuleCleaningExecutionContentWeb
                                                         Text(
                                                             "Schedule Execution"),
                                                         Spacer(),
+                                                        Container(
+                                                          height: 28,
+                                                          child:
+                                                              CustomElevatedButton(
+                                                           
+                                                            backgroundColor:
+                                                                ColorValues
+                                                                    .appDarkBlueColor,
+                                                            text: "View Equipments",
+                                                            onPressed: () {
+                                                              // controller.printScreen();
+                                                            },
+                                                          ),
+                                                        ),
+                                                        Dimens.boxWidth20,
                                                         GestureDetector(
                                                             onTap: () {
                                                               controller
@@ -274,8 +287,9 @@ class ViewModuleCleaningExecutionContentWeb
                                                         "Pending",
                                                         "Type",
                                                         "Water Used",
+                                                        "Start Date",
+                                                        "End Date",
                                                         "Remark",
-                                                        "Actions",
                                                       ].map((column) {
                                                         return TableViewColumn(
                                                           label: column,
@@ -297,6 +311,12 @@ class ViewModuleCleaningExecutionContentWeb
                                                                           'key'] ==
                                                                       "Days")
                                                                   ? Column(
+                                                                      mainAxisAlignment:
+                                                                          MainAxisAlignment
+                                                                              .center,
+                                                                      crossAxisAlignment:
+                                                                          CrossAxisAlignment
+                                                                              .center,
                                                                       children: [
                                                                         Text(
                                                                             '1')
@@ -305,6 +325,10 @@ class ViewModuleCleaningExecutionContentWeb
                                                                   : (mapData['key'] ==
                                                                           "Scheduled Module")
                                                                       ? Column(
+                                                                          mainAxisAlignment:
+                                                                              MainAxisAlignment.center,
+                                                                          crossAxisAlignment:
+                                                                              CrossAxisAlignment.center,
                                                                           children: [
                                                                             Text('2000')
                                                                           ],
@@ -312,74 +336,63 @@ class ViewModuleCleaningExecutionContentWeb
                                                                       : (mapData['key'] ==
                                                                               "Cleaned")
                                                                           ? Column(
+                                                                              mainAxisAlignment: MainAxisAlignment.center,
+                                                                              crossAxisAlignment: CrossAxisAlignment.center,
                                                                               children: [
                                                                                 Text('-')
                                                                               ],
                                                                             )
                                                                           : (mapData['key'] == "Abandoned")
                                                                               ? Column(
+                                                                                  mainAxisAlignment: MainAxisAlignment.center,
+                                                                                  crossAxisAlignment: CrossAxisAlignment.center,
                                                                                   children: [
-                                                                                    Text('-')
+                                                                                    Text('2400')
                                                                                   ],
                                                                                 )
                                                                               : (mapData['key'] == "Pending")
                                                                                   ? Column(
+                                                                                      mainAxisAlignment: MainAxisAlignment.center,
+                                                                                      crossAxisAlignment: CrossAxisAlignment.center,
                                                                                       children: [
                                                                                         Text('-')
                                                                                       ],
                                                                                     )
                                                                                   : (mapData['key'] == "Type")
                                                                                       ? Column(
+                                                                                          mainAxisAlignment: MainAxisAlignment.center,
+                                                                                          crossAxisAlignment: CrossAxisAlignment.center,
                                                                                           children: [
                                                                                             Text('Wet')
                                                                                           ],
                                                                                         )
                                                                                       : (mapData['key'] == "Water Used")
                                                                                           ? Column(
-                                                                                              children: [Text('-')],
+                                                                                              mainAxisAlignment: MainAxisAlignment.center,
+                                                                                              crossAxisAlignment: CrossAxisAlignment.center,
+                                                                                              children: [
+                                                                                                Text('1200 ltr')
+                                                                                              ],
                                                                                             )
-                                                                                          : (mapData['key'] == "Remark")
+                                                                                          : (mapData['key'] == "Start Date")
                                                                                               ? Column(
                                                                                                   mainAxisAlignment: MainAxisAlignment.center,
                                                                                                   crossAxisAlignment: CrossAxisAlignment.center,
-                                                                                                  children: [
-                                                                                                    SizedBox(
-                                                                                                        width: MediaQuery.of(context).size.width / 5,
-                                                                                                        child: LoginCustomTextfield(
-                                                                                                          keyboardType: TextInputType.number,
-                                                                                                          inputFormatters: <TextInputFormatter>[
-                                                                                                            FilteringTextInputFormatter.digitsOnly
-                                                                                                          ],
-                                                                                                          maxLine: 1,
-                                                                                                          textController: new TextEditingController(text: mapData["value"] ?? ''),
-                                                                                                          onChanged: (txt) {
-                                                                                                            mapData["value"] = txt;
-                                                                                                          },
-                                                                                                        )),
-                                                                                                    SizedBox(
-                                                                                                      height: 5,
-                                                                                                    ),
-                                                                                                  ],
+                                                                                                  children: [Text('01/02/2023')],
                                                                                                 )
-                                                                                              : (mapData['key'] == "Actions")
-                                                                                                  ? Padding(
-                                                                                                      padding: const EdgeInsets.only(left: 20),
-                                                                                                      child: Row(
-                                                                                                        children: [
-                                                                                                          TableActionButton(
-                                                                                                            label: 'Start',
-                                                                                                            onPress: () {},
-                                                                                                            color: Colors.green,
-                                                                                                          ),
-                                                                                                          TableActionButton(
-                                                                                                            label: 'Abandon',
-                                                                                                            onPress: () {},
-                                                                                                            color: Colors.red,
-                                                                                                          ),
-                                                                                                        ],
-                                                                                                      ),
+                                                                                              : (mapData['key'] == "End Date")
+                                                                                                  ? Column(
+                                                                                                      mainAxisAlignment: MainAxisAlignment.center,
+                                                                                                      crossAxisAlignment: CrossAxisAlignment.center,
+                                                                                                      children: [Text('02/02/2023')],
                                                                                                     )
-                                                                                                  : Text(mapData['key'] ?? ''),
+                                                                                                  : (mapData['key'] == "Remark")
+                                                                                                      ? Column(
+                                                                                                          mainAxisAlignment: MainAxisAlignment.center,
+                                                                                                          crossAxisAlignment: CrossAxisAlignment.center,
+                                                                                                          children: [Text('Heavy Rain')],
+                                                                                                        )
+                                                                                                      : Text(mapData['key'] ?? ''),
                                                             );
                                                           }).toList(),
                                                         );
@@ -392,34 +405,113 @@ class ViewModuleCleaningExecutionContentWeb
                                           ],
                                         ),
 
-                                        // Container(
-                                        //   height: 28,
-                                        //   child: CustomElevatedButton(
-                                        //     backgroundColor:
-                                        //         ColorValues.appGreenColor,
-                                        //     text: "Add Data",
-                                        //     onPressed: () {
-                                        //       controller
-                                        //           .addStatusEscalationData(
-                                        //               controller
-                                        //                   .selectedTypePermitId);
-                                        //       controller.addEscalationData(
-                                        //           int.tryParse(
-                                        //               '${controller.durationDaysTextCtrlr.text}'),
-                                        //           controller
-                                        //               .selectedRoleListId);
-                                        //       print(
-                                        //           'Controller:${controller.durationDaysTextCtrlr.text}');
-                                        //       print(
-                                        //           'Controller:${controller.selectedTypePermitId}');
-                                        //       controller
-                                        //           .durationDaysTextCtrlr
-                                        //           .clear();
-                                        //       controller.selectedRole
-                                        //           .value = "";
-                                        //     },
-                                        //   ),
-                                        // ),
+                                        ///MC Execution History
+                                        Container(
+                                          margin: Dimens.edgeInsets20,
+                                          height: 200,
+                                          width: MediaQuery.of(context)
+                                                  .size
+                                                  .width /
+                                              1.5,
+                                          decoration: BoxDecoration(
+                                            border: Border.all(
+                                              color: ColorValues
+                                                  .lightGreyColorWithOpacity35,
+                                              width: 1,
+                                            ),
+                                            boxShadow: [
+                                              BoxShadow(
+                                                color: ColorValues
+                                                    .appBlueBackgroundColor,
+                                                spreadRadius: 2,
+                                                blurRadius: 5,
+                                                offset: Offset(0, 2),
+                                              ),
+                                            ],
+                                          ),
+                                          child: Column(
+                                            children: [
+                                              Padding(
+                                                padding:
+                                                    const EdgeInsets.all(10.0),
+                                                child: Row(
+                                                  children: [
+                                                    Text(
+                                                      "MC Execution History ",
+                                                      style: Styles.blue700,
+                                                    ),
+                                                  ],
+                                                ),
+                                              ),
+                                              Divider(
+                                                color:
+                                                    ColorValues.greyLightColour,
+                                              ),
+                                              Expanded(
+                                                child: ScrollableTableView(
+                                                  columns: [
+                                                    "Time Stamp",
+                                                    "Module Ref ID",
+                                                    "Comment",
+                                                    "Module Type",
+                                                    "Status",
+                                                  ].map((column) {
+                                                    return TableViewColumn(
+                                                      label: column,
+                                                      minWidth:
+                                                          Get.width * 0.15,
+                                                    );
+                                                  }).toList(),
+                                                  rows: [
+                                                    // ...List.generate(
+                                                    //   controller
+                                                    //           .historyList
+                                                    //           ?.length ??
+                                                    //       0,
+                                                    //   (index) {
+                                                    //     var getHistoryListDetails =
+                                                    //         controller
+                                                    //                 .historyList?[
+                                                    //             index];
+                                                    //     return [
+                                                    //       '${getHistoryListDetails?.createdAt}',
+                                                    //       '${getHistoryListDetails?.moduleRefId ?? ''}',
+                                                    //       '${getHistoryListDetails?.comment ?? ''}',
+                                                    //       '${getHistoryListDetails?.moduleType ?? ''}',
+                                                    //       '${getHistoryListDetails?.status_name ?? ''}',
+                                                    //     ];
+                                                    //   },
+                                                    // ),
+                                                    [
+                                                      "2022-04-10 16:40",
+                                                      "Sujit Kumar",
+                                                      "Execution Started",
+                                                      "--",
+                                                      "Plan Execution Started"
+                                                    ],
+                                                    [
+                                                      "2022-02-15 12:30",
+                                                      "Amit Yadav",
+                                                      "Execution Completed",
+                                                      "--",
+                                                      "Plan Completed"
+                                                    ],
+                                                  ].map((record) {
+                                                    return TableViewRow(
+                                                      height: 30,
+                                                      cells:
+                                                          record.map((value) {
+                                                        return TableViewCell(
+                                                          child: Text(value),
+                                                        );
+                                                      }).toList(),
+                                                    );
+                                                  }).toList(),
+                                                ),
+                                              ),
+                                            ],
+                                          ),
+                                        ),
 
                                         Row(
                                           mainAxisAlignment:
@@ -428,7 +520,6 @@ class ViewModuleCleaningExecutionContentWeb
                                             SizedBox(
                                               height: 150,
                                             ),
-
                                             SizedBox(
                                               width: 15,
                                             ),
@@ -445,52 +536,15 @@ class ViewModuleCleaningExecutionContentWeb
                                             Container(
                                               height: 28,
                                               child: CustomElevatedButton(
-                                                backgroundColor:
-                                                    ColorValues.appGreenColor,
-                                                text: "Submit",
+                                                icon: Icons.print_outlined,
+                                                backgroundColor: ColorValues
+                                                    .appDarkBlueColor,
+                                                text: "Print",
                                                 onPressed: () {
-                                                  // controller
-                                                  //     .createEscalationMatrix();
+                                                  // controller.printScreen();
                                                 },
                                               ),
                                             ),
-                                            SizedBox(
-                                              width: 20,
-                                            ),
-                                            Container(
-                                              height: 28,
-                                              child: CustomElevatedButton(
-                                                backgroundColor:
-                                                    ColorValues.appRedColor,
-                                                text: "Abandoned All",
-                                                onPressed: () {
-                                                  // controller
-                                                  //     .createEscalationMatrix();
-                                                },
-                                              ),
-                                            ),
-
-                                            //           varUserAccessModel.value.access_list!
-                                            // .where((e) => e.feature_id == 3 && e.edit == 1)
-                                            // .length > 0
-                                            // &&
-                                            // controller.incidentReportDetailsModel
-                                            //             .value?.id !=
-                                            //         null
-                                            //     ? CustomElevatedButton(
-                                            //         icon: Icons.edit,
-                                            //         backgroundColor: Colors.green,
-                                            //         onPressed: () {
-                                            //           // controller.saveAsDraft();
-                                            //           controller.editIncidentReport(
-                                            //               id: controller
-                                            //                   .incidentReportDetailsModel
-                                            //                   .value
-                                            //                   ?.id);
-                                            //         },
-                                            //         text: 'Edit',
-                                            //       )
-                                            //     : Container()
                                           ],
                                         ),
                                       ],
