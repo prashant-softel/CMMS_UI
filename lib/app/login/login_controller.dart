@@ -10,8 +10,8 @@ class LoginController extends GetxController {
   LoginPresenter loginPresenter;
   Rx<bool> passwordVisible = true.obs;
 
-  var emailCtrlr = TextEditingController(text: "sujit@softeltech.in");
-  var passwordCtrlr = TextEditingController(text: "Sujit123");
+  var emailCtrlr = TextEditingController(text: "engineer@softeltech.in");
+  var passwordCtrlr = TextEditingController(text: "user123");
   // var emailCtrlr = TextEditingController(text: "khushru.mistry@softel.com");
   // var passwordCtrlr = TextEditingController(text: "/bS4BMO+fOLSPh0oK2qP0A==");
   final email = BehaviorSubject<String>();
@@ -24,7 +24,6 @@ class LoginController extends GetxController {
     email.add('');
     password.add('');
   }
-
 
   @override
   void onClose() {

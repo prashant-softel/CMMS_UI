@@ -76,28 +76,18 @@ class JobCardUsecase {
       );
 
   ///
-  Future<dynamic> approveJobCard({
-    jobCardId,
-    comment,
-    bool? isLoading,
-  }) async =>
-      await repository.approveJobCard(
-        jobCardId,
-        comment,
-        isLoading,
-      );
+  // Future<dynamic> approveJobCard({
+  //   jobCardId,
+  //   comment,
+  //   bool? isLoading,
+  // }) async =>
+  //     await repository.approveJobCard(
+  //       jobCardId,
+  //       comment,
+  //       isLoading,
+  //     );
 
   ///
-  Future<dynamic> rejectJobCard({
-    jobCardId,
-    comment,
-    bool? isLoading,
-  }) async =>
-      await repository.rejectJobCard(
-        jobCardId,
-        comment,
-        isLoading,
-      );
 
   ///
 }

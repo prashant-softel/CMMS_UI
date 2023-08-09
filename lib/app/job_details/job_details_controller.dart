@@ -1,3 +1,4 @@
+import 'package:cmms/app/constant/constant.dart';
 import 'package:cmms/app/facility/facility_presenter.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
@@ -62,12 +63,19 @@ class JobDetailsController extends GetxController {
   ///
   @override
   void onInit() async {
-    try {
-      super.onInit();
-    } //
-    catch (e) {
-      print(e);
-    }
+    // try {
+    //   await setJobId();
+    //   getJobDetails(jobId.value);
+    //   isDataLoading.value = false;
+    //   textControllers =
+    //       List.generate(permitValuesCount, (_) => TextEditingController());
+    //   permitValues = RxList<String>.filled(permitValuesCount, '');
+    // } //
+    // catch (e) {
+    //   Utility.showDialog(e.toString() + 'onReady');
+    //   print(e);
+    // }
+    super.onInit();
   }
 
   @override
@@ -88,34 +96,25 @@ class JobDetailsController extends GetxController {
   }
 
   Future<void> setJobId() async {
-    try {
-      final _flutterSecureStorage = const FlutterSecureStorage();
-      String? _jobId = '';
-      jobId.value = 0;
+    final _flutterSecureStorage = const FlutterSecureStorage();
+    String? _jobId = '';
+    // Read jobId from storage
+    _jobId = await _flutterSecureStorage.read(key: "jobId");
 
-      // Read jobId from storage
-      _jobId = await _flutterSecureStorage.read(key: "jobId");
-
-      // If jobId is unavailable, take it from the arguments received
-      if (_jobId == null || _jobId == '' || _jobId == "null") {
-        var data = Get.arguments;
-        if (data != null) {
-          jobId.value = data["jobId"];
-          // Update jobId in storage with the new value
-          await _flutterSecureStorage.write(
-            key: "jobId",
-            value: jobId.value == null ? '' : jobId.value.toString(),
-          );
-        }
-      } else {
-        jobId.value = int.tryParse(_jobId) ?? 0;
-      }
-      // await _flutterSecureStorage.delete(key: "jobId");
-    } catch (e) {
-      Utility.showDialog(e.toString() + 'setJobId');
+    // If jobId is unavailable, take it from the arguments received
+    if (_jobId == null || _jobId == '' || _jobId == "null") {
+      var data = Get.arguments;
+      jobId.value = data["jobId"];
+      // Update jobId in storage with the new value
+      await _flutterSecureStorage.write(
+        key: "jobId",
+        value: jobId.value == null ? '' : jobId.value.toString(),
+      );
+    } else {
+      jobId.value = int.tryParse(_jobId) ?? 0;
     }
+    await _flutterSecureStorage.delete(key: "jobId");
   }
-
   // startStopJobCard() {
   //   isJobCardStarted.value = !isJobCardStarted.value;
   // }
@@ -133,14 +132,12 @@ class JobDetailsController extends GetxController {
 
     if (responseMapJobCardStarted != null &&
         responseMapJobCardStarted.length > 0) {
-      final _jobCardId = responseMapJobCardStarted["id"][0];
-      jobCardId.value = _jobCardId;
       final _flutterSecureStorage = const FlutterSecureStorage();
 
-      await _flutterSecureStorage.delete(key: "JcId");
-      final _flutterSecureStoragejc = const FlutterSecureStorage();
+      await _flutterSecureStorage.delete(key: "jobId");
+      final _jobCardId = responseMapJobCardStarted["id"][0];
+      jobCardId.value = _jobCardId;
 
-      _flutterSecureStoragejc.delete(key: "jobId");
       Get.toNamed(Routes.jobCard, arguments: {'JcId': jobCardId.value});
 
       //  }
@@ -191,7 +188,14 @@ class JobDetailsController extends GetxController {
   Future<List<NewPermitModel?>?> getPermitList() async {
     facilityId = jobDetailsModel.value?.facilityId ?? 0;
     final _permitList = await jobDetailsPresenter.getPermitList(
-        facilityId: facilityId, selfView: false, isLoading: false);
+        facilityId: facilityId,
+        selfView: varUserAccessModel.value.access_list!
+                    .where((e) => e.feature_id == 4 && e.selfView == 1)
+                    .length >
+                0
+            ? true
+            : false,
+        isLoading: false);
     if (_permitList != null) {
       permitList?.value = <NewPermitModel>[];
       permitList?.value = _permitList;
@@ -207,6 +211,9 @@ class JobDetailsController extends GetxController {
   }
 
   void goToJobCardScreen() {
+    final _flutterSecureStoragejc = const FlutterSecureStorage();
+
+    _flutterSecureStoragejc.delete(key: "JcId");
     createJobCard();
   }
 

@@ -6,19 +6,15 @@ import 'package:flutter/material.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:get/get.dart';
 import 'package:html_unescape/html_unescape.dart';
+import '../../domain/models/comment_model.dart';
 import '../../domain/models/history_model.dart';
 import '../../domain/models/job_card_details_model.dart';
-import '../../domain/models/job_details_model.dart';
-import '../../domain/usecases/job_details_usecase.dart';
 import '../controllers/file_upload_controller.dart';
 import '../controllers/history_controller.dart';
 import '../job_details/job_details_presenter.dart';
 import '../navigators/app_pages.dart';
-import '../theme/color_values.dart';
 import '../utils/utility.dart';
-import '../widgets/custom_elevated_button.dart';
 import 'job_card_details_presenter.dart';
-import 'views/widgets/job_card_updated_dialog.dart';
 
 class JobCardDetailsController extends GetxController {
   ///
@@ -72,6 +68,11 @@ class JobCardDetailsController extends GetxController {
   RxList<JobCardDetailsModel?> jobCardList = <JobCardDetailsModel?>[].obs;
   Rx<JobCardDetailsModel?> jobCardDetailsModel = JobCardDetailsModel().obs;
 
+  TextEditingController approveCommentTextFieldCtrlr = TextEditingController();
+  TextEditingController rejectCommentTextFieldCtrlr = TextEditingController();
+
+
+
   /// Plant Details
   int userId = 35;
   int facilityId = 46;
@@ -92,6 +93,10 @@ class JobCardDetailsController extends GetxController {
   void onInit() async {
     try {
       Get.put(FileUploadController());
+      
+      final _flutterSecureStorage = const FlutterSecureStorage();
+
+      await _flutterSecureStorage.delete(key: "JcId");
 
       await setJcId();
 
@@ -133,7 +138,7 @@ class JobCardDetailsController extends GetxController {
       } else {
         jobCardId.value = int.tryParse(_jobCardId) ?? 0;
       }
-      await _flutterSecureStorage.delete(key: "JcId");
+      // await _flutterSecureStorage.delete(key: "JcId");
     } catch (e) {
       Utility.showDialog(e.toString() + 'JcId');
     }
@@ -403,8 +408,12 @@ class JobCardDetailsController extends GetxController {
 
       if (responseMapJobCardStarted != null &&
           responseMapJobCardStarted.length > 0) {
-        //   final _jobCardId = responseMapJobCardStarted["id"][0];
-        //   jobCardId.value = _jobCardId;
+        jobCardList.value = await jobCardDetailsPresenter.getJobCardDetails(
+              jobCardId: jobCardId.value,
+              isLoading: true,
+            ) ??
+            [];
+        getHistory();
       }
     }
 
@@ -521,18 +530,64 @@ class JobCardDetailsController extends GetxController {
     // print('update  Create GO  data: $carryForwardJCModelJsonString');
   }
 
-  void approveJobCard() async {
-    final response = await jobCardDetailsPresenter.approveJobCard(
-      jobCardId: jobCardId.value,
-      comment: comment,
-      isLoading: true,
-    );
+  // void approveJobCard() async {
+  //   final response = await jobCardDetailsPresenter.approveJobCard(
+  //     jobCardId: jobCardId.value,
+  //     comment: comment,
+  //     isLoading: true,
+  //   );
+  // }
+
+  // // void rejectJobCard() async {
+  // //   try {
+  // //     var comment = "comment"; //descriptionOfWorkDoneCtrlr.text.trim();
+  // //     Map<String, dynamic>? response =
+  // //         await jobCardDetailsPresenter.rejectJobCard(
+  // //       id: jobCardId.value,
+  // //       comment: comment,
+  // //       isLoading: false,
+  // //     );
+  // //   } //
+  // //   catch (e) {
+  // //     Utility.showDialog(e.toString() + ' rejectJobCard');
+  // //   }
+  // // }
+  void approveJobCards() async {
+    {
+      String _comment = approveCommentTextFieldCtrlr.text.trim();
+
+      CommentModel commentCalibrationModel =
+          CommentModel(id: jobCardId.value, comment: _comment);
+
+      var approveJsonString = commentCalibrationModel.toJson();
+      // print({"rejectCalibrationJsonString", approveCalibrationtoJsonString});
+      final response = await jobCardDetailsPresenter.approveJobCards(
+        approveJsonString: approveJsonString,
+        isLoading: true,
+      );
+      if (response == true) {
+        //getCalibrationList(facilityId, true);
+      }
+    }
   }
 
   void rejectJobCard() async {
-    var _comment = descriptionOfWorkDoneCtrlr.text.trim();
-    final response = await jobCardDetailsPresenter.rejectJobCard(
-        jobCardId.value, _comment, true);
+    {
+      String _comment = rejectCommentTextFieldCtrlr.text.trim();
+
+      CommentModel commentCalibrationModel =
+          CommentModel(id: jobCardId.value, comment: _comment);
+
+      var rejectJsonString = commentCalibrationModel.toJson();
+      // print({"rejectCalibrationJsonString", approveCalibrationtoJsonString});
+      final response = await jobCardDetailsPresenter.rejectJobCard(
+        rejectJsonString: rejectJsonString,
+        isLoading: true,
+      );
+      if (response == true) {
+        //getCalibrationList(facilityId, true);
+      }
+    }
   }
 
   String? getResponsibility(index) {

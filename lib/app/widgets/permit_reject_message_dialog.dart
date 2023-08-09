@@ -85,7 +85,7 @@ class PermitMessageRejectDialog extends GetView {
               onPressed: () {
                 Get.offAllNamed(Routes.newPermitList);
                 _controller.getNewPermitList(
-                    _controller.facilityId, _controller.userId,_controller.formattedTodate, _controller.formattedFromdate, false);
+                    _controller.facilityId, _controller.userId,_controller.formattedTodate, _controller.formattedFromdate, false, false);
                 Get.back();
               },
               child: const Text('Ok'),

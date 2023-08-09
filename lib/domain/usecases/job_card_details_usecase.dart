@@ -101,29 +101,20 @@ class JobCardDetailsUsecase {
         isLoading,
       );
 
-  ///
-  Future<Map<String, dynamic>?> approveJobCard({
-    jobCardId,
-    comment,
+  Future<bool> approveJobCards({
+    approveJsonString,
     bool? isLoading,
   }) async =>
-      await repository.approveJobCard(
-        jobCardId,
-        comment,
-        isLoading,
-      );
+      await repository.approveJobCards(
+          approveJsonString: approveJsonString, isLoading: isLoading);
 
   ///
-  Future<Map<String, dynamic>?> rejectJobCard({
-    int? id,
-    comment,
+  Future<bool> rejectJobCard({
+    rejectJsonString,
     bool? isLoading,
   }) async =>
       await repository.rejectJobCard(
-        id,
-        comment,
-        isLoading,
-      );
+          rejectJsonString: rejectJsonString, isLoading: isLoading);
 
   ///
 }

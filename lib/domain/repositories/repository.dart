@@ -1744,6 +1744,8 @@ class Repository {
   Future<List<MCTaskListModel>> getMCTaskList({
     required int? facility_id,
     required bool isLoading,
+     String? start_date,
+    required String end_date,
   }) async {
     try {
       final auth = await getSecuredValue(LocalKeys.authToken);
@@ -1752,6 +1754,8 @@ class Repository {
       final res = await _dataRepository.getMCTaskList(
         facility_id: facility_id,
         isLoading: isLoading,
+        start_date: start_date,
+        end_date: end_date,
         auth: auth,
       );
       print('MCTaskList: ${res.data}');
@@ -1889,6 +1893,7 @@ class Repository {
     String auth,
     int? facilityId,
     bool? isLoading,
+    bool? self_view,
     String? start_date,
     String end_date,
   ) async {
@@ -1906,6 +1911,7 @@ class Repository {
         // userId: 33,
         facilityId: facilityId,
         start_date: start_date,
+        self_view: self_view,
         end_date: end_date,
         userId: userId,
         // userId: 33,
@@ -3426,64 +3432,30 @@ class Repository {
   }
 
   ///
-  Future<Map<String, dynamic>> approveJobCard(
-    jobCardId,
-    comment,
-    bool? isLoading,
-  ) async {
-    try {
-      final auth = await getSecuredValue(LocalKeys.authToken);
-      final res = await _dataRepository.approveJobCard(
-        auth: auth,
-        jobCardId: jobCardId,
-        comment: comment,
-        isLoading: isLoading,
-      );
-
-      if (!res.hasError) {
-        if (res.errorCode == 200) {
-          var responseMap = json.decode(res.data);
-          return responseMap;
-        }
-      } //
-      else {
-        Utility.showDialog(res.errorCode.toString() + 'approveJobCard');
-      }
-      return Map();
-    } catch (error) {
-      print(error.toString());
-      return Map();
-    }
-  }
 
   ///
-  Future<Map<String, dynamic>> rejectJobCard(
-    int? id,
-    comment,
-    bool? isLoading,
-  ) async {
+  Future<bool> approveRequestCalibration(
+      {bool? isLoading, approveCalibrationtoJsonString}) async {
     try {
       final auth = await getSecuredValue(LocalKeys.authToken);
-      final res = await _dataRepository.rejectJobCard(
-        auth: auth,
-        id: id,
-        comment: comment,
-        isLoading: isLoading,
-      );
-
+      log(auth);
+      final res = await _dataRepository.approveRequestCalibration(
+          auth: auth,
+          isLoading: isLoading,
+          approveCalibrationtoJsonString:
+              json.encode(approveCalibrationtoJsonString));
+      print({"res.data", res.data});
       if (!res.hasError) {
-        if (res.errorCode == 200) {
-          var responseMap = json.decode(res.data);
-          return responseMap;
-        }
+        Fluttertoast.showToast(msg: res.data, fontSize: 45.0);
+
+        return true;
       } else {
-        Utility.showDialog(res.errorCode.toString());
-        //return '';
+        Fluttertoast.showToast(msg: res.data, fontSize: 45.0);
+        return false;
       }
-      return Map();
     } catch (error) {
-      print(error.toString());
-      return Map();
+      log(error.toString());
+      return false;
     }
   }
 
@@ -3678,16 +3650,37 @@ class Repository {
     }
   }
 
-  Future<bool> approveRequestCalibration(
-      {bool? isLoading, approveCalibrationtoJsonString}) async {
+  Future<bool> approveJobCards({bool? isLoading, approveJsonString}) async {
     try {
       final auth = await getSecuredValue(LocalKeys.authToken);
       log(auth);
-      final res = await _dataRepository.approveRequestCalibration(
+      final res = await _dataRepository.approveJobCards(
           auth: auth,
           isLoading: isLoading,
-          approveCalibrationtoJsonString:
-              json.encode(approveCalibrationtoJsonString));
+          approveJsonString: json.encode(approveJsonString));
+      print({"res.data", res.data});
+      if (!res.hasError) {
+        Fluttertoast.showToast(msg: res.data, fontSize: 45.0);
+
+        return true;
+      } else {
+        Fluttertoast.showToast(msg: res.data, fontSize: 45.0);
+        return false;
+      }
+    } catch (error) {
+      log(error.toString());
+      return false;
+    }
+  }
+
+  Future<bool> rejectJobCard({bool? isLoading, rejectJsonString}) async {
+    try {
+      final auth = await getSecuredValue(LocalKeys.authToken);
+      log(auth);
+      final res = await _dataRepository.rejectJobCard(
+          auth: auth,
+          isLoading: isLoading,
+          rejectJsonString: json.encode(rejectJsonString));
       print({"res.data", res.data});
       if (!res.hasError) {
         Fluttertoast.showToast(msg: res.data, fontSize: 45.0);

@@ -421,11 +421,15 @@ class DataRepository extends DomainRepository {
     int? facility_id,
     required bool isLoading,
     required String auth,
+     String? start_date,
+    required String end_date,
   }) async {
     return await connectHelper.getMCTaskList(
       isLoading: isLoading,
       auth: auth,
       facility_id: facility_id,
+       start_date: start_date,
+      end_date: end_date,
     );
   }
 
@@ -511,6 +515,7 @@ class DataRepository extends DomainRepository {
     int? facilityId,
     int? userId,
     bool? isLoading,
+    bool? self_view,
     String? start_date,
     required String end_date,
   }) async =>
@@ -519,6 +524,7 @@ class DataRepository extends DomainRepository {
         facilityId: facilityId,
         // facilityId: facilityId ?? 0,
         // userId: 33,
+        self_view: self_view,
         start_date: start_date,
         end_date: end_date,
         userId: userId,
@@ -1288,30 +1294,37 @@ class DataRepository extends DomainRepository {
     );
   }
 
-  Future<ResponseModel> approveJobCard({
-    String? auth,
-    jobCardId,
-    comment,
+  // Future<ResponseModel> approveJobCard({
+  //   String? auth,
+  //   jobCardId,
+  //   comment,
+  //   bool? isLoading,
+  // }) async {
+  //   return await connectHelper.approveJobCard(
+  //     auth: auth,
+  //     jobCardId: jobCardId,
+  //     isLoading: isLoading,
+  //   );
+  // }
+  Future<ResponseModel> approveJobCards({
+    auth,
     bool? isLoading,
+    approveJsonString,
   }) async {
-    return await connectHelper.approveJobCard(
-      auth: auth,
-      jobCardId: jobCardId,
-      isLoading: isLoading,
-    );
+    var response = await connectHelper.approveJobCards(
+        auth: auth, isLoading: isLoading, approveJsonString: approveJsonString);
+    return response;
   }
 
+//
   Future<ResponseModel> rejectJobCard({
-    String? auth,
-    int? id,
-    comment,
+    auth,
     bool? isLoading,
+    rejectJsonString,
   }) async {
-    return await connectHelper.rejectJobCard(
-      auth: auth,
-      id: id,
-      isLoading: isLoading,
-    );
+    var response = await connectHelper.rejectJobCard(
+        auth: auth, isLoading: isLoading, rejectJsonString: rejectJsonString);
+    return response;
   }
 
   // Future<ResponseModel> getPreventiveCheckList({

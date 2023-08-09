@@ -85,7 +85,7 @@ class ApiWrapper {
           /// Method to make the Put type request
           {
             var uri = _baseUrl + url;
-
+            print(uri);
             try {
               if (isLoading) Utility.showLoader();
               final response = await http

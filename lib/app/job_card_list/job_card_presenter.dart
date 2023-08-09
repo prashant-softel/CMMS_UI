@@ -76,28 +76,28 @@ class JobCardPresenter {
       );
 
   ///
-  Future<dynamic> approveJobCard({
-    int? jobCardId,
-    String? comment,
-    bool? isLoading,
-  }) async =>
-      await jobCardDetailsUsecase.approveJobCard(
-        jobCardId: jobCardId,
-        comment: comment,
-        isLoading: isLoading,
-      );
+  // Future<dynamic> approveJobCard({
+  //   int? jobCardId,
+  //   String? comment,
+  //   bool? isLoading,
+  // }) async =>
+  //     await jobCardDetailsUsecase.approveJobCard(
+  //       jobCardId: jobCardId,
+  //       comment: comment,
+  //       isLoading: isLoading,
+  //     );
 
   ///
-  Future<dynamic> rejectJobCard(
-    jobCardId,
-    comment,
-    isLoading,
-  ) async =>
-      await jobCardDetailsUsecase.approveJobCard(
-        jobCardId: jobCardId,
-        comment: comment,
-        isLoading: isLoading,
-      );
+  // Future<dynamic> rejectJobCard(
+  //   jobCardId,
+  //   comment,
+  //   isLoading,
+  // ) async =>
+  //     await jobCardDetailsUsecase.approveJobCard(
+  //       jobCardId: jobCardId,
+  //       comment: comment,
+  //       isLoading: isLoading,
+  //     );
 
   ///
 }

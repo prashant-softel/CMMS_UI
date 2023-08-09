@@ -2,8 +2,10 @@ import 'package:cmms/app/app.dart';
 // import 'package:cmms/app/preventive_maintanance/preventive.dart';
 import 'package:cmms/app/breakdown_maintenance/breakdown_maintenance_controller.dart';
 import 'package:cmms/app/constant/constant.dart';
+import 'package:cmms/app/utils/user_access_constants.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+
 
 import '../../home/widgets/header_widget.dart';
 
@@ -142,21 +144,45 @@ class BreakdownMaintenanceScreen
                           ? (itemWidth / itemHeight)
                           : (itemWidth / itemHeightWeb),
                       children: <Widget>[
+
+                        varUserAccessModel.value.access_list!
+                                      .where((e) =>
+                                          e.feature_id == UserAccessConstants.kJobFeatureId && e.view == UserAccessConstants.kHaveViewAccess)
+                                      .length >
+                                  0
+                              ?
                         createContentTile(
                             title: "Job List",
                             onTap: () {
                               controller.goToJobListScreen();
-                            }),
+                            }):
+                            Container(),
+
+                             varUserAccessModel.value.access_list!
+                                      .where((e) =>
+                                          e.feature_id == UserAccessConstants.kJobFeatureId && e.add == UserAccessConstants.kHaveAddAccess)
+                                      .length >
+                                  0
+                              ?
                         createContentTile(
                             title: 'Add New Job',
                             onTap: () {
                               controller.addNewJob();
-                            }),
+                            })
+                            :Container(),
+
+                         varUserAccessModel.value.access_list!
+                                      .where((e) =>
+                                          e.feature_id == UserAccessConstants.kJobCardFeatureId && e.view == UserAccessConstants.kHaveViewAccess)
+                                      .length >
+                                  0
+                              ?
                         createContentTile(
                             title: "JobCard List",
                             onTap: () {
                               controller.goToJobCardList();
-                            }),
+                            }):Container(),
+                            
                       ],
                     ),
                     GridView.count(
@@ -170,31 +196,31 @@ class BreakdownMaintenanceScreen
                           ? (itemWidth / itemHeight)
                           : (itemWidth / itemHeightWeb),
                       children: <Widget>[
-                        // varUserAccessModel.value.access_list!
-                        //               .where((e) =>
-                        //                   e.feature_id == 3 && e.add == 1)
-                        //               .length >
-                        //           0
-                        //       ?
+                        varUserAccessModel.value.access_list!
+                                      .where((e) =>
+                                          e.feature_id == UserAccessConstants.kPermitFeatureId && e.view == UserAccessConstants.kHaveViewAccess)
+                                      .length >
+                                  0
+                              ?
                         createContentTile(
                             title: "Permit List",
                             onTap: () {
                               controller.newPermitList();
-                            }),
-                            // : Container(),
+                            })
+                            : Container(),
 
-                            // varUserAccessModel.value.access_list!
-                            //           .where((e) =>
-                            //               e.feature_id == 3 && e.add == 1)
-                            //           .length >
-                            //       0
-                            //   ?
+                            varUserAccessModel.value.access_list!
+                                      .where((e) =>
+                                          e.feature_id == UserAccessConstants.kPermitFeatureId && e.add == UserAccessConstants.kHaveAddAccess)
+                                      .length >
+                                  0
+                              ?
                         createContentTile(
                             title: "Add New Permit",
                             onTap: () {
                               controller.createNewPermit();
                             })
-                            // : Container(),
+                            : Container(),
 
                       ],
                     ),

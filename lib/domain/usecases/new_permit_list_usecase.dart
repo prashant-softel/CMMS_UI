@@ -16,6 +16,7 @@ class NewPermitListUsecase {
     int? facilityId,
     int? userId,
     bool? isLoading,
+    bool? self_view,
     String? start_date,
     required String end_date,
   }) async =>
@@ -23,6 +24,7 @@ class NewPermitListUsecase {
         auth,
         facilityId,
         isLoading,
+        self_view,
         start_date,
         end_date
       );

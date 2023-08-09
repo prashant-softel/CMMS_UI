@@ -2,6 +2,7 @@ import 'package:cmms/app/app.dart';
 import 'package:cmms/app/constant/constant.dart';
 import 'package:cmms/app/controllers/file_upload_controller.dart';
 import 'package:cmms/app/home/widgets/header_widget.dart';
+import 'package:cmms/app/utils/user_access_constants.dart';
 import 'package:cmms/app/view_permit/view_permit_controller.dart';
 import 'package:cmms/app/widgets/custom_elevated_button.dart';
 import 'package:cmms/app/widgets/custom_multiselect_dialog_field.dart';
@@ -11,7 +12,6 @@ import 'package:cmms/app/widgets/file_upload_with_dropzone_widget.dart';
 import 'package:cmms/app/widgets/history_table_widget_web.dart';
 import 'package:cmms/app/widgets/permit_approved_dialog.dart';
 import 'package:cmms/app/widgets/permit_cancel_by_approver_dialog.dart';
-import 'package:cmms/app/widgets/permit_cancel_dialog.dart';
 import 'package:cmms/app/widgets/permit_reject_dialog.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -27,22 +27,10 @@ class ViewPermitWebScreen extends GetView<ViewPermitController> {
   final FileUploadController dropzoneController =
       Get.put(FileUploadController());
 
-  DateTime? _dateTime1;
-  DateTime? _dateTime2;
-  TimeOfDay? time1;
-  TimeOfDay? time2;
+  
 
   String dropdownvalue = 'Item 1';
 
-  // List of items in our dropdown menu
-  var items = [
-    'Item 1',
-    'Item 2',
-    'Item 3',
-    'Item 4',
-    'Item 5',
-  ];
-  int? l = 0;
 
   ///
   @override
@@ -441,7 +429,7 @@ class ViewPermitWebScreen extends GetView<ViewPermitController> {
 
                                                   ///Loto Applied List
                                                   SizedBox(
-                                                    height: 230,
+                                                    // height: 230,
                                                     width:
                                                         MediaQuery.of(context)
                                                                 .size
@@ -518,7 +506,7 @@ class ViewPermitWebScreen extends GetView<ViewPermitController> {
                                                                         ),
                                                                         SizedBox(
                                                                           width:
-                                                                              MediaQuery.of(context).size.height *
+                                                                              MediaQuery.of(context).size.width *
                                                                                   2,
                                                                           child:
                                                                               Container(
@@ -2086,7 +2074,7 @@ class ViewPermitWebScreen extends GetView<ViewPermitController> {
 
                                                   ///Loto Applied List
                                                   SizedBox(
-                                                    height: 270,
+                                                    height: 290,
                                                     width:
                                                         MediaQuery.of(context)
                                                                 .size
@@ -2114,49 +2102,43 @@ class ViewPermitWebScreen extends GetView<ViewPermitController> {
                                                                 CustomAppBar(
                                                                     title: '',
                                                                     action:
-                                                                        Padding(
-                                                                      padding: const EdgeInsets
-                                                                              .only(
-                                                                          right:
-                                                                              120),
-                                                                      child: Row(
-                                                                        children: [
-                                                                          CustomRichText(
-                                                                              title:
-                                                                                  'Isolation Required '),
-                                                                          Checkbox(
-                                                                            value: controller
-                                                                                .isCheckedLoto
-                                                                                .value,
-                                                                            onChanged:
-                                                                                (value) {},
-                                                                          ),
-                                                                          SizedBox(
-                                                                            width:
-                                                                                230,
-                                                                          ),
-                                                                          CustomRichText(
-                                                                              title:
-                                                                                  'Loto Applied '),
-                                                                          Checkbox(
-                                                                            value: controller
-                                                                                .isCheckedLoto
-                                                                                .value,
-                                                                            onChanged:
-                                                                                (value) {},
-                                                                          ),
-                                                                          SizedBox(
-                                                                            width:
-                                                                                180,
-                                                                          ),
-                                                                          CustomRichText(
-                                                                              title:
-                                                                                  'Isolated Equipments: '),
-                                                                          Text(
-                                                                              'Inverter'),
-                                                                        ],
-                                                                      ),
-                                                                    )),
+                                                                        Row(
+                                                                          children: [
+                                                                            CustomRichText(
+                                                                                title:
+                                                                                    'Isolation Required '),
+                                                                            Checkbox(
+                                                                              value: controller
+                                                                                  .isCheckedLoto
+                                                                                  .value,
+                                                                              onChanged:
+                                                                                  (value) {},
+                                                                            ),
+                                                                            SizedBox(
+                                                                              width:
+                                                                                  230,
+                                                                            ),
+                                                                            CustomRichText(
+                                                                                title:
+                                                                                    'Loto Applied '),
+                                                                            Checkbox(
+                                                                              value: controller
+                                                                                  .isCheckedLoto
+                                                                                  .value,
+                                                                              onChanged:
+                                                                                  (value) {},
+                                                                            ),
+                                                                            SizedBox(
+                                                                              width:
+                                                                                  150,
+                                                                            ),
+                                                                            CustomRichText(
+                                                                                title:
+                                                                                    'Isolated Equipments: '),
+                                                                            Text(
+                                                                                'Inverter'),
+                                                                          ],
+                                                                        )),
                                                                 Dimens
                                                                     .boxHeight10,
                                                                 Wrap(
@@ -2323,7 +2305,7 @@ class ViewPermitWebScreen extends GetView<ViewPermitController> {
 
                                                   ///Team Deployed
                                                   SizedBox(
-                                                    height: 270,
+                                                    height: 290,
                                                     width:
                                                         MediaQuery.of(context)
                                                                 .size
@@ -3272,7 +3254,7 @@ class ViewPermitWebScreen extends GetView<ViewPermitController> {
               ///Approve Button
               varUserAccessModel.value.access_list!
                                   .where((e) =>
-                                      e.feature_id == 3 && e.approve == 1)
+                                      e.feature_id == UserAccessConstants.kPermitFeatureId && e.approve == UserAccessConstants.kHaveApproveAccess)
                                   .length >
                               0 &&
                           controller.viewPermitDetailsModel.value?.ptwStatus ==
@@ -3309,7 +3291,7 @@ class ViewPermitWebScreen extends GetView<ViewPermitController> {
                               121 ||
                       varUserAccessModel.value.access_list!
                                   .where((e) =>
-                                      e.feature_id == 3 && e.approve == 1)
+                                      e.feature_id == UserAccessConstants.kPermitFeatureId && e.approve == UserAccessConstants.kHaveApproveAccess)
                                   .length >
                               0 &&
                           controller.viewPermitDetailsModel.value?.ptwStatus ==
@@ -3334,31 +3316,31 @@ class ViewPermitWebScreen extends GetView<ViewPermitController> {
               ),
 
               ///Permit cancel by Issuer
-              varUserAccessModel.value.access_list!
-                              .where((e) => e.feature_id == 3 && e.issue == 1)
-                              .length >
-                          0 &&
-                      controller.viewPermitDetailsModel.value?.ptwStatus == 121
-                  ? Container(
-                      height: 45,
-                      child: CustomElevatedButton(
-                        backgroundColor: ColorValues.appRedColor,
-                        text: "Cancel",
-                        icon: Icons.close,
-                        onPressed: () {
-                          // controller
-                          //     .createNewPermit();
-                          Get.dialog(PermitCancelByIssuerDialog(
-                              permitId:
-                                  '${controller.viewPermitDetailsModel.value?.permitNo}'));
-                        },
-                      ))
-                  : Container(),
+              // varUserAccessModel.value.access_list!
+              //                 .where((e) => e.feature_id == 3 && e.issue == 1)
+              //                 .length >
+              //             0 &&
+              //         controller.viewPermitDetailsModel.value?.ptwStatus == 121
+              //     ? Container(
+              //         height: 45,
+              //         child: CustomElevatedButton(
+              //           backgroundColor: ColorValues.appRedColor,
+              //           text: "Cancel",
+              //           icon: Icons.close,
+              //           onPressed: () {
+              //             // controller
+              //             //     .createNewPermit();
+              //             Get.dialog(PermitCancelByIssuerDialog(
+              //                 permitId:
+              //                     '${controller.viewPermitDetailsModel.value?.permitNo}'));
+              //           },
+              //         ))
+              //     : Container(),
 
               /// Permit Cancel By approver & Permit Request
               varUserAccessModel.value.access_list!
                                   .where((e) =>
-                                      e.feature_id == 3 && e.approve == 1)
+                                      e.feature_id == UserAccessConstants.kPermitFeatureId && e.approve == UserAccessConstants.kHaveApproveAccess)
                                   .length >
                               0 &&
                           controller.viewPermitDetailsModel.value?.ptwStatus ==
@@ -3383,22 +3365,39 @@ class ViewPermitWebScreen extends GetView<ViewPermitController> {
                         },
                       ))
                   : Container(),
+
+              // // //Permit Extend Approve
               // varUserAccessModel.value.access_list!
-              //                 .where((e) => e.feature_id == 3 && e.approve == 1)
+              //                 .where((e) => e.feature_id == 3 && e.approve == 0)
               //                 .length >
               //             0 &&
               //         controller.viewPermitDetailsModel.value?.ptwStatus == 133
-              // ?TableActionButton(
-              //   color: ColorValues.appDarkBlueColor,
-              //   icon: Icons.expand_outlined,
-              //   label: 'Extend Approve',
-              //   onPress: () {
+              // ?
+              // Container(
+              //         height: 45,
+              //         child: CustomElevatedButton(
+              //           backgroundColor: ColorValues.appGreenColor,
+              //           text: "Extend Approve",
+              //           icon: Icons.expand_outlined,
+              //           onPressed: () {
+              //             // controller
+              //             //     .createNewPermit();
+              //             Get.dialog(PermitExtendDialog(
+              //                 permitId:
+              //                     '${controller.viewPermitDetailsModel.value?.permitNo}'));
+              //           },
+              //         ))
+              // // TableActionButton(
+              // //   color: ColorValues.appDarkBlueColor,
+              // //   icon: Icons.expand_outlined,
+              // //   label: 'Extend Approve',
+              // //   onPress: () {
 
-              //     // Get.dialog(PermitExtendDialog(
-              //     //     permitId:
-              //     //         _newPermitList[0]));
-              //   },
-              // )
+              // //     // Get.dialog(PermitExtendDialog(
+              // //     //     permitId:
+              // //     //         '${controller.viewPermitDetailsModel.value?.permitNo}'));
+              // //   },
+              // // )
               // : Container()
             ],
           ),

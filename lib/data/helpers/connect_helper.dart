@@ -534,15 +534,17 @@ class ConnectHelper {
     required bool isLoading,
     required String auth,
     int? facility_id,
+     String? start_date,
+    required String end_date,
   }) async {
-    // var startDateParam = (start_date != null) ? 'start_date=$start_date&' : '';
-    // var endDateParam = (end_date != '') ? 'end_date=$end_date' : '';
+    var startDateParam = (start_date != null) ? 'start_date=$start_date&' : '';
+    var endDateParam = (end_date != '') ? 'end_date=$end_date' : '';
 //var statusParam = (status!=null status!='')?'status=1':'';
     // var statusParam = 'status=1';
     ResponseModel responseModel = await apiWrapper.makeRequest(
-      'MC/GetMCTaskList?facility_id=$facility_id',
-      // startDateParam +
-      // endDateParam,
+      'MC/GetMCTaskList?facility_id=$facility_id&' +
+      startDateParam +
+      endDateParam,
       Request.getMultiparts,
       null,
       isLoading,
@@ -606,6 +608,7 @@ class ConnectHelper {
   Future<ResponseModel> getNewPermitList({
     required String auth,
     bool? isLoading,
+    bool? self_view,
     int? facilityId,
     int? userId,
     String? start_date,
@@ -615,7 +618,7 @@ class ConnectHelper {
     var startDateParam = (start_date != null) ? 'start_date=$start_date&' : '';
     var endDateParam = (end_date != '') ? 'end_date=$end_date' : '';
     var responseModel = await apiWrapper.makeRequest(
-      'Permit/GetPermitList?facility_id=$facilityId&userId=$userId' +
+      'Permit/GetPermitList?facility_id=$facilityId&userId=$userId&self_view=$self_view&' +
           startDateParam +
           endDateParam,
       Request.get,
@@ -2171,35 +2174,54 @@ class ConnectHelper {
     return responseModel;
   }
 
-  Future<ResponseModel> approveJobCard({
-    String? auth,
-    jobCardId,
-    comment,
+  // Future<ResponseModel> approveJobCard({
+  //   String? auth,
+  //   jobCardId,
+  //   comment,
+  //   bool? isLoading,
+  // }) async {
+  //   var responseModel = await apiWrapper.makeRequest(
+  //     'JC/ApproveJC?status=3&ptw_id=59590',
+  //     Request.put,
+  //     null,
+  //     isLoading ?? false,
+  //     {
+  //       'Content-Type': 'application/json',
+  //       'Authorization': 'Bearer $auth',
+  //     },
+  //   );
+  //   return responseModel;
+  // }
+  Future<ResponseModel> approveJobCards({
+    required String auth,
+    approveJsonString,
     bool? isLoading,
   }) async {
     var responseModel = await apiWrapper.makeRequest(
       'JC/ApproveJC',
       Request.put,
-      null,
+      approveJsonString,
       isLoading ?? false,
       {
         'Content-Type': 'application/json',
         'Authorization': 'Bearer $auth',
       },
     );
+    print('JobCard Response $responseModel');
     return responseModel;
+    
   }
 
+//
   Future<ResponseModel> rejectJobCard({
-    String? auth,
-    int? id,
-    comment,
+    required String auth,
+    rejectJsonString,
     bool? isLoading,
   }) async {
     var responseModel = await apiWrapper.makeRequest(
       'JC/RejectJC',
       Request.put,
-      null,
+      rejectJsonString,
       isLoading ?? false,
       {
         'Content-Type': 'application/json',
