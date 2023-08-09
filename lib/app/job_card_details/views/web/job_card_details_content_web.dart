@@ -63,11 +63,11 @@ class JobCardDetailsContentWeb extends GetView<JobCardDetailsController> {
       margin: Dimens.edgeInsets20,
       decoration: BoxDecoration(
         color: ColorValues.whiteColor,
-        border: Border.all(
-          color: ColorValues.appDarkBlueColor,
-          style: BorderStyle.solid,
-          width: 3,
-        ),
+        // border: Border.all(
+        //   color: ColorValues.appDarkBlueColor,
+        //   style: BorderStyle.solid,
+        //   width: 3,
+        // ),
       ),
       child: //
           Obx(() {
@@ -164,14 +164,14 @@ class JobCardDetailsContentWeb extends GetView<JobCardDetailsController> {
                       Dimens.box0,
 
                   /// DESCRIPTION OF WORK DONE
-                  (controller.isJobCardStarted == false)
+                  (controller.jobCardList[0]!.status == 151)
                       ? Container()
                       : Row(children: [
                           Text('Description of work done: '),
                           Expanded(
                             child: TextField(
                               controller: controller.descriptionOfWorkDoneCtrlr,
-                              enabled: controller.isJobCardStarted.value,
+                              // enabled: controller.isJobCardStarted.value,
                               decoration: InputDecoration(
                                 disabledBorder: OutlineInputBorder(
                                   borderSide: BorderSide(
@@ -250,30 +250,31 @@ class JobCardDetailsContentWeb extends GetView<JobCardDetailsController> {
                                     },
                                   ),
                                   Dimens.boxWidth10,
-                                   varUserAccessModel.value.access_list!
-                                                  .where((e) =>
-                                                      e.feature_id == 4 &&
-                                                      e.add == 1)
-                                                  .length >
-                                              0
-                                  ?CustomElevatedButton(
-                                    backgroundColor: ColorValues.appGreenColor,
-                                    text: 'Close Job',
-                                    onPressed: () async {
-                                      bool? confirmed =
-                                          await showConfirmationDialog(
-                                        context,
-                                        'Are you sure you want to Close Job ?',
-                                      );
-                                      if (confirmed == true) {
-                                        controller.closeJob();
+                                  varUserAccessModel.value.access_list!
+                                              .where((e) =>
+                                                  e.feature_id == 4 &&
+                                                  e.add == 1)
+                                              .length >
+                                          0
+                                      ? CustomElevatedButton(
+                                          backgroundColor:
+                                              ColorValues.appGreenColor,
+                                          text: 'Close Job',
+                                          onPressed: () async {
+                                            bool? confirmed =
+                                                await showConfirmationDialog(
+                                              context,
+                                              'Are you sure you want to Close Job ?',
+                                            );
+                                            if (confirmed == true) {
+                                              controller.closeJob();
 
-                                        Text(
-                                            'Are you sure you want to Close Job ?');
-                                      }
-                                    },
-                                  )
-                                  :Container(),
+                                              Text(
+                                                  'Are you sure you want to Close Job ?');
+                                            }
+                                          },
+                                        )
+                                      : Container(),
                                   Dimens.boxWidth10,
                                   CustomElevatedButton(
                                     backgroundColor:

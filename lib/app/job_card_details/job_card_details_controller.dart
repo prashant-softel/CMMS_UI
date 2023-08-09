@@ -71,8 +71,6 @@ class JobCardDetailsController extends GetxController {
   TextEditingController approveCommentTextFieldCtrlr = TextEditingController();
   TextEditingController rejectCommentTextFieldCtrlr = TextEditingController();
 
-
-
   /// Plant Details
   int userId = 35;
   int facilityId = 46;
@@ -93,7 +91,7 @@ class JobCardDetailsController extends GetxController {
   void onInit() async {
     try {
       Get.put(FileUploadController());
-      
+
       final _flutterSecureStorage = const FlutterSecureStorage();
 
       await _flutterSecureStorage.delete(key: "JcId");
