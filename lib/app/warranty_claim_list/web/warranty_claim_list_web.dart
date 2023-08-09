@@ -1,6 +1,8 @@
 import 'package:cmms/app/app.dart';
+import 'package:cmms/app/constant/constant.dart';
 import 'package:cmms/app/home/widgets/header_widget.dart';
 import 'package:cmms/app/navigators/navigators.dart';
+import 'package:cmms/app/utils/user_access_constants.dart';
 import 'package:cmms/app/warranty_claim_list/warranty_claim_controller.dart';
 import 'package:cmms/app/widgets/custom_elevated_button.dart';
 import 'package:cmms/app/widgets/custom_richtext.dart';
@@ -122,15 +124,27 @@ class _WarrantyClaimListWebState extends State<WarrantyClaimListWeb> {
                                           ],
                                         ),
                                         Dimens.boxWidth10,
-                                        ActionButton(
-                                          icon: Icons.add,
-                                          label: 'Add Warranty Claim',
-                                          onPressed: () {
-                                            Get.toNamed(
-                                                Routes.newWarrantyClaimList);
-                                          },
-                                          color: ColorValues.appGreenColor,
-                                        ),
+                                        varUserAccessModel.value.access_list!
+                                                    .where((e) =>
+                                                        e.feature_id ==
+                                                            UserAccessConstants
+                                                                .kWarrantyClaimFeatureId &&
+                                                        e.add ==
+                                                            UserAccessConstants
+                                                                .kHaveAddAccess)
+                                                    .length >
+                                                0
+                                            ? ActionButton(
+                                                icon: Icons.add,
+                                                label: 'Add Warranty Claim',
+                                                onPressed: () {
+                                                  Get.toNamed(Routes
+                                                      .newWarrantyClaimList);
+                                                },
+                                                color:
+                                                    ColorValues.appGreenColor,
+                                              )
+                                            : Container(),
                                         Dimens.boxWidth10,
                                       ],
                                     ),
@@ -277,120 +291,64 @@ class _WarrantyClaimListWebState extends State<WarrantyClaimListWeb> {
                                                                           print(
                                                                               'warrantyiddata:$value');
                                                                         },
-                                                                        child:
-                                                                            // value.runtimeType
-                                                                            //             .toString() ==
-                                                                            //         'AssetName'
-                                                                            //     ? Builder(builder: (context) {
-                                                                            //         final val =
-                                                                            //             value as AssetName;
-                                                                            //         return Column(
-                                                                            //           children: [
-                                                                            //             Align(
-                                                                            //               alignment: Alignment
-                                                                            //                   .centerLeft,
-                                                                            //               child: Padding(
-                                                                            //                 padding: Dimens
-                                                                            //                     .edgeInsets8,
-                                                                            //                 child: Text(
-                                                                            //                     '${val.name}'),
-                                                                            //               ),
-                                                                            //             ),
-                                                                            //             Spacer(),
-                                                                            //             Align(
-                                                                            //               alignment: Alignment
-                                                                            //                   .centerRight,
-                                                                            //               child: Container(
-                                                                            //                 padding: Dimens
-                                                                            //                     .edgeInsets8_2_8_2,
-                                                                            //                 decoration:
-                                                                            //                     BoxDecoration(
-                                                                            //                   // color: val.requirementStatus ==
-                                                                            //                   //         1
-                                                                            //                   //     ? Colors.red
-                                                                            //                   //     : Colors
-                                                                            //                   //         .green,
-                                                                            //                   borderRadius:
-                                                                            //                       BorderRadius
-                                                                            //                           .circular(
-                                                                            //                               4),
-                                                                            //                 ),
-                                                                            //                 child: Text(
-                                                                            //                   // val.name == 1
-                                                                            //                   //     ? 'requirementRejected'
-                                                                            //                   //         .tr
-                                                                            //                   //     : 'requirementAccepted'
-                                                                            //                   //         .tr,
-                                                                            //                   // style: Styles
-                                                                            //                   //     .white10
-                                                                            //                   //     .copyWith(
-                                                                            //                   //   color: Colors
-                                                                            //                   //       .white,
-                                                                            //                   // ),
-                                                                            //                   '',
+                                                                        child: value ==
+                                                                                'Actions'
+                                                                            ? Wrap(
+                                                                                children: [
+                                                                                  Row(mainAxisAlignment: MainAxisAlignment.center, children: [
+                                                                                    varUserAccessModel.value.access_list!.where((e) => e.feature_id == UserAccessConstants.kWarrantyClaimFeatureId && e.view == UserAccessConstants.kHaveViewAccess).length > 0
+                                                                                        ? TableActionButton(
+                                                                                            color: ColorValues.appDarkBlueColor,
+                                                                                            icon: Icons.visibility,
+                                                                                            message: 'View',
+                                                                                            onPress: () {
+                                                                                              controller.viewWarrantyClaim(wc_id: int.tryParse('${record[0]}'));
+                                                                                              print('record:${int.tryParse('${record[0]}')}');
+                                                                                            },
+                                                                                          )
+                                                                                        : Container(),
+                                                                                    //),
+                                                                                    varUserAccessModel.value.access_list!.where((e) => e.feature_id == UserAccessConstants.kWarrantyClaimFeatureId && e.edit == UserAccessConstants.kHaveEditAccess).length > 0
+                                                                                        ? TableActionButton(
+                                                                                            color: ColorValues.appYellowColor,
+                                                                                            icon: Icons.edit,
+                                                                                            message: 'Edit',
+                                                                                            onPress: () {
+                                                                                              controller.editWarrantyClaim(wc_id: int.tryParse('${record[0]}'));
+                                                                                              print('edit record:${int.tryParse('${record[0]}')}');
+                                                                                            },
+                                                                                          )
+                                                                                        : Container(),
+                                                                                    //),
 
-                                                                            //                 ),
-                                                                            //               ),
-                                                                            //             ),
-                                                                            //             Dimens.boxHeight10,
-                                                                            //           ],
-                                                                            //         );
-                                                                            //       })
-                                                                            //     :
-                                                                            value == 'Actions'
-                                                                                ? Wrap(
-                                                                                    children: [
-                                                                                      Row(mainAxisAlignment: MainAxisAlignment.center, children: [
-                                                                                        TableActionButton(
-                                                                                          color: ColorValues.appDarkBlueColor,
-                                                                                          icon: Icons.visibility,
-                                                                                          message: 'View',
-                                                                                          onPress: () {
-                                                                                            controller.viewWarrantyClaim(wc_id: int.tryParse('${record[0]}'));
-                                                                                            print('record:${int.tryParse('${record[0]}')}');
-                                                                                          },
-                                                                                        ),
-                                                                                        //),
-
-                                                                                        TableActionButton(
-                                                                                          color: ColorValues.appYellowColor,
-                                                                                          icon: Icons.edit,
-                                                                                          message: 'Edit',
-                                                                                          onPress: () {
-                                                                                            controller.editWarrantyClaim(wc_id: int.tryParse('${record[0]}'));
-                                                                                            print('edit record:${int.tryParse('${record[0]}')}');
-                                                                                          },
-                                                                                        ),
-                                                                                        //),
-
-                                                                                        // TableActionButton(
-                                                                                        //   color: Colors.red,
-                                                                                        //   icon:
-                                                                                        //       Icons.delete,
-                                                                                        //   label: 'Delete',
-                                                                                        //   onPress: () {},
-                                                                                        // ),
-                                                                                        //),
-                                                                                      ]),
-                                                                                      // TableActionButton(
-                                                                                      //   color: Colors.green,
-                                                                                      //   icon: Icons
-                                                                                      //       .visibility,
-                                                                                      //   label:
-                                                                                      //       'Approve Request',
-                                                                                      //   onPress: () {},
-                                                                                      // ),
-                                                                                      // TableActionButton(
-                                                                                      //   color: Colors.red,
-                                                                                      //   icon: Icons
-                                                                                      //       .visibility,
-                                                                                      //   label:
-                                                                                      //       'Reject Request',
-                                                                                      //   onPress: () {},
-                                                                                      // ),
-                                                                                    ],
-                                                                                  )
-                                                                                : Text(value.toString()),
+                                                                                    // TableActionButton(
+                                                                                    //   color: Colors.red,
+                                                                                    //   icon:
+                                                                                    //       Icons.delete,
+                                                                                    //   label: 'Delete',
+                                                                                    //   onPress: () {},
+                                                                                    // ),
+                                                                                    //),
+                                                                                  ]),
+                                                                                  // TableActionButton(
+                                                                                  //   color: Colors.green,
+                                                                                  //   icon: Icons
+                                                                                  //       .visibility,
+                                                                                  //   label:
+                                                                                  //       'Approve Request',
+                                                                                  //   onPress: () {},
+                                                                                  // ),
+                                                                                  // TableActionButton(
+                                                                                  //   color: Colors.red,
+                                                                                  //   icon: Icons
+                                                                                  //       .visibility,
+                                                                                  //   label:
+                                                                                  //       'Reject Request',
+                                                                                  //   onPress: () {},
+                                                                                  // ),
+                                                                                ],
+                                                                              )
+                                                                            : Text(value.toString()),
                                                                       ),
                                                                     );
                                                                   },

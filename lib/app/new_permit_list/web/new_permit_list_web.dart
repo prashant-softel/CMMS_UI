@@ -6,6 +6,7 @@ import 'package:cmms/app/theme/color_values.dart';
 import 'package:cmms/app/theme/dimens.dart';
 import 'package:cmms/app/theme/styles.dart';
 import 'package:cmms/app/utils/responsive.dart';
+import 'package:cmms/app/utils/user_access_constants.dart';
 import 'package:cmms/app/widgets/action_button.dart';
 import 'package:cmms/app/widgets/body_custom_app_bar.dart';
 import 'package:cmms/app/widgets/custom_elevated_button.dart';
@@ -151,8 +152,8 @@ class NewPermitListWeb extends GetView<NewPermitListController> {
 
                                     varUserAccessModel.value.access_list!
                                                 .where((e) =>
-                                                    e.feature_id == 3 &&
-                                                    e.add == 1)
+                                                    e.feature_id == UserAccessConstants.kPermitFeatureId &&
+                                                    e.add == UserAccessConstants.kHaveAddAccess)
                                                 .length >
                                             0
                                         ? ActionButton(
@@ -438,7 +439,7 @@ class NewPermitListWeb extends GetView<NewPermitListController> {
                                                                             Wrap(
                                                                               children: [
                                                                                 ////////////
-                                                                                varUserAccessModel.value.access_list!.where((e) => e.feature_id == 3 && e.view == 1).length > 0
+                                                                                varUserAccessModel.value.access_list!.where((e) => e.feature_id == UserAccessConstants.kPermitFeatureId && e.view == UserAccessConstants.kHaveViewAccess).length > 0
                                                                                     ? TableActionButton(
                                                                                         color: ColorValues.appDarkBlueColor,
                                                                                         icon: Icons.visibility,
@@ -450,7 +451,7 @@ class NewPermitListWeb extends GetView<NewPermitListController> {
                                                                                     : Container(),
 
                                                                                 ///Permit Edit button
-                                                                                varUserAccessModel.value.access_list!.where((e) => e.feature_id == 3 && e.edit == 1).length > 0 &&
+                                                                                varUserAccessModel.value.access_list!.where((e) => e.feature_id == UserAccessConstants.kPermitFeatureId && e.edit == UserAccessConstants.kHaveEditAccess).length > 0 &&
                                                                                         controller.newPermitList!
                                                                                                 .firstWhere(
                                                                                                   (e) => "${e?.permitId}" == _newPermitList[0],
@@ -474,9 +475,9 @@ class NewPermitListWeb extends GetView<NewPermitListController> {
                                                                                 //                 .value
                                                                                 //                 .access_list!
                                                                                 //                 .where((e) =>
-                                                                                //                     e.feature_id == 3 &&
+                                                                                //                     e.feature_id == UserAccessConstants.kPermitFeatureId &&
                                                                                 //                     e.add ==
-                                                                                //                         1)
+                                                                                //                         UserAccessConstants.kHaveAddAccess)
                                                                                 //                 .length >
                                                                                 //             0 ||
                                                                                 controller.newPermitList!
@@ -533,7 +534,7 @@ class NewPermitListWeb extends GetView<NewPermitListController> {
                                                                                 //     : Container(),
 
                                                                                 ////Approve button
-                                                                                varUserAccessModel.value.access_list!.where((e) => e.feature_id == 3 && e.approve == 1).length > 0 &&
+                                                                                varUserAccessModel.value.access_list!.where((e) => e.feature_id == UserAccessConstants.kPermitFeatureId && e.approve == UserAccessConstants.kHaveApproveAccess).length > 0 &&
                                                                                         controller.newPermitList!
                                                                                                 .firstWhere(
                                                                                                   (e) => "${e?.permitId}" == _newPermitList[0],
@@ -589,7 +590,7 @@ class NewPermitListWeb extends GetView<NewPermitListController> {
                                                                                 /// Condition For delete ends here
 
                                                                                 ///Close Permit
-                                                                                varUserAccessModel.value.access_list!.where((e) => e.feature_id == 3 && e.add == 1).length > 0
+                                                                                varUserAccessModel.value.access_list!.where((e) => e.feature_id == UserAccessConstants.kPermitFeatureId && e.add == UserAccessConstants.kHaveAddAccess).length > 0
                                                                                     ? TableActionButton(
                                                                                         color: ColorValues.appcloseRedColor,
                                                                                         icon: Icons.close,
@@ -646,7 +647,7 @@ class NewPermitListWeb extends GetView<NewPermitListController> {
                                                                                 //     : Container(),
 
                                                                                 ////Permit Cancel By Approver / Cancel Permit Request
-                                                                                varUserAccessModel.value.access_list!.where((e) => e.feature_id == 3 && e.approve == 1).length > 0 &&
+                                                                                varUserAccessModel.value.access_list!.where((e) => e.feature_id == UserAccessConstants.kPermitFeatureId && e.approve == UserAccessConstants.kHaveApproveAccess).length > 0 &&
                                                                                         controller.newPermitList!
                                                                                                 .firstWhere(
                                                                                                   (e) => "${e?.permitId}" == _newPermitList[0],

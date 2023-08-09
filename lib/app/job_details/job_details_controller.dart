@@ -1,3 +1,4 @@
+import 'package:cmms/app/constant/constant.dart';
 import 'package:cmms/app/facility/facility_presenter.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
@@ -187,7 +188,14 @@ class JobDetailsController extends GetxController {
   Future<List<NewPermitModel?>?> getPermitList() async {
     facilityId = jobDetailsModel.value?.facilityId ?? 0;
     final _permitList = await jobDetailsPresenter.getPermitList(
-        facilityId: facilityId, selfView: false, isLoading: false);
+        facilityId: facilityId,
+        selfView: varUserAccessModel.value.access_list!
+                    .where((e) => e.feature_id == 4 && e.selfView == 1)
+                    .length >
+                0
+            ? true
+            : false,
+        isLoading: false);
     if (_permitList != null) {
       permitList?.value = <NewPermitModel>[];
       permitList?.value = _permitList;
