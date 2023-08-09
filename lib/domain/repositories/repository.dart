@@ -328,10 +328,7 @@ class Repository {
 
   //Update New Permit
   Future<Map<String, dynamic>> updateNewPermit(
-    newPermit,
-    bool? isLoading,
-    bool? resubmit
-  ) async {
+      newPermit, bool? isLoading, bool? resubmit) async {
     try {
       final auth = await getSecuredValue(LocalKeys.authToken);
       final res = await _dataRepository.updateNewPermit(
@@ -3946,10 +3943,11 @@ class Repository {
         scheduleId: scheduleId,
         isLoading: isLoading,
       );
+      // print(res.data);
       if (!res.hasError) {
         final PmtaskViewModel _permitDetailsModel =
             pmtaskViewModelFromJson(res.data);
-        print({"respqwe", _permitDetailsModel});
+        // print({"respqwe", _permitDetailsModel});
 
         return _permitDetailsModel;
       } //
@@ -3964,14 +3962,15 @@ class Repository {
     }
   }
 
-  Future<CreateSOPModel?> browseFiles(
-      Uint8List? fileBytes, String fileName, bool isLoading) async {
+  Future<CreateSOPModel?> browseFiles(Uint8List? fileBytes, String fileName,
+      int? importType, bool isLoading) async {
     try {
       final auth = await getSecuredValue(LocalKeys.authToken);
       final res = await _dataRepository.browseFiles(
         auth: auth,
         fileBytes: fileBytes,
         fileName: fileName,
+        importType: importType ?? 0,
         isLoading: isLoading,
       );
       if (res != null) {
@@ -6362,6 +6361,68 @@ class Repository {
     } catch (error) {
       print(error.toString());
       return [];
+    }
+  }
+
+  Future<Map<String, dynamic>> scheduleLinkToPermit(
+    scheduleId,
+    permitId,
+    bool? isLoading,
+  ) async {
+    try {
+      final auth = await getSecuredValue(LocalKeys.authToken);
+      final res = await _dataRepository.scheduleLinkToPermit(
+        auth: auth,
+        scheduleId: scheduleId,
+        permitId: permitId,
+        isLoading: isLoading ?? false,
+      );
+
+      if (!res.hasError) {
+        if (res.errorCode == 200) {
+          var responseMap = json.decode(res.data);
+          return responseMap;
+        }
+      } //
+      else {
+        Utility.showDialog(res.errorCode.toString() + 'scheduleLinkToPermit');
+        return Map();
+      }
+      return Map();
+    } //
+    catch (error) {
+      Utility.showDialog(error.toString() + 'scheduleLinkToPermit');
+      return Map();
+    }
+  }
+
+  Future<Map<String, dynamic>> setPmTask(
+    scheduleId,
+    bool? isLoading,
+  ) async {
+    try {
+      final auth = await getSecuredValue(LocalKeys.authToken);
+      final res = await _dataRepository.setPmTask(
+        auth: auth,
+        scheduleId: scheduleId,
+        isLoading: isLoading ?? false,
+      );
+
+      if (!res.hasError) {
+        if (res.errorCode == 200) {
+          var responseMap = json.decode(res.data);
+          return responseMap;
+        }
+      } //
+      else {
+        Utility.showDialog(res.errorCode.toString() + 'setPmTask');
+        return Map();
+      }
+      return Map();
+    } //
+    catch (error) {
+      Utility.showDialog(error.toString() + 'setPmTask');
+      return Map();
     }
   }
   //end

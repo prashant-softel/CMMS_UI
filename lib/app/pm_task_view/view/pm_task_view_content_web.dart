@@ -200,7 +200,7 @@ class PreventiveMaintenanceTaskViewContentWeb
                                     ],
                                   ),
                                 ),
-                                (controller.scheduleCheckPoint != null &&
+                                (controller.scheduleCheckPoint != [] &&
                                         controller
                                             .scheduleCheckPoint!.isNotEmpty)
                                     ? Container(
@@ -369,7 +369,7 @@ class PreventiveMaintenanceTaskViewContentWeb
                                 //   ),
                                 // ),
                                 // Dimens.boxHeight30,
-                                (controller.historyLog != null &&
+                                (controller.historyLog != [] &&
                                         controller.historyLog!.isNotEmpty)
                                     ? Container(
                                         margin: Dimens.edgeInsets20,
@@ -470,35 +470,53 @@ class PreventiveMaintenanceTaskViewContentWeb
             ),
           ),
           Dimens.boxHeight20,
-          // Container(
-          //   margin: EdgeInsets.only(bottom: 30, top: 20),
-          //   child: Row(
-          //     mainAxisAlignment: MainAxisAlignment.center,
-          //     children: [
-          //       Container(
-          //         height: 35,
-          //         child: CustomElevatedButton(
-          //           icon: Icons.print_outlined,
-          //           backgroundColor: ColorValues.appDarkBlueColor,
-          //           text: "Print",
-          //           onPressed: () {
-          //             controller.printScreen();
-          //           },
-          //         ),
-          //       ),
-          //       Dimens.boxWidth50,
-          //       Container(
-          //         height: 35,
-          //         child: CustomElevatedButton(
-          //           icon: Icons.close,
-          //           backgroundColor: ColorValues.appRedColor,
-          //           text: "Close",
-          //           onPressed: () {},
-          //         ),
-          //       ),
-          //     ],
-          //   ),
-          // )
+          Container(
+            margin: EdgeInsets.only(bottom: 30, top: 20),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                controller.pmtaskViewModel.value?.status == 163
+                    ? Container(
+                        height: 35,
+                        child: CustomElevatedButton(
+                          icon: Icons.link,
+                          backgroundColor: ColorValues.linktopermitColor,
+                          text: "Link to Permit",
+                          onPressed: () {
+                            controller.showPermitsDialog();
+
+                            //controller.printScreen();
+                          },
+                        ),
+                      )
+                    : controller.pmtaskViewModel.value?.status == 164
+                        ? Container(
+                            height: 35,
+                            child: CustomElevatedButton(
+                              icon: Icons.start,
+                              backgroundColor: ColorValues.linktopermitColor,
+                              text: "Start",
+                              onPressed: () {
+                                controller.setPmTask();
+
+                                //controller.printScreen();
+                              },
+                            ),
+                          )
+                        : Dimens.box0,
+                Dimens.boxWidth50,
+                Container(
+                  height: 35,
+                  child: CustomElevatedButton(
+                    icon: Icons.close,
+                    backgroundColor: ColorValues.closeColor,
+                    text: "Close",
+                    onPressed: () {},
+                  ),
+                ),
+              ],
+            ),
+          )
         ],
       ),
     );

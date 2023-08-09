@@ -2,6 +2,7 @@ import 'package:cmms/app/home/home_screen.dart';
 import 'package:cmms/app/theme/dimens.dart';
 import 'package:cmms/app/widgets/custom_richtext.dart';
 import 'package:cmms/app/widgets/date_picker.dart';
+import 'package:cmms/domain/models/pm_task_model.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:get/get.dart';
@@ -267,7 +268,6 @@ class _PreventiveMaintenanceTaskContentWebState
                                             "Equipment Name",
                                             "Order Frequency",
                                             "PTW",
-                                            "Status",
                                             "Action",
                                           ].map((column) {
                                             return TableViewColumn(
@@ -276,149 +276,193 @@ class _PreventiveMaintenanceTaskContentWebState
                                             );
                                           }).toList(),
                                           rows: //
-                                              [
-                                            ...List.generate(
-                                              controller.pmTaskList.length,
-                                              (index) {
-                                                var pmtaskListDetails =
-                                                    controller
-                                                        .pmTaskList[index];
-                                                return [
-                                                  '${pmtaskListDetails?.maintenance_order_number}',
-                                                  '${pmtaskListDetails?.schedule_date}',
-                                                  '${pmtaskListDetails?.completed_date}',
-                                                  '${pmtaskListDetails?.equipment_name}',
-                                                  '${pmtaskListDetails?.frequency_name}',
-                                                  '${pmtaskListDetails?.permit_code}',
-                                                  '${pmtaskListDetails?.status_name}',
-                                                  "Action",
-                                                ];
-                                              },
-                                            ),
-                                          ].map((record) {
-                                            return TableViewRow(
-                                              height: 50,
-                                              cells: record.map((value) {
-                                                return TableViewCell(
-                                                  child: (value == "Action")
-                                                      ? Wrap(children: [
-                                                          TableActionButton(
-                                                            color: ColorValues
-                                                                .viewColor,
-                                                            icon: Icons
-                                                                .remove_red_eye_outlined,
-                                                            message: 'View',
-                                                            onPress: () {
-                                                              controller.selectedItem = controller
-                                                                  .pmTaskList
-                                                                  .firstWhere(
-                                                                      (element) =>
-                                                                          "${element?.maintenance_order_number}" ==
-                                                                          record[
-                                                                              0]);
-                                                              int scheduleId =
-                                                                  controller
-                                                                          .selectedItem
-                                                                          ?.id ??
-                                                                      0;
-                                                              final _flutterSecureStorage =
-                                                                  const FlutterSecureStorage();
+                                              controller.pmTaskList
+                                                  .map(
+                                                      (pmTaskDetails) =>
+                                                          TableViewRow(
+                                                              onTap: () {
+                                                                int scheduleId =
+                                                                    pmTaskDetails
+                                                                            ?.id ??
+                                                                        0;
+                                                                final _flutterSecureStorage =
+                                                                    const FlutterSecureStorage();
 
-                                                              _flutterSecureStorage
-                                                                  .delete(
-                                                                      key:
-                                                                          "scheduleId");
-                                                              if (scheduleId !=
-                                                                  null) {
-                                                                Get.toNamed(
-                                                                    Routes
-                                                                        .pmTaskView,
-                                                                    arguments: {
-                                                                      'scheduleId':
-                                                                          scheduleId
-                                                                    });
-                                                              }
-                                                              // controller.pmTaskView();
-                                                            },
-                                                          ),
-                                                          TableActionButton(
-                                                            color: ColorValues
-                                                                .deleteColor,
-                                                            icon: Icons.delete,
-                                                            message: 'Delete',
-                                                            onPress: () {},
-                                                          ),
-                                                          // TableActionButton(
-                                                          //   color: ColorValues
-                                                          //       .appLightBlueColor,
-                                                          //   icon: Icons
-                                                          //       .access_time_filled_outlined,
-                                                          //   message: 'History',
-                                                          //   onPress: () {},
-                                                          // ),
-                                                          TableActionButton(
-                                                            color: ColorValues
-                                                                .executeColor,
-                                                            icon: Icons
-                                                                .remove_red_eye_outlined,
-                                                            message: 'Execute',
-                                                            onPress: () {
-                                                              final _flutterSecureStorage =
-                                                                  const FlutterSecureStorage();
+                                                                _flutterSecureStorage
+                                                                    .delete(
+                                                                        key:
+                                                                            "scheduleId");
+                                                                if (scheduleId !=
+                                                                    null) {
+                                                                  Get.toNamed(
+                                                                      Routes
+                                                                          .pmTaskView,
+                                                                      arguments: {
+                                                                        'scheduleId':
+                                                                            scheduleId
+                                                                      });
+                                                                }
+                                                              },
+                                                              height: 60,
+                                                              cells: [
+                                                                TableViewCell(
+                                                                    child:
+                                                                        Column(
+                                                                  children: [
+                                                                    Text(
+                                                                      '${pmTaskDetails?.maintenance_order_number}',
+                                                                    ),
+                                                                    Dimens
+                                                                        .boxHeight10,
+                                                                    Align(
+                                                                      alignment:
+                                                                          Alignment
+                                                                              .centerRight,
+                                                                      child:
+                                                                          Container(
+                                                                        padding:
+                                                                            Dimens.edgeInsets8_2_8_2,
+                                                                        decoration:
+                                                                            BoxDecoration(
+                                                                          color:
+                                                                              ColorValues.addNewColor,
+                                                                          borderRadius:
+                                                                              BorderRadius.circular(4),
+                                                                        ),
+                                                                        child:
+                                                                            Text(
+                                                                          '${pmTaskDetails?.status_name}',
+                                                                          style: Styles
+                                                                              .white10
+                                                                              .copyWith(
+                                                                            color:
+                                                                                Colors.white,
+                                                                          ),
+                                                                        ),
+                                                                      ),
+                                                                    ),
+                                                                  ],
+                                                                )),
+                                                                //
+                                                                TableViewCell(
+                                                                    child: Text(
+                                                                        "${pmTaskDetails?.id ?? ""}")),
+                                                                TableViewCell(
+                                                                    child: Text(
+                                                                        '${pmTaskDetails?.completed_date}')),
+                                                                TableViewCell(
+                                                                    child: Text(
+                                                                        '${pmTaskDetails?.equipment_name}')),
+                                                                TableViewCell(
+                                                                    child: Text(
+                                                                  '${pmTaskDetails?.frequency_name}',
+                                                                )),
+                                                                TableViewCell(
+                                                                    child: Text(
+                                                                  '${pmTaskDetails?.permit_code}id${pmTaskDetails?.status}',
+                                                                )),
+                                                                TableViewCell(
+                                                                    child: Wrap(
+                                                                        children: [
+                                                                      TableActionButton(
+                                                                        color: ColorValues
+                                                                            .viewColor,
+                                                                        icon: Icons
+                                                                            .remove_red_eye_outlined,
+                                                                        message:
+                                                                            'View',
+                                                                        onPress:
+                                                                            () {
+                                                                          int scheduleId =
+                                                                              pmTaskDetails?.id ?? 0;
+                                                                          final _flutterSecureStorage =
+                                                                              const FlutterSecureStorage();
 
-                                                              _flutterSecureStorage
-                                                                  .delete(
-                                                                      key:
-                                                                          "scheduleId");
-                                                              controller.selectedItem = controller
-                                                                  .pmTaskList
-                                                                  .firstWhere(
-                                                                      (element) =>
-                                                                          "${element?.maintenance_order_number}" ==
-                                                                          record[
-                                                                              0]);
-                                                              int scheduleId =
-                                                                  controller
-                                                                          .selectedItem
-                                                                          ?.id ??
-                                                                      0;
-                                                              if (scheduleId !=
-                                                                  null) {
-                                                                Get.toNamed(
-                                                                    Routes
-                                                                        .pmExecution,
-                                                                    arguments: {
-                                                                      'scheduleId':
-                                                                          scheduleId
-                                                                    });
-                                                              }
-                                                            },
-                                                          ),
-                                                          TableActionButton(
-                                                            color: ColorValues
-                                                                .linktopermitColor,
-                                                            icon: Icons
-                                                                .link_sharp,
-                                                            message:
-                                                                'Link To Permit',
-                                                            onPress: () {},
-                                                          ),
-                                                          TableActionButton(
-                                                            color: ColorValues
-                                                                .pendingColor,
-                                                            icon: Icons
-                                                                .numbers_outlined,
-                                                            message:
-                                                                'PM Pending Jobs',
-                                                            onPress: () {},
-                                                          ),
-                                                        ])
-                                                      : Text(value),
-                                                );
-                                              }).toList(),
-                                            );
-                                          }).toList(),
-                                        ),
+                                                                          _flutterSecureStorage.delete(
+                                                                              key: "scheduleId");
+                                                                          if (scheduleId !=
+                                                                              null) {
+                                                                            Get.toNamed(Routes.pmTaskView, arguments: {
+                                                                              'scheduleId': scheduleId
+                                                                            });
+                                                                          }
+                                                                          // controller.pmTaskView();
+                                                                        },
+                                                                      ),
+                                                                      TableActionButton(
+                                                                        color: ColorValues
+                                                                            .deleteColor,
+                                                                        icon: Icons
+                                                                            .delete,
+                                                                        message:
+                                                                            'Delete',
+                                                                        onPress:
+                                                                            () {},
+                                                                      ),
+                                                                      // TableActionButton(
+                                                                      //   color: ColorValues
+                                                                      //       .appLightBlueColor,
+                                                                      //   icon: Icons
+                                                                      //       .access_time_filled_outlined,
+                                                                      //   message: 'History',
+                                                                      //   onPress: () {},
+                                                                      // ),
+                                                                      controller.pmTaskList
+                                                                                  .firstWhere(
+                                                                                    (e) => e?.id == pmTaskDetails!.id,
+                                                                                    orElse: () => PmTaskListModel(id: 00),
+                                                                                  )
+                                                                                  ?.status ==
+                                                                              161
+                                                                          ? TableActionButton(
+                                                                              color: ColorValues.executeColor,
+                                                                              icon: Icons.remove_red_eye_outlined,
+                                                                              message: 'Execute',
+                                                                              onPress: () {
+                                                                                final _flutterSecureStorage = const FlutterSecureStorage();
+
+                                                                                _flutterSecureStorage.delete(key: "scheduleId");
+
+                                                                                int scheduleId = pmTaskDetails?.id ?? 0;
+                                                                                if (scheduleId != null) {
+                                                                                  Get.toNamed(Routes.pmExecution, arguments: {
+                                                                                    'scheduleId': scheduleId
+                                                                                  });
+                                                                                }
+                                                                              },
+                                                                            )
+                                                                          : Dimens.box0,
+                                                                      // controller.pmTaskList
+                                                                      //             .firstWhere(
+                                                                      //               (e) => e?.id == pmTaskDetails!.id,
+                                                                      //               orElse: () => PmTaskListModel(id: 00),
+                                                                      //             )
+                                                                      //             ?.status ==
+                                                                      //         163
+                                                                      //     ? TableActionButton(
+                                                                      //         color: ColorValues.linktopermitColor,
+                                                                      //         icon: Icons.link_sharp,
+                                                                      //         message: 'Link To Permit',
+                                                                      //         onPress: () {
+                                                                      //           controller.permitscheduleId = pmTaskDetails?.id ?? 0;
+
+                                                                      //           controller.showPermitsDialog();
+                                                                      //         },
+                                                                      //       )
+                                                                      //     : Dimens.box0,
+                                                                      TableActionButton(
+                                                                        color: ColorValues
+                                                                            .pendingColor,
+                                                                        icon: Icons
+                                                                            .numbers_outlined,
+                                                                        message:
+                                                                            'PM Pending Jobs',
+                                                                        onPress:
+                                                                            () {},
+                                                                      ),
+                                                                    ]))
+                                                              ]))
+                                                  .toList()),
                                 ),
                               ),
                               Padding(

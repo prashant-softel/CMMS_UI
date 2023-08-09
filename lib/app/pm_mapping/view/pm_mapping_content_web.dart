@@ -64,7 +64,7 @@ class PmMappingContentWeb extends GetView<PmMappingController> {
         ),
         Expanded(
             child: varUserAccessModel.value.access_list!
-                        .where((e) => e.feature_id == 7 && e.view == 1)
+                        .where((e) => e.feature_id == 7 && e.view == 0)
                         .length >
                     0
                 ? Container(
@@ -197,7 +197,7 @@ class PmMappingContentWeb extends GetView<PmMappingController> {
               //   width: 20,
               // ),
               varUserAccessModel.value.access_list!
-                          .where((e) => e.feature_id == 7 && e.add == 1)
+                          .where((e) => e.feature_id == 7 && e.add == 0)
                           .length >
                       0
                   ? Container(

@@ -8,9 +8,10 @@ class ImportInventoryPresenter {
   ImportInventoryPresenter(this.importInventoryUsecase);
   ImportInventoryUsecase importInventoryUsecase;
 
-  Future<bool> browseFiles(
-      Uint8List? fileBytes, String fileName, bool isLoading) async {
-    await importInventoryUsecase.browseFiles(fileBytes, fileName, isLoading);
+  Future<bool> browseFiles(Uint8List? fileBytes, String fileName,
+      int importType, bool isLoading) async {
+    await importInventoryUsecase.browseFiles(
+        fileBytes, fileName, importType, isLoading);
     return true;
   }
 }

@@ -1,15 +1,14 @@
 import 'dart:async';
 
 import 'package:cmms/app/preventive_maintenance_task/preventive_maintenance_task_presenter.dart';
-import 'package:flutter/foundation.dart';
+import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
 import 'package:scrollable_table_view/scrollable_table_view.dart';
 
+import '../../domain/models/new_permit_list_model.dart';
 import '../../domain/models/pm_task_model.dart';
-import '../../domain/models/update_pm_task_execution_model.dart';
 import '../home/home_controller.dart';
-import '../navigators/app_pages.dart';
 
 class PreventiveMaintenanceTaskController extends GetxController {
   ///
@@ -24,7 +23,17 @@ class PreventiveMaintenanceTaskController extends GetxController {
   RxList<PmTaskListModel?> pmTaskList = <PmTaskListModel?>[].obs;
   RxList<PmTaskListModel?> filteredData = <PmTaskListModel>[].obs;
   bool openFromDateToStartDatePicker = false;
+  RxList<NewPermitModel?>? permitList = <NewPermitModel>[].obs;
+  var permitDropdownValues = <String?>[].obs;
 
+  final selectedPermit = Rx<NewPermitModel?>(null);
+  Rx<int?> selectedPermitId = 0.obs;
+  Rx<bool> isPermitLinked = false.obs;
+  int permitValuesCount = 6;
+  var permitValues;
+  late List<TextEditingController> textControllers;
+  RxString responseMessage = ''.obs;
+  int permitscheduleId = 0;
   PmTaskListModel? pmTaskListModel;
   RxList<String> pmTaskListTableColumns = <String>[].obs;
   PaginationController paginationController = PaginationController(
@@ -40,6 +49,7 @@ class PreventiveMaintenanceTaskController extends GetxController {
   String get formattedFromdate1 =>
       DateFormat('yyyy-MM-dd').format(fromDate.value);
   PmTaskListModel? selectedItem;
+
   @override
   void onInit() async {
     facilityIdStreamSubscription = homecontroller.facilityId$.listen((event) {
@@ -47,6 +57,8 @@ class PreventiveMaintenanceTaskController extends GetxController {
       Future.delayed(Duration(seconds: 2), () async {
         getPmTaskList(facilityId, formattedTodate1, formattedFromdate1, false);
       });
+      // isDataLoading.value = false;
+
       // Future.delayed(Duration(seconds: 2), () async {
       // });
     });

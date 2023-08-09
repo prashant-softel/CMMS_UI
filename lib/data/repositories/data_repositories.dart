@@ -1002,18 +1002,16 @@ class DataRepository extends DomainRepository {
         isLoading: isLoading ?? false,
       );
 
-  Future<ResponseModel> updateNewPermit({
-    required String auth,
-    newPermit,
-    bool? isLoading,
-    bool? resubmit
-  }) async =>
+  Future<ResponseModel> updateNewPermit(
+          {required String auth,
+          newPermit,
+          bool? isLoading,
+          bool? resubmit}) async =>
       await connectHelper.updateNewPermit(
-        auth: auth,
-        newPermit: newPermit,
-        isLoading: isLoading ?? false,
-        resubmit: resubmit
-      );
+          auth: auth,
+          newPermit: newPermit,
+          isLoading: isLoading ?? false,
+          resubmit: resubmit);
 
   Future<ResponseModel> createSOP({
     required String auth,
@@ -1588,11 +1586,13 @@ class DataRepository extends DomainRepository {
       {required String auth,
       Uint8List? fileBytes,
       required String fileName,
+      required int importType,
       required bool isLoading}) async {
     return await connectHelper.browseFiles(
       auth: auth,
       fileBytes: fileBytes,
       fileName: fileName,
+      importType: importType,
       isLoading: true,
     );
     // return true;
@@ -2660,5 +2660,27 @@ class DataRepository extends DomainRepository {
           facilityId: facilityId ?? 0,
           isLoading: isLoading ?? false,
           userId: userId);
+  Future<ResponseModel> scheduleLinkToPermit({
+    required String auth,
+    scheduleId,
+    permitId,
+    bool? isLoading,
+  }) async =>
+      await connectHelper.scheduleLinkToPermit(
+        auth: auth,
+        scheduleId: scheduleId,
+        permitId: permitId,
+        isLoading: isLoading ?? false,
+      );
+  Future<ResponseModel> setPmTask({
+    required String auth,
+    scheduleId,
+    bool? isLoading,
+  }) async =>
+      await connectHelper.setPmTask(
+        auth: auth,
+        scheduleId: scheduleId,
+        isLoading: isLoading ?? false,
+      );
 //end
 }
