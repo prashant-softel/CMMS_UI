@@ -298,7 +298,9 @@ class PermitTypeContentWeb extends GetView<PermitTypeController> {
                                         child: CustomElevatedButton(
                                             backgroundColor:
                                                 ColorValues.appRedColor,
-                                            onPressed: () {},
+                                            onPressed: () {
+                                              controller.cleardata();
+                                            },
                                             text: 'Cancel')),
                                     SizedBox(
                                       width: 10,

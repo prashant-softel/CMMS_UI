@@ -260,10 +260,10 @@ class PermitTypeController extends GetxController {
 
   Future<void> issuccessCreatechecklist() async {
     isSuccess.toggle();
-    await {_cleardata()};
+    await {cleardata()};
   }
 
-  _cleardata() {
+  cleardata() {
     descriptionCtrlr.text = '';
     titleCtrlr.text = '';
     selectedFacility.value = '';
