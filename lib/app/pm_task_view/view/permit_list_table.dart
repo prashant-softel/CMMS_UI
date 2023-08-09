@@ -199,13 +199,22 @@ class SchedulePermitListTableDialog
                                     text: 'Link',
                                     onPressed: () => controller.linkToPermit(),
                                   )
-                                : CustomElevatedButton(
+                                : //controller.isPermitLinked.value == false
+                                // ?
+                                CustomElevatedButton(
                                     text: 'Start',
                                     onPressed: () {
                                       controller.setPmTask();
                                     } // =>
                                     // controller.goToJobDetailsScreen(),
                                     ),
+                            // : CustomElevatedButton(
+                            //     text: 'Execution',
+                            //     onPressed: () {
+                            //       controller.gotoexecution();
+                            //     } // =>
+                            //     // controller.goToJobDetailsScreen(),
+                            //     )
                           ]),
                     ),
                   )

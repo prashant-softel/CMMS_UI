@@ -281,7 +281,7 @@ class PreventiveMaintenanceTaskViewContentWeb
                                                   ),
                                                 ].map((record) {
                                                   return TableViewRow(
-                                                    height: 90,
+                                                    height: 50,
                                                     cells: record.map((value) {
                                                       return TableViewCell(
                                                         child: Text(value),
@@ -444,7 +444,7 @@ class PreventiveMaintenanceTaskViewContentWeb
                                                   // [
                                                 ].map((record) {
                                                   return TableViewRow(
-                                                    height: 90,
+                                                    height: 50,
                                                     cells: record.map((value) {
                                                       return TableViewCell(
                                                         child: Text(value),
@@ -509,9 +509,11 @@ class PreventiveMaintenanceTaskViewContentWeb
                   height: 35,
                   child: CustomElevatedButton(
                     icon: Icons.close,
-                    backgroundColor: ColorValues.closeColor,
+                    backgroundColor: ColorValues.cancelColor,
                     text: "Close",
-                    onPressed: () {},
+                    onPressed: () {
+                      Get.back();
+                    },
                   ),
                 ),
               ],

@@ -1,5 +1,8 @@
+import 'package:cmms/app/navigators/app_pages.dart';
 import 'package:cmms/app/pm_task_view/pm_task_view_presenter.dart';
 import 'package:cmms/app/pm_task_view/view/permit_list_table.dart';
+import 'package:cmms/app/theme/color_values.dart';
+import 'package:cmms/app/theme/dimens.dart';
 import 'package:cmms/app/utils/utility.dart';
 import 'package:cmms/domain/models/new_permit_list_model.dart';
 import 'package:cmms/domain/models/pm_task_view_list_model.dart';
@@ -16,6 +19,9 @@ import 'package:pdf/pdf.dart';
 import 'package:pdf/widgets.dart' as pw;
 
 import 'package:printing/printing.dart';
+
+import '../theme/styles.dart';
+import '../widgets/custom_elevated_button.dart';
 
 class PreventiveMaintenanceTaskViewController extends GetxController {
   ///
@@ -45,6 +51,7 @@ class PreventiveMaintenanceTaskViewController extends GetxController {
   var permitValues;
   late List<TextEditingController> textControllers;
   RxString responseMessage = ''.obs;
+  RxString startresponseMessage = ''.obs;
 
   @override
   void onInit() async {
@@ -198,8 +205,10 @@ class PreventiveMaintenanceTaskViewController extends GetxController {
     );
     if (responseMapPermitLinked != null && responseMapPermitLinked.length > 0) {
       // var _jobId = responseMapPermitLinked["id"][0];
-      responseMessage.value = responseMapPermitLinked["message"];
-      isPermitLinked.value = true;
+
+      // isPermitLinked.value = true;
+      Get.back();
+      getPmtaskViewList(scheduleId: scheduleId.value, isloading: true);
     }
   }
 
@@ -211,8 +220,76 @@ class PreventiveMaintenanceTaskViewController extends GetxController {
     );
     if (responseMapStart != null && responseMapStart.length > 0) {
       getPmtaskViewList(scheduleId: scheduleId.value, isloading: true);
-      responseMessage.value = responseMapStart["message"];
+      startresponseMessage.value = responseMapStart["message"];
       isPermitLinked.value = true;
+      _updatedailog();
     }
+  }
+
+  void _updatedailog() {
+    Get.dialog(AlertDialog(
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.all(Radius.circular(15.0)),
+      ),
+      insetPadding: Dimens.edgeInsets10_0_10_0,
+      contentPadding: EdgeInsets.zero,
+      title: Column(
+        children: [
+          Text(
+            'PM Task Started',
+            textAlign: TextAlign.center,
+            style: Styles.green700,
+          ),
+          Divider(
+            color: ColorValues.greyColor,
+          )
+        ],
+      ),
+      content: Builder(builder: (context) {
+        var height = Get.height;
+
+        return Container(
+          // margin: Dimens.edgeInsets15,
+          // padding: Dimens.edgeInsets25,
+          height: height / 7,
+          width: double.infinity,
+
+          child: Column(
+            children: [
+              // RichText(
+              //   text: TextSpan(
+              //       text: 'PM Execution Submitted with',
+              //       style: Styles.blue700,
+              //       children: <TextSpan>[
+              //         TextSpan(text: ' \n     Code', style: Styles.blue700),
+              //         TextSpan(
+              //           text: '  2444',
+              //           style: Styles.redBold15,
+              //         ),
+              //       ]),
+              // ),
+              // Dimens.boxHeight12,
+              //  Text("PM Execution Submitted with code PMSC87456"),
+              Container(
+                height: 40,
+                child: CustomElevatedButton(
+                  text: "Execute",
+                  onPressed: () {
+                    gotoexecution();
+                  },
+                  backgroundColor: ColorValues.appDarkBlueColor,
+                  textColor: ColorValues.whiteColor,
+                ),
+              ),
+            ],
+          ),
+        );
+      }),
+      actions: [],
+    ));
+  }
+
+  Future<void> gotoexecution() async {
+    Get.toNamed(Routes.pmExecution, arguments: {'scheduleId': scheduleId});
   }
 }
