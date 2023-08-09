@@ -156,27 +156,27 @@ class PreventiveMaintenanceExecutionController extends GetxController {
 
           child: Column(
             children: [
-              RichText(
-                text: TextSpan(
-                    text: 'PM Execution Submitted with',
-                    style: Styles.blue700,
-                    children: <TextSpan>[
-                      TextSpan(text: ' \n     Code', style: Styles.blue700),
-                      TextSpan(
-                        text: '  2444',
-                        style: Styles.redBold15,
-                      ),
-                    ]),
-              ),
-              Dimens.boxHeight12,
+              // RichText(
+              //   text: TextSpan(
+              //       text: 'PM Execution Submitted with',
+              //       style: Styles.blue700,
+              //       children: <TextSpan>[
+              //         TextSpan(text: ' \n     Code', style: Styles.blue700),
+              //         TextSpan(
+              //           text: '  2444',
+              //           style: Styles.redBold15,
+              //         ),
+              //       ]),
+              // ),
+              // Dimens.boxHeight12,
               //  Text("PM Execution Submitted with code PMSC87456"),
               Container(
                 height: 40,
                 child: CustomElevatedButton(
-                  text: "PM Execution View",
+                  text: "PM Task",
                   onPressed: () {
                     Get.toNamed(
-                      Routes.pmExecutionView,
+                      Routes.pmTask,
                     );
                   },
                   backgroundColor: ColorValues.appDarkBlueColor,

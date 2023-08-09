@@ -346,7 +346,7 @@ class _PreventiveMaintenanceTaskContentWebState
                                                                 //
                                                                 TableViewCell(
                                                                     child: Text(
-                                                                        "${pmTaskDetails?.id ?? ""}")),
+                                                                        "${pmTaskDetails?.schedule_date ?? ""}")),
                                                                 TableViewCell(
                                                                     child: Text(
                                                                         '${pmTaskDetails?.completed_date}')),
@@ -359,7 +359,7 @@ class _PreventiveMaintenanceTaskContentWebState
                                                                 )),
                                                                 TableViewCell(
                                                                     child: Text(
-                                                                  '${pmTaskDetails?.permit_code}id${pmTaskDetails?.status}',
+                                                                  '${pmTaskDetails?.permit_code}',
                                                                 )),
                                                                 TableViewCell(
                                                                     child: Wrap(
@@ -449,17 +449,17 @@ class _PreventiveMaintenanceTaskContentWebState
                                                                       //           controller.showPermitsDialog();
                                                                       //         },
                                                                       //       )
-                                                                      //     : Dimens.box0,
-                                                                      TableActionButton(
-                                                                        color: ColorValues
-                                                                            .pendingColor,
-                                                                        icon: Icons
-                                                                            .numbers_outlined,
-                                                                        message:
-                                                                            'PM Pending Jobs',
-                                                                        onPress:
-                                                                            () {},
-                                                                      ),
+                                                                      // //     : Dimens.box0,
+                                                                      // TableActionButton(
+                                                                      //   color: ColorValues
+                                                                      //       .pendingColor,
+                                                                      //   icon: Icons
+                                                                      //       .numbers_outlined,
+                                                                      //   message:
+                                                                      //       'PM Pending Jobs',
+                                                                      //   onPress:
+                                                                      //       () {},
+                                                                      // ),
                                                                     ]))
                                                               ]))
                                                   .toList()),
