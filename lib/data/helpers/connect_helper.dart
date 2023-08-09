@@ -609,6 +609,7 @@ class ConnectHelper {
     required String auth,
     bool? isLoading,
     bool? self_view,
+    bool? non_expired,
     int? facilityId,
     int? userId,
     String? start_date,
@@ -618,7 +619,7 @@ class ConnectHelper {
     var startDateParam = (start_date != null) ? 'start_date=$start_date&' : '';
     var endDateParam = (end_date != '') ? 'end_date=$end_date' : '';
     var responseModel = await apiWrapper.makeRequest(
-      'Permit/GetPermitList?facility_id=$facilityId&userId=$userId&self_view=$self_view&' +
+      'Permit/GetPermitList?facility_id=$facilityId&userId=$userId&self_view=$self_view&non_expired=$non_expired&' +
           startDateParam +
           endDateParam,
       Request.get,

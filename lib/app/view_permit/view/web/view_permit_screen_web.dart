@@ -3291,7 +3291,7 @@ class ViewPermitWebScreen extends GetView<ViewPermitController> {
                               121 ||
                       varUserAccessModel.value.access_list!
                                   .where((e) =>
-                                      e.feature_id == UserAccessConstants.kPermitFeatureId && e.approve == UserAccessConstants.kHaveApproveAccess)
+                                      e.feature_id == UserAccessConstants.kPermitFeatureId && e.delete == UserAccessConstants.kHaveDeleteAccess)
                                   .length >
                               0 &&
                           controller.viewPermitDetailsModel.value?.ptwStatus ==

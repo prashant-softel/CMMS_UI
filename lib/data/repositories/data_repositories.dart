@@ -516,6 +516,7 @@ class DataRepository extends DomainRepository {
     int? userId,
     bool? isLoading,
     bool? self_view,
+    bool? non_expired,
     String? start_date,
     required String end_date,
   }) async =>
@@ -525,6 +526,7 @@ class DataRepository extends DomainRepository {
         // facilityId: facilityId ?? 0,
         // userId: 33,
         self_view: self_view,
+        non_expired: non_expired,
         start_date: start_date,
         end_date: end_date,
         userId: userId,

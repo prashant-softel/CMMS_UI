@@ -1,5 +1,7 @@
 import 'package:cmms/app/add_inventory/view/add_inventory_ui.dart';
 import 'package:cmms/app/app.dart';
+import 'package:cmms/app/constant/constant.dart';
+import 'package:cmms/app/utils/user_access_constants.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -153,15 +155,36 @@ class InventoryScreen extends GetView<InventoryController> {
                                 Routes.warrantyCertificate,
                               );
                             }),
-                        _inventoryList(
-                          tittle: "Warranty Claims",
-                          ontap: () => controller.breakdownMaintenance(),
-                        ),
-                        _inventoryList(
-                            tittle: "New Warranty Claim",
-                            ontap: () {
-                              controller.newWarrantyClaimList();
-                            }),
+                        varUserAccessModel.value.access_list!
+                                    .where((e) =>
+                                        e.feature_id ==
+                                            UserAccessConstants
+                                                .kWarrantyClaimFeatureId &&
+                                        e.view ==
+                                            UserAccessConstants.kHaveViewAccess)
+                                    .length >
+                                0
+                            ? _inventoryList(
+                                tittle: "Warranty Claims List",
+                                ontap: () => controller.breakdownMaintenance(),
+                              )
+                            : Container(),
+
+                        varUserAccessModel.value.access_list!
+                                    .where((e) =>
+                                        e.feature_id ==
+                                            UserAccessConstants
+                                                .kWarrantyClaimFeatureId &&
+                                        e.add ==
+                                            UserAccessConstants.kHaveAddAccess)
+                                    .length >
+                                0
+                            ? _inventoryList(
+                                tittle: "New Warranty Claim",
+                                ontap: () {
+                                  controller.newWarrantyClaimList();
+                                })
+                            : Container(),
 
                         // _inventoryList(
                         //     tittle: "Inventory Category",

@@ -19,6 +19,7 @@ class NewPermitListPresenter {
     int? userId,
     required bool isLoading,
     required bool self_view,
+    required bool non_expired,
     String? start_date,
     required String end_date,
   }) async =>
@@ -27,6 +28,7 @@ class NewPermitListPresenter {
         facilityId: facilityId,
         isLoading: isLoading,
         self_view: self_view,
+        non_expired: non_expired,
         start_date: start_date,
         end_date: end_date,
         
