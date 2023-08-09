@@ -329,12 +329,12 @@ class PmScheduleContentWeb extends GetView<PmScheduleController> {
                                                       textController: (value
                                                               as FrequencyDates)
                                                           .schedule_date_value_controller,
-                                                      enabled:
-                                                          (value as FrequencyDates)
-                                                                      .schedule_date !=
-                                                                  null
-                                                              ? true
-                                                              : false,
+                                                      // enabled:
+                                                      //     (value as FrequencyDates)
+                                                      //                 .schedule_date !=
+                                                      //             null
+                                                      //         ? true
+                                                      //         : false,
                                                     )),
                                               );
                                             }).toList(),

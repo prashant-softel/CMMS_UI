@@ -21,7 +21,8 @@ class ImportInventoryController extends GetxController {
   }
 
   Future<bool> browseFiles({Uint8List? fileBytes}) async {
-    await importInventoryPresenter.browseFiles(fileBytes, fileName.value, true);
+    await importInventoryPresenter.browseFiles(
+        fileBytes, fileName.value, type, true);
     return true;
   }
 

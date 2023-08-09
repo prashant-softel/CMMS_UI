@@ -13,6 +13,7 @@ String pmtaskViewModelToJson(PmtaskViewModel data) =>
 
 class PmtaskViewModel {
   int? id;
+  int? facility_id;
   String? facility_name;
   String? maintenance_order_number;
   String? schedule_date;
@@ -59,6 +60,7 @@ class PmtaskViewModel {
       this.status_name,
       this.checklist_id,
       this.checklist_name,
+      this.facility_id,
       // this.files,
       this.is_custom_check_point,
       this.is_file_required});
@@ -82,7 +84,8 @@ class PmtaskViewModel {
         permit_id: json["permit_id"] ?? "",
         schedule_date: Utility.getFormatedyearMonthDay(json["schedule_date"]),
         // schedule_link_job: json["schedule_link_job"] ?? "",
-        status: json["status"] ?? "",
+        status: json["status"] ?? "", facility_id: json["facility_id"] ?? "",
+
         status_name: json["status_name"] ?? "",
         is_custom_check_point: json["is_custom_check_point"],
         is_file_required: json["is_file_required"],
@@ -107,6 +110,7 @@ class PmtaskViewModel {
         "facility_name": facility_name,
         "frequency_id": frequency_id,
         "frequency_name": frequency_name,
+        "facility_id": facility_id,
         "id": id,
         "maintenance_order_number": maintenance_order_number,
         "permit_code": permit_code,

@@ -1,3 +1,4 @@
+import 'package:cmms/domain/models/new_permit_list_model.dart';
 import 'package:cmms/domain/models/pm_task_model.dart';
 
 import '../../domain/usecases/pm_task_usecase.dart';

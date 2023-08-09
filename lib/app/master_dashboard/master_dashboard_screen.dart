@@ -358,7 +358,6 @@ class MastersDashboard extends GetView<MastersController> {
                                 ? (itemWidth / itemHeight)
                                 : (itemWidth / itemHeightWeb),
                             children: <Widget>[
-
                               OnHover(builder: (((isHovered) {
                                 return createContentTile(
                                     title: "Business Type List",
@@ -480,6 +479,13 @@ class MastersDashboard extends GetView<MastersController> {
                               }))),
                               OnHover(builder: (((isHovered) {
                                 return createContentTile(
+                                    title: "Import User",
+                                    onTap: () {
+                                      controller.goToImportUser();
+                                    });
+                              }))),
+                              OnHover(builder: (((isHovered) {
+                                return createContentTile(
                                     title: "Designation",
                                     onTap: () {
                                       controller.goToDesignationScreen();
@@ -492,7 +498,7 @@ class MastersDashboard extends GetView<MastersController> {
                                       controller.goToCompetencyScreen();
                                     });
                               }))),
-                               OnHover(builder: (((isHovered) {
+                              OnHover(builder: (((isHovered) {
                                 return createContentTile(
                                     title: "Escalation Matrix",
                                     onTap: () {

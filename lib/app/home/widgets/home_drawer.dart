@@ -97,8 +97,7 @@ class HomeDrawer extends GetView<HomeController> {
                                               isexpand:
                                                   controller.isExpanded.value,
                                               title: "Preventive Maintenance",
-                                              icon:
-                                                  "assets/files/preventive.png",
+                                              icon: "assets/files/correct.png",
                                               press: () {
                                                 Get.offNamed(Routes.preventive);
                                               },
@@ -109,7 +108,7 @@ class HomeDrawer extends GetView<HomeController> {
                                                   controller.isExpanded.value,
                                               title: "Module Cleaning",
                                               icon:
-                                                  "assets/files/maintenance.png",
+                                                  "assets/files/reportins.png",
                                               press: () {
                                                 Get.offNamed(Routes
                                                     .moduleCleaningDashboard);
@@ -119,8 +118,7 @@ class HomeDrawer extends GetView<HomeController> {
                                               isexpand:
                                                   controller.isExpanded.value,
                                               title: "Vegetation Control",
-                                              icon:
-                                                  "assets/files/preventive.png",
+                                              icon: "assets/files/maint.png",
                                               press: () {
                                                 Get.offNamed(Routes.home);
                                               },
@@ -129,7 +127,8 @@ class HomeDrawer extends GetView<HomeController> {
                                               isexpand:
                                                   controller.isExpanded.value,
                                               title: "Assets",
-                                              icon: "assets/files/warranty.png",
+                                              icon:
+                                                  "assets/files/maintenance.png",
                                               press: () {
                                                 Get.offNamed(Routes.inventory);
                                               },
@@ -138,8 +137,7 @@ class HomeDrawer extends GetView<HomeController> {
                                               isexpand:
                                                   controller.isExpanded.value,
                                               title: "Incident Report",
-                                              icon:
-                                                  "assets/files/reportins.png",
+                                              icon: "assets/files/misc.png",
                                               press: () {
                                                 Get.offNamed(Routes
                                                     .incidentReportListWeb);
@@ -149,7 +147,7 @@ class HomeDrawer extends GetView<HomeController> {
                                               isexpand:
                                                   controller.isExpanded.value,
                                               title: "Stock Management",
-                                              icon: "assets/files/maint.png",
+                                              icon: "assets/files/warranty.png",
                                               press: () {
                                                 Get.offNamed(Routes
                                                     .stockManagementDashboardScreen);
@@ -170,7 +168,8 @@ class HomeDrawer extends GetView<HomeController> {
                                               isexpand:
                                                   controller.isExpanded.value,
                                               title: "Masters",
-                                              icon: "assets/files/misc.png",
+                                              icon:
+                                                  "assets/files/inventory.png",
                                               press: () {
                                                 Get.offNamed(
                                                     Routes.masterDashboard);

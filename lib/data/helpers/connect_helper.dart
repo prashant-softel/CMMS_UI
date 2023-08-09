@@ -2497,7 +2497,7 @@ class ConnectHelper {
       dynamic startDate,
       dynamic endDate}) async {
     var responseModel = await apiWrapper.makeRequest(
-      'PMScheduleView/GetPMTaskList?facility_id=${facilityId}&start_date=${endDate}&end_date=${startDate}',
+      'PMScheduleView/GetPMTaskList?facility_id=${facilityId}&start_date=2023-08-22&end_date=2023-08-22',
       Request.get,
       null,
       isLoading ?? true,
@@ -2531,6 +2531,7 @@ class ConnectHelper {
     required String auth,
     Uint8List? fileBytes,
     required String fileName,
+    required int importType,
     bool? isLoading,
   }) async {
     final request = http.MultipartRequest('POST',
@@ -2547,10 +2548,17 @@ class ConnectHelper {
 
     // Check if the upload was successful
     if (response.statusCode == 200) {
-      importInventory(
-          auth: auth,
-          fileId: jsonResponse["id"][0].toString(),
-          isLoading: true);
+      if (importType == 1) {
+        importInventory(
+            auth: auth,
+            fileId: jsonResponse["id"][0].toString(),
+            isLoading: true);
+      } else if (importType == 2) {
+        importUser(
+            auth: auth,
+            fileId: jsonResponse["id"][0].toString(),
+            isLoading: true);
+      }
     }
 
     CreateSOPModel createSOPModel = CreateSOPModel(
@@ -2569,6 +2577,24 @@ class ConnectHelper {
   }) async {
     var responseModel = await apiWrapper.makeRequest(
       'Inventory/ImportInventories?file_id=$fileId',
+      Request.post,
+      null,
+      false,
+      {
+        'Content-Type': 'application/json',
+        'Authorization': 'Bearer $auth',
+      },
+    );
+    return responseModel;
+  }
+
+  Future<ResponseModel> importUser({
+    required String auth,
+    required String fileId,
+    required bool isLoading,
+  }) async {
+    var responseModel = await apiWrapper.makeRequest(
+      'User/ImportUsers?file_id=$fileId',
       Request.post,
       null,
       false,
@@ -4244,6 +4270,43 @@ class ConnectHelper {
       },
     );
 
+    return responseModel;
+  }
+
+  Future<ResponseModel> scheduleLinkToPermit({
+    required String auth,
+    scheduleId,
+    permitId,
+    bool? isLoading,
+  }) async {
+    var responseModel = await apiWrapper.makeRequest(
+      'PMScheduleView/LinkPermitToPMTask?schedule_id=$scheduleId&permit_id=$permitId',
+      Request.put,
+      null,
+      isLoading ?? false,
+      {
+        'Content-Type': 'application/json',
+        'Authorization': 'Bearer $auth',
+      },
+    );
+    return responseModel;
+  }
+
+  Future<ResponseModel> setPmTask({
+    required String auth,
+    scheduleId,
+    bool? isLoading,
+  }) async {
+    var responseModel = await apiWrapper.makeRequest(
+      'PMScheduleView/SetPMTask?schedule_id=$scheduleId',
+      Request.post,
+      null,
+      isLoading ?? false,
+      {
+        'Content-Type': 'application/json',
+        'Authorization': 'Bearer $auth',
+      },
+    );
     return responseModel;
   }
 }
