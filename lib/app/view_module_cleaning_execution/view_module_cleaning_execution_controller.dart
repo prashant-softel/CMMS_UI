@@ -38,8 +38,10 @@ class viewModuleCleaningExecutionController extends GetxController {
       {"key": "Pending", "value": ''},
       {"key": "Type", "value": ''},
       {"key": "Water Used", "value": ''},
-      {"key": "Remark", "value": ''},
-      {'key': "Actions", "value": ''},
+      {"key": "Start Date", "value": ''},
+      {'key': "End Date", "value": ''},
+      {'key': "Remark", "value": ''},
+
     ]);
   }
 
