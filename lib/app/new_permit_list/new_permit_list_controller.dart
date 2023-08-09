@@ -3,6 +3,7 @@ import 'dart:async';
 import 'package:cmms/app/constant/constant.dart';
 import 'package:cmms/app/home/home_controller.dart';
 import 'package:cmms/app/navigators/app_pages.dart';
+import 'package:cmms/app/utils/user_access_constants.dart';
 import 'package:cmms/domain/models/facility_model.dart';
 import 'package:cmms/domain/models/new_permit_list_model.dart';
 import 'package:cmms/app/new_permit_list/new_permit_list_presenter.dart';
@@ -144,8 +145,8 @@ class NewPermitListController extends GetxController {
         end_date: endDate,
         userId: userId,
         self_view:  varUserAccessModel.value.access_list!.where((e) =>
-         e.feature_id == 3 && 
-         e.selfView == 1).length > 0 ? true : false
+         e.feature_id == UserAccessConstants.kPermitFeatureId && 
+         e.selfView == UserAccessConstants.kHaveSelfViewAccess).length > 0 ? true : false
         );
 
     if (_newPermitList != null) {

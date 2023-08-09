@@ -2,8 +2,10 @@ import 'package:cmms/app/app.dart';
 // import 'package:cmms/app/preventive_maintanance/preventive.dart';
 import 'package:cmms/app/breakdown_maintenance/breakdown_maintenance_controller.dart';
 import 'package:cmms/app/constant/constant.dart';
+import 'package:cmms/app/utils/user_access_constants.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+
 
 import '../../home/widgets/header_widget.dart';
 
@@ -145,7 +147,7 @@ class BreakdownMaintenanceScreen
 
                         varUserAccessModel.value.access_list!
                                       .where((e) =>
-                                          e.feature_id == 2 && e.view == 1)
+                                          e.feature_id == UserAccessConstants.kJobFeatureId && e.view == UserAccessConstants.kHaveViewAccess)
                                       .length >
                                   0
                               ?
@@ -158,7 +160,7 @@ class BreakdownMaintenanceScreen
 
                              varUserAccessModel.value.access_list!
                                       .where((e) =>
-                                          e.feature_id == 2 && e.add == 1)
+                                          e.feature_id == UserAccessConstants.kJobFeatureId && e.add == UserAccessConstants.kHaveAddAccess)
                                       .length >
                                   0
                               ?
@@ -171,7 +173,7 @@ class BreakdownMaintenanceScreen
 
                          varUserAccessModel.value.access_list!
                                       .where((e) =>
-                                          e.feature_id == 4 && e.view == 1)
+                                          e.feature_id == UserAccessConstants.kJobCardFeatureId && e.view == UserAccessConstants.kHaveViewAccess)
                                       .length >
                                   0
                               ?
@@ -196,7 +198,7 @@ class BreakdownMaintenanceScreen
                       children: <Widget>[
                         varUserAccessModel.value.access_list!
                                       .where((e) =>
-                                          e.feature_id == 3 && e.view == 1)
+                                          e.feature_id == UserAccessConstants.kPermitFeatureId && e.view == UserAccessConstants.kHaveViewAccess)
                                       .length >
                                   0
                               ?
@@ -209,7 +211,7 @@ class BreakdownMaintenanceScreen
 
                             varUserAccessModel.value.access_list!
                                       .where((e) =>
-                                          e.feature_id == 3 && e.add == 1)
+                                          e.feature_id == UserAccessConstants.kPermitFeatureId && e.add == UserAccessConstants.kHaveAddAccess)
                                       .length >
                                   0
                               ?
