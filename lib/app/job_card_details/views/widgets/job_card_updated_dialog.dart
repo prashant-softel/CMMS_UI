@@ -44,7 +44,7 @@ class JobCardUpdatedDialog extends GetView<JobCardDetailsController> {
                 ),
                 Dimens.boxHeight20,
                 Center(
-                    child: Text("Job Card Added Succesfully With ID $jobId ")),
+                    child: Text("Job Card Update Succesfully With ID $jobId ")),
                 Dimens.boxHeight25,
                 Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween, //
