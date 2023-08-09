@@ -721,12 +721,14 @@ class MastersDashboard extends GetView<MastersController> {
             color: ColorValues.skyBlueColor,
             borderRadius: BorderRadius.circular(2),
           ),
-          padding: EdgeInsets.all(9),
-          child: Row(
-            crossAxisAlignment: CrossAxisAlignment.center,
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              Expanded(
+          padding: EdgeInsets.symmetric(horizontal: 12, vertical: 8),
+
+        child:
+          // Row(
+          //   crossAxisAlignment: CrossAxisAlignment.center,
+          //   mainAxisAlignment: MainAxisAlignment.center,
+          //   children: [
+              Center(
                 child: Text(
                   title,
                   style: TextStyle(
@@ -737,8 +739,8 @@ class MastersDashboard extends GetView<MastersController> {
                   textAlign: TextAlign.center, // Updated
                 ),
               ),
-            ],
-          ),
+            // ],
+          // ),
         ),
       ),
     );

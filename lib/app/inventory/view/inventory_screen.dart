@@ -310,23 +310,25 @@ class InventoryScreen extends GetView<InventoryController> {
             color: ColorValues.skyBlueColor,
             borderRadius: BorderRadius.circular(2),
           ),
-          padding: EdgeInsets.all(9),
-          child: Row(
-            crossAxisAlignment: CrossAxisAlignment.center,
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              Expanded(
+          padding: EdgeInsets.symmetric(horizontal: 12, vertical: 8),
+          // padding: EdgeInsets.all(9),
+          child:
+          // Row(
+          //   crossAxisAlignment: CrossAxisAlignment.center,
+          //   mainAxisAlignment: MainAxisAlignment.center,
+          //   children: [
+              Center(
                 child: Text(
                   tittle,
                   style: TextStyle(
                       color: ColorValues.whiteColor,
-                      fontSize: 16,
+                      fontSize: 15,
                       fontWeight: FontWeight.w700),
 
                   textAlign: TextAlign.center, // Updated
                 ),
-              ),
-            ],
+              // ),
+            // ],
           ),
         ),
       ),
