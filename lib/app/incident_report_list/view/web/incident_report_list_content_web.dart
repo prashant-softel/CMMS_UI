@@ -3,6 +3,7 @@ import 'package:cmms/app/constant/constant.dart';
 
 import 'package:cmms/app/incident_report_list/incident_report_list_controller.dart';
 import 'package:cmms/app/navigators/navigators.dart';
+import 'package:cmms/app/utils/user_access_constants.dart';
 import 'package:cmms/app/widgets/custom_elevated_button.dart';
 import 'package:cmms/app/widgets/custom_richtext.dart';
 import 'package:cmms/app/widgets/date_picker.dart';
@@ -120,8 +121,8 @@ class _IncidentReportListWebState extends State<IncidentReportListWeb> {
                                           Dimens.boxWidth10,
                                           varUserAccessModel.value.access_list!
                                                       .where((e) =>
-                                                          e.feature_id == 34 &&
-                                                          e.add == 1)
+                                                          e.feature_id == UserAccessConstants.kIncidentReportFeatureId &&
+                                                          e.add == UserAccessConstants.kHaveAddAccess)
                                                       .length >
                                                   0
                                               ? ActionButton(
@@ -305,7 +306,7 @@ class _IncidentReportListWebState extends State<IncidentReportListWeb> {
                                                                             ? Wrap(
                                                                                 children: [
                                                                                   Row(mainAxisAlignment: MainAxisAlignment.center, children: [
-                                                                                    varUserAccessModel.value.access_list!.where((e) => e.feature_id == 34 && e.view == 1).length > 0
+                                                                                    varUserAccessModel.value.access_list!.where((e) => e.feature_id == UserAccessConstants.kIncidentReportFeatureId && e.view == UserAccessConstants.kHaveViewAccess).length > 0
                                                                                         ? TableActionButton(
                                                                                             color: ColorValues.appDarkBlueColor,
                                                                                             icon: Icons.visibility,
@@ -317,7 +318,7 @@ class _IncidentReportListWebState extends State<IncidentReportListWeb> {
                                                                                           )
                                                                                         : Container(),
                                                                                     //),
-                                                                                    varUserAccessModel.value.access_list!.where((e) => e.feature_id == 34 && e.edit == 1).length > 0
+                                                                                    varUserAccessModel.value.access_list!.where((e) => e.feature_id == UserAccessConstants.kIncidentReportFeatureId && e.edit == UserAccessConstants.kHaveEditAccess).length > 0
                                                                                         ? TableActionButton(
                                                                                             color: ColorValues.appYellowColor,
                                                                                             icon: Icons.edit,
@@ -340,13 +341,13 @@ class _IncidentReportListWebState extends State<IncidentReportListWeb> {
                                                                                     // ),
                                                                                     //),
                                                                                   ]),
-                                                                                  varUserAccessModel.value.access_list!.where((e) => e.feature_id == 34 && e.approve == 1).length > 0 && record[8] == "Submitted"
+                                                                                  varUserAccessModel.value.access_list!.where((e) => e.feature_id == UserAccessConstants.kIncidentReportFeatureId && e.approve == UserAccessConstants.kHaveApproveAccess).length > 0 && record[8] == "Submitted"
                                                                                       ? Padding(
                                                                                           padding: const EdgeInsets.only(left: 15, top: 5),
                                                                                           child: TableActionButton(
                                                                                             color: ColorValues.appGreenColor,
                                                                                             icon: Icons.add,
-                                                                                            message: 'Add',
+                                                                                            message: 'Approve',
                                                                                             onPress: () {
                                                                                               // Get.dialog(PermitApprovedDialog(
                                                                                               //     permitId:
@@ -359,7 +360,7 @@ class _IncidentReportListWebState extends State<IncidentReportListWeb> {
                                                                                       : Container(),
 
                                                                                   ///Reject Button
-                                                                                  varUserAccessModel.value.access_list!.where((e) => e.feature_id == 34 && e.delete == 1).length > 0 && record[8] == "Submitted"
+                                                                                  varUserAccessModel.value.access_list!.where((e) => e.feature_id == UserAccessConstants.kIncidentReportFeatureId && e.delete == UserAccessConstants.kHaveDeleteAccess).length > 0 && record[8] == "Submitted"
                                                                                       ? Padding(
                                                                                           padding: const EdgeInsets.only(top: 5),
                                                                                           child: TableActionButton(

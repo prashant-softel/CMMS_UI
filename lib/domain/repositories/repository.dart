@@ -1894,6 +1894,7 @@ class Repository {
     int? facilityId,
     bool? isLoading,
     bool? self_view,
+    bool? non_expired,
     String? start_date,
     String end_date,
   ) async {
@@ -1912,6 +1913,7 @@ class Repository {
         facilityId: facilityId,
         start_date: start_date,
         self_view: self_view,
+        non_expired: non_expired,
         end_date: end_date,
         userId: userId,
         // userId: 33,
