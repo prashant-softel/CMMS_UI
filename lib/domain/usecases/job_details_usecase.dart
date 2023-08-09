@@ -21,6 +21,18 @@ class JobDetailsUsecase {
         userId,
         isLoading,
       );
+  Future<List<JobAssociatedModel?>?> getjobDetailsModel({
+    required String auth,
+    required int jobId,
+    int? userId,
+    bool? isLoading,
+  }) async =>
+      await repository.getjobDetailsModel(
+        auth,
+        jobId,
+        userId,
+        isLoading,
+      );
 
   ///
   Future<List<NewPermitModel?>?> getPermitList({

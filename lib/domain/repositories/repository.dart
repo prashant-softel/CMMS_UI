@@ -1744,7 +1744,7 @@ class Repository {
   Future<List<MCTaskListModel>> getMCTaskList({
     required int? facility_id,
     required bool isLoading,
-     String? start_date,
+    String? start_date,
     required String end_date,
   }) async {
     try {
@@ -2596,6 +2596,48 @@ class Repository {
         List<JobDetailsModel> _jobDetailsModelList = [];
         _jobDetailsModelList.add(_jsonJobDetailsModel);
         return _jobDetailsModelList;
+      } //
+      else {
+        Utility.showDialog(res.errorCode.toString() + 'getJobDetails');
+        return [];
+      }
+    } catch (error) {
+      print(error.toString());
+      return [];
+    }
+  }
+
+  Future<List<JobAssociatedModel>> getjobDetailsModel(
+    String? auth,
+    int jobId,
+    int? userId,
+    bool? isLoading,
+  ) async {
+    try {
+      final auth = await getSecuredValue(LocalKeys.authToken);
+
+      final res = await _dataRepository.getjobDetailsModel(
+        auth: auth,
+        jobId: jobId,
+        userId: userId,
+        isLoading: isLoading,
+      );
+
+      if (!res.hasError) {
+        final jsonCalibrationListModelModels = jsonDecode(res.data);
+
+        final List<JobAssociatedModel> _CalibrationListModelList =
+            jsonCalibrationListModelModels
+                .map<JobAssociatedModel>((m) =>
+                    JobAssociatedModel.fromJson(Map<String, dynamic>.from(m)))
+                .toList();
+
+        return _CalibrationListModelList.reversed.toList();
+        // final _jsonJobDetailsModel = jobAssociatedModelFromJson(res.data);
+
+        // List<JobAssociatedModel> _jobAssociatedModel = [];
+        // _jobAssociatedModel.add(_jsonJobDetailsModel);
+        // return _jobAssociatedModel;
       } //
       else {
         Utility.showDialog(res.errorCode.toString() + 'getJobDetails');

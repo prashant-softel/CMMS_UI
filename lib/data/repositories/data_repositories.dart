@@ -421,14 +421,14 @@ class DataRepository extends DomainRepository {
     int? facility_id,
     required bool isLoading,
     required String auth,
-     String? start_date,
+    String? start_date,
     required String end_date,
   }) async {
     return await connectHelper.getMCTaskList(
       isLoading: isLoading,
       auth: auth,
       facility_id: facility_id,
-       start_date: start_date,
+      start_date: start_date,
       end_date: end_date,
     );
   }
@@ -853,6 +853,19 @@ class DataRepository extends DomainRepository {
     bool? isLoading,
   }) async =>
       await connectHelper.getJobDetails(
+        auth: auth,
+        jobId: jobId ?? 0,
+        userId: userId,
+        isLoading: isLoading,
+      );
+
+  Future<ResponseModel> getjobDetailsModel({
+    required String auth,
+    int? jobId,
+    int? userId,
+    bool? isLoading,
+  }) async =>
+      await connectHelper.getjobDetailsModel(
         auth: auth,
         jobId: jobId ?? 0,
         userId: userId,

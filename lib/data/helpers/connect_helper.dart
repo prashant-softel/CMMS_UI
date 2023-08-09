@@ -534,7 +534,7 @@ class ConnectHelper {
     required bool isLoading,
     required String auth,
     int? facility_id,
-     String? start_date,
+    String? start_date,
     required String end_date,
   }) async {
     var startDateParam = (start_date != null) ? 'start_date=$start_date&' : '';
@@ -543,8 +543,8 @@ class ConnectHelper {
     // var statusParam = 'status=1';
     ResponseModel responseModel = await apiWrapper.makeRequest(
       'MC/GetMCTaskList?facility_id=$facility_id&' +
-      startDateParam +
-      endDateParam,
+          startDateParam +
+          endDateParam,
       Request.getMultiparts,
       null,
       isLoading,
@@ -1079,6 +1079,25 @@ class ConnectHelper {
   }) async {
     var responseModel = await apiWrapper.makeRequest(
       'Job/GetJobDetails?job_id=$jobId',
+      Request.get,
+      null,
+      isLoading ?? false,
+      {
+        'Authorization': 'Bearer $auth',
+      },
+    );
+
+    return responseModel;
+  }
+
+  Future<ResponseModel> getjobDetailsModel({
+    required String auth,
+    bool? isLoading,
+    int? jobId,
+    int? userId,
+  }) async {
+    var responseModel = await apiWrapper.makeRequest(
+      'JC/GetJCListByJobId?jobId=$jobId',
       Request.get,
       null,
       isLoading ?? false,
@@ -2210,7 +2229,6 @@ class ConnectHelper {
     );
     print('JobCard Response $responseModel');
     return responseModel;
-    
   }
 
 //
