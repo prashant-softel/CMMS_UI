@@ -590,10 +590,11 @@ class ConnectHelper {
     required String auth,
     bool? isLoading,
     int? facilityId,
+    bool? self_view,
     int? userId,
   }) async {
     var responseModel = await apiWrapper.makeRequest(
-      'Job/GetJobList?facility_id=$facilityId&userId=$userId',
+      'Job/GetJobList?facility_id=$facilityId&userId=$userId&self_view=$self_view',
       Request.get,
       null,
       isLoading ?? false,

@@ -2,6 +2,7 @@ import 'dart:async';
 
 import 'dart:io';
 import 'package:cmms/app/app.dart';
+import 'package:cmms/app/utils/user_access_constants.dart';
 import 'package:cmms/domain/models/facility_model.dart';
 import 'package:cmms/domain/models/job_model.dart';
 import 'package:excel/excel.dart';
@@ -73,7 +74,7 @@ class JobListController extends GetxController {
       // Future.delayed(Duration(seconds: 1), () {
       userId = varUserAccessModel.value.user_id ?? 0;
       if (userId > 0) {
-        getJobList(userId);
+        getJobList(userId, false);
       }
       // });
     });
@@ -84,7 +85,7 @@ class JobListController extends GetxController {
   void switchFacility(String? facilityName) {
     facilityId =
         facilityList.indexWhere((facility) => facility?.name == facilityName);
-    getJobList(userId);
+    getJobList(userId, false);
   }
 
   Future<void> getFacilityList({bool? isLoading}) async {
@@ -100,12 +101,16 @@ class JobListController extends GetxController {
     }
   }
 
-  Future<void> getJobList(int userId) async {
+  Future<void> getJobList(int userId,bool self_view,) async {
     jobList.value = <JobModel>[];
     if (facilityId > 0) {
       final _jobList = await jobListPresenter.getJobList(
         facilityId: facilityId,
         userId: userId,
+         self_view:  
+         varUserAccessModel.value.access_list!.where((e) =>
+         e.feature_id == UserAccessConstants.kJobFeatureId && 
+         e.selfView == UserAccessConstants.kHaveSelfViewAccess).length > 0 ? true : false,
         isLoading: true,
       );
 
@@ -284,7 +289,7 @@ class JobListController extends GetxController {
       isBlockSelected.value = true;
     }
     selectedBlock.value = selectedValue;
-    getJobList(userId);
+    getJobList(userId, false);
   }
 
   ///

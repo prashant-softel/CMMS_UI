@@ -1856,6 +1856,7 @@ class Repository {
     String auth,
     int? facilityId,
     bool? isLoading,
+    bool? self_view,
   ) async {
     try {
       final auth = await getSecuredValue(LocalKeys.authToken);
@@ -1868,6 +1869,7 @@ class Repository {
         auth: auth,
         facilityId: facilityId ?? 0,
         userId: userId,
+        self_view: self_view,
         isLoading: isLoading ?? false,
       );
 
