@@ -30,7 +30,23 @@ class TBTTypeListPresenter {
   Future<String?> getUserAccessList() async =>
       await tbtTypeListUsecase.getUserAccessList();
 
+  Future<bool> createJobType({
+    facilitylistJsonString,
+    required bool isLoading,
+  }) async {
+    print("presenter Create Facility type function.");
+    tbtTypeListUsecase.createJobType(
+      jobTypeJsonString: facilitylistJsonString,
+      isLoading: isLoading,
+    );
+    return true;
+  }
 
+  deleteJobType(String? business_id, {required bool isLoading}) async =>
+      await tbtTypeListUsecase.deleteJobType(
+        checklist_id: business_id ?? 0,
+        isLoading: isLoading,
+      );
  
  
 }
