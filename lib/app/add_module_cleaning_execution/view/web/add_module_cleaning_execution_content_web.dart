@@ -1,12 +1,11 @@
 // import 'package:cmms/app/add_job/views/widgets/work_area_widget.dart';
 
-import 'package:cmms/app/add_escalation_matrix/add_escalation_matrix_controller.dart';
 import 'package:cmms/app/add_module_cleaning_execution/add_module_cleaning_execution_controller.dart';
 import 'package:cmms/app/app.dart';
+import 'package:cmms/app/widgets/add_module_cleaning_execution_dialog.dart';
 import 'package:cmms/app/widgets/custom_elevated_button.dart';
 import 'package:cmms/app/widgets/custom_richtext.dart';
 import 'package:cmms/app/widgets/custom_textField.dart';
-import 'package:cmms/app/widgets/dropdown_web.dart';
 
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -302,6 +301,8 @@ class AddModuleCleaningExecutionContentWeb
                                                                  (mapData['key'] ==
                                                                             "Days")
                                                                         ? Column(
+                                                                            mainAxisAlignment: MainAxisAlignment.center,
+                                                                            crossAxisAlignment: CrossAxisAlignment.center,
                                                                           children: [
                                                                             Text('1')
                                                                           ],
@@ -309,6 +310,8 @@ class AddModuleCleaningExecutionContentWeb
                                                                  :(mapData['key'] ==
                                                                             "Scheduled Module")
                                                                         ? Column(
+                                                                            mainAxisAlignment: MainAxisAlignment.center,
+                                                                            crossAxisAlignment: CrossAxisAlignment.center,
                                                                           children: [
                                                                             Text('2000')
                                                                           ],
@@ -316,6 +319,8 @@ class AddModuleCleaningExecutionContentWeb
                                                                   :(mapData['key'] ==
                                                                             "Cleaned")
                                                                         ? Column(
+                                                                            mainAxisAlignment: MainAxisAlignment.center,
+                                                                            crossAxisAlignment: CrossAxisAlignment.center,
                                                                           children: [
                                                                             Text('-')
                                                                           ],
@@ -323,6 +328,8 @@ class AddModuleCleaningExecutionContentWeb
                                                                   :(mapData['key'] ==
                                                                             "Abandoned")
                                                                         ? Column(
+                                                                            mainAxisAlignment: MainAxisAlignment.center,
+                                                                            crossAxisAlignment: CrossAxisAlignment.center,
                                                                           children: [
                                                                             Text('-')
                                                                           ],
@@ -330,6 +337,8 @@ class AddModuleCleaningExecutionContentWeb
                                                                   :(mapData['key'] ==
                                                                             "Pending")
                                                                         ? Column(
+                                                                            mainAxisAlignment: MainAxisAlignment.center,
+                                                                            crossAxisAlignment: CrossAxisAlignment.center,
                                                                           children: [
                                                                             Text('-')
                                                                           ],
@@ -337,6 +346,8 @@ class AddModuleCleaningExecutionContentWeb
                                                                    :(mapData['key'] ==
                                                                             "Type")
                                                                         ? Column(
+                                                                            mainAxisAlignment: MainAxisAlignment.center,
+                                                                            crossAxisAlignment: CrossAxisAlignment.center,
                                                                           children: [
                                                                             Text('Wet')
                                                                           ],
@@ -344,6 +355,8 @@ class AddModuleCleaningExecutionContentWeb
                                                                     :(mapData['key'] ==
                                                                             "Water Used")
                                                                         ? Column(
+                                                                            mainAxisAlignment: MainAxisAlignment.center,
+                                                                            crossAxisAlignment: CrossAxisAlignment.center,
                                                                           children: [
                                                                             Text('-')
                                                                           ],
@@ -481,6 +494,7 @@ class AddModuleCleaningExecutionContentWeb
                                                     ColorValues.appRedColor,
                                                 text: "Abandoned All",
                                                 onPressed: () {
+                                                  Get.dialog(AddModuleCleaningExecutionDialog());
                                                   // controller
                                                   //     .createEscalationMatrix();
                                                 },
