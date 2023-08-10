@@ -14,11 +14,13 @@ class JobListPresenter {
     String? auth,
     int? facilityId,
     int? userId,
+    required bool self_view,
     bool? isLoading,
   }) async =>
       await jobUsecase.getJobList(
         auth: auth ?? "",
         facilityId: facilityId ?? 0,
+        self_view: self_view,
         isLoading: isLoading ?? false,
       );
       

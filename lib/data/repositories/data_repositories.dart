@@ -474,12 +474,14 @@ class DataRepository extends DomainRepository {
     required String auth,
     int? facilityId,
     int? userId,
+    bool? self_view,
     bool? isLoading,
   }) async =>
       await connectHelper.getJobList(
         auth: auth,
         facilityId: facilityId ?? 0,
         userId: userId,
+        self_view: self_view,
         isLoading: isLoading ?? false,
       );
   Future<ResponseModel> getGoodsOrdersList({
