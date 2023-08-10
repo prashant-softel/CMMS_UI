@@ -2712,5 +2712,26 @@ class DataRepository extends DomainRepository {
         scheduleId: scheduleId,
         isLoading: isLoading ?? false,
       );
+  Future<ResponseModel> createJobType({
+    auth,
+    bool? isLoading,
+    jobTypeJsonString,
+  }) async {
+    var response = await connectHelper.createJobType(
+        auth: auth,
+        isLoading: isLoading,
+        jobTypeJsonString: jobTypeJsonString);
+    return response;
+  }
+
+  Future<ResponseModel> deleteJobType({
+    auth,
+    bool? isLoading,
+    check_point_id,
+  }) async {
+    var response = await connectHelper.deleteJobType(
+        auth: auth, isLoading: isLoading, check_point_id: check_point_id);
+    return response;
+  }
 //end
 }
