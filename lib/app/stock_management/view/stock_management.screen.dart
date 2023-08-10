@@ -102,13 +102,13 @@ class StockManagementDashboardScreen
                             ),
                             SizedBox(
                                 width:
-                                10), // Add some space between the text and the line
+                                    10), // Add some space between the text and the line
                             Expanded(
                               child: Divider(
                                 color: Colors
                                     .grey, // Customize the color of the line if needed
                                 height:
-                                1, // Adjust the height of the line if needed
+                                    1, // Adjust the height of the line if needed
                               ),
                             ),
                           ],
@@ -141,6 +141,7 @@ class StockManagementDashboardScreen
                               );
                               controller.checkPoint();
                             }),
+
                         // _stockManagementList(
                         //     tittle: "MRS List",
                         //     ontap: () {
@@ -224,7 +225,6 @@ class StockManagementDashboardScreen
                             }),
                       ],
                     ),
-
                     Container(
                       margin: EdgeInsets.only(left: 20),
                       child: Row(
@@ -239,18 +239,17 @@ class StockManagementDashboardScreen
                           ),
                           SizedBox(
                               width:
-                              10), // Add some space between the text and the line
+                                  10), // Add some space between the text and the line
                           Expanded(
                             child: Divider(
                               color: Colors
                                   .grey, // Customize the color of the line if needed
                               height:
-                              1, // Adjust the height of the line if needed
+                                  1, // Adjust the height of the line if needed
                             ),
                           ),
                         ],
                       ),
-
                     ),
                     GridView.count(
                       shrinkWrap: true,

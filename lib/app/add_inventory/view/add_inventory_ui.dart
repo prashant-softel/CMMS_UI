@@ -216,6 +216,23 @@ class AddInventoryScreen extends GetView<AddInventoryController> {
                                         CustomRichText(title: 'Block'),
                                         SizedBox(
                                           child: DropdownWebWidget(
+                                            boxShadow: [
+                                              BoxShadow(
+                                                color: Colors.black26,
+                                                offset: const Offset(
+                                                  5.0,
+                                                  5.0,
+                                                ),
+                                                blurRadius: 5.0,
+                                                spreadRadius: 1.0,
+                                              ),
+                                              BoxShadow(
+                                                color: ColorValues.whiteColor,
+                                                offset: const Offset(0.0, 0.0),
+                                                blurRadius: 0.0,
+                                                spreadRadius: 0.0,
+                                              ),
+                                            ],
                                             margin: Dimens.edgeInsets5,
                                             width: MediaQuery.of(context)
                                                     .size
@@ -237,6 +254,23 @@ class AddInventoryScreen extends GetView<AddInventoryController> {
                                         CustomRichText(title: "Type"),
                                         SizedBox(
                                           child: DropdownWebWidget(
+                                            boxShadow: [
+                                              BoxShadow(
+                                                color: Colors.black26,
+                                                offset: const Offset(
+                                                  5.0,
+                                                  5.0,
+                                                ),
+                                                blurRadius: 5.0,
+                                                spreadRadius: 1.0,
+                                              ),
+                                              BoxShadow(
+                                                color: ColorValues.whiteColor,
+                                                offset: const Offset(0.0, 0.0),
+                                                blurRadius: 0.0,
+                                                spreadRadius: 0.0,
+                                              ),
+                                            ],
                                             margin: Dimens.edgeInsets5,
                                             width: MediaQuery.of(context)
                                                     .size
@@ -259,6 +293,23 @@ class AddInventoryScreen extends GetView<AddInventoryController> {
                                         CustomRichText(title: "Status"),
                                         SizedBox(
                                           child: DropdownWebWidget(
+                                            boxShadow: [
+                                              BoxShadow(
+                                                color: Colors.black26,
+                                                offset: const Offset(
+                                                  5.0,
+                                                  5.0,
+                                                ),
+                                                blurRadius: 5.0,
+                                                spreadRadius: 1.0,
+                                              ),
+                                              BoxShadow(
+                                                color: ColorValues.whiteColor,
+                                                offset: const Offset(0.0, 0.0),
+                                                blurRadius: 0.0,
+                                                spreadRadius: 0.0,
+                                              ),
+                                            ],
                                             margin: Dimens.edgeInsets5,
                                             width: MediaQuery.of(context)
                                                     .size
@@ -316,6 +367,23 @@ class AddInventoryScreen extends GetView<AddInventoryController> {
                                             title: 'Parent Equipment'),
                                         SizedBox(
                                           child: DropdownWebWidget(
+                                            boxShadow: [
+                                              BoxShadow(
+                                                color: Colors.black26,
+                                                offset: const Offset(
+                                                  5.0,
+                                                  5.0,
+                                                ),
+                                                blurRadius: 5.0,
+                                                spreadRadius: 1.0,
+                                              ),
+                                              BoxShadow(
+                                                color: ColorValues.whiteColor,
+                                                offset: const Offset(0.0, 0.0),
+                                                blurRadius: 0.0,
+                                                spreadRadius: 0.0,
+                                              ),
+                                            ],
                                             margin: Dimens.edgeInsets5,
                                             width: MediaQuery.of(context)
                                                     .size
@@ -338,6 +406,23 @@ class AddInventoryScreen extends GetView<AddInventoryController> {
                                         CustomRichText(title: "Category"),
                                         SizedBox(
                                           child: DropdownWebWidget(
+                                            boxShadow: [
+                                              BoxShadow(
+                                                color: Colors.black26,
+                                                offset: const Offset(
+                                                  5.0,
+                                                  5.0,
+                                                ),
+                                                blurRadius: 5.0,
+                                                spreadRadius: 1.0,
+                                              ),
+                                              BoxShadow(
+                                                color: ColorValues.whiteColor,
+                                                offset: const Offset(0.0, 0.0),
+                                                blurRadius: 0.0,
+                                                spreadRadius: 0.0,
+                                              ),
+                                            ],
                                             margin: Dimens.edgeInsets5,
                                             width: MediaQuery.of(context)
                                                     .size

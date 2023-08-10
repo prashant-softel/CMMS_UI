@@ -42,6 +42,23 @@ class ManufacturarTabWidget extends StatelessWidget {
                               CustomRichText(title: "Manufacturer Name"),
                               SizedBox(
                                 child: DropdownWebWidget(
+                                  boxShadow: [
+                                    BoxShadow(
+                                      color: Colors.black26,
+                                      offset: const Offset(
+                                        5.0,
+                                        5.0,
+                                      ),
+                                      blurRadius: 5.0,
+                                      spreadRadius: 1.0,
+                                    ),
+                                    BoxShadow(
+                                      color: ColorValues.whiteColor,
+                                      offset: const Offset(0.0, 0.0),
+                                      blurRadius: 0.0,
+                                      spreadRadius: 0.0,
+                                    ),
+                                  ],
                                   margin: Dimens.edgeInsets5,
                                   width: MediaQuery.of(context).size.width / 5,
                                   dropdownList:
@@ -131,6 +148,23 @@ class ManufacturarTabWidget extends StatelessWidget {
                               CustomRichText(title: "Supplier Name"),
                               SizedBox(
                                 child: DropdownWebWidget(
+                                  boxShadow: [
+                                    BoxShadow(
+                                      color: Colors.black26,
+                                      offset: const Offset(
+                                        5.0,
+                                        5.0,
+                                      ),
+                                      blurRadius: 5.0,
+                                      spreadRadius: 1.0,
+                                    ),
+                                    BoxShadow(
+                                      color: ColorValues.whiteColor,
+                                      offset: const Offset(0.0, 0.0),
+                                      blurRadius: 0.0,
+                                      spreadRadius: 0.0,
+                                    ),
+                                  ],
                                   margin: Dimens.edgeInsets5,
                                   width: MediaQuery.of(context).size.width / 5,
                                   dropdownList:
@@ -177,6 +211,23 @@ class ManufacturarTabWidget extends StatelessWidget {
                               CustomRichText(title: "Currency"),
                               SizedBox(
                                 child: DropdownWebWidget(
+                                  boxShadow: [
+                                    BoxShadow(
+                                      color: Colors.black26,
+                                      offset: const Offset(
+                                        5.0,
+                                        5.0,
+                                      ),
+                                      blurRadius: 5.0,
+                                      spreadRadius: 1.0,
+                                    ),
+                                    BoxShadow(
+                                      color: ColorValues.whiteColor,
+                                      offset: const Offset(0.0, 0.0),
+                                      blurRadius: 0.0,
+                                      spreadRadius: 0.0,
+                                    ),
+                                  ],
                                   margin: Dimens.edgeInsets5,
                                   width: MediaQuery.of(context).size.width / 5,
                                   dropdownList: controller.unitCurrencyList,
