@@ -1,5 +1,6 @@
 import 'package:cmms/app/pm_task_view/pm_task_view_controller.dart';
 import 'package:cmms/app/theme/dimens.dart';
+import 'package:cmms/app/widgets/table_action_button.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:scrollable_table_view/scrollable_table_view.dart';
@@ -386,8 +387,11 @@ class JobDetailsWebView extends GetView<JobDetailsController> {
                                 // ),
                                 // : Dimens.box0,
                                 Dimens.boxHeight30,
-                                (controller.jobAssociatedModelsList != [])
-                                    ? Container(
+                                Text(
+                                    "${controller.jobAssociatedModelsList?.length}"),
+                                (controller.jobAssociatedModelsList == [])
+                                    ? Dimens.box0
+                                    : Container(
                                         margin: Dimens.edgeInsets20,
                                         height: Get.height / 3.8,
                                         decoration: BoxDecoration(
@@ -424,46 +428,68 @@ class JobDetailsWebView extends GetView<JobDetailsController> {
                                               color:
                                                   ColorValues.greyLightColour,
                                             ),
-                                            Expanded(
-                                              child: ScrollableTableView(
-                                                columns: [
-                                                  "Job ID",
-                                                  "Permit ID",
-                                                  "Job Title",
-                                                  "Job Description",
-                                                  // "BreakDown Time",
-                                                  "Status",
-                                                ].map((column) {
-                                                  return TableViewColumn(
-                                                    label: column,
-                                                    minWidth: Get.width * 0.15,
-                                                  );
-                                                }).toList(),
-                                                rows: [
-                                                  [
-                                                    '${controller.jobAssociatedModel.value?.id}',
-                                                    '${controller.jobAssociatedModel.value?.permit_id != null ? controller.jobAssociatedModel.value?.permit_id.toString() ?? '' : ''}',
-                                                    '${controller.jobAssociatedModel.value?.description}',
-                                                    '${controller.jobAssociatedModel.value?.description}',
-                                                    // '${controller.jobAssociatedModel.value?.status}',
-                                                    "${JobStatusData.getStatusStringFromInt(controller.jobAssociatedModel.value?.current_status)}"
-                                                  ],
-                                                ].map((record) {
-                                                  return TableViewRow(
-                                                    height: 90,
-                                                    cells: record.map((value) {
-                                                      return TableViewCell(
-                                                        child: Text(value),
-                                                      );
-                                                    }).toList(),
-                                                  );
-                                                }).toList(),
-                                              ),
-                                            ),
+                                            controller.jobAssociatedModelsList!
+                                                        .length >
+                                                    0
+                                                ? Expanded(
+                                                    child: ScrollableTableView(
+                                                      columns: [
+                                                        "Job ID",
+                                                        "Permit ID",
+                                                        "Job Title",
+                                                        "Job Description",
+                                                        // "BreakDown Time",
+                                                        "Job Card Date",
+                                                        "Status",
+                                                        'Action',
+                                                      ].map((column) {
+                                                        return TableViewColumn(
+                                                          label: column,
+                                                          minWidth:
+                                                              Get.width * 0.11,
+                                                        );
+                                                      }).toList(),
+                                                      rows: [
+                                                        [
+                                                          '${controller.jobAssociatedModel.value?.jobid}',
+                                                          '${controller.jobAssociatedModel.value?.permit_id != null ? controller.jobAssociatedModel.value?.permit_id.toString() ?? '' : ''}',
+                                                          '${controller.jobAssociatedModel.value?.description}',
+                                                          '${controller.jobAssociatedModel.value?.description}',
+                                                          '${controller.jobAssociatedModel.value?.job_card_date}',
+                                                          // '${controller.jobAssociatedModel.value?.status}',
+                                                          "${JobStatusData.getStatusStringFromInt(controller.jobAssociatedModel.value?.current_status)}",
+                                                          'Action',
+                                                        ],
+                                                      ].map((record) {
+                                                        return TableViewRow(
+                                                          height: 90,
+                                                          cells: record
+                                                              .map((value) {
+                                                            return TableViewCell(
+                                                              child: value ==
+                                                                      "Action"
+                                                                  ? Wrap(
+                                                                      children: [
+                                                                          if (JobStatusData.getStatusStringFromInt(controller.jobDetailsModel.value?.status) ==
+                                                                              AppConstants.kJobStatusLinkedToPermit)
+                                                                            TableActionButton(
+                                                                              color: ColorValues.appPurpleColor,
+                                                                              icon: Icons.add,
+                                                                              message: "Job Card",
+                                                                              onPress: () => controller.goToJobCardScreen(),
+                                                                            ),
+                                                                        ])
+                                                                  : Text(value),
+                                                            );
+                                                          }).toList(),
+                                                        );
+                                                      }).toList(),
+                                                    ),
+                                                  )
+                                                : Container()
                                           ],
                                         ),
-                                      )
-                                    : Dimens.box0,
+                                      ),
                                 Dimens.boxHeight30,
                                 // (controller.historyLog != null &&
                                 //     controller.historyLog!.isNotEmpty)

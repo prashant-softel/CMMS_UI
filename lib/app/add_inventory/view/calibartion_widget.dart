@@ -55,6 +55,23 @@ class _CalibrationTabWidgetState extends State<CalibrationTabWidget> {
                                         Dimens.boxWidth5,
                                         SizedBox(
                                           child: DropdownWebWidget(
+                                            boxShadow: [
+                                              BoxShadow(
+                                                color: Colors.black26,
+                                                offset: const Offset(
+                                                  5.0,
+                                                  5.0,
+                                                ),
+                                                blurRadius: 5.0,
+                                                spreadRadius: 1.0,
+                                              ),
+                                              BoxShadow(
+                                                color: ColorValues.whiteColor,
+                                                offset: const Offset(0.0, 0.0),
+                                                blurRadius: 0.0,
+                                                spreadRadius: 0.0,
+                                              ),
+                                            ],
                                             margin: Dimens.edgeInsets5,
                                             width: MediaQuery.of(context)
                                                     .size

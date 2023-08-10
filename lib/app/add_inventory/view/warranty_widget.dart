@@ -51,6 +51,23 @@ class _WarrantyTabWidgetState extends State<WarrantyTabWidget> {
                               CustomRichText(title: "Warranty Type"),
                               SizedBox(
                                 child: DropdownWebWidget(
+                                  boxShadow: [
+                                    BoxShadow(
+                                      color: Colors.black26,
+                                      offset: const Offset(
+                                        5.0,
+                                        5.0,
+                                      ),
+                                      blurRadius: 5.0,
+                                      spreadRadius: 1.0,
+                                    ),
+                                    BoxShadow(
+                                      color: ColorValues.whiteColor,
+                                      offset: const Offset(0.0, 0.0),
+                                      blurRadius: 0.0,
+                                      spreadRadius: 0.0,
+                                    ),
+                                  ],
                                   margin: Dimens.edgeInsets5,
                                   width: MediaQuery.of(context).size.width / 5,
                                   dropdownList: controller.warrantyNameList,
@@ -69,6 +86,23 @@ class _WarrantyTabWidgetState extends State<WarrantyTabWidget> {
                                   title: "Warranty Usages Term Type"),
                               SizedBox(
                                 child: DropdownWebWidget(
+                                  boxShadow: [
+                                    BoxShadow(
+                                      color: Colors.black26,
+                                      offset: const Offset(
+                                        5.0,
+                                        5.0,
+                                      ),
+                                      blurRadius: 5.0,
+                                      spreadRadius: 1.0,
+                                    ),
+                                    BoxShadow(
+                                      color: ColorValues.whiteColor,
+                                      offset: const Offset(0.0, 0.0),
+                                      blurRadius: 0.0,
+                                      spreadRadius: 0.0,
+                                    ),
+                                  ],
                                   margin: Dimens.edgeInsets5,
                                   width: MediaQuery.of(context).size.width / 5,
                                   dropdownList:
@@ -115,6 +149,23 @@ class _WarrantyTabWidgetState extends State<WarrantyTabWidget> {
                               CustomRichText(title: "Warranty Provider"),
                               SizedBox(
                                 child: DropdownWebWidget(
+                                  boxShadow: [
+                                    BoxShadow(
+                                      color: Colors.black26,
+                                      offset: const Offset(
+                                        5.0,
+                                        5.0,
+                                      ),
+                                      blurRadius: 5.0,
+                                      spreadRadius: 1.0,
+                                    ),
+                                    BoxShadow(
+                                      color: ColorValues.whiteColor,
+                                      offset: const Offset(0.0, 0.0),
+                                      blurRadius: 0.0,
+                                      spreadRadius: 0.0,
+                                    ),
+                                  ],
                                   margin: Dimens.edgeInsets5,
                                   width: MediaQuery.of(context).size.width / 5,
                                   dropdownList:
