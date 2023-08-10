@@ -7,6 +7,7 @@ import 'package:cmms/domain/models/create_escalation_matrix_model.dart';
 import 'package:cmms/domain/models/modulelist_model.dart';
 import 'package:cmms/domain/models/paiyed_model.dart';
 import 'package:cmms/domain/models/role_model.dart';
+import 'package:cmms/domain/models/type_permit_model.dart';
 import 'package:get/get.dart';
 import 'package:rxdart/subjects.dart';
 import 'package:scrollable_table_view/scrollable_table_view.dart';
@@ -49,6 +50,13 @@ class AddModuleCleaningExecutionController extends GetxController {
   int? selectedModuleListId = 0;
   int type = 1;
 
+  ///Permit Type
+  RxList<TypePermitModel?> typePermitList = <TypePermitModel>[].obs;
+  Rx<bool> isTypePermitSelected = true.obs;
+  Rx<String> selectedTypePermit = ''.obs;
+  Rx<String> selectedTypeOfPermit = ''.obs;
+  Rx<bool> isTypePermit = true.obs;
+
  
 
   RxList<FacilityModel?> facilityList = <FacilityModel>[].obs;
@@ -82,6 +90,10 @@ class AddModuleCleaningExecutionController extends GetxController {
       });
     });
 
+     Future.delayed(Duration(seconds: 1), () {
+        getTypePermitList();
+      });
+
   
    
 
@@ -98,6 +110,18 @@ class AddModuleCleaningExecutionController extends GetxController {
 
       selectedFacility.value = facilityList[0]?.name ?? '';
       _facilityId.sink.add(facilityList[0]?.id ?? 0);
+    }
+  }
+
+   Future<void> getTypePermitList() async {
+    final _permitTypeList =
+        await addModuleCleaningExecutionPresenter.getTypePermitList(facility_id: facilityId);
+
+    if (_permitTypeList != null) {
+      for (var permitType in _permitTypeList) {
+        typePermitList.add(permitType);
+      }
+      // selectedTypePermit.value = typePermitList[0]?.name ?? '';
     }
   }
 

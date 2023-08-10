@@ -3282,20 +3282,15 @@ class ViewPermitWebScreen extends GetView<ViewPermitController> {
               ),
 
               ///Reject Button
-              // varUserAccessModel.value.access_list!
-              //                     .where(
-              //                         (e) => e.feature_id == 3 && e.issue == 1)
-              //                     .length >
-              //                 0 &&
-                          controller.viewPermitDetailsModel.value?.ptwStatus ==
+             varUserAccessModel.value.access_list!.where((e) => e.feature_id == UserAccessConstants.kPermitFeatureId && e.approve == UserAccessConstants.kHaveApproveAccess).length > 0
+                         && controller.viewPermitDetailsModel.value?.ptwStatus ==
                               121 ||
                       varUserAccessModel.value.access_list!
                                   .where((e) =>
                                       e.feature_id == UserAccessConstants.kPermitFeatureId && e.delete == UserAccessConstants.kHaveDeleteAccess)
                                   .length >
-                              0 &&
-                          controller.viewPermitDetailsModel.value?.ptwStatus ==
-                              123
+                              0
+                         
                   ? Container(
                       height: 45,
                       child: CustomElevatedButton(

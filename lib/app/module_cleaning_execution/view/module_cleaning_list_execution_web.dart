@@ -4,6 +4,7 @@ import 'package:cmms/app/module_cleaning_execution/module_cleaning_list_executio
 import 'package:cmms/app/navigators/app_pages.dart';
 
 import 'package:cmms/app/theme/dimens.dart';
+import 'package:cmms/app/utils/user_access_constants.dart';
 import 'package:cmms/app/widgets/action_button.dart';
 import 'package:cmms/app/widgets/custom_richtext.dart';
 import 'package:cmms/app/widgets/date_picker.dart';
@@ -211,8 +212,8 @@ class ModuleCleaningListExecution
                                     Dimens.boxWidth10,
                                      varUserAccessModel.value.access_list!
                                                       .where((e) =>
-                                                          e.feature_id == 34 &&
-                                                          e.add == 1)
+                                                          e.feature_id == UserAccessConstants.kModuleCleaningExecutionFeatureId &&
+                                                          e.add == UserAccessConstants.kNotHaveAddAccess)
                                                       .length >
                                                   0
                                    ? ActionButton(

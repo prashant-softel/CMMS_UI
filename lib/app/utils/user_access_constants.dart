@@ -28,6 +28,10 @@ abstract class UserAccessConstants {
   static int kIncidentReportFeatureId = 34;
   static String kFeatureIncidentReportName = "Incident Report";
 
+  ///MODULE CLEANING ACCESS
+  static int kModuleCleaningExecutionFeatureId = 32;
+  static String kFeatureModuleCleaningExecutionName = "Module Cleaning";
+
 
   ///USER ACCESS
   static int kHaveAddAccess = 1;
