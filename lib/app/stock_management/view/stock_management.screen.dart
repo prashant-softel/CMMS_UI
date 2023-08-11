@@ -141,6 +141,13 @@ class StockManagementDashboardScreen
                               );
                               controller.checkPoint();
                             }),
+                        _stockManagementList(
+                            tittle: "Receive Goods Order ",
+                            ontap: () {
+                              Get.offNamed(Routes.receiveGoodsOrders);
+
+                              // controller.checkPoint();
+                            }),
 
                         // _stockManagementList(
                         //     tittle: "MRS List",
