@@ -1,5 +1,6 @@
 import 'dart:async';
 
+import 'package:cmms/app/receive_goods_order/receive_goods_order_presenter.dart';
 import 'package:cmms/domain/models/business_type_model.dart';
 import 'package:cmms/domain/models/create_go_model.dart';
 import 'package:cmms/domain/models/currency_list_model.dart';
@@ -14,7 +15,6 @@ import 'package:rxdart/subjects.dart';
 
 import '../../domain/models/business_list_model.dart';
 import '../home/home_controller.dart';
-import 'receive_goods_orders_presenter.dart';
 
 class ReceiveGoodsOrdersController extends GetxController {
   ///

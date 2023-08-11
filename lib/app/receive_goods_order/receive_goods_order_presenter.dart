@@ -5,12 +5,14 @@ import 'package:cmms/domain/models/facility_model.dart';
 import 'package:cmms/domain/models/get_asset_data_list_model.dart';
 import 'package:cmms/domain/models/get_purchase_details_model.dart';
 
+import 'package:cmms/domain/usecases/stock_management_add_goods_orders_usecase.dart';
 import 'package:cmms/domain/usecases/stock_management_receive_goods_orders_usecase.dart';
 
 import '../../domain/models/paiyed_model.dart';
 
 class ReceiveGoodsOrdersPresenter {
   ReceiveGoodsOrdersPresenter(this.receiveGoodsOrdersUsecase);
+
   ReceiveGoodsOrdersUsecase receiveGoodsOrdersUsecase;
   Future<List<CurrencyListModel>> getUnitCurrencyList({
     required bool isLoading,

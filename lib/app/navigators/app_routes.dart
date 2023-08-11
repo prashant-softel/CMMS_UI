@@ -250,7 +250,7 @@ abstract class _Paths {
   static const changePassword = '/changePassword';
   static const returnMrsView = '/returnMrsView';
   static const approverReturnMrs = '/approverReturnMrs';
-  static const receiveGoodsOrders = '/ receiveGoodsOrders';
+  static const receiveGoodsOrders = '/receiveGoodsOrders';
 
   static const addModuleCleaningExecutionContentWeb =
       '/add-module-cleaning-execution';

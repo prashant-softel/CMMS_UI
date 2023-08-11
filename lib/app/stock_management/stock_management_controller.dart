@@ -22,6 +22,12 @@ class StockManagementDashboardController extends GetxController {
     );
   }
 
+  Future<void> receiveGoodsOrders() async {
+    Get.toNamed(
+      Routes.receiveGoodsOrders,
+    );
+  }
+
   Future<void> pmMapping() async {
     // Get.toNamed(
     //   Routes.preventiveMaintenanceMapping,

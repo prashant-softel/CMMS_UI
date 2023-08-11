@@ -1,12 +1,13 @@
-import 'package:cmms/app/receive_goods_orders.dart/receive_goods_orders_controller.dart';
-
+import 'package:cmms/app/home/widgets/header_widget.dart';
+import 'package:cmms/app/home/widgets/home_drawer.dart';
+import 'package:cmms/app/receive_goods_order/receive_goods_order_controller.dart';
+import 'package:cmms/app/stock_managment_add_goods_orders.dart/stock_management_add_goods_orders_controller.dart';
+import 'package:cmms/app/theme/dimens.dart';
+import 'package:cmms/app/utils/responsive.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import '../../home/widgets/header_widget.dart';
-import '../../home/widgets/home_drawer.dart';
-import '../../theme/dimens.dart';
-import '../../utils/responsive.dart';
-import 'receive_goods_orders_web.dart';
+
+import 'view/web/receive_goods_order_web.dart';
 
 class ReceiveGoodsOrdersScreen extends GetView<ReceiveGoodsOrdersController> {
   ReceiveGoodsOrdersScreen({super.key});
@@ -49,7 +50,7 @@ class ReceiveGoodsOrdersScreen extends GetView<ReceiveGoodsOrdersController> {
                     //   ),
                     if (Responsive.isDesktop(context))
                       Expanded(
-                        child: ReceiveGoodsOrdersWeb(),
+                        child: ReceiveGoodsOrderWeb(),
                       )
                   ],
                 ),
