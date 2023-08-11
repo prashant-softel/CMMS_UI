@@ -49,6 +49,8 @@ import 'package:cmms/app/mrs_return/mrs_return_binding.dart';
 import 'package:cmms/app/mrs_return/view/mrs_return_screen.dart';
 import 'package:cmms/app/mrs_view/mrs_view_binding.dart';
 import 'package:cmms/app/mrs_view/view/mrs_view_screen.dart';
+import 'package:cmms/app/receive_goods_orders.dart/receive_goods_orders_binding.dart';
+import 'package:cmms/app/receive_goods_orders.dart/view/receive_goods_orders_screen.dart';
 import 'package:cmms/app/role_access/role_access_binding.dart';
 import 'package:cmms/app/role_access/view/role_access_screen.dart';
 import 'package:cmms/app/role_notification/view/role_notification_screen.dart';
@@ -785,6 +787,11 @@ class AppPages {
       name: _Paths.approverReturnMrs,
       page: ApproveReturnMrsScreen.new,
       binding: ApproveReturnMrsBinding(),
+    ),
+    GetPage<dynamic>(
+      name: _Paths.receiveGoodsOrders,
+      page: ReceiveGoodsOrdersScreen.new,
+      binding: ReceiveGoodsOrdersBinding(),
     ),
   ];
 }
