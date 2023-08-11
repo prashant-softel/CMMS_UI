@@ -58,7 +58,7 @@ class TBTSOPListContentWeb extends GetView<TBTSOPListController> {
                     onTap: () {
                       Get.back();
                     },
-                    child: Text(" / Masters", style: Styles.greyMediumLight12),
+                    child: Text(" / MASTERS", style: Styles.greyMediumLight12),
                   ),
                   Text(" / TBT SOP List", style: Styles.greyMediumLight12)
                 ],

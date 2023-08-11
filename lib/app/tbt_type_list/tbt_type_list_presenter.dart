@@ -47,6 +47,14 @@ class TBTTypeListPresenter {
         checklist_id: business_id ?? 0,
         isLoading: isLoading,
       );
- 
- 
+
+  Future<bool> updateTbt(
+      {tbtJsonString, required bool isLoading}) async {
+    print("presenter");
+    tbtTypeListUsecase.updateTbt(
+      tbtJsonString: tbtJsonString,
+      isLoading: isLoading,
+    );
+    return true;
+  }
 }

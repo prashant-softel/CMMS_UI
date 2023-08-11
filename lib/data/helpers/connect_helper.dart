@@ -4367,4 +4367,24 @@ class ConnectHelper {
 
     return responseModel;
   }
+
+  Future<ResponseModel> updateTbt({
+    required String auth,
+    bool? isLoading,
+    required tbtJsonString,
+  }) async {
+    var responseModel = await apiWrapper.makeRequest(
+      'Permit/UpdateJobType',
+      Request.patch,
+      tbtJsonString,
+      isLoading ?? false,
+      {
+        'Content-Type': 'application/json',
+        'Authorization': 'Bearer $auth',
+      },
+    );
+
+    return responseModel;
+  }
+
 }
