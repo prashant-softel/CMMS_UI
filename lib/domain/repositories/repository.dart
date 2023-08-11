@@ -6506,6 +6506,32 @@ class Repository {
       print(error.toString());
     }
   }
+
+
+  Future<bool> updateTbt({
+    bool? isLoading,
+    tbtJsonString,
+  }) async {
+    try {
+      final auth = await getSecuredValue(LocalKeys.authToken);
+      final res = await _dataRepository.updateTbt(
+        auth: auth,
+        isLoading: isLoading,
+        tbtJsonString: tbtJsonString,
+      );
+      print(res.data);
+      if (!res.hasError) {
+        return true;
+      } //
+      else {
+        Utility.showDialog(res.errorCode.toString() + 'tbtJsonString');
+        return false;
+      }
+    } catch (error) {
+      print(error.toString());
+      return false;
+    }
+  }
   //end
   //end
 }

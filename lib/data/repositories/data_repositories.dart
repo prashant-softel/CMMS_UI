@@ -2733,5 +2733,18 @@ class DataRepository extends DomainRepository {
         auth: auth, isLoading: isLoading, check_point_id: check_point_id);
     return response;
   }
+
+  Future<ResponseModel> updateTbt({
+    auth,
+    bool? isLoading,
+    tbtJsonString,
+  }) async {
+    var response = await connectHelper.updateTbt(
+      auth: auth,
+      isLoading: isLoading,
+      tbtJsonString: tbtJsonString,
+    );
+    return response;
+  }
 //end
 }

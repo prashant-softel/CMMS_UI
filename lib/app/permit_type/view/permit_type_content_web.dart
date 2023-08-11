@@ -71,7 +71,7 @@ class PermitTypeContentWeb extends GetView<PermitTypeController> {
                               .length >
                           0
                       ? Container(
-                          width: (Get.width * .25),
+                          width: (Get.width * .3),
                           margin: EdgeInsets.only(left: 10, top: 30),
                           height: Get.height / 2.4,
                           child: Card(

@@ -39,14 +39,14 @@ class TBTTypeListUsecase {
         checklist_id,
         isLoading,
       );
-  // Future<bool> updateChecklistNumber({
-  //   checklistJsonString,
-  //   bool? isLoading,
-  // }) async =>
-  //     await repository.updateChecklistNumber(
-  //       isLoading: isLoading,
-  //       checklistJsonString: checklistJsonString,
-  //     );
+  Future<bool> updateTbt({
+    tbtJsonString,
+    bool? isLoading,
+  }) async =>
+      await repository.updateTbt(
+        isLoading: isLoading,
+        tbtJsonString: tbtJsonString,
+      );
 
   
        

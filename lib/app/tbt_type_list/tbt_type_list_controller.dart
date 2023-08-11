@@ -186,33 +186,32 @@ class TBTTypeListController extends GetxController {
         break;
     }
   }
-  // Future<bool> updateSPV(checklistId) async {
-  //   String _name = titleCtrlr.text.trim();
-  //   String _description = descriptionCtrlr.text.trim();
-  //
-  //   JobTypeListModel createChecklist = JobTypeListModel(
-  //     id: checklistId,
-  //     name : _name,
-  //     description: _description,
-  //   );
-  //   var businessTypeJsonString =
-  //   createChecklist.toJson();
-  //
-  //   print({"businessTypeJsonString", businessTypeJsonString});
-  //   await sPVListPresenter.updateSPV(
-  //     modulelistJsonString: businessTypeJsonString,
-  //     isLoading: true,
-  //   );
-  //   return true;
-  // }
+  Future<bool> updateTbt(checklistId) async {
+    String _name = titleCtrlr.text.trim();
+
+    JobTypeListModel createTbt = JobTypeListModel(
+      id: checklistId,
+      name : _name,
+      facilityId: selectedFacilityId,
+    );
+    var updateTbt =
+    createTbt.toJson();
+
+    print({"updateTbt", updateTbt});
+    await tbtTypeListPresenter.updateTbt(
+      tbtJsonString: updateTbt,
+      isLoading: true,
+    );
+    return true;
+  }
  
 
   Future<void> issuccessCreatechecklist() async {
     isSuccess.toggle();
-    await {_cleardata()};
+    await {cleardata()};
   }
 
-  _cleardata() {
+  cleardata() {
 
     titleCtrlr.text = '';
     descriptionCtrlr.text = '';

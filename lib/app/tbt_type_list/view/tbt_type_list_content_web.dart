@@ -55,9 +55,9 @@ class TBTTypeListContentWeb extends GetView<TBTTypeListController> {
                     onTap: () {
                       Get.back();
                     },
-                    child: Text(" / Masters", style: Styles.greyMediumLight12),
+                    child: Text(" / MASTERS", style: Styles.greyMediumLight12),
                   ),
-                  Text(" / TBT Type", style: Styles.greyMediumLight12)
+                  Text(" / TBT TYPE", style: Styles.greyMediumLight12)
                 ],
               ),
             ),
@@ -96,6 +96,28 @@ class TBTTypeListContentWeb extends GetView<TBTTypeListController> {
                                         ),
                                         SizedBox(
                                           height: 20,
+                                        ),
+                                        Visibility(
+                                          visible: controller.isSuccess.value,
+                                          child: Center(
+                                            child: Wrap(
+                                              children: [
+                                                Text(
+                                                  controller.selectedItem ==
+                                                      null
+                                                      ? "TBT added Successfully in the List."
+                                                      : "TBT updated Successfully in the List.",
+                                                  style: TextStyle(
+                                                      fontSize: 16,
+                                                      color: Color.fromARGB(
+                                                          255, 24, 243, 123)),
+                                                ),
+                                                SizedBox(
+                                                  height: 5,
+                                                ),
+                                              ],
+                                            ),
+                                          ),
                                         ),
                                         Row(
                                           mainAxisAlignment:
@@ -291,7 +313,7 @@ class TBTTypeListContentWeb extends GetView<TBTTypeListController> {
                                       ]),
                                 ),
                                 Row(
-                                  mainAxisAlignment: MainAxisAlignment.start,
+                                  mainAxisAlignment: MainAxisAlignment.center,
                                   children: [
                                     Container(
                                         height: 40,
@@ -299,7 +321,9 @@ class TBTTypeListContentWeb extends GetView<TBTTypeListController> {
                                         child: CustomElevatedButton(
                                             backgroundColor:
                                                 ColorValues.appRedColor,
-                                            onPressed: () {},
+                                            onPressed: () {
+                                              controller.cleardata;
+                                            },
                                             text: 'Cancel')),
                                     SizedBox(
                                       width: 10,
@@ -327,15 +351,15 @@ class TBTTypeListContentWeb extends GetView<TBTTypeListController> {
                                             backgroundColor: ColorValues
                                                 .appDarkBlueColor,
                                             onPressed: () {
-                                              // controller
-                                              //     .updateSPV(controller
-                                              //     .selectedItem?.id)
-                                              //     .then((value) {
-                                              //   print("value,$value");
-                                              //   if (value == true)
-                                              //     controller
-                                              //         .issuccessCreatechecklist();
-                                              // });
+                                              controller
+                                                  .updateTbt(controller
+                                                  .selectedItem?.id)
+                                                  .then((value) {
+                                                print("value,$value");
+                                                if (value == true)
+                                                  controller
+                                                      .issuccessCreatechecklist();
+                                              });
                                             },
                                             text: 'Update')),
                                   ],
@@ -527,7 +551,11 @@ class TBTTypeListContentWeb extends GetView<TBTTypeListController> {
                                                                           message:
                                                                               'Edit',
                                                                           onPress:
-                                                                              () {},
+                                                                              () {
+                                                                                controller.selectedItem = controller.jobTypeList.firstWhere((element) => "${element.id}" == _permitTypeList[0]);
+
+                                                                                controller.titleCtrlr.text = controller.selectedItem?.name ?? '';
+                                                                              },
                                                                         ),
                                                                         // : Container(),
                                                                         // :Container(),
