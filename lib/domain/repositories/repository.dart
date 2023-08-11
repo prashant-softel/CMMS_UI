@@ -2132,6 +2132,31 @@ class Repository {
     }
   }
 
+
+  Future<void> startMCExecutionButton(
+    int? planId,
+    bool? isLoading,
+  ) async {
+    try {
+      final auth = await getSecuredValue(LocalKeys.authToken);
+
+      final res = await _dataRepository.startMCExecutionButton(
+        auth: auth,
+        planId: planId,
+        isLoading: isLoading ?? false,
+      );
+      print('StartExecutionResponse55: ${res.data}');
+
+      if (!res.hasError) {
+        //  return _permitIssueModel;
+      } else {
+        Utility.showDialog(res.errorCode.toString() + 'startMCExecutionButton');
+      }
+    } catch (error) {
+      log(error.toString());
+    }
+  }
+
   Future<void> permitRejectButton(
     String? comment,
     String? id,

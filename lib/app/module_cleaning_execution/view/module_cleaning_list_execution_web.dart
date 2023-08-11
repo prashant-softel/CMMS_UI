@@ -287,7 +287,7 @@ class ModuleCleaningListExecution
                                               ),
                                             ].map((record) {
                                               return TableViewRow(
-                                                height: 40,
+                                                height: 55,
                                                 cells: record.map((value) {
                                                   return TableViewCell(
                                                     child: Text(value),
@@ -333,7 +333,8 @@ class ModuleCleaningListExecution
                                               ),
                                             ].map((record) {
                                               return TableViewRow(
-                                                height: 40,
+                                                onTap: (){},
+                                                height: 55,
                                                 cells: record.map((value) {
                                                   return TableViewCell(
                                                     child: value == "Actions"
@@ -358,6 +359,37 @@ class ModuleCleaningListExecution
                                                                 icon:
                                                                     Icons.edit,
                                                                 message: 'Edit',
+                                                                onPress: () {
+                                                                  // controller
+                                                                  //     .editIncidentReport(
+                                                                  //         id: int.tryParse(
+                                                                  //             '${record[0]}'));
+                                                                  // print(
+                                                                  //     'edit record:${int.tryParse('${record[0]}')}');
+                                                                },
+                                                              ),
+                                                              TableActionButton(
+                                                                color: ColorValues
+                                                                    .appGreenColor,
+                                                                icon:
+                                                                    Icons.add,
+                                                                message: 'Start',
+                                                                onPress: () {
+                                                                  controller.startMCExecutionButton(planId: int.tryParse('${record[1]}'));
+                                                                  // controller
+                                                                  //     .editIncidentReport(
+                                                                  //         id: int.tryParse(
+                                                                  //             '${record[0]}'));
+                                                                  // print(
+                                                                  //     'edit record:${int.tryParse('${record[0]}')}');
+                                                                },
+                                                              ),
+                                                              TableActionButton(
+                                                                color: ColorValues
+                                                                    .appGreenColor,
+                                                                icon:
+                                                                    Icons.add,
+                                                                message: 'End',
                                                                 onPress: () {
                                                                   // controller
                                                                   //     .editIncidentReport(

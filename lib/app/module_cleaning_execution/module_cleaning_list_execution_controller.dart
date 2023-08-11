@@ -66,6 +66,22 @@ class ModuleCleaningListExecutionController extends GetxController {
     }
   }
 
+  Future<void> startMCExecutionButton({int? planId}) async {
+    // String _reasonForExtensionComment =
+    //     extendReasonCommentTextFieldCtrlr.text.trim();
+    // String _timeForExtensionComment = timeTextFieldCtrlr.text.trim();
+
+    final _startMCExecutionBtn = await moduleCleaningListExecutionPresenter.startMCExecutionButton(
+     
+      planId: planId,
+    );
+    // showAlertPermitApproveDialog();
+
+    // print('Start MC Execution Button Data:${_startMCExecutionBtn}');
+    // print('Extend Button Data:${_timeForExtensionComment}');
+    // print('Extend Button Data:${permitId}');
+  }
+
   void search(String keyword) {
     if (keyword.isEmpty) {
       mcTaskList.value = filteredData;

@@ -284,7 +284,7 @@ class AddModuleCleaningExecutionContentWeb
                                                         return TableViewColumn(
                                                           label: column,
                                                           minWidth:
-                                                              Get.width * 0.12,
+                                                              Get.width * 0.17,
                                                           height:
                                                               Get.height / 2,
                                                         );
@@ -392,7 +392,9 @@ class AddModuleCleaningExecutionContentWeb
                                                                                                         children: [
                                                                                                           TableActionButton(
                                                                                                             label: 'Start',
-                                                                                                            onPress: () {},
+                                                                                                            onPress: () {
+                                                                                                              
+                                                                                                            },
                                                                                                             color: Colors.green,
                                                                                                           ),
                                                                                                           TableActionButton(

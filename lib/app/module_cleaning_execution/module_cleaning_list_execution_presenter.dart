@@ -21,6 +21,15 @@ class ModuleCleaningListExecutionPresenter {
     );
   }
 
+  Future<void> startMCExecutionButton({
+    int? planId,
+    bool? isLoading,
+  }) async =>
+      await moduleCleaningExecutionPlanUsecase.startMCExecutionButton(
+        planId: planId,
+        isLoading: isLoading ?? false,
+      );
+
   Future<List<FacilityModel?>?> getFacilityList({bool? isLoading}) async =>
       await moduleCleaningExecutionPlanUsecase.getFacilityList(
           isLoading: isLoading);
