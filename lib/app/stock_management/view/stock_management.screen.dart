@@ -144,9 +144,11 @@ class StockManagementDashboardScreen
                         _stockManagementList(
                             tittle: "Receive Goods Order ",
                             ontap: () {
-                              Get.offNamed(Routes.receiveGoodsOrders);
+                              Get.toNamed(
+                                Routes.receiveGoodsOrders,
+                              );
 
-                              // controller.checkPoint();
+                              // controller.receiveGoodsOrders();
                             }),
 
                         // _stockManagementList(

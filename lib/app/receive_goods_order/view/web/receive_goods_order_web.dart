@@ -1,7 +1,8 @@
 import 'package:cmms/app/app.dart';
-import 'package:cmms/app/receive_goods_orders.dart/receive_goods_orders_controller.dart';
-
+import 'package:cmms/app/receive_goods_order/receive_goods_order_controller.dart';
 import 'package:cmms/app/widgets/custom_elevated_button.dart';
+import 'package:cmms/app/widgets/custom_richtext.dart';
+import 'package:cmms/app/widgets/custom_textField.dart';
 import 'package:cmms/app/widgets/date_picker.dart';
 import 'package:cmms/app/widgets/stock_dropdown.dart';
 import 'package:flutter/material.dart';
@@ -10,19 +11,17 @@ import 'package:get/get.dart';
 import 'package:intl/intl.dart';
 import 'package:scrollable_table_view/scrollable_table_view.dart';
 import 'package:syncfusion_flutter_datepicker/datepicker.dart';
-import '../../widgets/custom_richtext.dart';
-import '../../widgets/custom_textField.dart';
 
-class ReceiveGoodsOrdersWeb extends StatefulWidget {
-  ReceiveGoodsOrdersWeb({
+class ReceiveGoodsOrderWeb extends StatefulWidget {
+  ReceiveGoodsOrderWeb({
     Key? key,
   }) : super(key: key);
 
   @override
-  State<ReceiveGoodsOrdersWeb> createState() => _ReceiveGoodsOrdersWebState();
+  State<ReceiveGoodsOrderWeb> createState() => _ReceiveGoodsOrderWebState();
 }
 
-class _ReceiveGoodsOrdersWebState extends State<ReceiveGoodsOrdersWeb> {
+class _ReceiveGoodsOrderWebState extends State<ReceiveGoodsOrderWeb> {
   @override
   Widget build(BuildContext context) {
     return GetBuilder<ReceiveGoodsOrdersController>(

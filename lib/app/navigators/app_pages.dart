@@ -49,8 +49,6 @@ import 'package:cmms/app/mrs_return/mrs_return_binding.dart';
 import 'package:cmms/app/mrs_return/view/mrs_return_screen.dart';
 import 'package:cmms/app/mrs_view/mrs_view_binding.dart';
 import 'package:cmms/app/mrs_view/view/mrs_view_screen.dart';
-import 'package:cmms/app/receive_goods_orders.dart/receive_goods_orders_binding.dart';
-import 'package:cmms/app/receive_goods_orders.dart/view/receive_goods_orders_screen.dart';
 import 'package:cmms/app/role_access/role_access_binding.dart';
 import 'package:cmms/app/role_access/view/role_access_screen.dart';
 import 'package:cmms/app/role_notification/view/role_notification_screen.dart';
@@ -185,6 +183,8 @@ import '../preventive_maintenance_execution_view/preventive_maintenance_executio
 import '../preventive_maintenance_execution_view/view/preventive_maintenance_execution_view_screen.dart';
 import '../preventive_maintenance_task/preventive_maintenance_task_binding.dart';
 import '../preventive_maintenance_task/view/preventive_maintenance_task_screen.dart';
+import '../receive_goods_order/receive_goods_order_binding.dart';
+import '../receive_goods_order/receive_goods_order_screen.dart';
 import '../return_mrs/return_mrs_binding.dart';
 import '../return_mrs/view/return_mrs_screen.dart';
 import '../role_List/role_list_binding.dart';
