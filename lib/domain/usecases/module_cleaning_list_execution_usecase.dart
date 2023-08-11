@@ -20,8 +20,17 @@ class ModuleCleaningListExecutionUsecase {
       facility_id: facility_id,
       start_date: start_date,
       end_date: end_date,
-      
-     
+    );
+  }
+
+    Future<void> startMCExecutionButton({
+   
+    int? planId,
+    bool? isLoading,
+  }) async {
+    await repository.startMCExecutionButton(
+      planId,
+      isLoading,
     );
   }
 

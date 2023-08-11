@@ -245,9 +245,9 @@ class NewPermitListController extends GetxController {
     );
     // showAlertPermitApproveDialog();
 
-    print('Extend Button Data:${_reasonForExtensionComment}');
-    print('Extend Button Data:${_timeForExtensionComment}');
-    print('Extend Button Data:${permitId}');
+    // print('Extend Button Data:${_reasonForExtensionComment}');
+    // print('Extend Button Data:${_timeForExtensionComment}');
+    // print('Extend Button Data:${permitId}');
   }
 
   Future<void> permitCloseButton({String? permitId}) async {
