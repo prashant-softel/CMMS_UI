@@ -632,6 +632,15 @@ class DataRepository extends DomainRepository {
         isLoading: isLoading ?? false,
       );
 
+  Future<ResponseModel> rejectJobCard({
+    auth,
+    bool? isLoading,
+    rejectJsonString,
+  }) async {
+    var response = await connectHelper.rejectJobCard(
+        auth: auth, isLoading: isLoading, rejectJsonString: rejectJsonString);
+    return response;
+  }
   Future<ResponseModel> startMCExecutionButton({
     required String auth,
     int? planId,
@@ -1345,15 +1354,16 @@ class DataRepository extends DomainRepository {
   }
 
 //
-  Future<ResponseModel> rejectJobCard({
-    auth,
+  Future<ResponseModel> abandonExecutionButton({
+    required String auth,
+    abandoneJsonString,
     bool? isLoading,
-    rejectJsonString,
-  }) async {
-    var response = await connectHelper.rejectJobCard(
-        auth: auth, isLoading: isLoading, rejectJsonString: rejectJsonString);
-    return response;
-  }
+  }) async =>
+      await connectHelper.abandonExecutionButton(
+        auth: auth,
+        abandoneJsonString: abandoneJsonString,
+        isLoading: isLoading ?? false,
+      );
 
   // Future<ResponseModel> getPreventiveCheckList({
   //   required String auth,

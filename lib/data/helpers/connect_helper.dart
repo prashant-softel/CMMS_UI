@@ -6,6 +6,7 @@ import 'dart:typed_data';
 import 'package:cmms/app/job_card_details/views/widgets/carry_forward_Job_dialog.dart';
 import 'package:cmms/app/job_card_details/views/widgets/close_job_dialog.dart';
 import 'package:cmms/app/job_card_details/views/widgets/job_card_updated_dialog.dart';
+import 'package:cmms/app/widgets/abandon_execution_message_dialog.dart';
 import 'package:cmms/app/widgets/create_escalation_matrix_dialog.dart';
 import 'package:cmms/app/widgets/create_incident_report_dialog.dart';
 import 'package:cmms/app/widgets/create_permit_dialog.dart';
@@ -856,6 +857,31 @@ class ConnectHelper {
   }
 
 
+   Future<ResponseModel> abandonExecutionButton({
+    required String auth,
+    abandoneJsonString,
+    bool? isLoading,
+  }) async {
+    var responseModel = await apiWrapper.makeRequest(
+      'MC/AbandonMCExecution',
+      Request.put,
+      abandoneJsonString,
+      isLoading ?? false,
+      {
+        'Content-Type': 'application/json',
+        'Authorization': 'Bearer $auth',
+      },
+    );
+    print('AbandonExecutionResponse: ${responseModel.data}');
+    var res = responseModel.data;
+    var parsedJson = json.decode(res);
+    Get.dialog<void>(AbandonMCExecutionMessageDialog(data: parsedJson['message']));
+
+    return responseModel;
+  }
+
+
+
   Future<ResponseModel> startMCExecutionButton({
     required String auth,
     bool? isLoading,
@@ -873,7 +899,7 @@ class ConnectHelper {
         'Authorization': 'Bearer $auth',
       },
     );
-    print('StartExecutionResponse: ${responseModel.data}');
+    // print('StartExecutionResponse: ${responseModel.data}');
     var res = responseModel.data;
     var parsedJson = json.decode(res);
     Get.dialog<void>(StartMcExecutionMessageDialog(
@@ -899,7 +925,7 @@ class ConnectHelper {
         'Authorization': 'Bearer $auth',
       },
     );
-    print('PermitRejectResponse: ${responseModel.data}');
+    // print('PermitRejectResponse: ${responseModel.data}');
     var res = responseModel.data;
     var parsedJson = json.decode(res);
     Get.dialog<void>(PermitMessageRejectDialog(data: parsedJson['message']));
@@ -924,7 +950,7 @@ class ConnectHelper {
         'Authorization': 'Bearer $auth',
       },
     );
-    print('IncidentReportRejectResponse: ${responseModel.data}');
+    // print('IncidentReportRejectResponse: ${responseModel.data}');
     var res = responseModel.data;
     var parsedJson = json.decode(res);
     Get.dialog<void>(
@@ -949,7 +975,7 @@ class ConnectHelper {
         'Authorization': 'Bearer $auth',
       },
     );
-    print('IncidentReportApproveResponse: ${responseModel.data}');
+    // print('IncidentReportApproveResponse: ${responseModel.data}');
     var res = responseModel.data;
     var parsedJson = json.decode(res);
     Get.dialog<void>(
@@ -1002,7 +1028,7 @@ class ConnectHelper {
         'Authorization': 'Bearer $auth',
       },
     );
-    print('InventoryDetailResponse: ${responseModel.data}');
+    // print('InventoryDetailResponse: ${responseModel.data}');
 
     return responseModel;
   }
@@ -1184,7 +1210,7 @@ class ConnectHelper {
   Future<ResponseModel> getTypePermitList(
       {String? auth, bool? isLoading, int? facility_id}) async {
     ResponseModel response = ResponseModel(data: '', hasError: true);
-    print('PermitTypeResponse: $response');
+    // print('PermitTypeResponse: $response');
     try {
       response = await apiWrapper.makeRequest(
         'Permit/GetPermitTypeList?facility_id=$facility_id',
