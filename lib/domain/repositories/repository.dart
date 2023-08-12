@@ -2133,6 +2133,51 @@ class Repository {
   }
 
 
+  ///Abandon MC Execution
+   Future<Map<String, dynamic>> abandonExecutionButton(
+    abandoneJsonString,
+    bool? isLoading,
+  ) async {
+    try {
+      final auth = await getSecuredValue(LocalKeys.authToken);
+      final res = await _dataRepository.abandonExecutionButton(
+        auth: auth,
+        abandoneJsonString: json.encode(abandoneJsonString),
+        isLoading: isLoading ?? false,
+      );
+
+      var resourceData = res.data;
+      // var parsedJson = json.decode(resourceData);
+      print('Response Abandon Execution: ${resourceData}');
+      // Get.dialog(
+      //   CreateNewPermitDialog(
+      //     createPermitData: 'Dialog Title',
+      //     data: parsedJson['message'],
+      //   ),
+      // );
+
+      // data = res.data;
+      //print('Response Create Permit: ${data}');
+
+      if (!res.hasError) {
+        if (res.errorCode == 200) {
+          var responseMap = json.decode(res.data);
+          return responseMap;
+        } else {
+          // Get.dialog<void>(WarrantyClaimErrorDialog());
+        }
+      } else {
+        Utility.showDialog(res.errorCode.toString() + 'abandonExecutionButton');
+        //return '';
+      }
+      return Map();
+    } catch (error) {
+      print(error.toString());
+      return Map();
+    }
+  }
+
+
   Future<void> startMCExecutionButton(
     int? planId,
     bool? isLoading,

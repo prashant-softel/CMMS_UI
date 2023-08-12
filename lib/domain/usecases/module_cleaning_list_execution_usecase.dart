@@ -34,6 +34,15 @@ class ModuleCleaningListExecutionUsecase {
     );
   }
 
+   Future<Map<String, dynamic>> abandonExecutionButton({
+    abandoneJsonString,
+    bool? isLoading,
+  }) async =>
+      await repository.abandonExecutionButton(
+        abandoneJsonString,
+        isLoading,
+      );
+
   Future<List<FacilityModel?>?> getFacilityList({bool? isLoading}) async =>
       await repository.getFacilityList(isLoading);
 }

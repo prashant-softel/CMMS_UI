@@ -1872,7 +1872,7 @@ class ViewPermitWebScreen extends GetView<ViewPermitController> {
                                                                           163)),
                                                                 ),
                                                               ),
-                                                              Dimens.boxHeight5,
+                                                              // Dimens.boxHeight5,
                                                               SizedBox(
                                                                 height: 20,
                                                                 child: Text(
@@ -1934,7 +1934,7 @@ class ViewPermitWebScreen extends GetView<ViewPermitController> {
                                                                     )
                                                                   : Container(),
                                                               SizedBox(
-                                                                height: 20,
+                                                                height: 5,
                                                               ),
                                                               SizedBox(
                                                                 width: 150,
@@ -1997,9 +1997,9 @@ class ViewPermitWebScreen extends GetView<ViewPermitController> {
                                                                             92,
                                                                             163)),
                                                               ),
-                                                              SizedBox(
-                                                                height: 5,
-                                                              ),
+                                                              // SizedBox(
+                                                              //   height: 5,
+                                                              // ),
                                                               Text(
                                                                 '${controller.viewPermitDetailsModel.value?.sitePermitNo}',
                                                                 style: TextStyle(
@@ -2010,9 +2010,9 @@ class ViewPermitWebScreen extends GetView<ViewPermitController> {
                                                                             92,
                                                                             163)),
                                                               ),
-                                                              SizedBox(
-                                                                height: 5,
-                                                              ),
+                                                              // SizedBox(
+                                                              //   height: 5,
+                                                              // ),
                                                               Text(
                                                                 '${controller.viewPermitDetailsModel.value?.permitTypeName}',
                                                                 style: TextStyle(
@@ -2064,9 +2064,9 @@ class ViewPermitWebScreen extends GetView<ViewPermitController> {
                                                                             92,
                                                                             163)),
                                                               ),
-                                                              SizedBox(
-                                                                height: 5,
-                                                              ),
+                                                              // SizedBox(
+                                                              //   height: 5,
+                                                              // ),
                                                               Text(
                                                                 '${controller.viewPermitDetailsModel.value?.blockName}',
                                                                 style: TextStyle(

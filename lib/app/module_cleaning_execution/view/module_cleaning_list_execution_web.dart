@@ -5,6 +5,7 @@ import 'package:cmms/app/navigators/app_pages.dart';
 
 import 'package:cmms/app/theme/dimens.dart';
 import 'package:cmms/app/utils/user_access_constants.dart';
+import 'package:cmms/app/widgets/abandon_execution_dialog.dart';
 import 'package:cmms/app/widgets/action_button.dart';
 import 'package:cmms/app/widgets/custom_richtext.dart';
 import 'package:cmms/app/widgets/date_picker.dart';
@@ -312,7 +313,7 @@ class ModuleCleaningListExecution
                                             ].map((column) {
                                               return TableViewColumn(
                                                 label: column,
-                                                minWidth: Get.width * 0.08,
+                                                minWidth: Get.width * 0.09,
                                               );
                                             }).toList(),
                                             // rows: [],
@@ -370,18 +371,23 @@ class ModuleCleaningListExecution
                                                               ),
                                                               TableActionButton(
                                                                 color: ColorValues
+                                                                    .appRedColor,
+                                                                icon:
+                                                                    Icons.close,
+                                                                message: 'Abandon',
+                                                                onPress: () {
+                                                                 Get.dialog(AbandoneExecutionDialog(id: int.tryParse('${record[0]}')));
+                                                                },
+                                                              ),
+                                                              TableActionButton(
+                                                                color: ColorValues
                                                                     .appGreenColor,
                                                                 icon:
                                                                     Icons.add,
                                                                 message: 'Start',
                                                                 onPress: () {
                                                                   controller.startMCExecutionButton(planId: int.tryParse('${record[1]}'));
-                                                                  // controller
-                                                                  //     .editIncidentReport(
-                                                                  //         id: int.tryParse(
-                                                                  //             '${record[0]}'));
-                                                                  // print(
-                                                                  //     'edit record:${int.tryParse('${record[0]}')}');
+                                                                
                                                                 },
                                                               ),
                                                               TableActionButton(
