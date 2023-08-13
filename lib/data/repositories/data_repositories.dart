@@ -2229,10 +2229,10 @@ class DataRepository extends DomainRepository {
   Future<ResponseModel> deletePermitType({
     auth,
     bool? isLoading,
-    checklist_id,
+    permit_id,
   }) async {
     var response = await connectHelper.deletePermitType(
-        auth: auth, isLoading: isLoading, checklist_id: checklist_id);
+        auth: auth, isLoading: isLoading, permit_id: permit_id);
     return response;
   }
 

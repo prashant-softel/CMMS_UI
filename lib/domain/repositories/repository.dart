@@ -5450,12 +5450,12 @@ class Repository {
     }
   }
 
-  Future<void> deletePermitType(Object checklist_id, bool isLoading) async {
+  Future<void> deletePermitType(Object permit_id, bool isLoading) async {
     try {
       final auth = await getSecuredValue(LocalKeys.authToken);
       final res = await _dataRepository.deletePermitType(
         auth: auth,
-        checklist_id: checklist_id,
+        permit_id: permit_id,
         isLoading: isLoading,
       );
 
@@ -6602,6 +6602,8 @@ class Repository {
       return false;
     }
   }
+
+
   //end
   //end
 }

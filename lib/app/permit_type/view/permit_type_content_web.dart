@@ -125,9 +125,8 @@ class PermitTypeContentWeb extends GetView<PermitTypeController> {
                                               MainAxisAlignment.spaceBetween,
                                           children: [
                                             Expanded(
-                                              child: Text(
-                                                "Facility: ",
-                                                style: Styles.blackBold16,
+                                              child: CustomRichText(
+                                                 title: "Facility: ",
                                               ),
                                             ),
                                             Expanded(
@@ -183,9 +182,8 @@ class PermitTypeContentWeb extends GetView<PermitTypeController> {
                                               MainAxisAlignment.spaceBetween,
                                           children: [
                                             Expanded(
-                                              child: Text(
-                                                "Title: ",
-                                                style: Styles.blackBold16,
+                                              child: CustomRichText(
+                                                title: "Title:",
                                               ),
                                             ),
                                             Expanded(
@@ -236,9 +234,9 @@ class PermitTypeContentWeb extends GetView<PermitTypeController> {
                                               MainAxisAlignment.spaceBetween,
                                           children: [
                                             Expanded(
-                                              child: Text(
-                                                "Description ",
-                                                style: Styles.blackBold16,
+                                              child: CustomRichText(
+                                                title:"Description ",
+                                                // style: Styles.blackBold16,
                                               ),
                                             ),
                                             Expanded(
