@@ -33,9 +33,9 @@ class PermitTypeUsecase {
           isLoading: isLoading, checklistJsonString: checklistJsonString);
 
   deletePermitType(
-      {required Object checklist_id, required bool isLoading}) async =>
+      {required Object permit_id, required bool isLoading}) async =>
       await repository.deletePermitType(
-        checklist_id,
+        permit_id,
         isLoading,
       );
   Future<bool> updatePermitType({

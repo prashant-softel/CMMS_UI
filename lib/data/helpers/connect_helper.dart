@@ -3579,12 +3579,12 @@ class ConnectHelper {
   Future<ResponseModel> deletePermitType({
     required String auth,
     bool? isLoading,
-    required checklist_id,
+    required permit_id,
   }) async {
     var responseModel = await apiWrapper.makeRequest(
-      'Permit/DeletePermitType?id=$checklist_id',
+      'Permit/DeletePermitType?id=$permit_id',
       Request.delete,
-      checklist_id,
+      permit_id,
       isLoading ?? false,
       {
         'Content-Type': 'application/json',

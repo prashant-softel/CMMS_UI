@@ -38,9 +38,9 @@ class PermitTypePresenter {
     return true;
   }
 
-  deletePermitType(String? checklist_id, {required bool isLoading}) async =>
+  deletePermitType(String? permit_id, {required bool isLoading}) async =>
       await permitTypeUsecase.deletePermitType(
-        checklist_id: checklist_id ?? 0,
+        permit_id: permit_id ?? 0,
         isLoading: isLoading,
       );
   Future<bool> updatePermitType(
