@@ -282,9 +282,12 @@ class ReceiveGoodsOrdersController extends GetxController {
   void addRowItem() {
     rowItem.value.add([
       {"key": "Drop_down", "value": 'Please Select'},
-      {'key': "Paid_By", "value": 'Please Select'},
-      {'key': "Cost", "value": ''},
-      {'key': "Order", "value": ''},
+      {'key': "Cost", "value": 'cost'},
+      {'key': "Order", "value": 'Order'},
+      {'key': "Received", "value": 'Received'},
+      {'key': "Accepted", "value": 'Accepted'},
+      {'key': "Damaged", "value": 'Damaged'},
+      {'key': "Pending", "value": 'Pending'},
     ]);
   }
 
