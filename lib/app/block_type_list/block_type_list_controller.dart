@@ -286,10 +286,10 @@ class BlockTypeListController extends GetxController {
 
   Future<void> issuccessCreateBlock() async {
     isSuccess.toggle();
-    await {_cleardata()};
+    await {cleardata()};
   }
 
-  _cleardata() {
+  cleardata() {
     titleCtrlr.text = '';
     descriptionCtrlr.text = '';
     // manpowerCtrlr.text = '';

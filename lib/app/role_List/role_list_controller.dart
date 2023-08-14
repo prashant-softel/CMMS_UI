@@ -116,10 +116,10 @@ class RoleListController extends GetxController {
     isSuccess.toggle();
 
     // isToggleOn.value = false;
-    await {_cleardata()};
+    await {cleardata()};
   }
 
-  _cleardata() {
+  cleardata() {
     rolelistNumberCtrlr.text = '';
     selectedItem = null;
     Future.delayed(Duration(seconds: 1), () {
