@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:cmms/app/app.dart';
 import 'package:cmms/app/receive_goods_order/receive_goods_order_controller.dart';
 import 'package:cmms/app/widgets/custom_elevated_button.dart';
@@ -780,16 +782,16 @@ class _ReceiveGoodsOrderWebState extends State<ReceiveGoodsOrderWeb> {
                                           children: [
                                             Text(" Selects Assets"),
                                             Spacer(),
-                                            GestureDetector(
-                                                onTap: () {
-                                                  controller.addRowItem();
-                                                },
-                                                child: Row(
-                                                  children: [
-                                                    Text("Add"),
-                                                    Icon(Icons.exposure_plus_1),
-                                                  ],
-                                                )),
+                                            // GestureDetector(
+                                            //     onTap: () {
+                                            //       controller.addRowItem();
+                                            //     },
+                                            //     child: Row(
+                                            //       children: [
+                                            //         Text("Add"),
+                                            //         Icon(Icons.exposure_plus_1),
+                                            //       ],
+                                            //     )),
                                           ],
                                         ),
                                       ),
@@ -807,13 +809,16 @@ class _ReceiveGoodsOrderWebState extends State<ReceiveGoodsOrderWeb> {
                                           child: ScrollableTableView(
                                             columns: [
                                               "Assets",
-                                              "Paid By",
                                               "Cost",
                                               "Ordered Qty",
+                                              "Received  Qty",
+                                              "Accepted Qty",
+                                              "Damaged Items",
+                                              "Order Pending"
                                             ].map((column) {
                                               return TableViewColumn(
                                                 label: column,
-                                                minWidth: Get.width * 0.18,
+                                                minWidth: Get.width * 0.14,
                                                 height: Get.height / 2,
                                               );
                                             }).toList(),
@@ -899,52 +904,68 @@ class _ReceiveGoodsOrderWebState extends State<ReceiveGoodsOrderWeb> {
                                                             ),
                                                           )
                                                         : (mapData['key'] ==
-                                                                "Paid_By")
+                                                                    "Order") ||
+                                                                (mapData[
+                                                                        'key'] ==
+                                                                    "Cost")
                                                             ? Padding(
                                                                 padding:
                                                                     const EdgeInsets
-                                                                            .only(
-                                                                        left:
-                                                                            10,
-                                                                        right:
-                                                                            10),
-                                                                child:
-                                                                    DropdownWebStock(
-                                                                  width: MediaQuery.of(
-                                                                          context)
-                                                                      .size
-                                                                      .width,
-                                                                  dropdownList:
-                                                                      controller
-                                                                          .paid,
-                                                                  selectedValue:
-                                                                      mapData[
-                                                                          "value"],
-                                                                  onValueChanged:
-                                                                      (list,
-                                                                          selectedValue) {
-                                                                    print(
-                                                                        'paifcghb:${controller.paid}');
-                                                                    print({
-                                                                      selectedValue:
-                                                                          selectedValue
-                                                                    });
-                                                                    mapData["value"] =
-                                                                        selectedValue;
-                                                                    controller.paiddropdownMapperData[selectedValue] = list.firstWhere(
-                                                                        (element) =>
-                                                                            element.name ==
-                                                                            selectedValue,
-                                                                        orElse:
-                                                                            null);
-                                                                  },
+                                                                        .only(
+                                                                  left: 20,
+                                                                  right: 20,
                                                                 ),
+                                                                child: Container(
+                                                                    width: (Get.width * .4),
+                                                                    // padding: EdgeInsets.all(value),
+                                                                    decoration: BoxDecoration(
+                                                                      boxShadow: [
+                                                                        BoxShadow(
+                                                                          color:
+                                                                              Colors.black26,
+                                                                          offset:
+                                                                              const Offset(
+                                                                            5.0,
+                                                                            5.0,
+                                                                          ),
+                                                                          blurRadius:
+                                                                              5.0,
+                                                                          spreadRadius:
+                                                                              1.0,
+                                                                        ),
+                                                                      ],
+                                                                      color: ColorValues
+                                                                          .whiteColor,
+                                                                      borderRadius:
+                                                                          BorderRadius.circular(
+                                                                              5),
+                                                                    ),
+                                                                    child: LoginCustomTextfield(
+                                                                      keyboardType:
+                                                                          TextInputType
+                                                                              .number,
+                                                                      inputFormatters: <
+                                                                          TextInputFormatter>[
+                                                                        FilteringTextInputFormatter
+                                                                            .digitsOnly
+                                                                      ],
+                                                                      maxLine:
+                                                                          1,
+                                                                      textController:
+                                                                          new TextEditingController(
+                                                                              text: mapData["value"] ?? ''),
+                                                                      onChanged:
+                                                                          (txt) {
+                                                                        mapData["value"] =
+                                                                            txt;
+                                                                      },
+                                                                    )),
                                                               )
                                                             : (mapData['key'] ==
-                                                                        "Order") ||
+                                                                        "Received") ||
                                                                     (mapData[
                                                                             'key'] ==
-                                                                        "Cost")
+                                                                        "Accepted")
                                                                 ? Padding(
                                                                     padding:
                                                                         const EdgeInsets
@@ -990,9 +1011,70 @@ class _ReceiveGoodsOrderWebState extends State<ReceiveGoodsOrderWeb> {
                                                                           },
                                                                         )),
                                                                   )
-                                                                : Text(mapData[
-                                                                        'key'] ??
-                                                                    ''),
+                                                                : (mapData['key'] ==
+                                                                        "Pending")
+                                                                    ? Padding(
+                                                                        padding:
+                                                                            const EdgeInsets
+                                                                                .only(
+                                                                          left:
+                                                                              20,
+                                                                          right:
+                                                                              20,
+                                                                        ),
+                                                                        child:
+                                                                            Checkbox(
+                                                                          onChanged:
+                                                                              (value) {},
+                                                                          value:
+                                                                              false,
+                                                                        ))
+                                                                    : (mapData['key'] ==
+                                                                            "Damaged")
+                                                                        ? Padding(
+                                                                            padding: const EdgeInsets
+                                                                                .only(
+                                                                              left: 20,
+                                                                              right: 20,
+                                                                            ),
+                                                                            child:
+                                                                                Padding(
+                                                                              padding: const EdgeInsets.only(
+                                                                                left: 20,
+                                                                                right: 20,
+                                                                              ),
+                                                                              child: Container(
+                                                                                  width: (Get.width * .4),
+                                                                                  // padding: EdgeInsets.all(value),
+                                                                                  decoration: BoxDecoration(
+                                                                                    boxShadow: [
+                                                                                      BoxShadow(
+                                                                                        color: Colors.black26,
+                                                                                        offset: const Offset(
+                                                                                          5.0,
+                                                                                          5.0,
+                                                                                        ),
+                                                                                        blurRadius: 5.0,
+                                                                                        spreadRadius: 1.0,
+                                                                                      ),
+                                                                                    ],
+                                                                                    color: ColorValues.whiteColor,
+                                                                                    borderRadius: BorderRadius.circular(5),
+                                                                                  ),
+                                                                                  child: LoginCustomTextfield(
+                                                                                    keyboardType: TextInputType.number,
+                                                                                    inputFormatters: <TextInputFormatter>[
+                                                                                      FilteringTextInputFormatter.digitsOnly
+                                                                                    ],
+                                                                                    maxLine: 1,
+                                                                                    textController: new TextEditingController(text: mapData["value"] ?? ''),
+                                                                                    onChanged: (txt) {
+                                                                                      mapData["value"] = txt;
+                                                                                    },
+                                                                                  )),
+                                                                            ))
+                                                                        : Text(mapData['key'] ??
+                                                                            ''),
                                                   );
                                                 }).toList(),
                                               );
