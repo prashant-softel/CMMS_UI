@@ -160,10 +160,10 @@ class InsuranceStatusController extends GetxController {
     isSuccess.toggle();
 
     // isToggleOn.value = false;
-    await {_cleardata()};
+    await {cleardata()};
   }
 
-  _cleardata() {
+  cleardata() {
     titleCtrlr.text = '';
     descriptionCtrlr.text = '';
     selectedItem = null;

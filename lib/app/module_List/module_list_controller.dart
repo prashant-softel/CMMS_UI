@@ -164,10 +164,10 @@ class ModuleListController extends GetxController {
     isSuccess.toggle();
 
     // isToggleOn.value = false;
-    await {_cleardata()};
+    await {cleardata()};
   }
 
-  _cleardata() {
+  cleardata() {
     modulelistNumberCtrlr.text = '';
     featureCtrlr.text = '';
     selectedItem = null;

@@ -535,10 +535,10 @@ class FacilityTypeListController extends GetxController {
 
   Future<void> issuccessCreatechecklist() async {
     isSuccess.toggle();
-    await {_cleardata()};
+    await {cleardata()};
   }
 
-  _cleardata() {
+  cleardata() {
     titleCtrlr.text = '';
     addressCtrlr.text = '';
     zipcodeCtrlr.text = '';

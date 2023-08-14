@@ -230,7 +230,7 @@ class InventoryTypeListContentWeb extends GetView<InventoryTypeListController> {
                                         child: CustomElevatedButton(
                                             backgroundColor:
                                                 ColorValues.appRedColor,
-                                            onPressed: () {},
+                                            onPressed: () {controller.cleardata();},
                                             text: 'Cancel')),
                                     SizedBox(
                                       width: 10,

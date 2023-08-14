@@ -379,10 +379,10 @@ class BusinessListController extends GetxController {
     isSuccess.toggle();
 
     // isToggleOn.value = false;
-    await {_cleardata()};
+    await {cleardata()};
   }
 
-  _cleardata() {
+  cleardata() {
     businesslistNumberCtrlr.text = '';
     emailCtrlr.text = '';
     contactpersonCtrlr.text = '';
