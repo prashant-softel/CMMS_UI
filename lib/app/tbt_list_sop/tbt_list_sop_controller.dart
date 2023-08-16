@@ -122,9 +122,9 @@ class TBTSOPListController extends GetxController {
        Future.delayed(Duration(seconds: 1), () {
         getJobTypePermitList();
       });
-      Future.delayed(Duration(seconds: 1), () {
-        getSopPermitList();
-      });
+      // Future.delayed(Duration(seconds: 1), () {
+      //   getSopPermitList(selectedJobTypesId);
+      // });
       
       
     });
@@ -133,12 +133,12 @@ class TBTSOPListController extends GetxController {
   }
 
 
-  Future<void> getSopPermitList() async {
+  Future<void> getSopPermitList(selectedJobTypesId) async {
     sopPermitList.value = <SOPListModel>[];
     final _sopPermitList = await tbtSOPListPresenter.getSopPermitList(
       isLoading: true,
       // categoryIds: categoryIds,
-      job_type_id: selectedJobSOPId,
+      job_type_id: selectedJobTypesId,
       // job_type_id: 36,
 
     );
@@ -149,6 +149,7 @@ class TBTSOPListController extends GetxController {
         sopPermitList.add(sopPermit_list);
       }
       // selectedSopPermit.value = _sopPermitList[0].name ?? '';
+      // selectedSopPermit.value = sopPermitList[0].name!;
 
     }
 
@@ -170,15 +171,15 @@ class TBTSOPListController extends GetxController {
     for (var jobType_list in _jobTypeList) {
       jobTypeList.add(jobType_list);
     }
-      // selectedJobType.value = jobTypeList[0].name ?? '';
-
-    // getSopPermitList();
+      selectedJobType.value = jobTypeList[0].name ?? '';
+      selectedJobTypesId = jobTypeList[0].id ?? 0;
+    getSopPermitList(selectedJobTypesId);
     // supplierNameList = _supplierNameList;
     // jobListPaginationController = PaginationController(
     //   rowCount: jobTypeList.length,
     //   rowsPerPage: 10,
     // );
-    update(['job_Type_list']);
+    // update(['job_Type_list']);
   }
 
 
@@ -297,9 +298,12 @@ class TBTSOPListController extends GetxController {
         title: _title,
         description: _description,
         tbt_jobType: selectedJobSOPId,
+          tbt_remarks: "PM Document",
         sop_fileId: sopFileId,
         sop_file_desc: "PM Document",
         jsa_fileId: jsaFileId
+
+
       );
       var sopJsonString = createSOPModel.toJson();
       Map<String, dynamic>? responseSopCreate =
@@ -348,9 +352,13 @@ class TBTSOPListController extends GetxController {
          case RxList<JobTypeListModel>:
         {
           int jobTypeListIndex = jobTypeList.indexWhere((x) => x.name == value);
-          selectedJobSOPId = jobTypeList[jobTypeListIndex].id ?? 0;
-          print('TBT_JobType:$selectedJobSOPId');
-          getSopPermitList();
+          int jobIds = 0;
+          if(jobTypeListIndex>=0){
+            jobIds = jobTypeList[jobTypeListIndex].id ?? 0;
+          }
+          selectedJobTypesId = jobIds;
+          print('TBT_JobType:$selectedJobTypesId');
+          getSopPermitList(selectedJobTypesId);
           //}
         }
         break;
