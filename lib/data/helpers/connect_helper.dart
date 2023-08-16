@@ -1618,7 +1618,7 @@ class ConnectHelper {
     bool? isLoading,
   }) async {
     var responseModel = await apiWrapper.makeRequest(
-      'Permit/createSOP',
+      'Permit/CreateSOP',
       Request.post,
       createSop,
       isLoading ?? false,
