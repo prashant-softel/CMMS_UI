@@ -2026,7 +2026,7 @@ class ViewPermitWebScreen extends GetView<ViewPermitController> {
                                                             ],
                                                           ),
                                                           SizedBox(
-                                                            width: 100,
+                                                            width: 80,
                                                           ),
                                                           Column(
                                                             crossAxisAlignment:
@@ -3324,14 +3324,15 @@ class ViewPermitWebScreen extends GetView<ViewPermitController> {
                               0 &&
                           controller.viewPermitDetailsModel.value?.ptwStatus ==
                               121 ||
-                      varUserAccessModel.value.access_list!
-                              .where((e) =>
-                                  e.feature_id ==
-                                      UserAccessConstants.kPermitFeatureId &&
-                                  e.delete ==
-                                      UserAccessConstants.kHaveDeleteAccess)
-                              .length >
-                          0
+                          controller.viewPermitDetailsModel.value?.ptwStatus == 133
+                      // varUserAccessModel.value.access_list!
+                      //         .where((e) =>
+                      //             e.feature_id ==
+                      //                 UserAccessConstants.kPermitFeatureId &&
+                      //             e.delete ==
+                      //                 UserAccessConstants.kHaveDeleteAccess)
+                      //         .length >
+                      //     0
                   ? Container(
                       height: 45,
                       child: CustomElevatedButton(
