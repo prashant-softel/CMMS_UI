@@ -466,39 +466,22 @@ class ViewModuleCleaningExecutionContentWeb
                                                     );
                                                   }).toList(),
                                                   rows: [
-                                                    // ...List.generate(
-                                                    //   controller
-                                                    //           .historyList
-                                                    //           ?.length ??
-                                                    //       0,
-                                                    //   (index) {
-                                                    //     var getHistoryListDetails =
-                                                    //         controller
-                                                    //                 .historyList?[
-                                                    //             index];
-                                                    //     return [
-                                                    //       '${getHistoryListDetails?.createdAt}',
-                                                    //       '${getHistoryListDetails?.moduleRefId ?? ''}',
-                                                    //       '${getHistoryListDetails?.comment ?? ''}',
-                                                    //       '${getHistoryListDetails?.moduleType ?? ''}',
-                                                    //       '${getHistoryListDetails?.status_name ?? ''}',
-                                                    //     ];
-                                                    //   },
-                                                    // ),
-                                                    [
-                                                      "2022-04-10 16:40",
-                                                      "Sujit Kumar",
-                                                      "Execution Started",
-                                                      "--",
-                                                      "Plan Execution Started"
-                                                    ],
-                                                    [
-                                                      "2022-02-15 12:30",
-                                                      "Amit Yadav",
-                                                      "Execution Completed",
-                                                      "--",
-                                                      "Plan Completed"
-                                                    ],
+                                                    ...List.generate(
+                                                      controller.historyList?.length ??
+                                                          0,
+                                                      (index) {
+                                                        var getHistoryListDetails =
+                                                            controller.historyList?[index];
+                                                        return [
+                                                          '${getHistoryListDetails?.createdAt}',
+                                                          '${getHistoryListDetails?.moduleRefId ?? ''}',
+                                                          '${getHistoryListDetails?.comment ?? ''}',
+                                                          '${getHistoryListDetails?.moduleType ?? ''}',
+                                                          '${getHistoryListDetails?.status_name ?? ''}',
+                                                        ];
+                                                      },
+                                                    ),
+                                                   
                                                   ].map((record) {
                                                     return TableViewRow(
                                                       height: 30,

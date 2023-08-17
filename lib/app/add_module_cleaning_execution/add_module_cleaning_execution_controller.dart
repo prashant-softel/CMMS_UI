@@ -78,11 +78,18 @@ class AddModuleCleaningExecutionController extends GetxController {
   int facilityId = 0;
 
   ///
-  int? id = 0;
+  // int? id = 0;
+  int? planId = 0;
+  String? status = '';
   @override
   void onInit() async {
-    id = Get.arguments;
-    print('EscalationMatrix_Id:$id');
+    status = Get.arguments;
+    // planId = Get.arguments;
+
+    
+    print('status:$status');
+    // print('plan Id:$planId');
+
     facilityIdStreamSubscription = homeController.facilityId$.listen((event) {
       facilityId = event;
       Future.delayed(Duration(seconds: 1), () {

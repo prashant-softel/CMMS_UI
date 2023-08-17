@@ -487,6 +487,36 @@ class AddModuleCleaningExecutionContentWeb
                                                 },
                                               ),
                                             ),
+                                             SizedBox(
+                                              width: 20,
+                                            ),
+                                            Container(
+                                              height: 28,
+                                              child: CustomElevatedButton(
+                                                backgroundColor:
+                                                    ColorValues.appGreenColor,
+                                                text: "Start",
+                                                onPressed: () {
+                                                  // controller
+                                                  //     .createEscalationMatrix();
+                                                },
+                                              ),
+                                            ),
+                                             SizedBox(
+                                              width: 20,
+                                            ),
+                                            Container(
+                                              height: 28,
+                                              child: CustomElevatedButton(
+                                                backgroundColor:
+                                                    ColorValues.appGreenColor,
+                                                text: "End",
+                                                onPressed: () {
+                                                  // controller
+                                                  //     .createEscalationMatrix();
+                                                },
+                                              ),
+                                            ),
                                             SizedBox(
                                               width: 20,
                                             ),
