@@ -3,6 +3,7 @@ import 'dart:async';
 import 'package:cmms/app/app.dart';
 import 'package:cmms/app/navigators/app_pages.dart';
 import 'package:cmms/domain/models/create_escalation_matrix_model.dart';
+import 'package:cmms/domain/models/history_model.dart';
 import 'package:cmms/domain/models/modulelist_model.dart';
 import 'package:cmms/domain/models/paiyed_model.dart';
 import 'package:cmms/domain/models/role_model.dart';
@@ -60,6 +61,10 @@ class viewModuleCleaningExecutionController extends GetxController {
     rowsPerPage: 10,
   );
 
+///MC Execution History
+  RxList<HistoryModel?>? historyList = <HistoryModel?>[].obs;
+
+
 
 
 
@@ -83,9 +88,7 @@ class viewModuleCleaningExecutionController extends GetxController {
       //   getFacilityList();
       // });
     });
-
-  
-   
+    await getMCExecutionHistory(id: id!);
 
     super.onInit();
   }
@@ -102,6 +105,23 @@ class viewModuleCleaningExecutionController extends GetxController {
   //     _facilityId.sink.add(facilityList[0]?.id ?? 0);
   //   }
   // }
+
+    Future<void> getMCExecutionHistory({required int id}) async {
+    /// TODO: CHANGE THESE VALUES
+    int moduleType = 81;
+    // int tempModuleType = 21;
+    int id = Get.arguments;
+    //
+    historyList?.value = await viewModuleCleaningExecutionPresenter.getMCExecutionHistory(
+          // tempModuleType,
+          // tempJobCardId,
+          moduleType,
+          id,
+          true,
+        ) ??
+        [];
+    update(["historyList"]);
+  }
 
  
   void onValueChanged(dynamic list, dynamic value) {

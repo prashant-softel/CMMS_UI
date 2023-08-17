@@ -101,28 +101,28 @@ class ModuleCleaningListExecution
                                       ),
                                       Spacer(),
                                       Row(
-                                      children: [
-                                        CustomRichText(title: 'Date Range'),
-                                        Dimens.boxWidth10,
-                                        CustomTextFieldForStock(
-                                          width: MediaQuery.of(context)
-                                                  .size
-                                                  .width /
-                                              5,
-                                          numberTextField: true,
-                                          onTap: () {
-                                            controller
-                                                    .openFromDateToStartDatePicker =
-                                                !controller
-                                                    .openFromDateToStartDatePicker;
-                                            controller.update(
-                                                ['stock_Mangement_Date']);
-                                          },
-                                          hintText:
-                                              '${controller.formattedTodate.toString()} To ${controller.formattedFromdate.toString()}',
-                                        ),
-                                      ],
-                                    ),
+                                        children: [
+                                          CustomRichText(title: 'Date Range'),
+                                          Dimens.boxWidth10,
+                                          CustomTextFieldForStock(
+                                            width: MediaQuery.of(context)
+                                                    .size
+                                                    .width /
+                                                5,
+                                            numberTextField: true,
+                                            onTap: () {
+                                              controller
+                                                      .openFromDateToStartDatePicker =
+                                                  !controller
+                                                      .openFromDateToStartDatePicker;
+                                              controller.update(
+                                                  ['stock_Mangement_Date']);
+                                            },
+                                            hintText:
+                                                '${controller.formattedTodate.toString()} To ${controller.formattedFromdate.toString()}',
+                                          ),
+                                        ],
+                                      ),
                                       // Container(
                                       //   child: Icon(
                                       //     Icons.filter_alt_sharp,
@@ -183,7 +183,6 @@ class ModuleCleaningListExecution
                                       ),
                                     ),
                                     Spacer(),
-                                    
                                     Dimens.boxWidth10,
                                     Container(
                                       width: 200,
@@ -211,22 +210,26 @@ class ModuleCleaningListExecution
                                       ),
                                     ),
                                     Dimens.boxWidth10,
-                                     varUserAccessModel.value.access_list!
-                                                      .where((e) =>
-                                                          e.feature_id == UserAccessConstants.kModuleCleaningExecutionFeatureId &&
-                                                          e.add == UserAccessConstants.kNotHaveAddAccess)
-                                                      .length >
-                                                  0
-                                   ? ActionButton(
-                                      icon: Icons.add,
-                                      label: 'Add MC Execution',
-                                      onPressed: () {
-                                        Get.toNamed(Routes
-                                            .addModuleCleaningExecutionContentWeb);
-                                      },
-                                      color: ColorValues.appGreenColor,
-                                    )
-                                    :Container(),
+                                    varUserAccessModel.value.access_list!
+                                                .where((e) =>
+                                                    e.feature_id ==
+                                                        UserAccessConstants
+                                                            .kModuleCleaningExecutionFeatureId &&
+                                                    e.add ==
+                                                        UserAccessConstants
+                                                            .kNotHaveAddAccess)
+                                                .length >
+                                            0
+                                        ? ActionButton(
+                                            icon: Icons.add,
+                                            label: 'Add MC Execution',
+                                            onPressed: () {
+                                              Get.toNamed(Routes
+                                                  .addModuleCleaningExecutionContentWeb);
+                                            },
+                                            color: ColorValues.appGreenColor,
+                                          )
+                                        : Container(),
                                   ],
                                 ),
                                 SizedBox(
@@ -334,7 +337,7 @@ class ModuleCleaningListExecution
                                               ),
                                             ].map((record) {
                                               return TableViewRow(
-                                                onTap: (){},
+                                                onTap: () {},
                                                 height: 55,
                                                 cells: record.map((value) {
                                                   return TableViewCell(
@@ -348,10 +351,9 @@ class ModuleCleaningListExecution
                                                                     .remove_red_eye_outlined,
                                                                 message: 'View',
                                                                 onPress: () {
-                                                                  controller
-                                                                      .viewMCExecution(
-                                                                          id: int.tryParse(
-                                                                              '${record[0]}'));
+                                                                  controller.viewMCExecution(
+                                                                      id: int.tryParse(
+                                                                          '${record[0]}'));
                                                                 },
                                                               ),
                                                               TableActionButton(
@@ -369,42 +371,64 @@ class ModuleCleaningListExecution
                                                                   //     'edit record:${int.tryParse('${record[0]}')}');
                                                                 },
                                                               ),
-                                                              TableActionButton(
-                                                                color: ColorValues
-                                                                    .appRedColor,
-                                                                icon:
-                                                                    Icons.close,
-                                                                message: 'Abandon',
-                                                                onPress: () {
-                                                                 Get.dialog(AbandoneExecutionDialog(id: int.tryParse('${record[0]}')));
-                                                                },
-                                                              ),
-                                                              TableActionButton(
-                                                                color: ColorValues
-                                                                    .appGreenColor,
-                                                                icon:
-                                                                    Icons.add,
-                                                                message: 'Start',
-                                                                onPress: () {
-                                                                  controller.startMCExecutionButton(planId: int.tryParse('${record[1]}'));
-                                                                
-                                                                },
-                                                              ),
-                                                              TableActionButton(
-                                                                color: ColorValues
-                                                                    .appGreenColor,
-                                                                icon:
-                                                                    Icons.add,
-                                                                message: 'End',
-                                                                onPress: () {
-                                                                  // controller
-                                                                  //     .editIncidentReport(
-                                                                  //         id: int.tryParse(
-                                                                  //             '${record[0]}'));
-                                                                  // print(
-                                                                  //     'edit record:${int.tryParse('${record[0]}')}');
-                                                                },
-                                                              )
+                                                              record[7] ==
+                                                                      "Abandoned"
+                                                                  ? TableActionButton(
+                                                                      color: ColorValues
+                                                                          .appRedColor,
+                                                                      icon: Icons
+                                                                          .close,
+                                                                      message:
+                                                                          'Abandon',
+                                                                      onPress:
+                                                                          () {
+                                                                        Get.dialog(
+                                                                            AbandoneExecutionDialog(id: int.tryParse('${record[0]}')));
+                                                                      },
+                                                                    )
+                                                                  : Container(),
+                                                              record[7] ==
+                                                                      "Scheduled"
+                                                                  ? TableActionButton(
+                                                                      color: ColorValues
+                                                                          .appGreenColor,
+                                                                      icon: Icons
+                                                                          .add,
+                                                                      message:
+                                                                          'Start',
+                                                                      onPress:
+                                                                          () {
+                                                                        controller.startMCExecutionButton(
+                                                                            planId:
+                                                                                int.tryParse('${record[1]}'));
+                                                                        // controller.addMCExecution(
+                                                                        //   status: '${record[7]}',
+                                                                        //     planId:int.tryParse('${record[1]}'),
+                                                                            
+                                                                        //     );
+                                                                      },
+                                                                    )
+                                                                  : Container(),
+                                                              record[7] ==
+                                                                      "Abandoned"
+                                                                  ? TableActionButton(
+                                                                      color: ColorValues
+                                                                          .appGreenColor,
+                                                                      icon: Icons
+                                                                          .add,
+                                                                      message:
+                                                                          'End',
+                                                                      onPress:
+                                                                          () {
+                                                                        // controller
+                                                                        //     .editIncidentReport(
+                                                                        //         id: int.tryParse(
+                                                                        //             '${record[0]}'));
+                                                                        // print(
+                                                                        //     'edit record:${int.tryParse('${record[0]}')}');
+                                                                      },
+                                                                    )
+                                                                  : Container(),
                                                             ],
                                                           )
                                                         : Text(value),

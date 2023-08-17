@@ -166,4 +166,11 @@ class ModuleCleaningListExecutionController extends GetxController {
     Get.toNamed(Routes.viewModuleCleaningExecutionScreen, arguments: id);
     print('Argument$id');
   }
+
+   Future<void> addMCExecution({int? planId, String? status}) async {
+    Get.toNamed(Routes.addModuleCleaningExecutionContentWeb, arguments: status, );
+    // Get.toNamed(Routes.addModuleCleaningExecutionContentWeb, arguments: planId,);
+
+    // print('Argument$planId');
+  }
 }

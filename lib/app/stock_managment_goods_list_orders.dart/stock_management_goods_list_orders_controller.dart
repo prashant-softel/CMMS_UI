@@ -144,8 +144,8 @@ class StockManagementGoodsOrdersController extends GetxController {
                     Get.back();
                     getGoodsOrdersList(
                       facilityId,
-                      formattedTodate,
-                      formattedFromdate,
+                      formattedTodate1,
+                      formattedFromdate1,
                       false,
                     );
                   });
