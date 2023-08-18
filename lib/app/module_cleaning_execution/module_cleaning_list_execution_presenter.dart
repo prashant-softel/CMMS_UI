@@ -21,14 +21,7 @@ class ModuleCleaningListExecutionPresenter {
     );
   }
 
-  Future<void> startMCExecutionButton({
-    int? planId,
-    bool? isLoading,
-  }) async =>
-      await moduleCleaningExecutionPlanUsecase.startMCExecutionButton(
-        planId: planId,
-        isLoading: isLoading ?? false,
-      );
+ 
 
   Future<Map<String, dynamic>?> abandonExecutionButton({
    abandoneJsonString,

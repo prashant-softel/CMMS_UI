@@ -286,6 +286,7 @@ class ModuleCleaningListExecution
                                                     '',
                                                     '',
                                                     '',
+                                                    '',
                                                   ];
                                                 },
                                               ),
@@ -309,6 +310,7 @@ class ModuleCleaningListExecution
                                               "Responsibility",
                                               "Frequency",
                                               "No. Of Days",
+                                              "Water Used",
                                               "Start Date",
                                               "Done Date",
                                               "Status",
@@ -329,6 +331,7 @@ class ModuleCleaningListExecution
                                                   '${controller.mcTaskList[index]!.responsibility}',
                                                   '${controller.mcTaskList[index]!.frequency}',
                                                   '${controller.mcTaskList[index]!.noOfDays}',
+                                                  '${controller.mcTaskList[index]!.water_used}',
                                                   '${controller.mcTaskList[index]!.startDate}',
                                                   '${controller.mcTaskList[index]!.doneDate}',
                                                   '${controller.mcTaskList[index]!.status_short}',
@@ -340,10 +343,21 @@ class ModuleCleaningListExecution
                                                 onTap: () {},
                                                 height: 55,
                                                 cells: record.map((value) {
+                                                   final Map<String, dynamic> dataList = {
+                                                                              'id': int.tryParse('${record[0]}'),
+                                                                              'status': '${record[8]}',
+                                                                              'planId': int.tryParse('${record[1]}')
+                                                                              // {'id': 2, 'name': 'Item 2'},
+                                                                              // {'id': 3, 'name': 'Item 3'},
+                                                                              // {'id': 4, 'name': 'Item 4'},
+                                                                              // {'id': 5, 'name': 'Item 5'},
+                                                   };
                                                   return TableViewCell(
                                                     child: value == "Actions"
                                                         ? Wrap(
                                                             children: [
+
+
                                                               TableActionButton(
                                                                 color: ColorValues
                                                                     .appDarkBlueColor,
@@ -371,7 +385,7 @@ class ModuleCleaningListExecution
                                                                   //     'edit record:${int.tryParse('${record[0]}')}');
                                                                 },
                                                               ),
-                                                              record[7] ==
+                                                              record[8] ==
                                                                       "Abandoned"
                                                                   ? TableActionButton(
                                                                       color: ColorValues
@@ -387,7 +401,7 @@ class ModuleCleaningListExecution
                                                                       },
                                                                     )
                                                                   : Container(),
-                                                              record[7] ==
+                                                              record[8] ==
                                                                       "Scheduled"
                                                                   ? TableActionButton(
                                                                       color: ColorValues
@@ -398,18 +412,15 @@ class ModuleCleaningListExecution
                                                                           'Start',
                                                                       onPress:
                                                                           () {
-                                                                        controller.startMCExecutionButton(
-                                                                            planId:
-                                                                                int.tryParse('${record[1]}'));
-                                                                        // controller.addMCExecution(
-                                                                        //   status: '${record[7]}',
-                                                                        //     planId:int.tryParse('${record[1]}'),
-                                                                            
-                                                                        //     );
+                                                                        // controller.startMCExecutionButton(
+                                                                        //     planId:
+                                                                        //         int.tryParse('${record[1]}'));
+                                                                        // controller.startMCExecution(planId:int.tryParse('${record[1]}'),);
+                                                                        controller.StartEndMCExecution(dataList: dataList);
                                                                       },
                                                                     )
                                                                   : Container(),
-                                                              record[7] ==
+                                                              record[8] ==
                                                                       "Abandoned"
                                                                   ? TableActionButton(
                                                                       color: ColorValues
@@ -420,6 +431,8 @@ class ModuleCleaningListExecution
                                                                           'End',
                                                                       onPress:
                                                                           () {
+                                                                           
+                                                                            controller.StartEndMCExecution(dataList: dataList);
                                                                         // controller
                                                                         //     .editIncidentReport(
                                                                         //         id: int.tryParse(

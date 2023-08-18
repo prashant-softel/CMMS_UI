@@ -1365,6 +1365,17 @@ class DataRepository extends DomainRepository {
         isLoading: isLoading ?? false,
       );
 
+    Future<ResponseModel> endMCExecutionButton({
+    required String auth,
+    endJsonString,
+    bool? isLoading,
+  }) async =>
+      await connectHelper.endMCExecutionButton(
+        auth: auth,
+        endJsonString: endJsonString,
+        isLoading: isLoading ?? false,
+      );
+
   // Future<ResponseModel> getPreventiveCheckList({
   //   required String auth,
   //   int? facilityId,
