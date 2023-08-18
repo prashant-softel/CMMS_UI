@@ -2220,6 +2220,52 @@ class Repository {
   }
 
 
+   ///End MC Execution
+   Future<Map<String, dynamic>> endMCExecutionButton(
+    endJsonString,
+    bool? isLoading,
+  ) async {
+    try {
+      final auth = await getSecuredValue(LocalKeys.authToken);
+      final res = await _dataRepository.endMCExecutionButton(
+        auth: auth,
+        endJsonString: json.encode(endJsonString),
+        isLoading: isLoading ?? false,
+      );
+
+      var resourceData = res.data;
+      // var parsedJson = json.decode(resourceData);
+      print('Response END Execution: ${resourceData}');
+      // Get.dialog(
+      //   CreateNewPermitDialog(
+      //     createPermitData: 'Dialog Title',
+      //     data: parsedJson['message'],
+      //   ),
+      // );
+
+      // data = res.data;
+      //print('Response Create Permit: ${data}');
+
+      if (!res.hasError) {
+        if (res.errorCode == 200) {
+          var responseMap = json.decode(res.data);
+          return responseMap;
+        } else {
+          // Get.dialog<void>(WarrantyClaimErrorDialog());
+        }
+      } else {
+        Utility.showDialog(res.errorCode.toString() + 'endExecutionButton');
+        //return '';
+      }
+      return Map();
+    } catch (error) {
+      print(error.toString());
+      return Map();
+    }
+  }
+
+
+
   Future<void> startMCExecutionButton(
     int? planId,
     bool? isLoading,

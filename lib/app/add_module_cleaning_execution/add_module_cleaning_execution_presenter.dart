@@ -10,15 +10,14 @@ class AddModuleCleaningExecutionPresenter {
 
  
 
-  //  Future<Map<String, dynamic>?> createEscalationMatrix({
-  //   createEscalationMatrix,
-  //   required bool isLoading,
-  // }) async {
-  //   return addModuleCleaningExecutionUsecase.createEscalationMatrix(
-  //     createEscalationMatrix: createEscalationMatrix,
-  //     isLoading: isLoading,
-  //   );
-  // }
+  Future<void> startMCExecutionButton({
+    int? planId,
+    bool? isLoading,
+  }) async =>
+      await addModuleCleaningExecutionUsecase.startMCExecutionButton(
+        planId: planId,
+        isLoading: isLoading ?? false,
+      );
 
    Future<List<TypePermitModel?>?> getTypePermitList(
     {required int facility_id}
@@ -27,7 +26,19 @@ class AddModuleCleaningExecutionPresenter {
         true,
         facility_id
         );
- 
+
+
+  Future<Map<String, dynamic>?> endMCExecutionButton({
+   endJsonString,
+  required bool isLoading,
+    
+  }) async {
+     return addModuleCleaningExecutionUsecase.endMCExecutionButton(
+        endJsonString: endJsonString,
+      isLoading: isLoading,
+      );
+  }
+
   Future<List<FacilityModel?>?> getFacilityList() async =>
       await addModuleCleaningExecutionUsecase.getFacilityList();
 

@@ -2,10 +2,12 @@
 
 import 'package:cmms/app/add_module_cleaning_execution/add_module_cleaning_execution_controller.dart';
 import 'package:cmms/app/app.dart';
+import 'package:cmms/app/navigators/navigators.dart';
 import 'package:cmms/app/widgets/add_module_cleaning_execution_dialog.dart';
 import 'package:cmms/app/widgets/custom_elevated_button.dart';
 import 'package:cmms/app/widgets/custom_richtext.dart';
 import 'package:cmms/app/widgets/custom_textField.dart';
+import 'package:cmms/app/widgets/end_mc_execution_dialog.dart';
 
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -468,7 +470,8 @@ class AddModuleCleaningExecutionContentWeb
                                             CustomElevatedButton(
                                               backgroundColor: Colors.red,
                                               onPressed: () {
-                                                // controller.saveAsDraft();
+                                                 Get.offAndToNamed(
+                                                Routes.moduleCleaningListExecution);
                                               },
                                               text: 'Cancel',
                                             ),
@@ -479,8 +482,8 @@ class AddModuleCleaningExecutionContentWeb
                                               height: 28,
                                               child: CustomElevatedButton(
                                                 backgroundColor:
-                                                    ColorValues.appGreenColor,
-                                                text: "Submit",
+                                                    ColorValues.appLightBlueColor,
+                                                text: "Update",
                                                 onPressed: () {
                                                   // controller
                                                   //     .createEscalationMatrix();
@@ -490,33 +493,37 @@ class AddModuleCleaningExecutionContentWeb
                                              SizedBox(
                                               width: 20,
                                             ),
-                                            Container(
+                                            controller.data['status'] == "Scheduled"
+                                            ?Container(
                                               height: 28,
                                               child: CustomElevatedButton(
                                                 backgroundColor:
                                                     ColorValues.appGreenColor,
                                                 text: "Start",
                                                 onPressed: () {
-                                                  // controller
-                                                  //     .createEscalationMatrix();
+                                                  controller.startMCExecutionButton();
                                                 },
                                               ),
-                                            ),
+                                            )
+                                            :Container(),
+
                                              SizedBox(
                                               width: 20,
                                             ),
-                                            Container(
+
+                                            controller.data['status'] == "Abandoned"
+                                            ?Container(
                                               height: 28,
                                               child: CustomElevatedButton(
                                                 backgroundColor:
                                                     ColorValues.appGreenColor,
                                                 text: "End",
                                                 onPressed: () {
-                                                  // controller
-                                                  //     .createEscalationMatrix();
+                                                 Get.dialog(EndMCExecutionDialog());
                                                 },
                                               ),
-                                            ),
+                                            )
+                                            :Container(),
                                             SizedBox(
                                               width: 20,
                                             ),

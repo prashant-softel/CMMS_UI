@@ -11,6 +11,7 @@ import 'package:cmms/app/widgets/create_escalation_matrix_dialog.dart';
 import 'package:cmms/app/widgets/create_incident_report_dialog.dart';
 import 'package:cmms/app/widgets/create_permit_dialog.dart';
 import 'package:cmms/app/widgets/create_sop_dialog.dart';
+import 'package:cmms/app/widgets/end_mc_execution_message_dialog.dart';
 import 'package:cmms/app/widgets/incident_report_approve_message_dialog.dart';
 import 'package:cmms/app/widgets/incident_report_reject_message_dialog.dart';
 import 'package:cmms/app/widgets/new_warranty_claim_dialog.dart';
@@ -899,6 +900,31 @@ class ConnectHelper {
 
     return responseModel;
   }
+
+///End MC Execution
+   Future<ResponseModel> endMCExecutionButton({
+    required String auth,
+    endJsonString,
+    bool? isLoading,
+  }) async {
+    var responseModel = await apiWrapper.makeRequest(
+      'MC/EndMCScheduleExecution',
+      Request.put,
+      endJsonString,
+      isLoading ?? false,
+      {
+        'Content-Type': 'application/json',
+        'Authorization': 'Bearer $auth',
+      },
+    );
+    print('EndExecutionResponse: ${responseModel.data}');
+    var res = responseModel.data;
+    var parsedJson = json.decode(res);
+    Get.dialog<void>(EndMCExecutionMessageDialog(data: parsedJson['message']));
+
+    return responseModel;
+  }
+
 
 
 

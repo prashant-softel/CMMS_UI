@@ -13,14 +13,25 @@ class AddModuleCleaningExecutionUsecase {
   }
 
    
-  //   Future<Map<String, dynamic>> createEscalationMatrix({
-  //   createEscalationMatrix,
-  //   bool? isLoading,
-  // }) async =>
-  //     await _repository.createEscalationMatrix(
-  //       createEscalationMatrix,
-  //       isLoading,
-  //     );
+  Future<void> startMCExecutionButton({
+   
+    int? planId,
+    bool? isLoading,
+  }) async {
+    await _repository.startMCExecutionButton(
+      planId,
+      isLoading,
+    );
+  }
+
+   Future<Map<String, dynamic>> endMCExecutionButton({
+    endJsonString,
+    bool? isLoading,
+  }) async =>
+      await _repository.endMCExecutionButton(
+        endJsonString,
+        isLoading,
+      );
 
    Future<List<TypePermitModel?>?> getTypePermitList(
     bool? isLoading,
