@@ -2767,5 +2767,28 @@ class DataRepository extends DomainRepository {
     );
     return response;
   }
+
+  Future<ResponseModel> deleteSopType({
+    auth,
+    bool? isLoading,
+    check_point_id,
+  }) async {
+    var response = await connectHelper.deleteSopType(
+        auth: auth, isLoading: isLoading, check_point_id: check_point_id);
+    return response;
+  }
+
+  Future<ResponseModel> updateSop({
+    auth,
+    bool? isLoading,
+    tbtJsonString,
+  }) async {
+    var response = await connectHelper.updateSop(
+      auth: auth,
+      isLoading: isLoading,
+      tbtJsonString: tbtJsonString,
+    );
+    return response;
+  }
 //end
 }

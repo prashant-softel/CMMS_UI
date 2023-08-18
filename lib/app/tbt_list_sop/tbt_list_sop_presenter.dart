@@ -61,7 +61,19 @@ class TBTSOPListPresenter {
     );
   }
 
+  deleteSopType(String? business_id, {required bool isLoading}) async =>
+      await tbtSOPListUsecase.deleteSopType(
+        checklist_id: business_id ?? 0,
+        isLoading: isLoading,
+      );
 
- 
- 
+  Future<bool> updateSop(
+      {tbtJsonString, required bool isLoading}) async {
+    print("presenter");
+    tbtSOPListUsecase.updateSop(
+      tbtJsonString: tbtJsonString,
+      isLoading: isLoading,
+    );
+    return true;
+  }
 }

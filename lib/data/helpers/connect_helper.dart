@@ -4441,5 +4441,42 @@ class ConnectHelper {
 
     return responseModel;
   }
+  Future<ResponseModel> deleteSopType({
+    required String auth,
+    bool? isLoading,
+    required check_point_id,
+  }) async {
+    var responseModel = await apiWrapper.makeRequest(
+      'Permit/DeleteSOP?id=$check_point_id',
+      Request.delete,
+      check_point_id,
+      isLoading ?? false,
+      {
+        'Content-Type': 'application/json',
+        'Authorization': 'Bearer $auth',
+      },
+    );
 
+    return responseModel;
+  }
+
+
+  Future<ResponseModel> updateSop({
+    required String auth,
+    bool? isLoading,
+    required tbtJsonString,
+  }) async {
+    var responseModel = await apiWrapper.makeRequest(
+      'Permit/UpdateSOP',
+      Request.patch,
+      tbtJsonString,
+      isLoading ?? false,
+      {
+        'Content-Type': 'application/json',
+        'Authorization': 'Bearer $auth',
+      },
+    );
+
+    return responseModel;
+  }
 }
