@@ -58,8 +58,7 @@ class GoodsOrdersReqDetailsWeb extends GetView<GoodsOrdersReqDetailController> {
                 child: Text(" / STOCK MANAGEMENT ",
                     style: Styles.greyMediumLight12),
               ),
-              Text(" / Purchase Orders Request Details ",
-                  style: Styles.greyMediumLight12)
+              Text(" / Purchase Goods Orders", style: Styles.greyMediumLight12)
             ],
           ),
         ),
@@ -76,7 +75,7 @@ class GoodsOrdersReqDetailsWeb extends GetView<GoodsOrdersReqDetailController> {
                       Padding(
                         padding: const EdgeInsets.all(10.0),
                         child: Text(
-                          " Purchase Orders Request Details",
+                          " Purchase Goods Orders",
                           style: Styles.blackBold16,
                         ),
                       ),
