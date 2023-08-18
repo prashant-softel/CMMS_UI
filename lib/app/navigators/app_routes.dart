@@ -131,6 +131,7 @@ abstract class Routes {
       _Paths.addModuleCleaningExecutionContentWeb;
   static const viewModuleCleaningExecutionScreen =
       _Paths.viewModuleCleaningExecutionScreen;
+  static const purchaseGoodsorder = _Paths.purchaseGoodsorder;
 }
 
 abstract class _Paths {
@@ -251,6 +252,7 @@ abstract class _Paths {
   static const returnMrsView = '/returnMrsView';
   static const approverReturnMrs = '/approverReturnMrs';
   static const receiveGoodsOrders = '/receiveGoodsOrders';
+  static const purchaseGoodsorder = '/purchaseGoodsorder';
 
   static const addModuleCleaningExecutionContentWeb =
       '/add-module-cleaning-execution';

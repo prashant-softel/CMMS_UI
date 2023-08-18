@@ -46,6 +46,7 @@ import 'package:cmms/domain/models/paiyed_model.dart';
 import 'package:cmms/domain/models/pm_task_model.dart';
 import 'package:cmms/domain/models/pm_task_view_list_model.dart';
 import 'package:cmms/domain/models/preventive_checklist_model.dart';
+import 'package:cmms/domain/models/request_order_list.model.dart';
 import 'package:cmms/domain/models/risk_type_list_model.dart';
 import 'package:cmms/domain/models/safety_measure_list_model.dart';
 import 'package:cmms/domain/models/sop_list_model.dart';
@@ -596,7 +597,7 @@ class Repository {
 
       if (!res.hasError) {
         Fluttertoast.showToast(
-            msg: " Goods Order  req Add Successfully...", fontSize: 16.0);
+            msg: " Purchase Goods Orders Add Successfully...", fontSize: 16.0);
 
         // if (res.errorCode == 200) {
         //   var responseMap = json.decode(res.data);
@@ -820,6 +821,47 @@ class Repository {
             jsonGoodsOrdersListModels
                 .map<GoodsOrdersListModel>((m) =>
                     GoodsOrdersListModel.fromJson(Map<String, dynamic>.from(m)))
+                .toList();
+
+        return _goodOrderModelList;
+      } //
+      else {
+        Utility.showDialog(res.errorCode.toString() + 'getIncidentReportList');
+        return [];
+      }
+    } catch (error) {
+      print(error.toString());
+      return [];
+    }
+  }
+
+  Future<List<GetRequestOrderListModel>> getRequestOrderList({
+    required int? facility_id,
+    String? start_date,
+    required String end_date,
+    required bool isLoading,
+  }) async {
+    try {
+      final auth = await getSecuredValue(LocalKeys.authToken);
+
+      log(auth);
+      final res = await _dataRepository.getRequestOrderList(
+        facility_id: facility_id,
+        start_date: start_date,
+        end_date: end_date,
+        isLoading: isLoading,
+        auth: auth,
+      );
+      print('getGoodsOrdersList: ${res.data}');
+
+      if (!res.hasError) {
+        final jsonGoodsOrdersListModels = jsonDecode(res.data);
+        // print(res.data);
+        final List<GetRequestOrderListModel> _goodOrderModelList =
+            jsonGoodsOrdersListModels
+                .map<GetRequestOrderListModel>((m) =>
+                    GetRequestOrderListModel.fromJson(
+                        Map<String, dynamic>.from(m)))
                 .toList();
 
         return _goodOrderModelList;
@@ -6535,9 +6577,7 @@ class Repository {
     }
   }
 
-
-  Future<bool> createJobType(
-      {bool? isLoading, jobTypeJsonString}) async {
+  Future<bool> createJobType({bool? isLoading, jobTypeJsonString}) async {
     try {
       final auth = await getSecuredValue(LocalKeys.authToken);
       final res = await _dataRepository.createJobType(

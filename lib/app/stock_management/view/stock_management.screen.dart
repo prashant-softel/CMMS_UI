@@ -230,8 +230,14 @@ class StockManagementDashboardScreen
                         _stockManagementList(
                             tittle: "Purchase Orders Request",
                             ontap: () {
-                              Get.offNamed(Routes.GoodsOrdersReqDetailsScreen);
+                              Get.offNamed(Routes.purchaseGoodsorder);
                             }),
+
+                        // _stockManagementList(
+                        //     tittle: "Purchase Orders Request",
+                        //     ontap: () {
+                        //       Get.offNamed(Routes.GoodsOrdersReqDetailsScreen);
+                        //     }),
                       ],
                     ),
                     Container(
