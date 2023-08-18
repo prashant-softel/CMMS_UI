@@ -6689,7 +6689,50 @@ class Repository {
     }
   }
 
+  Future<void> deleteSopType(Object check_point_id, bool isLoading) async {
+    try {
+      final auth = await getSecuredValue(LocalKeys.authToken);
+      final res = await _dataRepository.deleteSopType(
+        auth: auth,
+        check_point_id: check_point_id,
+        isLoading: isLoading,
+      );
 
+      if (!res.hasError) {
+        //get delete response back from API
+      } else {
+        Utility.showDialog(res.errorCode.toString() + 'deleteSopType');
+      }
+    } catch (error) {
+      print(error.toString());
+    }
+  }
+
+
+  Future<bool> updateSop({
+    bool? isLoading,
+    tbtJsonString,
+  }) async {
+    try {
+      final auth = await getSecuredValue(LocalKeys.authToken);
+      final res = await _dataRepository.updateSop(
+        auth: auth,
+        isLoading: isLoading,
+        tbtJsonString: tbtJsonString,
+      );
+      print(res.data);
+      if (!res.hasError) {
+        return true;
+      } //
+      else {
+        Utility.showDialog(res.errorCode.toString() + 'updateSop');
+        return false;
+      }
+    } catch (error) {
+      print(error.toString());
+      return false;
+    }
+  }
   //end
   //end
 }

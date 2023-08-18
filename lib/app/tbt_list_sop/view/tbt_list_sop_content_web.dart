@@ -14,6 +14,8 @@ import 'package:scrollable_table_view/scrollable_table_view.dart';
 import '../../widgets/custom_elevated_button.dart';
 import '../../widgets/custom_richtext.dart';
 import '../../widgets/dropdown_web.dart';
+import 'package:fluttertoast/fluttertoast.dart';
+import 'package:flutter/cupertino.dart';
 
 class TBTSOPListContentWeb extends GetView<TBTSOPListController> {
   TBTSOPListContentWeb({Key? key}) : super(key: key);
@@ -411,9 +413,9 @@ class TBTSOPListContentWeb extends GetView<TBTSOPListController> {
                                                           controller
                                                               .isSuccessDialog();
 
-                                                          //   // Fluttertoast.showToast(
-                                                          //   //     msg: "file upload  Successfully",
-                                                          //   //     fontSize: 16.0);
+                                                            Fluttertoast.showToast(
+                                                                msg: "file upload  Successfully",
+                                                                fontSize: 16.0);
                                                         });
                                                         //  controller.savePmMapping();
                                                       },
@@ -576,20 +578,47 @@ class TBTSOPListContentWeb extends GetView<TBTSOPListController> {
                                         child: CustomElevatedButton(
                                             backgroundColor:
                                                 ColorValues.appRedColor,
-                                            onPressed: () {},
+                                            onPressed: () {
+                                              controller.cleardata();
+                                            },
                                             text: 'Cancel')),
                                     SizedBox(
                                       width: 10,
                                     ),
-                                    Container( height: 40,
-                                        width: (Get.width * .2 - 50),
-                                        child: CustomElevatedButton(
-                                            backgroundColor:
-                                                ColorValues.appDarkBlueColor,
+                                    Container(
+                                        height: 40,
+                                        width: (Get.width * .2) - 70,
+                                        child: controller.selectedItem == null
+                                            ? CustomElevatedButton(
+                                            backgroundColor: ColorValues
+                                                .appDarkBlueColor,
                                             onPressed: () {
-                                              controller.createSOP();
+                                              controller
+                                                  .createSOP()
+                                                  .then((value) {
+                                                print("value,$value");
+                                                if (value == true)
+                                                  controller
+                                                      .issuccessCreatechecklist();
+                                              });
                                             },
-                                            text: 'Submit')),
+                                            text: 'Create SOP List')
+                                            : CustomElevatedButton(
+                                            backgroundColor: ColorValues
+                                                .appDarkBlueColor,
+                                            onPressed: () {
+                                              controller
+                                                  .updateSop(
+                                                  controller
+                                                      .selectedItem?.id)
+                                                  .then((value) {
+                                                print("value,$value");
+                                                if (value == true)
+                                                  controller
+                                                      .issuccessCreatechecklist();
+                                              });
+                                            },
+                                            text: 'Update')),
                                   ],
                                 ),
                               ],
@@ -777,7 +806,12 @@ class TBTSOPListContentWeb extends GetView<TBTSOPListController> {
                                                                           message:
                                                                               'Edit',
                                                                           onPress:
-                                                                              () {},
+                                                                              () {
+                                                                                controller.selectedItem = controller.sopPermitList.firstWhere((element) => "${element.id}" == _permitTypeList[0]);
+
+                                                                                controller.titleTextFieldCtrlr.text = controller.selectedItem?.name ?? '';
+                                                                                controller.descriptionTextFieldCtrlr.text = controller.selectedItem?.description ?? '';
+                                                                              },
                                                                         ),
                                                                         // : Container(),
                                                                         // :Container(),
@@ -792,7 +826,9 @@ class TBTSOPListContentWeb extends GetView<TBTSOPListController> {
                                                                           message:
                                                                               'Delete',
                                                                           onPress:
-                                                                              () {},
+                                                                              () {
+                                                                                controller.isDeleteDialog(business_id: _permitTypeList[0], business: _permitTypeList[1]);
+                                                                              },
                                                                         )
                                                                         // : Container()
                                                                       ])
