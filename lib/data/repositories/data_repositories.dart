@@ -1224,6 +1224,16 @@ class DataRepository extends DomainRepository {
         id: id,
         isLoading: isLoading ?? false,
       );
+  Future<ResponseModel> getRoDetailsByID({
+    required String auth,
+    bool? isLoading,
+    int? requestID,
+  }) async =>
+      await connectHelper.getRoDetailsByID(
+        auth: auth,
+        requestID: requestID,
+        isLoading: isLoading ?? false,
+      );
 
   Future<ResponseModel> getInventoryDetail({
     required String auth,

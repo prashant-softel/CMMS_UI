@@ -2031,6 +2031,24 @@ class ConnectHelper {
     return responseModel;
   }
 
+  Future<ResponseModel> getRoDetailsByID({
+    required String auth,
+    bool? isLoading,
+    int? requestID,
+  }) async {
+    var responseModel = await apiWrapper.makeRequest(
+      "RequestOrder/GetRODetailsByID?requestID=$requestID",
+      Request.get,
+      null,
+      isLoading ?? false,
+      {
+        'Authorization': 'Bearer $auth',
+      },
+    );
+    print('getRoDetailsByID${responseModel.data}');
+    return responseModel;
+  }
+
   Future<ResponseModel> getInventoryDetail({
     required String auth,
     bool? isLoading,
@@ -4522,6 +4540,7 @@ class ConnectHelper {
 
     return responseModel;
   }
+
 
   Future<ResponseModel> getReturnMrsDetails({
     required String? auth,

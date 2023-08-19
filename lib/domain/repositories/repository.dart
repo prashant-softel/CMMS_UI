@@ -47,6 +47,7 @@ import 'package:cmms/domain/models/paiyed_model.dart';
 import 'package:cmms/domain/models/pm_task_model.dart';
 import 'package:cmms/domain/models/pm_task_view_list_model.dart';
 import 'package:cmms/domain/models/preventive_checklist_model.dart';
+import 'package:cmms/domain/models/req_order_details_by_id_model.dart';
 import 'package:cmms/domain/models/request_order_list.model.dart';
 import 'package:cmms/domain/models/risk_type_list_model.dart';
 import 'package:cmms/domain/models/safety_measure_list_model.dart';
@@ -1201,6 +1202,40 @@ class Repository {
     }
   }
 
+  Future<GetRODetailsByIDModel?> getRoDetailsByID({
+    bool? isLoading,
+    int? requestID,
+  }) async {
+    try {
+      final auth = await getSecuredValue(LocalKeys.authToken);
+      final res = await _dataRepository.getRoDetailsByID(
+        auth: auth,
+        requestID: requestID,
+        isLoading: isLoading ?? false,
+      );
+
+      print({"getRoDetailsByID", res.data});
+
+      if (!res.hasError) {
+        if (res.errorCode == 200) {
+          final GetRODetailsByIDModel _getPurchaseDetailsByIDModelFromJson =
+              getRODetailsByIDModelFromJson(res.data);
+
+          var responseMap = _getPurchaseDetailsByIDModelFromJson;
+          print({"getRoDetailsByID", responseMap});
+          return responseMap;
+        }
+      } else {
+        Utility.showDialog(res.errorCode.toString() + 'GetPurchaseDetailsByID');
+        //return '';
+      }
+      return null;
+    } catch (error) {
+      print(error.toString());
+      return null;
+    }
+  }
+
   /// Inventory Details
   Future<InventoryDetailsModel?> getInventoryDetail({
     bool? isLoading,
@@ -2175,9 +2210,8 @@ class Repository {
     }
   }
 
-
   ///Abandon MC Execution
-   Future<Map<String, dynamic>> abandonExecutionButton(
+  Future<Map<String, dynamic>> abandonExecutionButton(
     abandoneJsonString,
     bool? isLoading,
   ) async {
@@ -2220,9 +2254,8 @@ class Repository {
     }
   }
 
-
-   ///End MC Execution
-   Future<Map<String, dynamic>> endMCExecutionButton(
+  ///End MC Execution
+  Future<Map<String, dynamic>> endMCExecutionButton(
     endJsonString,
     bool? isLoading,
   ) async {
@@ -2264,8 +2297,6 @@ class Repository {
       return Map();
     }
   }
-
-
 
   Future<void> startMCExecutionButton(
     int? planId,
@@ -6737,7 +6768,6 @@ class Repository {
     }
   }
 
-
   Future<bool> updateTbt({
     bool? isLoading,
     tbtJsonString,
@@ -6781,7 +6811,6 @@ class Repository {
       print(error.toString());
     }
   }
-
 
   Future<bool> updateSop({
     bool? isLoading,
