@@ -817,5 +817,6 @@ abstract class Styles {
     fontWeight: FontWeight.w400,
     fontSize: Dimens.fourteen,
   );
+
   ///
 }
