@@ -219,7 +219,7 @@ class _PurchaseGoodsorderListWebState extends State<PurchaseGoodsorderListWeb> {
                                         ].map((column) {
                                           return TableViewColumn(
                                             label: column,
-                                            minWidth: Get.width * 0.10,
+                                            minWidth: Get.width * 0.13,
                                           );
                                         }).toList(),
                                         rows: [
@@ -229,6 +229,7 @@ class _PurchaseGoodsorderListWebState extends State<PurchaseGoodsorderListWeb> {
                                                 0,
                                             (index) {
                                               return [
+                                                '',
                                                 '',
                                                 '',
                                                 '',
@@ -283,7 +284,7 @@ class _PurchaseGoodsorderListWebState extends State<PurchaseGoodsorderListWeb> {
                                           ].map((column) {
                                             return TableViewColumn(
                                               label: column,
-                                              minWidth: Get.width * 0.10,
+                                              minWidth: Get.width * 0.13,
                                             );
                                           }).toList(),
                                           rows: [
@@ -297,8 +298,8 @@ class _PurchaseGoodsorderListWebState extends State<PurchaseGoodsorderListWeb> {
                                                   '${controller.goodsOrdersList![index]?.generatedBy}',
                                                   '${controller.goodsOrdersList![index]?.challan_date}',
                                                   '${controller.goodsOrdersList![index]?.cost}',
-                                                  '${controller.goodsOrdersList![index]?.status}    '
-                                                      '${controller.goodsOrdersList![index]?.status_short}',
+                                                  '${controller.goodsOrdersList![index]?.status_short}    ',
+                                                  // '${controller.goodsOrdersList![index]?.status_short}',
                                                   'Action',
                                                 ];
                                               },
@@ -318,23 +319,34 @@ class _PurchaseGoodsorderListWebState extends State<PurchaseGoodsorderListWeb> {
                                                                 .remove_red_eye_outlined,
                                                             message: 'view',
                                                             onPress: () {
-                                                              controller.viewAddGoodsOrdersDetails(
-                                                                  id: int.tryParse(
-                                                                      '${record[0]}'));
-                                                              Get.toNamed(Routes
-                                                                  .viewGoodsOrders);
+                                                              // controller.viewAddGoodsOrdersDetails(
+                                                              //     id: int.tryParse(
+                                                              //         '${record[0]}'));
+                                                              // Get.toNamed(Routes
+                                                              //     .viewGoodsOrders);
                                                             },
                                                           ),
                                                           TableActionButton(
                                                             onPress: () {
-                                                              controller.showAddGoodsOrdersDetails(
-                                                                  id: int.tryParse(
-                                                                      '${record[0]}'));
+                                                              // controller.showAddGoodsOrdersDetails(
+                                                              //     id: int.tryParse(
+                                                              //         '${record[0]}'));
                                                             },
                                                             color: ColorValues
                                                                 .editColor,
                                                             icon: Icons.edit,
                                                             message: 'Edit',
+                                                          ),
+                                                          TableActionButton(
+                                                            color: ColorValues
+                                                                .appGreenColor,
+                                                            icon: Icons.add,
+                                                            message:
+                                                                'Approve/Reject',
+                                                            onPress: () {
+                                                              Get.offNamed(Routes
+                                                                  .purchaseGoodsorderView);
+                                                            },
                                                           ),
                                                           TableActionButton(
                                                             color: ColorValues
