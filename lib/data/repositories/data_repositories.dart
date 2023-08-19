@@ -1203,6 +1203,17 @@ class DataRepository extends DomainRepository {
         isLoading: isLoading ?? false,
       );
 
+   Future<ResponseModel> getMCExecutionDetail({
+    required String auth,
+    bool? isLoading,
+    int? executionId,
+  }) async =>
+      await connectHelper.getMCExecutionDetail(
+        auth: auth,
+        executionId: executionId,
+        isLoading: isLoading ?? false,
+      );
+
   Future<ResponseModel> getIncidentReportDetail({
     required String auth,
     bool? isLoading,

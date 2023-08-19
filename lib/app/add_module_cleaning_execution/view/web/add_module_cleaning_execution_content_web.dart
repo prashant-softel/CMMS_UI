@@ -124,14 +124,14 @@ class AddModuleCleaningExecutionContentWeb
                                                   CrossAxisAlignment.start,
                                               children: [
                                                 Text(
-                                                  ' All Inverter Acid Wash',
+                                                  ' ${controller.mcExecutionDetailsModel.value?.title}',
                                                   style: TextStyle(
                                                       color: Color.fromARGB(
                                                           255, 5, 92, 163)),
                                                 ),
                                                 Dimens.boxHeight15,
                                                 Text(
-                                                  ' Yearly',
+                                                  ' ${controller.mcExecutionDetailsModel.value?.frequency}',
                                                   style: TextStyle(
                                                       color: Color.fromARGB(
                                                           255, 5, 92, 163)),
@@ -155,14 +155,14 @@ class AddModuleCleaningExecutionContentWeb
                                                   CrossAxisAlignment.start,
                                               children: [
                                                 Text(
-                                                  ' Prashant Shethya',
+                                                  ' ${controller.mcExecutionDetailsModel.value?.plannedBy}',
                                                   style: TextStyle(
                                                       color: Color.fromARGB(
                                                           255, 5, 92, 163)),
                                                 ),
                                                 Dimens.boxHeight15,
                                                 Text(
-                                                  ' 05/05/2023',
+                                                  ' ${controller.startedAtDateTimeCtrlrWeb.text}',
                                                   style: TextStyle(
                                                       color: Color.fromARGB(
                                                           255, 5, 92, 163)),
@@ -188,14 +188,14 @@ class AddModuleCleaningExecutionContentWeb
                                                   CrossAxisAlignment.start,
                                               children: [
                                                 Text(
-                                                  ' 16/04/2023 11:00:00',
+                                                  ' ${controller.plannedAtDateTimeCtrlrWeb.text}',
                                                   style: TextStyle(
                                                       color: Color.fromARGB(
                                                           255, 5, 92, 163)),
                                                 ),
                                                 Dimens.boxHeight15,
                                                 Text(
-                                                  ' Sujit Kumar',
+                                                  ' ${controller.mcExecutionDetailsModel.value?.startedBy}',
                                                   style: TextStyle(
                                                       color: Color.fromARGB(
                                                           255, 5, 92, 163)),

@@ -4,13 +4,17 @@ import 'package:cmms/app/add_module_cleaning_execution/add_module_cleaning_execu
 import 'package:cmms/app/app.dart';
 import 'package:cmms/app/navigators/app_pages.dart';
 import 'package:cmms/domain/models/create_escalation_matrix_model.dart';
+import 'package:cmms/domain/models/end_mc_execution_detail_model.dart';
 import 'package:cmms/domain/models/end_mc_execution_model.dart';
+import 'package:cmms/domain/models/inventory_category_model.dart';
+import 'package:cmms/domain/models/inventory_model.dart';
 import 'package:cmms/domain/models/modulelist_model.dart';
 import 'package:cmms/domain/models/paiyed_model.dart';
 import 'package:cmms/domain/models/role_model.dart';
 import 'package:cmms/domain/models/type_permit_model.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:intl/intl.dart';
 import 'package:rxdart/subjects.dart';
 import 'package:scrollable_table_view/scrollable_table_view.dart';
 import '../../domain/models/facility_model.dart';
@@ -58,6 +62,27 @@ class AddModuleCleaningExecutionController extends GetxController {
   Rx<bool> isTypePermit = true.obs;
 
 
+  ///Mc Execution details
+  Rx<EndMCExecutionDetailsModel?> mcExecutionDetailsModel =
+      EndMCExecutionDetailsModel().obs;
+  RxList<EndMCExecutionDetailsModel?>? mcExecutionDetailsList =
+      <EndMCExecutionDetailsModel?>[].obs;
+
+
+///Equipment 
+RxList<InventoryCategoryModel?> equipmentCategoryList =
+      <InventoryCategoryModel>[].obs;
+  RxList<int> selectedEquipmentCategoryIdList = <int>[].obs;
+
+  var equipments = <Equipments>[].obs;
+  RxList<InventoryCategoryModel?> filteredequipmentsList = <InventoryCategoryModel>[].obs;
+
+  ///Date Time
+  var startedAtDateTimeCtrlrWeb = TextEditingController();
+  var plannedAtDateTimeCtrlrWeb = TextEditingController();
+
+  
+
   ///
   TextEditingController remarkTextFieldCtrlr = TextEditingController();
   
@@ -87,6 +112,9 @@ class AddModuleCleaningExecutionController extends GetxController {
     print('Data Id ${data['id']}');
     print('Data Status ${data['status']}');
     print('plan Id:${data['planId']}');
+    print('cleaning Days:${data['cleaningDays']}');
+    print('water Used:${data['waterUsed']}');
+
 
 
     facilityIdStreamSubscription = homeController.facilityId$.listen((event) {
@@ -99,6 +127,16 @@ class AddModuleCleaningExecutionController extends GetxController {
     Future.delayed(Duration(seconds: 1), () {
       getTypePermitList();
     });
+      
+     Future.delayed(Duration(seconds: 1), () {
+      getInventoryCategoryList();
+    });
+
+      if (data['id'] != null) {
+      Future.delayed(Duration(seconds: 1), () {
+        getMCExecutionDetail(executionId: data['id']!);
+      });
+    }
 
     super.onInit();
   }
@@ -129,6 +167,39 @@ class AddModuleCleaningExecutionController extends GetxController {
     }
   }
 
+   Future<void> getInventoryCategoryList({String? facilityId}) async {
+    equipmentCategoryList.value = <InventoryCategoryModel>[];
+    final _equipmentCategoryList =
+        await addModuleCleaningExecutionPresenter.getInventoryCategoryList(
+      isLoading: true,
+    );
+    if (_equipmentCategoryList != null) {
+      for (var equimentCategory in _equipmentCategoryList) {
+        equipmentCategoryList.add(equimentCategory);
+      }
+    }
+  }
+
+  //  void equipmentCategoriesSelected(_selectedEquipmentCategoryIds) {
+  //   selectedEquipmentCategoryIdList.value = <int>[];
+  //   for (var _selectedCategoryId in _selectedEquipmentCategoryIds) {
+  //     selectedEquipmentCategoryIdList.add(_selectedCategoryId);
+  //   }
+  // }
+
+   void equipmentCategoriesSelected(_selectedEquipmentNameIds) {
+    selectedEquipmentCategoryIdList.value = <int>[];
+    filteredequipmentsList.value = <InventoryCategoryModel>[];
+    for (var _selectedNameId in _selectedEquipmentNameIds) {
+      selectedEquipmentCategoryIdList.add(_selectedNameId);
+      InventoryCategoryModel? e = equipmentCategoryList.firstWhere((element) {
+        return element?.id == _selectedNameId;
+      });
+      filteredequipmentsList.add(e);
+    }
+      print({"selectedEquipmentsIdList le":selectedEquipmentCategoryIdList.value.length,"filteredEquipmentsList":filteredequipmentsList.value.length});
+  }
+
 
 
    Future<void> startMCExecutionButton() async {
@@ -146,18 +217,25 @@ class AddModuleCleaningExecutionController extends GetxController {
     {
       String _remark = remarkTextFieldCtrlr.text.trim();
 
+       late List<Equipments> equipments_list = [];
+
+      filteredequipmentsList.forEach((e) {
+        equipments_list.add(Equipments(id: e?.id));
+      });
+
       EndMCExecutionModel endMCModel =
           EndMCExecutionModel(
-            scheduleId:46,
-            executionId:57,
-            cleaningDay:1,
-            waterUsed: 2345,  
+            scheduleId: data['planId'],
+            executionId: data['id'],
+            cleaningDay: data['cleaningDays'],
+            waterUsed: data['waterUsed'],  
             remark: _remark,
-            equipments:[
+            equipments: equipments_list
+            // [
               
-             Equipments(id: 10),
-             Equipments(id: 9)
-             ]
+            //  Equipments(id: 10),
+            //  Equipments(id: 9)
+            //  ]
             );
 
       var endJsonString = endMCModel.toJson();
@@ -172,6 +250,23 @@ class AddModuleCleaningExecutionController extends GetxController {
       }
     }
   }
+
+
+  Future<void> getMCExecutionDetail({required int executionId}) async {
+    // newPermitDetails!.value = <NewPermitListModel>[];
+    mcExecutionDetailsList?.value = <EndMCExecutionDetailsModel>[];
+
+    final _mcExecutionDetails = await addModuleCleaningExecutionPresenter
+        .getMCExecutionDetail(executionId: executionId);
+    print('MC Execution Detail:$_mcExecutionDetails');
+
+    if (_mcExecutionDetails != null) {
+      mcExecutionDetailsModel.value = _mcExecutionDetails;
+      plannedAtDateTimeCtrlrWeb.text = '${DateFormat('yyyy-MM-dd HH:mm:ss').format(DateTime.parse('${mcExecutionDetailsModel.value?.plannedAt}'))}';
+      startedAtDateTimeCtrlrWeb.text = '${DateFormat('yyyy-MM-dd HH:mm:ss').format(DateTime.parse('${mcExecutionDetailsModel.value?.startedAt}'))}';
+    }
+  }
+
 
   void onValueChanged(dynamic list, dynamic value) {
     print('Valuesd:${value}');

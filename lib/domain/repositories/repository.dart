@@ -21,6 +21,7 @@ import 'package:cmms/domain/models/currency_list_model.dart';
 import 'package:cmms/domain/models/employee_list_model.dart';
 import 'package:cmms/domain/models/employee_list_model2.dart';
 import 'package:cmms/domain/models/employee_model.dart';
+import 'package:cmms/domain/models/end_mc_execution_detail_model.dart';
 import 'package:cmms/domain/models/get_asset_data_list_model.dart';
 import 'package:cmms/domain/models/get_asset_items_model.dart';
 import 'package:cmms/domain/models/get_notification_by_userid_model.dart';
@@ -1132,6 +1133,43 @@ class Repository {
       return null;
     }
   }
+
+
+  ///MC Execution Details
+   Future<EndMCExecutionDetailsModel?> getMCExecutionDetail({
+    bool? isLoading,
+    int? executionId,
+  }) async {
+    try {
+      final auth = await getSecuredValue(LocalKeys.authToken);
+      final res = await _dataRepository.getMCExecutionDetail(
+        auth: auth,
+        executionId: executionId,
+        isLoading: isLoading ?? false,
+      );
+
+      print({"MCExecutiondetail", res.data});
+
+      if (!res.hasError) {
+        if (res.errorCode == 200) {
+          final EndMCExecutionDetailsModel _endMCExecutionDetailModel =
+              endMCExecutionDetailsModelFromJson(res.data);
+
+          var responseMap = _endMCExecutionDetailModel;
+          print({"MCExecutionResponseData", responseMap});
+          return responseMap;
+        }
+      } else {
+        Utility.showDialog(res.errorCode.toString() + 'MCExecutionDetail');
+        //return '';
+      }
+      return null;
+    } catch (error) {
+      print(error.toString());
+      return null;
+    }
+  }
+
 
   Future<IncidentReportDetailsModel?> getIncidentReportDetail({
     bool? isLoading,
