@@ -901,8 +901,8 @@ class ConnectHelper {
     return responseModel;
   }
 
-///End MC Execution
-   Future<ResponseModel> endMCExecutionButton({
+  ///End MC Execution
+  Future<ResponseModel> endMCExecutionButton({
     required String auth,
     endJsonString,
     bool? isLoading,
@@ -924,9 +924,6 @@ class ConnectHelper {
 
     return responseModel;
   }
-
-
-
 
   Future<ResponseModel> startMCExecutionButton({
     required String auth,
@@ -2031,6 +2028,24 @@ class ConnectHelper {
       },
     );
     print('ViewgetPurchaseDetailsById1${responseModel.data}');
+    return responseModel;
+  }
+
+  Future<ResponseModel> getRoDetailsByID({
+    required String auth,
+    bool? isLoading,
+    int? requestID,
+  }) async {
+    var responseModel = await apiWrapper.makeRequest(
+      "RequestOrder/GetRODetailsByID?requestID=$requestID",
+      Request.get,
+      null,
+      isLoading ?? false,
+      {
+        'Authorization': 'Bearer $auth',
+      },
+    );
+    print('getRoDetailsByID${responseModel.data}');
     return responseModel;
   }
 
@@ -4487,6 +4502,7 @@ class ConnectHelper {
 
     return responseModel;
   }
+
   Future<ResponseModel> deleteSopType({
     required String auth,
     bool? isLoading,
@@ -4505,7 +4521,6 @@ class ConnectHelper {
 
     return responseModel;
   }
-
 
   Future<ResponseModel> updateSop({
     required String auth,

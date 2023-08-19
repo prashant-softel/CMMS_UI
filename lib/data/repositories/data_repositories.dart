@@ -657,6 +657,7 @@ class DataRepository extends DomainRepository {
         auth: auth, isLoading: isLoading, rejectJsonString: rejectJsonString);
     return response;
   }
+
   Future<ResponseModel> startMCExecutionButton({
     required String auth,
     int? planId,
@@ -1223,6 +1224,16 @@ class DataRepository extends DomainRepository {
         id: id,
         isLoading: isLoading ?? false,
       );
+  Future<ResponseModel> getRoDetailsByID({
+    required String auth,
+    bool? isLoading,
+    int? requestID,
+  }) async =>
+      await connectHelper.getRoDetailsByID(
+        auth: auth,
+        requestID: requestID,
+        isLoading: isLoading ?? false,
+      );
 
   Future<ResponseModel> getInventoryDetail({
     required String auth,
@@ -1381,7 +1392,7 @@ class DataRepository extends DomainRepository {
         isLoading: isLoading ?? false,
       );
 
-    Future<ResponseModel> endMCExecutionButton({
+  Future<ResponseModel> endMCExecutionButton({
     required String auth,
     endJsonString,
     bool? isLoading,
