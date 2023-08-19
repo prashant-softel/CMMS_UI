@@ -80,19 +80,19 @@ class ApproveReturnMrsContentWeb extends GetView<ApproveReturnMrsController> {
                               style: Styles.black17,
                             ),
                             Text(
-                              "${controller.mrsDetailsModel.value?.id ?? ""}",
+                              "${controller.returnMrsDetailsModel.value?.mrs_ID ?? ""}",
                               style: Styles.blue17,
                             ),
-                            Dimens.boxWidth8,
-                            Container(
-                              height: 30,
-                              child: CustomElevatedButton(
-                                backgroundColor: ColorValues.appLightBlueColor,
-                                onPressed: () async {},
-                                text:
-                                    "${controller.mrsDetailsModel.value?.status_short ?? ""}",
-                              ),
-                            ),
+                            // Dimens.boxWidth8,
+                            // Container(
+                            //   height: 30,
+                            //   child: CustomElevatedButton(
+                            //     backgroundColor: ColorValues.appLightBlueColor,
+                            //     onPressed: () async {},
+                            //     text:
+                            //         "${controller.returnMrsDetailsModel.value?.status ?? ""}",
+                            //   ),
+                            // ),
                           ],
                         ),
                       ),
@@ -128,15 +128,15 @@ class ApproveReturnMrsContentWeb extends GetView<ApproveReturnMrsController> {
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
                                 Text(
-                                    controller.mrsDetailsModel.value
-                                            ?.requested_by_name ??
-                                        "",
+                                    // controller.returnMrsDetailsModel.value
+                                    //         ?.requested_by_name ??
+                                    "",
                                     style: Styles.blue17),
                                 Dimens.boxHeight10,
                                 Text(
-                                    controller
-                                            .mrsDetailsModel.value?.activity ??
-                                        "",
+                                    // controller.returnMrsDetailsModel.value
+                                    //         ?.activity ??
+                                    "",
                                     style: Styles.blue17),
                               ],
                             ),
@@ -161,13 +161,13 @@ class ApproveReturnMrsContentWeb extends GetView<ApproveReturnMrsController> {
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
                                 Text(
-                                    controller.mrsDetailsModel.value
-                                            ?.requestd_date ??
+                                    controller.returnMrsDetailsModel.value
+                                            ?.lastmodifieddate ??
                                         "",
                                     style: Styles.blue17),
                                 Dimens.boxHeight10,
                                 Text(
-                                    "${controller.whereUsedType}${controller.mrsDetailsModel.value?.whereUsedTypeId ?? ""}",
+                                    "", // "${controller.whereUsedType}${controller.returnMrsDetailsModel.value?.whereUsedTypeId ?? ""}",
                                     style: Styles.blue17),
                               ],
                             )
@@ -175,7 +175,7 @@ class ApproveReturnMrsContentWeb extends GetView<ApproveReturnMrsController> {
                         ),
                       ),
                       Container(
-                        height: Get.height, //300,
+                        height: 300, //Get.height, //300,
                         margin: Dimens.edgeInsets20,
                         decoration: BoxDecoration(
                           border: Border.all(
@@ -198,7 +198,7 @@ class ApproveReturnMrsContentWeb extends GetView<ApproveReturnMrsController> {
                               child: Row(
                                 children: [
                                   Text(
-                                    //  "${controller.mrsDetailsModel.value!.cmmrsItems!.length - 1.toDouble()}",
+                                    //  "${controller.returnMrsDetailsModel.value!.cmmrsItems!.length - 1.toDouble()}",
                                     "Equipments",
                                     style: Styles.blue700,
                                   ),
@@ -223,23 +223,23 @@ class ApproveReturnMrsContentWeb extends GetView<ApproveReturnMrsController> {
                                   );
                                 }).toList(),
                                 rows: [
-                                  ...List.generate(
-                                    controller.mrsDetailsModel.value!
-                                        .cmmrsItems!.length,
-                                    (index) {
-                                      var equipmentModelListDetails = controller
-                                          .mrsDetailsModel
-                                          .value!
-                                          .cmmrsItems![index];
-                                      return [
-                                        '${equipmentModelListDetails.asset_name}',
-                                        '${equipmentModelListDetails.asset_type}',
-                                        "", //'${equipmentModelListDetails.file_path}',
-                                        '${equipmentModelListDetails.available_qty}',
-                                        '${equipmentModelListDetails.requested_qty}',
-                                      ];
-                                    },
-                                  ),
+                                  // ...List.generate(
+                                  //   controller.returnMrsDetailsModel.value!
+                                  //       .cmmrsItems!.length,
+                                  //   (index) {
+                                  //     var equipmentModelListDetails = controller
+                                  //         .returnMrsDetailsModel
+                                  //         .value!
+                                  //         .cmmrsItems![index];
+                                  //     return [
+                                  //       '${equipmentModelListDetails.asset_name}',
+                                  //       '${equipmentModelListDetails.asset_type}',
+                                  //       "", //'${equipmentModelListDetails.file_path}',
+                                  //       '${equipmentModelListDetails.available_qty}',
+                                  //       '${equipmentModelListDetails.requested_qty}',
+                                  //     ];
+                                  //   },
+                                  // ),
                                 ].map((record) {
                                   return TableViewRow(
                                     height: 50,
@@ -312,7 +312,7 @@ class ApproveReturnMrsContentWeb extends GetView<ApproveReturnMrsController> {
                                 backgroundColor: ColorValues.approveColor,
                                 text: 'Approve',
                                 onPressed: () {
-                                  controller.approveMrs();
+                                  controller.approveReturnMrs();
                                 },
                               ),
                             ),
@@ -325,7 +325,7 @@ class ApproveReturnMrsContentWeb extends GetView<ApproveReturnMrsController> {
                                 backgroundColor: ColorValues.rejectColor,
                                 text: 'Reject',
                                 onPressed: () {
-                                  controller.rejectMrs();
+                                  controller.rejectRetrunMrs();
                                 },
                               ),
                             ),

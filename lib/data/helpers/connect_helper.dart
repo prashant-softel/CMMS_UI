@@ -901,8 +901,8 @@ class ConnectHelper {
     return responseModel;
   }
 
-///End MC Execution
-   Future<ResponseModel> endMCExecutionButton({
+  ///End MC Execution
+  Future<ResponseModel> endMCExecutionButton({
     required String auth,
     endJsonString,
     bool? isLoading,
@@ -924,9 +924,6 @@ class ConnectHelper {
 
     return responseModel;
   }
-
-
-
 
   Future<ResponseModel> startMCExecutionButton({
     required String auth,
@@ -2618,7 +2615,7 @@ class ConnectHelper {
       dynamic startDate,
       dynamic endDate}) async {
     var responseModel = await apiWrapper.makeRequest(
-      'PMScheduleView/GetPMTaskList?facility_id=${facilityId}&start_date=2023-08-22&end_date=2023-08-22',
+      'PMScheduleView/GetPMTaskList?facility_id=${facilityId}&start_date=${endDate}&end_date=${startDate}',
       Request.get,
       null,
       isLoading ?? true,
@@ -4380,7 +4377,7 @@ class ConnectHelper {
       int? facilityId,
       int? userId}) async {
     var responseModel = await apiWrapper.makeRequest(
-      'MRS/GetMRSReturnList?facility_ID=$facilityId&emp_id=$userId',
+      'MRS/GetMRSReturnList?facility_ID=$facilityId&emp_id=2',
       //  'MRS/getMRSList?facility_ID=$facilityId&emp_id=412&fromDate=2023-04-23&toDate=2023-07-7',
       Request.get,
       null,
@@ -4450,6 +4447,25 @@ class ConnectHelper {
     return responseModel;
   }
 
+  Future<ResponseModel> approveReturnMrs({
+    required String auth,
+    bool? isLoading,
+    required approvetoJsonString,
+  }) async {
+    var responseModel = await apiWrapper.makeRequest(
+      'MRS/ApproveMRSReturn',
+      Request.post,
+      approvetoJsonString,
+      isLoading ?? false,
+      {
+        'Content-Type': 'application/json',
+        'Authorization': 'Bearer $auth',
+      },
+    );
+
+    return responseModel;
+  }
+
   Future<ResponseModel> deleteJobType({
     required String auth,
     bool? isLoading,
@@ -4459,6 +4475,25 @@ class ConnectHelper {
       'Permit/DeleteJobType?id=$check_point_id',
       Request.delete,
       check_point_id,
+      isLoading ?? false,
+      {
+        'Content-Type': 'application/json',
+        'Authorization': 'Bearer $auth',
+      },
+    );
+
+    return responseModel;
+  }
+
+  Future<ResponseModel> rejectRetrunMrs({
+    required String auth,
+    bool? isLoading,
+    required rejecttoJsonString,
+  }) async {
+    var responseModel = await apiWrapper.makeRequest(
+      'MRS/RejectMRSReturn',
+      Request.post,
+      rejecttoJsonString,
       isLoading ?? false,
       {
         'Content-Type': 'application/json',
@@ -4487,6 +4522,26 @@ class ConnectHelper {
 
     return responseModel;
   }
+
+  Future<ResponseModel> getReturnMrsDetails({
+    required String? auth,
+    int? mrsId,
+    bool? isLoading,
+  }) async {
+    var responseModel = await apiWrapper.makeRequest(
+      'MRS/getReturnDataByID?ID=$mrsId',
+      Request.get,
+      null,
+      isLoading ?? false,
+      {
+        'Content-Type': 'application/json',
+        'Authorization': 'Bearer $auth',
+      },
+    );
+
+    return responseModel;
+  }
+
   Future<ResponseModel> deleteSopType({
     required String auth,
     bool? isLoading,
@@ -4505,7 +4560,6 @@ class ConnectHelper {
 
     return responseModel;
   }
-
 
   Future<ResponseModel> updateSop({
     required String auth,
