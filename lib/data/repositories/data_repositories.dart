@@ -1381,6 +1381,17 @@ class DataRepository extends DomainRepository {
         isLoading: isLoading ?? false,
       );
 
+    Future<ResponseModel> endMCExecutionButton({
+    required String auth,
+    endJsonString,
+    bool? isLoading,
+  }) async =>
+      await connectHelper.endMCExecutionButton(
+        auth: auth,
+        endJsonString: endJsonString,
+        isLoading: isLoading ?? false,
+      );
+
   // Future<ResponseModel> getPreventiveCheckList({
   //   required String auth,
   //   int? facilityId,
@@ -2775,6 +2786,29 @@ class DataRepository extends DomainRepository {
     tbtJsonString,
   }) async {
     var response = await connectHelper.updateTbt(
+      auth: auth,
+      isLoading: isLoading,
+      tbtJsonString: tbtJsonString,
+    );
+    return response;
+  }
+
+  Future<ResponseModel> deleteSopType({
+    auth,
+    bool? isLoading,
+    check_point_id,
+  }) async {
+    var response = await connectHelper.deleteSopType(
+        auth: auth, isLoading: isLoading, check_point_id: check_point_id);
+    return response;
+  }
+
+  Future<ResponseModel> updateSop({
+    auth,
+    bool? isLoading,
+    tbtJsonString,
+  }) async {
+    var response = await connectHelper.updateSop(
       auth: auth,
       isLoading: isLoading,
       tbtJsonString: tbtJsonString,

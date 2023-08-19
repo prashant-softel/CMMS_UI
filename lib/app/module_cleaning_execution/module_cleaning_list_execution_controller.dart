@@ -68,12 +68,7 @@ class ModuleCleaningListExecutionController extends GetxController {
     }
   }
 
-  Future<void> startMCExecutionButton({int? planId}) async {
-    final _startMCExecutionBtn =
-        await moduleCleaningListExecutionPresenter.startMCExecutionButton(
-      planId: planId,
-    );
-  }
+ 
 
   // Future<void> abandonExecutionButton({int? id}) async {
   //   String _Comment = commentTextFieldCtrlr.text.trim();
@@ -167,10 +162,11 @@ class ModuleCleaningListExecutionController extends GetxController {
     print('Argument$id');
   }
 
-   Future<void> addMCExecution({int? planId, String? status}) async {
-    Get.toNamed(Routes.addModuleCleaningExecutionContentWeb, arguments: status, );
+   
+  Future<void> StartEndMCExecution({Map<String, dynamic>? dataList}) async {
+    Get.toNamed(Routes.addModuleCleaningExecutionContentWeb, arguments: dataList, );
     // Get.toNamed(Routes.addModuleCleaningExecutionContentWeb, arguments: planId,);
 
-    // print('Argument$planId');
+    print('Argument$dataList');
   }
 }

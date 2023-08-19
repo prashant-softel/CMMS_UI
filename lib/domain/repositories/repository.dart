@@ -2220,6 +2220,52 @@ class Repository {
   }
 
 
+   ///End MC Execution
+   Future<Map<String, dynamic>> endMCExecutionButton(
+    endJsonString,
+    bool? isLoading,
+  ) async {
+    try {
+      final auth = await getSecuredValue(LocalKeys.authToken);
+      final res = await _dataRepository.endMCExecutionButton(
+        auth: auth,
+        endJsonString: json.encode(endJsonString),
+        isLoading: isLoading ?? false,
+      );
+
+      var resourceData = res.data;
+      // var parsedJson = json.decode(resourceData);
+      print('Response END Execution: ${resourceData}');
+      // Get.dialog(
+      //   CreateNewPermitDialog(
+      //     createPermitData: 'Dialog Title',
+      //     data: parsedJson['message'],
+      //   ),
+      // );
+
+      // data = res.data;
+      //print('Response Create Permit: ${data}');
+
+      if (!res.hasError) {
+        if (res.errorCode == 200) {
+          var responseMap = json.decode(res.data);
+          return responseMap;
+        } else {
+          // Get.dialog<void>(WarrantyClaimErrorDialog());
+        }
+      } else {
+        Utility.showDialog(res.errorCode.toString() + 'endExecutionButton');
+        //return '';
+      }
+      return Map();
+    } catch (error) {
+      print(error.toString());
+      return Map();
+    }
+  }
+
+
+
   Future<void> startMCExecutionButton(
     int? planId,
     bool? isLoading,
@@ -6643,7 +6689,50 @@ class Repository {
     }
   }
 
+  Future<void> deleteSopType(Object check_point_id, bool isLoading) async {
+    try {
+      final auth = await getSecuredValue(LocalKeys.authToken);
+      final res = await _dataRepository.deleteSopType(
+        auth: auth,
+        check_point_id: check_point_id,
+        isLoading: isLoading,
+      );
 
+      if (!res.hasError) {
+        //get delete response back from API
+      } else {
+        Utility.showDialog(res.errorCode.toString() + 'deleteSopType');
+      }
+    } catch (error) {
+      print(error.toString());
+    }
+  }
+
+
+  Future<bool> updateSop({
+    bool? isLoading,
+    tbtJsonString,
+  }) async {
+    try {
+      final auth = await getSecuredValue(LocalKeys.authToken);
+      final res = await _dataRepository.updateSop(
+        auth: auth,
+        isLoading: isLoading,
+        tbtJsonString: tbtJsonString,
+      );
+      print(res.data);
+      if (!res.hasError) {
+        return true;
+      } //
+      else {
+        Utility.showDialog(res.errorCode.toString() + 'updateSop');
+        return false;
+      }
+    } catch (error) {
+      print(error.toString());
+      return false;
+    }
+  }
   //end
   //end
 }

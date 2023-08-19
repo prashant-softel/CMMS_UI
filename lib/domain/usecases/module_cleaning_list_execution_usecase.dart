@@ -23,16 +23,7 @@ class ModuleCleaningListExecutionUsecase {
     );
   }
 
-    Future<void> startMCExecutionButton({
    
-    int? planId,
-    bool? isLoading,
-  }) async {
-    await repository.startMCExecutionButton(
-      planId,
-      isLoading,
-    );
-  }
 
    Future<Map<String, dynamic>> abandonExecutionButton({
     abandoneJsonString,
