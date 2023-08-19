@@ -421,14 +421,14 @@ class DataRepository extends DomainRepository {
     int? facility_id,
     required bool isLoading,
     required String auth,
-     String? start_date,
+    String? start_date,
     required String end_date,
   }) async {
     return await connectHelper.getMCTaskList(
       isLoading: isLoading,
       auth: auth,
       facility_id: facility_id,
-       start_date: start_date,
+      start_date: start_date,
       end_date: end_date,
     );
   }
@@ -2695,5 +2695,40 @@ class DataRepository extends DomainRepository {
         scheduleId: scheduleId,
         isLoading: isLoading ?? false,
       );
+  Future<ResponseModel> approveReturnMrs({
+    auth,
+    bool? isLoading,
+    approvetoJsonString,
+  }) async {
+    var response = await connectHelper.approveReturnMrs(
+        auth: auth,
+        isLoading: isLoading,
+        approvetoJsonString: approvetoJsonString);
+    return response;
+  }
+
+  Future<ResponseModel> rejectRetrunMrs({
+    auth,
+    bool? isLoading,
+    rejecttoJsonString,
+  }) async {
+    var response = await connectHelper.rejectRetrunMrs(
+        auth: auth,
+        isLoading: isLoading,
+        rejecttoJsonString: rejecttoJsonString);
+    return response;
+  }
+
+  Future<ResponseModel> getReturnMrsDetails({
+    String? auth,
+    int? mrsId,
+    bool? isLoading,
+  }) async {
+    return await connectHelper.getReturnMrsDetails(
+      auth: auth,
+      mrsId: mrsId,
+      isLoading: isLoading,
+    );
+  }
 //end
 }

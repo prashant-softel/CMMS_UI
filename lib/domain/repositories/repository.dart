@@ -26,6 +26,7 @@ import 'package:cmms/domain/models/get_asset_items_model.dart';
 import 'package:cmms/domain/models/get_notification_by_userid_model.dart';
 import 'package:cmms/domain/models/get_notification_model.dart';
 import 'package:cmms/domain/models/get_purchase_details_model.dart';
+import 'package:cmms/domain/models/get_return_mrs_detail.dart';
 import 'package:cmms/domain/models/get_return_mrs_list.dart';
 import 'package:cmms/domain/models/getuser_access_byId_model.dart';
 import 'package:cmms/domain/models/history_model.dart';
@@ -1744,7 +1745,7 @@ class Repository {
   Future<List<MCTaskListModel>> getMCTaskList({
     required int? facility_id,
     required bool isLoading,
-     String? start_date,
+    String? start_date,
     required String end_date,
   }) async {
     try {
@@ -6418,6 +6419,78 @@ class Repository {
       return Map();
     }
   }
-  //end
-  //end
+
+  Future<bool> approveReturnMrs({bool? isLoading, approvetoJsonString}) async {
+    try {
+      final auth = await getSecuredValue(LocalKeys.authToken);
+      log(auth);
+      final res = await _dataRepository.approveReturnMrs(
+          auth: auth,
+          isLoading: isLoading,
+          approvetoJsonString: approvetoJsonString);
+      print({"res.data", res.data});
+      if (!res.hasError) {
+        Fluttertoast.showToast(msg: res.data, fontSize: 45.0);
+
+        return true;
+      } else {
+        Fluttertoast.showToast(msg: res.data, fontSize: 45.0);
+        return false;
+      }
+    } catch (error) {
+      log(error.toString());
+      return false;
+    }
+  }
+
+  Future<bool> rejectRetrunMrs({bool? isLoading, rejecttoJsonString}) async {
+    try {
+      final auth = await getSecuredValue(LocalKeys.authToken);
+      log(auth);
+      final res = await _dataRepository.rejectRetrunMrs(
+          auth: auth,
+          isLoading: isLoading,
+          rejecttoJsonString: rejecttoJsonString);
+      print({"res.data", res.data});
+      if (!res.hasError) {
+        Fluttertoast.showToast(msg: res.data, fontSize: 45.0);
+
+        return true;
+      } else {
+        Fluttertoast.showToast(msg: res.data, fontSize: 45.0);
+        return false;
+      }
+    } catch (error) {
+      log(error.toString());
+      return false;
+    }
+  }
+
+  Future<ReturnMrsDetailsModel?> getReturnMrsDetails(
+    int? mrsId,
+    bool? isLoading,
+  ) async {
+    try {
+      final auth = await getSecuredValue(LocalKeys.authToken);
+      final res = await _dataRepository.getReturnMrsDetails(
+        auth: auth,
+        mrsId: mrsId,
+        isLoading: isLoading,
+      );
+      if (!res.hasError) {
+        final ReturnMrsDetailsModel _returnMrsDetailModel =
+            returnMrsDetailsModelFromJson(res.data);
+        return _returnMrsDetailModel;
+      } //
+      else {
+        Utility.showDialog(res.errorCode.toString() + 'getMrsDetails');
+        return null;
+      }
+    } //
+    catch (error) {
+      print(error.toString());
+      return null;
+    } //end
+    //end
+  }
 }

@@ -534,7 +534,7 @@ class ConnectHelper {
     required bool isLoading,
     required String auth,
     int? facility_id,
-     String? start_date,
+    String? start_date,
     required String end_date,
   }) async {
     var startDateParam = (start_date != null) ? 'start_date=$start_date&' : '';
@@ -543,8 +543,8 @@ class ConnectHelper {
     // var statusParam = 'status=1';
     ResponseModel responseModel = await apiWrapper.makeRequest(
       'MC/GetMCTaskList?facility_id=$facility_id&' +
-      startDateParam +
-      endDateParam,
+          startDateParam +
+          endDateParam,
       Request.getMultiparts,
       null,
       isLoading,
@@ -2209,7 +2209,6 @@ class ConnectHelper {
     );
     print('JobCard Response $responseModel');
     return responseModel;
-    
   }
 
 //
@@ -2497,7 +2496,7 @@ class ConnectHelper {
       dynamic startDate,
       dynamic endDate}) async {
     var responseModel = await apiWrapper.makeRequest(
-      'PMScheduleView/GetPMTaskList?facility_id=${facilityId}&start_date=2023-08-22&end_date=2023-08-22',
+      'PMScheduleView/GetPMTaskList?facility_id=${facilityId}&start_date=${endDate}&end_date=${startDate}',
       Request.get,
       null,
       isLoading ?? true,
@@ -4259,7 +4258,7 @@ class ConnectHelper {
       int? facilityId,
       int? userId}) async {
     var responseModel = await apiWrapper.makeRequest(
-      'MRS/GetMRSReturnList?facility_ID=$facilityId&emp_id=$userId',
+      'MRS/GetMRSReturnList?facility_ID=$facilityId&emp_id=2',
       //  'MRS/getMRSList?facility_ID=$facilityId&emp_id=412&fromDate=2023-04-23&toDate=2023-07-7',
       Request.get,
       null,
@@ -4300,6 +4299,62 @@ class ConnectHelper {
     var responseModel = await apiWrapper.makeRequest(
       'PMScheduleView/SetPMTask?schedule_id=$scheduleId',
       Request.post,
+      null,
+      isLoading ?? false,
+      {
+        'Content-Type': 'application/json',
+        'Authorization': 'Bearer $auth',
+      },
+    );
+    return responseModel;
+  }
+
+  Future<ResponseModel> approveReturnMrs({
+    required String auth,
+    bool? isLoading,
+    required approvetoJsonString,
+  }) async {
+    var responseModel = await apiWrapper.makeRequest(
+      'MRS/ApproveMRSReturn',
+      Request.post,
+      approvetoJsonString,
+      isLoading ?? false,
+      {
+        'Content-Type': 'application/json',
+        'Authorization': 'Bearer $auth',
+      },
+    );
+
+    return responseModel;
+  }
+
+  Future<ResponseModel> rejectRetrunMrs({
+    required String auth,
+    bool? isLoading,
+    required rejecttoJsonString,
+  }) async {
+    var responseModel = await apiWrapper.makeRequest(
+      'MRS/RejectMRSReturn',
+      Request.post,
+      rejecttoJsonString,
+      isLoading ?? false,
+      {
+        'Content-Type': 'application/json',
+        'Authorization': 'Bearer $auth',
+      },
+    );
+
+    return responseModel;
+  }
+
+  Future<ResponseModel> getReturnMrsDetails({
+    required String? auth,
+    int? mrsId,
+    bool? isLoading,
+  }) async {
+    var responseModel = await apiWrapper.makeRequest(
+      'MRS/getReturnDataByID?ID=$mrsId',
+      Request.get,
       null,
       isLoading ?? false,
       {

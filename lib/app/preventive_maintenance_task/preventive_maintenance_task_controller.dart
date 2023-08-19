@@ -109,6 +109,6 @@ class PreventiveMaintenanceTaskController extends GetxController {
   }
 
   void getPmTaskListByDate() {
-    getPmTaskList(facilityId, formattedFromdate, formattedTodate, false);
+    getPmTaskList(facilityId, formattedTodate1, formattedFromdate1, false);
   }
 }

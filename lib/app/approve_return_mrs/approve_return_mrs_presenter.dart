@@ -1,32 +1,33 @@
 import 'package:cmms/domain/models/mrs_detail_model.dart';
+import '../../domain/models/get_return_mrs_detail.dart';
 import '../../domain/usecases/approve_return_mrs_usecase.dart';
 
 class ApproveReturnMrsPresenter {
   ApproveReturnMrsPresenter(this.approveReturnMrsUsecase);
   ApproveReturnMrsUsecase approveReturnMrsUsecase;
-  Future<MrsDetailsModel?> getMrsDetails({
+  Future<ReturnMrsDetailsModel?> getReturnMrsDetails({
     int? mrsId,
     bool? isLoading,
   }) async =>
-      await approveReturnMrsUsecase.getMrsDetails(
+      await approveReturnMrsUsecase.getReturnMrsDetails(
         mrsId: mrsId,
         isLoading: isLoading,
       );
-  Future<bool> approveMrs({
+  Future<bool> approveReturnMrs({
     approvetoJsonString,
     required bool isLoading,
   }) async {
-    return approveReturnMrsUsecase.approveMrs(
+    return approveReturnMrsUsecase.approveReturnMrs(
       approvetoJsonString: approvetoJsonString,
       isLoading: isLoading,
     );
   }
 
-  Future<bool> rejectMrs({
+  Future<bool> rejectRetrunMrs({
     rejecttoJsonString,
     required bool isLoading,
   }) async {
-    return approveReturnMrsUsecase.rejectMrs(
+    return approveReturnMrsUsecase.rejectRetrunMrs(
       rejecttoJsonString: rejecttoJsonString,
       isLoading: isLoading,
     );
