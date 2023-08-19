@@ -1998,6 +1998,26 @@ class ConnectHelper {
     return responseModel;
   }
 
+  ///MC Execution Details
+  Future<ResponseModel> getMCExecutionDetail({
+    required String auth,
+    bool? isLoading,
+    int? executionId,
+  }) async {
+    var responseModel = await apiWrapper.makeRequest(
+      'MC/GetMCExecutionDetails?executionId=$executionId',
+      Request.get,
+      null,
+      isLoading ?? false,
+      {
+        'Authorization': 'Bearer $auth',
+      },
+    );
+    print('MCExecutionResponseModel${responseModel.data}');
+    return responseModel;
+  }
+
+
   Future<ResponseModel> getIncidentReportDetail({
     required String auth,
     bool? isLoading,

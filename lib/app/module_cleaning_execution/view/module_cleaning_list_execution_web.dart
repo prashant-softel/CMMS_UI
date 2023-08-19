@@ -346,7 +346,9 @@ class ModuleCleaningListExecution
                                                    final Map<String, dynamic> dataList = {
                                                                               'id': int.tryParse('${record[0]}'),
                                                                               'status': '${record[8]}',
-                                                                              'planId': int.tryParse('${record[1]}')
+                                                                              'planId': int.tryParse('${record[1]}'),
+                                                                              'cleaningDays': int.tryParse('${record[4]}'),
+                                                                              'waterUsed': int.tryParse('${record[5]}'),
                                                                               // {'id': 2, 'name': 'Item 2'},
                                                                               // {'id': 3, 'name': 'Item 3'},
                                                                               // {'id': 4, 'name': 'Item 4'},
@@ -377,12 +379,8 @@ class ModuleCleaningListExecution
                                                                     Icons.edit,
                                                                 message: 'Edit',
                                                                 onPress: () {
-                                                                  // controller
-                                                                  //     .editIncidentReport(
-                                                                  //         id: int.tryParse(
-                                                                  //             '${record[0]}'));
-                                                                  // print(
-                                                                  //     'edit record:${int.tryParse('${record[0]}')}');
+                                                                controller.StartEndMCExecution(dataList: dataList);
+                                                                  
                                                                 },
                                                               ),
                                                               record[8] ==

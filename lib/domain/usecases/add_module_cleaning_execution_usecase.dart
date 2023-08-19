@@ -1,4 +1,6 @@
 import 'package:cmms/domain/domain.dart';
+import 'package:cmms/domain/models/end_mc_execution_detail_model.dart';
+import 'package:cmms/domain/models/inventory_category_model.dart';
 import 'package:cmms/domain/models/type_permit_model.dart';
 
 import '../models/facility_model.dart';
@@ -41,6 +43,26 @@ class AddModuleCleaningExecutionUsecase {
         isLoading,
         facility_id
         );
+
+   Future<List<InventoryCategoryModel?>?> getInventoryCategoryList({
+    String? auth,
+    int? facilityId,
+    bool? isLoading,
+  }) async =>
+      await _repository.getInventoryCategoryList(
+        auth,
+        facilityId,
+        isLoading,
+      );
+
+  Future<EndMCExecutionDetailsModel?> getMCExecutionDetail({
+    bool? isLoading,  
+    required int executionId,
+  }) async =>
+      await _repository.getMCExecutionDetail(
+        executionId: executionId,
+        isLoading: isLoading ?? false,
+      );
 
 
   Future<List<FacilityModel?>?> getFacilityList() async =>

@@ -1,10 +1,12 @@
 import 'package:cmms/app/add_module_cleaning_execution/add_module_cleaning_execution_controller.dart';
 import 'package:cmms/app/theme/color_values.dart';
+import 'package:cmms/app/widgets/custom_multiselect_dialog_field.dart';
 import 'package:cmms/app/widgets/custom_richtext.dart';
 import 'package:cmms/app/widgets/custom_textField.dart';
 import 'package:cmms/app/widgets/stock_dropdown.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:multi_select_flutter/multi_select_flutter.dart';
 import '../theme/dimens.dart';
 import '../theme/styles.dart';
 // import '../view_incident_report/view_incident_report_controller.dart';
@@ -21,7 +23,7 @@ class AddModuleCleaningExecutionDialog extends GetView {
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.all(Radius.circular(15.0)),
         ),
-        insetPadding: Dimens.edgeInsets10_0_10_0,
+        insetPadding: Dimens.edgeInsets0_0_10_0,
         // contentPadding: EdgeInsets.zero,
         title: Row(
           children: [
@@ -34,19 +36,37 @@ class AddModuleCleaningExecutionDialog extends GetView {
             Row(
               children: [
                 SizedBox(
-                  width: 10,
+                  width: 50,
                 ),
                 CustomRichText(title: 'Type: '),
                 SizedBox(
                   width: 5,
                 ),
                 SizedBox(
-                  width: MediaQuery.of(context).size.width / 7,
-                  child: DropdownWebStock(
-                    dropdownList: controller.typePermitList,
-                    isValueSelected: controller.isTypePermitSelected.value,
-                    selectedValue: controller.selectedTypePermit.value,
-                    onValueChanged: controller.onValueChanged,
+                  width: MediaQuery.of(context).size.width / 5,
+                  child: MultiSelectDialogField(
+                    dialogWidth: 300,
+                    dialogHeight: 400,
+                    // title: 'Select Equipments',
+                    // buttonText: 'Equipment Category',
+                    initialValue:
+                        (controller.selectedEquipmentCategoryIdList.isNotEmpty)
+                            ? controller.selectedEquipmentCategoryIdList
+                            : [],
+                    items: controller.equipmentCategoryList
+                        .map(
+                          (equipmentCategory) => MultiSelectItem(
+                            equipmentCategory?.id,
+                            equipmentCategory?.name ?? '',
+                          ),
+                        )
+                        .toList(),
+                    onConfirm: (selectedOptionsList) => {
+                      controller
+                          .equipmentCategoriesSelected(selectedOptionsList),
+                      print(
+                          'Equipment list ids ${controller.selectedEquipmentCategoryIdList}')
+                    },
                   ),
                 )
               ],
@@ -100,7 +120,7 @@ class AddModuleCleaningExecutionDialog extends GetView {
                   ),
                 ),
               ],
-            )
+            ),
           ],
         ),
         content: Builder(builder: (context) {
@@ -123,7 +143,7 @@ class AddModuleCleaningExecutionDialog extends GetView {
               ],
             ),
             padding: EdgeInsets.only(right: 120, top: 10),
-            height: height / 1.1,
+            height: height / 1.5,
             width: double.infinity,
             child: Column(
               children: [
@@ -151,7 +171,7 @@ class AddModuleCleaningExecutionDialog extends GetView {
                       children: [
                         Dimens.boxWidth10,
                         Container(
-                          height: MediaQuery.of(context).size.height / 1.5,
+                          height: MediaQuery.of(context).size.height / 1.7,
                           width: MediaQuery.of(context).size.width / 1.5,
                           child: SingleChildScrollView(
                             child: Column(
@@ -521,7 +541,36 @@ class AddModuleCleaningExecutionDialog extends GetView {
                                     ),
                                   ],
                                 ),
-                                Dimens.boxHeight10,
+                                Dimens.boxHeight150,
+                                Row(
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  children: [
+                                    Spacer(),
+                                    SizedBox(
+                                      width: 25,
+                                    ),
+                                    ElevatedButton(
+                                      style: Styles.greenElevatedButtonStyle,
+                                      onPressed: () {
+                                        // print('Incident Report Id${incidentReportId![0]}');
+                                        Get.back();
+                                      },
+                                      child: const Text('Save'),
+                                    ),
+                                    SizedBox(
+                                      width: 20,
+                                    ),
+                                    ElevatedButton(
+                                      style: Styles.darkRedElevatedButtonStyle,
+                                      onPressed: () {
+                                        // Get.offAllNamed(Routes.moduleCleaningPlanning);
+                                      },
+                                      child: const Text('Cancel'),
+                                    ),
+                                    Spacer(),
+                                  ],
+                                ),
+                                
                               ],
                             ),
                           ),
@@ -530,34 +579,35 @@ class AddModuleCleaningExecutionDialog extends GetView {
                     ),
                   ],
                 ),
-                Spacer(),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Spacer(),
-                    SizedBox(
-                      width: 25,
-                    ),
-                    ElevatedButton(
-                      style: Styles.greenElevatedButtonStyle,
-                      onPressed: () {
-                        // print('Incident Report Id${incidentReportId![0]}');
-                      },
-                      child: const Text('Save'),
-                    ),
-                    SizedBox(
-                      width: 20,
-                    ),
-                    ElevatedButton(
-                      style: Styles.darkRedElevatedButtonStyle,
-                      onPressed: () {
-                        // Get.offAllNamed(Routes.moduleCleaningPlanning);
-                      },
-                      child: const Text('Cancel'),
-                    ),
-                    Spacer(),
-                  ],
-                ),
+                // Spacer(),
+                // Row(
+                //   mainAxisAlignment: MainAxisAlignment.center,
+                //   children: [
+                //     Spacer(),
+                //     SizedBox(
+                //       width: 25,
+                //     ),
+                //     ElevatedButton(
+                //       style: Styles.greenElevatedButtonStyle,
+                //       onPressed: () {
+                //         // print('Incident Report Id${incidentReportId![0]}');
+                //         Get.back();
+                //       },
+                //       child: const Text('Save'),
+                //     ),
+                //     SizedBox(
+                //       width: 20,
+                //     ),
+                //     ElevatedButton(
+                //       style: Styles.darkRedElevatedButtonStyle,
+                //       onPressed: () {
+                //         // Get.offAllNamed(Routes.moduleCleaningPlanning);
+                //       },
+                //       child: const Text('Cancel'),
+                //     ),
+                //     Spacer(),
+                //   ],
+                // ),
               ],
             ),
           );
