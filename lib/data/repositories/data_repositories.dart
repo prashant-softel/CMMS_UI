@@ -2771,6 +2771,42 @@ class DataRepository extends DomainRepository {
         scheduleId: scheduleId,
         isLoading: isLoading ?? false,
       );
+  Future<ResponseModel> approveReturnMrs({
+    auth,
+    bool? isLoading,
+    approvetoJsonString,
+  }) async {
+    var response = await connectHelper.approveReturnMrs(
+        auth: auth,
+        isLoading: isLoading,
+        approvetoJsonString: approvetoJsonString);
+    return response;
+  }
+
+  Future<ResponseModel> rejectRetrunMrs({
+    auth,
+    bool? isLoading,
+    rejecttoJsonString,
+  }) async {
+    var response = await connectHelper.rejectRetrunMrs(
+        auth: auth,
+        isLoading: isLoading,
+        rejecttoJsonString: rejecttoJsonString);
+    return response;
+  }
+
+  Future<ResponseModel> getReturnMrsDetails({
+    String? auth,
+    int? mrsId,
+    bool? isLoading,
+  }) async {
+    return await connectHelper.getReturnMrsDetails(
+      auth: auth,
+      mrsId: mrsId,
+      isLoading: isLoading,
+    );
+  }
+
   Future<ResponseModel> createJobType({
     auth,
     bool? isLoading,

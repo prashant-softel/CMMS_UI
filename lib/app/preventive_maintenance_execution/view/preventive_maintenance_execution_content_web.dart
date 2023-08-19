@@ -366,21 +366,24 @@ class PreventiveMaintenanceExecutionContentWeb
                                     ),
                                     child: Padding(
                                       padding: const EdgeInsets.all(8.0),
-                                      child: Row(
-                                        mainAxisAlignment:
-                                            MainAxisAlignment.spaceBetween,
-                                        children: [
-                                          Text("Return Items",
-                                              style: Styles.blue700),
-                                          InkWell(
-                                            child:
-                                                Icon(Icons.arrow_forward_ios),
-                                            onTap: () {
-                                              //action code when clicked
-                                              print("The icon is clicked");
-                                            },
-                                          )
-                                        ],
+                                      child: InkWell(
+                                        onTap: () {
+                                          Get.toNamed(Routes.createMrs,
+                                              arguments: controller
+                                                      .pmtaskViewModel
+                                                      .value
+                                                      ?.id ??
+                                                  0);
+                                        },
+                                        child: Row(
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.spaceBetween,
+                                          children: [
+                                            Text("Return Items",
+                                                style: Styles.blue700),
+                                            Icon(Icons.arrow_forward_ios),
+                                          ],
+                                        ),
                                       ),
                                     ),
                                   ),
@@ -410,7 +413,7 @@ class PreventiveMaintenanceExecutionContentWeb
                                           mainAxisAlignment:
                                               MainAxisAlignment.spaceBetween,
                                           children: [
-                                            Text("Request From Store",
+                                            Text("Request From Store1",
                                                 style: Styles.blue700),
                                             Icon(Icons.arrow_forward_ios),
                                           ],
@@ -495,7 +498,7 @@ class PreventiveMaintenanceExecutionContentWeb
                                                     // [
                                                   ].map((record) {
                                                     return TableViewRow(
-                                                      height: 90,
+                                                      height: 50,
                                                       cells:
                                                           record.map((value) {
                                                         return TableViewCell(
@@ -581,8 +584,8 @@ class PreventiveMaintenanceExecutionContentWeb
                                                     ? 'Start'
                                                     : "Close",
                                             onPressed: () {
-                                              controller.toggleTouch();
-                                              //  controller.savePmMapping();
+                                              // controller.toggleTouch();
+                                              controller.closePmExecution();
                                             },
                                           ),
                                         ),

@@ -475,7 +475,7 @@ class PreventiveMaintenanceTaskViewContentWeb
             child: Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                controller.pmtaskViewModel.value?.status == 163
+                controller.pmtaskViewModel.value?.status == 161
                     ? Container(
                         height: 35,
                         child: CustomElevatedButton(
@@ -489,7 +489,7 @@ class PreventiveMaintenanceTaskViewContentWeb
                           },
                         ),
                       )
-                    : controller.pmtaskViewModel.value?.status == 164
+                    : controller.pmtaskViewModel.value?.status == 162
                         ? Container(
                             height: 35,
                             child: CustomElevatedButton(

@@ -1,27 +1,28 @@
+import 'package:cmms/domain/models/get_return_mrs_detail.dart';
 import 'package:cmms/domain/models/mrs_detail_model.dart';
 import 'package:cmms/domain/repositories/repository.dart';
 
 class ApproveReturnMrsUsecase {
   ApproveReturnMrsUsecase(this.repository);
   Repository repository;
-  Future<MrsDetailsModel?> getMrsDetails({
+  Future<ReturnMrsDetailsModel?> getReturnMrsDetails({
     int? mrsId,
     bool? isLoading,
   }) async =>
-      await repository.getMrsDetails(
+      await repository.getReturnMrsDetails(
         mrsId,
         isLoading,
       );
-  Future<bool> approveMrs({
+  Future<bool> approveReturnMrs({
     approvetoJsonString,
     bool? isLoading,
   }) async =>
-      await repository.approveMrs(
+      await repository.approveReturnMrs(
           approvetoJsonString: approvetoJsonString, isLoading: isLoading);
-  Future<bool> rejectMrs({
+  Future<bool> rejectRetrunMrs({
     rejecttoJsonString,
     bool? isLoading,
   }) async =>
-      await repository.rejectMrs(
+      await repository.rejectRetrunMrs(
           rejecttoJsonString: rejecttoJsonString, isLoading: isLoading);
 }

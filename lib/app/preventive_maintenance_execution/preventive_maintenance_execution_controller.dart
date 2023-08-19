@@ -35,6 +35,8 @@ class PreventiveMaintenanceExecutionController extends GetxController {
   RxList<String> scheduleCheckPointsTableColumns = <String>[].obs;
   RxList<HistoryLog?>? historyLog = <HistoryLog?>[].obs;
   HistoryLog? historyLogModel;
+  var commentCtrlr = TextEditingController();
+
   @override
   void onInit() async {
     try {
@@ -189,5 +191,22 @@ class PreventiveMaintenanceExecutionController extends GetxController {
       }),
       actions: [],
     ));
+  }
+
+  closePmExecution() async {
+    // String _comment = commentCtrlr.text.trim();
+
+    // CommentModel commentCalibrationModel =
+    //     CommentModel(id: int.tryParse(scheduleId.value), comment: _comment);
+
+    // var approveCalibrationtoJsonString = commentCalibrationModel.toJson();
+    // print({"rejectCalibrationJsonString", approveCalibrationtoJsonString});
+    // final response = await calibrationListPresenter.approveCloseCalibration(
+    //   approveCalibrationtoJsonString: approveCalibrationtoJsonString,
+    //   isLoading: true,
+    // );
+    // if (response == true) {
+    //   getCalibrationList(facilityId, true);
+    // }
   }
 }
