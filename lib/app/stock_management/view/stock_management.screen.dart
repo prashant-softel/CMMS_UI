@@ -102,13 +102,13 @@ class StockManagementDashboardScreen
                             ),
                             SizedBox(
                                 width:
-                                10), // Add some space between the text and the line
+                                    10), // Add some space between the text and the line
                             Expanded(
                               child: Divider(
                                 color: Colors
                                     .grey, // Customize the color of the line if needed
                                 height:
-                                1, // Adjust the height of the line if needed
+                                    1, // Adjust the height of the line if needed
                               ),
                             ),
                           ],
@@ -141,6 +141,16 @@ class StockManagementDashboardScreen
                               );
                               controller.checkPoint();
                             }),
+                        _stockManagementList(
+                            tittle: "Receive Goods Order ",
+                            ontap: () {
+                              Get.toNamed(
+                                Routes.receiveGoodsOrders,
+                              );
+
+                              // controller.receiveGoodsOrders();
+                            }),
+
                         // _stockManagementList(
                         //     tittle: "MRS List",
                         //     ontap: () {
@@ -220,11 +230,16 @@ class StockManagementDashboardScreen
                         _stockManagementList(
                             tittle: "Purchase Orders Request",
                             ontap: () {
-                              Get.offNamed(Routes.GoodsOrdersReqDetailsScreen);
+                              Get.offNamed(Routes.purchaseGoodsorder);
                             }),
+
+                        // _stockManagementList(
+                        //     tittle: "Purchase Orders Request",
+                        //     ontap: () {
+                        //       Get.offNamed(Routes.GoodsOrdersReqDetailsScreen);
+                        //     }),
                       ],
                     ),
-
                     Container(
                       margin: EdgeInsets.only(left: 20),
                       child: Row(
@@ -239,18 +254,17 @@ class StockManagementDashboardScreen
                           ),
                           SizedBox(
                               width:
-                              10), // Add some space between the text and the line
+                                  10), // Add some space between the text and the line
                           Expanded(
                             child: Divider(
                               color: Colors
                                   .grey, // Customize the color of the line if needed
                               height:
-                              1, // Adjust the height of the line if needed
+                                  1, // Adjust the height of the line if needed
                             ),
                           ),
                         ],
                       ),
-
                     ),
                     GridView.count(
                       shrinkWrap: true,

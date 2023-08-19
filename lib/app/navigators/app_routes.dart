@@ -126,8 +126,13 @@ abstract class Routes {
   static const changePassword = _Paths.changePassword;
   static const returnMrsView = _Paths.returnMrsView;
   static const approverReturnMrs = _Paths.approverReturnMrs;
-  static const addModuleCleaningExecutionContentWeb = _Paths.addModuleCleaningExecutionContentWeb;
-  static const viewModuleCleaningExecutionScreen = _Paths.viewModuleCleaningExecutionScreen;
+  static const receiveGoodsOrders = _Paths.receiveGoodsOrders;
+  static const addModuleCleaningExecutionContentWeb =
+      _Paths.addModuleCleaningExecutionContentWeb;
+  static const viewModuleCleaningExecutionScreen =
+      _Paths.viewModuleCleaningExecutionScreen;
+  static const purchaseGoodsorder = _Paths.purchaseGoodsorder;
+  static const purchaseGoodsorderView = _Paths.purchaseGoodsorderView;
 }
 
 abstract class _Paths {
@@ -247,9 +252,14 @@ abstract class _Paths {
   static const changePassword = '/changePassword';
   static const returnMrsView = '/returnMrsView';
   static const approverReturnMrs = '/approverReturnMrs';
-  static const addModuleCleaningExecutionContentWeb = '/add-module-cleaning-execution';
-  static const viewModuleCleaningExecutionScreen = '/view-module-cleaning-execution';
-  
+  static const receiveGoodsOrders = '/receiveGoodsOrders';
+  static const purchaseGoodsorder = '/purchaseGoodsorder';
+  static const purchaseGoodsorderView = '/purchaseGoodsorderView';
+
+  static const addModuleCleaningExecutionContentWeb =
+      '/add-module-cleaning-execution';
+  static const viewModuleCleaningExecutionScreen =
+      '/view-module-cleaning-execution';
 
 // static const editPermitWebScreen = '/edit-permit-web-screen';
 }

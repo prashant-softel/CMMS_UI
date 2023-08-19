@@ -14,11 +14,13 @@ class JobListUsecase {
   Future<List<JobModel?>?> getJobList({
     required String auth,
     int? facilityId,
+    bool? self_view,
     bool? isLoading,
   }) async =>
       await repository.getJobList(
         auth,
         facilityId,
+        self_view,
         isLoading,
       );
 }

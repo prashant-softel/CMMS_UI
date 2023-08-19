@@ -14,6 +14,8 @@ import 'package:scrollable_table_view/scrollable_table_view.dart';
 import '../../widgets/custom_elevated_button.dart';
 import '../../widgets/custom_richtext.dart';
 import '../../widgets/dropdown_web.dart';
+import 'package:fluttertoast/fluttertoast.dart';
+import 'package:flutter/cupertino.dart';
 
 class TBTSOPListContentWeb extends GetView<TBTSOPListController> {
   TBTSOPListContentWeb({Key? key}) : super(key: key);
@@ -58,7 +60,7 @@ class TBTSOPListContentWeb extends GetView<TBTSOPListController> {
                     onTap: () {
                       Get.back();
                     },
-                    child: Text(" / Masters", style: Styles.greyMediumLight12),
+                    child: Text(" / MASTERS", style: Styles.greyMediumLight12),
                   ),
                   Text(" / TBT SOP List", style: Styles.greyMediumLight12)
                 ],
@@ -73,7 +75,7 @@ class TBTSOPListContentWeb extends GetView<TBTSOPListController> {
                               .length >
                           0
                       ? Container(
-                          width: (Get.width * .303),
+                          width: (Get.width * .403),
                           margin: EdgeInsets.only(left: 30, top: 10),
                           height: Get.height / 1.2,
                           child: Card(
@@ -100,104 +102,110 @@ class TBTSOPListContentWeb extends GetView<TBTSOPListController> {
                                         SizedBox(
                                           height: 10,
                                         ),
-                                        Padding(
-                                          padding:
-                                              const EdgeInsets.only(left: 15),
-                                          child: CustomRichText(
-                                              title: 'TBT Type: '),
-                                        ),
-                                        SizedBox(
-                                          height: 5,
-                                        ),
-                                        SizedBox(
-                                          height: MediaQuery.of(context)
-                                                  .size
-                                                  .height *
-                                              0.040,
-                                          width: MediaQuery.of(context)
-                                                  .size
-                                                  .width /
-                                              2,
-
-                                          child: Obx(
-                                            () => DropdownWebWidget(
-                                              boxShadow: [
-                                                BoxShadow(
-                                                  color: Colors.black26,
-                                                  offset: const Offset(
-                                                    5.0,
-                                                    5.0,
-                                                  ),
-                                                  blurRadius: 5.0,
-                                                  spreadRadius: 1.0,
-                                                ),
-                                                BoxShadow(
-                                                  color: ColorValues.whiteColor,
-                                                  offset:
-                                                      const Offset(0.0, 0.0),
-                                                  blurRadius: 0.0,
-                                                  spreadRadius: 0.0,
-                                                ),
-                                              ],
-                                              dropdownList:
-                                                  controller.jobTypeList,
-                                              isValueSelected: controller
-                                                  .isJobTypeListSelected.value,
-                                              selectedValue: controller
-                                                  .selectedJobType.value,
-                                              onValueChanged:
-                                                  controller.onValueChanged,
+                                        Row(
+                                          mainAxisAlignment:
+                                          MainAxisAlignment.spaceBetween,
+                                          children: [
+                                            Expanded(
+                                              child: CustomRichText(
+                                                  title: 'TBT Type: '),
                                             ),
-                                          ),
+                                            Expanded(
+                                              child: SizedBox(
+                                                height: MediaQuery.of(context)
+                                                    .size
+                                                    .height *
+                                                    0.040,
+                                                width: MediaQuery.of(context)
+                                                    .size
+                                                    .width /
+                                                    2,
 
-                                          // LoginCustomTextfield(),
+                                                child: Obx(
+                                                      () => DropdownWebWidget(
+                                                    boxShadow: [
+                                                      BoxShadow(
+                                                        color: Colors.black26,
+                                                        offset: const Offset(
+                                                          5.0,
+                                                          5.0,
+                                                        ),
+                                                        blurRadius: 5.0,
+                                                        spreadRadius: 1.0,
+                                                      ),
+                                                      BoxShadow(
+                                                        color: ColorValues.whiteColor,
+                                                        offset:
+                                                        const Offset(0.0, 0.0),
+                                                        blurRadius: 0.0,
+                                                        spreadRadius: 0.0,
+                                                      ),
+                                                    ],
+                                                    dropdownList:
+                                                    controller.jobTypeList,
+                                                    isValueSelected: controller
+                                                        .isJobTypeListSelected.value,
+                                                    selectedValue: controller
+                                                        .selectedJobType.value,
+                                                    onValueChanged:
+                                                    controller.onValueChanged,
+                                                  ),
+                                                ),
+
+                                                // LoginCustomTextfield(),
+                                              ),
+                                            ),
+                                          ],
                                         ),
+
                                         SizedBox(
                                           height: 10,
                                         ),
 
-                                        Padding(
-                                          padding:
-                                              const EdgeInsets.only(left: 15),
-                                          child:
-                                              CustomRichText(title: 'Title '),
-                                        ),
-                                        Padding(
-                                          padding: const EdgeInsets.only(
-                                              left: 15, right: 15),
-                                          child: Container(
-                                              decoration: BoxDecoration(
-                                                boxShadow: [
-                                                  BoxShadow(
-                                                    color: Colors.black26,
-                                                    offset: const Offset(
-                                                      5.0,
-                                                      5.0,
-                                                    ),
-                                                    blurRadius: 5.0,
-                                                    spreadRadius: 1.0,
-                                                  ),
-                                                  BoxShadow(
-                                                    color:
+                                        Row(
+                                          mainAxisAlignment:
+                                          MainAxisAlignment.spaceBetween,
+                                          children: [
+                                            Expanded(
+                                              child:
+                                                  CustomRichText(title: 'Title '),
+                                            ),
+                                            Expanded(
+                                              child: Container(
+                                                  decoration: BoxDecoration(
+                                                    boxShadow: [
+                                                      BoxShadow(
+                                                        color: Colors.black26,
+                                                        offset: const Offset(
+                                                          5.0,
+                                                          5.0,
+                                                        ),
+                                                        blurRadius: 5.0,
+                                                        spreadRadius: 1.0,
+                                                      ),
+                                                      BoxShadow(
+                                                        color:
                                                         ColorValues.whiteColor,
-                                                    offset:
+                                                        offset:
                                                         const Offset(0.0, 0.0),
-                                                    blurRadius: 0.0,
-                                                    spreadRadius: 0.0,
-                                                  ),
-                                                ],
-                                                color: ColorValues.whiteColor,
-                                                borderRadius:
+                                                        blurRadius: 0.0,
+                                                        spreadRadius: 0.0,
+                                                      ),
+                                                    ],
+                                                    color: ColorValues.whiteColor,
+                                                    borderRadius:
                                                     BorderRadius.circular(5),
-                                              ),
-                                              width: MediaQuery.of(context)
+                                                  ),
+                                                  width: MediaQuery.of(context)
                                                       .size
                                                       .width /
-                                                  2,
-                                              child: LoginCustomTextfield(
-                                                textController: controller
-                                                    .titleTextFieldCtrlr,
-                                              )),
+                                                      2,
+                                                  child: LoginCustomTextfield(
+                                                    textController: controller
+                                                        .titleTextFieldCtrlr,
+                                                  )),
+                                            ),
+                                          ],
                                         ),
                                         SizedBox(
                                           height: 10,
@@ -244,303 +252,301 @@ class TBTSOPListContentWeb extends GetView<TBTSOPListController> {
                                         // SizedBox(
                                         //   height: 10,
                                         // ),
-                                        Padding(
-                                          padding:
-                                              const EdgeInsets.only(left: 15),
-                                          child: CustomRichText(
-                                              title: 'Description '),
-                                        ),
-                                        Padding(
-                                          padding: const EdgeInsets.only(
-                                              left: 15, right: 15),
-                                          child: Container(
-                                              decoration: BoxDecoration(
-                                                boxShadow: [
-                                                  BoxShadow(
-                                                    color: Colors.black26,
-                                                    offset: const Offset(
-                                                      5.0,
-                                                      5.0,
-                                                    ),
-                                                    blurRadius: 5.0,
-                                                    spreadRadius: 1.0,
-                                                  ),
-                                                  BoxShadow(
-                                                    color:
+                                        Row(
+                                          mainAxisAlignment:
+                                          MainAxisAlignment.spaceBetween,
+                                          children: [
+                                            Expanded(
+                                              child: CustomRichText(
+                                                  title: 'Description '),
+                                            ),
+                                            Expanded(
+                                              child: Container(
+                                                  decoration: BoxDecoration(
+                                                    boxShadow: [
+                                                      BoxShadow(
+                                                        color: Colors.black26,
+                                                        offset: const Offset(
+                                                          5.0,
+                                                          5.0,
+                                                        ),
+                                                        blurRadius: 5.0,
+                                                        spreadRadius: 1.0,
+                                                      ),
+                                                      BoxShadow(
+                                                        color:
                                                         ColorValues.whiteColor,
-                                                    offset:
+                                                        offset:
                                                         const Offset(0.0, 0.0),
-                                                    blurRadius: 0.0,
-                                                    spreadRadius: 0.0,
-                                                  ),
-                                                ],
-                                                color: ColorValues.whiteColor,
-                                                borderRadius:
+                                                        blurRadius: 0.0,
+                                                        spreadRadius: 0.0,
+                                                      ),
+                                                    ],
+                                                    color: ColorValues.whiteColor,
+                                                    borderRadius:
                                                     BorderRadius.circular(5),
-                                              ),
-                                              width: MediaQuery.of(context)
+                                                  ),
+                                                  width: MediaQuery.of(context)
                                                       .size
                                                       .width /
-                                                  2,
-                                              child: LoginCustomTextfield(
-                                                textController: controller
-                                                    .descriptionTextFieldCtrlr,
-                                              )),
+                                                      2,
+                                                  child: LoginCustomTextfield(
+                                                    textController: controller
+                                                        .descriptionTextFieldCtrlr,
+                                                  )),
+                                            ),
+                                          ],
                                         ),
                                         SizedBox(
                                           height: 10,
                                         ),
-                                        Padding(
-                                          padding:
-                                              const EdgeInsets.only(left: 15),
-                                          child: CustomRichText(
-                                            title: 'View JSA File ',
-                                          ),
-                                        ),
-                                        SizedBox(
-                                          height: 5,
-                                        ),
-                                        Padding(
-                                          padding: const EdgeInsets.only(
-                                              left: 15, right: 15),
-                                          child: Row(
-                                            mainAxisAlignment:
+                                        Row(
+                                          mainAxisAlignment:
+                                          MainAxisAlignment.start,
+                                          children: [
+                                            Expanded(
+                                              child: CustomRichText(
+                                                title: 'View JSA File ',
+                                              ),
+                                            ),
+
+                                              Row(
+                                                mainAxisAlignment:
                                                 MainAxisAlignment.start,
-                                            children: [
-                                              Container(
-                                                height: 45,
-                                                width: MediaQuery.of(context)
+                                                children: [
+                                                  Container(
+                                                    height: 45,
+                                                    width: MediaQuery.of(context)
                                                         .size
                                                         .width /
-                                                    7.1,
-                                                decoration: BoxDecoration(
-                                                  border: Border.all(
-                                                    color: Color.fromARGB(
-                                                        255, 227, 224, 224),
-                                                    width: 1,
-                                                  ),
-                                                  boxShadow: [
-                                                    BoxShadow(
-                                                      color: Color.fromARGB(255,
+                                                        7.1,
+                                                    decoration: BoxDecoration(
+                                                      border: Border.all(
+                                                        color: Color.fromARGB(
+                                                            255, 227, 224, 224),
+                                                        width: 1,
+                                                      ),
+                                                      boxShadow: [
+                                                        BoxShadow(
+                                                          color: Color.fromARGB(255,
                                                               236, 234, 234)
-                                                          .withOpacity(0.5),
-                                                      spreadRadius: 2,
-                                                      blurRadius: 5,
-                                                      offset: Offset(0, 2),
+                                                              .withOpacity(0.5),
+                                                          spreadRadius: 2,
+                                                          blurRadius: 5,
+                                                          offset: Offset(0, 2),
+                                                        ),
+                                                      ],
                                                     ),
-                                                  ],
-                                                ),
-                                                child: Padding(
-                                                  padding:
+                                                    child: Padding(
+                                                      padding:
                                                       const EdgeInsets.all(8.0),
-                                                  child: Align(
-                                                    alignment:
+                                                      child: Align(
+                                                        alignment:
                                                         Alignment.topLeft,
-                                                    child: Text(
-                                                      controller.fileName
-                                                                  .value ==
+                                                        child: Text(
+                                                          controller.fileName
+                                                              .value ==
                                                               ""
-                                                          ? 'File Name'
-                                                          : controller
+                                                              ? 'File Name'
+                                                              : controller
                                                               .fileName.value,
-                                                      maxLines: 3,
-                                                      textAlign:
+                                                          maxLines: 3,
+                                                          textAlign:
                                                           TextAlign.center,
-                                                      style: Styles.greyLight14,
+                                                          style: Styles.greyLight14,
+                                                        ),
+                                                      ),
                                                     ),
                                                   ),
-                                                ),
-                                              ),
-                                              Dimens.boxWidth5,
-                                              Container(
-                                                height: 35,
-                                                width: 77,
-                                                child: CustomElevatedButton(
-                                                  backgroundColor: ColorValues
-                                                      .appDarkBlueColor,
-                                                  text: "Browse",
-                                                  // style: TextStyle(fontSize: 8),
-                                                  size: 12,
-                                                  onPressed: () async {
-                                                    final result =
+                                                  Dimens.boxWidth5,
+                                                  Container(
+                                                    height: 35,
+                                                    width: 77,
+                                                    child: CustomElevatedButton(
+                                                      backgroundColor: ColorValues
+                                                          .appDarkBlueColor,
+                                                      text: "Browse",
+                                                      // style: TextStyle(fontSize: 8),
+                                                      size: 12,
+                                                      onPressed: () async {
+                                                        final result =
                                                         await FilePicker
                                                             .platform
                                                             .pickFiles();
-                                                    if (result != null) {
-                                                      // for (var file in result.files) {
-                                                      controller
+                                                        if (result != null) {
+                                                          // for (var file in result.files) {
+                                                          controller
                                                               .fileName.value =
-                                                          result.files.single
-                                                              .name;
-                                                      controller.fileBytes =
-                                                          result.files.single
-                                                              .bytes;
-                                                      //controller.filePath.value = file.;
-                                                      print({
-                                                        "filepathes",
-                                                        controller
-                                                            .fileName.value
-                                                      });
-                                                      // }
-                                                    }
-                                                  },
-                                                ),
-                                              ),
-                                              Dimens.boxWidth5,
-                                              Container(
-                                                height: 35,
-                                                width: 77,
-                                                child: CustomElevatedButton(
-                                                  backgroundColor:
+                                                              result.files.single
+                                                                  .name;
+                                                          controller.fileBytes =
+                                                              result.files.single
+                                                                  .bytes;
+                                                          //controller.filePath.value = file.;
+                                                          print({
+                                                            "filepathes",
+                                                            controller
+                                                                .fileName.value
+                                                          });
+                                                          // }
+                                                        }
+                                                      },
+                                                    ),
+                                                  ),
+                                                  Dimens.boxWidth5,
+                                                  Container(
+                                                    height: 35,
+                                                    width: 77,
+                                                    child: CustomElevatedButton(
+                                                      backgroundColor:
                                                       ColorValues.greenColor,
-                                                  text: 'Upload',
-                                                  size: 12,
-                                                  onPressed: () {
-                                                    controller
-                                                        .browseFiles(
+                                                      text: 'Upload',
+                                                      size: 12,
+                                                      onPressed: () {
+                                                        controller
+                                                            .browseFiles(
                                                             fileBytes:
-                                                                controller
-                                                                    .fileBytes,
+                                                            controller
+                                                                .fileBytes,
                                                             position: 0)
-                                                        .then((value) {
-                                                      controller
-                                                          .isSuccessDialog();
+                                                            .then((value) {
+                                                          controller
+                                                              .isSuccessDialog();
 
-                                                      //   // Fluttertoast.showToast(
-                                                      //   //     msg: "file upload  Successfully",
-                                                      //   //     fontSize: 16.0);
-                                                    });
-                                                    //  controller.savePmMapping();
-                                                  },
-                                                ),
+                                                            Fluttertoast.showToast(
+                                                                msg: "file upload  Successfully",
+                                                                fontSize: 16.0);
+                                                        });
+                                                        //  controller.savePmMapping();
+                                                      },
+                                                    ),
+                                                  ),
+                                                ],
                                               ),
-                                            ],
-                                          ),
+
+                                          ],
                                         ),
                                         SizedBox(
                                           height: 10,
                                         ),
-                                        Padding(
-                                          padding:
-                                              const EdgeInsets.only(left: 15),
-                                          child: CustomRichText(
-                                            title: 'View SOP File ',
-                                          ),
-                                        ),
-                                        SizedBox(
-                                          height: 5,
-                                        ),
-                                        Padding(
-                                          padding: const EdgeInsets.only(
-                                              left: 15, right: 15),
-                                          child: Row(
-                                            mainAxisAlignment:
+                                        Row(
+                                          mainAxisAlignment:
+                                          MainAxisAlignment.start,
+                                          children: [
+                                            Expanded(
+                                              child: CustomRichText(
+                                                title: 'View SOP File ',
+                                              ),
+                                            ),
+                                            Row(
+                                                mainAxisAlignment:
                                                 MainAxisAlignment.start,
-                                            children: [
-                                              Container(
-                                                height: 45,
-                                                width: MediaQuery.of(context)
+                                                children: [
+                                                  Container(
+                                                    height: 45,
+                                                    width: MediaQuery.of(context)
                                                         .size
                                                         .width /
-                                                    7.1,
-                                                decoration: BoxDecoration(
-                                                  border: Border.all(
-                                                    color: Color.fromARGB(
-                                                        255, 227, 224, 224),
-                                                    width: 1,
-                                                  ),
-                                                  boxShadow: [
-                                                    BoxShadow(
-                                                      color: Color.fromARGB(255,
+                                                        7.1,
+                                                    decoration: BoxDecoration(
+                                                      border: Border.all(
+                                                        color: Color.fromARGB(
+                                                            255, 227, 224, 224),
+                                                        width: 1,
+                                                      ),
+                                                      boxShadow: [
+                                                        BoxShadow(
+                                                          color: Color.fromARGB(255,
                                                               236, 234, 234)
-                                                          .withOpacity(0.5),
-                                                      spreadRadius: 2,
-                                                      blurRadius: 5,
-                                                      offset: Offset(0, 2),
+                                                              .withOpacity(0.5),
+                                                          spreadRadius: 2,
+                                                          blurRadius: 5,
+                                                          offset: Offset(0, 2),
+                                                        ),
+                                                      ],
                                                     ),
-                                                  ],
-                                                ),
-                                                child: Padding(
-                                                  padding:
+                                                    child: Padding(
+                                                      padding:
                                                       const EdgeInsets.all(8.0),
-                                                  child: Align(
-                                                    alignment:
+                                                      child: Align(
+                                                        alignment:
                                                         Alignment.topLeft,
-                                                    child: Text(
-                                                      controller.fileName2
-                                                                  .value ==
+                                                        child: Text(
+                                                          controller.fileName2
+                                                              .value ==
                                                               ""
-                                                          ? 'File Name'
-                                                          : controller
+                                                              ? 'File Name'
+                                                              : controller
                                                               .fileName2.value,
-                                                      maxLines: 3,
-                                                      textAlign:
+                                                          maxLines: 3,
+                                                          textAlign:
                                                           TextAlign.center,
-                                                      style: Styles.greyLight14,
+                                                          style: Styles.greyLight14,
+                                                        ),
+                                                      ),
                                                     ),
                                                   ),
-                                                ),
-                                              ),
-                                              Dimens.boxWidth5,
-                                              Container(
-                                                height: 35,
-                                                width: 77,
-                                                child: CustomElevatedButton(
-                                                  backgroundColor: ColorValues
-                                                      .appDarkBlueColor,
-                                                  text: "Browse",
-                                                  size: 12,
-                                                  onPressed: () async {
-                                                    final result =
+                                                  Dimens.boxWidth5,
+                                                  Container(
+                                                    height: 35,
+                                                    width: 77,
+                                                    child: CustomElevatedButton(
+                                                      backgroundColor: ColorValues
+                                                          .appDarkBlueColor,
+                                                      text: "Browse",
+                                                      size: 12,
+                                                      onPressed: () async {
+                                                        final result =
                                                         await FilePicker
                                                             .platform
                                                             .pickFiles();
-                                                    if (result != null) {
-                                                      // for (var file in result.files) {
-                                                      controller
+                                                        if (result != null) {
+                                                          // for (var file in result.files) {
+                                                          controller
                                                               .fileName2.value =
-                                                          result.files.single
-                                                              .name;
-                                                      controller.fileBytes2 =
-                                                          result.files.single
-                                                              .bytes;
-                                                      //controller.filePath.value = file.;
-                                                      //  print({"filepathes", fileBytes});
-                                                      // }
-                                                    }
-                                                  },
-                                                ),
-                                              ),
-                                              Dimens.boxWidth5,
-                                              Container(
-                                                height: 35,
-                                                width: 77,
-                                                child: CustomElevatedButton(
-                                                  backgroundColor:
+                                                              result.files.single
+                                                                  .name;
+                                                          controller.fileBytes2 =
+                                                              result.files.single
+                                                                  .bytes;
+                                                          //controller.filePath.value = file.;
+                                                          //  print({"filepathes", fileBytes});
+                                                          // }
+                                                        }
+                                                      },
+                                                    ),
+                                                  ),
+                                                  Dimens.boxWidth5,
+                                                  Container(
+                                                    height: 35,
+                                                    width: 77,
+                                                    child: CustomElevatedButton(
+                                                      backgroundColor:
                                                       ColorValues.greenColor,
-                                                  text: 'Upload',
-                                                  size: 12,
-                                                  onPressed: () {
-                                                    controller
-                                                        .browseFiles(
+                                                      text: 'Upload',
+                                                      size: 12,
+                                                      onPressed: () {
+                                                        controller
+                                                            .browseFiles(
                                                             fileBytes:
-                                                                controller
-                                                                    .fileBytes2,
+                                                            controller
+                                                                .fileBytes2,
                                                             position: 1)
-                                                        .then((value) {
-                                                      controller
-                                                          .isSuccessDialog2();
+                                                            .then((value) {
+                                                          controller
+                                                              .isSuccessDialog2();
 
-                                                      //   // Fluttertoast.showToast(
-                                                      //   //     msg: "file upload  Successfully",
-                                                      //   //     fontSize: 16.0);
-                                                    });
-                                                    //  controller.savePmMapping();
-                                                  },
-                                                ),
+                                                          //   // Fluttertoast.showToast(
+                                                          //   //     msg: "file upload  Successfully",
+                                                          //   //     fontSize: 16.0);
+                                                        });
+                                                        //  controller.savePmMapping();
+                                                      },
+                                                    ),
+                                                  ),
+                                                ],
                                               ),
-                                            ],
-                                          ),
+                                          ],
                                         ),
                                         // Row(
                                         //   children: [
@@ -567,24 +573,52 @@ class TBTSOPListContentWeb extends GetView<TBTSOPListController> {
                                   mainAxisAlignment: MainAxisAlignment.center,
                                   children: [
                                     Container(
-                                        width: (Get.width * .07),
+                                        height: 40,
+                                        width: (Get.width * .1),
                                         child: CustomElevatedButton(
                                             backgroundColor:
                                                 ColorValues.appRedColor,
-                                            onPressed: () {},
+                                            onPressed: () {
+                                              controller.cleardata();
+                                            },
                                             text: 'Cancel')),
                                     SizedBox(
                                       width: 10,
                                     ),
                                     Container(
-                                        width: (Get.width * .15) - 50,
-                                        child: CustomElevatedButton(
-                                            backgroundColor:
-                                                ColorValues.appDarkBlueColor,
+                                        height: 40,
+                                        width: (Get.width * .2) - 70,
+                                        child: controller.selectedItem == null
+                                            ? CustomElevatedButton(
+                                            backgroundColor: ColorValues
+                                                .appDarkBlueColor,
                                             onPressed: () {
-                                              controller.createSOP();
+                                              controller
+                                                  .createSOP()
+                                                  .then((value) {
+                                                print("value,$value");
+                                                if (value == true)
+                                                  controller
+                                                      .issuccessCreatechecklist();
+                                              });
                                             },
-                                            text: 'Submit')),
+                                            text: 'Create SOP List')
+                                            : CustomElevatedButton(
+                                            backgroundColor: ColorValues
+                                                .appDarkBlueColor,
+                                            onPressed: () {
+                                              controller
+                                                  .updateSop(
+                                                  controller
+                                                      .selectedItem?.id)
+                                                  .then((value) {
+                                                print("value,$value");
+                                                if (value == true)
+                                                  controller
+                                                      .issuccessCreatechecklist();
+                                              });
+                                            },
+                                            text: 'Update')),
                                   ],
                                 ),
                               ],
@@ -772,7 +806,12 @@ class TBTSOPListContentWeb extends GetView<TBTSOPListController> {
                                                                           message:
                                                                               'Edit',
                                                                           onPress:
-                                                                              () {},
+                                                                              () {
+                                                                                controller.selectedItem = controller.sopPermitList.firstWhere((element) => "${element.id}" == _permitTypeList[0]);
+
+                                                                                controller.titleTextFieldCtrlr.text = controller.selectedItem?.name ?? '';
+                                                                                controller.descriptionTextFieldCtrlr.text = controller.selectedItem?.description ?? '';
+                                                                              },
                                                                         ),
                                                                         // : Container(),
                                                                         // :Container(),
@@ -787,7 +826,9 @@ class TBTSOPListContentWeb extends GetView<TBTSOPListController> {
                                                                           message:
                                                                               'Delete',
                                                                           onPress:
-                                                                              () {},
+                                                                              () {
+                                                                                controller.isDeleteDialog(business_id: _permitTypeList[0], business: _permitTypeList[1]);
+                                                                              },
                                                                         )
                                                                         // : Container()
                                                                       ])

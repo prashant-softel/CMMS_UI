@@ -71,7 +71,7 @@ class PermitTypeContentWeb extends GetView<PermitTypeController> {
                               .length >
                           0
                       ? Container(
-                          width: (Get.width * .25),
+                          width: (Get.width * .3),
                           margin: EdgeInsets.only(left: 10, top: 30),
                           height: Get.height / 2.4,
                           child: Card(
@@ -125,9 +125,8 @@ class PermitTypeContentWeb extends GetView<PermitTypeController> {
                                               MainAxisAlignment.spaceBetween,
                                           children: [
                                             Expanded(
-                                              child: Text(
-                                                "Facility: ",
-                                                style: Styles.blackBold16,
+                                              child: CustomRichText(
+                                                 title: "Facility: ",
                                               ),
                                             ),
                                             Expanded(
@@ -183,9 +182,8 @@ class PermitTypeContentWeb extends GetView<PermitTypeController> {
                                               MainAxisAlignment.spaceBetween,
                                           children: [
                                             Expanded(
-                                              child: Text(
-                                                "Title: ",
-                                                style: Styles.blackBold16,
+                                              child: CustomRichText(
+                                                title: "Title:",
                                               ),
                                             ),
                                             Expanded(
@@ -236,9 +234,9 @@ class PermitTypeContentWeb extends GetView<PermitTypeController> {
                                               MainAxisAlignment.spaceBetween,
                                           children: [
                                             Expanded(
-                                              child: Text(
-                                                "Description ",
-                                                style: Styles.blackBold16,
+                                              child: CustomRichText(
+                                                title:"Description ",
+                                                // style: Styles.blackBold16,
                                               ),
                                             ),
                                             Expanded(
@@ -298,7 +296,9 @@ class PermitTypeContentWeb extends GetView<PermitTypeController> {
                                         child: CustomElevatedButton(
                                             backgroundColor:
                                                 ColorValues.appRedColor,
-                                            onPressed: () {},
+                                            onPressed: () {
+                                              controller.cleardata();
+                                            },
                                             text: 'Cancel')),
                                     SizedBox(
                                       width: 10,

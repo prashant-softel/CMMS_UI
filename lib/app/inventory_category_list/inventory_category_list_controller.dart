@@ -183,10 +183,10 @@ class InventoryCategoryListController extends GetxController {
 
 
 
-    await {_cleardata()};
+    await {cleardata()};
   }
 
-  _cleardata() {
+  cleardata() {
     nameCtrlr.text = '';
     // durationCtrlr.text = '';
     descriptionCtrlr.text = '';

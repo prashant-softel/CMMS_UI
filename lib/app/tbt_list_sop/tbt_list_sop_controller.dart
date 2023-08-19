@@ -12,11 +12,13 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:get/get.dart';
 import 'package:rxdart/subjects.dart';
 import 'package:scrollable_table_view/scrollable_table_view.dart';
 import '../../domain/models/frequency_model.dart';
 import '../../domain/models/inventory_category_model.dart';
+import '../../domain/models/update_sop_model.dart';
 
 
 class TBTSOPListController extends GetxController {
@@ -67,6 +69,7 @@ class TBTSOPListController extends GetxController {
   StreamSubscription<int>? facilityIdStreamSubscription;
 
 
+  SOPListModel? selectedItem;
 
   ///SOP Permit List
   RxList<SOPListModel> sopPermitList = <SOPListModel>[].obs;
@@ -122,9 +125,9 @@ class TBTSOPListController extends GetxController {
        Future.delayed(Duration(seconds: 1), () {
         getJobTypePermitList();
       });
-      Future.delayed(Duration(seconds: 1), () {
-        getSopPermitList();
-      });
+      // Future.delayed(Duration(seconds: 1), () {
+      //   getSopPermitList(selectedJobTypesId);
+      // });
       
       
     });
@@ -133,12 +136,12 @@ class TBTSOPListController extends GetxController {
   }
 
 
-  Future<void> getSopPermitList() async {
+  Future<void> getSopPermitList(selectedJobTypesId) async {
     sopPermitList.value = <SOPListModel>[];
     final _sopPermitList = await tbtSOPListPresenter.getSopPermitList(
       isLoading: true,
       // categoryIds: categoryIds,
-      job_type_id: selectedJobSOPId,
+      job_type_id: selectedJobTypesId,
       // job_type_id: 36,
 
     );
@@ -149,6 +152,7 @@ class TBTSOPListController extends GetxController {
         sopPermitList.add(sopPermit_list);
       }
       // selectedSopPermit.value = _sopPermitList[0].name ?? '';
+      // selectedSopPermit.value = sopPermitList[0].name!;
 
     }
 
@@ -170,15 +174,15 @@ class TBTSOPListController extends GetxController {
     for (var jobType_list in _jobTypeList) {
       jobTypeList.add(jobType_list);
     }
-      // selectedJobType.value = jobTypeList[0].name ?? '';
-
-    // getSopPermitList();
+      selectedJobType.value = jobTypeList[0].name ?? '';
+      selectedJobTypesId = jobTypeList[0].id ?? 0;
+    getSopPermitList(selectedJobTypesId);
     // supplierNameList = _supplierNameList;
     // jobListPaginationController = PaginationController(
     //   rowCount: jobTypeList.length,
     //   rowsPerPage: 10,
     // );
-    update(['job_Type_list']);
+    // update(['job_Type_list']);
   }
 
 
@@ -280,40 +284,46 @@ class TBTSOPListController extends GetxController {
 
 
 ///Create SOP
-   void createSOP() async {
-    {
-      // checkForm();
-      // if (isFormInvalid.value) {
-      //   return;
-      // }
-      String _title = htmlEscape.convert(titleTextFieldCtrlr.text.trim());
-      String _description = htmlEscape.convert(descriptionTextFieldCtrlr.text.trim());
+  Future<bool>  createSOP() async {
 
-      // int? sopFileId = createSOPModel2.sop_fileId;
-      // // int? jsaFileId = data.jsa_fileId;
-      // print('SOPFileId:$sopFileId');
-      
-      CreateSOPModel createSOPModel = CreateSOPModel(
-        title: _title,
-        description: _description,
-        tbt_jobType: selectedJobSOPId,
-        sop_fileId: sopFileId,
-        sop_file_desc: "PM Document",
-        jsa_fileId: jsaFileId
-      );
-      var sopJsonString = createSOPModel.toJson();
-      Map<String, dynamic>? responseSopCreate =
-          await tbtSOPListPresenter.createSOP(
-        createSop: sopJsonString,
-        isLoading: true,
-      );
-    
-      if (responseSopCreate != null) {
-        //  CreateNewPermitDialog();
-        // showAlertDialog();
+      if (titleTextFieldCtrlr.text.trim() == '' ||
+          descriptionTextFieldCtrlr.text.trim() == '') {
+        Fluttertoast.showToast(
+            msg: "Please enter required field", fontSize: 16.0);
+      } else {
+        String _title = htmlEscape.convert(titleTextFieldCtrlr.text.trim());
+        String _description = htmlEscape.convert(
+            descriptionTextFieldCtrlr.text.trim());
+
+        // int? sopFileId = createSOPModel2.sop_fileId;
+        // // int? jsaFileId = data.jsa_fileId;
+        // print('SOPFileId:$sopFileId');
+
+        CreateSOPModel createSOPModel = CreateSOPModel(
+            title: _title,
+            description: _description,
+            tbt_jobType: selectedJobTypesId,
+            tbt_remarks: "PM Document",
+            sop_fileId: 225,
+            sop_file_desc: "PM Document",
+            jsa_fileId: 220
+
+
+        );
+        var sopJsonString = createSOPModel.toJson();
+        Map<String, dynamic>? responseSopCreate =
+        await tbtSOPListPresenter.createSOP(
+          createSop: sopJsonString,
+          isLoading: true,
+        );
+
+
+        return true;
       }
-      print('Create SOP data: $sopJsonString');
-    }
+
+      getSopPermitList(selectedJobTypesId);
+      return true;
+
   }
 
 
@@ -348,9 +358,13 @@ class TBTSOPListController extends GetxController {
          case RxList<JobTypeListModel>:
         {
           int jobTypeListIndex = jobTypeList.indexWhere((x) => x.name == value);
-          selectedJobSOPId = jobTypeList[jobTypeListIndex].id ?? 0;
-          print('TBT_JobType:$selectedJobSOPId');
-          getSopPermitList();
+          int jobIds = 0;
+          if(jobTypeListIndex>=0){
+            jobIds = jobTypeList[jobTypeListIndex].id ?? 0;
+          }
+          selectedJobTypesId = jobIds;
+          print('TBT_JobType:$selectedJobTypesId');
+          getSopPermitList(selectedJobTypesId);
           //}
         }
         break;
@@ -366,22 +380,119 @@ class TBTSOPListController extends GetxController {
 
   Future<void> issuccessCreatechecklist() async {
     isSuccess.toggle();
-    await {_cleardata()};
+    await {cleardata()};
   }
 
-  _cleardata() {
+  cleardata() {
     // checklistNumberCtrlr.text = '';
-    // durationCtrlr.text = '';
-    // manpowerCtrlr.text = '';
-
+    titleTextFieldCtrlr.text = '';
+    descriptionTextFieldCtrlr.text = '';
+    selectedItem = null;
     // selectedequipment.value = '';
 
     // selectedfrequency.value = '';
-    // Future.delayed(Duration(seconds: 1), () {
-    //   getPreventiveCheckList(facilityId, type, true);
-    // });
-    // Future.delayed(Duration(seconds: 5), () {
-    //   isSuccess.value = false;
-    // });
+    Future.delayed(Duration(seconds: 1), () {
+
+      // getPreventiveCheckList(facilityId, type, true);
+      getSopPermitList(selectedJobTypesId);
+    });
+
+    Future.delayed(Duration(seconds: 5), () {
+      isSuccess.value = false;
+    });
+  }
+  void isDeleteDialog({
+    String? business_id ,
+    String? business
+  }) {
+    Get.dialog(
+      AlertDialog(
+        content: Column(mainAxisSize: MainAxisSize.min, children: [
+          Icon(Icons.delete, size: 35, color: ColorValues.redColor),
+
+          SizedBox(
+            height: 10,
+          ),
+          RichText(
+            text: TextSpan(
+                text: 'Are you sure you want to delete the TBT Type ',
+                style: Styles.blackBold16,
+                children: [
+                  TextSpan(
+                    text: business,
+                    style: TextStyle(
+                      color: ColorValues.orangeColor,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
+                ]),
+          ),
+        ]),
+        actions: [
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+            children: [
+              TextButton(
+                onPressed: () {
+                  Get.back();
+                },
+                child: Text('NO'),
+              ),
+              TextButton(
+                onPressed: () {
+                  deleteSopType(business_id).then((value) {
+                    Get.back();      getSopPermitList(selectedJobTypesId);
+
+                  });
+                },
+                child: Text('YES'),
+              ),
+            ],
+          )
+        ],
+      ),
+    );
+  }
+  Future<void> deleteSopType(String? business_id) async {
+    {
+      await tbtSOPListPresenter.deleteSopType(
+        business_id,
+        isLoading: true,
+      );
+    }
+  }
+
+
+  Future<bool> updateSop(checklistId) async {
+
+    String _title = htmlEscape.convert(titleTextFieldCtrlr.text.trim());
+    String _description = htmlEscape.convert(descriptionTextFieldCtrlr.text.trim());
+    // "id": 314,
+    // "title": "BM Document",
+    // "description": "BM Document",
+    // "tbt_jobType": 47,
+    // "tbt_remarks": "BM Document",
+    // "sop_fileId": 225,
+    // "sop_file_desc": "BM Document",
+    // "jsa_fileId": 220
+    UpdateSOPModel createTbt = UpdateSOPModel(
+        id: checklistId,
+        title: _title,
+        description: _description,
+        tbt_jobType: selectedJobTypesId,
+        tbt_remarks: "PM Document",
+        sop_fileId: 225,
+        sop_file_desc: "PM Document",
+        jsa_fileId: 220
+    );
+    var updateSop =
+    createTbt.toJson();
+
+    print({"updateTbt", updateSop});
+    await tbtSOPListPresenter.updateSop(
+      tbtJsonString: updateSop,
+      isLoading: true,
+    );
+    return true;
   }
 }

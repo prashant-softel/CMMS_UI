@@ -64,7 +64,7 @@ class PermitTypeController extends GetxController {
   var descriptionCtrlr = TextEditingController();
   int selectedEquipmentId = 0;
   int selectedfrequencyId = 0;
-  int selectedFacilityId = 0;
+  int? selectedFacilityId = 0;
   final isSuccess = false.obs;
   StreamSubscription<int>? facilityIdStreamSubscription;
 
@@ -153,12 +153,13 @@ class PermitTypeController extends GetxController {
       ),
     );
   }
-  Future<void> deletePermitType(String? checklist_id) async {
+  Future<void> deletePermitType(String? permit_id) async {
     {
       await permitTypePresenter.deletePermitType(
-        checklist_id,
+        permit_id,
         isLoading: true,
       );
+      getTypePermitList(true, selectedFacilityId!);
     }
   }
 
@@ -171,7 +172,8 @@ class PermitTypeController extends GetxController {
       }
 
       selectedFacility.value = facilityList[0]?.name ?? '';
-      _facilityId.sink.add(facilityList[0]?.id ?? 0);
+      selectedFacilityId = facilityList[0]?.id;
+      getTypePermitList(true, selectedFacilityId!);
     }
   }
 
@@ -192,33 +194,35 @@ class PermitTypeController extends GetxController {
       rowCount: typePermitList.length,
       rowsPerPage: 10,
     );
-
-    selectedFacility.value = '';
   }
 
 
   void onValueChanged(dynamic list, dynamic value) {
     switch (list.runtimeType) {
-      case RxList<InventoryCategoryModel>:
-        {
-          int equipmentIndex =
-              equipmentCategoryList.indexWhere((x) => x?.name == value);
-          selectedEquipmentId = equipmentCategoryList[equipmentIndex]?.id ?? 0;
-        }
-
-        break;
-      case RxList<FrequencyModel>:
-        {
-          // int frequencyIndex =
-              // frequencyList.indexWhere((x) => x?.name == value);
-          // selectedfrequencyId = frequencyList[frequencyIndex]?.id ?? 0;
-        }
-        break;
+      // case RxList<InventoryCategoryModel>:
+      //   {
+      //     int equipmentIndex =
+      //         equipmentCategoryList.indexWhere((x) => x?.name == value);
+      //     selectedEquipmentId = equipmentCategoryList[equipmentIndex]?.id ?? 0;
+      //   }
+      //
+      //   break;
+      // case RxList<FrequencyModel>:
+      //   {
+      //     // int frequencyIndex =
+      //         // frequencyList.indexWhere((x) => x?.name == value);
+      //     // selectedfrequencyId = frequencyList[frequencyIndex]?.id ?? 0;
+      //   }
+      //   break;
        case RxList<FacilityModel>:
         {
           int facilityIndex = facilityList.indexWhere((x) => x?.name == value);
-          selectedFacilityId = facilityList[facilityIndex]?.id ?? 0;
-            _facilityId.add(facilityList[facilityIndex]?.id ?? 0);
+          int facilityIds = 0;
+          if (facilityIndex >= 0) {
+            facilityIds = facilityList[facilityIndex]?.id ?? 0;
+          }
+          selectedFacilityId = facilityIds;
+          getTypePermitList(true, selectedFacilityId!);
         }
         break;
       default:
@@ -260,13 +264,12 @@ class PermitTypeController extends GetxController {
 
   Future<void> issuccessCreatechecklist() async {
     isSuccess.toggle();
-    await {_cleardata()};
+    await {cleardata()};
   }
 
-  _cleardata() {
+  cleardata() {
     descriptionCtrlr.text = '';
     titleCtrlr.text = '';
-    selectedFacility.value = '';
     selectedItem=null;
     // selectedFacilityId=0;
     Future.delayed(Duration(seconds: 1), () {
@@ -294,6 +297,7 @@ class PermitTypeController extends GetxController {
     );
     return true;
   }
+
 
 
 }

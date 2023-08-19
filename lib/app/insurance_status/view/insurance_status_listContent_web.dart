@@ -196,7 +196,7 @@ class InsuranceStatusWeb extends GetView<InsuranceStatusController> {
                                         child: CustomElevatedButton(
                                             backgroundColor:
                                                 ColorValues.appRedColor,
-                                            onPressed: () {},
+                                            onPressed: () {controller.cleardata();},
                                             text: 'Cancel')),
                                     SizedBox(
                                       width: 10,

@@ -147,10 +147,10 @@ class SPVListController extends GetxController {
 
   Future<void> issuccessCreatechecklist() async {
     isSuccess.toggle();
-    await {_cleardata()};
+    await {cleardata()};
   }
 
-  _cleardata() {
+  cleardata() {
     titleCtrlr.text = '';
     descriptionCtrlr.text = '';
     // selectedStateId = 0;

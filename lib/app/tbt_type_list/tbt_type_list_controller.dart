@@ -4,14 +4,16 @@ import 'package:cmms/app/app.dart';
 import 'package:cmms/app/tbt_type_list/tbt_type_list_presenter.dart';
 import 'package:cmms/domain/models/facility_model.dart';
 import 'package:cmms/domain/models/job_type_list_model.dart';
+import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
 
 import 'package:get/get.dart';
 import 'package:rxdart/subjects.dart';
 import 'package:scrollable_table_view/scrollable_table_view.dart';
 import '../../domain/models/frequency_model.dart';
 import '../../domain/models/inventory_category_model.dart';
-
-
+import '../../domain/models/create_tbt_type_list_model.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 class TBTTypeListController extends GetxController {
   TBTTypeListController(
     this.tbtTypeListPresenter,
@@ -26,9 +28,11 @@ class TBTTypeListController extends GetxController {
 
   //checkbox
    RxBool isChecked = true.obs;
+  JobTypeListModel? selectedItem;
 
 
-  
+  var titleCtrlr = TextEditingController();
+  var descriptionCtrlr = TextEditingController();
   Rx<String> selectedequipment = ''.obs;
   Rx<bool> isSelectedequipment = true.obs;
   RxList<int> selectedEquipmentCategoryIdList = <int>[].obs;
@@ -45,7 +49,8 @@ class TBTTypeListController extends GetxController {
 
   RxList<String> preventiveCheckListTableColumns = <String>[].obs;
   // RxList<FrequencyModel?> frequencyList = <FrequencyModel>[].obs;
- 
+  int? selectedFacilityId = 0;
+
   int selectedEquipmentId = 0;
   int selectedfrequencyId = 0;
   final isSuccess = false.obs;
@@ -79,7 +84,7 @@ class TBTTypeListController extends GetxController {
     facilityIdStreamSubscription = homecontroller.facilityId$.listen((event) {
       facilityId = event;
        Future.delayed(Duration(seconds: 1), () {
-        getJobTypePermitList();
+        getJobTypePermitList(selectedFacilityId);
       });
        Future.delayed(Duration(seconds: 1), () {
       getFacilityList();
@@ -101,17 +106,19 @@ class TBTTypeListController extends GetxController {
 
       selectedFacility.value = facilityList[0]?.name ?? '';
       _facilityId.sink.add(facilityList[0]?.id ?? 0);
+      selectedFacilityId = facilityList[0]?.id ;
+      getJobTypePermitList(selectedFacilityId);
     }
   }
 
 
 
-  Future<void> getJobTypePermitList() async {
+  Future<void> getJobTypePermitList(selectedFacilityId) async {
     jobTypeList.value = <JobTypeListModel>[];
     final _jobTypeList = await tbtTypeListPresenter.getJobTypePermitList(
       isLoading: true,
       // categoryIds: cPategoryIds,
-      facility_id: 45,
+      facility_id: selectedFacilityId,
     );
     if (_jobTypeList != null) {
       for (var jobType_list in _jobTypeList) {
@@ -129,29 +136,47 @@ class TBTTypeListController extends GetxController {
   }
 
 
-  
+
+  Future<bool> createJobType() async {
+    if (titleCtrlr.text.trim() == '' || descriptionCtrlr.text.trim() == '') {
+      Fluttertoast.showToast(
+          msg: "Please enter required field", fontSize: 16.0);
+    } else {
+      String _title = titleCtrlr.text.trim();
+      String _description = descriptionCtrlr.text.trim();
+
+      CreateTbtTypeModel createCheckpoint = CreateTbtTypeModel(
+          title: _title,
+          description: _description,
+        facilityId:selectedFacilityId
+      );
+      print("OUT ");
+      var facilitylistJsonString = createCheckpoint.toJson(); //createCheckPointToJson([createCheckpoint]);
+
+      print({"checkpointJsonString", facilitylistJsonString});
+      await tbtTypeListPresenter.createJobType(
+        facilitylistJsonString: facilitylistJsonString,
+        isLoading: true,
+      );
+      return true;
+    }
+    return true;
+  }
+
   void onValueChanged(dynamic list, dynamic value) {
     switch (list.runtimeType) {
-      case RxList<InventoryCategoryModel>:
-        {
-          // int equipmentIndex =
-          //     equipmentCategoryList.indexWhere((x) => x?.name == value);
-          // selectedEquipmentId = equipmentCategoryList[equipmentIndex]?.id ?? 0;
-        }
 
-        break;
-      case RxList<FrequencyModel>:
-        {
-          // int frequencyIndex =
-              // frequencyList.indexWhere((x) => x?.name == value);
-          // selectedfrequencyId = frequencyList[frequencyIndex]?.id ?? 0;
-        }
-        break;
        case RxList<FacilityModel>:
         {
           int facilityIndex = facilityList.indexWhere((x) => x?.name == value);
+          // int facilityId = 0;
+          if (facilityIndex >= 0) {
+            facilityId = facilityList[facilityIndex]?.id ?? 0;
+          }
+          selectedFacilityId = facilityId;
 
-          _facilityId.add(facilityList[facilityIndex]?.id ?? 0);
+          // _facilityId.add(facilityList[facilityIndex]?.id ?? 0);
+          getJobTypePermitList(selectedFacilityId);
         }
         break;
       default:
@@ -161,27 +186,104 @@ class TBTTypeListController extends GetxController {
         break;
     }
   }
+  Future<bool> updateTbt(checklistId) async {
+    String _name = titleCtrlr.text.trim();
 
+    JobTypeListModel createTbt = JobTypeListModel(
+      id: checklistId,
+      name : _name,
+      facilityId: selectedFacilityId,
+    );
+    var updateTbt =
+    createTbt.toJson();
+
+    print({"updateTbt", updateTbt});
+    await tbtTypeListPresenter.updateTbt(
+      tbtJsonString: updateTbt,
+      isLoading: true,
+    );
+    return true;
+  }
  
 
   Future<void> issuccessCreatechecklist() async {
     isSuccess.toggle();
-    await {_cleardata()};
+    await {cleardata()};
   }
 
-  _cleardata() {
-    // checklistNumberCtrlr.text = '';
-    // durationCtrlr.text = '';
-    // manpowerCtrlr.text = '';
+  cleardata() {
 
-    // selectedequipment.value = '';
-
-    // selectedfrequency.value = '';
-    // Future.delayed(Duration(seconds: 1), () {
-    //   getPreventiveCheckList(facilityId, type, true);
-    // });
-    // Future.delayed(Duration(seconds: 5), () {
-    //   isSuccess.value = false;
-    // });
+    titleCtrlr.text = '';
+    descriptionCtrlr.text = '';
+    selectedItem = null;
+    isCheckedRequire.value = false;
+    Future.delayed(Duration(seconds: 1), () {
+      getJobTypePermitList(selectedFacilityId);
+    });
+    Future.delayed(Duration(seconds: 5), () {
+      isSuccess.value = false;
+    });
   }
+
+  void isDeleteDialog({
+    String? business_id ,
+    String? business
+  }) {
+    Get.dialog(
+      AlertDialog(
+        content: Column(mainAxisSize: MainAxisSize.min, children: [
+          Icon(Icons.delete, size: 35, color: ColorValues.redColor),
+
+          SizedBox(
+            height: 10,
+          ),
+          RichText(
+            text: TextSpan(
+                text: 'Are you sure you want to delete the TBT Type ',
+                style: Styles.blackBold16,
+                children: [
+                  TextSpan(
+                    text: business,
+                    style: TextStyle(
+                      color: ColorValues.orangeColor,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
+                ]),
+          ),
+        ]),
+        actions: [
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+            children: [
+              TextButton(
+                onPressed: () {
+                  Get.back();
+                },
+                child: Text('NO'),
+              ),
+              TextButton(
+                onPressed: () {
+                  deleteJobType(business_id).then((value) {
+                    Get.back();
+                    getJobTypePermitList(selectedFacilityId);
+                  });
+                },
+                child: Text('YES'),
+              ),
+            ],
+          )
+        ],
+      ),
+    );
+  }
+  Future<void> deleteJobType(String? business_id) async {
+    {
+      await tbtTypeListPresenter.deleteJobType(
+        business_id,
+        isLoading: true,
+      );
+    }
+  }
+
 }

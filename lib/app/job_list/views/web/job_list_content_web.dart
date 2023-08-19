@@ -59,114 +59,109 @@ class JobListContentWeb extends StatelessWidget {
             color: ColorValues.appGreenColor,
           ),
           Dimens.boxWidth10,
-
-           varUserAccessModel.value.access_list!
-                                      .where((e) =>
-                                          e.feature_id == 2 && e.add == 1)
-                                      .length >
-                                  0
-                              ?
-          ActionButton(
-            icon: Icons.upload,
-            label: 'Add New Job',
-            onPressed: () {
-              controller.goToAddJobScreen();
-            },
-            color: ColorValues.appDarkBlueColor,
-          ): Container(),
-          
+          varUserAccessModel.value.access_list!
+                      .where((e) => e.feature_id == 2 && e.add == 1)
+                      .length >
+                  0
+              ? ActionButton(
+                  icon: Icons.upload,
+                  label: 'Add New Job',
+                  onPressed: () {
+                    controller.goToAddJobScreen();
+                  },
+                  color: ColorValues.appDarkBlueColor,
+                )
+              : Container(),
           Dimens.boxWidth10,
         ]),
       ),
-      Expanded(
-        child: Obx(() {
-          final dataSource = JobDataSource(controller);
+      Obx(() {
+        final dataSource = JobDataSource(controller);
 
-          return (controller.jobList.isEmpty == true)
-              ? Center(child: Text('No data'))
-              : Expanded(
-                  child: PaginatedDataTable2(
-                    dataRowHeight: Get.height * 0.12,
-                    columnSpacing: 10,
-                    source: dataSource, // Custom DataSource class
-                    headingRowHeight: Get.height * 0.12,
-                    minWidth: Get.width * 1.2,
-                    showCheckboxColumn: false,
-                    rowsPerPage: 10, // Number of rows per page
-                    availableRowsPerPage: [10, 20, 30, 50],
-                    columns: [
-                      buildDataColumn(
-                        'id',
-                        'ID',
-                        ColumnSize.S,
-                        controller.idFilterText,
-                      ),
-                      buildDataColumn(
-                        'jobDetails',
-                        'Job Title',
-                        ColumnSize.M,
-                        controller.jobDetailsFilterText,
-                      ),
-                      buildDataColumn(
-                        'breakdownTime',
-                        'BreakdownTime',
-                        ColumnSize.L,
-                        controller.breakdownTimeFilterText,
-                      ),
-                      buildDataColumn(
-                        'equipmentCat',
-                        'Equipment Category',
-                        ColumnSize.L,
-                        controller.equipmentCategoryFilterText,
-                      ),
-                      buildDataColumn(
-                        'workingArea',
-                        'Equipment',
-                        ColumnSize.L,
-                        controller.workAreaFilterText,
-                      ),
-                      buildDataColumn(
-                        'workType',
-                        'Work Type',
-                        ColumnSize.L,
-                        controller.workTypeFilterText,
-                      ),
-                      buildDataColumn(
-                        'raisedByName',
-                        'Raised By',
-                        ColumnSize.S,
-                        controller.raisedByNameFilterText,
-                      ),
+        return (controller.jobList.isEmpty == true)
+            ? Center(child: Text('No data'))
+            : Expanded(
+                child: PaginatedDataTable2(
+                  dataRowHeight: Get.height * 0.12,
+                  columnSpacing: 10,
+                  source: dataSource, // Custom DataSource class
+                  headingRowHeight: Get.height * 0.12,
+                  minWidth: Get.width * 1.2,
+                  showCheckboxColumn: false,
+                  rowsPerPage: 10, // Number of rows per page
+                  availableRowsPerPage: [10, 20, 30, 50],
+                  columns: [
+                    buildDataColumn(
+                      'id',
+                      'ID',
+                      ColumnSize.S,
+                      controller.idFilterText,
+                    ),
+                    buildDataColumn(
+                      'jobDetails',
+                      'Job Title',
+                      ColumnSize.M,
+                      controller.jobDetailsFilterText,
+                    ),
+                    buildDataColumn(
+                      'breakdownTime',
+                      'BreakdownTime',
+                      ColumnSize.L,
+                      controller.breakdownTimeFilterText,
+                    ),
+                    buildDataColumn(
+                      'equipmentCat',
+                      'Equipment Category',
+                      ColumnSize.L,
+                      controller.equipmentCategoryFilterText,
+                    ),
+                    buildDataColumn(
+                      'workingArea',
+                      'Equipment',
+                      ColumnSize.L,
+                      controller.workAreaFilterText,
+                    ),
+                    buildDataColumn(
+                      'workType',
+                      'Work Type',
+                      ColumnSize.L,
+                      controller.workTypeFilterText,
+                    ),
+                    buildDataColumn(
+                      'raisedByName',
+                      'Raised By',
+                      ColumnSize.S,
+                      controller.raisedByNameFilterText,
+                    ),
 
-                      // buildDataColumn(
-                      //   'breakdownType',
-                      //   'Breakdown Type',
-                      //   ColumnSize.L,
-                      //   controller.breakdownTypeFilterText,
-                      // ),
-                      buildDataColumn(
-                        'permitId',
-                        'Permit ID',
-                        ColumnSize.S,
-                        controller.permitIdFilterText,
-                      ),
-                      buildDataColumn(
-                        'assignedToName',
-                        'Assigned To',
-                        ColumnSize.S,
-                        controller.assignedToNameFilterText,
-                      ),
-                      buildDataColumn(
-                        'action'.tr,
-                        'Actions',
-                        ColumnSize.L,
-                        controller.jobDateFilterText,
-                      ),
-                    ],
-                  ),
-                );
-        }),
-      ),
+                    // buildDataColumn(
+                    //   'breakdownType',
+                    //   'Breakdown Type',
+                    //   ColumnSize.L,
+                    //   controller.breakdownTypeFilterText,
+                    // ),
+                    buildDataColumn(
+                      'permitId',
+                      'Permit ID',
+                      ColumnSize.S,
+                      controller.permitIdFilterText,
+                    ),
+                    buildDataColumn(
+                      'assignedToName',
+                      'Assigned To',
+                      ColumnSize.S,
+                      controller.assignedToNameFilterText,
+                    ),
+                    buildDataColumn(
+                      'action'.tr,
+                      'Actions',
+                      ColumnSize.L,
+                      controller.jobDateFilterText,
+                    ),
+                  ],
+                ),
+              );
+      }),
     ]);
   }
 

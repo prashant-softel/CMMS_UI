@@ -1,4 +1,5 @@
 import 'package:cmms/domain/domain.dart';
+import 'package:cmms/domain/models/history_model.dart';
 
 import '../models/facility_model.dart';
 
@@ -12,14 +13,16 @@ class ViewModuleCleaningExecutionUsecase {
   }
 
    
-  //   Future<Map<String, dynamic>> createEscalationMatrix({
-  //   createEscalationMatrix,
-  //   bool? isLoading,
-  // }) async =>
-  //     await _repository.createEscalationMatrix(
-  //       createEscalationMatrix,
-  //       isLoading,
-  //     );
+  Future<List<HistoryModel>?> getMCExecutionHistory({
+    moduleType,
+    id,
+    bool? isLoading,
+  }) async =>
+      await _repository.getHistory(
+        moduleType,
+        id,
+        isLoading,
+      );
 
   Future<List<FacilityModel?>?> getFacilityList() async =>
       await _repository.getFacilityList(true);

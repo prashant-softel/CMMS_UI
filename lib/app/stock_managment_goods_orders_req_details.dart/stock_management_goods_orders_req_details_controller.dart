@@ -60,7 +60,7 @@ class GoodsOrdersReqDetailController extends GetxController {
           // dropdownMapperData[element[0]["value"]]?.asset_type ?? ""),
           assetCode: dropdownMapperData[element[0]["value"]]?.asset_code,
           cost: int.tryParse(element[1]["value"] ?? '0'),
-          orderedQty: int.tryParse(element[2]["value"] ?? '0'));
+          ordered_qty: int.tryParse(element[2]["value"] ?? '0'));
 
       items.add(item);
       print('Create GO  req  data: $item');
@@ -68,7 +68,7 @@ class GoodsOrdersReqDetailController extends GetxController {
 
     SubmitPurchaseOrderDataModel submitPurchaseOrderDataModel =
         SubmitPurchaseOrderDataModel(
-            id: 0, facility_id: 45, items: items, purchaseID: 1);
+            id: 0, facilityID: 45, items: items, purchaseID: 1);
 
     var createGoReqModelJsonString = submitPurchaseOrderDataModel.toJson();
     Map<String, dynamic>? responseCreateGoModel =

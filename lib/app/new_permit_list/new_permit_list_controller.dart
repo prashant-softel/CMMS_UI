@@ -91,7 +91,7 @@ class NewPermitListController extends GetxController {
     facilityIdStreamSubscription = controller.facilityId$.listen((event) {
       facilityId = event;
       Future.delayed(Duration(seconds: 1), () {
-        getNewPermitList(facilityId, userId,formattedTodate, formattedFromdate, true, false);
+        getNewPermitList(facilityId, userId,formattedTodate, formattedFromdate, true, false, false);
       });
     });
 
@@ -136,7 +136,7 @@ class NewPermitListController extends GetxController {
   }
 
   Future<void> getNewPermitList(int facilityId, int userId,dynamic startDate,
-      dynamic endDate, bool isLoading, bool self_view) async {
+      dynamic endDate, bool isLoading, bool self_view, bool non_expired) async {
     newPermitList!.value = <NewPermitModel>[];
     final _newPermitList = await newPermitListPresenter.getNewPermitList(
         facilityId: facilityId,
@@ -146,7 +146,8 @@ class NewPermitListController extends GetxController {
         userId: userId,
         self_view:  varUserAccessModel.value.access_list!.where((e) =>
          e.feature_id == UserAccessConstants.kPermitFeatureId && 
-         e.selfView == UserAccessConstants.kHaveSelfViewAccess).length > 0 ? true : false
+         e.selfView == UserAccessConstants.kHaveSelfViewAccess).length > 0 ? true : false,
+         non_expired: false
         );
 
     if (_newPermitList != null) {
@@ -244,9 +245,9 @@ class NewPermitListController extends GetxController {
     );
     // showAlertPermitApproveDialog();
 
-    print('Extend Button Data:${_reasonForExtensionComment}');
-    print('Extend Button Data:${_timeForExtensionComment}');
-    print('Extend Button Data:${permitId}');
+    // print('Extend Button Data:${_reasonForExtensionComment}');
+    // print('Extend Button Data:${_timeForExtensionComment}');
+    // print('Extend Button Data:${permitId}');
   }
 
   Future<void> permitCloseButton({String? permitId}) async {
@@ -296,7 +297,7 @@ class NewPermitListController extends GetxController {
 
   void getNewPermitListByDate() {
     getNewPermitList(
-        facilityId, userId, formattedFromdate, formattedTodate, false, false);
+        facilityId, userId, formattedFromdate, formattedTodate, false, false, false);
   }
 
   //  Future<void> viewPermit({int? id}) async {

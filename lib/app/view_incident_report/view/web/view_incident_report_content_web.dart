@@ -4,6 +4,7 @@ import 'package:cmms/app/constant/constant.dart';
 import 'package:cmms/app/controllers/file_upload_controller.dart';
 import 'package:cmms/app/home/widgets/header_widget.dart';
 import 'package:cmms/app/navigators/navigators.dart';
+import 'package:cmms/app/utils/user_access_constants.dart';
 import 'package:cmms/app/view_incident_report/view_incident_report_controller.dart';
 import 'package:cmms/app/widgets/custom_elevated_button.dart';
 import 'package:cmms/app/widgets/custom_richtext.dart';
@@ -792,8 +793,8 @@ class ViewIncidentReportContentWeb
                                                         .value.access_list!
                                                         .where((e) =>
                                                             e.feature_id ==
-                                                                34 &&
-                                                            e.edit == 1)
+                                                                UserAccessConstants.kIncidentReportFeatureId &&
+                                                            e.edit == UserAccessConstants.kHaveEditAccess)
                                                         .length >
                                                     0
                                             ? CustomElevatedButton(
@@ -819,8 +820,8 @@ class ViewIncidentReportContentWeb
                                         varUserAccessModel.value.access_list!
                                                         .where((e) =>
                                                             e.feature_id ==
-                                                                34 &&
-                                                            e.approve == 0)
+                                                                UserAccessConstants.kIncidentReportFeatureId &&
+                                                            e.approve == UserAccessConstants.kHaveApproveAccess)
                                                         .length >
                                                     0 &&
                                                 controller
@@ -848,8 +849,8 @@ class ViewIncidentReportContentWeb
                                         varUserAccessModel.value.access_list!
                                                         .where((e) =>
                                                             e.feature_id ==
-                                                                34 &&
-                                                            e.delete == 1)
+                                                                UserAccessConstants.kIncidentReportFeatureId &&
+                                                            e.delete == UserAccessConstants.kHaveDeleteAccess)
                                                         .length >
                                                     0 &&
                                                 controller

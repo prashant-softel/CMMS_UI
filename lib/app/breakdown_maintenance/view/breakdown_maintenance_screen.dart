@@ -22,7 +22,7 @@ class BreakdownMaintenanceScreen
   @override
   Widget build(BuildContext context) {
     ///
-    var size = MediaQuery.of(context).size;
+    var size = Get;
     final double itemHeight = (size.height - kToolbarHeight - 50) / 9;
     final double itemHeightWeb = (size.height - kToolbarHeight - 70) /4;
     final double itemWidth = size.width / 2;
@@ -302,23 +302,23 @@ class BreakdownMaintenanceScreen
             color: ColorValues.skyBlueColor,
             borderRadius: BorderRadius.circular(2),
           ),
-          padding: EdgeInsets.all(9),
-          child: Row(
-            crossAxisAlignment: CrossAxisAlignment.center,
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              Expanded(
+          padding: EdgeInsets.symmetric(horizontal: 12, vertical: 8),
+          // child: Row(
+          //   crossAxisAlignment: CrossAxisAlignment.center,
+          //   mainAxisAlignment: MainAxisAlignment.center,
+          //   children: [
+              child : Center(
                 child: Text(
                   title,
                   style: TextStyle(
                       color: ColorValues.whiteColor,
-                      fontSize: 16,
+                      fontSize: 14,
                       fontWeight: FontWeight.w700),
                   textAlign: TextAlign.center, // Updated
                 ),
               )
-            ],
-          ),
+          //   ],
+          // ),
         ),
       ),
     );

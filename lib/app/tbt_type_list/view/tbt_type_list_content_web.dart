@@ -55,9 +55,9 @@ class TBTTypeListContentWeb extends GetView<TBTTypeListController> {
                     onTap: () {
                       Get.back();
                     },
-                    child: Text(" / Masters", style: Styles.greyMediumLight12),
+                    child: Text(" / MASTERS", style: Styles.greyMediumLight12),
                   ),
-                  Text(" / TBT Type", style: Styles.greyMediumLight12)
+                  Text(" / TBT TYPE", style: Styles.greyMediumLight12)
                 ],
               ),
             ),
@@ -97,55 +97,76 @@ class TBTTypeListContentWeb extends GetView<TBTTypeListController> {
                                         SizedBox(
                                           height: 20,
                                         ),
+                                        Visibility(
+                                          visible: controller.isSuccess.value,
+                                          child: Center(
+                                            child: Wrap(
+                                              children: [
+                                                Text(
+                                                  controller.selectedItem ==
+                                                      null
+                                                      ? "TBT added Successfully in the List."
+                                                      : "TBT updated Successfully in the List.",
+                                                  style: TextStyle(
+                                                      fontSize: 16,
+                                                      color: Color.fromARGB(
+                                                          255, 24, 243, 123)),
+                                                ),
+                                                SizedBox(
+                                                  height: 5,
+                                                ),
+                                              ],
+                                            ),
+                                          ),
+                                        ),
                                         Row(
                                           mainAxisAlignment:
                                               MainAxisAlignment.spaceBetween,
                                           children: [
-                                            Container(
-                                              margin: Dimens.edgeInsets5,
-                                              padding: const EdgeInsets.only(
-                                                  left: 15),
-                                              child: CustomRichText(
-                                                  title: 'Facility: '),
-                                            ),
-                                            SizedBox(
-                                              height: MediaQuery.of(context)
-                                                      .size
-                                                      .height *
-                                                  0.040,
-                                              width: (MediaQuery.of(context)
-                                                          .size
-                                                          .width *
-                                                      .2) -
-                                                  30,
-                                              child: DropdownWebWidget(
-                                                boxShadow: [
-                                                  BoxShadow(
-                                                    color: Colors.black26,
-                                                    offset: const Offset(
-                                                      5.0,
-                                                      5.0,
+                                             Expanded(
+                                                child: CustomRichText(
+                                                    title: 'Facility: '),
+                                              ),
+                                            Expanded(
+                                              child: SizedBox(
+                                                height: MediaQuery.of(context)
+                                                        .size
+                                                        .height *
+                                                    0.040,
+                                                width: (MediaQuery.of(context)
+                                                            .size
+                                                            .width *
+                                                        .2) -
+                                                    30,
+                                                child: DropdownWebWidget(
+                                                  boxShadow: [
+                                                    BoxShadow(
+                                                      color: Colors.black26,
+                                                      offset: const Offset(
+                                                        5.0,
+                                                        5.0,
+                                                      ),
+                                                      blurRadius: 5.0,
+                                                      spreadRadius: 1.0,
                                                     ),
-                                                    blurRadius: 5.0,
-                                                    spreadRadius: 1.0,
-                                                  ),
-                                                  BoxShadow(
-                                                    color:
-                                                        ColorValues.whiteColor,
-                                                    offset:
-                                                        const Offset(0.0, 0.0),
-                                                    blurRadius: 0.0,
-                                                    spreadRadius: 0.0,
-                                                  ),
-                                                ],
-                                                dropdownList:
-                                                    controller.facilityList,
-                                                isValueSelected: controller
-                                                    .isFacilitySelected.value,
-                                                selectedValue: controller
-                                                    .selectedFacility.value,
-                                                onValueChanged:
-                                                    controller.onValueChanged,
+                                                    BoxShadow(
+                                                      color:
+                                                          ColorValues.whiteColor,
+                                                      offset:
+                                                          const Offset(0.0, 0.0),
+                                                      blurRadius: 0.0,
+                                                      spreadRadius: 0.0,
+                                                    ),
+                                                  ],
+                                                  dropdownList:
+                                                      controller.facilityList,
+                                                  isValueSelected: controller
+                                                      .isFacilitySelected.value,
+                                                  selectedValue: controller
+                                                      .selectedFacility.value,
+                                                  onValueChanged:
+                                                      controller.onValueChanged,
+                                                ),
                                               ),
                                             ),
                                           ],
@@ -158,52 +179,52 @@ class TBTTypeListContentWeb extends GetView<TBTTypeListController> {
                                           mainAxisAlignment:
                                               MainAxisAlignment.spaceBetween,
                                           children: [
-                                            Padding(
-                                              padding: const EdgeInsets.only(
-                                                  left: 15),
+                                            Expanded(
                                               child: CustomRichText(
                                                   title: 'Job Type Title '),
                                             ),
-                                            Container(
-                                              padding: const EdgeInsets.only(
-                                                  left: 15, right: 15),
+                                            Expanded(
                                               child: Container(
-                                                  decoration: BoxDecoration(
-                                                    boxShadow: [
-                                                      BoxShadow(
-                                                        color: Colors.black26,
-                                                        offset: const Offset(
-                                                          5.0,
-                                                          5.0,
+                                                padding: const EdgeInsets.only(
+                                                    left: 15, right: 15),
+                                                child: Container(
+                                                    decoration: BoxDecoration(
+                                                      boxShadow: [
+                                                        BoxShadow(
+                                                          color: Colors.black26,
+                                                          offset: const Offset(
+                                                            5.0,
+                                                            5.0,
+                                                          ),
+                                                          blurRadius: 5.0,
+                                                          spreadRadius: 1.0,
                                                         ),
-                                                        blurRadius: 5.0,
-                                                        spreadRadius: 1.0,
-                                                      ),
-                                                      BoxShadow(
-                                                        color: ColorValues
-                                                            .whiteColor,
-                                                        offset: const Offset(
-                                                            0.0, 0.0),
-                                                        blurRadius: 0.0,
-                                                        spreadRadius: 0.0,
-                                                      ),
-                                                    ],
-                                                    color:
-                                                        ColorValues.whiteColor,
-                                                    borderRadius:
-                                                        BorderRadius.circular(
-                                                            5),
-                                                  ),
-                                                  width: (MediaQuery.of(context)
-                                                              .size
-                                                              .width *
-                                                          .2) -
-                                                      30,
-                                                  // width: MediaQuery.of(context).size.width / 1.5,/
-                                                  child: LoginCustomTextfield(
-                                                      // textController: controller
-                                                      //     .durationCtrlr,
-                                                      )),
+                                                        BoxShadow(
+                                                          color: ColorValues
+                                                              .whiteColor,
+                                                          offset: const Offset(
+                                                              0.0, 0.0),
+                                                          blurRadius: 0.0,
+                                                          spreadRadius: 0.0,
+                                                        ),
+                                                      ],
+                                                      color:
+                                                          ColorValues.whiteColor,
+                                                      borderRadius:
+                                                          BorderRadius.circular(
+                                                              5),
+                                                    ),
+                                                    width: (MediaQuery.of(context)
+                                                                .size
+                                                                .width *
+                                                            .2) -
+                                                        30,
+                                                    // width: MediaQuery.of(context).size.width / 1.5,/
+                                                    child: LoginCustomTextfield(
+                                                        textController: controller
+                                                            .titleCtrlr,
+                                                        )),
+                                              ),
                                             ),
                                           ],
                                         ),
@@ -214,53 +235,52 @@ class TBTTypeListContentWeb extends GetView<TBTTypeListController> {
                                           mainAxisAlignment:
                                               MainAxisAlignment.spaceBetween,
                                           children: [
-                                            Padding(
-                                              padding: const EdgeInsets.only(
-                                                  left: 15),
+                                            Expanded(
                                               child: CustomRichText(
                                                   title: 'Description '),
                                             ),
-                                            Container(
-                                                padding: const EdgeInsets.only(
-                                                    left: 15, right: 15),
-                                                child: Container(
-                                                  decoration: BoxDecoration(
-                                                    boxShadow: [
-                                                      BoxShadow(
-                                                        color: Colors.black26,
-                                                        offset: const Offset(
-                                                          5.0,
-                                                          5.0,
+                                            Expanded(
+                                              child: Container(
+                                                  padding: const EdgeInsets.only(
+                                                      left: 15, right: 15),
+                                                  child: Container(
+                                                    decoration: BoxDecoration(
+                                                      boxShadow: [
+                                                        BoxShadow(
+                                                          color: Colors.black26,
+                                                          offset: const Offset(
+                                                            5.0,
+                                                            5.0,
+                                                          ),
+                                                          blurRadius: 5.0,
+                                                          spreadRadius: 1.0,
                                                         ),
-                                                        blurRadius: 5.0,
-                                                        spreadRadius: 1.0,
-                                                      ),
-                                                      BoxShadow(
-                                                        color: ColorValues
-                                                            .whiteColor,
-                                                        offset: const Offset(
-                                                            0.0, 0.0),
-                                                        blurRadius: 0.0,
-                                                        spreadRadius: 0.0,
-                                                      ),
-                                                    ],
-                                                    color:
-                                                        ColorValues.whiteColor,
-                                                    borderRadius:
-                                                        BorderRadius.circular(
-                                                            5),
-                                                  ),
-                                                  // width: MediaQuery.of(context).size.width / 2,
-                                                  width: (MediaQuery.of(context)
-                                                              .size
-                                                              .width *
-                                                          .2) -
-                                                      30,
-                                                  child: LoginCustomTextfield(
-                                                      // textController: controller
-                                                      ),
-                                                  //     .durationCtrlr,
-                                                )),
+                                                        BoxShadow(
+                                                          color: ColorValues
+                                                              .whiteColor,
+                                                          offset: const Offset(
+                                                              0.0, 0.0),
+                                                          blurRadius: 0.0,
+                                                          spreadRadius: 0.0,
+                                                        ),
+                                                      ],
+                                                      color:
+                                                          ColorValues.whiteColor,
+                                                      borderRadius:
+                                                          BorderRadius.circular(
+                                                              5),
+                                                    ),
+                                                    // width: MediaQuery.of(context).size.width / 2,
+                                                    width: (MediaQuery.of(context)
+                                                                .size
+                                                                .width *
+                                                            .2) -
+                                                        30,
+                                                    child: LoginCustomTextfield(
+                                                        textController: controller.descriptionCtrlr,
+                                                        ),
+                                                  )),
+                                            ),
                                           ],
                                         ),
                                         SizedBox(
@@ -268,22 +288,22 @@ class TBTTypeListContentWeb extends GetView<TBTTypeListController> {
                                         ),
                                         Row(
                                           children: [
-                                            Padding(
-                                              padding: const EdgeInsets.only(
-                                                  left: 15),
+                                            Expanded(
                                               child: CustomRichText(
                                                   title: 'Require SOP/JSA: '),
                                             ),
                                             SizedBox(
                                               width: 5,
                                             ),
-                                            Checkbox(
-                                              value: controller
-                                                  .isCheckedRequire.value,
-                                              onChanged: (bool? value) {
-                                                controller
-                                                    .requiretoggleCheckbox();
-                                              },
+                                            Expanded(
+                                              child: Checkbox(
+                                                value: controller
+                                                    .isCheckedRequire.value,
+                                                onChanged: (bool? value) {
+                                                  controller
+                                                      .requiretoggleCheckbox();
+                                                },
+                                              ),
                                             ),
                                           ],
                                         ),
@@ -296,31 +316,52 @@ class TBTTypeListContentWeb extends GetView<TBTTypeListController> {
                                   mainAxisAlignment: MainAxisAlignment.center,
                                   children: [
                                     Container(
-                                        width: (Get.width * .07),
+                                        height: 40,
+                                        width: (Get.width * .1),
                                         child: CustomElevatedButton(
                                             backgroundColor:
                                                 ColorValues.appRedColor,
-                                            onPressed: () {},
+                                            onPressed: () {
+                                              controller.cleardata;
+                                            },
                                             text: 'Cancel')),
                                     SizedBox(
                                       width: 10,
                                     ),
+
                                     Container(
-                                        width: (Get.width * .15) - 50,
-                                        child: CustomElevatedButton(
-                                            backgroundColor:
-                                                ColorValues.appDarkBlueColor,
+                                        height: 40,
+                                        width: (Get.width * .2 - 50),
+                                        child: controller.selectedItem == null
+                                            ? CustomElevatedButton(
+                                            backgroundColor: ColorValues
+                                                .appDarkBlueColor,
                                             onPressed: () {
-                                              // controller
-                                              //     .createChecklistNumber()
-                                              //     .then((value) {
-                                              //   print("value,$value");
-                                              //   // if (value == true)
-                                              //   //   controller
-                                              //   //       .issuccessCreatechecklist();
-                                              // });
+                                              controller
+                                                  .createJobType()
+                                                  .then((value) {
+                                                print("value,$value");
+                                                if (value == true)
+                                                  controller
+                                                      .issuccessCreatechecklist();
+                                              });
                                             },
-                                            text: 'Submit')),
+                                            text: 'Create TBT Type ')
+                                            : CustomElevatedButton(
+                                            backgroundColor: ColorValues
+                                                .appDarkBlueColor,
+                                            onPressed: () {
+                                              controller
+                                                  .updateTbt(controller
+                                                  .selectedItem?.id)
+                                                  .then((value) {
+                                                print("value,$value");
+                                                if (value == true)
+                                                  controller
+                                                      .issuccessCreatechecklist();
+                                              });
+                                            },
+                                            text: 'Update')),
                                   ],
                                 ),
                               ],
@@ -410,7 +451,7 @@ class TBTTypeListContentWeb extends GetView<TBTTypeListController> {
                                               "Sr.No.",
                                               "Title",
                                               "Description",
-                                              "Facility",
+                                              // "Facility",
                                               "Require\nSOP/JSA",
                                               "Action"
                                             ].map((column) {
@@ -453,7 +494,7 @@ class TBTTypeListContentWeb extends GetView<TBTTypeListController> {
                                               "Sr.No.",
                                               "Title",
                                               "Description",
-                                              "Facility",
+                                              // "Facility",
                                               "Require\nSOP/JSA",
                                               "Action"
                                             ].map((column) {
@@ -474,7 +515,7 @@ class TBTTypeListContentWeb extends GetView<TBTTypeListController> {
                                                     '${jobTypeListDetails.id}',
                                                     '${jobTypeListDetails.name}',
                                                     'No Data Found',
-                                                    'Hero Future Solar Plant 100MW',
+                                                    // '${jobTypeListDetails.facilityId}',
                                                     'Checkbox',
                                                     "Action"
                                                   ];
@@ -510,7 +551,11 @@ class TBTTypeListContentWeb extends GetView<TBTTypeListController> {
                                                                           message:
                                                                               'Edit',
                                                                           onPress:
-                                                                              () {},
+                                                                              () {
+                                                                                controller.selectedItem = controller.jobTypeList.firstWhere((element) => "${element.id}" == _permitTypeList[0]);
+
+                                                                                controller.titleCtrlr.text = controller.selectedItem?.name ?? '';
+                                                                              },
                                                                         ),
                                                                         // : Container(),
                                                                         // :Container(),
@@ -525,7 +570,9 @@ class TBTTypeListContentWeb extends GetView<TBTTypeListController> {
                                                                           message:
                                                                               'Delete',
                                                                           onPress:
-                                                                              () {},
+                                                                              () {
+                                                                                controller.isDeleteDialog(business_id: _permitTypeList[0], business: _permitTypeList[1]);
+                                                                              },
                                                                         )
                                                                         // : Container()
                                                                       ])

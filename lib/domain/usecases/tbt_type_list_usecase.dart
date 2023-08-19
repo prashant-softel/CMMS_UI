@@ -27,6 +27,26 @@ class TBTTypeListUsecase {
       await repository.getUserAccessData(LocalKeys.userAccess);
 
 
+  Future<bool> createJobType({
+    jobTypeJsonString,
+    bool? isLoading,
+  }) async =>
+      await repository.createJobType(
+          isLoading: isLoading, jobTypeJsonString: jobTypeJsonString);
+  deleteJobType(
+      {required Object checklist_id, required bool isLoading}) async =>
+      await repository.deleteJobType(
+        checklist_id,
+        isLoading,
+      );
+  Future<bool> updateTbt({
+    tbtJsonString,
+    bool? isLoading,
+  }) async =>
+      await repository.updateTbt(
+        isLoading: isLoading,
+        tbtJsonString: tbtJsonString,
+      );
 
   
        

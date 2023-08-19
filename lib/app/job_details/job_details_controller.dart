@@ -30,6 +30,9 @@ class JobDetailsController extends GetxController {
   /// Job Details
   RxList<JobDetailsModel?>? jobDetailsList = <JobDetailsModel?>[].obs;
   Rx<JobDetailsModel?> jobDetailsModel = JobDetailsModel().obs;
+  RxList<JobAssociatedModel?>? jobAssociatedModelsList =
+      <JobAssociatedModel?>[].obs;
+  Rx<JobAssociatedModel?> jobAssociatedModel = JobAssociatedModel().obs;
   Rx<JobModel?> statusJobmodel = JobModel().obs;
   RxList<AssociatedPermit>? associatedPermitList = <AssociatedPermit>[].obs;
   PaginationController schedulePaginationController = PaginationController(
@@ -75,6 +78,7 @@ class JobDetailsController extends GetxController {
     //   Utility.showDialog(e.toString() + 'onReady');
     //   print(e);
     // }
+
     super.onInit();
   }
 
@@ -83,6 +87,9 @@ class JobDetailsController extends GetxController {
     try {
       await setJobId();
       getJobDetails(jobId.value);
+
+      getjobDetailsModel(jobId.value);
+
       isDataLoading.value = false;
       textControllers =
           List.generate(permitValuesCount, (_) => TextEditingController());
@@ -158,6 +165,24 @@ class JobDetailsController extends GetxController {
       }
     } catch (e) {
       Utility.showDialog(e.toString() + 'getJobDetails');
+    }
+  }
+
+  void getjobDetailsModel(int? jobId) async {
+    try {
+      jobAssociatedModelsList?.value = <JobAssociatedModel>[];
+      final _jobAssociatedModelsList = await jobDetailsPresenter
+          .getjobDetailsModel(jobId: jobId, isLoading: true);
+
+      if (_jobAssociatedModelsList != null &&
+          _jobAssociatedModelsList.isNotEmpty) {
+        jobAssociatedModel.value = _jobAssociatedModelsList[0];
+        // associatedPermitList?.value =
+        //     jobAssociatedModel.value?.associatedPermitList ?? [];
+        update(["getjobDetailsModel"]);
+      }
+    } catch (e) {
+      Utility.showDialog(e.toString() + 'getjobDetailsModel');
     }
   }
 

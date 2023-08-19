@@ -6,10 +6,12 @@ import 'dart:typed_data';
 import 'package:cmms/app/job_card_details/views/widgets/carry_forward_Job_dialog.dart';
 import 'package:cmms/app/job_card_details/views/widgets/close_job_dialog.dart';
 import 'package:cmms/app/job_card_details/views/widgets/job_card_updated_dialog.dart';
+import 'package:cmms/app/widgets/abandon_execution_message_dialog.dart';
 import 'package:cmms/app/widgets/create_escalation_matrix_dialog.dart';
 import 'package:cmms/app/widgets/create_incident_report_dialog.dart';
 import 'package:cmms/app/widgets/create_permit_dialog.dart';
 import 'package:cmms/app/widgets/create_sop_dialog.dart';
+import 'package:cmms/app/widgets/end_mc_execution_message_dialog.dart';
 import 'package:cmms/app/widgets/incident_report_approve_message_dialog.dart';
 import 'package:cmms/app/widgets/incident_report_reject_message_dialog.dart';
 import 'package:cmms/app/widgets/new_warranty_claim_dialog.dart';
@@ -21,6 +23,7 @@ import 'package:cmms/app/widgets/permit_close_message_dialog.dart';
 import 'package:cmms/app/widgets/permit_extend_message_dialog.dart';
 import 'package:cmms/app/widgets/permit_issue_message_dialog.dart';
 import 'package:cmms/app/widgets/permit_reject_message_dialog.dart';
+import 'package:cmms/app/widgets/start_mc_execution_dialog.dart';
 import 'package:cmms/app/widgets/update_incident_report_dialog.dart';
 import 'package:cmms/app/widgets/update_permit_dialog.dart';
 import 'package:cmms/app/widgets/warranty_claim_error_dialog.dart';
@@ -590,10 +593,11 @@ class ConnectHelper {
     required String auth,
     bool? isLoading,
     int? facilityId,
+    bool? self_view,
     int? userId,
   }) async {
     var responseModel = await apiWrapper.makeRequest(
-      'Job/GetJobList?facility_id=$facilityId&userId=$userId',
+      'Job/GetJobList?facility_id=$facilityId&userId=$userId&self_view=$self_view',
       Request.get,
       null,
       isLoading ?? false,
@@ -609,6 +613,7 @@ class ConnectHelper {
     required String auth,
     bool? isLoading,
     bool? self_view,
+    bool? non_expired,
     int? facilityId,
     int? userId,
     String? start_date,
@@ -618,7 +623,7 @@ class ConnectHelper {
     var startDateParam = (start_date != null) ? 'start_date=$start_date&' : '';
     var endDateParam = (end_date != '') ? 'end_date=$end_date' : '';
     var responseModel = await apiWrapper.makeRequest(
-      'Permit/GetPermitList?facility_id=$facilityId&userId=$userId&self_view=$self_view&' +
+      'Permit/GetPermitList?facility_id=$facilityId&userId=$userId&self_view=$self_view&non_expired=$non_expired&' +
           startDateParam +
           endDateParam,
       Request.get,
@@ -642,6 +647,26 @@ class ConnectHelper {
   }) async {
     ResponseModel responseModel = await apiWrapper.makeRequest(
       'GO/GetGOList?facility_id=$facility_id&fromDate=$end_date&toDate=$start_date',
+      Request.getMultiparts,
+      null,
+      isLoading,
+      {
+        'Authorization': 'Bearer $auth',
+      },
+    );
+
+    return responseModel;
+  }
+
+  Future<ResponseModel> getRequestOrderList({
+    required bool isLoading,
+    required String auth,
+    int? facility_id,
+    String? start_date,
+    required String end_date,
+  }) async {
+    ResponseModel responseModel = await apiWrapper.makeRequest(
+      'RequestOrder/GetRequestOrderList?facilityID=$facility_id&fromDate=$end_date&toDate=$start_date',
       Request.getMultiparts,
       null,
       isLoading,
@@ -852,6 +877,81 @@ class ConnectHelper {
     return responseModel;
   }
 
+  Future<ResponseModel> abandonExecutionButton({
+    required String auth,
+    abandoneJsonString,
+    bool? isLoading,
+  }) async {
+    var responseModel = await apiWrapper.makeRequest(
+      'MC/AbandonMCExecution',
+      Request.put,
+      abandoneJsonString,
+      isLoading ?? false,
+      {
+        'Content-Type': 'application/json',
+        'Authorization': 'Bearer $auth',
+      },
+    );
+    print('AbandonExecutionResponse: ${responseModel.data}');
+    var res = responseModel.data;
+    var parsedJson = json.decode(res);
+    Get.dialog<void>(
+        AbandonMCExecutionMessageDialog(data: parsedJson['message']));
+
+    return responseModel;
+  }
+
+  ///End MC Execution
+  Future<ResponseModel> endMCExecutionButton({
+    required String auth,
+    endJsonString,
+    bool? isLoading,
+  }) async {
+    var responseModel = await apiWrapper.makeRequest(
+      'MC/EndMCScheduleExecution',
+      Request.put,
+      endJsonString,
+      isLoading ?? false,
+      {
+        'Content-Type': 'application/json',
+        'Authorization': 'Bearer $auth',
+      },
+    );
+    print('EndExecutionResponse: ${responseModel.data}');
+    var res = responseModel.data;
+    var parsedJson = json.decode(res);
+    Get.dialog<void>(EndMCExecutionMessageDialog(data: parsedJson['message']));
+
+    return responseModel;
+  }
+
+  Future<ResponseModel> startMCExecutionButton({
+    required String auth,
+    bool? isLoading,
+    int? planId,
+  }) async {
+    // facilityId = 45;
+    var responseModel = await apiWrapper.makeRequest(
+      'MC/StartMCExecution?planId=$planId',
+      Request.put,
+      // {'comment': "$comment", 'id': id},
+      null,
+      isLoading ?? true,
+      {
+        'Authorization': 'Bearer $auth',
+      },
+    );
+    // print('StartExecutionResponse: ${responseModel.data}');
+    var res = responseModel.data;
+    var parsedJson = json.decode(res);
+    Get.dialog<void>(StartMcExecutionMessageDialog(
+      data: parsedJson['message'],
+      startMCId: parsedJson['id'],
+    ));
+
+    return responseModel;
+  }
+
   Future<ResponseModel> permitRejectButton({
     required String auth,
     bool? isLoading,
@@ -868,7 +968,7 @@ class ConnectHelper {
         'Authorization': 'Bearer $auth',
       },
     );
-    print('PermitRejectResponse: ${responseModel.data}');
+    // print('PermitRejectResponse: ${responseModel.data}');
     var res = responseModel.data;
     var parsedJson = json.decode(res);
     Get.dialog<void>(PermitMessageRejectDialog(data: parsedJson['message']));
@@ -893,7 +993,7 @@ class ConnectHelper {
         'Authorization': 'Bearer $auth',
       },
     );
-    print('IncidentReportRejectResponse: ${responseModel.data}');
+    // print('IncidentReportRejectResponse: ${responseModel.data}');
     var res = responseModel.data;
     var parsedJson = json.decode(res);
     Get.dialog<void>(
@@ -918,7 +1018,7 @@ class ConnectHelper {
         'Authorization': 'Bearer $auth',
       },
     );
-    print('IncidentReportApproveResponse: ${responseModel.data}');
+    // print('IncidentReportApproveResponse: ${responseModel.data}');
     var res = responseModel.data;
     var parsedJson = json.decode(res);
     Get.dialog<void>(
@@ -971,7 +1071,7 @@ class ConnectHelper {
         'Authorization': 'Bearer $auth',
       },
     );
-    print('InventoryDetailResponse: ${responseModel.data}');
+    // print('InventoryDetailResponse: ${responseModel.data}');
 
     return responseModel;
   }
@@ -1089,6 +1189,25 @@ class ConnectHelper {
     return responseModel;
   }
 
+  Future<ResponseModel> getjobDetailsModel({
+    required String auth,
+    bool? isLoading,
+    int? jobId,
+    int? userId,
+  }) async {
+    var responseModel = await apiWrapper.makeRequest(
+      'JC/GetJCListByJobId?jobId=$jobId',
+      Request.get,
+      null,
+      isLoading ?? false,
+      {
+        'Authorization': 'Bearer $auth',
+      },
+    );
+
+    return responseModel;
+  }
+
   Future<ResponseModel> getPermitList({
     required String auth,
     int? facilityId,
@@ -1134,7 +1253,7 @@ class ConnectHelper {
   Future<ResponseModel> getTypePermitList(
       {String? auth, bool? isLoading, int? facility_id}) async {
     ResponseModel response = ResponseModel(data: '', hasError: true);
-    print('PermitTypeResponse: $response');
+    // print('PermitTypeResponse: $response');
     try {
       response = await apiWrapper.makeRequest(
         'Permit/GetPermitTypeList?facility_id=$facility_id',
@@ -1542,7 +1661,7 @@ class ConnectHelper {
     bool? isLoading,
   }) async {
     var responseModel = await apiWrapper.makeRequest(
-      'Permit/createSOP',
+      'Permit/CreateSOP',
       Request.post,
       createSop,
       isLoading ?? false,
@@ -1696,7 +1815,7 @@ class ConnectHelper {
     bool? isLoading,
   }) async {
     var responseModel = await apiWrapper.makeRequest(
-      'GO/SubmitPurchaseOrderData',
+      'RequestOrder/CreateRequestOrder',
       Request.post,
       createGoReq,
       isLoading ?? false,
@@ -3503,12 +3622,12 @@ class ConnectHelper {
   Future<ResponseModel> deletePermitType({
     required String auth,
     bool? isLoading,
-    required checklist_id,
+    required permit_id,
   }) async {
     var responseModel = await apiWrapper.makeRequest(
-      'Permit/DeletePermitType?id=$checklist_id',
+      'Permit/DeletePermitType?id=$permit_id',
       Request.delete,
-      checklist_id,
+      permit_id,
       isLoading ?? false,
       {
         'Content-Type': 'application/json',
@@ -4309,6 +4428,25 @@ class ConnectHelper {
     return responseModel;
   }
 
+  Future<ResponseModel> createJobType({
+    required String auth,
+    bool? isLoading,
+    required jobTypeJsonString,
+  }) async {
+    var responseModel = await apiWrapper.makeRequest(
+      'Permit/CreateJobType',
+      Request.post,
+      jobTypeJsonString,
+      isLoading ?? false,
+      {
+        'Content-Type': 'application/json',
+        'Authorization': 'Bearer $auth',
+      },
+    );
+
+    return responseModel;
+  }
+
   Future<ResponseModel> approveReturnMrs({
     required String auth,
     bool? isLoading,
@@ -4318,6 +4456,25 @@ class ConnectHelper {
       'MRS/ApproveMRSReturn',
       Request.post,
       approvetoJsonString,
+      isLoading ?? false,
+      {
+        'Content-Type': 'application/json',
+        'Authorization': 'Bearer $auth',
+      },
+    );
+
+    return responseModel;
+  }
+
+  Future<ResponseModel> deleteJobType({
+    required String auth,
+    bool? isLoading,
+    required check_point_id,
+  }) async {
+    var responseModel = await apiWrapper.makeRequest(
+      'Permit/DeleteJobType?id=$check_point_id',
+      Request.delete,
+      check_point_id,
       isLoading ?? false,
       {
         'Content-Type': 'application/json',
@@ -4347,6 +4504,25 @@ class ConnectHelper {
     return responseModel;
   }
 
+  Future<ResponseModel> updateTbt({
+    required String auth,
+    bool? isLoading,
+    required tbtJsonString,
+  }) async {
+    var responseModel = await apiWrapper.makeRequest(
+      'Permit/UpdateJobType',
+      Request.patch,
+      tbtJsonString,
+      isLoading ?? false,
+      {
+        'Content-Type': 'application/json',
+        'Authorization': 'Bearer $auth',
+      },
+    );
+
+    return responseModel;
+  }
+
   Future<ResponseModel> getReturnMrsDetails({
     required String? auth,
     int? mrsId,
@@ -4362,6 +4538,45 @@ class ConnectHelper {
         'Authorization': 'Bearer $auth',
       },
     );
+
+    return responseModel;
+  }
+
+  Future<ResponseModel> deleteSopType({
+    required String auth,
+    bool? isLoading,
+    required check_point_id,
+  }) async {
+    var responseModel = await apiWrapper.makeRequest(
+      'Permit/DeleteSOP?id=$check_point_id',
+      Request.delete,
+      check_point_id,
+      isLoading ?? false,
+      {
+        'Content-Type': 'application/json',
+        'Authorization': 'Bearer $auth',
+      },
+    );
+
+    return responseModel;
+  }
+
+  Future<ResponseModel> updateSop({
+    required String auth,
+    bool? isLoading,
+    required tbtJsonString,
+  }) async {
+    var responseModel = await apiWrapper.makeRequest(
+      'Permit/UpdateSOP',
+      Request.patch,
+      tbtJsonString,
+      isLoading ?? false,
+      {
+        'Content-Type': 'application/json',
+        'Authorization': 'Bearer $auth',
+      },
+    );
+
     return responseModel;
   }
 }

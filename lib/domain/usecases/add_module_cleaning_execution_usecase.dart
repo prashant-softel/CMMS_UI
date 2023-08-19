@@ -1,4 +1,5 @@
 import 'package:cmms/domain/domain.dart';
+import 'package:cmms/domain/models/type_permit_model.dart';
 
 import '../models/facility_model.dart';
 
@@ -12,14 +13,35 @@ class AddModuleCleaningExecutionUsecase {
   }
 
    
-  //   Future<Map<String, dynamic>> createEscalationMatrix({
-  //   createEscalationMatrix,
-  //   bool? isLoading,
-  // }) async =>
-  //     await _repository.createEscalationMatrix(
-  //       createEscalationMatrix,
-  //       isLoading,
-  //     );
+  Future<void> startMCExecutionButton({
+   
+    int? planId,
+    bool? isLoading,
+  }) async {
+    await _repository.startMCExecutionButton(
+      planId,
+      isLoading,
+    );
+  }
+
+   Future<Map<String, dynamic>> endMCExecutionButton({
+    endJsonString,
+    bool? isLoading,
+  }) async =>
+      await _repository.endMCExecutionButton(
+        endJsonString,
+        isLoading,
+      );
+
+   Future<List<TypePermitModel?>?> getTypePermitList(
+    bool? isLoading,
+    int? facility_id
+    ) async =>
+      await _repository.getTypePermitList(
+        isLoading,
+        facility_id
+        );
+
 
   Future<List<FacilityModel?>?> getFacilityList() async =>
       await _repository.getFacilityList(true);

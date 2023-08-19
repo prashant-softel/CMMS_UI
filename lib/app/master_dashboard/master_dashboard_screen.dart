@@ -484,6 +484,42 @@ class MastersDashboard extends GetView<MastersController> {
                                       controller.goToImportUser();
                                     });
                               }))),
+                              // OnHover(builder: (((isHovered) {
+                              //   return createContentTile(
+                              //       title: "Designation",
+                              //       onTap: () {
+                              //         controller.goToDesignationScreen();
+                              //       });
+                              // }))),
+                              // OnHover(builder: (((isHovered) {
+                              //   return createContentTile(
+                              //       title: "Competencies",
+                              //       onTap: () {
+                              //         controller.goToCompetencyScreen();
+                              //       });
+                              // }))),
+                              // OnHover(builder: (((isHovered) {
+                              //   return createContentTile(
+                              //       title: "Escalation Matrix",
+                              //       onTap: () {
+                              //         controller.goToEscalationMatrixScreen();
+                              //       });
+                              // }))),
+                            ],
+                          ),
+                          GridView.count(
+                            shrinkWrap: true,
+                            primary: false,
+                            padding: Dimens.edgeInsets15,
+                            crossAxisSpacing: 70,
+                            mainAxisSpacing: 6,
+                            crossAxisCount:
+                            Responsive.isMobile(context) ? 2 : 5,
+                            childAspectRatio: Responsive.isMobile(context)
+                                ? (itemWidth / itemHeight)
+                                : (itemWidth / itemHeightWeb),
+                            children: <Widget>[
+
                               OnHover(builder: (((isHovered) {
                                 return createContentTile(
                                     title: "Designation",
@@ -507,7 +543,6 @@ class MastersDashboard extends GetView<MastersController> {
                               }))),
                             ],
                           ),
-
                           Container(
                             margin: EdgeInsets.only(left: 20),
                             child: Row(
@@ -727,12 +762,14 @@ class MastersDashboard extends GetView<MastersController> {
             color: ColorValues.skyBlueColor,
             borderRadius: BorderRadius.circular(2),
           ),
-          padding: EdgeInsets.all(9),
-          child: Row(
-            crossAxisAlignment: CrossAxisAlignment.center,
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              Expanded(
+          padding: EdgeInsets.symmetric(horizontal: 12, vertical: 8),
+
+        child:
+          // Row(
+          //   crossAxisAlignment: CrossAxisAlignment.center,
+          //   mainAxisAlignment: MainAxisAlignment.center,
+          //   children: [
+              Center(
                 child: Text(
                   title,
                   style: TextStyle(
@@ -743,8 +780,8 @@ class MastersDashboard extends GetView<MastersController> {
                   textAlign: TextAlign.center, // Updated
                 ),
               ),
-            ],
-          ),
+            // ],
+          // ),
         ),
       ),
     );

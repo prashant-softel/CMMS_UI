@@ -4,6 +4,8 @@ import 'package:cmms/app/module_cleaning_execution/module_cleaning_list_executio
 import 'package:cmms/app/navigators/app_pages.dart';
 
 import 'package:cmms/app/theme/dimens.dart';
+import 'package:cmms/app/utils/user_access_constants.dart';
+import 'package:cmms/app/widgets/abandon_execution_dialog.dart';
 import 'package:cmms/app/widgets/action_button.dart';
 import 'package:cmms/app/widgets/custom_richtext.dart';
 import 'package:cmms/app/widgets/date_picker.dart';
@@ -99,28 +101,28 @@ class ModuleCleaningListExecution
                                       ),
                                       Spacer(),
                                       Row(
-                                      children: [
-                                        CustomRichText(title: 'Date Range'),
-                                        Dimens.boxWidth10,
-                                        CustomTextFieldForStock(
-                                          width: MediaQuery.of(context)
-                                                  .size
-                                                  .width /
-                                              5,
-                                          numberTextField: true,
-                                          onTap: () {
-                                            controller
-                                                    .openFromDateToStartDatePicker =
-                                                !controller
-                                                    .openFromDateToStartDatePicker;
-                                            controller.update(
-                                                ['stock_Mangement_Date']);
-                                          },
-                                          hintText:
-                                              '${controller.formattedTodate.toString()} To ${controller.formattedFromdate.toString()}',
-                                        ),
-                                      ],
-                                    ),
+                                        children: [
+                                          CustomRichText(title: 'Date Range'),
+                                          Dimens.boxWidth10,
+                                          CustomTextFieldForStock(
+                                            width: MediaQuery.of(context)
+                                                    .size
+                                                    .width /
+                                                5,
+                                            numberTextField: true,
+                                            onTap: () {
+                                              controller
+                                                      .openFromDateToStartDatePicker =
+                                                  !controller
+                                                      .openFromDateToStartDatePicker;
+                                              controller.update(
+                                                  ['stock_Mangement_Date']);
+                                            },
+                                            hintText:
+                                                '${controller.formattedTodate.toString()} To ${controller.formattedFromdate.toString()}',
+                                          ),
+                                        ],
+                                      ),
                                       // Container(
                                       //   child: Icon(
                                       //     Icons.filter_alt_sharp,
@@ -181,7 +183,6 @@ class ModuleCleaningListExecution
                                       ),
                                     ),
                                     Spacer(),
-                                    
                                     Dimens.boxWidth10,
                                     Container(
                                       width: 200,
@@ -209,22 +210,26 @@ class ModuleCleaningListExecution
                                       ),
                                     ),
                                     Dimens.boxWidth10,
-                                     varUserAccessModel.value.access_list!
-                                                      .where((e) =>
-                                                          e.feature_id == 34 &&
-                                                          e.add == 1)
-                                                      .length >
-                                                  0
-                                   ? ActionButton(
-                                      icon: Icons.add,
-                                      label: 'Add MC Execution',
-                                      onPressed: () {
-                                        Get.toNamed(Routes
-                                            .addModuleCleaningExecutionContentWeb);
-                                      },
-                                      color: ColorValues.appGreenColor,
-                                    )
-                                    :Container(),
+                                    varUserAccessModel.value.access_list!
+                                                .where((e) =>
+                                                    e.feature_id ==
+                                                        UserAccessConstants
+                                                            .kModuleCleaningExecutionFeatureId &&
+                                                    e.add ==
+                                                        UserAccessConstants
+                                                            .kNotHaveAddAccess)
+                                                .length >
+                                            0
+                                        ? ActionButton(
+                                            icon: Icons.add,
+                                            label: 'Add MC Execution',
+                                            onPressed: () {
+                                              Get.toNamed(Routes
+                                                  .addModuleCleaningExecutionContentWeb);
+                                            },
+                                            color: ColorValues.appGreenColor,
+                                          )
+                                        : Container(),
                                   ],
                                 ),
                                 SizedBox(
@@ -281,12 +286,13 @@ class ModuleCleaningListExecution
                                                     '',
                                                     '',
                                                     '',
+                                                    '',
                                                   ];
                                                 },
                                               ),
                                             ].map((record) {
                                               return TableViewRow(
-                                                height: 40,
+                                                height: 55,
                                                 cells: record.map((value) {
                                                   return TableViewCell(
                                                     child: Text(value),
@@ -304,6 +310,7 @@ class ModuleCleaningListExecution
                                               "Responsibility",
                                               "Frequency",
                                               "No. Of Days",
+                                              "Water Used",
                                               "Start Date",
                                               "Done Date",
                                               "Status",
@@ -311,7 +318,7 @@ class ModuleCleaningListExecution
                                             ].map((column) {
                                               return TableViewColumn(
                                                 label: column,
-                                                minWidth: Get.width * 0.08,
+                                                minWidth: Get.width * 0.09,
                                               );
                                             }).toList(),
                                             // rows: [],
@@ -324,6 +331,7 @@ class ModuleCleaningListExecution
                                                   '${controller.mcTaskList[index]!.responsibility}',
                                                   '${controller.mcTaskList[index]!.frequency}',
                                                   '${controller.mcTaskList[index]!.noOfDays}',
+                                                  '${controller.mcTaskList[index]!.water_used}',
                                                   '${controller.mcTaskList[index]!.startDate}',
                                                   '${controller.mcTaskList[index]!.doneDate}',
                                                   '${controller.mcTaskList[index]!.status_short}',
@@ -332,12 +340,24 @@ class ModuleCleaningListExecution
                                               ),
                                             ].map((record) {
                                               return TableViewRow(
-                                                height: 40,
+                                                onTap: () {},
+                                                height: 55,
                                                 cells: record.map((value) {
+                                                   final Map<String, dynamic> dataList = {
+                                                                              'id': int.tryParse('${record[0]}'),
+                                                                              'status': '${record[8]}',
+                                                                              'planId': int.tryParse('${record[1]}')
+                                                                              // {'id': 2, 'name': 'Item 2'},
+                                                                              // {'id': 3, 'name': 'Item 3'},
+                                                                              // {'id': 4, 'name': 'Item 4'},
+                                                                              // {'id': 5, 'name': 'Item 5'},
+                                                   };
                                                   return TableViewCell(
                                                     child: value == "Actions"
                                                         ? Wrap(
                                                             children: [
+
+
                                                               TableActionButton(
                                                                 color: ColorValues
                                                                     .appDarkBlueColor,
@@ -345,10 +365,9 @@ class ModuleCleaningListExecution
                                                                     .remove_red_eye_outlined,
                                                                 message: 'View',
                                                                 onPress: () {
-                                                                  controller
-                                                                      .viewMCExecution(
-                                                                          id: int.tryParse(
-                                                                              '${record[0]}'));
+                                                                  controller.viewMCExecution(
+                                                                      id: int.tryParse(
+                                                                          '${record[0]}'));
                                                                 },
                                                               ),
                                                               TableActionButton(
@@ -365,7 +384,64 @@ class ModuleCleaningListExecution
                                                                   // print(
                                                                   //     'edit record:${int.tryParse('${record[0]}')}');
                                                                 },
-                                                              )
+                                                              ),
+                                                              record[8] ==
+                                                                      "Abandoned"
+                                                                  ? TableActionButton(
+                                                                      color: ColorValues
+                                                                          .appRedColor,
+                                                                      icon: Icons
+                                                                          .close,
+                                                                      message:
+                                                                          'Abandon',
+                                                                      onPress:
+                                                                          () {
+                                                                        Get.dialog(
+                                                                            AbandoneExecutionDialog(id: int.tryParse('${record[0]}')));
+                                                                      },
+                                                                    )
+                                                                  : Container(),
+                                                              record[8] ==
+                                                                      "Scheduled"
+                                                                  ? TableActionButton(
+                                                                      color: ColorValues
+                                                                          .appGreenColor,
+                                                                      icon: Icons
+                                                                          .add,
+                                                                      message:
+                                                                          'Start',
+                                                                      onPress:
+                                                                          () {
+                                                                        // controller.startMCExecutionButton(
+                                                                        //     planId:
+                                                                        //         int.tryParse('${record[1]}'));
+                                                                        // controller.startMCExecution(planId:int.tryParse('${record[1]}'),);
+                                                                        controller.StartEndMCExecution(dataList: dataList);
+                                                                      },
+                                                                    )
+                                                                  : Container(),
+                                                              record[8] ==
+                                                                      "Abandoned"
+                                                                  ? TableActionButton(
+                                                                      color: ColorValues
+                                                                          .appGreenColor,
+                                                                      icon: Icons
+                                                                          .add,
+                                                                      message:
+                                                                          'End',
+                                                                      onPress:
+                                                                          () {
+                                                                           
+                                                                            controller.StartEndMCExecution(dataList: dataList);
+                                                                        // controller
+                                                                        //     .editIncidentReport(
+                                                                        //         id: int.tryParse(
+                                                                        //             '${record[0]}'));
+                                                                        // print(
+                                                                        //     'edit record:${int.tryParse('${record[0]}')}');
+                                                                      },
+                                                                    )
+                                                                  : Container(),
                                                             ],
                                                           )
                                                         : Text(value),

@@ -152,8 +152,12 @@ class NewPermitListWeb extends GetView<NewPermitListController> {
 
                                     varUserAccessModel.value.access_list!
                                                 .where((e) =>
-                                                    e.feature_id == UserAccessConstants.kPermitFeatureId &&
-                                                    e.add == UserAccessConstants.kHaveAddAccess)
+                                                    e.feature_id ==
+                                                        UserAccessConstants
+                                                            .kPermitFeatureId &&
+                                                    e.add ==
+                                                        UserAccessConstants
+                                                            .kHaveAddAccess)
                                                 .length >
                                             0
                                         ? ActionButton(
@@ -268,7 +272,7 @@ class NewPermitListWeb extends GetView<NewPermitListController> {
                                                   'request_by_name',
                                                   // 'request_datetime',
                                                   'approved_by_name',
-                                                  // 'approved_datetime',
+                                                  // 'Permit Expire',
                                                   'current_status',
                                                   // 'breakdownTime',
                                                   // 'breakdownType',
@@ -302,8 +306,8 @@ class NewPermitListWeb extends GetView<NewPermitListController> {
                                                                               //     ? "Requested Date & Time"
                                                                               : column == "approved_by_name"
                                                                                   ? "Approved By"
-                                                                                  // : column == "approved_datetime"
-                                                                                  //     ? "Approved Date & Time"
+                                                                                  // : column == "Permit Expire"
+                                                                                  //     ? "Permit Expire"
                                                                                   : column == "current_status"
                                                                                       ? "Status"
                                                                                       : ""
@@ -337,6 +341,7 @@ class NewPermitListWeb extends GetView<NewPermitListController> {
                                                         // '${newPermitDetails?.requestDatetime}',
                                                         '${newPermitDetails?.approvedByName}\n${newPermitDetails?.approvedDatetime}',
                                                         // '${newPermitDetails?.approvedDatetime}',
+                                                        // '${newPermitDetails?.isExpired}',
                                                         '${newPermitDetails?.current_status_short}',
                                                         // '${newPermitDetails?.current_status}' ==
                                                         //         "Permit Created"
@@ -480,27 +485,35 @@ class NewPermitListWeb extends GetView<NewPermitListController> {
                                                                                 //                         UserAccessConstants.kHaveAddAccess)
                                                                                 //                 .length >
                                                                                 //             0 ||
+                                                                               
                                                                                 controller.newPermitList!
-                                                                                                .firstWhere(
-                                                                                                  (e) => "${e?.permitId}" == _newPermitList[0],
-                                                                                                  orElse: () => NewPermitModel(permitId: 000),
-                                                                                                )
-                                                                                                ?.requestById ==
-                                                                                            varUserAccessModel.value.user_id &&
-                                                                                        (controller.newPermitList!
+                                                                                                        .firstWhere(
+                                                                                                          (e) => "${e?.permitId}" == _newPermitList[0],
+                                                                                                          orElse: () => NewPermitModel(permitId: 000),
+                                                                                                        )
+                                                                                                        ?.isExpired ==
+                                                                                                    1 ||
+                                                                                        controller.newPermitList!
                                                                                                     .firstWhere(
                                                                                                       (e) => "${e?.permitId}" == _newPermitList[0],
                                                                                                       orElse: () => NewPermitModel(permitId: 000),
                                                                                                     )
-                                                                                                    ?.ptwStatus ==
-                                                                                                125 ||
-                                                                                            controller.newPermitList!
-                                                                                                    .firstWhere(
-                                                                                                      (e) => "${e?.permitId}" == _newPermitList[0],
-                                                                                                      orElse: () => NewPermitModel(permitId: 000),
-                                                                                                    )
-                                                                                                    ?.ptwStatus ==
-                                                                                                135)
+                                                                                                    ?.requestById ==
+                                                                                                varUserAccessModel.value.user_id &&
+                                                                                            (controller.newPermitList!
+                                                                                                        .firstWhere(
+                                                                                                          (e) => "${e?.permitId}" == _newPermitList[0],
+                                                                                                          orElse: () => NewPermitModel(permitId: 000),
+                                                                                                        )
+                                                                                                        ?.ptwStatus ==
+                                                                                                    125 ||
+                                                                                                controller.newPermitList!
+                                                                                                        .firstWhere(
+                                                                                                          (e) => "${e?.permitId}" == _newPermitList[0],
+                                                                                                          orElse: () => NewPermitModel(permitId: 000),
+                                                                                                        )
+                                                                                                        ?.ptwStatus ==
+                                                                                                    135)
                                                                                     ? TableActionButton(
                                                                                         color: ColorValues.appDarkBlueColor,
                                                                                         icon: Icons.expand_outlined,

@@ -55,9 +55,9 @@ class SafetyQuestionsListContentWeb
                     onTap: () {
                       Get.back();
                     },
-                    child: Text(" / Masters", style: Styles.greyMediumLight12),
+                    child: Text(" / MASTERS", style: Styles.greyMediumLight12),
                   ),
-                  Text(" / Safety Questions", style: Styles.greyMediumLight12)
+                  Text(" / SAFETY QUESTIONS", style: Styles.greyMediumLight12)
                 ],
               ),
             ),

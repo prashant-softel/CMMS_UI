@@ -10,6 +10,7 @@ abstract class ColorValues {
   static Color secondaryColor = Color(secondaryColorHex);
   static Color scaffoldBackgroundColor = Color(scaffoldBackgroundColorHex);
   static const Color blackColor = Color(blackColorHex);
+
   static const Color whiteColor = Color(whiteColorHex);
   static const Color greenColor = Color(greenColorHex);
   static const Color redColor = Color(redColorHex);
@@ -19,6 +20,9 @@ abstract class ColorValues {
   static const Color navyBlueColor = Color.fromARGB(255, 7, 63, 115);
   static const Color skyBlueColor = Color(skyBlueColorHex);
   static const Color greyColor = Color(greyColorHex);
+  static const Color cardColor = Color(cardColorHex);
+  static const Color inerCardColorHex = Color(inerToCardColorHex);
+
   static const Color greyDividerColor = Color(lightGreyDividerColorHex);
   static const Color lightGreyTextColor = Color(lightGreyTextColorHex);
   static const Color transparent = Colors.transparent;
@@ -124,6 +128,9 @@ abstract class ColorValues {
   static const int darkBlueColorHex = 0xff1B53F4;
   static const int skyBlueColorHex = 0xff63c0df;
   static const int greyColorHex = 0xff363636;
+  static const int cardColorHex = 0xffEDF0F2;
+  static const int inerToCardColorHex = 0xffE7F4F9;
+
   static const int blueMediumColorHex = 0xffd9e5f6;
   static const int lightBlueColorHex = 0xffd1ddfd;
   static const int lightGreenColorHex = 0xff6fdf2e;

@@ -7,6 +7,8 @@ import 'dart:convert';
 JobDetailsModel jobDetailsModelFromJson(String str) =>
     JobDetailsModel.fromJson(json.decode(str));
 
+JobAssociatedModel jobAssociatedModelFromJson(String str) =>
+    JobAssociatedModel.fromJson(json.decode(str));
 String jobDetailsModelToJson(JobDetailsModel data) =>
     json.encode(data.toJson());
 
@@ -281,5 +283,73 @@ class WorkTypeList {
       };
 }
 
-  ///
+///
+class JobAssociatedModel {
+  JobAssociatedModel({
+    this.id,
+    this.jobCardId,
+    this.jobCardNo,
+    this.jobid,
+    this.permit_id,
+    this.permit_no,
+    this.current_status,
+    this.description,
+    this.job_assinged_to,
+    this.job_card_date,
+    this.start_time,
+    this.end_time,
+    this.lstequipmentCatList,
+  });
 
+  int? id;
+  int? jobCardId;
+  int? jobCardNo;
+  int? jobid;
+  int? permit_id;
+  String? permit_no;
+  int? current_status;
+  String? description;
+  String? job_assinged_to;
+  String? job_card_date;
+  dynamic? start_time;
+  dynamic? end_time;
+  dynamic? lstequipmentCatList;
+
+  factory JobAssociatedModel.fromJson(Map<String, dynamic> json) =>
+      JobAssociatedModel(
+        id: json["id"] == null ? 0 : json['id'],
+        jobCardId: json["jobCardId"] == null ? 0 : json['jobCardId'],
+        jobCardNo: json["jobCardNo"] == null ? 0 : json['jobCardNo'],
+        jobid: json["jobid"] == null ? 0 : json['jobid'],
+        permit_id: json["permit_id"] == null ? 0 : json['permit_id'],
+        permit_no: json["permit_no"] == null ? 0 : json['permit_no'],
+        current_status:
+            json["current_status"] == null ? 0 : json['current_status'],
+        description: json["description"] == null ? 0 : json['description'],
+        job_assinged_to:
+            json["job_assinged_to"] == null ? 0 : json['job_assinged_to'],
+        job_card_date:
+            json["job_card_date"] == null ? 0 : json['job_card_date'],
+        start_time: json["start_time"] == null ? 0 : json['start_time'],
+        end_time: json["end_time"] == null ? 0 : json['end_time'],
+        lstequipmentCatList: json["lstequipmentCatList"] == null
+            ? 0
+            : json['lstequipmentCatList'],
+      );
+
+  Map<String, dynamic> toJson() => {
+        "id": id,
+        "jobCardId": jobCardId,
+        "jobCardNo": jobCardNo,
+        "jobid": jobid,
+        "permit_id": permit_id,
+        "permit_no": permit_no,
+        "current_status": current_status,
+        "description": description,
+        "job_assinged_to": job_assinged_to,
+        "job_card_date": job_card_date,
+        "start_time": start_time,
+        "end_time": end_time,
+        "lstequipmentCatList": lstequipmentCatList,
+      };
+}

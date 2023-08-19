@@ -123,9 +123,9 @@ class DesignationListController extends GetxController {
     isSuccess.toggle();
 
     // isToggleOn.value = false;
-    await {_cleardata()};
+    await {cleardata()};
   }
-  _cleardata() {
+  cleardata() {
     nameCtrlr.text = '';
     descriptionCtrlr.text = '';
     selectedItem = null;

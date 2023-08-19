@@ -4,25 +4,26 @@ import 'package:cmms/app/add_module_cleaning_execution/add_module_cleaning_execu
 import 'package:cmms/app/app.dart';
 import 'package:cmms/app/navigators/app_pages.dart';
 import 'package:cmms/domain/models/create_escalation_matrix_model.dart';
+import 'package:cmms/domain/models/end_mc_execution_model.dart';
 import 'package:cmms/domain/models/modulelist_model.dart';
 import 'package:cmms/domain/models/paiyed_model.dart';
 import 'package:cmms/domain/models/role_model.dart';
+import 'package:cmms/domain/models/type_permit_model.dart';
+import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:rxdart/subjects.dart';
 import 'package:scrollable_table_view/scrollable_table_view.dart';
 import '../../domain/models/facility_model.dart';
 
 class AddModuleCleaningExecutionController extends GetxController {
-  AddModuleCleaningExecutionController(this.addModuleCleaningExecutionPresenter);
+  AddModuleCleaningExecutionController(
+      this.addModuleCleaningExecutionPresenter);
   AddModuleCleaningExecutionPresenter addModuleCleaningExecutionPresenter;
 
   final HomeController homeController = Get.find();
 
   Rx<String> selectedFacility = ''.obs;
 
-
-
- 
   Rx<List<List<Map<String, String>>>> rowItem =
       Rx<List<List<Map<String, String>>>>([]);
   List<Escalation> days = [];
@@ -49,7 +50,17 @@ class AddModuleCleaningExecutionController extends GetxController {
   int? selectedModuleListId = 0;
   int type = 1;
 
- 
+  ///Permit Type
+  RxList<TypePermitModel?> typePermitList = <TypePermitModel>[].obs;
+  Rx<bool> isTypePermitSelected = true.obs;
+  Rx<String> selectedTypePermit = ''.obs;
+  Rx<String> selectedTypeOfPermit = ''.obs;
+  Rx<bool> isTypePermit = true.obs;
+
+
+  ///
+  TextEditingController remarkTextFieldCtrlr = TextEditingController();
+  
 
   RxList<FacilityModel?> facilityList = <FacilityModel>[].obs;
   Rx<bool> isFacilitySelected = true.obs;
@@ -58,10 +69,6 @@ class AddModuleCleaningExecutionController extends GetxController {
     rowsPerPage: 10,
   );
 
-
-
-
- 
   BehaviorSubject<int> _facilityId = BehaviorSubject.seeded(0);
   Stream<int> get facilityId$ => _facilityId.stream;
   int get facilityId1 => _facilityId.value;
@@ -70,11 +77,18 @@ class AddModuleCleaningExecutionController extends GetxController {
   int facilityId = 0;
 
   ///
-  int? id = 0;
+
+  Map<String, dynamic> data = {};
+  dynamic planId = [];
   @override
   void onInit() async {
-    id = Get.arguments;
-    print('EscalationMatrix_Id:$id');
+
+    data = Get.arguments;
+    print('Data Id ${data['id']}');
+    print('Data Status ${data['status']}');
+    print('plan Id:${data['planId']}');
+
+
     facilityIdStreamSubscription = homeController.facilityId$.listen((event) {
       facilityId = event;
       Future.delayed(Duration(seconds: 1), () {
@@ -82,14 +96,16 @@ class AddModuleCleaningExecutionController extends GetxController {
       });
     });
 
-  
-   
+    Future.delayed(Duration(seconds: 1), () {
+      getTypePermitList();
+    });
 
     super.onInit();
   }
 
   Future<void> getFacilityList() async {
-    final _facilityList = await addModuleCleaningExecutionPresenter.getFacilityList();
+    final _facilityList =
+        await addModuleCleaningExecutionPresenter.getFacilityList();
     //print('Facility25:$_facilityList');
     if (_facilityList != null) {
       for (var facility in _facilityList) {
@@ -101,7 +117,62 @@ class AddModuleCleaningExecutionController extends GetxController {
     }
   }
 
- 
+  Future<void> getTypePermitList() async {
+    final _permitTypeList = await addModuleCleaningExecutionPresenter
+        .getTypePermitList(facility_id: facilityId);
+
+    if (_permitTypeList != null) {
+      for (var permitType in _permitTypeList) {
+        typePermitList.add(permitType);
+      }
+      // selectedTypePermit.value = typePermitList[0]?.name ?? '';
+    }
+  }
+
+
+
+   Future<void> startMCExecutionButton() async {
+    final _startMCExecutionBtn =
+        await addModuleCleaningExecutionPresenter.startMCExecutionButton(
+      planId: data['planId'],
+      
+    );
+    
+    // print('Plan Data:${data['planId']}');
+  }
+
+
+   void endMCExecutionButton({int? id}) async {
+    {
+      String _remark = remarkTextFieldCtrlr.text.trim();
+
+      EndMCExecutionModel endMCModel =
+          EndMCExecutionModel(
+            scheduleId:46,
+            executionId:57,
+            cleaningDay:1,
+            waterUsed: 2345,  
+            remark: _remark,
+            equipments:[
+              
+             Equipments(id: 10),
+             Equipments(id: 9)
+             ]
+            );
+
+      var endJsonString = endMCModel.toJson();
+      // print({"rejectCalibrationJsonString", approveCalibrationtoJsonString});
+      Map<String, dynamic>? response = await addModuleCleaningExecutionPresenter.endMCExecutionButton(
+        endJsonString: endJsonString,
+        isLoading: true,
+      );
+      print('EndJsonData:$endJsonString');
+      if (response == true) {
+        //getCalibrationList(facilityId, true);
+      }
+    }
+  }
+
   void onValueChanged(dynamic list, dynamic value) {
     print('Valuesd:${value}');
     switch (list.runtimeType) {
@@ -119,7 +190,6 @@ class AddModuleCleaningExecutionController extends GetxController {
           print('Module List Id: $selectedModuleListId');
         }
         break;
-     
 
       default:
         {
@@ -129,7 +199,6 @@ class AddModuleCleaningExecutionController extends GetxController {
     }
   }
 
- 
   // void createEscalationMatrix() async {
   //   List<Escalation> days = [];
   //   rowItem.value.forEach((element) {
