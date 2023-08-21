@@ -3,11 +3,14 @@ import 'dart:async';
 import 'package:cmms/app/app.dart';
 import 'package:cmms/app/navigators/app_pages.dart';
 import 'package:cmms/domain/models/create_escalation_matrix_model.dart';
+import 'package:cmms/domain/models/end_mc_execution_detail_model.dart';
 import 'package:cmms/domain/models/history_model.dart';
 import 'package:cmms/domain/models/modulelist_model.dart';
 import 'package:cmms/domain/models/paiyed_model.dart';
 import 'package:cmms/domain/models/role_model.dart';
+import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:intl/intl.dart';
 import 'package:rxdart/subjects.dart';
 import 'package:scrollable_table_view/scrollable_table_view.dart';
 import '../../domain/models/facility_model.dart';
@@ -64,6 +67,21 @@ class viewModuleCleaningExecutionController extends GetxController {
 ///MC Execution History
   RxList<HistoryModel?>? historyList = <HistoryModel?>[].obs;
 
+///Schedule List
+  RxList<Schedules?>? listSchedules = <Schedules?>[].obs;
+
+
+   ///Mc Execution details
+  Rx<EndMCExecutionDetailsModel?> mcExecutionDetailsModel =
+      EndMCExecutionDetailsModel().obs;
+  RxList<EndMCExecutionDetailsModel?>? mcExecutionDetailsList =
+      <EndMCExecutionDetailsModel?>[].obs;
+
+
+    ///Date Time
+  var startedAtDateTimeCtrlrWeb = TextEditingController();
+  var plannedAtDateTimeCtrlrWeb = TextEditingController();
+
 
 
 
@@ -90,7 +108,29 @@ class viewModuleCleaningExecutionController extends GetxController {
     });
     await getMCExecutionHistory(id: id!);
 
+     if (id != null) {
+      Future.delayed(Duration(seconds: 1), () {
+        getMCExecutionDetail(executionId: id!);
+      });
+    }
+
     super.onInit();
+  }
+
+   Future<void> getMCExecutionDetail({required int executionId}) async {
+    // newPermitDetails!.value = <NewPermitListModel>[];
+    mcExecutionDetailsList?.value = <EndMCExecutionDetailsModel>[];
+
+    final _mcExecutionDetails = await viewModuleCleaningExecutionPresenter
+        .getMCExecutionDetail(executionId: executionId);
+    print('View MC Execution Detail:$_mcExecutionDetails');
+
+    if (_mcExecutionDetails != null) {
+      mcExecutionDetailsModel.value = _mcExecutionDetails;
+      plannedAtDateTimeCtrlrWeb.text = '${DateFormat('yyyy-MM-dd HH:mm:ss').format(DateTime.parse('${mcExecutionDetailsModel.value?.plannedAt}'))}';
+      startedAtDateTimeCtrlrWeb.text = '${DateFormat('yyyy-MM-dd HH:mm:ss').format(DateTime.parse('${mcExecutionDetailsModel.value?.startedAt}'))}';
+      listSchedules?.value = mcExecutionDetailsModel.value?.schedules ?? [];
+    }
   }
 
   // Future<void> getFacilityList() async {

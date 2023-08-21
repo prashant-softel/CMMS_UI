@@ -1362,6 +1362,7 @@ abstract class Dimens {
   static SizedBox boxHeight16 = SizedBox(height: sixteen);
   static SizedBox boxHeight18 = SizedBox(height: eighteen);
   static SizedBox boxHeight20 = SizedBox(height: twenty);
+  static SizedBox boxHeight22 = SizedBox(height: twentyTwo);
   static SizedBox boxHeight24 = SizedBox(height: twentyFour);
   static SizedBox boxHeight25 = SizedBox(height: twentyFive);
   static SizedBox boxHeight27 = SizedBox(height: twentySeven);
