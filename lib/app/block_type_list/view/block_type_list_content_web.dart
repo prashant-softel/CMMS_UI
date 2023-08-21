@@ -76,7 +76,7 @@ class BlockTypeListContentWeb extends GetView<BlockTypeListController> {
                               .length >
                           0
                       ? Container(
-                          width: (Get.width * .3),
+                          width: (Get.width * .35),
                           margin: EdgeInsets.only(left: 30, top: 30),
                           height: Get.height / 2.25,
                           child: Card(
@@ -119,7 +119,7 @@ class BlockTypeListContentWeb extends GetView<BlockTypeListController> {
                                                     .size
                                                     .height *
                                                     0.040,
-                                                margin: Dimens.edgeInsets5,
+                                                // margin: Dimens.edgeInsets5,
                                                 decoration: BoxDecoration(
                                                   boxShadow: [
                                                     BoxShadow(

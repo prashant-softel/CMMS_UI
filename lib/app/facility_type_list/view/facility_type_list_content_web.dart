@@ -70,9 +70,9 @@ class FacilityTypeListContentWeb extends GetView<FacilityTypeListController> {
                               .length >
                           0
                       ? Container(
-                          width: (Get.width * .3),
+                          width: (Get.width * .35 ),
                           margin: EdgeInsets.only(left: 30, top: 30),
-                          height: Get.height,
+                          height: Get.height/1.25,
                           child: Card(
                             color: Color.fromARGB(255, 251, 252, 253),
                             elevation: 10,
@@ -96,7 +96,7 @@ class FacilityTypeListContentWeb extends GetView<FacilityTypeListController> {
                                             style: Styles.blackBold16,
                                           ),
                                           SizedBox(
-                                            height: 40,
+                                            height: 20,
                                           ),
                                           Visibility(
                                             visible: controller.isSuccess.value,
@@ -123,14 +123,10 @@ class FacilityTypeListContentWeb extends GetView<FacilityTypeListController> {
 
                                           Row(
                                             mainAxisAlignment:
-                                                MainAxisAlignment.spaceBetween,
+                                                MainAxisAlignment.start,
                                             children: [
-                                              // Text(
-                                              //   "Title",
-                                              //   style: Styles.blackBold16,
-                                              // ),
 
-                                              CustomRichText(title: 'Title '),
+                                              Expanded(child: CustomRichText(title: 'Title ')),
                                               Expanded(
                                                 child: Container(
                                                     margin: Dimens.edgeInsets5,
@@ -174,14 +170,14 @@ class FacilityTypeListContentWeb extends GetView<FacilityTypeListController> {
                                               ),
                                             ],
                                           ),
-                                          SizedBox(
-                                            height: 10,
-                                          ),
+                                          // SizedBox(
+                                          //   height: 10,
+                                          // ),
                                           Row(
                                             mainAxisAlignment:
-                                                MainAxisAlignment.spaceBetween,
+                                                MainAxisAlignment.start,
                                             children: [
-                                              CustomRichText(title: 'Owner '),
+                                              Expanded(child: CustomRichText(title: 'Owner ')),
                                               Expanded(
                                                 child: Container(
                                                   margin: Dimens.edgeInsets5,
@@ -269,13 +265,24 @@ class FacilityTypeListContentWeb extends GetView<FacilityTypeListController> {
                                                   ),
                                                 ),
                                               ),
-                                              CustomRichText(
-                                                  title: 'Operator '),
+                                            ],
+                                          ),
+                                          // SizedBox(
+                                          //   height: 10,
+                                          // ),
+                                          Row(
+                                            mainAxisAlignment:
+                                            MainAxisAlignment.start,
+                                            children: [
+                                              Expanded(
+                                                child: CustomRichText(
+                                                    title: 'Operator '),
+                                              ),
                                               Expanded(
                                                 child: Container(
                                                   height: MediaQuery.of(context)
-                                                          .size
-                                                          .height *
+                                                      .size
+                                                      .height *
                                                       0.040,
                                                   margin: Dimens.edgeInsets5,
                                                   decoration: BoxDecoration(
@@ -299,27 +306,27 @@ class FacilityTypeListContentWeb extends GetView<FacilityTypeListController> {
                                                       ),
                                                     ],
                                                     color:
-                                                        ColorValues.whiteColor,
+                                                    ColorValues.whiteColor,
                                                     borderRadius:
-                                                        BorderRadius.circular(
-                                                            5),
+                                                    BorderRadius.circular(
+                                                        5),
                                                   ),
                                                   width: (MediaQuery.of(context)
-                                                              .size
-                                                              .width *
-                                                          .2) -
+                                                      .size
+                                                      .width *
+                                                      .2) -
                                                       45,
                                                   child: Container(
                                                     height:
-                                                        MediaQuery.of(context)
-                                                                .size
-                                                                .height *
-                                                            0.040,
+                                                    MediaQuery.of(context)
+                                                        .size
+                                                        .height *
+                                                        0.040,
                                                     width:
-                                                        (MediaQuery.of(context)
-                                                                .size
-                                                                .width *
-                                                            .3),
+                                                    (MediaQuery.of(context)
+                                                        .size
+                                                        .width *
+                                                        .3),
                                                     child: DropdownWebWidget(
                                                       boxShadow: [
                                                         BoxShadow(
@@ -351,11 +358,11 @@ class FacilityTypeListContentWeb extends GetView<FacilityTypeListController> {
                                                           .value,
                                                       onValueChanged:
                                                           (selectedValue,
-                                                              isValueSelected) {
+                                                          isValueSelected) {
                                                         controller
                                                             .onValueChangedCustomer(
-                                                                selectedValue,
-                                                                isValueSelected);
+                                                            selectedValue,
+                                                            isValueSelected);
                                                       },
                                                     ),
                                                   ),
@@ -363,15 +370,14 @@ class FacilityTypeListContentWeb extends GetView<FacilityTypeListController> {
                                               ),
                                             ],
                                           ),
-                                          SizedBox(
-                                            height: 10,
-                                          ),
+                                          // SizedBox(
+                                          //   height: 10,
+                                          // ),
                                           Row(
                                             mainAxisAlignment:
-                                                MainAxisAlignment.spaceBetween,
+                                                MainAxisAlignment.start,
                                             children: [
-                                              CustomRichText(
-                                                  title: 'Customer '),
+                                              Expanded(child: CustomRichText(title: 'Customer ')),
                                               Expanded(
                                                 child: Container(
                                                   margin: Dimens.edgeInsets5,
@@ -460,14 +466,14 @@ class FacilityTypeListContentWeb extends GetView<FacilityTypeListController> {
                                               ),
                                             ],
                                           ),
-                                          SizedBox(
-                                            height: 10,
-                                          ),
+                                          // SizedBox(
+                                          //   height: 10,
+                                          // ),
                                           Row(
                                             mainAxisAlignment:
-                                                MainAxisAlignment.spaceBetween,
+                                                MainAxisAlignment.start,
                                             children: [
-                                              CustomRichText(title: 'SPV '),
+                                              Expanded(child: CustomRichText(title: 'SPV ')),
                                               Expanded(
                                                 child: Container(
                                                   margin: Dimens.edgeInsets5,
@@ -556,14 +562,14 @@ class FacilityTypeListContentWeb extends GetView<FacilityTypeListController> {
                                               ),
                                             ],
                                           ),
-                                          SizedBox(
-                                            height: 10,
-                                          ),
+                                          // SizedBox(
+                                          //   height: 10,
+                                          // ),
                                           Row(
                                             mainAxisAlignment:
-                                                MainAxisAlignment.spaceBetween,
+                                                MainAxisAlignment.start,
                                             children: [
-                                              CustomRichText(title: 'Address '),
+                                              Expanded(child: CustomRichText(title: 'Title ')),
                                               Expanded(
                                                 child: Container(
                                                     margin: Dimens.edgeInsets5,
@@ -607,14 +613,14 @@ class FacilityTypeListContentWeb extends GetView<FacilityTypeListController> {
                                               ),
                                             ],
                                           ),
-                                          SizedBox(
-                                            height: 10,
-                                          ),
+                                          // SizedBox(
+                                          //   height: 10,
+                                          // ),
                                           Row(
                                             mainAxisAlignment:
-                                                MainAxisAlignment.spaceBetween,
+                                                MainAxisAlignment.start,
                                             children: [
-                                              CustomRichText(title: 'Country '),
+                                              Expanded(child: CustomRichText(title: 'Country ')),
                                               Expanded(
                                                 child: Container(
                                                   margin: Dimens.edgeInsets5,
@@ -703,13 +709,22 @@ class FacilityTypeListContentWeb extends GetView<FacilityTypeListController> {
                                                   ),
                                                 ),
                                               ),
-                                              CustomRichText(title: 'State '),
+                                            ],
+                                          ),
+                                          // SizedBox(
+                                          //   height: 10,
+                                          // ),
+                                          Row(
+                                            mainAxisAlignment:
+                                            MainAxisAlignment.start,
+                                            children: [
+                                              Expanded(child: CustomRichText(title: 'State ')),
                                               Expanded(
                                                 child: Container(
                                                   margin: Dimens.edgeInsets5,
                                                   height: MediaQuery.of(context)
-                                                          .size
-                                                          .height *
+                                                      .size
+                                                      .height *
                                                       0.040,
                                                   decoration: BoxDecoration(
                                                     boxShadow: [
@@ -732,34 +747,34 @@ class FacilityTypeListContentWeb extends GetView<FacilityTypeListController> {
                                                       ),
                                                     ],
                                                     color:
-                                                        ColorValues.whiteColor,
+                                                    ColorValues.whiteColor,
                                                     borderRadius:
-                                                        BorderRadius.circular(
-                                                            5),
+                                                    BorderRadius.circular(
+                                                        5),
                                                   ),
                                                   width: (MediaQuery.of(context)
-                                                              .size
-                                                              .width *
-                                                          .2) -
+                                                      .size
+                                                      .width *
+                                                      .2) -
                                                       45,
                                                   child: Container(
                                                     height:
-                                                        MediaQuery.of(context)
-                                                                .size
-                                                                .height *
-                                                            0.040,
+                                                    MediaQuery.of(context)
+                                                        .size
+                                                        .height *
+                                                        0.040,
                                                     width:
-                                                        (MediaQuery.of(context)
-                                                                .size
-                                                                .width *
-                                                            .3),
+                                                    (MediaQuery.of(context)
+                                                        .size
+                                                        .width *
+                                                        .3),
                                                     child: DropdownWebWidget(
                                                         boxShadow: [
                                                           BoxShadow(
                                                             color:
-                                                                Colors.black26,
+                                                            Colors.black26,
                                                             offset:
-                                                                const Offset(
+                                                            const Offset(
                                                               5.0,
                                                               5.0,
                                                             ),
@@ -770,8 +785,8 @@ class FacilityTypeListContentWeb extends GetView<FacilityTypeListController> {
                                                             color: ColorValues
                                                                 .whiteColor,
                                                             offset:
-                                                                const Offset(
-                                                                    0.0, 0.0),
+                                                            const Offset(
+                                                                0.0, 0.0),
                                                             blurRadius: 0.0,
                                                             spreadRadius: 0.0,
                                                           ),
@@ -783,25 +798,25 @@ class FacilityTypeListContentWeb extends GetView<FacilityTypeListController> {
                                                             .isSelectedStateType
                                                             .value,
                                                         selectedValue:
-                                                            controller
-                                                                .selectedState
-                                                                .value,
+                                                        controller
+                                                            .selectedState
+                                                            .value,
                                                         onValueChanged:
-                                                            controller
-                                                                .onValueChanged),
+                                                        controller
+                                                            .onValueChanged),
                                                   ),
                                                 ),
                                               ),
                                             ],
                                           ),
-                                          SizedBox(
-                                            height: 10,
-                                          ),
+                                          // SizedBox(
+                                          //   height: 10,
+                                          // ),
                                           Row(
                                             mainAxisAlignment:
-                                                MainAxisAlignment.spaceBetween,
+                                                MainAxisAlignment.start,
                                             children: [
-                                              CustomRichText(title: 'City '),
+                                              Expanded(child: CustomRichText(title: 'City ')),
                                               Expanded(
                                                 child: Container(
                                                   margin: Dimens.edgeInsets5,
@@ -894,7 +909,16 @@ class FacilityTypeListContentWeb extends GetView<FacilityTypeListController> {
                                                   ),
                                                 ),
                                               ),
-                                              CustomRichText(title: 'Pin '),
+                                            ],
+                                          ),
+                                          // SizedBox(
+                                          //   height: 10,
+                                          // ),
+                                          Row(
+                                            mainAxisAlignment:
+                                            MainAxisAlignment.start,
+                                            children: [
+                                              Expanded(child: CustomRichText(title: 'Pin ')),
                                               Expanded(
                                                 child: Container(
                                                     margin: Dimens.edgeInsets5,
@@ -921,15 +945,15 @@ class FacilityTypeListContentWeb extends GetView<FacilityTypeListController> {
                                                       color: ColorValues
                                                           .whiteColor,
                                                       borderRadius:
-                                                          BorderRadius.circular(
-                                                              5),
+                                                      BorderRadius.circular(
+                                                          5),
                                                     ),
                                                     width:
-                                                        (MediaQuery.of(context)
-                                                                    .size
-                                                                    .width *
-                                                                .2) -
-                                                            45,
+                                                    (MediaQuery.of(context)
+                                                        .size
+                                                        .width *
+                                                        .2) -
+                                                        45,
                                                     child: LoginCustomTextfield(
                                                       ishint: 'Enter Pin',
                                                       textController: controller
@@ -938,20 +962,15 @@ class FacilityTypeListContentWeb extends GetView<FacilityTypeListController> {
                                               ),
                                             ],
                                           ),
-                                          SizedBox(
-                                            height: 10,
-                                          ),
+                                          // SizedBox(
+                                          //   height: 10,
+                                          // ),
                                           Row(
                                             mainAxisAlignment:
                                                 MainAxisAlignment.start,
                                             children: [
-                                              // Text(
-                                              //   "Description ",
-                                              //   style: Styles.blackBold16,
-                                              // ),
 
-                                              CustomRichText(
-                                                  title: 'Description '),
+                                              Expanded(child: CustomRichText(title: 'Description ')),
                                               Expanded(
                                                 child: Container(
                                                     margin: Dimens.edgeInsets5,
@@ -996,9 +1015,6 @@ class FacilityTypeListContentWeb extends GetView<FacilityTypeListController> {
                                               ),
                                             ],
                                           ),
-                                          SizedBox(
-                                            height: 10,
-                                          ),
                                           // Row(
                                           //   children: [
                                           //     CustomRichText(
@@ -1016,7 +1032,7 @@ class FacilityTypeListContentWeb extends GetView<FacilityTypeListController> {
                                           //   ],
                                           // ),
                                           SizedBox(
-                                            height: 20,
+                                            height: 10,
                                           ),
                                         ]),
                                   ),
@@ -1025,7 +1041,7 @@ class FacilityTypeListContentWeb extends GetView<FacilityTypeListController> {
                                     children: [
                                       Container(
                                           width: (Get.width * .1),
-                                          height: 40,
+                                          height: 30,
                                           child: CustomElevatedButton(
                                               backgroundColor:
                                                   ColorValues.appRedColor,
@@ -1036,7 +1052,7 @@ class FacilityTypeListContentWeb extends GetView<FacilityTypeListController> {
                                       ),
                                       Container(
                                           width: (Get.width * .2) - 50,
-                                          height: 40,
+                                          height: 30,
                                           // print("$controller.selectedItem");
                                           child: controller.selectedItem == null
                                               ? CustomElevatedButton(
@@ -1143,7 +1159,6 @@ class FacilityTypeListContentWeb extends GetView<FacilityTypeListController> {
                                             text: 'PDF'),
                                       ),
                                       Container(
-                                        width: (Get.width * .2) - 200,
                                         margin: EdgeInsets.only(left: 10),
                                         child: CustomElevatedButton(
                                           backgroundColor:
