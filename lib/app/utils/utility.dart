@@ -7,14 +7,14 @@ import 'dart:math';
 import 'package:cmms/app/app.dart';
 import 'package:cmms/domain/domain.dart';
 import 'package:dio/dio.dart' as dio;
-import 'package:email_validator/email_validator.dart';
+// import 'package:email_validator/email_validator.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-import 'package:geocoding/geocoding.dart' show Placemark, GeocodingPlatform;
-import 'package:geolocator/geolocator.dart';
+// import 'package:geocoding/geocoding.dart' show Placemark, GeocodingPlatform;
+// import 'package:geolocator/geolocator.dart';
 import 'package:get/get.dart';
-import 'package:image_gallery_saver/image_gallery_saver.dart';
+// import 'package:image_gallery_saver/image_gallery_saver.dart';
 import 'package:internet_connection_checker/internet_connection_checker.dart';
 import 'package:intl/intl.dart';
 import 'package:loading_animation_widget/loading_animation_widget.dart';
@@ -93,7 +93,7 @@ abstract class Utility {
   }
 
   /// Returns true if email is Valid
-  static bool emailValidator(String email) => EmailValidator.validate(email);
+  // static bool emailValidator(String email) => EmailValidator.validate(email);
 
   /// Check if URL is valid
   static bool urlValidator(String value) {
@@ -366,27 +366,27 @@ abstract class Utility {
   }
 
   /// Get current lat long of the device.
-  static Future<Position> getCurrentLatLng() async =>
-      await Geolocator.getCurrentPosition(
-        desiredAccuracy: LocationAccuracy.high,
-      );
+  // static Future<Position> getCurrentLatLng() async =>
+  //     await Geolocator.getCurrentPosition(
+  //       desiredAccuracy: LocationAccuracy.high,
+  //     );
 
   /// Get the location name by giving the lat long.
   ///
   /// [latitude] : latitude of the location.
   /// [longitude] : longitude of the location.
-  static Future<Placemark?> getAddressThroughLatLng(
-      double? latitude, double? longitude) async {
-    if (latitude != null && longitude != null) {
-      var addresses = await GeocodingPlatform.instance.placemarkFromCoordinates(
-        latitude,
-        longitude,
-      );
-      return addresses[0];
-    } else {
-      return null;
-    }
-  }
+  // static Future<Placemark?> getAddressThroughLatLng(
+  //     double? latitude, double? longitude) async {
+  //   if (latitude != null && longitude != null) {
+  //     var addresses = await GeocodingPlatform.instance.placemarkFromCoordinates(
+  //       latitude,
+  //       longitude,
+  //     );
+  //     return addresses[0];
+  //   } else {
+  //     return null;
+  //   }
+  // }
 
   static String getFormatedDate(String datetime) {
     var date = DateTime.parse(datetime);
@@ -633,11 +633,11 @@ abstract class Utility {
       );
 
       if (GetPlatform.isIOS) {
-        dynamic result = await ImageGallerySaver.saveImage(
-            Uint8List.fromList(response.data as List<int>),
-            quality: 60,
-            name: name);
-        printILog(result);
+        // dynamic result = await ImageGallerySaver.saveImage(
+        //     Uint8List.fromList(response.data as List<int>),
+        //     quality: 60,
+        //     name: name);
+        // printILog(result);
       } else {
         final d = response.data as List<int>;
 
