@@ -1203,7 +1203,7 @@ class DataRepository extends DomainRepository {
         isLoading: isLoading ?? false,
       );
 
-   Future<ResponseModel> getMCExecutionDetail({
+  Future<ResponseModel> getMCExecutionDetail({
     required String auth,
     bool? isLoading,
     int? executionId,
@@ -2791,6 +2791,30 @@ class DataRepository extends DomainRepository {
         auth: auth,
         isLoading: isLoading,
         approvetoJsonString: approvetoJsonString);
+    return response;
+  }
+
+  Future<ResponseModel> approveGoodsOrder({
+    auth,
+    bool? isLoading,
+    approvetoJsonString,
+  }) async {
+    var response = await connectHelper.approveGoodsOrder(
+        auth: auth,
+        isLoading: isLoading,
+        approvetoJsonString: approvetoJsonString);
+    return response;
+  }
+
+  Future<ResponseModel> rejectGoodsOrder({
+    auth,
+    bool? isLoading,
+    rejecttoJsonString,
+  }) async {
+    var response = await connectHelper.rejectGoodsOrder(
+        auth: auth,
+        isLoading: isLoading,
+        rejecttoJsonString: rejecttoJsonString);
     return response;
   }
 
