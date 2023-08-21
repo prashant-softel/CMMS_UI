@@ -2014,7 +2014,6 @@ class ConnectHelper {
     return responseModel;
   }
 
-
   Future<ResponseModel> getIncidentReportDetail({
     required String auth,
     bool? isLoading,
@@ -4504,6 +4503,44 @@ class ConnectHelper {
     return responseModel;
   }
 
+  Future<ResponseModel> approveGoodsOrder({
+    required String auth,
+    bool? isLoading,
+    required approvetoJsonString,
+  }) async {
+    var responseModel = await apiWrapper.makeRequest(
+      'RequestOrder/ApproveRequestOrder',
+      Request.post,
+      approvetoJsonString,
+      isLoading ?? false,
+      {
+        'Content-Type': 'application/json',
+        'Authorization': 'Bearer $auth',
+      },
+    );
+
+    return responseModel;
+  }
+
+  Future<ResponseModel> rejectGoodsOrder({
+    required String auth,
+    bool? isLoading,
+    required rejecttoJsonString,
+  }) async {
+    var responseModel = await apiWrapper.makeRequest(
+      'RequestOrder/RejectGoodsOrder',
+      Request.post,
+      rejecttoJsonString,
+      isLoading ?? false,
+      {
+        'Content-Type': 'application/json',
+        'Authorization': 'Bearer $auth',
+      },
+    );
+
+    return responseModel;
+  }
+
   Future<ResponseModel> deleteJobType({
     required String auth,
     bool? isLoading,
@@ -4560,7 +4597,6 @@ class ConnectHelper {
 
     return responseModel;
   }
-
 
   Future<ResponseModel> getReturnMrsDetails({
     required String? auth,
