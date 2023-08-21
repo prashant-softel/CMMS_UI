@@ -344,7 +344,10 @@ class _PurchaseGoodsorderListWebState extends State<PurchaseGoodsorderListWeb> {
                                                             message:
                                                                 'Approve/Reject',
                                                             onPress: () {
-                                                              Get.offNamed(Routes
+                                                              controller.viewAddGoodsOrdersDetails(
+                                                                  id: int.tryParse(
+                                                                      '${record[0]}'));
+                                                              Get.toNamed(Routes
                                                                   .purchaseGoodsorderView);
                                                             },
                                                           ),

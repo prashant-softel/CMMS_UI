@@ -1995,6 +1995,26 @@ class ConnectHelper {
     return responseModel;
   }
 
+  ///MC Execution Details
+  Future<ResponseModel> getMCExecutionDetail({
+    required String auth,
+    bool? isLoading,
+    int? executionId,
+  }) async {
+    var responseModel = await apiWrapper.makeRequest(
+      'MC/GetMCExecutionDetails?executionId=$executionId',
+      Request.get,
+      null,
+      isLoading ?? false,
+      {
+        'Authorization': 'Bearer $auth',
+      },
+    );
+    print('MCExecutionResponseModel${responseModel.data}');
+    return responseModel;
+  }
+
+
   Future<ResponseModel> getIncidentReportDetail({
     required String auth,
     bool? isLoading,
@@ -2028,6 +2048,24 @@ class ConnectHelper {
       },
     );
     print('ViewgetPurchaseDetailsById1${responseModel.data}');
+    return responseModel;
+  }
+
+  Future<ResponseModel> getRoDetailsByID({
+    required String auth,
+    bool? isLoading,
+    int? requestID,
+  }) async {
+    var responseModel = await apiWrapper.makeRequest(
+      "RequestOrder/GetRODetailsByID?requestID=$requestID",
+      Request.get,
+      null,
+      isLoading ?? false,
+      {
+        'Authorization': 'Bearer $auth',
+      },
+    );
+    print('getRoDetailsByID${responseModel.data}');
     return responseModel;
   }
 
@@ -4522,6 +4560,7 @@ class ConnectHelper {
 
     return responseModel;
   }
+
 
   Future<ResponseModel> getReturnMrsDetails({
     required String? auth,

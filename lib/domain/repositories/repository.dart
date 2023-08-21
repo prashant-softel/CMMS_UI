@@ -21,6 +21,7 @@ import 'package:cmms/domain/models/currency_list_model.dart';
 import 'package:cmms/domain/models/employee_list_model.dart';
 import 'package:cmms/domain/models/employee_list_model2.dart';
 import 'package:cmms/domain/models/employee_model.dart';
+import 'package:cmms/domain/models/end_mc_execution_detail_model.dart';
 import 'package:cmms/domain/models/get_asset_data_list_model.dart';
 import 'package:cmms/domain/models/get_asset_items_model.dart';
 import 'package:cmms/domain/models/get_notification_by_userid_model.dart';
@@ -47,6 +48,7 @@ import 'package:cmms/domain/models/paiyed_model.dart';
 import 'package:cmms/domain/models/pm_task_model.dart';
 import 'package:cmms/domain/models/pm_task_view_list_model.dart';
 import 'package:cmms/domain/models/preventive_checklist_model.dart';
+import 'package:cmms/domain/models/req_order_details_by_id_model.dart';
 import 'package:cmms/domain/models/request_order_list.model.dart';
 import 'package:cmms/domain/models/risk_type_list_model.dart';
 import 'package:cmms/domain/models/safety_measure_list_model.dart';
@@ -1132,6 +1134,43 @@ class Repository {
     }
   }
 
+
+  ///MC Execution Details
+   Future<EndMCExecutionDetailsModel?> getMCExecutionDetail({
+    bool? isLoading,
+    int? executionId,
+  }) async {
+    try {
+      final auth = await getSecuredValue(LocalKeys.authToken);
+      final res = await _dataRepository.getMCExecutionDetail(
+        auth: auth,
+        executionId: executionId,
+        isLoading: isLoading ?? false,
+      );
+
+      print({"MCExecutiondetail", res.data});
+
+      if (!res.hasError) {
+        if (res.errorCode == 200) {
+          final EndMCExecutionDetailsModel _endMCExecutionDetailModel =
+              endMCExecutionDetailsModelFromJson(res.data);
+
+          var responseMap = _endMCExecutionDetailModel;
+          print({"MCExecutionResponseData", responseMap});
+          return responseMap;
+        }
+      } else {
+        Utility.showDialog(res.errorCode.toString() + 'MCExecutionDetail');
+        //return '';
+      }
+      return null;
+    } catch (error) {
+      print(error.toString());
+      return null;
+    }
+  }
+
+
   Future<IncidentReportDetailsModel?> getIncidentReportDetail({
     bool? isLoading,
     int? id,
@@ -1188,6 +1227,40 @@ class Repository {
 
           var responseMap = _getPurchaseDetailsByIDModelFromJson;
           print({"ViewgetPurchaseDetailsByID", responseMap});
+          return responseMap;
+        }
+      } else {
+        Utility.showDialog(res.errorCode.toString() + 'GetPurchaseDetailsByID');
+        //return '';
+      }
+      return null;
+    } catch (error) {
+      print(error.toString());
+      return null;
+    }
+  }
+
+  Future<GetRODetailsByIDModel?> getRoDetailsByID({
+    bool? isLoading,
+    int? requestID,
+  }) async {
+    try {
+      final auth = await getSecuredValue(LocalKeys.authToken);
+      final res = await _dataRepository.getRoDetailsByID(
+        auth: auth,
+        requestID: requestID,
+        isLoading: isLoading ?? false,
+      );
+
+      print({"getRoDetailsByID", res.data});
+
+      if (!res.hasError) {
+        if (res.errorCode == 200) {
+          final GetRODetailsByIDModel _getPurchaseDetailsByIDModelFromJson =
+              getRODetailsByIDModelFromJson(res.data);
+
+          var responseMap = _getPurchaseDetailsByIDModelFromJson;
+          print({"getRoDetailsByID", responseMap});
           return responseMap;
         }
       } else {
@@ -2175,9 +2248,8 @@ class Repository {
     }
   }
 
-
   ///Abandon MC Execution
-   Future<Map<String, dynamic>> abandonExecutionButton(
+  Future<Map<String, dynamic>> abandonExecutionButton(
     abandoneJsonString,
     bool? isLoading,
   ) async {
@@ -2220,9 +2292,8 @@ class Repository {
     }
   }
 
-
-   ///End MC Execution
-   Future<Map<String, dynamic>> endMCExecutionButton(
+  ///End MC Execution
+  Future<Map<String, dynamic>> endMCExecutionButton(
     endJsonString,
     bool? isLoading,
   ) async {
@@ -2264,8 +2335,6 @@ class Repository {
       return Map();
     }
   }
-
-
 
   Future<void> startMCExecutionButton(
     int? planId,
@@ -6737,7 +6806,6 @@ class Repository {
     }
   }
 
-
   Future<bool> updateTbt({
     bool? isLoading,
     tbtJsonString,
@@ -6781,7 +6849,6 @@ class Repository {
       print(error.toString());
     }
   }
-
 
   Future<bool> updateSop({
     bool? isLoading,
