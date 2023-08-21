@@ -1,4 +1,4 @@
-import 'package:clipboard/clipboard.dart';
+  import 'package:clipboard/clipboard.dart';
 import 'package:cmms/app/app.dart';
 import 'package:cmms/app/constant/constant.dart';
 import 'package:cmms/app/tbt_list_sop/tbt_list_sop_controller.dart';
@@ -77,7 +77,7 @@ class TBTSOPListContentWeb extends GetView<TBTSOPListController> {
                       ? Container(
                           width: (Get.width * .403),
                           margin: EdgeInsets.only(left: 30, top: 10),
-                          height: Get.height / 1.2,
+                          height: Get.height / 2.2,
                           child: Card(
                             color: Color.fromARGB(255, 251, 252, 253),
                             elevation: 10,

@@ -319,7 +319,7 @@ class PermitTypeContentWeb extends GetView<PermitTypeController> {
                                                           .issuccessCreatechecklist();
                                                   });
                                                 },
-                                                text: 'Create CheckList')
+                                                text: 'Create Permit')
                                             : CustomElevatedButton(
                                                 backgroundColor: ColorValues
                                                     .appDarkBlueColor,
