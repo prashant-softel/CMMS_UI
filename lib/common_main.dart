@@ -1,6 +1,6 @@
 // import 'package:firebase_core/firebase_core.dart';
-import 'dart:async';
 
+import 'dart:async';
 import 'package:cmms/app/app.dart';
 import 'package:cmms/app/calibration/calibration_list_controller.dart';
 import 'package:cmms/app/calibration/calibration_list_presenter.dart';
@@ -22,7 +22,7 @@ import 'package:cmms/domain/usecases/preventive_usecase.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:flutter_branch_sdk/flutter_branch_sdk.dart';
+// import 'package:flutter_branch_sdk/flutter_branch_sdk.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
@@ -238,11 +238,11 @@ class MyApp extends StatefulWidget {
 }
 
 class _MyAppState extends State<MyApp> {
-  BranchContentMetaData metadata = BranchContentMetaData();
-  BranchUniversalObject? buo;
-  BranchLinkProperties lp = BranchLinkProperties();
-  BranchEvent? eventStandart;
-  BranchEvent? eventCustom;
+  // BranchContentMetaData metadata = BranchContentMetaData();
+  // BranchUniversalObject? buo;
+  // BranchLinkProperties lp = BranchLinkProperties();
+  // BranchEvent? eventStandart;
+  // BranchEvent? eventCustom;
 
   StreamController<String> controllerData = StreamController<String>();
   StreamController<String> controllerInitSession = StreamController<String>();

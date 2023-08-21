@@ -2,7 +2,6 @@
 
 export 'no_data_found.dart';
 export 'no_internet_widget.dart';
-export 'profile_pic.dart';
 
 export 'safearea_container.dart';
 export 'shakey_widget.dart';

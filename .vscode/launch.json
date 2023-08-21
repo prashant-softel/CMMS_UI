@@ -12,7 +12,8 @@
             "args": [
                 "--web-enable-expression-evaluation",
                 "--flavor",
-                "dev"
+                "dev",
+                "--no-sound-null-safety"
             ]
         },
         // {
