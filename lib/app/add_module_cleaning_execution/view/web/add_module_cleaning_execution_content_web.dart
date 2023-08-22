@@ -236,7 +236,7 @@ class AddModuleCleaningExecutionContentWeb
                                               children: [
                                                 Padding(
                                                   padding: const EdgeInsets
-                                                          .symmetric(
+                                                      .symmetric(
                                                       horizontal: 20,
                                                       vertical: 5),
                                                   child: Row(
@@ -269,9 +269,10 @@ class AddModuleCleaningExecutionContentWeb
                                                 // Text(jsonEncode(controller
                                                 //     .dropdownMapperData)),
                                                 Container(
-                                                  height: 200,
+                                                  height: 250,
                                                   child: ScrollableTableView(
                                                     columns: [
+                                                      "Schedule Id",
                                                       "Days",
                                                       "Scheduled Module",
                                                       "Cleaned",
@@ -280,25 +281,53 @@ class AddModuleCleaningExecutionContentWeb
                                                       "Type",
                                                       "Water Used",
                                                       "Remark",
+                                                      "Status",
                                                       "Actions",
                                                     ].map((column) {
                                                       return TableViewColumn(
                                                         label: column,
                                                         minWidth:
-                                                            Get.width * 0.17,
-                                                        height:
-                                                            Get.height / 2,
+                                                            Get.width * 0.12,
+                                                        height: Get.height / 2,
                                                       );
                                                     }).toList(),
                                                     rows: controller
                                                         .rowItem.value
                                                         .map((record) {
                                                       return TableViewRow(
-                                                        height: 50,
+                                                        height: 70,
                                                         cells: record
                                                             .map((mapData) {
                                                           return TableViewCell(
                                                             child: (mapData[
+                                                                        'key'] ==
+                                                                    "Schedule Id")
+                                                                ? Column(
+                                                                    mainAxisAlignment:
+                                                                        MainAxisAlignment
+                                                                            .center,
+                                                                    crossAxisAlignment:
+                                                                        CrossAxisAlignment
+                                                                            .center,
+                                                                    children: [
+                                                                      // Text(
+                                                                      //     '1')
+                                                                    ]..addAll(controller
+                                                                        .listSchedules!
+                                                                        .map((element) =>
+                                                                            Row(
+                                                                              mainAxisSize: MainAxisSize.min,
+                                                                              mainAxisAlignment: MainAxisAlignment.start,
+                                                                              crossAxisAlignment: CrossAxisAlignment.start,
+                                                                              children: [
+                                                                                Text(
+                                                                                  "${element?.scheduleId}",
+                                                                                  style: TextStyle(color: Color.fromARGB(255, 5, 92, 163)),
+                                                                                ),
+                                                                              ],
+                                                                            ))),
+                                                                  )
+                                                            :(mapData[
                                                                         'key'] ==
                                                                     "Days")
                                                                 ? Column(
@@ -309,9 +338,22 @@ class AddModuleCleaningExecutionContentWeb
                                                                         CrossAxisAlignment
                                                                             .center,
                                                                     children: [
-                                                                      Text(
-                                                                          '1')
-                                                                    ],
+                                                                      // Text(
+                                                                      //     '1')
+                                                                    ]..addAll(controller
+                                                                        .listSchedules!
+                                                                        .map((element) =>
+                                                                            Row(
+                                                                              mainAxisSize: MainAxisSize.min,
+                                                                              mainAxisAlignment: MainAxisAlignment.start,
+                                                                              crossAxisAlignment: CrossAxisAlignment.start,
+                                                                              children: [
+                                                                                Text(
+                                                                                  "${element?.cleaningDay}",
+                                                                                  style: TextStyle(color: Color.fromARGB(255, 5, 92, 163)),
+                                                                                ),
+                                                                              ],
+                                                                            ))),
                                                                   )
                                                                 : (mapData['key'] ==
                                                                         "Scheduled Module")
@@ -321,96 +363,197 @@ class AddModuleCleaningExecutionContentWeb
                                                                         crossAxisAlignment:
                                                                             CrossAxisAlignment.center,
                                                                         children: [
-                                                                          Text('2000')
-                                                                        ],
+                                                                          // Text('2000')
+                                                                        ]..addAll(controller.listSchedules!.map((element) => Row(
+                                                                              mainAxisSize: MainAxisSize.min,
+                                                                              mainAxisAlignment: MainAxisAlignment.start,
+                                                                              crossAxisAlignment: CrossAxisAlignment.start,
+                                                                              children: [
+                                                                                Text(
+                                                                                  "${element?.scheduledModules}",
+                                                                                  style: TextStyle(color: Color.fromARGB(255, 5, 92, 163)),
+                                                                                ),
+                                                                              ],
+                                                                            ))),
                                                                       )
                                                                     : (mapData['key'] ==
                                                                             "Cleaned")
                                                                         ? Column(
-                                                                            mainAxisAlignment: MainAxisAlignment.center,
-                                                                            crossAxisAlignment: CrossAxisAlignment.center,
+                                                                            mainAxisAlignment:
+                                                                                MainAxisAlignment.center,
+                                                                            crossAxisAlignment:
+                                                                                CrossAxisAlignment.center,
                                                                             children: [
-                                                                              Text('-')
-                                                                            ],
+                                                                              // Text('-')
+                                                                            ]..addAll(controller.listSchedules!.map((element) => Row(
+                                                                                  mainAxisSize: MainAxisSize.min,
+                                                                                  mainAxisAlignment: MainAxisAlignment.start,
+                                                                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                                                                  children: [
+                                                                                    Text(
+                                                                                      "${element?.cleanedModules}",
+                                                                                      style: TextStyle(color: Color.fromARGB(255, 5, 92, 163)),
+                                                                                    ),
+                                                                                  ],
+                                                                                ))),
                                                                           )
-                                                                        : (mapData['key'] == "Abandoned")
+                                                                        : (mapData['key'] ==
+                                                                                "Abandoned")
                                                                             ? Column(
                                                                                 mainAxisAlignment: MainAxisAlignment.center,
                                                                                 crossAxisAlignment: CrossAxisAlignment.center,
                                                                                 children: [
-                                                                                  Text('-')
-                                                                                ],
+                                                                                  // Text('-')
+                                                                                ]..addAll(controller.listSchedules!.map((element) => Row(
+                                                                                      mainAxisSize: MainAxisSize.min,
+                                                                                      mainAxisAlignment: MainAxisAlignment.start,
+                                                                                      crossAxisAlignment: CrossAxisAlignment.start,
+                                                                                      children: [
+                                                                                        Text(
+                                                                                          "${element?.abandonedModules}",
+                                                                                          style: TextStyle(color: Color.fromARGB(255, 5, 92, 163)),
+                                                                                        ),
+                                                                                      ],
+                                                                                    ))),
                                                                               )
                                                                             : (mapData['key'] == "Pending")
                                                                                 ? Column(
                                                                                     mainAxisAlignment: MainAxisAlignment.center,
                                                                                     crossAxisAlignment: CrossAxisAlignment.center,
                                                                                     children: [
-                                                                                      Text('-')
-                                                                                    ],
+                                                                                      // Text('-')
+                                                                                    ]..addAll(controller.listSchedules!.map((element) => Row(
+                                                                                          mainAxisSize: MainAxisSize.min,
+                                                                                          mainAxisAlignment: MainAxisAlignment.start,
+                                                                                          crossAxisAlignment: CrossAxisAlignment.start,
+                                                                                          children: [
+                                                                                            Text(
+                                                                                              "${element?.pendingModules}",
+                                                                                              style: TextStyle(color: Color.fromARGB(255, 5, 92, 163)),
+                                                                                            ),
+                                                                                          ],
+                                                                                        ))),
                                                                                   )
                                                                                 : (mapData['key'] == "Type")
                                                                                     ? Column(
                                                                                         mainAxisAlignment: MainAxisAlignment.center,
                                                                                         crossAxisAlignment: CrossAxisAlignment.center,
                                                                                         children: [
-                                                                                          Text('Wet')
-                                                                                        ],
+                                                                                          // Text('Wet')
+                                                                                        ]..addAll(controller.listSchedules!.map((element) => Row(
+                                                                                              mainAxisSize: MainAxisSize.min,
+                                                                                              mainAxisAlignment: MainAxisAlignment.start,
+                                                                                              crossAxisAlignment: CrossAxisAlignment.start,
+                                                                                              children: [
+                                                                                                Text(
+                                                                                                  "${element?.cleaningTypeName}",
+                                                                                                  style: TextStyle(color: Color.fromARGB(255, 5, 92, 163)),
+                                                                                                ),
+                                                                                              ],
+                                                                                            ))),
                                                                                       )
                                                                                     : (mapData['key'] == "Water Used")
                                                                                         ? Column(
                                                                                             mainAxisAlignment: MainAxisAlignment.center,
                                                                                             crossAxisAlignment: CrossAxisAlignment.center,
-                                                                                            children: [Text('-')],
+                                                                                            children: [
+                                                                                              // Text('-')
+                                                                                            ]..addAll(controller.listSchedules!.map((element) => Row(
+                                                                                                  mainAxisSize: MainAxisSize.min,
+                                                                                                  mainAxisAlignment: MainAxisAlignment.start,
+                                                                                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                                                                                  children: [
+                                                                                                    Text(
+                                                                                                      "${element?.waterUsed}",
+                                                                                                      style: TextStyle(color: Color.fromARGB(255, 5, 92, 163)),
+                                                                                                    ),
+                                                                                                  ],
+                                                                                                ))),
                                                                                           )
                                                                                         : (mapData['key'] == "Remark")
                                                                                             ? Column(
                                                                                                 mainAxisAlignment: MainAxisAlignment.center,
                                                                                                 crossAxisAlignment: CrossAxisAlignment.center,
-                                                                                                children: [
-                                                                                                  SizedBox(
-                                                                                                      width: MediaQuery.of(context).size.width / 5,
-                                                                                                      child: LoginCustomTextfield(
-                                                                                                        keyboardType: TextInputType.number,
-                                                                                                        inputFormatters: <TextInputFormatter>[
-                                                                                                          FilteringTextInputFormatter.digitsOnly
-                                                                                                        ],
-                                                                                                        maxLine: 1,
-                                                                                                        textController: new TextEditingController(text: mapData["value"] ?? ''),
-                                                                                                        onChanged: (txt) {
-                                                                                                          mapData["value"] = txt;
-                                                                                                        },
-                                                                                                      )),
-                                                                                                  SizedBox(
-                                                                                                    height: 5,
-                                                                                                  ),
-                                                                                                ],
+                                                                                                children: []..addAll(controller.listSchedules!.map((element) => Row(
+                                                                                                      mainAxisSize: MainAxisSize.min,
+                                                                                                      mainAxisAlignment: MainAxisAlignment.start,
+                                                                                                      crossAxisAlignment: CrossAxisAlignment.start,
+                                                                                                      children: [
+                                                                                                        Padding(
+                                                                                                          padding: const EdgeInsets.only(bottom: 5),
+                                                                                                          child: SizedBox(
+                                                                                                              width: MediaQuery.of(context).size.width / 9,
+                                                                                                              child: LoginCustomTextfield(
+                                                                                                                keyboardType: TextInputType.number,
+                                                                                                                inputFormatters: <TextInputFormatter>[
+                                                                                                                  // FilteringTextInputFormatter.digitsOnly
+                                                                                                                ],
+                                                                                                                maxLine: 1,
+                                                                                                                textController: new TextEditingController(text: mapData["value"] ?? ''),
+                                                                                                                onChanged: (txt) {
+                                                                                                                  mapData["value"] = txt;
+                                                                                                                },
+                                                                                                              )),
+                                                                                                        ),
+                                                                                                       
+                                                                                                      ],
+                                                                                                    ))),
                                                                                               )
+                                                                                            : (mapData['key'] == "Status")
+                                                                                        ? Column(
+                                                                                            mainAxisAlignment: MainAxisAlignment.center,
+                                                                                            crossAxisAlignment: CrossAxisAlignment.center,
+                                                                                            children: [
+                                                                                              // Text('-')
+                                                                                            ]..addAll(controller.listSchedules!.map((element) => Row(
+                                                                                                  mainAxisSize: MainAxisSize.min,
+                                                                                                  mainAxisAlignment: MainAxisAlignment.start,
+                                                                                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                                                                                  children: [
+                                                                                                    Text(
+                                                                                                      "${element?.status_short}",
+                                                                                                      style: TextStyle(color: Color.fromARGB(255, 5, 92, 163)),
+                                                                                                    ),
+                                                                                                  ],
+                                                                                                ))),
+                                                                                          )  
                                                                                             : (mapData['key'] == "Actions")
                                                                                                 ? Padding(
                                                                                                     padding: const EdgeInsets.only(left: 20),
-                                                                                                    child: Row(
+                                                                                                    child: Column(
                                                                                                       children: [
-                                                                                                        TableActionButton(
-                                                                                                          label: 'Start',
-                                                                                                          onPress: () {
-                                                                                                            
-                                                                                                          },
+                                                                                                       
+                                                                                                      ]..addAll(controller.listSchedules!.map((element) => Row(
+                                                                                                  mainAxisSize: MainAxisSize.min,
+                                                                                                  mainAxisAlignment: MainAxisAlignment.start,
+                                                                                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                                                                                  children: [
+                                                                                                    TableActionButton(
+                                                                                                          // label: 'Start',
+                                                                                                          onPress: () {},
                                                                                                           color: Colors.green,
+                                                                                                          icon: Icons.add,
+                                                                                                          message: 'Start',
+                                                                                                          
                                                                                                         ),
                                                                                                         TableActionButton(
-                                                                                                          label: 'Abandon',
+                                                                                                          // label: 'Abandon',
                                                                                                           onPress: () {},
                                                                                                           color: Colors.red,
+                                                                                                          icon: Icons.close,
+                                                                                                          message: 'Abandon',
                                                                                                         ),
                                                                                                         TableActionButton(
-                                                                                                          label: 'Equipments',
+                                                                                                          // label: 'Equipments',
                                                                                                           onPress: () {
                                                                                                             Get.dialog(AddModuleCleaningExecutionDialog());
                                                                                                           },
                                                                                                           color: ColorValues.appDarkBlueColor,
+                                                                                                          icon: Icons.category,
+                                                                                                          message: 'Equipments',
                                                                                                         ),
-                                                                                                      ],
+                                                                                                  ],
+                                                                                                ))),
                                                                                                     ),
                                                                                                   )
                                                                                                 : Text(mapData['key'] ?? ''),
@@ -469,8 +612,8 @@ class AddModuleCleaningExecutionContentWeb
                                           CustomElevatedButton(
                                             backgroundColor: Colors.red,
                                             onPressed: () {
-                                               Get.offAndToNamed(
-                                              Routes.moduleCleaningListExecution);
+                                              Get.offAndToNamed(Routes
+                                                  .moduleCleaningListExecution);
                                             },
                                             text: 'Cancel',
                                           ),
@@ -489,40 +632,44 @@ class AddModuleCleaningExecutionContentWeb
                                               },
                                             ),
                                           ),
-                                           SizedBox(
+                                          SizedBox(
                                             width: 20,
                                           ),
-                                          controller.data['status'] == "Scheduled"
-                                          ?Container(
-                                            height: 28,
-                                            child: CustomElevatedButton(
-                                              backgroundColor:
-                                                  ColorValues.appGreenColor,
-                                              text: "Start",
-                                              onPressed: () {
-                                                controller.startMCExecutionButton();
-                                              },
-                                            ),
-                                          )
-                                          :Container(),
+                                          controller.data['status'] ==
+                                                  "Scheduled"
+                                              ? Container(
+                                                  height: 28,
+                                                  child: CustomElevatedButton(
+                                                    backgroundColor: ColorValues
+                                                        .appGreenColor,
+                                                    text: "Start",
+                                                    onPressed: () {
+                                                      controller
+                                                          .startMCExecutionButton();
+                                                    },
+                                                  ),
+                                                )
+                                              : Container(),
 
-                                           SizedBox(
+                                          SizedBox(
                                             width: 20,
                                           ),
 
-                                          controller.data['status'] == "Abandoned"
-                                          ?Container(
-                                            height: 28,
-                                            child: CustomElevatedButton(
-                                              backgroundColor:
-                                                  ColorValues.appGreenColor,
-                                              text: "End",
-                                              onPressed: () {
-                                               Get.dialog(EndMCExecutionDialog());
-                                              },
-                                            ),
-                                          )
-                                          :Container(),
+                                          controller.data['status'] ==
+                                                  "Abandoned"
+                                              ? Container(
+                                                  height: 28,
+                                                  child: CustomElevatedButton(
+                                                    backgroundColor: ColorValues
+                                                        .appGreenColor,
+                                                    text: "End",
+                                                    onPressed: () {
+                                                      Get.dialog(
+                                                          EndMCExecutionDialog());
+                                                    },
+                                                  ),
+                                                )
+                                              : Container(),
                                           SizedBox(
                                             width: 20,
                                           ),

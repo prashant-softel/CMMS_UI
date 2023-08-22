@@ -35,6 +35,7 @@ class AddModuleCleaningExecutionController extends GetxController {
 
   void addRowItem() {
     rowItem.value.add([
+      {"key": "Schedule Id", "value": ''},
       {"key": "Days", "value": ''},
       {"key": "Scheduled Module", "value": ''},
       {"key": "Cleaned", "value": ''},
@@ -43,6 +44,7 @@ class AddModuleCleaningExecutionController extends GetxController {
       {"key": "Type", "value": ''},
       {"key": "Water Used", "value": ''},
       {"key": "Remark", "value": ''},
+      {"key": "Status", "value": ''},
       {'key': "Actions", "value": ''},
     ]);
   }
@@ -84,6 +86,10 @@ RxList<InventoryCategoryModel?> equipmentCategoryList =
 
   ///
   TextEditingController remarkTextFieldCtrlr = TextEditingController();
+
+
+  ///Schedule List
+  RxList<Schedules?>? listSchedules = <Schedules?>[].obs;
   
 
   RxList<FacilityModel?> facilityList = <FacilityModel>[].obs;
@@ -263,6 +269,7 @@ RxList<InventoryCategoryModel?> equipmentCategoryList =
       mcExecutionDetailsModel.value = _mcExecutionDetails;
       plannedAtDateTimeCtrlrWeb.text = '${DateFormat('yyyy-MM-dd HH:mm:ss').format(DateTime.parse('${mcExecutionDetailsModel.value?.plannedAt}'))}';
       startedAtDateTimeCtrlrWeb.text = '${DateFormat('yyyy-MM-dd HH:mm:ss').format(DateTime.parse('${mcExecutionDetailsModel.value?.startedAt}'))}';
+      listSchedules?.value = mcExecutionDetailsModel.value?.schedules ?? [];
     }
   }
 
