@@ -615,7 +615,8 @@ class ViewModuleCleaningExecutionContentWeb
                                       //                               children: [
                                       //                                 // Text(
                                       //                                 //     '1')
-                                      //                               ]..addAll(controller
+                                      //                               ]
+                                      // ..addAll(controller
                                       //                                 .listSchedules!
                                       //                                 .map((element) =>
                                       //                                     Row(
@@ -630,7 +631,7 @@ class ViewModuleCleaningExecutionContentWeb
 
                                       //                                       ],
                                       //                                     ))),
-                                      //                             )
+                                                                  // )
                                       //                           : (mapData['key'] ==
                                       //                                   "Scheduled Module")
                                       //                               ? Column(
