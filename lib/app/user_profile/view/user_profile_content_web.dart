@@ -1,5 +1,6 @@
 import 'package:cmms/app/app.dart';
 import 'package:cmms/app/user_profile/user_profile_controller.dart';
+import 'package:cmms/app/widgets/custom_elevated_button.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:scrollable_table_view/scrollable_table_view.dart';
@@ -623,6 +624,17 @@ class UserProfileContentWeb extends GetView<UserProfileController> {
                                 ),
                               ],
                             ),
+                            Container(
+                              height: 35,
+                              child: CustomElevatedButton(
+                                backgroundColor: ColorValues.appDarkBlueColor,
+                                text: 'Edit Profile',
+                                onPressed: () {
+                                  controller.editProfile();
+                                  //  controller.saveAccessLevel();
+                                },
+                              ),
+                            )
                           ],
                         ),
                       ),

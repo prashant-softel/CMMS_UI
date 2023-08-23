@@ -1,16 +1,14 @@
-import 'package:cmms/app/home/widgets/home_drawer.dart';
-import 'package:cmms/app/mrs_return/mrs_return_controller.dart';
-import 'package:cmms/app/mrs_return/view/mrs_return_content_web.dart';
-import 'package:cmms/app/theme/dimens.dart';
+import 'package:cmms/app/plant_stock_report/plant_stock_report_controller.dart';
+import 'package:cmms/app/plant_stock_report/view/plant_stock_report_content_web.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-
 import '../../home/widgets/header_widget.dart';
+import '../../home/widgets/home_drawer.dart';
+import '../../theme/dimens.dart';
 import '../../utils/responsive.dart';
 
-class MrsReturnScreen extends GetView<MrsReturnController> {
-  MrsReturnScreen({super.key});
-  final MrsReturnController controller = Get.find();
+class PlantStockReportScreen extends GetView<PlantStockReportController> {
+  PlantStockReportScreen({super.key});
 
   ///
   @override
@@ -24,10 +22,14 @@ class MrsReturnScreen extends GetView<MrsReturnController> {
               automaticallyImplyLeading: false,
             )
           : AppBar(
-              title: Text('Preventive Check Point'),
+              title: Text('Plant Stock Report'),
               centerTitle: true,
               elevation: 0,
             ),
+      drawer: //
+          (Responsive.isMobile(context) || Responsive.isTablet(context))
+              ? HomeDrawer() //ResponsiveSideMenu()
+              : null,
       body: Container(
           width: Get.width,
           height: Get.height,
@@ -42,12 +44,11 @@ class MrsReturnScreen extends GetView<MrsReturnController> {
                     // if (Responsive.isMobile(context) ||
                     //     Responsive.isTablet(context))
                     //   Expanded(
-                    //     child: MrsReturnContentMobile(),
+                    //     child: PreventiveChecklistListContentMobile(),
                     //   ),
-
                     if (Responsive.isDesktop(context))
                       Expanded(
-                        child: MrsReturnContentWeb(),
+                        child: PlantStockReportContentWeb(),
                       )
                   ],
                 ),

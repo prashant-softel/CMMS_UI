@@ -26,6 +26,7 @@ import 'package:cmms/domain/models/get_asset_data_list_model.dart';
 import 'package:cmms/domain/models/get_asset_items_model.dart';
 import 'package:cmms/domain/models/get_notification_by_userid_model.dart';
 import 'package:cmms/domain/models/get_notification_model.dart';
+import 'package:cmms/domain/models/get_plant_Stock_list.dart';
 import 'package:cmms/domain/models/get_purchase_details_model.dart';
 import 'package:cmms/domain/models/get_return_mrs_detail.dart';
 import 'package:cmms/domain/models/get_return_mrs_list.dart';
@@ -84,6 +85,7 @@ import '../models/city_model.dart';
 import '../models/competency_model.dart';
 import '../models/designation_model.dart';
 import '../models/document_manager_model.dart';
+import '../models/employe_stock_model.dart';
 import '../models/frequency_model.dart';
 import '../models/get_mrs_list_model.dart';
 import '../models/insurance_status_model.dart';
@@ -5926,6 +5928,39 @@ class Repository {
     }
   }
 
+  Future<List<PlantStockListModel?>?> getPlantStockList(int? facilityId,
+      bool? isLoading, dynamic startDate, dynamic endDate) async {
+    try {
+      final auth = await getSecuredValue(LocalKeys.authToken);
+      int userId = varUserAccessModel.value.user_id ?? 0;
+      final res = await _dataRepository.getPlantStockList(
+          auth: auth,
+          facilityId: facilityId ?? 0,
+          isLoading: isLoading ?? false,
+          startDate: startDate,
+          endDate: endDate,
+          userId: userId);
+
+      if (!res.hasError) {
+        final jsonPlantStockListModels = jsonDecode(res.data);
+        // print(res.data);
+        final List<PlantStockListModel> _plantStockListModels =
+            jsonPlantStockListModels
+                .map<PlantStockListModel>((m) =>
+                    PlantStockListModel.fromJson(Map<String, dynamic>.from(m)))
+                .toList();
+
+        return _plantStockListModels;
+      } else {
+        Utility.showDialog(res.errorCode.toString() + ' getPlantStockList');
+        return [];
+      }
+    } catch (error) {
+      print(error.toString());
+      return [];
+    }
+  }
+
   Future<List<GetAssetItemsModel?>?> getEquipmentAssetsList(
     int? facilityId,
     bool? isLoading,
@@ -6919,6 +6954,36 @@ class Repository {
       return false;
     }
   }
+
+  Future<EmployeeStockListModel?> getCmmsItemList(
+    int? facilityId,
+    bool? isLoading,
+  ) async {
+    try {
+      final auth = await getSecuredValue(LocalKeys.authToken);
+      int userId = varUserAccessModel.value.user_id ?? 0;
+
+      final res = await _dataRepository.getCmmsItemList(
+          auth: auth,
+          isLoading: isLoading ?? false,
+          facilityId: facilityId ?? 0,
+          userId: userId);
+
+      if (!res.hasError) {
+        final EmployeeStockListModel _employeeStockListModel =
+            employeeStockListModelFromJson(res.data);
+        return _employeeStockListModel;
+      } //
+      else {
+        Utility.showDialog(res.errorCode.toString() + 'getCmmsItemList');
+        return null;
+      }
+    } catch (error) {
+      print(error.toString());
+      return null;
+    }
+  }
+
   //end
   //end
 }

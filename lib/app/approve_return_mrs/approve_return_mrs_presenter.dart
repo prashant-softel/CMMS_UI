@@ -1,4 +1,3 @@
-import 'package:cmms/domain/models/mrs_detail_model.dart';
 import '../../domain/models/get_return_mrs_detail.dart';
 import '../../domain/usecases/approve_return_mrs_usecase.dart';
 

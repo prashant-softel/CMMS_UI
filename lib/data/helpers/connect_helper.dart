@@ -3910,6 +3910,28 @@ class ConnectHelper {
     return responseModel;
   }
 
+  Future<ResponseModel> getPlantStockList(
+      {required String auth,
+      bool? isLoading,
+      int? facilityId,
+      dynamic startDate,
+      dynamic endDate,
+      int? userId}) async {
+    var responseModel = await apiWrapper.makeRequest(
+      //'SMReports/GetPlantStockReport?facility_id=$facilityId&StartDate=$endDate&EndDate=$startDate',
+      'SMReports/GetPlantStockReport?facility_id=45&StartDate=2002-01-01&EndDate=2023-05-01',
+      Request.get,
+      null,
+      isLoading ?? false,
+      {
+        'Authorization': 'Bearer $auth',
+        'Content-Type': 'application/json',
+      },
+    );
+
+    return responseModel;
+  }
+
   Future<ResponseModel> getEquipmentAssetsList({
     String? auth,
     bool? isLoading,
@@ -4654,4 +4676,20 @@ class ConnectHelper {
 
     return responseModel;
   }
+
+  Future<ResponseModel> getCmmsItemList({
+    String? auth,
+    bool? isLoading,
+    int? facilityId,
+    int? userId,
+  }) async =>
+      await apiWrapper.makeRequest(
+        'SMReports/GetEmployeeStock?facility_id=$facilityId&Emp_ID=$userId',
+        Request.get,
+        null,
+        isLoading ?? false,
+        {
+          'Authorization': 'Bearer $auth',
+        },
+      );
 }

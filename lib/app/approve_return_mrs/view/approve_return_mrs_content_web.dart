@@ -80,7 +80,7 @@ class ApproveReturnMrsContentWeb extends GetView<ApproveReturnMrsController> {
                               style: Styles.black17,
                             ),
                             Text(
-                              "${controller.returnMrsDetailsModel.value?.mrs_ID ?? ""}",
+                              "${controller.returnMrsDetailsModel.value?.id ?? ""}",
                               style: Styles.blue17,
                             ),
                             // Dimens.boxWidth8,
@@ -128,15 +128,15 @@ class ApproveReturnMrsContentWeb extends GetView<ApproveReturnMrsController> {
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
                                 Text(
-                                    // controller.returnMrsDetailsModel.value
-                                    //         ?.requested_by_name ??
-                                    "",
+                                    controller.returnMrsDetailsModel.value
+                                            ?.requested_by_name ??
+                                        "",
                                     style: Styles.blue17),
                                 Dimens.boxHeight10,
                                 Text(
-                                    // controller.returnMrsDetailsModel.value
-                                    //         ?.activity ??
-                                    "",
+                                    controller.returnMrsDetailsModel.value
+                                            ?.activity ??
+                                        "",
                                     style: Styles.blue17),
                               ],
                             ),
@@ -162,12 +162,12 @@ class ApproveReturnMrsContentWeb extends GetView<ApproveReturnMrsController> {
                               children: [
                                 Text(
                                     controller.returnMrsDetailsModel.value
-                                            ?.lastmodifieddate ??
+                                            ?.requestd_date ??
                                         "",
                                     style: Styles.blue17),
                                 Dimens.boxHeight10,
                                 Text(
-                                    "", // "${controller.whereUsedType}${controller.returnMrsDetailsModel.value?.whereUsedTypeId ?? ""}",
+                                    "${controller.whereUsedType}${controller.returnMrsDetailsModel.value?.whereUsedTypeId ?? ""}",
                                     style: Styles.blue17),
                               ],
                             )
@@ -198,7 +198,7 @@ class ApproveReturnMrsContentWeb extends GetView<ApproveReturnMrsController> {
                               child: Row(
                                 children: [
                                   Text(
-                                    //  "${controller.returnMrsDetailsModel.value!.cmmrsItems!.length - 1.toDouble()}",
+                                    // "${controller.returnMrsDetailsModel.value!.cmmrsItems!.length - 1.toDouble()}",
                                     "Equipments",
                                     style: Styles.blue700,
                                   ),
@@ -223,23 +223,23 @@ class ApproveReturnMrsContentWeb extends GetView<ApproveReturnMrsController> {
                                   );
                                 }).toList(),
                                 rows: [
-                                  // ...List.generate(
-                                  //   controller.returnMrsDetailsModel.value!
-                                  //       .cmmrsItems!.length,
-                                  //   (index) {
-                                  //     var equipmentModelListDetails = controller
-                                  //         .returnMrsDetailsModel
-                                  //         .value!
-                                  //         .cmmrsItems![index];
-                                  //     return [
-                                  //       '${equipmentModelListDetails.asset_name}',
-                                  //       '${equipmentModelListDetails.asset_type}',
-                                  //       "", //'${equipmentModelListDetails.file_path}',
-                                  //       '${equipmentModelListDetails.available_qty}',
-                                  //       '${equipmentModelListDetails.requested_qty}',
-                                  //     ];
-                                  //   },
-                                  // ),
+                                  ...List.generate(
+                                    controller.returnMrsDetailsModel.value!
+                                        .cmmrsItems!.length,
+                                    (index) {
+                                      var equipmentModelListDetails = controller
+                                          .returnMrsDetailsModel
+                                          .value!
+                                          .cmmrsItems![index];
+                                      return [
+                                        '${equipmentModelListDetails.asset_name}',
+                                        '${equipmentModelListDetails.asset_type}',
+                                        '${equipmentModelListDetails.asset_item_ID}',
+                                        '${equipmentModelListDetails.available_qty}',
+                                        '${equipmentModelListDetails.returned_qty}',
+                                      ];
+                                    },
+                                  ),
                                 ].map((record) {
                                   return TableViewRow(
                                     height: 50,
@@ -260,33 +260,11 @@ class ApproveReturnMrsContentWeb extends GetView<ApproveReturnMrsController> {
                           children: [
                             CustomRichText(title: "Comment:"),
                             Dimens.boxWidth10,
-                            Container(
-                                width: (Get.width * .6),
-                                decoration: BoxDecoration(
-                                  boxShadow: [
-                                    BoxShadow(
-                                      color: Colors.black26,
-                                      offset: const Offset(
-                                        5.0,
-                                        5.0,
-                                      ),
-                                      blurRadius: 5.0,
-                                      spreadRadius: 1.0,
-                                    ),
-                                    BoxShadow(
-                                      color: ColorValues.whiteColor,
-                                      offset: const Offset(0.0, 0.0),
-                                      blurRadius: 0.0,
-                                      spreadRadius: 0.0,
-                                    ),
-                                  ],
-                                  color: ColorValues.whiteColor,
-                                  borderRadius: BorderRadius.circular(5),
-                                ),
-                                child: LoginCustomTextfield(
-                                  maxLine: 5,
-                                  textController: controller.commentCtrlr,
-                                )),
+                            LoginCustomTextfield(
+                              width: (Get.width * .6),
+                              maxLine: 5,
+                              textController: controller.commentCtrlr,
+                            ),
                           ],
                         ),
                       ),

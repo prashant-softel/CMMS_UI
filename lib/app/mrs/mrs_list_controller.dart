@@ -76,6 +76,6 @@ class MrsListController extends GetxController {
   }
 
   void getMrsListByDate() {
-    getMrsList(facilityId, formattedFromdate, formattedTodate, false);
+    getMrsList(facilityId, formattedTodate1, formattedFromdate1, true);
   }
 }

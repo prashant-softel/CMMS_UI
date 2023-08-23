@@ -1,5 +1,4 @@
 import 'package:cmms/domain/models/get_return_mrs_detail.dart';
-import 'package:cmms/domain/models/mrs_detail_model.dart';
 import 'package:cmms/domain/repositories/repository.dart';
 
 class ApproveReturnMrsUsecase {

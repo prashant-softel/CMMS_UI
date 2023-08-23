@@ -2417,6 +2417,20 @@ class DataRepository extends DomainRepository {
           startDate: startDate,
           endDate: endDate,
           userId: userId);
+  Future<ResponseModel> getPlantStockList(
+          {required String auth,
+          int? facilityId,
+          bool? isLoading,
+          dynamic startDate,
+          dynamic endDate,
+          int? userId}) async =>
+      await connectHelper.getPlantStockList(
+          auth: auth,
+          facilityId: facilityId ?? 0,
+          isLoading: isLoading ?? false,
+          startDate: startDate,
+          endDate: endDate,
+          userId: userId);
   Future<ResponseModel> getEquipmentAssetsList({
     String? auth,
     bool? isLoading,
@@ -2897,5 +2911,19 @@ class DataRepository extends DomainRepository {
     );
     return response;
   }
+
+  Future<ResponseModel> getCmmsItemList({
+    String? auth,
+    bool? isLoading,
+    int? facilityId,
+    int? userId,
+  }) async {
+    return await connectHelper.getCmmsItemList(
+        auth: auth,
+        isLoading: isLoading,
+        facilityId: facilityId,
+        userId: userId);
+  }
+
 //end
 }

@@ -390,6 +390,13 @@ class _MrsListContentWebState extends State<MrsListContentWeb> {
                                                                   message:
                                                                       "View",
                                                                   onPress: () {
+                                                                    final _flutterSecureStorage =
+                                                                        const FlutterSecureStorage();
+
+                                                                    _flutterSecureStorage
+                                                                        .delete(
+                                                                            key:
+                                                                                "mrsId");
                                                                     int mrsId =
                                                                         mrsListDetails?.id ??
                                                                             0;

@@ -4,6 +4,7 @@ import 'package:cmms/app/theme/dimens.dart';
 import 'package:cmms/app/widgets/action_button.dart';
 import 'package:cmms/app/widgets/table_action_button.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 
 import 'package:get/get.dart';
 import 'package:scrollable_table_view/scrollable_table_view.dart';
@@ -393,8 +394,10 @@ class _ReturnMrsListContentWebState extends State<ReturnMrsListContentWeb> {
                                                               Get.toNamed(
                                                                   Routes
                                                                       .returnMrsView,
-                                                                  arguments:
-                                                                      mrsId);
+                                                                  arguments: {
+                                                                    'mrsId':
+                                                                        mrsId
+                                                                  });
                                                             }
                                                           },
                                                         ),
@@ -404,6 +407,13 @@ class _ReturnMrsListContentWebState extends State<ReturnMrsListContentWeb> {
                                                           icon: Icons.edit,
                                                           message: 'edit',
                                                           onPress: () {
+                                                            final _flutterSecureStorage =
+                                                                const FlutterSecureStorage();
+
+                                                            _flutterSecureStorage
+                                                                .delete(
+                                                                    key:
+                                                                        "mrsId");
                                                             int mrsId =
                                                                 mrsListDetails
                                                                         ?.id ??
@@ -438,6 +448,13 @@ class _ReturnMrsListContentWebState extends State<ReturnMrsListContentWeb> {
                                                           icon: Icons.check,
                                                           message: 'Approve',
                                                           onPress: () {
+                                                            final _flutterSecureStorage =
+                                                                const FlutterSecureStorage();
+
+                                                            _flutterSecureStorage
+                                                                .delete(
+                                                                    key:
+                                                                        "mrsId");
                                                             int mrsId =
                                                                 mrsListDetails
                                                                         ?.id ??
@@ -446,8 +463,10 @@ class _ReturnMrsListContentWebState extends State<ReturnMrsListContentWeb> {
                                                               Get.toNamed(
                                                                   Routes
                                                                       .approverReturnMrs,
-                                                                  arguments:
-                                                                      mrsId);
+                                                                  arguments: {
+                                                                    'mrsId':
+                                                                        mrsId
+                                                                  });
                                                             }
                                                           },
                                                         ),
@@ -501,6 +520,14 @@ class _ReturnMrsListContentWebState extends State<ReturnMrsListContentWeb> {
                                                           icon: Icons.close,
                                                           message: 'Reject',
                                                           onPress: () {
+                                                            final _flutterSecureStorage =
+                                                                const FlutterSecureStorage();
+
+                                                            _flutterSecureStorage
+                                                                .delete(
+                                                                    key:
+                                                                        "mrsId");
+
                                                             int mrsId =
                                                                 mrsListDetails
                                                                         ?.id ??
@@ -509,8 +536,10 @@ class _ReturnMrsListContentWebState extends State<ReturnMrsListContentWeb> {
                                                               Get.toNamed(
                                                                   Routes
                                                                       .approverReturnMrs,
-                                                                  arguments:
-                                                                      mrsId);
+                                                                  arguments: {
+                                                                    'mrsId':
+                                                                        mrsId
+                                                                  });
                                                             }
                                                           },
                                                         ),
