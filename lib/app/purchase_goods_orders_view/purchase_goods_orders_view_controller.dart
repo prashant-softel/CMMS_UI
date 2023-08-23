@@ -26,7 +26,7 @@ class PurchaseGoodsorderViewController extends GetxController {
     this.purchaseGoodsorderViewPresenter,
   );
   PurchaseGoodsorderViewPresenter purchaseGoodsorderViewPresenter;
-  int? id = 237;
+  int? id = 236;
 
   @override
   void onInit() async {
