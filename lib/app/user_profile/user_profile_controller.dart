@@ -1,8 +1,10 @@
 import 'package:cmms/app/constant/constant.dart';
+import 'package:cmms/app/navigators/app_pages.dart';
 import 'package:cmms/app/user_profile/user_profile_presenter.dart';
 import 'package:cmms/app/view_user_detail/view_user_detail_presenter.dart';
 import 'package:cmms/domain/models/get_notification_by_userid_model.dart';
 import 'package:cmms/domain/models/getuser_access_byId_model.dart';
+import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:get/get.dart';
 
 import '../../domain/models/user_detail_model.dart';
@@ -12,7 +14,7 @@ class UserProfileController extends GetxController {
     this.userProfilePresenter,
   );
   UserProfilePresenter userProfilePresenter;
-  int userId = 0;
+  Rx<int> userId = 0.obs;
   Rx<UserDetailsModel?> userDetailModel = UserDetailsModel().obs;
   RxList<PlantList?> plantListModel = <PlantList?>[].obs;
   Rx<GetAccessLevelByIdModel?> accessListModel = GetAccessLevelByIdModel().obs;
@@ -28,13 +30,37 @@ class UserProfileController extends GetxController {
 
   @override
   void onInit() async {
-    userId = varUserAccessModel.value.user_id ?? 0; //Get.arguments;
-    print('userId:$userId');
-    if (userId != 0) {
-      await getUserDetails(userId: userId, isloading: true);
+    await setUserId();
+
+    // userId = varUserAccessModel.value.user_id ?? 0; //Get.arguments;
+    if (userId.value != 0) {
+      await getUserDetails(userId: userId.value, isloading: true);
     }
 
     super.onInit();
+  }
+
+  Future<void> setUserId() async {
+    try {
+      final _flutterSecureStorage = const FlutterSecureStorage();
+      // Read jobId
+      String? _userId = await _flutterSecureStorage.read(key: "userId");
+      if (_userId == null || _userId == '' || _userId == "null") {
+        var dataFromPreviousScreen = Get.arguments;
+
+        userId.value = dataFromPreviousScreen['userId'];
+        await _flutterSecureStorage.write(
+          key: "userId",
+          value: userId.value == null ? '' : userId.value.toString(),
+        );
+      } else {
+        userId.value = int.tryParse(_userId) ?? 0;
+      }
+      //  await _flutterSecureStorage.delete(key: "userId");
+    } catch (e) {
+      print(e.toString() + 'userId');
+      //  Utility.showDialog(e.toString() + 'userId');
+    }
   }
 
   Future<void> getUserDetails({int? userId, bool? isloading}) async {
@@ -81,4 +107,13 @@ class UserProfileController extends GetxController {
   //     accesslevel.value = accessLevelModel.value?.access_list ?? [];
   //   }
   // }
+
+  Future<void> editProfile() async {
+    final _flutterSecureStorage = const FlutterSecureStorage();
+
+    _flutterSecureStorage.delete(key: "userId");
+    Get.toNamed(Routes.addUser, arguments: {
+      'userId': userId,
+    });
+  }
 }

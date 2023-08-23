@@ -45,8 +45,8 @@ import 'package:cmms/app/mrs_approve/mrs_approve_binding.dart';
 import 'package:cmms/app/mrs_approve/view/mrs_approve_screen.dart';
 import 'package:cmms/app/mrs_issue/mrs_issue_binding.dart';
 import 'package:cmms/app/mrs_issue/view/mrs_issue_screen.dart';
-import 'package:cmms/app/mrs_return/mrs_return_binding.dart';
-import 'package:cmms/app/mrs_return/view/mrs_return_screen.dart';
+import 'package:cmms/app/create_mrs_return/create_mrs_return_binding.dart';
+import 'package:cmms/app/create_mrs_return/view/create_mrs_return_screen.dart';
 import 'package:cmms/app/mrs_view/mrs_view_binding.dart';
 import 'package:cmms/app/mrs_view/view/mrs_view_screen.dart';
 import 'package:cmms/app/purchase_goods_orders_list.dart/purchase_goods_orders_list_binding.dart';
@@ -170,6 +170,8 @@ import '../login/view/login_screen.dart';
 import '../module_List/module_list_binding.dart';
 import '../module_List/view/module_list_screen.dart';
 import '../module_cleaning_dashboard/view/module_dashboard_screen.dart';
+import '../plant_stock_report/plant_stock_report_binding.dart';
+import '../plant_stock_report/view/plant_stock_report_screen.dart';
 import '../pm_mapping/pm_mapping_binding.dart';
 import '../pm_mapping/view/pm_mapping_screen.dart';
 import '../pm_schedule/pm_schedule_binding.dart';
@@ -640,8 +642,8 @@ class AppPages {
     ),
     GetPage<dynamic>(
       name: _Paths.mrsReturnScreen,
-      page: MrsReturnScreen.new,
-      binding: MrsReturnBinding(),
+      page: CreateMrsReturnScreen.new,
+      binding: CreateMrsReturnBinding(),
     ),
     GetPage<dynamic>(
       name: _Paths.documentManager,
@@ -806,6 +808,11 @@ class AppPages {
       name: _Paths.purchaseGoodsorderView,
       page: PurchaseGoodsorderViewScreen.new,
       binding: PurchaseGoodsorderViewBinding(),
+    ),
+    GetPage<dynamic>(
+      name: _Paths.plantStockReport,
+      page: PlantStockReportScreen.new,
+      binding: PlantStockReportBinding(),
     ),
   ];
 }

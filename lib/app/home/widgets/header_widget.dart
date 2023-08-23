@@ -2,6 +2,7 @@ import 'package:cmms/app/app.dart';
 import 'package:cmms/app/constant/constant.dart';
 import 'package:cmms/app/widgets/dropdown_web.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:get/get.dart';
 
 import '../../navigators/app_pages.dart';
@@ -136,9 +137,16 @@ class HeaderWidget extends GetView<HomeController> {
                                       children: [
                                         GestureDetector(
                                           onTap: () {
+                                            final _flutterSecureStorage =
+                                                const FlutterSecureStorage();
+
+                                            _flutterSecureStorage.delete(
+                                                key: "userId");
                                             Get.toNamed(Routes.profile,
-                                                arguments: varUserAccessModel
-                                                    .value.user_id);
+                                                arguments: {
+                                                  'userId': varUserAccessModel
+                                                      .value.user_id,
+                                                });
                                           },
                                           child: Row(
                                             children: [

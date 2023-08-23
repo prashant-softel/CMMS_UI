@@ -2,6 +2,7 @@ import 'package:cmms/app/app.dart';
 import 'package:cmms/app/constant/constant.dart';
 import 'package:cmms/app/setting_dashboard/setting_dashboard_controller.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:get/get.dart';
 
 import '../../home/widgets/header_widget.dart';
@@ -138,8 +139,13 @@ class SettingDashboardScreen extends GetView<SettingDashboardController> {
                         _settingList(
                             tittle: "Profile",
                             ontap: () {
-                              Get.toNamed(Routes.profile,
-                                  arguments: varUserAccessModel.value.user_id);
+                              final _flutterSecureStorage =
+                                  const FlutterSecureStorage();
+
+                              _flutterSecureStorage.delete(key: "userId");
+                              Get.toNamed(Routes.profile, arguments: {
+                                'userId': varUserAccessModel.value.user_id
+                              });
                               // controller.checkPoint();
                             })
                       ],

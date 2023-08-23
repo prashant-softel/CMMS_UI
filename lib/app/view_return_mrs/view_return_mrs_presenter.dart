@@ -1,15 +1,15 @@
-import 'package:cmms/domain/models/mrs_detail_model.dart';
+import 'package:cmms/domain/models/get_return_mrs_detail.dart';
 
 import '../../domain/usecases/view_return_mrs_usecase.dart';
 
 class MrsReturnViewPresenter {
   MrsReturnViewPresenter(this.mrsReturnViewUsecase);
   MrsReturnViewUsecase mrsReturnViewUsecase;
-  Future<MrsDetailsModel?> getMrsDetails({
+  Future<ReturnMrsDetailsModel?> getReturnMrsDetails({
     int? mrsId,
     bool? isLoading,
   }) async =>
-      await mrsReturnViewUsecase.getMrsDetails(
+      await mrsReturnViewUsecase.getReturnMrsDetails(
         mrsId: mrsId,
         isLoading: isLoading,
       );

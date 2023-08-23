@@ -78,7 +78,7 @@ class MrsReturnViewContentWeb extends GetView<MrsReturnViewController> {
                               style: Styles.black17,
                             ),
                             Text(
-                              "${controller.mrsDetailsModel.value?.id ?? ""}",
+                              "${controller.returnMrsDetailsModel.value?.id ?? ""}",
                               style: Styles.blue17,
                             ),
                             Dimens.boxWidth8,
@@ -88,7 +88,7 @@ class MrsReturnViewContentWeb extends GetView<MrsReturnViewController> {
                                 backgroundColor: ColorValues.appLightBlueColor,
                                 onPressed: () async {},
                                 text:
-                                    "${controller.mrsDetailsModel.value?.status_short ?? ""}",
+                                    "${controller.returnMrsDetailsModel.value?.status_short ?? ""}",
                               ),
                             ),
                           ],
@@ -131,19 +131,19 @@ class MrsReturnViewContentWeb extends GetView<MrsReturnViewController> {
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
                                 Text(
-                                    controller.mrsDetailsModel.value
+                                    controller.returnMrsDetailsModel.value
                                             ?.requested_by_name ??
                                         "",
                                     style: Styles.blue17),
                                 Dimens.boxHeight10,
                                 Text(
-                                    controller
-                                            .mrsDetailsModel.value?.activity ??
+                                    controller.returnMrsDetailsModel.value
+                                            ?.activity ??
                                         "",
                                     style: Styles.blue17),
                                 Dimens.boxHeight10,
                                 Text(
-                                    controller.mrsDetailsModel.value
+                                    controller.returnMrsDetailsModel.value
                                             ?.approver_name ??
                                         "",
                                     style: Styles.blue17),
@@ -175,7 +175,7 @@ class MrsReturnViewContentWeb extends GetView<MrsReturnViewController> {
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
                                 Text(
-                                    controller.mrsDetailsModel.value
+                                    controller.returnMrsDetailsModel.value
                                             ?.requestd_date ??
                                         "",
                                     style: Styles.blue17),
@@ -184,7 +184,7 @@ class MrsReturnViewContentWeb extends GetView<MrsReturnViewController> {
                                     style: Styles.blue17),
                                 Dimens.boxHeight10,
                                 Text(
-                                    controller.mrsDetailsModel.value
+                                    controller.returnMrsDetailsModel.value
                                             ?.approval_date ??
                                         "",
                                     style: Styles.blue17),
@@ -242,11 +242,11 @@ class MrsReturnViewContentWeb extends GetView<MrsReturnViewController> {
                                 }).toList(),
                                 rows: [
                                   ...List.generate(
-                                    controller.mrsDetailsModel.value!
+                                    controller.returnMrsDetailsModel.value!
                                         .cmmrsItems!.length,
                                     (index) {
                                       var equipmentModelListDetails = controller
-                                          .mrsDetailsModel
+                                          .returnMrsDetailsModel
                                           .value!
                                           .cmmrsItems![index];
                                       return [
@@ -261,7 +261,7 @@ class MrsReturnViewContentWeb extends GetView<MrsReturnViewController> {
                                   ),
                                 ].map((record) {
                                   return TableViewRow(
-                                    height: 90,
+                                    height: 50,
                                     cells: record.map((value) {
                                       return TableViewCell(
                                         child: Text(value),

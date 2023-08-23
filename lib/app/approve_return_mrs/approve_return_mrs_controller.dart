@@ -40,7 +40,7 @@ class ApproveReturnMrsController extends GetxController {
   Future<void> setMrsId() async {
     try {
       final _flutterSecureStorage = const FlutterSecureStorage();
-      String? _mrsId = await _flutterSecureStorage.read(key: "scheduleId");
+      String? _mrsId = await _flutterSecureStorage.read(key: "mrsId");
       if (_mrsId == null || _mrsId == '' || _mrsId == "null") {
         var dataFromPreviousScreen = Get.arguments;
 
@@ -64,10 +64,13 @@ class ApproveReturnMrsController extends GetxController {
 
     if (_returnMrsrsDetailsModel != null) {
       returnMrsDetailsModel.value = _returnMrsrsDetailsModel;
-      // whereUsedType =
-      //     returnMrsDetailsModel.value?.whereUsedType == 1 ? "JC" : "PM";
+      whereUsedType = returnMrsDetailsModel.value?.whereUsedType == 1
+          ? "JC"
+          : returnMrsDetailsModel.value?.whereUsedType == 2
+              ? "PM"
+              : "";
     }
-    // print({"mrsdetailss", returnMrsDetailsModel});
+    // print({"mrsdetailss", returnMrsDetailsModel.value});
   }
 
   approveReturnMrs() async {
@@ -83,7 +86,10 @@ class ApproveReturnMrsController extends GetxController {
         isLoading: true,
       );
       if (response == true) {
-        Get.offAllNamed(Routes.mrsListScreen);
+        final _flutterSecureStorage = const FlutterSecureStorage();
+
+        _flutterSecureStorage.delete(key: "mrsId");
+        Get.offAllNamed(Routes.returnMrsList);
       }
     }
   }
@@ -101,7 +107,10 @@ class ApproveReturnMrsController extends GetxController {
         isLoading: true,
       );
       if (response == true) {
-        Get.offAllNamed(Routes.mrsListScreen);
+        final _flutterSecureStorage = const FlutterSecureStorage();
+
+        _flutterSecureStorage.delete(key: "mrsId");
+        Get.offAllNamed(Routes.returnMrsList);
       }
     }
   }

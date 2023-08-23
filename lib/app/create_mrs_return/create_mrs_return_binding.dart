@@ -1,19 +1,19 @@
 import 'package:cmms/app/home/home_controller.dart';
 import 'package:cmms/app/home/home_presenter.dart';
-import 'package:cmms/app/mrs_return/mrs_return_controller.dart';
-import 'package:cmms/app/mrs_return/mrs_return_presenter.dart';
+import 'package:cmms/app/create_mrs_return/create_mrs_return_controller.dart';
+import 'package:cmms/app/create_mrs_return/create_mrs_return_presenter.dart';
 import 'package:cmms/domain/usecases/home_usecase.dart';
-import 'package:cmms/domain/usecases/mrs_return_usecase.dart';
+import 'package:cmms/domain/usecases/create_mrs_return_usecase.dart';
 import 'package:get/get.dart';
 
-class MrsReturnBinding extends Bindings {
+class CreateMrsReturnBinding extends Bindings {
   @override
   void dependencies() {
     Get.lazyPut(
-      () => MrsReturnController(
+      () => CreateMrsReturnController(
         Get.put(
-          MrsReturnPresenter(
-            MrsReturnUsecase(
+          CreateMrsReturnPresenter(
+            CreateMrsReturnUsecase(
               Get.find(),
             ),
           ),

@@ -130,7 +130,14 @@ class StockManagementDashboardScreen
                             ontap: () {
                               controller.createChecklist();
                             }),
-                        _stockManagementList(tittle: "Plant Stock"),
+                        _stockManagementList(
+                            tittle: "Plant Stock Report",
+                            ontap: () {
+                              Get.toNamed(
+                                Routes.plantStockReport,
+                              );
+                              //  controller.checkPoint();
+                            }),
 
                         //  if (Responsive.isDesktop(context))
                         _stockManagementList(
@@ -139,7 +146,7 @@ class StockManagementDashboardScreen
                               Get.toNamed(
                                 Routes.stockManagementGoodsOrdersScreen,
                               );
-                              controller.checkPoint();
+                              //controller.checkPoint();
                             }),
                         _stockManagementList(
                             tittle: "Receive Goods Order ",
@@ -149,6 +156,11 @@ class StockManagementDashboardScreen
                               );
 
                               // controller.receiveGoodsOrders();
+                            }),
+                        _stockManagementList(
+                            tittle: "Employee Stock Report",
+                            ontap: () {
+                              //  Get.offNamed(Routes.purchaseGoodsorder);
                             }),
 
                         // _stockManagementList(

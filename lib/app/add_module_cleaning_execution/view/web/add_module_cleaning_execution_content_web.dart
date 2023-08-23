@@ -394,9 +394,7 @@ class AddModuleCleaningExecutionContentWeb
                                                                                                         children: [
                                                                                                           TableActionButton(
                                                                                                             label: 'Start',
-                                                                                                            onPress: () {
-                                                                                                              
-                                                                                                            },
+                                                                                                            onPress: () {},
                                                                                                             color: Colors.green,
                                                                                                           ),
                                                                                                           TableActionButton(
@@ -470,8 +468,8 @@ class AddModuleCleaningExecutionContentWeb
                                             CustomElevatedButton(
                                               backgroundColor: Colors.red,
                                               onPressed: () {
-                                                 Get.offAndToNamed(
-                                                Routes.moduleCleaningListExecution);
+                                                Get.offAndToNamed(Routes
+                                                    .moduleCleaningListExecution);
                                               },
                                               text: 'Cancel',
                                             ),
@@ -481,8 +479,8 @@ class AddModuleCleaningExecutionContentWeb
                                             Container(
                                               height: 28,
                                               child: CustomElevatedButton(
-                                                backgroundColor:
-                                                    ColorValues.appLightBlueColor,
+                                                backgroundColor: ColorValues
+                                                    .appLightBlueColor,
                                                 text: "Update",
                                                 onPressed: () {
                                                   // controller
@@ -490,40 +488,46 @@ class AddModuleCleaningExecutionContentWeb
                                                 },
                                               ),
                                             ),
-                                             SizedBox(
+                                            SizedBox(
                                               width: 20,
                                             ),
-                                            controller.data['status'] == "Scheduled"
-                                            ?Container(
-                                              height: 28,
-                                              child: CustomElevatedButton(
-                                                backgroundColor:
-                                                    ColorValues.appGreenColor,
-                                                text: "Start",
-                                                onPressed: () {
-                                                  controller.startMCExecutionButton();
-                                                },
-                                              ),
-                                            )
-                                            :Container(),
+                                            controller.data['status'] ==
+                                                    "Scheduled"
+                                                ? Container(
+                                                    height: 28,
+                                                    child: CustomElevatedButton(
+                                                      backgroundColor:
+                                                          ColorValues
+                                                              .appGreenColor,
+                                                      text: "Start",
+                                                      onPressed: () {
+                                                        controller
+                                                            .startMCExecutionButton();
+                                                      },
+                                                    ),
+                                                  )
+                                                : Container(),
 
-                                             SizedBox(
+                                            SizedBox(
                                               width: 20,
                                             ),
 
-                                            controller.data['status'] == "Abandoned"
-                                            ?Container(
-                                              height: 28,
-                                              child: CustomElevatedButton(
-                                                backgroundColor:
-                                                    ColorValues.appGreenColor,
-                                                text: "End",
-                                                onPressed: () {
-                                                 Get.dialog(EndMCExecutionDialog());
-                                                },
-                                              ),
-                                            )
-                                            :Container(),
+                                            controller.data['status'] ==
+                                                    "Abandoned"
+                                                ? Container(
+                                                    height: 28,
+                                                    child: CustomElevatedButton(
+                                                      backgroundColor:
+                                                          ColorValues
+                                                              .appGreenColor,
+                                                      text: "End",
+                                                      onPressed: () {
+                                                        Get.dialog(
+                                                            EndMCExecutionDialog());
+                                                      },
+                                                    ),
+                                                  )
+                                                : Container(),
                                             SizedBox(
                                               width: 20,
                                             ),

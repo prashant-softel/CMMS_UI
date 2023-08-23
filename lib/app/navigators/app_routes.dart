@@ -133,6 +133,7 @@ abstract class Routes {
       _Paths.viewModuleCleaningExecutionScreen;
   static const purchaseGoodsorder = _Paths.purchaseGoodsorder;
   static const purchaseGoodsorderView = _Paths.purchaseGoodsorderView;
+  static const plantStockReport = _Paths.plantStockReport;
 }
 
 abstract class _Paths {
@@ -260,6 +261,7 @@ abstract class _Paths {
       '/add-module-cleaning-execution';
   static const viewModuleCleaningExecutionScreen =
       '/view-module-cleaning-execution';
+  static const plantStockReport = '/plant-stock-report';
 
 // static const editPermitWebScreen = '/edit-permit-web-screen';
 }
