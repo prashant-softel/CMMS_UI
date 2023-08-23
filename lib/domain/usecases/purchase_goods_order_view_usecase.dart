@@ -25,4 +25,16 @@ class PurchaseGoodsorderViewUsecase {
         facilityId,
         isLoading,
       );
+  Future<bool> approveGoodsOrder({
+    approvetoJsonString,
+    bool? isLoading,
+  }) async =>
+      await _repository.approveGoodsOrder(
+          approvetoJsonString: approvetoJsonString, isLoading: isLoading);
+  Future<bool> rejectGoodsOrder({
+    rejecttoJsonString,
+    bool? isLoading,
+  }) async =>
+      await _repository.rejectGoodsOrder(
+          rejecttoJsonString: rejecttoJsonString, isLoading: isLoading);
 }

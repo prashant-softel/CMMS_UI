@@ -2808,6 +2808,30 @@ class DataRepository extends DomainRepository {
     return response;
   }
 
+  Future<ResponseModel> approveGoodsOrder({
+    auth,
+    bool? isLoading,
+    approvetoJsonString,
+  }) async {
+    var response = await connectHelper.approveGoodsOrder(
+        auth: auth,
+        isLoading: isLoading,
+        approvetoJsonString: approvetoJsonString);
+    return response;
+  }
+
+  Future<ResponseModel> rejectGoodsOrder({
+    auth,
+    bool? isLoading,
+    rejecttoJsonString,
+  }) async {
+    var response = await connectHelper.rejectGoodsOrder(
+        auth: auth,
+        isLoading: isLoading,
+        rejecttoJsonString: rejecttoJsonString);
+    return response;
+  }
+
   Future<ResponseModel> rejectRetrunMrs({
     auth,
     bool? isLoading,

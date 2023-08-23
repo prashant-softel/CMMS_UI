@@ -1,4 +1,5 @@
 import 'package:cmms/domain/domain.dart';
+import 'package:cmms/domain/models/end_mc_execution_detail_model.dart';
 import 'package:cmms/domain/models/history_model.dart';
 
 import '../models/facility_model.dart';
@@ -22,6 +23,15 @@ class ViewModuleCleaningExecutionUsecase {
         moduleType,
         id,
         isLoading,
+      );
+
+  Future<EndMCExecutionDetailsModel?> getMCExecutionDetail({
+    bool? isLoading,  
+    required int executionId,
+  }) async =>
+      await _repository.getMCExecutionDetail(
+        executionId: executionId,
+        isLoading: isLoading ?? false,
       );
 
   Future<List<FacilityModel?>?> getFacilityList() async =>

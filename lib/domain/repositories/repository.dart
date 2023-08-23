@@ -5027,6 +5027,52 @@ class Repository {
     }
   }
 
+  Future<bool> approveGoodsOrder({bool? isLoading, approvetoJsonString}) async {
+    try {
+      final auth = await getSecuredValue(LocalKeys.authToken);
+      log(auth);
+      final res = await _dataRepository.approveGoodsOrder(
+          auth: auth,
+          isLoading: isLoading,
+          approvetoJsonString: approvetoJsonString);
+      print({"res.data", res.data});
+      if (!res.hasError) {
+        Fluttertoast.showToast(msg: res.data, fontSize: 45.0);
+
+        return true;
+      } else {
+        Fluttertoast.showToast(msg: res.data, fontSize: 45.0);
+        return false;
+      }
+    } catch (error) {
+      log(error.toString());
+      return false;
+    }
+  }
+
+  Future<bool> rejectGoodsOrder({bool? isLoading, rejecttoJsonString}) async {
+    try {
+      final auth = await getSecuredValue(LocalKeys.authToken);
+      log(auth);
+      final res = await _dataRepository.rejectGoodsOrder(
+          auth: auth,
+          isLoading: isLoading,
+          rejecttoJsonString: rejecttoJsonString);
+      print({"res.data", res.data});
+      if (!res.hasError) {
+        Fluttertoast.showToast(msg: res.data, fontSize: 45.0);
+
+        return true;
+      } else {
+        Fluttertoast.showToast(msg: res.data, fontSize: 45.0);
+        return false;
+      }
+    } catch (error) {
+      log(error.toString());
+      return false;
+    }
+  }
+
   Future<bool> createBusinessListNumber(
       {bool? isLoading, businesslistJsonString}) async {
     try {

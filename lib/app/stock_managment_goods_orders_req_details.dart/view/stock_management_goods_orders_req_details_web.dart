@@ -253,8 +253,7 @@ class GoodsOrdersReqDetailsWeb extends GetView<GoodsOrdersReqDetailController> {
                                                             keyboardType:
                                                                 TextInputType
                                                                     .number,
-                                                            inputFormatters: <
-                                                                TextInputFormatter>[
+                                                            inputFormatters: <TextInputFormatter>[
                                                               FilteringTextInputFormatter
                                                                   .digitsOnly
                                                             ],
@@ -314,7 +313,7 @@ class GoodsOrdersReqDetailsWeb extends GetView<GoodsOrdersReqDetailController> {
                                 ),
                                 child: LoginCustomTextfield(
                                   maxLine: 5,
-                                  // textController: controller.remarkCtrlr,
+                                  // textController: controller,
                                 )),
                           ],
                         ),
