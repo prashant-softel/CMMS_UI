@@ -952,6 +952,36 @@ class ConnectHelper {
     return responseModel;
   }
 
+
+  Future<ResponseModel> startMCExecutionScheduleButton({
+    required String auth,
+    bool? isLoading,
+    int? scheduleId,
+  }) async {
+    // facilityId = 45;
+    var responseModel = await apiWrapper.makeRequest(
+      'MC/StartMCScheduleExecution?scheduleId=$scheduleId',
+      Request.put,
+      // {'comment': "$comment", 'id': id},
+      null,
+      isLoading ?? true,
+      {
+        'Authorization': 'Bearer $auth',
+      },
+    );
+    // print('StartExecutionResponse: ${responseModel.data}');
+    var res = responseModel.data;
+    var parsedJson = json.decode(res);
+    Get.dialog<void>(StartMcExecutionMessageDialog(
+      data: parsedJson['message'],
+      startMCId: parsedJson['id'],
+    ));
+
+    return responseModel;
+  }
+
+
+
   Future<ResponseModel> permitRejectButton({
     required String auth,
     bool? isLoading,

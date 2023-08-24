@@ -2358,6 +2358,32 @@ class Repository {
     }
   }
 
+
+   Future<void> startMCExecutionScheduleButton(
+    int? scheduleId,
+    bool? isLoading,
+  ) async {
+    try {
+      final auth = await getSecuredValue(LocalKeys.authToken);
+
+      final res = await _dataRepository.startMCExecutionScheduleButton(
+        auth: auth,
+        scheduleId: scheduleId,
+        isLoading: isLoading ?? false,
+      );
+      print('StartScheduleExecutionResponse55: ${res.data}');
+
+      if (!res.hasError) {
+        //  return _permitIssueModel;
+      } else {
+        Utility.showDialog(res.errorCode.toString() + 'startMCScheduleExecutionButton');
+      }
+    } catch (error) {
+      log(error.toString());
+    }
+  }
+
+
   Future<void> permitRejectButton(
     String? comment,
     String? id,
@@ -2372,7 +2398,7 @@ class Repository {
         id: id,
         isLoading: isLoading ?? false,
       );
-      print('PermitRejectResponse55: ${res.data}');
+      // print('PermitRejectResponse55: ${res.data}');
 
       if (!res.hasError) {
         //  return _permitIssueModel;
@@ -2399,7 +2425,7 @@ class Repository {
         id: id,
         isLoading: isLoading ?? false,
       );
-      print('IncidentReportRejectResponse: ${res.data}');
+      // print('IncidentReportRejectResponse: ${res.data}');
 
       if (!res.hasError) {
         //  return _permitIssueModel;
@@ -2425,7 +2451,7 @@ class Repository {
         incidentId: incidentId,
         isLoading: isLoading ?? false,
       );
-      print('IncidentReportApproveResponse: ${res.data}');
+      // print('IncidentReportApproveResponse: ${res.data}');
 
       if (!res.hasError) {
         //  return _permitIssueModel;
@@ -3585,7 +3611,7 @@ class Repository {
         permitId: permitId,
         isLoading: isLoading,
       );
-      print('Permit History: ${res.data}');
+      // print('Permit History: ${res.data}');
 
       if (!res.hasError) {
         final jsonPermitDetailsModels = jsonDecode(res.data);

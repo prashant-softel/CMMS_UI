@@ -1,4 +1,5 @@
 import 'package:cmms/app/module_cleaning_execution/module_cleaning_list_execution_controller.dart';
+import 'package:cmms/app/navigators/app_pages.dart';
 import 'package:cmms/app/theme/color_values.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -13,7 +14,7 @@ class StartMcExecutionMessageDialog extends GetView {
   List<dynamic>? startMCId;
 
   StartMcExecutionMessageDialog({super.key, this.createPermitData, this.data, this.startMCId});
-  final ModuleCleaningListExecutionController _controller = Get.find();
+  // final ModuleCleaningListExecutionController _controller = Get.find();
 
 
   @override
@@ -26,7 +27,7 @@ class StartMcExecutionMessageDialog extends GetView {
         insetPadding: Dimens.edgeInsets10_0_10_0,
         contentPadding: EdgeInsets.zero,
         title: Text(
-          'Start MC Execution',
+          data == "Plan Execution started" ?'Start MC Execution' : 'Start MC Schedule Execution',
           textAlign: TextAlign.center,
           style: TextStyle(color: Colors.black),
         ),
@@ -45,6 +46,8 @@ class StartMcExecutionMessageDialog extends GetView {
                     thickness: 1,
                   ),
                   Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    crossAxisAlignment: CrossAxisAlignment.center,
                     children: [
                       Text(
                           '${data} ', style: TextStyle(color: Colors.green),textAlign: TextAlign.center),
@@ -62,8 +65,9 @@ class StartMcExecutionMessageDialog extends GetView {
             child: ElevatedButton(
               style: Styles.darkBlueElevatedButtonStyle,
               onPressed: () {
-                _controller.getMCTaskList(_controller.facilityId, _controller.formattedTodate, _controller.formattedFromdate, true);
-                    
+                Get.offAllNamed(Routes.moduleCleaningListExecution);
+                // _controller.getMCTaskList(_controller.facilityId, _controller.formattedTodate, _controller.formattedFromdate, true);
+                
                 Get.back();
               },
               child: const Text('Ok'),
