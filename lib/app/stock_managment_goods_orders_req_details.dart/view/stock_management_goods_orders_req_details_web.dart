@@ -18,50 +18,46 @@ class GoodsOrdersReqDetailsWeb extends GetView<GoodsOrdersReqDetailController> {
   @override
   Widget build(BuildContext context) {
     return Obx(
-      () => Container(
-        color: Color.fromARGB(255, 234, 236, 238),
-        width: Get.width,
-        height: Get.height,
-        child: Column(children: [
-          Container(
-            height: 45,
-            decoration: BoxDecoration(
-              border: Border.all(
-                color: Color.fromARGB(255, 227, 224, 224),
-                width: 1,
+      () => Column(children: [
+        Container(
+          height: 45,
+          decoration: BoxDecoration(
+            border: Border.all(
+              color: Color.fromARGB(255, 227, 224, 224),
+              width: 1,
+            ),
+            boxShadow: [
+              BoxShadow(
+                color: Color.fromARGB(255, 236, 234, 234).withOpacity(0.5),
+                spreadRadius: 2,
+                blurRadius: 5,
+                offset: Offset(0, 2),
               ),
-              boxShadow: [
-                BoxShadow(
-                  color: Color.fromARGB(255, 236, 234, 234).withOpacity(0.5),
-                  spreadRadius: 2,
-                  blurRadius: 5,
-                  offset: Offset(0, 2),
-                ),
-              ],
-            ),
-            child: Row(
-              children: [
-                Icon(
-                  Icons.home,
-                  color: ColorValues.greyLightColor,
-                ),
-                Text(
-                  "DASHBOARD",
-                  style: Styles.greyLight14,
-                ),
-                GestureDetector(
-                  onTap: () {
-                    Get.back();
-                  },
-                  child: Text(" / STOCK MANAGEMENT ",
-                      style: Styles.greyMediumLight12),
-                ),
-                Text(" / Purchase Goods Orders",
-                    style: Styles.greyMediumLight12)
-              ],
-            ),
+            ],
           ),
-          Expanded(
+          child: Row(
+            children: [
+              Icon(
+                Icons.home,
+                color: ColorValues.greyLightColor,
+              ),
+              Text(
+                "DASHBOARD",
+                style: Styles.greyLight14,
+              ),
+              GestureDetector(
+                onTap: () {
+                  Get.back();
+                },
+                child: Text(" / STOCK MANAGEMENT ",
+                    style: Styles.greyMediumLight12),
+              ),
+              Text(" / Purchase Goods Orders1", style: Styles.greyMediumLight12)
+            ],
+          ),
+        ),
+        Expanded(
+          child: SingleChildScrollView(
             child: Container(
               width: Get.width * 7,
               margin: EdgeInsets.only(left: 10, top: 10, right: 10),
@@ -343,8 +339,8 @@ class GoodsOrdersReqDetailsWeb extends GetView<GoodsOrdersReqDetailController> {
               ),
             ),
           ),
-        ]),
-      ),
+        ),
+      ]),
     );
     //  ),
   }
