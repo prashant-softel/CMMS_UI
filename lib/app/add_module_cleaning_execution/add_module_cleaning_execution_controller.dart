@@ -30,7 +30,7 @@ class AddModuleCleaningExecutionController extends GetxController {
   Rx<List<List<Map<String, String>>>> rowItem =
       Rx<List<List<Map<String, String>>>>([]);
   List<Escalation> days = [];
-  Map<String, RoleModel> dropdownMapperData = {};
+  Map<String, Schedules> dropdownMapperData = {};
   Map<String, PaiedModel> paiddropdownMapperData = {};
 
   void addRowItem() {
@@ -105,6 +105,8 @@ RxList<InventoryCategoryModel?> equipmentCategoryList =
 
   StreamSubscription<int>? facilityIdStreamSubscription;
   int facilityId = 0;
+
+  List<int?> scheduleId = [];
 
   ///
 
@@ -217,6 +219,16 @@ RxList<InventoryCategoryModel?> equipmentCategoryList =
     // print('Plan Data:${data['planId']}');
   }
 
+  Future<void> startMCExecutionScheduleButton({int? scheduleID}) async {
+    final _startMCScheduleExecutionBtn =
+        await addModuleCleaningExecutionPresenter.startMCExecutionScheduleButton(
+      scheduleId: scheduleId.first,
+      
+    );
+    
+    // print('Plan Data:${data['planId']}');
+  }
+
 
    void endMCExecutionButton({int? id}) async {
     {
@@ -231,6 +243,7 @@ RxList<InventoryCategoryModel?> equipmentCategoryList =
       EndMCExecutionModel endMCModel =
           EndMCExecutionModel(
             scheduleId: data['planId'],
+            // scheduleId: scheduleId.first,
             executionId: data['id'],
             cleaningDay: data['cleaningDays'],
             waterUsed: data['waterUsed'],  
@@ -270,6 +283,9 @@ RxList<InventoryCategoryModel?> equipmentCategoryList =
       plannedAtDateTimeCtrlrWeb.text = '${DateFormat('yyyy-MM-dd HH:mm:ss').format(DateTime.parse('${mcExecutionDetailsModel.value?.plannedAt}'))}';
       startedAtDateTimeCtrlrWeb.text = '${DateFormat('yyyy-MM-dd HH:mm:ss').format(DateTime.parse('${mcExecutionDetailsModel.value?.startedAt}'))}';
       listSchedules?.value = mcExecutionDetailsModel.value?.schedules ?? [];
+      scheduleId = listSchedules!.map((element) => element?.scheduleId).toList();
+      print('ScheduleId: ${scheduleId}');
+      
     }
   }
 

@@ -1,5 +1,7 @@
 // import 'package:cmms/app/add_job/views/widgets/work_area_widget.dart';
 
+import 'dart:convert';
+
 import 'package:cmms/app/add_module_cleaning_execution/add_module_cleaning_execution_controller.dart';
 import 'package:cmms/app/app.dart';
 import 'package:cmms/app/navigators/navigators.dart';
@@ -206,7 +208,7 @@ class AddModuleCleaningExecutionContentWeb
 
                                       Dimens.boxHeight50,
 
-                                      ///Escalation Matrix Roles
+                                      ///Schedule Execution
 
                                       Wrap(
                                         children: [
@@ -327,23 +329,17 @@ class AddModuleCleaningExecutionContentWeb
                                                                               ],
                                                                             ))),
                                                                   )
-                                                            :(mapData[
-                                                                        'key'] ==
-                                                                    "Days")
-                                                                ? Column(
-                                                                    mainAxisAlignment:
-                                                                        MainAxisAlignment
-                                                                            .center,
-                                                                    crossAxisAlignment:
-                                                                        CrossAxisAlignment
-                                                                            .center,
-                                                                    children: [
-                                                                      // Text(
-                                                                      //     '1')
-                                                                    ]..addAll(controller
-                                                                        .listSchedules!
-                                                                        .map((element) =>
-                                                                            Row(
+                                                                : (mapData['key'] ==
+                                                                        "Days")
+                                                                    ? Column(
+                                                                        mainAxisAlignment:
+                                                                            MainAxisAlignment.center,
+                                                                        crossAxisAlignment:
+                                                                            CrossAxisAlignment.center,
+                                                                        children: [
+                                                                          // Text(
+                                                                          //     '1')
+                                                                        ]..addAll(controller.listSchedules!.map((element) => Row(
                                                                               mainAxisSize: MainAxisSize.min,
                                                                               mainAxisAlignment: MainAxisAlignment.start,
                                                                               crossAxisAlignment: CrossAxisAlignment.start,
@@ -354,51 +350,30 @@ class AddModuleCleaningExecutionContentWeb
                                                                                 ),
                                                                               ],
                                                                             ))),
-                                                                  )
-                                                                : (mapData['key'] ==
-                                                                        "Scheduled Module")
-                                                                    ? Column(
-                                                                        mainAxisAlignment:
-                                                                            MainAxisAlignment.center,
-                                                                        crossAxisAlignment:
-                                                                            CrossAxisAlignment.center,
-                                                                        children: [
-                                                                          // Text('2000')
-                                                                        ]..addAll(controller.listSchedules!.map((element) => Row(
-                                                                              mainAxisSize: MainAxisSize.min,
-                                                                              mainAxisAlignment: MainAxisAlignment.start,
-                                                                              crossAxisAlignment: CrossAxisAlignment.start,
-                                                                              children: [
-                                                                                Text(
-                                                                                  "${element?.scheduledModules}",
-                                                                                  style: TextStyle(color: Color.fromARGB(255, 5, 92, 163)),
-                                                                                ),
-                                                                              ],
-                                                                            ))),
                                                                       )
                                                                     : (mapData['key'] ==
-                                                                            "Cleaned")
+                                                                            "Scheduled Module")
                                                                         ? Column(
                                                                             mainAxisAlignment:
                                                                                 MainAxisAlignment.center,
                                                                             crossAxisAlignment:
                                                                                 CrossAxisAlignment.center,
                                                                             children: [
-                                                                              // Text('-')
+                                                                              // Text('2000')
                                                                             ]..addAll(controller.listSchedules!.map((element) => Row(
                                                                                   mainAxisSize: MainAxisSize.min,
                                                                                   mainAxisAlignment: MainAxisAlignment.start,
                                                                                   crossAxisAlignment: CrossAxisAlignment.start,
                                                                                   children: [
                                                                                     Text(
-                                                                                      "${element?.cleanedModules}",
+                                                                                      "${element?.scheduledModules}",
                                                                                       style: TextStyle(color: Color.fromARGB(255, 5, 92, 163)),
                                                                                     ),
                                                                                   ],
                                                                                 ))),
                                                                           )
                                                                         : (mapData['key'] ==
-                                                                                "Abandoned")
+                                                                                "Cleaned")
                                                                             ? Column(
                                                                                 mainAxisAlignment: MainAxisAlignment.center,
                                                                                 crossAxisAlignment: CrossAxisAlignment.center,
@@ -410,13 +385,13 @@ class AddModuleCleaningExecutionContentWeb
                                                                                       crossAxisAlignment: CrossAxisAlignment.start,
                                                                                       children: [
                                                                                         Text(
-                                                                                          "${element?.abandonedModules}",
+                                                                                          "${element?.cleanedModules}",
                                                                                           style: TextStyle(color: Color.fromARGB(255, 5, 92, 163)),
                                                                                         ),
                                                                                       ],
                                                                                     ))),
                                                                               )
-                                                                            : (mapData['key'] == "Pending")
+                                                                            : (mapData['key'] == "Abandoned")
                                                                                 ? Column(
                                                                                     mainAxisAlignment: MainAxisAlignment.center,
                                                                                     crossAxisAlignment: CrossAxisAlignment.center,
@@ -428,135 +403,156 @@ class AddModuleCleaningExecutionContentWeb
                                                                                           crossAxisAlignment: CrossAxisAlignment.start,
                                                                                           children: [
                                                                                             Text(
-                                                                                              "${element?.pendingModules}",
+                                                                                              "${element?.abandonedModules}",
                                                                                               style: TextStyle(color: Color.fromARGB(255, 5, 92, 163)),
                                                                                             ),
                                                                                           ],
                                                                                         ))),
                                                                                   )
-                                                                                : (mapData['key'] == "Type")
+                                                                                : (mapData['key'] == "Pending")
                                                                                     ? Column(
                                                                                         mainAxisAlignment: MainAxisAlignment.center,
                                                                                         crossAxisAlignment: CrossAxisAlignment.center,
                                                                                         children: [
-                                                                                          // Text('Wet')
+                                                                                          // Text('-')
                                                                                         ]..addAll(controller.listSchedules!.map((element) => Row(
                                                                                               mainAxisSize: MainAxisSize.min,
                                                                                               mainAxisAlignment: MainAxisAlignment.start,
                                                                                               crossAxisAlignment: CrossAxisAlignment.start,
                                                                                               children: [
                                                                                                 Text(
-                                                                                                  "${element?.cleaningTypeName}",
+                                                                                                  "${element?.pendingModules}",
                                                                                                   style: TextStyle(color: Color.fromARGB(255, 5, 92, 163)),
                                                                                                 ),
                                                                                               ],
                                                                                             ))),
                                                                                       )
-                                                                                    : (mapData['key'] == "Water Used")
+                                                                                    : (mapData['key'] == "Type")
                                                                                         ? Column(
                                                                                             mainAxisAlignment: MainAxisAlignment.center,
                                                                                             crossAxisAlignment: CrossAxisAlignment.center,
                                                                                             children: [
-                                                                                              // Text('-')
+                                                                                              // Text('Wet')
                                                                                             ]..addAll(controller.listSchedules!.map((element) => Row(
                                                                                                   mainAxisSize: MainAxisSize.min,
                                                                                                   mainAxisAlignment: MainAxisAlignment.start,
                                                                                                   crossAxisAlignment: CrossAxisAlignment.start,
                                                                                                   children: [
                                                                                                     Text(
-                                                                                                      "${element?.waterUsed}",
+                                                                                                      "${element?.cleaningTypeName}",
                                                                                                       style: TextStyle(color: Color.fromARGB(255, 5, 92, 163)),
                                                                                                     ),
                                                                                                   ],
                                                                                                 ))),
                                                                                           )
-                                                                                        : (mapData['key'] == "Remark")
+                                                                                        : (mapData['key'] == "Water Used")
                                                                                             ? Column(
                                                                                                 mainAxisAlignment: MainAxisAlignment.center,
                                                                                                 crossAxisAlignment: CrossAxisAlignment.center,
-                                                                                                children: []..addAll(controller.listSchedules!.map((element) => Row(
+                                                                                                children: [
+                                                                                                  // Text('-')
+                                                                                                ]..addAll(controller.listSchedules!.map((element) => Row(
                                                                                                       mainAxisSize: MainAxisSize.min,
                                                                                                       mainAxisAlignment: MainAxisAlignment.start,
                                                                                                       crossAxisAlignment: CrossAxisAlignment.start,
                                                                                                       children: [
-                                                                                                        Padding(
-                                                                                                          padding: const EdgeInsets.only(bottom: 5),
-                                                                                                          child: SizedBox(
-                                                                                                              width: MediaQuery.of(context).size.width / 9,
-                                                                                                              child: LoginCustomTextfield(
-                                                                                                                keyboardType: TextInputType.number,
-                                                                                                                inputFormatters: <TextInputFormatter>[
-                                                                                                                  // FilteringTextInputFormatter.digitsOnly
-                                                                                                                ],
-                                                                                                                maxLine: 1,
-                                                                                                                textController: new TextEditingController(text: mapData["value"] ?? ''),
-                                                                                                                onChanged: (txt) {
-                                                                                                                  mapData["value"] = txt;
-                                                                                                                },
-                                                                                                              )),
+                                                                                                        Text(
+                                                                                                          "${element?.waterUsed}",
+                                                                                                          style: TextStyle(color: Color.fromARGB(255, 5, 92, 163)),
                                                                                                         ),
-                                                                                                       
                                                                                                       ],
                                                                                                     ))),
                                                                                               )
-                                                                                            : (mapData['key'] == "Status")
-                                                                                        ? Column(
-                                                                                            mainAxisAlignment: MainAxisAlignment.center,
-                                                                                            crossAxisAlignment: CrossAxisAlignment.center,
-                                                                                            children: [
-                                                                                              // Text('-')
-                                                                                            ]..addAll(controller.listSchedules!.map((element) => Row(
-                                                                                                  mainAxisSize: MainAxisSize.min,
-                                                                                                  mainAxisAlignment: MainAxisAlignment.start,
-                                                                                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                                                                                  children: [
-                                                                                                    Text(
-                                                                                                      "${element?.status_short}",
-                                                                                                      style: TextStyle(color: Color.fromARGB(255, 5, 92, 163)),
-                                                                                                    ),
-                                                                                                  ],
-                                                                                                ))),
-                                                                                          )  
-                                                                                            : (mapData['key'] == "Actions")
-                                                                                                ? Padding(
-                                                                                                    padding: const EdgeInsets.only(left: 20),
-                                                                                                    child: Column(
-                                                                                                      children: [
-                                                                                                       
-                                                                                                      ]..addAll(controller.listSchedules!.map((element) => Row(
-                                                                                                  mainAxisSize: MainAxisSize.min,
-                                                                                                  mainAxisAlignment: MainAxisAlignment.start,
-                                                                                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                                                                                  children: [
-                                                                                                    TableActionButton(
-                                                                                                          // label: 'Start',
-                                                                                                          onPress: () {},
-                                                                                                          color: Colors.green,
-                                                                                                          icon: Icons.add,
-                                                                                                          message: 'Start',
-                                                                                                          
-                                                                                                        ),
-                                                                                                        TableActionButton(
-                                                                                                          // label: 'Abandon',
-                                                                                                          onPress: () {},
-                                                                                                          color: Colors.red,
-                                                                                                          icon: Icons.close,
-                                                                                                          message: 'Abandon',
-                                                                                                        ),
-                                                                                                        TableActionButton(
-                                                                                                          // label: 'Equipments',
-                                                                                                          onPress: () {
-                                                                                                            Get.dialog(AddModuleCleaningExecutionDialog());
-                                                                                                          },
-                                                                                                          color: ColorValues.appDarkBlueColor,
-                                                                                                          icon: Icons.category,
-                                                                                                          message: 'Equipments',
-                                                                                                        ),
-                                                                                                  ],
-                                                                                                ))),
-                                                                                                    ),
+                                                                                            : (mapData['key'] == "Remark")
+                                                                                                ? Column(
+                                                                                                    mainAxisAlignment: MainAxisAlignment.center,
+                                                                                                    crossAxisAlignment: CrossAxisAlignment.center,
+                                                                                                    children: []..addAll(controller.listSchedules!.map((element) => Row(
+                                                                                                          mainAxisSize: MainAxisSize.min,
+                                                                                                          mainAxisAlignment: MainAxisAlignment.start,
+                                                                                                          crossAxisAlignment: CrossAxisAlignment.start,
+                                                                                                          children: [
+                                                                                                            Padding(
+                                                                                                              padding: const EdgeInsets.only(bottom: 5),
+                                                                                                              child: SizedBox(
+                                                                                                                  width: MediaQuery.of(context).size.width / 9,
+                                                                                                                  child: LoginCustomTextfield(
+                                                                                                                    keyboardType: TextInputType.number,
+                                                                                                                    inputFormatters: <TextInputFormatter>[
+                                                                                                                      // FilteringTextInputFormatter.digitsOnly
+                                                                                                                    ],
+                                                                                                                    maxLine: 1,
+                                                                                                                    textController: new TextEditingController(text: mapData["value"] ?? ''),
+                                                                                                                    onChanged: (txt) {
+                                                                                                                      mapData["value"] = txt;
+                                                                                                                    },
+                                                                                                                  )),
+                                                                                                            ),
+                                                                                                          ],
+                                                                                                        ))),
                                                                                                   )
-                                                                                                : Text(mapData['key'] ?? ''),
+                                                                                                : (mapData['key'] == "Status")
+                                                                                                    ? Column(
+                                                                                                        mainAxisAlignment: MainAxisAlignment.center,
+                                                                                                        crossAxisAlignment: CrossAxisAlignment.center,
+                                                                                                        children: [
+                                                                                                          // Text('-')
+                                                                                                        ]..addAll(controller.listSchedules!.map((element) => Row(
+                                                                                                              mainAxisSize: MainAxisSize.min,
+                                                                                                              mainAxisAlignment: MainAxisAlignment.start,
+                                                                                                              crossAxisAlignment: CrossAxisAlignment.start,
+                                                                                                              children: [
+                                                                                                                Text(
+                                                                                                                  "${element?.status_short}",
+                                                                                                                  style: TextStyle(color: Color.fromARGB(255, 5, 92, 163)),
+                                                                                                                ),
+                                                                                                              ],
+                                                                                                            ))),
+                                                                                                      )
+                                                                                                    : (mapData['key'] == "Actions")
+                                                                                                        ? Padding(
+                                                                                                            padding: const EdgeInsets.only(left: 20),
+                                                                                                            child: Column(
+                                                                                                              children: []..addAll(controller.listSchedules!.map((element) => Row(
+                                                                                                                    mainAxisSize: MainAxisSize.min,
+                                                                                                                    mainAxisAlignment: MainAxisAlignment.start,
+                                                                                                                    crossAxisAlignment: CrossAxisAlignment.start,
+                                                                                                                    children: [
+                                                                                                                     
+                                                                                                                      TableActionButton(
+                                                                                                                        // label: 'Start',
+                                                                                                                        onPress: () {
+                                                                                                                          var filterdData = controller.listSchedules?.firstWhere((e) =>
+                                                                                                                            e?.scheduleId == element?.scheduleId);
+                                                                                                                //  selectedData = filterdData;
+                                                                                                                          controller.startMCExecutionScheduleButton(scheduleID: filterdData?.scheduleId);
+                                                                                                                          print({'scheduledata:':filterdData?.scheduleId});
+                                                                                                                        },
+                                                                                                                        color: Colors.green,
+                                                                                                                        icon: Icons.add,
+                                                                                                                        message: 'Start',
+                                                                                                                      ),
+                                                                                                                      TableActionButton(
+                                                                                                                        // label: 'Abandon',
+                                                                                                                        onPress: () {},
+                                                                                                                        color: Colors.red,
+                                                                                                                        icon: Icons.close,
+                                                                                                                        message: 'Abandon',
+                                                                                                                      ),
+                                                                                                                      TableActionButton(
+                                                                                                                        // label: 'Equipments',
+                                                                                                                        onPress: () {
+                                                                                                                          Get.dialog(AddModuleCleaningExecutionDialog());
+                                                                                                                        },
+                                                                                                                        color: ColorValues.appDarkBlueColor,
+                                                                                                                        icon: Icons.category,
+                                                                                                                        message: 'Equipments',
+                                                                                                                      ),
+                                                                                                                    ],
+                                                                                                                  ))),
+                                                                                                            ),
+                                                                                                          )
+                                                                                                        : Text(mapData['key'] ?? ''),
                                                           );
                                                         }).toList(),
                                                       );

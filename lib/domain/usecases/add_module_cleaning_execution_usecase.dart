@@ -26,6 +26,18 @@ class AddModuleCleaningExecutionUsecase {
     );
   }
 
+
+  Future<void> startMCExecutionScheduleButton({
+   
+    int? scheduleId,
+    bool? isLoading,
+  }) async {
+    await _repository.startMCExecutionScheduleButton(
+      scheduleId,
+      isLoading,
+    );
+  }
+
    Future<Map<String, dynamic>> endMCExecutionButton({
     endJsonString,
     bool? isLoading,
