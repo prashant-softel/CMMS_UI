@@ -1499,7 +1499,7 @@ class ConnectHelper {
     bool? isLoading,
   }) async {
     var responseModel = await apiWrapper.makeRequest(
-      'Job/CreateNewJob?job=$job',
+      'Job/CreateNewJob',
       Request.post,
       job,
       isLoading ?? false,

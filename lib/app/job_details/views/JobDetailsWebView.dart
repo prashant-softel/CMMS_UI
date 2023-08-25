@@ -1,5 +1,7 @@
+import 'package:cmms/app/constant/constant.dart';
 import 'package:cmms/app/pm_task_view/pm_task_view_controller.dart';
 import 'package:cmms/app/theme/dimens.dart';
+import 'package:cmms/app/utils/user_access_constants.dart';
 import 'package:cmms/app/widgets/table_action_button.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -645,14 +647,27 @@ class JobDetailsWebView extends GetView<JobDetailsController> {
                                               controller.jobDetailsModel.value
                                                   ?.status) ==
                                           AppConstants.kJobStatusAssigned)
-                                        CustomElevatedButton(
+                                        
+                                        varUserAccessModel.value.access_list!
+                                                .where((e) =>
+                                                    e.feature_id ==
+                                                        UserAccessConstants
+                                                            .kJobFeatureId &&
+                                                    e.add ==
+                                                        UserAccessConstants
+                                                            .kHaveAddAccess)
+                                                .length >
+                                            0
+                                        ? CustomElevatedButton(
                                           text: "Create New Permit",
                                           icon: Icons.add,
                                           onPressed: () =>
                                               controller.createNewPermit(),
                                           backgroundColor:
                                               ColorValues.appLightBlueColor,
-                                        ), //check if status is "LINKED TO PERMIT"
+                                        )
+                                        :Container(),
+                                         //check if status is "LINKED TO PERMIT"
                                       if (JobStatusData.getStatusStringFromInt(
                                               controller.jobDetailsModel.value
                                                   ?.status) ==

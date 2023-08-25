@@ -13,6 +13,7 @@ import 'package:cmms/app/widgets/file_upload_with_dropzone_widget.dart';
 import 'package:cmms/app/widgets/view_sop_dialog.dart';
 import 'package:cmms/app/widgets/view_jsa_dialog.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
 import 'package:multi_select_flutter/multi_select_flutter.dart';
@@ -26,24 +27,6 @@ class NewPermitScreen extends GetView<NewPermitController> {
   ///
   final FileUploadController dropzoneController =
       Get.put(FileUploadController());
-
-  DateTime? _dateTime1;
-  DateTime? _dateTime2;
-  TimeOfDay? time1;
-  TimeOfDay? time2;
-
-  String dropdownvalue = 'Item 1';
-  int? i = 0;
-  int? j = 0;
-
-  // List of items in our dropdown menu
-  var items = [
-    'Item 1',
-    'Item 2',
-    'Item 3',
-    'Item 4',
-    'Item 5',
-  ];
 
   ///
   @override
@@ -1547,12 +1530,269 @@ class NewPermitScreen extends GetView<NewPermitController> {
                                                           FontWeight.bold),
                                                 ),
                                               ),
+                                              Dimens.boxHeight20,
+
+                                              controller.jobModel?.id != null
+                                                  ? Container(
+                                                      height: 100,
+                                                      width:
+                                                          MediaQuery.of(context)
+                                                                  .size
+                                                                  .width /
+                                                              1.2,
+                                                      decoration: BoxDecoration(
+                                                        border: Border.all(
+                                                          color: ColorValues
+                                                              .lightGreyColorWithOpacity35,
+                                                          width: 1,
+                                                        ),
+                                                        boxShadow: [
+                                                          // BoxShadow(
+                                                          //   color: ColorValues
+                                                          //       .appBlueBackgroundColor,
+                                                          //   spreadRadius: 2,
+                                                          //   blurRadius: 5,
+                                                          //   offset: Offset(0, 2),
+                                                          // ),
+                                                        ],
+                                                      ),
+                                                      child: Column(
+                                                        crossAxisAlignment:
+                                                            CrossAxisAlignment
+                                                                .start,
+                                                        mainAxisAlignment:
+                                                            MainAxisAlignment
+                                                                .start,
+                                                        children: [
+                                                          Dimens.boxHeight10,
+                                                          Padding(
+                                                            padding:
+                                                                const EdgeInsets
+                                                                        .only(
+                                                                    left: 10),
+                                                            child: Text(
+                                                              'Request a Permit For a Job',
+                                                              style: TextStyle(
+                                                                  color: Color
+                                                                      .fromARGB(
+                                                                          255,
+                                                                          5,
+                                                                          92,
+                                                                          163)),
+                                                            ),
+                                                          ),
+                                                          Padding(
+                                                            padding:
+                                                                const EdgeInsets
+                                                                        .only(
+                                                                    top: 10,
+                                                                    left: 40,
+                                                                    right: 10),
+                                                            child: Row(
+                                                              mainAxisAlignment:
+                                                                  MainAxisAlignment
+                                                                      .center,
+                                                              children: [
+                                                                Column(
+                                                                  crossAxisAlignment:
+                                                                      CrossAxisAlignment
+                                                                          .center,
+                                                                  mainAxisAlignment:
+                                                                      MainAxisAlignment
+                                                                          .center,
+                                                                  children: [
+                                                                    Text(
+                                                                      'Job ID',
+                                                                      style: TextStyle(
+                                                                          color: Color.fromARGB(
+                                                                              255,
+                                                                              5,
+                                                                              92,
+                                                                              163)),
+                                                                    ),
+                                                                    Dimens
+                                                                        .boxHeight10,
+                                                                    GestureDetector(
+                                                                      onTap: (){
+                                                                        controller.viewJobDetails();
+                                                                      },
+                                                                      child: Text(
+                                                                          '${int.tryParse('${controller.jobModel?.id ?? 0}')}',
+                                                                          style:
+                                                                        TextStyle(
+                                                                      decoration: TextDecoration.underline,
+                                                                      
+                                                                      decorationStyle: TextDecorationStyle
+                                                                          .solid,
+                                                                      color: Color.fromARGB(
+                                                                          255,
+                                                                          5,
+                                                                          92,
+                                                                          163),
+                                                                        
+                                                                      
+                                                                          ),
+                                                                        ),
+                                                                    )
+                                                                  ],
+                                                                ),
+                                                                Spacer(),
+                                                                Column(
+                                                                  crossAxisAlignment:
+                                                                      CrossAxisAlignment
+                                                                          .center,
+                                                                  mainAxisAlignment:
+                                                                      MainAxisAlignment
+                                                                          .center,
+                                                                  children: [
+                                                                    Text(
+                                                                      'Job Title',
+                                                                      style: TextStyle(
+                                                                          color: Color.fromARGB(
+                                                                              255,
+                                                                              5,
+                                                                              92,
+                                                                              163)),
+                                                                    ),
+                                                                    Dimens
+                                                                        .boxHeight10,
+                                                                    Text(
+                                                                        '${controller.titleTextCtrlr.text}'),
+                                                                  ],
+                                                                ),
+                                                                Spacer(),
+                                                                Column(
+                                                                  crossAxisAlignment:
+                                                                      CrossAxisAlignment
+                                                                          .center,
+                                                                  mainAxisAlignment:
+                                                                      MainAxisAlignment
+                                                                          .center,
+                                                                  children: [
+                                                                    Text(
+                                                                      'Equipment Category',
+                                                                      style: TextStyle(
+                                                                          color: Color.fromARGB(
+                                                                              255,
+                                                                              5,
+                                                                              92,
+                                                                              163)),
+                                                                    ),
+                                                                    Dimens
+                                                                        .boxHeight10,
+                                                                    SizedBox(
+                                                                      width:
+                                                                          100,
+                                                                      child:
+                                                                          Wrap(
+                                                                        alignment:
+                                                                            WrapAlignment.start,
+                                                                        spacing:
+                                                                            100,
+                                                                        children: []
+                                                                          ..addAll(controller.listJobModelCategory.map((element) =>
+                                                                              Row(
+                                                                                mainAxisSize: MainAxisSize.min,
+                                                                                mainAxisAlignment: MainAxisAlignment.start,
+                                                                                crossAxisAlignment: CrossAxisAlignment.start,
+                                                                                children: [
+                                                                                  Text(
+                                                                                    "${element?.equipmentCatName}",
+                                                                                  )
+                                                                                ],
+                                                                              ))),
+                                                                      ),
+                                                                    )
+                                                                    // Text('${controller.selectedItem}'),
+                                                                  ],
+                                                                ),
+                                                                Spacer(),
+                                                                Column(
+                                                                  crossAxisAlignment:
+                                                                      CrossAxisAlignment
+                                                                          .center,
+                                                                  mainAxisAlignment:
+                                                                      MainAxisAlignment
+                                                                          .center,
+                                                                  children: [
+                                                                    Text(
+                                                                      'Equipment',
+                                                                      style: TextStyle(
+                                                                          color: Color.fromARGB(
+                                                                              255,
+                                                                              5,
+                                                                              92,
+                                                                              163)),
+                                                                    ),
+                                                                    Dimens
+                                                                        .boxHeight10,
+                                                                    Text(
+                                                                        '${controller.blockNameTextCtrlr.text}'),
+                                                                  ],
+                                                                ),
+                                                                Spacer(),
+                                                                Column(
+                                                                  crossAxisAlignment:
+                                                                      CrossAxisAlignment
+                                                                          .center,
+                                                                  mainAxisAlignment:
+                                                                      MainAxisAlignment
+                                                                          .center,
+                                                                  children: [
+                                                                    Text(
+                                                                      'Breakdwon Time',
+                                                                      style: TextStyle(
+                                                                          color: Color.fromARGB(
+                                                                              255,
+                                                                              5,
+                                                                              92,
+                                                                              163)),
+                                                                    ),
+                                                                    Dimens
+                                                                        .boxHeight10,
+                                                                    Text(
+                                                                        '${controller.breakdownTimeTextCtrlr.text}'),
+                                                                  ],
+                                                                ),
+                                                                Spacer(),
+                                                                Column(
+                                                                  crossAxisAlignment:
+                                                                      CrossAxisAlignment
+                                                                          .center,
+                                                                  mainAxisAlignment:
+                                                                      MainAxisAlignment
+                                                                          .center,
+                                                                  children: [
+                                                                    Text(
+                                                                      'Assigned To',
+                                                                      style: TextStyle(
+                                                                          color: Color.fromARGB(
+                                                                              255,
+                                                                              5,
+                                                                              92,
+                                                                              163)),
+                                                                    ),
+                                                                    Dimens
+                                                                        .boxHeight10,
+                                                                    Text(
+                                                                        '${controller.assignToTextCtrlr.text}'),
+                                                                  ],
+                                                                ),
+                                                                Spacer(),
+                                                              ],
+                                                            ),
+                                                          ),
+                                                        ],
+                                                      ),
+                                                    )
+                                                  : Container(),
 
                                               SizedBox(
                                                 height: 20,
                                               ),
                                               Padding(
-                                                padding: const EdgeInsets.only(left: 60),
+                                                padding: const EdgeInsets.only(
+                                                    left: 60),
                                                 child: Row(
                                                   children: [
                                                     Container(
@@ -1562,7 +1802,8 @@ class NewPermitScreen extends GetView<NewPermitController> {
                                                           Alignment.centerRight,
                                                       width: 172,
                                                       child: CustomRichText(
-                                                          title: 'Block/Plot: '),
+                                                          title:
+                                                              'Block/Plot: '),
                                                     ),
                                                     SizedBox(
                                                       width:
@@ -1570,11 +1811,12 @@ class NewPermitScreen extends GetView<NewPermitController> {
                                                                   .size
                                                                   .width /
                                                               5,
-                                              
+
                                                       child: Obx(
                                                         () => DropdownWebWidget(
-                                                          dropdownList: controller
-                                                              .blockList,
+                                                          dropdownList:
+                                                              controller
+                                                                  .blockList,
                                                           isValueSelected:
                                                               controller
                                                                   .isBlockSelected
@@ -1599,7 +1841,8 @@ class NewPermitScreen extends GetView<NewPermitController> {
                                                     SizedBox(
                                                       width: 8,
                                                     ),
-                                                    controller.permitId.value > 0
+                                                    controller.permitId.value >
+                                                            0
                                                         ? SizedBox(
                                                             width: MediaQuery.of(
                                                                         context)
@@ -1691,7 +1934,8 @@ class NewPermitScreen extends GetView<NewPermitController> {
                                                 height: 10,
                                               ),
                                               Padding(
-                                                padding: const EdgeInsets.only(left: 60),
+                                                padding: const EdgeInsets.only(
+                                                    left: 60),
                                                 child: Row(
                                                   mainAxisAlignment:
                                                       MainAxisAlignment.start,
@@ -1716,9 +1960,10 @@ class NewPermitScreen extends GetView<NewPermitController> {
                                                         () => DropdownWebWidget(
                                                           dropdownList: controller
                                                               .typePermitList,
-                                                          isValueSelected: controller
-                                                              .isTypePermitSelected
-                                                              .value,
+                                                          isValueSelected:
+                                                              controller
+                                                                  .isTypePermitSelected
+                                                                  .value,
                                                           selectedValue: controller
                                                               .selectedTypePermit
                                                               .value,
@@ -1738,7 +1983,8 @@ class NewPermitScreen extends GetView<NewPermitController> {
                                                 height: 10,
                                               ),
                                               Padding(
-                                                padding: const EdgeInsets.only(left: 60),
+                                                padding: const EdgeInsets.only(
+                                                    left: 60),
                                                 child: Row(
                                                   mainAxisAlignment:
                                                       MainAxisAlignment.start,
@@ -1750,9 +1996,10 @@ class NewPermitScreen extends GetView<NewPermitController> {
                                                           Alignment.centerRight,
                                                       width: 172,
                                                       child: CustomRichText(
-                                                          title: 'Start Date: '),
+                                                          title:
+                                                              'Start Date: '),
                                                     ),
-                                              
+
                                                     _buildStartValidTillDateField_web(
                                                       context,
                                                       0,
@@ -1762,7 +2009,9 @@ class NewPermitScreen extends GetView<NewPermitController> {
                                                     ),
                                                     CustomRichText(
                                                         title: 'Valid Till: '),
-                                                    SizedBox(width: 5,),
+                                                    SizedBox(
+                                                      width: 5,
+                                                    ),
                                                     _buildStartValidTillDateField_web(
                                                         context, 1),
                                                     // _buildValidTillField_web(
@@ -1772,7 +2021,8 @@ class NewPermitScreen extends GetView<NewPermitController> {
                                               ),
 
                                               Padding(
-                                                padding: const EdgeInsets.only(left: 60),
+                                                padding: const EdgeInsets.only(
+                                                    left: 60),
                                                 child: Row(
                                                   children: [
                                                     Container(
@@ -1793,7 +2043,7 @@ class NewPermitScreen extends GetView<NewPermitController> {
                                                 height: 10,
                                               ),
 
-                                            //// Permit Reference commented for now
+                                              //// Permit Reference commented for now
                                               // Row(
                                               //   children: [
                                               //     Container(
@@ -1812,7 +2062,8 @@ class NewPermitScreen extends GetView<NewPermitController> {
                                               // ),
 
                                               Padding(
-                                                padding: const EdgeInsets.only(left: 60),
+                                                padding: const EdgeInsets.only(
+                                                    left: 60),
                                                 child: Row(
                                                   children: [
                                                     SizedBox(
@@ -1837,10 +2088,10 @@ class NewPermitScreen extends GetView<NewPermitController> {
                                                 height: 10,
                                               ),
                                               Padding(
-                                                padding: const EdgeInsets.only(left: 60),
+                                                padding: const EdgeInsets.only(
+                                                    left: 60),
                                                 child: Row(
                                                   children: [
-                                                   
                                                     Container(
                                                       margin: EdgeInsets.only(
                                                           right: 13),
@@ -1873,10 +2124,11 @@ class NewPermitScreen extends GetView<NewPermitController> {
                                               ),
                                               controller.isToggleOn == true
                                                   ? Padding(
-                                                    padding: const EdgeInsets.only(left: 60),
-                                                    child: Row(
+                                                      padding:
+                                                          const EdgeInsets.only(
+                                                              left: 60),
+                                                      child: Row(
                                                         children: [
-                                                         
                                                           Container(
                                                             margin:
                                                                 EdgeInsets.only(
@@ -1917,8 +2169,7 @@ class NewPermitScreen extends GetView<NewPermitController> {
                                                                         .map(
                                                                           (equipmentIsolation) =>
                                                                               MultiSelectItem(
-                                                                            equipmentIsolation
-                                                                                ?.id,
+                                                                            equipmentIsolation?.id,
                                                                             equipmentIsolation?.name ??
                                                                                 '',
                                                                           ),
@@ -1958,8 +2209,7 @@ class NewPermitScreen extends GetView<NewPermitController> {
                                                                         .map(
                                                                           (equipmentIsolation) =>
                                                                               MultiSelectItem(
-                                                                            equipmentIsolation
-                                                                                ?.id,
+                                                                            equipmentIsolation?.id,
                                                                             equipmentIsolation?.name ??
                                                                                 '',
                                                                           ),
@@ -1978,7 +2228,7 @@ class NewPermitScreen extends GetView<NewPermitController> {
                                                                 )
                                                         ],
                                                       ),
-                                                  )
+                                                    )
                                                   : Text(
                                                       'No Isolation Equipment'),
 
@@ -2022,19 +2272,18 @@ class NewPermitScreen extends GetView<NewPermitController> {
                                                                 title: ''.tr,
                                                                 action:
                                                                     ActionButton(
-                                                                  label:
-                                                                      'Add New',
-                                                                  icon:
-                                                                      Icons.add,
-                                                                  onPressed:
-                                                                      () {
-                                                                    //  showEquipmentNameAlertBox();
-                                                                    Get.dialog<
-                                                                            void>(
-                                                                        showEquipmentNameAlertBox());
-                                                                  },
-                                                                  color: ColorValues.appGreenColor
-                                                                ),
+                                                                        label:
+                                                                            'Add New',
+                                                                        icon: Icons
+                                                                            .add,
+                                                                        onPressed:
+                                                                            () {
+                                                                          //  showEquipmentNameAlertBox();
+                                                                          Get.dialog<void>(
+                                                                              showEquipmentNameAlertBox());
+                                                                        },
+                                                                        color: ColorValues
+                                                                            .appGreenColor),
                                                               ),
                                                               Dimens
                                                                   .boxHeight10,
@@ -2377,7 +2626,8 @@ class NewPermitScreen extends GetView<NewPermitController> {
                                                                         Get.dialog<void>(
                                                                             AddEmployeeListAlertBox());
                                                                       },
-                                                                      color: ColorValues.appGreenColor,
+                                                                      color: ColorValues
+                                                                          .appGreenColor,
                                                                     ),
                                                                   ),
                                                                   Dimens
@@ -3517,7 +3767,7 @@ class NewPermitScreen extends GetView<NewPermitController> {
       // ),
 
       Container(
-        width:  Responsive.isDesktop(context)
+        width: Responsive.isDesktop(context)
             ? MediaQuery.of(context).size.width / 1.75
             : MediaQuery.of(context).size.width / 1.1,
         decoration: BoxDecoration(
