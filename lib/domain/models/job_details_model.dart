@@ -303,14 +303,14 @@ class JobAssociatedModel {
 
   int? id;
   int? jobCardId;
-  int? jobCardNo;
+  dynamic? jobCardNo;
   int? jobid;
   int? permit_id;
   String? permit_no;
   int? current_status;
   String? description;
   String? job_assinged_to;
-  String? job_card_date;
+  dynamic? job_card_date;
   dynamic? start_time;
   dynamic? end_time;
   dynamic? lstequipmentCatList;
