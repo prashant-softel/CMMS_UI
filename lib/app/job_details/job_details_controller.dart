@@ -242,6 +242,10 @@ class JobDetailsController extends GetxController {
     createJobCard();
   }
 
+  void goToAddMrsScreen() {
+    Get.toNamed(Routes.createMrs, arguments: jobId.value);
+  }
+
   void goToJobDetailsScreen() {
     // close pop-up
     Get.back();

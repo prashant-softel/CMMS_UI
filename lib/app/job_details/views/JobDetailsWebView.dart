@@ -1,4 +1,5 @@
 import 'package:cmms/app/constant/constant.dart';
+import 'package:cmms/app/navigators/app_pages.dart';
 import 'package:cmms/app/pm_task_view/pm_task_view_controller.dart';
 import 'package:cmms/app/theme/dimens.dart';
 import 'package:cmms/app/utils/user_access_constants.dart';
@@ -494,7 +495,6 @@ class JobDetailsWebView extends GetView<JobDetailsController> {
                                   ),
                                 ),
 
-                                Dimens.boxHeight10,
                                 Container(
                                   margin: Dimens.edgeInsets20,
                                   height: Get.height / 3.8,
@@ -585,7 +585,26 @@ class JobDetailsWebView extends GetView<JobDetailsController> {
                                                 }).toList(),
                                               ),
                                             )
-                                          : Container()
+                                          : Container(
+                                              padding: EdgeInsets.only(top: 40),
+                                              child: Row(
+                                                crossAxisAlignment:
+                                                    CrossAxisAlignment.center,
+                                                mainAxisAlignment:
+                                                    MainAxisAlignment.center,
+                                                children: [
+                                                  Text(
+                                                      "Not add the any matarial please add the material first"),
+                                                  TableActionButton(
+                                                    color: ColorValues
+                                                        .appPurpleColor,
+                                                    icon: Icons.add,
+                                                    message: "Add Material",
+                                                    onPress: () => controller
+                                                        .goToAddMrsScreen(),
+                                                  ),
+                                                ],
+                                              ))
                                     ],
                                   ),
                                 ),
