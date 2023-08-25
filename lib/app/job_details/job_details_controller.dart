@@ -32,7 +32,7 @@ class JobDetailsController extends GetxController {
   Rx<JobDetailsModel?> jobDetailsModel = JobDetailsModel().obs;
   RxList<JobAssociatedModel?>? jobAssociatedModelsList =
       <JobAssociatedModel?>[].obs;
-  Rx<JobAssociatedModel?> jobAssociatedModel = JobAssociatedModel().obs;
+  // Rx<JobAssociatedModel?> jobAssociatedModel = JobAssociatedModel().obs;
   Rx<JobModel?> statusJobmodel = JobModel().obs;
   RxList<AssociatedPermit>? associatedPermitList = <AssociatedPermit>[].obs;
   PaginationController schedulePaginationController = PaginationController(
@@ -176,7 +176,7 @@ class JobDetailsController extends GetxController {
 
       if (_jobAssociatedModelsList != null &&
           _jobAssociatedModelsList.isNotEmpty) {
-        jobAssociatedModel.value = _jobAssociatedModelsList[0];
+        jobAssociatedModelsList!.value = _jobAssociatedModelsList;
         // associatedPermitList?.value =
         //     jobAssociatedModel.value?.associatedPermitList ?? [];
         update(["getjobDetailsModel"]);
