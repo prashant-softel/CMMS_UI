@@ -5,6 +5,7 @@ import 'dart:convert';
 import 'package:cmms/app/add_module_cleaning_execution/add_module_cleaning_execution_controller.dart';
 import 'package:cmms/app/app.dart';
 import 'package:cmms/app/navigators/navigators.dart';
+import 'package:cmms/app/widgets/abandon_all_dialog.dart';
 import 'package:cmms/app/widgets/add_module_cleaning_execution_dialog.dart';
 import 'package:cmms/app/widgets/custom_elevated_button.dart';
 import 'package:cmms/app/widgets/custom_richtext.dart';
@@ -677,7 +678,7 @@ class AddModuleCleaningExecutionContentWeb
                                               text: "Abandoned All",
                                               onPressed: () {
                                                 Get.dialog(
-                                                    AddModuleCleaningExecutionDialog());
+                                                    AbandonAllDialog());
                                                 // controller
                                                 //     .createEscalationMatrix();
                                               },
