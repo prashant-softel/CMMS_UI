@@ -1,3 +1,4 @@
+import 'package:cmms/app/add_module_cleaning_execution/add_module_cleaning_execution_controller.dart';
 import 'package:cmms/app/incident_report_list/incident_report_list_controller.dart';
 import 'package:cmms/app/navigators/app_pages.dart';
 import 'package:cmms/app/theme/color_values.dart';
@@ -11,9 +12,10 @@ import '../theme/styles.dart';
 // import '../view_incident_report/view_incident_report_controller.dart';
 
 class AbandonAllDialog extends GetView {
-  AbandonAllDialog();
+  int? id;
+  AbandonAllDialog({this.id});
 
-  // final IncidentReportListController _controller = Get.find();
+  final AddModuleCleaningExecutionController _controller = Get.find();
 
   @override
   Widget build(BuildContext context) {
@@ -51,7 +53,7 @@ class AbandonAllDialog extends GetView {
               ],
             ),
             padding: EdgeInsets.only(right: 30, top: 10),
-            height: height / 4.3,
+            height: height / 4.7,
             width: double.infinity,
             child: Column(
               children: [
@@ -80,67 +82,10 @@ class AbandonAllDialog extends GetView {
                         width: MediaQuery.of(context).size.width / 6,
                         child: LoginCustomTextfield(
                           ishint: 'Enter Reason',
-                          
-                            // textController: controller.girNoCtrlr,
+                          textController: _controller.commentTextFieldCtrlr,
                             )),
                    
                      
-                  ],
-                ),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.end,
-                  children: [
-                    Container(
-                            decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(10),
-                              border: Border.all(
-                                color: Color.fromARGB(255, 227, 224, 224),
-                                width: 1,
-                              ),
-                              boxShadow: [
-                                BoxShadow(
-                                  color: Color.fromARGB(255, 236, 234, 234)
-                                      .withOpacity(0.5),
-                                  spreadRadius: 2,
-                                  blurRadius: 5,
-                                  offset: Offset(0, 2),
-                                ),
-                              ],
-                            ),
-                            width: MediaQuery.of(context).size.width / 6,
-                            child: LoginCustomTextfield(
-                              ishint: 'Abandoned By rain',
-                              
-                                // textController: controller.girNoCtrlr,
-                                )),
-                  ],
-                ),
-                 Row(
-                  mainAxisAlignment: MainAxisAlignment.end,
-                  children: [
-                    Container(
-                            decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(10),
-                              border: Border.all(
-                                color: Color.fromARGB(255, 227, 224, 224),
-                                width: 1,
-                              ),
-                              boxShadow: [
-                                BoxShadow(
-                                  color: Color.fromARGB(255, 236, 234, 234)
-                                      .withOpacity(0.5),
-                                  spreadRadius: 2,
-                                  blurRadius: 5,
-                                  offset: Offset(0, 2),
-                                ),
-                              ],
-                            ),
-                            width: MediaQuery.of(context).size.width / 6,
-                            child: LoginCustomTextfield(
-                              ishint: 'manpower Unavailability',
-                              
-                                // textController: controller.girNoCtrlr,
-                                )),
                   ],
                 ),
                 
@@ -155,7 +100,7 @@ class AbandonAllDialog extends GetView {
                   ElevatedButton(
                     style: Styles.darkRedElevatedButtonStyle,
                     onPressed: () {
-                      Get.offAllNamed(Routes.moduleCleaningPlanning);
+                      Get.back();
                     },
                     child: const Text('Cancel'),
                   ),
@@ -166,6 +111,8 @@ class AbandonAllDialog extends GetView {
                     style: Styles.greenElevatedButtonStyle,
                     onPressed: () {
                       // print('Incident Report Id${incidentReportId![0]}');
+                      _controller.abandonAllExecutionButton(id: id);
+                      Get.back();
                     },
                     child: const Text('Submit'),
                   ),
