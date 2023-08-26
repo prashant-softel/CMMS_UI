@@ -415,6 +415,22 @@ class DataRepository extends DomainRepository {
     );
   }
 
+
+  @override
+  Future<ResponseModel> getEquipmentModelList({
+    int? facilityId,
+    required bool isLoading,
+    required String auth,
+  }) async {
+    return await connectHelper.getEquipmentModelList(
+      isLoading: isLoading,
+      auth: auth,
+      facilityId: facilityId,
+      
+    );
+  }
+
+
   ///Module Cleaning Task List
   @override
   Future<ResponseModel> getMCTaskList({

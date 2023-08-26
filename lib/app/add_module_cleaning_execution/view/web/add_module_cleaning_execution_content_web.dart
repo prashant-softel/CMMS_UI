@@ -11,6 +11,7 @@ import 'package:cmms/app/widgets/custom_elevated_button.dart';
 import 'package:cmms/app/widgets/custom_richtext.dart';
 import 'package:cmms/app/widgets/custom_textField.dart';
 import 'package:cmms/app/widgets/end_mc_execution_dialog.dart';
+import 'package:cmms/domain/models/end_mc_execution_detail_model.dart';
 
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -239,7 +240,7 @@ class AddModuleCleaningExecutionContentWeb
                                               children: [
                                                 Padding(
                                                   padding: const EdgeInsets
-                                                      .symmetric(
+                                                          .symmetric(
                                                       horizontal: 20,
                                                       vertical: 5),
                                                   child: Row(
@@ -519,20 +520,44 @@ class AddModuleCleaningExecutionContentWeb
                                                                                                                     mainAxisAlignment: MainAxisAlignment.start,
                                                                                                                     crossAxisAlignment: CrossAxisAlignment.start,
                                                                                                                     children: [
-                                                                                                                     
-                                                                                                                      TableActionButton(
-                                                                                                                        // label: 'Start',
-                                                                                                                        onPress: () {
-                                                                                                                          var filterdData = controller.listSchedules?.firstWhere((e) =>
-                                                                                                                            e?.scheduleId == element?.scheduleId);
-                                                                                                                //  selectedData = filterdData;
-                                                                                                                          controller.startMCExecutionScheduleButton(scheduleID: filterdData?.scheduleId);
-                                                                                                                          print({'scheduledata:':filterdData?.scheduleId});
-                                                                                                                        },
-                                                                                                                        color: Colors.green,
-                                                                                                                        icon: Icons.add,
-                                                                                                                        message: 'Start',
-                                                                                                                      ),
+                                                                                                                      controller.listSchedules!
+                                                                                                                                  .firstWhere(
+                                                                                                                                    (e) => "${e?.status_short}" == e?.status_short,
+                                                                                                                                    orElse: () => Schedules(status_short: ""),
+                                                                                                                                  )
+                                                                                                                                  ?.status_short ==
+                                                                                                                              "Scheduled"
+                                                                                                                          ? TableActionButton(
+                                                                                                                              // label: 'Start',
+                                                                                                                              onPress: () {
+                                                                                                                                var filterdData = controller.listSchedules?.firstWhere((e) => e?.scheduleId == element?.scheduleId);
+                                                                                                                                //  selectedData = filterdData;
+                                                                                                                                controller.startMCExecutionScheduleButton(scheduleID: filterdData?.scheduleId);
+                                                                                                                                print({'scheduledata:': filterdData?.scheduleId});
+                                                                                                                              },
+                                                                                                                              color: Colors.green,
+                                                                                                                              icon: Icons.add,
+                                                                                                                              message: 'Start',
+                                                                                                                            )
+                                                                                                                          : Container(),
+                                                                                                                      // controller.listSchedules!
+                                                                                                                      //             .firstWhere(
+                                                                                                                      //               (e) => "${e?.status_short}" == e?.status_short,
+                                                                                                                      //               orElse: () => Schedules(status_short: ""),
+                                                                                                                      //             )
+                                                                                                                      //             ?.status_short ==
+                                                                                                                      //         "In Progress"
+                                                                                                                      //     ? 
+                                                                                                                          TableActionButton(
+                                                                                                                              // label: 'Abandon',
+                                                                                                                              onPress: () {
+                                                                                                                                Get.dialog(AddModuleCleaningExecutionDialog());
+                                                                                                                              },
+                                                                                                                              color: ColorValues.appLightBlueColor,
+                                                                                                                              icon: Icons.add,
+                                                                                                                              message: 'Update',
+                                                                                                                            ),
+                                                                                                                          // : Container(),
                                                                                                                       TableActionButton(
                                                                                                                         // label: 'Abandon',
                                                                                                                         onPress: () {},
@@ -542,9 +567,7 @@ class AddModuleCleaningExecutionContentWeb
                                                                                                                       ),
                                                                                                                       TableActionButton(
                                                                                                                         // label: 'Equipments',
-                                                                                                                        onPress: () {
-                                                                                                                          Get.dialog(AddModuleCleaningExecutionDialog());
-                                                                                                                        },
+                                                                                                                        onPress: () {},
                                                                                                                         color: ColorValues.appDarkBlueColor,
                                                                                                                         icon: Icons.category,
                                                                                                                         message: 'Equipments',
@@ -677,8 +700,8 @@ class AddModuleCleaningExecutionContentWeb
                                                   ColorValues.appRedColor,
                                               text: "Abandoned All",
                                               onPressed: () {
-                                                Get.dialog(
-                                                    AbandonAllDialog());
+                                                Get.dialog(AbandonAllDialog(
+                                                    id: controller.data['id']));
                                                 // controller
                                                 //     .createEscalationMatrix();
                                               },
