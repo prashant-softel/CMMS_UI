@@ -569,7 +569,7 @@ class FacilityTypeListContentWeb extends GetView<FacilityTypeListController> {
                                             mainAxisAlignment:
                                                 MainAxisAlignment.start,
                                             children: [
-                                              Expanded(child: CustomRichText(title: 'Title ')),
+                                              Expanded(child: CustomRichText(title: 'Address ')),
                                               Expanded(
                                                 child: Container(
                                                     margin: Dimens.edgeInsets5,
@@ -1207,6 +1207,7 @@ class FacilityTypeListContentWeb extends GetView<FacilityTypeListController> {
                                               "Sr.No.",
                                               "Title",
                                               "Address",
+                                              "SPV",
                                               "City",
                                               "State",
                                               "Country",
@@ -1226,6 +1227,7 @@ class FacilityTypeListContentWeb extends GetView<FacilityTypeListController> {
                                                     0,
                                                 (index) {
                                                   return [
+                                                    '',
                                                     '',
                                                     '',
                                                     '',
@@ -1259,6 +1261,8 @@ class FacilityTypeListContentWeb extends GetView<FacilityTypeListController> {
                                               "Sr.No.",
                                               "Title",
                                               "Address",
+                                              "SPV",
+
                                               "City",
                                               "State",
                                               "Country",
@@ -1293,6 +1297,7 @@ class FacilityTypeListContentWeb extends GetView<FacilityTypeListController> {
                                                     '${facilityTypeListDetails.id}',
                                                     '${facilityTypeListDetails.name}',
                                                     '${facilityTypeListDetails.address}',
+                                                    '${facilityTypeListDetails.spv}',
                                                     '${facilityTypeListDetails.city}',
                                                     '${facilityTypeListDetails.state}',
                                                     '${facilityTypeListDetails.country}',
