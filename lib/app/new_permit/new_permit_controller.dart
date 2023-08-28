@@ -43,6 +43,8 @@ class NewPermitController extends GetxController {
   // void toggle() => on.value = on.value ? false : true;
   var itemCount = 0.obs;
 
+  var isHovered = false.obs;
+
   var isToggleOn = false.obs;
   var isToggleOn1 = false.obs;
   var isToggleOn2 = false.obs;
@@ -51,6 +53,8 @@ class NewPermitController extends GetxController {
   var isToggleOn5 = false.obs;
   var isToggleOn6 = false.obs;
   var isToggleOn7 = false.obs;
+
+   var idCtrlr = TextEditingController();
 
   ///Switch toggle
   final isSuccess = false.obs;
@@ -153,6 +157,9 @@ class NewPermitController extends GetxController {
 
   var permitDescriptionCtrlr = TextEditingController();
   var titleTextCtrlr = TextEditingController();
+  var blockNameTextCtrlr = TextEditingController();
+  var assignToTextCtrlr = TextEditingController();
+  var breakdownTimeTextCtrlr = TextEditingController();
   var workPermitNumberTextCtrlr = TextEditingController();
 
   Rx<DateTime> selectedBreakdownTime = DateTime.now().obs;
@@ -211,6 +218,7 @@ class NewPermitController extends GetxController {
   RxList<int?> selectedJobModelEquipemntIsolationIdList = <int?>[].obs;
 
   RxList<EquipmentCatList?> listJobModelCategory = <EquipmentCatList?>[].obs;
+  String? selectedItem = '';
 
   Rx<bool> isemployeeListSelected = true.obs;
   Rx<String> selectedEmployeeList = ''.obs;
@@ -317,7 +325,7 @@ class NewPermitController extends GetxController {
   RxList<SOPListModel> sopListFilePathModel = <SOPListModel>[].obs;
   Rx<String> selectedSOPFilePath = ''.obs;
 
-  var jobModel = JobDetailsModel();
+  // var jobModel = JobDetailsModel();
 
   BehaviorSubject<int> _facilityId = BehaviorSubject.seeded(0);
   Stream<int> get facilityId$ => _facilityId.stream;
@@ -329,6 +337,8 @@ class NewPermitController extends GetxController {
   bool isFromJobDetails = false;
   Rx<int> permitId = 0.obs;
   bool isChecked = false;
+      JobDetailsModel? jobModel = JobDetailsModel();
+
 
   
   ///
@@ -338,7 +348,6 @@ class NewPermitController extends GetxController {
 
     try {
       final arguments = Get.arguments;
-      JobDetailsModel? jobModel = JobDetailsModel();
       if (arguments != null) {
         if (arguments.containsKey('permitId')) {
           permitId.value = arguments['permitId'];
@@ -379,8 +388,8 @@ class NewPermitController extends GetxController {
       await getInventoryDetailList();
       await getEmployeePermitList();
       await getJobTypePermitList();
-      await getPermitIssuerList();
-      await getPermitApproverList();
+      // await getPermitIssuerList();
+      // await getPermitApproverList();
 
      
     } catch (e) {
@@ -1189,18 +1198,33 @@ class NewPermitController extends GetxController {
     listJobModelCategory.value = jobModel.equipmentCatList ?? [];
     List<int> idList =
         listJobModelCategory.map((obj) => obj!.equipmentCatId).toList();
+    List<String> nameList =
+        listJobModelCategory.map((obj) => obj!.equipmentCatName).toList();
+     selectedItem = nameList[0];
 
     print("Selected Block Id:${selectedBlockId}");
 
     selectedEquipmentCategoryIdList.value = idList;
     // selectedJobModelEquipemntIsolationIdList.value = idList;
     print("JobModel Equipment Category Id:${selectedEquipmentCategoryIdList}");
-    print("Selected Block Name:${selectedBlock}");
+    print("Selected Name Category:${jobModel.id ?? 0}");
+
+    // idCtrlr.text = '${int.tryParse(jobModel.id ?? 0)}';
+    blockNameTextCtrlr.text = jobModel.blockName;
+    assignToTextCtrlr.text = jobModel.assignedName;
+     breakdownTimeTextCtrlr.text =
+          '${DateFormat('yyyy-MM-dd HH:mm').format(DateTime.parse('${jobModel.breakdownTime}')).toString()}';
+
   }
 
   Future<void> viewNewPermitList({int? permitId}) async {
     Get.toNamed(Routes.viewPermitWebScreen, arguments: permitId);
   }
+
+   Future<void> viewJobDetails() async {
+    Get.toNamed(Routes.jobDetails);
+  }
+
 
   /// class ends
 }

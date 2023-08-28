@@ -81,8 +81,9 @@ class EndMCExecutionMessageDialog extends GetView {
             child: ElevatedButton(
               style: Styles.darkBlueElevatedButtonStyle,
               onPressed: () {
-                 Get.offAndToNamed(Routes.moduleCleaningListExecution);
-                //  _controller.getMCTaskList(_controller.facilityId, _controller.formattedTodate, _controller.formattedFromdate, true);
+                 Get.offAllNamed(Routes.moduleCleaningListExecution);
+                _controller.getMCTaskList(_controller.facilityId, _controller.formattedTodate, _controller.formattedFromdate, true);
+                
                 Get.back();
               },
               child: const Text('Ok'),

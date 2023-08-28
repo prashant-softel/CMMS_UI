@@ -63,6 +63,9 @@ class JobCardDetailsController extends GetxController {
   RxString strToolsRequired = ''.obs;
   RxString strEquipmentCategories = ''.obs;
   List<String> workTypeNames = [];
+  List<String> assignNames = [];
+  RxString strAssignName = ''.obs;
+
   List<String> toolsRequiredNames = [];
   List<String> equipmentCategoryNames = [];
   RxList<JobCardDetailsModel?> jobCardList = <JobCardDetailsModel?>[].obs;
@@ -96,7 +99,7 @@ class JobCardDetailsController extends GetxController {
 
       await _flutterSecureStorage.delete(key: "JcId");
 
-      await setJcId();
+      //  await setJcId();
 
       jobCardList.value = await jobCardDetailsPresenter.getJobCardDetails(
             jobCardId: jobCardId.value,
@@ -107,10 +110,10 @@ class JobCardDetailsController extends GetxController {
       createPlantDetailsTableData();
 
       createJobDetailsTableData();
-      // createPermitDetailsTableData();
+      createPermitDetailsTableData();
       //  createJcDetailsTableData();
       getEmployeeList();
-      // getPermitDetails();
+      //  getPermitDetails();
 
       // responsibilityCtrlrs.add(TextEditingController());
       currentIndex.value = -1;
@@ -184,13 +187,13 @@ class JobCardDetailsController extends GetxController {
       jobCardDetailsModel.value = jobCardList[0];
       equipmentCategoryNames = <String>[];
       for (var eC in jobCardDetailsModel.value?.lstPermitDetailList ?? []) {
-        // equipmentCategoryNames.add(eC.);
+        //  equipmentCategoryNames.add(eC);
       }
       strEquipmentCategories.value = equipmentCategoryNames.join(', ');
       plantDetails.value = {
         "Plant Details": jobCardDetailsModel.value?.plantName,
         "Block": jobCardDetailsModel.value?.plantName,
-        "Equipment Categories": strEquipmentCategories.value,
+        "Equipment Categories": jobCardDetailsModel.value?.assetCategoryName,
       };
     }
   }
@@ -217,20 +220,32 @@ class JobCardDetailsController extends GetxController {
         //     );
         //   }
         //   // Convert work type(s) to comma separated list
-        //   workTypeNames = <String>[];
-        //   for (var workType
-        //       in jobCardDetailsModel.value?.lstCmjcIsolatedDetailList ?? []) {
-        //     workTypeNames.add(workType.name);
-        //   }
-        //   strWorkTypes.value = workTypeNames.join(', ');
-        //   //remove extra comma at the end
-        //   if (strWorkTypes.value.length > 0) {
-        //     strWorkTypes.value = strWorkTypes.substring(
-        //       0,
-        //       strWorkTypes.value.length - 1,
-        //     );
-        //   }
-
+        workTypeNames = <String>[];
+        for (var workType
+            in jobCardDetailsModel.value?.lstCmjcJobDetailList ?? []) {
+          workTypeNames.add(workType.workType);
+        }
+        strWorkTypes.value = workTypeNames.join(', ');
+        //remove extra comma at the end
+        if (strWorkTypes.value.length > 0) {
+          strWorkTypes.value = strWorkTypes.substring(
+            0,
+            strWorkTypes.value.length - 1,
+          );
+        }
+        assignNames = <String>[];
+        for (var assignName
+            in jobCardDetailsModel.value?.lstCmjcJobDetailList ?? []) {
+          assignNames.add(assignName.jobAssignedEmployeeName);
+        }
+        strAssignName.value = assignNames.join(', ');
+        //remove extra comma at the end
+        if (strAssignName.value.length > 0) {
+          strAssignName.value = strAssignName.substring(
+            0,
+            strAssignName.value.length - 1,
+          );
+        }
         // Convert work area(s)/equipment(s) to comma separated list
         //   var workAreaNames = <String>[];
         // // for (var workArea in jobCardDetailsModel.value?.workingAreaList ?? []) {
@@ -249,8 +264,8 @@ class JobCardDetailsController extends GetxController {
           "Job ID": jobCardDetailsModel.value?.jobId.toString(),
           "Job Title": jobCardDetailsModel.value?.title,
           "Job Description": jobCardDetailsModel.value?.description,
-          "Job Assigned To": "asign", //jobCardDetailsModel.value?.,
-          "Work Area / Equipments": strWorkAreasOrEquipments.value,
+          "Job Assigned To": strAssignName.value, //jobCardDetailsModel.value?.,
+          // "Work Area / Equipments": strWorkAreasOrEquipments.value,
           "Work Type": strWorkTypes.value,
           "Linked Tool To  Work Type": strToolsRequired.value,
           "Job Created By": jobCardDetailsModel.value?.created_by,
@@ -269,23 +284,21 @@ class JobCardDetailsController extends GetxController {
 
         permitList?.value =
             jobCardDetailsModel.value!.lstPermitDetailList ?? [];
-        //jobCardDetailsModel.value?.associatedPermitList ?? [];
-
+        //  jobCardDetailsModel.value?.associatedPermitList ?? [];
+//
         LstPermitDetailList? permit = permitList?[0];
 
         if (permit != null) {
           permitId = permit.permitId;
+          getPermitDetails();
         }
 
-        // String decodedPermitDescription = unescape.convert(
-        //   permit?.t ?? '',
-        // );
         permitDetails.value = {
           "Permit ID": permit?.permitId.toString(),
-          "Site Permit No.": permit?.sitePermitNo,
+          "Site Permit No.": permit?.sitePermitNo.toString(),
           "Permit Type": permit?.permitType,
           "Permit Description": permit?.permitDescription,
-          "Permit Issued By": permit?.permitIssuedByName,
+          "Permit Issued By": permit?.permitIssuedByName ?? "",
         };
         //var x = jobDetails.value;
       }

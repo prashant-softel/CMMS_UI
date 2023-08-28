@@ -340,7 +340,11 @@ class ModuleCleaningListExecution
                                               ),
                                             ].map((record) {
                                               return TableViewRow(
-                                                onTap: () {},
+                                                onTap: () {
+                                                   controller.viewMCExecution(
+                                                                      id: int.tryParse(
+                                                                          '${record[0]}'));
+                                                },
                                                 height: 55,
                                                 cells: record.map((value) {
                                                    final Map<String, dynamic> dataList = {

@@ -1,5 +1,6 @@
 import 'package:cmms/domain/domain.dart';
 import 'package:cmms/domain/models/end_mc_execution_detail_model.dart';
+import 'package:cmms/domain/models/equipment_list_model.dart';
 import 'package:cmms/domain/models/inventory_category_model.dart';
 import 'package:cmms/domain/models/type_permit_model.dart';
 
@@ -26,6 +27,27 @@ class AddModuleCleaningExecutionUsecase {
     );
   }
 
+   Future<Map<String, dynamic>> abandonAllExecutionButton({
+    abandoneJsonString,
+    bool? isLoading,
+  }) async =>
+      await _repository.abandonExecutionButton(
+        abandoneJsonString,
+        isLoading,
+      );
+
+
+  Future<void> startMCExecutionScheduleButton({
+   
+    int? scheduleId,
+    bool? isLoading,
+  }) async {
+    await _repository.startMCExecutionScheduleButton(
+      scheduleId,
+      isLoading,
+    );
+  }
+
    Future<Map<String, dynamic>> endMCExecutionButton({
     endJsonString,
     bool? isLoading,
@@ -34,6 +56,18 @@ class AddModuleCleaningExecutionUsecase {
         endJsonString,
         isLoading,
       );
+
+   Future<List<EquipmentListModel>> getEquipmentModelList({
+    required bool isLoading,
+    required int? facilityId,
+    
+  }) async {
+    return _repository.getEquipmentModelList(
+      isLoading: isLoading,
+      facilityId: facilityId,
+      
+    );
+  }
 
    Future<List<TypePermitModel?>?> getTypePermitList(
     bool? isLoading,

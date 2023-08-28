@@ -75,27 +75,30 @@ class AddModuleCleaningExecutionDialog extends GetView {
             Row(
               children: [
                 CustomRichText(title: 'Water Used: '),
-                Container(
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(10),
-                      border: Border.all(
-                        color: Color.fromARGB(255, 227, 224, 224),
-                        width: 1,
-                      ),
-                      boxShadow: [
-                        BoxShadow(
-                          color: Color.fromARGB(255, 236, 234, 234)
-                              .withOpacity(0.5),
-                          spreadRadius: 2,
-                          blurRadius: 5,
-                          offset: Offset(0, 2),
-                        ),
-                      ],
-                    ),
-                    width: MediaQuery.of(context).size.width / 7,
-                    child: LoginCustomTextfield(
-                        // textController: controller.girNoCtrlr,
-                        )),
+                Dimens.boxWidth20,
+                Text('1000 ltr'),
+                Dimens.boxWidth50,
+                // Container(
+                //     decoration: BoxDecoration(
+                //       borderRadius: BorderRadius.circular(10),
+                //       border: Border.all(
+                //         color: Color.fromARGB(255, 227, 224, 224),
+                //         width: 1,
+                //       ),
+                //       boxShadow: [
+                //         BoxShadow(
+                //           color: Color.fromARGB(255, 236, 234, 234)
+                //               .withOpacity(0.5),
+                //           spreadRadius: 2,
+                //           blurRadius: 5,
+                //           offset: Offset(0, 2),
+                //         ),
+                //       ],
+                //     ),
+                //     width: MediaQuery.of(context).size.width / 7,
+                //     child: LoginCustomTextfield(
+                //         // textController: controller.girNoCtrlr,
+                //         )),
                 Dimens.boxWidth10,
                 Container(
                   width: 150,

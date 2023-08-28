@@ -877,49 +877,22 @@ class _AddJobContentWebState extends State<AddJobContentWeb> {
                     ),
                     if (controller.openbreaketimeDatePicker)
                       Positioned(
-                        left: 450,
-                        top: 300,
-                        child: Container(
-                          child: ElevatedButton(
-                            onPressed: () async {
-                              final DateTime? selectedDateTime =
-                                  await showDatePicker(
-                                context: context,
-                                initialDate: DateTime.now(),
-                                firstDate: DateTime(DateTime.now().year),
-                                lastDate: DateTime(DateTime.now().year, 12, 31),
-                              );
-
-                              if (selectedDateTime != null) {
-                                final TimeOfDay? selectedTime =
-                                    await showTimePicker(
-                                  context: context,
-                                  initialTime: TimeOfDay.now(),
-                                );
-
-                                if (selectedTime != null) {
-                                  final DateTime selectedDateWithTime =
-                                      DateTime(
-                                    selectedDateTime.year,
-                                    selectedDateTime.month,
-                                    selectedDateTime.day,
-                                    selectedTime.hour,
-                                    selectedTime.minute,
-                                  );
-
-                                  print(
-                                      'Selected Date with Time: $selectedDateWithTime');
-                                  // Update  controller's values or do other operations here
-                                  controller.breakdownTimeCtrlr.text =
-                                      DateFormat('yyyy-MM-dd HH:mm')
-                                          .format(selectedDateWithTime);
-                                  controller.openbreaketimeDatePicker = false;
-                                  controller.update(['stock_Mangement']);
-                                }
-                              }
-                            },
-                            child: Text('Open Date & Time Picker'),
-                          ),
+                        left: 290,
+                        top: 200,
+                        child: DatePickerWidget(
+                          showActionButtons: false,
+                          minDate: DateTime(DateTime.now().year),
+                          maxDate: DateTime(DateTime.now().year, 13,
+                              0), // last date of this year
+                          controller: DateRangePickerController(),
+                          selectionChanges: (p0) {
+                            print('po valu ${p0.value.toString()}');
+                            controller.breakdownTimeCtrlr.text =
+                                DateFormat('yyyy-MM-dd').format(p0.value);
+                            controller.openbreaketimeDatePicker =
+                                !controller.openbreaketimeDatePicker;
+                            controller.update(['stock_Mangement']);
+                          },
                         ),
                       ),
                   ],

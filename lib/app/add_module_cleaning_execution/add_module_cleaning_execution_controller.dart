@@ -3,9 +3,11 @@ import 'dart:async';
 import 'package:cmms/app/add_module_cleaning_execution/add_module_cleaning_execution_presenter.dart';
 import 'package:cmms/app/app.dart';
 import 'package:cmms/app/navigators/app_pages.dart';
+import 'package:cmms/domain/models/comment_model.dart';
 import 'package:cmms/domain/models/create_escalation_matrix_model.dart';
 import 'package:cmms/domain/models/end_mc_execution_detail_model.dart';
 import 'package:cmms/domain/models/end_mc_execution_model.dart';
+import 'package:cmms/domain/models/equipment_list_model.dart';
 import 'package:cmms/domain/models/inventory_category_model.dart';
 import 'package:cmms/domain/models/modulelist_model.dart';
 import 'package:cmms/domain/models/paiyed_model.dart';
@@ -30,7 +32,7 @@ class AddModuleCleaningExecutionController extends GetxController {
   Rx<List<List<Map<String, String>>>> rowItem =
       Rx<List<List<Map<String, String>>>>([]);
   List<Escalation> days = [];
-  Map<String, RoleModel> dropdownMapperData = {};
+  Map<String, Schedules> dropdownMapperData = {};
   Map<String, PaiedModel> paiddropdownMapperData = {};
 
   void addRowItem() {
@@ -90,6 +92,11 @@ RxList<InventoryCategoryModel?> equipmentCategoryList =
 
   ///Schedule List
   RxList<Schedules?>? listSchedules = <Schedules?>[].obs;
+  TextEditingController commentTextFieldCtrlr = TextEditingController();
+
+  RxList<EquipmentListModel?> equipmentList =
+      <EquipmentListModel?>[].obs;
+
   
 
   RxList<FacilityModel?> facilityList = <FacilityModel>[].obs;
@@ -105,6 +112,8 @@ RxList<InventoryCategoryModel?> equipmentCategoryList =
 
   StreamSubscription<int>? facilityIdStreamSubscription;
   int facilityId = 0;
+
+  List<int?> scheduleId = [];
 
   ///
 
@@ -136,6 +145,9 @@ RxList<InventoryCategoryModel?> equipmentCategoryList =
      Future.delayed(Duration(seconds: 1), () {
       getInventoryCategoryList();
     });
+     Future.delayed(Duration(seconds: 1), () {
+      getEquipmentModelList(facilityId, true);
+    });
 
       if (data['id'] != null) {
       Future.delayed(Duration(seconds: 1), () {
@@ -160,6 +172,36 @@ RxList<InventoryCategoryModel?> equipmentCategoryList =
     }
   }
 
+  Future<void> getEquipmentModelList(int facilityId,  bool isLoading) async {
+    equipmentList.value = <EquipmentListModel>[];
+
+    final list = await addModuleCleaningExecutionPresenter.getEquipmentModelList(
+        isLoading: isLoading,
+        facilityId: facilityId);
+    // print('incidentReportFacilityId$facilityId');
+    // print('Incident Report List:$list');
+    for (var equipment_list in list) {
+      equipmentList.add(equipment_list);
+    }
+
+    if (list != null) {
+      equipmentList.value = list;
+      // filteredData.value = incidentReportList.value;
+      // print('Filtered data:${filteredData.value}');
+     
+      // if (filteredData != null && filteredData.isNotEmpty) {
+      //   incidentReportModelList = filteredData[0];
+      //   var incidentListJson = incidentReportModelList?.toJson();
+      //   incidentListTableColumns.value = <String>[];
+      //   for (var key in incidentListJson?.keys.toList() ?? []) {
+      //     incidentListTableColumns.add(key);
+      //   }
+      // }
+    }
+
+    update(['equipment_list']);
+  }
+
   Future<void> getTypePermitList() async {
     final _permitTypeList = await addModuleCleaningExecutionPresenter
         .getTypePermitList(facility_id: facilityId);
@@ -169,6 +211,25 @@ RxList<InventoryCategoryModel?> equipmentCategoryList =
         typePermitList.add(permitType);
       }
       // selectedTypePermit.value = typePermitList[0]?.name ?? '';
+    }
+  }
+
+  void abandonAllExecutionButton({int? id}) async {
+    {
+      String _comment = commentTextFieldCtrlr.text.trim();
+
+      CommentModel commentAbandonModel =
+          CommentModel(id: id, comment: _comment);
+
+      var abandoneJsonString = commentAbandonModel.toJson();
+      // print({"rejectCalibrationJsonString", approveCalibrationtoJsonString});
+      Map<String, dynamic>? response = await addModuleCleaningExecutionPresenter.abandonAllExecutionButton(
+        abandoneJsonString: abandoneJsonString,
+        isLoading: true,
+      );
+      if (response == true) {
+        //getCalibrationList(facilityId, true);
+      }
     }
   }
 
@@ -217,6 +278,16 @@ RxList<InventoryCategoryModel?> equipmentCategoryList =
     // print('Plan Data:${data['planId']}');
   }
 
+  Future<void> startMCExecutionScheduleButton({int? scheduleID}) async {
+    final _startMCScheduleExecutionBtn =
+        await addModuleCleaningExecutionPresenter.startMCExecutionScheduleButton(
+      scheduleId: scheduleId.first,
+      
+    );
+    
+    // print('Plan Data:${data['planId']}');
+  }
+
 
    void endMCExecutionButton({int? id}) async {
     {
@@ -231,6 +302,7 @@ RxList<InventoryCategoryModel?> equipmentCategoryList =
       EndMCExecutionModel endMCModel =
           EndMCExecutionModel(
             scheduleId: data['planId'],
+            // scheduleId: scheduleId.first,
             executionId: data['id'],
             cleaningDay: data['cleaningDays'],
             waterUsed: data['waterUsed'],  
@@ -270,6 +342,9 @@ RxList<InventoryCategoryModel?> equipmentCategoryList =
       plannedAtDateTimeCtrlrWeb.text = '${DateFormat('yyyy-MM-dd HH:mm:ss').format(DateTime.parse('${mcExecutionDetailsModel.value?.plannedAt}'))}';
       startedAtDateTimeCtrlrWeb.text = '${DateFormat('yyyy-MM-dd HH:mm:ss').format(DateTime.parse('${mcExecutionDetailsModel.value?.startedAt}'))}';
       listSchedules?.value = mcExecutionDetailsModel.value?.schedules ?? [];
+      scheduleId = listSchedules!.map((element) => element?.scheduleId).toList();
+      print('ScheduleId: ${scheduleId}');
+      
     }
   }
 

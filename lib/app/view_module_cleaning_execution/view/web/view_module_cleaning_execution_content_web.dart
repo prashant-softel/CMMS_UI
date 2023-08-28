@@ -761,9 +761,9 @@ class ViewModuleCleaningExecutionContentWeb
                                               child: ScrollableTableView(
                                                 columns: [
                                                   "Time Stamp",
-                                                  "Module Ref ID",
+                                                  "Posted By",
                                                   "Comment",
-                                                  "Module Type",
+                                                  "Location",
                                                   "Status",
                                                 ].map((column) {
                                                   return TableViewColumn(
@@ -784,9 +784,9 @@ class ViewModuleCleaningExecutionContentWeb
                                                               index];
                                                       return [
                                                         '${getHistoryListDetails?.createdAt}',
-                                                        '${getHistoryListDetails?.moduleRefId ?? ''}',
+                                                        '${getHistoryListDetails?.createdByName ?? ''}',
                                                         '${getHistoryListDetails?.comment ?? ''}',
-                                                        '${getHistoryListDetails?.moduleType ?? ''}',
+                                                        '--',
                                                         '${getHistoryListDetails?.status_name ?? ''}',
                                                       ];
                                                     },

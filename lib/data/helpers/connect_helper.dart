@@ -532,6 +532,33 @@ class ConnectHelper {
     return responseModel;
   }
 
+   Future<ResponseModel> getEquipmentModelList({
+    required bool isLoading,
+    required String auth,
+    int? facilityId,
+   
+  }) async {
+    // var startDateParam = (start_date != null) ? 'start_date=$end_date&' : '';
+    // var endDateParam = (end_date != '') ? 'end_date=$start_date' : '';
+//var statusParam = (status!=null status!='')?'status=1':'';
+    // var statusParam = 'status=1';
+    ResponseModel responseModel = await apiWrapper.makeRequest(
+      'MC/GetMCEquipmentList?facilityId=$facilityId', 
+          // startDateParam +
+          // endDateParam,
+      Request.getMultiparts,
+      null,
+      isLoading,
+      {
+        'Authorization': 'Bearer $auth',
+      },
+    );
+    
+    return responseModel;
+    
+  }
+
+
   ///Module Cleaning Task List
   Future<ResponseModel> getMCTaskList({
     required bool isLoading,
@@ -951,6 +978,36 @@ class ConnectHelper {
 
     return responseModel;
   }
+
+
+  Future<ResponseModel> startMCExecutionScheduleButton({
+    required String auth,
+    bool? isLoading,
+    int? scheduleId,
+  }) async {
+    // facilityId = 45;
+    var responseModel = await apiWrapper.makeRequest(
+      'MC/StartMCScheduleExecution?scheduleId=$scheduleId',
+      Request.put,
+      // {'comment': "$comment", 'id': id},
+      null,
+      isLoading ?? true,
+      {
+        'Authorization': 'Bearer $auth',
+      },
+    );
+    // print('StartExecutionResponse: ${responseModel.data}');
+    var res = responseModel.data;
+    var parsedJson = json.decode(res);
+    Get.dialog<void>(StartMcExecutionMessageDialog(
+      data: parsedJson['message'],
+      startMCId: parsedJson['id'],
+    ));
+
+    return responseModel;
+  }
+
+
 
   Future<ResponseModel> permitRejectButton({
     required String auth,
@@ -1469,7 +1526,7 @@ class ConnectHelper {
     bool? isLoading,
   }) async {
     var responseModel = await apiWrapper.makeRequest(
-      'Job/CreateNewJob?job=$job',
+      'Job/CreateNewJob',
       Request.post,
       job,
       isLoading ?? false,
@@ -3953,7 +4010,7 @@ class ConnectHelper {
     required business_id,
   }) async {
     var responseModel = await apiWrapper.makeRequest(
-      'Facility/DeleteFacility?id=$business_id',
+      'Facility/DeleteFacility?facility_id=$business_id',
       Request.delete,
       business_id,
       isLoading ?? false,
