@@ -12,6 +12,7 @@ import 'package:cmms/domain/models/employee_list_model2.dart';
 import 'package:cmms/domain/models/employee_model.dart';
 import 'package:cmms/domain/models/inventory_detail_model.dart';
 import 'package:cmms/domain/models/job_type_list_model.dart';
+import 'package:cmms/domain/models/linked_jobs_to_permit_model.dart';
 import 'package:cmms/domain/models/new_permit_details_model.dart';
 import 'package:cmms/domain/models/new_permit_list_model.dart';
 import 'package:cmms/domain/models/safety_measure_list_model.dart';
@@ -129,6 +130,10 @@ class NewPermitController extends GetxController {
   int selectedFacility_id = 0;
   RxList<InventoryModel?> selectedWorkAreaList = <InventoryModel>[].obs;
 
+
+  /// Linked jobs to permit list
+  RxList<LinkedJobsToPermitModel?>? jobsLinkedToPermitList = <LinkedJobsToPermitModel?>[].obs;
+
   String username = '';
   Rx<String> selectedFacility = ''.obs;
   RxList<InventoryCategoryModel?> equipmentCategoryList =
@@ -218,7 +223,10 @@ class NewPermitController extends GetxController {
   RxList<int?> selectedJobModelEquipemntIsolationIdList = <int?>[].obs;
 
   RxList<EquipmentCatList?> listJobModelCategory = <EquipmentCatList?>[].obs;
+  RxList<AssociatedPermit?> listAssociatedPermit = <AssociatedPermit?>[].obs;
+
   String? selectedItem = '';
+  int? associatePermitId = 0;
 
   Rx<bool> isemployeeListSelected = true.obs;
   Rx<String> selectedEmployeeList = ''.obs;
@@ -364,6 +372,9 @@ class NewPermitController extends GetxController {
         if (jobModel != null) {
           loadPermitDetails(jobModel);
         }
+        if(jobModel != null){
+          getJobsLinkdToPermitList(permitId: associatePermitId!);
+        }
       }
 
       //homePresenter.generateToken();
@@ -457,6 +468,21 @@ class NewPermitController extends GetxController {
 
       // print('EmployeeList:${listEmployee}');
     }
+  }
+
+   Future<void> getJobsLinkdToPermitList({required int permitId}) async {
+    /// TODO: CHANGE THESE VALUES
+    // int moduleType = 81;
+    // // int tempModuleType = 21;
+    // int id = Get.arguments;
+    //
+    jobsLinkedToPermitList?.value = await permitPresenter.getJobsLinkdToPermitList(
+         
+          permitId,
+          true,
+        ) ??
+        [];
+    update(["JobsLinkdToPermitList"]);
   }
 
   Future<void> getInventoryDetailList() async {
@@ -1195,19 +1221,29 @@ class NewPermitController extends GetxController {
     titleTextCtrlr.text = jobModel.jobTitle ?? '';
     selectedBlock.value = jobModel.blockName ?? '';
     selectedBlockId = jobModel.blockId ?? 0;
+
+    //// uncomment once work done
     listJobModelCategory.value = jobModel.equipmentCatList ?? [];
     List<int> idList =
         listJobModelCategory.map((obj) => obj!.equipmentCatId).toList();
     List<String> nameList =
         listJobModelCategory.map((obj) => obj!.equipmentCatName).toList();
      selectedItem = nameList[0];
+    ///end uncomment
+
+    listAssociatedPermit.value = jobModel.associatedPermitList ?? [];
+    List<int?> associetdPermitId = listAssociatedPermit.map((element) => element?.permitId).toList();
+    associatePermitId = associetdPermitId[0];
+    print("Associated Permit Id:${associatePermitId}");
 
     print("Selected Block Id:${selectedBlockId}");
 
+    //uncomment once work done
     selectedEquipmentCategoryIdList.value = idList;
     // selectedJobModelEquipemntIsolationIdList.value = idList;
     print("JobModel Equipment Category Id:${selectedEquipmentCategoryIdList}");
     print("Selected Name Category:${jobModel.id ?? 0}");
+    ///end uncomment
 
     // idCtrlr.text = '${int.tryParse(jobModel.id ?? 0)}';
     blockNameTextCtrlr.text = jobModel.blockName;

@@ -1572,13 +1572,8 @@ class NewPermitScreen extends GetView<NewPermitController> {
                                                                     left: 10),
                                                             child: Text(
                                                               'Request a Permit For a Job',
-                                                              style: TextStyle(
-                                                                  color: Color
-                                                                      .fromARGB(
-                                                                          255,
-                                                                          5,
-                                                                          92,
-                                                                          163)),
+                                                              style: Styles
+                                                                      .blue700,
                                                             ),
                                                           ),
                                                           Padding(
@@ -1613,26 +1608,27 @@ class NewPermitScreen extends GetView<NewPermitController> {
                                                                     Dimens
                                                                         .boxHeight10,
                                                                     GestureDetector(
-                                                                      onTap: (){
-                                                                        controller.viewJobDetails();
+                                                                      onTap:
+                                                                          () {
+                                                                        controller
+                                                                            .viewJobDetails();
                                                                       },
-                                                                      child: Text(
-                                                                          '${int.tryParse('${controller.jobModel?.id ?? 0}')}',
-                                                                          style:
-                                                                        TextStyle(
-                                                                      decoration: TextDecoration.underline,
-                                                                      
-                                                                      decorationStyle: TextDecorationStyle
-                                                                          .solid,
-                                                                      color: Color.fromARGB(
-                                                                          255,
-                                                                          5,
-                                                                          92,
-                                                                          163),
-                                                                        
-                                                                      
-                                                                          ),
+                                                                      child:
+                                                                          Text(
+                                                                        '${int.tryParse('${controller.jobModel?.id ?? 0}')}',
+                                                                        style:
+                                                                            TextStyle(
+                                                                          decoration:
+                                                                              TextDecoration.underline,
+                                                                          decorationStyle:
+                                                                              TextDecorationStyle.solid,
+                                                                          color: Color.fromARGB(
+                                                                              255,
+                                                                              5,
+                                                                              92,
+                                                                              163),
                                                                         ),
+                                                                      ),
                                                                     )
                                                                   ],
                                                                 ),
@@ -1683,13 +1679,14 @@ class NewPermitScreen extends GetView<NewPermitController> {
                                                                     SizedBox(
                                                                       width:
                                                                           100,
-                                                                      child:
-                                                                          Wrap(
-                                                                        alignment:
-                                                                            WrapAlignment.start,
-                                                                        spacing:
-                                                                            100,
-                                                                        children: []
+                                                                      child: Wrap(
+                                                                          alignment: WrapAlignment
+                                                                              .start,
+                                                                          spacing:
+                                                                              100,
+                                                                          children: []
+
+                                                                          ///Uncomment once Work done
                                                                           ..addAll(controller.listJobModelCategory.map((element) =>
                                                                               Row(
                                                                                 mainAxisSize: MainAxisSize.min,
@@ -1701,7 +1698,8 @@ class NewPermitScreen extends GetView<NewPermitController> {
                                                                                   )
                                                                                 ],
                                                                               ))),
-                                                                      ),
+                                                                          ///end Uncomment
+                                                                          ),
                                                                     )
                                                                     // Text('${controller.selectedItem}'),
                                                                   ],
@@ -1780,6 +1778,138 @@ class NewPermitScreen extends GetView<NewPermitController> {
                                                                 ),
                                                                 Spacer(),
                                                               ],
+                                                            ),
+                                                          ),
+                                                        ],
+                                                      ),
+                                                    )
+                                                  : Container(),
+                                              Dimens.boxHeight30,
+
+                                              ///Jobs Linked to this permit
+                                              controller.jobModel?.id != null
+                                                  ? Container(
+                                                      margin:
+                                                          Dimens.edgeInsets20,
+                                                      height: 250,
+                                                      width:
+                                                          MediaQuery.of(context)
+                                                                  .size
+                                                                  .width /
+                                                              1.2,
+                                                      decoration: BoxDecoration(
+                                                        border: Border.all(
+                                                          color: ColorValues
+                                                              .lightGreyColorWithOpacity35,
+                                                          width: 1,
+                                                        ),
+                                                        boxShadow: [
+                                                          BoxShadow(
+                                                            color: ColorValues
+                                                                .appBlueBackgroundColor,
+                                                            spreadRadius: 2,
+                                                            blurRadius: 5,
+                                                            offset:
+                                                                Offset(0, 2),
+                                                          ),
+                                                        ],
+                                                      ),
+                                                      child: Column(
+                                                        children: [
+                                                          Padding(
+                                                            padding:
+                                                                const EdgeInsets
+                                                                    .all(10.0),
+                                                            child: Row(
+                                                              children: [
+                                                                Text(
+                                                                  "Jobs Linked To This Permit",
+                                                                  style: Styles
+                                                                      .blue700,
+                                                                ),
+                                                              ],
+                                                            ),
+                                                          ),
+                                                          Divider(
+                                                            color: ColorValues
+                                                                .greyLightColour,
+                                                          ),
+                                                          Expanded(
+                                                            child:
+                                                                ScrollableTableView(
+
+                                                              columns: [
+                                                                "Job Id",
+                                                                "Job Title",
+                                                                "Equipment Category",
+                                                                "Equipment",
+                                                                "Breakdown Time",
+                                                                "Assigned To",
+                                                                "Status",
+                                                                
+                                                              ].map((column) {
+                                                                return TableViewColumn(
+                                                                
+                                                                  label: column,
+                                                                  minWidth:
+                                                                      Get.width *
+                                                                          0.15,
+                                                                );
+                                                              }).toList(),
+                                                              rows: [
+                                                                ...List
+                                                                    .generate(
+                                                                  controller
+                                                                          .jobsLinkedToPermitList
+                                                                          ?.length ??
+                                                                      0,
+                                                                  (index) {
+                                                                    var getJobsLinkedToPermitList =
+                                                                        controller
+                                                                            .jobsLinkedToPermitList?[index];
+                                                                    return [
+                                                                      '${getJobsLinkedToPermitList?.jobId}',
+                                                                      '${getJobsLinkedToPermitList?.title ?? ''}',
+                                                                      '${getJobsLinkedToPermitList?.equipmentCat ?? ''}',
+                                                                      '${getJobsLinkedToPermitList?.equipment ?? ''}',
+                                                                      '${getJobsLinkedToPermitList?.breakdownTime ?? ''}',
+                                                                      '${getJobsLinkedToPermitList?.assignedTo ?? ''}',
+                                                                      '${getJobsLinkedToPermitList?.status_short ?? ''}',
+                                                                    ];
+                                                                  },
+                                                                ),
+                                                              ].map((record) {
+                                                                return TableViewRow(
+                                                                  height: 40,
+                                                                  cells: record
+                                                                      .map(
+                                                                          (value) {
+                                                                    return TableViewCell(
+                                                                      child: value == record[0]
+                                                                      ?GestureDetector(
+                                                                        onTap: () {
+                                                                          controller.viewJobDetails();
+                                                                        },
+                                                                        child: Text(value,   
+                                                                        style:
+                                                                              TextStyle(
+                                                                            decoration:
+                                                                                TextDecoration.underline,
+                                                                            decorationStyle:
+                                                                                TextDecorationStyle.solid,
+                                                                            color: Color.fromARGB(
+                                                                                255,
+                                                                                5,
+                                                                                92,
+                                                                                163),
+                                                                          ),),
+                                                                      )
+                                                                      :Text(value)
+
+                                                                    );
+                                                                  }).toList(),
+                                                                );
+                                                              }).toList(),
                                                             ),
                                                           ),
                                                         ],

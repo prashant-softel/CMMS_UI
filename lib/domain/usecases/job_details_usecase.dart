@@ -1,3 +1,4 @@
+import 'package:cmms/domain/models/mrs_list_by_jobId.dart';
 import 'package:cmms/domain/repositories/repository.dart';
 
 import '../models/job_details_model.dart';
@@ -45,6 +46,18 @@ class JobDetailsUsecase {
         selfView,
         isLoading,
       );
+
+  Future<List<MRSListByJobIdModel>?> getMrsListByModule({
+    
+    jobId,
+    bool? isLoading,
+  }) async =>
+      await repository.getMrsListByModule(
+       
+        jobId,
+        isLoading,
+      );
+
 
   ///
   Future<Map<String, dynamic>?> linkToPermit({

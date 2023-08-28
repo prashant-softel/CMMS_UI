@@ -40,10 +40,12 @@ import 'package:cmms/domain/models/inventory_category_model2.dart';
 import 'package:cmms/domain/models/inventory_detail_model.dart';
 import 'package:cmms/domain/models/inventory_details_model.dart';
 import 'package:cmms/domain/models/job_type_list_model.dart';
+import 'package:cmms/domain/models/linked_jobs_to_permit_model.dart';
 import 'package:cmms/domain/models/manufacturer_model.dart';
 import 'package:cmms/domain/models/mc_task_list_model.dart';
 import 'package:cmms/domain/models/models.dart';
 import 'package:cmms/domain/models/module_cleaning_list_plan_model.dart';
+import 'package:cmms/domain/models/mrs_list_by_jobId.dart';
 import 'package:cmms/domain/models/new_permit_details_model.dart';
 import 'package:cmms/domain/models/new_permit_list_model.dart';
 import 'package:cmms/domain/models/paiyed_model.dart';
@@ -3822,6 +3824,73 @@ class Repository {
       return [];
     }
   }
+
+
+   Future<List<LinkedJobsToPermitModel>?> getJobsLinkdToPermitList(
+    //String? auth,
+    int? permitId,
+    bool? isLoading,
+  ) async {
+    try {
+      final auth = await getSecuredValue(LocalKeys.authToken);
+      final res = await _dataRepository.getJobsLinkdToPermitList(
+        auth: auth,
+        isLoading: isLoading,
+        permitId: permitId,
+      );
+
+      if (!res.hasError) {
+        final jsonLinkedJobsToPermitModel = jsonDecode(res.data);
+        final List<LinkedJobsToPermitModel> _linkedJobsToPermit = jsonLinkedJobsToPermitModel
+            .map<LinkedJobsToPermitModel>(
+              (m) => LinkedJobsToPermitModel.fromJson(Map<String, dynamic>.from(m)),
+            )
+            .toList();
+        print({"_linkedJobsToPermit", _linkedJobsToPermit});
+        return _linkedJobsToPermit;
+      } else {
+        Utility.showDialog(res.errorCode.toString() + 'getLinkedJobsToPermit');
+        return null;
+      }
+    } catch (error) {
+      print(error.toString());
+      return [];
+    }
+  }
+
+
+  Future<List<MRSListByJobIdModel>?> getMrsListByModule(
+    //String? auth,
+    int? jobId,
+    bool? isLoading,
+  ) async {
+    try {
+      final auth = await getSecuredValue(LocalKeys.authToken);
+      final res = await _dataRepository.getMrsListByModule(
+        auth: auth,
+        isLoading: isLoading,
+        jobId: jobId,
+      );
+
+      if (!res.hasError) {
+        final jsonMrsListByModuleModel = jsonDecode(res.data);
+        final List<MRSListByJobIdModel> _mrsListByModule = jsonMrsListByModuleModel
+            .map<MRSListByJobIdModel>(
+              (m) => MRSListByJobIdModel.fromJson(Map<String, dynamic>.from(m)),
+            )
+            .toList();
+        print({"_mrsListByModule", _mrsListByModule});
+        return _mrsListByModule;
+      } else {
+        Utility.showDialog(res.errorCode.toString() + 'getMrsListByModule');
+        return null;
+      }
+    } catch (error) {
+      print(error.toString());
+      return [];
+    }
+  }
+
 
   Future<void> deleteCkeckpoint(Object check_point_id, bool isLoading) async {
     try {

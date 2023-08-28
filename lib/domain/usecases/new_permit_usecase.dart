@@ -5,6 +5,7 @@ import 'package:cmms/domain/models/employee_model.dart';
 import 'package:cmms/domain/models/inventory_category_model.dart';
 import 'package:cmms/domain/models/inventory_detail_model.dart';
 import 'package:cmms/domain/models/job_type_list_model.dart';
+import 'package:cmms/domain/models/linked_jobs_to_permit_model.dart';
 import 'package:cmms/domain/models/new_permit_details_model.dart';
 import 'package:cmms/domain/models/new_permit_list_model.dart';
 import 'package:cmms/domain/models/safety_measure_list_model.dart';
@@ -199,4 +200,16 @@ class NewPermitUsecase {
         permitId: permitId,
         isLoading: isLoading ?? false,
       );
+
+   Future<List<LinkedJobsToPermitModel>?> getJobsLinkdToPermitList({
+    
+    permitId,
+    bool? isLoading,
+  }) async =>
+      await repository.getJobsLinkdToPermitList(
+       
+        permitId,
+        isLoading,
+      );
+
 }

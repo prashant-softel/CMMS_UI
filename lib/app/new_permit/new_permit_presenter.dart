@@ -6,6 +6,7 @@ import 'package:cmms/domain/models/facility_model.dart';
 import 'package:cmms/domain/models/inventory_detail_model.dart';
 import 'package:cmms/domain/models/inventory_model.dart';
 import 'package:cmms/domain/models/job_type_list_model.dart';
+import 'package:cmms/domain/models/linked_jobs_to_permit_model.dart';
 import 'package:cmms/domain/models/new_permit_details_model.dart';
 import 'package:cmms/domain/models/preventive_checklist_model.dart';
 import 'package:cmms/domain/models/safety_measure_list_model.dart';
@@ -215,6 +216,15 @@ Future<NewPermitDetailModel?> getNewPermitDetail({
         isLoading: isLoading ?? false,
       );
   }
+
+  Future<List<LinkedJobsToPermitModel>?> getJobsLinkdToPermitList(
+    permitId,
+    isLoading,
+  ) async =>
+      await newPermitUsecase.getJobsLinkdToPermitList(
+        permitId: permitId,
+        isLoading: isLoading,
+      );
 
 }
 
