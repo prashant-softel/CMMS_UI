@@ -495,120 +495,240 @@ class JobDetailsWebView extends GetView<JobDetailsController> {
                                   ),
                                 ),
 
+                                // Container(
+                                //   margin: Dimens.edgeInsets20,
+                                //   height: Get.height / 2,
+                                //   decoration: BoxDecoration(
+                                //     border: Border.all(
+                                //       color: ColorValues
+                                //           .lightGreyColorWithOpacity35,
+                                //       width: 1,
+                                //     ),
+                                //     boxShadow: [
+                                //       BoxShadow(
+                                //         color:
+                                //             ColorValues.appBlueBackgroundColor,
+                                //         spreadRadius: 2,
+                                //         blurRadius: 5,
+                                //         offset: Offset(0, 2),
+                                //       ),
+                                //     ],
+                                //   ),
+                                //   child: Column(
+                                //     children: [
+                                //       Padding(
+                                //         padding: const EdgeInsets.all(10.0),
+                                //         child: Row(
+                                //           children: [
+                                //             Text(
+                                //               "Material Used / Issued",
+                                //               style: Styles.blue700,
+                                //             ),
+                                //           ],
+                                //         ),
+                                //       ),
+                                //       Divider(
+                                //         color: ColorValues.greyLightColour,
+                                //       ),
+                                //       controller.listMrsByJobId!
+                                //                   .length >
+                                //               0
+                                //           ? Expanded(
+                                //               child: ScrollableTableView(
+                                //                 columns: [
+                                //                   "Job Card ID",
+                                //                   "Mrs ID",
+                                //                   "Mrs Items List ",
+                                //                   'Action',
+                                //                 ].map((column) {
+                                //                   return TableViewColumn(
+                                //                     label: column,
+                                //                     minWidth: Get.width * 0.21,
+                                //                   );
+                                //                 }).toList(),
+                                //                 rows: [
+                                //                   [
+                                //                     '${controller.listMrsByJobId![0]?.jobCardId}',
+                                //                     '${controller.listMrsByJobId![0]?.mrsId}',
+                                //                     '${controller.listMrsByJobId![0]?.mrsItems}',
+                                //                     'Action',
+                                //                   ],
+                                //                 ].map((record) {
+                                //                   return TableViewRow(
+                                //                     height: 40,
+                                //                     cells: record.map((value) {
+                                //                       return TableViewCell(
+                                //                         child: value == "Action"
+                                //                             ? Wrap(children: [
+                                //                                 // if (JobStatusData.getStatusStringFromInt(controller
+                                //                                 //         .jobDetailsModel
+                                //                                 //         .value
+                                //                                 //         ?.status) ==
+                                //                                 //     AppConstants
+                                //                                 //         .kJobStatusLinkedToPermit)
+                                //                                   TableActionButton(
+                                //                                     color: ColorValues
+                                //                                         .appPurpleColor,
+                                //                                     icon: Icons
+                                //                                         .add,
+                                //                                     message:
+                                //                                         "Job Card",
+                                //                                     onPress: () =>
+                                //                                         controller
+                                //                                             .goToJobCardScreen(),
+                                //                                   ),
+                                //                               ])
+                                //                             : Text(value),
+                                //                       );
+                                //                     }).toList(),
+                                //                   );
+                                //                 }).toList(),
+                                //               ),
+                                //             )
+                                //           : Container(
+                                //               padding: EdgeInsets.only(top: 40),
+                                //               child: Row(
+                                //                 crossAxisAlignment:
+                                //                     CrossAxisAlignment.center,
+                                //                 mainAxisAlignment:
+                                //                     MainAxisAlignment.center,
+                                //                 children: [
+                                //                   Text(
+                                //                       "Not add the any matarial please add the material first"),
+                                //                   TableActionButton(
+                                //                     color: ColorValues
+                                //                         .appPurpleColor,
+                                //                     icon: Icons.add,
+                                //                     message: "Add Material",
+                                //                     onPress: () => controller
+                                //                         .goToAddMrsScreen(),
+                                //                   ),
+                                //                 ],
+                                //               ))
+                                //     ],
+                                //   ),
+                                // ),
                                 Container(
-                                  margin: Dimens.edgeInsets20,
-                                  height: Get.height / 3.8,
-                                  decoration: BoxDecoration(
-                                    border: Border.all(
-                                      color: ColorValues
-                                          .lightGreyColorWithOpacity35,
-                                      width: 1,
-                                    ),
-                                    boxShadow: [
-                                      BoxShadow(
-                                        color:
-                                            ColorValues.appBlueBackgroundColor,
-                                        spreadRadius: 2,
-                                        blurRadius: 5,
-                                        offset: Offset(0, 2),
-                                      ),
-                                    ],
-                                  ),
-                                  child: Column(
-                                    children: [
-                                      Padding(
-                                        padding: const EdgeInsets.all(10.0),
-                                        child: Row(
-                                          children: [
-                                            Text(
-                                              "Material Used / Issued",
-                                              style: Styles.blue700,
-                                            ),
-                                          ],
-                                        ),
-                                      ),
-                                      Divider(
-                                        color: ColorValues.greyLightColour,
-                                      ),
-                                      controller.jobAssociatedModelsList!
-                                                  .length >
-                                              0
-                                          ? Expanded(
-                                              child: ScrollableTableView(
-                                                columns: [
-                                                  "Job Card ID",
-                                                  "Mrs ID",
-                                                  "Mrs Items List ",
-                                                  'Action',
-                                                ].map((column) {
-                                                  return TableViewColumn(
-                                                    label: column,
-                                                    minWidth: Get.width * 0.21,
-                                                  );
-                                                }).toList(),
-                                                rows: [
-                                                  [
-                                                    // '${controller.jobAssociatedModelsList![0]?.jobid}',
-                                                    // '${controller.jobAssociatedModelsList![0]?.permit_id != null ? controller.jobAssociatedModelsList![0]?.permit_id.toString() ?? '' : ''}',
-                                                    // "${JobStatusData.getStatusStringFromInt(controller.jobAssociatedModelsList![0]?.current_status)}",
-                                                    // 'Action',
-                                                  ],
-                                                ].map((record) {
-                                                  return TableViewRow(
-                                                    height: 90,
-                                                    cells: record.map((value) {
-                                                      return TableViewCell(
-                                                        child: value == "Action"
-                                                            ? Wrap(children: [
-                                                                if (JobStatusData.getStatusStringFromInt(controller
-                                                                        .jobDetailsModel
-                                                                        .value
-                                                                        ?.status) ==
-                                                                    AppConstants
-                                                                        .kJobStatusLinkedToPermit)
-                                                                  TableActionButton(
-                                                                    color: ColorValues
-                                                                        .appPurpleColor,
-                                                                    icon: Icons
-                                                                        .add,
-                                                                    message:
-                                                                        "Job Card",
-                                                                    onPress: () =>
-                                                                        controller
-                                                                            .goToJobCardScreen(),
-                                                                  ),
-                                                              ])
-                                                            : Text(value),
-                                                      );
-                                                    }).toList(),
-                                                  );
-                                                }).toList(),
-                                              ),
-                                            )
-                                          : Container(
-                                              padding: EdgeInsets.only(top: 40),
-                                              child: Row(
-                                                crossAxisAlignment:
-                                                    CrossAxisAlignment.center,
-                                                mainAxisAlignment:
-                                                    MainAxisAlignment.center,
-                                                children: [
-                                                  Text(
-                                                      "Not add the any matarial please add the material first"),
-                                                  TableActionButton(
-                                                    color: ColorValues
-                                                        .appPurpleColor,
-                                                    icon: Icons.add,
-                                                    message: "Add Material",
-                                                    onPress: () => controller
-                                                        .goToAddMrsScreen(),
-                                                  ),
-                                                ],
-                                              ))
-                                    ],
-                                  ),
-                                ),
+                                                      margin:
+                                                          Dimens.edgeInsets20,
+                                                      height: 250,
+                                                      width:
+                                                          MediaQuery.of(context)
+                                                                  .size
+                                                                  .width /
+                                                              1.2,
+                                                      decoration: BoxDecoration(
+                                                        border: Border.all(
+                                                          color: ColorValues
+                                                              .lightGreyColorWithOpacity35,
+                                                          width: 1,
+                                                        ),
+                                                        boxShadow: [
+                                                          BoxShadow(
+                                                            color: ColorValues
+                                                                .appBlueBackgroundColor,
+                                                            spreadRadius: 2,
+                                                            blurRadius: 5,
+                                                            offset:
+                                                                Offset(0, 2),
+                                                          ),
+                                                        ],
+                                                      ),
+                                                      child: Column(
+                                                        children: [
+                                                          Padding(
+                                                            padding:
+                                                                const EdgeInsets
+                                                                    .all(10.0),
+                                                            child: Row(
+                                                              children: [
+                                                                Text(
+                                                                  "Material Issue / Used",
+                                                                  style: Styles
+                                                                      .blue700,
+                                                                ),
+                                                              ],
+                                                            ),
+                                                          ),
+                                                          Divider(
+                                                            color: ColorValues
+                                                                .greyLightColour,
+                                                          ),
+                                                          Expanded(
+                                                            child:
+                                                                ScrollableTableView(
 
+                                                              columns: [
+                                                               "Job Card ID",
+                                                               "Mrs ID",
+                                                               "Mrs Items List ",
+                                                               "Action",
+                                                                
+                                                              ].map((column) {
+                                                                return TableViewColumn(
+                                                                
+                                                                  label: column,
+                                                                  minWidth:
+                                                                      Get.width *
+                                                                          0.15,
+                                                                );
+                                                              }).toList(),
+                                                              rows: [
+                                                                ...List
+                                                                    .generate(
+                                                                  controller
+                                                                          .listMrsByJobId
+                                                                          ?.length ??
+                                                                      0,
+                                                                  (index) {
+                                                                    var getJobsLinkedToPermitList =
+                                                                        controller
+                                                                            .listMrsByJobId?[index];
+                                                                    return [
+                                                                      '${getJobsLinkedToPermitList?.jobCardId}',
+                                                                      '${getJobsLinkedToPermitList?.mrsId}',
+                                                                      '${getJobsLinkedToPermitList?.mrsItems ?? ''}',
+                                                                      'Action',
+                                                                    ];
+                                                                  },
+                                                                ),
+                                                              ].map((record) {
+                                                                return TableViewRow(
+                                                                  height: 40,
+                                                                  cells: record
+                                                                      .map(
+                                                                          (value) {
+                                                                    return TableViewCell(
+                                                                      child: value == 'Action'
+                                                                      ?GestureDetector(
+                                                                        onTap: () {
+                                                                          // controller.viewJobDetails();
+                                                                        },
+                                                                        child: Text(value,   
+                                                                        style:
+                                                                              TextStyle(
+                                                                            decoration:
+                                                                                TextDecoration.underline,
+                                                                            decorationStyle:
+                                                                                TextDecorationStyle.solid,
+                                                                            color: Color.fromARGB(
+                                                                                255,
+                                                                                5,
+                                                                                92,
+                                                                                163),
+                                                                          ),),
+                                                                      )
+                                                                      :Text(value)
+
+                                                                    );
+                                                                  }).toList(),
+                                                                );
+                                                              }).toList(),
+                                                            ),
+                                                          ),
+                                                        ],
+                                                      ),
+                                                    ),
                                 Dimens.boxHeight30,
                                 // (controller.historyLog != null &&
                                 //     controller.historyLog!.isNotEmpty)

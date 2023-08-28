@@ -2179,6 +2179,44 @@ class ConnectHelper {
     return responseModel;
   }
 
+
+   Future<ResponseModel> getJobsLinkdToPermitList({
+    String? auth,
+    int? permitId,
+    bool? isLoading,
+  }) async {
+    var responseModel = await apiWrapper.makeRequest(
+      'Job/GetJobListByPermitId?permitId=$permitId',
+      Request.get,
+      null,
+      isLoading ?? false,
+      {
+        'Authorization': 'Bearer $auth',
+      },
+    );
+    return responseModel;
+  }
+
+
+  Future<ResponseModel> getMrsListByModule({
+    String? auth,
+    int? jobId,
+    bool? isLoading,
+  }) async {
+    var responseModel = await apiWrapper.makeRequest(
+      'MRS/getMRSListByModule?jobId=$jobId',
+      Request.get,
+      null,
+      isLoading ?? false,
+      {
+        'Authorization': 'Bearer $auth',
+      },
+    );
+    return responseModel;
+  }
+
+
+
   Future<ResponseModel> createModuleList({
     required String auth,
     bool? isLoading,

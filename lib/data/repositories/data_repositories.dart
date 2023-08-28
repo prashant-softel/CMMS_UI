@@ -1310,6 +1310,31 @@ class DataRepository extends DomainRepository {
     );
   }
 
+   Future<ResponseModel> getJobsLinkdToPermitList({
+    String? auth,
+    int? permitId,
+    bool? isLoading,
+  }) async {
+    return await connectHelper.getJobsLinkdToPermitList(
+      auth: auth,
+      permitId: permitId,
+      isLoading: isLoading,
+    );
+  }
+
+
+   Future<ResponseModel> getMrsListByModule({
+    String? auth,
+    int? jobId,
+    bool? isLoading,
+  }) async {
+    return await connectHelper.getMrsListByModule(
+      auth: auth,
+      jobId: jobId,
+      isLoading: isLoading,
+    );
+  }
+
   Future<ResponseModel> deleteCkeckpoint({
     auth,
     bool? isLoading,

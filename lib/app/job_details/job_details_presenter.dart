@@ -1,3 +1,5 @@
+import 'package:cmms/domain/models/mrs_list_by_jobId.dart';
+
 import '../../domain/models/job_details_model.dart';
 import '../../domain/models/new_permit_list_model.dart';
 import '../../domain/usecases/job_details_usecase.dart';
@@ -42,6 +44,15 @@ class JobDetailsPresenter {
       await jobDetailsUsecase.getPermitList(
         facilityId: facilityId,
         selfView: selfView,
+        isLoading: isLoading,
+      );
+
+   Future<List<MRSListByJobIdModel>?> getMrsListByModule(
+    jobId,
+    isLoading,
+  ) async =>
+      await jobDetailsUsecase.getMrsListByModule(
+        jobId: jobId,
         isLoading: isLoading,
       );
 

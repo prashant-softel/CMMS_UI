@@ -1,5 +1,6 @@
 import 'package:cmms/app/constant/constant.dart';
 import 'package:cmms/app/facility/facility_presenter.dart';
+import 'package:cmms/domain/models/mrs_list_by_jobId.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 
@@ -32,6 +33,9 @@ class JobDetailsController extends GetxController {
   Rx<JobDetailsModel?> jobDetailsModel = JobDetailsModel().obs;
   RxList<JobAssociatedModel?>? jobAssociatedModelsList =
       <JobAssociatedModel?>[].obs;
+  RxList<MRSListByJobIdModel?>? listMrsByJobId =
+      <MRSListByJobIdModel?>[].obs;
+      
   // Rx<JobAssociatedModel?> jobAssociatedModel = JobAssociatedModel().obs;
   Rx<JobModel?> statusJobmodel = JobModel().obs;
   RxList<AssociatedPermit>? associatedPermitList = <AssociatedPermit>[].obs;
@@ -89,6 +93,7 @@ class JobDetailsController extends GetxController {
       getJobDetails(jobId.value);
 
       getjobDetailsModel(jobId.value);
+      getMrsListByModule(jobId: jobId.value);
 
       isDataLoading.value = false;
       textControllers =
@@ -185,6 +190,25 @@ class JobDetailsController extends GetxController {
       Utility.showDialog(e.toString() + 'getjobDetailsModel');
     }
   }
+
+  Future<void> getMrsListByModule({required int jobId}) async {
+    /// TODO: CHANGE THESE VALUES
+    // int moduleType = 81;
+    // // int tempModuleType = 21;
+    // int id = Get.arguments;
+    //
+    listMrsByJobId?.value = await jobDetailsPresenter.getMrsListByModule(
+         
+          jobId,
+          true,
+        ) ??
+        [];
+    update(["JobsLinkdToPermitList"]);
+  }
+
+
+
+
 
   void goToEditJobScreen(int? _jobId) {
     Get.toNamed(Routes.editJob, arguments: {'jobId': _jobId});

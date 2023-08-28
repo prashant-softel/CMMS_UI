@@ -340,6 +340,7 @@ class ModuleCleaningListExecution
                                               ),
                                             ].map((record) {
                                               return TableViewRow(
+                                                
                                                 onTap: () {
                                                    controller.viewMCExecution(
                                                                       id: int.tryParse(
