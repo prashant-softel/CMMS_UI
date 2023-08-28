@@ -6,13 +6,19 @@ import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:get/get.dart';
 import 'package:scrollable_table_view/scrollable_table_view.dart';
 
-class MrsViewContentWeb extends GetView<MrsViewController> {
-  MrsViewContentWeb({Key? key}) : super(key: key);
-  final MrsViewController controller = Get.find();
+import 'package:pdf/widgets.dart' as pw;
 
-  @override
-  Widget build(BuildContext context) {
-    return Obx(
+import 'package:printing/printing.dart';
+
+import 'package:pdf/pdf.dart';
+// class MrsViewContentWeb extends GetView<MrsViewController> {
+//   MrsViewContentWeb({Key? key}) : super(key: key);
+//   final MrsViewController controller = Get.find();
+
+//   @override
+//   Widget build(BuildContext context) {
+//     return
+buildPrintableData(controller) => Obx(
       () => Container(
         color: Color.fromARGB(255, 234, 236, 238),
         width: Get.width,
@@ -394,7 +400,9 @@ class MrsViewContentWeb extends GetView<MrsViewController> {
                           child: CustomElevatedButton(
                             backgroundColor: ColorValues.printColor,
                             text: "Print",
-                            onPressed: () {},
+                            onPressed: () {
+                              controller.printDoc(controller);
+                            },
                           ),
                         ),
                       )
@@ -407,5 +415,16 @@ class MrsViewContentWeb extends GetView<MrsViewController> {
         ),
       ),
     );
-  }
+//   }
+// }
+
+Future<void> printDoc(controller) async {
+  final doc = pw.Document();
+  doc.addPage(pw.Page(
+      pageFormat: PdfPageFormat.a4,
+      build: (pw.Context context) {
+        return buildPrintableData(controller);
+      }));
+  await Printing.layoutPdf(
+      onLayout: (PdfPageFormat format) async => doc.save());
 }

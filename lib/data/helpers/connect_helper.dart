@@ -4749,4 +4749,21 @@ class ConnectHelper {
           'Authorization': 'Bearer $auth',
         },
       );
+  Future<ResponseModel> createReturnMrs({
+    required String auth,
+    createReturnMrsJsonString,
+    bool? isLoading,
+  }) async {
+    var responseModel = await apiWrapper.makeRequest(
+      'MRS/ReturnMRS',
+      Request.post,
+      createReturnMrsJsonString,
+      isLoading ?? false,
+      {
+        'Content-Type': 'application/json',
+        'Authorization': 'Bearer $auth',
+      },
+    );
+    return responseModel;
+  }
 }

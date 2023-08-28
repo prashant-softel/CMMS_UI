@@ -99,19 +99,3 @@ class Equipments {
         "id": id,
       };
 }
-
-class Credentials {
-  String? user_name;
-  String? password;
-
-  Credentials({this.user_name, this.password});
-
-  factory Credentials.fromJson(Map<String, dynamic> json) {
-    return Credentials(
-        password: json['password'], user_name: json['user_name']);
-  }
-  Map<String, dynamic> toJson() => {
-        "password": password,
-        "user_name": user_name,
-      };
-}

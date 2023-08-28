@@ -1,7 +1,6 @@
 import 'package:cmms/app/app.dart';
 import 'package:cmms/app/role_notification/role_notification_presenter.dart';
-import 'package:cmms/domain/models/access_level_model.dart';
-import 'package:cmms/domain/models/save_role_access_model.dart';
+
 import 'package:get/get.dart';
 
 import '../../domain/models/get_notification_model.dart';
@@ -79,7 +78,6 @@ class RoleNotificationController extends GetxController {
   Future<void> getRoleNotificationList({int? roleId, bool? isloading}) async {
     final _notificationModel = await roleNotificationPresenter
         .getRoleNotificationList(roleId: roleId, isLoading: isloading);
-    print({"ddddd", _notificationModel});
     if (_notificationModel != null) {
       notificationModel.value = _notificationModel;
       notificationList.value = notificationModel.value?.notification_list ?? [];

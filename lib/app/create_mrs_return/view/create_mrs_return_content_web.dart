@@ -52,7 +52,8 @@ class CreateMrsReturnContentWeb extends GetView<CreateMrsReturnController> {
                   child: Text(" / STOCK MANAGEMENT ",
                       style: Styles.greyMediumLight12),
                 ),
-                Text(" / NEW MATERIAL SLIP ", style: Styles.greyMediumLight12)
+                Text(" / NEW RETURN MATERIAL SLIP ",
+                    style: Styles.greyMediumLight12)
               ],
             ),
           ),
@@ -67,7 +68,7 @@ class CreateMrsReturnContentWeb extends GetView<CreateMrsReturnController> {
                     Padding(
                       padding: const EdgeInsets.all(10.0),
                       child: Text(
-                        "New Material Requisition Slip",
+                        "New Return Material Requisition Slip",
                         style: Styles.blackBold16,
                       ),
                     ),
@@ -141,9 +142,9 @@ class CreateMrsReturnContentWeb extends GetView<CreateMrsReturnController> {
                                   ),
                                 ],
                               ),
-                              width: (MediaQuery.of(context).size.width * .2),
                               child: LoginCustomTextfield(
-                                enabled: false,
+                                // enabled: false,
+                                width: (MediaQuery.of(context).size.width * .2),
                                 textController: controller.whereUsedCtrlr,
                               )),
                         ],

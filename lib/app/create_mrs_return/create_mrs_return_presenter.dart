@@ -4,20 +4,18 @@ import '../../domain/usecases/create_mrs_return_usecase.dart';
 class CreateMrsReturnPresenter {
   CreateMrsReturnPresenter(this.craetemrsReturnUsecase);
   CreateMrsReturnUsecase craetemrsReturnUsecase;
-  Future<EmployeeStockListModel?> getCmmsItemList({
-    int? facilityId,
-    bool? isLoading,
-  }) async =>
+  Future<EmployeeStockListModel?> getCmmsItemList(
+          {int? facilityId, bool? isLoading, int? userId}) async =>
       await craetemrsReturnUsecase.getCmmsItemList(
-        facilityId: facilityId ?? 0,
-        isLoading: isLoading ?? false,
-      );
-  Future<Map<String, dynamic>?> createMrs({
-    createMrsJsonString,
+          facilityId: facilityId ?? 0,
+          isLoading: isLoading ?? false,
+          userId: userId);
+  Future<Map<String, dynamic>?> createReturnMrs({
+    createReturnMrsJsonString,
     required bool isLoading,
   }) async {
-    return craetemrsReturnUsecase.createMrs(
-      createMrsJsonString: createMrsJsonString,
+    return craetemrsReturnUsecase.createReturnMrs(
+      createReturnMrsJsonString: createReturnMrsJsonString,
       isLoading: isLoading,
     );
   }
