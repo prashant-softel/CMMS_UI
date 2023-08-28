@@ -4010,7 +4010,7 @@ class ConnectHelper {
     required business_id,
   }) async {
     var responseModel = await apiWrapper.makeRequest(
-      'Facility/DeleteFacility?id=$business_id',
+      'Facility/DeleteFacility?facility_id=$business_id',
       Request.delete,
       business_id,
       isLoading ?? false,
