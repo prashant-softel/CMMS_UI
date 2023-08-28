@@ -5,20 +5,19 @@ import '../models/employe_stock_model.dart';
 class CreateMrsReturnUsecase {
   CreateMrsReturnUsecase(this.repository);
   Repository repository;
-  Future<EmployeeStockListModel?> getCmmsItemList({
-    int? facilityId,
-    bool? isLoading,
-  }) async =>
+  Future<EmployeeStockListModel?> getCmmsItemList(
+          {int? facilityId, bool? isLoading, int? userId}) async =>
       await repository.getCmmsItemList(
         facilityId,
         isLoading,
+        userId,
       );
-  Future<Map<String, dynamic>> createMrs({
-    createMrsJsonString,
+  Future<Map<String, dynamic>> createReturnMrs({
+    createReturnMrsJsonString,
     bool? isLoading,
   }) async =>
-      await repository.createMrs(
-        createMrsJsonString,
+      await repository.createReturnMrs(
+        createReturnMrsJsonString,
         isLoading,
       );
 }

@@ -6958,10 +6958,10 @@ class Repository {
   Future<EmployeeStockListModel?> getCmmsItemList(
     int? facilityId,
     bool? isLoading,
+    int? userId,
   ) async {
     try {
       final auth = await getSecuredValue(LocalKeys.authToken);
-      int userId = varUserAccessModel.value.user_id ?? 0;
 
       final res = await _dataRepository.getCmmsItemList(
           auth: auth,
@@ -6981,6 +6981,41 @@ class Repository {
     } catch (error) {
       print(error.toString());
       return null;
+    }
+  }
+
+  Future<Map<String, dynamic>> createReturnMrs(
+    createReturnMrsJsonString,
+    bool? isLoading,
+  ) async {
+    try {
+      final auth = await getSecuredValue(LocalKeys.authToken);
+      final res = await _dataRepository.createReturnMrs(
+        auth: auth,
+        createReturnMrsJsonString: createReturnMrsJsonString,
+        isLoading: isLoading ?? false,
+      );
+
+      var resourceData = res.data;
+
+      print('Response Create Goods order : ${resourceData}');
+
+      if (!res.hasError) {
+        if (res.errorCode == 200) {
+          var responseMap = json.decode(res.data);
+          Fluttertoast.showToast(
+              msg: " Mrs Return Add Successfully...", fontSize: 16.0);
+
+          return responseMap;
+        }
+      } else {
+        Utility.showDialog(res.errorCode.toString() + 'createReturnMrs');
+        //return '';
+      }
+      return Map();
+    } catch (error) {
+      print(error.toString());
+      return Map();
     }
   }
 

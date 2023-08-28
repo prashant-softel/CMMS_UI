@@ -33,8 +33,8 @@ class UserListController extends GetxController {
     }
 
     userList.value = filteredData
-        .where((item) =>
-            item!.user_name!.toLowerCase().contains(keyword.toLowerCase()))
+        .where(
+            (item) => item!.name!.toLowerCase().contains(keyword.toLowerCase()))
         .toList();
     update(['user_list']);
   }

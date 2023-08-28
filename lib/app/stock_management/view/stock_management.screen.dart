@@ -160,35 +160,8 @@ class StockManagementDashboardScreen
                         _stockManagementList(
                             tittle: "Employee Stock Report",
                             ontap: () {
-                              //  Get.offNamed(Routes.purchaseGoodsorder);
+                              Get.toNamed(Routes.employeeStockReport);
                             }),
-
-                        // _stockManagementList(
-                        //     tittle: "MRS List",
-                        //     ontap: () {
-                        //       Get.offNamed(Routes.mrsListScreen);
-                        //
-                        //       // Get.toNamed(
-                        //       //     Routes.preventiveMaintenanceMapping,
-                        //       //     );
-                        //       //    controller.pmMapping();
-                        //     }),
-                        // _stockManagementList(
-                        //     tittle: "MRS Return",
-                        //     ontap: () {
-                        //       Get.offNamed(Routes.returnMrsList);
-                        //     }),
-                        // _stockManagementList(
-                        //   tittle: "S2S Material Transfer",
-                        //   // ontap: () {
-                        //   //   controller.pmTask();
-                        //   // }
-                        // ),
-                        // _stockManagementList(
-                        //     tittle: "Purchase Orders Request",
-                        //     ontap: () {
-                        //       Get.offNamed(Routes.GoodsOrdersReqDetailsScreen);
-                        //     }),
                       ],
                     ),
                     GridView.count(
@@ -202,31 +175,10 @@ class StockManagementDashboardScreen
                           ? (itemWidth / itemHeight)
                           : (itemWidth / itemHeightWeb),
                       children: <Widget>[
-                        // _stockManagementList(
-                        //     tittle: "Stock List",
-                        //     ontap: () {
-                        //       controller.createChecklist();
-                        //     }),
-                        // _stockManagementList(tittle: "Plant Stock"),
-                        //
-                        // //  if (Responsive.isDesktop(context))
-                        // _stockManagementList(
-                        //     tittle: "Goods Order  List",
-                        //     ontap: () {
-                        //       Get.toNamed(
-                        //         Routes.stockManagementGoodsOrdersScreen,
-                        //       );
-                        //       controller.checkPoint();
-                        //     }),
                         _stockManagementList(
                             tittle: "MRS List",
                             ontap: () {
                               Get.offNamed(Routes.mrsListScreen);
-
-                              // Get.toNamed(
-                              //     Routes.preventiveMaintenanceMapping,
-                              //     );
-                              //    controller.pmMapping();
                             }),
                         _stockManagementList(
                             tittle: "MRS Return",
@@ -244,12 +196,11 @@ class StockManagementDashboardScreen
                             ontap: () {
                               Get.offNamed(Routes.purchaseGoodsorder);
                             }),
-
-                        // _stockManagementList(
-                        //     tittle: "Purchase Orders Request",
-                        //     ontap: () {
-                        //       Get.offNamed(Routes.GoodsOrdersReqDetailsScreen);
-                        //     }),
+                        _stockManagementList(
+                            tittle: "Faulty Material Report",
+                            ontap: () {
+                              Get.offNamed(Routes.purchaseGoodsorder);
+                            }),
                       ],
                     ),
                     Container(

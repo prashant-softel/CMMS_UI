@@ -25,6 +25,7 @@ import 'package:cmms/app/create_preventive_checklist/view/create_preventive_scre
 import 'package:cmms/app/edit_mrs/view/edit_mrs_screen.dart';
 import 'package:cmms/app/edit_warranty_claim/edit_%20warranty_claim_binding.dart';
 import 'package:cmms/app/edit_warranty_claim/view/edit_warranty_claim_content_web.dart';
+import 'package:cmms/app/employee_stock_report/view/employee_stock_report_screen.dart';
 import 'package:cmms/app/escalation_matrix_list/escalation_matrix_list_binding.dart';
 import 'package:cmms/app/escalation_matrix_list/escalation_matrix_list_screen.dart';
 import 'package:cmms/app/incident_report_list/incident_report_list_binding.dart';
@@ -111,6 +112,7 @@ import '../calibration_certificate/calibration_certificate_binding.dart';
 import '../calibration_certificate/view/calibration_certificate_screen.dart';
 import '../change_password/change_password_binding.dart';
 import '../change_password/view/change_password_screen.dart';
+import '../employee_stock_report/employee_stock_report_binding.dart';
 import '../insurance_status/insurance_status_listContent_binding.dart';
 import '../insurance_status/view/insurance_status_listContent_screen.dart';
 // import 'package:cmms/warranty_claim_list/warranty_claim_list_binding.dart';
@@ -813,6 +815,11 @@ class AppPages {
       name: _Paths.plantStockReport,
       page: PlantStockReportScreen.new,
       binding: PlantStockReportBinding(),
+    ),
+    GetPage<dynamic>(
+      name: _Paths.employeeStockReport,
+      page: EmployeeStockReportScreen.new,
+      binding: EmployeeStockReportBinding(),
     ),
   ];
 }

@@ -2925,5 +2925,15 @@ class DataRepository extends DomainRepository {
         userId: userId);
   }
 
+  Future<ResponseModel> createReturnMrs({
+    required String auth,
+    createReturnMrsJsonString,
+    bool? isLoading,
+  }) async =>
+      await connectHelper.createReturnMrs(
+        auth: auth,
+        createReturnMrsJsonString: createReturnMrsJsonString,
+        isLoading: isLoading ?? false,
+      );
 //end
 }

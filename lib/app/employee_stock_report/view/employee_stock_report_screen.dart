@@ -1,16 +1,14 @@
-import 'package:cmms/app/home/widgets/home_drawer.dart';
-import 'package:cmms/app/mrs_view/mrs_view_controller.dart';
-import 'package:cmms/app/mrs_view/view/mrs_view__content_web.dart';
-import 'package:cmms/app/theme/dimens.dart';
+import 'package:cmms/app/employee_stock_report/employee_stock_report_controller.dart';
+import 'package:cmms/app/employee_stock_report/view/employee_stock_report_content_web.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-
 import '../../home/widgets/header_widget.dart';
+import '../../home/widgets/home_drawer.dart';
+import '../../theme/dimens.dart';
 import '../../utils/responsive.dart';
 
-class MrsViewScreen extends GetView<MrsViewController> {
-  MrsViewScreen({super.key});
-  final MrsViewController controller = Get.find();
+class EmployeeStockReportScreen extends GetView<EmployeeStockReportController> {
+  EmployeeStockReportScreen({super.key});
 
   ///
   @override
@@ -24,7 +22,7 @@ class MrsViewScreen extends GetView<MrsViewController> {
               automaticallyImplyLeading: false,
             )
           : AppBar(
-              title: Text('Preventive Check Point'),
+              title: Text('Module List'),
               centerTitle: true,
               elevation: 0,
             ),
@@ -42,12 +40,11 @@ class MrsViewScreen extends GetView<MrsViewController> {
                     // if (Responsive.isMobile(context) ||
                     //     Responsive.isTablet(context))
                     //   Expanded(
-                    //     child: MrsViewContentMobile(),
+                    //     child: EmployeeStockReportContentMobile(),
                     //   ),
-
                     if (Responsive.isDesktop(context))
                       Expanded(
-                        child: buildPrintableData(controller),
+                        child: EmployeeStockReportContentWeb(),
                       )
                   ],
                 ),
