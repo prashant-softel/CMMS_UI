@@ -39,37 +39,43 @@ class JobModel {
             : json['assignedToName'] ?? '',
         assignedToId:
             json['assignedToId'] == null ? null : json['assignedToId'] ?? '',
-        status: json['status'] == null
+        status: json['status'] == null ? null : json['status'] ?? '',
+        latestJCStatus: json['latestJCStatus'] == null
             ? null
-            : JobStatusData.statusValues.entries
-                .firstWhere(
-                  (x) => x.value.index == json['status'] - 101,
-                  orElse: () => MapEntry("CREATED", JobStatus.JOB_CREATED),
-                )
-                .value,
+            : json['latestJCStatus'] ?? '',
+        latestJCStatusShort: json['latestJCStatusShort'] == null
+            ? null
+            : json['latestJCStatusShort'] ?? '',
+        // : JobStatusData.statusValues.entries
+        //     .firstWhere(
+        //       (x) => x.value.index == json['latestJCStatus'] - 101,
+        //       orElse: () => MapEntry("CREATED", JobStatus.JOB_CREATED),
+        //     )
+        //     .value,
       );
 
   ///
-  JobModel({
-    this.id,
-    this.userId,
-    this.facilityId,
-    this.facilityName,
-    this.jobDate,
-    this.equipmentCat,
-    this.workingArea,
-    this.description,
-    this.jobDetails,
-    this.workType,
-    this.raisedBy,
-    this.raisedByName,
-    this.breakdownTime,
-    this.breakdownType,
-    this.permitId,
-    this.assignedToName,
-    this.assignedToId,
-    this.status,
-  });
+  JobModel(
+      {this.id,
+      this.userId,
+      this.facilityId,
+      this.facilityName,
+      this.jobDate,
+      this.equipmentCat,
+      this.workingArea,
+      this.description,
+      this.jobDetails,
+      this.workType,
+      this.raisedBy,
+      this.raisedByName,
+      this.breakdownTime,
+      this.breakdownType,
+      this.permitId,
+      this.assignedToName,
+      this.assignedToId,
+      this.status,
+      this.latestJCStatus,
+      this.latestJCStatusShort});
 
   int? id;
   int? userId;
@@ -88,8 +94,9 @@ class JobModel {
   String? permitId;
   String? assignedToName;
   int? assignedToId;
-
-  JobStatus? status;
+  int? status;
+  int? latestJCStatus;
+  String? latestJCStatusShort;
 
   Map<String, dynamic> toJson() => {
         'id': id,
@@ -109,10 +116,14 @@ class JobModel {
         'permitId': permitId,
         'assignedToName': assignedToName,
         'assignedToId': assignedToId,
-        'status': JobStatusData.statusValues.entries
-            .firstWhere((x) => x.value == status,
-                orElse: () => MapEntry("CREATED", JobStatus.JOB_CREATED))
-            .key,
+        'latestJCStatus': latestJCStatus,
+        'latestJCStatusShort': latestJCStatusShort,
+        'status': status
+
+        // 'latestJCStatus': JobStatusData.statusValues.entries
+        //     .firstWhere((x) => x.value == status,
+        //         orElse: () => MapEntry("CREATED", JobStatus.JOB_CREATED))
+        //     .key,
       };
 
   ///

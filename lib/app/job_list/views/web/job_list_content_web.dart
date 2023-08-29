@@ -27,37 +27,37 @@ class JobListContentWeb extends StatelessWidget {
       CustomAppBar(
         title: 'Job List',
         action: Row(children: [
-          ActionButton(
-            icon: Icons.download,
-            label: 'BM Report',
-            onPressed: () {
-              if (kIsWeb) {
-                controller.exportToExcelWeb();
-              }
-            },
-            color: ColorValues.appYellowColor,
-          ),
-          Dimens.boxWidth10,
-          ActionButton(
-            icon: Icons.upload,
-            label: 'Pending Jobs',
-            onPressed: () {},
-            color: ColorValues.appDarkBlueColor.withOpacity(0.3),
-          ),
-          Dimens.boxWidth10,
-          ActionButton(
-            icon: Icons.add,
-            label: 'Created By Me'.tr,
-            onPressed: () {},
-            color: ColorValues.appLightBlueColor,
-          ),
-          Dimens.boxWidth10,
-          ActionButton(
-            icon: Icons.close,
-            label: 'Assigned To Me'.tr,
-            onPressed: () async {},
-            color: ColorValues.appGreenColor,
-          ),
+          // ActionButton(
+          //   icon: Icons.download,
+          //   label: 'BM Report',
+          //   onPressed: () {
+          //     if (kIsWeb) {
+          //       controller.exportToExcelWeb();
+          //     }
+          //   },
+          //   color: ColorValues.appYellowColor,
+          // ),
+          // Dimens.boxWidth10,
+          // ActionButton(
+          //   icon: Icons.upload,
+          //   label: 'Pending Jobs',
+          //   onPressed: () {},
+          //   color: ColorValues.appDarkBlueColor.withOpacity(0.3),
+          // ),
+          // Dimens.boxWidth10,
+          // ActionButton(
+          //   icon: Icons.add,
+          //   label: 'Created By Me'.tr,
+          //   onPressed: () {},
+          //   color: ColorValues.appLightBlueColor,
+          // ),
+          // Dimens.boxWidth10,
+          // ActionButton(
+          //   icon: Icons.close,
+          //   label: 'Assigned To Me'.tr,
+          //   onPressed: () async {},
+          //   color: ColorValues.appGreenColor,
+          // ),
           Dimens.boxWidth10,
           varUserAccessModel.value.access_list!
                       .where((e) => e.feature_id == 2 && e.add == 1)
@@ -276,8 +276,8 @@ class JobDataSource extends DataTableSource {
     final jobDetails = filteredJobList[index];
 
     controller.jobId.value = jobDetails?.id ?? 0;
-    var _statusString =
-        JobStatusData.getStatusStringFromStatusEnumValue(jobDetails?.status);
+    // var _statusString =
+    //     JobStatusData.getStatusStringFromStatusEnumValue(jobDetails?.status);
 
     ///
     return DataRow.byIndex(
@@ -298,11 +298,12 @@ class JobDataSource extends DataTableSource {
                 padding: EdgeInsets.symmetric(vertical: 2, horizontal: 5),
                 margin: EdgeInsets.only(top: 5),
                 decoration: BoxDecoration(
-                  color: JobStatusData.getStatusColor(_statusString),
+                  color: ColorValues
+                      .addNewColor, //JobStatusData.getStatusColor(_statusString),
                   borderRadius: BorderRadius.circular(5),
                 ),
                 child: Text(
-                  _statusString,
+                  '${jobDetails?.latestJCStatusShort ?? ""}${jobDetails?.latestJCStatus.toString() ?? ""}',
                   style: TextStyle(color: Colors.white),
                 ),
               ),

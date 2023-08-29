@@ -23,6 +23,8 @@ class MrsViewController extends GetxController {
     try {
       await setMrsId();
       if (mrsId != 0) {
+        print({"fghvjbggjhjgk", mrsId});
+
         await getMrsDetails(mrsId: mrsId.value, isloading: true);
       }
       super.onInit();

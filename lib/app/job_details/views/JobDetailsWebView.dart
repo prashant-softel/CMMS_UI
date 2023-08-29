@@ -139,19 +139,15 @@ class JobDetailsWebView extends GetView<JobDetailsController> {
                                             CrossAxisAlignment.end,
                                         children: [
                                           Text(
+                                            "Job Title",
+                                            style: Styles.black14,
+                                          ),
+                                          Text(
                                             "Plant Name: ",
                                             style: Styles.black14,
                                           ),
                                           Text(
-                                            "Block Name: ",
-                                            style: Styles.black14,
-                                          ),
-                                          Text(
                                             "Equipment Categories ",
-                                            style: Styles.black14,
-                                          ),
-                                          Text(
-                                            "Equipment Name ",
                                             style: Styles.black14,
                                           ),
                                           Text(
@@ -170,11 +166,12 @@ class JobDetailsWebView extends GetView<JobDetailsController> {
                                             CrossAxisAlignment.start,
                                         children: [
                                           Text(
-                                              "${controller.jobDetailsModel.value?.facilityName ?? ""}",
+                                              "${controller.jobDetailsModel.value?.jobTitle ?? ""}",
                                               style: Styles.blue14),
                                           Text(
-                                              " ${controller.jobDetailsModel.value?.blockName ?? ""}",
+                                              "${controller.jobDetailsModel.value?.facilityName ?? ""}",
                                               style: Styles.blue14),
+
                                           // Text(
                                           //     "${controller.jobDetailsModel
                                           //         .value?.workingAreaList !=
@@ -192,8 +189,6 @@ class JobDetailsWebView extends GetView<JobDetailsController> {
                                               "${controller.jobDetailsModel.value?.equipmentCatList != null ? controller.jobDetailsModel.value?.equipmentCatList?.map<String>((item) => item.equipmentCatName.toString()).toList() : []}",
                                               style: Styles.blue14),
 
-                                          Text(
-                                              "${"${controller.jobDetailsModel.value?.workingAreaList != null ? controller.jobDetailsModel.value?.workingAreaList?.map<String>((item) => item.workingAreaName.toString()).toList() : []}"}"),
                                           Text(
                                               "${"${controller.jobDetailsModel.value?.workTypeList != null ? controller.jobDetailsModel.value?.workTypeList?.map<String>((item) => item.workTypeName.toString()).toList() : []}"}"),
                                           Text(
@@ -219,6 +214,14 @@ class JobDetailsWebView extends GetView<JobDetailsController> {
                                             CrossAxisAlignment.end,
                                         children: [
                                           Text(
+                                            "Block Name: ",
+                                            style: Styles.black14,
+                                          ),
+                                          Text(
+                                            "Equipment Name ",
+                                            style: Styles.black14,
+                                          ),
+                                          Text(
                                             "Raised By ",
                                             style: Styles.black14,
                                           ),
@@ -241,6 +244,11 @@ class JobDetailsWebView extends GetView<JobDetailsController> {
                                         crossAxisAlignment:
                                             CrossAxisAlignment.start,
                                         children: [
+                                          Text(
+                                              " ${controller.jobDetailsModel.value?.blockName ?? ""}",
+                                              style: Styles.blue14),
+                                          Text(
+                                              "${"${controller.jobDetailsModel.value?.workingAreaList != null ? controller.jobDetailsModel.value?.workingAreaList?.map<String>((item) => item.workingAreaName.toString()).toList() : []}"}"),
                                           Text(
                                               "${controller.jobDetailsModel.value?.createdByName ?? ""}",
                                               style: Styles.blue14),
@@ -266,6 +274,7 @@ class JobDetailsWebView extends GetView<JobDetailsController> {
                                           //           ?.status)
                                           //   }"
                                           // ),
+
                                           Text(
                                               " ${controller.jobDetailsModel.value?.breakdownTime ?? ""}",
                                               style: Styles.blue14),
@@ -392,9 +401,10 @@ class JobDetailsWebView extends GetView<JobDetailsController> {
                                 Dimens.boxHeight10,
                                 // Text(
                                 //     "${controller.jobAssociatedModelsList?.length}"),
+
                                 Container(
                                   margin: Dimens.edgeInsets20,
-                                  height: Get.height / 3.8,
+                                  height: Get.height / 3,
                                   decoration: BoxDecoration(
                                     border: Border.all(
                                       color: ColorValues
@@ -427,16 +437,13 @@ class JobDetailsWebView extends GetView<JobDetailsController> {
                                       Divider(
                                         color: ColorValues.greyLightColour,
                                       ),
-                                      controller.jobAssociatedModelsList!
-                                                  .length >
-                                              0
+                                      controller.listMrsByJobId!.length > 0
                                           ? Expanded(
                                               child: ScrollableTableView(
                                                 columns: [
-                                                  "Job ID",
+                                                  "job Card Id",
                                                   "Permit ID",
-                                                  "Job Title",
-                                                  "Job Description",
+
                                                   // "BreakDown Time",
                                                   "Job Card Date",
                                                   "Status",
@@ -444,57 +451,218 @@ class JobDetailsWebView extends GetView<JobDetailsController> {
                                                 ].map((column) {
                                                   return TableViewColumn(
                                                     label: column,
-                                                    minWidth: Get.width * 0.13,
+                                                    minWidth: Get.width * 0.18,
                                                   );
                                                 }).toList(),
                                                 rows: [
-                                                  [
-                                                    '${controller.jobAssociatedModelsList![0]?.jobid}',
-                                                    '${controller.jobAssociatedModelsList![0]?.permit_id != null ? controller.jobAssociatedModelsList![0]?.permit_id.toString() ?? '' : ''}',
-                                                    '${controller.jobAssociatedModelsList![0]?.description}',
-                                                    '${controller.jobAssociatedModelsList![0]?.description}',
-                                                    '${controller.jobAssociatedModelsList![0]?.job_card_date}',
-                                                    // '${controller.jobAssociatedModelsList![0]?.status}',
-                                                    "${JobStatusData.getStatusStringFromInt(controller.jobAssociatedModelsList![0]?.current_status)}",
-                                                    'Action',
-                                                  ],
+                                                  ...List.generate(
+                                                    controller
+                                                            .jobAssociatedModelsList
+                                                            ?.length ??
+                                                        0,
+                                                    (index) {
+                                                      var getjobAssociatedModelsList =
+                                                          controller
+                                                                  .jobAssociatedModelsList?[
+                                                              index];
+                                                      return [
+                                                        '${getjobAssociatedModelsList?.jobCardId}',
+                                                        '${getjobAssociatedModelsList?.permitId}',
+                                                        '${getjobAssociatedModelsList?.jobCardDate ?? ''}',
+                                                        '${getjobAssociatedModelsList?.status_short}',
+                                                        'Action',
+                                                      ];
+                                                    },
+                                                  ),
                                                 ].map((record) {
                                                   return TableViewRow(
-                                                    height: 90,
+                                                    height: 40,
                                                     cells: record.map((value) {
                                                       return TableViewCell(
-                                                        child: value == "Action"
-                                                            ? Wrap(children: [
-                                                                if (JobStatusData.getStatusStringFromInt(controller
-                                                                        .jobDetailsModel
-                                                                        .value
-                                                                        ?.status) ==
-                                                                    AppConstants
-                                                                        .kJobStatusLinkedToPermit)
-                                                                  TableActionButton(
-                                                                    color: ColorValues
-                                                                        .appPurpleColor,
-                                                                    icon: Icons
-                                                                        .add,
-                                                                    message:
-                                                                        "Job Card",
-                                                                    onPress: () =>
-                                                                        controller
-                                                                            .goToJobCardScreen(),
-                                                                  ),
-                                                              ])
-                                                            : Text(value),
-                                                      );
+                                                          child:
+                                                              value == 'Action'
+                                                                  ? Row(
+                                                                      mainAxisAlignment:
+                                                                          MainAxisAlignment
+                                                                              .spaceEvenly,
+                                                                      children: [
+                                                                        TableActionButton(
+                                                                          color:
+                                                                              ColorValues.viewColor,
+                                                                          icon:
+                                                                              Icons.remove_red_eye,
+                                                                          message:
+                                                                              "View Job Card",
+                                                                          // onPress:
+                                                                          //     () =>
+                                                                          //         controller.goToJobCardScreen(),
+                                                                        ),
+                                                                        TableActionButton(
+                                                                            color: ColorValues
+                                                                                .appLightBlueColor,
+                                                                            icon: Icons
+                                                                                .remove_red_eye,
+                                                                            message:
+                                                                                "View Permit",
+                                                                            onPress: () =>
+                                                                                controller.viewNewPermitList(permitId: int.tryParse(record[1]))),
+                                                                        TableActionButton(
+                                                                            color:
+                                                                                ColorValues.appYellowColor,
+                                                                            icon: Icons.copy,
+                                                                            message: "Clone Permit"
+                                                                            // onPress:
+                                                                            //     () =>
+                                                                            //         controller.goToJobCardScreen(),
+                                                                            ),
+                                                                      ],
+                                                                    )
+                                                                  : Text(
+                                                                      value));
                                                     }).toList(),
                                                   );
                                                 }).toList(),
                                               ),
                                             )
-                                          : Container()
+                                          : Container(),
                                     ],
                                   ),
                                 ),
 
+                                ////
+                                ///tbstrv
+
+                                // Container(
+                                //   margin: Dimens.edgeInsets20,
+                                //   height: Get.height / 3.8,
+                                //   decoration: BoxDecoration(
+                                //     border: Border.all(
+                                //       color: ColorValues
+                                //           .lightGreyColorWithOpacity35,
+                                //       width: 1,
+                                //     ),
+                                //     boxShadow: [
+                                //       BoxShadow(
+                                //         color:
+                                //             ColorValues.appBlueBackgroundColor,
+                                //         spreadRadius: 2,
+                                //         blurRadius: 5,
+                                //         offset: Offset(0, 2),
+                                //       ),
+                                //     ],
+                                //   ),
+                                //   child: Column(
+                                //     children: [
+                                //       Padding(
+                                //         padding: const EdgeInsets.all(10.0),
+                                //         child: Row(
+                                //           children: [
+                                //             Text(
+                                //               "Associated JobCard(s) ",
+                                //               style: Styles.blue700,
+                                //             ),
+                                //           ],
+                                //         ),
+                                //       ),
+                                //       Divider(
+                                //         color: ColorValues.greyLightColour,
+                                //       ),
+                                //       controller.jobAssociatedModelsList!
+                                //                   .length >
+                                //               0
+                                //           ? Expanded(
+                                //               child: ScrollableTableView(
+                                //                 columns: [
+                                //                   "job Card Id",
+                                //                   "Permit ID",
+
+                                //                   // "BreakDown Time",
+                                //                   "Job Card Date",
+                                //                   "Status",
+                                //                   'Action',
+                                //                 ].map((column) {
+                                //                   return TableViewColumn(
+                                //                     label: column,
+                                //                     minWidth: Get.width * 0.18,
+                                //                   );
+                                //                 }).toList(),
+                                //                 rows: [
+                                //                   [
+                                //                     '${controller.jobAssociatedModelsList![0]?.jobCardId}',
+                                //                     '${controller.jobAssociatedModelsList![0]?.permitId != null ? controller.jobAssociatedModelsList![0]?.permitId.toString() ?? '' : ''}',
+
+                                //                     '${controller.jobAssociatedModelsList![0]?.jobCardDate}',
+                                //                     '${controller.jobAssociatedModelsList![0]?.status_short}',
+                                //                     // "${JobStatusData.getStatusStringFromInt(controller.jobAssociatedModelsList![0]?.status_short)}",
+                                //                     'Action',
+                                //                   ],
+                                //                 ].map((record) {
+                                //                   return TableViewRow(
+                                //                     height: 90,
+                                //                     cells: record.map((value) {
+                                //                       return TableViewCell(
+                                //                         child: value == "Action"
+                                //                             ? Wrap(children: [
+                                //                                 if (JobStatusData.getStatusStringFromInt(controller
+                                //                                         .jobDetailsModel
+                                //                                         .value
+                                //                                         ?.status) ==
+                                //                                     AppConstants
+                                //                                         .kJobStatusLinkedToPermit)
+                                //                                   Row(
+                                //                                     children: [
+                                //                                       TableActionButton(
+                                //                                         color: ColorValues
+                                //                                             .viewColor,
+                                //                                         icon: Icons
+                                //                                             .remove_red_eye,
+                                //                                         message:
+                                //                                             "View Job Card",
+                                //                                         // onPress:
+                                //                                         //     () =>
+                                //                                         //         controller.goToJobCardScreen(),
+                                //                                       ),
+                                //                                       TableActionButton(
+                                //                                           color: ColorValues
+                                //                                               .appLightBlueColor,
+                                //                                           icon: Icons
+                                //                                               .remove_red_eye,
+                                //                                           message:
+                                //                                               "View Permit",
+                                //                                           onPress: () =>
+                                //                                               controller.viewNewPermitList(permitId: int.tryParse(record[1]))),
+                                //                                       TableActionButton(
+                                //                                           color: ColorValues
+                                //                                               .appYellowColor,
+                                //                                           icon: Icons
+                                //                                               .copy,
+                                //                                           message:
+                                //                                               "Clone Permit"
+                                //                                           // onPress:
+                                //                                           //     () =>
+                                //                                           //         controller.goToJobCardScreen(),
+                                //                                           ),
+                                //                                     ],
+                                //                                   ),
+                                //                               ])
+                                //                             : Text(value),
+                                //                       );
+                                //                     }).toList(),
+                                //                   );
+                                //                 }).toList(),
+                                //               ),
+                                //             )
+                                //           : Container()
+                                //     ],
+                                //   ),
+                                // ),
+//////
+                                ///
+                                ///
+                                ///
+                                ///
+                                ///
+                                ///
                                 // Container(
                                 //   margin: Dimens.edgeInsets20,
                                 //   height: Get.height / 2,
@@ -609,126 +777,117 @@ class JobDetailsWebView extends GetView<JobDetailsController> {
                                 //   ),
                                 // ),
                                 Container(
-                                                      margin:
-                                                          Dimens.edgeInsets20,
-                                                      height: 250,
-                                                      width:
-                                                          MediaQuery.of(context)
-                                                                  .size
-                                                                  .width /
-                                                              1.2,
-                                                      decoration: BoxDecoration(
-                                                        border: Border.all(
-                                                          color: ColorValues
-                                                              .lightGreyColorWithOpacity35,
-                                                          width: 1,
-                                                        ),
-                                                        boxShadow: [
-                                                          BoxShadow(
-                                                            color: ColorValues
-                                                                .appBlueBackgroundColor,
-                                                            spreadRadius: 2,
-                                                            blurRadius: 5,
-                                                            offset:
-                                                                Offset(0, 2),
-                                                          ),
-                                                        ],
-                                                      ),
-                                                      child: Column(
-                                                        children: [
-                                                          Padding(
-                                                            padding:
-                                                                const EdgeInsets
-                                                                    .all(10.0),
-                                                            child: Row(
-                                                              children: [
-                                                                Text(
-                                                                  "Material Issue / Used",
-                                                                  style: Styles
-                                                                      .blue700,
-                                                                ),
-                                                              ],
-                                                            ),
-                                                          ),
-                                                          Divider(
-                                                            color: ColorValues
-                                                                .greyLightColour,
-                                                          ),
-                                                          Expanded(
-                                                            child:
-                                                                ScrollableTableView(
+                                  margin: Dimens.edgeInsets20,
+                                  height: Get.height / 3,
+                                  decoration: BoxDecoration(
+                                    border: Border.all(
+                                      color: ColorValues
+                                          .lightGreyColorWithOpacity35,
+                                      width: 1,
+                                    ),
+                                    boxShadow: [
+                                      BoxShadow(
+                                        color:
+                                            ColorValues.appBlueBackgroundColor,
+                                        spreadRadius: 2,
+                                        blurRadius: 5,
+                                        offset: Offset(0, 2),
+                                      ),
+                                    ],
+                                  ),
+                                  child: Column(
+                                    children: [
+                                      Padding(
+                                        padding: const EdgeInsets.all(10.0),
+                                        child: Row(
+                                          children: [
+                                            Text(
+                                              "Material Issue / Used",
+                                              style: Styles.blue700,
+                                            ),
+                                          ],
+                                        ),
+                                      ),
+                                      Divider(
+                                        color: ColorValues.greyLightColour,
+                                      ),
+                                      controller.listMrsByJobId!.length > 0
+                                          ? Expanded(
+                                              child: ScrollableTableView(
+                                                columns: [
+                                                  "Job Card ID",
+                                                  "Mrs ID",
+                                                  "Mrs Items List ",
+                                                  "Action",
+                                                ].map((column) {
+                                                  return TableViewColumn(
+                                                    label: column,
+                                                    minWidth: Get.width * 0.23,
+                                                  );
+                                                }).toList(),
+                                                rows: [
+                                                  ...List.generate(
+                                                    controller.listMrsByJobId
+                                                            ?.length ??
+                                                        0,
+                                                    (index) {
+                                                      var getJobsLinkedToPermitList =
+                                                          controller
+                                                                  .listMrsByJobId?[
+                                                              index];
+                                                      return [
+                                                        '${getJobsLinkedToPermitList?.jobCardId}',
+                                                        '${getJobsLinkedToPermitList?.mrsId}',
+                                                        '${getJobsLinkedToPermitList?.mrsItems ?? ''}',
+                                                        'Action',
+                                                      ];
+                                                    },
+                                                  ),
+                                                ].map((record) {
+                                                  return TableViewRow(
+                                                    height: 40,
+                                                    cells: record.map((value) {
+                                                      return TableViewCell(
+                                                          child: value ==
+                                                                  'Action'
+                                                              ? TableActionButton(
+                                                                  color: ColorValues
+                                                                      .viewColor,
+                                                                  icon: Icons
+                                                                      .remove_red_eye,
+                                                                  message:
+                                                                      "View MRS",
+                                                                  onPress: () {
+                                                                    String
+                                                                        mrsId =
+                                                                        record[
+                                                                            1];
+                                                                    if (mrsId !=
+                                                                        null) {
+                                                                      print({
+                                                                        "mrsId":
+                                                                            mrsId
+                                                                      });
+                                                                      Get.toNamed(
+                                                                          Routes
+                                                                              .mrsViewScreen,
+                                                                          arguments: {
+                                                                            'mrsId':
+                                                                                int.tryParse("$mrsId")
+                                                                          });
+                                                                    }
+                                                                  })
+                                                              : Text(value));
+                                                    }).toList(),
+                                                  );
+                                                }).toList(),
+                                              ),
+                                            )
+                                          : Container(),
+                                    ],
+                                  ),
+                                ),
 
-                                                              columns: [
-                                                               "Job Card ID",
-                                                               "Mrs ID",
-                                                               "Mrs Items List ",
-                                                               "Action",
-                                                                
-                                                              ].map((column) {
-                                                                return TableViewColumn(
-                                                                
-                                                                  label: column,
-                                                                  minWidth:
-                                                                      Get.width *
-                                                                          0.15,
-                                                                );
-                                                              }).toList(),
-                                                              rows: [
-                                                                ...List
-                                                                    .generate(
-                                                                  controller
-                                                                          .listMrsByJobId
-                                                                          ?.length ??
-                                                                      0,
-                                                                  (index) {
-                                                                    var getJobsLinkedToPermitList =
-                                                                        controller
-                                                                            .listMrsByJobId?[index];
-                                                                    return [
-                                                                      '${getJobsLinkedToPermitList?.jobCardId}',
-                                                                      '${getJobsLinkedToPermitList?.mrsId}',
-                                                                      '${getJobsLinkedToPermitList?.mrsItems ?? ''}',
-                                                                      'Action',
-                                                                    ];
-                                                                  },
-                                                                ),
-                                                              ].map((record) {
-                                                                return TableViewRow(
-                                                                  height: 40,
-                                                                  cells: record
-                                                                      .map(
-                                                                          (value) {
-                                                                    return TableViewCell(
-                                                                      child: value == 'Action'
-                                                                      ?GestureDetector(
-                                                                        onTap: () {
-                                                                          // controller.viewJobDetails();
-                                                                        },
-                                                                        child: Text(value,   
-                                                                        style:
-                                                                              TextStyle(
-                                                                            decoration:
-                                                                                TextDecoration.underline,
-                                                                            decorationStyle:
-                                                                                TextDecorationStyle.solid,
-                                                                            color: Color.fromARGB(
-                                                                                255,
-                                                                                5,
-                                                                                92,
-                                                                                163),
-                                                                          ),),
-                                                                      )
-                                                                      :Text(value)
-
-                                                                    );
-                                                                  }).toList(),
-                                                                );
-                                                              }).toList(),
-                                                            ),
-                                                          ),
-                                                        ],
-                                                      ),
-                                                    ),
                                 Dimens.boxHeight30,
                                 // (controller.historyLog != null &&
                                 //     controller.historyLog!.isNotEmpty)
