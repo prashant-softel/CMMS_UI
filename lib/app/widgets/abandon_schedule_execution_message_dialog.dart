@@ -9,11 +9,11 @@ import '../navigators/app_pages.dart';
 import '../theme/dimens.dart';
 import '../theme/styles.dart';
 
-class AbandonMCExecutionMessageDialog extends GetView {
+class AbandonScheduleExecutionMessageDialog extends GetView {
   String? createData;
   String? data;
 
-  AbandonMCExecutionMessageDialog({super.key, this.createData, this.data});
+  AbandonScheduleExecutionMessageDialog({super.key, this.createData, this.data});
   final ModuleCleaningListExecutionController _controller = Get.find();
 
 
@@ -27,7 +27,7 @@ class AbandonMCExecutionMessageDialog extends GetView {
         insetPadding: Dimens.edgeInsets10_0_10_0,
         contentPadding: EdgeInsets.zero,
         title: Text(
-          'Abandon Execution',
+          'Abandon Schedule Execution',
           textAlign: TextAlign.center,
           style: TextStyle(color: Colors.black),
         ),
