@@ -2808,6 +2808,17 @@ class ConnectHelper {
             auth: auth,
             fileId: jsonResponse["id"][0].toString(),
             isLoading: true);
+      } else if (importType == 3) {
+        importCheckpoint(
+          auth: auth,
+          fileId: jsonResponse["id"][0].toString(),
+          isLoading: true);
+      }
+      else if (importType == 4) {
+        importCheckpoint(
+            auth: auth,
+            fileId: jsonResponse["id"][0].toString(),
+            isLoading: true);
       }
     }
 
@@ -4797,6 +4808,41 @@ class ConnectHelper {
       Request.post,
       createReturnMrsJsonString,
       isLoading ?? false,
+      {
+        'Content-Type': 'application/json',
+        'Authorization': 'Bearer $auth',
+      },
+    );
+    return responseModel;
+  }
+  Future<ResponseModel> importCheckpoint({
+    required String auth,
+    required String fileId,
+    required bool isLoading,
+  }) async {
+    var responseModel = await apiWrapper.makeRequest(
+      'CheckList/ImportChecklistCheckpoint?file_id=$fileId',
+      Request.post,
+      null,
+      false,
+      {
+        'Content-Type': 'application/json',
+        'Authorization': 'Bearer $auth',
+      },
+    );
+    return responseModel;
+  }
+
+  Future<ResponseModel> importBusiness({
+    required String auth,
+    required String fileId,
+    required bool isLoading,
+  }) async {
+    var responseModel = await apiWrapper.makeRequest(
+      'CheckList/ImportChecklistCheckpoint?file_id=$fileId',
+      Request.post,
+      null,
+      false,
       {
         'Content-Type': 'application/json',
         'Authorization': 'Bearer $auth',

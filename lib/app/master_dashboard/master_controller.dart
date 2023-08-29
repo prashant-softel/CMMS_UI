@@ -236,4 +236,8 @@ class MastersController extends GetxController {
   Future<void> goToImportUser() async {
     Get.toNamed(Routes.importInventory, arguments: 2);
   }
+
+  Future<void> goToImportBusiness() async {
+    Get.toNamed(Routes.importInventory, arguments: 4);
+  }
 }
