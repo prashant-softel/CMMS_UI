@@ -372,6 +372,13 @@ class MastersDashboard extends GetView<MastersController> {
                                       controller.goToBusinessList();
                                     });
                               }))),
+                              OnHover(builder: (((isHovered) {
+                                return createContentTile(
+                                    title: "Business List Import",
+                                    onTap: () {
+                                      controller.goToImportBusiness();
+                                    });
+                              }))),
                             ],
                           ),
                           Container(

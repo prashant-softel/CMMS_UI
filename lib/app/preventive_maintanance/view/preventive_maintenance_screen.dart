@@ -150,6 +150,12 @@ class PreventiveScreen extends GetView<PreventiveController> {
                               );
                               //    controller.pmMapping();
                             }),
+                        _priventiveList(
+                            tittle: "Import Checklist",
+                            ontap: () {
+                              controller.importChecklist();
+
+                            }),
                       ],
                     ),
                     GridView.count(

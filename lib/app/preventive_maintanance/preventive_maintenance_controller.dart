@@ -76,4 +76,10 @@ class PreventiveController extends GetxController {
       Routes.pmExecution,
     );
   }
+
+  Future<void> importChecklist() async {
+    Get.toNamed(
+        Routes.importInventory,arguments: 3
+    );
+  }
 }

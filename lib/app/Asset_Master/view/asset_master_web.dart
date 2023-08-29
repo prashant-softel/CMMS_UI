@@ -488,7 +488,7 @@ class AssetMasterWeb extends GetView<AssetMasterController> {
                           child: Container(
                             width: Get.width * 7,
                             margin: EdgeInsets.only(left: 10, top: 30),
-                            height: Get.height,
+                            height: Get.height/1.1,
                             child: Card(
                               color: Color.fromARGB(255, 251, 252, 253),
                               elevation: 10,
@@ -653,7 +653,7 @@ class AssetMasterWeb extends GetView<AssetMasterController> {
                                           ),
                                         )
                                       : Container(
-                                          height: Get.height / 1.85,
+                                          height: Get.height / 2.08,
                                           margin: Dimens.edgeInsets20,
                                           decoration: BoxDecoration(
                                             border: Border.all(
