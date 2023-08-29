@@ -22,6 +22,7 @@ class ModuleCleaningListExecutionController extends GetxController {
   TextEditingController commentTextFieldCtrlr = TextEditingController();
 
 
+
   ///MC task list
   RxList<MCTaskListModel?> mcTaskList = <MCTaskListModel?>[].obs;
   RxList<MCTaskListModel?> filteredData = <MCTaskListModel>[].obs;
@@ -105,6 +106,10 @@ class ModuleCleaningListExecutionController extends GetxController {
       }
     }
   }
+
+
+ 
+
 
   void search(String keyword) {
     if (keyword.isEmpty) {
