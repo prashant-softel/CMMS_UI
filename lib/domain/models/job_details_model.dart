@@ -285,71 +285,69 @@ class WorkTypeList {
 
 ///
 class JobAssociatedModel {
-  JobAssociatedModel({
-    this.id,
-    this.jobCardId,
-    this.jobCardNo,
-    this.jobid,
-    this.permit_id,
-    this.permit_no,
-    this.current_status,
-    this.description,
-    this.job_assinged_to,
-    this.job_card_date,
-    this.start_time,
-    this.end_time,
-    this.lstequipmentCatList,
-  });
+  JobAssociatedModel(
+      {
+      // this.id,
+      this.jobCardId,
+      this.jobCardNo,
+      this.jobId,
+      this.permitId,
+      this.permitNo,
+      // this.current_status,
+      // this.description,
+      this.jobAssingedTo,
+      this.jobCardDate,
+      // this.start_time,
+      this.endTime,
+      this.status,
+      this.approvedStatus,
+      this.status_short});
 
-  int? id;
+  // int? id;
   int? jobCardId;
-  dynamic? jobCardNo;
-  int? jobid;
-  int? permit_id;
-  String? permit_no;
-  int? current_status;
-  String? description;
-  String? job_assinged_to;
-  dynamic? job_card_date;
-  dynamic? start_time;
-  dynamic? end_time;
-  dynamic? lstequipmentCatList;
+  String? jobCardNo;
+  int? jobId;
+  int? permitId;
+  String? permitNo;
+
+  String? jobAssingedTo;
+  String? jobCardDate;
+
+  String? endTime;
+  int? status;
+  int? approvedStatus;
+  String? status_short;
 
   factory JobAssociatedModel.fromJson(Map<String, dynamic> json) =>
       JobAssociatedModel(
-        id: json["id"] == null ? 0 : json['id'],
+        // id: json["id"] == null ? 0 : json['id'],
         jobCardId: json["jobCardId"] == null ? 0 : json['jobCardId'],
-        jobCardNo: json["jobCardNo"] == null ? 0 : json['jobCardNo'],
-        jobid: json["jobid"] == null ? 0 : json['jobid'],
-        permit_id: json["permit_id"] == null ? 0 : json['permit_id'],
-        permit_no: json["permit_no"] == null ? 0 : json['permit_no'],
-        current_status:
-            json["current_status"] == null ? 0 : json['current_status'],
-        description: json["description"] == null ? 0 : json['description'],
-        job_assinged_to:
-            json["job_assinged_to"] == null ? 0 : json['job_assinged_to'],
-        job_card_date:
-            json["job_card_date"] == null ? 0 : json['job_card_date'],
-        start_time: json["start_time"] == null ? 0 : json['start_time'],
-        end_time: json["end_time"] == null ? 0 : json['end_time'],
-        lstequipmentCatList: json["lstequipmentCatList"] == null
-            ? 0
-            : json['lstequipmentCatList'],
+        jobCardNo: json["jobCardNo"] == null ? "" : json['jobCardNo'],
+        jobId: json["jobId"] == null ? 0 : json['jobId'],
+        permitId: json["permitId"] == null ? 0 : json['permitId'],
+        permitNo: json["permitNo"] == null ? "" : json['permitNo'],
+        jobAssingedTo:
+            json["jobAssingedTo"] == null ? "" : json['jobAssingedTo'],
+        jobCardDate: json["jobCardDate"] == null ? "" : json['jobCardDate'],
+        endTime: json["endTime"] == null ? "" : json['endTime'],
+        status: json["status"] == null ? 0 : json['status'],
+        approvedStatus:
+            json["approvedStatus"] == null ? 0 : json['approvedStatus'],
+        status_short: json["status_short"] == null ? "" : json['status_short'],
       );
 
   Map<String, dynamic> toJson() => {
-        "id": id,
+        // "id": id,
         "jobCardId": jobCardId,
         "jobCardNo": jobCardNo,
-        "jobid": jobid,
-        "permit_id": permit_id,
-        "permit_no": permit_no,
-        "current_status": current_status,
-        "description": description,
-        "job_assinged_to": job_assinged_to,
-        "job_card_date": job_card_date,
-        "start_time": start_time,
-        "end_time": end_time,
-        "lstequipmentCatList": lstequipmentCatList,
+        "jobId": jobId,
+        "permitId": permitId,
+        "permitNo": permitNo,
+        "jobAssingedTo": jobAssingedTo,
+        "jobCardDate": jobCardDate,
+        "endTime": endTime,
+        "status": status,
+        "approvedStatus": approvedStatus,
+        "status_short": status_short,
       };
 }

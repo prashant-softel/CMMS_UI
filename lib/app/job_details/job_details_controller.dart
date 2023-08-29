@@ -33,9 +33,8 @@ class JobDetailsController extends GetxController {
   Rx<JobDetailsModel?> jobDetailsModel = JobDetailsModel().obs;
   RxList<JobAssociatedModel?>? jobAssociatedModelsList =
       <JobAssociatedModel?>[].obs;
-  RxList<MRSListByJobIdModel?>? listMrsByJobId =
-      <MRSListByJobIdModel?>[].obs;
-      
+  RxList<MRSListByJobIdModel?>? listMrsByJobId = <MRSListByJobIdModel?>[].obs;
+
   // Rx<JobAssociatedModel?> jobAssociatedModel = JobAssociatedModel().obs;
   Rx<JobModel?> statusJobmodel = JobModel().obs;
   RxList<AssociatedPermit>? associatedPermitList = <AssociatedPermit>[].obs;
@@ -146,7 +145,7 @@ class JobDetailsController extends GetxController {
         responseMapJobCardStarted.length > 0) {
       final _flutterSecureStorage = const FlutterSecureStorage();
 
-      await _flutterSecureStorage.delete(key: "jobId");
+      // await _flutterSecureStorage.delete(key: "jobId");
       final _jobCardId = responseMapJobCardStarted["id"][0];
       jobCardId.value = _jobCardId;
 
@@ -160,7 +159,7 @@ class JobDetailsController extends GetxController {
     try {
       jobDetailsList?.value = <JobDetailsModel>[];
       final _jobDetailsList = await jobDetailsPresenter.getJobDetails(
-          jobId: jobId, isLoading: true);
+          jobId: jobId, isLoading: false);
 
       if (_jobDetailsList != null && _jobDetailsList.isNotEmpty) {
         jobDetailsModel.value = _jobDetailsList[0];
@@ -177,7 +176,7 @@ class JobDetailsController extends GetxController {
     try {
       jobAssociatedModelsList?.value = <JobAssociatedModel>[];
       final _jobAssociatedModelsList = await jobDetailsPresenter
-          .getjobDetailsModel(jobId: jobId, isLoading: true);
+          .getjobDetailsModel(jobId: jobId, isLoading: false);
 
       if (_jobAssociatedModelsList != null &&
           _jobAssociatedModelsList.isNotEmpty) {
@@ -198,17 +197,12 @@ class JobDetailsController extends GetxController {
     // int id = Get.arguments;
     //
     listMrsByJobId?.value = await jobDetailsPresenter.getMrsListByModule(
-         
           jobId,
-          true,
+          false,
         ) ??
         [];
     update(["JobsLinkdToPermitList"]);
   }
-
-
-
-
 
   void goToEditJobScreen(int? _jobId) {
     Get.toNamed(Routes.editJob, arguments: {'jobId': _jobId});
@@ -309,6 +303,15 @@ class JobDetailsController extends GetxController {
   }) async {
     await Get.dialog<void>(PermitListTableDialog());
   }
+
+  Future<void> viewNewPermitList({int? permitId}) async {
+    Get.toNamed(Routes.viewPermitWebScreen, arguments: permitId);
+  }
+
+  // Future<void> vieMRSList({Rx<int>? mrsId}) async {
+  //   Get.toNamed(Routes.mrsViewScreen, arguments: mrsId);
+  //   print({"mrsIdsexdrcftvgybhj", mrsId});
+  // }
 
   ///
 }

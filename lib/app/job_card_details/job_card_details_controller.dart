@@ -97,16 +97,16 @@ class JobCardDetailsController extends GetxController {
 
       final _flutterSecureStorage = const FlutterSecureStorage();
 
-      await _flutterSecureStorage.delete(key: "JcId");
+      // await _flutterSecureStorage.delete(key: "JcId");
 
-      //  await setJcId();
+      await setJcId();
 
       jobCardList.value = await jobCardDetailsPresenter.getJobCardDetails(
             jobCardId: jobCardId.value,
             isLoading: true,
           ) ??
           [];
-      getHistory();
+      // getHistory();
       createPlantDetailsTableData();
 
       createJobDetailsTableData();
@@ -139,7 +139,7 @@ class JobCardDetailsController extends GetxController {
       } else {
         jobCardId.value = int.tryParse(_jobCardId) ?? 0;
       }
-      // await _flutterSecureStorage.delete(key: "JcId");
+      await _flutterSecureStorage.delete(key: "JcId");
     } catch (e) {
       Utility.showDialog(e.toString() + 'JcId');
     }

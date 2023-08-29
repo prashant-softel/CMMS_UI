@@ -32,9 +32,9 @@ class JobListContentMobile extends GetView<JobListController> {
                           final jobModel = (controller.jobList != null)
                               ? controller.jobList[index]
                               : JobModel();
-                          var _statusString =
-                              JobStatusData.getStatusStringFromStatusEnumValue(
-                                  jobModel?.status);
+                          // var _statusString =
+                          //     JobStatusData.getStatusStringFromStatusEnumValue(
+                          //         jobModel?.status);
 
                           return GestureDetector(
                             onTap: () {
@@ -80,9 +80,11 @@ class JobListContentMobile extends GetView<JobListController> {
                                                     borderRadius:
                                                         BorderRadius.circular(
                                                             10),
-                                                    color: JobStatusData
-                                                        .getStatusColor(
-                                                            _statusString),
+                                                    color:
+                                                        ColorValues.addNewColor,
+                                                    // JobStatusData
+                                                    //     .getStatusColor(
+                                                    //         _statusString),
                                                   ),
                                                   padding: const EdgeInsets
                                                       .symmetric(
@@ -91,7 +93,7 @@ class JobListContentMobile extends GetView<JobListController> {
                                                   ),
                                                   child: Center(
                                                     child: Text(
-                                                      _statusString,
+                                                      '${jobModel?.latestJCStatusShort ?? ""}${jobModel?.latestJCStatus.toString() ?? ""}',
                                                       style: const TextStyle(
                                                         color: Colors.white,
                                                       ),
