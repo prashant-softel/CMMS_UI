@@ -201,15 +201,6 @@ class NewPermitUsecase {
         isLoading: isLoading ?? false,
       );
 
-   Future<List<LinkedJobsToPermitModel>?> getJobsLinkdToPermitList({
-    
-    permitId,
-    bool? isLoading,
-  }) async =>
-      await repository.getJobsLinkdToPermitList(
-       
-        permitId,
-        isLoading,
-      );
+  
 
 }
