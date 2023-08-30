@@ -276,8 +276,8 @@ class JobDataSource extends DataTableSource {
     final jobDetails = filteredJobList[index];
 
     controller.jobId.value = jobDetails?.id ?? 0;
-    // var _statusString =
-    //     JobStatusData.getStatusStringFromStatusEnumValue(jobDetails?.status);
+    var _statusString =
+        JobStatusData.getStatusStringFromStatusEnumValue(jobDetails?.status);
 
     ///
     return DataRow.byIndex(
@@ -298,12 +298,11 @@ class JobDataSource extends DataTableSource {
                 padding: EdgeInsets.symmetric(vertical: 2, horizontal: 5),
                 margin: EdgeInsets.only(top: 5),
                 decoration: BoxDecoration(
-                  color: ColorValues
-                      .addNewColor, //JobStatusData.getStatusColor(_statusString),
+                  color: JobStatusData.getStatusColor(_statusString),
                   borderRadius: BorderRadius.circular(5),
                 ),
                 child: Text(
-                  '${jobDetails?.latestJCStatusShort ?? ""}${jobDetails?.latestJCStatus.toString() ?? ""}',
+                  _statusString,
                   style: TextStyle(color: Colors.white),
                 ),
               ),

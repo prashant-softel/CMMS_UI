@@ -308,6 +308,10 @@ class JobDetailsController extends GetxController {
     Get.toNamed(Routes.viewPermitWebScreen, arguments: permitId);
   }
 
+  Future<void> viewJobCArd({int? jobcardId}) async {
+    Get.toNamed(Routes.jobCard, arguments: jobcardId);
+    print({"jobcardvghwjbkn", jobcardId});
+  }
   // Future<void> vieMRSList({Rx<int>? mrsId}) async {
   //   Get.toNamed(Routes.mrsViewScreen, arguments: mrsId);
   //   print({"mrsIdsexdrcftvgybhj", mrsId});

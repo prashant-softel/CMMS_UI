@@ -20,7 +20,9 @@ abstract class AppConstants {
   /// JOB STATUSES
   static String kJobStatusCreated = "CREATED";
   static String kJobStatusAssigned = "ASSIGNED";
-  static String kJobStatusLinkedToPermit = "LINKED TO PERMIT";
+  static String kJobStatusLinkedToPermit =
+      "Carry Forward Request Waiting for Approval"
+          .toUpperCase(); //"LINKED TO PERMIT";
   static String kJobStatusInProgress = "IN PROGRESS";
   static String kJobStatusCaryForward = "CARRY FORWARD";
   static String kJobStatusClosed = "CLOSED";
@@ -41,7 +43,8 @@ abstract class AppConstants {
   static const String kPermitStatusCancelRequested = "CANCEL_REQUESTED";
   static const String kPermitStatusCancelRequestRejected =
       "CANCEL_REQUEST_REJECTED";
-  static const String kPermitStatusCancelRequestApproved = "PTW_CANCEL_REQUEST_APPROVED";
+  static const String kPermitStatusCancelRequestApproved =
+      "PTW_CANCEL_REQUEST_APPROVED";
   static const String kPermitStatusEdit = "EDIT";
   static const String kPermitStatusExtendRequested = "EXTEND_REQUESTED";
   static const String kPermitStatusExtendRequestApproved =

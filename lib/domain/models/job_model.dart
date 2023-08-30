@@ -39,19 +39,17 @@ class JobModel {
             : json['assignedToName'] ?? '',
         assignedToId:
             json['assignedToId'] == null ? null : json['assignedToId'] ?? '',
-        status: json['status'] == null ? null : json['status'] ?? '',
-        latestJCStatus: json['latestJCStatus'] == null
-            ? null
-            : json['latestJCStatus'] ?? '',
         latestJCStatusShort: json['latestJCStatusShort'] == null
             ? null
             : json['latestJCStatusShort'] ?? '',
-        // : JobStatusData.statusValues.entries
-        //     .firstWhere(
-        //       (x) => x.value.index == json['latestJCStatus'] - 101,
-        //       orElse: () => MapEntry("CREATED", JobStatus.JOB_CREATED),
-        //     )
-        //     .value,
+        status: json['status'] == null
+            ? null
+            : JobStatusData.statusValues.entries
+                .firstWhere(
+                  (x) => x.value.index == json['status'] - 101,
+                  orElse: () => MapEntry("CREATED", JobStatus.JOB_CREATED),
+                )
+                .value,
       );
 
   ///
@@ -74,7 +72,6 @@ class JobModel {
       this.assignedToName,
       this.assignedToId,
       this.status,
-      this.latestJCStatus,
       this.latestJCStatusShort});
 
   int? id;
@@ -94,10 +91,9 @@ class JobModel {
   String? permitId;
   String? assignedToName;
   int? assignedToId;
-  int? status;
-  int? latestJCStatus;
-  String? latestJCStatusShort;
 
+  JobStatus? status;
+  String? latestJCStatusShort;
   Map<String, dynamic> toJson() => {
         'id': id,
         'userId': userId,
@@ -116,14 +112,11 @@ class JobModel {
         'permitId': permitId,
         'assignedToName': assignedToName,
         'assignedToId': assignedToId,
-        'latestJCStatus': latestJCStatus,
         'latestJCStatusShort': latestJCStatusShort,
-        'status': status
-
-        // 'latestJCStatus': JobStatusData.statusValues.entries
-        //     .firstWhere((x) => x.value == status,
-        //         orElse: () => MapEntry("CREATED", JobStatus.JOB_CREATED))
-        //     .key,
+        'status': JobStatusData.statusValues.entries
+            .firstWhere((x) => x.value == status,
+                orElse: () => MapEntry("CREATED", JobStatus.JOB_CREATED))
+            .key,
       };
 
   ///

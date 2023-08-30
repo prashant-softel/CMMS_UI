@@ -32,7 +32,7 @@ class CmmrsItemsModel {
 
   factory CmmrsItemsModel.fromJson(Map<String, dynamic> parsedJson) {
     return CmmrsItemsModel(
-      id: parsedJson['id'],
+      id: parsedJson['asset_item_ID'],
       name: parsedJson['item_name'],
       quantity: parsedJson['quantity'],
     );

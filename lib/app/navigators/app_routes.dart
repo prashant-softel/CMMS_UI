@@ -135,6 +135,7 @@ abstract class Routes {
   static const purchaseGoodsorderView = _Paths.purchaseGoodsorderView;
   static const plantStockReport = _Paths.plantStockReport;
   static const employeeStockReport = _Paths.employeeStockReport;
+  static const faultyMaterialReport = _Paths.faultyMaterialReport;
 }
 
 abstract class _Paths {
@@ -264,6 +265,7 @@ abstract class _Paths {
       '/view-module-cleaning-execution';
   static const plantStockReport = '/plant-stock-report';
   static const employeeStockReport = '/employee-stock-report';
+  static const faultyMaterialReport = '/faulty-material-report';
 
 // static const editPermitWebScreen = '/edit-permit-web-screen';
 }

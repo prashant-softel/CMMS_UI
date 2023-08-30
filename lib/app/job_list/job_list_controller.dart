@@ -52,8 +52,6 @@ class JobListController extends GetxController {
   RxString assignedToNameFilterText = ''.obs;
   RxString statusFilterText = ''.obs;
 
-
-
   ///
   final excel = Excel.createExcel();
   int facilityId = 0;
@@ -101,16 +99,23 @@ class JobListController extends GetxController {
     }
   }
 
-  Future<void> getJobList(int userId,bool self_view,) async {
+  Future<void> getJobList(
+    int userId,
+    bool self_view,
+  ) async {
     jobList.value = <JobModel>[];
     if (facilityId > 0) {
       final _jobList = await jobListPresenter.getJobList(
         facilityId: facilityId,
         userId: userId,
-         self_view:  
-         varUserAccessModel.value.access_list!.where((e) =>
-         e.feature_id == UserAccessConstants.kJobFeatureId && 
-         e.selfView == UserAccessConstants.kHaveSelfViewAccess).length > 0 ? true : false,
+        self_view: varUserAccessModel.value.access_list!
+                    .where((e) =>
+                        e.feature_id == UserAccessConstants.kJobFeatureId &&
+                        e.selfView == UserAccessConstants.kHaveSelfViewAccess)
+                    .length >
+                0
+            ? true
+            : false,
         isLoading: true,
       );
 
