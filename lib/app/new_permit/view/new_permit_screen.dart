@@ -1786,137 +1786,7 @@ class NewPermitScreen extends GetView<NewPermitController> {
                                                   : Container(),
                                               Dimens.boxHeight30,
 
-                                              ///Jobs Linked to this permit
-                                              controller.jobModel?.id != null
-                                                  ? Container(
-                                                      margin:
-                                                          Dimens.edgeInsets20,
-                                                      height: 250,
-                                                      width:
-                                                          MediaQuery.of(context)
-                                                                  .size
-                                                                  .width /
-                                                              1.2,
-                                                      decoration: BoxDecoration(
-                                                        border: Border.all(
-                                                          color: ColorValues
-                                                              .lightGreyColorWithOpacity35,
-                                                          width: 1,
-                                                        ),
-                                                        boxShadow: [
-                                                          BoxShadow(
-                                                            color: ColorValues
-                                                                .appBlueBackgroundColor,
-                                                            spreadRadius: 2,
-                                                            blurRadius: 5,
-                                                            offset:
-                                                                Offset(0, 2),
-                                                          ),
-                                                        ],
-                                                      ),
-                                                      child: Column(
-                                                        children: [
-                                                          Padding(
-                                                            padding:
-                                                                const EdgeInsets
-                                                                    .all(10.0),
-                                                            child: Row(
-                                                              children: [
-                                                                Text(
-                                                                  "Jobs Linked To This Permit",
-                                                                  style: Styles
-                                                                      .blue700,
-                                                                ),
-                                                              ],
-                                                            ),
-                                                          ),
-                                                          Divider(
-                                                            color: ColorValues
-                                                                .greyLightColour,
-                                                          ),
-                                                          Expanded(
-                                                            child:
-                                                                ScrollableTableView(
-
-                                                              columns: [
-                                                                "Job Id",
-                                                                "Job Title",
-                                                                "Equipment Category",
-                                                                "Equipment",
-                                                                "Breakdown Time",
-                                                                "Assigned To",
-                                                                "Status",
-                                                                
-                                                              ].map((column) {
-                                                                return TableViewColumn(
-                                                                
-                                                                  label: column,
-                                                                  minWidth:
-                                                                      Get.width *
-                                                                          0.15,
-                                                                );
-                                                              }).toList(),
-                                                              rows: [
-                                                                ...List
-                                                                    .generate(
-                                                                  controller
-                                                                          .jobsLinkedToPermitList
-                                                                          ?.length ??
-                                                                      0,
-                                                                  (index) {
-                                                                    var getJobsLinkedToPermitList =
-                                                                        controller
-                                                                            .jobsLinkedToPermitList?[index];
-                                                                    return [
-                                                                      '${getJobsLinkedToPermitList?.jobId}',
-                                                                      '${getJobsLinkedToPermitList?.title ?? ''}',
-                                                                      '${getJobsLinkedToPermitList?.equipmentCat ?? ''}',
-                                                                      '${getJobsLinkedToPermitList?.equipment ?? ''}',
-                                                                      '${getJobsLinkedToPermitList?.breakdownTime ?? ''}',
-                                                                      '${getJobsLinkedToPermitList?.assignedTo ?? ''}',
-                                                                      '${getJobsLinkedToPermitList?.status_short ?? ''}',
-                                                                    ];
-                                                                  },
-                                                                ),
-                                                              ].map((record) {
-                                                                return TableViewRow(
-                                                                  height: 40,
-                                                                  cells: record
-                                                                      .map(
-                                                                          (value) {
-                                                                    return TableViewCell(
-                                                                      child: value == record[0]
-                                                                      ?GestureDetector(
-                                                                        onTap: () {
-                                                                          controller.viewJobDetails();
-                                                                        },
-                                                                        child: Text(value,   
-                                                                        style:
-                                                                              TextStyle(
-                                                                            decoration:
-                                                                                TextDecoration.underline,
-                                                                            decorationStyle:
-                                                                                TextDecorationStyle.solid,
-                                                                            color: Color.fromARGB(
-                                                                                255,
-                                                                                5,
-                                                                                92,
-                                                                                163),
-                                                                          ),),
-                                                                      )
-                                                                      :Text(value)
-
-                                                                    );
-                                                                  }).toList(),
-                                                                );
-                                                              }).toList(),
-                                                            ),
-                                                          ),
-                                                        ],
-                                                      ),
-                                                    )
-                                                  : Container(),
-
+                                            
                                               SizedBox(
                                                 height: 20,
                                               ),
@@ -2174,22 +2044,25 @@ class NewPermitScreen extends GetView<NewPermitController> {
                                               ),
 
                                               //// Permit Reference commented for now
-                                              // Row(
-                                              //   children: [
-                                              //     Container(
-                                              //       margin: EdgeInsets.only(
-                                              //           right: 13),
-                                              //       alignment:
-                                              //           Alignment.centerRight,
-                                              //       width: 172,
-                                              //       child: CustomRichText(
-                                              //           title:
-                                              //               'Permit Ref. No: '),
-                                              //     ),
-                                              //     _buildWorkPermitReferenceTextField_web(
-                                              //         context),
-                                              //   ],
-                                              // ),
+                                              Padding(
+                                                padding: const EdgeInsets.only(left: 60),
+                                                child: Row(
+                                                  children: [
+                                                    Container(
+                                                      margin: EdgeInsets.only(
+                                                          right: 13),
+                                                      alignment:
+                                                          Alignment.centerRight,
+                                                      width: 172,
+                                                      child: CustomRichText(
+                                                          title:
+                                                              'Permit Ref. No: '),
+                                                    ),
+                                                    _buildWorkPermitReferenceTextField_web(
+                                                        context),
+                                                  ],
+                                                ),
+                                              ),
 
                                               Padding(
                                                 padding: const EdgeInsets.only(
@@ -3195,6 +3068,28 @@ class NewPermitScreen extends GetView<NewPermitController> {
                                                   ),
                                                 ),
                                               ),
+                                              Dimens.boxHeight50,
+
+                                                ////  commented
+                                              Padding(
+                                                padding: const EdgeInsets.only(left: 60),
+                                                child: Row(
+                                                  children: [
+                                                    Container(
+                                                      margin: EdgeInsets.only(
+                                                          right: 13),
+                                                      alignment:
+                                                          Alignment.centerRight,
+                                                      width: 172,
+                                                      child: CustomRichText(
+                                                          title:
+                                                              'Comment here: '),
+                                                    ),
+                                                    _buildWorkPermitCommentTextField_web(
+                                                        context),
+                                                  ],
+                                                ),
+                                              ),
 
                                               controller.permitId.value <= 0
                                                   ? Center(
@@ -4087,7 +3982,7 @@ class NewPermitScreen extends GetView<NewPermitController> {
       Container(
         height: MediaQuery.of(context).size.height * 0.050,
         width: Responsive.isDesktop(context)
-            ? MediaQuery.of(context).size.width / 1.9
+            ? MediaQuery.of(context).size.width / 1.75
             : MediaQuery.of(context).size.width / 1.1,
         decoration: BoxDecoration(
           boxShadow: [
@@ -4111,7 +4006,7 @@ class NewPermitScreen extends GetView<NewPermitController> {
           borderRadius: BorderRadius.circular(5),
         ),
         child: SizedBox(
-          width: MediaQuery.of(context).size.width / 1.44,
+          width: MediaQuery.of(context).size.width / 1.4,
           child: TextField(
             controller: controller.workPermitNumberTextCtrlr,
             keyboardType: TextInputType.multiline,
@@ -4119,6 +4014,102 @@ class NewPermitScreen extends GetView<NewPermitController> {
             decoration: InputDecoration(
               fillColor: ColorValues.whiteColor,
               filled: true,
+              contentPadding: Dimens.edgeInsets05_10,
+              border: InputBorder.none,
+              enabledBorder: InputBorder.none,
+              focusedBorder: InputBorder.none,
+              focusedErrorBorder: controller.isWorPermitNumberTextInvalid.value
+                  ? OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(5),
+                      borderSide: BorderSide(
+                        color: ColorValues.redColorDark,
+                      ),
+                    )
+                  : InputBorder.none,
+              errorBorder: controller.isWorPermitNumberTextInvalid.value
+                  ? OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(5),
+                      borderSide: BorderSide(
+                        color: ColorValues.redColorDark,
+                      ),
+                    )
+                  : null,
+              errorText: controller.isWorPermitNumberTextInvalid.value
+                  ? "Required field"
+                  : null,
+            ),
+            onChanged: (value) {
+              if (value.trim().length > 3) {
+                controller.isWorPermitNumberTextInvalid.value = false;
+              } else {
+                controller.isWorPermitNumberTextInvalid.value = true;
+              }
+            },
+          ),
+        ),
+      ),
+      Dimens.boxHeight10,
+    ]);
+  }
+   Widget _buildWorkPermitCommentTextField_web(BuildContext context) {
+    return Column(//
+        children: [
+      // Align(
+      //   alignment: Alignment.centerLeft,
+      //   child: Padding(
+      //     padding: const EdgeInsets.only(left: 10),
+      //     child: RichText(
+      //       text:
+      //           TextSpan(text: 'Title: ', style: Styles.blackBold16, children: [
+      //         TextSpan(
+      //           text: '*',
+      //           style: TextStyle(
+      //             color: ColorValues.orangeColor,
+      //             fontWeight: FontWeight.bold,
+      //           ),
+      //         ),
+      //       ]),
+      //     ),
+      //   ),
+      // ),
+
+      Container(
+        // height: MediaQuery.of(context).size.height * 0.1,
+        width: Responsive.isDesktop(context)
+            ? MediaQuery.of(context).size.width / 1.75
+            : MediaQuery.of(context).size.width / 1.1,
+        decoration: BoxDecoration(
+          boxShadow: [
+            BoxShadow(
+              color: Colors.black26,
+              offset: const Offset(
+                5.0,
+                5.0,
+              ),
+              blurRadius: 5.0,
+              spreadRadius: 1.0,
+            ),
+            BoxShadow(
+              color: ColorValues.whiteColor,
+              offset: const Offset(0.0, 0.0),
+              blurRadius: 0.0,
+              spreadRadius: 0.0,
+            ),
+          ],
+          color: ColorValues.whiteColor,
+          borderRadius: BorderRadius.circular(5),
+        ),
+        child: SizedBox(
+          width: MediaQuery.of(context).size.width / 1.4,
+          child: TextField(
+            // controller: controller.workPermitNumberTextCtrlr,
+            keyboardType: TextInputType.multiline,
+            autofocus: false,
+            maxLines: 5,
+            decoration: InputDecoration(
+              fillColor: ColorValues.whiteColor,
+              filled: true,
+            
               contentPadding: Dimens.edgeInsets05_10,
               border: InputBorder.none,
               enabledBorder: InputBorder.none,

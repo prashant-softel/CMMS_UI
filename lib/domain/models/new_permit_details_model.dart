@@ -42,7 +42,7 @@ class NewPermitDetailModel {
   List<ListIsolation?>? lstIsolation;
   List<ListCategory?>? lstCategory;
   List<LotoLists>? loto_list;
-  List<ListAssociatedJob?>? lstAssociatedJob;
+  List<ListAssociatedJob?>? lstAssociatedJobs;
 
 
 
@@ -92,7 +92,7 @@ class NewPermitDetailModel {
       this.lstIsolation,
       this.loto_list,
       this.lstCategory,
-      this.lstAssociatedJob,
+      this.lstAssociatedJobs,
 
 
       // this.approver_id,
@@ -146,8 +146,8 @@ class NewPermitDetailModel {
             json["loto_list"]?.map((x) => LotoLists.fromJson(x))):[],
         lstCategory: json["lstCategory"]!=null? List<ListCategory>.from(
             json["lstCategory"].map((x) => ListCategory.fromJson(x))):[],
-        lstAssociatedJob: json["lstAssociatedJob"]!=null? List<ListAssociatedJob>.from(
-            json["lstAssociatedJob"].map((x) => ListAssociatedJob.fromJson(x))):[],
+        lstAssociatedJobs: json["lstAssociatedJobs"]!=null? List<ListAssociatedJob>.from(
+            json["lstAssociatedJobs"].map((x) => ListAssociatedJob.fromJson(x))):[],
 
 
 
@@ -199,7 +199,7 @@ class NewPermitDetailModel {
         "lstCategory": List<dynamic>.from(lstCategory!.map((x) => x)),
         "loto_list": List<dynamic>.from(loto_list!.map((x) => x.toJson())),
 
-        "lstAssociatedJob": List<dynamic>.from(lstAssociatedJob!.map((x) => x)),
+        "lstAssociatedJobs": List<dynamic>.from(lstAssociatedJobs!.map((x) => x)),
 
 
         // "approver_id": approver_id,
@@ -367,36 +367,52 @@ class ListCategory {
 class ListAssociatedJob {
   ListAssociatedJob({
     this.jobId,
-    this.jobCardId,
-    this.jobTitle,
-    this.jobDes,
-    this.jobDate,
-    this.jobStatus,
+    this.permitId,
+    this.title,
+    this.equipmentCat,
+    this.equipment,
+    this.breakdownTime,
+    this.assignedTo,
+    this.status,
+    this.status_short,
+   
   });
 
   int? jobId;
-  int? jobCardId;
-  String? jobTitle;
-  String? jobDes;
-  String? jobDate;
-  int? jobStatus;
+  int? permitId;
+  String? title;
+  String? equipmentCat;
+  String? equipment;
+  String? breakdownTime;
+  String? assignedTo;
+  int? status;
+  String? status_short;
+  
 
   factory ListAssociatedJob.fromJson(Map<String, dynamic> json) => ListAssociatedJob(
-        jobId: json["jobId"],
-        jobCardId: json['jobCardId'],
-        jobTitle: json["jobTitle"] ?? '',
-        jobDes: json['jobDes'],
-        jobDate: json['jobDate'],
-        jobStatus: json['jobStatus'],
+        jobId: json['jobId'],
+        permitId: json['permitId'],
+        title: json["title"] ?? '',
+        equipmentCat: json['equipmentCat'],
+        equipment: json['equipment'],
+        breakdownTime: json['breakdownTime'],
+        assignedTo: json['assignedTo'] ?? '',
+        status: json['status'],
+        status_short: json['status_short'],
+       
       );
 
   Map<String, dynamic> toJson() => {
         "jobId": jobId,
-        "jobCardId": jobCardId,
-        "jobTitle": jobTitle,
-        "jobDes": jobDes,
-        "jobDate": jobDate,
-        "jobStatus": jobStatus,
+        "permitId": permitId,
+        "title": title,
+        "equipmentCat": equipmentCat,
+        "equipment": equipment,
+        "breakdownTime": breakdownTime,
+        "assignedTo": assignedTo,
+        "status": status,
+        "status_short": status_short,
+       
       };
 }
 
@@ -413,4 +429,7 @@ String addFileListToJson(FileList data) => json.encode(data.toJson());
 String addListIsolationToJson(ListIsolation data) => json.encode(data.toJson());
 
 String addListCategoryToJson(ListCategory data) => json.encode(data.toJson());
+
+String addListAssocitedJobsToJson(ListAssociatedJob data) => json.encode(data.toJson());
+
 
