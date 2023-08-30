@@ -130,14 +130,6 @@ class StockManagementDashboardScreen
                             ontap: () {
                               controller.createChecklist();
                             }),
-                        _stockManagementList(
-                            tittle: "Plant Stock Report",
-                            ontap: () {
-                              Get.toNamed(
-                                Routes.plantStockReport,
-                              );
-                              //  controller.checkPoint();
-                            }),
 
                         //  if (Responsive.isDesktop(context))
                         _stockManagementList(
@@ -156,11 +148,6 @@ class StockManagementDashboardScreen
                               );
 
                               // controller.receiveGoodsOrders();
-                            }),
-                        _stockManagementList(
-                            tittle: "Employee Stock Report",
-                            ontap: () {
-                              Get.toNamed(Routes.employeeStockReport);
                             }),
                       ],
                     ),
@@ -196,10 +183,62 @@ class StockManagementDashboardScreen
                             ontap: () {
                               Get.offNamed(Routes.purchaseGoodsorder);
                             }),
+                      ],
+                    ),
+                    Container(
+                      margin: EdgeInsets.only(left: 20),
+                      child: Row(
+                        children: [
+                          Text(
+                            "Stock Report",
+                            style: TextStyle(
+                              color: Color.fromARGB(255, 159, 156, 156),
+                              fontSize: 16,
+                              fontWeight: FontWeight.w400,
+                            ),
+                          ),
+                          SizedBox(
+                              width:
+                                  10), // Add some space between the text and the line
+                          Expanded(
+                            child: Divider(
+                              color: Colors
+                                  .grey, // Customize the color of the line if needed
+                              height:
+                                  1, // Adjust the height of the line if needed
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                    GridView.count(
+                      shrinkWrap: true,
+                      primary: false,
+                      padding: const EdgeInsets.all(16),
+                      crossAxisSpacing: 70,
+                      mainAxisSpacing: 6,
+                      crossAxisCount: Responsive.isMobile(context) ? 2 : 5,
+                      childAspectRatio: Responsive.isMobile(context)
+                          ? (itemWidth / itemHeight)
+                          : (itemWidth / itemHeightWeb),
+                      children: <Widget>[
+                        _stockManagementList(
+                            tittle: "Plant Stock Report",
+                            ontap: () {
+                              Get.toNamed(
+                                Routes.plantStockReport,
+                              );
+                              //  controller.checkPoint();
+                            }),
+                        _stockManagementList(
+                            tittle: "Employee Stock Report",
+                            ontap: () {
+                              Get.toNamed(Routes.employeeStockReport);
+                            }),
                         _stockManagementList(
                             tittle: "Faulty Material Report",
                             ontap: () {
-                              Get.offNamed(Routes.purchaseGoodsorder);
+                              Get.offNamed(Routes.faultyMaterialReport);
                             }),
                       ],
                     ),

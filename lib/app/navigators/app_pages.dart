@@ -28,6 +28,8 @@ import 'package:cmms/app/edit_warranty_claim/view/edit_warranty_claim_content_we
 import 'package:cmms/app/employee_stock_report/view/employee_stock_report_screen.dart';
 import 'package:cmms/app/escalation_matrix_list/escalation_matrix_list_binding.dart';
 import 'package:cmms/app/escalation_matrix_list/escalation_matrix_list_screen.dart';
+import 'package:cmms/app/faulty_material_report/faulty_material_report_binding.dart';
+import 'package:cmms/app/faulty_material_report/view/faulty_material_report_screen.dart';
 import 'package:cmms/app/incident_report_list/incident_report_list_binding.dart';
 import 'package:cmms/app/incident_report_list/incident_report_list_screen.dart';
 import 'package:cmms/app/inventory_list/inventory_list_binding.dart';
@@ -820,6 +822,11 @@ class AppPages {
       name: _Paths.employeeStockReport,
       page: EmployeeStockReportScreen.new,
       binding: EmployeeStockReportBinding(),
+    ),
+    GetPage<dynamic>(
+      name: _Paths.faultyMaterialReport,
+      page: FaultyMaterialReportScreen.new,
+      binding: FaultyMaterialReportBinding(),
     ),
   ];
 }

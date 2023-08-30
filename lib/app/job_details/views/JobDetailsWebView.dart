@@ -143,6 +143,10 @@ class JobDetailsWebView extends GetView<JobDetailsController> {
                                             style: Styles.black14,
                                           ),
                                           Text(
+                                            "Job Description ",
+                                            style: Styles.black14,
+                                          ),
+                                          Text(
                                             "Plant Name: ",
                                             style: Styles.black14,
                                           ),
@@ -154,10 +158,10 @@ class JobDetailsWebView extends GetView<JobDetailsController> {
                                             "Work Type ",
                                             style: Styles.black14,
                                           ),
-                                          Text(
-                                            "Tools Required ",
-                                            style: Styles.black14,
-                                          ),
+                                          // Text(
+                                          //   "Tools Required ",
+                                          //   style: Styles.black14,
+                                          // ),
                                         ],
                                       ),
                                       Dimens.boxWidth10,
@@ -167,6 +171,9 @@ class JobDetailsWebView extends GetView<JobDetailsController> {
                                         children: [
                                           Text(
                                               "${controller.jobDetailsModel.value?.jobTitle ?? ""}",
+                                              style: Styles.blue14),
+                                          Text(
+                                              "${controller.jobDetailsModel.value?.jobDescription ?? ""}",
                                               style: Styles.blue14),
                                           Text(
                                               "${controller.jobDetailsModel.value?.facilityName ?? ""}",
@@ -191,9 +198,10 @@ class JobDetailsWebView extends GetView<JobDetailsController> {
 
                                           Text(
                                               "${"${controller.jobDetailsModel.value?.workTypeList != null ? controller.jobDetailsModel.value?.workTypeList?.map<String>((item) => item.workTypeName.toString()).toList() : []}"}"),
-                                          Text(
-                                              " ${controller.jobDetailsModel.value?.lstToolsRequired ?? ""}",
-                                              style: Styles.blue14),
+                                          // Text(
+                                          //     " ${controller.jobDetailsModel.value?.lstToolsRequired ?? ""}",
+                                          //     style: Styles.blue14),
+
                                           // Text("${
                                           //     "${controller.jobDetailsModel
                                           //         .value?.lstToolsRequired !=
@@ -437,7 +445,9 @@ class JobDetailsWebView extends GetView<JobDetailsController> {
                                       Divider(
                                         color: ColorValues.greyLightColour,
                                       ),
-                                      controller.listMrsByJobId!.length > 0
+                                      controller.jobAssociatedModelsList!
+                                                  .length >
+                                              0
                                           ? Expanded(
                                               child: ScrollableTableView(
                                                 columns: [
@@ -487,16 +497,24 @@ class JobDetailsWebView extends GetView<JobDetailsController> {
                                                                               .spaceEvenly,
                                                                       children: [
                                                                         TableActionButton(
-                                                                          color:
-                                                                              ColorValues.viewColor,
-                                                                          icon:
-                                                                              Icons.remove_red_eye,
-                                                                          message:
-                                                                              "View Job Card",
-                                                                          // onPress:
-                                                                          //     () =>
-                                                                          //         controller.goToJobCardScreen(),
-                                                                        ),
+                                                                            color: ColorValues
+                                                                                .viewColor,
+                                                                            icon: Icons
+                                                                                .remove_red_eye,
+                                                                            message:
+                                                                                "View Job Card",
+                                                                            onPress:
+                                                                                () {
+                                                                              String jobCardId = record[0];
+                                                                              if (jobCardId != null) {
+                                                                                print({
+                                                                                  "JcId": jobCardId
+                                                                                });
+                                                                                Get.toNamed(Routes.jobCard, arguments: {
+                                                                                  'JcId': int.tryParse("$jobCardId")
+                                                                                });
+                                                                              }
+                                                                            }),
                                                                         TableActionButton(
                                                                             color: ColorValues
                                                                                 .appLightBlueColor,
@@ -883,7 +901,26 @@ class JobDetailsWebView extends GetView<JobDetailsController> {
                                                 }).toList(),
                                               ),
                                             )
-                                          : Container(),
+                                          : Container(
+                                              padding: EdgeInsets.only(top: 40),
+                                              child: Row(
+                                                crossAxisAlignment:
+                                                    CrossAxisAlignment.center,
+                                                mainAxisAlignment:
+                                                    MainAxisAlignment.center,
+                                                children: [
+                                                  Text(
+                                                      "Not add the any matarial please add the material first"),
+                                                  TableActionButton(
+                                                    color: ColorValues
+                                                        .appPurpleColor,
+                                                    icon: Icons.add,
+                                                    message: "Add Material",
+                                                    onPress: () => controller
+                                                        .goToAddMrsScreen(),
+                                                  ),
+                                                ],
+                                              ))
                                     ],
                                   ),
                                 ),

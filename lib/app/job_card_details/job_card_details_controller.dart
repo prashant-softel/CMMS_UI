@@ -93,6 +93,7 @@ class JobCardDetailsController extends GetxController {
   @override
   void onInit() async {
     try {
+      print({"madfhuiwef", jobCardId});
       Get.put(FileUploadController());
 
       final _flutterSecureStorage = const FlutterSecureStorage();

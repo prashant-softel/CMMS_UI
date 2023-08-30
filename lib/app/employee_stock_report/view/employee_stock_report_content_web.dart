@@ -51,7 +51,8 @@ class EmployeeStockReportContentWeb
                     onTap: () {
                       Get.back();
                     },
-                    child: Text(" / MASTER", style: Styles.greyMediumLight12),
+                    child: Text(" / STOCK MANAGEMENT",
+                        style: Styles.greyMediumLight12),
                   ),
                   Text(" / EMPLOYEE STOCK REPORT ",
                       style: Styles.greyMediumLight12)
