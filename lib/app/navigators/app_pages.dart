@@ -343,7 +343,7 @@ class AppPages {
       binding: PmMappingBinding(),
     ),
     GetPage<dynamic>(
-      name: _Paths.moduleTypeListScreen,
+      name: _Paths.featureTypeListScreen,
       page: ModuleListScreen.new,
       binding: ModuleListBinding(),
     ),

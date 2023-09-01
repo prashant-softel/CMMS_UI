@@ -62,7 +62,7 @@ abstract class Routes {
   static const userList = _Paths.userList;
   static const addUser = _Paths.addUser;
   static const viewUserDetail = _Paths.viewUserDetail;
-  static const moduleTypeListScreen = _Paths.moduleTypeListScreen;
+  static const featureTypeListScreen = _Paths.featureTypeListScreen;
   static const editWarrantyClaimContentWeb = _Paths.editWarrantyClaimContentWeb;
   static const addInventoryScreen = _Paths.addInventoryScreen;
   static const viewAddInventoryScreen = _Paths.viewAddInventoryScreen;
@@ -196,7 +196,7 @@ abstract class _Paths {
   static const userList = '/userList';
   static const addUser = '/addUser';
   static const viewUserDetail = '/view-user-detail';
-  static const moduleTypeListScreen = '/module-Type-List-Screen';
+  static const featureTypeListScreen = '/feature-Type-List-Screen';
   static const editWarrantyClaimContentWeb = '/edit-warranty-claim-content-web';
   static const bloodTypeListScreen = '/blood-Type-List-Screen';
   static const countryTypeListScreen = '/country-Type-List-Screen';
