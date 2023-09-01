@@ -10,12 +10,11 @@ import '../theme/dimens.dart';
 import '../theme/styles.dart';
 
 class AbandoneScheduleExecutionDialog extends GetView {
- String? permitCloseDialog;
- int? id;
- 
+  String? permitCloseDialog;
+  int? id;
+
   AbandoneScheduleExecutionDialog({super.key, this.permitCloseDialog, this.id});
   final AddModuleCleaningExecutionController _controller = Get.find();
-
 
   @override
   Widget build(BuildContext context) {
@@ -34,101 +33,92 @@ class AbandoneScheduleExecutionDialog extends GetView {
         content: Builder(builder: (context) {
           var height = MediaQuery.of(context).size.height;
 
-          return 
-             Container(
-              padding: Dimens.edgeInsets05_0_5_0,
-              height: 200,
-              width: double.infinity,
-              child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.stretch,
-                  children: [
-                    Divider(
-                      color: ColorValues.greyLightColour,
-                      thickness: 1,
-                    ),
-                    Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                       
-                       CustomRichText(title: 'Comment '),
-                       SizedBox(height: 20,),
-                       TextField(
-                        controller: _controller.scheduleExecutionTextFieldCtrlr,
+          return Container(
+            padding: Dimens.edgeInsets05_0_5_0,
+            height: 200,
+            width: double.infinity,
+            child: Column(
+                crossAxisAlignment: CrossAxisAlignment.stretch,
+                children: [
+                  Divider(
+                    color: ColorValues.greyLightColour,
+                    thickness: 1,
+                  ),
+                  Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      CustomRichText(title: 'Comment '),
+                      SizedBox(
+                        height: 20,
+                      ),
+                      TextField(
+                        // controller: _controller.scheduleExecutionTextFieldCtrlr,
                         maxLines: 4,
                         decoration: InputDecoration(
                           hintText: 'Comment here....',
                           enabledBorder: OutlineInputBorder(
-                            borderSide: BorderSide(color: Colors.black,),
-                          
+                            borderSide: BorderSide(
+                              color: Colors.black,
+                            ),
                           ),
                           focusedBorder: OutlineInputBorder(
-                          borderSide: BorderSide( color: Colors.black),
-                           ),
-                          
+                            borderSide: BorderSide(color: Colors.black),
+                          ),
                         ),
-                       ),
-                       
-                       
+                      ),
+                    ],
+                  ),
+                  // SizedBox(
+                  //   height: 20,
+                  // ),
+                  // Row(
+                  //     mainAxisAlignment: MainAxisAlignment.center,
+                  //     children: [
 
-                      ],
-                    ),
-                    // SizedBox(
-                    //   height: 20,
-                    // ),
-                    // Row(
-                    //     mainAxisAlignment: MainAxisAlignment.center,
-                    //     children: [
-                          
-                          
-                    //       Dimens.boxWidth10,
-                    //       ElevatedButton(
-                    //         style: Styles.greenElevatedButtonStyle,
-                    //         onPressed: () {
-                    //           _controller.permitApprovedButton(permitId:permitId);
-                    //           Get.back();
-                    //         },
-                    //         child: const Text('Permit Approve'),
-                    //       ),
-                    //       // Dimens.boxWidth10,
-                    //       // ElevatedButton(
-                    //       //   style: Styles.redElevatedButtonStyle,
-                    //       //   onPressed: () => Get.offAndToNamed(Routes.addJob),
-                    //       //   child: const Text('Add New Job'),
-                    //       // ),
-                    //     ]),
-                  ]),
-            );
-          
+                  //       Dimens.boxWidth10,
+                  //       ElevatedButton(
+                  //         style: Styles.greenElevatedButtonStyle,
+                  //         onPressed: () {
+                  //           _controller.permitApprovedButton(permitId:permitId);
+                  //           Get.back();
+                  //         },
+                  //         child: const Text('Permit Approve'),
+                  //       ),
+                  //       // Dimens.boxWidth10,
+                  //       // ElevatedButton(
+                  //       //   style: Styles.redElevatedButtonStyle,
+                  //       //   onPressed: () => Get.offAndToNamed(Routes.addJob),
+                  //       //   child: const Text('Add New Job'),
+                  //       // ),
+                  //     ]),
+                ]),
+          );
         }),
         actions: [
-           SizedBox(
-                      height: 20,
-                    ),
-                    Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          
-                          Dimens.boxWidth10,
-                          ElevatedButton(
-                            style: Styles.darkRedElevatedButtonStyle,
-                            onPressed: () {
-                              Get.back();
-                            },
-                            child: const Text('Cancel'),
-                          ),
-                           Dimens.boxWidth20,
-                          ElevatedButton(
-                            style: Styles.greenElevatedButtonStyle,
-                            onPressed: () {
-                              _controller.abandonScheduleExecutionButton(id:id);
-                              Get.back();
-                            },
-                            child: const Text('Abandone Schedule Execution'),
-                          ),
-                        ]),
+          SizedBox(
+            height: 20,
+          ),
+          Row(mainAxisAlignment: MainAxisAlignment.center, children: [
+            Dimens.boxWidth10,
+            ElevatedButton(
+              style: Styles.darkRedElevatedButtonStyle,
+              onPressed: () {
+                Get.back();
+              },
+              child: const Text('Cancel'),
+            ),
+            Dimens.boxWidth20,
+            ElevatedButton(
+              style: Styles.greenElevatedButtonStyle,
+              onPressed: () {
+                // _controller.abandonScheduleExecutionButton(id:id);
+                Get.back();
+              },
+              child: const Text('Abandone Schedule Execution'),
+            ),
+          ]),
         ],
       );
     }));
- 
   }
 }

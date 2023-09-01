@@ -415,7 +415,6 @@ class DataRepository extends DomainRepository {
     );
   }
 
-
   @override
   Future<ResponseModel> getEquipmentModelList({
     int? facilityId,
@@ -426,10 +425,8 @@ class DataRepository extends DomainRepository {
       isLoading: isLoading,
       auth: auth,
       facilityId: facilityId,
-      
     );
   }
-
 
   ///Module Cleaning Task List
   @override
@@ -685,7 +682,7 @@ class DataRepository extends DomainRepository {
         isLoading: isLoading ?? false,
       );
 
-   Future<ResponseModel> startMCExecutionScheduleButton({
+  Future<ResponseModel> startMCExecutionScheduleButton({
     required String auth,
     int? scheduleId,
     bool? isLoading,
@@ -695,7 +692,6 @@ class DataRepository extends DomainRepository {
         scheduleId: scheduleId,
         isLoading: isLoading ?? false,
       );
-
 
   Future<ResponseModel> permitRejectButton({
     required String auth,
@@ -1310,7 +1306,7 @@ class DataRepository extends DomainRepository {
     );
   }
 
-   Future<ResponseModel> getJobsLinkdToPermitList({
+  Future<ResponseModel> getJobsLinkdToPermitList({
     String? auth,
     int? permitId,
     bool? isLoading,
@@ -1322,8 +1318,7 @@ class DataRepository extends DomainRepository {
     );
   }
 
-
-   Future<ResponseModel> getMrsListByModule({
+  Future<ResponseModel> getMrsListByModule({
     String? auth,
     int? jobId,
     bool? isLoading,
@@ -2484,6 +2479,20 @@ class DataRepository extends DomainRepository {
           startDate: startDate,
           endDate: endDate,
           userId: userId);
+  Future<ResponseModel> getFaultyMaterialReportList({
+    required String auth,
+    int? facilityId,
+    bool? isLoading,
+    dynamic startDate,
+    dynamic endDate,
+  }) async =>
+      await connectHelper.getFaultyMaterialReportList(
+        auth: auth,
+        facilityId: facilityId ?? 0,
+        isLoading: isLoading ?? false,
+        startDate: startDate,
+        endDate: endDate,
+      );
   Future<ResponseModel> getEquipmentAssetsList({
     String? auth,
     bool? isLoading,

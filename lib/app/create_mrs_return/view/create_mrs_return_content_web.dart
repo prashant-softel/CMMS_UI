@@ -198,9 +198,9 @@ class CreateMrsReturnContentWeb extends GetView<CreateMrsReturnController> {
                             child: ScrollableTableView(
                               columns: [
                                 "Equipment Name",
-                                "Material Type",
                                 "Issue Qty",
                                 "Return Qty",
+                                "Is Faulty?",
                                 "Remark",
                               ].map((column) {
                                 return TableViewColumn(
@@ -294,9 +294,22 @@ class CreateMrsReturnContentWeb extends GetView<CreateMrsReturnController> {
                                                   ? Text(
                                                       "${controller.dropdownMapperData[record[0]['value']]?.quantity ?? ""}")
                                                   : (mapData['key'] ==
-                                                          "Material_Type")
-                                                      ? Text(
-                                                          "${controller.dropdownMapperData[record[0]['value']]?.id ?? ""}")
+                                                          "is_faulty")
+                                                      ? Padding(
+                                                          padding:
+                                                              const EdgeInsets
+                                                                      .only(
+                                                                  top: 8.0),
+                                                          child:
+                                                              CustomSwitchTroggle(
+                                                                  value: controller
+                                                                      .isSetTemplate
+                                                                      .value,
+                                                                  onChanged:
+                                                                      (value) {
+                                                                    controller
+                                                                        .setTemplatetoggle();
+                                                                  }))
                                                       : (mapData['key'] ==
                                                               "Remark")
                                                           ? Padding(
@@ -333,11 +346,11 @@ class CreateMrsReturnContentWeb extends GetView<CreateMrsReturnController> {
                                                                   ),
                                                                   child:
                                                                       LoginCustomTextfield(
-                                                                    inputFormatters: <
-                                                                        TextInputFormatter>[
-                                                                      FilteringTextInputFormatter
-                                                                          .digitsOnly
-                                                                    ],
+                                                                    // inputFormatters: <
+                                                                    //     TextInputFormatter>[
+                                                                    //   FilteringTextInputFormatter
+                                                                    //       .digitsOnly
+                                                                    // ],
                                                                     maxLine: 1,
                                                                     textController:
                                                                         new TextEditingController(
@@ -408,14 +421,39 @@ class CreateMrsReturnContentWeb extends GetView<CreateMrsReturnController> {
                             style: Styles.blackBold14,
                           ),
                           Dimens.boxWidth10,
-                          Padding(
-                            padding: const EdgeInsets.only(top: 8.0),
-                            child: CustomSwitchTroggle(
-                                value: controller.isSetTemplate.value,
-                                onChanged: (value) {
-                                  controller.setTemplatetoggle();
-                                }),
-                          ),
+                          Container(
+                              decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(10),
+                                border: Border.all(
+                                  color: Color.fromARGB(255, 227, 224, 224),
+                                  width: 1,
+                                ),
+                                boxShadow: [
+                                  BoxShadow(
+                                    color: Colors.black26,
+                                    offset: const Offset(
+                                      5.0,
+                                      5.0,
+                                    ),
+                                    blurRadius: 5.0,
+                                    spreadRadius: 1.0,
+                                  ),
+                                  BoxShadow(
+                                    color: ColorValues.whiteColor,
+                                    offset: const Offset(0.0, 0.0),
+                                    blurRadius: 0.0,
+                                    spreadRadius: 0.0,
+                                  ),
+                                ],
+                              ),
+                              width: (MediaQuery.of(context).size.width * .2),
+                              child: LoginCustomTextfield(
+                                // inputFormatters: [
+                                //   FilteringTextInputFormatter.deny(
+                                //       RegExp(r'\s')),
+                                // ],
+                                textController: controller.setTemlateCtrlr,
+                              )),
                         ],
                       ),
                     ),
@@ -430,7 +468,7 @@ class CreateMrsReturnContentWeb extends GetView<CreateMrsReturnController> {
                             text: 'Submit',
                             onPressed: () {
                               // controller.addUser();
-                              //   controller.createMrs();
+                              controller.createReturnMrs();
                             },
                           ),
                         ),

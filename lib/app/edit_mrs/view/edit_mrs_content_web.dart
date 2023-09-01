@@ -375,14 +375,39 @@ class EditMrsContentWeb extends GetView<EditMrsController> {
                             style: Styles.blackBold14,
                           ),
                           Dimens.boxWidth10,
-                          Padding(
-                            padding: const EdgeInsets.only(top: 8.0),
-                            child: CustomSwitchTroggle(
-                                value: controller.isSetTemplate.value,
-                                onChanged: (value) {
-                                  controller.setTemplatetoggle();
-                                }),
-                          ),
+                          Container(
+                              decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(10),
+                                border: Border.all(
+                                  color: Color.fromARGB(255, 227, 224, 224),
+                                  width: 1,
+                                ),
+                                boxShadow: [
+                                  BoxShadow(
+                                    color: Colors.black26,
+                                    offset: const Offset(
+                                      5.0,
+                                      5.0,
+                                    ),
+                                    blurRadius: 5.0,
+                                    spreadRadius: 1.0,
+                                  ),
+                                  BoxShadow(
+                                    color: ColorValues.whiteColor,
+                                    offset: const Offset(0.0, 0.0),
+                                    blurRadius: 0.0,
+                                    spreadRadius: 0.0,
+                                  ),
+                                ],
+                              ),
+                              width: (MediaQuery.of(context).size.width * .2),
+                              child: LoginCustomTextfield(
+                                // inputFormatters: [
+                                //   FilteringTextInputFormatter.deny(
+                                //       RegExp(r'\s')),
+                                // ],
+                                textController: controller.setTemlateCtrlr,
+                              )),
                         ],
                       ),
                     ),
