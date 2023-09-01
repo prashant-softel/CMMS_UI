@@ -55,7 +55,7 @@ class NewPermitController extends GetxController {
   var isToggleOn6 = false.obs;
   var isToggleOn7 = false.obs;
 
-   var idCtrlr = TextEditingController();
+  var idCtrlr = TextEditingController();
 
   ///Switch toggle
   final isSuccess = false.obs;
@@ -129,10 +129,6 @@ class NewPermitController extends GetxController {
   Rx<bool> isFormInvalid = false.obs;
   int selectedFacility_id = 0;
   RxList<InventoryModel?> selectedWorkAreaList = <InventoryModel>[].obs;
-
-
-  /// Linked jobs to permit list
-  RxList<LinkedJobsToPermitModel?>? jobsLinkedToPermitList = <LinkedJobsToPermitModel?>[].obs;
 
   String username = '';
   Rx<String> selectedFacility = ''.obs;
@@ -345,20 +341,17 @@ class NewPermitController extends GetxController {
   bool isFromJobDetails = false;
   Rx<int> permitId = 0.obs;
   bool isChecked = false;
-      JobDetailsModel? jobModel = JobDetailsModel();
+  JobDetailsModel? jobModel;
 
-
-  
   ///
   @override
   void onInit() async {
-    
-
     try {
       final arguments = Get.arguments;
       if (arguments != null) {
         if (arguments.containsKey('permitId')) {
           permitId.value = arguments['permitId'];
+          print('PermitId:${permitId.value}');
         }
         if (arguments.containsKey('isChecked')) {
           isChecked = arguments['isChecked'];
@@ -371,9 +364,6 @@ class NewPermitController extends GetxController {
 
         if (jobModel != null) {
           loadPermitDetails(jobModel);
-        }
-        if(jobModel != null){
-          getJobsLinkdToPermitList(permitId: associatePermitId!);
         }
       }
 
@@ -401,12 +391,10 @@ class NewPermitController extends GetxController {
       await getJobTypePermitList();
       // await getPermitIssuerList();
       // await getPermitApproverList();
-
-     
     } catch (e) {
       print('jobModelError: $e');
     }
-     
+
     super.onInit();
   }
 
@@ -430,7 +418,7 @@ class NewPermitController extends GetxController {
 
       startDateTimeCtrlrBuffer =
           '${newPermitDetailsModel.value?.start_datetime}';
-        
+
       ///
 
       ///End date Time
@@ -439,7 +427,7 @@ class NewPermitController extends GetxController {
 
       validTillTimeCtrlrBuffer =
           newPermitDetailsModel.value?.end_datetime ?? '';
-        
+
       ///
       selectedBlock.value = newPermitDetailsModel.value?.blockName ?? "";
       selectedTypePermit.value =
@@ -468,21 +456,6 @@ class NewPermitController extends GetxController {
 
       // print('EmployeeList:${listEmployee}');
     }
-  }
-
-   Future<void> getJobsLinkdToPermitList({required int permitId}) async {
-    /// TODO: CHANGE THESE VALUES
-    // int moduleType = 81;
-    // // int tempModuleType = 21;
-    // int id = Get.arguments;
-    //
-    jobsLinkedToPermitList?.value = await permitPresenter.getJobsLinkdToPermitList(
-         
-          permitId,
-          true,
-        ) ??
-        [];
-    update(["JobsLinkdToPermitList"]);
   }
 
   Future<void> getInventoryDetailList() async {
@@ -1169,33 +1142,32 @@ class NewPermitController extends GetxController {
       // }
 
       CreatePermitModel updatePermitModel = CreatePermitModel(
-        facility_id: facilityId,
-        blockId: selectedBlockId,
-        lotoId: selectedEquipmentCategoryIdList.first,
-        permit_id: permitId.value,
-        permitTypeId: selectedPermitTypeId,
+          facility_id: facilityId,
+          blockId: selectedBlockId,
+          lotoId: selectedEquipmentCategoryIdList.first,
+          permit_id: permitId.value,
+          permitTypeId: selectedPermitTypeId,
 
-        ///Permit Type Id
-        start_datetime: startDateTimeCtrlrBuffer,
-        end_datetime: validTillTimeCtrlrBuffer,
-        title: _title,
-        description: _description,
-        job_type_id: selectedJobTypesId, ////Job type Id
-        sop_type_id: selectedSOPId,
-        issuer_id: selectedPermitIssuerTypeId,
-        approver_id: selectedPermitApproverTypeId,
-        user_id: userId,
-        latitude: 0,
-        longitude: 0,
-        block_ids: selectedEmployeeNameIdList,
-        category_ids: selectedEquipmentCategoryIdList,
-        is_isolation_required: isToggleOn.value,
-        isolated_category_ids: selectedEquipmentIsolationIdList,
-        Loto_list: loto_map_list,
-        employee_list: employee_map_list,
-        safety_question_list: safety_measure_map_list,
-        resubmit: isChecked
-      );
+          ///Permit Type Id
+          start_datetime: startDateTimeCtrlrBuffer,
+          end_datetime: validTillTimeCtrlrBuffer,
+          title: _title,
+          description: _description,
+          job_type_id: selectedJobTypesId, ////Job type Id
+          sop_type_id: selectedSOPId,
+          issuer_id: selectedPermitIssuerTypeId,
+          approver_id: selectedPermitApproverTypeId,
+          user_id: userId,
+          latitude: 0,
+          longitude: 0,
+          block_ids: selectedEmployeeNameIdList,
+          category_ids: selectedEquipmentCategoryIdList,
+          is_isolation_required: isToggleOn.value,
+          isolated_category_ids: selectedEquipmentIsolationIdList,
+          Loto_list: loto_map_list,
+          employee_list: employee_map_list,
+          safety_question_list: safety_measure_map_list,
+          resubmit: isChecked);
       var jobJsonString = updatePermitModel.toJson();
       Map<String, dynamic>? responseUpdatePermit =
           await permitPresenter.updateNewPermit(
@@ -1228,39 +1200,37 @@ class NewPermitController extends GetxController {
         listJobModelCategory.map((obj) => obj!.equipmentCatId).toList();
     List<String> nameList =
         listJobModelCategory.map((obj) => obj!.equipmentCatName).toList();
-     selectedItem = nameList[0];
+    //  selectedItem = nameList[0];
     ///end uncomment
 
-    listAssociatedPermit.value = jobModel.associatedPermitList ?? [];
-    List<int?> associetdPermitId = listAssociatedPermit.map((element) => element?.permitId).toList();
-    associatePermitId = associetdPermitId[0];
-    print("Associated Permit Id:${associatePermitId}");
+    // listAssociatedPermit.value = jobModel.associatedPermitList ?? [];
+    // List<int?> associetdPermitId = listAssociatedPermit.map((element) => element?.permitId).toList();
+    // associatePermitId = associetdPermitId[0];
+    // print("Associated Permit Id:${associatePermitId}");
 
     print("Selected Block Id:${selectedBlockId}");
-
     //uncomment once work done
     selectedEquipmentCategoryIdList.value = idList;
     // selectedJobModelEquipemntIsolationIdList.value = idList;
     print("JobModel Equipment Category Id:${selectedEquipmentCategoryIdList}");
     print("Selected Name Category:${jobModel.id ?? 0}");
+
     ///end uncomment
 
     // idCtrlr.text = '${int.tryParse(jobModel.id ?? 0)}';
     blockNameTextCtrlr.text = jobModel.blockName;
     assignToTextCtrlr.text = jobModel.assignedName;
-     breakdownTimeTextCtrlr.text =
-          '${DateFormat('yyyy-MM-dd HH:mm').format(DateTime.parse('${jobModel.breakdownTime}')).toString()}';
-
+    breakdownTimeTextCtrlr.text =
+        '${DateFormat('yyyy-MM-dd HH:mm').format(DateTime.parse('${jobModel.breakdownTime}')).toString()}';
   }
 
   Future<void> viewNewPermitList({int? permitId}) async {
     Get.toNamed(Routes.viewPermitWebScreen, arguments: permitId);
   }
 
-   Future<void> viewJobDetails() async {
+  Future<void> viewJobDetails() async {
     Get.toNamed(Routes.jobDetails);
   }
-
 
   /// class ends
 }

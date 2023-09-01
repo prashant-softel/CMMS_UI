@@ -246,6 +246,9 @@ class ViewPermitController extends GetxController {
   RxList<NewPermitDetailModel?>? viewPermitDetailsList =
       <NewPermitDetailModel?>[].obs;
 
+   RxList<ListAssociatedJob?>? listAssociatedJobs =
+      <ListAssociatedJob?>[].obs;
+
   ///Employee List
   RxList<ListEmployees?>? listEmployee = <ListEmployees?>[].obs; //ListEmployees
 
@@ -387,6 +390,8 @@ class ViewPermitController extends GetxController {
           '${DateFormat('yyyy-MM-dd HH:mm').format(DateTime.parse('${viewPermitDetailsModel.value?.end_datetime}'))}';
 
       selectedSafetyMeasureId = viewPermitDetailsModel.value?.permitTypeid ?? 0;
+
+      listAssociatedJobs?.value = viewPermitDetailsModel.value?.lstAssociatedJobs ?? [];
       // selectedTypePermit.value = newPermitDetailsModel.value?.permitTypeName ?? '';
       // // selectedJobTypeList.value = newPermitDetailsModel.value.
       // selectedPermitIssuerLists.value = newPermitDetailsModel.value?.issuedByName ?? '';
@@ -1043,5 +1048,8 @@ class ViewPermitController extends GetxController {
 
   void goToNewPermitScreen() {
     Get.toNamed(Routes.newPermit);
+  }
+  Future<void> viewJobDetails(int? _jobId) async {
+    Get.toNamed(Routes.jobDetails, arguments: {'jobId': _jobId});
   }
 }

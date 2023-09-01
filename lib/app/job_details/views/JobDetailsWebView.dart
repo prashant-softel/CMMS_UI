@@ -142,10 +142,7 @@ class JobDetailsWebView extends GetView<JobDetailsController> {
                                             "Job Title",
                                             style: Styles.black14,
                                           ),
-                                          Text(
-                                            "Job Description ",
-                                            style: Styles.black14,
-                                          ),
+
                                           Text(
                                             "Plant Name: ",
                                             style: Styles.black14,
@@ -162,6 +159,10 @@ class JobDetailsWebView extends GetView<JobDetailsController> {
                                           //   "Tools Required ",
                                           //   style: Styles.black14,
                                           // ),
+                                          Text(
+                                            "Job Description ",
+                                            style: Styles.black14,
+                                          ),
                                         ],
                                       ),
                                       Dimens.boxWidth10,
@@ -172,9 +173,7 @@ class JobDetailsWebView extends GetView<JobDetailsController> {
                                           Text(
                                               "${controller.jobDetailsModel.value?.jobTitle ?? ""}",
                                               style: Styles.blue14),
-                                          Text(
-                                              "${controller.jobDetailsModel.value?.jobDescription ?? ""}",
-                                              style: Styles.blue14),
+
                                           Text(
                                               "${controller.jobDetailsModel.value?.facilityName ?? ""}",
                                               style: Styles.blue14),
@@ -214,6 +213,9 @@ class JobDetailsWebView extends GetView<JobDetailsController> {
                                           //         : []}"
                                           // }"
                                           // ),
+                                          Text(
+                                              "${controller.jobDetailsModel.value?.jobDescription ?? ""}",
+                                              style: Styles.blue14),
                                         ],
                                       ),
                                       Spacer(),

@@ -2814,6 +2814,137 @@ class ViewPermitWebScreen extends GetView<ViewPermitController> {
                                                 SizedBox(
                                                   height: 10,
                                                 ),
+                                                ///Jobs Linked to this permit
+                                              
+                                                   Container(
+                                                      margin:
+                                                          Dimens.edgeInsets20,
+                                                      height: 250,
+                                                      width:
+                                                          MediaQuery.of(context)
+                                                                  .size
+                                                                  .width /
+                                                              1.2,
+                                                      decoration: BoxDecoration(
+                                                        border: Border.all(
+                                                          color: ColorValues
+                                                              .lightGreyColorWithOpacity35,
+                                                          width: 1,
+                                                        ),
+                                                        boxShadow: [
+                                                          BoxShadow(
+                                                            color: ColorValues
+                                                                .appBlueBackgroundColor,
+                                                            spreadRadius: 2,
+                                                            blurRadius: 5,
+                                                            offset:
+                                                                Offset(0, 2),
+                                                          ),
+                                                        ],
+                                                      ),
+                                                      child: Column(
+                                                        children: [
+                                                          Padding(
+                                                            padding:
+                                                                const EdgeInsets
+                                                                    .all(10.0),
+                                                            child: Row(
+                                                              children: [
+                                                                Text(
+                                                                  "Jobs Linked To This Permit",
+                                                                  style: Styles
+                                                                      .blue700,
+                                                                ),
+                                                              ],
+                                                            ),
+                                                          ),
+                                                          Divider(
+                                                            color: ColorValues
+                                                                .greyLightColour,
+                                                          ),
+                                                          Expanded(
+                                                            child:
+                                                                ScrollableTableView(
+
+                                                              columns: [
+                                                                "Job Id",
+                                                                "Job Title",
+                                                                "Equipment Category",
+                                                                "Equipment",
+                                                                "Breakdown Time",
+                                                                "Assigned To",
+                                                                "Status",
+                                                                
+                                                              ].map((column) {
+                                                                return TableViewColumn(
+                                                                
+                                                                  label: column,
+                                                                  minWidth:
+                                                                      Get.width *
+                                                                          0.15,
+                                                                );
+                                                              }).toList(),
+                                                              rows: [
+                                                                ...List
+                                                                    .generate(
+                                                                  controller
+                                                                          .listAssociatedJobs
+                                                                          ?.length ??
+                                                                      0,
+                                                                  (index) {
+                                                                    var getJobsLinkedToPermitList =
+                                                                        controller
+                                                                            .listAssociatedJobs?[index];
+                                                                    return [
+                                                                      '${getJobsLinkedToPermitList?.jobId}',
+                                                                      '${getJobsLinkedToPermitList?.title ?? ''}',
+                                                                      '${getJobsLinkedToPermitList?.equipmentCat ?? ''}',
+                                                                      '${getJobsLinkedToPermitList?.equipment ?? ''}',
+                                                                      '${getJobsLinkedToPermitList?.breakdownTime ?? ''}',
+                                                                      '${getJobsLinkedToPermitList?.assignedTo ?? ''}',
+                                                                      '${getJobsLinkedToPermitList?.status_short ?? ''}',
+                                                                    ];
+                                                                  },
+                                                                ),
+                                                              ].map((record) {
+                                                                return TableViewRow(
+                                                                  height: 40,
+                                                                  cells: record
+                                                                      .map(
+                                                                          (value) {
+                                                                    return TableViewCell(
+                                                                      child: value == record[0]
+                                                                      ?GestureDetector(
+                                                                        onTap: () {
+                                                                          controller.viewJobDetails(
+                                                                            int.tryParse('${record[0]}')
+                                                                          );
+                                                                        },
+                                                                        child: Text(value,   
+                                                                        style:
+                                                                              TextStyle(
+                                                                            decoration:
+                                                                                TextDecoration.underline,
+                                                                            decorationStyle:
+                                                                                TextDecorationStyle.solid,
+                                                                            color: Color.fromARGB(
+                                                                                255,
+                                                                                5,
+                                                                                92,
+                                                                                163),
+                                                                          ),),
+                                                                      )
+                                                                      :Text(value)
+
+                                                                    );
+                                                                  }).toList(),
+                                                                );
+                                                              }).toList(),
+                                                            ),
+                                                          ),
+                                                        ],
+                                                      ),
+                                                    ),
 
                                                 ///Permit History
                                                 SizedBox(

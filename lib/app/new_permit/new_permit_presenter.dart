@@ -217,14 +217,7 @@ Future<NewPermitDetailModel?> getNewPermitDetail({
       );
   }
 
-  Future<List<LinkedJobsToPermitModel>?> getJobsLinkdToPermitList(
-    permitId,
-    isLoading,
-  ) async =>
-      await newPermitUsecase.getJobsLinkdToPermitList(
-        permitId: permitId,
-        isLoading: isLoading,
-      );
+ 
 
 }
 

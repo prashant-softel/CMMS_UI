@@ -281,6 +281,7 @@ class NewPermitListController extends GetxController {
 // {'permitId':permitId}
   Future<void> editNewPermit({int? permitId, bool? isChecked}) async {
     Get.toNamed(Routes.newPermit, arguments: {'permitId': permitId, 'isChecked': isChecked});
+    print('PermitIdArgument:$permitId');
   }
 
   Future<void> viewNewPermitList({int? permitId}) async {
