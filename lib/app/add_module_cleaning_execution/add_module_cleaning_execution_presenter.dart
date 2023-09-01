@@ -92,6 +92,27 @@ class AddModuleCleaningExecutionPresenter {
     );
   }
 
+   Future<Map<String, dynamic>?> abandonScheduleExecutionButton({
+   abandoneJsonString,
+  required bool isLoading,
+    
+  }) async {
+     return addModuleCleaningExecutionUsecase.abandonScheduleExecutionButton(
+        abandoneJsonString: abandoneJsonString,
+      isLoading: isLoading,
+      );
+  }
+
+  Future<Map<String, dynamic>?> updateMCExecution({
+    updateMCExecution,
+    required bool isLoading,
+  }) async {
+    return addModuleCleaningExecutionUsecase.updateMCExecution(
+      updateMCExecution: updateMCExecution,
+      isLoading: isLoading,
+    );
+  }
+
 
   Future<List<FacilityModel?>?> getFacilityList() async =>
       await addModuleCleaningExecutionUsecase.getFacilityList();

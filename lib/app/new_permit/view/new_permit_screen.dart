@@ -2043,7 +2043,7 @@ class NewPermitScreen extends GetView<NewPermitController> {
                                                 height: 10,
                                               ),
 
-                                              //// Permit Reference commented for now
+                                              //// Permit Reference 
                                               Padding(
                                                 padding: const EdgeInsets.only(left: 60),
                                                 child: Row(
@@ -3090,7 +3090,37 @@ class NewPermitScreen extends GetView<NewPermitController> {
                                                   ],
                                                 ),
                                               ),
-
+                                            
+                                              controller.jobModel?.id != null
+                                              ?Center(
+                                                      child: Container(
+                                                          height: 45,
+                                                          child:
+                                                              CustomElevatedButton(
+                                                            backgroundColor:
+                                                                ColorValues
+                                                                    .appGreenColor,
+                                                            text: "Submit For Job",
+                                                            onPressed: () {
+                                                              // var jobId = controller.jobModel?.id ?? 0;
+                                                              // print('JobId'),
+                                                              controller.isCheckedJSA
+                                                                              .value ==
+                                                                          true &&
+                                                                      controller
+                                                                              .isCheckedSOP
+                                                                              .value ==
+                                                                          true
+                                                                  ? controller
+                                                                      .createNewPermitForJob(jobId: controller.jobModel?.id)
+                                                                  : Get.dialog<
+                                                                          void>(
+                                                                      checkboxAlertBox());
+                                                                  // controller.linkToPermit(jobId: controller.jobModel?.id);
+                                                            },
+                                                          )),
+                                                    )
+                                                    :
                                               controller.permitId.value <= 0
                                                   ? Center(
                                                       child: Container(

@@ -7,8 +7,10 @@ import 'package:cmms/app/job_card_details/views/widgets/carry_forward_Job_dialog
 import 'package:cmms/app/job_card_details/views/widgets/close_job_dialog.dart';
 import 'package:cmms/app/job_card_details/views/widgets/job_card_updated_dialog.dart';
 import 'package:cmms/app/widgets/abandon_execution_message_dialog.dart';
+import 'package:cmms/app/widgets/abandon_schedule_execution_message_dialog.dart';
 import 'package:cmms/app/widgets/create_escalation_matrix_dialog.dart';
 import 'package:cmms/app/widgets/create_incident_report_dialog.dart';
+import 'package:cmms/app/widgets/create_new_permit_for_job.dart';
 import 'package:cmms/app/widgets/create_permit_dialog.dart';
 import 'package:cmms/app/widgets/create_sop_dialog.dart';
 import 'package:cmms/app/widgets/end_mc_execution_message_dialog.dart';
@@ -25,6 +27,7 @@ import 'package:cmms/app/widgets/permit_issue_message_dialog.dart';
 import 'package:cmms/app/widgets/permit_reject_message_dialog.dart';
 import 'package:cmms/app/widgets/start_mc_execution_dialog.dart';
 import 'package:cmms/app/widgets/update_incident_report_dialog.dart';
+import 'package:cmms/app/widgets/update_mc_execution_dialog.dart';
 import 'package:cmms/app/widgets/update_permit_dialog.dart';
 import 'package:cmms/app/widgets/warranty_claim_error_dialog.dart';
 import 'package:cmms/app/widgets/warranty_claim_updated_message_dialog.dart';
@@ -925,6 +928,32 @@ class ConnectHelper {
     return responseModel;
   }
 
+
+   Future<ResponseModel> abandonScheduleExecutionButton({
+    required String auth,
+    abandoneJsonString,
+    bool? isLoading,
+  }) async {
+    var responseModel = await apiWrapper.makeRequest(
+      'MC/AbandonMCSchedule',
+      Request.put,
+      abandoneJsonString,
+      isLoading ?? false,
+      {
+        'Content-Type': 'application/json',
+        'Authorization': 'Bearer $auth',
+      },
+    );
+    print('AbandonExecutionResponse: ${responseModel.data}');
+    var res = responseModel.data;
+    var parsedJson = json.decode(res);
+    Get.dialog<void>(
+        AbandonScheduleExecutionMessageDialog(data: parsedJson['message']));
+
+    return responseModel;
+  }
+
+
   ///End MC Execution
   Future<ResponseModel> endMCExecutionButton({
     required String auth,
@@ -1676,6 +1705,37 @@ class ConnectHelper {
     return responseModel;
   }
 
+
+  //Create New Permit
+  Future<ResponseModel> createNewPermitForJob({
+    required String auth,
+    newPermit,
+    jobId,
+    bool? isLoading,
+  }) async {
+    var responseModel = await apiWrapper.makeRequest(
+      'Permit/CreatePermit',
+      Request.post,
+      newPermit,
+      isLoading ?? false,
+      {
+        'Content-Type': 'application/json',
+        'Authorization': 'Bearer $auth',
+      },
+    );
+
+    print('CreateNewPermitResponseForJob:${responseModel.data}');
+    var res = responseModel.data;
+    var parsedJson = json.decode(res);
+    Get.dialog<void>(CreateNewPermitForJobDialog(
+      data: parsedJson['message'],
+      PtwId: parsedJson['id'],
+    ));
+
+    return responseModel;
+  }
+
+
   //Update New Permit
   Future<ResponseModel> updateNewPermit({
     required String auth,
@@ -1969,6 +2029,40 @@ class ConnectHelper {
     Get.dialog<void>(UpdateIncidentReportDialog(
       data: parsedJson['message'],
       incidentReportId: parsedJson['id'],
+    ));
+    // }
+
+    return responseModel;
+  }
+
+
+   //Update MC Execution
+  Future<ResponseModel> updateMCExecution({
+    required String auth,
+    updateMCExecution,
+    bool? isLoading,
+  }) async {
+    var responseModel = await apiWrapper.makeRequest(
+      'MC/UpdateMCScheduleExecution',
+      Request.put,
+      updateMCExecution,
+      isLoading ?? false,
+      {
+        'Content-Type': 'application/json',
+        'Authorization': 'Bearer $auth',
+      },
+    );
+
+    print('Update MC Execution Response:${responseModel.data}');
+    var res = responseModel.data;
+    var parsedJson = json.decode(res);
+    // if (res.e != null) {
+    //   Get.dialog<void>(WarrantyClaimErrorDialog());
+    // } else {
+
+    Get.dialog<void>(UpdateMCExecutionDialog(
+      data: parsedJson['message'],
+      mcExecutionId: parsedJson['id'],
     ));
     // }
 

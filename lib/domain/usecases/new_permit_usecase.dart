@@ -172,12 +172,35 @@ class NewPermitUsecase {
         facility_id
         );
 
+
+  Future<Map<String, dynamic>?> linkToPermit({
+    int? jobId,
+    int? permitId,
+    bool? isLoading,
+  }) async =>
+      await repository.linkToPermit(
+        jobId,
+        permitId,
+        isLoading,
+      );
+
   Future<Map<String, dynamic>> createNewPermit({
     newPermit,
     bool? isLoading,
   }) async =>
       await repository.createNewPermit(
         newPermit,
+        isLoading,
+      );
+
+  Future<Map<String, dynamic>> createNewPermitForJob({
+    newPermit,
+    jobId,
+    bool? isLoading,
+  }) async =>
+      await repository.createNewPermitForJob(
+        newPermit,
+        jobId,
         isLoading,
       );
 
