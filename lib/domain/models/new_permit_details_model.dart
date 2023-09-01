@@ -383,7 +383,7 @@ class ListAssociatedJob {
   String? title;
   String? equipmentCat;
   String? equipment;
-  String? breakdownTime;
+  DateTime? breakdownTime;
   String? assignedTo;
   int? status;
   String? status_short;
@@ -395,7 +395,9 @@ class ListAssociatedJob {
         title: json["title"] ?? '',
         equipmentCat: json['equipmentCat'],
         equipment: json['equipment'],
-        breakdownTime: json['breakdownTime'],
+        breakdownTime: json['breakdownTime'] == null
+            ? DateTime.now()
+            : DateTime.parse(json['breakdownTime'] as String),
         assignedTo: json['assignedTo'] ?? '',
         status: json['status'],
         status_short: json['status_short'],
