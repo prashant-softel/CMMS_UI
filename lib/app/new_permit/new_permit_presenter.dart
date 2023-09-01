@@ -148,6 +148,17 @@ class NewPermitPresenter {
         facility_id
         );
 
+  Future<Map<String, dynamic>?> linkToPermit({
+    int? jobId,
+    int? permitId,
+    bool? isLoading,
+  }) async =>
+      await newPermitUsecase.linkToPermit(
+        jobId: jobId,
+        permitId: permitId,
+        isLoading: isLoading,
+      );
+
 
   Future<List<InventoryCategoryModel?>?> getInventoryCategoryList({
     String? auth,
@@ -190,6 +201,18 @@ class NewPermitPresenter {
   }) async {
     return newPermitUsecase.createNewPermit(
        newPermit: newPermit,
+      isLoading: isLoading,
+    );
+  }
+
+  Future<Map<String, dynamic>?> createNewPermitForJob({
+     newPermit,
+     required int jobId,
+    required bool isLoading,
+  }) async {
+    return newPermitUsecase.createNewPermitForJob(
+       newPermit: newPermit,
+       jobId: jobId,
       isLoading: isLoading,
     );
   }

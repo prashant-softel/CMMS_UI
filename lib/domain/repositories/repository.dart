@@ -336,6 +336,57 @@ class Repository {
     }
   }
 
+
+  //create New Permit For Job
+  Future<Map<String, dynamic>> createNewPermitForJob(
+    newPermit,
+    jobId,
+    bool? isLoading,
+  ) async {
+    try {
+      final auth = await getSecuredValue(LocalKeys.authToken);
+      final res = await _dataRepository.createNewPermitForJob(
+        auth: auth,
+        newPermit: newPermit,
+        jobId: jobId,
+        isLoading: isLoading ?? false,
+      );
+
+      var resourceData = res.data;
+      // var parsedJson = json.decode(resourceData);
+      print('Response Create Permit For Job: ${resourceData}');
+      // Get.dialog(
+      //   CreateNewPermitDialog(
+      //     createPermitData: 'Dialog Title',
+      //     data: parsedJson['message'],
+      //   ),
+      // );
+
+      // data = res.data;
+      //print('Response Create Permit: ${data}');
+
+      if (!res.hasError) {
+        if (res.errorCode == 200) {
+          var responseMap = json.decode(res.data);
+           var permitForJob = responseMap['id'];
+          print('CreateForJobPermitResponse:${permitForJob[0]}');
+          if(jobId!=null){
+            linkToPermit(jobId, permitForJob[0], true);
+            }
+          return responseMap;
+        }
+      } else {
+        Utility.showDialog(res.errorCode.toString() + 'createNewPermitForJOb');
+        //return '';
+      }
+      return Map();
+    } catch (error) {
+      print(error.toString());
+      return Map();
+    }
+  }
+
+
   //Update New Permit
   Future<Map<String, dynamic>> updateNewPermit(
       newPermit, bool? isLoading, bool? resubmit) async {
@@ -406,6 +457,7 @@ class Repository {
       if (!res.hasError) {
         if (res.errorCode == 200) {
           var responseMap = json.decode(res.data);
+          
           return responseMap;
         }
       } else {
@@ -747,6 +799,52 @@ class Repository {
       return Map();
     }
   }
+
+
+  //Update MC Execution
+  Future<Map<String, dynamic>> updateMCExecution(
+    updateMCExecution,
+    bool? isLoading,
+  ) async {
+    try {
+      final auth = await getSecuredValue(LocalKeys.authToken);
+      final res = await _dataRepository.updateMCExecution(
+        auth: auth,
+        updateMCExecution: json.encode(updateMCExecution),
+        isLoading: isLoading ?? false,
+      );
+
+      var resourceData = res.data;
+      // var parsedJson = json.decode(resourceData);
+      print('Response MC Execution Report: ${resourceData}');
+      // Get.dialog(
+      //   CreateNewPermitDialog(
+      //     createPermitData: 'Dialog Title',
+      //     data: parsedJson['message'],
+      //   ),
+      // );
+
+      // data = res.data;
+      //print('Response Create Permit: ${data}');
+
+      if (!res.hasError) {
+        if (res.errorCode == 200) {
+          var responseMap = json.decode(res.data);
+          return responseMap;
+        } else {
+          // Get.dialog<void>(WarrantyClaimErrorDialog());
+        }
+      } else {
+        Utility.showDialog(res.errorCode.toString() + 'updateMCExecution');
+        //return '';
+      }
+      return Map();
+    } catch (error) {
+      print(error.toString());
+      return Map();
+    }
+  }
+
 
   /// Clear all data from secure storage .
   void deleteAllSecuredValues() {
@@ -2325,6 +2423,52 @@ class Repository {
       return Map();
     }
   }
+
+
+   ///Abandon Schedule Execution
+  Future<Map<String, dynamic>> abandonScheduleExecutionButton(
+    abandoneJsonString,
+    bool? isLoading,
+  ) async {
+    try {
+      final auth = await getSecuredValue(LocalKeys.authToken);
+      final res = await _dataRepository.abandonScheduleExecutionButton(
+        auth: auth,
+        abandoneJsonString: json.encode(abandoneJsonString),
+        isLoading: isLoading ?? false,
+      );
+
+      var resourceData = res.data;
+      // var parsedJson = json.decode(resourceData);
+      print('Response Abandon Schedule Execution: ${resourceData}');
+      // Get.dialog(
+      //   CreateNewPermitDialog(
+      //     createPermitData: 'Dialog Title',
+      //     data: parsedJson['message'],
+      //   ),
+      // );
+
+      // data = res.data;
+      //print('Response Create Permit: ${data}');
+
+      if (!res.hasError) {
+        if (res.errorCode == 200) {
+          var responseMap = json.decode(res.data);
+          return responseMap;
+        } else {
+          // Get.dialog<void>(WarrantyClaimErrorDialog());
+        }
+      } else {
+        Utility.showDialog(res.errorCode.toString() + 'abandonScheduleExecutionButton');
+        //return '';
+      }
+      return Map();
+    } catch (error) {
+      print(error.toString());
+      return Map();
+    }
+  }
+
 
   ///End MC Execution
   Future<Map<String, dynamic>> endMCExecutionButton(

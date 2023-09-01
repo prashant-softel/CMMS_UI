@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'dart:convert';
 
 import 'package:cmms/app/add_module_cleaning_execution/add_module_cleaning_execution_presenter.dart';
 import 'package:cmms/app/app.dart';
@@ -13,6 +14,7 @@ import 'package:cmms/domain/models/modulelist_model.dart';
 import 'package:cmms/domain/models/paiyed_model.dart';
 import 'package:cmms/domain/models/role_model.dart';
 import 'package:cmms/domain/models/type_permit_model.dart';
+import 'package:cmms/domain/models/update_mc_execution_model.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
@@ -70,6 +72,12 @@ class AddModuleCleaningExecutionController extends GetxController {
       EndMCExecutionDetailsModel().obs;
   RxList<EndMCExecutionDetailsModel?>? mcExecutionDetailsList =
       <EndMCExecutionDetailsModel?>[].obs;
+
+
+  TextEditingController scheduleExecutionTextFieldCtrlr = TextEditingController();
+  TextEditingController remarkScheduleExecutionTextFieldCtrlr = TextEditingController();
+
+  
 
 
 ///Equipment 
@@ -200,6 +208,75 @@ RxList<InventoryCategoryModel?> equipmentCategoryList =
     }
 
     update(['equipment_list']);
+  }
+
+   void abandonScheduleExecutionButton({int? id}) async {
+    {
+      String _comment = scheduleExecutionTextFieldCtrlr.text.trim();
+
+      CommentModel commentAbandonModel =
+          CommentModel(id: id, comment: _comment);
+
+      var abandoneJsonString = commentAbandonModel.toJson();
+      // print({"rejectCalibrationJsonString", approveCalibrationtoJsonString});
+      Map<String, dynamic>? response = await addModuleCleaningExecutionPresenter.abandonScheduleExecutionButton(
+        abandoneJsonString: abandoneJsonString,
+        isLoading: true,
+      );
+      if (response == true) {
+        //getCalibrationList(facilityId, true);
+      }
+    }
+  }
+
+  ///Update MC Execution
+  void updateMCExecution({int? scheduleId, int? cleaningDay, int? waterUsed}) async {
+    {
+      // checkForm();
+      // if (isFormInvalid.value) {
+      //   return;
+      // }
+      // String _title = htmlEscape.convert(titleTextCtrlr.text.trim());
+      // String _incidentDescription =
+      //     htmlEscape.convert(incidentreportDescriptionCtrlr.text.trim());
+      // String _insuranceRemark =
+      //     htmlEscape.convert(insuranceRemarkTextCtrlr.text.trim());
+      // String _insuranceAvailable =
+      //     htmlEscape.convert(insuranceAvailableTextCtrlr.text.trim());
+    
+     var remark;
+    rowItem.value.forEach((element) {
+     
+      // items.add(item);
+    });
+    print('data${rowItem.value}');
+    
+    // String remark = items.join(', ');
+    // print('Items remark:${remark}');
+
+      UpdateMcExecutionModel updateMCExecutionModel =
+          UpdateMcExecutionModel(
+            scheduleId: scheduleId,
+            cleaningDay: cleaningDay,
+            waterUsed: waterUsed,  
+            remark: rowItem.value[0][8]["value"],
+            cleanedEquipmentIds:[10,11],
+            abandonedEquipmentIds:[12]
+             
+             );
+
+      var updateMCExecutionJsonString = updateMCExecutionModel.toJson();
+      Map<String, dynamic>? responseUpdateMCExecution =
+          await addModuleCleaningExecutionPresenter.updateMCExecution(
+        updateMCExecution: updateMCExecutionJsonString,
+        isLoading: true,
+      );
+
+      if (responseUpdateMCExecution == null) {
+        // showAlertDialog();
+      }
+      print('Update MC Execution data: $updateMCExecutionJsonString');
+    }
   }
 
   Future<void> getTypePermitList() async {
