@@ -368,7 +368,7 @@ class PreventiveMaintenanceExecutionContentWeb
                                       padding: const EdgeInsets.all(8.0),
                                       child: InkWell(
                                         onTap: () {
-                                          Get.toNamed(Routes.createMrs,
+                                          Get.toNamed(Routes.mrsReturnScreen,
                                               arguments: controller
                                                       .pmtaskViewModel
                                                       .value

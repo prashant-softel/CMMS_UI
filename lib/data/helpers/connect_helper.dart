@@ -532,20 +532,19 @@ class ConnectHelper {
     return responseModel;
   }
 
-   Future<ResponseModel> getEquipmentModelList({
+  Future<ResponseModel> getEquipmentModelList({
     required bool isLoading,
     required String auth,
     int? facilityId,
-   
   }) async {
     // var startDateParam = (start_date != null) ? 'start_date=$end_date&' : '';
     // var endDateParam = (end_date != '') ? 'end_date=$start_date' : '';
 //var statusParam = (status!=null status!='')?'status=1':'';
     // var statusParam = 'status=1';
     ResponseModel responseModel = await apiWrapper.makeRequest(
-      'MC/GetMCEquipmentList?facilityId=$facilityId', 
-          // startDateParam +
-          // endDateParam,
+      'MC/GetMCEquipmentList?facilityId=$facilityId',
+      // startDateParam +
+      // endDateParam,
       Request.getMultiparts,
       null,
       isLoading,
@@ -553,11 +552,9 @@ class ConnectHelper {
         'Authorization': 'Bearer $auth',
       },
     );
-    
-    return responseModel;
-    
-  }
 
+    return responseModel;
+  }
 
   ///Module Cleaning Task List
   Future<ResponseModel> getMCTaskList({
@@ -979,7 +976,6 @@ class ConnectHelper {
     return responseModel;
   }
 
-
   Future<ResponseModel> startMCExecutionScheduleButton({
     required String auth,
     bool? isLoading,
@@ -1006,8 +1002,6 @@ class ConnectHelper {
 
     return responseModel;
   }
-
-
 
   Future<ResponseModel> permitRejectButton({
     required String auth,
@@ -2179,8 +2173,7 @@ class ConnectHelper {
     return responseModel;
   }
 
-
-   Future<ResponseModel> getJobsLinkdToPermitList({
+  Future<ResponseModel> getJobsLinkdToPermitList({
     String? auth,
     int? permitId,
     bool? isLoading,
@@ -2196,7 +2189,6 @@ class ConnectHelper {
     );
     return responseModel;
   }
-
 
   Future<ResponseModel> getMrsListByModule({
     String? auth,
@@ -2214,8 +2206,6 @@ class ConnectHelper {
     );
     return responseModel;
   }
-
-
 
   Future<ResponseModel> createModuleList({
     required String auth,
@@ -2810,11 +2800,10 @@ class ConnectHelper {
             isLoading: true);
       } else if (importType == 3) {
         importCheckpoint(
-          auth: auth,
-          fileId: jsonResponse["id"][0].toString(),
-          isLoading: true);
-      }
-      else if (importType == 4) {
+            auth: auth,
+            fileId: jsonResponse["id"][0].toString(),
+            isLoading: true);
+      } else if (importType == 4) {
         importCheckpoint(
             auth: auth,
             fileId: jsonResponse["id"][0].toString(),
@@ -4815,6 +4804,7 @@ class ConnectHelper {
     );
     return responseModel;
   }
+
   Future<ResponseModel> importCheckpoint({
     required String auth,
     required String fileId,
@@ -4848,6 +4838,28 @@ class ConnectHelper {
         'Authorization': 'Bearer $auth',
       },
     );
+    return responseModel;
+  }
+
+  Future<ResponseModel> getFaultyMaterialReportList(
+      {required String auth,
+      bool? isLoading,
+      int? facilityId,
+      dynamic startDate,
+      dynamic endDate,
+      int? userId}) async {
+    var responseModel = await apiWrapper.makeRequest(
+      //'SMReports/GetPlantStockReport?facility_id=$facilityId&StartDate=$endDate&EndDate=$startDate',
+      'SMReports/GetFaultyMaterialReport?facility_id=45&StartDate=2020-01-01&EndDate=2023-08-30',
+      Request.get,
+      null,
+      isLoading ?? false,
+      {
+        'Authorization': 'Bearer $auth',
+        'Content-Type': 'application/json',
+      },
+    );
+
     return responseModel;
   }
 }

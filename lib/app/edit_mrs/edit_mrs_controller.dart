@@ -29,6 +29,7 @@ class EditMrsController extends GetxController {
   var activityCtrlr = TextEditingController();
   var remarkCtrlr = TextEditingController();
   var whereUsedCtrlr = TextEditingController();
+  var setTemlateCtrlr = TextEditingController();
 
   Rx<int> mrsId = 0.obs;
   var isSetTemplate = false.obs;
@@ -99,6 +100,7 @@ class EditMrsController extends GetxController {
       });
       whereUsedId = _mrsDetailsModel.whereUsedTypeId ?? 0;
       activityCtrlr.text = _mrsDetailsModel.activity ?? "";
+      // activityCtrlr.text = _mrsDetailsModel. ?? "";
       remarkCtrlr.text = _mrsDetailsModel.remarks ?? "";
       whereUsedCtrlr.text = _mrsDetailsModel.whereUsedType.toString();
     }
@@ -132,10 +134,7 @@ class EditMrsController extends GetxController {
   Future<void> editMrs() async {
     String _activity = activityCtrlr.text.trim();
     String _remark = remarkCtrlr.text.trim();
-
-    // Rx<DateTime> requestd_date = DateTime.now().obs;
-    // String formattedFromdate =
-    //     DateFormat('yyyy-MM-dd').format(requestd_date.value);
+    String _setTemp = setTemlateCtrlr.text.trim();
 
     List<Equipments> items = [];
     rowItem.value.forEach((element) {
@@ -155,7 +154,7 @@ class EditMrsController extends GetxController {
         isEditMode: 1,
         facility_ID: facilityId,
         //  requestd_date: formattedFromdate,
-        setAsTemplate: "",
+        setAsTemplate: _setTemp,
         activity: _activity,
         //1 is job,2 is pm
         whereUsedType: 2,

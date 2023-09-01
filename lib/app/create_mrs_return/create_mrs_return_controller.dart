@@ -1,6 +1,7 @@
 import 'dart:async';
 
 import 'package:cmms/app/create_mrs_return/create_mrs_return_presenter.dart';
+import 'package:cmms/domain/models/create_return_mrs_model.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
@@ -26,6 +27,7 @@ class CreateMrsReturnController extends GetxController {
   var activityCtrlr = TextEditingController();
   var remarkCtrlr = TextEditingController();
   var whereUsedCtrlr = TextEditingController();
+  var setTemlateCtrlr = TextEditingController();
 
   int whereUsedTypeId = 0;
   var isSetTemplate = false.obs;
@@ -70,72 +72,68 @@ class CreateMrsReturnController extends GetxController {
   void addRowItem() {
     rowItem.value.add([
       {"key": "Drop_down", "value": 'Please Select'},
-      {'key': "Material_Type", "value": ''},
       {'key': "Issue_Qty", "value": ''},
       {'key': "Return_Qty", "value": ''},
+      {'key': "is_faulty", "value": ''},
       {'key': "Remark", "value": ''},
     ]);
   }
 
-  Future<void> createMrs() async {
+  Future<void> createReturnMrs() async {
     String _activity = activityCtrlr.text.trim();
     String _remark = remarkCtrlr.text.trim();
+    String _setTemp = setTemlateCtrlr.text.trim();
 
     Rx<DateTime> requestd_date = DateTime.now().obs;
     String formattedFromdate =
         DateFormat('yyyy-MM-dd').format(requestd_date.value);
 
-    // List<Equipments> items = [];
-    // rowItem.value.forEach((element) {
-    //   Equipments item = Equipments(
-    //     id: dropdownMapperData[element[0]["value"]]?.id,
-    //     issued_qty: dropdownMapperData[element[0]["value"]]?.available_qty,
-    //     asset_code: dropdownMapperData[element[0]["value"]]?.asset_code,
-    //     equipmentID: dropdownMapperData[element[0]["value"]]?.asset_ID,
-    //     asset_type_ID: dropdownMapperData[element[0]["value"]]?.asset_type_ID,
-    //     approval_required: 1,
-    //     requested_qty: int.tryParse(element[4]["value"] ?? '0'),
-    //   );
-    //   items.add(item);
-    // });
-    // CreateMrsModel createMrs = CreateMrsModel(
-    //     ID: 0,
-    //     isEditMode: 0,
-    //     facility_ID: facilityId,
-    //     setAsTemplate: "", //isSetTemplate == true ? 1 : 0,
-    //     activity: _activity,
-    //     //1 is job,2 is pm
-    //     whereUsedType: 2,
-    //     whereUsedTypeId: whereUsedTypeId,
-    //     remarks: _remark,
-    //     equipments: items);
-    //  var createMrsJsonString = createMrs.toJson();
-    var createReturnMrsJsonString = {
-      "ID": 145,
-      "isEditMode": 0,
-      "facility_ID": 45,
-      "requested_by_emp_ID": 1,
-      // "returnDate":"2023-03-03",
-      "setAsTemplate": "T3",
-      "asset_item_ID": 4,
-      "return_remarks": "Testing",
-      "item_condition": 1,
-      "cmmrsItems": [
-        {
-          "id": 316,
-          "equipmentID": 12,
-          "approval_required": 1,
-          "asset_type_ID": 10,
-          "return_remarks": "Test remarks",
-          "requested_qty": 15,
-          "issued_qty": 10,
-          "returned_qty": 3,
-          "is_faulty": 0
-        }
-      ]
-    };
+    List<CmmsItem> items = [];
+    rowItem.value.forEach((element) {
+      CmmsItem item = CmmsItem(
+        asset_item_ID: dropdownMapperData[element[0]["value"]]?.id,
+        issued_qty: dropdownMapperData[element[0]["value"]]?.quantity,
+        returned_qty: int.tryParse(element[2]["value"] ?? '0'),
+        requested_qty: 0,
+        approval_required: 0,
+        is_faulty: int.tryParse(element[3]["value"] ?? '0'),
+        return_remarks: element[4]["value"] ?? '0',
+      );
+      items.add(item);
+    });
+    CreateReturnMrsModel createMrs = CreateReturnMrsModel(
+        ID: 0,
+        facility_ID: facilityId,
+        setAsTemplate: "", //isSetTemplate == true ? 1 : 0,
+        activity: _activity,
+        //1 is job,2 is pm
+        whereUsedType: 2,
+        whereUsedTypeId: whereUsedTypeId,
+        remarks: _remark,
+        cmmrsItems: items);
+    var createReturnMrsJsonString = createMrs.toJson();
+    // var createReturnMrsJsonString = {
+    //   "ID": 0,
+    //   "facility_ID": 45,
+    //   "setAsTemplate": "T140",
+    //   "whereUsedType": 1,
+    //   "whereUsedTypeId": 9999,
+    //   "remarks": "Testing on live",
+    //   "activity": "return activity",
+    //   "cmmrsItems": [
+    //     {
+    //       "asset_item_ID": 12,
+    //       "approval_required": 1,
+    //       "return_remarks": "Test remarks",
+    //       "requested_qty": 99,
+    //       "issued_qty": 65,
+    //       "returned_qty": 10,
+    //       "is_faulty": 0
+    //     }
+    //   ]
+    // };
 
-    print({"createMrsJsonString", createReturnMrsJsonString});
+    print({"createReturnMrsJsonString", createReturnMrsJsonString});
     Map<String, dynamic>? responseCreateReturnMrs =
         await createmrsReturnPresenter.createReturnMrs(
       createReturnMrsJsonString: createReturnMrsJsonString,

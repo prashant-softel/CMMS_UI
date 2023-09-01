@@ -25,6 +25,7 @@ import 'package:cmms/domain/models/end_mc_execution_detail_model.dart';
 import 'package:cmms/domain/models/equipment_list_model.dart';
 import 'package:cmms/domain/models/get_asset_data_list_model.dart';
 import 'package:cmms/domain/models/get_asset_items_model.dart';
+import 'package:cmms/domain/models/get_faulty_material_report_model.dart';
 import 'package:cmms/domain/models/get_notification_by_userid_model.dart';
 import 'package:cmms/domain/models/get_notification_model.dart';
 import 'package:cmms/domain/models/get_plant_Stock_list.dart';
@@ -3825,8 +3826,7 @@ class Repository {
     }
   }
 
-
-   Future<List<LinkedJobsToPermitModel>?> getJobsLinkdToPermitList(
+  Future<List<LinkedJobsToPermitModel>?> getJobsLinkdToPermitList(
     //String? auth,
     int? permitId,
     bool? isLoading,
@@ -3841,11 +3841,13 @@ class Repository {
 
       if (!res.hasError) {
         final jsonLinkedJobsToPermitModel = jsonDecode(res.data);
-        final List<LinkedJobsToPermitModel> _linkedJobsToPermit = jsonLinkedJobsToPermitModel
-            .map<LinkedJobsToPermitModel>(
-              (m) => LinkedJobsToPermitModel.fromJson(Map<String, dynamic>.from(m)),
-            )
-            .toList();
+        final List<LinkedJobsToPermitModel> _linkedJobsToPermit =
+            jsonLinkedJobsToPermitModel
+                .map<LinkedJobsToPermitModel>(
+                  (m) => LinkedJobsToPermitModel.fromJson(
+                      Map<String, dynamic>.from(m)),
+                )
+                .toList();
         print({"_linkedJobsToPermit", _linkedJobsToPermit});
         return _linkedJobsToPermit;
       } else {
@@ -3857,7 +3859,6 @@ class Repository {
       return [];
     }
   }
-
 
   Future<List<MRSListByJobIdModel>?> getMrsListByModule(
     //String? auth,
@@ -3874,11 +3875,13 @@ class Repository {
 
       if (!res.hasError) {
         final jsonMrsListByModuleModel = jsonDecode(res.data);
-        final List<MRSListByJobIdModel> _mrsListByModule = jsonMrsListByModuleModel
-            .map<MRSListByJobIdModel>(
-              (m) => MRSListByJobIdModel.fromJson(Map<String, dynamic>.from(m)),
-            )
-            .toList();
+        final List<MRSListByJobIdModel> _mrsListByModule =
+            jsonMrsListByModuleModel
+                .map<MRSListByJobIdModel>(
+                  (m) => MRSListByJobIdModel.fromJson(
+                      Map<String, dynamic>.from(m)),
+                )
+                .toList();
         print({"_mrsListByModule", _mrsListByModule});
         return _mrsListByModule;
       } else {
@@ -3890,7 +3893,6 @@ class Repository {
       return [];
     }
   }
-
 
   Future<void> deleteCkeckpoint(Object check_point_id, bool isLoading) async {
     try {
@@ -7144,6 +7146,42 @@ class Repository {
     }
   }
 
+  Future<List<FaultyMaterialReportModel?>?> getFaultyMaterialReportList(
+      int? facilityId,
+      bool? isLoading,
+      dynamic startDate,
+      dynamic endDate) async {
+    try {
+      final auth = await getSecuredValue(LocalKeys.authToken);
+      final res = await _dataRepository.getFaultyMaterialReportList(
+        auth: auth,
+        facilityId: facilityId ?? 0,
+        isLoading: isLoading ?? false,
+        startDate: startDate,
+        endDate: endDate,
+      );
+
+      if (!res.hasError) {
+        final jsonFaultyMaterialReportModels = jsonDecode(res.data);
+        // print(res.data);
+        final List<FaultyMaterialReportModel> _FaultyMaterialReportModels =
+            jsonFaultyMaterialReportModels
+                .map<FaultyMaterialReportModel>((m) =>
+                    FaultyMaterialReportModel.fromJson(
+                        Map<String, dynamic>.from(m)))
+                .toList();
+
+        return _FaultyMaterialReportModels;
+      } else {
+        Utility.showDialog(
+            res.errorCode.toString() + ' getFaultyMaterialReportList');
+        return [];
+      }
+    } catch (error) {
+      print(error.toString());
+      return [];
+    }
+  }
   //end
   //end
 }

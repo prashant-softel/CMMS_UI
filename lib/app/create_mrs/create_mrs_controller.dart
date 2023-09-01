@@ -25,7 +25,7 @@ class CreateMrsController extends GetxController {
   var activityCtrlr = TextEditingController();
   var remarkCtrlr = TextEditingController();
   var whereUsedCtrlr = TextEditingController();
-
+  var setTemlateCtrlr = TextEditingController();
   int whereUsedTypeId = 0;
   var isSetTemplate = false.obs;
 
@@ -81,6 +81,7 @@ class CreateMrsController extends GetxController {
   Future<void> createMrs() async {
     String _activity = activityCtrlr.text.trim();
     String _remark = remarkCtrlr.text.trim();
+    String _setTemp = setTemlateCtrlr.text.trim();
 
     Rx<DateTime> requestd_date = DateTime.now().obs;
     String formattedFromdate =
@@ -103,7 +104,7 @@ class CreateMrsController extends GetxController {
         ID: 0,
         isEditMode: 0,
         facility_ID: facilityId,
-        setAsTemplate: "", //isSetTemplate == true ? 1 : 0,
+        setAsTemplate: _setTemp, //isSetTemplate == true ? 1 : 0,
         activity: _activity,
         //1 is job,2 is pm
         whereUsedType: 2,

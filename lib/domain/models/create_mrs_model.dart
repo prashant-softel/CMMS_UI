@@ -81,7 +81,7 @@ class Equipments {
   int? available_qty;
   factory Equipments.fromJson(Map<String, dynamic> json) => Equipments(
         id: json["id"],
-        equipmentID: json["equipmentID"],
+        equipmentID: json["asset_item_ID"],
         approval_required: json["approval_required"],
         asset_type_ID: json["asset_type_ID"],
         asset_code: json["asset_code"],
@@ -95,7 +95,7 @@ class Equipments {
         "asset_code": asset_code,
         "asset_type_ID": asset_type_ID,
         "approval_required": approval_required,
-        "equipmentID": equipmentID,
+        "asset_item_ID": equipmentID,
         "id": id,
       };
 }

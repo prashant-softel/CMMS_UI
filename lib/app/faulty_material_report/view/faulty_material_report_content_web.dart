@@ -200,16 +200,16 @@ class _FaultyMaterialReportContentWebState
                                   ),
                                 ],
                               ),
-                              controller.StockDetailsList!.isEmpty
+                              controller.faultyMaterialReportList!.isEmpty
                                   ? Expanded(
                                       child: ScrollableTableView(
                                         columns: [
                                           "Assets Name",
-                                          "Assets Code",
-                                          "Opening",
-                                          "Inward",
-                                          "Outward",
-                                          "Balance"
+                                          "Serial Number",
+                                          "Replace Serial No.",
+                                          "Inseted DateTime",
+                                          "quantity",
+                                          "Remark"
                                         ].map((column) {
                                           return TableViewColumn(
                                             label: column,
@@ -218,7 +218,8 @@ class _FaultyMaterialReportContentWebState
                                         }).toList(),
                                         rows: [
                                           ...List.generate(
-                                            controller.StockDetailsList!.length,
+                                            controller.faultyMaterialReportList!
+                                                .length,
                                             (index) {
                                               return [
                                                 "",
@@ -266,18 +267,19 @@ class _FaultyMaterialReportContentWebState
                                                 controller.paginationController,
                                             columns: [
                                               "Assets Name",
-                                              "Assets Code",
-                                              "Opening",
-                                              "Inward",
-                                              "Outward",
-                                              "Balance"
+                                              "Serial Number",
+                                              "Replace Serial No.",
+                                              "Inseted DateTime",
+                                              "quantity",
+                                              "Remark"
                                             ].map((column) {
                                               return TableViewColumn(
                                                 label: column,
                                                 minWidth: Get.width * 0.13,
                                               );
                                             }).toList(),
-                                            rows: controller.StockDetailsList!
+                                            rows: controller
+                                                .faultyMaterialReportList!
                                                 .map((stockDetails) =>
                                                     TableViewRow(
                                                         height: 50,
@@ -289,21 +291,23 @@ class _FaultyMaterialReportContentWebState
                                                           ),
                                                           TableViewCell(
                                                               child: Text(
-                                                            '${stockDetails?.asset_code ?? ""}',
+                                                            '${stockDetails?.serial_number ?? ""}',
                                                           )),
                                                           TableViewCell(
                                                               child: Text(
-                                                                  '${stockDetails?.opening}')),
-                                                          TableViewCell(
-                                                              child: Text(
-                                                                  '${stockDetails?.inward}')),
-                                                          TableViewCell(
-                                                              child: Text(
-                                                            '${stockDetails?.outward}',
+                                                            '${stockDetails?.replaceSerialNo}',
                                                           )),
                                                           TableViewCell(
                                                               child: Text(
-                                                            '${stockDetails?.balance}',
+                                                            '${stockDetails?.lastInsetedDateTime}',
+                                                          )),
+                                                          TableViewCell(
+                                                              child: Text(
+                                                            '${stockDetails?.qty}',
+                                                          )),
+                                                          TableViewCell(
+                                                              child: Text(
+                                                            '${stockDetails?.remarks}',
                                                           )),
                                                         ]))
                                                 .toList()),
