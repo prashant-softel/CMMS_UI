@@ -253,7 +253,7 @@ class CompetencyListContentWeb extends GetView<CompetencyListController> {
                                                     print("value,$value");
                                                     if (value == true) {
                                                       controller
-                                                          .issuccessCreatechecklist();
+                                                          .issuccessCompetency();
                                                     }
                                                   });
                                                 },
@@ -270,7 +270,7 @@ class CompetencyListContentWeb extends GetView<CompetencyListController> {
                                                     print("value,$value");
                                                     if (value == true) {
                                                       controller
-                                                          .issuccessCreatechecklist();
+                                                          .issuccessCompetency();
                                                     }
                                                   });
                                                 },

@@ -121,9 +121,9 @@ class MastersController extends GetxController {
     );
   }
 
-  Future<void> goToModuleTypeList() async {
+  Future<void> goToFeatureList() async {
     Get.toNamed(
-      Routes.moduleTypeListScreen,
+      Routes.featureTypeListScreen,
     );
   }
 
