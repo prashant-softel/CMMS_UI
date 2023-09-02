@@ -119,7 +119,7 @@ class _WarrantyClaimListWebState extends State<WarrantyClaimListWeb> {
                                                     ['WarrantyClaimListWeb']);
                                               },
                                               hintText:
-                                                  '${controller.formattedTodate.toString()} To ${controller.formattedFromdate.toString()}',
+                                                  '${controller.formattedTodate.toString()} - ${controller.formattedFromdate.toString()}',
                                             ),
                                           ],
                                         ),

@@ -261,6 +261,8 @@ class NewPermitController extends GetxController {
   String? jsaData;
   String? sopData;
 
+ 
+
   ///Safety Measure List
   RxList<SafetyMeasureListModel> safetyMeasureList =
       <SafetyMeasureListModel>[].obs;

@@ -1,5 +1,7 @@
+import 'package:cmms/app/constant/constant.dart';
 import 'package:cmms/app/navigators/app_pages.dart';
 import 'package:cmms/app/theme/dimens.dart';
+import 'package:cmms/app/utils/user_access_constants.dart';
 import 'package:cmms/app/widgets/table_action_button.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
@@ -448,15 +450,14 @@ class JobDetailsWebView extends GetView<JobDetailsController> {
                                                                                 });
                                                                               }
                                                                             }),
-                                                                        TableActionButton(
-                                                                            color: ColorValues
-                                                                                .appLightBlueColor,
-                                                                            icon: Icons
-                                                                                .remove_red_eye,
-                                                                            message:
-                                                                                "View Permit",
-                                                                            onPress: () =>
-                                                                                controller.viewNewPermitList(permitId: int.tryParse(record[1]))),
+                                                                        varUserAccessModel.value.access_list!.where((e) => e.feature_id == UserAccessConstants.kJobFeatureId && e.view == UserAccessConstants.kHaveViewAccess).length >
+                                                                                0
+                                                                            ? TableActionButton(
+                                                                                color: ColorValues.appLightBlueColor,
+                                                                                icon: Icons.remove_red_eye,
+                                                                                message: "View Permit",
+                                                                                onPress: () => controller.viewNewPermitList(permitId: int.tryParse(record[1])))
+                                                                            : Container(),
                                                                         TableActionButton(
                                                                             color:
                                                                                 ColorValues.appYellowColor,

@@ -35,8 +35,8 @@ class ModuleCleaningListExecutionController extends GetxController {
   Rx<DateTime> toDate = DateTime.now().obs;
   bool openFromDateToStartDatePicker = false;
   String get formattedFromdate =>
-      DateFormat('yyyy-MM-dd').format(fromDate.value);
-  String get formattedTodate => DateFormat('yyyy-MM-dd').format(toDate.value);
+      DateFormat('dd/MM/yyyy').format(fromDate.value);
+  String get formattedTodate => DateFormat('dd/MM/yyyy').format(toDate.value);
 
   PaginationController paginationController = PaginationController(
     rowCount: 0,

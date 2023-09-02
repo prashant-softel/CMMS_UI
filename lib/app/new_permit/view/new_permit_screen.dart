@@ -2491,7 +2491,7 @@ class NewPermitScreen extends GetView<NewPermitController> {
 
                                               ///Safety measures
                                               SizedBox(
-                                                height: 150,
+                                                height: 250,
                                                 width: MediaQuery.of(context)
                                                         .size
                                                         .width /
@@ -2535,18 +2535,21 @@ class NewPermitScreen extends GetView<NewPermitController> {
                                                                               mainAxisAlignment: MainAxisAlignment.start,
                                                                               crossAxisAlignment: CrossAxisAlignment.start,
                                                                               children: [
-                                                                                Row(
-                                                                                  children: [
-                                                                                    // checkBoxMethod(1),
-                                                                                    // Text("${i= i! + 1}. "),
-                                                                                    Checkbox(
-                                                                                      value: controller.isChecked1.value,
-                                                                                      onChanged: (bool? value) {
-                                                                                        controller.toggleCheckbox1();
-                                                                                      },
-                                                                                    ),
-                                                                                    Text("${element.name}")
-                                                                                  ],
+                                                                                SizedBox(
+                                                                                  width: 200,
+                                                                                  child: Row(
+                                                                                    children: [
+                                                                                      // checkBoxMethod(1),
+                                                                                      // Text("${i= i! + 1}. "),
+                                                                                      Checkbox(
+                                                                                        value: controller.isChecked1.value,
+                                                                                        onChanged: (bool? value) {
+                                                                                          controller.toggleCheckbox1();
+                                                                                        },
+                                                                                      ),
+                                                                                      Text("${element.name}")
+                                                                                    ],
+                                                                                  ),
                                                                                 )
                                                                               ],
                                                                             ))),
@@ -2565,12 +2568,15 @@ class NewPermitScreen extends GetView<NewPermitController> {
                                                                               mainAxisAlignment: MainAxisAlignment.start,
                                                                               crossAxisAlignment: CrossAxisAlignment.start,
                                                                               children: [
-                                                                                Row(
-                                                                                  children: [
-                                                                                    checkBoxMethod(1),
-                                                                                    // Text("${j= j! + 1}. "),
-                                                                                    Text("${element?.saftyQuestionName}")
-                                                                                  ],
+                                                                                SizedBox(
+                                                                                  width: 200,
+                                                                                  child: Row(
+                                                                                    children: [
+                                                                                      checkBoxMethod(1),
+                                                                                      // Text("${j= j! + 1}. "),
+                                                                                      Text("${element?.saftyQuestionName}")
+                                                                                    ],
+                                                                                  ),
                                                                                 )
                                                                               ],
                                                                             ))),
@@ -3107,7 +3113,7 @@ class NewPermitScreen extends GetView<NewPermitController> {
                                                                 ColorValues
                                                                     .appGreenColor,
                                                             text:
-                                                                "Submit For Job",
+                                                                "Approve Job",
                                                             onPressed: () {
                                                               // var jobId = controller.jobModel?.id ?? 0;
                                                               // print('JobId'),

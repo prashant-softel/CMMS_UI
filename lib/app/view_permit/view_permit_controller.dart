@@ -256,6 +256,8 @@ class ViewPermitController extends GetxController {
   RxList<ListSafetyQuestion?>? safetyList = <ListSafetyQuestion?>[].obs;
   RxList<ListCategory?>? listCategory = <ListCategory?>[].obs; //ListCategory
   RxList<LotoLists?>? listLoto = <LotoLists?>[].obs; //ListsLoto
+  RxList<ListIsolation?>? listIsolation = <ListIsolation?>[].obs; //ListCategory
+
 
   ///Safety Measure List
   RxList<SafetyMeasureListModel> safetyMeasureList =
@@ -392,6 +394,7 @@ class ViewPermitController extends GetxController {
       selectedSafetyMeasureId = viewPermitDetailsModel.value?.permitTypeid ?? 0;
 
       listAssociatedJobs?.value = viewPermitDetailsModel.value?.lstAssociatedJobs ?? [];
+      listIsolation?.value = viewPermitDetailsModel.value?.lstIsolation ?? [];
       // selectedTypePermit.value = newPermitDetailsModel.value?.permitTypeName ?? '';
       // // selectedJobTypeList.value = newPermitDetailsModel.value.
       // selectedPermitIssuerLists.value = newPermitDetailsModel.value?.issuedByName ?? '';
