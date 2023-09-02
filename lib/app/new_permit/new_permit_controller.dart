@@ -408,21 +408,21 @@ class NewPermitController extends GetxController {
 
     ///
     // if (isJobCardStarted.value == true) {
-    Map<String, dynamic>? responseMapJobCardStarted =
-        await permitPresenter.createJobCard(
+    //  Map<String, dynamic>? responseMapJobCardStarted =
+    await permitPresenter.createJobCard(
       jobId: jobModel?.id,
       isLoading: false,
     );
 
-    if (responseMapJobCardStarted != null &&
-        responseMapJobCardStarted.length > 0) {
-      Get.toNamed(
-        Routes.createMrs,
-        arguments: jobModel?.id,
-      );
+    // if (responseMapJobCardStarted != null &&
+    //     responseMapJobCardStarted.length > 0) {
+    //   Get.toNamed(
+    //     Routes.createMrs,
+    //     arguments: jcId,
+    //   );
 
-      //  }
-    }
+    //  }
+    //  }
   }
 
   Future<void> getNewPermitDetail({required int intPermitId}) async {

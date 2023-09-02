@@ -103,12 +103,8 @@ class JobDetailsWebView extends GetView<JobDetailsController> {
                                   : controller.jobDetailsModel.value?.status ==
                                           102
                                       ? Text("Job Assigned")
-                                      :
-                                      //         : jobDetails?.status == 103
-                                      //             ? Text('${jobDetails?.latestJCStatusShort ?? ''}')
-                                      //    :
-                                      Text(
-                                          '${controller.jobDetailsModel.value?.status ?? ''}'),
+                                      : Text(
+                                          '${controller.jobDetailsModel.value?.latestJCStatusShort ?? ''}'),
                             ),
                           ],
                         ),
@@ -263,8 +259,13 @@ class JobDetailsWebView extends GetView<JobDetailsController> {
                                               Text(
                                                   " ${controller.jobDetailsModel.value?.blockName ?? ""}",
                                                   style: Styles.blue14),
-                                              Text(
-                                                  "${"${controller.jobDetailsModel.value?.workingAreaList != null ? controller.jobDetailsModel.value?.workingAreaList?.map<String>((item) => item.workingAreaName.toString()).toList() : []}"}"),
+                                              Container(
+                                                width: 200,
+                                                child: Expanded(
+                                                  child: Text(
+                                                      "${"${controller.jobDetailsModel.value?.workingAreaList != null ? controller.jobDetailsModel.value?.workingAreaList?.map<String>((item) => item.workingAreaName.toString()).toList() : []}"}"),
+                                                ),
+                                              ),
                                               Text(
                                                   "${controller.jobDetailsModel.value?.createdByName ?? ""}",
                                                   style: Styles.blue14),
@@ -337,111 +338,7 @@ class JobDetailsWebView extends GetView<JobDetailsController> {
                                   ),
                                 ),
 
-                                // (controller.scheduleCheckPoint != null &&
-                                //     controller
-                                //         .scheduleCheckPoint!.isNotEmpty)
-                                //     ?
-                                // Container(
-                                //   margin: Dimens.edgeInsets20,
-                                //   height: 400,
-                                //   decoration: BoxDecoration(
-                                //     border: Border.all(
-                                //       color: ColorValues
-                                //           .lightGreyColorWithOpacity35,
-                                //       width: 1,
-                                //     ),
-                                //     boxShadow: [
-                                //       BoxShadow(
-                                //         color: ColorValues
-                                //             .appBlueBackgroundColor,
-                                //         spreadRadius: 2,
-                                //         blurRadius: 5,
-                                //         offset: Offset(0, 2),
-                                //       ),
-                                //     ],
-                                //   ),
-                                //   child: Column(
-                                //     children: [
-                                //       // Padding(
-                                //       //   padding:
-                                //       //   const EdgeInsets.all(10.0),
-                                //       //   child: Row(
-                                //       //     children: [
-                                //       //       Text(
-                                //       //         "${controller.pmtaskViewModel.value?.checklist_name ?? ""}",
-                                //       //         style: Styles.blue700,
-                                //       //       ),
-                                //       //     ],
-                                //       //   ),
-                                //       // ),
-                                //       Divider(
-                                //         color:
-                                //         ColorValues.greyLightColour,
-                                //       ),
-                                //       Expanded(
-                                //         child: ScrollableTableView(
-                                //           paginationController: controller
-                                //               .schedulePaginationController,
-                                //           columns: [
-                                //             "Job ID",
-                                //             "Job Title",
-                                //             // "Job Description",
-                                //             "BreakDown Time",
-                                //             "Current Status",
-                                //             "Equipments"
-                                //           ].map((column) {
-                                //             return TableViewColumn(
-                                //               minWidth: Get.width * 0.15,
-                                //               label: column,
-                                //             );
-                                //           }).toList(),
-                                //           rows: //
-                                //           [
-                                //             // ...List.generate(
-                                //             //   controller
-                                //             //       .scheduleCheckPoint?.length ?? 0,
-                                //             //       (index) {
-                                //                 // var scheduleCheckPointDetails = controller.scheduleCheckPoint?[index];
-                                //                 // return
-                                //               [
-                                //                   '${controller.jobDetailsModel.value?.id}',
-                                //                   '${controller.jobDetailsModel.value?.jobTitle}',
-                                //                   // '${controller.jobDetailsModel.value?.jobDescription}',
-                                //
-                                //                     "${controller.jobDetailsModel
-                                //                         .value?.workingAreaList !=
-                                //                         null
-                                //                         ? controller.jobDetailsModel.value
-                                //                         ?.workingAreaList
-                                //                         ?.map<String>((item) => item
-                                //                         .workingAreaName
-                                //                         .toString())
-                                //                         .toList()
-                                //                         : []}",
-                                //                   '${controller.jobDetailsModel.value?.breakdownTime}',
-                                //                   '${controller.jobDetailsModel.value?.status}',
-                                //                 ],
-                                //             //   },
-                                //             // ),
-                                //           ].map((record) {
-                                //             return TableViewRow(
-                                //               height: 90,
-                                //               cells: record.map((value) {
-                                //                 return TableViewCell(
-                                //                   child: Text(value),
-                                //                 );
-                                //               }).toList(),
-                                //             );
-                                //           }).toList(),
-                                //         ),
-                                //       ),
-                                //     ],
-                                //   ),
-                                // ),
-                                // : Dimens.box0,
                                 Dimens.boxHeight10,
-                                // Text(
-                                //     "${controller.jobAssociatedModelsList?.length}"),
                                 controller.jobAssociatedModelsList!.length > 0
                                     ? Container(
                                         margin: Dimens.edgeInsets20,
@@ -583,7 +480,7 @@ class JobDetailsWebView extends GetView<JobDetailsController> {
                                       )
                                     : Container(
                                         margin: Dimens.edgeInsets20,
-                                        height: Get.height / 9,
+                                        height: Get.height / 7,
                                         decoration: BoxDecoration(
                                           border: Border.all(
                                             color: ColorValues
@@ -614,11 +511,24 @@ class JobDetailsWebView extends GetView<JobDetailsController> {
                                                 ],
                                               ),
                                             ),
+                                            Divider(
+                                              color:
+                                                  ColorValues.greyLightColour,
+                                            ),
+                                            Row(
+                                              crossAxisAlignment:
+                                                  CrossAxisAlignment.center,
+                                              mainAxisAlignment:
+                                                  MainAxisAlignment.center,
+                                              children: [
+                                                Text("No Data Found"),
+                                              ],
+                                            )
                                           ],
                                         ),
                                       ),
 
-                                ////
+                                ///
                                 controller.listMrsByJobId!.length > 0
                                     ? Container(
                                         margin: Dimens.edgeInsets20,
@@ -731,60 +641,61 @@ class JobDetailsWebView extends GetView<JobDetailsController> {
                                           ],
                                         ),
                                       )
-                                    : Container(
-                                        margin: Dimens.edgeInsets20,
-                                        height: Get.height / 7,
-                                        decoration: BoxDecoration(
-                                          border: Border.all(
-                                            color: ColorValues
-                                                .lightGreyColorWithOpacity35,
-                                            width: 1,
-                                          ),
-                                          boxShadow: [
-                                            BoxShadow(
-                                              color: ColorValues
-                                                  .appBlueBackgroundColor,
-                                              spreadRadius: 2,
-                                              blurRadius: 5,
-                                              offset: Offset(0, 2),
-                                            ),
-                                          ],
-                                        ),
-                                        child: Column(
-                                          children: [
-                                            Padding(
-                                              padding:
-                                                  const EdgeInsets.all(10.0),
-                                              child: Row(
-                                                children: [
-                                                  Text(
-                                                    "Material Issue / Used",
-                                                    style: Styles.blue700,
-                                                  ),
-                                                ],
-                                              ),
-                                            ),
-                                            Row(
-                                              crossAxisAlignment:
-                                                  CrossAxisAlignment.center,
-                                              mainAxisAlignment:
-                                                  MainAxisAlignment.center,
-                                              children: [
-                                                Text(
-                                                    "Not added the any permit and matarial , please add first"),
-                                                TableActionButton(
-                                                  color: ColorValues
-                                                      .appPurpleColor,
-                                                  icon: Icons.add,
-                                                  message: "Add Material",
-                                                  onPress: () => controller
-                                                      .goToAddMrsScreen(),
-                                                ),
-                                              ],
-                                            )
-                                          ],
-                                        ),
-                                      ),
+                                    : Dimens.box0,
+                                // Container(
+                                //     margin: Dimens.edgeInsets20,
+                                //     height: Get.height / 7,
+                                //     decoration: BoxDecoration(
+                                //       border: Border.all(
+                                //         color: ColorValues
+                                //             .lightGreyColorWithOpacity35,
+                                //         width: 1,
+                                //       ),
+                                //       boxShadow: [
+                                //         BoxShadow(
+                                //           color: ColorValues
+                                //               .appBlueBackgroundColor,
+                                //           spreadRadius: 2,
+                                //           blurRadius: 5,
+                                //           offset: Offset(0, 2),
+                                //         ),
+                                //       ],
+                                //     ),
+                                //     child: Column(
+                                //       children: [
+                                //         Padding(
+                                //           padding:
+                                //               const EdgeInsets.all(10.0),
+                                //           child: Row(
+                                //             children: [
+                                //               Text(
+                                //                 "Material Issue / Used",
+                                //                 style: Styles.blue700,
+                                //               ),
+                                //             ],
+                                //           ),
+                                //         ),
+                                //         Row(
+                                //           crossAxisAlignment:
+                                //               CrossAxisAlignment.center,
+                                //           mainAxisAlignment:
+                                //               MainAxisAlignment.center,
+                                //           children: [
+                                //             Text(
+                                //                 "Not added the any permit and matarial , please add first"),
+                                //             TableActionButton(
+                                //               color: ColorValues
+                                //                   .appPurpleColor,
+                                //               icon: Icons.add,
+                                //               message: "Add Material",
+                                //               onPress: () => controller
+                                //                   .goToAddMrsScreen(),
+                                //             ),
+                                //           ],
+                                //         )
+                                //       ],
+                                //     ),
+                                //   ),
 
                                 Dimens.boxHeight30,
                                 // (controller.historyLog != null &&

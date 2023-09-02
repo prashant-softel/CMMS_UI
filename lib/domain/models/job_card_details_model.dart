@@ -35,7 +35,8 @@ class JobCardDetailsModel {
       this.status,
       this.status_long,
       this.status_short,
-      this.created_by});
+      this.created_by,
+      this.jC_Start_By_Name});
 
   String? plantName;
   String? assetCategoryName;
@@ -60,6 +61,7 @@ class JobCardDetailsModel {
   int? status;
   String? status_short;
   String? status_long;
+  String? jC_Start_By_Name;
   factory JobCardDetailsModel.fromJson(Map<String, dynamic> json) =>
       JobCardDetailsModel(
         plantName: json["plant_name"],
@@ -76,6 +78,7 @@ class JobCardDetailsModel {
         ptwId: json["ptwId"],
         title: json["title"],
         status: json["status"],
+        jC_Start_By_Name: json["jC_Start_By_Name"],
         status_long: json["status_long"],
         status_short: json["status_short"],
         created_by: json["created_by"],
@@ -110,6 +113,7 @@ class JobCardDetailsModel {
         "ptwId": ptwId,
         "title": title,
         "status": status,
+        "jC_Start_By_Name": jC_Start_By_Name,
         "status_long": status_long,
         "status_short": status_short,
         "created_by": created_by,
