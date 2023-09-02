@@ -113,7 +113,7 @@ class UserProfileController extends GetxController {
 
     _flutterSecureStorage.delete(key: "userId");
     Get.toNamed(Routes.addUser, arguments: {
-      'userId': userId,
+      'userId': userId.value,
     });
   }
 }
