@@ -120,7 +120,7 @@ class CompetencyListController extends GetxController {
     return true;
   }
 
-  Future<void> issuccessCreatechecklist() async {
+  Future<void> issuccessCompetency() async {
     isSuccess.toggle();
 
     await {cleardata()};

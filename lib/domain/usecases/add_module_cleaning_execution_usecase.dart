@@ -69,6 +69,14 @@ class AddModuleCleaningExecutionUsecase {
     );
   }
 
+  Future<Map<String, dynamic>> abandonScheduleExecutionButton({
+    abandoneJsonString,
+    bool? isLoading,
+  }) async =>
+      await _repository.abandonScheduleExecutionButton(
+        abandoneJsonString,
+        isLoading,
+      );
    Future<List<TypePermitModel?>?> getTypePermitList(
     bool? isLoading,
     int? facility_id
@@ -86,6 +94,15 @@ class AddModuleCleaningExecutionUsecase {
       await _repository.getInventoryCategoryList(
         auth,
         facilityId,
+        isLoading,
+      );
+
+   Future<Map<String, dynamic>> updateMCExecution({
+    updateMCExecution,
+    bool? isLoading,
+  }) async =>
+      await _repository.updateMCExecution(
+        updateMCExecution,
         isLoading,
       );
 

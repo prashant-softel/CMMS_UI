@@ -6,6 +6,7 @@ import 'package:cmms/app/add_module_cleaning_execution/add_module_cleaning_execu
 import 'package:cmms/app/app.dart';
 import 'package:cmms/app/navigators/navigators.dart';
 import 'package:cmms/app/widgets/abandon_all_dialog.dart';
+import 'package:cmms/app/widgets/abandon_schedule_execution_dialog.dart';
 import 'package:cmms/app/widgets/add_module_cleaning_execution_dialog.dart';
 import 'package:cmms/app/widgets/custom_elevated_button.dart';
 import 'package:cmms/app/widgets/custom_richtext.dart';
@@ -477,18 +478,22 @@ class AddModuleCleaningExecutionContentWeb
                                                                                                             Padding(
                                                                                                               padding: const EdgeInsets.only(bottom: 5),
                                                                                                               child: SizedBox(
-                                                                                                                  width: MediaQuery.of(context).size.width / 9,
-                                                                                                                  child: LoginCustomTextfield(
-                                                                                                                    keyboardType: TextInputType.number,
-                                                                                                                    inputFormatters: <TextInputFormatter>[
-                                                                                                                      // FilteringTextInputFormatter.digitsOnly
-                                                                                                                    ],
-                                                                                                                    maxLine: 1,
-                                                                                                                    textController: new TextEditingController(text: mapData["value"] ?? ''),
-                                                                                                                    onChanged: (txt) {
-                                                                                                                      mapData["value"] = txt;
-                                                                                                                    },
-                                                                                                                  )),
+                                                                                                                width: MediaQuery.of(context).size.width / 9,
+                                                                                                                height: 30,
+                                                                                                                child: 
+                                                                                                                LoginCustomTextfield(
+                                                                                                                  keyboardType: TextInputType.number,
+                                                                                                                  inputFormatters: <TextInputFormatter>[
+                                                                                                                    // FilteringTextInputFormatter.digitsOnly
+                                                                                                                  ],
+                                                                                                                  maxLine: 1,
+                                                                                                                  textController: new TextEditingController(text: mapData["value"] ?? ''),
+                                                                                                                  onChanged: (txt) {
+                                                                                                                    mapData["value"] = txt;
+                                                                                                                    print('RemarkData${mapData["value"]}');
+                                                                                                                  },
+                                                                                                                )
+                                                                                                              ),
                                                                                                             ),
                                                                                                           ],
                                                                                                         ))),
@@ -540,6 +545,7 @@ class AddModuleCleaningExecutionContentWeb
                                                                                                                               message: 'Start',
                                                                                                                             )
                                                                                                                           : Container(),
+
                                                                                                                       // controller.listSchedules!
                                                                                                                       //             .firstWhere(
                                                                                                                       //               (e) => "${e?.status_short}" == e?.status_short,
@@ -547,27 +553,40 @@ class AddModuleCleaningExecutionContentWeb
                                                                                                                       //             )
                                                                                                                       //             ?.status_short ==
                                                                                                                       //         "In Progress"
-                                                                                                                      //     ? 
-                                                                                                                          TableActionButton(
-                                                                                                                              // label: 'Abandon',
-                                                                                                                              onPress: () {
-                                                                                                                                Get.dialog(AddModuleCleaningExecutionDialog());
-                                                                                                                              },
-                                                                                                                              color: ColorValues.appLightBlueColor,
-                                                                                                                              icon: Icons.add,
-                                                                                                                              message: 'Update',
-                                                                                                                            ),
-                                                                                                                          // : Container(),
+                                                                                                                      //     ?
                                                                                                                       TableActionButton(
                                                                                                                         // label: 'Abandon',
-                                                                                                                        onPress: () {},
+                                                                                                                        onPress: () {
+                                                                                                                          // Get.dialog(AddModuleCleaningExecutionDialog());
+                                                                                                                          var filterdData = controller.listSchedules?.firstWhere((e) => e?.scheduleId == element?.scheduleId);
+
+                                                                                                                          controller.updateMCExecution(scheduleId: filterdData?.scheduleId, cleaningDay: filterdData?.cleaningDay, waterUsed: filterdData?.waterUsed);
+                                                                                                                        },
+                                                                                                                        color: ColorValues.appLightBlueColor,
+                                                                                                                        icon: Icons.add,
+                                                                                                                        message: 'Update',
+                                                                                                                      ),
+                                                                                                                      //  : Container(),
+
+                                                                                                                      ///Abandon
+                                                                                                                      TableActionButton(
+                                                                                                                        // label: 'Abandon',
+                                                                                                                        onPress: () {
+                                                                                                                          var filterdData = controller.listSchedules?.firstWhere((e) => e?.executionId == element?.executionId);
+                                                                                                                          print({'Executiondata:': filterdData?.executionId});
+                                                                                                                          Get.dialog(AbandoneScheduleExecutionDialog(
+                                                                                                                            id: filterdData?.executionId,
+                                                                                                                          ));
+                                                                                                                        },
                                                                                                                         color: Colors.red,
                                                                                                                         icon: Icons.close,
                                                                                                                         message: 'Abandon',
                                                                                                                       ),
                                                                                                                       TableActionButton(
                                                                                                                         // label: 'Equipments',
-                                                                                                                        onPress: () {},
+                                                                                                                        onPress: () {
+                                                                                                                          Get.dialog(AddModuleCleaningExecutionDialog());
+                                                                                                                        },
                                                                                                                         color: ColorValues.appDarkBlueColor,
                                                                                                                         icon: Icons.category,
                                                                                                                         message: 'Equipments',
@@ -646,10 +665,7 @@ class AddModuleCleaningExecutionContentWeb
                                               backgroundColor:
                                                   ColorValues.appLightBlueColor,
                                               text: "Update",
-                                              onPressed: () {
-                                                // controller
-                                                //     .createEscalationMatrix();
-                                              },
+                                              onPressed: () {},
                                             ),
                                           ),
                                           SizedBox(

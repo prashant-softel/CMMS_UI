@@ -1086,6 +1086,19 @@ class DataRepository extends DomainRepository {
         isLoading: isLoading ?? false,
       );
 
+   Future<ResponseModel> createNewPermitForJob({
+    required String auth,
+    newPermit,
+    jobId,
+    bool? isLoading,
+  }) async =>
+      await connectHelper.createNewPermitForJob(
+        auth: auth,
+        newPermit: newPermit,
+        jobId: jobId,
+        isLoading: isLoading ?? false,
+      );
+
   Future<ResponseModel> updateNewPermit(
           {required String auth,
           newPermit,
@@ -1191,6 +1204,17 @@ class DataRepository extends DomainRepository {
       await connectHelper.updateIncidentReport(
         auth: auth,
         updateIncidentReport: updateIncidentReport,
+        isLoading: isLoading ?? false,
+      );
+
+   Future<ResponseModel> updateMCExecution({
+    required String auth,
+    updateMCExecution,
+    bool? isLoading,
+  }) async =>
+      await connectHelper.updateMCExecution(
+        auth: auth,
+        updateMCExecution: updateMCExecution,
         isLoading: isLoading ?? false,
       );
 
@@ -1446,6 +1470,18 @@ class DataRepository extends DomainRepository {
     bool? isLoading,
   }) async =>
       await connectHelper.abandonExecutionButton(
+        auth: auth,
+        abandoneJsonString: abandoneJsonString,
+        isLoading: isLoading ?? false,
+      );
+
+
+   Future<ResponseModel> abandonScheduleExecutionButton({
+    required String auth,
+    abandoneJsonString,
+    bool? isLoading,
+  }) async =>
+      await connectHelper.abandonScheduleExecutionButton(
         auth: auth,
         abandoneJsonString: abandoneJsonString,
         isLoading: isLoading ?? false,

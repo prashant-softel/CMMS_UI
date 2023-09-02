@@ -33,7 +33,7 @@ class JobDetailField extends StatelessWidget {
                   if (title == "Current Status") ...[
                     Container(
                       padding: Dimens.edgeInsets05_0_5_0,
-                      color: JobStatusData.getStatusColor(value.toUpperCase()),
+                      //  color: JobStatusData.getStatusColor(value.toUpperCase()),
                       child: Text(
                         value,
                         style: (Responsive.isMobile(context) ||

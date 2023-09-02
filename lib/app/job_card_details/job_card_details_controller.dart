@@ -1,3 +1,4 @@
+import 'package:cmms/domain/models/employee_list_model.dart';
 import 'package:cmms/domain/models/employee_model.dart';
 import 'package:cmms/domain/models/permit_details_model.dart';
 import 'package:data_table_2/data_table_2.dart';
@@ -36,7 +37,7 @@ class JobCardDetailsController extends GetxController {
 
   RxList<DataRow2> employeeTableRows = <DataRow2>[].obs;
   final responsibilityCtrlr = TextEditingController();
-  // List<TextEditingController> responsibilityCtrlrs = [];
+  List<TextEditingController> responsibilityCtrlrs = [];
   RxList<EmployeeModel?> employeeList = <EmployeeModel>[].obs;
   RxList<EmployeeModel>? selectedEmployeeList = <EmployeeModel>[].obs;
   Rx<EmployeeModel> selectedEmployee = EmployeeModel().obs;
@@ -92,8 +93,8 @@ class JobCardDetailsController extends GetxController {
   ///
   @override
   void onInit() async {
+    // print({"madfhuiwef", jobCardId});
     try {
-      print({"madfhuiwef", jobCardId});
       Get.put(FileUploadController());
 
       final _flutterSecureStorage = const FlutterSecureStorage();
@@ -107,7 +108,7 @@ class JobCardDetailsController extends GetxController {
             isLoading: true,
           ) ??
           [];
-      // getHistory();
+      getHistory();
       createPlantDetailsTableData();
 
       createJobDetailsTableData();
@@ -116,7 +117,7 @@ class JobCardDetailsController extends GetxController {
       getEmployeeList();
       //  getPermitDetails();
 
-      // responsibilityCtrlrs.add(TextEditingController());
+      responsibilityCtrlrs.add(TextEditingController());
       currentIndex.value = -1;
       super.onInit();
     } catch (e) {
@@ -149,9 +150,9 @@ class JobCardDetailsController extends GetxController {
 
   @override
   void onClose() {
-    // for (var i = 0; i < responsibilityCtrlrs.length; i++) {
-    //   responsibilityCtrlrs[i].dispose();
-    // }
+    for (var i = 0; i < responsibilityCtrlrs.length; i++) {
+      responsibilityCtrlrs[i].dispose();
+    }
     super.onClose();
   }
 
@@ -194,7 +195,7 @@ class JobCardDetailsController extends GetxController {
       plantDetails.value = {
         "Plant Details": jobCardDetailsModel.value?.plantName,
         "Block": jobCardDetailsModel.value?.plantName,
-        "Equipment Categories": jobCardDetailsModel.value?.assetCategoryName,
+        // "Equipment Categories": jobCardDetailsModel.value?.assetCategoryName,
       };
     }
   }
@@ -603,10 +604,10 @@ class JobCardDetailsController extends GetxController {
   }
 
   String? getResponsibility(index) {
-    return null;
+    //return null;
 
-    // final responsibitlity = responsibilityCtrlrs[index].text;
-    // return responsibitlity;
+    final responsibitlity = responsibilityCtrlrs[index].text;
+    return responsibitlity;
   }
 
   goToJobCardListScreen() {

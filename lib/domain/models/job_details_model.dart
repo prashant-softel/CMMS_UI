@@ -46,6 +46,7 @@ class JobDetailsModel {
     this.workTypeList,
     this.associatedPermitList,
     this.lstToolsRequired,
+    this.latestJCStatus,
   });
 
   int? id;
@@ -69,6 +70,7 @@ class JobDetailsModel {
   DateTime? breakdownTime;
   int? currentPtwId;
   String? currentPtwTitle;
+  int? latestJCStatus;
   List<EquipmentCatList>? equipmentCatList;
   List<WorkingAreaList>? workingAreaList;
   List<WorkTypeList>? workTypeList;
@@ -88,6 +90,8 @@ class JobDetailsModel {
         statusShort: json["status_short"] == null ? '' : json['status_short'],
         statusLong: json["status_long"] == null ? '' : json['status_long'],
         createdById: json["created_by_id"] == null ? 0 : json['created_by_id'],
+        latestJCStatus:
+            json["latestJCStatus"] == null ? 0 : json['latestJCStatus'],
         createdByName:
             json["created_by_name"] == null ? '' : json['created_by_name'],
         assignedId: json["assigned_id"] == null ? 0 : json['assigned_id'],
@@ -151,6 +155,7 @@ class JobDetailsModel {
         "breakdown_time": breakdownTime?.toIso8601String(),
         "current_ptw_id": currentPtwId,
         "current_ptw_title": currentPtwTitle,
+        "latestJCStatus": latestJCStatus,
         "equipment_cat_list":
             List<dynamic>.from(equipmentCatList?.map((x) => x.toJson()) ?? []),
         "working_area_name_list":

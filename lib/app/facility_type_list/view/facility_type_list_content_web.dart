@@ -126,7 +126,7 @@ class FacilityTypeListContentWeb extends GetView<FacilityTypeListController> {
                                                 MainAxisAlignment.start,
                                             children: [
 
-                                              Expanded(child: CustomRichText(title: 'Title ')),
+                                              Expanded(child: CustomRichText(title: 'Plant Address ')),
                                               Expanded(
                                                 child: Container(
                                                     margin: Dimens.edgeInsets5,

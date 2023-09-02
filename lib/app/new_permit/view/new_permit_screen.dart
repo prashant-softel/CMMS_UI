@@ -1078,6 +1078,7 @@ class NewPermitScreen extends GetView<NewPermitController> {
                                                   ),
                                                 ),
                                               ),
+
                                               //Tool box talk For Mobile
                                               SizedBox(
                                                 height: 480,
@@ -1534,7 +1535,7 @@ class NewPermitScreen extends GetView<NewPermitController> {
 
                                               controller.jobModel?.id != null
                                                   ? Container(
-                                                      height: 100,
+                                                      height: 130,
                                                       width:
                                                           MediaQuery.of(context)
                                                                   .size
@@ -1573,7 +1574,7 @@ class NewPermitScreen extends GetView<NewPermitController> {
                                                             child: Text(
                                                               'Request a Permit For a Job',
                                                               style: Styles
-                                                                      .blue700,
+                                                                  .blue700,
                                                             ),
                                                           ),
                                                           Padding(
@@ -1679,16 +1680,16 @@ class NewPermitScreen extends GetView<NewPermitController> {
                                                                     SizedBox(
                                                                       width:
                                                                           100,
-                                                                      child: Wrap(
-                                                                          alignment: WrapAlignment
-                                                                              .start,
-                                                                          spacing:
-                                                                              100,
-                                                                          children: []
+                                                                      child:
+                                                                          Wrap(
+                                                                        alignment:
+                                                                            WrapAlignment.start,
+                                                                        spacing:
+                                                                            100,
+                                                                        children: []
 
                                                                           ///Uncomment once Work done
-                                                                          ..addAll(controller.listJobModelCategory.map((element) =>
-                                                                              Row(
+                                                                          ..addAll(controller.listJobModelCategory.map((element) => Row(
                                                                                 mainAxisSize: MainAxisSize.min,
                                                                                 mainAxisAlignment: MainAxisAlignment.start,
                                                                                 crossAxisAlignment: CrossAxisAlignment.start,
@@ -1698,8 +1699,9 @@ class NewPermitScreen extends GetView<NewPermitController> {
                                                                                   )
                                                                                 ],
                                                                               ))),
-                                                                          ///end Uncomment
-                                                                          ),
+
+                                                                        ///end Uncomment
+                                                                      ),
                                                                     )
                                                                     // Text('${controller.selectedItem}'),
                                                                   ],
@@ -1786,7 +1788,6 @@ class NewPermitScreen extends GetView<NewPermitController> {
                                                   : Container(),
                                               Dimens.boxHeight30,
 
-                                            
                                               SizedBox(
                                                 height: 20,
                                               ),
@@ -1832,101 +1833,104 @@ class NewPermitScreen extends GetView<NewPermitController> {
                                                       ),
                                                       // LoginCustomTextfield(),
                                                     ),
-                                                    SizedBox(
-                                                      width: 77,
-                                                    ),
-                                                    CustomRichText(
-                                                        title:
-                                                            'Equipment Categories: '),
-                                                    SizedBox(
-                                                      width: 8,
-                                                    ),
-                                                    controller.permitId.value >
-                                                            0
-                                                        ? SizedBox(
-                                                            width: MediaQuery.of(
-                                                                        context)
-                                                                    .size
-                                                                    .width /
-                                                                5,
-                                                            child:
-                                                                CustomMultiSelectDialogField(
+                                                    Container(
+                                                      padding:
+                                                          const EdgeInsets.only(
+                                                              left: 53),
+                                                      child: Row(
+                                                        children: [
+                                                          CustomRichText(
                                                               title:
-                                                                  'Select Equipment Category',
-                                                              buttonText:
-                                                                  'Equipment Category',
-                                                              initialValue: ((controller
-                                                                      .selectedEquipmentCategoryIdList
-                                                                      .isNotEmpty)
-                                                                  ? controller
-                                                                      .selectedEquipmentCategoryIdList
-                                                                  : []),
-                                                              items: controller
-                                                                  .equipmentCategoryList
-                                                                  .map(
-                                                                    (equipmentCategory) =>
-                                                                        MultiSelectItem(
-                                                                      equipmentCategory
-                                                                          ?.id,
-                                                                      equipmentCategory
-                                                                              ?.name ??
-                                                                          '',
-                                                                    ),
-                                                                  )
-                                                                  .toList(),
-                                                              onConfirm:
-                                                                  (selectedOptionsList) =>
-                                                                      {
-                                                                controller
-                                                                    .equipmentCategoriesSelected(
-                                                                        selectedOptionsList),
-                                                                print(
-                                                                    'Equipment list ${controller.selectedEquipmentCategoryIdList}')
-                                                              },
-                                                            ),
-                                                          )
-                                                        : SizedBox(
-                                                            width: MediaQuery.of(
-                                                                        context)
-                                                                    .size
-                                                                    .width /
-                                                                5,
-                                                            child:
-                                                                CustomMultiSelectDialogField(
-                                                              title:
-                                                                  'Select Equipment Category',
-                                                              buttonText:
-                                                                  'Equipment Category',
-                                                              initialValue: (controller
-                                                                      .selectedEquipmentCategoryIdList
-                                                                      .isNotEmpty)
-                                                                  ? controller
-                                                                      .selectedEquipmentCategoryIdList
-                                                                  : [],
-                                                              items: controller
-                                                                  .equipmentCategoryList
-                                                                  .map(
-                                                                    (equipmentCategory) =>
-                                                                        MultiSelectItem(
-                                                                      equipmentCategory
-                                                                          ?.id,
-                                                                      equipmentCategory
-                                                                              ?.name ??
-                                                                          '',
-                                                                    ),
-                                                                  )
-                                                                  .toList(),
-                                                              onConfirm:
-                                                                  (selectedOptionsList) =>
-                                                                      {
-                                                                controller
-                                                                    .equipmentCategoriesSelected(
-                                                                        selectedOptionsList),
-                                                                print(
-                                                                    'Equipment list55 ${controller.selectedEquipmentCategoryIdList}')
-                                                              },
-                                                            ),
+                                                                  'Equipment Categories: '),
+                                                          SizedBox(
+                                                            width: 8,
                                                           ),
+                                                          controller.permitId
+                                                                      .value >
+                                                                  0
+                                                              ? SizedBox(
+                                                                  width: MediaQuery.of(
+                                                                              context)
+                                                                          .size
+                                                                          .width /
+                                                                      5,
+                                                                  child:
+                                                                      CustomMultiSelectDialogField(
+                                                                    title:
+                                                                        'Select Equipment Category',
+                                                                    buttonText:
+                                                                        'Equipment Category',
+                                                                    initialValue: ((controller
+                                                                            .selectedEquipmentCategoryIdList
+                                                                            .isNotEmpty)
+                                                                        ? controller
+                                                                            .selectedEquipmentCategoryIdList
+                                                                        : []),
+                                                                    items: controller
+                                                                        .equipmentCategoryList
+                                                                        .map(
+                                                                          (equipmentCategory) =>
+                                                                              MultiSelectItem(
+                                                                            equipmentCategory?.id,
+                                                                            equipmentCategory?.name ??
+                                                                                '',
+                                                                          ),
+                                                                        )
+                                                                        .toList(),
+                                                                    onConfirm:
+                                                                        (selectedOptionsList) =>
+                                                                            {
+                                                                      controller
+                                                                          .equipmentCategoriesSelected(
+                                                                              selectedOptionsList),
+                                                                      print(
+                                                                          'Equipment list ${controller.selectedEquipmentCategoryIdList}')
+                                                                    },
+                                                                  ),
+                                                                )
+                                                              : SizedBox(
+                                                                  width: MediaQuery.of(
+                                                                              context)
+                                                                          .size
+                                                                          .width /
+                                                                      5,
+                                                                  child:
+                                                                      CustomMultiSelectDialogField(
+                                                                    title:
+                                                                        'Select Equipment Category',
+                                                                    buttonText:
+                                                                        'Equipment Category',
+                                                                    initialValue: (controller
+                                                                            .selectedEquipmentCategoryIdList
+                                                                            .isNotEmpty)
+                                                                        ? controller
+                                                                            .selectedEquipmentCategoryIdList
+                                                                        : [],
+                                                                    items: controller
+                                                                        .equipmentCategoryList
+                                                                        .map(
+                                                                          (equipmentCategory) =>
+                                                                              MultiSelectItem(
+                                                                            equipmentCategory?.id,
+                                                                            equipmentCategory?.name ??
+                                                                                '',
+                                                                          ),
+                                                                        )
+                                                                        .toList(),
+                                                                    onConfirm:
+                                                                        (selectedOptionsList) =>
+                                                                            {
+                                                                      controller
+                                                                          .equipmentCategoriesSelected(
+                                                                              selectedOptionsList),
+                                                                      print(
+                                                                          'Equipment list55 ${controller.selectedEquipmentCategoryIdList}')
+                                                                    },
+                                                                  ),
+                                                                ),
+                                                        ],
+                                                      ),
+                                                    )
                                                   ],
                                                 ),
                                               ),
@@ -2043,9 +2047,10 @@ class NewPermitScreen extends GetView<NewPermitController> {
                                                 height: 10,
                                               ),
 
-                                              //// Permit Reference commented for now
+                                              //// Permit Reference
                                               Padding(
-                                                padding: const EdgeInsets.only(left: 60),
+                                                padding: const EdgeInsets.only(
+                                                    left: 60),
                                                 child: Row(
                                                   children: [
                                                     Container(
@@ -3070,9 +3075,10 @@ class NewPermitScreen extends GetView<NewPermitController> {
                                               ),
                                               Dimens.boxHeight50,
 
-                                                ////  commented
+                                              ////  commented
                                               Padding(
-                                                padding: const EdgeInsets.only(left: 60),
+                                                padding: const EdgeInsets.only(
+                                                    left: 60),
                                                 child: Row(
                                                   children: [
                                                     Container(
@@ -3091,7 +3097,7 @@ class NewPermitScreen extends GetView<NewPermitController> {
                                                 ),
                                               ),
 
-                                              controller.permitId.value <= 0
+                                              controller.jobModel?.id != null
                                                   ? Center(
                                                       child: Container(
                                                           height: 45,
@@ -3100,38 +3106,67 @@ class NewPermitScreen extends GetView<NewPermitController> {
                                                             backgroundColor:
                                                                 ColorValues
                                                                     .appGreenColor,
-                                                            text: "Submit",
+                                                            text:
+                                                                "Submit For Job",
                                                             onPressed: () {
+                                                              // var jobId = controller.jobModel?.id ?? 0;
+                                                              // print('JobId'),
                                                               controller.isCheckedJSA
                                                                               .value ==
                                                                           true &&
                                                                       controller
-                                                                              .isCheckedSOP
-                                                                              .value ==
+                                                                              .isCheckedSOP.value ==
                                                                           true
-                                                                  ? controller
-                                                                      .createNewPermit()
+                                                                  ? controller.createNewPermitForJob(
+                                                                      jobId: controller
+                                                                          .jobModel
+                                                                          ?.id)
                                                                   : Get.dialog<
                                                                           void>(
                                                                       checkboxAlertBox());
+                                                              // controller.linkToPermit(jobId: controller.jobModel?.id);
                                                             },
                                                           )),
                                                     )
-                                                  : Center(
-                                                      child: Container(
-                                                          height: 45,
-                                                          child:
-                                                              CustomElevatedButton(
-                                                            backgroundColor:
-                                                                ColorValues
-                                                                    .appDarkBlueColor,
-                                                            text: "Update",
-                                                            onPressed: () {
-                                                              controller
-                                                                  .updateNewPermit();
-                                                            },
-                                                          )),
-                                                    ),
+                                                  : controller.permitId.value <=
+                                                          0
+                                                      ? Center(
+                                                          child: Container(
+                                                              height: 45,
+                                                              child:
+                                                                  CustomElevatedButton(
+                                                                backgroundColor:
+                                                                    ColorValues
+                                                                        .appGreenColor,
+                                                                text: "Submit",
+                                                                onPressed: () {
+                                                                  controller.isCheckedJSA.value ==
+                                                                              true &&
+                                                                          controller.isCheckedSOP.value ==
+                                                                              true
+                                                                      ? controller
+                                                                          .createNewPermit()
+                                                                      : Get.dialog<
+                                                                              void>(
+                                                                          checkboxAlertBox());
+                                                                },
+                                                              )),
+                                                        )
+                                                      : Center(
+                                                          child: Container(
+                                                              height: 45,
+                                                              child:
+                                                                  CustomElevatedButton(
+                                                                backgroundColor:
+                                                                    ColorValues
+                                                                        .appDarkBlueColor,
+                                                                text: "Update",
+                                                                onPressed: () {
+                                                                  controller
+                                                                      .updateNewPermit();
+                                                                },
+                                                              )),
+                                                        ),
 
                                               // : checkboxAlertBox(),
 
@@ -4051,7 +4086,8 @@ class NewPermitScreen extends GetView<NewPermitController> {
       Dimens.boxHeight10,
     ]);
   }
-   Widget _buildWorkPermitCommentTextField_web(BuildContext context) {
+
+  Widget _buildWorkPermitCommentTextField_web(BuildContext context) {
     return Column(//
         children: [
       // Align(
@@ -4109,7 +4145,6 @@ class NewPermitScreen extends GetView<NewPermitController> {
             decoration: InputDecoration(
               fillColor: ColorValues.whiteColor,
               filled: true,
-            
               contentPadding: Dimens.edgeInsets05_10,
               border: InputBorder.none,
               enabledBorder: InputBorder.none,

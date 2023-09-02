@@ -282,8 +282,8 @@ class JobDataSource extends DataTableSource {
     final jobDetails = filteredJobList[index];
 
     controller.jobId.value = jobDetails?.id ?? 0;
-    var _statusString =
-        JobStatusData.getStatusStringFromStatusEnumValue(jobDetails?.status);
+    // var _statusString =
+    //     JobStatusData.getStatusStringFromStatusEnumValue(jobDetails?.status);
 
     ///
     return DataRow.byIndex(
@@ -304,13 +304,20 @@ class JobDataSource extends DataTableSource {
                 padding: EdgeInsets.symmetric(vertical: 2, horizontal: 5),
                 margin: EdgeInsets.only(top: 5),
                 decoration: BoxDecoration(
-                  color: JobStatusData.getStatusColor(_statusString),
+                  color: ColorValues
+                      .addNewColor, //JobStatusData.getStatusColor(_statusString),
                   borderRadius: BorderRadius.circular(5),
                 ),
-                child: Text(
-                  _statusString,
-                  style: TextStyle(color: Colors.white),
-                ),
+                child: jobDetails?.status == 101
+                    ? Text(" Job Created")
+                    : jobDetails?.status == 102
+                        ? Text("Job Assigned")
+                        :
+                        //         : jobDetails?.status == 103
+                        //             ? Text('${jobDetails?.latestJCStatusShort ?? ''}')
+                        //    :
+                        Text(
+                            '${jobDetails?.status ?? ''}${jobDetails?.latestJCStatusShort ?? ''}'),
               ),
               Text(
                 '${controller.formatDate(jobDetails?.jobDate?.toString() ?? '')}',
@@ -332,91 +339,62 @@ class JobDataSource extends DataTableSource {
             Padding(
               padding: EdgeInsets.zero,
               child: (value == 'Actions')
-                  ? Column(
-                      //
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      crossAxisAlignment: CrossAxisAlignment.center,
-                      children: [
-                          Row(
-                              mainAxisAlignment: MainAxisAlignment.center, //
-                              children: [
-                                Flexible(
-                                  child: TableActionButton(
-                                    color: ColorValues.viewColor,
-                                    icon: Icons.visibility,
-                                    message: 'View',
-                                    onPress: () {
-                                      final _flutterSecureStorage =
-                                          const FlutterSecureStorage();
+                  ? Wrap(children: [
+                      Flexible(
+                        child: TableActionButton(
+                          color: ColorValues.viewColor,
+                          icon: Icons.visibility,
+                          message: 'View',
+                          onPress: () {
+                            final _flutterSecureStorage =
+                                const FlutterSecureStorage();
 
-                                      _flutterSecureStorage.delete(
-                                          key: "jobId");
-                                      controller.goToJobDetailsScreen(
-                                        int.tryParse('${jobDetails?.id}'),
-                                      );
-                                    },
-                                  ),
-                                ),
+                            _flutterSecureStorage.delete(key: "jobId");
+                            controller.goToJobDetailsScreen(
+                              int.tryParse('${jobDetails?.id}'),
+                            );
+                          },
+                        ),
+                      ),
+                      if (jobDetails?.status == 102)
+                        TableActionButton(
+                          color: ColorValues.appYellowColor,
+                          icon: Icons.assignment_ind,
+                          message: 'Re-Assign',
+                          onPress: () {
+                            controller.goToEditJobScreen(
+                                int.tryParse('${jobDetails?.id}'));
+                          },
+                        ),
+                      if (jobDetails?.status == 101)
+                        Flexible(
+                          child: //
+                              TableActionButton(
+                            color: ColorValues.appYellowColor,
+                            icon: Icons.assignment,
+                            message: 'Assign',
+                            onPress: () {
+                              controller.goToEditJobScreen(
+                                  int.tryParse('${jobDetails?.id}'));
+                            },
+                          ),
+                        ),
 
-                                /// if job is linked, only then show Job Card button
-                                if (jobDetails?.status == JobStatus.JOB_LINKED)
-                                  Flexible(
-                                    child: TableActionButton(
-                                      color: ColorValues.addNewColor,
-                                      icon: Icons.add,
-                                      message: 'Job Card',
-                                      onPress: () {
-                                        controller.goToJobCardScreen(
-                                          int.tryParse('${jobDetails?.id}'),
-                                        );
-                                      },
-                                    ),
-                                  ),
-                              ]),
-                          if (jobDetails?.status == JobStatus.JOB_ASSIGNED)
-                            Row(
-                                mainAxisAlignment: MainAxisAlignment.center, //
-                                children: [
-                                  Flexible(
-                                    child: TableActionButton(
-                                      color: ColorValues.linktopermitColor,
-                                      icon: Icons.link,
-                                      message: 'Link Permit',
-                                      onPress: () {
-                                        final _flutterSecureStorage =
-                                            const FlutterSecureStorage();
-
-                                        _flutterSecureStorage.delete(
-                                            key: "jobId");
-                                        controller.goToJobDetailsScreen(
-                                            int.tryParse('${jobDetails?.id}'));
-                                      },
-                                    ),
-                                  ),
-                                  TableActionButton(
-                                    color: ColorValues.appYellowColor,
-                                    icon: Icons.assignment_ind,
-                                    message: 'Re-Assign',
-                                    onPress: () {
-                                      controller.goToEditJobScreen(
-                                          int.tryParse('${jobDetails?.id}'));
-                                    },
-                                  ),
-                                ]),
-                          if (jobDetails?.status == JobStatus.JOB_CREATED)
-                            Flexible(
-                              child: //
-                                  TableActionButton(
-                                color: ColorValues.appYellowColor,
-                                icon: Icons.assignment,
-                                message: 'Assign',
-                                onPress: () {
-                                  controller.goToEditJobScreen(
-                                      int.tryParse('${jobDetails?.id}'));
-                                },
-                              ),
-                            ),
-                        ])
+                      /// if job is linked, only then show Job Card button
+                      //   if (jobDetails?.status == JobStatus.JOB_LINKED)
+                      // Flexible(
+                      //   child: TableActionButton(
+                      //     color: ColorValues.addNewColor,
+                      //     icon: Icons.add,
+                      //     message: 'Job Card',
+                      //     onPress: () {
+                      //       controller.goToJobCardScreen(
+                      //         int.tryParse('${jobDetails?.id}'),
+                      //       );
+                      //     },
+                      //   ),
+                      // ),
+                    ])
                   : Text(value.toString()),
             ),
           );

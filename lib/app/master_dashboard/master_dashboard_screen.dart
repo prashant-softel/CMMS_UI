@@ -422,19 +422,13 @@ class MastersDashboard extends GetView<MastersController> {
                               OnHover(
                                 builder: ((isHovered) {
                                   return createContentTile(
-                                      title: "Module List",
+                                      title: "Feature List",
                                       onTap: () {
-                                        controller.goToModuleTypeList();
+                                        controller.goToFeatureList();
                                       });
                                 }),
                               ),
-                              OnHover(builder: (((isHovered) {
-                                return createContentTile(
-                                    title: "Feature List",
-                                    onTap: () {
-                                      controller.goToBlockTypeList();
-                                    });
-                              }))),
+
                               OnHover(builder: (((isHovered) {
                                 return createContentTile(
                                     title: "Roles",
