@@ -271,6 +271,7 @@ class JobCardDetailsController extends GetxController {
           "Work Type": strWorkTypes.value,
           "Linked Tool To  Work Type": strToolsRequired.value,
           "Job Created By": jobCardDetailsModel.value?.created_by,
+          "Job Status": jobCardDetailsModel.value?.status_short,
         };
       }
     } //
@@ -301,6 +302,7 @@ class JobCardDetailsController extends GetxController {
           "Permit Type": permit?.permitType,
           "Permit Description": permit?.permitDescription,
           "Permit Issued By": permit?.permitIssuedByName ?? "",
+          "Permit Status": "" //permit.sitePermitNo
         };
         //var x = jobDetails.value;
       }

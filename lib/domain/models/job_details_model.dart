@@ -19,39 +19,40 @@ String jobDetailsModelListToJson(List<JobDetailsModel> data) =>
     json.encode(List<dynamic>.from(data.map((x) => x.toJson())));
 
 class JobDetailsModel {
-  JobDetailsModel({
-    this.id,
-    this.facilityId,
-    this.facilityName,
-    this.blockId,
-    this.blockName,
-    this.status,
-    this.statusShort,
-    this.statusLong,
-    this.createdById,
-    this.createdByName,
-    this.assignedId,
-    this.assignedName,
-    this.jobType,
-    this.workType,
-    this.standardAction,
-    this.breakdownType,
-    this.jobTitle,
-    this.jobDescription,
-    this.breakdownTime,
-    this.currentPtwId,
-    this.currentPtwTitle,
-    this.equipmentCatList,
-    this.workingAreaList,
-    this.workTypeList,
-    this.associatedPermitList,
-    this.lstToolsRequired,
-    this.latestJCStatus,
-  });
+  JobDetailsModel(
+      {this.id,
+      this.facilityId,
+      this.facilityName,
+      this.blockId,
+      this.blockName,
+      this.status,
+      this.statusShort,
+      this.statusLong,
+      this.createdById,
+      this.createdByName,
+      this.assignedId,
+      this.assignedName,
+      this.jobType,
+      this.workType,
+      this.standardAction,
+      this.breakdownType,
+      this.jobTitle,
+      this.jobDescription,
+      this.breakdownTime,
+      this.currentPtwId,
+      this.currentPtwTitle,
+      this.equipmentCatList,
+      this.workingAreaList,
+      this.workTypeList,
+      this.associatedPermitList,
+      this.lstToolsRequired,
+      this.latestJCStatus,
+      this.latestJCStatusShort});
 
   int? id;
   int? facilityId;
   String? facilityName;
+  String? latestJCStatusShort;
   int? blockId;
   String? blockName;
   int? status;
@@ -92,6 +93,9 @@ class JobDetailsModel {
         createdById: json["created_by_id"] == null ? 0 : json['created_by_id'],
         latestJCStatus:
             json["latestJCStatus"] == null ? 0 : json['latestJCStatus'],
+        latestJCStatusShort: json["latestJCStatusShort"] == null
+            ? 0
+            : json['latestJCStatusShort'],
         createdByName:
             json["created_by_name"] == null ? '' : json['created_by_name'],
         assignedId: json["assigned_id"] == null ? 0 : json['assigned_id'],
@@ -156,6 +160,7 @@ class JobDetailsModel {
         "current_ptw_id": currentPtwId,
         "current_ptw_title": currentPtwTitle,
         "latestJCStatus": latestJCStatus,
+        "latestJCStatusShort": latestJCStatusShort,
         "equipment_cat_list":
             List<dynamic>.from(equipmentCatList?.map((x) => x.toJson()) ?? []),
         "working_area_name_list":
