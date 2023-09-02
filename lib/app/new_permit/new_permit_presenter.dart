@@ -24,11 +24,10 @@ import '../../domain/models/create_permit_model.dart';
 import '../../domain/usecases/breakdown_usecase.dart';
 
 class NewPermitPresenter {
- NewPermitPresenter(this.newPermitUsecase);
+  NewPermitPresenter(this.newPermitUsecase);
   NewPermitUsecase newPermitUsecase;
 
-
-   Future<List<BlockModel?>?> getBlocksList({
+  Future<List<BlockModel?>?> getBlocksList({
     String? auth,
     int? facilityId,
     bool? isLoading,
@@ -39,7 +38,7 @@ class NewPermitPresenter {
         isLoading: isLoading ?? false,
       );
 
-   Future<List<EmployeeModel?>?> getAssignedToList({
+  Future<List<EmployeeModel?>?> getAssignedToList({
     String? auth,
     int? facilityId,
     bool? isLoading,
@@ -50,7 +49,7 @@ class NewPermitPresenter {
         isLoading: isLoading ?? false,
       );
 
-   Future<List<EmployeeListModel>> getEmployeePermitList({
+  Future<List<EmployeeListModel>> getEmployeePermitList({
     required bool isLoading,
     required int? facility_id,
   }) async {
@@ -70,7 +69,7 @@ class NewPermitPresenter {
     );
   }
 
-   Future<List<EmployeeListModel2>> getPermitApproverList({
+  Future<List<EmployeeListModel2>> getPermitApproverList({
     required bool isLoading,
     required int? facility_id,
   }) async {
@@ -80,7 +79,7 @@ class NewPermitPresenter {
     );
   }
 
-   Future<List<JobTypeListModel>> getJobTypePermitList({
+  Future<List<JobTypeListModel>> getJobTypePermitList({
     required bool isLoading,
     required int? facility_id,
   }) async {
@@ -90,7 +89,7 @@ class NewPermitPresenter {
     );
   }
 
-   Future<List<SOPListModel>> getSopPermitList({
+  Future<List<SOPListModel>> getSopPermitList({
     required bool isLoading,
     required int? job_type_id,
   }) async {
@@ -100,7 +99,7 @@ class NewPermitPresenter {
     );
   }
 
-   Future<List<SafetyMeasureListModel>> getSafetyMeasureList({
+  Future<List<SafetyMeasureListModel>> getSafetyMeasureList({
     required bool isLoading,
     required int? permit_type_id,
   }) async {
@@ -110,7 +109,7 @@ class NewPermitPresenter {
     );
   }
 
-   Future<List<WorkTypeModel?>?> getWorkTypeList({
+  Future<List<WorkTypeModel?>?> getWorkTypeList({
     String? auth,
     String? categoryIds,
     bool? isLoading,
@@ -119,9 +118,8 @@ class NewPermitPresenter {
         categoryIds: categoryIds,
         isLoading: isLoading ?? false,
       );
-  
 
-   Future<List<InventoryDetailModel?>?> getInventoryDetailList({
+  Future<List<InventoryDetailModel?>?> getInventoryDetailList({
     String? auth,
     // int? facilityId,
     int? id,
@@ -135,18 +133,12 @@ class NewPermitPresenter {
         isLoading: isLoading ?? false,
       );
 
-
-
-   Future<List<FacilityModel?>?> getFacilityLists() async =>
+  Future<List<FacilityModel?>?> getFacilityLists() async =>
       await newPermitUsecase.getFacilityLists(true);
 
-   Future<List<TypePermitModel?>?> getTypePermitList(
-    {required int facility_id}
-   ) async =>
-      await newPermitUsecase.getTypePermitList(
-        true,
-        facility_id
-        );
+  Future<List<TypePermitModel?>?> getTypePermitList(
+          {required int facility_id}) async =>
+      await newPermitUsecase.getTypePermitList(true, facility_id);
 
   Future<Map<String, dynamic>?> linkToPermit({
     int? jobId,
@@ -159,14 +151,12 @@ class NewPermitPresenter {
         isLoading: isLoading,
       );
 
-
   Future<List<InventoryCategoryModel?>?> getInventoryCategoryList({
     String? auth,
     int? facilityId,
     bool? isLoading,
   }) async =>
-      await newPermitUsecase.getInventoryCategoryList(
-      );
+      await newPermitUsecase.getInventoryCategoryList();
 
   Future<List<InventoryCategoryModel?>?> getInventoryIsolationList({
     String? auth,
@@ -174,10 +164,9 @@ class NewPermitPresenter {
     bool? isLoading,
     int? categoryId,
   }) async =>
-      await newPermitUsecase.getInventoryIsolationList(
-      );
+      await newPermitUsecase.getInventoryIsolationList();
 
-    Future<List<InventoryModel?>?> getInventoryEquipmentNameList({
+  Future<List<InventoryModel?>?> getInventoryEquipmentNameList({
     required bool isLoading,
     required int? facilityId,
     int? blockId,
@@ -196,52 +185,54 @@ class NewPermitPresenter {
   //     await newPermitUsecase.createCheckList(isLoading: isLoading);
 
   Future<Map<String, dynamic>?> createNewPermit({
-     newPermit,
+    newPermit,
     required bool isLoading,
   }) async {
     return newPermitUsecase.createNewPermit(
-       newPermit: newPermit,
+      newPermit: newPermit,
       isLoading: isLoading,
     );
   }
 
   Future<Map<String, dynamic>?> createNewPermitForJob({
-     newPermit,
-     required int jobId,
+    newPermit,
+    required int jobId,
     required bool isLoading,
   }) async {
     return newPermitUsecase.createNewPermitForJob(
-       newPermit: newPermit,
-       jobId: jobId,
+      newPermit: newPermit,
+      jobId: jobId,
       isLoading: isLoading,
     );
   }
 
-   Future<Map<String, dynamic>?> updateNewPermit({
-     newPermit,
+  Future<Map<String, dynamic>?> updateNewPermit({
+    newPermit,
     required bool isLoading,
     required bool resubmit,
   }) async {
     return newPermitUsecase.updateNewPermit(
-       newPermit: newPermit,
-      isLoading: isLoading,
-      resubmit: resubmit
+        newPermit: newPermit, isLoading: isLoading, resubmit: resubmit);
+  }
+
+  Future<NewPermitDetailModel?> getNewPermitDetail({
+    bool? isLoading,
+    required int permitId,
+  }) async {
+    return newPermitUsecase.getNewPermitDetail(
+      permitId: permitId,
+      isLoading: isLoading ?? false,
     );
   }
 
-Future<NewPermitDetailModel?> getNewPermitDetail({
-  
-    bool? isLoading,  
-    required int permitId,
-  }) async {
-      return newPermitUsecase.getNewPermitDetail(
-        permitId: permitId,
-        isLoading: isLoading ?? false,
+  Future<Map<String, dynamic>?> createJobCard({
+    String? auth,
+    int? jobId,
+    bool? isLoading,
+  }) async =>
+      await newPermitUsecase.createJobCard(
+        auth: auth,
+        jobId: jobId,
+        isLoading: isLoading,
       );
-  }
-
- 
-
 }
-
-

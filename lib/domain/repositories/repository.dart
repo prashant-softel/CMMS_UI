@@ -336,7 +336,6 @@ class Repository {
     }
   }
 
-
   //create New Permit For Job
   Future<Map<String, dynamic>> createNewPermitForJob(
     newPermit,
@@ -368,11 +367,11 @@ class Repository {
       if (!res.hasError) {
         if (res.errorCode == 200) {
           var responseMap = json.decode(res.data);
-           var permitForJob = responseMap['id'];
+          var permitForJob = responseMap['id'];
           print('CreateForJobPermitResponse:${permitForJob[0]}');
-          if(jobId!=null){
+          if (jobId != null) {
             linkToPermit(jobId, permitForJob[0], true);
-            }
+          }
           return responseMap;
         }
       } else {
@@ -385,7 +384,6 @@ class Repository {
       return Map();
     }
   }
-
 
   //Update New Permit
   Future<Map<String, dynamic>> updateNewPermit(
@@ -457,7 +455,7 @@ class Repository {
       if (!res.hasError) {
         if (res.errorCode == 200) {
           var responseMap = json.decode(res.data);
-          
+
           return responseMap;
         }
       } else {
@@ -800,7 +798,6 @@ class Repository {
     }
   }
 
-
   //Update MC Execution
   Future<Map<String, dynamic>> updateMCExecution(
     updateMCExecution,
@@ -844,7 +841,6 @@ class Repository {
       return Map();
     }
   }
-
 
   /// Clear all data from secure storage .
   void deleteAllSecuredValues() {
@@ -2424,8 +2420,7 @@ class Repository {
     }
   }
 
-
-   ///Abandon Schedule Execution
+  ///Abandon Schedule Execution
   Future<Map<String, dynamic>> abandonScheduleExecutionButton(
     abandoneJsonString,
     bool? isLoading,
@@ -2459,7 +2454,8 @@ class Repository {
           // Get.dialog<void>(WarrantyClaimErrorDialog());
         }
       } else {
-        Utility.showDialog(res.errorCode.toString() + 'abandonScheduleExecutionButton');
+        Utility.showDialog(
+            res.errorCode.toString() + 'abandonScheduleExecutionButton');
         //return '';
       }
       return Map();
@@ -2468,7 +2464,6 @@ class Repository {
       return Map();
     }
   }
-
 
   ///End MC Execution
   Future<Map<String, dynamic>> endMCExecutionButton(
@@ -3826,7 +3821,7 @@ class Repository {
         jobCard: json.encode(jobCard),
         isLoading: isLoading,
       );
-
+      print({"res.data", res.data});
       if (!res.hasError) {
         if (res.errorCode == 200) {
           var responseMap = json.decode(res.data);

@@ -17,8 +17,6 @@ class CreateNewPermitForJobDialog extends GetView {
       {super.key, this.createPermitData, this.data, this.PtwId});
 
   final NewPermitController controller = Get.find();
-  
-
 
   @override
   Widget build(BuildContext context) {
@@ -88,6 +86,8 @@ class CreateNewPermitForJobDialog extends GetView {
                         ElevatedButton(
                           style: Styles.yellowElevatedButtonStyle,
                           onPressed: () {
+                            controller.createJobCard();
+
                             // Get.offAndToNamed(Routes.viewPermitWebScreen);
                             // controller.viewNewPermitList(permitId: PtwId![0]);
                           },

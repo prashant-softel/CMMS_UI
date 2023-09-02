@@ -877,7 +877,7 @@ class _AddJobContentWebState extends State<AddJobContentWeb> {
                     ),
                     if (controller.openbreaketimeDatePicker)
                       Positioned(
-                        left: 290,
+                        left: 430,
                         top: 200,
                         child: DatePickerWidget(
                           showActionButtons: false,

@@ -249,8 +249,7 @@ class NewPermitController extends GetxController {
   RxList<SOPListModel> sopPermitList = <SOPListModel>[].obs;
   RxList<SOPListModel?> filteredSOPPathList = <SOPListModel>[].obs;
 
-
-///For Job 
+  ///For Job
   Rx<bool> isPermitLinked = false.obs;
   RxString responseMessage = ''.obs;
 
@@ -402,6 +401,28 @@ class NewPermitController extends GetxController {
     }
 
     super.onInit();
+  }
+
+  Future<void> createJobCard() async {
+    //   await startStopJobCard();
+
+    ///
+    // if (isJobCardStarted.value == true) {
+    Map<String, dynamic>? responseMapJobCardStarted =
+        await permitPresenter.createJobCard(
+      jobId: jobModel?.id,
+      isLoading: false,
+    );
+
+    if (responseMapJobCardStarted != null &&
+        responseMapJobCardStarted.length > 0) {
+      Get.toNamed(
+        Routes.createMrs,
+        arguments: jobModel?.id,
+      );
+
+      //  }
+    }
   }
 
   Future<void> getNewPermitDetail({required int intPermitId}) async {
@@ -917,7 +938,7 @@ class NewPermitController extends GetxController {
     }
   }
 
-   void linkToPermit({int? jobId, int? permitId}) async {
+  void linkToPermit({int? jobId, int? permitId}) async {
     Map<String, dynamic>? responseMapPermitLinked =
         await permitPresenter.linkToPermit(
       permitId: permitId,
@@ -1076,7 +1097,7 @@ class NewPermitController extends GetxController {
     }
   }
 
-   void createNewPermitForJob({int? jobId}) async {
+  void createNewPermitForJob({int? jobId}) async {
     {
       checkForm();
       if (isFormInvalid.value) {
@@ -1172,7 +1193,6 @@ class NewPermitController extends GetxController {
       }
       print('Create permit For Job data: $jobJsonString');
       print('permit Id For Job data: $permitIdForJob');
-
     }
   }
 

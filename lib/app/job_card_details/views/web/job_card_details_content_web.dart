@@ -31,13 +31,13 @@ class JobCardDetailsContentWeb extends GetView<JobCardDetailsController> {
           content: Text(message),
           actions: <Widget>[
             TextButton(
-              child: Text('Cancel'),
+              child: Text('No'),
               onPressed: () {
                 Navigator.of(context).pop(false);
               },
             ),
             TextButton(
-              child: Text('Confirm'),
+              child: Text('Yes'),
               onPressed: () {
                 Navigator.of(context).pop(true);
               },
@@ -120,6 +120,7 @@ class JobCardDetailsContentWeb extends GetView<JobCardDetailsController> {
                   CustomDivider(),
 
                   /// EMPLOYEE TABLE
+
                   EmployeeTableWidget(controller: controller, isWeb: true),
                   Dimens.boxHeight20,
                   CustomDivider(),
@@ -348,6 +349,8 @@ class JobCardDetailsContentWeb extends GetView<JobCardDetailsController> {
                                       //   },
                                       // ),
 
+                                      Dimens.boxWidth10,
+
                                       varUserAccessModel.value.access_list!
                                                   .where((e) =>
                                                       e.feature_id == 4 &&
@@ -375,24 +378,6 @@ class JobCardDetailsContentWeb extends GetView<JobCardDetailsController> {
                                               ))
                                           : Container(),
                                       Dimens.boxWidth10,
-                                      // CustomElevatedButton(
-                                      //   backgroundColor:
-                                      //       ColorValues.rejectColor,
-                                      //   text: 'Reject',
-                                      //   onPressed: () async {
-                                      //     bool? confirmed =
-                                      //         await showConfirmationDialog(
-                                      //       context,
-                                      //       'Are you sure you want to Reject ?',
-                                      //     );
-                                      //     if (confirmed == true) {
-                                      //       controller.rejectJobCard();
-
-                                      //       Text(
-                                      //           'Are you sure you want to Reject ?');
-                                      //     }
-                                      //   },
-                                      // ),
                                       varUserAccessModel.value.access_list!
                                                   .where((e) =>
                                                       e.feature_id == 4 &&
