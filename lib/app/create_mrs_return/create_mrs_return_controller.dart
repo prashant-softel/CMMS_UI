@@ -96,7 +96,7 @@ class CreateMrsReturnController extends GetxController {
         returned_qty: int.tryParse(element[2]["value"] ?? '0'),
         requested_qty: 0,
         approval_required: 0,
-        is_faulty: int.tryParse(element[3]["value"] ?? '0'),
+        is_faulty: 0, // int.tryParse(element[3]["value"] ?? '0'),
         return_remarks: element[4]["value"] ?? '0',
       );
       items.add(item);

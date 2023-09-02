@@ -1,5 +1,6 @@
 import 'package:cmms/app/theme/dimens.dart';
 import 'package:cmms/domain/models/user_list_model.dart';
+import 'package:data_table_2/data_table_2.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:get/get.dart';
@@ -27,8 +28,10 @@ class _UserListContentWebState extends State<UserListContentWeb> {
     return GetBuilder<UserListController>(
         id: 'user_list',
         builder: (controller) {
-          return Obx(
-            () => Column(
+          return Obx(() {
+            final dataSource = UserDataSource(controller);
+
+            return Column(
               children: [
                 Container(
                   height: 45,
@@ -81,472 +84,356 @@ class _UserListContentWebState extends State<UserListContentWeb> {
                           borderRadius: BorderRadius.circular(10.0),
                         ),
                         child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Padding(
-                              padding: const EdgeInsets.all(10.0),
-                              child: Row(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Padding(
+                                padding: const EdgeInsets.all(10.0),
+                                child: Row(
+                                  children: [
+                                    Text(
+                                      "User List ",
+                                      style: Styles.blackBold16,
+                                    ),
+                                    Spacer(),
+                                    ActionButton(
+                                      icon: Icons.add,
+                                      label: "Add New",
+                                      onPressed: () {
+                                        Get.toNamed(Routes.addUser);
+                                      },
+                                      color: ColorValues.greenlightColor,
+                                    ),
+                                  ],
+                                ),
+                              ),
+                              Divider(
+                                color: ColorValues.greyLightColour,
+                              ),
+                              Row(
                                 children: [
-                                  Text(
-                                    "User List ",
-                                    style: Styles.blackBold16,
+                                  Container(
+                                    height: 35,
+                                    margin: EdgeInsets.only(left: 10),
+                                    child: CustomElevatedButton(
+                                      backgroundColor:
+                                          ColorValues.appLightBlueColor,
+                                      onPressed: () {},
+                                      text: 'columnVisibility'.tr,
+                                    ),
+                                  ),
+                                  Container(
+                                    height: 35,
+                                    margin: EdgeInsets.only(left: 10),
+                                    child: CustomElevatedButton(
+                                        backgroundColor:
+                                            ColorValues.appLightBlueColor,
+                                        onPressed: () {},
+                                        text: 'Copy'),
+                                  ),
+                                  Container(
+                                    height: 35,
+                                    margin: EdgeInsets.only(left: 10),
+                                    child: CustomElevatedButton(
+                                        backgroundColor:
+                                            ColorValues.appLightBlueColor,
+                                        onPressed: () {},
+                                        text: 'Excel'),
+                                  ),
+                                  Container(
+                                    height: 35,
+                                    margin: EdgeInsets.only(left: 10),
+                                    child: CustomElevatedButton(
+                                        backgroundColor:
+                                            ColorValues.appLightBlueColor,
+                                        onPressed: () {},
+                                        text: 'PDF'),
                                   ),
                                   Spacer(),
-                                  ActionButton(
-                                    icon: Icons.add,
-                                    label: "Add New",
-                                    onPressed: () {
-                                      Get.toNamed(Routes.addUser);
-                                    },
-                                    color: ColorValues.greenlightColor,
+                                  Container(
+                                    width: 200,
+                                    height: 35,
+                                    margin: Dimens.edgeInsets0_0_16_0,
+                                    child: TextField(
+                                      onChanged: (value) =>
+                                          controller.search(value),
+                                      decoration: InputDecoration(
+                                        enabledBorder: const OutlineInputBorder(
+                                          borderSide: const BorderSide(
+                                              color: Colors.grey, width: 0.0),
+                                        ),
+                                        focusedBorder: const OutlineInputBorder(
+                                          borderSide: const BorderSide(
+                                              color: Colors.grey, width: 0.0),
+                                        ),
+                                        contentPadding:
+                                            Dimens.edgeInsets10_0_0_0,
+                                        hintText: 'search'.tr,
+                                        hintStyle: Styles.grey12,
+                                      ),
+                                    ),
                                   ),
                                 ],
                               ),
-                            ),
-                            Divider(
-                              color: ColorValues.greyLightColour,
-                            ),
-                            Row(
-                              children: [
-                                Container(
-                                  height: 35,
-                                  margin: EdgeInsets.only(left: 10),
-                                  child: CustomElevatedButton(
-                                    backgroundColor:
-                                        ColorValues.appLightBlueColor,
-                                    onPressed: () {},
-                                    text: 'columnVisibility'.tr,
-                                  ),
-                                ),
-                                Container(
-                                  height: 35,
-                                  margin: EdgeInsets.only(left: 10),
-                                  child: CustomElevatedButton(
-                                      backgroundColor:
-                                          ColorValues.appLightBlueColor,
-                                      onPressed: () {},
-                                      text: 'Copy'),
-                                ),
-                                Container(
-                                  height: 35,
-                                  margin: EdgeInsets.only(left: 10),
-                                  child: CustomElevatedButton(
-                                      backgroundColor:
-                                          ColorValues.appLightBlueColor,
-                                      onPressed: () {},
-                                      text: 'Excel'),
-                                ),
-                                Container(
-                                  height: 35,
-                                  margin: EdgeInsets.only(left: 10),
-                                  child: CustomElevatedButton(
-                                      backgroundColor:
-                                          ColorValues.appLightBlueColor,
-                                      onPressed: () {},
-                                      text: 'PDF'),
-                                ),
-                                Spacer(),
-                                Container(
-                                  width: 200,
-                                  height: 35,
-                                  margin: Dimens.edgeInsets0_0_16_0,
-                                  child: TextField(
-                                    onChanged: (value) =>
-                                        controller.search(value),
-                                    decoration: InputDecoration(
-                                      enabledBorder: const OutlineInputBorder(
-                                        borderSide: const BorderSide(
-                                            color: Colors.grey, width: 0.0),
-                                      ),
-                                      focusedBorder: const OutlineInputBorder(
-                                        borderSide: const BorderSide(
-                                            color: Colors.grey, width: 0.0),
-                                      ),
-                                      contentPadding: Dimens.edgeInsets10_0_0_0,
-                                      hintText: 'search'.tr,
-                                      hintStyle: Styles.grey12,
-                                    ),
-                                  ),
-                                ),
-                              ],
-                            ),
-                            SizedBox(
-                              height: 20,
-                            ),
-                            controller.userList.isEmpty
-                                ? Expanded(
-                                    child: ScrollableTableView(
-                                      columns: [
-                                        "Profile",
-                                        "User Login ID",
-                                        "User Role",
-                                        "Contact Number",
-                                        "Created On",
-                                        "Updated On",
-                                        "Status",
-                                        "Action"
-                                      ].map((column) {
-                                        return TableViewColumn(
-                                          label: column,
-                                          minWidth: Get.width * 0.16,
-                                        );
-                                      }).toList(),
-                                      rows: [
-                                        ...List.generate(
-                                          controller.userList.length,
-                                          (index) {
-                                            return [
-                                              "",
-                                              '',
-                                              '',
-                                              '',
-                                              '',
-                                              '',
-                                              '',
-                                              ''
-                                            ];
-                                          },
-                                        ),
-                                      ].map((record) {
-                                        return TableViewRow(
-                                          height: 60,
-                                          cells: record.map((value) {
-                                            return TableViewCell(
-                                              child: Text(value),
-                                            );
-                                          }).toList(),
-                                        );
-                                      }).toList(),
-                                    ),
-                                  )
-                                : Expanded(
-                                    child: Container(
-                                      margin: Dimens.edgeInsets15,
-                                      decoration: BoxDecoration(
-                                        border: Border.all(
-                                          color: ColorValues
-                                              .lightGreyColorWithOpacity35,
-                                          width: 1,
-                                        ),
-                                        boxShadow: [
-                                          BoxShadow(
-                                            color: ColorValues
-                                                .appBlueBackgroundColor,
-                                            spreadRadius: 2,
-                                            blurRadius: 5,
-                                            offset: Offset(0, 2),
+                              SizedBox(
+                                height: 20,
+                              ),
+                              controller.userList.isEmpty == true
+                                  ? Center(child: Text('No data'))
+                                  : Expanded(
+                                      child: PaginatedDataTable2(
+                                        // fixedLeftColumns: 1,
+                                        // dataRowHeight: Get.height * 0.12,
+                                        columnSpacing: 10,
+                                        source:
+                                            dataSource, // Custom DataSource class
+                                        headingRowHeight: Get.height * 0.12,
+                                        minWidth: Get.width * 1.2,
+                                        showCheckboxColumn: false,
+                                        rowsPerPage:
+                                            10, // Number of rows per page
+                                        availableRowsPerPage: [10, 20, 30, 50],
+                                        columns: [
+                                          buildDataColumn(
+                                            'Profile',
+                                            'Profile',
+                                            //  ColumnSize.S,
+                                            controller.idFilterText,
+                                            100,
                                           ),
+                                          buildDataColumn(
+                                              "UserLoginID",
+                                              "User Login ID",
+                                              // ColumnSize.M,
+                                              controller.userLoginIdFilterText,
+                                              200),
+                                          buildDataColumn(
+                                              "UserRole",
+                                              "User Role", // ColumnSize.L,
+                                              controller.userRoleFilterText,
+                                              150),
+                                          buildDataColumn(
+                                              "ContactNumber",
+                                              "Contact Number",
+                                              // ColumnSize.L,
+                                              controller.contractFilterText,
+                                              170),
+                                          buildDataColumn(
+                                              "CreatedOn",
+                                              "Created On",
+                                              // ColumnSize.L,
+                                              controller.createdOnFilterText,
+                                              170),
+                                          buildDataColumn(
+                                              "UpdatedOn",
+                                              "Updated On",
+                                              // ColumnSize.L,
+                                              controller.updatedOnFilterText,
+                                              150),
+                                          buildDataColumn(
+                                              'action'.tr,
+                                              'Actions',
+                                              // ColumnSize.L,
+                                              controller.userDateFilterText,
+                                              150),
                                         ],
                                       ),
-                                      child: ScrollableTableView(
-                                        paginationController:
-                                            controller.paginationController,
-                                        columns: [
-                                          "Profile",
-                                          "User Login ID",
-                                          "User Role",
-                                          "Contact Number",
-                                          "Created On",
-                                          "Updated On",
-                                          "Status",
-                                          "Action"
-                                        ].map((column) {
-                                          return TableViewColumn(
-                                            minWidth: Get.width * 0.095,
-                                            label: column,
-                                          );
-                                        }).toList(),
-                                        rows: //
-                                            [
-                                          ...List.generate(
-                                            controller.userList.length,
-                                            (index) {
-                                              var userListModelListDetails =
-                                                  controller.userList[index];
-                                              return [
-                                                'Profile_Img', //  '${userListModelListDetails?.photoPath}',
-                                                '${userListModelListDetails?.name}',
-                                                '${userListModelListDetails?.role_name}',
-                                                '${userListModelListDetails?.contact_no}',
-                                                "2023-03-26",
-                                                "2023-05-26",
-                                                '${userListModelListDetails?.status}',
-                                                "Action"
-                                              ];
-                                            },
-                                          ),
-                                        ].map((_userList) {
-                                          return TableViewRow(
-                                              onTap: () {
-                                                controller.selectedItem =
-                                                    controller
-                                                        .userList
-                                                        .firstWhere((element) =>
-                                                            "${element?.name}" ==
-                                                            _userList[1]);
-                                                int userId = controller
-                                                        .selectedItem?.id ??
-                                                    0;
-                                                if (userId != 0) {
-                                                  Get.toNamed(
-                                                      Routes.viewUserDetail,
-                                                      arguments: userId);
-                                                }
-                                              },
-                                              height: 60,
-                                              cells: _userList.map((value) {
-                                                return TableViewCell(
-                                                    child: (value ==
-                                                            "Profile_Img")
-                                                        ? controller.userList
-                                                                    .firstWhere(
-                                                                      (e) =>
-                                                                          "${e?.photoPath}" ==
-                                                                          _userList[
-                                                                              0],
-                                                                      orElse: () =>
-                                                                          UserListModel(
-                                                                              id: 000),
-                                                                    )
-                                                                    ?.photoPath !=
-                                                                null
-                                                            ? Container(
-                                                                height: 45,
-                                                                width: 45,
-                                                                decoration:
-                                                                    BoxDecoration(
-                                                                  color: Color
-                                                                      .fromARGB(
-                                                                          255,
-                                                                          171,
-                                                                          38,
-                                                                          38),
-                                                                  border: Border
-                                                                      .all(
-                                                                    color: Color
-                                                                        .fromARGB(
-                                                                            255,
-                                                                            134,
-                                                                            78,
-                                                                            78),
-                                                                  ),
-                                                                  borderRadius:
-                                                                      BorderRadius
-                                                                          .circular(
-                                                                              100),
-                                                                ),
-                                                                child:
-                                                                    GestureDetector(
-                                                                  onTap: () {},
-                                                                  child: Center(
-                                                                    child: Icon(
-                                                                      Icons
-                                                                          .person,
-                                                                      size: 25,
-                                                                      color: ColorValues
-                                                                          .appBlueBackgroundColor,
-                                                                    ),
-                                                                  ), //Circ
-                                                                ),
-                                                              )
-                                                            : Container(
-                                                                height: 45,
-                                                                width: 45,
-                                                                decoration:
-                                                                    BoxDecoration(
-                                                                  color: ColorValues
-                                                                      .appDarkGreyColor,
-                                                                  border: Border
-                                                                      .all(
-                                                                    color: ColorValues
-                                                                        .appDarkGreyColor,
-                                                                  ),
-                                                                  borderRadius:
-                                                                      BorderRadius
-                                                                          .circular(
-                                                                              100),
-                                                                ),
-                                                                child:
-                                                                    GestureDetector(
-                                                                  onTap: () {},
-                                                                  child: Center(
-                                                                    child: Icon(
-                                                                      Icons
-                                                                          .person,
-                                                                      size: 25,
-                                                                      color: ColorValues
-                                                                          .appBlueBackgroundColor,
-                                                                    ),
-                                                                  ), //Circ
-                                                                ),
-                                                              )
-                                                        : (value == "Action")
-                                                            ? Wrap(children: [
-                                                                TableActionButton(
-                                                                  color: ColorValues
-                                                                      .viewColor,
-                                                                  icon: Icons
-                                                                      .remove_red_eye_outlined,
-                                                                  message:
-                                                                      'view',
-                                                                  onPress: () {
-                                                                    final _flutterSecureStorage =
-                                                                        const FlutterSecureStorage();
-
-                                                                    _flutterSecureStorage
-                                                                        .delete(
-                                                                            key:
-                                                                                "userId");
-                                                                    controller.selectedItem = controller
-                                                                        .filteredData
-                                                                        .firstWhere((element) =>
-                                                                            "${element?.name}" ==
-                                                                            _userList[1]);
-                                                                    int userId =
-                                                                        controller.selectedItem?.id ??
-                                                                            0;
-                                                                    if (userId !=
-                                                                        0) {
-                                                                      Get.toNamed(
-                                                                          Routes
-                                                                              .viewUserDetail,
-                                                                          arguments: {
-                                                                            'userId':
-                                                                                userId
-                                                                          });
-                                                                    }
-                                                                  },
-                                                                ),
-                                                                TableActionButton(
-                                                                  color: ColorValues
-                                                                      .editColor,
-                                                                  icon: Icons
-                                                                      .edit,
-                                                                  message:
-                                                                      'Edit',
-                                                                  onPress: () {
-                                                                    final _flutterSecureStorage =
-                                                                        const FlutterSecureStorage();
-
-                                                                    _flutterSecureStorage
-                                                                        .delete(
-                                                                            key:
-                                                                                "userId");
-                                                                    controller.selectedItem = controller
-                                                                        .filteredData
-                                                                        .firstWhere((element) =>
-                                                                            "${element?.name}" ==
-                                                                            _userList[1]);
-                                                                    int userId =
-                                                                        controller.selectedItem?.id ??
-                                                                            0;
-                                                                    if (userId !=
-                                                                        0) {
-                                                                      Get.toNamed(
-                                                                          Routes
-                                                                              .addUser,
-                                                                          arguments: {
-                                                                            'userId':
-                                                                                userId
-                                                                          });
-                                                                    }
-                                                                  },
-                                                                ),
-                                                                TableActionButton(
-                                                                  color: ColorValues
-                                                                      .deleteColor,
-                                                                  icon: Icons
-                                                                      .delete,
-                                                                  message:
-                                                                      'Delete',
-                                                                  onPress:
-                                                                      () {},
-                                                                )
-                                                              ])
-                                                            : Text(
-                                                                value,
-                                                              ));
-                                              }).toList());
-                                        }).toList(),
-                                      ),
-                                    ),
-                                  ),
-                            Padding(
-                              padding:
-                                  const EdgeInsets.symmetric(horizontal: 25),
-                              child: ValueListenableBuilder(
-                                  valueListenable:
-                                      controller.paginationController,
-                                  builder: (context, value, child) {
-                                    return Row(children: [
-                                      Text(
-                                          "${controller.paginationController.currentPage}  of ${controller.paginationController.pageCount}"),
-                                      Row(children: [
-                                        IconButton(
-                                          onPressed: controller
-                                                      .paginationController
-                                                      .currentPage <=
-                                                  1
-                                              ? null
-                                              : () {
-                                                  controller
-                                                      .paginationController
-                                                      .previous();
-                                                },
-                                          iconSize: 20,
-                                          splashRadius: 20,
-                                          icon: Icon(
-                                            Icons.arrow_back_ios_new_rounded,
-                                            color: controller
-                                                        .paginationController
-                                                        .currentPage <=
-                                                    1
-                                                ? Colors.black26
-                                                : Theme.of(context)
-                                                    .primaryColor,
-                                          ),
-                                        ),
-                                        IconButton(
-                                          onPressed: controller
-                                                      .paginationController
-                                                      .currentPage >=
-                                                  controller
-                                                      .paginationController
-                                                      .pageCount
-                                              ? null
-                                              : () {
-                                                  controller
-                                                      .paginationController
-                                                      .next();
-                                                },
-                                          iconSize: 20,
-                                          splashRadius: 20,
-                                          icon: Icon(
-                                            Icons.arrow_forward_ios_rounded,
-                                            color: controller
-                                                        .paginationController
-                                                        .currentPage >=
-                                                    controller
-                                                        .paginationController
-                                                        .pageCount
-                                                ? Colors.black26
-                                                : Theme.of(context)
-                                                    .primaryColor,
-                                          ),
-                                        ),
-                                      ]),
-                                    ]);
-                                  }),
-                            ),
-                          ],
-                        ),
+                                    )
+                            ]),
                       ),
                     ),
                   ),
                 ),
               ],
-            ),
-          );
+            );
+          });
         });
   }
+
+  DataColumn2 buildDataColumn(
+    String columnName,
+    String header,
+
+    /// ColumnSize columnSize,
+    RxString filterText,
+    double? fixedWidth,
+  ) {
+    return //
+        DataColumn2(
+      // size: columnSize,
+      fixedWidth: fixedWidth,
+
+      label: //
+          Column(
+              mainAxisAlignment: MainAxisAlignment.center, //
+              children: [
+            SizedBox(
+              height: Get.height * 0.05,
+              child: TextField(
+                onChanged: (value) {
+                  filterText.value = value;
+                },
+                textAlign: TextAlign.left,
+                style: TextStyle(height: 1.0),
+                decoration: InputDecoration(
+                  hintText: 'Filter',
+                  contentPadding: EdgeInsets.fromLTRB(
+                      5, 0, 5, 0), // Reduced vertical padding
+                  border: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(5),
+                    borderSide: BorderSide(color: Colors.black),
+                  ),
+                  focusedBorder: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(5),
+                    borderSide: BorderSide(color: Colors.black),
+                  ),
+                  enabledBorder: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(5),
+                    borderSide: BorderSide(color: Colors.black),
+                  ),
+                ),
+              ),
+            ),
+            Align(
+              alignment: Alignment.centerLeft,
+              child: Text(
+                header,
+                style: Styles.black16W500,
+              ),
+            ),
+          ]),
+      // ),
+    );
+  }
+}
+
+class UserDataSource extends DataTableSource {
+  final UserListController controller;
+
+  late List<UserListModel?> filteredUserList;
+
+  UserDataSource(this.controller) {
+    filterUsers();
+  }
+
+  ///
+  void filterUsers() {
+    filteredUserList = <UserListModel?>[];
+    filteredUserList = controller.userList.where((User) {
+      return (User?.id ?? '')
+              .toString()
+              .toLowerCase()
+              .contains(controller.idFilterText.value.toLowerCase()) &&
+          (User?.name ?? '')
+              .toLowerCase()
+              .contains(controller.userLoginIdFilterText.value.toLowerCase()) &&
+          (User?.role_name ?? '')
+              .toString()
+              .toLowerCase()
+              .contains(controller.userRoleFilterText.value.toLowerCase()) &&
+          (User?.contact_no ?? '')
+              .toLowerCase()
+              .contains(controller.contractFilterText.value.toLowerCase());
+      // (User?.status ?? '')
+      //     .toString()
+      //     .toLowerCase()
+      //     .contains(controller.statusFilterText.value.toLowerCase());
+      // Add other filter conditions as needed
+    }).toList();
+  }
+
+  @override
+  DataRow? getRow(int index) {
+    final UserDetails = filteredUserList[index];
+
+    controller.userId.value = UserDetails?.id ?? 0;
+    // var _statusString =
+    //     UserStatusData.getStatusStringFromStatusEnumValue(UserDetails?.status);
+
+    ///
+    return DataRow.byIndex(
+      index: index,
+      cells: [
+        // ...[
+        "Profile_Img", // '${UserDetails?.id ?? ''}',
+        '${UserDetails?.name ?? ''}',
+        '${UserDetails?.role_name ?? ''}',
+        '${UserDetails?.contact_no ?? ''}',
+        "2023-03-26",
+        "2023-05-26",
+        'Actions',
+      ].map((value) {
+        return DataCell(
+          Padding(
+            padding: EdgeInsets.zero,
+            child: (value == 'Actions')
+                ? Wrap(children: [
+                    TableActionButton(
+                      color: ColorValues.viewColor,
+                      icon: Icons.remove_red_eye_outlined,
+                      message: 'view',
+                      onPress: () {
+                        final _flutterSecureStorage =
+                            const FlutterSecureStorage();
+
+                        _flutterSecureStorage.delete(key: "userId");
+                        // controller.selectedItem = controller.filteredData
+                        //     .firstWhere(
+                        //         (element) => "${element?.name}" == value[1]);
+                        int userId = UserDetails?.id ?? 0;
+                        if (userId != 0) {
+                          Get.toNamed(Routes.viewUserDetail,
+                              arguments: {'userId': userId});
+                        }
+                      },
+                    ),
+                    TableActionButton(
+                      color: ColorValues.editColor,
+                      icon: Icons.edit,
+                      message: 'Edit',
+                      onPress: () {
+                        final _flutterSecureStorage =
+                            const FlutterSecureStorage();
+
+                        _flutterSecureStorage.delete(key: "userId");
+                        // controller.selectedItem = controller.filteredData
+                        //     .firstWhere(
+                        //         (element) => "${element?.name}" == value[1]);
+                        int userId = UserDetails?.id ?? 0;
+                        if (userId != 0) {
+                          Get.toNamed(Routes.addUser,
+                              arguments: {'userId': userId});
+                        }
+                      },
+                    ),
+                    TableActionButton(
+                      color: ColorValues.deleteColor,
+                      icon: Icons.delete,
+                      message: 'Delete',
+                      onPress: () {},
+                    )
+                  ])
+                : Text(value.toString()),
+          ),
+        );
+      }).toList(),
+      //   ],
+      onSelectChanged: (_) {
+        final _flutterSecureStorage = const FlutterSecureStorage();
+
+        _flutterSecureStorage.delete(key: "UserId");
+        Get.toNamed(Routes.viewUserDetail,
+            arguments: {'userId': UserDetails?.id});
+        //  controller.goToUserDetailsScreen(int.tryParse('${UserDetails?.id}'));
+      },
+    );
+  }
+
+  @override
+  int get rowCount => filteredUserList.length;
+
+  @override
+  bool get isRowCountApproximate => false;
+
+  @override
+  int get selectedRowCount => 0;
 }

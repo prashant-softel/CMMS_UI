@@ -82,6 +82,7 @@ class JobListContentWeb extends StatelessWidget {
             ? Center(child: Text('No data'))
             : Expanded(
                 child: PaginatedDataTable2(
+                  fixedLeftColumns: 1,
                   dataRowHeight: Get.height * 0.12,
                   columnSpacing: 10,
                   source: dataSource, // Custom DataSource class
@@ -94,45 +95,46 @@ class JobListContentWeb extends StatelessWidget {
                     buildDataColumn(
                       'id',
                       'ID',
-                      ColumnSize.S,
+                      //  ColumnSize.S,
                       controller.idFilterText,
+                      100,
                     ),
                     buildDataColumn(
-                      'jobDetails',
-                      'Job Title',
-                      ColumnSize.M,
-                      controller.jobDetailsFilterText,
-                    ),
+                        'jobDetails',
+                        'Job Title',
+                        // ColumnSize.M,
+                        controller.jobDetailsFilterText,
+                        150),
                     buildDataColumn(
-                      'breakdownTime',
-                      'BreakdownTime',
-                      ColumnSize.L,
-                      controller.breakdownTimeFilterText,
-                    ),
+                        'breakdownTime',
+                        'BreakdownTime',
+                        // ColumnSize.L,
+                        controller.breakdownTimeFilterText,
+                        150),
                     buildDataColumn(
-                      'equipmentCat',
-                      'Equipment Category',
-                      ColumnSize.L,
-                      controller.equipmentCategoryFilterText,
-                    ),
+                        'equipmentCat',
+                        'Equipment Category',
+                        // ColumnSize.L,
+                        controller.equipmentCategoryFilterText,
+                        170),
                     buildDataColumn(
-                      'workingArea',
-                      'Equipment',
-                      ColumnSize.L,
-                      controller.workAreaFilterText,
-                    ),
+                        'workingArea',
+                        'Equipment',
+                        // ColumnSize.L,
+                        controller.workAreaFilterText,
+                        170),
                     buildDataColumn(
-                      'workType',
-                      'Work Type',
-                      ColumnSize.L,
-                      controller.workTypeFilterText,
-                    ),
+                        'workType',
+                        'Work Type',
+                        // ColumnSize.L,
+                        controller.workTypeFilterText,
+                        150),
                     buildDataColumn(
-                      'raisedByName',
-                      'Raised By',
-                      ColumnSize.S,
-                      controller.raisedByNameFilterText,
-                    ),
+                        'raisedByName',
+                        'Raised By',
+                        // ColumnSize.S,
+                        controller.raisedByNameFilterText,
+                        100),
 
                     // buildDataColumn(
                     //   'breakdownType',
@@ -141,23 +143,23 @@ class JobListContentWeb extends StatelessWidget {
                     //   controller.breakdownTypeFilterText,
                     // ),
                     buildDataColumn(
-                      'permitId',
-                      'Permit ID',
-                      ColumnSize.S,
-                      controller.permitIdFilterText,
-                    ),
+                        'permitId',
+                        'Permit ID',
+                        // ColumnSize.S,
+                        controller.permitIdFilterText,
+                        100),
                     buildDataColumn(
-                      'assignedToName',
-                      'Assigned To',
-                      ColumnSize.S,
-                      controller.assignedToNameFilterText,
-                    ),
+                        'assignedToName',
+                        'Assigned To',
+                        // ColumnSize.S,
+                        controller.assignedToNameFilterText,
+                        150),
                     buildDataColumn(
-                      'action'.tr,
-                      'Actions',
-                      ColumnSize.L,
-                      controller.jobDateFilterText,
-                    ),
+                        'action'.tr,
+                        'Actions',
+                        // ColumnSize.L,
+                        controller.jobDateFilterText,
+                        150),
                   ],
                 ),
               );
@@ -168,12 +170,16 @@ class JobListContentWeb extends StatelessWidget {
   DataColumn2 buildDataColumn(
     String columnName,
     String header,
-    ColumnSize columnSize,
-    RxString? filterText,
+
+    /// ColumnSize columnSize,
+    RxString filterText,
+    double? fixedWidth,
   ) {
     return //
         DataColumn2(
-      size: columnSize,
+      // size: columnSize,
+      fixedWidth: fixedWidth,
+
       label: //
           Column(
               mainAxisAlignment: MainAxisAlignment.center, //

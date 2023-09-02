@@ -489,7 +489,7 @@ class PreventiveMaintenanceTaskViewContentWeb
                           },
                         ),
                       )
-                    : controller.pmtaskViewModel.value?.status == 162
+                    : controller.pmtaskViewModel.value?.status == 172
                         ? Container(
                             height: 35,
                             child: CustomElevatedButton(
