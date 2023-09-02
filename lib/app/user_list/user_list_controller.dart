@@ -26,6 +26,17 @@ class UserListController extends GetxController {
   UserListModel? userListModel;
   RxList<String> userListTableColumns = <String>[].obs;
   UserListModel? selectedItem;
+
+  RxString idFilterText = ''.obs;
+  RxString userLoginIdFilterText = ''.obs;
+  RxString userRoleFilterText = ''.obs;
+  RxString contractFilterText = ''.obs;
+  RxString createdOnFilterText = ''.obs;
+  RxString updatedOnFilterText = ''.obs;
+  RxString userDateFilterText = ''.obs;
+
+  Rx<int> userId = 0.obs;
+
   void search(String keyword) {
     if (keyword.isEmpty) {
       userList.value = filteredData;

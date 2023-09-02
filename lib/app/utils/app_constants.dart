@@ -21,8 +21,7 @@ abstract class AppConstants {
   static String kJobStatusCreated = "CREATED";
   static String kJobStatusAssigned = "ASSIGNED";
   static String kJobStatusLinkedToPermit =
-      "Carry Forward Request Waiting for Approval"
-          .toUpperCase(); //"LINKED TO PERMIT";
+      "Carry ".toUpperCase(); //"LINKED TO PERMIT";
   static String kJobStatusInProgress = "IN PROGRESS";
   static String kJobStatusCaryForward = "CARRY FORWARD";
   static String kJobStatusClosed = "CLOSED";

@@ -27,6 +27,13 @@ class ModuleCleaningListPlanController extends GetxController {
   RxList<FacilityModel?> facilityList = <FacilityModel>[].obs;
   Rx<String> selectedBlock = ''.obs;
   ModuleCleaningListPlanModel? moduleCleaningListPlanModel;
+  RxString planId = ''.obs;
+  RxString title = ''.obs;
+  RxString noOfCleaningDays = ''.obs;
+  RxString createdBy = ''.obs;
+  RxString frequency = ''.obs;
+  Rx<int> planIdnew = 0.obs;
+
   final columnVisibility = ValueNotifier<Map<String, bool>>({
     'Plan Id': true,
     'Plan Title': true,
@@ -64,12 +71,6 @@ class ModuleCleaningListPlanController extends GetxController {
     final newVisibility = Map<String, bool>.from(columnVisibility.value)
       ..[columnName] = isVisible;
     columnVisibility.value = newVisibility;
-  }
-
-  void setSearchText(String columnName, String searchText) {
-    final newSearchText = Map<String, String>.from(columnSearchText.value)
-      ..[columnName] = searchText;
-    columnSearchText.value = newSearchText;
   }
 
   StreamSubscription<int>? facilityIdStreamSubscription;

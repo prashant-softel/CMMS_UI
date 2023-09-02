@@ -124,7 +124,7 @@ class AddUserController extends GetxController {
         getFacilityList();
       });
       if (userId.value != 0) {
-        await getUserDetails(userId: userId.value, isloading: true);
+        await getUserDetails();
       }
       super.onInit();
     } catch (e) {
@@ -243,9 +243,9 @@ class AddUserController extends GetxController {
     // return true;
   }
 
-  Future<void> getUserDetails({int? userId, bool? isloading}) async {
+  Future<void> getUserDetails() async {
     final _userDetailModel = await addUserPresenter.getUserDetails(
-        userId: userId, isLoading: isloading);
+        userId: userId.value, isLoading: true);
 
     if (_userDetailModel != null) {
       userDetailModel.value = _userDetailModel;
@@ -272,8 +272,8 @@ class AddUserController extends GetxController {
       gender.value = userDetailModel.value?.gender_name ?? "";
       plantListModel.value = _userDetailModel.plant_list ?? [];
 
-      await getUserAccessListById(userId: userId, isloading: true);
-      await getUserNotificationListById(userId: userId, isloading: true);
+      await getUserAccessListById(userId: userId.value, isloading: true);
+      await getUserNotificationListById(userId: userId.value, isloading: true);
     }
   }
 
