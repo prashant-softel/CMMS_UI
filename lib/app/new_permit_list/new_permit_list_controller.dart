@@ -38,8 +38,8 @@ class NewPermitListController extends GetxController {
    Rx<DateTime> fromDate = DateTime.now().obs;
   Rx<DateTime> toDate = DateTime.now().obs;
   String get formattedFromdate =>
-      DateFormat('yyyy-MM-dd').format(fromDate.value);
-  String get formattedTodate => DateFormat('yyyy-MM-dd').format(toDate.value);
+      DateFormat('dd/MM/yyyy').format(fromDate.value);
+  String get formattedTodate => DateFormat('dd/MM/yyyy').format(toDate.value);
 
   RxList<NewPermitModel?>? newPermitList = <NewPermitModel?>[].obs;
   RxList<NewPermitModel?> filteredData = <NewPermitModel>[].obs;

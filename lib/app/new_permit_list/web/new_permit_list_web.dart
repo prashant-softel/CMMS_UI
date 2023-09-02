@@ -133,7 +133,7 @@ class NewPermitListWeb extends GetView<NewPermitListController> {
                                                 ['stock_Mangement_Date']);
                                           },
                                           hintText:
-                                              '${controller.formattedTodate.toString()} To ${controller.formattedFromdate.toString()}',
+                                              '${controller.formattedTodate.toString()} - ${controller.formattedFromdate.toString()}',
                                         ),
                                       ],
                                     ),
