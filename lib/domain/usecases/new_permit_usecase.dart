@@ -164,14 +164,8 @@ class NewPermitUsecase {
       await repository.getFacilityList(isLoading);
 
   Future<List<TypePermitModel?>?> getTypePermitList(
-    bool? isLoading,
-    int? facility_id
-    ) async =>
-      await repository.getTypePermitList(
-        isLoading,
-        facility_id
-        );
-
+          bool? isLoading, int? facility_id) async =>
+      await repository.getTypePermitList(isLoading, facility_id);
 
   Future<Map<String, dynamic>?> linkToPermit({
     int? jobId,
@@ -204,16 +198,9 @@ class NewPermitUsecase {
         isLoading,
       );
 
-  Future<Map<String, dynamic>> updateNewPermit({
-    newPermit,
-    bool? isLoading,
-    required bool resubmit
-  }) async =>
-      await repository.updateNewPermit(
-        newPermit,
-        isLoading,
-        resubmit
-      );
+  Future<Map<String, dynamic>> updateNewPermit(
+          {newPermit, bool? isLoading, required bool resubmit}) async =>
+      await repository.updateNewPermit(newPermit, isLoading, resubmit);
 
   Future<NewPermitDetailModel?> getNewPermitDetail({
     bool? isLoading,
@@ -224,6 +211,14 @@ class NewPermitUsecase {
         isLoading: isLoading ?? false,
       );
 
-  
-
+  Future<Map<String, dynamic>?> createJobCard({
+    String? auth,
+    int? jobId,
+    bool? isLoading,
+  }) async =>
+      await repository.createJobCard(
+        auth,
+        jobId,
+        isLoading,
+      );
 }

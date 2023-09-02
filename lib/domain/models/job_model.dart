@@ -1,5 +1,6 @@
 import 'dart:convert';
 
+import 'package:cmms/app/theme/color_values.dart';
 import 'package:flutter/material.dart';
 
 import '../../app/utils/app_constants.dart';
@@ -42,14 +43,19 @@ class JobModel {
         latestJCStatusShort: json['latestJCStatusShort'] == null
             ? null
             : json['latestJCStatusShort'] ?? '',
-        status: json['status'] == null
+        status: json['status'] == null ? null : json['status'] ?? '',
+        latestJCStatus: json['latestJCStatus'] == null
             ? null
-            : JobStatusData.statusValues.entries
-                .firstWhere(
-                  (x) => x.value.index == json['status'] - 101,
-                  orElse: () => MapEntry("CREATED", JobStatus.JOB_CREATED),
-                )
-                .value,
+            : json['latestJCStatus'] ?? '',
+        status_short:
+            json['status_short'] == null ? null : json['status_short'] ?? '',
+
+        // : JobStatusData.statusValues.entries
+        //     .firstWhere(
+        //       (x) => x.value.index == json['status'] - 101,
+        //       orElse: () => MapEntry("CREATED", JobStatus.JOB_CREATED),
+        //     )
+        //     .value,
       );
 
   ///
@@ -72,7 +78,9 @@ class JobModel {
       this.assignedToName,
       this.assignedToId,
       this.status,
-      this.latestJCStatusShort});
+      this.status_short,
+      this.latestJCStatusShort,
+      this.latestJCStatus});
 
   int? id;
   int? userId;
@@ -91,8 +99,10 @@ class JobModel {
   String? permitId;
   String? assignedToName;
   int? assignedToId;
+  int? latestJCStatus;
+  String? status_short;
 
-  JobStatus? status;
+  int? status;
   String? latestJCStatusShort;
   Map<String, dynamic> toJson() => {
         'id': id,
@@ -113,85 +123,87 @@ class JobModel {
         'assignedToName': assignedToName,
         'assignedToId': assignedToId,
         'latestJCStatusShort': latestJCStatusShort,
-        'status': JobStatusData.statusValues.entries
-            .firstWhere((x) => x.value == status,
-                orElse: () => MapEntry("CREATED", JobStatus.JOB_CREATED))
-            .key,
+        'latestJCStatus': latestJCStatus,
+        "status_short": status_short,
+        'status': status //JobStatusData.statusValues.entries
+        //     .firstWhere((x) => x.value == status,
+        //         orElse: () => MapEntry("CREATED", JobStatus.JOB_CREATED))
+        //     .key,
       };
 
   ///
 }
 
-class JobStatusData {
-  static Map<String, JobStatus> statusValues = {
-    AppConstants.kJobStatusCreated: JobStatus.JOB_CREATED,
-    AppConstants.kJobStatusAssigned: JobStatus.JOB_ASSIGNED,
-    AppConstants.kJobStatusLinkedToPermit: JobStatus.JOB_LINKED,
-    AppConstants.kJobStatusInProgress: JobStatus.JOB_IN_PROGRESS,
-    AppConstants.kJobStatusCaryForward: JobStatus.JOB_CARRY_FORWARD,
-    AppConstants.kJobStatusClosed: JobStatus.JOB_CLOSED,
-    AppConstants.kJobStatusCancelled: JobStatus.JOB_CANCELLED,
-    AppConstants.kJobStatusDeleted: JobStatus.JOB_DELETED,
-  };
+//  class JobStatusData {
+//   static Map<String, JobStatus> statusValues = {
+//     AppConstants.kJobStatusCreated: JobStatus.JOB_CREATED,
+//     AppConstants.kJobStatusAssigned: JobStatus.JOB_ASSIGNED,
+//     AppConstants.kJobStatusLinkedToPermit: JobStatus.JOB_LINKED,
+//     AppConstants.kJobStatusInProgress: JobStatus.JOB_IN_PROGRESS,
+//     AppConstants.kJobStatusCaryForward: JobStatus.JOB_CARRY_FORWARD,
+//     AppConstants.kJobStatusClosed: JobStatus.JOB_CLOSED,
+//     AppConstants.kJobStatusCancelled: JobStatus.JOB_CANCELLED,
+//     AppConstants.kJobStatusDeleted: JobStatus.JOB_DELETED,
+//   };
 
-  static const Map<JobStatus, Color> statusColors = {
-    JobStatus.JOB_CREATED: Color(0xff58c3ca),
-    JobStatus.JOB_ASSIGNED: Color(0xff58c352),
-    JobStatus.JOB_LINKED: Color.fromARGB(255, 175, 170, 195),
-    JobStatus.JOB_IN_PROGRESS: Color(0xffbf8c4b),
-    JobStatus.JOB_CARRY_FORWARD: Colors.orange,
-    JobStatus.JOB_CLOSED: Color(0xff3438cd),
-    JobStatus.JOB_CANCELLED: Color(0xffbf4844),
-    JobStatus.JOB_DELETED: Colors.red,
-  };
-  static Color getStatusColor(String strJobStatus) {
-    if (strJobStatus == null) {
-      return Colors.grey;
-    }
+//   static const Map<JobStatus, Color> statusColors = {
+//     JobStatus.JOB_CREATED: Color(0xff58c3ca),
+//     JobStatus.JOB_ASSIGNED: Color(0xff58c352),
+//     JobStatus.JOB_LINKED: ColorValues.linktopermitColor,
+//     JobStatus.JOB_IN_PROGRESS: Color(0xffbf8c4b),
+//     JobStatus.JOB_CARRY_FORWARD: Colors.orange,
+//     JobStatus.JOB_CLOSED: Color(0xff3438cd),
+//     JobStatus.JOB_CANCELLED: Color(0xffbf4844),
+//     JobStatus.JOB_DELETED: Colors.red,
+//   };
+//   static Color getStatusColor(String strJobStatus) {
+//     if (strJobStatus == null) {
+//       return Colors.grey;
+//     }
 
-    JobStatus? status = JobStatusData.statusValues[strJobStatus];
-    return status != null
-        ? JobStatusData.statusColors[status] ?? Colors.grey
-        : Colors.grey;
-  }
+//     JobStatus? status = JobStatusData.statusValues[strJobStatus];
+//     return status != null
+//         ? JobStatusData.statusColors[status] ?? Colors.grey
+//         : Colors.grey;
+//   }
 
-  static String getStatusStringFromInt(int? intStatus) {
-    if (intStatus == null) {
-      return 'UNKNOWN';
-    }
+//   static String getStatusStringFromInt(int? intStatus) {
+//     if (intStatus == null) {
+//       return 'UNKNOWN';
+//     }
 
-    final jobStatus = JobStatus.values.firstWhere(
-        (x) => x.index == (intStatus - 101),
-        orElse: () => JobStatus.JOB_CREATED);
-    final statusString = JobStatusData.statusValues.entries
-        .firstWhere((x) => x.value == jobStatus,
-            orElse: () => MapEntry("CREATED", JobStatus.JOB_CREATED))
-        .key;
-    return statusString;
-  }
+//     final jobStatus = JobStatus.values.firstWhere(
+//         (x) => x.index == (intStatus - 101),
+//         orElse: () => JobStatus.JOB_CREATED);
+//     final statusString = JobStatusData.statusValues.entries
+//         .firstWhere((x) => x.value == jobStatus,
+//             orElse: () => MapEntry("CREATED", JobStatus.JOB_CREATED))
+//         .key;
+//     return statusString;
+//   }
 
-  static String getStatusStringFromStatusEnumValue(JobStatus? statusEnum) {
-    if (statusEnum == null) {
-      return 'UNKNOWN';
-    }
+//   static String getStatusStringFromStatusEnumValue(JobStatus? statusEnum) {
+//     if (statusEnum == null) {
+//       return 'UNKNOWN';
+//     }
 
-    final statusString = JobStatusData.statusValues.entries
-        .firstWhere((x) => x.value == statusEnum,
-            orElse: () => MapEntry("CREATED", JobStatus.JOB_CREATED))
-        .key;
-    return statusString;
-  }
+//     final statusString = JobStatusData.statusValues.entries
+//         .firstWhere((x) => x.value == statusEnum,
+//             orElse: () => MapEntry("CREATED", JobStatus.JOB_CREATED))
+//         .key;
+//     return statusString;
+//   }
 
-  ///
-}
+//   ///
+// }
 
-enum JobStatus {
-  JOB_CREATED,
-  JOB_ASSIGNED,
-  JOB_LINKED,
-  JOB_IN_PROGRESS,
-  JOB_CARRY_FORWARD,
-  JOB_CLOSED,
-  JOB_CANCELLED,
-  JOB_DELETED,
-}
+// enum JobStatus {
+//   JOB_CREATED,
+//   JOB_ASSIGNED,
+//   JOB_LINKED,
+//   JOB_IN_PROGRESS,
+//   JOB_CARRY_FORWARD,
+//   JOB_CLOSED,
+//   JOB_CANCELLED,
+//   JOB_DELETED,
+// }
