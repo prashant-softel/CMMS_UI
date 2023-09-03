@@ -19,7 +19,7 @@ class SPVListController extends GetxController {
   final HomeController homecontroller = Get.find();
   SPVListModel? selectedItem;
   SPVListModel? selectedItemupdate;
-
+  Rx<bool> isFormInvalid = false.obs;
   RxBool isCheckedRequire = false.obs;
   void requiretoggleCheckbox() {
     isCheckedRequire.value =
@@ -49,6 +49,8 @@ class SPVListController extends GetxController {
   StreamSubscription<int>? facilityIdStreamSubscription;
 
   ///SOP Permit List
+  Rx<bool> isTitleInvalid = false.obs;
+  Rx<bool> isDescriptionInvalid = false.obs;
   RxList<SPVListModel> SPVList = <SPVListModel>[].obs;
   Rx<bool> isSPVListSelected = true.obs;
   Rx<String> selectedSopPermit = ''.obs;
@@ -121,28 +123,46 @@ class SPVListController extends GetxController {
   }
 
   Future<bool> createSPVlist() async {
-    if (titleCtrlr.text.trim() == '' || descriptionCtrlr.text.trim() == '') {
-      Fluttertoast.showToast(
-          msg: "Please enter required field", fontSize: 16.0);
-    } else {
-      String _title = titleCtrlr.text.trim();
-      String _description = descriptionCtrlr.text.trim();
-
-      CreateSPVModel createCheckpoint = CreateSPVModel(
-        name: _title,
-        description: _description
-      );
-      print("OUT ");
-      var facilitylistJsonString = createCheckpoint.toJson(); //createCheckPointToJson([createCheckpoint]);
-
-      print({"checkpointJsonString", facilitylistJsonString});
-      await sPVListPresenter.createSPVlist(
-        facilitylistJsonString: facilitylistJsonString,
-        isLoading: true,
-      );
-      return true;
+    print("CREATE CONTROLLER");
+    if (titleCtrlr.text.trim() == '' ) {
+      isTitleInvalid.value = true;
+      isFormInvalid.value = true;
+      // isDescriptionInvalid.value = true;
     }
-    return true;
+    if (descriptionCtrlr.text.trim() == '' ) {
+      // isTitleInvalid.value = true;
+      isFormInvalid.value = true;
+      isDescriptionInvalid.value = true;
+    }
+    checkForm();
+    print("FORMVALIDITIY : $isFormInvalid.value");
+    print("TITLE : $isTitleInvalid.value");
+    print("DES : $isDescriptionInvalid.value");
+    if (isFormInvalid.value == true) {
+      return false;
+    }
+      if (titleCtrlr.text.trim() == '' || descriptionCtrlr.text.trim() == '') {
+        Fluttertoast.showToast(
+            msg: "Please enter required field", fontSize: 16.0);
+      } else {
+        String _title = titleCtrlr.text.trim();
+        String _description = descriptionCtrlr.text.trim();
+
+        CreateSPVModel createCheckpoint = CreateSPVModel(
+            name: _title,
+            description: _description
+        );
+        print("OUT ");
+        var facilitylistJsonString = createCheckpoint.toJson(); //createCheckPointToJson([createCheckpoint]);
+
+        print({"checkpointJsonString", facilitylistJsonString});
+        await sPVListPresenter.createSPVlist(
+          facilitylistJsonString: facilitylistJsonString,
+          isLoading: true,
+        );
+        return true;
+      }
+      return true;
   }
 
   Future<void> issuccessCreatechecklist() async {
@@ -252,4 +272,11 @@ class SPVListController extends GetxController {
     }
   }
 
+  void checkForm() {
+    if(isTitleInvalid.value == true || isDescriptionInvalid.value == true){
+      isFormInvalid.value = true;
+    } else {
+      isFormInvalid.value = false;
+    }
+  }
 }
