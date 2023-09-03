@@ -61,7 +61,7 @@ class CreateNewPermitForJobDialog extends GetView {
                         ),
                         TextSpan(
                             text:
-                                '. Please wait for Approval, you can start \nthe job only after PTW is approved'),
+                                ' \nPlease wait for Approval, you can start the job only after PTW is approved'),
                       ],
                     ),
                   ),
