@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:get/get.dart';
 
+import '../../../controllers/file_upload_controller.dart';
 import '../../../theme/color_values.dart';
 import '../../../theme/dimens.dart';
 import '../../../theme/styles.dart';
@@ -55,10 +57,44 @@ class carryForwardJobDialog extends GetView<JobCardDetailsController> {
                       ),
                       Dimens.boxWidth10,
                       ElevatedButton(
-                        style: Styles.yellowElevatedButtonStyle,
-                        child: Text("Job Card"),
-                        onPressed: () => controller.goToJobCardScreen(),
-                      ),
+                          style: Styles.yellowElevatedButtonStyle,
+                          child: Text("Job Card"),
+                          onPressed: () async {
+                            Get.back();
+                            try {
+                              Get.put(FileUploadController());
+
+                              final _flutterSecureStorage =
+                                  const FlutterSecureStorage();
+
+                              // await _flutterSecureStorage.delete(key: "JcId");
+
+                              //   await controller.setJcId();
+
+                              controller.jobCardList.value = await controller
+                                      .jobCardDetailsPresenter
+                                      .getJobCardDetails(
+                                    jobCardId: controller.jobCardId.value,
+                                    isLoading: true,
+                                  ) ??
+                                  [];
+                              controller.getHistory();
+                              controller.createPlantDetailsTableData();
+
+                              controller.createJobDetailsTableData();
+                              controller.createPermitDetailsTableData();
+                              //  createJcDetailsTableData();
+                              controller.getEmployeeList();
+                              //  getPermitDetails();
+
+                              controller.responsibilityCtrlrs
+                                  .add(TextEditingController());
+                              controller.currentIndex.value = -1;
+                            } catch (e) {
+                              print(e);
+                            }
+                          } // => controller.goToJobCardScreen(),
+                          ),
                       // ElevatedButton(
                       //   style: Styles.yellowElevatedButtonStyle,
                       //   onPressed: () {

@@ -154,7 +154,11 @@ class PreventiveScreen extends GetView<PreventiveController> {
                             tittle: "Import Checklist",
                             ontap: () {
                               controller.importChecklist();
-
+                            }),
+                        _priventiveList(
+                            tittle: "Create PM Plan",
+                            ontap: () {
+                              controller.createPmPlan();
                             }),
                       ],
                     ),

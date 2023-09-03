@@ -928,8 +928,7 @@ class ConnectHelper {
     return responseModel;
   }
 
-
-   Future<ResponseModel> abandonScheduleExecutionButton({
+  Future<ResponseModel> abandonScheduleExecutionButton({
     required String auth,
     abandoneJsonString,
     bool? isLoading,
@@ -952,7 +951,6 @@ class ConnectHelper {
 
     return responseModel;
   }
-
 
   ///End MC Execution
   Future<ResponseModel> endMCExecutionButton({
@@ -1705,7 +1703,6 @@ class ConnectHelper {
     return responseModel;
   }
 
-
   //Create New Permit
   Future<ResponseModel> createNewPermitForJob({
     required String auth,
@@ -1734,7 +1731,6 @@ class ConnectHelper {
 
     return responseModel;
   }
-
 
   //Update New Permit
   Future<ResponseModel> updateNewPermit({
@@ -2035,8 +2031,7 @@ class ConnectHelper {
     return responseModel;
   }
 
-
-   //Update MC Execution
+  //Update MC Execution
   Future<ResponseModel> updateMCExecution({
     required String auth,
     updateMCExecution,
@@ -2533,7 +2528,7 @@ class ConnectHelper {
     bool? isLoading,
   }) async {
     var responseModel = await apiWrapper.makeRequest(
-      'JC/ApproveJC',
+      'JC/ApproveJCCF',
       Request.put,
       approveJsonString,
       isLoading ?? false,
@@ -2553,7 +2548,7 @@ class ConnectHelper {
     bool? isLoading,
   }) async {
     var responseModel = await apiWrapper.makeRequest(
-      'JC/RejectJC',
+      'JC/RejectJCCF',
       Request.put,
       rejectJsonString,
       isLoading ?? false,

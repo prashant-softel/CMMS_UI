@@ -76,7 +76,7 @@ class _AddJobContentWebState extends State<AddJobContentWeb> {
                     Expanded(
                       child: SingleChildScrollView(
                         child: Card(
-                          color: Color.fromARGB(255, 5, 145, 239),
+                          color: Color.fromARGB(255, 237, 240, 242),
                           elevation: 10,
                           shape: RoundedRectangleBorder(
                             borderRadius: BorderRadius.circular(10.0),
