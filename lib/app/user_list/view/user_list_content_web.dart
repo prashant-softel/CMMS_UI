@@ -346,10 +346,7 @@ class UserDataSource extends DataTableSource {
     final UserDetails = filteredUserList[index];
 
     controller.userId.value = UserDetails?.id ?? 0;
-    // var _statusString =
-    //     UserStatusData.getStatusStringFromStatusEnumValue(UserDetails?.status);
 
-    ///
     return DataRow.byIndex(
       index: index,
       cells: [

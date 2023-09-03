@@ -302,7 +302,7 @@ class JobCardDetailsController extends GetxController {
           "Permit Type": permit?.permitType,
           "Permit Description": permit?.permitDescription,
           "Permit Issued By": permit?.permitIssuedByName ?? "",
-          "Permit Status": "" //permit.sitePermitNo
+          "Permit Status": permit?.status_short ?? ""
         };
         //var x = jobDetails.value;
       }
@@ -581,6 +581,35 @@ class JobCardDetailsController extends GetxController {
         isLoading: true,
       );
       if (response == true) {
+        try {
+          Get.put(FileUploadController());
+
+          final _flutterSecureStorage = const FlutterSecureStorage();
+
+          // await _flutterSecureStorage.delete(key: "JcId");
+
+          //   await controller.setJcId();
+
+          jobCardList.value = await jobCardDetailsPresenter.getJobCardDetails(
+                jobCardId: jobCardId.value,
+                isLoading: true,
+              ) ??
+              [];
+          getHistory();
+          createPlantDetailsTableData();
+
+          createJobDetailsTableData();
+          createPermitDetailsTableData();
+          //  createJcDetailsTableData();
+          getEmployeeList();
+          //  getPermitDetails();
+
+          responsibilityCtrlrs.add(TextEditingController());
+          currentIndex.value = -1;
+        } catch (e) {
+          print(e);
+        }
+        //
         //getCalibrationList(facilityId, true);
       }
     }

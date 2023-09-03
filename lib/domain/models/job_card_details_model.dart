@@ -182,15 +182,16 @@ class LstCmjcJobDetailList {
 }
 
 class LstPermitDetailList {
-  LstPermitDetailList({
-    required this.permitId,
-    required this.sitePermitNo,
-    this.permitType,
-    required this.permitDescription,
-    this.jobCreatedByName,
-    this.permitIssuedByName,
-    this.permitApprovedByName,
-  });
+  LstPermitDetailList(
+      {required this.permitId,
+      required this.sitePermitNo,
+      this.permitType,
+      required this.permitDescription,
+      this.jobCreatedByName,
+      this.permitIssuedByName,
+      this.permitApprovedByName,
+      this.status,
+      this.status_short});
 
   int permitId;
   int sitePermitNo;
@@ -199,6 +200,8 @@ class LstPermitDetailList {
   String? jobCreatedByName;
   String? permitIssuedByName;
   String? permitApprovedByName;
+  int? status;
+  String? status_short;
 
   factory LstPermitDetailList.fromJson(Map<String, dynamic> json) =>
       LstPermitDetailList(
@@ -209,6 +212,8 @@ class LstPermitDetailList {
         jobCreatedByName: json["job_created_by_name"],
         permitIssuedByName: json["permit_issued_by_name"],
         permitApprovedByName: json["permit_approved_by_name"],
+        status: json["status"],
+        status_short: json["status_short"],
       );
 
   Map<String, dynamic> toJson() => {
@@ -219,5 +224,7 @@ class LstPermitDetailList {
         "job_created_by_name": jobCreatedByName,
         "permit_issued_by_name": permitIssuedByName,
         "permit_approved_by_name": permitApprovedByName,
+        "status_short": status_short,
+        "status": status
       };
 }

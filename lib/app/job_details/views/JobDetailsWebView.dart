@@ -855,12 +855,13 @@ class JobDetailsWebView extends GetView<JobDetailsController> {
                                       //                 ?.latestJCStatus ==
                                       //             153
                                       //   ?
-                                      if (controller.jobDetailsModel.value
-                                                  ?.status ==
-                                              103 ||
-                                          controller.jobDetailsModel.value
+                                      if (
+                                      // controller.jobDetailsModel.value
+                                      //           ?.status ==
+                                      //       103 ||
+                                      controller.jobDetailsModel.value
                                                   ?.latestJCStatus ==
-                                              153 ||
+                                              155 ||
                                           controller.jobDetailsModel.value
                                                   ?.status ==
                                               102)
