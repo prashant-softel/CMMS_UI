@@ -3668,11 +3668,11 @@ class Repository {
       if (!res.hasError) {
         if (res.errorCode == 200) {
           var responseMap = json.decode(res.data);
-          var jcId = responseMap["id"];
-          Get.toNamed(
-            Routes.createMrs,
-            arguments: jcId[0],
-          );
+          // var jcId = responseMap["id"];
+          // Get.toNamed(
+          //   Routes.createMrs,
+          //   arguments: jcId[0],
+          // );
           return responseMap;
         }
       } else {
