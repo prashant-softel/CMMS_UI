@@ -21,6 +21,8 @@ import 'package:cmms/app/calibration_history/view/calibration_history_screen.dar
 import 'package:cmms/app/calibration_view/calibration_view_binding.dart';
 import 'package:cmms/app/create_mrs/create_mrs_binding.dart';
 import 'package:cmms/app/create_mrs/view/create_mrs_screen.dart';
+import 'package:cmms/app/create_pm_plan/create_pm_plan_binding.dart';
+import 'package:cmms/app/create_pm_plan/view/create_pm_plan_screen.dart';
 import 'package:cmms/app/create_preventive_checklist/view/create_preventive_screen.dart';
 import 'package:cmms/app/edit_mrs/view/edit_mrs_screen.dart';
 import 'package:cmms/app/edit_warranty_claim/edit_%20warranty_claim_binding.dart';
@@ -827,6 +829,11 @@ class AppPages {
       name: _Paths.faultyMaterialReport,
       page: FaultyMaterialReportScreen.new,
       binding: FaultyMaterialReportBinding(),
+    ),
+    GetPage<dynamic>(
+      name: _Paths.createPmPlan,
+      page: CreatePmPlanScreen.new,
+      binding: CreatePmPlanBinding(),
     ),
   ];
 }

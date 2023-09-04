@@ -108,10 +108,11 @@ class SPVListContentWeb extends GetView<SPVListController> {
                                             child: Wrap(
                                               children: [
                                                 Text(
+                                                  controller.isFormInvalid == false ?
                                                   controller.selectedItem ==
                                                           null
                                                       ? "Facility added Successfully in the List."
-                                                      : "Facility updated Successfully in the List.",
+                                                      : "Facility updated Successfully in the List." : "Facility is not added.",
                                                   style: TextStyle(
                                                       fontSize: 16,
                                                       color: Color.fromARGB(
@@ -170,11 +171,92 @@ class SPVListContentWeb extends GetView<SPVListController> {
                                                               .width *
                                                           .2) -
                                                       45,
-                                                  child: LoginCustomTextfield(
-                                                    ishint: 'Enter Title',
-                                                    textController:
-                                                        controller.titleCtrlr,
-                                                  )),
+                                                  child: Obx(
+                                                        () => TextField
+                                                          (
+                                                      controller: controller
+                                                          .titleCtrlr,
+                                                      keyboardType:
+                                                      TextInputType.multiline,
+                                                      maxLines: 1,
+
+                                                      autofocus: false,
+                                                      decoration: InputDecoration(
+                                                        fillColor: ColorValues
+                                                            .whiteColor,
+                                                        filled: true,
+                                                        contentPadding: Dimens
+                                                            .edgeInsets05_10,
+                                                        border: InputBorder.none,
+                                                        enabledBorder:
+                                                        OutlineInputBorder(
+                                                          borderRadius:
+                                                          BorderRadius
+                                                              .circular(10.0),
+                                                          borderSide: BorderSide(
+                                                              color: Colors
+                                                                  .transparent),
+                                                        ),
+                                                        focusedBorder:
+                                                        OutlineInputBorder(
+                                                          borderRadius:
+                                                          BorderRadius
+                                                              .circular(10.0),
+                                                          borderSide: BorderSide(
+                                                              color: Colors
+                                                                  .transparent),
+                                                        ),
+                                                        focusedErrorBorder: controller
+                                                            .isTitleInvalid
+                                                            .value
+                                                            ? OutlineInputBorder(
+                                                          borderRadius:
+                                                          BorderRadius
+                                                              .circular(
+                                                              5),
+                                                          borderSide:
+                                                          BorderSide(
+                                                            color: ColorValues
+                                                                .redColorDark,
+                                                          ),
+                                                        )
+                                                            : InputBorder.none,
+                                                        errorBorder: controller
+                                                            .isTitleInvalid
+                                                            .value
+                                                            ? OutlineInputBorder(
+                                                          borderRadius:
+                                                          BorderRadius
+                                                              .circular(
+                                                              5),
+                                                          borderSide:
+                                                          BorderSide(
+                                                            color: ColorValues
+                                                                .redColorDark,
+                                                          ),
+                                                        )
+                                                            : null,
+                                                        errorText: controller
+                                                            .isTitleInvalid
+                                                            .value
+                                                            ? "Required field"
+                                                            : null,
+                                                      ),
+                                                      onChanged: (value) {
+                                                        if (value.trim().length >
+                                                            1) {
+                                                          controller
+                                                              .isTitleInvalid
+                                                              .value = false;
+                                                        } else {
+                                                          controller
+                                                              .isTitleInvalid
+                                                              .value = true;
+                                                        }
+                                                      },
+                                                    ),
+                                                  ),
+                                              ),
                                             ),
                                           ],
                                         ),
@@ -219,11 +301,92 @@ class SPVListContentWeb extends GetView<SPVListController> {
                                                               .width *
                                                           .2) -
                                                       45,
-                                                  child: LoginCustomTextfield(
-                                                    ishint: 'Enter Description',
-                                                    textController: controller
-                                                        .descriptionCtrlr,
-                                                  )),
+                                                  child: Obx(
+                                                        () => TextField
+                                                      (
+                                                      controller: controller
+                                                          .descriptionCtrlr,
+                                                      keyboardType:
+                                                      TextInputType.multiline,
+                                                      maxLines: 1,
+
+                                                      autofocus: false,
+                                                      decoration: InputDecoration(
+                                                        fillColor: ColorValues
+                                                            .whiteColor,
+                                                        filled: true,
+                                                        contentPadding: Dimens
+                                                            .edgeInsets05_10,
+                                                        border: InputBorder.none,
+                                                        enabledBorder:
+                                                        OutlineInputBorder(
+                                                          borderRadius:
+                                                          BorderRadius
+                                                              .circular(10.0),
+                                                          borderSide: BorderSide(
+                                                              color: Colors
+                                                                  .transparent),
+                                                        ),
+                                                        focusedBorder:
+                                                        OutlineInputBorder(
+                                                          borderRadius:
+                                                          BorderRadius
+                                                              .circular(10.0),
+                                                          borderSide: BorderSide(
+                                                              color: Colors
+                                                                  .transparent),
+                                                        ),
+                                                        focusedErrorBorder: controller
+                                                            .isDescriptionInvalid
+                                                            .value
+                                                            ? OutlineInputBorder(
+                                                          borderRadius:
+                                                          BorderRadius
+                                                              .circular(
+                                                              5),
+                                                          borderSide:
+                                                          BorderSide(
+                                                            color: ColorValues
+                                                                .redColorDark,
+                                                          ),
+                                                        )
+                                                            : InputBorder.none,
+                                                        errorBorder: controller
+                                                            .isDescriptionInvalid
+                                                            .value
+                                                            ? OutlineInputBorder(
+                                                          borderRadius:
+                                                          BorderRadius
+                                                              .circular(
+                                                              5),
+                                                          borderSide:
+                                                          BorderSide(
+                                                            color: ColorValues
+                                                                .redColorDark,
+                                                          ),
+                                                        )
+                                                            : null,
+                                                        errorText: controller
+                                                            .isDescriptionInvalid
+                                                            .value
+                                                            ? "Required field"
+                                                            : null,
+                                                      ),
+                                                      onChanged: (value) {
+                                                        if (value.trim().length >
+                                                            1) {
+                                                          controller
+                                                              .isDescriptionInvalid
+                                                              .value = false;
+                                                        } else {
+                                                          controller
+                                                              .isDescriptionInvalid
+                                                              .value = true;
+                                                        }
+                                                      },
+                                                    ),
+                                                  ),
+                                              ),
                                             ),
                                           ],
                                         ),
@@ -259,6 +422,7 @@ class SPVListContentWeb extends GetView<SPVListController> {
                                                   controller
                                                       .createSPVlist()
                                                       .then((value) {
+                                                    print("CREATE");
                                                     print("value,$value");
                                                     if (value == true)
                                                       controller
@@ -274,6 +438,7 @@ class SPVListContentWeb extends GetView<SPVListController> {
                                                       .updateSPV(controller
                                                           .selectedItem?.id)
                                                       .then((value) {
+                                                    print("UPDATE");
                                                     print("value,$value");
                                                     if (value == true)
                                                       controller

@@ -78,8 +78,12 @@ class PreventiveController extends GetxController {
   }
 
   Future<void> importChecklist() async {
+    Get.toNamed(Routes.importInventory, arguments: 3);
+  }
+
+  Future<void> createPmPlan() async {
     Get.toNamed(
-        Routes.importInventory,arguments: 3
+      Routes.createPmPlan,
     );
   }
 }

@@ -95,8 +95,37 @@ class JobDetailsWebView extends GetView<JobDetailsController> {
                                   vertical: 2, horizontal: 5),
                               margin: EdgeInsets.only(top: 5),
                               decoration: BoxDecoration(
-                                color: ColorValues
-                                    .addNewColor, //JobStatusData.getStatusColor(_statusString),
+                                color: controller
+                                            .jobDetailsModel.value?.status ==
+                                        101
+                                    ? ColorValues.createdColor
+                                    : controller.jobDetailsModel.value?.status ==
+                                            102
+                                        ? ColorValues.assignStatusColor
+                                        : controller.jobDetailsModel.value
+                                                    ?.latestJCStatus ==
+                                                151
+                                            ? ColorValues.createsColor
+                                            : controller.jobDetailsModel.value
+                                                        ?.latestJCStatus ==
+                                                    152
+                                                ? ColorValues.startColor
+                                                : controller
+                                                            .jobDetailsModel
+                                                            .value
+                                                            ?.latestJCStatus ==
+                                                        153
+                                                    ? Color.fromARGB(
+                                                        255, 181, 129, 179)
+                                                    : controller
+                                                                .jobDetailsModel
+                                                                .value
+                                                                ?.latestJCStatus ==
+                                                            155
+                                                        ? ColorValues
+                                                            .waitingForApproveStatusColor
+                                                        : ColorValues
+                                                            .lightBlueColor,
                                 borderRadius: BorderRadius.circular(5),
                               ),
                               child: controller.jobDetailsModel.value?.status ==
@@ -855,12 +884,13 @@ class JobDetailsWebView extends GetView<JobDetailsController> {
                                       //                 ?.latestJCStatus ==
                                       //             153
                                       //   ?
-                                      if (controller.jobDetailsModel.value
-                                                  ?.status ==
-                                              103 ||
-                                          controller.jobDetailsModel.value
+                                      if (
+                                      // controller.jobDetailsModel.value
+                                      //           ?.status ==
+                                      //       103 ||
+                                      controller.jobDetailsModel.value
                                                   ?.latestJCStatus ==
-                                              153 ||
+                                              155 ||
                                           controller.jobDetailsModel.value
                                                   ?.status ==
                                               102)

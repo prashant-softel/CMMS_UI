@@ -22,6 +22,17 @@ abstract class ColorValues {
   static const Color greyColor = Color(greyColorHex);
   static const Color cardColor = Color(cardColorHex);
   static const Color inerCardColorHex = Color(inerToCardColorHex);
+  static const Color createdColor = Color(0xff58c3ca);
+  static const Color carryfarwordColor = Color(0xff58c3ca);
+  static const Color createsColor = Colors.orange;
+
+//     JobStatus.JOB_ASSIGNED: Color(0xff58c352),
+//     JobStatus.JOB_LINKED: ColorValues.linktopermitColor,
+//     JobStatus.JOB_IN_PROGRESS: Color(0xffbf8c4b),
+//     JobStatus.JOB_CARRY_FORWARD: Colors.orange,
+//     JobStatus.JOB_CLOSED: Color(0xff3438cd),
+//     JobStatus.JOB_CANCELLED: Color(0xffbf4844),
+//     JobStatus.JOB_DELETED: Colors.red,
 
   static const Color greyDividerColor = Color(lightGreyDividerColorHex);
   static const Color lightGreyTextColor = Color(lightGreyTextColorHex);

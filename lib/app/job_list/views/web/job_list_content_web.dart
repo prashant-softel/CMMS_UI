@@ -82,8 +82,8 @@ class JobListContentWeb extends StatelessWidget {
             ? Center(child: Text('No data'))
             : Expanded(
                 child: PaginatedDataTable2(
-                  fixedLeftColumns: 1,
-                  dataRowHeight: Get.height * 0.12,
+                  //fixedLeftColumns: 1,
+                  dataRowHeight: 105, // Get.height * 0.12,
                   columnSpacing: 10,
                   source: dataSource, // Custom DataSource class
                   headingRowHeight: Get.height * 0.12,
@@ -188,7 +188,7 @@ class JobListContentWeb extends StatelessWidget {
               height: Get.height * 0.05,
               child: TextField(
                 onChanged: (value) {
-                  filterText?.value = value;
+                  filterText.value = value;
                 },
                 textAlign: TextAlign.left,
                 style: TextStyle(height: 1.0),
@@ -304,8 +304,20 @@ class JobDataSource extends DataTableSource {
                 padding: EdgeInsets.symmetric(vertical: 2, horizontal: 5),
                 margin: EdgeInsets.only(top: 5),
                 decoration: BoxDecoration(
-                  color: ColorValues
-                      .addNewColor, //JobStatusData.getStatusColor(_statusString),
+                  color: jobDetails?.status == 101
+                      ? ColorValues.createdColor
+                      : jobDetails?.status == 102
+                          ? ColorValues.assignStatusColor
+                          : jobDetails?.latestJCStatus == 151
+                              ? ColorValues.createsColor
+                              : jobDetails?.latestJCStatus == 152
+                                  ? ColorValues.startColor
+                                  : jobDetails?.latestJCStatus == 153
+                                      ? Color.fromARGB(255, 181, 129, 179)
+                                      : jobDetails?.latestJCStatus == 155
+                                          ? ColorValues
+                                              .waitingForApproveStatusColor
+                                          : ColorValues.lightBlueColor,
                   borderRadius: BorderRadius.circular(5),
                 ),
                 child: jobDetails?.status == 101
@@ -316,8 +328,7 @@ class JobDataSource extends DataTableSource {
                         //         : jobDetails?.status == 103
                         //             ? Text('${jobDetails?.latestJCStatusShort ?? ''}')
                         //    :
-                        Text(
-                            '${jobDetails?.status ?? ''}${jobDetails?.latestJCStatusShort ?? ''}'),
+                        Text('${jobDetails?.latestJCStatusShort ?? ''}'),
               ),
               Text(
                 '${controller.formatDate(jobDetails?.jobDate?.toString() ?? '')}',
@@ -340,21 +351,19 @@ class JobDataSource extends DataTableSource {
               padding: EdgeInsets.zero,
               child: (value == 'Actions')
                   ? Wrap(children: [
-                      Flexible(
-                        child: TableActionButton(
-                          color: ColorValues.viewColor,
-                          icon: Icons.visibility,
-                          message: 'View',
-                          onPress: () {
-                            final _flutterSecureStorage =
-                                const FlutterSecureStorage();
+                      TableActionButton(
+                        color: ColorValues.viewColor,
+                        icon: Icons.visibility,
+                        message: 'View',
+                        onPress: () {
+                          final _flutterSecureStorage =
+                              const FlutterSecureStorage();
 
-                            _flutterSecureStorage.delete(key: "jobId");
-                            controller.goToJobDetailsScreen(
-                              int.tryParse('${jobDetails?.id}'),
-                            );
-                          },
-                        ),
+                          _flutterSecureStorage.delete(key: "jobId");
+                          controller.goToJobDetailsScreen(
+                            int.tryParse('${jobDetails?.id}'),
+                          );
+                        },
                       ),
                       if (jobDetails?.status == 102)
                         TableActionButton(
@@ -367,17 +376,14 @@ class JobDataSource extends DataTableSource {
                           },
                         ),
                       if (jobDetails?.status == 101)
-                        Flexible(
-                          child: //
-                              TableActionButton(
-                            color: ColorValues.appYellowColor,
-                            icon: Icons.assignment,
-                            message: 'Assign',
-                            onPress: () {
-                              controller.goToEditJobScreen(
-                                  int.tryParse('${jobDetails?.id}'));
-                            },
-                          ),
+                        TableActionButton(
+                          color: ColorValues.appYellowColor,
+                          icon: Icons.assignment,
+                          message: 'Assign',
+                          onPress: () {
+                            controller.goToEditJobScreen(
+                                int.tryParse('${jobDetails?.id}'));
+                          },
                         ),
 
                       /// if job is linked, only then show Job Card button
