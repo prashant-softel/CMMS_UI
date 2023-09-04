@@ -1775,13 +1775,13 @@ class ViewPermitWebScreen extends GetView<ViewPermitController> {
                                                             BorderRadius
                                                                 .circular(10),
                                                         border: Border.all(
-                                                          color: controller.viewPermitDetailsModel.value?.current_status_short == "Permit Approved" || controller.viewPermitDetailsModel.value?.current_status_short == "Permit Waiting for Approval"  ? ColorValues.approveColor : ColorValues.appRedColor,
+                                                          color: controller.viewPermitDetailsModel.value?.current_status_short == "Permit Approved" || controller.viewPermitDetailsModel.value?.current_status_short == "Waiting for Approval"  ? ColorValues.approveColor : ColorValues.appRedColor,
                                                           width: 1,
                                                         ),
                                                         boxShadow: [
                                                           BoxShadow(
                                                               color:
-                                                                  controller.viewPermitDetailsModel.value?.current_status_short == "Permit Approved" || controller.viewPermitDetailsModel.value?.current_status_short == "Permit Waiting for Approval"  ? ColorValues.approveColor : ColorValues.appRedColor,),
+                                                                  controller.viewPermitDetailsModel.value?.current_status_short == "Permit Approved" || controller.viewPermitDetailsModel.value?.current_status_short == "Waiting for Approval"  ? ColorValues.approveColor : ColorValues.appRedColor,),
                                                         ],
                                                       ),
                                                       child: Center(
