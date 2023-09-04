@@ -261,8 +261,6 @@ class NewPermitController extends GetxController {
   String? jsaData;
   String? sopData;
 
- 
-
   ///Safety Measure List
   RxList<SafetyMeasureListModel> safetyMeasureList =
       <SafetyMeasureListModel>[].obs;
@@ -410,20 +408,19 @@ class NewPermitController extends GetxController {
 
     ///
     // if (isJobCardStarted.value == true) {
-    //  Map<String, dynamic>? responseMapJobCardStarted =
-    await permitPresenter.createJobCard(
+    Map<String, dynamic>? responseMapJobCardStarted =
+        await permitPresenter.createJobCard(
       jobId: jobModel?.id,
       isLoading: false,
     );
 
-    // if (responseMapJobCardStarted != null &&
-    //     responseMapJobCardStarted.length > 0) {
-    //   Get.toNamed(
-    //     Routes.createMrs,
-    //     arguments: jcId,
-    //   );
-
-    //  }
+    if (responseMapJobCardStarted != null &&
+        responseMapJobCardStarted.length > 0) {
+      Get.toNamed(
+        Routes.createMrs,
+        arguments: jobModel?.id,
+      );
+    }
     //  }
   }
 
@@ -961,10 +958,10 @@ class NewPermitController extends GetxController {
     if (selectedBlock.value == '') {
       isBlockSelected.value = false;
     }
-    if(selectedJobType.value == ''){
+    if (selectedJobType.value == '') {
       isJobTypeListSelected.value = false;
     }
-    if(selectedSopPermit.value == ''){
+    if (selectedSopPermit.value == '') {
       isSopPermitListSelected.value = false;
     }
     if (selectedTypePermit.value == '') {
@@ -1109,10 +1106,10 @@ class NewPermitController extends GetxController {
 
   void createNewPermitForJob({int? jobId}) async {
     {
-      checkForm();
-      if (isFormInvalid.value) {
-        return;
-      }
+      // checkForm();
+      // if (isFormInvalid.value) {
+      //   return;
+      // }
       //   if(selectedBlockId <= 0){
       //   selectedBlockId = getAssignedBlockId(selectedBlock.value) ?? 0;
       //   }

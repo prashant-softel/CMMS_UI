@@ -304,8 +304,20 @@ class JobDataSource extends DataTableSource {
                 padding: EdgeInsets.symmetric(vertical: 2, horizontal: 5),
                 margin: EdgeInsets.only(top: 5),
                 decoration: BoxDecoration(
-                  color: ColorValues
-                      .addNewColor, //JobStatusData.getStatusColor(_statusString),
+                  color: jobDetails?.status == 101
+                      ? ColorValues.createdColor
+                      : jobDetails?.status == 102
+                          ? ColorValues.assignStatusColor
+                          : jobDetails?.latestJCStatus == 151
+                              ? ColorValues.createsColor
+                              : jobDetails?.latestJCStatus == 152
+                                  ? ColorValues.startColor
+                                  : jobDetails?.latestJCStatus == 153
+                                      ? Color.fromARGB(255, 181, 129, 179)
+                                      : jobDetails?.latestJCStatus == 155
+                                          ? ColorValues
+                                              .waitingForApproveStatusColor
+                                          : ColorValues.lightBlueColor,
                   borderRadius: BorderRadius.circular(5),
                 ),
                 child: jobDetails?.status == 101

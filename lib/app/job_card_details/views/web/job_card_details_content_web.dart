@@ -130,8 +130,25 @@ class JobCardDetailsContentWeb extends GetView<JobCardDetailsController> {
                                     vertical: 2, horizontal: 5),
                                 margin: EdgeInsets.only(top: 5),
                                 decoration: BoxDecoration(
-                                  color: ColorValues
-                                      .addNewColor, //JobStatusData.getStatusColor(_statusString),
+                                  color: controller.jobCardDetailsModel.value
+                                              ?.status ==
+                                          151
+                                      ? ColorValues.createsColor
+                                      : controller.jobCardDetailsModel.value
+                                                  ?.status ==
+                                              152
+                                          ? ColorValues.startColor
+                                          : controller.jobCardDetailsModel.value
+                                                      ?.status ==
+                                                  153
+                                              ? Color.fromARGB(
+                                                  255, 181, 129, 179)
+                                              : controller.jobCardDetailsModel
+                                                          .value?.status ==
+                                                      155
+                                                  ? ColorValues
+                                                      .waitingForApproveStatusColor
+                                                  : ColorValues.lightBlueColor,
                                   borderRadius: BorderRadius.circular(5),
                                 ),
                                 child: Text(
