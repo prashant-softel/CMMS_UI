@@ -2942,9 +2942,8 @@ class NewPermitScreen extends GetView<NewPermitController> {
                                                                         MainAxisAlignment
                                                                             .spaceEvenly,
                                                                     children: [
-                                                                      CustomRichText(
-                                                                          title:
-                                                                              'TBT Type: '),
+                                                                      Text(
+                                                                          'TBT Type: '),
                                                                       SizedBox(
                                                                         width:
                                                                             MediaQuery.of(context).size.width /
@@ -2970,9 +2969,8 @@ class NewPermitScreen extends GetView<NewPermitController> {
                                                                         width:
                                                                             20,
                                                                       ),
-                                                                      CustomRichText(
-                                                                          title:
-                                                                              'SOP: '),
+                                                                      Text(
+                                                                          'SOP: '),
                                                                       SizedBox(
                                                                         width:
                                                                             MediaQuery.of(context).size.width /
@@ -3112,8 +3110,7 @@ class NewPermitScreen extends GetView<NewPermitController> {
                                                             backgroundColor:
                                                                 ColorValues
                                                                     .appGreenColor,
-                                                            text:
-                                                                "Approve Job",
+                                                            text: "Approve Job",
                                                             onPressed: () {
                                                               // var jobId = controller.jobModel?.id ?? 0;
                                                               // print('JobId'),

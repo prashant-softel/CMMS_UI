@@ -961,12 +961,12 @@ class NewPermitController extends GetxController {
     if (selectedBlock.value == '') {
       isBlockSelected.value = false;
     }
-    if(selectedJobType.value == ''){
-      isJobTypeListSelected.value = false;
-    }
-    if(selectedSopPermit.value == ''){
-      isSopPermitListSelected.value = false;
-    }
+    // if(selectedJobType.value == ''){
+    //   isJobTypeListSelected.value = false;
+    // }
+    // if(selectedSopPermit.value == ''){
+    //   isSopPermitListSelected.value = false;
+    // }
     if (selectedTypePermit.value == '') {
       isTypePermit.value = false;
     }
@@ -994,8 +994,8 @@ class NewPermitController extends GetxController {
     if (isAssignedToSelected.value == false ||
         isFacilitySelected.value == false ||
         isBlockSelected.value == false ||
-        isJobTypeListSelected.value == false ||
-        isSopPermitListSelected.value == false ||
+        // isJobTypeListSelected.value == false ||
+        // isSopPermitListSelected.value == false ||
         isJobDescriptionInvalid == true) {
       isFormInvalid.value = true;
     } else {
