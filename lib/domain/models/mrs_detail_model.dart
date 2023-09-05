@@ -21,7 +21,8 @@ class MrsDetailsModel {
   int? whereUsedType;
   int? whereUsedTypeId;
   String? remarks;
-
+  String? whereUsedTypeName;
+  int? whereUsedRefID;
   List<CmmrsItems>? cmmrsItems;
 
   MrsDetailsModel(
@@ -40,6 +41,8 @@ class MrsDetailsModel {
       this.requested_by_name,
       this.status_long,
       this.status_short,
+      this.whereUsedRefID,
+      this.whereUsedTypeName,
       this.remarks});
 
   factory MrsDetailsModel.fromJson(Map<String?, dynamic> parsedJson) {
@@ -62,6 +65,8 @@ class MrsDetailsModel {
         requested_by_name: parsedJson['requested_by_name'],
         whereUsedType: parsedJson['whereUsedPType'],
         whereUsedTypeId: parsedJson['whereUsedTypeId'],
+        whereUsedTypeName: parsedJson['whereUsedTypeName'],
+        whereUsedRefID: parsedJson['whereUsedRefID'],
         remarks: parsedJson['remarks'],
         cmmrsItems: cmmrsItems);
   }

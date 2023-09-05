@@ -4620,7 +4620,7 @@ class ConnectHelper {
       int? facilityId,
       int? userId}) async {
     var responseModel = await apiWrapper.makeRequest(
-      'MRS/GetMRSReturnList?facility_ID=$facilityId&emp_id=2',
+      'MRS/GetMRSReturnList?facility_ID=$facilityId&emp_id=$userId',
       //  'MRS/getMRSList?facility_ID=$facilityId&emp_id=412&fromDate=2023-04-23&toDate=2023-07-7',
       Request.get,
       null,

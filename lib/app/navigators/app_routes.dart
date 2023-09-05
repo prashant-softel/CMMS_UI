@@ -137,6 +137,8 @@ abstract class Routes {
   static const employeeStockReport = _Paths.employeeStockReport;
   static const faultyMaterialReport = _Paths.faultyMaterialReport;
   static const createPmPlan = _Paths.createPmPlan;
+  static const editReturnMrs = _Paths.editReturnMrs;
+  static const pmPlanList = _Paths.pmPlanList;
 }
 
 abstract class _Paths {
@@ -268,6 +270,8 @@ abstract class _Paths {
   static const employeeStockReport = '/employee-stock-report';
   static const faultyMaterialReport = '/faulty-material-report';
   static const createPmPlan = '/createPmPlan';
+  static const editReturnMrs = '/edit-return-mrs';
+  static const pmPlanList = '/pm-plan-list';
 
 // static const editPermitWebScreen = '/edit-permit-web-screen';
 }

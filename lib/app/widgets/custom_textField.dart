@@ -75,7 +75,7 @@ class LoginCustomTextfield extends GetView {
             height: 0,
           ),
           errorText: errorController,
-          contentPadding: EdgeInsets.symmetric(horizontal: 15.0),
+          contentPadding: EdgeInsets.symmetric(horizontal: 15.0, vertical: 15),
           suffixIcon: widget,
           focusedBorder: OutlineInputBorder(
               borderRadius: BorderRadius.circular(5),

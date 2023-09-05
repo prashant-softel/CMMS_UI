@@ -129,27 +129,27 @@ class PreventiveScreen extends GetView<PreventiveController> {
                           : (itemWidth / itemHeightWeb),
                       children: <Widget>[
                         _priventiveList(
-                            tittle: "Create CheckList",
+                            tittle: "Check List",
                             ontap: () {
                               controller.createChecklist();
                             }),
                         //  if (Responsive.isDesktop(context))
                         _priventiveList(
-                            tittle: "Check Point Creator",
+                            tittle: "Check Point",
                             ontap: () {
                               // Get.toNamed(
                               //   Routes.preventive_checkPoint,
                               // );
                               controller.checkPoint();
                             }),
-                        _priventiveList(
-                            tittle: "CheckList Mapping",
-                            ontap: () {
-                              Get.toNamed(
-                                Routes.preventiveMaintenanceMapping,
-                              );
-                              //    controller.pmMapping();
-                            }),
+                        // _priventiveList(
+                        //     tittle: "CheckList Mapping",
+                        //     ontap: () {
+                        //       Get.toNamed(
+                        //         Routes.preventiveMaintenanceMapping,
+                        //       );
+                        //       //    controller.pmMapping();
+                        //     }),
                         _priventiveList(
                             tittle: "Import Checklist",
                             ontap: () {
@@ -159,6 +159,11 @@ class PreventiveScreen extends GetView<PreventiveController> {
                             tittle: "Create PM Plan",
                             ontap: () {
                               controller.createPmPlan();
+                            }),
+                        _priventiveList(
+                            tittle: "PM Plans",
+                            ontap: () {
+                              controller.pmPlanList();
                             }),
                       ],
                     ),
@@ -178,7 +183,6 @@ class PreventiveScreen extends GetView<PreventiveController> {
                             ontap: () {
                               controller.pmSchedule();
                             }),
-                        _priventiveList(tittle: "PM Plan"),
 
                         _priventiveList(
                             tittle: "PM Tasks",

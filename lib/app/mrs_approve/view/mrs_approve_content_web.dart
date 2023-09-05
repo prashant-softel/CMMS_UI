@@ -14,12 +14,12 @@ class MrsApproveContentWeb extends GetView<MrsApproveController> {
 
   @override
   Widget build(BuildContext context) {
-    return Obx(
-      () => Container(
-        color: Color.fromARGB(255, 234, 236, 238),
-        width: Get.width,
-        height: Get.height,
-        child: Column(
+    return Container(
+      color: Color.fromARGB(255, 234, 236, 238),
+      width: Get.width,
+      height: Get.height,
+      child: Obx(
+        () => Column(
           children: [
             Container(
               height: 45,
@@ -171,7 +171,7 @@ class MrsApproveContentWeb extends GetView<MrsApproveController> {
                                     style: Styles.blue17),
                                 Dimens.boxHeight10,
                                 Text(
-                                    "${controller.whereUsedType}${controller.mrsDetailsModel.value?.whereUsedTypeId ?? ""}",
+                                    "${controller.mrsDetailsModel.value?.whereUsedTypeName ?? ""}",
                                     style: Styles.blue17),
                               ],
                             )

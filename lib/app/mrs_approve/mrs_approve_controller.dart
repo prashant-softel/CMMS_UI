@@ -62,7 +62,7 @@ class MrsApproveController extends GetxController {
 
     if (_mrsDetailsModel != null) {
       mrsDetailsModel.value = _mrsDetailsModel;
-      whereUsedType = mrsDetailsModel.value?.whereUsedType == 1 ? "JC" : "PM";
+      // whereUsedType = mrsDetailsModel.value?.whereUsedType == 1 ? "JC" : "PM";
     }
     // print({"mrsdetailss", mrsDetailsModel});
   }

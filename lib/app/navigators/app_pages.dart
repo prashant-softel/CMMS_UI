@@ -25,6 +25,8 @@ import 'package:cmms/app/create_pm_plan/create_pm_plan_binding.dart';
 import 'package:cmms/app/create_pm_plan/view/create_pm_plan_screen.dart';
 import 'package:cmms/app/create_preventive_checklist/view/create_preventive_screen.dart';
 import 'package:cmms/app/edit_mrs/view/edit_mrs_screen.dart';
+import 'package:cmms/app/edit_return_mrs/edit_return_mrs_binding.dart';
+import 'package:cmms/app/edit_return_mrs/view/edit_return_mrs_screen.dart';
 import 'package:cmms/app/edit_warranty_claim/edit_%20warranty_claim_binding.dart';
 import 'package:cmms/app/edit_warranty_claim/view/edit_warranty_claim_content_web.dart';
 import 'package:cmms/app/employee_stock_report/view/employee_stock_report_screen.dart';
@@ -54,6 +56,7 @@ import 'package:cmms/app/create_mrs_return/create_mrs_return_binding.dart';
 import 'package:cmms/app/create_mrs_return/view/create_mrs_return_screen.dart';
 import 'package:cmms/app/mrs_view/mrs_view_binding.dart';
 import 'package:cmms/app/mrs_view/view/mrs_view_screen.dart';
+import 'package:cmms/app/pm_plan_list/pm_plan_list_binding.dart';
 import 'package:cmms/app/purchase_goods_orders_list.dart/purchase_goods_orders_list_binding.dart';
 import 'package:cmms/app/purchase_goods_orders_view/purchase_goods_orders_view_binding.dart';
 import 'package:cmms/app/role_access/role_access_binding.dart';
@@ -180,6 +183,7 @@ import '../plant_stock_report/plant_stock_report_binding.dart';
 import '../plant_stock_report/view/plant_stock_report_screen.dart';
 import '../pm_mapping/pm_mapping_binding.dart';
 import '../pm_mapping/view/pm_mapping_screen.dart';
+import '../pm_plan_list/view/pm_plan_list_screen.dart';
 import '../pm_schedule/pm_schedule_binding.dart';
 import '../pm_schedule/view/pm_schedule_screen.dart';
 import '../pm_task_view/pm_task_view_binding.dart';
@@ -834,6 +838,16 @@ class AppPages {
       name: _Paths.createPmPlan,
       page: CreatePmPlanScreen.new,
       binding: CreatePmPlanBinding(),
+    ),
+    GetPage<dynamic>(
+      name: _Paths.editReturnMrs,
+      page: EditMrsReturnScreen.new,
+      binding: EditMrsReturnBinding(),
+    ),
+    GetPage<dynamic>(
+      name: _Paths.pmPlanList,
+      page: PmPlanListScreen.new,
+      binding: PmPlanListBinding(),
     ),
   ];
 }

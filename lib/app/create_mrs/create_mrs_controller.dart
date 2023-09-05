@@ -26,8 +26,10 @@ class CreateMrsController extends GetxController {
   var remarkCtrlr = TextEditingController();
   var whereUsedCtrlr = TextEditingController();
   var setTemlateCtrlr = TextEditingController();
-  int whereUsedTypeId = 0;
+  // int whereUsedTypeId = 0;
   var isSetTemplate = false.obs;
+  Rx<int> whereUsedTypeId = 0.obs;
+  Rx<int> whereUsed = 0.obs;
 
   void setTemplatetoggle() {
     isSetTemplate.value = !isSetTemplate.value;
@@ -36,18 +38,34 @@ class CreateMrsController extends GetxController {
   ///
   @override
   void onInit() async {
-    whereUsedTypeId = Get.arguments;
-    if (whereUsedTypeId != 0) {
-      whereUsedCtrlr.text = whereUsedTypeId.toString();
+    // whereUsedTypeId = Get.arguments;
+    try {
+      final arguments = Get.arguments;
+      if (arguments != null) {
+        if (arguments.containsKey('whereUsedId')) {
+          whereUsedTypeId.value = arguments['whereUsedId'];
+          print('PermitId:${whereUsedTypeId.value}');
+        }
+        if (arguments.containsKey('whereUsed')) {
+          whereUsed.value = arguments['whereUsed'];
+        }
+        if (whereUsedTypeId != 0) {
+          whereUsedCtrlr.text = whereUsedTypeId.toString();
+        }
+        facilityIdStreamSubscription =
+            homecontroller.facilityId$.listen((event) {
+          facilityId = event;
+          Future.delayed(Duration(seconds: 1), () {
+            getEquipmentList(
+              facilityId,
+            );
+          });
+        });
+      }
+    } catch (e) {
+      print('jobModelError: $e');
     }
-    facilityIdStreamSubscription = homecontroller.facilityId$.listen((event) {
-      facilityId = event;
-      Future.delayed(Duration(seconds: 1), () {
-        getEquipmentList(
-          facilityId,
-        );
-      });
-    });
+
     super.onInit();
   }
 
@@ -107,8 +125,8 @@ class CreateMrsController extends GetxController {
         setAsTemplate: _setTemp, //isSetTemplate == true ? 1 : 0,
         activity: _activity,
         //1 is job,2 is pm
-        whereUsedType: 2,
-        whereUsedTypeId: whereUsedTypeId,
+        whereUsedType: whereUsed.value,
+        whereUsedTypeId: whereUsedTypeId.value,
         remarks: _remark,
         equipments: items);
     var createMrsJsonString = createMrs.toJson();

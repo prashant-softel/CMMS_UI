@@ -416,10 +416,8 @@ class NewPermitController extends GetxController {
 
     if (responseMapJobCardStarted != null &&
         responseMapJobCardStarted.length > 0) {
-      Get.toNamed(
-        Routes.createMrs,
-        arguments: jobModel?.id,
-      );
+      Get.toNamed(Routes.createMrs,
+          arguments: {"whereUsedId": jobModel?.id, "whereUsed": 1});
     }
     //  }
   }
@@ -1106,10 +1104,10 @@ class NewPermitController extends GetxController {
 
   void createNewPermitForJob({int? jobId}) async {
     {
-      // checkForm();
-      // if (isFormInvalid.value) {
-      //   return;
-      // }
+      checkForm();
+      if (isFormInvalid.value) {
+        return;
+      }
       //   if(selectedBlockId <= 0){
       //   selectedBlockId = getAssignedBlockId(selectedBlock.value) ?? 0;
       //   }
