@@ -205,7 +205,7 @@ class _UserListContentWebState extends State<UserListContentWeb> {
                                               "User Login ID",
                                               // ColumnSize.M,
                                               controller.userLoginIdFilterText,
-                                              200),
+                                              400),
                                           buildDataColumn(
                                               "UserRole",
                                               "User Role", // ColumnSize.L,
@@ -350,70 +350,77 @@ class UserDataSource extends DataTableSource {
     return DataRow.byIndex(
       index: index,
       cells: [
-        // ...[
-        "Profile_Img", // '${UserDetails?.id ?? ''}',
-        '${UserDetails?.name ?? ''}',
-        '${UserDetails?.role_name ?? ''}',
-        '${UserDetails?.contact_no ?? ''}',
-        "2023-03-26",
-        "2023-05-26",
-        'Actions',
-      ].map((value) {
-        return DataCell(
-          Padding(
-            padding: EdgeInsets.zero,
-            child: (value == 'Actions')
-                ? Wrap(children: [
-                    TableActionButton(
-                      color: ColorValues.viewColor,
-                      icon: Icons.remove_red_eye_outlined,
-                      message: 'view',
-                      onPress: () {
-                        final _flutterSecureStorage =
-                            const FlutterSecureStorage();
-
-                        _flutterSecureStorage.delete(key: "userId");
-                        // controller.selectedItem = controller.filteredData
-                        //     .firstWhere(
-                        //         (element) => "${element?.name}" == value[1]);
-                        int userId = UserDetails?.id ?? 0;
-                        if (userId != 0) {
-                          Get.toNamed(Routes.viewUserDetail,
-                              arguments: {'userId': userId});
-                        }
-                      },
-                    ),
-                    TableActionButton(
-                      color: ColorValues.editColor,
-                      icon: Icons.edit,
-                      message: 'Edit',
-                      onPress: () {
-                        final _flutterSecureStorage =
-                            const FlutterSecureStorage();
-
-                        _flutterSecureStorage.delete(key: "userId");
-                        // controller.selectedItem = controller.filteredData
-                        //     .firstWhere(
-                        //         (element) => "${element?.name}" == value[1]);
-                        int userId = UserDetails?.id ?? 0;
-                        if (userId != 0) {
-                          Get.toNamed(Routes.addUser,
-                              arguments: {'userId': userId});
-                        }
-                      },
-                    ),
-                    TableActionButton(
-                      color: ColorValues.deleteColor,
-                      icon: Icons.delete,
-                      message: 'Delete',
-                      onPress: () {},
-                    )
-                  ])
-                : Text(value.toString()),
+        DataCell(
+          Image.asset(
+            height: 45,
+            width: 45,
+            'assets/files/proimg.png',
+            fit: BoxFit.cover,
           ),
-        );
-      }).toList(),
-      //   ],
+        ),
+        ...[
+          '${UserDetails?.name ?? ''}',
+          '${UserDetails?.role_name ?? ''}',
+          '${UserDetails?.contact_no ?? ''}',
+          "2023-03-26",
+          "2023-05-26",
+          'Actions',
+        ].map((value) {
+          return DataCell(
+            Padding(
+              padding: EdgeInsets.zero,
+              child: (value == 'Actions')
+                  ? Wrap(children: [
+                      TableActionButton(
+                        color: ColorValues.viewColor,
+                        icon: Icons.remove_red_eye_outlined,
+                        message: 'view',
+                        onPress: () {
+                          final _flutterSecureStorage =
+                              const FlutterSecureStorage();
+
+                          _flutterSecureStorage.delete(key: "userId");
+                          // controller.selectedItem = controller.filteredData
+                          //     .firstWhere(
+                          //         (element) => "${element?.name}" == value[1]);
+                          int userId = UserDetails?.id ?? 0;
+                          if (userId != 0) {
+                            Get.toNamed(Routes.viewUserDetail,
+                                arguments: {'userId': userId});
+                          }
+                        },
+                      ),
+                      TableActionButton(
+                        color: ColorValues.editColor,
+                        icon: Icons.edit,
+                        message: 'Edit',
+                        onPress: () {
+                          final _flutterSecureStorage =
+                              const FlutterSecureStorage();
+
+                          _flutterSecureStorage.delete(key: "userId");
+                          // controller.selectedItem = controller.filteredData
+                          //     .firstWhere(
+                          //         (element) => "${element?.name}" == value[1]);
+                          int userId = UserDetails?.id ?? 0;
+                          if (userId != 0) {
+                            Get.toNamed(Routes.addUser,
+                                arguments: {'userId': userId});
+                          }
+                        },
+                      ),
+                      TableActionButton(
+                        color: ColorValues.deleteColor,
+                        icon: Icons.delete,
+                        message: 'Delete',
+                        onPress: () {},
+                      )
+                    ])
+                  : Text(value.toString()),
+            ),
+          );
+        }).toList(),
+      ],
       onSelectChanged: (_) {
         final _flutterSecureStorage = const FlutterSecureStorage();
 
