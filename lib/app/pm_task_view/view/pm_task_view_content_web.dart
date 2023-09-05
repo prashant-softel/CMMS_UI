@@ -373,7 +373,11 @@ class PreventiveMaintenanceTaskViewContentWeb
                                         controller.historyLog!.isNotEmpty)
                                     ? Container(
                                         margin: Dimens.edgeInsets20,
-                                        height: 300,
+                                        height:
+                                            ((controller.historyLog?.length ??
+                                                        0) *
+                                                    40) +
+                                                150,
                                         decoration: BoxDecoration(
                                           border: Border.all(
                                             color: ColorValues
