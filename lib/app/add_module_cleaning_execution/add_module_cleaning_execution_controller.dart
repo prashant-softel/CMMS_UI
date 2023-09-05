@@ -214,13 +214,13 @@ RxList<InventoryCategoryModel?> equipmentCategoryList =
     {
       String _comment = scheduleExecutionTextFieldCtrlr.text.trim();
 
-      CommentModel commentAbandonModel =
+      CommentModel commentAbandonScheduleModel =
           CommentModel(id: id, comment: _comment);
 
-      var abandoneJsonString = commentAbandonModel.toJson();
+      var abandoneScheduleJsonString = commentAbandonScheduleModel.toJson();
       // print({"rejectCalibrationJsonString", approveCalibrationtoJsonString});
       Map<String, dynamic>? response = await addModuleCleaningExecutionPresenter.abandonScheduleExecutionButton(
-        abandoneJsonString: abandoneJsonString,
+        abandoneScheduleJsonString: abandoneScheduleJsonString,
         isLoading: true,
       );
       if (response == true) {
@@ -229,8 +229,8 @@ RxList<InventoryCategoryModel?> equipmentCategoryList =
     }
   }
 
-  ///Update MC Execution
-  void updateMCExecution({int? scheduleId, int? cleaningDay, int? waterUsed}) async {
+  ///Update MC Schedule Execution
+  void updateMCScheduleExecution({int? scheduleId, int? cleaningDay, int? waterUsed}) async {
     {
       // checkForm();
       // if (isFormInvalid.value) {
@@ -254,8 +254,8 @@ RxList<InventoryCategoryModel?> equipmentCategoryList =
     // String remark = items.join(', ');
     // print('Items remark:${remark}');
 
-      UpdateMcExecutionModel updateMCExecutionModel =
-          UpdateMcExecutionModel(
+      UpdateMcScheduleExecutionModel updateMCScheduleExecutionModel =
+          UpdateMcScheduleExecutionModel(
             scheduleId: scheduleId,
             cleaningDay: cleaningDay,
             waterUsed: waterUsed,  
@@ -265,17 +265,17 @@ RxList<InventoryCategoryModel?> equipmentCategoryList =
              
              );
 
-      var updateMCExecutionJsonString = updateMCExecutionModel.toJson();
+      var updateMCScheduleExecutionJsonString = updateMCScheduleExecutionModel.toJson();
       Map<String, dynamic>? responseUpdateMCExecution =
-          await addModuleCleaningExecutionPresenter.updateMCExecution(
-        updateMCExecution: updateMCExecutionJsonString,
+          await addModuleCleaningExecutionPresenter.updateMCScheduleExecution(
+        updateMCScheduleExecutionJsonString: updateMCScheduleExecutionJsonString,
         isLoading: true,
       );
 
       if (responseUpdateMCExecution == null) {
         // showAlertDialog();
       }
-      print('Update MC Execution data: $updateMCExecutionJsonString');
+      print('Update MC Schedule Execution data: $updateMCScheduleExecutionJsonString');
     }
   }
 

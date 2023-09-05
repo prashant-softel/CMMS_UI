@@ -546,27 +546,27 @@ class AddModuleCleaningExecutionContentWeb
                                                                                                                             )
                                                                                                                           : Container(),
 
-                                                                                                                      // controller.listSchedules!
-                                                                                                                      //             .firstWhere(
-                                                                                                                      //               (e) => "${e?.status_short}" == e?.status_short,
-                                                                                                                      //               orElse: () => Schedules(status_short: ""),
-                                                                                                                      //             )
-                                                                                                                      //             ?.status_short ==
-                                                                                                                      //         "In Progress"
-                                                                                                                      //     ?
+                                                                                                                      controller.listSchedules!
+                                                                                                                                  .firstWhere(
+                                                                                                                                    (e) => "${e?.status_short}" == e?.status_short,
+                                                                                                                                    orElse: () => Schedules(status_short: ""),
+                                                                                                                                  )
+                                                                                                                                  ?.status_short ==
+                                                                                                                              "In Progress"
+                                                                                                                          ?
                                                                                                                       TableActionButton(
                                                                                                                         // label: 'Abandon',
                                                                                                                         onPress: () {
                                                                                                                           // Get.dialog(AddModuleCleaningExecutionDialog());
                                                                                                                           var filterdData = controller.listSchedules?.firstWhere((e) => e?.scheduleId == element?.scheduleId);
 
-                                                                                                                          controller.updateMCExecution(scheduleId: filterdData?.scheduleId, cleaningDay: filterdData?.cleaningDay, waterUsed: filterdData?.waterUsed);
+                                                                                                                          controller.updateMCScheduleExecution(scheduleId: filterdData?.scheduleId, cleaningDay: filterdData?.cleaningDay, waterUsed: filterdData?.waterUsed);
                                                                                                                         },
                                                                                                                         color: ColorValues.appLightBlueColor,
                                                                                                                         icon: Icons.add,
                                                                                                                         message: 'Update',
-                                                                                                                      ),
-                                                                                                                      //  : Container(),
+                                                                                                                      )
+                                                                                                                       : Container(),
 
                                                                                                                       ///Abandon
                                                                                                                       TableActionButton(
@@ -582,6 +582,7 @@ class AddModuleCleaningExecutionContentWeb
                                                                                                                         icon: Icons.close,
                                                                                                                         message: 'Abandon',
                                                                                                                       ),
+
                                                                                                                       TableActionButton(
                                                                                                                         // label: 'Equipments',
                                                                                                                         onPress: () {
