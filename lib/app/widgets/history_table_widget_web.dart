@@ -19,33 +19,49 @@ class HistoryTableWidgetWeb extends StatelessWidget {
         //
         DataTable2(
       headingRowHeight: Get.height * 0.06,
-      border: TableBorder.all(color: ColorValues.appLightBlueColor),
+      border: TableBorder.all(color: Color.fromARGB(255, 206, 229, 234)),
       dataRowHeight: Get.height * 0.06,
       horizontalMargin: 12,
       columns: [
         Responsive.isDesktop(context)
-            ? DataColumn(label: Text('Time Stamp'))
+            ? DataColumn(
+                label: Text(
+                'Time Stamp',
+                style: TextStyle(fontSize: 15, fontWeight: FontWeight.bold),
+              ))
             : DataColumn(
                 label: Text(
                 'Time\nStamp',
                 style: TextStyle(fontSize: 10, fontWeight: FontWeight.bold),
               )),
         Responsive.isDesktop(context)
-            ? DataColumn(label: Text('Posted By'))
+            ? DataColumn(
+                label: Text(
+                'Posted By',
+                style: TextStyle(fontSize: 15, fontWeight: FontWeight.bold),
+              ))
             : DataColumn(
                 label: Text(
                 'Post\nBy',
                 style: TextStyle(fontSize: 10, fontWeight: FontWeight.bold),
               )),
         Responsive.isDesktop(context)
-            ? DataColumn(label: Text('Comments'))
+            ? DataColumn(
+                label: Text(
+                'Comments',
+                style: TextStyle(fontSize: 15, fontWeight: FontWeight.bold),
+              ))
             : DataColumn(
                 label: Text(
                 'Com-\nments',
                 style: TextStyle(fontSize: 10, fontWeight: FontWeight.bold),
               )),
         Responsive.isDesktop(context)
-            ? DataColumn(label: Text('Status'))
+            ? DataColumn(
+                label: Text(
+                'Status',
+                style: TextStyle(fontSize: 15, fontWeight: FontWeight.bold),
+              ))
             : DataColumn(
                 label: Text(
                 'Status',

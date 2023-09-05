@@ -81,86 +81,93 @@ class JobListContentWeb extends StatelessWidget {
         return (controller.jobList.isEmpty == true)
             ? Center(child: Text('No data'))
             : Expanded(
-                child: PaginatedDataTable2(
-                  //fixedLeftColumns: 1,
-                  dataRowHeight: 105, // Get.height * 0.12,
-                  columnSpacing: 10,
-                  source: dataSource, // Custom DataSource class
-                  headingRowHeight: Get.height * 0.12,
-                  minWidth: Get.width * 1.2,
-                  showCheckboxColumn: false,
-                  rowsPerPage: 10, // Number of rows per page
-                  availableRowsPerPage: [10, 20, 30, 50],
-                  columns: [
-                    buildDataColumn(
-                      'id',
-                      'ID',
-                      //  ColumnSize.S,
-                      controller.idFilterText,
-                      100,
-                    ),
-                    buildDataColumn(
-                        'jobDetails',
-                        'Job Title',
-                        // ColumnSize.M,
-                        controller.jobDetailsFilterText,
-                        150),
-                    buildDataColumn(
-                        'breakdownTime',
-                        'BreakdownTime',
-                        // ColumnSize.L,
-                        controller.breakdownTimeFilterText,
-                        150),
-                    buildDataColumn(
-                        'equipmentCat',
-                        'Equipment Category',
-                        // ColumnSize.L,
-                        controller.equipmentCategoryFilterText,
-                        170),
-                    buildDataColumn(
-                        'workingArea',
-                        'Equipment',
-                        // ColumnSize.L,
-                        controller.workAreaFilterText,
-                        170),
-                    buildDataColumn(
-                        'workType',
-                        'Work Type',
-                        // ColumnSize.L,
-                        controller.workTypeFilterText,
-                        150),
-                    buildDataColumn(
-                        'raisedByName',
-                        'Raised By',
-                        // ColumnSize.S,
-                        controller.raisedByNameFilterText,
-                        100),
+                child: Theme(
+                  data: ThemeData(
+                      scrollbarTheme: ScrollbarThemeData(
+                          isAlwaysShown: false,
+                          thumbColor: MaterialStateProperty.all<Color>(
+                              Colors.transparent))),
+                  child: PaginatedDataTable2(
+                    //fixedLeftColumns: 1,
+                    dataRowHeight: 105, // Get.height * 0.12,
+                    columnSpacing: 10,
+                    source: dataSource, // Custom DataSource class
+                    headingRowHeight: Get.height * 0.12,
+                    minWidth: Get.width * 1.2,
+                    showCheckboxColumn: false,
+                    rowsPerPage: 10, // Number of rows per page
+                    availableRowsPerPage: [10, 20, 30, 50],
+                    columns: [
+                      buildDataColumn(
+                        'id',
+                        'ID',
+                        //  ColumnSize.S,
+                        controller.idFilterText,
+                        100,
+                      ),
+                      buildDataColumn(
+                          'jobDetails',
+                          'Job Title',
+                          // ColumnSize.M,
+                          controller.jobDetailsFilterText,
+                          150),
+                      buildDataColumn(
+                          'breakdownTime',
+                          'BreakdownTime',
+                          // ColumnSize.L,
+                          controller.breakdownTimeFilterText,
+                          150),
+                      buildDataColumn(
+                          'equipmentCat',
+                          'Equipment Category',
+                          // ColumnSize.L,
+                          controller.equipmentCategoryFilterText,
+                          170),
+                      buildDataColumn(
+                          'workingArea',
+                          'Equipment',
+                          // ColumnSize.L,
+                          controller.workAreaFilterText,
+                          170),
+                      buildDataColumn(
+                          'workType',
+                          'Work Type',
+                          // ColumnSize.L,
+                          controller.workTypeFilterText,
+                          150),
+                      buildDataColumn(
+                          'raisedByName',
+                          'Raised By',
+                          // ColumnSize.S,
+                          controller.raisedByNameFilterText,
+                          100),
 
-                    // buildDataColumn(
-                    //   'breakdownType',
-                    //   'Breakdown Type',
-                    //   ColumnSize.L,
-                    //   controller.breakdownTypeFilterText,
-                    // ),
-                    buildDataColumn(
-                        'permitId',
-                        'Permit ID',
-                        // ColumnSize.S,
-                        controller.permitIdFilterText,
-                        100),
-                    buildDataColumn(
-                        'assignedToName',
-                        'Assigned To',
-                        // ColumnSize.S,
-                        controller.assignedToNameFilterText,
-                        150),
-                    buildDataColumn(
-                        'action'.tr,
-                        'Actions',
-                        // ColumnSize.L,
-                        controller.jobDateFilterText,
-                        150),
-                  ],
+                      // buildDataColumn(
+                      //   'breakdownType',
+                      //   'Breakdown Type',
+                      //   ColumnSize.L,
+                      //   controller.breakdownTypeFilterText,
+                      // ),
+                      buildDataColumn(
+                          'permitId',
+                          'Permit ID',
+                          // ColumnSize.S,
+                          controller.permitIdFilterText,
+                          100),
+                      buildDataColumn(
+                          'assignedToName',
+                          'Assigned To',
+                          // ColumnSize.S,
+                          controller.assignedToNameFilterText,
+                          150),
+                      buildDataColumn(
+                          'action'.tr,
+                          'Actions',
+                          // ColumnSize.L,
+                          controller.jobDateFilterText,
+                          150),
+                    ],
+                  ),
                 ),
               );
       }),

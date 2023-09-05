@@ -72,6 +72,7 @@ class _MultipDropdownWebWidgetState extends State<MultipDropdownWebWidget> {
                       ),
                     ),
                     showSelectedItems: true,
+                    onItemAdded: (selectedItems, addedItem) {},
                     disabledItemFn: (String s) => s.startsWith('I'),
                     showSearchBox: true,
                   ),
