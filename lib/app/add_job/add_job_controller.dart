@@ -298,7 +298,7 @@ class AddJobController extends GetxController {
       Map<String, dynamic>? responseMapJobCreated =
           await addJobPresenter.saveJob(
         job: addJobModel,
-        isLoading: false,
+        isLoading: true,
       );
       if (responseMapJobCreated != null) {
         var _jobId = 0;

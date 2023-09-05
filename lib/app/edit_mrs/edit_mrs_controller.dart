@@ -96,7 +96,7 @@ class EditMrsController extends GetxController {
           {'key': "Available_Qty", "value": '${element.available_qty}'},
           {'key': "Requested_Qty", "value": '${element.requested_qty}'},
         ]);
-        //  dropdownMapperData = element.approval_required;
+        // dropdownMapperData = element.approval_required;
       });
       whereUsedId = _mrsDetailsModel.whereUsedTypeId ?? 0;
       activityCtrlr.text = _mrsDetailsModel.activity ?? "";
@@ -170,9 +170,9 @@ class EditMrsController extends GetxController {
     );
     if (responseEditMrs == null) {
     } else {
-      Get.offAllNamed(
-        Routes.mrsListScreen,
-      );
+      // Get.offAllNamed(
+      //   Routes.mrsListScreen,
+      // );
     }
   }
 }

@@ -166,7 +166,7 @@ class IssueMrsApproveContentWeb extends GetView<IssueMrsApproveController> {
                                     style: Styles.blue17),
                                 Dimens.boxHeight10,
                                 Text(
-                                    "${controller.whereUsedType}${controller.mrsDetailsModel.value?.whereUsedTypeId ?? ""}",
+                                    "${controller.mrsDetailsModel.value?.whereUsedTypeName ?? ""}",
                                     style: Styles.blue17),
                               ],
                             )

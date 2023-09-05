@@ -432,7 +432,7 @@ class _ReturnMrsListContentWebState extends State<ReturnMrsListContentWeb> {
                                                                         if (mrsId !=
                                                                             null) {
                                                                           Get.toNamed(
-                                                                              Routes.mrsReturnScreen,
+                                                                              Routes.editReturnMrs,
                                                                               arguments: mrsId);
                                                                         }
                                                                       },

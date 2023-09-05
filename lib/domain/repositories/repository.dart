@@ -6188,7 +6188,7 @@ class Repository {
                 (m) => MrsListModel.fromJson(Map<String, dynamic>.from(m)))
             .toList();
 
-        return _MrsListModelList;
+        return _MrsListModelList.reversed.toList();
       } else {
         Utility.showDialog(res.errorCode.toString() + ' getMrsList');
         return [];
@@ -6970,7 +6970,7 @@ class Repository {
                     ReturnMrsListModel.fromJson(Map<String, dynamic>.from(m)))
                 .toList();
 
-        return _ReturnMrsListModelList;
+        return _ReturnMrsListModelList.reversed.toList();
       } else {
         Utility.showDialog(res.errorCode.toString() + ' getMrsList');
         return [];
