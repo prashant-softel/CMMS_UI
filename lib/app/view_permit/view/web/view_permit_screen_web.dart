@@ -2079,11 +2079,11 @@ class ViewPermitWebScreen extends GetView<ViewPermitController> {
                                                 Container(
                                                   margin: Dimens.edgeInsets20,
                                                   height: ((controller
-                                                                    .listAssociatedJobs
-                                                                    ?.length ??
-                                                                0) *
-                                                            50) +
-                                                        120,
+                                                                  .listAssociatedJobs
+                                                                  ?.length ??
+                                                              0) *
+                                                          50) +
+                                                      120,
                                                   width: MediaQuery.of(context)
                                                           .size
                                                           .width /
@@ -2125,75 +2125,82 @@ class ViewPermitWebScreen extends GetView<ViewPermitController> {
                                                             .greyLightColour,
                                                       ),
                                                       Expanded(
-                                                        child:
-                                                            ScrollableTableView(
-                                                          columns: [
-                                                            "Job Id",
-                                                            "Job Title",
-                                                            "Equipment Category",
-                                                            "Equipment",
-                                                            "Breakdown Time",
-                                                            "Assigned To",
-                                                            "Status",
-                                                          ].map((column) {
-                                                            return TableViewColumn(
-                                                              label: column,
-                                                              minWidth:
-                                                                  Get.width *
-                                                                      0.11,
-                                                            );
-                                                          }).toList(),
-                                                          rows: [
-                                                            ...List.generate(
-                                                              controller
-                                                                      .listAssociatedJobs
-                                                                      ?.length ??
-                                                                  0,
-                                                              (index) {
-                                                                var getJobsLinkedToPermitList =
-                                                                    controller
-                                                                            .listAssociatedJobs?[
-                                                                        index];
-                                                                return [
-                                                                  '${getJobsLinkedToPermitList?.jobId}',
-                                                                  '${getJobsLinkedToPermitList?.title ?? ''}',
-                                                                  '${getJobsLinkedToPermitList?.equipmentCat ?? ''}',
-                                                                  '${getJobsLinkedToPermitList?.equipment ?? ''}',
-                                                                  '${getJobsLinkedToPermitList?.breakdownTime ?? ''}',
-                                                                  '${getJobsLinkedToPermitList?.assignedTo ?? ''}',
-                                                                  '${getJobsLinkedToPermitList?.status_short ?? ''}',
-                                                                ];
-                                                              },
-                                                            ),
-                                                          ].map((record) {
-                                                            return TableViewRow(
-                                                              height: 40,
-                                                              cells: record
-                                                                  .map((value) {
-                                                                return TableViewCell(
-                                                                    child: value ==
-                                                                            record[
-                                                                                0]
-                                                                        ? GestureDetector(
-                                                                            onTap:
-                                                                                () {
-                                                                              controller.viewJobDetails(int.tryParse('${record[0]}'));
-                                                                            },
-                                                                            child:
-                                                                                Text(
-                                                                              value,
-                                                                              style: TextStyle(
-                                                                                decoration: TextDecoration.underline,
-                                                                                decorationStyle: TextDecorationStyle.solid,
-                                                                                color: Color.fromARGB(255, 5, 92, 163),
+                                                        child: Theme(
+                                                          data: ThemeData(
+                                                              scrollbarTheme: ScrollbarThemeData(
+                                                                  isAlwaysShown:
+                                                                      false,
+                                                                  thumbColor: MaterialStateProperty.all<
+                                                                          Color>(
+                                                                      Colors
+                                                                          .transparent))),
+                                                          child:
+                                                              ScrollableTableView(
+                                                            columns: [
+                                                              "Job Id",
+                                                              "Job Title",
+                                                              "Equipment Category",
+                                                              "Equipment",
+                                                              "Breakdown Time",
+                                                              "Assigned To",
+                                                              "Status",
+                                                            ].map((column) {
+                                                              return TableViewColumn(
+                                                                label: column,
+                                                                minWidth:
+                                                                    Get.width *
+                                                                        0.11,
+                                                              );
+                                                            }).toList(),
+                                                            rows: [
+                                                              ...List.generate(
+                                                                controller
+                                                                        .listAssociatedJobs
+                                                                        ?.length ??
+                                                                    0,
+                                                                (index) {
+                                                                  var getJobsLinkedToPermitList =
+                                                                      controller
+                                                                              .listAssociatedJobs?[
+                                                                          index];
+                                                                  return [
+                                                                    '${getJobsLinkedToPermitList?.jobId}',
+                                                                    '${getJobsLinkedToPermitList?.title ?? ''}',
+                                                                    '${getJobsLinkedToPermitList?.equipmentCat ?? ''}',
+                                                                    '${getJobsLinkedToPermitList?.equipment ?? ''}',
+                                                                    '${getJobsLinkedToPermitList?.breakdownTime ?? ''}',
+                                                                    '${getJobsLinkedToPermitList?.assignedTo ?? ''}',
+                                                                    '${getJobsLinkedToPermitList?.status_short ?? ''}',
+                                                                  ];
+                                                                },
+                                                              ),
+                                                            ].map((record) {
+                                                              return TableViewRow(
+                                                                height: 40,
+                                                                cells: record
+                                                                    .map(
+                                                                        (value) {
+                                                                  return TableViewCell(
+                                                                      child: value ==
+                                                                              record[0]
+                                                                          ? GestureDetector(
+                                                                              onTap: () {
+                                                                                controller.viewJobDetails(int.tryParse('${record[0]}'));
+                                                                              },
+                                                                              child: Text(
+                                                                                value,
+                                                                                style: TextStyle(
+                                                                                  decoration: TextDecoration.underline,
+                                                                                  decorationStyle: TextDecorationStyle.solid,
+                                                                                  color: Color.fromARGB(255, 5, 92, 163),
+                                                                                ),
                                                                               ),
-                                                                            ),
-                                                                          )
-                                                                        : Text(
-                                                                            value));
-                                                              }).toList(),
-                                                            );
-                                                          }).toList(),
+                                                                            )
+                                                                          : Text(value));
+                                                                }).toList(),
+                                                              );
+                                                            }).toList(),
+                                                          ),
                                                         ),
                                                       ),
                                                     ],
@@ -3004,34 +3011,36 @@ class ViewPermitWebScreen extends GetView<ViewPermitController> {
                                                         //       );
                                                         //     })),
                                                         // ),
-                                                      
+
                                                         Expanded(
-                                                          child:
-                                                              Theme(
-                                          data: ThemeData(
-                                              scrollbarTheme: ScrollbarThemeData(
-                                                  isAlwaysShown: false,
-                                                  thumbColor:
-                                                      MaterialStateProperty.all<
-                                                              Color>(
-                                                          Colors.transparent))),
-                                                                child: ScrollableTableView(
-                                                                  columns: [
+                                                          child: Theme(
+                                                            data: ThemeData(
+                                                                scrollbarTheme: ScrollbarThemeData(
+                                                                    isAlwaysShown:
+                                                                        false,
+                                                                    thumbColor: MaterialStateProperty.all<
+                                                                            Color>(
+                                                                        Colors
+                                                                            .transparent))),
+                                                            child:
+                                                                ScrollableTableView(
+                                                              columns: [
                                                                 "Time Stamp",
                                                                 "Posted By",
                                                                 "Comment",
                                                                 "Location",
                                                                 "Status",
-                                                               ].map((column) {
+                                                              ].map((column) {
                                                                 return TableViewColumn(
                                                                   label: column,
                                                                   minWidth:
                                                                       Get.width *
                                                                           0.15,
                                                                 );
-                                                                    }).toList(),
-                                                                      rows: [
-                                                                ...List.generate(
+                                                              }).toList(),
+                                                              rows: [
+                                                                ...List
+                                                                    .generate(
                                                                   controller
                                                                           .historyList
                                                                           ?.length ??
@@ -3039,8 +3048,7 @@ class ViewPermitWebScreen extends GetView<ViewPermitController> {
                                                                   (index) {
                                                                     var getHistoryListDetails =
                                                                         controller
-                                                                                .historyList?[
-                                                                            index];
+                                                                            .historyList?[index];
                                                                     return [
                                                                       '${getHistoryListDetails?.createdAt}',
                                                                       '${getHistoryListDetails?.createdByName ?? ''}',
@@ -3051,7 +3059,7 @@ class ViewPermitWebScreen extends GetView<ViewPermitController> {
                                                                   },
                                                                 ),
                                                                 // [
-                                                                                                                          ].map((record) {
+                                                              ].map((record) {
                                                                 return TableViewRow(
                                                                   height: 45,
                                                                   cells: record
@@ -3063,11 +3071,10 @@ class ViewPermitWebScreen extends GetView<ViewPermitController> {
                                                                     );
                                                                   }).toList(),
                                                                 );
-                                                                                                                          }).toList(),
-                                                                                                                        ),
-                                                              ),
+                                                              }).toList(),
+                                                            ),
+                                                          ),
                                                         ),
-                                                      
                                                       ],
                                                     ),
                                                   ),
