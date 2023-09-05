@@ -93,22 +93,22 @@ class AddModuleCleaningExecutionPresenter {
   }
 
    Future<Map<String, dynamic>?> abandonScheduleExecutionButton({
-   abandoneJsonString,
+   abandoneScheduleJsonString,
   required bool isLoading,
     
   }) async {
      return addModuleCleaningExecutionUsecase.abandonScheduleExecutionButton(
-        abandoneJsonString: abandoneJsonString,
+        abandoneScheduleJsonString: abandoneScheduleJsonString,
       isLoading: isLoading,
       );
   }
 
-  Future<Map<String, dynamic>?> updateMCExecution({
-    updateMCExecution,
+  Future<Map<String, dynamic>?> updateMCScheduleExecution({
+    updateMCScheduleExecutionJsonString,
     required bool isLoading,
   }) async {
-    return addModuleCleaningExecutionUsecase.updateMCExecution(
-      updateMCExecution: updateMCExecution,
+    return addModuleCleaningExecutionUsecase.updateMCScheduleExecution(
+      updateMCScheduleExecutionJsonString: updateMCScheduleExecutionJsonString,
       isLoading: isLoading,
     );
   }

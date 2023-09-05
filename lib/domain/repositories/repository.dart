@@ -798,22 +798,22 @@ class Repository {
     }
   }
 
-  //Update MC Execution
-  Future<Map<String, dynamic>> updateMCExecution(
-    updateMCExecution,
+  //Update MC Schedule Execution
+  Future<Map<String, dynamic>> updateMCScheduleExecution(
+    updateMCScheduleExecutionJsonString,
     bool? isLoading,
   ) async {
     try {
       final auth = await getSecuredValue(LocalKeys.authToken);
-      final res = await _dataRepository.updateMCExecution(
+      final res = await _dataRepository.updateMCScheduleExecution(
         auth: auth,
-        updateMCExecution: json.encode(updateMCExecution),
+        updateMCScheduleExecutionJsonString: json.encode(updateMCScheduleExecutionJsonString),
         isLoading: isLoading ?? false,
       );
 
       var resourceData = res.data;
       // var parsedJson = json.decode(resourceData);
-      print('Response MC Execution Report: ${resourceData}');
+      print('Response MC Schedule Execution Report: ${resourceData}');
       // Get.dialog(
       //   CreateNewPermitDialog(
       //     createPermitData: 'Dialog Title',
@@ -2422,14 +2422,14 @@ class Repository {
 
   ///Abandon Schedule Execution
   Future<Map<String, dynamic>> abandonScheduleExecutionButton(
-    abandoneJsonString,
+    abandoneScheduleJsonString,
     bool? isLoading,
   ) async {
     try {
       final auth = await getSecuredValue(LocalKeys.authToken);
       final res = await _dataRepository.abandonScheduleExecutionButton(
         auth: auth,
-        abandoneJsonString: json.encode(abandoneJsonString),
+        abandoneScheduleJsonString: json.encode(abandoneScheduleJsonString),
         isLoading: isLoading ?? false,
       );
 
