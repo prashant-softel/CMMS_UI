@@ -5,7 +5,9 @@ import 'package:cmms/app/widgets/custom_richtext.dart';
 import 'package:cmms/app/widgets/custom_textfield.dart';
 import 'package:cmms/app/widgets/date_picker.dart';
 import 'package:cmms/app/widgets/dropdown_web.dart';
-import 'package:cmms/app/widgets/stock_dropdown.dart';
+import 'package:cmms/app/widgets/multipule_dropdown_web.dart';
+import 'package:dropdown_search/dropdown_search.dart';
+
 import 'package:flutter/material.dart';
 
 import 'package:get/get.dart';
@@ -73,7 +75,7 @@ class _CreatePmPlanWebState extends State<CreatePmPlanWeb> {
                     Container(
                       height: MediaQuery.of(context).size.height / 1.5,
                       width: Get.width * 7,
-                      margin: EdgeInsets.only(left: 10, top: 10, right: 10),
+                      margin: EdgeInsets.only(left: 20, top: 10, right: 20),
                       // height: Get.height,
                       child: Card(
                         color: ColorValues.cardColor,
@@ -106,84 +108,126 @@ class _CreatePmPlanWebState extends State<CreatePmPlanWeb> {
                               color: ColorValues.greyLightColour,
                             ),
                             Dimens.boxHeight15,
-                            Row(
-                              crossAxisAlignment: CrossAxisAlignment.center,
-                              children: [
-                                Column(
-                                  crossAxisAlignment: CrossAxisAlignment.end,
-                                  children: [
-                                    CustomRichText(title: 'Plan Title :'),
-                                    CustomRichText(
-                                        title: 'Equipment Category :'),
-                                    CustomRichText(title: 'Start Date :'),
-                                  ],
-                                ),
-                                Column(
-                                  crossAxisAlignment: CrossAxisAlignment.end,
-                                  children: [
-                                    Container(
-                                        decoration: BoxDecoration(
-                                          borderRadius:
-                                              BorderRadius.circular(10),
-                                          border: Border.all(
-                                            color: Color.fromARGB(
-                                                255, 227, 224, 224),
-                                            width: 1,
-                                          ),
-                                          boxShadow: [
-                                            BoxShadow(
-                                              color: Color.fromARGB(
-                                                      255, 236, 234, 234)
-                                                  .withOpacity(0.5),
-                                              spreadRadius: 2,
-                                              blurRadius: 5,
-                                              offset: Offset(0, 2),
+                            Padding(
+                              padding: const EdgeInsets.only(left: 100),
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.end,
+                                children: [
+                                  Padding(
+                                    padding: const EdgeInsets.only(left: 85),
+                                    child: Row(
+                                      children: [
+                                        CustomRichText(title: 'Plan Title :'),
+                                        Dimens.boxWidth5,
+                                        Container(
+                                            decoration: BoxDecoration(
+                                              borderRadius:
+                                                  BorderRadius.circular(10),
+                                              border: Border.all(
+                                                color: Color.fromARGB(
+                                                    255, 227, 224, 224),
+                                                width: 1,
+                                              ),
+                                              boxShadow: [
+                                                BoxShadow(
+                                                  color: Color.fromARGB(
+                                                          255, 236, 234, 234)
+                                                      .withOpacity(0.5),
+                                                  spreadRadius: 2,
+                                                  blurRadius: 5,
+                                                  offset: Offset(0, 2),
+                                                ),
+                                              ],
                                             ),
-                                          ],
-                                        ),
-                                        width:
-                                            (MediaQuery.of(context).size.width *
-                                                .2),
-                                        child: LoginCustomTextfield()),
-                                    Container(
-                                        decoration: BoxDecoration(
-                                          borderRadius:
-                                              BorderRadius.circular(10),
-                                          border: Border.all(
-                                            color: Color.fromARGB(
-                                                255, 227, 224, 224),
-                                            width: 1,
-                                          ),
-                                          boxShadow: [
-                                            BoxShadow(
-                                              color: Color.fromARGB(
-                                                      255, 236, 234, 234)
-                                                  .withOpacity(0.5),
-                                              spreadRadius: 2,
-                                              blurRadius: 5,
-                                              offset: Offset(0, 2),
-                                            ),
-                                          ],
-                                        ),
-                                        width:
-                                            (MediaQuery.of(context).size.width *
-                                                .2),
-                                        child: LoginCustomTextfield()),
-                                    CustomTextFieldForStock(
-                                      width:
-                                          MediaQuery.of(context).size.width / 5,
-                                      numberTextField: true,
-                                      onTap: () {
-                                        controller.openStartDatePicker =
-                                            !controller.openStartDatePicker;
-                                        controller.update(['stock_Mangement']);
-                                      },
-                                      textController:
-                                          controller.startDateDateTc,
+                                            width: (MediaQuery.of(context)
+                                                    .size
+                                                    .width *
+                                                .29),
+                                            child: LoginCustomTextfield()),
+                                      ],
                                     ),
-                                  ],
-                                ),
-                              ],
+                                  ),
+                                  Dimens.boxHeight15,
+                                  Row(
+                                    children: [
+                                      CustomRichText(
+                                          title: 'Equipment Category :'),
+                                      Dimens.boxWidth5,
+                                      MultipDropdownWebWidget(
+                                        width:
+                                            (MediaQuery.of(context).size.width *
+                                                .2),
+                                        dropdownList:
+                                            controller.equipmentCategoryList,
+                                        selectedItems: controller
+                                            .selectedEquipmentCategoryList,
+                                      ),
+                                    ],
+                                  ),
+                                  Dimens.boxHeight15,
+                                  Row(
+                                    children: [
+                                      Padding(
+                                        padding:
+                                            const EdgeInsets.only(left: 81),
+                                        child: Row(
+                                          children: [
+                                            CustomRichText(
+                                                title: 'Start Date :'),
+                                            Dimens.boxWidth5,
+                                            CustomTextFieldForStock(
+                                              width: MediaQuery.of(context)
+                                                      .size
+                                                      .width /
+                                                  5,
+                                              numberTextField: true,
+                                              onTap: () {
+                                                controller.openStartDatePicker =
+                                                    !controller
+                                                        .openStartDatePicker;
+                                                controller.update(
+                                                    ['stock_Mangement']);
+                                              },
+                                              textController:
+                                                  controller.startDateDateTc,
+                                            ),
+                                          ],
+                                        ),
+                                      ),
+                                      Padding(
+                                        padding:
+                                            const EdgeInsets.only(left: 90),
+                                        child: Row(
+                                          children: [
+                                            CustomRichText(title: "Frequency"),
+                                            Dimens.boxWidth5,
+                                            SizedBox(
+                                              child: DropdownWebWidget(
+                                                margin: Dimens.edgeInsets5,
+                                                width: (MediaQuery.of(context)
+                                                        .size
+                                                        .width *
+                                                    .2),
+                                                controller: controller,
+                                                dropdownList:
+                                                    controller.frequencyList,
+                                                isValueSelected: controller
+                                                    .isSelectedfrequency.value,
+                                                selectedValue: controller
+                                                    .selectedfrequency.value,
+                                                onValueChanged:
+                                                    controller.onValueChanged,
+                                              ),
+                                            ),
+                                            Dimens.boxWidth30,
+                                            Dimens.boxWidth5,
+                                          ],
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                ],
+                              ),
                             ),
                             Dimens.boxHeight15,
                           ],
