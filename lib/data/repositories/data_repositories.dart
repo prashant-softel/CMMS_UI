@@ -1207,14 +1207,14 @@ class DataRepository extends DomainRepository {
         isLoading: isLoading ?? false,
       );
 
-   Future<ResponseModel> updateMCExecution({
+   Future<ResponseModel> updateMCScheduleExecution({
     required String auth,
-    updateMCExecution,
+    updateMCScheduleExecutionJsonString,
     bool? isLoading,
   }) async =>
-      await connectHelper.updateMCExecution(
+      await connectHelper.updateMCScheduleExecution(
         auth: auth,
-        updateMCExecution: updateMCExecution,
+        updateMCScheduleExecutionJsonString: updateMCScheduleExecutionJsonString,
         isLoading: isLoading ?? false,
       );
 
@@ -1478,12 +1478,12 @@ class DataRepository extends DomainRepository {
 
    Future<ResponseModel> abandonScheduleExecutionButton({
     required String auth,
-    abandoneJsonString,
+    abandoneScheduleJsonString,
     bool? isLoading,
   }) async =>
       await connectHelper.abandonScheduleExecutionButton(
         auth: auth,
-        abandoneJsonString: abandoneJsonString,
+        abandoneScheduleJsonString: abandoneScheduleJsonString,
         isLoading: isLoading ?? false,
       );
 

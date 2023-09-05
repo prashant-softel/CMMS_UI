@@ -334,10 +334,9 @@ class JobCardDetailsContentWeb extends GetView<JobCardDetailsController> {
                                 controller.historyList!.isNotEmpty)
                             ? Container(
                                 margin: Dimens.edgeInsets20,
-                                constraints: BoxConstraints(
-                                  maxHeight: 200,
-                                  minHeight: 100,
-                                ),
+                                height: ((controller.historyList?.length ?? 0) *
+                                        40) +
+                                    120,
                                 child: //
                                     HistoryTableWidgetWeb(
                                   historyList: controller.historyList,

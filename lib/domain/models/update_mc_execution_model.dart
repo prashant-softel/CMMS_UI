@@ -1,4 +1,4 @@
-class UpdateMcExecutionModel {
+class UpdateMcScheduleExecutionModel {
   
   int? scheduleId;
   int? cleaningDay;
@@ -7,7 +7,7 @@ class UpdateMcExecutionModel {
   List<int?>? cleanedEquipmentIds;
   List<int?>? abandonedEquipmentIds;
 
-  UpdateMcExecutionModel({
+  UpdateMcScheduleExecutionModel({
     
     this.scheduleId,
     this.cleaningDay,
@@ -17,7 +17,7 @@ class UpdateMcExecutionModel {
     this.abandonedEquipmentIds,
   });
 
-  factory UpdateMcExecutionModel.fromJson(Map<String, dynamic> json) => UpdateMcExecutionModel(
+  factory UpdateMcScheduleExecutionModel.fromJson(Map<String, dynamic> json) => UpdateMcScheduleExecutionModel(
         scheduleId: json["scheduleId"],
         cleaningDay: json["cleaningDay"],
         waterUsed: json['waterUsed'],

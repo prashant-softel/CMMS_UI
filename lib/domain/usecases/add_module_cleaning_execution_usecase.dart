@@ -70,11 +70,11 @@ class AddModuleCleaningExecutionUsecase {
   }
 
   Future<Map<String, dynamic>> abandonScheduleExecutionButton({
-    abandoneJsonString,
+    abandoneScheduleJsonString,
     bool? isLoading,
   }) async =>
       await _repository.abandonScheduleExecutionButton(
-        abandoneJsonString,
+        abandoneScheduleJsonString,
         isLoading,
       );
    Future<List<TypePermitModel?>?> getTypePermitList(
@@ -97,12 +97,12 @@ class AddModuleCleaningExecutionUsecase {
         isLoading,
       );
 
-   Future<Map<String, dynamic>> updateMCExecution({
-    updateMCExecution,
+   Future<Map<String, dynamic>> updateMCScheduleExecution({
+    updateMCScheduleExecutionJsonString,
     bool? isLoading,
   }) async =>
-      await _repository.updateMCExecution(
-        updateMCExecution,
+      await _repository.updateMCScheduleExecution(
+        updateMCScheduleExecutionJsonString,
         isLoading,
       );
 

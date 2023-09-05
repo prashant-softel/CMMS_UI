@@ -930,13 +930,13 @@ class ConnectHelper {
 
   Future<ResponseModel> abandonScheduleExecutionButton({
     required String auth,
-    abandoneJsonString,
+    abandoneScheduleJsonString,
     bool? isLoading,
   }) async {
     var responseModel = await apiWrapper.makeRequest(
       'MC/AbandonMCSchedule',
       Request.put,
-      abandoneJsonString,
+      abandoneScheduleJsonString,
       isLoading ?? false,
       {
         'Content-Type': 'application/json',
@@ -2031,16 +2031,16 @@ class ConnectHelper {
     return responseModel;
   }
 
-  //Update MC Execution
-  Future<ResponseModel> updateMCExecution({
+  //Update MC Schedule Execution
+  Future<ResponseModel> updateMCScheduleExecution({
     required String auth,
-    updateMCExecution,
+    updateMCScheduleExecutionJsonString,
     bool? isLoading,
   }) async {
     var responseModel = await apiWrapper.makeRequest(
       'MC/UpdateMCScheduleExecution',
       Request.put,
-      updateMCExecution,
+      updateMCScheduleExecutionJsonString,
       isLoading ?? false,
       {
         'Content-Type': 'application/json',

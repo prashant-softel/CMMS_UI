@@ -1775,13 +1775,39 @@ class ViewPermitWebScreen extends GetView<ViewPermitController> {
                                                             BorderRadius
                                                                 .circular(10),
                                                         border: Border.all(
-                                                          color: controller.viewPermitDetailsModel.value?.current_status_short == "Permit Approved" || controller.viewPermitDetailsModel.value?.current_status_short == "Waiting for Approval"  ? ColorValues.approveColor : ColorValues.appRedColor,
+                                                          color: controller
+                                                                          .viewPermitDetailsModel
+                                                                          .value
+                                                                          ?.current_status_short ==
+                                                                      "Approved" ||
+                                                                  controller
+                                                                          .viewPermitDetailsModel
+                                                                          .value
+                                                                          ?.current_status_short ==
+                                                                      "Waiting for Approval"
+                                                              ? ColorValues
+                                                                  .approveColor
+                                                              : ColorValues
+                                                                  .appRedColor,
                                                           width: 1,
                                                         ),
                                                         boxShadow: [
                                                           BoxShadow(
-                                                              color:
-                                                                  controller.viewPermitDetailsModel.value?.current_status_short == "Permit Approved" || controller.viewPermitDetailsModel.value?.current_status_short == "Waiting for Approval"  ? ColorValues.approveColor : ColorValues.appRedColor,),
+                                                            color: controller
+                                                                            .viewPermitDetailsModel
+                                                                            .value
+                                                                            ?.current_status_short ==
+                                                                        "Approved" ||
+                                                                    controller
+                                                                            .viewPermitDetailsModel
+                                                                            .value
+                                                                            ?.current_status_short ==
+                                                                        "Waiting for Approval"
+                                                                ? ColorValues
+                                                                    .approveColor
+                                                                : ColorValues
+                                                                    .appRedColor,
+                                                          ),
                                                         ],
                                                       ),
                                                       child: Center(
@@ -1817,7 +1843,9 @@ class ViewPermitWebScreen extends GetView<ViewPermitController> {
                                                         width: 35,
                                                       ),
                                                       Column(
-                                                        crossAxisAlignment : CrossAxisAlignment.start,
+                                                        crossAxisAlignment:
+                                                            CrossAxisAlignment
+                                                                .start,
                                                         children: [
                                                           Row(
                                                             crossAxisAlignment:
@@ -1964,7 +1992,6 @@ class ViewPermitWebScreen extends GetView<ViewPermitController> {
                                                                 ],
                                                               ),
                                                               Dimens.boxWidth50,
-                                                              
                                                               Column(
                                                                 crossAxisAlignment:
                                                                     CrossAxisAlignment
@@ -2010,10 +2037,17 @@ class ViewPermitWebScreen extends GetView<ViewPermitController> {
                                                             ],
                                                           ),
                                                           Padding(
-                                                            padding: const EdgeInsets.only(left: 30),
+                                                            padding:
+                                                                const EdgeInsets
+                                                                        .only(
+                                                                    left: 30),
                                                             child: Row(
-                                                              mainAxisAlignment : MainAxisAlignment.start,
-                                                              crossAxisAlignment : CrossAxisAlignment.start,
+                                                              mainAxisAlignment:
+                                                                  MainAxisAlignment
+                                                                      .start,
+                                                              crossAxisAlignment:
+                                                                  CrossAxisAlignment
+                                                                      .start,
                                                               children: [
                                                                 Text(
                                                                     'Permit Description: '),
@@ -2044,7 +2078,12 @@ class ViewPermitWebScreen extends GetView<ViewPermitController> {
 
                                                 Container(
                                                   margin: Dimens.edgeInsets20,
-                                                  height: 300,
+                                                  height: ((controller
+                                                                  .listAssociatedJobs
+                                                                  ?.length ??
+                                                              0) *
+                                                          50) +
+                                                      120,
                                                   width: MediaQuery.of(context)
                                                           .size
                                                           .width /
@@ -2086,75 +2125,82 @@ class ViewPermitWebScreen extends GetView<ViewPermitController> {
                                                             .greyLightColour,
                                                       ),
                                                       Expanded(
-                                                        child:
-                                                            ScrollableTableView(
-                                                          columns: [
-                                                            "Job Id",
-                                                            "Job Title",
-                                                            "Equipment Category",
-                                                            "Equipment",
-                                                            "Breakdown Time",
-                                                            "Assigned To",
-                                                            "Status",
-                                                          ].map((column) {
-                                                            return TableViewColumn(
-                                                              label: column,
-                                                              minWidth:
-                                                                  Get.width *
-                                                                      0.11,
-                                                            );
-                                                          }).toList(),
-                                                          rows: [
-                                                            ...List.generate(
-                                                              controller
-                                                                      .listAssociatedJobs
-                                                                      ?.length ??
-                                                                  0,
-                                                              (index) {
-                                                                var getJobsLinkedToPermitList =
-                                                                    controller
-                                                                            .listAssociatedJobs?[
-                                                                        index];
-                                                                return [
-                                                                  '${getJobsLinkedToPermitList?.jobId}',
-                                                                  '${getJobsLinkedToPermitList?.title ?? ''}',
-                                                                  '${getJobsLinkedToPermitList?.equipmentCat ?? ''}',
-                                                                  '${getJobsLinkedToPermitList?.equipment ?? ''}',
-                                                                  '${getJobsLinkedToPermitList?.breakdownTime ?? ''}',
-                                                                  '${getJobsLinkedToPermitList?.assignedTo ?? ''}',
-                                                                  '${getJobsLinkedToPermitList?.status_short ?? ''}',
-                                                                ];
-                                                              },
-                                                            ),
-                                                          ].map((record) {
-                                                            return TableViewRow(
-                                                              height: 40,
-                                                              cells: record
-                                                                  .map((value) {
-                                                                return TableViewCell(
-                                                                    child: value ==
-                                                                            record[
-                                                                                0]
-                                                                        ? GestureDetector(
-                                                                            onTap:
-                                                                                () {
-                                                                              controller.viewJobDetails(int.tryParse('${record[0]}'));
-                                                                            },
-                                                                            child:
-                                                                                Text(
-                                                                              value,
-                                                                              style: TextStyle(
-                                                                                decoration: TextDecoration.underline,
-                                                                                decorationStyle: TextDecorationStyle.solid,
-                                                                                color: Color.fromARGB(255, 5, 92, 163),
+                                                        child: Theme(
+                                                          data: ThemeData(
+                                                              scrollbarTheme: ScrollbarThemeData(
+                                                                  isAlwaysShown:
+                                                                      false,
+                                                                  thumbColor: MaterialStateProperty.all<
+                                                                          Color>(
+                                                                      Colors
+                                                                          .transparent))),
+                                                          child:
+                                                              ScrollableTableView(
+                                                            columns: [
+                                                              "Job Id",
+                                                              "Job Title",
+                                                              "Equipment Category",
+                                                              "Equipment",
+                                                              "Breakdown Time",
+                                                              "Assigned To",
+                                                              "Status",
+                                                            ].map((column) {
+                                                              return TableViewColumn(
+                                                                label: column,
+                                                                minWidth:
+                                                                    Get.width *
+                                                                        0.11,
+                                                              );
+                                                            }).toList(),
+                                                            rows: [
+                                                              ...List.generate(
+                                                                controller
+                                                                        .listAssociatedJobs
+                                                                        ?.length ??
+                                                                    0,
+                                                                (index) {
+                                                                  var getJobsLinkedToPermitList =
+                                                                      controller
+                                                                              .listAssociatedJobs?[
+                                                                          index];
+                                                                  return [
+                                                                    '${getJobsLinkedToPermitList?.jobId}',
+                                                                    '${getJobsLinkedToPermitList?.title ?? ''}',
+                                                                    '${getJobsLinkedToPermitList?.equipmentCat ?? ''}',
+                                                                    '${getJobsLinkedToPermitList?.equipment ?? ''}',
+                                                                    '${getJobsLinkedToPermitList?.breakdownTime ?? ''}',
+                                                                    '${getJobsLinkedToPermitList?.assignedTo ?? ''}',
+                                                                    '${getJobsLinkedToPermitList?.status_short ?? ''}',
+                                                                  ];
+                                                                },
+                                                              ),
+                                                            ].map((record) {
+                                                              return TableViewRow(
+                                                                height: 40,
+                                                                cells: record
+                                                                    .map(
+                                                                        (value) {
+                                                                  return TableViewCell(
+                                                                      child: value ==
+                                                                              record[0]
+                                                                          ? GestureDetector(
+                                                                              onTap: () {
+                                                                                controller.viewJobDetails(int.tryParse('${record[0]}'));
+                                                                              },
+                                                                              child: Text(
+                                                                                value,
+                                                                                style: TextStyle(
+                                                                                  decoration: TextDecoration.underline,
+                                                                                  decorationStyle: TextDecorationStyle.solid,
+                                                                                  color: Color.fromARGB(255, 5, 92, 163),
+                                                                                ),
                                                                               ),
-                                                                            ),
-                                                                          )
-                                                                        : Text(
-                                                                            value));
-                                                              }).toList(),
-                                                            );
-                                                          }).toList(),
+                                                                            )
+                                                                          : Text(value));
+                                                                }).toList(),
+                                                              );
+                                                            }).toList(),
+                                                          ),
                                                         ),
                                                       ),
                                                     ],
@@ -2185,61 +2231,65 @@ class ViewPermitWebScreen extends GetView<ViewPermitController> {
                                                       ),
                                                       child: Column(
                                                         children: [
-                                                           
-                                                              Row(
-                                                                mainAxisAlignment : MainAxisAlignment.center,
-                                                                crossAxisAlignment : CrossAxisAlignment.center,
-                                                                children: [
-                                                                  Text(
-                                                                      'Isolation Required '),
-                                                                  Checkbox(
-                                                                    value: controller
-                                                                        .isCheckedLoto
-                                                                        .value,
-                                                                    onChanged:
-                                                                        (value) {},
-                                                                  ),
-                                                                  Dimens.boxWidth80,
-                                                                  
-                                                                  Text(
-                                                                      'Loto Applied '),
-                                                                  Checkbox(
-                                                                    value: controller
-                                                                        .isCheckedLoto
-                                                                        .value,
-                                                                    onChanged:
-                                                                        (value) {},
-                                                                  ),
-                                                                   Dimens.boxWidth80,
-                                                                 
-                                                                  Text(
-                                                                      'Isolated Equipments: '),
-                                                                  Row(
-                                                                    children: [
-                                                                      
-                                                                    ]..addAll(controller.listIsolation!.map((element) =>
-                                                                                Row(
-                                                                                  mainAxisSize: MainAxisSize.min,
-                                                                                  mainAxisAlignment: MainAxisAlignment.start,
-                                                                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                                                                  children: [
-                                                                                    SizedBox(
-                                                                                      height: 20,
-                                                                                      child: Text(
-                                                                                        "${element?.isolationAssetsCatName}",
-                                                                                        style: TextStyle(color: Color.fromARGB(255, 5, 92, 163)),
-                                                                                      ),
-                                                                                    )
-                                                                                  ],
-                                                                                ))),
-                                                                  ),
-                                                                ],
+                                                          Row(
+                                                            mainAxisAlignment:
+                                                                MainAxisAlignment
+                                                                    .center,
+                                                            crossAxisAlignment:
+                                                                CrossAxisAlignment
+                                                                    .center,
+                                                            children: [
+                                                              Text(
+                                                                  'Isolation Required '),
+                                                              Checkbox(
+                                                                value: controller
+                                                                    .isCheckedLoto
+                                                                    .value,
+                                                                onChanged:
+                                                                    (value) {},
                                                               ),
-                                                               Divider(
-                                                        color: ColorValues
-                                                            .greyLightColour,
-                                                      ),
-                                                              
+                                                              Dimens.boxWidth80,
+                                                              Text(
+                                                                  'Loto Applied '),
+                                                              Checkbox(
+                                                                value: controller
+                                                                    .isCheckedLoto
+                                                                    .value,
+                                                                onChanged:
+                                                                    (value) {},
+                                                              ),
+                                                              Dimens.boxWidth80,
+                                                              Text(
+                                                                  'Isolated Equipments: '),
+                                                              Row(
+                                                                children: []
+                                                                  ..addAll(controller
+                                                                      .listIsolation!
+                                                                      .map((element) =>
+                                                                          Row(
+                                                                            mainAxisSize:
+                                                                                MainAxisSize.min,
+                                                                            mainAxisAlignment:
+                                                                                MainAxisAlignment.start,
+                                                                            crossAxisAlignment:
+                                                                                CrossAxisAlignment.start,
+                                                                            children: [
+                                                                              SizedBox(
+                                                                                height: 20,
+                                                                                child: Text(
+                                                                                  "${element?.isolationAssetsCatName}",
+                                                                                  style: TextStyle(color: Color.fromARGB(255, 5, 92, 163)),
+                                                                                ),
+                                                                              )
+                                                                            ],
+                                                                          ))),
+                                                              ),
+                                                            ],
+                                                          ),
+                                                          Divider(
+                                                            color: ColorValues
+                                                                .greyLightColour,
+                                                          ),
                                                           Dimens.boxHeight10,
                                                           Wrap(
                                                             children: [
@@ -2884,7 +2934,12 @@ class ViewPermitWebScreen extends GetView<ViewPermitController> {
                                                       1.2,
                                                   child: Container(
                                                     margin: Dimens.edgeInsets20,
-                                                    height: 350,
+                                                    height: ((controller
+                                                                    .historyList
+                                                                    ?.length ??
+                                                                0) *
+                                                            50) +
+                                                        120,
                                                     decoration: BoxDecoration(
                                                       border: Border.all(
                                                         color: ColorValues
@@ -2921,57 +2976,103 @@ class ViewPermitWebScreen extends GetView<ViewPermitController> {
                                                           color: ColorValues
                                                               .greyLightColour,
                                                         ),
+                                                        // Column(
+                                                        //   children: [
+                                                        //     Row(
+                                                        //       children: [
+                                                        //         Text(
+                                                        //             "Time Stamp"),
+                                                        //         Text(
+                                                        //             "Posted By"),
+                                                        //         Text("Comment"),
+                                                        //         Text(
+                                                        //             "Location"),
+                                                        //         Text("Status"),
+                                                        //       ],
+                                                        //     )
+                                                        //   ]..addAll([
+                                                        //       ...(controller
+                                                        //               .historyList?.value ??
+                                                        //           [])
+                                                        //     ].map((e) {
+                                                        //       return Row(
+                                                        //         children: [
+                                                        //           Text(
+                                                        //               "${e?.createdAt??''}"),
+                                                        //           Text(
+                                                        //               "${e?.createdByName}"),
+                                                        //           Text(
+                                                        //               "${e?.comment}"),
+                                                        //           Text(
+                                                        //               "--"),
+                                                        //           Text(
+                                                        //               "${e?.status_name ??''}"),
+                                                        //         ],
+                                                        //       );
+                                                        //     })),
+                                                        // ),
+
                                                         Expanded(
-                                                          child:
-                                                              ScrollableTableView(
-                                                            columns: [
-                                                              "Time Stamp",
-                                                              "Posted By",
-                                                              "Comment",
-                                                              "Location",
-                                                              "Status",
-                                                            ].map((column) {
-                                                              return TableViewColumn(
-                                                                label: column,
-                                                                minWidth:
-                                                                    Get.width *
-                                                                        0.15,
-                                                              );
-                                                            }).toList(),
-                                                            rows: [
-                                                              ...List.generate(
-                                                                controller
-                                                                        .historyList
-                                                                        ?.length ??
-                                                                    0,
-                                                                (index) {
-                                                                  var getHistoryListDetails =
-                                                                      controller
-                                                                              .historyList?[
-                                                                          index];
-                                                                  return [
-                                                                    '${getHistoryListDetails?.createdAt}',
-                                                                    '${getHistoryListDetails?.createdByName ?? ''}',
-                                                                    '${getHistoryListDetails?.comment ?? ''}',
-                                                                    '--',
-                                                                    '${getHistoryListDetails?.status_name ?? ''}',
-                                                                  ];
-                                                                },
-                                                              ),
-                                                              // [
-                                                            ].map((record) {
-                                                              return TableViewRow(
-                                                                height: 40,
-                                                                cells: record
-                                                                    .map(
-                                                                        (value) {
-                                                                  return TableViewCell(
-                                                                    child: Text(
-                                                                        value),
-                                                                  );
-                                                                }).toList(),
-                                                              );
-                                                            }).toList(),
+                                                          child: Theme(
+                                                            data: ThemeData(
+                                                                scrollbarTheme: ScrollbarThemeData(
+                                                                    isAlwaysShown:
+                                                                        false,
+                                                                    thumbColor: MaterialStateProperty.all<
+                                                                            Color>(
+                                                                        Colors
+                                                                            .transparent))),
+                                                            child:
+                                                                ScrollableTableView(
+                                                              columns: [
+                                                                "Time Stamp",
+                                                                "Posted By",
+                                                                "Comment",
+                                                                "Location",
+                                                                "Status",
+                                                              ].map((column) {
+                                                                return TableViewColumn(
+                                                                  label: column,
+                                                                  minWidth:
+                                                                      Get.width *
+                                                                          0.15,
+                                                                );
+                                                              }).toList(),
+                                                              rows: [
+                                                                ...List
+                                                                    .generate(
+                                                                  controller
+                                                                          .historyList
+                                                                          ?.length ??
+                                                                      0,
+                                                                  (index) {
+                                                                    var getHistoryListDetails =
+                                                                        controller
+                                                                            .historyList?[index];
+                                                                    return [
+                                                                      '${getHistoryListDetails?.createdAt}',
+                                                                      '${getHistoryListDetails?.createdByName ?? ''}',
+                                                                      '${getHistoryListDetails?.comment ?? ''}',
+                                                                      '--',
+                                                                      '${getHistoryListDetails?.status_name ?? ''}',
+                                                                    ];
+                                                                  },
+                                                                ),
+                                                                // [
+                                                              ].map((record) {
+                                                                return TableViewRow(
+                                                                  height: 45,
+                                                                  cells: record
+                                                                      .map(
+                                                                          (value) {
+                                                                    return TableViewCell(
+                                                                      child: Text(
+                                                                          value),
+                                                                    );
+                                                                  }).toList(),
+                                                                );
+                                                              }).toList(),
+                                                            ),
                                                           ),
                                                         ),
                                                       ],
