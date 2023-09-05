@@ -6,17 +6,17 @@ class CustomMultiSelectDialogField extends StatefulWidget {
   List<MultiSelectItem<int?>> items;
   String? title;
   String? buttonText;
-  
+
   Function(dynamic selectedOptionsList) onConfirm;
-  
+
   // var title;
-  
+
   CustomMultiSelectDialogField(
       {super.key,
       required this.initialValue,
       required this.items,
-       this.title,
-       this.buttonText,
+      this.title,
+      this.buttonText,
       required this.onConfirm});
 
   @override
