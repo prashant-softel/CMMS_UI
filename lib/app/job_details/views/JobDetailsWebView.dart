@@ -73,7 +73,8 @@ class JobDetailsWebView extends GetView<JobDetailsController> {
                 child: SingleChildScrollView(
                   child: Container(
                     width: MediaQuery.of(context).size.width,
-                    margin: EdgeInsets.only(left: 20, top: 30, right: 20),
+                    // margin: EdgeInsets.only(
+                    //     left: 20, top: 30, right: 20, bottom: 30),
                     //   height: Get.height / 1.2,
                     child: Card(
                       color: Color.fromARGB(255, 245, 248, 250),
@@ -85,7 +86,8 @@ class JobDetailsWebView extends GetView<JobDetailsController> {
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           Padding(
-                            padding: const EdgeInsets.all(10.0),
+                            padding: const EdgeInsets.only(
+                                left: 10.0, right: 10, top: 10, bottom: 30),
                             // child: Row(
                             //   children: [
                             child: Row(
@@ -165,6 +167,7 @@ class JobDetailsWebView extends GetView<JobDetailsController> {
                             color: ColorValues.greyLightColour,
                           ),
                           Container(
+                            margin: EdgeInsets.only(bottom: 15),
                             child: Column(
                               children: [
                                 Container(
