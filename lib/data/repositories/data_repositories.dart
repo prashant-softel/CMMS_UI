@@ -1086,7 +1086,7 @@ class DataRepository extends DomainRepository {
         isLoading: isLoading ?? false,
       );
 
-   Future<ResponseModel> createNewPermitForJob({
+  Future<ResponseModel> createNewPermitForJob({
     required String auth,
     newPermit,
     jobId,
@@ -1207,14 +1207,15 @@ class DataRepository extends DomainRepository {
         isLoading: isLoading ?? false,
       );
 
-   Future<ResponseModel> updateMCScheduleExecution({
+  Future<ResponseModel> updateMCScheduleExecution({
     required String auth,
     updateMCScheduleExecutionJsonString,
     bool? isLoading,
   }) async =>
       await connectHelper.updateMCScheduleExecution(
         auth: auth,
-        updateMCScheduleExecutionJsonString: updateMCScheduleExecutionJsonString,
+        updateMCScheduleExecutionJsonString:
+            updateMCScheduleExecutionJsonString,
         isLoading: isLoading ?? false,
       );
 
@@ -1475,8 +1476,7 @@ class DataRepository extends DomainRepository {
         isLoading: isLoading ?? false,
       );
 
-
-   Future<ResponseModel> abandonScheduleExecutionButton({
+  Future<ResponseModel> abandonScheduleExecutionButton({
     required String auth,
     abandoneScheduleJsonString,
     bool? isLoading,
@@ -1942,6 +1942,16 @@ class DataRepository extends DomainRepository {
     bool? isLoading,
   }) async =>
       await connectHelper.getUserList(
+        auth: auth,
+        facilityId: facilityId ?? 0,
+        isLoading: isLoading ?? false,
+      );
+  Future<ResponseModel> jobCardList({
+    required String auth,
+    int? facilityId,
+    bool? isLoading,
+  }) async =>
+      await connectHelper.jobCardList(
         auth: auth,
         facilityId: facilityId ?? 0,
         isLoading: isLoading ?? false,

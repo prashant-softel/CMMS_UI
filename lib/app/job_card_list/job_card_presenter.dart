@@ -1,4 +1,5 @@
 import 'package:cmms/domain/models/history_model.dart';
+import 'package:cmms/domain/models/job_card_model.dart';
 
 import '../../domain/models/employee_model.dart';
 import '../../domain/models/job_card_details_model.dart';
@@ -19,6 +20,14 @@ class JobCardPresenter {
         auth: auth ?? "",
         facilityId: facilityId,
         isLoading: isLoading,
+      );
+  Future<List<JobCardModel?>?> jobCardList({
+    int? facilityId,
+    bool? isLoading,
+  }) async =>
+      await jobCardDetailsUsecase.jobCardList(
+        facilityId: facilityId ?? 0,
+        isLoading: isLoading ?? false,
       );
 
   ///
@@ -74,30 +83,4 @@ class JobCardPresenter {
         jobCardId: jobCardId,
         isLoading: isLoading,
       );
-
-  ///
-  // Future<dynamic> approveJobCard({
-  //   int? jobCardId,
-  //   String? comment,
-  //   bool? isLoading,
-  // }) async =>
-  //     await jobCardDetailsUsecase.approveJobCard(
-  //       jobCardId: jobCardId,
-  //       comment: comment,
-  //       isLoading: isLoading,
-  //     );
-
-  ///
-  // Future<dynamic> rejectJobCard(
-  //   jobCardId,
-  //   comment,
-  //   isLoading,
-  // ) async =>
-  //     await jobCardDetailsUsecase.approveJobCard(
-  //       jobCardId: jobCardId,
-  //       comment: comment,
-  //       isLoading: isLoading,
-  //     );
-
-  ///
 }

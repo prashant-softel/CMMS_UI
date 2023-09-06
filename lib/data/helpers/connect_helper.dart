@@ -3178,6 +3178,25 @@ class ConnectHelper {
     return responseModel;
   }
 
+  Future<ResponseModel> jobCardList({
+    required String auth,
+    bool? isLoading,
+    int? facilityId,
+  }) async {
+    var responseModel = await apiWrapper.makeRequest(
+      'JC/GetJCList?facility_id=$facilityId',
+      Request.get,
+      null,
+      isLoading ?? false,
+      {
+        'Authorization': 'Bearer $auth',
+        'Content-Type': 'application/json',
+      },
+    );
+
+    return responseModel;
+  }
+
   Future<ResponseModel> getUserDetails({
     required String? auth,
     int? userId,

@@ -25,29 +25,28 @@ class JobCardModel {
     this.job_card_date,
     this.start_time,
     this.end_time,
-    this.lstequipmentCatList,
+    // this.lstequipmentCatList,
   });
 
   int? id;
   int? jobCardId;
-  int? jobCardNo;
+  dynamic jobCardNo;
   int? jobId;
   int? permit_id;
   String? permit_no;
   int? currentStatus;
   String? description;
   String? job_assinged_to;
-  DateTime? job_card_date;
-  DateTime? start_time;
-  DateTime? end_time;
-  List<LstequipmentCatList>? lstequipmentCatList;
+  dynamic job_card_date;
+  dynamic start_time;
+  dynamic end_time;
+  // List<LstequipmentCatList>? lstequipmentCatList;
 
-  factory JobCardModel.fromJson(Map<String, dynamic> json) =>
-      JobCardModel(
+  factory JobCardModel.fromJson(Map<String, dynamic> json) => JobCardModel(
         jobCardId: json["jobCardId"],
         jobCardNo: json["jobCardNo"],
         jobId: json["jobid"],
-        permit_id: json["permit_id"], 
+        permit_id: json["permit_id"],
         permit_no: json["permit_no"],
         id: json["id"],
         job_assinged_to: json["currentEmpID"],
@@ -56,10 +55,10 @@ class JobCardModel {
         description: json["description"],
         start_time: json["start_time"],
         end_time: json["end_time"],
-        lstequipmentCatList: (json["lstequipmentCatList"] != null)
-            ? List<LstequipmentCatList>.from(json["lstequipmentCatList"]
-            .map((x) => LstequipmentCatList.fromJson(x)))
-            : [],
+        // lstequipmentCatList: (json["lstequipmentCatList"] != null)
+        //     ? List<LstequipmentCatList>.from(json["lstequipmentCatList"]
+        //         .map((x) => LstequipmentCatList.fromJson(x)))
+        //     : [],
         // lstequipmentCatList: List<LstequipmentCatList>.from(
         //     json["lstCMJCIsolatedDetailList"]
         //         .map((x) => LstequipmentCatList.fromJson(x))),
@@ -79,9 +78,8 @@ class JobCardModel {
         "permit_id": permit_id,
         "start_time": start_time,
         "end_time": end_time,
-
-        "lstequipmentCatList": List<dynamic>.from(
-            lstequipmentCatList?.map((x) => x.toJson()) ?? []),
+        // "lstequipmentCatList": List<dynamic>.from(
+        //     lstequipmentCatList?.map((x) => x.toJson()) ?? []),
       };
 }
 
@@ -101,7 +99,7 @@ class LstequipmentCatList {
       );
 
   Map<String, dynamic> toJson() => {
-    "equipmentCat_id": equipmentCatId,
-    "equipmentCat_name": equipmentCatName,
-  };
+        "equipmentCat_id": equipmentCatId,
+        "equipmentCat_name": equipmentCatName,
+      };
 }

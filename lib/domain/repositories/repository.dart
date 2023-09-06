@@ -40,6 +40,7 @@ import 'package:cmms/domain/models/inventory_category_model.dart';
 import 'package:cmms/domain/models/inventory_category_model2.dart';
 import 'package:cmms/domain/models/inventory_detail_model.dart';
 import 'package:cmms/domain/models/inventory_details_model.dart';
+import 'package:cmms/domain/models/job_card_model.dart';
 import 'package:cmms/domain/models/job_type_list_model.dart';
 import 'package:cmms/domain/models/linked_jobs_to_permit_model.dart';
 import 'package:cmms/domain/models/manufacturer_model.dart';
@@ -807,7 +808,8 @@ class Repository {
       final auth = await getSecuredValue(LocalKeys.authToken);
       final res = await _dataRepository.updateMCScheduleExecution(
         auth: auth,
-        updateMCScheduleExecutionJsonString: json.encode(updateMCScheduleExecutionJsonString),
+        updateMCScheduleExecutionJsonString:
+            json.encode(updateMCScheduleExecutionJsonString),
         isLoading: isLoading ?? false,
       );
 
@@ -3668,7 +3670,9 @@ class Repository {
       if (!res.hasError) {
         if (res.errorCode == 200) {
           var responseMap = json.decode(res.data);
-          // var jcId = responseMap["id"];
+          var jcId = responseMap["id"];
+          Get.toNamed(Routes.createMrs,
+              arguments: {"whereUsedId": jcId[0], "whereUsed": 1});
           // Get.toNamed(
           //   Routes.createMrs,
           //   arguments: jcId[0],
@@ -4916,6 +4920,38 @@ class Repository {
         return _UserListModelList;
       } else {
         Utility.showDialog(res.errorCode.toString() + ' getUserList');
+        return [];
+      }
+    } catch (error) {
+      print(error.toString());
+      return [];
+    }
+  }
+
+  Future<List<JobCardModel?>?> jobCardList(
+    int? facilityId,
+    bool? isLoading,
+  ) async {
+    try {
+      final auth = await getSecuredValue(LocalKeys.authToken);
+      final res = await _dataRepository.jobCardList(
+        auth: auth,
+        facilityId: facilityId ?? 0,
+        isLoading: isLoading ?? false,
+      );
+
+      if (!res.hasError) {
+        final jsonJobCardListModelModels = jsonDecode(res.data);
+        // print(res.data);
+        final List<JobCardModel> _JobCardListModelList =
+            jsonJobCardListModelModels
+                .map<JobCardModel>(
+                    (m) => JobCardModel.fromJson(Map<String, dynamic>.from(m)))
+                .toList();
+
+        return _JobCardListModelList;
+      } else {
+        Utility.showDialog(res.errorCode.toString() + ' getjobcardList');
         return [];
       }
     } catch (error) {
