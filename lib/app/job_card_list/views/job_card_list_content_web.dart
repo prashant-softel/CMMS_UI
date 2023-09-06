@@ -186,6 +186,9 @@ class _JobCardContentWebState extends State<JobCardContentWeb> {
                                     ? Center(child: Text('No data'))
                                     : Expanded(
                                         child: PaginatedDataTable2(
+                                          border: TableBorder.all(
+                                              color: Color.fromARGB(
+                                                  255, 9, 5, 20)),
                                           // fixedLeftColumns: 1,
                                           // dataRowHeight: Get.height * 0.12,
                                           columnSpacing: 10,
@@ -203,51 +206,51 @@ class _JobCardContentWebState extends State<JobCardContentWeb> {
                                             50
                                           ],
                                           columns: [
-                                            buildDataColumn(
-                                              'Id',
-                                              'Id',
-                                              //  ColumnSize.S,
-                                              controller.IdFilterText,
-                                              100,
-                                            ),
+                                            // buildDataColumn(
+                                            //   'Id',
+                                            //   'Id',
+                                            //   //  ColumnSize.S,
+                                            //   controller.IdFilterText,
+                                            //   100,
+                                            // ),
                                             buildDataColumn(
                                               'JobCardId',
                                               'Job Card Id',
                                               //  ColumnSize.S,
                                               controller.JobCardIdFilterText,
-                                              100,
+                                              130,
                                             ),
                                             buildDataColumn(
                                                 "JobId",
                                                 "Job Id",
                                                 // ColumnSize.M,
                                                 controller.JobIdFilterText,
-                                                400),
+                                                130),
                                             buildDataColumn(
                                                 "JobAssingedTo",
-                                                "job assinged to", // ColumnSize.L,
+                                                "Assinged To", // ColumnSize.L,
                                                 controller
                                                     .JobAssingedToFilterText,
-                                                150),
+                                                200),
                                             buildDataColumn(
                                                 "Description",
                                                 "Description",
                                                 // ColumnSize.L,
                                                 controller
                                                     .DescriptionFilterText,
-                                                170),
+                                                200),
                                             buildDataColumn(
                                                 "StartTime",
                                                 "Start Time",
                                                 // ColumnSize.L,
                                                 controller.StartTimeFilterText,
-                                                170),
+                                                200),
                                             buildDataColumn(
                                                 "EndTime",
                                                 "End Time",
                                                 // ColumnSize.L,
                                                 controller.EndTimeFilterText,
-                                                150),
+                                                200),
                                             buildDataColumn(
                                                 'Action'.tr,
                                                 'Actions',
@@ -304,11 +307,13 @@ class _JobCardContentWebState extends State<JobCardContentWeb> {
                   ),
                   focusedBorder: OutlineInputBorder(
                     borderRadius: BorderRadius.circular(5),
-                    borderSide: BorderSide(color: Colors.black),
+                    borderSide:
+                        BorderSide(color: Color.fromARGB(255, 223, 219, 219)),
                   ),
                   enabledBorder: OutlineInputBorder(
                     borderRadius: BorderRadius.circular(5),
-                    borderSide: BorderSide(color: Colors.black),
+                    borderSide:
+                        BorderSide(color: Color.fromARGB(255, 232, 225, 225)),
                   ),
                 ),
               ),
@@ -382,7 +387,7 @@ class JobDataSource extends DataTableSource {
     return DataRow.byIndex(
       index: index,
       cells: [
-        '${JobDetails?.id ?? ''}',
+        // '${JobDetails?.id ?? ''}',
         '${JobDetails?.jobCardId ?? ''}',
         '${JobDetails?.jobId ?? ''}',
         '${JobDetails?.job_assinged_to ?? ''}',

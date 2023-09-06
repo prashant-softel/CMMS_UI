@@ -3672,7 +3672,7 @@ class Repository {
           var responseMap = json.decode(res.data);
           var jcId = responseMap["id"];
           Get.toNamed(Routes.createMrs,
-              arguments: {"whereUsedId": jcId[0], "whereUsed": 1});
+              arguments: {"whereUsedId": jcId[0], "whereUsed": 4});
           // Get.toNamed(
           //   Routes.createMrs,
           //   arguments: jcId[0],
@@ -4949,7 +4949,7 @@ class Repository {
                     (m) => JobCardModel.fromJson(Map<String, dynamic>.from(m)))
                 .toList();
 
-        return _JobCardListModelList;
+        return _JobCardListModelList.reversed.toList();
       } else {
         Utility.showDialog(res.errorCode.toString() + ' getjobcardList');
         return [];
