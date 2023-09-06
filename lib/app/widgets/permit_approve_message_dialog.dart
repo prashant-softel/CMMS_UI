@@ -1,5 +1,6 @@
 import 'package:cmms/app/new_permit_list/new_permit_list_controller.dart';
 import 'package:cmms/app/theme/color_values.dart';
+import 'package:cmms/app/view_permit/view_permit_controller.dart';
 import 'package:cmms/domain/repositories/repository.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -14,7 +15,7 @@ class PermitMessageApproveDialog extends GetView {
   String? data;
 
   PermitMessageApproveDialog({super.key, this.createPermitData, this.data});
-  final NewPermitListController _controller = Get.find();
+  final ViewPermitController _controller = Get.find();
 
 
   @override
@@ -82,7 +83,7 @@ class PermitMessageApproveDialog extends GetView {
               style: Styles.darkBlueElevatedButtonStyle,
               onPressed: () {
                 Get.offAllNamed(Routes.newPermitList);
-                _controller.getNewPermitList(_controller.facilityId, _controller.userId,_controller.formattedTodate, _controller.formattedFromdate, false, false, false);
+                // _controller.getNewPermitList(_controller.facilityId, _controller.userId,_controller.formattedTodate, _controller.formattedFromdate, false, false, false);
                 Get.back();
               },
               child: const Text('Ok'),

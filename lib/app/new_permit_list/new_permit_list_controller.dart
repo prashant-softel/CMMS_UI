@@ -72,10 +72,10 @@ class NewPermitListController extends GetxController {
   ///Buttons Cancel, Close Reject
   TextEditingController cancelCommentTextFieldCtrlr = TextEditingController();
   TextEditingController closeCommentTextFieldCtrlr = TextEditingController();
-  TextEditingController rejectCommentTextFieldCtrlr = TextEditingController();
+  // TextEditingController rejectCommentTextFieldCtrlr = TextEditingController();
 
-  TextEditingController cancelCommentByApproverTextFieldCtrlr =
-      TextEditingController();
+  // TextEditingController cancelCommentByApproverTextFieldCtrlr =
+  //     TextEditingController();
   TextEditingController cancelCommentRequestTextFieldCtrlr =
       TextEditingController();
 
@@ -183,17 +183,17 @@ class NewPermitListController extends GetxController {
     print('Issue Data:${permitId}');
   }
 
-  Future<void> permitApprovedButton(
-      {String? permitId, String? ptwStatus}) async {
-    String _approveComment = approveCommentTextFieldCtrlr.text.trim();
+  // Future<void> permitApprovedButton(
+  //     {String? permitId, String? ptwStatus}) async {
+  //   String _approveComment = approveCommentTextFieldCtrlr.text.trim();
 
-    final _permitApprovedBtn =
-        await newPermitListPresenter.permitApprovedButton(
-            comment: _approveComment, id: permitId, ptwStatus: ptwStatus);
-    // showAlertPermitApproveDialog();
-    print('Approved Data:${_approveComment}');
-    print('Approved Data:${permitId}');
-  }
+  //   final _permitApprovedBtn =
+  //       await newPermitListPresenter.permitApprovedButton(
+  //           comment: _approveComment, id: permitId, ptwStatus: ptwStatus);
+  //   // showAlertPermitApproveDialog();
+  //   print('Approved Data:${_approveComment}');
+  //   print('Approved Data:${permitId}');
+  // }
 
   Future<void> permitCancelByIssuerButton({String? permitId}) async {
     String _cancelComment = cancelCommentTextFieldCtrlr.text.trim();
@@ -221,17 +221,17 @@ class NewPermitListController extends GetxController {
     print('Cancel Request Button Data:${permitId}');
   }
 
-  Future<void> permitCancelByApproverButton(
-      {String? permitId, String? ptwStatus}) async {
-    String _cancelComment = cancelCommentByApproverTextFieldCtrlr.text.trim();
+  // Future<void> permitCancelByApproverButton(
+  //     {String? permitId, String? ptwStatus}) async {
+  //   String _cancelComment = cancelCommentByApproverTextFieldCtrlr.text.trim();
 
-    final _permitCancelByApproverBtn =
-        await newPermitListPresenter.permitCancelByApproverButton(
-            comment: _cancelComment, id: permitId, ptwStatus: ptwStatus);
-    // showAlertPermitApproveDialog();
-    print('Cancel Button By Approver Data:${_cancelComment}');
-    print('Cancel Button By Approver Data:${permitId}');
-  }
+  //   final _permitCancelByApproverBtn =
+  //       await newPermitListPresenter.permitCancelByApproverButton(
+  //           comment: _cancelComment, id: permitId, ptwStatus: ptwStatus);
+  //   // showAlertPermitApproveDialog();
+  //   print('Cancel Button By Approver Data:${_cancelComment}');
+  //   print('Cancel Button By Approver Data:${permitId}');
+  // }
 
   Future<void> permitExtendButton({String? permitId}) async {
     String _reasonForExtensionComment =
@@ -262,17 +262,17 @@ class NewPermitListController extends GetxController {
     print('Close Button Data:${permitId}');
   }
 
-  Future<void> permitRejectButton({String? permitId}) async {
-    String _rejectComment = rejectCommentTextFieldCtrlr.text.trim();
+  // Future<void> permitRejectButton({String? permitId}) async {
+  //   String _rejectComment = rejectCommentTextFieldCtrlr.text.trim();
 
-    final _permitRejectBtn = await newPermitListPresenter.permitRejectButton(
-      comment: _rejectComment,
-      id: permitId,
-    );
-    // showAlertPermitApproveDialog();
-    print('Reject Button Data:${_rejectComment}');
-    print('Reject Button Data:${permitId}');
-  }
+  //   final _permitRejectBtn = await newPermitListPresenter.permitRejectButton(
+  //     comment: _rejectComment,
+  //     id: permitId,
+  //   );
+  //   // showAlertPermitApproveDialog();
+  //   print('Reject Button Data:${_rejectComment}');
+  //   print('Reject Button Data:${permitId}');
+  // }
 
   Future<void> addNewPermitList({String? permitId}) async {
     Get.toNamed(Routes.newPermit, arguments: permitId);

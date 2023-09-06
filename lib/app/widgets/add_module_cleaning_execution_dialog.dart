@@ -156,14 +156,23 @@ class AddModuleCleaningExecutionDialog extends GetView {
                   children: [
                     // Dimens.boxWidth20,
                     Text('Assets'),
-                    // Dimens.boxWidth100,
+                    Dimens.boxWidth30,
                     Text('Modules'),
                     // Dimens.boxWidth100,
-                    Text('Cleaned'),
+                    Padding(
+                      padding: const EdgeInsets.only(right: 40),
+                      child: Text('Cleaned'),
+                    ),
                     // Dimens.boxWidth100,
-                    Text('Abandoned'),
+                    Padding(
+                      padding: const EdgeInsets.only(right: 50),
+                      child: Text('Abandoned'),
+                    ),
                     // Dimens.boxWidth100,
-                    Text('Day'),
+                    Padding(
+                      padding: const EdgeInsets.only(right: 50),
+                      child: Text('Day'),
+                    ),
                   ],
                 ),
                 SizedBox(height: 5),
@@ -180,370 +189,399 @@ class AddModuleCleaningExecutionDialog extends GetView {
                             child: Column(
                               children: <Widget>[
                                 SizedBox(height: 20.0),
-                                ExpansionTile(
-                                  title: Text(
-                                    "Inventor_1",
-                                    style: TextStyle(
-                                        fontSize: 12.0,
-                                        fontWeight: FontWeight.bold),
-                                  ),
-                                  children: <Widget>[
-                                    ListTile(
-                                      title: Row(
-                                        mainAxisAlignment:
-                                            MainAxisAlignment.spaceAround,
-                                        children: [
-                                          Text('SMB1'),
-                                          // Dimens.boxWidth120,
-                                          Spacer(),
-                                          Text('500'),
-                                          // Dimens.boxWidth150,
-                                          Spacer(),
-                                          Checkbox(
-                                            value: false,
-                                            onChanged: (value) {
-                                              // When the checkbox is changed, update the state using the controller
-                                              // controller.isChecked.value = value!;
-                                              // print(
-                                              //     'Checkbox Value:${controller.isChecked.value}');
-                                            },
-                                          ),
-                                          //  Dimens.boxWidth150,
-                                          Spacer(),
-                                          Checkbox(
-                                            value: false,
-                                            onChanged: (value) {
-                                              // When the checkbox is changed, update the state using the controller
-                                              // controller.isChecked.value = value!;
-                                              // print(
-                                              //     'Checkbox Value:${controller.isChecked.value}');
-                                            },
-                                          ),
-                                          // Dimens.boxWidth150,
-                                          Spacer(),
-                                          Text('Day1 (05/05/2023)')
-                                        ],
-                                      ),
-                                    ),
-                                    ListTile(
-                                      title: Row(
-                                        mainAxisAlignment:
-                                            MainAxisAlignment.spaceAround,
-                                        children: [
-                                          Text('SMB1'),
-                                          // Dimens.boxWidth120,
-                                          Spacer(),
-                                          Text('500'),
-                                          // Dimens.boxWidth150,
-                                          Spacer(),
-                                          Checkbox(
-                                            value: false,
-                                            onChanged: (value) {
-                                              // When the checkbox is changed, update the state using the controller
-                                              // controller.isChecked.value = value!;
-                                              // print(
-                                              //     'Checkbox Value:${controller.isChecked.value}');
-                                            },
-                                          ),
-                                          //  Dimens.boxWidth150,
-                                          Spacer(),
-                                          Checkbox(
-                                            value: false,
-                                            onChanged: (value) {
-                                              // When the checkbox is changed, update the state using the controller
-                                              // controller.isChecked.value = value!;
-                                              // print(
-                                              //     'Checkbox Value:${controller.isChecked.value}');
-                                            },
-                                          ),
-                                          // Dimens.boxWidth150,
-                                          Spacer(),
-                                          Text('Day1 (05/05/2023)')
-                                        ],
-                                      ),
-                                    ),
-                                    ListTile(
-                                      title: Row(
-                                        mainAxisAlignment:
-                                            MainAxisAlignment.spaceAround,
-                                        children: [
-                                          Text('SMB1'),
-                                          // Dimens.boxWidth120,
-                                          Spacer(),
-                                          Text('500'),
-                                          // Dimens.boxWidth150,
-                                          Spacer(),
-                                          Checkbox(
-                                            value: false,
-                                            onChanged: (value) {
-                                              // When the checkbox is changed, update the state using the controller
-                                              // controller.isChecked.value = value!;
-                                              // print(
-                                              //     'Checkbox Value:${controller.isChecked.value}');
-                                            },
-                                          ),
-                                          //  Dimens.boxWidth150,
-                                          Spacer(),
-                                          Checkbox(
-                                            value: false,
-                                            onChanged: (value) {
-                                              // When the checkbox is changed, update the state using the controller
-                                              // controller.isChecked.value = value!;
-                                              // print(
-                                              //     'Checkbox Value:${controller.isChecked.value}');
-                                            },
-                                          ),
-                                          // Dimens.boxWidth150,
-                                          Spacer(),
-                                          Text('Day1 (05/05/2023)')
-                                        ],
-                                      ),
-                                    ),
-                                  ],
+                                Column(
+                                  children: []
+                                    ..addAll(controller.equipmentList
+                                        .map((element) => Column(
+                                              children: [
+                                                ExpansionTile(
+                                                  title: Row(
+                                                    mainAxisAlignment : MainAxisAlignment.start,
+                                                    crossAxisAlignment : CrossAxisAlignment.start,
+                                                    children: [
+                                                      SizedBox(
+                                                        width: 200,
+                                                        child: Text(
+                                                          "${element?.invName}",
+                                                          style: TextStyle(
+                                                              fontSize: 12.0,
+                                                              fontWeight:
+                                                                  FontWeight
+                                                                      .bold),
+                                                        ),
+                                                      ),
+                                                      Dimens.boxWidth30,
+                                                      Obx(
+                                                        () => Checkbox(
+                                                          value: controller
+                                                              .isChecked.value,
+                                                          onChanged:
+                                                              (bool? value) {
+                                                            controller
+                                                                .toggleCheckbox();
+                                                          },
+                                                        ),
+                                                      ),
+                                                    ],
+                                                  ),
+                                                  children: <Widget>[
+                                                    ListTile(
+                                                      title: Column(
+                                                        mainAxisAlignment:
+                                                            MainAxisAlignment
+                                                                .spaceAround,
+                                                        children: [
+                                                          // Text('SMB1'),
+                                                          // // Dimens.boxWidth120,
+                                                          // Spacer(),
+                                                          // Text('500'),
+                                                          // Dimens.boxWidth150,
+                                                          // Spacer(),
+                                                          // Checkbox(
+                                                          //   value: false,
+                                                          //   onChanged: (value) {
+                                                          //     // When the checkbox is changed, update the state using the controller
+                                                          //     // controller.isChecked.value = value!;
+                                                          //     // print(
+                                                          //     //     'Checkbox Value:${controller.isChecked.value}');
+                                                          //   },
+                                                          // ),
+                                                          //  Dimens.boxWidth150,
+                                                          // Spacer(),
+                                                          // Checkbox(
+                                                          //   value: false,
+                                                          //   onChanged: (value) {
+                                                          //     // When the checkbox is changed, update the state using the controller
+                                                          //     // controller.isChecked.value = value!;
+                                                          //     // print(
+                                                          //     //     'Checkbox Value:${controller.isChecked.value}');
+                                                          //   },
+                                                          // ),
+                                                          // Dimens.boxWidth150,
+                                                          // Spacer(),
+                                                          // Text('Day1 (05/05/2023)')
+                                                        ]
+                                                          ..addAll(
+                                                              element!.smbs!
+                                                                  .map(
+                                                                      (e) =>
+                                                                          Row(
+                                                                            mainAxisAlignment : MainAxisAlignment.end,
+                                                                            crossAxisAlignment : CrossAxisAlignment.end,
+                                                                            children: [
+                                                                              Text('${e?.smbName}'),
+                                                                              Dimens.boxWidth50,
+                                                                              Text('${e?.moduleQuantity}'),
+                                                                              Dimens.boxWidth120,
+                                                                              Obx(
+                                                                                () => Checkbox(
+                                                                                  value: controller.isChecked.value,
+                                                                                  onChanged: (bool? value) {
+                                                                                    controller.toggleCheckbox();
+                                                                                  },
+                                                                                ),
+                                                                              ),
+                                                                              Dimens.boxWidth150,
+                                                                              Obx(
+                                                                                () => Checkbox(
+                                                                                  value: controller.isChecked.value,
+                                                                                  onChanged: (bool? value) {
+                                                                                    controller.toggleCheckbox();
+                                                                                  },
+                                                                                ),
+                                                                              ),
+                                                                              Dimens.boxWidth100,
+                                                                              Text('Day1 (05/05/2023)')
+                                                                            ],
+                                                                          ))),
+                                                      ),
+                                                    ),
+                                                    // ListTile(
+                                                    //   title: Row(
+                                                    //     mainAxisAlignment:
+                                                    //         MainAxisAlignment.spaceAround,
+                                                    //     children: [
+                                                    //       Text('SMB1'),
+                                                    //       // Dimens.boxWidth120,
+                                                    //       Spacer(),
+                                                    //       Text('500'),
+                                                    //       // Dimens.boxWidth150,
+                                                    //       Spacer(),
+                                                    //       Checkbox(
+                                                    //         value: false,
+                                                    //         onChanged: (value) {
+                                                    //           // When the checkbox is changed, update the state using the controller
+                                                    //           // controller.isChecked.value = value!;
+                                                    //           // print(
+                                                    //           //     'Checkbox Value:${controller.isChecked.value}');
+                                                    //         },
+                                                    //       ),
+                                                    //       //  Dimens.boxWidth150,
+                                                    //       // Spacer(),
+                                                    //       // Checkbox(
+                                                    //       //   value: false,
+                                                    //       //   onChanged: (value) {
+                                                    //       //     // When the checkbox is changed, update the state using the controller
+                                                    //       //     // controller.isChecked.value = value!;
+                                                    //       //     // print(
+                                                    //       //     //     'Checkbox Value:${controller.isChecked.value}');
+                                                    //       //   },
+                                                    //       // ),
+                                                    //       // Dimens.boxWidth150,
+                                                    //       Spacer(),
+                                                    //       Text('Day1 (05/05/2023)')
+                                                    //     ],
+                                                    //   ),
+                                                    // ),
+                                                  ],
+                                                ),
+                                              ],
+                                            ))),
                                 ),
-                                ExpansionTile(
-                                  title: Text(
-                                    "Inventor_2",
-                                    style: TextStyle(
-                                        fontSize: 12.0,
-                                        fontWeight: FontWeight.bold),
-                                  ),
-                                  children: <Widget>[
-                                    ListTile(
-                                      title: Row(
-                                        mainAxisAlignment:
-                                            MainAxisAlignment.spaceAround,
-                                        children: [
-                                          Text('SMB2'),
-                                          // Dimens.boxWidth120,
-                                          Spacer(),
-                                          Text('2000'),
-                                          // Dimens.boxWidth150,
-                                          Spacer(),
-                                          Checkbox(
-                                            value: false,
-                                            onChanged: (value) {
-                                              // When the checkbox is changed, update the state using the controller
-                                              // controller.isChecked.value = value!;
-                                              // print(
-                                              //     'Checkbox Value:${controller.isChecked.value}');
-                                            },
-                                          ),
-                                          //  Dimens.boxWidth150,
-                                          Spacer(),
-                                          Checkbox(
-                                            value: false,
-                                            onChanged: (value) {
-                                              // When the checkbox is changed, update the state using the controller
-                                              // controller.isChecked.value = value!;
-                                              // print(
-                                              //     'Checkbox Value:${controller.isChecked.value}');
-                                            },
-                                          ),
-                                          // Dimens.boxWidth150,
-                                          Spacer(),
-                                          Text('Day3 (05/05/2023)')
-                                        ],
-                                      ),
-                                    ),
-                                    ListTile(
-                                      title: Row(
-                                        mainAxisAlignment:
-                                            MainAxisAlignment.spaceAround,
-                                        children: [
-                                          Text('SMB2'),
-                                          // Dimens.boxWidth120,
-                                          Spacer(),
-                                          Text('2000'),
-                                          // Dimens.boxWidth150,
-                                          Spacer(),
-                                          Checkbox(
-                                            value: false,
-                                            onChanged: (value) {
-                                              // When the checkbox is changed, update the state using the controller
-                                              // controller.isChecked.value = value!;
-                                              // print(
-                                              //     'Checkbox Value:${controller.isChecked.value}');
-                                            },
-                                          ),
-                                          //  Dimens.boxWidth150,
-                                          Spacer(),
-                                          Checkbox(
-                                            value: false,
-                                            onChanged: (value) {
-                                              // When the checkbox is changed, update the state using the controller
-                                              // controller.isChecked.value = value!;
-                                              // print(
-                                              //     'Checkbox Value:${controller.isChecked.value}');
-                                            },
-                                          ),
-                                          // Dimens.boxWidth150,
-                                          Spacer(),
-                                          Text('Day3 (05/05/2023)')
-                                        ],
-                                      ),
-                                    ),
-                                    ListTile(
-                                      title: Row(
-                                        mainAxisAlignment:
-                                            MainAxisAlignment.spaceAround,
-                                        children: [
-                                          Text('SMB3'),
-                                          // Dimens.boxWidth120,
-                                          Spacer(),
-                                          Text('2000'),
-                                          // Dimens.boxWidth150,
-                                          Spacer(),
-                                          Checkbox(
-                                            value: false,
-                                            onChanged: (value) {
-                                              // When the checkbox is changed, update the state using the controller
-                                              // controller.isChecked.value = value!;
-                                              // print(
-                                              //     'Checkbox Value:${controller.isChecked.value}');
-                                            },
-                                          ),
-                                          //  Dimens.boxWidth150,
-                                          Spacer(),
-                                          Checkbox(
-                                            value: false,
-                                            onChanged: (value) {
-                                              // When the checkbox is changed, update the state using the controller
-                                              // controller.isChecked.value = value!;
-                                              // print(
-                                              //     'Checkbox Value:${controller.isChecked.value}');
-                                            },
-                                          ),
-                                          // Dimens.boxWidth150,
-                                          Spacer(),
-                                          Text('Day3 (05/05/2023)')
-                                        ],
-                                      ),
-                                    ),
-                                  ],
-                                ),
-                                Dimens.boxHeight10,
-                                ExpansionTile(
-                                  title: Text(
-                                    "Inventor_3",
-                                    style: TextStyle(
-                                        fontSize: 12.0,
-                                        fontWeight: FontWeight.bold),
-                                  ),
-                                  children: <Widget>[
-                                    ListTile(
-                                      title: Row(
-                                        mainAxisAlignment:
-                                            MainAxisAlignment.spaceAround,
-                                        children: [
-                                          Text('SMB1'),
-                                          // Dimens.boxWidth120,
-                                          Spacer(),
-                                          Text('2700'),
-                                          // Dimens.boxWidth150,
-                                          Spacer(),
-                                          Checkbox(
-                                            value: false,
-                                            onChanged: (value) {
-                                              // When the checkbox is changed, update the state using the controller
-                                              // controller.isChecked.value = value!;
-                                              // print(
-                                              //     'Checkbox Value:${controller.isChecked.value}');
-                                            },
-                                          ),
-                                          //  Dimens.boxWidth150,
-                                          Spacer(),
-                                          Checkbox(
-                                            value: false,
-                                            onChanged: (value) {
-                                              // When the checkbox is changed, update the state using the controller
-                                              // controller.isChecked.value = value!;
-                                              // print(
-                                              //     'Checkbox Value:${controller.isChecked.value}');
-                                            },
-                                          ),
-                                          // Dimens.boxWidth150,
-                                          Spacer(),
-                                          Text('Day4 (05/05/2023)')
-                                        ],
-                                      ),
-                                    ),
-                                    ListTile(
-                                      title: Row(
-                                        mainAxisAlignment:
-                                            MainAxisAlignment.spaceAround,
-                                        children: [
-                                          Text('SMB2'),
-                                          // Dimens.boxWidth120,
-                                          Spacer(),
-                                          Text('2700'),
-                                          // Dimens.boxWidth150,
-                                          Spacer(),
-                                          Checkbox(
-                                            value: false,
-                                            onChanged: (value) {
-                                              // When the checkbox is changed, update the state using the controller
-                                              // controller.isChecked.value = value!;
-                                              // print(
-                                              //     'Checkbox Value:${controller.isChecked.value}');
-                                            },
-                                          ),
-                                          //  Dimens.boxWidth150,
-                                          Spacer(),
-                                          Checkbox(
-                                            value: false,
-                                            onChanged: (value) {
-                                              // When the checkbox is changed, update the state using the controller
-                                              // controller.isChecked.value = value!;
-                                              // print(
-                                              //     'Checkbox Value:${controller.isChecked.value}');
-                                            },
-                                          ),
-                                          // Dimens.boxWidth150,
-                                          Spacer(),
-                                          Text('Day4 (05/05/2023)')
-                                        ],
-                                      ),
-                                    ),
-                                    ListTile(
-                                      title: Row(
-                                        mainAxisAlignment:
-                                            MainAxisAlignment.spaceAround,
-                                        children: [
-                                          Text('SMB1'),
-                                          // Dimens.boxWidth120,
-                                          Spacer(),
-                                          Text('500'),
-                                          // Dimens.boxWidth150,
-                                          Spacer(),
-                                          Checkbox(
-                                            value: false,
-                                            onChanged: (value) {
-                                              // When the checkbox is changed, update the state using the controller
-                                              // controller.isChecked.value = value!;
-                                              // print(
-                                              //     'Checkbox Value:${controller.isChecked.value}');
-                                            },
-                                          ),
-                                          //  Dimens.boxWidth150,
-                                          Spacer(),
-                                          Checkbox(
-                                            value: false,
-                                            onChanged: (value) {
-                                              // When the checkbox is changed, update the state using the controller
-                                              // controller.isChecked.value = value!;
-                                              // print(
-                                              //     'Checkbox Value:${controller.isChecked.value}');
-                                            },
-                                          ),
-                                          // Dimens.boxWidth150,
-                                          Spacer(),
-                                          Text('Day1 (05/05/2023)')
-                                        ],
-                                      ),
-                                    ),
-                                  ],
-                                ),
+                                // ExpansionTile(
+                                //   title: Text(
+                                //     "Inventor_2",
+                                //     style: TextStyle(
+                                //         fontSize: 12.0,
+                                //         fontWeight: FontWeight.bold),
+                                //   ),
+                                //   children: <Widget>[
+                                //     ListTile(
+                                //       title: Row(
+                                //         mainAxisAlignment:
+                                //             MainAxisAlignment.spaceAround,
+                                //         children: [
+                                //           Text('SMB2'),
+                                //           // Dimens.boxWidth120,
+                                //           Spacer(),
+                                //           Text('2000'),
+                                //           // Dimens.boxWidth150,
+                                //           Spacer(),
+                                //           Checkbox(
+                                //             value: false,
+                                //             onChanged: (value) {
+                                //               // When the checkbox is changed, update the state using the controller
+                                //               // controller.isChecked.value = value!;
+                                //               // print(
+                                //               //     'Checkbox Value:${controller.isChecked.value}');
+                                //             },
+                                //           ),
+                                //           //  Dimens.boxWidth150,
+                                //           Spacer(),
+                                //           Checkbox(
+                                //             value: false,
+                                //             onChanged: (value) {
+                                //               // When the checkbox is changed, update the state using the controller
+                                //               // controller.isChecked.value = value!;
+                                //               // print(
+                                //               //     'Checkbox Value:${controller.isChecked.value}');
+                                //             },
+                                //           ),
+                                //           // Dimens.boxWidth150,
+                                //           Spacer(),
+                                //           Text('Day3 (05/05/2023)')
+                                //         ],
+                                //       ),
+                                //     ),
+                                //     ListTile(
+                                //       title: Row(
+                                //         mainAxisAlignment:
+                                //             MainAxisAlignment.spaceAround,
+                                //         children: [
+                                //           Text('SMB2'),
+                                //           // Dimens.boxWidth120,
+                                //           Spacer(),
+                                //           Text('2000'),
+                                //           // Dimens.boxWidth150,
+                                //           Spacer(),
+                                //           Checkbox(
+                                //             value: false,
+                                //             onChanged: (value) {
+                                //               // When the checkbox is changed, update the state using the controller
+                                //               // controller.isChecked.value = value!;
+                                //               // print(
+                                //               //     'Checkbox Value:${controller.isChecked.value}');
+                                //             },
+                                //           ),
+                                //           //  Dimens.boxWidth150,
+                                //           Spacer(),
+                                //           Checkbox(
+                                //             value: false,
+                                //             onChanged: (value) {
+                                //               // When the checkbox is changed, update the state using the controller
+                                //               // controller.isChecked.value = value!;
+                                //               // print(
+                                //               //     'Checkbox Value:${controller.isChecked.value}');
+                                //             },
+                                //           ),
+                                //           // Dimens.boxWidth150,
+                                //           Spacer(),
+                                //           Text('Day3 (05/05/2023)')
+                                //         ],
+                                //       ),
+                                //     ),
+                                //     ListTile(
+                                //       title: Row(
+                                //         mainAxisAlignment:
+                                //             MainAxisAlignment.spaceAround,
+                                //         children: [
+                                //           Text('SMB3'),
+                                //           // Dimens.boxWidth120,
+                                //           Spacer(),
+                                //           Text('2000'),
+                                //           // Dimens.boxWidth150,
+                                //           Spacer(),
+                                //           Checkbox(
+                                //             value: false,
+                                //             onChanged: (value) {
+                                //               // When the checkbox is changed, update the state using the controller
+                                //               // controller.isChecked.value = value!;
+                                //               // print(
+                                //               //     'Checkbox Value:${controller.isChecked.value}');
+                                //             },
+                                //           ),
+                                //           //  Dimens.boxWidth150,
+                                //           Spacer(),
+                                //           Checkbox(
+                                //             value: false,
+                                //             onChanged: (value) {
+                                //               // When the checkbox is changed, update the state using the controller
+                                //               // controller.isChecked.value = value!;
+                                //               // print(
+                                //               //     'Checkbox Value:${controller.isChecked.value}');
+                                //             },
+                                //           ),
+                                //           // Dimens.boxWidth150,
+                                //           Spacer(),
+                                //           Text('Day3 (05/05/2023)')
+                                //         ],
+                                //       ),
+                                //     ),
+                                //   ],
+                                // ),
+                                // Dimens.boxHeight10,
+                                // ExpansionTile(
+                                //   title: Text(
+                                //     "Inventor_3",
+                                //     style: TextStyle(
+                                //         fontSize: 12.0,
+                                //         fontWeight: FontWeight.bold),
+                                //   ),
+                                //   children: <Widget>[
+                                //     ListTile(
+                                //       title: Row(
+                                //         mainAxisAlignment:
+                                //             MainAxisAlignment.spaceAround,
+                                //         children: [
+                                //           Text('SMB1'),
+                                //           // Dimens.boxWidth120,
+                                //           Spacer(),
+                                //           Text('2700'),
+                                //           // Dimens.boxWidth150,
+                                //           Spacer(),
+                                //           Checkbox(
+                                //             value: false,
+                                //             onChanged: (value) {
+                                //               // When the checkbox is changed, update the state using the controller
+                                //               // controller.isChecked.value = value!;
+                                //               // print(
+                                //               //     'Checkbox Value:${controller.isChecked.value}');
+                                //             },
+                                //           ),
+                                //           //  Dimens.boxWidth150,
+                                //           Spacer(),
+                                //           Checkbox(
+                                //             value: false,
+                                //             onChanged: (value) {
+                                //               // When the checkbox is changed, update the state using the controller
+                                //               // controller.isChecked.value = value!;
+                                //               // print(
+                                //               //     'Checkbox Value:${controller.isChecked.value}');
+                                //             },
+                                //           ),
+                                //           // Dimens.boxWidth150,
+                                //           Spacer(),
+                                //           Text('Day4 (05/05/2023)')
+                                //         ],
+                                //       ),
+                                //     ),
+                                //     ListTile(
+                                //       title: Row(
+                                //         mainAxisAlignment:
+                                //             MainAxisAlignment.spaceAround,
+                                //         children: [
+                                //           Text('SMB2'),
+                                //           // Dimens.boxWidth120,
+                                //           Spacer(),
+                                //           Text('2700'),
+                                //           // Dimens.boxWidth150,
+                                //           Spacer(),
+                                //           Checkbox(
+                                //             value: false,
+                                //             onChanged: (value) {
+                                //               // When the checkbox is changed, update the state using the controller
+                                //               // controller.isChecked.value = value!;
+                                //               // print(
+                                //               //     'Checkbox Value:${controller.isChecked.value}');
+                                //             },
+                                //           ),
+                                //           //  Dimens.boxWidth150,
+                                //           Spacer(),
+                                //           Checkbox(
+                                //             value: false,
+                                //             onChanged: (value) {
+                                //               // When the checkbox is changed, update the state using the controller
+                                //               // controller.isChecked.value = value!;
+                                //               // print(
+                                //               //     'Checkbox Value:${controller.isChecked.value}');
+                                //             },
+                                //           ),
+                                //           // Dimens.boxWidth150,
+                                //           Spacer(),
+                                //           Text('Day4 (05/05/2023)')
+                                //         ],
+                                //       ),
+                                //     ),
+                                //     ListTile(
+                                //       title: Row(
+                                //         mainAxisAlignment:
+                                //             MainAxisAlignment.spaceAround,
+                                //         children: [
+                                //           Text('SMB1'),
+                                //           // Dimens.boxWidth120,
+                                //           Spacer(),
+                                //           Text('500'),
+                                //           // Dimens.boxWidth150,
+                                //           Spacer(),
+                                //           Checkbox(
+                                //             value: false,
+                                //             onChanged: (value) {
+                                //               // When the checkbox is changed, update the state using the controller
+                                //               // controller.isChecked.value = value!;
+                                //               // print(
+                                //               //     'Checkbox Value:${controller.isChecked.value}');
+                                //             },
+                                //           ),
+                                //           //  Dimens.boxWidth150,
+                                //           Spacer(),
+                                //           Checkbox(
+                                //             value: false,
+                                //             onChanged: (value) {
+                                //               // When the checkbox is changed, update the state using the controller
+                                //               // controller.isChecked.value = value!;
+                                //               // print(
+                                //               //     'Checkbox Value:${controller.isChecked.value}');
+                                //             },
+                                //           ),
+                                //           // Dimens.boxWidth150,
+                                //           Spacer(),
+                                //           Text('Day1 (05/05/2023)')
+                                //         ],
+                                //       ),
+                                //     ),
+                                //   ],
+                                // ),
+
                                 Dimens.boxHeight150,
                                 Row(
                                   mainAxisAlignment: MainAxisAlignment.center,
@@ -573,7 +611,6 @@ class AddModuleCleaningExecutionDialog extends GetView {
                                     Spacer(),
                                   ],
                                 ),
-                                
                               ],
                             ),
                           ),
