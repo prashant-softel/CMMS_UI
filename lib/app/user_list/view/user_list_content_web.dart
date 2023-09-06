@@ -185,79 +185,68 @@ class _UserListContentWebState extends State<UserListContentWeb> {
                                 controller.userList.isEmpty == true
                                     ? Center(child: Text('No data'))
                                     : Expanded(
-                                        child: Theme(
-                                          data: ThemeData(
-                                              scrollbarTheme: ScrollbarThemeData(
-                                                  isAlwaysShown: false,
-                                                  thumbColor:
-                                                      MaterialStateProperty.all<
-                                                              Color>(
-                                                          Colors.transparent))),
-                                          child: PaginatedDataTable2(
-                                            // fixedLeftColumns: 1,
-                                            // dataRowHeight: Get.height * 0.12,
-                                            columnSpacing: 10,
-                                            source:
-                                                dataSource, // Custom DataSource class
-                                            headingRowHeight: Get.height * 0.12,
-                                            minWidth: Get.width * 1.2,
-                                            showCheckboxColumn: false,
-                                            rowsPerPage:
-                                                10, // Number of rows per page
-                                            availableRowsPerPage: [
-                                              10,
-                                              20,
-                                              30,
-                                              50
-                                            ],
-                                            columns: [
-                                              buildDataColumn(
-                                                'Profile',
-                                                'Profile',
-                                                //  ColumnSize.S,
-                                                controller.idFilterText,
-                                                100,
-                                              ),
-                                              buildDataColumn(
-                                                  "UserLoginID",
-                                                  "User Login ID",
-                                                  // ColumnSize.M,
-                                                  controller
-                                                      .userLoginIdFilterText,
-                                                  200),
-                                              buildDataColumn(
-                                                  "UserRole",
-                                                  "User Role", // ColumnSize.L,
-                                                  controller.userRoleFilterText,
-                                                  150),
-                                              buildDataColumn(
-                                                  "ContactNumber",
-                                                  "Contact Number",
-                                                  // ColumnSize.L,
-                                                  controller.contractFilterText,
-                                                  170),
-                                              buildDataColumn(
-                                                  "CreatedOn",
-                                                  "Created On",
-                                                  // ColumnSize.L,
-                                                  controller
-                                                      .createdOnFilterText,
-                                                  170),
-                                              buildDataColumn(
-                                                  "UpdatedOn",
-                                                  "Updated On",
-                                                  // ColumnSize.L,
-                                                  controller
-                                                      .updatedOnFilterText,
-                                                  150),
-                                              buildDataColumn(
-                                                  'action'.tr,
-                                                  'Actions',
-                                                  // ColumnSize.L,
-                                                  controller.userDateFilterText,
-                                                  150),
-                                            ],
-                                          ),
+                                        child: PaginatedDataTable2(
+                                          // fixedLeftColumns: 1,
+                                          // dataRowHeight: Get.height * 0.12,
+                                          columnSpacing: 10,
+                                          source:
+                                              dataSource, // Custom DataSource class
+                                          headingRowHeight: Get.height * 0.12,
+                                          minWidth: Get.width * 1.2,
+                                          showCheckboxColumn: false,
+                                          rowsPerPage:
+                                              10, // Number of rows per page
+                                          availableRowsPerPage: [
+                                            10,
+                                            20,
+                                            30,
+                                            50
+                                          ],
+                                          columns: [
+                                            buildDataColumn(
+                                              'Profile',
+                                              'Profile',
+                                              //  ColumnSize.S,
+                                              controller.idFilterText,
+                                              100,
+                                            ),
+                                            buildDataColumn(
+                                                "UserLoginID",
+                                                "User Login ID",
+                                                // ColumnSize.M,
+                                                controller
+                                                    .userLoginIdFilterText,
+                                                400),
+                                            buildDataColumn(
+                                                "UserRole",
+                                                "User Role", // ColumnSize.L,
+                                                controller.userRoleFilterText,
+                                                150),
+                                            buildDataColumn(
+                                                "ContactNumber",
+                                                "Contact Number",
+                                                // ColumnSize.L,
+                                                controller.contractFilterText,
+                                                170),
+                                            buildDataColumn(
+                                                "CreatedOn",
+                                                "Created On",
+                                                // ColumnSize.L,
+                                                controller.createdOnFilterText,
+                                                170),
+                                            buildDataColumn(
+                                                "UpdatedOn",
+                                                "Updated On",
+                                                // ColumnSize.L,
+                                                controller.updatedOnFilterText,
+                                                150),
+                                            buildDataColumn(
+                                                'action'.tr,
+                                                'Actions',
+                                                // ColumnSize.L,
+                                                controller.userDateFilterText,
+                                                150),
+                                          ],
                                         ),
                                       )
                               ]),

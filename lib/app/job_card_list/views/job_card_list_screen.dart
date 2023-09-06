@@ -46,7 +46,7 @@ class JobCardScreen extends GetView<JobCardListController> {
                     //   // ),
                     // if (Responsive.isDesktop(context))
                     Expanded(
-                      child: JobCardWeb(),
+                      child: JobCardContentWeb(),
                     )
                   ],
                 ),

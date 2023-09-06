@@ -1,5 +1,6 @@
 import 'package:cmms/domain/models/employee_model.dart';
 import 'package:cmms/domain/models/history_model.dart';
+import 'package:cmms/domain/models/job_card_model.dart';
 import 'package:cmms/domain/repositories/repository.dart';
 
 import '../models/job_card_details_model.dart';
@@ -17,6 +18,14 @@ class JobCardUsecase {
   }) async =>
       await repository.getAssignedToList(
         auth,
+        facilityId,
+        isLoading,
+      );
+  Future<List<JobCardModel?>?> jobCardList({
+    int? facilityId,
+    bool? isLoading,
+  }) async =>
+      await repository.jobCardList(
         facilityId,
         isLoading,
       );
