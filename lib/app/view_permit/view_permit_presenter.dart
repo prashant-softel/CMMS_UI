@@ -43,6 +43,43 @@ class ViewPermitPresenter {
         isLoading: isLoading,
       );
 
+   Future<void> permitApprovedButton({
+    String? comment,
+    String? id,
+    String? ptwStatus,
+    bool? isLoading,
+  }) async =>
+      await viewPermitUsecase.permitApprovedButton(
+        comment: comment,
+        id: id,
+        ptwStatus: ptwStatus,
+        isLoading: isLoading ?? false,
+      );
+
+   Future<void> permitRejectButton({
+    String? comment,
+    String? id,
+    bool? isLoading,
+  }) async =>
+      await viewPermitUsecase.permitRejectButton(
+        comment: comment,
+        id: id,
+        isLoading: isLoading ?? false,
+      );
+
+   Future<void> permitCancelByApproverButton({
+    String? comment,
+    String? id,
+    String? ptwStatus,
+    bool? isLoading,
+  }) async =>
+      await viewPermitUsecase.permitCancelByApproverButton(
+        comment: comment,
+        id: id,
+        ptwStatus: ptwStatus,
+        isLoading: isLoading ?? false,
+      );
+
    Future<List<EmployeeModel?>?> getAssignedToList({
     String? auth,
     int? facilityId,

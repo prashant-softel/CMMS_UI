@@ -114,7 +114,7 @@ class _IncidentReportListWebState extends State<IncidentReportListWeb> {
                                                       ['stock_Mangement_Date']);
                                                 },
                                                 hintText:
-                                                    '${controller.formattedTodate.toString()} - ${controller.formattedFromdate.toString()}',
+                                                    '${controller.formattedFromdate.toString()} - ${controller.formattedTodate.toString()}',
                                               ),
                                             ],
                                           ),

@@ -99,8 +99,8 @@ class IncidentReportListController extends GetxController {
   Rx<DateTime> fromDate = DateTime.now().obs;
   Rx<DateTime> toDate = DateTime.now().obs;
   String get formattedFromdate =>
-      DateFormat('dd/MM/yyyy').format(fromDate.value);
-  String get formattedTodate => DateFormat('dd/MM/yyyy').format(toDate.value);
+      DateFormat('yyyy/MM/dd').format(fromDate.value);
+  String get formattedTodate => DateFormat('yyyy/MM/dd').format(toDate.value);
 
   BehaviorSubject<int> _facilityId = BehaviorSubject.seeded(0);
   Stream<int> get facilityId$ => _facilityId.stream;
@@ -117,7 +117,7 @@ class IncidentReportListController extends GetxController {
       facilityId = event;
       Future.delayed(Duration(seconds: 2), () {
         getIncidentReportList(
-            facilityId, formattedTodate, formattedFromdate, false);
+            facilityId,  formattedFromdate, formattedTodate, false);
       });
     });
 

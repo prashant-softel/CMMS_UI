@@ -138,16 +138,7 @@ class NewPermitListWeb extends GetView<NewPermitListController> {
                                       ],
                                     ),
                                     Dimens.boxWidth10,
-                                    Container(
-                                      height: 35,
-                                      margin: EdgeInsets.only(left: 10),
-                                      child: CustomElevatedButton(
-                                        backgroundColor:
-                                            ColorValues.appLightBlueColor,
-                                        onPressed: () {},
-                                        text: 'columnVisibility'.tr,
-                                      ),
-                                    ),
+                                    
                                     Dimens.boxWidth10,
 
                                     varUserAccessModel.value.access_list!
@@ -161,8 +152,8 @@ class NewPermitListWeb extends GetView<NewPermitListController> {
                                                 .length >
                                             0
                                         ? ActionButton(
-                                            icon: Icons.upload,
-                                            label: 'Add New Permit',
+                                            icon: Icons.add,
+                                            label: 'Add New',
                                             onPressed: () {
                                               controller.addNewPermitList();
                                             },
@@ -170,9 +161,29 @@ class NewPermitListWeb extends GetView<NewPermitListController> {
                                           )
                                         : Container(),
 
-                                    ////Search field
+                                   
+                                  ]),
+                                ),
+                                SizedBox(
+                                    height: 20,
+                                  ),
+                                Row(
+                                  mainAxisAlignment : MainAxisAlignment.spaceBetween,
+                                  children: [
+                                    Container(
+                                      height: 35,
+                                      margin: EdgeInsets.only(left: 10),
+                                      child: CustomElevatedButton(
+                                        backgroundColor:
+                                            ColorValues.appLightBlueColor,
+                                        onPressed: () {},
+                                        text: 'columnVisibility'.tr,
+                                      ),
+                                    ),
+
+                                     ////Search field
                                     Padding(
-                                      padding: const EdgeInsets.only(left: 10),
+                                      padding: const EdgeInsets.only(left: 450),
                                       child: Container(
                                         width: 200,
                                         height: 35,
@@ -201,7 +212,9 @@ class NewPermitListWeb extends GetView<NewPermitListController> {
                                         ),
                                       ),
                                     ),
-                                  ]),
+                                 
+
+                                  ],
                                 ),
 
                                 ///
