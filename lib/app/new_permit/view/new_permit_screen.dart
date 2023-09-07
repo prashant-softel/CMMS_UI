@@ -1742,7 +1742,7 @@ class NewPermitScreen extends GetView<NewPermitController> {
                                                                               MainAxisAlignment.center,
                                                                           children: [
                                                                             Text(
-                                                                              'Equipment',
+                                                                              'Block',
                                                                               style: TextStyle(color: Color.fromARGB(255, 5, 92, 163)),
                                                                             ),
                                                                             Dimens.boxHeight10,
@@ -2000,7 +2000,7 @@ class NewPermitScreen extends GetView<NewPermitController> {
                                                               0,
                                                             ),
                                                             SizedBox(
-                                                              width: 170,
+                                                              width: 165,
                                                             ),
                                                             CustomRichText(
                                                                 title:
@@ -2594,10 +2594,12 @@ class NewPermitScreen extends GetView<NewPermitController> {
                                                       ),
 
                                                       ///Team Deploying
-                                                      controller.permitId
+                                                      
+                                                   controller.permitId
                                                                   .value <=
                                                               0
-                                                          ? SizedBox(
+                                                          ? 
+                                                          SizedBox(
                                                               height: ((controller
                                                                           .filteredEmployeeNameList
                                                                           .length) *
@@ -2751,6 +2753,7 @@ class NewPermitScreen extends GetView<NewPermitController> {
                                                                 ),
                                                               ),
                                                             )
+                                                         
                                                           : SizedBox(
                                                               height: ((controller
                                                                           .listEmployee!
