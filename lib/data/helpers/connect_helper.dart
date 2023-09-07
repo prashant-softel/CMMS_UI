@@ -3513,7 +3513,7 @@ class ConnectHelper {
     int? facilityId,
   }) async {
     ResponseModel responseModel = await apiWrapper.makeRequest(
-      'Inventory/GetInventoryList?facility_id=$facilityId',
+      'Inventory/GetInventoryList?facilityId=$facilityId',
       Request.get,
       null,
       isLoading,

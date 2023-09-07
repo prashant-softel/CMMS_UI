@@ -4,7 +4,7 @@ import '../../domain/usecases/user_list_usecase.dart';
 class UserListPresenter {
   UserListPresenter(this.userListUsecase);
   UserListUsecase userListUsecase;
-  Future<List<UserListModel?>?> getUserList({
+  Future<List<UserListModel>?> getUserList({
     int? facilityId,
     bool? isLoading,
   }) async =>

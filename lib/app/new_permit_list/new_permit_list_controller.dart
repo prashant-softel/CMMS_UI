@@ -16,7 +16,6 @@ import 'package:scrollable_table_view/scrollable_table_view.dart';
 
 import '../../../domain/models/block_model.dart';
 
-
 class NewPermitListController extends GetxController {
   ///
   NewPermitListController(
@@ -34,14 +33,23 @@ class NewPermitListController extends GetxController {
 
   ///Date Range
   bool openFromDateToStartDatePicker = false;
-  
-   Rx<DateTime> fromDate = DateTime.now().obs;
+  RxString PermitIdFilterText = ''.obs;
+  RxString DescriptionFilterText = ''.obs;
+  RxString PermitTypeNameFilterText = ''.obs;
+  RxString EquipmentCategoriesFilterText = ''.obs;
+  RxString WorkingAreaNameFilterText = ''.obs;
+  RxString RequestByNameFilterText = ''.obs;
+  RxString ApprovedByNameFilterText = ''.obs;
+  RxString CurrentStatusShortFilterText = ''.obs;
+  RxString ActionFilterText = ''.obs;
+
+  Rx<DateTime> fromDate = DateTime.now().obs;
   Rx<DateTime> toDate = DateTime.now().obs;
   String get formattedFromdate =>
       DateFormat('dd/MM/yyyy').format(fromDate.value);
   String get formattedTodate => DateFormat('dd/MM/yyyy').format(toDate.value);
 
-  RxList<NewPermitModel?>? newPermitList = <NewPermitModel?>[].obs;
+  RxList<NewPermitModel?> newPermitList = <NewPermitModel?>[].obs;
   RxList<NewPermitModel?> filteredData = <NewPermitModel>[].obs;
 
   RxList<FacilityModel?> facilityList = <FacilityModel>[].obs;
@@ -124,13 +132,13 @@ class NewPermitListController extends GetxController {
     facilityIdStreamSubscription = controller.facilityId$.listen((event) {
       facilityId = event;
       Future.delayed(Duration(seconds: 1), () {
-        getNewPermitList(facilityId, userId,formattedTodate, formattedFromdate, true, false, false);
+        getNewPermitList(facilityId, userId, formattedTodate, formattedFromdate,
+            true, false, false);
       });
     });
 
     Future.delayed(Duration(seconds: 1), () {
       getFacilityList(isLoading: true);
-
     });
 
     super.onInit();
@@ -168,7 +176,7 @@ class NewPermitListController extends GetxController {
     update(['permit_list']);
   }
 
-  Future<void> getNewPermitList(int facilityId, int userId,dynamic startDate,
+  Future<void> getNewPermitList(int facilityId, int userId, dynamic startDate,
       dynamic endDate, bool isLoading, bool self_view, bool non_expired) async {
     newPermitList!.value = <NewPermitModel>[];
     final _newPermitList = await newPermitListPresenter.getNewPermitList(
@@ -177,11 +185,15 @@ class NewPermitListController extends GetxController {
         start_date: startDate, //// "2020-01-01",
         end_date: endDate,
         userId: userId,
-        self_view:  varUserAccessModel.value.access_list!.where((e) =>
-         e.feature_id == UserAccessConstants.kPermitFeatureId && 
-         e.selfView == UserAccessConstants.kHaveSelfViewAccess).length > 0 ? true : false,
-         non_expired: false
-        );
+        self_view: varUserAccessModel.value.access_list!
+                    .where((e) =>
+                        e.feature_id == UserAccessConstants.kPermitFeatureId &&
+                        e.selfView == UserAccessConstants.kHaveSelfViewAccess)
+                    .length >
+                0
+            ? true
+            : false,
+        non_expired: false);
 
     if (_newPermitList != null) {
       newPermitList!.value = _newPermitList;
@@ -313,7 +325,8 @@ class NewPermitListController extends GetxController {
 
 // {'permitId':permitId}
   Future<void> editNewPermit({int? permitId, bool? isChecked}) async {
-    Get.toNamed(Routes.newPermit, arguments: {'permitId': permitId, 'isChecked': isChecked});
+    Get.toNamed(Routes.newPermit,
+        arguments: {'permitId': permitId, 'isChecked': isChecked});
     print('PermitIdArgument:$permitId');
   }
 
@@ -330,8 +343,8 @@ class NewPermitListController extends GetxController {
   }
 
   void getNewPermitListByDate() {
-    getNewPermitList(
-        facilityId, userId, formattedFromdate, formattedTodate, false, false, false);
+    getNewPermitList(facilityId, userId, formattedFromdate, formattedTodate,
+        false, false, false);
   }
 
   //  Future<void> viewPermit({int? id}) async {

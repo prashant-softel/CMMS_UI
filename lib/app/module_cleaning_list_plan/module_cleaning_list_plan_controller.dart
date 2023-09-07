@@ -27,12 +27,12 @@ class ModuleCleaningListPlanController extends GetxController {
   RxList<FacilityModel?> facilityList = <FacilityModel>[].obs;
   Rx<String> selectedBlock = ''.obs;
   ModuleCleaningListPlanModel? moduleCleaningListPlanModel;
-  RxString planId = ''.obs;
-  RxString title = ''.obs;
-  RxString noOfCleaningDays = ''.obs;
-  RxString createdBy = ''.obs;
-  RxString frequency = ''.obs;
-  Rx<int> planIdnew = 0.obs;
+  // RxString planId = ''.obs;
+  // RxString title = ''.obs;
+  // RxString noOfCleaningDays = ''.obs;
+  // RxString createdBy = ''.obs;
+  // RxString frequency = ''.obs;
+  // Rx<int> planIdnew = 0.obs;
 
   final columnVisibility = ValueNotifier<Map<String, bool>>({
     'Plan Id': true,
@@ -42,27 +42,28 @@ class ModuleCleaningListPlanController extends GetxController {
     'frequency': true,
     // 'Action': true,
   });
-  final columnSearchText = ValueNotifier<Map<String, String>>({
-    'planId': '',
-    'title': '',
-    'noOfCleaningDays': '',
-    'createdBy': '',
-    'frequency': '',
-  });
+  // final columnSearchText = ValueNotifier<Map<String, String>>({
+  //   'planId': '',
+  //   'title': '',
+  //   'noOfCleaningDays': '',
+  //   'createdBy': '',
+  //   'frequency': '',
+  // });
   List<ModuleCleaningListPlanModel> get filteredData {
     final visibilityMap = columnVisibility.value;
-    final searchTextMap = columnSearchText.value;
+    //  final searchTextMap = columnSearchText.value;
 
     return moduleCleaningListPlan.value.where((row) {
       return visibilityMap.entries.every((entry) {
-        final columnName = entry.key;
+        //  final columnName = entry.key;
         final columnVisible = entry.value;
-        final searchValue = searchTextMap[columnName]?.toLowerCase() ?? '';
-        if (!columnVisible || searchValue.isEmpty) {
+        // final searchValue = searchTextMap[columnName]?.toLowerCase() ?? '';
+        if (!columnVisible) {
           return true; // Skip the check if the column is hidden or search text is empty
         }
-        final cellValue = row.columnByName(columnName)?.toLowerCase() ?? '';
-        return cellValue.contains(searchValue);
+        //   final cellValue = row.columnByName(columnName)?.toLowerCase() ?? '';
+        return true;
+        // cellValue.contains(searchValue);
       });
     }).toList();
   }

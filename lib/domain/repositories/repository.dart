@@ -4898,7 +4898,7 @@ class Repository {
     }
   }
 
-  Future<List<UserListModel?>?> getUserList(
+  Future<List<UserListModel>?> getUserList(
     int? facilityId,
     bool? isLoading,
   ) async {
