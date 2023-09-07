@@ -1842,7 +1842,7 @@ class NewPermitScreen extends GetView<NewPermitController> {
                                                               padding:
                                                                   const EdgeInsets
                                                                           .only(
-                                                                      left: 53),
+                                                                      left: 75),
                                                               child: Row(
                                                                 children: [
                                                                   CustomRichText(
@@ -2000,7 +2000,7 @@ class NewPermitScreen extends GetView<NewPermitController> {
                                                               0,
                                                             ),
                                                             SizedBox(
-                                                              width: 163,
+                                                              width: 170,
                                                             ),
                                                             CustomRichText(
                                                                 title:
@@ -2674,7 +2674,7 @@ class NewPermitScreen extends GetView<NewPermitController> {
                                                                                                     'action'.tr,
                                                                                                   ].map((column) {
                                                                                                     return TableViewColumn(
-                                                                                                      minWidth: Get.width * 0.19,
+                                                                                                      minWidth: Get.width * 0.185,
                                                                                                       label: column == "id"
                                                                                                           ? "Employee Id"
                                                                                                           : column == "name"
