@@ -4210,6 +4210,7 @@ class Repository {
       print({"res.data", res.data});
       if (!res.hasError) {
         Fluttertoast.showToast(msg: res.data, fontSize: 45.0);
+        Get.offAllNamed(Routes.jobList);
 
         return true;
       } else {

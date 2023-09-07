@@ -78,7 +78,6 @@ class _JobCardContentWebState extends State<JobCardContentWeb> {
                     child: SingleChildScrollView(
                       child: Container(
                         width: Get.width * 7,
-                        margin: EdgeInsets.all(10),
                         height: Get.height,
                         child: Card(
                           color: Color.fromARGB(255, 245, 248, 250),
@@ -186,12 +185,13 @@ class _JobCardContentWebState extends State<JobCardContentWeb> {
                                     ? Center(child: Text('No data'))
                                     : Expanded(
                                         child: PaginatedDataTable2(
-                                          border: TableBorder.all(
-                                              color: Color.fromARGB(
-                                                  255, 9, 5, 20)),
+                                          // border: TableBorder.all(
+                                          //     color: Color.fromARGB(
+                                          //         255, 9, 5, 20)),
                                           // fixedLeftColumns: 1,
                                           // dataRowHeight: Get.height * 0.12,
                                           columnSpacing: 10,
+
                                           source:
                                               dataSource, // Custom DataSource class
                                           headingRowHeight: Get.height * 0.12,
@@ -307,13 +307,11 @@ class _JobCardContentWebState extends State<JobCardContentWeb> {
                   ),
                   focusedBorder: OutlineInputBorder(
                     borderRadius: BorderRadius.circular(5),
-                    borderSide:
-                        BorderSide(color: Color.fromARGB(255, 223, 219, 219)),
+                    borderSide: BorderSide(color: Colors.black),
                   ),
                   enabledBorder: OutlineInputBorder(
                     borderRadius: BorderRadius.circular(5),
-                    borderSide:
-                        BorderSide(color: Color.fromARGB(255, 232, 225, 225)),
+                    borderSide: BorderSide(color: Colors.black),
                   ),
                 ),
               ),
@@ -409,56 +407,22 @@ class JobDataSource extends DataTableSource {
                         final _flutterSecureStorage =
                             const FlutterSecureStorage();
 
-                        _flutterSecureStorage.delete(key: "userId");
+                        _flutterSecureStorage.delete(key: "JcId");
                         // controller.selectedItem = controller.filteredData
                         //     .firstWhere(
                         //         (element) => "${element?.name}" == value[1]);
-                        int userId = JobDetails?.id ?? 0;
-                        if (userId != 0) {
-                          // Get.toNamed(Routes.viewUserDetail,
-                          //     arguments: {'userId': userId});
+                        int jobCardId = JobDetails?.jobCardId ?? 0;
+                        if (jobCardId != 0) {
+                          Get.toNamed(Routes.jobCard,
+                              arguments: {'JcId': jobCardId});
                         }
                       },
                     ),
-                    // TableActionButton(
-                    //   color: ColorValues.editColor,
-                    //   icon: Icons.edit,
-                    //   message: 'Edit',
-                    //   onPress: () {
-                    //     final _flutterSecureStorage =
-                    //         const FlutterSecureStorage();
-
-                    //     _flutterSecureStorage.delete(key: "userId");
-                    //     // controller.selectedItem = controller.filteredData
-                    //     //     .firstWhere(
-                    //     //         (element) => "${element?.name}" == value[1]);
-                    //     int userId = UserDetails?.id ?? 0;
-                    //     if (userId != 0) {
-                    //       Get.toNamed(Routes.addUser,
-                    //           arguments: {'userId': userId});
-                    //     }
-                    //   },
-                    // ),
-                    // TableActionButton(
-                    //   color: ColorValues.deleteColor,
-                    //   icon: Icons.delete,
-                    //   message: 'Delete',
-                    //   onPress: () {},
-                    // )
                   ])
                 : Text(value.toString()),
           ),
         );
       }).toList(),
-      //   ],
-      // onSelectChanged: (_) {
-      //   final _flutterSecureStorage = const FlutterSecureStorage();
-
-      //   _flutterSecureStorage.delete(key: "UserId");
-      //   Get.toNamed(Routes.viewUserDetail,
-      //       arguments: {'userId': UserDetails?.id});
-      //   //  controller.goToUserDetailsScreen(int.tryParse('${UserDetails?.id}'));
-      // },
     );
   }
 

@@ -421,7 +421,6 @@ class JobDetailsWebView extends GetView<JobDetailsController> {
                                                 border: TableBorder.all(
                                                     color: Color.fromARGB(
                                                         255, 206, 229, 234)),
-
                                                 columns: [
                                                   DataColumn(
                                                       label: Text(
@@ -720,7 +719,12 @@ class JobDetailsWebView extends GetView<JobDetailsController> {
                                 controller.listMrsByJobId!.length > 0
                                     ? Container(
                                         margin: Dimens.edgeInsets20,
-                                        height: Get.height / 3,
+                                        height: ((controller
+                                                        .jobAssociatedModelsList
+                                                        ?.length ??
+                                                    0) *
+                                                40) +
+                                            150,
                                         decoration: BoxDecoration(
                                           border: Border.all(
                                             color: ColorValues
@@ -791,36 +795,58 @@ class JobDetailsWebView extends GetView<JobDetailsController> {
                                                     height: 40,
                                                     cells: record.map((value) {
                                                       return TableViewCell(
-                                                          child: value ==
-                                                                  'Action'
-                                                              ? TableActionButton(
-                                                                  color: ColorValues
-                                                                      .viewColor,
-                                                                  icon: Icons
-                                                                      .remove_red_eye,
-                                                                  message:
-                                                                      "View MRS",
-                                                                  onPress: () {
-                                                                    String
-                                                                        mrsId =
-                                                                        record[
-                                                                            1];
-                                                                    if (mrsId !=
-                                                                        null) {
-                                                                      print({
-                                                                        "mrsId":
-                                                                            mrsId
-                                                                      });
-                                                                      Get.toNamed(
-                                                                          Routes
-                                                                              .mrsViewScreen,
-                                                                          arguments: {
-                                                                            'mrsId':
-                                                                                int.tryParse("$mrsId")
-                                                                          });
-                                                                    }
-                                                                  })
-                                                              : Text(value));
+                                                          child:
+                                                              value == 'Action'
+                                                                  ? Row(
+                                                                      children: [
+                                                                        TableActionButton(
+                                                                            color: ColorValues
+                                                                                .viewColor,
+                                                                            icon: Icons
+                                                                                .remove_red_eye,
+                                                                            message:
+                                                                                "View MRS",
+                                                                            onPress:
+                                                                                () {
+                                                                              final _flutterSecureStorage = const FlutterSecureStorage();
+
+                                                                              _flutterSecureStorage.delete(key: "mrsId");
+                                                                              String mrsId = record[1];
+                                                                              if (mrsId != null) {
+                                                                                print({
+                                                                                  "mrsId": mrsId
+                                                                                });
+                                                                                Get.toNamed(Routes.mrsViewScreen, arguments: {
+                                                                                  'mrsId': int.tryParse("$mrsId")
+                                                                                });
+                                                                              }
+                                                                            }),
+                                                                        TableActionButton(
+                                                                            color: ColorValues
+                                                                                .viewColor,
+                                                                            icon: Icons
+                                                                                .edit,
+                                                                            message:
+                                                                                "Edit MRS",
+                                                                            onPress:
+                                                                                () {
+                                                                              final _flutterSecureStorage = const FlutterSecureStorage();
+
+                                                                              _flutterSecureStorage.delete(key: "mrsId");
+                                                                              String mrsId = record[1];
+                                                                              if (mrsId != null) {
+                                                                                print({
+                                                                                  "mrsId": mrsId
+                                                                                });
+                                                                                Get.toNamed(Routes.editMrs, arguments: {
+                                                                                  'mrsId': int.tryParse("$mrsId")
+                                                                                });
+                                                                              }
+                                                                            })
+                                                                      ],
+                                                                    )
+                                                                  : Text(
+                                                                      value));
                                                     }).toList(),
                                                   );
                                                 }).toList(),

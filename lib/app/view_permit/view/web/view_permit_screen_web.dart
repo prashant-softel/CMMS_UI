@@ -22,7 +22,7 @@ import 'package:scrollable_table_view/scrollable_table_view.dart';
 class ViewPermitWebScreen extends GetView<ViewPermitController> {
   ViewPermitWebScreen({super.key});
   bool valuefirst = false;
-  final ViewPermitController _controller = Get.find();
+  final ViewPermitController controller = Get.find();
 
   final FileUploadController dropzoneController =
       Get.put(FileUploadController());
