@@ -227,6 +227,20 @@ class _JobCardContentWebState extends State<JobCardContentWeb> {
                                                 controller.JobIdFilterText,
                                                 130),
                                             buildDataColumn(
+                                              'PermitId',
+                                              'Permit Id',
+                                              //  ColumnSize.S,
+                                              controller.PermitIdFilterText,
+                                              130,
+                                            ),
+                                            buildDataColumn(
+                                              'PermitNo',
+                                              'Permit No.',
+                                              //  ColumnSize.S,
+                                              controller.PermitNoFilterText,
+                                              130,
+                                            ),
+                                            buildDataColumn(
                                                 "JobAssingedTo",
                                                 "Assinged To", // ColumnSize.L,
                                                 controller
@@ -366,7 +380,15 @@ class JobDataSource extends DataTableSource {
           (Job?.end_time ?? '')
               .toString()
               .toLowerCase()
-              .contains(controller.EndTimeFilterText.value.toLowerCase());
+              .contains(controller.EndTimeFilterText.value.toLowerCase()) &&
+          (Job?.permit_id ?? '')
+              .toString()
+              .toLowerCase()
+              .contains(controller.PermitIdFilterText.value.toLowerCase()) &&
+          (Job?.permit_no ?? '')
+              .toString()
+              .toLowerCase()
+              .contains(controller.PermitNoFilterText.value.toLowerCase());
 
       // (User?.status ?? '')
       //     .toString()
@@ -387,7 +409,9 @@ class JobDataSource extends DataTableSource {
       cells: [
         // '${JobDetails?.id ?? ''}',
         '${JobDetails?.jobCardId ?? ''}',
-        '${JobDetails?.jobId ?? ''}',
+        '${JobDetails?.jobId ?? ''}', '${JobDetails?.permit_id ?? ''}',
+        '${JobDetails?.permit_no ?? ''}',
+
         '${JobDetails?.job_assinged_to ?? ''}',
         '${JobDetails?.description ?? ''}',
         '${JobDetails?.start_time ?? ''}',

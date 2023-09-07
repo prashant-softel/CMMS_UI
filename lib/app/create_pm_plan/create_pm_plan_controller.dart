@@ -17,6 +17,8 @@ class CreatePmPlanController extends GetxController {
   final HomeController homecontroller = Get.find();
 
   RxList<GetAssetDataModel?> assetList = <GetAssetDataModel>[].obs;
+  Rx<List<List<Map<String, String>>>> rowItem =
+      Rx<List<List<Map<String, String>>>>([]);
   Map<String, GetAssetDataModel> dropdownMapperData = {};
   BehaviorSubject<int> _facilityId = BehaviorSubject.seeded(0);
   Stream<int> get facilityId$ => _facilityId.stream;

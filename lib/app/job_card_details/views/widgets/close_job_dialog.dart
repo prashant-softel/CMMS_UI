@@ -1,4 +1,6 @@
+import 'package:cmms/app/controllers/file_upload_controller.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:get/get.dart';
 
 import '../../../theme/color_values.dart';
@@ -57,7 +59,41 @@ class closeJobDialog extends GetView<JobCardDetailsController> {
                       ElevatedButton(
                         style: Styles.yellowElevatedButtonStyle,
                         child: Text("Job Card"),
-                        onPressed: () => controller.goToJobCardScreen(),
+                        onPressed: () async {
+                          Get.back();
+                          try {
+                            Get.put(FileUploadController());
+
+                            final _flutterSecureStorage =
+                                const FlutterSecureStorage();
+
+                            await _flutterSecureStorage.delete(key: "JcId");
+
+                            //   await controller.setJcId();
+
+                            controller.jobCardList.value = await controller
+                                    .jobCardDetailsPresenter
+                                    .getJobCardDetails(
+                                  jobCardId: controller.jobCardId.value,
+                                  isLoading: true,
+                                ) ??
+                                [];
+                            controller.getHistory();
+                            controller.createPlantDetailsTableData();
+
+                            controller.createJobDetailsTableData();
+                            controller.createPermitDetailsTableData();
+                            //  createJcDetailsTableData();
+                            controller.getEmployeeList();
+                            //  getPermitDetails();
+
+                            controller.responsibilityCtrlrs
+                                .add(TextEditingController());
+                            controller.currentIndex.value = -1;
+                          } catch (e) {
+                            print(e);
+                          }
+                        },
                       ),
                       // ElevatedButton(
                       //   style: Styles.yellowElevatedButtonStyle,
