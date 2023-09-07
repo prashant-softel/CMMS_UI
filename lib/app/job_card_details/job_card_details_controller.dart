@@ -656,7 +656,7 @@ class JobCardDetailsController extends GetxController {
 
   goToAddJobScreen() {
     Get.back();
-    Get.toNamed(Routes.jobDetails);
+    Get.offAllNamed(Routes.jobDetails);
   }
 
   void addNewEmployee(EmployeeModel selectedEmployee, String responsibility) {

@@ -689,6 +689,8 @@ class JobDetailsWebView extends GetView<JobDetailsController> {
                                           ],
                                         ),
                                         child: Column(
+                                          crossAxisAlignment:
+                                              CrossAxisAlignment.start,
                                           children: [
                                             Padding(
                                               padding:
@@ -765,11 +767,12 @@ class JobDetailsWebView extends GetView<JobDetailsController> {
                                                   "Job Card ID",
                                                   "Mrs ID",
                                                   "Mrs Items List ",
+                                                  "Status",
                                                   "Action",
                                                 ].map((column) {
                                                   return TableViewColumn(
                                                     label: column,
-                                                    minWidth: Get.width * 0.23,
+                                                    minWidth: Get.width * 0.15,
                                                   );
                                                 }).toList(),
                                                 rows: [
@@ -786,6 +789,7 @@ class JobDetailsWebView extends GetView<JobDetailsController> {
                                                         '${getJobsLinkedMrsList?.jobCardId}',
                                                         '${getJobsLinkedMrsList?.mrsId}',
                                                         '${getJobsLinkedMrsList?.mrsItems ?? ''}',
+                                                        '${getJobsLinkedMrsList?.status_short ?? ''}',
                                                         'Action',
                                                       ];
                                                     },
@@ -823,7 +827,7 @@ class JobDetailsWebView extends GetView<JobDetailsController> {
                                                                             }),
                                                                         TableActionButton(
                                                                             color: ColorValues
-                                                                                .viewColor,
+                                                                                .editColor,
                                                                             icon: Icons
                                                                                 .edit,
                                                                             message:

@@ -489,7 +489,9 @@ class JobDataSource extends DataTableSource {
                         //         : jobDetails?.status == 103
                         //             ? Text('${jobDetails?.latestJCStatusShort ?? ''}')
                         //    :
-                        Text('${jobDetails?.latestJCStatusShort ?? ''}'),
+                        Text(
+                            //'${jobDetails?.status ?? ''}
+                            ' ${jobDetails?.latestJCStatusShort ?? ''}'),
               ),
               Text(
                 '${controller.formatDate(jobDetails?.jobDate?.toString() ?? '')}',

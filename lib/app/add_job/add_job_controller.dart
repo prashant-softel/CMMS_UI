@@ -178,6 +178,8 @@ class AddJobController extends GetxController {
       workTypeIds: workTypeIds,
     );
     toolsRequiredToWorkTypeList.value = list ?? <ToolsModel>[];
+    // String str3 = toolsRequiredToWorkTypeList.join("  ");
+
     update(['toolsRequiredToWorkTypeList']);
   }
 

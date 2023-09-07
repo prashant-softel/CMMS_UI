@@ -32,6 +32,9 @@ class JobCardListController extends GetxController {
   RxString DescriptionFilterText = ''.obs;
   RxString StartTimeFilterText = ''.obs;
   RxString EndTimeFilterText = ''.obs;
+  RxString PermitIdFilterText = ''.obs;
+  RxString PermitNoFilterText = ''.obs;
+
   RxString ActionFilterText = ''.obs;
 
   Rx<int> jobId = 0.obs;
