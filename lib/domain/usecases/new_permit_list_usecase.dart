@@ -43,19 +43,19 @@ class NewPermitListUsecase {
     );
   }
 
-  Future<void> permitApprovedButton({
-    String? comment,
-    String? id,
-    String? ptwStatus,
-    bool? isLoading,
-  }) async {
-    await repository.permitApprovedButton(
-      comment,
-      id,
-      ptwStatus,
-      isLoading,
-    );
-  }
+  // Future<void> permitApprovedButton({
+  //   String? comment,
+  //   String? id,
+  //   String? ptwStatus,
+  //   bool? isLoading,
+  // }) async {
+  //   await repository.permitApprovedButton(
+  //     comment,
+  //     id,
+  //     ptwStatus,
+  //     isLoading,
+  //   );
+  // }
 
 
    Future<void> permitCancelByIssuerButton({
@@ -82,19 +82,19 @@ class NewPermitListUsecase {
     );
   }
 
-  Future<void> permitCancelByApproverButton({
-    String? comment,
-    String? id,
-    String? ptwStatus,
-    bool? isLoading,
-  }) async {
-    await repository.permitCancelByApproverButton(
-      comment,
-      id,
-      ptwStatus,
-      isLoading,
-    );
-  }
+  // Future<void> permitCancelByApproverButton({
+  //   String? comment,
+  //   String? id,
+  //   String? ptwStatus,
+  //   bool? isLoading,
+  // }) async {
+  //   await repository.permitCancelByApproverButton(
+  //     comment,
+  //     id,
+  //     ptwStatus,
+  //     isLoading,
+  //   );
+  // }
 
    Future<void> permitExtendButton({
     String? comment,
@@ -123,17 +123,17 @@ class NewPermitListUsecase {
   }
 
 
-   Future<void> permitRejectButton({
-    String? comment,
-    String? id,
-    bool? isLoading,
-  }) async {
-    await repository.permitRejectButton(
-      comment,
-      id,
-      isLoading,
-    );
-  }
+  //  Future<void> permitRejectButton({
+  //   String? comment,
+  //   String? id,
+  //   bool? isLoading,
+  // }) async {
+  //   await repository.permitRejectButton(
+  //     comment,
+  //     id,
+  //     isLoading,
+  //   );
+  // }
 
   // Future<List<NewPermitListModel>> getNewPermitList({
   //   required bool isLoading,

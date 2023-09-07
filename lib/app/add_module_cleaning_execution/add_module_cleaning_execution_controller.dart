@@ -92,6 +92,16 @@ RxList<InventoryCategoryModel?> equipmentCategoryList =
   var startedAtDateTimeCtrlrWeb = TextEditingController();
   var plannedAtDateTimeCtrlrWeb = TextEditingController();
 
+
+  ///Checkbox
+  var isChecked = false.obs; // This makes `isChecked` observable
+  void toggleCheckbox() => isChecked.value = !isChecked.value;
+
+  // RxList<bool> isCheckedList = <bool>[].obs;
+  // void toggleCheckbox(int index) {
+  //   isCheckedList[index] = !isCheckedList[index];
+  // }
+
   
 
   ///
@@ -129,6 +139,8 @@ RxList<InventoryCategoryModel?> equipmentCategoryList =
   dynamic planId = [];
   @override
   void onInit() async {
+
+    //  isCheckedList.assignAll(List.generate(equipmentList.length, (index) => false));
 
     data = Get.arguments;
     print('Data Id ${data['id']}');

@@ -111,7 +111,7 @@ class AbandoneScheduleExecutionDialog extends GetView {
             ElevatedButton(
               style: Styles.greenElevatedButtonStyle,
               onPressed: () {
-                // _controller.abandonScheduleExecutionButton(id:id);
+                _controller.abandonScheduleExecutionButton(id:id);
                 Get.back();
               },
               child: const Text('Abandone Schedule Execution'),

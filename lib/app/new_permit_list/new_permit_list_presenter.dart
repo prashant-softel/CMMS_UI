@@ -45,18 +45,18 @@ class NewPermitListPresenter {
         isLoading: isLoading ?? false,
       );
 
-  Future<void> permitApprovedButton({
-    String? comment,
-    String? id,
-    String? ptwStatus,
-    bool? isLoading,
-  }) async =>
-      await newPermitListUsecase.permitApprovedButton(
-        comment: comment,
-        id: id,
-        ptwStatus: ptwStatus,
-        isLoading: isLoading ?? false,
-      );
+  // Future<void> permitApprovedButton({
+  //   String? comment,
+  //   String? id,
+  //   String? ptwStatus,
+  //   bool? isLoading,
+  // }) async =>
+  //     await newPermitListUsecase.permitApprovedButton(
+  //       comment: comment,
+  //       id: id,
+  //       ptwStatus: ptwStatus,
+  //       isLoading: isLoading ?? false,
+  //     );
 
   Future<void> permitCancelByIssuerButton({
     String? comment,
@@ -80,18 +80,18 @@ class NewPermitListPresenter {
         isLoading: isLoading ?? false,
       );
 
-  Future<void> permitCancelByApproverButton({
-    String? comment,
-    String? id,
-    String? ptwStatus,
-    bool? isLoading,
-  }) async =>
-      await newPermitListUsecase.permitCancelByApproverButton(
-        comment: comment,
-        id: id,
-        ptwStatus: ptwStatus,
-        isLoading: isLoading ?? false,
-      );
+  // Future<void> permitCancelByApproverButton({
+  //   String? comment,
+  //   String? id,
+  //   String? ptwStatus,
+  //   bool? isLoading,
+  // }) async =>
+  //     await newPermitListUsecase.permitCancelByApproverButton(
+  //       comment: comment,
+  //       id: id,
+  //       ptwStatus: ptwStatus,
+  //       isLoading: isLoading ?? false,
+  //     );
 
   Future<void> permitExtendButton({
     String? comment,
@@ -117,16 +117,16 @@ class NewPermitListPresenter {
         isLoading: isLoading ?? false,
       );
 
-  Future<void> permitRejectButton({
-    String? comment,
-    String? id,
-    bool? isLoading,
-  }) async =>
-      await newPermitListUsecase.permitRejectButton(
-        comment: comment,
-        id: id,
-        isLoading: isLoading ?? false,
-      );
+  // Future<void> permitRejectButton({
+  //   String? comment,
+  //   String? id,
+  //   bool? isLoading,
+  // }) async =>
+  //     await newPermitListUsecase.permitRejectButton(
+  //       comment: comment,
+  //       id: id,
+  //       isLoading: isLoading ?? false,
+  //     );
 
   // Future<List<NewPermitListModel>>getNewPermitList({
   //   required bool isLoading,

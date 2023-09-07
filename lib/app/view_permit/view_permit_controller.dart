@@ -279,6 +279,13 @@ class ViewPermitController extends GetxController {
     rowsPerPage: 10,
   );
 
+  TextEditingController approveCommentTextFieldCtrlr = TextEditingController();
+  TextEditingController rejectCommentTextFieldCtrlr = TextEditingController();
+  TextEditingController cancelCommentByApproverTextFieldCtrlr =
+      TextEditingController();
+
+
+
   RxList<InventoryDetailModel?>? inventoryDetailList =
       <InventoryDetailModel?>[].obs;
   InventoryDetailModel? inventoryDetailListModel;
@@ -350,6 +357,45 @@ class ViewPermitController extends GetxController {
         getBlocksList(selectedFacilityId!);
       }
     }
+  }
+
+
+  Future<void> permitApprovedButton(
+      {String? permitId, String? ptwStatus}) async {
+    String _approveComment = approveCommentTextFieldCtrlr.text.trim();
+
+    final _permitApprovedBtn =
+        await viewPermitPresenter.permitApprovedButton(
+            comment: _approveComment, id: permitId, ptwStatus: ptwStatus);
+    // showAlertPermitApproveDialog();
+    print('Approved Data:${_approveComment}');
+    print('Approved Data:${permitId}');
+  }
+
+
+   Future<void> permitRejectButton({String? permitId}) async {
+    String _rejectComment = rejectCommentTextFieldCtrlr.text.trim();
+
+    final _permitRejectBtn = await viewPermitPresenter.permitRejectButton(
+      comment: _rejectComment,
+      id: permitId,
+    );
+    // showAlertPermitApproveDialog();
+    print('Reject Button Data:${_rejectComment}');
+    print('Reject Button Data:${permitId}');
+  }
+
+
+  Future<void> permitCancelByApproverButton(
+      {String? permitId, String? ptwStatus}) async {
+    String _cancelComment = cancelCommentByApproverTextFieldCtrlr.text.trim();
+
+    final _permitCancelByApproverBtn =
+        await viewPermitPresenter.permitCancelByApproverButton(
+            comment: _cancelComment, id: permitId, ptwStatus: ptwStatus);
+    // showAlertPermitApproveDialog();
+    print('Cancel Button By Approver Data:${_cancelComment}');
+    print('Cancel Button By Approver Data:${permitId}');
   }
 
   Future<void> getPermitHistory({required int permitId}) async {
