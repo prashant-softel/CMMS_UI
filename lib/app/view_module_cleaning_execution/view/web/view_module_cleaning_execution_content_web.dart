@@ -79,7 +79,7 @@ class ViewModuleCleaningExecutionContentWeb
                   ),
                   SizedBox(
                     // width: MediaQuery.of(context).size.width / 1,
-                    height: MediaQuery.of(context).size.height / 0.8,
+                    // height: MediaQuery.of(context).size.height / 0.8,
                     child: Card(
                       // color: Colors.lightBlue.shade50,
                       child: Wrap(
@@ -201,16 +201,21 @@ class ViewModuleCleaningExecutionContentWeb
 
                                       Dimens.boxHeight50,
 
-                                      ///Escalation Matrix Roles
+                                      ///Schedule Execution
                                       SizedBox(
-                                        height: 230,
+                                        height:  ((controller
+                                                                  .listSchedules
+                                                                  ?.length ??
+                                                              0) *
+                                                          40) +
+                                                      220,
                                         width: MediaQuery.of(context)
                                                 .size
                                                 .width /
                                             1.45,
                                         child: Center(
                                           child: Container(
-                                            margin: Dimens.edgeInsets16,
+                                             margin: Dimens.edgeInsets16,
                                             height: Get.height,
                                             decoration: BoxDecoration(
                                               border: Border.all(
@@ -244,11 +249,11 @@ class ViewModuleCleaningExecutionContentWeb
                                                   ),
                                                 ],
                                               ),
-                                            ),
-                                             Divider(
+                                              ),
+                                               Divider(
                                               color:
                                                   ColorValues.greyLightColour,
-                                            ),
+                                              ),
                                                   Dimens.boxHeight10,
                                                   Wrap(
                                                     children: [
@@ -276,150 +281,151 @@ class ViewModuleCleaningExecutionContentWeb
                                                                     Expanded(
                                                                       child: //
                                                                           ScrollableTableView(
-                                                                        // paginationController: controller.equipmentNamepaginationController,
-                                                                        columns:
-                                                                            [
-                                                                          "Schedule Id",
-                                                                          "Execution Id",
-                                                                          "Days",
-                                                                          "Scheduled Module",
-                                                                          "Cleaned",
-                                                                          "Abandoned",
-                                                                          "Pending",
-                                                                          "Type",
-                                                                          "Water Used",
-                                                                          "Start Date",
-                                                                          "End Date",
+                                                                                 // paginationController: controller.equipmentNamepaginationController,
+                                                                               columns:
+                                                                              [
+                                                                            "Schedule Id",
+                                                                            "Execution Id",
+                                                                            "Days",
+                                                                            "Scheduled Module",
+                                                                            "Cleaned",
+                                                                            "Abandoned",
+                                                                            "Pending",
+                                                                            "Type",
+                                                                            "Water Used",
+                                                                            "Start Date",
+                                                                            "End Date",
                                                                           "Remark",
-                                                                          "Status",
-                                                                          'Execution'.tr,
-                                                                        ].map((column) {
-                                                                          return TableViewColumn(
+                                                                            "Status",
+                                                                            'Execution'.tr,
+                                                                              ].map((column) {
+                                                                            return TableViewColumn(
                                                                             minWidth: Get.width * 0.1,
-                                                                            label: column == "Schedule Id"
-                                                                                ? "Schedule Id"
-                                                                                :column == "Execution Id"
-                                                                                    ? "Execution Id"
-                                                                                :column == "Days"
-                                                                                    ? "Days"
-                                                                                : column == "Scheduled Module"
-                                                                                    ? "Scheduled Module"
-                                                                                : column == "Cleaned"
-                                                                                    ? "Cleaned"
-                                                                                : column == "Abandoned"
-                                                                                    ? "Abandoned"
-                                                                                : column == "Pending"
-                                                                                    ? "Pending"
-                                                                                : column == "Type"
-                                                                                    ? "Type"
-                                                                                : column == "Water Used"
-                                                                                    ? "Water Used"
-                                                                                : column == "Start Date"
-                                                                                    ? "Start Date"
-                                                                                : column == "End Date"
-                                                                                    ? "End Date"
+                                                                              label: column == "Schedule Id"
+                                                                                  ? "Schedule Id"
+                                                                                  :column == "Execution Id"
+                                                                                      ? "Execution Id"
+                                                                                  :column == "Days"
+                                                                                      ? "Days"
+                                                                                  : column == "Scheduled Module"
+                                                                                      ? "Scheduled Module"
+                                                                                  : column == "Cleaned"
+                                                                                      ? "Cleaned"
+                                                                                  : column == "Abandoned"
+                                                                                      ? "Abandoned"
+                                                                                  : column == "Pending"
+                                                                                      ? "Pending"
+                                                                                  : column == "Type"
+                                                                                      ? "Type"
+                                                                                  : column == "Water Used"
+                                                                                      ? "Water Used"
+                                                                                  : column == "Start Date"
+                                                                                      ? "Start Date"
+                                                                                  : column == "End Date"
+                                                                                      ? "End Date"
                                                                                 : column == "Remark"
                                                                                     ? "Remark"
-                                                                                 : column == "Status"
-                                                                                    ? "Status"
-                                                                                    : "Execution",
-                                                                          );
-                                                                        }).toList(),
-                                                                        rows: //
-                                                                            [
-                                                                          ...List.generate(
-                                                                            ///controller.selectedEquipmentNameIdList
-                                                                            controller.listSchedules?.length ?? 0,
-
-                                                                            (index) {
-                                                                              var schedulesDetails = controller.listSchedules![index];
-
-                                                                              //_jobId = jobDetails?.id;
-
-                                                                              // controller.id.value = employeeNameDetails?.id ?? 0;
-                                                                              // print('schedule5:${controller}');
-                                                                              return [
-                                                                                '${schedulesDetails?.scheduleId ?? ''}',
-                                                                                '${schedulesDetails?.executionId ?? ''}',
-                                                                                '${schedulesDetails?.cleaningDay ?? ''}',
-                                                                                '${schedulesDetails?.scheduledModules ?? ''}',
-                                                                                '${schedulesDetails?.cleanedModules ?? ''}',
-                                                                                '${schedulesDetails?.abandonedModules ?? ''}',
-                                                                                '${schedulesDetails?.pendingModules ?? ''}',
-                                                                                '${schedulesDetails?.cleaningTypeName ?? ''}',
-                                                                                '${schedulesDetails?.waterUsed ?? ''}',
-                                                                                '${schedulesDetails?.execution_date ?? ''}',
-                                                                                '${schedulesDetails?.execution_date ?? ''}',
+                                                                                   : column == "Status"
+                                                                                      ? "Status"
+                                                                                      : "Execution",
+                                                                            );
+                                                                                }).toList(),
+                                                                               rows: //
+                                                                              [
+                                                                            ...List.generate(
+                                                                              ///controller.selectedEquipmentNameIdList
+                                                                              controller.listSchedules?.length ?? 0,
+                                                                          
+                                                                              (index) {
+                                                                                var schedulesDetails = controller.listSchedules![index];
+                                                                          
+                                                                                //_jobId = jobDetails?.id;
+                                                                          
+                                                                                // controller.id.value = employeeNameDetails?.id ?? 0;
+                                                                                // print('schedule5:${controller}');
+                                                                                return [
+                                                                                  '${schedulesDetails?.scheduleId ?? ''}',
+                                                                                  '${schedulesDetails?.executionId ?? ''}',
+                                                                                  '${schedulesDetails?.cleaningDay ?? ''}',
+                                                                                  '${schedulesDetails?.scheduledModules ?? ''}',
+                                                                                  '${schedulesDetails?.cleanedModules ?? ''}',
+                                                                                  '${schedulesDetails?.abandonedModules ?? ''}',
+                                                                                  '${schedulesDetails?.pendingModules ?? ''}',
+                                                                                  '${schedulesDetails?.cleaningTypeName ?? ''}',
+                                                                                  '${schedulesDetails?.waterUsed ?? ''}',
+                                                                                  '${schedulesDetails?.execution_date ?? ''}',
+                                                                                  '${schedulesDetails?.execution_date ?? ''}',
                                                                                 '${schedulesDetails?.remark ?? ''}',
-                                                                                '${schedulesDetails?.status_short ?? ''}',
-                                                                                'Execution'
-                                                                              ];
-                                                                            },
+                                                                                  '${schedulesDetails?.status_short ?? ''}',
+                                                                                  'Execution'
+                                                                                ];
+                                                                              },
+                                                                            ),
+                                                                             ].map((_record) {
+                                                                            return TableViewRow(
+                                                                                onTap: () => {
+                                                                                      print('ZERO = ${_record[0]}')
+                                                                                    },
+                                                                                height: 25,
+                                                                                cells: _record.map((value) {
+                                                                                  return TableViewCell(
+                                                                                    //key: ,
+                                                                                    child: (value == 'Execution')
+                                                                                        ? Wrap(
+                                                                                            children: [
+                                                                                              TableActionButton(
+                                                                                                color: ColorValues.appDarkBlueColor,
+                                                                                                icon: Icons.remove_red_eye_outlined,
+                                                                                                message: 'View',
+                                                                                                onPress: () {
+                                                                                                  // controller.showNewPermitListDetails(
+                                                                                                  //     controller.permitId.value);
+                                                                                                },
+                                                                                              ),
+                                                                                              // TableActionButton(
+                                                                                              //   color: ColorValues.purpleColor,
+                                                                                              //   icon: Icons.add,
+                                                                                              //   label: 'Job Card',
+                                                                                              //   onPress: () {
+                                                                                              //     // controller.goToJobCardScreen(
+                                                                                              //     //   int.tryParse(_newPermitList[0]),
+                                                                                              //     // );
+                                                                                              //   },
+                                                                                              // ),
+                                                                                              // TableActionButton(
+                                                                                              //   color: Colors.blue,
+                                                                                              //   icon: Icons.edit,
+                                                                                              //   label: 'Edit PTW',
+                                                                                              //   onPress: () {},
+                                                                                              // ),
+                                                                                              // TableActionButton(
+                                                                                              //   color: Colors.green,
+                                                                                              //   icon: Icons.visibility,
+                                                                                              //   label: 'Approve Request',
+                                                                                              //   onPress: () {},
+                                                                                              // ),
+                                                                                              // TableActionButton(
+                                                                                              //   color: Colors.red,
+                                                                                              //   icon: Icons.visibility,
+                                                                                              //   label: 'Reject Request',
+                                                                                              //   onPress: () {},
+                                                                                              // ),
+                                                                                            ],
+                                                                                          )
+                                                                                        : Text(value.toString()),
+                                                                                  );
+                                                                                }).toList());
+                                                                                                                                                }).toList(),
+                                                                                                                                              ),
                                                                           ),
-                                                                        ].map((_record) {
-                                                                          return TableViewRow(
-                                                                              onTap: () => {
-                                                                                    print('ZERO = ${_record[0]}')
-                                                                                  },
-                                                                              height: 25,
-                                                                              cells: _record.map((value) {
-                                                                                return TableViewCell(
-                                                                                  //key: ,
-                                                                                  child: (value == 'Execution')
-                                                                                      ? Wrap(
-                                                                                          children: [
-                                                                                            TableActionButton(
-                                                                                              color: ColorValues.appDarkBlueColor,
-                                                                                              icon: Icons.remove_red_eye_outlined,
-                                                                                              message: 'View',
-                                                                                              onPress: () {
-                                                                                                // controller.showNewPermitListDetails(
-                                                                                                //     controller.permitId.value);
-                                                                                              },
-                                                                                            ),
-                                                                                            // TableActionButton(
-                                                                                            //   color: ColorValues.purpleColor,
-                                                                                            //   icon: Icons.add,
-                                                                                            //   label: 'Job Card',
-                                                                                            //   onPress: () {
-                                                                                            //     // controller.goToJobCardScreen(
-                                                                                            //     //   int.tryParse(_newPermitList[0]),
-                                                                                            //     // );
-                                                                                            //   },
-                                                                                            // ),
-                                                                                            // TableActionButton(
-                                                                                            //   color: Colors.blue,
-                                                                                            //   icon: Icons.edit,
-                                                                                            //   label: 'Edit PTW',
-                                                                                            //   onPress: () {},
-                                                                                            // ),
-                                                                                            // TableActionButton(
-                                                                                            //   color: Colors.green,
-                                                                                            //   icon: Icons.visibility,
-                                                                                            //   label: 'Approve Request',
-                                                                                            //   onPress: () {},
-                                                                                            // ),
-                                                                                            // TableActionButton(
-                                                                                            //   color: Colors.red,
-                                                                                            //   icon: Icons.visibility,
-                                                                                            //   label: 'Reject Request',
-                                                                                            //   onPress: () {},
-                                                                                            // ),
-                                                                                          ],
-                                                                                        )
-                                                                                      : Text(value.toString()),
-                                                                                );
-                                                                              }).toList());
-                                                                        }).toList(),
-                                                                      ),
-                                                                    ),
-
+                                                                    
+                                            
                                                                     /// PAGINATION
                                                                    
                                                                   ]),
                                                             ),
                                                           ),
-
+                                            
                                                           // SizedBox(
                                                           //   width: MediaQuery.of(context)
                                                           //           .size
@@ -454,7 +460,12 @@ class ViewModuleCleaningExecutionContentWeb
                                       ///MC Execution History
                                       Container(
                                         margin: Dimens.edgeInsets20,
-                                        height: 200,
+                                        height: ((controller
+                                                                  .historyList
+                                                                  ?.length ??
+                                                              0) *
+                                                          50) +
+                                                      120,
                                         width: MediaQuery.of(context)
                                                 .size
                                                 .width /
@@ -494,50 +505,60 @@ class ViewModuleCleaningExecutionContentWeb
                                                   ColorValues.greyLightColour,
                                             ),
                                             Expanded(
-                                              child: ScrollableTableView(
-                                                columns: [
-                                                  "Time Stamp",
-                                                  "Posted By",
-                                                  "Comment",
-                                                  "Location",
-                                                  "Status",
-                                                ].map((column) {
-                                                  return TableViewColumn(
-                                                    label: column,
-                                                    minWidth:
-                                                        Get.width * 0.15,
-                                                  );
-                                                }).toList(),
-                                                rows: [
-                                                  ...List.generate(
-                                                    controller.historyList
-                                                            ?.length ??
-                                                        0,
-                                                    (index) {
-                                                      var getHistoryListDetails =
-                                                          controller
-                                                                  .historyList?[
-                                                              index];
-                                                      return [
-                                                        '${getHistoryListDetails?.createdAt}',
-                                                        '${getHistoryListDetails?.createdByName ?? ''}',
-                                                        '${getHistoryListDetails?.comment ?? ''}',
-                                                        '--',
-                                                        '${getHistoryListDetails?.status_name ?? ''}',
-                                                      ];
-                                                    },
-                                                  ),
-                                                ].map((record) {
-                                                  return TableViewRow(
-                                                    height: 30,
-                                                    cells:
-                                                        record.map((value) {
-                                                      return TableViewCell(
-                                                        child: Text(value),
-                                                      );
-                                                    }).toList(),
-                                                  );
-                                                }).toList(),
+                                              child: Theme(
+                                                 data: ThemeData(
+                                                              scrollbarTheme: ScrollbarThemeData(
+                                                                  isAlwaysShown:
+                                                                      false,
+                                                                  thumbColor: MaterialStateProperty.all<
+                                                                          Color>(
+                                                                      Colors
+                                                                          .transparent))),
+                                                child: ScrollableTableView(
+                                                  columns: [
+                                                    "Time Stamp",
+                                                    "Posted By",
+                                                    "Comment",
+                                                    "Location",
+                                                    "Status",
+                                                  ].map((column) {
+                                                    return TableViewColumn(
+                                                      label: column,
+                                                      minWidth:
+                                                      Get.width * 0.13,
+                                                    );
+                                                  }).toList(),
+                                                  rows: [
+                                                    ...List.generate(
+                                                      controller.historyList
+                                                              ?.length ??
+                                                          0,
+                                                      (index) {
+                                                        var getHistoryListDetails =
+                                                            controller
+                                                                    .historyList?[
+                                                                index];
+                                                        return [
+                                                          '${getHistoryListDetails?.createdAt}',
+                                                          '${getHistoryListDetails?.createdByName ?? ''}',
+                                                          '${getHistoryListDetails?.comment ?? ''}',
+                                                          '--',
+                                                          '${getHistoryListDetails?.status_name ?? ''}',
+                                                        ];
+                                                      },
+                                                    ),
+                                                  ].map((record) {
+                                                    return TableViewRow(
+                                                      height: 45,
+                                                      cells:
+                                                          record.map((value) {
+                                                        return TableViewCell(
+                                                          child: Text(value),
+                                                        );
+                                                      }).toList(),
+                                                    );
+                                                  }).toList(),
+                                                ),
                                               ),
                                             ),
                                           ],

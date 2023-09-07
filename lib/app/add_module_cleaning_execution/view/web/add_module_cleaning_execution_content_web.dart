@@ -546,14 +546,14 @@ class AddModuleCleaningExecutionContentWeb
                                                                                                                             )
                                                                                                                           : Container(),
 
-                                                                                                                      controller.listSchedules!
-                                                                                                                                  .firstWhere(
-                                                                                                                                    (e) => "${e?.status_short}" == e?.status_short,
-                                                                                                                                    orElse: () => Schedules(status_short: ""),
-                                                                                                                                  )
-                                                                                                                                  ?.status_short ==
-                                                                                                                              "In Progress"
-                                                                                                                          ?
+                                                                                                                      // controller.listSchedules!
+                                                                                                                      //             .firstWhere(
+                                                                                                                      //               (e) => "${e?.status_short}" == e?.status_short,
+                                                                                                                      //               orElse: () => Schedules(status_short: ""),
+                                                                                                                      //             )
+                                                                                                                      //             ?.status_short ==
+                                                                                                                      //         "In Progress"
+                                                                                                                      //     ?
                                                                                                                       TableActionButton(
                                                                                                                         // label: 'Abandon',
                                                                                                                         onPress: () {
@@ -565,8 +565,8 @@ class AddModuleCleaningExecutionContentWeb
                                                                                                                         color: ColorValues.appLightBlueColor,
                                                                                                                         icon: Icons.add,
                                                                                                                         message: 'Update',
-                                                                                                                      )
-                                                                                                                       : Container(),
+                                                                                                                      ),
+                                                                                                                      //  : Container(),
 
                                                                                                                       ///Abandon
                                                                                                                       TableActionButton(

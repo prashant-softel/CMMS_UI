@@ -69,6 +69,39 @@ class NewPermitListController extends GetxController {
 
   int userId = varUserAccessModel.value.user_id ?? 0;
 
+    // Add variables to store filter text for each column
+  RxString permitIdFilterText = ''.obs;
+  RxString descriptionFilterText = ''.obs;
+  RxString permitTypeNameFilterText = ''.obs;
+  RxString equipment_categoriesFilterText = ''.obs;
+  RxString workingAreaNameFilterText = ''.obs;
+  RxString requestByNameFilterText = ''.obs;
+  RxString approvedByNameFilterText = ''.obs;
+  RxString approvedDatetimeFilterText = ''.obs;
+  RxString current_status_shortFilterText = ''.obs;
+
+
+  String formatDate(String? inputDateTime) {
+    ///
+    String formattedDateTimeString = '';
+
+    if (inputDateTime != null &&
+        inputDateTime.isNotEmpty &&
+        inputDateTime != "null")
+    // Parse the input DateTime string
+    {
+      DateFormat inputFormat = DateFormat("yyyy-MM-dd hh:mm:ss.SSS");
+      DateTime parsedDateTime = inputFormat.parse(inputDateTime);
+
+      // Format the parsed DateTime to the desired format
+      DateFormat outputFormat = DateFormat("yyyy-MM-dd hh:mm");
+      formattedDateTimeString = outputFormat.format(parsedDateTime);
+    }
+
+    return formattedDateTimeString;
+  }
+ 
+
   ///Buttons Cancel, Close Reject
   TextEditingController cancelCommentTextFieldCtrlr = TextEditingController();
   TextEditingController closeCommentTextFieldCtrlr = TextEditingController();

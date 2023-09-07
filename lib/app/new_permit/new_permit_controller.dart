@@ -369,6 +369,7 @@ class NewPermitController extends GetxController {
 
         if (jobModel != null) {
           loadPermitDetails(jobModel);
+          
         }
       }
 
@@ -1367,6 +1368,12 @@ class NewPermitController extends GetxController {
     assignToTextCtrlr.text = jobModel.assignedName;
     breakdownTimeTextCtrlr.text =
         '${DateFormat('yyyy-MM-dd HH:mm').format(DateTime.parse('${jobModel.breakdownTime}')).toString()}';
+
+    // RxList<JobDetailsModel> jobDataList = 
+    // filteredEmployeeNameList = jobModel.assignedId;
+    // filteredEmployeeNameList = jobModel.assignedName;
+    // filteredEmployeeNameList.add(EmployeeListModel(id: jobModel.assignedId,name: "${jobModel.assignedName}"));
+
   }
 
   Future<void> viewNewPermitList({int? permitId}) async {
