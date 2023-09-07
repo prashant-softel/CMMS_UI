@@ -59,8 +59,8 @@ abstract class ColorValues {
   static const Color pendingStatusColor = appYellowColor;
   static const Color approveStatusColor = appGreenColor;
   static const Color rejectedStatusColor = appRedColor;
-  static const Color waitingForApproveStatusColor = appGreenColor;
-  static const Color assignStatusColor = appRedColor;
+  static const Color waitingForApproveStatusColor = appRedColor;
+  static const Color assignStatusColor = appGreenColor;
   static const Color createdStatusColor = appGreenColor;
   static const Color linktopermitStatusColor = appDarkBlueColor;
   static const Color submitStatusColor = appGreenColor;

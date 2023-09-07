@@ -307,105 +307,105 @@ buildPrintableData(controller) => Obx(
                           ],
                         ),
                       ),
-                      Container(
-                        height: 300,
-                        margin: Dimens.edgeInsets20,
-                        decoration: BoxDecoration(
-                          border: Border.all(
-                            color: ColorValues.lightGreyColorWithOpacity35,
-                            width: 1,
-                          ),
-                          boxShadow: [
-                            BoxShadow(
-                              color: ColorValues.appBlueBackgroundColor,
-                              spreadRadius: 2,
-                              blurRadius: 5,
-                              offset: Offset(0, 2),
-                            ),
-                          ],
-                        ),
-                        child: Column(
-                          children: [
-                            Padding(
-                              padding: const EdgeInsets.all(10.0),
-                              child: Row(
-                                children: [
-                                  Text(
-                                    "MRS History",
-                                    style: Styles.blue700,
-                                  ),
-                                ],
-                              ),
-                            ),
-                            Divider(
-                              color: ColorValues.greyLightColour,
-                            ),
-                            Expanded(
-                              child: ScrollableTableView(
-                                columns: [
-                                  "Time Stamp",
-                                  "Posted By",
-                                  "Comment",
-                                  "Location",
-                                  "Status",
-                                ].map((column) {
-                                  return TableViewColumn(
-                                    label: column,
-                                    minWidth: Get.width * 0.15,
-                                  );
-                                }).toList(),
-                                rows: [
-                                  [
-                                    "2023-09-08",
-                                    "Sujit Kumar",
-                                    "Check Approval",
-                                    "--",
-                                    "Approve",
-                                  ],
-                                  [
-                                    "2023-09-08",
-                                    "Sujit Kumar",
-                                    "Check Approval",
-                                    "--",
-                                    "Approve",
-                                  ],
-                                  [
-                                    "2023-09-08",
-                                    "Sujit Kumar",
-                                    "Check Approval",
-                                    "--",
-                                    "Approve",
-                                  ],
-                                ].map((record) {
-                                  return TableViewRow(
-                                    height: 90,
-                                    cells: record.map((value) {
-                                      return TableViewCell(
-                                        child: Text(value),
-                                      );
-                                    }).toList(),
-                                  );
-                                }).toList(),
-                              ),
-                            ),
-                          ],
-                        ),
-                      ),
-                      Dimens.boxHeight25,
-                      Container(
-                        margin: EdgeInsets.only(bottom: 30, top: 20),
-                        child: Container(
-                          height: 35,
-                          width: (Get.width * .2) - 170,
-                          child: CustomElevatedButton(
-                            backgroundColor: ColorValues.printColor,
-                            text: "Print",
-                            onPressed: () {
-                              controller.printDoc(controller);
-                            },
-                          ),
-                        ),
-                      )
+                      // Container(
+                      //   height: 300,
+                      //   margin: Dimens.edgeInsets20,
+                      //   decoration: BoxDecoration(
+                      //     border: Border.all(
+                      //       color: ColorValues.lightGreyColorWithOpacity35,
+                      //       width: 1,
+                      //     ),
+                      //     boxShadow: [
+                      //       BoxShadow(
+                      //         color: ColorValues.appBlueBackgroundColor,
+                      //         spreadRadius: 2,
+                      //         blurRadius: 5,
+                      //         offset: Offset(0, 2),
+                      //       ),
+                      //     ],
+                      //   ),
+                      //   child: Column(
+                      //     children: [
+                      //       Padding(
+                      //         padding: const EdgeInsets.all(10.0),
+                      //         child: Row(
+                      //           children: [
+                      //             Text(
+                      //               "MRS History",
+                      //               style: Styles.blue700,
+                      //             ),
+                      //           ],
+                      //         ),
+                      //       ),
+                      //       Divider(
+                      //         color: ColorValues.greyLightColour,
+                      //       ),
+                      //       Expanded(
+                      //         child: ScrollableTableView(
+                      //           columns: [
+                      //             "Time Stamp",
+                      //             "Posted By",
+                      //             "Comment",
+                      //             "Location",
+                      //             "Status",
+                      //           ].map((column) {
+                      //             return TableViewColumn(
+                      //               label: column,
+                      //               minWidth: Get.width * 0.15,
+                      //             );
+                      //           }).toList(),
+                      //           rows: [
+                      //             [
+                      //               "2023-09-08",
+                      //               "Sujit Kumar",
+                      //               "Check Approval",
+                      //               "--",
+                      //               "Approve",
+                      //             ],
+                      //             [
+                      //               "2023-09-08",
+                      //               "Sujit Kumar",
+                      //               "Check Approval",
+                      //               "--",
+                      //               "Approve",
+                      //             ],
+                      //             [
+                      //               "2023-09-08",
+                      //               "Sujit Kumar",
+                      //               "Check Approval",
+                      //               "--",
+                      //               "Approve",
+                      //             ],
+                      //           ].map((record) {
+                      //             return TableViewRow(
+                      //               height: 90,
+                      //               cells: record.map((value) {
+                      //                 return TableViewCell(
+                      //                   child: Text(value),
+                      //                 );
+                      //               }).toList(),
+                      //             );
+                      //           }).toList(),
+                      //         ),
+                      //       ),
+                      //     ],
+                      //   ),
+                      // ),
+                      // Dimens.boxHeight25,
+                      // Container(
+                      //   margin: EdgeInsets.only(bottom: 30, top: 20),
+                      //   child: Container(
+                      //     height: 35,
+                      //     width: (Get.width * .2) - 170,
+                      //     child: CustomElevatedButton(
+                      //       backgroundColor: ColorValues.printColor,
+                      //       text: "Print",
+                      //       onPressed: () {
+                      //         controller.printDoc(controller);
+                      //       },
+                      //     ),
+                      //   ),
+                      // )
                     ],
                   ),
                 ),

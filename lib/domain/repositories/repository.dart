@@ -3672,7 +3672,7 @@ class Repository {
           var responseMap = json.decode(res.data);
           var jcId = responseMap["id"];
           Get.toNamed(Routes.createMrs,
-              arguments: {"whereUsedId": jcId[0], "whereUsed": 1});
+              arguments: {"whereUsedId": jcId[0], "whereUsed": 4});
           // Get.toNamed(
           //   Routes.createMrs,
           //   arguments: jcId[0],
@@ -4210,6 +4210,7 @@ class Repository {
       print({"res.data", res.data});
       if (!res.hasError) {
         Fluttertoast.showToast(msg: res.data, fontSize: 45.0);
+        Get.offAllNamed(Routes.jobList);
 
         return true;
       } else {
@@ -4949,7 +4950,7 @@ class Repository {
                     (m) => JobCardModel.fromJson(Map<String, dynamic>.from(m)))
                 .toList();
 
-        return _JobCardListModelList;
+        return _JobCardListModelList.reversed.toList();
       } else {
         Utility.showDialog(res.errorCode.toString() + ' getjobcardList');
         return [];

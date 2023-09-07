@@ -2574,7 +2574,6 @@ class NewPermitScreen extends GetView<NewPermitController> {
                                                                                     child: Row(
                                                                                       children: [
                                                                                         checkBoxMethod(1),
-                                                                                        
 
                                                                                         // Text("${j= j! + 1}. "),
                                                                                         Text("${element?.saftyQuestionName}")
@@ -2603,7 +2602,7 @@ class NewPermitScreen extends GetView<NewPermitController> {
                                                                           .filteredEmployeeNameList
                                                                           .length) *
                                                                       30) +
-                                                                  200,
+                                                                  220,
                                                               width: MediaQuery.of(
                                                                           context)
                                                                       .size

@@ -37,7 +37,7 @@ class CreateMrsModel {
         remarks: json["remarks"],
         setAsTemplate: json["setAsTemplate"],
         whereUsedType: json["whereUsedType"],
-        whereUsedTypeId: json["whereUsedTypeId"],
+        whereUsedTypeId: json["whereUsedRefID"],
         equipments: List<Equipments>.from(
             json["cmmrsItems"].map((x) => Equipments.fromJson(x))),
       );
@@ -53,7 +53,7 @@ class CreateMrsModel {
         "remarks": remarks,
         "setAsTemplate": setAsTemplate,
         "whereUsedType": whereUsedType,
-        "whereUsedTypeId": whereUsedTypeId,
+        "whereUsedRefID": whereUsedTypeId,
         "cmmrsItems": List<dynamic>.from(equipments!.map((x) => x.toJson())),
       };
 }
