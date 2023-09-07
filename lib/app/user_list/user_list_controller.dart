@@ -1,6 +1,7 @@
 import 'dart:async';
 
 import 'package:cmms/app/user_list/user_list_presenter.dart';
+import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:scrollable_table_view/scrollable_table_view.dart';
 
@@ -12,13 +13,24 @@ class UserListController extends GetxController {
   UserListController(
     this.userListPresenter,
   );
+
+  Map<String, bool> colHeaderMap = {
+    "Profile": false,
+    "User Login ID": false,
+    "User Role": false,
+    "Contact Number": false,
+    "Created On": false,
+    "Updated On": false,
+    'Actions': false,
+  };
+
   UserListPresenter userListPresenter;
   final HomeController homecontroller = Get.find();
 
   StreamSubscription<int>? facilityIdStreamSubscription;
   int facilityId = 0;
-  RxList<UserListModel?> userList = <UserListModel?>[].obs;
-  RxList<UserListModel?> filteredData = <UserListModel>[].obs;
+  RxList<UserListModel> userList = <UserListModel>[].obs;
+  RxList<UserListModel> filteredData = <UserListModel>[].obs;
   PaginationController paginationController = PaginationController(
     rowCount: 0,
     rowsPerPage: 10,
@@ -36,6 +48,47 @@ class UserListController extends GetxController {
   RxString userDateFilterText = ''.obs;
 
   Rx<int> userId = 0.obs;
+  final columnVisibility = ValueNotifier<Map<String, bool>>({
+    "Profile": true,
+    "User Login ID": true,
+    "User Role": true,
+    "Contact Number": true,
+    "Created On": true,
+    "Updated On": true,
+  });
+  final Map<String, double> columnwidth = {
+    "Profile": 123,
+    "User Login ID": 400,
+    "User Role": 200,
+    "Contact Number": 123,
+    "Created On": 123,
+    "Updated On": 123,
+  };
+  List<UserListModel> get filteredDatavisibility {
+    final visibilityMap = columnVisibility.value;
+    //  final searchTextMap = columnSearchText.value;
+
+    return userList.value.where((row) {
+      return visibilityMap.entries.every((entry) {
+        final columnName = entry.key;
+        final columnVisible = entry.value;
+        // final searchValue = searchTextMap[columnName]?.toLowerCase() ?? '';
+        if (!columnVisible) {
+          return true; // Skip the check if the column is hidden or search text is empty
+        }
+        //   final cellValue = row.columnByName(columnName)?.toLowerCase() ?? '';
+        return true;
+        // cellValue.contains(searchValue);
+      });
+    }).toList();
+  }
+
+  void setColumnVisibility(String columnName, bool isVisible) {
+    final newVisibility = Map<String, bool>.from(columnVisibility.value)
+      ..[columnName] = isVisible;
+    columnVisibility.value = newVisibility;
+    print({"updated columnVisibility": columnVisibility});
+  }
 
   void search(String keyword) {
     if (keyword.isEmpty) {
@@ -45,7 +98,7 @@ class UserListController extends GetxController {
 
     userList.value = filteredData
         .where(
-            (item) => item!.name!.toLowerCase().contains(keyword.toLowerCase()))
+            (item) => item.name!.toLowerCase().contains(keyword.toLowerCase()))
         .toList();
     update(['user_list']);
   }
@@ -69,7 +122,7 @@ class UserListController extends GetxController {
 
     if (_userList != null) {
       userList.value = _userList;
-      filteredData.value = userList.value;
+      filteredData.value = userList;
       paginationController = PaginationController(
         rowCount: userList.length,
         rowsPerPage: 10,
@@ -85,5 +138,26 @@ class UserListController extends GetxController {
       }
     }
     update(['user_list']);
+  }
+}
+
+extension DataRowModelExtensions on UserListModel {
+  String? columnByName(String name) {
+    switch (name) {
+      case 'Profile':
+        return "Profile image";
+      case 'User Login ID':
+        return name;
+      case 'User Role':
+        return role_name;
+      case 'Contact Number':
+        return contact_no;
+      case 'Created On':
+        return "2023-03-26";
+      case 'Updated On':
+        return "2023-03-26";
+      default:
+        return null;
+    }
   }
 }

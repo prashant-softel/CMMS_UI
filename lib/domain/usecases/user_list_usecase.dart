@@ -6,7 +6,7 @@ class UserListUsecase {
   final Repository repository;
 
   UserListUsecase(this.repository);
-  Future<List<UserListModel?>?> getUserList({
+  Future<List<UserListModel>?> getUserList({
     int? facilityId,
     bool? isLoading,
   }) async =>

@@ -185,75 +185,140 @@ class _UserListContentWebState extends State<UserListContentWeb> {
                                 controller.userList.isEmpty == true
                                     ? Center(child: Text('No data'))
                                     : Expanded(
-                                        child: PaginatedDataTable2(
-                                          // fixedLeftColumns: 1,
-                                          // dataRowHeight: Get.height * 0.12,
-                                          columnSpacing: 10,
-                                          source:
-                                              dataSource, // Custom DataSource class
-                                          headingRowHeight: Get.height * 0.12,
-                                          minWidth: Get.width * 1.2,
-                                          showCheckboxColumn: false,
-                                          rowsPerPage:
-                                              10, // Number of rows per page
-                                          availableRowsPerPage: [
-                                            10,
-                                            20,
-                                            30,
-                                            50
-                                          ],
-                                          columns: [
-                                            buildDataColumn(
-                                              'Profile',
-                                              'Profile',
-                                              //  ColumnSize.S,
-                                              controller.idFilterText,
-                                              100,
-                                            ),
-                                            buildDataColumn(
-                                                "UserLoginID",
-                                                "User Login ID",
-                                                // ColumnSize.M,
-                                                controller
-                                                    .userLoginIdFilterText,
-                                                400),
-                                            buildDataColumn(
-                                                "UserRole",
-                                                "User Role", // ColumnSize.L,
-                                                controller.userRoleFilterText,
-                                                150),
-                                            buildDataColumn(
-                                                "ContactNumber",
-                                                "Contact Number",
-                                                // ColumnSize.L,
-                                                controller.contractFilterText,
-                                                170),
-                                            buildDataColumn(
-                                                "CreatedOn",
-                                                "Created On",
-                                                // ColumnSize.L,
-                                                controller.createdOnFilterText,
-                                                170),
-                                            buildDataColumn(
-                                                "UpdatedOn",
-                                                "Updated On",
-                                                // ColumnSize.L,
-                                                controller.updatedOnFilterText,
-                                                150),
-                                            buildDataColumn(
-                                                'action'.tr,
-                                                'Actions',
-                                                // ColumnSize.L,
-                                                controller.userDateFilterText,
-                                                150),
-                                          ],
-                                        ),
+                                        child: ValueListenableBuilder(
+                                            valueListenable:
+                                                controller.columnVisibility,
+                                            builder: (context, value, child) {
+                                              final dataSource =
+                                                  UserDataSource(controller);
+
+                                              return PaginatedDataTable2(
+                                                // fixedLeftColumns: 1,
+                                                // dataRowHeight: Get.height * 0.12,
+                                                columnSpacing: 10,
+                                                source:
+                                                    dataSource, // Custom DataSource class
+                                                headingRowHeight:
+                                                    Get.height * 0.12,
+                                                minWidth: Get.width * 1.2,
+                                                showCheckboxColumn: false,
+                                                rowsPerPage:
+                                                    10, // Number of rows per page
+                                                availableRowsPerPage: [
+                                                  10,
+                                                  20,
+                                                  30,
+                                                  50
+                                                ],
+                                                columns: [
+                                                  for (var entry
+                                                      in value.entries)
+                                                    if (entry.value)
+                                                      buildDataColumn(
+                                                          'Profile',
+                                                          // 'Profile',
+                                                          entry.key,
+                                                          //  ColumnSize.S,
+                                                          controller
+                                                              .idFilterText,
+                                                          controller
+                                                                  .columnwidth[
+                                                              entry.key]),
+
+                                                  // buildDataColumn(
+                                                  //   "UserLoginID",
+                                                  //   "User Login ID",
+                                                  //   // ColumnSize.M,
+                                                  //   controller.userLoginIdFilterText,
+                                                  //   controller.colHeaderMap[
+                                                  //               "UserLoginID"] ==
+                                                  //           true
+                                                  //       ? 400
+                                                  //       : 0,
+                                                  // ),
+                                                  // buildDataColumn(
+                                                  //   "UserRole",
+                                                  //   "User Role", // ColumnSize.L,
+                                                  //   controller.userRoleFilterText,
+                                                  //   controller.colHeaderMap[
+                                                  //               "UserRole"] ==
+                                                  //           true
+                                                  //       ? 150
+                                                  //       : 0,
+                                                  // ),
+                                                  // buildDataColumn(
+                                                  //   "ContactNumber",
+                                                  //   "Contact Number",
+                                                  //   // ColumnSize.L,
+                                                  //   controller.contractFilterText,
+                                                  //   controller.colHeaderMap[
+                                                  //               "ContactNumber"] ==
+                                                  //           true
+                                                  //       ? 170
+                                                  //       : 0,
+                                                  // ),
+                                                  // buildDataColumn(
+                                                  //   "CreatedOn",
+                                                  //   "Created On",
+                                                  //   // ColumnSize.L,
+                                                  //   controller.createdOnFilterText,
+                                                  //   controller.colHeaderMap[
+                                                  //               "CreatedOn"] ==
+                                                  //           true
+                                                  //       ? 170
+                                                  //       : 0,
+                                                  // ),
+                                                  // buildDataColumn(
+                                                  //   "UpdatedOn",
+                                                  //   "Updated On",
+                                                  //   // ColumnSize.L,
+                                                  //   controller.updatedOnFilterText,
+                                                  //   controller.colHeaderMap[
+                                                  //               "UpdatedOn"] ==
+                                                  //           true
+                                                  //       ? 150
+                                                  //       : 0,
+                                                  // ),
+
+                                                  buildDataColumn(
+                                                      'action'.tr,
+                                                      'Actions',
+                                                      // ColumnSize.L,
+                                                      controller
+                                                          .userDateFilterText,
+                                                      150),
+                                                ],
+                                              );
+                                            }),
                                       )
                               ]),
                         ),
                       ),
                     ),
                   ),
+                ),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                  children: [
+                    for (var entry in controller.columnVisibility.value.entries)
+                      Row(
+                        children: [
+                          ValueListenableBuilder(
+                            valueListenable: controller.columnVisibility,
+                            builder: (context, value, child) {
+                              return Checkbox(
+                                value: value[entry.key],
+                                onChanged: (newValue) {
+                                  controller.setColumnVisibility(
+                                      entry.key, newValue!);
+                                },
+                              );
+                            },
+                          ),
+                          Text(entry.key),
+                        ],
+                      ),
+                  ],
                 ),
               ],
             );
@@ -262,13 +327,12 @@ class _UserListContentWebState extends State<UserListContentWeb> {
   }
 
   DataColumn2 buildDataColumn(
-    String columnName,
-    String header,
+      String columnName,
+      String header,
 
-    /// ColumnSize columnSize,
-    RxString filterText,
-    double? fixedWidth,
-  ) {
+      /// ColumnSize columnSize,
+      RxString filterText,
+      double? fixedWidth) {
     return //
         DataColumn2(
       // size: columnSize,
@@ -331,18 +395,18 @@ class UserDataSource extends DataTableSource {
   void filterUsers() {
     filteredUserList = <UserListModel?>[];
     filteredUserList = controller.userList.where((User) {
-      return (User?.id ?? '')
+      return (User.id ?? '')
               .toString()
               .toLowerCase()
               .contains(controller.idFilterText.value.toLowerCase()) &&
-          (User?.name ?? '')
+          (User.name ?? '')
               .toLowerCase()
               .contains(controller.userLoginIdFilterText.value.toLowerCase()) &&
-          (User?.role_name ?? '')
+          (User.role_name ?? '')
               .toString()
               .toLowerCase()
               .contains(controller.userRoleFilterText.value.toLowerCase()) &&
-          (User?.contact_no ?? '')
+          (User.contact_no ?? '')
               .toLowerCase()
               .contains(controller.contractFilterText.value.toLowerCase());
       // (User?.status ?? '')
@@ -358,19 +422,45 @@ class UserDataSource extends DataTableSource {
     final UserDetails = filteredUserList[index];
 
     controller.userId.value = UserDetails?.id ?? 0;
+    var cellsBuffer = [
+      "Profile_Img", // '${UserDetails?.id ?? ''}',
+      '${UserDetails?.name ?? ''}',
+      '${UserDetails?.role_name ?? ''}',
+      '${UserDetails?.contact_no ?? ''}',
+      "2023-03-26",
+      "2023-05-26",
+      'Actions',
+    ];
+    var cells = [];
+    int i = 0;
 
+    for (var entry in controller.columnVisibility.value.entries) {
+      print({"entry.value entry": entry});
+
+      if (entry.value) {
+        print({"entry.value removed": entry.key});
+        cells.add(cellsBuffer[i]);
+      }
+    }
+    cells.add('Actions');
+
+    // controller.columnVisibility.value
+    //   ..entries.map((entry) {
+    //     print({"entry.value entry": entry});
+
+    //     // int idx = entry.key;
+    //     // String val = entry.value;
+    //     if (!entry.value) {
+    //       print({"entry.value removed": entry.key});
+    //       cells.remove(i);
+    //     }
+    //     i++;
+    //     return {};
+    //   });
+    print({"cell": cells});
     return DataRow.byIndex(
       index: index,
-      cells: [
-        // ...[
-        "Profile_Img", // '${UserDetails?.id ?? ''}',
-        '${UserDetails?.name ?? ''}',
-        '${UserDetails?.role_name ?? ''}',
-        '${UserDetails?.contact_no ?? ''}',
-        "2023-03-26",
-        "2023-05-26",
-        'Actions',
-      ].map((value) {
+      cells: cells.map((value) {
         return DataCell(
           Padding(
             padding: EdgeInsets.zero,
