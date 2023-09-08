@@ -4970,4 +4970,39 @@ class ConnectHelper {
 
     return responseModel;
   }
+
+  Future<ResponseModel> getEmployeeStockReportList(
+          {String? auth,
+          bool? isLoading,
+          int? facilityId,
+          int? userId,
+          dynamic startDate,
+          dynamic endDate}) async =>
+      await apiWrapper.makeRequest(
+        'SMReports/GetEmployeeStockReport?facility_id=${facilityId}&Emp_id=${userId}&StartDate=${endDate}&EndDate=${startDate}',
+        Request.get,
+        null,
+        isLoading ?? false,
+        {
+          'Authorization': 'Bearer $auth',
+        },
+      );
+  Future<ResponseModel> getPmPlanList(
+      {required String auth,
+      bool? isLoading,
+      int? facilityId,
+      dynamic startDate,
+      dynamic endDate}) async {
+    var responseModel = await apiWrapper.makeRequest(
+      'PMScheduleView/GetPMTaskList?facility_id=${facilityId}&start_date=${endDate}&end_date=${startDate}',
+      Request.get,
+      null,
+      isLoading ?? true,
+      {
+        'Authorization': 'Bearer $auth',
+      },
+    );
+
+    return responseModel;
+  }
 }

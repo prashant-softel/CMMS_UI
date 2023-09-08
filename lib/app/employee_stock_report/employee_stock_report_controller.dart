@@ -2,10 +2,12 @@ import 'dart:async';
 
 import 'package:cmms/app/app.dart';
 import 'package:cmms/app/employee_stock_report/employee_stock_report_presenter.dart';
-import 'package:cmms/domain/models/employe_stock_model.dart';
 import 'package:cmms/domain/models/user_list_model.dart';
 
 import 'package:get/get.dart';
+import 'package:intl/intl.dart';
+
+import '../../domain/models/get_employee_stock_report_model.dart';
 
 class EmployeeStockReportController extends GetxController {
   EmployeeStockReportController(
@@ -17,12 +19,23 @@ class EmployeeStockReportController extends GetxController {
   Rx<String> selectedUser = ''.obs;
   Rx<bool> isSelectedUser = true.obs;
   int selectedUserId = 0;
+  bool openFromDateToStartDatePicker = false;
 
   RxList<UserListModel?> userList = <UserListModel?>[].obs;
-  RxList<CmmrsItemsModel?> assetItemList = <CmmrsItemsModel?>[].obs;
+  RxList<EmployeeStockReportListModel?> assetItemList =
+      <EmployeeStockReportListModel?>[].obs;
 
   StreamSubscription<int>? facilityIdStreamSubscription;
   int facilityId = 0;
+
+  Rx<DateTime> fromDate = DateTime.now().subtract(Duration(days: 7)).obs;
+  Rx<DateTime> toDate = DateTime.now().obs;
+  String get formattedFromdate =>
+      DateFormat('dd/MM/yyyy').format(fromDate.value);
+  String get formattedTodate => DateFormat('dd/MM/yyyy').format(toDate.value);
+  String get formattedTodate1 => DateFormat('yyyy-MM-dd').format(toDate.value);
+  String get formattedFromdate1 =>
+      DateFormat('yyyy-MM-dd').format(fromDate.value);
   @override
   void onInit() async {
     facilityIdStreamSubscription = homecontroller.facilityId$.listen((event) {
@@ -46,16 +59,25 @@ class EmployeeStockReportController extends GetxController {
       selectedUser.value = userList[0]?.name ?? '';
       selectedUserId = userList[0]?.id ?? 0;
       Future.delayed(Duration(seconds: 1), () {
-        getCmmsItemList(facilityId, 2);
+        getEmployeeStockReportList(facilityId, selectedUserId, formattedTodate1,
+            formattedFromdate1, false);
       });
     }
   }
 
-  Future<void> getCmmsItemList(int facilityId, int userId) async {
-    final _assetList = await employeeStockReportPresenter.getCmmsItemList(
-        facilityId: facilityId, userId: userId);
+  Future<void> getEmployeeStockReportList(int facilityId, int userId,
+      dynamic startDate, dynamic endDate, bool isLoading) async {
+    assetItemList.value = <EmployeeStockReportListModel>[];
+
+    final _assetList =
+        await employeeStockReportPresenter.getEmployeeStockReportList(
+            facilityId: facilityId,
+            userId: userId,
+            isLoading: isLoading,
+            startDate: startDate,
+            endDate: endDate);
     if (_assetList != null) {
-      assetItemList.value = _assetList.cmmrsItems ?? [];
+      assetItemList.value = _assetList;
       //
     }
     print({"eeee", assetItemList});
@@ -69,7 +91,8 @@ class EmployeeStockReportController extends GetxController {
           selectedUserId = userList[userIndex]?.id ?? 0;
           selectedUser.value = userList[0]?.name ?? '';
 
-          getCmmsItemList(facilityId, selectedUserId);
+          getEmployeeStockReportList(facilityId, selectedUserId,
+              formattedTodate1, formattedFromdate1, false);
         }
         break;
       default:
@@ -78,5 +101,10 @@ class EmployeeStockReportController extends GetxController {
         }
         break;
     }
+  }
+
+  void getEmployeeReportListListByDate() {
+    getEmployeeStockReportList(facilityId, selectedUserId, formattedTodate1,
+        formattedFromdate1, false);
   }
 }

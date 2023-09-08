@@ -25,6 +25,7 @@ import 'package:cmms/domain/models/end_mc_execution_detail_model.dart';
 import 'package:cmms/domain/models/equipment_list_model.dart';
 import 'package:cmms/domain/models/get_asset_data_list_model.dart';
 import 'package:cmms/domain/models/get_asset_items_model.dart';
+import 'package:cmms/domain/models/get_employee_stock_report_model.dart';
 import 'package:cmms/domain/models/get_faulty_material_report_model.dart';
 import 'package:cmms/domain/models/get_notification_by_userid_model.dart';
 import 'package:cmms/domain/models/get_notification_model.dart';
@@ -51,6 +52,7 @@ import 'package:cmms/domain/models/mrs_list_by_jobId.dart';
 import 'package:cmms/domain/models/new_permit_details_model.dart';
 import 'package:cmms/domain/models/new_permit_list_model.dart';
 import 'package:cmms/domain/models/paiyed_model.dart';
+import 'package:cmms/domain/models/pm_plan_list_model.dart';
 import 'package:cmms/domain/models/pm_task_model.dart';
 import 'package:cmms/domain/models/pm_task_view_list_model.dart';
 import 'package:cmms/domain/models/preventive_checklist_model.dart';
@@ -7360,6 +7362,78 @@ class Repository {
       }
     } catch (error) {
       print(error.toString());
+      return [];
+    }
+  }
+
+  Future<List<EmployeeStockReportListModel>?> getEmployeeStockReportList(
+      int? facilityId,
+      bool? isLoading,
+      int? userId,
+      dynamic startDate,
+      dynamic endDate) async {
+    try {
+      final auth = await getSecuredValue(LocalKeys.authToken);
+
+      final res = await _dataRepository.getEmployeeStockReportList(
+          auth: auth,
+          isLoading: isLoading ?? false,
+          facilityId: facilityId ?? 0,
+          userId: userId,
+          startDate: startDate,
+          endDate: endDate);
+
+      if (!res.hasError) {
+        final jsonEmployeeStockReportListModelModels = jsonDecode(res.data);
+        // print(res.data);
+        final List<EmployeeStockReportListModel>
+            _EmployeeStockReportListModelList =
+            jsonEmployeeStockReportListModelModels
+                .map<EmployeeStockReportListModel>((m) =>
+                    EmployeeStockReportListModel.fromJson(
+                        Map<String, dynamic>.from(m)))
+                .toList();
+        return _EmployeeStockReportListModelList;
+      } //
+      else {
+        Utility.showDialog(
+            res.errorCode.toString() + 'getEmployeeStockReportList');
+        return null;
+      }
+    } catch (error) {
+      print(error.toString());
+      return null;
+    }
+  }
+
+  Future<List<PmPlanListModel?>?> getPmPlanList(int? facilityId,
+      bool? isLoading, dynamic startDate, dynamic endDate) async {
+    try {
+      final auth = await getSecuredValue(LocalKeys.authToken);
+      final res = await _dataRepository.getPmPlanList(
+          auth: auth,
+          facilityId: facilityId ?? 0,
+          isLoading: isLoading ?? false,
+          startDate: startDate,
+          endDate: endDate);
+      // print(res.data);
+      if (!res.hasError) {
+        final jsonPmPlanListModelModels = jsonDecode(res.data);
+
+        final List<PmPlanListModel> _PmPlanListModelList =
+            jsonPmPlanListModelModels
+                .map<PmPlanListModel>((m) =>
+                    PmPlanListModel.fromJson(Map<String, dynamic>.from(m)))
+                .toList();
+        // print({"object", _PmPlanListModelList});
+        return _PmPlanListModelList;
+      } else {
+        Utility.showDialog(res.errorCode.toString() + 'getPmPlanList');
+        return [];
+      }
+    } catch (error) {
+      log(error.toString());
+
       return [];
     }
   }

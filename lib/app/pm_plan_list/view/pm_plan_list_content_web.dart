@@ -1,14 +1,9 @@
-import 'package:cmms/app/home/home_screen.dart';
 import 'package:cmms/app/theme/dimens.dart';
 import 'package:cmms/app/widgets/action_button.dart';
-import 'package:cmms/app/widgets/custom_richtext.dart';
-import 'package:cmms/app/widgets/date_picker.dart';
-import 'package:cmms/domain/models/pm_task_model.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:get/get.dart';
 import 'package:scrollable_table_view/scrollable_table_view.dart';
-import 'package:syncfusion_flutter_datepicker/datepicker.dart';
 import '../../navigators/app_pages.dart';
 import '../../theme/color_values.dart';
 import '../../theme/styles.dart';
@@ -262,7 +257,7 @@ class _PmPlanListContentWebState extends State<PmPlanListContentWeb> {
                                                         onTap: () {
                                                           int scheduleId =
                                                               pmTaskDetails
-                                                                      ?.id ??
+                                                                      ?.plan_id ??
                                                                   0;
                                                           final _flutterSecureStorage =
                                                               const FlutterSecureStorage();
@@ -288,7 +283,7 @@ class _PmPlanListContentWebState extends State<PmPlanListContentWeb> {
                                                               child: Column(
                                                             children: [
                                                               Text(
-                                                                '${pmTaskDetails?.maintenance_order_number}',
+                                                                '${pmTaskDetails?.plan_name}',
                                                               ),
                                                               Dimens
                                                                   .boxHeight10,
@@ -323,17 +318,18 @@ class _PmPlanListContentWebState extends State<PmPlanListContentWeb> {
                                                           //
                                                           TableViewCell(
                                                               child: Text(
-                                                                  "${pmTaskDetails?.schedule_date ?? ""}")),
+                                                                  "${pmTaskDetails?.created_at ?? ""}")),
                                                           TableViewCell(
                                                               child: Text("--"
                                                                   //   '${pmTaskDetails?.completed_date}'
                                                                   )),
                                                           TableViewCell(
                                                               child: Text(
-                                                                  '${pmTaskDetails?.equipment_name}')),
+                                                            "fffghg",
+                                                          )), //'${pmTaskDetails?.equipment_name}')),
                                                           TableViewCell(
                                                               child: Text(
-                                                            '${pmTaskDetails?.frequency_name}',
+                                                            '${pmTaskDetails?.plan_freq_name}',
                                                           )),
                                                           TableViewCell(
                                                               child: Text(
@@ -351,7 +347,7 @@ class _PmPlanListContentWebState extends State<PmPlanListContentWeb> {
                                                                       'View',
                                                                   onPress: () {
                                                                     int scheduleId =
-                                                                        pmTaskDetails?.id ??
+                                                                        pmTaskDetails?.plan_id ??
                                                                             0;
                                                                     final _flutterSecureStorage =
                                                                         const FlutterSecureStorage();

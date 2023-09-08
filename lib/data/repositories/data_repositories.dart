@@ -3043,5 +3043,34 @@ class DataRepository extends DomainRepository {
         createReturnMrsJsonString: createReturnMrsJsonString,
         isLoading: isLoading ?? false,
       );
+
+  Future<ResponseModel> getEmployeeStockReportList(
+      {String? auth,
+      bool? isLoading,
+      int? facilityId,
+      int? userId,
+      dynamic startDate,
+      dynamic endDate}) async {
+    return await connectHelper.getEmployeeStockReportList(
+        auth: auth,
+        isLoading: isLoading,
+        facilityId: facilityId,
+        userId: userId,
+        startDate: startDate,
+        endDate: endDate);
+  }
+
+  Future<ResponseModel> getPmPlanList(
+          {required String auth,
+          int? facilityId,
+          bool? isLoading,
+          dynamic startDate,
+          dynamic endDate}) async =>
+      await connectHelper.getPmPlanList(
+          auth: auth,
+          facilityId: facilityId ?? 0,
+          isLoading: isLoading ?? false,
+          startDate: startDate,
+          endDate: endDate);
 //end
 }
