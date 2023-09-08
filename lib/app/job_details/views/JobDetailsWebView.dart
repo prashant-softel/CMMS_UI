@@ -573,97 +573,6 @@ class JobDetailsWebView extends GetView<JobDetailsController> {
                                                     )),
                                                   ]),
                                                 ),
-                                                //   ...List.generate(
-                                                //     controller
-                                                //             .jobAssociatedModelsList
-                                                //             ?.length ??
-                                                //         0,
-                                                //     (index) {
-                                                //       var getjobAssociatedModelsList =
-                                                //           controller
-                                                //                   .jobAssociatedModelsList?[
-                                                //               index];
-                                                //       return [
-                                                //         '${getjobAssociatedModelsList?.jobCardId}',
-                                                //         '${getjobAssociatedModelsList?.permitId}',
-                                                //         '${getjobAssociatedModelsList?.jobCardDate ?? ''}',
-                                                //         '${getjobAssociatedModelsList?.status_short}',
-                                                //         'Action',
-                                                //       ];
-                                                //     },
-                                                //   ),
-                                                // ].map((record) {
-                                                //   return TableViewRow(
-                                                //     height: 40,
-                                                //     cells: record.map((value) {
-                                                //       return TableViewCell(
-                                                //           child: value == 'Action'
-                                                //               ? Row(
-                                                //                   mainAxisAlignment:
-                                                //                       MainAxisAlignment
-                                                //                           .spaceEvenly,
-                                                //                   children: [
-                                                //                     TableActionButton(
-                                                //                         color: ColorValues
-                                                //                             .viewColor,
-                                                //                         icon: Icons
-                                                //                             .remove_red_eye,
-                                                //                         message:
-                                                //                             "View Job Card",
-                                                //                         onPress:
-                                                //                             () {
-                                                //                           final _flutterSecureStorage =
-                                                //                               const FlutterSecureStorage();
-
-                                                //                           _flutterSecureStorage.delete(
-                                                //                               key:
-                                                //                                   "JcId");
-                                                //                           String
-                                                //                               jobCardId =
-                                                //                               record[0];
-                                                //                           if (jobCardId !=
-                                                //                               null) {
-                                                //                             print({
-                                                //                               "JcId":
-                                                //                                   jobCardId
-                                                //                             });
-
-                                                //                             Get.toNamed(
-                                                //                                 Routes.jobCard,
-                                                //                                 arguments: {
-                                                //                                   'JcId': int.tryParse("$jobCardId")
-                                                //                                 });
-                                                //                           }
-                                                //                         }),
-                                                //                     varUserAccessModel.value.access_list!.where((e) => e.feature_id == UserAccessConstants.kJobFeatureId && e.view == UserAccessConstants.kHaveViewAccess).length >
-                                                //                             0
-                                                //                         ? TableActionButton(
-                                                //                             color: ColorValues
-                                                //                                 .appLightBlueColor,
-                                                //                             icon: Icons
-                                                //                                 .remove_red_eye,
-                                                //                             message:
-                                                //                                 "View Permit",
-                                                //                             onPress: () =>
-                                                //                                 controller.viewNewPermitList(permitId: int.tryParse(record[1])))
-                                                //                         : Container(),
-                                                //                     TableActionButton(
-                                                //                         color: ColorValues
-                                                //                             .appYellowColor,
-                                                //                         icon: Icons
-                                                //                             .copy,
-                                                //                         message:
-                                                //                             "Clone Permit"
-                                                //                         // onPress:
-                                                //                         //     () =>
-                                                //                         //         controller.goToJobCardScreen(),
-                                                //                         ),
-                                                //                   ],
-                                                //                 )
-                                                //               : Text(value));
-                                                //     }).toList(),
-                                                //   );
-                                                // }).toList(),
                                               ),
                                             ),
                                           ],
@@ -721,8 +630,7 @@ class JobDetailsWebView extends GetView<JobDetailsController> {
                                 controller.listMrsByJobId!.length > 0
                                     ? Container(
                                         margin: Dimens.edgeInsets20,
-                                        height: ((controller
-                                                        .jobAssociatedModelsList
+                                        height: ((controller.listMrsByJobId
                                                         ?.length ??
                                                     0) *
                                                 40) +
@@ -757,105 +665,260 @@ class JobDetailsWebView extends GetView<JobDetailsController> {
                                                 ],
                                               ),
                                             ),
-                                            Divider(
-                                              color:
-                                                  ColorValues.greyLightColour,
-                                            ),
+                                            // Divider(
+                                            //   color:
+                                            //       ColorValues.greyLightColour,
+                                            // ),
                                             Expanded(
-                                              child: ScrollableTableView(
+                                              child: DataTable2(
+                                                border: TableBorder.all(
+                                                    color: Color.fromARGB(
+                                                        255, 206, 229, 234)),
                                                 columns: [
-                                                  "Job Card ID",
-                                                  "Mrs ID",
-                                                  "Mrs Items List ",
-                                                  "Status",
-                                                  "Action",
-                                                ].map((column) {
-                                                  return TableViewColumn(
-                                                    label: column,
-                                                    minWidth: Get.width * 0.15,
-                                                  );
-                                                }).toList(),
-                                                rows: [
-                                                  ...List.generate(
-                                                    controller.listMrsByJobId
-                                                            ?.length ??
-                                                        0,
-                                                    (index) {
-                                                      var getJobsLinkedMrsList =
-                                                          controller
-                                                                  .listMrsByJobId?[
-                                                              index];
-                                                      return [
-                                                        '${getJobsLinkedMrsList?.jobCardId}',
-                                                        '${getJobsLinkedMrsList?.mrsId}',
-                                                        '${getJobsLinkedMrsList?.mrsItems ?? ''}',
-                                                        '${getJobsLinkedMrsList?.status_short ?? ''}',
-                                                        'Action',
-                                                      ];
-                                                    },
-                                                  ),
-                                                ].map((record) {
-                                                  return TableViewRow(
-                                                    height: 40,
-                                                    cells: record.map((value) {
-                                                      return TableViewCell(
-                                                          child:
-                                                              value == 'Action'
-                                                                  ? Row(
-                                                                      children: [
-                                                                        TableActionButton(
-                                                                            color: ColorValues
-                                                                                .viewColor,
-                                                                            icon: Icons
-                                                                                .remove_red_eye,
-                                                                            message:
-                                                                                "View MRS",
-                                                                            onPress:
-                                                                                () {
-                                                                              final _flutterSecureStorage = const FlutterSecureStorage();
+                                                  DataColumn(
+                                                      label: Text(
+                                                    "Job Card Id",
+                                                    style: TextStyle(
+                                                        fontSize: 15,
+                                                        fontWeight:
+                                                            FontWeight.bold),
+                                                  )),
+                                                  DataColumn(
+                                                      label: Text(
+                                                    "Mrs ID",
+                                                    style: TextStyle(
+                                                        fontSize: 15,
+                                                        fontWeight:
+                                                            FontWeight.bold),
+                                                  )),
+                                                  DataColumn(
+                                                      label: Text(
+                                                    "Mrs Items List ",
+                                                    style: TextStyle(
+                                                        fontSize: 15,
+                                                        fontWeight:
+                                                            FontWeight.bold),
+                                                  )),
+                                                  DataColumn(
+                                                      label: Text(
+                                                    "Status",
+                                                    style: TextStyle(
+                                                        fontSize: 15,
+                                                        fontWeight:
+                                                            FontWeight.bold),
+                                                  )),
+                                                  DataColumn(
+                                                      label: Text(
+                                                    'Action',
+                                                    style: TextStyle(
+                                                        fontSize: 15,
+                                                        fontWeight:
+                                                            FontWeight.bold),
+                                                  )),
+                                                ],
+                                                rows: List<DataRow>.generate(
+                                                  controller.listMrsByJobId
+                                                          ?.length ??
+                                                      0,
+                                                  (index) => DataRow(cells: [
+                                                    DataCell(Text(controller
+                                                            .listMrsByJobId?[
+                                                                index]
+                                                            ?.jobCardId
+                                                            .toString() ??
+                                                        '')),
+                                                    DataCell(Text(controller
+                                                            .listMrsByJobId?[
+                                                                index]
+                                                            ?.mrsId
+                                                            .toString() ??
+                                                        '')),
+                                                    DataCell(Text(controller
+                                                            .listMrsByJobId?[
+                                                                index]
+                                                            ?.mrsItems ??
+                                                        '')),
+                                                    DataCell(Text(controller
+                                                            .listMrsByJobId?[
+                                                                index]
+                                                            ?.status_short ??
+                                                        '')),
+                                                    DataCell(Row(
+                                                      mainAxisAlignment:
+                                                          MainAxisAlignment
+                                                              .spaceEvenly,
+                                                      children: [
+                                                        TableActionButton(
+                                                            color: ColorValues
+                                                                .viewColor,
+                                                            icon: Icons
+                                                                .remove_red_eye,
+                                                            message: "View MRS",
+                                                            onPress: () {
+                                                              final _flutterSecureStorage =
+                                                                  const FlutterSecureStorage();
 
-                                                                              _flutterSecureStorage.delete(key: "mrsId");
-                                                                              String mrsId = record[1];
-                                                                              if (mrsId != null) {
-                                                                                print({
-                                                                                  "mrsId": mrsId
-                                                                                });
-                                                                                Get.toNamed(Routes.mrsViewScreen, arguments: {
-                                                                                  'mrsId': int.tryParse("$mrsId")
-                                                                                });
-                                                                              }
-                                                                            }),
-                                                                        TableActionButton(
-                                                                            color: ColorValues
-                                                                                .editColor,
-                                                                            icon: Icons
-                                                                                .edit,
-                                                                            message:
-                                                                                "Edit MRS",
-                                                                            onPress:
-                                                                                () {
-                                                                              final _flutterSecureStorage = const FlutterSecureStorage();
+                                                              _flutterSecureStorage
+                                                                  .delete(
+                                                                      key:
+                                                                          "mrsId");
+                                                              String mrsId = controller
+                                                                      .listMrsByJobId?[
+                                                                          index]
+                                                                      ?.mrsId
+                                                                      .toString() ??
+                                                                  "";
+                                                              if (mrsId !=
+                                                                  null) {
+                                                                print({
+                                                                  "mrsId": mrsId
+                                                                });
+                                                                Get.toNamed(
+                                                                    Routes
+                                                                        .mrsViewScreen,
+                                                                    arguments: {
+                                                                      'mrsId': int
+                                                                          .tryParse(
+                                                                              "$mrsId")
+                                                                    });
+                                                              }
+                                                            }),
+                                                        TableActionButton(
+                                                            color: ColorValues
+                                                                .editColor,
+                                                            icon: Icons.edit,
+                                                            message: "Edit MRS",
+                                                            onPress: () {
+                                                              final _flutterSecureStorage =
+                                                                  const FlutterSecureStorage();
 
-                                                                              _flutterSecureStorage.delete(key: "mrsId");
-                                                                              String mrsId = record[1];
-                                                                              if (mrsId != null) {
-                                                                                print({
-                                                                                  "mrsId": mrsId
-                                                                                });
-                                                                                Get.toNamed(Routes.editMrs, arguments: {
-                                                                                  'mrsId': int.tryParse("$mrsId")
-                                                                                });
-                                                                              }
-                                                                            })
-                                                                      ],
-                                                                    )
-                                                                  : Text(
-                                                                      value));
-                                                    }).toList(),
-                                                  );
-                                                }).toList(),
+                                                              _flutterSecureStorage
+                                                                  .delete(
+                                                                      key:
+                                                                          "mrsId");
+                                                              String mrsId = controller
+                                                                      .listMrsByJobId?[
+                                                                          index]
+                                                                      ?.mrsId
+                                                                      .toString() ??
+                                                                  "";
+                                                              if (mrsId !=
+                                                                  null) {
+                                                                print({
+                                                                  "mrsId": mrsId
+                                                                });
+                                                                Get.toNamed(
+                                                                    Routes
+                                                                        .editMrs,
+                                                                    arguments: {
+                                                                      'mrsId': int
+                                                                          .tryParse(
+                                                                              "$mrsId")
+                                                                    });
+                                                              }
+                                                            })
+                                                      ],
+                                                    )),
+                                                  ]),
+                                                ),
                                               ),
                                             ),
+
+                                            // Expanded(
+                                            //   child: ScrollableTableView(
+                                            //     columns: [
+                                            //       "Job Card ID",
+                                            //       "Mrs ID",
+                                            //       "Mrs Items List ",
+                                            //       "Status",
+                                            //       "Action",
+                                            //     ].map((column) {
+                                            //       return TableViewColumn(
+                                            //         label: column,
+                                            //         minWidth: Get.width * 0.15,
+                                            //       );
+                                            //     }).toList(),
+                                            //     rows: [
+                                            //       ...List.generate(
+                                            //         controller.listMrsByJobId
+                                            //                 ?.length ??
+                                            //             0,
+                                            //         (index) {
+                                            //           var getJobsLinkedMrsList =
+                                            //               controller
+                                            //                       .listMrsByJobId?[
+                                            //                   index];
+                                            //           return [
+                                            //             '${getJobsLinkedMrsList?.jobCardId}',
+                                            //             '${getJobsLinkedMrsList?.mrsId}',
+                                            //             '${getJobsLinkedMrsList?.mrsItems ?? ''}',
+                                            //             '${getJobsLinkedMrsList?.status_short ?? ''}',
+                                            //             'Action',
+                                            //           ];
+                                            //         },
+                                            //       ),
+                                            //     ].map((record) {
+                                            //       return TableViewRow(
+                                            //         height: 40,
+                                            //         cells: record.map((value) {
+                                            //           return TableViewCell(
+                                            //               child:
+                                            //                   value == 'Action'
+                                            //                       ? Row(
+                                            //                           children: [
+                                            //                             TableActionButton(
+                                            //                                 color: ColorValues
+                                            //                                     .viewColor,
+                                            //                                 icon: Icons
+                                            //                                     .remove_red_eye,
+                                            //                                 message:
+                                            //                                     "View MRS",
+                                            //                                 onPress:
+                                            //                                     () {
+                                            //                                   final _flutterSecureStorage = const FlutterSecureStorage();
+
+                                            //                                   _flutterSecureStorage.delete(key: "mrsId");
+                                            //                                   String mrsId = record[1];
+                                            //                                   if (mrsId != null) {
+                                            //                                     print({
+                                            //                                       "mrsId": mrsId
+                                            //                                     });
+                                            //                                     Get.toNamed(Routes.mrsViewScreen, arguments: {
+                                            //                                       'mrsId': int.tryParse("$mrsId")
+                                            //                                     });
+                                            //                                   }
+                                            //                                 }),
+                                            //                             TableActionButton(
+                                            //                                 color: ColorValues
+                                            //                                     .editColor,
+                                            //                                 icon: Icons
+                                            //                                     .edit,
+                                            //                                 message:
+                                            //                                     "Edit MRS",
+                                            //                                 onPress:
+                                            //                                     () {
+                                            //                                   final _flutterSecureStorage = const FlutterSecureStorage();
+
+                                            //                                   _flutterSecureStorage.delete(key: "mrsId");
+                                            //                                   String mrsId = record[1];
+                                            //                                   if (mrsId != null) {
+                                            //                                     print({
+                                            //                                       "mrsId": mrsId
+                                            //                                     });
+                                            //                                     Get.toNamed(Routes.editMrs, arguments: {
+                                            //                                       'mrsId': int.tryParse("$mrsId")
+                                            //                                     });
+                                            //                                   }
+                                            //                                 })
+                                            //                           ],
+                                            //                         )
+                                            //                       : Text(
+                                            //                           value));
+                                            //         }).toList(),
+                                            //       );
+                                            //     }).toList(),
+                                            //   ),
+                                            // ),
                                           ],
                                         ),
                                       )
