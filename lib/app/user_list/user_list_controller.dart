@@ -24,6 +24,8 @@ class UserListController extends GetxController {
     'Actions': false,
   };
 
+  final streamController = StreamController<int>();
+
   UserListPresenter userListPresenter;
   final HomeController homecontroller = Get.find();
 
@@ -55,6 +57,7 @@ class UserListController extends GetxController {
     "Contact Number": true,
     "Created On": true,
     "Updated On": true,
+    // "search": true,
   });
   final Map<String, double> columnwidth = {
     "Profile": 123,
@@ -64,25 +67,8 @@ class UserListController extends GetxController {
     "Created On": 123,
     "Updated On": 123,
   };
-  List<UserListModel> get filteredDatavisibility {
-    final visibilityMap = columnVisibility.value;
-    //  final searchTextMap = columnSearchText.value;
-
-    return userList.value.where((row) {
-      return visibilityMap.entries.every((entry) {
-        final columnName = entry.key;
-        final columnVisible = entry.value;
-        // final searchValue = searchTextMap[columnName]?.toLowerCase() ?? '';
-        if (!columnVisible) {
-          return true; // Skip the check if the column is hidden or search text is empty
-        }
-        //   final cellValue = row.columnByName(columnName)?.toLowerCase() ?? '';
-        return true;
-        // cellValue.contains(searchValue);
-      });
-    }).toList();
-  }
-
+  // Map<String, RxString> filterText = {};
+  Map<String, RxString> filterText = {};
   void setColumnVisibility(String columnName, bool isVisible) {
     final newVisibility = Map<String, bool>.from(columnVisibility.value)
       ..[columnName] = isVisible;
@@ -105,6 +91,14 @@ class UserListController extends GetxController {
 
   @override
   void onInit() async {
+    this.filterText = {
+      "Profile": idFilterText,
+      "User Login ID": userLoginIdFilterText,
+      "User Role": userRoleFilterText,
+      "Contact Number": contractFilterText,
+      "Created On": createdOnFilterText,
+      "Updated On": updatedOnFilterText,
+    };
     facilityIdStreamSubscription = homecontroller.facilityId$.listen((event) {
       facilityId = event;
       Future.delayed(Duration(seconds: 1), () {

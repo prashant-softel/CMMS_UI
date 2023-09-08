@@ -2,6 +2,7 @@ import 'package:cmms/app/theme/dimens.dart';
 import 'package:cmms/domain/models/user_list_model.dart';
 import 'package:data_table_2/data_table_2.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:get/get.dart';
 import 'package:scrollable_table_view/scrollable_table_view.dart';
@@ -114,15 +115,65 @@ class _UserListContentWebState extends State<UserListContentWeb> {
                                 ),
                                 Row(
                                   children: [
-                                    Container(
-                                      height: 35,
-                                      margin: EdgeInsets.only(left: 10),
-                                      child: CustomElevatedButton(
-                                        backgroundColor:
-                                            ColorValues.appLightBlueColor,
-                                        onPressed: () {},
-                                        text: 'columnVisibility'.tr,
+                                    PopupMenuButton<String>(
+                                      tooltip: "",
+                                      elevation: 25.0,
+                                      child: Container(
+                                        height: 35,
+                                        margin: EdgeInsets.only(left: 10),
+                                        padding: EdgeInsets.only(
+                                            top: 4,
+                                            bottom: 4,
+                                            right: 8,
+                                            left: 8),
+                                        decoration: BoxDecoration(
+                                          color: ColorValues.appLightBlueColor,
+                                          borderRadius:
+                                              BorderRadius.circular(5),
+                                        ),
+                                        child: Text(
+                                          'Column Visibility',
+                                          style: TextStyle(
+                                            color: Colors.white,
+                                            fontSize: 16,
+                                            fontWeight: FontWeight.w400,
+                                          ),
+                                          // style: TextStyle(
+                                          //     color: Colors.white,
+                                          //     fontSize: 16),
+                                        ),
                                       ),
+                                      itemBuilder: (BuildContext context) => <
+                                          PopupMenuEntry<String>>[]..addAll(
+                                            controller
+                                                .columnVisibility.value.entries
+                                                .map((e) {
+                                          return PopupMenuItem<String>(
+                                              child: ValueListenableBuilder(
+                                                  valueListenable: controller
+                                                      .columnVisibility,
+                                                  builder:
+                                                      (context, value, child) {
+                                                    return Row(
+                                                      children: [
+                                                        Checkbox(
+                                                          value: value[e.key],
+                                                          onChanged:
+                                                              (newValue) {
+                                                            controller
+                                                                .setColumnVisibility(
+                                                                    e.key,
+                                                                    newValue!);
+                                                          },
+                                                        ),
+                                                        Text(e.key),
+                                                      ],
+                                                    );
+                                                  }));
+                                        })),
+                                      onSelected: (String value) {
+                                        // Handle column selection
+                                      },
                                     ),
                                     Container(
                                       height: 35,
@@ -215,15 +266,27 @@ class _UserListContentWebState extends State<UserListContentWeb> {
                                                       in value.entries)
                                                     if (entry.value)
                                                       buildDataColumn(
-                                                          'Profile',
-                                                          // 'Profile',
-                                                          entry.key,
-                                                          //  ColumnSize.S,
-                                                          controller
-                                                              .idFilterText,
-                                                          controller
-                                                                  .columnwidth[
-                                                              entry.key]),
+                                                        // 'Profile',
+                                                        // 'Profile',
+                                                        entry.key,
+                                                        //  ColumnSize.S,
+                                                        controller.filterText[
+                                                            entry.key]!,
+                                                        controller.columnwidth[
+                                                            entry.key],
+                                                        onSearchCallBack:
+                                                            (val) {
+                                                          print({"val": val});
+                                                          // final dataSource =
+                                                          //     UserDataSource(
+                                                          //         controller);
+                                                          // controller
+                                                          //     .streamController
+                                                          //     .add(DateTime
+                                                          //             .now()
+                                                          //         .millisecondsSinceEpoch);
+                                                        },
+                                                      ),
 
                                                   // buildDataColumn(
                                                   //   "UserLoginID",
@@ -281,12 +344,14 @@ class _UserListContentWebState extends State<UserListContentWeb> {
                                                   // ),
 
                                                   buildDataColumn(
-                                                      'action'.tr,
-                                                      'Actions',
-                                                      // ColumnSize.L,
-                                                      controller
-                                                          .userDateFilterText,
-                                                      150),
+                                                    // 'action'.tr,
+                                                    'Actions',
+                                                    // ColumnSize.L,
+                                                    controller
+                                                        .userDateFilterText,
+                                                    150,
+                                                    onSearchCallBack: (val) {},
+                                                  ),
                                                 ],
                                               );
                                             }),
@@ -297,29 +362,29 @@ class _UserListContentWebState extends State<UserListContentWeb> {
                     ),
                   ),
                 ),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                  children: [
-                    for (var entry in controller.columnVisibility.value.entries)
-                      Row(
-                        children: [
-                          ValueListenableBuilder(
-                            valueListenable: controller.columnVisibility,
-                            builder: (context, value, child) {
-                              return Checkbox(
-                                value: value[entry.key],
-                                onChanged: (newValue) {
-                                  controller.setColumnVisibility(
-                                      entry.key, newValue!);
-                                },
-                              );
-                            },
-                          ),
-                          Text(entry.key),
-                        ],
-                      ),
-                  ],
-                ),
+                // Row(
+                //   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                //   children: [
+                //     for (var entry in controller.columnVisibility.value.entries)
+                //       Row(
+                //         children: [
+                //           ValueListenableBuilder(
+                //             valueListenable: controller.columnVisibility,
+                //             builder: (context, value, child) {
+                //               return Checkbox(
+                //                 value: value[entry.key],
+                //                 onChanged: (newValue) {
+                //                   controller.setColumnVisibility(
+                //                       entry.key, newValue!);
+                //                 },
+                //               );
+                //             },
+                //           ),
+                //           Text(entry.key),
+                //         ],
+                //       ),
+                //   ],
+                // ),
               ],
             );
           });
@@ -327,12 +392,13 @@ class _UserListContentWebState extends State<UserListContentWeb> {
   }
 
   DataColumn2 buildDataColumn(
-      String columnName,
+      // String columnName,
       String header,
 
       /// ColumnSize columnSize,
       RxString filterText,
-      double? fixedWidth) {
+      double? fixedWidth,
+      {required Function(String) onSearchCallBack}) {
     return //
         DataColumn2(
       // size: columnSize,
@@ -347,6 +413,7 @@ class _UserListContentWebState extends State<UserListContentWeb> {
               child: TextField(
                 onChanged: (value) {
                   filterText.value = value;
+                  onSearchCallBack(value);
                 },
                 textAlign: TextAlign.left,
                 style: TextStyle(height: 1.0),
@@ -389,6 +456,13 @@ class UserDataSource extends DataTableSource {
 
   UserDataSource(this.controller) {
     filterUsers();
+    print("filkter kr de");
+    print({
+      "controller.idFilterText.value": controller.userLoginIdFilterText.value
+    });
+    // controller.streamController.stream.listen((evnt) {
+    //   filterUsers();
+    // });
   }
 
   ///
@@ -415,10 +489,12 @@ class UserDataSource extends DataTableSource {
       //     .contains(controller.statusFilterText.value.toLowerCase());
       // Add other filter conditions as needed
     }).toList();
+    print({"filteredUserList": filteredUserList});
   }
 
   @override
   DataRow? getRow(int index) {
+    print({"getRow call"});
     final UserDetails = filteredUserList[index];
 
     controller.userId.value = UserDetails?.id ?? 0;
@@ -435,12 +511,15 @@ class UserDataSource extends DataTableSource {
     int i = 0;
 
     for (var entry in controller.columnVisibility.value.entries) {
-      print({"entry.value entry": entry});
-
+      // print({"entry.value entry": entry});
+      if (entry.key == "search") {
+        return null;
+      }
       if (entry.value) {
-        print({"entry.value removed": entry.key});
+        // print({"entry.value removed": entry.key});
         cells.add(cellsBuffer[i]);
       }
+      i++;
     }
     cells.add('Actions');
 

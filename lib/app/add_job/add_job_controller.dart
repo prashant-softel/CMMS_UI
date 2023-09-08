@@ -96,6 +96,7 @@ class AddJobController extends GetxController {
   StreamSubscription<int>? facilityIdStreamSubscription;
   // Create a FocusNode instance in your controller
   FocusNode focusNode = FocusNode();
+  String str = "";
 
   ///
   @override
@@ -178,7 +179,7 @@ class AddJobController extends GetxController {
       workTypeIds: workTypeIds,
     );
     toolsRequiredToWorkTypeList.value = list ?? <ToolsModel>[];
-    // String str3 = toolsRequiredToWorkTypeList.join("  ");
+    str = toolsRequiredToWorkTypeList.join(" , ");
 
     update(['toolsRequiredToWorkTypeList']);
   }

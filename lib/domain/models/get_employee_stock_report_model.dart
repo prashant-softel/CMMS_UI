@@ -1,50 +1,24 @@
 import 'dart:convert';
 
-List<PlantStockListModel> MrsModelFromJson(String str) =>
-    List<PlantStockListModel>.from(
-        json.decode(str).map((x) => PlantStockListModel.fromJson(x)));
+List<EmployeeStockReportListModel> MrsModelFromJson(String str) =>
+    List<EmployeeStockReportListModel>.from(
+        json.decode(str).map((x) => EmployeeStockReportListModel.fromJson(x)));
 
-class PlantStockListModel {
-  int? facilityID;
+class EmployeeStockReportListModel {
   String? facilityName;
-
-  List<StockDetails> stockDetails;
-
-  PlantStockListModel(
-      {required this.stockDetails, this.facilityID, this.facilityName});
-
-  factory PlantStockListModel.fromJson(Map<String, dynamic> parsedJson) {
-    var list = parsedJson['stockDetails'] as List;
-    print(list.runtimeType);
-    List<StockDetails> stockDetails =
-        list.map((i) => StockDetails.fromJson(i)).toList();
-
-    return PlantStockListModel(
-      facilityID: parsedJson['facilityID'],
-      facilityName: parsedJson['facilityName'],
-      stockDetails: stockDetails,
-    );
-  }
-  Map<String, dynamic> toJson() => {
-        "facilityID": facilityID,
-        "facilityName": facilityName,
-        "stockDetails": List<dynamic>.from(stockDetails.map((x) => x.toJson())),
-      };
-}
-
-class StockDetails {
   int? facility_Is_Block;
   dynamic facility_Is_Block_of_name;
+  String? requested_by_name;
   int? assetItemID;
   String? asset_name;
   String? asset_code;
   int? asset_type_ID;
   double? opening;
-  double? inward;
-  double? outward;
+  int? inward;
+  int? outward;
   double? balance;
 
-  StockDetails(
+  EmployeeStockReportListModel(
       {this.assetItemID,
       this.asset_code,
       this.asset_name,
@@ -54,10 +28,13 @@ class StockDetails {
       this.facility_Is_Block_of_name,
       this.inward,
       this.opening,
-      this.outward});
+      this.outward,
+      this.facilityName,
+      this.requested_by_name});
 
-  factory StockDetails.fromJson(Map<String, dynamic> parsedJson) {
-    return StockDetails(
+  factory EmployeeStockReportListModel.fromJson(
+      Map<String, dynamic> parsedJson) {
+    return EmployeeStockReportListModel(
       assetItemID: parsedJson['assetItemID'],
       asset_code: parsedJson['asset_code'],
       asset_type_ID: parsedJson['asset_type_ID'],
@@ -68,6 +45,8 @@ class StockDetails {
       inward: parsedJson['inward'],
       opening: parsedJson['opening'],
       outward: parsedJson['outward'],
+      facilityName: parsedJson['facilityName'],
+      requested_by_name: parsedJson['requested_by_name'],
     );
   }
   Map<String, dynamic> toJson() => {
@@ -81,5 +60,7 @@ class StockDetails {
         "inward": inward,
         "opening": opening,
         "outward": outward,
+        "facilityName": facilityName,
+        "requested_by_name": requested_by_name,
       };
 }
