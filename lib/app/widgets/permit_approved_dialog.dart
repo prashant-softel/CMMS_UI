@@ -17,8 +17,9 @@ class PermitApprovedDialog extends GetView {
  String? permitApprovedDialog;
  String? permitId;
  String? ptwStatus;
+ int? jobId;
  
-  PermitApprovedDialog({super.key, this.permitApprovedDialog, this.permitId, this.ptwStatus});
+  PermitApprovedDialog({super.key, this.permitApprovedDialog, this.permitId, this.ptwStatus, this.jobId});
   final ViewPermitController _controller = Get.find();
 
 
@@ -125,8 +126,8 @@ class PermitApprovedDialog extends GetView {
                           ElevatedButton(
                             style: Styles.greenElevatedButtonStyle,
                             onPressed: () {
-                              _controller.permitApprovedButton(permitId:permitId, ptwStatus: '$ptwStatus');
-                              print('PermitStatus:$ptwStatus');
+                              _controller.permitApprovedButton(permitId:permitId, ptwStatus: '$ptwStatus',jobId: jobId);
+                              print('jobId:$jobId');
                               Get.back();
                             },
                             child:  Text('${ptwStatus == '133' ? 'Extend Approve' : 'Approve Permit'}'),

@@ -348,9 +348,13 @@ class NewPermitController extends GetxController {
   bool isChecked = false;
   JobDetailsModel? jobModel;
 
+  int? jcId = 0;
+
   ///
   @override
   void onInit() async {
+    jcId = Get.arguments["jcId"];
+    print('JobCardId:$jcId');
     try {
       final arguments = Get.arguments;
       if (arguments != null) {

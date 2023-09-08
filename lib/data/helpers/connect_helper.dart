@@ -10,6 +10,7 @@ import 'package:cmms/app/widgets/abandon_execution_message_dialog.dart';
 import 'package:cmms/app/widgets/abandon_schedule_execution_message_dialog.dart';
 import 'package:cmms/app/widgets/create_escalation_matrix_dialog.dart';
 import 'package:cmms/app/widgets/create_incident_report_dialog.dart';
+import 'package:cmms/app/widgets/create_jc_success_message_dialog.dart';
 import 'package:cmms/app/widgets/create_new_permit_for_job.dart';
 import 'package:cmms/app/widgets/create_permit_dialog.dart';
 import 'package:cmms/app/widgets/create_sop_dialog.dart';
@@ -754,6 +755,7 @@ class ConnectHelper {
     String? id,
     String? employee_id,
     String? ptwStatus,
+    int? jobId
   }) async {
     // facilityId = 45;
     // ptwStatus = 123;
@@ -771,7 +773,7 @@ class ConnectHelper {
     print('PermitApprovedResponse: ${responseModel.data}');
     var res = responseModel.data;
     var parsedJson = json.decode(res);
-    Get.dialog<void>(PermitMessageApproveDialog(data: parsedJson['message']));
+    Get.dialog<void>(PermitMessageApproveDialog(data: parsedJson['message'], jobId: jobId));
 
     return responseModel;
   }
@@ -1632,6 +1634,11 @@ class ConnectHelper {
         'Authorization': 'Bearer $auth',
       },
     );
+    var res = responseModel.data;
+    var parsedJson = json.decode(res);
+    Get.dialog<void>(
+        CreateJobCardDialog(data: parsedJson['message'], jcId: parsedJson['id']));
+    print('jcId2:${parsedJson['id']}');
     return responseModel;
   }
 

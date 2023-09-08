@@ -37,13 +37,9 @@ class ViewPermitController extends GetxController {
   final HomeController homeController = Get.find();
   RxList<HistoryModel?>? historyList = <HistoryModel?>[].obs;
 
-
   ViewPermitPresenter viewPermitPresenter;
   JobListPresenter jobListPresenter;
 
-
-
-  
   ///Print Global key
   final GlobalKey<State<StatefulWidget>> printKey = GlobalKey();
 
@@ -118,8 +114,6 @@ class ViewPermitController extends GetxController {
   int selectedTypePermitId = 0;
   int? selectedPermitTypeId = 0;
   int selectedJobTYpesId = 0;
-
- 
 
   // create permit
   Rx<bool> isFormInvalid = false.obs;
@@ -204,7 +198,6 @@ class ViewPermitController extends GetxController {
   RxList<EmployeeListModel?> filteredEmployeeNameList =
       <EmployeeListModel>[].obs;
 
-
   /// Job Type Permit List
   RxList<JobTypeListModel> jobTypeList = <JobTypeListModel>[].obs;
   Rx<bool> isJobTypeListSelected = true.obs;
@@ -246,8 +239,7 @@ class ViewPermitController extends GetxController {
   RxList<NewPermitDetailModel?>? viewPermitDetailsList =
       <NewPermitDetailModel?>[].obs;
 
-   RxList<ListAssociatedJob?>? listAssociatedJobs =
-      <ListAssociatedJob?>[].obs;
+  RxList<ListAssociatedJob?>? listAssociatedJobs = <ListAssociatedJob?>[].obs;
 
   ///Employee List
   RxList<ListEmployees?>? listEmployee = <ListEmployees?>[].obs; //ListEmployees
@@ -257,7 +249,6 @@ class ViewPermitController extends GetxController {
   RxList<ListCategory?>? listCategory = <ListCategory?>[].obs; //ListCategory
   RxList<LotoLists?>? listLoto = <LotoLists?>[].obs; //ListsLoto
   RxList<ListIsolation?>? listIsolation = <ListIsolation?>[].obs; //ListCategory
-
 
   ///Safety Measure List
   RxList<SafetyMeasureListModel> safetyMeasureList =
@@ -284,8 +275,6 @@ class ViewPermitController extends GetxController {
   TextEditingController cancelCommentByApproverTextFieldCtrlr =
       TextEditingController();
 
-
-
   RxList<InventoryDetailModel?>? inventoryDetailList =
       <InventoryDetailModel?>[].obs;
   InventoryDetailModel? inventoryDetailListModel;
@@ -306,10 +295,27 @@ class ViewPermitController extends GetxController {
   Map<int, dynamic> loto_map = {};
 
   int? permitId = 0;
+  int? jobId = 0;
+  Map<String, dynamic> data = {};
   @override
   void onInit() async {
-    permitId = Get.arguments;
-    print('PermitIdView:$permitId');
+    //  data = Get.arguments;
+    // print('Data permitId ${data['permitId']}');
+    // print('Data JobId ${data['jobId']}');
+
+    // // if(data['jobId'] != null){
+    //   permitId = int.tryParse('${data['permitId']}');
+    // // }
+    
+    permitId = Get.arguments["permitId"];
+    jobId = Get.arguments["jobId"];
+
+
+    // jobId = Get.arguments[1];
+
+    print('PermitIdView:${permitId}');
+    print('JobIdIdView:${jobId}');
+
     //homePresenter.generateToken();
     //  Future.delayed(Duration(seconds: 1), () {
     facilityIdStreamSubscription = homeController.facilityId$.listen((event) {
@@ -359,21 +365,18 @@ class ViewPermitController extends GetxController {
     }
   }
 
-
   Future<void> permitApprovedButton(
-      {String? permitId, String? ptwStatus}) async {
+      {String? permitId, String? ptwStatus, int? jobId}) async {
     String _approveComment = approveCommentTextFieldCtrlr.text.trim();
 
-    final _permitApprovedBtn =
-        await viewPermitPresenter.permitApprovedButton(
-            comment: _approveComment, id: permitId, ptwStatus: ptwStatus);
+    final _permitApprovedBtn = await viewPermitPresenter.permitApprovedButton(
+        comment: _approveComment, id: permitId, ptwStatus: ptwStatus, jobId: jobId);
     // showAlertPermitApproveDialog();
     print('Approved Data:${_approveComment}');
     print('Approved Data:${permitId}');
   }
 
-
-   Future<void> permitRejectButton({String? permitId}) async {
+  Future<void> permitRejectButton({String? permitId}) async {
     String _rejectComment = rejectCommentTextFieldCtrlr.text.trim();
 
     final _permitRejectBtn = await viewPermitPresenter.permitRejectButton(
@@ -384,7 +387,6 @@ class ViewPermitController extends GetxController {
     print('Reject Button Data:${_rejectComment}');
     print('Reject Button Data:${permitId}');
   }
-
 
   Future<void> permitCancelByApproverButton(
       {String? permitId, String? ptwStatus}) async {
@@ -439,7 +441,8 @@ class ViewPermitController extends GetxController {
 
       selectedSafetyMeasureId = viewPermitDetailsModel.value?.permitTypeid ?? 0;
 
-      listAssociatedJobs?.value = viewPermitDetailsModel.value?.lstAssociatedJobs ?? [];
+      listAssociatedJobs?.value =
+          viewPermitDetailsModel.value?.lstAssociatedJobs ?? [];
       listIsolation?.value = viewPermitDetailsModel.value?.lstIsolation ?? [];
       // selectedTypePermit.value = newPermitDetailsModel.value?.permitTypeName ?? '';
       // // selectedJobTypeList.value = newPermitDetailsModel.value.
@@ -890,8 +893,6 @@ class ViewPermitController extends GetxController {
     }
   }
 
-
-
   //  Future<void> getInventoryIsolationList({String? facilityId}) async {
   //   equipmentIsolationList.value = <InventoryCategoryModel>[];
   //   final _equipmentIsolationList =
@@ -944,9 +945,8 @@ class ViewPermitController extends GetxController {
   }
 
   Future<void> getTypePermitList() async {
-    final _permitTypeList = await viewPermitPresenter.getTypePermitList(
-      facility_id: facilityId
-    );
+    final _permitTypeList =
+        await viewPermitPresenter.getTypePermitList(facility_id: facilityId);
 
     if (_permitTypeList != null) {
       for (var permitType in _permitTypeList) {
@@ -1098,6 +1098,7 @@ class ViewPermitController extends GetxController {
   void goToNewPermitScreen() {
     Get.toNamed(Routes.newPermit);
   }
+
   Future<void> viewJobDetails(int? _jobId) async {
     Get.toNamed(Routes.jobDetails, arguments: {'jobId': _jobId});
   }

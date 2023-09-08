@@ -135,11 +135,11 @@ class ViewPermitWebScreen extends GetView<ViewPermitController> {
                                                           Get.back();
                                                         },
                                                         child: Text(
-                                                            " / New Permit List",
+                                                            " / NEW PERMIT LIST",
                                                             style: Styles
                                                                 .greyMediumLight12),
                                                       ),
-                                                      Text(" / View Permit",
+                                                      Text(" / VIEW PERMIT",
                                                           style: Styles
                                                               .greyMediumLight12)
                                                     ],
@@ -1726,11 +1726,11 @@ class ViewPermitWebScreen extends GetView<ViewPermitController> {
                                                           Get.back();
                                                         },
                                                         child: Text(
-                                                            " / New Permit List",
+                                                            " / NEW PERMIT LIST",
                                                             style: Styles
                                                                 .greyMediumLight12),
                                                       ),
-                                                      Text(" / View Permit",
+                                                      Text(" / VIEW PERMIT",
                                                           style: Styles
                                                               .greyMediumLight12)
                                                     ],
@@ -2085,7 +2085,7 @@ class ViewPermitWebScreen extends GetView<ViewPermitController> {
                                                                   ?.length ??
                                                               0) *
                                                           50) +
-                                                      120,
+                                                      125,
                                                   width: MediaQuery.of(context)
                                                           .size
                                                           .width /
@@ -2445,7 +2445,7 @@ class ViewPermitWebScreen extends GetView<ViewPermitController> {
                                                                   ?.length ??
                                                               0) *
                                                           30) +
-                                                      270,
+                                                      280,
                                                   width: MediaQuery.of(context)
                                                           .size
                                                           .width /
@@ -2971,7 +2971,7 @@ class ViewPermitWebScreen extends GetView<ViewPermitController> {
                                                                     ?.length ??
                                                                 0) *
                                                             50) +
-                                                        120,
+                                                        125,
                                                     decoration: BoxDecoration(
                                                       border: Border.all(
                                                         color: ColorValues
@@ -3127,136 +3127,109 @@ class ViewPermitWebScreen extends GetView<ViewPermitController> {
                                                 SizedBox(
                                                   height: 10,
                                                 ),
-                                                Row(
-                                                  crossAxisAlignment:
-                                                      CrossAxisAlignment.start,
-                                                  children: [
-                                                    SizedBox(
-                                                      width: 100,
-                                                    ),
-                                                    Column(
-                                                      crossAxisAlignment:
-                                                          CrossAxisAlignment
-                                                              .end,
-                                                      children: [
-                                                        Text('Requested By: '),
-                                                        Text('Issued By: '),
-                                                        Text('Approved By: '),
-                                                        Text('Closed By: '),
-                                                        Text('Cancelled By: '),
-                                                      ],
-                                                    ),
-                                                    SizedBox(
-                                                      width: 100,
-                                                    ),
-                                                    Column(
-                                                      crossAxisAlignment:
-                                                          CrossAxisAlignment
-                                                              .end,
-                                                      children: [
-                                                        SizedBox(
-                                                          width: 100,
-                                                          child: Text(
+                                                Padding(
+                                                  padding: const EdgeInsets.only(left: 20),
+                                                  child: Row(
+                                                    crossAxisAlignment:
+                                                        CrossAxisAlignment.start,
+                                                    children: [
+                                                      SizedBox(
+                                                        width: 100,
+                                                      ),
+                                                      Column(
+                                                        crossAxisAlignment:
+                                                            CrossAxisAlignment
+                                                                .end,
+                                                        children: [
+                                                          Text('Requested By: '),
+                                                          Text('Issued By: '),
+                                                          Text('Approved By: '),
+                                                          Text('Closed By: '),
+                                                          Text('Cancelled By: '),
+                                                        ],
+                                                      ),
+                                                      SizedBox(
+                                                        width: 100,
+                                                      ),
+                                                      Column(
+                                                        crossAxisAlignment:
+                                                            CrossAxisAlignment
+                                                                .start,
+                                                        children: [
+                                                          Text(
                                                             '${controller.viewPermitDetailsModel.value?.issuedByName}',
                                                           ),
-                                                        ),
-                                                        SizedBox(
-                                                          width: 100,
-                                                          child: Text(
+                                                          Text(
                                                             '${controller.viewPermitDetailsModel.value?.issuedByName}',
                                                           ),
-                                                        ),
-                                                        SizedBox(
-                                                          width: 100,
-                                                          child: Text(
+                                                          Text(
                                                             '${controller.viewPermitDetailsModel.value?.approvedByName}',
                                                           ),
-                                                        ),
-                                                        SizedBox(
-                                                          width: 100,
-                                                          child: Text(
+                                                          Text(
                                                             '${controller.viewPermitDetailsModel.value?.closedByName}',
                                                           ),
-                                                        ),
-                                                        SizedBox(
-                                                          width: 100,
-                                                          child: Text(
-                                                            '${controller.viewPermitDetailsModel.value?.cancelRequestByName ?? ''}',
+                                                          Text(
+                                                            '${controller.viewPermitDetailsModel.value?.cancelRequestByName}',
                                                           ),
-                                                        ),
-                                                      ],
-                                                    ),
-                                                    SizedBox(
-                                                      width: 70,
-                                                    ),
-                                                    Column(
-                                                      crossAxisAlignment:
-                                                          CrossAxisAlignment
-                                                              .end,
-                                                      children: [
-                                                        Text('Date / Time: '),
-                                                        Text('Date / Time: '),
-                                                        Text('Date / Time: '),
-                                                        Text('Date / Time: '),
-                                                        Text('Date / Time: '),
-                                                      ],
-                                                    ),
-                                                    SizedBox(
-                                                      width: 100,
-                                                    ),
-                                                    Column(
-                                                      crossAxisAlignment:
-                                                          CrossAxisAlignment
-                                                              .end,
-                                                      children: [
-                                                        SizedBox(
-                                                          width: 200,
-                                                          child: Text(
+                                                        ],
+                                                      ),
+                                                      SizedBox(
+                                                        width: 70,
+                                                      ),
+                                                      Column(
+                                                        crossAxisAlignment:
+                                                            CrossAxisAlignment
+                                                                .end,
+                                                        children: [
+                                                          Text('Date / Time: '),
+                                                          Text('Date / Time: '),
+                                                          Text('Date / Time: '),
+                                                          Text('Date / Time: '),
+                                                          Text('Date / Time: '),
+                                                        ],
+                                                      ),
+                                                      SizedBox(
+                                                        width: 100,
+                                                      ),
+                                                      Column(
+                                                        crossAxisAlignment:
+                                                            CrossAxisAlignment
+                                                                .start,
+                                                        children: [
+                                                          Text(
                                                             '${controller.viewPermitDetailsModel.value?.issue_at}',
                                                           ),
-                                                        ),
-                                                        SizedBox(
-                                                          width: 200,
-                                                          child: Text(
+                                                          Text(
                                                             '${controller.viewPermitDetailsModel.value?.issue_at}',
                                                           ),
-                                                        ),
-                                                        SizedBox(
-                                                          width: 200,
-                                                          child: Text(
+                                                          Text(
                                                             '${controller.viewPermitDetailsModel.value?.approve_at}',
                                                           ),
-                                                        ),
-                                                        SizedBox(
-                                                          width: 200,
-                                                          child: Text(
+                                                          Text(
                                                             '${controller.viewPermitDetailsModel.value?.close_at}',
                                                           ),
-                                                        ),
-                                                        SizedBox(
-                                                          width: 200,
-                                                          child: Text(
-                                                            '${controller.viewPermitDetailsModel.value?.cancel_at ?? ''}',
+                                                          Text(
+                                                            '${controller.viewPermitDetailsModel.value?.cancel_at}',
                                                           ),
-                                                        ),
-                                                      ],
-                                                    ),
-                                                    SizedBox(
-                                                      width: 40,
-                                                    ),
-                                                    Column(
-                                                      crossAxisAlignment:
-                                                          CrossAxisAlignment
-                                                              .end,
-                                                      children: [
-                                                        Text('Signature: '),
-                                                        Text('Signature: '),
-                                                        Text('Signature: '),
-                                                        Text('Signature: '),
-                                                        Text('Signature: '),
-                                                      ],
-                                                    ),
-                                                  ],
+                                                        ],
+                                                      ),
+                                                      SizedBox(
+                                                        width: 40,
+                                                      ),
+                                                      Column(
+                                                        crossAxisAlignment:
+                                                            CrossAxisAlignment
+                                                                .end,
+                                                        children: [
+                                                          Text('Signature: '),
+                                                          Text('Signature: '),
+                                                          Text('Signature: '),
+                                                          Text('Signature: '),
+                                                          Text('Signature: '),
+                                                        ],
+                                                      ),
+                                                    ],
+                                                  ),
                                                 ),
 
                                                 SizedBox(
@@ -3393,7 +3366,8 @@ class ViewPermitWebScreen extends GetView<ViewPermitController> {
                               permitId:
                                   '${controller.viewPermitDetailsModel.value?.permitNo}',
                               ptwStatus:
-                                  '${controller.viewPermitDetailsModel.value?.ptwStatus}'));
+                                  '${controller.viewPermitDetailsModel.value?.ptwStatus}',
+                              jobId: controller.jobId,));
                         },
                       ))
                   : Container(),

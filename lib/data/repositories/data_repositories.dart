@@ -582,6 +582,7 @@ class DataRepository extends DomainRepository {
     String? comment,
     String? id,
     String? ptwStatus,
+    int? jobId,
     bool? isLoading,
   }) async =>
       await connectHelper.permitApprovedButton(
@@ -589,6 +590,7 @@ class DataRepository extends DomainRepository {
         comment: comment,
         id: id,
         ptwStatus: ptwStatus,
+        jobId: jobId,
         isLoading: isLoading ?? false,
       );
 

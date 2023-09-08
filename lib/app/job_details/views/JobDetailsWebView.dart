@@ -553,11 +553,19 @@ class JobDetailsWebView extends GetView<JobDetailsController> {
                                                                     .remove_red_eye,
                                                                 message:
                                                                     "View Permit",
-                                                                onPress: () => controller
-                                                                    .viewNewPermitList(
-                                                                        permitId:
-                                                                            controller.jobAssociatedModelsList?[index]?.permitId ??
-                                                                                0))
+                                                                onPress: () {
+                                                                 
+                                                                  controller
+                                                                      .viewNewPermitList(
+                                                                    permitId: controller
+                                                                            .jobAssociatedModelsList?[index]
+                                                                            ?.permitId ??
+                                                                        0,
+                                                                     jobId: controller.jobDetailsModel.value!.id ?? 0
+                                                                    
+                                                                  );
+                                                                  
+                                                                })
                                                             : Container(),
                                                         TableActionButton(
                                                             color: ColorValues
