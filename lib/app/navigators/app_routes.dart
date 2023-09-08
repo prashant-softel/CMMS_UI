@@ -139,6 +139,7 @@ abstract class Routes {
   static const createPmPlan = _Paths.createPmPlan;
   static const editReturnMrs = _Paths.editReturnMrs;
   static const pmPlanList = _Paths.pmPlanList;
+  static const viewPmPlanScreen = _Paths.viewPmPlanScreen;
 }
 
 abstract class _Paths {
@@ -272,6 +273,7 @@ abstract class _Paths {
   static const createPmPlan = '/createPmPlan';
   static const editReturnMrs = '/edit-return-mrs';
   static const pmPlanList = '/pm-plan-list';
+  static const viewPmPlanScreen = '/view-Pm-Plan-Screen';
 
 // static const editPermitWebScreen = '/edit-permit-web-screen';
 }

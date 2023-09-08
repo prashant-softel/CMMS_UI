@@ -161,6 +161,11 @@ class PreventiveScreen extends GetView<PreventiveController> {
                               controller.createPmPlan();
                             }),
                         _priventiveList(
+                            tittle: "View PM Plan",
+                            ontap: () {
+                              controller.viewPmPlanScreen();
+                            }),
+                        _priventiveList(
                             tittle: "PM Plans",
                             ontap: () {
                               controller.pmPlanList();
