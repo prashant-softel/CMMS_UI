@@ -59,17 +59,17 @@ class ViewModuleCleaningExecutionContentWeb
                           color: ColorValues.greyLightColor,
                         ),
                         Text(
-                          "Dashboard",
+                          "DASHBOARD",
                           style: Styles.greyLight14,
                         ),
                         GestureDetector(
                           onTap: () {
                             Get.back();
                           },
-                          child: Text(" / Module Cleaning Execution List",
+                          child: Text(" / MODULE CLEANING EXECUTION LIST",
                               style: Styles.greyMediumLight12),
                         ),
-                        Text(" / View Module Cleaning Execution",
+                        Text(" / VIEW MODULE CLEANING EXECUTION",
                             style: Styles.greyMediumLight12)
                       ],
                     ),

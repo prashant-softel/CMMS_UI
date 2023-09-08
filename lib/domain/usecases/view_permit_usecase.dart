@@ -45,12 +45,14 @@ class ViewPermitUsecase {
     String? comment,
     String? id,
     String? ptwStatus,
+    int? jobId,
     bool? isLoading,
   }) async {
     await repository.permitApprovedButton(
       comment,
       id,
       ptwStatus,
+      jobId,
       isLoading,
     );
   }

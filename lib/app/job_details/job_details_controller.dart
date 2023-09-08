@@ -69,6 +69,7 @@ class JobDetailsController extends GetxController {
   ///
   @override
   void onInit() async {
+    jobId.value = Get.arguments["jobId"];
     // try {
     //   await setJobId();
     //   getJobDetails(jobId.value);
@@ -304,9 +305,16 @@ class JobDetailsController extends GetxController {
     await Get.dialog<void>(PermitListTableDialog());
   }
 
-  Future<void> viewNewPermitList({int? permitId}) async {
-    Get.toNamed(Routes.viewPermitWebScreen, arguments: permitId);
+  Future<void> viewNewPermitList({
+    int? permitId,
+    int? jobId,
+    
+  }) async {
+    Get.toNamed(Routes.viewPermitWebScreen, arguments: {"permitId": permitId, "jobId":jobId});
+    print({"Permit", permitId, jobId});
   }
+
+  
 
   Future<void> viewJobCArd({int? jobcardId}) async {
     Get.toNamed(Routes.jobCard, arguments: jobcardId);

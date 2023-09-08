@@ -1559,11 +1559,11 @@ class NewPermitScreen extends GetView<NewPermitController> {
                                                   onTap: () {
                                                     Get.back();
                                                   },
-                                                  child: Text(" / Breakdown",
+                                                  child: Text(" / BREAKDOWN",
                                                       style: Styles
                                                           .greyMediumLight12),
                                                 ),
-                                                Text(" / Add New Permit",
+                                                Text(" / ADD NEW PERMIT",
                                                     style: Styles
                                                         .greyMediumLight12),
                                               ],
@@ -1976,7 +1976,7 @@ class NewPermitScreen extends GetView<NewPermitController> {
                                                       Padding(
                                                         padding:
                                                             const EdgeInsets
-                                                                .only(left: 60),
+                                                                .only(left: 60, ),
                                                         child: Row(
                                                           mainAxisAlignment:
                                                               MainAxisAlignment
@@ -1994,14 +1994,12 @@ class NewPermitScreen extends GetView<NewPermitController> {
                                                                   title:
                                                                       'Start Date: '),
                                                             ),
-
+                                                                                                            
                                                             _buildStartValidTillDateField_web(
                                                               context,
                                                               0,
                                                             ),
-                                                            SizedBox(
-                                                              width: 165,
-                                                            ),
+                                                            Dimens.boxWidth170,
                                                             CustomRichText(
                                                                 title:
                                                                     'Valid Till: '),
@@ -2009,7 +2007,9 @@ class NewPermitScreen extends GetView<NewPermitController> {
                                                               width: 5,
                                                             ),
                                                             _buildStartValidTillDateField_web(
-                                                                context, 1),
+                                                            context, 1),
+                                                            
+                                                                                                            
                                                             // _buildValidTillField_web(
                                                             //     context),
                                                           ],

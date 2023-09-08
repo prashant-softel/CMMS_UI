@@ -47,12 +47,14 @@ class ViewPermitPresenter {
     String? comment,
     String? id,
     String? ptwStatus,
+    int? jobId,
     bool? isLoading,
   }) async =>
       await viewPermitUsecase.permitApprovedButton(
         comment: comment,
         id: id,
         ptwStatus: ptwStatus,
+        jobId: jobId,
         isLoading: isLoading ?? false,
       );
 

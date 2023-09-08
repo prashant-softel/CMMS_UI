@@ -77,7 +77,7 @@ class NewPermitListController extends GetxController {
 
   int userId = varUserAccessModel.value.user_id ?? 0;
 
-    // Add variables to store filter text for each column
+  // Add variables to store filter text for each column
   RxString permitIdFilterText = ''.obs;
   RxString descriptionFilterText = ''.obs;
   RxString permitTypeNameFilterText = ''.obs;
@@ -87,7 +87,6 @@ class NewPermitListController extends GetxController {
   RxString approvedByNameFilterText = ''.obs;
   RxString approvedDatetimeFilterText = ''.obs;
   RxString current_status_shortFilterText = ''.obs;
-
 
   String formatDate(String? inputDateTime) {
     ///
@@ -108,7 +107,6 @@ class NewPermitListController extends GetxController {
 
     return formattedDateTimeString;
   }
- 
 
   ///Buttons Cancel, Close Reject
   TextEditingController cancelCommentTextFieldCtrlr = TextEditingController();
@@ -132,7 +130,7 @@ class NewPermitListController extends GetxController {
     facilityIdStreamSubscription = controller.facilityId$.listen((event) {
       facilityId = event;
       Future.delayed(Duration(seconds: 1), () {
-        getNewPermitList(facilityId, userId, formattedTodate, formattedFromdate,
+        getNewPermitList(facilityId, userId, formattedFromdate, formattedTodate,
             true, false, false);
       });
     });
@@ -178,7 +176,7 @@ class NewPermitListController extends GetxController {
 
   Future<void> getNewPermitList(int facilityId, int userId, dynamic startDate,
       dynamic endDate, bool isLoading, bool self_view, bool non_expired) async {
-    newPermitList!.value = <NewPermitModel>[];
+    newPermitList.value = <NewPermitModel>[];
     final _newPermitList = await newPermitListPresenter.getNewPermitList(
         facilityId: facilityId,
         isLoading: isLoading,
@@ -331,7 +329,7 @@ class NewPermitListController extends GetxController {
   }
 
   Future<void> viewNewPermitList({int? permitId}) async {
-    Get.toNamed(Routes.viewPermitWebScreen, arguments: permitId);
+    Get.toNamed(Routes.viewPermitWebScreen, arguments: {"permitId": permitId});
   }
 
   void goToJobCardScreen(int? jobId) {

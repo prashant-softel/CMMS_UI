@@ -1,6 +1,7 @@
+import 'package:cmms/app/incident_report_list/incident_report_list_controller.dart';
+import 'package:cmms/app/new_permit/new_permit_controller.dart';
 import 'package:cmms/app/new_permit_list/new_permit_list_controller.dart';
 import 'package:cmms/app/theme/color_values.dart';
-import 'package:cmms/app/view_permit/view_permit_controller.dart';
 import 'package:cmms/domain/repositories/repository.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -10,14 +11,14 @@ import '../navigators/app_pages.dart';
 import '../theme/dimens.dart';
 import '../theme/styles.dart';
 
-class PermitMessageApproveDialog extends GetView {
-  String? createPermitData;
+class CreateJobCardDialog extends GetView {
+  String? approveIncidentReportData;
   String? data;
-  int? jobId;
+  List<dynamic>? jcId;
 
-  PermitMessageApproveDialog({super.key, this.createPermitData, this.data,this.jobId});
-  final ViewPermitController _controller = Get.find();
-
+  CreateJobCardDialog(
+      {super.key, this.approveIncidentReportData, this.data, this.jcId});
+  final NewPermitController _controller = Get.find();
 
   @override
   Widget build(BuildContext context) {
@@ -29,7 +30,7 @@ class PermitMessageApproveDialog extends GetView {
         insetPadding: Dimens.edgeInsets10_0_10_0,
         contentPadding: EdgeInsets.zero,
         title: Text(
-          'Permit Approval',
+          'Create Job Card',
           textAlign: TextAlign.center,
           style: TextStyle(color: Colors.black),
         ),
@@ -47,9 +48,11 @@ class PermitMessageApproveDialog extends GetView {
                     color: ColorValues.greyLightColour,
                     thickness: 1,
                   ),
-                  Text(
-                      '${data}', style: TextStyle(color: Colors.green),textAlign: TextAlign.center),
-                  //     SizedBox(height: 20,),
+                  Center(
+                    child: Text(
+                        '${data}', style: TextStyle(color: Colors.green),textAlign: TextAlign.center),
+                  ),
+                      // SizedBox(height: 20,),
                   // Row(
                   //     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   //     children: [
@@ -81,15 +84,17 @@ class PermitMessageApproveDialog extends GetView {
           Dimens.boxWidth10,
           Center(
             child: ElevatedButton(
-              style: Styles.darkBlueElevatedButtonStyle,
+             style: Styles.yellowElevatedButtonStyle,
               onPressed: () {
-                jobId != null
-                ?Get.offAllNamed(Routes.jobDetails,arguments: {"jobId":jobId})
-                :Get.offAllNamed(Routes.newPermitList);
-                // _controller.getNewPermitList(_controller.facilityId, _controller.userId,_controller.formattedTodate, _controller.formattedFromdate, false, false, false);
+                // _controller.getIncidentReportList(
+                //     _controller.facilityId,
+                //     _controller.formattedTodate,
+                //     _controller.formattedFromdate,
+                //     false);
+                    Get.offAllNamed(Routes.createMrs, arguments: {"jcId": jcId![0]});
                 Get.back();
               },
-              child: const Text('Ok'),
+              child: const Text('Add Mrs'),
             ),
           ),
         ],
