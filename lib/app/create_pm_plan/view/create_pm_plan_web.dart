@@ -201,37 +201,31 @@ class _CreatePmPlanWebState extends State<CreatePmPlanWeb> {
                                             ],
                                           ),
                                         ),
-                                        Padding(
-                                          padding:
-                                              const EdgeInsets.only(left: 90),
-                                          child: Row(
-                                            children: [
-                                              CustomRichText(
-                                                  title: "Frequency"),
-                                              Dimens.boxWidth5,
-                                              SizedBox(
-                                                child: DropdownWebWidget(
-                                                  margin: Dimens.edgeInsets5,
-                                                  width: (MediaQuery.of(context)
-                                                          .size
-                                                          .width *
-                                                      .2),
-                                                  controller: controller,
-                                                  dropdownList:
-                                                      controller.frequencyList,
-                                                  isValueSelected: controller
-                                                      .isSelectedfrequency
-                                                      .value,
-                                                  selectedValue: controller
-                                                      .selectedfrequency.value,
-                                                  onValueChanged:
-                                                      controller.onValueChanged,
-                                                ),
+                                        Spacer(),
+                                        Row(
+                                          children: [
+                                            CustomRichText(title: "Frequency"),
+                                            Dimens.boxWidth5,
+                                            SizedBox(
+                                              child: DropdownWebWidget(
+                                                margin: Dimens.edgeInsets5,
+                                                width: (MediaQuery.of(context)
+                                                        .size
+                                                        .width *
+                                                    .2),
+                                                controller: controller,
+                                                dropdownList:
+                                                    controller.frequencyList,
+                                                isValueSelected: controller
+                                                    .isSelectedfrequency.value,
+                                                selectedValue: controller
+                                                    .selectedfrequency.value,
+                                                onValueChanged:
+                                                    controller.onValueChanged,
                                               ),
-                                              Dimens.boxWidth30,
-                                              Dimens.boxWidth5,
-                                            ],
-                                          ),
+                                            ),
+                                            Dimens.boxWidth80,
+                                          ],
                                         ),
                                       ],
                                     ),

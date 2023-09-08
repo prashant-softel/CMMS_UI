@@ -1,7 +1,8 @@
 import 'package:dropdown_search/dropdown_search.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:get/get.dart';
-import 'package:multi_select_flutter/util/multi_select_item.dart';
+
 import '../theme/color_values.dart';
 import '../theme/dimens.dart';
 
@@ -43,13 +44,25 @@ class _MultipDropdownWebWidgetState extends State<MultipDropdownWebWidget> {
 
         Obx(
       () => Container(
-          height: MediaQuery.of(context).size.height * 0.040,
+          // color: ColorValues.greyBorderColor,
+          // height: MediaQuery.of(context).size.height * 0.040,
           width: widget.width,
-          margin: widget.margin,
+          // margin: widget.margin,
+          padding: EdgeInsets.symmetric(vertical: 5),
           decoration: BoxDecoration(
-            boxShadow: widget.boxShadow,
-            color: ColorValues.whiteColor,
-            borderRadius: BorderRadius.circular(5),
+            borderRadius: BorderRadius.circular(10),
+            border: Border.all(
+              color: Color.fromARGB(255, 227, 224, 224),
+              width: 1,
+            ),
+            boxShadow: [
+              BoxShadow(
+                color: Color.fromARGB(255, 236, 234, 234).withOpacity(0.5),
+                spreadRadius: 2,
+                blurRadius: 5,
+                offset: Offset(0, 2),
+              ),
+            ],
           ),
           child: //
 

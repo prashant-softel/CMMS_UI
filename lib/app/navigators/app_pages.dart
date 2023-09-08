@@ -110,6 +110,7 @@ import 'package:cmms/app/preventive_check_point/view/preventive_check_point_scre
 import 'package:cmms/app/preventive_maintanance/preventive_maintenance_binding.dart';
 import 'package:cmms/app/new_permit_list/new_permit_list_binding.dart';
 import 'package:cmms/app/new_permit_list/new_permit_list_screen.dart';
+import 'package:cmms/app/view_pm_plan/view_pm_plan_binding.dart';
 import 'package:cmms/app/view_warranty_claim/view/view_warranty_claim_content_web.dart';
 import 'package:cmms/app/view_warranty_claim/view_warranty_claim_binding.dart';
 import 'package:cmms/app/warranty_claim_list/warranty_claim_binding.dart';
@@ -217,6 +218,7 @@ import '../user_list/view/user_list_screen.dart';
 import '../role_List/view/role_list_screen.dart';
 import '../view_incident_report/view_incident_report_binding.dart';
 import '../view_incident_report/view_incident_report_screen.dart';
+import '../view_pm_plan/view/view_pm_plan_screen.dart';
 import '../view_return_mrs/view/view_return_mrs_screen.dart';
 import '../view_return_mrs/view_return_mrs_binding.dart';
 import '../view_user_detail/view/view_user_detail_screen.dart';
@@ -848,6 +850,11 @@ class AppPages {
       name: _Paths.pmPlanList,
       page: PmPlanListScreen.new,
       binding: PmPlanListBinding(),
+    ),
+    GetPage<dynamic>(
+      name: _Paths.viewPmPlanScreen,
+      page: ViewPmPlanScreen.new,
+      binding: ViewPmPlanBinding(),
     ),
   ];
 }
