@@ -24,7 +24,7 @@ class UserListController extends GetxController {
     'Actions': false,
   };
 
-  final streamController = StreamController<int>();
+  // final streamController = StreamController<int>();
 
   UserListPresenter userListPresenter;
   final HomeController homecontroller = Get.find();
@@ -67,7 +67,6 @@ class UserListController extends GetxController {
     "Created On": 123,
     "Updated On": 123,
   };
-  // Map<String, RxString> filterText = {};
   Map<String, RxString> filterText = {};
   void setColumnVisibility(String columnName, bool isVisible) {
     final newVisibility = Map<String, bool>.from(columnVisibility.value)

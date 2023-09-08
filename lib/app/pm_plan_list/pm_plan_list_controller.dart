@@ -1,6 +1,7 @@
 import 'dart:async';
 
 import 'package:cmms/app/pm_plan_list/pm_plan_list_presenter.dart';
+import 'package:cmms/domain/models/pm_plan_list_model.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
@@ -20,8 +21,8 @@ class PmPlanListController extends GetxController {
 
   StreamSubscription<int>? facilityIdStreamSubscription;
   int facilityId = 0;
-  RxList<PmTaskListModel?> pmTaskList = <PmTaskListModel?>[].obs;
-  RxList<PmTaskListModel?> filteredData = <PmTaskListModel>[].obs;
+  RxList<PmPlanListModel?> pmTaskList = <PmPlanListModel?>[].obs;
+  RxList<PmPlanListModel?> filteredData = <PmPlanListModel>[].obs;
   bool openFromDateToStartDatePicker = false;
   RxList<NewPermitModel?>? permitList = <NewPermitModel>[].obs;
   var permitDropdownValues = <String?>[].obs;
@@ -34,7 +35,7 @@ class PmPlanListController extends GetxController {
   late List<TextEditingController> textControllers;
   RxString responseMessage = ''.obs;
   int permitscheduleId = 0;
-  PmTaskListModel? pmTaskListModel;
+  PmPlanListModel? pmTaskListModel;
   RxList<String> pmTaskListTableColumns = <String>[].obs;
   PaginationController paginationController = PaginationController(
     rowCount: 0,
@@ -55,7 +56,7 @@ class PmPlanListController extends GetxController {
     facilityIdStreamSubscription = homecontroller.facilityId$.listen((event) {
       facilityId = event;
       Future.delayed(Duration(seconds: 2), () async {
-        getPmTaskList(facilityId, formattedTodate1, formattedFromdate1, false);
+        getPmPlanList(facilityId, formattedTodate1, formattedFromdate1, false);
       });
       // isDataLoading.value = false;
 
@@ -72,18 +73,18 @@ class PmPlanListController extends GetxController {
       return;
     }
 
-    pmTaskList.value = filteredData
-        .where((item) => item!.maintenance_order_number!
-            .toLowerCase()
-            .contains(keyword.toLowerCase()))
-        .toList();
+    // pmTaskList.value = filteredData
+    //     .where((item) => item!.maintenance_order_number!
+    //         .toLowerCase()
+    //         .contains(keyword.toLowerCase()))
+    //     .toList();
   }
 
-  Future<void> getPmTaskList(int facilityId, dynamic startDate, dynamic endDate,
+  Future<void> getPmPlanList(int facilityId, dynamic startDate, dynamic endDate,
       bool isLoading) async {
-    pmTaskList.value = <PmTaskListModel>[];
+    pmTaskList.value = <PmPlanListModel>[];
     // pmTaskList?.clear();
-    final _pmTaskList = await pmPlanListPresenter.getPmTaskList(
+    final _pmTaskList = await pmPlanListPresenter.getPmPlanList(
         facilityId: facilityId,
         isLoading: isLoading,
         startDate: startDate,
@@ -108,7 +109,7 @@ class PmPlanListController extends GetxController {
     }
   }
 
-  void getPmTaskListByDate() {
-    getPmTaskList(facilityId, formattedTodate1, formattedFromdate1, false);
+  void getPmPlanListByDate() {
+    getPmPlanList(facilityId, formattedTodate1, formattedFromdate1, false);
   }
 }

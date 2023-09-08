@@ -2,10 +2,8 @@ import 'package:cmms/app/theme/dimens.dart';
 import 'package:cmms/domain/models/user_list_model.dart';
 import 'package:data_table_2/data_table_2.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:get/get.dart';
-import 'package:scrollable_table_view/scrollable_table_view.dart';
 import '../../navigators/app_pages.dart';
 import '../../theme/color_values.dart';
 import '../../theme/styles.dart';
@@ -138,9 +136,6 @@ class _UserListContentWebState extends State<UserListContentWeb> {
                                             fontSize: 16,
                                             fontWeight: FontWeight.w400,
                                           ),
-                                          // style: TextStyle(
-                                          //     color: Colors.white,
-                                          //     fontSize: 16),
                                         ),
                                       ),
                                       itemBuilder: (BuildContext context) => <
@@ -266,91 +261,17 @@ class _UserListContentWebState extends State<UserListContentWeb> {
                                                       in value.entries)
                                                     if (entry.value)
                                                       buildDataColumn(
-                                                        // 'Profile',
-                                                        // 'Profile',
                                                         entry.key,
-                                                        //  ColumnSize.S,
                                                         controller.filterText[
                                                             entry.key]!,
                                                         controller.columnwidth[
                                                             entry.key],
-                                                        onSearchCallBack:
-                                                            (val) {
-                                                          print({"val": val});
-                                                          // final dataSource =
-                                                          //     UserDataSource(
-                                                          //         controller);
-                                                          // controller
-                                                          //     .streamController
-                                                          //     .add(DateTime
-                                                          //             .now()
-                                                          //         .millisecondsSinceEpoch);
-                                                        },
                                                       ),
-
-                                                  // buildDataColumn(
-                                                  //   "UserLoginID",
-                                                  //   "User Login ID",
-                                                  //   // ColumnSize.M,
-                                                  //   controller.userLoginIdFilterText,
-                                                  //   controller.colHeaderMap[
-                                                  //               "UserLoginID"] ==
-                                                  //           true
-                                                  //       ? 400
-                                                  //       : 0,
-                                                  // ),
-                                                  // buildDataColumn(
-                                                  //   "UserRole",
-                                                  //   "User Role", // ColumnSize.L,
-                                                  //   controller.userRoleFilterText,
-                                                  //   controller.colHeaderMap[
-                                                  //               "UserRole"] ==
-                                                  //           true
-                                                  //       ? 150
-                                                  //       : 0,
-                                                  // ),
-                                                  // buildDataColumn(
-                                                  //   "ContactNumber",
-                                                  //   "Contact Number",
-                                                  //   // ColumnSize.L,
-                                                  //   controller.contractFilterText,
-                                                  //   controller.colHeaderMap[
-                                                  //               "ContactNumber"] ==
-                                                  //           true
-                                                  //       ? 170
-                                                  //       : 0,
-                                                  // ),
-                                                  // buildDataColumn(
-                                                  //   "CreatedOn",
-                                                  //   "Created On",
-                                                  //   // ColumnSize.L,
-                                                  //   controller.createdOnFilterText,
-                                                  //   controller.colHeaderMap[
-                                                  //               "CreatedOn"] ==
-                                                  //           true
-                                                  //       ? 170
-                                                  //       : 0,
-                                                  // ),
-                                                  // buildDataColumn(
-                                                  //   "UpdatedOn",
-                                                  //   "Updated On",
-                                                  //   // ColumnSize.L,
-                                                  //   controller.updatedOnFilterText,
-                                                  //   controller.colHeaderMap[
-                                                  //               "UpdatedOn"] ==
-                                                  //           true
-                                                  //       ? 150
-                                                  //       : 0,
-                                                  // ),
-
                                                   buildDataColumn(
-                                                    // 'action'.tr,
                                                     'Actions',
-                                                    // ColumnSize.L,
                                                     controller
                                                         .userDateFilterText,
                                                     150,
-                                                    onSearchCallBack: (val) {},
                                                   ),
                                                 ],
                                               );
@@ -362,29 +283,6 @@ class _UserListContentWebState extends State<UserListContentWeb> {
                     ),
                   ),
                 ),
-                // Row(
-                //   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                //   children: [
-                //     for (var entry in controller.columnVisibility.value.entries)
-                //       Row(
-                //         children: [
-                //           ValueListenableBuilder(
-                //             valueListenable: controller.columnVisibility,
-                //             builder: (context, value, child) {
-                //               return Checkbox(
-                //                 value: value[entry.key],
-                //                 onChanged: (newValue) {
-                //                   controller.setColumnVisibility(
-                //                       entry.key, newValue!);
-                //                 },
-                //               );
-                //             },
-                //           ),
-                //           Text(entry.key),
-                //         ],
-                //       ),
-                //   ],
-                // ),
               ],
             );
           });
@@ -392,13 +290,14 @@ class _UserListContentWebState extends State<UserListContentWeb> {
   }
 
   DataColumn2 buildDataColumn(
-      // String columnName,
-      String header,
+    // String columnName,
+    String header,
 
-      /// ColumnSize columnSize,
-      RxString filterText,
-      double? fixedWidth,
-      {required Function(String) onSearchCallBack}) {
+    /// ColumnSize columnSize,
+    RxString filterText,
+    double? fixedWidth,
+    //  {required Function(String) onSearchCallBack}
+  ) {
     return //
         DataColumn2(
       // size: columnSize,
@@ -413,7 +312,7 @@ class _UserListContentWebState extends State<UserListContentWeb> {
               child: TextField(
                 onChanged: (value) {
                   filterText.value = value;
-                  onSearchCallBack(value);
+                  //   onSearchCallBack(value);
                 },
                 textAlign: TextAlign.left,
                 style: TextStyle(height: 1.0),
@@ -456,13 +355,6 @@ class UserDataSource extends DataTableSource {
 
   UserDataSource(this.controller) {
     filterUsers();
-    print("filkter kr de");
-    print({
-      "controller.idFilterText.value": controller.userLoginIdFilterText.value
-    });
-    // controller.streamController.stream.listen((evnt) {
-    //   filterUsers();
-    // });
   }
 
   ///
@@ -483,18 +375,15 @@ class UserDataSource extends DataTableSource {
           (User.contact_no ?? '')
               .toLowerCase()
               .contains(controller.contractFilterText.value.toLowerCase());
-      // (User?.status ?? '')
-      //     .toString()
-      //     .toLowerCase()
-      //     .contains(controller.statusFilterText.value.toLowerCase());
+
       // Add other filter conditions as needed
     }).toList();
-    print({"filteredUserList": filteredUserList});
+    // print({"filteredUserList": filteredUserList});
   }
 
   @override
   DataRow? getRow(int index) {
-    print({"getRow call"});
+    // print({"getRow call"});
     final UserDetails = filteredUserList[index];
 
     controller.userId.value = UserDetails?.id ?? 0;
@@ -523,20 +412,7 @@ class UserDataSource extends DataTableSource {
     }
     cells.add('Actions');
 
-    // controller.columnVisibility.value
-    //   ..entries.map((entry) {
-    //     print({"entry.value entry": entry});
-
-    //     // int idx = entry.key;
-    //     // String val = entry.value;
-    //     if (!entry.value) {
-    //       print({"entry.value removed": entry.key});
-    //       cells.remove(i);
-    //     }
-    //     i++;
-    //     return {};
-    //   });
-    print({"cell": cells});
+    // print({"cell": cells});
     return DataRow.byIndex(
       index: index,
       cells: cells.map((value) {
@@ -554,9 +430,6 @@ class UserDataSource extends DataTableSource {
                             const FlutterSecureStorage();
 
                         _flutterSecureStorage.delete(key: "userId");
-                        // controller.selectedItem = controller.filteredData
-                        //     .firstWhere(
-                        //         (element) => "${element?.name}" == value[1]);
                         int userId = UserDetails?.id ?? 0;
                         if (userId != 0) {
                           Get.toNamed(Routes.viewUserDetail,
@@ -573,9 +446,6 @@ class UserDataSource extends DataTableSource {
                             const FlutterSecureStorage();
 
                         _flutterSecureStorage.delete(key: "userId");
-                        // controller.selectedItem = controller.filteredData
-                        //     .firstWhere(
-                        //         (element) => "${element?.name}" == value[1]);
                         int userId = UserDetails?.id ?? 0;
                         if (userId != 0) {
                           Get.toNamed(Routes.addUser,
@@ -601,7 +471,6 @@ class UserDataSource extends DataTableSource {
         _flutterSecureStorage.delete(key: "UserId");
         Get.toNamed(Routes.viewUserDetail,
             arguments: {'userId': UserDetails?.id});
-        //  controller.goToUserDetailsScreen(int.tryParse('${UserDetails?.id}'));
       },
     );
   }

@@ -1,7 +1,6 @@
-import 'package:cmms/domain/models/role_model.dart';
+import 'package:cmms/domain/models/get_employee_stock_report_model.dart';
 import 'package:cmms/domain/repositories/repository.dart';
 
-import '../models/employe_stock_model.dart';
 import '../models/user_list_model.dart';
 
 class EmployeeStockReportUsecase {
@@ -17,11 +16,12 @@ class EmployeeStockReportUsecase {
         facilityId,
         isLoading,
       );
-  Future<EmployeeStockListModel?> getCmmsItemList(
-          {int? facilityId, bool? isLoading, int? userId}) async =>
-      await repository.getCmmsItemList(
-        facilityId,
-        isLoading,
-        userId,
-      );
+  Future<List<EmployeeStockReportListModel>?> getEmployeeStockReportList(
+          {int? facilityId,
+          bool? isLoading,
+          int? userId,
+          dynamic endDate,
+          dynamic startDate}) async =>
+      await repository.getEmployeeStockReportList(
+          facilityId, isLoading, userId, startDate, endDate);
 }

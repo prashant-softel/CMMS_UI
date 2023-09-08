@@ -17,8 +17,8 @@ class CreateMrsContentWeb extends GetView<CreateMrsController> {
 
   @override
   Widget build(BuildContext context) {
-    return Obx(
-      () => Column(
+    return Obx(() {
+      return Column(
         children: [
           Container(
             height: 45,
@@ -439,7 +439,7 @@ class CreateMrsContentWeb extends GetView<CreateMrsController> {
             ),
           ),
         ],
-      ),
-    );
+      );
+    });
   }
 }
