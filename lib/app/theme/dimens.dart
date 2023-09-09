@@ -105,6 +105,7 @@ abstract class Dimens {
   static double twoHundred = 200.sp;
   static double oneHundredEighty = 180.sp;
   static double oneHundredSeventy = 170.sp;
+  static double oneHundredSeventyFive = 175.sp;
   static double oneHundredSixty = 160.sp;
   static double twoHundredFive = 205.sp;
   static double twoHundredTen = 210.sp;
@@ -1350,6 +1351,7 @@ abstract class Dimens {
   static SizedBox boxWidth200 = SizedBox(width: twoHundred);
   static SizedBox boxWidth180 = SizedBox(width: oneHundredEighty);
   static SizedBox boxWidth170 = SizedBox(width: oneHundredSeventy);
+  static SizedBox boxWidth175 = SizedBox(width: oneHundredSeventyFive);
   static SizedBox boxWidth160 = SizedBox(width: oneHundredSixty);
 
 

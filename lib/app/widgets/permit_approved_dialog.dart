@@ -44,7 +44,7 @@ class PermitApprovedDialog extends GetView {
              Container(
               padding: Dimens.edgeInsets05_0_5_0,
               height: 200,
-              width: double.infinity,
+              width: 400,
               child: Column(
                   crossAxisAlignment: CrossAxisAlignment.stretch,
                   children: [

@@ -1792,25 +1792,33 @@ class NewPermitScreen extends GetView<NewPermitController> {
                                                       SizedBox(
                                                         height: 20,
                                                       ),
-                                                      Padding(
-                                                        padding:
-                                                            const EdgeInsets
-                                                                .only(left: 60),
-                                                        child: Row(
-                                                          children: [
-                                                            Container(
-                                                              margin: EdgeInsets
-                                                                  .only(
-                                                                      right:
-                                                                          13),
-                                                              alignment: Alignment
-                                                                  .centerRight,
-                                                              width: 172,
-                                                              child: CustomRichText(
-                                                                  title:
-                                                                      'Block/Plot: '),
-                                                            ),
-                                                            SizedBox(
+                                                      Column(
+                                                        crossAxisAlignment : CrossAxisAlignment.start,
+                                                        children: [
+                                                          Row(
+                                                            crossAxisAlignment : CrossAxisAlignment.start,
+                                                            children: [
+                                                              Padding(
+                                                                padding: const EdgeInsets.only(left: 120),
+                                                                child: Column(
+                                                                  crossAxisAlignment : CrossAxisAlignment.end,
+                                                                  children: [
+                                                                    Dimens.boxHeight10,
+                                                                    CustomRichText(title:'Block/Plot: '),
+                                                                    Dimens.boxHeight15,
+                                                                    CustomRichText(title:'Type of permit: '),
+                                                                    Dimens.boxHeight25,
+                                                                    CustomRichText(title:'Start Date: '),
+                                                              
+                                                              
+                                                                  ],
+                                                                ),
+                                                              ),
+                                                              Dimens.boxWidth10,
+                                                              Column(
+                                                                crossAxisAlignment : CrossAxisAlignment.start,
+                                                                children: [
+                                                                  SizedBox(
                                                               width: MediaQuery.of(
                                                                           context)
                                                                       .size
@@ -1838,19 +1846,63 @@ class NewPermitScreen extends GetView<NewPermitController> {
                                                               ),
                                                               // LoginCustomTextfield(),
                                                             ),
-                                                            Container(
-                                                              padding:
-                                                                  const EdgeInsets
-                                                                          .only(
-                                                                      left: 75),
-                                                              child: Row(
+                                                            Dimens.boxHeight10,
+                                                            SizedBox(
+                                                              width: MediaQuery.of(
+                                                                          context)
+                                                                      .size
+                                                                      .width /
+                                                                  5,
+                                                              child: Obx(
+                                                                () =>
+                                                                    DropdownWebWidget(
+                                                                  dropdownList:
+                                                                      controller
+                                                                          .typePermitList,
+                                                                  isValueSelected:
+                                                                      controller
+                                                                          .isTypePermitSelected
+                                                                          .value,
+                                                                  selectedValue:
+                                                                      controller
+                                                                          .selectedTypePermit
+                                                                          .value,
+                                                                  onValueChanged:
+                                                                      controller
+                                                                          .onValueChanged,
+                                                                ),
+                                                              ),
+                                                            ),
+                                                            Dimens.boxHeight10,
+                                                             _buildStartValidTillDateField_web(
+                                                                  context,
+                                                                  0,
+                                                                ),
+
+                                                                ],
+                                                              ),
+                                                              
+                                                              Padding(
+                                                                padding: const EdgeInsets.only(left: 65),
+                                                                child: Column(
+                                                                  crossAxisAlignment : CrossAxisAlignment.end,
+                                                                  children: [
+                                                                    Dimens.boxHeight10,
+                                                                    CustomRichText(
+                                                                        title:
+                                                                            'Equipment Categories: '),
+                                                                    Dimens.boxHeight60,
+                                                                    CustomRichText(
+                                                                        title:
+                                                                            'Valid Till: '),
+                                                                
+                                                                  ],
+                                                                ),
+                                                              ),
+                                                              Dimens.boxWidth10,
+                                                              Column(
+                                                                crossAxisAlignment : CrossAxisAlignment.start,
                                                                 children: [
-                                                                  CustomRichText(
-                                                                      title:
-                                                                          'Equipment Categories: '),
-                                                                  SizedBox(
-                                                                    width: 8,
-                                                                  ),
                                                                   controller.permitId
                                                                               .value >
                                                                           0
@@ -1908,114 +1960,19 @@ class NewPermitScreen extends GetView<NewPermitController> {
                                                                             },
                                                                           ),
                                                                         ),
+                                                                        Dimens.boxHeight30,
+                                                                         _buildStartValidTillDateField_web(
+                                                                    context, 1),
+                                                              
                                                                 ],
                                                               ),
-                                                            )
-                                                          ],
-                                                        ),
-                                                      ),
-                                                      SizedBox(
-                                                        height: 10,
-                                                      ),
-                                                      Padding(
-                                                        padding:
-                                                            const EdgeInsets
-                                                                .only(left: 60),
-                                                        child: Row(
-                                                          mainAxisAlignment:
-                                                              MainAxisAlignment
-                                                                  .start,
-                                                          children: [
-                                                            Container(
-                                                              margin: EdgeInsets
-                                                                  .only(
-                                                                      right:
-                                                                          13),
-                                                              alignment: Alignment
-                                                                  .centerRight,
-                                                              width: 172,
-                                                              child: CustomRichText(
-                                                                  title:
-                                                                      'Type of permit: '),
-                                                            ),
-                                                            SizedBox(
-                                                              width: MediaQuery.of(
-                                                                          context)
-                                                                      .size
-                                                                      .width /
-                                                                  5,
-                                                              child: Obx(
-                                                                () =>
-                                                                    DropdownWebWidget(
-                                                                  dropdownList:
-                                                                      controller
-                                                                          .typePermitList,
-                                                                  isValueSelected:
-                                                                      controller
-                                                                          .isTypePermitSelected
-                                                                          .value,
-                                                                  selectedValue:
-                                                                      controller
-                                                                          .selectedTypePermit
-                                                                          .value,
-                                                                  onValueChanged:
-                                                                      controller
-                                                                          .onValueChanged,
-                                                                ),
-                                                              ),
-                                                            ),
-                                                            SizedBox(
-                                                              width: 60,
-                                                            ),
-                                                          ],
-                                                        ),
-                                                      ),
-                                                      SizedBox(
-                                                        height: 10,
-                                                      ),
-                                                      Padding(
-                                                        padding:
-                                                            const EdgeInsets
-                                                                .only(left: 60, ),
-                                                        child: Row(
-                                                          mainAxisAlignment:
-                                                              MainAxisAlignment
-                                                                  .start,
-                                                          children: [
-                                                            Container(
-                                                              margin: EdgeInsets
-                                                                  .only(
-                                                                      right:
-                                                                          13),
-                                                              alignment: Alignment
-                                                                  .centerRight,
-                                                              width: 172,
-                                                              child: CustomRichText(
-                                                                  title:
-                                                                      'Start Date: '),
-                                                            ),
-                                                                                                            
-                                                            _buildStartValidTillDateField_web(
-                                                              context,
-                                                              0,
-                                                            ),
-                                                            Dimens.boxWidth170,
-                                                            CustomRichText(
-                                                                title:
-                                                                    'Valid Till: '),
-                                                            SizedBox(
-                                                              width: 5,
-                                                            ),
-                                                            _buildStartValidTillDateField_web(
-                                                            context, 1),
-                                                            
-                                                                                                            
-                                                            // _buildValidTillField_web(
-                                                            //     context),
-                                                          ],
-                                                        ),
-                                                      ),
 
+                                                            ],
+                                                          )
+
+                                                        ],
+                                                      ),
+                                                    
                                                       Padding(
                                                         padding:
                                                             const EdgeInsets
@@ -2594,12 +2551,11 @@ class NewPermitScreen extends GetView<NewPermitController> {
                                                       ),
 
                                                       ///Team Deploying
-                                                      
-                                                   controller.permitId
+
+                                                      controller.permitId
                                                                   .value <=
                                                               0
-                                                          ? 
-                                                          SizedBox(
+                                                          ? SizedBox(
                                                               height: ((controller
                                                                           .filteredEmployeeNameList
                                                                           .length) *
@@ -2753,7 +2709,6 @@ class NewPermitScreen extends GetView<NewPermitController> {
                                                                 ),
                                                               ),
                                                             )
-                                                         
                                                           : SizedBox(
                                                               height: ((controller
                                                                           .listEmployee!
