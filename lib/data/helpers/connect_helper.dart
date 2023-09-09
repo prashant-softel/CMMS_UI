@@ -648,8 +648,8 @@ class ConnectHelper {
     required String end_date,
   }) async {
     // facilityId = 45;
-    var startDateParam = (start_date != null) ? 'start_date=$start_date&' : '';
-    var endDateParam = (end_date != '') ? 'end_date=$end_date' : '';
+    var startDateParam = (start_date != null) ? 'startDate=$start_date&' : '';
+    var endDateParam = (end_date != '') ? 'endDate=$end_date' : '';
     var responseModel = await apiWrapper.makeRequest(
       'Permit/GetPermitList?facility_id=$facilityId&userId=$userId&self_view=$self_view&non_expired=$non_expired&' +
           startDateParam +
