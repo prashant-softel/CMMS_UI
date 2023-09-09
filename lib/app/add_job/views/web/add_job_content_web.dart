@@ -239,11 +239,11 @@ class _AddJobContentWebState extends State<AddJobContentWeb> {
                                           ],
                                         ),
                                         Dimens.boxHeight10,
-
                                         Row(
                                           children: [
                                             CustomRichText(
-                                                title: 'Select Block :'),
+                                                title:
+                                                    'Equipment Categories :'),
                                             Dimens.boxWidth10,
                                             Container(
                                               decoration: BoxDecoration(
@@ -270,22 +270,69 @@ class _AddJobContentWebState extends State<AddJobContentWeb> {
                                                       .width *
                                                   .2),
                                               child: Obx(
-                                                () => DropdownWebWidget(
-                                                  dropdownList:
-                                                      controller.blockList,
-                                                  isValueSelected: controller
-                                                      .isBlockSelected.value,
-                                                  selectedValue: controller
-                                                      .selectedBlock.value,
-                                                  onValueChanged: controller
-                                                      .onDropdownValueChanged,
-                                                  // focusNode: controller.focusNode,
+                                                () => MultiSelectDialogField(
+                                                  dialogWidth: 300,
+                                                  dialogHeight: 400,
+                                                  searchable: true,
+                                                  validator: (selectedItems) {
+                                                    if (controller
+                                                            .isEquipmentCategorySelected
+                                                            .value ==
+                                                        false) {
+                                                      return "Required field";
+                                                    } else {
+                                                      return null;
+                                                    }
+                                                  },
+                                                  autovalidateMode:
+                                                      AutovalidateMode.always,
+                                                  decoration: BoxDecoration(
+                                                    border: Border.all(
+                                                      color: controller
+                                                                  .isEquipmentCategorySelected
+                                                                  .value ==
+                                                              false
+                                                          ? Colors.red
+                                                          : Colors.transparent,
+                                                      width: 1.0,
+                                                    ),
+                                                    borderRadius:
+                                                        BorderRadius.circular(
+                                                            5),
+                                                  ),
+                                                  buttonIcon: Icon(
+                                                      Icons.arrow_drop_down),
+                                                  items: controller
+                                                      .equipmentCategoryList
+                                                      .map(
+                                                        (equipCat) =>
+                                                            MultiSelectItem<
+                                                                InventoryCategoryModel?>(
+                                                          equipCat,
+                                                          equipCat?.name ?? '',
+                                                        ),
+                                                      )
+                                                      .toList(),
+                                                  onConfirm:
+                                                      (selectedOptionsList) => {
+                                                    controller
+                                                        .equipmentCategoriesSelected(
+                                                            selectedOptionsList),
+                                                    controller
+                                                            .isEquipmentCategorySelected
+                                                            .value =
+                                                        selectedOptionsList
+                                                            .isNotEmpty,
+                                                  },
+                                                  chipDisplay:
+                                                      MultiSelectChipDisplay(),
                                                 ),
                                               ),
                                             ),
                                           ],
                                         ),
                                         Dimens.boxHeight10,
+
                                         Row(
                                           children: [
                                             CustomRichText(
@@ -488,7 +535,7 @@ class _AddJobContentWebState extends State<AddJobContentWeb> {
                                           ],
                                         ),
 
-                                        Dimens.boxHeight10,
+                                        //  Dimens.boxHeight10,
                                       ],
                                     ),
                                     Dimens.boxWidth30,
@@ -497,11 +544,12 @@ class _AddJobContentWebState extends State<AddJobContentWeb> {
                                           CrossAxisAlignment.end,
                                       children: [
                                         ///
+                                        //   Dimens.boxHeight10,
+
                                         Row(
                                           children: [
                                             CustomRichText(
-                                                title:
-                                                    'Equipment Categories :'),
+                                                title: 'Select Block :'),
                                             Dimens.boxWidth10,
                                             Container(
                                               decoration: BoxDecoration(
@@ -528,62 +576,16 @@ class _AddJobContentWebState extends State<AddJobContentWeb> {
                                                       .width *
                                                   .2),
                                               child: Obx(
-                                                () => MultiSelectDialogField(
-                                                  dialogWidth: 300,
-                                                  dialogHeight: 400,
-                                                  searchable: true,
-                                                  validator: (selectedItems) {
-                                                    if (controller
-                                                            .isEquipmentCategorySelected
-                                                            .value ==
-                                                        false) {
-                                                      return "Required field";
-                                                    } else {
-                                                      return null;
-                                                    }
-                                                  },
-                                                  autovalidateMode:
-                                                      AutovalidateMode.always,
-                                                  decoration: BoxDecoration(
-                                                    border: Border.all(
-                                                      color: controller
-                                                                  .isEquipmentCategorySelected
-                                                                  .value ==
-                                                              false
-                                                          ? Colors.red
-                                                          : Colors.transparent,
-                                                      width: 1.0,
-                                                    ),
-                                                    borderRadius:
-                                                        BorderRadius.circular(
-                                                            5),
-                                                  ),
-                                                  buttonIcon: Icon(
-                                                      Icons.arrow_drop_down),
-                                                  items: controller
-                                                      .equipmentCategoryList
-                                                      .map(
-                                                        (equipCat) =>
-                                                            MultiSelectItem<
-                                                                InventoryCategoryModel?>(
-                                                          equipCat,
-                                                          equipCat?.name ?? '',
-                                                        ),
-                                                      )
-                                                      .toList(),
-                                                  onConfirm:
-                                                      (selectedOptionsList) => {
-                                                    controller
-                                                        .equipmentCategoriesSelected(
-                                                            selectedOptionsList),
-                                                    controller
-                                                            .isEquipmentCategorySelected
-                                                            .value =
-                                                        selectedOptionsList
-                                                            .isNotEmpty,
-                                                  },
-                                                  chipDisplay:
-                                                      MultiSelectChipDisplay(),
+                                                () => DropdownWebWidget(
+                                                  dropdownList:
+                                                      controller.blockList,
+                                                  isValueSelected: controller
+                                                      .isBlockSelected.value,
+                                                  selectedValue: controller
+                                                      .selectedBlock.value,
+                                                  onValueChanged: controller
+                                                      .onDropdownValueChanged,
+                                                  // focusNode: controller.focusNode,
                                                 ),
                                               ),
                                             ),

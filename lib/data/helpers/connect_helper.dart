@@ -748,15 +748,14 @@ class ConnectHelper {
     return responseModel;
   }
 
-  Future<ResponseModel> permitApprovedButton({
-    required String auth,
-    bool? isLoading,
-    String? comment,
-    String? id,
-    String? employee_id,
-    String? ptwStatus,
-    int? jobId
-  }) async {
+  Future<ResponseModel> permitApprovedButton(
+      {required String auth,
+      bool? isLoading,
+      String? comment,
+      String? id,
+      String? employee_id,
+      String? ptwStatus,
+      int? jobId}) async {
     // facilityId = 45;
     // ptwStatus = 123;
     var responseModel = await apiWrapper.makeRequest(
@@ -773,7 +772,8 @@ class ConnectHelper {
     print('PermitApprovedResponse: ${responseModel.data}');
     var res = responseModel.data;
     var parsedJson = json.decode(res);
-    Get.dialog<void>(PermitMessageApproveDialog(data: parsedJson['message'], jobId: jobId));
+    Get.dialog<void>(
+        PermitMessageApproveDialog(data: parsedJson['message'], jobId: jobId));
 
     return responseModel;
   }
@@ -1636,8 +1636,8 @@ class ConnectHelper {
     );
     var res = responseModel.data;
     var parsedJson = json.decode(res);
-    Get.dialog<void>(
-        CreateJobCardDialog(data: parsedJson['message'], jcId: parsedJson['id']));
+    Get.dialog<void>(CreateJobCardDialog(
+        data: parsedJson['message'], jcId: parsedJson['id']));
     print('jcId2:${parsedJson['id']}');
     return responseModel;
   }
@@ -1729,12 +1729,12 @@ class ConnectHelper {
     );
 
     print('CreateNewPermitResponseForJob:${responseModel.data}');
-    var res = responseModel.data;
-    var parsedJson = json.decode(res);
-    Get.dialog<void>(CreateNewPermitForJobDialog(
-      data: parsedJson['message'],
-      PtwId: parsedJson['id'],
-    ));
+    // var res = responseModel.data;
+    // var parsedJson = json.decode(res);
+    // Get.dialog<void>(CreateNewPermitForJobDialog(
+    //   data: parsedJson['message'],
+    //   PtwId: parsedJson['id'],
+    // ));
 
     return responseModel;
   }

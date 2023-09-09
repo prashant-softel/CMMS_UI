@@ -49,10 +49,11 @@ class CreateJobCardDialog extends GetView {
                     thickness: 1,
                   ),
                   Center(
-                    child: Text(
-                        '${data}', style: TextStyle(color: Colors.green),textAlign: TextAlign.center),
+                    child: Text('${data}',
+                        style: TextStyle(color: Colors.green),
+                        textAlign: TextAlign.center),
                   ),
-                      // SizedBox(height: 20,),
+                  // SizedBox(height: 20,),
                   // Row(
                   //     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   //     children: [
@@ -84,14 +85,16 @@ class CreateJobCardDialog extends GetView {
           Dimens.boxWidth10,
           Center(
             child: ElevatedButton(
-             style: Styles.yellowElevatedButtonStyle,
+              style: Styles.yellowElevatedButtonStyle,
               onPressed: () {
                 // _controller.getIncidentReportList(
                 //     _controller.facilityId,
                 //     _controller.formattedTodate,
                 //     _controller.formattedFromdate,
                 //     false);
-                    Get.offAllNamed(Routes.createMrs, arguments: {"jcId": jcId![0]});
+                //  Get.offAllNamed(Routes.createMrs, arguments: {"jcId": jcId![0]});
+                Get.offAllNamed(Routes.createMrs,
+                    arguments: {"whereUsedId": jcId![0], "whereUsed": 4});
                 Get.back();
               },
               child: const Text('Add Mrs'),

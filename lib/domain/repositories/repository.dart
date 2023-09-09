@@ -374,7 +374,6 @@ class Repository {
           print('CreateForJobPermitResponse:${permitForJob[0]}');
           if (jobId != null) {
             linkToPermit(jobId, permitForJob[0], true);
-            createJobCard(auth, jobId, isLoading);
           }
           return responseMap;
         }
@@ -3202,6 +3201,7 @@ class Repository {
       if (!res.hasError) {
         if (res.errorCode == 200) {
           var responseMap = json.decode(res.data);
+          createJobCard(auth, jobId, false);
           return responseMap;
         }
       } //
@@ -3673,20 +3673,19 @@ class Repository {
       );
 
       if (!res.hasError) {
-        if (res.errorCode == 200) {
-          var responseMap = json.decode(res.data);
-          var jcId = responseMap["id"];
-          // Get.toNamed(Routes.createMrs,
-          //     arguments: {"whereUsedId": jcId[0], "whereUsed": 4});
-          // Get.toNamed(
-          //   Routes.newPermit,
-          //   arguments: {"jcId":jcId[0]},
-          // );
-          print('jcId:${jcId[0]}');
-          print('JobCard:${res.data}');
-          return responseMap;
-        
-        }
+        // if (res.errorCode == 200) {
+        //   var responseMap = json.decode(res.data);
+        //   var jcId = responseMap["id"];
+        //   // Get.toNamed(Routes.createMrs,
+        //   //     arguments: {"whereUsedId": jcId[0], "whereUsed": 4});
+        //   // Get.toNamed(
+        //   //   Routes.newPermit,
+        //   //   arguments: {"jcId":jcId[0]},
+        //   // );
+        //   print('jcId:${jcId[0]}');
+        //   print('JobCard:${res.data}');
+        //   return responseMap;
+        // }
       } else {
         Utility.showDialog(res.errorCode.toString() + 'createJobCard');
       }

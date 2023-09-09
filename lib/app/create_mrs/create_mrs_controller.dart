@@ -30,7 +30,7 @@ class CreateMrsController extends GetxController {
   var isSetTemplate = false.obs;
   Rx<int> whereUsedTypeId = 0.obs;
   Rx<int> whereUsed = 0.obs;
-  int? jcId = 0;
+  // int? jcId = 0;
 
   void setTemplatetoggle() {
     isSetTemplate.value = !isSetTemplate.value;
@@ -39,8 +39,8 @@ class CreateMrsController extends GetxController {
   ///
   @override
   void onInit() async {
-    jcId = Get.arguments["jcId"];
-    print('JCId:$jcId');
+    //  whereUsedTypeId = Get.arguments["jcId"];
+//    print('JCId:$jcId');
     // whereUsedTypeId = Get.arguments;
     try {
       final arguments = Get.arguments;
