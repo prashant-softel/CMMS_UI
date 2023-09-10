@@ -41,6 +41,11 @@ class BusinessListController extends GetxController {
       <CityModel>[].obs;
   RxList<BusinessTypeModel?>  businessCategoryList =
       <BusinessTypeModel>[].obs;
+  Rx<bool> isNameInvalid = false.obs;
+  Rx<bool> isEmailInvalid = false.obs;
+  Rx<bool> isPersonInvalid = false.obs;
+  Rx<bool> isNumberInvalid = false.obs;
+  Rx<bool> isFormInvalid = false.obs;
 
   Rx<String?> selectedBusinessType = ''.obs;
   Rx<String> selectedCountry = ''.obs;
@@ -316,8 +321,51 @@ class BusinessListController extends GetxController {
     );
   }
 
+  void checkForm() {
+
+    if(selectedBusinessType.value == ''){
+      isSelectedBusinessType.value = false;
+    }
+
+    if(isNameInvalid.value == true || isSelectedBusinessType.value == false ||
+        isEmailInvalid.value == false || isPersonInvalid.value == false || isNumberInvalid  .value == false
+    ){
+      isFormInvalid.value = true;
+    } else {
+      isFormInvalid.value = false;
+    }
+  }
 
   Future<bool> createBusinessListNumber() async {
+
+    if (businesslistNumberCtrlr.text.trim() == '' ) {
+      isNameInvalid.value = true;
+      isFormInvalid.value = true;
+    }
+
+    if (emailCtrlr.text.trim() == '' ) {
+      isEmailInvalid.value = true;
+      isFormInvalid.value = true;
+    }
+
+    if (contactpersonCtrlr.text.trim() == '' ) {
+      isPersonInvalid.value = true;
+      isFormInvalid.value = true;
+    }
+
+    if (contactnumberCtrlr.text.trim() == '' ) {
+      isNumberInvalid.value = true;
+      isFormInvalid.value = true;
+    }
+
+
+
+    checkForm();
+    if (isFormInvalid.value) {
+      return false;
+    }
+
+
     if (
         websiteCtrlr.text.trim()== '' ||
         emailCtrlr.text.trim() == ''  ||
