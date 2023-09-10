@@ -31,6 +31,9 @@ class BlockTypeListController extends GetxController {
   //checkbox
   RxBool isChecked = true.obs;
   BlockTypeListModel? selectedItem;
+  Rx<bool> isNameInvalid = false.obs;
+  Rx<bool> isDescriptionInvalid = false.obs;
+  Rx<bool> isFormInvalid = false.obs;
 
   Rx<String> selectedfacility = ''.obs;
   Rx<bool> isSelectedfacility = true.obs;
@@ -139,16 +142,43 @@ class BlockTypeListController extends GetxController {
     );
     update(['block_type_list']);
   }
+  void checkForm() {
+
+    if(selectedfacility.value == ''){
+      isSelectedfacility.value = false;
+    }
+
+    if(isNameInvalid.value == true || isDescriptionInvalid.value == true || isSelectedfacility.value == false
+    ){
+      isFormInvalid.value = true;
+    } else {
+      isFormInvalid.value = false;
+    }
+  }
 
   Future<bool> createBlockList() async {
+    if (titleCtrlr.text.trim() == '' ) {
+      isNameInvalid.value = true;
+      // isDescriptionInvalid.value = true;
+      isFormInvalid.value = true;
+    }
+    if (descriptionCtrlr.text.trim() == '') {
+      // isNameInvalid.value = true;
+      isDescriptionInvalid.value = true;
+      isFormInvalid.value = true;
+    }
+    checkForm();
+    if (isFormInvalid.value == true) {
+      return false;
+    }
     print(
         "title : ${titleCtrlr.text.trim()} , description : ${descriptionCtrlr.text.trim()} ");
     if (titleCtrlr.text.trim() == '' ||
         descriptionCtrlr.text.trim() == '' ||
-        selectedFacilityId == 0) {
+        selectedfacility == '') {
       Fluttertoast.showToast(
           msg: "Please enter required field", fontSize: 16.0);
-      print("Fields are blank, please enter dat ato create");
+      print("Fields are blank, please enter data to create");
     } else {
       String _title = titleCtrlr.text.trim();
       String _description = descriptionCtrlr.text.trim();

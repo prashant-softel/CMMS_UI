@@ -22,8 +22,8 @@ import '../../domain/models/update_facility_type_model.dart';
 
 class FacilityTypeListController extends GetxController {
   FacilityTypeListController(
-    this.facilityTypeListPresenter,
-  );
+      this.facilityTypeListPresenter,
+      );
   FacilityTypeListPresenter facilityTypeListPresenter;
   final HomeController homecontroller = Get.find();
   FacilityTypeListModel? selectedItem;
@@ -31,7 +31,7 @@ class FacilityTypeListController extends GetxController {
   RxBool isCheckedRequire = false.obs;
   void requiretoggleCheckbox() {
     isCheckedRequire.value =
-        !isCheckedRequire.value; // Toggle the checkbox state
+    !isCheckedRequire.value; // Toggle the checkbox state
   }
 
   //checkbox
@@ -42,6 +42,7 @@ class FacilityTypeListController extends GetxController {
       <CountryState>[].obs;
   RxList<CityModel?> cityList =
       <CityModel>[].obs;
+  Rx<bool> isFormInvalid = false.obs;
 
   // Rx<String> selectedBusinessType = ''.obs;
   Rx<String> selectedCountry = ''.obs;
@@ -67,7 +68,7 @@ class FacilityTypeListController extends GetxController {
   Rx<bool> isSelectedOperator = true.obs;
   int operatorId = 0;
   RxList<BusinessListModel?> operatorList = <BusinessListModel>[].obs;
-
+  Rx<bool> isNameInvalid = false.obs;
   Rx<String> selectedSpv = ''.obs;
   Rx<bool> isSelectedSpv = true.obs;
   int SpvId = 0;
@@ -104,7 +105,7 @@ class FacilityTypeListController extends GetxController {
   int selectedJobSOPId = 0;
 
   PaginationController facilityTypeListPaginationController =
-      PaginationController(
+  PaginationController(
     rowCount: 0,
     rowsPerPage: 10,
   );
@@ -172,7 +173,7 @@ class FacilityTypeListController extends GetxController {
     facilityTypeList.clear();
     facilityTypeList.value = <FacilityTypeListModel>[];
     final _facilityTypePermitList =
-        await facilityTypeListPresenter.getFacilityTypeList(
+    await facilityTypeListPresenter.getFacilityTypeList(
       isLoading: true,
       // categoryIds: categoryIds,
       // job_type_id: selectedJobSOPId,
@@ -438,6 +439,7 @@ class FacilityTypeListController extends GetxController {
       ownerId = ownerList[indexId]?.id ?? 0;
     }
     selectedOwner.value = list;
+    isSelectedOwner.value = true;
     print("index received is : $indexId & owner id  : $ownerId");
   }
 
@@ -452,6 +454,7 @@ class FacilityTypeListController extends GetxController {
       customerId = customerList[indexId]?.id ?? 0;
     }
     selectedCustomer.value = list;
+    isSelectedCustomer.value = true;
     print("index received is : $indexId & customer id  : $customerId");
   }
 
@@ -466,6 +469,7 @@ class FacilityTypeListController extends GetxController {
       operatorId = operatorList[indexId]?.id ?? 0;
     }
     selectedOperator.value = list;
+    isSelectedOperator.value = true;
     print("index received is : $indexId & operator id  : $operatorId");
   }
 
@@ -479,20 +483,54 @@ class FacilityTypeListController extends GetxController {
       SpvId = SpvList[indexId]?.id ?? 0;
     }
     selectedSpv.value = list;
-
+    isSelectedSpv.value = true;
     print("index received is : $indexId & SPV id  : $SpvId");
+  }
+  void checkForm() {
+
+    if(selectedSpv.value == ''){
+      isSelectedSpv.value = false;
+    }
+
+    if(selectedOperator.value == ''){
+      isSelectedOperator.value = false;
+    }
+
+    if(selectedOwner.value == ''){
+      isSelectedOwner.value = false;
+    }
+
+    if(selectedCustomer.value == ''){
+      isSelectedCustomer.value = false;
+    }
+
+    if(isNameInvalid.value == true || isSelectedSpv.value == false ||
+        isSelectedOwner.value == false || isSelectedCustomer.value == false
+    ){
+      isFormInvalid.value = true;
+    } else {
+      isFormInvalid.value = false;
+    }
   }
 
   Future<bool> createFacilityType() async {
+    if (titleCtrlr.text.trim() == '' ) {
+      isNameInvalid.value = true;
+      isFormInvalid.value = true;
+    }
+
+    checkForm();
+    if (isFormInvalid.value) {
+      return false;
+    }
+
     print("title : ${titleCtrlr.text.trim()} , address: ${addressCtrlr.text.trim()} , zipcode : ${zipcodeCtrlr.text.trim()} , description : ${descriptionCtrlr.text.trim()}, countryid: $selectedCountry , stateId: $selectedState, cityId : $selectedCity, ownerId: $selectedOwner, customerId : $isSelectedCustomer, operatorId: $selectedOperator, spvId : $selectedSpv");
-    if (titleCtrlr.text.trim() == '' ||
-        addressCtrlr.text.trim() == '' ||
-        zipcodeCtrlr.text.trim() == '' ||
-        descriptionCtrlr.text.trim() == '' ||
+    if
+    (titleCtrlr.text.trim() == '' ||
+
         selectedOwner == '' ||
         selectedCustomer == '' ||
-        selectedOperator == ''|| selectedCity == '' ||
-    selectedCountry == '' || selectedState == '' || selectedSpv==''
+        selectedOperator == ''|| selectedSpv==''
     ) {
       Fluttertoast.showToast(
           msg: "Please enter required field", fontSize: 16.0);
@@ -500,11 +538,12 @@ class FacilityTypeListController extends GetxController {
     } else {
       String _title = titleCtrlr.text.trim();
       String _address = addressCtrlr.text.trim();
-      String pin = zipcodeCtrlr.text.trim();
+      String? pin = zipcodeCtrlr.text.trim();
+      pin = (pin != "" ? zipcodeCtrlr.text.trim() : "0") ;
       int _zipcode = int.parse(pin);
       String _description = descriptionCtrlr.text.trim();
       CreateFacilityType createCheckpoint = CreateFacilityType(
-         name: _title,
+        name: _title,
         ownerId: ownerId,
         customerId: customerId,
         operatorId: operatorId,
@@ -513,7 +552,7 @@ class FacilityTypeListController extends GetxController {
         cityId: selectedCityId,
         stateId: selectedStateId,
         countryId: selectedCountryId,
-        zipcode: _zipcode,
+        zipcode: _zipcode ,
         description: _description,
         photoId: 0,
         latitude: 0.0,
@@ -627,22 +666,22 @@ class FacilityTypeListController extends GetxController {
     String _address = addressCtrlr.text.trim();
 
     UpdateFacilityTypeModel createChecklist = UpdateFacilityTypeModel(
-        id: checklistId,
-        name : _name,
-        description: _description,
-        zipcode : int.parse(_pin),
-        address: _address,
-        countryId: selectedCountryId,
-        cityId: selectedCityId,
-        stateId: selectedStateId,
-        operatorId: operatorId,
-        spvId: SpvId,
-        ownerId: ownerId,
-        customerId: customerId,
-        photoId: 0,
-        latitude: 0.0,
-        longitude: 0.0,
-        timezone: "default",
+      id: checklistId,
+      name : _name,
+      description: _description,
+      zipcode : int.parse(_pin),
+      address: _address,
+      countryId: selectedCountryId,
+      cityId: selectedCityId,
+      stateId: selectedStateId,
+      operatorId: operatorId,
+      spvId: SpvId,
+      ownerId: ownerId,
+      customerId: customerId,
+      photoId: 0,
+      latitude: 0.0,
+      longitude: 0.0,
+      timezone: "default",
     );
     var businessTypeJsonString =
     createChecklist.toJson();

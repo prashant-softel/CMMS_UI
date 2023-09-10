@@ -33,11 +33,15 @@ class BusinessTypeListController extends GetxController {
   );
   BusinessTypeModel? businessTypeListModel;
   RxList<BusinessTypeModel?> filteredData = <BusinessTypeModel?>[].obs;
+  Rx<bool> isFormInvalid = false.obs;
 
   RxList<String> businessTypeListTableColumns = <String>[].obs;
   Rx<String> selectedfrequency = ''.obs;
   Rx<bool> isSelectedfrequency = true.obs;
   var nameCtrlr = TextEditingController();
+  Rx<bool> isTitleInvalid = false.obs;
+  Rx<bool> isDescriptionInvalid = false.obs;
+
   BusinessTypeModel? selectedItem;
   var descriptionCtrlr = TextEditingController();
   final isSuccess = false.obs;
@@ -100,8 +104,28 @@ class BusinessTypeListController extends GetxController {
   }
 
 
-
+  void checkForm() {
+    if(isTitleInvalid.value == true || isDescriptionInvalid.value == true){
+      isFormInvalid.value = true;
+    } else {
+      isFormInvalid.value = false;
+    }
+  }
   Future<bool> createBusinessType() async {
+    if (nameCtrlr.text.trim() == '' ) {
+      isTitleInvalid.value = true;
+      isFormInvalid.value = true;
+      // isDescriptionInvalid.value = true;
+    }
+    if (descriptionCtrlr.text.trim() == '' ) {
+      // isTitleInvalid.value = true;
+      isFormInvalid.value = true;
+      isDescriptionInvalid.value = true;
+    }
+    checkForm();
+    if (isFormInvalid.value == true) {
+      return false;
+    }
     if (nameCtrlr.text.trim() == '' ||
         descriptionCtrlr.text.trim() == '') {
       Fluttertoast.showToast(
