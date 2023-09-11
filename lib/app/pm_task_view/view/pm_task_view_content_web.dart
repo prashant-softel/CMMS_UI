@@ -302,7 +302,7 @@ class PreventiveMaintenanceTaskViewContentWeb
                                 Dimens.boxHeight30,
 
                                 ///Assets
-                               
+
                                 Container(
                                   margin: Dimens.edgeInsets20,
                                   height: 400,
@@ -360,28 +360,28 @@ class PreventiveMaintenanceTaskViewContentWeb
                                               "0%",
                                               "Action",
                                             ],
-                                             [
+                                            [
                                               "2",
                                               "Demo_Block_2_Inv_2",
                                               "demo_checklist_2",
                                               "20%",
                                               "Action",
                                             ],
-                                             [
+                                            [
                                               "3",
                                               "Demo_Block_3_Inv_3",
                                               "demo_checklist_3",
                                               "0%",
                                               "Action",
                                             ],
-                                             [
+                                            [
                                               "4",
                                               "Demo_Block_4_Inv_4",
                                               "demo_checklist_4",
                                               "0%",
                                               "Action",
                                             ],
-                                             [
+                                            [
                                               "5",
                                               "Demo_Block_5_Inv_5",
                                               "demo_checklist_5",
@@ -394,34 +394,44 @@ class PreventiveMaintenanceTaskViewContentWeb
                                               cells: record.map((value) {
                                                 return TableViewCell(
                                                     child: (value == "0%")
-                                                    ? Text('0%', style: TextStyle(color: Colors.green),)
-                                                    : value == "20%"
-                                                    ? Text('20%',style: TextStyle(color: Colors.yellow),)
-                                                    : value == "80%"
-                                                    ? Text('80%',style: TextStyle(color: Colors.red),)
-                                                    :(value == "Action")
-                                                        ? Wrap(
-                                                          children: 
-                                                            [
-                                                             
-                                                              
-                                                              
-                                                              TableActionButton(
-                                                              color: ColorValues
-                                                                  .viewColor,
-                                                              icon: Icons
-                                                                  .remove_red_eye_outlined,
-                                                              message:
-                                                                  'View',
-                                                              onPress:
-                                                                  () {
-                                                                     Get.dialog(ObservationPMTaskViewDialog());
-                                                                  },
-                                                            ),
-                                                          ],
-                                                        )
-                                                        : Text(
-                                                            value.toString()));
+                                                        ? Text(
+                                                            '0%',
+                                                            style: TextStyle(
+                                                                color: Colors
+                                                                    .green),
+                                                          )
+                                                        : value == "20%"
+                                                            ? Text(
+                                                                '20%',
+                                                                style: TextStyle(
+                                                                    color: Colors
+                                                                        .yellow),
+                                                              )
+                                                            : value == "80%"
+                                                                ? Text(
+                                                                    '80%',
+                                                                    style: TextStyle(
+                                                                        color: Colors
+                                                                            .red),
+                                                                  )
+                                                                : (value ==
+                                                                        "Action")
+                                                                    ? Wrap(
+                                                                        children: [
+                                                                          TableActionButton(
+                                                                            color:
+                                                                                ColorValues.viewColor,
+                                                                            icon:
+                                                                                Icons.remove_red_eye_outlined,
+                                                                            message:
+                                                                                'View',
+                                                                            onPress:
+                                                                                () {},
+                                                                          ),
+                                                                        ],
+                                                                      )
+                                                                    : Text(value
+                                                                        .toString()));
                                               }).toList(),
                                             );
                                           }).toList(),
@@ -461,6 +471,17 @@ class PreventiveMaintenanceTaskViewContentWeb
                                               "Material Used/Issued",
                                               style: Styles.blue700,
                                             ),
+                                            Spacer(),
+                                            TableActionButton( 
+                                              color: ColorValues.appGreenColor,
+                                              icon:
+                                                  Icons.add,
+                                              message: '',
+                                              label: "Add New MRS",
+                                              onPress: () {
+                                               
+                                              },
+                                            ),
                                           ],
                                         ),
                                       ),
@@ -489,7 +510,7 @@ class PreventiveMaintenanceTaskViewContentWeb
                                               "Waiting For Approval",
                                               "Action",
                                             ],
-                                             [
+                                            [
                                               "2",
                                               "MRS45693",
                                               "String connector 60MM Male,String connector...",
@@ -501,43 +522,36 @@ class PreventiveMaintenanceTaskViewContentWeb
                                               height: 40,
                                               cells: record.map((value) {
                                                 return TableViewCell(
-                                                  child: (value == "Action")
-                                                  ?Wrap(
-                                                    children: [
-                                                       TableActionButton(
+                                                    child: (value == "Action")
+                                                        ? Wrap(children: [
+                                                            TableActionButton(
                                                               color: ColorValues
                                                                   .viewColor,
                                                               icon: Icons
                                                                   .remove_red_eye_outlined,
-                                                              message:
-                                                                  'View',
-                                                              onPress:
-                                                                  () {},
+                                                              message: 'View',
+                                                              onPress: () {
+                                                                Get.dialog(
+                                                                    ObservationPMTaskViewDialog());
+                                                              },
                                                             ),
-                                                         TableActionButton(
+                                                            TableActionButton(
                                                               color: ColorValues
                                                                   .appGreenColor,
-                                                              icon: Icons
-                                                                  .add,
-                                                              message:
-                                                                  'Add',
-                                                              onPress:
-                                                                  () {},
+                                                              icon: Icons.add,
+                                                              message: 'Add',
+                                                              onPress: () {},
                                                             ),
-                                                          TableActionButton(
+                                                            TableActionButton(
                                                               color: ColorValues
                                                                   .appRedColor,
-                                                              icon: Icons
-                                                                  .remove,
-                                                              message:
-                                                                  'Delete',
-                                                              onPress:
-                                                                  () {},
+                                                              icon:
+                                                                  Icons.remove,
+                                                              message: 'Delete',
+                                                              onPress: () {},
                                                             ),
-                                                      
-                                                      ])
-                                                      :Text(value)
-                                                );
+                                                          ])
+                                                        : Text(value));
                                               }).toList(),
                                             );
                                           }).toList(),
