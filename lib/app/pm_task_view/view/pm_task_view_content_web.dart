@@ -1,5 +1,9 @@
+import 'package:cmms/app/navigators/app_pages.dart';
 import 'package:cmms/app/pm_task_view/pm_task_view_controller.dart';
 import 'package:cmms/app/theme/dimens.dart';
+import 'package:cmms/app/widgets/observation_pm_task_view_popup_dialog.dart';
+import 'package:cmms/app/widgets/table_action_button.dart';
+import 'package:data_table_2/data_table_2.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:get/get.dart';
@@ -296,78 +300,253 @@ class PreventiveMaintenanceTaskViewContentWeb
                                       )
                                     : Dimens.box0,
                                 Dimens.boxHeight30,
-                                // Container(
-                                //   margin: Dimens.edgeInsets20,
-                                //   height: 200,
-                                //   decoration: BoxDecoration(
-                                //     border: Border.all(
-                                //       color: ColorValues
-                                //           .lightGreyColorWithOpacity35,
-                                //       width: 1,
-                                //     ),
-                                //     boxShadow: [
-                                //       BoxShadow(
-                                //         color:
-                                //             ColorValues.appBlueBackgroundColor,
-                                //         spreadRadius: 2,
-                                //         blurRadius: 5,
-                                //         offset: Offset(0, 2),
-                                //       ),
-                                //     ],
-                                //   ),
-                                //   child: Column(
-                                //     children: [
-                                //       Padding(
-                                //         padding: const EdgeInsets.all(10.0),
-                                //         child: Row(
-                                //           children: [
-                                //             Text(
-                                //               "Associated Job(s) ",
-                                //               style: Styles.blue700,
-                                //             ),
-                                //           ],
-                                //         ),
-                                //       ),
-                                //       Divider(
-                                //         color: ColorValues.greyLightColour,
-                                //       ),
-                                //       Expanded(
-                                //         child: ScrollableTableView(
-                                //           columns: [
-                                //             "Job ID",
-                                //             "Check Point No.",
-                                //             "Job Title",
-                                //             "Job Date",
-                                //             "Job Status",
-                                //           ].map((column) {
-                                //             return TableViewColumn(
-                                //               label: column,
-                                //               minWidth: Get.width * 0.15,
-                                //             );
-                                //           }).toList(),
-                                //           rows: [
-                                //             [
-                                //               "JQ325890",
-                                //               "2234",
-                                //               "Check and clean charging module",
-                                //               "2022-04-05",
-                                //               "In Progress",
-                                //             ],
-                                //           ].map((record) {
-                                //             return TableViewRow(
-                                //               height: 90,
-                                //               cells: record.map((value) {
-                                //                 return TableViewCell(
-                                //                   child: Text(value),
-                                //                 );
-                                //               }).toList(),
-                                //             );
-                                //           }).toList(),
-                                //         ),
-                                //       ),
-                                //     ],
-                                //   ),
-                                // ),
+
+                                ///Assets
+                               
+                                Container(
+                                  margin: Dimens.edgeInsets20,
+                                  height: 400,
+                                  decoration: BoxDecoration(
+                                    border: Border.all(
+                                      color: ColorValues
+                                          .lightGreyColorWithOpacity35,
+                                      width: 1,
+                                    ),
+                                    boxShadow: [
+                                      BoxShadow(
+                                        color:
+                                            ColorValues.appBlueBackgroundColor,
+                                        spreadRadius: 2,
+                                        blurRadius: 5,
+                                        offset: Offset(0, 2),
+                                      ),
+                                    ],
+                                  ),
+                                  child: Column(
+                                    children: [
+                                      Padding(
+                                        padding: const EdgeInsets.all(10.0),
+                                        child: Row(
+                                          children: [
+                                            Text(
+                                              "Assets",
+                                              style: Styles.blue700,
+                                            ),
+                                          ],
+                                        ),
+                                      ),
+                                      Divider(
+                                        color: ColorValues.greyLightColour,
+                                      ),
+                                      Expanded(
+                                        child: ScrollableTableView(
+                                          columns: [
+                                            "SR.No.",
+                                            "Asset",
+                                            "Checklist",
+                                            "Failure Score",
+                                            "Action",
+                                          ].map((column) {
+                                            return TableViewColumn(
+                                              label: column,
+                                              minWidth: Get.width * 0.18,
+                                            );
+                                          }).toList(),
+                                          rows: [
+                                            [
+                                              "1",
+                                              "Demo_Block_1_Inv_1",
+                                              "demo_checklist_1",
+                                              "0%",
+                                              "Action",
+                                            ],
+                                             [
+                                              "2",
+                                              "Demo_Block_2_Inv_2",
+                                              "demo_checklist_2",
+                                              "20%",
+                                              "Action",
+                                            ],
+                                             [
+                                              "3",
+                                              "Demo_Block_3_Inv_3",
+                                              "demo_checklist_3",
+                                              "0%",
+                                              "Action",
+                                            ],
+                                             [
+                                              "4",
+                                              "Demo_Block_4_Inv_4",
+                                              "demo_checklist_4",
+                                              "0%",
+                                              "Action",
+                                            ],
+                                             [
+                                              "5",
+                                              "Demo_Block_5_Inv_5",
+                                              "demo_checklist_5",
+                                              "80%",
+                                              "Action",
+                                            ],
+                                          ].map((record) {
+                                            return TableViewRow(
+                                              height: 40,
+                                              cells: record.map((value) {
+                                                return TableViewCell(
+                                                    child: (value == "0%")
+                                                    ? Text('0%', style: TextStyle(color: Colors.green),)
+                                                    : value == "20%"
+                                                    ? Text('20%',style: TextStyle(color: Colors.yellow),)
+                                                    : value == "80%"
+                                                    ? Text('80%',style: TextStyle(color: Colors.red),)
+                                                    :(value == "Action")
+                                                        ? Wrap(
+                                                          children: 
+                                                            [
+                                                             
+                                                              
+                                                              
+                                                              TableActionButton(
+                                                              color: ColorValues
+                                                                  .viewColor,
+                                                              icon: Icons
+                                                                  .remove_red_eye_outlined,
+                                                              message:
+                                                                  'View',
+                                                              onPress:
+                                                                  () {
+                                                                     Get.dialog(ObservationPMTaskViewDialog());
+                                                                  },
+                                                            ),
+                                                          ],
+                                                        )
+                                                        : Text(
+                                                            value.toString()));
+                                              }).toList(),
+                                            );
+                                          }).toList(),
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                ),
+
+                                ////Material Used/Issued
+                                Container(
+                                  margin: Dimens.edgeInsets20,
+                                  height: 250,
+                                  decoration: BoxDecoration(
+                                    border: Border.all(
+                                      color: ColorValues
+                                          .lightGreyColorWithOpacity35,
+                                      width: 1,
+                                    ),
+                                    boxShadow: [
+                                      BoxShadow(
+                                        color:
+                                            ColorValues.appBlueBackgroundColor,
+                                        spreadRadius: 2,
+                                        blurRadius: 5,
+                                        offset: Offset(0, 2),
+                                      ),
+                                    ],
+                                  ),
+                                  child: Column(
+                                    children: [
+                                      Padding(
+                                        padding: const EdgeInsets.all(10.0),
+                                        child: Row(
+                                          children: [
+                                            Text(
+                                              "Material Used/Issued",
+                                              style: Styles.blue700,
+                                            ),
+                                          ],
+                                        ),
+                                      ),
+                                      Divider(
+                                        color: ColorValues.greyLightColour,
+                                      ),
+                                      Expanded(
+                                        child: ScrollableTableView(
+                                          columns: [
+                                            "Sr.No.",
+                                            "MRS ID",
+                                            "MRS Item list",
+                                            "Status",
+                                            "Action",
+                                          ].map((column) {
+                                            return TableViewColumn(
+                                              label: column,
+                                              minWidth: Get.width * 0.15,
+                                            );
+                                          }).toList(),
+                                          rows: [
+                                            [
+                                              "1",
+                                              "MRS45692",
+                                              "String connector 60MM Male,String connector...",
+                                              "Waiting For Approval",
+                                              "Action",
+                                            ],
+                                             [
+                                              "2",
+                                              "MRS45693",
+                                              "String connector 60MM Male,String connector...",
+                                              "Approved",
+                                              "Action",
+                                            ],
+                                          ].map((record) {
+                                            return TableViewRow(
+                                              height: 40,
+                                              cells: record.map((value) {
+                                                return TableViewCell(
+                                                  child: (value == "Action")
+                                                  ?Wrap(
+                                                    children: [
+                                                       TableActionButton(
+                                                              color: ColorValues
+                                                                  .viewColor,
+                                                              icon: Icons
+                                                                  .remove_red_eye_outlined,
+                                                              message:
+                                                                  'View',
+                                                              onPress:
+                                                                  () {},
+                                                            ),
+                                                         TableActionButton(
+                                                              color: ColorValues
+                                                                  .appGreenColor,
+                                                              icon: Icons
+                                                                  .add,
+                                                              message:
+                                                                  'Add',
+                                                              onPress:
+                                                                  () {},
+                                                            ),
+                                                          TableActionButton(
+                                                              color: ColorValues
+                                                                  .appRedColor,
+                                                              icon: Icons
+                                                                  .remove,
+                                                              message:
+                                                                  'Delete',
+                                                              onPress:
+                                                                  () {},
+                                                            ),
+                                                      
+                                                      ])
+                                                      :Text(value)
+                                                );
+                                              }).toList(),
+                                            );
+                                          }).toList(),
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                ),
+
                                 // Dimens.boxHeight30,
                                 (controller.historyLog != [] &&
                                         controller.historyLog!.isNotEmpty)
