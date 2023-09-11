@@ -1793,186 +1793,366 @@ class NewPermitScreen extends GetView<NewPermitController> {
                                                         height: 20,
                                                       ),
                                                       Column(
-                                                        crossAxisAlignment : CrossAxisAlignment.start,
+                                                        crossAxisAlignment:
+                                                            CrossAxisAlignment
+                                                                .start,
                                                         children: [
                                                           Row(
-                                                            crossAxisAlignment : CrossAxisAlignment.start,
+                                                            crossAxisAlignment:
+                                                                CrossAxisAlignment
+                                                                    .start,
+                                                            // mainAxisAlignment:
+                                                            //     MainAxisAlignment
+                                                            //         .center,
                                                             children: [
                                                               Padding(
                                                                 padding: const EdgeInsets.only(left: 120),
                                                                 child: Column(
-                                                                  crossAxisAlignment : CrossAxisAlignment.end,
+                                                                  crossAxisAlignment:
+                                                                      CrossAxisAlignment
+                                                                          .end,
                                                                   children: [
-                                                                    Dimens.boxHeight10,
-                                                                    CustomRichText(title:'Block/Plot: '),
-                                                                    Dimens.boxHeight15,
-                                                                    CustomRichText(title:'Type of permit: '),
-                                                                    Dimens.boxHeight25,
-                                                                    CustomRichText(title:'Start Date: '),
-                                                              
-                                                              
-                                                                  ],
-                                                                ),
-                                                              ),
-                                                              Dimens.boxWidth10,
-                                                              Column(
-                                                                crossAxisAlignment : CrossAxisAlignment.start,
-                                                                children: [
-                                                                  SizedBox(
-                                                              width: MediaQuery.of(
-                                                                          context)
-                                                                      .size
-                                                                      .width /
-                                                                  5,
-
-                                                              child: Obx(
-                                                                () =>
-                                                                    DropdownWebWidget(
-                                                                  dropdownList:
-                                                                      controller
-                                                                          .blockList,
-                                                                  isValueSelected:
-                                                                      controller
-                                                                          .isBlockSelected
-                                                                          .value,
-                                                                  selectedValue:
-                                                                      controller
-                                                                          .selectedBlock
-                                                                          .value,
-                                                                  onValueChanged:
-                                                                      controller
-                                                                          .onValueChanged,
-                                                                ),
-                                                              ),
-                                                              // LoginCustomTextfield(),
-                                                            ),
-                                                            Dimens.boxHeight10,
-                                                            SizedBox(
-                                                              width: MediaQuery.of(
-                                                                          context)
-                                                                      .size
-                                                                      .width /
-                                                                  5,
-                                                              child: Obx(
-                                                                () =>
-                                                                    DropdownWebWidget(
-                                                                  dropdownList:
-                                                                      controller
-                                                                          .typePermitList,
-                                                                  isValueSelected:
-                                                                      controller
-                                                                          .isTypePermitSelected
-                                                                          .value,
-                                                                  selectedValue:
-                                                                      controller
-                                                                          .selectedTypePermit
-                                                                          .value,
-                                                                  onValueChanged:
-                                                                      controller
-                                                                          .onValueChanged,
-                                                                ),
-                                                              ),
-                                                            ),
-                                                            Dimens.boxHeight10,
-                                                             _buildStartValidTillDateField_web(
-                                                                  context,
-                                                                  0,
-                                                                ),
-
-                                                                ],
-                                                              ),
-                                                              
-                                                              Padding(
-                                                                padding: const EdgeInsets.only(left: 65),
-                                                                child: Column(
-                                                                  crossAxisAlignment : CrossAxisAlignment.end,
-                                                                  children: [
-                                                                    Dimens.boxHeight10,
-                                                                    CustomRichText(
-                                                                        title:
-                                                                            'Equipment Categories: '),
-                                                                    Dimens.boxHeight60,
-                                                                    CustomRichText(
-                                                                        title:
-                                                                            'Valid Till: '),
-                                                                
-                                                                  ],
-                                                                ),
-                                                              ),
-                                                              Dimens.boxWidth10,
-                                                              Column(
-                                                                crossAxisAlignment : CrossAxisAlignment.start,
-                                                                children: [
-                                                                  controller.permitId
-                                                                              .value >
-                                                                          0
-                                                                      ? SizedBox(
-                                                                          width:
-                                                                              MediaQuery.of(context).size.width / 5,
-                                                                          child:
-                                                                              CustomMultiSelectDialogField(
+                                                                    Row(
+                                                                      children: [
+                                                                        CustomRichText(
                                                                             title:
-                                                                                'Select Equipment Category',
-                                                                            buttonText:
-                                                                                'Equipment Category',
-                                                                            initialValue: ((controller.selectedEquipmentCategoryIdList.isNotEmpty)
-                                                                                ? controller.selectedEquipmentCategoryIdList
-                                                                                : []),
-                                                                            items: controller.equipmentCategoryList
-                                                                                .map(
-                                                                                  (equipmentCategory) => MultiSelectItem(
-                                                                                    equipmentCategory?.id,
-                                                                                    equipmentCategory?.name ?? '',
-                                                                                  ),
-                                                                                )
-                                                                                .toList(),
-                                                                            onConfirm: (selectedOptionsList) =>
-                                                                                {
-                                                                              controller.equipmentCategoriesSelected(selectedOptionsList),
-                                                                              print('Equipment list ${controller.selectedEquipmentCategoryIdList}')
-                                                                            },
+                                                                                'Block/Plot: '),
+                                                                        Dimens.boxWidth10,
+                                                                        SizedBox(
+                                                                          width:
+                                                                              MediaQuery.of(context).size.width /
+                                                                                  5,
+                                                              
+                                                                          child:
+                                                                              Obx(
+                                                                            () =>
+                                                                                DropdownWebWidget(
+                                                                              dropdownList:
+                                                                                  controller.blockList,
+                                                                              isValueSelected:
+                                                                                  controller.isBlockSelected.value,
+                                                                              selectedValue:
+                                                                                  controller.selectedBlock.value,
+                                                                              onValueChanged:
+                                                                                  controller.onValueChanged,
+                                                                            ),
                                                                           ),
-                                                                        )
-                                                                      : SizedBox(
-                                                                          width:
-                                                                              MediaQuery.of(context).size.width / 5,
-                                                                          child:
-                                                                              CustomMultiSelectDialogField(
+                                                                          // LoginCustomTextfield(),
+                                                                        ),
+                                                                      ],
+                                                                    ),
+                                                                    Dimens.boxHeight10,
+                                                                    Row(
+                                                                      children: [
+                                                                        CustomRichText(
                                                                             title:
-                                                                                'Select Equipment Category',
-                                                                            buttonText:
-                                                                                'Equipment Category',
-                                                                            initialValue: (controller.selectedEquipmentCategoryIdList.isNotEmpty)
-                                                                                ? controller.selectedEquipmentCategoryIdList
-                                                                                : [],
-                                                                            items: controller.equipmentCategoryList
-                                                                                .map(
-                                                                                  (equipmentCategory) => MultiSelectItem(
-                                                                                    equipmentCategory?.id,
-                                                                                    equipmentCategory?.name ?? '',
-                                                                                  ),
-                                                                                )
-                                                                                .toList(),
-                                                                            onConfirm: (selectedOptionsList) =>
-                                                                                {
-                                                                              controller.equipmentCategoriesSelected(selectedOptionsList),
-                                                                              print('Equipment list55 ${controller.selectedEquipmentCategoryIdList}')
-                                                                            },
+                                                                                'Type of permit: '),
+                                                                                 Dimens.boxWidth10,
+                                                                        SizedBox(
+                                                                          width:
+                                                                              MediaQuery.of(context).size.width /
+                                                                                  5,
+                                                                          child:
+                                                                              Obx(
+                                                                            () =>
+                                                                                DropdownWebWidget(
+                                                                              dropdownList:
+                                                                                  controller.typePermitList,
+                                                                              isValueSelected:
+                                                                                  controller.isTypePermitSelected.value,
+                                                                              selectedValue:
+                                                                                  controller.selectedTypePermit.value,
+                                                                              onValueChanged:
+                                                                                  controller.onValueChanged,
+                                                                            ),
                                                                           ),
                                                                         ),
-                                                                        Dimens.boxHeight30,
-                                                                         _buildStartValidTillDateField_web(
-                                                                    context, 1),
-                                                              
+                                                                      ],
+                                                                    ),
+                                                                    Dimens.boxHeight10,
+                                                                    Row(
+                                                                      children: [
+                                                                        CustomRichText(
+                                                                            title:
+                                                                                'Start Date: '),
+                                                                                 Dimens.boxWidth10,
+                                                                        _buildStartValidTillDateField_web(
+                                                                          context,
+                                                                          0,
+                                                                        ),
+                                                                      ],
+                                                                    )
+                                                                  ],
+                                                                ),
+                                                              ),
+                                                              Dimens.boxWidth70,
+                                                              Column(
+                                                                crossAxisAlignment:
+                                                                    CrossAxisAlignment
+                                                                        .end,
+                                                                children: [
+                                                                  Row(
+                                                                    children: [
+                                                                      CustomRichText(
+                                                                          title:
+                                                                              'Equipment Categories: '),
+                                                                               Dimens.boxWidth10,
+                                                                      controller.permitId.value >
+                                                                              0
+                                                                          ? SizedBox(
+                                                                              width: MediaQuery.of(context).size.width / 5,
+                                                                              child: CustomMultiSelectDialogField(
+                                                                                title: 'Select Equipment Category',
+                                                                                buttonText: 'Equipment Category',
+                                                                                initialValue: ((controller.selectedEquipmentCategoryIdList.isNotEmpty) ? controller.selectedEquipmentCategoryIdList : []),
+                                                                                items: controller.equipmentCategoryList
+                                                                                    .map(
+                                                                                      (equipmentCategory) => MultiSelectItem(
+                                                                                        equipmentCategory?.id,
+                                                                                        equipmentCategory?.name ?? '',
+                                                                                      ),
+                                                                                    )
+                                                                                    .toList(),
+                                                                                onConfirm: (selectedOptionsList) => {
+                                                                                  controller.equipmentCategoriesSelected(selectedOptionsList),
+                                                                                  print('Equipment list ${controller.selectedEquipmentCategoryIdList}')
+                                                                                },
+                                                                              ),
+                                                                            )
+                                                                          : SizedBox(
+                                                                              width: MediaQuery.of(context).size.width / 5,
+                                                                              child: CustomMultiSelectDialogField(
+                                                                                title: 'Select Equipment Category',
+                                                                                buttonText: 'Equipment Category',
+                                                                                initialValue: (controller.selectedEquipmentCategoryIdList.isNotEmpty) ? controller.selectedEquipmentCategoryIdList : [],
+                                                                                items: controller.equipmentCategoryList
+                                                                                    .map(
+                                                                                      (equipmentCategory) => MultiSelectItem(
+                                                                                        equipmentCategory?.id,
+                                                                                        equipmentCategory?.name ?? '',
+                                                                                      ),
+                                                                                    )
+                                                                                    .toList(),
+                                                                                onConfirm: (selectedOptionsList) => {
+                                                                                  controller.equipmentCategoriesSelected(selectedOptionsList),
+                                                                                  print('Equipment list55 ${controller.selectedEquipmentCategoryIdList}')
+                                                                                },
+                                                                              ),
+                                                                            ),
+                                                                    ],
+                                                                  ),
+                                                                  Dimens.boxHeight30,
+                                                                  Row(
+                                                                    children: [
+                                                                      CustomRichText(
+                                                                          title:
+                                                                              'Valid Till: '),
+                                                                               Dimens.boxWidth10,
+                                                                      _buildStartValidTillDateField_web(
+                                                                          context,
+                                                                          1),
+                                                                    ],
+                                                                  ),
+
                                                                 ],
                                                               ),
+                                                              // Padding(
+                                                              //   padding:
+                                                              //       const EdgeInsets
+                                                              //               .only(
+                                                              //           left:
+                                                              //               120),
+                                                              //   child: Column(
+                                                              //     crossAxisAlignment:
+                                                              //         CrossAxisAlignment
+                                                              //             .end,
+                                                              //     children: [
+                                                              //       Dimens
+                                                              //           .boxHeight10,
+                                                              //       // CustomRichText(title:'Block/Plot: '),
+                                                              //       Dimens
+                                                              //           .boxHeight15,
+                                                              //       // CustomRichText(title:'Type of permit: '),
+                                                              //       Dimens
+                                                              //           .boxHeight25,
+                                                              //       // CustomRichText(
+                                                              //       //     title:
+                                                              //       //         'Start Date: '),
+                                                              //     ],
+                                                              //   ),
+                                                              // ),
+                                                              // Dimens.boxWidth10,
+                                                              // Column(
+                                                              //   crossAxisAlignment:
+                                                              //       CrossAxisAlignment
+                                                              //           .start,
+                                                              //   children: [
+                                                              //     //       SizedBox(
+                                                              //     //   width: MediaQuery.of(
+                                                              //     //               context)
+                                                              //     //           .size
+                                                              //     //           .width /
+                                                              //     //       5,
 
+                                                              //     //   child: Obx(
+                                                              //     //     () =>
+                                                              //     //         DropdownWebWidget(
+                                                              //     //       dropdownList:
+                                                              //     //           controller
+                                                              //     //               .blockList,
+                                                              //     //       isValueSelected:
+                                                              //     //           controller
+                                                              //     //               .isBlockSelected
+                                                              //     //               .value,
+                                                              //     //       selectedValue:
+                                                              //     //           controller
+                                                              //     //               .selectedBlock
+                                                              //     //               .value,
+                                                              //     //       onValueChanged:
+                                                              //     //           controller
+                                                              //     //               .onValueChanged,
+                                                              //     //     ),
+                                                              //     //   ),
+                                                              //     //   // LoginCustomTextfield(),
+                                                              //     // ),
+                                                              //     Dimens
+                                                              //         .boxHeight10,
+                                                              //     // SizedBox(
+                                                              //     //   width: MediaQuery.of(
+                                                              //     //               context)
+                                                              //     //           .size
+                                                              //     //           .width /
+                                                              //     //       5,
+                                                              //     //   child: Obx(
+                                                              //     //     () =>
+                                                              //     //         DropdownWebWidget(
+                                                              //     //       dropdownList:
+                                                              //     //           controller
+                                                              //     //               .typePermitList,
+                                                              //     //       isValueSelected:
+                                                              //     //           controller
+                                                              //     //               .isTypePermitSelected
+                                                              //     //               .value,
+                                                              //     //       selectedValue:
+                                                              //     //           controller
+                                                              //     //               .selectedTypePermit
+                                                              //     //               .value,
+                                                              //     //       onValueChanged:
+                                                              //     //           controller
+                                                              //     //               .onValueChanged,
+                                                              //     //     ),
+                                                              //     //   ),
+                                                              //     // ),
+                                                              //     Dimens
+                                                              //         .boxHeight10,
+                                                              //     // _buildStartValidTillDateField_web(
+                                                              //     //   context,
+                                                              //     //   0,
+                                                              //     // ),
+                                                              //   ],
+                                                              // ),
+                                                              // Padding(
+                                                              //   padding:
+                                                              //       const EdgeInsets
+                                                              //               .only(
+                                                              //           left:
+                                                              //               65),
+                                                              //   child: Column(
+                                                              //     crossAxisAlignment:
+                                                              //         CrossAxisAlignment
+                                                              //             .end,
+                                                              //     children: [
+                                                              //       Dimens
+                                                              //           .boxHeight10,
+                                                              //       // CustomRichText(
+                                                              //       //     title:
+                                                              //       //         'Equipment Categories: '),
+                                                              //       Dimens
+                                                              //           .boxHeight60,
+                                                              //       // CustomRichText(
+                                                              //       //     title:
+                                                              //       //         'Valid Till: '),
+                                                              //       Dimens
+                                                              //           .boxWidth10,
+                                                              //     ],
+                                                              //   ),
+                                                              // ),
+                                                              // Dimens.boxWidth10,
+                                                              // Column(
+                                                              //   crossAxisAlignment:
+                                                              //       CrossAxisAlignment
+                                                              //           .start,
+                                                              //   children: [
+                                                              //     // controller.permitId
+                                                              //     //             .value >
+                                                              //     //         0
+                                                              //     //     ? SizedBox(
+                                                              //     //         width:
+                                                              //     //             MediaQuery.of(context).size.width / 5,
+                                                              //     //         child:
+                                                              //     //             CustomMultiSelectDialogField(
+                                                              //     //           title:
+                                                              //     //               'Select Equipment Category',
+                                                              //     //           buttonText:
+                                                              //     //               'Equipment Category',
+                                                              //     //           initialValue: ((controller.selectedEquipmentCategoryIdList.isNotEmpty)
+                                                              //     //               ? controller.selectedEquipmentCategoryIdList
+                                                              //     //               : []),
+                                                              //     //           items: controller.equipmentCategoryList
+                                                              //     //               .map(
+                                                              //     //                 (equipmentCategory) => MultiSelectItem(
+                                                              //     //                   equipmentCategory?.id,
+                                                              //     //                   equipmentCategory?.name ?? '',
+                                                              //     //                 ),
+                                                              //     //               )
+                                                              //     //               .toList(),
+                                                              //     //           onConfirm: (selectedOptionsList) =>
+                                                              //     //               {
+                                                              //     //             controller.equipmentCategoriesSelected(selectedOptionsList),
+                                                              //     //             print('Equipment list ${controller.selectedEquipmentCategoryIdList}')
+                                                              //     //           },
+                                                              //     //         ),
+                                                              //     //       )
+                                                              //     //     : SizedBox(
+                                                              //     //         width:
+                                                              //     //             MediaQuery.of(context).size.width / 5,
+                                                              //     //         child:
+                                                              //     //             CustomMultiSelectDialogField(
+                                                              //     //           title:
+                                                              //     //               'Select Equipment Category',
+                                                              //     //           buttonText:
+                                                              //     //               'Equipment Category',
+                                                              //     //           initialValue: (controller.selectedEquipmentCategoryIdList.isNotEmpty)
+                                                              //     //               ? controller.selectedEquipmentCategoryIdList
+                                                              //     //               : [],
+                                                              //     //           items: controller.equipmentCategoryList
+                                                              //     //               .map(
+                                                              //     //                 (equipmentCategory) => MultiSelectItem(
+                                                              //     //                   equipmentCategory?.id,
+                                                              //     //                   equipmentCategory?.name ?? '',
+                                                              //     //                 ),
+                                                              //     //               )
+                                                              //     //               .toList(),
+                                                              //     //           onConfirm: (selectedOptionsList) =>
+                                                              //     //               {
+                                                              //     //             controller.equipmentCategoriesSelected(selectedOptionsList),
+                                                              //     //             print('Equipment list55 ${controller.selectedEquipmentCategoryIdList}')
+                                                              //     //           },
+                                                              //     //         ),
+                                                              //     //       ),
+                                                              //     Dimens
+                                                              //         .boxHeight30,
+                                                              //     // _buildStartValidTillDateField_web(
+                                                              //     //     context,
+                                                              //     //     1),
+                                                              //   ],
+                                                              // ),
+                                                           
                                                             ],
                                                           )
-
                                                         ],
                                                       ),
-                                                    
+
                                                       Padding(
                                                         padding:
                                                             const EdgeInsets

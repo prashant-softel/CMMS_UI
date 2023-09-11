@@ -353,7 +353,7 @@ class NewPermitController extends GetxController {
   ///
   @override
   void onInit() async {
-    jcId = Get.arguments["jcId"];
+    // jcId = Get.arguments["jcId"];
     print('JobCardId:$jcId');
     try {
       final arguments = Get.arguments;
@@ -1381,7 +1381,7 @@ class NewPermitController extends GetxController {
   }
 
   Future<void> viewNewPermitList({int? permitId}) async {
-    Get.toNamed(Routes.viewPermitWebScreen, arguments: permitId);
+    Get.toNamed(Routes.viewPermitWebScreen, arguments: {"permitId":permitId});
   }
 
   Future<void> viewJobDetails() async {
