@@ -20,6 +20,7 @@ class PmTaskListModel {
   String? category_name;
   int? frequency_id;
   String? frequency_name;
+  String? assigned_to_name;
   String? permit_code;
   int? permit_id;
   int? status;
@@ -34,6 +35,7 @@ class PmTaskListModel {
       this.equipment_name,
       this.frequency_id,
       this.frequency_name,
+      this.assigned_to_name,
       this.maintenance_order_number,
       this.permit_code,
       this.permit_id,
@@ -53,6 +55,7 @@ class PmTaskListModel {
         equipment_name: json['equipment_name'] ?? '',
         frequency_id: json['frequency_id'] ?? 0,
         frequency_name: json['frequency_name'] ?? '',
+        assigned_to_name: json['assigned_to_name'] ?? '',
         maintenance_order_number: json['maintenance_order_number'] ?? '',
         permit_code: json['permit_code'] ?? '-',
         permit_id: json['permit_id'] ?? 0,
@@ -70,6 +73,7 @@ class PmTaskListModel {
         "equipment_name": equipment_name,
         "frequency_id": frequency_id,
         "frequency_name": frequency_name,
+        "assigned_to_name": assigned_to_name,
         "maintenance_order_number": maintenance_order_number,
         "permit_code": permit_code,
         "permit_id": permit_id,

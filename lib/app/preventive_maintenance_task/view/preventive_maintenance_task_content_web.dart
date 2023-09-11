@@ -271,6 +271,7 @@ class _PreventiveMaintenanceTaskContentWebState
                                               "Done Date",
                                               "Equipment Name",
                                               "Order Frequency",
+                                              "Assigned To",
                                               "PTW",
                                               "Action",
                                             ].map((column) {
@@ -362,6 +363,11 @@ class _PreventiveMaintenanceTaskContentWebState
                                                                   TableViewCell(
                                                                       child:
                                                                           Text(
+                                                                    '${pmTaskDetails?.assigned_to_name}',
+                                                                  )),
+                                                                  TableViewCell(
+                                                                      child:
+                                                                          Text(
                                                                     '${pmTaskDetails?.permit_code}',
                                                                   )),
                                                                   TableViewCell(
@@ -390,6 +396,26 @@ class _PreventiveMaintenanceTaskContentWebState
                                                                             }
                                                                             // controller.pmTaskView();
                                                                           },
+                                                                        ),
+                                                                        TableActionButton(
+                                                                          color:
+                                                                              ColorValues.appYellowColor,
+                                                                          icon:
+                                                                              Icons.edit,
+                                                                          message:
+                                                                              'Edit',
+                                                                          onPress:
+                                                                              () {},
+                                                                        ),
+                                                                         TableActionButton(
+                                                                          color:
+                                                                              ColorValues.linktopermitColor,
+                                                                          icon:
+                                                                              Icons.link,
+                                                                          message:
+                                                                              'Link To Permit',
+                                                                          onPress:
+                                                                              () {},
                                                                         ),
                                                                         TableActionButton(
                                                                           color:
