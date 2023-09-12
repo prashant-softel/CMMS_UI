@@ -52,6 +52,7 @@ abstract class Dimens {
   static double fourtyEight = 48.sp;
   static double fourtyNine = 49.sp;
   static double fifty = 50.sp;
+  static double fortySeven = 47.sp;
   static double fiftyTwo = 52.sp;
   static double fiftyFour = 54.sp;
   static double fiftyFive = 55.sp;
@@ -1340,6 +1341,7 @@ abstract class Dimens {
   static SizedBox boxWidth40 = SizedBox(width: fourty);
   static SizedBox boxWidth35 = SizedBox(width: thirtyFive);
   static SizedBox boxWidth50 = SizedBox(width: fifty);
+  static SizedBox boxWidth47 = SizedBox(width: fortySeven);
   static SizedBox boxWidth60 = SizedBox(width: sixty);
   static SizedBox boxWidth70 = SizedBox(width: seventy);
   static SizedBox boxWidth80 = SizedBox(width: eighty);
@@ -1354,11 +1356,6 @@ abstract class Dimens {
   static SizedBox boxWidth170 = SizedBox(width: oneHundredSeventy);
   static SizedBox boxWidth175 = SizedBox(width: oneHundredSeventyFive);
   static SizedBox boxWidth160 = SizedBox(width: oneHundredSixty);
-
-
-
-
-
 
   /// Box heights
   static SizedBox boxHeight0 = SizedBox(height: zero);
@@ -1406,10 +1403,6 @@ abstract class Dimens {
   static SizedBox boxHeight300 = SizedBox(height: threeHundred);
   static SizedBox boxHeight350 = SizedBox(height: threeHundredFifty);
   static SizedBox boxHeight370 = SizedBox(height: threeHundredSeventy);
-
-
-
-
 
   static SizedBox box0 = const SizedBox.shrink();
 }

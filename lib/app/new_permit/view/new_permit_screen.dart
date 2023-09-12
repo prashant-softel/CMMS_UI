@@ -1806,7 +1806,11 @@ class NewPermitScreen extends GetView<NewPermitController> {
                                                             //         .center,
                                                             children: [
                                                               Padding(
-                                                                padding: const EdgeInsets.only(left: 120),
+                                                                padding:
+                                                                    const EdgeInsets
+                                                                            .only(
+                                                                        left:
+                                                                            103),
                                                                 child: Column(
                                                                   crossAxisAlignment:
                                                                       CrossAxisAlignment
@@ -1817,65 +1821,60 @@ class NewPermitScreen extends GetView<NewPermitController> {
                                                                         CustomRichText(
                                                                             title:
                                                                                 'Block/Plot: '),
-                                                                        Dimens.boxWidth10,
+                                                                        Dimens
+                                                                            .boxWidth10,
                                                                         SizedBox(
                                                                           width:
-                                                                              MediaQuery.of(context).size.width /
-                                                                                  5,
-                                                              
+                                                                              MediaQuery.of(context).size.width / 5,
+
                                                                           child:
                                                                               Obx(
                                                                             () =>
                                                                                 DropdownWebWidget(
-                                                                              dropdownList:
-                                                                                  controller.blockList,
-                                                                              isValueSelected:
-                                                                                  controller.isBlockSelected.value,
-                                                                              selectedValue:
-                                                                                  controller.selectedBlock.value,
-                                                                              onValueChanged:
-                                                                                  controller.onValueChanged,
+                                                                              dropdownList: controller.blockList,
+                                                                              isValueSelected: controller.isBlockSelected.value,
+                                                                              selectedValue: controller.selectedBlock.value,
+                                                                              onValueChanged: controller.onValueChanged,
                                                                             ),
                                                                           ),
                                                                           // LoginCustomTextfield(),
                                                                         ),
                                                                       ],
                                                                     ),
-                                                                    Dimens.boxHeight10,
+                                                                    Dimens
+                                                                        .boxHeight10,
                                                                     Row(
                                                                       children: [
                                                                         CustomRichText(
                                                                             title:
                                                                                 'Type of permit: '),
-                                                                                 Dimens.boxWidth10,
+                                                                        Dimens
+                                                                            .boxWidth10,
                                                                         SizedBox(
                                                                           width:
-                                                                              MediaQuery.of(context).size.width /
-                                                                                  5,
+                                                                              MediaQuery.of(context).size.width / 5,
                                                                           child:
                                                                               Obx(
                                                                             () =>
                                                                                 DropdownWebWidget(
-                                                                              dropdownList:
-                                                                                  controller.typePermitList,
-                                                                              isValueSelected:
-                                                                                  controller.isTypePermitSelected.value,
-                                                                              selectedValue:
-                                                                                  controller.selectedTypePermit.value,
-                                                                              onValueChanged:
-                                                                                  controller.onValueChanged,
+                                                                              dropdownList: controller.typePermitList,
+                                                                              isValueSelected: controller.isTypePermitSelected.value,
+                                                                              selectedValue: controller.selectedTypePermit.value,
+                                                                              onValueChanged: controller.onValueChanged,
                                                                             ),
                                                                           ),
                                                                         ),
                                                                       ],
                                                                     ),
-                                                                    Dimens.boxHeight10,
+                                                                    Dimens
+                                                                        .boxHeight10,
                                                                     Row(
                                                                       children: [
                                                                         CustomRichText(
                                                                             title:
                                                                                 'Start Date: '),
-                                                                                 Dimens.boxWidth10,
+                                                                        Dimens
+                                                                            .boxWidth10,
                                                                         _buildStartValidTillDateField_web(
                                                                           context,
                                                                           0,
@@ -1885,7 +1884,7 @@ class NewPermitScreen extends GetView<NewPermitController> {
                                                                   ],
                                                                 ),
                                                               ),
-                                                              Dimens.boxWidth70,
+                                                              Dimens.boxWidth47,
                                                               Column(
                                                                 crossAxisAlignment:
                                                                     CrossAxisAlignment
@@ -1896,7 +1895,8 @@ class NewPermitScreen extends GetView<NewPermitController> {
                                                                       CustomRichText(
                                                                           title:
                                                                               'Equipment Categories: '),
-                                                                               Dimens.boxWidth10,
+                                                                      Dimens
+                                                                          .boxWidth10,
                                                                       controller.permitId.value >
                                                                               0
                                                                           ? SizedBox(
@@ -1941,19 +1941,20 @@ class NewPermitScreen extends GetView<NewPermitController> {
                                                                             ),
                                                                     ],
                                                                   ),
-                                                                  Dimens.boxHeight30,
+                                                                  Dimens
+                                                                      .boxHeight30,
                                                                   Row(
                                                                     children: [
                                                                       CustomRichText(
                                                                           title:
                                                                               'Valid Till: '),
-                                                                               Dimens.boxWidth10,
+                                                                      Dimens
+                                                                          .boxWidth10,
                                                                       _buildStartValidTillDateField_web(
                                                                           context,
                                                                           1),
                                                                     ],
                                                                   ),
-
                                                                 ],
                                                               ),
                                                               // Padding(
@@ -2147,7 +2148,6 @@ class NewPermitScreen extends GetView<NewPermitController> {
                                                               //     //     1),
                                                               //   ],
                                                               // ),
-                                                           
                                                             ],
                                                           )
                                                         ],
@@ -3048,7 +3048,7 @@ class NewPermitScreen extends GetView<NewPermitController> {
 
                                                       //Tool box talk
                                                       SizedBox(
-                                                        height: 380,
+                                                        height: 450,
                                                         width: MediaQuery.of(
                                                                     context)
                                                                 .size
@@ -3071,129 +3071,127 @@ class NewPermitScreen extends GetView<NewPermitController> {
                                                                 BoxConstraints(
                                                               maxWidth: 1100,
                                                             ),
-                                                            child:
-                                                                SingleChildScrollView(
-                                                              child: Column(
-                                                                children: [
-                                                                  CustomAppBar(
-                                                                    title:
-                                                                        'Tool Box Talk'
-                                                                            .tr,
-                                                                  ),
-                                                                  Dimens
-                                                                      .boxHeight10,
-                                                                  Wrap(
-                                                                    children: [
-                                                                      Column(
-                                                                        children: [
-                                                                          Row(
-                                                                            mainAxisAlignment:
-                                                                                MainAxisAlignment.spaceEvenly,
-                                                                            children: [
-                                                                              Text('TBT Type: '),
-                                                                              SizedBox(
-                                                                                width: MediaQuery.of(context).size.width / 5,
-                                                                                child: Obx(
-                                                                                  () => DropdownWebWidget(
-                                                                                    dropdownList: controller.jobTypeList,
-                                                                                    isValueSelected: controller.isJobTypeListSelected.value,
-                                                                                    selectedValue: controller.selectedJobType.value,
-                                                                                    onValueChanged: controller.onValueChanged,
-                                                                                  ),
+                                                            child: Column(
+                                                              children: [
+                                                                CustomAppBar(
+                                                                  title:
+                                                                      'Tool Box Talk'
+                                                                          .tr,
+                                                                ),
+                                                                Dimens
+                                                                    .boxHeight10,
+                                                                Wrap(
+                                                                  children: [
+                                                                    Column(
+                                                                      children: [
+                                                                        Row(
+                                                                          mainAxisAlignment:
+                                                                              MainAxisAlignment.spaceEvenly,
+                                                                          children: [
+                                                                            Text('TBT Type: '),
+                                                                            SizedBox(
+                                                                              width: MediaQuery.of(context).size.width / 5,
+                                                                              child: Obx(
+                                                                                () => DropdownWebWidget(
+                                                                                  dropdownList: controller.jobTypeList,
+                                                                                  isValueSelected: controller.isJobTypeListSelected.value,
+                                                                                  selectedValue: controller.selectedJobType.value,
+                                                                                  onValueChanged: controller.onValueChanged,
                                                                                 ),
+                                                                              ),
 
-                                                                                // LoginCustomTextfield(),
-                                                                              ),
-                                                                              SizedBox(
-                                                                                width: 20,
-                                                                              ),
-                                                                              Text('SOP: '),
-                                                                              SizedBox(
-                                                                                width: MediaQuery.of(context).size.width / 5,
-                                                                                child: Obx(
-                                                                                  () => DropdownWebWidget(
-                                                                                    dropdownList: controller.sopPermitList,
-                                                                                    isValueSelected: controller.isSopPermitListSelected.value,
-                                                                                    selectedValue: controller.selectedSopPermit.value,
-                                                                                    onValueChanged: controller.onValueChanged,
-                                                                                  ),
+                                                                              // LoginCustomTextfield(),
+                                                                            ),
+                                                                            SizedBox(
+                                                                              width: 20,
+                                                                            ),
+                                                                            Text('SOP: '),
+                                                                            SizedBox(
+                                                                              width: MediaQuery.of(context).size.width / 5,
+                                                                              child: Obx(
+                                                                                () => DropdownWebWidget(
+                                                                                  dropdownList: controller.sopPermitList,
+                                                                                  isValueSelected: controller.isSopPermitListSelected.value,
+                                                                                  selectedValue: controller.selectedSopPermit.value,
+                                                                                  onValueChanged: controller.onValueChanged,
                                                                                 ),
-                                                                                // LoginCustomTextfield(),
                                                                               ),
+                                                                              // LoginCustomTextfield(),
+                                                                            ),
+                                                                          ],
+                                                                        ),
+                                                                        SizedBox(
+                                                                          height:
+                                                                              40,
+                                                                        ),
+                                                                        Center(
+                                                                          child:
+                                                                              Row(
+                                                                            mainAxisAlignment:
+                                                                                MainAxisAlignment.center,
+                                                                            children: [
+                                                                              Container(
+                                                                                  height: 30,
+                                                                                  child: CustomElevatedButton(
+                                                                                    backgroundColor: ColorValues.navyBlueColor,
+                                                                                    text: "View JSA",
+                                                                                    onPressed: () {
+                                                                                      // controller.createNewPermit();
+                                                                                      Get.dialog<void>(ViewJSADialog());
+                                                                                    },
+                                                                                  )),
+                                                                              SizedBox(
+                                                                                width: 10,
+                                                                              ),
+                                                                              Container(
+                                                                                  height: 30,
+                                                                                  child: CustomElevatedButton(
+                                                                                    backgroundColor: ColorValues.navyBlueColor,
+                                                                                    text: "View SOP",
+                                                                                    onPressed: () {
+                                                                                      Get.dialog<void>(ViewSOPDialog());
+                                                                                      // controller.createNewPermit();
+                                                                                    },
+                                                                                  )),
                                                                             ],
                                                                           ),
-                                                                          SizedBox(
-                                                                            height:
-                                                                                40,
-                                                                          ),
-                                                                          Center(
-                                                                            child:
-                                                                                Row(
-                                                                              mainAxisAlignment: MainAxisAlignment.center,
+                                                                        ),
+                                                                        SizedBox(
+                                                                          height:
+                                                                              10,
+                                                                        ),
+                                                                        SizedBox(
+                                                                          height:
+                                                                              22,
+                                                                        ),
+
+                                                                        /// FILE UPLOAD WIDGET
+                                                                        Container(
+                                                                          height:
+                                                                              Get.height * 0.2,
+                                                                          width:
+                                                                              Get.width,
+                                                                          child: Row(
+                                                                              //
                                                                               children: [
-                                                                                Container(
-                                                                                    height: 30,
-                                                                                    child: CustomElevatedButton(
-                                                                                      backgroundColor: ColorValues.navyBlueColor,
-                                                                                      text: "View JSA",
-                                                                                      onPressed: () {
-                                                                                        // controller.createNewPermit();
-                                                                                        Get.dialog<void>(ViewJSADialog());
-                                                                                      },
-                                                                                    )),
-                                                                                SizedBox(
-                                                                                  width: 10,
+                                                                                Expanded(
+                                                                                  flex: 2,
+                                                                                  child: FileUploadWidgetWithDropzone(),
                                                                                 ),
-                                                                                Container(
-                                                                                    height: 30,
-                                                                                    child: CustomElevatedButton(
-                                                                                      backgroundColor: ColorValues.navyBlueColor,
-                                                                                      text: "View SOP",
-                                                                                      onPressed: () {
-                                                                                        Get.dialog<void>(ViewSOPDialog());
-                                                                                        // controller.createNewPermit();
-                                                                                      },
-                                                                                    )),
-                                                                              ],
-                                                                            ),
-                                                                          ),
-                                                                          SizedBox(
-                                                                            height:
-                                                                                10,
-                                                                          ),
-                                                                          SizedBox(
-                                                                            height:
-                                                                                22,
-                                                                          ),
+                                                                                Dimens.boxWidth10,
+                                                                                Expanded(flex: 8, child: FileUploadDetailsWidgetWeb()),
+                                                                              ]),
+                                                                        ),
 
-                                                                          /// FILE UPLOAD WIDGET
-                                                                          Container(
-                                                                            height:
-                                                                                Get.height * 0.2,
-                                                                            width:
-                                                                                Get.width,
-                                                                            child: Row(
-                                                                                //
-                                                                                children: [
-                                                                                  Expanded(
-                                                                                    flex: 2,
-                                                                                    child: FileUploadWidgetWithDropzone(),
-                                                                                  ),
-                                                                                  Dimens.boxWidth10,
-                                                                                  Expanded(flex: 8, child: FileUploadDetailsWidgetWeb()),
-                                                                                ]),
-                                                                          ),
-
-                                                                          SizedBox(
-                                                                            height:
-                                                                                15,
-                                                                          ),
-                                                                        ],
-                                                                      ),
-                                                                    ],
-                                                                  ),
-                                                                ],
-                                                              ),
+                                                                        SizedBox(
+                                                                          height:
+                                                                              15,
+                                                                        ),
+                                                                      ],
+                                                                    ),
+                                                                  ],
+                                                                ),
+                                                              ],
                                                             ),
                                                           ),
                                                         ),
