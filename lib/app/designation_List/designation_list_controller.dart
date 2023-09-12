@@ -54,6 +54,10 @@ class DesignationListController extends GetxController {
   Rx<bool> isSelectedfrequency = true.obs;
   var nameCtrlr = TextEditingController();
   var descriptionCtrlr = TextEditingController();
+  Rx<bool> isTitleInvalid = false.obs;
+  Rx<bool> isDescriptionInvalid = false.obs;
+  Rx<bool> isFormInvalid = false.obs;
+
   DesignationModel? selectedItem = null;
   StreamSubscription<int>? facilityIdStreamSubscription;
   bool isEditMode = false;
@@ -91,8 +95,32 @@ class DesignationListController extends GetxController {
     }
   }
 
-
+  void checkForm() {
+    if(isTitleInvalid.value == true || isDescriptionInvalid.value == true){
+      isFormInvalid.value = true;
+    } else {
+      isFormInvalid.value = false;
+    }
+  }
   Future<bool> createDesignation() async {
+    print("CREATE CONTROLLER");
+    if (nameCtrlr.text.trim() == '' ) {
+      isTitleInvalid.value = true;
+      isFormInvalid.value = true;
+      // isDescriptionInvalid.value = true;
+    }
+    if (descriptionCtrlr.text.trim() == '' ) {
+      // isTitleInvalid.value = true;
+      isFormInvalid.value = true;
+      isDescriptionInvalid.value = true;
+    }
+    checkForm();
+    print("FORMVALIDITIY : $isFormInvalid.value");
+    print("TITLE : $isTitleInvalid.value");
+    print("DES : $isDescriptionInvalid.value");
+    if (isFormInvalid.value == true) {
+      return false;
+    }
     if (nameCtrlr.text.trim() == '') {
       Fluttertoast.showToast(
           msg: "Please enter required field", fontSize: 16.0);

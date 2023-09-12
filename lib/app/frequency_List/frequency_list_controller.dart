@@ -44,6 +44,11 @@ class FrequencyListController extends GetxController {
   FrequencyModel? selectedItem;
   var manpowerCtrlr = TextEditingController();
   var durationCtrlr = TextEditingController();
+
+  Rx<bool> isTitleInvalid = false.obs;
+  Rx<bool> isDescriptionInvalid = false.obs;
+  Rx<bool> isFormInvalid = false.obs;
+
   int selectedEquipmentId = 0;
   int selectedfrequencyId = 0;
   final isSuccess = false.obs;
@@ -151,8 +156,31 @@ class FrequencyListController extends GetxController {
   //       break;
   //   }
   // }
-
+  void checkForm() {
+    if(isTitleInvalid.value == true || isDescriptionInvalid.value == true){
+      isFormInvalid.value = true;
+    } else {
+      isFormInvalid.value = false;
+    }
+  }
   Future<bool> createChecklistNumber() async {
+    if (checklistNumberCtrlr.text.trim() == '' ) {
+      isTitleInvalid.value = true;
+      isFormInvalid.value = true;
+      // isDescriptionInvalid.value = true;
+    }
+    if (manpowerCtrlr.text.trim() == '' ) {
+      // isTitleInvalid.value = true;
+      isFormInvalid.value = true;
+      isDescriptionInvalid.value = true;
+    }
+    checkForm();
+    print("FORMVALIDITIY : $isFormInvalid.value");
+    print("TITLE : $isTitleInvalid.value");
+    print("DES : $isDescriptionInvalid.value");
+    if (isFormInvalid.value == true) {
+      return false;
+    }
     if (checklistNumberCtrlr.text.trim() == '' ||
         selectedEquipmentId == 0 ||
         selectedfrequencyId == 0) {
