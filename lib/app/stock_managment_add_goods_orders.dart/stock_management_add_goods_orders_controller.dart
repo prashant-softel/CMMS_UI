@@ -95,7 +95,7 @@ class StockManagementAddGoodsOrdersController extends GetxController {
   ///
   @override
   void onInit() async {
-    id = Get.arguments;
+    id = Get.arguments["id"];
     print('AddStock:$id');
     facilityIdStreamSubscription = homeController.facilityId$.listen((event) {
       facilityId = event;

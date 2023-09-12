@@ -86,7 +86,7 @@ class ViewAddGoodsOrdersController extends GetxController {
   ///
   @override
   void onInit() async {
-    id = Get.arguments;
+    id = Get.arguments["id"];
     print('AddStock:$id');
     Future.delayed(Duration(seconds: 1), () {
       getUnitCurrencyList();
