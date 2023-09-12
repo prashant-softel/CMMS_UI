@@ -101,7 +101,9 @@ class JobCardDetailsController extends GetxController {
 
       // await _flutterSecureStorage.delete(key: "JcId");
 
-      await setJcId();
+      jobCardId.value = Get.arguments["JcId"];
+
+      //   await setJcId();
 
       jobCardList.value = await jobCardDetailsPresenter.getJobCardDetails(
             jobCardId: jobCardId.value,

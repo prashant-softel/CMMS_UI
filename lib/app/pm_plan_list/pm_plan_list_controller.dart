@@ -21,7 +21,7 @@ class PmPlanListController extends GetxController {
 
   StreamSubscription<int>? facilityIdStreamSubscription;
   int facilityId = 0;
-  RxList<PmPlanListModel?> pmTaskList = <PmPlanListModel?>[].obs;
+  RxList<PmPlanListModel?> pmPlanList = <PmPlanListModel?>[].obs;
   RxList<PmPlanListModel?> filteredData = <PmPlanListModel>[].obs;
   bool openFromDateToStartDatePicker = false;
   RxList<NewPermitModel?>? permitList = <NewPermitModel>[].obs;
@@ -35,8 +35,8 @@ class PmPlanListController extends GetxController {
   late List<TextEditingController> textControllers;
   RxString responseMessage = ''.obs;
   int permitscheduleId = 0;
-  PmPlanListModel? pmTaskListModel;
-  RxList<String> pmTaskListTableColumns = <String>[].obs;
+  PmPlanListModel? pmPlanListModel;
+  RxList<String> pmPlanListTableColumns = <String>[].obs;
   PaginationController paginationController = PaginationController(
     rowCount: 0,
     rowsPerPage: 10,
@@ -49,10 +49,50 @@ class PmPlanListController extends GetxController {
   String get formattedTodate1 => DateFormat('yyyy-MM-dd').format(toDate.value);
   String get formattedFromdate1 =>
       DateFormat('yyyy-MM-dd').format(fromDate.value);
-  PmTaskListModel? selectedItem;
+
+  RxString idFilterText = ''.obs;
+  RxString tittleFilterText = ''.obs;
+  RxString lastDoneDateFilterText = ''.obs;
+  RxString nextScheduleDateFilterText = ''.obs;
+  RxString frequencyFilterText = ''.obs;
+  RxString createdByFilterText = ''.obs;
+
+  Rx<int> pmPlanId = 0.obs;
+  final columnVisibility = ValueNotifier<Map<String, bool>>({
+    "Pm PlanID": true,
+    "Pm Plan Title": true,
+    "Last Done Date": true,
+    "Next Schedule Date": true,
+    "Frequency ": true,
+    "Created By": true,
+  });
+
+  final Map<String, double> columnwidth = {
+    "Pm PlanID": 100,
+    "Pm Plan Title": 350,
+    "Last Done Date": 200,
+    "Next Schedule Date": 200,
+    "Frequency ": 150,
+    "Created By": 150,
+  };
+  Map<String, RxString> filterText = {};
+  void setColumnVisibility(String columnName, bool isVisible) {
+    final newVisibility = Map<String, bool>.from(columnVisibility.value)
+      ..[columnName] = isVisible;
+    columnVisibility.value = newVisibility;
+    // print({"updated columnVisibility": columnVisibility});
+  }
 
   @override
   void onInit() async {
+    this.filterText = {
+      "Pm PlanID": idFilterText,
+      "Pm Plan Title": tittleFilterText,
+      "Last Done Date": lastDoneDateFilterText,
+      "Next Schedule Date": nextScheduleDateFilterText,
+      "Frequency ": frequencyFilterText,
+      "Created By": createdByFilterText,
+    };
     facilityIdStreamSubscription = homecontroller.facilityId$.listen((event) {
       facilityId = event;
       Future.delayed(Duration(seconds: 2), () async {
@@ -69,11 +109,11 @@ class PmPlanListController extends GetxController {
 
   void search(String keyword) {
     if (keyword.isEmpty) {
-      pmTaskList.value = filteredData;
+      pmPlanList.value = filteredData;
       return;
     }
 
-    // pmTaskList.value = filteredData
+    // pmPlanList.value = filteredData
     //     .where((item) => item!.maintenance_order_number!
     //         .toLowerCase()
     //         .contains(keyword.toLowerCase()))
@@ -82,16 +122,16 @@ class PmPlanListController extends GetxController {
 
   Future<void> getPmPlanList(int facilityId, dynamic startDate, dynamic endDate,
       bool isLoading) async {
-    pmTaskList.value = <PmPlanListModel>[];
-    // pmTaskList?.clear();
-    final _pmTaskList = await pmPlanListPresenter.getPmPlanList(
+    pmPlanList.value = <PmPlanListModel>[];
+    // pmPlanList?.clear();
+    final _pmPlanList = await pmPlanListPresenter.getPmPlanList(
         facilityId: facilityId,
         isLoading: isLoading,
         startDate: startDate,
         endDate: endDate);
-    if (_pmTaskList != null) {
-      pmTaskList.value = _pmTaskList;
-      filteredData.value = pmTaskList.value;
+    if (_pmPlanList != null) {
+      pmPlanList.value = _pmPlanList;
+      filteredData.value = pmPlanList;
 
       paginationController = PaginationController(
         rowCount: filteredData.length,
@@ -99,14 +139,15 @@ class PmPlanListController extends GetxController {
       );
 
       if (filteredData != null && filteredData.isNotEmpty) {
-        pmTaskListModel = filteredData[0];
-        var calibrationListJson = pmTaskListModel?.toJson();
-        pmTaskListTableColumns.value = <String>[];
+        pmPlanListModel = filteredData[0];
+        var calibrationListJson = pmPlanListModel?.toJson();
+        pmPlanListTableColumns.value = <String>[];
         for (var key in calibrationListJson?.keys.toList() ?? []) {
-          pmTaskListTableColumns.add(key);
+          pmPlanListTableColumns.add(key);
         }
       }
     }
+    update(['pmPlan_list']);
   }
 
   void getPmPlanListByDate() {

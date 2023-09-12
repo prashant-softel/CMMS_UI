@@ -89,7 +89,7 @@ class JobDetailsController extends GetxController {
   @override
   void onReady() async {
     try {
-      await setJobId();
+      // await setJobId();
       getJobDetails(jobId.value);
 
       getjobDetailsModel(jobId.value);
@@ -308,13 +308,11 @@ class JobDetailsController extends GetxController {
   Future<void> viewNewPermitList({
     int? permitId,
     int? jobId,
-    
   }) async {
-    Get.toNamed(Routes.viewPermitWebScreen, arguments: {"permitId": permitId, "jobId":jobId});
+    Get.toNamed(Routes.viewPermitWebScreen,
+        arguments: {"permitId": permitId, "jobId": jobId});
     print({"Permit", permitId, jobId});
   }
-
-  
 
   Future<void> viewJobCArd({int? jobcardId}) async {
     Get.toNamed(Routes.jobCard, arguments: jobcardId);
