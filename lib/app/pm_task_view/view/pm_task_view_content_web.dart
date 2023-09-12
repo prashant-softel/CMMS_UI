@@ -1,6 +1,7 @@
 import 'package:cmms/app/navigators/app_pages.dart';
 import 'package:cmms/app/pm_task_view/pm_task_view_controller.dart';
 import 'package:cmms/app/theme/dimens.dart';
+import 'package:cmms/app/widgets/assign_to_pm_task_dialog.dart';
 import 'package:cmms/app/widgets/observation_pm_task_view_popup_dialog.dart';
 import 'package:cmms/app/widgets/table_action_button.dart';
 import 'package:data_table_2/data_table_2.dart';
@@ -472,15 +473,12 @@ class PreventiveMaintenanceTaskViewContentWeb
                                               style: Styles.blue700,
                                             ),
                                             Spacer(),
-                                            TableActionButton( 
+                                            TableActionButton(
                                               color: ColorValues.appGreenColor,
-                                              icon:
-                                                  Icons.add,
+                                              icon: Icons.add,
                                               message: '',
                                               label: "Add New MRS",
-                                              onPress: () {
-                                               
-                                              },
+                                              onPress: () {},
                                             ),
                                           ],
                                         ),
@@ -672,6 +670,31 @@ class PreventiveMaintenanceTaskViewContentWeb
             child: Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
+                Container(
+                  height: 35,
+                  child: CustomElevatedButton(
+                    icon: Icons.print,
+                    backgroundColor: ColorValues.linktopermitColor,
+                    text: "print",
+                    onPressed: () {
+                      //controller.printScreen();
+                    },
+                  ),
+                ),
+                Dimens.boxWidth10,
+                Container(
+                  height: 35,
+                  child: CustomElevatedButton(
+                    // icon: Icons.link,
+                    backgroundColor: ColorValues.blueColor,
+                    text: "Assign",
+                    onPressed: () {
+                      Get.dialog<void>(AssignToPMTaskDialog());
+                      //controller.printScreen();
+                    },
+                  ),
+                ),
+                Dimens.boxWidth10,
                 controller.pmtaskViewModel.value?.status == 161
                     ? Container(
                         height: 35,
@@ -701,7 +724,31 @@ class PreventiveMaintenanceTaskViewContentWeb
                             ),
                           )
                         : Dimens.box0,
-                Dimens.boxWidth50,
+                Dimens.boxWidth10,
+                Container(
+                  height: 35,
+                  child: CustomElevatedButton(
+                    // icon: Icons.start,
+                    backgroundColor: ColorValues.appGreenColor,
+                    text: "Create New Permit",
+                    onPressed: () {
+                      //controller.printScreen();
+                    },
+                  ),
+                ),
+                Dimens.boxWidth10,
+                Container(
+                  height: 35,
+                  child: CustomElevatedButton(
+                    // icon: Icons.start,
+                    backgroundColor: ColorValues.appGreenColor,
+                    text: "Clone Permit",
+                    onPressed: () {
+                      //controller.printScreen();
+                    },
+                  ),
+                ),
+                Dimens.boxWidth10,
                 Container(
                   height: 35,
                   child: CustomElevatedButton(
