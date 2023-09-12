@@ -47,7 +47,9 @@ class InventoryTypeListController extends GetxController {
         item!.name!.toString().toLowerCase().contains(keyword.toLowerCase()))
         .toList();
   }
-
+  Rx<bool> isTitleInvalid = false.obs;
+  Rx<bool> isDescriptionInvalid = false.obs;
+  Rx<bool> isFormInvalid = false.obs;
   RxList<String> inventoryTypeListTableColumns = <String>[].obs;
   RxList<FrequencyModel?> frequencyList = <FrequencyModel>[].obs;
   Rx<String> selectedfrequency = ''.obs;
@@ -118,7 +120,13 @@ class InventoryTypeListController extends GetxController {
       }
     }
   }
-
+  void checkForm() {
+    if(isTitleInvalid.value == true || isDescriptionInvalid.value == true){
+      isFormInvalid.value = true;
+    } else {
+      isFormInvalid.value = false;
+    }
+  }
   Future<void> createChecklist() async {
     Get.toNamed(
       Routes.createCheckList,
@@ -151,6 +159,23 @@ class InventoryTypeListController extends GetxController {
   }
 
   Future<bool> createChecklistNumber() async {
+    if (nameCtrlr.text.trim() == '' ) {
+      isTitleInvalid.value = true;
+      isFormInvalid.value = true;
+      // isDescriptionInvalid.value = true;
+    }
+    if (descriptionCtrlr.text.trim() == '' ) {
+      // isTitleInvalid.value = true;
+      isFormInvalid.value = true;
+      isDescriptionInvalid.value = true;
+    }
+    checkForm();
+    print("FORMVALIDITIY : $isFormInvalid.value");
+    print("TITLE : $isTitleInvalid.value");
+    print("DES : $isDescriptionInvalid.value");
+    if (isFormInvalid.value == true) {
+      return false;
+    }
     if (nameCtrlr.text.trim() == '' || descriptionCtrlr.text.trim() == '') {
       Fluttertoast.showToast(
           msg: "Please enter required field", fontSize: 16.0);
