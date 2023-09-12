@@ -27,6 +27,9 @@ class InventoryCategoryListController extends GetxController {
       <InventoryCategoryModel2>[].obs;
   Rx<String> selectedequipment = ''.obs;
   Rx<bool> isSelectedequipment = true.obs;
+  Rx<bool> isTitleInvalid = false.obs;
+  Rx<bool> isDescriptionInvalid = false.obs;
+  Rx<bool> isFormInvalid = false.obs;
   RxList<int> selectedEquipmentCategoryIdList = <int>[].obs;
   RxList<InventoryCategoryModel2?>? inventoryStatusList =
       <InventoryCategoryModel2?>[].obs;
@@ -150,7 +153,34 @@ class InventoryCategoryListController extends GetxController {
     }
   }
 
+  void checkForm() {
+    if(isTitleInvalid.value == true || isDescriptionInvalid.value == true){
+      isFormInvalid.value = true;
+    } else {
+      isFormInvalid.value = false;
+    }
+  }
+  // Future<bool> createDesignation() async {
+  //   print("CREATE CONTROLLER");
+
   Future<bool> createInventoryStatus() async {
+    if (nameCtrlr.text.trim() == '' ) {
+      isTitleInvalid.value = true;
+      isFormInvalid.value = true;
+      // isDescriptionInvalid.value = true;
+    }
+    if (descriptionCtrlr.text.trim() == '' ) {
+      // isTitleInvalid.value = true;
+      isFormInvalid.value = true;
+      isDescriptionInvalid.value = true;
+    }
+    checkForm();
+    print("FORMVALIDITIY : $isFormInvalid.value");
+    print("TITLE : $isTitleInvalid.value");
+    print("DES : $isDescriptionInvalid.value");
+    if (isFormInvalid.value == true) {
+      return false;
+    }
     if (nameCtrlr.text.trim() == '' || descriptionCtrlr.text.trim() == '') {
       Fluttertoast.showToast(
           msg: "Please enter required field", fontSize: 16.0);
