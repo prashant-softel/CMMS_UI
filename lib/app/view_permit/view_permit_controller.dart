@@ -294,7 +294,7 @@ class ViewPermitController extends GetxController {
   Map<dynamic, dynamic> employee_map = {};
   Map<int, dynamic> loto_map = {};
 
-  int? permitId = 0;
+  int? permitId = 60102;
   int? jobId = 0;
   Map<String, dynamic> data = {};
   @override
@@ -306,10 +306,9 @@ class ViewPermitController extends GetxController {
     // // if(data['jobId'] != null){
     //   permitId = int.tryParse('${data['permitId']}');
     // // }
-    
+
     permitId = Get.arguments["permitId"];
     jobId = Get.arguments["jobId"];
-
 
     // jobId = Get.arguments[1];
 
@@ -370,7 +369,10 @@ class ViewPermitController extends GetxController {
     String _approveComment = approveCommentTextFieldCtrlr.text.trim();
 
     final _permitApprovedBtn = await viewPermitPresenter.permitApprovedButton(
-        comment: _approveComment, id: permitId, ptwStatus: ptwStatus, jobId: jobId);
+        comment: _approveComment,
+        id: permitId,
+        ptwStatus: ptwStatus,
+        jobId: jobId);
     // showAlertPermitApproveDialog();
     print('Approved Data:${_approveComment}');
     print('Approved Data:${permitId}');

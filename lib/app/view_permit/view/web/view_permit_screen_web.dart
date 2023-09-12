@@ -14,6 +14,7 @@ import 'package:cmms/app/widgets/history_table_widget_web.dart';
 import 'package:cmms/app/widgets/permit_approved_dialog.dart';
 import 'package:cmms/app/widgets/permit_cancel_by_approver_dialog.dart';
 import 'package:cmms/app/widgets/permit_reject_dialog.dart';
+import 'package:data_table_2/data_table_2.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
@@ -61,8 +62,8 @@ class ViewPermitWebScreen extends GetView<ViewPermitController> {
                 Obx(
                   () => Expanded(
                     child: Container(
-                      // width: MediaQuery.of(context).size.width,
-                      //  height: MediaQuery.of(context).size.height,
+                      width: MediaQuery.of(context).size.width,
+                      height: MediaQuery.of(context).size.height,
                       child: Card(
                         color: Color.fromARGB(255, 245, 248, 250),
                         //  elevation: 20,
@@ -1581,9 +1582,9 @@ class ViewPermitWebScreen extends GetView<ViewPermitController> {
                                             color: Color.fromARGB(
                                                     255, 236, 234, 234)
                                                 .withOpacity(0.5),
-                                            spreadRadius: 2,
-                                            blurRadius: 5,
-                                            offset: Offset(0, 2),
+                                            //  spreadRadius: 2,
+                                            //  blurRadius: 5,
+                                            //  offset: Offset(0, 2),
                                           ),
                                         ],
                                       ),
@@ -1610,55 +1611,27 @@ class ViewPermitWebScreen extends GetView<ViewPermitController> {
                                         ],
                                       ),
                                     ),
-                                    SizedBox(
-                                      height: 20,
-                                    ),
-                                    Row(
-                                      children: [
-                                        SizedBox(
-                                          width: 30,
-                                        ),
-                                        Text('Title:'),
-                                        SizedBox(
-                                          width: 10,
-                                        ),
-                                        SizedBox(
-                                          width: 150,
-                                          child: Text(
+
+                                    Padding(
+                                      padding: const EdgeInsets.all(10.0),
+                                      child: Row(
+                                        children: [
+                                          Text(
                                             '${controller.viewPermitDetailsModel.value?.title}',
-                                            style: TextStyle(
-                                                color: Color.fromARGB(
-                                                    255, 6, 83, 146),
-                                                fontWeight: FontWeight.bold),
+                                            style: Styles.blackBold16,
                                           ),
-                                        ),
-                                        Spacer(),
-                                        Container(
-                                          height: 30,
-                                          width: MediaQuery.of(context)
-                                                  .size
-                                                  .width /
-                                              5,
-                                          decoration: BoxDecoration(
-                                            borderRadius:
-                                                BorderRadius.circular(10),
-                                            border: Border.all(
-                                              color: controller
-                                                              .viewPermitDetailsModel
-                                                              .value
-                                                              ?.current_status_short ==
-                                                          "Approved" ||
-                                                      controller
-                                                              .viewPermitDetailsModel
-                                                              .value
-                                                              ?.current_status_short ==
-                                                          "Waiting for Approval"
-                                                  ? ColorValues.approveColor
-                                                  : ColorValues.appRedColor,
-                                              width: 1,
-                                            ),
-                                            boxShadow: [
-                                              BoxShadow(
+                                          Spacer(),
+                                          Container(
+                                            // height: 30,
+                                            // width: MediaQuery.of(context)
+                                            //         .size
+                                            //         .width /
+                                            //     5,
+                                            padding: EdgeInsets.all(5),
+                                            decoration: BoxDecoration(
+                                              borderRadius:
+                                                  BorderRadius.circular(10),
+                                              border: Border.all(
                                                 color: controller
                                                                 .viewPermitDetailsModel
                                                                 .value
@@ -1671,261 +1644,234 @@ class ViewPermitWebScreen extends GetView<ViewPermitController> {
                                                             "Waiting for Approval"
                                                     ? ColorValues.approveColor
                                                     : ColorValues.appRedColor,
+                                                width: 1,
+                                              ),
+                                              boxShadow: [
+                                                BoxShadow(
+                                                  color: controller
+                                                                  .viewPermitDetailsModel
+                                                                  .value
+                                                                  ?.current_status_short ==
+                                                              "Approved" ||
+                                                          controller
+                                                                  .viewPermitDetailsModel
+                                                                  .value
+                                                                  ?.current_status_short ==
+                                                              "Waiting for Approval"
+                                                      ? ColorValues.approveColor
+                                                      : ColorValues.appRedColor,
+                                                ),
+                                              ],
+                                            ),
+                                            child: Center(
+                                                child: Text(
+                                              '${controller.viewPermitDetailsModel.value?.current_status_short}',
+                                              style: TextStyle(
+                                                  color: Colors.white),
+                                            )),
+                                          )
+                                        ],
+                                      ),
+                                    ),
+
+                                    Divider(
+                                      color: ColorValues.lightGreyColor,
+                                    ),
+
+                                    Container(
+                                      margin: EdgeInsets.only(
+                                          left: 20, right: 20, top: 20),
+                                      child: Row(
+                                        crossAxisAlignment:
+                                            CrossAxisAlignment.start,
+                                        children: [
+                                          Column(
+                                            crossAxisAlignment:
+                                                CrossAxisAlignment.end,
+                                            children: [
+                                              Text(
+                                                'Start Date: ',
+                                                style: Styles.black17,
+                                              ),
+                                              Dimens.boxHeight5,
+                                              Text(
+                                                'Permit No: ',
+                                                style: Styles.black17,
+                                              ),
+                                              Dimens.boxHeight5,
+                                              Text(
+                                                'Equipment Categories: ',
+                                                style: Styles.black17,
                                               ),
                                             ],
-                                          ),
-                                          child: Center(
-                                              child: Text(
-                                            '${controller.viewPermitDetailsModel.value?.current_status_short}',
-                                            style:
-                                                TextStyle(color: Colors.white),
-                                          )),
-                                        )
-                                      ],
-                                    ),
-                                    SizedBox(
-                                      height: 5,
-                                    ),
-                                    Divider(
-                                      height: 5,
-                                      thickness: 2,
-                                    ),
-                                    SizedBox(
-                                      height: 20,
-                                    ),
-                                    SizedBox(
-                                      width: MediaQuery.of(context).size.width /
-                                          1.2,
-                                      child: Row(
-                                        mainAxisAlignment:
-                                            MainAxisAlignment.start,
-                                        children: [
-                                          SizedBox(
-                                            width: 35,
                                           ),
                                           Column(
                                             crossAxisAlignment:
                                                 CrossAxisAlignment.start,
                                             children: [
-                                              Row(
-                                                crossAxisAlignment:
-                                                    CrossAxisAlignment.start,
-                                                children: [
-                                                  Column(
-                                                    crossAxisAlignment:
-                                                        CrossAxisAlignment.end,
-                                                    children: [
-                                                      Text('Start Date: '),
-                                                      Text('Permit No: '),
-                                                      Text(
-                                                          'Equipment Categories: '),
-                                                    ],
-                                                  ),
-                                                  Column(
-                                                    crossAxisAlignment:
-                                                        CrossAxisAlignment
-                                                            .start,
-                                                    children: [
-                                                      SizedBox(
-                                                        child: Text(
-                                                          '${controller.startDateTimeCtrlr.text}',
-                                                          style: TextStyle(
-                                                              color: Color
-                                                                  .fromARGB(
-                                                                      255,
-                                                                      5,
-                                                                      92,
-                                                                      163)),
-                                                        ),
-                                                      ),
-                                                      // Dimens.boxHeight5,
-                                                      SizedBox(
-                                                        child: Text(
-                                                          '${controller.viewPermitDetailsModel.value?.permitNo}',
-                                                          style: TextStyle(
-                                                              color: Color
-                                                                  .fromARGB(
-                                                                      255,
-                                                                      5,
-                                                                      92,
-                                                                      163)),
-                                                        ),
-                                                      ),
-
-                                                      //  SizedBox(
-                                                      //     width: 150,
-                                                      //     child: Text(
-                                                      //       'Inverter, SCADA',
-                                                      //       style: TextStyle(
-                                                      //           color: Color
-                                                      //               .fromARGB(
-                                                      //                   255,
-                                                      //                   5,
-                                                      //                   92,
-                                                      //                   163)),
-                                                      //     ),
-                                                      //   ),
-
-                                                      controller.permitId !=
-                                                              null
-                                                          ? SizedBox(
-                                                              width: 100,
-                                                              child: Wrap(
-                                                                alignment:
-                                                                    WrapAlignment
-                                                                        .start,
-                                                                spacing: 100,
-                                                                children: []
-                                                                  ..addAll(controller
-                                                                      .listCategory!
-                                                                      .map((element) =>
-                                                                          Row(
-                                                                            mainAxisSize:
-                                                                                MainAxisSize.min,
-                                                                            mainAxisAlignment:
-                                                                                MainAxisAlignment.start,
-                                                                            crossAxisAlignment:
-                                                                                CrossAxisAlignment.start,
-                                                                            children: [
-                                                                              SizedBox(
-                                                                                height: 20,
-                                                                                child: Text(
-                                                                                  "${element?.equipmentCat}",
-                                                                                  style: TextStyle(color: Color.fromARGB(255, 5, 92, 163)),
-                                                                                ),
-                                                                              )
-                                                                            ],
-                                                                          ))),
-                                                              ),
-                                                            )
-                                                          : Container(),
-                                                    ],
-                                                  ),
-                                                  Dimens.boxWidth50,
-                                                  Column(
-                                                    crossAxisAlignment:
-                                                        CrossAxisAlignment.end,
-                                                    children: [
-                                                      Text('Valid Till: '),
-                                                      Text('Site Permit No.: '),
-                                                      Text('Permit Type: '),
-                                                    ],
-                                                  ),
-                                                  Column(
-                                                    crossAxisAlignment:
-                                                        CrossAxisAlignment
-                                                            .start,
-                                                    children: [
-                                                      Text(
-                                                        '${controller.validTillTimeCtrlr.text}',
-                                                        style: TextStyle(
-                                                            color:
-                                                                Color.fromARGB(
-                                                                    255,
-                                                                    5,
-                                                                    92,
-                                                                    163)),
-                                                      ),
-
-                                                      Text(
-                                                        '${controller.viewPermitDetailsModel.value?.sitePermitNo}',
-                                                        style: TextStyle(
-                                                            color:
-                                                                Color.fromARGB(
-                                                                    255,
-                                                                    5,
-                                                                    92,
-                                                                    163)),
-                                                      ),
-                                                      // SizedBox(
-                                                      //   height: 5,
-                                                      // ),
-                                                      Text(
-                                                        '${controller.viewPermitDetailsModel.value?.permitTypeName}',
-                                                        style: TextStyle(
-                                                            color:
-                                                                Color.fromARGB(
-                                                                    255,
-                                                                    5,
-                                                                    92,
-                                                                    163)),
-                                                      ),
-                                                    ],
-                                                  ),
-                                                  Dimens.boxWidth50,
-                                                  Column(
-                                                    crossAxisAlignment:
-                                                        CrossAxisAlignment.end,
-                                                    children: [
-                                                      Text('Plant: '),
-                                                      Text('Block: '),
-                                                    ],
-                                                  ),
-                                                  Column(
-                                                    crossAxisAlignment:
-                                                        CrossAxisAlignment
-                                                            .start,
-                                                    children: [
-                                                      Text(
-                                                        '${controller.viewPermitDetailsModel.value?.siteName}',
-                                                        overflow:
-                                                            TextOverflow.clip,
-                                                        style: TextStyle(
-                                                            color:
-                                                                Color.fromARGB(
-                                                                    255,
-                                                                    5,
-                                                                    92,
-                                                                    163)),
-                                                      ),
-                                                      // SizedBox(
-                                                      //   height: 5,
-                                                      // ),
-                                                      Text(
-                                                        '${controller.viewPermitDetailsModel.value?.blockName}',
-                                                        style: TextStyle(
-                                                            color:
-                                                                Color.fromARGB(
-                                                                    255,
-                                                                    5,
-                                                                    92,
-                                                                    163)),
-                                                      ),
-                                                    ],
-                                                  ),
-                                                ],
+                                              SizedBox(
+                                                child: Text(
+                                                    '${controller.startDateTimeCtrlr.text}',
+                                                    style: Styles.blue17),
                                               ),
-                                              Padding(
-                                                padding: const EdgeInsets.only(
-                                                    left: 30),
-                                                child: Row(
-                                                  mainAxisAlignment:
-                                                      MainAxisAlignment.start,
-                                                  crossAxisAlignment:
-                                                      CrossAxisAlignment.start,
-                                                  children: [
-                                                    Text(
-                                                        'Permit Description: '),
-                                                    Container(
-                                                      child: Text(
-                                                        '${controller.viewPermitDetailsModel.value?.description}',
-                                                        style: TextStyle(
-                                                            color:
-                                                                Color.fromARGB(
-                                                                    255,
-                                                                    5,
-                                                                    92,
-                                                                    163)),
+                                              Dimens.boxHeight5,
+
+                                              // Dimens.boxHeight5,
+                                              SizedBox(
+                                                child: Text(
+                                                    '${controller.viewPermitDetailsModel.value?.permitNo}',
+                                                    style: Styles.blue17),
+                                              ),
+                                              Dimens.boxHeight5,
+
+                                              //  SizedBox(
+                                              //     width: 150,
+                                              //     child: Text(
+                                              //       'Inverter, SCADA',
+                                              //       style: TextStyle(
+                                              //           color: Color
+                                              //               .fromARGB(
+                                              //                   255,
+                                              //                   5,
+                                              //                   92,
+                                              //                   163)),
+                                              //     ),
+                                              //   ),
+
+                                              controller.permitId != null
+                                                  ? SizedBox(
+                                                      width: 100,
+                                                      child: Wrap(
+                                                        alignment:
+                                                            WrapAlignment.start,
+                                                        spacing: 100,
+                                                        children: []
+                                                          ..addAll(controller
+                                                              .listCategory!
+                                                              .map(
+                                                                  (element) =>
+                                                                      Row(
+                                                                        mainAxisSize:
+                                                                            MainAxisSize.min,
+                                                                        mainAxisAlignment:
+                                                                            MainAxisAlignment.start,
+                                                                        crossAxisAlignment:
+                                                                            CrossAxisAlignment.start,
+                                                                        children: [
+                                                                          SizedBox(
+                                                                            height:
+                                                                                20,
+                                                                            child:
+                                                                                Text(
+                                                                              "${element?.equipmentCat}",
+                                                                              style: TextStyle(color: Color.fromARGB(255, 5, 92, 163)),
+                                                                            ),
+                                                                          )
+                                                                        ],
+                                                                      ))),
                                                       ),
-                                                    ),
-                                                  ],
-                                                ),
+                                                    )
+                                                  : Container(),
+                                            ],
+                                          ),
+                                          Spacer(),
+                                          Column(
+                                            crossAxisAlignment:
+                                                CrossAxisAlignment.end,
+                                            children: [
+                                              Text(
+                                                'Valid Till: ',
+                                                style: Styles.black17,
+                                              ),
+                                              Dimens.boxHeight5,
+                                              Text(
+                                                'Site Permit No.: ',
+                                                style: Styles.black17,
+                                              ),
+                                              Dimens.boxHeight5,
+                                              Text(
+                                                'Permit Type: ',
+                                                style: Styles.black17,
                                               ),
                                             ],
                                           ),
+                                          Column(
+                                            crossAxisAlignment:
+                                                CrossAxisAlignment.start,
+                                            children: [
+                                              Text(
+                                                  '${controller.validTillTimeCtrlr.text}',
+                                                  style: Styles.blue17),
 
-                                          // _buildStartValidTillDateField_web(
-                                          //     context, 0,),
+                                              Dimens.boxHeight5,
+                                              Text(
+                                                  '${controller.viewPermitDetailsModel.value?.sitePermitNo}',
+                                                  style: Styles.blue17),
+                                              Dimens.boxHeight5,
+                                              // SizedBox(
+                                              //   height: 5,
+                                              // ),
+                                              Text(
+                                                  '${controller.viewPermitDetailsModel.value?.permitTypeName}',
+                                                  style: Styles.blue17),
+                                            ],
+                                          ),
+                                          Spacer(),
+                                          Column(
+                                            crossAxisAlignment:
+                                                CrossAxisAlignment.end,
+                                            children: [
+                                              Text(
+                                                'Plant: ',
+                                                style: Styles.black17,
+                                              ),
+                                              Dimens.boxHeight5,
+                                              Text(
+                                                'Block: ',
+                                                style: Styles.black17,
+                                              ),
+                                            ],
+                                          ),
+                                          Column(
+                                            crossAxisAlignment:
+                                                CrossAxisAlignment.start,
+                                            children: [
+                                              Text(
+                                                  '${controller.viewPermitDetailsModel.value?.siteName}',
+                                                  overflow: TextOverflow.clip,
+                                                  style: Styles.blue17),
+                                              Dimens.boxHeight5,
+                                              // SizedBox(
+                                              //   height: 5,
+                                              // ),
+                                              Text(
+                                                  '${controller.viewPermitDetailsModel.value?.blockName}',
+                                                  style: Styles.blue17),
+                                            ],
+                                          ),
+                                        ],
+                                      ),
+                                    ),
+                                    Dimens.boxHeight5,
+
+                                    Padding(
+                                      padding: const EdgeInsets.only(left: 30),
+                                      child: Row(
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.start,
+                                        crossAxisAlignment:
+                                            CrossAxisAlignment.start,
+                                        children: [
+                                          Text(
+                                            'Permit Description: ',
+                                            style: Styles.black17,
+                                          ),
+                                          Dimens.boxHeight5,
+                                          Container(
+                                            child: Text(
+                                                '${controller.viewPermitDetailsModel.value?.description}',
+                                                style: Styles.blue17),
+                                          ),
                                         ],
                                       ),
                                     ),
@@ -2073,91 +2019,324 @@ class ViewPermitWebScreen extends GetView<ViewPermitController> {
                                           ),
 
                                     ///Loto Applied List
-                                    SizedBox(
+                                    Container(
+                                      margin: EdgeInsets.all(20),
+                                      child: Row(
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.center,
+                                        crossAxisAlignment:
+                                            CrossAxisAlignment.center,
+                                        children: [
+                                          Text(
+                                            'Isolation Required ',
+                                            style: Styles.blue700,
+                                          ),
+                                          Checkbox(
+                                            value:
+                                                controller.isCheckedLoto.value,
+                                            onChanged: (value) {},
+                                          ),
+                                          Spacer(),
+                                          Text(
+                                            'Loto Applied ',
+                                            style: Styles.blue700,
+                                          ),
+                                          Checkbox(
+                                            value:
+                                                controller.isCheckedLoto.value,
+                                            onChanged: (value) {},
+                                          ),
+                                          Spacer(),
+                                          Text(
+                                            'Isolated Equipments: ',
+                                            style: Styles.blue700,
+                                          ),
+                                          Row(
+                                            children: []..addAll(controller
+                                                .listIsolation!
+                                                .map((element) => Row(
+                                                      mainAxisSize:
+                                                          MainAxisSize.min,
+                                                      mainAxisAlignment:
+                                                          MainAxisAlignment
+                                                              .start,
+                                                      crossAxisAlignment:
+                                                          CrossAxisAlignment
+                                                              .start,
+                                                      children: [
+                                                        Text(
+                                                            "${element?.isolationAssetsCatName}",
+                                                            style:
+                                                                Styles.blue17)
+                                                      ],
+                                                    ))),
+                                          ),
+                                        ],
+                                      ),
+                                    ),
+                                    Container(
+                                      margin: Dimens.edgeInsets20,
                                       height:
                                           ((controller.listLoto?.length ?? 0) *
-                                                  30) +
-                                              270,
-                                      width: MediaQuery.of(context).size.width /
-                                          1.2,
-                                      child: Center(
-                                        child: Container(
-                                          margin: Dimens.edgeInsets16,
-                                          height: Get.height,
-                                          decoration: BoxDecoration(
-                                            border: Border.all(
-                                                color: Colors.grey
-                                                    .withOpacity(.3)),
+                                                  40) +
+                                              130,
+                                      decoration: BoxDecoration(
+                                        border: Border.all(
+                                          color: ColorValues
+                                              .lightGreyColorWithOpacity35,
+                                          width: 1,
+                                        ),
+                                        boxShadow: [
+                                          BoxShadow(
+                                            color: ColorValues
+                                                .appBlueBackgroundColor,
+                                            spreadRadius: 2,
+                                            blurRadius: 5,
+                                            offset: Offset(0, 2),
                                           ),
-                                          constraints: BoxConstraints(
-                                            maxWidth: 1100,
+                                        ],
+                                      ),
+                                      child: Column(
+                                        children: [
+                                          Padding(
+                                            padding: const EdgeInsets.all(10.0),
+                                            child: Row(
+                                              children: [
+                                                Text(
+                                                  'Isolated Category',
+                                                  style: Styles.blue700,
+                                                ),
+                                              ],
+                                            ),
                                           ),
-                                          child: Column(
-                                            children: [
-                                              Row(
-                                                mainAxisAlignment:
-                                                    MainAxisAlignment.center,
-                                                crossAxisAlignment:
-                                                    CrossAxisAlignment.center,
-                                                children: [
-                                                  Text('Isolation Required '),
-                                                  Checkbox(
-                                                    value: controller
-                                                        .isCheckedLoto.value,
-                                                    onChanged: (value) {},
-                                                  ),
-                                                  Dimens.boxWidth80,
-                                                  Text('Loto Applied '),
-                                                  Checkbox(
-                                                    value: controller
-                                                        .isCheckedLoto.value,
-                                                    onChanged: (value) {},
-                                                  ),
-                                                  Dimens.boxWidth80,
-                                                  Text('Isolated Equipments: '),
-                                                  Row(
-                                                    children: []
-                                                      ..addAll(
-                                                          controller
-                                                              .listIsolation!
-                                                              .map(
-                                                                  (element) =>
-                                                                      Row(
-                                                                        mainAxisSize:
-                                                                            MainAxisSize.min,
-                                                                        mainAxisAlignment:
-                                                                            MainAxisAlignment.start,
-                                                                        crossAxisAlignment:
-                                                                            CrossAxisAlignment.start,
-                                                                        children: [
-                                                                          SizedBox(
-                                                                            height:
-                                                                                20,
-                                                                            child:
-                                                                                Text(
-                                                                              "${element?.isolationAssetsCatName}",
-                                                                              style: TextStyle(color: Color.fromARGB(255, 5, 92, 163)),
-                                                                            ),
-                                                                          )
-                                                                        ],
-                                                                      ))),
-                                                  ),
-                                                ],
+                                          Expanded(
+                                            child: DataTable2(
+                                              border: TableBorder.all(
+                                                  color: Color.fromARGB(
+                                                      255, 206, 229, 234)),
+                                              columns: [
+                                                DataColumn(
+                                                    label: Text(
+                                                  "Loto Applied On",
+                                                  style: TextStyle(
+                                                      fontSize: 15,
+                                                      fontWeight:
+                                                          FontWeight.bold),
+                                                )),
+                                                DataColumn(
+                                                    label: Text(
+                                                  "Loto Lock Sr. No.",
+                                                  style: TextStyle(
+                                                      fontSize: 15,
+                                                      fontWeight:
+                                                          FontWeight.bold),
+                                                )),
+                                              ],
+                                              rows: List<DataRow>.generate(
+                                                controller.listLoto?.length ??
+                                                    0,
+                                                (index) => DataRow(cells: [
+                                                  DataCell(Text(controller
+                                                          .listLoto?[index]
+                                                          ?.asset_name
+                                                          .toString() ??
+                                                      '')),
+                                                  DataCell(Text(controller
+                                                          .listLoto?[index]
+                                                          ?.locksrno
+                                                          .toString() ??
+                                                      '')),
+                                                ]),
                                               ),
-                                              Divider(
-                                                color:
-                                                    ColorValues.greyLightColour,
+                                            ),
+                                          ),
+                                        ],
+                                      ),
+                                    ),
+                                    Container(
+                                      margin: Dimens.edgeInsets20,
+                                      height:
+                                          ((controller.listEmployee?.length ??
+                                                      0) *
+                                                  40) +
+                                              130,
+                                      decoration: BoxDecoration(
+                                        border: Border.all(
+                                          color: ColorValues
+                                              .lightGreyColorWithOpacity35,
+                                          width: 1,
+                                        ),
+                                        boxShadow: [
+                                          BoxShadow(
+                                            color: ColorValues
+                                                .appBlueBackgroundColor,
+                                            spreadRadius: 2,
+                                            blurRadius: 5,
+                                            offset: Offset(0, 2),
+                                          ),
+                                        ],
+                                      ),
+                                      child: Column(
+                                        children: [
+                                          Padding(
+                                            padding: const EdgeInsets.all(10.0),
+                                            child: Row(
+                                              children: [
+                                                Text(
+                                                  'Team deploying to carry out the Job',
+                                                  style: Styles.blue700,
+                                                ),
+                                              ],
+                                            ),
+                                          ),
+                                          Expanded(
+                                            child: DataTable2(
+                                              border: TableBorder.all(
+                                                  color: Color.fromARGB(
+                                                      255, 206, 229, 234)),
+                                              columns: [
+                                                DataColumn(
+                                                    label: Text(
+                                                  "Employee Name",
+                                                  style: TextStyle(
+                                                      fontSize: 15,
+                                                      fontWeight:
+                                                          FontWeight.bold),
+                                                )),
+                                                DataColumn(
+                                                    label: Text(
+                                                  "Responsibility",
+                                                  style: TextStyle(
+                                                      fontSize: 15,
+                                                      fontWeight:
+                                                          FontWeight.bold),
+                                                )),
+                                              ],
+                                              rows: List<DataRow>.generate(
+                                                controller
+                                                        .listEmployee?.length ??
+                                                    0,
+                                                (index) => DataRow(cells: [
+                                                  DataCell(Text(controller
+                                                          .listEmployee?[index]
+                                                          ?.empName
+                                                          .toString() ??
+                                                      '')),
+                                                  DataCell(Text(controller
+                                                          .listEmployee?[index]
+                                                          ?.resp
+                                                          .toString() ??
+                                                      '')),
+                                                ]),
                                               ),
-                                              Dimens.boxHeight10,
-                                              Wrap(
-                                                children: [
-                                                  Column(
-                                                    children: [
-                                                      Align(
-                                                          alignment: Alignment
-                                                              .centerLeft,
+                                            ),
+                                          ),
+                                        ],
+                                      ),
+                                    ),
+
+                                    ///Safety measures
+                                    controller.safetyMeasureList.isEmpty
+                                        ? Dimens.box0
+                                        : Container(
+                                            margin: EdgeInsets.all(20),
+                                            child: Column(
+                                              children: [
+                                                CustomAppBar(
+                                                  title:
+                                                      'Following safety Measures taken to carry out the work'
+                                                          .tr,
+                                                ),
+                                                Dimens.boxHeight10,
+                                                Wrap(
+                                                  children: [
+                                                    Column(
+                                                      children: [
+                                                        controller.permitId !=
+                                                                null
+                                                            ? Wrap(
+                                                                alignment:
+                                                                    WrapAlignment
+                                                                        .start,
+                                                                spacing: 100,
+                                                                children: []
+                                                                  ..addAll(controller
+                                                                      .safetyMeasureList
+                                                                      .map((element) =>
+                                                                          Row(
+                                                                            mainAxisSize:
+                                                                                MainAxisSize.min,
+                                                                            mainAxisAlignment:
+                                                                                MainAxisAlignment.start,
+                                                                            crossAxisAlignment:
+                                                                                CrossAxisAlignment.start,
+                                                                            children: [
+                                                                              SizedBox(
+                                                                                width: 200,
+                                                                                child: Row(
+                                                                                  children: [
+                                                                                    checkBoxMethod(1),
+                                                                                    // Text("${l = l! + 1}. "),
+                                                                                    Text("${element.name}")
+                                                                                  ],
+                                                                                ),
+                                                                              )
+                                                                            ],
+                                                                          ))),
+                                                              )
+                                                            : Container(),
+                                                        SizedBox(
+                                                          height: 20,
+                                                        ),
+                                                      ],
+                                                    )
+                                                  ],
+                                                ),
+                                              ],
+                                            ),
+                                          ),
+
+                                    //Tool box talk
+                                    Container(
+                                      margin: EdgeInsets.all(20),
+                                      decoration: BoxDecoration(
+                                        border: Border.all(
+                                            color: Colors.grey.withOpacity(.3)),
+                                      ),
+                                      child: Container(
+                                        color:
+                                            ColorValues.appBlueBackgroundColor,
+                                        padding: const EdgeInsets.all(8.0),
+                                        child: Column(
+                                          crossAxisAlignment:
+                                              CrossAxisAlignment.start,
+                                          children: [
+                                            Text(
+                                              "Tool Box Talk",
+                                              style: Styles.blue700,
+                                            ),
+                                            Dimens.boxHeight10,
+                                            Wrap(
+                                              children: [
+                                                Column(
+                                                  children: [
+                                                    Row(
+                                                      // mainAxisAlignment:
+                                                      //     MainAxisAlignment
+                                                      //         .spaceEvenly,
+                                                      children: [
+                                                        SizedBox(
+                                                          width: 15,
+                                                        ),
+                                                        Text('Job Type: '),
+                                                        SizedBox(
+                                                          width: 5,
+                                                        ),
+
+                                                        SizedBox(
+                                                          width: 150,
                                                           child: Text(
-                                                            'Isolated Category',
+                                                            '${controller.viewPermitDetailsModel.value?.job_type_name ?? 'No Data Found'}',
                                                             style: TextStyle(
                                                                 color: Color
                                                                     .fromARGB(
@@ -2165,594 +2344,121 @@ class ViewPermitWebScreen extends GetView<ViewPermitController> {
                                                                         5,
                                                                         92,
                                                                         163)),
-                                                          )),
-                                                      Divider(
-                                                        thickness: 2,
-                                                      ),
-                                                      SizedBox(
-                                                        width: MediaQuery.of(
-                                                                    context)
-                                                                .size
-                                                                .width *
-                                                            2,
-                                                        child: Container(
-                                                          height: 140,
-                                                          child: Column(
-                                                              //
-                                                              children: [
-                                                                Expanded(
-                                                                  child: //
-                                                                      Theme(
-                                                                    data: ThemeData(
-                                                                        scrollbarTheme: ScrollbarThemeData(
-                                                                            isAlwaysShown:
-                                                                                false,
-                                                                            thumbColor:
-                                                                                MaterialStateProperty.all<Color>(Colors.transparent))),
-                                                                    child:
-                                                                        ScrollableTableView(
-                                                                      // paginationController: controller.equipmentNamepaginationController,
-                                                                      columns: [
-                                                                        'asset_name',
-                                                                        'locksrno',
-                                                                      ].map(
-                                                                          (column) {
-                                                                        return TableViewColumn(
-                                                                          minWidth:
-                                                                              Get.width * 0.4,
-                                                                          label: column == "asset_name"
-                                                                              ? "Loto Applied On"
-                                                                              : column == "locksrno"
-                                                                                  ? "Serial Number"
-                                                                                  //     : column == "approved_datetime"
-                                                                                  //         ? "Approved Time"
-                                                                                  //         : column == "equipment"
-                                                                                  //             ? "Equipment" //
-                                                                                  //             : column == "workingAreaId"
-                                                                                  //                 ? "Working Area Id"
-                                                                                  //                 : column == "description"
-                                                                                  //                     ? "Description"
-                                                                                  //                     : column == "permitTypeName"
-                                                                                  //                         ? "Work Type"
-
-                                                                                  : "",
-                                                                          // : ""
-                                                                        );
-                                                                      }).toList(),
-                                                                      rows: //
-                                                                          [
-                                                                        ...List
-                                                                            .generate(
-                                                                          ///controller.selectedEquipmentNameIdList
-                                                                          controller
-                                                                              .listLoto!
-                                                                              .length,
-
-                                                                          (index) {
-                                                                            var viewLotoListName =
-                                                                                controller.listLoto![index];
-
-                                                                            //_jobId = jobDetails?.id;
-
-                                                                            // controller.id.value = viewLotoListName?.id ?? 0;
-                                                                            print('Equipment Isss5:${controller.id.value}');
-                                                                            return [
-                                                                              '${viewLotoListName?.asset_name}',
-                                                                              '${viewLotoListName?.locksrno}',
-                                                                              // '${newPermitDetails?.workingAreaId}',
-                                                                              // '${newPermitDetails?.description}',
-                                                                              // '${newPermitDetails?.permitTypeName}',
-                                                                              // '${jobDetails?.workType}',
-                                                                              // '${jobDetails?.raisedByName}',
-                                                                              // '${jobDetails?.breakdownTime ?? ''}',
-                                                                              // '${jobDetails?.breakdownType}',
-                                                                              // '${jobDetails?.permitId}',
-                                                                              // '${jobDetails?.assignedToName}',
-                                                                              // '${jobDetails?.status}',
-                                                                            ];
-                                                                          },
-                                                                        ),
-                                                                      ].map((_inventoryDetailList) {
-                                                                        return TableViewRow(
-                                                                            onTap: () =>
-                                                                                {
-                                                                                  print('ZERO = ${_inventoryDetailList[0]}')
-                                                                                },
-                                                                            height:
-                                                                                25,
-                                                                            cells:
-                                                                                _inventoryDetailList.map((value) {
-                                                                              return TableViewCell(
-                                                                                //key: ,
-                                                                                child: (value == 'Actions')
-                                                                                    ? Wrap(
-                                                                                        children: [
-                                                                                          // TableActionButton(
-                                                                                          //   color: Colors.red,
-                                                                                          //   icon: Icons.delete_outline,
-                                                                                          //   message: 'Remove',
-                                                                                          //   onPress: () {
-                                                                                          //     // controller.showNewPermitListDetails(
-                                                                                          //     //     controller.permitId.value);
-                                                                                          //   },
-                                                                                          // ),
-                                                                                        ],
-                                                                                      )
-                                                                                    : Text(value.toString()),
-                                                                              );
-                                                                            }).toList());
-                                                                      }).toList(),
-                                                                    ),
-                                                                  ),
-                                                                ),
-                                                              ]),
-                                                        ),
-                                                      ),
-                                                    ],
-                                                  )
-                                                ],
-                                              ),
-                                            ],
-                                          ),
-                                        ),
-                                      ),
-                                    ),
-
-                                    SizedBox(
-                                      height: 10,
-                                    ),
-
-                                    ///Team Deployed
-                                    SizedBox(
-                                      height:
-                                          ((controller.listEmployee?.length ??
-                                                      0) *
-                                                  30) +
-                                              280,
-                                      width: MediaQuery.of(context).size.width /
-                                          1.2,
-                                      child: Center(
-                                        child: Container(
-                                          margin: Dimens.edgeInsets16,
-                                          height: Get.height,
-                                          decoration: BoxDecoration(
-                                            border: Border.all(
-                                                color: Colors.grey
-                                                    .withOpacity(.3)),
-                                          ),
-                                          constraints: BoxConstraints(
-                                            maxWidth: 1100,
-                                          ),
-                                          child: Column(
-                                            children: [
-                                              CustomAppBar(
-                                                title:
-                                                    'Team Deployed to carry out the job'
-                                                        .tr,
-                                              ),
-                                              Dimens.boxHeight10,
-                                              Wrap(
-                                                children: [
-                                                  Column(
-                                                    children: [
-                                                      Row(
-                                                        children: [
-                                                          SizedBox(
-                                                            width: 20,
                                                           ),
-                                                        ],
-                                                      ),
-                                                      SizedBox(
-                                                        width: MediaQuery.of(
-                                                                    context)
-                                                                .size
-                                                                .width *
-                                                            1.5,
-                                                        child: Container(
-                                                          height: 180,
-                                                          child: Column(
-                                                              //
-                                                              children: [
-                                                                Expanded(
-                                                                  child: //
-                                                                      Theme(
-                                                                    data: ThemeData(
-                                                                        scrollbarTheme: ScrollbarThemeData(
-                                                                            isAlwaysShown:
-                                                                                false,
-                                                                            thumbColor:
-                                                                                MaterialStateProperty.all<Color>(Colors.transparent))),
-                                                                    child:
-                                                                        ScrollableTableView(
-                                                                      // paginationController: controller.equipmentNamepaginationController,
-                                                                      columns: [
-                                                                        'empName',
-                                                                        'resp',
-                                                                        // 'Competeness'.tr,
-                                                                      ].map(
-                                                                          (column) {
-                                                                        return TableViewColumn(
-                                                                          minWidth:
-                                                                              Get.width * 0.4,
-                                                                          label: column == "empName"
-                                                                              ? "Employee Name"
-                                                                              : column == "resp"
-                                                                                  ? "Responsibility"
-                                                                                  : "",
-                                                                        );
-                                                                      }).toList(),
-                                                                      rows: //
-                                                                          [
-                                                                        ...List
-                                                                            .generate(
-                                                                          ///controller.selectedEquipmentNameIdList
-                                                                          controller.listEmployee?.length ??
-                                                                              0,
-
-                                                                          (index) {
-                                                                            var employeeNameDetails =
-                                                                                controller.listEmployee![index];
-
-                                                                            //_jobId = jobDetails?.id;
-
-                                                                            // controller.id.value = employeeNameDetails?.id ?? 0;
-                                                                            print('Employee Idss5:${controller.id.value}');
-                                                                            return [
-                                                                              '${employeeNameDetails?.empName ?? ''}',
-                                                                              '${employeeNameDetails?.resp ?? ''}',
-                                                                              // 'Competeness'
-                                                                            ];
-                                                                          },
-                                                                        ),
-                                                                      ].map((_inventoryDetailList) {
-                                                                        return TableViewRow(
-                                                                            onTap: () =>
-                                                                                {
-                                                                                  print('ZERO = ${_inventoryDetailList[0]}')
-                                                                                },
-                                                                            height:
-                                                                                25,
-                                                                            cells:
-                                                                                _inventoryDetailList.map((value) {
-                                                                              return TableViewCell(
-                                                                                //key: ,
-                                                                                child: (value == 'Competeness')
-                                                                                    ? Wrap(
-                                                                                        children: [
-                                                                                          // TableActionButton(
-                                                                                          //   color: Colors.blue,
-                                                                                          //   icon: Icons.delete_outline,
-                                                                                          //   message: 'Competency',
-                                                                                          //   onPress: () {
-                                                                                          //     // controller.showNewPermitListDetails(
-                                                                                          //     //     controller.permitId.value);
-                                                                                          //   },
-                                                                                          // ),
-                                                                                          // TableActionButton(
-                                                                                          //   color: ColorValues.purpleColor,
-                                                                                          //   icon: Icons.add,
-                                                                                          //   label: 'Job Card',
-                                                                                          //   onPress: () {
-                                                                                          //     // controller.goToJobCardScreen(
-                                                                                          //     //   int.tryParse(_newPermitList[0]),
-                                                                                          //     // );
-                                                                                          //   },
-                                                                                          // ),
-                                                                                          // TableActionButton(
-                                                                                          //   color: Colors.blue,
-                                                                                          //   icon: Icons.edit,
-                                                                                          //   label: 'Edit PTW',
-                                                                                          //   onPress: () {},
-                                                                                          // ),
-                                                                                          // TableActionButton(
-                                                                                          //   color: Colors.green,
-                                                                                          //   icon: Icons.visibility,
-                                                                                          //   label: 'Approve Request',
-                                                                                          //   onPress: () {},
-                                                                                          // ),
-                                                                                          // TableActionButton(
-                                                                                          //   color: Colors.red,
-                                                                                          //   icon: Icons.visibility,
-                                                                                          //   label: 'Reject Request',
-                                                                                          //   onPress: () {},
-                                                                                          // ),
-                                                                                        ],
-                                                                                      )
-                                                                                    : Text(value.toString()),
-                                                                              );
-                                                                            }).toList());
-                                                                      }).toList(),
-                                                                    ),
-                                                                  ),
-                                                                ),
-                                                              ]),
                                                         ),
-                                                      ),
-                                                    ],
-                                                  )
-                                                ],
-                                              ),
-                                            ],
-                                          ),
-                                        ),
-                                      ),
-                                    ),
-                                    SizedBox(
-                                      height: 10,
-                                    ),
 
-                                    ///Safety measures
+                                                        SizedBox(
+                                                          width: 120,
+                                                        ),
+                                                        Text('SOP: '),
+                                                        SizedBox(
+                                                          width: 5,
+                                                        ),
 
-                                    SizedBox(
-                                      height:
-                                          ((controller.listEmployee?.length ??
-                                                      0) *
-                                                  30) +
-                                              250,
-                                      width: MediaQuery.of(context).size.width /
-                                          1.2,
-                                      child: Center(
-                                        child: Container(
-                                          margin: Dimens.edgeInsets16,
-                                          height: Get.height,
-                                          decoration: BoxDecoration(
-                                            border: Border.all(
-                                                color: Colors.grey
-                                                    .withOpacity(.3)),
-                                          ),
-                                          constraints: BoxConstraints(
-                                            maxWidth: 1100,
-                                          ),
-                                          child: Theme(
-                                            data: ThemeData(
-                                                scrollbarTheme: ScrollbarThemeData(
-                                                    isAlwaysShown: false,
-                                                    thumbColor:
-                                                        MaterialStateProperty
-                                                            .all<Color>(Colors
-                                                                .transparent))),
-                                            child: SingleChildScrollView(
-                                              child: Column(
-                                                children: [
-                                                  CustomAppBar(
-                                                    title:
-                                                        'Following safety Measures taken to carry out the work'
-                                                            .tr,
-                                                  ),
-                                                  Dimens.boxHeight10,
-                                                  Wrap(
-                                                    children: [
-                                                      Column(
-                                                        children: [
-                                                          controller.permitId !=
-                                                                  null
-                                                              ? Wrap(
-                                                                  alignment:
-                                                                      WrapAlignment
-                                                                          .start,
-                                                                  spacing: 100,
-                                                                  children: []
-                                                                    ..addAll(controller
-                                                                        .safetyMeasureList
-                                                                        .map((element) =>
-                                                                            Row(
-                                                                              mainAxisSize: MainAxisSize.min,
-                                                                              mainAxisAlignment: MainAxisAlignment.start,
-                                                                              crossAxisAlignment: CrossAxisAlignment.start,
-                                                                              children: [
-                                                                                SizedBox(
-                                                                                  width: 200,
-                                                                                  child: Row(
-                                                                                    children: [
-                                                                                      checkBoxMethod(1),
-                                                                                      // Text("${l = l! + 1}. "),
-                                                                                      Text("${element.name}")
-                                                                                    ],
-                                                                                  ),
-                                                                                )
-                                                                              ],
-                                                                            ))),
-                                                                )
-                                                              : Container(),
-                                                          SizedBox(
-                                                            height: 20,
+                                                        SizedBox(
+                                                          width: 200,
+                                                          child: Text(
+                                                            '${controller.viewPermitDetailsModel.value?.sop_type_name ?? 'No Data Found'}',
+                                                            style: TextStyle(
+                                                                color: Color
+                                                                    .fromARGB(
+                                                                        255,
+                                                                        5,
+                                                                        92,
+                                                                        163)),
                                                           ),
-                                                        ],
-                                                      )
-                                                    ],
-                                                  ),
-                                                ],
-                                              ),
+                                                        ),
+                                                        // Checkbox(
+                                                        //   value: controller
+                                                        //       .isCheckedLoto
+                                                        //       .value,
+                                                        //   onChanged:
+                                                        //       (value) {},
+                                                        // ),
+                                                        SizedBox(
+                                                          width: 90,
+                                                        ),
+                                                        Text('JSA: '),
+                                                        // Text(
+                                                        //   'Breakdown Maintenance - Demo Plant',
+                                                        //   style: TextStyle(
+                                                        //       color: Color.fromARGB(
+                                                        //           255,
+                                                        //           5,
+                                                        //           92,
+                                                        //           163)),
+                                                        // ),
+                                                        // Checkbox(
+                                                        //   value: controller
+                                                        //       .isCheckedLoto
+                                                        //       .value,
+                                                        //   onChanged:
+                                                        //       (value) {},
+                                                        // )
+                                                      ],
+                                                    ),
+                                                    SizedBox(
+                                                      height: 30,
+                                                    ),
+                                                    Row(
+                                                      mainAxisAlignment:
+                                                          MainAxisAlignment
+                                                              .center,
+                                                      children: [
+                                                        SizedBox(
+                                                          width: 30,
+                                                        ),
+                                                        Container(
+                                                            height: 30,
+                                                            child:
+                                                                CustomElevatedButton(
+                                                              backgroundColor:
+                                                                  ColorValues
+                                                                      .navyBlueColor,
+                                                              text: "View SOP",
+                                                              onPressed: () {
+                                                                // controller.createNewPermit();
+                                                                // Get.dialog<void>(ViewJSADialog());
+                                                              },
+                                                            )),
+                                                        SizedBox(
+                                                          width: 230,
+                                                        ),
+                                                        Container(
+                                                            height: 30,
+                                                            child:
+                                                                CustomElevatedButton(
+                                                              backgroundColor:
+                                                                  ColorValues
+                                                                      .navyBlueColor,
+                                                              text: "View JSA",
+                                                              onPressed: () {
+                                                                // Get.dialog<void>(SafetyMeasureDialog());
+                                                                // controller.createNewPermit();
+                                                              },
+                                                            )),
+                                                      ],
+                                                    ),
+                                                  ],
+                                                ),
+                                              ],
                                             ),
-                                          ),
+                                          ],
                                         ),
                                       ),
                                     ),
-
-                                    SizedBox(
-                                      height: 10,
-                                    ),
-                                    //Tool box talk
-                                    SizedBox(
-                                      height: 250,
-                                      width: MediaQuery.of(context).size.width /
-                                          1.2,
-                                      child: Center(
-                                        child: Container(
-                                          margin: Dimens.edgeInsets16,
-                                          height: Get.height,
-                                          decoration: BoxDecoration(
-                                            border: Border.all(
-                                                color: Colors.grey
-                                                    .withOpacity(.3)),
-                                          ),
-                                          constraints: BoxConstraints(
-                                            maxWidth: 1100,
-                                          ),
-                                          child: Column(
-                                            children: [
-                                              CustomAppBar(
-                                                title: 'Tool Box Talk'.tr,
-                                              ),
-                                              Dimens.boxHeight10,
-                                              Wrap(
-                                                children: [
-                                                  Column(
-                                                    children: [
-                                                      Row(
-                                                        // mainAxisAlignment:
-                                                        //     MainAxisAlignment
-                                                        //         .spaceEvenly,
-                                                        children: [
-                                                          SizedBox(
-                                                            width: 15,
-                                                          ),
-                                                          Text('Job Type: '),
-                                                          SizedBox(
-                                                            width: 5,
-                                                          ),
-
-                                                          SizedBox(
-                                                            width: 150,
-                                                            child: Text(
-                                                              '${controller.viewPermitDetailsModel.value?.job_type_name ?? 'No Data Found'}',
-                                                              style: TextStyle(
-                                                                  color: Color
-                                                                      .fromARGB(
-                                                                          255,
-                                                                          5,
-                                                                          92,
-                                                                          163)),
-                                                            ),
-                                                          ),
-
-                                                          SizedBox(
-                                                            width: 120,
-                                                          ),
-                                                          Text('SOP: '),
-                                                          SizedBox(
-                                                            width: 5,
-                                                          ),
-
-                                                          SizedBox(
-                                                            width: 200,
-                                                            child: Text(
-                                                              '${controller.viewPermitDetailsModel.value?.sop_type_name ?? 'No Data Found'}',
-                                                              style: TextStyle(
-                                                                  color: Color
-                                                                      .fromARGB(
-                                                                          255,
-                                                                          5,
-                                                                          92,
-                                                                          163)),
-                                                            ),
-                                                          ),
-                                                          // Checkbox(
-                                                          //   value: controller
-                                                          //       .isCheckedLoto
-                                                          //       .value,
-                                                          //   onChanged:
-                                                          //       (value) {},
-                                                          // ),
-                                                          SizedBox(
-                                                            width: 90,
-                                                          ),
-                                                          Text('JSA: '),
-                                                          // Text(
-                                                          //   'Breakdown Maintenance - Demo Plant',
-                                                          //   style: TextStyle(
-                                                          //       color: Color.fromARGB(
-                                                          //           255,
-                                                          //           5,
-                                                          //           92,
-                                                          //           163)),
-                                                          // ),
-                                                          // Checkbox(
-                                                          //   value: controller
-                                                          //       .isCheckedLoto
-                                                          //       .value,
-                                                          //   onChanged:
-                                                          //       (value) {},
-                                                          // )
-                                                        ],
-                                                      ),
-                                                      SizedBox(
-                                                        height: 30,
-                                                      ),
-                                                      Row(
-                                                        mainAxisAlignment:
-                                                            MainAxisAlignment
-                                                                .center,
-                                                        children: [
-                                                          SizedBox(
-                                                            width: 30,
-                                                          ),
-                                                          Container(
-                                                              height: 30,
-                                                              child:
-                                                                  CustomElevatedButton(
-                                                                backgroundColor:
-                                                                    ColorValues
-                                                                        .navyBlueColor,
-                                                                text:
-                                                                    "View SOP",
-                                                                onPressed: () {
-                                                                  // controller.createNewPermit();
-                                                                  // Get.dialog<void>(ViewJSADialog());
-                                                                },
-                                                              )),
-                                                          SizedBox(
-                                                            width: 230,
-                                                          ),
-                                                          Container(
-                                                              height: 30,
-                                                              child:
-                                                                  CustomElevatedButton(
-                                                                backgroundColor:
-                                                                    ColorValues
-                                                                        .navyBlueColor,
-                                                                text:
-                                                                    "View JSA",
-                                                                onPressed: () {
-                                                                  // Get.dialog<void>(SafetyMeasureDialog());
-                                                                  // controller.createNewPermit();
-                                                                },
-                                                              )),
-                                                        ],
-                                                      ),
-                                                    ],
-                                                  ),
-                                                ],
-                                              ),
-                                            ],
-                                          ),
-                                        ),
-                                      ),
-                                    ),
-                                    SizedBox(height: 10),
+                                    //   SizedBox(height: 10),
 
                                     ///File Upload
                                     Container(
-                                      height: 250,
-                                      width: MediaQuery.of(context).size.width /
-                                          1.2,
-                                      decoration: BoxDecoration(
-                                        border: Border.all(
-                                            color: Colors.grey.withOpacity(.3)),
-                                      ),
-                                      constraints: BoxConstraints(
-                                        maxWidth: 1100,
-                                      ),
+                                      margin: EdgeInsets.all(20),
                                       child: Column(
+                                        crossAxisAlignment:
+                                            CrossAxisAlignment.start,
                                         children: [
-                                          CustomAppBar(
-                                            title: 'All Files Upload'.tr,
-                                            action: Row(
-                                              mainAxisAlignment:
-                                                  MainAxisAlignment
-                                                      .spaceBetween,
-                                              children: [],
-                                            ),
+                                          Text(
+                                            "All Files Upload",
+                                            style: Styles.blue700,
                                           ),
                                           Dimens.boxHeight10,
                                           Wrap(
@@ -2799,157 +2505,147 @@ class ViewPermitWebScreen extends GetView<ViewPermitController> {
                                       height: 10,
                                     ),
 
-                                    ///Permit History
+                                    //Permit History
                                     controller.historyList!.isEmpty
                                         ? Dimens.box0
-                                        : SizedBox(
-                                            width: MediaQuery.of(context)
-                                                    .size
-                                                    .width /
-                                                1.2,
-                                            child: Container(
-                                              margin: Dimens.edgeInsets20,
-                                              height: ((controller.historyList
-                                                              ?.length ??
-                                                          0) *
-                                                      50) +
-                                                  125,
-                                              decoration: BoxDecoration(
-                                                border: Border.all(
+                                        : Container(
+                                            margin: Dimens.edgeInsets20,
+                                            height: ((controller.historyList
+                                                            ?.length ??
+                                                        0) *
+                                                    50) +
+                                                125,
+                                            decoration: BoxDecoration(
+                                              border: Border.all(
+                                                color: ColorValues
+                                                    .lightGreyColorWithOpacity35,
+                                                width: 1,
+                                              ),
+                                              boxShadow: [
+                                                BoxShadow(
                                                   color: ColorValues
-                                                      .lightGreyColorWithOpacity35,
-                                                  width: 1,
+                                                      .appBlueBackgroundColor,
+                                                  spreadRadius: 2,
+                                                  blurRadius: 5,
+                                                  offset: Offset(0, 2),
                                                 ),
-                                                boxShadow: [
-                                                  BoxShadow(
-                                                    color: ColorValues
-                                                        .appBlueBackgroundColor,
-                                                    spreadRadius: 2,
-                                                    blurRadius: 5,
-                                                    offset: Offset(0, 2),
-                                                  ),
-                                                ],
-                                              ),
-                                              child: Column(
-                                                children: [
-                                                  Padding(
-                                                    padding:
-                                                        const EdgeInsets.all(
-                                                            10.0),
-                                                    child: Row(
-                                                      children: [
-                                                        Text(
-                                                          "Permit History ",
-                                                          style: Styles.blue700,
-                                                        ),
-                                                      ],
-                                                    ),
-                                                  ),
-                                                  Divider(
-                                                    color: ColorValues
-                                                        .greyLightColour,
-                                                  ),
-                                                  // Column(
-                                                  //   children: [
-                                                  //     Row(
-                                                  //       children: [
-                                                  //         Text(
-                                                  //             "Time Stamp"),
-                                                  //         Text(
-                                                  //             "Posted By"),
-                                                  //         Text("Comment"),
-                                                  //         Text(
-                                                  //             "Location"),
-                                                  //         Text("Status"),
-                                                  //       ],
-                                                  //     )
-                                                  //   ]..addAll([
-                                                  //       ...(controller
-                                                  //               .historyList?.value ??
-                                                  //           [])
-                                                  //     ].map((e) {
-                                                  //       return Row(
-                                                  //         children: [
-                                                  //           Text(
-                                                  //               "${e?.createdAt??''}"),
-                                                  //           Text(
-                                                  //               "${e?.createdByName}"),
-                                                  //           Text(
-                                                  //               "${e?.comment}"),
-                                                  //           Text(
-                                                  //               "--"),
-                                                  //           Text(
-                                                  //               "${e?.status_name ??''}"),
-                                                  //         ],
-                                                  //       );
-                                                  //     })),
-                                                  // ),
-
-                                                  Expanded(
-                                                    child: Theme(
-                                                      data: ThemeData(
-                                                          scrollbarTheme: ScrollbarThemeData(
-                                                              isAlwaysShown:
-                                                                  false,
-                                                              thumbColor:
-                                                                  MaterialStateProperty.all<
-                                                                          Color>(
-                                                                      Colors
-                                                                          .transparent))),
-                                                      child:
-                                                          ScrollableTableView(
-                                                        columns: [
-                                                          "Time Stamp",
-                                                          "Posted By",
-                                                          "Comment",
-                                                          "Location",
-                                                          "Status",
-                                                        ].map((column) {
-                                                          return TableViewColumn(
-                                                            label: column,
-                                                            minWidth:
-                                                                Get.width *
-                                                                    0.15,
-                                                          );
-                                                        }).toList(),
-                                                        rows: [
-                                                          ...List.generate(
-                                                            controller
-                                                                    .historyList
-                                                                    ?.length ??
-                                                                0,
-                                                            (index) {
-                                                              var getHistoryListDetails =
-                                                                  controller
-                                                                          .historyList?[
-                                                                      index];
-                                                              return [
-                                                                '${getHistoryListDetails?.createdAt}',
-                                                                '${getHistoryListDetails?.createdByName ?? ''}',
-                                                                '${getHistoryListDetails?.comment ?? ''}',
-                                                                '--',
-                                                                '${getHistoryListDetails?.status_name ?? ''}',
-                                                              ];
-                                                            },
-                                                          ),
-                                                          // [
-                                                        ].map((record) {
-                                                          return TableViewRow(
-                                                            height: 45,
-                                                            cells: record
-                                                                .map((value) {
-                                                              return TableViewCell(
-                                                                child:
-                                                                    Text(value),
-                                                              );
-                                                            }).toList(),
-                                                          );
-                                                        }).toList(),
+                                              ],
+                                            ),
+                                            child: Column(
+                                              children: [
+                                                Padding(
+                                                  padding: const EdgeInsets.all(
+                                                      10.0),
+                                                  child: Row(
+                                                    children: [
+                                                      Text(
+                                                        "Permit History ",
+                                                        style: Styles.blue700,
                                                       ),
+                                                    ],
+                                                  ),
+                                                ),
+                                                Divider(
+                                                  color: ColorValues
+                                                      .greyLightColour,
+                                                ),
+                                                // Column(
+                                                //   children: [
+                                                //     Row(
+                                                //       children: [
+                                                //         Text(
+                                                //             "Time Stamp"),
+                                                //         Text(
+                                                //             "Posted By"),
+                                                //         Text("Comment"),
+                                                //         Text(
+                                                //             "Location"),
+                                                //         Text("Status"),
+                                                //       ],
+                                                //     )
+                                                //   ]..addAll([
+                                                //       ...(controller
+                                                //               .historyList?.value ??
+                                                //           [])
+                                                //     ].map((e) {
+                                                //       return Row(
+                                                //         children: [
+                                                //           Text(
+                                                //               "${e?.createdAt??''}"),
+                                                //           Text(
+                                                //               "${e?.createdByName}"),
+                                                //           Text(
+                                                //               "${e?.comment}"),
+                                                //           Text(
+                                                //               "--"),
+                                                //           Text(
+                                                //               "${e?.status_name ??''}"),
+                                                //         ],
+                                                //       );
+                                                //     })),
+                                                // ),
+
+                                                Expanded(
+                                                  child: Theme(
+                                                    data: ThemeData(
+                                                        scrollbarTheme: ScrollbarThemeData(
+                                                            isAlwaysShown:
+                                                                false,
+                                                            thumbColor:
+                                                                MaterialStateProperty
+                                                                    .all<Color>(
+                                                                        Colors
+                                                                            .transparent))),
+                                                    child: ScrollableTableView(
+                                                      columns: [
+                                                        "Time Stamp",
+                                                        "Posted By",
+                                                        "Comment",
+                                                        "Location",
+                                                        "Status",
+                                                      ].map((column) {
+                                                        return TableViewColumn(
+                                                          label: column,
+                                                          minWidth:
+                                                              Get.width * 0.15,
+                                                        );
+                                                      }).toList(),
+                                                      rows: [
+                                                        ...List.generate(
+                                                          controller.historyList
+                                                                  ?.length ??
+                                                              0,
+                                                          (index) {
+                                                            var getHistoryListDetails =
+                                                                controller
+                                                                        .historyList?[
+                                                                    index];
+                                                            return [
+                                                              '${getHistoryListDetails?.createdAt}',
+                                                              '${getHistoryListDetails?.createdByName ?? ''}',
+                                                              '${getHistoryListDetails?.comment ?? ''}',
+                                                              '--',
+                                                              '${getHistoryListDetails?.status_name ?? ''}',
+                                                            ];
+                                                          },
+                                                        ),
+                                                        // [
+                                                      ].map((record) {
+                                                        return TableViewRow(
+                                                          height: 45,
+                                                          cells: record
+                                                              .map((value) {
+                                                            return TableViewCell(
+                                                              child:
+                                                                  Text(value),
+                                                            );
+                                                          }).toList(),
+                                                        );
+                                                      }).toList(),
                                                     ),
                                                   ),
-                                                ],
-                                              ),
+                                                ),
+                                              ],
                                             ),
                                           ),
                                     // Container(
@@ -2968,15 +2664,12 @@ class ViewPermitWebScreen extends GetView<ViewPermitController> {
                                     SizedBox(
                                       height: 10,
                                     ),
-                                    Padding(
-                                      padding: const EdgeInsets.only(left: 20),
+                                    Container(
+                                      margin: EdgeInsets.all(20),
                                       child: Row(
                                         crossAxisAlignment:
                                             CrossAxisAlignment.start,
                                         children: [
-                                          SizedBox(
-                                            width: 100,
-                                          ),
                                           Column(
                                             crossAxisAlignment:
                                                 CrossAxisAlignment.end,
@@ -2988,9 +2681,7 @@ class ViewPermitWebScreen extends GetView<ViewPermitController> {
                                               Text('Cancelled By: '),
                                             ],
                                           ),
-                                          SizedBox(
-                                            width: 100,
-                                          ),
+                                          Dimens.boxWidth20,
                                           Column(
                                             crossAxisAlignment:
                                                 CrossAxisAlignment.start,
@@ -3012,9 +2703,7 @@ class ViewPermitWebScreen extends GetView<ViewPermitController> {
                                               ),
                                             ],
                                           ),
-                                          SizedBox(
-                                            width: 70,
-                                          ),
+                                          Spacer(),
                                           Column(
                                             crossAxisAlignment:
                                                 CrossAxisAlignment.end,
@@ -3026,9 +2715,7 @@ class ViewPermitWebScreen extends GetView<ViewPermitController> {
                                               Text('Date / Time: '),
                                             ],
                                           ),
-                                          SizedBox(
-                                            width: 100,
-                                          ),
+                                          Dimens.boxWidth20,
                                           Column(
                                             crossAxisAlignment:
                                                 CrossAxisAlignment.start,
@@ -3050,9 +2737,7 @@ class ViewPermitWebScreen extends GetView<ViewPermitController> {
                                               ),
                                             ],
                                           ),
-                                          SizedBox(
-                                            width: 40,
-                                          ),
+                                          Spacer(),
                                           Column(
                                             crossAxisAlignment:
                                                 CrossAxisAlignment.end,
@@ -3064,6 +2749,8 @@ class ViewPermitWebScreen extends GetView<ViewPermitController> {
                                               Text('Signature: '),
                                             ],
                                           ),
+                                          Spacer()
+                                          // Dimens.boxWidth50
                                         ],
                                       ),
                                     ),
