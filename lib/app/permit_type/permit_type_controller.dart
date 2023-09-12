@@ -44,6 +44,10 @@ class PermitTypeController extends GetxController {
   RxList<FacilityModel?> facilityList = <FacilityModel>[].obs;
   Rx<bool> isFacilitySelected = true.obs;
   Rx<String> selectedFacility = ''.obs;
+  Rx<bool> isNameInvalid = false.obs;
+  Rx<bool> isDescriptionInvalid = false.obs;
+  Rx<bool> isFormInvalid = false.obs;
+
   BehaviorSubject<int> _facilityId = BehaviorSubject.seeded(0);
   Stream<int> get facilityId$ => _facilityId.stream;
   // int get facilityId => _facilityId.value;
@@ -93,6 +97,19 @@ class PermitTypeController extends GetxController {
     });
 
     super.onInit();
+  }
+  void checkForm() {
+
+    if(selectedFacility.value == ''){
+      isFacilitySelected.value = false;
+    }
+
+    if(isNameInvalid.value == true || isDescriptionInvalid.value == true || isFacilitySelected.value == false
+    ){
+      isFormInvalid.value = true;
+    } else {
+      isFormInvalid.value = false;
+    }
   }
 
   dynamic
@@ -234,6 +251,20 @@ class PermitTypeController extends GetxController {
   }
 
   Future<bool> createPermitType() async {
+    if (titleCtrlr.text.trim() == '' ) {
+      isNameInvalid.value = true;
+      // isDescriptionInvalid.value = true;
+      isFormInvalid.value = true;
+    }
+    if (descriptionCtrlr.text.trim() == '') {
+      // isNameInvalid.value = true;
+      isDescriptionInvalid.value = true;
+      isFormInvalid.value = true;
+    }
+    checkForm();
+    if (isFormInvalid.value == true) {
+      return false;
+    }
     if (titleCtrlr.text.trim() == '' ||
         descriptionCtrlr.text.trim() == '' ||
         selectedFacilityId == 0) {

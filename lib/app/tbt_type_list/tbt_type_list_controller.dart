@@ -29,7 +29,9 @@ class TBTTypeListController extends GetxController {
   //checkbox
    RxBool isChecked = true.obs;
   JobTypeListModel? selectedItem;
-
+  Rx<bool> isTitleInvalid = false.obs;
+  Rx<bool> isDescriptionInvalid = false.obs;
+  Rx<bool> isFormInvalid = false.obs;
 
   var titleCtrlr = TextEditingController();
   var descriptionCtrlr = TextEditingController();
@@ -136,8 +138,31 @@ class TBTTypeListController extends GetxController {
   }
 
 
-
+  void checkForm() {
+    if(isTitleInvalid.value == true || isDescriptionInvalid.value == true){
+      isFormInvalid.value = true;
+    } else {
+      isFormInvalid.value = false;
+    }
+  }
   Future<bool> createJobType() async {
+    if (titleCtrlr.text.trim() == '' ) {
+      isTitleInvalid.value = true;
+      isFormInvalid.value = true;
+      // isDescriptionInvalid.value = true;
+    }
+    if (descriptionCtrlr.text.trim() == '' ) {
+      // isTitleInvalid.value = true;
+      isFormInvalid.value = true;
+      isDescriptionInvalid.value = true;
+    }
+    checkForm();
+    print("FORMVALIDITIY : $isFormInvalid.value");
+    print("TITLE : $isTitleInvalid.value");
+    print("DES : $isDescriptionInvalid.value");
+    if (isFormInvalid.value == true) {
+      return false;
+    }
     if (titleCtrlr.text.trim() == '' || descriptionCtrlr.text.trim() == '') {
       Fluttertoast.showToast(
           msg: "Please enter required field", fontSize: 16.0);
