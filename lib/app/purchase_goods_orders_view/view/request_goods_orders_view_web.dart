@@ -1,9 +1,6 @@
-import 'dart:convert';
-
 import 'package:cmms/app/app.dart';
-import 'package:cmms/app/stock_managment_goods_orders_req_details.dart/stock_management_goods_orders_req_details_controller.dart';
+import 'package:cmms/app/purchase_goods_orders_view/request_goods_orders_view_controller.dart';
 import 'package:cmms/app/widgets/custom_elevated_button.dart';
-import 'package:cmms/app/widgets/custom_richtext.dart';
 import 'package:cmms/app/widgets/custom_textField.dart';
 import 'package:cmms/app/widgets/stock_dropdown.dart';
 import 'package:flutter/material.dart';
@@ -11,9 +8,10 @@ import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:scrollable_table_view/scrollable_table_view.dart';
 
-class GoodsOrdersReqDetailsWeb extends GetView<GoodsOrdersReqDetailController> {
-  GoodsOrdersReqDetailsWeb({Key? key}) : super(key: key);
-  final GoodsOrdersReqDetailController controller = Get.find();
+class PurchaseGoodsorderViewWeb
+    extends GetView<PurchaseGoodsorderViewController> {
+  PurchaseGoodsorderViewWeb({Key? key}) : super(key: key);
+  final PurchaseGoodsorderViewController controller = Get.find();
 
   @override
   Widget build(BuildContext context) {
@@ -52,7 +50,8 @@ class GoodsOrdersReqDetailsWeb extends GetView<GoodsOrdersReqDetailController> {
                 child: Text(" / STOCK MANAGEMENT ",
                     style: Styles.greyMediumLight12),
               ),
-              Text(" / Purchase Goods Orders1", style: Styles.greyMediumLight12)
+              Text(" / Goods Order Request Details",
+                  style: Styles.greyMediumLight12)
             ],
           ),
         ),
@@ -75,14 +74,48 @@ class GoodsOrdersReqDetailsWeb extends GetView<GoodsOrdersReqDetailController> {
                       padding:
                           const EdgeInsets.only(top: 10, right: 10, left: 10),
                       child: Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
                           Padding(
-                            padding: const EdgeInsets.only(
-                                top: 10, right: 10, left: 10),
+                            padding: const EdgeInsets.all(10.0),
                             child: Text(
-                              " Purchase Goods Orders",
+                              " Goods Order Request Details",
                               style: Styles.blackBold14,
+                            ),
+                          ),
+                          Spacer(),
+                          Container(
+                            height: 25,
+                            width: 230,
+                            decoration: BoxDecoration(
+                                color: ColorValues.appYellowColor,
+                                borderRadius: BorderRadius.all(
+                                  Radius.circular(10),
+                                )),
+                            child: Center(
+                              child: Padding(
+                                padding:
+                                    const EdgeInsets.symmetric(horizontal: 10),
+                                child: Text(
+                                  "Waiting For Approval",
+                                  style: Styles.whiteColor16,
+                                ),
+                              ),
+                            ),
+                          ),
+                          Spacer(),
+                          Padding(
+                            padding: const EdgeInsets.all(10.0),
+                            child: Row(
+                              children: [
+                                Text(
+                                  "Request ID: ",
+                                  style: Styles.blackBold14,
+                                ),
+                                Text(
+                                  "${controller.getPurchaseDetailsByIDModel.value?.id}",
+                                  style: Styles.blackBold14,
+                                ),
+                              ],
                             ),
                           ),
                         ],
@@ -121,31 +154,6 @@ class GoodsOrdersReqDetailsWeb extends GetView<GoodsOrdersReqDetailController> {
                             child: Row(
                               children: [
                                 Text("Material"),
-                                Spacer(),
-                                GestureDetector(
-                                    onTap: () {
-                                      controller.addRowItem();
-                                    },
-                                    child: Container(
-                                      height: 25,
-                                      width: 70,
-                                      decoration: BoxDecoration(
-                                        color: ColorValues.addNewColor,
-                                        border: Border.all(
-                                          color: ColorValues
-                                              .lightGreyColorWithOpacity35,
-                                          width: 1,
-                                        ),
-                                        borderRadius: BorderRadius.all(
-                                            Radius.circular(15)),
-                                      ),
-                                      child: Center(
-                                        child: Text(
-                                          "ADD",
-                                          style: Styles.whiteBold15,
-                                        ),
-                                      ),
-                                    )),
                               ],
                             ),
                           ),
@@ -284,7 +292,8 @@ class GoodsOrdersReqDetailsWeb extends GetView<GoodsOrdersReqDetailController> {
                                                           keyboardType:
                                                               TextInputType
                                                                   .number,
-                                                          inputFormatters: <TextInputFormatter>[
+                                                          inputFormatters: <
+                                                              TextInputFormatter>[
                                                             FilteringTextInputFormatter
                                                                 .digitsOnly
                                                           ],
@@ -315,20 +324,25 @@ class GoodsOrdersReqDetailsWeb extends GetView<GoodsOrdersReqDetailController> {
                     Row(
                       children: [
                         Spacer(),
-                        CustomElevatedButton(
-                          backgroundColor: ColorValues.appRedColor,
-                          text: 'cancel',
-                          onPressed: () {
-                            // controller.AddInventory();
-                          },
-                        ),
-                        Dimens.boxWidth15,
-                        CustomElevatedButton(
-                          backgroundColor: ColorValues.appGreenColor,
-                          text: 'Submit',
-                          onPressed: () {
-                            controller.submitPurchaseOrderData();
-                          },
+                        Container(
+                            height: 40,
+                            child: CustomElevatedButton(
+                              backgroundColor: ColorValues.submitColor,
+                              text: 'Approve',
+                              onPressed: () {
+                                controller.approveGoodsOrder();
+                              },
+                            )),
+                        Dimens.boxWidth10,
+                        Container(
+                          height: 40,
+                          child: CustomElevatedButton(
+                            backgroundColor: ColorValues.rejectColor,
+                            text: ' Reject ',
+                            onPressed: () {
+                              controller.rejectGoodsOrder();
+                            },
+                          ),
                         ),
                         Spacer()
                       ],

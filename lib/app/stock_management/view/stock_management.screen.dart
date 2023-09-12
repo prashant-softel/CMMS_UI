@@ -179,7 +179,7 @@ class StockManagementDashboardScreen
                           // }
                         ),
                         _stockManagementList(
-                            tittle: "Purchase Orders Request",
+                            tittle: "Request Orders",
                             ontap: () {
                               Get.offNamed(Routes.purchaseGoodsorder);
                             }),

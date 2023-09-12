@@ -1,6 +1,5 @@
-import 'package:cmms/app/stock_managment_goods_list_orders.dart/stock_management_goods_list_orders_controller.dart';
-import 'package:cmms/app/stock_managment_goods_orders_req_details.dart/view/stock_management_goods_orders_req_details_web.dart';
-
+import 'package:cmms/app/purchase_goods_orders_view/request_goods_orders_view_controller.dart';
+import 'package:cmms/app/purchase_goods_orders_view/view/request_goods_orders_view_web.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import '../../home/widgets/header_widget.dart';
@@ -8,9 +7,9 @@ import '../../home/widgets/home_drawer.dart';
 import '../../theme/dimens.dart';
 import '../../utils/responsive.dart';
 
-class StockManagementGoodsOrdersReqdetailsScreen
-    extends GetView<StockManagementGoodsOrdersController> {
-  StockManagementGoodsOrdersReqdetailsScreen({super.key});
+class PurchaseGoodsorderViewScreen
+    extends GetView<PurchaseGoodsorderViewController> {
+  PurchaseGoodsorderViewScreen({super.key});
 
   ///
   @override
@@ -41,7 +40,7 @@ class StockManagementGoodsOrdersReqdetailsScreen
                   children: [
                     if (Responsive.isDesktop(context))
                       Expanded(
-                        child: GoodsOrdersReqDetailsWeb(),
+                        child: PurchaseGoodsorderViewWeb(),
                       )
                   ],
                 ),

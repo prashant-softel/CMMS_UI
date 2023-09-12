@@ -2,7 +2,7 @@ import 'dart:async';
 
 import 'package:cmms/app/home/home_controller.dart';
 import 'package:cmms/app/navigators/app_pages.dart';
-import 'package:cmms/app/purchase_goods_orders_list.dart/purchase_goods_orders_list_presenter.dart';
+import 'package:cmms/app/purchase_goods_orders_list.dart/request_goods_orders_list_presenter.dart';
 import 'package:cmms/app/theme/color_values.dart';
 import 'package:cmms/app/theme/styles.dart';
 import 'package:cmms/domain/models/request_order_list.model.dart';
@@ -95,9 +95,9 @@ class PurchaseGoodsorderListController extends GetxController {
     print('Argument5:$id');
   }
 
-  void viewAddGoodsOrdersDetails({int? id}) {
-    Get.toNamed(Routes.viewGoodsOrders, arguments: id);
-    print('Argument85:$id');
+  void viewAddGoodsOrdersDetails({int? request_order_id}) {
+    Get.toNamed(Routes.viewGoodsOrders, arguments: request_order_id);
+    print('Argument85:$request_order_id');
   }
 
   void getPmTaskListByDate() {
