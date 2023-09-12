@@ -1,8 +1,10 @@
+import 'package:cmms/app/navigators/app_pages.dart';
 import 'package:cmms/app/request_order_details/request_order_details_presenter.dart';
 import 'package:cmms/domain/models/get_asset_data_list_model.dart';
+import 'package:cmms/domain/models/request_order_model.dart';
 import 'package:get/get.dart';
 import 'package:rxdart/subjects.dart';
-import '../../domain/models/submit_purchase_order_data_model.dart';
+
 import '../home/home_controller.dart';
 
 class GoodsOrdersReqDetailController extends GetxController {
@@ -56,30 +58,27 @@ class GoodsOrdersReqDetailController extends GetxController {
     rowItem.value.forEach((element) {
       SubmitItems item = SubmitItems(
           assetItemID: dropdownMapperData[element[0]["value"]]?.id,
-          type: 4, // int.tryParse(
-          // dropdownMapperData[element[0]["value"]]?.asset_type ?? ""),
-          assetCode: dropdownMapperData[element[0]["value"]]?.asset_code,
           cost: int.tryParse(element[1]["value"] ?? '0'),
           ordered_qty: int.tryParse(element[2]["value"] ?? '0'));
 
       items.add(item);
-      print('Create GO  req  data: $item');
+      print('Create req  order  data: $item');
     });
 
-    SubmitPurchaseOrderDataModel submitPurchaseOrderDataModel =
-        SubmitPurchaseOrderDataModel(
-            id: 0, facilityID: 45, items: items, purchaseID: 1);
+    CreateRequestOrderDataModel createRequestOrderDataModel =
+        CreateRequestOrderDataModel(
+      facilityID: 45,
+      items: items,
+    );
 
-    var createGoReqModelJsonString = submitPurchaseOrderDataModel.toJson();
+    var createGoReqModelJsonString = createRequestOrderDataModel.toJson();
     Map<String, dynamic>? responseCreateGoModel =
         await goodsOrdersReqDetailPresenter.submitPurchaseOrderData(
       createGoReq: createGoReqModelJsonString,
       isLoading: true,
     );
-
-    if (responseCreateGoModel == null) {
-      //  CreateNewPermitDialog();
-      // showAlertDialog();
+    if (responseCreateGoModel == true) {
+      Get.offAllNamed(Routes.purchaseGoodsorder);
     }
 
     print('Create GO  req  data: $createGoReqModelJsonString');
