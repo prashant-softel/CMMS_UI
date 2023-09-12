@@ -203,29 +203,7 @@ class JobListContentWeb extends StatelessWidget {
                                     onPressed: () {},
                                     text: 'PDF'),
                               ),
-                              Spacer(),
-                              Container(
-                                width: 200,
-                                height: 35,
-                                margin: Dimens.edgeInsets0_0_16_0,
-                                child: TextField(
-                                  onChanged: (value) {},
-                                  //   controller.search(value),
-                                  decoration: InputDecoration(
-                                    enabledBorder: const OutlineInputBorder(
-                                      borderSide: const BorderSide(
-                                          color: Colors.grey, width: 0.0),
-                                    ),
-                                    focusedBorder: const OutlineInputBorder(
-                                      borderSide: const BorderSide(
-                                          color: Colors.grey, width: 0.0),
-                                    ),
-                                    contentPadding: Dimens.edgeInsets10_0_0_0,
-                                    hintText: 'search'.tr,
-                                    hintStyle: Styles.grey12,
-                                  ),
-                                ),
-                              ),
+                                
                             ],
                           ),
                           SizedBox(

@@ -14,18 +14,6 @@ class UserListController extends GetxController {
     this.userListPresenter,
   );
 
-  Map<String, bool> colHeaderMap = {
-    "Profile": false,
-    "User Login ID": false,
-    "User Role": false,
-    "Contact Number": false,
-    "Created On": false,
-    "Updated On": false,
-    'Actions': false,
-  };
-
-  // final streamController = StreamController<int>();
-
   UserListPresenter userListPresenter;
   final HomeController homecontroller = Get.find();
 
@@ -72,7 +60,7 @@ class UserListController extends GetxController {
     final newVisibility = Map<String, bool>.from(columnVisibility.value)
       ..[columnName] = isVisible;
     columnVisibility.value = newVisibility;
-    print({"updated columnVisibility": columnVisibility});
+    // print({"updated columnVisibility": columnVisibility});
   }
 
   void search(String keyword) {
@@ -131,26 +119,5 @@ class UserListController extends GetxController {
       }
     }
     update(['user_list']);
-  }
-}
-
-extension DataRowModelExtensions on UserListModel {
-  String? columnByName(String name) {
-    switch (name) {
-      case 'Profile':
-        return "Profile image";
-      case 'User Login ID':
-        return name;
-      case 'User Role':
-        return role_name;
-      case 'Contact Number':
-        return contact_no;
-      case 'Created On':
-        return "2023-03-26";
-      case 'Updated On':
-        return "2023-03-26";
-      default:
-        return null;
-    }
   }
 }

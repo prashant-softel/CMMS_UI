@@ -11,7 +11,6 @@ import 'package:cmms/app/widgets/abandon_schedule_execution_message_dialog.dart'
 import 'package:cmms/app/widgets/create_escalation_matrix_dialog.dart';
 import 'package:cmms/app/widgets/create_incident_report_dialog.dart';
 import 'package:cmms/app/widgets/create_jc_success_message_dialog.dart';
-import 'package:cmms/app/widgets/create_new_permit_for_job.dart';
 import 'package:cmms/app/widgets/create_permit_dialog.dart';
 import 'package:cmms/app/widgets/create_sop_dialog.dart';
 import 'package:cmms/app/widgets/end_mc_execution_message_dialog.dart';
@@ -5001,8 +5000,8 @@ class ConnectHelper {
       dynamic startDate,
       dynamic endDate}) async {
     var responseModel = await apiWrapper.makeRequest(
-      'PMScheduleView/GetPMTaskList?facility_id=${facilityId}&start_date=${endDate}&end_date=${startDate}',
-      Request.get,
+      //   'PMScheduleView/GetPMTaskList?facility_id=${facilityId}&start_date=${endDate}&end_date=${startDate}',
+      'PM/GetPMPlanList?facility_id=1736', Request.get,
       null,
       isLoading ?? true,
       {
