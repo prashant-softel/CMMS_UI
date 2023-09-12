@@ -1,4 +1,5 @@
 import 'package:cmms/domain/models/get_asset_data_list_model.dart';
+import 'package:cmms/domain/models/req_order_details_by_id_model.dart';
 
 import 'package:cmms/domain/usecases/stock_managment_goods_order_req_details_usecase.dart';
 
@@ -15,6 +16,16 @@ class GoodsOrdersReqDetailPresenter {
         facilityId: facilityId ?? 0,
         isLoading: isLoading ?? false,
       );
+  Future<GetRODetailsByIDModel?> getRoDetailsByID({
+    bool? isLoading,
+    required int requestID,
+  }) async {
+    return goodsOrdersReqDetailUsecase.getRoDetailsByID(
+      requestID: requestID,
+      isLoading: isLoading ?? false,
+    );
+  }
+
   Future<Map<String, dynamic>?> submitPurchaseOrderData({
     createGoReq,
     required bool isLoading,

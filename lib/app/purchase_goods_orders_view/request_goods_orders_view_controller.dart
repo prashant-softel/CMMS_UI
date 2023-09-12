@@ -26,11 +26,11 @@ class PurchaseGoodsorderViewController extends GetxController {
     this.purchaseGoodsorderViewPresenter,
   );
   PurchaseGoodsorderViewPresenter purchaseGoodsorderViewPresenter;
-  int? id = 236;
+  int? id = 0;
 
   @override
   void onInit() async {
-    // id = Get.arguments;
+    id = Get.arguments;
 
     print("purchesid $id");
     Future.delayed(Duration(seconds: 1), () {
@@ -114,9 +114,9 @@ class PurchaseGoodsorderViewController extends GetxController {
         getPurchaseDetailsByIDModel.value = _getPurchaseDetailsById;
 
         print(
-            'Additioanl Email Employees${_getPurchaseDetailsById.go_items?.length ?? 0}');
+            'Additioanl Email Employees${_getPurchaseDetailsById.request_order_items?.length ?? 0}');
         rowItem.value = [];
-        _getPurchaseDetailsById.go_items?.forEach((element) {
+        _getPurchaseDetailsById.request_order_items?.forEach((element) {
           rowItem.value.add([
             {"key": "Drop_down", "value": '${element.asset_name}'},
             // {'key': "Paid_By", "value": '${element.assetItem_Name}'},

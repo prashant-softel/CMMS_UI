@@ -96,8 +96,14 @@ class PurchaseGoodsorderListController extends GetxController {
   }
 
   void viewAddGoodsOrdersDetails({int? request_order_id}) {
-    Get.toNamed(Routes.viewGoodsOrders, arguments: request_order_id);
+    Get.toNamed(Routes.purchaseGoodsorderView, arguments: request_order_id);
     print('Argument85:$request_order_id');
+  }
+
+  void editReqDetails({int? request_order_id}) {
+    Get.toNamed(Routes.GoodsOrdersReqDetailsScreen,
+        arguments: request_order_id);
+    print('Argument:$request_order_id');
   }
 
   void getPmTaskListByDate() {

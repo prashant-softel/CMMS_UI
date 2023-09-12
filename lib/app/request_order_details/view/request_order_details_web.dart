@@ -328,13 +328,21 @@ class GoodsOrdersReqDetailsWeb extends GetView<GoodsOrdersReqDetailController> {
                           },
                         ),
                         Dimens.boxWidth15,
-                        CustomElevatedButton(
-                          backgroundColor: ColorValues.appGreenColor,
-                          text: 'Submit',
-                          onPressed: () {
-                            controller.submitPurchaseOrderData();
-                          },
-                        ),
+                        controller.id == null
+                            ? CustomElevatedButton(
+                                backgroundColor: ColorValues.appGreenColor,
+                                text: 'Submit',
+                                onPressed: () {
+                                  controller.submitPurchaseOrderData();
+                                },
+                              )
+                            : CustomElevatedButton(
+                                backgroundColor: ColorValues.updateColor,
+                                text: 'Update',
+                                onPressed: () {
+                                  controller.submitPurchaseOrderData();
+                                },
+                              ),
                         Spacer()
                       ],
                     ),

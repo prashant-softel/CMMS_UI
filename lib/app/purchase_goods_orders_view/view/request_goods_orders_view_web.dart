@@ -112,7 +112,7 @@ class PurchaseGoodsorderViewWeb
                                   style: Styles.blackBold14,
                                 ),
                                 Text(
-                                  "${controller.getPurchaseDetailsByIDModel.value?.id}",
+                                  "${controller.getPurchaseDetailsByIDModel.value?.request_order_id}",
                                   style: Styles.blackBold14,
                                 ),
                               ],

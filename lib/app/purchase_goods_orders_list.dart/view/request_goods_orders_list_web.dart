@@ -325,9 +325,10 @@ class _PurchaseGoodsorderListWebState extends State<PurchaseGoodsorderListWeb> {
                                                           ),
                                                           TableActionButton(
                                                             onPress: () {
-                                                              // controller.showAddGoodsOrdersDetails(
-                                                              //     id: int.tryParse(
-                                                              //         '${record[0]}'));
+                                                              controller.editReqDetails(
+                                                                  request_order_id:
+                                                                      int.tryParse(
+                                                                          '${record[0]}'));
                                                             },
                                                             color: ColorValues
                                                                 .editColor,
@@ -345,8 +346,6 @@ class _PurchaseGoodsorderListWebState extends State<PurchaseGoodsorderListWeb> {
                                                                   request_order_id:
                                                                       int.tryParse(
                                                                           '${record[0]}'));
-                                                              Get.toNamed(Routes
-                                                                  .purchaseGoodsorderView);
                                                             },
                                                           ),
                                                           TableActionButton(
