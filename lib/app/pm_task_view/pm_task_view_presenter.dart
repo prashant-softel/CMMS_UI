@@ -1,3 +1,4 @@
+import 'package:cmms/domain/models/employee_model.dart';
 import 'package:cmms/domain/models/new_permit_list_model.dart';
 import 'package:cmms/domain/models/pm_task_view_list_model.dart';
 
@@ -25,6 +26,18 @@ class PreventiveMaintenanceTaskViewPresenter {
         selfView: selfView,
         isLoading: isLoading,
       );
+
+   Future<List<EmployeeModel?>?> getAssignedToList({
+    String? auth,
+    int? facilityId,
+    bool? isLoading,
+  }) async =>
+      await preventiveMaintenanceTaskViewUsecase.getAssignedToList(
+        auth: auth ?? "",
+        facilityId: facilityId ?? 0,
+        isLoading: isLoading ?? false,
+      );
+  
   Future<Map<String, dynamic>?> scheduleLinkToPermit({
     int? scheduleId,
     int? permitId,

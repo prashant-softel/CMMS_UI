@@ -1,9 +1,13 @@
+import 'dart:async';
+
+import 'package:cmms/app/home/home_controller.dart';
 import 'package:cmms/app/navigators/app_pages.dart';
 import 'package:cmms/app/pm_task_view/pm_task_view_presenter.dart';
 import 'package:cmms/app/pm_task_view/view/permit_list_table.dart';
 import 'package:cmms/app/theme/color_values.dart';
 import 'package:cmms/app/theme/dimens.dart';
 import 'package:cmms/app/utils/utility.dart';
+import 'package:cmms/domain/models/employee_model.dart';
 import 'package:cmms/domain/models/new_permit_list_model.dart';
 import 'package:cmms/domain/models/pm_task_view_list_model.dart';
 import 'package:flutter/material.dart';
@@ -44,6 +48,10 @@ class PreventiveMaintenanceTaskViewController extends GetxController {
   RxList<NewPermitModel?>? permitList = <NewPermitModel>[].obs;
   var permitDropdownValues = <String?>[].obs;
 
+  bool openDueTimeDatePicker = false;
+  var dueDateTimeCtrlr = TextEditingController();
+
+
   final selectedPermit = Rx<NewPermitModel?>(null);
   Rx<int?> selectedPermitId = 0.obs;
   Rx<bool> isPermitLinked = false.obs;
@@ -52,9 +60,37 @@ class PreventiveMaintenanceTaskViewController extends GetxController {
   late List<TextEditingController> textControllers;
   RxString responseMessage = ''.obs;
   RxString startresponseMessage = ''.obs;
+  StreamSubscription<int>? facilityIdStreamSubscription;
+  HomeController homeController = Get.find<HomeController>();
+  int facilityId = 0;
+  Rx<bool> isFacilitySelected = true.obs;
+
+
+  var dueToDateTimeCtrlr = TextEditingController();
+  Rx<DateTime> selectedDueTime = DateTime.now().obs;
+
+
+
+
+
+  ///Assigned To 
+  RxList<EmployeeModel?> assignedToList = <EmployeeModel>[].obs;
+  Rx<String> selectedAssignedTo = ''.obs;
+  Rx<bool> isAssignedToSelected = true.obs;
+  int selectedAssignedToId = 0;
+  
 
   @override
   void onInit() async {
+     facilityIdStreamSubscription =
+        homeController.facilityId$.listen((event) async{
+          facilityId = event;
+          if(facilityId > 0){
+            isFacilitySelected.value = true;
+            getAssignedToList(facilityId);
+          }
+           
+        });
     try {
       await setScheduleId();
 
@@ -64,6 +100,7 @@ class PreventiveMaintenanceTaskViewController extends GetxController {
       textControllers =
           List.generate(permitValuesCount, (_) => TextEditingController());
       permitValues = RxList<String>.filled(permitValuesCount, '');
+     
 
       super.onInit();
     } catch (e) {
@@ -90,6 +127,18 @@ class PreventiveMaintenanceTaskViewController extends GetxController {
       //  await _flutterSecureStorage.delete(key: "scheduleId");
     } catch (e) {
       Utility.showDialog(e.toString() + 'scheduleId');
+    }
+  }
+
+  Future<void> getAssignedToList(_facilityId) async {
+    final _assignedToList =
+        await preventiveMaintenanceTaskViewPresenter.getAssignedToList(facilityId: _facilityId);
+
+    if (_assignedToList != null) {
+      for (var _assignedTo in _assignedToList) {
+        assignedToList.add(_assignedTo);
+      }
+      update(["assignedToList"]);
     }
   }
 
@@ -287,6 +336,27 @@ class PreventiveMaintenanceTaskViewController extends GetxController {
       }),
       actions: [],
     ));
+  }
+
+  void onDropdownValueChanged(dynamic list, dynamic value){
+    switch (list.runtimeType){
+      case RxList<EmployeeModel>:
+        {
+          int assignedToIndex =
+              assignedToList.indexWhere((x) => x?.name == value);
+          selectedAssignedToId = assignedToList[assignedToIndex]?.id ?? 0;
+          if (selectedAssignedToId != 0) {
+            isAssignedToSelected.value = true;
+          }
+          selectedAssignedTo.value = value;
+        }
+        break;
+      default:
+        {
+          //statements;
+        }
+        break;
+    }
   }
 
   Future<void> gotoexecution() async {
