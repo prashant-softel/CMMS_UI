@@ -4,8 +4,8 @@ import 'package:cmms/domain/usecases/home_usecase.dart';
 import 'package:cmms/domain/usecases/stock_managment_goods_order_req_details_usecase.dart';
 import 'package:get/get.dart';
 
-import 'stock_management_goods_orders_req_details_controller.dart';
-import 'stock_management_goods_orders_req_details_presenter.dart';
+import 'request_order_details_controller.dart';
+import 'request_order_details_presenter.dart';
 
 class GoodsOrdersReqDetailBinding extends Bindings {
   @override

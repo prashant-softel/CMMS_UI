@@ -1,15 +1,16 @@
-import 'package:cmms/app/purchase_goods_orders_view/purchase_goods_orders_view_controller.dart';
-import 'package:cmms/app/purchase_goods_orders_view/view/purchase_goods_orders_view_web.dart';
+import 'package:cmms/app/purchase_goods_orders_list.dart/request_goods_orders_list_controller.dart';
+
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import '../../home/widgets/header_widget.dart';
 import '../../home/widgets/home_drawer.dart';
 import '../../theme/dimens.dart';
 import '../../utils/responsive.dart';
+import 'request_goods_orders_list_web.dart';
 
-class PurchaseGoodsorderViewScreen
-    extends GetView<PurchaseGoodsorderViewController> {
-  PurchaseGoodsorderViewScreen({super.key});
+class PurchaseGoodsorderListScreen
+    extends GetView<PurchaseGoodsorderListController> {
+  PurchaseGoodsorderListScreen({super.key});
 
   ///
   @override
@@ -40,7 +41,7 @@ class PurchaseGoodsorderViewScreen
                   children: [
                     if (Responsive.isDesktop(context))
                       Expanded(
-                        child: PurchaseGoodsorderViewWeb(),
+                        child: PurchaseGoodsorderListWeb(),
                       )
                   ],
                 ),

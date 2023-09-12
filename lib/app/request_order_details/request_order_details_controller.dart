@@ -1,4 +1,4 @@
-import 'package:cmms/app/stock_managment_goods_orders_req_details.dart/stock_management_goods_orders_req_details_presenter.dart';
+import 'package:cmms/app/request_order_details/request_order_details_presenter.dart';
 import 'package:cmms/domain/models/get_asset_data_list_model.dart';
 import 'package:get/get.dart';
 import 'package:rxdart/subjects.dart';
