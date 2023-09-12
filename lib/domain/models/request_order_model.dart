@@ -15,15 +15,15 @@ class CreateRequestOrderDataModel {
   factory CreateRequestOrderDataModel.fromJson(Map<String, dynamic> json) {
     return CreateRequestOrderDataModel(
       facilityID: json['facilityID'],
-      items: json["submitItems"] != null
+      items: json["request_order_items"] != null
           ? List<SubmitItems>.from(
-              json["submitItems"]?.map((x) => SubmitItems.fromJson(x)))
+              json["request_order_items"]?.map((x) => SubmitItems.fromJson(x)))
           : [],
     );
   }
   Map<String, dynamic> toJson() => {
         "facilityID": facilityID,
-        "submitItems": List<dynamic>.from(items!.map((x) => x)),
+        "request_order_items": List<dynamic>.from(items!.map((x) => x)),
       };
 }
 

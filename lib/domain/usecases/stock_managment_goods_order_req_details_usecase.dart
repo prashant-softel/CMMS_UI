@@ -1,4 +1,5 @@
 import 'package:cmms/domain/models/get_asset_data_list_model.dart';
+import 'package:cmms/domain/models/req_order_details_by_id_model.dart';
 import 'package:cmms/domain/repositories/repository.dart';
 
 class GoodsOrdersReqDetailUsecase {
@@ -21,5 +22,13 @@ class GoodsOrdersReqDetailUsecase {
       await repository.submitPurchaseOrderData(
         createGoReq,
         isLoading,
+      );
+  Future<GetRODetailsByIDModel?> getRoDetailsByID({
+    bool? isLoading,
+    required int requestID,
+  }) async =>
+      await repository.getRoDetailsByID(
+        requestID: requestID,
+        isLoading: isLoading ?? false,
       );
 }
