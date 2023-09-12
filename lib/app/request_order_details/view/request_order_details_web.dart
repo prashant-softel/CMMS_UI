@@ -52,7 +52,7 @@ class GoodsOrdersReqDetailsWeb extends GetView<GoodsOrdersReqDetailController> {
                 child: Text(" / STOCK MANAGEMENT ",
                     style: Styles.greyMediumLight12),
               ),
-              Text(" / REQUEST GOODS ORDERS", style: Styles.greyMediumLight12)
+              Text(" / REQUEST GOODS ORDERS ", style: Styles.greyMediumLight12)
             ],
           ),
         ),
