@@ -3,7 +3,7 @@ import 'dart:convert';
 import 'package:cmms/app/app.dart';
 import 'package:cmms/app/request_order_details/request_order_details_controller.dart';
 import 'package:cmms/app/widgets/custom_elevated_button.dart';
-import 'package:cmms/app/widgets/custom_richtext.dart';
+
 import 'package:cmms/app/widgets/custom_textField.dart';
 import 'package:cmms/app/widgets/stock_dropdown.dart';
 import 'package:flutter/material.dart';
@@ -153,6 +153,12 @@ class GoodsOrdersReqDetailsWeb extends GetView<GoodsOrdersReqDetailController> {
                               ],
                             ),
                           ),
+                          Column(
+                              children: []
+                                ..addAll(controller.rowItem.value.map((e) {
+                                  return Text(jsonEncode(e));
+                                }))),
+                          Text(jsonEncode(controller.dropdownMapperData)),
                           Container(
                             margin: Dimens.edgeInsets15,
                             decoration: BoxDecoration(
@@ -173,10 +179,11 @@ class GoodsOrdersReqDetailsWeb extends GetView<GoodsOrdersReqDetailController> {
                                   "Assets Code",
                                   "Cost",
                                   "Ordered Qty",
+                                  "Comment"
                                 ].map((column) {
                                   return TableViewColumn(
                                     label: column,
-                                    minWidth: Get.width * 0.28,
+                                    minWidth: Get.width * 0.21,
                                     height: Get.height / 2,
                                   );
                                 }).toList(),
@@ -260,7 +267,7 @@ class GoodsOrdersReqDetailsWeb extends GetView<GoodsOrdersReqDetailController> {
                                                         const EdgeInsets.all(
                                                             8.0),
                                                     child: Container(
-                                                        width: (Get.width * .4),
+                                                        width: (Get.width * .9),
                                                         // padding: EdgeInsets.all(value),
                                                         decoration:
                                                             BoxDecoration(
@@ -305,7 +312,55 @@ class GoodsOrdersReqDetailsWeb extends GetView<GoodsOrdersReqDetailController> {
                                                           },
                                                         )),
                                                   )
-                                                : Text(mapData['key'] ?? ''),
+                                                : (mapData['key'] == "Comment")
+                                                    ? Padding(
+                                                        padding:
+                                                            const EdgeInsets
+                                                                .all(8.0),
+                                                        child: Container(
+                                                            width: (Get.width *
+                                                                .9),
+                                                            // padding: EdgeInsets.all(value),
+                                                            decoration:
+                                                                BoxDecoration(
+                                                              boxShadow: [
+                                                                BoxShadow(
+                                                                  color: Colors
+                                                                      .black26,
+                                                                  offset:
+                                                                      const Offset(
+                                                                    5.0,
+                                                                    5.0,
+                                                                  ),
+                                                                  blurRadius:
+                                                                      5.0,
+                                                                  spreadRadius:
+                                                                      1.0,
+                                                                ),
+                                                              ],
+                                                              color: ColorValues
+                                                                  .whiteColor,
+                                                              borderRadius:
+                                                                  BorderRadius
+                                                                      .circular(
+                                                                          5),
+                                                            ),
+                                                            child:
+                                                                LoginCustomTextfield(
+                                                              maxLine: 1,
+                                                              textController:
+                                                                  new TextEditingController(
+                                                                      text: mapData[
+                                                                              "value"] ??
+                                                                          ''),
+                                                              onChanged: (txt) {
+                                                                mapData["value"] =
+                                                                    txt;
+                                                              },
+                                                            )),
+                                                      )
+                                                    : Text(
+                                                        mapData['key'] ?? ''),
                                       );
                                     }).toList(),
                                   );
@@ -316,6 +371,47 @@ class GoodsOrdersReqDetailsWeb extends GetView<GoodsOrdersReqDetailController> {
                         ],
                       ),
                     ),
+                    Dimens.boxHeight15,
+                    // (controller.getPurchaseDetailsByIDModel.value?.status !=
+                    //         341)
+                    //     ? Container()
+                    //     :
+                    Padding(
+                      padding: const EdgeInsets.symmetric(horizontal: 20),
+                      child: Row(children: [
+                        Text('Comment: '),
+                        Expanded(
+                          child: TextField(
+                            controller: controller.commentCtrlr,
+                            // enabled: controller.isJobCardStarted.value,
+                            decoration: InputDecoration(
+                              disabledBorder: OutlineInputBorder(
+                                borderSide: BorderSide(
+                                  color: ColorValues.appLightGreyColor,
+                                  width: 1.0,
+                                ),
+                              ),
+                              enabledBorder: OutlineInputBorder(
+                                borderSide: BorderSide(
+                                  color: ColorValues.appLightBlueColor,
+                                  width: 1.0,
+                                ),
+                              ),
+                              focusedBorder: OutlineInputBorder(
+                                borderSide: BorderSide(
+                                  color: ColorValues.appLightBlueColor,
+                                  width: 1.0,
+                                ),
+                              ),
+                            ),
+                            keyboardType: TextInputType.multiline,
+                            minLines: 5,
+                            maxLines: null,
+                          ),
+                        ),
+                      ]),
+                    ),
+
                     Dimens.boxHeight15,
                     Row(
                       children: [
@@ -340,7 +436,7 @@ class GoodsOrdersReqDetailsWeb extends GetView<GoodsOrdersReqDetailController> {
                                 backgroundColor: ColorValues.updateColor,
                                 text: 'Update',
                                 onPressed: () {
-                                  controller.submitPurchaseOrderData();
+                                  controller.updatePurchaseOrderData();
                                 },
                               ),
                         Spacer()

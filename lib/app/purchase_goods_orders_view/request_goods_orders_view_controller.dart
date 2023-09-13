@@ -55,7 +55,7 @@ class PurchaseGoodsorderViewController extends GetxController {
       }
       update(["AssetList"]);
     }
-    addRowItem();
+    // addRowItem();
   }
 
   approveGoodsOrder() async {
@@ -98,6 +98,7 @@ class PurchaseGoodsorderViewController extends GetxController {
       // {'key': "Paid_By", "value": 'Please Select'},
       {'key': "Cost", "value": ''},
       {'key': "Order", "value": ''},
+      {'key': "Comment", "value": ''},
     ]);
   }
 
@@ -122,7 +123,9 @@ class PurchaseGoodsorderViewController extends GetxController {
             // {'key': "Paid_By", "value": '${element.assetItem_Name}'},
             {'key': "Cost", "value": '${element.cost}'},
             {'key': "Order", "value": '${element.ordered_qty}'},
+            {'key': "Comment", "value": '${element.comment}'},
           ]);
+          commentCtrlr.text = getPurchaseDetailsByIDModel.value?.comment ?? "";
         });
       }
     }

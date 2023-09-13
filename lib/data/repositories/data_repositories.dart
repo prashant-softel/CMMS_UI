@@ -1176,6 +1176,16 @@ class DataRepository extends DomainRepository {
         createGoReq: createGoReq,
         isLoading: isLoading ?? false,
       );
+  Future<ResponseModel> updatePurchaseOrderData({
+    required String auth,
+    createGoReq,
+    bool? isLoading,
+  }) async =>
+      await connectHelper.updatePurchaseOrderData(
+        auth: auth,
+        createGoReq: createGoReq,
+        isLoading: isLoading ?? false,
+      );
   Future<ResponseModel> updateGoodsOrder({
     required String auth,
     createGo,
