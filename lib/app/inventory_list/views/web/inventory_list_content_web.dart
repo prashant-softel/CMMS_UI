@@ -177,7 +177,7 @@ class InventoryListContentWeb extends GetView<InventoryListController> {
                                       'action'.tr,
                                     ].map((column) {
                                       return TableViewColumn(
-                                        minWidth: Get.width * 0.12,
+                                        minWidth: Get.width * 0.13,
                                         label: column,
                                       );
                                     }).toList(),
@@ -342,7 +342,7 @@ class InventoryListContentWeb extends GetView<InventoryListController> {
                                       'action'.tr,
                                     ].map((column) {
                                       return TableViewColumn(
-                                        minWidth: Get.width * 0.12,
+                                        minWidth: Get.width * 0.13,
                                         label: column,
                                       );
                                     }).toList(),
@@ -350,11 +350,14 @@ class InventoryListContentWeb extends GetView<InventoryListController> {
                                       ...List.generate(
                                         _controller.inventoryList.length,
                                         (index) => [
-                                          AssetName(
-                                            '${_controller.inventoryList[index]!.name}',
-                                            1,
-                                          ),
-                                          index + 1,
+                                          // AssetName(
+                                          //   '${_controller.inventoryList[index]!.name}',
+                                          //   1,
+                                          // ),
+                                          // index + 1,
+                                          '${controller.inventoryList[index]!.name}',
+                                          '${controller.inventoryList[index]!.serialNumber}',
+
                                           '${controller.inventoryList[index]!.id}',
                                           '${_controller.inventoryList[index]!.parentName}',
                                           '${_controller.inventoryList[index]!.categoryName}',
@@ -373,128 +376,81 @@ class InventoryListContentWeb extends GetView<InventoryListController> {
                                                   onTap: () {
                                                     print('${value} $record');
                                                   },
-                                                  child:
-                                                      value.runtimeType
-                                                                  .toString() ==
-                                                              'AssetName'
-                                                          ? Builder(builder:
-                                                              (context) {
-                                                              final val = value
-                                                                  as AssetName;
-                                                              return Column(
-                                                                children: [
-                                                                  Text(
-                                                                      '${val.name}'),
-                                                                  Spacer(),
-                                                                  // Align(
-                                                                  //   alignment: Alignment
-                                                                  //       .centerRight,
-                                                                  //   child: Container(
-                                                                  //     padding: Dimens
-                                                                  //         .edgeInsets8_2_8_2,
-                                                                  //     decoration:
-                                                                  //         BoxDecoration(
-                                                                  //       color: val.requirementStatus ==
-                                                                  //               1
-                                                                  //           ? ColorValues
-                                                                  //               .appRedColor
-                                                                  //           : ColorValues
-                                                                  //               .appGreenColor,
-                                                                  //       borderRadius:
-                                                                  //           BorderRadius
-                                                                  //               .circular(
-                                                                  //                   4),
-                                                                  //     ),
-                                                                  //     // child: Text(
-                                                                  //     //   val.name == 1
-                                                                  //     //       ? 'requirementRejected'
-                                                                  //     //           .tr
-                                                                  //     //       : 'requirementAccepted'
-                                                                  //     //           .tr,
-                                                                  //     //   style: Styles
-                                                                  //     //       .white10
-                                                                  //     //       .copyWith(
-                                                                  //     //     color: Colors
-                                                                  //     //         .white,
-                                                                  //     //   ),
-                                                                  //     // ),
-                                                                  //   ),
-                                                                  // ),
+                                                  child: value == 'Actions'
+                                                      ? Wrap(
+                                                          children: [
+                                                            Row(children: [
+                                                              TableActionButton(
+                                                                color: ColorValues
+                                                                    .viewColor,
+                                                                icon: Icons
+                                                                    .visibility,
+                                                                message: 'View',
+                                                                onPress: () {
+                                                                  controller.viewAddInventoryDetails(
+                                                                      id: int.tryParse(
+                                                                          '${record[2]}'));
+                                                                  Get.toNamed(Routes
+                                                                      .viewAddInventoryScreen);
+                                                                },
+                                                              ),
+                                                              //),p
 
-                                                                  Dimens
-                                                                      .boxHeight10,
-                                                                ],
-                                                              );
-                                                            })
-                                                          : value == 'Actions'
-                                                              ? Wrap(
-                                                                  children: [
-                                                                    Row(
-                                                                        children: [
-                                                                          TableActionButton(
-                                                                            color:
-                                                                                ColorValues.viewColor,
-                                                                            icon:
-                                                                                Icons.visibility,
-                                                                            message:
-                                                                                'View',
-                                                                            onPress:
-                                                                                () {
-                                                                              controller.viewAddInventoryDetails(id: int.tryParse('${record[2]}'));
-                                                                              Get.toNamed(Routes.viewAddInventoryScreen);
-                                                                            },
-                                                                          ),
-                                                                          //),p
+                                                              TableActionButton(
+                                                                color: ColorValues
+                                                                    .editColor,
+                                                                icon:
+                                                                    Icons.edit,
+                                                                message: 'Edit',
+                                                                onPress: () {
+                                                                  controller.showAddInventoryDetails(
+                                                                      id: int.tryParse(
+                                                                          '${record[2]}'));
+                                                                  print(
+                                                                      'AddInV:${record[2]}');
+                                                                },
+                                                              ),
+                                                              //),
 
-                                                                          TableActionButton(
-                                                                            color:
-                                                                                ColorValues.editColor,
-                                                                            icon:
-                                                                                Icons.edit,
-                                                                            message:
-                                                                                'Edit',
-                                                                            onPress:
-                                                                                () {
-                                                                              controller.showAddInventoryDetails(id: int.tryParse('${record[2]}'));
-                                                                              print('AddInV:${record[2]}');
-                                                                            },
-                                                                          ),
-                                                                          //),
-
-                                                                          TableActionButton(
-                                                                            color:
-                                                                                ColorValues.deleteColor,
-                                                                            icon:
-                                                                                Icons.delete,
-                                                                            message:
-                                                                                'Delete',
-                                                                            onPress:
-                                                                                () {},
-                                                                          ),
-                                                                          //),
-                                                                        ]),
-                                                                    // TableActionButton(
-                                                                    //   color: ColorValues
-                                                                    //       .appGreenColor,
-                                                                    //   icon: Icons
-                                                                    //       .visibility,
-                                                                    //  message:
-                                                                    //       'Approve Request',
-                                                                    //   onPress: () {},
-                                                                    // ),
-                                                                    // TableActionButton(
-                                                                    //   color: ColorValues
-                                                                    //       .appRedColor,
-                                                                    //   icon: Icons
-                                                                    //       .visibility,
-                                                                    //  message:
-                                                                    //       'Reject Request',
-                                                                    //   onPress: () {},
-                                                                    // ),
-                                                                  ],
-                                                                )
-                                                              : Text(value
-                                                                  .toString()),
+                                                              TableActionButton(
+                                                                color: ColorValues
+                                                                    .deleteColor,
+                                                                icon: Icons
+                                                                    .delete,
+                                                                message:
+                                                                    'Delete',
+                                                                onPress: () {},
+                                                              ),
+                                                              //),
+                                                            ]),
+                                                            // TableActionButton(
+                                                            //   color: ColorValues
+                                                            //       .appGreenColor,
+                                                            //   icon: Icons
+                                                            //       .visibility,
+                                                            //  message:
+                                                            //       'Approve Request',
+                                                            //   onPress: () {},
+                                                            // ),
+                                                            // TableActionButton(
+                                                            //   color: ColorValues
+                                                            //       .appRedColor,
+                                                            //   icon: Icons
+                                                            //       .visibility,
+                                                            //  message:
+                                                            //       'Reject Request',
+                                                            //   onPress: () {},
+                                                            // ),
+                                                          ],
+                                                        )
+                                                      : Padding(
+                                                          padding:
+                                                              const EdgeInsets
+                                                                      .only(
+                                                                  left: 25),
+                                                          child: Text(
+                                                              value.toString()),
+                                                        ),
                                                 ),
                                               );
                                             },

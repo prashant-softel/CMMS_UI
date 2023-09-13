@@ -23,6 +23,14 @@ class GoodsOrdersReqDetailUsecase {
         createGoReq,
         isLoading,
       );
+  Future<Map<String, dynamic>> updatePurchaseOrderData({
+    createGoReq,
+    bool? isLoading,
+  }) async =>
+      await repository.updatePurchaseOrderData(
+        createGoReq,
+        isLoading,
+      );
   Future<GetRODetailsByIDModel?> getRoDetailsByID({
     bool? isLoading,
     required int requestID,
