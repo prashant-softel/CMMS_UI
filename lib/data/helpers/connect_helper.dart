@@ -2921,7 +2921,7 @@ class ConnectHelper {
     required bool isLoading,
   }) async {
     var responseModel = await apiWrapper.makeRequest(
-      'Inventory/ImportInventories?file_id=$fileId',
+      'Inventory/ImportInventories?file_id=$fileId&facilityID=45',
       Request.post,
       null,
       false,
