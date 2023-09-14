@@ -35,6 +35,8 @@ class DropdownWebStock extends StatelessWidget {
     ///
     return //
 
+        //   Obx(
+        // () =>
         Container(
       height: MediaQuery.of(context).size.height * 0.040,
       width: width,
@@ -116,6 +118,7 @@ class DropdownWebStock extends StatelessWidget {
         selectedItem: selectedValue,
       ),
     );
+    // );
   }
 }
-  //  popupProps: PopupProps.menu(menuProps: MenuProps()),
+//  popupProps: PopupProps.menu(menuProps: MenuProps()),

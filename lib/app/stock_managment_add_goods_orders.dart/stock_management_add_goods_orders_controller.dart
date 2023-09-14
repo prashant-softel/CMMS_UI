@@ -93,10 +93,31 @@ class StockManagementAddGoodsOrdersController extends GetxController {
   // var selectedCountry = PaiedModel(name: "Please Select", id: 0).obs;
 
   ///
+  ///    facilityIdStreamSubscription = homecontroller.facilityId$.listen((event) {
+  //    facilityId = event;
   @override
   void onInit() async {
-    id = Get.arguments["id"];
+    // id = Get.arguments["id"];
     print('AddStock:$id');
+    // facilityIdStreamSubscription =
+    //     homeController.facilityId$.listen((event) async {
+    //   facilityId = event;
+
+    //   Future.delayed(Duration(seconds: 1), () {
+    //     getUnitCurrencyList();
+    //   });
+    //   Future.delayed(Duration(seconds: 1), () {
+    //     getBusinessList(4);
+    //   });
+    //   Future.delayed(Duration(seconds: 1), () {
+    //     getAssetList(facilityId);
+    //     if (id != null) {
+    //       Future.delayed(Duration(seconds: 1), () {
+    //         getPurchaseDetailsById(id: id!);
+    //       });
+    //     }
+    //   });
+    // });
     facilityIdStreamSubscription = homeController.facilityId$.listen((event) {
       facilityId = event;
       Future.delayed(Duration(seconds: 1), () {
