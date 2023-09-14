@@ -16,7 +16,7 @@ class MrsListModel {
   int? status;
   String? status_short;
   String? activity;
-  int? whereUsedType;
+  String? whereUsedType;
   int? whereUsedTypeId;
   List<CmmsItems>? cmmrsItems;
 
@@ -55,10 +55,10 @@ class MrsListModel {
       requested_by_name: parsedJson['requested_by_name'],
       returnDate: parsedJson['returnDate'],
       status_short: parsedJson['status_short'],
-      whereUsedTypeId: parsedJson['whereUsedTypeId'],
+      whereUsedTypeId: parsedJson['whereUsedRefID'],
       cmmrsItems: cmmrsItems,
       status: parsedJson['status'],
-      whereUsedType: parsedJson['whereUsedType'],
+      whereUsedType: parsedJson['whereUsedTypeName'],
     );
   }
   Map<String, dynamic> toJson() => {
@@ -73,9 +73,9 @@ class MrsListModel {
         "requested_by_name": requested_by_name,
         "returnDate": returnDate,
         "status_short": status_short,
-        "whereUsedTypeId": whereUsedTypeId,
+        "whereUsedRefID": whereUsedTypeId,
         "status": status,
-        "whereUsedType": whereUsedType,
+        "whereUsedTypeName": whereUsedType,
         "cmmrsItems":
             List<dynamic>.from(cmmrsItems?.map((x) => x.toJson()) ?? []),
       };

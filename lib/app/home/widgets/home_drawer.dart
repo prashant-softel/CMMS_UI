@@ -66,7 +66,7 @@ class HomeDrawer extends GetView<HomeController> {
                                               title: "DashBoard",
                                               icon: "assets/files/home.png",
                                               press: () {
-                                                Get.offNamed(Routes.home);
+                                                Get.offAllNamed(Routes.home);
                                               },
                                             ),
 
@@ -77,7 +77,8 @@ class HomeDrawer extends GetView<HomeController> {
                                               icon:
                                                   "assets/files/preventive.png",
                                               press: () {
-                                                Get.offNamed(Routes.breakdown);
+                                                Get.offAllNamed(
+                                                    Routes.breakdown);
                                               },
                                             ),
                                             // MenuItem(
@@ -86,7 +87,7 @@ class HomeDrawer extends GetView<HomeController> {
 //title: "Warranty claim",
                                             //   icon: "assets/files/warranty.png",
                                             //   press: () {
-                                            //     Get.offNamed(Routes.warrantyClaimList);
+                                            //     Get.offAllNamed(Routes.warrantyClaimList);
                                             //     //  Navigator.push(
                                             //     //         context,
                                             //     //         MaterialPageRoute(
@@ -99,7 +100,8 @@ class HomeDrawer extends GetView<HomeController> {
                                               title: "Preventive Maintenance",
                                               icon: "assets/files/correct.png",
                                               press: () {
-                                                Get.offNamed(Routes.preventive);
+                                                Get.offAllNamed(
+                                                    Routes.preventive);
                                               },
                                             ),
 
@@ -110,7 +112,7 @@ class HomeDrawer extends GetView<HomeController> {
                                               icon:
                                                   "assets/files/reportins.png",
                                               press: () {
-                                                Get.offNamed(Routes
+                                                Get.offAllNamed(Routes
                                                     .moduleCleaningDashboard);
                                               },
                                             ),
@@ -120,7 +122,7 @@ class HomeDrawer extends GetView<HomeController> {
                                               title: "Vegetation Control",
                                               icon: "assets/files/maint.png",
                                               press: () {
-                                                Get.offNamed(Routes.home);
+                                                Get.offAllNamed(Routes.home);
                                               },
                                             ),
                                             MenuItem(
@@ -130,7 +132,8 @@ class HomeDrawer extends GetView<HomeController> {
                                               icon:
                                                   "assets/files/maintenance.png",
                                               press: () {
-                                                Get.offNamed(Routes.inventory);
+                                                Get.offAllNamed(
+                                                    Routes.inventory);
                                               },
                                             ),
                                             MenuItem(
@@ -139,7 +142,7 @@ class HomeDrawer extends GetView<HomeController> {
                                               title: "Incident Report",
                                               icon: "assets/files/misc.png",
                                               press: () {
-                                                Get.offNamed(Routes
+                                                Get.offAllNamed(Routes
                                                     .incidentReportListWeb);
                                               },
                                             ),
@@ -149,7 +152,7 @@ class HomeDrawer extends GetView<HomeController> {
                                               title: "Stock Management",
                                               icon: "assets/files/warranty.png",
                                               press: () {
-                                                Get.offNamed(Routes
+                                                Get.offAllNamed(Routes
                                                     .stockManagementDashboardScreen);
                                               },
                                             ),
@@ -160,7 +163,7 @@ class HomeDrawer extends GetView<HomeController> {
                                             //   icon:
                                             //       "assets/files/preventive.png",
                                             //   press: () {
-                                            //     Get.offNamed(
+                                            //     Get.offAllNamed(
                                             //         Routes.calibrationList);
                                             //   },
                                             // ),
@@ -171,7 +174,7 @@ class HomeDrawer extends GetView<HomeController> {
                                               icon:
                                                   "assets/files/inventory.png",
                                               press: () {
-                                                Get.offNamed(
+                                                Get.offAllNamed(
                                                     Routes.masterDashboard);
                                               },
                                             ),
@@ -181,7 +184,7 @@ class HomeDrawer extends GetView<HomeController> {
                                               title: "Settings",
                                               icon: "assets/files/setting.png",
                                               press: () {
-                                                Get.offNamed(Routes.setting);
+                                                Get.offAllNamed(Routes.setting);
                                               },
                                             ),
                                             MenuItem(
