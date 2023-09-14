@@ -626,6 +626,7 @@ class PermitListDataSource extends DataTableSource {
                                     )
                                   : Container(),
 
+                              ///Extend Button
                               controller.newPermitList
                                               .firstWhere(
                                                 (e) =>
@@ -673,9 +674,11 @@ class PermitListDataSource extends DataTableSource {
                                       icon: Icons.expand_outlined,
                                       message: 'Extend',
                                       onPress: () {
-                                        Get.dialog(PermitExtendDialog(
-                                            permitId: PermitDetails?.permitId
-                                                .toString()));
+                                        // Get.dialog(PermitExtendDialog(
+                                        //     permitId: PermitDetails?.permitId
+                                        //         .toString()));
+                                         controller.extendPermitList(
+                                            permitId: PermitDetails?.permitId);
                                       },
                                     )
                                   : Container(),

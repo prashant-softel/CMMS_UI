@@ -57,6 +57,21 @@ class ViewPermitUsecase {
     );
   }
 
+  Future<void> permitExtendButton({
+    String? comment,
+    String? Time,
+    String? id,
+    bool? isLoading,
+  }) async {
+    await repository.permitExtendButton(
+      comment,
+      Time,
+      id,
+      isLoading,
+    );
+  }
+
+
    Future<void> permitRejectButton({
     String? comment,
     String? id,
