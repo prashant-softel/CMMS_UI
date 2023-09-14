@@ -594,6 +594,17 @@ class DataRepository extends DomainRepository {
         isLoading: isLoading ?? false,
       );
 
+  Future<ResponseModel> goodsOrderApprovedButton({
+    required String auth,
+    goodsOrderApproveJsonString,
+    bool? isLoading,
+  }) async =>
+      await connectHelper.goodsOrderApprovedButton(
+        auth: auth,
+        goodsOrderApproveJsonString: goodsOrderApproveJsonString,
+        isLoading: isLoading ?? false,
+      );
+
   Future<ResponseModel> permitCancelByIssuerButton({
     required String auth,
     String? comment,

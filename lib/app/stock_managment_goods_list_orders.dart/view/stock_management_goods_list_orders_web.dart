@@ -101,7 +101,7 @@ class _StockManagementGoodsOrdersWebState
                                         MainAxisAlignment.spaceBetween,
                                     children: [
                                       Text(
-                                        "GOODS ORDER List",
+                                        "Goods Order List",
                                         style: Styles.blackBold16,
                                       ),
                                       Spacer(),
@@ -708,11 +708,24 @@ class GoodsOrderListDataSource extends DataTableSource {
                       },
                     ),
                     TableActionButton(
-                      color: ColorValues.deleteColor,
-                      icon: Icons.delete,
-                      message: 'Delete',
-                      onPress: () {},
-                    )
+                      color: ColorValues.approveColor,
+                      icon: Icons.approval_rounded,
+                      message: 'Approve/Reject',
+                      onPress: () {
+                        int id = GoodsOrderListDetails?.id ?? 0;
+                        if (id != 0) {
+                          Get.toNamed(Routes.viewGoodsOrders,
+                              arguments: {'id': id});
+                        }
+                      },
+                    ),
+
+                    // TableActionButton(
+                    //   color: ColorValues.deleteColor,
+                    //   icon: Icons.delete,
+                    //   message: 'Delete',
+                    //   onPress: () {},
+                    // )
                   ])
                 : Text(value.toString()),
           ),

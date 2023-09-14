@@ -1,4 +1,5 @@
 import 'package:cmms/domain/models/business_type_model.dart';
+import 'package:cmms/domain/models/comment_model.dart';
 import 'package:cmms/domain/models/create_go_model.dart';
 import 'package:cmms/domain/models/currency_list_model.dart';
 import 'package:cmms/domain/models/get_asset_data_list_model.dart';
@@ -31,6 +32,7 @@ class ViewAddGoodsOrdersController extends GetxController {
   RxList<BusinessListModel?> ownerList = <BusinessListModel>[].obs;
   Rx<String> selectedBusinessType = ''.obs;
   RxList<PaiedModel?> paid = <PaiedModel>[].obs;
+  TextEditingController approveCommentTextFieldCtrlr = TextEditingController();
 
   Rx<bool> isSelectedBusinessType = true.obs;
   int selectedBusinessTypeId = 1;
@@ -122,7 +124,7 @@ class ViewAddGoodsOrdersController extends GetxController {
       _getPurchaseDetailsById.goDetails?.forEach((element) {
         rowItem.value.add([
           {"key": "Drop_down", "value": '${element.assetItem_Name}'},
-          {'key': "Paid_By", "value": '${element.assetItem_Name}'},
+          {'key': "Paid_By", "value": '${element.paid_by_name}'},
           {'key': "Cost", "value": '${element.cost}'},
           {'key': "Order", "value": '${element.ordered_qty}'},
         ]);
@@ -165,6 +167,26 @@ class ViewAddGoodsOrdersController extends GetxController {
     if (list!.length > 0) {
       for (var _ownerList in list) {
         ownerList.add(_ownerList);
+      }
+    }
+  }
+
+  void goodsOrderApprovedButton({int? id}) async {
+    {
+      String _comment = approveCommentTextFieldCtrlr.text.trim();
+
+      CommentModel commentGoodsOrderAproveModel =
+          CommentModel(id: id, comment: _comment);
+
+      var goodsOrderApproveJsonString = commentGoodsOrderAproveModel.toJson();
+
+      Map<String, dynamic>? response =
+          await viewAddGoodsOrdersPresenter.goodsOrderApprovedButton(
+        goodsOrderApproveJsonString: goodsOrderApproveJsonString,
+        isLoading: true,
+      );
+      if (response == true) {
+        //getCalibrationList(facilityId, true);
       }
     }
   }
