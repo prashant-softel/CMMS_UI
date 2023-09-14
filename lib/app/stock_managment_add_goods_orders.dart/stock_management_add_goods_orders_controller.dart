@@ -156,7 +156,7 @@ class StockManagementAddGoodsOrdersController extends GetxController {
       _getPurchaseDetailsById.goDetails?.forEach((element) {
         rowItem.value.add([
           {"key": "Drop_down", "value": '${element.assetItem_Name}'},
-          {'key': "Paid_By", "value": ''},
+          {'key': "Paid_By", "value": '${element.paid_by_name}'},
           {'key': "Cost", "value": '${element.cost}'},
           {'key': "Order", "value": '${element.ordered_qty}'},
         ]);

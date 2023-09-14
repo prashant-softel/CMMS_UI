@@ -47,7 +47,7 @@ class MrsViewScreen extends GetView<MrsViewController> {
 
                     if (Responsive.isDesktop(context))
                       Expanded(
-                        child: buildPrintableData(controller),
+                        child: MrsViewContentWeb(),
                       )
                   ],
                 ),

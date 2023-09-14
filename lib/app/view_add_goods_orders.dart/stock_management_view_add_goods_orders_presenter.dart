@@ -21,6 +21,26 @@ class ViewAddGoodsOrdersPresenter {
     );
   }
 
+  Future<Map<String, dynamic>?> goodsOrderApprovedButton({
+    goodsOrderApproveJsonString,
+    required bool isLoading,
+  }) async {
+    return viewAddGoodsOrdersUsecase.goodsOrderApprovedButton(
+      goodsOrderApproveJsonString: goodsOrderApproveJsonString,
+      isLoading: isLoading,
+    );
+  }
+
+  Future<Map<String, dynamic>?> goodsOrderRejectButton({
+    goodsOrderRejectJsonString,
+    required bool isLoading,
+  }) async {
+    return viewAddGoodsOrdersUsecase.goodsOrderRejectButton(
+      goodsOrderRejectJsonString: goodsOrderRejectJsonString,
+      isLoading: isLoading,
+    );
+  }
+
   Future<List<BusinessListModel?>?> getBusinessList({
     required int ListType,
     required bool isLoading,

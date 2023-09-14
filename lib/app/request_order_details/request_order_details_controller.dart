@@ -5,6 +5,9 @@ import 'package:cmms/app/request_order_details/request_order_details_presenter.d
 import 'package:cmms/domain/models/get_asset_data_list_model.dart';
 import 'package:cmms/domain/models/req_order_details_by_id_model.dart';
 import 'package:cmms/domain/models/request_order_model.dart';
+
+import 'package:flutter/cupertino.dart';
+
 import 'package:get/get.dart';
 import 'package:rxdart/subjects.dart';
 
@@ -29,11 +32,13 @@ class GoodsOrdersReqDetailController extends GetxController {
   Stream<int> get facilityId$ => _facilityId.stream;
   // int get facilityId => _facilityId.value;
   int selectedPurchaseID = 0;
+  var commentCtrlr = TextEditingController();
 
   StreamSubscription<int>? facilityIdStreamSubscription;
   final HomeController homeController = Get.find();
   int facilityId = 0;
   int? id = 0;
+
   @override
   void onInit() async {
     id = Get.arguments;
@@ -63,7 +68,9 @@ class GoodsOrdersReqDetailController extends GetxController {
       }
       update(["AssetList"]);
     }
-    addRowItem();
+    if (id == null) {
+      addRowItem();
+    }
   }
 
   void addRowItem() {
@@ -71,6 +78,7 @@ class GoodsOrdersReqDetailController extends GetxController {
       {"key": "Drop_down", "value": 'Please Select'},
       {'key': "Cost", "value": ''},
       {'key': "Order", "value": ''},
+      {'key': "Comment", "value": ''},
     ]);
   }
 
@@ -95,7 +103,9 @@ class GoodsOrdersReqDetailController extends GetxController {
             // {'key': "Paid_By", "value": '${element.assetItem_Name}'},
             {'key': "Cost", "value": '${element.cost}'},
             {'key': "Order", "value": '${element.ordered_qty}'},
+            {'key': "Comment", "value": '${element.comment}'},
           ]);
+          commentCtrlr.text = getPurchaseDetailsByIDModel.value?.comment ?? "";
         });
       }
     }
@@ -107,17 +117,20 @@ class GoodsOrdersReqDetailController extends GetxController {
       SubmitItems item = SubmitItems(
           assetItemID: dropdownMapperData[element[0]["value"]]?.id,
           cost: int.tryParse(element[1]["value"] ?? '0'),
-          ordered_qty: int.tryParse(element[2]["value"] ?? '0'));
+          ordered_qty: int.tryParse(element[2]["value"] ?? '0'),
+          comment: element[3]["value"] ?? '0');
 
       items.add(item);
+
       print('Create req  order  data: $item');
     });
 
     CreateRequestOrderDataModel createRequestOrderDataModel =
         CreateRequestOrderDataModel(
-      facilityID: facilityId,
-      items: items,
-    );
+            facilityID: facilityId,
+            items: items,
+            comment: commentCtrlr.text,
+            request_order_id: 0);
 
     var createGoReqModelJsonString = createRequestOrderDataModel.toJson();
     Map<String, dynamic>? responseCreateGoModel =
@@ -130,5 +143,39 @@ class GoodsOrdersReqDetailController extends GetxController {
     }
 
     print('Create GO  req  data: $createGoReqModelJsonString');
+  }
+
+  void updatePurchaseOrderData() async {
+    List<SubmitItems> items = [];
+    rowItem.value.forEach((element) {
+      SubmitItems item = SubmitItems(
+          assetItemID: dropdownMapperData[element[0]["value"]]?.id,
+          cost: int.tryParse(element[1]["value"] ?? '0'),
+          ordered_qty: int.tryParse(element[2]["value"] ?? '0'),
+          comment: element[3]["value"] ?? '0');
+
+      items.add(item);
+
+      print('update req  order  data: $item');
+    });
+
+    CreateRequestOrderDataModel createRequestOrderDataModel =
+        CreateRequestOrderDataModel(
+            facilityID: facilityId,
+            items: items,
+            comment: commentCtrlr.text,
+            request_order_id: id);
+
+    var createGoReqModelJsonString = createRequestOrderDataModel.toJson();
+    Map<String, dynamic>? responseCreateGoModel =
+        await goodsOrdersReqDetailPresenter.updatePurchaseOrderData(
+      createGoReq: createGoReqModelJsonString,
+      isLoading: true,
+    );
+    if (responseCreateGoModel != null) {
+      Get.offAllNamed(Routes.purchaseGoodsorder);
+    }
+
+    print('update GO  req  data: $createGoReqModelJsonString');
   }
 }

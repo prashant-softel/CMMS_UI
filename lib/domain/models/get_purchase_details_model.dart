@@ -155,6 +155,7 @@ class GoDetails {
   int? remarks;
   int? receive_later;
   int? asset_type_ID;
+  String? paid_by_name;
 
   GoDetails({
     this.id,
@@ -172,6 +173,7 @@ class GoDetails {
     this.remarks,
     this.receive_later,
     this.asset_type_ID,
+    this.paid_by_name,
   });
 
   GoDetails.fromJson(Map<String, dynamic> json) {
@@ -190,6 +192,7 @@ class GoDetails {
     remarks = json['remarks'];
     receive_later = json['receive_later'];
     asset_type_ID = json['asset_type_ID'];
+    paid_by_name = json['paid_by_name'];
   }
 
   Map<String, dynamic> toJson() {
@@ -209,6 +212,7 @@ class GoDetails {
     data['remarks'] = this.remarks;
     data['receive_later'] = this.receive_later;
     data['asset_type_ID'] = this.asset_type_ID;
+    data['paid_by_name'] = this.paid_by_name;
 
     return data;
   }

@@ -594,6 +594,28 @@ class DataRepository extends DomainRepository {
         isLoading: isLoading ?? false,
       );
 
+  Future<ResponseModel> goodsOrderApprovedButton({
+    required String auth,
+    goodsOrderApproveJsonString,
+    bool? isLoading,
+  }) async =>
+      await connectHelper.goodsOrderApprovedButton(
+        auth: auth,
+        goodsOrderApproveJsonString: goodsOrderApproveJsonString,
+        isLoading: isLoading ?? false,
+      );
+
+  Future<ResponseModel> goodsOrderRejectButton({
+    required String auth,
+    goodsOrderRejectJsonString,
+    bool? isLoading,
+  }) async =>
+      await connectHelper.goodsOrderRejectButton(
+        auth: auth,
+        goodsOrderRejectJsonString: goodsOrderRejectJsonString,
+        isLoading: isLoading ?? false,
+      );
+
   Future<ResponseModel> permitCancelByIssuerButton({
     required String auth,
     String? comment,
@@ -1172,6 +1194,16 @@ class DataRepository extends DomainRepository {
     bool? isLoading,
   }) async =>
       await connectHelper.submitPurchaseOrderData(
+        auth: auth,
+        createGoReq: createGoReq,
+        isLoading: isLoading ?? false,
+      );
+  Future<ResponseModel> updatePurchaseOrderData({
+    required String auth,
+    createGoReq,
+    bool? isLoading,
+  }) async =>
+      await connectHelper.updatePurchaseOrderData(
         auth: auth,
         createGoReq: createGoReq,
         isLoading: isLoading ?? false,
@@ -1773,14 +1805,15 @@ class DataRepository extends DomainRepository {
       Uint8List? fileBytes,
       required String fileName,
       required int importType,
-      required bool isLoading}) async {
+      required bool isLoading,
+      required int facilityId}) async {
     return await connectHelper.browseFiles(
-      auth: auth,
-      fileBytes: fileBytes,
-      fileName: fileName,
-      importType: importType,
-      isLoading: true,
-    );
+        auth: auth,
+        fileBytes: fileBytes,
+        fileName: fileName,
+        importType: importType,
+        isLoading: true,
+        facilityId: facilityId);
     // return true;
   }
 

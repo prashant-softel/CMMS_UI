@@ -678,6 +678,43 @@ class Repository {
     }
   }
 
+  Future<Map<String, dynamic>> updatePurchaseOrderData(
+    createGoReq,
+    bool? isLoading,
+  ) async {
+    try {
+      final auth = await getSecuredValue(LocalKeys.authToken);
+      final res = await _dataRepository.updatePurchaseOrderData(
+        auth: auth,
+        createGoReq: createGoReq,
+        isLoading: isLoading ?? false,
+      );
+
+      var resourceData = res.data;
+
+      print('Response update  req order : ${resourceData}');
+
+      if (!res.hasError) {
+        Fluttertoast.showToast(
+            msg: " Update Req Order Add Successfully...", fontSize: 16.0);
+
+        // if (res.errorCode == 200) {
+        //   var responseMap = json.decode(res.data);
+        //   return responseMap;
+        // }
+
+        // Fluttertoast.showToast(msg: "Data add successfully...", fontSize: 16.0);
+      } else {
+        Utility.showDialog(res.errorCode.toString() + 'createGoodsOrder');
+        //return '';
+      }
+      return Map();
+    } catch (error) {
+      print(error.toString());
+      return Map();
+    }
+  }
+
   Future<Map<String, dynamic>> updateGoodsOrder(
     createGo,
     bool? isLoading,
@@ -1470,6 +1507,76 @@ class Repository {
     } catch (error) {
       log(error.toString());
       return [];
+    }
+  }
+
+  Future<Map<String, dynamic>> goodsOrderApprovedButton(
+    goodsOrderApproveJsonString,
+    bool? isLoading,
+  ) async {
+    try {
+      final auth = await getSecuredValue(LocalKeys.authToken);
+      final res = await _dataRepository.goodsOrderApprovedButton(
+        auth: auth,
+        goodsOrderApproveJsonString: goodsOrderApproveJsonString,
+        isLoading: isLoading ?? false,
+      );
+
+      var resourceData = res.data;
+
+      print('Response Goods Order Approve: ${resourceData}');
+
+      if (!res.hasError) {
+        if (res.errorCode == 200) {
+          var responseMap = json.decode(res.data);
+          return responseMap;
+        } else {
+          // Get.dialog<void>(WarrantyClaimErrorDialog());
+        }
+      } else {
+        Utility.showDialog(
+            res.errorCode.toString() + 'goodsOrderApprovedButton');
+        //return '';
+      }
+      return Map();
+    } catch (error) {
+      print(error.toString());
+      return Map();
+    }
+  }
+
+  Future<Map<String, dynamic>> goodsOrderRejectButton(
+    goodsOrderRejectJsonString,
+    bool? isLoading,
+  ) async {
+    try {
+      final auth = await getSecuredValue(LocalKeys.authToken);
+      final res = await _dataRepository.goodsOrderRejectButton(
+        auth: auth,
+        goodsOrderRejectJsonString: goodsOrderRejectJsonString,
+        isLoading: isLoading ?? false,
+      );
+
+      var resourceData = res.data;
+
+      print('Response Goods Order Approve: ${resourceData}');
+
+      if (!res.hasError) {
+        if (res.errorCode == 200) {
+          var responseMap = json.decode(res.data);
+          return responseMap;
+        } else {
+          // Get.dialog<void>(WarrantyClaimErrorDialog());
+        }
+      } else {
+        Utility.showDialog(
+            res.errorCode.toString() + 'goodsOrderApprovedButton');
+        //return '';
+      }
+      return Map();
+    } catch (error) {
+      print(error.toString());
+      return Map();
     }
   }
 
@@ -4513,16 +4620,16 @@ class Repository {
   }
 
   Future<CreateSOPModel?> browseFiles(Uint8List? fileBytes, String fileName,
-      int? importType, bool isLoading) async {
+      int? importType, bool isLoading, int facilityId) async {
     try {
       final auth = await getSecuredValue(LocalKeys.authToken);
       final res = await _dataRepository.browseFiles(
-        auth: auth,
-        fileBytes: fileBytes,
-        fileName: fileName,
-        importType: importType ?? 0,
-        isLoading: isLoading,
-      );
+          auth: auth,
+          fileBytes: fileBytes,
+          fileName: fileName,
+          importType: importType ?? 0,
+          isLoading: isLoading,
+          facilityId: facilityId);
       if (res != null) {
         print("file upload");
         return res;

@@ -46,28 +46,54 @@ class MrsDetailsModel {
       this.remarks});
 
   factory MrsDetailsModel.fromJson(Map<String?, dynamic> parsedJson) {
-    var list = parsedJson['cmmrsItems'] as List;
+    var list = parsedJson['cmmrsItems'] == null
+        ? []
+        : parsedJson['cmmrsItems'] as List;
     List<CmmrsItems> cmmrsItems =
         list.map((i) => CmmrsItems.fromJson(i)).toList();
 
     return MrsDetailsModel(
-        activity: parsedJson['activity'],
-        approval_date: parsedJson['approval_date'],
-        approval_status: parsedJson['approval_status'],
-        approver_name: parsedJson['approver_name'],
-        id: parsedJson['id'],
-        status: parsedJson['status'],
-        status_short: parsedJson['status_short'],
-        status_long: parsedJson['status_long'],
-        requestd_date: parsedJson['requestd_date'],
-        requested_by_emp_ID: parsedJson['requested_by_emp_ID'],
-        returnDate: parsedJson['returnDate'],
-        requested_by_name: parsedJson['requested_by_name'],
-        whereUsedType: parsedJson['whereUsedPType'],
-        whereUsedTypeId: parsedJson['whereUsedTypeId'],
-        whereUsedTypeName: parsedJson['whereUsedTypeName'],
-        whereUsedRefID: parsedJson['whereUsedRefID'],
-        remarks: parsedJson['remarks'],
+        activity: parsedJson["activity"] == null ? "" : parsedJson['activity'],
+        approval_date: parsedJson["approval_date"] == null
+            ? ""
+            : parsedJson['approval_date'],
+        approval_status: parsedJson["approval_status"] == null
+            ? 0
+            : parsedJson['approval_status'],
+        approver_name: parsedJson["approver_name"] == null
+            ? ""
+            : parsedJson['approver_name'],
+        id: parsedJson["id"] == null ? 0 : parsedJson['id'],
+        status: parsedJson["status"] == null ? 0 : parsedJson['status'],
+        status_short: parsedJson["status_short"] == null
+            ? ""
+            : parsedJson['status_short'],
+        status_long:
+            parsedJson["status_long"] == null ? "" : parsedJson['status_long'],
+        requestd_date: parsedJson["requestd_date"] == null
+            ? ""
+            : parsedJson['requestd_date'],
+        requested_by_emp_ID: parsedJson["requested_by_emp_ID"] == null
+            ? 0
+            : parsedJson['requested_by_emp_ID'],
+        returnDate:
+            parsedJson["returnDate"] == null ? "" : parsedJson['returnDate'],
+        requested_by_name: parsedJson["requested_by_name"] == null
+            ? ""
+            : parsedJson['requested_by_name'],
+        whereUsedType: parsedJson["whereUsedType"] == null
+            ? 0
+            : parsedJson['whereUsedPType'],
+        whereUsedTypeId: parsedJson["whereUsedTypeId"] == null
+            ? 0
+            : parsedJson['whereUsedTypeId'],
+        whereUsedTypeName: parsedJson["whereUsedTypeName"] == null
+            ? ""
+            : parsedJson['whereUsedTypeName'],
+        whereUsedRefID: parsedJson["whereUsedRefID"] == null
+            ? 0
+            : parsedJson['whereUsedRefID'],
+        remarks: parsedJson["remarks"] == null ? "" : parsedJson['remarks'],
         cmmrsItems: cmmrsItems);
   }
 }
@@ -116,25 +142,52 @@ class CmmrsItems {
 
   factory CmmrsItems.fromJson(Map<String, dynamic> parsedJson) {
     return CmmrsItems(
-        id: parsedJson['id'],
-        mrs_return_ID: parsedJson['mrs_return_ID'],
-        asset_item_ID: parsedJson['asset_item_ID'],
-        asset_MDM_code: parsedJson['asset_MDM_code'],
-        returned_qty: parsedJson['returned_qty'],
-        available_qty: parsedJson['available_qty'],
-        used_qty: parsedJson['used_qty'],
-        issued_qty: parsedJson['issued_qty'],
-        approved_date: parsedJson['approved_date'],
-        issued_date: parsedJson['issued_date'],
-        requested_qty: parsedJson['requested_qty'],
-        approval_required: parsedJson['approval_required'],
-        asset_name: parsedJson['asset_name'],
-        asset_type_ID: parsedJson['asset_type_ID'],
-        asset_type: parsedJson['asset_type'],
-        status: parsedJson['status'],
-        status_short: parsedJson['status_short'],
-        status_long: parsedJson['status_long'],
-        issued_qty_controller:
-            TextEditingController(text: parsedJson['issued_qty'].toString()));
+        id: parsedJson["id"] == null ? 0 : parsedJson['id'],
+        mrs_return_ID: parsedJson["mrs_return_ID"] == null
+            ? 0
+            : parsedJson['mrs_return_ID'],
+        asset_item_ID: parsedJson["asset_item_ID"] == null
+            ? 0
+            : parsedJson['asset_item_ID'],
+        asset_MDM_code: parsedJson["asset_MDM_code"] == null
+            ? ""
+            : parsedJson['asset_MDM_code'],
+        returned_qty: parsedJson["returned_qty"] == null
+            ? 0.0
+            : parsedJson['returned_qty'],
+        available_qty: parsedJson["available_qty"] == null
+            ? 0.0
+            : parsedJson['available_qty'],
+        used_qty: parsedJson["used_qty"] == null ? 0.0 : parsedJson['used_qty'],
+        issued_qty:
+            parsedJson["issued_qty"] == null ? 0.0 : parsedJson['issued_qty'],
+        approved_date: parsedJson["approved_date"] == null
+            ? ""
+            : parsedJson['approved_date'],
+        issued_date:
+            parsedJson["issued_date"] == null ? "" : parsedJson['issued_date'],
+        requested_qty: parsedJson["requested_qty"] == null
+            ? 0.0
+            : parsedJson['requested_qty'],
+        approval_required: parsedJson["approval_required"] == null
+            ? ""
+            : parsedJson['approval_required'],
+        asset_name:
+            parsedJson["asset_name"] == null ? "" : parsedJson['asset_name'],
+        asset_type_ID: parsedJson["asset_type_ID"] == null
+            ? 0
+            : parsedJson['asset_type_ID'],
+        asset_type:
+            parsedJson["asset_type"] == null ? "" : parsedJson['asset_type'],
+        status: parsedJson["status"] == null ? 0 : parsedJson['status'],
+        status_short: parsedJson["status_short"] == null
+            ? ''
+            : parsedJson['status_short'],
+        status_long:
+            parsedJson["status_long"] == null ? "" : parsedJson['status_long'],
+        issued_qty_controller: TextEditingController(
+            text: parsedJson["issued_qty_controller"] == null
+                ? ""
+                : parsedJson['issued_qty'].toString()));
   }
 }

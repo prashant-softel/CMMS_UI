@@ -1,9 +1,8 @@
 import 'dart:async';
 
-import 'package:cmms/app/constant/constant.dart';
 import 'package:cmms/app/return_mrs/return_mrs_presenter.dart';
+import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:intl/intl.dart';
 import 'package:scrollable_table_view/scrollable_table_view.dart';
 import '../../domain/models/get_return_mrs_list.dart';
 import '../home/home_controller.dart';
@@ -34,8 +33,44 @@ class ReturnMrsListController extends GetxController {
   // String get formattedTodate => DateFormat('yyyy-MM-dd').format(toDate.value);
 
   ///
+  RxString idFilterText = ''.obs;
+  RxString mrsDetailFilterText = ''.obs;
+  RxString orderDateFilterText = ''.obs;
+  RxString activityFilterText = ''.obs;
+  RxString whereusedFilterText = ''.obs;
+  Rx<int> MrsId = 0.obs;
+
+  final columnVisibility = ValueNotifier<Map<String, bool>>({
+    "MRS ID": true,
+    "MRS Details": true,
+    "Order Date": true,
+    "Activity": true,
+    "Where Used": true,
+  });
+  final Map<String, double> columnwidth = {
+    "MRS ID": 200,
+    "MRS Details": 400,
+    "Order Date": 200,
+    "Activity": 200,
+    "Where Used": 200,
+  };
+  Map<String, RxString> filterText = {};
+  void setColumnVisibility(String columnName, bool isVisible) {
+    final newVisibility = Map<String, bool>.from(columnVisibility.value)
+      ..[columnName] = isVisible;
+    columnVisibility.value = newVisibility;
+    // print({"updated columnVisibility": columnVisibility});
+  }
+
   @override
   void onInit() async {
+    this.filterText = {
+      "MRS ID": idFilterText,
+      "MRS Details": mrsDetailFilterText,
+      "Order Date": orderDateFilterText,
+      "Activity": activityFilterText,
+      "Where Used": whereusedFilterText
+    };
     facilityIdStreamSubscription = homecontroller.facilityId$.listen((event) {
       facilityId = event;
       Future.delayed(Duration(seconds: 2), () {
@@ -69,5 +104,4 @@ class ReturnMrsListController extends GetxController {
       }
     }
   }
-
 }

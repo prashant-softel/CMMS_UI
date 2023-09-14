@@ -382,6 +382,7 @@ class JobCardDetailsContentWeb extends GetView<JobCardDetailsController> {
                                   ),
                                 ),
                               ]),
+
                         Dimens.boxHeight20,
 
                         /// START JOB CARD BUTTON

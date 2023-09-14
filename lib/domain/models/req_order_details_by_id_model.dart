@@ -36,6 +36,7 @@ class GetRODetailsByIDModel {
     this.status_short,
     this.status_long,
     this.facilityName,
+    this.comment,
     this.request_order_items,
   });
 
@@ -46,6 +47,7 @@ class GetRODetailsByIDModel {
         facilityName: parsedJson["facilityName"] ?? "",
         rejectedRemark: parsedJson["rejectedRemark"] ?? "",
         status: parsedJson["status"] ?? "",
+        comment: parsedJson["comment"] ?? "",
         status_short: parsedJson["status_short"] ?? "",
         generatedBy: parsedJson["generatedBy"] ?? "",
         approvedBy: parsedJson["approvedBy"] ?? "",
@@ -62,6 +64,7 @@ class GetRODetailsByIDModel {
         "facilityName": facilityName,
         "rejectedRemark": rejectedRemark,
         "status": status,
+        "comment": comment,
         "status_short": status_short,
         "generatedBy": generatedBy,
         "approvedBy": approvedBy,

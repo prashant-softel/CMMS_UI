@@ -58,6 +58,19 @@ class ViewPermitPresenter {
         isLoading: isLoading ?? false,
       );
 
+   Future<void> permitExtendButton({
+    String? comment,
+    String? Time,
+    String? id,
+    bool? isLoading,
+  }) async =>
+      await viewPermitUsecase.permitExtendButton(
+        comment: comment,
+        Time: Time,
+        id: id,
+        isLoading: isLoading ?? false,
+      );
+
    Future<void> permitRejectButton({
     String? comment,
     String? id,

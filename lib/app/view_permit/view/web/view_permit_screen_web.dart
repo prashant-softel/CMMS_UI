@@ -13,9 +13,11 @@ import 'package:cmms/app/widgets/file_upload_with_dropzone_widget.dart';
 import 'package:cmms/app/widgets/history_table_widget_web.dart';
 import 'package:cmms/app/widgets/permit_approved_dialog.dart';
 import 'package:cmms/app/widgets/permit_cancel_by_approver_dialog.dart';
+import 'package:cmms/app/widgets/permit_extend_dialog.dart';
 import 'package:cmms/app/widgets/permit_reject_dialog.dart';
 import 'package:data_table_2/data_table_2.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
 import 'package:multi_select_flutter/multi_select_flutter.dart';
@@ -1600,6 +1602,11 @@ class ViewPermitWebScreen extends GetView<ViewPermitController> {
                                           ),
                                           GestureDetector(
                                             onTap: () {
+                                              final _flutterSecureStorage =
+                                                  const FlutterSecureStorage();
+
+                                              _flutterSecureStorage.delete(
+                                                  key: "permitId");
                                               Get.back();
                                             },
                                             child: Text(" / NEW PERMIT LIST",
@@ -1635,13 +1642,13 @@ class ViewPermitWebScreen extends GetView<ViewPermitController> {
                                                 color: controller
                                                                 .viewPermitDetailsModel
                                                                 .value
-                                                                ?.current_status_short ==
-                                                            "Approved" ||
+                                                                ?.ptwStatus ==
+                                                            125 ||
                                                         controller
                                                                 .viewPermitDetailsModel
                                                                 .value
-                                                                ?.current_status_short ==
-                                                            "Waiting for Approval"
+                                                                ?.ptwStatus ==
+                                                            121
                                                     ? ColorValues.approveColor
                                                     : ColorValues.appRedColor,
                                                 width: 1,
@@ -1651,13 +1658,13 @@ class ViewPermitWebScreen extends GetView<ViewPermitController> {
                                                   color: controller
                                                                   .viewPermitDetailsModel
                                                                   .value
-                                                                  ?.current_status_short ==
-                                                              "Approved" ||
+                                                                  ?.ptwStatus ==
+                                                              125 ||
                                                           controller
                                                                   .viewPermitDetailsModel
                                                                   .value
-                                                                  ?.current_status_short ==
-                                                              "Waiting for Approval"
+                                                                  ?.ptwStatus ==
+                                                              121
                                                       ? ColorValues.approveColor
                                                       : ColorValues.appRedColor,
                                                 ),
@@ -1764,7 +1771,7 @@ class ViewPermitWebScreen extends GetView<ViewPermitController> {
                                                                             child:
                                                                                 Text(
                                                                               "${element?.equipmentCat}",
-                                                                              style: TextStyle(color: Color.fromARGB(255, 5, 92, 163)),
+                                                                              style: Styles.blue17,
                                                                             ),
                                                                           )
                                                                         ],
@@ -1863,7 +1870,7 @@ class ViewPermitWebScreen extends GetView<ViewPermitController> {
                                             CrossAxisAlignment.start,
                                         children: [
                                           Text(
-                                            'Permit Description: ',
+                                            'Work Description: ',
                                             style: Styles.black17,
                                           ),
                                           Dimens.boxHeight5,
@@ -2058,14 +2065,13 @@ class ViewPermitWebScreen extends GetView<ViewPermitController> {
                                                       mainAxisSize:
                                                           MainAxisSize.min,
                                                       mainAxisAlignment:
-                                                          MainAxisAlignment
-                                                              .start,
+                                                          MainAxisAlignment.end,
                                                       crossAxisAlignment:
                                                           CrossAxisAlignment
-                                                              .start,
+                                                              .end,
                                                       children: [
                                                         Text(
-                                                            "${element?.isolationAssetsCatName}",
+                                                            "${element?.isolationAssetsCatName?.split(',')}",
                                                             style:
                                                                 Styles.blue17)
                                                       ],
@@ -2153,6 +2159,8 @@ class ViewPermitWebScreen extends GetView<ViewPermitController> {
                                         ],
                                       ),
                                     ),
+
+                                    ///Team Deployed
                                     Container(
                                       margin: Dimens.edgeInsets20,
                                       height:
@@ -2336,15 +2344,9 @@ class ViewPermitWebScreen extends GetView<ViewPermitController> {
                                                         SizedBox(
                                                           width: 150,
                                                           child: Text(
-                                                            '${controller.viewPermitDetailsModel.value?.job_type_name ?? 'No Data Found'}',
-                                                            style: TextStyle(
-                                                                color: Color
-                                                                    .fromARGB(
-                                                                        255,
-                                                                        5,
-                                                                        92,
-                                                                        163)),
-                                                          ),
+                                                              '${controller.viewPermitDetailsModel.value?.job_type_name ?? 'No Data Found'}',
+                                                              style: Styles
+                                                                  .blue17),
                                                         ),
 
                                                         SizedBox(
@@ -2358,15 +2360,9 @@ class ViewPermitWebScreen extends GetView<ViewPermitController> {
                                                         SizedBox(
                                                           width: 200,
                                                           child: Text(
-                                                            '${controller.viewPermitDetailsModel.value?.sop_type_name ?? 'No Data Found'}',
-                                                            style: TextStyle(
-                                                                color: Color
-                                                                    .fromARGB(
-                                                                        255,
-                                                                        5,
-                                                                        92,
-                                                                        163)),
-                                                          ),
+                                                              '${controller.viewPermitDetailsModel.value?.sop_type_name ?? 'No Data Found'}',
+                                                              style: Styles
+                                                                  .blue17),
                                                         ),
                                                         // Checkbox(
                                                         //   value: controller
@@ -2660,10 +2656,58 @@ class ViewPermitWebScreen extends GetView<ViewPermitController> {
                                     //         controller.historyList,
                                     //   ),
                                     // ),
+                                     controller.viewPermitDetailsModel.value?.isExpired == 1 &&
+                          controller.viewPermitDetailsModel.value?.ptwStatus ==
+                              125 ||
+                      controller.viewPermitDetailsModel.value?.ptwStatus == 135
+                                    ?Container(
+                                      margin: EdgeInsets.all(20),
+                                      // height: ,
+                                      width: MediaQuery.of(context).size.width /
+                                          1,
+                                      child: Column(
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.start,
+                                        crossAxisAlignment:
+                                            CrossAxisAlignment.start,
+                                        children: [
+                                          Text(
+                                              StringConstants.extendPermitText,style: Styles.black17,),
+                                          Row(
+                                            mainAxisAlignment:
+                                                MainAxisAlignment.start,
+                                            crossAxisAlignment:
+                                                CrossAxisAlignment.start,
+                                            children: [
+                                             checkBoxInstructionMethod(0),
+                                              Padding(
+                                                padding: const EdgeInsets.only(top: 3),
+                                                child: Text(StringConstants
+                                                    .extendCheckPermitText,style: Styles.black17,),
+                                              )
+                                            ],
+                                          ),
+                                          Row(
+                                            mainAxisAlignment:
+                                                MainAxisAlignment.start,
+                                            crossAxisAlignment:
+                                                CrossAxisAlignment.start,
+                                            children: [
+                                              checkBoxInstructionMethod(1),
+                                              Padding(
+                                                padding: const EdgeInsets.only(top: 5),
+                                                child: Text(StringConstants
+                                                    .extendCheck2PermitText,style: Styles.black17,),
+                                              )
+                                            ],
+                                          )
+                                        ],
+                                      ),
+                                    )
+                                    :Dimens.box0,
 
-                                    SizedBox(
-                                      height: 10,
-                                    ),
+
+                                    Dimens.boxHeight10,
                                     Container(
                                       margin: EdgeInsets.all(20),
                                       child: Row(
@@ -2893,6 +2937,27 @@ class ViewPermitWebScreen extends GetView<ViewPermitController> {
               SizedBox(
                 width: 10,
               ),
+
+              ///Extend Permit Button
+              controller.viewPermitDetailsModel.value?.isExpired == 1 &&
+                          controller.viewPermitDetailsModel.value?.ptwStatus ==
+                              125 ||
+                      controller.viewPermitDetailsModel.value?.ptwStatus == 135
+                  ? Container(
+                      height: 45,
+                      child: CustomElevatedButton(
+                        backgroundColor: ColorValues.appDarkBlueColor,
+                        text: "Extend Permit",
+                        icon: Icons.expand_outlined,
+                        onPressed: () {
+                          // controller
+                          Get.dialog(PermitExtendDialog(
+                            permitId:
+                                '${controller.viewPermitDetailsModel.value?.permitNo}',
+                          ));
+                        },
+                      ))
+                  : Container(),
 
               ///Reject Button
               varUserAccessModel.value.access_list!
@@ -3799,6 +3864,15 @@ class ViewPermitWebScreen extends GetView<ViewPermitController> {
         'View Competeness',
         style: TextStyle(color: Colors.white),
       )),
+    );
+  }
+
+  checkBoxInstructionMethod(int position) {
+    return Checkbox(
+      value: position == 0 ? controller.isCheckedRequire.value : controller.isCheckedRequire2.value,
+      onChanged: (bool? value) {
+        position == 0 ?controller.requiretoggleCheckbox() : controller.requiretoggleCheckbox2();
+      },
     );
   }
 }

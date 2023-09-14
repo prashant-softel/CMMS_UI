@@ -35,4 +35,14 @@ class GoodsOrdersReqDetailPresenter {
       isLoading: isLoading,
     );
   }
+
+  Future<Map<String, dynamic>?> updatePurchaseOrderData({
+    createGoReq,
+    required bool isLoading,
+  }) async {
+    return goodsOrdersReqDetailUsecase.updatePurchaseOrderData(
+      createGoReq: createGoReq,
+      isLoading: isLoading,
+    );
+  }
 }

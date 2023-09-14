@@ -22,6 +22,7 @@ import 'package:cmms/domain/models/facility_model.dart';
 import 'package:cmms/domain/models/inventory_model.dart';
 import 'package:cmms/domain/models/type_permit_model.dart';
 import 'package:flutter/widgets.dart';
+import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
 import 'package:pdf/pdf.dart';
@@ -109,6 +110,10 @@ class ViewPermitController extends GetxController {
   void _doSomething() {
     // Do something
   }
+
+  TextEditingController extendReasonCommentTextFieldCtrlr =
+      TextEditingController();
+  TextEditingController timeTextFieldCtrlr = TextEditingController();
 
   int? selectedFacilityId = 0;
   int selectedTypePermitId = 0;
@@ -270,6 +275,18 @@ class ViewPermitController extends GetxController {
     rowsPerPage: 10,
   );
 
+  ///Checkbox
+  RxBool isCheckedRequire = false.obs;
+  void requiretoggleCheckbox() {
+    isCheckedRequire.value = !isCheckedRequire.value; // Toggle the checkbox state
+  }
+
+   RxBool isCheckedRequire2 = false.obs;
+  void requiretoggleCheckbox2() {
+    isCheckedRequire2.value = !isCheckedRequire2.value; // Toggle the checkbox state
+  }
+
+
   TextEditingController approveCommentTextFieldCtrlr = TextEditingController();
   TextEditingController rejectCommentTextFieldCtrlr = TextEditingController();
   TextEditingController cancelCommentByApproverTextFieldCtrlr =
@@ -299,6 +316,9 @@ class ViewPermitController extends GetxController {
   Map<String, dynamic> data = {};
   @override
   void onInit() async {
+    final _flutterSecureStorage = const FlutterSecureStorage();
+    // Read jobId
+    String? _permitId = await _flutterSecureStorage.read(key: "permitId");
     //  data = Get.arguments;
     // print('Data permitId ${data['permitId']}');
     // print('Data JobId ${data['jobId']}');
@@ -376,6 +396,23 @@ class ViewPermitController extends GetxController {
     // showAlertPermitApproveDialog();
     print('Approved Data:${_approveComment}');
     print('Approved Data:${permitId}');
+  }
+
+   Future<void> permitExtendButton({String? permitId}) async {
+    String _reasonForExtensionComment =
+        extendReasonCommentTextFieldCtrlr.text.trim();
+    String _timeForExtensionComment = timeTextFieldCtrlr.text.trim();
+
+    final _permitextendBtn = await viewPermitPresenter.permitExtendButton(
+      comment: _reasonForExtensionComment,
+      Time: _timeForExtensionComment,
+      id: permitId,
+    );
+    // showAlertPermitApproveDialog();
+
+    print('Extend Button Data:${_reasonForExtensionComment}');
+    print('Extend Button Data:${_timeForExtensionComment}');
+    print('Extend Button Data:${permitId}');
   }
 
   Future<void> permitRejectButton({String? permitId}) async {

@@ -9,6 +9,7 @@ String newPermitDetailModelToJson(NewPermitDetailModel data) => json.encode(data
 
 
 class NewPermitDetailModel {
+  int? isExpired;
   int? insertedId;
   int? ptwStatus;
   int? permitNo;
@@ -59,6 +60,7 @@ class NewPermitDetailModel {
 
    NewPermitDetailModel(
        {
+      this.isExpired,
       this.insertedId,
       this.ptwStatus,
       this.permitNo,
@@ -107,6 +109,7 @@ class NewPermitDetailModel {
 
   factory NewPermitDetailModel.fromJson(Map<String, dynamic> json) =>
       NewPermitDetailModel(
+        isExpired: json['isExpired'],
         insertedId: json["insertedId"],
         ptwStatus: json["ptwStatus"],
         permitNo: json["permitNo"],
@@ -165,6 +168,7 @@ class NewPermitDetailModel {
       );
 
   Map<String, dynamic> toJson() => {
+        "isExpired": isExpired,
         "insertedId": insertedId,
         "ptwStatus": ptwStatus,
         "permitNo": permitNo,

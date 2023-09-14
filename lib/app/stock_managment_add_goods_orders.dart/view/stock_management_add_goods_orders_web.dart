@@ -813,7 +813,7 @@ class _AddGoodsOrdersWebState extends State<AddGoodsOrdersWeb> {
                                             ].map((column) {
                                               return TableViewColumn(
                                                 label: column,
-                                                minWidth: Get.width * 0.18,
+                                                minWidth: Get.width * 0.23,
                                                 height: Get.height / 2,
                                               );
                                             }).toList(),

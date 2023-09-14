@@ -14,6 +14,8 @@ import 'package:cmms/app/widgets/create_jc_success_message_dialog.dart';
 import 'package:cmms/app/widgets/create_permit_dialog.dart';
 import 'package:cmms/app/widgets/create_sop_dialog.dart';
 import 'package:cmms/app/widgets/end_mc_execution_message_dialog.dart';
+import 'package:cmms/app/widgets/goods_order_message_approve_dialog.dart';
+import 'package:cmms/app/widgets/goods_order_message_reject_dialog.dart';
 import 'package:cmms/app/widgets/incident_report_approve_message_dialog.dart';
 import 'package:cmms/app/widgets/incident_report_reject_message_dialog.dart';
 import 'package:cmms/app/widgets/new_warranty_claim_dialog.dart';
@@ -773,6 +775,54 @@ class ConnectHelper {
     var parsedJson = json.decode(res);
     Get.dialog<void>(
         PermitMessageApproveDialog(data: parsedJson['message'], jobId: jobId));
+
+    return responseModel;
+  }
+
+  Future<ResponseModel> goodsOrderApprovedButton({
+    required String auth,
+    goodsOrderApproveJsonString,
+    bool? isLoading,
+  }) async {
+    var responseModel = await apiWrapper.makeRequest(
+      'GO/ApproveGO',
+      Request.post,
+      goodsOrderApproveJsonString,
+      isLoading ?? false,
+      {
+        'Content-Type': 'application/json',
+        'Authorization': 'Bearer $auth',
+      },
+    );
+    print('goodsOrderApproveResponse: ${responseModel.data}');
+    var res = responseModel.data;
+    var parsedJson = json.decode(res);
+    Get.dialog<void>(GoodsOrderMessageApproveDialog(
+        data: parsedJson['message'], id: parsedJson['id']));
+
+    return responseModel;
+  }
+
+  Future<ResponseModel> goodsOrderRejectButton({
+    required String auth,
+    goodsOrderRejectJsonString,
+    bool? isLoading,
+  }) async {
+    var responseModel = await apiWrapper.makeRequest(
+      'GO/RejectGO',
+      Request.post,
+      goodsOrderRejectJsonString,
+      isLoading ?? false,
+      {
+        'Content-Type': 'application/json',
+        'Authorization': 'Bearer $auth',
+      },
+    );
+    print('goodsOrderApproveResponse: ${responseModel.data}');
+    var res = responseModel.data;
+    var parsedJson = json.decode(res);
+    Get.dialog<void>(GoodsOrderMessageRejectDialog(
+        data: parsedJson['message'], id: parsedJson['id']));
 
     return responseModel;
   }
@@ -1948,6 +1998,32 @@ class ConnectHelper {
     return responseModel;
   }
 
+  Future<ResponseModel> updatePurchaseOrderData({
+    required String auth,
+    createGoReq,
+    bool? isLoading,
+  }) async {
+    var responseModel = await apiWrapper.makeRequest(
+      'RequestOrder/UpdateRequestOrder',
+      Request.post,
+      createGoReq,
+      isLoading ?? false,
+      {
+        'Content-Type': 'application/json',
+        'Authorization': 'Bearer $auth',
+      },
+    );
+
+    print('Update Req Order:${responseModel.data}');
+    var res = responseModel.data;
+    var parsedJson = json.decode(res);
+    // if (res.e != null) {
+    //   Get.dialog<void>(WarrantyClaimErrorDialog());
+    // } else {
+
+    return responseModel;
+  }
+
   Future<ResponseModel> updateGoodsOrder({
     required String auth,
     createGo,
@@ -2862,13 +2938,13 @@ class ConnectHelper {
     return responseModel;
   }
 
-  Future<CreateSOPModel> browseFiles({
-    required String auth,
-    Uint8List? fileBytes,
-    required String fileName,
-    required int importType,
-    bool? isLoading,
-  }) async {
+  Future<CreateSOPModel> browseFiles(
+      {required String auth,
+      Uint8List? fileBytes,
+      required String fileName,
+      required int importType,
+      bool? isLoading,
+      required int facilityId}) async {
     final request = http.MultipartRequest('POST',
         Uri.parse('http://65.0.20.19/CMMS_API/api/FileUpload/UploadFile'));
 
@@ -2887,7 +2963,8 @@ class ConnectHelper {
         importInventory(
             auth: auth,
             fileId: jsonResponse["id"][0].toString(),
-            isLoading: true);
+            isLoading: true,
+            facilityId: facilityId);
       } else if (importType == 2) {
         importUser(
             auth: auth,
@@ -2915,13 +2992,13 @@ class ConnectHelper {
     return createSOPModel;
   }
 
-  Future<ResponseModel> importInventory({
-    required String auth,
-    required String fileId,
-    required bool isLoading,
-  }) async {
+  Future<ResponseModel> importInventory(
+      {required String auth,
+      required String fileId,
+      required bool isLoading,
+      required int facilityId}) async {
     var responseModel = await apiWrapper.makeRequest(
-      'Inventory/ImportInventories?file_id=$fileId&facilityID=45',
+      'Inventory/ImportInventories?file_id=$fileId&facilityID=$facilityId',
       Request.post,
       null,
       false,

@@ -14,14 +14,18 @@ import '../theme/dimens.dart';
 import '../theme/styles.dart';
 
 class PermitApprovedDialog extends GetView {
- String? permitApprovedDialog;
- String? permitId;
- String? ptwStatus;
- int? jobId;
- 
-  PermitApprovedDialog({super.key, this.permitApprovedDialog, this.permitId, this.ptwStatus, this.jobId});
-  final ViewPermitController _controller = Get.find();
+  String? permitApprovedDialog;
+  String? permitId;
+  String? ptwStatus;
+  int? jobId;
 
+  PermitApprovedDialog(
+      {super.key,
+      this.permitApprovedDialog,
+      this.permitId,
+      this.ptwStatus,
+      this.jobId});
+  final ViewPermitController _controller = Get.find();
 
   @override
   Widget build(BuildContext context) {
@@ -40,102 +44,101 @@ class PermitApprovedDialog extends GetView {
         content: Builder(builder: (context) {
           var height = MediaQuery.of(context).size.height;
 
-          return 
-             Container(
-              padding: Dimens.edgeInsets05_0_5_0,
-              height: 200,
-              width: 400,
-              child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.stretch,
-                  children: [
-                    Divider(
-                      color: ColorValues.greyLightColour,
-                      thickness: 1,
-                    ),
-                    Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                       
-                       CustomRichText(title: 'Comment'),
-                       SizedBox(height: 20,),
-                       TextField(
+          return Container(
+            padding: Dimens.edgeInsets05_0_5_0,
+            height: MediaQuery.of(context).size.height / 1.5,
+            width: MediaQuery.of(context).size.width / 1.5,
+            child: Column(
+                crossAxisAlignment: CrossAxisAlignment.stretch,
+                children: [
+                  Divider(
+                    color: ColorValues.greyLightColour,
+                    thickness: 1,
+                  ),
+                  Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text(
+                        ptwStatus == '133'
+                            ? ''
+                            : """This certifies that I (PERMIT APPROVER) have personally completed a safety inspection of the area where this work is to be done as well as the surrounding areas, with specific attention to the type of work for which this PTW is being issued. I have reviewed the necessary precautions required to be taken for safely executing the work as mentioned in the checkpoints of this PTW to protect man and machinery engaged in this work from injury accident. I have made sure that the assigned personnel know the applicable
+
+work is to be done as well as the surrounding areas, with specific attention to the type of work for which this PTW is being issued. I have reviewed the necessary precautions required to be taken for safely executing the work as mentioned in the checkpoints of this PTW to protect man and machinery engaged in this work from injury accident. I have made sure that the assigned personnel know the applicable safety rules and that they know what to do in an emergency.""",
+                        textAlign: TextAlign.left,
+                        // style: TextStyle(color: Colors.green),
+                      ),
+                      Dimens.boxHeight20,
+                      CustomRichText(title: 'Comment'),
+                      Dimens.boxHeight10,
+                      TextField(
                         controller: _controller.approveCommentTextFieldCtrlr,
                         maxLines: 4,
                         decoration: InputDecoration(
                           hintText: 'Comment here....',
                           enabledBorder: OutlineInputBorder(
-                            borderSide: BorderSide(color: Colors.black,),
-                          
+                            borderSide: BorderSide(
+                              color: Colors.black,
+                            ),
                           ),
                           focusedBorder: OutlineInputBorder(
-                          borderSide: BorderSide( color: Colors.black),
-                           ),
-                          
+                            borderSide: BorderSide(color: Colors.black),
+                          ),
                         ),
-                       ),
-                       
-                       
+                      ),
+                    ],
+                  ),
+                  // SizedBox(
+                  //   height: 20,
+                  // ),
+                  // Row(
+                  //     mainAxisAlignment: MainAxisAlignment.center,
+                  //     children: [
 
-                      ],
-                    ),
-                    // SizedBox(
-                    //   height: 20,
-                    // ),
-                    // Row(
-                    //     mainAxisAlignment: MainAxisAlignment.center,
-                    //     children: [
-                          
-                          
-                    //       Dimens.boxWidth10,
-                    //       ElevatedButton(
-                    //         style: Styles.greenElevatedButtonStyle,
-                    //         onPressed: () {
-                    //           _controller.permitApprovedButton(permitId:permitId);
-                    //           Get.back();
-                    //         },
-                    //         child: const Text('Permit Approve'),
-                    //       ),
-                    //       // Dimens.boxWidth10,
-                    //       // ElevatedButton(
-                    //       //   style: Styles.redElevatedButtonStyle,
-                    //       //   onPressed: () => Get.offAndToNamed(Routes.addJob),
-                    //       //   child: const Text('Add New Job'),
-                    //       // ),
-                    //     ]),
-                  ]),
-            );
-          
+                  //       Dimens.boxWidth10,
+                  //       ElevatedButton(
+                  //         style: Styles.greenElevatedButtonStyle,
+                  //         onPressed: () {
+                  //           _controller.permitApprovedButton(permitId:permitId);
+                  //           Get.back();
+                  //         },
+                  //         child: const Text('Permit Approve'),
+                  //       ),
+                  //       // Dimens.boxWidth10,
+                  //       // ElevatedButton(
+                  //       //   style: Styles.redElevatedButtonStyle,
+                  //       //   onPressed: () => Get.offAndToNamed(Routes.addJob),
+                  //       //   child: const Text('Add New Job'),
+                  //       // ),
+                  //     ]),
+                ]),
+          );
         }),
         actions: [
-           SizedBox(
-                      height: 20,
-                    ),
-                    Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          
-                          Dimens.boxWidth10,
-                          ElevatedButton(
-                            style: Styles.darkRedElevatedButtonStyle,
-                            onPressed: () {
-                              Get.back();
-                            },
-                            child: const Text('Cancel'),
-                          ),
-                           Dimens.boxWidth20,
-                          ElevatedButton(
-                            style: Styles.greenElevatedButtonStyle,
-                            onPressed: () {
-                              _controller.permitApprovedButton(permitId:permitId, ptwStatus: '$ptwStatus',jobId: jobId);
-                              print('jobId:$jobId');
-                              Get.back();
-                            },
-                            child:  Text('${ptwStatus == '133' ? 'Extend Approve' : 'Approve Permit'}'),
-                          ),
-                        ]),
+          
+          Row(mainAxisAlignment: MainAxisAlignment.center, children: [
+            Dimens.boxWidth10,
+            ElevatedButton(
+              style: Styles.darkRedElevatedButtonStyle,
+              onPressed: () {
+                Get.back();
+              },
+              child: const Text('Cancel'),
+            ),
+            Dimens.boxWidth20,
+            ElevatedButton(
+              style: Styles.greenElevatedButtonStyle,
+              onPressed: () {
+                _controller.permitApprovedButton(
+                    permitId: permitId, ptwStatus: '$ptwStatus', jobId: jobId);
+                print('jobId:$jobId');
+                Get.back();
+              },
+              child: Text(
+                  '${ptwStatus == '133' ? 'Extend Approve' : 'Approve Permit'}'),
+            ),
+          ]),
         ],
       );
     }));
- 
   }
 }
