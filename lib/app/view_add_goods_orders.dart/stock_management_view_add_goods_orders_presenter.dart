@@ -41,6 +41,16 @@ class ViewAddGoodsOrdersPresenter {
     );
   }
 
+  Future<Map<String, dynamic>?> goodsOrderCloseButton({
+    goodsOrderCloseJsonString,
+    required bool isLoading,
+  }) async {
+    return viewAddGoodsOrdersUsecase.goodsOrderCloseButton(
+      goodsOrderCloseJsonString: goodsOrderCloseJsonString,
+      isLoading: isLoading,
+    );
+  }
+
   Future<List<BusinessListModel?>?> getBusinessList({
     required int ListType,
     required bool isLoading,

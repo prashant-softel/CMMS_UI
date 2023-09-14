@@ -1,5 +1,6 @@
 import 'package:cmms/app/app.dart';
 import 'package:cmms/app/view_add_goods_orders.dart/stock_management_view_add_goods_orders_controller.dart';
+import 'package:cmms/app/widgets/close_goods_order_dialog.dart';
 import 'package:cmms/app/widgets/custom_elevated_button.dart';
 import 'package:cmms/app/widgets/goods_order_approve_dialog.dart';
 import 'package:cmms/app/widgets/goods_order_reject_dialog.dart';
@@ -949,6 +950,21 @@ class _ViewAddGoodsOrdersWebState extends State<ViewAddGoodsOrdersWeb> {
                                             icon: Icons.close,
                                             onPressed: () {
                                               Get.dialog(GoodsOrderRejectDialog(
+                                                id: controller.id,
+                                              ));
+                                            },
+                                          ),
+                                        ),
+                                        Dimens.boxWidth10,
+                                        Container(
+                                          height: 45,
+                                          child: CustomElevatedButton(
+                                            backgroundColor:
+                                                ColorValues.rejectColor,
+                                            text: "Close",
+                                            icon: Icons.close,
+                                            onPressed: () {
+                                              Get.dialog(GoodsOrderCloseDialog(
                                                 id: controller.id,
                                               ));
                                             },

@@ -15,6 +15,7 @@ import 'package:cmms/app/widgets/create_permit_dialog.dart';
 import 'package:cmms/app/widgets/create_sop_dialog.dart';
 import 'package:cmms/app/widgets/end_mc_execution_message_dialog.dart';
 import 'package:cmms/app/widgets/goods_order_message_approve_dialog.dart';
+import 'package:cmms/app/widgets/goods_order_message_close_dialog.dart';
 import 'package:cmms/app/widgets/goods_order_message_reject_dialog.dart';
 import 'package:cmms/app/widgets/incident_report_approve_message_dialog.dart';
 import 'package:cmms/app/widgets/incident_report_reject_message_dialog.dart';
@@ -822,6 +823,30 @@ class ConnectHelper {
     var res = responseModel.data;
     var parsedJson = json.decode(res);
     Get.dialog<void>(GoodsOrderMessageRejectDialog(
+        data: parsedJson['message'], id: parsedJson['id']));
+
+    return responseModel;
+  }
+
+  Future<ResponseModel> goodsOrderCloseButton({
+    required String auth,
+    goodsOrderCloseJsonString,
+    bool? isLoading,
+  }) async {
+    var responseModel = await apiWrapper.makeRequest(
+      'GO/CloseGO',
+      Request.post,
+      goodsOrderCloseJsonString,
+      isLoading ?? false,
+      {
+        'Content-Type': 'application/json',
+        'Authorization': 'Bearer $auth',
+      },
+    );
+    print('goodsOrderRejecteResponse: ${responseModel.data}');
+    var res = responseModel.data;
+    var parsedJson = json.decode(res);
+    Get.dialog<void>(GoodsOrderMessageCloseDialog(
         data: parsedJson['message'], id: parsedJson['id']));
 
     return responseModel;

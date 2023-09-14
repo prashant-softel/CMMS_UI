@@ -8,10 +8,10 @@ import 'package:get/get.dart';
 import '../theme/dimens.dart';
 import '../theme/styles.dart';
 
-class GoodsOrderRejectDialog extends GetView {
+class GoodsOrderCloseDialog extends GetView {
   int? id;
 
-  GoodsOrderRejectDialog({super.key, this.id});
+  GoodsOrderCloseDialog({super.key, this.id});
   final ViewAddGoodsOrdersController _controller = Get.find();
 
   @override
@@ -24,7 +24,7 @@ class GoodsOrderRejectDialog extends GetView {
         insetPadding: Dimens.edgeInsets10_0_10_0,
         contentPadding: EdgeInsets.zero,
         title: Text(
-          "Goods Order Reject",
+          "Goods Order Close",
           textAlign: TextAlign.center,
           // style: TextStyle(color: Colors.green),
         ),
@@ -50,7 +50,7 @@ class GoodsOrderRejectDialog extends GetView {
                         height: 20,
                       ),
                       TextField(
-                        controller: _controller.rejectCommentTextFieldCtrlr,
+                        controller: _controller.closeCommentTextFieldCtrlr,
                         maxLines: 4,
                         decoration: InputDecoration(
                           hintText: 'Comment here....',
@@ -86,11 +86,11 @@ class GoodsOrderRejectDialog extends GetView {
             ElevatedButton(
               style: Styles.darkRedElevatedButtonStyle,
               onPressed: () {
-                _controller.goodsOrderRejectButton(id: id);
+                _controller.goodsOrderCloseButton(id: id);
                 print('Goods order id:$id');
                 Get.back();
               },
-              child: Text('Reject Goods'),
+              child: Text('Close Goods'),
             ),
           ]),
         ],
