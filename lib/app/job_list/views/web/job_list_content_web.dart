@@ -203,7 +203,6 @@ class JobListContentWeb extends StatelessWidget {
                                     onPressed: () {},
                                     text: 'PDF'),
                               ),
-                                
                             ],
                           ),
                           SizedBox(
@@ -221,8 +220,8 @@ class JobListContentWeb extends StatelessWidget {
                                     headingRowHeight: Get.height * 0.12,
                                     minWidth: 20000, //Get.width * 1.2,
                                     showCheckboxColumn: false,
-                                    rowsPerPage: 10, // Number of rows per page
-                                    availableRowsPerPage: [10, 20, 30, 50],
+                                    //  rowsPerPage: 10, // Number of rows per page
+                                    //    availableRowsPerPage: [10, 20, 30, 50],
                                     columns: [
                                       buildDataColumn(
                                         'id',

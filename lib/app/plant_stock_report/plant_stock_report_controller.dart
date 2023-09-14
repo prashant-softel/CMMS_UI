@@ -1,8 +1,8 @@
 import 'dart:async';
 
 import 'package:cmms/app/plant_stock_report/plant_stock_report_presenter.dart';
-import 'package:cmms/domain/models/get_mrs_list_model.dart';
 import 'package:cmms/domain/models/get_plant_Stock_list.dart';
+import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
 import 'package:scrollable_table_view/scrollable_table_view.dart';
@@ -38,9 +38,48 @@ class PlantStockReportController extends GetxController {
   String get formattedFromdate1 =>
       DateFormat('yyyy-MM-dd').format(fromDate.value);
 
+  RxString assetNameFilterText = ''.obs;
+  RxString assetsCodeFilterText = ''.obs;
+  RxString openingFilterText = ''.obs;
+  RxString inwardFilterText = ''.obs;
+  RxString outwardFilterText = ''.obs;
+  RxString balanceFilterText = ''.obs;
+
+  final columnVisibility = ValueNotifier<Map<String, bool>>({
+    "Assets Name": true,
+    "Assets Code": true,
+    "Opening": true,
+    "Inward": true,
+    "Outward": true,
+    "Balance": true,
+  });
+  final Map<String, double> columnwidth = {
+    "Assets Name": 300,
+    "Assets Code": 250,
+    "Opening": 100,
+    "Inward": 100,
+    "Outward": 100,
+    "Balance": 100,
+  };
+  Map<String, RxString> filterText = {};
+  void setColumnVisibility(String columnName, bool isVisible) {
+    final newVisibility = Map<String, bool>.from(columnVisibility.value)
+      ..[columnName] = isVisible;
+    columnVisibility.value = newVisibility;
+    // print({"updated columnVisibility": columnVisibility});
+  }
+
   ///
   @override
   void onInit() async {
+    this.filterText = {
+      "Assets Name": assetNameFilterText,
+      "Assets Code": assetsCodeFilterText,
+      "Opening": openingFilterText,
+      "Inward": inwardFilterText,
+      "Outward": outwardFilterText,
+      "Balance": balanceFilterText,
+    };
     facilityIdStreamSubscription = homecontroller.facilityId$.listen((event) {
       facilityId = event;
       Future.delayed(Duration(seconds: 2), () {

@@ -1,4 +1,6 @@
+import 'dart:async';
 import 'dart:typed_data';
+import 'package:cmms/app/home/home_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import '../theme/color_values.dart';
@@ -14,15 +16,22 @@ class ImportInventoryController extends GetxController {
   Uint8List? fileBytes;
 
   int type = 0;
+  StreamSubscription<int>? facilityIdStreamSubscription;
+  int facilityId = 0;
+  final HomeController homeController = Get.find();
+
   @override
   void onInit() async {
     type = Get.arguments;
+    facilityIdStreamSubscription = homeController.facilityId$.listen((event) {
+      facilityId = event;
+    });
     super.onInit();
   }
 
   Future<bool> browseFiles({Uint8List? fileBytes}) async {
     await importInventoryPresenter.browseFiles(
-        fileBytes, fileName.value, type, true);
+        fileBytes, fileName.value, type, true, facilityId);
     return true;
   }
 

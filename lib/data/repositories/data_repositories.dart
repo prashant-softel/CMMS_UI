@@ -1783,14 +1783,15 @@ class DataRepository extends DomainRepository {
       Uint8List? fileBytes,
       required String fileName,
       required int importType,
-      required bool isLoading}) async {
+      required bool isLoading,
+      required int facilityId}) async {
     return await connectHelper.browseFiles(
-      auth: auth,
-      fileBytes: fileBytes,
-      fileName: fileName,
-      importType: importType,
-      isLoading: true,
-    );
+        auth: auth,
+        fileBytes: fileBytes,
+        fileName: fileName,
+        importType: importType,
+        isLoading: true,
+        facilityId: facilityId);
     // return true;
   }
 
