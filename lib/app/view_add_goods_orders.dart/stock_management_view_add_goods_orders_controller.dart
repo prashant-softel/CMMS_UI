@@ -34,6 +34,7 @@ class ViewAddGoodsOrdersController extends GetxController {
   RxList<PaiedModel?> paid = <PaiedModel>[].obs;
   TextEditingController approveCommentTextFieldCtrlr = TextEditingController();
   TextEditingController rejectCommentTextFieldCtrlr = TextEditingController();
+  TextEditingController closeCommentTextFieldCtrlr = TextEditingController();
 
   Rx<bool> isSelectedBusinessType = true.obs;
   int selectedBusinessTypeId = 1;
@@ -207,6 +208,26 @@ class ViewAddGoodsOrdersController extends GetxController {
       Map<String, dynamic>? response =
           await viewAddGoodsOrdersPresenter.goodsOrderRejectButton(
         goodsOrderRejectJsonString: goodsOrderRejectJsonString,
+        isLoading: true,
+      );
+      if (response == true) {
+        //getCalibrationList(facilityId, true);
+      }
+    }
+  }
+
+  void goodsOrderCloseButton({int? id}) async {
+    {
+      String _comment = closeCommentTextFieldCtrlr.text.trim();
+
+      CommentModel commentGoodsOrderCloseModel =
+          CommentModel(id: id, comment: _comment);
+
+      var goodsOrderCloseJsonString = commentGoodsOrderCloseModel.toJson();
+
+      Map<String, dynamic>? response =
+          await viewAddGoodsOrdersPresenter.goodsOrderCloseButton(
+        goodsOrderCloseJsonString: goodsOrderCloseJsonString,
         isLoading: true,
       );
       if (response == true) {

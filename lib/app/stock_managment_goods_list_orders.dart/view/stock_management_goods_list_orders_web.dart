@@ -275,9 +275,8 @@ class _StockManagementGoodsOrdersWebState
                                                       controller);
 
                                               return PaginatedDataTable2(
-                                                // fixedLeftColumns: 1,
-                                                // dataRowHeight: Get.height * 0.12,
                                                 columnSpacing: 10,
+                                                dataRowHeight: 70,
                                                 source:
                                                     dataSource, // Custom DataSource class
                                                 headingRowHeight:
@@ -650,7 +649,8 @@ class GoodsOrderListDataSource extends DataTableSource {
 
     controller.GoodsOrderId.value = GoodsOrderListDetails?.id ?? 0;
     var cellsBuffer = [
-      '${GoodsOrderListDetails?.id ?? ''}',
+      // '${GoodsOrderListDetails?.id ?? ''}',
+      "id",
       '${GoodsOrderListDetails?.challan_no ?? ''}',
       '${GoodsOrderListDetails?.generatedBy ?? ''}',
       '${GoodsOrderListDetails?.purchaseDate ?? ''}',
@@ -681,53 +681,126 @@ class GoodsOrderListDataSource extends DataTableSource {
         return DataCell(
           Padding(
             padding: EdgeInsets.zero,
-            child: (value == 'Actions')
-                ? Wrap(children: [
-                    TableActionButton(
-                      color: ColorValues.viewColor,
-                      icon: Icons.remove_red_eye_outlined,
-                      message: 'view',
-                      onPress: () {
-                        int id = GoodsOrderListDetails?.id ?? 0;
-                        if (id != 0) {
-                          Get.toNamed(Routes.viewGoodsOrders,
-                              arguments: {'id': id});
-                        }
-                      },
-                    ),
-                    TableActionButton(
-                      color: ColorValues.editColor,
-                      icon: Icons.edit,
-                      message: 'Edit',
-                      onPress: () {
-                        int id = GoodsOrderListDetails?.id ?? 0;
-                        if (id != 0) {
-                          Get.toNamed(Routes.updateGoodsOrdersDetailsScreen,
-                              arguments: {'id': id});
-                        }
-                      },
-                    ),
-                    TableActionButton(
-                      color: ColorValues.approveColor,
-                      icon: Icons.approval_rounded,
-                      message: 'Approve/Reject',
-                      onPress: () {
-                        int id = GoodsOrderListDetails?.id ?? 0;
-                        if (id != 0) {
-                          Get.toNamed(Routes.viewGoodsOrders,
-                              arguments: {'id': id, "type": 1});
-                        }
-                      },
-                    ),
+            child: (value == 'id')
+                ? Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text(
+                        '${GoodsOrderListDetails?.id}',
+                      ),
+                      Dimens.boxHeight10,
+                      Align(
+                        alignment: Alignment.centerRight,
+                        child: Container(
+                          padding: Dimens.edgeInsets8_2_8_2,
+                          decoration: BoxDecoration(
+                            color: controller.goodsOrdersList
+                                        .firstWhere(
+                                          (e) =>
+                                              e?.id ==
+                                              GoodsOrderListDetails!.id,
+                                          orElse: () =>
+                                              GoodsOrdersListModel(id: 00),
+                                        )
+                                        ?.status ==
+                                    306
+                                ? ColorValues.rejectedStatusColor
+                                : controller.goodsOrdersList
+                                            .firstWhere(
+                                              (e) =>
+                                                  e?.id ==
+                                                  GoodsOrderListDetails!.id,
+                                              orElse: () =>
+                                                  GoodsOrdersListModel(id: 00),
+                                            )
+                                            ?.status ==
+                                        301
+                                    ? ColorValues.submitColor
+                                    : controller.goodsOrdersList
+                                                .firstWhere(
+                                                  (e) =>
+                                                      e?.id ==
+                                                      GoodsOrderListDetails!.id,
+                                                  orElse: () =>
+                                                      GoodsOrdersListModel(
+                                                          id: 00),
+                                                )
+                                                ?.status ==
+                                            305
+                                        ? ColorValues.closeColor
+                                        : controller.goodsOrdersList
+                                                    .firstWhere(
+                                                      (e) =>
+                                                          e?.id ==
+                                                          GoodsOrderListDetails!
+                                                              .id,
+                                                      orElse: () =>
+                                                          GoodsOrdersListModel(
+                                                              id: 00),
+                                                    )
+                                                    ?.status ==
+                                                307
+                                            ? ColorValues.approveColor
+                                            : ColorValues.addNewColor,
+                            borderRadius: BorderRadius.circular(4),
+                          ),
+                          child: Text(
+                            '${GoodsOrderListDetails?.status_short}',
+                            style: Styles.white10.copyWith(
+                              color: Colors.white,
+                            ),
+                          ),
+                        ),
+                      ),
+                    ],
+                  )
+                : (value == 'Actions')
+                    ? Wrap(children: [
+                        TableActionButton(
+                          color: ColorValues.viewColor,
+                          icon: Icons.remove_red_eye_outlined,
+                          message: 'view',
+                          onPress: () {
+                            int id = GoodsOrderListDetails?.id ?? 0;
+                            if (id != 0) {
+                              Get.toNamed(Routes.viewGoodsOrders,
+                                  arguments: {'id': id});
+                            }
+                          },
+                        ),
+                        TableActionButton(
+                          color: ColorValues.editColor,
+                          icon: Icons.edit,
+                          message: 'Edit',
+                          onPress: () {
+                            int id = GoodsOrderListDetails?.id ?? 0;
+                            if (id != 0) {
+                              Get.toNamed(Routes.updateGoodsOrdersDetailsScreen,
+                                  arguments: {'id': id});
+                            }
+                          },
+                        ),
+                        TableActionButton(
+                          color: ColorValues.approveColor,
+                          icon: Icons.approval_rounded,
+                          message: 'Approve/Reject',
+                          onPress: () {
+                            int id = GoodsOrderListDetails?.id ?? 0;
+                            if (id != 0) {
+                              Get.toNamed(Routes.viewGoodsOrders,
+                                  arguments: {'id': id, "type": 1});
+                            }
+                          },
+                        ),
 
-                    // TableActionButton(
-                    //   color: ColorValues.deleteColor,
-                    //   icon: Icons.delete,
-                    //   message: 'Delete',
-                    //   onPress: () {},
-                    // )
-                  ])
-                : Text(value.toString()),
+                        // TableActionButton(
+                        //   color: ColorValues.deleteColor,
+                        //   icon: Icons.delete,
+                        //   message: 'Delete',
+                        //   onPress: () {},
+                        // )
+                      ])
+                    : Text(value.toString()),
           ),
         );
       }).toList(),
