@@ -715,7 +715,7 @@ class GoodsOrderListDataSource extends DataTableSource {
                         int id = GoodsOrderListDetails?.id ?? 0;
                         if (id != 0) {
                           Get.toNamed(Routes.viewGoodsOrders,
-                              arguments: {'id': id});
+                              arguments: {'id': id, "type": 1});
                         }
                       },
                     ),

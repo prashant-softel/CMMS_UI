@@ -33,12 +33,14 @@ class ViewAddGoodsOrdersController extends GetxController {
   Rx<String> selectedBusinessType = ''.obs;
   RxList<PaiedModel?> paid = <PaiedModel>[].obs;
   TextEditingController approveCommentTextFieldCtrlr = TextEditingController();
+  TextEditingController rejectCommentTextFieldCtrlr = TextEditingController();
 
   Rx<bool> isSelectedBusinessType = true.obs;
   int selectedBusinessTypeId = 1;
   int paidId = 0;
   RxBool showAdditionalColumn = false.obs;
   int? id = 0;
+  int? type = 0;
 
   //drop down list of assets
   RxList<GetAssetDataModel?> assetList = <GetAssetDataModel>[].obs;
@@ -89,6 +91,8 @@ class ViewAddGoodsOrdersController extends GetxController {
   @override
   void onInit() async {
     id = Get.arguments["id"];
+    type = Get.arguments["type"];
+
     print('AddStock:$id');
     Future.delayed(Duration(seconds: 1), () {
       getUnitCurrencyList();
@@ -183,6 +187,26 @@ class ViewAddGoodsOrdersController extends GetxController {
       Map<String, dynamic>? response =
           await viewAddGoodsOrdersPresenter.goodsOrderApprovedButton(
         goodsOrderApproveJsonString: goodsOrderApproveJsonString,
+        isLoading: true,
+      );
+      if (response == true) {
+        //getCalibrationList(facilityId, true);
+      }
+    }
+  }
+
+  void goodsOrderRejectButton({int? id}) async {
+    {
+      String _comment = rejectCommentTextFieldCtrlr.text.trim();
+
+      CommentModel commentGoodsOrderRejectModel =
+          CommentModel(id: id, comment: _comment);
+
+      var goodsOrderRejectJsonString = commentGoodsOrderRejectModel.toJson();
+
+      Map<String, dynamic>? response =
+          await viewAddGoodsOrdersPresenter.goodsOrderRejectButton(
+        goodsOrderRejectJsonString: goodsOrderRejectJsonString,
         isLoading: true,
       );
       if (response == true) {

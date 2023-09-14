@@ -2,6 +2,7 @@ import 'package:cmms/app/app.dart';
 import 'package:cmms/app/view_add_goods_orders.dart/stock_management_view_add_goods_orders_controller.dart';
 import 'package:cmms/app/widgets/custom_elevated_button.dart';
 import 'package:cmms/app/widgets/goods_order_approve_dialog.dart';
+import 'package:cmms/app/widgets/goods_order_reject_dialog.dart';
 
 import 'package:cmms/app/widgets/stock_dropdown.dart';
 
@@ -740,7 +741,7 @@ class _ViewAddGoodsOrdersWebState extends State<ViewAddGoodsOrdersWeb> {
                                             ].map((column) {
                                               return TableViewColumn(
                                                 label: column,
-                                                minWidth: Get.width * 0.18,
+                                                minWidth: Get.width * 0.23,
                                                 height: Get.height / 2,
                                               );
                                             }).toList(),
@@ -916,46 +917,47 @@ class _ViewAddGoodsOrdersWebState extends State<ViewAddGoodsOrdersWeb> {
                                   ],
                                 ),
                               ),
-                              Row(
-                                children: [
-                                  Spacer(),
-                                  Container(
-                                    height: 45,
-                                    child: CustomElevatedButton(
-                                      backgroundColor:
-                                          ColorValues.appGreenColor,
-                                      text: "Approve",
-                                      icon: Icons.add,
-                                      onPressed: () {
-                                        Get.dialog(GoodsOrderApprovedDialog(
-                                          id: controller.id,
-                                        ));
-                                      },
-                                    ),
-                                  ),
-                                  Dimens.boxWidth10,
-                                  Container(
-                                    height: 45,
-                                    child: CustomElevatedButton(
-                                      backgroundColor: ColorValues.rejectColor,
-                                      text: "Reject",
-                                      icon: Icons.close,
-                                      onPressed: () {
-                                        // controller
-                                        //     .createNewPermit();
-                                        // Get.dialog(PermitApprovedDialog(
-                                        //   permitId:
-                                        //       '${controller.viewPermitDetailsModel.value?.permitNo}',
-                                        //   ptwStatus:
-                                        //       '${controller.viewPermitDetailsModel.value?.ptwStatus}',
-                                        //   jobId: controller.jobId,
-                                        // ));
-                                      },
-                                    ),
-                                  ),
-                                  Spacer(),
-                                ],
-                              ),
+                              (controller.getPurchaseDetailsByIDModel.value
+                                              ?.status ==
+                                          301 &&
+                                      controller.type == 1)
+                                  ? Row(
+                                      children: [
+                                        Spacer(),
+                                        Container(
+                                          height: 45,
+                                          child: CustomElevatedButton(
+                                            backgroundColor:
+                                                ColorValues.appGreenColor,
+                                            text: "Approve",
+                                            icon: Icons.add,
+                                            onPressed: () {
+                                              Get.dialog(
+                                                  GoodsOrderApprovedDialog(
+                                                id: controller.id,
+                                              ));
+                                            },
+                                          ),
+                                        ),
+                                        Dimens.boxWidth10,
+                                        Container(
+                                          height: 45,
+                                          child: CustomElevatedButton(
+                                            backgroundColor:
+                                                ColorValues.rejectColor,
+                                            text: "Reject",
+                                            icon: Icons.close,
+                                            onPressed: () {
+                                              Get.dialog(GoodsOrderRejectDialog(
+                                                id: controller.id,
+                                              ));
+                                            },
+                                          ),
+                                        ),
+                                        Spacer(),
+                                      ],
+                                    )
+                                  : Container(),
                               Dimens.boxHeight10
                             ],
                           ),

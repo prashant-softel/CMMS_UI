@@ -26,7 +26,14 @@ class ViewAddGoodsOrdersUsecase {
         goodsOrderApproveJsonString,
         isLoading,
       );
-
+  Future<Map<String, dynamic>> goodsOrderRejectButton({
+    goodsOrderRejectJsonString,
+    bool? isLoading,
+  }) async =>
+      await _repository.goodsOrderRejectButton(
+        goodsOrderRejectJsonString,
+        isLoading,
+      );
   Future<List<BusinessListModel?>?> getBusinessList({
     required int type,
     bool isLoading = true,
