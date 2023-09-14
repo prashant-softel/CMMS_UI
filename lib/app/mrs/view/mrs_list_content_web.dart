@@ -78,7 +78,8 @@ class _MrsListContentWebState extends State<MrsListContentWeb> {
                   child: Stack(children: [
                     Container(
                       width: Get.width * 7,
-                      margin: EdgeInsets.only(left: 10, top: 30),
+                      margin: EdgeInsets.only(
+                          left: 10, top: 10, right: 10, bottom: 10),
                       height: Get.height,
                       child: Card(
                         color: Color.fromARGB(255, 245, 248, 250),
