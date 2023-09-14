@@ -13,6 +13,7 @@ import 'package:cmms/domain/models/sop_list_model.dart';
 import 'package:cmms/domain/models/type_permit_model.dart';
 import 'package:cmms/domain/models/work_type_model.dart';
 import 'package:cmms/domain/usecases/view_permit_usecase.dart';
+import 'package:flutter/foundation.dart';
 
 import '../../../domain/models/inventory_category_model.dart';
 
@@ -57,6 +58,37 @@ class ViewPermitPresenter {
         jobId: jobId,
         isLoading: isLoading ?? false,
       );
+
+  Future<void> permitCloseButton({
+    String? comment,
+    String? id,
+    bool? isLoading,
+  }) async =>
+      await viewPermitUsecase.permitCloseButton(
+        comment: comment,
+        id: id,
+        isLoading: isLoading ?? false,
+      );
+
+   Future<bool> browseFiles(Uint8List? fileBytes, String fileName,
+      int importType, bool isLoading, int facilityId) async {
+    await viewPermitUsecase.browseFiles(
+        fileBytes, fileName, importType, isLoading, facilityId);
+    return true;
+  }
+
+  Future<void> permitCancelRequestButton({
+    String? comment,
+    String? id,
+    bool? isLoading,
+  }) async =>
+      await viewPermitUsecase.permitCancelRequestButton(
+        comment: comment,
+        id: id,
+        isLoading: isLoading ?? false,
+      );
+
+
 
    Future<void> permitExtendButton({
     String? comment,

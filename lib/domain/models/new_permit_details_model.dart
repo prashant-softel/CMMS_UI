@@ -17,6 +17,8 @@ class NewPermitDetailModel {
   int? permitTypeid;
   int? job_type_id;
   int? sop_type_id;
+  int? requester_id;
+  String? requestedByName;
   String? permitTypeName;
   String? job_type_name;
   String? sop_type_name;
@@ -68,6 +70,8 @@ class NewPermitDetailModel {
       this.permitTypeid,
       this.job_type_id,
       this.sop_type_id,
+      this.requester_id,
+      this.requestedByName,
       this.permitTypeName,
       this.job_type_name,
       this.sop_type_name,
@@ -117,6 +121,8 @@ class NewPermitDetailModel {
         permitTypeid: json["permitTypeid"],
         job_type_id: json['job_type_id'],
         sop_type_id: json['sop_type_id'],
+        requester_id: json['requester_id'],
+        requestedByName: json['requestedByName'],
         permitTypeName: json['permitTypeName'],
         job_type_name: json['job_type_name'] ?? '',
         sop_type_name: json['sop_type_name'] ?? '',
@@ -179,6 +185,8 @@ class NewPermitDetailModel {
         "sop_type_name" : sop_type_name,
         "permitTypeName": permitTypeName,
         "job_type_name": job_type_name,
+        "requester_id": requester_id,
+        "requestedByName": requestedByName,
         "title": title,
         "description": description,
         "siteName": siteName,

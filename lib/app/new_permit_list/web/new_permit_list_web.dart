@@ -695,15 +695,28 @@ class PermitListDataSource extends DataTableSource {
                                                   UserAccessConstants
                                                       .kHaveAddAccess)
                                           .length >
-                                      0
+                                      0 &&
+                                      controller.newPermitList
+                                                      .firstWhere(
+                                                        (e) =>
+                                                            "${e?.permitId}" ==
+                                                            "${PermitDetails?.permitId}",
+                                                        orElse: () =>
+                                                            NewPermitModel(
+                                                                permitId: 000),
+                                                      )
+                                                      ?.ptwStatus ==
+                                                  121
                                   ? TableActionButton(
                                       color: ColorValues.appcloseRedColor,
                                       icon: Icons.close,
                                       message: 'Close Permit',
                                       onPress: () {
-                                        Get.dialog(PermitCloseDialog(
-                                            permitId: PermitDetails?.permitId
-                                                .toString()));
+                                        // Get.dialog(PermitCloseDialog(
+                                        //     permitId: PermitDetails?.permitId
+                                        //         .toString()));
+                                        controller.closePermitRequestList(
+                                            permitId: PermitDetails?.permitId);
                                       },
                                     )
                                   : Container(),
@@ -743,9 +756,11 @@ class PermitListDataSource extends DataTableSource {
                                       icon: Icons.close,
                                       message: 'Cancel Permit Request',
                                       onPress: () {
-                                        Get.dialog(PermitCancelReQuestDialog(
-                                            permitId: PermitDetails?.permitId
-                                                .toString()));
+                                        controller.cancelPermitList(
+                                            permitId: PermitDetails?.permitId);
+                                        // Get.dialog(PermitCancelReQuestDialog(
+                                        //     permitId: PermitDetails?.permitId
+                                        //         .toString()));
                                       },
                                     ),
                             ],
@@ -754,6 +769,16 @@ class PermitListDataSource extends DataTableSource {
                       ),
 
                       ///Checkbox
+                      varUserAccessModel.value.access_list!
+                                              .where((e) =>
+                                                  e.feature_id ==
+                                                      UserAccessConstants
+                                                          .kPermitFeatureId &&
+                                                  e.edit ==
+                                                      UserAccessConstants
+                                                          .kHaveEditAccess)
+                                              .length >
+                                          0 &&
                       controller.newPermitList
                                   .firstWhere(
                                     (e) =>

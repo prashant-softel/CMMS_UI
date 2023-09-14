@@ -13,11 +13,15 @@ import 'package:cmms/app/widgets/file_upload_with_dropzone_widget.dart';
 import 'package:cmms/app/widgets/history_table_widget_web.dart';
 import 'package:cmms/app/widgets/permit_approved_dialog.dart';
 import 'package:cmms/app/widgets/permit_cancel_by_approver_dialog.dart';
+import 'package:cmms/app/widgets/permit_cancel_request_dialog.dart';
+import 'package:cmms/app/widgets/permit_close_dialog.dart';
 import 'package:cmms/app/widgets/permit_extend_dialog.dart';
 import 'package:cmms/app/widgets/permit_reject_dialog.dart';
 import 'package:data_table_2/data_table_2.dart';
+import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
 import 'package:multi_select_flutter/multi_select_flutter.dart';
@@ -2656,56 +2660,1108 @@ class ViewPermitWebScreen extends GetView<ViewPermitController> {
                                     //         controller.historyList,
                                     //   ),
                                     // ),
-                                     controller.viewPermitDetailsModel.value?.isExpired == 1 &&
-                          controller.viewPermitDetailsModel.value?.ptwStatus ==
-                              125 ||
-                      controller.viewPermitDetailsModel.value?.ptwStatus == 135
-                                    ?Container(
-                                      margin: EdgeInsets.all(20),
-                                      // height: ,
-                                      width: MediaQuery.of(context).size.width /
-                                          1,
-                                      child: Column(
-                                        mainAxisAlignment:
-                                            MainAxisAlignment.start,
-                                        crossAxisAlignment:
-                                            CrossAxisAlignment.start,
-                                        children: [
-                                          Text(
-                                              StringConstants.extendPermitText,style: Styles.black17,),
-                                          Row(
-                                            mainAxisAlignment:
-                                                MainAxisAlignment.start,
-                                            crossAxisAlignment:
-                                                CrossAxisAlignment.start,
-                                            children: [
-                                             checkBoxInstructionMethod(0),
-                                              Padding(
-                                                padding: const EdgeInsets.only(top: 3),
-                                                child: Text(StringConstants
-                                                    .extendCheckPermitText,style: Styles.black17,),
-                                              )
-                                            ],
-                                          ),
-                                          Row(
-                                            mainAxisAlignment:
-                                                MainAxisAlignment.start,
-                                            crossAxisAlignment:
-                                                CrossAxisAlignment.start,
-                                            children: [
-                                              checkBoxInstructionMethod(1),
-                                              Padding(
-                                                padding: const EdgeInsets.only(top: 5),
-                                                child: Text(StringConstants
-                                                    .extendCheck2PermitText,style: Styles.black17,),
-                                              )
-                                            ],
-                                          )
-                                        ],
-                                      ),
-                                    )
-                                    :Dimens.box0,
 
+                                    ///Extend Permit
+                                    controller.viewPermitDetailsModel.value
+                                                        ?.isExpired ==
+                                                    1 &&
+                                                controller
+                                                        .viewPermitDetailsModel
+                                                        .value
+                                                        ?.ptwStatus ==
+                                                    125 ||
+                                            controller.viewPermitDetailsModel
+                                                    .value?.ptwStatus ==
+                                                135
+                                        ? Container(
+                                            margin: EdgeInsets.all(20),
+                                            // height: ,
+                                            width: MediaQuery.of(context)
+                                                    .size
+                                                    .width /
+                                                1,
+                                            child: Column(
+                                              mainAxisAlignment:
+                                                  MainAxisAlignment.start,
+                                              crossAxisAlignment:
+                                                  CrossAxisAlignment.start,
+                                              children: [
+                                                Text(
+                                                  StringConstants
+                                                      .extendPermitText,
+                                                  style: Styles.black17,
+                                                ),
+                                                Row(
+                                                  mainAxisAlignment:
+                                                      MainAxisAlignment.start,
+                                                  crossAxisAlignment:
+                                                      CrossAxisAlignment.start,
+                                                  children: [
+                                                    checkBoxInstructionMethod(
+                                                        0),
+                                                    Padding(
+                                                      padding:
+                                                          const EdgeInsets.only(
+                                                              top: 3),
+                                                      child: Text(
+                                                        StringConstants
+                                                            .extendCheckPermitText,
+                                                        style: Styles.black17,
+                                                      ),
+                                                    )
+                                                  ],
+                                                ),
+                                                Row(
+                                                  mainAxisAlignment:
+                                                      MainAxisAlignment.start,
+                                                  crossAxisAlignment:
+                                                      CrossAxisAlignment.start,
+                                                  children: [
+                                                    checkBoxInstructionMethod(
+                                                        1),
+                                                    Padding(
+                                                      padding:
+                                                          const EdgeInsets.only(
+                                                              top: 5),
+                                                      child: Text(
+                                                        StringConstants
+                                                            .extendCheck2PermitText,
+                                                        style: Styles.black17,
+                                                      ),
+                                                    )
+                                                  ],
+                                                ),
+                                                //  Dimens.boxHeight20,
+                                                Text(
+                                                  'Above Conditions, Validated By:',
+                                                  style: TextStyle(
+                                                      fontSize: 18,
+                                                      fontWeight:
+                                                          FontWeight.bold),
+                                                ),
+                                                Row(
+                                                  crossAxisAlignment:
+                                                      CrossAxisAlignment.start,
+                                                  children: [
+                                                    Column(
+                                                      crossAxisAlignment:
+                                                          CrossAxisAlignment
+                                                              .end,
+                                                      children: [
+                                                        Text(
+                                                          'Permit Requester',
+                                                          style: Styles.black17,
+                                                        ),
+                                                        Text(
+                                                          '${controller.viewPermitDetailsModel.value?.requestedByName}',
+                                                          style: Styles.black17,
+                                                        ),
+                                                      ],
+                                                    ),
+                                                    Spacer(),
+                                                    Column(
+                                                      crossAxisAlignment:
+                                                          CrossAxisAlignment
+                                                              .end,
+                                                      children: [
+                                                        Text(
+                                                          'Designation',
+                                                          style: Styles.black17,
+                                                        ),
+                                                        Text(
+                                                          '${controller.viewPermitDetailsModel.value?.requestedByName}',
+                                                          style: Styles.black17,
+                                                        ),
+                                                      ],
+                                                    ),
+                                                    Spacer(),
+                                                    Column(
+                                                      crossAxisAlignment:
+                                                          CrossAxisAlignment
+                                                              .end,
+                                                      children: [
+                                                        Text(
+                                                          'Company',
+                                                          style: Styles.black17,
+                                                        ),
+                                                        Text(
+                                                          '${controller.viewPermitDetailsModel.value?.requestedByName}',
+                                                          style: Styles.black17,
+                                                        ),
+                                                      ],
+                                                    ),
+                                                    Spacer(),
+                                                    Column(
+                                                      crossAxisAlignment:
+                                                          CrossAxisAlignment
+                                                              .end,
+                                                      children: [
+                                                        Text(
+                                                          'Date & Time',
+                                                          style: Styles.black17,
+                                                        ),
+                                                        Text(
+                                                          '${controller.viewPermitDetailsModel.value?.requestedByName}',
+                                                          style: Styles.black17,
+                                                        ),
+                                                      ],
+                                                    ),
+                                                  ],
+                                                ),
+                                                Dimens.boxHeight20,
+                                                Row(
+                                                  crossAxisAlignment:
+                                                      CrossAxisAlignment.start,
+                                                  children: [
+                                                    Column(
+                                                      crossAxisAlignment:
+                                                          CrossAxisAlignment
+                                                              .end,
+                                                      children: [
+                                                        // Text(
+                                                        //   'Closure Remark',
+                                                        //   style: Styles.black17,
+                                                        // ),
+                                                        CustomTextField(
+                                                          label:
+                                                              'Extend Remark',
+                                                        )
+                                                      ],
+                                                    ),
+                                                    Spacer(),
+                                                    Column(
+                                                      crossAxisAlignment:
+                                                          CrossAxisAlignment
+                                                              .end,
+                                                      children: [
+                                                        // Text(
+                                                        //   'Upload Photo',
+                                                        //   style: Styles.black17,
+                                                        // ),
+                                                        Row(
+                                                          // mainAxisAlignment: MainAxisAlignment.center,
+                                                          children: [
+                                                            Container(
+                                                              height: 45,
+                                                              width: 200,
+                                                              decoration:
+                                                                  BoxDecoration(
+                                                                border:
+                                                                    Border.all(
+                                                                  color: Color
+                                                                      .fromARGB(
+                                                                          255,
+                                                                          227,
+                                                                          224,
+                                                                          224),
+                                                                  width: 1,
+                                                                ),
+                                                                boxShadow: [
+                                                                  BoxShadow(
+                                                                    color: Color.fromARGB(
+                                                                            255,
+                                                                            236,
+                                                                            234,
+                                                                            234)
+                                                                        .withOpacity(
+                                                                            0.5),
+                                                                    spreadRadius:
+                                                                        2,
+                                                                    blurRadius:
+                                                                        5,
+                                                                    offset:
+                                                                        Offset(
+                                                                            0,
+                                                                            2),
+                                                                  ),
+                                                                ],
+                                                              ),
+                                                              child: Padding(
+                                                                padding:
+                                                                    const EdgeInsets
+                                                                            .all(
+                                                                        8.0),
+                                                                child: Align(
+                                                                  alignment:
+                                                                      Alignment
+                                                                          .topLeft,
+                                                                  child: Text(
+                                                                    controller.fileName.value ==
+                                                                            ""
+                                                                        ? 'Upload Photo'
+                                                                        : controller
+                                                                            .fileName
+                                                                            .value,
+                                                                    maxLines: 3,
+                                                                    textAlign:
+                                                                        TextAlign
+                                                                            .center,
+                                                                    style: Styles
+                                                                        .greyLight14,
+                                                                  ),
+                                                                ),
+                                                              ),
+                                                            ),
+                                                            Dimens.boxWidth5,
+                                                            Container(
+                                                              height: 45,
+                                                              child:
+                                                                  CustomElevatedButton(
+                                                                backgroundColor:
+                                                                    ColorValues
+                                                                        .appDarkBlueColor,
+                                                                text: "Browse",
+                                                                onPressed:
+                                                                    () async {
+                                                                  final result =
+                                                                      await FilePicker
+                                                                          .platform
+                                                                          .pickFiles();
+                                                                  if (result !=
+                                                                      null) {
+                                                                    // for (var file in result.files) {
+                                                                    controller
+                                                                            .fileName
+                                                                            .value =
+                                                                        result
+                                                                            .files
+                                                                            .single
+                                                                            .name;
+                                                                    controller
+                                                                            .fileBytes =
+                                                                        result
+                                                                            .files
+                                                                            .single
+                                                                            .bytes;
+                                                                    //controller.filePath.value = file.;
+                                                                    //  print({"filepathes", fileBytes});
+                                                                    // }
+                                                                  }
+                                                                },
+                                                              ),
+                                                            ),
+                                                            Container(
+                                                              height: 45,
+                                                              child:
+                                                                  CustomElevatedButton(
+                                                                backgroundColor:
+                                                                    ColorValues
+                                                                        .greenColor,
+                                                                text: 'Upload',
+                                                                onPressed: () {
+                                                                  if (controller
+                                                                          .fileName
+                                                                          .value !=
+                                                                      "") {
+                                                                    controller
+                                                                        .browseFiles(
+                                                                      fileBytes:
+                                                                          controller
+                                                                              .fileBytes,
+                                                                    )
+                                                                        .then(
+                                                                            (value) {
+                                                                      controller
+                                                                          .isSuccessDialog();
+
+                                                                      // Fluttertoast.showToast(
+                                                                      //     msg: "file upload  Successfully",
+                                                                      //     fontSize: 16.0);
+                                                                    });
+                                                                  } else {
+                                                                    Fluttertoast.showToast(
+                                                                        msg:
+                                                                            "Please Select file...",
+                                                                        fontSize:
+                                                                            16.0);
+                                                                  }
+
+                                                                  //  controller.savePmMapping();
+                                                                },
+                                                              ),
+                                                            ),
+                                                          ],
+                                                        ),
+                                                      ],
+                                                    ),
+                                                  ],
+                                                )
+                                              ],
+                                            ),
+                                          )
+                                        : Dimens.box0,
+
+                                    ///Permit Close Text
+                                    varUserAccessModel.value.access_list!
+                                                    .where((e) =>
+                                                        e.feature_id ==
+                                                            UserAccessConstants
+                                                                .kPermitFeatureId &&
+                                                        e.add ==
+                                                            UserAccessConstants
+                                                                .kHaveAddAccess)
+                                                    .length >
+                                                0 &&
+                                            controller.viewPermitDetailsModel
+                                                    .value?.permitNo !=
+                                                null &&
+                                            controller.viewPermitDetailsModel
+                                                    .value?.ptwStatus ==
+                                                121
+                                        ? Container(
+                                            margin: EdgeInsets.all(20),
+                                            // height: ,
+                                            width: MediaQuery.of(context)
+                                                    .size
+                                                    .width /
+                                                1,
+                                            child: Column(
+                                              mainAxisAlignment:
+                                                  MainAxisAlignment.start,
+                                              crossAxisAlignment:
+                                                  CrossAxisAlignment.start,
+                                              children: [
+                                                Text(
+                                                  StringConstants
+                                                      .permitCloseText,
+                                                  style: Styles.black17,
+                                                ),
+                                                Row(
+                                                  mainAxisAlignment:
+                                                      MainAxisAlignment.start,
+                                                  crossAxisAlignment:
+                                                      CrossAxisAlignment.start,
+                                                  children: [
+                                                    checkBoxInstructionMethod(
+                                                        2),
+                                                    Padding(
+                                                      padding:
+                                                          const EdgeInsets.only(
+                                                              top: 3),
+                                                      child: Text(
+                                                        StringConstants
+                                                            .permitCloseCheck1,
+                                                        style: Styles.black17,
+                                                      ),
+                                                    )
+                                                  ],
+                                                ),
+                                                Row(
+                                                  mainAxisAlignment:
+                                                      MainAxisAlignment.start,
+                                                  crossAxisAlignment:
+                                                      CrossAxisAlignment.start,
+                                                  children: [
+                                                    checkBoxInstructionMethod(
+                                                        3),
+                                                    Padding(
+                                                      padding:
+                                                          const EdgeInsets.only(
+                                                              top: 5),
+                                                      child: Text(
+                                                        StringConstants
+                                                            .permitCloseCheck2,
+                                                        style: Styles.black17,
+                                                      ),
+                                                    )
+                                                  ],
+                                                ),
+                                                Row(
+                                                  mainAxisAlignment:
+                                                      MainAxisAlignment.start,
+                                                  crossAxisAlignment:
+                                                      CrossAxisAlignment.start,
+                                                  children: [
+                                                    checkBoxInstructionMethod(
+                                                        4),
+                                                    Padding(
+                                                      padding:
+                                                          const EdgeInsets.only(
+                                                              top: 5),
+                                                      child: Text(
+                                                        StringConstants
+                                                            .permitCloseCheck3,
+                                                        style: Styles.black17,
+                                                      ),
+                                                    )
+                                                  ],
+                                                ),
+                                                Row(
+                                                  mainAxisAlignment:
+                                                      MainAxisAlignment.start,
+                                                  crossAxisAlignment:
+                                                      CrossAxisAlignment.start,
+                                                  children: [
+                                                    checkBoxInstructionMethod(
+                                                        5),
+                                                    Padding(
+                                                      padding:
+                                                          const EdgeInsets.only(
+                                                              top: 5),
+                                                      child: Text(
+                                                        StringConstants
+                                                            .permitCloseCheck4,
+                                                        style: Styles.black17,
+                                                      ),
+                                                    )
+                                                  ],
+                                                ),
+                                                Text(
+                                                  'Above Conditions, Validated By:',
+                                                  style: TextStyle(
+                                                      fontSize: 18,
+                                                      fontWeight:
+                                                          FontWeight.bold),
+                                                ),
+                                                Row(
+                                                  crossAxisAlignment:
+                                                      CrossAxisAlignment.start,
+                                                  children: [
+                                                    Column(
+                                                      crossAxisAlignment:
+                                                          CrossAxisAlignment
+                                                              .end,
+                                                      children: [
+                                                        Text(
+                                                          'Permit Requester',
+                                                          style: Styles.black17,
+                                                        ),
+                                                        Text(
+                                                          '${controller.viewPermitDetailsModel.value?.requestedByName}',
+                                                          style: Styles.black17,
+                                                        ),
+                                                      ],
+                                                    ),
+                                                    Spacer(),
+                                                    Column(
+                                                      crossAxisAlignment:
+                                                          CrossAxisAlignment
+                                                              .end,
+                                                      children: [
+                                                        Text(
+                                                          'Designation',
+                                                          style: Styles.black17,
+                                                        ),
+                                                        Text(
+                                                          '${controller.viewPermitDetailsModel.value?.requestedByName}',
+                                                          style: Styles.black17,
+                                                        ),
+                                                      ],
+                                                    ),
+                                                    Spacer(),
+                                                    Column(
+                                                      crossAxisAlignment:
+                                                          CrossAxisAlignment
+                                                              .end,
+                                                      children: [
+                                                        Text(
+                                                          'Company',
+                                                          style: Styles.black17,
+                                                        ),
+                                                        Text(
+                                                          '${controller.viewPermitDetailsModel.value?.requestedByName}',
+                                                          style: Styles.black17,
+                                                        ),
+                                                      ],
+                                                    ),
+                                                    Spacer(),
+                                                    Column(
+                                                      crossAxisAlignment:
+                                                          CrossAxisAlignment
+                                                              .end,
+                                                      children: [
+                                                        Text(
+                                                          'Date & Time',
+                                                          style: Styles.black17,
+                                                        ),
+                                                        Text(
+                                                          '${controller.viewPermitDetailsModel.value?.requestedByName}',
+                                                          style: Styles.black17,
+                                                        ),
+                                                      ],
+                                                    ),
+                                                  ],
+                                                ),
+                                                Dimens.boxHeight20,
+                                                Row(
+                                                  crossAxisAlignment:
+                                                      CrossAxisAlignment.start,
+                                                  children: [
+                                                    Column(
+                                                      crossAxisAlignment:
+                                                          CrossAxisAlignment
+                                                              .end,
+                                                      children: [
+                                                        // Text(
+                                                        //   'Closure Remark',
+                                                        //   style: Styles.black17,
+                                                        // ),
+                                                        CustomTextField(
+                                                          label:
+                                                              'Closure Remark',
+                                                        )
+                                                      ],
+                                                    ),
+                                                    Spacer(),
+                                                    Column(
+                                                      crossAxisAlignment:
+                                                          CrossAxisAlignment
+                                                              .end,
+                                                      children: [
+                                                        // Text(
+                                                        //   'Upload Photo',
+                                                        //   style: Styles.black17,
+                                                        // ),
+                                                        Row(
+                                                          // mainAxisAlignment: MainAxisAlignment.center,
+                                                          children: [
+                                                            Container(
+                                                              height: 45,
+                                                              width: 200,
+                                                              decoration:
+                                                                  BoxDecoration(
+                                                                border:
+                                                                    Border.all(
+                                                                  color: Color
+                                                                      .fromARGB(
+                                                                          255,
+                                                                          227,
+                                                                          224,
+                                                                          224),
+                                                                  width: 1,
+                                                                ),
+                                                                boxShadow: [
+                                                                  BoxShadow(
+                                                                    color: Color.fromARGB(
+                                                                            255,
+                                                                            236,
+                                                                            234,
+                                                                            234)
+                                                                        .withOpacity(
+                                                                            0.5),
+                                                                    spreadRadius:
+                                                                        2,
+                                                                    blurRadius:
+                                                                        5,
+                                                                    offset:
+                                                                        Offset(
+                                                                            0,
+                                                                            2),
+                                                                  ),
+                                                                ],
+                                                              ),
+                                                              child: Padding(
+                                                                padding:
+                                                                    const EdgeInsets
+                                                                            .all(
+                                                                        8.0),
+                                                                child: Align(
+                                                                  alignment:
+                                                                      Alignment
+                                                                          .topLeft,
+                                                                  child: Text(
+                                                                    controller.fileName.value ==
+                                                                            ""
+                                                                        ? 'Upload Photo'
+                                                                        : controller
+                                                                            .fileName
+                                                                            .value,
+                                                                    maxLines: 3,
+                                                                    textAlign:
+                                                                        TextAlign
+                                                                            .center,
+                                                                    style: Styles
+                                                                        .greyLight14,
+                                                                  ),
+                                                                ),
+                                                              ),
+                                                            ),
+                                                            Dimens.boxWidth5,
+                                                            Container(
+                                                              height: 45,
+                                                              child:
+                                                                  CustomElevatedButton(
+                                                                backgroundColor:
+                                                                    ColorValues
+                                                                        .appDarkBlueColor,
+                                                                text: "Browse",
+                                                                onPressed:
+                                                                    () async {
+                                                                  final result =
+                                                                      await FilePicker
+                                                                          .platform
+                                                                          .pickFiles();
+                                                                  if (result !=
+                                                                      null) {
+                                                                    // for (var file in result.files) {
+                                                                    controller
+                                                                            .fileName
+                                                                            .value =
+                                                                        result
+                                                                            .files
+                                                                            .single
+                                                                            .name;
+                                                                    controller
+                                                                            .fileBytes =
+                                                                        result
+                                                                            .files
+                                                                            .single
+                                                                            .bytes;
+                                                                    //controller.filePath.value = file.;
+                                                                    //  print({"filepathes", fileBytes});
+                                                                    // }
+                                                                  }
+                                                                },
+                                                              ),
+                                                            ),
+                                                            Container(
+                                                              height: 45,
+                                                              child:
+                                                                  CustomElevatedButton(
+                                                                backgroundColor:
+                                                                    ColorValues
+                                                                        .greenColor,
+                                                                text: 'Upload',
+                                                                onPressed: () {
+                                                                  if (controller
+                                                                          .fileName
+                                                                          .value !=
+                                                                      "") {
+                                                                    controller
+                                                                        .browseFiles(
+                                                                      fileBytes:
+                                                                          controller
+                                                                              .fileBytes,
+                                                                    )
+                                                                        .then(
+                                                                            (value) {
+                                                                      controller
+                                                                          .isSuccessDialog();
+
+                                                                      // Fluttertoast.showToast(
+                                                                      //     msg: "file upload  Successfully",
+                                                                      //     fontSize: 16.0);
+                                                                    });
+                                                                  } else {
+                                                                    Fluttertoast.showToast(
+                                                                        msg:
+                                                                            "Please Select file...",
+                                                                        fontSize:
+                                                                            16.0);
+                                                                  }
+
+                                                                  //  controller.savePmMapping();
+                                                                },
+                                                              ),
+                                                            ),
+                                                          ],
+                                                        ),
+                                                      ],
+                                                    ),
+                                                  ],
+                                                )
+                                              ],
+                                            ),
+                                          )
+                                        : Dimens.box0,
+
+                                    ///Cancel Permit Request
+                                    varUserAccessModel.value.access_list!
+                                                        .where((e) =>
+                                                            e.feature_id ==
+                                                                UserAccessConstants
+                                                                    .kPermitFeatureId &&
+                                                            e.approve ==
+                                                                UserAccessConstants
+                                                                    .kHaveApproveAccess)
+                                                        .length >
+                                                    0 &&
+                                                controller
+                                                        .viewPermitDetailsModel
+                                                        .value
+                                                        ?.ptwStatus ==
+                                                    123 ||
+                                            controller.viewPermitDetailsModel
+                                                    .value?.ptwStatus ==
+                                                130
+                                        ? Dimens.box0
+                                        : controller.viewPermitDetailsModel
+                                                    .value?.permitNo !=
+                                                null
+                                            ? Container(
+                                                margin: EdgeInsets.all(20),
+                                                // height: ,
+                                                width: MediaQuery.of(context)
+                                                        .size
+                                                        .width /
+                                                    1,
+                                                child: Column(
+                                                  mainAxisAlignment:
+                                                      MainAxisAlignment.start,
+                                                  crossAxisAlignment:
+                                                      CrossAxisAlignment.start,
+                                                  children: [
+                                                    Text(
+                                                      StringConstants
+                                                          .cancelWorkPermit,
+                                                      style: Styles.black17,
+                                                    ),
+                                                    Row(
+                                                      mainAxisAlignment:
+                                                          MainAxisAlignment
+                                                              .start,
+                                                      crossAxisAlignment:
+                                                          CrossAxisAlignment
+                                                              .start,
+                                                      children: [
+                                                        checkBoxInstructionMethod(
+                                                            6),
+                                                        Padding(
+                                                          padding:
+                                                              const EdgeInsets
+                                                                  .only(top: 3),
+                                                          child: Text(
+                                                            StringConstants
+                                                                .cancelWorkPermitCheck1,
+                                                            style:
+                                                                Styles.black17,
+                                                          ),
+                                                        )
+                                                      ],
+                                                    ),
+                                                    Row(
+                                                      mainAxisAlignment:
+                                                          MainAxisAlignment
+                                                              .start,
+                                                      crossAxisAlignment:
+                                                          CrossAxisAlignment
+                                                              .start,
+                                                      children: [
+                                                        checkBoxInstructionMethod(
+                                                            7),
+                                                        Padding(
+                                                          padding:
+                                                              const EdgeInsets
+                                                                  .only(top: 5),
+                                                          child: Text(
+                                                            StringConstants
+                                                                .cancelWorkPermitCheck2,
+                                                            style:
+                                                                Styles.black17,
+                                                          ),
+                                                        )
+                                                      ],
+                                                    ),
+                                                    Row(
+                                                      mainAxisAlignment:
+                                                          MainAxisAlignment
+                                                              .start,
+                                                      crossAxisAlignment:
+                                                          CrossAxisAlignment
+                                                              .start,
+                                                      children: [
+                                                        checkBoxInstructionMethod(
+                                                            8),
+                                                        Padding(
+                                                          padding:
+                                                              const EdgeInsets
+                                                                  .only(top: 5),
+                                                          child: Text(
+                                                            StringConstants
+                                                                .cancelWorkPermitCheck3,
+                                                            style:
+                                                                Styles.black17,
+                                                          ),
+                                                        )
+                                                      ],
+                                                    ),
+                                                    Row(
+                                                      mainAxisAlignment:
+                                                          MainAxisAlignment
+                                                              .start,
+                                                      crossAxisAlignment:
+                                                          CrossAxisAlignment
+                                                              .start,
+                                                      children: [
+                                                        checkBoxInstructionMethod(
+                                                            9),
+                                                            Padding(
+                                                          padding:
+                                                              const EdgeInsets
+                                                                  .only(top: 5),
+                                                          child: Text(
+                                                            StringConstants
+                                                                .cancelWorkPermitCheck4,
+                                                            style:
+                                                                Styles.black17,
+                                                          ),
+                                                        ),
+                                                        Dimens.boxWidth5,
+                                                        CustomTextFieldForPermit()
+                                                      ],
+                                                    ),
+                                                    Text(
+                                                      'Above Conditions, Validated By:',
+                                                      style: TextStyle(
+                                                          fontSize: 18,
+                                                          fontWeight:
+                                                              FontWeight.bold),
+                                                    ),
+                                                    Row(
+                                                      crossAxisAlignment:
+                                                          CrossAxisAlignment
+                                                              .start,
+                                                      children: [
+                                                        Column(
+                                                          crossAxisAlignment:
+                                                              CrossAxisAlignment
+                                                                  .end,
+                                                          children: [
+                                                            Text(
+                                                              'Authorized person',
+                                                              style: Styles
+                                                                  .black17,
+                                                            ),
+                                                            Text(
+                                                              '${controller.viewPermitDetailsModel.value?.requestedByName}',
+                                                              style: Styles
+                                                                  .black17,
+                                                            ),
+                                                          ],
+                                                        ),
+                                                        Spacer(),
+                                                        Column(
+                                                          crossAxisAlignment:
+                                                              CrossAxisAlignment
+                                                                  .end,
+                                                          children: [
+                                                            Text(
+                                                              'Designation',
+                                                              style: Styles
+                                                                  .black17,
+                                                            ),
+                                                            Text(
+                                                              '${controller.viewPermitDetailsModel.value?.requestedByName}',
+                                                              style: Styles
+                                                                  .black17,
+                                                            ),
+                                                          ],
+                                                        ),
+                                                        Spacer(),
+                                                        Column(
+                                                          crossAxisAlignment:
+                                                              CrossAxisAlignment
+                                                                  .end,
+                                                          children: [
+                                                            Text(
+                                                              'Company',
+                                                              style: Styles
+                                                                  .black17,
+                                                            ),
+                                                            Text(
+                                                              '${controller.viewPermitDetailsModel.value?.requestedByName}',
+                                                              style: Styles
+                                                                  .black17,
+                                                            ),
+                                                          ],
+                                                        ),
+                                                        Spacer(),
+                                                        Column(
+                                                          crossAxisAlignment:
+                                                              CrossAxisAlignment
+                                                                  .end,
+                                                          children: [
+                                                            Text(
+                                                              'Date & Time',
+                                                              style: Styles
+                                                                  .black17,
+                                                            ),
+                                                            Text(
+                                                              '${controller.viewPermitDetailsModel.value?.requestedByName}',
+                                                              style: Styles
+                                                                  .black17,
+                                                            ),
+                                                          ],
+                                                        ),
+                                                      ],
+                                                    ),
+                                                    Dimens.boxHeight20,
+                                                    Row(
+                                                      crossAxisAlignment:
+                                                          CrossAxisAlignment
+                                                              .start,
+                                                      children: [
+                                                        Column(
+                                                          crossAxisAlignment:
+                                                              CrossAxisAlignment
+                                                                  .end,
+                                                          children: [
+                                                            // Text(
+                                                            //   'Closure Remark',
+                                                            //   style: Styles.black17,
+                                                            // ),
+                                                            CustomTextField(
+                                                              label:
+                                                                  'Cancellation Remark',
+                                                            )
+                                                          ],
+                                                        ),
+                                                        Spacer(),
+                                                        Column(
+                                                          crossAxisAlignment:
+                                                              CrossAxisAlignment
+                                                                  .end,
+                                                          children: [
+                                                            // Text(
+                                                            //   'Upload Photo',
+                                                            //   style: Styles.black17,
+                                                            // ),
+                                                            Row(
+                                                              // mainAxisAlignment: MainAxisAlignment.center,
+                                                              children: [
+                                                                Container(
+                                                                  height: 45,
+                                                                  width: 200,
+                                                                  decoration:
+                                                                      BoxDecoration(
+                                                                    border:
+                                                                        Border
+                                                                            .all(
+                                                                      color: Color.fromARGB(
+                                                                          255,
+                                                                          227,
+                                                                          224,
+                                                                          224),
+                                                                      width: 1,
+                                                                    ),
+                                                                    boxShadow: [
+                                                                      BoxShadow(
+                                                                        color: Color.fromARGB(
+                                                                                255,
+                                                                                236,
+                                                                                234,
+                                                                                234)
+                                                                            .withOpacity(0.5),
+                                                                        spreadRadius:
+                                                                            2,
+                                                                        blurRadius:
+                                                                            5,
+                                                                        offset: Offset(
+                                                                            0,
+                                                                            2),
+                                                                      ),
+                                                                    ],
+                                                                  ),
+                                                                  child:
+                                                                      Padding(
+                                                                    padding:
+                                                                        const EdgeInsets.all(
+                                                                            8.0),
+                                                                    child:
+                                                                        Align(
+                                                                      alignment:
+                                                                          Alignment
+                                                                              .topLeft,
+                                                                      child:
+                                                                          Text(
+                                                                        controller.fileName.value ==
+                                                                                ""
+                                                                            ? 'Upload Photo'
+                                                                            : controller.fileName.value,
+                                                                        maxLines:
+                                                                            3,
+                                                                        textAlign:
+                                                                            TextAlign.center,
+                                                                        style: Styles
+                                                                            .greyLight14,
+                                                                      ),
+                                                                    ),
+                                                                  ),
+                                                                ),
+                                                                Dimens
+                                                                    .boxWidth5,
+                                                                Container(
+                                                                  height: 45,
+                                                                  child:
+                                                                      CustomElevatedButton(
+                                                                    backgroundColor:
+                                                                        ColorValues
+                                                                            .appDarkBlueColor,
+                                                                    text:
+                                                                        "Browse",
+                                                                    onPressed:
+                                                                        () async {
+                                                                      final result = await FilePicker
+                                                                          .platform
+                                                                          .pickFiles();
+                                                                      if (result !=
+                                                                          null) {
+                                                                        // for (var file in result.files) {
+                                                                        controller.fileName.value = result
+                                                                            .files
+                                                                            .single
+                                                                            .name;
+                                                                        controller.fileBytes = result
+                                                                            .files
+                                                                            .single
+                                                                            .bytes;
+                                                                        //controller.filePath.value = file.;
+                                                                        //  print({"filepathes", fileBytes});
+                                                                        // }
+                                                                      }
+                                                                    },
+                                                                  ),
+                                                                ),
+                                                                Container(
+                                                                  height: 45,
+                                                                  child:
+                                                                      CustomElevatedButton(
+                                                                    backgroundColor:
+                                                                        ColorValues
+                                                                            .greenColor,
+                                                                    text:
+                                                                        'Upload',
+                                                                    onPressed:
+                                                                        () {
+                                                                      if (controller
+                                                                              .fileName
+                                                                              .value !=
+                                                                          "") {
+                                                                        controller
+                                                                            .browseFiles(
+                                                                          fileBytes:
+                                                                              controller.fileBytes,
+                                                                        )
+                                                                            .then((value) {
+                                                                          controller
+                                                                              .isSuccessDialog();
+
+                                                                          // Fluttertoast.showToast(
+                                                                          //     msg: "file upload  Successfully",
+                                                                          //     fontSize: 16.0);
+                                                                        });
+                                                                      } else {
+                                                                        Fluttertoast.showToast(
+                                                                            msg:
+                                                                                "Please Select file...",
+                                                                            fontSize:
+                                                                                16.0);
+                                                                      }
+
+                                                                      //  controller.savePmMapping();
+                                                                    },
+                                                                  ),
+                                                                ),
+                                                              ],
+                                                            ),
+                                                          ],
+                                                        ),
+                                                      ],
+                                                    )
+                                                  ],
+                                                ),
+                                              )
+                                            : Dimens.box0,
 
                                     Dimens.boxHeight10,
                                     Container(
@@ -2959,6 +4015,32 @@ class ViewPermitWebScreen extends GetView<ViewPermitController> {
                       ))
                   : Container(),
 
+              ///Close Permit Request
+              varUserAccessModel.value.access_list!
+                              .where((e) =>
+                                  e.feature_id ==
+                                      UserAccessConstants.kPermitFeatureId &&
+                                  e.add == UserAccessConstants.kHaveAddAccess)
+                              .length >
+                          0 &&
+                      controller.viewPermitDetailsModel.value?.permitNo !=
+                          null &&
+                      controller.viewPermitDetailsModel.value?.ptwStatus == 121
+                  ? Container(
+                      height: 45,
+                      child: CustomElevatedButton(
+                        backgroundColor: ColorValues.appcloseRedColor,
+                        text: "Close Permit",
+                        icon: Icons.close,
+                        onPressed: () {
+                          Get.dialog(PermitCloseDialog(
+                            permitId:
+                                '${controller.viewPermitDetailsModel.value?.permitNo}',
+                          ));
+                        },
+                      ))
+                  : Dimens.box0,
+
               ///Reject Button
               varUserAccessModel.value.access_list!
                                   .where((e) =>
@@ -3041,7 +4123,7 @@ class ViewPermitWebScreen extends GetView<ViewPermitController> {
                       child: CustomElevatedButton(
                         backgroundColor: ColorValues.appRedColor,
                         text:
-                            "${controller.viewPermitDetailsModel.value?.ptwStatus == 123 ? 'Cancel By Approver' : 'Cancel Request'}",
+                            "${controller.viewPermitDetailsModel.value?.ptwStatus == 123 ? 'Cancel By Approver' : 'Cancel Permit Request'}",
                         icon: Icons.close,
                         onPressed: () {
                           // controller
@@ -3054,7 +4136,20 @@ class ViewPermitWebScreen extends GetView<ViewPermitController> {
                           ));
                         },
                       ))
-                  : Container(),
+                  : controller.viewPermitDetailsModel.value?.permitNo != null
+                      ? Container(
+                          height: 45,
+                          child: CustomElevatedButton(
+                            backgroundColor: ColorValues.appRedColor,
+                            text: "Cancel Permit Request",
+                            icon: Icons.close,
+                            onPressed: () {
+                              Get.dialog(PermitCancelReQuestDialog(
+                                  permitId:
+                                      '${controller.viewPermitDetailsModel.value?.permitNo}'));
+                            },
+                          ))
+                      : Dimens.box0
 
               // // //Permit Extend Approve
               // varUserAccessModel.value.access_list!
@@ -3869,9 +4964,52 @@ class ViewPermitWebScreen extends GetView<ViewPermitController> {
 
   checkBoxInstructionMethod(int position) {
     return Checkbox(
-      value: position == 0 ? controller.isCheckedRequire.value : controller.isCheckedRequire2.value,
+      value: position == 0
+          ? controller.isCheckedRequire.value
+          : position == 1
+              ? controller.isCheckedRequire1.value
+              : position == 2
+                  ? controller.isCheckedRequire2.value
+                  : position == 3
+                      ? controller.isCheckedRequire3.value
+                      : position == 4
+                          ? controller.isCheckedRequire4.value
+                          : position == 5
+                              ? controller.isCheckedRequire5.value
+                              : position == 6
+                                  ? controller.isCheckedRequire6.value
+                                  : position == 7
+                                      ? controller.isCheckedRequire7.value
+                                      : position == 8
+                                          ? controller.isCheckedRequire8.value
+                                          : position == 9
+                                              ? controller
+                                                  .isCheckedRequire9.value
+                                              : null,
       onChanged: (bool? value) {
-        position == 0 ?controller.requiretoggleCheckbox() : controller.requiretoggleCheckbox2();
+        position == 0
+            ? controller.requiretoggleCheckbox()
+            : position == 1
+                ? controller.requiretoggleCheckbox1()
+                : position == 2
+                    ? controller.requiretoggleCheckbox2()
+                    : position == 3
+                        ? controller.requiretoggleCheckbox3()
+                        : position == 4
+                            ? controller.requiretoggleCheckbox4()
+                            : position == 5
+                                ? controller.requiretoggleCheckbox5()
+                                : position == 6
+                                    ? controller.requiretoggleCheckbox6()
+                                    : position == 7
+                                        ? controller.requiretoggleCheckbox7()
+                                        : position == 8
+                                            ? controller
+                                                .requiretoggleCheckbox8()
+                                            : position == 9
+                                                ? controller
+                                                    .requiretoggleCheckbox9()
+                                                : null;
       },
     );
   }
