@@ -69,16 +69,16 @@ class NewPermitListPresenter {
         isLoading: isLoading ?? false,
       );
 
-  Future<void> permitCancelRequestButton({
-    String? comment,
-    String? id,
-    bool? isLoading,
-  }) async =>
-      await newPermitListUsecase.permitCancelRequestButton(
-        comment: comment,
-        id: id,
-        isLoading: isLoading ?? false,
-      );
+  // Future<void> permitCancelRequestButton({
+  //   String? comment,
+  //   String? id,
+  //   bool? isLoading,
+  // }) async =>
+  //     await newPermitListUsecase.permitCancelRequestButton(
+  //       comment: comment,
+  //       id: id,
+  //       isLoading: isLoading ?? false,
+  //     );
 
   // Future<void> permitCancelByApproverButton({
   //   String? comment,
@@ -106,16 +106,16 @@ class NewPermitListPresenter {
         isLoading: isLoading ?? false,
       );
 
-  Future<void> permitCloseButton({
-    String? comment,
-    String? id,
-    bool? isLoading,
-  }) async =>
-      await newPermitListUsecase.permitCloseButton(
-        comment: comment,
-        id: id,
-        isLoading: isLoading ?? false,
-      );
+  // Future<void> permitCloseButton({
+  //   String? comment,
+  //   String? id,
+  //   bool? isLoading,
+  // }) async =>
+  //     await newPermitListUsecase.permitCloseButton(
+  //       comment: comment,
+  //       id: id,
+  //       isLoading: isLoading ?? false,
+  //     );
 
   // Future<void> permitRejectButton({
   //   String? comment,

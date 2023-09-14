@@ -1805,12 +1805,85 @@ class NewPermitScreen extends GetView<NewPermitController> {
                                                             //     MainAxisAlignment
                                                             //         .center,
                                                             children: [
+                                                              Column(
+                                                                crossAxisAlignment:
+                                                                    CrossAxisAlignment
+                                                                        .end,
+                                                                children: [
+                                                                  Row(
+                                                                    children: [
+                                                                      Dimens.boxWidth15,
+                                                                      CustomRichText(
+                                                                          title:
+                                                                              'Block/Plot: '),
+                                                                      Dimens
+                                                                          .boxWidth10,
+                                                                      SizedBox(
+                                                                        width:
+                                                                            MediaQuery.of(context).size.width / 5,
+
+                                                                        child:
+                                                                            Obx(
+                                                                          () =>
+                                                                              DropdownWebWidget(
+                                                                            dropdownList: controller.blockList,
+                                                                            isValueSelected: controller.isBlockSelected.value,
+                                                                            selectedValue: controller.selectedBlock.value,
+                                                                            onValueChanged: controller.onValueChanged,
+                                                                          ),
+                                                                        ),
+                                                                        // LoginCustomTextfield(),
+                                                                      ),
+                                                                    ],
+                                                                  ),
+                                                                  Dimens
+                                                                      .boxHeight10,
+                                                                  Row(
+                                                                    children: [
+                                                                      Dimens.boxWidth15,
+                                                                      CustomRichText(
+                                                                          title:
+                                                                              'Type of permit: '),
+                                                                      Dimens
+                                                                          .boxWidth10,
+                                                                      SizedBox(
+                                                                        width:
+                                                                            MediaQuery.of(context).size.width / 5,
+                                                                        child:
+                                                                            Obx(
+                                                                          () =>
+                                                                              DropdownWebWidget(
+                                                                            dropdownList: controller.typePermitList,
+                                                                            isValueSelected: controller.isTypePermitSelected.value,
+                                                                            selectedValue: controller.selectedTypePermit.value,
+                                                                            onValueChanged: controller.onValueChanged,
+                                                                          ),
+                                                                        ),
+                                                                      ),
+                                                                    ],
+                                                                  ),
+                                                                  Dimens
+                                                                      .boxHeight10,
+                                                                  Row(
+                                                                    children: [
+                                                                      Dimens.boxWidth15,
+                                                                      CustomRichText(
+                                                                          title:
+                                                                              'Start Date & Time: '),
+                                                                      Dimens
+                                                                          .boxWidth10,
+                                                                      _buildStartValidTillDateField_web(
+                                                                        context,
+                                                                        0,
+                                                                      ),
+                                                                    ],
+                                                                  )
+                                                                ],
+                                                              ),
+                                                              Spacer(),
+                                                              // Dimens.boxWidth47,
                                                               Padding(
-                                                                padding:
-                                                                    const EdgeInsets
-                                                                            .only(
-                                                                        left:
-                                                                            100),
+                                                                padding: const EdgeInsets.only(right: 20),
                                                                 child: Column(
                                                                   crossAxisAlignment:
                                                                       CrossAxisAlignment
@@ -1820,142 +1893,69 @@ class NewPermitScreen extends GetView<NewPermitController> {
                                                                       children: [
                                                                         CustomRichText(
                                                                             title:
-                                                                                'Block/Plot: '),
+                                                                                'Equipment Categories: '),
                                                                         Dimens
                                                                             .boxWidth10,
-                                                                        SizedBox(
-                                                                          width:
-                                                                              MediaQuery.of(context).size.width / 5,
-
-                                                                          child:
-                                                                              Obx(
-                                                                            () =>
-                                                                                DropdownWebWidget(
-                                                                              dropdownList: controller.blockList,
-                                                                              isValueSelected: controller.isBlockSelected.value,
-                                                                              selectedValue: controller.selectedBlock.value,
-                                                                              onValueChanged: controller.onValueChanged,
-                                                                            ),
-                                                                          ),
-                                                                          // LoginCustomTextfield(),
-                                                                        ),
+                                                                        controller.permitId.value >
+                                                                                0
+                                                                            ? SizedBox(
+                                                                                width: MediaQuery.of(context).size.width / 5,
+                                                                                child: CustomMultiSelectDialogField(
+                                                                                  title: 'Select Equipment Category',
+                                                                                  buttonText: 'Equipment Category',
+                                                                                  initialValue: ((controller.selectedEquipmentCategoryIdList.isNotEmpty) ? controller.selectedEquipmentCategoryIdList : []),
+                                                                                  items: controller.equipmentCategoryList
+                                                                                      .map(
+                                                                                        (equipmentCategory) => MultiSelectItem(
+                                                                                          equipmentCategory?.id,
+                                                                                          equipmentCategory?.name ?? '',
+                                                                                        ),
+                                                                                      )
+                                                                                      .toList(),
+                                                                                  onConfirm: (selectedOptionsList) => {
+                                                                                    controller.equipmentCategoriesSelected(selectedOptionsList),
+                                                                                    print('Equipment list ${controller.selectedEquipmentCategoryIdList}')
+                                                                                  },
+                                                                                ),
+                                                                              )
+                                                                            : SizedBox(
+                                                                                width: MediaQuery.of(context).size.width / 5,
+                                                                                child: CustomMultiSelectDialogField(
+                                                                                  title: 'Select Equipment Category',
+                                                                                  buttonText: 'Equipment Category',
+                                                                                  initialValue: (controller.selectedEquipmentCategoryIdList.isNotEmpty) ? controller.selectedEquipmentCategoryIdList : [],
+                                                                                  items: controller.equipmentCategoryList
+                                                                                      .map(
+                                                                                        (equipmentCategory) => MultiSelectItem(
+                                                                                          equipmentCategory?.id,
+                                                                                          equipmentCategory?.name ?? '',
+                                                                                        ),
+                                                                                      )
+                                                                                      .toList(),
+                                                                                  onConfirm: (selectedOptionsList) => {
+                                                                                    controller.equipmentCategoriesSelected(selectedOptionsList),
+                                                                                    print('Equipment list55 ${controller.selectedEquipmentCategoryIdList}')
+                                                                                  },
+                                                                                ),
+                                                                              ),
                                                                       ],
                                                                     ),
                                                                     Dimens
-                                                                        .boxHeight10,
+                                                                        .boxHeight30,
                                                                     Row(
                                                                       children: [
                                                                         CustomRichText(
                                                                             title:
-                                                                                'Type of permit: '),
-                                                                        Dimens
-                                                                            .boxWidth10,
-                                                                        SizedBox(
-                                                                          width:
-                                                                              MediaQuery.of(context).size.width / 5,
-                                                                          child:
-                                                                              Obx(
-                                                                            () =>
-                                                                                DropdownWebWidget(
-                                                                              dropdownList: controller.typePermitList,
-                                                                              isValueSelected: controller.isTypePermitSelected.value,
-                                                                              selectedValue: controller.selectedTypePermit.value,
-                                                                              onValueChanged: controller.onValueChanged,
-                                                                            ),
-                                                                          ),
-                                                                        ),
-                                                                      ],
-                                                                    ),
-                                                                    Dimens
-                                                                        .boxHeight10,
-                                                                    Row(
-                                                                      children: [
-                                                                        CustomRichText(
-                                                                            title:
-                                                                                'Start Date & Time: '),
+                                                                                'Stop Date & Time: '),
                                                                         Dimens
                                                                             .boxWidth10,
                                                                         _buildStartValidTillDateField_web(
-                                                                          context,
-                                                                          0,
-                                                                        ),
+                                                                            context,
+                                                                            1),
                                                                       ],
-                                                                    )
+                                                                    ),
                                                                   ],
                                                                 ),
-                                                              ),
-                                                              Dimens.boxWidth47,
-                                                              Column(
-                                                                crossAxisAlignment:
-                                                                    CrossAxisAlignment
-                                                                        .end,
-                                                                children: [
-                                                                  Row(
-                                                                    children: [
-                                                                      CustomRichText(
-                                                                          title:
-                                                                              'Equipment Categories: '),
-                                                                      Dimens
-                                                                          .boxWidth10,
-                                                                      controller.permitId.value >
-                                                                              0
-                                                                          ? SizedBox(
-                                                                              width: MediaQuery.of(context).size.width / 5,
-                                                                              child: CustomMultiSelectDialogField(
-                                                                                title: 'Select Equipment Category',
-                                                                                buttonText: 'Equipment Category',
-                                                                                initialValue: ((controller.selectedEquipmentCategoryIdList.isNotEmpty) ? controller.selectedEquipmentCategoryIdList : []),
-                                                                                items: controller.equipmentCategoryList
-                                                                                    .map(
-                                                                                      (equipmentCategory) => MultiSelectItem(
-                                                                                        equipmentCategory?.id,
-                                                                                        equipmentCategory?.name ?? '',
-                                                                                      ),
-                                                                                    )
-                                                                                    .toList(),
-                                                                                onConfirm: (selectedOptionsList) => {
-                                                                                  controller.equipmentCategoriesSelected(selectedOptionsList),
-                                                                                  print('Equipment list ${controller.selectedEquipmentCategoryIdList}')
-                                                                                },
-                                                                              ),
-                                                                            )
-                                                                          : SizedBox(
-                                                                              width: MediaQuery.of(context).size.width / 5,
-                                                                              child: CustomMultiSelectDialogField(
-                                                                                title: 'Select Equipment Category',
-                                                                                buttonText: 'Equipment Category',
-                                                                                initialValue: (controller.selectedEquipmentCategoryIdList.isNotEmpty) ? controller.selectedEquipmentCategoryIdList : [],
-                                                                                items: controller.equipmentCategoryList
-                                                                                    .map(
-                                                                                      (equipmentCategory) => MultiSelectItem(
-                                                                                        equipmentCategory?.id,
-                                                                                        equipmentCategory?.name ?? '',
-                                                                                      ),
-                                                                                    )
-                                                                                    .toList(),
-                                                                                onConfirm: (selectedOptionsList) => {
-                                                                                  controller.equipmentCategoriesSelected(selectedOptionsList),
-                                                                                  print('Equipment list55 ${controller.selectedEquipmentCategoryIdList}')
-                                                                                },
-                                                                              ),
-                                                                            ),
-                                                                    ],
-                                                                  ),
-                                                                  Dimens
-                                                                      .boxHeight30,
-                                                                  Row(
-                                                                    children: [
-                                                                      CustomRichText(
-                                                                          title:
-                                                                              'Stop Date & Time: '),
-                                                                      Dimens
-                                                                          .boxWidth10,
-                                                                      _buildStartValidTillDateField_web(
-                                                                          context,
-                                                                          1),
-                                                                    ],
-                                                                  ),
-                                                                ],
                                                               ),
                                                               // Padding(
                                                               //   padding:
@@ -2152,214 +2152,182 @@ class NewPermitScreen extends GetView<NewPermitController> {
                                                           )
                                                         ],
                                                       ),
-
-                                                      Padding(
-                                                        padding:
-                                                            const EdgeInsets
-                                                                .only(left: 60),
-                                                        child: Row(
-                                                          children: [
-                                                            Container(
-                                                              margin: EdgeInsets
-                                                                  .only(
-                                                                      right:
-                                                                          13),
-                                                              alignment: Alignment
-                                                                  .centerRight,
-                                                              width: 172,
-                                                              child: CustomRichText(
-                                                                  title:
-                                                                      'Title: '),
-                                                            ),
-                                                            _buildTitleTextField_web(
+                                                      // Spacer(),
+                                                      Row(
+                                                        children: [
+                                                          Container(
+                                                           
+                                                            alignment: Alignment
+                                                                .centerRight,
+                                                            width: 150,
+                                                            child: CustomRichText(
+                                                                title:
+                                                                    'Title: '),
+                                                          ),
+                                                          
+                                                          Expanded(
+                                                            child: _buildTitleTextField_web(
                                                                 context),
-                                                          ],
-                                                        ),
+                                                          ),
+                                                        ],
                                                       ),
-                                                      SizedBox(
-                                                        height: 10,
-                                                      ),
+                                                     
 
                                                       //// Permit Reference
-                                                      Padding(
-                                                        padding:
-                                                            const EdgeInsets
-                                                                .only(left: 60),
-                                                        child: Row(
-                                                          children: [
-                                                            Container(
-                                                              margin: EdgeInsets
-                                                                  .only(
-                                                                      right:
-                                                                          13),
-                                                              alignment: Alignment
-                                                                  .centerRight,
-                                                              width: 172,
-                                                              child: CustomRichText(
-                                                                  title:
-                                                                      'Permit Ref. No: '),
-                                                            ),
-                                                            _buildWorkPermitReferenceTextField_web(
+                                                      Row(
+                                                        children: [
+                                                          Container(
+                                                            
+                                                            alignment: Alignment
+                                                                .centerRight,
+                                                            width: 150,
+                                                            child: CustomRichText(
+                                                                title:
+                                                                    'Permit Ref. No: '),
+                                                          ),
+                                                          Expanded(
+                                                            child: _buildWorkPermitReferenceTextField_web(
                                                                 context),
-                                                          ],
-                                                        ),
+                                                          ),
+                                                        ],
                                                       ),
 
-                                                      Padding(
-                                                        padding:
-                                                            const EdgeInsets
-                                                                .only(left: 60),
-                                                        child: Row(
-                                                          children: [
-                                                            SizedBox(
-                                                              width: 10,
-                                                            ),
-                                                            Container(
-                                                              margin: EdgeInsets
-                                                                  .only(
-                                                                      right:
-                                                                          13),
-                                                              alignment: Alignment
-                                                                  .centerRight,
-                                                              width: 162,
-                                                              child: CustomRichText(
-                                                                  title:
-                                                                      'Work Description: '),
-                                                            ),
-                                                            _buildPermitDescriptionField_web(
+                                                      Row(
+                                                        children: [
+                                                          
+                                                          Container(
+                                                            
+                                                            alignment: Alignment
+                                                                .centerRight,
+                                                            width: 150,
+                                                            child: CustomRichText(
+                                                                title:
+                                                                    'Work Description: '),
+                                                          ),
+                                                          Expanded(
+                                                            child: _buildPermitDescriptionField_web(
                                                                 context),
-                                                          ],
-                                                        ),
+                                                          ),
+                                                        ],
                                                       ),
                                                       SizedBox(
                                                         height: 10,
                                                       ),
-                                                      Padding(
-                                                        padding:
-                                                            const EdgeInsets
-                                                                .only(left: 60),
-                                                        child: Row(
-                                                          children: [
-                                                            Container(
-                                                              margin: EdgeInsets
-                                                                  .only(
-                                                                      right:
-                                                                          13),
-                                                              alignment: Alignment
-                                                                  .centerRight,
-                                                              width: 172,
-                                                              child: CustomRichText(
-                                                                  title:
-                                                                      'Isolation Required '),
-                                                            ),
-                                                            Switch(
-                                                              value: _controller
-                                                                  .isToggleOn
-                                                                  .value,
-                                                              onChanged:
-                                                                  (value) {
-                                                                _controller
-                                                                    .toggle();
-                                                              },
-                                                              activeColor:
-                                                                  Colors.white,
-                                                              activeTrackColor:
-                                                                  Colors.green,
-                                                              inactiveThumbColor:
-                                                                  Colors.white,
-                                                              inactiveTrackColor:
-                                                                  Colors.red,
-                                                            )
-                                                          ],
-                                                        ),
+                                                      Row(
+                                                        children: [
+                                                          Container(
+                                                            // margin: EdgeInsets
+                                                            //     .only(
+                                                            //         right:
+                                                            //             13),
+                                                            alignment: Alignment
+                                                                .centerRight,
+                                                            width: 150,
+                                                            child: CustomRichText(
+                                                                title:
+                                                                    'Isolation Required '),
+                                                          ),
+                                                          Switch(
+                                                            value: _controller
+                                                                .isToggleOn
+                                                                .value,
+                                                            onChanged:
+                                                                (value) {
+                                                              _controller
+                                                                  .toggle();
+                                                            },
+                                                            activeColor:
+                                                                Colors.white,
+                                                            activeTrackColor:
+                                                                Colors.green,
+                                                            inactiveThumbColor:
+                                                                Colors.white,
+                                                            inactiveTrackColor:
+                                                                Colors.red,
+                                                          )
+                                                        ],
                                                       ),
                                                       SizedBox(
                                                         height: 15,
                                                       ),
                                                       controller.isToggleOn ==
                                                               true
-                                                          ? Padding(
-                                                              padding:
-                                                                  const EdgeInsets
-                                                                          .only(
-                                                                      left: 60),
-                                                              child: Row(
-                                                                children: [
-                                                                  Container(
-                                                                    margin: EdgeInsets.only(
-                                                                        right:
-                                                                            13),
-                                                                    alignment:
-                                                                        Alignment
-                                                                            .centerRight,
-                                                                    width: 172,
-                                                                    child: CustomRichText(
-                                                                        title:
-                                                                            'Equipment Isolation '),
-                                                                  ),
-                                                                  SizedBox(
-                                                                    width: 5,
-                                                                  ),
-                                                                  controller.permitId
-                                                                              .value >
-                                                                          0
-                                                                      ? SizedBox(
-                                                                          width:
-                                                                              MediaQuery.of(context).size.width / 5,
-                                                                          child:
-                                                                              CustomMultiSelectDialogField(
-                                                                            buttonText:
-                                                                                'Select Equipment Isolation',
-                                                                            title:
-                                                                                'Equipment Isolation',
-                                                                            initialValue: (controller.selectedEditEquipemntIsolationIdList.isNotEmpty)
-                                                                                ? controller.selectedEditEquipemntIsolationIdList
-                                                                                : [],
-                                                                            items: controller.equipmentIsolationList
-                                                                                .map(
-                                                                                  (equipmentIsolation) => MultiSelectItem(
-                                                                                    equipmentIsolation?.id,
-                                                                                    equipmentIsolation?.name ?? '',
-                                                                                  ),
-                                                                                )
-                                                                                .toList(),
-                                                                            onConfirm: (selectedOptionsList) =>
-                                                                                {
-                                                                              controller.equipmentIsolationSelected(selectedOptionsList),
-                                                                              print('Equipment Edit Isolation list5: ${controller.equipmentIsolationList}')
-                                                                            },
-                                                                          ),
-                                                                        )
-                                                                      : SizedBox(
-                                                                          width:
-                                                                              MediaQuery.of(context).size.width / 5,
-                                                                          child:
-                                                                              CustomMultiSelectDialogField(
-                                                                            buttonText:
-                                                                                'Select Equipment Isolation',
-                                                                            title:
-                                                                                'Equipment Isolation',
-                                                                            initialValue: (controller.selectedEquipmentIsolationIdList.isNotEmpty)
-                                                                                ? controller.selectedEquipmentIsolationIdList
-                                                                                : [],
-                                                                            items: controller.equipmentIsolationList
-                                                                                .map(
-                                                                                  (equipmentIsolation) => MultiSelectItem(
-                                                                                    equipmentIsolation?.id,
-                                                                                    equipmentIsolation?.name ?? '',
-                                                                                  ),
-                                                                                )
-                                                                                .toList(),
-                                                                            onConfirm: (selectedOptionsList) =>
-                                                                                {
-                                                                              controller.equipmentIsolationSelected(selectedOptionsList),
-                                                                              print('Equipment Isolation list5: ${controller.equipmentIsolationList}')
-                                                                            },
-                                                                          ),
-                                                                        )
-                                                                ],
+                                                          ? Row(
+                                                            children: [
+                                                              Container(
+                                                                margin: EdgeInsets.only(
+                                                                    right:
+                                                                        13),
+                                                                alignment:
+                                                                    Alignment
+                                                                        .centerRight,
+                                                                width: 150,
+                                                                child: CustomRichText(
+                                                                    title:
+                                                                        'Equipment Isolation '),
                                                               ),
-                                                            )
+                                                              SizedBox(
+                                                                width: 5,
+                                                              ),
+                                                              controller.permitId
+                                                                          .value >
+                                                                      0
+                                                                  ? SizedBox(
+                                                                      width:
+                                                                          MediaQuery.of(context).size.width / 5,
+                                                                      child:
+                                                                          CustomMultiSelectDialogField(
+                                                                        buttonText:
+                                                                            'Select Equipment Isolation',
+                                                                        title:
+                                                                            'Equipment Isolation',
+                                                                        initialValue: (controller.selectedEditEquipemntIsolationIdList.isNotEmpty)
+                                                                            ? controller.selectedEditEquipemntIsolationIdList
+                                                                            : [],
+                                                                        items: controller.equipmentIsolationList
+                                                                            .map(
+                                                                              (equipmentIsolation) => MultiSelectItem(
+                                                                                equipmentIsolation?.id,
+                                                                                equipmentIsolation?.name ?? '',
+                                                                              ),
+                                                                            )
+                                                                            .toList(),
+                                                                        onConfirm: (selectedOptionsList) =>
+                                                                            {
+                                                                          controller.equipmentIsolationSelected(selectedOptionsList),
+                                                                          print('Equipment Edit Isolation list5: ${controller.equipmentIsolationList}')
+                                                                        },
+                                                                      ),
+                                                                    )
+                                                                  : SizedBox(
+                                                                      width:
+                                                                          MediaQuery.of(context).size.width / 5,
+                                                                      child:
+                                                                          CustomMultiSelectDialogField(
+                                                                        buttonText:
+                                                                            'Select Equipment Isolation',
+                                                                        title:
+                                                                            'Equipment Isolation',
+                                                                        initialValue: (controller.selectedEquipmentIsolationIdList.isNotEmpty)
+                                                                            ? controller.selectedEquipmentIsolationIdList
+                                                                            : [],
+                                                                        items: controller.equipmentIsolationList
+                                                                            .map(
+                                                                              (equipmentIsolation) => MultiSelectItem(
+                                                                                equipmentIsolation?.id,
+                                                                                equipmentIsolation?.name ?? '',
+                                                                              ),
+                                                                            )
+                                                                            .toList(),
+                                                                        onConfirm: (selectedOptionsList) =>
+                                                                            {
+                                                                          controller.equipmentIsolationSelected(selectedOptionsList),
+                                                                          print('Equipment Isolation list5: ${controller.equipmentIsolationList}')
+                                                                        },
+                                                                      ),
+                                                                    )
+                                                            ],
+                                                          )
                                                           : Text(
                                                               'No Isolation Equipment'),
 
@@ -3951,9 +3919,11 @@ class NewPermitScreen extends GetView<NewPermitController> {
       // ),
 
       Container(
-        width: Responsive.isDesktop(context)
-            ? MediaQuery.of(context).size.width / 1.75
-            : MediaQuery.of(context).size.width / 1.1,
+        // width: Responsive.isDesktop(context)
+        //     ? MediaQuery.of(context).size.width / 1.75
+        //     : MediaQuery.of(context).size.width / 1.1,
+        //  margin: EdgeInsets.all(20),
+        margin: EdgeInsets.only(left: 10, right: 18),
         decoration: BoxDecoration(
           boxShadow: [
             BoxShadow(
@@ -3976,7 +3946,7 @@ class NewPermitScreen extends GetView<NewPermitController> {
           borderRadius: BorderRadius.circular(5),
         ),
         child: SizedBox(
-          width: MediaQuery.of(context).size.width / 1.4,
+          width: MediaQuery.of(context).size.width / 1,
           child: TextField(
             controller: controller.permitDescriptionCtrlr,
             keyboardType: TextInputType.multiline,
@@ -4047,9 +4017,11 @@ class NewPermitScreen extends GetView<NewPermitController> {
 
       Container(
         height: MediaQuery.of(context).size.height * 0.050,
-        width: Responsive.isDesktop(context)
-            ? MediaQuery.of(context).size.width / 1.75
-            : MediaQuery.of(context).size.width / 1.1,
+        // width: Responsive.isDesktop(context)
+        //     ? MediaQuery.of(context).size.width / 1.75
+        //     : MediaQuery.of(context).size.width / 1.1,
+        // margin: EdgeInsets.all(20),
+         margin: EdgeInsets.only(left: 10, right: 18, bottom: 10),
         decoration: BoxDecoration(
           boxShadow: [
             BoxShadow(
@@ -4072,7 +4044,7 @@ class NewPermitScreen extends GetView<NewPermitController> {
           borderRadius: BorderRadius.circular(5),
         ),
         child: SizedBox(
-          width: MediaQuery.of(context).size.width / 1.4,
+          width: MediaQuery.of(context).size.width / 1,
           child: TextField(
             controller: controller.titleTextCtrlr,
             keyboardType: TextInputType.multiline,
@@ -4140,9 +4112,11 @@ class NewPermitScreen extends GetView<NewPermitController> {
 
       Container(
         height: MediaQuery.of(context).size.height * 0.050,
-        width: Responsive.isDesktop(context)
-            ? MediaQuery.of(context).size.width / 1.75
-            : MediaQuery.of(context).size.width / 1.1,
+        // width: Responsive.isDesktop(context)
+        //     ? MediaQuery.of(context).size.width / 1.75
+        //     : MediaQuery.of(context).size.width / 1.1,
+        //  margin: EdgeInsets.all(20),
+        margin: EdgeInsets.only(left: 10, right: 18, bottom: 10),
         decoration: BoxDecoration(
           boxShadow: [
             BoxShadow(
@@ -4165,7 +4139,7 @@ class NewPermitScreen extends GetView<NewPermitController> {
           borderRadius: BorderRadius.circular(5),
         ),
         child: SizedBox(
-          width: MediaQuery.of(context).size.width / 1.4,
+          width: MediaQuery.of(context).size.width / 1,
           child: TextField(
             controller: controller.workPermitNumberTextCtrlr,
             keyboardType: TextInputType.multiline,

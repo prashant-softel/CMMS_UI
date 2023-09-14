@@ -70,17 +70,17 @@ class NewPermitListUsecase {
     );
   }
 
-   Future<void> permitCancelRequestButton({
-    String? comment,
-    String? id,
-    bool? isLoading,
-  }) async {
-    await repository.permitCancelRequestButton(
-      comment,
-      id,
-      isLoading,
-    );
-  }
+  //  Future<void> permitCancelRequestButton({
+  //   String? comment,
+  //   String? id,
+  //   bool? isLoading,
+  // }) async {
+  //   await repository.permitCancelRequestButton(
+  //     comment,
+  //     id,
+  //     isLoading,
+  //   );
+  // }
 
   // Future<void> permitCancelByApproverButton({
   //   String? comment,
@@ -110,17 +110,17 @@ class NewPermitListUsecase {
     );
   }
 
-  Future<void> permitCloseButton({
-    String? comment,
-    String? id,
-    bool? isLoading,
-  }) async {
-    await repository.permitCloseButton(
-      comment,
-      id,
-      isLoading,
-    );
-  }
+  // Future<void> permitCloseButton({
+  //   String? comment,
+  //   String? id,
+  //   bool? isLoading,
+  // }) async {
+  //   await repository.permitCloseButton(
+  //     comment,
+  //     id,
+  //     isLoading,
+  //   );
+  // }
 
 
   //  Future<void> permitRejectButton({

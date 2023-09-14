@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'dart:typed_data';
 import 'dart:ui';
 
 import 'package:cmms/app/home/home_controller.dart';
@@ -16,6 +17,7 @@ import 'package:cmms/domain/models/job_type_list_model.dart';
 import 'package:cmms/domain/models/new_permit_details_model.dart';
 import 'package:cmms/domain/models/safety_measure_list_model.dart';
 import 'package:cmms/domain/models/sop_list_model.dart';
+import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:cmms/domain/models/equipment_model.dart';
 import 'package:cmms/domain/models/facility_model.dart';
@@ -31,6 +33,7 @@ import 'package:rxdart/subjects.dart';
 import 'package:pdf/widgets.dart' as pw;
 import 'package:scrollable_table_view/scrollable_table_view.dart';
 import '../../../domain/models/inventory_category_model.dart';
+import '../theme/color_values.dart';
 
 class ViewPermitController extends GetxController {
   ViewPermitController(this.viewPermitPresenter, this.jobListPresenter);
@@ -114,6 +117,11 @@ class ViewPermitController extends GetxController {
   TextEditingController extendReasonCommentTextFieldCtrlr =
       TextEditingController();
   TextEditingController timeTextFieldCtrlr = TextEditingController();
+
+  TextEditingController closeCommentTextFieldCtrlr = TextEditingController();
+
+   TextEditingController cancelCommentRequestTextFieldCtrlr =
+      TextEditingController();
 
   int? selectedFacilityId = 0;
   int selectedTypePermitId = 0;
@@ -278,14 +286,63 @@ class ViewPermitController extends GetxController {
   ///Checkbox
   RxBool isCheckedRequire = false.obs;
   void requiretoggleCheckbox() {
-    isCheckedRequire.value = !isCheckedRequire.value; // Toggle the checkbox state
+    isCheckedRequire.value =
+        !isCheckedRequire.value; // Toggle the checkbox state
   }
 
-   RxBool isCheckedRequire2 = false.obs;
+  RxBool isCheckedRequire1 = false.obs;
+  void requiretoggleCheckbox1() {
+    isCheckedRequire1.value =
+        !isCheckedRequire1.value; // Toggle the checkbox state
+  }
+
+  RxBool isCheckedRequire2 = false.obs;
   void requiretoggleCheckbox2() {
-    isCheckedRequire2.value = !isCheckedRequire2.value; // Toggle the checkbox state
+    isCheckedRequire2.value =
+        !isCheckedRequire2.value; // Toggle the checkbox state
   }
 
+  RxBool isCheckedRequire3 = false.obs;
+  void requiretoggleCheckbox3() {
+    isCheckedRequire3.value =
+        !isCheckedRequire3.value; // Toggle the checkbox state
+  }
+
+  RxBool isCheckedRequire4 = false.obs;
+  void requiretoggleCheckbox4() {
+    isCheckedRequire4.value =
+        !isCheckedRequire4.value; // Toggle the checkbox state
+  }
+
+  RxBool isCheckedRequire5 = false.obs;
+  void requiretoggleCheckbox5() {
+    isCheckedRequire5.value =
+        !isCheckedRequire5.value; // Toggle the checkbox state
+  }
+
+   RxBool isCheckedRequire6 = false.obs;
+  void requiretoggleCheckbox6() {
+    isCheckedRequire6.value =
+        !isCheckedRequire6.value; // Toggle the checkbox state
+  }
+
+   RxBool isCheckedRequire7 = false.obs;
+  void requiretoggleCheckbox7() {
+    isCheckedRequire7.value =
+        !isCheckedRequire7.value; // Toggle the checkbox state
+  }
+
+   RxBool isCheckedRequire8 = false.obs;
+  void requiretoggleCheckbox8() {
+    isCheckedRequire8.value =
+        !isCheckedRequire8.value; // Toggle the checkbox state
+  }
+
+   RxBool isCheckedRequire9 = false.obs;
+  void requiretoggleCheckbox9() {
+    isCheckedRequire9.value =
+        !isCheckedRequire9.value; // Toggle the checkbox state
+  }
 
   TextEditingController approveCommentTextFieldCtrlr = TextEditingController();
   TextEditingController rejectCommentTextFieldCtrlr = TextEditingController();
@@ -303,6 +360,11 @@ class ViewPermitController extends GetxController {
     rowCount: 0,
     rowsPerPage: 10,
   );
+
+  //File Import
+  RxString fileName = "".obs;
+  Uint8List? fileBytes;
+  int type = 0;
 
   BehaviorSubject<int> _facilityId = BehaviorSubject.seeded(0);
   Stream<int> get facilityId$ => _facilityId.stream;
@@ -398,7 +460,33 @@ class ViewPermitController extends GetxController {
     print('Approved Data:${permitId}');
   }
 
-   Future<void> permitExtendButton({String? permitId}) async {
+  Future<void> permitCloseButton({String? permitId}) async {
+    String _closeComment = closeCommentTextFieldCtrlr.text.trim();
+
+    final _permitCloseBtn = await viewPermitPresenter.permitCloseButton(
+      comment: _closeComment,
+      id: permitId,
+    );
+    // showAlertPermitApproveDialog();
+    print('Close Button Data:${_closeComment}');
+    print('Close Button Data:${permitId}');
+  }
+
+
+  Future<void> permitCancelRequestButton({String? permitId}) async {
+    String _cancelComment = cancelCommentRequestTextFieldCtrlr.text.trim();
+
+    final _permitCancelRequestBtn =
+        await viewPermitPresenter.permitCancelRequestButton(
+      comment: _cancelComment,
+      id: permitId,
+    );
+    // showAlertPermitApproveDialog();
+    print('Cancel Request Button Data:${_cancelComment}');
+    print('Cancel Request Button Data:${permitId}');
+  }
+
+  Future<void> permitExtendButton({String? permitId}) async {
     String _reasonForExtensionComment =
         extendReasonCommentTextFieldCtrlr.text.trim();
     String _timeForExtensionComment = timeTextFieldCtrlr.text.trim();
@@ -1140,5 +1228,51 @@ class ViewPermitController extends GetxController {
 
   Future<void> viewJobDetails(int? _jobId) async {
     Get.toNamed(Routes.jobDetails, arguments: {'jobId': _jobId});
+  }
+
+  browseFiles({Uint8List? fileBytes}) async {
+    await viewPermitPresenter.browseFiles(
+        fileBytes, fileName.value, type, true, facilityId);
+    return true;
+  }
+
+  void isSuccessDialog() {
+    Get.dialog(
+      AlertDialog(
+        title: Text('Import Image'),
+        content: Column(mainAxisSize: MainAxisSize.min, children: [
+          Container(
+            decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(5),
+              color: Color.fromARGB(255, 7, 161, 17),
+              border: Border.all(
+                color: Color.fromARGB(255, 7, 161, 17),
+                width: 1,
+              ),
+            ),
+            child: Icon(Icons.check, size: 35, color: ColorValues.whiteColor),
+          ),
+          SizedBox(
+            height: 10,
+          ),
+          Center(
+            child: Text("${fileName.value} \n image uploaded Successfully....",
+                style: TextStyle(fontSize: 16, color: ColorValues.blackColor)),
+          )
+        ]),
+        actions: [
+          TextButton(
+            onPressed: () {
+              Get.back();
+              // Get.back();
+              Future.delayed(Duration(seconds: 2), () {
+                fileName.value = "";
+              });
+            },
+            child: Text('OK'),
+          ),
+        ],
+      ),
+    );
   }
 }
