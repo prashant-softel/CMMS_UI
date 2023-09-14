@@ -2888,13 +2888,13 @@ class ConnectHelper {
     return responseModel;
   }
 
-  Future<CreateSOPModel> browseFiles({
-    required String auth,
-    Uint8List? fileBytes,
-    required String fileName,
-    required int importType,
-    bool? isLoading,
-  }) async {
+  Future<CreateSOPModel> browseFiles(
+      {required String auth,
+      Uint8List? fileBytes,
+      required String fileName,
+      required int importType,
+      bool? isLoading,
+      required int facilityId}) async {
     final request = http.MultipartRequest('POST',
         Uri.parse('http://65.0.20.19/CMMS_API/api/FileUpload/UploadFile'));
 
@@ -2913,7 +2913,8 @@ class ConnectHelper {
         importInventory(
             auth: auth,
             fileId: jsonResponse["id"][0].toString(),
-            isLoading: true);
+            isLoading: true,
+            facilityId: facilityId);
       } else if (importType == 2) {
         importUser(
             auth: auth,
@@ -2941,13 +2942,13 @@ class ConnectHelper {
     return createSOPModel;
   }
 
-  Future<ResponseModel> importInventory({
-    required String auth,
-    required String fileId,
-    required bool isLoading,
-  }) async {
+  Future<ResponseModel> importInventory(
+      {required String auth,
+      required String fileId,
+      required bool isLoading,
+      required int facilityId}) async {
     var responseModel = await apiWrapper.makeRequest(
-      'Inventory/ImportInventories?file_id=$fileId',
+      'Inventory/ImportInventories?file_id=$fileId&facilityID=$facilityId',
       Request.post,
       null,
       false,

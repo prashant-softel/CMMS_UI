@@ -3,67 +3,67 @@ import 'package:cmms/app/mrs_approve/mrs_approve_controller.dart';
 import 'package:cmms/app/widgets/custom_elevated_button.dart';
 import 'package:cmms/app/widgets/custom_richtext.dart';
 import 'package:cmms/app/widgets/custom_textField.dart';
+import 'package:data_table_2/data_table_2.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:get/get.dart';
-import 'package:scrollable_table_view/scrollable_table_view.dart';
 
 class MrsApproveContentWeb extends GetView<MrsApproveController> {
-  MrsApproveContentWeb({Key? key}) : super(key: key);
+  // MrsApproveContentWeb({Key? key}) : super(key: key);
+  MrsApproveContentWeb({super.key});
+
   final MrsApproveController controller = Get.find();
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      color: Color.fromARGB(255, 234, 236, 238),
-      width: Get.width,
-      height: Get.height,
-      child: Obx(
-        () => Column(
-          children: [
-            Container(
-              height: 45,
-              decoration: BoxDecoration(
-                border: Border.all(
-                  color: Color.fromARGB(255, 227, 224, 224),
-                  width: 1,
+    return Obx(
+      () => Column(
+        children: [
+          Container(
+            height: 45,
+            decoration: BoxDecoration(
+              border: Border.all(
+                color: Color.fromARGB(255, 227, 224, 224),
+                width: 1,
+              ),
+              boxShadow: [
+                BoxShadow(
+                  color: Color.fromARGB(255, 236, 234, 234).withOpacity(0.5),
+                  spreadRadius: 2,
+                  blurRadius: 5,
+                  offset: Offset(0, 2),
                 ),
-                boxShadow: [
-                  BoxShadow(
-                    color: Color.fromARGB(255, 236, 234, 234).withOpacity(0.5),
-                    spreadRadius: 2,
-                    blurRadius: 5,
-                    offset: Offset(0, 2),
-                  ),
-                ],
-              ),
-              child: Row(
-                children: [
-                  Icon(
-                    Icons.home,
-                    color: ColorValues.greyLightColor,
-                  ),
-                  Text(
-                    "DASHBOARD",
-                    style: Styles.greyLight14,
-                  ),
-                  GestureDetector(
-                    onTap: () {
-                      final _flutterSecureStorage =
-                          const FlutterSecureStorage();
-
-                      _flutterSecureStorage.delete(key: "mrsId");
-                      Get.back();
-                    },
-                    child: Text(" / STOCK MANAGEMENT ",
-                        style: Styles.greyMediumLight12),
-                  ),
-                  Text(" / MATERIAL REQUISITION  APPROVAL AND REJECT",
-                      style: Styles.greyMediumLight12)
-                ],
-              ),
+              ],
             ),
-            Expanded(
+            child: Row(
+              children: [
+                Icon(
+                  Icons.home,
+                  color: ColorValues.greyLightColor,
+                ),
+                Text(
+                  "DASHBOARD",
+                  style: Styles.greyLight14,
+                ),
+                GestureDetector(
+                  onTap: () {
+                    final _flutterSecureStorage = const FlutterSecureStorage();
+
+                    _flutterSecureStorage.delete(key: "mrsId");
+                    Get.back();
+                  },
+                  child: Text(" / STOCK MANAGEMENT ",
+                      style: Styles.greyMediumLight12),
+                ),
+                Text(" / MATERIAL REQUISITION  APPROVAL AND REJECT",
+                    style: Styles.greyMediumLight12)
+              ],
+            ),
+          ),
+          Expanded(
+            child: ScrollConfiguration(
+              behavior:
+                  ScrollConfiguration.of(context).copyWith(scrollbars: false),
               child: SingleChildScrollView(
                 child: Container(
                   // margin: Dimens.edgeInsets20,
@@ -179,8 +179,12 @@ class MrsApproveContentWeb extends GetView<MrsApproveController> {
                         ),
                       ),
                       Container(
-                        height: Get.height, //300,
                         margin: Dimens.edgeInsets20,
+                        height: ((controller.mrsDetailsModel.value!.cmmrsItems
+                                        ?.length ??
+                                    0) *
+                                40) +
+                            120,
                         decoration: BoxDecoration(
                           border: Border.all(
                             color: ColorValues.lightGreyColorWithOpacity35,
@@ -202,55 +206,76 @@ class MrsApproveContentWeb extends GetView<MrsApproveController> {
                               child: Row(
                                 children: [
                                   Text(
-                                    "Equipments",
+                                    "Material  ",
                                     style: Styles.blue700,
                                   ),
                                 ],
                               ),
                             ),
-                            Divider(
-                              color: ColorValues.greyLightColour,
-                            ),
                             Expanded(
-                              child: ScrollableTableView(
+                              //       // "Image",
+                              child: DataTable2(
+                                border: TableBorder.all(
+                                    color: Color.fromARGB(255, 206, 229, 234)),
                                 columns: [
-                                  "Equipment Name",
-                                  "Asset Type",
-                                  "Image",
-                                  "Available Qyt.",
-                                  "Requested Qty.",
-                                ].map((column) {
-                                  return TableViewColumn(
-                                    label: column,
-                                    minWidth: Get.width * 0.15,
-                                  );
-                                }).toList(),
-                                rows: [
-                                  ...List.generate(
+                                  DataColumn(
+                                      label: Text(
+                                    "Material Name",
+                                    style: TextStyle(
+                                        fontSize: 15,
+                                        fontWeight: FontWeight.bold),
+                                  )),
+                                  DataColumn(
+                                      label: Text(
+                                    "Asset Type",
+                                    style: TextStyle(
+                                        fontSize: 15,
+                                        fontWeight: FontWeight.bold),
+                                  )),
+                                  DataColumn(
+                                      label: Text(
+                                    "Available Qyt.",
+                                    style: TextStyle(
+                                        fontSize: 15,
+                                        fontWeight: FontWeight.bold),
+                                  )),
+                                  DataColumn(
+                                      label: Text(
+                                    "Requested Qty.",
+                                    style: TextStyle(
+                                        fontSize: 15,
+                                        fontWeight: FontWeight.bold),
+                                  )),
+                                ],
+                                rows: List<DataRow>.generate(
                                     controller.mrsDetailsModel.value!
                                         .cmmrsItems!.length,
-                                    (index) {
-                                      var equipmentModelListDetails = controller
-                                          .mrsDetailsModel
-                                          .value!
-                                          .cmmrsItems![index];
-                                      return [
-                                        '${equipmentModelListDetails.asset_name}',
-                                        '${equipmentModelListDetails.asset_type}',
-                                        "", //'${equipmentModelListDetails.file_path}',
-                                        '${equipmentModelListDetails.available_qty}',
-                                        '${equipmentModelListDetails.requested_qty}',
-                                      ];
-                                    },
-                                  ),
-                                ].map((record) {
-                                  return TableViewRow(
-                                    height: 50,
-                                    cells: record.map((value) {
-                                      return TableViewCell(child: Text(value));
-                                    }).toList(),
-                                  );
-                                }).toList(),
+                                    (index) => DataRow(cells: [
+                                          DataCell(Text(controller
+                                              .mrsDetailsModel
+                                              .value!
+                                              .cmmrsItems![index]
+                                              .asset_name
+                                              .toString())),
+                                          DataCell(Text(controller
+                                              .mrsDetailsModel
+                                              .value!
+                                              .cmmrsItems![index]
+                                              .asset_type
+                                              .toString())),
+                                          DataCell(Text(controller
+                                              .mrsDetailsModel
+                                              .value!
+                                              .cmmrsItems![index]
+                                              .available_qty
+                                              .toString())),
+                                          DataCell(Text(controller
+                                              .mrsDetailsModel
+                                              .value!
+                                              .cmmrsItems![index]
+                                              .requested_qty
+                                              .toString())),
+                                        ])),
                               ),
                             ),
                           ],
@@ -340,8 +365,8 @@ class MrsApproveContentWeb extends GetView<MrsApproveController> {
                 ),
               ),
             ),
-          ],
-        ),
+          ),
+        ],
       ),
     );
   }

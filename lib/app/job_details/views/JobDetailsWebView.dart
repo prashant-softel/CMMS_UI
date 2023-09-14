@@ -7,7 +7,6 @@ import 'package:data_table_2/data_table_2.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:get/get.dart';
-import 'package:scrollable_table_view/scrollable_table_view.dart';
 import '../../theme/color_values.dart';
 import '../../theme/styles.dart';
 import '../../widgets/custom_elevated_button.dart';
@@ -554,17 +553,15 @@ class JobDetailsWebView extends GetView<JobDetailsController> {
                                                                 message:
                                                                     "View Permit",
                                                                 onPress: () {
-                                                                 
-                                                                  controller
-                                                                      .viewNewPermitList(
-                                                                    permitId: controller
-                                                                            .jobAssociatedModelsList?[index]
-                                                                            ?.permitId ??
-                                                                        0,
-                                                                     jobId: controller.jobDetailsModel.value!.id ?? 0
-                                                                    
-                                                                  );
-                                                                  
+                                                                  controller.viewNewPermitList(
+                                                                      permitId:
+                                                                          controller.jobAssociatedModelsList?[index]?.permitId ??
+                                                                              0,
+                                                                      jobId: controller
+                                                                              .jobDetailsModel
+                                                                              .value!
+                                                                              .id ??
+                                                                          0);
                                                                 })
                                                             : Container(),
                                                         TableActionButton(

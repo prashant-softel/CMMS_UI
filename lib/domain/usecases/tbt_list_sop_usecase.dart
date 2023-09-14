@@ -3,7 +3,6 @@ import 'package:cmms/domain/models/facility_model.dart';
 import 'package:cmms/domain/models/job_type_list_model.dart';
 import 'package:cmms/domain/models/sop_list_model.dart';
 import 'package:cmms/domain/repositories/repository.dart';
-import 'package:cmms/domain/repositories/local_storage_keys.dart';
 import 'package:flutter/services.dart';
 
 class TBTSOPListUsecase {
@@ -12,23 +11,13 @@ class TBTSOPListUsecase {
 
   Future<CreateSOPModel?> browseFiles(
       Uint8List? fileBytes, String fileName, bool isLoading) async {
-    return await repository.browseFiles(
-      fileBytes,
-      fileName,
-      0,
-      isLoading,
-    );
+    return await repository.browseFiles(fileBytes, fileName, 0, isLoading, 0);
     // return true;
   }
 
   Future<bool> browseTBTSOPFiles(
       Uint8List? fileBytes, String fileName, bool isLoading) async {
-    await repository.browseFiles(
-      fileBytes,
-      fileName,
-      0,
-      isLoading,
-    );
+    await repository.browseFiles(fileBytes, fileName, 0, isLoading, 0);
     return true;
   }
 
@@ -58,7 +47,7 @@ class TBTSOPListUsecase {
   }
 
   deleteSopType(
-      {required Object checklist_id, required bool isLoading}) async =>
+          {required Object checklist_id, required bool isLoading}) async =>
       await repository.deleteSopType(
         checklist_id,
         isLoading,
@@ -68,7 +57,6 @@ class TBTSOPListUsecase {
   // Future<String?> getUserAccessList() async =>
   //     await repository.getUserAccessData(LocalKeys.userAccess);
 
-
   Future<bool> updateSop({
     tbtJsonString,
     bool? isLoading,
@@ -77,5 +65,4 @@ class TBTSOPListUsecase {
         isLoading: isLoading,
         tbtJsonString: tbtJsonString,
       );
-
 }

@@ -1,9 +1,8 @@
 import 'dart:async';
 
 import 'package:cmms/app/faulty_material_report/faulty_material_report_presenter.dart';
-import 'package:cmms/app/plant_stock_report/plant_stock_report_presenter.dart';
-import 'package:cmms/domain/models/get_mrs_list_model.dart';
 import 'package:cmms/domain/models/get_plant_Stock_list.dart';
+import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
 import 'package:scrollable_table_view/scrollable_table_view.dart';
@@ -40,10 +39,48 @@ class FaultyMaterialReportController extends GetxController {
   String get formattedTodate1 => DateFormat('yyyy-MM-dd').format(toDate.value);
   String get formattedFromdate1 =>
       DateFormat('yyyy-MM-dd').format(fromDate.value);
+  RxString assetNameFilterText = ''.obs;
+  RxString serialNoFilterText = ''.obs;
+  RxString replaceFilterText = ''.obs;
+  RxString insetedFilterText = ''.obs;
+  RxString quantityFilterText = ''.obs;
+  RxString remarkFilterText = ''.obs;
+
+  final columnVisibility = ValueNotifier<Map<String, bool>>({
+    "Assets Name": true,
+    "Serial Number": true,
+    "Replace Serial No.": true,
+    "Inseted DateTime": true,
+    "quantity": true,
+    "Remark": true
+  });
+  final Map<String, double> columnwidth = {
+    "Assets Name": 300,
+    "Serial Number": 250,
+    "Replace Serial No.": 250,
+    "Inseted DateTime": 200,
+    "quantity": 100,
+    "Remark": 300,
+  };
+  Map<String, RxString> filterText = {};
+  void setColumnVisibility(String columnName, bool isVisible) {
+    final newVisibility = Map<String, bool>.from(columnVisibility.value)
+      ..[columnName] = isVisible;
+    columnVisibility.value = newVisibility;
+    // print({"updated columnVisibility": columnVisibility});
+  }
 
   ///
   @override
   void onInit() async {
+    this.filterText = {
+      "Assets Name": assetNameFilterText,
+      "Serial Number": serialNoFilterText,
+      "Replace Serial No.": replaceFilterText,
+      "Inseted DateTime": insetedFilterText,
+      "quantity": quantityFilterText,
+      "Remark": remarkFilterText,
+    };
     facilityIdStreamSubscription = homecontroller.facilityId$.listen((event) {
       facilityId = event;
       Future.delayed(Duration(seconds: 2), () {
