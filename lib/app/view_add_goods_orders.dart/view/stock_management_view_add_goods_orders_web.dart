@@ -1,5 +1,7 @@
 import 'package:cmms/app/app.dart';
 import 'package:cmms/app/view_add_goods_orders.dart/stock_management_view_add_goods_orders_controller.dart';
+import 'package:cmms/app/widgets/custom_elevated_button.dart';
+import 'package:cmms/app/widgets/goods_order_approve_dialog.dart';
 
 import 'package:cmms/app/widgets/stock_dropdown.dart';
 
@@ -914,6 +916,47 @@ class _ViewAddGoodsOrdersWebState extends State<ViewAddGoodsOrdersWeb> {
                                   ],
                                 ),
                               ),
+                              Row(
+                                children: [
+                                  Spacer(),
+                                  Container(
+                                    height: 45,
+                                    child: CustomElevatedButton(
+                                      backgroundColor:
+                                          ColorValues.appGreenColor,
+                                      text: "Approve",
+                                      icon: Icons.add,
+                                      onPressed: () {
+                                        Get.dialog(GoodsOrderApprovedDialog(
+                                          id: controller.id,
+                                        ));
+                                      },
+                                    ),
+                                  ),
+                                  Dimens.boxWidth10,
+                                  Container(
+                                    height: 45,
+                                    child: CustomElevatedButton(
+                                      backgroundColor: ColorValues.rejectColor,
+                                      text: "Reject",
+                                      icon: Icons.close,
+                                      onPressed: () {
+                                        // controller
+                                        //     .createNewPermit();
+                                        // Get.dialog(PermitApprovedDialog(
+                                        //   permitId:
+                                        //       '${controller.viewPermitDetailsModel.value?.permitNo}',
+                                        //   ptwStatus:
+                                        //       '${controller.viewPermitDetailsModel.value?.ptwStatus}',
+                                        //   jobId: controller.jobId,
+                                        // ));
+                                      },
+                                    ),
+                                  ),
+                                  Spacer(),
+                                ],
+                              ),
+                              Dimens.boxHeight10
                             ],
                           ),
                         ),

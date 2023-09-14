@@ -14,6 +14,7 @@ import 'package:cmms/app/widgets/create_jc_success_message_dialog.dart';
 import 'package:cmms/app/widgets/create_permit_dialog.dart';
 import 'package:cmms/app/widgets/create_sop_dialog.dart';
 import 'package:cmms/app/widgets/end_mc_execution_message_dialog.dart';
+import 'package:cmms/app/widgets/goods_order_message_approve_dialog.dart';
 import 'package:cmms/app/widgets/incident_report_approve_message_dialog.dart';
 import 'package:cmms/app/widgets/incident_report_reject_message_dialog.dart';
 import 'package:cmms/app/widgets/new_warranty_claim_dialog.dart';
@@ -773,6 +774,30 @@ class ConnectHelper {
     var parsedJson = json.decode(res);
     Get.dialog<void>(
         PermitMessageApproveDialog(data: parsedJson['message'], jobId: jobId));
+
+    return responseModel;
+  }
+
+  Future<ResponseModel> goodsOrderApprovedButton({
+    required String auth,
+    goodsOrderApproveJsonString,
+    bool? isLoading,
+  }) async {
+    var responseModel = await apiWrapper.makeRequest(
+      'GO/ApproveGO',
+      Request.post,
+      goodsOrderApproveJsonString,
+      isLoading ?? false,
+      {
+        'Content-Type': 'application/json',
+        'Authorization': 'Bearer $auth',
+      },
+    );
+    print('goodsOrderApproveResponse: ${responseModel.data}');
+    var res = responseModel.data;
+    var parsedJson = json.decode(res);
+    Get.dialog<void>(GoodsOrderMessageApproveDialog(
+        data: parsedJson['message'], id: parsedJson['id']));
 
     return responseModel;
   }
