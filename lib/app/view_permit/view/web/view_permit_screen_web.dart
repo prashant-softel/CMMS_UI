@@ -3910,9 +3910,7 @@ class ViewPermitWebScreen extends GetView<ViewPermitController> {
               //     },
               //   ),
               // ),
-              SizedBox(
-                width: 10,
-              ),
+             Dimens.boxWidth10,
               // Container(
               //     height: 45,
               //     child: CustomElevatedButton(
@@ -4040,6 +4038,8 @@ class ViewPermitWebScreen extends GetView<ViewPermitController> {
                         },
                       ))
                   : Dimens.box0,
+
+                  Dimens.boxWidth10,
 
               ///Reject Button
               varUserAccessModel.value.access_list!
