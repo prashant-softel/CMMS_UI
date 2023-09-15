@@ -95,8 +95,10 @@ class _AddGoodsOrdersWebState extends State<AddGoodsOrdersWeb> {
                                                 () => DropdownWebStock(
                                                   width: MediaQuery.of(context).size.width / 5,
                                                   dropdownList: controller.ownerList,
-                                                  isValueSelected: controller.isSelectedBusinessType.value,
-                                                  selectedValue: controller.selectedBusinessType.value,
+                                                  isValueSelected:
+                                                      controller.isSelectedBusinessType.value,
+                                                  selectedValue:
+                                                      controller.selectedBusinessType.value,
                                                   onValueChanged: controller.onValueChanged,
                                                 ),
                                               ),
@@ -110,7 +112,9 @@ class _AddGoodsOrdersWebState extends State<AddGoodsOrdersWeb> {
                                             Dimens.boxWidth10,
                                             GoodsOrderTextField(
                                               keyboardType: TextInputType.number,
-                                              inputFormatters: <TextInputFormatter>[FilteringTextInputFormatter.digitsOnly],
+                                              inputFormatters: <TextInputFormatter>[
+                                                FilteringTextInputFormatter.digitsOnly
+                                              ],
                                               textController: controller.challanNoCtrlr,
                                             ),
                                           ],
@@ -122,7 +126,9 @@ class _AddGoodsOrdersWebState extends State<AddGoodsOrdersWeb> {
                                             Dimens.boxWidth10,
                                             GoodsOrderTextField(
                                               keyboardType: TextInputType.number,
-                                              inputFormatters: <TextInputFormatter>[FilteringTextInputFormatter.digitsOnly],
+                                              inputFormatters: <TextInputFormatter>[
+                                                FilteringTextInputFormatter.digitsOnly
+                                              ],
                                               textController: controller.pOCtrlr,
                                             ),
                                           ],
@@ -134,7 +140,9 @@ class _AddGoodsOrdersWebState extends State<AddGoodsOrdersWeb> {
                                             Dimens.boxWidth10,
                                             GoodsOrderTextField(
                                               keyboardType: TextInputType.number,
-                                              inputFormatters: <TextInputFormatter>[FilteringTextInputFormatter.digitsOnly],
+                                              inputFormatters: <TextInputFormatter>[
+                                                FilteringTextInputFormatter.digitsOnly
+                                              ],
                                               textController: controller.frieghtToPayPaidCtrlr,
                                             ),
                                           ],
@@ -152,12 +160,16 @@ class _AddGoodsOrdersWebState extends State<AddGoodsOrdersWeb> {
                                         Dimens.boxHeight5,
                                         Row(
                                           children: [
-                                            CustomRichText(title: 'Condition of Packages Received : '),
+                                            CustomRichText(
+                                                title: 'Condition of Packages Received : '),
                                             Dimens.boxWidth10,
                                             GoodsOrderTextField(
                                               keyboardType: TextInputType.number,
-                                              inputFormatters: <TextInputFormatter>[FilteringTextInputFormatter.digitsOnly],
-                                              textController: controller.conditionOfPackagesReceivedCtrlr,
+                                              inputFormatters: <TextInputFormatter>[
+                                                FilteringTextInputFormatter.digitsOnly
+                                              ],
+                                              textController:
+                                                  controller.conditionOfPackagesReceivedCtrlr,
                                             ),
                                           ],
                                         ),
@@ -168,7 +180,9 @@ class _AddGoodsOrdersWebState extends State<AddGoodsOrdersWeb> {
                                             Dimens.boxWidth10,
                                             GoodsOrderTextField(
                                               keyboardType: TextInputType.number,
-                                              inputFormatters: <TextInputFormatter>[FilteringTextInputFormatter.digitsOnly],
+                                              inputFormatters: <TextInputFormatter>[
+                                                FilteringTextInputFormatter.digitsOnly
+                                              ],
                                               textController: controller.girNoCtrlr,
                                             ),
                                           ],
@@ -179,7 +193,9 @@ class _AddGoodsOrdersWebState extends State<AddGoodsOrdersWeb> {
                                           Dimens.boxWidth10,
                                           GoodsOrderTextField(
                                             keyboardType: TextInputType.number,
-                                            inputFormatters: <TextInputFormatter>[FilteringTextInputFormatter.digitsOnly],
+                                            inputFormatters: <TextInputFormatter>[
+                                              FilteringTextInputFormatter.digitsOnly
+                                            ],
                                             textController: controller.amountCtrlr,
                                           ),
                                         ]),
@@ -197,7 +213,8 @@ class _AddGoodsOrdersWebState extends State<AddGoodsOrdersWeb> {
                                               width: MediaQuery.of(context).size.width / 5,
                                               numberTextField: true,
                                               onTap: () {
-                                                controller.openPurchaseDatePicker = !controller.openPurchaseDatePicker;
+                                                controller.openPurchaseDatePicker =
+                                                    !controller.openPurchaseDatePicker;
                                                 controller.update(['stock_Mangement']);
                                               },
                                               textController: controller.purchaseDateTc,
@@ -215,7 +232,8 @@ class _AddGoodsOrdersWebState extends State<AddGoodsOrdersWeb> {
                                               width: MediaQuery.of(context).size.width / 5,
                                               numberTextField: true,
                                               onTap: () {
-                                                controller.openChallanDatePicker = !controller.openChallanDatePicker;
+                                                controller.openChallanDatePicker =
+                                                    !controller.openChallanDatePicker;
                                                 controller.update(['stock_Mangement']);
                                               },
                                               textController: controller.challanDateTc,
@@ -233,7 +251,8 @@ class _AddGoodsOrdersWebState extends State<AddGoodsOrdersWeb> {
                                               width: MediaQuery.of(context).size.width / 5,
                                               numberTextField: true,
                                               onTap: () {
-                                                controller.openPODatePicker = !controller.openPODatePicker;
+                                                controller.openPODatePicker =
+                                                    !controller.openPODatePicker;
                                                 controller.update(['stock_Mangement']);
                                               },
                                               textController: controller.poDateDateTc,
@@ -251,7 +270,8 @@ class _AddGoodsOrdersWebState extends State<AddGoodsOrdersWeb> {
                                               width: MediaQuery.of(context).size.width / 5,
                                               numberTextField: true,
                                               onTap: () {
-                                                controller.openReceivedPicker = !controller.openReceivedPicker;
+                                                controller.openReceivedPicker =
+                                                    !controller.openReceivedPicker;
                                                 controller.update(['stock_Mangement']);
                                               },
                                               textController: controller.receivedDateTc,
@@ -265,7 +285,9 @@ class _AddGoodsOrdersWebState extends State<AddGoodsOrdersWeb> {
                                             Dimens.boxWidth10,
                                             GoodsOrderTextField(
                                               keyboardType: TextInputType.number,
-                                              inputFormatters: <TextInputFormatter>[FilteringTextInputFormatter.digitsOnly],
+                                              inputFormatters: <TextInputFormatter>[
+                                                FilteringTextInputFormatter.digitsOnly
+                                              ],
                                               textController: controller.lrNoCtrlr,
                                             ),
                                           ],
@@ -277,7 +299,9 @@ class _AddGoodsOrdersWebState extends State<AddGoodsOrdersWeb> {
                                             Dimens.boxWidth10,
                                             GoodsOrderTextField(
                                               keyboardType: TextInputType.number,
-                                              inputFormatters: <TextInputFormatter>[FilteringTextInputFormatter.digitsOnly],
+                                              inputFormatters: <TextInputFormatter>[
+                                                FilteringTextInputFormatter.digitsOnly
+                                              ],
                                               textController: controller.vehicleNoCtrlr,
                                             ),
                                           ],
@@ -289,7 +313,9 @@ class _AddGoodsOrdersWebState extends State<AddGoodsOrdersWeb> {
                                             Dimens.boxWidth10,
                                             GoodsOrderTextField(
                                               keyboardType: TextInputType.number,
-                                              inputFormatters: <TextInputFormatter>[FilteringTextInputFormatter.digitsOnly],
+                                              inputFormatters: <TextInputFormatter>[
+                                                FilteringTextInputFormatter.digitsOnly
+                                              ],
                                               textController: controller.jobRefCtrlr,
                                             ),
                                           ],
@@ -304,8 +330,10 @@ class _AddGoodsOrdersWebState extends State<AddGoodsOrdersWeb> {
                                               child: DropdownWebStock(
                                                 width: MediaQuery.of(context).size.width / 5,
                                                 dropdownList: controller.unitCurrencyList,
-                                                isValueSelected: controller.isUnitCurrencySelected.value,
-                                                selectedValue: controller.selectedUnitCurrency.value,
+                                                isValueSelected:
+                                                    controller.isUnitCurrencySelected.value,
+                                                selectedValue:
+                                                    controller.selectedUnitCurrency.value,
                                                 onValueChanged: controller.onValueChanged,
                                               ),
                                             ),
@@ -328,12 +356,15 @@ class _AddGoodsOrdersWebState extends State<AddGoodsOrdersWeb> {
                             top: 130,
                             child: DatePickerWidget(
                               minDate: DateTime(DateTime.now().year),
-                              maxDate: DateTime(DateTime.now().year, 13, 0), // last date of this year
+                              maxDate:
+                                  DateTime(DateTime.now().year, 13, 0), // last date of this year
                               controller: DateRangePickerController(),
                               selectionChanges: (p0) {
                                 print('po valu ${p0.value.toString()}');
-                                controller.purchaseDateTc.text = DateFormat('yyyy-MM-dd').format(p0.value);
-                                controller.openPurchaseDatePicker = !controller.openPurchaseDatePicker;
+                                controller.purchaseDateTc.text =
+                                    DateFormat('yyyy-MM-dd').format(p0.value);
+                                controller.openPurchaseDatePicker =
+                                    !controller.openPurchaseDatePicker;
                                 controller.update(['stock_Mangement']);
                               },
                             ),
@@ -344,12 +375,15 @@ class _AddGoodsOrdersWebState extends State<AddGoodsOrdersWeb> {
                             top: 170,
                             child: DatePickerWidget(
                               minDate: DateTime(DateTime.now().year),
-                              maxDate: DateTime(DateTime.now().year, 13, 0), // last date of this year
+                              maxDate:
+                                  DateTime(DateTime.now().year, 13, 0), // last date of this year
                               controller: DateRangePickerController(),
                               selectionChanges: (p0) {
                                 print('po valu ${p0.value.toString()}');
-                                controller.challanDateTc.text = DateFormat('yyyy-MM-dd').format(p0.value);
-                                controller.openChallanDatePicker = !controller.openChallanDatePicker;
+                                controller.challanDateTc.text =
+                                    DateFormat('yyyy-MM-dd').format(p0.value);
+                                controller.openChallanDatePicker =
+                                    !controller.openChallanDatePicker;
                                 controller.update(['stock_Mangement']);
                               },
                             ),
@@ -360,11 +394,13 @@ class _AddGoodsOrdersWebState extends State<AddGoodsOrdersWeb> {
                             top: 200,
                             child: DatePickerWidget(
                               minDate: DateTime(DateTime.now().year),
-                              maxDate: DateTime(DateTime.now().year, 13, 0), // last date of this year
+                              maxDate:
+                                  DateTime(DateTime.now().year, 13, 0), // last date of this year
                               controller: DateRangePickerController(),
                               selectionChanges: (p0) {
                                 print('po valu ${p0.value.toString()}');
-                                controller.poDateDateTc.text = DateFormat('yyyy-MM-dd').format(p0.value);
+                                controller.poDateDateTc.text =
+                                    DateFormat('yyyy-MM-dd').format(p0.value);
                                 controller.openPODatePicker = !controller.openPODatePicker;
                                 controller.update(['stock_Mangement']);
                               },
@@ -376,11 +412,13 @@ class _AddGoodsOrdersWebState extends State<AddGoodsOrdersWeb> {
                             top: 230,
                             child: DatePickerWidget(
                               minDate: DateTime(DateTime.now().year),
-                              maxDate: DateTime(DateTime.now().year, 13, 0), // last date of this year
+                              maxDate:
+                                  DateTime(DateTime.now().year, 13, 0), // last date of this year
                               controller: DateRangePickerController(),
                               selectionChanges: (p0) {
                                 print('po valu ${p0.value.toString()}');
-                                controller.receivedDateTc.text = DateFormat('yyyy-MM-dd').format(p0.value);
+                                controller.receivedDateTc.text =
+                                    DateFormat('yyyy-MM-dd').format(p0.value);
                                 controller.openReceivedPicker = !controller.openReceivedPicker;
                                 controller.update(['stock_Mangement']);
                               },
@@ -492,115 +530,327 @@ class AddRowInGoodsOrder extends StatelessWidget {
           //       }))),
           // Text(jsonEncode(
           //     controller.dropdownMapperData)),
+          /// testing
+          // Container(
+          //   child: Column(
+          //     children: [
+          //       Row(
+          //         mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          //         children: [
+          //           Text(
+          //             "Assets",
+          //           ),
+          //           Text(
+          //             "Paid By",
+          //           ),
+          //           Text(
+          //             "Cost",
+          //           ),
+          //           Text(
+          //             "Ordered Qty",
+          //           )
+          //         ],
+          //       ),
+          //       Row(
+          //         mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          //         children: [
+          //           Column(
+          //             mainAxisAlignment: MainAxisAlignment.center,
+          //             crossAxisAlignment: CrossAxisAlignment.center,
+          //             children: [
+          //               DropdownWebStock(
+          //                 width: 250, //MediaQuery.of(context).size.width,
+          //                 dropdownList: controller.assetList,
+          //                 selectedValue: "", //mapData["value"],
+          //                 onValueChanged: (list, selectedValue) {
+          //                   print('paifcghb:${controller.assetList}');
+          //                   print({selectedValue: selectedValue});
+          //                   //  mapData["value"] = selectedValue;
+          //                   controller.dropdownMapperData[selectedValue] = list.firstWhere(
+          //                       (element) => element.name == selectedValue,
+          //                       orElse: null);
+          //                   controller.asset.value =
+          //                       controller.dropdownMapperData[selectedValue]?.asset_code ?? "";
+          //                   controller.asstype.value =
+          //                       controller.dropdownMapperData[selectedValue]?.asset_type ?? "";
+          //                   controller.asscat.value =
+          //                       controller.dropdownMapperData[selectedValue]?.cat_name ?? "";
+
+          //                   print({
+          //                     "lfsmdsmldf",
+          //                     controller.dropdownMapperData[selectedValue]?.asset_code,
+          //                   });
+          //                 },
+          //               ),
+          //               Row(
+          //                 children: [
+          //                   Text("Assets Code :"),
+          //                   Obx(() => Text(controller.asset.value))
+          //                   //  "${controller.dropdownMapperData['asset_code']?.asset_code ?? ''}")
+          //                 ],
+          //               ),
+          //               Row(
+          //                 children: [
+          //                   Text("Assets type :"),
+          //                   Obx(() => Text(controller.asstype
+          //                       .value)) // "${controller.dropdownMapperData[mapData['value']]?.asset_type ?? ''}")
+          //                 ],
+          //               ),
+          //               Row(
+          //                 children: [
+          //                   Text("Assets Category :"),
+          //                   Obx(() => Text(controller.asscat
+          //                       .value)) // "${controller.dropdownMapperData[mapData['value']]?.cat_name ?? ''}")
+          //                 ],
+          //               )
+          //             ],
+          //           ),
+          //           Padding(
+          //             padding: const EdgeInsets.only(left: 10, right: 10),
+          //             child: DropdownWebStock(
+          //               width: 250, //MediaQuery.of(context).size.width,
+          //               dropdownList: controller.paid,
+          //               selectedValue: "", // mapData["value"],
+          //               onValueChanged: (list, selectedValue) {
+          //                 print('paifcghb:${controller.paid}');
+          //                 print({selectedValue: selectedValue});
+          //                 //  mapData["value"] = selectedValue;
+          //                 controller.paiddropdownMapperData[selectedValue] = list
+          //                     .firstWhere((element) => element.name == selectedValue, orElse: null);
+          //               },
+          //             ),
+          //           ),
+          //           Padding(
+          //             padding: const EdgeInsets.only(
+          //               left: 20,
+          //               right: 20,
+          //             ),
+          //             child: Container(
+          //                 width: 250, //(Get.width * .4),
+          //                 // padding: EdgeInsets.all(value),
+          //                 decoration: BoxDecoration(
+          //                   boxShadow: [
+          //                     BoxShadow(
+          //                       color: Colors.black26,
+          //                       offset: const Offset(
+          //                         5.0,
+          //                         5.0,
+          //                       ),
+          //                       blurRadius: 5.0,
+          //                       spreadRadius: 1.0,
+          //                     ),
+          //                   ],
+          //                   color: ColorValues.whiteColor,
+          //                   borderRadius: BorderRadius.circular(5),
+          //                 ),
+          //                 child: LoginCustomTextfield(
+          //                   keyboardType: TextInputType.number,
+          //                   inputFormatters: <TextInputFormatter>[
+          //                     FilteringTextInputFormatter.digitsOnly
+          //                   ],
+          //                   maxLine: 1,
+          //                   // textController: new TextEditingController(text: mapData["value"] ?? ''),
+          //                   // onChanged: (txt) {
+          //                   //   mapData["value"] = txt;
+          //                   // },
+          //                 )),
+          //           ),
+          //           Padding(
+          //             padding: const EdgeInsets.only(
+          //               left: 20,
+          //               right: 20,
+          //             ),
+          //             child: Container(
+          //                 width: 250, //(Get.width * .4),
+          //                 // padding: EdgeInsets.all(value),
+          //                 decoration: BoxDecoration(
+          //                   boxShadow: [
+          //                     BoxShadow(
+          //                       color: Colors.black26,
+          //                       offset: const Offset(
+          //                         5.0,
+          //                         5.0,
+          //                       ),
+          //                       blurRadius: 5.0,
+          //                       spreadRadius: 1.0,
+          //                     ),
+          //                   ],
+          //                   color: ColorValues.whiteColor,
+          //                   borderRadius: BorderRadius.circular(5),
+          //                 ),
+          //                 child: LoginCustomTextfield(
+          //                   keyboardType: TextInputType.number,
+          //                   inputFormatters: <TextInputFormatter>[
+          //                     FilteringTextInputFormatter.digitsOnly
+          //                   ],
+          //                   maxLine: 1,
+          //                   // textController: new TextEditingController(text: mapData["value"] ?? ''),
+          //                   // onChanged: (txt) {
+          //                   //   mapData["value"] = txt;
+          //                   // },
+          //                 )),
+          //           )
+          //         ],
+          //       )
+          //     ],
+          //   ),
+          // ),
+
+          //tenxing
+
+          // Column(
+          //   mainAxisAlignment: MainAxisAlignment.center,
+          //   children: [
+          //     ElevatedButton(
+          //       onPressed: () {
+          //         controller.addRowItem();
+          //         // Whenever you modify rowItem, it will trigger reactivity.
+          //       },
+          //       child: Text('Add Row Item'),
+          //     ),
+          //     Obx(() {
+          //       // Use Obx to observe changes in rowItem and rebuild the UI.
+          //       return Column(
+          //         children: controller.rowItem.value.map((row) {
+          //           return Row(
+          //             children: row.map((item) {
+          //               return Obx(() => Text('${item['key']}: ${item['value']}'));
+          //             }).toList(),
+          //           );
+          //         }).toList(),
+          //       );
+          //     }),
+          //   ],
+          // ),
+
           Container(
             height: 300,
-            child: ScrollableTableView(
-              columns: [
-                "Assets",
-                "Paid By",
-                "Cost",
-                "Ordered Qty",
-              ].map((column) {
-                return TableViewColumn(
-                  label: column,
-                  minWidth: Get.width * 0.23,
-                  // height: Get.height / 2,
-                );
-              }).toList(),
-              rows: controller.rowItem.value.map((record) {
-                return TableViewRow(
-                  height: 130,
-                  cells: record.map((mapData) {
-                    return TableViewCell(
-                      child: (mapData['key'] == "Drop_down")
-                          ? Padding(
-                              padding: const EdgeInsets.only(
-                                left: 20,
-                                right: 20,
-                              ),
-                              child: Column(
-                                mainAxisAlignment: MainAxisAlignment.center,
-                                crossAxisAlignment: CrossAxisAlignment.center,
-                                children: [
-                                  DropdownWebStock(
-                                    width: MediaQuery.of(context).size.width,
-                                    dropdownList: controller.assetList,
-                                    selectedValue: mapData["value"],
-                                    onValueChanged: (list, selectedValue) {
-                                      print('paifcghb:${controller.assetList}');
-                                      print({selectedValue: selectedValue});
-                                      mapData["value"] = selectedValue;
-                                      controller.dropdownMapperData[selectedValue] =
-                                          list.firstWhere((element) => element.name == selectedValue, orElse: null);
-                                    },
-                                  ),
-                                  Row(
-                                    children: [Text("Assets Code :"), Text("${controller.dropdownMapperData[mapData['value']]?.asset_code ?? ''}")],
-                                  ),
-                                  Row(
-                                    children: [Text("Assets type :"), Text("${controller.dropdownMapperData[mapData['value']]?.asset_type ?? ''}")],
-                                  ),
-                                  Row(
-                                    children: [Text("Assets Category :"), Text("${controller.dropdownMapperData[mapData['value']]?.cat_name ?? ''}")],
-                                  )
-                                ],
-                              ),
-                            )
-                          : (mapData['key'] == "Paid_By")
-                              ? Padding(
-                                  padding: const EdgeInsets.only(left: 10, right: 10),
-                                  child: DropdownWebStock(
-                                    width: MediaQuery.of(context).size.width,
-                                    dropdownList: controller.paid,
-                                    selectedValue: mapData["value"],
-                                    onValueChanged: (list, selectedValue) {
-                                      print('paifcghb:${controller.paid}');
-                                      print({selectedValue: selectedValue});
-                                      mapData["value"] = selectedValue;
-                                      controller.paiddropdownMapperData[selectedValue] =
-                                          list.firstWhere((element) => element.name == selectedValue, orElse: null);
-                                    },
-                                  ),
-                                )
-                              : (mapData['key'] == "Order") || (mapData['key'] == "Cost")
-                                  ? Padding(
-                                      padding: const EdgeInsets.only(
-                                        left: 20,
-                                        right: 20,
-                                      ),
-                                      child: Container(
-                                          width: (Get.width * .4),
-                                          // padding: EdgeInsets.all(value),
-                                          decoration: BoxDecoration(
-                                            boxShadow: [
-                                              BoxShadow(
-                                                color: Colors.black26,
-                                                offset: const Offset(
-                                                  5.0,
-                                                  5.0,
-                                                ),
-                                                blurRadius: 5.0,
-                                                spreadRadius: 1.0,
-                                              ),
-                                            ],
-                                            color: ColorValues.whiteColor,
-                                            borderRadius: BorderRadius.circular(5),
-                                          ),
-                                          child: LoginCustomTextfield(
-                                            keyboardType: TextInputType.number,
-                                            inputFormatters: <TextInputFormatter>[FilteringTextInputFormatter.digitsOnly],
-                                            maxLine: 1,
-                                            textController: new TextEditingController(text: mapData["value"] ?? ''),
-                                            onChanged: (txt) {
-                                              mapData["value"] = txt;
-                                            },
-                                          )),
+            child: Obx(
+              () => ScrollableTableView(
+                columns: [
+                  "Assets",
+                  "Paid By",
+                  "Cost",
+                  "Ordered Qty",
+                ].map((column) {
+                  return TableViewColumn(
+                    label: column,
+                    minWidth: Get.width * 0.23,
+                    // height: Get.height / 2,
+                  );
+                }).toList(),
+                rows: controller.rowItem.value.map((record) {
+                  return TableViewRow(
+                    height: 130,
+                    cells: record.map((mapData) {
+                      return TableViewCell(
+                        child: (mapData['key'] == "Drop_down")
+                            ? Padding(
+                                padding: const EdgeInsets.only(
+                                  left: 20,
+                                  right: 20,
+                                ),
+                                child: Column(
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  crossAxisAlignment: CrossAxisAlignment.center,
+                                  children: [
+                                    DropdownWebStock(
+                                      width: MediaQuery.of(context).size.width,
+                                      dropdownList: controller.assetList,
+                                      selectedValue: mapData["value"],
+                                      onValueChanged: (list, selectedValue) {
+                                        print('paifcghb:${controller.assetList}');
+                                        print({selectedValue: selectedValue});
+                                        mapData["value"] = selectedValue;
+                                        controller.dropdownMapperData[selectedValue] = list
+                                            .firstWhere((element) => element.name == selectedValue,
+                                                orElse: null);
+                                      },
+                                    ),
+                                    Row(
+                                      children: [
+                                        Text("Assets Code :"),
+                                        Text(
+                                            "${controller.dropdownMapperData[mapData['value']]?.asset_code ?? ''}")
+                                      ],
+                                    ),
+                                    Row(
+                                      children: [
+                                        Text("Assets type :"),
+                                        Text(
+                                            "${controller.dropdownMapperData[mapData['value']]?.asset_type ?? ''}")
+                                      ],
+                                    ),
+                                    Row(
+                                      children: [
+                                        Text("Assets Category :"),
+                                        Text(
+                                            "${controller.dropdownMapperData[mapData['value']]?.cat_name ?? ''}")
+                                      ],
                                     )
-                                  : Text(mapData['key'] ?? ''),
-                    );
-                  }).toList(),
-                );
-              }).toList(),
+                                  ],
+                                ),
+                              )
+                            : (mapData['key'] == "Paid_By")
+                                ? Padding(
+                                    padding: const EdgeInsets.only(left: 10, right: 10),
+                                    child: DropdownWebStock(
+                                      width: MediaQuery.of(context).size.width,
+                                      dropdownList: controller.paid,
+                                      selectedValue: mapData["value"],
+                                      onValueChanged: (list, selectedValue) {
+                                        print('paifcghb:${controller.paid}');
+                                        print({selectedValue: selectedValue});
+                                        mapData["value"] = selectedValue;
+                                        controller.paiddropdownMapperData[selectedValue] = list
+                                            .firstWhere((element) => element.name == selectedValue,
+                                                orElse: null);
+                                      },
+                                    ),
+                                  )
+                                : (mapData['key'] == "Order") || (mapData['key'] == "Cost")
+                                    ? Padding(
+                                        padding: const EdgeInsets.only(
+                                          left: 20,
+                                          right: 20,
+                                        ),
+                                        child: Container(
+                                            width: (Get.width * .4),
+                                            // padding: EdgeInsets.all(value),
+                                            decoration: BoxDecoration(
+                                              boxShadow: [
+                                                BoxShadow(
+                                                  color: Colors.black26,
+                                                  offset: const Offset(
+                                                    5.0,
+                                                    5.0,
+                                                  ),
+                                                  blurRadius: 5.0,
+                                                  spreadRadius: 1.0,
+                                                ),
+                                              ],
+                                              color: ColorValues.whiteColor,
+                                              borderRadius: BorderRadius.circular(5),
+                                            ),
+                                            child: LoginCustomTextfield(
+                                              keyboardType: TextInputType.number,
+                                              inputFormatters: <TextInputFormatter>[
+                                                FilteringTextInputFormatter.digitsOnly
+                                              ],
+                                              maxLine: 1,
+                                              textController: new TextEditingController(
+                                                  text: mapData["value"] ?? ''),
+                                              onChanged: (txt) {
+                                                mapData["value"] = txt;
+                                              },
+                                            )),
+                                      )
+                                    : Text(mapData['key'] ?? ''),
+                      );
+                    }).toList(),
+                  );
+                }).toList(),
+              ),
             ),
           ),
         ],
