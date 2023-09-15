@@ -84,7 +84,6 @@ class StockManagementGoodsOrdersController extends GetxController {
       "Cost": costFilterText,
       "Status": statusFilterText,
     };
-
     facilityIdStreamSubscription = homecontroller.facilityId$.listen((event) {
       facilityId = event;
       Future.delayed(Duration(seconds: 2), () async {

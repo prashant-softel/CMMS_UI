@@ -54,14 +54,11 @@ class StockManagementAddGoodsOrdersController extends GetxController {
   Rx<bool> isAssetSelected = true.obs;
   Rx<String> selectedAsset = ''.obs;
 
-  Rx<List<List<Map<String, String>>>> rowItem =
-      Rx<List<List<Map<String, String>>>>([]);
+  Rx<List<List<Map<String, String>>>> rowItem = Rx<List<List<Map<String, String>>>>([]);
   Map<String, GetAssetDataModel> dropdownMapperData = {};
   Map<String, PaiedModel> paiddropdownMapperData = {};
-  RxList<GetPurchaseDetailsByIDModel?>? getPurchaseDetailsByIDModelList =
-      <GetPurchaseDetailsByIDModel?>[].obs;
-  Rx<GetPurchaseDetailsByIDModel?> getPurchaseDetailsByIDModel =
-      GetPurchaseDetailsByIDModel().obs;
+  RxList<GetPurchaseDetailsByIDModel?>? getPurchaseDetailsByIDModelList = <GetPurchaseDetailsByIDModel?>[].obs;
+  Rx<GetPurchaseDetailsByIDModel?> getPurchaseDetailsByIDModel = GetPurchaseDetailsByIDModel().obs;
 
 //all textfield tc
   var challanNoCtrlr = TextEditingController();
@@ -93,10 +90,31 @@ class StockManagementAddGoodsOrdersController extends GetxController {
   // var selectedCountry = PaiedModel(name: "Please Select", id: 0).obs;
 
   ///
+  ///    facilityIdStreamSubscription = homecontroller.facilityId$.listen((event) {
+  //    facilityId = event;
   @override
   void onInit() async {
-    id = Get.arguments["id"];
+    // id = Get.arguments["id"];
     print('AddStock:$id');
+    // facilityIdStreamSubscription =
+    //     homeController.facilityId$.listen((event) async {
+    //   facilityId = event;
+
+    //   Future.delayed(Duration(seconds: 1), () {
+    //     getUnitCurrencyList();
+    //   });
+    //   Future.delayed(Duration(seconds: 1), () {
+    //     getBusinessList(4);
+    //   });
+    //   Future.delayed(Duration(seconds: 1), () {
+    //     getAssetList(facilityId);
+    //     if (id != null) {
+    //       Future.delayed(Duration(seconds: 1), () {
+    //         getPurchaseDetailsById(id: id!);
+    //       });
+    //     }
+    //   });
+    // });
     facilityIdStreamSubscription = homeController.facilityId$.listen((event) {
       facilityId = event;
       Future.delayed(Duration(seconds: 1), () {
@@ -116,19 +134,18 @@ class StockManagementAddGoodsOrdersController extends GetxController {
     Future.delayed(Duration(seconds: 1), () {
       getAssetList(facilityId);
 
-      if (id != null) {
-        Future.delayed(Duration(seconds: 1), () {
-          getPurchaseDetailsById(id: id!);
-        });
-      }
+      // if (id != null) {
+      //   Future.delayed(Duration(seconds: 1), () {
+      //     getPurchaseDetailsById(id: id!);
+      //   });
+      // }
     });
 
     super.onInit();
   }
 
   Future<void> getFacilityList() async {
-    final _facilityList =
-        await stockManagementAddGoodsOrdersPresenter.getFacilityList();
+    final _facilityList = await stockManagementAddGoodsOrdersPresenter.getFacilityList();
     //print('Facility25:$_facilityList');
     if (_facilityList != null) {
       for (var facility in _facilityList) {
@@ -143,15 +160,13 @@ class StockManagementAddGoodsOrdersController extends GetxController {
   Future<void> getPurchaseDetailsById({required int id}) async {
     getPurchaseDetailsByIDModelList?.value = <GetPurchaseDetailsByIDModel>[];
 
-    final _getPurchaseDetailsById = await stockManagementAddGoodsOrdersPresenter
-        .getPurchaseDetailsById(id: id);
+    final _getPurchaseDetailsById = await stockManagementAddGoodsOrdersPresenter.getPurchaseDetailsById(id: id);
     print('Edit goods order  Detail:$_getPurchaseDetailsById');
 
     if (_getPurchaseDetailsById != null) {
       getPurchaseDetailsByIDModel.value = _getPurchaseDetailsById;
 
-      print(
-          'Additioanl Email Employees${_getPurchaseDetailsById.goDetails?.length ?? 0}');
+      print('Additioanl Email Employees${_getPurchaseDetailsById.goDetails?.length ?? 0}');
       rowItem.value = [];
       _getPurchaseDetailsById.goDetails?.forEach((element) {
         rowItem.value.add([
@@ -162,32 +177,23 @@ class StockManagementAddGoodsOrdersController extends GetxController {
         ]);
       });
 
-      challanDateTc.text =
-          getPurchaseDetailsByIDModel.value?.challan_date ?? "";
-      purchaseDateTc.text =
-          getPurchaseDetailsByIDModel.value?.purchaseDate ?? "";
+      challanDateTc.text = getPurchaseDetailsByIDModel.value?.challan_date ?? "";
+      purchaseDateTc.text = getPurchaseDetailsByIDModel.value?.purchaseDate ?? "";
       poDateDateTc.text = getPurchaseDetailsByIDModel.value?.po_date ?? "";
       receivedDateTc.text = getPurchaseDetailsByIDModel.value?.receivedAt ?? "";
       challanNoCtrlr.text = getPurchaseDetailsByIDModel.value?.challan_no ?? "";
       pOCtrlr.text = getPurchaseDetailsByIDModel.value?.po_no ?? "";
-      frieghtToPayPaidCtrlr.text =
-          getPurchaseDetailsByIDModel.value?.freight ?? "";
-      noOfPackagesReceivedCtrlr.text =
-          getPurchaseDetailsByIDModel.value?.no_pkg_received ?? "";
-      conditionOfPackagesReceivedCtrlr.text =
-          getPurchaseDetailsByIDModel.value?.condition_pkg_received ?? "";
+      frieghtToPayPaidCtrlr.text = getPurchaseDetailsByIDModel.value?.freight ?? "";
+      noOfPackagesReceivedCtrlr.text = getPurchaseDetailsByIDModel.value?.no_pkg_received ?? "";
+      conditionOfPackagesReceivedCtrlr.text = getPurchaseDetailsByIDModel.value?.condition_pkg_received ?? "";
       girNoCtrlr.text = getPurchaseDetailsByIDModel.value?.gir_no ?? "";
-      amountCtrlr.text =
-          getPurchaseDetailsByIDModel.value?.amount.toString() ?? "";
+      amountCtrlr.text = getPurchaseDetailsByIDModel.value?.amount.toString() ?? "";
       lrNoCtrlr.text = getPurchaseDetailsByIDModel.value?.lr_no ?? "";
       vehicleNoCtrlr.text = getPurchaseDetailsByIDModel.value?.vehicle_no ?? "";
       jobRefCtrlr.text = getPurchaseDetailsByIDModel.value?.job_ref ?? "";
-      textController.text =
-          getPurchaseDetailsByIDModel.value?.goDetails.toString() ?? "";
-      selectedBusinessType.value =
-          getPurchaseDetailsByIDModel.value?.vendor_name ?? "";
-      selectedUnitCurrency.value =
-          getPurchaseDetailsByIDModel.value?.currency ?? "";
+      textController.text = getPurchaseDetailsByIDModel.value?.goDetails.toString() ?? "";
+      selectedBusinessType.value = getPurchaseDetailsByIDModel.value?.vendor_name ?? "";
+      selectedUnitCurrency.value = getPurchaseDetailsByIDModel.value?.currency ?? "";
     }
   }
 
@@ -205,8 +211,7 @@ class StockManagementAddGoodsOrdersController extends GetxController {
 
   Future<void> getAssetList(int _facilityId) async {
     assetList.value = <GetAssetDataModel>[];
-    final _assetList = await stockManagementAddGoodsOrdersPresenter
-        .getAssetList(facilityId: facilityId);
+    final _assetList = await stockManagementAddGoodsOrdersPresenter.getAssetList(facilityId: facilityId);
     // print('jkncejknce:$facilityId');
     if (_assetList != null) {
       for (var asset in _assetList) {
@@ -243,8 +248,7 @@ class StockManagementAddGoodsOrdersController extends GetxController {
 
   void getUnitCurrencyList() async {
     unitCurrencyList.value = <CurrencyListModel>[];
-    final _unitCUrrencyList =
-        await stockManagementAddGoodsOrdersPresenter.getUnitCurrencyList(
+    final _unitCUrrencyList = await stockManagementAddGoodsOrdersPresenter.getUnitCurrencyList(
       isLoading: true,
       facilityId: facilityId,
     );
@@ -260,8 +264,7 @@ class StockManagementAddGoodsOrdersController extends GetxController {
     switch (list.runtimeType) {
       case RxList<CurrencyListModel>:
         {
-          int currencyIndex =
-              unitCurrencyList.indexWhere((x) => x?.name == value);
+          int currencyIndex = unitCurrencyList.indexWhere((x) => x?.name == value);
           selectedUnitCurrencyId = unitCurrencyList[currencyIndex]?.id ?? 0;
         }
         break;
@@ -294,8 +297,7 @@ class StockManagementAddGoodsOrdersController extends GetxController {
     String _pOCtrlr = pOCtrlr.text.trim();
     String _frieghtToPayPaidCtrlr = frieghtToPayPaidCtrlr.text.trim();
     String _noOfPackagesReceivedCtrlr = noOfPackagesReceivedCtrlr.text.trim();
-    String _conditionOfPackagesReceivedCtrlr =
-        conditionOfPackagesReceivedCtrlr.text.trim();
+    String _conditionOfPackagesReceivedCtrlr = conditionOfPackagesReceivedCtrlr.text.trim();
     String _girNoCtrlr = girNoCtrlr.text.trim();
     String _amountCtrlr = amountCtrlr.text.trim();
     String _purchaseDateTc = purchaseDateTc.text.trim();
@@ -338,8 +340,7 @@ class StockManagementAddGoodsOrdersController extends GetxController {
         items: items);
 
     var createGoModelJsonString = createGoModel.toJson();
-    Map<String, dynamic>? responseCreateGoModel =
-        await stockManagementAddGoodsOrdersPresenter.createGoodsOrder(
+    Map<String, dynamic>? responseCreateGoModel = await stockManagementAddGoodsOrdersPresenter.createGoodsOrder(
       createGo: createGoModelJsonString,
       isLoading: true,
     );
@@ -356,8 +357,7 @@ class StockManagementAddGoodsOrdersController extends GetxController {
     String _pOCtrlr = pOCtrlr.text.trim();
     String _frieghtToPayPaidCtrlr = frieghtToPayPaidCtrlr.text.trim();
     String _noOfPackagesReceivedCtrlr = noOfPackagesReceivedCtrlr.text.trim();
-    String _conditionOfPackagesReceivedCtrlr =
-        conditionOfPackagesReceivedCtrlr.text.trim();
+    String _conditionOfPackagesReceivedCtrlr = conditionOfPackagesReceivedCtrlr.text.trim();
     String _girNoCtrlr = girNoCtrlr.text.trim();
     String _amountCtrlr = amountCtrlr.text.trim();
     String _purchaseDateTc = purchaseDateTc.text.trim();
@@ -400,8 +400,7 @@ class StockManagementAddGoodsOrdersController extends GetxController {
         items: items);
 
     var createGoModelJsonString = createGoModel.toJson();
-    Map<String, dynamic>? responseCreateGoModel =
-        await stockManagementAddGoodsOrdersPresenter.updateGoodsOrder(
+    Map<String, dynamic>? responseCreateGoModel = await stockManagementAddGoodsOrdersPresenter.updateGoodsOrder(
       createGo: createGoModelJsonString,
       isLoading: true,
     );
