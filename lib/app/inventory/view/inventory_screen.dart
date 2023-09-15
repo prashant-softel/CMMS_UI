@@ -161,7 +161,7 @@ class InventoryScreen extends GetView<InventoryController> {
                                             UserAccessConstants
                                                 .kWarrantyClaimFeatureId &&
                                         e.view ==
-                                            UserAccessConstants.kHaveViewAccess)
+                                            UserAccessConstants.kNotHaveViewAccess)
                                     .length >
                                 0
                             ? _inventoryList(

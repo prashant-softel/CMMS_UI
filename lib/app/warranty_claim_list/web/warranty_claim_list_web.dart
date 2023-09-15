@@ -131,7 +131,7 @@ class _WarrantyClaimListWebState extends State<WarrantyClaimListWeb> {
                                                                 .kWarrantyClaimFeatureId &&
                                                         e.add ==
                                                             UserAccessConstants
-                                                                .kHaveAddAccess)
+                                                                .kNotHaveAddAccess)
                                                     .length >
                                                 0
                                             ? ActionButton(
