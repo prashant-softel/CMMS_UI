@@ -9,6 +9,7 @@ import 'package:cmms/domain/models/get_purchase_details_model.dart';
 
 import 'package:cmms/domain/models/paiyed_model.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:get/get.dart';
 import 'package:rxdart/subjects.dart';
 
@@ -42,7 +43,7 @@ class StockManagementAddGoodsOrdersController extends GetxController {
   int selectedBusinessTypeId = 1;
   int paidId = 0;
   RxBool showAdditionalColumn = false.obs;
-  int? id = 0;
+  Rx<int> id = 0.obs;
   int facilityId = 0;
 
   //drop down list of assets
@@ -54,10 +55,12 @@ class StockManagementAddGoodsOrdersController extends GetxController {
   Rx<bool> isAssetSelected = true.obs;
   Rx<String> selectedAsset = ''.obs;
 
-  Rx<List<List<Map<String, String>>>> rowItem = Rx<List<List<Map<String, String>>>>([]);
+  // Rx<List<List<Map<String, String>>>> rowItem = Rx<List<List<Map<String, String>>>>([]);
+  final rowItem = Rx<List<List<Map<String, String>>>>([]);
   Map<String, GetAssetDataModel> dropdownMapperData = {};
   Map<String, PaiedModel> paiddropdownMapperData = {};
-  RxList<GetPurchaseDetailsByIDModel?>? getPurchaseDetailsByIDModelList = <GetPurchaseDetailsByIDModel?>[].obs;
+  RxList<GetPurchaseDetailsByIDModel?>? getPurchaseDetailsByIDModelList =
+      <GetPurchaseDetailsByIDModel?>[].obs;
   Rx<GetPurchaseDetailsByIDModel?> getPurchaseDetailsByIDModel = GetPurchaseDetailsByIDModel().obs;
 
 //all textfield tc
@@ -82,6 +85,9 @@ class StockManagementAddGoodsOrdersController extends GetxController {
   bool openChallanDatePicker = false;
   bool openPODatePicker = false;
   bool openReceivedPicker = false;
+  Rx<String> asset = ''.obs;
+  Rx<String> asstype = ''.obs;
+  Rx<String> asscat = ''.obs;
   // var paid = <PaiedModel>[
   //   PaiedModel(name: "Please Select", id: 0),
   //   PaiedModel(name: 'Operator', id: 1),
@@ -94,8 +100,35 @@ class StockManagementAddGoodsOrdersController extends GetxController {
   //    facilityId = event;
   @override
   void onInit() async {
-    // id = Get.arguments["id"];
-    print('AddStock:$id');
+    try {
+      await setUserId();
+      facilityIdStreamSubscription = homeController.facilityId$.listen((event) {
+        facilityId = event;
+        Future.delayed(Duration(seconds: 1), () {
+          getFacilityList();
+        });
+      });
+      Future.delayed(Duration(seconds: 1), () {
+        getUnitCurrencyList();
+      });
+
+      Future.delayed(Duration(seconds: 1), () {
+        updatePaidBy();
+      });
+      Future.delayed(Duration(seconds: 1), () {
+        getBusinessList(4);
+      });
+      Future.delayed(Duration(seconds: 1), () {
+        getAssetList(facilityId);
+
+        if (id.value != 0) {
+          Future.delayed(Duration(seconds: 1), () {
+            getPurchaseDetailsById(id: id.value);
+          });
+        }
+      });
+    } catch (e) {}
+
     // facilityIdStreamSubscription =
     //     homeController.facilityId$.listen((event) async {
     //   facilityId = event;
@@ -115,33 +148,36 @@ class StockManagementAddGoodsOrdersController extends GetxController {
     //     }
     //   });
     // });
-    facilityIdStreamSubscription = homeController.facilityId$.listen((event) {
-      facilityId = event;
-      Future.delayed(Duration(seconds: 1), () {
-        getFacilityList();
-      });
-    });
-    Future.delayed(Duration(seconds: 1), () {
-      getUnitCurrencyList();
-    });
-
-    Future.delayed(Duration(seconds: 1), () {
-      updatePaidBy();
-    });
-    Future.delayed(Duration(seconds: 1), () {
-      getBusinessList(4);
-    });
-    Future.delayed(Duration(seconds: 1), () {
-      getAssetList(facilityId);
-
-      // if (id != null) {
-      //   Future.delayed(Duration(seconds: 1), () {
-      //     getPurchaseDetailsById(id: id!);
-      //   });
-      // }
-    });
 
     super.onInit();
+  }
+
+  Future<void> setUserId() async {
+    try {
+      var dataFromPreviousScreen = Get.arguments;
+
+      id.value = dataFromPreviousScreen['id'];
+      // id= Get.arguments;
+      print('AddStock:$id');
+      // final _flutterSecureStorage = const FlutterSecureStorage();
+      // // Read jobId
+      // String? _userId = await _flutterSecureStorage.read(key: "userId");
+      // if (_userId == null || _userId == '' || _userId == "null") {
+      //   var dataFromPreviousScreen = Get.arguments;
+
+      //   userId.value = dataFromPreviousScreen['userId'];
+      //   await _flutterSecureStorage.write(
+      //     key: "userId",
+      //     value: userId.value == null ? '' : userId.value.toString(),
+      //   );
+      // } else {
+      //   userId.value = int.tryParse(_userId) ?? 0;
+      // }
+      //  await _flutterSecureStorage.delete(key: "userId");
+    } catch (e) {
+      print(e.toString() + 'userId');
+      //  Utility.showDialog(e.toString() + 'userId');
+    }
   }
 
   Future<void> getFacilityList() async {
@@ -160,7 +196,8 @@ class StockManagementAddGoodsOrdersController extends GetxController {
   Future<void> getPurchaseDetailsById({required int id}) async {
     getPurchaseDetailsByIDModelList?.value = <GetPurchaseDetailsByIDModel>[];
 
-    final _getPurchaseDetailsById = await stockManagementAddGoodsOrdersPresenter.getPurchaseDetailsById(id: id);
+    final _getPurchaseDetailsById =
+        await stockManagementAddGoodsOrdersPresenter.getPurchaseDetailsById(id: id);
     print('Edit goods order  Detail:$_getPurchaseDetailsById');
 
     if (_getPurchaseDetailsById != null) {
@@ -185,7 +222,8 @@ class StockManagementAddGoodsOrdersController extends GetxController {
       pOCtrlr.text = getPurchaseDetailsByIDModel.value?.po_no ?? "";
       frieghtToPayPaidCtrlr.text = getPurchaseDetailsByIDModel.value?.freight ?? "";
       noOfPackagesReceivedCtrlr.text = getPurchaseDetailsByIDModel.value?.no_pkg_received ?? "";
-      conditionOfPackagesReceivedCtrlr.text = getPurchaseDetailsByIDModel.value?.condition_pkg_received ?? "";
+      conditionOfPackagesReceivedCtrlr.text =
+          getPurchaseDetailsByIDModel.value?.condition_pkg_received ?? "";
       girNoCtrlr.text = getPurchaseDetailsByIDModel.value?.gir_no ?? "";
       amountCtrlr.text = getPurchaseDetailsByIDModel.value?.amount.toString() ?? "";
       lrNoCtrlr.text = getPurchaseDetailsByIDModel.value?.lr_no ?? "";
@@ -211,7 +249,8 @@ class StockManagementAddGoodsOrdersController extends GetxController {
 
   Future<void> getAssetList(int _facilityId) async {
     assetList.value = <GetAssetDataModel>[];
-    final _assetList = await stockManagementAddGoodsOrdersPresenter.getAssetList(facilityId: facilityId);
+    final _assetList =
+        await stockManagementAddGoodsOrdersPresenter.getAssetList(facilityId: facilityId);
     // print('jkncejknce:$facilityId');
     if (_assetList != null) {
       for (var asset in _assetList) {
@@ -340,7 +379,8 @@ class StockManagementAddGoodsOrdersController extends GetxController {
         items: items);
 
     var createGoModelJsonString = createGoModel.toJson();
-    Map<String, dynamic>? responseCreateGoModel = await stockManagementAddGoodsOrdersPresenter.createGoodsOrder(
+    Map<String, dynamic>? responseCreateGoModel =
+        await stockManagementAddGoodsOrdersPresenter.createGoodsOrder(
       createGo: createGoModelJsonString,
       isLoading: true,
     );
@@ -377,7 +417,7 @@ class StockManagementAddGoodsOrdersController extends GetxController {
       items.add(item);
     });
     CreateGoModel createGoModel = CreateGoModel(
-        id: id,
+        id: id.value,
         facility_id: facilityId,
         order_type: 1,
         location_ID: 1,
@@ -400,7 +440,8 @@ class StockManagementAddGoodsOrdersController extends GetxController {
         items: items);
 
     var createGoModelJsonString = createGoModel.toJson();
-    Map<String, dynamic>? responseCreateGoModel = await stockManagementAddGoodsOrdersPresenter.updateGoodsOrder(
+    Map<String, dynamic>? responseCreateGoModel =
+        await stockManagementAddGoodsOrdersPresenter.updateGoodsOrder(
       createGo: createGoModelJsonString,
       isLoading: true,
     );
@@ -411,4 +452,10 @@ class StockManagementAddGoodsOrdersController extends GetxController {
     }
     print('update  Create GO  data: $createGoModelJsonString');
   }
+}
+
+class RowItem {
+  final List<List<Map<String, String>>> data;
+
+  RowItem(this.data);
 }

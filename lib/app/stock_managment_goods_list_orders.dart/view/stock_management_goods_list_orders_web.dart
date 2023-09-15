@@ -23,12 +23,10 @@ class StockManagementGoodsOrdersWeb extends StatefulWidget {
   }) : super(key: key);
 
   @override
-  State<StockManagementGoodsOrdersWeb> createState() =>
-      _StockManagementGoodsOrdersWebState();
+  State<StockManagementGoodsOrdersWeb> createState() => _StockManagementGoodsOrdersWebState();
 }
 
-class _StockManagementGoodsOrdersWebState
-    extends State<StockManagementGoodsOrdersWeb> {
+class _StockManagementGoodsOrdersWebState extends State<StockManagementGoodsOrdersWeb> {
   @override
   Widget build(BuildContext context) {
     return GetBuilder<StockManagementGoodsOrdersController>(
@@ -49,8 +47,7 @@ class _StockManagementGoodsOrdersWebState
                         ),
                         boxShadow: [
                           BoxShadow(
-                            color: Color.fromARGB(255, 236, 234, 234)
-                                .withOpacity(0.5),
+                            color: Color.fromARGB(255, 236, 234, 234).withOpacity(0.5),
                             spreadRadius: 2,
                             blurRadius: 5,
                             offset: Offset(0, 2),
@@ -71,11 +68,9 @@ class _StockManagementGoodsOrdersWebState
                             onTap: () {
                               Get.back();
                             },
-                            child: Text(" / STOCK MANAGEMENT",
-                                style: Styles.greyMediumLight12),
+                            child: Text(" / STOCK MANAGEMENT", style: Styles.greyMediumLight12),
                           ),
-                          Text(" / GOODS ORDER LIST",
-                              style: Styles.greyMediumLight12)
+                          Text(" / GOODS ORDER LIST", style: Styles.greyMediumLight12)
                         ],
                       ),
                     ),
@@ -97,8 +92,7 @@ class _StockManagementGoodsOrdersWebState
                                 Padding(
                                   padding: const EdgeInsets.all(10.0),
                                   child: Row(
-                                    mainAxisAlignment:
-                                        MainAxisAlignment.spaceBetween,
+                                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
                                     children: [
                                       Text(
                                         "Goods Order List",
@@ -110,18 +104,12 @@ class _StockManagementGoodsOrdersWebState
                                           CustomRichText(title: 'Date Range'),
                                           Dimens.boxWidth10,
                                           CustomTextFieldForStock(
-                                            width: MediaQuery.of(context)
-                                                    .size
-                                                    .width /
-                                                5,
+                                            width: MediaQuery.of(context).size.width / 5,
                                             numberTextField: true,
                                             onTap: () {
-                                              controller
-                                                      .openFromDateToStartDatePicker =
-                                                  !controller
-                                                      .openFromDateToStartDatePicker;
-                                              controller.update(
-                                                  ['stock_Mangement_Date']);
+                                              controller.openFromDateToStartDatePicker =
+                                                  !controller.openFromDateToStartDatePicker;
+                                              controller.update(['stock_Mangement_Date']);
                                             },
                                             hintText:
                                                 '${controller.formattedFromdate} - ${controller.formattedTodate}',
@@ -133,8 +121,7 @@ class _StockManagementGoodsOrdersWebState
                                         icon: Icons.add,
                                         label: "Add New",
                                         onPressed: () {
-                                          Get.offNamed(Routes
-                                              .updateGoodsOrdersDetailsScreen);
+                                          Get.offNamed(Routes.updateGoodsOrdersDetailsScreen);
                                         },
                                         color: ColorValues.appGreenColor,
                                       ),
@@ -208,8 +195,7 @@ class _StockManagementGoodsOrdersWebState
                                       height: 35,
                                       margin: EdgeInsets.only(left: 10),
                                       child: CustomElevatedButton(
-                                          backgroundColor:
-                                              ColorValues.appLightBlueColor,
+                                          backgroundColor: ColorValues.appLightBlueColor,
                                           onPressed: () {},
                                           text: 'Copy'),
                                     ),
@@ -217,8 +203,7 @@ class _StockManagementGoodsOrdersWebState
                                       height: 35,
                                       margin: EdgeInsets.only(left: 10),
                                       child: CustomElevatedButton(
-                                          backgroundColor:
-                                              ColorValues.appLightBlueColor,
+                                          backgroundColor: ColorValues.appLightBlueColor,
                                           onPressed: () {},
                                           text: 'Excel'),
                                     ),
@@ -226,8 +211,7 @@ class _StockManagementGoodsOrdersWebState
                                       height: 35,
                                       margin: EdgeInsets.only(left: 10),
                                       child: CustomElevatedButton(
-                                          backgroundColor:
-                                              ColorValues.appLightBlueColor,
+                                          backgroundColor: ColorValues.appLightBlueColor,
                                           onPressed: () {},
                                           text: 'PDF'),
                                     ),
@@ -237,21 +221,17 @@ class _StockManagementGoodsOrdersWebState
                                       height: 35,
                                       margin: Dimens.edgeInsets0_0_16_0,
                                       child: TextField(
-                                        onChanged: (value) =>
-                                            controller.search(value),
+                                        onChanged: (value) => controller.search(value),
                                         decoration: InputDecoration(
-                                          enabledBorder:
-                                              const OutlineInputBorder(
-                                            borderSide: const BorderSide(
-                                                color: Colors.grey, width: 0.0),
+                                          enabledBorder: const OutlineInputBorder(
+                                            borderSide:
+                                                const BorderSide(color: Colors.grey, width: 0.0),
                                           ),
-                                          focusedBorder:
-                                              const OutlineInputBorder(
-                                            borderSide: const BorderSide(
-                                                color: Colors.grey, width: 0.0),
+                                          focusedBorder: const OutlineInputBorder(
+                                            borderSide:
+                                                const BorderSide(color: Colors.grey, width: 0.0),
                                           ),
-                                          contentPadding:
-                                              Dimens.edgeInsets10_0_0_0,
+                                          contentPadding: Dimens.edgeInsets10_0_0_0,
                                           hintText: 'search'.tr,
                                           hintStyle: Styles.grey12,
                                         ),
@@ -267,45 +247,31 @@ class _StockManagementGoodsOrdersWebState
                                     ? Center(child: Text('No data'))
                                     : Expanded(
                                         child: ValueListenableBuilder(
-                                            valueListenable:
-                                                controller.columnVisibility,
+                                            valueListenable: controller.columnVisibility,
                                             builder: (context, value, child) {
                                               final dataSource =
-                                                  GoodsOrderListDataSource(
-                                                      controller);
+                                                  GoodsOrderListDataSource(controller);
 
                                               return PaginatedDataTable2(
                                                 columnSpacing: 10,
                                                 dataRowHeight: 70,
-                                                source:
-                                                    dataSource, // Custom DataSource class
-                                                headingRowHeight:
-                                                    Get.height * 0.12,
+                                                source: dataSource, // Custom DataSource class
+                                                headingRowHeight: Get.height * 0.12,
                                                 minWidth: Get.width * 1.2,
                                                 showCheckboxColumn: false,
-                                                rowsPerPage:
-                                                    10, // Number of rows per page
-                                                availableRowsPerPage: [
-                                                  10,
-                                                  20,
-                                                  30,
-                                                  50
-                                                ],
+                                                rowsPerPage: 10, // Number of rows per page
+                                                availableRowsPerPage: [10, 20, 30, 50],
                                                 columns: [
-                                                  for (var entry
-                                                      in value.entries)
+                                                  for (var entry in value.entries)
                                                     if (entry.value)
                                                       buildDataColumn(
                                                         entry.key,
-                                                        controller.filterText[
-                                                            entry.key]!,
-                                                        controller.columnwidth[
-                                                            entry.key],
+                                                        controller.filterText[entry.key]!,
+                                                        controller.columnwidth[entry.key],
                                                       ),
                                                   buildDataColumn(
                                                     'Actions',
-                                                    controller
-                                                        .userDateFilterText,
+                                                    controller.userDateFilterText,
                                                     150,
                                                   ),
                                                 ],
@@ -424,67 +390,49 @@ class _StockManagementGoodsOrdersWebState
                                 //   ),
 
                                 Padding(
-                                  padding: const EdgeInsets.symmetric(
-                                      horizontal: 25),
+                                  padding: const EdgeInsets.symmetric(horizontal: 25),
                                   child: ValueListenableBuilder(
-                                      valueListenable:
-                                          controller.paginationController,
+                                      valueListenable: controller.paginationController,
                                       builder: (context, value, child) {
                                         return Row(children: [
                                           Text(
                                               "${controller.paginationController.currentPage}  of ${controller.paginationController.pageCount}"),
                                           Row(children: [
                                             IconButton(
-                                              onPressed: controller
-                                                          .paginationController
-                                                          .currentPage <=
-                                                      1
-                                                  ? null
-                                                  : () {
-                                                      controller
-                                                          .paginationController
-                                                          .previous();
-                                                    },
+                                              onPressed:
+                                                  controller.paginationController.currentPage <= 1
+                                                      ? null
+                                                      : () {
+                                                          controller.paginationController
+                                                              .previous();
+                                                        },
                                               iconSize: 20,
                                               splashRadius: 20,
                                               icon: Icon(
-                                                Icons
-                                                    .arrow_back_ios_new_rounded,
-                                                color: controller
-                                                            .paginationController
-                                                            .currentPage <=
-                                                        1
-                                                    ? Colors.black26
-                                                    : Theme.of(context)
-                                                        .primaryColor,
+                                                Icons.arrow_back_ios_new_rounded,
+                                                color:
+                                                    controller.paginationController.currentPage <= 1
+                                                        ? Colors.black26
+                                                        : Theme.of(context).primaryColor,
                                               ),
                                             ),
                                             IconButton(
-                                              onPressed: controller
-                                                          .paginationController
-                                                          .currentPage >=
-                                                      controller
-                                                          .paginationController
-                                                          .pageCount
-                                                  ? null
-                                                  : () {
-                                                      controller
-                                                          .paginationController
-                                                          .next();
-                                                    },
+                                              onPressed:
+                                                  controller.paginationController.currentPage >=
+                                                          controller.paginationController.pageCount
+                                                      ? null
+                                                      : () {
+                                                          controller.paginationController.next();
+                                                        },
                                               iconSize: 20,
                                               splashRadius: 20,
                                               icon: Icon(
                                                 Icons.arrow_forward_ios_rounded,
                                                 color: controller
-                                                            .paginationController
-                                                            .currentPage >=
-                                                        controller
-                                                            .paginationController
-                                                            .pageCount
+                                                            .paginationController.currentPage >=
+                                                        controller.paginationController.pageCount
                                                     ? Colors.black26
-                                                    : Theme.of(context)
-                                                        .primaryColor,
+                                                    : Theme.of(context).primaryColor,
                                               ),
                                             ),
                                           ]),
@@ -503,8 +451,7 @@ class _StockManagementGoodsOrdersWebState
                               selectionMode: DateRangePickerSelectionMode.range,
                               monthCellStyle: DateRangePickerMonthCellStyle(
                                 todayCellDecoration: BoxDecoration(
-                                    shape: BoxShape.circle,
-                                    color: ColorValues.appDarkBlueColor),
+                                    shape: BoxShape.circle, color: ColorValues.appDarkBlueColor),
                               ), // last date of this year
                               // controller: DateRangePickerController(),
                               initialSelectedRange: PickerDateRange(
@@ -514,14 +461,11 @@ class _StockManagementGoodsOrdersWebState
 
                               onSubmit: (value) {
                                 print('po valu ${value.toString()}');
-                                PickerDateRange? data =
-                                    value as PickerDateRange;
+                                PickerDateRange? data = value as PickerDateRange;
 
-                                var pickUpDate =
-                                    DateTime.parse(data.startDate.toString());
+                                var pickUpDate = DateTime.parse(data.startDate.toString());
                                 controller.fromDate.value = pickUpDate;
-                                var dropDate =
-                                    DateTime.parse(data.endDate.toString());
+                                var dropDate = DateTime.parse(data.endDate.toString());
                                 dropDate != null
                                     ? controller.toDate.value = dropDate
                                     : controller.toDate.value = pickUpDate;
@@ -577,8 +521,7 @@ DataColumn2 buildDataColumn(
               style: TextStyle(height: 1.0),
               decoration: InputDecoration(
                 hintText: 'Filter',
-                contentPadding:
-                    EdgeInsets.fromLTRB(5, 0, 5, 0), // Reduced vertical padding
+                contentPadding: EdgeInsets.fromLTRB(5, 0, 5, 0), // Reduced vertical padding
                 border: OutlineInputBorder(
                   borderRadius: BorderRadius.circular(5),
                   borderSide: BorderSide(color: Colors.black),
@@ -696,47 +639,32 @@ class GoodsOrderListDataSource extends DataTableSource {
                           decoration: BoxDecoration(
                             color: controller.goodsOrdersList
                                         .firstWhere(
-                                          (e) =>
-                                              e?.id ==
-                                              GoodsOrderListDetails!.id,
-                                          orElse: () =>
-                                              GoodsOrdersListModel(id: 00),
+                                          (e) => e?.id == GoodsOrderListDetails!.id,
+                                          orElse: () => GoodsOrdersListModel(id: 00),
                                         )
                                         ?.status ==
                                     306
                                 ? ColorValues.rejectedStatusColor
                                 : controller.goodsOrdersList
                                             .firstWhere(
-                                              (e) =>
-                                                  e?.id ==
-                                                  GoodsOrderListDetails!.id,
-                                              orElse: () =>
-                                                  GoodsOrdersListModel(id: 00),
+                                              (e) => e?.id == GoodsOrderListDetails!.id,
+                                              orElse: () => GoodsOrdersListModel(id: 00),
                                             )
                                             ?.status ==
                                         301
                                     ? ColorValues.submitColor
                                     : controller.goodsOrdersList
                                                 .firstWhere(
-                                                  (e) =>
-                                                      e?.id ==
-                                                      GoodsOrderListDetails!.id,
-                                                  orElse: () =>
-                                                      GoodsOrdersListModel(
-                                                          id: 00),
+                                                  (e) => e?.id == GoodsOrderListDetails!.id,
+                                                  orElse: () => GoodsOrdersListModel(id: 00),
                                                 )
                                                 ?.status ==
                                             305
                                         ? ColorValues.closeColor
                                         : controller.goodsOrdersList
                                                     .firstWhere(
-                                                      (e) =>
-                                                          e?.id ==
-                                                          GoodsOrderListDetails!
-                                                              .id,
-                                                      orElse: () =>
-                                                          GoodsOrdersListModel(
-                                                              id: 00),
+                                                      (e) => e?.id == GoodsOrderListDetails!.id,
+                                                      orElse: () => GoodsOrdersListModel(id: 00),
                                                     )
                                                     ?.status ==
                                                 307
@@ -763,8 +691,7 @@ class GoodsOrderListDataSource extends DataTableSource {
                           onPress: () {
                             int id = GoodsOrderListDetails?.id ?? 0;
                             if (id != 0) {
-                              Get.toNamed(Routes.viewGoodsOrders,
-                                  arguments: {'id': id});
+                              Get.toNamed(Routes.viewGoodsOrders, arguments: {'id': id});
                             }
                           },
                         ),
@@ -776,7 +703,7 @@ class GoodsOrderListDataSource extends DataTableSource {
                             int id = GoodsOrderListDetails?.id ?? 0;
                             if (id != 0) {
                               Get.toNamed(Routes.updateGoodsOrdersDetailsScreen,
-                                  arguments: {'id': id});
+                                  arguments: {"id": id});
                             }
                           },
                         ),
@@ -787,8 +714,7 @@ class GoodsOrderListDataSource extends DataTableSource {
                           onPress: () {
                             int id = GoodsOrderListDetails?.id ?? 0;
                             if (id != 0) {
-                              Get.toNamed(Routes.viewGoodsOrders,
-                                  arguments: {'id': id, "type": 1});
+                              Get.toNamed(Routes.viewGoodsOrders, arguments: {'id': id, "type": 1});
                             }
                           },
                         ),

@@ -45,8 +45,7 @@ class _ViewAddGoodsOrdersWebState extends State<ViewAddGoodsOrdersWeb> {
                       ),
                       boxShadow: [
                         BoxShadow(
-                          color: Color.fromARGB(255, 236, 234, 234)
-                              .withOpacity(0.5),
+                          color: Color.fromARGB(255, 236, 234, 234).withOpacity(0.5),
                           spreadRadius: 2,
                           blurRadius: 5,
                           offset: Offset(0, 2),
@@ -67,8 +66,7 @@ class _ViewAddGoodsOrdersWebState extends State<ViewAddGoodsOrdersWeb> {
                           onTap: () {
                             Get.back();
                           },
-                          child: Text(" / STOCK MANAGEMENT",
-                              style: Styles.greyMediumLight12),
+                          child: Text(" / STOCK MANAGEMENT", style: Styles.greyMediumLight12),
                         ),
                         GestureDetector(
                             onTap: () {
@@ -117,12 +115,10 @@ class _ViewAddGoodsOrdersWebState extends State<ViewAddGoodsOrdersWeb> {
                                 child: Container(
                                   margin: Dimens.edgeInsets20,
                                   child: Row(
-                                    crossAxisAlignment:
-                                        CrossAxisAlignment.start,
+                                    crossAxisAlignment: CrossAxisAlignment.start,
                                     children: [
                                       Column(
-                                        crossAxisAlignment:
-                                            CrossAxisAlignment.end,
+                                        crossAxisAlignment: CrossAxisAlignment.end,
                                         children: [
                                           Row(
                                             children: [
@@ -131,20 +127,13 @@ class _ViewAddGoodsOrdersWebState extends State<ViewAddGoodsOrdersWeb> {
                                               Dimens.boxWidth10,
                                               SizedBox(
                                                 child: DropdownWebStock(
-                                                  width: MediaQuery.of(context)
-                                                          .size
-                                                          .width /
-                                                      5,
-                                                  dropdownList:
-                                                      controller.ownerList,
-                                                  isValueSelected: controller
-                                                      .isSelectedBusinessType
-                                                      .value,
-                                                  selectedValue: controller
-                                                      .selectedBusinessType
-                                                      .value,
-                                                  onValueChanged:
-                                                      controller.onValueChanged,
+                                                  width: MediaQuery.of(context).size.width / 5,
+                                                  dropdownList: controller.ownerList,
+                                                  isValueSelected:
+                                                      controller.isSelectedBusinessType.value,
+                                                  selectedValue:
+                                                      controller.selectedBusinessType.value,
+                                                  onValueChanged: controller.onValueChanged,
                                                 ),
                                               ),
                                             ],
@@ -152,26 +141,18 @@ class _ViewAddGoodsOrdersWebState extends State<ViewAddGoodsOrdersWeb> {
                                           Dimens.boxHeight5,
                                           Row(
                                             children: [
-                                              CustomRichText(
-                                                  title: 'Challan No.: '),
+                                              CustomRichText(title: 'Challan No.: '),
                                               Dimens.boxWidth10,
                                               Container(
                                                   decoration: BoxDecoration(
-                                                    borderRadius:
-                                                        BorderRadius.circular(
-                                                            10),
+                                                    borderRadius: BorderRadius.circular(10),
                                                     border: Border.all(
-                                                      color: Color.fromARGB(
-                                                          255, 227, 224, 224),
+                                                      color: Color.fromARGB(255, 227, 224, 224),
                                                       width: 1,
                                                     ),
                                                     boxShadow: [
                                                       BoxShadow(
-                                                        color: Color.fromARGB(
-                                                                255,
-                                                                236,
-                                                                234,
-                                                                234)
+                                                        color: Color.fromARGB(255, 236, 234, 234)
                                                             .withOpacity(0.5),
                                                         spreadRadius: 2,
                                                         blurRadius: 5,
@@ -179,13 +160,9 @@ class _ViewAddGoodsOrdersWebState extends State<ViewAddGoodsOrdersWeb> {
                                                       ),
                                                     ],
                                                   ),
-                                                  width: (MediaQuery.of(context)
-                                                          .size
-                                                          .width *
-                                                      .2),
+                                                  width: (MediaQuery.of(context).size.width * .2),
                                                   child: LoginCustomTextfield(
-                                                    textController: controller
-                                                        .challanNoCtrlr,
+                                                    textController: controller.challanNoCtrlr,
                                                   )),
                                             ],
                                           ),
@@ -196,21 +173,14 @@ class _ViewAddGoodsOrdersWebState extends State<ViewAddGoodsOrdersWeb> {
                                               Dimens.boxWidth10,
                                               Container(
                                                   decoration: BoxDecoration(
-                                                    borderRadius:
-                                                        BorderRadius.circular(
-                                                            10),
+                                                    borderRadius: BorderRadius.circular(10),
                                                     border: Border.all(
-                                                      color: Color.fromARGB(
-                                                          255, 227, 224, 224),
+                                                      color: Color.fromARGB(255, 227, 224, 224),
                                                       width: 1,
                                                     ),
                                                     boxShadow: [
                                                       BoxShadow(
-                                                        color: Color.fromARGB(
-                                                                255,
-                                                                236,
-                                                                234,
-                                                                234)
+                                                        color: Color.fromARGB(255, 236, 234, 234)
                                                             .withOpacity(0.5),
                                                         spreadRadius: 2,
                                                         blurRadius: 5,
@@ -218,40 +188,56 @@ class _ViewAddGoodsOrdersWebState extends State<ViewAddGoodsOrdersWeb> {
                                                       ),
                                                     ],
                                                   ),
-                                                  width: (MediaQuery.of(context)
-                                                          .size
-                                                          .width *
-                                                      .2),
+                                                  width: (MediaQuery.of(context).size.width * .2),
+                                                  child: LoginCustomTextfield(
+                                                    textController: controller.pOCtrlr,
+                                                  )),
+                                            ],
+                                          ),
+                                          Dimens.boxHeight5,
+                                          Row(
+                                            children: [
+                                              CustomRichText(title: 'Frieght:To Pay /Paid : '),
+                                              Dimens.boxWidth10,
+                                              Container(
+                                                  decoration: BoxDecoration(
+                                                    borderRadius: BorderRadius.circular(10),
+                                                    border: Border.all(
+                                                      color: Color.fromARGB(255, 227, 224, 224),
+                                                      width: 1,
+                                                    ),
+                                                    boxShadow: [
+                                                      BoxShadow(
+                                                        color: Color.fromARGB(255, 236, 234, 234)
+                                                            .withOpacity(0.5),
+                                                        spreadRadius: 2,
+                                                        blurRadius: 5,
+                                                        offset: Offset(0, 2),
+                                                      ),
+                                                    ],
+                                                  ),
+                                                  width: (MediaQuery.of(context).size.width * .2),
                                                   child: LoginCustomTextfield(
                                                     textController:
-                                                        controller.pOCtrlr,
+                                                        controller.frieghtToPayPaidCtrlr,
                                                   )),
                                             ],
                                           ),
                                           Dimens.boxHeight5,
                                           Row(
                                             children: [
-                                              CustomRichText(
-                                                  title:
-                                                      'Frieght:To Pay /Paid : '),
+                                              CustomRichText(title: 'No. of Packages  received :'),
                                               Dimens.boxWidth10,
                                               Container(
                                                   decoration: BoxDecoration(
-                                                    borderRadius:
-                                                        BorderRadius.circular(
-                                                            10),
+                                                    borderRadius: BorderRadius.circular(10),
                                                     border: Border.all(
-                                                      color: Color.fromARGB(
-                                                          255, 227, 224, 224),
+                                                      color: Color.fromARGB(255, 227, 224, 224),
                                                       width: 1,
                                                     ),
                                                     boxShadow: [
                                                       BoxShadow(
-                                                        color: Color.fromARGB(
-                                                                255,
-                                                                236,
-                                                                234,
-                                                                234)
+                                                        color: Color.fromARGB(255, 236, 234, 234)
                                                             .withOpacity(0.5),
                                                         spreadRadius: 2,
                                                         blurRadius: 5,
@@ -259,135 +245,68 @@ class _ViewAddGoodsOrdersWebState extends State<ViewAddGoodsOrdersWeb> {
                                                       ),
                                                     ],
                                                   ),
-                                                  width: (MediaQuery.of(context)
-                                                          .size
-                                                          .width *
-                                                      .2),
-                                                  child: LoginCustomTextfield(
-                                                    textController: controller
-                                                        .frieghtToPayPaidCtrlr,
-                                                  )),
-                                            ],
-                                          ),
-                                          Dimens.boxHeight5,
-                                          Row(
-                                            children: [
-                                              CustomRichText(
-                                                  title:
-                                                      'No. of Packages  received :'),
-                                              Dimens.boxWidth10,
-                                              Container(
-                                                  decoration: BoxDecoration(
-                                                    borderRadius:
-                                                        BorderRadius.circular(
-                                                            10),
-                                                    border: Border.all(
-                                                      color: Color.fromARGB(
-                                                          255, 227, 224, 224),
-                                                      width: 1,
-                                                    ),
-                                                    boxShadow: [
-                                                      BoxShadow(
-                                                        color: Color.fromARGB(
-                                                                255,
-                                                                236,
-                                                                234,
-                                                                234)
-                                                            .withOpacity(0.5),
-                                                        spreadRadius: 2,
-                                                        blurRadius: 5,
-                                                        offset: Offset(0, 2),
-                                                      ),
-                                                    ],
-                                                  ),
-                                                  width: (MediaQuery.of(context)
-                                                          .size
-                                                          .width *
-                                                      .2),
-                                                  child: LoginCustomTextfield(
-                                                    textController: controller
-                                                        .noOfPackagesReceivedCtrlr,
-                                                  )),
-                                            ],
-                                          ),
-                                          Dimens.boxHeight5,
-                                          Row(
-                                            children: [
-                                              CustomRichText(
-                                                  title:
-                                                      'Condition of Packages Received : '),
-                                              Dimens.boxWidth10,
-                                              Container(
-                                                  decoration: BoxDecoration(
-                                                    borderRadius:
-                                                        BorderRadius.circular(
-                                                            10),
-                                                    border: Border.all(
-                                                      color: Color.fromARGB(
-                                                          255, 227, 224, 224),
-                                                      width: 1,
-                                                    ),
-                                                    boxShadow: [
-                                                      BoxShadow(
-                                                        color: Color.fromARGB(
-                                                                255,
-                                                                236,
-                                                                234,
-                                                                234)
-                                                            .withOpacity(0.5),
-                                                        spreadRadius: 2,
-                                                        blurRadius: 5,
-                                                        offset: Offset(0, 2),
-                                                      ),
-                                                    ],
-                                                  ),
-                                                  width: (MediaQuery.of(context)
-                                                          .size
-                                                          .width *
-                                                      .2),
-                                                  child: LoginCustomTextfield(
-                                                    textController: controller
-                                                        .conditionOfPackagesReceivedCtrlr,
-                                                  )),
-                                            ],
-                                          ),
-                                          Dimens.boxHeight5,
-                                          Row(
-                                            children: [
-                                              CustomRichText(
-                                                  title: 'GIR. No. : '),
-                                              Dimens.boxWidth10,
-                                              Container(
-                                                  decoration: BoxDecoration(
-                                                    borderRadius:
-                                                        BorderRadius.circular(
-                                                            10),
-                                                    border: Border.all(
-                                                      color: Color.fromARGB(
-                                                          255, 227, 224, 224),
-                                                      width: 1,
-                                                    ),
-                                                    boxShadow: [
-                                                      BoxShadow(
-                                                        color: Color.fromARGB(
-                                                                255,
-                                                                236,
-                                                                234,
-                                                                234)
-                                                            .withOpacity(0.5),
-                                                        spreadRadius: 2,
-                                                        blurRadius: 5,
-                                                        offset: Offset(0, 2),
-                                                      ),
-                                                    ],
-                                                  ),
-                                                  width: (MediaQuery.of(context)
-                                                          .size
-                                                          .width *
-                                                      .2),
+                                                  width: (MediaQuery.of(context).size.width * .2),
                                                   child: LoginCustomTextfield(
                                                     textController:
-                                                        controller.girNoCtrlr,
+                                                        controller.noOfPackagesReceivedCtrlr,
+                                                  )),
+                                            ],
+                                          ),
+                                          Dimens.boxHeight5,
+                                          Row(
+                                            children: [
+                                              CustomRichText(
+                                                  title: 'Condition of Packages Received : '),
+                                              Dimens.boxWidth10,
+                                              Container(
+                                                  decoration: BoxDecoration(
+                                                    borderRadius: BorderRadius.circular(10),
+                                                    border: Border.all(
+                                                      color: Color.fromARGB(255, 227, 224, 224),
+                                                      width: 1,
+                                                    ),
+                                                    boxShadow: [
+                                                      BoxShadow(
+                                                        color: Color.fromARGB(255, 236, 234, 234)
+                                                            .withOpacity(0.5),
+                                                        spreadRadius: 2,
+                                                        blurRadius: 5,
+                                                        offset: Offset(0, 2),
+                                                      ),
+                                                    ],
+                                                  ),
+                                                  width: (MediaQuery.of(context).size.width * .2),
+                                                  child: LoginCustomTextfield(
+                                                    textController:
+                                                        controller.conditionOfPackagesReceivedCtrlr,
+                                                  )),
+                                            ],
+                                          ),
+                                          Dimens.boxHeight5,
+                                          Row(
+                                            children: [
+                                              CustomRichText(title: 'GIR. No. : '),
+                                              Dimens.boxWidth10,
+                                              Container(
+                                                  decoration: BoxDecoration(
+                                                    borderRadius: BorderRadius.circular(10),
+                                                    border: Border.all(
+                                                      color: Color.fromARGB(255, 227, 224, 224),
+                                                      width: 1,
+                                                    ),
+                                                    boxShadow: [
+                                                      BoxShadow(
+                                                        color: Color.fromARGB(255, 236, 234, 234)
+                                                            .withOpacity(0.5),
+                                                        spreadRadius: 2,
+                                                        blurRadius: 5,
+                                                        offset: Offset(0, 2),
+                                                      ),
+                                                    ],
+                                                  ),
+                                                  width: (MediaQuery.of(context).size.width * .2),
+                                                  child: LoginCustomTextfield(
+                                                    textController: controller.girNoCtrlr,
                                                   )),
                                             ],
                                           ),
@@ -397,17 +316,14 @@ class _ViewAddGoodsOrdersWebState extends State<ViewAddGoodsOrdersWeb> {
                                             Dimens.boxWidth10,
                                             Container(
                                                 decoration: BoxDecoration(
-                                                  borderRadius:
-                                                      BorderRadius.circular(10),
+                                                  borderRadius: BorderRadius.circular(10),
                                                   border: Border.all(
-                                                    color: Color.fromARGB(
-                                                        255, 227, 224, 224),
+                                                    color: Color.fromARGB(255, 227, 224, 224),
                                                     width: 1,
                                                   ),
                                                   boxShadow: [
                                                     BoxShadow(
-                                                      color: Color.fromARGB(255,
-                                                              236, 234, 234)
+                                                      color: Color.fromARGB(255, 236, 234, 234)
                                                           .withOpacity(0.5),
                                                       spreadRadius: 2,
                                                       blurRadius: 5,
@@ -415,143 +331,99 @@ class _ViewAddGoodsOrdersWebState extends State<ViewAddGoodsOrdersWeb> {
                                                     ),
                                                   ],
                                                 ),
-                                                width: (MediaQuery.of(context)
-                                                        .size
-                                                        .width *
-                                                    .2),
+                                                width: (MediaQuery.of(context).size.width * .2),
                                                 child: LoginCustomTextfield(
-                                                  textController:
-                                                      controller.amountCtrlr,
+                                                  textController: controller.amountCtrlr,
                                                 )),
                                           ]),
                                         ],
                                       ),
                                       Spacer(),
                                       Column(
-                                        crossAxisAlignment:
-                                            CrossAxisAlignment.end,
+                                        crossAxisAlignment: CrossAxisAlignment.end,
                                         children: [
                                           Row(
                                             children: [
-                                              CustomRichText(
-                                                  title: 'Purchase Date :'),
+                                              CustomRichText(title: 'Purchase Date :'),
                                               Dimens.boxWidth10,
                                               CustomTextFieldForStock(
-                                                width: MediaQuery.of(context)
-                                                        .size
-                                                        .width /
-                                                    5.1,
+                                                width: MediaQuery.of(context).size.width / 5.1,
                                                 numberTextField: true,
                                                 onTap: () {
-                                                  controller
-                                                          .openPurchaseDatePicker =
-                                                      !controller
-                                                          .openPurchaseDatePicker;
-                                                  controller.update(
-                                                      ['stock_Mangement']);
+                                                  controller.openPurchaseDatePicker =
+                                                      !controller.openPurchaseDatePicker;
+                                                  controller.update(['stock_Mangement']);
                                                 },
-                                                textController:
-                                                    controller.purchaseDateTc,
+                                                textController: controller.purchaseDateTc,
                                               ),
                                             ],
                                           ),
                                           Dimens.boxHeight5,
                                           Row(
                                             children: [
-                                              CustomRichText(
-                                                  title: 'Challan Date : '),
+                                              CustomRichText(title: 'Challan Date : '),
                                               Dimens.boxWidth10,
                                               CustomTextFieldForStock(
-                                                width: MediaQuery.of(context)
-                                                        .size
-                                                        .width /
-                                                    5.1,
+                                                width: MediaQuery.of(context).size.width / 5.1,
                                                 numberTextField: true,
                                                 onTap: () {
-                                                  controller
-                                                          .openChallanDatePicker =
-                                                      !controller
-                                                          .openChallanDatePicker;
-                                                  controller.update(
-                                                      ['stock_Mangement']);
+                                                  controller.openChallanDatePicker =
+                                                      !controller.openChallanDatePicker;
+                                                  controller.update(['stock_Mangement']);
                                                 },
-                                                textController:
-                                                    controller.challanDateTc,
+                                                textController: controller.challanDateTc,
                                               ),
                                             ],
                                           ),
                                           Dimens.boxHeight5,
                                           Row(
                                             children: [
-                                              CustomRichText(
-                                                  title: 'PO Date  : '),
+                                              CustomRichText(title: 'PO Date  : '),
                                               Dimens.boxWidth10,
                                               CustomTextFieldForStock(
-                                                width: MediaQuery.of(context)
-                                                        .size
-                                                        .width /
-                                                    5.1,
+                                                width: MediaQuery.of(context).size.width / 5.1,
                                                 numberTextField: true,
                                                 onTap: () {
                                                   controller.openPODatePicker =
-                                                      !controller
-                                                          .openPODatePicker;
-                                                  controller.update(
-                                                      ['stock_Mangement']);
+                                                      !controller.openPODatePicker;
+                                                  controller.update(['stock_Mangement']);
                                                 },
-                                                textController:
-                                                    controller.poDateDateTc,
+                                                textController: controller.poDateDateTc,
                                               ),
                                             ],
                                           ),
                                           Dimens.boxHeight5,
                                           Row(
                                             children: [
-                                              CustomRichText(
-                                                  title: 'Received Date  : '),
+                                              CustomRichText(title: 'Received Date  : '),
                                               Dimens.boxWidth10,
                                               CustomTextFieldForStock(
-                                                width: MediaQuery.of(context)
-                                                        .size
-                                                        .width /
-                                                    5.1,
+                                                width: MediaQuery.of(context).size.width / 5.1,
                                                 numberTextField: true,
                                                 onTap: () {
-                                                  controller
-                                                          .openReceivedPicker =
-                                                      !controller
-                                                          .openReceivedPicker;
-                                                  controller.update(
-                                                      ['stock_Mangement']);
+                                                  controller.openReceivedPicker =
+                                                      !controller.openReceivedPicker;
+                                                  controller.update(['stock_Mangement']);
                                                 },
-                                                textController:
-                                                    controller.receivedDateTc,
+                                                textController: controller.receivedDateTc,
                                               ),
                                             ],
                                           ),
                                           Dimens.boxHeight5,
                                           Row(
                                             children: [
-                                              CustomRichText(
-                                                  title: 'L.R No.  : '),
+                                              CustomRichText(title: 'L.R No.  : '),
                                               Dimens.boxWidth10,
                                               Container(
                                                   decoration: BoxDecoration(
-                                                    borderRadius:
-                                                        BorderRadius.circular(
-                                                            10),
+                                                    borderRadius: BorderRadius.circular(10),
                                                     border: Border.all(
-                                                      color: Color.fromARGB(
-                                                          255, 227, 224, 224),
+                                                      color: Color.fromARGB(255, 227, 224, 224),
                                                       width: 1,
                                                     ),
                                                     boxShadow: [
                                                       BoxShadow(
-                                                        color: Color.fromARGB(
-                                                                255,
-                                                                236,
-                                                                234,
-                                                                234)
+                                                        color: Color.fromARGB(255, 236, 234, 234)
                                                             .withOpacity(0.5),
                                                         spreadRadius: 2,
                                                         blurRadius: 5,
@@ -559,39 +431,27 @@ class _ViewAddGoodsOrdersWebState extends State<ViewAddGoodsOrdersWeb> {
                                                       ),
                                                     ],
                                                   ),
-                                                  width: (MediaQuery.of(context)
-                                                          .size
-                                                          .width *
-                                                      .2),
+                                                  width: (MediaQuery.of(context).size.width * .2),
                                                   child: LoginCustomTextfield(
-                                                    textController:
-                                                        controller.lrNoCtrlr,
+                                                    textController: controller.lrNoCtrlr,
                                                   )),
                                             ],
                                           ),
                                           Dimens.boxHeight5,
                                           Row(
                                             children: [
-                                              CustomRichText(
-                                                  title: 'Vehicle  No. : '),
+                                              CustomRichText(title: 'Vehicle  No. : '),
                                               Dimens.boxWidth10,
                                               Container(
                                                   decoration: BoxDecoration(
-                                                    borderRadius:
-                                                        BorderRadius.circular(
-                                                            10),
+                                                    borderRadius: BorderRadius.circular(10),
                                                     border: Border.all(
-                                                      color: Color.fromARGB(
-                                                          255, 227, 224, 224),
+                                                      color: Color.fromARGB(255, 227, 224, 224),
                                                       width: 1,
                                                     ),
                                                     boxShadow: [
                                                       BoxShadow(
-                                                        color: Color.fromARGB(
-                                                                255,
-                                                                236,
-                                                                234,
-                                                                234)
+                                                        color: Color.fromARGB(255, 236, 234, 234)
                                                             .withOpacity(0.5),
                                                         spreadRadius: 2,
                                                         blurRadius: 5,
@@ -599,39 +459,27 @@ class _ViewAddGoodsOrdersWebState extends State<ViewAddGoodsOrdersWeb> {
                                                       ),
                                                     ],
                                                   ),
-                                                  width: (MediaQuery.of(context)
-                                                          .size
-                                                          .width *
-                                                      .2),
+                                                  width: (MediaQuery.of(context).size.width * .2),
                                                   child: LoginCustomTextfield(
-                                                    textController: controller
-                                                        .vehicleNoCtrlr,
+                                                    textController: controller.vehicleNoCtrlr,
                                                   )),
                                             ],
                                           ),
                                           Dimens.boxHeight5,
                                           Row(
                                             children: [
-                                              CustomRichText(
-                                                  title: 'Job Ref. : '),
+                                              CustomRichText(title: 'Job Ref. : '),
                                               Dimens.boxWidth10,
                                               Container(
                                                   decoration: BoxDecoration(
-                                                    borderRadius:
-                                                        BorderRadius.circular(
-                                                            10),
+                                                    borderRadius: BorderRadius.circular(10),
                                                     border: Border.all(
-                                                      color: Color.fromARGB(
-                                                          255, 227, 224, 224),
+                                                      color: Color.fromARGB(255, 227, 224, 224),
                                                       width: 1,
                                                     ),
                                                     boxShadow: [
                                                       BoxShadow(
-                                                        color: Color.fromARGB(
-                                                                255,
-                                                                236,
-                                                                234,
-                                                                234)
+                                                        color: Color.fromARGB(255, 236, 234, 234)
                                                             .withOpacity(0.5),
                                                         spreadRadius: 2,
                                                         blurRadius: 5,
@@ -639,13 +487,9 @@ class _ViewAddGoodsOrdersWebState extends State<ViewAddGoodsOrdersWeb> {
                                                       ),
                                                     ],
                                                   ),
-                                                  width: (MediaQuery.of(context)
-                                                          .size
-                                                          .width *
-                                                      .2),
+                                                  width: (MediaQuery.of(context).size.width * .2),
                                                   child: LoginCustomTextfield(
-                                                    textController:
-                                                        controller.jobRefCtrlr,
+                                                    textController: controller.jobRefCtrlr,
                                                   )),
                                             ],
                                           ),
@@ -653,25 +497,17 @@ class _ViewAddGoodsOrdersWebState extends State<ViewAddGoodsOrdersWeb> {
                                           Row(
                                             children: [
                                               Dimens.boxWidth10,
-                                              CustomRichText(
-                                                  title: 'Currency: '),
+                                              CustomRichText(title: 'Currency: '),
                                               Dimens.boxWidth10,
                                               SizedBox(
                                                 child: DropdownWebStock(
-                                                  width: MediaQuery.of(context)
-                                                          .size
-                                                          .width /
-                                                      5,
-                                                  dropdownList: controller
-                                                      .unitCurrencyList,
-                                                  isValueSelected: controller
-                                                      .isUnitCurrencySelected
-                                                      .value,
-                                                  selectedValue: controller
-                                                      .selectedUnitCurrency
-                                                      .value,
-                                                  onValueChanged:
-                                                      controller.onValueChanged,
+                                                  width: MediaQuery.of(context).size.width / 5,
+                                                  dropdownList: controller.unitCurrencyList,
+                                                  isValueSelected:
+                                                      controller.isUnitCurrencySelected.value,
+                                                  selectedValue:
+                                                      controller.selectedUnitCurrency.value,
+                                                  onValueChanged: controller.onValueChanged,
                                                 ),
                                               ),
                                             ],
@@ -691,8 +527,7 @@ class _ViewAddGoodsOrdersWebState extends State<ViewAddGoodsOrdersWeb> {
                                 margin: Dimens.edgeInsets20,
                                 decoration: BoxDecoration(
                                   border: Border.all(
-                                    color:
-                                        ColorValues.lightGreyColorWithOpacity35,
+                                    color: ColorValues.lightGreyColorWithOpacity35,
                                     width: 1,
                                   ),
                                   boxShadow: [
@@ -707,8 +542,8 @@ class _ViewAddGoodsOrdersWebState extends State<ViewAddGoodsOrdersWeb> {
                                 child: Column(
                                   children: [
                                     Padding(
-                                      padding: const EdgeInsets.symmetric(
-                                          horizontal: 20, vertical: 5),
+                                      padding:
+                                          const EdgeInsets.symmetric(horizontal: 20, vertical: 5),
                                       child: Row(
                                         children: [
                                           Text("Assets"),
@@ -717,8 +552,7 @@ class _ViewAddGoodsOrdersWebState extends State<ViewAddGoodsOrdersWeb> {
                                               onTap: () {
                                                 controller.addRowItem();
                                               },
-                                              child:
-                                                  Icon(Icons.exposure_plus_1)),
+                                              child: Icon(Icons.exposure_plus_1)),
                                         ],
                                       ),
                                     ),
@@ -746,57 +580,43 @@ class _ViewAddGoodsOrdersWebState extends State<ViewAddGoodsOrdersWeb> {
                                                 height: Get.height / 2,
                                               );
                                             }).toList(),
-                                            rows: controller.rowItem.value
-                                                .map((record) {
+                                            rows: controller.rowItem.value.map((record) {
                                               return TableViewRow(
                                                 height: 200,
                                                 cells: record.map((mapData) {
                                                   return TableViewCell(
-                                                    child: (mapData['key'] ==
-                                                            "Drop_down")
+                                                    child: (mapData['key'] == "Drop_down")
                                                         ? Padding(
-                                                            padding:
-                                                                const EdgeInsets
-                                                                        .only(
-                                                                    left: 20,
-                                                                    right: 20,
-                                                                    top: 70),
+                                                            padding: const EdgeInsets.only(
+                                                                left: 20, right: 20, top: 70),
                                                             child: Column(
                                                               mainAxisAlignment:
-                                                                  MainAxisAlignment
-                                                                      .center,
+                                                                  MainAxisAlignment.center,
                                                               crossAxisAlignment:
-                                                                  CrossAxisAlignment
-                                                                      .center,
+                                                                  CrossAxisAlignment.center,
                                                               children: [
                                                                 DropdownWebStock(
-                                                                  width: MediaQuery.of(
-                                                                              context)
+                                                                  width: MediaQuery.of(context)
                                                                           .size
                                                                           .width /
                                                                       4,
                                                                   dropdownList:
-                                                                      controller
-                                                                          .assetList
-                                                                          .value,
-                                                                  selectedValue:
-                                                                      mapData[
-                                                                          "value"],
+                                                                      controller.assetList,
+                                                                  selectedValue: mapData["value"],
                                                                   onValueChanged:
-                                                                      (list,
-                                                                          selectedValue) {
+                                                                      (list, selectedValue) {
                                                                     print({
-                                                                      selectedValue:
-                                                                          selectedValue
+                                                                      selectedValue: selectedValue
                                                                     });
                                                                     mapData["value"] =
                                                                         selectedValue;
-                                                                    controller.dropdownMapperData[selectedValue] = list.firstWhere(
-                                                                        (element) =>
-                                                                            element.name ==
-                                                                            selectedValue,
-                                                                        orElse:
-                                                                            null);
+                                                                    controller.dropdownMapperData[
+                                                                            selectedValue] =
+                                                                        list.firstWhere(
+                                                                            (element) =>
+                                                                                element.name ==
+                                                                                selectedValue,
+                                                                            orElse: null);
                                                                   },
                                                                 ),
                                                                 SizedBox(
@@ -804,24 +624,21 @@ class _ViewAddGoodsOrdersWebState extends State<ViewAddGoodsOrdersWeb> {
                                                                 ),
                                                                 Row(
                                                                   children: [
-                                                                    Text(
-                                                                        "Assets Code :"),
+                                                                    Text("Assets Code :"),
                                                                     Text(
                                                                         "${controller.dropdownMapperData[mapData['value']]?.asset_code ?? ''}")
                                                                   ],
                                                                 ),
                                                                 Row(
                                                                   children: [
-                                                                    Text(
-                                                                        "Assets type :"),
+                                                                    Text("Assets type :"),
                                                                     Text(
                                                                         "${controller.dropdownMapperData[mapData['value']]?.asset_type ?? ''}")
                                                                   ],
                                                                 ),
                                                                 Row(
                                                                   children: [
-                                                                    Text(
-                                                                        "Assets Category :"),
+                                                                    Text("Assets Category :"),
                                                                     Text(
                                                                         "${controller.dropdownMapperData[mapData['value']]?.cat_name ?? ''}")
                                                                   ],
@@ -829,49 +646,36 @@ class _ViewAddGoodsOrdersWebState extends State<ViewAddGoodsOrdersWeb> {
                                                               ],
                                                             ),
                                                           )
-                                                        : (mapData['key'] ==
-                                                                "Paid_By")
+                                                        : (mapData['key'] == "Paid_By")
                                                             ? DropdownWebStock(
-                                                                width: MediaQuery.of(
-                                                                            context)
+                                                                width: MediaQuery.of(context)
                                                                         .size
                                                                         .width /
                                                                     4,
-                                                                dropdownList:
-                                                                    controller
-                                                                        .paid,
-                                                                selectedValue:
-                                                                    mapData[
-                                                                        "value"],
+                                                                dropdownList: controller.paid,
+                                                                selectedValue: mapData["value"],
                                                                 onValueChanged:
-                                                                    (list,
-                                                                        selectedValue) {
+                                                                    (list, selectedValue) {
                                                                   print({
-                                                                    selectedValue:
-                                                                        selectedValue
+                                                                    selectedValue: selectedValue
                                                                   });
-                                                                  mapData["value"] =
-                                                                      selectedValue;
-                                                                  controller.paiddropdownMapperData[selectedValue] = list.firstWhere(
-                                                                      (element) =>
-                                                                          element
-                                                                              .name ==
-                                                                          selectedValue,
-                                                                      orElse:
-                                                                          null);
+                                                                  mapData["value"] = selectedValue;
+                                                                  controller.paiddropdownMapperData[
+                                                                          selectedValue] =
+                                                                      list.firstWhere(
+                                                                          (element) =>
+                                                                              element.name ==
+                                                                              selectedValue,
+                                                                          orElse: null);
                                                                   // mapData["value"] =
                                                                   //     selectedValue;
                                                                 },
                                                               )
-                                                            : (mapData['key'] ==
-                                                                        "Order") ||
-                                                                    (mapData[
-                                                                            'key'] ==
-                                                                        "Cost")
+                                                            : (mapData['key'] == "Order") ||
+                                                                    (mapData['key'] == "Cost")
                                                                 ? Padding(
                                                                     padding:
-                                                                        const EdgeInsets.all(
-                                                                            8.0),
+                                                                        const EdgeInsets.all(8.0),
                                                                     child: Container(
                                                                         width: (Get.width * .4),
                                                                         // padding: EdgeInsets.all(value),
@@ -887,26 +691,25 @@ class _ViewAddGoodsOrdersWebState extends State<ViewAddGoodsOrdersWeb> {
                                                                               spreadRadius: 1.0,
                                                                             ),
                                                                           ],
-                                                                          color:
-                                                                              ColorValues.whiteColor,
+                                                                          color: ColorValues
+                                                                              .whiteColor,
                                                                           borderRadius:
-                                                                              BorderRadius.circular(5),
+                                                                              BorderRadius.circular(
+                                                                                  5),
                                                                         ),
                                                                         child: LoginCustomTextfield(
-                                                                          maxLine:
-                                                                              1,
+                                                                          maxLine: 1,
                                                                           textController:
-                                                                              new TextEditingController(text: mapData["value"] ?? ''),
-                                                                          onChanged:
-                                                                              (txt) {
-                                                                            mapData["value"] =
-                                                                                txt;
+                                                                              new TextEditingController(
+                                                                                  text: mapData[
+                                                                                          "value"] ??
+                                                                                      ''),
+                                                                          onChanged: (txt) {
+                                                                            mapData["value"] = txt;
                                                                           },
                                                                         )),
                                                                   )
-                                                                : Text(mapData[
-                                                                        'key'] ??
-                                                                    ''),
+                                                                : Text(mapData['key'] ?? ''),
                                                   );
                                                 }).toList(),
                                               );
@@ -918,9 +721,7 @@ class _ViewAddGoodsOrdersWebState extends State<ViewAddGoodsOrdersWeb> {
                                   ],
                                 ),
                               ),
-                              (controller.getPurchaseDetailsByIDModel.value
-                                              ?.status ==
-                                          301 &&
+                              (controller.getPurchaseDetailsByIDModel.value?.status == 301 &&
                                       controller.type == 1)
                                   ? Row(
                                       children: [
@@ -928,13 +729,11 @@ class _ViewAddGoodsOrdersWebState extends State<ViewAddGoodsOrdersWeb> {
                                         Container(
                                           height: 45,
                                           child: CustomElevatedButton(
-                                            backgroundColor:
-                                                ColorValues.appGreenColor,
+                                            backgroundColor: ColorValues.appGreenColor,
                                             text: "Approve",
                                             icon: Icons.add,
                                             onPressed: () {
-                                              Get.dialog(
-                                                  GoodsOrderApprovedDialog(
+                                              Get.dialog(GoodsOrderApprovedDialog(
                                                 id: controller.id,
                                               ));
                                             },
@@ -944,8 +743,7 @@ class _ViewAddGoodsOrdersWebState extends State<ViewAddGoodsOrdersWeb> {
                                         Container(
                                           height: 45,
                                           child: CustomElevatedButton(
-                                            backgroundColor:
-                                                ColorValues.rejectColor,
+                                            backgroundColor: ColorValues.rejectColor,
                                             text: "Reject",
                                             icon: Icons.close,
                                             onPressed: () {
@@ -959,8 +757,7 @@ class _ViewAddGoodsOrdersWebState extends State<ViewAddGoodsOrdersWeb> {
                                         Container(
                                           height: 45,
                                           child: CustomElevatedButton(
-                                            backgroundColor:
-                                                ColorValues.rejectColor,
+                                            backgroundColor: ColorValues.rejectColor,
                                             text: "Close",
                                             icon: Icons.close,
                                             onPressed: () {
