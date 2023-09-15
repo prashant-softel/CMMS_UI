@@ -2168,7 +2168,7 @@ class NewPermitScreen extends GetView<NewPermitController> {
                                                             padding:
                                                                 const EdgeInsets
                                                                         .only(
-                                                                    left: 120),
+                                                                    left: 106),
                                                             child: Row(
                                                               children: [
                                                                 CustomRichText(
@@ -2185,7 +2185,7 @@ class NewPermitScreen extends GetView<NewPermitController> {
                                                             padding:
                                                                 const EdgeInsets
                                                                         .only(
-                                                                    left: 40),
+                                                                    left: 38),
                                                             child: Row(
                                                               children: [
                                                                 CustomRichText(
@@ -2199,21 +2199,12 @@ class NewPermitScreen extends GetView<NewPermitController> {
                                                             ),
                                                           ),
                                                           Padding(
-                                                            padding:
-                                                                const EdgeInsets
-                                                                        .only(
-                                                                    left: 20),
+                                                            padding: const EdgeInsets.only(left: 20),
                                                             child: Row(
                                                               children: [
-                                                                Container(
-                                                                  alignment:
-                                                                      Alignment
-                                                                          .centerRight,
-                                                                  width: 150,
-                                                                  child: CustomRichText(
-                                                                      title:
-                                                                          'Work Description: '),
-                                                                ),
+                                                                CustomRichText(
+                                                                    title:
+                                                                        'Work Description: '),
                                                                 Expanded(
                                                                   child: _buildPermitDescriptionField_web(
                                                                       context),
