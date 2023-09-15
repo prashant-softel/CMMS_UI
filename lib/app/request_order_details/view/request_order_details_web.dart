@@ -52,7 +52,8 @@ class GoodsOrdersReqDetailsWeb extends GetView<GoodsOrdersReqDetailController> {
                 child: Text(" / STOCK MANAGEMENT ",
                     style: Styles.greyMediumLight12),
               ),
-              Text(" / REQUEST GOODS ORDERS ", style: Styles.greyMediumLight12)
+              Text(" / REQUEST GOODS rgORDERS ",
+                  style: Styles.greyMediumLight12)
             ],
           ),
         ),
@@ -153,12 +154,12 @@ class GoodsOrdersReqDetailsWeb extends GetView<GoodsOrdersReqDetailController> {
                               ],
                             ),
                           ),
-                          Column(
-                              children: []
-                                ..addAll(controller.rowItem.value.map((e) {
-                                  return Text(jsonEncode(e));
-                                }))),
-                          Text(jsonEncode(controller.dropdownMapperData)),
+                          // Column(
+                          //     children: []
+                          //       ..addAll(controller.rowItem.value.map((e) {
+                          //         return Text(jsonEncode(e));
+                          //       }))),
+                          // Text(jsonEncode(controller.dropdownMapperData)),
                           Container(
                             margin: Dimens.edgeInsets15,
                             decoration: BoxDecoration(
@@ -210,8 +211,8 @@ class GoodsOrdersReqDetailsWeb extends GetView<GoodsOrdersReqDetailController> {
                                                                   .size
                                                                   .width /
                                                               4,
-                                                      dropdownList: controller
-                                                          .assetList.value,
+                                                      dropdownList:
+                                                          controller.assetList,
                                                       selectedValue:
                                                           mapData["value"],
                                                       onValueChanged: (list,

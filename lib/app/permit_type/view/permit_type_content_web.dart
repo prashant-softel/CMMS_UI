@@ -67,7 +67,7 @@ class PermitTypeContentWeb extends GetView<PermitTypeController> {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   varUserAccessModel.value.access_list!
-                              .where((e) => e.feature_id == 5 && e.add == 0)
+                              .where((e) => e.feature_id == 5 && e.add == 1)
                               .length >
                           0
                       ? Container(
@@ -126,7 +126,7 @@ class PermitTypeContentWeb extends GetView<PermitTypeController> {
                                           children: [
                                             Expanded(
                                               child: CustomRichText(
-                                                 title: "Facility: ",
+                                                title: "Facility: ",
                                               ),
                                             ),
                                             Expanded(
@@ -188,46 +188,42 @@ class PermitTypeContentWeb extends GetView<PermitTypeController> {
                                             ),
                                             Expanded(
                                               child: Container(
-                                                  decoration: BoxDecoration(
-                                                    boxShadow: [
-                                                      BoxShadow(
-                                                        color: Colors.black26,
-                                                        offset: const Offset(
-                                                          5.0,
-                                                          5.0,
-                                                        ),
-                                                        blurRadius: 5.0,
-                                                        spreadRadius: 1.0,
+                                                decoration: BoxDecoration(
+                                                  boxShadow: [
+                                                    BoxShadow(
+                                                      color: Colors.black26,
+                                                      offset: const Offset(
+                                                        5.0,
+                                                        5.0,
                                                       ),
-                                                      BoxShadow(
-                                                        color: ColorValues
-                                                            .whiteColor,
-                                                        offset: const Offset(
-                                                            0.0, 0.0),
-                                                        blurRadius: 0.0,
-                                                        spreadRadius: 0.0,
-                                                      ),
-                                                    ],
-                                                    color:
-                                                        ColorValues.whiteColor,
-                                                    borderRadius:
-                                                        BorderRadius.circular(
-                                                            5),
-                                                  ),
-                                                  width: (MediaQuery.of(context)
-                                                              .size
-                                                              .width *
-                                                          .2) -
-                                                      30,
+                                                      blurRadius: 5.0,
+                                                      spreadRadius: 1.0,
+                                                    ),
+                                                    BoxShadow(
+                                                      color: ColorValues
+                                                          .whiteColor,
+                                                      offset: const Offset(
+                                                          0.0, 0.0),
+                                                      blurRadius: 0.0,
+                                                      spreadRadius: 0.0,
+                                                    ),
+                                                  ],
+                                                  color: ColorValues.whiteColor,
+                                                  borderRadius:
+                                                      BorderRadius.circular(5),
+                                                ),
+                                                width: (MediaQuery.of(context)
+                                                            .size
+                                                            .width *
+                                                        .2) -
+                                                    30,
                                                 child: Obx(
-                                                      () => TextField
-                                                    (
-                                                    controller: controller
-                                                        .titleCtrlr,
+                                                  () => TextField(
+                                                    controller:
+                                                        controller.titleCtrlr,
                                                     keyboardType:
-                                                    TextInputType.multiline,
+                                                        TextInputType.multiline,
                                                     maxLines: 1,
-
                                                     autofocus: false,
                                                     decoration: InputDecoration(
                                                       fillColor: ColorValues
@@ -237,73 +233,74 @@ class PermitTypeContentWeb extends GetView<PermitTypeController> {
                                                           .edgeInsets05_10,
                                                       border: InputBorder.none,
                                                       enabledBorder:
-                                                      OutlineInputBorder(
+                                                          OutlineInputBorder(
                                                         borderRadius:
-                                                        BorderRadius
-                                                            .circular(10.0),
+                                                            BorderRadius
+                                                                .circular(10.0),
                                                         borderSide: BorderSide(
                                                             color: Colors
                                                                 .transparent),
                                                       ),
                                                       focusedBorder:
-                                                      OutlineInputBorder(
+                                                          OutlineInputBorder(
                                                         borderRadius:
-                                                        BorderRadius
-                                                            .circular(10.0),
+                                                            BorderRadius
+                                                                .circular(10.0),
                                                         borderSide: BorderSide(
                                                             color: Colors
                                                                 .transparent),
                                                       ),
-                                                      focusedErrorBorder: controller
-                                                          .isNameInvalid
-                                                          .value
-                                                          ? OutlineInputBorder(
-                                                        borderRadius:
-                                                        BorderRadius
-                                                            .circular(
-                                                            5),
-                                                        borderSide:
-                                                        BorderSide(
-                                                          color: ColorValues
-                                                              .redColorDark,
-                                                        ),
-                                                      )
-                                                          : InputBorder.none,
+                                                      focusedErrorBorder:
+                                                          controller
+                                                                  .isNameInvalid
+                                                                  .value
+                                                              ? OutlineInputBorder(
+                                                                  borderRadius:
+                                                                      BorderRadius
+                                                                          .circular(
+                                                                              5),
+                                                                  borderSide:
+                                                                      BorderSide(
+                                                                    color: ColorValues
+                                                                        .redColorDark,
+                                                                  ),
+                                                                )
+                                                              : InputBorder
+                                                                  .none,
                                                       errorBorder: controller
-                                                          .isNameInvalid
-                                                          .value
+                                                              .isNameInvalid
+                                                              .value
                                                           ? OutlineInputBorder(
-                                                        borderRadius:
-                                                        BorderRadius
-                                                            .circular(
-                                                            5),
-                                                        borderSide:
-                                                        BorderSide(
-                                                          color: ColorValues
-                                                              .redColorDark,
-                                                        ),
-                                                      )
+                                                              borderRadius:
+                                                                  BorderRadius
+                                                                      .circular(
+                                                                          5),
+                                                              borderSide:
+                                                                  BorderSide(
+                                                                color: ColorValues
+                                                                    .redColorDark,
+                                                              ),
+                                                            )
                                                           : null,
                                                       errorText: controller
-                                                          .isNameInvalid
-                                                          .value
+                                                              .isNameInvalid
+                                                              .value
                                                           ? "Required field"
                                                           : null,
                                                     ),
                                                     onChanged: (value) {
                                                       if (value.trim().length >
                                                           1) {
-                                                        controller
-                                                            .isNameInvalid
+                                                        controller.isNameInvalid
                                                             .value = false;
                                                       } else {
-                                                        controller
-                                                            .isNameInvalid
+                                                        controller.isNameInvalid
                                                             .value = true;
                                                       }
                                                     },
                                                   ),
-                                                ),),
+                                                ),
+                                              ),
                                             ),
                                           ],
                                         ),
@@ -316,7 +313,7 @@ class PermitTypeContentWeb extends GetView<PermitTypeController> {
                                           children: [
                                             Expanded(
                                               child: CustomRichText(
-                                                title:"Description ",
+                                                title: "Description ",
                                                 // style: Styles.blackBold16,
                                               ),
                                             ),
@@ -354,90 +351,90 @@ class PermitTypeContentWeb extends GetView<PermitTypeController> {
                                                           .2) -
                                                       45,
                                                   child: Obx(
-                                                        () => TextField
-                                                      (
+                                                    () => TextField(
                                                       controller: controller
                                                           .descriptionCtrlr,
                                                       keyboardType:
-                                                      TextInputType.multiline,
+                                                          TextInputType
+                                                              .multiline,
                                                       maxLines: 1,
-
                                                       autofocus: false,
-                                                      decoration: InputDecoration(
+                                                      decoration:
+                                                          InputDecoration(
                                                         fillColor: ColorValues
                                                             .whiteColor,
                                                         filled: true,
                                                         contentPadding: Dimens
                                                             .edgeInsets05_10,
-                                                        border: InputBorder.none,
+                                                        border:
+                                                            InputBorder.none,
                                                         enabledBorder:
-                                                        OutlineInputBorder(
+                                                            OutlineInputBorder(
                                                           borderRadius:
-                                                          BorderRadius
-                                                              .circular(10.0),
+                                                              BorderRadius
+                                                                  .circular(
+                                                                      10.0),
                                                           borderSide: BorderSide(
                                                               color: Colors
                                                                   .transparent),
                                                         ),
                                                         focusedBorder:
-                                                        OutlineInputBorder(
+                                                            OutlineInputBorder(
                                                           borderRadius:
-                                                          BorderRadius
-                                                              .circular(10.0),
+                                                              BorderRadius
+                                                                  .circular(
+                                                                      10.0),
                                                           borderSide: BorderSide(
                                                               color: Colors
                                                                   .transparent),
                                                         ),
                                                         focusedErrorBorder: controller
-                                                            . isDescriptionInvalid
-
-                                                            .value
+                                                                .isDescriptionInvalid
+                                                                .value
                                                             ? OutlineInputBorder(
-                                                          borderRadius:
-                                                          BorderRadius
-                                                              .circular(
-                                                              5),
-                                                          borderSide:
-                                                          BorderSide(
-                                                            color: ColorValues
-                                                                .redColorDark,
-                                                          ),
-                                                        )
+                                                                borderRadius:
+                                                                    BorderRadius
+                                                                        .circular(
+                                                                            5),
+                                                                borderSide:
+                                                                    BorderSide(
+                                                                  color: ColorValues
+                                                                      .redColorDark,
+                                                                ),
+                                                              )
                                                             : InputBorder.none,
                                                         errorBorder: controller
-                                                            . isDescriptionInvalid
-
-                                                            .value
+                                                                .isDescriptionInvalid
+                                                                .value
                                                             ? OutlineInputBorder(
-                                                          borderRadius:
-                                                          BorderRadius
-                                                              .circular(
-                                                              5),
-                                                          borderSide:
-                                                          BorderSide(
-                                                            color: ColorValues
-                                                                .redColorDark,
-                                                          ),
-                                                        )
+                                                                borderRadius:
+                                                                    BorderRadius
+                                                                        .circular(
+                                                                            5),
+                                                                borderSide:
+                                                                    BorderSide(
+                                                                  color: ColorValues
+                                                                      .redColorDark,
+                                                                ),
+                                                              )
                                                             : null,
                                                         errorText: controller
-                                                            . isDescriptionInvalid
-
-                                                            .value
+                                                                .isDescriptionInvalid
+                                                                .value
                                                             ? "Required field"
                                                             : null,
                                                       ),
                                                       onChanged: (value) {
-                                                        if (value.trim().length >
+                                                        if (value
+                                                                .trim()
+                                                                .length >
                                                             1) {
                                                           controller
-                                                              . isDescriptionInvalid
-
+                                                              .isDescriptionInvalid
                                                               .value = false;
                                                         } else {
                                                           controller
-                                                              . isDescriptionInvalid
-
+                                                              .isDescriptionInvalid
                                                               .value = true;
                                                         }
                                                       },
@@ -511,7 +508,7 @@ class PermitTypeContentWeb extends GetView<PermitTypeController> {
                         )
                       : Container(),
                   varUserAccessModel.value.access_list!
-                              .where((e) => e.feature_id == 5 && e.view == 0)
+                              .where((e) => e.feature_id == 5 && e.view == 1)
                               .length >
                           0
                       ? Expanded(
