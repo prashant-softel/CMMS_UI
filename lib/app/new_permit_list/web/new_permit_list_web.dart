@@ -132,15 +132,19 @@ class _NewPermitListWebState extends State<NewPermitListWeb> {
                                           ],
                                         ),
                                         Dimens.boxWidth10,
-                                        
-                                          ActionButton(
+                                         varUserAccessModel.value.access_list!
+                                  .where((e) =>
+                                      e.feature_id == UserAccessConstants.kPermitFeatureId && e.add == UserAccessConstants.kHaveAddAccess)
+                                  .length > 0
+                                         ? ActionButton(
                                             icon: Icons.add,
                                             label: "Add New",
                                             onPressed: () {
                                               Get.toNamed(Routes.newPermit);
                                             },
                                             color: ColorValues.greenlightColor,
-                                          ),
+                                          )
+                                          :Dimens.box0
                                         ],
                                       ),
                                     ),
@@ -741,7 +745,17 @@ class PermitListDataSource extends DataTableSource {
                                                     NewPermitModel(permitId: 000),
                                               )
                                               ?.ptwStatus ==
-                                          123
+                                          123 ||
+                                          controller.newPermitList
+                                              .firstWhere(
+                                                (e) =>
+                                                    "${e?.permitId}" ==
+                                                    "${PermitDetails?.permitId}",
+                                                orElse: () =>
+                                                    NewPermitModel(permitId: 000),
+                                              )
+                                              ?.ptwStatus ==
+                                          130
                                   ? TableActionButton(
                                       color: ColorValues.appRedColor,
                                       icon: Icons.close,

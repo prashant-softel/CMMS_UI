@@ -12,6 +12,7 @@ import 'package:cmms/domain/models/safety_measure_list_model.dart';
 import 'package:cmms/domain/models/sop_list_model.dart';
 import 'package:cmms/domain/models/type_permit_model.dart';
 import 'package:cmms/domain/models/work_type_model.dart';
+import 'package:flutter/foundation.dart';
 
 import '../models/facility_model.dart';
 
@@ -186,6 +187,13 @@ class NewPermitUsecase {
         newPermit,
         isLoading,
       );
+
+  Future<bool> browseFiles(Uint8List? fileBytes, String fileName,
+      int importType, bool isLoading, int facilityId) async {
+    await repository.browseFiles(
+        fileBytes, fileName, importType, isLoading, facilityId);
+    return true;
+  }
 
   Future<Map<String, dynamic>> createNewPermitForJob({
     newPermit,

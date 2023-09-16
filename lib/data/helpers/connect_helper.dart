@@ -911,7 +911,7 @@ class ConnectHelper {
   }) async {
     // facilityId = 45;
     var responseModel = await apiWrapper.makeRequest(
-      ptwStatus == '123'
+      ptwStatus == '123' || ptwStatus == '130'
           ? 'Permit/PermitCancelByApprover'
           : 'Permit/PermitCancelRequest',
       Request.put,

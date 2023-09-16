@@ -5,6 +5,7 @@ import 'package:cmms/app/constant/constant.dart';
 import 'package:cmms/app/home/home_controller.dart';
 import 'package:cmms/app/job_list/job_list_presenter.dart';
 import 'package:cmms/app/navigators/navigators.dart';
+import 'package:cmms/app/theme/color_values.dart';
 import 'package:cmms/domain/models/block_model.dart';
 import 'package:cmms/domain/models/create_permit_model.dart';
 import 'package:cmms/domain/models/employee_list_model.dart';
@@ -17,6 +18,8 @@ import 'package:cmms/domain/models/new_permit_details_model.dart';
 import 'package:cmms/domain/models/new_permit_list_model.dart';
 import 'package:cmms/domain/models/safety_measure_list_model.dart';
 import 'package:cmms/domain/models/sop_list_model.dart';
+import 'package:flutter/foundation.dart';
+import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:cmms/domain/models/equipment_model.dart';
 import 'package:cmms/domain/models/facility_model.dart';
@@ -332,6 +335,11 @@ class NewPermitController extends GetxController {
   JobDetailsModel? jobModel;
 
   int? jcId = 0;
+
+    //File Import
+  RxString fileName = "".obs;
+  Uint8List? fileBytes;
+  int type = 0;
 
   ///
   @override
@@ -1323,6 +1331,52 @@ class NewPermitController extends GetxController {
 
   Future<void> viewJobDetails() async {
     Get.toNamed(Routes.jobDetails);
+  }
+
+  browseFiles({Uint8List? fileBytes}) async {
+    await permitPresenter.browseFiles(
+        fileBytes, fileName.value, type, true, facilityId);
+    return true;
+  }
+
+  void isSuccessDialog() {
+    Get.dialog(
+      AlertDialog(
+        title: Text('Import Image'),
+        content: Column(mainAxisSize: MainAxisSize.min, children: [
+          Container(
+            decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(5),
+              color: Color.fromARGB(255, 7, 161, 17),
+              border: Border.all(
+                color: Color.fromARGB(255, 7, 161, 17),
+                width: 1,
+              ),
+            ),
+            child: Icon(Icons.check, size: 35, color: ColorValues.whiteColor),
+          ),
+          SizedBox(
+            height: 10,
+          ),
+          Center(
+            child: Text("${fileName.value} \n data uploaded Successfully....",
+                style: TextStyle(fontSize: 16, color: ColorValues.blackColor)),
+          )
+        ]),
+        actions: [
+          TextButton(
+            onPressed: () {
+              Get.back();
+              // Get.back();
+              Future.delayed(Duration(seconds: 2), () {
+                fileName.value = "";
+              });
+            },
+            child: Text('OK'),
+          ),
+        ],
+      ),
+    );
   }
 
   /// class ends
