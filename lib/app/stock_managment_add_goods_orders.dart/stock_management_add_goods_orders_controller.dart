@@ -218,7 +218,11 @@ class StockManagementAddGoodsOrdersController extends GetxController {
             "value": '${element.assetItem_Name}',
             'id': '${element.assetItemID}'
           },
-          {'key': "Paid_By", "value": '${element.paid_by_name}', 'id': '0'},
+          {
+            'key': "Paid_By",
+            "value": '${element.paid_by_name}',
+            'id': '${element.paid_by_ID}'
+          },
           {
             'key': "Cost",
             "value": '${element.cost}',
@@ -453,10 +457,14 @@ class StockManagementAddGoodsOrdersController extends GetxController {
     List<Items> items = [];
     rowItem.value.forEach((element) {
       Items item = Items(
-          assetItemID: int.tryParse('${element[0]["id"]}'),
-          cost: int.tryParse(element[2]["value"] ?? '0'),
-          ordered_qty: int.tryParse(element[3]["value"] ?? '0'),
-          poID: paiddropdownMapperData[element[1]["value"]]?.id);
+        assetItemID: int.tryParse('${element[0]["id"]}'),
+        cost: int.tryParse(element[2]["value"] ?? '0'),
+        ordered_qty: int.tryParse(element[3]["value"] ?? '0'),
+        poID: int.tryParse('${element[1]["id"]}'),
+      );
+
+      // poID: paiddropdownMapperData[element[1]["value"]]?.id)
+      ;
       items.add(item);
     });
     CreateGoModel createGoModel = CreateGoModel(
