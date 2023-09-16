@@ -75,7 +75,7 @@ class GoodsOrdersReqDetailController extends GetxController {
 
   void addRowItem() {
     rowItem.value.add([
-      {"key": "Drop_down", "value": 'Please Select'},
+      {"key": "Drop_down", "value": 'Please Select', "id": ''},
       {'key': "Cost", "value": ''},
       {'key': "Order", "value": ''},
       {'key': "Comment", "value": ''},
@@ -99,7 +99,11 @@ class GoodsOrdersReqDetailController extends GetxController {
         rowItem.value = [];
         _getPurchaseDetailsById.request_order_items?.forEach((element) {
           rowItem.value.add([
-            {"key": "Drop_down", "value": '${element.asset_name}'},
+            {
+              "key": "Drop_down",
+              "value": '${element.asset_name}',
+              'id': '${element.assetItemID}'
+            },
             // {'key': "Paid_By", "value": '${element.assetItem_Name}'},
             {'key': "Cost", "value": '${element.cost}'},
             {'key': "Order", "value": '${element.ordered_qty}'},
@@ -149,7 +153,7 @@ class GoodsOrdersReqDetailController extends GetxController {
     List<SubmitItems> items = [];
     rowItem.value.forEach((element) {
       SubmitItems item = SubmitItems(
-          assetItemID: dropdownMapperData[element[0]["value"]]?.id,
+          assetItemID: int.tryParse('${element[0]["id"]}'),
           cost: int.tryParse(element[1]["value"] ?? '0'),
           ordered_qty: int.tryParse(element[2]["value"] ?? '0'),
           comment: element[3]["value"] ?? '0');
