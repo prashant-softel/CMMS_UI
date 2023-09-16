@@ -140,15 +140,15 @@ class StockManagementDashboardScreen
                               );
                               //controller.checkPoint();
                             }),
-                        _stockManagementList(
-                            tittle: "Receive Goods Order ",
-                            ontap: () {
-                              Get.toNamed(
-                                Routes.receiveGoodsOrders,
-                              );
+                        // _stockManagementList(
+                        //     tittle: "Receive Goods Order ",
+                        //     ontap: () {
+                        //       Get.toNamed(
+                        //         Routes.receiveGoodsOrders,
+                        //       );
 
-                              // controller.receiveGoodsOrders();
-                            }),
+                        //       // controller.receiveGoodsOrders();
+                        //     }),
                       ],
                     ),
                     GridView.count(

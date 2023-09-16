@@ -10,6 +10,7 @@ import 'package:cmms/domain/models/get_purchase_details_model.dart';
 
 import 'package:cmms/domain/models/paiyed_model.dart';
 import 'package:flutter/cupertino.dart';
+
 import 'package:get/get.dart';
 import 'package:rxdart/subjects.dart';
 
@@ -42,7 +43,7 @@ class ReceiveGoodsOrdersController extends GetxController {
   int selectedBusinessTypeId = 1;
   int paidId = 0;
   RxBool showAdditionalColumn = false.obs;
-  int? id = 0;
+  Rx<int> id = 0.obs;
   int facilityId = 0;
 
   //drop down list of assets
@@ -54,8 +55,8 @@ class ReceiveGoodsOrdersController extends GetxController {
   Rx<bool> isAssetSelected = true.obs;
   Rx<String> selectedAsset = ''.obs;
 
-  Rx<List<List<Map<String, String>>>> rowItem =
-      Rx<List<List<Map<String, String>>>>([]);
+  // Rx<List<List<Map<String, String>>>> rowItem = Rx<List<List<Map<String, String>>>>([]);
+  final rowItem = Rx<List<List<Map<String, String>>>>([]);
   Map<String, GetAssetDataModel> dropdownMapperData = {};
   Map<String, PaiedModel> paiddropdownMapperData = {};
   RxList<GetPurchaseDetailsByIDModel?>? getPurchaseDetailsByIDModelList =
@@ -85,45 +86,56 @@ class ReceiveGoodsOrdersController extends GetxController {
   bool openChallanDatePicker = false;
   bool openPODatePicker = false;
   bool openReceivedPicker = false;
-  // var paid = <PaiedModel>[
-  //   PaiedModel(name: "Please Select", id: 0),
-  //   PaiedModel(name: 'Operator', id: 1),
-  //   PaiedModel(name: 'Owner', id: 2),
-  // ];
-  // var selectedCountry = PaiedModel(name: "Please Select", id: 0).obs;
+  Rx<String> asset = ''.obs;
+  Rx<String> asstype = ''.obs;
+  Rx<String> asscat = ''.obs;
+  int assetNameId = 0;
+  List<int?> idList = [];
 
-  ///
-  @override
   void onInit() async {
-    id = Get.arguments;
-    print('AddStock:$id');
-    facilityIdStreamSubscription = homeController.facilityId$.listen((event) {
-      facilityId = event;
-      Future.delayed(Duration(seconds: 1), () {
-        getFacilityList();
-      });
-    });
-    Future.delayed(Duration(seconds: 1), () {
-      getUnitCurrencyList();
-    });
-
-    Future.delayed(Duration(seconds: 1), () {
-      updatePaidBy();
-    });
-    Future.delayed(Duration(seconds: 1), () {
-      getBusinessList(4);
-    });
-    Future.delayed(Duration(seconds: 1), () {
-      getAssetList(facilityId);
-
-      if (id != null) {
+    try {
+      await setUserId();
+      facilityIdStreamSubscription = homeController.facilityId$.listen((event) {
+        facilityId = event;
         Future.delayed(Duration(seconds: 1), () {
-          getPurchaseDetailsById(id: id!);
+          getFacilityList();
         });
-      }
-    });
+      });
+      Future.delayed(Duration(seconds: 1), () {
+        getUnitCurrencyList();
+      });
+
+      Future.delayed(Duration(seconds: 1), () {
+        updatePaidBy();
+      });
+      Future.delayed(Duration(seconds: 1), () {
+        getBusinessList(4);
+      });
+      Future.delayed(Duration(seconds: 1), () {
+        getAssetList(facilityId);
+
+        if (id.value != 0) {
+          Future.delayed(Duration(seconds: 1), () {
+            getPurchaseDetailsById(id: id.value);
+          });
+        }
+      });
+    } catch (e) {}
 
     super.onInit();
+  }
+
+  Future<void> setUserId() async {
+    try {
+      var dataFromPreviousScreen = Get.arguments;
+
+      id.value = dataFromPreviousScreen['id'];
+      // id= Get.arguments;
+      print('AddStock:$id');
+    } catch (e) {
+      print(e.toString() + 'userId');
+      //  Utility.showDialog(e.toString() + 'userId');
+    }
   }
 
   Future<void> getFacilityList() async {
@@ -154,10 +166,37 @@ class ReceiveGoodsOrdersController extends GetxController {
       rowItem.value = [];
       _getPurchaseDetailsById.goDetails?.forEach((element) {
         rowItem.value.add([
-          {"key": "Drop_down", "value": '${element.assetItem_Name}'},
-          {'key': "Paid_By", "value": ''},
-          {'key': "Cost", "value": '${element.cost}'},
-          {'key': "Order", "value": '${element.ordered_qty}'},
+          {
+            "key": "Drop_down",
+            "value": '${element.assetItem_Name}',
+            'assetItemID': '${element.assetItemID}',
+            'id': '${element.id}'
+          },
+          {
+            'key': "Cost",
+            "value": '${element.cost}',
+            // 'id': '${element.assetItemID}'
+          },
+          {
+            'key': "Order",
+            "value": '${element.ordered_qty}',
+            // 'id': '${element.assetItemID}'
+          },
+          {
+            'key': "Received",
+            "value": '${element.received_qty}',
+            // 'id': '${element.assetItemID}'
+          },
+          {
+            'key': "Accepted",
+            "value": '${element..damaged_qty}',
+            // 'id': '${element.assetItemID}'
+          },
+          {
+            'key': "Damaged",
+            "value": '${element.accepted_qty}',
+            // 'id': '${element.assetItemID}'
+          },
         ]);
       });
 
@@ -187,6 +226,9 @@ class ReceiveGoodsOrdersController extends GetxController {
           getPurchaseDetailsByIDModel.value?.vendor_name ?? "";
       selectedUnitCurrency.value =
           getPurchaseDetailsByIDModel.value?.currency ?? "";
+      idList =
+          _getPurchaseDetailsById.goDetails!.map((e) => e.assetItemID).toList();
+      print('AssetsItemId:$idList');
     }
   }
 
@@ -281,13 +323,18 @@ class ReceiveGoodsOrdersController extends GetxController {
 
   void addRowItem() {
     rowItem.value.add([
-      {"key": "Drop_down", "value": 'Please Select'},
-      {'key': "Cost", "value": 'cost'},
-      {'key': "Order", "value": 'Order'},
-      {'key': "Received", "value": 'Received'},
-      {'key': "Accepted", "value": 'Accepted'},
-      {'key': "Damaged", "value": 'Damaged'},
-      {'key': "Pending", "value": 'Pending'},
+      {
+        "key": "Drop_down",
+        "value": 'Please Select',
+        "assetItemID": '',
+        "id": ''
+      },
+      {'key': "Cost", "value": ''},
+      {'key': "Order", "value": ''},
+      {'key': "Received", "value": ''},
+      {'key': "Accepted", "value": ''},
+      {'key': "Damaged", "value": ''},
+      // {'key': "Pending", "value": ''},
     ]);
   }
 
@@ -310,6 +357,7 @@ class ReceiveGoodsOrdersController extends GetxController {
     List<Items> items = [];
     rowItem.value.forEach((element) {
       Items item = Items(
+          goItemID: 0,
           assetItemID: dropdownMapperData[element[0]["value"]]?.id,
           cost: int.tryParse(element[2]["value"] ?? '0'),
           ordered_qty: int.tryParse(element[3]["value"] ?? '0'),
@@ -372,14 +420,19 @@ class ReceiveGoodsOrdersController extends GetxController {
     List<Items> items = [];
     rowItem.value.forEach((element) {
       Items item = Items(
-          assetItemID: dropdownMapperData[element[0]["value"]]?.id,
-          cost: int.tryParse(element[2]["value"] ?? '0'),
-          ordered_qty: int.tryParse(element[3]["value"] ?? '0'),
-          poID: paiddropdownMapperData[element[1]["value"]]?.id);
+        goItemID: int.tryParse('${element[0]["id"]}'),
+        assetItemID: int.tryParse('${element[0]["assetItemID"]}'),
+        cost: int.tryParse(element[2]["value"] ?? '0'),
+        ordered_qty: int.tryParse(element[3]["value"] ?? '0'),
+        poID: int.tryParse('${element[1]["id"]}'),
+      );
+
+      // poID: paiddropdownMapperData[element[1]["value"]]?.id)
+      ;
       items.add(item);
     });
     CreateGoModel createGoModel = CreateGoModel(
-        id: id,
+        id: id.value,
         facility_id: facilityId,
         order_type: 1,
         location_ID: 1,

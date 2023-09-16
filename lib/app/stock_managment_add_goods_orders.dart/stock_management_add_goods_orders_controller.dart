@@ -216,7 +216,8 @@ class StockManagementAddGoodsOrdersController extends GetxController {
           {
             "key": "Drop_down",
             "value": '${element.assetItem_Name}',
-            'id': '${element.assetItemID}'
+            'assetItemID': '${element.assetItemID}',
+            'id': '${element.id}'
           },
           {
             'key': "Paid_By",
@@ -369,7 +370,12 @@ class StockManagementAddGoodsOrdersController extends GetxController {
 
   void addRowItem() {
     rowItem.value.add([
-      {"key": "Drop_down", "value": 'Please Select', "id": ''},
+      {
+        "key": "Drop_down",
+        "value": 'Please Select',
+        "assetItemID": '',
+        "id": ''
+      },
       {'key': "Paid_By", "value": 'Please Select', "id": ''},
       {'key': "Cost", "value": ''},
       {'key': "Order", "value": ''},
@@ -395,6 +401,7 @@ class StockManagementAddGoodsOrdersController extends GetxController {
     List<Items> items = [];
     rowItem.value.forEach((element) {
       Items item = Items(
+          goItemID: 0,
           assetItemID: dropdownMapperData[element[0]["value"]]?.id,
           cost: int.tryParse(element[2]["value"] ?? '0'),
           ordered_qty: int.tryParse(element[3]["value"] ?? '0'),
@@ -457,7 +464,8 @@ class StockManagementAddGoodsOrdersController extends GetxController {
     List<Items> items = [];
     rowItem.value.forEach((element) {
       Items item = Items(
-        assetItemID: int.tryParse('${element[0]["id"]}'),
+        goItemID: int.tryParse('${element[0]["id"]}'),
+        assetItemID: int.tryParse('${element[0]["assetItemID"]}'),
         cost: int.tryParse(element[2]["value"] ?? '0'),
         ordered_qty: int.tryParse(element[3]["value"] ?? '0'),
         poID: int.tryParse('${element[1]["id"]}'),
