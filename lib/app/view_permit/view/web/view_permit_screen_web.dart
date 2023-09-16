@@ -1664,70 +1664,72 @@ class ViewPermitWebScreen extends GetView<ViewPermitController> {
                                                 ],
                                               ),
                                             ),
-                                            Divider(
-                                              color: ColorValues.greyLightColour,
-                                            ),
+                                            // Divider(
+                                            //   color: ColorValues.greyLightColour,
+                                            // ),
                                             Expanded(
-                                              child: Theme(
-                                                data: ThemeData(
-                                                    scrollbarTheme: ScrollbarThemeData(
-                                                        isAlwaysShown: false, thumbColor: MaterialStateProperty.all<Color>(Colors.transparent))),
-                                                child: ScrollableTableView(
-                                                  columns: [
-                                                    "Job Id",
-                                                    "Job Title",
-                                                    "Equipment Category",
-                                                    "Equipment",
-                                                    "Breakdown Time",
-                                                    "Assigned To",
-                                                    "Status",
-                                                  ].map((column) {
-                                                    return TableViewColumn(
-                                                      label: column,
-                                                      minWidth: Get.width * 0.11,
-                                                    );
-                                                  }).toList(),
-                                                  rows: [
-                                                    ...List.generate(
-                                                      controller.listAssociatedJobs?.length ?? 0,
-                                                      (index) {
-                                                        var getJobsLinkedToPermitList = controller.listAssociatedJobs?[index];
-                                                        return [
-                                                          '${getJobsLinkedToPermitList?.jobId}',
-                                                          '${getJobsLinkedToPermitList?.title ?? ''}',
-                                                          '${getJobsLinkedToPermitList?.equipmentCat ?? ''}',
-                                                          '${getJobsLinkedToPermitList?.equipment ?? ''}',
-                                                          '${getJobsLinkedToPermitList?.breakdownTime ?? ''}',
-                                                          '${getJobsLinkedToPermitList?.assignedTo ?? ''}',
-                                                          '${getJobsLinkedToPermitList?.status_short ?? ''}',
-                                                        ];
-                                                      },
-                                                    ),
-                                                  ].map((record) {
-                                                    return TableViewRow(
-                                                      height: 40,
-                                                      cells: record.map((value) {
-                                                        return TableViewCell(
-                                                            child: value == record[0]
-                                                                ? GestureDetector(
-                                                                    onTap: () {
-                                                                      controller.viewJobDetails(int.tryParse('${record[0]}'));
-                                                                    },
-                                                                    child: Text(
-                                                                      value,
-                                                                      style: TextStyle(
+                                             
+                                              child:DataTable2(
+                                          border: TableBorder.all(color: Color.fromARGB(255, 206, 229, 234)),
+                                          columns: [
+                                            DataColumn(
+                                                label: Text(
+                                              "Job Id",
+                                              style: TextStyle(fontSize: 15, fontWeight: FontWeight.bold),
+                                            )),
+                                            DataColumn(
+                                                label: Text(
+                                              "Job Title",
+                                              style: TextStyle(fontSize: 15, fontWeight: FontWeight.bold),
+                                            )),
+                                             DataColumn(
+                                                label: Text(
+                                              "Equipment Category",
+                                              style: TextStyle(fontSize: 15, fontWeight: FontWeight.bold),
+                                            )),
+                                             DataColumn(
+                                                label: Text(
+                                              "Equipment",
+                                              style: TextStyle(fontSize: 15, fontWeight: FontWeight.bold),
+                                            )),
+                                             DataColumn(
+                                                label: Text(
+                                              "Breakdown Time",
+                                              style: TextStyle(fontSize: 15, fontWeight: FontWeight.bold),
+                                            )),
+                                             DataColumn(
+                                                label: Text(
+                                              "Assigned To",
+                                              style: TextStyle(fontSize: 15, fontWeight: FontWeight.bold),
+                                            )),
+                                             DataColumn(
+                                                label: Text(
+                                              "Status",
+                                              style: TextStyle(fontSize: 15, fontWeight: FontWeight.bold),
+                                            )),
+                                          ],
+                                          rows: List<DataRow>.generate(
+                                            controller.listAssociatedJobs?.length ?? 0,
+                                            (index) => DataRow(cells: [
+                                              DataCell(GestureDetector(
+                                                onTap: () {
+                                                   controller.viewJobDetails(controller.listAssociatedJobs?[index]?.jobId);
+                                                },
+                                                child: Text(controller.listAssociatedJobs?[index]?.jobId.toString() ?? '', style: TextStyle(
                                                                         decoration: TextDecoration.underline,
                                                                         decorationStyle: TextDecorationStyle.solid,
                                                                         color: Color.fromARGB(255, 5, 92, 163),
-                                                                      ),
-                                                                    ),
-                                                                  )
-                                                                : Text(value));
-                                                      }).toList(),
-                                                    );
-                                                  }).toList(),
-                                                ),
-                                              ),
+                                                                      ),))),
+                                              DataCell(Text(controller.listAssociatedJobs?[index]?.title.toString() ?? '')),
+                                               DataCell(Text(controller.listAssociatedJobs?[index]?.equipmentCat.toString() ?? '')),
+                                               DataCell(Text(controller.listAssociatedJobs?[index]?.equipment.toString() ?? '')),
+                                               DataCell(Text(controller.listAssociatedJobs?[index]?.breakdownTime.toString() ?? '')),
+                                               DataCell(Text(controller.listAssociatedJobs?[index]?.assignedTo.toString() ?? '')),
+                                               DataCell(Text(controller.listAssociatedJobs?[index]?.status_short.toString() ?? '')),
+
+                                            ]),
+                                          ),
+                                        ),
                                             ),
                                           ],
                                         ),
@@ -1893,51 +1895,71 @@ class ViewPermitWebScreen extends GetView<ViewPermitController> {
                                 ///Safety measures
                                 controller.safetyMeasureList.isEmpty
                                     ? Dimens.box0
-                                    : Container(
-                                        margin: EdgeInsets.all(20),
-                                        child: Column(
-                                          children: [
-                                            CustomAppBar(
-                                              title: 'Following safety Measures taken to carry out the work'.tr,
-                                            ),
-                                            Dimens.boxHeight10,
-                                            Wrap(
-                                              children: [
-                                                Column(
-                                                  children: [
-                                                    controller.permitId != null
-                                                        ? Wrap(
-                                                            alignment: WrapAlignment.start,
-                                                            spacing: 100,
-                                                            children: []..addAll(controller.safetyMeasureList.map((element) => Row(
-                                                                  mainAxisSize: MainAxisSize.min,
-                                                                  mainAxisAlignment: MainAxisAlignment.start,
-                                                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                                                  children: [
-                                                                    SizedBox(
-                                                                      width: 200,
-                                                                      child: Row(
-                                                                        children: [
-                                                                          checkBoxMethod(1),
-                                                                          // Text("${l = l! + 1}. "),
-                                                                          Text("${element.name}")
-                                                                        ],
-                                                                      ),
-                                                                    )
-                                                                  ],
-                                                                ))),
-                                                          )
-                                                        : Container(),
-                                                    SizedBox(
-                                                      height: 20,
-                                                    ),
-                                                  ],
-                                                )
-                                              ],
-                                            ),
-                                          ],
-                                        ),
+                                    : SizedBox(
+                                      width: MediaQuery.of(context).size.width / 1,
+                                      child: Container(
+                                          margin: Dimens.edgeInsets20,
+                                           height: ((controller.safetyMeasureList.length) * 10) + 130,
+                                          decoration: BoxDecoration(
+                                      border: Border.all(
+                                        color: ColorValues.lightGreyColorWithOpacity35,
+                                        width: 1,
                                       ),
+                                      boxShadow: [
+                                        BoxShadow(
+                                          color: ColorValues.appBlueBackgroundColor,
+                                          spreadRadius: 2,
+                                          blurRadius: 5,
+                                          offset: Offset(0, 2),
+                                        ),
+                                      ],
+                                                                      ),
+                                          child: Column(
+                                            crossAxisAlignment: CrossAxisAlignment.start,
+                                            children: [
+                                              // CustomAppBar(
+                                              //   title: 'Following safety Measures taken to carry out the work'.tr,
+                                              // ),
+                                              Text('Following safety Measures taken to carry out the work',style: Styles.blue700,),
+                                              Dimens.boxHeight10,
+                                              Wrap(
+                                                children: [
+                                                  Column(
+                                                    children: [
+                                                      controller.permitId != null
+                                                          ? Wrap(
+                                                              alignment: WrapAlignment.start,
+                                                              spacing: 100,
+                                                              children: []..addAll(controller.safetyMeasureList.map((element) => Row(
+                                                                    mainAxisSize: MainAxisSize.min,
+                                                                    mainAxisAlignment: MainAxisAlignment.start,
+                                                                    crossAxisAlignment: CrossAxisAlignment.start,
+                                                                    children: [
+                                                                      SizedBox(
+                                                                        width: 200,
+                                                                        child: Row(
+                                                                          children: [
+                                                                            checkBoxMethod(1),
+                                                                            // Text("${l = l! + 1}. "),
+                                                                            Text("${element.name}")
+                                                                          ],
+                                                                        ),
+                                                                      )
+                                                                    ],
+                                                                  ))),
+                                                            )
+                                                          : Container(),
+                                                      SizedBox(
+                                                        height: 20,
+                                                      ),
+                                                    ],
+                                                  )
+                                                ],
+                                              ),
+                                            ],
+                                          ),
+                                        ),
+                                    ),
 
                                 //Tool box talk
                                 Container(
@@ -2183,50 +2205,47 @@ class ViewPermitWebScreen extends GetView<ViewPermitController> {
                                             // ),
 
                                             Expanded(
-                                              child: Theme(
-                                                data: ThemeData(
-                                                    scrollbarTheme: ScrollbarThemeData(
-                                                        isAlwaysShown: false, thumbColor: MaterialStateProperty.all<Color>(Colors.transparent))),
-                                                child: ScrollableTableView(
-                                                  columns: [
-                                                    "Time Stamp",
-                                                    "Posted By",
-                                                    "Comment",
-                                                    "Location",
-                                                    "Status",
-                                                  ].map((column) {
-                                                    return TableViewColumn(
-                                                      label: column,
-                                                      minWidth: Get.width * 0.15,
-                                                    );
-                                                  }).toList(),
-                                                  rows: [
-                                                    ...List.generate(
-                                                      controller.historyList?.length ?? 0,
-                                                      (index) {
-                                                        var getHistoryListDetails = controller.historyList?[index];
-                                                        return [
-                                                          '${getHistoryListDetails?.createdAt}',
-                                                          '${getHistoryListDetails?.createdByName ?? ''}',
-                                                          '${getHistoryListDetails?.comment ?? ''}',
-                                                          '--',
-                                                          '${getHistoryListDetails?.status_name ?? ''}',
-                                                        ];
-                                                      },
-                                                    ),
-                                                    // [
-                                                  ].map((record) {
-                                                    return TableViewRow(
-                                                      height: 45,
-                                                      cells: record.map((value) {
-                                                        return TableViewCell(
-                                                          child: Text(value),
-                                                        );
-                                                      }).toList(),
-                                                    );
-                                                  }).toList(),
-                                                ),
-                                              ),
+                                             
+                                              child: DataTable2(
+                                          border: TableBorder.all(color: Color.fromARGB(255, 206, 229, 234)),
+                                          columns: [
+                                            DataColumn(
+                                                label: Text(
+                                              "Time Stamp",
+                                              style: TextStyle(fontSize: 15, fontWeight: FontWeight.bold),
+                                            )),
+                                            DataColumn(
+                                                label: Text(
+                                              "Posted By",
+                                              style: TextStyle(fontSize: 15, fontWeight: FontWeight.bold),
+                                            )),
+                                             DataColumn(
+                                                label: Text(
+                                              "Comment",
+                                              style: TextStyle(fontSize: 15, fontWeight: FontWeight.bold),
+                                            )),
+                                             DataColumn(
+                                                label: Text(
+                                              "Location",
+                                              style: TextStyle(fontSize: 15, fontWeight: FontWeight.bold),
+                                            )),
+                                             DataColumn(
+                                                label: Text(
+                                              "Status",
+                                              style: TextStyle(fontSize: 15, fontWeight: FontWeight.bold),
+                                            )),
+                                          ],
+                                          rows: List<DataRow>.generate(
+                                            controller.historyList?.length ?? 0,
+                                            (index) => DataRow(cells: [
+                                              DataCell(Text(controller.historyList?[index]?.createdAt.toString() ?? '')),
+                                              DataCell(Text(controller.historyList?[index]?.createdByName.toString() ?? '')),
+                                               DataCell(Text(controller.historyList?[index]?.comment.toString() ?? '')),
+                                              DataCell(Text('--')),
+                                               DataCell(Text(controller.historyList?[index]?.status_name.toString() ?? '')),
+                                            ]),
+                                          ),
+                                        ),
                                             ),
                                           ],
                                         ),
@@ -2243,1009 +2262,6 @@ class ViewPermitWebScreen extends GetView<ViewPermitController> {
                                 //         controller.historyList,
                                 //   ),
                                 // ),
-
-                                 ///Approve Permit Instruction Text
-                                  varUserAccessModel.value.access_list!
-                                  .where((e) =>
-                                      e.feature_id == UserAccessConstants.kPermitFeatureId && e.approve == UserAccessConstants.kHaveApproveAccess)
-                                  .length >
-                              0 &&
-                          controller.viewPermitDetailsModel.value?.ptwStatus == 121 ||
-                      controller.viewPermitDetailsModel.value?.ptwStatus == 133
-                                        ?Container(
-                                           margin: Dimens.edgeInsets20,
-                                           decoration: BoxDecoration(
-                                          border: Border.all(
-                                            color: ColorValues.lightGreyColorWithOpacity35,
-                                            width: 1,
-                                          ),
-                                          boxShadow: [
-                                            BoxShadow(
-                                              color: ColorValues.appBlueBackgroundColor,
-                                              spreadRadius: 2,
-                                              blurRadius: 5,
-                                              offset: Offset(0, 2),
-                                            ),
-                                          ],
-                                        ),
-                                          child: Column(
-                                            children: [
-                                              Padding(
-                                              padding: const EdgeInsets.all(10.0),
-                                              child: Row(
-                                                children: [
-                                                  Text(
-                                                    "Approve Permit ",
-                                                    style: Styles.blue700,
-                                                  ),
-                                                ],
-                                              ),
-                                            ),
-                                            Divider(
-                                              color: ColorValues.greyLightColour,
-                                            ),
-                                              Align(
-                                                alignment: Alignment.centerLeft,
-                                                child: Text(
-                                                    'ISSUED BY:',
-                                                    style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
-                                                    
-                                                  ),
-                                              ),
-                                                Row(
-                                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                                  children: [
-                                                    Column(
-                                                      crossAxisAlignment: CrossAxisAlignment.end,
-                                                      children: [
-                                                        Text(
-                                                          'Permit Issuer Name',
-                                                          style: Styles.black17,
-                                                        ),
-                                                        Text(
-                                                          '${controller.viewPermitDetailsModel.value?.issuedByName}',
-                                                          style: Styles.black17,
-                                                        ),
-                                                      ],
-                                                    ),
-                                                    Spacer(),
-                                                    Column(
-                                                      crossAxisAlignment: CrossAxisAlignment.end,
-                                                      children: [
-                                                        Text(
-                                                          'Designation',
-                                                          style: Styles.black17,
-                                                        ),
-                                                        Text(
-                                                          '${controller.viewPermitDetailsModel.value?.requestedByName}',
-                                                          style: Styles.black17,
-                                                        ),
-                                                      ],
-                                                    ),
-                                                    Spacer(),
-                                                    Column(
-                                                      crossAxisAlignment: CrossAxisAlignment.end,
-                                                      children: [
-                                                        Text(
-                                                          'Company',
-                                                          style: Styles.black17,
-                                                        ),
-                                                        Text(
-                                                          '${controller.viewPermitDetailsModel.value?.requestedByName}',
-                                                          style: Styles.black17,
-                                                        ),
-                                                      ],
-                                                    ),
-                                                    Spacer(),
-                                                    Column(
-                                                      crossAxisAlignment: CrossAxisAlignment.end,
-                                                      children: [
-                                                        Text(
-                                                          'Date & Time',
-                                                          style: Styles.black17,
-                                                        ),
-                                                        Text(
-                                                          '${controller.viewPermitDetailsModel.value?.requestedByName}',
-                                                          style: Styles.black17,
-                                                        ),
-                                                      ],
-                                                    ),
-                                                  ],
-                                                ),
-                                                Dimens.boxHeight20,
-                                                Align(
-                                                  alignment: Alignment.centerLeft,
-                                                  child: Text(
-                                                    'RESPONSIBILITY ACCEPTED BY:',
-                                                    style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
-                                                    
-                                                  ),
-                                                ),
-                                                Row(
-                                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                                  children: [
-                                                    Column(
-                                                      crossAxisAlignment: CrossAxisAlignment.end,
-                                                      children: [
-                                                        Text(
-                                                          'Permit Requester Name',
-                                                          style: Styles.black17,
-                                                        ),
-                                                        Text(
-                                                          '${controller.viewPermitDetailsModel.value?.requestedByName}',
-                                                          style: Styles.black17,
-                                                        ),
-                                                      ],
-                                                    ),
-                                                    Spacer(),
-                                                    Column(
-                                                      crossAxisAlignment: CrossAxisAlignment.end,
-                                                      children: [
-                                                        Text(
-                                                          'Designation',
-                                                          style: Styles.black17,
-                                                        ),
-                                                        Text(
-                                                          '${controller.viewPermitDetailsModel.value?.requestedByName}',
-                                                          style: Styles.black17,
-                                                        ),
-                                                      ],
-                                                    ),
-                                                    Spacer(),
-                                                    Column(
-                                                      crossAxisAlignment: CrossAxisAlignment.end,
-                                                      children: [
-                                                        Text(
-                                                          'Company',
-                                                          style: Styles.black17,
-                                                        ),
-                                                        Text(
-                                                          '${controller.viewPermitDetailsModel.value?.requestedByName}',
-                                                          style: Styles.black17,
-                                                        ),
-                                                      ],
-                                                    ),
-                                                    Spacer(),
-                                                    Column(
-                                                      crossAxisAlignment: CrossAxisAlignment.end,
-                                                      children: [
-                                                        Text(
-                                                          'Date & Time',
-                                                          style: Styles.black17,
-                                                        ),
-                                                        Text(
-                                                          '${controller.viewPermitDetailsModel.value?.requestedByName}',
-                                                          style: Styles.black17,
-                                                        ),
-                                                      ],
-                                                    ),
-                                                  ],
-                                                ),
-                                            ],
-                                          ),
-                                        )
-                                        : Dimens.box0,
-                                        Dimens.boxHeight20,
-                                        
-
-                                ///Extend Permit Instruction Text
-                                controller.viewPermitDetailsModel.value?.isExpired == 1 &&
-                                            controller.viewPermitDetailsModel.value?.ptwStatus == 125 ||
-                                        controller.viewPermitDetailsModel.value?.ptwStatus == 135
-                                    ? Container(
-                                         margin: Dimens.edgeInsets20,
-                                           decoration: BoxDecoration(
-                                          border: Border.all(
-                                            color: ColorValues.lightGreyColorWithOpacity35,
-                                            width: 1,
-                                          ),
-                                          boxShadow: [
-                                            BoxShadow(
-                                              color: ColorValues.appBlueBackgroundColor,
-                                              spreadRadius: 2,
-                                              blurRadius: 5,
-                                              offset: Offset(0, 2),
-                                            ),
-                                          ],
-                                        ),
-                                        // height: ,
-                                        width: MediaQuery.of(context).size.width / 1,
-                                        child: Column(
-                                          mainAxisAlignment: MainAxisAlignment.start,
-                                          crossAxisAlignment: CrossAxisAlignment.start,
-                                          children: [
-                                             Padding(
-                                              padding: const EdgeInsets.all(10.0),
-                                              child: Row(
-                                                children: [
-                                                  Text(
-                                                    "Extend Permit ",
-                                                    style: Styles.blue700,
-                                                  ),
-                                                ],
-                                              ),
-                                            ),
-                                            Divider(
-                                              color: ColorValues.greyLightColour,
-                                            ),
-                                            Text(
-                                              StringConstants.extendPermitText,
-                                              style: Styles.black17,
-                                            ),
-                                            Row(
-                                              mainAxisAlignment: MainAxisAlignment.start,
-                                              crossAxisAlignment: CrossAxisAlignment.start,
-                                              children: [
-                                                checkBoxInstructionMethod(0),
-                                                Padding(
-                                                  padding: const EdgeInsets.only(top: 3),
-                                                  child: Text(
-                                                    StringConstants.extendCheckPermitText,
-                                                    style: Styles.black17,
-                                                  ),
-                                                )
-                                              ],
-                                            ),
-                                            Row(
-                                              mainAxisAlignment: MainAxisAlignment.start,
-                                              crossAxisAlignment: CrossAxisAlignment.start,
-                                              children: [
-                                                checkBoxInstructionMethod(1),
-                                                Padding(
-                                                  padding: const EdgeInsets.only(top: 5),
-                                                  child: Text(
-                                                    StringConstants.extendCheck2PermitText,
-                                                    style: Styles.black17,
-                                                  ),
-                                                )
-                                              ],
-                                            ),
-                                            //  Dimens.boxHeight20,
-                                            Text(
-                                              'Above Conditions, Validated By:',
-                                              style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
-                                            ),
-                                            Row(
-                                              crossAxisAlignment: CrossAxisAlignment.start,
-                                              children: [
-                                                Column(
-                                                  crossAxisAlignment: CrossAxisAlignment.end,
-                                                  children: [
-                                                    Text(
-                                                      'Permit Requester',
-                                                      style: Styles.black17,
-                                                    ),
-                                                    Text(
-                                                      '${controller.viewPermitDetailsModel.value?.requestedByName}',
-                                                      style: Styles.black17,
-                                                    ),
-                                                  ],
-                                                ),
-                                                Spacer(),
-                                                Column(
-                                                  crossAxisAlignment: CrossAxisAlignment.end,
-                                                  children: [
-                                                    Text(
-                                                      'Designation',
-                                                      style: Styles.black17,
-                                                    ),
-                                                    Text(
-                                                      '${controller.viewPermitDetailsModel.value?.requestedByName}',
-                                                      style: Styles.black17,
-                                                    ),
-                                                  ],
-                                                ),
-                                                Spacer(),
-                                                Column(
-                                                  crossAxisAlignment: CrossAxisAlignment.end,
-                                                  children: [
-                                                    Text(
-                                                      'Company',
-                                                      style: Styles.black17,
-                                                    ),
-                                                    Text(
-                                                      '${controller.viewPermitDetailsModel.value?.requestedByName}',
-                                                      style: Styles.black17,
-                                                    ),
-                                                  ],
-                                                ),
-                                                Spacer(),
-                                                Column(
-                                                  crossAxisAlignment: CrossAxisAlignment.end,
-                                                  children: [
-                                                    Text(
-                                                      'Date & Time',
-                                                      style: Styles.black17,
-                                                    ),
-                                                    Text(
-                                                      '${controller.viewPermitDetailsModel.value?.requestedByName}',
-                                                      style: Styles.black17,
-                                                    ),
-                                                  ],
-                                                ),
-                                              ],
-                                            ),
-                                            Dimens.boxHeight20,
-                                            Row(
-                                              crossAxisAlignment: CrossAxisAlignment.start,
-                                              children: [
-                                                Column(
-                                                  crossAxisAlignment: CrossAxisAlignment.end,
-                                                  children: [
-                                                    // Text(
-                                                    //   'Closure Remark',
-                                                    //   style: Styles.black17,
-                                                    // ),
-                                                    CustomTextField(
-                                                      label: 'Extend Remark',
-                                                    )
-                                                  ],
-                                                ),
-                                                Spacer(),
-                                                Column(
-                                                  crossAxisAlignment: CrossAxisAlignment.end,
-                                                  children: [
-                                                    // Text(
-                                                    //   'Upload Photo',
-                                                    //   style: Styles.black17,
-                                                    // ),
-                                                    Row(
-                                                      // mainAxisAlignment: MainAxisAlignment.center,
-                                                      children: [
-                                                        Container(
-                                                          height: 45,
-                                                          width: 200,
-                                                          decoration: BoxDecoration(
-                                                            border: Border.all(
-                                                              color: Color.fromARGB(255, 227, 224, 224),
-                                                              width: 1,
-                                                            ),
-                                                            boxShadow: [
-                                                              BoxShadow(
-                                                                color: Color.fromARGB(255, 236, 234, 234).withOpacity(0.5),
-                                                                spreadRadius: 2,
-                                                                blurRadius: 5,
-                                                                offset: Offset(0, 2),
-                                                              ),
-                                                            ],
-                                                          ),
-                                                          child: Padding(
-                                                            padding: const EdgeInsets.all(8.0),
-                                                            child: Align(
-                                                              alignment: Alignment.topLeft,
-                                                              child: Text(
-                                                                controller.fileName.value == "" ? 'Upload Photo' : controller.fileName.value,
-                                                                maxLines: 3,
-                                                                textAlign: TextAlign.center,
-                                                                style: Styles.greyLight14,
-                                                              ),
-                                                            ),
-                                                          ),
-                                                        ),
-                                                        Dimens.boxWidth5,
-                                                        Container(
-                                                          height: 45,
-                                                          child: CustomElevatedButton(
-                                                            backgroundColor: ColorValues.appDarkBlueColor,
-                                                            text: "Browse",
-                                                            onPressed: () async {
-                                                              final result = await FilePicker.platform.pickFiles();
-                                                              if (result != null) {
-                                                                // for (var file in result.files) {
-                                                                controller.fileName.value = result.files.single.name;
-                                                                controller.fileBytes = result.files.single.bytes;
-                                                                //controller.filePath.value = file.;
-                                                                //  print({"filepathes", fileBytes});
-                                                                // }
-                                                              }
-                                                            },
-                                                          ),
-                                                        ),
-                                                        Container(
-                                                          height: 45,
-                                                          child: CustomElevatedButton(
-                                                            backgroundColor: ColorValues.greenColor,
-                                                            text: 'Upload',
-                                                            onPressed: () {
-                                                              if (controller.fileName.value != "") {
-                                                                controller
-                                                                    .browseFiles(
-                                                                  fileBytes: controller.fileBytes,
-                                                                )
-                                                                    .then((value) {
-                                                                  controller.isSuccessDialog();
-
-                                                                  // Fluttertoast.showToast(
-                                                                  //     msg: "file upload  Successfully",
-                                                                  //     fontSize: 16.0);
-                                                                });
-                                                              } else {
-                                                                Fluttertoast.showToast(msg: "Please Select file...", fontSize: 16.0);
-                                                              }
-
-                                                              //  controller.savePmMapping();
-                                                            },
-                                                          ),
-                                                        ),
-                                                      ],
-                                                    ),
-                                                  ],
-                                                ),
-                                              ],
-                                            )
-                                          ],
-                                        ),
-                                      )
-                                    : Dimens.box0,
-
-                                ///Permit Close Instruction Text
-                                varUserAccessModel.value.access_list!
-                                                .where((e) =>
-                                                    e.feature_id == UserAccessConstants.kPermitFeatureId &&
-                                                    e.add == UserAccessConstants.kHaveAddAccess)
-                                                .length >
-                                            0 &&
-                                        controller.viewPermitDetailsModel.value?.permitNo != null &&
-                                        controller.viewPermitDetailsModel.value?.ptwStatus == 121
-                                    ? Container(
-                                         margin: Dimens.edgeInsets20,
-                                           decoration: BoxDecoration(
-                                          border: Border.all(
-                                            color: ColorValues.lightGreyColorWithOpacity35,
-                                            width: 1,
-                                          ),
-                                          boxShadow: [
-                                            BoxShadow(
-                                              color: ColorValues.appBlueBackgroundColor,
-                                              spreadRadius: 2,
-                                              blurRadius: 5,
-                                              offset: Offset(0, 2),
-                                            ),
-                                          ],
-                                        ),
-                                        // height: ,
-                                        width: MediaQuery.of(context).size.width / 1,
-                                        child: Column(
-                                          mainAxisAlignment: MainAxisAlignment.start,
-                                          crossAxisAlignment: CrossAxisAlignment.start,
-                                          children: [
-                                             Padding(
-                                              padding: const EdgeInsets.all(10.0),
-                                              child: Row(
-                                                children: [
-                                                  Text(
-                                                    "Close Permit ",
-                                                    style: Styles.blue700,
-                                                  ),
-                                                ],
-                                              ),
-                                            ),
-                                            Divider(
-                                              color: ColorValues.greyLightColour,
-                                            ),
-                                            Text(
-                                              StringConstants.permitCloseText,
-                                              style: Styles.black17,
-                                            ),
-                                            Row(
-                                              mainAxisAlignment: MainAxisAlignment.start,
-                                              crossAxisAlignment: CrossAxisAlignment.start,
-                                              children: [
-                                                checkBoxInstructionMethod(2),
-                                                Padding(
-                                                  padding: const EdgeInsets.only(top: 3),
-                                                  child: Text(
-                                                    StringConstants.permitCloseCheck1,
-                                                    style: Styles.black17,
-                                                  ),
-                                                )
-                                              ],
-                                            ),
-                                            Row(
-                                              mainAxisAlignment: MainAxisAlignment.start,
-                                              crossAxisAlignment: CrossAxisAlignment.start,
-                                              children: [
-                                                checkBoxInstructionMethod(3),
-                                                Padding(
-                                                  padding: const EdgeInsets.only(top: 5),
-                                                  child: Text(
-                                                    StringConstants.permitCloseCheck2,
-                                                    style: Styles.black17,
-                                                  ),
-                                                )
-                                              ],
-                                            ),
-                                            Row(
-                                              mainAxisAlignment: MainAxisAlignment.start,
-                                              crossAxisAlignment: CrossAxisAlignment.start,
-                                              children: [
-                                                checkBoxInstructionMethod(4),
-                                                Padding(
-                                                  padding: const EdgeInsets.only(top: 5),
-                                                  child: Text(
-                                                    StringConstants.permitCloseCheck3,
-                                                    style: Styles.black17,
-                                                  ),
-                                                )
-                                              ],
-                                            ),
-                                            Row(
-                                              mainAxisAlignment: MainAxisAlignment.start,
-                                              crossAxisAlignment: CrossAxisAlignment.start,
-                                              children: [
-                                                checkBoxInstructionMethod(5),
-                                                Padding(
-                                                  padding: const EdgeInsets.only(top: 5),
-                                                  child: Text(
-                                                    StringConstants.permitCloseCheck4,
-                                                    style: Styles.black17,
-                                                  ),
-                                                )
-                                              ],
-                                            ),
-                                            Text(
-                                              'Above Conditions, Validated By:',
-                                              style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
-                                            ),
-                                            Row(
-                                              crossAxisAlignment: CrossAxisAlignment.start,
-                                              children: [
-                                                Column(
-                                                  crossAxisAlignment: CrossAxisAlignment.end,
-                                                  children: [
-                                                    Text(
-                                                      'Permit Requester',
-                                                      style: Styles.black17,
-                                                    ),
-                                                    Text(
-                                                      '${controller.viewPermitDetailsModel.value?.requestedByName}',
-                                                      style: Styles.black17,
-                                                    ),
-                                                  ],
-                                                ),
-                                                Spacer(),
-                                                Column(
-                                                  crossAxisAlignment: CrossAxisAlignment.end,
-                                                  children: [
-                                                    Text(
-                                                      'Designation',
-                                                      style: Styles.black17,
-                                                    ),
-                                                    Text(
-                                                      '${controller.viewPermitDetailsModel.value?.requestedByName}',
-                                                      style: Styles.black17,
-                                                    ),
-                                                  ],
-                                                ),
-                                                Spacer(),
-                                                Column(
-                                                  crossAxisAlignment: CrossAxisAlignment.end,
-                                                  children: [
-                                                    Text(
-                                                      'Company',
-                                                      style: Styles.black17,
-                                                    ),
-                                                    Text(
-                                                      '${controller.viewPermitDetailsModel.value?.requestedByName}',
-                                                      style: Styles.black17,
-                                                    ),
-                                                  ],
-                                                ),
-                                                Spacer(),
-                                                Column(
-                                                  crossAxisAlignment: CrossAxisAlignment.end,
-                                                  children: [
-                                                    Text(
-                                                      'Date & Time',
-                                                      style: Styles.black17,
-                                                    ),
-                                                    Text(
-                                                      '${controller.viewPermitDetailsModel.value?.requestedByName}',
-                                                      style: Styles.black17,
-                                                    ),
-                                                  ],
-                                                ),
-                                              ],
-                                            ),
-                                            Dimens.boxHeight20,
-                                            Row(
-                                              crossAxisAlignment: CrossAxisAlignment.start,
-                                              children: [
-                                                Column(
-                                                  crossAxisAlignment: CrossAxisAlignment.end,
-                                                  children: [
-                                                    // Text(
-                                                    //   'Closure Remark',
-                                                    //   style: Styles.black17,
-                                                    // ),
-                                                    CustomTextField(
-                                                      label: 'Closure Remark',
-                                                    )
-                                                  ],
-                                                ),
-                                                Spacer(),
-                                                Column(
-                                                  crossAxisAlignment: CrossAxisAlignment.end,
-                                                  children: [
-                                                    // Text(
-                                                    //   'Upload Photo',
-                                                    //   style: Styles.black17,
-                                                    // ),
-                                                    Row(
-                                                      // mainAxisAlignment: MainAxisAlignment.center,
-                                                      children: [
-                                                        Container(
-                                                          height: 45,
-                                                          width: 200,
-                                                          decoration: BoxDecoration(
-                                                            border: Border.all(
-                                                              color: Color.fromARGB(255, 227, 224, 224),
-                                                              width: 1,
-                                                            ),
-                                                            boxShadow: [
-                                                              BoxShadow(
-                                                                color: Color.fromARGB(255, 236, 234, 234).withOpacity(0.5),
-                                                                spreadRadius: 2,
-                                                                blurRadius: 5,
-                                                                offset: Offset(0, 2),
-                                                              ),
-                                                            ],
-                                                          ),
-                                                          child: Padding(
-                                                            padding: const EdgeInsets.all(8.0),
-                                                            child: Align(
-                                                              alignment: Alignment.topLeft,
-                                                              child: Text(
-                                                                controller.fileName.value == "" ? 'Upload Photo' : controller.fileName.value,
-                                                                maxLines: 3,
-                                                                textAlign: TextAlign.center,
-                                                                style: Styles.greyLight14,
-                                                              ),
-                                                            ),
-                                                          ),
-                                                        ),
-                                                        Dimens.boxWidth5,
-                                                        Container(
-                                                          height: 45,
-                                                          child: CustomElevatedButton(
-                                                            backgroundColor: ColorValues.appDarkBlueColor,
-                                                            text: "Browse",
-                                                            onPressed: () async {
-                                                              final result = await FilePicker.platform.pickFiles();
-                                                              if (result != null) {
-                                                                // for (var file in result.files) {
-                                                                controller.fileName.value = result.files.single.name;
-                                                                controller.fileBytes = result.files.single.bytes;
-                                                                //controller.filePath.value = file.;
-                                                                //  print({"filepathes", fileBytes});
-                                                                // }
-                                                              }
-                                                            },
-                                                          ),
-                                                        ),
-                                                        Container(
-                                                          height: 45,
-                                                          child: CustomElevatedButton(
-                                                            backgroundColor: ColorValues.greenColor,
-                                                            text: 'Upload',
-                                                            onPressed: () {
-                                                              if (controller.fileName.value != "") {
-                                                                controller
-                                                                    .browseFiles(
-                                                                  fileBytes: controller.fileBytes,
-                                                                )
-                                                                    .then((value) {
-                                                                  controller.isSuccessDialog();
-
-                                                                  // Fluttertoast.showToast(
-                                                                  //     msg: "file upload  Successfully",
-                                                                  //     fontSize: 16.0);
-                                                                });
-                                                              } else {
-                                                                Fluttertoast.showToast(msg: "Please Select file...", fontSize: 16.0);
-                                                              }
-
-                                                              //  controller.savePmMapping();
-                                                            },
-                                                          ),
-                                                        ),
-                                                      ],
-                                                    ),
-                                                  ],
-                                                ),
-                                              ],
-                                            )
-                                          ],
-                                        ),
-                                      )
-                                    : Dimens.box0,
-
-                                ///Cancel Permit Request Instruction Text
-                                varUserAccessModel.value.access_list!
-                                                    .where((e) =>
-                                                        e.feature_id == UserAccessConstants.kPermitFeatureId &&
-                                                        e.approve == UserAccessConstants.kHaveApproveAccess)
-                                                    .length >
-                                                0 &&
-                                            controller.viewPermitDetailsModel.value?.ptwStatus == 123 ||
-                                        controller.viewPermitDetailsModel.value?.ptwStatus == 130
-                                    ? Dimens.box0
-                                    : controller.viewPermitDetailsModel.value?.permitNo != null
-                                        ? Container(
-                                            margin: Dimens.edgeInsets20,
-                                           decoration: BoxDecoration(
-                                          border: Border.all(
-                                            color: ColorValues.lightGreyColorWithOpacity35,
-                                            width: 1,
-                                          ),
-                                          boxShadow: [
-                                            BoxShadow(
-                                              color: ColorValues.appBlueBackgroundColor,
-                                              spreadRadius: 2,
-                                              blurRadius: 5,
-                                              offset: Offset(0, 2),
-                                            ),
-                                          ],
-                                        ),
-                                            // height: ,
-                                            width: MediaQuery.of(context).size.width / 1,
-                                            child: Column(
-                                              mainAxisAlignment: MainAxisAlignment.start,
-                                              crossAxisAlignment: CrossAxisAlignment.start,
-                                              children: [
-                                                 Padding(
-                                              padding: const EdgeInsets.all(10.0),
-                                              child: Row(
-                                                children: [
-                                                  Text(
-                                                    "Cancel Permit Request",
-                                                    style: Styles.blue700,
-                                                  ),
-                                                ],
-                                              ),
-                                            ),
-                                            Divider(
-                                              color: ColorValues.greyLightColour,
-                                            ),
-                                                Text(
-                                                  StringConstants.cancelWorkPermit,
-                                                  style: Styles.black17,
-                                                ),
-                                                Row(
-                                                  mainAxisAlignment: MainAxisAlignment.start,
-                                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                                  children: [
-                                                    checkBoxInstructionMethod(6),
-                                                    Padding(
-                                                      padding: const EdgeInsets.only(top: 3),
-                                                      child: Text(
-                                                        StringConstants.cancelWorkPermitCheck1,
-                                                        style: Styles.black17,
-                                                      ),
-                                                    )
-                                                  ],
-                                                ),
-                                                Row(
-                                                  mainAxisAlignment: MainAxisAlignment.start,
-                                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                                  children: [
-                                                    checkBoxInstructionMethod(7),
-                                                    Padding(
-                                                      padding: const EdgeInsets.only(top: 5),
-                                                      child: Text(
-                                                        StringConstants.cancelWorkPermitCheck2,
-                                                        style: Styles.black17,
-                                                      ),
-                                                    )
-                                                  ],
-                                                ),
-                                                Row(
-                                                  mainAxisAlignment: MainAxisAlignment.start,
-                                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                                  children: [
-                                                    checkBoxInstructionMethod(8),
-                                                    Padding(
-                                                      padding: const EdgeInsets.only(top: 5),
-                                                      child: Text(
-                                                        StringConstants.cancelWorkPermitCheck3,
-                                                        style: Styles.black17,
-                                                      ),
-                                                    )
-                                                  ],
-                                                ),
-                                                Row(
-                                                  mainAxisAlignment: MainAxisAlignment.start,
-                                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                                  children: [
-                                                    checkBoxInstructionMethod(9),
-                                                    Padding(
-                                                      padding: const EdgeInsets.only(top: 5),
-                                                      child: Text(
-                                                        StringConstants.cancelWorkPermitCheck4,
-                                                        style: Styles.black17,
-                                                      ),
-                                                    ),
-                                                    Dimens.boxWidth5,
-                                                    CustomTextFieldForPermit()
-                                                  ],
-                                                ),
-                                                Text(
-                                                  'Above Conditions, Validated By:',
-                                                  style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
-                                                ),
-                                                Row(
-                                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                                  children: [
-                                                    Column(
-                                                      crossAxisAlignment: CrossAxisAlignment.end,
-                                                      children: [
-                                                        Text(
-                                                          'Authorized person',
-                                                          style: Styles.black17,
-                                                        ),
-                                                        Text(
-                                                          '${controller.viewPermitDetailsModel.value?.requestedByName}',
-                                                          style: Styles.black17,
-                                                        ),
-                                                      ],
-                                                    ),
-                                                    Spacer(),
-                                                    Column(
-                                                      crossAxisAlignment: CrossAxisAlignment.end,
-                                                      children: [
-                                                        Text(
-                                                          'Designation',
-                                                          style: Styles.black17,
-                                                        ),
-                                                        Text(
-                                                          '${controller.viewPermitDetailsModel.value?.requestedByName}',
-                                                          style: Styles.black17,
-                                                        ),
-                                                      ],
-                                                    ),
-                                                    Spacer(),
-                                                    Column(
-                                                      crossAxisAlignment: CrossAxisAlignment.end,
-                                                      children: [
-                                                        Text(
-                                                          'Company',
-                                                          style: Styles.black17,
-                                                        ),
-                                                        Text(
-                                                          '${controller.viewPermitDetailsModel.value?.requestedByName}',
-                                                          style: Styles.black17,
-                                                        ),
-                                                      ],
-                                                    ),
-                                                    Spacer(),
-                                                    Column(
-                                                      crossAxisAlignment: CrossAxisAlignment.end,
-                                                      children: [
-                                                        Text(
-                                                          'Date & Time',
-                                                          style: Styles.black17,
-                                                        ),
-                                                        Text(
-                                                          '${controller.viewPermitDetailsModel.value?.requestedByName}',
-                                                          style: Styles.black17,
-                                                        ),
-                                                      ],
-                                                    ),
-                                                  ],
-                                                ),
-                                                Dimens.boxHeight20,
-                                                Row(
-                                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                                  children: [
-                                                    Column(
-                                                      crossAxisAlignment: CrossAxisAlignment.end,
-                                                      children: [
-                                                        // Text(
-                                                        //   'Closure Remark',
-                                                        //   style: Styles.black17,
-                                                        // ),
-                                                        CustomTextField(
-                                                          label: 'Cancellation Remark',
-                                                        )
-                                                      ],
-                                                    ),
-                                                    Spacer(),
-                                                    Column(
-                                                      crossAxisAlignment: CrossAxisAlignment.end,
-                                                      children: [
-                                                        // Text(
-                                                        //   'Upload Photo',
-                                                        //   style: Styles.black17,
-                                                        // ),
-                                                        Row(
-                                                          // mainAxisAlignment: MainAxisAlignment.center,
-                                                          children: [
-                                                            Container(
-                                                              height: 45,
-                                                              width: 200,
-                                                              decoration: BoxDecoration(
-                                                                border: Border.all(
-                                                                  color: Color.fromARGB(255, 227, 224, 224),
-                                                                  width: 1,
-                                                                ),
-                                                                boxShadow: [
-                                                                  BoxShadow(
-                                                                    color: Color.fromARGB(255, 236, 234, 234).withOpacity(0.5),
-                                                                    spreadRadius: 2,
-                                                                    blurRadius: 5,
-                                                                    offset: Offset(0, 2),
-                                                                  ),
-                                                                ],
-                                                              ),
-                                                              child: Padding(
-                                                                padding: const EdgeInsets.all(8.0),
-                                                                child: Align(
-                                                                  alignment: Alignment.topLeft,
-                                                                  child: Text(
-                                                                    controller.fileName.value == "" ? 'Upload Photo' : controller.fileName.value,
-                                                                    maxLines: 3,
-                                                                    textAlign: TextAlign.center,
-                                                                    style: Styles.greyLight14,
-                                                                  ),
-                                                                ),
-                                                              ),
-                                                            ),
-                                                            Dimens.boxWidth5,
-                                                            Container(
-                                                              height: 45,
-                                                              child: CustomElevatedButton(
-                                                                backgroundColor: ColorValues.appDarkBlueColor,
-                                                                text: "Browse",
-                                                                onPressed: () async {
-                                                                  final result = await FilePicker.platform.pickFiles();
-                                                                  if (result != null) {
-                                                                    // for (var file in result.files) {
-                                                                    controller.fileName.value = result.files.single.name;
-                                                                    controller.fileBytes = result.files.single.bytes;
-                                                                    //controller.filePath.value = file.;
-                                                                    //  print({"filepathes", fileBytes});
-                                                                    // }
-                                                                  }
-                                                                },
-                                                              ),
-                                                            ),
-                                                            Container(
-                                                              height: 45,
-                                                              child: CustomElevatedButton(
-                                                                backgroundColor: ColorValues.greenColor,
-                                                                text: 'Upload',
-                                                                onPressed: () {
-                                                                  if (controller.fileName.value != "") {
-                                                                    controller
-                                                                        .browseFiles(
-                                                                      fileBytes: controller.fileBytes,
-                                                                    )
-                                                                        .then((value) {
-                                                                      controller.isSuccessDialog();
-
-                                                                      // Fluttertoast.showToast(
-                                                                      //     msg: "file upload  Successfully",
-                                                                      //     fontSize: 16.0);
-                                                                    });
-                                                                  } else {
-                                                                    Fluttertoast.showToast(msg: "Please Select file...", fontSize: 16.0);
-                                                                  }
-
-                                                                  //  controller.savePmMapping();
-                                                                },
-                                                              ),
-                                                            ),
-                                                          ],
-                                                        ),
-                                                      ],
-                                                    ),
-                                                  ],
-                                                )
-                                              ],
-                                            ),
-                                          )
-                                        : Dimens.box0,
-
                                        
 
                                 Dimens.boxHeight10,
@@ -3359,22 +2375,22 @@ class ViewPermitWebScreen extends GetView<ViewPermitController> {
               // SizedBox(
               //   width: MediaQuery.of(context).size.width * 0.19,
               // ),
-              Container(
-                child: ElevatedButton.icon(
-                  style: ElevatedButton.styleFrom(
-                    padding: EdgeInsets.symmetric(vertical: 19, horizontal: 30),
+              // Container(
+              //   child: ElevatedButton.icon(
+              //     style: ElevatedButton.styleFrom(
+              //       padding: EdgeInsets.symmetric(vertical: 19, horizontal: 30),
 
-                    foregroundColor: Colors.white,
-                    backgroundColor: ColorValues.appDarkBlueColor, //  foreground
-                  ),
-                  onPressed: () {
-                    controller.printScreen();
-                  },
-                  icon: Icon(Icons.print), //icon data for elevated button
-                  label: Text("Print"), //label text
-                  // style: ButtonStyle( backgroundColor:Color(value)),
-                ),
-              ),
+              //       foregroundColor: Colors.white,
+              //       backgroundColor: ColorValues.appDarkBlueColor, //  foreground
+              //     ),
+              //     onPressed: () {
+              //       controller.printScreen();
+              //     },
+              //     icon: Icon(Icons.print), //icon data for elevated button
+              //     label: Text("Print"), //label text
+              //     // style: ButtonStyle( backgroundColor:Color(value)),
+              //   ),
+              // ),
 
               ///Printing functionality
               // Container(
@@ -3445,7 +2461,7 @@ class ViewPermitWebScreen extends GetView<ViewPermitController> {
                       height: 45,
                       child: CustomElevatedButton(
                         backgroundColor: ColorValues.appGreenColor,
-                        text: "Approve",
+                        text: "Approve Permit",
                         icon: Icons.add,
                         onPressed: () {
                           // controller
@@ -3525,7 +2541,7 @@ class ViewPermitWebScreen extends GetView<ViewPermitController> {
                       height: 45,
                       child: CustomElevatedButton(
                         backgroundColor: ColorValues.appRedColor,
-                        text: "Reject",
+                        text: "Reject Permit",
                         icon: Icons.close,
                         onPressed: () {
                           // controller
@@ -3573,7 +2589,7 @@ class ViewPermitWebScreen extends GetView<ViewPermitController> {
                       child: CustomElevatedButton(
                         backgroundColor: ColorValues.appRedColor,
                         text: "${controller.viewPermitDetailsModel.value?.ptwStatus == 123 ||
-                      controller.viewPermitDetailsModel.value?.ptwStatus == 130 ? 'Cancel By Approver' : 'Cancel Permit Request'}",
+                      controller.viewPermitDetailsModel.value?.ptwStatus == 130 ? 'Cancel By Approver' : 'Cancel Permit'}",
                         icon: Icons.close,
                         onPressed: () {
                           // controller
@@ -3590,7 +2606,7 @@ class ViewPermitWebScreen extends GetView<ViewPermitController> {
                           height: 45,
                           child: CustomElevatedButton(
                             backgroundColor: ColorValues.appRedColor,
-                            text: "Cancel Permit Request",
+                            text: "Cancel Permit",
                             icon: Icons.close,
                             onPressed: () {
                               Get.dialog(PermitCancelReQuestDialog(permitId: '${controller.viewPermitDetailsModel.value?.permitNo}'));
@@ -4422,4 +3438,5 @@ class ViewPermitWebScreen extends GetView<ViewPermitController> {
       },
     );
   }
+
 }
