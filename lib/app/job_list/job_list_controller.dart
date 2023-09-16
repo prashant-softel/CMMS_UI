@@ -56,13 +56,14 @@ class JobListController extends GetxController {
   final excel = Excel.createExcel();
   int facilityId = 0;
   int userId = 0;
-
+  String? facilityName;
   JobModel? jobModel;
   PaginationController paginationController = PaginationController(
     rowCount: 0,
     rowsPerPage: 10,
   );
   StreamSubscription<int>? facilityIdStreamSubscription;
+  StreamSubscription<String>? facilityNameStreamSubscription;
 
   ///
   @override
@@ -76,7 +77,12 @@ class JobListController extends GetxController {
       }
       // });
     });
+    facilityNameStreamSubscription =
+        homeController.facilityName$.listen((event) {
+      facilityName = event;
 
+      // });
+    });
     super.onInit();
   }
 

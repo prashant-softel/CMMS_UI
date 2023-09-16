@@ -45,13 +45,8 @@ class HomeUsecase {
       );
 
   Future<List<TypePermitModel?>?> getTypePermitList(
-    bool? isLoading,
-    int? facility_id
-    ) async =>
-      await _repository.getTypePermitList(
-        isLoading,
-        facility_id
-        );
+          bool? isLoading, int? facility_id) async =>
+      await _repository.getTypePermitList(isLoading, facility_id);
 
   Future<List<SafetyMeasureListModel>> getSafetyMeasureList(
       {required bool isLoading, required int? permit_type_id}) async {
@@ -140,4 +135,8 @@ class HomeUsecase {
       await _repository.getFacilityList(true);
   Future<String?> getUserAccessList() async =>
       await _repository.getUserAccessData(LocalKeys.userAccess);
+  void saveValue({String? facilitydata}) async =>
+      _repository.saveValue(LocalKeys.selectFacalityDropdowndata, facilitydata);
+  Future<String?> getValue() async =>
+      await _repository.getStringValue(LocalKeys.selectFacalityDropdowndata);
 }
