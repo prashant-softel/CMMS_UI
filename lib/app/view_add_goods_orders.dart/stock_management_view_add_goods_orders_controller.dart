@@ -52,7 +52,7 @@ class ViewAddGoodsOrdersController extends GetxController {
 
   Rx<List<List<Map<String, String>>>> rowItem =
       Rx<List<List<Map<String, String>>>>([]);
-  Map<String, GetAssetDataModel> dropdownMapperData = {};
+  Map<String, CreateGoModel> dropdownMapperData = {};
   Map<String, PaiedModel> paiddropdownMapperData = {};
   RxList<GetPurchaseDetailsByIDModel?>? getPurchaseDetailsByIDModelList =
       <GetPurchaseDetailsByIDModel?>[].obs;
@@ -128,7 +128,12 @@ class ViewAddGoodsOrdersController extends GetxController {
       rowItem.value = [];
       _getPurchaseDetailsById.goDetails?.forEach((element) {
         rowItem.value.add([
-          {"key": "Drop_down", "value": '${element.assetItem_Name}'},
+          {
+            "key": "Drop_down",
+            "value": '${element.assetItem_Name}',
+            'assetItemID': '${element.assetItemID}',
+            'id': '${element.id}'
+          },
           {'key': "Paid_By", "value": '${element.paid_by_name}'},
           {'key': "Cost", "value": '${element.cost}'},
           {'key': "Order", "value": '${element.ordered_qty}'},
@@ -299,12 +304,25 @@ class ViewAddGoodsOrdersController extends GetxController {
 
   void addRowItem() {
     rowItem.value.add([
-      {"key": "Drop_down", "value": 'Please Select'},
+      {
+        "key": "Drop_down",
+        "value": 'Please Select',
+        "assetItemID": '',
+        "id": ''
+      },
       {'key': "Paid_By", "value": 'Please Select'},
       {'key': "Cost", "value": ''},
       {'key': "Order", "value": ''},
     ]);
   }
+  // void addRowItem() {
+  //   rowItem.value.add([
+  //     {"key": "Drop_down", "value": 'Please Select'},
+  //     {'key': "Paid_By", "value": 'Please Select'},
+  //     {'key': "Cost", "value": ''},
+  //     {'key': "Order", "value": ''},
+  //   ]);
+  // }
 
   void createGoodsOrder() async {
     String _challanNoCtrlr = challanNoCtrlr.text.trim();
@@ -325,6 +343,7 @@ class ViewAddGoodsOrdersController extends GetxController {
     List<Items> items = [];
     rowItem.value.forEach((element) {
       Items item = Items(
+          goItemID: 0,
           assetItemID: dropdownMapperData[element[0]["value"]]?.id,
           cost: int.tryParse(element[2]["value"] ?? '0'),
           ordered_qty: int.tryParse(element[3]["value"] ?? '0'),
@@ -387,11 +406,19 @@ class ViewAddGoodsOrdersController extends GetxController {
     List<Items> items = [];
     rowItem.value.forEach((element) {
       Items item = Items(
-          assetItemID: dropdownMapperData[element[0]["value"]]?.id,
-          cost: int.tryParse(element[2]["value"] ?? '0'),
-          ordered_qty: int.tryParse(element[3]["value"] ?? '0'),
-          poID: paiddropdownMapperData[element[1]["value"]]?.id);
+        goItemID: int.tryParse('${element[0]["id"]}'),
+        assetItemID: int.tryParse('${element[0]["assetItemID"]}'),
+        cost: int.tryParse(element[2]["value"] ?? '0'),
+        ordered_qty: int.tryParse(element[3]["value"] ?? '0'),
+        poID: int.tryParse('${element[1]["id"]}'),
+      );
       items.add(item);
+      // Items item = Items(
+      //     assetItemID: dropdownMapperData[element[0]["value"]]?.id,
+      //     cost: int.tryParse(element[2]["value"] ?? '0'),
+      //     ordered_qty: int.tryParse(element[3]["value"] ?? '0'),
+      //     poID: paiddropdownMapperData[element[1]["value"]]?.id);
+      // items.add(item);
     });
     CreateGoModel createGoModel = CreateGoModel(
         id: id,

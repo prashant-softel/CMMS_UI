@@ -106,12 +106,13 @@ class CreateGoModel {
 
 class Items {
   Items({
+    this.goItemID,
     this.assetItemID,
     this.cost,
     this.ordered_qty,
     this.poID,
   });
-
+  int? goItemID;
   int? assetItemID;
   int? cost;
   int? ordered_qty;
@@ -119,6 +120,7 @@ class Items {
 
   factory Items.fromJson(Map<String, dynamic> json) => Items(
         assetItemID: json["assetItemID"],
+        goItemID: json["goItemID"],
         cost: json["cost"],
         ordered_qty: json["ordered_qty"],
         poID: json["poID"],
@@ -126,6 +128,7 @@ class Items {
 
   Map<String, dynamic> toJson() => {
         "assetItemID": assetItemID,
+        "goItemID": goItemID,
         "cost": cost,
         "ordered_qty": ordered_qty,
         "poID": poID,

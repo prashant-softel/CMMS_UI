@@ -75,7 +75,7 @@ class _ReceiveGoodsOrderWebState extends State<ReceiveGoodsOrderWeb> {
                             onTap: () {
                               Get.back();
                             },
-                            child: Text(" /  ADD GOODS ORDER DETAILS",
+                            child: Text(" / RECEIVE GOODS ORDER  ",
                                 style: Styles.greyMediumLight12)),
                       ],
                     ),
@@ -93,7 +93,7 @@ class _ReceiveGoodsOrderWebState extends State<ReceiveGoodsOrderWeb> {
                                   child: Row(
                                     children: [
                                       Text(
-                                        "Add  Goods Order Details",
+                                        "Receive Goods Order",
                                         style: Styles.blackBold16,
                                       ),
                                       Spacer(),
@@ -814,11 +814,11 @@ class _ReceiveGoodsOrderWebState extends State<ReceiveGoodsOrderWeb> {
                                               "Received  Qty",
                                               "Accepted Qty",
                                               "Damaged Items",
-                                              "Order Pending"
+                                              // "Order Pending"
                                             ].map((column) {
                                               return TableViewColumn(
                                                 label: column,
-                                                minWidth: Get.width * 0.14,
+                                                minWidth: Get.width * 0.18,
                                                 height: Get.height / 2,
                                               );
                                             }).toList(),
@@ -852,8 +852,7 @@ class _ReceiveGoodsOrderWebState extends State<ReceiveGoodsOrderWeb> {
                                                                       .width,
                                                                   dropdownList:
                                                                       controller
-                                                                          .assetList
-                                                                          .value,
+                                                                          .assetList,
                                                                   selectedValue:
                                                                       mapData[
                                                                           "value"],
@@ -1011,8 +1010,28 @@ class _ReceiveGoodsOrderWebState extends State<ReceiveGoodsOrderWeb> {
                                                                           },
                                                                         )),
                                                                   )
-                                                                : (mapData['key'] ==
-                                                                        "Pending")
+                                                                :
+                                                                //  (mapData['key'] ==
+                                                                //         "Pending")
+                                                                //     ? Padding(
+                                                                //         padding:
+                                                                //             const EdgeInsets
+                                                                //                 .only(
+                                                                //           left:
+                                                                //               20,
+                                                                //           right:
+                                                                //               20,
+                                                                //         ),
+                                                                //         child:
+                                                                //             Checkbox(
+                                                                //           onChanged:
+                                                                //               (value) {},
+                                                                //           value:
+                                                                //               false,
+                                                                //         ))
+                                                                //     :
+                                                                (mapData['key'] ==
+                                                                        "Damaged")
                                                                     ? Padding(
                                                                         padding:
                                                                             const EdgeInsets
@@ -1023,58 +1042,47 @@ class _ReceiveGoodsOrderWebState extends State<ReceiveGoodsOrderWeb> {
                                                                               20,
                                                                         ),
                                                                         child:
-                                                                            Checkbox(
-                                                                          onChanged:
-                                                                              (value) {},
-                                                                          value:
-                                                                              false,
-                                                                        ))
-                                                                    : (mapData['key'] ==
-                                                                            "Damaged")
-                                                                        ? Padding(
-                                                                            padding: const EdgeInsets
-                                                                                .only(
-                                                                              left: 20,
-                                                                              right: 20,
-                                                                            ),
-                                                                            child:
-                                                                                Padding(
-                                                                              padding: const EdgeInsets.only(
-                                                                                left: 20,
-                                                                                right: 20,
-                                                                              ),
-                                                                              child: Container(
-                                                                                  width: (Get.width * .4),
-                                                                                  // padding: EdgeInsets.all(value),
-                                                                                  decoration: BoxDecoration(
-                                                                                    boxShadow: [
-                                                                                      BoxShadow(
-                                                                                        color: Colors.black26,
-                                                                                        offset: const Offset(
-                                                                                          5.0,
-                                                                                          5.0,
-                                                                                        ),
-                                                                                        blurRadius: 5.0,
-                                                                                        spreadRadius: 1.0,
-                                                                                      ),
-                                                                                    ],
-                                                                                    color: ColorValues.whiteColor,
-                                                                                    borderRadius: BorderRadius.circular(5),
+                                                                            Padding(
+                                                                          padding:
+                                                                              const EdgeInsets.only(
+                                                                            left:
+                                                                                20,
+                                                                            right:
+                                                                                20,
+                                                                          ),
+                                                                          child: Container(
+                                                                              width: (Get.width * .4),
+                                                                              // padding: EdgeInsets.all(value),
+                                                                              decoration: BoxDecoration(
+                                                                                boxShadow: [
+                                                                                  BoxShadow(
+                                                                                    color: Colors.black26,
+                                                                                    offset: const Offset(
+                                                                                      5.0,
+                                                                                      5.0,
+                                                                                    ),
+                                                                                    blurRadius: 5.0,
+                                                                                    spreadRadius: 1.0,
                                                                                   ),
-                                                                                  child: LoginCustomTextfield(
-                                                                                    keyboardType: TextInputType.number,
-                                                                                    inputFormatters: <TextInputFormatter>[
-                                                                                      FilteringTextInputFormatter.digitsOnly
-                                                                                    ],
-                                                                                    maxLine: 1,
-                                                                                    textController: new TextEditingController(text: mapData["value"] ?? ''),
-                                                                                    onChanged: (txt) {
-                                                                                      mapData["value"] = txt;
-                                                                                    },
-                                                                                  )),
-                                                                            ))
-                                                                        : Text(mapData['key'] ??
-                                                                            ''),
+                                                                                ],
+                                                                                color: ColorValues.whiteColor,
+                                                                                borderRadius: BorderRadius.circular(5),
+                                                                              ),
+                                                                              child: LoginCustomTextfield(
+                                                                                keyboardType: TextInputType.number,
+                                                                                inputFormatters: <TextInputFormatter>[
+                                                                                  FilteringTextInputFormatter.digitsOnly
+                                                                                ],
+                                                                                maxLine: 1,
+                                                                                textController: new TextEditingController(text: mapData["value"] ?? ''),
+                                                                                onChanged: (txt) {
+                                                                                  mapData["value"] = txt;
+                                                                                },
+                                                                              )),
+                                                                        ))
+                                                                    : Text(mapData[
+                                                                            'key'] ??
+                                                                        ''),
                                                   );
                                                 }).toList(),
                                               );
@@ -1089,82 +1097,6 @@ class _ReceiveGoodsOrderWebState extends State<ReceiveGoodsOrderWeb> {
                               ],
                             ),
                           ),
-                          if (controller.openPurchaseDatePicker)
-                            Positioned(
-                              right: 65,
-                              top: 130,
-                              child: DatePickerWidget(
-                                minDate: DateTime(DateTime.now().year),
-                                maxDate: DateTime(DateTime.now().year, 13,
-                                    0), // last date of this year
-                                controller: DateRangePickerController(),
-                                selectionChanges: (p0) {
-                                  print('po valu ${p0.value.toString()}');
-                                  controller.purchaseDateTc.text =
-                                      DateFormat('yyyy-MM-dd').format(p0.value);
-                                  controller.openPurchaseDatePicker =
-                                      !controller.openPurchaseDatePicker;
-                                  controller.update(['stock_Mangement']);
-                                },
-                              ),
-                            ),
-                          if (controller.openChallanDatePicker)
-                            Positioned(
-                              right: 65,
-                              top: 170,
-                              child: DatePickerWidget(
-                                minDate: DateTime(DateTime.now().year),
-                                maxDate: DateTime(DateTime.now().year, 13,
-                                    0), // last date of this year
-                                controller: DateRangePickerController(),
-                                selectionChanges: (p0) {
-                                  print('po valu ${p0.value.toString()}');
-                                  controller.challanDateTc.text =
-                                      DateFormat('yyyy-MM-dd').format(p0.value);
-                                  controller.openChallanDatePicker =
-                                      !controller.openChallanDatePicker;
-                                  controller.update(['stock_Mangement']);
-                                },
-                              ),
-                            ),
-                          if (controller.openPODatePicker)
-                            Positioned(
-                              right: 65,
-                              top: 200,
-                              child: DatePickerWidget(
-                                minDate: DateTime(DateTime.now().year),
-                                maxDate: DateTime(DateTime.now().year, 13,
-                                    0), // last date of this year
-                                controller: DateRangePickerController(),
-                                selectionChanges: (p0) {
-                                  print('po valu ${p0.value.toString()}');
-                                  controller.poDateDateTc.text =
-                                      DateFormat('yyyy-MM-dd').format(p0.value);
-                                  controller.openPODatePicker =
-                                      !controller.openPODatePicker;
-                                  controller.update(['stock_Mangement']);
-                                },
-                              ),
-                            ),
-                          if (controller.openReceivedPicker)
-                            Positioned(
-                              right: 65,
-                              top: 230,
-                              child: DatePickerWidget(
-                                minDate: DateTime(DateTime.now().year),
-                                maxDate: DateTime(DateTime.now().year, 13,
-                                    0), // last date of this year
-                                controller: DateRangePickerController(),
-                                selectionChanges: (p0) {
-                                  print('po valu ${p0.value.toString()}');
-                                  controller.receivedDateTc.text =
-                                      DateFormat('yyyy-MM-dd').format(p0.value);
-                                  controller.openReceivedPicker =
-                                      !controller.openReceivedPicker;
-                                  controller.update(['stock_Mangement']);
-                                },
-                              ),
-                            ),
                         ],
                       ),
                     ),
@@ -1178,34 +1110,23 @@ class _ReceiveGoodsOrderWebState extends State<ReceiveGoodsOrderWeb> {
                 Container(
                   height: 40,
                   child: CustomElevatedButton(
-                    backgroundColor: ColorValues.cancelColor,
-                    text: 'Cancel',
+                    backgroundColor: Color(0xff77cae7),
+                    text: 'Save as Draft',
                     onPressed: () {
                       // controller.AddInventory();
                     },
                   ),
                 ),
                 Dimens.boxWidth15,
-                controller.id == null
-                    ? Container(
-                        height: 40,
-                        child: CustomElevatedButton(
-                          backgroundColor: ColorValues.submitColor,
-                          text: 'Submit',
-                          onPressed: () {
-                            controller.createGoodsOrder();
-                          },
-                        ))
-                    : Container(
-                        height: 40,
-                        child: CustomElevatedButton(
-                          backgroundColor: ColorValues.submitColor,
-                          text: 'Update',
-                          onPressed: () {
-                            controller.updateGoodsOrder();
-                          },
-                        ),
-                      ),
+                Container(
+                    height: 40,
+                    child: CustomElevatedButton(
+                      backgroundColor: ColorValues.submitColor,
+                      text: 'Submit for Approval',
+                      onPressed: () {
+                        controller.createGoodsOrder();
+                      },
+                    )),
                 Spacer()
               ],
             ),
