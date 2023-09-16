@@ -110,20 +110,35 @@ class Items {
     this.assetItemID,
     this.cost,
     this.ordered_qty,
-    this.poID,
+    this.paid_by_ID,
+    this.requested_qty,
+    this.accepted_qty,
+    this.received_qty,
+    this.lost_qty,
+    this.damaged_qty,
   });
   int? goItemID;
   int? assetItemID;
   int? cost;
   int? ordered_qty;
-  int? poID;
+  int? paid_by_ID;
+  int? requested_qty;
+  int? accepted_qty;
+  int? received_qty;
+  int? lost_qty;
+  int? damaged_qty;
 
   factory Items.fromJson(Map<String, dynamic> json) => Items(
         assetItemID: json["assetItemID"],
         goItemID: json["goItemID"],
         cost: json["cost"],
+        requested_qty: json["requested_qty"],
+        accepted_qty: json["accepted_qty"],
+        received_qty: json["received_qty"],
+        lost_qty: json["lost_qty"],
+        damaged_qty: json["damaged_qty"],
         ordered_qty: json["ordered_qty"],
-        poID: json["poID"],
+        paid_by_ID: json["paid_by_ID"],
       );
 
   Map<String, dynamic> toJson() => {
@@ -131,6 +146,11 @@ class Items {
         "goItemID": goItemID,
         "cost": cost,
         "ordered_qty": ordered_qty,
-        "poID": poID,
+        "paid_by_ID": paid_by_ID,
+        "requested_qty": requested_qty,
+        "accepted_qty": accepted_qty,
+        "received_qty": received_qty,
+        "lost_qty": lost_qty,
+        "damaged_qty": damaged_qty,
       };
 }
