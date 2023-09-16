@@ -12,8 +12,10 @@ import 'package:cmms/app/widgets/file_upload_details_widget_web.dart';
 import 'package:cmms/app/widgets/file_upload_with_dropzone_widget.dart';
 import 'package:cmms/app/widgets/view_sop_dialog.dart';
 import 'package:cmms/app/widgets/view_jsa_dialog.dart';
+import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
 import 'package:multi_select_flutter/multi_select_flutter.dart';
@@ -2168,7 +2170,7 @@ class NewPermitScreen extends GetView<NewPermitController> {
                                                             padding:
                                                                 const EdgeInsets
                                                                         .only(
-                                                                    left: 106),
+                                                                    left: 95),
                                                             child: Row(
                                                               children: [
                                                                 CustomRichText(
@@ -2181,11 +2183,13 @@ class NewPermitScreen extends GetView<NewPermitController> {
                                                               ],
                                                             ),
                                                           ),
+
+                                                           //// Permit Reference
                                                           Padding(
                                                             padding:
                                                                 const EdgeInsets
                                                                         .only(
-                                                                    left: 38),
+                                                                    left: 30),
                                                             child: Row(
                                                               children: [
                                                                 CustomRichText(
@@ -2199,7 +2203,7 @@ class NewPermitScreen extends GetView<NewPermitController> {
                                                             ),
                                                           ),
                                                           Padding(
-                                                            padding: const EdgeInsets.only(left: 20),
+                                                            padding: const EdgeInsets.only(left: 17),
                                                             child: Row(
                                                               children: [
                                                                 CustomRichText(
@@ -2216,7 +2220,7 @@ class NewPermitScreen extends GetView<NewPermitController> {
                                                       ),
                                                       // Spacer(),
 
-                                                      //// Permit Reference
+                                                     
 
                                                       SizedBox(
                                                         height: 10,
@@ -2594,7 +2598,9 @@ class NewPermitScreen extends GetView<NewPermitController> {
                                                               'Nothing to show !!'),
 
                                                       ///Safety measures
-                                                      SizedBox(
+                                                     controller.safetyMeasureList.isEmpty 
+                                                     ?Dimens.box0
+                                                      :SizedBox(
                                                         height: ((controller
                                                                     .safetyMeasureList
                                                                     .length) *
@@ -2703,6 +2709,8 @@ class NewPermitScreen extends GetView<NewPermitController> {
                                                           ),
                                                         ),
                                                       ),
+                                                      
+                                                      
                                                       SizedBox(
                                                         height: 10,
                                                       ),
@@ -3134,10 +3142,7 @@ class NewPermitScreen extends GetView<NewPermitController> {
                                                                             ],
                                                                           ),
                                                                         ),
-                                                                        SizedBox(
-                                                                          height:
-                                                                              10,
-                                                                        ),
+                                                                        
                                                                         SizedBox(
                                                                           height:
                                                                               22,
@@ -3165,6 +3170,130 @@ class NewPermitScreen extends GetView<NewPermitController> {
                                                                           height:
                                                                               15,
                                                                         ),
+                                                                        Row(
+                                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                                  children: [
+                                                    Column(
+                                                      crossAxisAlignment: CrossAxisAlignment.end,
+                                                      children: [
+                                                        Text(
+                                                          'Conducted At Job-Site By:',
+                                                          style: Styles.blackBold17,
+                                                          
+                                                        ),
+                                                        Text(
+                                                          'Ramesh Singh',
+                                                          style: Styles.black17,
+                                                        ),
+                                                      ],
+                                                    ),
+                                                    Spacer(),
+                                                    Column(
+                                                      crossAxisAlignment: CrossAxisAlignment.end,
+                                                      children: [
+                                                        Text(
+                                                          'Date & Time',
+                                                          style: Styles.blackBold17,
+                                                        ),
+                                                        Text(
+                                                          '17:06:2022 09:30:00',
+                                                          style: Styles.black17,
+                                                        ),
+                                                      ],
+                                                    ),
+                                                    Spacer(),
+                                                     Column(
+                                                      crossAxisAlignment: CrossAxisAlignment.end,
+                                                      children: [
+                                                        Text(
+                                                          'Upload TBT Attendance Sheet',
+                                                          style: Styles.blackBold17,
+                                                        ),
+                                                        Row(
+                                                          // mainAxisAlignment: MainAxisAlignment.center,
+                                                          children: [
+                                                            Container(
+                                                              height: 45,
+                                                              width: 200,
+                                                              decoration: BoxDecoration(
+                                                                border: Border.all(
+                                                                  color: Color.fromARGB(255, 227, 224, 224),
+                                                                  width: 1,
+                                                                ),
+                                                                boxShadow: [
+                                                                  BoxShadow(
+                                                                    color: Color.fromARGB(255, 236, 234, 234).withOpacity(0.5),
+                                                                    spreadRadius: 2,
+                                                                    blurRadius: 5,
+                                                                    offset: Offset(0, 2),
+                                                                  ),
+                                                                ],
+                                                              ),
+                                                              child: Padding(
+                                                                padding: const EdgeInsets.all(8.0),
+                                                                child: Align(
+                                                                  alignment: Alignment.topLeft,
+                                                                  child: Text(
+                                                                    controller.fileName.value == "" ? 'Upload Photo' : controller.fileName.value,
+                                                                    maxLines: 3,
+                                                                    textAlign: TextAlign.center,
+                                                                    style: Styles.greyLight14,
+                                                                  ),
+                                                                ),
+                                                              ),
+                                                            ),
+                                                            Dimens.boxWidth5,
+                                                            Container(
+                                                              height: 45,
+                                                              child: CustomElevatedButton(
+                                                                backgroundColor: ColorValues.appDarkBlueColor,
+                                                                text: "Browse",
+                                                                onPressed: () async {
+                                                                  final result = await FilePicker.platform.pickFiles();
+                                                                  if (result != null) {
+                                                                    // for (var file in result.files) {
+                                                                    controller.fileName.value = result.files.single.name;
+                                                                    controller.fileBytes = result.files.single.bytes;
+                                                                    //controller.filePath.value = file.;
+                                                                    //  print({"filepathes", fileBytes});
+                                                                    // }
+                                                                  }
+                                                                },
+                                                              ),
+                                                            ),
+                                                            Container(
+                                                              height: 45,
+                                                              child: CustomElevatedButton(
+                                                                backgroundColor: ColorValues.greenColor,
+                                                                text: 'Upload',
+                                                                onPressed: () {
+                                                                  if (controller.fileName.value != "") {
+                                                                    controller
+                                                                        .browseFiles(
+                                                                      fileBytes: controller.fileBytes,
+                                                                    )
+                                                                        .then((value) {
+                                                                      controller.isSuccessDialog();
+
+                                                                      // Fluttertoast.showToast(
+                                                                      //     msg: "file upload  Successfully",
+                                                                      //     fontSize: 16.0);
+                                                                    });
+                                                                  } else {
+                                                                    Fluttertoast.showToast(msg: "Please Select file...", fontSize: 16.0);
+                                                                  }
+
+                                                                  //  controller.savePmMapping();
+                                                                },
+                                                              ),
+                                                            ),
+                                                          ],
+                                                        ),
+                                                        
+                                                      ],
+                                                    ),
+                                                  ],
+                                                ),
                                                                       ],
                                                                     ),
                                                                   ],

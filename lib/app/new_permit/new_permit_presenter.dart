@@ -17,6 +17,7 @@ import 'package:cmms/domain/repositories/repositories.dart';
 import 'package:cmms/domain/usecases/breakdown_usecase.dart';
 import 'package:cmms/domain/usecases/breakdown_usecase.dart';
 import 'package:cmms/domain/usecases/new_permit_usecase.dart';
+import 'package:flutter/foundation.dart';
 
 import '../../../domain/models/inventory_category_model.dart';
 import '../../../domain/usecases/preventive_list_usecase.dart';
@@ -192,6 +193,13 @@ class NewPermitPresenter {
       newPermit: newPermit,
       isLoading: isLoading,
     );
+  }
+
+  Future<bool> browseFiles(Uint8List? fileBytes, String fileName,
+      int importType, bool isLoading, int facilityId) async {
+    await newPermitUsecase.browseFiles(
+        fileBytes, fileName, importType, isLoading, facilityId);
+    return true;
   }
 
   Future<Map<String, dynamic>?> createNewPermitForJob({

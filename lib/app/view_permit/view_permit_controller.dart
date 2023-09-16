@@ -373,7 +373,7 @@ class ViewPermitController extends GetxController {
   Map<dynamic, dynamic> employee_map = {};
   Map<int, dynamic> loto_map = {};
 
-  int? permitId = 60102;
+  int? permitId = 0;
   int? jobId = 0;
   Map<String, dynamic> data = {};
   @override
@@ -531,7 +531,6 @@ class ViewPermitController extends GetxController {
     /// TODO: CHANGE THESE VALUES
     int moduleType = 3;
     // int tempModuleType = 21;
-    int permitId = Get.arguments;
     //
     historyList?.value = await viewPermitPresenter.getPermitHistory(
           // tempModuleType,
@@ -1256,7 +1255,7 @@ class ViewPermitController extends GetxController {
             height: 10,
           ),
           Center(
-            child: Text("${fileName.value} \n image uploaded Successfully....",
+            child: Text("${fileName.value} \n data uploaded Successfully....",
                 style: TextStyle(fontSize: 16, color: ColorValues.blackColor)),
           )
         ]),
