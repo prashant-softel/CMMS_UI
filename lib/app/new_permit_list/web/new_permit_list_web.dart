@@ -556,7 +556,7 @@ class PermitListDataSource extends DataTableSource {
                                   ? TableActionButton(
                                       color: ColorValues.appDarkBlueColor,
                                       icon: Icons.visibility,
-                                      message: 'View',
+                                      message: 'View Permit',
                                       onPress: () {
                                         controller.viewNewPermitList(
                                             permitId: PermitDetails?.permitId);
@@ -587,7 +587,7 @@ class PermitListDataSource extends DataTableSource {
                                   ? TableActionButton(
                                       color: ColorValues.appGreenColor,
                                       icon: Icons.add,
-                                      message: 'Approve/Reject',
+                                      message: 'Approve/Reject Permit',
                                       onPress: () {
                                         controller.viewNewPermitList(
                                             permitId: PermitDetails?.permitId);
@@ -619,7 +619,7 @@ class PermitListDataSource extends DataTableSource {
                                   ? TableActionButton(
                                       color: ColorValues.appYellowColor,
                                       icon: Icons.edit,
-                                      message: 'Edit',
+                                      message: 'Edit Permit',
                                       onPress: () {
                                         controller.editNewPermit(
                                             permitId: PermitDetails?.permitId,
@@ -676,7 +676,7 @@ class PermitListDataSource extends DataTableSource {
                                   ? TableActionButton(
                                       color: ColorValues.appDarkBlueColor,
                                       icon: Icons.expand_outlined,
-                                      message: 'Extend',
+                                      message: 'Extend Permit',
                                       onPress: () {
                                         // Get.dialog(PermitExtendDialog(
                                         //     permitId: PermitDetails?.permitId
@@ -768,7 +768,7 @@ class PermitListDataSource extends DataTableSource {
                                   : TableActionButton(
                                       color: ColorValues.appRedColor,
                                       icon: Icons.close,
-                                      message: 'Cancel Permit Request',
+                                      message: 'Cancel Permit',
                                       onPress: () {
                                         controller.cancelPermitList(
                                             permitId: PermitDetails?.permitId);
