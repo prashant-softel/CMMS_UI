@@ -31,6 +31,7 @@ class HomeController extends GetxController {
   Rx<String> selectedTypePermit = ''.obs;
   Rx<String> selectedTypeOfPermit = ''.obs;
   Rx<bool> isTypePermit = true.obs;
+  Rx<String> selectedFacilityName = ''.obs;
 
   //block
   int facilityId = 0;
@@ -81,7 +82,9 @@ class HomeController extends GetxController {
   BehaviorSubject<int> _facilityId = BehaviorSubject.seeded(0);
   Stream<int> get facilityId$ => _facilityId.stream;
   int get facilityId1 => _facilityId.value;
-
+  BehaviorSubject<String> _facilityName = BehaviorSubject.seeded('');
+  Stream<String> get facilityName$ => _facilityName.stream;
+  String get facilityName1 => _facilityName.value;
   Rx<int> selectedIndex = 0.obs;
   var isExpanded = false.obs;
 
@@ -139,9 +142,15 @@ class HomeController extends GetxController {
       for (var facility in _facilityList) {
         facilityList.add(facility);
       }
+      final facilityData = await homePresenter.getValue();
+      print({"facilityData": facilityData});
 
-      selectedFacility.value = facilityList[0]?.name ?? '';
-      _facilityId.sink.add(facilityList[0]?.id ?? 0);
+      Map<String, dynamic> savaData =
+          facilityData != '' ? jsonDecode(facilityData ?? '{}') : {};
+      selectedFacility.value = savaData['name'] ?? facilityList[0]?.name ?? '';
+      print({"selected facality": selectedFacility});
+      _facilityId.sink.add(savaData['id'] ?? facilityList[0]?.id ?? 0);
+      _facilityName.sink.add(savaData['name'] ?? facilityList[0]?.name ?? '');
     }
   }
 
@@ -178,9 +187,8 @@ class HomeController extends GetxController {
   }
 
   Future<void> getTypePermitList() async {
-    final _permitTypeList = await homePresenter.getTypePermitList(
-      facility_id: facilityId
-    );
+    final _permitTypeList =
+        await homePresenter.getTypePermitList(facility_id: facilityId);
 
     if (_permitTypeList != null) {
       for (var permitType in _permitTypeList) {
@@ -238,8 +246,16 @@ class HomeController extends GetxController {
       case RxList<FacilityModel>:
         {
           int facilityIndex = facilityList.indexWhere((x) => x?.name == value);
+          selectedFacility.value = facilityList[facilityIndex]?.name ?? '';
 
+          print({"selected facality11": selectedFacility});
           _facilityId.add(facilityList[facilityIndex]?.id ?? 0);
+          _facilityName.add(facilityList[facilityIndex]?.name ?? '');
+          String facilitydata = jsonEncode({
+            "id": facilityList[facilityIndex]?.id,
+            "name": facilityList[facilityIndex]?.name
+          });
+          homePresenter.saveValue(facilitydata: facilitydata);
         }
         break;
       case RxList<InventoryModel>:

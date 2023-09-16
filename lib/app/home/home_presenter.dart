@@ -44,12 +44,8 @@ class HomePresenter {
       );
 
   Future<List<TypePermitModel?>?> getTypePermitList(
-    {required int facility_id}
-  ) async =>
-      await homeUsecase.getTypePermitList(
-        true,
-        facility_id
-        );
+          {required int facility_id}) async =>
+      await homeUsecase.getTypePermitList(true, facility_id);
 
   Future<List<BusinessListModel>> getBusinessList({
     required bool isLoading,
@@ -130,6 +126,11 @@ class HomePresenter {
       await homeUsecase.getFacilityList();
   Future<String?> getUserAccessList() async =>
       await homeUsecase.getUserAccessList();
+  void saveValue({String? facilitydata}) async {
+    return homeUsecase.saveValue(facilitydata: facilitydata);
+  }
+
+  Future<String?> getValue() async => await homeUsecase.getValue();
 
   ///
 }

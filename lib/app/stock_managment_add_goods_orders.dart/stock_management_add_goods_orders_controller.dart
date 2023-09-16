@@ -213,11 +213,33 @@ class StockManagementAddGoodsOrdersController extends GetxController {
       rowItem.value = [];
       _getPurchaseDetailsById.goDetails?.forEach((element) {
         rowItem.value.add([
-          {"key": "Drop_down", "value": '${element.assetItemID}'},
-          {'key': "Paid_By", "value": '${element.paid_by_name}'},
-          {'key': "Cost", "value": '${element.cost}'},
-          {'key': "Order", "value": '${element.ordered_qty}'},
+          {
+            "key": "Drop_down",
+            "value": '${element.assetItem_Name}',
+            'id': '${element.assetItemID}'
+          },
+          {'key': "Paid_By", "value": '${element.paid_by_name}', 'id': '0'},
+          {
+            'key': "Cost",
+            "value": '${element.cost}',
+            // 'id': '${element.assetItemID}'
+          },
+          {
+            'key': "Order",
+            "value": '${element.ordered_qty}',
+            // 'id': '${element.assetItemID}'
+          },
         ]);
+        // rowItem.value.add([
+        //   {
+        //     "key": "Drop_down",
+        //     "value": '${element.assetItem_Name}',
+        //     "id": '${element.assetItemID}'
+        //   },
+        //   {'key': "Paid_By", "value": '${element.paid_by_name}'},
+        //   {'key': "Cost", "value": '${element.cost}'},
+        //   {'key': "Order", "value": '${element.ordered_qty}'},
+        // ]);
       });
 
       challanDateTc.text =
@@ -343,8 +365,8 @@ class StockManagementAddGoodsOrdersController extends GetxController {
 
   void addRowItem() {
     rowItem.value.add([
-      {"key": "Drop_down", "value": 'Please Select'},
-      {'key': "Paid_By", "value": 'Please Select'},
+      {"key": "Drop_down", "value": 'Please Select', "id": ''},
+      {'key': "Paid_By", "value": 'Please Select', "id": ''},
       {'key': "Cost", "value": ''},
       {'key': "Order", "value": ''},
     ]);
@@ -431,7 +453,7 @@ class StockManagementAddGoodsOrdersController extends GetxController {
     List<Items> items = [];
     rowItem.value.forEach((element) {
       Items item = Items(
-          assetItemID: dropdownMapperData[element[0]["value"]]?.id,
+          assetItemID: int.tryParse('${element[0]["id"]}'),
           cost: int.tryParse(element[2]["value"] ?? '0'),
           ordered_qty: int.tryParse(element[3]["value"] ?? '0'),
           poID: paiddropdownMapperData[element[1]["value"]]?.id);
