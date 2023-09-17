@@ -121,9 +121,37 @@ class PurchaseGoodsorderViewWeb
                         ],
                       ),
                     ),
+
                     Divider(
                       color: ColorValues.greyLightColour,
                     ),
+                    Dimens.boxHeight10,
+                    Row(
+                      children: [
+                        Spacer(),
+                        Text(
+                          'Generated  by :',
+                          style: Styles.black17,
+                        ),
+                        Dimens.boxWidth10,
+                        Text(
+                          "${controller.getPurchaseDetailsByIDModel.value?.generatedBy}",
+                          style: Styles.blue17,
+                        ),
+                        Spacer(),
+                        Text(
+                          'Order Date & Time :',
+                          style: Styles.black17,
+                        ),
+                        Dimens.boxWidth10,
+                        Text(
+                          "${controller.getPurchaseDetailsByIDModel.value?.generatedAt}",
+                          style: Styles.blue17,
+                        ),
+                        Spacer(),
+                      ],
+                    ),
+
                     Dimens.boxHeight10,
                     Container(
                       margin: Dimens.edgeInsets15,
@@ -157,57 +185,53 @@ class PurchaseGoodsorderViewWeb
                               ],
                             ),
                           ),
-                          IgnorePointer(
-                            child: Container(
-                              margin: Dimens.edgeInsets15,
-                              decoration: BoxDecoration(
-                                color: ColorValues.inerCardColorHex,
-                                border: Border.all(
-                                  color:
-                                      ColorValues.lightGreyColorWithOpacity35,
-                                  width: 1,
-                                ),
-                                borderRadius:
-                                    BorderRadius.all(Radius.circular(15)),
+                          Container(
+                            margin: Dimens.edgeInsets15,
+                            decoration: BoxDecoration(
+                              color: ColorValues.inerCardColorHex,
+                              border: Border.all(
+                                color: ColorValues.lightGreyColorWithOpacity35,
+                                width: 1,
                               ),
-                              width: Get.width * 7,
-                              height: Get.height * 0.4,
-                              child: Container(
-                                height: 295,
-                                child: ScrollableTableView(
-                                  columns: [
-                                    "Assets Code",
-                                    "Cost",
-                                    "Ordered Qty",
-                                    "Comment"
-                                  ].map((column) {
-                                    return TableViewColumn(
-                                      label: column,
-                                      minWidth: Get.width * 0.21,
-                                      height: Get.height / 2,
-                                    );
-                                  }).toList(),
-                                  rows: controller.rowItem.value.map((record) {
-                                    return TableViewRow(
-                                      height: 200,
-                                      cells: record.map((mapData) {
-                                        return TableViewCell(
-                                          child: (mapData['key'] == "Drop_down")
-                                              ? Padding(
-                                                  padding:
-                                                      const EdgeInsets.only(
-                                                          left: 20,
-                                                          right: 20,
-                                                          top: 70),
-                                                  child: Column(
-                                                    mainAxisAlignment:
-                                                        MainAxisAlignment
-                                                            .center,
-                                                    crossAxisAlignment:
-                                                        CrossAxisAlignment
-                                                            .center,
-                                                    children: [
-                                                      DropdownWebStock(
+                              borderRadius:
+                                  BorderRadius.all(Radius.circular(15)),
+                            ),
+                            width: Get.width * 7,
+                            height: Get.height * 0.4,
+                            child: Container(
+                              height: 295,
+                              child: ScrollableTableView(
+                                columns: [
+                                  "Assets Code",
+                                  "Cost",
+                                  "Ordered Qty",
+                                  "Comment"
+                                ].map((column) {
+                                  return TableViewColumn(
+                                    label: column,
+                                    minWidth: Get.width * 0.21,
+                                    height: Get.height / 2,
+                                  );
+                                }).toList(),
+                                rows: controller.rowItem.value.map((record) {
+                                  return TableViewRow(
+                                    height: 200,
+                                    cells: record.map((mapData) {
+                                      return TableViewCell(
+                                        child: (mapData['key'] == "Drop_down")
+                                            ? Padding(
+                                                padding: const EdgeInsets.only(
+                                                    left: 20,
+                                                    right: 20,
+                                                    top: 70),
+                                                child: Column(
+                                                  mainAxisAlignment:
+                                                      MainAxisAlignment.center,
+                                                  crossAxisAlignment:
+                                                      CrossAxisAlignment.center,
+                                                  children: [
+                                                    IgnorePointer(
+                                                      child: DropdownWebStock(
                                                         width: MediaQuery.of(
                                                                     context)
                                                                 .size
@@ -235,69 +259,66 @@ class PurchaseGoodsorderViewWeb
                                                                   orElse: null);
                                                         },
                                                       ),
-                                                      SizedBox(
-                                                        height: 5,
-                                                      ),
-                                                      Row(
-                                                        children: [
-                                                          Text(
-                                                              "Material Code :"),
-                                                          Text(
-                                                              "${controller.dropdownMapperData[mapData['value']]?.asset_code ?? ''}")
-                                                        ],
-                                                      ),
-                                                      Row(
-                                                        children: [
-                                                          Text(
-                                                              "Material type :"),
-                                                          Text(
-                                                              "${controller.dropdownMapperData[mapData['value']]?.asset_type ?? ''}")
-                                                        ],
-                                                      ),
-                                                      Row(
-                                                        children: [
-                                                          Text(
-                                                              "Material Category :"),
-                                                          Text(
-                                                              "${controller.dropdownMapperData[mapData['value']]?.cat_name ?? ''}")
-                                                        ],
-                                                      )
-                                                    ],
-                                                  ),
-                                                )
-                                              : (mapData['key'] == "Order") ||
-                                                      (mapData['key'] == "Cost")
-                                                  ? Padding(
-                                                      padding:
-                                                          const EdgeInsets.all(
-                                                              8.0),
-                                                      child: Container(
-                                                          width:
-                                                              (Get.width * .4),
-                                                          // padding: EdgeInsets.all(value),
-                                                          decoration:
-                                                              BoxDecoration(
-                                                            boxShadow: [
-                                                              BoxShadow(
-                                                                color: Colors
-                                                                    .black26,
-                                                                offset:
-                                                                    const Offset(
-                                                                  5.0,
-                                                                  5.0,
-                                                                ),
-                                                                blurRadius: 5.0,
-                                                                spreadRadius:
-                                                                    1.0,
+                                                    ),
+                                                    SizedBox(
+                                                      height: 5,
+                                                    ),
+                                                    Row(
+                                                      children: [
+                                                        Text("Material Code :"),
+                                                        Text(
+                                                            "${controller.dropdownMapperData[mapData['value']]?.asset_code ?? ''}")
+                                                      ],
+                                                    ),
+                                                    Row(
+                                                      children: [
+                                                        Text("Material type :"),
+                                                        Text(
+                                                            "${controller.dropdownMapperData[mapData['value']]?.asset_type ?? ''}")
+                                                      ],
+                                                    ),
+                                                    Row(
+                                                      children: [
+                                                        Text(
+                                                            "Material Category :"),
+                                                        Text(
+                                                            "${controller.dropdownMapperData[mapData['value']]?.cat_name ?? ''}")
+                                                      ],
+                                                    )
+                                                  ],
+                                                ),
+                                              )
+                                            : (mapData['key'] == "Order") ||
+                                                    (mapData['key'] == "Cost")
+                                                ? Padding(
+                                                    padding:
+                                                        const EdgeInsets.all(
+                                                            8.0),
+                                                    child: Container(
+                                                        width: (Get.width * .4),
+                                                        // padding: EdgeInsets.all(value),
+                                                        decoration:
+                                                            BoxDecoration(
+                                                          boxShadow: [
+                                                            BoxShadow(
+                                                              color: Colors
+                                                                  .black26,
+                                                              offset:
+                                                                  const Offset(
+                                                                5.0,
+                                                                5.0,
                                                               ),
-                                                            ],
-                                                            color: ColorValues
-                                                                .whiteColor,
-                                                            borderRadius:
-                                                                BorderRadius
-                                                                    .circular(
-                                                                        5),
-                                                          ),
+                                                              blurRadius: 5.0,
+                                                              spreadRadius: 1.0,
+                                                            ),
+                                                          ],
+                                                          color: ColorValues
+                                                              .whiteColor,
+                                                          borderRadius:
+                                                              BorderRadius
+                                                                  .circular(5),
+                                                        ),
+                                                        child: IgnorePointer(
                                                           child:
                                                               LoginCustomTextfield(
                                                             keyboardType:
@@ -318,43 +339,44 @@ class PurchaseGoodsorderViewWeb
                                                               mapData["value"] =
                                                                   txt;
                                                             },
-                                                          )),
-                                                    )
-                                                  : (mapData['key'] ==
-                                                          "Comment")
-                                                      ? Padding(
-                                                          padding:
-                                                              const EdgeInsets
-                                                                  .all(8.0),
-                                                          child: Container(
-                                                              width:
-                                                                  (Get.width *
-                                                                      .9),
-                                                              // padding: EdgeInsets.all(value),
-                                                              decoration:
-                                                                  BoxDecoration(
-                                                                boxShadow: [
-                                                                  BoxShadow(
-                                                                    color: Colors
-                                                                        .black26,
-                                                                    offset:
-                                                                        const Offset(
-                                                                      5.0,
-                                                                      5.0,
-                                                                    ),
-                                                                    blurRadius:
-                                                                        5.0,
-                                                                    spreadRadius:
-                                                                        1.0,
+                                                          ),
+                                                        )),
+                                                  )
+                                                : (mapData['key'] == "Comment")
+                                                    ? Padding(
+                                                        padding:
+                                                            const EdgeInsets
+                                                                .all(8.0),
+                                                        child: Container(
+                                                            width: (Get.width *
+                                                                .9),
+                                                            // padding: EdgeInsets.all(value),
+                                                            decoration:
+                                                                BoxDecoration(
+                                                              boxShadow: [
+                                                                BoxShadow(
+                                                                  color: Colors
+                                                                      .black26,
+                                                                  offset:
+                                                                      const Offset(
+                                                                    5.0,
+                                                                    5.0,
                                                                   ),
-                                                                ],
-                                                                color: ColorValues
-                                                                    .whiteColor,
-                                                                borderRadius:
-                                                                    BorderRadius
-                                                                        .circular(
-                                                                            5),
-                                                              ),
+                                                                  blurRadius:
+                                                                      5.0,
+                                                                  spreadRadius:
+                                                                      1.0,
+                                                                ),
+                                                              ],
+                                                              color: ColorValues
+                                                                  .whiteColor,
+                                                              borderRadius:
+                                                                  BorderRadius
+                                                                      .circular(
+                                                                          5),
+                                                            ),
+                                                            child:
+                                                                IgnorePointer(
                                                               child:
                                                                   LoginCustomTextfield(
                                                                 maxLine: 1,
@@ -367,15 +389,15 @@ class PurchaseGoodsorderViewWeb
                                                                   mapData["value"] =
                                                                       txt;
                                                                 },
-                                                              )),
-                                                        )
-                                                      : Text(
-                                                          mapData['key'] ?? ''),
-                                        );
-                                      }).toList(),
-                                    );
-                                  }).toList(),
-                                ),
+                                                              ),
+                                                            )),
+                                                      )
+                                                    : Text(
+                                                        mapData['key'] ?? ''),
+                                      );
+                                    }).toList(),
+                                  );
+                                }).toList(),
                               ),
                             ),
                           )
@@ -425,7 +447,7 @@ class PurchaseGoodsorderViewWeb
                         ]),
                       ),
                     ),
-
+ Dimens.boxHeight15,
                     Row(
                       children: [
                         Spacer(),

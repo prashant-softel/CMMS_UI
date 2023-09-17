@@ -783,14 +783,15 @@ class _ReceiveGoodsOrderWebState extends State<ReceiveGoodsOrderWeb> {
                 ),
                 Dimens.boxWidth15,
                 Container(
-                    height: 40,
-                    child: CustomElevatedButton(
-                      backgroundColor: ColorValues.submitColor,
-                      text: 'Submit for Approval',
-                      onPressed: () {
-                        controller.createGoodsOrder();
-                      },
-                    )),
+                  height: 40,
+                  child: CustomElevatedButton(
+                    backgroundColor: ColorValues.submitColor,
+                    text: 'Submit for Approval',
+                    onPressed: () {
+                      controller.updateGoodsOrder();
+                    },
+                  ),
+                ),
                 Spacer()
               ],
             ),

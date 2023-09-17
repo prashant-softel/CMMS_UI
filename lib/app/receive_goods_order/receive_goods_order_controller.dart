@@ -422,9 +422,11 @@ class ReceiveGoodsOrdersController extends GetxController {
       Items item = Items(
         goItemID: int.tryParse('${element[0]["id"]}'),
         assetItemID: int.tryParse('${element[0]["assetItemID"]}'),
-        cost: int.tryParse(element[2]["value"] ?? '0'),
-        ordered_qty: int.tryParse(element[3]["value"] ?? '0'),
-        paid_by_ID: int.tryParse('${element[1]["id"]}'),
+        cost: int.tryParse(element[1]["value"] ?? '0'),
+        ordered_qty: int.tryParse(element[2]["value"] ?? '0'),
+        received_qty: int.tryParse(element[3]["value"] ?? '0'),
+        accepted_qty: int.tryParse(element[4]["value"] ?? '0'),
+        damaged_qty: int.tryParse(element[5]["value"] ?? '0'),
       );
 
       // poID: paiddropdownMapperData[element[1]["value"]]?.id)
