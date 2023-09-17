@@ -8,6 +8,7 @@ import 'package:cmms/app/job_card_details/views/widgets/close_job_dialog.dart';
 import 'package:cmms/app/job_card_details/views/widgets/job_card_updated_dialog.dart';
 import 'package:cmms/app/widgets/abandon_execution_message_dialog.dart';
 import 'package:cmms/app/widgets/abandon_schedule_execution_message_dialog.dart';
+import 'package:cmms/app/widgets/approve_go_receive_dialog.dart';
 import 'package:cmms/app/widgets/create_escalation_matrix_dialog.dart';
 import 'package:cmms/app/widgets/create_incident_report_dialog.dart';
 import 'package:cmms/app/widgets/create_jc_success_message_dialog.dart';
@@ -28,6 +29,8 @@ import 'package:cmms/app/widgets/permit_close_message_dialog.dart';
 import 'package:cmms/app/widgets/permit_extend_message_dialog.dart';
 import 'package:cmms/app/widgets/permit_issue_message_dialog.dart';
 import 'package:cmms/app/widgets/permit_reject_message_dialog.dart';
+import 'package:cmms/app/widgets/recive_go_msg_dialog.dart';
+import 'package:cmms/app/widgets/reject_go_recive_msg_dialog.dart';
 import 'package:cmms/app/widgets/start_mc_execution_dialog.dart';
 import 'package:cmms/app/widgets/update_incident_report_dialog.dart';
 import 'package:cmms/app/widgets/update_mc_execution_dialog.dart';
@@ -799,6 +802,54 @@ class ConnectHelper {
     var res = responseModel.data;
     var parsedJson = json.decode(res);
     Get.dialog<void>(GoodsOrderMessageApproveDialog(
+        data: parsedJson['message'], id: parsedJson['id']));
+
+    return responseModel;
+  }
+
+  Future<ResponseModel> approveGOReceiveButton({
+    required String auth,
+    goodsOrderApproveJsonString,
+    bool? isLoading,
+  }) async {
+    var responseModel = await apiWrapper.makeRequest(
+      'GO/ApproveGOReceive',
+      Request.post,
+      goodsOrderApproveJsonString,
+      isLoading ?? false,
+      {
+        'Content-Type': 'application/json',
+        'Authorization': 'Bearer $auth',
+      },
+    );
+    print('goodsOrderApproveResponse: ${responseModel.data}');
+    var res = responseModel.data;
+    var parsedJson = json.decode(res);
+    Get.dialog<void>(ApproveGOMsgReceiveDialog(
+        data: parsedJson['message'], id: parsedJson['id']));
+
+    return responseModel;
+  }
+
+  Future<ResponseModel> rejectGOReceiveButton({
+    required String auth,
+    goodsOrderApproveJsonString,
+    bool? isLoading,
+  }) async {
+    var responseModel = await apiWrapper.makeRequest(
+      'GO/RejectGOReceive',
+      Request.post,
+      goodsOrderApproveJsonString,
+      isLoading ?? false,
+      {
+        'Content-Type': 'application/json',
+        'Authorization': 'Bearer $auth',
+      },
+    );
+    print('goodsOrderApproveResponse: ${responseModel.data}');
+    var res = responseModel.data;
+    var parsedJson = json.decode(res);
+    Get.dialog<void>(RejectGOMsgReceiveDialog(
         data: parsedJson['message'], id: parsedJson['id']));
 
     return responseModel;
@@ -4860,6 +4911,25 @@ class ConnectHelper {
   }
 
   Future<ResponseModel> approveGoodsOrder({
+    required String auth,
+    bool? isLoading,
+    required approvetoJsonString,
+  }) async {
+    var responseModel = await apiWrapper.makeRequest(
+      'RequestOrder/ApproveRequestOrder',
+      Request.post,
+      approvetoJsonString,
+      isLoading ?? false,
+      {
+        'Content-Type': 'application/json',
+        'Authorization': 'Bearer $auth',
+      },
+    );
+
+    return responseModel;
+  }
+
+  Future<ResponseModel> approveGOReceive({
     required String auth,
     bool? isLoading,
     required approvetoJsonString,

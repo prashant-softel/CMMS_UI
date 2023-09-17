@@ -803,11 +803,23 @@ class GoodsOrderListDataSource extends DataTableSource {
                             }
                           },
                         ),
+                        TableActionButton(
+                          color: ColorValues.approveColor,
+                          icon: Icons.approval_outlined,
+                          message: 'Approve/Reject GO Receive',
+                          onPress: () {
+                            int id = GoodsOrderListDetails?.id ?? 0;
+                            if (id != 0) {
+                              Get.toNamed(Routes.receiveGoodsOrders,
+                                  arguments: {'id': id, "type": 1});
+                            }
+                          },
+                        ),
                         // :
                         TableActionButton(
                           color: ColorValues.approveColor,
                           icon: Icons.approval_rounded,
-                          message: 'Approve/Reject',
+                          message: 'Approve/Reject GO',
                           onPress: () {
                             int id = GoodsOrderListDetails?.id ?? 0;
                             if (id != 0) {

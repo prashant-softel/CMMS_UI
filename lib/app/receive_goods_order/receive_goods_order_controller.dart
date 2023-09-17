@@ -1,7 +1,9 @@
 import 'dart:async';
 
+import 'package:cmms/app/navigators/app_pages.dart';
 import 'package:cmms/app/receive_goods_order/receive_goods_order_presenter.dart';
 import 'package:cmms/domain/models/business_type_model.dart';
+import 'package:cmms/domain/models/comment_model.dart';
 import 'package:cmms/domain/models/create_go_model.dart';
 import 'package:cmms/domain/models/currency_list_model.dart';
 import 'package:cmms/domain/models/facility_model.dart';
@@ -45,6 +47,8 @@ class ReceiveGoodsOrdersController extends GetxController {
   RxBool showAdditionalColumn = false.obs;
   Rx<int> id = 0.obs;
   int facilityId = 0;
+
+  TextEditingController approveCommentTextFieldCtrlr = TextEditingController();
 
   //drop down list of assets
   RxList<GetAssetDataModel?> assetList = <GetAssetDataModel>[].obs;
@@ -344,6 +348,46 @@ class ReceiveGoodsOrdersController extends GetxController {
       {'key': "Damaged", "value": ''},
       // {'key': "Pending", "value": ''},
     ]);
+  }
+
+  void approveGOReceiveButton({int? id}) async {
+    {
+      String _comment = approveCommentTextFieldCtrlr.text.trim();
+
+      CommentModel commentGoodsOrderAproveModel =
+          CommentModel(id: id, comment: _comment);
+
+      var goodsOrderApproveJsonString = commentGoodsOrderAproveModel.toJson();
+
+      Map<String, dynamic>? response =
+          await receiveGoodsOrdersPresenter.approveGOReceiveButton(
+        goodsOrderApproveJsonString: goodsOrderApproveJsonString,
+        isLoading: true,
+      );
+      if (response == true) {
+        //getCalibrationList(facilityId, true);
+      }
+    }
+  }
+
+  void rejectGOReceiveButton({int? id}) async {
+    {
+      String _comment = approveCommentTextFieldCtrlr.text.trim();
+
+      CommentModel commentGoodsOrderAproveModel =
+          CommentModel(id: id, comment: _comment);
+
+      var goodsOrderApproveJsonString = commentGoodsOrderAproveModel.toJson();
+
+      Map<String, dynamic>? response =
+          await receiveGoodsOrdersPresenter.rejectGOReceiveButton(
+        goodsOrderApproveJsonString: goodsOrderApproveJsonString,
+        isLoading: true,
+      );
+      if (response == true) {
+        //getCalibrationList(facilityId, true);
+      }
+    }
   }
 
   void createGoodsOrder() async {

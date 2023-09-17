@@ -605,6 +605,27 @@ class DataRepository extends DomainRepository {
         isLoading: isLoading ?? false,
       );
 
+  Future<ResponseModel> approveGOReceiveButton({
+    required String auth,
+    goodsOrderApproveJsonString,
+    bool? isLoading,
+  }) async =>
+      await connectHelper.approveGOReceiveButton(
+        auth: auth,
+        goodsOrderApproveJsonString: goodsOrderApproveJsonString,
+        isLoading: isLoading ?? false,
+      );
+
+  Future<ResponseModel> rejectGOReceiveButton({
+    required String auth,
+    goodsOrderApproveJsonString,
+    bool? isLoading,
+  }) async =>
+      await connectHelper.rejectGOReceiveButton(
+        auth: auth,
+        goodsOrderApproveJsonString: goodsOrderApproveJsonString,
+        isLoading: isLoading ?? false,
+      );
   Future<ResponseModel> goodsOrderRejectButton({
     required String auth,
     goodsOrderRejectJsonString,
@@ -2978,6 +2999,18 @@ class DataRepository extends DomainRepository {
     approvetoJsonString,
   }) async {
     var response = await connectHelper.approveGoodsOrder(
+        auth: auth,
+        isLoading: isLoading,
+        approvetoJsonString: approvetoJsonString);
+    return response;
+  }
+
+  Future<ResponseModel> approveGOReceive({
+    auth,
+    bool? isLoading,
+    approvetoJsonString,
+  }) async {
+    var response = await connectHelper.approveGOReceive(
         auth: auth,
         isLoading: isLoading,
         approvetoJsonString: approvetoJsonString);

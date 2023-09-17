@@ -1,5 +1,6 @@
 import 'package:cmms/app/app.dart';
 import 'package:cmms/app/receive_goods_order/receive_goods_order_controller.dart';
+import 'package:cmms/app/widgets/approve_go_receive_dialog.dart';
 import 'package:cmms/app/widgets/custom_elevated_button.dart';
 import 'package:cmms/app/widgets/custom_textField.dart';
 import 'package:cmms/app/widgets/stock_dropdown.dart';
@@ -7,6 +8,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:scrollable_table_view/scrollable_table_view.dart';
+
+import '../../../widgets/reject_go_receive_dialog.dart';
 
 class ReceiveGoodsOrderWeb extends StatefulWidget {
   ReceiveGoodsOrderWeb({
@@ -852,9 +855,37 @@ class _ReceiveGoodsOrderWebState extends State<ReceiveGoodsOrderWeb> {
                   height: 40,
                   child: CustomElevatedButton(
                     backgroundColor: ColorValues.submitColor,
-                    text: 'Submit for Approval',
+                    text: 'Update for Approval',
                     onPressed: () {
                       controller.updateGOReceive();
+                    },
+                  ),
+                ),
+                Dimens.boxWidth15,
+                Container(
+                  height: 45,
+                  child: CustomElevatedButton(
+                    backgroundColor: ColorValues.submitColor,
+                    text: 'Approve GO Receive',
+                    // icon: Icons.add,
+                    onPressed: () {
+                      Get.dialog(ApproveGOReceiveDialog(
+                        id: controller.id.value,
+                      ));
+                    },
+                  ),
+                ),
+
+                Dimens.boxWidth15,
+                Container(
+                  height: 40,
+                  child: CustomElevatedButton(
+                    backgroundColor: ColorValues.rejectColor,
+                    text: 'Reject GO Receive',
+                    onPressed: () {
+                      Get.dialog(RejectGOReceiveDialog(
+                        id: controller.id.value,
+                      ));
                     },
                   ),
                 ),

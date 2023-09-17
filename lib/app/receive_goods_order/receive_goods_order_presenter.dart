@@ -62,6 +62,26 @@ class ReceiveGoodsOrdersPresenter {
     );
   }
 
+  Future<Map<String, dynamic>?> approveGOReceiveButton({
+    goodsOrderApproveJsonString,
+    required bool isLoading,
+  }) async {
+    return receiveGoodsOrdersUsecase.approveGOReceiveButton(
+      goodsOrderApproveJsonString: goodsOrderApproveJsonString,
+      isLoading: isLoading,
+    );
+  }
+
+  Future<Map<String, dynamic>?> rejectGOReceiveButton({
+    goodsOrderApproveJsonString,
+    required bool isLoading,
+  }) async {
+    return receiveGoodsOrdersUsecase.rejectGOReceiveButton(
+      goodsOrderApproveJsonString: goodsOrderApproveJsonString,
+      isLoading: isLoading,
+    );
+  }
+
   Future<Map<String, dynamic>?> updateGOReceive({
     createGo,
     required bool isLoading,
