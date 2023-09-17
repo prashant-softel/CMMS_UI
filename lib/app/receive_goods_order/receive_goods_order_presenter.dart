@@ -62,11 +62,11 @@ class ReceiveGoodsOrdersPresenter {
     );
   }
 
-  Future<Map<String, dynamic>?> updateGoodsOrder({
+  Future<Map<String, dynamic>?> updateGOReceive({
     createGo,
     required bool isLoading,
   }) async {
-    return receiveGoodsOrdersUsecase.updateGoodsOrder(
+    return receiveGoodsOrdersUsecase.updateGOReceive(
       createGo: createGo,
       isLoading: isLoading,
     );

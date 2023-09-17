@@ -834,7 +834,9 @@ class _ReceiveGoodsOrderWebState extends State<ReceiveGoodsOrderWeb> {
                 //     },
                 //   ),
                 // ),
-                Dimens.boxWidth15,
+
+                // controller.getPurchaseDetailsByIDModel.value?.status == 307
+                //     ?
                 Container(
                   height: 40,
                   child: CustomElevatedButton(
@@ -852,10 +854,12 @@ class _ReceiveGoodsOrderWebState extends State<ReceiveGoodsOrderWeb> {
                     backgroundColor: ColorValues.submitColor,
                     text: 'Submit for Approval',
                     onPressed: () {
-                      controller.updateGoodsOrder();
+                      controller.updateGOReceive();
                     },
                   ),
                 ),
+                // :
+                // Container(),
                 Spacer()
               ],
             ),

@@ -273,8 +273,7 @@ class StockManagementAddGoodsOrdersController extends GetxController {
           getPurchaseDetailsByIDModel.value?.vendor_name ?? "";
       selectedUnitCurrency.value =
           getPurchaseDetailsByIDModel.value?.currency ?? "";
-      idList =
-          _getPurchaseDetailsById.goDetails!.map((e) => e.assetItemID).toList();
+
       print('AssetsItemId:$idList');
     }
   }

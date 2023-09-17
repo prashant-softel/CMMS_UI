@@ -1230,6 +1230,16 @@ class DataRepository extends DomainRepository {
         isLoading: isLoading ?? false,
       );
 
+  Future<ResponseModel> updateGOReceive({
+    required String auth,
+    createGo,
+    bool? isLoading,
+  }) async =>
+      await connectHelper.updateGOReceive(
+        auth: auth,
+        createGo: createGo,
+        isLoading: isLoading ?? false,
+      );
   Future<ResponseModel> updateWarrantyClaim({
     required String auth,
     updateWarrantyClaim,

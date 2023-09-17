@@ -56,11 +56,11 @@ class ReceiveGoodsOrdersUsecase {
         createGo,
         isLoading,
       );
-  Future<Map<String, dynamic>> updateGoodsOrder({
+  Future<Map<String, dynamic>> updateGOReceive({
     createGo,
     bool? isLoading,
   }) async =>
-      await _repository.updateGoodsOrder(
+      await _repository.updateGOReceive(
         createGo,
         isLoading,
       );

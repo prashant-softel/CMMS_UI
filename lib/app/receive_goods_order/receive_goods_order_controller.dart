@@ -409,7 +409,7 @@ class ReceiveGoodsOrdersController extends GetxController {
     print('Create  Create GO  data: $createGoModelJsonString');
   }
 
-  void updateGoodsOrder() async {
+  void updateGOReceive() async {
     String _challanNoCtrlr = challanNoCtrlr.text.trim();
     String _pOCtrlr = pOCtrlr.text.trim();
     String _frieghtToPayPaidCtrlr = frieghtToPayPaidCtrlr.text.trim();
@@ -469,7 +469,7 @@ class ReceiveGoodsOrdersController extends GetxController {
 
     var createGoModelJsonString = createGoModel.toJson();
     Map<String, dynamic>? responseCreateGoModel =
-        await receiveGoodsOrdersPresenter.updateGoodsOrder(
+        await receiveGoodsOrdersPresenter.updateGOReceive(
       createGo: createGoModelJsonString,
       isLoading: true,
     );
