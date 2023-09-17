@@ -733,7 +733,7 @@ class Repository {
 
       if (!res.hasError) {
         Fluttertoast.showToast(
-            msg: " Goods Order update Successfully...", fontSize: 16.0);
+            msg: " Recive GO  update Successfully...", fontSize: 16.0);
 
         Get.offNamed(
           Routes.stockManagementGoodsOrdersScreen,

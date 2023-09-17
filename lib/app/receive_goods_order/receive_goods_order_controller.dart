@@ -173,6 +173,11 @@ class ReceiveGoodsOrdersController extends GetxController {
             'id': '${element.id}'
           },
           {
+            'key': "Paid_By",
+            "value": '${element.paid_by_name}',
+            'id': '${element.paid_by_ID}'
+          },
+          {
             'key': "Cost",
             "value": '${element.cost}',
             // 'id': '${element.assetItemID}'
@@ -185,7 +190,8 @@ class ReceiveGoodsOrdersController extends GetxController {
           {
             'key': "Received",
             "value": '${element.received_qty}',
-            // 'id': '${element.assetItemID}'
+            'recieveQty': '${element.received_qty}',
+            "lostQty": '${element.lost_qty}'
           },
           {
             'key': "Accepted",
@@ -329,9 +335,11 @@ class ReceiveGoodsOrdersController extends GetxController {
         "assetItemID": '',
         "id": ''
       },
+      {'key': "Paid_By", "value": 'Please Select', "id": ''},
+
       {'key': "Cost", "value": ''},
       {'key': "Order", "value": ''},
-      {'key': "Received", "value": ''},
+      {'key': "Received", "value": '', "recieveQty": '', "lostQty": ''},
       {'key': "Accepted", "value": ''},
       {'key': "Damaged", "value": ''},
       // {'key': "Pending", "value": ''},
@@ -421,12 +429,15 @@ class ReceiveGoodsOrdersController extends GetxController {
     rowItem.value.forEach((element) {
       Items item = Items(
         goItemID: int.tryParse('${element[0]["id"]}'),
+        requested_qty: int.tryParse('${element[4]["recieveQty"]}'),
+        lost_qty: int.tryParse('${element[4]["lostQty"]}'),
         assetItemID: int.tryParse('${element[0]["assetItemID"]}'),
-        cost: int.tryParse(element[1]["value"] ?? '0'),
-        ordered_qty: int.tryParse(element[2]["value"] ?? '0'),
-        received_qty: int.tryParse(element[3]["value"] ?? '0'),
-        accepted_qty: int.tryParse(element[4]["value"] ?? '0'),
-        damaged_qty: int.tryParse(element[5]["value"] ?? '0'),
+        paid_by_ID: int.tryParse('${element[1]["id"]}'),
+        cost: int.tryParse(element[2]["value"] ?? '0'),
+        ordered_qty: int.tryParse(element[3]["value"] ?? '0'),
+        received_qty: int.tryParse(element[4]["value"] ?? '0'),
+        accepted_qty: int.tryParse(element[5]["value"] ?? '0'),
+        damaged_qty: int.tryParse(element[6]["value"] ?? '0'),
       );
 
       // poID: paiddropdownMapperData[element[1]["value"]]?.id)

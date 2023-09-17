@@ -11,6 +11,7 @@ import 'package:rxdart/subjects.dart';
 import 'package:scrollable_table_view/scrollable_table_view.dart';
 import '../../domain/models/createSPVModel.dart';
 import 'package:fluttertoast/fluttertoast.dart';
+
 class SPVListController extends GetxController {
   SPVListController(
     this.sPVListPresenter,
@@ -25,6 +26,7 @@ class SPVListController extends GetxController {
     isCheckedRequire.value =
         !isCheckedRequire.value; // Toggle the checkbox state
   }
+
   //checkbox
   RxBool isChecked = true.obs;
 
@@ -70,8 +72,11 @@ class SPVListController extends GetxController {
       return;
     }
 
-    SPVList.value = filteredData.where((item) =>
-        item!.name!.toString().toLowerCase().contains(keyword.toLowerCase()))
+    SPVList.value = filteredData
+        .where((item) => item!.name!
+            .toString()
+            .toLowerCase()
+            .contains(keyword.toLowerCase()))
         .toList();
   }
 
@@ -124,12 +129,12 @@ class SPVListController extends GetxController {
 
   Future<bool> createSPVlist() async {
     print("CREATE CONTROLLER");
-    if (titleCtrlr.text.trim() == '' ) {
+    if (titleCtrlr.text.trim() == '') {
       isTitleInvalid.value = true;
       isFormInvalid.value = true;
       // isDescriptionInvalid.value = true;
     }
-    if (descriptionCtrlr.text.trim() == '' ) {
+    if (descriptionCtrlr.text.trim() == '') {
       // isTitleInvalid.value = true;
       isFormInvalid.value = true;
       isDescriptionInvalid.value = true;
@@ -141,28 +146,27 @@ class SPVListController extends GetxController {
     if (isFormInvalid.value == true) {
       return false;
     }
-      if (titleCtrlr.text.trim() == '' || descriptionCtrlr.text.trim() == '') {
-        Fluttertoast.showToast(
-            msg: "Please enter required field", fontSize: 16.0);
-      } else {
-        String _title = titleCtrlr.text.trim();
-        String _description = descriptionCtrlr.text.trim();
+    if (titleCtrlr.text.trim() == '' || descriptionCtrlr.text.trim() == '') {
+      Fluttertoast.showToast(
+          msg: "Please enter required field", fontSize: 16.0);
+    } else {
+      String _title = titleCtrlr.text.trim();
+      String _description = descriptionCtrlr.text.trim();
 
-        CreateSPVModel createCheckpoint = CreateSPVModel(
-            name: _title,
-            description: _description
-        );
-        print("OUT ");
-        var facilitylistJsonString = createCheckpoint.toJson(); //createCheckPointToJson([createCheckpoint]);
+      CreateSPVModel createCheckpoint =
+          CreateSPVModel(name: _title, description: _description);
+      print("OUT ");
+      var facilitylistJsonString = createCheckpoint
+          .toJson(); //createCheckPointToJson([createCheckpoint]);
 
-        print({"checkpointJsonString", facilitylistJsonString});
-        await sPVListPresenter.createSPVlist(
-          facilitylistJsonString: facilitylistJsonString,
-          isLoading: true,
-        );
-        return true;
-      }
+      print({"checkpointJsonString", facilitylistJsonString});
+      await sPVListPresenter.createSPVlist(
+        facilitylistJsonString: facilitylistJsonString,
+        isLoading: true,
+      );
       return true;
+    }
+    return true;
   }
 
   Future<void> issuccessCreatechecklist() async {
@@ -190,18 +194,16 @@ class SPVListController extends GetxController {
     });
   }
 
-
   Future<bool> updateSPV(checklistId) async {
     String _name = titleCtrlr.text.trim();
     String _description = descriptionCtrlr.text.trim();
 
     SPVListModel createChecklist = SPVListModel(
       id: checklistId,
-      name : _name,
+      name: _name,
       description: _description,
     );
-    var businessTypeJsonString =
-    createChecklist.toJson();
+    var businessTypeJsonString = createChecklist.toJson();
 
     print({"businessTypeJsonString", businessTypeJsonString});
     await sPVListPresenter.updateSPV(
@@ -211,15 +213,11 @@ class SPVListController extends GetxController {
     return true;
   }
 
-  void isDeleteDialog({
-    String? business_id ,
-    String? business
-  }) {
+  void isDeleteDialog({String? business_id, String? business}) {
     Get.dialog(
       AlertDialog(
         content: Column(mainAxisSize: MainAxisSize.min, children: [
           Icon(Icons.delete, size: 35, color: ColorValues.redColor),
-
           SizedBox(
             height: 10,
           ),
@@ -263,6 +261,7 @@ class SPVListController extends GetxController {
       ),
     );
   }
+
   Future<void> deleteSPV(String? business_id) async {
     {
       await sPVListPresenter.deleteFacility(
@@ -273,7 +272,7 @@ class SPVListController extends GetxController {
   }
 
   void checkForm() {
-    if(isTitleInvalid.value == true || isDescriptionInvalid.value == true){
+    if (isTitleInvalid.value == true || isDescriptionInvalid.value == true) {
       isFormInvalid.value = true;
     } else {
       isFormInvalid.value = false;

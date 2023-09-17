@@ -1,18 +1,12 @@
-import 'dart:convert';
-
 import 'package:cmms/app/app.dart';
 import 'package:cmms/app/receive_goods_order/receive_goods_order_controller.dart';
 import 'package:cmms/app/widgets/custom_elevated_button.dart';
-import 'package:cmms/app/widgets/custom_richtext.dart';
 import 'package:cmms/app/widgets/custom_textField.dart';
-import 'package:cmms/app/widgets/date_picker.dart';
 import 'package:cmms/app/widgets/stock_dropdown.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
-import 'package:intl/intl.dart';
 import 'package:scrollable_table_view/scrollable_table_view.dart';
-import 'package:syncfusion_flutter_datepicker/datepicker.dart';
 
 class ReceiveGoodsOrderWeb extends StatefulWidget {
   ReceiveGoodsOrderWeb({
@@ -133,14 +127,16 @@ class _ReceiveGoodsOrderWebState extends State<ReceiveGoodsOrderWeb> {
                                               Text("Vendor :",
                                                   style: Styles.blackBold16),
                                               Dimens.boxWidth10,
-                                              SizedBox(
-                                                child: DropdownWebStock(
-                                                  width: MediaQuery.of(context)
-                                                          .size
-                                                          .width /
-                                                      5,
-                                                  onValueChanged: (p0, p1) {},
-                                                ),
+                                              Container(
+                                                color: Color(0xffE8E7EC),
+                                                height: MediaQuery.of(context)
+                                                        .size
+                                                        .height *
+                                                    0.040,
+                                                width: MediaQuery.of(context)
+                                                        .size
+                                                        .width /
+                                                    5,
                                               ),
                                             ],
                                           ),
@@ -150,14 +146,16 @@ class _ReceiveGoodsOrderWebState extends State<ReceiveGoodsOrderWeb> {
                                               Text("Challan No :",
                                                   style: Styles.blackBold16),
                                               Dimens.boxWidth10,
-                                              SizedBox(
-                                                child: DropdownWebStock(
-                                                  width: MediaQuery.of(context)
-                                                          .size
-                                                          .width /
-                                                      5,
-                                                  onValueChanged: (p0, p1) {},
-                                                ),
+                                              Container(
+                                                color: Color(0xffE8E7EC),
+                                                height: MediaQuery.of(context)
+                                                        .size
+                                                        .height *
+                                                    0.040,
+                                                width: MediaQuery.of(context)
+                                                        .size
+                                                        .width /
+                                                    5,
                                               ),
                                             ],
                                           ),
@@ -167,14 +165,16 @@ class _ReceiveGoodsOrderWebState extends State<ReceiveGoodsOrderWeb> {
                                               Text("P.O :",
                                                   style: Styles.blackBold16),
                                               Dimens.boxWidth10,
-                                              SizedBox(
-                                                child: DropdownWebStock(
-                                                  width: MediaQuery.of(context)
-                                                          .size
-                                                          .width /
-                                                      5,
-                                                  onValueChanged: (p0, p1) {},
-                                                ),
+                                              Container(
+                                                color: Color(0xffE8E7EC),
+                                                height: MediaQuery.of(context)
+                                                        .size
+                                                        .height *
+                                                    0.040,
+                                                width: MediaQuery.of(context)
+                                                        .size
+                                                        .width /
+                                                    5,
                                               ),
                                             ],
                                           ),
@@ -184,14 +184,16 @@ class _ReceiveGoodsOrderWebState extends State<ReceiveGoodsOrderWeb> {
                                               Text("Frieght:To Pay /Paid :",
                                                   style: Styles.blackBold16),
                                               Dimens.boxWidth10,
-                                              SizedBox(
-                                                child: DropdownWebStock(
-                                                  width: MediaQuery.of(context)
-                                                          .size
-                                                          .width /
-                                                      5,
-                                                  onValueChanged: (p0, p1) {},
-                                                ),
+                                              Container(
+                                                color: Color(0xffE8E7EC),
+                                                height: MediaQuery.of(context)
+                                                        .size
+                                                        .height *
+                                                    0.040,
+                                                width: MediaQuery.of(context)
+                                                        .size
+                                                        .width /
+                                                    5,
                                               ),
                                             ],
                                           ),
@@ -202,14 +204,16 @@ class _ReceiveGoodsOrderWebState extends State<ReceiveGoodsOrderWeb> {
                                                   "No. of Packages  received :",
                                                   style: Styles.blackBold16),
                                               Dimens.boxWidth10,
-                                              SizedBox(
-                                                child: DropdownWebStock(
-                                                  width: MediaQuery.of(context)
-                                                          .size
-                                                          .width /
-                                                      5,
-                                                  onValueChanged: (p0, p1) {},
-                                                ),
+                                              Container(
+                                                color: Color(0xffE8E7EC),
+                                                height: MediaQuery.of(context)
+                                                        .size
+                                                        .height *
+                                                    0.040,
+                                                width: MediaQuery.of(context)
+                                                        .size
+                                                        .width /
+                                                    5,
                                               ),
                                             ],
                                           ),
@@ -220,14 +224,16 @@ class _ReceiveGoodsOrderWebState extends State<ReceiveGoodsOrderWeb> {
                                                   "Condition of Packages Received :",
                                                   style: Styles.blackBold16),
                                               Dimens.boxWidth10,
-                                              SizedBox(
-                                                child: DropdownWebStock(
-                                                  width: MediaQuery.of(context)
-                                                          .size
-                                                          .width /
-                                                      5,
-                                                  onValueChanged: (p0, p1) {},
-                                                ),
+                                              Container(
+                                                color: Color(0xffE8E7EC),
+                                                height: MediaQuery.of(context)
+                                                        .size
+                                                        .height *
+                                                    0.040,
+                                                width: MediaQuery.of(context)
+                                                        .size
+                                                        .width /
+                                                    5,
                                               ),
                                             ],
                                           ),
@@ -237,14 +243,16 @@ class _ReceiveGoodsOrderWebState extends State<ReceiveGoodsOrderWeb> {
                                               Text("GIR. No. :",
                                                   style: Styles.blackBold16),
                                               Dimens.boxWidth10,
-                                              SizedBox(
-                                                child: DropdownWebStock(
-                                                  width: MediaQuery.of(context)
-                                                          .size
-                                                          .width /
-                                                      5,
-                                                  onValueChanged: (p0, p1) {},
-                                                ),
+                                              Container(
+                                                color: Color(0xffE8E7EC),
+                                                height: MediaQuery.of(context)
+                                                        .size
+                                                        .height *
+                                                    0.040,
+                                                width: MediaQuery.of(context)
+                                                        .size
+                                                        .width /
+                                                    5,
                                               ),
                                             ],
                                           ),
@@ -253,14 +261,16 @@ class _ReceiveGoodsOrderWebState extends State<ReceiveGoodsOrderWeb> {
                                             Text("Amount :",
                                                 style: Styles.blackBold16),
                                             Dimens.boxWidth10,
-                                            SizedBox(
-                                              child: DropdownWebStock(
-                                                width: MediaQuery.of(context)
-                                                        .size
-                                                        .width /
-                                                    5,
-                                                onValueChanged: (p0, p1) {},
-                                              ),
+                                            Container(
+                                              color: Color(0xffE8E7EC),
+                                              height: MediaQuery.of(context)
+                                                      .size
+                                                      .height *
+                                                  0.040,
+                                              width: MediaQuery.of(context)
+                                                      .size
+                                                      .width /
+                                                  5,
                                             ),
                                           ]),
                                         ],
@@ -275,14 +285,16 @@ class _ReceiveGoodsOrderWebState extends State<ReceiveGoodsOrderWeb> {
                                               Text("Purchase Date :",
                                                   style: Styles.blackBold16),
                                               Dimens.boxWidth10,
-                                              SizedBox(
-                                                child: DropdownWebStock(
-                                                  width: MediaQuery.of(context)
-                                                          .size
-                                                          .width /
-                                                      5,
-                                                  onValueChanged: (p0, p1) {},
-                                                ),
+                                              Container(
+                                                color: Color(0xffE8E7EC),
+                                                height: MediaQuery.of(context)
+                                                        .size
+                                                        .height *
+                                                    0.040,
+                                                width: MediaQuery.of(context)
+                                                        .size
+                                                        .width /
+                                                    5,
                                               ),
                                             ],
                                           ),
@@ -294,14 +306,16 @@ class _ReceiveGoodsOrderWebState extends State<ReceiveGoodsOrderWeb> {
                                               Text("Challan Date :",
                                                   style: Styles.blackBold16),
                                               Dimens.boxWidth10,
-                                              SizedBox(
-                                                child: DropdownWebStock(
-                                                  width: MediaQuery.of(context)
-                                                          .size
-                                                          .width /
-                                                      5,
-                                                  onValueChanged: (p0, p1) {},
-                                                ),
+                                              Container(
+                                                color: Color(0xffE8E7EC),
+                                                height: MediaQuery.of(context)
+                                                        .size
+                                                        .height *
+                                                    0.040,
+                                                width: MediaQuery.of(context)
+                                                        .size
+                                                        .width /
+                                                    5,
                                               ),
                                             ],
                                           ),
@@ -313,14 +327,16 @@ class _ReceiveGoodsOrderWebState extends State<ReceiveGoodsOrderWeb> {
                                               Text("PO Date :",
                                                   style: Styles.blackBold16),
                                               Dimens.boxWidth10,
-                                              SizedBox(
-                                                child: DropdownWebStock(
-                                                  width: MediaQuery.of(context)
-                                                          .size
-                                                          .width /
-                                                      5,
-                                                  onValueChanged: (p0, p1) {},
-                                                ),
+                                              Container(
+                                                color: Color(0xffE8E7EC),
+                                                height: MediaQuery.of(context)
+                                                        .size
+                                                        .height *
+                                                    0.040,
+                                                width: MediaQuery.of(context)
+                                                        .size
+                                                        .width /
+                                                    5,
                                               ),
                                             ],
                                           ),
@@ -332,14 +348,16 @@ class _ReceiveGoodsOrderWebState extends State<ReceiveGoodsOrderWeb> {
                                               Text("Received Date  : ",
                                                   style: Styles.blackBold16),
                                               Dimens.boxWidth10,
-                                              SizedBox(
-                                                child: DropdownWebStock(
-                                                  width: MediaQuery.of(context)
-                                                          .size
-                                                          .width /
-                                                      5,
-                                                  onValueChanged: (p0, p1) {},
-                                                ),
+                                              Container(
+                                                color: Color(0xffE8E7EC),
+                                                height: MediaQuery.of(context)
+                                                        .size
+                                                        .height *
+                                                    0.040,
+                                                width: MediaQuery.of(context)
+                                                        .size
+                                                        .width /
+                                                    5,
                                               ),
                                             ],
                                           ),
@@ -349,14 +367,16 @@ class _ReceiveGoodsOrderWebState extends State<ReceiveGoodsOrderWeb> {
                                               Text("L.R No :",
                                                   style: Styles.blackBold16),
                                               Dimens.boxWidth10,
-                                              SizedBox(
-                                                child: DropdownWebStock(
-                                                  width: MediaQuery.of(context)
-                                                          .size
-                                                          .width /
-                                                      5,
-                                                  onValueChanged: (p0, p1) {},
-                                                ),
+                                              Container(
+                                                color: Color(0xffE8E7EC),
+                                                height: MediaQuery.of(context)
+                                                        .size
+                                                        .height *
+                                                    0.040,
+                                                width: MediaQuery.of(context)
+                                                        .size
+                                                        .width /
+                                                    5,
                                               ),
                                             ],
                                           ),
@@ -366,14 +386,16 @@ class _ReceiveGoodsOrderWebState extends State<ReceiveGoodsOrderWeb> {
                                               Text("Vehicle  No :",
                                                   style: Styles.blackBold16),
                                               Dimens.boxWidth10,
-                                              SizedBox(
-                                                child: DropdownWebStock(
-                                                  width: MediaQuery.of(context)
-                                                          .size
-                                                          .width /
-                                                      5,
-                                                  onValueChanged: (p0, p1) {},
-                                                ),
+                                              Container(
+                                                color: Color(0xffE8E7EC),
+                                                height: MediaQuery.of(context)
+                                                        .size
+                                                        .height *
+                                                    0.040,
+                                                width: MediaQuery.of(context)
+                                                        .size
+                                                        .width /
+                                                    5,
                                               ),
                                             ],
                                           ),
@@ -383,14 +405,16 @@ class _ReceiveGoodsOrderWebState extends State<ReceiveGoodsOrderWeb> {
                                               Text("Job Ref :",
                                                   style: Styles.blackBold16),
                                               Dimens.boxWidth10,
-                                              SizedBox(
-                                                child: DropdownWebStock(
-                                                  width: MediaQuery.of(context)
-                                                          .size
-                                                          .width /
-                                                      5,
-                                                  onValueChanged: (p0, p1) {},
-                                                ),
+                                              Container(
+                                                color: Color(0xffE8E7EC),
+                                                height: MediaQuery.of(context)
+                                                        .size
+                                                        .height *
+                                                    0.040,
+                                                width: MediaQuery.of(context)
+                                                        .size
+                                                        .width /
+                                                    5,
                                               ),
                                             ],
                                           ),
@@ -401,14 +425,16 @@ class _ReceiveGoodsOrderWebState extends State<ReceiveGoodsOrderWeb> {
                                               Text("Currency :",
                                                   style: Styles.blackBold16),
                                               Dimens.boxWidth10,
-                                              SizedBox(
-                                                child: DropdownWebStock(
-                                                  width: MediaQuery.of(context)
-                                                          .size
-                                                          .width /
-                                                      5,
-                                                  onValueChanged: (p0, p1) {},
-                                                ),
+                                              Container(
+                                                color: Color(0xffE8E7EC),
+                                                height: MediaQuery.of(context)
+                                                        .size
+                                                        .height *
+                                                    0.040,
+                                                width: MediaQuery.of(context)
+                                                        .size
+                                                        .width /
+                                                    5,
                                               ),
                                             ],
                                           ),
@@ -473,6 +499,7 @@ class _ReceiveGoodsOrderWebState extends State<ReceiveGoodsOrderWeb> {
                                           child: ScrollableTableView(
                                             columns: [
                                               "Assets",
+                                              "Paid_By",
                                               "Cost",
                                               "Ordered Qty",
                                               "Received  Qty",
@@ -509,35 +536,38 @@ class _ReceiveGoodsOrderWebState extends State<ReceiveGoodsOrderWeb> {
                                                                   CrossAxisAlignment
                                                                       .center,
                                                               children: [
-                                                                DropdownWebStock(
-                                                                  width: MediaQuery.of(
-                                                                          context)
-                                                                      .size
-                                                                      .width,
-                                                                  dropdownList:
-                                                                      controller
-                                                                          .assetList,
-                                                                  selectedValue:
-                                                                      mapData[
-                                                                          "value"],
-                                                                  onValueChanged:
-                                                                      (list,
-                                                                          selectedValue) {
-                                                                    print(
-                                                                        'paifcghb:${controller.assetList}');
-                                                                    print({
-                                                                      selectedValue:
-                                                                          selectedValue
-                                                                    });
-                                                                    mapData["value"] =
-                                                                        selectedValue;
-                                                                    controller.dropdownMapperData[selectedValue] = list.firstWhere(
-                                                                        (element) =>
-                                                                            element.name ==
-                                                                            selectedValue,
-                                                                        orElse:
-                                                                            null);
-                                                                  },
+                                                                IgnorePointer(
+                                                                  child:
+                                                                      DropdownWebStock(
+                                                                    width: MediaQuery.of(
+                                                                            context)
+                                                                        .size
+                                                                        .width,
+                                                                    dropdownList:
+                                                                        controller
+                                                                            .assetList,
+                                                                    selectedValue:
+                                                                        mapData[
+                                                                            "value"],
+                                                                    onValueChanged:
+                                                                        (list,
+                                                                            selectedValue) {
+                                                                      print(
+                                                                          'paifcghb:${controller.assetList}');
+                                                                      print({
+                                                                        selectedValue:
+                                                                            selectedValue
+                                                                      });
+                                                                      mapData["value"] =
+                                                                          selectedValue;
+                                                                      controller.dropdownMapperData[selectedValue] = list.firstWhere(
+                                                                          (element) =>
+                                                                              element.name ==
+                                                                              selectedValue,
+                                                                          orElse:
+                                                                              null);
+                                                                    },
+                                                                  ),
                                                                 ),
                                                                 Row(
                                                                   children: [
@@ -567,68 +597,55 @@ class _ReceiveGoodsOrderWebState extends State<ReceiveGoodsOrderWeb> {
                                                             ),
                                                           )
                                                         : (mapData['key'] ==
-                                                                    "Order") ||
-                                                                (mapData[
-                                                                        'key'] ==
-                                                                    "Cost")
+                                                                "Paid_By")
                                                             ? Padding(
                                                                 padding:
                                                                     const EdgeInsets
-                                                                        .only(
-                                                                  left: 20,
-                                                                  right: 20,
+                                                                            .only(
+                                                                        left:
+                                                                            10,
+                                                                        right:
+                                                                            10),
+                                                                child:
+                                                                    IgnorePointer(
+                                                                  child:
+                                                                      DropdownWebStock(
+                                                                    width: MediaQuery.of(
+                                                                            context)
+                                                                        .size
+                                                                        .width,
+                                                                    dropdownList:
+                                                                        controller
+                                                                            .paid,
+                                                                    selectedValue:
+                                                                        mapData[
+                                                                            "value"],
+                                                                    onValueChanged:
+                                                                        (list,
+                                                                            selectedValue) {
+                                                                      print(
+                                                                          'paifcghb:${controller.paid}');
+                                                                      print({
+                                                                        selectedValue:
+                                                                            selectedValue
+                                                                      });
+                                                                      mapData["value"] =
+                                                                          selectedValue;
+                                                                      controller.paiddropdownMapperData[selectedValue] = list.firstWhere(
+                                                                          (element) =>
+                                                                              element.name ==
+                                                                              selectedValue,
+                                                                          orElse:
+                                                                              null);
+                                                                    },
+                                                                  ),
                                                                 ),
-                                                                child: Container(
-                                                                    width: (Get.width * .4),
-                                                                    // padding: EdgeInsets.all(value),
-                                                                    decoration: BoxDecoration(
-                                                                      boxShadow: [
-                                                                        BoxShadow(
-                                                                          color:
-                                                                              Colors.black26,
-                                                                          offset:
-                                                                              const Offset(
-                                                                            5.0,
-                                                                            5.0,
-                                                                          ),
-                                                                          blurRadius:
-                                                                              5.0,
-                                                                          spreadRadius:
-                                                                              1.0,
-                                                                        ),
-                                                                      ],
-                                                                      color: ColorValues
-                                                                          .whiteColor,
-                                                                      borderRadius:
-                                                                          BorderRadius.circular(
-                                                                              5),
-                                                                    ),
-                                                                    child: LoginCustomTextfield(
-                                                                      keyboardType:
-                                                                          TextInputType
-                                                                              .number,
-                                                                      inputFormatters: <
-                                                                          TextInputFormatter>[
-                                                                        FilteringTextInputFormatter
-                                                                            .digitsOnly
-                                                                      ],
-                                                                      maxLine:
-                                                                          1,
-                                                                      textController:
-                                                                          new TextEditingController(
-                                                                              text: mapData["value"] ?? ''),
-                                                                      onChanged:
-                                                                          (txt) {
-                                                                        mapData["value"] =
-                                                                            txt;
-                                                                      },
-                                                                    )),
                                                               )
                                                             : (mapData['key'] ==
-                                                                        "Received") ||
+                                                                        "Order") ||
                                                                     (mapData[
                                                                             'key'] ==
-                                                                        "Accepted")
+                                                                        "Cost")
                                                                 ? Padding(
                                                                     padding:
                                                                         const EdgeInsets
@@ -656,97 +673,133 @@ class _ReceiveGoodsOrderWebState extends State<ReceiveGoodsOrderWeb> {
                                                                           borderRadius:
                                                                               BorderRadius.circular(5),
                                                                         ),
-                                                                        child: LoginCustomTextfield(
-                                                                          keyboardType:
-                                                                              TextInputType.number,
-                                                                          inputFormatters: <
-                                                                              TextInputFormatter>[
-                                                                            FilteringTextInputFormatter.digitsOnly
-                                                                          ],
-                                                                          maxLine:
-                                                                              1,
-                                                                          textController:
-                                                                              new TextEditingController(text: mapData["value"] ?? ''),
-                                                                          onChanged:
-                                                                              (txt) {
-                                                                            mapData["value"] =
-                                                                                txt;
-                                                                          },
+                                                                        child: IgnorePointer(
+                                                                          child:
+                                                                              LoginCustomTextfield(
+                                                                            keyboardType:
+                                                                                TextInputType.number,
+                                                                            inputFormatters: <TextInputFormatter>[
+                                                                              FilteringTextInputFormatter.digitsOnly
+                                                                            ],
+                                                                            maxLine:
+                                                                                1,
+                                                                            textController:
+                                                                                new TextEditingController(text: mapData["value"] ?? ''),
+                                                                            onChanged:
+                                                                                (txt) {
+                                                                              mapData["value"] = txt;
+                                                                            },
+                                                                          ),
                                                                         )),
                                                                   )
-                                                                :
-                                                                //  (mapData['key'] ==
-                                                                //         "Pending")
-                                                                //     ? Padding(
-                                                                //         padding:
-                                                                //             const EdgeInsets
-                                                                //                 .only(
-                                                                //           left:
-                                                                //               20,
-                                                                //           right:
-                                                                //               20,
-                                                                //         ),
-                                                                //         child:
-                                                                //             Checkbox(
-                                                                //           onChanged:
-                                                                //               (value) {},
-                                                                //           value:
-                                                                //               false,
-                                                                //         ))
-                                                                //     :
-                                                                (mapData['key'] ==
-                                                                        "Damaged")
+                                                                : (mapData['key'] ==
+                                                                            "Received") ||
+                                                                        (mapData['key'] ==
+                                                                            "Accepted")
                                                                     ? Padding(
                                                                         padding:
-                                                                            const EdgeInsets
-                                                                                .only(
+                                                                            const EdgeInsets.only(
                                                                           left:
                                                                               20,
                                                                           right:
                                                                               20,
                                                                         ),
-                                                                        child:
-                                                                            Padding(
-                                                                          padding:
-                                                                              const EdgeInsets.only(
-                                                                            left:
-                                                                                20,
-                                                                            right:
-                                                                                20,
-                                                                          ),
-                                                                          child: Container(
-                                                                              width: (Get.width * .4),
-                                                                              // padding: EdgeInsets.all(value),
-                                                                              decoration: BoxDecoration(
-                                                                                boxShadow: [
-                                                                                  BoxShadow(
-                                                                                    color: Colors.black26,
-                                                                                    offset: const Offset(
-                                                                                      5.0,
-                                                                                      5.0,
-                                                                                    ),
-                                                                                    blurRadius: 5.0,
-                                                                                    spreadRadius: 1.0,
+                                                                        child: Container(
+                                                                            width: (Get.width * .4),
+                                                                            // padding: EdgeInsets.all(value),
+                                                                            decoration: BoxDecoration(
+                                                                              boxShadow: [
+                                                                                BoxShadow(
+                                                                                  color: Colors.black26,
+                                                                                  offset: const Offset(
+                                                                                    5.0,
+                                                                                    5.0,
                                                                                   ),
-                                                                                ],
-                                                                                color: ColorValues.whiteColor,
-                                                                                borderRadius: BorderRadius.circular(5),
+                                                                                  blurRadius: 5.0,
+                                                                                  spreadRadius: 1.0,
+                                                                                ),
+                                                                              ],
+                                                                              color: ColorValues.whiteColor,
+                                                                              borderRadius: BorderRadius.circular(5),
+                                                                            ),
+                                                                            child: LoginCustomTextfield(
+                                                                              keyboardType: TextInputType.number,
+                                                                              inputFormatters: <TextInputFormatter>[
+                                                                                FilteringTextInputFormatter.digitsOnly
+                                                                              ],
+                                                                              maxLine: 1,
+                                                                              textController: new TextEditingController(text: mapData["value"] ?? ''),
+                                                                              onChanged: (txt) {
+                                                                                mapData["value"] = txt;
+                                                                              },
+                                                                            )),
+                                                                      )
+                                                                    :
+                                                                    //  (mapData['key'] ==
+                                                                    //         "Pending")
+                                                                    //     ? Padding(
+                                                                    //         padding:
+                                                                    //             const EdgeInsets
+                                                                    //                 .only(
+                                                                    //           left:
+                                                                    //               20,
+                                                                    //           right:
+                                                                    //               20,
+                                                                    //         ),
+                                                                    //         child:
+                                                                    //             Checkbox(
+                                                                    //           onChanged:
+                                                                    //               (value) {},
+                                                                    //           value:
+                                                                    //               false,
+                                                                    //         ))
+                                                                    //     :
+                                                                    (mapData['key'] ==
+                                                                            "Damaged")
+                                                                        ? Padding(
+                                                                            padding: const EdgeInsets
+                                                                                .only(
+                                                                              left: 20,
+                                                                              right: 20,
+                                                                            ),
+                                                                            child:
+                                                                                Padding(
+                                                                              padding: const EdgeInsets.only(
+                                                                                left: 20,
+                                                                                right: 20,
                                                                               ),
-                                                                              child: LoginCustomTextfield(
-                                                                                keyboardType: TextInputType.number,
-                                                                                inputFormatters: <TextInputFormatter>[
-                                                                                  FilteringTextInputFormatter.digitsOnly
-                                                                                ],
-                                                                                maxLine: 1,
-                                                                                textController: new TextEditingController(text: mapData["value"] ?? ''),
-                                                                                onChanged: (txt) {
-                                                                                  mapData["value"] = txt;
-                                                                                },
-                                                                              )),
-                                                                        ))
-                                                                    : Text(mapData[
-                                                                            'key'] ??
-                                                                        ''),
+                                                                              child: Container(
+                                                                                  width: (Get.width * .4),
+                                                                                  // padding: EdgeInsets.all(value),
+                                                                                  decoration: BoxDecoration(
+                                                                                    boxShadow: [
+                                                                                      BoxShadow(
+                                                                                        color: Colors.black26,
+                                                                                        offset: const Offset(
+                                                                                          5.0,
+                                                                                          5.0,
+                                                                                        ),
+                                                                                        blurRadius: 5.0,
+                                                                                        spreadRadius: 1.0,
+                                                                                      ),
+                                                                                    ],
+                                                                                    color: ColorValues.whiteColor,
+                                                                                    borderRadius: BorderRadius.circular(5),
+                                                                                  ),
+                                                                                  child: LoginCustomTextfield(
+                                                                                    keyboardType: TextInputType.number,
+                                                                                    inputFormatters: <TextInputFormatter>[
+                                                                                      FilteringTextInputFormatter.digitsOnly
+                                                                                    ],
+                                                                                    maxLine: 1,
+                                                                                    textController: new TextEditingController(text: mapData["value"] ?? ''),
+                                                                                    onChanged: (txt) {
+                                                                                      mapData["value"] = txt;
+                                                                                    },
+                                                                                  )),
+                                                                            ))
+                                                                        : Text(mapData['key'] ??
+                                                                            ''),
                                                   );
                                                 }).toList(),
                                               );
@@ -771,6 +824,17 @@ class _ReceiveGoodsOrderWebState extends State<ReceiveGoodsOrderWeb> {
             floatingActionButton: Row(
               children: [
                 Spacer(),
+                // Container(
+                //   height: 40,
+                //   child: CustomElevatedButton(
+                //     backgroundColor: ColorValues.printColor,
+                //     text: 'Print',
+                //     onPressed: () {
+                //       // controller.AddInventory();
+                //     },
+                //   ),
+                // ),
+                Dimens.boxWidth15,
                 Container(
                   height: 40,
                   child: CustomElevatedButton(
