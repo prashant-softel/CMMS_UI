@@ -733,7 +733,7 @@ class Repository {
 
       if (!res.hasError) {
         Fluttertoast.showToast(
-            msg: " Recive GO  update Successfully...", fontSize: 16.0);
+            msg: " GO  update Successfully...", fontSize: 16.0);
 
         Get.offNamed(
           Routes.stockManagementGoodsOrdersScreen,
@@ -741,6 +741,42 @@ class Repository {
         // Fluttertoast.showToast(msg: "Data add successfully...", fontSize: 16.0);
       } else {
         Utility.showDialog(res.errorCode.toString() + 'updateGoodsOrder');
+        //return '';
+      }
+      return Map();
+    } catch (error) {
+      print(error.toString());
+      return Map();
+    }
+  }
+
+  //
+  Future<Map<String, dynamic>> updateGOReceive(
+    createGo,
+    bool? isLoading,
+  ) async {
+    try {
+      final auth = await getSecuredValue(LocalKeys.authToken);
+      final res = await _dataRepository.updateGOReceive(
+        auth: auth,
+        createGo: createGo,
+        isLoading: isLoading ?? false,
+      );
+
+      var resourceData = res.data;
+
+      print('Response update Goods order : ${resourceData}');
+
+      if (!res.hasError) {
+        Fluttertoast.showToast(
+            msg: " Recive GO  update Successfully...", fontSize: 16.0);
+
+        Get.offNamed(
+          Routes.stockManagementGoodsOrdersScreen,
+        );
+        // Fluttertoast.showToast(msg: "Data add successfully...", fontSize: 16.0);
+      } else {
+        Utility.showDialog(res.errorCode.toString() + 'reciveUpdateGoodsOrder');
         //return '';
       }
       return Map();

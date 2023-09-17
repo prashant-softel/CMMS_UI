@@ -2072,6 +2072,29 @@ class ConnectHelper {
     return responseModel;
   }
 
+  Future<ResponseModel> updateGOReceive({
+    required String auth,
+    createGo,
+    bool? isLoading,
+  }) async {
+    var responseModel = await apiWrapper.makeRequest(
+      'GO/UpdateGOReceive',
+      Request.post,
+      createGo,
+      isLoading ?? false,
+      {
+        'Content-Type': 'application/json',
+        'Authorization': 'Bearer $auth',
+      },
+    );
+
+    print('update Goods Orders Response:${responseModel.data}');
+    var res = responseModel.data;
+    var parsedJson = json.decode(res);
+
+    return responseModel;
+  }
+
   //Update Warranty Claim
   Future<ResponseModel> updateWarrantyClaim({
     required String auth,

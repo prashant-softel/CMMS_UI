@@ -11,7 +11,7 @@ String pmtaskViewModelToJson(GetPurchaseDetailsByIDModel data) =>
 class GetPurchaseDetailsByIDModel {
   int? id;
   int? facility_id;
-  int? asset_type_ID;
+  // int? asset_type_ID;
   int? vendorId;
   int? status;
   String? status_short;
@@ -43,7 +43,7 @@ class GetPurchaseDetailsByIDModel {
   GetPurchaseDetailsByIDModel({
     this.id,
     this.facility_id,
-    this.asset_type_ID,
+    // this.asset_type_ID,
     this.vendorId,
     this.status,
     this.status_short,
@@ -77,7 +77,7 @@ class GetPurchaseDetailsByIDModel {
         facilityName: parsedJson["facilityName"] ?? "",
         id: parsedJson["id"] ?? "",
         facility_id: parsedJson["facility_id"] ?? "",
-        asset_type_ID: parsedJson["asset_type_ID"] ?? "",
+        // asset_type_ID: parsedJson["asset_type_ID"] ?? "",
         vendorId: parsedJson["vendorID"] ?? "",
         status: parsedJson["status"] ?? "",
         status_short: parsedJson["status_short"] ?? "",
@@ -111,7 +111,7 @@ class GetPurchaseDetailsByIDModel {
         "id": id,
         "facilityName": facilityName,
         "facility_id": facility_id,
-        "asset_type_ID": asset_type_ID,
+        // "asset_type_ID": asset_type_ID,
         "vendorId": vendorId,
         "status": status,
         "status_short": status_short,

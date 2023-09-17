@@ -84,7 +84,8 @@ class _AddGoodsOrdersWebState extends State<AddGoodsOrdersWeb> {
                                   crossAxisAlignment: CrossAxisAlignment.start,
                                   children: [
                                     Column(
-                                      crossAxisAlignment: CrossAxisAlignment.end,
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.end,
                                       children: [
                                         Row(
                                           children: [
@@ -93,13 +94,20 @@ class _AddGoodsOrdersWebState extends State<AddGoodsOrdersWeb> {
                                             SizedBox(
                                               child: Obx(
                                                 () => DropdownWebStock(
-                                                  width: MediaQuery.of(context).size.width / 5,
-                                                  dropdownList: controller.ownerList,
-                                                  isValueSelected:
-                                                      controller.isSelectedBusinessType.value,
-                                                  selectedValue:
-                                                      controller.selectedBusinessType.value,
-                                                  onValueChanged: controller.onValueChanged,
+                                                  width: MediaQuery.of(context)
+                                                          .size
+                                                          .width /
+                                                      5,
+                                                  dropdownList:
+                                                      controller.ownerList,
+                                                  isValueSelected: controller
+                                                      .isSelectedBusinessType
+                                                      .value,
+                                                  selectedValue: controller
+                                                      .selectedBusinessType
+                                                      .value,
+                                                  onValueChanged:
+                                                      controller.onValueChanged,
                                                 ),
                                               ),
                                             ),
@@ -108,14 +116,19 @@ class _AddGoodsOrdersWebState extends State<AddGoodsOrdersWeb> {
                                         Dimens.boxHeight5,
                                         Row(
                                           children: [
-                                            CustomRichText(title: 'Challan No.: '),
+                                            CustomRichText(
+                                                title: 'Challan No.: '),
                                             Dimens.boxWidth10,
                                             GoodsOrderTextField(
-                                              keyboardType: TextInputType.number,
-                                              inputFormatters: <TextInputFormatter>[
-                                                FilteringTextInputFormatter.digitsOnly
+                                              keyboardType:
+                                                  TextInputType.number,
+                                              inputFormatters: <
+                                                  TextInputFormatter>[
+                                                FilteringTextInputFormatter
+                                                    .digitsOnly
                                               ],
-                                              textController: controller.challanNoCtrlr,
+                                              textController:
+                                                  controller.challanNoCtrlr,
                                             ),
                                           ],
                                         ),
@@ -125,35 +138,15 @@ class _AddGoodsOrdersWebState extends State<AddGoodsOrdersWeb> {
                                             CustomRichText(title: 'P.O: '),
                                             Dimens.boxWidth10,
                                             GoodsOrderTextField(
-                                              keyboardType: TextInputType.number,
-                                              inputFormatters: <TextInputFormatter>[
-                                                FilteringTextInputFormatter.digitsOnly
+                                              keyboardType:
+                                                  TextInputType.number,
+                                              inputFormatters: <
+                                                  TextInputFormatter>[
+                                                FilteringTextInputFormatter
+                                                    .digitsOnly
                                               ],
-                                              textController: controller.pOCtrlr,
-                                            ),
-                                          ],
-                                        ),
-                                        Dimens.boxHeight5,
-                                        Row(
-                                          children: [
-                                            CustomRichText(title: 'Frieght:To Pay /Paid : '),
-                                            Dimens.boxWidth10,
-                                            GoodsOrderTextField(
-                                              keyboardType: TextInputType.number,
-                                              inputFormatters: <TextInputFormatter>[
-                                                FilteringTextInputFormatter.digitsOnly
-                                              ],
-                                              textController: controller.frieghtToPayPaidCtrlr,
-                                            ),
-                                          ],
-                                        ),
-                                        Dimens.boxHeight5,
-                                        Row(
-                                          children: [
-                                            CustomRichText(title: 'No. of Packages  received :'),
-                                            Dimens.boxWidth10,
-                                            GoodsOrderTextField(
-                                              textController: controller.noOfPackagesReceivedCtrlr,
+                                              textController:
+                                                  controller.pOCtrlr,
                                             ),
                                           ],
                                         ),
@@ -161,29 +154,71 @@ class _AddGoodsOrdersWebState extends State<AddGoodsOrdersWeb> {
                                         Row(
                                           children: [
                                             CustomRichText(
-                                                title: 'Condition of Packages Received : '),
+                                                title:
+                                                    'Frieght:To Pay /Paid : '),
                                             Dimens.boxWidth10,
                                             GoodsOrderTextField(
-                                              keyboardType: TextInputType.number,
-                                              inputFormatters: <TextInputFormatter>[
-                                                FilteringTextInputFormatter.digitsOnly
+                                              keyboardType:
+                                                  TextInputType.number,
+                                              inputFormatters: <
+                                                  TextInputFormatter>[
+                                                FilteringTextInputFormatter
+                                                    .digitsOnly
                                               ],
-                                              textController:
-                                                  controller.conditionOfPackagesReceivedCtrlr,
+                                              textController: controller
+                                                  .frieghtToPayPaidCtrlr,
                                             ),
                                           ],
                                         ),
                                         Dimens.boxHeight5,
                                         Row(
                                           children: [
-                                            CustomRichText(title: 'GIR. No. : '),
+                                            CustomRichText(
+                                                title:
+                                                    'No. of Packages  received :'),
                                             Dimens.boxWidth10,
                                             GoodsOrderTextField(
-                                              keyboardType: TextInputType.number,
-                                              inputFormatters: <TextInputFormatter>[
-                                                FilteringTextInputFormatter.digitsOnly
+                                              textController: controller
+                                                  .noOfPackagesReceivedCtrlr,
+                                            ),
+                                          ],
+                                        ),
+                                        Dimens.boxHeight5,
+                                        Row(
+                                          children: [
+                                            CustomRichText(
+                                                title:
+                                                    'Condition of Packages Received : '),
+                                            Dimens.boxWidth10,
+                                            GoodsOrderTextField(
+                                              keyboardType:
+                                                  TextInputType.number,
+                                              inputFormatters: <
+                                                  TextInputFormatter>[
+                                                FilteringTextInputFormatter
+                                                    .digitsOnly
                                               ],
-                                              textController: controller.girNoCtrlr,
+                                              textController: controller
+                                                  .conditionOfPackagesReceivedCtrlr,
+                                            ),
+                                          ],
+                                        ),
+                                        Dimens.boxHeight5,
+                                        Row(
+                                          children: [
+                                            CustomRichText(
+                                                title: 'GIR. No. : '),
+                                            Dimens.boxWidth10,
+                                            GoodsOrderTextField(
+                                              keyboardType:
+                                                  TextInputType.number,
+                                              inputFormatters: <
+                                                  TextInputFormatter>[
+                                                FilteringTextInputFormatter
+                                                    .digitsOnly
+                                              ],
+                                              textController:
+                                                  controller.girNoCtrlr,
                                             ),
                                           ],
                                         ),
@@ -193,31 +228,43 @@ class _AddGoodsOrdersWebState extends State<AddGoodsOrdersWeb> {
                                           Dimens.boxWidth10,
                                           GoodsOrderTextField(
                                             keyboardType: TextInputType.number,
-                                            inputFormatters: <TextInputFormatter>[
-                                              FilteringTextInputFormatter.digitsOnly
+                                            inputFormatters: <
+                                                TextInputFormatter>[
+                                              FilteringTextInputFormatter
+                                                  .digitsOnly
                                             ],
-                                            textController: controller.amountCtrlr,
+                                            textController:
+                                                controller.amountCtrlr,
                                           ),
                                         ]),
                                       ],
                                     ),
                                     Spacer(),
                                     Column(
-                                      crossAxisAlignment: CrossAxisAlignment.end,
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.end,
                                       children: [
                                         Row(
                                           children: [
-                                            CustomRichText(title: 'Purchase Date :'),
+                                            CustomRichText(
+                                                title: 'Purchase Date :'),
                                             Dimens.boxWidth10,
                                             CustomTextFieldForStock(
-                                              width: MediaQuery.of(context).size.width / 5,
+                                              width: MediaQuery.of(context)
+                                                      .size
+                                                      .width /
+                                                  5,
                                               numberTextField: true,
                                               onTap: () {
-                                                controller.openPurchaseDatePicker =
-                                                    !controller.openPurchaseDatePicker;
-                                                controller.update(['stock_Mangement']);
+                                                controller
+                                                        .openPurchaseDatePicker =
+                                                    !controller
+                                                        .openPurchaseDatePicker;
+                                                controller.update(
+                                                    ['stock_Mangement']);
                                               },
-                                              textController: controller.purchaseDateTc,
+                                              textController:
+                                                  controller.purchaseDateTc,
                                             ),
                                           ],
                                         ),
@@ -226,17 +273,25 @@ class _AddGoodsOrdersWebState extends State<AddGoodsOrdersWeb> {
                                         ),
                                         Row(
                                           children: [
-                                            CustomRichText(title: 'Challan Date : '),
+                                            CustomRichText(
+                                                title: 'Challan Date : '),
                                             Dimens.boxWidth10,
                                             CustomTextFieldForStock(
-                                              width: MediaQuery.of(context).size.width / 5,
+                                              width: MediaQuery.of(context)
+                                                      .size
+                                                      .width /
+                                                  5,
                                               numberTextField: true,
                                               onTap: () {
-                                                controller.openChallanDatePicker =
-                                                    !controller.openChallanDatePicker;
-                                                controller.update(['stock_Mangement']);
+                                                controller
+                                                        .openChallanDatePicker =
+                                                    !controller
+                                                        .openChallanDatePicker;
+                                                controller.update(
+                                                    ['stock_Mangement']);
                                               },
-                                              textController: controller.challanDateTc,
+                                              textController:
+                                                  controller.challanDateTc,
                                             ),
                                           ],
                                         ),
@@ -245,17 +300,24 @@ class _AddGoodsOrdersWebState extends State<AddGoodsOrdersWeb> {
                                         ),
                                         Row(
                                           children: [
-                                            CustomRichText(title: 'PO Date  : '),
+                                            CustomRichText(
+                                                title: 'PO Date  : '),
                                             Dimens.boxWidth10,
                                             CustomTextFieldForStock(
-                                              width: MediaQuery.of(context).size.width / 5,
+                                              width: MediaQuery.of(context)
+                                                      .size
+                                                      .width /
+                                                  5,
                                               numberTextField: true,
                                               onTap: () {
                                                 controller.openPODatePicker =
-                                                    !controller.openPODatePicker;
-                                                controller.update(['stock_Mangement']);
+                                                    !controller
+                                                        .openPODatePicker;
+                                                controller.update(
+                                                    ['stock_Mangement']);
                                               },
-                                              textController: controller.poDateDateTc,
+                                              textController:
+                                                  controller.poDateDateTc,
                                             ),
                                           ],
                                         ),
@@ -264,59 +326,81 @@ class _AddGoodsOrdersWebState extends State<AddGoodsOrdersWeb> {
                                         ),
                                         Row(
                                           children: [
-                                            CustomRichText(title: 'Received Date  : '),
+                                            CustomRichText(
+                                                title: 'Received Date  : '),
                                             Dimens.boxWidth10,
                                             CustomTextFieldForStock(
-                                              width: MediaQuery.of(context).size.width / 5,
+                                              width: MediaQuery.of(context)
+                                                      .size
+                                                      .width /
+                                                  5,
                                               numberTextField: true,
                                               onTap: () {
                                                 controller.openReceivedPicker =
-                                                    !controller.openReceivedPicker;
-                                                controller.update(['stock_Mangement']);
+                                                    !controller
+                                                        .openReceivedPicker;
+                                                controller.update(
+                                                    ['stock_Mangement']);
                                               },
-                                              textController: controller.receivedDateTc,
+                                              textController:
+                                                  controller.receivedDateTc,
                                             ),
                                           ],
                                         ),
                                         Dimens.boxHeight5,
                                         Row(
                                           children: [
-                                            CustomRichText(title: 'L.R No.  : '),
+                                            CustomRichText(
+                                                title: 'L.R No.  : '),
                                             Dimens.boxWidth10,
                                             GoodsOrderTextField(
-                                              keyboardType: TextInputType.number,
-                                              inputFormatters: <TextInputFormatter>[
-                                                FilteringTextInputFormatter.digitsOnly
+                                              keyboardType:
+                                                  TextInputType.number,
+                                              inputFormatters: <
+                                                  TextInputFormatter>[
+                                                FilteringTextInputFormatter
+                                                    .digitsOnly
                                               ],
-                                              textController: controller.lrNoCtrlr,
+                                              textController:
+                                                  controller.lrNoCtrlr,
                                             ),
                                           ],
                                         ),
                                         Dimens.boxHeight5,
                                         Row(
                                           children: [
-                                            CustomRichText(title: 'Vehicle  No. : '),
+                                            CustomRichText(
+                                                title: 'Vehicle  No. : '),
                                             Dimens.boxWidth10,
                                             GoodsOrderTextField(
-                                              keyboardType: TextInputType.number,
-                                              inputFormatters: <TextInputFormatter>[
-                                                FilteringTextInputFormatter.digitsOnly
+                                              keyboardType:
+                                                  TextInputType.number,
+                                              inputFormatters: <
+                                                  TextInputFormatter>[
+                                                FilteringTextInputFormatter
+                                                    .digitsOnly
                                               ],
-                                              textController: controller.vehicleNoCtrlr,
+                                              textController:
+                                                  controller.vehicleNoCtrlr,
                                             ),
                                           ],
                                         ),
                                         Dimens.boxHeight5,
                                         Row(
                                           children: [
-                                            CustomRichText(title: 'Job Ref. : '),
+                                            CustomRichText(
+                                                title: 'Job Ref. : '),
                                             Dimens.boxWidth10,
                                             GoodsOrderTextField(
-                                              keyboardType: TextInputType.number,
-                                              inputFormatters: <TextInputFormatter>[
-                                                FilteringTextInputFormatter.digitsOnly
+                                              keyboardType:
+                                                  TextInputType.number,
+                                              inputFormatters: <
+                                                  TextInputFormatter>[
+                                                FilteringTextInputFormatter
+                                                    .digitsOnly
                                               ],
-                                              textController: controller.jobRefCtrlr,
+                                              textController:
+                                                  controller.jobRefCtrlr,
                                             ),
                                           ],
                                         ),
@@ -328,13 +412,19 @@ class _AddGoodsOrdersWebState extends State<AddGoodsOrdersWeb> {
                                             Dimens.boxWidth10,
                                             SizedBox(
                                               child: DropdownWebStock(
-                                                width: MediaQuery.of(context).size.width / 5,
-                                                dropdownList: controller.unitCurrencyList,
-                                                isValueSelected:
-                                                    controller.isUnitCurrencySelected.value,
-                                                selectedValue:
-                                                    controller.selectedUnitCurrency.value,
-                                                onValueChanged: controller.onValueChanged,
+                                                width: MediaQuery.of(context)
+                                                        .size
+                                                        .width /
+                                                    5,
+                                                dropdownList:
+                                                    controller.unitCurrencyList,
+                                                isValueSelected: controller
+                                                    .isUnitCurrencySelected
+                                                    .value,
+                                                selectedValue: controller
+                                                    .selectedUnitCurrency.value,
+                                                onValueChanged:
+                                                    controller.onValueChanged,
                                               ),
                                             ),
                                           ],
@@ -356,8 +446,8 @@ class _AddGoodsOrdersWebState extends State<AddGoodsOrdersWeb> {
                             top: 130,
                             child: DatePickerWidget(
                               minDate: DateTime(DateTime.now().year),
-                              maxDate:
-                                  DateTime(DateTime.now().year, 13, 0), // last date of this year
+                              maxDate: DateTime(DateTime.now().year, 13,
+                                  0), // last date of this year
                               controller: DateRangePickerController(),
                               selectionChanges: (p0) {
                                 print('po valu ${p0.value.toString()}');
@@ -375,8 +465,8 @@ class _AddGoodsOrdersWebState extends State<AddGoodsOrdersWeb> {
                             top: 170,
                             child: DatePickerWidget(
                               minDate: DateTime(DateTime.now().year),
-                              maxDate:
-                                  DateTime(DateTime.now().year, 13, 0), // last date of this year
+                              maxDate: DateTime(DateTime.now().year, 13,
+                                  0), // last date of this year
                               controller: DateRangePickerController(),
                               selectionChanges: (p0) {
                                 print('po valu ${p0.value.toString()}');
@@ -394,14 +484,15 @@ class _AddGoodsOrdersWebState extends State<AddGoodsOrdersWeb> {
                             top: 200,
                             child: DatePickerWidget(
                               minDate: DateTime(DateTime.now().year),
-                              maxDate:
-                                  DateTime(DateTime.now().year, 13, 0), // last date of this year
+                              maxDate: DateTime(DateTime.now().year, 13,
+                                  0), // last date of this year
                               controller: DateRangePickerController(),
                               selectionChanges: (p0) {
                                 print('po valu ${p0.value.toString()}');
                                 controller.poDateDateTc.text =
                                     DateFormat('yyyy-MM-dd').format(p0.value);
-                                controller.openPODatePicker = !controller.openPODatePicker;
+                                controller.openPODatePicker =
+                                    !controller.openPODatePicker;
                                 controller.update(['stock_Mangement']);
                               },
                             ),
@@ -412,14 +503,15 @@ class _AddGoodsOrdersWebState extends State<AddGoodsOrdersWeb> {
                             top: 230,
                             child: DatePickerWidget(
                               minDate: DateTime(DateTime.now().year),
-                              maxDate:
-                                  DateTime(DateTime.now().year, 13, 0), // last date of this year
+                              maxDate: DateTime(DateTime.now().year, 13,
+                                  0), // last date of this year
                               controller: DateRangePickerController(),
                               selectionChanges: (p0) {
                                 print('po valu ${p0.value.toString()}');
                                 controller.receivedDateTc.text =
                                     DateFormat('yyyy-MM-dd').format(p0.value);
-                                controller.openReceivedPicker = !controller.openReceivedPicker;
+                                controller.openReceivedPicker =
+                                    !controller.openReceivedPicker;
                                 controller.update(['stock_Mangement']);
                               },
                             ),
@@ -759,11 +851,16 @@ class AddRowInGoodsOrder extends StatelessWidget {
                                       dropdownList: controller.assetList,
                                       selectedValue: mapData["value"],
                                       onValueChanged: (list, selectedValue) {
-                                        print('paifcghb:${controller.assetList}');
+                                        print(
+                                            'paifcghb:${controller.assetList}');
                                         print({selectedValue: selectedValue});
                                         mapData["value"] = selectedValue;
-                                        controller.dropdownMapperData[selectedValue] = list
-                                            .firstWhere((element) => element.name == selectedValue,
+                                        controller.dropdownMapperData[
+                                                selectedValue] =
+                                            list.firstWhere(
+                                                (element) =>
+                                                    element.name ==
+                                                    selectedValue,
                                                 orElse: null);
                                       },
                                     ),
@@ -793,7 +890,8 @@ class AddRowInGoodsOrder extends StatelessWidget {
                               )
                             : (mapData['key'] == "Paid_By")
                                 ? Padding(
-                                    padding: const EdgeInsets.only(left: 10, right: 10),
+                                    padding: const EdgeInsets.only(
+                                        left: 10, right: 10),
                                     child: DropdownWebStock(
                                       width: MediaQuery.of(context).size.width,
                                       dropdownList: controller.paid,
@@ -802,13 +900,18 @@ class AddRowInGoodsOrder extends StatelessWidget {
                                         print('paifcghb:${controller.paid}');
                                         print({selectedValue: selectedValue});
                                         mapData["value"] = selectedValue;
-                                        controller.paiddropdownMapperData[selectedValue] = list
-                                            .firstWhere((element) => element.name == selectedValue,
+                                        controller.paiddropdownMapperData[
+                                                selectedValue] =
+                                            list.firstWhere(
+                                                (element) =>
+                                                    element.name ==
+                                                    selectedValue,
                                                 orElse: null);
                                       },
                                     ),
                                   )
-                                : (mapData['key'] == "Order") || (mapData['key'] == "Cost")
+                                : (mapData['key'] == "Order") ||
+                                        (mapData['key'] == "Cost")
                                     ? Padding(
                                         padding: const EdgeInsets.only(
                                           left: 20,
@@ -830,16 +933,22 @@ class AddRowInGoodsOrder extends StatelessWidget {
                                                 ),
                                               ],
                                               color: ColorValues.whiteColor,
-                                              borderRadius: BorderRadius.circular(5),
+                                              borderRadius:
+                                                  BorderRadius.circular(5),
                                             ),
                                             child: LoginCustomTextfield(
-                                              keyboardType: TextInputType.number,
-                                              inputFormatters: <TextInputFormatter>[
-                                                FilteringTextInputFormatter.digitsOnly
+                                              keyboardType:
+                                                  TextInputType.number,
+                                              inputFormatters: <
+                                                  TextInputFormatter>[
+                                                FilteringTextInputFormatter
+                                                    .digitsOnly
                                               ],
                                               maxLine: 1,
-                                              textController: new TextEditingController(
-                                                  text: mapData["value"] ?? ''),
+                                              textController:
+                                                  new TextEditingController(
+                                                      text: mapData["value"] ??
+                                                          ''),
                                               onChanged: (txt) {
                                                 mapData["value"] = txt;
                                               },
@@ -934,13 +1043,14 @@ class AppBarGoodsOrder extends StatelessWidget {
             onTap: () {
               Get.back();
             },
-            child: Text(" / STOCK MANAGEMENT33", style: Styles.greyMediumLight12),
+            child: Text(" / STOCK MANAGEMENT", style: Styles.greyMediumLight12),
           ),
           GestureDetector(
               onTap: () {
                 Get.back();
               },
-              child: Text(" /  ADD GOODS ORDER DETAILS", style: Styles.greyMediumLight12)),
+              child: Text(" /  ADD GOODS ORDER DETAILS",
+                  style: Styles.greyMediumLight12)),
         ],
       ),
     );

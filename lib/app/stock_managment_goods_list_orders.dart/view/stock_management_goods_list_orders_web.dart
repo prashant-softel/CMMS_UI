@@ -782,38 +782,40 @@ class GoodsOrderListDataSource extends DataTableSource {
                             }
                           },
                         ),
-                        controller.goodsOrdersList
-                                    .firstWhere(
-                                      (e) => e?.id == GoodsOrderListDetails!.id,
-                                      orElse: () =>
-                                          GoodsOrdersListModel(id: 00),
-                                    )
-                                    ?.status ==
-                                307
-                            ? TableActionButton(
-                                color: ColorValues.approveColor,
-                                icon: Icons.shopping_cart,
-                                message: 'Receive GO',
-                                onPress: () {
-                                  int id = GoodsOrderListDetails?.id ?? 0;
-                                  if (id != 0) {
-                                    Get.toNamed(Routes.receiveGoodsOrders,
-                                        arguments: {'id': id, "type": 1});
-                                  }
-                                },
-                              )
-                            : TableActionButton(
-                                color: ColorValues.approveColor,
-                                icon: Icons.approval_rounded,
-                                message: 'Approve/Reject',
-                                onPress: () {
-                                  int id = GoodsOrderListDetails?.id ?? 0;
-                                  if (id != 0) {
-                                    Get.toNamed(Routes.viewGoodsOrders,
-                                        arguments: {'id': id, "type": 1});
-                                  }
-                                },
-                              )
+                        // controller.goodsOrdersList
+                        //             .firstWhere(
+                        //               (e) => e?.id == GoodsOrderListDetails!.id,
+                        //               orElse: () =>
+                        //                   GoodsOrdersListModel(id: 00),
+                        //             )
+                        //             ?.status ==
+                        //         307
+                        //     ?
+                        TableActionButton(
+                          color: ColorValues.approveColor,
+                          icon: Icons.shopping_cart,
+                          message: 'Receive GO',
+                          onPress: () {
+                            int id = GoodsOrderListDetails?.id ?? 0;
+                            if (id != 0) {
+                              Get.toNamed(Routes.receiveGoodsOrders,
+                                  arguments: {'id': id, "type": 1});
+                            }
+                          },
+                        ),
+                        // :
+                        TableActionButton(
+                          color: ColorValues.approveColor,
+                          icon: Icons.approval_rounded,
+                          message: 'Approve/Reject',
+                          onPress: () {
+                            int id = GoodsOrderListDetails?.id ?? 0;
+                            if (id != 0) {
+                              Get.toNamed(Routes.viewGoodsOrders,
+                                  arguments: {'id': id, "type": 1});
+                            }
+                          },
+                        )
 
                         // TableActionButton(
                         //   color: ColorValues.deleteColor,
