@@ -42,6 +42,7 @@ class SubmitItems {
     this.cost,
     this.ordered_qty,
     this.comment,
+    this.itemID,
   });
 
   // int? itemID;
@@ -49,17 +50,20 @@ class SubmitItems {
   int? cost;
   int? ordered_qty;
   String? comment;
+  int? itemID;
 
   factory SubmitItems.fromJson(Map<String, dynamic> json) => SubmitItems(
         // itemID: json["itemID"],
         assetItemID: json["assetItemID"],
+        itemID: json["itemID"],
+
         cost: json["cost"],
         ordered_qty: json["ordered_qty"],
         comment: json["comment"],
       );
 
   Map<String, dynamic> toJson() => {
-        // "itemID": itemID,
+        "itemID": itemID,
         "assetItemID": assetItemID,
         "cost": cost,
         "ordered_qty": ordered_qty,

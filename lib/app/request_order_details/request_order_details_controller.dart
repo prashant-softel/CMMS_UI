@@ -75,7 +75,12 @@ class GoodsOrdersReqDetailController extends GetxController {
 
   void addRowItem() {
     rowItem.value.add([
-      {"key": "Drop_down", "value": 'Please Select', "id": ''},
+      {
+        "key": "Drop_down",
+        "value": 'Please Select',
+        "assetItemID": '',
+        "id": ''
+      },
       {'key': "Cost", "value": ''},
       {'key': "Order", "value": ''},
       {'key': "Comment", "value": ''},
@@ -102,7 +107,8 @@ class GoodsOrdersReqDetailController extends GetxController {
             {
               "key": "Drop_down",
               "value": '${element.asset_name}',
-              'id': '${element.assetItemID}'
+              'assetItemID': '${element.assetItemID}',
+              'itemID': '${element.itemID}'
             },
             // {'key': "Paid_By", "value": '${element.assetItem_Name}'},
             {'key': "Cost", "value": '${element.cost}'},
@@ -119,6 +125,7 @@ class GoodsOrdersReqDetailController extends GetxController {
     List<SubmitItems> items = [];
     rowItem.value.forEach((element) {
       SubmitItems item = SubmitItems(
+          itemID: 0,
           assetItemID: dropdownMapperData[element[0]["value"]]?.id,
           cost: int.tryParse(element[1]["value"] ?? '0'),
           ordered_qty: int.tryParse(element[2]["value"] ?? '0'),
@@ -153,7 +160,8 @@ class GoodsOrdersReqDetailController extends GetxController {
     List<SubmitItems> items = [];
     rowItem.value.forEach((element) {
       SubmitItems item = SubmitItems(
-          assetItemID: int.tryParse('${element[0]["id"]}'),
+          itemID: int.tryParse('${element[0]["itemID"]}'),
+          assetItemID: int.tryParse('${element[0]["assetItemID"]}'),
           cost: int.tryParse(element[1]["value"] ?? '0'),
           ordered_qty: int.tryParse(element[2]["value"] ?? '0'),
           comment: element[3]["value"] ?? '0');
