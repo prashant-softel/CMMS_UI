@@ -425,74 +425,74 @@ class _StockManagementGoodsOrdersWebState
                                 //     ),
                                 //   ),
 
-                                Padding(
-                                  padding: const EdgeInsets.symmetric(
-                                      horizontal: 25),
-                                  child: ValueListenableBuilder(
-                                      valueListenable:
-                                          controller.paginationController,
-                                      builder: (context, value, child) {
-                                        return Row(children: [
-                                          Text(
-                                              "${controller.paginationController.currentPage}  of ${controller.paginationController.pageCount}"),
-                                          Row(children: [
-                                            IconButton(
-                                              onPressed: controller
-                                                          .paginationController
-                                                          .currentPage <=
-                                                      1
-                                                  ? null
-                                                  : () {
-                                                      controller
-                                                          .paginationController
-                                                          .previous();
-                                                    },
-                                              iconSize: 20,
-                                              splashRadius: 20,
-                                              icon: Icon(
-                                                Icons
-                                                    .arrow_back_ios_new_rounded,
-                                                color: controller
-                                                            .paginationController
-                                                            .currentPage <=
-                                                        1
-                                                    ? Colors.black26
-                                                    : Theme.of(context)
-                                                        .primaryColor,
-                                              ),
-                                            ),
-                                            IconButton(
-                                              onPressed: controller
-                                                          .paginationController
-                                                          .currentPage >=
-                                                      controller
-                                                          .paginationController
-                                                          .pageCount
-                                                  ? null
-                                                  : () {
-                                                      controller
-                                                          .paginationController
-                                                          .next();
-                                                    },
-                                              iconSize: 20,
-                                              splashRadius: 20,
-                                              icon: Icon(
-                                                Icons.arrow_forward_ios_rounded,
-                                                color: controller
-                                                            .paginationController
-                                                            .currentPage >=
-                                                        controller
-                                                            .paginationController
-                                                            .pageCount
-                                                    ? Colors.black26
-                                                    : Theme.of(context)
-                                                        .primaryColor,
-                                              ),
-                                            ),
-                                          ]),
-                                        ]);
-                                      }),
-                                ),
+                                // Padding(
+                                //   padding: const EdgeInsets.symmetric(
+                                //       horizontal: 25),
+                                //   child: ValueListenableBuilder(
+                                //       valueListenable:
+                                //           controller.paginationController,
+                                //       builder: (context, value, child) {
+                                //         return Row(children: [
+                                //           Text(
+                                //               "${controller.paginationController.currentPage}  of ${controller.paginationController.pageCount}"),
+                                //           Row(children: [
+                                //             IconButton(
+                                //               onPressed: controller
+                                //                           .paginationController
+                                //                           .currentPage <=
+                                //                       1
+                                //                   ? null
+                                //                   : () {
+                                //                       controller
+                                //                           .paginationController
+                                //                           .previous();
+                                //                     },
+                                //               iconSize: 20,
+                                //               splashRadius: 20,
+                                //               icon: Icon(
+                                //                 Icons
+                                //                     .arrow_back_ios_new_rounded,
+                                //                 color: controller
+                                //                             .paginationController
+                                //                             .currentPage <=
+                                //                         1
+                                //                     ? Colors.black26
+                                //                     : Theme.of(context)
+                                //                         .primaryColor,
+                                //               ),
+                                //             ),
+                                //             IconButton(
+                                //               onPressed: controller
+                                //                           .paginationController
+                                //                           .currentPage >=
+                                //                       controller
+                                //                           .paginationController
+                                //                           .pageCount
+                                //                   ? null
+                                //                   : () {
+                                //                       controller
+                                //                           .paginationController
+                                //                           .next();
+                                //                     },
+                                //               iconSize: 20,
+                                //               splashRadius: 20,
+                                //               icon: Icon(
+                                //                 Icons.arrow_forward_ios_rounded,
+                                //                 color: controller
+                                //                             .paginationController
+                                //                             .currentPage >=
+                                //                         controller
+                                //                             .paginationController
+                                //                             .pageCount
+                                //                     ? Colors.black26
+                                //                     : Theme.of(context)
+                                //                         .primaryColor,
+                                //               ),
+                                //             ),
+                                //           ]),
+                                //         ]);
+                                //       }),
+                                // ),
                               ],
                             ),
                           ),
@@ -697,15 +697,25 @@ class GoodsOrderListDataSource extends DataTableSource {
                           padding: Dimens.edgeInsets8_2_8_2,
                           decoration: BoxDecoration(
                             color: controller.goodsOrdersList
-                                        .firstWhere(
-                                          (e) =>
-                                              e?.id ==
-                                              GoodsOrderListDetails!.id,
-                                          orElse: () =>
-                                              GoodsOrdersListModel(id: 00),
-                                        )
-                                        ?.status ==
-                                    306
+                                            .firstWhere(
+                                              (e) =>
+                                                  e?.id ==
+                                                  GoodsOrderListDetails!.id,
+                                              orElse: () =>
+                                                  GoodsOrdersListModel(id: 00),
+                                            )
+                                            ?.status ==
+                                        305 ||
+                                    controller.goodsOrdersList
+                                            .firstWhere(
+                                              (e) =>
+                                                  e?.id ==
+                                                  GoodsOrderListDetails!.id,
+                                              orElse: () =>
+                                                  GoodsOrdersListModel(id: 00),
+                                            )
+                                            ?.status ==
+                                        306
                                 ? ColorValues.rejectedStatusColor
                                 : controller.goodsOrdersList
                                             .firstWhere(
@@ -728,20 +738,32 @@ class GoodsOrderListDataSource extends DataTableSource {
                                                           id: 00),
                                                 )
                                                 ?.status ==
-                                            305
+                                            304
                                         ? ColorValues.closeColor
                                         : controller.goodsOrdersList
-                                                    .firstWhere(
-                                                      (e) =>
-                                                          e?.id ==
-                                                          GoodsOrderListDetails!
-                                                              .id,
-                                                      orElse: () =>
-                                                          GoodsOrdersListModel(
-                                                              id: 00),
-                                                    )
-                                                    ?.status ==
-                                                307
+                                                        .firstWhere(
+                                                          (e) =>
+                                                              e?.id ==
+                                                              GoodsOrderListDetails!
+                                                                  .id,
+                                                          orElse: () =>
+                                                              GoodsOrdersListModel(
+                                                                  id: 00),
+                                                        )
+                                                        ?.status ==
+                                                    306 ||
+                                                controller.goodsOrdersList
+                                                        .firstWhere(
+                                                          (e) =>
+                                                              e?.id ==
+                                                              GoodsOrderListDetails!
+                                                                  .id,
+                                                          orElse: () =>
+                                                              GoodsOrdersListModel(
+                                                                  id: 00),
+                                                        )
+                                                        ?.status ==
+                                                    310
                                             ? ColorValues.approveColor
                                             : ColorValues.addNewColor,
                             borderRadius: BorderRadius.circular(4),
@@ -782,40 +804,74 @@ class GoodsOrderListDataSource extends DataTableSource {
                             }
                           },
                         ),
-                        // controller.goodsOrdersList
-                        //             .firstWhere(
-                        //               (e) => e?.id == GoodsOrderListDetails!.id,
-                        //               orElse: () =>
-                        //                   GoodsOrdersListModel(id: 00),
-                        //             )
-                        //             ?.status ==
-                        //         307
-                        //     ?
-                        TableActionButton(
-                          color: ColorValues.approveColor,
-                          icon: Icons.shopping_cart,
-                          message: 'Receive GO',
-                          onPress: () {
-                            int id = GoodsOrderListDetails?.id ?? 0;
-                            if (id != 0) {
-                              Get.toNamed(Routes.receiveGoodsOrders,
-                                  arguments: {'id': id, "type": 1});
-                            }
-                          },
-                        ),
+                        controller.goodsOrdersList
+                                        .firstWhere(
+                                          (e) =>
+                                              e?.id ==
+                                              GoodsOrderListDetails!.id,
+                                          orElse: () =>
+                                              GoodsOrdersListModel(id: 00),
+                                        )
+                                        ?.status ==
+                                    306 ||
+                                controller.goodsOrdersList
+                                        .firstWhere(
+                                          (e) =>
+                                              e?.id ==
+                                              GoodsOrderListDetails!.id,
+                                          orElse: () =>
+                                              GoodsOrdersListModel(id: 00),
+                                        )
+                                        ?.status ==
+                                    307
+                            ? TableActionButton(
+                                color: ColorValues.approveColor,
+                                icon: Icons.shopping_cart,
+                                message: 'Receive GO',
+                                onPress: () {
+                                  int id = GoodsOrderListDetails?.id ?? 0;
+                                  if (id != 0) {
+                                    Get.toNamed(Routes.receiveGoodsOrders,
+                                        arguments: {'id': id, "type": 1});
+                                  }
+                                },
+                              )
+                            : Dimens.box0,
+                        // TableActionButton(
+                        //   color: ColorValues.approveColor,
+                        //   icon: Icons.approval_outlined,
+                        //   message: 'Approve/Reject GO Receive',
+                        //   onPress: () {
+                        //     int id = GoodsOrderListDetails?.id ?? 0;
+                        //     if (id != 0) {
+                        //       Get.toNamed(Routes.receiveGoodsOrders,
+                        //           arguments: {'id': id, "type": 1});
+                        //     }
+                        //   },
+                        // ),
+                        //   : Dimens.box0,
                         // :
-                        TableActionButton(
-                          color: ColorValues.approveColor,
-                          icon: Icons.approval_rounded,
-                          message: 'Approve/Reject',
-                          onPress: () {
-                            int id = GoodsOrderListDetails?.id ?? 0;
-                            if (id != 0) {
-                              Get.toNamed(Routes.viewGoodsOrders,
-                                  arguments: {'id': id, "type": 1});
-                            }
-                          },
-                        )
+                        controller.goodsOrdersList
+                                    .firstWhere(
+                                      (e) => e?.id == GoodsOrderListDetails!.id,
+                                      orElse: () =>
+                                          GoodsOrdersListModel(id: 00),
+                                    )
+                                    ?.status ==
+                                302
+                            ? TableActionButton(
+                                color: ColorValues.approveColor,
+                                icon: Icons.approval_rounded,
+                                message: 'Approve/Reject GO',
+                                onPress: () {
+                                  int id = GoodsOrderListDetails?.id ?? 0;
+                                  if (id != 0) {
+                                    Get.toNamed(Routes.viewGoodsOrders,
+                                        arguments: {'id': id, "type": 1});
+                                  }
+                                },
+                              )
+                            : Dimens.box0
 
                         // TableActionButton(
                         //   color: ColorValues.deleteColor,

@@ -56,6 +56,24 @@ class ReceiveGoodsOrdersUsecase {
         createGo,
         isLoading,
       );
+  Future<Map<String, dynamic>> approveGOReceiveButton({
+    goodsOrderApproveJsonString,
+    bool? isLoading,
+  }) async =>
+      await _repository.approveGOReceiveButton(
+        goodsOrderApproveJsonString,
+        isLoading,
+      );
+
+  Future<Map<String, dynamic>> rejectGOReceiveButton({
+    goodsOrderApproveJsonString,
+    bool? isLoading,
+  }) async =>
+      await _repository.rejectGOReceiveButton(
+        goodsOrderApproveJsonString,
+        isLoading,
+      );
+
   Future<Map<String, dynamic>> updateGOReceive({
     createGo,
     bool? isLoading,
