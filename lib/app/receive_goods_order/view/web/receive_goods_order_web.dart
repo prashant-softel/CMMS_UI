@@ -840,22 +840,22 @@ class _ReceiveGoodsOrderWebState extends State<ReceiveGoodsOrderWeb> {
 
                 // controller.getPurchaseDetailsByIDModel.value?.status == 307
                 //     ?
-                Container(
-                  height: 40,
-                  child: CustomElevatedButton(
-                    backgroundColor: Color(0xff77cae7),
-                    text: 'Save as Draft',
-                    onPressed: () {
-                      // controller.AddInventory();
-                    },
-                  ),
-                ),
+                // Container(
+                //   height: 40,
+                //   child: CustomElevatedButton(
+                //     backgroundColor: Color(0xff77cae7),
+                //     text: 'Save as Draft',
+                //     onPressed: () {
+                //       // controller.AddInventory();
+                //     },
+                //   ),
+                // ),
                 Dimens.boxWidth15,
                 Container(
                   height: 40,
                   child: CustomElevatedButton(
                     backgroundColor: ColorValues.submitColor,
-                    text: 'Update for Approval',
+                    text: 'Update Go Receive',
                     onPressed: () {
                       controller.updateGOReceive();
                     },
