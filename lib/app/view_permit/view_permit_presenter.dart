@@ -8,6 +8,7 @@ import 'package:cmms/domain/models/inventory_detail_model.dart';
 import 'package:cmms/domain/models/inventory_model.dart';
 import 'package:cmms/domain/models/job_type_list_model.dart';
 import 'package:cmms/domain/models/new_permit_details_model.dart';
+import 'package:cmms/domain/models/permit_cancel_condition_list.dart';
 import 'package:cmms/domain/models/safety_measure_list_model.dart';
 import 'package:cmms/domain/models/sop_list_model.dart';
 import 'package:cmms/domain/models/type_permit_model.dart';
@@ -77,16 +78,28 @@ class ViewPermitPresenter {
     return true;
   }
 
-  Future<void> permitCancelRequestButton({
-    String? comment,
-    String? id,
-    bool? isLoading,
-  }) async =>
-      await viewPermitUsecase.permitCancelRequestButton(
-        comment: comment,
-        id: id,
-        isLoading: isLoading ?? false,
+  // Future<void> permitCancelRequestButton({
+  //   // String? comment,
+  //   // String? id,
+  //   cancelPermitJsonString
+  //   bool? isLoading,
+  // }) async =>
+  //     await viewPermitUsecase.permitCancelRequestButton(
+  //       // comment: comment,
+  //       // id: id,
+  //       isLoading: isLoading ?? false,
+  //     );
+
+  Future<Map<String, dynamic>?> permitCancelRequestButton({
+   cancelPermitJsonString,
+  required bool isLoading,
+    
+  }) async {
+     return viewPermitUsecase.permitCancelRequestButton(
+        cancelPermitJsonString: cancelPermitJsonString,
+      isLoading: isLoading,
       );
+  }
 
 
 
@@ -145,6 +158,16 @@ class ViewPermitPresenter {
     return viewPermitUsecase.getSafetyMeasureList(
       isLoading: isLoading,
       permit_type_id: permit_type_id,
+    );
+  }
+
+  Future<List<PermitCancelListModel>> getPermitConditionList({
+    required bool isLoading,
+    required int? isCancle,
+  }) async {
+    return viewPermitUsecase.getPermitConditionList(
+      isLoading: isLoading,
+      isCancle: isCancle,
     );
   }
 

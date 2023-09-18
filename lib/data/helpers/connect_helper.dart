@@ -488,6 +488,24 @@ class ConnectHelper {
     return responseModel;
   }
 
+///Permit Condition List
+   Future<ResponseModel> getPermitConditionList(
+      {required bool isLoading,
+      required String auth,
+      int? isCancle}) async {
+    ResponseModel responseModel = await apiWrapper.makeRequest(
+      'Permit/GetPermitConditionList?isCancle=$isCancle',
+      Request.getMultiparts,
+      null,
+      isLoading,
+      {
+        'Authorization': 'Bearer $auth',
+      },
+    );
+    return responseModel;
+  }
+
+
   Future<ResponseModel> getWarrantyClaimList({
     required bool isLoading,
     required String auth,
@@ -930,17 +948,18 @@ class ConnectHelper {
 
   Future<ResponseModel> permitCancelRequestButton({
     required String auth,
+    cancelPermitJsonString,
     bool? isLoading,
-    String? comment,
-    String? id,
   }) async {
     // facilityId = 45;
     var responseModel = await apiWrapper.makeRequest(
       'Permit/PermitCancelRequest',
       Request.put,
-      {'comment': "$comment", 'id': id},
-      isLoading ?? true,
+      // {'comment': "$comment", 'id': id},
+      cancelPermitJsonString,
+      isLoading ?? false,
       {
+        'Content-Type': 'application/json',
         'Authorization': 'Bearer $auth',
       },
     );

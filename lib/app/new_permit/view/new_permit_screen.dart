@@ -1840,17 +1840,17 @@ class NewPermitScreen extends GetView<NewPermitController> {
                                                       // ),
 
                                                       //// Permit Reference
-                                                      Padding(
-                                                        padding: const EdgeInsets.only(left: 30),
-                                                        child: Row(
-                                                          children: [
-                                                            CustomRichText(title: 'Permit Ref. No: '),
-                                                            Expanded(
-                                                              child: _buildWorkPermitReferenceTextField_web(context),
-                                                            ),
-                                                          ],
-                                                        ),
-                                                      ),
+                                                      // Padding(
+                                                      //   padding: const EdgeInsets.only(left: 30),
+                                                      //   child: Row(
+                                                      //     children: [
+                                                      //       CustomRichText(title: 'Permit Ref. No: '),
+                                                      //       Expanded(
+                                                      //         child: _buildWorkPermitReferenceTextField_web(context),
+                                                      //       ),
+                                                      //     ],
+                                                      //   ),
+                                                      // ),
                                                       Padding(
                                                         padding: const EdgeInsets.only(left: 17),
                                                         child: Row(

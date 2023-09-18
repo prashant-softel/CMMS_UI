@@ -8,6 +8,7 @@ import 'package:cmms/app/navigators/navigators.dart';
 import 'package:cmms/app/view_permit/view_permit_presenter.dart';
 import 'package:cmms/app/widgets/create_permit_dialog.dart';
 import 'package:cmms/domain/models/block_model.dart';
+import 'package:cmms/domain/models/cancel_permit_request_model.dart';
 import 'package:cmms/domain/models/employee_list_model.dart';
 import 'package:cmms/domain/models/employee_list_model2.dart';
 import 'package:cmms/domain/models/employee_model.dart';
@@ -15,6 +16,7 @@ import 'package:cmms/domain/models/history_model.dart';
 import 'package:cmms/domain/models/inventory_detail_model.dart';
 import 'package:cmms/domain/models/job_type_list_model.dart';
 import 'package:cmms/domain/models/new_permit_details_model.dart';
+import 'package:cmms/domain/models/permit_cancel_condition_list.dart';
 import 'package:cmms/domain/models/safety_measure_list_model.dart';
 import 'package:cmms/domain/models/sop_list_model.dart';
 import 'package:flutter/material.dart';
@@ -273,6 +275,10 @@ class ViewPermitController extends GetxController {
   int selectedSafetyMeasureId = 0;
   SafetyMeasureListModel? safetyMeasureListModel;
 
+//Permit Cancel Condition
+  RxList<PermitCancelListModel?>? permitCancelConditionList =
+      <PermitCancelListModel?>[].obs;
+
   PaginationController equipmentNamepaginationController = PaginationController(
     rowCount: 0,
     rowsPerPage: 10,
@@ -321,15 +327,27 @@ class ViewPermitController extends GetxController {
   }
 
    RxBool isCheckedRequire6 = false.obs;
-  void requiretoggleCheckbox6() {
-    isCheckedRequire6.value =
-        !isCheckedRequire6.value; // Toggle the checkbox state
+   RxInt intValue6 = 0.obs;
+  void requiretoggleCheckbox6(bool value) {
+    
+    isCheckedRequire6.value = value;
+    if(value){
+      intValue6.value = 6;
+    }else{
+      intValue6.value = 0;
+    }
+    // isCheckedRequire6.value = 
+    //     !isCheckedRequire6.value; // Toggle the checkbox state
   }
 
    RxBool isCheckedRequire7 = false.obs;
-  void requiretoggleCheckbox7() {
+   RxInt intValue7 = 0.obs;
+  void requiretoggleCheckbox7(bool value) {
     isCheckedRequire7.value =
         !isCheckedRequire7.value; // Toggle the checkbox state
+    if(value){
+
+    }
   }
 
    RxBool isCheckedRequire8 = false.obs;
@@ -372,7 +390,7 @@ class ViewPermitController extends GetxController {
 
   Map<dynamic, dynamic> employee_map = {};
   Map<int, dynamic> loto_map = {};
-
+  int? isCancle = 1;
   int? permitId = 0;
   int? jobId = 0;
   Map<String, dynamic> data = {};
@@ -425,6 +443,7 @@ class ViewPermitController extends GetxController {
 
     await getSafetyMeasureList();
     await getPermitHistory(permitId: permitId!);
+    await getPermitConditionList(isCancle: isCancle!);
 
     super.onInit();
   }
@@ -474,16 +493,39 @@ class ViewPermitController extends GetxController {
 
 
   Future<void> permitCancelRequestButton({String? permitId}) async {
-    String _cancelComment = cancelCommentRequestTextFieldCtrlr.text.trim();
+    // String _cancelComment = cancelCommentRequestTextFieldCtrlr.text.trim();
 
-    final _permitCancelRequestBtn =
-        await viewPermitPresenter.permitCancelRequestButton(
-      comment: _cancelComment,
-      id: permitId,
-    );
-    // showAlertPermitApproveDialog();
-    print('Cancel Request Button Data:${_cancelComment}');
-    print('Cancel Request Button Data:${permitId}');
+    // final _permitCancelRequestBtn =
+    //     await viewPermitPresenter.permitCancelRequestButton(
+    //   comment: _cancelComment,
+    //   id: permitId,
+    // );
+    // // showAlertPermitApproveDialog();
+    // print('Cancel Request Button Data:${_cancelComment}');
+    // print('Cancel Request Button Data:${permitId}');
+     {
+      String _cancelComment = cancelCommentRequestTextFieldCtrlr.text.trim();
+
+      CancelPermitRequestModel cancelPermitModel =
+          CancelPermitRequestModel(
+            id: int.tryParse('${permitId}'), 
+            comment: _cancelComment,
+            conditionIds:[4,6],
+            fileId:125
+
+            );
+
+      var cancelPermitJsonString = cancelPermitModel.toJson();
+      // print({"rejectCalibrationJsonString", approveCalibrationtoJsonString});
+      Map<String, dynamic>? response = await viewPermitPresenter.permitCancelRequestButton(
+        cancelPermitJsonString: cancelPermitJsonString,
+        isLoading: true,
+      );
+      print('cancelPermitRequest:$cancelPermitJsonString');
+      if (response == true) {
+        //getCalibrationList(facilityId, true);
+      }
+    }
   }
 
   Future<void> permitExtendButton({String? permitId}) async {
@@ -579,6 +621,30 @@ class ViewPermitController extends GetxController {
       // // print('EmployeeList:${listEmployee}');
     }
   }
+
+  
+   Future<void> getPermitConditionList({required int isCancle}) async {
+    permitCancelConditionList!.value = <PermitCancelListModel>[];
+    final _permitCancelConditionList = await viewPermitPresenter.getPermitConditionList(
+      isLoading: true,
+      // categoryIds: categoryIds,
+      isCancle: 1,
+      // job_type_id: 36,
+    );
+    print('Permit condition List${_permitCancelConditionList}');
+    if (_permitCancelConditionList != null) {
+      for (var permitCancelCondition_list in _permitCancelConditionList) {
+        permitCancelConditionList!.add(permitCancelCondition_list);
+      }
+    }
+    // supplierNameList = _supplierNameList;
+    // employeeNamepaginationController = PaginationController(
+    //   rowCount: employeeNameList.length,
+    //   rowsPerPage: 10,
+    // );
+    update(['permit_condition_list']);
+  }
+
 
   Future<void> getSafetyMeasureList() async {
     safetyMeasureList.value = <SafetyMeasureListModel>[];

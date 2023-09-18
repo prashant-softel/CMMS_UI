@@ -50,21 +50,18 @@ class PermitExtendDialog extends GetView {
                 Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    
                     Container(
                       margin: Dimens.edgeInsets20,
-                     
                       width: MediaQuery.of(context).size.width / 1,
                       child: Column(
                         mainAxisAlignment: MainAxisAlignment.start,
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          
                           Text(
                             StringConstants.extendPermitText,
                             style: Styles.black17,
                           ),
-                          
+
                           Row(
                             mainAxisAlignment: MainAxisAlignment.start,
                             crossAxisAlignment: CrossAxisAlignment.start,
@@ -79,7 +76,7 @@ class PermitExtendDialog extends GetView {
                               )
                             ],
                           ),
-                          
+
                           Row(
                             mainAxisAlignment: MainAxisAlignment.start,
                             crossAxisAlignment: CrossAxisAlignment.start,
@@ -94,7 +91,7 @@ class PermitExtendDialog extends GetView {
                               )
                             ],
                           ),
-                          
+
                           //  Dimens.boxHeight20,
                           Padding(
                             padding: const EdgeInsets.only(left: 10),
@@ -180,13 +177,10 @@ class PermitExtendDialog extends GetView {
                                         style: Styles.black17,
                                       ),
                                       Dimens.boxWidth5,
-                                      SizedBox(
-                                        width: 130,
-                                        child: CustomTextFieldForPermit())
-                                      
+                                      SizedBox(width: 130, child: CustomTextFieldForPermit())
                                     ],
                                   ),
-                                  
+
                                   // CustomTextField(
                                   //   label: 'Extend Remark',
                                   // )
@@ -201,7 +195,7 @@ class PermitExtendDialog extends GetView {
                                   //   style: Styles.black17,
                                   // ),
                                   Obx(
-                                    ()=> Row(
+                                    () => Row(
                                       // mainAxisAlignment: MainAxisAlignment.center,
                                       children: [
                                         Container(
@@ -266,7 +260,7 @@ class PermitExtendDialog extends GetView {
                                                 )
                                                     .then((value) {
                                                   controller.isSuccessDialog();
-                                                
+
                                                   // Fluttertoast.showToast(
                                                   //     msg: "file upload  Successfully",
                                                   //     fontSize: 16.0);
@@ -274,7 +268,7 @@ class PermitExtendDialog extends GetView {
                                               } else {
                                                 Fluttertoast.showToast(msg: "Please Select file...", fontSize: 16.0);
                                               }
-                                                
+
                                               //  controller.savePmMapping();
                                             },
                                           ),
@@ -334,7 +328,7 @@ class PermitExtendDialog extends GetView {
                 // Row(
                 //     mainAxisAlignment: MainAxisAlignment.center,
                 //     children: [
-            
+
                 //       Dimens.boxWidth10,
                 //       ElevatedButton(
                 //         style: Styles.greenElevatedButtonStyle,
@@ -385,53 +379,20 @@ class PermitExtendDialog extends GetView {
 
   checkBoxInstructionMethod(int position) {
     return Obx(
-      ()=> Checkbox(
+      () => Checkbox(
         value: position == 0
             ? controller.isCheckedRequire.value
             : position == 1
                 ? controller.isCheckedRequire1.value
-                : position == 2
-                    ? controller.isCheckedRequire2.value
-                    : position == 3
-                        ? controller.isCheckedRequire3.value
-                        : position == 4
-                            ? controller.isCheckedRequire4.value
-                            : position == 5
-                                ? controller.isCheckedRequire5.value
-                                : position == 6
-                                    ? controller.isCheckedRequire6.value
-                                    : position == 7
-                                        ? controller.isCheckedRequire7.value
-                                        : position == 8
-                                            ? controller.isCheckedRequire8.value
-                                            : position == 9
-                                                ? controller.isCheckedRequire9.value
-                                                : null,
+                : null,
         onChanged: (bool? value) {
           position == 0
               ? controller.requiretoggleCheckbox()
               : position == 1
                   ? controller.requiretoggleCheckbox1()
-                  : position == 2
-                      ? controller.requiretoggleCheckbox2()
-                      : position == 3
-                          ? controller.requiretoggleCheckbox3()
-                          : position == 4
-                              ? controller.requiretoggleCheckbox4()
-                              : position == 5
-                                  ? controller.requiretoggleCheckbox5()
-                                  : position == 6
-                                      ? controller.requiretoggleCheckbox6()
-                                      : position == 7
-                                          ? controller.requiretoggleCheckbox7()
-                                          : position == 8
-                                              ? controller.requiretoggleCheckbox8()
-                                              : position == 9
-                                                  ? controller.requiretoggleCheckbox9()
-                                                  : null;
+                  : null;
         },
       ),
     );
   }
-
 }
