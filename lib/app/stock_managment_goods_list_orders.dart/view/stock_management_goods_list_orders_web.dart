@@ -697,26 +697,16 @@ class GoodsOrderListDataSource extends DataTableSource {
                           padding: Dimens.edgeInsets8_2_8_2,
                           decoration: BoxDecoration(
                             color: controller.goodsOrdersList
-                                            .firstWhere(
-                                              (e) =>
-                                                  e?.id ==
-                                                  GoodsOrderListDetails!.id,
-                                              orElse: () =>
-                                                  GoodsOrdersListModel(id: 00),
-                                            )
-                                            ?.status ==
-                                        305 ||
-                                    controller.goodsOrdersList
-                                            .firstWhere(
-                                              (e) =>
-                                                  e?.id ==
-                                                  GoodsOrderListDetails!.id,
-                                              orElse: () =>
-                                                  GoodsOrdersListModel(id: 00),
-                                            )
-                                            ?.status ==
-                                        306
-                                ? ColorValues.rejectedStatusColor
+                                        .firstWhere(
+                                          (e) =>
+                                              e?.id ==
+                                              GoodsOrderListDetails!.id,
+                                          orElse: () =>
+                                              GoodsOrdersListModel(id: 00),
+                                        )
+                                        ?.status ==
+                                    302
+                                ? ColorValues.submitColor
                                 : controller.goodsOrdersList
                                             .firstWhere(
                                               (e) =>
@@ -726,8 +716,8 @@ class GoodsOrderListDataSource extends DataTableSource {
                                                   GoodsOrdersListModel(id: 00),
                                             )
                                             ?.status ==
-                                        301
-                                    ? ColorValues.submitColor
+                                        304
+                                    ? ColorValues.closeColor
                                     : controller.goodsOrdersList
                                                 .firstWhere(
                                                   (e) =>
@@ -738,9 +728,22 @@ class GoodsOrderListDataSource extends DataTableSource {
                                                           id: 00),
                                                 )
                                                 ?.status ==
-                                            304
-                                        ? ColorValues.closeColor
+                                            305
+                                        ? ColorValues.rejectColor
                                         : controller.goodsOrdersList
+                                                    .firstWhere(
+                                                      (e) =>
+                                                          e?.id ==
+                                                          GoodsOrderListDetails!
+                                                              .id,
+                                                      orElse: () =>
+                                                          GoodsOrdersListModel(
+                                                              id: 00),
+                                                    )
+                                                    ?.status ==
+                                                306
+                                            ? ColorValues.approveStatusColor
+                                            : controller.goodsOrdersList
                                                         .firstWhere(
                                                           (e) =>
                                                               e?.id ==
@@ -751,21 +754,66 @@ class GoodsOrderListDataSource extends DataTableSource {
                                                                   id: 00),
                                                         )
                                                         ?.status ==
-                                                    306 ||
-                                                controller.goodsOrdersList
-                                                        .firstWhere(
-                                                          (e) =>
-                                                              e?.id ==
-                                                              GoodsOrderListDetails!
-                                                                  .id,
-                                                          orElse: () =>
-                                                              GoodsOrdersListModel(
-                                                                  id: 00),
-                                                        )
-                                                        ?.status ==
-                                                    310
-                                            ? ColorValues.approveColor
-                                            : ColorValues.addNewColor,
+                                                    308
+                                                ? Color.fromARGB(
+                                                    255, 44, 230, 230)
+                                                : controller.goodsOrdersList
+                                                            .firstWhere(
+                                                              (e) =>
+                                                                  e?.id ==
+                                                                  GoodsOrderListDetails!
+                                                                      .id,
+                                                              orElse: () =>
+                                                                  GoodsOrdersListModel(
+                                                                      id: 00),
+                                                            )
+                                                            ?.status ==
+                                                        304
+                                                    ? ColorValues.closeColor
+                                                    : controller.goodsOrdersList
+                                                                .firstWhere(
+                                                                  (e) =>
+                                                                      e?.id ==
+                                                                      GoodsOrderListDetails!
+                                                                          .id,
+                                                                  orElse: () =>
+                                                                      GoodsOrdersListModel(
+                                                                          id: 00),
+                                                                )
+                                                                ?.status ==
+                                                            309
+                                                        ? ColorValues
+                                                            .rejectColor
+                                                        : controller
+                                                                    .goodsOrdersList
+                                                                    .firstWhere(
+                                                                      (e) =>
+                                                                          e?.id ==
+                                                                          GoodsOrderListDetails!
+                                                                              .id,
+                                                                      orElse: () =>
+                                                                          GoodsOrdersListModel(
+                                                                              id: 00),
+                                                                    )
+                                                                    ?.status ==
+                                                                310
+                                                            ? ColorValues
+                                                                .greenColor
+                                                            : controller
+                                                                        .goodsOrdersList
+                                                                        .firstWhere(
+                                                                          (e) =>
+                                                                              e?.id ==
+                                                                              GoodsOrderListDetails!.id,
+                                                                          orElse: () =>
+                                                                              GoodsOrdersListModel(id: 00),
+                                                                        )
+                                                                        ?.status ==
+                                                                    301
+                                                                ? ColorValues
+                                                                    .approveColor
+                                                                : ColorValues
+                                                                    .addNewColor,
                             borderRadius: BorderRadius.circular(4),
                           ),
                           child: Text(
