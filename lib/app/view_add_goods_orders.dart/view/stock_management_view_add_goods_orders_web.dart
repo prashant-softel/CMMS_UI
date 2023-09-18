@@ -1,4 +1,6 @@
 import 'package:cmms/app/app.dart';
+import 'package:cmms/app/constant/constant.dart';
+import 'package:cmms/app/utils/user_access_constants.dart';
 import 'package:cmms/app/view_add_goods_orders.dart/stock_management_view_add_goods_orders_controller.dart';
 import 'package:cmms/app/widgets/close_goods_order_dialog.dart';
 import 'package:cmms/app/widgets/custom_elevated_button.dart';
@@ -924,36 +926,59 @@ class _ViewAddGoodsOrdersWebState extends State<ViewAddGoodsOrdersWeb> {
                                   ? Row(
                                       children: [
                                         Spacer(),
-                                        Container(
-                                          height: 45,
-                                          child: CustomElevatedButton(
-                                            backgroundColor:
-                                                ColorValues.appGreenColor,
-                                            text: "Approve",
-                                            icon: Icons.add,
-                                            onPressed: () {
-                                              Get.dialog(
-                                                  GoodsOrderApprovedDialog(
-                                                id: controller.id,
-                                              ));
-                                            },
-                                          ),
-                                        ),
+                                        varUserAccessModel.value.access_list!
+                                                    .where((e) =>
+                                                        e.feature_id ==
+                                                            UserAccessConstants
+                                                                .kGoodsFeatureId &&
+                                                        e.approve ==
+                                                            UserAccessConstants
+                                                                .kHaveApproveAccess)
+                                                    .length >
+                                                0
+                                            ? Container(
+                                                height: 45,
+                                                child: CustomElevatedButton(
+                                                  backgroundColor:
+                                                      ColorValues.appGreenColor,
+                                                  text: "Approve",
+                                                  icon: Icons.add,
+                                                  onPressed: () {
+                                                    Get.dialog(
+                                                        GoodsOrderApprovedDialog(
+                                                      id: controller.id,
+                                                    ));
+                                                  },
+                                                ),
+                                              )
+                                            : Dimens.box0,
                                         Dimens.boxWidth10,
-                                        Container(
-                                          height: 45,
-                                          child: CustomElevatedButton(
-                                            backgroundColor:
-                                                ColorValues.rejectColor,
-                                            text: "Reject",
-                                            icon: Icons.close,
-                                            onPressed: () {
-                                              Get.dialog(GoodsOrderRejectDialog(
-                                                id: controller.id,
-                                              ));
-                                            },
-                                          ),
-                                        ),
+                                        varUserAccessModel.value.access_list!
+                                                    .where((e) =>
+                                                        e.feature_id ==
+                                                            UserAccessConstants
+                                                                .kGoodsFeatureId &&
+                                                        e.approve ==
+                                                            UserAccessConstants
+                                                                .kHaveApproveAccess)
+                                                    .length >
+                                                0
+                                            ? Container(
+                                                height: 45,
+                                                child: CustomElevatedButton(
+                                                  backgroundColor:
+                                                      ColorValues.rejectColor,
+                                                  text: "Reject",
+                                                  icon: Icons.close,
+                                                  onPressed: () {
+                                                    Get.dialog(
+                                                        GoodsOrderRejectDialog(
+                                                      id: controller.id,
+                                                    ));
+                                                  },
+                                                ),
+                                              )
+                                            : Dimens.box0,
                                         Dimens.boxWidth10,
                                         Container(
                                           height: 45,

@@ -6,8 +6,6 @@ import 'package:cmms/domain/domain.dart';
 
 // coverage:ignore-file
 abstract class UserAccessConstants {
-  
-
   /// JOB ACCESS
   static int kJobFeatureId = 2;
   static String kFeatureJobName = "Job";
@@ -32,6 +30,9 @@ abstract class UserAccessConstants {
   static int kModuleCleaningExecutionFeatureId = 32;
   static String kFeatureModuleCleaningExecutionName = "Module Cleaning";
 
+  //GOODS ORDER ACCESS
+  static int kGoodsFeatureId = 35;
+  static String kFeatureGoodsOrderName = "Goods Order";
 
   ///USER ACCESS
   static int kHaveAddAccess = 1;
@@ -54,11 +55,6 @@ abstract class UserAccessConstants {
 
   static int kHaveSelfViewAccess = 1;
   static int kNotHaveSelfViewAccess = 0;
-
-
-
-
-  
 }
 
 AppFlavor? appFlavor;

@@ -1,5 +1,7 @@
 import 'package:cmms/app/app.dart';
+import 'package:cmms/app/constant/constant.dart';
 import 'package:cmms/app/receive_goods_order/receive_goods_order_controller.dart';
+import 'package:cmms/app/utils/user_access_constants.dart';
 import 'package:cmms/app/widgets/approve_go_receive_dialog.dart';
 import 'package:cmms/app/widgets/custom_elevated_button.dart';
 import 'package:cmms/app/widgets/custom_textField.dart';
@@ -862,33 +864,51 @@ class _ReceiveGoodsOrderWebState extends State<ReceiveGoodsOrderWeb> {
                   ),
                 ),
                 Dimens.boxWidth15,
-                Container(
-                  height: 45,
-                  child: CustomElevatedButton(
-                    backgroundColor: ColorValues.submitColor,
-                    text: 'Approve GO Receive',
-                    // icon: Icons.add,
-                    onPressed: () {
-                      Get.dialog(ApproveGOReceiveDialog(
-                        id: controller.id.value,
-                      ));
-                    },
-                  ),
-                ),
+                varUserAccessModel.value.access_list!
+                            .where((e) =>
+                                e.feature_id ==
+                                    UserAccessConstants.kGoodsFeatureId &&
+                                e.approve ==
+                                    UserAccessConstants.kHaveApproveAccess)
+                            .length >
+                        0
+                    ? Container(
+                        height: 45,
+                        child: CustomElevatedButton(
+                          backgroundColor: ColorValues.submitColor,
+                          text: 'Approve GO Receive',
+                          // icon: Icons.add,
+                          onPressed: () {
+                            Get.dialog(ApproveGOReceiveDialog(
+                              id: controller.id.value,
+                            ));
+                          },
+                        ),
+                      )
+                    : Dimens.box0,
 
                 Dimens.boxWidth15,
-                Container(
-                  height: 40,
-                  child: CustomElevatedButton(
-                    backgroundColor: ColorValues.rejectColor,
-                    text: 'Reject GO Receive',
-                    onPressed: () {
-                      Get.dialog(RejectGOReceiveDialog(
-                        id: controller.id.value,
-                      ));
-                    },
-                  ),
-                ),
+                varUserAccessModel.value.access_list!
+                            .where((e) =>
+                                e.feature_id ==
+                                    UserAccessConstants.kGoodsFeatureId &&
+                                e.approve ==
+                                    UserAccessConstants.kHaveApproveAccess)
+                            .length >
+                        0
+                    ? Container(
+                        height: 40,
+                        child: CustomElevatedButton(
+                          backgroundColor: ColorValues.rejectColor,
+                          text: 'Reject GO Receive',
+                          onPressed: () {
+                            Get.dialog(RejectGOReceiveDialog(
+                              id: controller.id.value,
+                            ));
+                          },
+                        ),
+                      )
+                    : Dimens.box0,
                 // :
                 // Container(),
                 Spacer()
