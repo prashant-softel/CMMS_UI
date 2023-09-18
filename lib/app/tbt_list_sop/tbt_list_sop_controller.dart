@@ -169,7 +169,7 @@ class TBTSOPListController extends GetxController {
     final _jobTypeList = await tbtSOPListPresenter.getJobTypePermitList(
       isLoading: true,
       // categoryIds: cPategoryIds,
-      facility_id: 45,
+      facility_id: facilityId,
     );
     for (var jobType_list in _jobTypeList) {
       jobTypeList.add(jobType_list);

@@ -52,6 +52,7 @@ import 'package:cmms/domain/models/mrs_list_by_jobId.dart';
 import 'package:cmms/domain/models/new_permit_details_model.dart';
 import 'package:cmms/domain/models/new_permit_list_model.dart';
 import 'package:cmms/domain/models/paiyed_model.dart';
+import 'package:cmms/domain/models/permit_cancel_condition_list.dart';
 import 'package:cmms/domain/models/pm_plan_list_model.dart';
 import 'package:cmms/domain/models/pm_task_model.dart';
 import 'package:cmms/domain/models/pm_task_view_list_model.dart';
@@ -2133,6 +2134,34 @@ class Repository {
     }
   }
 
+///Permit Condition List
+   Future<List<PermitCancelListModel>> getPermitConditionList({
+    required int? isCancle,
+    required bool isLoading,
+  }) async {
+    try {
+      final auth = await getSecuredValue(LocalKeys.authToken);
+
+      log(auth);
+      final res = await _dataRepository.getPermitConditionList(
+        isCancle: isCancle,
+        isLoading: isLoading,
+        auth: auth,
+      );
+      print('PermitCondition List Data: ${res.data}');
+
+      if (!res.hasError) {
+        var permitConditionList = permitCancelListModelFromJson(res.data);
+        return permitConditionList;
+      }
+      return [];
+    } catch (error) {
+      log(error.toString());
+      return [];
+    }
+  }
+
+
   Future<List<WarrantyClaimModel>> getWarrantyClaimList({
     required int? facilityId,
     int? blockId,
@@ -2517,10 +2546,11 @@ class Repository {
       log(error.toString());
     }
   }
-
-  Future<void> permitCancelRequestButton(
-    String? comment,
-    String? id,
+///Cancel Permit
+  Future<Map<String, dynamic>> permitCancelRequestButton(
+    // String? comment,
+    // String? id,
+     cancelPermitJsonString,
     bool? isLoading,
   ) async {
     try {
@@ -2528,8 +2558,7 @@ class Repository {
 
       final res = await _dataRepository.permitCancelRequestButton(
         auth: auth,
-        comment: comment,
-        id: id,
+        cancelPermitJsonString: json.encode(cancelPermitJsonString),
         isLoading: isLoading ?? false,
       );
       print('PermitCancelRequestResponse: ${res.data}');
@@ -2540,8 +2569,10 @@ class Repository {
         Utility.showDialog(
             res.errorCode.toString() + 'permitCancelRequestButton');
       }
+      return Map();
     } catch (error) {
       log(error.toString());
+      return Map();
     }
   }
 
