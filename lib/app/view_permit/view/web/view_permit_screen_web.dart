@@ -1899,7 +1899,7 @@ class ViewPermitWebScreen extends GetView<ViewPermitController> {
                                       width: MediaQuery.of(context).size.width / 1,
                                       child: Container(
                                           margin: Dimens.edgeInsets20,
-                                           height: ((controller.safetyMeasureList.length) * 10) + 130,
+                                           height: ((controller.safetyMeasureList.length) * 13) + 130,
                                           decoration: BoxDecoration(
                                       border: Border.all(
                                         color: ColorValues.lightGreyColorWithOpacity35,
@@ -1913,7 +1913,7 @@ class ViewPermitWebScreen extends GetView<ViewPermitController> {
                                           offset: Offset(0, 2),
                                         ),
                                       ],
-                                                                      ),
+                                         ),
                                           child: Column(
                                             crossAxisAlignment: CrossAxisAlignment.start,
                                             children: [
@@ -1941,7 +1941,7 @@ class ViewPermitWebScreen extends GetView<ViewPermitController> {
                                                                           children: [
                                                                             checkBoxMethod(1),
                                                                             // Text("${l = l! + 1}. "),
-                                                                            Text("${element.name}")
+                                                                            Expanded(child: Text("${element.name}"))
                                                                           ],
                                                                         ),
                                                                       )
