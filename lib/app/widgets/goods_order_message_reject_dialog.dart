@@ -13,7 +13,7 @@ class GoodsOrderMessageRejectDialog extends GetView {
   List<dynamic>? id;
 
   GoodsOrderMessageRejectDialog({super.key, this.data, this.id});
-  final ViewAddGoodsOrdersController _controller = Get.find();
+  final ViewAddGoodsOrdersController controller = Get.find();
 
   @override
   Widget build(BuildContext context) {
@@ -78,16 +78,31 @@ class GoodsOrderMessageRejectDialog extends GetView {
           );
         }),
         actions: [
-          Dimens.boxWidth10,
-          Center(
-            child: ElevatedButton(
-              style: Styles.darkBlueElevatedButtonStyle,
-              onPressed: () {
-                Get.offAllNamed(Routes.stockManagementGoodsOrdersScreen);
-              },
-              child: const Text('Ok'),
-            ),
-          ),
+          Row(
+            children: [
+              Dimens.boxWidth10,
+              Center(
+                child: ElevatedButton(
+                  style: Styles.darkBlueElevatedButtonStyle,
+                  onPressed: () {
+                    Get.offAllNamed(Routes.stockManagementGoodsOrdersScreen);
+                  },
+                  child: const Text('Goods Order List'),
+                ),
+              ),
+              Dimens.boxWidth10,
+              Center(
+                child: ElevatedButton(
+                  style: Styles.yellowElevatedButtonStyle,
+                  onPressed: () {
+                    Get.toNamed(Routes.viewGoodsOrders);
+                  },
+                  child: const Text('View Goods Order'),
+                ),
+              ),
+              Dimens.boxWidth10,
+            ],
+          )
         ],
       );
     }));
