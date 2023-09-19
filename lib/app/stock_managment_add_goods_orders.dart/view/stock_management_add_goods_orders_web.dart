@@ -823,7 +823,7 @@ class AddRowInGoodsOrder extends StatelessWidget {
                   "Assets",
                   "Paid By",
                   "Cost",
-                  "Ordered Qty",
+                  "Dispatch Qty",
                 ].map((column) {
                   return TableViewColumn(
                     label: column,

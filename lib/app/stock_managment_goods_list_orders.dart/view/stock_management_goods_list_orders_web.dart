@@ -624,6 +624,9 @@ class GoodsOrderListDataSource extends DataTableSource {
       return (GoodsOrderList!.id ?? '')
               .toString()
               .contains(controller.orderIdFilterText.value.toLowerCase()) &&
+          (GoodsOrderList.vendor_name ?? '')
+              .toString()
+              .contains(controller.challanNoFilterText.value.toLowerCase()) &&
           (GoodsOrderList.challan_no ?? '')
               .toString()
               .contains(controller.challanNoFilterText.value.toLowerCase()) &&
@@ -635,9 +638,9 @@ class GoodsOrderListDataSource extends DataTableSource {
               .contains(controller.costFilterText.value.toLowerCase()) &&
           (GoodsOrderList.purchaseDate ?? '')
               .contains(controller.orderDateFilterText.value.toLowerCase()) &&
-          (GoodsOrderList.status ?? '')
+          (GoodsOrderList.currency ?? '')
               .toString()
-              .contains(controller.statusFilterText.value.toLowerCase());
+              .contains(controller.currencyFilterText.value.toLowerCase());
 
       // Add other filter conditions as needed
     }).toList();
@@ -653,11 +656,14 @@ class GoodsOrderListDataSource extends DataTableSource {
     var cellsBuffer = [
       // '${GoodsOrderListDetails?.id ?? ''}',
       "id",
+      '${GoodsOrderListDetails?.vendor_name ?? ''}',
+
       '${GoodsOrderListDetails?.challan_no ?? ''}',
+
       '${GoodsOrderListDetails?.generatedBy ?? ''}',
       '${GoodsOrderListDetails?.purchaseDate ?? ''}',
       '${GoodsOrderListDetails?.cost ?? ''}',
-      '${GoodsOrderListDetails?.status ?? ''}',
+      '${GoodsOrderListDetails?.currency ?? ''}',
       'Actions',
     ];
     var cells = [];

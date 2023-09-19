@@ -76,7 +76,7 @@ class _ViewAddGoodsOrdersWebState extends State<ViewAddGoodsOrdersWeb> {
                             onTap: () {
                               Get.back();
                             },
-                            child: Text(" /  ADD GOODS ORDER DETAILS",
+                            child: Text(" /  VIEW GOODS ORDER DETAILS",
                                 style: Styles.greyMediumLight12)),
                       ],
                     ),
@@ -93,13 +93,12 @@ class _ViewAddGoodsOrdersWebState extends State<ViewAddGoodsOrdersWeb> {
                                 child: Row(
                                   children: [
                                     Text(
-                                      "Add  Goods Order Details",
+                                      "View Goods Order Details",
                                       style: Styles.blackBold16,
                                     ),
                                     Spacer(),
                                     Text(
-                                      " Order ID : GOS001 ",
-                                      style: Styles.blackBold16,
+                                      " Order ID :${controller.getPurchaseDetailsByIDModel.value?.id} ",
                                     ),
                                     // ActionButton(
                                     //   icon: Icons.menu,
@@ -114,6 +113,10 @@ class _ViewAddGoodsOrdersWebState extends State<ViewAddGoodsOrdersWeb> {
                               ),
                               Divider(
                                 color: ColorValues.greyLightColour,
+                              ),
+                              Text(
+                                "Status :${controller.getPurchaseDetailsByIDModel.value?.status_long ?? ""} ",
+                                style: Styles.blackBold16,
                               ),
                               IgnorePointer(
                                 child: Container(

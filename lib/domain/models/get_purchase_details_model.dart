@@ -83,7 +83,8 @@ class GetPurchaseDetailsByIDModel {
         status_short: parsedJson["status_short"] ?? "",
         status_long: parsedJson["status_long"] ?? "",
         accepted_qty: parsedJson["accepted_qty"] ?? "",
-        receivedAt: parsedJson["receivedAt"] ?? "",
+        receivedAt: Utility.getFormatedyearMonthDay(parsedJson['receivedAt']),
+
         currencyID: parsedJson["currencyID"] ?? "",
         currency: parsedJson["currency"] ?? "",
         amount: parsedJson["amount"] ?? "",

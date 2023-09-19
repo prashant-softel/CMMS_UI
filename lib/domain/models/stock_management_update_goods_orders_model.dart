@@ -11,6 +11,7 @@ class GoodsOrdersListModel {
   String? challan_no;
   int? spare_status;
   dynamic remarks;
+  String? currency;
   int? orderflag;
   String? asset_name;
   int? asset_type_ID;
@@ -46,6 +47,7 @@ class GoodsOrdersListModel {
     this.remarks,
     this.orderflag,
     this.asset_name,
+    this.currency,
     this.asset_type_ID,
     this.purchaseID,
     this.assetItemID,
@@ -84,6 +86,7 @@ class GoodsOrdersListModel {
       asset_name: json['asset_name'],
       asset_type_ID: json['asset_type_ID'],
       purchaseID: json['purchaseID'],
+      currency: json['currency'],
       assetItemID: json['assetItemID'],
       serial_number: json['serial_number'],
       location_ID: json['location_ID'],
@@ -124,6 +127,8 @@ class GoodsOrdersListModel {
     data['serial_number'] = this.serial_number;
     data['location_ID'] = this.location_ID;
     data['cost'] = this.cost;
+    data['currency'] = this.currency;
+
     data['ordered_qty'] = this.ordered_qty;
     data['rejectedRemark'] = this.rejectedRemark;
     data['facility_id'] = this.facility_id;
