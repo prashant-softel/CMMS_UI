@@ -121,7 +121,7 @@ class PermitApprovedDialog extends GetView {
                                                           crossAxisAlignment: CrossAxisAlignment.end,
                                                           children: [
                                                             Text(
-                                                              'Permit Issuer Name',
+                                                              'Permit Approver Name',
                                                               style: Styles.blackBold17,
                                                             ),
                                                             Text(
@@ -167,7 +167,7 @@ class PermitApprovedDialog extends GetView {
                                                               style: Styles.blackBold17,
                                                             ),
                                                             Text(
-                                                              '${controller.viewPermitDetailsModel.value?.requestedByName}',
+                                                              '${controller.viewPermitDetailsModel.value?.start_datetime}',
                                                               style: Styles.black17,
                                                             ),
                                                           ],
@@ -242,7 +242,7 @@ class PermitApprovedDialog extends GetView {
                                                               style: Styles.blackBold17,
                                                             ),
                                                             Text(
-                                                              '${controller.viewPermitDetailsModel.value?.requestedByName}',
+                                                              '${controller.viewPermitDetailsModel.value?.start_datetime}',
                                                               style: Styles.black17,
                                                             ),
                                                           ],

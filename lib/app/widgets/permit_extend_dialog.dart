@@ -170,16 +170,16 @@ class PermitExtendDialog extends GetView {
                               Column(
                                 crossAxisAlignment: CrossAxisAlignment.end,
                                 children: [
-                                  Row(
-                                    children: [
-                                      Text(
-                                        'Extend Remark',
-                                        style: Styles.black17,
-                                      ),
-                                      Dimens.boxWidth5,
-                                      SizedBox(width: 130, child: CustomTextFieldForPermit())
-                                    ],
-                                  ),
+                                  // Row(
+                                  //   children: [
+                                  //     Text(
+                                  //       'Extend Remark',
+                                  //       style: Styles.black17,
+                                  //     ),
+                                  //     Dimens.boxWidth5,
+                                  //     SizedBox(width: 130, child: CustomTextFieldForPermit())
+                                  //   ],
+                                  // ),
 
                                   // CustomTextField(
                                   //   label: 'Extend Remark',
@@ -254,17 +254,17 @@ class PermitExtendDialog extends GetView {
                                             text: 'Upload',
                                             onPressed: () {
                                               if (controller.fileName.value != "") {
-                                                controller
-                                                    .browseFiles(
-                                                  fileBytes: controller.fileBytes,
-                                                )
-                                                    .then((value) {
-                                                  controller.isSuccessDialog();
+                                                // controller
+                                                //     .browseFiles(
+                                                //   fileBytes: controller.fileBytes,
+                                                // )
+                                                //     .then((value) {
+                                                //   controller.isSuccessDialog();
 
-                                                  // Fluttertoast.showToast(
-                                                  //     msg: "file upload  Successfully",
-                                                  //     fontSize: 16.0);
-                                                });
+                                                //   // Fluttertoast.showToast(
+                                                //   //     msg: "file upload  Successfully",
+                                                //   //     fontSize: 16.0);
+                                                // });
                                               } else {
                                                 Fluttertoast.showToast(msg: "Please Select file...", fontSize: 16.0);
                                               }
@@ -283,7 +283,7 @@ class PermitExtendDialog extends GetView {
                         ],
                       ),
                     ),
-                    CustomRichText(title: 'Enter reason for extension '),
+                    CustomRichText(title: 'Extend Remark '),
                     TextField(
                       // keyboardType: TextInputType.number,
                       controller: controller.extendReasonCommentTextFieldCtrlr,
@@ -303,23 +303,24 @@ class PermitExtendDialog extends GetView {
                     SizedBox(
                       height: 20,
                     ),
-                    CustomRichText(title: 'Enter Time for extension '),
-                    TextField(
-                      // keyboardType: TextInputType.number,
-                      controller: controller.timeTextFieldCtrlr,
-                      maxLines: 1,
-                      decoration: InputDecoration(
-                        hintText: 'in minutes ....',
-                        enabledBorder: OutlineInputBorder(
-                          borderSide: BorderSide(
-                            color: Colors.black,
-                          ),
-                        ),
-                        focusedBorder: OutlineInputBorder(
-                          borderSide: BorderSide(color: Colors.black),
-                        ),
-                      ),
-                    ),
+                    Center(child: Text( 'NOTE: The permit would extended for 4 hours ',style: Styles.blackBold17,)),
+                    // TextField(
+                    //   // keyboardType: TextInputType.number,
+                    //   controller: controller.timeTextFieldCtrlr,
+                    //   maxLines: 1,
+                    //   decoration: InputDecoration(
+                    //     hintText: 'in minutes ....',
+                    //     enabledBorder: OutlineInputBorder(
+                    //       borderSide: BorderSide(
+                    //         color: Colors.black,
+                    //       ),
+                    //     ),
+                    //     focusedBorder: OutlineInputBorder(
+                    //       borderSide: BorderSide(color: Colors.black),
+                    //     ),
+                    //   ),
+                    // ),
+                  
                   ],
                 ),
                 // SizedBox(

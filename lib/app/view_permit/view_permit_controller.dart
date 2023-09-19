@@ -9,6 +9,7 @@ import 'package:cmms/app/view_permit/view_permit_presenter.dart';
 import 'package:cmms/app/widgets/create_permit_dialog.dart';
 import 'package:cmms/domain/models/block_model.dart';
 import 'package:cmms/domain/models/cancel_permit_request_model.dart';
+import 'package:cmms/domain/models/create_sop_model.dart';
 import 'package:cmms/domain/models/employee_list_model.dart';
 import 'package:cmms/domain/models/employee_list_model2.dart';
 import 'package:cmms/domain/models/employee_model.dart';
@@ -16,7 +17,7 @@ import 'package:cmms/domain/models/history_model.dart';
 import 'package:cmms/domain/models/inventory_detail_model.dart';
 import 'package:cmms/domain/models/job_type_list_model.dart';
 import 'package:cmms/domain/models/new_permit_details_model.dart';
-import 'package:cmms/domain/models/permit_cancel_condition_list.dart';
+import 'package:cmms/domain/models/permit_cancel_condition_list_model.dart';
 import 'package:cmms/domain/models/safety_measure_list_model.dart';
 import 'package:cmms/domain/models/sop_list_model.dart';
 import 'package:flutter/material.dart';
@@ -275,6 +276,8 @@ class ViewPermitController extends GetxController {
   int selectedSafetyMeasureId = 0;
   SafetyMeasureListModel? safetyMeasureListModel;
 
+  var fileId;
+
 //Permit Cancel Condition
   RxList<PermitCancelListModel?>? permitCancelConditionList =
       <PermitCancelListModel?>[].obs;
@@ -324,6 +327,11 @@ class ViewPermitController extends GetxController {
   void requiretoggleCheckbox5() {
     isCheckedRequire5.value =
         !isCheckedRequire5.value; // Toggle the checkbox state
+  }
+
+  RxBool isChecked = false.obs;
+   void toggleItemSelection(int index) {
+    permitCancelConditionList![index]!.id = permitCancelConditionList![index]?.id;
   }
 
    RxBool isCheckedRequire6 = false.obs;
@@ -505,13 +513,20 @@ class ViewPermitController extends GetxController {
     // print('Cancel Request Button Data:${permitId}');
      {
       String _cancelComment = cancelCommentRequestTextFieldCtrlr.text.trim();
-
+      List<int> data = [];
+      permitCancelConditionList!.value.forEach((element) { 
+        if(element!.isChecked!){
+          data.add(element.id!);
+        }
+      });
+      print('ConditionIds:$data');
+      
       CancelPermitRequestModel cancelPermitModel =
           CancelPermitRequestModel(
             id: int.tryParse('${permitId}'), 
             comment: _cancelComment,
-            conditionIds:[4,6],
-            fileId:125
+            conditionIds:data,
+            fileId:fileId
 
             );
 
@@ -535,7 +550,8 @@ class ViewPermitController extends GetxController {
 
     final _permitextendBtn = await viewPermitPresenter.permitExtendButton(
       comment: _reasonForExtensionComment,
-      Time: _timeForExtensionComment,
+      // Time: _timeForExtensionComment,
+      Time: 240,
       id: permitId,
     );
     // showAlertPermitApproveDialog();
@@ -631,7 +647,7 @@ class ViewPermitController extends GetxController {
       isCancle: 1,
       // job_type_id: 36,
     );
-    print('Permit condition List${_permitCancelConditionList}');
+    print('Permit condition List${permitCancelConditionList}');
     if (_permitCancelConditionList != null) {
       for (var permitCancelCondition_list in _permitCancelConditionList) {
         permitCancelConditionList!.add(permitCancelCondition_list);
@@ -1295,12 +1311,23 @@ class ViewPermitController extends GetxController {
     Get.toNamed(Routes.jobDetails, arguments: {'jobId': _jobId});
   }
 
-  browseFiles({Uint8List? fileBytes}) async {
-    await viewPermitPresenter.browseFiles(
-        fileBytes, fileName.value, type, true, facilityId);
+  // Future<bool> browseFiles({Uint8List? fileBytes}) async {
+  //  await viewPermitPresenter.browseFiles(
+  //       fileBytes, fileName.value, type, true, facilityId);
+  //   return true;
+  // }
+   Future<bool> browseFiles({Uint8List? fileBytes, required int position}) async {
+   CreateSOPModel? createSOPModel = await viewPermitPresenter.browseFiles(fileBytes, fileName.value, true);
+  
+    fileId = createSOPModel?.jsa_fileId;
+    print('fileId:$fileId');
+  
+   
+  
     return true;
   }
 
+  
   void isSuccessDialog() {
     Get.dialog(
       AlertDialog(

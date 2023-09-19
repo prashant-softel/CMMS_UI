@@ -1005,7 +1005,7 @@ class ConnectHelper {
     required String auth,
     bool? isLoading,
     String? comment,
-    String? Time,
+    int? Time,
     String? id,
   }) async {
     // facilityId = 45;

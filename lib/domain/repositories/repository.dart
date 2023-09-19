@@ -52,7 +52,7 @@ import 'package:cmms/domain/models/mrs_list_by_jobId.dart';
 import 'package:cmms/domain/models/new_permit_details_model.dart';
 import 'package:cmms/domain/models/new_permit_list_model.dart';
 import 'package:cmms/domain/models/paiyed_model.dart';
-import 'package:cmms/domain/models/permit_cancel_condition_list.dart';
+import 'package:cmms/domain/models/permit_cancel_condition_list_model.dart';
 import 'package:cmms/domain/models/pm_plan_list_model.dart';
 import 'package:cmms/domain/models/pm_task_model.dart';
 import 'package:cmms/domain/models/pm_task_view_list_model.dart';
@@ -2607,7 +2607,7 @@ class Repository {
 
   Future<void> permitExtendButton(
     String? comment,
-    String? Time,
+    int? Time,
     String? id,
     bool? isLoading,
   ) async {
@@ -4801,7 +4801,7 @@ class Repository {
           isLoading: isLoading,
           facilityId: facilityId);
       if (res != null) {
-        print("file upload");
+        print("file upload:${res}");
         return res;
       } //
       else {

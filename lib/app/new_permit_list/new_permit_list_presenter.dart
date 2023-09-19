@@ -93,18 +93,18 @@ class NewPermitListPresenter {
   //       isLoading: isLoading ?? false,
   //     );
 
-  Future<void> permitExtendButton({
-    String? comment,
-    String? Time,
-    String? id,
-    bool? isLoading,
-  }) async =>
-      await newPermitListUsecase.permitExtendButton(
-        comment: comment,
-        Time: Time,
-        id: id,
-        isLoading: isLoading ?? false,
-      );
+  // Future<void> permitExtendButton({
+  //   String? comment,
+  //   String? Time,
+  //   String? id,
+  //   bool? isLoading,
+  // }) async =>
+  //     await newPermitListUsecase.permitExtendButton(
+  //       comment: comment,
+  //       Time: Time,
+  //       id: id,
+  //       isLoading: isLoading ?? false,
+  //     );
 
   // Future<void> permitCloseButton({
   //   String? comment,

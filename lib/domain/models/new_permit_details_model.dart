@@ -26,7 +26,7 @@ class NewPermitDetailModel {
   String? description;
   String? siteName;
   String? blockName;
-  String? start_datetime;
+  DateTime? start_datetime;
   String? end_datetime;
   String? permitArea;
   int? workingTime;
@@ -130,7 +130,9 @@ class NewPermitDetailModel {
         description: json["description"],
         siteName: json['siteName'],
         blockName: json['blockName'],
-        start_datetime: json["start_datetime"],
+        start_datetime: json["start_datetime"] == null
+        ? null
+        :  DateTime.parse(json['start_datetime'] as String),
         end_datetime: json["end_datetime"],
         permitArea: json['permitArea'],
         workingTime: json['workingTime'],
