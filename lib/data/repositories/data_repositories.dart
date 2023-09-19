@@ -377,6 +377,21 @@ class DataRepository extends DomainRepository {
   }
 
   @override
+  Future<ResponseModel> getPermitConditionList({
+    int? isCancle,
+    required bool isLoading,
+    required String auth,
+  }) async {
+    return await connectHelper.getPermitConditionList(
+      isLoading: isLoading,
+      auth: auth,
+      isCancle: isCancle,
+     
+    );
+  }
+
+
+  @override
   Future<ResponseModel> getWarrantyClaimList({
     int? facilityId,
     int? blockId,
@@ -663,14 +678,12 @@ class DataRepository extends DomainRepository {
 
   Future<ResponseModel> permitCancelRequestButton({
     required String auth,
-    String? comment,
-    String? id,
+    cancelPermitJsonString,
     bool? isLoading,
   }) async =>
       await connectHelper.permitCancelRequestButton(
-        auth: auth,
-        comment: comment,
-        id: id,
+         auth: auth,
+        cancelPermitJsonString: cancelPermitJsonString,
         isLoading: isLoading ?? false,
       );
 

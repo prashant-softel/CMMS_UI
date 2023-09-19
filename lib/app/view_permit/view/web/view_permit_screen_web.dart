@@ -3390,53 +3390,53 @@ class ViewPermitWebScreen extends GetView<ViewPermitController> {
     );
   }
 
-  checkBoxInstructionMethod(int position) {
-    return Checkbox(
-      value: position == 0
-          ? controller.isCheckedRequire.value
-          : position == 1
-              ? controller.isCheckedRequire1.value
-              : position == 2
-                  ? controller.isCheckedRequire2.value
-                  : position == 3
-                      ? controller.isCheckedRequire3.value
-                      : position == 4
-                          ? controller.isCheckedRequire4.value
-                          : position == 5
-                              ? controller.isCheckedRequire5.value
-                              : position == 6
-                                  ? controller.isCheckedRequire6.value
-                                  : position == 7
-                                      ? controller.isCheckedRequire7.value
-                                      : position == 8
-                                          ? controller.isCheckedRequire8.value
-                                          : position == 9
-                                              ? controller.isCheckedRequire9.value
-                                              : null,
-      onChanged: (bool? value) {
-        position == 0
-            ? controller.requiretoggleCheckbox()
-            : position == 1
-                ? controller.requiretoggleCheckbox1()
-                : position == 2
-                    ? controller.requiretoggleCheckbox2()
-                    : position == 3
-                        ? controller.requiretoggleCheckbox3()
-                        : position == 4
-                            ? controller.requiretoggleCheckbox4()
-                            : position == 5
-                                ? controller.requiretoggleCheckbox5()
-                                : position == 6
-                                    ? controller.requiretoggleCheckbox6()
-                                    : position == 7
-                                        ? controller.requiretoggleCheckbox7()
-                                        : position == 8
-                                            ? controller.requiretoggleCheckbox8()
-                                            : position == 9
-                                                ? controller.requiretoggleCheckbox9()
-                                                : null;
-      },
-    );
-  }
+  // checkBoxInstructionMethod(int position) {
+  //   return Checkbox(
+  //     value: position == 0
+  //         ? controller.isCheckedRequire.value
+  //         : position == 1
+  //             ? controller.isCheckedRequire1.value
+  //             : position == 2
+  //                 ? controller.isCheckedRequire2.value
+  //                 : position == 3
+  //                     ? controller.isCheckedRequire3.value
+  //                     : position == 4
+  //                         ? controller.isCheckedRequire4.value
+  //                         : position == 5
+  //                             ? controller.isCheckedRequire5.value
+  //                             : position == 6
+  //                                 ? controller.isCheckedRequire6.value
+  //                                 : position == 7
+  //                                     ? controller.isCheckedRequire7.value
+  //                                     : position == 8
+  //                                         ? controller.isCheckedRequire8.value
+  //                                         : position == 9
+  //                                             ? controller.isCheckedRequire9.value
+  //                                             : null,
+  //     onChanged: (bool? value) {
+  //       position == 0
+  //           ? controller.requiretoggleCheckbox()
+  //           : position == 1
+  //               ? controller.requiretoggleCheckbox1()
+  //               : position == 2
+  //                   ? controller.requiretoggleCheckbox2()
+  //                   : position == 3
+  //                       ? controller.requiretoggleCheckbox3()
+  //                       : position == 4
+  //                           ? controller.requiretoggleCheckbox4()
+  //                           : position == 5
+  //                               ? controller.requiretoggleCheckbox5()
+  //                               : position == 6
+  //                                   ? controller.requiretoggleCheckbox6()
+  //                                   : position == 7
+  //                                       ? controller.requiretoggleCheckbox7()
+  //                                       : position == 8
+  //                                           ? controller.requiretoggleCheckbox8()
+  //                                           : position == 9
+  //                                               ? controller.requiretoggleCheckbox9()
+  //                                               : null;
+  //     },
+  //   );
+  // }
 
 }
