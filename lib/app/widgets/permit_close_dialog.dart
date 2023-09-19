@@ -330,8 +330,8 @@ class PermitCloseDialog extends GetView {
                                                   onPressed: () {
                                                     if (controller
                                                             .fileName.value !=
-                                                        "") {
-                                                      controller
+
+                                                      "") {controller
                                                           .browseFiles(
                                                         fileBytes: controller
                                                             .fileBytes,
