@@ -732,6 +732,7 @@ class _ReceiveGoodsOrderWebState extends State<ReceiveGoodsOrderWeb> {
                                                                               inputFormatters: <TextInputFormatter>[
                                                                                 FilteringTextInputFormatter.digitsOnly
                                                                               ],
+                                                                              enabled: controller.getPurchaseDetailsByIDModel.value?.status == 306 || controller.getPurchaseDetailsByIDModel.value?.status == 307 && varUserAccessModel.value.access_list!.where((e) => e.feature_id == UserAccessConstants.kGoodsFeatureId && e.add == UserAccessConstants.kHaveAddAccess).length > 0 ? true : false,
                                                                               maxLine: 1,
                                                                               textController: new TextEditingController(text: mapData["value"] ?? ''),
                                                                               onChanged: (txt) {
@@ -796,6 +797,7 @@ class _ReceiveGoodsOrderWebState extends State<ReceiveGoodsOrderWeb> {
                                                                                     inputFormatters: <TextInputFormatter>[
                                                                                       FilteringTextInputFormatter.digitsOnly
                                                                                     ],
+                                                                                    enabled: controller.getPurchaseDetailsByIDModel.value?.status == 306 || controller.getPurchaseDetailsByIDModel.value?.status == 307 && varUserAccessModel.value.access_list!.where((e) => e.feature_id == UserAccessConstants.kGoodsFeatureId && e.add == UserAccessConstants.kHaveAddAccess).length > 0 ? true : false,
                                                                                     maxLine: 1,
                                                                                     textController: new TextEditingController(text: mapData["value"] ?? ''),
                                                                                     onChanged: (txt) {
@@ -853,16 +855,31 @@ class _ReceiveGoodsOrderWebState extends State<ReceiveGoodsOrderWeb> {
                 //   ),
                 // ),
                 Dimens.boxWidth15,
-                Container(
-                  height: 40,
-                  child: CustomElevatedButton(
-                    backgroundColor: ColorValues.submitColor,
-                    text: 'Update Go Receive',
-                    onPressed: () {
-                      controller.updateGOReceive();
-                    },
-                  ),
-                ),
+                controller.getPurchaseDetailsByIDModel.value?.status == 306 ||
+                        controller.getPurchaseDetailsByIDModel.value?.status ==
+                            307 ||
+                        controller.getPurchaseDetailsByIDModel.value?.status ==
+                                309 &&
+                            varUserAccessModel.value.access_list!
+                                    .where((e) =>
+                                        e.feature_id ==
+                                            UserAccessConstants
+                                                .kGoodsFeatureId &&
+                                        e.add ==
+                                            UserAccessConstants.kHaveAddAccess)
+                                    .length >
+                                0
+                    ? Container(
+                        height: 40,
+                        child: CustomElevatedButton(
+                          backgroundColor: ColorValues.submitColor,
+                          text: 'Update Go Receive',
+                          onPressed: () {
+                            controller.updateGOReceive();
+                          },
+                        ),
+                      )
+                    : Dimens.box0,
                 Dimens.boxWidth15,
                 varUserAccessModel.value.access_list!
                             .where((e) =>

@@ -921,8 +921,11 @@ class _ViewAddGoodsOrdersWebState extends State<ViewAddGoodsOrdersWeb> {
                               ),
                               (controller.getPurchaseDetailsByIDModel.value
                                               ?.status ==
-                                          302 &&
-                                      controller.type == 1)
+                                          302 ||
+                                      controller.getPurchaseDetailsByIDModel
+                                                  .value?.status ==
+                                              301 &&
+                                          controller.type == 1)
                                   ? Row(
                                       children: [
                                         Spacer(),

@@ -840,18 +840,40 @@ class GoodsOrderListDataSource extends DataTableSource {
                             }
                           },
                         ),
-                        TableActionButton(
-                          color: ColorValues.editColor,
-                          icon: Icons.edit,
-                          message: 'Edit',
-                          onPress: () {
-                            int id = GoodsOrderListDetails?.id ?? 0;
-                            if (id != 0) {
-                              Get.toNamed(Routes.updateGoodsOrdersDetailsScreen,
-                                  arguments: {"id": id});
-                            }
-                          },
-                        ),
+                        controller.goodsOrdersList
+                                        .firstWhere(
+                                          (e) =>
+                                              e?.id ==
+                                              GoodsOrderListDetails!.id,
+                                          orElse: () =>
+                                              GoodsOrdersListModel(id: 00),
+                                        )
+                                        ?.status ==
+                                    310 ||
+                                controller.goodsOrdersList
+                                        .firstWhere(
+                                          (e) =>
+                                              e?.id ==
+                                              GoodsOrderListDetails!.id,
+                                          orElse: () =>
+                                              GoodsOrdersListModel(id: 00),
+                                        )
+                                        ?.status ==
+                                    304
+                            ? Dimens.box0
+                            : TableActionButton(
+                                color: ColorValues.editColor,
+                                icon: Icons.edit,
+                                message: 'Edit',
+                                onPress: () {
+                                  int id = GoodsOrderListDetails?.id ?? 0;
+                                  if (id != 0) {
+                                    Get.toNamed(
+                                        Routes.updateGoodsOrdersDetailsScreen,
+                                        arguments: {"id": id});
+                                  }
+                                },
+                              ),
                         controller.goodsOrdersList
                                         .firstWhere(
                                           (e) =>
@@ -885,6 +907,28 @@ class GoodsOrderListDataSource extends DataTableSource {
                                 },
                               )
                             : Dimens.box0,
+
+                        controller.goodsOrdersList
+                                    .firstWhere(
+                                      (e) => e?.id == GoodsOrderListDetails!.id,
+                                      orElse: () =>
+                                          GoodsOrdersListModel(id: 00),
+                                    )
+                                    ?.status ==
+                                309
+                            ? TableActionButton(
+                                color: Color.fromARGB(255, 116, 78, 130),
+                                icon: Icons.ads_click,
+                                message: 'Re-Submit Receive GO',
+                                onPress: () {
+                                  int id = GoodsOrderListDetails?.id ?? 0;
+                                  if (id != 0) {
+                                    Get.toNamed(Routes.viewGoodsOrders,
+                                        arguments: {'id': id, "type": 1});
+                                  }
+                                },
+                              )
+                            : Dimens.box0,
                         // TableActionButton(
                         //   color: ColorValues.approveColor,
                         //   icon: Icons.approval_outlined,
@@ -900,13 +944,25 @@ class GoodsOrderListDataSource extends DataTableSource {
                         //   : Dimens.box0,
                         // :
                         controller.goodsOrdersList
-                                    .firstWhere(
-                                      (e) => e?.id == GoodsOrderListDetails!.id,
-                                      orElse: () =>
-                                          GoodsOrdersListModel(id: 00),
-                                    )
-                                    ?.status ==
-                                302
+                                        .firstWhere(
+                                          (e) =>
+                                              e?.id ==
+                                              GoodsOrderListDetails!.id,
+                                          orElse: () =>
+                                              GoodsOrdersListModel(id: 00),
+                                        )
+                                        ?.status ==
+                                    302 ||
+                                controller.goodsOrdersList
+                                        .firstWhere(
+                                          (e) =>
+                                              e?.id ==
+                                              GoodsOrderListDetails!.id,
+                                          orElse: () =>
+                                              GoodsOrdersListModel(id: 00),
+                                        )
+                                        ?.status ==
+                                    301
                             ? TableActionButton(
                                 color: ColorValues.approveColor,
                                 icon: Icons.approval_rounded,
@@ -916,6 +972,29 @@ class GoodsOrderListDataSource extends DataTableSource {
                                   if (id != 0) {
                                     Get.toNamed(Routes.viewGoodsOrders,
                                         arguments: {'id': id, "type": 1});
+                                  }
+                                },
+                              )
+                            : Dimens.box0,
+
+                        controller.goodsOrdersList
+                                    .firstWhere(
+                                      (e) => e?.id == GoodsOrderListDetails!.id,
+                                      orElse: () =>
+                                          GoodsOrdersListModel(id: 00),
+                                    )
+                                    ?.status ==
+                                305
+                            ? TableActionButton(
+                                color: ColorValues.purpleColor,
+                                icon: Icons.ads_click,
+                                message: 'Re-Submit GO',
+                                onPress: () {
+                                  int id = GoodsOrderListDetails?.id ?? 0;
+                                  if (id != 0) {
+                                    Get.toNamed(
+                                        Routes.updateGoodsOrdersDetailsScreen,
+                                        arguments: {"id": id});
                                   }
                                 },
                               )
