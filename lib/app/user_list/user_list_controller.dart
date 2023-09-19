@@ -51,7 +51,7 @@ class UserListController extends GetxController {
     "Profile": 123,
     "User Login ID": 400,
     "User Role": 200,
-    "Contact Number": 123,
+    "Contact Number": 200,
     "Created On": 123,
     "Updated On": 123,
   };

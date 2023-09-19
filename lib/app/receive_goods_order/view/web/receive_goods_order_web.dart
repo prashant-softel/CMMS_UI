@@ -6,6 +6,7 @@ import 'package:cmms/app/widgets/approve_go_receive_dialog.dart';
 import 'package:cmms/app/widgets/custom_elevated_button.dart';
 import 'package:cmms/app/widgets/custom_textField.dart';
 import 'package:cmms/app/widgets/stock_dropdown.dart';
+import 'package:data_table_2/data_table_2.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
@@ -74,618 +75,779 @@ class _ReceiveGoodsOrderWebState extends State<ReceiveGoodsOrderWeb> {
                             onTap: () {
                               Get.back();
                             },
-                            child: Text(" / RECEIVE GOODS ORDER  ",
+                            child: Text(" / RECEIVE GOODS ORDER  erg",
                                 style: Styles.greyMediumLight12)),
                       ],
                     ),
                   ),
                   Expanded(
-                    child: SingleChildScrollView(
-                      child: Stack(
-                        children: [
-                          Container(
-                            color: Color.fromARGB(255, 245, 248, 250),
-                            child: Column(
-                              children: [
-                                Padding(
-                                  padding: const EdgeInsets.only(left: 10),
-                                  child: Row(
-                                    children: [
-                                      Text(
-                                        "Receive Goods Order",
-                                        style: Styles.blackBold16,
-                                      ),
-                                      Spacer(),
-                                      controller.id == null
-                                          ? Container()
-                                          : Text(
-                                              " Order ID :${controller.getPurchaseDetailsByIDModel.value?.id} ",
-                                              style: Styles.blackBold16,
-                                            )
+                    child: ScrollConfiguration(
+                      behavior: ScrollConfiguration.of(context)
+                          .copyWith(scrollbars: false),
+                      child: SingleChildScrollView(
+                        child: Stack(
+                          children: [
+                            Container(
+                              color: Color.fromARGB(255, 245, 248, 250),
+                              child: Column(
+                                children: [
+                                  Padding(
+                                    padding: const EdgeInsets.only(left: 10),
+                                    child: Row(
+                                      children: [
+                                        Text(
+                                          "Receive Goods Order",
+                                          style: Styles.blackBold16,
+                                        ),
+                                        Spacer(),
+                                        controller.id == null
+                                            ? Container()
+                                            : Text(
+                                                " Order ID :${controller.getPurchaseDetailsByIDModel.value?.id} ",
+                                                style: Styles.blackBold16,
+                                              )
 
-                                      // ActionButton(
-                                      //   icon: Icons.menu,
-                                      //   label: "User List",
-                                      //   onPressed: () {
-                                      //     Get.offNamed(Routes.userList);
-                                      //   },
-                                      //   color: ColorValues.greenlightColor,
-                                      // ),
-                                    ],
-                                  ),
-                                ),
-                                Divider(
-                                  color: ColorValues.greyLightColour,
-                                ),
-                                Container(
-                                  margin: Dimens.edgeInsets20,
-                                  child: Row(
-                                    crossAxisAlignment:
-                                        CrossAxisAlignment.start,
-                                    children: [
-                                      Column(
-                                        crossAxisAlignment:
-                                            CrossAxisAlignment.end,
-                                        children: [
-                                          Row(
-                                            children: [
-                                              Text("Vendor :",
-                                                  style: Styles.blackBold16),
-                                              Dimens.boxWidth10,
-                                              Container(
-                                                color: Color(0xffE8E7EC),
-                                                height: MediaQuery.of(context)
-                                                        .size
-                                                        .height *
-                                                    0.040,
-                                                width: MediaQuery.of(context)
-                                                        .size
-                                                        .width /
-                                                    5,
-                                              ),
-                                            ],
-                                          ),
-                                          Dimens.boxHeight5,
-                                          Row(
-                                            children: [
-                                              Text("Challan No :",
-                                                  style: Styles.blackBold16),
-                                              Dimens.boxWidth10,
-                                              Container(
-                                                color: Color(0xffE8E7EC),
-                                                height: MediaQuery.of(context)
-                                                        .size
-                                                        .height *
-                                                    0.040,
-                                                width: MediaQuery.of(context)
-                                                        .size
-                                                        .width /
-                                                    5,
-                                              ),
-                                            ],
-                                          ),
-                                          Dimens.boxHeight5,
-                                          Row(
-                                            children: [
-                                              Text("P.O :",
-                                                  style: Styles.blackBold16),
-                                              Dimens.boxWidth10,
-                                              Container(
-                                                color: Color(0xffE8E7EC),
-                                                height: MediaQuery.of(context)
-                                                        .size
-                                                        .height *
-                                                    0.040,
-                                                width: MediaQuery.of(context)
-                                                        .size
-                                                        .width /
-                                                    5,
-                                              ),
-                                            ],
-                                          ),
-                                          Dimens.boxHeight5,
-                                          Row(
-                                            children: [
-                                              Text("Frieght:To Pay /Paid :",
-                                                  style: Styles.blackBold16),
-                                              Dimens.boxWidth10,
-                                              Container(
-                                                color: Color(0xffE8E7EC),
-                                                height: MediaQuery.of(context)
-                                                        .size
-                                                        .height *
-                                                    0.040,
-                                                width: MediaQuery.of(context)
-                                                        .size
-                                                        .width /
-                                                    5,
-                                              ),
-                                            ],
-                                          ),
-                                          Dimens.boxHeight5,
-                                          Row(
-                                            children: [
-                                              Text(
-                                                  "No. of Packages  received :",
-                                                  style: Styles.blackBold16),
-                                              Dimens.boxWidth10,
-                                              Container(
-                                                color: Color(0xffE8E7EC),
-                                                height: MediaQuery.of(context)
-                                                        .size
-                                                        .height *
-                                                    0.040,
-                                                width: MediaQuery.of(context)
-                                                        .size
-                                                        .width /
-                                                    5,
-                                              ),
-                                            ],
-                                          ),
-                                          Dimens.boxHeight5,
-                                          Row(
-                                            children: [
-                                              Text(
-                                                  "Condition of Packages Received :",
-                                                  style: Styles.blackBold16),
-                                              Dimens.boxWidth10,
-                                              Container(
-                                                color: Color(0xffE8E7EC),
-                                                height: MediaQuery.of(context)
-                                                        .size
-                                                        .height *
-                                                    0.040,
-                                                width: MediaQuery.of(context)
-                                                        .size
-                                                        .width /
-                                                    5,
-                                              ),
-                                            ],
-                                          ),
-                                          Dimens.boxHeight5,
-                                          Row(
-                                            children: [
-                                              Text("GIR. No. :",
-                                                  style: Styles.blackBold16),
-                                              Dimens.boxWidth10,
-                                              Container(
-                                                color: Color(0xffE8E7EC),
-                                                height: MediaQuery.of(context)
-                                                        .size
-                                                        .height *
-                                                    0.040,
-                                                width: MediaQuery.of(context)
-                                                        .size
-                                                        .width /
-                                                    5,
-                                              ),
-                                            ],
-                                          ),
-                                          Dimens.boxHeight5,
-                                          Row(children: [
-                                            Text("Amount :",
-                                                style: Styles.blackBold16),
-                                            Dimens.boxWidth10,
-                                            Container(
-                                              color: Color(0xffE8E7EC),
-                                              height: MediaQuery.of(context)
-                                                      .size
-                                                      .height *
-                                                  0.040,
-                                              width: MediaQuery.of(context)
-                                                      .size
-                                                      .width /
-                                                  5,
-                                            ),
-                                          ]),
-                                        ],
-                                      ),
-                                      Spacer(),
-                                      Column(
-                                        crossAxisAlignment:
-                                            CrossAxisAlignment.end,
-                                        children: [
-                                          Row(
-                                            children: [
-                                              Text("Purchase Date :",
-                                                  style: Styles.blackBold16),
-                                              Dimens.boxWidth10,
-                                              Container(
-                                                color: Color(0xffE8E7EC),
-                                                height: MediaQuery.of(context)
-                                                        .size
-                                                        .height *
-                                                    0.040,
-                                                width: MediaQuery.of(context)
-                                                        .size
-                                                        .width /
-                                                    5,
-                                              ),
-                                            ],
-                                          ),
-                                          SizedBox(
-                                            height: 6,
-                                          ),
-                                          Row(
-                                            children: [
-                                              Text("Challan Date :",
-                                                  style: Styles.blackBold16),
-                                              Dimens.boxWidth10,
-                                              Container(
-                                                color: Color(0xffE8E7EC),
-                                                height: MediaQuery.of(context)
-                                                        .size
-                                                        .height *
-                                                    0.040,
-                                                width: MediaQuery.of(context)
-                                                        .size
-                                                        .width /
-                                                    5,
-                                              ),
-                                            ],
-                                          ),
-                                          SizedBox(
-                                            height: 6,
-                                          ),
-                                          Row(
-                                            children: [
-                                              Text("PO Date :",
-                                                  style: Styles.blackBold16),
-                                              Dimens.boxWidth10,
-                                              Container(
-                                                color: Color(0xffE8E7EC),
-                                                height: MediaQuery.of(context)
-                                                        .size
-                                                        .height *
-                                                    0.040,
-                                                width: MediaQuery.of(context)
-                                                        .size
-                                                        .width /
-                                                    5,
-                                              ),
-                                            ],
-                                          ),
-                                          SizedBox(
-                                            height: 6,
-                                          ),
-                                          Row(
-                                            children: [
-                                              Text("Received Date  : ",
-                                                  style: Styles.blackBold16),
-                                              Dimens.boxWidth10,
-                                              Container(
-                                                color: Color(0xffE8E7EC),
-                                                height: MediaQuery.of(context)
-                                                        .size
-                                                        .height *
-                                                    0.040,
-                                                width: MediaQuery.of(context)
-                                                        .size
-                                                        .width /
-                                                    5,
-                                              ),
-                                            ],
-                                          ),
-                                          Dimens.boxHeight5,
-                                          Row(
-                                            children: [
-                                              Text("L.R No :",
-                                                  style: Styles.blackBold16),
-                                              Dimens.boxWidth10,
-                                              Container(
-                                                color: Color(0xffE8E7EC),
-                                                height: MediaQuery.of(context)
-                                                        .size
-                                                        .height *
-                                                    0.040,
-                                                width: MediaQuery.of(context)
-                                                        .size
-                                                        .width /
-                                                    5,
-                                              ),
-                                            ],
-                                          ),
-                                          Dimens.boxHeight5,
-                                          Row(
-                                            children: [
-                                              Text("Vehicle  No :",
-                                                  style: Styles.blackBold16),
-                                              Dimens.boxWidth10,
-                                              Container(
-                                                color: Color(0xffE8E7EC),
-                                                height: MediaQuery.of(context)
-                                                        .size
-                                                        .height *
-                                                    0.040,
-                                                width: MediaQuery.of(context)
-                                                        .size
-                                                        .width /
-                                                    5,
-                                              ),
-                                            ],
-                                          ),
-                                          Dimens.boxHeight5,
-                                          Row(
-                                            children: [
-                                              Text("Job Ref :",
-                                                  style: Styles.blackBold16),
-                                              Dimens.boxWidth10,
-                                              Container(
-                                                color: Color(0xffE8E7EC),
-                                                height: MediaQuery.of(context)
-                                                        .size
-                                                        .height *
-                                                    0.040,
-                                                width: MediaQuery.of(context)
-                                                        .size
-                                                        .width /
-                                                    5,
-                                              ),
-                                            ],
-                                          ),
-                                          Dimens.boxHeight5,
-                                          Row(
-                                            children: [
-                                              Dimens.boxWidth10,
-                                              Text("Currency :",
-                                                  style: Styles.blackBold16),
-                                              Dimens.boxWidth10,
-                                              Container(
-                                                color: Color(0xffE8E7EC),
-                                                height: MediaQuery.of(context)
-                                                        .size
-                                                        .height *
-                                                    0.040,
-                                                width: MediaQuery.of(context)
-                                                        .size
-                                                        .width /
-                                                    5,
-                                              ),
-                                            ],
-                                          ),
-                                        ],
-                                      ),
-                                      Dimens.boxWidth30,
-                                    ],
-                                  ),
-                                ),
-                                Container(
-                                  height: 350,
-                                  // margin: Dimens.edgeInsets20,
-                                  decoration: BoxDecoration(
-                                    border: Border.all(
-                                      color: ColorValues
-                                          .lightGreyColorWithOpacity35,
-                                      width: 1,
+                                        // ActionButton(
+                                        //   icon: Icons.menu,
+                                        //   label: "User List",
+                                        //   onPressed: () {
+                                        //     Get.offNamed(Routes.userList);
+                                        //   },
+                                        //   color: ColorValues.greenlightColor,
+                                        // ),
+                                      ],
                                     ),
-                                    boxShadow: [
-                                      BoxShadow(
-                                        color:
-                                            ColorValues.appBlueBackgroundColor,
-                                        spreadRadius: 2,
-                                        blurRadius: 5,
-                                        offset: Offset(0, 2),
-                                      ),
-                                    ],
                                   ),
-                                  child: Column(
-                                    children: [
+                                  Divider(
+                                    color: ColorValues.greyLightColour,
+                                  ),
+                                  Container(
+                                    margin: Dimens.edgeInsets20,
+                                    child: Row(
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.start,
+                                      children: [
+                                        Column(
+                                          crossAxisAlignment:
+                                              CrossAxisAlignment.end,
+                                          children: [
+                                            Row(
+                                              children: [
+                                                Text("Vendor :",
+                                                    style: Styles.blackBold16),
+                                                Dimens.boxWidth10,
+                                                Container(
+                                                  color: Color(0xffE8E7EC),
+                                                  height: MediaQuery.of(context)
+                                                          .size
+                                                          .height *
+                                                      0.040,
+                                                  width: MediaQuery.of(context)
+                                                          .size
+                                                          .width /
+                                                      5,
+                                                ),
+                                              ],
+                                            ),
+                                            Dimens.boxHeight5,
+                                            Row(
+                                              children: [
+                                                Text("Challan No :",
+                                                    style: Styles.blackBold16),
+                                                Dimens.boxWidth10,
+                                                Container(
+                                                  color: Color(0xffE8E7EC),
+                                                  height: MediaQuery.of(context)
+                                                          .size
+                                                          .height *
+                                                      0.040,
+                                                  width: MediaQuery.of(context)
+                                                          .size
+                                                          .width /
+                                                      5,
+                                                ),
+                                              ],
+                                            ),
+                                            Dimens.boxHeight5,
+                                            Row(
+                                              children: [
+                                                Text("P.O :",
+                                                    style: Styles.blackBold16),
+                                                Dimens.boxWidth10,
+                                                Container(
+                                                  color: Color(0xffE8E7EC),
+                                                  height: MediaQuery.of(context)
+                                                          .size
+                                                          .height *
+                                                      0.040,
+                                                  width: MediaQuery.of(context)
+                                                          .size
+                                                          .width /
+                                                      5,
+                                                ),
+                                              ],
+                                            ),
+                                            Dimens.boxHeight5,
+                                            Row(
+                                              children: [
+                                                Text("Frieght:To Pay /Paid :",
+                                                    style: Styles.blackBold16),
+                                                Dimens.boxWidth10,
+                                                Container(
+                                                  color: Color(0xffE8E7EC),
+                                                  height: MediaQuery.of(context)
+                                                          .size
+                                                          .height *
+                                                      0.040,
+                                                  width: MediaQuery.of(context)
+                                                          .size
+                                                          .width /
+                                                      5,
+                                                ),
+                                              ],
+                                            ),
+                                            Dimens.boxHeight5,
+                                            Row(
+                                              children: [
+                                                Text(
+                                                    "No. of Packages  received :",
+                                                    style: Styles.blackBold16),
+                                                Dimens.boxWidth10,
+                                                Container(
+                                                  color: Color(0xffE8E7EC),
+                                                  height: MediaQuery.of(context)
+                                                          .size
+                                                          .height *
+                                                      0.040,
+                                                  width: MediaQuery.of(context)
+                                                          .size
+                                                          .width /
+                                                      5,
+                                                ),
+                                              ],
+                                            ),
+                                            Dimens.boxHeight5,
+                                            Row(
+                                              children: [
+                                                Text(
+                                                    "Condition of Packages Received :",
+                                                    style: Styles.blackBold16),
+                                                Dimens.boxWidth10,
+                                                Container(
+                                                  color: Color(0xffE8E7EC),
+                                                  height: MediaQuery.of(context)
+                                                          .size
+                                                          .height *
+                                                      0.040,
+                                                  width: MediaQuery.of(context)
+                                                          .size
+                                                          .width /
+                                                      5,
+                                                ),
+                                              ],
+                                            ),
+                                            Dimens.boxHeight5,
+                                            Row(
+                                              children: [
+                                                Text("GIR. No. :",
+                                                    style: Styles.blackBold16),
+                                                Dimens.boxWidth10,
+                                                Container(
+                                                  color: Color(0xffE8E7EC),
+                                                  height: MediaQuery.of(context)
+                                                          .size
+                                                          .height *
+                                                      0.040,
+                                                  width: MediaQuery.of(context)
+                                                          .size
+                                                          .width /
+                                                      5,
+                                                ),
+                                              ],
+                                            ),
+                                            Dimens.boxHeight5,
+                                            Row(children: [
+                                              Text("Amount :",
+                                                  style: Styles.blackBold16),
+                                              Dimens.boxWidth10,
+                                              Container(
+                                                color: Color(0xffE8E7EC),
+                                                height: MediaQuery.of(context)
+                                                        .size
+                                                        .height *
+                                                    0.040,
+                                                width: MediaQuery.of(context)
+                                                        .size
+                                                        .width /
+                                                    5,
+                                              ),
+                                            ]),
+                                          ],
+                                        ),
+                                        Spacer(),
+                                        Column(
+                                          crossAxisAlignment:
+                                              CrossAxisAlignment.end,
+                                          children: [
+                                            Row(
+                                              children: [
+                                                Text("Purchase Date :",
+                                                    style: Styles.blackBold16),
+                                                Dimens.boxWidth10,
+                                                Container(
+                                                  color: Color(0xffE8E7EC),
+                                                  height: MediaQuery.of(context)
+                                                          .size
+                                                          .height *
+                                                      0.040,
+                                                  width: MediaQuery.of(context)
+                                                          .size
+                                                          .width /
+                                                      5,
+                                                ),
+                                              ],
+                                            ),
+                                            SizedBox(
+                                              height: 6,
+                                            ),
+                                            Row(
+                                              children: [
+                                                Text("Challan Date :",
+                                                    style: Styles.blackBold16),
+                                                Dimens.boxWidth10,
+                                                Container(
+                                                  color: Color(0xffE8E7EC),
+                                                  height: MediaQuery.of(context)
+                                                          .size
+                                                          .height *
+                                                      0.040,
+                                                  width: MediaQuery.of(context)
+                                                          .size
+                                                          .width /
+                                                      5,
+                                                ),
+                                              ],
+                                            ),
+                                            SizedBox(
+                                              height: 6,
+                                            ),
+                                            Row(
+                                              children: [
+                                                Text("PO Date :",
+                                                    style: Styles.blackBold16),
+                                                Dimens.boxWidth10,
+                                                Container(
+                                                  color: Color(0xffE8E7EC),
+                                                  height: MediaQuery.of(context)
+                                                          .size
+                                                          .height *
+                                                      0.040,
+                                                  width: MediaQuery.of(context)
+                                                          .size
+                                                          .width /
+                                                      5,
+                                                ),
+                                              ],
+                                            ),
+                                            SizedBox(
+                                              height: 6,
+                                            ),
+                                            Row(
+                                              children: [
+                                                Text("Received Date  : ",
+                                                    style: Styles.blackBold16),
+                                                Dimens.boxWidth10,
+                                                Container(
+                                                  color: Color(0xffE8E7EC),
+                                                  height: MediaQuery.of(context)
+                                                          .size
+                                                          .height *
+                                                      0.040,
+                                                  width: MediaQuery.of(context)
+                                                          .size
+                                                          .width /
+                                                      5,
+                                                ),
+                                              ],
+                                            ),
+                                            Dimens.boxHeight5,
+                                            Row(
+                                              children: [
+                                                Text("L.R No :",
+                                                    style: Styles.blackBold16),
+                                                Dimens.boxWidth10,
+                                                Container(
+                                                  color: Color(0xffE8E7EC),
+                                                  height: MediaQuery.of(context)
+                                                          .size
+                                                          .height *
+                                                      0.040,
+                                                  width: MediaQuery.of(context)
+                                                          .size
+                                                          .width /
+                                                      5,
+                                                ),
+                                              ],
+                                            ),
+                                            Dimens.boxHeight5,
+                                            Row(
+                                              children: [
+                                                Text("Vehicle  No :",
+                                                    style: Styles.blackBold16),
+                                                Dimens.boxWidth10,
+                                                Container(
+                                                  color: Color(0xffE8E7EC),
+                                                  height: MediaQuery.of(context)
+                                                          .size
+                                                          .height *
+                                                      0.040,
+                                                  width: MediaQuery.of(context)
+                                                          .size
+                                                          .width /
+                                                      5,
+                                                ),
+                                              ],
+                                            ),
+                                            Dimens.boxHeight5,
+                                            Row(
+                                              children: [
+                                                Text("Job Ref :",
+                                                    style: Styles.blackBold16),
+                                                Dimens.boxWidth10,
+                                                Container(
+                                                  color: Color(0xffE8E7EC),
+                                                  height: MediaQuery.of(context)
+                                                          .size
+                                                          .height *
+                                                      0.040,
+                                                  width: MediaQuery.of(context)
+                                                          .size
+                                                          .width /
+                                                      5,
+                                                ),
+                                              ],
+                                            ),
+                                            Dimens.boxHeight5,
+                                            Row(
+                                              children: [
+                                                Dimens.boxWidth10,
+                                                Text("Currency :",
+                                                    style: Styles.blackBold16),
+                                                Dimens.boxWidth10,
+                                                Container(
+                                                  color: Color(0xffE8E7EC),
+                                                  height: MediaQuery.of(context)
+                                                          .size
+                                                          .height *
+                                                      0.040,
+                                                  width: MediaQuery.of(context)
+                                                          .size
+                                                          .width /
+                                                      5,
+                                                ),
+                                              ],
+                                            ),
+                                          ],
+                                        ),
+                                        Dimens.boxWidth30,
+                                      ],
+                                    ),
+                                  ),
+                                  Container(
+                                    margin: Dimens.edgeInsets20, //height: 300,
+                                    height:
+                                        ((controller.goDetails!.value.length) *
+                                                80) +
+                                            170,
+                                    decoration: BoxDecoration(
+                                      border: Border.all(
+                                        color: ColorValues
+                                            .lightGreyColorWithOpacity35,
+                                        width: 1,
+                                      ),
+                                      boxShadow: [
+                                        BoxShadow(
+                                          color: ColorValues
+                                              .appBlueBackgroundColor,
+                                          spreadRadius: 2,
+                                          blurRadius: 5,
+                                          offset: Offset(0, 2),
+                                        ),
+                                      ],
+                                    ),
+                                    child: Column(children: [
                                       Padding(
-                                        padding: const EdgeInsets.symmetric(
-                                            horizontal: 20, vertical: 5),
+                                        padding: const EdgeInsets.all(10.0),
                                         child: Row(
                                           children: [
-                                            Text(" Selects Assets"),
-                                            Spacer(),
-                                            // GestureDetector(
-                                            //     onTap: () {
-                                            //       controller.addRowItem();
-                                            //     },
-                                            //     child: Row(
-                                            //       children: [
-                                            //         Text("Add"),
-                                            //         Icon(Icons.exposure_plus_1),
-                                            //       ],
-                                            //     )),
+                                            Text(
+                                              "Selects Assets ",
+                                              style: Styles.blue700,
+                                            ),
                                           ],
                                         ),
                                       ),
-                                      // Column(
-                                      //     children: []..addAll(controller
-                                      //           .rowItem.value
-                                      //           .map((e) {
-                                      //         return Text(jsonEncode(e));
-                                      //       }))),
-                                      // Text(jsonEncode(
-                                      //     controller.dropdownMapperData)),
-                                      Obx(
-                                        () => Container(
-                                          height: 300,
-                                          child: ScrollableTableView(
-                                            columns: [
-                                              "Assets",
-                                              "Paid_By",
+                                      Expanded(
+                                        child: DataTable2(
+                                          minWidth: 1000,
+                                          dataRowHeight: 105,
+                                          columnSpacing: 10,
+                                          border: TableBorder.all(
+                                              color: Color.fromARGB(
+                                                  255, 206, 229, 234)),
+                                          columns: [
+                                            DataColumn2(
+                                                fixedWidth: 300,
+                                                label: Text(
+                                                  "Assets",
+                                                  style: TextStyle(
+                                                      fontSize: 15,
+                                                      fontWeight:
+                                                          FontWeight.bold),
+                                                )),
+                                            DataColumn2(
+                                                fixedWidth: 250,
+                                                label: Text(
+                                                  "Paid By",
+                                                  style: TextStyle(
+                                                      fontSize: 15,
+                                                      fontWeight:
+                                                          FontWeight.bold),
+                                                )),
+                                            DataColumn2(
+                                                // fixedWidth: 300,
+                                                label: Text(
                                               "Cost",
+                                              style: TextStyle(
+                                                  fontSize: 15,
+                                                  fontWeight: FontWeight.bold),
+                                            )),
+                                            DataColumn2(
+                                                // fixedWidth: 300,
+                                                label: Text(
                                               "Ordered Qty",
+                                              style: TextStyle(
+                                                  fontSize: 15,
+                                                  fontWeight: FontWeight.bold),
+                                            )),
+                                            DataColumn2(
+                                                // fixedWidth: 300,
+                                                label: Text(
                                               "Received  Qty",
+                                              style: TextStyle(
+                                                  fontSize: 15,
+                                                  fontWeight: FontWeight.bold),
+                                            )),
+                                            DataColumn2(
+                                                //  fixedWidth: 300,
+                                                label: Text(
                                               "Accepted Qty",
+                                              style: TextStyle(
+                                                  fontSize: 15,
+                                                  fontWeight: FontWeight.bold),
+                                            )),
+                                            DataColumn2(
+                                                //  fixedWidth: 300,
+                                                label: Text(
                                               "Damaged Items",
-                                              // "Order Pending"
-                                            ].map((column) {
-                                              return TableViewColumn(
-                                                label: column,
-                                                minWidth: Get.width * 0.18,
-                                                height: Get.height / 2,
-                                              );
-                                            }).toList(),
-                                            rows: controller.rowItem.value
-                                                .map((record) {
-                                              return TableViewRow(
-                                                height: 130,
-                                                cells: record.map((mapData) {
-                                                  return TableViewCell(
-                                                    child: (mapData['key'] ==
-                                                            "Drop_down")
-                                                        ? Padding(
-                                                            padding:
-                                                                const EdgeInsets
-                                                                    .only(
-                                                              left: 20,
-                                                              right: 20,
-                                                            ),
-                                                            child: Column(
-                                                              mainAxisAlignment:
-                                                                  MainAxisAlignment
-                                                                      .center,
-                                                              crossAxisAlignment:
-                                                                  CrossAxisAlignment
-                                                                      .center,
-                                                              children: [
-                                                                IgnorePointer(
-                                                                  child:
-                                                                      DropdownWebStock(
-                                                                    width: MediaQuery.of(
-                                                                            context)
-                                                                        .size
-                                                                        .width,
-                                                                    dropdownList:
-                                                                        controller
-                                                                            .assetList,
-                                                                    selectedValue:
-                                                                        mapData[
-                                                                            "value"],
-                                                                    onValueChanged:
-                                                                        (list,
-                                                                            selectedValue) {
-                                                                      print(
-                                                                          'paifcghb:${controller.assetList}');
-                                                                      print({
-                                                                        selectedValue:
-                                                                            selectedValue
-                                                                      });
-                                                                      mapData["value"] =
-                                                                          selectedValue;
-                                                                      controller.dropdownMapperData[selectedValue] = list.firstWhere(
-                                                                          (element) =>
-                                                                              element.name ==
-                                                                              selectedValue,
-                                                                          orElse:
-                                                                              null);
-                                                                    },
-                                                                  ),
-                                                                ),
-                                                                Row(
-                                                                  children: [
-                                                                    Text(
-                                                                        "Assets Code :"),
-                                                                    Text(
-                                                                        "${controller.dropdownMapperData[mapData['value']]?.asset_code ?? ''}")
-                                                                  ],
-                                                                ),
-                                                                Row(
-                                                                  children: [
-                                                                    Text(
-                                                                        "Assets type :"),
-                                                                    Text(
-                                                                        "${controller.dropdownMapperData[mapData['value']]?.asset_type ?? ''}")
-                                                                  ],
-                                                                ),
-                                                                Row(
-                                                                  children: [
-                                                                    Text(
-                                                                        "Assets Category :"),
-                                                                    Text(
-                                                                        "${controller.dropdownMapperData[mapData['value']]?.cat_name ?? ''}")
-                                                                  ],
-                                                                )
-                                                              ],
-                                                            ),
-                                                          )
-                                                        : (mapData['key'] ==
-                                                                "Paid_By")
-                                                            ? Padding(
-                                                                padding:
-                                                                    const EdgeInsets
-                                                                            .only(
-                                                                        left:
-                                                                            10,
-                                                                        right:
-                                                                            10),
+                                              style: TextStyle(
+                                                  fontSize: 15,
+                                                  fontWeight: FontWeight.bold),
+                                            )),
+                                          ],
+                                          rows: controller.rowItem.value
+                                              .map((record) {
+                                            return DataRow(
+                                              // height: 130,
+                                              cells: record.map((mapData) {
+                                                return DataCell(
+                                                  (mapData['key'] ==
+                                                          "Drop_down")
+                                                      ? Padding(
+                                                          padding:
+                                                              const EdgeInsets
+                                                                  .only(
+                                                            left: 10,
+                                                            right: 10,
+                                                          ),
+                                                          child: Column(
+                                                            mainAxisAlignment:
+                                                                MainAxisAlignment
+                                                                    .center,
+                                                            crossAxisAlignment:
+                                                                CrossAxisAlignment
+                                                                    .center,
+                                                            children: [
+                                                              IgnorePointer(
                                                                 child:
-                                                                    IgnorePointer(
-                                                                  child:
-                                                                      DropdownWebStock(
-                                                                    width: MediaQuery.of(
-                                                                            context)
-                                                                        .size
-                                                                        .width,
-                                                                    dropdownList:
-                                                                        controller
-                                                                            .paid,
-                                                                    selectedValue:
-                                                                        mapData[
-                                                                            "value"],
-                                                                    onValueChanged:
-                                                                        (list,
-                                                                            selectedValue) {
-                                                                      print(
-                                                                          'paifcghb:${controller.paid}');
-                                                                      print({
-                                                                        selectedValue:
-                                                                            selectedValue
-                                                                      });
-                                                                      mapData["value"] =
-                                                                          selectedValue;
-                                                                      controller.paiddropdownMapperData[selectedValue] = list.firstWhere(
-                                                                          (element) =>
-                                                                              element.name ==
-                                                                              selectedValue,
-                                                                          orElse:
-                                                                              null);
-                                                                    },
-                                                                  ),
+                                                                    DropdownWebStock(
+                                                                  width: MediaQuery.of(
+                                                                          context)
+                                                                      .size
+                                                                      .width,
+                                                                  dropdownList:
+                                                                      controller
+                                                                          .assetList,
+                                                                  selectedValue:
+                                                                      mapData[
+                                                                          "value"],
+                                                                  onValueChanged:
+                                                                      (list,
+                                                                          selectedValue) {
+                                                                    print(
+                                                                        'paifcghb:${controller.assetList}');
+                                                                    print({
+                                                                      selectedValue:
+                                                                          selectedValue
+                                                                    });
+                                                                    mapData["value"] =
+                                                                        selectedValue;
+                                                                    controller.dropdownMapperData[selectedValue] = list.firstWhere(
+                                                                        (element) =>
+                                                                            element.name ==
+                                                                            selectedValue,
+                                                                        orElse:
+                                                                            null);
+                                                                  },
                                                                 ),
-                                                              )
-                                                            : (mapData['key'] ==
-                                                                        "Order") ||
-                                                                    (mapData[
-                                                                            'key'] ==
-                                                                        "Cost")
-                                                                ? Padding(
-                                                                    padding:
-                                                                        const EdgeInsets
-                                                                            .only(
-                                                                      left: 20,
-                                                                      right: 20,
-                                                                    ),
-                                                                    child: Container(
-                                                                        width: (Get.width * .4),
-                                                                        // padding: EdgeInsets.all(value),
-                                                                        decoration: BoxDecoration(
-                                                                          boxShadow: [
-                                                                            BoxShadow(
-                                                                              color: Colors.black26,
-                                                                              offset: const Offset(
-                                                                                5.0,
-                                                                                5.0,
-                                                                              ),
-                                                                              blurRadius: 5.0,
-                                                                              spreadRadius: 1.0,
-                                                                            ),
-                                                                          ],
-                                                                          color:
-                                                                              ColorValues.whiteColor,
-                                                                          borderRadius:
-                                                                              BorderRadius.circular(5),
+                                                              ),
+                                                              // Row(
+                                                              //   children: [
+                                                              //     Text(
+                                                              //         "Assets Code :"),
+                                                              //     Text(
+                                                              //         "${controller.dropdownMapperData[mapData['value']]?.asset_code ?? ''}")
+                                                              //   ],
+                                                              // ),
+                                                              // Row(
+                                                              //   children: [
+                                                              //     Text(
+                                                              //         "Assets type :"),
+                                                              //     Text(
+                                                              //         "${controller.dropdownMapperData[mapData['value']]?.asset_type ?? ''}")
+                                                              //   ],
+                                                              // ),
+                                                              // Row(
+                                                              //   children: [
+                                                              //     Text(
+                                                              //         "Assets Category :"),
+                                                              //     Text(
+                                                              //         "${controller.dropdownMapperData[mapData['value']]?.cat_name ?? ''}")
+                                                              //   ],
+                                                              // )
+                                                            ],
+                                                          ),
+                                                        )
+                                                      : (mapData['key'] ==
+                                                              "Paid_By")
+                                                          ? Padding(
+                                                              padding:
+                                                                  const EdgeInsets
+                                                                          .only(
+                                                                      left: 10,
+                                                                      right:
+                                                                          10),
+                                                              child:
+                                                                  IgnorePointer(
+                                                                child:
+                                                                    DropdownWebStock(
+                                                                  width: MediaQuery.of(
+                                                                          context)
+                                                                      .size
+                                                                      .width,
+                                                                  dropdownList:
+                                                                      controller
+                                                                          .paid,
+                                                                  selectedValue:
+                                                                      mapData[
+                                                                          "value"],
+                                                                  onValueChanged:
+                                                                      (list,
+                                                                          selectedValue) {
+                                                                    print(
+                                                                        'paifcghb:${controller.paid}');
+                                                                    print({
+                                                                      selectedValue:
+                                                                          selectedValue
+                                                                    });
+                                                                    mapData["value"] =
+                                                                        selectedValue;
+                                                                    controller.paiddropdownMapperData[selectedValue] = list.firstWhere(
+                                                                        (element) =>
+                                                                            element.name ==
+                                                                            selectedValue,
+                                                                        orElse:
+                                                                            null);
+                                                                  },
+                                                                ),
+                                                              ),
+                                                            )
+                                                          : (mapData['key'] ==
+                                                                      "Order") ||
+                                                                  (mapData[
+                                                                          'key'] ==
+                                                                      "Cost")
+                                                              ? Container(
+
+                                                                  // padding: EdgeInsets.all(value),
+                                                                  decoration:
+                                                                      BoxDecoration(
+                                                                    boxShadow: [
+                                                                      BoxShadow(
+                                                                        color: Colors
+                                                                            .black26,
+                                                                        offset:
+                                                                            const Offset(
+                                                                          5.0,
+                                                                          5.0,
                                                                         ),
-                                                                        child: IgnorePointer(
+                                                                        blurRadius:
+                                                                            5.0,
+                                                                        spreadRadius:
+                                                                            1.0,
+                                                                      ),
+                                                                    ],
+                                                                    color: ColorValues
+                                                                        .whiteColor,
+                                                                    borderRadius:
+                                                                        BorderRadius
+                                                                            .circular(5),
+                                                                  ),
+                                                                  child:
+                                                                      IgnorePointer(
+                                                                    child:
+                                                                        LoginCustomTextfield(
+                                                                      width: (Get
+                                                                              .width *
+                                                                          .4),
+                                                                      keyboardType:
+                                                                          TextInputType
+                                                                              .number,
+                                                                      inputFormatters: <
+                                                                          TextInputFormatter>[
+                                                                        FilteringTextInputFormatter
+                                                                            .digitsOnly
+                                                                      ],
+                                                                      maxLine:
+                                                                          1,
+                                                                      textController:
+                                                                          new TextEditingController(
+                                                                              text: mapData["value"] ?? ''),
+                                                                      onChanged:
+                                                                          (txt) {
+                                                                        mapData["value"] =
+                                                                            txt;
+                                                                      },
+                                                                    ),
+                                                                  ))
+                                                              : (mapData['key'] ==
+                                                                          "Received") ||
+                                                                      (mapData[
+                                                                              'key'] ==
+                                                                          "Accepted")
+                                                                  ? Container(
+
+                                                                      // padding: EdgeInsets.all(value),
+                                                                      decoration:
+                                                                          BoxDecoration(
+                                                                        boxShadow: [
+                                                                          BoxShadow(
+                                                                            color:
+                                                                                Colors.black26,
+                                                                            offset:
+                                                                                const Offset(
+                                                                              5.0,
+                                                                              5.0,
+                                                                            ),
+                                                                            blurRadius:
+                                                                                5.0,
+                                                                            spreadRadius:
+                                                                                1.0,
+                                                                          ),
+                                                                        ],
+                                                                        color: ColorValues
+                                                                            .whiteColor,
+                                                                        borderRadius:
+                                                                            BorderRadius.circular(5),
+                                                                      ),
+                                                                      child:
+                                                                          LoginCustomTextfield(
+                                                                        width: (Get.width *
+                                                                            .4),
+                                                                        keyboardType:
+                                                                            TextInputType.number,
+                                                                        inputFormatters: <
+                                                                            TextInputFormatter>[
+                                                                          FilteringTextInputFormatter
+                                                                              .digitsOnly
+                                                                        ],
+                                                                        enabled: controller.getPurchaseDetailsByIDModel.value?.status == 306 ||
+                                                                                controller.getPurchaseDetailsByIDModel.value?.status == 307 && varUserAccessModel.value.access_list!.where((e) => e.feature_id == UserAccessConstants.kGoodsFeatureId && e.add == UserAccessConstants.kHaveAddAccess).length > 0
+                                                                            ? true
+                                                                            : false,
+                                                                        maxLine:
+                                                                            1,
+                                                                        textController:
+                                                                            new TextEditingController(text: mapData["value"] ?? ''),
+                                                                        onChanged:
+                                                                            (txt) {
+                                                                          mapData["value"] =
+                                                                              txt;
+                                                                        },
+                                                                      ))
+                                                                  :
+                                                                  //  (mapData['key'] ==
+                                                                  //         "Pending")
+                                                                  //     ? Padding(
+                                                                  //         padding:
+                                                                  //             const EdgeInsets
+                                                                  //                 .only(
+                                                                  //           left:
+                                                                  //               20,
+                                                                  //           right:
+                                                                  //               20,
+                                                                  //         ),
+                                                                  //         child:
+                                                                  //             Checkbox(
+                                                                  //           onChanged:
+                                                                  //               (value) {},
+                                                                  //           value:
+                                                                  //               false,
+                                                                  //         ))
+                                                                  //     :
+                                                                  (mapData['key'] ==
+                                                                          "Damaged")
+                                                                      ? Container(
+                                                                          decoration:
+                                                                              BoxDecoration(
+                                                                            boxShadow: [
+                                                                              BoxShadow(
+                                                                                color: Colors.black26,
+                                                                                offset: const Offset(
+                                                                                  5.0,
+                                                                                  5.0,
+                                                                                ),
+                                                                                blurRadius: 5.0,
+                                                                                spreadRadius: 1.0,
+                                                                              ),
+                                                                            ],
+                                                                            color:
+                                                                                ColorValues.whiteColor,
+                                                                            borderRadius:
+                                                                                BorderRadius.circular(5),
+                                                                          ),
                                                                           child:
                                                                               LoginCustomTextfield(
+                                                                            width:
+                                                                                (Get.width * .4),
                                                                             keyboardType:
                                                                                 TextInputType.number,
                                                                             inputFormatters: <TextInputFormatter>[
                                                                               FilteringTextInputFormatter.digitsOnly
                                                                             ],
+                                                                            enabled: controller.getPurchaseDetailsByIDModel.value?.status == 306 || controller.getPurchaseDetailsByIDModel.value?.status == 307 && varUserAccessModel.value.access_list!.where((e) => e.feature_id == UserAccessConstants.kGoodsFeatureId && e.add == UserAccessConstants.kHaveAddAccess).length > 0
+                                                                                ? true
+                                                                                : false,
                                                                             maxLine:
                                                                                 1,
                                                                             textController:
@@ -694,134 +856,24 @@ class _ReceiveGoodsOrderWebState extends State<ReceiveGoodsOrderWeb> {
                                                                                 (txt) {
                                                                               mapData["value"] = txt;
                                                                             },
-                                                                          ),
-                                                                        )),
-                                                                  )
-                                                                : (mapData['key'] ==
-                                                                            "Received") ||
-                                                                        (mapData['key'] ==
-                                                                            "Accepted")
-                                                                    ? Padding(
-                                                                        padding:
-                                                                            const EdgeInsets.only(
-                                                                          left:
-                                                                              20,
-                                                                          right:
-                                                                              20,
-                                                                        ),
-                                                                        child: Container(
-                                                                            width: (Get.width * .4),
-                                                                            // padding: EdgeInsets.all(value),
-                                                                            decoration: BoxDecoration(
-                                                                              boxShadow: [
-                                                                                BoxShadow(
-                                                                                  color: Colors.black26,
-                                                                                  offset: const Offset(
-                                                                                    5.0,
-                                                                                    5.0,
-                                                                                  ),
-                                                                                  blurRadius: 5.0,
-                                                                                  spreadRadius: 1.0,
-                                                                                ),
-                                                                              ],
-                                                                              color: ColorValues.whiteColor,
-                                                                              borderRadius: BorderRadius.circular(5),
-                                                                            ),
-                                                                            child: LoginCustomTextfield(
-                                                                              keyboardType: TextInputType.number,
-                                                                              inputFormatters: <TextInputFormatter>[
-                                                                                FilteringTextInputFormatter.digitsOnly
-                                                                              ],
-                                                                              enabled: controller.getPurchaseDetailsByIDModel.value?.status == 306 || controller.getPurchaseDetailsByIDModel.value?.status == 307 && varUserAccessModel.value.access_list!.where((e) => e.feature_id == UserAccessConstants.kGoodsFeatureId && e.add == UserAccessConstants.kHaveAddAccess).length > 0 ? true : false,
-                                                                              maxLine: 1,
-                                                                              textController: new TextEditingController(text: mapData["value"] ?? ''),
-                                                                              onChanged: (txt) {
-                                                                                mapData["value"] = txt;
-                                                                              },
-                                                                            )),
-                                                                      )
-                                                                    :
-                                                                    //  (mapData['key'] ==
-                                                                    //         "Pending")
-                                                                    //     ? Padding(
-                                                                    //         padding:
-                                                                    //             const EdgeInsets
-                                                                    //                 .only(
-                                                                    //           left:
-                                                                    //               20,
-                                                                    //           right:
-                                                                    //               20,
-                                                                    //         ),
-                                                                    //         child:
-                                                                    //             Checkbox(
-                                                                    //           onChanged:
-                                                                    //               (value) {},
-                                                                    //           value:
-                                                                    //               false,
-                                                                    //         ))
-                                                                    //     :
-                                                                    (mapData['key'] ==
-                                                                            "Damaged")
-                                                                        ? Padding(
-                                                                            padding: const EdgeInsets
-                                                                                .only(
-                                                                              left: 20,
-                                                                              right: 20,
-                                                                            ),
-                                                                            child:
-                                                                                Padding(
-                                                                              padding: const EdgeInsets.only(
-                                                                                left: 20,
-                                                                                right: 20,
-                                                                              ),
-                                                                              child: Container(
-                                                                                  width: (Get.width * .4),
-                                                                                  // padding: EdgeInsets.all(value),
-                                                                                  decoration: BoxDecoration(
-                                                                                    boxShadow: [
-                                                                                      BoxShadow(
-                                                                                        color: Colors.black26,
-                                                                                        offset: const Offset(
-                                                                                          5.0,
-                                                                                          5.0,
-                                                                                        ),
-                                                                                        blurRadius: 5.0,
-                                                                                        spreadRadius: 1.0,
-                                                                                      ),
-                                                                                    ],
-                                                                                    color: ColorValues.whiteColor,
-                                                                                    borderRadius: BorderRadius.circular(5),
-                                                                                  ),
-                                                                                  child: LoginCustomTextfield(
-                                                                                    keyboardType: TextInputType.number,
-                                                                                    inputFormatters: <TextInputFormatter>[
-                                                                                      FilteringTextInputFormatter.digitsOnly
-                                                                                    ],
-                                                                                    enabled: controller.getPurchaseDetailsByIDModel.value?.status == 306 || controller.getPurchaseDetailsByIDModel.value?.status == 307 && varUserAccessModel.value.access_list!.where((e) => e.feature_id == UserAccessConstants.kGoodsFeatureId && e.add == UserAccessConstants.kHaveAddAccess).length > 0 ? true : false,
-                                                                                    maxLine: 1,
-                                                                                    textController: new TextEditingController(text: mapData["value"] ?? ''),
-                                                                                    onChanged: (txt) {
-                                                                                      mapData["value"] = txt;
-                                                                                    },
-                                                                                  )),
-                                                                            ))
-                                                                        : Text(mapData['key'] ??
-                                                                            ''),
-                                                  );
-                                                }).toList(),
-                                              );
-                                            }).toList(),
-                                          ),
+                                                                          ))
+                                                                      : Text(mapData[
+                                                                              'key'] ??
+                                                                          ''),
+                                                );
+                                              }).toList(),
+                                            );
+                                          }).toList(),
                                         ),
                                       ),
-                                    ],
+                                    ]),
                                   ),
-                                ),
-                                Dimens.boxHeight15,
-                              ],
+                                  Dimens.boxHeight15,
+                                ],
+                              ),
                             ),
-                          ),
-                        ],
+                          ],
+                        ),
                       ),
                     ),
                   ),

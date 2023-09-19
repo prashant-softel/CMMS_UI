@@ -65,6 +65,7 @@ class ReceiveGoodsOrdersController extends GetxController {
   Map<String, PaiedModel> paiddropdownMapperData = {};
   RxList<GetPurchaseDetailsByIDModel?>? getPurchaseDetailsByIDModelList =
       <GetPurchaseDetailsByIDModel?>[].obs;
+  RxList<GoDetails?>? goDetails = <GoDetails?>[].obs;
   Rx<GetPurchaseDetailsByIDModel?> getPurchaseDetailsByIDModel =
       GetPurchaseDetailsByIDModel().obs;
 
@@ -168,6 +169,7 @@ class ReceiveGoodsOrdersController extends GetxController {
       print(
           'Additioanl Email Employees${_getPurchaseDetailsById.goDetails?.length ?? 0}');
       rowItem.value = [];
+      goDetails?.value = _getPurchaseDetailsById.goDetails ?? [];
       _getPurchaseDetailsById.goDetails?.forEach((element) {
         rowItem.value.add([
           {
