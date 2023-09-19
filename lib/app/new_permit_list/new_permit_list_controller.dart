@@ -277,22 +277,22 @@ class NewPermitListController extends GetxController {
   //   print('Cancel Button By Approver Data:${permitId}');
   // }
 
-  Future<void> permitExtendButton({String? permitId}) async {
-    String _reasonForExtensionComment =
-        extendReasonCommentTextFieldCtrlr.text.trim();
-    String _timeForExtensionComment = timeTextFieldCtrlr.text.trim();
+  // Future<void> permitExtendButton({String? permitId}) async {
+  //   String _reasonForExtensionComment =
+  //       extendReasonCommentTextFieldCtrlr.text.trim();
+  //   String _timeForExtensionComment = timeTextFieldCtrlr.text.trim();
 
-    final _permitextendBtn = await newPermitListPresenter.permitExtendButton(
-      comment: _reasonForExtensionComment,
-      Time: _timeForExtensionComment,
-      id: permitId,
-    );
-    // showAlertPermitApproveDialog();
+  //   final _permitextendBtn = await newPermitListPresenter.permitExtendButton(
+  //     comment: _reasonForExtensionComment,
+  //     Time: _timeForExtensionComment,
+  //     id: permitId,
+  //   );
+  //   // showAlertPermitApproveDialog();
 
-    print('Extend Button Data:${_reasonForExtensionComment}');
-    print('Extend Button Data:${_timeForExtensionComment}');
-    print('Extend Button Data:${permitId}');
-  }
+  //   print('Extend Button Data:${_reasonForExtensionComment}');
+  //   print('Extend Button Data:${_timeForExtensionComment}');
+  //   print('Extend Button Data:${permitId}');
+  // }
 
   // Future<void> permitCloseButton({String? permitId}) async {
   //   String _closeComment = closeCommentTextFieldCtrlr.text.trim();

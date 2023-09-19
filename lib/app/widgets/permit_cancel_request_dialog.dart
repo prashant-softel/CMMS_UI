@@ -38,356 +38,391 @@ class PermitCancelReQuestDialog extends GetView {
         content: Builder(builder: (context) {
           var height = MediaQuery.of(context).size.height;
 
-          return Container(
-            padding: Dimens.edgeInsets05_0_5_0,
-            height: MediaQuery.of(context).size.height / 1,
-            width: MediaQuery.of(context).size.width / 1.5,
-            child: SingleChildScrollView(
-              child: Column(crossAxisAlignment: CrossAxisAlignment.stretch, children: [
-                Divider(
-                  color: ColorValues.greyLightColour,
-                  thickness: 1,
-                ),
-                Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Container(
-                      margin: Dimens.edgeInsets20,
-                      // decoration: BoxDecoration(
-                      //   border: Border.all(
-                      //     color: ColorValues.lightGreyColorWithOpacity35,
-                      //     width: 1,
-                      //   ),
-                      //   boxShadow: [
-                      //     BoxShadow(
-                      //       color: ColorValues.appBlueBackgroundColor,
-                      //       spreadRadius: 2,
-                      //       blurRadius: 5,
-                      //       offset: Offset(0, 2),
-                      //     ),
-                      //   ],
-                      // ),
-                      // height: ,
-                      width: MediaQuery.of(context).size.width / 1,
-                      child: Column(
-                        mainAxisAlignment: MainAxisAlignment.start,
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Padding(
-                            padding: const EdgeInsets.all(10.0),
-                            child: Row(
+          return  Container(
+              padding: Dimens.edgeInsets05_0_5_0,
+              height: MediaQuery.of(context).size.height / 1,
+              width: MediaQuery.of(context).size.width / 1.5,
+              child: SingleChildScrollView(
+                child: Column(crossAxisAlignment: CrossAxisAlignment.stretch, children: [
+                  Divider(
+                    color: ColorValues.greyLightColour,
+                    thickness: 1,
+                  ),
+                  Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Container(
+                        margin: Dimens.edgeInsets20,
+                        // decoration: BoxDecoration(
+                        //   border: Border.all(
+                        //     color: ColorValues.lightGreyColorWithOpacity35,
+                        //     width: 1,
+                        //   ),
+                        //   boxShadow: [
+                        //     BoxShadow(
+                        //       color: ColorValues.appBlueBackgroundColor,
+                        //       spreadRadius: 2,
+                        //       blurRadius: 5,
+                        //       offset: Offset(0, 2),
+                        //     ),
+                        //   ],
+                        // ),
+                        // height: ,
+                        width: MediaQuery.of(context).size.width / 1,
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment.start,
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Padding(
+                              padding: const EdgeInsets.all(10.0),
+                              child: Row(
+                                children: [
+                                  // Text(
+                                  //   "Cancel Permit Request",
+                                  //   style: Styles.blue700,
+                                  // ),
+                                ],
+                              ),
+                            ),
+                            // Divider(
+                            //   color: ColorValues.greyLightColour,
+                            // ),
+                            Text(
+                              StringConstants.cancelWorkPermit,
+                              style: Styles.black17,
+                            ),
+                            // Row(
+                            //   mainAxisAlignment: MainAxisAlignment.start,
+                            //   crossAxisAlignment: CrossAxisAlignment.start,
+                            //   children: [
+                            //     checkBoxInstructionMethod(6),
+                            //     Padding(
+                            //       padding: const EdgeInsets.only(top: 3),
+                            //       child: Text(
+                            //         StringConstants.cancelWorkPermitCheck1,
+                            //         style: Styles.black17,
+                            //       ),
+                            //     )
+                            //   ],
+                            // ),
+                            // Row(
+                            //   mainAxisAlignment: MainAxisAlignment.start,
+                            //   crossAxisAlignment: CrossAxisAlignment.start,
+                            //   children: [
+                            //     checkBoxInstructionMethod(7),
+                            //     Padding(
+                            //       padding: const EdgeInsets.only(top: 5),
+                            //       child: Text(
+                            //         StringConstants.cancelWorkPermitCheck2,
+                            //         style: Styles.black17,
+                            //       ),
+                            //     )
+                            //   ],
+                            // ),
+                            // Row(
+                            //   mainAxisAlignment: MainAxisAlignment.start,
+                            //   crossAxisAlignment: CrossAxisAlignment.start,
+                            //   children: [
+                            //     checkBoxInstructionMethod(8),
+                            //     Padding(
+                            //       padding: const EdgeInsets.only(top: 5),
+                            //       child: Text(
+                            //         StringConstants.cancelWorkPermitCheck3,
+                            //         style: Styles.black17,
+                            //       ),
+                            //     )
+                            //   ],
+                            // ),
+          
+                             Column(
+                                children: []..addAll(controller.permitCancelConditionList!.map((element) => Column(
+                                      // mainAxisSize: MainAxisSize.min,
+                                      mainAxisAlignment: MainAxisAlignment.start,
+                                      crossAxisAlignment: CrossAxisAlignment.start,
+                                      children: [
+                                         Row(
+                                            children: [
+                                              
+                                              // // Text('${element!.isChecked}'),
+                                              // Obx(
+                                              //   () => 
+                                              
+                                                Checkbox(
+                                                  value: element!.isChecked,
+                                                  onChanged: (bool? value) {
+                                                    // controller.toggleItemSelection(index);
+                                                    element.isChecked = !element.isChecked!;
+                                                     print('Element:${ element.isChecked}');
+                                                  },
+                                                ),
+                                              // ),
+                                              
+                                        
+                                              Expanded(
+                                                  child: Text(
+                                                    "${element!.name}",
+                                                    style: Styles.black17,
+                                                  ))
+                                            ],
+                                          ),
+                                        
+                                      ],
+                                    ))),
+                              ),
+                            
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.start,
+                              crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
-                                // Text(
-                                //   "Cancel Permit Request",
-                                //   style: Styles.blue700,
-                                // ),
+                                checkBoxInstructionMethod(9),
+                                Padding(
+                                  padding: const EdgeInsets.only(top: 5),
+                                  child: Text(
+                                    StringConstants.cancelWorkPermitCheck4,
+                                    style: Styles.black17,
+                                  ),
+                                ),
+                                Dimens.boxWidth5,
+                                SizedBox(width: 130, child: CustomTextFieldForPermit())
                               ],
                             ),
-                          ),
-                          // Divider(
-                          //   color: ColorValues.greyLightColour,
-                          // ),
-                          Text(
-                            StringConstants.cancelWorkPermit,
-                            style: Styles.black17,
-                          ),
-                          Row(
-                            mainAxisAlignment: MainAxisAlignment.start,
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              checkBoxInstructionMethod(6),
-                              Padding(
-                                padding: const EdgeInsets.only(top: 3),
-                                child: Text(
-                                  StringConstants.cancelWorkPermitCheck1,
-                                  style: Styles.black17,
-                                ),
-                              )
-                            ],
-                          ),
-                          Row(
-                            mainAxisAlignment: MainAxisAlignment.start,
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              checkBoxInstructionMethod(7),
-                              Padding(
-                                padding: const EdgeInsets.only(top: 5),
-                                child: Text(
-                                  StringConstants.cancelWorkPermitCheck2,
-                                  style: Styles.black17,
-                                ),
-                              )
-                            ],
-                          ),
-                          Row(
-                            mainAxisAlignment: MainAxisAlignment.start,
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              checkBoxInstructionMethod(8),
-                              Padding(
-                                padding: const EdgeInsets.only(top: 5),
-                                child: Text(
-                                  StringConstants.cancelWorkPermitCheck3,
-                                  style: Styles.black17,
-                                ),
-                              )
-                            ],
-                          ),
-                          Row(
-                            mainAxisAlignment: MainAxisAlignment.start,
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              checkBoxInstructionMethod(9),
-                              Padding(
-                                padding: const EdgeInsets.only(top: 5),
-                                child: Text(
-                                  StringConstants.cancelWorkPermitCheck4,
-                                  style: Styles.black17,
-                                ),
+                            Padding(
+                              padding: const EdgeInsets.only(left: 10),
+                              child: Text(
+                                'Above Conditions, Validated By:',
+                                style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
                               ),
-                              Dimens.boxWidth5,
-                              SizedBox(width: 130, child: CustomTextFieldForPermit())
-                            ],
-                          ),
-                          Padding(
-                            padding: const EdgeInsets.only(left: 10),
-                            child: Text(
-                              'Above Conditions, Validated By:',
-                              style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
                             ),
-                          ),
-                          Padding(
-                            padding: const EdgeInsets.only(left: 10, right: 10),
-                            child: Row(
+                            Padding(
+                              padding: const EdgeInsets.only(left: 10, right: 10),
+                              child: Row(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  Column(
+                                    crossAxisAlignment: CrossAxisAlignment.end,
+                                    children: [
+                                      Text(
+                                        'Authorized Person',
+                                        style: Styles.blackBold17,
+                                      ),
+                                      Text(
+                                        '${controller.viewPermitDetailsModel.value?.requestedByName}',
+                                        style: Styles.black17,
+                                      ),
+                                    ],
+                                  ),
+                                  Spacer(),
+                                  Column(
+                                    crossAxisAlignment: CrossAxisAlignment.end,
+                                    children: [
+                                      Text(
+                                        'Designation',
+                                        style: Styles.blackBold17,
+                                      ),
+                                      Text(
+                                        '${controller.viewPermitDetailsModel.value?.requestedByName}',
+                                        style: Styles.black17,
+                                      ),
+                                    ],
+                                  ),
+                                  Spacer(),
+                                  Column(
+                                    crossAxisAlignment: CrossAxisAlignment.end,
+                                    children: [
+                                      Text(
+                                        'Company',
+                                        style: Styles.blackBold17,
+                                      ),
+                                      Text(
+                                        '${controller.viewPermitDetailsModel.value?.requestedByName}',
+                                        style: Styles.black17,
+                                      ),
+                                    ],
+                                  ),
+                                  Spacer(),
+                                  Column(
+                                    crossAxisAlignment: CrossAxisAlignment.end,
+                                    children: [
+                                      Text(
+                                        'Date & Time',
+                                        style: Styles.blackBold17,
+                                      ),
+                                      Text(
+                                        '${controller.viewPermitDetailsModel.value?.start_datetime}',
+                                        style: Styles.black17,
+                                      ),
+                                    ],
+                                  ),
+                                ],
+                              ),
+                            ),
+                            Dimens.boxHeight20,
+                            Row(
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
                                 Column(
                                   crossAxisAlignment: CrossAxisAlignment.end,
                                   children: [
-                                    Text(
-                                      'Authorized Person',
-                                      style: Styles.blackBold17,
-                                    ),
-                                    Text(
-                                      '${controller.viewPermitDetailsModel.value?.requestedByName}',
-                                      style: Styles.black17,
-                                    ),
+                                    // Row(
+                                    //   children: [
+                                    //     Text(
+                                    //       'Cancellation Remark',
+                                    //       style: Styles.black17,
+                                    //     ),
+                                    //     Dimens.boxWidth5,
+                                    //     SizedBox(width: 130, child: CustomTextFieldForPermit())
+                                    //   ],
+                                    // ),
+                                    // CustomTextField(
+                                    //   label: 'Cancellation Remark',
+                                    // )
                                   ],
                                 ),
                                 Spacer(),
                                 Column(
                                   crossAxisAlignment: CrossAxisAlignment.end,
                                   children: [
-                                    Text(
-                                      'Designation',
-                                      style: Styles.blackBold17,
-                                    ),
-                                    Text(
-                                      '${controller.viewPermitDetailsModel.value?.requestedByName}',
-                                      style: Styles.black17,
-                                    ),
-                                  ],
-                                ),
-                                Spacer(),
-                                Column(
-                                  crossAxisAlignment: CrossAxisAlignment.end,
-                                  children: [
-                                    Text(
-                                      'Company',
-                                      style: Styles.blackBold17,
-                                    ),
-                                    Text(
-                                      '${controller.viewPermitDetailsModel.value?.requestedByName}',
-                                      style: Styles.black17,
-                                    ),
-                                  ],
-                                ),
-                                Spacer(),
-                                Column(
-                                  crossAxisAlignment: CrossAxisAlignment.end,
-                                  children: [
-                                    Text(
-                                      'Date & Time',
-                                      style: Styles.blackBold17,
-                                    ),
-                                    Text(
-                                      '${controller.viewPermitDetailsModel.value?.requestedByName}',
-                                      style: Styles.black17,
+                                    // Text(
+                                    //   'Upload Photo',
+                                    //   style: Styles.black17,
+                                    // ),
+                                    Padding(
+                                      padding: const EdgeInsets.only(left: 10, right: 10),
+                                      child: Obx(
+                                        () => Row(
+                                          // mainAxisAlignment: MainAxisAlignment.center,
+                                          children: [
+                                            Container(
+                                              height: 45,
+                                              width: 200,
+                                              decoration: BoxDecoration(
+                                                border: Border.all(
+                                                  color: Color.fromARGB(255, 227, 224, 224),
+                                                  width: 1,
+                                                ),
+                                                boxShadow: [
+                                                  BoxShadow(
+                                                    color: Color.fromARGB(255, 236, 234, 234).withOpacity(0.5),
+                                                    spreadRadius: 2,
+                                                    blurRadius: 5,
+                                                    offset: Offset(0, 2),
+                                                  ),
+                                                ],
+                                              ),
+                                              child: Padding(
+                                                padding: const EdgeInsets.all(8.0),
+                                                child: Align(
+                                                  alignment: Alignment.topLeft,
+                                                  child: Text(
+                                                    controller.fileName.value == "" ? 'Upload Photo' : controller.fileName.value,
+                                                    maxLines: 3,
+                                                    textAlign: TextAlign.center,
+                                                    style: Styles.greyLight14,
+                                                  ),
+                                                ),
+                                              ),
+                                            ),
+                                            Dimens.boxWidth5,
+                                            Container(
+                                              height: 45,
+                                              child: CustomElevatedButton(
+                                                backgroundColor: ColorValues.appDarkBlueColor,
+                                                text: "Browse",
+                                                onPressed: () async {
+                                                  final result = await FilePicker.platform.pickFiles();
+                                                  if (result != null) {
+                                                    // for (var file in result.files) {
+                                                    controller.fileName.value = result.files.single.name;
+                                                    controller.fileBytes = result.files.single.bytes;
+                                                    print('Data:${controller.fileName.value}');
+                                                    //controller.filePath.value = file.;
+                                                    //  print({"filepathes", fileBytes});
+                                                    // }
+                                                  }
+                                                },
+                                              ),
+                                            ),
+                                            Container(
+                                              height: 45,
+                                              child: CustomElevatedButton(
+                                                backgroundColor: ColorValues.greenColor,
+                                                text: 'Upload',
+                                                onPressed: () {
+                                                  if (controller.fileName.value != "") {
+                                                    controller.browseFiles(fileBytes: controller.fileBytes, position: 1).then((value) {
+                                                      controller.isSuccessDialog();
+          
+                                                      // Fluttertoast.showToast(
+                                                      //     msg: "file upload  Successfully",
+                                                      //     fontSize: 16.0);
+                                                    });
+                                                  } else {
+                                                    Fluttertoast.showToast(msg: "Please Select file...", fontSize: 16.0);
+                                                  }
+          
+                                                  //  controller.savePmMapping();
+                                                },
+                                              ),
+                                            ),
+                                          ],
+                                        ),
+                                      ),
                                     ),
                                   ],
                                 ),
                               ],
+                            )
+                          ],
+                        ),
+                      ),
+                      CustomRichText(title: 'Cancellation Remark '),
+                      SizedBox(
+                        height: 20,
+                      ),
+                      TextField(
+                        controller: controller.cancelCommentRequestTextFieldCtrlr,
+                        maxLines: 4,
+                        decoration: InputDecoration(
+                          hintText: 'Comment here....',
+                          enabledBorder: OutlineInputBorder(
+                            borderSide: BorderSide(
+                              color: Colors.black,
                             ),
                           ),
-                          Dimens.boxHeight20,
-                          Row(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              Column(
-                                crossAxisAlignment: CrossAxisAlignment.end,
-                                children: [
-                                  Row(
-                                    children: [
-                                      Text(
-                                        'Cancellation Remark',
-                                        style: Styles.black17,
-                                      ),
-                                      Dimens.boxWidth5,
-                                      SizedBox(width: 130, child: CustomTextFieldForPermit())
-                                    ],
-                                  ),
-                                  // CustomTextField(
-                                  //   label: 'Cancellation Remark',
-                                  // )
-                                ],
-                              ),
-                              Spacer(),
-                              Column(
-                                crossAxisAlignment: CrossAxisAlignment.end,
-                                children: [
-                                  // Text(
-                                  //   'Upload Photo',
-                                  //   style: Styles.black17,
-                                  // ),
-                                  Padding(
-                                    padding: const EdgeInsets.only(left: 10, right: 10),
-                                    child: Obx(
-                                      () => Row(
-                                        // mainAxisAlignment: MainAxisAlignment.center,
-                                        children: [
-                                          Container(
-                                            height: 45,
-                                            width: 200,
-                                            decoration: BoxDecoration(
-                                              border: Border.all(
-                                                color: Color.fromARGB(255, 227, 224, 224),
-                                                width: 1,
-                                              ),
-                                              boxShadow: [
-                                                BoxShadow(
-                                                  color: Color.fromARGB(255, 236, 234, 234).withOpacity(0.5),
-                                                  spreadRadius: 2,
-                                                  blurRadius: 5,
-                                                  offset: Offset(0, 2),
-                                                ),
-                                              ],
-                                            ),
-                                            child: Padding(
-                                              padding: const EdgeInsets.all(8.0),
-                                              child: Align(
-                                                alignment: Alignment.topLeft,
-                                                child: Text(
-                                                  controller.fileName.value == "" ? 'Upload Photo' : controller.fileName.value,
-                                                  maxLines: 3,
-                                                  textAlign: TextAlign.center,
-                                                  style: Styles.greyLight14,
-                                                ),
-                                              ),
-                                            ),
-                                          ),
-                                          Dimens.boxWidth5,
-                                          Container(
-                                            height: 45,
-                                            child: CustomElevatedButton(
-                                              backgroundColor: ColorValues.appDarkBlueColor,
-                                              text: "Browse",
-                                              onPressed: () async {
-                                                final result = await FilePicker.platform.pickFiles();
-                                                if (result != null) {
-                                                  // for (var file in result.files) {
-                                                  controller.fileName.value = result.files.single.name;
-                                                  controller.fileBytes = result.files.single.bytes;
-                                                  //controller.filePath.value = file.;
-                                                  //  print({"filepathes", fileBytes});
-                                                  // }
-                                                }
-                                              },
-                                            ),
-                                          ),
-                                          Container(
-                                            height: 45,
-                                            child: CustomElevatedButton(
-                                              backgroundColor: ColorValues.greenColor,
-                                              text: 'Upload',
-                                              onPressed: () {
-                                                if (controller.fileName.value != "") {
-                                                  controller
-                                                      .browseFiles(
-                                                    fileBytes: controller.fileBytes,
-                                                  )
-                                                      .then((value) {
-                                                    controller.isSuccessDialog();
-
-                                                    // Fluttertoast.showToast(
-                                                    //     msg: "file upload  Successfully",
-                                                    //     fontSize: 16.0);
-                                                  });
-                                                } else {
-                                                  Fluttertoast.showToast(msg: "Please Select file...", fontSize: 16.0);
-                                                }
-
-                                                //  controller.savePmMapping();
-                                              },
-                                            ),
-                                          ),
-                                        ],
-                                      ),
-                                    ),
-                                  ),
-                                ],
-                              ),
-                            ],
-                          )
-                        ],
-                      ),
-                    ),
-                    CustomRichText(title: 'Comment '),
-                    SizedBox(
-                      height: 20,
-                    ),
-                    TextField(
-                      controller: controller.cancelCommentRequestTextFieldCtrlr,
-                      maxLines: 4,
-                      decoration: InputDecoration(
-                        hintText: 'Comment here....',
-                        enabledBorder: OutlineInputBorder(
-                          borderSide: BorderSide(
-                            color: Colors.black,
+                          focusedBorder: OutlineInputBorder(
+                            borderSide: BorderSide(color: Colors.black),
                           ),
                         ),
-                        focusedBorder: OutlineInputBorder(
-                          borderSide: BorderSide(color: Colors.black),
-                        ),
                       ),
-                    ),
-                  ],
-                ),
-                // SizedBox(
-                //   height: 20,
-                // ),
-                // Row(
-                //     mainAxisAlignment: MainAxisAlignment.center,
-                //     children: [
-
-                //       Dimens.boxWidth10,
-                //       ElevatedButton(
-                //         style: Styles.greenElevatedButtonStyle,
-                //         onPressed: () {
-                //           _controller.permitApprovedButton(permitId:permitId);
-                //           Get.back();
-                //         },
-                //         child: const Text('Permit Approve'),
-                //       ),
-                //       // Dimens.boxWidth10,
-                //       // ElevatedButton(
-                //       //   style: Styles.redElevatedButtonStyle,
-                //       //   onPressed: () => Get.offAndToNamed(Routes.addJob),
-                //       //   child: const Text('Add New Job'),
-                //       // ),
-                //     ]),
-              ]),
-            ),
-          );
+                    ],
+                  ),
+                  // SizedBox(
+                  //   height: 20,
+                  // ),
+                  // Row(
+                  //     mainAxisAlignment: MainAxisAlignment.center,
+                  //     children: [
+          
+                  //       Dimens.boxWidth10,
+                  //       ElevatedButton(
+                  //         style: Styles.greenElevatedButtonStyle,
+                  //         onPressed: () {
+                  //           _controller.permitApprovedButton(permitId:permitId);
+                  //           Get.back();
+                  //         },
+                  //         child: const Text('Permit Approve'),
+                  //       ),
+                  //       // Dimens.boxWidth10,
+                  //       // ElevatedButton(
+                  //       //   style: Styles.redElevatedButtonStyle,
+                  //       //   onPressed: () => Get.offAndToNamed(Routes.addJob),
+                  //       //   child: const Text('Add New Job'),
+                  //       // ),
+                  //     ]),
+                ]),
+              ),
+            );
+          
         }),
         actions: [
           SizedBox(
@@ -443,5 +478,16 @@ class PermitCancelReQuestDialog extends GetView {
         },
       ),
     );
+  }
+
+  conditionMethid(bool value){
+    return Obx(() => Checkbox(
+      value: value, 
+      onChanged: (bool? value){
+        value = !value!;
+
+      }
+      ));
+
   }
 }

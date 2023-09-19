@@ -583,7 +583,27 @@ class PermitListDataSource extends DataTableSource {
                                                     NewPermitModel(permitId: 000),
                                               )
                                               ?.ptwStatus ==
-                                          121
+                                          126 ||
+                                          controller.newPermitList
+                                              .firstWhere(
+                                                (e) =>
+                                                    "${e?.permitId}" ==
+                                                    "${PermitDetails?.permitId}",
+                                                orElse: () =>
+                                                    NewPermitModel(permitId: 000),
+                                              )
+                                              ?.ptwStatus ==
+                                          133 ||
+                                          controller.newPermitList
+                                              .firstWhere(
+                                                (e) =>
+                                                    "${e?.permitId}" ==
+                                                    "${PermitDetails?.permitId}",
+                                                orElse: () =>
+                                                    NewPermitModel(permitId: 000),
+                                              )
+                                              ?.ptwStatus ==
+                                          130
                                   ? TableActionButton(
                                       color: ColorValues.appGreenColor,
                                       icon: Icons.add,

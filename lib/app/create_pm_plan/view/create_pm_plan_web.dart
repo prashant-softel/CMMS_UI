@@ -78,7 +78,7 @@ class _CreatePmPlanWebState extends State<CreatePmPlanWeb> {
                   child: Stack(
                     children: [
                       Container(
-                        height: MediaQuery.of(context).size.height / 1.2,
+                        height: MediaQuery.of(context).size.height / 1,
                         width: Get.width * 7,
                         margin: EdgeInsets.only(left: 20, top: 10, right: 20),
                         // height: Get.height,
