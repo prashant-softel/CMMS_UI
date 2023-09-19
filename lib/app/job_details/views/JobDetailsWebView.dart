@@ -421,23 +421,28 @@ class JobDetailsWebView extends GetView<JobDetailsController> {
                                                     color: Color.fromARGB(
                                                         255, 206, 229, 234)),
                                                 columns: [
-                                                  DataColumn(
+                                                  DataColumn2(
+                                                      fixedWidth: 100,
                                                       label: Text(
-                                                    "Job Card Id",
-                                                    style: TextStyle(
-                                                        fontSize: 15,
-                                                        fontWeight:
-                                                            FontWeight.bold),
-                                                  )),
-                                                  DataColumn(
+                                                        "Job Card Id",
+                                                        style: TextStyle(
+                                                            fontSize: 15,
+                                                            fontWeight:
+                                                                FontWeight
+                                                                    .bold),
+                                                      )),
+                                                  DataColumn2(
+                                                      fixedWidth: 150,
                                                       label: Text(
-                                                    "Permit ID",
-                                                    style: TextStyle(
-                                                        fontSize: 15,
-                                                        fontWeight:
-                                                            FontWeight.bold),
-                                                  )),
-                                                  DataColumn(
+                                                        "Permit ID",
+                                                        style: TextStyle(
+                                                            fontSize: 15,
+                                                            fontWeight:
+                                                                FontWeight
+                                                                    .bold),
+                                                      )),
+                                                  DataColumn2(
+                                                      // fixedWidth: 300,
                                                       label: Text(
                                                     "Job Card Date",
                                                     style: TextStyle(
@@ -445,7 +450,8 @@ class JobDetailsWebView extends GetView<JobDetailsController> {
                                                         fontWeight:
                                                             FontWeight.bold),
                                                   )),
-                                                  DataColumn(
+                                                  DataColumn2(
+                                                      // fixedWidth: 300,
                                                       label: Text(
                                                     "Status",
                                                     style: TextStyle(
@@ -453,14 +459,16 @@ class JobDetailsWebView extends GetView<JobDetailsController> {
                                                         fontWeight:
                                                             FontWeight.bold),
                                                   )),
-                                                  DataColumn(
+                                                  DataColumn2(
+                                                      fixedWidth: 300,
                                                       label: Text(
-                                                    'Action',
-                                                    style: TextStyle(
-                                                        fontSize: 15,
-                                                        fontWeight:
-                                                            FontWeight.bold),
-                                                  )),
+                                                        'Action',
+                                                        style: TextStyle(
+                                                            fontSize: 15,
+                                                            fontWeight:
+                                                                FontWeight
+                                                                    .bold),
+                                                      )),
                                                 ],
                                                 rows: List<DataRow>.generate(
                                                   controller
@@ -680,23 +688,28 @@ class JobDetailsWebView extends GetView<JobDetailsController> {
                                                     color: Color.fromARGB(
                                                         255, 206, 229, 234)),
                                                 columns: [
-                                                  DataColumn(
+                                                  DataColumn2(
+                                                      fixedWidth: 100,
                                                       label: Text(
-                                                    "Job Card Id",
-                                                    style: TextStyle(
-                                                        fontSize: 15,
-                                                        fontWeight:
-                                                            FontWeight.bold),
-                                                  )),
-                                                  DataColumn(
+                                                        "Job Card Id",
+                                                        style: TextStyle(
+                                                            fontSize: 15,
+                                                            fontWeight:
+                                                                FontWeight
+                                                                    .bold),
+                                                      )),
+                                                  DataColumn2(
+                                                      fixedWidth: 130,
                                                       label: Text(
-                                                    "Mrs ID",
-                                                    style: TextStyle(
-                                                        fontSize: 15,
-                                                        fontWeight:
-                                                            FontWeight.bold),
-                                                  )),
-                                                  DataColumn(
+                                                        "Mrs ID",
+                                                        style: TextStyle(
+                                                            fontSize: 15,
+                                                            fontWeight:
+                                                                FontWeight
+                                                                    .bold),
+                                                      )),
+                                                  DataColumn2(
+                                                      // fixedWidth: 200,
                                                       label: Text(
                                                     "Mrs Items List ",
                                                     style: TextStyle(
@@ -704,7 +717,8 @@ class JobDetailsWebView extends GetView<JobDetailsController> {
                                                         fontWeight:
                                                             FontWeight.bold),
                                                   )),
-                                                  DataColumn(
+                                                  DataColumn2(
+                                                      //  fixedWidth: 300,
                                                       label: Text(
                                                     "Status",
                                                     style: TextStyle(
@@ -712,14 +726,16 @@ class JobDetailsWebView extends GetView<JobDetailsController> {
                                                         fontWeight:
                                                             FontWeight.bold),
                                                   )),
-                                                  DataColumn(
+                                                  DataColumn2(
+                                                      fixedWidth: 300,
                                                       label: Text(
-                                                    'Action',
-                                                    style: TextStyle(
-                                                        fontSize: 15,
-                                                        fontWeight:
-                                                            FontWeight.bold),
-                                                  )),
+                                                        'Action',
+                                                        style: TextStyle(
+                                                            fontSize: 15,
+                                                            fontWeight:
+                                                                FontWeight
+                                                                    .bold),
+                                                      )),
                                                 ],
                                                 rows: List<DataRow>.generate(
                                                   controller.listMrsByJobId
