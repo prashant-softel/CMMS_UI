@@ -220,18 +220,18 @@ class PermitCloseDialog extends GetView {
                                   Column(
                                     crossAxisAlignment: CrossAxisAlignment.end,
                                     children: [
-                                      Row(
-                                        children: [
-                                          Text(
-                                            'Closure Remark',
-                                            style: Styles.black17,
-                                          ),
-                                          Dimens.boxWidth5,
-                                          SizedBox(
-                                              width: 130,
-                                              child: CustomTextFieldForPermit())
-                                        ],
-                                      ),
+                                      // Row(
+                                      //   children: [
+                                      //     Text(
+                                      //       'Closure Remark',
+                                      //       style: Styles.black17,
+                                      //     ),
+                                      //     Dimens.boxWidth5,
+                                      //     SizedBox(
+                                      //         width: 130,
+                                      //         child: CustomTextFieldForPermit())
+                                      //   ],
+                                      // ),
                                       // CustomTextField(
                                       //   label: 'Closure Remark',
                                       // )
@@ -331,19 +331,16 @@ class PermitCloseDialog extends GetView {
                                                     if (controller
                                                             .fileName.value !=
 
-                                                      "") {controller
-                                                          .browseFiles(
-                                                        fileBytes: controller
-                                                            .fileBytes,
-                                                      )
-                                                          .then((value) {
-                                                        controller
-                                                            .isSuccessDialog();
+                                                      "") {
+                                                      //  controller.browseFiles(fileBytes: controller.fileBytes2, position: 1)
+                                                      //     .then((value) {
+                                                      //   controller
+                                                      //       .isSuccessDialog();
 
-                                                        // Fluttertoast.showToast(
-                                                        //     msg: "file upload  Successfully",
-                                                        //     fontSize: 16.0);
-                                                      });
+                                                      //   // Fluttertoast.showToast(
+                                                      //   //     msg: "file upload  Successfully",
+                                                      //   //     fontSize: 16.0);
+                                                      // });
                                                     } else {
                                                       Fluttertoast.showToast(
                                                           msg:
@@ -366,7 +363,7 @@ class PermitCloseDialog extends GetView {
                             ],
                           ),
                         ),
-                        CustomRichText(title: 'Comment '),
+                        CustomRichText(title: 'Closure Remark '),
                         SizedBox(
                           height: 20,
                         ),

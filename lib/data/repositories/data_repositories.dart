@@ -703,7 +703,7 @@ class DataRepository extends DomainRepository {
   Future<ResponseModel> permitExtendButton({
     required String auth,
     String? comment,
-    String? Time,
+    int? Time,
     String? id,
     bool? isLoading,
   }) async =>

@@ -1,4 +1,5 @@
 import 'package:cmms/domain/domain.dart';
+import 'package:cmms/domain/models/create_sop_model.dart';
 import 'package:cmms/domain/models/employee_list_model.dart';
 import 'package:cmms/domain/models/employee_list_model2.dart';
 import 'package:cmms/domain/models/employee_model.dart';
@@ -7,7 +8,7 @@ import 'package:cmms/domain/models/inventory_category_model.dart';
 import 'package:cmms/domain/models/inventory_detail_model.dart';
 import 'package:cmms/domain/models/job_type_list_model.dart';
 import 'package:cmms/domain/models/new_permit_details_model.dart';
-import 'package:cmms/domain/models/permit_cancel_condition_list.dart';
+import 'package:cmms/domain/models/permit_cancel_condition_list_model.dart';
 import 'package:cmms/domain/models/safety_measure_list_model.dart';
 import 'package:cmms/domain/models/sop_list_model.dart';
 import 'package:cmms/domain/models/type_permit_model.dart';
@@ -92,16 +93,15 @@ class ViewPermitUsecase {
         isLoading,
       );
 
-   Future<bool> browseFiles(Uint8List? fileBytes, String fileName,
-      int importType, bool isLoading, int facilityId) async {
-    await repository.browseFiles(
-        fileBytes, fileName, importType, isLoading, facilityId);
-    return true;
+  Future<CreateSOPModel?> browseFiles(
+      Uint8List? fileBytes, String fileName, bool isLoading) async {
+    return await repository.browseFiles(fileBytes, fileName, 0, isLoading, 0);
+    // return true;
   }
 
   Future<void> permitExtendButton({
     String? comment,
-    String? Time,
+    int? Time,
     String? id,
     bool? isLoading,
   }) async {

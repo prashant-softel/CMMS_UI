@@ -2455,8 +2455,9 @@ class ViewPermitWebScreen extends GetView<ViewPermitController> {
                                       e.feature_id == UserAccessConstants.kPermitFeatureId && e.approve == UserAccessConstants.kHaveApproveAccess)
                                   .length >
                               0 &&
-                          controller.viewPermitDetailsModel.value?.ptwStatus == 121 ||
-                      controller.viewPermitDetailsModel.value?.ptwStatus == 133
+                          controller.viewPermitDetailsModel.value?.ptwStatus == 126 ||
+                      controller.viewPermitDetailsModel.value?.ptwStatus == 133 ||
+                      controller.viewPermitDetailsModel.value?.ptwStatus == 130
                   ? Container(
                       height: 45,
                       child: CustomElevatedButton(
@@ -2527,8 +2528,9 @@ class ViewPermitWebScreen extends GetView<ViewPermitController> {
                                       e.feature_id == UserAccessConstants.kPermitFeatureId && e.approve == UserAccessConstants.kHaveApproveAccess)
                                   .length >
                               0 &&
-                          controller.viewPermitDetailsModel.value?.ptwStatus == 121 ||
-                      controller.viewPermitDetailsModel.value?.ptwStatus == 133
+                          controller.viewPermitDetailsModel.value?.ptwStatus == 126 ||
+                      controller.viewPermitDetailsModel.value?.ptwStatus == 133 ||
+                      controller.viewPermitDetailsModel.value?.ptwStatus == 130
                   // varUserAccessModel.value.access_list!
                   //         .where((e) =>
                   //             e.feature_id ==
