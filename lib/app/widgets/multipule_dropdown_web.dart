@@ -50,19 +50,29 @@ class _MultipDropdownWebWidgetState extends State<MultipDropdownWebWidget> {
           // margin: widget.margin,
           padding: EdgeInsets.symmetric(vertical: 5),
           decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(10),
-            border: Border.all(
-              color: Color.fromARGB(255, 227, 224, 224),
-              width: 1,
-            ),
+            borderRadius: BorderRadius.circular(5),
+            // border: Border.all(
+            //   color: Color.fromARGB(255, 176, 67, 67),
+            //   width: 1,
+            // ),
             boxShadow: [
               BoxShadow(
-                color: Color.fromARGB(255, 236, 234, 234).withOpacity(0.5),
-                spreadRadius: 2,
-                blurRadius: 5,
-                offset: Offset(0, 2),
+                color: Colors.black26,
+                // offset: const Offset(
+                //   5.0,
+                //   5.0,
+                // ),
+                // blurRadius: 5.0,
+                // spreadRadius: 1.0,
               ),
+              BoxShadow(
+                  // color: ColorValues.whiteColor,
+                  // offset: const Offset(0.0, 0.0),
+                  // blurRadius: 0.0,
+                  // spreadRadius: 0.0,
+                  ),
             ],
+            color: ColorValues.whiteColor,
           ),
           child: //
 
@@ -75,18 +85,20 @@ class _MultipDropdownWebWidgetState extends State<MultipDropdownWebWidget> {
                     searchFieldProps: TextFieldProps(
                       decoration: InputDecoration(
                         enabledBorder: OutlineInputBorder(
-                          borderSide: BorderSide(color: ColorValues.blueColor),
+                          borderSide: BorderSide(
+                              color: ColorValues.appBlueBackgroundColor),
                           borderRadius: BorderRadius.circular(5),
                         ),
                         focusedBorder: OutlineInputBorder(
-                          borderSide: BorderSide(color: ColorValues.blueColor),
+                          borderSide: BorderSide(
+                              color: ColorValues.appBlueBackgroundColor),
                           borderRadius: BorderRadius.circular(5),
                         ),
                       ),
                     ),
                     showSelectedItems: true,
                     onItemAdded: (selectedItems, addedItem) {},
-                    disabledItemFn: (String s) => s.startsWith('I'),
+                    // disabledItemFn: (String s) => s.startsWith('I'),
                     showSearchBox: true,
                   ),
                   dropdownDecoratorProps: DropDownDecoratorProps(

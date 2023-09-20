@@ -96,7 +96,7 @@ class PmPlanListController extends GetxController {
     facilityIdStreamSubscription = homecontroller.facilityId$.listen((event) {
       facilityId = event;
       Future.delayed(Duration(seconds: 2), () async {
-        getPmPlanList(facilityId, formattedTodate1, formattedFromdate1, false);
+        getPmPlanList(facilityId, formattedTodate1, formattedFromdate1, true);
       });
       // isDataLoading.value = false;
 

@@ -1278,6 +1278,16 @@ class _ReceiveGoodsOrderWebState extends State<ReceiveGoodsOrderWeb> {
                       )
                     : Dimens.box0,
                 Dimens.boxWidth15,
+                Container(
+                  height: 40,
+                  child: CustomElevatedButton(
+                    backgroundColor: Color(0xFF77CAE7),
+                    text: 'Save as Drafts',
+                    onPressed: () {
+                      controller.updateGOReceiveIsSubmit0();
+                    },
+                  ),
+                ),
                 varUserAccessModel.value.access_list!
                             .where((e) =>
                                 e.feature_id ==

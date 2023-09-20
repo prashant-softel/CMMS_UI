@@ -787,6 +787,41 @@ class Repository {
     }
   }
 
+  Future<Map<String, dynamic>> updateGOReceiveIsSubmit0(
+    createGo,
+    bool? isLoading,
+  ) async {
+    try {
+      final auth = await getSecuredValue(LocalKeys.authToken);
+      final res = await _dataRepository.updateGOReceiveIsSubmit0(
+        auth: auth,
+        createGo: createGo,
+        isLoading: isLoading ?? false,
+      );
+
+      var resourceData = res.data;
+
+      print('Response update Goods order : ${resourceData}');
+
+      if (!res.hasError) {
+        Fluttertoast.showToast(
+            msg: " Recive GO  update Successfully...", fontSize: 16.0);
+
+        Get.offAllNamed(
+          Routes.stockManagementGoodsOrdersScreen,
+        );
+        // Fluttertoast.showToast(msg: "Data add successfully...", fontSize: 16.0);
+      } else {
+        Utility.showDialog(res.errorCode.toString() + 'reciveUpdateGoodsOrder');
+        //return '';
+      }
+      return Map();
+    } catch (error) {
+      print(error.toString());
+      return Map();
+    }
+  }
+
   //Update Warranty claim
   Future<Map<String, dynamic>> updateWarrantyClaim(
     updateWarrantyClaim,
@@ -997,7 +1032,7 @@ class Repository {
 
       if (!res.hasError) {
         final jsonGoodsOrdersListModels = jsonDecode(res.data);
-        // print(res.data);
+        // print(res.data); `6
         final List<GoodsOrdersListModel> _goodOrderModelList =
             jsonGoodsOrdersListModels
                 .map<GoodsOrdersListModel>((m) =>
