@@ -275,7 +275,7 @@ class _StockManagementGoodsOrdersWebState
                                 SizedBox(
                                   height: 20,
                                 ),
-                                controller.goodsOrdersList!.isEmpty
+                                controller.goodsOrdersList.isEmpty
                                     ? Center(child: Text('No data'))
                                     : Expanded(
                                         child: ValueListenableBuilder(

@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:cmms/app/create_pm_plan/create_pm_plan_presenter.dart';
 import 'package:cmms/domain/models/frequency_model.dart';
 import 'package:cmms/domain/models/get_asset_data_list_model.dart';
@@ -20,9 +22,6 @@ class CreatePmPlanController extends GetxController {
   Rx<List<List<Map<String, String>>>> rowItem =
       Rx<List<List<Map<String, String>>>>([]);
   Map<String, GetAssetDataModel> dropdownMapperData = {};
-  BehaviorSubject<int> _facilityId = BehaviorSubject.seeded(0);
-  Stream<int> get facilityId$ => _facilityId.stream;
-  int get facilityId => _facilityId.value;
   int selectedPurchaseID = 0;
   bool openStartDatePicker = false;
   RxList<FacilityModel?> facilityList = <FacilityModel>[].obs;
@@ -31,7 +30,6 @@ class CreatePmPlanController extends GetxController {
   Rx<String> selectedfrequency = ''.obs;
   Rx<bool> isSelectedfrequency = true.obs;
   int selectedfrequencyId = 0;
-  List<String> options = ["GetX", "Provider", "BloC", "MobX"];
   Rx<List<String>> selectedOptionList = Rx<List<String>>([]);
   var selectedOption = ''.obs;
   RxList<InventoryCategoryModel?> equipmentCategoryList =
@@ -40,25 +38,32 @@ class CreatePmPlanController extends GetxController {
       <InventoryCategoryModel>[].obs;
   RxList<int> selectedEquipmentCategoryIdList = <int>[].obs;
   int selectedInventoryCategoryId = 0;
-
+  StreamSubscription<int>? facilityIdStreamSubscription;
+  int facilityId = 0;
   @override
   void onInit() async {
-    Future.delayed(Duration(seconds: 1), () {
-      getAssetList(facilityId);
+    facilityIdStreamSubscription = homecontroller.facilityId$.listen((event) {
+      facilityId = event;
+      Future.delayed(Duration(seconds: 1), () {
+        Future.delayed(Duration(seconds: 1), () {
+          getAssetList(facilityId);
+        });
+        Future.delayed(Duration(seconds: 1), () {
+          getInventoryCategoryList();
+        });
+        Future.delayed(Duration(seconds: 1), () {
+          getFrequencyList();
+        });
+      });
     });
-    Future.delayed(Duration(seconds: 1), () {
-      getInventoryCategoryList();
-    });
-    Future.delayed(Duration(seconds: 1), () {
-      getFrequencyList();
-    });
+
     super.onInit();
   }
 
   Future<void> getAssetList(int _facilityId) async {
     assetList.value = <GetAssetDataModel>[];
-    final _assetList =
-        await createPmPlanPresenter.getAssetList(facilityId: facilityId);
+    final _assetList = await createPmPlanPresenter.getAssetList(
+        facilityId: facilityId, isLoading: true);
     // print('jkncejknce:$facilityId');
     if (_assetList != null) {
       for (var asset in _assetList) {
@@ -69,7 +74,7 @@ class CreatePmPlanController extends GetxController {
   }
 
   Future<void> getFrequencyList() async {
-    final list = await createPmPlanPresenter.getFrequencyList();
+    final list = await createPmPlanPresenter.getFrequencyList(isLoading: true);
 
     if (list != null) {
       for (var _frequencyList in list) {
@@ -89,19 +94,11 @@ class CreatePmPlanController extends GetxController {
         equipmentCategoryList.add(equimentCategory);
       }
     }
-    print({"dfjfdkbf", equipmentCategoryList});
   }
 
   void onValueChanged(dynamic list, dynamic value) {
     print({"valuevaluevaluevalue": value});
     switch (list.runtimeType) {
-      case RxList<FacilityModel>:
-        {
-          int facilityIndex = facilityList.indexWhere((x) => x?.name == value);
-
-          _facilityId.add(facilityList[facilityIndex]?.id ?? 0);
-        }
-        break;
       case RxList<InventoryCategoryModel>:
         {
           for (var equipCat in selectedEquipmentCategoryList) {

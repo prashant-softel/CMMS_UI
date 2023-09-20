@@ -155,16 +155,16 @@ class PreventiveScreen extends GetView<PreventiveController> {
                             ontap: () {
                               controller.importChecklist();
                             }),
-                        _priventiveList(
-                            tittle: "Create PM Plan",
-                            ontap: () {
-                              controller.createPmPlan();
-                            }),
-                        _priventiveList(
-                            tittle: "View PM Plan",
-                            ontap: () {
-                              controller.viewPmPlanScreen();
-                            }),
+                        // _priventiveList(
+                        //     tittle: "Create PM Plan",
+                        //     ontap: () {
+                        //       controller.createPmPlan();
+                        //     }),
+                        // _priventiveList(
+                        //     tittle: "View PM Plan",
+                        //     ontap: () {
+                        //       controller.viewPmPlanScreen();
+                        //     }),
                         _priventiveList(
                             tittle: "PM Plans",
                             ontap: () {

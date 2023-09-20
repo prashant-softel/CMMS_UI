@@ -386,10 +386,8 @@ class DataRepository extends DomainRepository {
       isLoading: isLoading,
       auth: auth,
       isCancle: isCancle,
-     
     );
   }
-
 
   @override
   Future<ResponseModel> getWarrantyClaimList({
@@ -682,7 +680,7 @@ class DataRepository extends DomainRepository {
     bool? isLoading,
   }) async =>
       await connectHelper.permitCancelRequestButton(
-         auth: auth,
+        auth: auth,
         cancelPermitJsonString: cancelPermitJsonString,
         isLoading: isLoading ?? false,
       );
@@ -1274,6 +1272,17 @@ class DataRepository extends DomainRepository {
         createGo: createGo,
         isLoading: isLoading ?? false,
       );
+  Future<ResponseModel> updateGOReceiveIsSubmit0({
+    required String auth,
+    createGo,
+    bool? isLoading,
+  }) async =>
+      await connectHelper.updateGOReceiveIsSubmit0(
+        auth: auth,
+        createGo: createGo,
+        isLoading: isLoading ?? false,
+      );
+
   Future<ResponseModel> updateWarrantyClaim({
     required String auth,
     updateWarrantyClaim,

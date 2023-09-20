@@ -103,7 +103,7 @@ class _PmPlanListContentWebState extends State<PmPlanListContentWeb> {
                                         onPressed: () {
                                           Get.toNamed(Routes.createPmPlan);
                                         },
-                                        color: ColorValues.greenlightColor,
+                                        color: ColorValues.addNewColor,
                                       ),
                                     ],
                                   ),

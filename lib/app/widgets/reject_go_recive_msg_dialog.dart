@@ -79,16 +79,58 @@ class RejectGOMsgReceiveDialog extends GetView {
           );
         }),
         actions: [
-          Dimens.boxWidth10,
-          Center(
-            child: ElevatedButton(
-              style: Styles.darkBlueElevatedButtonStyle,
-              onPressed: () {
-                Get.offAllNamed(Routes.stockManagementGoodsOrdersScreen);
-              },
-              child: const Text('Ok'),
-            ),
-          ),
+          Row(
+            children: [
+              Dimens.boxWidth10,
+              Center(
+                child: ElevatedButton(
+                  style: Styles.darkBlueElevatedButtonStyle,
+                  onPressed: () {
+                    Get.offAllNamed(Routes.stockManagementGoodsOrdersScreen);
+                  },
+                  child: const Text('Goods Order List'),
+                ),
+              ),
+              Dimens.boxWidth10,
+              Center(
+                child: ElevatedButton(
+                  style: Styles.yellowElevatedButtonStyle,
+                  onPressed: () {
+                    Get.back();
+                    controller.facilityIdStreamSubscription =
+                        controller.facilityId$.listen((event) {
+                      controller.facilityId = event;
+                      Future.delayed(Duration(seconds: 1), () {
+                        controller.getFacilityList();
+                      });
+                    });
+                    Future.delayed(Duration(seconds: 1), () {
+                      controller.getUnitCurrencyList();
+                    });
+
+                    Future.delayed(Duration(seconds: 1), () {
+                      controller.updatePaidBy();
+                    });
+                    Future.delayed(Duration(seconds: 1), () {
+                      controller.getBusinessList(4);
+                    });
+                    Future.delayed(Duration(seconds: 1), () {
+                      controller.getAssetList(controller.facilityId);
+
+                      if (controller.id.value != 0) {
+                        Future.delayed(Duration(seconds: 1), () {
+                          controller.getPurchaseDetailsById(
+                              id: controller.id.value);
+                        });
+                      }
+                    });
+                  },
+                  child: const Text('View Goods Order'),
+                ),
+              ),
+              Dimens.boxWidth10,
+            ],
+          )
         ],
       );
     }));
