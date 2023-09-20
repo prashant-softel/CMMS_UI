@@ -69,7 +69,8 @@ class _ViewAddGoodsOrdersWebState extends State<ViewAddGoodsOrdersWeb> {
                           onTap: () {
                             Get.back();
                           },
-                          child: Text(" / STOCK MANAGEMENT",
+                          child: Text(
+                              " / STOCK MANAGEMENT1${controller.getPurchaseDetailsByIDModel.value?.status}",
                               style: Styles.greyMediumLight12),
                         ),
                         GestureDetector(
@@ -928,7 +929,20 @@ class _ViewAddGoodsOrdersWebState extends State<ViewAddGoodsOrdersWeb> {
                                       controller.getPurchaseDetailsByIDModel
                                                   .value?.status ==
                                               301 &&
-                                          controller.type == 1)
+                                          controller.type == 1 ||
+                                      controller.getPurchaseDetailsByIDModel
+                                                  .value?.status ==
+                                              310 &&
+                                          varUserAccessModel.value.access_list!
+                                                  .where((e) =>
+                                                      e.feature_id ==
+                                                          UserAccessConstants
+                                                              .kGoodsFeatureId &&
+                                                      e.delete ==
+                                                          UserAccessConstants
+                                                              .kHaveApproveAccess)
+                                                  .length >
+                                              0)
                                   ? Row(
                                       children: [
                                         Spacer(),
@@ -986,20 +1000,36 @@ class _ViewAddGoodsOrdersWebState extends State<ViewAddGoodsOrdersWeb> {
                                               )
                                             : Dimens.box0,
                                         Dimens.boxWidth10,
-                                        Container(
-                                          height: 45,
-                                          child: CustomElevatedButton(
-                                            backgroundColor:
-                                                ColorValues.rejectColor,
-                                            text: "Close",
-                                            icon: Icons.close,
-                                            onPressed: () {
-                                              Get.dialog(GoodsOrderCloseDialog(
-                                                id: controller.id,
-                                              ));
-                                            },
-                                          ),
-                                        ),
+                                        controller.getPurchaseDetailsByIDModel
+                                                        .value?.status ==
+                                                    310 &&
+                                                varUserAccessModel
+                                                        .value.access_list!
+                                                        .where((e) =>
+                                                            e.feature_id ==
+                                                                UserAccessConstants
+                                                                    .kGoodsFeatureId &&
+                                                            e.delete ==
+                                                                UserAccessConstants
+                                                                    .kHaveApproveAccess)
+                                                        .length >
+                                                    0
+                                            ? Container(
+                                                height: 45,
+                                                child: CustomElevatedButton(
+                                                  backgroundColor:
+                                                      ColorValues.rejectColor,
+                                                  text: "Close",
+                                                  icon: Icons.close,
+                                                  onPressed: () {
+                                                    Get.dialog(
+                                                        GoodsOrderCloseDialog(
+                                                      id: controller.id,
+                                                    ));
+                                                  },
+                                                ),
+                                              )
+                                            : Dimens.box0,
                                         Spacer(),
                                       ],
                                     )

@@ -488,11 +488,9 @@ class ConnectHelper {
     return responseModel;
   }
 
-///Permit Condition List
-   Future<ResponseModel> getPermitConditionList(
-      {required bool isLoading,
-      required String auth,
-      int? isCancle}) async {
+  ///Permit Condition List
+  Future<ResponseModel> getPermitConditionList(
+      {required bool isLoading, required String auth, int? isCancle}) async {
     ResponseModel responseModel = await apiWrapper.makeRequest(
       'Permit/GetPermitConditionList?isCancle=$isCancle',
       Request.getMultiparts,
@@ -504,7 +502,6 @@ class ConnectHelper {
     );
     return responseModel;
   }
-
 
   Future<ResponseModel> getWarrantyClaimList({
     required bool isLoading,
@@ -4322,8 +4319,8 @@ class ConnectHelper {
       dynamic endDate,
       int? userId}) async {
     var responseModel = await apiWrapper.makeRequest(
-      //'SMReports/GetPlantStockReport?facility_id=$facilityId&StartDate=$endDate&EndDate=$startDate',
-      'SMReports/GetPlantStockReport?facility_id=45&StartDate=2002-01-01&EndDate=2023-05-01',
+      'SMReports/GetPlantStockReport?facility_id=$facilityId&StartDate=$endDate&EndDate=$startDate',
+      // 'SMReports/GetPlantStockReport?facility_id=45&StartDate=2002-01-01&EndDate=2023-05-01',
       Request.get,
       null,
       isLoading ?? false,

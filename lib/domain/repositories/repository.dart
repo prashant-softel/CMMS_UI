@@ -772,7 +772,7 @@ class Repository {
         Fluttertoast.showToast(
             msg: " Recive GO  update Successfully...", fontSize: 16.0);
 
-        Get.offNamed(
+        Get.offAllNamed(
           Routes.stockManagementGoodsOrdersScreen,
         );
         // Fluttertoast.showToast(msg: "Data add successfully...", fontSize: 16.0);
@@ -1004,7 +1004,7 @@ class Repository {
                     GoodsOrdersListModel.fromJson(Map<String, dynamic>.from(m)))
                 .toList();
 
-        return _goodOrderModelList;
+        return _goodOrderModelList.reversed.toList();
       } //
       else {
         Utility.showDialog(res.errorCode.toString() + 'getIncidentReportList');
@@ -2134,8 +2134,8 @@ class Repository {
     }
   }
 
-///Permit Condition List
-   Future<List<PermitCancelListModel>> getPermitConditionList({
+  ///Permit Condition List
+  Future<List<PermitCancelListModel>> getPermitConditionList({
     required int? isCancle,
     required bool isLoading,
   }) async {
@@ -2160,7 +2160,6 @@ class Repository {
       return [];
     }
   }
-
 
   Future<List<WarrantyClaimModel>> getWarrantyClaimList({
     required int? facilityId,
@@ -2546,11 +2545,12 @@ class Repository {
       log(error.toString());
     }
   }
-///Cancel Permit
+
+  ///Cancel Permit
   Future<Map<String, dynamic>> permitCancelRequestButton(
     // String? comment,
     // String? id,
-     cancelPermitJsonString,
+    cancelPermitJsonString,
     bool? isLoading,
   ) async {
     try {

@@ -95,7 +95,21 @@ class GoodsOrderMessageRejectDialog extends GetView {
                 child: ElevatedButton(
                   style: Styles.yellowElevatedButtonStyle,
                   onPressed: () {
-                    Get.toNamed(Routes.viewGoodsOrders);
+                    Get.back();
+                    Future.delayed(Duration(seconds: 1), () {
+                      controller.getUnitCurrencyList();
+                    });
+                    Future.delayed(Duration(seconds: 1), () {
+                      controller.getBusinessList(4);
+                    });
+                    Future.delayed(Duration(seconds: 1), () {
+                      controller.getAssetList(controller.facilityId);
+                      if (id != null) {
+                        Future.delayed(Duration(seconds: 1), () {
+                          controller.getPurchaseDetailsById(id: controller.id!);
+                        });
+                      }
+                    });
                   },
                   child: const Text('View Goods Order'),
                 ),
