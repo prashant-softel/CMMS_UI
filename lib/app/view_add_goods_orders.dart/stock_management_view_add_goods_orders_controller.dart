@@ -4,6 +4,7 @@ import 'package:cmms/domain/models/comment_model.dart';
 import 'package:cmms/domain/models/create_go_model.dart';
 import 'package:cmms/domain/models/currency_list_model.dart';
 import 'package:cmms/domain/models/get_asset_data_list_model.dart';
+import 'package:cmms/domain/models/get_asset_items_model.dart';
 import 'package:cmms/domain/models/get_purchase_details_model.dart';
 import 'package:cmms/domain/models/paiyed_model.dart';
 import 'package:flutter/cupertino.dart';
@@ -33,6 +34,7 @@ class ViewAddGoodsOrdersController extends GetxController {
   RxList<BusinessListModel?> ownerList = <BusinessListModel>[].obs;
   Rx<String> selectedBusinessType = ''.obs;
   RxList<PaiedModel?> paid = <PaiedModel>[].obs;
+  RxList<GetAssetItemsModel?> assetItemList = <GetAssetItemsModel>[].obs;
   TextEditingController approveCommentTextFieldCtrlr = TextEditingController();
   TextEditingController rejectCommentTextFieldCtrlr = TextEditingController();
   TextEditingController closeCommentTextFieldCtrlr = TextEditingController();
@@ -45,7 +47,7 @@ class ViewAddGoodsOrdersController extends GetxController {
   int? type = 0;
 
   //drop down list of assets
-  RxList<GetAssetDataModel?> assetList = <GetAssetDataModel>[].obs;
+  // RxList<GetAssetDataModel?> assetList = <GetAssetDataModel>[].obs;
   var paidByDropdownList = 'Select Gender'.obs;
 
   Rx<bool> isAssetSelected = true.obs;
@@ -103,7 +105,7 @@ class ViewAddGoodsOrdersController extends GetxController {
       getBusinessList(4);
     });
     Future.delayed(Duration(seconds: 1), () {
-      getAssetList(facilityId);
+      getEquipmentAssetsList(facilityId);
       if (id != null) {
         Future.delayed(Duration(seconds: 1), () {
           getPurchaseDetailsById(id: id!);
@@ -242,17 +244,19 @@ class ViewAddGoodsOrdersController extends GetxController {
     }
   }
 
-  Future<void> getAssetList(int _facilityId) async {
-    assetList.value = <GetAssetDataModel>[];
-    final _assetList =
-        await viewAddGoodsOrdersPresenter.getAssetList(facilityId: facilityId);
-    // print('jkncejknce:$facilityId');
+  Future<void> getEquipmentAssetsList(int _facilityId) async {
+    assetItemList.value = <GetAssetItemsModel>[];
+    final _assetList = await viewAddGoodsOrdersPresenter.getEquipmentAssetsList(
+        facilityId: facilityId);
     if (_assetList != null) {
       for (var asset in _assetList) {
-        assetList.add(asset);
+        assetItemList.add(asset);
       }
+      //
+
       update(["AssetList"]);
     }
+
     addRowItem();
   }
 
