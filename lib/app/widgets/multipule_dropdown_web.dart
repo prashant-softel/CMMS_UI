@@ -14,6 +14,7 @@ class MultipDropdownWebWidget extends StatefulWidget {
   final dynamic controller;
   final FocusNode? focusNode;
   double? width;
+  double? height;
   EdgeInsetsGeometry? margin;
   List<BoxShadow>? boxShadow;
   List<dynamic> selectedItems;
@@ -27,6 +28,7 @@ class MultipDropdownWebWidget extends StatefulWidget {
       this.width,
       this.margin,
       this.boxShadow,
+      this.height,
       required this.dropdownList,
       required this.selectedItems});
 
@@ -45,7 +47,7 @@ class _MultipDropdownWebWidgetState extends State<MultipDropdownWebWidget> {
         Obx(
       () => Container(
           // color: ColorValues.greyBorderColor,
-          // height: MediaQuery.of(context).size.height * 0.040,
+          height: widget.height, // MediaQuery.of(context).size.height * 0.040,
           width: widget.width,
           // margin: widget.margin,
           padding: EdgeInsets.symmetric(vertical: 5),

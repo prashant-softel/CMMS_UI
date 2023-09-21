@@ -33,4 +33,12 @@ class CreatePmPlanUsecase {
         facilityId,
         isLoading,
       );
+  Future<Map<String, dynamic>> createPmPlan({
+    createPmPlanJsonString,
+    bool? isLoading,
+  }) async =>
+      await repository.createPmPlan(
+        createPmPlanJsonString,
+        isLoading,
+      );
 }

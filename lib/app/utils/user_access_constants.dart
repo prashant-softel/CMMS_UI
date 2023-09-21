@@ -33,6 +33,10 @@ abstract class UserAccessConstants {
   //GOODS ORDER ACCESS
   static int kGoodsFeatureId = 35;
   static String kFeatureGoodsOrderName = "Goods Order";
+  //MRS
+
+  static int kMrsFeatureId = 15;
+  static String kFeatureMrsName = "SM MRS";
 
   ///USER ACCESS
   static int kHaveAddAccess = 1;

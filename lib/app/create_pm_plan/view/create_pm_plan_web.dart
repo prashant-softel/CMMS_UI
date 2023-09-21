@@ -146,9 +146,9 @@ class _CreatePmPlanWebState extends State<CreatePmPlanWeb> {
                                                     .width *
                                                 .29),
                                             child: LoginCustomTextfield(
-                                                // textController: controller
-                                                //     .challanNoCtrlr,
-                                                )),
+                                              textController:
+                                                  controller.planTittleCtrlr,
+                                            )),
                                       ],
                                     ),
                                   ),
@@ -162,6 +162,12 @@ class _CreatePmPlanWebState extends State<CreatePmPlanWeb> {
                                         width:
                                             (MediaQuery.of(context).size.width *
                                                 .2),
+                                        height: controller
+                                                    .selectedEquipmentCategoryList
+                                                    .length >
+                                                4
+                                            ? 100
+                                            : 45,
                                         dropdownList:
                                             controller.equipmentCategoryList,
                                         selectedItems: controller
@@ -314,7 +320,7 @@ class _CreatePmPlanWebState extends State<CreatePmPlanWeb> {
                                   backgroundColor: ColorValues.appGreenColor,
                                   text: 'Submit',
                                   onPressed: () {
-                                    // controller.submitPurchaseOrderData();
+                                    controller.createPmPlan();
                                   },
                                 ),
                                 Dimens.boxWidth15,

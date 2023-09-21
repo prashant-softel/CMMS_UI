@@ -861,7 +861,7 @@ class _ReceiveGoodsOrderWebState extends State<ReceiveGoodsOrderWeb> {
                                             DataColumn2(
                                                 // fixedWidth: 300,
                                                 label: Text(
-                                              "Ordered Qty",
+                                              "Dispatch Qty",
                                               style: TextStyle(
                                                   fontSize: 15,
                                                   fontWeight: FontWeight.bold),

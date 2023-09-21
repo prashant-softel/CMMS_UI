@@ -2406,7 +2406,7 @@ class ConnectHelper {
         'Authorization': 'Bearer $auth',
       },
     );
-    print('ViewgetPurchaseDetailsById1${responseModel.data}');
+    // print('ViewgetPurchaseDetailsById1${responseModel.data}');
     return responseModel;
   }
 
@@ -4399,6 +4399,24 @@ class ConnectHelper {
       'MRS/CreateMRS',
       Request.post,
       createMrsJsonString,
+      isLoading ?? false,
+      {
+        'Content-Type': 'application/json',
+        'Authorization': 'Bearer $auth',
+      },
+    );
+    return responseModel;
+  }
+
+  Future<ResponseModel> createPmPlan({
+    required String auth,
+    createPmPlanJsonString,
+    bool? isLoading,
+  }) async {
+    var responseModel = await apiWrapper.makeRequest(
+      'PM/CreatePMPlan',
+      Request.post,
+      createPmPlanJsonString,
       isLoading ?? false,
       {
         'Content-Type': 'application/json',
