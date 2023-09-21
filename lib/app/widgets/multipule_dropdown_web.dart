@@ -18,12 +18,15 @@ class MultipDropdownWebWidget extends StatefulWidget {
   EdgeInsetsGeometry? margin;
   List<BoxShadow>? boxShadow;
   List<dynamic> selectedItems;
+  Function(dynamic, dynamic) onValueChanged;
+
   MultipDropdownWebWidget(
       {super.key,
       this.selectedValue,
       this.isValueSelected,
       this.isEditable,
       this.controller,
+      required this.onValueChanged,
       this.focusNode,
       this.width,
       this.margin,
@@ -118,7 +121,11 @@ class _MultipDropdownWebWidgetState extends State<MultipDropdownWebWidget> {
                       hintText: "Select",
                     ),
                   ),
-                  onChanged: print,
+                  onChanged: (List<String>? _selectedValue) {
+                    widget.selectedItems = _selectedValue ?? [];
+                    widget.onValueChanged(
+                        widget.dropdownList, widget.selectedItems);
+                  },
                   selectedItems: widget.selectedItems
                       .map<String>((item) => item.name)
                       .toList() //["Brazil"],

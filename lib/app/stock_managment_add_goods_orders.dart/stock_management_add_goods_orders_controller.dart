@@ -6,6 +6,7 @@ import 'package:cmms/domain/models/create_go_model.dart';
 import 'package:cmms/domain/models/currency_list_model.dart';
 import 'package:cmms/domain/models/facility_model.dart';
 import 'package:cmms/domain/models/get_asset_data_list_model.dart';
+import 'package:cmms/domain/models/get_asset_items_model.dart';
 import 'package:cmms/domain/models/get_purchase_details_model.dart';
 
 import 'package:cmms/domain/models/paiyed_model.dart';
@@ -38,6 +39,7 @@ class StockManagementAddGoodsOrdersController extends GetxController {
   Stream<int> get facilityId$ => _facilityId.stream;
   RxList<FacilityModel?> facilityList = <FacilityModel>[].obs;
   RxList<BusinessListModel?> ownerList = <BusinessListModel>[].obs;
+  RxList<GetAssetItemsModel?> assetItemList = <GetAssetItemsModel>[].obs;
   Rx<String> selectedBusinessType = ''.obs;
 
   Rx<bool> isSelectedBusinessType = true.obs;
@@ -48,17 +50,17 @@ class StockManagementAddGoodsOrdersController extends GetxController {
   int facilityId = 0;
 
   //drop down list of assets
-  RxList<GetAssetDataModel?> assetList = <GetAssetDataModel>[].obs;
+  // RxList<GetAssetDataModel?> assetList = <GetAssetDataModel>[].obs;
   RxList<PaiedModel?> paid = <PaiedModel>[].obs;
 
   var paidByDropdownList = 'Select Gender'.obs;
 
-  Rx<bool> isAssetSelected = true.obs;
-  Rx<String> selectedAsset = ''.obs;
+  // Rx<bool> isAssetSelected = true.obs;
+  // Rx<String> selectedAsset = ''.obs;
 
   // Rx<List<List<Map<String, String>>>> rowItem = Rx<List<List<Map<String, String>>>>([]);
   final rowItem = Rx<List<List<Map<String, String>>>>([]);
-  Map<String, GetAssetDataModel> dropdownMapperData = {};
+  Map<String, GetAssetItemsModel> dropdownMapperData = {};
   Map<String, PaiedModel> paiddropdownMapperData = {};
   RxList<GetPurchaseDetailsByIDModel?>? getPurchaseDetailsByIDModelList =
       <GetPurchaseDetailsByIDModel?>[].obs;
@@ -124,7 +126,7 @@ class StockManagementAddGoodsOrdersController extends GetxController {
         getBusinessList(4);
       });
       Future.delayed(Duration(seconds: 1), () {
-        getAssetList(facilityId);
+        getEquipmentAssetsList(facilityId);
 
         if (id.value != 0) {
           Future.delayed(Duration(seconds: 1), () {
@@ -291,19 +293,34 @@ class StockManagementAddGoodsOrdersController extends GetxController {
     }
   }
 
-  Future<void> getAssetList(int _facilityId) async {
-    assetList.value = <GetAssetDataModel>[];
+  Future<void> getEquipmentAssetsList(int _facilityId) async {
+    assetItemList.value = <GetAssetItemsModel>[];
     final _assetList = await stockManagementAddGoodsOrdersPresenter
-        .getAssetList(facilityId: facilityId);
-    // print('jkncejknce:$facilityId');
+        .getEquipmentAssetsList(facilityId: facilityId);
     if (_assetList != null) {
       for (var asset in _assetList) {
-        assetList.add(asset);
+        assetItemList.add(asset);
       }
+      //
+
       update(["AssetList"]);
     }
+
     addRowItem();
   }
+  // Future<void> getAssetList(int _facilityId) async {
+  //   assetList.value = <GetAssetDataModel>[];
+  //   final _assetList = await stockManagementAddGoodsOrdersPresenter
+  //       .getAssetList(facilityId: facilityId);
+  //   // print('jkncejknce:$facilityId');
+  //   if (_assetList != null) {
+  //     for (var asset in _assetList) {
+  //       assetList.add(asset);
+  //     }
+  //     update(["AssetList"]);
+  //   }
+  //   addRowItem();
+  // }
 
   Future<void> updatePaidBy() async {
     paid.value = <PaiedModel>[];

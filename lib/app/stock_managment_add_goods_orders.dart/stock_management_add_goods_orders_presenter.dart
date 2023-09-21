@@ -3,6 +3,7 @@ import 'package:cmms/domain/models/business_list_model.dart';
 import 'package:cmms/domain/models/currency_list_model.dart';
 import 'package:cmms/domain/models/facility_model.dart';
 import 'package:cmms/domain/models/get_asset_data_list_model.dart';
+import 'package:cmms/domain/models/get_asset_items_model.dart';
 import 'package:cmms/domain/models/get_purchase_details_model.dart';
 
 import 'package:cmms/domain/usecases/stock_management_add_goods_orders_usecase.dart';
@@ -41,16 +42,25 @@ class StockManagementAddGoodsOrdersPresenter {
         type: ListType, isLoading: isLoading);
   }
 
-  Future<List<GetAssetDataModel?>?> getAssetList({
-    String? auth,
+  // Future<List<GetAssetDataModel?>?> getAssetList({
+  //   String? auth,
+  //   int? facilityId,
+  //   bool? isLoading,
+  // }) async =>
+  //     await stockManagementAddGoodsOrdersUsecase.getAssetList(
+  //       auth: auth ?? "",
+  //       facilityId: facilityId ?? 0,
+  //       isLoading: isLoading ?? false,
+  //     );
+  Future<List<GetAssetItemsModel?>?> getEquipmentAssetsList({
     int? facilityId,
     bool? isLoading,
   }) async =>
-      await stockManagementAddGoodsOrdersUsecase.getAssetList(
-        auth: auth ?? "",
+      await stockManagementAddGoodsOrdersUsecase.getEquipmentAssetsList(
         facilityId: facilityId ?? 0,
         isLoading: isLoading ?? false,
       );
+
   Future<Map<String, dynamic>?> createGoodsOrder({
     createGo,
     required bool isLoading,
