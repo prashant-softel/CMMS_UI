@@ -113,73 +113,62 @@ class _PmPlanListContentWebState extends State<PmPlanListContentWeb> {
                                 ),
                                 Row(
                                   children: [
-                                    // PopupMenuButton<String>(
-                                    //   tooltip: "",
-                                    //   elevation: 25.0,
-                                    //   child: Container(
-                                    //     height: 35,
-                                    //     margin: EdgeInsets.only(left: 10),
-                                    //     padding: EdgeInsets.only(
-                                    //         top: 4,
-                                    //         bottom: 4,
-                                    //         right: 8,
-                                    //         left: 8),
-                                    //     decoration: BoxDecoration(
-                                    //       color: ColorValues.appLightBlueColor,
-                                    //       borderRadius:
-                                    //           BorderRadius.circular(5),
-                                    //     ),
-                                    //     child: Text(
-                                    //       'Column Visibility',
-                                    //       style: TextStyle(
-                                    //         color: Colors.white,
-                                    //         fontSize: 16,
-                                    //         fontWeight: FontWeight.w400,
-                                    //       ),
-                                    //     ),
-                                    //   ),
-                                    //   itemBuilder: (BuildContext context) => <
-                                    //       PopupMenuEntry<String>>[]..addAll(
-                                    //         controller
-                                    //             .columnVisibility.value.entries
-                                    //             .map((e) {
-                                    //       return PopupMenuItem<String>(
-                                    //           child: ValueListenableBuilder(
-                                    //               valueListenable: controller
-                                    //                   .columnVisibility,
-                                    //               builder:
-                                    //                   (context, value, child) {
-                                    //                 return Row(
-                                    //                   children: [
-                                    //                     Checkbox(
-                                    //                       value: value[e.key],
-                                    //                       onChanged:
-                                    //                           (newValue) {
-                                    //                         controller
-                                    //                             .setColumnVisibility(
-                                    //                                 e.key,
-                                    //                                 newValue!);
-                                    //                       },
-                                    //                     ),
-                                    //                     Text(e.key),
-                                    //                   ],
-                                    //                 );
-                                    //               }));
-                                    //     })),
-                                    //   onSelected: (String value) {
-                                    //     // Handle column selection
-                                    //   },
-                                    // ),
-
-                                    Container(
-                                      height: 35,
-                                      margin: EdgeInsets.only(left: 10),
-                                      child: CustomElevatedButton(
-                                        backgroundColor:
-                                            ColorValues.appLightBlueColor,
-                                        onPressed: () {},
-                                        text: 'Column Visibility',
+                                    PopupMenuButton<String>(
+                                      tooltip: "",
+                                      elevation: 25.0,
+                                      child: Container(
+                                        height: 35,
+                                        margin: EdgeInsets.only(left: 10),
+                                        padding: EdgeInsets.only(
+                                            top: 4,
+                                            bottom: 4,
+                                            right: 8,
+                                            left: 8),
+                                        decoration: BoxDecoration(
+                                          color: ColorValues.appLightBlueColor,
+                                          borderRadius:
+                                              BorderRadius.circular(5),
+                                        ),
+                                        child: Text(
+                                          'Column Visibility',
+                                          style: TextStyle(
+                                            color: Colors.white,
+                                            fontSize: 16,
+                                            fontWeight: FontWeight.w400,
+                                          ),
+                                        ),
                                       ),
+                                      itemBuilder: (BuildContext context) => <
+                                          PopupMenuEntry<String>>[]..addAll(
+                                            controller
+                                                .columnVisibility.value.entries
+                                                .map((e) {
+                                          return PopupMenuItem<String>(
+                                              child: ValueListenableBuilder(
+                                                  valueListenable: controller
+                                                      .columnVisibility,
+                                                  builder:
+                                                      (context, value, child) {
+                                                    return Row(
+                                                      children: [
+                                                        Checkbox(
+                                                          value: value[e.key],
+                                                          onChanged:
+                                                              (newValue) {
+                                                            controller
+                                                                .setColumnVisibility(
+                                                                    e.key,
+                                                                    newValue!);
+                                                          },
+                                                        ),
+                                                        Text(e.key),
+                                                      ],
+                                                    );
+                                                  }));
+                                        })),
+                                      onSelected: (String value) {
+                                        // Handle column selection
+                                      },
                                     ),
                                     Container(
                                       height: 35,

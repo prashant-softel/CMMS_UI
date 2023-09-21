@@ -38,7 +38,7 @@ class DropdownWebStock extends StatelessWidget {
         //   Obx(
         // () =>
         Container(
-      height: MediaQuery.of(context).size.height * 0.040,
+      height: 30, //MediaQuery.of(context).size.height * 0.040,
       width: width,
       margin: margin,
       decoration: BoxDecoration(
