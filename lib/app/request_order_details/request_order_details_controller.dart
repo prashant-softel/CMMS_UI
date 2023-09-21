@@ -92,7 +92,7 @@ class GoodsOrdersReqDetailController extends GetxController {
 
     final _getPurchaseDetailsById = await goodsOrdersReqDetailPresenter
         .getRoDetailsByID(requestID: requestID);
-    print('Edit goods order  Detail:$_getPurchaseDetailsById');
+    // print('Edit gosods order  Detail:$_getPurchaseDetailsById');
 
     if (_getPurchaseDetailsById != null) {
       getPurchaseDetailsByIDModel.value = _getPurchaseDetailsById;

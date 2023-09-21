@@ -2,6 +2,7 @@ import 'package:cmms/app/home/home_screen.dart';
 import 'package:cmms/app/mrs/Mrs_list_controller.dart';
 import 'package:cmms/app/navigators/app_pages.dart';
 import 'package:cmms/app/theme/dimens.dart';
+import 'package:cmms/app/utils/user_access_constants.dart';
 import 'package:cmms/app/widgets/action_button.dart';
 import 'package:cmms/app/widgets/custom_richtext.dart';
 import 'package:cmms/app/widgets/date_picker.dart';
@@ -13,6 +14,7 @@ import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 
 import 'package:get/get.dart';
 import 'package:syncfusion_flutter_datepicker/datepicker.dart';
+import '../../constant/constant.dart';
 import '../../theme/color_values.dart';
 import '../../theme/styles.dart';
 import '../../widgets/custom_elevated_button.dart';
@@ -629,6 +631,16 @@ class MrsListDataSource extends DataTableSource {
                                           orElse: () => MrsListModel(id: 00),
                                         )
                                         ?.approval_status ==
+                                    1 &&
+                                varUserAccessModel.value.access_list!
+                                        .where((e) =>
+                                            e.feature_id ==
+                                                UserAccessConstants
+                                                    .kMrsFeatureId &&
+                                            e.approve ==
+                                                UserAccessConstants
+                                                    .kHaveApproveAccess)
+                                        .length >
                                     0
                             ? TableActionButton(
                                 color: ColorValues.approveColor,
@@ -648,12 +660,22 @@ class MrsListDataSource extends DataTableSource {
                               )
                             : Dimens.box0,
                         controller.mrsList!
-                                    .firstWhere(
-                                      (e) => e?.id == MrsDetails!.id,
-                                      orElse: () => MrsListModel(id: 00),
-                                    )
-                                    ?.status ==
-                                323
+                                        .firstWhere(
+                                          (e) => e?.id == MrsDetails!.id,
+                                          orElse: () => MrsListModel(id: 00),
+                                        )
+                                        ?.status ==
+                                    323 &&
+                                varUserAccessModel.value.access_list!
+                                        .where((e) =>
+                                            e.feature_id ==
+                                                UserAccessConstants
+                                                    .kMrsFeatureId &&
+                                            e.delete ==
+                                                UserAccessConstants
+                                                    .kHaveIssueAccess)
+                                        .length >
+                                    0
                             ? TableActionButton(
                                 color: ColorValues.issueColor,
                                 icon: Icons.report,
@@ -684,6 +706,16 @@ class MrsListDataSource extends DataTableSource {
                                           orElse: () => MrsListModel(id: 00),
                                         )
                                         ?.approval_status ==
+                                    0 &&
+                                varUserAccessModel.value.access_list!
+                                        .where((e) =>
+                                            e.feature_id ==
+                                                UserAccessConstants
+                                                    .kMrsFeatureId &&
+                                            e.approve ==
+                                                UserAccessConstants
+                                                    .kHaveApproveAccess)
+                                        .length >
                                     0
                             ? TableActionButton(
                                 color: ColorValues.rejectColor,
@@ -703,12 +735,22 @@ class MrsListDataSource extends DataTableSource {
                               )
                             : Dimens.box0,
                         controller.mrsList!
-                                    .firstWhere(
-                                      (e) => e?.id == MrsDetails!.id,
-                                      orElse: () => MrsListModel(id: 00),
-                                    )
-                                    ?.status ==
-                                324
+                                        .firstWhere(
+                                          (e) => e?.id == MrsDetails!.id,
+                                          orElse: () => MrsListModel(id: 00),
+                                        )
+                                        ?.status ==
+                                    324 &&
+                                varUserAccessModel.value.access_list!
+                                        .where((e) =>
+                                            e.feature_id ==
+                                                UserAccessConstants
+                                                    .kMrsFeatureId &&
+                                            e.approve ==
+                                                UserAccessConstants
+                                                    .kHaveApproveAccess)
+                                        .length >
+                                    0
                             ? TableActionButton(
                                 color: ColorValues.approveColor,
                                 icon: Icons.approval,
@@ -727,12 +769,22 @@ class MrsListDataSource extends DataTableSource {
                               )
                             : Dimens.box0,
                         controller.mrsList!
-                                    .firstWhere(
-                                      (e) => e?.id == MrsDetails!.id,
-                                      orElse: () => MrsListModel(id: 00),
-                                    )
-                                    ?.status ==
-                                324
+                                        .firstWhere(
+                                          (e) => e?.id == MrsDetails!.id,
+                                          orElse: () => MrsListModel(id: 00),
+                                        )
+                                        ?.status ==
+                                    324 &&
+                                varUserAccessModel.value.access_list!
+                                        .where((e) =>
+                                            e.feature_id ==
+                                                UserAccessConstants
+                                                    .kMrsFeatureId &&
+                                            e.issue ==
+                                                UserAccessConstants
+                                                    .kHaveIssueAccess)
+                                        .length >
+                                    0
                             ? TableActionButton(
                                 color: ColorValues.rejectColor,
                                 icon: Icons.close_fullscreen,

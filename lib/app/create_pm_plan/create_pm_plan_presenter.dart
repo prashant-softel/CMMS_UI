@@ -29,4 +29,13 @@ class CreatePmPlanPresenter {
     bool? isLoading,
   }) async =>
       await createPmPlanUsecase.getInventoryCategoryList();
+  Future<Map<String, dynamic>?> createPmPlan({
+    createPmPlanJsonString,
+    required bool isLoading,
+  }) async {
+    return createPmPlanUsecase.createPmPlan(
+      createPmPlanJsonString: createPmPlanJsonString,
+      isLoading: isLoading,
+    );
+  }
 }

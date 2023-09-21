@@ -119,7 +119,7 @@ class ViewAddGoodsOrdersController extends GetxController {
 
     final _getPurchaseDetailsById =
         await viewAddGoodsOrdersPresenter.getPurchaseDetailsById(id: id);
-    print('Edit goods order  Detail:$_getPurchaseDetailsById');
+    // print('Edit goods order  Detail:$_getPurchaseDetailsById');
 
     if (_getPurchaseDetailsById != null) {
       getPurchaseDetailsByIDModel.value = _getPurchaseDetailsById;

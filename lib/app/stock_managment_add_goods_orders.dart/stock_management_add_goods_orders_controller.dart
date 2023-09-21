@@ -414,6 +414,7 @@ class StockManagementAddGoodsOrdersController extends GetxController {
       items.add(item);
     });
     CreateGoModel createGoModel = CreateGoModel(
+        // is_submit: 0,
         id: 0,
         facility_id: facilityId,
         order_type: 1,

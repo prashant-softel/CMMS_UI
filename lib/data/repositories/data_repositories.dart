@@ -2660,6 +2660,16 @@ class DataRepository extends DomainRepository {
         createMrsJsonString: createMrsJsonString,
         isLoading: isLoading ?? false,
       );
+  Future<ResponseModel> createPmPlan({
+    required String auth,
+    createPmPlanJsonString,
+    bool? isLoading,
+  }) async =>
+      await connectHelper.createPmPlan(
+        auth: auth,
+        createPmPlanJsonString: createPmPlanJsonString,
+        isLoading: isLoading ?? false,
+      );
   Future<ResponseModel> getIncidentRiskTypeList({
     // int? job_type_id,
     required bool isLoading,
