@@ -61,20 +61,26 @@ class ViewPermitPresenter {
         isLoading: isLoading ?? false,
       );
 
-  Future<void> permitCloseButton({
-    String? comment,
-    String? id,
-    bool? isLoading,
-  }) async =>
-      await viewPermitUsecase.permitCloseButton(
-        comment: comment,
-        id: id,
-        isLoading: isLoading ?? false,
+  Future<Map<String, dynamic>?> permitCloseButton({
+   closePermitJsonString,
+  required bool isLoading,
+    
+  }) async {
+     return viewPermitUsecase.permitCloseButton(
+        closePermitJsonString: closePermitJsonString,
+      isLoading: isLoading,
       );
+  }
 
    Future<CreateSOPModel?> browseFiles(
       Uint8List? fileBytes, String fileName, bool isLoading) async {
     return await viewPermitUsecase.browseFiles(fileBytes, fileName, isLoading);
+    // return true;
+  }
+
+   Future<CreateSOPModel?> browseFilesForExtend(
+      Uint8List? fileBytes, String fileName, bool isLoading) async {
+    return await viewPermitUsecase.browseFilesForExtend(fileBytes, fileName, isLoading);
     // return true;
   }
 
@@ -104,18 +110,17 @@ class ViewPermitPresenter {
 
 
 
-   Future<void> permitExtendButton({
-    String? comment,
-    int? Time,
-    String? id,
-    bool? isLoading,
-  }) async =>
-      await viewPermitUsecase.permitExtendButton(
-        comment: comment,
-        Time: Time,
-        id: id,
-        isLoading: isLoading ?? false,
+  Future<Map<String, dynamic>?> permitExtendButton({
+   extendPermitJsonString,
+  required bool isLoading,
+    
+  }) async {
+     return viewPermitUsecase.permitExtendButton(
+        extendPermitJsonString: extendPermitJsonString,
+      isLoading: isLoading,
       );
+  }
+
 
    Future<void> permitRejectButton({
     String? comment,
@@ -169,6 +174,26 @@ class ViewPermitPresenter {
     return viewPermitUsecase.getPermitConditionList(
       isLoading: isLoading,
       isCancle: isCancle,
+    );
+  }
+
+  Future<List<PermitCancelListModel>> getPermitCloseConditionList({
+    required bool isLoading,
+    required int? isClose,
+  }) async {
+    return viewPermitUsecase.getPermitCloseConditionList(
+      isLoading: isLoading,
+      isClose: isClose,
+    );
+  }
+
+  Future<List<PermitCancelListModel>> getPermitExtendConditionList({
+    required bool isLoading,
+    required int? isExtend,
+  }) async {
+    return viewPermitUsecase.getPermitExtendConditionList(
+      isLoading: isLoading,
+      isExtend: isExtend,
     );
   }
 

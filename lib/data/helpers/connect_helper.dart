@@ -488,11 +488,50 @@ class ConnectHelper {
     return responseModel;
   }
 
+///Permit Cancel Condition List
+   Future<ResponseModel> getPermitConditionList(
+      {required bool isLoading,
+      required String auth,
+      int? isCancle}) async {
   ///Permit Condition List
   Future<ResponseModel> getPermitConditionList(
       {required bool isLoading, required String auth, int? isCancle}) async {
     ResponseModel responseModel = await apiWrapper.makeRequest(
       'Permit/GetPermitConditionList?isCancle=$isCancle',
+      Request.getMultiparts,
+      null,
+      isLoading,
+      {
+        'Authorization': 'Bearer $auth',
+      },
+    );
+    return responseModel;
+  }
+
+  ///Permit Close Condition List
+   Future<ResponseModel> getPermitCloseConditionList(
+      {required bool isLoading,
+      required String auth,
+      int? isClose}) async {
+    ResponseModel responseModel = await apiWrapper.makeRequest(
+      'Permit/GetPermitConditionList?isClose=$isClose',
+      Request.getMultiparts,
+      null,
+      isLoading,
+      {
+        'Authorization': 'Bearer $auth',
+      },
+    );
+    return responseModel;
+  }
+
+  ///Permit Extend Condition List
+   Future<ResponseModel> getPermitExtendConditionList(
+      {required bool isLoading,
+      required String auth,
+      int? isExtend}) async {
+    ResponseModel responseModel = await apiWrapper.makeRequest(
+      'Permit/GetPermitConditionList?isExtend=$isExtend',
       Request.getMultiparts,
       null,
       isLoading,
@@ -779,9 +818,10 @@ class ConnectHelper {
     // facilityId = 45;
     // ptwStatus = 123;
     var responseModel = await apiWrapper.makeRequest(
-      ptwStatus == '121'
-          ? 'Permit/PermitApprove'
-          : 'Permit/PermitExtendApprove',
+      ptwStatus == '133'
+          ? 'Permit/PermitExtendApprove'
+          : 'Permit/PermitApprove',
+
       Request.put,
       {'comment': "$comment", 'id': id},
       isLoading ?? true,
@@ -793,7 +833,7 @@ class ConnectHelper {
     var res = responseModel.data;
     var parsedJson = json.decode(res);
     Get.dialog<void>(
-        PermitMessageApproveDialog(data: parsedJson['message'], jobId: jobId));
+        PermitMessageApproveDialog(data: parsedJson['message'], jobId: jobId, ptwStatus: int.tryParse('$ptwStatus'),));
 
     return responseModel;
   }
@@ -1000,18 +1040,18 @@ class ConnectHelper {
 
   Future<ResponseModel> permitExtendButton({
     required String auth,
+    extendPermitJsonString,
     bool? isLoading,
-    String? comment,
-    int? Time,
-    String? id,
   }) async {
     // facilityId = 45;
     var responseModel = await apiWrapper.makeRequest(
       'Permit/PermitExtend',
       Request.put,
-      {'comment': "$comment", 'Time': '$Time', 'id': id},
+      // {'comment': "$comment", 'Time': '$Time', 'id': id},
+      extendPermitJsonString,
       isLoading ?? true,
       {
+        'Content-Type': 'application/json',
         'Authorization': 'Bearer $auth',
       },
     );
@@ -1025,17 +1065,18 @@ class ConnectHelper {
 
   Future<ResponseModel> permitCloseButton({
     required String auth,
+    closePermitJsonString,
     bool? isLoading,
-    String? comment,
-    String? id,
   }) async {
     // facilityId = 45;
     var responseModel = await apiWrapper.makeRequest(
       'Permit/PermitClose',
       Request.put,
-      {'comment': "$comment", 'id': id},
+      // {'comment': "$comment", 'id': id},
+      closePermitJsonString,
       isLoading ?? true,
       {
+        'Content-Type': 'application/json',
         'Authorization': 'Bearer $auth',
       },
     );

@@ -2,11 +2,9 @@ import 'dart:convert';
 
 import 'package:get/get_rx/src/rx_types/rx_types.dart';
 
-NewPermitDetailModel newPermitDetailModelFromJson(String str) =>
-    NewPermitDetailModel.fromJson(json.decode(str));
+NewPermitDetailModel newPermitDetailModelFromJson(String str) => NewPermitDetailModel.fromJson(json.decode(str));
 
 String newPermitDetailModelToJson(NewPermitDetailModel data) => json.encode(data.toJson());
-
 
 class NewPermitDetailModel {
   int? isExpired;
@@ -46,11 +44,8 @@ class NewPermitDetailModel {
   List<ListCategory?>? lstCategory;
   List<LotoLists>? loto_list;
   List<ListAssociatedJob?>? lstAssociatedJobs;
+  ExtendDetails? extendDetails;
 
-
-
-
-  
   // int? sop_type_id;
   // int? issuer_id;
   // int? approver_id;
@@ -60,59 +55,57 @@ class NewPermitDetailModel {
   // List<int?>? category_ids;
   // List<int?>? isolated_category_ids;
 
-   NewPermitDetailModel(
-       {
-      this.isExpired,
-      this.insertedId,
-      this.ptwStatus,
-      this.permitNo,
-      this.sitePermitNo,
-      this.permitTypeid,
-      this.job_type_id,
-      this.sop_type_id,
-      this.requester_id,
-      this.requestedByName,
-      this.permitTypeName,
-      this.job_type_name,
-      this.sop_type_name,
-      this.title,
-      this.description,
-      this.siteName,
-      this.blockName,
-      this.start_datetime,
-      this.end_datetime,
-      this.permitArea,
-      this.workingTime,
-      this.issuedByName,
-      this.issue_at,
-      this.approvedByName,
-      this.approve_at,
-      this.completedByName,
-      this.close_at,
-      this.closedByName,
-      this.cancelRequestByName,
-      this.cancel_at,
-      this.current_status_short,
-      this.safety_question_list,
-      this.employee_list,
-      this.lstIsolation,
-      this.loto_list,
-      this.lstCategory,
-      this.lstAssociatedJobs,
+  NewPermitDetailModel({
+    this.isExpired,
+    this.insertedId,
+    this.ptwStatus,
+    this.permitNo,
+    this.sitePermitNo,
+    this.permitTypeid,
+    this.job_type_id,
+    this.sop_type_id,
+    this.requester_id,
+    this.requestedByName,
+    this.permitTypeName,
+    this.job_type_name,
+    this.sop_type_name,
+    this.title,
+    this.description,
+    this.siteName,
+    this.blockName,
+    this.start_datetime,
+    this.end_datetime,
+    this.permitArea,
+    this.workingTime,
+    this.issuedByName,
+    this.issue_at,
+    this.approvedByName,
+    this.approve_at,
+    this.completedByName,
+    this.close_at,
+    this.closedByName,
+    this.cancelRequestByName,
+    this.cancel_at,
+    this.current_status_short,
+    this.safety_question_list,
+    this.employee_list,
+    this.lstIsolation,
+    this.loto_list,
+    this.lstCategory,
+    this.lstAssociatedJobs,
+    this.extendDetails,
 
+    // this.approver_id,
+    // this.block_ids,
+    // this.category_ids,
+    // this.is_isolation_required,
+    // this.isolated_category_ids,
+    // this.issuer_id,
+    // this.sop_type_id,
+    // this.user_id,
+  });
 
-      // this.approver_id,
-      // this.block_ids,
-      // this.category_ids,
-      // this.is_isolation_required,
-      // this.isolated_category_ids,
-      // this.issuer_id,
-      // this.sop_type_id,
-      // this.user_id,
-       });
-
-  factory NewPermitDetailModel.fromJson(Map<String, dynamic> json) =>
-      NewPermitDetailModel(
+  factory NewPermitDetailModel.fromJson(Map<String, dynamic> json) => NewPermitDetailModel(
         isExpired: json['isExpired'],
         insertedId: json["insertedId"],
         ptwStatus: json["ptwStatus"],
@@ -130,9 +123,7 @@ class NewPermitDetailModel {
         description: json["description"],
         siteName: json['siteName'],
         blockName: json['blockName'],
-        start_datetime: json["start_datetime"] == null
-        ? null
-        :  DateTime.parse(json['start_datetime'] as String),
+        start_datetime: json["start_datetime"] == null ? null : DateTime.parse(json['start_datetime'] as String),
         end_datetime: json["end_datetime"],
         permitArea: json['permitArea'],
         workingTime: json['workingTime'],
@@ -146,29 +137,25 @@ class NewPermitDetailModel {
         cancelRequestByName: json['cancelRequestByName'] ?? '',
         cancel_at: json['cancel_at'] ?? '',
         current_status_short: json['current_status_short'],
-        safety_question_list:json["safety_question_list"]!=null? List<ListSafetyQuestion>.from(
-            json["safety_question_list"]
-                .map((x) => ListSafetyQuestion.fromJson(x))):[],
-        employee_list: json["employee_list"]!=null? List<ListEmployees>.from(
-            json["employee_list"].map((x) => ListEmployees.fromJson(x))):[],
-        lstIsolation: json["lstIsolation"]!=null? List<ListIsolation>.from(
-            json["lstIsolation"].map((x) => ListIsolation.fromJson(x))):[],
-        loto_list: json["loto_list"]!=null? List<LotoLists>.from(
-            json["loto_list"]?.map((x) => LotoLists.fromJson(x))):[],
-        lstCategory: json["lstCategory"]!=null? List<ListCategory>.from(
-            json["lstCategory"].map((x) => ListCategory.fromJson(x))):[],
-        lstAssociatedJobs: json["lstAssociatedJobs"]!=null? List<ListAssociatedJob>.from(
-            json["lstAssociatedJobs"].map((x) => ListAssociatedJob.fromJson(x))):[],
+        safety_question_list: json["safety_question_list"] != null
+            ? List<ListSafetyQuestion>.from(json["safety_question_list"].map((x) => ListSafetyQuestion.fromJson(x)))
+            : [],
+        employee_list: json["employee_list"] != null ? List<ListEmployees>.from(json["employee_list"].map((x) => ListEmployees.fromJson(x))) : [],
+        lstIsolation: json["lstIsolation"] != null ? List<ListIsolation>.from(json["lstIsolation"].map((x) => ListIsolation.fromJson(x))) : [],
+        loto_list: json["loto_list"] != null ? List<LotoLists>.from(json["loto_list"]?.map((x) => LotoLists.fromJson(x))) : [],
+        lstCategory: json["lstCategory"] != null ? List<ListCategory>.from(json["lstCategory"].map((x) => ListCategory.fromJson(x))) : [],
+        lstAssociatedJobs: json["lstAssociatedJobs"] != null
+            ? List<ListAssociatedJob>.from(json["lstAssociatedJobs"].map((x) => ListAssociatedJob.fromJson(x)))
+            : [],
 
-
-
+        extendDetails: ExtendDetails.fromJson(json['extendDetails']),
 
         // approver_id: json["approver_id"],
         // issuer_id: json["issuer_id"],
         // sop_type_id: json["sop_type_id"],
         // user_id: json["user_id"],
         // is_isolation_required: json["is_isolation_required"],
-        
+
         // block_ids:json["block_ids"]!=null? List<int>.from(json["block_ids"].map((x) => x)):[],
         // isolated_category_ids:json["isolated_category_ids"]!=null?
         //     List<int>.from(json["isolated_category_ids"].map((x) => x)):[],
@@ -184,7 +171,7 @@ class NewPermitDetailModel {
         "permitTypeid": permitTypeid,
         "job_type_id": job_type_id,
         "sop_type_id": sop_type_id,
-        "sop_type_name" : sop_type_name,
+        "sop_type_name": sop_type_name,
         "permitTypeName": permitTypeName,
         "job_type_name": job_type_name,
         "requester_id": requester_id,
@@ -214,7 +201,7 @@ class NewPermitDetailModel {
         "loto_list": List<dynamic>.from(loto_list!.map((x) => x.toJson())),
 
         "lstAssociatedJobs": List<dynamic>.from(lstAssociatedJobs!.map((x) => x)),
-
+        "extendDetails": extendDetails,
 
         // "approver_id": approver_id,
         // "issuer_id": issuer_id,
@@ -224,9 +211,6 @@ class NewPermitDetailModel {
         // "block_ids": List<dynamic>.from(block_ids!.map((x) => x)),
         // "isolated_category_ids": List<dynamic>.from(isolated_category_ids!.map((x) => x)),
         // "category_ids": List<dynamic>.from(category_ids!.map((x) => x)),
-
-
-
       };
 }
 
@@ -241,18 +225,10 @@ class LotoLists {
   String? asset_name;
   String? locksrno;
 
-  factory LotoLists.fromJson(Map<String, dynamic> json) => LotoLists(
-        asset_id: json["asset_id"],
-        asset_name: json["asset_name"],
-        locksrno: json['locksrno']
-      );
+  factory LotoLists.fromJson(Map<String, dynamic> json) =>
+      LotoLists(asset_id: json["asset_id"], asset_name: json["asset_name"], locksrno: json['locksrno']);
 
-  Map<String, dynamic> toJson() => {
-        "asset_id": asset_id,
-        "asset_name": asset_name,
-        "locksrno": locksrno
-        
-      };
+  Map<String, dynamic> toJson() => {"asset_id": asset_id, "asset_name": asset_name, "locksrno": locksrno};
 }
 
 class ListEmployees {
@@ -287,12 +263,7 @@ class ListSafetyQuestion {
   int? input;
 
   factory ListSafetyQuestion.fromJson(Map<String, dynamic> json) =>
-      ListSafetyQuestion(
-        saftyQuestionId: json["saftyQuestionId"],
-        saftyQuestionName: json["saftyQuestionName"],
-        input: json['input']
-        
-      );
+      ListSafetyQuestion(saftyQuestionId: json["saftyQuestionId"], saftyQuestionName: json["saftyQuestionName"], input: json['input']);
 
   Map<String, dynamic> toJson() => {
         "saftyQuestionId": saftyQuestionId,
@@ -301,15 +272,8 @@ class ListSafetyQuestion {
       };
 }
 
-class FileList{
-   FileList({
-    this.id,
-    this.fileName,
-    this.fileCategory,
-    this.fileSize,
-    this.status,
-    this.ptwFiles
-  });
+class FileList {
+  FileList({this.id, this.fileName, this.fileCategory, this.fileSize, this.status, this.ptwFiles});
 
   int? id;
   String? fileName;
@@ -318,27 +282,16 @@ class FileList{
   int? status;
   String? ptwFiles;
 
-  factory FileList.fromJson(Map<String, dynamic> json) =>
-      FileList(
-        id: json["id"],
-        fileName: json["fileName"],
-        fileCategory: json['fileCategory'],
-        fileSize: json['fileSize'],
-        status: json['status'],
-        ptwFiles: json['ptwFiles'] ?? ''
-        
-      );
+  factory FileList.fromJson(Map<String, dynamic> json) => FileList(
+      id: json["id"],
+      fileName: json["fileName"],
+      fileCategory: json['fileCategory'],
+      fileSize: json['fileSize'],
+      status: json['status'],
+      ptwFiles: json['ptwFiles'] ?? '');
 
-  Map<String, dynamic> toJson() => {
-        "id": id,
-        "fileName": fileName,
-        "fileCategory": fileCategory,
-        "fileSize": fileSize,
-        "status": status,
-        "ptwFiles": ptwFiles
-      };
-
-
+  Map<String, dynamic> toJson() =>
+      {"id": id, "fileName": fileName, "fileCategory": fileCategory, "fileSize": fileSize, "status": status, "ptwFiles": ptwFiles};
 }
 
 class ListIsolation {
@@ -364,7 +317,6 @@ class ListIsolation {
 class ListCategory {
   ListCategory({
     this.equipmentCat,
-    
   });
 
   String? equipmentCat;
@@ -389,7 +341,6 @@ class ListAssociatedJob {
     this.assignedTo,
     this.status,
     this.status_short,
-   
   });
 
   int? jobId;
@@ -401,7 +352,6 @@ class ListAssociatedJob {
   String? assignedTo;
   int? status;
   String? status_short;
-  
 
   factory ListAssociatedJob.fromJson(Map<String, dynamic> json) => ListAssociatedJob(
         jobId: json['jobId'],
@@ -409,13 +359,10 @@ class ListAssociatedJob {
         title: json["title"] ?? '',
         equipmentCat: json['equipmentCat'],
         equipment: json['equipment'],
-        breakdownTime: json['breakdownTime'] == null
-            ? DateTime.now()
-            : DateTime.parse(json['breakdownTime'] as String),
+        breakdownTime: json['breakdownTime'] == null ? DateTime.now() : DateTime.parse(json['breakdownTime'] as String),
         assignedTo: json['assignedTo'] ?? '',
         status: json['status'],
         status_short: json['status_short'],
-       
       );
 
   Map<String, dynamic> toJson() => {
@@ -428,11 +375,72 @@ class ListAssociatedJob {
         "assignedTo": assignedTo,
         "status": status,
         "status_short": status_short,
-       
       };
 }
 
+class ExtendDetails {
+  ExtendDetails({
+    this.conditions,
+    this.files,
+  });
 
+  List<ExtendConditions>? conditions;
+  List<Files>? files;
+
+  factory ExtendDetails.fromJson(Map<String, dynamic> json) => ExtendDetails(
+        conditions: json["conditions"] != null ? List<ExtendConditions>.from(json["conditions"].map((x) => ExtendConditions.fromJson(x))) : [],
+        files: json["files"] != null ? List<Files>.from(json["files"].map((x) => Files.fromJson(x))) : [],
+      );
+
+  Map<String, dynamic> toJson() => {
+        "conditions": List<dynamic>.from(conditions!.map((x) => x.toJson())),
+        "files": List<dynamic>.from(files!.map((x) => x)),
+      };
+}
+
+class ExtendConditions {
+  ExtendConditions({
+    this.id,
+    this.value,
+    this.name,
+  });
+
+  int? id;
+  int? value;
+  String? name;
+
+  factory ExtendConditions.fromJson(Map<String, dynamic> json) => ExtendConditions(
+        id: json['id'],
+        value: json['value'],
+        name: json['name'],
+      );
+
+  Map<String, dynamic> toJson() => {
+        "id": id,
+        "value": value,
+        "name": name,
+      };
+}
+
+class Files {
+  Files({
+    this.fileId,
+    this.path,
+  });
+
+  int? fileId;
+  String? path;
+
+  factory Files.fromJson(Map<String, dynamic> json) => Files(
+        fileId: json['fileId'],
+        path: json['path'],
+      );
+
+  Map<String, dynamic> toJson() => {
+        "fileId": fileId,
+        "path": path,
+      };
+}
 
 String addsafetyToJson(ListSafetyQuestion data) => json.encode(data.toJson());
 
@@ -448,4 +456,6 @@ String addListCategoryToJson(ListCategory data) => json.encode(data.toJson());
 
 String addListAssocitedJobsToJson(ListAssociatedJob data) => json.encode(data.toJson());
 
+String addListExtendConditionsToJson(ExtendConditions data) => json.encode(data.toJson());
 
+String addListFilesToJson(Files data) => json.encode(data.toJson());

@@ -1,5 +1,6 @@
 import 'package:cmms/app/new_permit_list/new_permit_list_controller.dart';
 import 'package:cmms/app/theme/color_values.dart';
+import 'package:cmms/app/view_permit/view_permit_controller.dart';
 import 'package:cmms/domain/repositories/repository.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -14,7 +15,7 @@ class PermitMessageExtendDialog extends GetView {
   String? data;
 
   PermitMessageExtendDialog({super.key, this.createPermitData, this.data});
-  final NewPermitListController _controller = Get.find();
+  final ViewPermitController _controller = Get.find();
 
 
   @override
@@ -81,7 +82,8 @@ class PermitMessageExtendDialog extends GetView {
             child: ElevatedButton(
               style: Styles.darkBlueElevatedButtonStyle,
               onPressed: () {
-                _controller.getNewPermitList(_controller.facilityId, _controller.userId,_controller.formattedTodate, _controller.formattedFromdate, false, false, false);
+                // _controller.getNewPermitList(_controller.facilityId, _controller.userId,_controller.formattedTodate, _controller.formattedFromdate, false, false, false);
+                Get.offAllNamed(Routes.newPermitList);//Anas
                 Get.back();
               },
               child: const Text('Ok'),

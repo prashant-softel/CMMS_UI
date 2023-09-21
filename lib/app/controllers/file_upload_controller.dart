@@ -28,6 +28,10 @@ class FileUploadController extends GetxController {
   List<List<int>>? bytesDataList;
   Rx<double?> tileHeight = 0.0.obs;
 
+  ///fileIDs
+     List<dynamic> fileIds = [];
+  
+
   ///
   @override
   void onInit() async {
@@ -127,9 +131,17 @@ class FileUploadController extends GetxController {
     });
 
     var response = await request.send();
+    print('File Upload Response:$response');
 
     if (response.statusCode == 200) {
-      print('Files uploaded successfully');
+    var respStr = await response.stream.bytesToString();
+    var jsonResponse = json.decode(respStr);
+      
+      var id = jsonResponse['id'];
+      print('File Id,${id[0]}');
+      fileIds.addAll(jsonResponse['id']);
+      print('Files uploaded successfully,$fileIds');
+      
     } else {
       print('Failed to upload files: ${response.reasonPhrase}');
     }

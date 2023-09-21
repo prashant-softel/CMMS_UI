@@ -2169,7 +2169,7 @@ class Repository {
     }
   }
 
-  ///Permit Condition List
+  ///Permit Cancel Condition List
   Future<List<PermitCancelListModel>> getPermitConditionList({
     required int? isCancle,
     required bool isLoading,
@@ -2195,6 +2195,61 @@ class Repository {
       return [];
     }
   }
+
+  ///Permit Close Condition List
+   Future<List<PermitCancelListModel>> getPermitCloseConditionList({
+    required int? isClose,
+    required bool isLoading,
+  }) async {
+    try {
+      final auth = await getSecuredValue(LocalKeys.authToken);
+
+      log(auth);
+      final res = await _dataRepository.getPermitCloseConditionList(
+        isClose: isClose,
+        isLoading: isLoading,
+        auth: auth,
+      );
+      print('PermitCloseCondition List Data: ${res.data}');
+
+      if (!res.hasError) {
+        var permitCloseConditionList = permitCancelListModelFromJson(res.data);
+        return permitCloseConditionList;
+      }
+      return [];
+    } catch (error) {
+      log(error.toString());
+      return [];
+    }
+  }
+
+///Permit Extend Condition List
+   Future<List<PermitCancelListModel>> getPermitExtendConditionList({
+    required int? isExtend,
+    required bool isLoading,
+  }) async {
+    try {
+      final auth = await getSecuredValue(LocalKeys.authToken);
+
+      log(auth);
+      final res = await _dataRepository.getPermitExtendConditionList(
+        isExtend: isExtend,
+        isLoading: isLoading,
+        auth: auth,
+      );
+      print('PermitExtendCondition List Data: ${res.data}');
+
+      if (!res.hasError) {
+        var permitExtendConditionList = permitCancelListModelFromJson(res.data);
+        return permitExtendConditionList;
+      }
+      return [];
+    } catch (error) {
+      log(error.toString());
+      return [];
+    }
+  }
+
 
   Future<List<WarrantyClaimModel>> getWarrantyClaimList({
     required int? facilityId,
@@ -2640,10 +2695,11 @@ class Repository {
     }
   }
 
-  Future<void> permitExtendButton(
-    String? comment,
-    int? Time,
-    String? id,
+  ///Extend Permit
+  Future<Map<String, dynamic>> permitExtendButton(
+    // String? comment,
+    // String? id,
+     extendPermitJsonString,
     bool? isLoading,
   ) async {
     try {
@@ -2651,26 +2707,29 @@ class Repository {
 
       final res = await _dataRepository.permitExtendButton(
         auth: auth,
-        comment: comment,
-        Time: Time,
-        id: id,
+        extendPermitJsonString: json.encode(extendPermitJsonString),
         isLoading: isLoading ?? false,
       );
-      print('PermitExtendResponse: ${res.data}');
+      print('PermitExtendRequestResponse: ${res.data}');
 
       if (!res.hasError) {
         //  return _permitIssueModel;
       } else {
-        Utility.showDialog(res.errorCode.toString() + 'permitExtendButton');
+        Utility.showDialog(
+            res.errorCode.toString() + 'permitExtendtButton');
       }
+      return Map();
     } catch (error) {
       log(error.toString());
+      return Map();
     }
   }
 
-  Future<void> permitCloseButton(
-    String? comment,
-    String? id,
+ ///Close Permit
+  Future<Map<String, dynamic>> permitCloseButton(
+    // String? comment,
+    // String? id,
+    closePermitJsonString,
     bool? isLoading,
   ) async {
     try {
@@ -2678,19 +2737,21 @@ class Repository {
 
       final res = await _dataRepository.permitCloseButton(
         auth: auth,
-        comment: comment,
-        id: id,
+        closePermitJsonString: json.encode(closePermitJsonString),
         isLoading: isLoading ?? false,
       );
-      print('PermitCloseResponse55: ${res.data}');
+      print('PermitCloseRequestResponse: ${res.data}');
 
       if (!res.hasError) {
         //  return _permitIssueModel;
       } else {
-        Utility.showDialog(res.errorCode.toString() + 'permitCloseButton');
+        Utility.showDialog(
+            res.errorCode.toString() + 'permitCloseButton');
       }
+      return Map();
     } catch (error) {
       log(error.toString());
+      return Map();
     }
   }
 

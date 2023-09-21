@@ -390,6 +390,35 @@ class DataRepository extends DomainRepository {
   }
 
   @override
+  Future<ResponseModel> getPermitCloseConditionList({
+    int? isClose,
+    required bool isLoading,
+    required String auth,
+  }) async {
+    return await connectHelper.getPermitCloseConditionList(
+      isLoading: isLoading,
+      auth: auth,
+      isClose: isClose,
+
+    );
+  }
+
+  @override
+  Future<ResponseModel> getPermitExtendConditionList({
+    int? isExtend,
+    required bool isLoading,
+    required String auth,
+  }) async {
+    return await connectHelper.getPermitExtendConditionList(
+      isLoading: isLoading,
+      auth: auth,
+      isExtend: isExtend,
+
+    );
+  }
+
+
+  @override
   Future<ResponseModel> getWarrantyClaimList({
     int? facilityId,
     int? blockId,
@@ -700,31 +729,25 @@ class DataRepository extends DomainRepository {
         isLoading: isLoading ?? false,
       );
 
-  Future<ResponseModel> permitExtendButton({
+   Future<ResponseModel> permitExtendButton({
     required String auth,
-    String? comment,
-    int? Time,
-    String? id,
+    extendPermitJsonString,
     bool? isLoading,
   }) async =>
       await connectHelper.permitExtendButton(
-        auth: auth,
-        comment: comment,
-        Time: Time,
-        id: id,
+         auth: auth,
+        extendPermitJsonString: extendPermitJsonString,
         isLoading: isLoading ?? false,
       );
 
-  Future<ResponseModel> permitCloseButton({
+ Future<ResponseModel> permitCloseButton({
     required String auth,
-    String? comment,
-    String? id,
+    closePermitJsonString,
     bool? isLoading,
   }) async =>
       await connectHelper.permitCloseButton(
-        auth: auth,
-        comment: comment,
-        id: id,
+         auth: auth,
+        closePermitJsonString: closePermitJsonString,
         isLoading: isLoading ?? false,
       );
 
