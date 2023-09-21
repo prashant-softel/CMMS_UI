@@ -488,12 +488,8 @@ class ConnectHelper {
     return responseModel;
   }
 
-///Permit Cancel Condition List
-   Future<ResponseModel> getPermitConditionList(
-      {required bool isLoading,
-      required String auth,
-      int? isCancle}) async {
-  ///Permit Condition List
+  ///Permit Cancel Condition List
+
   Future<ResponseModel> getPermitConditionList(
       {required bool isLoading, required String auth, int? isCancle}) async {
     ResponseModel responseModel = await apiWrapper.makeRequest(
@@ -509,10 +505,8 @@ class ConnectHelper {
   }
 
   ///Permit Close Condition List
-   Future<ResponseModel> getPermitCloseConditionList(
-      {required bool isLoading,
-      required String auth,
-      int? isClose}) async {
+  Future<ResponseModel> getPermitCloseConditionList(
+      {required bool isLoading, required String auth, int? isClose}) async {
     ResponseModel responseModel = await apiWrapper.makeRequest(
       'Permit/GetPermitConditionList?isClose=$isClose',
       Request.getMultiparts,
@@ -526,10 +520,8 @@ class ConnectHelper {
   }
 
   ///Permit Extend Condition List
-   Future<ResponseModel> getPermitExtendConditionList(
-      {required bool isLoading,
-      required String auth,
-      int? isExtend}) async {
+  Future<ResponseModel> getPermitExtendConditionList(
+      {required bool isLoading, required String auth, int? isExtend}) async {
     ResponseModel responseModel = await apiWrapper.makeRequest(
       'Permit/GetPermitConditionList?isExtend=$isExtend',
       Request.getMultiparts,
@@ -821,7 +813,6 @@ class ConnectHelper {
       ptwStatus == '133'
           ? 'Permit/PermitExtendApprove'
           : 'Permit/PermitApprove',
-
       Request.put,
       {'comment': "$comment", 'id': id},
       isLoading ?? true,
@@ -832,8 +823,11 @@ class ConnectHelper {
     print('PermitApprovedResponse: ${responseModel.data}');
     var res = responseModel.data;
     var parsedJson = json.decode(res);
-    Get.dialog<void>(
-        PermitMessageApproveDialog(data: parsedJson['message'], jobId: jobId, ptwStatus: int.tryParse('$ptwStatus'),));
+    Get.dialog<void>(PermitMessageApproveDialog(
+      data: parsedJson['message'],
+      jobId: jobId,
+      ptwStatus: int.tryParse('$ptwStatus'),
+    ));
 
     return responseModel;
   }
