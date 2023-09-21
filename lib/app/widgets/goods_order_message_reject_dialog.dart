@@ -103,7 +103,7 @@ class GoodsOrderMessageRejectDialog extends GetView {
                       controller.getBusinessList(4);
                     });
                     Future.delayed(Duration(seconds: 1), () {
-                      controller.getAssetList(controller.facilityId);
+                      controller.getEquipmentAssetsList(controller.facilityId);
                       if (id != null) {
                         Future.delayed(Duration(seconds: 1), () {
                           controller.getPurchaseDetailsById(id: controller.id!);

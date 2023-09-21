@@ -1,5 +1,6 @@
 import 'package:cmms/app/app.dart';
 import 'package:cmms/app/constant/constant.dart';
+import 'package:cmms/app/stock_managment_add_goods_orders.dart/view/stock_management_add_goods_orders_web.dart';
 import 'package:cmms/app/utils/user_access_constants.dart';
 import 'package:cmms/app/view_add_goods_orders.dart/stock_management_view_add_goods_orders_controller.dart';
 import 'package:cmms/app/widgets/close_goods_order_dialog.dart';
@@ -8,8 +9,10 @@ import 'package:cmms/app/widgets/goods_order_approve_dialog.dart';
 import 'package:cmms/app/widgets/goods_order_reject_dialog.dart';
 
 import 'package:cmms/app/widgets/stock_dropdown.dart';
+import 'package:data_table_2/data_table_2.dart';
 
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:scrollable_table_view/scrollable_table_view.dart';
 
@@ -693,8 +696,9 @@ class _ViewAddGoodsOrdersWebState extends State<ViewAddGoodsOrdersWeb> {
                                 height: 20,
                               ),
                               Container(
-                                height: 350,
                                 margin: Dimens.edgeInsets20,
+                                height: 300,
+                                // height: ((controller.goDetails!.value.length) * 80) + 170,
                                 decoration: BoxDecoration(
                                   border: Border.all(
                                     color:
@@ -710,218 +714,271 @@ class _ViewAddGoodsOrdersWebState extends State<ViewAddGoodsOrdersWeb> {
                                     ),
                                   ],
                                 ),
-                                child: Column(
-                                  children: [
-                                    Padding(
-                                      padding: const EdgeInsets.symmetric(
-                                          horizontal: 20, vertical: 5),
-                                      child: Row(
-                                        children: [
-                                          Text("Assets"),
-                                          Spacer(),
-                                          GestureDetector(
-                                              onTap: () {
-                                                controller.addRowItem();
-                                              },
-                                              child:
-                                                  Icon(Icons.exposure_plus_1)),
-                                        ],
-                                      ),
+                                child: Column(children: [
+                                  // Column(
+                                  //     children: []..addAll(controller.rowItem.value.map((e) {
+                                  //         return Text(jsonEncode(e));
+                                  //       }))),
+                                  // Text(jsonEncode(controller.dropdownMapperData)),
+                                  Padding(
+                                    padding: const EdgeInsets.all(10.0),
+                                    child: Row(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.spaceBetween,
+                                      children: [
+                                        Text(
+                                          "Selects Material ",
+                                          style: Styles.blue700,
+                                        ),
+                                        GestureDetector(
+                                          onTap: () {
+                                            controller.addRowItem();
+                                          },
+                                          child: Row(
+                                            children: [
+                                              Text("Add"),
+                                              Icon(Icons.exposure_plus_1),
+                                            ],
+                                          ),
+                                        ),
+                                      ],
                                     ),
-                                    // Column(
-                                    //     children: []..addAll(
-                                    //           controller.rowItem.value.map((e) {
-                                    //         return Text(jsonEncode(e));
-                                    //       }))),
-                                    // Text(jsonEncode(
-                                    //     controller.dropdownMapperData)),
-                                    IgnorePointer(
-                                      child: Obx(
-                                        () => Container(
-                                          height: 300,
-                                          child: ScrollableTableView(
-                                            columns: [
-                                              "Assets Code",
-                                              "Paid By",
+                                  ),
+                                  Expanded(
+                                    child: DataTable2(
+                                      minWidth: 1000,
+                                      dataRowHeight: 105,
+                                      columnSpacing: 10,
+                                      border: TableBorder.all(
+                                          color: Color.fromARGB(
+                                              255, 206, 229, 234)),
+                                      columns: [
+                                        DataColumn2(
+                                            fixedWidth: 500,
+                                            label: Text(
+                                              "Material",
+                                              style: TextStyle(
+                                                  fontSize: 15,
+                                                  fontWeight: FontWeight.bold),
+                                            )),
+                                        DataColumn2(
+                                            // fixedWidth: 250,
+                                            label: Text(
+                                          "Paid By",
+                                          style: TextStyle(
+                                              fontSize: 15,
+                                              fontWeight: FontWeight.bold),
+                                        )),
+                                        // DataColumn2(
+                                        //     fixedWidth: 110,
+                                        //     label: Text(
+                                        //       "Received  Qty",
+                                        //       style: TextStyle(fontSize: 15, fontWeight: FontWeight.bold),
+                                        //     )),
+                                        DataColumn2(
+                                            fixedWidth: 110,
+                                            label: Text(
                                               "Cost",
-                                              "Ordered Qty",
-                                            ].map((column) {
-                                              return TableViewColumn(
-                                                label: column,
-                                                minWidth: Get.width * 0.23,
-                                                height: Get.height / 2,
-                                              );
-                                            }).toList(),
-                                            rows: controller.rowItem.value
-                                                .map((record) {
-                                              return TableViewRow(
-                                                height: 200,
-                                                cells: record.map((mapData) {
-                                                  return TableViewCell(
-                                                    child: (mapData['key'] ==
-                                                            "Drop_down")
-                                                        ? Padding(
-                                                            padding:
-                                                                const EdgeInsets
-                                                                        .only(
-                                                                    left: 20,
-                                                                    right: 20,
-                                                                    top: 70),
-                                                            child: Column(
-                                                              mainAxisAlignment:
-                                                                  MainAxisAlignment
-                                                                      .center,
-                                                              crossAxisAlignment:
-                                                                  CrossAxisAlignment
-                                                                      .center,
-                                                              children: [
-                                                                DropdownWebStock(
-                                                                  width: MediaQuery.of(
-                                                                              context)
-                                                                          .size
-                                                                          .width /
-                                                                      4,
-                                                                  dropdownList:
-                                                                      controller
-                                                                          .assetList,
-                                                                  selectedValue:
-                                                                      mapData[
-                                                                          "value"],
-                                                                  onValueChanged:
-                                                                      (list,
-                                                                          selectedValue) {
-                                                                    print({
-                                                                      selectedValue:
-                                                                          selectedValue
-                                                                    });
-                                                                    mapData["value"] =
-                                                                        selectedValue;
-                                                                    controller.dropdownMapperData[selectedValue] = list.firstWhere(
+                                              style: TextStyle(
+                                                  fontSize: 15,
+                                                  fontWeight: FontWeight.bold),
+                                            )),
+                                        DataColumn2(
+                                            fixedWidth: 110,
+                                            label: Text(
+                                              "Dispatch Qty",
+                                              style: TextStyle(
+                                                  fontSize: 15,
+                                                  fontWeight: FontWeight.bold),
+                                            )),
+                                      ],
+                                      rows: controller.rowItem.value
+                                          .map((record) {
+                                        return DataRow(
+                                          // height: 130,
+                                          cells: record.map((mapData) {
+                                            return DataCell(
+                                              (mapData['key'] == "Drop_down")
+                                                  ? IgnorePointer(
+                                                      child: Padding(
+                                                        padding:
+                                                            const EdgeInsets
+                                                                .only(
+                                                          left: 10,
+                                                          right: 10,
+                                                        ),
+                                                        child: Column(
+                                                          mainAxisAlignment:
+                                                              MainAxisAlignment
+                                                                  .center,
+                                                          crossAxisAlignment:
+                                                              CrossAxisAlignment
+                                                                  .center,
+                                                          children: [
+                                                            DropdownWebStock(
+                                                              width:
+                                                                  MediaQuery.of(
+                                                                          context)
+                                                                      .size
+                                                                      .width,
+                                                              dropdownList:
+                                                                  controller
+                                                                      .assetItemList,
+                                                              selectedValue:
+                                                                  mapData[
+                                                                      "value"],
+                                                              onValueChanged: (list,
+                                                                  selectedValue) {
+                                                                // print(
+                                                                //     'paifcghb:${controller.assetItemList}');
+                                                                // print({selectedValue: selectedValue});
+                                                                mapData["value"] =
+                                                                    selectedValue;
+                                                                controller.dropdownMapperData[
+                                                                        selectedValue] =
+                                                                    list.firstWhere(
                                                                         (element) =>
                                                                             element.name ==
                                                                             selectedValue,
                                                                         orElse:
                                                                             null);
-                                                                  },
-                                                                ),
-                                                                SizedBox(
-                                                                  height: 5,
-                                                                ),
-                                                                Row(
-                                                                  children: [
-                                                                    Text(
-                                                                        "Assets Code :"),
-                                                                    // Text(
-                                                                    //     "${controller.dropdownMapperData[mapData['value']]?.asset_code ?? ''}")
-                                                                  ],
-                                                                ),
-                                                                Row(
-                                                                  children: [
-                                                                    Text(
-                                                                        "Assets type :"),
-                                                                    // Text(
-                                                                    //     "${controller.dropdownMapperData[mapData['value']]?.asset_type ?? ''}")
-                                                                  ],
-                                                                ),
-                                                                Row(
-                                                                  children: [
-                                                                    Text(
-                                                                        "Assets Category :"),
-                                                                    // Text(
-                                                                    //     "${controller.dropdownMapperData[mapData['value']]?.cat_name ?? ''}")
-                                                                  ],
-                                                                )
-                                                              ],
+                                                              },
                                                             ),
-                                                          )
-                                                        : (mapData['key'] ==
-                                                                "Paid_By")
-                                                            ? DropdownWebStock(
-                                                                width: MediaQuery.of(
-                                                                            context)
-                                                                        .size
-                                                                        .width /
-                                                                    4,
-                                                                dropdownList:
-                                                                    controller
-                                                                        .paid,
-                                                                selectedValue:
-                                                                    mapData[
-                                                                        "value"],
-                                                                onValueChanged:
-                                                                    (list,
-                                                                        selectedValue) {
-                                                                  print({
-                                                                    selectedValue:
-                                                                        selectedValue
-                                                                  });
-                                                                  mapData["value"] =
-                                                                      selectedValue;
-                                                                  controller.paiddropdownMapperData[selectedValue] = list.firstWhere(
-                                                                      (element) =>
-                                                                          element
-                                                                              .name ==
-                                                                          selectedValue,
-                                                                      orElse:
-                                                                          null);
-                                                                  // mapData["value"] =
-                                                                  //     selectedValue;
-                                                                },
-                                                              )
-                                                            : (mapData['key'] ==
-                                                                        "Order") ||
-                                                                    (mapData[
-                                                                            'key'] ==
-                                                                        "Cost")
-                                                                ? Padding(
-                                                                    padding:
-                                                                        const EdgeInsets.all(
-                                                                            8.0),
-                                                                    child: Container(
-                                                                        width: (Get.width * .4),
-                                                                        // padding: EdgeInsets.all(value),
-                                                                        decoration: BoxDecoration(
-                                                                          boxShadow: [
-                                                                            BoxShadow(
-                                                                              color: Colors.black26,
-                                                                              offset: const Offset(
-                                                                                5.0,
-                                                                                5.0,
-                                                                              ),
-                                                                              blurRadius: 5.0,
-                                                                              spreadRadius: 1.0,
-                                                                            ),
-                                                                          ],
-                                                                          color:
-                                                                              ColorValues.whiteColor,
-                                                                          borderRadius:
-                                                                              BorderRadius.circular(5),
+                                                            // Row(
+                                                            //   children: [
+                                                            //     Text("Assets Code :"),
+                                                            //     Text(
+                                                            //         "${controller.dropdownMapperData[mapData['value']]?.asset_code ?? ''}")
+                                                            //   ],
+                                                            // ),
+                                                            // Row(
+                                                            //   children: [
+                                                            //     Text("Assets type :"),
+                                                            //     Text(
+                                                            //         "${controller.dropdownMapperData[mapData['value']]?.asset_type ?? ''}")
+                                                            //   ],
+                                                            // ),
+                                                            // Row(
+                                                            //   children: [
+                                                            //     Text("Assets Category :"),
+                                                            //     Text(
+                                                            //         "${controller.dropdownMapperData[mapData['value']]?.cat_name ?? ''}")
+                                                            //   ],
+                                                            // )
+                                                          ],
+                                                        ),
+                                                      ),
+                                                    )
+                                                  : (mapData['key'] ==
+                                                          "Paid_By")
+                                                      ? IgnorePointer(
+                                                          child: Padding(
+                                                            padding:
+                                                                const EdgeInsets
+                                                                        .only(
+                                                                    left: 10,
+                                                                    right: 10),
+                                                            child:
+                                                                DropdownWebStock(
+                                                              width:
+                                                                  MediaQuery.of(
+                                                                          context)
+                                                                      .size
+                                                                      .width,
+                                                              dropdownList:
+                                                                  controller
+                                                                      .paid,
+                                                              selectedValue:
+                                                                  mapData[
+                                                                      "value"],
+                                                              onValueChanged: (list,
+                                                                  selectedValue) {
+                                                                print(
+                                                                    'paifcghb:${controller.paid}');
+                                                                print({
+                                                                  selectedValue:
+                                                                      selectedValue
+                                                                });
+                                                                mapData["value"] =
+                                                                    selectedValue;
+                                                                controller.paiddropdownMapperData[
+                                                                        selectedValue] =
+                                                                    list.firstWhere(
+                                                                        (element) =>
+                                                                            element.name ==
+                                                                            selectedValue,
+                                                                        orElse:
+                                                                            null);
+                                                              },
+                                                            ),
+                                                          ),
+                                                        )
+                                                      : (mapData['key'] ==
+                                                                  "Order") ||
+                                                              (mapData['key'] ==
+                                                                  "Cost")
+                                                          ? IgnorePointer(
+                                                              child: Container(
+
+                                                                  // padding: EdgeInsets.all(value),
+                                                                  decoration:
+                                                                      BoxDecoration(
+                                                                    boxShadow: [
+                                                                      BoxShadow(
+                                                                        color: Colors
+                                                                            .black26,
+                                                                        offset:
+                                                                            const Offset(
+                                                                          5.0,
+                                                                          5.0,
                                                                         ),
-                                                                        child: LoginCustomTextfield(
-                                                                          maxLine:
-                                                                              1,
-                                                                          textController:
-                                                                              new TextEditingController(text: mapData["value"] ?? ''),
-                                                                          onChanged:
-                                                                              (txt) {
-                                                                            mapData["value"] =
-                                                                                txt;
-                                                                          },
-                                                                        )),
-                                                                  )
-                                                                : Text(mapData[
-                                                                        'key'] ??
-                                                                    ''),
-                                                  );
-                                                }).toList(),
-                                              );
-                                            }).toList(),
-                                          ),
-                                        ),
-                                      ),
+                                                                        blurRadius:
+                                                                            5.0,
+                                                                        spreadRadius:
+                                                                            1.0,
+                                                                      ),
+                                                                    ],
+                                                                    color: ColorValues
+                                                                        .whiteColor,
+                                                                    borderRadius:
+                                                                        BorderRadius
+                                                                            .circular(5),
+                                                                  ),
+                                                                  child:
+                                                                      LoginCustomTextfield(
+                                                                    width:
+                                                                        (Get.width *
+                                                                            .4),
+                                                                    keyboardType:
+                                                                        TextInputType
+                                                                            .number,
+                                                                    inputFormatters: <
+                                                                        TextInputFormatter>[
+                                                                      FilteringTextInputFormatter
+                                                                          .digitsOnly
+                                                                    ],
+                                                                    maxLine: 1,
+                                                                    textController:
+                                                                        new TextEditingController(
+                                                                            text:
+                                                                                mapData["value"] ?? ''),
+                                                                    onChanged:
+                                                                        (txt) {
+                                                                      mapData["value"] =
+                                                                          txt;
+                                                                    },
+                                                                  )),
+                                                            )
+                                                          : Text(
+                                                              mapData['key'] ??
+                                                                  ''),
+                                            );
+                                          }).toList(),
+                                        );
+                                      }).toList(),
                                     ),
-                                  ],
-                                ),
+                                  ),
+                                ]),
                               ),
                               (controller.getPurchaseDetailsByIDModel.value
                                               ?.status ==

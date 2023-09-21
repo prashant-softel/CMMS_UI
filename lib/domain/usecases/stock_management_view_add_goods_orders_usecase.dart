@@ -4,6 +4,7 @@ import 'package:cmms/domain/models/business_type_model.dart';
 
 import 'package:cmms/domain/models/currency_list_model.dart';
 import 'package:cmms/domain/models/get_asset_data_list_model.dart';
+import 'package:cmms/domain/models/get_asset_items_model.dart';
 import 'package:cmms/domain/models/get_purchase_details_model.dart';
 
 class ViewAddGoodsOrdersUsecase {
@@ -50,13 +51,11 @@ class ViewAddGoodsOrdersUsecase {
         businessType: type,
         isLoading: isLoading,
       );
-  Future<List<GetAssetDataModel?>?> getAssetList({
-    String? auth,
+  Future<List<GetAssetItemsModel?>?> getEquipmentAssetsList({
     int? facilityId,
     bool? isLoading,
   }) async =>
-      await _repository.getAssetList(
-        auth,
+      await _repository.getEquipmentAssetsList(
         facilityId,
         isLoading,
       );
