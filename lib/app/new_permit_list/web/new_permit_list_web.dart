@@ -508,7 +508,16 @@ class PermitListDataSource extends DataTableSource {
                                   orElse: () => NewPermitModel(permitId: 000),
                                 )
                                 ?.ptwStatus ==
-                            125
+                            125 ||
+                            controller.newPermitList
+                                .firstWhere(
+                                  (e) =>
+                                      "${e?.permitId}" ==
+                                      "${PermitDetails?.permitId}",
+                                  orElse: () => NewPermitModel(permitId: 000),
+                                )
+                                ?.ptwStatus ==
+                            135
                     ? ColorValues.appGreenColor
                     : ColorValues.appRedColor,
                 borderRadius: BorderRadius.circular(5),

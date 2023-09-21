@@ -60,9 +60,10 @@ class PermitApprovedDialog extends GetView {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Text(
-                          ptwStatus == '133'
-                              ? ''
-                              : """This certifies that I (PERMIT APPROVER) have personally completed a safety inspection of the area where this work is to be done as well as the surrounding areas, with specific attention to the type of work for which this PTW is being issued. I have reviewed the necessary precautions required to be taken for safely executing the work as mentioned in the checkpoints of this PTW to protect man and machinery engaged in this work from injury accident. I have made sure that the assigned personnel know the applicable
+                          // ptwStatus == '133'
+                          //     ? ''
+                          //     : 
+                              """This certifies that I (PERMIT APPROVER) have personally completed a safety inspection of the area where this work is to be done as well as the surrounding areas, with specific attention to the type of work for which this PTW is being issued. I have reviewed the necessary precautions required to be taken for safely executing the work as mentioned in the checkpoints of this PTW to protect man and machinery engaged in this work from injury accident. I have made sure that the assigned personnel know the applicable
                     
                     work is to be done as well as the surrounding areas, with specific attention to the type of work for which this PTW is being issued. I have reviewed the necessary precautions required to be taken for safely executing the work as mentioned in the checkpoints of this PTW to protect man and machinery engaged in this work from injury accident. I have made sure that the assigned personnel know the applicable safety rules and that they know what to do in an emergency.""",
                           textAlign: TextAlign.left,
@@ -87,17 +88,17 @@ class PermitApprovedDialog extends GetView {
                                           // ),
                                             child: Column(
                                               children: [
-                                                Padding(
-                                                padding: const EdgeInsets.all(10.0),
-                                                child: Row(
-                                                  children: [
-                                                    Text(
-                                                      "Approve Permit ",
-                                                      style: Styles.blue700,
-                                                    ),
-                                                  ],
-                                                ),
-                                              ),
+                                              //   Padding(
+                                              //   padding: const EdgeInsets.all(10.0),
+                                              //   child: Row(
+                                              //     children: [
+                                              //       Text(
+                                              //         "Approve Permit ",
+                                              //         style: Styles.blue700,
+                                              //       ),
+                                              //     ],
+                                              //   ),
+                                              // ),
                                               Divider(
                                                 color: ColorValues.greyLightColour,
                                               ),

@@ -60,17 +60,14 @@ class ViewPermitUsecase {
     );
   }
 
-  Future<void> permitCloseButton({
-    String? comment,
-    String? id,
+  Future<Map<String, dynamic>> permitCloseButton({
+    closePermitJsonString,
     bool? isLoading,
-  }) async {
-    await repository.permitCloseButton(
-      comment,
-      id,
-      isLoading,
-    );
-  }
+  }) async =>
+      await repository.permitCloseButton(
+        closePermitJsonString,
+        isLoading,
+      );
 
   // Future<void> permitCancelRequestButton({
   //   String? comment,
@@ -99,20 +96,21 @@ class ViewPermitUsecase {
     // return true;
   }
 
-  Future<void> permitExtendButton({
-    String? comment,
-    int? Time,
-    String? id,
-    bool? isLoading,
-  }) async {
-    await repository.permitExtendButton(
-      comment,
-      Time,
-      id,
-      isLoading,
-    );
+  Future<CreateSOPModel?> browseFilesForExtend(
+      Uint8List? fileBytes, String fileName, bool isLoading) async {
+    return await repository.browseFiles(fileBytes, fileName, 0, isLoading, 0);
+    // return true;
   }
 
+
+  Future<Map<String, dynamic>> permitExtendButton({
+    extendPermitJsonString,
+    bool? isLoading,
+  }) async =>
+      await repository.permitExtendButton(
+        extendPermitJsonString,
+        isLoading,
+      );
 
    Future<void> permitRejectButton({
     String? comment,
@@ -164,6 +162,31 @@ class ViewPermitUsecase {
   
     );
   }
+
+  Future<List<PermitCancelListModel>> getPermitCloseConditionList({
+    required bool isLoading,
+    required int? isClose
+   
+  }) async {
+    return repository.getPermitCloseConditionList(
+      isLoading: isLoading,
+      isClose: isClose,
+  
+    );
+  }
+
+Future<List<PermitCancelListModel>> getPermitExtendConditionList({
+    required bool isLoading,
+    required int? isExtend
+   
+  }) async {
+    return repository.getPermitExtendConditionList(
+      isLoading: isLoading,
+      isExtend: isExtend,
+  
+    );
+  }
+
 
   Future<NewPermitDetailModel?> getViewPermitDetail({
     bool? isLoading,  

@@ -14,8 +14,9 @@ class PermitMessageApproveDialog extends GetView {
   String? createPermitData;
   String? data;
   int? jobId;
+  int? ptwStatus;
 
-  PermitMessageApproveDialog({super.key, this.createPermitData, this.data,this.jobId});
+  PermitMessageApproveDialog({super.key, this.createPermitData, this.data,this.jobId, this.ptwStatus});
   final ViewPermitController _controller = Get.find();
 
 
@@ -29,7 +30,7 @@ class PermitMessageApproveDialog extends GetView {
         insetPadding: Dimens.edgeInsets10_0_10_0,
         contentPadding: EdgeInsets.zero,
         title: Text(
-          'Permit Approval',
+          ptwStatus == 133 ? 'Extend Permit Approval' : 'Permit Approval',
           textAlign: TextAlign.center,
           style: TextStyle(color: Colors.black),
         ),

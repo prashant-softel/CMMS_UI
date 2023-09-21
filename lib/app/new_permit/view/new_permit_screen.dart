@@ -1341,159 +1341,200 @@ class NewPermitScreen extends GetView<NewPermitController> {
                                                   Dimens.boxHeight20,
 
                                                   controller.jobModel?.id != null
-                                                      ? Container(
-                                                          height: 130,
-                                                          width: MediaQuery.of(context).size.width / 1.2,
-                                                          decoration: BoxDecoration(
-                                                            border: Border.all(
-                                                              color: ColorValues.lightGreyColorWithOpacity35,
-                                                              width: 1,
+                                                      ? Column(
+                                                        crossAxisAlignment: CrossAxisAlignment.start,
+                                                        mainAxisAlignment: MainAxisAlignment.start,
+                                                        children: [
+                                                          Dimens.boxHeight10,
+                                                          Padding(
+                                                            padding: const EdgeInsets.only(left: 10),
+                                                            child: Text(
+                                                              'Request a Permit For a Job',
+                                                              style: Styles.blue700,
                                                             ),
-                                                            boxShadow: [
-                                                              // BoxShadow(
-                                                              //   color: ColorValues
-                                                              //       .appBlueBackgroundColor,
-                                                              //   spreadRadius: 2,
-                                                              //   blurRadius: 5,
-                                                              //   offset: Offset(0, 2),
-                                                              // ),
-                                                            ],
                                                           ),
-                                                          child: Column(
-                                                            crossAxisAlignment: CrossAxisAlignment.start,
-                                                            mainAxisAlignment: MainAxisAlignment.start,
-                                                            children: [
-                                                              Dimens.boxHeight10,
-                                                              Padding(
-                                                                padding: const EdgeInsets.only(left: 10),
-                                                                child: Text(
-                                                                  'Request a Permit For a Job',
-                                                                  style: Styles.blue700,
-                                                                ),
-                                                              ),
-                                                              Padding(
-                                                                padding: const EdgeInsets.only(top: 10, left: 40, right: 10),
-                                                                child: Row(
+                                                          Padding(
+                                                            padding: const EdgeInsets.only(top: 10, left: 40, right: 10),
+                                                            child: Row(
+                                                              mainAxisAlignment: MainAxisAlignment.center,
+                                                              children: [
+                                                                Column(
+                                                                  crossAxisAlignment: CrossAxisAlignment.center,
                                                                   mainAxisAlignment: MainAxisAlignment.center,
                                                                   children: [
-                                                                    Column(
-                                                                      crossAxisAlignment: CrossAxisAlignment.center,
-                                                                      mainAxisAlignment: MainAxisAlignment.center,
-                                                                      children: [
-                                                                        Text(
-                                                                          'Job ID',
-                                                                          style: TextStyle(color: Color.fromARGB(255, 5, 92, 163)),
-                                                                        ),
-                                                                        Dimens.boxHeight10,
-                                                                        GestureDetector(
-                                                                          onTap: () {
-                                                                            controller.viewJobDetails();
-                                                                          },
-                                                                          child: Text(
-                                                                            '${int.tryParse('${controller.jobModel?.id ?? 0}')}',
-                                                                            style: TextStyle(
-                                                                              decoration: TextDecoration.underline,
-                                                                              decorationStyle: TextDecorationStyle.solid,
-                                                                              color: Color.fromARGB(255, 5, 92, 163),
-                                                                            ),
-                                                                          ),
-                                                                        )
-                                                                      ],
+                                                                    Text(
+                                                                      'Job ID',
+                                                                      style: TextStyle(color: Color.fromARGB(255, 5, 92, 163)),
                                                                     ),
-                                                                    Spacer(),
-                                                                    Column(
-                                                                      crossAxisAlignment: CrossAxisAlignment.center,
-                                                                      mainAxisAlignment: MainAxisAlignment.center,
-                                                                      children: [
-                                                                        Text(
-                                                                          'Job Title',
-                                                                          style: TextStyle(color: Color.fromARGB(255, 5, 92, 163)),
+                                                                    Dimens.boxHeight10,
+                                                                    GestureDetector(
+                                                                      onTap: () {
+                                                                        controller.viewJobDetails();
+                                                                      },
+                                                                      child: Text(
+                                                                        '${int.tryParse('${controller.jobModel?.id ?? 0}')}',
+                                                                        style: TextStyle(
+                                                                          decoration: TextDecoration.underline,
+                                                                          decorationStyle: TextDecorationStyle.solid,
+                                                                          color: Color.fromARGB(255, 5, 92, 163),
                                                                         ),
-                                                                        Dimens.boxHeight10,
-                                                                        Text('${controller.titleTextCtrlr.text}'),
-                                                                      ],
-                                                                    ),
-                                                                    Spacer(),
-                                                                    Column(
-                                                                      crossAxisAlignment: CrossAxisAlignment.center,
-                                                                      mainAxisAlignment: MainAxisAlignment.center,
-                                                                      children: [
-                                                                        Text(
-                                                                          'Equipment Category',
-                                                                          style: TextStyle(color: Color.fromARGB(255, 5, 92, 163)),
-                                                                        ),
-                                                                        Dimens.boxHeight10,
-                                                                        SizedBox(
-                                                                          width: 100,
-                                                                          child: Wrap(
-                                                                            alignment: WrapAlignment.start,
-                                                                            spacing: 100,
-                                                                            children: []
-
-                                                                              ///Uncomment once Work done
-                                                                              ..addAll(controller.listJobModelCategory.map((element) => Row(
-                                                                                    mainAxisSize: MainAxisSize.min,
-                                                                                    mainAxisAlignment: MainAxisAlignment.start,
-                                                                                    crossAxisAlignment: CrossAxisAlignment.start,
-                                                                                    children: [
-                                                                                      Text(
-                                                                                        "${element?.equipmentCatName}",
-                                                                                      )
-                                                                                    ],
-                                                                                  ))),
-
-                                                                            ///end Uncomment
-                                                                          ),
-                                                                        )
-                                                                        // Text('${controller.selectedItem}'),
-                                                                      ],
-                                                                    ),
-                                                                    Spacer(),
-                                                                    Column(
-                                                                      crossAxisAlignment: CrossAxisAlignment.center,
-                                                                      mainAxisAlignment: MainAxisAlignment.center,
-                                                                      children: [
-                                                                        Text(
-                                                                          'Block',
-                                                                          style: TextStyle(color: Color.fromARGB(255, 5, 92, 163)),
-                                                                        ),
-                                                                        Dimens.boxHeight10,
-                                                                        Text('${controller.blockNameTextCtrlr.text}'),
-                                                                      ],
-                                                                    ),
-                                                                    Spacer(),
-                                                                    Column(
-                                                                      crossAxisAlignment: CrossAxisAlignment.center,
-                                                                      mainAxisAlignment: MainAxisAlignment.center,
-                                                                      children: [
-                                                                        Text(
-                                                                          'Breakdwon Time',
-                                                                          style: TextStyle(color: Color.fromARGB(255, 5, 92, 163)),
-                                                                        ),
-                                                                        Dimens.boxHeight10,
-                                                                        Text('${controller.breakdownTimeTextCtrlr.text}'),
-                                                                      ],
-                                                                    ),
-                                                                    Spacer(),
-                                                                    Column(
-                                                                      crossAxisAlignment: CrossAxisAlignment.center,
-                                                                      mainAxisAlignment: MainAxisAlignment.center,
-                                                                      children: [
-                                                                        Text(
-                                                                          'Assigned To',
-                                                                          style: TextStyle(color: Color.fromARGB(255, 5, 92, 163)),
-                                                                        ),
-                                                                        Dimens.boxHeight10,
-                                                                        Text('${controller.assignToTextCtrlr.text}'),
-                                                                      ],
-                                                                    ),
-                                                                    Spacer(),
+                                                                      ),
+                                                                    )
                                                                   ],
                                                                 ),
-                                                              ),
-                                                            ],
+                                                                Spacer(),
+                                                                Column(
+                                                                  crossAxisAlignment: CrossAxisAlignment.center,
+                                                                  mainAxisAlignment: MainAxisAlignment.center,
+                                                                  children: [
+                                                                    Text(
+                                                                      'Job Title',
+                                                                      style: TextStyle(color: Color.fromARGB(255, 5, 92, 163)),
+                                                                    ),
+                                                                    Dimens.boxHeight10,
+                                                                    Text('${controller.titleTextCtrlr.text}'),
+                                                                  ],
+                                                                ),
+                                                                Spacer(),
+                                                                Column(
+                                                                  crossAxisAlignment: CrossAxisAlignment.center,
+                                                                  mainAxisAlignment: MainAxisAlignment.center,
+                                                                  children: [
+                                                                    Text(
+                                                                      'Equipment Category',
+                                                                      style: TextStyle(color: Color.fromARGB(255, 5, 92, 163)),
+                                                                    ),
+                                                                    Dimens.boxHeight10,
+                                                                    SizedBox(
+                                                                      // width: 100,
+                                                                      child: Column(
+                                                                        // alignment: WrapAlignment.start,
+                                                                        // spacing: 100,
+                                                                        children: []
+
+                                                                          ///Uncomment once Work done
+                                                                          ..addAll(controller.listJobModelCategory.map((element) => Column(
+                                                                                // mainAxisSize: MainAxisSize.min,
+                                                                                mainAxisAlignment: MainAxisAlignment.start,
+                                                                                crossAxisAlignment: CrossAxisAlignment.start,
+                                                                                children: [
+                                                                                  Text(
+                                                                                    "${element?.equipmentCatName}",
+                                                                                  ),
+                                                                                  //  Text(
+                                                                                  //   "${element?.equipmentCatName}",
+                                                                                  // ),
+                                                                                  //  Text(
+                                                                                  //   "${element?.equipmentCatName}",
+                                                                                  // ),
+                                                                                  //  Text(
+                                                                                  //   "${element?.equipmentCatName}",
+                                                                                  // ),
+                                                                                  //  Text(
+                                                                                  //   "${element?.equipmentCatName}",
+                                                                                  // ),
+                                                                                 
+                                                                                ],
+                                                                              ))),
+
+                                                                        ///end Uncomment
+                                                                      ),
+                                                                    )
+                                                                    // Text('${controller.selectedItem}'),
+                                                                  ],
+                                                                ),
+                                                                Spacer(),
+                                                                Column(
+                                                                  crossAxisAlignment: CrossAxisAlignment.center,
+                                                                  mainAxisAlignment: MainAxisAlignment.center,
+                                                                  children: [
+                                                                    Text(
+                                                                      'Block',
+                                                                      style: TextStyle(color: Color.fromARGB(255, 5, 92, 163)),
+                                                                    ),
+                                                                    Dimens.boxHeight10,
+                                                                    Text('${controller.blockNameTextCtrlr.text}'),
+                                                                  ],
+                                                                ),
+                                                                Spacer(),
+                                                                Column(
+                                                                  crossAxisAlignment: CrossAxisAlignment.center,
+                                                                  mainAxisAlignment: MainAxisAlignment.center,
+                                                                  children: [
+                                                                    Text(
+                                                                      'Equipment Name',
+                                                                      style: TextStyle(color: Color.fromARGB(255, 5, 92, 163)),
+                                                                    ),
+                                                                    Dimens.boxHeight10,
+                                                                     SizedBox(
+                                                                      // width: 200,
+                                                                      child: Column(
+                                                                        // alignment: WrapAlignment.start,
+                                                                        // spacing: 100,
+                                                                        children: []
+
+                                                                          ///Uncomment once Work done
+                                                                          ..addAll(controller.list_working_area_name.map((element) => Column(
+                                                                                // mainAxisSize: MainAxisSize.min,
+                                                                                mainAxisAlignment: MainAxisAlignment.start,
+                                                                                crossAxisAlignment: CrossAxisAlignment.start,
+                                                                                children: [
+                                                                                  Text(
+                                                                                    "${element?.workingAreaName}",
+                                                                                  ),
+                                                                                  //  Text(
+                                                                                  //   "${element?.workingAreaName}",
+                                                                                  // ),
+                                                                                  //  Text(
+                                                                                  //   "${element?.workingAreaName}",
+                                                                                  // ),
+                                                                                  //  Text(
+                                                                                  //   "${element?.workingAreaName}",
+                                                                                  // ),
+                                                                                  //  Text(
+                                                                                  //   "${element?.workingAreaName}",
+                                                                                  // ),
+                                                                                  
+                                                                                ],
+                                                                              ))),
+
+                                                                        ///end Uncomment
+                                                                      ),
+                                                                    )
+                                                                  ],
+                                                                ),
+                                                                Spacer(),
+                                                                Column(
+                                                                  crossAxisAlignment: CrossAxisAlignment.center,
+                                                                  mainAxisAlignment: MainAxisAlignment.center,
+                                                                  children: [
+                                                                    Text(
+                                                                      'Breakdwon Time',
+                                                                      style: TextStyle(color: Color.fromARGB(255, 5, 92, 163)),
+                                                                    ),
+                                                                    Dimens.boxHeight10,
+                                                                    Text('${controller.breakdownTimeTextCtrlr.text}'),
+                                                                  ],
+                                                                ),
+                                                                Spacer(),
+                                                                Column(
+                                                                  crossAxisAlignment: CrossAxisAlignment.center,
+                                                                  mainAxisAlignment: MainAxisAlignment.center,
+                                                                  children: [
+                                                                    Text(
+                                                                      'Assigned To',
+                                                                      style: TextStyle(color: Color.fromARGB(255, 5, 92, 163)),
+                                                                    ),
+                                                                    Dimens.boxHeight10,
+                                                                    Text('${controller.assignToTextCtrlr.text}'),
+                                                                  ],
+                                                                ),
+                                                                Spacer(),
+                                                              ],
+                                                            ),
                                                           ),
-                                                        )
+                                                        ],
+                                                      )
                                                       : Container(),
                                                   Dimens.boxHeight30,
 

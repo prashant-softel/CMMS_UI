@@ -1441,7 +1441,8 @@ class ViewPermitWebScreen extends GetView<ViewPermitController> {
                                           borderRadius: BorderRadius.circular(10),
                                           border: Border.all(
                                             color: controller.viewPermitDetailsModel.value?.ptwStatus == 125 ||
-                                                    controller.viewPermitDetailsModel.value?.ptwStatus == 121
+                                                    controller.viewPermitDetailsModel.value?.ptwStatus == 121 ||
+                                                    controller.viewPermitDetailsModel.value?.ptwStatus == 135
                                                 ? ColorValues.approveColor
                                                 : ColorValues.appRedColor,
                                             width: 1,
@@ -1449,7 +1450,8 @@ class ViewPermitWebScreen extends GetView<ViewPermitController> {
                                           boxShadow: [
                                             BoxShadow(
                                               color: controller.viewPermitDetailsModel.value?.ptwStatus == 125 ||
-                                                      controller.viewPermitDetailsModel.value?.ptwStatus == 121
+                                                      controller.viewPermitDetailsModel.value?.ptwStatus == 121 ||
+                                                    controller.viewPermitDetailsModel.value?.ptwStatus == 135
                                                   ? ColorValues.approveColor
                                                   : ColorValues.appRedColor,
                                             ),
@@ -1636,7 +1638,7 @@ class ViewPermitWebScreen extends GetView<ViewPermitController> {
                                     : Container(
                                         margin: Dimens.edgeInsets20,
                                         height: ((controller.listAssociatedJobs?.length ?? 0) * 50) + 125,
-                                        width: MediaQuery.of(context).size.width / 1.25,
+                                        width: MediaQuery.of(context).size.width / 1.2,
                                         decoration: BoxDecoration(
                                           border: Border.all(
                                             color: ColorValues.lightGreyColorWithOpacity35,
@@ -1684,8 +1686,9 @@ class ViewPermitWebScreen extends GetView<ViewPermitController> {
                                             )),
                                              DataColumn(
                                                 label: Text(
-                                              "Equipment Category",
+                                              "Equipment\nCategory",
                                               style: TextStyle(fontSize: 15, fontWeight: FontWeight.bold),
+                                              
                                             )),
                                              DataColumn(
                                                 label: Text(
@@ -1694,13 +1697,14 @@ class ViewPermitWebScreen extends GetView<ViewPermitController> {
                                             )),
                                              DataColumn(
                                                 label: Text(
-                                              "Breakdown Time",
+                                              "Breakdown\nTime",
                                               style: TextStyle(fontSize: 15, fontWeight: FontWeight.bold),
                                             )),
                                              DataColumn(
                                                 label: Text(
                                               "Assigned To",
                                               style: TextStyle(fontSize: 15, fontWeight: FontWeight.bold),
+                                              
                                             )),
                                              DataColumn(
                                                 label: Text(
@@ -1720,9 +1724,9 @@ class ViewPermitWebScreen extends GetView<ViewPermitController> {
                                                                         decorationStyle: TextDecorationStyle.solid,
                                                                         color: Color.fromARGB(255, 5, 92, 163),
                                                                       ),))),
-                                              DataCell(Text(controller.listAssociatedJobs?[index]?.title.toString() ?? '')),
+                                               DataCell(Text(controller.listAssociatedJobs?[index]?.title.toString() ?? '')),
                                                DataCell(Text(controller.listAssociatedJobs?[index]?.equipmentCat.toString() ?? '')),
-                                               DataCell(Text(controller.listAssociatedJobs?[index]?.equipment.toString() ?? '')),
+                                               DataCell(Text(controller.listAssociatedJobs?[index]?.equipment.toString() ?? '',overflow: TextOverflow.ellipsis,),),
                                                DataCell(Text(controller.listAssociatedJobs?[index]?.breakdownTime.toString() ?? '')),
                                                DataCell(Text(controller.listAssociatedJobs?[index]?.assignedTo.toString() ?? '')),
                                                DataCell(Text(controller.listAssociatedJobs?[index]?.status_short.toString() ?? '')),
@@ -2462,7 +2466,7 @@ class ViewPermitWebScreen extends GetView<ViewPermitController> {
                       height: 45,
                       child: CustomElevatedButton(
                         backgroundColor: ColorValues.appGreenColor,
-                        text: "Approve Permit",
+                        text: controller.viewPermitDetailsModel.value?.ptwStatus == 133 ? "Extend Approve" :"Approve Permit",
                         icon: Icons.add,
                         onPressed: () {
                           // controller

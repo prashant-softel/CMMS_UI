@@ -216,6 +216,7 @@ class NewPermitController extends GetxController {
 
   RxList<EquipmentCatList?> listJobModelCategory = <EquipmentCatList?>[].obs;
   RxList<AssociatedPermit?> listAssociatedPermit = <AssociatedPermit?>[].obs;
+  RxList<WorkingAreaList?> list_working_area_name = <WorkingAreaList?>[].obs;
 
   String? selectedItem = '';
   int? associatePermitId = 0;
@@ -1297,6 +1298,9 @@ class NewPermitController extends GetxController {
     listJobModelCategory.value = jobModel.equipmentCatList ?? [];
     List<int> idList = listJobModelCategory.map((obj) => obj!.equipmentCatId).toList();
     List<String> nameList = listJobModelCategory.map((obj) => obj!.equipmentCatName).toList();
+
+    list_working_area_name.value = jobModel.workingAreaList ?? [];
+
     //  selectedItem = nameList[0];
     ///end uncomment
 
