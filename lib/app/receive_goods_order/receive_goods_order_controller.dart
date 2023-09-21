@@ -161,7 +161,7 @@ class ReceiveGoodsOrdersController extends GetxController {
 
     final _getPurchaseDetailsById =
         await receiveGoodsOrdersPresenter.getPurchaseDetailsById(id: id);
-    print('Edit goods order  Detail:$_getPurchaseDetailsById');
+    // print('Edit goods order  Detail:$_getPurchaseDetailsById');
 
     if (_getPurchaseDetailsById != null) {
       getPurchaseDetailsByIDModel.value = _getPurchaseDetailsById;
@@ -493,6 +493,7 @@ class ReceiveGoodsOrdersController extends GetxController {
     CreateGoModel createGoModel = CreateGoModel(
         id: id.value,
         facility_id: facilityId,
+        is_submit: 1,
         order_type: 1,
         location_ID: 1,
         vendorID: selectedBusinessTypeId,
@@ -516,6 +517,79 @@ class ReceiveGoodsOrdersController extends GetxController {
     var createGoModelJsonString = createGoModel.toJson();
     Map<String, dynamic>? responseCreateGoModel =
         await receiveGoodsOrdersPresenter.updateGOReceive(
+      createGo: createGoModelJsonString,
+      isLoading: true,
+    );
+
+    if (responseCreateGoModel == null) {
+      //  CreateNewPermitDialog();
+      // showAlertDialog();
+    }
+    print('update  Create GO  data: $createGoModelJsonString');
+  }
+
+  void updateGOReceiveIsSubmit0() async {
+    String _challanNoCtrlr = challanNoCtrlr.text.trim();
+    String _pOCtrlr = pOCtrlr.text.trim();
+    String _frieghtToPayPaidCtrlr = frieghtToPayPaidCtrlr.text.trim();
+    String _noOfPackagesReceivedCtrlr = noOfPackagesReceivedCtrlr.text.trim();
+    String _conditionOfPackagesReceivedCtrlr =
+        conditionOfPackagesReceivedCtrlr.text.trim();
+    String _girNoCtrlr = girNoCtrlr.text.trim();
+    String _amountCtrlr = amountCtrlr.text.trim();
+    String _purchaseDateTc = purchaseDateTc.text.trim();
+    String _challanDateTc = challanDateTc.text.trim();
+    String _poDateDateTc = poDateDateTc.text.trim();
+    String _receivedDateTc = receivedDateTc.text.trim();
+    String _lrNoCtrlr = lrNoCtrlr.text.trim();
+    String _vehicleNoCtrlr = vehicleNoCtrlr.text.trim();
+    String _jobRefCtrlr = jobRefCtrlr.text.trim();
+    List<Items> items = [];
+    rowItem.value.forEach((element) {
+      Items item = Items(
+        goItemID: int.tryParse('${element[0]["id"]}'),
+        requested_qty: int.tryParse('${element[4]["recieveQty"]}'),
+        lost_qty: int.tryParse('${element[4]["lostQty"]}'),
+        assetItemID: int.tryParse('${element[0]["assetItemID"]}'),
+        paid_by_ID: int.tryParse('${element[1]["id"]}'),
+        cost: int.tryParse(element[2]["value"] ?? '0'),
+        ordered_qty: int.tryParse(element[3]["value"] ?? '0'),
+        received_qty: int.tryParse(element[4]["value"] ?? '0'),
+        accepted_qty: int.tryParse(element[5]["value"] ?? '0'),
+        damaged_qty: int.tryParse(element[6]["value"] ?? '0'),
+      );
+
+      // poID: paiddropdownMapperData[element[1]["value"]]?.id)
+      ;
+      items.add(item);
+    });
+    CreateGoModel createGoModel = CreateGoModel(
+        id: id.value,
+        facility_id: facilityId,
+        is_submit: 0,
+        order_type: 1,
+        location_ID: 1,
+        vendorID: selectedBusinessTypeId,
+        purchaseDate: _purchaseDateTc,
+        challan_no: _challanNoCtrlr,
+        challan_date: _challanDateTc,
+        po_no: _pOCtrlr,
+        po_date: _poDateDateTc,
+        freight: _frieghtToPayPaidCtrlr,
+        received_on: _receivedDateTc,
+        no_pkg_received: _noOfPackagesReceivedCtrlr,
+        lr_no: _lrNoCtrlr,
+        condition_pkg_received: _conditionOfPackagesReceivedCtrlr,
+        vehicle_no: _vehicleNoCtrlr,
+        gir_no: _girNoCtrlr,
+        job_ref: _jobRefCtrlr,
+        amount: int.tryParse(_amountCtrlr) ?? 0,
+        currencyID: selectedUnitCurrencyId,
+        items: items);
+
+    var createGoModelJsonString = createGoModel.toJson();
+    Map<String, dynamic>? responseCreateGoModel =
+        await receiveGoodsOrdersPresenter.updateGOReceiveIsSubmit0(
       createGo: createGoModelJsonString,
       isLoading: true,
     );

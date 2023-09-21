@@ -92,6 +92,16 @@ class ReceiveGoodsOrdersPresenter {
     );
   }
 
+  Future<Map<String, dynamic>?> updateGOReceiveIsSubmit0({
+    createGo,
+    required bool isLoading,
+  }) async {
+    return receiveGoodsOrdersUsecase.updateGOReceiveIsSubmit0(
+      createGo: createGo,
+      isLoading: isLoading,
+    );
+  }
+
   Future<GetPurchaseDetailsByIDModel?> getPurchaseDetailsById({
     bool? isLoading,
     required int id,

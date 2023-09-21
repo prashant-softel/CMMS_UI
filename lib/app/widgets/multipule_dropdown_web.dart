@@ -14,19 +14,24 @@ class MultipDropdownWebWidget extends StatefulWidget {
   final dynamic controller;
   final FocusNode? focusNode;
   double? width;
+  double? height;
   EdgeInsetsGeometry? margin;
   List<BoxShadow>? boxShadow;
   List<dynamic> selectedItems;
+  Function(dynamic, dynamic) onValueChanged;
+
   MultipDropdownWebWidget(
       {super.key,
       this.selectedValue,
       this.isValueSelected,
       this.isEditable,
       this.controller,
+      required this.onValueChanged,
       this.focusNode,
       this.width,
       this.margin,
       this.boxShadow,
+      this.height,
       required this.dropdownList,
       required this.selectedItems});
 
@@ -45,24 +50,34 @@ class _MultipDropdownWebWidgetState extends State<MultipDropdownWebWidget> {
         Obx(
       () => Container(
           // color: ColorValues.greyBorderColor,
-          // height: MediaQuery.of(context).size.height * 0.040,
+          height: widget.height, // MediaQuery.of(context).size.height * 0.040,
           width: widget.width,
           // margin: widget.margin,
           padding: EdgeInsets.symmetric(vertical: 5),
           decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(10),
-            border: Border.all(
-              color: Color.fromARGB(255, 227, 224, 224),
-              width: 1,
-            ),
+            borderRadius: BorderRadius.circular(5),
+            // border: Border.all(
+            //   color: Color.fromARGB(255, 176, 67, 67),
+            //   width: 1,
+            // ),
             boxShadow: [
               BoxShadow(
-                color: Color.fromARGB(255, 236, 234, 234).withOpacity(0.5),
-                spreadRadius: 2,
-                blurRadius: 5,
-                offset: Offset(0, 2),
+                color: Colors.black26,
+                // offset: const Offset(
+                //   5.0,
+                //   5.0,
+                // ),
+                // blurRadius: 5.0,
+                // spreadRadius: 1.0,
               ),
+              BoxShadow(
+                  // color: ColorValues.whiteColor,
+                  // offset: const Offset(0.0, 0.0),
+                  // blurRadius: 0.0,
+                  // spreadRadius: 0.0,
+                  ),
             ],
+            color: ColorValues.whiteColor,
           ),
           child: //
 
@@ -75,18 +90,20 @@ class _MultipDropdownWebWidgetState extends State<MultipDropdownWebWidget> {
                     searchFieldProps: TextFieldProps(
                       decoration: InputDecoration(
                         enabledBorder: OutlineInputBorder(
-                          borderSide: BorderSide(color: ColorValues.blueColor),
+                          borderSide: BorderSide(
+                              color: ColorValues.appBlueBackgroundColor),
                           borderRadius: BorderRadius.circular(5),
                         ),
                         focusedBorder: OutlineInputBorder(
-                          borderSide: BorderSide(color: ColorValues.blueColor),
+                          borderSide: BorderSide(
+                              color: ColorValues.appBlueBackgroundColor),
                           borderRadius: BorderRadius.circular(5),
                         ),
                       ),
                     ),
                     showSelectedItems: true,
                     onItemAdded: (selectedItems, addedItem) {},
-                    disabledItemFn: (String s) => s.startsWith('I'),
+                    // disabledItemFn: (String s) => s.startsWith('I'),
                     showSearchBox: true,
                   ),
                   dropdownDecoratorProps: DropDownDecoratorProps(
@@ -104,7 +121,11 @@ class _MultipDropdownWebWidgetState extends State<MultipDropdownWebWidget> {
                       hintText: "Select",
                     ),
                   ),
-                  onChanged: print,
+                  onChanged: (List<String>? _selectedValue) {
+                    widget.selectedItems = _selectedValue ?? [];
+                    widget.onValueChanged(
+                        widget.dropdownList, widget.selectedItems);
+                  },
                   selectedItems: widget.selectedItems
                       .map<String>((item) => item.name)
                       .toList() //["Brazil"],

@@ -47,6 +47,8 @@ class StockManagementGoodsOrdersController extends GetxController {
   RxString orderDateFilterText = ''.obs;
   RxString costFilterText = ''.obs;
   RxString currencyFilterText = ''.obs;
+  RxString statusFilterText = ''.obs;
+
   RxString vendorFilterText = ''.obs;
 
   RxString userDateFilterText = ''.obs;
@@ -59,6 +61,7 @@ class StockManagementGoodsOrdersController extends GetxController {
     "Order Date": true,
     "Cost": true,
     "Currency": true,
+    "Status": true,
 
     // "search": true,
   });
@@ -70,6 +73,7 @@ class StockManagementGoodsOrdersController extends GetxController {
     "Order Date": 223,
     "Cost": 153,
     "Currency": 130,
+    "Status": 100
   };
   Map<String, RxString> filterText = {};
   void setColumnVisibility(String columnName, bool isVisible) {
@@ -89,6 +93,7 @@ class StockManagementGoodsOrdersController extends GetxController {
       "Order Date": orderDateFilterText,
       "Cost": costFilterText,
       "Currency": currencyFilterText,
+      "Status": statusFilterText,
     };
     facilityIdStreamSubscription = homecontroller.facilityId$.listen((event) {
       facilityId = event;
@@ -119,7 +124,7 @@ class StockManagementGoodsOrdersController extends GetxController {
 
   Future<void> getGoodsOrdersList(int facilityId, dynamic startDate,
       dynamic endDate, bool isLoading) async {
-    goodsOrdersList!.value = <GoodsOrdersListModel>[];
+    goodsOrdersList.value = <GoodsOrdersListModel>[];
     final _goodsordersList =
         await stockManagementGoodsOrdersPresenter.getGoodsOrdersList(
       isLoading: true,
@@ -128,14 +133,14 @@ class StockManagementGoodsOrdersController extends GetxController {
       facility_id: facilityId,
     );
     if (_goodsordersList != null) {
-      goodsOrdersList!.value = _goodsordersList;
+      goodsOrdersList.value = _goodsordersList;
       paginationController = PaginationController(
-        rowCount: goodsOrdersList?.length ?? 0,
+        rowCount: goodsOrdersList.length,
         rowsPerPage: 10,
       );
 
-      if (goodsOrdersList != null && goodsOrdersList!.isNotEmpty) {
-        goodsOrdersListModel = goodsOrdersList![0];
+      if (goodsOrdersList != null && goodsOrdersList.isNotEmpty) {
+        goodsOrdersListModel = goodsOrdersList[0];
         var newPermitListJson = goodsOrdersListModel?.toJson();
         goodsOrdersListTableColumns.value = <String>[];
         for (var key in newPermitListJson?.keys.toList() ?? []) {

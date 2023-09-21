@@ -861,7 +861,7 @@ class _ReceiveGoodsOrderWebState extends State<ReceiveGoodsOrderWeb> {
                                             DataColumn2(
                                                 // fixedWidth: 300,
                                                 label: Text(
-                                              "Ordered Qty",
+                                              "Dispatch Qty",
                                               style: TextStyle(
                                                   fontSize: 15,
                                                   fontWeight: FontWeight.bold),
@@ -1117,7 +1117,8 @@ class _ReceiveGoodsOrderWebState extends State<ReceiveGoodsOrderWeb> {
                                                                           FilteringTextInputFormatter
                                                                               .digitsOnly
                                                                         ],
-                                                                        enabled: controller.getPurchaseDetailsByIDModel.value?.status == 306 ||
+                                                                        enabled: controller.getPurchaseDetailsByIDModel.value?.status == 306 && varUserAccessModel.value.access_list!.where((e) => e.feature_id == UserAccessConstants.kGoodsFeatureId && e.add == UserAccessConstants.kHaveAddAccess).length > 0 ||
+                                                                                controller.getPurchaseDetailsByIDModel.value?.status == 309 && varUserAccessModel.value.access_list!.where((e) => e.feature_id == UserAccessConstants.kGoodsFeatureId && e.add == UserAccessConstants.kHaveAddAccess).length > 0 ||
                                                                                 controller.getPurchaseDetailsByIDModel.value?.status == 307 && varUserAccessModel.value.access_list!.where((e) => e.feature_id == UserAccessConstants.kGoodsFeatureId && e.add == UserAccessConstants.kHaveAddAccess).length > 0
                                                                             ? true
                                                                             : false,
@@ -1181,7 +1182,7 @@ class _ReceiveGoodsOrderWebState extends State<ReceiveGoodsOrderWeb> {
                                                                             inputFormatters: <TextInputFormatter>[
                                                                               FilteringTextInputFormatter.digitsOnly
                                                                             ],
-                                                                            enabled: controller.getPurchaseDetailsByIDModel.value?.status == 306 || controller.getPurchaseDetailsByIDModel.value?.status == 307 && varUserAccessModel.value.access_list!.where((e) => e.feature_id == UserAccessConstants.kGoodsFeatureId && e.add == UserAccessConstants.kHaveAddAccess).length > 0
+                                                                            enabled: controller.getPurchaseDetailsByIDModel.value?.status == 306 && varUserAccessModel.value.access_list!.where((e) => e.feature_id == UserAccessConstants.kGoodsFeatureId && e.add == UserAccessConstants.kHaveAddAccess).length > 0 || controller.getPurchaseDetailsByIDModel.value?.status == 307 && varUserAccessModel.value.access_list!.where((e) => e.feature_id == UserAccessConstants.kGoodsFeatureId && e.add == UserAccessConstants.kHaveAddAccess).length > 0 || controller.getPurchaseDetailsByIDModel.value?.status == 309 && varUserAccessModel.value.access_list!.where((e) => e.feature_id == UserAccessConstants.kGoodsFeatureId && e.add == UserAccessConstants.kHaveAddAccess).length > 0
                                                                                 ? true
                                                                                 : false,
                                                                             maxLine:
@@ -1243,18 +1244,26 @@ class _ReceiveGoodsOrderWebState extends State<ReceiveGoodsOrderWeb> {
                 //   ),
                 // ),
                 Dimens.boxWidth15,
-                controller.getPurchaseDetailsByIDModel.value?.status == 306 ||
-                        controller.getPurchaseDetailsByIDModel.value?.status ==
-                            307 ||
+                controller.getPurchaseDetailsByIDModel.value?.status == 306 &&
+                            varUserAccessModel.value.access_list!
+                                    .where((e) =>
+                                        e.feature_id == UserAccessConstants.kGoodsFeatureId &&
+                                        e.add ==
+                                            UserAccessConstants.kHaveAddAccess)
+                                    .length >
+                                0 ||
+                        controller.getPurchaseDetailsByIDModel.value?.status == 307 &&
+                            varUserAccessModel.value.access_list!
+                                    .where((e) =>
+                                        e.feature_id == UserAccessConstants.kGoodsFeatureId &&
+                                        e.add ==
+                                            UserAccessConstants.kHaveAddAccess)
+                                    .length >
+                                0 ||
                         controller.getPurchaseDetailsByIDModel.value?.status ==
                                 309 &&
                             varUserAccessModel.value.access_list!
-                                    .where((e) =>
-                                        e.feature_id ==
-                                            UserAccessConstants
-                                                .kGoodsFeatureId &&
-                                        e.add ==
-                                            UserAccessConstants.kHaveAddAccess)
+                                    .where((e) => e.feature_id == UserAccessConstants.kGoodsFeatureId && e.add == UserAccessConstants.kHaveAddAccess)
                                     .length >
                                 0
                     ? Container(
@@ -1269,6 +1278,16 @@ class _ReceiveGoodsOrderWebState extends State<ReceiveGoodsOrderWeb> {
                       )
                     : Dimens.box0,
                 Dimens.boxWidth15,
+                Container(
+                  height: 40,
+                  child: CustomElevatedButton(
+                    backgroundColor: Color(0xFF77CAE7),
+                    text: 'Save as Drafts',
+                    onPressed: () {
+                      controller.updateGOReceiveIsSubmit0();
+                    },
+                  ),
+                ),
                 varUserAccessModel.value.access_list!
                             .where((e) =>
                                 e.feature_id ==

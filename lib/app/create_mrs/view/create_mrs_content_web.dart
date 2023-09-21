@@ -175,7 +175,7 @@ class CreateMrsContentWeb extends GetView<CreateMrsController> {
                             child: Row(
                               children: [
                                 Text(
-                                  "Equipment",
+                                  "Material",
                                   style: Styles.blue700,
                                 ),
                                 Spacer(),
@@ -197,7 +197,7 @@ class CreateMrsContentWeb extends GetView<CreateMrsController> {
                             height: 300,
                             child: ScrollableTableView(
                               columns: [
-                                "Equipment Name",
+                                "Material Name",
                                 "Material Type",
                                 "Image",
                                 "Available Qty",

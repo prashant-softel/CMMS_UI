@@ -386,7 +386,6 @@ class DataRepository extends DomainRepository {
       isLoading: isLoading,
       auth: auth,
       isCancle: isCancle,
-     
     );
   }
 
@@ -400,7 +399,7 @@ class DataRepository extends DomainRepository {
       isLoading: isLoading,
       auth: auth,
       isClose: isClose,
-     
+
     );
   }
 
@@ -414,7 +413,7 @@ class DataRepository extends DomainRepository {
       isLoading: isLoading,
       auth: auth,
       isExtend: isExtend,
-     
+
     );
   }
 
@@ -710,7 +709,7 @@ class DataRepository extends DomainRepository {
     bool? isLoading,
   }) async =>
       await connectHelper.permitCancelRequestButton(
-         auth: auth,
+        auth: auth,
         cancelPermitJsonString: cancelPermitJsonString,
         isLoading: isLoading ?? false,
       );
@@ -1296,6 +1295,17 @@ class DataRepository extends DomainRepository {
         createGo: createGo,
         isLoading: isLoading ?? false,
       );
+  Future<ResponseModel> updateGOReceiveIsSubmit0({
+    required String auth,
+    createGo,
+    bool? isLoading,
+  }) async =>
+      await connectHelper.updateGOReceiveIsSubmit0(
+        auth: auth,
+        createGo: createGo,
+        isLoading: isLoading ?? false,
+      );
+
   Future<ResponseModel> updateWarrantyClaim({
     required String auth,
     updateWarrantyClaim,
@@ -2671,6 +2681,16 @@ class DataRepository extends DomainRepository {
       await connectHelper.createMrs(
         auth: auth,
         createMrsJsonString: createMrsJsonString,
+        isLoading: isLoading ?? false,
+      );
+  Future<ResponseModel> createPmPlan({
+    required String auth,
+    createPmPlanJsonString,
+    bool? isLoading,
+  }) async =>
+      await connectHelper.createPmPlan(
+        auth: auth,
+        createPmPlanJsonString: createPmPlanJsonString,
         isLoading: isLoading ?? false,
       );
   Future<ResponseModel> getIncidentRiskTypeList({

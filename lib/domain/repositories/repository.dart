@@ -772,7 +772,42 @@ class Repository {
         Fluttertoast.showToast(
             msg: " Recive GO  update Successfully...", fontSize: 16.0);
 
-        Get.offNamed(
+        Get.offAllNamed(
+          Routes.stockManagementGoodsOrdersScreen,
+        );
+        // Fluttertoast.showToast(msg: "Data add successfully...", fontSize: 16.0);
+      } else {
+        Utility.showDialog(res.errorCode.toString() + 'reciveUpdateGoodsOrder');
+        //return '';
+      }
+      return Map();
+    } catch (error) {
+      print(error.toString());
+      return Map();
+    }
+  }
+
+  Future<Map<String, dynamic>> updateGOReceiveIsSubmit0(
+    createGo,
+    bool? isLoading,
+  ) async {
+    try {
+      final auth = await getSecuredValue(LocalKeys.authToken);
+      final res = await _dataRepository.updateGOReceiveIsSubmit0(
+        auth: auth,
+        createGo: createGo,
+        isLoading: isLoading ?? false,
+      );
+
+      var resourceData = res.data;
+
+      print('Response update Goods order : ${resourceData}');
+
+      if (!res.hasError) {
+        Fluttertoast.showToast(
+            msg: " Recive GO  update Successfully...", fontSize: 16.0);
+
+        Get.offAllNamed(
           Routes.stockManagementGoodsOrdersScreen,
         );
         // Fluttertoast.showToast(msg: "Data add successfully...", fontSize: 16.0);
@@ -997,14 +1032,14 @@ class Repository {
 
       if (!res.hasError) {
         final jsonGoodsOrdersListModels = jsonDecode(res.data);
-        // print(res.data);
+        // print(res.data); `6
         final List<GoodsOrdersListModel> _goodOrderModelList =
             jsonGoodsOrdersListModels
                 .map<GoodsOrdersListModel>((m) =>
                     GoodsOrdersListModel.fromJson(Map<String, dynamic>.from(m)))
                 .toList();
 
-        return _goodOrderModelList;
+        return _goodOrderModelList.reversed.toList();
       } //
       else {
         Utility.showDialog(res.errorCode.toString() + 'getIncidentReportList');
@@ -1402,7 +1437,7 @@ class Repository {
               getPurchaseDetailsByIDModelFromJson(res.data);
 
           var responseMap = _getPurchaseDetailsByIDModelFromJson;
-          print({"ViewgetPurchaseDetailsByID", responseMap});
+          // print({"ViewgetPurchaseDetailsByID", responseMap});
           return responseMap;
         }
       } else {
@@ -2134,8 +2169,8 @@ class Repository {
     }
   }
 
-///Permit Cancel Condition List
-   Future<List<PermitCancelListModel>> getPermitConditionList({
+  ///Permit Cancel Condition List
+  Future<List<PermitCancelListModel>> getPermitConditionList({
     required int? isCancle,
     required bool isLoading,
   }) async {
@@ -2214,7 +2249,6 @@ class Repository {
       return [];
     }
   }
-
 
 
   Future<List<WarrantyClaimModel>> getWarrantyClaimList({
@@ -2601,11 +2635,12 @@ class Repository {
       log(error.toString());
     }
   }
-///Cancel Permit
+
+  ///Cancel Permit
   Future<Map<String, dynamic>> permitCancelRequestButton(
     // String? comment,
     // String? id,
-     cancelPermitJsonString,
+    cancelPermitJsonString,
     bool? isLoading,
   ) async {
     try {
@@ -7780,6 +7815,43 @@ class Repository {
       return [];
     }
   }
+
+  Future<Map<String, dynamic>> createPmPlan(
+    createPmPlanJsonString,
+    bool? isLoading,
+  ) async {
+    try {
+      final auth = await getSecuredValue(LocalKeys.authToken);
+      final res = await _dataRepository.createPmPlan(
+        auth: auth,
+        createPmPlanJsonString: createPmPlanJsonString,
+        isLoading: isLoading ?? false,
+      );
+
+      var resourceData = res.data;
+
+      print('Response Create Goods order : ${resourceData}');
+
+      if (!res.hasError) {
+        Fluttertoast.showToast(msg: " Mrs Add Successfully...", fontSize: 16.0);
+
+        // if (res.errorCode == 200) {
+        //   var responseMap = json.decode(res.data);
+        //   return responseMap;
+        // }
+
+        // Fluttertoast.showToast(msg: "Data add successfully...", fontSize: 16.0);
+      } else {
+        Utility.showDialog(res.errorCode.toString() + 'createMrs');
+        //return '';
+      }
+      return Map();
+    } catch (error) {
+      print(error.toString());
+      return Map();
+    }
+  }
+
   //end
   //end
 }

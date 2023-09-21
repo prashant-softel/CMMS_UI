@@ -6,6 +6,7 @@ import 'package:cmms/app/widgets/custom_textfield.dart';
 import 'package:cmms/app/widgets/date_picker.dart';
 import 'package:cmms/app/widgets/dropdown_web.dart';
 import 'package:cmms/app/widgets/multipule_dropdown_web.dart';
+import 'package:cmms/app/widgets/stock_dropdown.dart';
 import 'package:dropdown_search/dropdown_search.dart';
 
 import 'package:flutter/material.dart';
@@ -31,59 +32,56 @@ class _CreatePmPlanWebState extends State<CreatePmPlanWeb> {
     return GetBuilder<CreatePmPlanController>(
       id: 'stock_Mangement',
       builder: (controller) {
-        return Scaffold(
-          backgroundColor: ColorValues.cardColor,
-          body: Column(
-            children: [
-              Container(
-                height: 45,
-                decoration: BoxDecoration(
-                  border: Border.all(
-                    color: Color.fromARGB(255, 227, 224, 224),
-                    width: 1,
+        return Obx(
+          () => Scaffold(
+            backgroundColor: ColorValues.whiteColor,
+            body: Column(
+              children: [
+                Container(
+                  height: 45,
+                  decoration: BoxDecoration(
+                    border: Border.all(
+                      color: Color.fromARGB(255, 227, 224, 224),
+                      width: 1,
+                    ),
+                    boxShadow: [
+                      BoxShadow(
+                        color:
+                            Color.fromARGB(255, 236, 234, 234).withOpacity(0.5),
+                        spreadRadius: 2,
+                        blurRadius: 5,
+                        offset: Offset(0, 2),
+                      ),
+                    ],
                   ),
-                  boxShadow: [
-                    BoxShadow(
-                      color:
-                          Color.fromARGB(255, 236, 234, 234).withOpacity(0.5),
-                      spreadRadius: 2,
-                      blurRadius: 5,
-                      offset: Offset(0, 2),
-                    ),
-                  ],
-                ),
-                child: Row(
-                  children: [
-                    Icon(
-                      Icons.home,
-                      color: ColorValues.greyLightColor,
-                    ),
-                    Text(
-                      "DASHBOARD",
-                      style: Styles.greyLight14,
-                    ),
-                    GestureDetector(
-                      onTap: () {
-                        Get.back();
-                      },
-                      child: Text(" / PREVENTIVE MAINTENANCE",
-                          style: Styles.greyMediumLight12),
-                    ),
-                    Text(" / CREATE PM PLAN", style: Styles.greyMediumLight12)
-                  ],
-                ),
-              ),
-              Expanded(
-                child: SingleChildScrollView(
-                  child: Stack(
+                  child: Row(
                     children: [
-                      Container(
-                        height: MediaQuery.of(context).size.height / 1,
-                        width: Get.width * 7,
-                        margin: EdgeInsets.only(left: 20, top: 10, right: 20),
-                        // height: Get.height,
-                        child: Card(
-                          color: ColorValues.cardColor,
+                      Icon(
+                        Icons.home,
+                        color: ColorValues.greyLightColor,
+                      ),
+                      Text(
+                        "DASHBOARD",
+                        style: Styles.greyLight14,
+                      ),
+                      GestureDetector(
+                        onTap: () {
+                          Get.back();
+                        },
+                        child: Text(" / PREVENTIVE MAINTENANCE",
+                            style: Styles.greyMediumLight12),
+                      ),
+                      Text(" / CREATE PM PLAN", style: Styles.greyMediumLight12)
+                    ],
+                  ),
+                ),
+                Expanded(
+                  child: SingleChildScrollView(
+                    child: Stack(
+                      children: [
+                        Card(
+                          margin: EdgeInsets.all(20),
+                          color: ColorValues.whiteColor,
                           elevation: 10,
                           shape: RoundedRectangleBorder(
                             borderRadius: BorderRadius.circular(10.0),
@@ -147,8 +145,11 @@ class _CreatePmPlanWebState extends State<CreatePmPlanWeb> {
                                               width: (MediaQuery.of(context)
                                                       .size
                                                       .width *
-                                                  .29),
-                                              child: LoginCustomTextfield()),
+                                                  .35),
+                                              child: LoginCustomTextfield(
+                                                textController:
+                                                    controller.planTittleCtrlr,
+                                              )),
                                         ],
                                       ),
                                     ),
@@ -158,15 +159,47 @@ class _CreatePmPlanWebState extends State<CreatePmPlanWeb> {
                                         CustomRichText(
                                             title: 'Equipment Category :'),
                                         Dimens.boxWidth5,
-                                        MultipDropdownWebWidget(
-                                          width: (MediaQuery.of(context)
-                                                  .size
-                                                  .width *
-                                              .2),
-                                          dropdownList:
-                                              controller.equipmentCategoryList,
-                                          selectedItems: controller
-                                              .selectedEquipmentCategoryList,
+                                        SizedBox(
+                                          child: DropdownWebStock(
+                                            width: (MediaQuery.of(context)
+                                                    .size
+                                                    .width *
+                                                .2),
+                                            controller: controller,
+                                            dropdownList: controller
+                                                .equipmentCategoryList,
+                                            isValueSelected: controller
+                                                .isSelectedInventory.value,
+                                            selectedValue: controller
+                                                .selectedInventory.value,
+                                            onValueChanged:
+                                                controller.onValueChanged,
+                                          ),
+                                        ),
+                                        Spacer(),
+                                        Row(
+                                          children: [
+                                            CustomRichText(title: "Frequency"),
+                                            Dimens.boxWidth5,
+                                            SizedBox(
+                                              child: DropdownWebStock(
+                                                width: (MediaQuery.of(context)
+                                                        .size
+                                                        .width *
+                                                    .2),
+                                                controller: controller,
+                                                dropdownList:
+                                                    controller.frequencyList,
+                                                isValueSelected: controller
+                                                    .isSelectedfrequency.value,
+                                                selectedValue: controller
+                                                    .selectedfrequency.value,
+                                                onValueChanged:
+                                                    controller.onValueChanged,
+                                              ),
+                                            ),
+                                            Dimens.boxWidth80,
+                                          ],
                                         ),
                                       ],
                                     ),
@@ -201,36 +234,18 @@ class _CreatePmPlanWebState extends State<CreatePmPlanWeb> {
                                             ],
                                           ),
                                         ),
-                                        Spacer(),
-                                        Row(
-                                          children: [
-                                            CustomRichText(title: "Frequency"),
-                                            Dimens.boxWidth5,
-                                            SizedBox(
-                                              child: DropdownWebWidget(
-                                                margin: Dimens.edgeInsets5,
-                                                width: (MediaQuery.of(context)
-                                                        .size
-                                                        .width *
-                                                    .2),
-                                                controller: controller,
-                                                dropdownList:
-                                                    controller.frequencyList,
-                                                isValueSelected: controller
-                                                    .isSelectedfrequency.value,
-                                                selectedValue: controller
-                                                    .selectedfrequency.value,
-                                                onValueChanged:
-                                                    controller.onValueChanged,
-                                              ),
-                                            ),
-                                            Dimens.boxWidth80,
-                                          ],
-                                        ),
+                                        // Spacer(),
                                       ],
                                     ),
                                   ],
                                 ),
+                              ),
+                              MultipDropdownWebWidget(
+                                width: (MediaQuery.of(context).size.width * .2),
+                                dropdownList: controller.equipmentNameList,
+                                selectedItems:
+                                    controller.selectedEquipmentNameList,
+                                onValueChanged: controller.onValueChanged,
                               ),
                               Dimens.boxHeight25,
                               Padding(
@@ -246,7 +261,7 @@ class _CreatePmPlanWebState extends State<CreatePmPlanWeb> {
                                         width: 1,
                                       ),
                                       borderRadius:
-                                          BorderRadius.all(Radius.circular(20)),
+                                          BorderRadius.all(Radius.circular(10)),
                                       boxShadow: [
                                         BoxShadow(
                                           color: ColorValues
@@ -269,36 +284,67 @@ class _CreatePmPlanWebState extends State<CreatePmPlanWeb> {
                                               "Equipment List",
                                               style: Styles.black15W400,
                                             ),
-                                            Spacer(),
-                                            GestureDetector(
-                                              onTap: () {
-                                                // controller.addRowItem();
-                                              },
-                                              child: Container(
-                                                height: 30,
-                                                width: 150,
-                                                decoration: BoxDecoration(
-                                                  color:
-                                                      ColorValues.addNewColor,
-                                                  border: Border.all(
-                                                    color: ColorValues
-                                                        .lightGreyColorWithOpacity35,
-                                                    width: 1,
-                                                  ),
-                                                  borderRadius:
-                                                      BorderRadius.all(
-                                                          Radius.circular(10)),
-                                                ),
-                                                child: Center(
-                                                  child: Text(
-                                                    "Add Assets",
-                                                    style: Styles.whiteBold15,
-                                                  ),
-                                                ),
-                                              ),
-                                            ),
-                                            Dimens.boxWidth15,
                                           ],
+                                        ),
+                                        Container(
+                                          width: MediaQuery.of(context)
+                                                  .size
+                                                  .height *
+                                              1.5,
+                                          height: 200, //Get.height - 70,
+                                          child: Column(
+                                              //
+                                              children: [
+                                                Expanded(
+                                                  child: ScrollableTableView(
+                                                    columns: [
+                                                      "Facility Id",
+                                                      'Facility name',
+                                                      'Location',
+                                                    ].map((column) {
+                                                      return TableViewColumn(
+                                                          minWidth:
+                                                              Get.width * 0.20,
+                                                          label: column);
+                                                    }).toList(),
+                                                    rows: //
+                                                        [
+                                                      ...List.generate(
+                                                        controller
+                                                            .filteredInventoryNameList
+                                                            .length,
+                                                        (index) {
+                                                          var facilityNameDetails =
+                                                              controller
+                                                                      .filteredInventoryNameList[
+                                                                  index];
+
+                                                          return [
+                                                            '${facilityNameDetails?.id ?? ''}',
+                                                            '${facilityNameDetails?.name ?? ''}',
+                                                            '${facilityNameDetails?.blockName ?? ''}',
+                                                          ];
+                                                        },
+                                                      ),
+                                                    ].map((_inventoryDetailList) {
+                                                      return TableViewRow(
+                                                          onTap: () => {
+                                                                //  print('ZERO = ${_inventoryDetailList[0]}')
+                                                              },
+                                                          height: 60,
+                                                          cells:
+                                                              _inventoryDetailList
+                                                                  .map((value) {
+                                                            return TableViewCell(
+                                                              //key: ,
+                                                              child: Text(value
+                                                                  .toString()),
+                                                            );
+                                                          }).toList());
+                                                    }).toList(),
+                                                  ),
+                                                ),
+                                              ]),
                                         ),
                                       ],
                                     )),
@@ -319,7 +365,7 @@ class _CreatePmPlanWebState extends State<CreatePmPlanWeb> {
                                     backgroundColor: ColorValues.appGreenColor,
                                     text: 'Submit',
                                     onPressed: () {
-                                      // controller.submitPurchaseOrderData();
+                                      controller.createPmPlan();
                                     },
                                   ),
                                   Dimens.boxWidth15,
@@ -337,32 +383,32 @@ class _CreatePmPlanWebState extends State<CreatePmPlanWeb> {
                             ],
                           ),
                         ),
-                      ),
-                      if (controller.openStartDatePicker)
-                        Positioned(
-                          left: 65,
-                          top: 230,
-                          child: DatePickerWidget(
-                            minDate: DateTime(DateTime.now().year),
-                            maxDate: DateTime(DateTime.now().year, 13,
-                                0), // last date of this year
-                            controller: DateRangePickerController(),
-                            selectionChanges: (p0) {
-                              print('po valu ${p0.value.toString()}');
-                              controller.startDateDateTc.text =
-                                  DateFormat('yyyy-MM-dd').format(p0.value);
-                              controller.openStartDatePicker =
-                                  !controller.openStartDatePicker;
-                              controller.update(['stock_Mangement']);
-                            },
+                        if (controller.openStartDatePicker)
+                          Positioned(
+                            left: 65,
+                            top: 230,
+                            child: DatePickerWidget(
+                              minDate: DateTime(DateTime.now().year),
+                              maxDate: DateTime(DateTime.now().year, 13,
+                                  0), // last date of this year
+                              controller: DateRangePickerController(),
+                              selectionChanges: (p0) {
+                                print('po valu ${p0.value.toString()}');
+                                controller.startDateDateTc.text =
+                                    DateFormat('yyyy-MM-dd').format(p0.value);
+                                controller.openStartDatePicker =
+                                    !controller.openStartDatePicker;
+                                controller.update(['stock_Mangement']);
+                              },
+                            ),
                           ),
-                        ),
-                    ],
+                      ],
+                    ),
                   ),
                 ),
-              ),
-              Dimens.boxHeight40,
-            ],
+                // Dimens.boxHeight40,
+              ],
+            ),
           ),
         );
       },

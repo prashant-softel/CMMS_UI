@@ -25,6 +25,7 @@ class CreateGoModel {
   String? job_ref;
   int? amount;
   int? currencyID;
+  int? is_submit;
   List<Items?>? items;
   CreateGoModel(
       {this.facility_id,
@@ -48,7 +49,8 @@ class CreateGoModel {
       this.amount,
       this.currencyID,
       this.items,
-      this.id});
+      this.id,
+      this.is_submit});
 
   factory CreateGoModel.fromJson(Map<String, dynamic> json) {
     return CreateGoModel(
@@ -73,6 +75,7 @@ class CreateGoModel {
       amount: json['amount'],
       currencyID: json['currencyID'],
       id: json['id'],
+      is_submit: json['is_submit'] == null ? 0 : json['is_submit'],
       items: json["go_items"] != null
           ? List<Items>.from(json["go_items"]?.map((x) => Items.fromJson(x)))
           : [],
@@ -100,6 +103,7 @@ class CreateGoModel {
         "amount": amount,
         "currencyID": currencyID,
         "id": id,
+        "is_submit": is_submit == null ? 0 : is_submit,
         "go_items": List<dynamic>.from(items!.map((x) => x)),
       };
 }

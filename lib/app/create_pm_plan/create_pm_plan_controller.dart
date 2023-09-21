@@ -1,9 +1,13 @@
+import 'dart:async';
+
 import 'package:cmms/app/create_pm_plan/create_pm_plan_presenter.dart';
+import 'package:cmms/app/navigators/app_pages.dart';
+import 'package:cmms/domain/models/create_pm_plan_model.dart';
 import 'package:cmms/domain/models/frequency_model.dart';
 import 'package:cmms/domain/models/get_asset_data_list_model.dart';
+import 'package:cmms/domain/models/inventory_model.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
-import 'package:rxdart/subjects.dart';
 import '../../domain/models/facility_model.dart';
 import '../../domain/models/inventory_category_model.dart';
 import '../home/home_controller.dart';
@@ -20,9 +24,6 @@ class CreatePmPlanController extends GetxController {
   Rx<List<List<Map<String, String>>>> rowItem =
       Rx<List<List<Map<String, String>>>>([]);
   Map<String, GetAssetDataModel> dropdownMapperData = {};
-  BehaviorSubject<int> _facilityId = BehaviorSubject.seeded(0);
-  Stream<int> get facilityId$ => _facilityId.stream;
-  int get facilityId => _facilityId.value;
   int selectedPurchaseID = 0;
   bool openStartDatePicker = false;
   RxList<FacilityModel?> facilityList = <FacilityModel>[].obs;
@@ -31,45 +32,60 @@ class CreatePmPlanController extends GetxController {
   Rx<String> selectedfrequency = ''.obs;
   Rx<bool> isSelectedfrequency = true.obs;
   int selectedfrequencyId = 0;
-  List<String> options = ["GetX", "Provider", "BloC", "MobX"];
   Rx<List<String>> selectedOptionList = Rx<List<String>>([]);
   var selectedOption = ''.obs;
   RxList<InventoryCategoryModel?> equipmentCategoryList =
       <InventoryCategoryModel>[].obs;
-  RxList<InventoryCategoryModel?> selectedEquipmentCategoryList =
-      <InventoryCategoryModel>[].obs;
-  RxList<int> selectedEquipmentCategoryIdList = <int>[].obs;
+  Rx<String> selectedInventory = ''.obs;
+  Rx<bool> isSelectedInventory = true.obs;
+  RxList<InventoryModel?> selectedEquipmentNameList = <InventoryModel>[].obs;
   int selectedInventoryCategoryId = 0;
+  RxList<InventoryModel?> filteredInventoryNameList = <InventoryModel>[].obs;
 
+  StreamSubscription<int>? facilityIdStreamSubscription;
+  int facilityId = 0;
+  //Equipment Name List
+  RxList<InventoryModel?> equipmentNameList = <InventoryModel>[].obs;
+  RxList<InventoryModel?> filteredEquipmentNameList = <InventoryModel>[].obs;
+  RxList<int> selectedEquipmentNameIdList = <int>[].obs;
+  Map<dynamic, dynamic> inventory_map = {};
+
+  var planTittleCtrlr = TextEditingController();
   @override
   void onInit() async {
-    Future.delayed(Duration(seconds: 1), () {
-      getAssetList(facilityId);
+    facilityIdStreamSubscription = homecontroller.facilityId$.listen((event) {
+      facilityId = event;
+      Future.delayed(Duration(seconds: 1), () {
+        Future.delayed(Duration(seconds: 1), () {
+          inventoryList(facilityId);
+        });
+        Future.delayed(Duration(seconds: 1), () {
+          getInventoryCategoryList();
+        });
+        Future.delayed(Duration(seconds: 1), () {
+          getFrequencyList();
+        });
+      });
     });
-    Future.delayed(Duration(seconds: 1), () {
-      getInventoryCategoryList();
-    });
-    Future.delayed(Duration(seconds: 1), () {
-      getFrequencyList();
-    });
+
     super.onInit();
   }
 
-  Future<void> getAssetList(int _facilityId) async {
-    assetList.value = <GetAssetDataModel>[];
-    final _assetList =
-        await createPmPlanPresenter.getAssetList(facilityId: facilityId);
-    // print('jkncejknce:$facilityId');
-    if (_assetList != null) {
-      for (var asset in _assetList) {
-        assetList.add(asset);
+  Future<void> inventoryList(int facilityId) async {
+    equipmentNameList.value = <InventoryModel>[];
+    final _equipmentNameList = await createPmPlanPresenter.inventoryList(
+      isLoading: true,
+      facilityId: facilityId,
+    );
+    if (_equipmentNameList != null) {
+      for (var equipmentName in _equipmentNameList) {
+        equipmentNameList.add(equipmentName);
       }
-      update(["AssetList"]);
     }
   }
 
   Future<void> getFrequencyList() async {
-    final list = await createPmPlanPresenter.getFrequencyList();
+    final list = await createPmPlanPresenter.getFrequencyList(isLoading: true);
 
     if (list != null) {
       for (var _frequencyList in list) {
@@ -89,27 +105,53 @@ class CreatePmPlanController extends GetxController {
         equipmentCategoryList.add(equimentCategory);
       }
     }
-    print({"dfjfdkbf", equipmentCategoryList});
+  }
+
+  void facilityNameSelected(_selectedfacilityNameIds) {
+    selectedEquipmentNameIdList.value = <int>[];
+    filteredInventoryNameList.value = <InventoryModel>[];
+    late int emp_id = 0;
+    for (var _selectedfacilityNameId in _selectedfacilityNameIds) {
+      selectedEquipmentNameIdList.add(_selectedfacilityNameId);
+      InventoryModel? e = filteredInventoryNameList.firstWhere((element) {
+        return element?.id == _selectedfacilityNameId;
+      });
+      filteredInventoryNameList.add(e);
+    }
+
+    inventory_map[emp_id] = selectedEquipmentNameIdList;
   }
 
   void onValueChanged(dynamic list, dynamic value) {
     print({"valuevaluevaluevalue": value});
     switch (list.runtimeType) {
-      case RxList<FacilityModel>:
-        {
-          int facilityIndex = facilityList.indexWhere((x) => x?.name == value);
-
-          _facilityId.add(facilityList[facilityIndex]?.id ?? 0);
-        }
-        break;
       case RxList<InventoryCategoryModel>:
         {
-          for (var equipCat in selectedEquipmentCategoryList) {
+          //   for (var equipCat in selectedEquipmentCategoryList) {
+          int equipCatIndex =
+              equipmentCategoryList.indexWhere((x) => x?.name == value);
+          //  selectedEquipmentCategoryIdList.add(equipCatIndex);
+          selectedInventoryCategoryId =
+              equipmentCategoryList[equipCatIndex]?.id ?? 0;
+
+          selectedInventory.value = value;
+
+          // print('First Category Id:$selectedInventoryCategoryId');
+          //  }
+        }
+        break;
+      case RxList<InventoryModel>:
+        {
+          for (var equipCat in selectedEquipmentNameList) {
             int equipCatIndex =
-                equipmentCategoryList.indexWhere((x) => x?.name == value);
-            selectedEquipmentCategoryIdList.add(equipCatIndex);
-            // selectedInventoryCategoryId = equipmentCategoryList[equipCatIndex]?.id ?? 0;
-            print('First Category Id:$selectedInventoryCategoryId');
+                equipmentNameList.indexWhere((x) => x?.name == value);
+            selectedEquipmentNameIdList.add(equipCatIndex);
+            // selectedInventoryCategoryId =
+            //     equipmentCategoryList[equipCatIndex]?.id ?? 0;
+            // selectedInventory.value = value;
+            facilityNameSelected(selectedEquipmentNameIdList);
+
+            print('First Category Id:$selectedEquipmentNameIdList');
           }
         }
         break;
@@ -127,6 +169,37 @@ class CreatePmPlanController extends GetxController {
         break;
     }
 
-    print({"selectedfrequency": selectedfrequency});
+    // print({"selectedfrequency": selectedfrequency});
+  }
+
+  Future<void> createPmPlan() async {
+    String _startDate = startDateDateTc.text.trim();
+    String _plantitle = planTittleCtrlr.text.trim();
+
+    List<AssetChecklist> mapAssetChecklist = [];
+    // mapAssetChecklist = AssetChecklist(asset_id: 131086, checklist_id: 2988);
+
+    CreatePmPlanModel createPmPlan = CreatePmPlanModel(
+        plan_name: _plantitle,
+        plan_date: _startDate,
+        facility_id: facilityId,
+        category_id:
+            selectedInventoryCategoryId, // selectedEquipmentCategoryIdList,
+        plan_freq_id: selectedfrequencyId,
+        mapAssetChecklist: mapAssetChecklist);
+    var createPmPlanJsonString = createPmPlan.toJson();
+
+    print({"createPmPlanJsonString", createPmPlanJsonString});
+    Map<String, dynamic>? responseCreatePmPlan =
+        await createPmPlanPresenter.createPmPlan(
+      createPmPlanJsonString: createPmPlanJsonString,
+      isLoading: true,
+    );
+    if (responseCreatePmPlan == null) {
+    } else {
+      Get.offAllNamed(
+        Routes.pmPlanList,
+      );
+    }
   }
 }

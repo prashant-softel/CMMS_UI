@@ -493,6 +493,9 @@ class ConnectHelper {
       {required bool isLoading,
       required String auth,
       int? isCancle}) async {
+  ///Permit Condition List
+  Future<ResponseModel> getPermitConditionList(
+      {required bool isLoading, required String auth, int? isCancle}) async {
     ResponseModel responseModel = await apiWrapper.makeRequest(
       'Permit/GetPermitConditionList?isCancle=$isCancle',
       Request.getMultiparts,
@@ -538,7 +541,6 @@ class ConnectHelper {
     );
     return responseModel;
   }
-
 
   Future<ResponseModel> getWarrantyClaimList({
     required bool isLoading,
@@ -819,7 +821,7 @@ class ConnectHelper {
       ptwStatus == '133'
           ? 'Permit/PermitExtendApprove'
           : 'Permit/PermitApprove',
-          
+
       Request.put,
       {'comment': "$comment", 'id': id},
       isLoading ?? true,
@@ -2201,6 +2203,29 @@ class ConnectHelper {
     return responseModel;
   }
 
+  Future<ResponseModel> updateGOReceiveIsSubmit0({
+    required String auth,
+    createGo,
+    bool? isLoading,
+  }) async {
+    var responseModel = await apiWrapper.makeRequest(
+      'GO/UpdateGOReceive',
+      Request.post,
+      createGo,
+      isLoading ?? false,
+      {
+        'Content-Type': 'application/json',
+        'Authorization': 'Bearer $auth',
+      },
+    );
+
+    print('update Goods Orders Response:${responseModel.data}');
+    var res = responseModel.data;
+    var parsedJson = json.decode(res);
+
+    return responseModel;
+  }
+
   //Update Warranty Claim
   Future<ResponseModel> updateWarrantyClaim({
     required String auth,
@@ -2422,7 +2447,7 @@ class ConnectHelper {
         'Authorization': 'Bearer $auth',
       },
     );
-    print('ViewgetPurchaseDetailsById1${responseModel.data}');
+    // print('ViewgetPurchaseDetailsById1${responseModel.data}');
     return responseModel;
   }
 
@@ -4358,8 +4383,8 @@ class ConnectHelper {
       dynamic endDate,
       int? userId}) async {
     var responseModel = await apiWrapper.makeRequest(
-      //'SMReports/GetPlantStockReport?facility_id=$facilityId&StartDate=$endDate&EndDate=$startDate',
-      'SMReports/GetPlantStockReport?facility_id=45&StartDate=2002-01-01&EndDate=2023-05-01',
+      'SMReports/GetPlantStockReport?facility_id=$facilityId&StartDate=$endDate&EndDate=$startDate',
+      // 'SMReports/GetPlantStockReport?facility_id=45&StartDate=2002-01-01&EndDate=2023-05-01',
       Request.get,
       null,
       isLoading ?? false,
@@ -4415,6 +4440,24 @@ class ConnectHelper {
       'MRS/CreateMRS',
       Request.post,
       createMrsJsonString,
+      isLoading ?? false,
+      {
+        'Content-Type': 'application/json',
+        'Authorization': 'Bearer $auth',
+      },
+    );
+    return responseModel;
+  }
+
+  Future<ResponseModel> createPmPlan({
+    required String auth,
+    createPmPlanJsonString,
+    bool? isLoading,
+  }) async {
+    var responseModel = await apiWrapper.makeRequest(
+      'PM/CreatePMPlan',
+      Request.post,
+      createPmPlanJsonString,
       isLoading ?? false,
       {
         'Content-Type': 'application/json',
@@ -5251,7 +5294,7 @@ class ConnectHelper {
       dynamic endDate}) async {
     var responseModel = await apiWrapper.makeRequest(
       //   'PMScheduleView/GetPMTaskList?facility_id=${facilityId}&start_date=${endDate}&end_date=${startDate}',
-      'PM/GetPMPlanList?facility_id=1736', Request.get,
+      'PM/GetPMPlanList?facility_id=${facilityId}', Request.get,
       null,
       isLoading ?? true,
       {
