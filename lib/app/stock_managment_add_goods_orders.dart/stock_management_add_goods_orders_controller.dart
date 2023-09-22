@@ -66,6 +66,7 @@ class StockManagementAddGoodsOrdersController extends GetxController {
       <GetPurchaseDetailsByIDModel?>[].obs;
   Rx<GetPurchaseDetailsByIDModel?> getPurchaseDetailsByIDModel =
       GetPurchaseDetailsByIDModel().obs;
+  RxList<GoDetails?>? goDetails = <GoDetails?>[].obs;
 
 //all textfield tc
   var challanNoCtrlr = TextEditingController();
@@ -214,6 +215,8 @@ class StockManagementAddGoodsOrdersController extends GetxController {
       print(
           'Additioanl Email Employees${_getPurchaseDetailsById.goDetails?.length ?? 0}');
       rowItem.value = [];
+      goDetails?.value = _getPurchaseDetailsById.goDetails ?? [];
+
       _getPurchaseDetailsById.goDetails?.forEach((element) {
         rowItem.value.add([
           {

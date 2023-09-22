@@ -580,209 +580,241 @@ class AddRowInGoodsOrder extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      margin: Dimens.edgeInsets20,
-      height: 300,
-      // height: ((controller.goDetails!.value.length) * 80) + 170,
-      decoration: BoxDecoration(
-        border: Border.all(
-          color: ColorValues.lightGreyColorWithOpacity35,
-          width: 1,
-        ),
-        boxShadow: [
-          BoxShadow(
-            color: ColorValues.appBlueBackgroundColor,
-            spreadRadius: 2,
-            blurRadius: 5,
-            offset: Offset(0, 2),
+    return Obx(
+      () => Container(
+        margin: Dimens.edgeInsets20,
+        //  height: 300,
+        height: ((controller.rowItem.value.length) * 90) + 170,
+        decoration: BoxDecoration(
+          border: Border.all(
+            color: ColorValues.lightGreyColorWithOpacity35,
+            width: 1,
           ),
-        ],
-      ),
-      child: Column(children: [
-        // Column(
-        //     children: []..addAll(controller.rowItem.value.map((e) {
-        //         return Text(jsonEncode(e));
-        //       }))),
-        // Text(jsonEncode(controller.dropdownMapperData)),
-        Padding(
-          padding: const EdgeInsets.all(10.0),
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              Text(
-                "Selects Material ",
-                style: Styles.blue700,
-              ),
-              GestureDetector(
-                onTap: () {
-                  controller.addRowItem();
-                },
-                child: Row(
-                  children: [
-                    Text("Add"),
-                    Icon(Icons.exposure_plus_1),
-                  ],
+          boxShadow: [
+            BoxShadow(
+              color: ColorValues.appBlueBackgroundColor,
+              spreadRadius: 2,
+              blurRadius: 5,
+              offset: Offset(0, 2),
+            ),
+          ],
+        ),
+        child: Column(children: [
+          // Column(
+          //     children: []..addAll(controller.rowItem.value.map((e) {
+          //         return Text(jsonEncode(e));
+          //       }))),
+          // Text(jsonEncode(controller.dropdownMapperData)),
+          Padding(
+            padding: const EdgeInsets.all(10.0),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Text(
+                  "Selects Material ",
+                  style: Styles.blue700,
                 ),
-              ),
-            ],
+                GestureDetector(
+                  onTap: () {
+                    controller.addRowItem();
+                  },
+                  child: Row(
+                    children: [
+                      Text("Add"),
+                      Icon(Icons.exposure_plus_1),
+                    ],
+                  ),
+                ),
+              ],
+            ),
           ),
-        ),
-        Expanded(
-          child: DataTable2(
-            minWidth: 1000,
-            dataRowHeight: 105,
-            columnSpacing: 10,
-            border: TableBorder.all(color: Color.fromARGB(255, 206, 229, 234)),
-            columns: [
-              DataColumn2(
-                  fixedWidth: 500,
-                  label: Text(
-                    "Material",
-                    style: TextStyle(fontSize: 15, fontWeight: FontWeight.bold),
-                  )),
-              DataColumn2(
-                  // fixedWidth: 250,
-                  label: Text(
-                "Paid By",
-                style: TextStyle(fontSize: 15, fontWeight: FontWeight.bold),
-              )),
-              // DataColumn2(
-              //     fixedWidth: 110,
-              //     label: Text(
-              //       "Received  Qty",
-              //       style: TextStyle(fontSize: 15, fontWeight: FontWeight.bold),
-              //     )),
-              DataColumn2(
-                  fixedWidth: 110,
-                  label: Text(
-                    "Cost",
-                    style: TextStyle(fontSize: 15, fontWeight: FontWeight.bold),
-                  )),
-              DataColumn2(
-                  fixedWidth: 110,
-                  label: Text(
-                    "Dispatch Qty",
-                    style: TextStyle(fontSize: 15, fontWeight: FontWeight.bold),
-                  )),
-            ],
-            rows: controller.rowItem.value.map((record) {
-              return DataRow(
-                // height: 130,
-                cells: record.map((mapData) {
-                  return DataCell(
-                    (mapData['key'] == "Drop_down")
-                        ? Padding(
-                            padding: const EdgeInsets.only(
-                              left: 10,
-                              right: 10,
-                            ),
-                            child: Column(
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              crossAxisAlignment: CrossAxisAlignment.center,
-                              children: [
-                                DropdownWebStock(
-                                  width: MediaQuery.of(context).size.width,
-                                  dropdownList: controller.assetItemList,
-                                  selectedValue: mapData["value"],
-                                  onValueChanged: (list, selectedValue) {
-                                    // print(
-                                    //     'paifcghb:${controller.assetItemList}');
-                                    // print({selectedValue: selectedValue});
-                                    mapData["value"] = selectedValue;
-                                    controller
-                                            .dropdownMapperData[selectedValue] =
-                                        list.firstWhere(
-                                            (element) =>
-                                                element.name == selectedValue,
-                                            orElse: null);
-                                  },
-                                ),
-                                Row(
-                                  children: [
-                                    Text("Assets Code :"),
-                                    Text(
-                                        "${controller.dropdownMapperData[mapData['value']]?.asset_code ?? ''}")
-                                  ],
-                                ),
-                                Row(
-                                  children: [
-                                    Text("Assets type :"),
-                                    Text(
-                                        "${controller.dropdownMapperData[mapData['value']]?.asset_type ?? ''}")
-                                  ],
-                                ),
-                                Row(
-                                  children: [
-                                    Text("Assets Category :"),
-                                    Text(
-                                        "${controller.dropdownMapperData[mapData['value']]?.cat_name ?? ''}")
-                                  ],
+          Expanded(
+            child: DataTable2(
+              minWidth: 1000,
+              dataRowHeight: 105,
+              columnSpacing: 10,
+              border:
+                  TableBorder.all(color: Color.fromARGB(255, 206, 229, 234)),
+              columns: [
+                DataColumn2(
+                    fixedWidth: 500,
+                    label: Text(
+                      "Material",
+                      style:
+                          TextStyle(fontSize: 15, fontWeight: FontWeight.bold),
+                    )),
+                DataColumn2(
+                    // fixedWidth: 250,
+                    label: Text(
+                  "Paid By",
+                  style: TextStyle(fontSize: 15, fontWeight: FontWeight.bold),
+                )),
+                // DataColumn2(
+                //     fixedWidth: 110,
+                //     label: Text(
+                //       "Received  Qty",
+                //       style: TextStyle(fontSize: 15, fontWeight: FontWeight.bold),
+                //     )),
+                DataColumn2(
+                    fixedWidth: 110,
+                    label: Text(
+                      "Cost",
+                      style:
+                          TextStyle(fontSize: 15, fontWeight: FontWeight.bold),
+                    )),
+                DataColumn2(
+                    fixedWidth: 110,
+                    label: Text(
+                      "Dispatch Qty",
+                      style:
+                          TextStyle(fontSize: 15, fontWeight: FontWeight.bold),
+                    )),
+              ],
+              rows: controller.rowItem.value.map((record) {
+                return DataRow(
+                  // height: 130,
+                  cells: record.map((mapData) {
+                    return DataCell(
+                      (mapData['key'] == "Drop_down")
+                          ? Padding(
+                              padding: const EdgeInsets.only(
+                                left: 10,
+                                right: 10,
+                                top: 10,
+                              ),
+                              child: Column(
+                                mainAxisAlignment: MainAxisAlignment.start,
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  DropdownWebStock(
+                                    width: MediaQuery.of(context).size.width,
+                                    dropdownList: controller.assetItemList,
+                                    selectedValue: mapData["value"],
+                                    onValueChanged: (list, selectedValue) {
+                                      // print(
+                                      //     'paifcghb:${controller.assetItemList}');
+                                      // print({selectedValue: selectedValue});
+                                      mapData["value"] = selectedValue;
+                                      controller.dropdownMapperData[
+                                              selectedValue] =
+                                          list.firstWhere(
+                                              (element) =>
+                                                  element.name == selectedValue,
+                                              orElse: null);
+                                    },
+                                  ),
+                                  Row(
+                                    children: [
+                                      Text("Assets Code :"),
+                                      Text(
+                                          "${controller.dropdownMapperData[mapData['value']]?.asset_code ?? ''}")
+                                    ],
+                                  ),
+                                  Row(
+                                    children: [
+                                      Text("Assets type :"),
+                                      Text(
+                                          "${controller.dropdownMapperData[mapData['value']]?.asset_type ?? ''}")
+                                    ],
+                                  ),
+                                  Row(
+                                    children: [
+                                      Text("Assets Category :"),
+                                      Text(
+                                          "${controller.dropdownMapperData[mapData['value']]?.cat_name ?? ''}")
+                                    ],
+                                  )
+                                ],
+                              ),
+                            )
+                          : (mapData['key'] == "Paid_By")
+                              ? Padding(
+                                  padding: const EdgeInsets.only(
+                                      left: 10, right: 10, top: 10),
+                                  child: Column(
+                                    mainAxisAlignment: MainAxisAlignment.start,
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
+                                    children: [
+                                      DropdownWebStock(
+                                        width:
+                                            MediaQuery.of(context).size.width,
+                                        dropdownList: controller.paid,
+                                        selectedValue: mapData["value"],
+                                        onValueChanged: (list, selectedValue) {
+                                          print('paifcghb:${controller.paid}');
+                                          print({selectedValue: selectedValue});
+                                          mapData["value"] = selectedValue;
+                                          controller.paiddropdownMapperData[
+                                                  selectedValue] =
+                                              list.firstWhere(
+                                                  (element) =>
+                                                      element.name ==
+                                                      selectedValue,
+                                                  orElse: null);
+                                        },
+                                      ),
+                                    ],
+                                  ),
                                 )
-                              ],
-                            ),
-                          )
-                        : (mapData['key'] == "Paid_By")
-                            ? Padding(
-                                padding:
-                                    const EdgeInsets.only(left: 10, right: 10),
-                                child: DropdownWebStock(
-                                  width: MediaQuery.of(context).size.width,
-                                  dropdownList: controller.paid,
-                                  selectedValue: mapData["value"],
-                                  onValueChanged: (list, selectedValue) {
-                                    print('paifcghb:${controller.paid}');
-                                    print({selectedValue: selectedValue});
-                                    mapData["value"] = selectedValue;
-                                    controller.paiddropdownMapperData[
-                                            selectedValue] =
-                                        list.firstWhere(
-                                            (element) =>
-                                                element.name == selectedValue,
-                                            orElse: null);
-                                  },
-                                ),
-                              )
-                            : (mapData['key'] == "Order") ||
-                                    (mapData['key'] == "Cost")
-                                ? Container(
-
-                                    // padding: EdgeInsets.all(value),
-                                    decoration: BoxDecoration(
-                                      boxShadow: [
-                                        BoxShadow(
-                                          color: Colors.black26,
-                                          offset: const Offset(
-                                            5.0,
-                                            5.0,
-                                          ),
-                                          blurRadius: 5.0,
-                                          spreadRadius: 1.0,
-                                        ),
-                                      ],
-                                      color: ColorValues.whiteColor,
-                                      borderRadius: BorderRadius.circular(5),
-                                    ),
-                                    child: LoginCustomTextfield(
-                                      width: (Get.width * .4),
-                                      keyboardType: TextInputType.number,
-                                      inputFormatters: <TextInputFormatter>[
-                                        FilteringTextInputFormatter.digitsOnly
-                                      ],
-                                      maxLine: 1,
-                                      textController: new TextEditingController(
-                                          text: mapData["value"] ?? ''),
-                                      onChanged: (txt) {
-                                        mapData["value"] = txt;
-                                      },
-                                    ))
-                                : Text(mapData['key'] ?? ''),
-                  );
-                }).toList(),
-              );
-            }).toList(),
+                              : (mapData['key'] == "Order") ||
+                                      (mapData['key'] == "Cost")
+                                  ? Padding(
+                                      padding: EdgeInsets.only(top: 10),
+                                      child: Column(
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.start,
+                                        crossAxisAlignment:
+                                            CrossAxisAlignment.start,
+                                        children: [
+                                          Container(
+                                              decoration: BoxDecoration(
+                                                boxShadow: [
+                                                  BoxShadow(
+                                                    color: Colors.black26,
+                                                    offset: const Offset(
+                                                      5.0,
+                                                      5.0,
+                                                    ),
+                                                    blurRadius: 5.0,
+                                                    spreadRadius: 1.0,
+                                                  ),
+                                                ],
+                                                color: ColorValues.whiteColor,
+                                                borderRadius:
+                                                    BorderRadius.circular(5),
+                                              ),
+                                              child: LoginCustomTextfield(
+                                                width: (Get.width * .4),
+                                                keyboardType:
+                                                    TextInputType.number,
+                                                inputFormatters: <
+                                                    TextInputFormatter>[
+                                                  FilteringTextInputFormatter
+                                                      .digitsOnly
+                                                ],
+                                                maxLine: 1,
+                                                textController:
+                                                    new TextEditingController(
+                                                        text:
+                                                            mapData["value"] ??
+                                                                ''),
+                                                onChanged: (txt) {
+                                                  mapData["value"] = txt;
+                                                },
+                                              )),
+                                        ],
+                                      ),
+                                    )
+                                  : Text(mapData['key'] ?? ''),
+                    );
+                  }).toList(),
+                );
+              }).toList(),
+            ),
           ),
-        ),
-      ]),
+        ]),
+      ),
     );
 
     // Container(

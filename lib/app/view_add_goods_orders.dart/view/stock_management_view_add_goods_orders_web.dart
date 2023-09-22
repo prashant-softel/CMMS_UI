@@ -697,8 +697,10 @@ class _ViewAddGoodsOrdersWebState extends State<ViewAddGoodsOrdersWeb> {
                               ),
                               Container(
                                 margin: Dimens.edgeInsets20,
-                                height: 300,
-                                // height: ((controller.goDetails!.value.length) * 80) + 170,
+                                // height: 300,
+                                height: ((controller.goDetails!.value.length) *
+                                        80) +
+                                    170,
                                 decoration: BoxDecoration(
                                   border: Border.all(
                                     color:
