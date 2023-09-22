@@ -240,6 +240,11 @@ class StockManagementAddGoodsOrdersController extends GetxController {
             "value": '${element.ordered_qty}',
             // 'id': '${element.assetItemID}'
           },
+          {
+            'key': "Requested",
+            "value": '${element.requested_qty}',
+            // 'id': '${element.assetItemID}'
+          },
         ]);
         // rowItem.value.add([
         //   {
@@ -399,6 +404,7 @@ class StockManagementAddGoodsOrdersController extends GetxController {
       {'key': "Paid_By", "value": 'Please Select', "id": ''},
       {'key': "Cost", "value": ''},
       {'key': "Order", "value": ''},
+      {'key': "Requested", "value": ''},
     ]);
   }
 
@@ -421,15 +427,15 @@ class StockManagementAddGoodsOrdersController extends GetxController {
     List<Items> items = [];
     rowItem.value.forEach((element) {
       Items item = Items(
-          requested_qty: 0,
           goItemID: 0,
           received_qty: 0,
           lost_qty: 0,
           accepted_qty: 0,
           damaged_qty: 0,
+          requested_qty: int.tryParse(element[2]["value"] ?? '0'),
           assetItemID: dropdownMapperData[element[0]["value"]]?.id,
-          cost: int.tryParse(element[2]["value"] ?? '0'),
-          ordered_qty: int.tryParse(element[3]["value"] ?? '0'),
+          cost: int.tryParse(element[3]["value"] ?? '0'),
+          ordered_qty: int.tryParse(element[4]["value"] ?? '0'),
           paid_by_ID: paiddropdownMapperData[element[1]["value"]]?.id);
       items.add(item);
     });
@@ -494,11 +500,11 @@ class StockManagementAddGoodsOrdersController extends GetxController {
         lost_qty: 0,
         accepted_qty: 0,
         damaged_qty: 0,
-        requested_qty: 0,
+        requested_qty: int.tryParse(element[2]["value"] ?? '0'),
         goItemID: int.tryParse('${element[0]["id"]}'),
         assetItemID: int.tryParse('${element[0]["assetItemID"]}'),
-        cost: int.tryParse(element[2]["value"] ?? '0'),
-        ordered_qty: int.tryParse(element[3]["value"] ?? '0'),
+        cost: int.tryParse(element[3]["value"] ?? '0'),
+        ordered_qty: int.tryParse(element[4]["value"] ?? '0'),
         paid_by_ID: int.tryParse('${element[1]["id"]}'),
       );
 
