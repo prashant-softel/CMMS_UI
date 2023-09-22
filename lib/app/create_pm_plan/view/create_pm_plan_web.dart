@@ -298,9 +298,12 @@ class _CreatePmPlanWebState extends State<CreatePmPlanWeb> {
                                                 Expanded(
                                                   child: ScrollableTableView(
                                                     columns: [
-                                                      "Facility Id",
-                                                      'Facility name',
-                                                      'Location',
+                                                      "Sr. No.",
+                                                      'Assest name',
+                                                      'Assest ID',
+                                                      'Parent Assest',
+                                                      'Module Quantity',
+                                                      "Checklist"
                                                     ].map((column) {
                                                       return TableViewColumn(
                                                           minWidth:
@@ -320,9 +323,12 @@ class _CreatePmPlanWebState extends State<CreatePmPlanWeb> {
                                                                   index];
 
                                                           return [
-                                                            '${facilityNameDetails?.id ?? ''}',
+                                                            '1',
                                                             '${facilityNameDetails?.name ?? ''}',
-                                                            '${facilityNameDetails?.blockName ?? ''}',
+                                                            '${facilityNameDetails?.id ?? ''}',
+                                                            '${facilityNameDetails?.parentName ?? ''}',
+                                                            '${facilityNameDetails?.categoryId ?? ''}',
+                                                            "check"
                                                           ];
                                                         },
                                                       ),

@@ -771,12 +771,14 @@ class _ViewAddGoodsOrdersWebState extends State<ViewAddGoodsOrdersWeb> {
                                               fontSize: 15,
                                               fontWeight: FontWeight.bold),
                                         )),
-                                        // DataColumn2(
-                                        //     fixedWidth: 110,
-                                        //     label: Text(
-                                        //       "Received  Qty",
-                                        //       style: TextStyle(fontSize: 15, fontWeight: FontWeight.bold),
-                                        //     )),
+                                        DataColumn2(
+                                            fixedWidth: 210,
+                                            label: Text(
+                                              "Requested  Qty",
+                                              style: TextStyle(
+                                                  fontSize: 15,
+                                                  fontWeight: FontWeight.bold),
+                                            )),
                                         DataColumn2(
                                             fixedWidth: 110,
                                             label: Text(
@@ -928,42 +930,45 @@ class _ViewAddGoodsOrdersWebState extends State<ViewAddGoodsOrdersWeb> {
                                                           ),
                                                         )
                                                       : (mapData['key'] ==
-                                                                  "Order") ||
-                                                              (mapData['key'] ==
-                                                                  "Cost")
-                                                          ? IgnorePointer(
-                                                              child: Padding(
-                                                                padding: EdgeInsets
-                                                                    .only(
-                                                                        top:
-                                                                            10),
-                                                                child: Column(
-                                                                  mainAxisAlignment:
-                                                                      MainAxisAlignment
-                                                                          .start,
-                                                                  crossAxisAlignment:
-                                                                      CrossAxisAlignment
-                                                                          .start,
-                                                                  children: [
-                                                                    Container(
-                                                                        decoration:
-                                                                            BoxDecoration(
-                                                                          boxShadow: [
-                                                                            BoxShadow(
-                                                                              color: Colors.black26,
-                                                                              offset: const Offset(
-                                                                                5.0,
-                                                                                5.0,
-                                                                              ),
-                                                                              blurRadius: 5.0,
-                                                                              spreadRadius: 1.0,
+                                                              "Requested")
+                                                          ? Padding(
+                                                              padding:
+                                                                  const EdgeInsets
+                                                                          .only(
+                                                                      top: 10),
+                                                              child: Column(
+                                                                mainAxisAlignment:
+                                                                    MainAxisAlignment
+                                                                        .start,
+                                                                crossAxisAlignment:
+                                                                    CrossAxisAlignment
+                                                                        .start,
+                                                                children: [
+                                                                  Container(
+                                                                      decoration:
+                                                                          BoxDecoration(
+                                                                        boxShadow: [
+                                                                          BoxShadow(
+                                                                            color:
+                                                                                Colors.black26,
+                                                                            offset:
+                                                                                const Offset(
+                                                                              5.0,
+                                                                              5.0,
                                                                             ),
-                                                                          ],
-                                                                          color:
-                                                                              ColorValues.whiteColor,
-                                                                          borderRadius:
-                                                                              BorderRadius.circular(5),
-                                                                        ),
+                                                                            blurRadius:
+                                                                                5.0,
+                                                                            spreadRadius:
+                                                                                1.0,
+                                                                          ),
+                                                                        ],
+                                                                        color: ColorValues
+                                                                            .whiteColor,
+                                                                        borderRadius:
+                                                                            BorderRadius.circular(5),
+                                                                      ),
+                                                                      child:
+                                                                          IgnorePointer(
                                                                         child:
                                                                             LoginCustomTextfield(
                                                                           width:
@@ -983,13 +988,68 @@ class _ViewAddGoodsOrdersWebState extends State<ViewAddGoodsOrdersWeb> {
                                                                             mapData["value"] =
                                                                                 txt;
                                                                           },
-                                                                        )),
-                                                                  ],
-                                                                ),
+                                                                        ),
+                                                                      )),
+                                                                ],
                                                               ),
                                                             )
-                                                          : Text(
-                                                              mapData['key'] ??
+                                                          : (mapData['key'] ==
+                                                                      "Order") ||
+                                                                  (mapData[
+                                                                          'key'] ==
+                                                                      "Cost")
+                                                              ? IgnorePointer(
+                                                                  child:
+                                                                      Padding(
+                                                                    padding: EdgeInsets
+                                                                        .only(
+                                                                            top:
+                                                                                10),
+                                                                    child:
+                                                                        Column(
+                                                                      mainAxisAlignment:
+                                                                          MainAxisAlignment
+                                                                              .start,
+                                                                      crossAxisAlignment:
+                                                                          CrossAxisAlignment
+                                                                              .start,
+                                                                      children: [
+                                                                        Container(
+                                                                            decoration:
+                                                                                BoxDecoration(
+                                                                              boxShadow: [
+                                                                                BoxShadow(
+                                                                                  color: Colors.black26,
+                                                                                  offset: const Offset(
+                                                                                    5.0,
+                                                                                    5.0,
+                                                                                  ),
+                                                                                  blurRadius: 5.0,
+                                                                                  spreadRadius: 1.0,
+                                                                                ),
+                                                                              ],
+                                                                              color: ColorValues.whiteColor,
+                                                                              borderRadius: BorderRadius.circular(5),
+                                                                            ),
+                                                                            child:
+                                                                                LoginCustomTextfield(
+                                                                              width: (Get.width * .4),
+                                                                              keyboardType: TextInputType.number,
+                                                                              inputFormatters: <TextInputFormatter>[
+                                                                                FilteringTextInputFormatter.digitsOnly
+                                                                              ],
+                                                                              maxLine: 1,
+                                                                              textController: new TextEditingController(text: mapData["value"] ?? ''),
+                                                                              onChanged: (txt) {
+                                                                                mapData["value"] = txt;
+                                                                              },
+                                                                            )),
+                                                                      ],
+                                                                    ),
+                                                                  ),
+                                                                )
+                                                              : Text(mapData[
+                                                                      'key'] ??
                                                                   ''),
                                             );
                                           }).toList(),
