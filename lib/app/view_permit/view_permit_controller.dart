@@ -249,9 +249,14 @@ class ViewPermitController extends GetxController {
   ///Employee List
   RxList<ListEmployees?>? listEmployee = <ListEmployees?>[].obs; //ListEmployees
 
-  ///Extend Condition
+  ///Extend Condition List
+  RxList<ExtendConditions?>? listExtendCondition = <ExtendConditions?>[].obs; //Extend Condition List
 
-  RxList<ExtendConditions?>? listExtendCondition = <ExtendConditions?>[].obs; //Extend Condition
+  ///Cancel Condition List
+  RxList<CancelConditions?>? listCancelCondition = <CancelConditions?>[].obs; //Cancel Condition List
+
+  ///Close Condition List
+  RxList<CloseConditions?>? listCloseCondition = <CloseConditions?>[].obs; //Close Condition List
 
   ///Safety Measure List
   RxList<ListSafetyQuestion?>? safetyList = <ListSafetyQuestion?>[].obs;
@@ -655,13 +660,15 @@ class ViewPermitController extends GetxController {
       listAssociatedJobs?.value = viewPermitDetailsModel.value?.lstAssociatedJobs ?? [];
       listIsolation?.value = viewPermitDetailsModel.value?.lstIsolation ?? [];
       listExtendCondition?.value = viewPermitDetailsModel.value?.extendDetails?.conditions ?? [];
+      listCancelCondition?.value = viewPermitDetailsModel.value?.cancelDetails?.conditions ?? [];
+      listCloseCondition?.value = viewPermitDetailsModel.value?.closeDetails?.conditions ?? [];
       // selectedTypePermit.value = newPermitDetailsModel.value?.permitTypeName ?? '';
       // // selectedJobTypeList.value = newPermitDetailsModel.value.
       // selectedPermitIssuerLists.value = newPermitDetailsModel.value?.issuedByName ?? '';
       // selectedPermitApproverLists.value = newPermitDetailsModel.value?.approvedByName ?? '';
       // listEmployee?.value = newPermitDetailsModel.value?.lstEmp ?? [];
       // safetyList?.value = newPermitDetailsModel.value?.safety_question_list ?? [];
-      print('EmployeeList:${listExtendCondition?.value}');
+      // print('EmployeeList:${listExtendCondition?.value}');
     }
   }
 
