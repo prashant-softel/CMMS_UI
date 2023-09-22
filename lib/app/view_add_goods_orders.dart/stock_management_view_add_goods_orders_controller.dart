@@ -55,12 +55,13 @@ class ViewAddGoodsOrdersController extends GetxController {
 
   Rx<List<List<Map<String, String>>>> rowItem =
       Rx<List<List<Map<String, String>>>>([]);
-  Map<String, CreateGoModel> dropdownMapperData = {};
+  Map<String, GetAssetItemsModel> dropdownMapperData = {};
   Map<String, PaiedModel> paiddropdownMapperData = {};
   RxList<GetPurchaseDetailsByIDModel?>? getPurchaseDetailsByIDModelList =
       <GetPurchaseDetailsByIDModel?>[].obs;
   Rx<GetPurchaseDetailsByIDModel?> getPurchaseDetailsByIDModel =
       GetPurchaseDetailsByIDModel().obs;
+  RxList<GoDetails?>? goDetails = <GoDetails?>[].obs;
 
 //all textfield tc
   var challanNoCtrlr = TextEditingController();
