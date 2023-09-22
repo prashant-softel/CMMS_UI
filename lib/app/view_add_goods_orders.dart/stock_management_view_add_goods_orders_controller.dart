@@ -134,6 +134,7 @@ class ViewAddGoodsOrdersController extends GetxController {
           {
             "key": "Drop_down",
             "value": '${element.assetItem_Name}',
+            // "asset_code": '${element.asset_code}',
             'assetItemID': '${element.assetItemID}',
             'id': '${element.id}'
           },

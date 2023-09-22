@@ -38,16 +38,16 @@ class CreatePmPlanController extends GetxController {
       <InventoryCategoryModel>[].obs;
   Rx<String> selectedInventory = ''.obs;
   Rx<bool> isSelectedInventory = true.obs;
-  RxList<InventoryModel?> selectedEquipmentNameList = <InventoryModel>[].obs;
+  RxList<InventoryModel?> selectedInventoryNameList = <InventoryModel>[].obs;
   int selectedInventoryCategoryId = 0;
   RxList<InventoryModel?> filteredInventoryNameList = <InventoryModel>[].obs;
 
   StreamSubscription<int>? facilityIdStreamSubscription;
   int facilityId = 0;
   //Equipment Name List
-  RxList<InventoryModel?> equipmentNameList = <InventoryModel>[].obs;
-  RxList<InventoryModel?> filteredEquipmentNameList = <InventoryModel>[].obs;
-  RxList<int> selectedEquipmentNameIdList = <int>[].obs;
+  RxList<InventoryModel?> inventoryNameList = <InventoryModel>[].obs;
+  // RxList<InventoryModel?> filteredNameList = <InventoryModel>[].obs;
+  RxList<int> selectedInventoryNameIdList = <int>[].obs;
   Map<dynamic, dynamic> inventory_map = {};
 
   var planTittleCtrlr = TextEditingController();
@@ -72,14 +72,14 @@ class CreatePmPlanController extends GetxController {
   }
 
   Future<void> inventoryList(int facilityId) async {
-    equipmentNameList.value = <InventoryModel>[];
+    inventoryNameList.value = <InventoryModel>[];
     final _equipmentNameList = await createPmPlanPresenter.inventoryList(
       isLoading: true,
       facilityId: facilityId,
     );
     if (_equipmentNameList != null) {
       for (var equipmentName in _equipmentNameList) {
-        equipmentNameList.add(equipmentName);
+        inventoryNameList.add(equipmentName);
       }
     }
   }
@@ -108,18 +108,20 @@ class CreatePmPlanController extends GetxController {
   }
 
   void facilityNameSelected(_selectedfacilityNameIds) {
-    selectedEquipmentNameIdList.value = <int>[];
     filteredInventoryNameList.value = <InventoryModel>[];
-    late int emp_id = 0;
+    // late int emp_id = 0;
     for (var _selectedfacilityNameId in _selectedfacilityNameIds) {
-      selectedEquipmentNameIdList.add(_selectedfacilityNameId);
-      InventoryModel? e = filteredInventoryNameList.firstWhere((element) {
+      selectedInventoryNameIdList.value = <int>[];
+
+      selectedInventoryNameIdList.add(_selectedfacilityNameId);
+      InventoryModel? e = inventoryNameList.firstWhere((element) {
         return element?.id == _selectedfacilityNameId;
       });
       filteredInventoryNameList.add(e);
     }
+    print({"filteredInventoryNameList": filteredInventoryNameList});
 
-    inventory_map[emp_id] = selectedEquipmentNameIdList;
+    // inventory_map[emp_id] = selectedInventoryNameIdList;
   }
 
   void onValueChanged(dynamic list, dynamic value) {
@@ -142,16 +144,20 @@ class CreatePmPlanController extends GetxController {
         break;
       case RxList<InventoryModel>:
         {
-          for (var equipCat in selectedEquipmentNameList) {
-            int equipCatIndex =
-                equipmentNameList.indexWhere((x) => x?.name == value);
-            selectedEquipmentNameIdList.add(equipCatIndex);
-            // selectedInventoryCategoryId =
-            //     equipmentCategoryList[equipCatIndex]?.id ?? 0;
-            // selectedInventory.value = value;
-            facilityNameSelected(selectedEquipmentNameIdList);
+          if (value != null) {
+            for (var selectedItem in value) {
+              int equipCatIndex =
+                  inventoryNameList.indexWhere((x) => x?.name == selectedItem);
+              if (equipCatIndex >= 0) {
+                selectedInventoryNameIdList
+                    .add(inventoryNameList[equipCatIndex]?.id ?? 0);
+              }
+            }
+          }
 
-            print('First Category Id:$selectedEquipmentNameIdList');
+          print('First Category Id:$selectedInventoryNameIdList');
+          if (selectedInventoryNameIdList.length > 0) {
+            facilityNameSelected(selectedInventoryNameIdList);
           }
         }
         break;
