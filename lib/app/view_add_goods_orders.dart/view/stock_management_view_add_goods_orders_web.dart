@@ -806,14 +806,15 @@ class _ViewAddGoodsOrdersWebState extends State<ViewAddGoodsOrdersWeb> {
                                                                 .only(
                                                           left: 10,
                                                           right: 10,
+                                                          top: 10,
                                                         ),
                                                         child: Column(
                                                           mainAxisAlignment:
                                                               MainAxisAlignment
-                                                                  .center,
+                                                                  .start,
                                                           crossAxisAlignment:
                                                               CrossAxisAlignment
-                                                                  .center,
+                                                                  .start,
                                                           children: [
                                                             DropdownWebStock(
                                                               width:
@@ -846,21 +847,24 @@ class _ViewAddGoodsOrdersWebState extends State<ViewAddGoodsOrdersWeb> {
                                                             ),
                                                             // Row(
                                                             //   children: [
-                                                            //     Text("Assets Code :"),
+                                                            //     Text(
+                                                            //         "Assets Code :"),
                                                             //     Text(
                                                             //         "${controller.dropdownMapperData[mapData['value']]?.asset_code ?? ''}")
                                                             //   ],
                                                             // ),
                                                             // Row(
                                                             //   children: [
-                                                            //     Text("Assets type :"),
+                                                            //     Text(
+                                                            //         "Assets type :"),
                                                             //     Text(
                                                             //         "${controller.dropdownMapperData[mapData['value']]?.asset_type ?? ''}")
                                                             //   ],
                                                             // ),
                                                             // Row(
                                                             //   children: [
-                                                            //     Text("Assets Category :"),
+                                                            //     Text(
+                                                            //         "Assets Category :"),
                                                             //     Text(
                                                             //         "${controller.dropdownMapperData[mapData['value']]?.cat_name ?? ''}")
                                                             //   ],
@@ -877,39 +881,47 @@ class _ViewAddGoodsOrdersWebState extends State<ViewAddGoodsOrdersWeb> {
                                                                 const EdgeInsets
                                                                         .only(
                                                                     left: 10,
-                                                                    right: 10),
-                                                            child:
+                                                                    right: 10,
+                                                                    top: 10),
+                                                            child: Column(
+                                                              mainAxisAlignment:
+                                                                  MainAxisAlignment
+                                                                      .start,
+                                                              crossAxisAlignment:
+                                                                  CrossAxisAlignment
+                                                                      .start,
+                                                              children: [
                                                                 DropdownWebStock(
-                                                              width:
-                                                                  MediaQuery.of(
+                                                                  width: MediaQuery.of(
                                                                           context)
                                                                       .size
                                                                       .width,
-                                                              dropdownList:
-                                                                  controller
-                                                                      .paid,
-                                                              selectedValue:
-                                                                  mapData[
-                                                                      "value"],
-                                                              onValueChanged: (list,
-                                                                  selectedValue) {
-                                                                print(
-                                                                    'paifcghb:${controller.paid}');
-                                                                print({
+                                                                  dropdownList:
+                                                                      controller
+                                                                          .paid,
                                                                   selectedValue:
-                                                                      selectedValue
-                                                                });
-                                                                mapData["value"] =
-                                                                    selectedValue;
-                                                                controller.paiddropdownMapperData[
-                                                                        selectedValue] =
-                                                                    list.firstWhere(
+                                                                      mapData[
+                                                                          "value"],
+                                                                  onValueChanged:
+                                                                      (list,
+                                                                          selectedValue) {
+                                                                    print(
+                                                                        'paifcghb:${controller.paid}');
+                                                                    print({
+                                                                      selectedValue:
+                                                                          selectedValue
+                                                                    });
+                                                                    mapData["value"] =
+                                                                        selectedValue;
+                                                                    controller.paiddropdownMapperData[selectedValue] = list.firstWhere(
                                                                         (element) =>
                                                                             element.name ==
                                                                             selectedValue,
                                                                         orElse:
                                                                             null);
-                                                              },
+                                                                  },
+                                                                ),
+                                                              ],
                                                             ),
                                                           ),
                                                         )
@@ -918,56 +930,61 @@ class _ViewAddGoodsOrdersWebState extends State<ViewAddGoodsOrdersWeb> {
                                                               (mapData['key'] ==
                                                                   "Cost")
                                                           ? IgnorePointer(
-                                                              child: Container(
-
-                                                                  // padding: EdgeInsets.all(value),
-                                                                  decoration:
-                                                                      BoxDecoration(
-                                                                    boxShadow: [
-                                                                      BoxShadow(
-                                                                        color: Colors
-                                                                            .black26,
-                                                                        offset:
-                                                                            const Offset(
-                                                                          5.0,
-                                                                          5.0,
+                                                              child: Padding(
+                                                                padding: EdgeInsets
+                                                                    .only(
+                                                                        top:
+                                                                            10),
+                                                                child: Column(
+                                                                  mainAxisAlignment:
+                                                                      MainAxisAlignment
+                                                                          .start,
+                                                                  crossAxisAlignment:
+                                                                      CrossAxisAlignment
+                                                                          .start,
+                                                                  children: [
+                                                                    Container(
+                                                                        decoration:
+                                                                            BoxDecoration(
+                                                                          boxShadow: [
+                                                                            BoxShadow(
+                                                                              color: Colors.black26,
+                                                                              offset: const Offset(
+                                                                                5.0,
+                                                                                5.0,
+                                                                              ),
+                                                                              blurRadius: 5.0,
+                                                                              spreadRadius: 1.0,
+                                                                            ),
+                                                                          ],
+                                                                          color:
+                                                                              ColorValues.whiteColor,
+                                                                          borderRadius:
+                                                                              BorderRadius.circular(5),
                                                                         ),
-                                                                        blurRadius:
-                                                                            5.0,
-                                                                        spreadRadius:
-                                                                            1.0,
-                                                                      ),
-                                                                    ],
-                                                                    color: ColorValues
-                                                                        .whiteColor,
-                                                                    borderRadius:
-                                                                        BorderRadius
-                                                                            .circular(5),
-                                                                  ),
-                                                                  child:
-                                                                      LoginCustomTextfield(
-                                                                    width:
-                                                                        (Get.width *
-                                                                            .4),
-                                                                    keyboardType:
-                                                                        TextInputType
-                                                                            .number,
-                                                                    inputFormatters: <
-                                                                        TextInputFormatter>[
-                                                                      FilteringTextInputFormatter
-                                                                          .digitsOnly
-                                                                    ],
-                                                                    maxLine: 1,
-                                                                    textController:
-                                                                        new TextEditingController(
-                                                                            text:
-                                                                                mapData["value"] ?? ''),
-                                                                    onChanged:
-                                                                        (txt) {
-                                                                      mapData["value"] =
-                                                                          txt;
-                                                                    },
-                                                                  )),
+                                                                        child:
+                                                                            LoginCustomTextfield(
+                                                                          width:
+                                                                              (Get.width * .4),
+                                                                          keyboardType:
+                                                                              TextInputType.number,
+                                                                          inputFormatters: <
+                                                                              TextInputFormatter>[
+                                                                            FilteringTextInputFormatter.digitsOnly
+                                                                          ],
+                                                                          maxLine:
+                                                                              1,
+                                                                          textController:
+                                                                              new TextEditingController(text: mapData["value"] ?? ''),
+                                                                          onChanged:
+                                                                              (txt) {
+                                                                            mapData["value"] =
+                                                                                txt;
+                                                                          },
+                                                                        )),
+                                                                  ],
+                                                                ),
+                                                              ),
                                                             )
                                                           : Text(
                                                               mapData['key'] ??

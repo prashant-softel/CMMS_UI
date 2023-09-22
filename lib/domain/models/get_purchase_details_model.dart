@@ -38,6 +38,7 @@ class GetPurchaseDetailsByIDModel {
   String? purchaseDate;
   int? location_ID;
   String? facilityName;
+
   List<GoDetails>? goDetails;
 
   GetPurchaseDetailsByIDModel({
@@ -76,6 +77,7 @@ class GetPurchaseDetailsByIDModel {
       GetPurchaseDetailsByIDModel(
         facilityName: parsedJson["facilityName"] ?? "",
         id: parsedJson["id"] ?? "",
+
         facility_id: parsedJson["facility_id"] ?? "",
         // asset_type_ID: parsedJson["asset_type_ID"] ?? "",
         vendorId: parsedJson["vendorID"] ?? "",
@@ -110,6 +112,7 @@ class GetPurchaseDetailsByIDModel {
 
   Map<String, dynamic> toJson() => {
         "id": id,
+
         "facilityName": facilityName,
         "facility_id": facility_id,
         // "asset_type_ID": asset_type_ID,
@@ -158,6 +161,9 @@ class GoDetails {
   int? asset_type_ID;
   String? paid_by_name;
   int? paid_by_ID;
+  String? cat_name;
+  String? asset_type;
+  String? asset_code;
 
   GoDetails({
     this.id,
@@ -177,6 +183,9 @@ class GoDetails {
     this.asset_type_ID,
     this.paid_by_name,
     this.paid_by_ID,
+    this.cat_name,
+    this.asset_type,
+    this.asset_code,
   });
 
   GoDetails.fromJson(Map<String, dynamic> json) {
@@ -197,6 +206,9 @@ class GoDetails {
     asset_type_ID = json['asset_type_ID'];
     paid_by_name = json['paid_by_name'];
     paid_by_ID = json['paid_by_ID'];
+    cat_name = json['cat_name'];
+    asset_type = json['asset_type'];
+    asset_code = json['asset_code'];
   }
 
   Map<String, dynamic> toJson() {
@@ -218,6 +230,9 @@ class GoDetails {
     data['asset_type_ID'] = this.asset_type_ID;
     data['paid_by_name'] = this.paid_by_name;
     data['paid_by_ID'] = this.paid_by_ID;
+    data['cat_name'] = this.cat_name;
+    data['asset_type'] = this.asset_type;
+    data['asset_code'] = this.asset_code;
 
     return data;
   }

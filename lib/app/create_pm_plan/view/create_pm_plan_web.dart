@@ -242,9 +242,9 @@ class _CreatePmPlanWebState extends State<CreatePmPlanWeb> {
                               ),
                               MultipDropdownWebWidget(
                                 width: (MediaQuery.of(context).size.width * .2),
-                                dropdownList: controller.equipmentNameList,
+                                dropdownList: controller.inventoryNameList,
                                 selectedItems:
-                                    controller.selectedEquipmentNameList,
+                                    controller.selectedInventoryNameList,
                                 onValueChanged: controller.onValueChanged,
                               ),
                               Dimens.boxHeight25,
