@@ -156,6 +156,10 @@ class ViewPermitController extends GetxController {
   var startDateTimeCtrlr = TextEditingController();
   var validTillTimeCtrlr = TextEditingController();
 
+  ///
+  // var issuedAtTimeCtrlr = TextEditingController();
+  
+
   var jobDescriptionCtrlr = TextEditingController();
   var titleTextCtrlr = TextEditingController();
 

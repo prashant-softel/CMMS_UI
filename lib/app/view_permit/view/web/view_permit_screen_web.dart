@@ -1451,7 +1451,7 @@ class ViewPermitWebScreen extends GetView<ViewPermitController> {
                                             BoxShadow(
                                               color: controller.viewPermitDetailsModel.value?.ptwStatus == 125 ||
                                                       controller.viewPermitDetailsModel.value?.ptwStatus == 121 ||
-                                                    controller.viewPermitDetailsModel.value?.ptwStatus == 135
+                                                      controller.viewPermitDetailsModel.value?.ptwStatus == 135
                                                   ? ColorValues.approveColor
                                                   : ColorValues.appRedColor,
                                             ),
@@ -1670,70 +1670,74 @@ class ViewPermitWebScreen extends GetView<ViewPermitController> {
                                             //   color: ColorValues.greyLightColour,
                                             // ),
                                             Expanded(
-                                             
-                                              child:DataTable2(
-                                          border: TableBorder.all(color: Color.fromARGB(255, 206, 229, 234)),
-                                          columns: [
-                                            DataColumn(
-                                                label: Text(
-                                              "Job Id",
-                                              style: TextStyle(fontSize: 15, fontWeight: FontWeight.bold),
-                                            )),
-                                            DataColumn(
-                                                label: Text(
-                                              "Job Title",
-                                              style: TextStyle(fontSize: 15, fontWeight: FontWeight.bold),
-                                            )),
-                                             DataColumn(
-                                                label: Text(
-                                              "Equipment\nCategory",
-                                              style: TextStyle(fontSize: 15, fontWeight: FontWeight.bold),
-                                              
-                                            )),
-                                             DataColumn(
-                                                label: Text(
-                                              "Equipment",
-                                              style: TextStyle(fontSize: 15, fontWeight: FontWeight.bold),
-                                            )),
-                                             DataColumn(
-                                                label: Text(
-                                              "Breakdown\nTime",
-                                              style: TextStyle(fontSize: 15, fontWeight: FontWeight.bold),
-                                            )),
-                                             DataColumn(
-                                                label: Text(
-                                              "Assigned To",
-                                              style: TextStyle(fontSize: 15, fontWeight: FontWeight.bold),
-                                              
-                                            )),
-                                             DataColumn(
-                                                label: Text(
-                                              "Status",
-                                              style: TextStyle(fontSize: 15, fontWeight: FontWeight.bold),
-                                            )),
-                                          ],
-                                          rows: List<DataRow>.generate(
-                                            controller.listAssociatedJobs?.length ?? 0,
-                                            (index) => DataRow(cells: [
-                                              DataCell(GestureDetector(
-                                                onTap: () {
-                                                   controller.viewJobDetails(controller.listAssociatedJobs?[index]?.jobId);
-                                                },
-                                                child: Text(controller.listAssociatedJobs?[index]?.jobId.toString() ?? '', style: TextStyle(
-                                                                        decoration: TextDecoration.underline,
-                                                                        decorationStyle: TextDecorationStyle.solid,
-                                                                        color: Color.fromARGB(255, 5, 92, 163),
-                                                                      ),))),
-                                               DataCell(Text(controller.listAssociatedJobs?[index]?.title.toString() ?? '')),
-                                               DataCell(Text(controller.listAssociatedJobs?[index]?.equipmentCat.toString() ?? '')),
-                                               DataCell(Text(controller.listAssociatedJobs?[index]?.equipment.toString() ?? '',overflow: TextOverflow.ellipsis,),),
-                                               DataCell(Text(controller.listAssociatedJobs?[index]?.breakdownTime.toString() ?? '')),
-                                               DataCell(Text(controller.listAssociatedJobs?[index]?.assignedTo.toString() ?? '')),
-                                               DataCell(Text(controller.listAssociatedJobs?[index]?.status_short.toString() ?? '')),
-
-                                            ]),
-                                          ),
-                                        ),
+                                              child: DataTable2(
+                                                border: TableBorder.all(color: Color.fromARGB(255, 206, 229, 234)),
+                                                columns: [
+                                                  DataColumn(
+                                                      label: Text(
+                                                    "Job Id",
+                                                    style: TextStyle(fontSize: 15, fontWeight: FontWeight.bold),
+                                                  )),
+                                                  DataColumn(
+                                                      label: Text(
+                                                    "Job Title",
+                                                    style: TextStyle(fontSize: 15, fontWeight: FontWeight.bold),
+                                                  )),
+                                                  DataColumn(
+                                                      label: Text(
+                                                    "Equipment\nCategory",
+                                                    style: TextStyle(fontSize: 15, fontWeight: FontWeight.bold),
+                                                  )),
+                                                  DataColumn(
+                                                      label: Text(
+                                                    "Equipment",
+                                                    style: TextStyle(fontSize: 15, fontWeight: FontWeight.bold),
+                                                  )),
+                                                  DataColumn(
+                                                      label: Text(
+                                                    "Breakdown\nTime",
+                                                    style: TextStyle(fontSize: 15, fontWeight: FontWeight.bold),
+                                                  )),
+                                                  DataColumn(
+                                                      label: Text(
+                                                    "Assigned To",
+                                                    style: TextStyle(fontSize: 15, fontWeight: FontWeight.bold),
+                                                  )),
+                                                  DataColumn(
+                                                      label: Text(
+                                                    "Status",
+                                                    style: TextStyle(fontSize: 15, fontWeight: FontWeight.bold),
+                                                  )),
+                                                ],
+                                                rows: List<DataRow>.generate(
+                                                  controller.listAssociatedJobs?.length ?? 0,
+                                                  (index) => DataRow(cells: [
+                                                    DataCell(GestureDetector(
+                                                        onTap: () {
+                                                          controller.viewJobDetails(controller.listAssociatedJobs?[index]?.jobId);
+                                                        },
+                                                        child: Text(
+                                                          controller.listAssociatedJobs?[index]?.jobId.toString() ?? '',
+                                                          style: TextStyle(
+                                                            decoration: TextDecoration.underline,
+                                                            decorationStyle: TextDecorationStyle.solid,
+                                                            color: Color.fromARGB(255, 5, 92, 163),
+                                                          ),
+                                                        ))),
+                                                    DataCell(Text(controller.listAssociatedJobs?[index]?.title.toString() ?? '')),
+                                                    DataCell(Text(controller.listAssociatedJobs?[index]?.equipmentCat.toString() ?? '')),
+                                                    DataCell(
+                                                      Text(
+                                                        controller.listAssociatedJobs?[index]?.equipment.toString() ?? '',
+                                                        overflow: TextOverflow.ellipsis,
+                                                      ),
+                                                    ),
+                                                    DataCell(Text(controller.listAssociatedJobs?[index]?.breakdownTime.toString() ?? '')),
+                                                    DataCell(Text(controller.listAssociatedJobs?[index]?.assignedTo.toString() ?? '')),
+                                                    DataCell(Text(controller.listAssociatedJobs?[index]?.status_short.toString() ?? '')),
+                                                  ]),
+                                                ),
+                                              ),
                                             ),
                                           ],
                                         ),
@@ -1900,31 +1904,34 @@ class ViewPermitWebScreen extends GetView<ViewPermitController> {
                                 controller.safetyMeasureList.isEmpty
                                     ? Dimens.box0
                                     : SizedBox(
-                                      width: MediaQuery.of(context).size.width / 1,
-                                      child: Container(
+                                        width: MediaQuery.of(context).size.width / 1,
+                                        child: Container(
                                           margin: Dimens.edgeInsets20,
-                                           height: ((controller.safetyMeasureList.length) * 28) + 180,
+                                          height: ((controller.safetyMeasureList.length) * 28) + 180,
                                           decoration: BoxDecoration(
-                                      border: Border.all(
-                                        color: ColorValues.lightGreyColorWithOpacity35,
-                                        width: 1,
-                                      ),
-                                      boxShadow: [
-                                        BoxShadow(
-                                          color: ColorValues.appBlueBackgroundColor,
-                                          spreadRadius: 2,
-                                          blurRadius: 5,
-                                          offset: Offset(0, 2),
-                                        ),
-                                      ],
-                                         ),
+                                            border: Border.all(
+                                              color: ColorValues.lightGreyColorWithOpacity35,
+                                              width: 1,
+                                            ),
+                                            boxShadow: [
+                                              BoxShadow(
+                                                color: ColorValues.appBlueBackgroundColor,
+                                                spreadRadius: 2,
+                                                blurRadius: 5,
+                                                offset: Offset(0, 2),
+                                              ),
+                                            ],
+                                          ),
                                           child: Column(
                                             crossAxisAlignment: CrossAxisAlignment.start,
                                             children: [
                                               // CustomAppBar(
                                               //   title: 'Following safety Measures taken to carry out the work'.tr,
                                               // ),
-                                              Text('Following safety Measures taken to carry out the work',style: Styles.blue700,),
+                                              Text(
+                                                'Following safety Measures taken to carry out the work',
+                                                style: Styles.blue700,
+                                              ),
                                               Dimens.boxHeight10,
                                               Wrap(
                                                 children: [
@@ -1963,7 +1970,7 @@ class ViewPermitWebScreen extends GetView<ViewPermitController> {
                                             ],
                                           ),
                                         ),
-                                    ),
+                                      ),
 
                                 //Tool box talk
                                 Container(
@@ -2092,67 +2099,119 @@ class ViewPermitWebScreen extends GetView<ViewPermitController> {
                                 //   SizedBox(height: 10),
 
                                 ////Extend Conditions List
-                                 
-                                 controller.viewPermitDetailsModel.value?.ptwStatus == 133 ||
-                                controller.viewPermitDetailsModel.value?.ptwStatus == 135
-                                    
+
+                                controller.viewPermitDetailsModel.value?.ptwStatus == 133 || controller.viewPermitDetailsModel.value?.ptwStatus == 135
                                     ? SizedBox(
-                                      width: MediaQuery.of(context).size.width / 1,
-                                      child: Container(
-                                          margin: Dimens.edgeInsets20,
-                                           height: ((controller.listExtendCondition!.length) * 20) + 130,
-                                          decoration: BoxDecoration(
-                                      border: Border.all(
-                                        color: ColorValues.lightGreyColorWithOpacity35,
-                                        width: 1,
-                                      ),
-                                      boxShadow: [
-                                        BoxShadow(
-                                          color: ColorValues.appBlueBackgroundColor,
-                                          spreadRadius: 2,
-                                          blurRadius: 5,
-                                          offset: Offset(0, 2),
-                                        ),
-                                      ],
-                                         ),
+                                        width: MediaQuery.of(context).size.width / 1,
+                                        child: Padding(
+                                          padding: const EdgeInsets.all(20),
                                           child: Column(
                                             crossAxisAlignment: CrossAxisAlignment.start,
                                             children: [
                                               // CustomAppBar(
                                               //   title: 'Following safety Measures taken to carry out the work'.tr,
                                               // ),
-                                              Text('Extend Condition List',style: Styles.blue700,),
+                                              Text(
+                                                'Extend Condition List',
+                                                style: Styles.blue700,
+                                              ),
                                               Dimens.boxHeight10,
                                               Column(
                                                 children: [
                                                   Column(
                                                     children: [
-                                                     
-                                                          
-                                                           Column(
-                                                              // alignment: WrapAlignment.start,
-                                                              // spacing: 100,
-                                                              children: []..addAll(controller.listExtendCondition!.map((element) => Column(
-                                                                    // mainAxisSize: MainAxisSize.min,
-                                                                    mainAxisAlignment: MainAxisAlignment.start,
-                                                                    crossAxisAlignment: CrossAxisAlignment.start,
+                                                      Column(
+                                                        // alignment: WrapAlignment.start,
+                                                        // spacing: 100,
+                                                        children: []..addAll(controller.listExtendCondition!.map((element) => Column(
+                                                              // mainAxisSize: MainAxisSize.min,
+                                                              mainAxisAlignment: MainAxisAlignment.start,
+                                                              crossAxisAlignment: CrossAxisAlignment.start,
+                                                              children: [
+                                                                SizedBox(
+                                                                  // width: 200,
+                                                                  child: Row(
                                                                     children: [
-                                                                      SizedBox(
-                                                                        // width: 200,
-                                                                        child: Row(
-                                                                          children: [
-                                                                            checkBoxMethod(1),
-                                                                            // Text("${l = l! + 1}. "),
-                                                                            Expanded(child: Text("${element!.name}"))
-                                                                          ],
-                                                                        ),
-                                                                      )
+                                                                      checkBoxMethod(1),
+                                                                      // Text("${l = l! + 1}. "),
+                                                                      Expanded(child: Text("${element!.name}")),
                                                                     ],
-                                                                  ))),
-                                                            ),
-                                                          // : Dimens.box0,
+                                                                  ),
+                                                                ),
+                                                              ],
+                                                            ))),
+                                                      ),
+                                                      // : Dimens.box0,
                                                       SizedBox(
                                                         height: 20,
+                                                      ),
+                                                      Padding(
+                                                        padding: const EdgeInsets.only(left: 10, right: 10),
+                                                        child: Row(
+                                                          crossAxisAlignment: CrossAxisAlignment.start,
+                                                          children: [
+                                                            Column(
+                                                              crossAxisAlignment: CrossAxisAlignment.end,
+                                                              children: [
+                                                                Text(
+                                                                  'Attached Files',
+                                                                  style: Styles.blackBold17,
+                                                                ),
+                                                                Text(
+                                                                  'anas zia.jpeg',
+                                                                  style: TextStyle(
+                                                            decoration: TextDecoration.underline,
+                                                            decorationStyle: TextDecorationStyle.solid,
+                                                            color: Color.fromARGB(255, 5, 92, 163),
+                                                            fontSize: Dimens.seventeen
+                                                          ),
+                                                                ),
+                                                              ],
+                                                            ),
+                                                            Spacer(),
+                                                            Column(
+                                                              crossAxisAlignment: CrossAxisAlignment.end,
+                                                              children: [
+                                                                Text(
+                                                                  'Comment/Remark',
+                                                                  style: Styles.blackBold17,
+                                                                ),
+                                                                Text(
+                                                                  'Extended Conditions',
+                                                                  style: Styles.black17,
+                                                                ),
+                                                              ],
+                                                            ),
+                                                            Spacer(),
+                                                            Column(
+                                                              crossAxisAlignment: CrossAxisAlignment.end,
+                                                              children: [
+                                                                Text(
+                                                                  'Approver Name',
+                                                                  style: Styles.blackBold17,
+                                                                ),
+                                                                Text(
+                                                                  '${controller.viewPermitDetailsModel.value?.requestedByName}',
+                                                                  style: Styles.black17,
+                                                                ),
+                                                              ],
+                                                            ),
+                                                            Spacer(),
+                                                            Column(
+                                                              crossAxisAlignment: CrossAxisAlignment.end,
+                                                              children: [
+                                                                Text(
+                                                                  'Date & Time',
+                                                                  style: Styles.blackBold17,
+                                                                ),
+                                                                Text(
+                                                                  '${controller.viewPermitDetailsModel.value?.start_datetime}',
+                                                                  style: Styles.black17,
+                                                                ),
+                                                              ],
+                                                            ),
+                                                          ],
+                                                        ),
                                                       ),
                                                     ],
                                                   )
@@ -2161,70 +2220,124 @@ class ViewPermitWebScreen extends GetView<ViewPermitController> {
                                             ],
                                           ),
                                         ),
-                                    )
+                                      )
                                     : Dimens.box0,
 
-
-                                  ///Cancel Condition List
-                                  controller.viewPermitDetailsModel.value?.ptwStatus == 129 ||
-                                controller.viewPermitDetailsModel.value?.ptwStatus == 130
-                                  ? SizedBox(
-                                      width: MediaQuery.of(context).size.width / 1,
-                                      child: Container(
-                                          margin: Dimens.edgeInsets20,
-                                           height: ((controller.listCancelCondition!.length) * 20) + 130,
-                                          decoration: BoxDecoration(
-                                      border: Border.all(
-                                        color: ColorValues.lightGreyColorWithOpacity35,
-                                        width: 1,
-                                      ),
-                                      boxShadow: [
-                                        BoxShadow(
-                                          color: ColorValues.appBlueBackgroundColor,
-                                          spreadRadius: 2,
-                                          blurRadius: 5,
-                                          offset: Offset(0, 2),
-                                        ),
-                                      ],
-                                         ),
+                                ///Cancel Condition List
+                                controller.viewPermitDetailsModel.value?.ptwStatus == 129 || controller.viewPermitDetailsModel.value?.ptwStatus == 130
+                                    ? SizedBox(
+                                        width: MediaQuery.of(context).size.width / 1,
+                                        child: Padding(
+                                          padding: const EdgeInsets.all(20),
                                           child: Column(
                                             crossAxisAlignment: CrossAxisAlignment.start,
                                             children: [
                                               // CustomAppBar(
                                               //   title: 'Following safety Measures taken to carry out the work'.tr,
                                               // ),
-                                              Text('Cancel Condition List',style: Styles.blue700,),
+                                              Text(
+                                                'Cancel Condition List',
+                                                style: Styles.blue700,
+                                              ),
                                               Dimens.boxHeight10,
                                               Column(
                                                 children: [
                                                   Column(
                                                     children: [
                                                       // controller.permitId != null
-                                                      //     ? 
-                                                          Column(
-                                                              // alignment: WrapAlignment.start,
-                                                              // spacing: 100,
-                                                              children: []..addAll(controller.listCancelCondition!.map((element) => Column(
-                                                                    // mainAxisSize: MainAxisSize.min,
-                                                                    mainAxisAlignment: MainAxisAlignment.start,
-                                                                    crossAxisAlignment: CrossAxisAlignment.start,
+                                                      //     ?
+                                                      Column(
+                                                        // alignment: WrapAlignment.start,
+                                                        // spacing: 100,
+                                                        children: []..addAll(controller.listCancelCondition!.map((element) => Column(
+                                                              // mainAxisSize: MainAxisSize.min,
+                                                              mainAxisAlignment: MainAxisAlignment.start,
+                                                              crossAxisAlignment: CrossAxisAlignment.start,
+                                                              children: [
+                                                                SizedBox(
+                                                                  // width: 200,
+                                                                  child: Row(
                                                                     children: [
-                                                                      SizedBox(
-                                                                        // width: 200,
-                                                                        child: Row(
-                                                                          children: [
-                                                                            checkBoxMethod(1),
-                                                                            // Text("${l = l! + 1}. "),
-                                                                            Expanded(child: Text("${element!.name}"))
-                                                                          ],
-                                                                        ),
-                                                                      )
+                                                                      checkBoxMethod(1),
+                                                                      // Text("${l = l! + 1}. "),
+                                                                      Expanded(child: Text("${element!.name}"))
                                                                     ],
-                                                                  ))),
-                                                            ),
-                                                          // : Container(),
+                                                                  ),
+                                                                )
+                                                              ],
+                                                            ))),
+                                                      ),
+                                                      // : Container(),
                                                       SizedBox(
                                                         height: 20,
+                                                      ),
+                                                      Padding(
+                                                        padding: const EdgeInsets.only(left: 10, right: 10),
+                                                        child: Row(
+                                                          crossAxisAlignment: CrossAxisAlignment.start,
+                                                          children: [
+                                                            Column(
+                                                              crossAxisAlignment: CrossAxisAlignment.end,
+                                                              children: [
+                                                                Text(
+                                                                  'Attached Files',
+                                                                  style: Styles.blackBold17,
+                                                                ),
+                                                                Text(
+                                                                  'anas zia.jpeg',
+                                                                  style: TextStyle(
+                                                            decoration: TextDecoration.underline,
+                                                            decorationStyle: TextDecorationStyle.solid,
+                                                            color: Color.fromARGB(255, 5, 92, 163),
+                                                            fontSize: Dimens.seventeen
+                                                          ),
+                                                                ),
+                                                              ],
+                                                            ),
+                                                            Spacer(),
+                                                            Column(
+                                                              crossAxisAlignment: CrossAxisAlignment.end,
+                                                              children: [
+                                                                Text(
+                                                                  'Comment/Remark',
+                                                                  style: Styles.blackBold17,
+                                                                ),
+                                                                Text(
+                                                                  'Extended Conditions',
+                                                                  style: Styles.black17,
+                                                                ),
+                                                              ],
+                                                            ),
+                                                            Spacer(),
+                                                            Column(
+                                                              crossAxisAlignment: CrossAxisAlignment.end,
+                                                              children: [
+                                                                Text(
+                                                                  'Approver Name',
+                                                                  style: Styles.blackBold17,
+                                                                ),
+                                                                Text(
+                                                                  '${controller.viewPermitDetailsModel.value?.requestedByName}',
+                                                                  style: Styles.black17,
+                                                                ),
+                                                              ],
+                                                            ),
+                                                            Spacer(),
+                                                            Column(
+                                                              crossAxisAlignment: CrossAxisAlignment.end,
+                                                              children: [
+                                                                Text(
+                                                                  'Date & Time',
+                                                                  style: Styles.blackBold17,
+                                                                ),
+                                                                Text(
+                                                                  '${controller.viewPermitDetailsModel.value?.start_datetime}',
+                                                                  style: Styles.black17,
+                                                                ),
+                                                              ],
+                                                            ),
+                                                          ],
+                                                        ),
                                                       ),
                                                     ],
                                                   )
@@ -2233,69 +2346,124 @@ class ViewPermitWebScreen extends GetView<ViewPermitController> {
                                             ],
                                           ),
                                         ),
-                                    )
-                                    :Dimens.box0,
+                                      )
+                                    : Dimens.box0,
 
-                                  
-                                   ///Close Condition List
-                                   controller.viewPermitDetailsModel.value?.ptwStatus == 126
-                                   ?SizedBox(
-                                      width: MediaQuery.of(context).size.width / 1,
-                                      child: Container(
-                                          margin: Dimens.edgeInsets20,
-                                           height: ((controller.listCloseCondition!.length) * 20) + 130,
-                                          decoration: BoxDecoration(
-                                      border: Border.all(
-                                        color: ColorValues.lightGreyColorWithOpacity35,
-                                        width: 1,
-                                      ),
-                                      boxShadow: [
-                                        BoxShadow(
-                                          color: ColorValues.appBlueBackgroundColor,
-                                          spreadRadius: 2,
-                                          blurRadius: 5,
-                                          offset: Offset(0, 2),
-                                        ),
-                                      ],
-                                         ),
+                                ///Close Condition List
+                                controller.viewPermitDetailsModel.value?.ptwStatus == 126
+                                    ? SizedBox(
+                                        width: MediaQuery.of(context).size.width / 1,
+                                        child: Padding(
+                                          padding: const EdgeInsets.all(20),
                                           child: Column(
                                             crossAxisAlignment: CrossAxisAlignment.start,
                                             children: [
                                               // CustomAppBar(
                                               //   title: 'Following safety Measures taken to carry out the work'.tr,
                                               // ),
-                                              Text('Close Condition List',style: Styles.blue700,),
+                                              Text(
+                                                'Close Condition List',
+                                                style: Styles.blue700,
+                                              ),
                                               Dimens.boxHeight10,
                                               Column(
                                                 children: [
                                                   Column(
                                                     children: [
                                                       // controller.permitId != null
-                                                      //     ? 
-                                                          Column(
-                                                              // alignment: WrapAlignment.start,
-                                                              // spacing: 100,
-                                                              children: []..addAll(controller.listCloseCondition!.map((element) => Column(
-                                                                    // mainAxisSize: MainAxisSize.min,
-                                                                    mainAxisAlignment: MainAxisAlignment.start,
-                                                                    crossAxisAlignment: CrossAxisAlignment.start,
+                                                      //     ?
+                                                      Column(
+                                                        // alignment: WrapAlignment.start,
+                                                        // spacing: 100,
+                                                        children: []..addAll(controller.listCloseCondition!.map((element) => Column(
+                                                              // mainAxisSize: MainAxisSize.min,
+                                                              mainAxisAlignment: MainAxisAlignment.start,
+                                                              crossAxisAlignment: CrossAxisAlignment.start,
+                                                              children: [
+                                                                SizedBox(
+                                                                  // width: 200,
+                                                                  child: Row(
                                                                     children: [
-                                                                      SizedBox(
-                                                                        // width: 200,
-                                                                        child: Row(
-                                                                          children: [
-                                                                            checkBoxMethod(1),
-                                                                            // Text("${l = l! + 1}. "),
-                                                                            Expanded(child: Text("${element!.name}"))
-                                                                          ],
-                                                                        ),
-                                                                      )
+                                                                      checkBoxMethod(1),
+                                                                      // Text("${l = l! + 1}. "),
+                                                                      Expanded(child: Text("${element!.name}"))
                                                                     ],
-                                                                  ))),
-                                                            ),
-                                                          // : Container(),
+                                                                  ),
+                                                                )
+                                                              ],
+                                                            ))),
+                                                      ),
+                                                      // : Container(),
                                                       SizedBox(
                                                         height: 20,
+                                                      ),
+                                                      Padding(
+                                                        padding: const EdgeInsets.only(left: 10, right: 10),
+                                                        child: Row(
+                                                          crossAxisAlignment: CrossAxisAlignment.start,
+                                                          children: [
+                                                            Column(
+                                                              crossAxisAlignment: CrossAxisAlignment.end,
+                                                              children: [
+                                                                Text(
+                                                                  'Attached Files',
+                                                                  style: Styles.blackBold17,
+                                                                ),
+                                                                Text(
+                                                                  'anas zia.jpeg',
+                                                                  style: TextStyle(
+                                                            decoration: TextDecoration.underline,
+                                                            decorationStyle: TextDecorationStyle.solid,
+                                                            color: Color.fromARGB(255, 5, 92, 163),
+                                                            fontSize: Dimens.seventeen
+                                                          ),
+                                                                ),
+                                                              ],
+                                                            ),
+                                                            Spacer(),
+                                                            Column(
+                                                              crossAxisAlignment: CrossAxisAlignment.end,
+                                                              children: [
+                                                                Text(
+                                                                  'Comment/Remark',
+                                                                  style: Styles.blackBold17,
+                                                                ),
+                                                                Text(
+                                                                  'Extended Conditions',
+                                                                  style: Styles.black17,
+                                                                ),
+                                                              ],
+                                                            ),
+                                                            Spacer(),
+                                                            Column(
+                                                              crossAxisAlignment: CrossAxisAlignment.end,
+                                                              children: [
+                                                                Text(
+                                                                  'Approver Name',
+                                                                  style: Styles.blackBold17,
+                                                                ),
+                                                                Text(
+                                                                  '${controller.viewPermitDetailsModel.value?.requestedByName}',
+                                                                  style: Styles.black17,
+                                                                ),
+                                                              ],
+                                                            ),
+                                                            Spacer(),
+                                                            Column(
+                                                              crossAxisAlignment: CrossAxisAlignment.end,
+                                                              children: [
+                                                                Text(
+                                                                  'Date & Time',
+                                                                  style: Styles.blackBold17,
+                                                                ),
+                                                                Text(
+                                                                  '${controller.viewPermitDetailsModel.value?.start_datetime}',
+                                                                  style: Styles.black17,
+                                                                ),
+                                                              ],
+                                                            ),
+                                                          ],
+                                                        ),
                                                       ),
                                                     ],
                                                   )
@@ -2304,9 +2472,8 @@ class ViewPermitWebScreen extends GetView<ViewPermitController> {
                                             ],
                                           ),
                                         ),
-                                    )
+                                      )
                                     : Dimens.box0,
-
 
                                 ///File Upload
                                 Container(
@@ -2426,47 +2593,46 @@ class ViewPermitWebScreen extends GetView<ViewPermitController> {
                                             // ),
 
                                             Expanded(
-                                             
                                               child: DataTable2(
-                                          border: TableBorder.all(color: Color.fromARGB(255, 206, 229, 234)),
-                                          columns: [
-                                            DataColumn(
-                                                label: Text(
-                                              "Time Stamp",
-                                              style: TextStyle(fontSize: 15, fontWeight: FontWeight.bold),
-                                            )),
-                                            DataColumn(
-                                                label: Text(
-                                              "Posted By",
-                                              style: TextStyle(fontSize: 15, fontWeight: FontWeight.bold),
-                                            )),
-                                             DataColumn(
-                                                label: Text(
-                                              "Comment",
-                                              style: TextStyle(fontSize: 15, fontWeight: FontWeight.bold),
-                                            )),
-                                             DataColumn(
-                                                label: Text(
-                                              "Location",
-                                              style: TextStyle(fontSize: 15, fontWeight: FontWeight.bold),
-                                            )),
-                                             DataColumn(
-                                                label: Text(
-                                              "Status",
-                                              style: TextStyle(fontSize: 15, fontWeight: FontWeight.bold),
-                                            )),
-                                          ],
-                                          rows: List<DataRow>.generate(
-                                            controller.historyList?.length ?? 0,
-                                            (index) => DataRow(cells: [
-                                              DataCell(Text(controller.historyList?[index]?.createdAt.toString() ?? '')),
-                                              DataCell(Text(controller.historyList?[index]?.createdByName.toString() ?? '')),
-                                               DataCell(Text(controller.historyList?[index]?.comment.toString() ?? '')),
-                                              DataCell(Text('--')),
-                                               DataCell(Text(controller.historyList?[index]?.status_name.toString() ?? '')),
-                                            ]),
-                                          ),
-                                        ),
+                                                border: TableBorder.all(color: Color.fromARGB(255, 206, 229, 234)),
+                                                columns: [
+                                                  DataColumn(
+                                                      label: Text(
+                                                    "Time Stamp",
+                                                    style: TextStyle(fontSize: 15, fontWeight: FontWeight.bold),
+                                                  )),
+                                                  DataColumn(
+                                                      label: Text(
+                                                    "Posted By",
+                                                    style: TextStyle(fontSize: 15, fontWeight: FontWeight.bold),
+                                                  )),
+                                                  DataColumn(
+                                                      label: Text(
+                                                    "Comment",
+                                                    style: TextStyle(fontSize: 15, fontWeight: FontWeight.bold),
+                                                  )),
+                                                  DataColumn(
+                                                      label: Text(
+                                                    "Location",
+                                                    style: TextStyle(fontSize: 15, fontWeight: FontWeight.bold),
+                                                  )),
+                                                  DataColumn(
+                                                      label: Text(
+                                                    "Status",
+                                                    style: TextStyle(fontSize: 15, fontWeight: FontWeight.bold),
+                                                  )),
+                                                ],
+                                                rows: List<DataRow>.generate(
+                                                  controller.historyList?.length ?? 0,
+                                                  (index) => DataRow(cells: [
+                                                    DataCell(Text(controller.historyList?[index]?.createdAt.toString() ?? '')),
+                                                    DataCell(Text(controller.historyList?[index]?.createdByName.toString() ?? '')),
+                                                    DataCell(Text(controller.historyList?[index]?.comment.toString() ?? '')),
+                                                    DataCell(Text('--')),
+                                                    DataCell(Text(controller.historyList?[index]?.status_name.toString() ?? '')),
+                                                  ]),
+                                                ),
+                                              ),
                                             ),
                                           ],
                                         ),
@@ -2483,7 +2649,6 @@ class ViewPermitWebScreen extends GetView<ViewPermitController> {
                                 //         controller.historyList,
                                 //   ),
                                 // ),
-                                       
 
                                 Dimens.boxHeight10,
                                 Container(
@@ -2539,7 +2704,7 @@ class ViewPermitWebScreen extends GetView<ViewPermitController> {
                                         children: [
                                           Text(
                                             '${controller.viewPermitDetailsModel.value?.issue_at}',
-                                          ),
+                                             ),
                                           Text(
                                             '${controller.viewPermitDetailsModel.value?.issue_at}',
                                           ),
@@ -2548,6 +2713,7 @@ class ViewPermitWebScreen extends GetView<ViewPermitController> {
                                           ),
                                           Text(
                                             '${controller.viewPermitDetailsModel.value?.close_at}',
+                                            
                                           ),
                                           Text(
                                             '${controller.viewPermitDetailsModel.value?.cancel_at}',
@@ -2683,7 +2849,7 @@ class ViewPermitWebScreen extends GetView<ViewPermitController> {
                       height: 45,
                       child: CustomElevatedButton(
                         backgroundColor: ColorValues.appGreenColor,
-                        text: controller.viewPermitDetailsModel.value?.ptwStatus == 133 ? "Extend Approve" :"Approve Permit",
+                        text: controller.viewPermitDetailsModel.value?.ptwStatus == 133 ? "Extend Approve" : "Approve Permit",
                         icon: Icons.add,
                         onPressed: () {
                           // controller
@@ -2811,8 +2977,8 @@ class ViewPermitWebScreen extends GetView<ViewPermitController> {
                       height: 45,
                       child: CustomElevatedButton(
                         backgroundColor: ColorValues.appRedColor,
-                        text: "${controller.viewPermitDetailsModel.value?.ptwStatus == 123 ||
-                      controller.viewPermitDetailsModel.value?.ptwStatus == 130 ? 'Cancel By Approver' : 'Cancel Permit'}",
+                        text:
+                            "${controller.viewPermitDetailsModel.value?.ptwStatus == 123 || controller.viewPermitDetailsModel.value?.ptwStatus == 130 ? 'Cancel By Approver' : 'Cancel Permit'}",
                         icon: Icons.close,
                         onPressed: () {
                           // controller
@@ -2824,7 +2990,6 @@ class ViewPermitWebScreen extends GetView<ViewPermitController> {
                         },
                       ))
                   : controller.viewPermitDetailsModel.value?.permitNo != null
-                  
                       ? Container(
                           height: 45,
                           child: CustomElevatedButton(
@@ -3661,5 +3826,4 @@ class ViewPermitWebScreen extends GetView<ViewPermitController> {
   //     },
   //   );
   // }
-
 }

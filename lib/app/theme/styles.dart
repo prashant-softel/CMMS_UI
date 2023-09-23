@@ -147,6 +147,8 @@ abstract class Styles {
     // color: ColorValues.blackColor,
     fontSize: Dimens.seventeen,
   );
+
+  
   
 
   static TextStyle blackBold17 = TextStyle(

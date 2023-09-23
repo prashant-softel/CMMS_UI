@@ -29,14 +29,14 @@ class NewPermitDetailModel {
   String? permitArea;
   int? workingTime;
   String? issuedByName;
-  String? issue_at;
+  DateTime? issue_at;
   String? approvedByName;
-  String? approve_at;
+  DateTime? approve_at;
   String? completedByName;
-  String? close_at;
+  DateTime? close_at;
   String? closedByName;
   String? cancelRequestByName;
-  String? cancel_at;
+  DateTime? cancel_at;
   String? current_status_short;
   List<ListSafetyQuestion>? safety_question_list;
   List<ListEmployees?>? employee_list;
@@ -132,14 +132,14 @@ class NewPermitDetailModel {
         permitArea: json['permitArea'],
         workingTime: json['workingTime'],
         issuedByName: json['issuedByName'],
-        issue_at: json['issue_at'],
+        issue_at: json["issue_at"] == null ? null : DateTime.parse(json['issue_at'] as String),
         approvedByName: json['approvedByName'],
-        approve_at: json['approve_at'],
+        approve_at: json["approve_at"] == null ? null : DateTime.parse(json['approve_at'] as String),
         completedByName: json['completedByName'],
-        close_at: json['close_at'],
+        close_at: json["close_at"] == null ? null : DateTime.parse(json['close_at'] as String),
         closedByName: json['closedByName'],
         cancelRequestByName: json['cancelRequestByName'] ?? '',
-        cancel_at: json['cancel_at'] ?? '',
+        cancel_at: json["cancel_at"] == null ? null : DateTime.parse(json['cancel_at'] as String),
         current_status_short: json['current_status_short'],
         safety_question_list: json["safety_question_list"] != null
             ? List<ListSafetyQuestion>.from(json["safety_question_list"].map((x) => ListSafetyQuestion.fromJson(x)))
