@@ -145,26 +145,28 @@ class PermitCancelReQuestDialog extends GetView {
                                     mainAxisAlignment: MainAxisAlignment.start,
                                     crossAxisAlignment: CrossAxisAlignment.start,
                                     children: [
-                                      Row(
-                                        children: [
-                                          // Text('${element!.isChecked}'),
-
-                                          Checkbox(
-                                            value: element!.isChecked,
-                                            onChanged: (bool? value) {
-                                              // controller.toggleItemSelection(index);
-                                              element.isChecked = !element.isChecked!;
-                                              print('Element Cancel:${element.isChecked}');
-                                            },
-                                          ),
-
-                                          Expanded(
-                                              child: Text(
-                                            "${element.name}",
-                                            style: Styles.black17,
-                                          ))
-                                        ],
-                                      ),
+                                       Row(
+                                          children: [
+                                            // Text('${element!.isChecked}'),
+                                      
+                                             Checkbox(
+                                                value: element!.isChecked,
+                                                onChanged: (bool? value) {
+                                                  // controller.toggleItemSelection(index);
+                                                  element.isChecked = !element.isChecked!;
+                                                  print('Element Cancel:${element.isChecked}');
+                                                },
+                                              ),
+                                            
+                                      
+                                            Expanded(
+                                                child: Text(
+                                              "${element.name}",
+                                              style: Styles.black17,
+                                            ))
+                                          ],
+                                        ),
+                                     
                                     ],
                                   ))),
                             ),
