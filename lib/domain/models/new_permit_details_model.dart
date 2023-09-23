@@ -45,6 +45,8 @@ class NewPermitDetailModel {
   List<LotoLists>? loto_list;
   List<ListAssociatedJob?>? lstAssociatedJobs;
   ExtendDetails? extendDetails;
+  CancelDetails? cancelDetails;
+  CloseDetails? closeDetails;
 
   // int? sop_type_id;
   // int? issuer_id;
@@ -94,6 +96,8 @@ class NewPermitDetailModel {
     this.lstCategory,
     this.lstAssociatedJobs,
     this.extendDetails,
+    this.cancelDetails,
+    this.closeDetails,
 
     // this.approver_id,
     // this.block_ids,
@@ -149,6 +153,8 @@ class NewPermitDetailModel {
             : [],
 
         extendDetails: ExtendDetails.fromJson(json['extendDetails']),
+        cancelDetails: CancelDetails.fromJson(json['cancelDetails']),
+        closeDetails: CloseDetails.fromJson(json['closeDetails']),
 
         // approver_id: json["approver_id"],
         // issuer_id: json["issuer_id"],
@@ -202,6 +208,8 @@ class NewPermitDetailModel {
 
         "lstAssociatedJobs": List<dynamic>.from(lstAssociatedJobs!.map((x) => x)),
         "extendDetails": extendDetails,
+        "cancelDetails": cancelDetails,
+        "closeDetails": closeDetails,
 
         // "approver_id": approver_id,
         // "issuer_id": issuer_id,
@@ -442,6 +450,137 @@ class Files {
       };
 }
 
+
+class CancelDetails {
+  CancelDetails({
+    this.conditions,
+    this.files,
+  });
+
+  List<CancelConditions>? conditions;
+  List<CancelFiles>? files;
+
+  factory CancelDetails.fromJson(Map<String, dynamic> json) => CancelDetails(
+        conditions: json["conditions"] != null ? List<CancelConditions>.from(json["conditions"].map((x) => CancelConditions.fromJson(x))) : [],
+        files: json["files"] != null ? List<CancelFiles>.from(json["files"].map((x) => CancelFiles.fromJson(x))) : [],
+      );
+
+  Map<String, dynamic> toJson() => {
+        "conditions": List<dynamic>.from(conditions!.map((x) => x.toJson())),
+        "files": List<dynamic>.from(files!.map((x) => x)),
+      };
+}
+
+class CancelConditions {
+  CancelConditions({
+    this.id,
+    this.value,
+    this.name,
+  });
+
+  int? id;
+  int? value;
+  String? name;
+
+  factory CancelConditions.fromJson(Map<String, dynamic> json) => CancelConditions(
+        id: json['id'],
+        value: json['value'],
+        name: json['name'],
+      );
+
+  Map<String, dynamic> toJson() => {
+        "id": id,
+        "value": value,
+        "name": name,
+      };
+}
+
+class CancelFiles {
+  CancelFiles({
+    this.fileId,
+    this.path,
+  });
+
+  int? fileId;
+  String? path;
+
+  factory CancelFiles.fromJson(Map<String, dynamic> json) => CancelFiles(
+        fileId: json['fileId'],
+        path: json['path'],
+      );
+
+  Map<String, dynamic> toJson() => {
+        "fileId": fileId,
+        "path": path,
+      };
+}
+
+class CloseDetails {
+  CloseDetails({
+    this.conditions,
+    this.files,
+  });
+
+  List<CloseConditions>? conditions;
+  List<CloseFiles>? files;
+
+  factory CloseDetails.fromJson(Map<String, dynamic> json) => CloseDetails(
+        conditions: json["conditions"] != null ? List<CloseConditions>.from(json["conditions"].map((x) => CloseConditions.fromJson(x))) : [],
+        files: json["files"] != null ? List<CloseFiles>.from(json["files"].map((x) => CloseFiles.fromJson(x))) : [],
+      );
+
+  Map<String, dynamic> toJson() => {
+        "conditions": List<dynamic>.from(conditions!.map((x) => x.toJson())),
+        "files": List<dynamic>.from(files!.map((x) => x)),
+      };
+}
+
+class CloseConditions {
+  CloseConditions({
+    this.id,
+    this.value,
+    this.name,
+  });
+
+  int? id;
+  int? value;
+  String? name;
+
+  factory CloseConditions.fromJson(Map<String, dynamic> json) => CloseConditions(
+        id: json['id'],
+        value: json['value'],
+        name: json['name'],
+      );
+
+  Map<String, dynamic> toJson() => {
+        "id": id,
+        "value": value,
+        "name": name,
+      };
+}
+
+class CloseFiles {
+  CloseFiles({
+    this.fileId,
+    this.path,
+  });
+
+  int? fileId;
+  String? path;
+
+  factory CloseFiles.fromJson(Map<String, dynamic> json) => CloseFiles(
+        fileId: json['fileId'],
+        path: json['path'],
+      );
+
+  Map<String, dynamic> toJson() => {
+        "fileId": fileId,
+        "path": path,
+      };
+}
+
+
+
 String addsafetyToJson(ListSafetyQuestion data) => json.encode(data.toJson());
 
 String addEmploylistToJson(ListEmployees data) => json.encode(data.toJson());
@@ -459,3 +598,15 @@ String addListAssocitedJobsToJson(ListAssociatedJob data) => json.encode(data.to
 String addListExtendConditionsToJson(ExtendConditions data) => json.encode(data.toJson());
 
 String addListFilesToJson(Files data) => json.encode(data.toJson());
+
+String addListCancelConditionsToJson(CancelConditions data) => json.encode(data.toJson());
+
+String addListCancelFilesToJson(CancelFiles data) => json.encode(data.toJson());
+
+String addListCloseConditionsToJson(CloseConditions data) => json.encode(data.toJson());
+
+String addListCloseFilesToJson(CloseFiles data) => json.encode(data.toJson());
+
+
+
+

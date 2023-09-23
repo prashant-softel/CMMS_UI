@@ -1903,7 +1903,7 @@ class ViewPermitWebScreen extends GetView<ViewPermitController> {
                                       width: MediaQuery.of(context).size.width / 1,
                                       child: Container(
                                           margin: Dimens.edgeInsets20,
-                                           height: ((controller.safetyMeasureList.length) * 13) + 130,
+                                           height: ((controller.safetyMeasureList.length) * 28) + 180,
                                           decoration: BoxDecoration(
                                       border: Border.all(
                                         color: ColorValues.lightGreyColorWithOpacity35,
@@ -1931,16 +1931,16 @@ class ViewPermitWebScreen extends GetView<ViewPermitController> {
                                                   Column(
                                                     children: [
                                                       controller.permitId != null
-                                                          ? Wrap(
-                                                              alignment: WrapAlignment.start,
-                                                              spacing: 100,
-                                                              children: []..addAll(controller.safetyMeasureList.map((element) => Row(
-                                                                    mainAxisSize: MainAxisSize.min,
+                                                          ? Column(
+                                                              // alignment: WrapAlignment.start,
+                                                              // spacing: 100,
+                                                              children: []..addAll(controller.safetyMeasureList.map((element) => Column(
+                                                                    // mainAxisSize: MainAxisSize.min,
                                                                     mainAxisAlignment: MainAxisAlignment.start,
                                                                     crossAxisAlignment: CrossAxisAlignment.start,
                                                                     children: [
                                                                       SizedBox(
-                                                                        width: 200,
+                                                                        // width: 200,
                                                                         child: Row(
                                                                           children: [
                                                                             checkBoxMethod(1),
@@ -2090,6 +2090,223 @@ class ViewPermitWebScreen extends GetView<ViewPermitController> {
                                   ),
                                 ),
                                 //   SizedBox(height: 10),
+
+                                ////Extend Conditions List
+                                 
+                                 controller.viewPermitDetailsModel.value?.ptwStatus == 133 ||
+                                controller.viewPermitDetailsModel.value?.ptwStatus == 135
+                                    
+                                    ? SizedBox(
+                                      width: MediaQuery.of(context).size.width / 1,
+                                      child: Container(
+                                          margin: Dimens.edgeInsets20,
+                                           height: ((controller.listExtendCondition!.length) * 20) + 130,
+                                          decoration: BoxDecoration(
+                                      border: Border.all(
+                                        color: ColorValues.lightGreyColorWithOpacity35,
+                                        width: 1,
+                                      ),
+                                      boxShadow: [
+                                        BoxShadow(
+                                          color: ColorValues.appBlueBackgroundColor,
+                                          spreadRadius: 2,
+                                          blurRadius: 5,
+                                          offset: Offset(0, 2),
+                                        ),
+                                      ],
+                                         ),
+                                          child: Column(
+                                            crossAxisAlignment: CrossAxisAlignment.start,
+                                            children: [
+                                              // CustomAppBar(
+                                              //   title: 'Following safety Measures taken to carry out the work'.tr,
+                                              // ),
+                                              Text('Extend Condition List',style: Styles.blue700,),
+                                              Dimens.boxHeight10,
+                                              Column(
+                                                children: [
+                                                  Column(
+                                                    children: [
+                                                     
+                                                          
+                                                           Column(
+                                                              // alignment: WrapAlignment.start,
+                                                              // spacing: 100,
+                                                              children: []..addAll(controller.listExtendCondition!.map((element) => Column(
+                                                                    // mainAxisSize: MainAxisSize.min,
+                                                                    mainAxisAlignment: MainAxisAlignment.start,
+                                                                    crossAxisAlignment: CrossAxisAlignment.start,
+                                                                    children: [
+                                                                      SizedBox(
+                                                                        // width: 200,
+                                                                        child: Row(
+                                                                          children: [
+                                                                            checkBoxMethod(1),
+                                                                            // Text("${l = l! + 1}. "),
+                                                                            Expanded(child: Text("${element!.name}"))
+                                                                          ],
+                                                                        ),
+                                                                      )
+                                                                    ],
+                                                                  ))),
+                                                            ),
+                                                          // : Dimens.box0,
+                                                      SizedBox(
+                                                        height: 20,
+                                                      ),
+                                                    ],
+                                                  )
+                                                ],
+                                              ),
+                                            ],
+                                          ),
+                                        ),
+                                    )
+                                    : Dimens.box0,
+
+
+                                  ///Cancel Condition List
+                                  controller.viewPermitDetailsModel.value?.ptwStatus == 129 ||
+                                controller.viewPermitDetailsModel.value?.ptwStatus == 130
+                                  ? SizedBox(
+                                      width: MediaQuery.of(context).size.width / 1,
+                                      child: Container(
+                                          margin: Dimens.edgeInsets20,
+                                           height: ((controller.listCancelCondition!.length) * 20) + 130,
+                                          decoration: BoxDecoration(
+                                      border: Border.all(
+                                        color: ColorValues.lightGreyColorWithOpacity35,
+                                        width: 1,
+                                      ),
+                                      boxShadow: [
+                                        BoxShadow(
+                                          color: ColorValues.appBlueBackgroundColor,
+                                          spreadRadius: 2,
+                                          blurRadius: 5,
+                                          offset: Offset(0, 2),
+                                        ),
+                                      ],
+                                         ),
+                                          child: Column(
+                                            crossAxisAlignment: CrossAxisAlignment.start,
+                                            children: [
+                                              // CustomAppBar(
+                                              //   title: 'Following safety Measures taken to carry out the work'.tr,
+                                              // ),
+                                              Text('Cancel Condition List',style: Styles.blue700,),
+                                              Dimens.boxHeight10,
+                                              Column(
+                                                children: [
+                                                  Column(
+                                                    children: [
+                                                      // controller.permitId != null
+                                                      //     ? 
+                                                          Column(
+                                                              // alignment: WrapAlignment.start,
+                                                              // spacing: 100,
+                                                              children: []..addAll(controller.listCancelCondition!.map((element) => Column(
+                                                                    // mainAxisSize: MainAxisSize.min,
+                                                                    mainAxisAlignment: MainAxisAlignment.start,
+                                                                    crossAxisAlignment: CrossAxisAlignment.start,
+                                                                    children: [
+                                                                      SizedBox(
+                                                                        // width: 200,
+                                                                        child: Row(
+                                                                          children: [
+                                                                            checkBoxMethod(1),
+                                                                            // Text("${l = l! + 1}. "),
+                                                                            Expanded(child: Text("${element!.name}"))
+                                                                          ],
+                                                                        ),
+                                                                      )
+                                                                    ],
+                                                                  ))),
+                                                            ),
+                                                          // : Container(),
+                                                      SizedBox(
+                                                        height: 20,
+                                                      ),
+                                                    ],
+                                                  )
+                                                ],
+                                              ),
+                                            ],
+                                          ),
+                                        ),
+                                    )
+                                    :Dimens.box0,
+
+                                  
+                                   ///Close Condition List
+                                   controller.viewPermitDetailsModel.value?.ptwStatus == 126
+                                   ?SizedBox(
+                                      width: MediaQuery.of(context).size.width / 1,
+                                      child: Container(
+                                          margin: Dimens.edgeInsets20,
+                                           height: ((controller.listCloseCondition!.length) * 20) + 130,
+                                          decoration: BoxDecoration(
+                                      border: Border.all(
+                                        color: ColorValues.lightGreyColorWithOpacity35,
+                                        width: 1,
+                                      ),
+                                      boxShadow: [
+                                        BoxShadow(
+                                          color: ColorValues.appBlueBackgroundColor,
+                                          spreadRadius: 2,
+                                          blurRadius: 5,
+                                          offset: Offset(0, 2),
+                                        ),
+                                      ],
+                                         ),
+                                          child: Column(
+                                            crossAxisAlignment: CrossAxisAlignment.start,
+                                            children: [
+                                              // CustomAppBar(
+                                              //   title: 'Following safety Measures taken to carry out the work'.tr,
+                                              // ),
+                                              Text('Close Condition List',style: Styles.blue700,),
+                                              Dimens.boxHeight10,
+                                              Column(
+                                                children: [
+                                                  Column(
+                                                    children: [
+                                                      // controller.permitId != null
+                                                      //     ? 
+                                                          Column(
+                                                              // alignment: WrapAlignment.start,
+                                                              // spacing: 100,
+                                                              children: []..addAll(controller.listCloseCondition!.map((element) => Column(
+                                                                    // mainAxisSize: MainAxisSize.min,
+                                                                    mainAxisAlignment: MainAxisAlignment.start,
+                                                                    crossAxisAlignment: CrossAxisAlignment.start,
+                                                                    children: [
+                                                                      SizedBox(
+                                                                        // width: 200,
+                                                                        child: Row(
+                                                                          children: [
+                                                                            checkBoxMethod(1),
+                                                                            // Text("${l = l! + 1}. "),
+                                                                            Expanded(child: Text("${element!.name}"))
+                                                                          ],
+                                                                        ),
+                                                                      )
+                                                                    ],
+                                                                  ))),
+                                                            ),
+                                                          // : Container(),
+                                                      SizedBox(
+                                                        height: 20,
+                                                      ),
+                                                    ],
+                                                  )
+                                                ],
+                                              ),
+                                            ],
+                                          ),
+                                        ),
+                                    )
+                                    : Dimens.box0,
+
 
                                 ///File Upload
                                 Container(
@@ -2388,7 +2605,7 @@ class ViewPermitWebScreen extends GetView<ViewPermitController> {
               //       backgroundColor: ColorValues.appDarkBlueColor, //  foreground
               //     ),
               //     onPressed: () {
-              //       controller.printScreen();
+              //  controller.printScreen();
               //     },
               //     icon: Icon(Icons.print), //icon data for elevated button
               //     label: Text("Print"), //label text
