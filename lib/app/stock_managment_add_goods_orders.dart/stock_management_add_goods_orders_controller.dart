@@ -231,6 +231,11 @@ class StockManagementAddGoodsOrdersController extends GetxController {
             'id': '${element.paid_by_ID}'
           },
           {
+            'key': "Requested",
+            "value": '${element.requested_qty}',
+            // 'id': '${element.assetItemID}'
+          },
+          {
             'key': "Cost",
             "value": '${element.cost}',
             // 'id': '${element.assetItemID}'
@@ -238,11 +243,6 @@ class StockManagementAddGoodsOrdersController extends GetxController {
           {
             'key': "Order",
             "value": '${element.ordered_qty}',
-            // 'id': '${element.assetItemID}'
-          },
-          {
-            'key': "Requested",
-            "value": '${element.requested_qty}',
             // 'id': '${element.assetItemID}'
           },
         ]);
@@ -402,9 +402,9 @@ class StockManagementAddGoodsOrdersController extends GetxController {
         "id": ''
       },
       {'key': "Paid_By", "value": 'Please Select', "id": ''},
+      {'key': "Requested", "value": ''},
       {'key': "Cost", "value": ''},
       {'key': "Order", "value": ''},
-      {'key': "Requested", "value": ''},
     ]);
   }
 
