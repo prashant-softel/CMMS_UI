@@ -15,7 +15,7 @@ class CreateGoModel {
   String? po_no;
   String? po_date;
   String? freight;
-  String? received_on;
+  String? receivedAt;
   String? no_pkg_received;
   String? lr_no;
   String? condition_pkg_received;
@@ -38,7 +38,7 @@ class CreateGoModel {
       this.po_no,
       this.po_date,
       this.freight,
-      this.received_on,
+      this.receivedAt,
       this.no_pkg_received,
       this.lr_no,
       this.condition_pkg_received,
@@ -64,7 +64,7 @@ class CreateGoModel {
       po_no: json['po_no'],
       po_date: json['po_date'],
       freight: json['freight'],
-      received_on: json['received_on'],
+      receivedAt: json['receivedAt'],
       no_pkg_received: json['no_pkg_received'],
       lr_no: json['lr_no'],
       condition_pkg_received: json['condition_pkg_received'],
@@ -92,7 +92,7 @@ class CreateGoModel {
         "po_no": po_no,
         "po_date": po_date,
         "freight": freight,
-        "received_on": received_on,
+        "receivedAt": receivedAt,
         "no_pkg_received": no_pkg_received,
         "lr_no": lr_no,
         "condition_pkg_received": condition_pkg_received,
