@@ -66,7 +66,7 @@ class SafetyQuestionsListContentWeb
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   varUserAccessModel.value.access_list!
-                              .where((e) => e.feature_id == 5 && e.add == 0)
+                              .where((e) => e.feature_id == 5 && e.add == 1)
                               .length >
                           0
                       ? Container(
@@ -391,7 +391,7 @@ class SafetyQuestionsListContentWeb
                         )
                       : Container(),
                   varUserAccessModel.value.access_list!
-                              .where((e) => e.feature_id == 5 && e.view == 0)
+                              .where((e) => e.feature_id == 5 && e.view == 1)
                               .length >
                           0
                       ? Expanded(
