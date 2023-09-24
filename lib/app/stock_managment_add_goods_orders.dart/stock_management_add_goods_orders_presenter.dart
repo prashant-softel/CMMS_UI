@@ -43,24 +43,24 @@ class StockManagementAddGoodsOrdersPresenter {
         type: ListType, isLoading: isLoading);
   }
 
-  // Future<List<GetAssetDataModel?>?> getAssetList({
-  //   String? auth,
-  //   int? facilityId,
-  //   bool? isLoading,
-  // }) async =>
-  //     await stockManagementAddGoodsOrdersUsecase.getAssetList(
-  //       auth: auth ?? "",
-  //       facilityId: facilityId ?? 0,
-  //       isLoading: isLoading ?? false,
-  //     );
-  Future<List<GetAssetItemsModel?>?> getEquipmentAssetsList({
+  Future<List<GetAssetDataModel?>?> getAssetList({
+    String? auth,
     int? facilityId,
     bool? isLoading,
   }) async =>
-      await stockManagementAddGoodsOrdersUsecase.getEquipmentAssetsList(
+      await stockManagementAddGoodsOrdersUsecase.getAssetList(
+        auth: auth ?? "",
         facilityId: facilityId ?? 0,
         isLoading: isLoading ?? false,
       );
+  // Future<List<GetAssetItemsModel?>?> getEquipmentAssetsList({
+  //   int? facilityId,
+  //   bool? isLoading,
+  // }) async =>
+  //     await stockManagementAddGoodsOrdersUsecase.getEquipmentAssetsList(
+  //       facilityId: facilityId ?? 0,
+  //       isLoading: isLoading ?? false,
+  //     );
 
   Future<Map<String, dynamic>?> createGoodsOrder({
     createGo,

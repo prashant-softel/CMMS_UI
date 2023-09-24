@@ -812,11 +812,11 @@ class AddRowInGoodsOrder extends StatelessWidget {
                                 children: [
                                   DropdownWebStock(
                                     width: MediaQuery.of(context).size.width,
-                                    dropdownList: controller.assetItemList,
+                                    dropdownList: controller.assetList,
                                     selectedValue: mapData["value"],
                                     onValueChanged: (list, selectedValue) {
                                       // print(
-                                      //     'paifcghb:${controller.assetItemList}');
+                                      //     'paifcghb:${controller.assetList}');
                                       // print({selectedValue: selectedValue});
                                       mapData["value"] = selectedValue;
                                       controller.dropdownMapperData[
