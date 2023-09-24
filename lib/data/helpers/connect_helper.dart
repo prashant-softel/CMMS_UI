@@ -1332,14 +1332,45 @@ class ConnectHelper {
     return responseModel;
   }
 
-  Future<ResponseModel> getPreventiveCheckList({
-    required String auth,
-    bool? isLoading,
-    int? facilityId,
-    int? type,
-  }) async {
+  Future<ResponseModel> getPreventiveCheckList(
+      {required String auth,
+      bool? isLoading,
+      int? facilityId,
+      int? type,
+      int? frequencyid,
+      int? categoryId}) async {
+    // var categoryIdsParam = (categoryId != 0) ? '&category_id=$categoryId' : 0;
+    // var frequencyIdsParam =
+    //     (frequencyid != 0) ? '&frequency_id=$frequencyid' : 0;
+
     var responseModel = await apiWrapper.makeRequest(
       'CheckList/GetCheckList?facility_id=$facilityId&type=$type',
+      Request.get,
+      null,
+      isLoading ?? false,
+      {
+        'Authorization': 'Bearer $auth',
+      },
+    );
+
+    return responseModel;
+  }
+
+  Future<ResponseModel> getPreventiveCheckListForPm(
+      {required String auth,
+      bool? isLoading,
+      int? facilityId,
+      int? type,
+      int? frequencyid,
+      int? categoryId}) async {
+    var categoryIdsParam = (categoryId != 0) ? '&category_id=$categoryId' : 0;
+    var frequencyIdsParam =
+        (frequencyid != 0) ? '&frequency_id=$frequencyid' : 0;
+
+    var responseModel = await apiWrapper.makeRequest(
+      'CheckList/GetCheckList?facility_id=$facilityId&type=$type' +
+          categoryIdsParam.toString() +
+          frequencyIdsParam.toString(),
       Request.get,
       null,
       isLoading ?? false,
@@ -3763,13 +3794,14 @@ class ConnectHelper {
     return responseModel;
   }
 
-  Future<ResponseModel> inventoryList({
-    required bool isLoading,
-    required String auth,
-    int? facilityId,
-  }) async {
+  Future<ResponseModel> inventoryList(
+      {required bool isLoading,
+      required String auth,
+      int? facilityId,
+      int? categoryId}) async {
+    var categoryIdsParam = (categoryId != 0) ? '&categoryIds=$categoryId' : '';
     ResponseModel responseModel = await apiWrapper.makeRequest(
-      'Inventory/GetInventoryList?facilityId=$facilityId',
+      'Inventory/GetInventoryList?facilityId=$facilityId' + categoryIdsParam,
       Request.get,
       null,
       isLoading,

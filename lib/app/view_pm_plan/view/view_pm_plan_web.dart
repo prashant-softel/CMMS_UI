@@ -166,12 +166,50 @@ class _ViewPmPlanWebState extends State<ViewPmPlanWeb> {
                               Row(
                                 children: [
                                   Spacer(),
-                                  CustomElevatedButton(
-                                    backgroundColor: ColorValues.printColor,
-                                    text: 'Print',
-                                    onPressed: () {
-                                      // controller.AddInventory();
-                                    },
+                                  Container(
+                                    height: 45,
+                                    child: CustomElevatedButton(
+                                      backgroundColor: ColorValues.printColor,
+                                      text: "Print",
+                                      icon: Icons.print,
+                                      onPressed: () {
+                                        // Get.dialog(
+                                        //     GoodsOrderApprovedDialog(
+                                        //   id: controller.id,
+                                        // ));
+                                      },
+                                    ),
+                                  ),
+                                  Dimens.boxWidth10,
+                                  Container(
+                                    height: 45,
+                                    child: CustomElevatedButton(
+                                      backgroundColor:
+                                          ColorValues.appGreenColor,
+                                      text: "Approve",
+                                      icon: Icons.add,
+                                      onPressed: () {
+                                        // Get.dialog(
+                                        //     GoodsOrderApprovedDialog(
+                                        //   id: controller.id,
+                                        // ));
+                                      },
+                                    ),
+                                  ),
+                                  Dimens.boxWidth10,
+                                  Container(
+                                    height: 45,
+                                    child: CustomElevatedButton(
+                                      backgroundColor: ColorValues.rejectColor,
+                                      text: "Reject",
+                                      icon: Icons.close,
+                                      onPressed: () {
+                                        // Get.dialog(
+                                        //     GoodsOrderRejectDialog(
+                                        //   id: controller.id,
+                                        // ));
+                                      },
+                                    ),
                                   ),
                                   Spacer()
                                 ],

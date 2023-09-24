@@ -196,7 +196,6 @@ class ReceiveGoodsOrdersController extends GetxController {
           {
             'key': "Received",
             "value": '${element.received_qty}',
-            'recieveQty': '${element.received_qty}',
             "lostQty": '${element.lost_qty}'
           },
           {
@@ -207,6 +206,11 @@ class ReceiveGoodsOrdersController extends GetxController {
           {
             'key': "Damaged",
             "value": '${element.damaged_qty}',
+            // 'id': '${element.assetItemID}'
+          },
+          {
+            'key': "Requested",
+            "value": '${element.requested_qty}',
             // 'id': '${element.assetItemID}'
           },
         ]);
@@ -345,9 +349,10 @@ class ReceiveGoodsOrdersController extends GetxController {
 
       {'key': "Cost", "value": ''},
       {'key': "Order", "value": ''},
-      {'key': "Received", "value": '', "recieveQty": '', "lostQty": ''},
+      {'key': "Received", "value": '', "lostQty": ''},
       {'key': "Accepted", "value": ''},
       {'key': "Damaged", "value": ''},
+      {'key': "Requested", "value": ''},
       // {'key': "Pending", "value": ''},
     ]);
   }
@@ -475,15 +480,16 @@ class ReceiveGoodsOrdersController extends GetxController {
     rowItem.value.forEach((element) {
       Items item = Items(
         goItemID: int.tryParse('${element[0]["id"]}'),
-        requested_qty: int.tryParse('${element[4]["recieveQty"]}'),
-        lost_qty: int.tryParse('${element[4]["lostQty"]}'),
+        // requested_qty: int.tryParse('${element[4]["recieveQty"]}'),
+        lost_qty: int.tryParse('${element[5]["lostQty"]}'),
         assetItemID: int.tryParse('${element[0]["assetItemID"]}'),
         paid_by_ID: int.tryParse('${element[1]["id"]}'),
-        cost: int.tryParse(element[2]["value"] ?? '0'),
-        ordered_qty: int.tryParse(element[3]["value"] ?? '0'),
-        received_qty: int.tryParse(element[4]["value"] ?? '0'),
-        accepted_qty: int.tryParse(element[5]["value"] ?? '0'),
-        damaged_qty: int.tryParse(element[6]["value"] ?? '0'),
+        cost: int.tryParse(element[3]["value"] ?? '0'),
+        ordered_qty: int.tryParse(element[4]["value"] ?? '0'),
+        received_qty: int.tryParse(element[5]["value"] ?? '0'),
+        accepted_qty: int.tryParse(element[6]["value"] ?? '0'),
+        damaged_qty: int.tryParse(element[7]["value"] ?? '0'),
+        requested_qty: int.tryParse(element[2]["value"] ?? '0'),
       );
 
       // poID: paiddropdownMapperData[element[1]["value"]]?.id)
@@ -548,7 +554,6 @@ class ReceiveGoodsOrdersController extends GetxController {
     rowItem.value.forEach((element) {
       Items item = Items(
         goItemID: int.tryParse('${element[0]["id"]}'),
-        requested_qty: int.tryParse('${element[4]["recieveQty"]}'),
         lost_qty: int.tryParse('${element[4]["lostQty"]}'),
         assetItemID: int.tryParse('${element[0]["assetItemID"]}'),
         paid_by_ID: int.tryParse('${element[1]["id"]}'),
@@ -557,6 +562,7 @@ class ReceiveGoodsOrdersController extends GetxController {
         received_qty: int.tryParse(element[4]["value"] ?? '0'),
         accepted_qty: int.tryParse(element[5]["value"] ?? '0'),
         damaged_qty: int.tryParse(element[6]["value"] ?? '0'),
+        requested_qty: int.tryParse(element[2]["value"] ?? '0'),
       );
 
       // poID: paiddropdownMapperData[element[1]["value"]]?.id)

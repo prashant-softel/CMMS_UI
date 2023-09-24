@@ -11,9 +11,9 @@ class PreventiveCheckPointUsecase {
     bool? isLoading,
   }) async =>
       await repository.getPreventiveCheckList(
-        type,
-        facilityId,
-        isLoading,
+        type: type,
+        facilityId: facilityId,
+        isLoading: isLoading,
       );
   Future<bool> createCheckpoint({
     checkpointJsonString,

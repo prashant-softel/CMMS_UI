@@ -2197,7 +2197,7 @@ class Repository {
   }
 
   ///Permit Close Condition List
-   Future<List<PermitCancelListModel>> getPermitCloseConditionList({
+  Future<List<PermitCancelListModel>> getPermitCloseConditionList({
     required int? isClose,
     required bool isLoading,
   }) async {
@@ -2223,8 +2223,8 @@ class Repository {
     }
   }
 
-///Permit Extend Condition List
-   Future<List<PermitCancelListModel>> getPermitExtendConditionList({
+  ///Permit Extend Condition List
+  Future<List<PermitCancelListModel>> getPermitExtendConditionList({
     required int? isExtend,
     required bool isLoading,
   }) async {
@@ -2249,7 +2249,6 @@ class Repository {
       return [];
     }
   }
-
 
   Future<List<WarrantyClaimModel>> getWarrantyClaimList({
     required int? facilityId,
@@ -2699,7 +2698,7 @@ class Repository {
   Future<Map<String, dynamic>> permitExtendButton(
     // String? comment,
     // String? id,
-     extendPermitJsonString,
+    extendPermitJsonString,
     bool? isLoading,
   ) async {
     try {
@@ -2715,8 +2714,7 @@ class Repository {
       if (!res.hasError) {
         //  return _permitIssueModel;
       } else {
-        Utility.showDialog(
-            res.errorCode.toString() + 'permitExtendtButton');
+        Utility.showDialog(res.errorCode.toString() + 'permitExtendtButton');
       }
       return Map();
     } catch (error) {
@@ -2725,7 +2723,7 @@ class Repository {
     }
   }
 
- ///Close Permit
+  ///Close Permit
   Future<Map<String, dynamic>> permitCloseButton(
     // String? comment,
     // String? id,
@@ -2745,8 +2743,7 @@ class Repository {
       if (!res.hasError) {
         //  return _permitIssueModel;
       } else {
-        Utility.showDialog(
-            res.errorCode.toString() + 'permitCloseButton');
+        Utility.showDialog(res.errorCode.toString() + 'permitCloseButton');
       }
       return Map();
     } catch (error) {
@@ -3754,19 +3751,59 @@ class Repository {
     }
   }
 
+  Future<List<PreventiveCheckListModel?>?> getPreventiveCheckListForPm(
+      {int? type,
+      int? facilityId,
+      bool? isLoading,
+      int? frequencyid,
+      int? categoryId}) async {
+    try {
+      final auth = await getSecuredValue(LocalKeys.authToken);
+      final res = await _dataRepository.getPreventiveCheckListForPm(
+          auth: auth,
+          facilityId: facilityId ?? 0,
+          type: type,
+          isLoading: isLoading ?? false,
+          categoryId: categoryId,
+          frequencyid: frequencyid);
+
+      if (!res.hasError) {
+        final jsonPreventiveCheckListModelModels = jsonDecode(res.data);
+        // print(res.data);
+        final List<PreventiveCheckListModel> _PreventiveCheckListModelList =
+            jsonPreventiveCheckListModelModels
+                .map<PreventiveCheckListModel>((m) =>
+                    PreventiveCheckListModel.fromJson(
+                        Map<String, dynamic>.from(m)))
+                .toList();
+
+        return _PreventiveCheckListModelList;
+      } else {
+        Utility.showDialog(
+            res.errorCode.toString() + ' getPreventiveCheckListForPm');
+        return [];
+      }
+    } catch (error) {
+      print(error.toString());
+      return [];
+    }
+  }
+
   Future<List<PreventiveCheckListModel?>?> getPreventiveCheckList(
-    int? type,
-    int? facilityId,
-    bool? isLoading,
-  ) async {
+      {int? type,
+      int? facilityId,
+      bool? isLoading,
+      int? frequencyid,
+      int? categoryId}) async {
     try {
       final auth = await getSecuredValue(LocalKeys.authToken);
       final res = await _dataRepository.getPreventiveCheckList(
-        auth: auth,
-        facilityId: facilityId ?? 0,
-        type: type,
-        isLoading: isLoading ?? false,
-      );
+          auth: auth,
+          facilityId: facilityId ?? 0,
+          type: type,
+          isLoading: isLoading ?? false,
+          categoryId: categoryId,
+          frequencyid: frequencyid);
 
       if (!res.hasError) {
         final jsonPreventiveCheckListModelModels = jsonDecode(res.data);
@@ -5884,17 +5921,17 @@ class Repository {
     }
   }
 
-  Future<List<InventoryModel>> inventoryList({
-    required int? facilityId,
-    required bool isLoading,
-  }) async {
+  Future<List<InventoryModel>> inventoryList(
+      {required int? facilityId,
+      required bool isLoading,
+      int? categoryId}) async {
     try {
       final auth = await getSecuredValue(LocalKeys.authToken);
       final res = await _dataRepository.inventoryList(
-        facilityId: facilityId,
-        isLoading: isLoading,
-        auth: auth,
-      );
+          facilityId: facilityId,
+          isLoading: isLoading,
+          auth: auth,
+          categoryId: categoryId);
       // print('Inventory List Data: ${res.data}');
 
       if (!res.hasError) {

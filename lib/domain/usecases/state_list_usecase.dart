@@ -47,12 +47,11 @@ class StatelistUsecase {
         pmScheduleJsonString,
         isLoading,
       );
-  Future<List<CountryState?>?> getStateList({
-    // int? type,
-    // bool? isLoading,
-    int? selectedCountryId
-
-  }) async =>
+  Future<List<CountryState?>?> getStateList(
+          {
+          // int? type,
+          // bool? isLoading,
+          int? selectedCountryId}) async =>
       await repository.getStateList(
         selectedCountryId!,
       );
@@ -68,16 +67,15 @@ class StatelistUsecase {
         isLoading,
       );
 
-
   Future<List<PreventiveCheckListModel?>?> getPreventiveCheckList({
     int? type,
     int? facilityId,
     bool? isLoading,
   }) async =>
       await repository.getPreventiveCheckList(
-        type,
-        facilityId,
-        isLoading,
+        type: type,
+        facilityId: facilityId,
+        isLoading: isLoading,
       );
   // Future<List<FrequencyModel?>?> getFrequencyList({
   //   bool? isLoading,
@@ -92,7 +90,7 @@ class StatelistUsecase {
       await repository.createCheckListNumber(
           isLoading: isLoading, checklistJsonString: checklistJsonString);
   deleteCkecklist(
-      {required Object checklist_id, required bool isLoading}) async =>
+          {required Object checklist_id, required bool isLoading}) async =>
       await repository.deleteCkecklist(
         checklist_id,
         isLoading,
@@ -105,5 +103,4 @@ class StatelistUsecase {
         isLoading: isLoading,
         checklistJsonString: checklistJsonString,
       );
-
 }

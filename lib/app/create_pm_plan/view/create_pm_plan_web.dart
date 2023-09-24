@@ -4,17 +4,15 @@ import 'package:cmms/app/widgets/custom_elevated_button.dart';
 import 'package:cmms/app/widgets/custom_richtext.dart';
 import 'package:cmms/app/widgets/custom_textfield.dart';
 import 'package:cmms/app/widgets/date_picker.dart';
-import 'package:cmms/app/widgets/dropdown_web.dart';
 import 'package:cmms/app/widgets/multipule_dropdown_web.dart';
 import 'package:cmms/app/widgets/stock_dropdown.dart';
-import 'package:dropdown_search/dropdown_search.dart';
+import 'package:data_table_2/data_table_2.dart';
 
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
-import 'package:scrollable_table_view/scrollable_table_view.dart';
 import 'package:syncfusion_flutter_datepicker/datepicker.dart';
 
 class CreatePmPlanWeb extends StatefulWidget {
@@ -111,250 +109,354 @@ class _CreatePmPlanWebState extends State<CreatePmPlanWeb> {
                                 color: ColorValues.greyLightColour,
                               ),
                               Dimens.boxHeight15,
-                              Padding(
-                                padding: const EdgeInsets.only(left: 100),
-                                child: Column(
-                                  crossAxisAlignment: CrossAxisAlignment.end,
+                              Container(
+                                margin: EdgeInsets.all(20),
+                                child: Row(
                                   children: [
-                                    Padding(
-                                      padding: const EdgeInsets.only(left: 83),
-                                      child: Row(
+                                    Column(
+                                        crossAxisAlignment:
+                                            CrossAxisAlignment.end,
                                         children: [
-                                          CustomRichText(title: 'Plan Title :'),
-                                          Dimens.boxWidth5,
-                                          Container(
-                                              decoration: BoxDecoration(
-                                                borderRadius:
-                                                    BorderRadius.circular(10),
-                                                border: Border.all(
-                                                  color: Color.fromARGB(
-                                                      255, 227, 224, 224),
-                                                  width: 1,
-                                                ),
-                                                boxShadow: [
-                                                  BoxShadow(
-                                                    color: Color.fromARGB(
-                                                            255, 236, 234, 234)
-                                                        .withOpacity(0.5),
-                                                    spreadRadius: 2,
-                                                    blurRadius: 5,
-                                                    offset: Offset(0, 2),
+                                          Row(
+                                            children: [
+                                              CustomRichText(
+                                                  title: 'Plan Title :'),
+                                              Dimens.boxWidth5,
+                                              Container(
+                                                  decoration: BoxDecoration(
+                                                    borderRadius:
+                                                        BorderRadius.circular(
+                                                            10),
+                                                    border: Border.all(
+                                                      color: Color.fromARGB(
+                                                          255, 227, 224, 224),
+                                                      width: 1,
+                                                    ),
+                                                    boxShadow: [
+                                                      BoxShadow(
+                                                        color: Color.fromARGB(
+                                                                255,
+                                                                236,
+                                                                234,
+                                                                234)
+                                                            .withOpacity(0.5),
+                                                        spreadRadius: 2,
+                                                        blurRadius: 5,
+                                                        offset: Offset(0, 2),
+                                                      ),
+                                                    ],
+                                                  ),
+                                                  width: (MediaQuery.of(context)
+                                                          .size
+                                                          .width *
+                                                      .2),
+                                                  child: LoginCustomTextfield(
+                                                    textController: controller
+                                                        .planTittleCtrlr,
+                                                  )),
+                                              SizedBox(
+                                                width: MediaQuery.of(context)
+                                                        .size
+                                                        .width *
+                                                    0.2,
+                                              ),
+                                              Row(
+                                                children: [
+                                                  CustomRichText(
+                                                      title: "Frequency"),
+                                                  Dimens.boxWidth5,
+                                                  SizedBox(
+                                                    child: DropdownWebStock(
+                                                      width: (MediaQuery.of(
+                                                                  context)
+                                                              .size
+                                                              .width *
+                                                          .2),
+                                                      controller: controller,
+                                                      dropdownList: controller
+                                                          .frequencyList,
+                                                      isValueSelected: controller
+                                                          .isSelectedfrequency
+                                                          .value,
+                                                      selectedValue: controller
+                                                          .selectedfrequency
+                                                          .value,
+                                                      onValueChanged: controller
+                                                          .onValueChanged,
+                                                    ),
                                                   ),
                                                 ],
                                               ),
-                                              width: (MediaQuery.of(context)
-                                                      .size
-                                                      .width *
-                                                  .35),
-                                              child: LoginCustomTextfield(
-                                                textController:
-                                                    controller.planTittleCtrlr,
-                                              )),
-                                        ],
-                                      ),
-                                    ),
-                                    Dimens.boxHeight15,
-                                    Row(
-                                      children: [
-                                        CustomRichText(
-                                            title: 'Equipment Category :'),
-                                        Dimens.boxWidth5,
-                                        SizedBox(
-                                          child: DropdownWebStock(
-                                            width: (MediaQuery.of(context)
-                                                    .size
-                                                    .width *
-                                                .2),
-                                            controller: controller,
-                                            dropdownList: controller
-                                                .equipmentCategoryList,
-                                            isValueSelected: controller
-                                                .isSelectedInventory.value,
-                                            selectedValue: controller
-                                                .selectedInventory.value,
-                                            onValueChanged:
-                                                controller.onValueChanged,
-                                          ),
-                                        ),
-                                        Spacer(),
-                                        Row(
-                                          children: [
-                                            CustomRichText(title: "Frequency"),
-                                            Dimens.boxWidth5,
-                                            SizedBox(
-                                              child: DropdownWebStock(
-                                                width: (MediaQuery.of(context)
-                                                        .size
-                                                        .width *
-                                                    .2),
-                                                controller: controller,
-                                                dropdownList:
-                                                    controller.frequencyList,
-                                                isValueSelected: controller
-                                                    .isSelectedfrequency.value,
-                                                selectedValue: controller
-                                                    .selectedfrequency.value,
-                                                onValueChanged:
-                                                    controller.onValueChanged,
-                                              ),
-                                            ),
-                                            Dimens.boxWidth80,
-                                          ],
-                                        ),
-                                      ],
-                                    ),
-                                    Dimens.boxHeight15,
-                                    Row(
-                                      children: [
-                                        Padding(
-                                          padding:
-                                              const EdgeInsets.only(left: 81),
-                                          child: Row(
-                                            children: [
-                                              CustomRichText(
-                                                  title: 'Start Date :'),
-                                              Dimens.boxWidth5,
-                                              CustomTextFieldForStock(
-                                                width: MediaQuery.of(context)
-                                                        .size
-                                                        .width /
-                                                    5,
-                                                numberTextField: true,
-                                                onTap: () {
-                                                  controller
-                                                          .openStartDatePicker =
-                                                      !controller
-                                                          .openStartDatePicker;
-                                                  controller.update(
-                                                      ['stock_Mangement']);
-                                                },
-                                                textController:
-                                                    controller.startDateDateTc,
-                                              ),
+                                              Dimens.boxHeight10,
                                             ],
                                           ),
-                                        ),
-                                        // Spacer(),
-                                      ],
-                                    ),
+                                          Dimens.boxHeight10,
+                                          Row(
+                                            children: [
+                                              CustomRichText(
+                                                  title:
+                                                      '   Equipment Category :'),
+                                              Dimens.boxWidth5,
+                                              SizedBox(
+                                                child: DropdownWebStock(
+                                                  width: (MediaQuery.of(context)
+                                                          .size
+                                                          .width *
+                                                      .2),
+                                                  controller: controller,
+                                                  dropdownList: controller
+                                                      .equipmentCategoryList,
+                                                  isValueSelected: controller
+                                                      .isSelectedInventory
+                                                      .value,
+                                                  selectedValue: controller
+                                                      .selectedInventory.value,
+                                                  onValueChanged:
+                                                      controller.onValueChanged,
+                                                ),
+                                              ),
+                                              SizedBox(
+                                                width: MediaQuery.of(context)
+                                                        .size
+                                                        .width *
+                                                    0.2,
+                                              ),
+                                              Row(
+                                                children: [
+                                                  Row(
+                                                    children: [
+                                                      CustomRichText(
+                                                          title:
+                                                              'Start Date :'),
+                                                      Dimens.boxWidth5,
+                                                      CustomTextFieldForStock(
+                                                        width: MediaQuery.of(
+                                                                    context)
+                                                                .size
+                                                                .width /
+                                                            5,
+                                                        numberTextField: true,
+                                                        onTap: () {
+                                                          controller
+                                                                  .openStartDatePicker =
+                                                              !controller
+                                                                  .openStartDatePicker;
+                                                          controller.update([
+                                                            'stock_Mangement'
+                                                          ]);
+                                                        },
+                                                        textController:
+                                                            controller
+                                                                .startDateDateTc,
+                                                      ),
+                                                    ],
+                                                  )
+                                                ],
+                                              )
+                                            ],
+                                          ),
+                                        ]),
                                   ],
                                 ),
                               ),
-                              MultipDropdownWebWidget(
-                                width: (MediaQuery.of(context).size.width * .2),
-                                dropdownList: controller.inventoryNameList,
-                                selectedItems:
-                                    controller.selectedInventoryNameList,
-                                onValueChanged: controller.onValueChanged,
+                              Row(
+                                children: [
+                                  Dimens.boxWidth50,
+                                  CustomRichText(title: 'Equipments :'),
+                                  Dimens.boxWidth5,
+                                  MultipDropdownWebWidget(
+                                    width: (MediaQuery.of(context).size.width *
+                                        .5),
+                                    //  height: 35,
+                                    dropdownList: controller.inventoryNameList,
+                                    selectedItems:
+                                        controller.selectedInventoryNameList,
+                                    onValueChanged: controller.onValueChanged,
+                                  ),
+                                  Spacer()
+                                ],
                               ),
-                              Dimens.boxHeight25,
-                              Padding(
-                                padding: EdgeInsets.symmetric(horizontal: 50),
-                                child: Container(
-                                    height: 350,
-                                    width: double.infinity,
-                                    // margin: Dimens.edgeInsets20,
-                                    decoration: BoxDecoration(
-                                      border: Border.all(
-                                        color: ColorValues
-                                            .lightGreyColorWithOpacity35,
-                                        width: 1,
-                                      ),
-                                      borderRadius:
-                                          BorderRadius.all(Radius.circular(10)),
-                                      boxShadow: [
-                                        BoxShadow(
+                              Dimens.boxHeight12,
+                              controller.filteredInventoryNameList.length > 0
+                                  ? Container(
+                                      margin: Dimens.edgeInsets20,
+                                      height: ((controller
+                                                  .filteredInventoryNameList
+                                                  .length) *
+                                              40) +
+                                          150,
+                                      decoration: BoxDecoration(
+                                        border: Border.all(
                                           color: ColorValues
-                                              .appBlueBackgroundColor,
-                                          spreadRadius: 2,
-                                          blurRadius: 5,
-                                          offset: Offset(0, 2),
+                                              .lightGreyColorWithOpacity35,
+                                          width: 1,
                                         ),
-                                      ],
-                                    ),
-                                    child: Column(
-                                      children: [
-                                        Dimens.boxHeight15,
-                                        Row(
-                                          crossAxisAlignment:
-                                              CrossAxisAlignment.start,
-                                          children: [
-                                            Dimens.boxWidth15,
-                                            Text(
-                                              "Equipment List",
-                                              style: Styles.black15W400,
-                                            ),
-                                          ],
-                                        ),
-                                        Container(
-                                          width: MediaQuery.of(context)
-                                                  .size
-                                                  .height *
-                                              1.5,
-                                          height: 200, //Get.height - 70,
-                                          child: Column(
-                                              //
+                                        boxShadow: [
+                                          BoxShadow(
+                                            color: ColorValues
+                                                .appBlueBackgroundColor,
+                                            spreadRadius: 2,
+                                            blurRadius: 5,
+                                            offset: Offset(0, 2),
+                                          ),
+                                        ],
+                                      ),
+                                      child: Column(
+                                        children: [
+                                          Padding(
+                                            padding: const EdgeInsets.all(10.0),
+                                            child: Row(
                                               children: [
-                                                Expanded(
-                                                  child: ScrollableTableView(
-                                                    columns: [
-                                                      "Sr. No.",
-                                                      'Assest name',
-                                                      'Assest ID',
-                                                      'Parent Assest',
-                                                      'Module Quantity',
-                                                      "Checklist"
-                                                    ].map((column) {
-                                                      return TableViewColumn(
-                                                          minWidth:
-                                                              Get.width * 0.20,
-                                                          label: column);
-                                                    }).toList(),
-                                                    rows: //
-                                                        [
-                                                      ...List.generate(
-                                                        controller
-                                                            .filteredInventoryNameList
-                                                            .length,
-                                                        (index) {
-                                                          var facilityNameDetails =
-                                                              controller
-                                                                      .filteredInventoryNameList[
-                                                                  index];
-
-                                                          return [
-                                                            '1',
-                                                            '${facilityNameDetails?.name ?? ''}',
-                                                            '${facilityNameDetails?.id ?? ''}',
-                                                            '${facilityNameDetails?.parentName ?? ''}',
-                                                            '${facilityNameDetails?.categoryId ?? ''}',
-                                                            "check"
-                                                          ];
-                                                        },
-                                                      ),
-                                                    ].map((_inventoryDetailList) {
-                                                      return TableViewRow(
-                                                          onTap: () => {
-                                                                //  print('ZERO = ${_inventoryDetailList[0]}')
-                                                              },
-                                                          height: 60,
-                                                          cells:
-                                                              _inventoryDetailList
-                                                                  .map((value) {
-                                                            return TableViewCell(
-                                                              //key: ,
-                                                              child: Text(value
-                                                                  .toString()),
-                                                            );
-                                                          }).toList());
-                                                    }).toList(),
-                                                  ),
+                                                Text(
+                                                  "Equipment List ",
+                                                  style: Styles.blue700,
                                                 ),
-                                              ]),
-                                        ),
-                                      ],
-                                    )),
-                              ),
+                                              ],
+                                            ),
+                                          ),
+                                          Expanded(
+                                            child: DataTable2(
+                                              border: TableBorder.all(
+                                                  color: Color.fromARGB(
+                                                      255, 206, 229, 234)),
+                                              columns: [
+                                                DataColumn2(
+                                                    fixedWidth: 100,
+                                                    label: Text(
+                                                      "Sr. No.",
+                                                      style: TextStyle(
+                                                          fontSize: 15,
+                                                          fontWeight:
+                                                              FontWeight.bold),
+                                                    )),
+                                                DataColumn2(
+                                                    //fixedWidth: 150,
+                                                    label: Text(
+                                                  'Assest name',
+                                                  style: TextStyle(
+                                                      fontSize: 15,
+                                                      fontWeight:
+                                                          FontWeight.bold),
+                                                )),
+                                                DataColumn2(
+                                                    fixedWidth: 150,
+                                                    label: Text(
+                                                      'Assest ID',
+                                                      style: TextStyle(
+                                                          fontSize: 15,
+                                                          fontWeight:
+                                                              FontWeight.bold),
+                                                    )),
+                                                DataColumn2(
+                                                    // fixedWidth: 300,
+                                                    label: Text(
+                                                  'Parent Assest',
+                                                  style: TextStyle(
+                                                      fontSize: 15,
+                                                      fontWeight:
+                                                          FontWeight.bold),
+                                                )),
+                                                DataColumn2(
+                                                    // fixedWidth: 300,
+                                                    label: Text(
+                                                  'Module Quantity',
+                                                  style: TextStyle(
+                                                      fontSize: 15,
+                                                      fontWeight:
+                                                          FontWeight.bold),
+                                                )),
+                                                DataColumn2(
+                                                    // fixedWidth: 300,
+                                                    label: Text(
+                                                  "Checklist",
+                                                  style: TextStyle(
+                                                      fontSize: 15,
+                                                      fontWeight:
+                                                          FontWeight.bold),
+                                                )),
+                                              ],
+                                              rows: controller.rowItem.value
+                                                  .map((record) {
+                                                return DataRow(
+                                                  // height: 130,
+                                                  cells: record.map((mapData) {
+                                                    return DataCell(
+                                                      (mapData['key'] ==
+                                                              "checklist")
+                                                          ? DropdownWebStock(
+                                                              width:
+                                                                  MediaQuery.of(
+                                                                          context)
+                                                                      .size
+                                                                      .width,
+                                                              dropdownList:
+                                                                  controller
+                                                                      .preventiveCheckList,
+                                                              selectedValue:
+                                                                  mapData[
+                                                                      "value"],
+                                                              onValueChanged: (list,
+                                                                  selectedValue) {
+                                                                // print(
+                                                                //     'paifcghb:${controller.preventiveCheckList}');
+                                                                // print({
+                                                                //   selectedValue:
+                                                                //       selectedValue
+                                                                // });
+                                                                mapData["value"] =
+                                                                    selectedValue;
+                                                                controller.checkdropdownMapperData[
+                                                                        selectedValue] =
+                                                                    list.firstWhere(
+                                                                        (element) =>
+                                                                            element.name ==
+                                                                            selectedValue,
+                                                                        orElse:
+                                                                            null);
+                                                              },
+                                                            )
+                                                          // SizedBox(
+                                                          //     child: DropdownWebStock(
+                                                          //       width: (MediaQuery.of(
+                                                          //                   context)
+                                                          //               .size
+                                                          //               .width *
+                                                          //           .2),
+                                                          //       controller:
+                                                          //           controller,
+                                                          //       dropdownList: controller
+                                                          //           .preventiveCheckList,
+                                                          //       isValueSelected:
+                                                          //           controller
+                                                          //               .isSelectedChecklist
+                                                          //               .value,
+                                                          //       selectedValue: controller
+                                                          //           .selectedChecklist
+                                                          //           .value,
+                                                          //       onValueChanged:
+                                                          //           controller
+                                                          //               .onValueChanged,
+                                                          //     ),
+                                                          //   )
+
+                                                          : (mapData['key'] ==
+                                                                  "srNo")
+                                                              ? Text(mapData[
+                                                                      'value'] ??
+                                                                  "")
+                                                              : Text(mapData[
+                                                                      'value'] ??
+                                                                  ''),
+                                                    );
+                                                  }).toList(),
+                                                );
+                                              }).toList(),
+                                            ),
+                                          ),
+                                        ],
+                                      ),
+                                    )
+                                  : Dimens.box0,
                               Dimens.boxHeight15,
                               Row(
                                 children: [

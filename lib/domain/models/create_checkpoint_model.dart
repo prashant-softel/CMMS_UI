@@ -10,6 +10,14 @@ class CreateCheckpoint {
   int is_document_required;
   int status;
   int id;
+
+  // "failure_weightage": 10,//In percent
+  // "checkpoint_type": {
+  // "id": 2, //1 = bool, 2 = renge;
+  // "min": 10, // only required if type is 2
+  // "max":70// only required if type is 2
+  // },
+  // "status": 1
   CreateCheckpoint({
     required this.check_point,
     required this.checklist_id,
