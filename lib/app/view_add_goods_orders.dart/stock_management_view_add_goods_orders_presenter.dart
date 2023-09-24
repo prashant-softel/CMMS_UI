@@ -4,6 +4,7 @@ import 'package:cmms/domain/models/currency_list_model.dart';
 import 'package:cmms/domain/models/get_asset_data_list_model.dart';
 import 'package:cmms/domain/models/get_asset_items_model.dart';
 import 'package:cmms/domain/models/get_purchase_details_model.dart';
+import 'package:cmms/domain/models/history_model.dart';
 
 import 'package:cmms/domain/usecases/stock_management_add_goods_orders_usecase.dart';
 
@@ -32,6 +33,16 @@ class ViewAddGoodsOrdersPresenter {
     );
   }
 
+  Future<List<HistoryModel>?> getGoHistory(
+    moduleType,
+    id,
+    isLoading,
+  ) async =>
+      await viewAddGoodsOrdersUsecase.getGoHistory(
+        moduleType: moduleType,
+        id: id,
+        isLoading: isLoading,
+      );
   Future<Map<String, dynamic>?> goodsOrderRejectButton({
     goodsOrderRejectJsonString,
     required bool isLoading,

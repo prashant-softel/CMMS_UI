@@ -6,6 +6,7 @@ import 'package:cmms/domain/models/currency_list_model.dart';
 import 'package:cmms/domain/models/get_asset_data_list_model.dart';
 import 'package:cmms/domain/models/get_asset_items_model.dart';
 import 'package:cmms/domain/models/get_purchase_details_model.dart';
+import 'package:cmms/domain/models/history_model.dart';
 import 'package:cmms/domain/models/paiyed_model.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
@@ -34,6 +35,7 @@ class ViewAddGoodsOrdersController extends GetxController {
   RxList<BusinessListModel?> ownerList = <BusinessListModel>[].obs;
   Rx<String> selectedBusinessType = ''.obs;
   RxList<PaiedModel?> paid = <PaiedModel>[].obs;
+  RxList<HistoryModel?>? historyList = <HistoryModel?>[].obs;
   RxList<GetAssetItemsModel?> assetItemList = <GetAssetItemsModel>[].obs;
   TextEditingController approveCommentTextFieldCtrlr = TextEditingController();
   TextEditingController rejectCommentTextFieldCtrlr = TextEditingController();
@@ -43,7 +45,8 @@ class ViewAddGoodsOrdersController extends GetxController {
   int selectedBusinessTypeId = 1;
   int paidId = 0;
   RxBool showAdditionalColumn = false.obs;
-  int? id = 0;
+  int id = 0;
+
   int? type = 0;
 
   //drop down list of assets
@@ -109,11 +112,11 @@ class ViewAddGoodsOrdersController extends GetxController {
       getEquipmentAssetsList(facilityId);
       if (id != null) {
         Future.delayed(Duration(seconds: 1), () {
-          getPurchaseDetailsById(id: id!);
+          getPurchaseDetailsById(id: id);
+          getGoHistory(id: id);
         });
       }
     });
-
     super.onInit();
   }
 
@@ -209,6 +212,22 @@ class ViewAddGoodsOrdersController extends GetxController {
         //getCalibrationList(facilityId, true);
       }
     }
+  }
+
+  Future<void> getGoHistory({required int id}) async {
+    /// TODO: CHANGE THESE VALUES
+    int moduleType = 32;
+    // int tempModuleType = 21;
+    //
+    historyList?.value = await viewAddGoodsOrdersPresenter.getGoHistory(
+          // tempModuleType,
+          // tempJobCardId,
+          moduleType,
+          id,
+          true,
+        ) ??
+        [];
+    update(["historyList"]);
   }
 
   void goodsOrderRejectButton({int? id}) async {

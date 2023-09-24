@@ -8,6 +8,7 @@ import 'package:cmms/domain/models/facility_model.dart';
 import 'package:cmms/domain/models/get_asset_data_list_model.dart';
 import 'package:cmms/domain/models/get_asset_items_model.dart';
 import 'package:cmms/domain/models/get_purchase_details_model.dart';
+import 'package:cmms/domain/models/history_model.dart';
 
 import 'package:cmms/domain/models/paiyed_model.dart';
 import 'package:flutter/cupertino.dart';
@@ -41,6 +42,7 @@ class StockManagementAddGoodsOrdersController extends GetxController {
   RxList<BusinessListModel?> ownerList = <BusinessListModel>[].obs;
   RxList<GetAssetItemsModel?> assetItemList = <GetAssetItemsModel>[].obs;
   Rx<String> selectedBusinessType = ''.obs;
+  RxList<HistoryModel?>? historyList = <HistoryModel?>[].obs;
 
   Rx<bool> isSelectedBusinessType = true.obs;
   int selectedBusinessTypeId = 1;
@@ -137,26 +139,7 @@ class StockManagementAddGoodsOrdersController extends GetxController {
       });
     } catch (e) {}
 
-    // facilityIdStreamSubscription =
-    //     homeController.facilityId$.listen((event) async {
-    //   facilityId = event;
-
-    //   Future.delayed(Duration(seconds: 1), () {
-    //     getUnitCurrencyList();
-    //   });
-    //   Future.delayed(Duration(seconds: 1), () {
-    //     getBusinessList(4);
-    //   });
-    //   Future.delayed(Duration(seconds: 1), () {
-    //     getAssetList(facilityId);
-    //     if (id != null) {
-    //       Future.delayed(Duration(seconds: 1), () {
-    //         getPurchaseDetailsById(id: id!);
-    //       });
-    //     }
-    //   });
-    // });
-
+    await getGoHistory(id: id.value);
     super.onInit();
   }
 
@@ -186,6 +169,23 @@ class StockManagementAddGoodsOrdersController extends GetxController {
       print(e.toString() + 'userId');
       //  Utility.showDialog(e.toString() + 'userId');
     }
+  }
+
+  Future<void> getGoHistory({required int id}) async {
+    /// TODO: CHANGE THESE VALUES
+    int moduleType = 32;
+    // int tempModuleType = 21;
+    //
+    historyList?.value =
+        await stockManagementAddGoodsOrdersPresenter.getGoHistory(
+              // tempModuleType,
+              // tempJobCardId,
+              moduleType,
+              id,
+              true,
+            ) ??
+            [];
+    update(["historyList"]);
   }
 
   Future<void> getFacilityList() async {

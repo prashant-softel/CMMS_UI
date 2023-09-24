@@ -6,6 +6,7 @@ import 'package:cmms/domain/models/currency_list_model.dart';
 import 'package:cmms/domain/models/facility_model.dart';
 import 'package:cmms/domain/models/get_asset_data_list_model.dart';
 import 'package:cmms/domain/models/get_purchase_details_model.dart';
+import 'package:cmms/domain/models/history_model.dart';
 import 'package:cmms/domain/models/paiyed_model.dart';
 
 class ReceiveGoodsOrdersUsecase {
@@ -46,6 +47,16 @@ class ReceiveGoodsOrdersUsecase {
       await _repository.getAssetList(
         auth,
         facilityId,
+        isLoading,
+      );
+  Future<List<HistoryModel>?> getGoHistory({
+    moduleType,
+    id,
+    bool? isLoading,
+  }) async =>
+      await _repository.getGoHistory(
+        moduleType,
+        id,
         isLoading,
       );
   Future<Map<String, dynamic>> createGoodsOrder({
