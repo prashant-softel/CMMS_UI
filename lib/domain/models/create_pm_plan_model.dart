@@ -4,6 +4,7 @@ class CreatePmPlanModel {
   int? facility_id;
   int? category_id;
   int? plan_freq_id;
+  int? assigned_to_id;
   List<AssetChecklist>? mapAssetChecklist;
   CreatePmPlanModel(
       {this.category_id,
@@ -11,6 +12,7 @@ class CreatePmPlanModel {
       this.mapAssetChecklist,
       this.plan_date,
       this.plan_freq_id,
+      this.assigned_to_id,
       this.plan_name});
 
   factory CreatePmPlanModel.fromJson(Map<String, dynamic> json) =>
@@ -20,6 +22,7 @@ class CreatePmPlanModel {
         facility_id: json["facility_id"],
         plan_date: json["plan_date"],
         plan_name: json["plan_name"],
+        assigned_to_id: json["assigned_to_id"],
         mapAssetChecklist: List<AssetChecklist>.from(
             json["mapAssetChecklist"].map((x) => AssetChecklist.fromJson(x))),
       );
@@ -30,6 +33,7 @@ class CreatePmPlanModel {
         "facility_id": facility_id,
         "category_id": category_id,
         "plan_freq_id": plan_freq_id,
+        "assigned_to_id": assigned_to_id,
         "mapAssetChecklist":
             List<dynamic>.from(mapAssetChecklist!.map((x) => x.toJson())),
       };

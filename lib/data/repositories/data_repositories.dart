@@ -399,7 +399,6 @@ class DataRepository extends DomainRepository {
       isLoading: isLoading,
       auth: auth,
       isClose: isClose,
-
     );
   }
 
@@ -413,10 +412,8 @@ class DataRepository extends DomainRepository {
       isLoading: isLoading,
       auth: auth,
       isExtend: isExtend,
-
     );
   }
-
 
   @override
   Future<ResponseModel> getWarrantyClaimList({
@@ -729,24 +726,24 @@ class DataRepository extends DomainRepository {
         isLoading: isLoading ?? false,
       );
 
-   Future<ResponseModel> permitExtendButton({
+  Future<ResponseModel> permitExtendButton({
     required String auth,
     extendPermitJsonString,
     bool? isLoading,
   }) async =>
       await connectHelper.permitExtendButton(
-         auth: auth,
+        auth: auth,
         extendPermitJsonString: extendPermitJsonString,
         isLoading: isLoading ?? false,
       );
 
- Future<ResponseModel> permitCloseButton({
+  Future<ResponseModel> permitCloseButton({
     required String auth,
     closePermitJsonString,
     bool? isLoading,
   }) async =>
       await connectHelper.permitCloseButton(
-         auth: auth,
+        auth: auth,
         closePermitJsonString: closePermitJsonString,
         isLoading: isLoading ?? false,
       );
@@ -854,18 +851,34 @@ class DataRepository extends DomainRepository {
         isLoading: isLoading ?? false,
       );
 
-  Future<ResponseModel> getPreventiveCheckList({
-    required String auth,
-    int? facilityId,
-    int? type,
-    bool? isLoading,
-  }) async =>
+  Future<ResponseModel> getPreventiveCheckList(
+          {required String auth,
+          int? facilityId,
+          int? type,
+          bool? isLoading,
+          int? frequencyid,
+          int? categoryId}) async =>
       await connectHelper.getPreventiveCheckList(
-        auth: auth,
-        facilityId: facilityId ?? 0,
-        type: type,
-        isLoading: isLoading ?? false,
-      );
+          auth: auth,
+          facilityId: facilityId ?? 0,
+          type: type,
+          isLoading: isLoading ?? false,
+          categoryId: categoryId,
+          frequencyid: frequencyid);
+  Future<ResponseModel> getPreventiveCheckListForPm(
+          {required String auth,
+          int? facilityId,
+          int? type,
+          bool? isLoading,
+          int? frequencyid,
+          int? categoryId}) async =>
+      await connectHelper.getPreventiveCheckListForPm(
+          auth: auth,
+          facilityId: facilityId ?? 0,
+          type: type,
+          isLoading: isLoading ?? false,
+          categoryId: categoryId,
+          frequencyid: frequencyid);
 
   Future<ResponseModel> getModuleList({
     required String auth,
@@ -2263,16 +2276,16 @@ class DataRepository extends DomainRepository {
     return response;
   }
 
-  Future<ResponseModel> inventoryList({
-    int? facilityId,
-    required bool isLoading,
-    required String auth,
-  }) async {
+  Future<ResponseModel> inventoryList(
+      {int? facilityId,
+      required bool isLoading,
+      required String auth,
+      int? categoryId}) async {
     return await connectHelper.inventoryList(
-      isLoading: isLoading,
-      auth: auth,
-      facilityId: facilityId,
-    );
+        isLoading: isLoading,
+        auth: auth,
+        facilityId: facilityId,
+        categoryId: categoryId);
   }
 
   Future<ResponseModel> startCalibration({

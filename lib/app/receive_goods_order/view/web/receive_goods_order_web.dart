@@ -853,6 +853,14 @@ class _ReceiveGoodsOrderWebState extends State<ReceiveGoodsOrderWeb> {
                                             DataColumn2(
                                                 // fixedWidth: 300,
                                                 label: Text(
+                                              "Requested  Qty",
+                                              style: TextStyle(
+                                                  fontSize: 15,
+                                                  fontWeight: FontWeight.bold),
+                                            )),
+                                            DataColumn2(
+                                                // fixedWidth: 300,
+                                                label: Text(
                                               "Cost",
                                               style: TextStyle(
                                                   fontSize: 15,
@@ -1194,9 +1202,41 @@ class _ReceiveGoodsOrderWebState extends State<ReceiveGoodsOrderWeb> {
                                                                               mapData["value"] = txt;
                                                                             },
                                                                           ))
-                                                                      : Text(mapData[
-                                                                              'key'] ??
-                                                                          ''),
+                                                                      : (mapData['key'] ==
+                                                                              "Requested")
+                                                                          ? Container(
+                                                                              decoration:
+                                                                                  BoxDecoration(
+                                                                                boxShadow: [
+                                                                                  BoxShadow(
+                                                                                    color: Colors.black26,
+                                                                                    offset: const Offset(
+                                                                                      5.0,
+                                                                                      5.0,
+                                                                                    ),
+                                                                                    blurRadius: 5.0,
+                                                                                    spreadRadius: 1.0,
+                                                                                  ),
+                                                                                ],
+                                                                                color: ColorValues.whiteColor,
+                                                                                borderRadius: BorderRadius.circular(5),
+                                                                              ),
+                                                                              child:
+                                                                                  LoginCustomTextfield(
+                                                                                width: (Get.width * .4),
+                                                                                keyboardType: TextInputType.number,
+                                                                                inputFormatters: <TextInputFormatter>[
+                                                                                  FilteringTextInputFormatter.digitsOnly
+                                                                                ],
+                                                                                enabled: controller.getPurchaseDetailsByIDModel.value?.status == 306 && varUserAccessModel.value.access_list!.where((e) => e.feature_id == UserAccessConstants.kGoodsFeatureId && e.add == UserAccessConstants.kHaveAddAccess).length > 0 || controller.getPurchaseDetailsByIDModel.value?.status == 307 && varUserAccessModel.value.access_list!.where((e) => e.feature_id == UserAccessConstants.kGoodsFeatureId && e.add == UserAccessConstants.kHaveAddAccess).length > 0 || controller.getPurchaseDetailsByIDModel.value?.status == 309 && varUserAccessModel.value.access_list!.where((e) => e.feature_id == UserAccessConstants.kGoodsFeatureId && e.add == UserAccessConstants.kHaveAddAccess).length > 0 ? true : false,
+                                                                                maxLine: 1,
+                                                                                textController: new TextEditingController(text: mapData["value"] ?? ''),
+                                                                                onChanged: (txt) {
+                                                                                  mapData["value"] = txt;
+                                                                                },
+                                                                              ))
+                                                                          : Text(mapData['key'] ??
+                                                                              ''),
                                                 );
                                               }).toList(),
                                             );

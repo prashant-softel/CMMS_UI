@@ -56,10 +56,10 @@ class _MultipDropdownWebWidgetState extends State<MultipDropdownWebWidget> {
           padding: EdgeInsets.symmetric(vertical: 5),
           decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(5),
-            // border: Border.all(
-            //   color: Color.fromARGB(255, 176, 67, 67),
-            //   width: 1,
-            // ),
+            border: Border.all(
+              color: Color.fromARGB(255, 186, 184, 184),
+              width: 1,
+            ),
             boxShadow: [
               BoxShadow(
                 color: Colors.black26,
@@ -108,18 +108,19 @@ class _MultipDropdownWebWidgetState extends State<MultipDropdownWebWidget> {
                   ),
                   dropdownDecoratorProps: DropDownDecoratorProps(
                     dropdownSearchDecoration: InputDecoration(
-                      border: InputBorder.none,
-                      enabledBorder:
-                          OutlineInputBorder(borderSide: BorderSide.none),
-                      focusedBorder:
-                          OutlineInputBorder(borderSide: BorderSide.none),
-                      errorBorder: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(5),
-                        borderSide: BorderSide(color: ColorValues.redColorDark),
-                      ),
-                      contentPadding: Dimens.edgeInsets05_0_5_0,
-                      hintText: "Select",
-                    ),
+                        border: InputBorder.none,
+                        enabledBorder:
+                            OutlineInputBorder(borderSide: BorderSide.none),
+                        focusedBorder:
+                            OutlineInputBorder(borderSide: BorderSide.none),
+                        errorBorder: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(5),
+                          borderSide:
+                              BorderSide(color: ColorValues.redColorDark),
+                        ),
+                        contentPadding: Dimens.edgeInsets05_0_5_0,
+                        hintText: "Select",
+                        suffixIcon: null),
                   ),
                   onChanged: (List<String>? _selectedValue) {
                     widget.selectedItems = _selectedValue ?? [];

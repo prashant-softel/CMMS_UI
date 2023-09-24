@@ -1,19 +1,16 @@
 import 'package:cmms/domain/models/inventory_category_model.dart';
 import '../../domain/models/frequency_model.dart';
 import '../../domain/models/inventory_model.dart';
+import '../../domain/models/preventive_checklist_model.dart';
 import '../../domain/usecases/create_pm_plan_usecase.dart';
 
 class CreatePmPlanPresenter {
   CreatePmPlanPresenter(this.createPmPlanUsecase);
   CreatePmPlanUsecase createPmPlanUsecase;
-  Future<List<InventoryModel?>?> inventoryList({
-    required bool isLoading,
-    required int? facilityId,
-  }) async {
+  Future<List<InventoryModel?>?> inventoryList(
+      {required bool isLoading, int? facilityId, int? categoryId}) async {
     return createPmPlanUsecase.inventoryList(
-      isLoading: isLoading,
-      facilityId: facilityId,
-    );
+        isLoading: isLoading, facilityId: facilityId, categoryId: categoryId);
   }
 
   Future<List<FrequencyModel?>?> getFrequencyList({
@@ -37,4 +34,17 @@ class CreatePmPlanPresenter {
       isLoading: isLoading,
     );
   }
+
+  Future<List<PreventiveCheckListModel?>?> getPreventiveCheckListForPm(
+          {int? facilityId,
+          int? type,
+          bool? isLoading,
+          int? frequencyid,
+          int? categoryId}) async =>
+      await createPmPlanUsecase.getPreventiveCheckListForPm(
+          facilityId: facilityId ?? 0,
+          type: type,
+          isLoading: isLoading ?? false,
+          categoryId: categoryId,
+          frequencyid: frequencyid);
 }
