@@ -218,7 +218,7 @@ class ReceiveGoodsOrdersController extends GetxController {
           {
             'key': "Received",
             "value": '${element.received_qty}',
-            "lostQty": '${element.lost_qty}'
+            // "lostQty": '${element.lost_qty}'
           },
           {
             'key': "Accepted",
@@ -367,7 +367,7 @@ class ReceiveGoodsOrdersController extends GetxController {
 
       {'key': "Cost", "value": ''},
       {'key': "Order", "value": ''},
-      {'key': "Received", "value": '', "lostQty": ''},
+      {'key': "Received", "value": ''},
       {'key': "Accepted", "value": ''},
       {'key': "Damaged", "value": ''},
       // {'key': "Pending", "value": ''},
@@ -452,7 +452,7 @@ class ReceiveGoodsOrdersController extends GetxController {
         po_no: _pOCtrlr,
         po_date: _poDateDateTc,
         freight: _frieghtToPayPaidCtrlr,
-        received_on: _receivedDateTc,
+        receivedAt: _receivedDateTc,
         no_pkg_received: _noOfPackagesReceivedCtrlr,
         lr_no: _lrNoCtrlr,
         condition_pkg_received: _conditionOfPackagesReceivedCtrlr,
@@ -496,9 +496,19 @@ class ReceiveGoodsOrdersController extends GetxController {
     List<Items> items = [];
     rowItem.value.forEach((element) {
       Items item = Items(
+        // goItemID: int.tryParse('${element[0]["id"]}'),
+        // // requested_qty: int.tryParse('${element[4]["recieveQty"]}'),
+        // lost_qty: 0, //int.tryParse('${element[5]["lostQty"]}'),
+        // assetItemID: int.tryParse('${element[0]["assetItemID"]}'),
+        // paid_by_ID: int.tryParse('${element[1]["id"]}'),
+        // cost: int.tryParse(element[3]["value"] ?? '0'),
+        // ordered_qty: int.tryParse(element[4]["value"] ?? '0'),
+        // received_qty: int.tryParse(element[5]["value"] ?? '0'),
+        // accepted_qty: int.tryParse(element[6]["value"] ?? '0'),
+        // damaged_qty: int.tryParse(element[7]["value"] ?? '0'),
+        // requested_qty: int.tryParse(element[2]["value"] ?? '0'),
         goItemID: int.tryParse('${element[0]["id"]}'),
-        // requested_qty: int.tryParse('${element[4]["recieveQty"]}'),
-        lost_qty: int.tryParse('${element[5]["lostQty"]}'),
+        lost_qty: 0, //int.tryParse('${element[4]["lostQty"]}'),
         assetItemID: int.tryParse('${element[0]["assetItemID"]}'),
         paid_by_ID: int.tryParse('${element[1]["id"]}'),
         cost: int.tryParse(element[3]["value"] ?? '0'),
@@ -526,7 +536,7 @@ class ReceiveGoodsOrdersController extends GetxController {
         po_no: _pOCtrlr,
         po_date: _poDateDateTc,
         freight: _frieghtToPayPaidCtrlr,
-        received_on: _receivedDateTc,
+        receivedAt: _receivedDateTc,
         no_pkg_received: _noOfPackagesReceivedCtrlr,
         lr_no: _lrNoCtrlr,
         condition_pkg_received: _conditionOfPackagesReceivedCtrlr,
@@ -571,14 +581,14 @@ class ReceiveGoodsOrdersController extends GetxController {
     rowItem.value.forEach((element) {
       Items item = Items(
         goItemID: int.tryParse('${element[0]["id"]}'),
-        lost_qty: int.tryParse('${element[4]["lostQty"]}'),
+        lost_qty: 0, //int.tryParse('${element[4]["lostQty"]}'),
         assetItemID: int.tryParse('${element[0]["assetItemID"]}'),
         paid_by_ID: int.tryParse('${element[1]["id"]}'),
-        cost: int.tryParse(element[2]["value"] ?? '0'),
-        ordered_qty: int.tryParse(element[3]["value"] ?? '0'),
-        received_qty: int.tryParse(element[4]["value"] ?? '0'),
-        accepted_qty: int.tryParse(element[5]["value"] ?? '0'),
-        damaged_qty: int.tryParse(element[6]["value"] ?? '0'),
+        cost: int.tryParse(element[3]["value"] ?? '0'),
+        ordered_qty: int.tryParse(element[4]["value"] ?? '0'),
+        received_qty: int.tryParse(element[5]["value"] ?? '0'),
+        accepted_qty: int.tryParse(element[6]["value"] ?? '0'),
+        damaged_qty: int.tryParse(element[7]["value"] ?? '0'),
         requested_qty: int.tryParse(element[2]["value"] ?? '0'),
       );
 
@@ -599,7 +609,7 @@ class ReceiveGoodsOrdersController extends GetxController {
         po_no: _pOCtrlr,
         po_date: _poDateDateTc,
         freight: _frieghtToPayPaidCtrlr,
-        received_on: _receivedDateTc,
+        receivedAt: _receivedDateTc,
         no_pkg_received: _noOfPackagesReceivedCtrlr,
         lr_no: _lrNoCtrlr,
         condition_pkg_received: _conditionOfPackagesReceivedCtrlr,
