@@ -6,6 +6,7 @@ import 'package:cmms/domain/models/currency_list_model.dart';
 import 'package:cmms/domain/models/get_asset_data_list_model.dart';
 import 'package:cmms/domain/models/get_asset_items_model.dart';
 import 'package:cmms/domain/models/get_purchase_details_model.dart';
+import 'package:cmms/domain/models/history_model.dart';
 
 class ViewAddGoodsOrdersUsecase {
   final Repository _repository;
@@ -25,6 +26,16 @@ class ViewAddGoodsOrdersUsecase {
   }) async =>
       await _repository.goodsOrderApprovedButton(
         goodsOrderApproveJsonString,
+        isLoading,
+      );
+  Future<List<HistoryModel>?> getGoHistory({
+    moduleType,
+    id,
+    bool? isLoading,
+  }) async =>
+      await _repository.getGoHistory(
+        moduleType,
+        id,
         isLoading,
       );
   Future<Map<String, dynamic>> goodsOrderRejectButton({

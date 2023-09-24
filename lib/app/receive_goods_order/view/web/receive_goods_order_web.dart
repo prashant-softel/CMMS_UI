@@ -76,7 +76,7 @@ class _ReceiveGoodsOrderWebState extends State<ReceiveGoodsOrderWeb> {
                             onTap: () {
                               Get.back();
                             },
-                            child: Text(" / RECEIVE GOODS ORDER  erg",
+                            child: Text(" / RECEIVE GOODS ORDER",
                                 style: Styles.greyMediumLight12)),
                       ],
                     ),
@@ -1246,6 +1246,133 @@ class _ReceiveGoodsOrderWebState extends State<ReceiveGoodsOrderWeb> {
                                     ]),
                                   ),
                                   Dimens.boxHeight15,
+                                  controller.historyList!.isEmpty
+                                      ? Dimens.box0
+                                      : Container(
+                                          margin: Dimens.edgeInsets20,
+                                          height: ((controller.historyList
+                                                          ?.length ??
+                                                      0) *
+                                                  50) +
+                                              125,
+                                          decoration: BoxDecoration(
+                                            border: Border.all(
+                                              color: ColorValues
+                                                  .lightGreyColorWithOpacity35,
+                                              width: 1,
+                                            ),
+                                            boxShadow: [
+                                              BoxShadow(
+                                                color: ColorValues
+                                                    .appBlueBackgroundColor,
+                                                spreadRadius: 2,
+                                                blurRadius: 5,
+                                                offset: Offset(0, 2),
+                                              ),
+                                            ],
+                                          ),
+                                          child: Column(
+                                            children: [
+                                              Padding(
+                                                padding:
+                                                    const EdgeInsets.all(10.0),
+                                                child: Row(
+                                                  children: [
+                                                    Text(
+                                                      "Goods Order History ",
+                                                      style: Styles.blue700,
+                                                    ),
+                                                  ],
+                                                ),
+                                              ),
+                                              Divider(
+                                                color:
+                                                    ColorValues.greyLightColour,
+                                              ),
+                                              Expanded(
+                                                child: DataTable2(
+                                                  border: TableBorder.all(
+                                                      color: Color.fromARGB(
+                                                          255, 206, 229, 234)),
+                                                  columns: [
+                                                    DataColumn(
+                                                        label: Text(
+                                                      "Time Stamp",
+                                                      style: TextStyle(
+                                                          fontSize: 15,
+                                                          fontWeight:
+                                                              FontWeight.bold),
+                                                    )),
+                                                    DataColumn(
+                                                        label: Text(
+                                                      "Posted By",
+                                                      style: TextStyle(
+                                                          fontSize: 15,
+                                                          fontWeight:
+                                                              FontWeight.bold),
+                                                    )),
+                                                    DataColumn(
+                                                        label: Text(
+                                                      "Comment",
+                                                      style: TextStyle(
+                                                          fontSize: 15,
+                                                          fontWeight:
+                                                              FontWeight.bold),
+                                                    )),
+                                                    DataColumn(
+                                                        label: Text(
+                                                      "Location",
+                                                      style: TextStyle(
+                                                          fontSize: 15,
+                                                          fontWeight:
+                                                              FontWeight.bold),
+                                                    )),
+                                                    DataColumn(
+                                                        label: Text(
+                                                      "Status",
+                                                      style: TextStyle(
+                                                          fontSize: 15,
+                                                          fontWeight:
+                                                              FontWeight.bold),
+                                                    )),
+                                                  ],
+                                                  rows: List<DataRow>.generate(
+                                                    controller.historyList
+                                                            ?.length ??
+                                                        0,
+                                                    (index) => DataRow(cells: [
+                                                      DataCell(Text(controller
+                                                              .historyList?[
+                                                                  index]
+                                                              ?.createdAt
+                                                              .toString() ??
+                                                          '')),
+                                                      DataCell(Text(controller
+                                                              .historyList?[
+                                                                  index]
+                                                              ?.createdByName
+                                                              .toString() ??
+                                                          '')),
+                                                      DataCell(Text(controller
+                                                              .historyList?[
+                                                                  index]
+                                                              ?.comment
+                                                              .toString() ??
+                                                          '')),
+                                                      DataCell(Text('--')),
+                                                      DataCell(Text(controller
+                                                              .historyList?[
+                                                                  index]
+                                                              ?.status_name
+                                                              .toString() ??
+                                                          '')),
+                                                    ]),
+                                                  ),
+                                                ),
+                                              ),
+                                            ],
+                                          ),
+                                        ),
                                 ],
                               ),
                             ),

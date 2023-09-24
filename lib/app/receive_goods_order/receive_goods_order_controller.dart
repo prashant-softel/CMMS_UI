@@ -9,6 +9,7 @@ import 'package:cmms/domain/models/currency_list_model.dart';
 import 'package:cmms/domain/models/facility_model.dart';
 import 'package:cmms/domain/models/get_asset_data_list_model.dart';
 import 'package:cmms/domain/models/get_purchase_details_model.dart';
+import 'package:cmms/domain/models/history_model.dart';
 
 import 'package:cmms/domain/models/paiyed_model.dart';
 import 'package:flutter/cupertino.dart';
@@ -40,7 +41,7 @@ class ReceiveGoodsOrdersController extends GetxController {
   RxList<FacilityModel?> facilityList = <FacilityModel>[].obs;
   RxList<BusinessListModel?> ownerList = <BusinessListModel>[].obs;
   Rx<String> selectedBusinessType = ''.obs;
-
+  RxList<HistoryModel?>? historyList = <HistoryModel?>[].obs;
   Rx<bool> isSelectedBusinessType = true.obs;
   int selectedBusinessTypeId = 1;
   int paidId = 0;
@@ -126,7 +127,7 @@ class ReceiveGoodsOrdersController extends GetxController {
         }
       });
     } catch (e) {}
-
+    await getGoHistory(id: id.value);
     super.onInit();
   }
 
@@ -154,6 +155,22 @@ class ReceiveGoodsOrdersController extends GetxController {
       selectedFacility.value = facilityList[0]?.name ?? '';
       _facilityId.sink.add(facilityList[0]?.id ?? 0);
     }
+  }
+
+  Future<void> getGoHistory({required int id}) async {
+    /// TODO: CHANGE THESE VALUES
+    int moduleType = 32;
+    // int tempModuleType = 21;
+    //
+    historyList?.value = await receiveGoodsOrdersPresenter.getGoHistory(
+          // tempModuleType,
+          // tempJobCardId,
+          moduleType,
+          id,
+          true,
+        ) ??
+        [];
+    update(["historyList"]);
   }
 
   Future<void> getPurchaseDetailsById({required int id}) async {
