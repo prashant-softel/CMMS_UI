@@ -52,7 +52,7 @@ class StockManagementAddGoodsOrdersController extends GetxController {
   int facilityId = 0;
 
   //drop down list of assets
-  // RxList<GetAssetDataModel?> assetList = <GetAssetDataModel>[].obs;
+  RxList<GetAssetDataModel?> assetList = <GetAssetDataModel>[].obs;
   RxList<PaiedModel?> paid = <PaiedModel>[].obs;
 
   var paidByDropdownList = 'Select Gender'.obs;
@@ -62,7 +62,7 @@ class StockManagementAddGoodsOrdersController extends GetxController {
 
   // Rx<List<List<Map<String, String>>>> rowItem = Rx<List<List<Map<String, String>>>>([]);
   final rowItem = Rx<List<List<Map<String, String>>>>([]);
-  Map<String, GetAssetItemsModel> dropdownMapperData = {};
+  Map<String, GetAssetDataModel> dropdownMapperData = {};
   Map<String, PaiedModel> paiddropdownMapperData = {};
   RxList<GetPurchaseDetailsByIDModel?>? getPurchaseDetailsByIDModelList =
       <GetPurchaseDetailsByIDModel?>[].obs;
@@ -129,7 +129,7 @@ class StockManagementAddGoodsOrdersController extends GetxController {
         getBusinessList(4);
       });
       Future.delayed(Duration(seconds: 1), () {
-        getEquipmentAssetsList(facilityId);
+        getAssetList(facilityId);
 
         if (id.value != 0) {
           Future.delayed(Duration(seconds: 1), () {
@@ -301,34 +301,34 @@ class StockManagementAddGoodsOrdersController extends GetxController {
     }
   }
 
-  Future<void> getEquipmentAssetsList(int _facilityId) async {
-    assetItemList.value = <GetAssetItemsModel>[];
-    final _assetList = await stockManagementAddGoodsOrdersPresenter
-        .getEquipmentAssetsList(facilityId: facilityId);
-    if (_assetList != null) {
-      for (var asset in _assetList) {
-        assetItemList.add(asset);
-      }
-      //
-
-      update(["AssetList"]);
-    }
-
-    addRowItem();
-  }
-  // Future<void> getAssetList(int _facilityId) async {
-  //   assetList.value = <GetAssetDataModel>[];
+  // Future<void> getEquipmentAssetsList(int _facilityId) async {
+  //   assetItemList.value = <GetAssetItemsModel>[];
   //   final _assetList = await stockManagementAddGoodsOrdersPresenter
-  //       .getAssetList(facilityId: facilityId);
-  //   // print('jkncejknce:$facilityId');
+  //       .getEquipmentAssetsList(facilityId: facilityId);
   //   if (_assetList != null) {
   //     for (var asset in _assetList) {
-  //       assetList.add(asset);
+  //       assetItemList.add(asset);
   //     }
+  //     //
+
   //     update(["AssetList"]);
   //   }
+
   //   addRowItem();
   // }
+  Future<void> getAssetList(int _facilityId) async {
+    assetList.value = <GetAssetDataModel>[];
+    final _assetList = await stockManagementAddGoodsOrdersPresenter
+        .getAssetList(facilityId: facilityId);
+    // print('jkncejknce:$facilityId');
+    if (_assetList != null) {
+      for (var asset in _assetList) {
+        assetList.add(asset);
+      }
+      update(["AssetList"]);
+    }
+    addRowItem();
+  }
 
   Future<void> updatePaidBy() async {
     paid.value = <PaiedModel>[];

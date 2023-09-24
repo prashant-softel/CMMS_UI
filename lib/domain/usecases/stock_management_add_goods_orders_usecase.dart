@@ -55,19 +55,28 @@ class StockManagementAddGoodsOrdersUsecase {
   //   int? facilityId,
   //   bool? isLoading,
   // }) async =>
-  //     await _repository.getAssetList(
-  //       auth,
-  //       facilityId,
-  //       isLoading,
+  //     await _repository.getBusinessList(
+  //       businessType: type,
+  //       isLoading: isLoading,
   //     );
-  Future<List<GetAssetItemsModel?>?> getEquipmentAssetsList({
+  Future<List<GetAssetDataModel?>?> getAssetList({
+    String? auth,
     int? facilityId,
     bool? isLoading,
   }) async =>
-      await _repository.getEquipmentAssetsList(
+      await _repository.getAssetList(
+        auth,
         facilityId,
         isLoading,
       );
+  // Future<List<GetAssetItemsModel?>?> getEquipmentAssetsList({
+  //   int? facilityId,
+  //   bool? isLoading,
+  // }) async =>
+  //     await _repository.getEquipmentAssetsList(
+  //       facilityId,
+  //       isLoading,
+  //     );
   Future<Map<String, dynamic>> createGoodsOrder({
     createGo,
     bool? isLoading,
