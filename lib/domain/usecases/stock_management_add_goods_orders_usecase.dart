@@ -7,6 +7,7 @@ import 'package:cmms/domain/models/facility_model.dart';
 import 'package:cmms/domain/models/get_asset_data_list_model.dart';
 import 'package:cmms/domain/models/get_asset_items_model.dart';
 import 'package:cmms/domain/models/get_purchase_details_model.dart';
+import 'package:cmms/domain/models/history_model.dart';
 import 'package:cmms/domain/models/paiyed_model.dart';
 
 class StockManagementAddGoodsOrdersUsecase {
@@ -29,6 +30,16 @@ class StockManagementAddGoodsOrdersUsecase {
     );
   }
 
+  Future<List<HistoryModel>?> getGoHistory({
+    moduleType,
+    id,
+    bool? isLoading,
+  }) async =>
+      await _repository.getGoHistory(
+        moduleType,
+        id,
+        isLoading,
+      );
   Future<List<FacilityModel?>?> getFacilityList() async =>
       await _repository.getFacilityList(true);
   Future<List<BusinessListModel?>?> getBusinessList({

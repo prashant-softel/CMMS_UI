@@ -4,6 +4,7 @@ import 'package:cmms/domain/models/currency_list_model.dart';
 import 'package:cmms/domain/models/facility_model.dart';
 import 'package:cmms/domain/models/get_asset_data_list_model.dart';
 import 'package:cmms/domain/models/get_purchase_details_model.dart';
+import 'package:cmms/domain/models/history_model.dart';
 
 import 'package:cmms/domain/usecases/stock_management_add_goods_orders_usecase.dart';
 import 'package:cmms/domain/usecases/stock_management_receive_goods_orders_usecase.dart';
@@ -114,4 +115,14 @@ class ReceiveGoodsOrdersPresenter {
 
   Future<List<FacilityModel?>?> getFacilityList() async =>
       await receiveGoodsOrdersUsecase.getFacilityList();
+  Future<List<HistoryModel>?> getGoHistory(
+    moduleType,
+    id,
+    isLoading,
+  ) async =>
+      await receiveGoodsOrdersUsecase.getGoHistory(
+        moduleType: moduleType,
+        id: id,
+        isLoading: isLoading,
+      );
 }

@@ -1784,6 +1784,42 @@ class Repository {
     }
   }
 
+  Future<List<HistoryModel>?> getGoHistory(
+    int? moduleType,
+    int? id,
+    bool? isLoading,
+  ) async {
+    try {
+      final auth = await getSecuredValue(LocalKeys.authToken);
+      final res = await _dataRepository.getGoHistory(
+        auth: auth,
+        moduleType: moduleType,
+        id: id,
+        isLoading: isLoading,
+      );
+      // print('Permit History: ${res.data}');
+
+      if (!res.hasError) {
+        final jsonGoDetailsModels = jsonDecode(res.data);
+        final List<HistoryModel> _goDetailsList = jsonGoDetailsModels
+            .map<HistoryModel>(
+              (m) => HistoryModel.fromJson(
+                Map<String, dynamic>.from(m),
+              ),
+            )
+            .toList();
+
+        return _goDetailsList;
+      } else {
+        Utility.showDialog(res.errorCode.toString());
+        return null;
+      }
+    } catch (error) {
+      print(error.toString());
+      return [];
+    }
+  }
+
   Future<List<InventoryDetailModel?>?> getInventoryDetailList(
     String auth,
     int? id,
