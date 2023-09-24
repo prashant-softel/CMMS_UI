@@ -143,13 +143,13 @@ class ViewAddGoodsOrdersController extends GetxController {
             'id': '${element.id}'
           },
           {'key': "Paid_By", "value": '${element.paid_by_name}'},
-          {'key': "Cost", "value": '${element.cost}'},
-          {'key': "Order", "value": '${element.ordered_qty}'},
           {
             'key': "Requested",
             "value": '${element.requested_qty}',
             // 'id': '${element.assetItemID}'
           },
+          {'key': "Cost", "value": '${element.cost}'},
+          {'key': "Order", "value": '${element.ordered_qty}'},
         ]);
       });
 
@@ -342,9 +342,9 @@ class ViewAddGoodsOrdersController extends GetxController {
         "id": ''
       },
       {'key': "Paid_By", "value": 'Please Select'},
+      {'key': "Requested", "value": ''},
       {'key': "Cost", "value": ''},
       {'key': "Order", "value": ''},
-      {'key': "Requested", "value": ''},
     ]);
   }
   // void addRowItem() {
