@@ -35,9 +35,10 @@ class ViewAddGoodsOrdersController extends GetxController {
   RxList<BusinessListModel?> ownerList = <BusinessListModel>[].obs;
   Rx<String> selectedBusinessType = ''.obs;
   RxList<PaiedModel?> paid = <PaiedModel>[].obs;
+  RxList<HistoryModel?>? historyList = <HistoryModel?>[].obs;
   RxList<GetAssetDataModel?> assetList = <GetAssetDataModel>[].obs;
 
-  RxList<HistoryModel?>? historyList = <HistoryModel?>[].obs;
+  // RxList<HistoryModel?>? historyList = <HistoryModel?>[].obs;
   RxList<GetAssetDataModel?> assetItemList = <GetAssetDataModel>[].obs;
   TextEditingController approveCommentTextFieldCtrlr = TextEditingController();
   TextEditingController rejectCommentTextFieldCtrlr = TextEditingController();
