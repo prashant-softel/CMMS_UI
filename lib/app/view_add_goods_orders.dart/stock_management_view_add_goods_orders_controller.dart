@@ -38,7 +38,7 @@ class ViewAddGoodsOrdersController extends GetxController {
   RxList<HistoryModel?>? historyList = <HistoryModel?>[].obs;
   RxList<GetAssetDataModel?> assetList = <GetAssetDataModel>[].obs;
 
-  RxList<HistoryModel?>? historyList = <HistoryModel?>[].obs;
+  // RxList<HistoryModel?>? historyList = <HistoryModel?>[].obs;
   RxList<GetAssetDataModel?> assetItemList = <GetAssetDataModel>[].obs;
   TextEditingController approveCommentTextFieldCtrlr = TextEditingController();
   TextEditingController rejectCommentTextFieldCtrlr = TextEditingController();
