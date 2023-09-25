@@ -643,6 +643,16 @@ class DataRepository extends DomainRepository {
         goodsOrderApproveJsonString: goodsOrderApproveJsonString,
         isLoading: isLoading ?? false,
       );
+  Future<ResponseModel> pmPlanApprovedButton({
+    required String auth,
+    pmPlanApproveJsonString,
+    bool? isLoading,
+  }) async =>
+      await connectHelper.pmPlanApprovedButton(
+        auth: auth,
+        pmPlanApproveJsonString: pmPlanApproveJsonString,
+        isLoading: isLoading ?? false,
+      );
 
   Future<ResponseModel> approveGOReceiveButton({
     required String auth,
@@ -663,6 +673,16 @@ class DataRepository extends DomainRepository {
       await connectHelper.rejectGOReceiveButton(
         auth: auth,
         goodsOrderApproveJsonString: goodsOrderApproveJsonString,
+        isLoading: isLoading ?? false,
+      );
+  Future<ResponseModel> pmPlanRejectButton({
+    required String auth,
+    pmPlanRejectJsonString,
+    bool? isLoading,
+  }) async =>
+      await connectHelper.pmPlanRejectButton(
+        auth: auth,
+        pmPlanRejectJsonString: pmPlanRejectJsonString,
         isLoading: isLoading ?? false,
       );
   Future<ResponseModel> goodsOrderRejectButton({
@@ -1496,6 +1516,16 @@ class DataRepository extends DomainRepository {
   }) async {
     var response = await connectHelper.deleteCkeckpoint(
         auth: auth, isLoading: isLoading, check_point_id: check_point_id);
+    return response;
+  }
+
+  Future<ResponseModel> deletePmPlan({
+    auth,
+    bool? isLoading,
+    planId,
+  }) async {
+    var response = await connectHelper.deletePmPlan(
+        auth: auth, isLoading: isLoading, planId: planId);
     return response;
   }
 
@@ -2793,6 +2823,18 @@ class DataRepository extends DomainRepository {
     return await connectHelper.getMrsDetails(
       auth: auth,
       mrsId: mrsId,
+      isLoading: isLoading,
+    );
+  }
+
+  Future<ResponseModel> getPmPlanDetails({
+    String? auth,
+    int? pmPlanId,
+    bool? isLoading,
+  }) async {
+    return await connectHelper.getPmPlanDetails(
+      auth: auth,
+      pmPlanId: pmPlanId,
       isLoading: isLoading,
     );
   }

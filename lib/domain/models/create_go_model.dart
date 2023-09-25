@@ -15,7 +15,7 @@ class CreateGoModel {
   String? po_no;
   String? po_date;
   String? freight;
-  String? received_on;
+  String? receivedAt;
   String? no_pkg_received;
   String? lr_no;
   String? condition_pkg_received;
@@ -38,7 +38,7 @@ class CreateGoModel {
       this.po_no,
       this.po_date,
       this.freight,
-      this.received_on,
+      this.receivedAt,
       this.no_pkg_received,
       this.lr_no,
       this.condition_pkg_received,
@@ -64,7 +64,7 @@ class CreateGoModel {
       po_no: json['po_no'],
       po_date: json['po_date'],
       freight: json['freight'],
-      received_on: json['received_on'],
+      receivedAt: json['receivedAt'],
       no_pkg_received: json['no_pkg_received'],
       lr_no: json['lr_no'],
       condition_pkg_received: json['condition_pkg_received'],
@@ -92,7 +92,7 @@ class CreateGoModel {
         "po_no": po_no,
         "po_date": po_date,
         "freight": freight,
-        "received_on": received_on,
+        "receivedAt": receivedAt,
         "no_pkg_received": no_pkg_received,
         "lr_no": lr_no,
         "condition_pkg_received": condition_pkg_received,
@@ -120,17 +120,39 @@ class Items {
     this.received_qty,
     this.lost_qty,
     this.damaged_qty,
+    this.id,
+    this.assetItem_Name,
+    this.locationID,
+    this.spare_status,
+    this.remarks,
+    this.receive_later,
+    this.asset_type_ID,
+    this.paid_by_name,
+    this.cat_name,
+    this.asset_type,
+    this.asset_code,
   });
-  int? goItemID;
+  int? id;
   int? assetItemID;
-  int? cost;
+  String? assetItem_Name;
+  int? locationID;
+  double? cost;
   int? ordered_qty;
-  int? paid_by_ID;
-  int? requested_qty;
-  int? accepted_qty;
   int? received_qty;
   int? lost_qty;
+  int? requested_qty;
   int? damaged_qty;
+  double? accepted_qty;
+  int? spare_status;
+  int? remarks;
+  int? receive_later;
+  int? asset_type_ID;
+  String? paid_by_name;
+  int? paid_by_ID;
+  String? cat_name;
+  String? asset_type;
+  String? asset_code;
+  int? goItemID;
 
   factory Items.fromJson(Map<String, dynamic> json) => Items(
         assetItemID: json["assetItemID"],
@@ -143,6 +165,17 @@ class Items {
         damaged_qty: json["damaged_qty"],
         ordered_qty: json["ordered_qty"],
         paid_by_ID: json["paid_by_ID"],
+        id: json['id'],
+        assetItem_Name: json['assetItem_Name'],
+        locationID: json['location_ID'],
+        spare_status: json['spare_status'],
+        remarks: json['remarks'],
+        receive_later: json['receive_later'],
+        asset_type_ID: json['asset_type_ID'],
+        paid_by_name: json['paid_by_name'],
+        cat_name: json['cat_name'],
+        asset_type: json['asset_type'],
+        asset_code: json['asset_code'],
       );
 
   Map<String, dynamic> toJson() => {
@@ -156,5 +189,16 @@ class Items {
         "received_qty": received_qty,
         "lost_qty": lost_qty,
         "damaged_qty": damaged_qty,
+        "id": id == null ? 0 : id,
+        "assetItem_Name": assetItem_Name == null ? "" : assetItem_Name,
+        "locationID": locationID == null ? 0 : locationID,
+        "spare_status": spare_status == null ? 0 : spare_status,
+        "remarks": remarks == null ? 0 : remarks,
+        "receive_later": receive_later == null ? 0 : receive_later,
+        "asset_type_ID": asset_type_ID == null ? 0 : asset_type_ID,
+        "paid_by_name": paid_by_name == null ? "" : paid_by_name,
+        "cat_name": cat_name == null ? "" : cat_name,
+        "asset_type": asset_type == null ? "" : asset_type,
+        "asset_code": asset_code == null ? "" : asset_code,
       };
 }

@@ -1,5 +1,7 @@
+import 'package:cmms/app/receive_goods_order/receive_goods_order_controller.dart';
 import 'package:cmms/app/theme/color_values.dart';
 import 'package:cmms/app/view_add_goods_orders.dart/stock_management_view_add_goods_orders_controller.dart';
+import 'package:cmms/app/view_pm_plan/view_pm_plan_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -8,12 +10,12 @@ import '../navigators/app_pages.dart';
 import '../theme/dimens.dart';
 import '../theme/styles.dart';
 
-class GoodsOrderMessageRejectDialog extends GetView {
+class PMPlanMsgReceiveDialog extends GetView {
   String? data;
   List<dynamic>? id;
 
-  GoodsOrderMessageRejectDialog({super.key, this.data, this.id});
-  final ViewAddGoodsOrdersController controller = Get.find();
+  PMPlanMsgReceiveDialog({super.key, this.data, this.id});
+  final ViewPmPlanController _controller = Get.find();
 
   @override
   Widget build(BuildContext context) {
@@ -25,7 +27,7 @@ class GoodsOrderMessageRejectDialog extends GetView {
         insetPadding: Dimens.edgeInsets10_0_10_0,
         contentPadding: EdgeInsets.zero,
         title: Text(
-          'Goods Order Reject',
+          'Reject PM Plan',
           textAlign: TextAlign.center,
           style: TextStyle(color: Colors.black),
         ),
@@ -49,31 +51,6 @@ class GoodsOrderMessageRejectDialog extends GetView {
                   Text('${id}',
                       style: TextStyle(color: Colors.green),
                       textAlign: TextAlign.center),
-                  //     SizedBox(height: 20,),
-                  // Row(
-                  //     mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  //     children: [
-                  //       SizedBox(
-                  //         width: 15,
-                  //       ),
-                  //       ElevatedButton(
-                  //         style: Styles.greenElevatedButtonStyle,
-                  //         onPressed: () => Get.offAllNamed(Routes.newPermit),
-                  //         child: const Text('Permit List'),
-                  //       ),
-                  //       Dimens.boxWidth10,
-                  //       ElevatedButton(
-                  //         style: Styles.blueElevatedButtonStyle,
-                  //         onPressed: () => Get.offAndToNamed(Routes.newPermitList),
-                  //         child: const Text('View This Permit'),
-                  //       ),
-                  //       Dimens.boxWidth10,
-                  //       // ElevatedButton(
-                  //       //   style: Styles.redElevatedButtonStyle,
-                  //       //   onPressed: () => Get.offAndToNamed(Routes.addJob),
-                  //       //   child: const Text('Add New Job'),
-                  //       // ),
-                  //     ]),
                 ]),
           );
         }),
@@ -85,9 +62,9 @@ class GoodsOrderMessageRejectDialog extends GetView {
                 child: ElevatedButton(
                   style: Styles.darkBlueElevatedButtonStyle,
                   onPressed: () {
-                    Get.offAllNamed(Routes.stockManagementGoodsOrdersScreen);
+                    Get.offAllNamed(Routes.pmPlanList);
                   },
-                  child: const Text('Goods Order List'),
+                  child: const Text('PM Plan List'),
                 ),
               ),
               Dimens.boxWidth10,
@@ -96,22 +73,35 @@ class GoodsOrderMessageRejectDialog extends GetView {
                   style: Styles.yellowElevatedButtonStyle,
                   onPressed: () {
                     Get.back();
-                    Future.delayed(Duration(seconds: 1), () {
-                      controller.getUnitCurrencyList();
-                    });
-                    Future.delayed(Duration(seconds: 1), () {
-                      controller.getBusinessList(4);
-                    });
-                    Future.delayed(Duration(seconds: 1), () {
-                      controller.getAssetList(controller.facilityId);
-                      if (id != null) {
-                        Future.delayed(Duration(seconds: 1), () {
-                          controller.getPurchaseDetailsById(id: controller.id);
-                        });
-                      }
-                    });
+                    // controller.facilityIdStreamSubscription =
+                    //     controller.facilityId$.listen((event) {
+                    //   controller.facilityId = event;
+                    //   Future.delayed(Duration(seconds: 1), () {
+                    //     controller.getFacilityList();
+                    //   });
+                    // });
+                    // Future.delayed(Duration(seconds: 1), () {
+                    //   controller.getUnitCurrencyList();
+                    // });
+
+                    // Future.delayed(Duration(seconds: 1), () {
+                    //   controller.updatePaidBy();
+                    // });
+                    // Future.delayed(Duration(seconds: 1), () {
+                    //   controller.getBusinessList(4);
+                    // });
+                    // Future.delayed(Duration(seconds: 1), () {
+                    //   controller.getAssetList(controller.facilityId);
+
+                    //   if (controller.id.value != 0) {
+                    //     Future.delayed(Duration(seconds: 1), () {
+                    //       controller.getPurchaseDetailsById(
+                    //           id: controller.id.value);
+                    //     });
+                    //   }
+                    // });
                   },
-                  child: const Text('View Goods Order'),
+                  child: const Text('View PM Plan'),
                 ),
               ),
               Dimens.boxWidth10,

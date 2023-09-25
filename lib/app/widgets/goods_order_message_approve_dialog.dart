@@ -13,7 +13,7 @@ class GoodsOrderMessageApproveDialog extends GetView {
   List<dynamic>? id;
 
   GoodsOrderMessageApproveDialog({super.key, this.data, this.id});
-  final ViewAddGoodsOrdersController _controller = Get.find();
+  final ViewAddGoodsOrdersController controller = Get.find();
 
   @override
   Widget build(BuildContext context) {
@@ -106,7 +106,7 @@ class GoodsOrderMessageApproveDialog extends GetView {
                       controller.getAssetList(controller.facilityId);
                       if (id != null) {
                         Future.delayed(Duration(seconds: 1), () {
-                          controller.getPurchaseDetailsById(id: controller.id!);
+                          controller.getPurchaseDetailsById(id: controller.id);
                         });
                       }
                     });

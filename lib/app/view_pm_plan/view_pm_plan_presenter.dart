@@ -1,33 +1,37 @@
-import 'package:cmms/domain/models/get_asset_data_list_model.dart';
-import 'package:cmms/domain/models/inventory_category_model.dart';
+import 'package:cmms/domain/models/get_pm_plan_detail_model.dart';
 
-import '../../domain/models/frequency_model.dart';
-import '../../domain/usecases/create_pm_plan_usecase.dart';
 import '../../domain/usecases/view_pm_plan_usecase.dart';
 
 class ViewPmPlanPresenter {
-  ViewPmPlanPresenter(this.createPmPlanUsecase);
-  ViewPmPlanUsecase createPmPlanUsecase;
-  Future<List<GetAssetDataModel?>?> getAssetList({
-    String? auth,
-    int? facilityId,
+  ViewPmPlanPresenter(this.viewPmPlanUsecase);
+  ViewPmPlanUsecase viewPmPlanUsecase;
+
+  Future<Map<String, dynamic>?> pmPlanApprovedButton({
+    pmPlanApproveJsonString,
+    required bool isLoading,
+  }) async {
+    return viewPmPlanUsecase.pmPlanApprovedButton(
+      pmPlanApproveJsonString: pmPlanApproveJsonString,
+      isLoading: isLoading,
+    );
+  }
+
+  Future<Map<String, dynamic>?> pmPlanRejectButton({
+    pmPlanRejectJsonString,
+    required bool isLoading,
+  }) async {
+    return viewPmPlanUsecase.pmPlanRejectButton(
+      pmPlanRejectJsonString: pmPlanRejectJsonString,
+      isLoading: isLoading,
+    );
+  }
+
+  Future<PMPlanDetail?> getPmPlanDetails({
+    int? pmPlanId,
     bool? isLoading,
   }) async =>
-      await createPmPlanUsecase.getAssetList(
-        auth: auth ?? "",
-        facilityId: facilityId ?? 0,
-        isLoading: isLoading ?? false,
+      await viewPmPlanUsecase.getPmPlanDetails(
+        pmPlanId: pmPlanId,
+        isLoading: isLoading,
       );
-  Future<List<FrequencyModel?>?> getFrequencyList({
-    bool? isLoading,
-  }) async =>
-      await createPmPlanUsecase.getFrequencyList(
-        isLoading: isLoading ?? false,
-      );
-  Future<List<InventoryCategoryModel?>?> getInventoryCategoryList({
-    String? auth,
-    int? facilityId,
-    bool? isLoading,
-  }) async =>
-      await createPmPlanUsecase.getInventoryCategoryList();
 }

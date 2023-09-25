@@ -46,6 +46,16 @@ class ViewAddGoodsOrdersUsecase {
         goodsOrderRejectJsonString,
         isLoading,
       );
+  Future<List<GetAssetDataModel?>?> getAssetList({
+    String? auth,
+    int? facilityId,
+    bool? isLoading,
+  }) async =>
+      await _repository.getAssetList(
+        auth,
+        facilityId,
+        isLoading,
+      );
   Future<Map<String, dynamic>> goodsOrderCloseButton({
     goodsOrderCloseJsonString,
     bool? isLoading,

@@ -827,14 +827,14 @@ class _ViewAddGoodsOrdersWebState extends State<ViewAddGoodsOrdersWeb> {
                                                                       .width,
                                                               dropdownList:
                                                                   controller
-                                                                      .assetItemList,
+                                                                      .assetList,
                                                               selectedValue:
                                                                   mapData[
                                                                       "value"],
                                                               onValueChanged: (list,
                                                                   selectedValue) {
                                                                 // print(
-                                                                //     'paifcghb:${controller.assetItemList}');
+                                                                //     'paifcghb:${controller.assetList}');
                                                                 // print({selectedValue: selectedValue});
                                                                 mapData["value"] =
                                                                     selectedValue;
@@ -848,30 +848,30 @@ class _ViewAddGoodsOrdersWebState extends State<ViewAddGoodsOrdersWeb> {
                                                                             null);
                                                               },
                                                             ),
-                                                            // Row(
-                                                            //   children: [
-                                                            //     Text(
-                                                            //         "Assets Code :"),
-                                                            //     Text(
-                                                            //         "${controller.dropdownMapperData[mapData['value']]?.asset_code ?? ''}")
-                                                            //   ],
-                                                            // ),
-                                                            // Row(
-                                                            //   children: [
-                                                            //     Text(
-                                                            //         "Assets type :"),
-                                                            //     Text(
-                                                            //         "${controller.dropdownMapperData[mapData['value']]?.asset_type ?? ''}")
-                                                            //   ],
-                                                            // ),
-                                                            // Row(
-                                                            //   children: [
-                                                            //     Text(
-                                                            //         "Assets Category :"),
-                                                            //     Text(
-                                                            //         "${controller.dropdownMapperData[mapData['value']]?.cat_name ?? ''}")
-                                                            //   ],
-                                                            // )
+                                                            Row(
+                                                              children: [
+                                                                Text(
+                                                                    "Assets Code :"),
+                                                                Text(
+                                                                    "${controller.dropdownMapperData[mapData['value']]?.asset_code ?? ''}")
+                                                              ],
+                                                            ),
+                                                            Row(
+                                                              children: [
+                                                                Text(
+                                                                    "Assets type :"),
+                                                                Text(
+                                                                    "${controller.dropdownMapperData[mapData['value']]?.asset_type ?? ''}")
+                                                              ],
+                                                            ),
+                                                            Row(
+                                                              children: [
+                                                                Text(
+                                                                    "Assets Category :"),
+                                                                Text(
+                                                                    "${controller.dropdownMapperData[mapData['value']]?.cat_name ?? ''}")
+                                                              ],
+                                                            )
                                                           ],
                                                         ),
                                                       ),

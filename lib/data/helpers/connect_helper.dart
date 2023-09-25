@@ -29,6 +29,7 @@ import 'package:cmms/app/widgets/permit_close_message_dialog.dart';
 import 'package:cmms/app/widgets/permit_extend_message_dialog.dart';
 import 'package:cmms/app/widgets/permit_issue_message_dialog.dart';
 import 'package:cmms/app/widgets/permit_reject_message_dialog.dart';
+import 'package:cmms/app/widgets/pm_plan_reject_msg_dialog.dart';
 import 'package:cmms/app/widgets/recive_go_msg_dialog.dart';
 import 'package:cmms/app/widgets/reject_go_recive_msg_dialog.dart';
 import 'package:cmms/app/widgets/start_mc_execution_dialog.dart';
@@ -45,6 +46,8 @@ import 'package:cmms/domain/models/create_sop_model.dart';
 import 'package:http/http.dart' as http;
 
 import 'package:get/get.dart';
+
+import '../../app/widgets/pm_plan_approve_msg_dialog.dart';
 
 /// The helper class which will connect to the world to get the data.
 class ConnectHelper {
@@ -856,6 +859,30 @@ class ConnectHelper {
     return responseModel;
   }
 
+  Future<ResponseModel> pmPlanApprovedButton({
+    required String auth,
+    pmPlanApproveJsonString,
+    bool? isLoading,
+  }) async {
+    var responseModel = await apiWrapper.makeRequest(
+      'PM/ApprovePMPlan',
+      Request.put,
+      pmPlanApproveJsonString,
+      isLoading ?? false,
+      {
+        'Content-Type': 'application/json',
+        'Authorization': 'Bearer $auth',
+      },
+    );
+    print('pmplanApproveResponse: ${responseModel.data}');
+    var res = responseModel.data;
+    var parsedJson = json.decode(res);
+    Get.dialog<void>(PmPlanMessageApproveDialog(
+        data: parsedJson['message'], id: parsedJson['id']));
+
+    return responseModel;
+  }
+
   Future<ResponseModel> approveGOReceiveButton({
     required String auth,
     goodsOrderApproveJsonString,
@@ -899,6 +926,30 @@ class ConnectHelper {
     var res = responseModel.data;
     var parsedJson = json.decode(res);
     Get.dialog<void>(RejectGOMsgReceiveDialog(
+        data: parsedJson['message'], id: parsedJson['id']));
+
+    return responseModel;
+  }
+
+  Future<ResponseModel> pmPlanRejectButton({
+    required String auth,
+    pmPlanRejectJsonString,
+    bool? isLoading,
+  }) async {
+    var responseModel = await apiWrapper.makeRequest(
+      'PM/RejectPMPlan',
+      Request.put,
+      pmPlanRejectJsonString,
+      isLoading ?? false,
+      {
+        'Content-Type': 'application/json',
+        'Authorization': 'Bearer $auth',
+      },
+    );
+    print('goodsOrderApproveResponse: ${responseModel.data}');
+    var res = responseModel.data;
+    var parsedJson = json.decode(res);
+    Get.dialog<void>(PMPlanMsgReceiveDialog(
         data: parsedJson['message'], id: parsedJson['id']));
 
     return responseModel;
@@ -2649,6 +2700,25 @@ class ConnectHelper {
       'CheckList/DeleteCheckPoint?id=$check_point_id',
       Request.delete,
       check_point_id,
+      isLoading ?? false,
+      {
+        'Content-Type': 'application/json',
+        'Authorization': 'Bearer $auth',
+      },
+    );
+
+    return responseModel;
+  }
+
+  Future<ResponseModel> deletePmPlan({
+    required String auth,
+    bool? isLoading,
+    required planId,
+  }) async {
+    var responseModel = await apiWrapper.makeRequest(
+      'PM/DeletePMPlan?planId=$planId',
+      Request.delete,
+      planId,
       isLoading ?? false,
       {
         'Content-Type': 'application/json',
@@ -4596,6 +4666,24 @@ class ConnectHelper {
   }) async {
     var responseModel = await apiWrapper.makeRequest(
       'MRS/getMRSDetails?ID=$mrsId',
+      Request.get,
+      null,
+      isLoading ?? false,
+      {
+        'Content-Type': 'application/json',
+        'Authorization': 'Bearer $auth',
+      },
+    );
+    return responseModel;
+  }
+
+  Future<ResponseModel> getPmPlanDetails({
+    required String? auth,
+    int? pmPlanId,
+    bool? isLoading,
+  }) async {
+    var responseModel = await apiWrapper.makeRequest(
+      'PM/GetPMPlanDetail?planId=$pmPlanId',
       Request.get,
       null,
       isLoading ?? false,

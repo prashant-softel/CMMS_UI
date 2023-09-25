@@ -52,7 +52,7 @@ class StockManagementAddGoodsOrdersController extends GetxController {
   int facilityId = 0;
 
   //drop down list of assets
-  // RxList<GetAssetDataModel?> assetList = <GetAssetDataModel>[].obs;
+  RxList<GetAssetDataModel?> assetList = <GetAssetDataModel>[].obs;
   RxList<PaiedModel?> paid = <PaiedModel>[].obs;
 
   var paidByDropdownList = 'Select Gender'.obs;
@@ -62,13 +62,13 @@ class StockManagementAddGoodsOrdersController extends GetxController {
 
   // Rx<List<List<Map<String, String>>>> rowItem = Rx<List<List<Map<String, String>>>>([]);
   final rowItem = Rx<List<List<Map<String, String>>>>([]);
-  Map<String, GetAssetItemsModel> dropdownMapperData = {};
+  Map<String, GetAssetDataModel> dropdownMapperData = {};
   Map<String, PaiedModel> paiddropdownMapperData = {};
   RxList<GetPurchaseDetailsByIDModel?>? getPurchaseDetailsByIDModelList =
       <GetPurchaseDetailsByIDModel?>[].obs;
   Rx<GetPurchaseDetailsByIDModel?> getPurchaseDetailsByIDModel =
       GetPurchaseDetailsByIDModel().obs;
-  RxList<GoDetails?>? goDetails = <GoDetails?>[].obs;
+  RxList<Items?>? goDetails = <Items?>[].obs;
 
 //all textfield tc
   var challanNoCtrlr = TextEditingController();
@@ -129,7 +129,7 @@ class StockManagementAddGoodsOrdersController extends GetxController {
         getBusinessList(4);
       });
       Future.delayed(Duration(seconds: 1), () {
-        getEquipmentAssetsList(facilityId);
+        getAssetList(facilityId);
 
         if (id.value != 0) {
           Future.delayed(Duration(seconds: 1), () {
@@ -213,11 +213,11 @@ class StockManagementAddGoodsOrdersController extends GetxController {
       getPurchaseDetailsByIDModel.value = _getPurchaseDetailsById;
 
       print(
-          'Additioanl Email Employees${_getPurchaseDetailsById.goDetails?.length ?? 0}');
+          'Additioanl Email Employees${_getPurchaseDetailsById.goDetails.length}');
       rowItem.value = [];
-      goDetails?.value = _getPurchaseDetailsById.goDetails ?? [];
+      goDetails?.value = _getPurchaseDetailsById.goDetails;
 
-      _getPurchaseDetailsById.goDetails?.forEach((element) {
+      _getPurchaseDetailsById.goDetails.forEach((element) {
         rowItem.value.add([
           {
             "key": "Drop_down",
@@ -231,6 +231,11 @@ class StockManagementAddGoodsOrdersController extends GetxController {
             'id': '${element.paid_by_ID}'
           },
           {
+            'key': "Requested",
+            "value": '${element.requested_qty}',
+            // 'id': '${element.assetItemID}'
+          },
+          {
             'key': "Cost",
             "value": '${element.cost}',
             // 'id': '${element.assetItemID}'
@@ -240,22 +245,11 @@ class StockManagementAddGoodsOrdersController extends GetxController {
             "value": '${element.ordered_qty}',
             // 'id': '${element.assetItemID}'
           },
-          {
-            'key': "Requested",
-            "value": '${element.requested_qty}',
-            // 'id': '${element.assetItemID}'
-          },
         ]);
-        // rowItem.value.add([
-        //   {
-        //     "key": "Drop_down",
-        //     "value": '${element.assetItem_Name}',
-        //     "id": '${element.assetItemID}'
-        //   },
-        //   {'key': "Paid_By", "value": '${element.paid_by_name}'},
-        //   {'key': "Cost", "value": '${element.cost}'},
-        //   {'key': "Order", "value": '${element.ordered_qty}'},
-        // ]);
+
+        dropdownMapperData[element.assetItem_Name ?? ""] = assetList.firstWhere(
+            (e) => e?.name == element.assetItem_Name,
+            orElse: null)!;
       });
 
       challanDateTc.text =
@@ -301,34 +295,34 @@ class StockManagementAddGoodsOrdersController extends GetxController {
     }
   }
 
-  Future<void> getEquipmentAssetsList(int _facilityId) async {
-    assetItemList.value = <GetAssetItemsModel>[];
-    final _assetList = await stockManagementAddGoodsOrdersPresenter
-        .getEquipmentAssetsList(facilityId: facilityId);
-    if (_assetList != null) {
-      for (var asset in _assetList) {
-        assetItemList.add(asset);
-      }
-      //
-
-      update(["AssetList"]);
-    }
-
-    addRowItem();
-  }
-  // Future<void> getAssetList(int _facilityId) async {
-  //   assetList.value = <GetAssetDataModel>[];
+  // Future<void> getEquipmentAssetsList(int _facilityId) async {
+  //   assetItemList.value = <GetAssetItemsModel>[];
   //   final _assetList = await stockManagementAddGoodsOrdersPresenter
-  //       .getAssetList(facilityId: facilityId);
-  //   // print('jkncejknce:$facilityId');
+  //       .getEquipmentAssetsList(facilityId: facilityId);
   //   if (_assetList != null) {
   //     for (var asset in _assetList) {
-  //       assetList.add(asset);
+  //       assetItemList.add(asset);
   //     }
+  //     //
+
   //     update(["AssetList"]);
   //   }
+
   //   addRowItem();
   // }
+  Future<void> getAssetList(int _facilityId) async {
+    assetList.value = <GetAssetDataModel>[];
+    final _assetList = await stockManagementAddGoodsOrdersPresenter
+        .getAssetList(facilityId: facilityId);
+    // print('jkncejknce:$facilityId');
+    if (_assetList != null) {
+      for (var asset in _assetList) {
+        assetList.add(asset);
+      }
+      update(["AssetList"]);
+    }
+    addRowItem();
+  }
 
   Future<void> updatePaidBy() async {
     paid.value = <PaiedModel>[];
@@ -402,9 +396,9 @@ class StockManagementAddGoodsOrdersController extends GetxController {
         "id": ''
       },
       {'key': "Paid_By", "value": 'Please Select', "id": ''},
+      {'key': "Requested", "value": ''},
       {'key': "Cost", "value": ''},
       {'key': "Order", "value": ''},
-      {'key': "Requested", "value": ''},
     ]);
   }
 
@@ -434,7 +428,7 @@ class StockManagementAddGoodsOrdersController extends GetxController {
           damaged_qty: 0,
           requested_qty: int.tryParse(element[2]["value"] ?? '0'),
           assetItemID: dropdownMapperData[element[0]["value"]]?.id,
-          cost: int.tryParse(element[3]["value"] ?? '0'),
+          cost: double.tryParse(element[3]["value"] ?? '0'),
           ordered_qty: int.tryParse(element[4]["value"] ?? '0'),
           paid_by_ID: paiddropdownMapperData[element[1]["value"]]?.id);
       items.add(item);
@@ -452,7 +446,7 @@ class StockManagementAddGoodsOrdersController extends GetxController {
         po_no: _pOCtrlr,
         po_date: _poDateDateTc,
         freight: _frieghtToPayPaidCtrlr,
-        received_on: _receivedDateTc,
+        receivedAt: _receivedDateTc,
         no_pkg_received: _noOfPackagesReceivedCtrlr,
         lr_no: _lrNoCtrlr,
         condition_pkg_received: _conditionOfPackagesReceivedCtrlr,
@@ -503,7 +497,7 @@ class StockManagementAddGoodsOrdersController extends GetxController {
         requested_qty: int.tryParse(element[2]["value"] ?? '0'),
         goItemID: int.tryParse('${element[0]["id"]}'),
         assetItemID: int.tryParse('${element[0]["assetItemID"]}'),
-        cost: int.tryParse(element[3]["value"] ?? '0'),
+        cost: double.tryParse(element[3]["value"] ?? '0'),
         ordered_qty: int.tryParse(element[4]["value"] ?? '0'),
         paid_by_ID: int.tryParse('${element[1]["id"]}'),
       );
@@ -524,7 +518,7 @@ class StockManagementAddGoodsOrdersController extends GetxController {
         po_no: _pOCtrlr,
         po_date: _poDateDateTc,
         freight: _frieghtToPayPaidCtrlr,
-        received_on: _receivedDateTc,
+        receivedAt: _receivedDateTc,
         no_pkg_received: _noOfPackagesReceivedCtrlr,
         lr_no: _lrNoCtrlr,
         condition_pkg_received: _conditionOfPackagesReceivedCtrlr,
