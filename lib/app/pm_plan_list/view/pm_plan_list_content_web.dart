@@ -271,7 +271,7 @@ class _PmPlanListContentWebState extends State<PmPlanListContentWeb> {
                                                   buildDataColumn(
                                                     'Actions',
                                                     controller.tittleFilterText,
-                                                    150,
+                                                    200,
                                                   ),
                                                 ],
                                               );
@@ -393,7 +393,7 @@ class PmPlanDataSource extends DataTableSource {
 
     controller.pmPlanId.value = pmPlanDetails?.plan_id ?? 0;
     var cellsBuffer = [
-      '${pmPlanDetails?.plan_id ?? ''}',
+      'pmPlanId', // '${pmPlanDetails?.plan_id ?? ''}',
       '${pmPlanDetails?.plan_name ?? ''}',
       '${pmPlanDetails?.created_at ?? ''}',
       '${pmPlanDetails?.updated_at ?? ''}',
@@ -424,48 +424,121 @@ class PmPlanDataSource extends DataTableSource {
         return DataCell(
           Padding(
             padding: EdgeInsets.zero,
-            child: (value == 'Actions')
-                ? Wrap(children: [
-                    TableActionButton(
-                      color: ColorValues.viewColor,
-                      icon: Icons.remove_red_eye_outlined,
-                      message: 'view',
-                      onPress: () {
-                        final _flutterSecureStorage =
-                            const FlutterSecureStorage();
+            child: (value == 'pmPlanId')
+                ? Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text(
+                        '${pmPlanDetails?.plan_id}',
+                      ),
+                      Dimens.boxHeight5,
+                      Align(
+                        alignment: Alignment.centerRight,
+                        child: Container(
+                          padding: Dimens.edgeInsets8_2_8_2,
+                          decoration: BoxDecoration(
+                            color: controller.pmPlanList
+                                        .firstWhere(
+                                          (e) =>
+                                              e?.plan_id ==
+                                              pmPlanDetails?.plan_id,
+                                          orElse: () =>
+                                              PmPlanListModel(plan_id: 00),
+                                        )
+                                        ?.status_id ==
+                                    406
+                                ? ColorValues.rejectedStatusColor
+                                : controller.pmPlanList
+                                            .firstWhere(
+                                              (e) =>
+                                                  e?.plan_id ==
+                                                  pmPlanDetails?.plan_id,
+                                              orElse: () =>
+                                                  PmPlanListModel(plan_id: 00),
+                                            )
+                                            ?.status_id ==
+                                        401
+                                    ? ColorValues.appLightBlueColor
+                                    : controller.pmPlanList
+                                                .firstWhere(
+                                                  (e) =>
+                                                      e?.plan_id ==
+                                                      pmPlanDetails?.plan_id,
+                                                  orElse: () => PmPlanListModel(
+                                                      plan_id: 00),
+                                                )
+                                                ?.status_id ==
+                                            405
+                                        ? ColorValues.approveStatusColor
+                                        : ColorValues.addNewColor,
+                            borderRadius: BorderRadius.circular(4),
+                          ),
+                          child: Text(
+                            '${pmPlanDetails?.status_name}${pmPlanDetails?.status_id}',
+                            style: Styles.white10.copyWith(
+                              color: Colors.white,
+                            ),
+                          ),
+                        ),
+                      ),
+                    ],
+                  )
+                : (value == 'Actions')
+                    ? Wrap(children: [
+                        TableActionButton(
+                          color: ColorValues.viewColor,
+                          icon: Icons.remove_red_eye_outlined,
+                          message: 'view',
+                          onPress: () {
+                            final _flutterSecureStorage =
+                                const FlutterSecureStorage();
 
-                        _flutterSecureStorage.delete(key: "pmPlanId");
-                        int pmPlanId = pmPlanDetails?.plan_id ?? 0;
-                        if (pmPlanId != 0) {
-                          Get.toNamed(Routes.viewPmPlanScreen,
-                              arguments: {'pmPlanId': pmPlanId});
-                        }
-                      },
-                    ),
-                    TableActionButton(
-                      color: ColorValues.editColor,
-                      icon: Icons.edit,
-                      message: 'Edit',
-                      onPress: () {
-                        final _flutterSecureStorage =
-                            const FlutterSecureStorage();
+                            _flutterSecureStorage.delete(key: "pmPlanId");
+                            int pmPlanId = pmPlanDetails?.plan_id ?? 0;
+                            if (pmPlanId != null) {
+                              Get.toNamed(Routes.viewPmPlanScreen,
+                                  arguments: {'pmPlanId': pmPlanId});
+                            }
+                          },
+                        ),
+                        controller.pmPlanList
+                                    .firstWhere(
+                                      (e) =>
+                                          e?.plan_id == pmPlanDetails?.plan_id,
+                                      orElse: () =>
+                                          PmPlanListModel(plan_id: 00),
+                                    )
+                                    ?.status_id ==
+                                401
+                            ? TableActionButton(
+                                color: ColorValues.approveColor,
+                                icon: Icons.approval,
+                                message: 'Approve/Reject',
+                                onPress: () {
+                                  final _flutterSecureStorage =
+                                      const FlutterSecureStorage();
 
-                        _flutterSecureStorage.delete(key: "pmPlanId");
-                        int pmPlanId = pmPlanDetails?.plan_id ?? 0;
-                        if (pmPlanId != 0) {
-                          // Get.toNamed(Routes.addpmPlan,
-                          //     arguments: {'pmPlanId': pmPlanId});
-                        }
-                      },
-                    ),
-                    TableActionButton(
-                      color: ColorValues.deleteColor,
-                      icon: Icons.delete,
-                      message: 'Delete',
-                      onPress: () {},
-                    )
-                  ])
-                : Text(value.toString()),
+                                  _flutterSecureStorage.delete(key: "pmPlanId");
+                                  int pmPlanId = pmPlanDetails?.plan_id ?? 0;
+                                  if (pmPlanId != null) {
+                                    Get.toNamed(Routes.viewPmPlanScreen,
+                                        arguments: {'pmPlanId': pmPlanId});
+                                  }
+                                },
+                              )
+                            : Dimens.box0,
+                        TableActionButton(
+                          color: ColorValues.deleteColor,
+                          icon: Icons.delete,
+                          message: 'Delete',
+                          onPress: () {
+                            controller.isDeleteDialog(
+                                planName: pmPlanDetails?.plan_name,
+                                planId: pmPlanDetails?.plan_id.toString());
+                          },
+                        )
+                      ])
+                    : Text(value.toString()),
           ),
         );
       }).toList(),

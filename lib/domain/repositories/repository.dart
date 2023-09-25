@@ -30,6 +30,7 @@ import 'package:cmms/domain/models/get_faulty_material_report_model.dart';
 import 'package:cmms/domain/models/get_notification_by_userid_model.dart';
 import 'package:cmms/domain/models/get_notification_model.dart';
 import 'package:cmms/domain/models/get_plant_Stock_list.dart';
+import 'package:cmms/domain/models/get_pm_plan_detail_model.dart';
 import 'package:cmms/domain/models/get_purchase_details_model.dart';
 import 'package:cmms/domain/models/get_return_mrs_detail.dart';
 import 'package:cmms/domain/models/get_return_mrs_list.dart';
@@ -1617,6 +1618,75 @@ class Repository {
     }
   }
 
+  Future<Map<String, dynamic>> pmPlanApprovedButton(
+    pmPlanApproveJsonString,
+    bool? isLoading,
+  ) async {
+    try {
+      final auth = await getSecuredValue(LocalKeys.authToken);
+      final res = await _dataRepository.pmPlanApprovedButton(
+        auth: auth,
+        pmPlanApproveJsonString: json.encode(pmPlanApproveJsonString),
+        isLoading: isLoading ?? false,
+      );
+
+      var resourceData = res.data;
+
+      print('Response Goods Order Approve: ${resourceData}');
+
+      if (!res.hasError) {
+        if (res.errorCode == 200) {
+          var responseMap = json.decode(res.data);
+          return responseMap;
+        } else {
+          // Get.dialog<void>(WarrantyClaimErrorDialog());
+        }
+      } else {
+        Utility.showDialog(res.errorCode.toString() + 'pmPlanApprovedButton');
+        //return '';
+      }
+      return Map();
+    } catch (error) {
+      print(error.toString());
+      return Map();
+    }
+  }
+
+  Future<Map<String, dynamic>> goodsOrderRejectButton(
+    goodsOrderRejectJsonString,
+    bool? isLoading,
+  ) async {
+    try {
+      final auth = await getSecuredValue(LocalKeys.authToken);
+      final res = await _dataRepository.goodsOrderRejectButton(
+        auth: auth,
+        goodsOrderRejectJsonString: goodsOrderRejectJsonString,
+        isLoading: isLoading ?? false,
+      );
+
+      var resourceData = res.data;
+
+      print('Response Goods Order Approve: ${resourceData}');
+
+      if (!res.hasError) {
+        if (res.errorCode == 200) {
+          var responseMap = json.decode(res.data);
+          return responseMap;
+        } else {
+          // Get.dialog<void>(WarrantyClaimErrorDialog());
+        }
+      } else {
+        Utility.showDialog(
+            res.errorCode.toString() + 'goodsOrderApprovedButton');
+        //return '';
+      }
+      return Map();
+    } catch (error) {
+      print(error.toString());
+      return Map();
+    }
+  }
+
   Future<Map<String, dynamic>> approveGOReceiveButton(
     goodsOrderApproveJsonString,
     bool? isLoading,
@@ -1685,15 +1755,15 @@ class Repository {
     }
   }
 
-  Future<Map<String, dynamic>> goodsOrderRejectButton(
-    goodsOrderRejectJsonString,
+  Future<Map<String, dynamic>> pmPlanRejectButton(
+    pmPlanRejectJsonString,
     bool? isLoading,
   ) async {
     try {
       final auth = await getSecuredValue(LocalKeys.authToken);
-      final res = await _dataRepository.goodsOrderRejectButton(
+      final res = await _dataRepository.pmPlanRejectButton(
         auth: auth,
-        goodsOrderRejectJsonString: goodsOrderRejectJsonString,
+        pmPlanRejectJsonString: json.encode(pmPlanRejectJsonString),
         isLoading: isLoading ?? false,
       );
 
@@ -4514,6 +4584,25 @@ class Repository {
     }
   }
 
+  Future<void> deletePmPlan(Object planId, bool isLoading) async {
+    try {
+      final auth = await getSecuredValue(LocalKeys.authToken);
+      final res = await _dataRepository.deletePmPlan(
+        auth: auth,
+        planId: planId,
+        isLoading: isLoading,
+      );
+
+      if (!res.hasError) {
+        //get delete response back from API
+      } else {
+        Utility.showDialog(res.errorCode.toString() + 'deletePmPlan');
+      }
+    } catch (error) {
+      print(error.toString());
+    }
+  }
+
   Future<List<PmMappingListModel?>?> getPmMappingList(
     int? facilityId,
     bool? isLoading,
@@ -6943,6 +7032,32 @@ class Repository {
       } //
       else {
         Utility.showDialog(res.errorCode.toString() + 'getMrsDetails');
+        return null;
+      }
+    } //
+    catch (error) {
+      print(error.toString());
+      return null;
+    }
+  }
+
+  Future<PMPlanDetail?> getPmPlanDetails(
+    int? pmPlanId,
+    bool? isLoading,
+  ) async {
+    try {
+      final auth = await getSecuredValue(LocalKeys.authToken);
+      final res = await _dataRepository.getPmPlanDetails(
+        auth: auth,
+        pmPlanId: pmPlanId,
+        isLoading: isLoading,
+      );
+      if (!res.hasError) {
+        final PMPlanDetail _pmPlanDetailModel = pmPlanDetailFromJson(res.data);
+        return _pmPlanDetailModel;
+      } //
+      else {
+        Utility.showDialog(res.errorCode.toString() + 'getPmPlanDetails');
         return null;
       }
     } //

@@ -1,6 +1,10 @@
 import 'dart:async';
 
 import 'package:cmms/app/pm_plan_list/pm_plan_list_presenter.dart';
+import 'package:cmms/app/theme/color_values.dart';
+import 'package:cmms/app/theme/dimens.dart';
+import 'package:cmms/app/theme/styles.dart';
+import 'package:cmms/app/widgets/custom_elevated_button.dart';
 import 'package:cmms/domain/models/pm_plan_list_model.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -68,7 +72,7 @@ class PmPlanListController extends GetxController {
   });
 
   final Map<String, double> columnwidth = {
-    "Pm PlanID": 100,
+    "Pm PlanID": 200,
     "Pm Plan Title": 350,
     "Last Done Date": 200,
     "Next Schedule Date": 200,
@@ -152,5 +156,68 @@ class PmPlanListController extends GetxController {
 
   void getPmPlanListByDate() {
     getPmPlanList(facilityId, formattedTodate1, formattedFromdate1, false);
+  }
+
+  void isDeleteDialog({String? planId, String? planName}) {
+    Get.dialog(
+      AlertDialog(
+        content: Column(
+            mainAxisSize: MainAxisSize.min,
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Text("${planName}", style: Styles.blackBold16),
+              Divider(
+                color: ColorValues.appLightGreyColor,
+              ),
+              Dimens.boxHeight5,
+              RichText(
+                text: TextSpan(
+                    text: 'Are you sure you want to delete the PM Plan ',
+                    style: Styles.blackBold16,
+                    children: [
+                      TextSpan(
+                        text: planName,
+                        style: TextStyle(
+                          color: ColorValues.orangeColor,
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
+                    ]),
+              ),
+            ]),
+        actions: [
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+            children: [
+              CustomElevatedButton(
+                  backgroundColor: ColorValues.appRedColor,
+                  onPressed: () {
+                    Get.back();
+                  },
+                  text: 'No'),
+              CustomElevatedButton(
+                  backgroundColor: ColorValues.appGreenColor,
+                  onPressed: () {
+                    deletePmPlan(planId).then((value) {
+                      Get.back();
+                      getPmPlanList(facilityId, formattedTodate1,
+                          formattedFromdate1, true);
+                    });
+                  },
+                  text: 'Yes'),
+            ],
+          )
+        ],
+      ),
+    );
+  }
+
+  Future<void> deletePmPlan(String? planId) async {
+    {
+      await pmPlanListPresenter.deletePmPlan(
+        planId,
+        isLoading: true,
+      );
+    }
   }
 }
