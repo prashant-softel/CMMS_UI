@@ -35,8 +35,10 @@ class ViewAddGoodsOrdersController extends GetxController {
   RxList<BusinessListModel?> ownerList = <BusinessListModel>[].obs;
   Rx<String> selectedBusinessType = ''.obs;
   RxList<PaiedModel?> paid = <PaiedModel>[].obs;
+  RxList<GetAssetDataModel?> assetList = <GetAssetDataModel>[].obs;
+
   RxList<HistoryModel?>? historyList = <HistoryModel?>[].obs;
-  RxList<GetAssetItemsModel?> assetItemList = <GetAssetItemsModel>[].obs;
+  RxList<GetAssetDataModel?> assetItemList = <GetAssetDataModel>[].obs;
   TextEditingController approveCommentTextFieldCtrlr = TextEditingController();
   TextEditingController rejectCommentTextFieldCtrlr = TextEditingController();
   TextEditingController closeCommentTextFieldCtrlr = TextEditingController();
@@ -58,13 +60,13 @@ class ViewAddGoodsOrdersController extends GetxController {
 
   Rx<List<List<Map<String, String>>>> rowItem =
       Rx<List<List<Map<String, String>>>>([]);
-  Map<String, GetAssetItemsModel> dropdownMapperData = {};
+  Map<String, GetAssetDataModel> dropdownMapperData = {};
   Map<String, PaiedModel> paiddropdownMapperData = {};
   RxList<GetPurchaseDetailsByIDModel?>? getPurchaseDetailsByIDModelList =
       <GetPurchaseDetailsByIDModel?>[].obs;
   Rx<GetPurchaseDetailsByIDModel?> getPurchaseDetailsByIDModel =
       GetPurchaseDetailsByIDModel().obs;
-  RxList<GoDetails?>? goDetails = <GoDetails?>[].obs;
+  RxList<Items?>? goDetails = <Items?>[].obs;
 
 //all textfield tc
   var challanNoCtrlr = TextEditingController();
@@ -109,7 +111,7 @@ class ViewAddGoodsOrdersController extends GetxController {
       getBusinessList(4);
     });
     Future.delayed(Duration(seconds: 1), () {
-      getEquipmentAssetsList(facilityId);
+      getAssetList(facilityId);
       if (id != null) {
         Future.delayed(Duration(seconds: 1), () {
           getPurchaseDetailsById(id: id);
@@ -151,6 +153,10 @@ class ViewAddGoodsOrdersController extends GetxController {
           {'key': "Cost", "value": '${element.cost}'},
           {'key': "Order", "value": '${element.ordered_qty}'},
         ]);
+
+        dropdownMapperData[element.assetItem_Name ?? ""] =
+            assetItemList.firstWhere((e) => e?.name == element.assetItem_Name,
+                orElse: null)!;
       });
 
       challanDateTc.text =
@@ -270,19 +276,17 @@ class ViewAddGoodsOrdersController extends GetxController {
     }
   }
 
-  Future<void> getEquipmentAssetsList(int _facilityId) async {
-    assetItemList.value = <GetAssetItemsModel>[];
-    final _assetList = await viewAddGoodsOrdersPresenter.getEquipmentAssetsList(
-        facilityId: facilityId);
+  Future<void> getAssetList(int _facilityId) async {
+    assetList.value = <GetAssetDataModel>[];
+    final _assetList =
+        await viewAddGoodsOrdersPresenter.getAssetList(facilityId: facilityId);
+    // print('jkncejknce:$facilityId');
     if (_assetList != null) {
       for (var asset in _assetList) {
-        assetItemList.add(asset);
+        assetList.add(asset);
       }
-      //
-
       update(["AssetList"]);
     }
-
     addRowItem();
   }
 
@@ -382,7 +386,7 @@ class ViewAddGoodsOrdersController extends GetxController {
           damaged_qty: 0,
           requested_qty: int.tryParse(element[2]["value"] ?? '0'),
           assetItemID: dropdownMapperData[element[0]["value"]]?.id,
-          cost: int.tryParse(element[3]["value"] ?? '0'),
+          cost: double.tryParse(element[3]["value"] ?? '0'),
           ordered_qty: int.tryParse(element[4]["value"] ?? '0'),
           paid_by_ID: paiddropdownMapperData[element[1]["value"]]?.id);
       items.add(item);
@@ -450,7 +454,7 @@ class ViewAddGoodsOrdersController extends GetxController {
         requested_qty: int.tryParse(element[2]["value"] ?? '0'),
         goItemID: int.tryParse('${element[0]["id"]}'),
         assetItemID: int.tryParse('${element[0]["assetItemID"]}'),
-        cost: int.tryParse(element[3]["value"] ?? '0'),
+        cost: double.tryParse(element[3]["value"] ?? '0'),
         ordered_qty: int.tryParse(element[4]["value"] ?? '0'),
         paid_by_ID: int.tryParse('${element[1]["id"]}'),
       );

@@ -66,7 +66,7 @@ class ReceiveGoodsOrdersController extends GetxController {
   Map<String, PaiedModel> paiddropdownMapperData = {};
   RxList<GetPurchaseDetailsByIDModel?>? getPurchaseDetailsByIDModelList =
       <GetPurchaseDetailsByIDModel?>[].obs;
-  RxList<GoDetails?>? goDetails = <GoDetails?>[].obs;
+  RxList<Items?>? goDetails = <Items?>[].obs;
   Rx<GetPurchaseDetailsByIDModel?> getPurchaseDetailsByIDModel =
       GetPurchaseDetailsByIDModel().obs;
 
@@ -231,6 +231,9 @@ class ReceiveGoodsOrdersController extends GetxController {
             // 'id': '${element.assetItemID}'
           },
         ]);
+        dropdownMapperData[element.assetItem_Name ?? ""] = assetList.firstWhere(
+            (e) => e?.name == element.assetItem_Name,
+            orElse: null)!;
       });
 
       challanDateTc.text =
@@ -435,7 +438,7 @@ class ReceiveGoodsOrdersController extends GetxController {
       Items item = Items(
           goItemID: 0,
           assetItemID: dropdownMapperData[element[0]["value"]]?.id,
-          cost: int.tryParse(element[2]["value"] ?? '0'),
+          cost: double.tryParse(element[2]["value"] ?? '0'),
           ordered_qty: int.tryParse(element[3]["value"] ?? '0'),
           paid_by_ID: paiddropdownMapperData[element[1]["value"]]?.id);
       items.add(item);
@@ -511,10 +514,10 @@ class ReceiveGoodsOrdersController extends GetxController {
         lost_qty: 0, //int.tryParse('${element[4]["lostQty"]}'),
         assetItemID: int.tryParse('${element[0]["assetItemID"]}'),
         paid_by_ID: int.tryParse('${element[1]["id"]}'),
-        cost: int.tryParse(element[3]["value"] ?? '0'),
+        cost: double.tryParse(element[3]["value"] ?? '0'),
         ordered_qty: int.tryParse(element[4]["value"] ?? '0'),
         received_qty: int.tryParse(element[5]["value"] ?? '0'),
-        accepted_qty: int.tryParse(element[6]["value"] ?? '0'),
+        accepted_qty: double.tryParse(element[6]["value"] ?? '0'),
         damaged_qty: int.tryParse(element[7]["value"] ?? '0'),
         requested_qty: int.tryParse(element[2]["value"] ?? '0'),
       );
@@ -584,10 +587,10 @@ class ReceiveGoodsOrdersController extends GetxController {
         lost_qty: 0, //int.tryParse('${element[4]["lostQty"]}'),
         assetItemID: int.tryParse('${element[0]["assetItemID"]}'),
         paid_by_ID: int.tryParse('${element[1]["id"]}'),
-        cost: int.tryParse(element[3]["value"] ?? '0'),
+        cost: double.tryParse(element[3]["value"] ?? '0'),
         ordered_qty: int.tryParse(element[4]["value"] ?? '0'),
         received_qty: int.tryParse(element[5]["value"] ?? '0'),
-        accepted_qty: int.tryParse(element[6]["value"] ?? '0'),
+        accepted_qty: double.tryParse(element[6]["value"] ?? '0'),
         damaged_qty: int.tryParse(element[7]["value"] ?? '0'),
         requested_qty: int.tryParse(element[2]["value"] ?? '0'),
       );

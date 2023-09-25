@@ -815,8 +815,7 @@ class AddRowInGoodsOrder extends StatelessWidget {
                                     dropdownList: controller.assetList,
                                     selectedValue: mapData["value"],
                                     onValueChanged: (list, selectedValue) {
-                                      // print(
-                                      //     'paifcghb:${controller.assetList}');
+                                      // print('paifcghb:${controller.assetList}');
                                       // print({selectedValue: selectedValue});
                                       mapData["value"] = selectedValue;
                                       controller.dropdownMapperData[
