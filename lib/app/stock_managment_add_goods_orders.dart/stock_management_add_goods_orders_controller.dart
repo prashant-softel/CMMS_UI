@@ -133,13 +133,13 @@ class StockManagementAddGoodsOrdersController extends GetxController {
 
         if (id.value != 0) {
           Future.delayed(Duration(seconds: 1), () {
-            getPurchaseDetailsById(id: id.value);
+            getPurchaseDetailsById(id: id.value);     getGoHistory(id: id.value);
+
           });
         }
       });
     } catch (e) {}
 
-    await getGoHistory(id: id.value);
     super.onInit();
   }
 

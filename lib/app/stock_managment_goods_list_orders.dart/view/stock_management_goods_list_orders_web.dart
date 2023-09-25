@@ -159,91 +159,91 @@ class _StockManagementGoodsOrdersWebState
                                 ),
                                 Row(
                                   children: [
-                                    // PopupMenuButton<String>(
-                                    //   tooltip: "",
-                                    //   elevation: 25.0,
-                                    //   child: Container(
-                                    //     height: 35,
-                                    //     margin: EdgeInsets.only(left: 10),
-                                    //     padding: EdgeInsets.only(
-                                    //         top: 4,
-                                    //         bottom: 4,
-                                    //         right: 8,
-                                    //         left: 8),
-                                    //     decoration: BoxDecoration(
-                                    //       color: ColorValues.appLightBlueColor,
-                                    //       borderRadius:
-                                    //           BorderRadius.circular(5),
-                                    //     ),
-                                    //     child: Text(
-                                    //       'Column Visibility',
-                                    //       style: TextStyle(
-                                    //         color: Colors.white,
-                                    //         fontSize: 16,
-                                    //         fontWeight: FontWeight.w400,
-                                    //       ),
-                                    //     ),
-                                    //   ),
-                                    //   itemBuilder: (BuildContext context) => <
-                                    //       PopupMenuEntry<String>>[]..addAll(
-                                    //         controller
-                                    //             .columnVisibility.value.entries
-                                    //             .map((e) {
-                                    //       return PopupMenuItem<String>(
-                                    //           child: ValueListenableBuilder(
-                                    //               valueListenable: controller
-                                    //                   .columnVisibility,
-                                    //               builder:
-                                    //                   (context, value, child) {
-                                    //                 return Row(
-                                    //                   children: [
-                                    //                     Checkbox(
-                                    //                       value: value[e.key],
-                                    //                       onChanged:
-                                    //                           (newValue) {
-                                    //                         controller
-                                    //                             .setColumnVisibility(
-                                    //                                 e.key,
-                                    //                                 newValue!);
-                                    //                       },
-                                    //                     ),
-                                    //                     Text(e.key),
-                                    //                   ],
-                                    //                 );
-                                    //               }));
-                                    //     })),
-                                    //   onSelected: (String value) {
-                                    //     // Handle column selection
-                                    //   },
-                                    // ),
+                                    PopupMenuButton<String>(
+                                      tooltip: "",
+                                      elevation: 25.0,
+                                      child: Container(
+                                        height: 35,
+                                        margin: EdgeInsets.only(left: 10),
+                                        padding: EdgeInsets.only(
+                                            top: 4,
+                                            bottom: 4,
+                                            right: 8,
+                                            left: 8),
+                                        decoration: BoxDecoration(
+                                          color: ColorValues.appLightBlueColor,
+                                          borderRadius:
+                                              BorderRadius.circular(5),
+                                        ),
+                                        child: Text(
+                                          'Column Visibility',
+                                          style: TextStyle(
+                                            color: Colors.white,
+                                            fontSize: 16,
+                                            fontWeight: FontWeight.w400,
+                                          ),
+                                        ),
+                                      ),
+                                      itemBuilder: (BuildContext context) => <
+                                          PopupMenuEntry<String>>[]..addAll(
+                                            controller
+                                                .columnVisibility.value.entries
+                                                .map((e) {
+                                          return PopupMenuItem<String>(
+                                              child: ValueListenableBuilder(
+                                                  valueListenable: controller
+                                                      .columnVisibility,
+                                                  builder:
+                                                      (context, value, child) {
+                                                    return Row(
+                                                      children: [
+                                                        Checkbox(
+                                                          value: value[e.key],
+                                                          onChanged:
+                                                              (newValue) {
+                                                            controller
+                                                                .setColumnVisibility(
+                                                                    e.key,
+                                                                    newValue!);
+                                                          },
+                                                        ),
+                                                        Text(e.key),
+                                                      ],
+                                                    );
+                                                  }));
+                                        })),
+                                      onSelected: (String value) {
+                                        // Handle column selection
+                                      },
+                                    ),
 
-                                    Container(
-                                      height: 35,
-                                      margin: EdgeInsets.only(left: 10),
-                                      child: CustomElevatedButton(
-                                          backgroundColor:
-                                              ColorValues.appLightBlueColor,
-                                          onPressed: () {},
-                                          text: 'Copy'),
-                                    ),
-                                    Container(
-                                      height: 35,
-                                      margin: EdgeInsets.only(left: 10),
-                                      child: CustomElevatedButton(
-                                          backgroundColor:
-                                              ColorValues.appLightBlueColor,
-                                          onPressed: () {},
-                                          text: 'Excel'),
-                                    ),
-                                    Container(
-                                      height: 35,
-                                      margin: EdgeInsets.only(left: 10),
-                                      child: CustomElevatedButton(
-                                          backgroundColor:
-                                              ColorValues.appLightBlueColor,
-                                          onPressed: () {},
-                                          text: 'PDF'),
-                                    ),
+                                    // Container(
+                                    //   height: 35,
+                                    //   margin: EdgeInsets.only(left: 10),
+                                    //   child: CustomElevatedButton(
+                                    //       backgroundColor:
+                                    //           ColorValues.appLightBlueColor,
+                                    //       onPressed: () {},
+                                    //       text: 'Copy'),
+                                    // ),
+                                    // Container(
+                                    //   height: 35,
+                                    //   margin: EdgeInsets.only(left: 10),
+                                    //   child: CustomElevatedButton(
+                                    //       backgroundColor:
+                                    //           ColorValues.appLightBlueColor,
+                                    //       onPressed: () {},
+                                    //       text: 'Excel'),
+                                    // ),
+                                    // Container(
+                                    //   height: 35,
+                                    //   margin: EdgeInsets.only(left: 10),
+                                    //   child: CustomElevatedButton(
+                                    //       backgroundColor:
+                                    //           ColorValues.appLightBlueColor,
+                                    //       onPressed: () {},
+                                    //       text: 'PDF'),
+                                    // ),
                                     Spacer(),
                                     Container(
                                       width: 200,
@@ -798,6 +798,25 @@ class GoodsOrderListDataSource extends DataTableSource {
                                                     UserAccessConstants
                                                         .kHaveAddAccess)
                                             .length >
+                                        0 || controller.goodsOrdersList
+                                            .firstWhere(
+                                              (e) =>
+                                                  e?.id ==
+                                                  GoodsOrderListDetails!.id,
+                                              orElse: () =>
+                                                  GoodsOrdersListModel(id: 00),
+                                            )
+                                            ?.status ==
+                                        307 &&
+                                    varUserAccessModel.value.access_list!
+                                            .where((e) =>
+                                                e.feature_id ==
+                                                    UserAccessConstants
+                                                        .kGoodsFeatureId &&
+                                                e.add ==
+                                                    UserAccessConstants
+                                                        .kHaveAddAccess)
+                                            .length >
                                         0 ||
                                 controller.goodsOrdersList
                                             .firstWhere(
@@ -808,7 +827,7 @@ class GoodsOrderListDataSource extends DataTableSource {
                                                   GoodsOrdersListModel(id: 00),
                                             )
                                             ?.status ==
-                                        307 &&
+                                        308 &&
                                     varUserAccessModel.value.access_list!
                                             .where((e) =>
                                                 e.feature_id ==

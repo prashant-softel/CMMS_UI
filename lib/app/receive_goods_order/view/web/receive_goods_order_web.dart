@@ -1447,7 +1447,29 @@ class _ReceiveGoodsOrderWebState extends State<ReceiveGoodsOrderWeb> {
                       )
                     : Dimens.box0,
                 Dimens.boxWidth15,
-                Container(
+                controller.getPurchaseDetailsByIDModel.value?.status == 306 &&
+                            varUserAccessModel.value.access_list!
+                                    .where((e) =>
+                                        e.feature_id == UserAccessConstants.kGoodsFeatureId &&
+                                        e.add ==
+                                            UserAccessConstants.kHaveAddAccess)
+                                    .length >
+                                0 ||
+                        controller.getPurchaseDetailsByIDModel.value?.status == 307 &&
+                            varUserAccessModel.value.access_list!
+                                    .where((e) =>
+                                        e.feature_id == UserAccessConstants.kGoodsFeatureId &&
+                                        e.add ==
+                                            UserAccessConstants.kHaveAddAccess)
+                                    .length >
+                                0 ||
+                        controller.getPurchaseDetailsByIDModel.value?.status ==
+                                309 &&
+                            varUserAccessModel.value.access_list!
+                                    .where((e) => e.feature_id == UserAccessConstants.kGoodsFeatureId && e.add == UserAccessConstants.kHaveAddAccess)
+                                    .length >
+                                0
+                    ?  Container(
                   height: 40,
                   child: CustomElevatedButton(
                     backgroundColor: Color(0xFF77CAE7),
@@ -1456,7 +1478,7 @@ class _ReceiveGoodsOrderWebState extends State<ReceiveGoodsOrderWeb> {
                       controller.updateGOReceiveIsSubmit0();
                     },
                   ),
-                ),
+                )   : Dimens.box0,
                 varUserAccessModel.value.access_list!
                             .where((e) =>
                                 e.feature_id ==

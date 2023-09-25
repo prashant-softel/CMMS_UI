@@ -66,7 +66,7 @@ class _AddGoodsOrdersWebState extends State<AddGoodsOrdersWeb> {
                                         ? Container()
                                         : Obx(
                                             () => Text(
-                                              " Order ID :${controller.getPurchaseDetailsByIDModel.value?.id} ",
+                                              " Order ID :${controller.getPurchaseDetailsByIDModel.value?.id??""} ",
                                               style: Styles.blackBold16,
                                             ),
                                           )
