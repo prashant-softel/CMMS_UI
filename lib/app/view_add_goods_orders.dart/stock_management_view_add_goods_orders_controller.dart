@@ -112,7 +112,7 @@ class ViewAddGoodsOrdersController extends GetxController {
     });
     Future.delayed(Duration(seconds: 1), () {
       getAssetList(facilityId);
-      if (id != null) {
+      if (id != 0) {
         Future.delayed(Duration(seconds: 1), () {
           getPurchaseDetailsById(id: id);
           getGoHistory(id: id);
@@ -133,9 +133,9 @@ class ViewAddGoodsOrdersController extends GetxController {
       getPurchaseDetailsByIDModel.value = _getPurchaseDetailsById;
 
       print(
-          'Additioanl Email Employees${_getPurchaseDetailsById.goDetails?.length ?? 0}');
+          'Additioanl Email Employees${_getPurchaseDetailsById.goDetails.length}');
       rowItem.value = [];
-      _getPurchaseDetailsById.goDetails?.forEach((element) {
+      _getPurchaseDetailsById.goDetails.forEach((element) {
         rowItem.value.add([
           {
             "key": "Drop_down",
@@ -154,9 +154,9 @@ class ViewAddGoodsOrdersController extends GetxController {
           {'key': "Order", "value": '${element.ordered_qty}'},
         ]);
 
-        dropdownMapperData[element.assetItem_Name ?? ""] =
-            assetItemList.firstWhere((e) => e?.name == element.assetItem_Name,
-                orElse: null)!;
+        dropdownMapperData[element.assetItem_Name ?? ""] = assetList.firstWhere(
+            (e) => e?.name == element.assetItem_Name,
+            orElse: null)!;
       });
 
       challanDateTc.text =

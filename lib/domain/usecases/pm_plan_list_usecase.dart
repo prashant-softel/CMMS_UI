@@ -10,4 +10,9 @@ class PmPlanListUsecase {
           dynamic endDate,
           dynamic startDate}) async =>
       await repository.getPmPlanList(facilityId, isLoading, startDate, endDate);
+  deletePmPlan({required Object planId, required bool isLoading}) async =>
+      await repository.deletePmPlan(
+        planId,
+        isLoading,
+      );
 }
