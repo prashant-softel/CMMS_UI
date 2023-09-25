@@ -53,6 +53,16 @@ class ViewAddGoodsOrdersPresenter {
     );
   }
 
+  Future<List<GetAssetDataModel?>?> getAssetList({
+    String? auth,
+    int? facilityId,
+    bool? isLoading,
+  }) async =>
+      await viewAddGoodsOrdersUsecase.getAssetList(
+        auth: auth ?? "",
+        facilityId: facilityId ?? 0,
+        isLoading: isLoading ?? false,
+      );
   Future<Map<String, dynamic>?> goodsOrderCloseButton({
     goodsOrderCloseJsonString,
     required bool isLoading,

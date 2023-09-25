@@ -68,7 +68,7 @@ class StockManagementAddGoodsOrdersController extends GetxController {
       <GetPurchaseDetailsByIDModel?>[].obs;
   Rx<GetPurchaseDetailsByIDModel?> getPurchaseDetailsByIDModel =
       GetPurchaseDetailsByIDModel().obs;
-  RxList<GoDetails?>? goDetails = <GoDetails?>[].obs;
+  RxList<Items?>? goDetails = <Items?>[].obs;
 
 //all textfield tc
   var challanNoCtrlr = TextEditingController();
@@ -213,11 +213,11 @@ class StockManagementAddGoodsOrdersController extends GetxController {
       getPurchaseDetailsByIDModel.value = _getPurchaseDetailsById;
 
       print(
-          'Additioanl Email Employees${_getPurchaseDetailsById.goDetails?.length ?? 0}');
+          'Additioanl Email Employees${_getPurchaseDetailsById.goDetails.length}');
       rowItem.value = [];
-      goDetails?.value = _getPurchaseDetailsById.goDetails ?? [];
+      goDetails?.value = _getPurchaseDetailsById.goDetails;
 
-      _getPurchaseDetailsById.goDetails?.forEach((element) {
+      _getPurchaseDetailsById.goDetails.forEach((element) {
         rowItem.value.add([
           {
             "key": "Drop_down",
@@ -246,16 +246,10 @@ class StockManagementAddGoodsOrdersController extends GetxController {
             // 'id': '${element.assetItemID}'
           },
         ]);
-        // rowItem.value.add([
-        //   {
-        //     "key": "Drop_down",
-        //     "value": '${element.assetItem_Name}',
-        //     "id": '${element.assetItemID}'
-        //   },
-        //   {'key': "Paid_By", "value": '${element.paid_by_name}'},
-        //   {'key': "Cost", "value": '${element.cost}'},
-        //   {'key': "Order", "value": '${element.ordered_qty}'},
-        // ]);
+
+        dropdownMapperData[element.assetItem_Name ?? ""] = assetList.firstWhere(
+            (e) => e?.name == element.assetItem_Name,
+            orElse: null)!;
       });
 
       challanDateTc.text =
@@ -434,7 +428,7 @@ class StockManagementAddGoodsOrdersController extends GetxController {
           damaged_qty: 0,
           requested_qty: int.tryParse(element[2]["value"] ?? '0'),
           assetItemID: dropdownMapperData[element[0]["value"]]?.id,
-          cost: int.tryParse(element[3]["value"] ?? '0'),
+          cost: double.tryParse(element[3]["value"] ?? '0'),
           ordered_qty: int.tryParse(element[4]["value"] ?? '0'),
           paid_by_ID: paiddropdownMapperData[element[1]["value"]]?.id);
       items.add(item);
@@ -503,7 +497,7 @@ class StockManagementAddGoodsOrdersController extends GetxController {
         requested_qty: int.tryParse(element[2]["value"] ?? '0'),
         goItemID: int.tryParse('${element[0]["id"]}'),
         assetItemID: int.tryParse('${element[0]["assetItemID"]}'),
-        cost: int.tryParse(element[3]["value"] ?? '0'),
+        cost: double.tryParse(element[3]["value"] ?? '0'),
         ordered_qty: int.tryParse(element[4]["value"] ?? '0'),
         paid_by_ID: int.tryParse('${element[1]["id"]}'),
       );
