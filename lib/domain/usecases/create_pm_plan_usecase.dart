@@ -1,5 +1,6 @@
 import 'package:cmms/domain/models/employee_model.dart';
 import 'package:cmms/domain/models/frequency_model.dart';
+import 'package:cmms/domain/models/get_pm_plan_detail_model.dart';
 import 'package:cmms/domain/models/inventory_category_model.dart';
 import 'package:cmms/domain/models/inventory_model.dart';
 import 'package:cmms/domain/models/preventive_checklist_model.dart';
@@ -59,6 +60,14 @@ class CreatePmPlanUsecase {
       await repository.getAssignedToList(
         auth,
         facilityId,
+        isLoading,
+      );
+  Future<PMPlanDetail?> getPmPlanDetails({
+    int? pmPlanId,
+    bool? isLoading,
+  }) async =>
+      await repository.getPmPlanDetails(
+        pmPlanId,
         isLoading,
       );
 }

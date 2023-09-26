@@ -101,6 +101,11 @@ class _PmPlanListContentWebState extends State<PmPlanListContentWeb> {
                                         icon: Icons.add,
                                         label: "Add New",
                                         onPressed: () {
+                                          final _flutterSecureStorage =
+                                              const FlutterSecureStorage();
+
+                                          _flutterSecureStorage.delete(
+                                              key: "pmPlanId");
                                           Get.toNamed(Routes.createPmPlan);
                                         },
                                         color: ColorValues.addNewColor,
@@ -488,7 +493,7 @@ class PmPlanDataSource extends DataTableSource {
                         TableActionButton(
                           color: ColorValues.viewColor,
                           icon: Icons.remove_red_eye_outlined,
-                          message: 'view',
+                          message: 'View',
                           onPress: () {
                             final _flutterSecureStorage =
                                 const FlutterSecureStorage();
@@ -497,6 +502,22 @@ class PmPlanDataSource extends DataTableSource {
                             int pmPlanId = pmPlanDetails?.plan_id ?? 0;
                             if (pmPlanId != null) {
                               Get.toNamed(Routes.viewPmPlanScreen,
+                                  arguments: {'pmPlanId': pmPlanId});
+                            }
+                          },
+                        ),
+                        TableActionButton(
+                          color: ColorValues.editColor,
+                          icon: Icons.edit,
+                          message: 'Edit',
+                          onPress: () {
+                            final _flutterSecureStorage =
+                                const FlutterSecureStorage();
+
+                            _flutterSecureStorage.delete(key: "pmPlanId");
+                            int pmPlanId = pmPlanDetails?.plan_id ?? 0;
+                            if (pmPlanId != null) {
+                              Get.toNamed(Routes.createPmPlan,
                                   arguments: {'pmPlanId': pmPlanId});
                             }
                           },

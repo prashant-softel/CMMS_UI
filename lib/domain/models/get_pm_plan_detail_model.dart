@@ -1,5 +1,7 @@
 import 'dart:convert';
 
+import 'package:cmms/domain/models/create_pm_plan_model.dart';
+
 PMPlanDetail pmPlanDetailFromJson(String str) =>
     PMPlanDetail.fromJson(json.decode(str));
 
@@ -31,7 +33,7 @@ class PMPlanDetail {
   int? updated_by_id;
   String? updated_by_name;
   String? updated_at;
-  List<MapAssetChecklist>? mapAssetChecklist;
+  List<AssetChecklist>? mapAssetChecklist;
 
   PMPlanDetail(
       {this.approved_at,
@@ -66,8 +68,8 @@ class PMPlanDetail {
   factory PMPlanDetail.fromJson(Map<String, dynamic> parsedJson) {
     var list = parsedJson['mapAssetChecklist'] as List;
     print(list.runtimeType);
-    List<MapAssetChecklist> mapAssetChecklist =
-        list.map((i) => MapAssetChecklist.fromJson(i)).toList();
+    List<AssetChecklist> mapAssetChecklist =
+        list.map((i) => AssetChecklist.fromJson(i)).toList();
 
     return PMPlanDetail(
       approved_at: parsedJson['approved_at'],
@@ -133,41 +135,41 @@ class PMPlanDetail {
       };
 }
 
-class MapAssetChecklist {
-  int? asset_id;
-  String? asset_name;
-  int? parent_id;
-  String? parent_name;
-  int? module_qty;
-  int? checklist_id;
-  String? checklist_name;
-  MapAssetChecklist(
-      {this.asset_id,
-      this.asset_name,
-      this.checklist_id,
-      this.checklist_name,
-      this.module_qty,
-      this.parent_id,
-      this.parent_name});
+// class MapAssetChecklist {
+//   int? asset_id;
+//   String? asset_name;
+//   int? parent_id;
+//   String? parent_name;
+//   int? module_qty;
+//   int? checklist_id;
+//   String? checklist_name;
+//   MapAssetChecklist(
+//       {this.asset_id,
+//       this.asset_name,
+//       this.checklist_id,
+//       this.checklist_name,
+//       this.module_qty,
+//       this.parent_id,
+//       this.parent_name});
 
-  factory MapAssetChecklist.fromJson(Map<String, dynamic> parsedJson) {
-    return MapAssetChecklist(
-      asset_id: parsedJson['asset_id'],
-      asset_name: parsedJson['asset_name'],
-      checklist_id: parsedJson['checklist_id'],
-      checklist_name: parsedJson['checklist_name'],
-      module_qty: parsedJson['module_qty'],
-      parent_id: parsedJson['parent_id'],
-      parent_name: parsedJson['parent_name'],
-    );
-  }
-  Map<String, dynamic> toJson() => {
-        "asset_id": asset_id,
-        "parent_name": parent_name,
-        "module_qty": module_qty,
-        "checklist_id": checklist_id,
-        "checklist_name": checklist_name,
-        "asset_name": asset_name,
-        "parent_id": parent_id,
-      };
-}
+//   factory MapAssetChecklist.fromJson(Map<String, dynamic> parsedJson) {
+//     return MapAssetChecklist(
+//       asset_id: parsedJson['asset_id'],
+//       asset_name: parsedJson['asset_name'],
+//       checklist_id: parsedJson['checklist_id'],
+//       checklist_name: parsedJson['checklist_name'],
+//       module_qty: parsedJson['module_qty'],
+//       parent_id: parsedJson['parent_id'],
+//       parent_name: parsedJson['parent_name'],
+//     );
+//   }
+//   Map<String, dynamic> toJson() => {
+//         "asset_id": asset_id,
+//         "parent_name": parent_name,
+//         "module_qty": module_qty,
+//         "checklist_id": checklist_id,
+//         "checklist_name": checklist_name,
+//         "asset_name": asset_name,
+//         "parent_id": parent_id,
+//       };
+// }
