@@ -124,7 +124,7 @@ class _AddGoodsOrdersWebState extends State<AddGoodsOrdersWeb> {
                                         Row(
                                           children: [
                                             CustomRichText(
-                                                title: 'Challan No.: '),
+                                                title: 'Delivery Challan: '),
                                             Dimens.boxWidth10,
                                             GoodsOrderTextField(
                                               keyboardType:
@@ -142,7 +142,7 @@ class _AddGoodsOrdersWebState extends State<AddGoodsOrdersWeb> {
                                         Dimens.boxHeight5,
                                         Row(
                                           children: [
-                                            CustomRichText(title: 'P.O: '),
+                                            CustomRichText(title: 'P.O No: '),
                                             Dimens.boxWidth10,
                                             GoodsOrderTextField(
                                               keyboardType:
@@ -182,7 +182,7 @@ class _AddGoodsOrdersWebState extends State<AddGoodsOrdersWeb> {
                                           children: [
                                             CustomRichText(
                                                 title:
-                                                    'No. of Packages  received :'),
+                                                    'Materials Received Against PO:'),
                                             Dimens.boxWidth10,
                                             GoodsOrderTextField(
                                               textController: controller
@@ -214,7 +214,7 @@ class _AddGoodsOrdersWebState extends State<AddGoodsOrdersWeb> {
                                         Row(
                                           children: [
                                             CustomRichText(
-                                                title: 'GIR. No. : '),
+                                                title: 'Gate Inward Register No. : '),
                                             Dimens.boxWidth10,
                                             GoodsOrderTextField(
                                               keyboardType:
