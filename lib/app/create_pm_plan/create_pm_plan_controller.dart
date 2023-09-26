@@ -2,13 +2,16 @@ import 'dart:async';
 
 import 'package:cmms/app/create_pm_plan/create_pm_plan_presenter.dart';
 import 'package:cmms/app/navigators/app_pages.dart';
+import 'package:cmms/app/utils/utility.dart';
 import 'package:cmms/domain/models/create_pm_plan_model.dart';
 import 'package:cmms/domain/models/employee_model.dart';
 import 'package:cmms/domain/models/frequency_model.dart';
 import 'package:cmms/domain/models/get_asset_data_list_model.dart';
+import 'package:cmms/domain/models/get_pm_plan_detail_model.dart';
 import 'package:cmms/domain/models/inventory_model.dart';
 import 'package:cmms/domain/models/preventive_checklist_model.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:get/get.dart';
 import '../../domain/models/facility_model.dart';
 import '../../domain/models/inventory_category_model.dart';
@@ -63,25 +66,93 @@ class CreatePmPlanController extends GetxController {
   Rx<String> selectedAssignedTo = ''.obs;
   Rx<bool> isAssignedToSelected = true.obs;
   int selectedAssignedToId = 0;
+  Rx<int> pmPlanId = 0.obs;
+  Rx<PMPlanDetail?> pmPlanDetailsModel = PMPlanDetail().obs;
+
   @override
   void onInit() async {
-    facilityIdStreamSubscription = homecontroller.facilityId$.listen((event) {
-      facilityId = event;
-      //   Future.delayed(Duration(seconds: 1), () {
+    try {
+      await setPmPlanId();
+      if (pmPlanId != 0) {
+        await getPmPlanDetails(pmPlanId: pmPlanId.value, isloading: true);
+      }
+      facilityIdStreamSubscription = homecontroller.facilityId$.listen((event) {
+        facilityId = event;
+        //   Future.delayed(Duration(seconds: 1), () {
 
-      Future.delayed(Duration(seconds: 1), () {
-        getInventoryCategoryList();
+        Future.delayed(Duration(seconds: 1), () {
+          getInventoryCategoryList();
+        });
+        Future.delayed(Duration(seconds: 1), () {
+          getFrequencyList();
+        });
+        Future.delayed(Duration(seconds: 1), () {
+          getAssignedToList();
+        });
+        //   });
       });
-      Future.delayed(Duration(seconds: 1), () {
-        getFrequencyList();
-      });
-      Future.delayed(Duration(seconds: 1), () {
-        getAssignedToList();
-      });
-      //   });
-    });
+      super.onInit();
+    } catch (e) {
+      print(e);
+    }
 
     super.onInit();
+  }
+
+  Future<void> setPmPlanId() async {
+    try {
+      final _flutterSecureStorage = const FlutterSecureStorage();
+      // Read jobId
+      String? _pmPlanId = await _flutterSecureStorage.read(key: "pmPlanId");
+      if (_pmPlanId == null || _pmPlanId == '' || _pmPlanId == "null") {
+        var dataFromPreviousScreen = Get.arguments;
+
+        pmPlanId.value = dataFromPreviousScreen['pmPlanId'];
+        await _flutterSecureStorage.write(
+          key: "pmPlanId",
+          value: pmPlanId.value == null ? '' : pmPlanId.value.toString(),
+        );
+      } else {
+        pmPlanId.value = int.tryParse(_pmPlanId) ?? 0;
+      }
+      //  await _flutterSecureStorage.delete(key: "pmPlanId");
+    } catch (e) {
+      Utility.showDialog(e.toString() + 'pmPlanId');
+    }
+  }
+
+  Future<void> getPmPlanDetails({int? pmPlanId, bool? isloading}) async {
+    final _pmPlanDetailsModel = await createPmPlanPresenter.getPmPlanDetails(
+        pmPlanId: pmPlanId, isLoading: isloading);
+
+    if (_pmPlanDetailsModel != null) {
+      planTittleCtrlr.text = _pmPlanDetailsModel.plan_name ?? "";
+      startDateDateTc.text = _pmPlanDetailsModel.plan_date ?? "";
+      selectedAssignedTo.value = _pmPlanDetailsModel.assign_to_name ?? "";
+      selectedAssignedToId = _pmPlanDetailsModel.assign_to_id ?? 0;
+      selectedfrequency.value = _pmPlanDetailsModel.plan_freq_name ?? "";
+      selectedfrequencyId = _pmPlanDetailsModel.plan_freq_id ?? 0;
+      selectedInventoryCategoryId = _pmPlanDetailsModel.category_id ?? 0;
+      selectedInventory.value = _pmPlanDetailsModel.category_name ?? "";
+      inventoryList(
+          facilityId: facilityId, categoryId: selectedInventoryCategoryId);
+      //filteredInventoryNameList.value = _pmPlanDetailsModel.mapAssetChecklist;
+      _pmPlanDetailsModel.mapAssetChecklist?.forEach((element) {
+        rowItem.value.add([
+          {"key": "srNo", "value": ''},
+          {"key": "assetName", "value": '${element.asset_name}'},
+          {'key': "assetsId", "value": '${element.asset_id}'},
+          {'key': "parentAsset", "value": '${element.parent_name}'},
+          {'key': "qty", "value": '${element.module_qty}'},
+          {
+            'key': "checklist",
+            "value": '${element.checklist_name}',
+            "checkListId": '${element.checklist_id}'
+          },
+        ]);
+      });
+      //  pmPlanDetailsModel.value = _pmPlanDetailsModel;
+    }
   }
 
   Future<void> getAssignedToList() async {
@@ -221,7 +292,7 @@ class CreatePmPlanController extends GetxController {
           selectedInventoryCategoryId =
               equipmentCategoryList[equipCatIndex]?.id ?? 0;
 
-          // selectedInventory.value = value;
+          selectedInventory.value = value;
           filteredInventoryNameList.value = <InventoryModel>[];
           inventoryNameList.value = <InventoryModel>[];
           selectedInventoryNameIdList.value = [];
@@ -311,6 +382,11 @@ class CreatePmPlanController extends GetxController {
     // mapAssetChecklist = AssetChecklist(asset_id: 131086, checklist_id: 2988);
     rowItem.value.forEach((element) {
       AssetChecklist item = AssetChecklist(
+          asset_name: "",
+          checklist_name: "",
+          module_qty: 0,
+          parent_id: 0,
+          parent_name: "",
           asset_id: int.tryParse(element[2]["value"] ?? '0'),
           checklist_id: checkdropdownMapperData[element[5]["value"]]?.id);
       mapAssetChecklist.add(item);

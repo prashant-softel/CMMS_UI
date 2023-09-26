@@ -40,18 +40,42 @@ class CreatePmPlanModel {
 }
 
 class AssetChecklist {
-  AssetChecklist({this.asset_id, this.checklist_id});
-
+  AssetChecklist(
+      {this.asset_id,
+      this.asset_name,
+      this.checklist_id,
+      this.checklist_name,
+      this.module_qty,
+      this.parent_id,
+      this.parent_name});
   int? asset_id;
+  String? asset_name;
+  int? parent_id;
+  String? parent_name;
+  int? module_qty;
   int? checklist_id;
+  String? checklist_name;
+  // int? asset_id;
+  // int? checklist_id;
 
-  factory AssetChecklist.fromJson(Map<String, dynamic> json) => AssetChecklist(
-        asset_id: json["asset_id"],
-        checklist_id: json["asset_item_ID"],
+  factory AssetChecklist.fromJson(Map<String, dynamic> parsedJson) =>
+      AssetChecklist(
+        asset_id: parsedJson['asset_id'],
+        asset_name: parsedJson['asset_name'],
+        checklist_id: parsedJson['checklist_id'],
+        checklist_name: parsedJson['checklist_name'],
+        module_qty: parsedJson['module_qty'],
+        parent_id: parsedJson['parent_id'],
+        parent_name: parsedJson['parent_name'],
       );
 
   Map<String, dynamic> toJson() => {
-        "checklist_id": checklist_id,
         "asset_id": asset_id,
+        "parent_name": parent_name,
+        "module_qty": module_qty,
+        "checklist_id": checklist_id,
+        "checklist_name": checklist_name,
+        "asset_name": asset_name,
+        "parent_id": parent_id,
       };
 }

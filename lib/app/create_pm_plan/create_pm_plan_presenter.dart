@@ -1,4 +1,5 @@
 import 'package:cmms/domain/models/employee_model.dart';
+import 'package:cmms/domain/models/get_pm_plan_detail_model.dart';
 import 'package:cmms/domain/models/inventory_category_model.dart';
 import '../../domain/models/frequency_model.dart';
 import '../../domain/models/inventory_model.dart';
@@ -57,5 +58,13 @@ class CreatePmPlanPresenter {
         auth: auth ?? "",
         facilityId: facilityId ?? 0,
         isLoading: isLoading ?? false,
+      );
+  Future<PMPlanDetail?> getPmPlanDetails({
+    int? pmPlanId,
+    bool? isLoading,
+  }) async =>
+      await createPmPlanUsecase.getPmPlanDetails(
+        pmPlanId: pmPlanId,
+        isLoading: isLoading,
       );
 }
