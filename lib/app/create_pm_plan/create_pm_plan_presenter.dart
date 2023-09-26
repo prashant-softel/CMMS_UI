@@ -1,3 +1,4 @@
+import 'package:cmms/domain/models/employee_model.dart';
 import 'package:cmms/domain/models/inventory_category_model.dart';
 import '../../domain/models/frequency_model.dart';
 import '../../domain/models/inventory_model.dart';
@@ -47,4 +48,14 @@ class CreatePmPlanPresenter {
           isLoading: isLoading ?? false,
           categoryId: categoryId,
           frequencyid: frequencyid);
+  Future<List<EmployeeModel?>?> getAssignedToList({
+    String? auth,
+    int? facilityId,
+    bool? isLoading,
+  }) async =>
+      await createPmPlanUsecase.getAssignedToList(
+        auth: auth ?? "",
+        facilityId: facilityId ?? 0,
+        isLoading: isLoading ?? false,
+      );
 }

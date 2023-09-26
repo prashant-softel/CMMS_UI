@@ -3,6 +3,7 @@ import 'dart:async';
 import 'package:cmms/app/create_pm_plan/create_pm_plan_presenter.dart';
 import 'package:cmms/app/navigators/app_pages.dart';
 import 'package:cmms/domain/models/create_pm_plan_model.dart';
+import 'package:cmms/domain/models/employee_model.dart';
 import 'package:cmms/domain/models/frequency_model.dart';
 import 'package:cmms/domain/models/get_asset_data_list_model.dart';
 import 'package:cmms/domain/models/inventory_model.dart';
@@ -58,6 +59,10 @@ class CreatePmPlanController extends GetxController {
   var planTittleCtrlr = TextEditingController();
   RxList<PreventiveCheckListModel?> preventiveCheckList =
       <PreventiveCheckListModel?>[].obs;
+  RxList<EmployeeModel?> assignedToList = <EmployeeModel>[].obs;
+  Rx<String> selectedAssignedTo = ''.obs;
+  Rx<bool> isAssignedToSelected = true.obs;
+  int selectedAssignedToId = 0;
   @override
   void onInit() async {
     facilityIdStreamSubscription = homecontroller.facilityId$.listen((event) {
@@ -70,10 +75,28 @@ class CreatePmPlanController extends GetxController {
       Future.delayed(Duration(seconds: 1), () {
         getFrequencyList();
       });
+      Future.delayed(Duration(seconds: 1), () {
+        getAssignedToList();
+      });
       //   });
     });
 
     super.onInit();
+  }
+
+  Future<void> getAssignedToList() async {
+    assignedToList.clear();
+    final _assignedToList = await createPmPlanPresenter.getAssignedToList(
+      facilityId: facilityId,
+    );
+
+    if (_assignedToList != null) {
+      for (var assignedTo in _assignedToList) {
+        assignedToList.add(assignedTo);
+      }
+      // selectedAssignedTo.value =
+      //     getAssignedToName(jobDetailsModel.value?.assignedId ?? 0) ?? '';
+    }
   }
 
   Future<void> inventoryList({int? facilityId, int? categoryId}) async {
@@ -261,6 +284,17 @@ class CreatePmPlanController extends GetxController {
               preventiveCheckList[checklistIndex]?.name ?? "";
         }
         break;
+      case RxList<EmployeeModel>:
+        {
+          int assignedToIndex =
+              assignedToList.indexWhere((x) => x?.name == value);
+          selectedAssignedToId = assignedToList[assignedToIndex]?.id ?? 0;
+          if (selectedAssignedToId > 0) {
+            isAssignedToSelected.value = true;
+          }
+          selectedAssignedTo.value = value;
+        }
+        break;
       default:
         {}
         break;
@@ -285,7 +319,7 @@ class CreatePmPlanController extends GetxController {
         plan_name: _plantitle,
         plan_date: _startDate,
         facility_id: facilityId,
-        assigned_to_id: 2,
+        assigned_to_id: selectedAssignedToId,
         category_id:
             selectedInventoryCategoryId, // selectedEquipmentCategoryIdList,
         plan_freq_id: selectedfrequencyId,
