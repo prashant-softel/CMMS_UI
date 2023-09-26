@@ -1,4 +1,4 @@
-import 'package:cmms/app/purchase_goods_orders_list.dart/request_goods_orders_list_controller.dart';
+import 'package:cmms/app/request_goods_orders_list.dart/request_goods_orders_list_controller.dart';
 
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
