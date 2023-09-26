@@ -42,6 +42,10 @@ class DropdownWebStock extends StatelessWidget {
       width: width,
       margin: margin,
       decoration: BoxDecoration(
+        border: Border.all(
+          color: Color.fromARGB(255, 227, 224, 224),
+          width: 1,
+        ),
         boxShadow: [
           BoxShadow(
             color: Colors.black26,

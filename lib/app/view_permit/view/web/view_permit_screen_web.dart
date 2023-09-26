@@ -1908,10 +1908,10 @@ class ViewPermitWebScreen extends GetView<ViewPermitController> {
                                                         0) *
                                                     50) +
                                                 125,
-                                            width: MediaQuery.of(context)
-                                                    .size
-                                                    .width /
-                                                1.2,
+                                            // width: MediaQuery.of(context)
+                                            //         .size
+                                            //         .width /
+                                            //     1.2,
                                             decoration: BoxDecoration(
                                               border: Border.all(
                                                 color: ColorValues
