@@ -2,7 +2,7 @@ import 'dart:async';
 
 import 'package:cmms/app/home/home_controller.dart';
 import 'package:cmms/app/navigators/app_pages.dart';
-import 'package:cmms/app/purchase_goods_orders_list.dart/request_goods_orders_list_presenter.dart';
+import 'package:cmms/app/request_goods_orders_list.dart/request_goods_orders_list_presenter.dart';
 import 'package:cmms/app/theme/color_values.dart';
 import 'package:cmms/app/theme/styles.dart';
 import 'package:cmms/domain/models/request_order_list.model.dart';
