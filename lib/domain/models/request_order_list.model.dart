@@ -19,7 +19,7 @@ class GetRequestOrderListModel {
   dynamic approvedBy;
   String? approvedAt;
   dynamic generatedAt;
-
+  double? cost;
   dynamic? go_items;
 
   GetRequestOrderListModel({
@@ -35,6 +35,7 @@ class GetRequestOrderListModel {
     this.generatedAt,
     this.status_long,
     this.go_items,
+    this.cost,
   });
 
   // Factory method to create a GetRequestOrderListModel instance from JSON
@@ -51,6 +52,7 @@ class GetRequestOrderListModel {
       approvedAt: json['approvedAt'],
       generatedAt: Utility.getFormatedyearMonthDay(json['generatedAt']),
       status_long: json['status_long'],
+      cost: json['cost'],
       go_items: json['go_items'],
     );
   }
@@ -74,6 +76,7 @@ class GetRequestOrderListModel {
     data['generatedAt'] = this.generatedAt;
 
     data['status_long'] = this.status_long;
+    data['cost'] = this.cost;
     data['go_items'] = this.go_items;
 
     return data;

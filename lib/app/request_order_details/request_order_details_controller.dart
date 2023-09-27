@@ -37,24 +37,72 @@ class GoodsOrdersReqDetailController extends GetxController {
   StreamSubscription<int>? facilityIdStreamSubscription;
   final HomeController homeController = Get.find();
   int facilityId = 0;
-  int? id = 0;
+  Rx<int> id = 0.obs;
 
   @override
   void onInit() async {
-    id = Get.arguments;
-
-    facilityIdStreamSubscription = homeController.facilityId$.listen((event) {
-      facilityId = event;
-    });
-    Future.delayed(Duration(seconds: 1), () {
-      getAssetList(facilityId);
-    });
-    if (id != 0) {
-      Future.delayed(Duration(seconds: 1), () {
-        getRoDetailsByID(requestID: id!);
+    try {
+      await setUserId();
+      facilityIdStreamSubscription = homeController.facilityId$.listen((event) {
+        facilityId = event;
       });
-    }
+
+      Future.delayed(Duration(seconds: 1), () {
+        getAssetList(facilityId);
+
+        if (id.value != 0) {
+          Future.delayed(Duration(seconds: 1), () {
+            getRoDetailsByID(requestID: id.value);
+            // getGoHistory(id: id.value);
+          });
+        }
+      });
+    } catch (e) {}
+
     super.onInit();
+  }
+
+  // void onInit() async {
+  //   facilityIdStreamSubscription = homeController.facilityId$.listen((event) {
+  //     facilityId = event;
+  //   });
+  //   Future.delayed(Duration(seconds: 1), () {
+  //     getAssetList(facilityId);
+  //   });
+  //   if (id != 0) {
+  //     Future.delayed(Duration(seconds: 1), () {
+  //       getRoDetailsByID(requestID: id.value);
+  //     });
+  //   }
+  //   super.onInit();
+  // }
+
+  Future<void> setUserId() async {
+    try {
+      var dataFromPreviousScreen = Get.arguments;
+
+      id.value = dataFromPreviousScreen['id'];
+      // id= Get.arguments;
+      print('AddStock:$id');
+      // final _flutterSecureStorage = const FlutterSecureStorage();
+      // // Read jobId
+      // String? _userId = await _flutterSecureStorage.read(key: "userId");
+      // if (_userId == null || _userId == '' || _userId == "null") {
+      //   var dataFromPreviousScreen = Get.arguments;
+
+      //   userId.value = dataFromPreviousScreen['userId'];
+      //   await _flutterSecureStorage.write(
+      //     key: "userId",
+      //     value: userId.value == null ? '' : userId.value.toString(),
+      //   );
+      // } else {
+      //   userId.value = int.tryParse(_userId) ?? 0;
+      // }
+      //  await _flutterSecureStorage.delete(key: "userId");
+    } catch (e) {
+      print(e.toString() + 'userId');
+      //  Utility.showDialog(e.toString() + 'userId');
+    }
   }
 
   Future<void> getAssetList(int _facilityId) async {
@@ -176,7 +224,7 @@ class GoodsOrdersReqDetailController extends GetxController {
             facilityID: facilityId,
             items: items,
             comment: commentCtrlr.text,
-            request_order_id: id);
+            request_order_id: id.value);
 
     var createGoReqModelJsonString = createRequestOrderDataModel.toJson();
     Map<String, dynamic>? responseCreateGoModel =
