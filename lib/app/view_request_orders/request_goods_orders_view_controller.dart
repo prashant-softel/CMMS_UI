@@ -1,3 +1,6 @@
+import 'dart:async';
+
+import 'package:cmms/app/home/home_controller.dart';
 import 'package:cmms/app/navigators/navigators.dart';
 import 'package:cmms/app/view_request_orders/request_goods_orders_view_presenter.dart';
 import 'package:cmms/app/return_mrs/return_mrs_presenter.dart';
@@ -17,31 +20,68 @@ class PurchaseGoodsorderViewController extends GetxController {
       GetRODetailsByIDModel().obs;
   Map<String, GetAssetDataModel> dropdownMapperData = {};
   RxList<GetAssetDataModel?> assetList = <GetAssetDataModel>[].obs;
-  BehaviorSubject<int> _facilityId = BehaviorSubject.seeded(0);
-  int get facilityId => _facilityId.value;
+
   var commentCtrlr = TextEditingController();
+  StreamSubscription<int>? facilityIdStreamSubscription;
 
   ///
   PurchaseGoodsorderViewController(
     this.purchaseGoodsorderViewPresenter,
   );
   PurchaseGoodsorderViewPresenter purchaseGoodsorderViewPresenter;
-  int? id = 0;
+  Rx<int> id = 0.obs;
+  final HomeController homeController = Get.find();
+  int facilityId = 0;
 
   @override
   void onInit() async {
-    id = Get.arguments;
+    try {
+      await setUserId();
+      facilityIdStreamSubscription = homeController.facilityId$.listen((event) {
+        facilityId = event;
+      });
 
-    print("purchesid $id");
-    Future.delayed(Duration(seconds: 1), () {
-      getAssetList(facilityId);
-      if (id != 0) {
-        Future.delayed(Duration(seconds: 1), () {
-          getRoDetailsByID(requestID: id!);
-        });
-      }
-    });
+      Future.delayed(Duration(seconds: 1), () {
+        getAssetList(facilityId);
+
+        if (id.value != 0) {
+          Future.delayed(Duration(seconds: 1), () {
+            getRoDetailsByID(requestID: id.value);
+            // getGoHistory(id: id.value);
+          });
+        }
+      });
+    } catch (e) {}
+
     super.onInit();
+  }
+
+  Future<void> setUserId() async {
+    try {
+      var dataFromPreviousScreen = Get.arguments;
+
+      id.value = dataFromPreviousScreen['id'];
+      // id= Get.arguments;
+      print('AddStock:$id');
+      // final _flutterSecureStorage = const FlutterSecureStorage();
+      // // Read jobId
+      // String? _userId = await _flutterSecureStorage.read(key: "userId");
+      // if (_userId == null || _userId == '' || _userId == "null") {
+      //   var dataFromPreviousScreen = Get.arguments;
+
+      //   userId.value = dataFromPreviousScreen['userId'];
+      //   await _flutterSecureStorage.write(
+      //     key: "userId",
+      //     value: userId.value == null ? '' : userId.value.toString(),
+      //   );
+      // } else {
+      //   userId.value = int.tryParse(_userId) ?? 0;
+      // }
+      //  await _flutterSecureStorage.delete(key: "userId");
+    } catch (e) {
+      print(e.toString() + 'userId');
+      //  Utility.showDialog(e.toString() + 'userId');
+    }
   }
 
   Future<void> getAssetList(int _facilityId) async {
@@ -55,14 +95,13 @@ class PurchaseGoodsorderViewController extends GetxController {
       }
       update(["AssetList"]);
     }
-    // addRowItem();
   }
 
   approveGoodsOrder() async {
     {
       String _comment = commentCtrlr.text.trim();
 
-      CommentModel commentModel = CommentModel(id: id, comment: _comment);
+      CommentModel commentModel = CommentModel(id: id.value, comment: _comment);
 
       var approvetoJsonString = commentModel.toJson();
       final response = await purchaseGoodsorderViewPresenter.approveGoodsOrder(
@@ -79,7 +118,7 @@ class PurchaseGoodsorderViewController extends GetxController {
     {
       String _comment = commentCtrlr.text.trim();
 
-      CommentModel commentModel = CommentModel(id: id, comment: _comment);
+      CommentModel commentModel = CommentModel(id: id.value, comment: _comment);
 
       var rejecttoJsonString = commentModel.toJson();
       final response = await purchaseGoodsorderViewPresenter.rejectGoodsOrder(
