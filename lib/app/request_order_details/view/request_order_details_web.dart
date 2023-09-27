@@ -144,7 +144,7 @@ class GoodsOrdersReqDetailsWeb extends GetView<GoodsOrdersReqDetailController> {
                         },
                       ),
                       Dimens.boxWidth15,
-                      controller.id == null
+                      controller.id == 0
                           ? CustomElevatedButton(
                               backgroundColor: ColorValues.appGreenColor,
                               text: 'Submit',
