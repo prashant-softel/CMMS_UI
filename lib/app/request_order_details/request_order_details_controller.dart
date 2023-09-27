@@ -116,9 +116,7 @@ class GoodsOrdersReqDetailController extends GetxController {
       }
       update(["AssetList"]);
     }
-    if (id == null) {
-      addRowItem();
-    }
+    addRowItem();
   }
 
   void addRowItem() {
@@ -164,6 +162,8 @@ class GoodsOrdersReqDetailController extends GetxController {
             {'key': "Comment", "value": '${element.comment}'},
           ]);
           commentCtrlr.text = getPurchaseDetailsByIDModel.value?.comment ?? "";
+          dropdownMapperData[element.asset_name ?? ""] = assetList
+              .firstWhere((e) => e?.name == element.asset_name, orElse: null)!;
         });
       }
     }

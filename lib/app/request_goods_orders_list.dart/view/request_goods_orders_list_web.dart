@@ -1,13 +1,10 @@
-import 'package:cmms/app/constant/constant.dart';
 import 'package:cmms/app/home/home_screen.dart';
 import 'package:cmms/app/navigators/app_pages.dart';
 import 'package:cmms/app/request_goods_orders_list.dart/request_goods_orders_list_controller.dart';
 import 'package:cmms/app/theme/dimens.dart';
-import 'package:cmms/app/utils/user_access_constants.dart';
 import 'package:cmms/app/widgets/custom_richtext.dart';
 import 'package:cmms/app/widgets/date_picker.dart';
 import 'package:cmms/domain/models/request_order_list.model.dart';
-import 'package:cmms/domain/models/stock_management_update_goods_orders_model.dart';
 import 'package:data_table_2/data_table_2.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -17,7 +14,6 @@ import 'package:syncfusion_flutter_datepicker/datepicker.dart';
 import '../../theme/color_values.dart';
 import '../../theme/styles.dart';
 import '../../widgets/action_button.dart';
-import '../../widgets/custom_elevated_button.dart';
 import '../../widgets/table_action_button.dart';
 
 class PurchaseGoodsorderListWeb extends StatefulWidget {
@@ -136,7 +132,7 @@ class _PurchaseGoodsorderListWebState extends State<PurchaseGoodsorderListWeb> {
                                         label: "Add New",
                                         onPressed: () {
                                           Get.offNamed(Routes
-                                              .updateGoodsOrdersDetailsScreen);
+                                              .GoodsOrdersReqDetailsScreen);
                                         },
                                         color: ColorValues.addNewColor,
                                       )

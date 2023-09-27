@@ -66,7 +66,7 @@ class _AddGoodsOrdersWebState extends State<AddGoodsOrdersWeb> {
                                         ? Container()
                                         : Obx(
                                             () => Text(
-                                              " Order ID :${controller.getPurchaseDetailsByIDModel.value?.id??""} ",
+                                              " Order ID :${controller.getPurchaseDetailsByIDModel.value?.id ?? ""} ",
                                               style: Styles.blackBold16,
                                             ),
                                           )
@@ -214,7 +214,8 @@ class _AddGoodsOrdersWebState extends State<AddGoodsOrdersWeb> {
                                         Row(
                                           children: [
                                             CustomRichText(
-                                                title: 'Gate Inward Register No. : '),
+                                                title:
+                                                    'Gate Inward Register No. : '),
                                             Dimens.boxWidth10,
                                             GoodsOrderTextField(
                                               keyboardType:
@@ -741,11 +742,26 @@ class AddRowInGoodsOrder extends StatelessWidget {
                   onTap: () {
                     controller.addRowItem();
                   },
-                  child: Row(
-                    children: [
-                      Text("Add"),
-                      Icon(Icons.exposure_plus_1),
-                    ],
+                  child: Container(
+                    height: 25,
+                    width: 70,
+                    decoration: BoxDecoration(
+                      color: ColorValues.addNewColor,
+                      border: Border.all(
+                        color: ColorValues.lightGreyColorWithOpacity35,
+                        width: 1,
+                      ),
+                      borderRadius: BorderRadius.all(Radius.circular(5)),
+                    ),
+                    child: Center(
+                      child: Text(
+                        " + Add ",
+                        style: TextStyle(
+                            fontSize: 18,
+                            fontWeight: FontWeight.w100,
+                            color: Colors.white),
+                      ),
+                    ),
                   ),
                 ),
               ],
