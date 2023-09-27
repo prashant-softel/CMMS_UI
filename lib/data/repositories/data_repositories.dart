@@ -3118,16 +3118,26 @@ class DataRepository extends DomainRepository {
   }
 
   Future<ResponseModel> approveGoodsOrder({
-    auth,
+    required String auth,
+    goodsOrderApproveJsonString,
     bool? isLoading,
-    approvetoJsonString,
-  }) async {
-    var response = await connectHelper.approveGoodsOrder(
+  }) async =>
+      await connectHelper.approveGoodsOrder(
         auth: auth,
-        isLoading: isLoading,
-        approvetoJsonString: approvetoJsonString);
-    return response;
-  }
+        goodsOrderApproveJsonString: goodsOrderApproveJsonString,
+        isLoading: isLoading ?? false,
+      );
+  // Future<ResponseModel> approveGoodsOrder({
+  //   auth,
+  //   bool? isLoading,
+  //   approvetoJsonString,
+  // }) async {
+  //   var response = await connectHelper.approveGoodsOrder(
+  //       auth: auth,
+  //       isLoading: isLoading,
+  //       approvetoJsonString: approvetoJsonString);
+  //   return response;
+  // }
 
   Future<ResponseModel> approveGOReceive({
     auth,
@@ -3142,16 +3152,26 @@ class DataRepository extends DomainRepository {
   }
 
   Future<ResponseModel> rejectGoodsOrder({
-    auth,
+    required String auth,
+    goodsOrderRejectJsonString,
     bool? isLoading,
-    rejecttoJsonString,
-  }) async {
-    var response = await connectHelper.rejectGoodsOrder(
+  }) async =>
+      await connectHelper.rejectGoodsOrder(
         auth: auth,
-        isLoading: isLoading,
-        rejecttoJsonString: rejecttoJsonString);
-    return response;
-  }
+        goodsOrderRejectJsonString: goodsOrderRejectJsonString,
+        isLoading: isLoading ?? false,
+      );
+  // Future<ResponseModel> rejectGoodsOrder({
+  //   auth,
+  //   bool? isLoading,
+  //   rejecttoJsonString,
+  // }) async {
+  //   var response = await connectHelper.rejectGoodsOrder(
+  //       auth: auth,
+  //       isLoading: isLoading,
+  //       rejecttoJsonString: rejecttoJsonString);
+  //   return response;
+  // }
 
   Future<ResponseModel> rejectRetrunMrs({
     auth,
