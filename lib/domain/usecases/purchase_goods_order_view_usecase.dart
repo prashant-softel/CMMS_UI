@@ -25,17 +25,34 @@ class PurchaseGoodsorderViewUsecase {
         facilityId,
         isLoading,
       );
-  Future<bool> approveGoodsOrder({
-    approvetoJsonString,
+  Future<Map<String, dynamic>> approveGoodsOrder({
+    goodsOrderApproveJsonString,
     bool? isLoading,
   }) async =>
       await _repository.approveGoodsOrder(
-          approvetoJsonString: approvetoJsonString, isLoading: isLoading);
+        goodsOrderApproveJsonString,
+        isLoading,
+      );
+  // Future<bool> approveGoodsOrder({
+  //   approvetoJsonString,
+  //   bool? isLoading,
+  // }) async =>
+  //     await _repository.approveGoodsOrder(
+  //         approvetoJsonString: approvetoJsonString, isLoading: isLoading);
 
-  Future<bool> rejectGoodsOrder({
-    rejecttoJsonString,
+  // Future<bool> rejectGoodsOrder({
+  //   rejecttoJsonString,
+  //   bool? isLoading,
+  // }) async =>
+  //     await _repository.rejectGoodsOrder(
+  //         rejecttoJsonString: rejecttoJsonString, isLoading: isLoading);
+
+  Future<Map<String, dynamic>> rejectGoodsOrder({
+    goodsOrderRejectJsonString,
     bool? isLoading,
   }) async =>
       await _repository.rejectGoodsOrder(
-          rejecttoJsonString: rejecttoJsonString, isLoading: isLoading);
+        goodsOrderRejectJsonString,
+        isLoading,
+      );
 }

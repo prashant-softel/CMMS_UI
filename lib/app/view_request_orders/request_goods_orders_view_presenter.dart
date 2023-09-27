@@ -28,22 +28,40 @@ class PurchaseGoodsorderViewPresenter {
         facilityId: facilityId ?? 0,
         isLoading: isLoading ?? false,
       );
-  Future<bool> approveGoodsOrder({
-    approvetoJsonString,
+  Future<Map<String, dynamic>?> approveGoodsOrder({
+    goodsOrderApproveJsonString,
     required bool isLoading,
   }) async {
     return purchaseGoodsorderViewUsecase.approveGoodsOrder(
-      approvetoJsonString: approvetoJsonString,
+      goodsOrderApproveJsonString: goodsOrderApproveJsonString,
       isLoading: isLoading,
     );
   }
+  // Future<bool> approveGoodsOrder({
+  //   approvetoJsonString,
+  //   required bool isLoading,
+  // }) async {
+  //   return purchaseGoodsorderViewUsecase.approveGoodsOrder(
+  //     approvetoJsonString: approvetoJsonString,
+  //     isLoading: isLoading,
+  //   );
+  // }
 
-  Future<bool> rejectGoodsOrder({
-    rejecttoJsonString,
+  // Future<bool> rejectGoodsOrder({
+  //   rejecttoJsonString,
+  //   required bool isLoading,
+  // }) async {
+  //   return purchaseGoodsorderViewUsecase.rejectGoodsOrder(
+  //     rejecttoJsonString: rejecttoJsonString,
+  //     isLoading: isLoading,
+  //   );
+  // }
+  Future<Map<String, dynamic>?> rejectGoodsOrder({
+    goodsOrderRejectJsonString,
     required bool isLoading,
   }) async {
     return purchaseGoodsorderViewUsecase.rejectGoodsOrder(
-      rejecttoJsonString: rejecttoJsonString,
+      goodsOrderRejectJsonString: goodsOrderRejectJsonString,
       isLoading: isLoading,
     );
   }

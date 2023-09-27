@@ -32,6 +32,8 @@ import 'package:cmms/app/widgets/permit_reject_message_dialog.dart';
 import 'package:cmms/app/widgets/pm_plan_reject_msg_dialog.dart';
 import 'package:cmms/app/widgets/recive_go_msg_dialog.dart';
 import 'package:cmms/app/widgets/reject_go_recive_msg_dialog.dart';
+import 'package:cmms/app/widgets/req_message_approve_dialog.dart';
+import 'package:cmms/app/widgets/req_message_reject_dialog.dart';
 import 'package:cmms/app/widgets/start_mc_execution_dialog.dart';
 import 'package:cmms/app/widgets/update_incident_report_dialog.dart';
 import 'package:cmms/app/widgets/update_mc_execution_dialog.dart';
@@ -973,7 +975,7 @@ class ConnectHelper {
     print('goodsOrderApproveResponse: ${responseModel.data}');
     var res = responseModel.data;
     var parsedJson = json.decode(res);
-    Get.dialog<void>(GoodsOrderMessageRejectDialog(
+    Get.dialog<void>(ReqOrderMessageRejectDialog(
         data: parsedJson['message'], id: parsedJson['id']));
 
     return responseModel;
@@ -5145,22 +5147,45 @@ class ConnectHelper {
 
   Future<ResponseModel> approveGoodsOrder({
     required String auth,
+    goodsOrderApproveJsonString,
     bool? isLoading,
-    required approvetoJsonString,
   }) async {
     var responseModel = await apiWrapper.makeRequest(
       'RequestOrder/ApproveRequestOrder',
       Request.post,
-      approvetoJsonString,
+      goodsOrderApproveJsonString,
       isLoading ?? false,
       {
         'Content-Type': 'application/json',
         'Authorization': 'Bearer $auth',
       },
     );
+    print('reqOrderApproveResponse: ${responseModel.data}');
+    var res = responseModel.data;
+    var parsedJson = json.decode(res);
+    Get.dialog<void>(ReqOrderMessageApproveDialog(
+        data: parsedJson['message'], id: parsedJson['id']));
 
     return responseModel;
   }
+  // Future<ResponseModel> approveGoodsOrder({
+  //   required String auth,
+  //   bool? isLoading,
+  //   required approvetoJsonString,
+  // }) async {
+  //   var responseModel = await apiWrapper.makeRequest(
+  //     'RequestOrder/ApproveRequestOrder',
+  //     Request.post,
+  //     approvetoJsonString,
+  //     isLoading ?? false,
+  //     {
+  //       'Content-Type': 'application/json',
+  //       'Authorization': 'Bearer $auth',
+  //     },
+  //   );
+
+  //   return responseModel;
+  // }
 
   Future<ResponseModel> approveGOReceive({
     required String auth,
@@ -5183,22 +5208,45 @@ class ConnectHelper {
 
   Future<ResponseModel> rejectGoodsOrder({
     required String auth,
+    goodsOrderRejectJsonString,
     bool? isLoading,
-    required rejecttoJsonString,
   }) async {
     var responseModel = await apiWrapper.makeRequest(
       'RequestOrder/RejectGoodsOrder',
       Request.post,
-      rejecttoJsonString,
+      goodsOrderRejectJsonString,
       isLoading ?? false,
       {
         'Content-Type': 'application/json',
         'Authorization': 'Bearer $auth',
       },
     );
+    print('goodsOrderApproveResponse: ${responseModel.data}');
+    var res = responseModel.data;
+    var parsedJson = json.decode(res);
+    Get.dialog<void>(ReqOrderMessageRejectDialog(
+        data: parsedJson['message'], id: parsedJson['id']));
 
     return responseModel;
   }
+  // Future<ResponseModel> rejectGoodsOrder({
+  //   required String auth,
+  //   bool? isLoading,
+  //   required rejecttoJsonString,
+  // }) async {
+  //   var responseModel = await apiWrapper.makeRequest(
+  //     'RequestOrder/RejectGoodsOrder',
+  //     Request.post,
+  //     rejecttoJsonString,
+  //     isLoading ?? false,
+  //     {
+  //       'Content-Type': 'application/json',
+  //       'Authorization': 'Bearer $auth',
+  //     },
+  //   );
+
+  //   return responseModel;
+  // }
 
   Future<ResponseModel> deleteJobType({
     required String auth,

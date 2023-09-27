@@ -20,6 +20,8 @@ class PurchaseGoodsorderViewController extends GetxController {
       GetRODetailsByIDModel().obs;
   Map<String, GetAssetDataModel> dropdownMapperData = {};
   RxList<GetAssetDataModel?> assetList = <GetAssetDataModel>[].obs;
+  TextEditingController approveCommentTextFieldCtrlr = TextEditingController();
+  TextEditingController rejectCommentTextFieldCtrlr = TextEditingController();
 
   var commentCtrlr = TextEditingController();
   StreamSubscription<int>? facilityIdStreamSubscription;
@@ -41,16 +43,19 @@ class PurchaseGoodsorderViewController extends GetxController {
         facilityId = event;
       });
 
-      Future.delayed(Duration(seconds: 1), () {
-        getAssetList(facilityId);
+      Future.delayed(
+        Duration(seconds: 1),
+        () {
+          getAssetList(facilityId);
 
-        if (id.value != 0) {
-          Future.delayed(Duration(seconds: 1), () {
-            getRoDetailsByID(requestID: id.value);
-            // getGoHistory(id: id.value);
-          });
-        }
-      });
+          if (id.value != 0) {
+            Future.delayed(Duration(seconds: 1), () {
+              getRoDetailsByID(requestID: id.value);
+              // getGoHistory(id: id.value);
+            });
+          }
+        },
+      );
     } catch (e) {}
 
     super.onInit();
@@ -97,36 +102,74 @@ class PurchaseGoodsorderViewController extends GetxController {
     }
   }
 
-  approveGoodsOrder() async {
+  void approveGoodsOrder({int? id}) async {
     {
-      String _comment = commentCtrlr.text.trim();
+      String _comment = approveCommentTextFieldCtrlr.text.trim();
 
-      CommentModel commentModel = CommentModel(id: id.value, comment: _comment);
+      CommentModel commentGoodsOrderAproveModel =
+          CommentModel(id: id, comment: _comment);
 
-      var approvetoJsonString = commentModel.toJson();
-      final response = await purchaseGoodsorderViewPresenter.approveGoodsOrder(
-        approvetoJsonString: approvetoJsonString,
+      var goodsOrderApproveJsonString = commentGoodsOrderAproveModel.toJson();
+
+      Map<String, dynamic>? response =
+          await purchaseGoodsorderViewPresenter.approveGoodsOrder(
+        goodsOrderApproveJsonString: goodsOrderApproveJsonString,
         isLoading: true,
       );
       if (response == true) {
-        Get.offAllNamed(Routes.purchaseGoodsorder);
+        //getCalibrationList(facilityId, true);
       }
     }
   }
+  // approveGoodsOrder() async {
+  //   {
+  //     String _comment = commentCtrlr.text.trim();
 
-  rejectGoodsOrder() async {
+  //     CommentModel commentModel = CommentModel(id: id.value, comment: _comment);
+
+  //     var approvetoJsonString = commentModel.toJson();
+  //     final response = await purchaseGoodsorderViewPresenter.approveGoodsOrder(
+  //       approvetoJsonString: approvetoJsonString,
+  //       isLoading: true,
+  //     );
+  //     if (response == true) {
+  //       Get.offAllNamed(Routes.purchaseGoodsorder);
+  //     }
+  //   }
+  // }
+
+  // rejectGoodsOrder() async {
+  //   {
+  //     String _comment = commentCtrlr.text.trim();
+
+  //     CommentModel commentModel = CommentModel(id: id.value, comment: _comment);
+
+  //     var rejecttoJsonString = commentModel.toJson();
+  //     final response = await purchaseGoodsorderViewPresenter.rejectGoodsOrder(
+  //       rejecttoJsonString: rejecttoJsonString,
+  //       isLoading: true,
+  //     );
+  //     if (response == true) {
+  //       Get.offAllNamed(Routes.purchaseGoodsorder);
+  //     }
+  //   }
+  // }
+  void rejectGoodsOrder({int? id}) async {
     {
-      String _comment = commentCtrlr.text.trim();
+      String _comment = rejectCommentTextFieldCtrlr.text.trim();
 
-      CommentModel commentModel = CommentModel(id: id.value, comment: _comment);
+      CommentModel commentGoodsOrderRejectModel =
+          CommentModel(id: id, comment: _comment);
 
-      var rejecttoJsonString = commentModel.toJson();
-      final response = await purchaseGoodsorderViewPresenter.rejectGoodsOrder(
-        rejecttoJsonString: rejecttoJsonString,
+      var goodsOrderRejectJsonString = commentGoodsOrderRejectModel.toJson();
+
+      Map<String, dynamic>? response =
+          await purchaseGoodsorderViewPresenter.rejectGoodsOrder(
+        goodsOrderRejectJsonString: goodsOrderRejectJsonString,
         isLoading: true,
       );
       if (response == true) {
-        Get.offAllNamed(Routes.purchaseGoodsorder);
+        //getCalibrationList(facilityId, true);
       }
     }
   }
@@ -165,6 +208,8 @@ class PurchaseGoodsorderViewController extends GetxController {
             {'key': "Comment", "value": '${element.comment}'},
           ]);
           commentCtrlr.text = getPurchaseDetailsByIDModel.value?.comment ?? "";
+          dropdownMapperData[element.asset_name ?? ""] = assetList
+              .firstWhere((e) => e?.name == element.asset_name, orElse: null)!;
         });
       }
     }

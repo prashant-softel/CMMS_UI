@@ -5877,51 +5877,119 @@ class Repository {
     }
   }
 
-  Future<bool> approveGoodsOrder({bool? isLoading, approvetoJsonString}) async {
+  Future<Map<String, dynamic>> approveGoodsOrder(
+    goodsOrderApproveJsonString,
+    bool? isLoading,
+  ) async {
     try {
       final auth = await getSecuredValue(LocalKeys.authToken);
-      log(auth);
       final res = await _dataRepository.approveGoodsOrder(
-          auth: auth,
-          isLoading: isLoading,
-          approvetoJsonString: approvetoJsonString);
-      print({"res.data", res.data});
-      if (!res.hasError) {
-        Fluttertoast.showToast(msg: res.data, fontSize: 45.0);
+        auth: auth,
+        goodsOrderApproveJsonString: goodsOrderApproveJsonString,
+        isLoading: isLoading ?? false,
+      );
 
-        return true;
+      var resourceData = res.data;
+
+      print('Response Goods Order Approve: ${resourceData}');
+
+      if (!res.hasError) {
+        if (res.errorCode == 200) {
+          var responseMap = json.decode(res.data);
+          return responseMap;
+        } else {
+          // Get.dialog<void>(WarrantyClaimErrorDialog());
+        }
       } else {
-        Fluttertoast.showToast(msg: res.data, fontSize: 45.0);
-        return false;
+        Utility.showDialog(
+            res.errorCode.toString() + 'goodsOrderApprovedButton');
+        //return '';
       }
+      return Map();
     } catch (error) {
-      log(error.toString());
-      return false;
+      print(error.toString());
+      return Map();
     }
   }
+  // Future<bool> approveGoodsOrder({bool? isLoading, approvetoJsonString}) async {
+  //   try {
+  //     final auth = await getSecuredValue(LocalKeys.authToken);
+  //     log(auth);
+  //     final res = await _dataRepository.approveGoodsOrder(
+  //         auth: auth,
+  //         isLoading: isLoading,
+  //         approvetoJsonString: approvetoJsonString);
+  //     print({"res.data", res.data});
+  //     if (!res.hasError) {
+  //       Fluttertoast.showToast(msg: res.data, fontSize: 45.0);
 
-  Future<bool> rejectGoodsOrder({bool? isLoading, rejecttoJsonString}) async {
+  //       return true;
+  //     } else {
+  //       Fluttertoast.showToast(msg: res.data, fontSize: 45.0);
+  //       return false;
+  //     }
+  //   } catch (error) {
+  //     log(error.toString());
+  //     return false;
+  //   }
+  // }
+
+  Future<Map<String, dynamic>> rejectGoodsOrder(
+    goodsOrderRejectJsonString,
+    bool? isLoading,
+  ) async {
     try {
       final auth = await getSecuredValue(LocalKeys.authToken);
-      log(auth);
       final res = await _dataRepository.rejectGoodsOrder(
-          auth: auth,
-          isLoading: isLoading,
-          rejecttoJsonString: rejecttoJsonString);
-      print({"res.data", res.data});
-      if (!res.hasError) {
-        Fluttertoast.showToast(msg: res.data, fontSize: 45.0);
+        auth: auth,
+        goodsOrderRejectJsonString: goodsOrderRejectJsonString,
+        isLoading: isLoading ?? false,
+      );
 
-        return true;
+      var resourceData = res.data;
+
+      print('Response Goods Order Approve: ${resourceData}');
+
+      if (!res.hasError) {
+        if (res.errorCode == 200) {
+          var responseMap = json.decode(res.data);
+          return responseMap;
+        } else {
+          // Get.dialog<void>(WarrantyClaimErrorDialog());
+        }
       } else {
-        Fluttertoast.showToast(msg: res.data, fontSize: 45.0);
-        return false;
+        Utility.showDialog(
+            res.errorCode.toString() + 'goodsOrderApprovedButton');
+        //return '';
       }
+      return Map();
     } catch (error) {
-      log(error.toString());
-      return false;
+      print(error.toString());
+      return Map();
     }
   }
+  // Future<bool> rejectGoodsOrder({bool? isLoading, rejecttoJsonString}) async {
+  //   try {
+  //     final auth = await getSecuredValue(LocalKeys.authToken);
+  //     log(auth);
+  //     final res = await _dataRepository.rejectGoodsOrder(
+  //         auth: auth,
+  //         isLoading: isLoading,
+  //         rejecttoJsonString: rejecttoJsonString);
+  //     print({"res.data", res.data});
+  //     if (!res.hasError) {
+  //       Fluttertoast.showToast(msg: res.data, fontSize: 45.0);
+
+  //       return true;
+  //     } else {
+  //       Fluttertoast.showToast(msg: res.data, fontSize: 45.0);
+  //       return false;
+  //     }
+  //   } catch (error) {
+  //     log(error.toString());
+  //     return false;
+  //   }
+  // }
 
   Future<bool> createBusinessListNumber(
       {bool? isLoading, businesslistJsonString}) async {

@@ -4,6 +4,8 @@ import 'package:cmms/app/utils/user_access_constants.dart';
 import 'package:cmms/app/view_request_orders/request_goods_orders_view_controller.dart';
 import 'package:cmms/app/widgets/custom_elevated_button.dart';
 import 'package:cmms/app/widgets/custom_textField.dart';
+import 'package:cmms/app/widgets/req_approved_dialog.dart';
+import 'package:cmms/app/widgets/req_order_reject_dialog.dart';
 import 'package:cmms/app/widgets/stock_dropdown.dart';
 import 'package:data_table_2/data_table_2.dart';
 import 'package:flutter/material.dart';
@@ -167,8 +169,13 @@ class PurchaseGoodsorderViewWeb
                                   backgroundColor: ColorValues.rejectColor,
                                   text: ' Reject ',
                                   onPressed: () {
-                                    controller.rejectGoodsOrder();
+                                    Get.dialog(ReqOrderRejectDialog(
+                                      id: controller.id.value,
+                                    ));
                                   },
+                                  // onPressed: () {
+                                  //   controller.rejectGoodsOrder();
+                                  // },
                                 ),
                               ),
                               Dimens.boxWidth10,
@@ -178,8 +185,13 @@ class PurchaseGoodsorderViewWeb
                                     backgroundColor: ColorValues.submitColor,
                                     text: 'Approve',
                                     onPressed: () {
-                                      controller.approveGoodsOrder();
+                                      Get.dialog(ReqOrderApprovedDialog(
+                                        id: controller.id.value,
+                                      ));
                                     },
+                                    // onPressed: () {
+                                    //   controller.approveGoodsOrder();
+                                    // },
                                   )),
                               Spacer()
                             ],
