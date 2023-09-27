@@ -58,7 +58,7 @@ import 'package:cmms/app/mrs_view/mrs_view_binding.dart';
 import 'package:cmms/app/mrs_view/view/mrs_view_screen.dart';
 import 'package:cmms/app/pm_plan_list/pm_plan_list_binding.dart';
 import 'package:cmms/app/request_goods_orders_list.dart/request_goods_orders_list_binding.dart';
-import 'package:cmms/app/purchase_goods_orders_view/request_goods_orders_view_binding.dart';
+import 'package:cmms/app/view_request_orders/request_goods_orders_view_binding.dart';
 import 'package:cmms/app/role_access/role_access_binding.dart';
 import 'package:cmms/app/role_access/view/role_access_screen.dart';
 import 'package:cmms/app/role_notification/view/role_notification_screen.dart';
@@ -199,7 +199,7 @@ import '../preventive_maintenance_execution_view/view/preventive_maintenance_exe
 import '../preventive_maintenance_task/preventive_maintenance_task_binding.dart';
 import '../preventive_maintenance_task/view/preventive_maintenance_task_screen.dart';
 import '../request_goods_orders_list.dart/view/request_goods_orders__list_screen.dart';
-import '../purchase_goods_orders_view/view/request_goods_orders_view_screen.dart';
+import '../view_request_orders/view/request_goods_orders_view_screen.dart';
 import '../receive_goods_order/receive_goods_order_binding.dart';
 import '../receive_goods_order/receive_goods_order_screen.dart';
 import '../return_mrs/return_mrs_binding.dart';

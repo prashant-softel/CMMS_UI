@@ -1,5 +1,5 @@
-import 'package:cmms/app/purchase_goods_orders_view/request_goods_orders_view_controller.dart';
-import 'package:cmms/app/purchase_goods_orders_view/view/request_goods_orders_view_web.dart';
+import 'package:cmms/app/view_request_orders/request_goods_orders_view_controller.dart';
+import 'package:cmms/app/view_request_orders/view/request_goods_orders_view_web.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import '../../home/widgets/header_widget.dart';
