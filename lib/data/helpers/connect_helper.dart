@@ -975,7 +975,7 @@ class ConnectHelper {
     print('goodsOrderApproveResponse: ${responseModel.data}');
     var res = responseModel.data;
     var parsedJson = json.decode(res);
-    Get.dialog<void>(ReqOrderMessageRejectDialog(
+    Get.dialog<void>(GoodsOrderMessageRejectDialog(
         data: parsedJson['message'], id: parsedJson['id']));
 
     return responseModel;
@@ -2778,6 +2778,26 @@ class ConnectHelper {
   }) async {
     var responseModel = await apiWrapper.makeRequest(
       'Utils/GetHistoryLog?module_type=$moduleType&id=$permitId',
+      Request.get,
+      null,
+      isLoading ?? false,
+      {
+        'Content-Type': 'application/json',
+        'Authorization': 'Bearer $auth',
+      },
+    );
+    print('PermitHistory Response:${responseModel}');
+    return responseModel;
+  }
+
+  Future<ResponseModel> getRoHistory({
+    required String? auth,
+    int? moduleType,
+    int? id,
+    bool? isLoading,
+  }) async {
+    var responseModel = await apiWrapper.makeRequest(
+      'Utils/GetHistoryLog?module_type=$moduleType&id=$id',
       Request.get,
       null,
       isLoading ?? false,
@@ -5212,7 +5232,7 @@ class ConnectHelper {
     bool? isLoading,
   }) async {
     var responseModel = await apiWrapper.makeRequest(
-      'RequestOrder/RejectGoodsOrder',
+      'RequestOrder/RejectRequestOrder',
       Request.post,
       goodsOrderRejectJsonString,
       isLoading ?? false,

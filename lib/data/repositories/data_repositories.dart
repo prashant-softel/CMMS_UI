@@ -1584,6 +1584,20 @@ class DataRepository extends DomainRepository {
     );
   }
 
+  Future<ResponseModel> getRoHistory({
+    String? auth,
+    int? id,
+    int? moduleType,
+    bool? isLoading,
+  }) async {
+    return await connectHelper.getRoHistory(
+      auth: auth,
+      moduleType: moduleType,
+      id: id,
+      isLoading: isLoading,
+    );
+  }
+
   Future<ResponseModel> updateJobCard({
     String? auth,
     jobCard,
