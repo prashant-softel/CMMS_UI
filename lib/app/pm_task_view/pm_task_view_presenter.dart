@@ -1,3 +1,4 @@
+import 'package:cmms/app/widgets/reject_go_receive_dialog.dart';
 import 'package:cmms/domain/models/employee_model.dart';
 import 'package:cmms/domain/models/new_permit_list_model.dart';
 import 'package:cmms/domain/models/pm_task_view_list_model.dart';
@@ -27,7 +28,7 @@ class PreventiveMaintenanceTaskViewPresenter {
         isLoading: isLoading,
       );
 
-   Future<List<EmployeeModel?>?> getAssignedToList({
+  Future<List<EmployeeModel?>?> getAssignedToList({
     String? auth,
     int? facilityId,
     bool? isLoading,
@@ -37,7 +38,7 @@ class PreventiveMaintenanceTaskViewPresenter {
         facilityId: facilityId ?? 0,
         isLoading: isLoading ?? false,
       );
-  
+
   Future<Map<String, dynamic>?> scheduleLinkToPermit({
     int? scheduleId,
     int? permitId,
@@ -56,4 +57,33 @@ class PreventiveMaintenanceTaskViewPresenter {
         scheduleId: scheduleId,
         isLoading: isLoading,
       );
+  Future<bool> approvePmTaskExecution({
+    approvetoJsonString,
+    required bool isLoading,
+  }) async {
+    return preventiveMaintenanceTaskViewUsecase.approvePmTaskExecution(
+      approvetoJsonString: approvetoJsonString,
+      isLoading: isLoading,
+    );
+  }
+
+  Future<bool> rejectPmTaskExecution({
+    rejecttoJsonString,
+    required bool isLoading,
+  }) async {
+    return preventiveMaintenanceTaskViewUsecase.rejectPmTaskExecution(
+      rejecttoJsonString: rejecttoJsonString,
+      isLoading: isLoading,
+    );
+  }
+
+  Future<bool> closePmTaskExecution({
+    closetoJsonString,
+    required bool isLoading,
+  }) async {
+    return preventiveMaintenanceTaskViewUsecase.closePmTaskExecution(
+      closetoJsonString: closetoJsonString,
+      isLoading: isLoading,
+    );
+  }
 }

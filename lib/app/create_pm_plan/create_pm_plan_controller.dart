@@ -73,7 +73,7 @@ class CreatePmPlanController extends GetxController {
   void onInit() async {
     try {
       await setPmPlanId();
-      if (pmPlanId != 0) {
+      if (pmPlanId.value != 0) {
         await getPmPlanDetails(pmPlanId: pmPlanId.value, isloading: true);
       }
       facilityIdStreamSubscription = homecontroller.facilityId$.listen((event) {
@@ -134,8 +134,6 @@ class CreatePmPlanController extends GetxController {
       selectedfrequencyId = _pmPlanDetailsModel.plan_freq_id ?? 0;
       selectedInventoryCategoryId = _pmPlanDetailsModel.category_id ?? 0;
       selectedInventory.value = _pmPlanDetailsModel.category_name ?? "";
-      inventoryList(
-          facilityId: facilityId, categoryId: selectedInventoryCategoryId);
       //filteredInventoryNameList.value = _pmPlanDetailsModel.mapAssetChecklist;
       _pmPlanDetailsModel.mapAssetChecklist?.forEach((element) {
         rowItem.value.add([
@@ -292,11 +290,11 @@ class CreatePmPlanController extends GetxController {
           selectedInventoryCategoryId =
               equipmentCategoryList[equipCatIndex]?.id ?? 0;
 
-          selectedInventory.value = value;
-          filteredInventoryNameList.value = <InventoryModel>[];
-          inventoryNameList.value = <InventoryModel>[];
-          selectedInventoryNameIdList.value = [];
-          rowItem.value = [];
+          // selectedInventory.value = value;
+          // filteredInventoryNameList.value = <InventoryModel>[];
+          // inventoryNameList.value = <InventoryModel>[];
+          // selectedInventoryNameIdList.value = [];
+          // rowItem.value = [];
           preventiveCheckList.value = <PreventiveCheckListModel>[];
           selectedInventoryNameList.value = <InventoryModel>[];
           Future.delayed(Duration(seconds: 1), () {

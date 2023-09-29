@@ -390,6 +390,54 @@ class Repository {
     }
   }
 
+  Future<Map<String, dynamic>> createNewPermitForPm(
+    newPermit,
+    pmTaskId,
+    bool? isLoading,
+  ) async {
+    try {
+      final auth = await getSecuredValue(LocalKeys.authToken);
+      final res = await _dataRepository.createNewPermitForPm(
+        auth: auth,
+        newPermit: newPermit,
+        pmTaskId: pmTaskId,
+        isLoading: isLoading ?? false,
+      );
+
+      var resourceData = res.data;
+      // var parsedJson = json.decode(resourceData);
+      print('Response Create Permit For Job: ${resourceData}');
+      // Get.dialog(
+      //   CreateNewPermitDialog(
+      //     createPermitData: 'Dialog Title',
+      //     data: parsedJson['message'],
+      //   ),
+      // );
+
+      // data = res.data;
+      //print('Response Create Permit: ${data}');
+
+      if (!res.hasError) {
+        if (res.errorCode == 200) {
+          var responseMap = json.decode(res.data);
+          var permitForJob = responseMap['id'];
+          print('CreateForJobPermitResponse:${permitForJob[0]}');
+          if (pmTaskId != null) {
+            scheduleLinkToPermit(pmTaskId, permitForJob[0], true);
+          }
+          return responseMap;
+        }
+      } else {
+        Utility.showDialog(res.errorCode.toString() + 'createNewPermitForJOb');
+        //return '';
+      }
+      return Map();
+    } catch (error) {
+      print(error.toString());
+      return Map();
+    }
+  }
+
   //Update New Permit
   Future<Map<String, dynamic>> updateNewPermit(
       newPermit, bool? isLoading, bool? resubmit) async {
@@ -8144,6 +8192,77 @@ class Repository {
     }
   }
 
+  Future<bool> approvePmTaskExecution(
+      {bool? isLoading, approvetoJsonString}) async {
+    try {
+      final auth = await getSecuredValue(LocalKeys.authToken);
+      log(auth);
+      final res = await _dataRepository.approvePmTaskExecution(
+          auth: auth,
+          isLoading: isLoading,
+          approvetoJsonString: json.encode(approvetoJsonString));
+      print({"res.data", res.data});
+      if (!res.hasError) {
+        Fluttertoast.showToast(msg: res.data, fontSize: 45.0);
+
+        return true;
+      } else {
+        Fluttertoast.showToast(msg: res.data, fontSize: 45.0);
+        return false;
+      }
+    } catch (error) {
+      log(error.toString());
+      return false;
+    }
+  }
+
+  Future<bool> rejectPmTaskExecution(
+      {bool? isLoading, rejecttoJsonString}) async {
+    try {
+      final auth = await getSecuredValue(LocalKeys.authToken);
+      log(auth);
+      final res = await _dataRepository.rejectPmTaskExecution(
+          auth: auth,
+          isLoading: isLoading,
+          rejecttoJsonString: json.encode(rejecttoJsonString));
+      print({"res.data", res.data});
+      if (!res.hasError) {
+        Fluttertoast.showToast(msg: res.data, fontSize: 45.0);
+
+        return true;
+      } else {
+        Fluttertoast.showToast(msg: res.data, fontSize: 45.0);
+        return false;
+      }
+    } catch (error) {
+      log(error.toString());
+      return false;
+    }
+  }
+
+  Future<bool> ClosePMTaskExecution(
+      {bool? isLoading, closetoJsonString}) async {
+    try {
+      final auth = await getSecuredValue(LocalKeys.authToken);
+      log(auth);
+      final res = await _dataRepository.ClosePMTaskExecution(
+          auth: auth,
+          isLoading: isLoading,
+          ClosePMTaskExecutionJsonString: json.encode(closetoJsonString));
+      print({"res.data", res.data});
+      if (!res.hasError) {
+        Fluttertoast.showToast(msg: res.data, fontSize: 45.0);
+
+        return true;
+      } else {
+        Fluttertoast.showToast(msg: res.data, fontSize: 45.0);
+        return false;
+      }
+    } catch (error) {
+      log(error.toString());
+      return false;
+    }
+  }
   //end
   //end
 }

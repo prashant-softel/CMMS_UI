@@ -20,6 +20,7 @@ import 'package:cmms/app/widgets/goods_order_message_close_dialog.dart';
 import 'package:cmms/app/widgets/goods_order_message_reject_dialog.dart';
 import 'package:cmms/app/widgets/incident_report_approve_message_dialog.dart';
 import 'package:cmms/app/widgets/incident_report_reject_message_dialog.dart';
+import 'package:cmms/app/widgets/link_to_permit_dailog.dart';
 import 'package:cmms/app/widgets/new_warranty_claim_dialog.dart';
 import 'package:cmms/app/widgets/permit_approve_message_dialog.dart';
 import 'package:cmms/app/widgets/permit_cancel_by_approver_message_dialog.dart';
@@ -1999,6 +2000,34 @@ class ConnectHelper {
     return responseModel;
   }
 
+  Future<ResponseModel> createNewPermitForPm({
+    required String auth,
+    newPermit,
+    pmTaskId,
+    bool? isLoading,
+  }) async {
+    var responseModel = await apiWrapper.makeRequest(
+      'Permit/CreatePermit',
+      Request.post,
+      newPermit,
+      isLoading ?? false,
+      {
+        'Content-Type': 'application/json',
+        'Authorization': 'Bearer $auth',
+      },
+    );
+
+    print('CreateNewPermitResponseForJob:${responseModel.data}');
+    // var res = responseModel.data;
+    // var parsedJson = json.decode(res);
+    // Get.dialog<void>(CreateNewPermitForJobDialog(
+    //   data: parsedJson['message'],
+    //   PtwId: parsedJson['id'],
+    // ));
+
+    return responseModel;
+  }
+
   //Update New Permit
   Future<ResponseModel> updateNewPermit({
     required String auth,
@@ -3224,8 +3253,8 @@ class ConnectHelper {
       dynamic startDate,
       dynamic endDate}) async {
     var responseModel = await apiWrapper.makeRequest(
-      //  'PMScheduleView/GetPMTaskList?facility_id=${facilityId}&start_date=${endDate}&end_date=${startDate}',
-      'PMScheduleView/GetPMTaskList?facility_id=1776&start_date=2023-09-13&end_date=2023-09-27&frequencyIds="6,2"&categoryIds="4,2"',
+      // 'PMScheduleView/GetPMTaskList?facility_id=${facilityId}&start_date=${endDate}&end_date=${startDate}&frequencyIds="6,2"&categoryIds="4,2"',
+      'PMScheduleView/GetPMTaskList?facility_id=1736&start_date=2023-09-13&end_date=2023-09-14&frequencyIds="6,2"&categoryIds="4,2"',
       Request.get,
       null,
       isLoading ?? true,
@@ -3243,7 +3272,7 @@ class ConnectHelper {
     bool? isLoading,
   }) async {
     var responseModel = await apiWrapper.makeRequest(
-      'PMScheduleView/GetPMTaskDetail?schedule_id=$scheduleId',
+      'PMScheduleView/GetPMTaskDetail?task_id=$scheduleId',
       Request.get,
       null,
       isLoading ?? false,
@@ -5097,7 +5126,9 @@ class ConnectHelper {
     bool? isLoading,
   }) async {
     var responseModel = await apiWrapper.makeRequest(
-      'PMScheduleView/LinkPermitToPMTask?schedule_id=$scheduleId&permit_id=$permitId',
+      // 'PMScheduleView/LinkPermitToPMTask?schedule_id=$scheduleId&permit_id=$permitId',
+
+      'PMScheduleView/LinkPermitToPMTask?task_id=$scheduleId&permit_id=$permitId',
       Request.put,
       null,
       isLoading ?? false,
@@ -5106,6 +5137,11 @@ class ConnectHelper {
         'Authorization': 'Bearer $auth',
       },
     );
+    var res = responseModel.data;
+    var parsedJson = json.decode(res);
+    Get.dialog<void>(LinkToPermitDialog(
+        data: parsedJson['message'], taskId: parsedJson['id']));
+    print('jcId2:${parsedJson['id']}');
     return responseModel;
   }
 
@@ -5115,7 +5151,8 @@ class ConnectHelper {
     bool? isLoading,
   }) async {
     var responseModel = await apiWrapper.makeRequest(
-      'PMScheduleView/SetPMTask?schedule_id=$scheduleId',
+      //  'PMScheduleView/SetPMTask?schedule_id=$scheduleId',
+      'PMScheduleView/StartPMTask?task_id=$scheduleId',
       Request.post,
       null,
       isLoading ?? false,
@@ -5504,6 +5541,78 @@ class ConnectHelper {
         'Authorization': 'Bearer $auth',
       },
     );
+
+    return responseModel;
+  }
+
+  Future<ResponseModel> ClosePMTaskExecution({
+    required String auth,
+    ClosePMTaskExecutionJsonString,
+    bool? isLoading,
+  }) async {
+    // facilityId = 45;
+    var responseModel = await apiWrapper.makeRequest(
+      'PMScheduleView/ClosePMTaskExecution',
+      Request.put,
+      // {'comment': "$comment", 'id': id},
+      ClosePMTaskExecutionJsonString,
+      isLoading ?? true,
+      {
+        'Content-Type': 'application/json',
+        'Authorization': 'Bearer $auth',
+      },
+    );
+    var res = responseModel.data;
+    var parsedJson = json.decode(res);
+    // Get.dialog<void>(PermitMessageCloseDialog(data: parsedJson['message']));
+
+    return responseModel;
+  }
+
+  Future<ResponseModel> approvePmTaskExecution({
+    required String auth,
+    approvetoJsonString,
+    bool? isLoading,
+  }) async {
+    // facilityId = 45;
+    var responseModel = await apiWrapper.makeRequest(
+      'PMScheduleView/ApprovePMTaskExecution',
+      Request.put,
+      // {'comment': "$comment", 'id': id},
+      approvetoJsonString,
+      isLoading ?? true,
+      {
+        'Content-Type': 'application/json',
+        'Authorization': 'Bearer $auth',
+      },
+    );
+    var res = responseModel.data;
+    var parsedJson = json.decode(res);
+    // Get.dialog<void>(PermitMessageCloseDialog(data: parsedJson['message']));
+
+    return responseModel;
+  }
+
+  Future<ResponseModel> rejectPmTaskExecution({
+    required String auth,
+    rejecttoJsonString,
+    bool? isLoading,
+  }) async {
+    // facilityId = 45;
+    var responseModel = await apiWrapper.makeRequest(
+      'PMScheduleView/RejectPMTaskExecution',
+      Request.put,
+      // {'comment': "$comment", 'id': id},
+      rejecttoJsonString,
+      isLoading ?? true,
+      {
+        'Content-Type': 'application/json',
+        'Authorization': 'Bearer $auth',
+      },
+    );
+    var res = responseModel.data;
+    var parsedJson = json.decode(res);
+    // Get.dialog<void>(PermitMessageCloseDialog(data: parsedJson['message']));
 
     return responseModel;
   }

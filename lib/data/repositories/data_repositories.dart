@@ -1221,7 +1221,18 @@ class DataRepository extends DomainRepository {
         jobId: jobId,
         isLoading: isLoading ?? false,
       );
-
+  Future<ResponseModel> createNewPermitForPm({
+    required String auth,
+    newPermit,
+    pmTaskId,
+    bool? isLoading,
+  }) async =>
+      await connectHelper.createNewPermitForPm(
+        auth: auth,
+        newPermit: newPermit,
+        pmTaskId: pmTaskId,
+        isLoading: isLoading ?? false,
+      );
   Future<ResponseModel> updateNewPermit(
           {required String auth,
           newPermit,
@@ -3319,5 +3330,35 @@ class DataRepository extends DomainRepository {
           isLoading: isLoading ?? false,
           startDate: startDate,
           endDate: endDate);
+  Future<ResponseModel> ClosePMTaskExecution({
+    required String auth,
+    ClosePMTaskExecutionJsonString,
+    bool? isLoading,
+  }) async =>
+      await connectHelper.ClosePMTaskExecution(
+        auth: auth,
+        ClosePMTaskExecutionJsonString: ClosePMTaskExecutionJsonString,
+        isLoading: isLoading ?? false,
+      );
+  Future<ResponseModel> rejectPmTaskExecution({
+    required String auth,
+    rejecttoJsonString,
+    bool? isLoading,
+  }) async =>
+      await connectHelper.rejectPmTaskExecution(
+        auth: auth,
+        rejecttoJsonString: rejecttoJsonString,
+        isLoading: isLoading ?? false,
+      );
+  Future<ResponseModel> approvePmTaskExecution({
+    required String auth,
+    approvetoJsonString,
+    bool? isLoading,
+  }) async =>
+      await connectHelper.approvePmTaskExecution(
+        auth: auth,
+        approvetoJsonString: approvetoJsonString,
+        isLoading: isLoading ?? false,
+      );
 //end
 }

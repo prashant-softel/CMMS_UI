@@ -49,9 +49,58 @@ class PreventiveMaintenanceTaskController extends GetxController {
   String get formattedFromdate1 =>
       DateFormat('yyyy-MM-dd').format(fromDate.value);
   PmTaskListModel? selectedItem;
+  RxString idFilterText = ''.obs;
+  RxString titleFilterText = ''.obs;
+  RxString lastDoneDateFilterText = ''.obs;
+  RxString dueDateFilterText = ''.obs;
+  RxString doneDateFilterText = ''.obs;
+
+  RxString frequencyFilterText = ''.obs;
+  RxString assignFilterText = ''.obs;
+  RxString ptwFilterText = ''.obs;
+
+  final columnVisibility = ValueNotifier<Map<String, bool>>({
+    "PM Plan Id": true,
+    "PM Plan Title": true,
+    "Last Done Date": true,
+    "Due Date": true,
+    "Done Date": true,
+    "Order Frequency": true,
+    "Assigned To": true,
+    "PTW": true,
+  });
+  Rx<int> pmTaskId = 0.obs;
+
+  final Map<String, double> columnwidth = {
+    "PM Plan Id": 150,
+    "PM Plan Title": 300,
+    "Last Done Date": 200,
+    "Due Date": 200,
+    "Done Date": 200,
+    "Order Frequency": 200,
+    "Assigned To": 150,
+    "PTW": 150,
+  };
+  Map<String, RxString> filterText = {};
+  void setColumnVisibility(String columnName, bool isVisible) {
+    final newVisibility = Map<String, bool>.from(columnVisibility.value)
+      ..[columnName] = isVisible;
+    columnVisibility.value = newVisibility;
+    // print({"updated columnVisibility": columnVisibility});
+  }
 
   @override
   void onInit() async {
+    this.filterText = {
+      "PM Plan Id": idFilterText,
+      "PM Plan Title": titleFilterText,
+      "Last Done Date": lastDoneDateFilterText,
+      "Due Date": dueDateFilterText,
+      "Done Date": doneDateFilterText,
+      "Order Frequency": frequencyFilterText,
+      "Assigned To": assignFilterText,
+      "PTW": ptwFilterText,
+    };
     facilityIdStreamSubscription = homecontroller.facilityId$.listen((event) {
       facilityId = event;
       Future.delayed(Duration(seconds: 2), () async {
@@ -72,11 +121,11 @@ class PreventiveMaintenanceTaskController extends GetxController {
       return;
     }
 
-    pmTaskList.value = filteredData
-        .where((item) => item!.maintenance_order_number!
-            .toLowerCase()
-            .contains(keyword.toLowerCase()))
-        .toList();
+    // pmTaskList.value = filteredData
+    //     .where((item) => item!.maintenance_order_number!
+    //         .toLowerCase()
+    //         .contains(keyword.toLowerCase()))
+    //     .toList();
   }
 
   Future<void> getPmTaskList(int facilityId, dynamic startDate, dynamic endDate,

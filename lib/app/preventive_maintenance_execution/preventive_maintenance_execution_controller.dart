@@ -6,6 +6,7 @@ import 'package:cmms/app/utils/utility.dart';
 import 'package:cmms/app/widgets/custom_elevated_button.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:get/get.dart';
 import 'package:scrollable_table_view/scrollable_table_view.dart';
 
@@ -27,15 +28,18 @@ class PreventiveMaintenanceExecutionController extends GetxController {
   Rx<PmtaskViewModel?> pmtaskViewModel = PmtaskViewModel().obs;
   RxList<ScheduleCheckPoint?>? scheduleCheckPoints =
       <ScheduleCheckPoint?>[].obs;
-  ScheduleCheckPoint? scheduleCheckPointsModel;
-  PaginationController schedulePaginationController = PaginationController(
-    rowCount: 0,
-    rowsPerPage: 10,
-  );
-  RxList<String> scheduleCheckPointsTableColumns = <String>[].obs;
-  RxList<HistoryLog?>? historyLog = <HistoryLog?>[].obs;
-  HistoryLog? historyLogModel;
+  RxList<ChecklistObservation>? checklistObservations =
+      <ChecklistObservation>[].obs;
+  // ScheduleCheckPoint? scheduleCheckPointsModel;
+  // PaginationController schedulePaginationController = PaginationController(
+  //   rowCount: 0,
+  //   rowsPerPage: 10,
+  // );
+  // RxList<String> scheduleCheckPointsTableColumns = <String>[].obs;
+  // RxList<HistoryLog?>? historyLog = <HistoryLog?>[].obs;
+  // HistoryLog? historyLogModel;
   var commentCtrlr = TextEditingController();
+  ScheduleCheckPoint? selectedItem;
 
   @override
   void onInit() async {
@@ -54,13 +58,13 @@ class PreventiveMaintenanceExecutionController extends GetxController {
     try {
       final _flutterSecureStorage = const FlutterSecureStorage();
       // Read jobId
-      String? _scheduleId = await _flutterSecureStorage.read(key: "scheduleId");
+      String? _scheduleId = await _flutterSecureStorage.read(key: "pmTaskId");
       if (_scheduleId == null || _scheduleId == '' || _scheduleId == "null") {
         var dataFromPreviousScreen = Get.arguments;
 
-        scheduleId.value = dataFromPreviousScreen['scheduleId'];
+        scheduleId.value = dataFromPreviousScreen['pmTaskId'];
         await _flutterSecureStorage.write(
-          key: "scheduleId",
+          key: "pmTaskId",
           value: scheduleId.value == null ? '' : scheduleId.value.toString(),
         );
       } else {
@@ -68,7 +72,7 @@ class PreventiveMaintenanceExecutionController extends GetxController {
       }
       //  await _flutterSecureStorage.delete(key: "scheduleId");
     } catch (e) {
-      Utility.showDialog(e.toString() + 'scheduleId');
+      Utility.showDialog(e.toString() + 'pmTaskId');
     }
   }
 
@@ -78,42 +82,37 @@ class PreventiveMaintenanceExecutionController extends GetxController {
   }
 
   Future<void> getPmtaskViewList({int? scheduleId, bool? isloading}) async {
-//scheduleId = 5326;
     final _permitDetails = await preventiveMaintenanceExecutionPresenter
         .getPmtaskViewList(scheduleId: scheduleId, isloading: isloading);
     if (_permitDetails != null) {
       pmtaskViewModel.value = _permitDetails;
-
-      // print({"werr", pmtaskViewModel.value?.category_name});
-      scheduleCheckPoints!.value = _permitDetails.schedule_check_points ?? [];
-      historyLog!.value = _permitDetails.history_log ?? [];
-
-      schedulePaginationController = PaginationController(
-        rowCount: scheduleCheckPoints?.length ?? 0,
-        rowsPerPage: 10,
-      );
-      if (scheduleCheckPoints != null && scheduleCheckPoints!.isNotEmpty) {
-        scheduleCheckPointsModel = scheduleCheckPoints![0];
-        var scheduleCheckPointsJson = scheduleCheckPointsModel?.toJson();
-        scheduleCheckPointsTableColumns.value = <String>[];
-        for (var key in scheduleCheckPointsJson?.keys.toList() ?? []) {
-          scheduleCheckPointsTableColumns.add(key);
-        }
+      scheduleCheckPoints!.value = _permitDetails.schedules ?? [];
+      for (var checkpoint in scheduleCheckPoints!) {
+        // checklistObservations!.value.add(checkpoint?.checklist_observation);
       }
     }
   }
 
   void updatePmExecution() async {
     List<AddObservations> addObservations = <AddObservations>[];
-    scheduleCheckPoints?.forEach((e) {
+    checklistObservations?.forEach((e) {
       addObservations.add(AddObservations(
-          execution_id: e!.execution_id ?? 0,
+          execution_id: e.execution_id ?? 0,
           observation: e.observation_value_controller?.text ?? "",
-          job_create: e.linked_job_id.value,
+          job_create: e.linked_job_id,
           pm_files: []));
     });
+    List<Schedules> schedule = <Schedules>[];
+    checklistObservations?.forEach((e) {
+      schedule.add(Schedules(
+          schedule_id: selectedItem?.schedule_id ?? 0,
+          add_observations: addObservations));
+    });
+
     UpdatePmExecutionMdel updatePmExecutionMdel = UpdatePmExecutionMdel(
-        schedule_id: 2444, add_observations: addObservations);
+        task_id: scheduleId.value,
+        comment: commentCtrlr.text,
+        schedules: schedule);
     var pmExecutionJsonString = updatePmExecutionMdel.toJson();
     print({"pmExecutionJsonString", pmExecutionJsonString});
     List<dynamic>? responsePmScheduleCreated =
@@ -123,8 +122,8 @@ class PreventiveMaintenanceExecutionController extends GetxController {
     );
     if (responsePmScheduleCreated != null) {
       _updatedailog();
-      // Fluttertoast.showToast(
-      //     msg: "PM Schedule Successfully...", fontSize: 16.0);
+      Fluttertoast.showToast(
+          msg: "PM Schedule Successfully...", fontSize: 16.0);
     }
   }
 

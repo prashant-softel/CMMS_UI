@@ -36,7 +36,7 @@ class PreventiveMaintenanceTaskViewUsecase {
         isLoading,
       );
 
-   Future<List<EmployeeModel?>?> getAssignedToList({
+  Future<List<EmployeeModel?>?> getAssignedToList({
     String? auth,
     int? facilityId,
     bool? isLoading,
@@ -46,7 +46,7 @@ class PreventiveMaintenanceTaskViewUsecase {
         facilityId,
         isLoading,
       );
-      
+
   Future<Map<String, dynamic>?> setPmTask({
     int? scheduleId,
     bool? isLoading,
@@ -55,4 +55,22 @@ class PreventiveMaintenanceTaskViewUsecase {
         scheduleId,
         isLoading,
       );
+  Future<bool> approvePmTaskExecution({
+    approvetoJsonString,
+    bool? isLoading,
+  }) async =>
+      await repository.approvePmTaskExecution(
+          approvetoJsonString: approvetoJsonString, isLoading: isLoading);
+  Future<bool> rejectPmTaskExecution({
+    rejecttoJsonString,
+    bool? isLoading,
+  }) async =>
+      await repository.rejectPmTaskExecution(
+          rejecttoJsonString: rejecttoJsonString, isLoading: isLoading);
+  Future<bool> closePmTaskExecution({
+    closetoJsonString,
+    bool? isLoading,
+  }) async =>
+      await repository.ClosePMTaskExecution(
+          closetoJsonString: closetoJsonString, isLoading: isLoading);
 }
