@@ -1,4 +1,5 @@
 import 'package:cmms/domain/models/get_asset_data_list_model.dart';
+import 'package:cmms/domain/models/history_model.dart';
 import 'package:cmms/domain/models/req_order_details_by_id_model.dart';
 
 import 'package:cmms/domain/usecases/stock_managment_goods_order_req_details_usecase.dart';
@@ -26,6 +27,16 @@ class GoodsOrdersReqDetailPresenter {
     );
   }
 
+  Future<List<HistoryModel>?> getRoHistory(
+    moduleType,
+    id,
+    isLoading,
+  ) async =>
+      await goodsOrdersReqDetailUsecase.getRoHistory(
+        moduleType: moduleType,
+        id: id,
+        isLoading: isLoading,
+      );
   Future<Map<String, dynamic>?> submitPurchaseOrderData({
     createGoReq,
     required bool isLoading,

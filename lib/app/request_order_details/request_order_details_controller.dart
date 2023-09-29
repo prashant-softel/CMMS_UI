@@ -2,7 +2,9 @@ import 'dart:async';
 
 import 'package:cmms/app/navigators/app_pages.dart';
 import 'package:cmms/app/request_order_details/request_order_details_presenter.dart';
+import 'package:cmms/app/utils/module_type_constants.dart';
 import 'package:cmms/domain/models/get_asset_data_list_model.dart';
+import 'package:cmms/domain/models/history_model.dart';
 import 'package:cmms/domain/models/req_order_details_by_id_model.dart';
 import 'package:cmms/domain/models/request_order_model.dart';
 
@@ -26,6 +28,7 @@ class GoodsOrdersReqDetailController extends GetxController {
       <GetRODetailsByIDModel?>[].obs;
   Rx<GetRODetailsByIDModel?> getPurchaseDetailsByIDModel =
       GetRODetailsByIDModel().obs;
+  RxList<HistoryModel?>? historyList = <HistoryModel?>[].obs;
   RxList<GetAssetDataModel?> assetList = <GetAssetDataModel>[].obs;
   Map<String, GetAssetDataModel> dropdownMapperData = {};
   BehaviorSubject<int> _facilityId = BehaviorSubject.seeded(0);
@@ -53,7 +56,7 @@ class GoodsOrdersReqDetailController extends GetxController {
         if (id.value != 0) {
           Future.delayed(Duration(seconds: 1), () {
             getRoDetailsByID(requestID: id.value);
-            // getGoHistory(id: id.value);
+            getRoHistory(id: id.value);
           });
         }
       });
@@ -103,6 +106,23 @@ class GoodsOrdersReqDetailController extends GetxController {
       print(e.toString() + 'userId');
       //  Utility.showDialog(e.toString() + 'userId');
     }
+  }
+
+  Future<void> getRoHistory({required int id}) async {
+    /// TODO: CHANGE THESE VALUES
+
+    int moduleType = UserModuleTypeConstants.kReqOrderModuleTypeId;
+
+    //
+    historyList?.value = await goodsOrdersReqDetailPresenter.getRoHistory(
+          // tempModuleType,
+          // tempJobCardId,
+          moduleType,
+          id,
+          true,
+        ) ??
+        [];
+    update(["historyList"]);
   }
 
   Future<void> getAssetList(int _facilityId) async {
