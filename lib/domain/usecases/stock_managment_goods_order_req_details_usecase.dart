@@ -1,4 +1,5 @@
 import 'package:cmms/domain/models/get_asset_data_list_model.dart';
+import 'package:cmms/domain/models/history_model.dart';
 import 'package:cmms/domain/models/req_order_details_by_id_model.dart';
 import 'package:cmms/domain/repositories/repository.dart';
 
@@ -29,6 +30,16 @@ class GoodsOrdersReqDetailUsecase {
   }) async =>
       await repository.updatePurchaseOrderData(
         createGoReq,
+        isLoading,
+      );
+  Future<List<HistoryModel>?> getRoHistory({
+    moduleType,
+    id,
+    bool? isLoading,
+  }) async =>
+      await repository.getRoHistory(
+        moduleType,
+        id,
         isLoading,
       );
   Future<GetRODetailsByIDModel?> getRoDetailsByID({
