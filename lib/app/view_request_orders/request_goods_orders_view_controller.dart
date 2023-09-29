@@ -2,10 +2,12 @@ import 'dart:async';
 
 import 'package:cmms/app/home/home_controller.dart';
 import 'package:cmms/app/navigators/navigators.dart';
+import 'package:cmms/app/utils/module_type_constants.dart';
 import 'package:cmms/app/view_request_orders/request_goods_orders_view_presenter.dart';
 import 'package:cmms/app/return_mrs/return_mrs_presenter.dart';
 import 'package:cmms/domain/models/comment_model.dart';
 import 'package:cmms/domain/models/get_asset_data_list_model.dart';
+import 'package:cmms/domain/models/history_model.dart';
 import 'package:cmms/domain/models/req_order_details_by_id_model.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -19,6 +21,7 @@ class PurchaseGoodsorderViewController extends GetxController {
   Rx<GetRODetailsByIDModel?> getPurchaseDetailsByIDModel =
       GetRODetailsByIDModel().obs;
   Map<String, GetAssetDataModel> dropdownMapperData = {};
+  RxList<HistoryModel?>? historyList = <HistoryModel?>[].obs;
   RxList<GetAssetDataModel?> assetList = <GetAssetDataModel>[].obs;
   TextEditingController approveCommentTextFieldCtrlr = TextEditingController();
   TextEditingController rejectCommentTextFieldCtrlr = TextEditingController();
@@ -51,7 +54,7 @@ class PurchaseGoodsorderViewController extends GetxController {
           if (id.value != 0) {
             Future.delayed(Duration(seconds: 1), () {
               getRoDetailsByID(requestID: id.value);
-              // getGoHistory(id: id.value);
+              getRoHistory(id: id.value);
             });
           }
         },
@@ -121,6 +124,7 @@ class PurchaseGoodsorderViewController extends GetxController {
       }
     }
   }
+
   // approveGoodsOrder() async {
   //   {
   //     String _comment = commentCtrlr.text.trim();
@@ -172,6 +176,23 @@ class PurchaseGoodsorderViewController extends GetxController {
         //getCalibrationList(facilityId, true);
       }
     }
+  }
+
+  Future<void> getRoHistory({required int id}) async {
+    /// TODO: CHANGE THESE VALUES
+
+    int moduleType = UserModuleTypeConstants.kReqOrderModuleTypeId;
+
+    //
+    historyList?.value = await purchaseGoodsorderViewPresenter.getRoHistory(
+          // tempModuleType,
+          // tempJobCardId,
+          moduleType,
+          id,
+          true,
+        ) ??
+        [];
+    update(["historyList"]);
   }
 
   void addRowItem() {

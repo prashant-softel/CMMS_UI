@@ -1185,23 +1185,22 @@ class _ViewAddGoodsOrdersWebState extends State<ViewAddGoodsOrdersWeb> {
                                       controller.getPurchaseDetailsByIDModel
                                                   .value?.status ==
                                               301 &&
-                                          controller.type == 1 
-                                      //     ||
-                                      // controller.getPurchaseDetailsByIDModel
-                                      //             .value?.status ==
-                                      //         310 &&
-                                      //     varUserAccessModel.value.access_list!
-                                      //             .where((e) =>
-                                      //                 e.feature_id ==
-                                      //                     UserAccessConstants
-                                      //                         .kGoodsFeatureId &&
-                                      //                 e.delete ==
-                                      //                     UserAccessConstants
-                                      //                         .kHaveApproveAccess)
-                                      //             .length >
-                                      //         0
-                                              )
-
+                                          controller.type == 1
+                                  //     ||
+                                  // controller.getPurchaseDetailsByIDModel
+                                  //             .value?.status ==
+                                  //         310 &&
+                                  //     varUserAccessModel.value.access_list!
+                                  //             .where((e) =>
+                                  //                 e.feature_id ==
+                                  //                     UserAccessConstants
+                                  //                         .kGoodsFeatureId &&
+                                  //                 e.delete ==
+                                  //                     UserAccessConstants
+                                  //                         .kHaveApproveAccess)
+                                  //             .length >
+                                  //         0
+                                  )
                                   ? Row(
                                       children: [
                                         Spacer(),
@@ -1232,31 +1231,29 @@ class _ViewAddGoodsOrdersWebState extends State<ViewAddGoodsOrdersWeb> {
                                               )
                                             : Dimens.box0,
                                         Dimens.boxWidth10,
-                                       controller.getPurchaseDetailsByIDModel.value
-                                              ?.status ==
-                                          302  && varUserAccessModel.value.access_list!
-                                                    .where((e) =>
-                                                        e.feature_id ==
-                                                            UserAccessConstants
-                                                                .kGoodsFeatureId &&
-                                                        e.approve ==
-                                                            UserAccessConstants
-                                                                .kHaveApproveAccess)
-                                                    .length >
-                                                0||
-                                      controller.getPurchaseDetailsByIDModel
-                                                  .value?.status ==
-                                              301 &&
-                                          controller.type == 1 && varUserAccessModel.value.access_list!
-                                                    .where((e) =>
-                                                        e.feature_id ==
-                                                            UserAccessConstants
-                                                                .kGoodsFeatureId &&
-                                                        e.approve ==
-                                                            UserAccessConstants
-                                                                .kHaveApproveAccess)
-                                                    .length >
-                                                0
+                                        controller.getPurchaseDetailsByIDModel
+                                                            .value?.status ==
+                                                        302 &&
+                                                    varUserAccessModel.value.access_list!
+                                                            .where((e) =>
+                                                                e.feature_id == UserAccessConstants.kGoodsFeatureId &&
+                                                                e.approve ==
+                                                                    UserAccessConstants
+                                                                        .kHaveApproveAccess)
+                                                            .length >
+                                                        0 ||
+                                                controller.getPurchaseDetailsByIDModel
+                                                            .value?.status ==
+                                                        301 &&
+                                                    controller.type == 1 &&
+                                                    varUserAccessModel
+                                                            .value.access_list!
+                                                            .where((e) =>
+                                                                e.feature_id ==
+                                                                    UserAccessConstants.kGoodsFeatureId &&
+                                                                e.approve == UserAccessConstants.kHaveApproveAccess)
+                                                            .length >
+                                                        0
                                             ? Container(
                                                 height: 45,
                                                 child: CustomElevatedButton(

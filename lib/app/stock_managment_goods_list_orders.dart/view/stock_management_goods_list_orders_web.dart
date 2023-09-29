@@ -798,7 +798,8 @@ class GoodsOrderListDataSource extends DataTableSource {
                                                     UserAccessConstants
                                                         .kHaveAddAccess)
                                             .length >
-                                        0 || controller.goodsOrdersList
+                                        0 ||
+                                controller.goodsOrdersList
                                             .firstWhere(
                                               (e) =>
                                                   e?.id ==

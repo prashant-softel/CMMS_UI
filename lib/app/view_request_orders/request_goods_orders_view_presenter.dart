@@ -1,5 +1,6 @@
 import 'package:cmms/domain/models/get_asset_data_list_model.dart';
 import 'package:cmms/domain/models/get_return_mrs_list.dart';
+import 'package:cmms/domain/models/history_model.dart';
 import 'package:cmms/domain/models/req_order_details_by_id_model.dart';
 
 import '../../domain/usecases/purchase_goods_order_view_usecase.dart';
@@ -65,4 +66,15 @@ class PurchaseGoodsorderViewPresenter {
       isLoading: isLoading,
     );
   }
+
+  Future<List<HistoryModel>?> getRoHistory(
+    moduleType,
+    id,
+    isLoading,
+  ) async =>
+      await purchaseGoodsorderViewUsecase.getRoHistory(
+        moduleType: moduleType,
+        id: id,
+        isLoading: isLoading,
+      );
 }

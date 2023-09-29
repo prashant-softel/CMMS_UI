@@ -478,7 +478,7 @@ class GoodsOrderListDataSource extends DataTableSource {
     controller.GoodsOrderId.value =
         GoodsOrderListDetails?.request_order_id ?? 0;
     var cellsBuffer = [
-      '${GoodsOrderListDetails?.request_order_id ?? ''}',
+      "request_order_id",
       '${GoodsOrderListDetails?.generatedBy ?? ''}',
       '${GoodsOrderListDetails?.generatedAt ?? ''}',
       '${GoodsOrderListDetails?.status ?? ''}',
@@ -508,7 +508,7 @@ class GoodsOrderListDataSource extends DataTableSource {
         return DataCell(
           Padding(
             padding: EdgeInsets.zero,
-            child: (value == 'id')
+            child: (value == 'request_order_id')
                 ? Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
@@ -520,6 +520,49 @@ class GoodsOrderListDataSource extends DataTableSource {
                         alignment: Alignment.centerRight,
                         child: Container(
                           padding: Dimens.edgeInsets8_2_8_2,
+                          decoration: BoxDecoration(
+                            color: controller.goodsOrdersList
+                                        .firstWhere(
+                                          (e) =>
+                                              e?.request_order_id ==
+                                              GoodsOrderListDetails!
+                                                  .request_order_id,
+                                          orElse: () =>
+                                              GetRequestOrderListModel(
+                                                  request_order_id: 00),
+                                        )
+                                        ?.status ==
+                                    341
+                                ? ColorValues.yellowColor
+                                : controller.goodsOrdersList
+                                            .firstWhere(
+                                              (e) =>
+                                                  e?.request_order_id ==
+                                                  GoodsOrderListDetails!
+                                                      .request_order_id,
+                                              orElse: () =>
+                                                  GetRequestOrderListModel(
+                                                      request_order_id: 00),
+                                            )
+                                            ?.status ==
+                                        342
+                                    ? ColorValues.rejectColor
+                                    : controller.goodsOrdersList
+                                                .firstWhere(
+                                                  (e) =>
+                                                      e?.request_order_id ==
+                                                      GoodsOrderListDetails!
+                                                          .request_order_id,
+                                                  orElse: () =>
+                                                      GetRequestOrderListModel(
+                                                          request_order_id: 00),
+                                                )
+                                                ?.status ==
+                                            301
+                                        ? ColorValues.approveColor
+                                        : ColorValues.addNewColor,
+                            borderRadius: BorderRadius.circular(4),
+                          ),
                           child: Text(
                             '${GoodsOrderListDetails?.status_short}',
                             style: Styles.white10.copyWith(
@@ -552,16 +595,28 @@ class GoodsOrderListDataSource extends DataTableSource {
                           //   //     .viewGoodsOrders);
                           // },
                         ),
-                        varUserAccessModel.value.access_list!
-                                    .where((e) =>
-                                        e.feature_id ==
-                                            UserAccessConstants
-                                                .kReqOrderFeatureId &&
-                                        e.edit ==
-                                            UserAccessConstants
-                                                .kHaveApproveAccess)
-                                    .length >
-                                0
+                        controller.goodsOrdersList
+                                        .firstWhere(
+                                          (e) =>
+                                              e?.request_order_id ==
+                                              GoodsOrderListDetails!
+                                                  .request_order_id,
+                                          orElse: () =>
+                                              GetRequestOrderListModel(
+                                                  request_order_id: 00),
+                                        )
+                                        .status ==
+                                    341 &&
+                                varUserAccessModel.value.access_list!
+                                        .where((e) =>
+                                            e.feature_id ==
+                                                UserAccessConstants
+                                                    .kReqOrderFeatureId &&
+                                            e.edit ==
+                                                UserAccessConstants
+                                                    .kHaveApproveAccess)
+                                        .length >
+                                    0
                             ? TableActionButton(
                                 color: ColorValues.editColor,
                                 icon: Icons.edit,
@@ -578,16 +633,66 @@ class GoodsOrderListDataSource extends DataTableSource {
                                 },
                               )
                             : Dimens.box0,
-                        varUserAccessModel.value.access_list!
-                                    .where((e) =>
-                                        e.feature_id ==
-                                            UserAccessConstants
-                                                .kReqOrderFeatureId &&
-                                        e.approve ==
-                                            UserAccessConstants
-                                                .kHaveApproveAccess)
-                                    .length >
-                                0
+                        controller.goodsOrdersList
+                                        .firstWhere(
+                                          (e) =>
+                                              e?.request_order_id ==
+                                              GoodsOrderListDetails!
+                                                  .request_order_id,
+                                          orElse: () =>
+                                              GetRequestOrderListModel(
+                                                  request_order_id: 00),
+                                        )
+                                        .status ==
+                                    342 &&
+                                varUserAccessModel.value.access_list!
+                                        .where((e) =>
+                                            e.feature_id ==
+                                                UserAccessConstants
+                                                    .kReqOrderFeatureId &&
+                                            e.add ==
+                                                UserAccessConstants
+                                                    .kHaveAddAccess)
+                                        .length >
+                                    0
+                            ? TableActionButton(
+                                color: Color.fromARGB(255, 116, 78, 130),
+                                icon: Icons.ads_click,
+                                message: 'Re-Submit RO',
+                                onPress: () {
+                                  int id =
+                                      GoodsOrderListDetails?.request_order_id ??
+                                          0;
+                                  if (id != 0) {
+                                    Get.toNamed(
+                                        Routes.GoodsOrdersReqDetailsScreen,
+                                        arguments: {"id": id});
+                                  }
+                                },
+                              )
+                            : Dimens.box0,
+                        controller.goodsOrdersList
+                                        .firstWhere(
+                                          (e) =>
+                                              e?.request_order_id ==
+                                              GoodsOrderListDetails!
+                                                  .request_order_id,
+                                          orElse: () =>
+                                              GetRequestOrderListModel(
+                                                  request_order_id: 00),
+                                        )
+                                        .status ==
+                                    341 &&
+                                varUserAccessModel.value.access_list!
+                                        .where((e) =>
+                                            e.feature_id ==
+                                                UserAccessConstants
+                                                    .kReqOrderFeatureId &&
+                                            e.approve ==
+                                                UserAccessConstants
+                                                    .kHaveApproveAccess)
+                                        .length >
+                                    0
                             ? TableActionButton(
                                 color: ColorValues.appGreenColor,
                                 icon: Icons.add,
