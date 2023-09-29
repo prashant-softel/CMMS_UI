@@ -86,7 +86,7 @@ class ReqOrderMessageApproveDialog extends GetView {
                 child: ElevatedButton(
                   style: Styles.darkBlueElevatedButtonStyle,
                   onPressed: () {
-                    Get.offAllNamed(Routes.stockManagementGoodsOrdersScreen);
+                    Get.offAllNamed(Routes.purchaseGoodsorder);
                   },
                   child: const Text('Request Order List'),
                 ),

@@ -11,7 +11,7 @@ import '../theme/styles.dart';
 
 class ReqOrderMessageRejectDialog extends GetView {
   String? data;
-  int? id;
+  List<dynamic>? id;
 
   ReqOrderMessageRejectDialog({super.key, this.data, this.id});
   final PurchaseGoodsorderViewController controller = Get.find();
@@ -104,7 +104,8 @@ class ReqOrderMessageRejectDialog extends GetView {
 
                         if (controller.id.value != 0) {
                           Future.delayed(Duration(seconds: 1), () {
-                            controller.getRoDetailsByID(requestID: id ?? 0);
+                            controller.getRoDetailsByID(
+                                requestID: controller.id.value);
                             // getGoHistory(id: id.value);
                           });
                         }

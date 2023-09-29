@@ -5958,8 +5958,7 @@ class Repository {
           // Get.dialog<void>(WarrantyClaimErrorDialog());
         }
       } else {
-        Utility.showDialog(
-            res.errorCode.toString() + 'goodsOrderApprovedButton');
+        Utility.showDialog(res.errorCode.toString() + 'reqOrderRejectedButton');
         //return '';
       }
       return Map();

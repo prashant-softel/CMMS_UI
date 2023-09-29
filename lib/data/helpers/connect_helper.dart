@@ -975,7 +975,7 @@ class ConnectHelper {
     print('goodsOrderApproveResponse: ${responseModel.data}');
     var res = responseModel.data;
     var parsedJson = json.decode(res);
-    Get.dialog<void>(ReqOrderMessageRejectDialog(
+    Get.dialog<void>(GoodsOrderMessageRejectDialog(
         data: parsedJson['message'], id: parsedJson['id']));
 
     return responseModel;
@@ -5212,7 +5212,7 @@ class ConnectHelper {
     bool? isLoading,
   }) async {
     var responseModel = await apiWrapper.makeRequest(
-      'RequestOrder/RejectGoodsOrder',
+      'RequestOrder/RejectRequestOrder',
       Request.post,
       goodsOrderRejectJsonString,
       isLoading ?? false,
