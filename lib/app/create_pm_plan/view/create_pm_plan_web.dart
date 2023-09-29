@@ -505,18 +505,18 @@ class _CreatePmPlanWebState extends State<CreatePmPlanWeb> {
                                     controller.pmPlanId != 0
                                         ? CustomElevatedButton(
                                             backgroundColor:
-                                                ColorValues.appGreenColor,
-                                            text: 'Submit',
-                                            onPressed: () {
-                                              controller.createPmPlan();
-                                            },
-                                          )
-                                        : CustomElevatedButton(
-                                            backgroundColor:
                                                 ColorValues.updateColor,
                                             text: 'Update',
                                             onPressed: () {
                                               // controller.createPmPlan();
+                                            },
+                                          )
+                                        : CustomElevatedButton(
+                                            backgroundColor:
+                                                ColorValues.appGreenColor,
+                                            text: 'Submit',
+                                            onPressed: () {
+                                              controller.createPmPlan();
                                             },
                                           ),
                                     // Dimens.boxWidth15,

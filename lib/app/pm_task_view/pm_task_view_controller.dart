@@ -7,6 +7,7 @@ import 'package:cmms/app/pm_task_view/view/permit_list_table.dart';
 import 'package:cmms/app/theme/color_values.dart';
 import 'package:cmms/app/theme/dimens.dart';
 import 'package:cmms/app/utils/utility.dart';
+import 'package:cmms/domain/models/comment_model.dart';
 import 'package:cmms/domain/models/employee_model.dart';
 import 'package:cmms/domain/models/new_permit_list_model.dart';
 import 'package:cmms/domain/models/pm_task_view_list_model.dart';
@@ -36,21 +37,20 @@ class PreventiveMaintenanceTaskViewController extends GetxController {
   Rx<int> scheduleId = 0.obs;
   Rx<PmtaskViewModel?> pmtaskViewModel = PmtaskViewModel().obs;
   RxList<ScheduleCheckPoint?>? scheduleCheckPoint = <ScheduleCheckPoint?>[].obs;
-  ScheduleCheckPoint? scheduleCheckPointModel;
+  ScheduleCheckPoint? selectedItem;
   PaginationController schedulePaginationController = PaginationController(
     rowCount: 0,
     rowsPerPage: 10,
   );
   RxList<String> scheduleCheckPointTableColumns = <String>[].obs;
-  RxList<HistoryLog?>? historyLog = <HistoryLog?>[].obs;
-  HistoryLog? historyLogModel;
+  // RxList<HistoryLog?>? historyLog = <HistoryLog?>[].obs;
+  // HistoryLog? historyLogModel;
   final GlobalKey<State<StatefulWidget>> printKey = GlobalKey();
   RxList<NewPermitModel?>? permitList = <NewPermitModel>[].obs;
   var permitDropdownValues = <String?>[].obs;
 
   bool openDueTimeDatePicker = false;
   var dueDateTimeCtrlr = TextEditingController();
-
 
   final selectedPermit = Rx<NewPermitModel?>(null);
   Rx<int?> selectedPermitId = 0.obs;
@@ -65,32 +65,27 @@ class PreventiveMaintenanceTaskViewController extends GetxController {
   int facilityId = 0;
   Rx<bool> isFacilitySelected = true.obs;
 
-
   var dueToDateTimeCtrlr = TextEditingController();
   Rx<DateTime> selectedDueTime = DateTime.now().obs;
+  TextEditingController commentCtrlr = TextEditingController();
 
-
-
-
-
-  ///Assigned To 
+  ///Assigned To
   RxList<EmployeeModel?> assignedToList = <EmployeeModel>[].obs;
   Rx<String> selectedAssignedTo = ''.obs;
   Rx<bool> isAssignedToSelected = true.obs;
   int selectedAssignedToId = 0;
-  
+  //////////////////////////////////
 
   @override
   void onInit() async {
-     facilityIdStreamSubscription =
-        homeController.facilityId$.listen((event) async{
-          facilityId = event;
-          if(facilityId > 0){
-            isFacilitySelected.value = true;
-            getAssignedToList(facilityId);
-          }
-           
-        });
+    facilityIdStreamSubscription =
+        homeController.facilityId$.listen((event) async {
+      facilityId = event;
+      if (facilityId > 0) {
+        isFacilitySelected.value = true;
+        getAssignedToList(facilityId);
+      }
+    });
     try {
       await setScheduleId();
 
@@ -100,7 +95,6 @@ class PreventiveMaintenanceTaskViewController extends GetxController {
       textControllers =
           List.generate(permitValuesCount, (_) => TextEditingController());
       permitValues = RxList<String>.filled(permitValuesCount, '');
-     
 
       super.onInit();
     } catch (e) {
@@ -112,13 +106,13 @@ class PreventiveMaintenanceTaskViewController extends GetxController {
     try {
       final _flutterSecureStorage = const FlutterSecureStorage();
       // Read jobId
-      String? _scheduleId = await _flutterSecureStorage.read(key: "scheduleId");
+      String? _scheduleId = await _flutterSecureStorage.read(key: "pmTaskId");
       if (_scheduleId == null || _scheduleId == '' || _scheduleId == "null") {
         var dataFromPreviousScreen = Get.arguments;
 
-        scheduleId.value = dataFromPreviousScreen['scheduleId'];
+        scheduleId.value = dataFromPreviousScreen['pmTaskId'];
         await _flutterSecureStorage.write(
-          key: "scheduleId",
+          key: "pmTaskId",
           value: scheduleId.value == null ? '' : scheduleId.value.toString(),
         );
       } else {
@@ -131,8 +125,8 @@ class PreventiveMaintenanceTaskViewController extends GetxController {
   }
 
   Future<void> getAssignedToList(_facilityId) async {
-    final _assignedToList =
-        await preventiveMaintenanceTaskViewPresenter.getAssignedToList(facilityId: _facilityId);
+    final _assignedToList = await preventiveMaintenanceTaskViewPresenter
+        .getAssignedToList(facilityId: _facilityId);
 
     if (_assignedToList != null) {
       for (var _assignedTo in _assignedToList) {
@@ -148,21 +142,7 @@ class PreventiveMaintenanceTaskViewController extends GetxController {
         .getPmtaskViewList(scheduleId: scheduleId, isloading: isloading);
     if (_permitDetails != null) {
       pmtaskViewModel.value = _permitDetails;
-      scheduleCheckPoint!.value = _permitDetails.schedule_check_points ?? [];
-      historyLog!.value = _permitDetails.history_log ?? [];
-
-      schedulePaginationController = PaginationController(
-        rowCount: scheduleCheckPoint?.length ?? 0,
-        rowsPerPage: 10,
-      );
-      if (scheduleCheckPoint != null && scheduleCheckPoint!.isNotEmpty) {
-        scheduleCheckPointModel = scheduleCheckPoint![0];
-        var scheduleCheckPointJson = scheduleCheckPointModel?.toJson();
-        scheduleCheckPointTableColumns.value = <String>[];
-        for (var key in scheduleCheckPointJson?.keys.toList() ?? []) {
-          scheduleCheckPointTableColumns.add(key);
-        }
-      }
+      scheduleCheckPoint!.value = _permitDetails.schedules ?? [];
     }
   }
 
@@ -338,8 +318,8 @@ class PreventiveMaintenanceTaskViewController extends GetxController {
     ));
   }
 
-  void onDropdownValueChanged(dynamic list, dynamic value){
-    switch (list.runtimeType){
+  void onDropdownValueChanged(dynamic list, dynamic value) {
+    switch (list.runtimeType) {
       case RxList<EmployeeModel>:
         {
           int assignedToIndex =
@@ -360,6 +340,79 @@ class PreventiveMaintenanceTaskViewController extends GetxController {
   }
 
   Future<void> gotoexecution() async {
-    Get.toNamed(Routes.pmExecution, arguments: {'scheduleId': scheduleId});
+    Get.toNamed(Routes.pmExecution, arguments: {'pmTaskId': scheduleId});
+  }
+
+  createNewPermit() {
+    Get.toNamed(Routes.newPermit, arguments: {
+      "pmTaskModel": pmtaskViewModel.value,
+      "isFromPmTaskDetails": true,
+    });
+  }
+
+  approvePmTaskExecution() async {
+    {
+      String _comment = commentCtrlr.text.trim();
+
+      CommentModel commentModel =
+          CommentModel(id: scheduleId.value, comment: _comment);
+
+      var approvetoJsonString = commentModel.toJson();
+      final response =
+          await preventiveMaintenanceTaskViewPresenter.approvePmTaskExecution(
+        approvetoJsonString: approvetoJsonString,
+        isLoading: true,
+      );
+      if (response == true) {
+        final _flutterSecureStorage = const FlutterSecureStorage();
+
+        _flutterSecureStorage.delete(key: "pmTaskId");
+        Get.offAllNamed(Routes.pmTask);
+      }
+    }
+  }
+
+  closePmTaskExecution() async {
+    {
+      String _comment = commentCtrlr.text.trim();
+
+      CommentModel commentModel =
+          CommentModel(id: scheduleId.value, comment: _comment);
+
+      var closetoJsonString = commentModel.toJson();
+      final response =
+          await preventiveMaintenanceTaskViewPresenter.closePmTaskExecution(
+        closetoJsonString: closetoJsonString,
+        isLoading: true,
+      );
+      if (response == true) {
+        final _flutterSecureStorage = const FlutterSecureStorage();
+
+        _flutterSecureStorage.delete(key: "pmTaskId");
+        Get.offAllNamed(Routes.pmTask);
+      }
+    }
+  }
+
+  rejectPmTaskExecution() async {
+    {
+      String _comment = commentCtrlr.text.trim();
+
+      CommentModel commentModel =
+          CommentModel(id: scheduleId.value, comment: _comment);
+
+      var rejecttoJsonString = commentModel.toJson();
+      final response =
+          await preventiveMaintenanceTaskViewPresenter.rejectPmTaskExecution(
+        rejecttoJsonString: rejecttoJsonString,
+        isLoading: true,
+      );
+      if (response == true) {
+        final _flutterSecureStorage = const FlutterSecureStorage();
+
+        _flutterSecureStorage.delete(key: "pmTaskId");
+        Get.offAllNamed(Routes.pmTask);
+      }
+    }
   }
 }

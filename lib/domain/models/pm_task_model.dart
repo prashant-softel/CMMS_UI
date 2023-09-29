@@ -1,7 +1,5 @@
 import 'dart:convert';
 
-import '../../app/utils/utility.dart';
-
 List<PmTaskListModel> pmTaskListModelFromJson(String str) =>
     List<PmTaskListModel>.from(
         json.decode(str).map((x) => PmTaskListModel.fromJson(x)));
@@ -11,74 +9,76 @@ String mTaskListModelToJson(List<PmTaskListModel> data) =>
 
 class PmTaskListModel {
   int? id;
-  String? maintenance_order_number;
-  String? schedule_date;
-  String? completed_date;
-  int? equipment_id;
-  String? equipment_name;
-  int? category_id;
-  String? category_name;
+  int? facility_id;
+  String? task_code;
+  String? plan_title;
+  String? last_done_date;
+  String? due_date;
+  String? done_date;
   int? frequency_id;
   String? frequency_name;
+  int? category_id;
+  String? category_name;
+  int? assigned_to_id;
   String? assigned_to_name;
-  String? permit_code;
   int? permit_id;
+  String? permit_code;
   int? status;
-  String? status_name;
-
+  String? status_short;
   PmTaskListModel(
-      {this.id,
+      {this.assigned_to_id,
+      this.assigned_to_name,
       this.category_id,
-      this.completed_date,
-      this.equipment_id,
       this.category_name,
-      this.equipment_name,
+      this.done_date,
+      this.due_date,
+      this.facility_id,
       this.frequency_id,
       this.frequency_name,
-      this.assigned_to_name,
-      this.maintenance_order_number,
+      this.id,
+      this.last_done_date,
       this.permit_code,
       this.permit_id,
-      this.schedule_date,
+      this.plan_title,
       this.status,
-      this.status_name});
+      this.status_short,
+      this.task_code});
 
   factory PmTaskListModel.fromJson(Map<String, dynamic> json) =>
       PmTaskListModel(
-        id: json['id'] ?? 0,
+        assigned_to_id: json['assigned_to_id'] ?? 0,
+        assigned_to_name: json['assigned_to_name'] ?? '',
         category_id: json['category_id'] ?? 0,
-        completed_date: json['completed_date'] != null
-            ? Utility.getFormatedyearMonthDay(json["completed_date"])
-            : json['completed_date'] ?? "-",
-        equipment_id: json['equipment_id'] ?? 0,
         category_name: json['category_name'] ?? '',
-        equipment_name: json['equipment_name'] ?? '',
+        done_date: json['done_date'] ?? '',
+        due_date: json['due_date'] ?? '',
+        facility_id: json['facility_id'] ?? 0,
+        permit_code: json['permit_code'] ?? '',
+        permit_id: json['permit_id'] ?? 0,
+        status: json['status'] ?? 0,
+        status_short: json['status_short'] ?? '',
         frequency_id: json['frequency_id'] ?? 0,
         frequency_name: json['frequency_name'] ?? '',
-        assigned_to_name: json['assigned_to_name'] ?? '',
-        maintenance_order_number: json['maintenance_order_number'] ?? '',
-        permit_code: json['permit_code'] ?? '-',
-        permit_id: json['permit_id'] ?? 0,
-        schedule_date: Utility.getFormatedyearMonthDay(json["schedule_date"]),
-        status: json['status'] ?? 0,
-        status_name: json['status_name'] ?? 0,
+        id: json['id'] ?? 0,
+        last_done_date: json['last_done_date'] ?? '',
+        plan_title: json['plan_title'] ?? '',
       );
 
   Map<String, dynamic> toJson() => {
         "id": id,
         "category_id": category_id,
-        "completed_date": completed_date,
-        "equipment_id": equipment_id,
         "category_name": category_name,
-        "equipment_name": equipment_name,
         "frequency_id": frequency_id,
         "frequency_name": frequency_name,
         "assigned_to_name": assigned_to_name,
-        "maintenance_order_number": maintenance_order_number,
         "permit_code": permit_code,
         "permit_id": permit_id,
-        "schedule_date": schedule_date,
         "status": status,
-        "status_name": status_name,
+        "status_short": status_short,
+        "last_done_date": last_done_date,
+        "plan_title": plan_title,
+        "due_date": due_date,
+        "done_date": done_date,
+        "assigned_to_id": assigned_to_id,
       };
 }
