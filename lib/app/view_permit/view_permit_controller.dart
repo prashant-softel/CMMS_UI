@@ -69,7 +69,8 @@ class ViewPermitController extends GetxController {
   }
 
   ///Checkbox
-  RxBool isChecked1 = false.obs; // Create an observable boolean to track the checkbox state
+  RxBool isChecked1 =
+      false.obs; // Create an observable boolean to track the checkbox state
   RxBool isChecked2 = false.obs;
   RxBool isChecked3 = false.obs;
   RxBool isChecked4 = false.obs;
@@ -118,12 +119,14 @@ class ViewPermitController extends GetxController {
     // Do something
   }
 
-  TextEditingController extendReasonCommentTextFieldCtrlr = TextEditingController();
+  TextEditingController extendReasonCommentTextFieldCtrlr =
+      TextEditingController();
   TextEditingController timeTextFieldCtrlr = TextEditingController();
 
   TextEditingController closeCommentTextFieldCtrlr = TextEditingController();
 
-  TextEditingController cancelCommentRequestTextFieldCtrlr = TextEditingController();
+  TextEditingController cancelCommentRequestTextFieldCtrlr =
+      TextEditingController();
 
   int? selectedFacilityId = 0;
   int selectedTypePermitId = 0;
@@ -137,7 +140,8 @@ class ViewPermitController extends GetxController {
 
   String username = '';
   Rx<String> selectedFacility = ''.obs;
-  RxList<InventoryCategoryModel?> equipmentCategoryList = <InventoryCategoryModel>[].obs;
+  RxList<InventoryCategoryModel?> equipmentCategoryList =
+      <InventoryCategoryModel>[].obs;
   RxList<int> selectedEquipmentCategoryIdList = <int>[].obs;
   RxList<FacilityModel?> facilityList = <FacilityModel>[].obs;
   Rx<bool> isFacilitySelected = true.obs;
@@ -155,10 +159,10 @@ class ViewPermitController extends GetxController {
 
   var startDateTimeCtrlr = TextEditingController();
   var validTillTimeCtrlr = TextEditingController();
+  int? type = 0;
 
   ///
   // var issuedAtTimeCtrlr = TextEditingController();
-  
 
   var jobDescriptionCtrlr = TextEditingController();
   var titleTextCtrlr = TextEditingController();
@@ -179,7 +183,8 @@ class ViewPermitController extends GetxController {
   RxList<InventoryModel?> workAreaList = <InventoryModel>[].obs;
   RxList<String?> selectedWorkAreaNameList = <String>[].obs;
   RxList<int?> selectedWorkAreaIdList = <int>[].obs;
-  RxList<InventoryCategoryModel?> selectedEquipmentCategoryList = <InventoryCategoryModel>[].obs;
+  RxList<InventoryCategoryModel?> selectedEquipmentCategoryList =
+      <InventoryCategoryModel>[].obs;
   RxList<EmployeeModel?> assignedToList = <EmployeeModel>[].obs;
   int selectedAssignedToId = 0;
   Rx<bool> isAssignedToSelected = true.obs;
@@ -188,14 +193,17 @@ class ViewPermitController extends GetxController {
 
   //Equipment Isolation
   RxList<int> selectedEquipmentIsolationIdList = <int>[].obs;
-  RxList<InventoryCategoryModel?> equipmentIsolationList = <InventoryCategoryModel>[].obs;
-  RxList<InventoryCategoryModel?> selectedEquipmentIsolationList = <InventoryCategoryModel>[].obs;
+  RxList<InventoryCategoryModel?> equipmentIsolationList =
+      <InventoryCategoryModel>[].obs;
+  RxList<InventoryCategoryModel?> selectedEquipmentIsolationList =
+      <InventoryCategoryModel>[].obs;
 
   //Equipment Name List
   RxList<InventoryModel?> equipmentNameList = <InventoryModel>[].obs;
   RxList<InventoryModel?> filteredEquipmentNameList = <InventoryModel>[].obs;
   RxList<int> selectedEquipmentNameIdList = <int>[].obs;
-  RxList<InventoryCategoryModel?> selectedEquipmentNameList = <InventoryCategoryModel>[].obs;
+  RxList<InventoryCategoryModel?> selectedEquipmentNameList =
+      <InventoryCategoryModel>[].obs;
   String categoryIds = '';
   Rx<int> id = 0.obs;
 
@@ -205,10 +213,12 @@ class ViewPermitController extends GetxController {
   Rx<String> selectedEmployeeList = ''.obs;
   RxList<String?> selectedEmployeeDataList = <String>[].obs;
   RxList<int?> selectedEmployeeIdList = <int>[].obs;
-  RxList<EmployeeListModel?> selectedEmployeeNameList = <EmployeeListModel>[].obs;
+  RxList<EmployeeListModel?> selectedEmployeeNameList =
+      <EmployeeListModel>[].obs;
   RxList<int> selectedEmployeeNameIdList = <int>[].obs;
   RxList<EmployeeListModel?> employeeNameList = <EmployeeListModel>[].obs;
-  RxList<EmployeeListModel?> filteredEmployeeNameList = <EmployeeListModel>[].obs;
+  RxList<EmployeeListModel?> filteredEmployeeNameList =
+      <EmployeeListModel>[].obs;
 
   /// Job Type Permit List
   RxList<JobTypeListModel> jobTypeList = <JobTypeListModel>[].obs;
@@ -226,7 +236,8 @@ class ViewPermitController extends GetxController {
   int selectedSOPId = 0;
 
   ///Permit Issuer
-  RxList<EmployeeListModel?> selectedPermitIssuerList = <EmployeeListModel>[].obs;
+  RxList<EmployeeListModel?> selectedPermitIssuerList =
+      <EmployeeListModel>[].obs;
   RxList<int> selectedPermitIssuerIdList = <int>[].obs;
   RxList<EmployeeListModel?> permitIssuerList = <EmployeeListModel>[].obs;
   Rx<bool> isPermitIssuerListSelected = true.obs;
@@ -236,7 +247,8 @@ class ViewPermitController extends GetxController {
   int selectedEmployeeTestId = 0;
 
   ///Permit Approver
-  RxList<EmployeeListModel2?> selectedPermitApproverList = <EmployeeListModel2>[].obs;
+  RxList<EmployeeListModel2?> selectedPermitApproverList =
+      <EmployeeListModel2>[].obs;
   RxList<int> selectedPermitApproverIdList = <int>[].obs;
   RxList<EmployeeListModel2?> permitApproverList = <EmployeeListModel2>[].obs;
   Rx<bool> isPermitApproverListSelected = true.obs;
@@ -246,7 +258,8 @@ class ViewPermitController extends GetxController {
 
   ///View Permit Details
   Rx<NewPermitDetailModel?> viewPermitDetailsModel = NewPermitDetailModel().obs;
-  RxList<NewPermitDetailModel?>? viewPermitDetailsList = <NewPermitDetailModel?>[].obs;
+  RxList<NewPermitDetailModel?>? viewPermitDetailsList =
+      <NewPermitDetailModel?>[].obs;
 
   RxList<ListAssociatedJob?>? listAssociatedJobs = <ListAssociatedJob?>[].obs;
 
@@ -254,13 +267,16 @@ class ViewPermitController extends GetxController {
   RxList<ListEmployees?>? listEmployee = <ListEmployees?>[].obs; //ListEmployees
 
   ///Extend Condition List
-  RxList<ExtendConditions?>? listExtendCondition = <ExtendConditions?>[].obs; //Extend Condition List
+  RxList<ExtendConditions?>? listExtendCondition =
+      <ExtendConditions?>[].obs; //Extend Condition List
 
   ///Cancel Condition List
-  RxList<CancelConditions?>? listCancelCondition = <CancelConditions?>[].obs; //Cancel Condition List
+  RxList<CancelConditions?>? listCancelCondition =
+      <CancelConditions?>[].obs; //Cancel Condition List
 
   ///Close Condition List
-  RxList<CloseConditions?>? listCloseCondition = <CloseConditions?>[].obs; //Close Condition List
+  RxList<CloseConditions?>? listCloseCondition =
+      <CloseConditions?>[].obs; //Close Condition List
 
   ///Safety Measure List
   RxList<ListSafetyQuestion?>? safetyList = <ListSafetyQuestion?>[].obs;
@@ -269,7 +285,8 @@ class ViewPermitController extends GetxController {
   RxList<ListIsolation?>? listIsolation = <ListIsolation?>[].obs; //ListCategory
 
   ///Safety Measure List
-  RxList<SafetyMeasureListModel> safetyMeasureList = <SafetyMeasureListModel>[].obs;
+  RxList<SafetyMeasureListModel> safetyMeasureList =
+      <SafetyMeasureListModel>[].obs;
   Rx<bool> isSafetyMeasuretListSelected = true.obs;
   Rx<String> selectedSafetyMeasureList = ''.obs;
   RxList<String?> selectedSafetyMeasureDataList = <String>[].obs;
@@ -281,13 +298,16 @@ class ViewPermitController extends GetxController {
   var fileIdExtend;
 
 //Permit Cancel Condition
-  RxList<PermitCancelListModel?>? permitCancelConditionList = <PermitCancelListModel?>[].obs;
+  RxList<PermitCancelListModel?>? permitCancelConditionList =
+      <PermitCancelListModel?>[].obs;
 
   //Permit Close Condition
-  RxList<PermitCancelListModel?>? permitCloseConditionList = <PermitCancelListModel?>[].obs;
+  RxList<PermitCancelListModel?>? permitCloseConditionList =
+      <PermitCancelListModel?>[].obs;
 
   //Permit extend Condition
-  RxList<PermitCancelListModel?>? permitExtendConditionList = <PermitCancelListModel?>[].obs;
+  RxList<PermitCancelListModel?>? permitExtendConditionList =
+      <PermitCancelListModel?>[].obs;
 
   PaginationController equipmentNamepaginationController = PaginationController(
     rowCount: 0,
@@ -302,37 +322,44 @@ class ViewPermitController extends GetxController {
   ///Checkbox
   RxBool isCheckedRequire = false.obs;
   void requiretoggleCheckbox() {
-    isCheckedRequire.value = !isCheckedRequire.value; // Toggle the checkbox state
+    isCheckedRequire.value =
+        !isCheckedRequire.value; // Toggle the checkbox state
   }
 
   RxBool isCheckedRequire1 = false.obs;
   void requiretoggleCheckbox1() {
-    isCheckedRequire1.value = !isCheckedRequire1.value; // Toggle the checkbox state
+    isCheckedRequire1.value =
+        !isCheckedRequire1.value; // Toggle the checkbox state
   }
 
   RxBool isCheckedRequire2 = false.obs;
   void requiretoggleCheckbox2() {
-    isCheckedRequire2.value = !isCheckedRequire2.value; // Toggle the checkbox state
+    isCheckedRequire2.value =
+        !isCheckedRequire2.value; // Toggle the checkbox state
   }
 
   RxBool isCheckedRequire3 = false.obs;
   void requiretoggleCheckbox3() {
-    isCheckedRequire3.value = !isCheckedRequire3.value; // Toggle the checkbox state
+    isCheckedRequire3.value =
+        !isCheckedRequire3.value; // Toggle the checkbox state
   }
 
   RxBool isCheckedRequire4 = false.obs;
   void requiretoggleCheckbox4() {
-    isCheckedRequire4.value = !isCheckedRequire4.value; // Toggle the checkbox state
+    isCheckedRequire4.value =
+        !isCheckedRequire4.value; // Toggle the checkbox state
   }
 
   RxBool isCheckedRequire5 = false.obs;
   void requiretoggleCheckbox5() {
-    isCheckedRequire5.value = !isCheckedRequire5.value; // Toggle the checkbox state
+    isCheckedRequire5.value =
+        !isCheckedRequire5.value; // Toggle the checkbox state
   }
 
   RxBool isChecked = false.obs;
   void toggleItemSelection(int index) {
-    permitCancelConditionList![index]!.id = permitCancelConditionList![index]?.id;
+    permitCancelConditionList![index]!.id =
+        permitCancelConditionList![index]?.id;
   }
 
   RxBool isCheckedRequire6 = false.obs;
@@ -351,30 +378,36 @@ class ViewPermitController extends GetxController {
   RxBool isCheckedRequire7 = false.obs;
   RxInt intValue7 = 0.obs;
   void requiretoggleCheckbox7(bool value) {
-    isCheckedRequire7.value = !isCheckedRequire7.value; // Toggle the checkbox state
+    isCheckedRequire7.value =
+        !isCheckedRequire7.value; // Toggle the checkbox state
     if (value) {}
   }
 
   RxBool isCheckedRequire8 = false.obs;
   void requiretoggleCheckbox8() {
-    isCheckedRequire8.value = !isCheckedRequire8.value; // Toggle the checkbox state
+    isCheckedRequire8.value =
+        !isCheckedRequire8.value; // Toggle the checkbox state
   }
 
   RxBool isCheckedRequire9 = false.obs;
   void requiretoggleCheckbox9() {
-    isCheckedRequire9.value = !isCheckedRequire9.value; // Toggle the checkbox state
+    isCheckedRequire9.value =
+        !isCheckedRequire9.value; // Toggle the checkbox state
   }
 
   TextEditingController approveCommentTextFieldCtrlr = TextEditingController();
   TextEditingController rejectCommentTextFieldCtrlr = TextEditingController();
-  TextEditingController cancelCommentByApproverTextFieldCtrlr = TextEditingController();
+  TextEditingController cancelCommentByApproverTextFieldCtrlr =
+      TextEditingController();
 
-  RxList<InventoryDetailModel?>? inventoryDetailList = <InventoryDetailModel?>[].obs;
+  RxList<InventoryDetailModel?>? inventoryDetailList =
+      <InventoryDetailModel?>[].obs;
   InventoryDetailModel? inventoryDetailListModel;
   RxList<String> inventoryDetailListTableColumns = <String>[].obs;
   int ids = 14430;
 
-  PaginationController inventoryDetailPaginationController = PaginationController(
+  PaginationController inventoryDetailPaginationController =
+      PaginationController(
     rowCount: 0,
     rowsPerPage: 10,
   );
@@ -382,7 +415,7 @@ class ViewPermitController extends GetxController {
   //File Import For Cancel
   RxString fileName = "".obs;
   Uint8List? fileBytes;
-  int type = 0;
+  // int types = 0;
 
   //File Import for Extend
   RxString fileNameExtend = "".obs;
@@ -404,6 +437,7 @@ class ViewPermitController extends GetxController {
   Map<String, dynamic> data = {};
   @override
   void onInit() async {
+    // types = Get.arguments["types"];
     final _flutterSecureStorage = const FlutterSecureStorage();
     // Read jobId
     String? _permitId = await _flutterSecureStorage.read(key: "permitId");
@@ -466,7 +500,8 @@ class ViewPermitController extends GetxController {
     if (_facilityList != null) {
       facilityList.value = _facilityList;
 
-      int facilityIndex = facilityList.indexWhere((x) => x?.id == selectedFacilityId);
+      int facilityIndex =
+          facilityList.indexWhere((x) => x?.id == selectedFacilityId);
       if (facilityIndex > -1) {
         selectedFacility.value = facilityList[facilityIndex]?.name ?? '';
         getBlocksList(selectedFacilityId!);
@@ -474,17 +509,23 @@ class ViewPermitController extends GetxController {
     }
   }
 
-  Future<void> permitApprovedButton({String? permitId, String? ptwStatus, int? jobId}) async {
+  Future<void> permitApprovedButton(
+      {String? permitId, String? ptwStatus, int? jobId}) async {
     String _approveComment = approveCommentTextFieldCtrlr.text.trim();
 
-    final _permitApprovedBtn =
-        await viewPermitPresenter.permitApprovedButton(comment: _approveComment, id: permitId, ptwStatus: ptwStatus, jobId: jobId);
+    final _permitApprovedBtn = await viewPermitPresenter.permitApprovedButton(
+        comment: _approveComment,
+        id: permitId,
+        ptwStatus: ptwStatus,
+        jobId: jobId,
+        isLoading: true);
     // showAlertPermitApproveDialog();
     print('Approved Data:${_approveComment}');
     print('Approved Data:${permitId}');
   }
 
-  Future<void> permitCloseButton({String? permitId, List<dynamic>? closeFileIds}) async {
+  Future<void> permitCloseButton(
+      {String? permitId, List<dynamic>? closeFileIds}) async {
     //  String _closeComment = closeCommentTextFieldCtrlr.text.trim();
 
     // final _permitCloseBtn = await viewPermitPresenter.permitCloseButton(
@@ -504,12 +545,16 @@ class ViewPermitController extends GetxController {
       });
       // print('ConditionIds:$data');
 
-      ClosePermitModel closePermitModel =
-          ClosePermitModel(id: int.tryParse('${permitId}'), comment: _closeComment, conditionIds: dataClose, fileIds: closeFileIds);
+      ClosePermitModel closePermitModel = ClosePermitModel(
+          id: int.tryParse('${permitId}'),
+          comment: _closeComment,
+          conditionIds: dataClose,
+          fileIds: closeFileIds);
 
       var closePermitJsonString = closePermitModel.toJson();
       // print({"rejectCalibrationJsonString", approveCalibrationtoJsonString});
-      Map<String, dynamic>? response = await viewPermitPresenter.permitCloseButton(
+      Map<String, dynamic>? response =
+          await viewPermitPresenter.permitCloseButton(
         closePermitJsonString: closePermitJsonString,
         isLoading: true,
       );
@@ -520,7 +565,8 @@ class ViewPermitController extends GetxController {
     }
   }
 
-  Future<void> permitCancelRequestButton({String? permitId, List<dynamic>? fileIds}) async {
+  Future<void> permitCancelRequestButton(
+      {String? permitId, List<dynamic>? fileIds}) async {
     // String _cancelComment = cancelCommentRequestTextFieldCtrlr.text.trim();
 
     // final _permitCancelRequestBtn =
@@ -541,12 +587,16 @@ class ViewPermitController extends GetxController {
       });
       print('ConditionIds:$data');
 
-      CancelPermitRequestModel cancelPermitModel =
-          CancelPermitRequestModel(id: int.tryParse('${permitId}'), comment: _cancelComment, conditionIds: data, fileIds: fileIds);
+      CancelPermitRequestModel cancelPermitModel = CancelPermitRequestModel(
+          id: int.tryParse('${permitId}'),
+          comment: _cancelComment,
+          conditionIds: data,
+          fileIds: fileIds);
 
       var cancelPermitJsonString = cancelPermitModel.toJson();
       // print({"rejectCalibrationJsonString", approveCalibrationtoJsonString});
-      Map<String, dynamic>? response = await viewPermitPresenter.permitCancelRequestButton(
+      Map<String, dynamic>? response =
+          await viewPermitPresenter.permitCancelRequestButton(
         cancelPermitJsonString: cancelPermitJsonString,
         isLoading: true,
       );
@@ -557,7 +607,8 @@ class ViewPermitController extends GetxController {
     }
   }
 
-  Future<void> permitExtendButton({String? permitId, List<dynamic>? extendFileIds}) async {
+  Future<void> permitExtendButton(
+      {String? permitId, List<dynamic>? extendFileIds}) async {
     // String _reasonForExtensionComment =
     //     extendReasonCommentTextFieldCtrlr.text.trim();
     // String _timeForExtensionComment = timeTextFieldCtrlr.text.trim();
@@ -574,7 +625,8 @@ class ViewPermitController extends GetxController {
     // print('Extend Button Data:${_timeForExtensionComment}');
     // print('Extend Button Data:${permitId}');
     {
-      final _reasonForExtensionComment = extendReasonCommentTextFieldCtrlr.text.trim();
+      final _reasonForExtensionComment =
+          extendReasonCommentTextFieldCtrlr.text.trim();
       List<int> dataExtend = [];
       permitExtendConditionList!.value.forEach((element) {
         if (element!.isChecked!) {
@@ -592,7 +644,8 @@ class ViewPermitController extends GetxController {
 
       var extendPermitJsonString = extendPermitModel.toJson();
       // print({"rejectCalibrationJsonString", approveCalibrationtoJsonString});
-      Map<String, dynamic>? response = await viewPermitPresenter.permitExtendButton(
+      Map<String, dynamic>? response =
+          await viewPermitPresenter.permitExtendButton(
         extendPermitJsonString: extendPermitJsonString,
         isLoading: true,
       );
@@ -603,23 +656,28 @@ class ViewPermitController extends GetxController {
     }
   }
 
-  Future<void> permitRejectButton({String? permitId}) async {
+  Future<void> permitRejectButton(
+      {String? permitId, String? ptwStatus, int? jobId}) async {
     String _rejectComment = rejectCommentTextFieldCtrlr.text.trim();
 
     final _permitRejectBtn = await viewPermitPresenter.permitRejectButton(
-      comment: _rejectComment,
-      id: permitId,
-    );
+        comment: _rejectComment,
+        id: permitId,
+        ptwStatus: ptwStatus,
+        jobId: jobId,
+        isLoading: true);
     // showAlertPermitApproveDialog();
     print('Reject Button Data:${_rejectComment}');
     print('Reject Button Data:${permitId}');
   }
 
-  Future<void> permitCancelByApproverButton({String? permitId, String? ptwStatus}) async {
+  Future<void> permitCancelByApproverButton(
+      {String? permitId, String? ptwStatus}) async {
     String _cancelComment = cancelCommentByApproverTextFieldCtrlr.text.trim();
 
     final _permitCancelByApproverBtn =
-        await viewPermitPresenter.permitCancelByApproverButton(comment: _cancelComment, id: permitId, ptwStatus: ptwStatus);
+        await viewPermitPresenter.permitCancelByApproverButton(
+            comment: _cancelComment, id: permitId, ptwStatus: ptwStatus);
     // showAlertPermitApproveDialog();
     print('Cancel Button By Approver Data:${_cancelComment}');
     print('Cancel Button By Approver Data:${permitId}');
@@ -645,27 +703,35 @@ class ViewPermitController extends GetxController {
     // newPermitDetails!.value = <NewPermitListModel>[];
     viewPermitDetailsList?.value = <NewPermitDetailModel>[];
 
-    final _viewPermitDetails = await viewPermitPresenter.getViewPermitDetail(permitId: permitId);
+    final _viewPermitDetails =
+        await viewPermitPresenter.getViewPermitDetail(permitId: permitId);
     print('New Permit Detail:$_viewPermitDetails');
 
     if (_viewPermitDetails != null) {
       viewPermitDetailsModel.value = _viewPermitDetails;
       listEmployee?.value = viewPermitDetailsModel.value?.employee_list ?? [];
-      safetyList?.value = viewPermitDetailsModel.value?.safety_question_list ?? [];
+      safetyList?.value =
+          viewPermitDetailsModel.value?.safety_question_list ?? [];
       listCategory?.value = viewPermitDetailsModel.value?.lstCategory ?? [];
       listLoto?.value = viewPermitDetailsModel.value?.loto_list ?? [];
       // titleTextCtrlr.text = newPermitDetailsModel.value?.title ?? '';
       // permitDescriptionCtrlr.text = newPermitDetailsModel.value?.description ?? '';
-      startDateTimeCtrlr.text = '${DateFormat('yyyy-MM-dd HH:mm').format(DateTime.parse('${viewPermitDetailsModel.value?.start_datetime}'))}';
-      validTillTimeCtrlr.text = '${DateFormat('yyyy-MM-dd HH:mm').format(DateTime.parse('${viewPermitDetailsModel.value?.end_datetime}'))}';
+      startDateTimeCtrlr.text =
+          '${DateFormat('yyyy-MM-dd HH:mm').format(DateTime.parse('${viewPermitDetailsModel.value?.start_datetime}'))}';
+      validTillTimeCtrlr.text =
+          '${DateFormat('yyyy-MM-dd HH:mm').format(DateTime.parse('${viewPermitDetailsModel.value?.end_datetime}'))}';
 
       selectedSafetyMeasureId = viewPermitDetailsModel.value?.permitTypeid ?? 0;
 
-      listAssociatedJobs?.value = viewPermitDetailsModel.value?.lstAssociatedJobs ?? [];
+      listAssociatedJobs?.value =
+          viewPermitDetailsModel.value?.lstAssociatedJobs ?? [];
       listIsolation?.value = viewPermitDetailsModel.value?.lstIsolation ?? [];
-      listExtendCondition?.value = viewPermitDetailsModel.value?.extendDetails?.conditions ?? [];
-      listCancelCondition?.value = viewPermitDetailsModel.value?.cancelDetails?.conditions ?? [];
-      listCloseCondition?.value = viewPermitDetailsModel.value?.closeDetails?.conditions ?? [];
+      listExtendCondition?.value =
+          viewPermitDetailsModel.value?.extendDetails?.conditions ?? [];
+      listCancelCondition?.value =
+          viewPermitDetailsModel.value?.cancelDetails?.conditions ?? [];
+      listCloseCondition?.value =
+          viewPermitDetailsModel.value?.closeDetails?.conditions ?? [];
       // selectedTypePermit.value = newPermitDetailsModel.value?.permitTypeName ?? '';
       // // selectedJobTypeList.value = newPermitDetailsModel.value.
       // selectedPermitIssuerLists.value = newPermitDetailsModel.value?.issuedByName ?? '';
@@ -678,7 +744,8 @@ class ViewPermitController extends GetxController {
 
   Future<void> getPermitConditionList({required int isCancle}) async {
     permitCancelConditionList!.value = <PermitCancelListModel>[];
-    final _permitCancelConditionList = await viewPermitPresenter.getPermitConditionList(
+    final _permitCancelConditionList =
+        await viewPermitPresenter.getPermitConditionList(
       isLoading: true,
       // categoryIds: categoryIds,
       isCancle: 1,
@@ -700,7 +767,8 @@ class ViewPermitController extends GetxController {
 
   Future<void> getPermitCloseConditionList({required int isClose}) async {
     permitCloseConditionList!.value = <PermitCancelListModel>[];
-    final _permitCloseConditionList = await viewPermitPresenter.getPermitCloseConditionList(
+    final _permitCloseConditionList =
+        await viewPermitPresenter.getPermitCloseConditionList(
       isLoading: true,
       // categoryIds: categoryIds,
       isClose: 1,
@@ -722,7 +790,8 @@ class ViewPermitController extends GetxController {
 
   Future<void> getPermitExtendConditionList({required int isExtend}) async {
     permitExtendConditionList!.value = <PermitCancelListModel>[];
-    final _permitExtendConditionList = await viewPermitPresenter.getPermitExtendConditionList(
+    final _permitExtendConditionList =
+        await viewPermitPresenter.getPermitExtendConditionList(
       isLoading: true,
       // categoryIds: categoryIds,
       isExtend: 1,
@@ -767,7 +836,8 @@ class ViewPermitController extends GetxController {
   Future<void> getInventoryDetailList() async {
     inventoryDetailList!.value = <InventoryDetailModel>[];
 
-    final list = await viewPermitPresenter.getInventoryDetailList(isLoading: true, id: 14430);
+    final list = await viewPermitPresenter.getInventoryDetailList(
+        isLoading: true, id: 14430);
     print('InventoryDetail List:$inventoryDetailList');
     if (list != null) {
       // selectedSupplierNameList.clear();
@@ -815,7 +885,8 @@ class ViewPermitController extends GetxController {
       filteredEquipmentNameList.add(e);
     }
     print({
-      "selectedEquipmentNameIdList le": selectedEquipmentNameIdList.value.length,
+      "selectedEquipmentNameIdList le":
+          selectedEquipmentNameIdList.value.length,
       "filteredEquipmentNameList": filteredEquipmentNameList.value.length
     });
   }
@@ -833,7 +904,10 @@ class ViewPermitController extends GetxController {
       });
       filteredEmployeeNameList.add(e);
     }
-    print({"selectedEmployeeNameIdList": selectedEmployeeNameIdList.value.length, "filteredEmployeeNameList": filteredEmployeeNameList.value.length});
+    print({
+      "selectedEmployeeNameIdList": selectedEmployeeNameIdList.value.length,
+      "filteredEmployeeNameList": filteredEmployeeNameList.value.length
+    });
 
     employee_map[emp_id] = selectedEmployeeNameIdList;
   }
@@ -851,7 +925,10 @@ class ViewPermitController extends GetxController {
       });
       // filteredEmployeeNameList.add(e);
     }
-    print({"selectedEmployeeNameIdList": selectedEmployeeNameIdList.value.length, "filteredEmployeeNameList": filteredEmployeeNameList.value.length});
+    print({
+      "selectedEmployeeNameIdList": selectedEmployeeNameIdList.value.length,
+      "filteredEmployeeNameList": filteredEmployeeNameList.value.length
+    });
 
     employee_map[emp_id] = selectedEmployeeNameIdList;
   }
@@ -1013,7 +1090,8 @@ class ViewPermitController extends GetxController {
         break;
       case RxList<EquipmentModel>:
         {
-          int equipmentIndex = equipmentList.indexWhere((x) => x?.name == value);
+          int equipmentIndex =
+              equipmentList.indexWhere((x) => x?.name == value);
           int selectedEquipmentId = equipmentList[equipmentIndex]?.id ?? 0;
           print('euipment data5:$selectedEquipmentId');
         }
@@ -1021,7 +1099,8 @@ class ViewPermitController extends GetxController {
       case RxList<InventoryModel>:
         {
           for (var workAreaName in selectedWorkAreaNameList) {
-            int workAreaIndex = workAreaList.indexWhere((x) => x?.name == workAreaName);
+            int workAreaIndex =
+                workAreaList.indexWhere((x) => x?.name == workAreaName);
             selectedWorkAreaIdList.add(workAreaIndex);
           }
         }
@@ -1029,9 +1108,11 @@ class ViewPermitController extends GetxController {
       case RxList<InventoryCategoryModel>:
         {
           for (var equipCat in selectedEquipmentCategoryList) {
-            int equipCatIndex = equipmentCategoryList.indexWhere((x) => x?.name == value);
+            int equipCatIndex =
+                equipmentCategoryList.indexWhere((x) => x?.name == value);
             selectedEquipmentCategoryIdList.add(equipCatIndex);
-            selectedInventoryCategoryId = equipmentCategoryList[equipCatIndex]?.id ?? 0;
+            selectedInventoryCategoryId =
+                equipmentCategoryList[equipCatIndex]?.id ?? 0;
             // print('First Category Id:$selectedInventoryCategoryId');
           }
         }
@@ -1039,7 +1120,8 @@ class ViewPermitController extends GetxController {
       case RxList<InventoryCategoryModel>:
         {
           for (var equipIso in selectedEquipmentIsolationList) {
-            int equipIsoIndex = selectedEquipmentIsolationList.indexWhere((x) => x?.name == equipIso);
+            int equipIsoIndex = selectedEquipmentIsolationList
+                .indexWhere((x) => x?.name == equipIso);
             selectedEquipmentIsolationIdList.add(equipIsoIndex);
           }
         }
@@ -1047,7 +1129,8 @@ class ViewPermitController extends GetxController {
 
       case RxList<EmployeeModel>:
         {
-          int assignedToIndex = assignedToList.indexWhere((x) => x?.name == value);
+          int assignedToIndex =
+              assignedToList.indexWhere((x) => x?.name == value);
           selectedAssignedToId = assignedToList[assignedToIndex]?.id ?? 0;
           if (selectedAssignedToId != 0) {
             isAssignedToSelected.value = true;
@@ -1057,7 +1140,8 @@ class ViewPermitController extends GetxController {
         break;
       case RxList<TypePermitModel>:
         {
-          int permitTypeIndex = typePermitList.indexWhere((x) => x?.name == value);
+          int permitTypeIndex =
+              typePermitList.indexWhere((x) => x?.name == value);
           selectedTypePermitId = facilityList[permitTypeIndex]?.id ?? 0;
           selectedPermitTypeId = typePermitList[permitTypeIndex]?.id ?? 0;
           print('TypePermitList$selectedPermitTypeId');
@@ -1070,15 +1154,19 @@ class ViewPermitController extends GetxController {
         break;
       case RxList<EmployeeListModel>:
         {
-          int permitIssuerListIndex = permitIssuerList.indexWhere((x) => x!.name == value);
-          selectedPermitIssuerTypeId = permitIssuerList[permitIssuerListIndex]!.id ?? 0;
+          int permitIssuerListIndex =
+              permitIssuerList.indexWhere((x) => x!.name == value);
+          selectedPermitIssuerTypeId =
+              permitIssuerList[permitIssuerListIndex]!.id ?? 0;
           print('PermitIssuerId:$selectedPermitIssuerTypeId');
         }
         break;
       case RxList<EmployeeListModel2>:
         {
-          int permitApproverListIndex = permitApproverList.indexWhere((x) => x!.name == value);
-          selectedPermitApproverTypeId = permitApproverList[permitApproverListIndex]!.id ?? 0;
+          int permitApproverListIndex =
+              permitApproverList.indexWhere((x) => x!.name == value);
+          selectedPermitApproverTypeId =
+              permitApproverList[permitApproverListIndex]!.id ?? 0;
           print('PermitApproverId:$selectedPermitApproverTypeId');
         }
         break;
@@ -1094,7 +1182,8 @@ class ViewPermitController extends GetxController {
         break;
       case RxList<SOPListModel>:
         {
-          int sopPermitListIndex = sopPermitList.indexWhere((x) => x.name == value);
+          int sopPermitListIndex =
+              sopPermitList.indexWhere((x) => x.name == value);
           selectedSOPId = sopPermitList[sopPermitListIndex].id ?? 0;
           print('SOPTyeId:$selectedSOPId');
         }
@@ -1110,7 +1199,8 @@ class ViewPermitController extends GetxController {
 
   Future<void> getBlocksList(int _facilityId) async {
     blockList.value = <BlockModel>[];
-    final _blockList = await viewPermitPresenter.getBlocksList(facilityId: _facilityId);
+    final _blockList =
+        await viewPermitPresenter.getBlocksList(facilityId: _facilityId);
 
     if (_blockList != null) {
       for (var block in _blockList) {
@@ -1122,7 +1212,8 @@ class ViewPermitController extends GetxController {
 
   Future<void> getInventoryCategoryList({String? facilityId}) async {
     equipmentCategoryList.value = <InventoryCategoryModel>[];
-    final _equipmentCategoryList = await viewPermitPresenter.getInventoryCategoryList(
+    final _equipmentCategoryList =
+        await viewPermitPresenter.getInventoryCategoryList(
       isLoading: true,
     );
     if (_equipmentCategoryList != null) {
@@ -1134,8 +1225,11 @@ class ViewPermitController extends GetxController {
 
   Future<void> printScreen() async {
     try {
-      final RenderRepaintBoundary boundary = printKey.currentContext!.findRenderObject() as RenderRepaintBoundary;
-      final imageBytes = await boundary.toImage(pixelRatio: 3.0).then((image) => image.toByteData(format: ImageByteFormat.png));
+      final RenderRepaintBoundary boundary =
+          printKey.currentContext!.findRenderObject() as RenderRepaintBoundary;
+      final imageBytes = await boundary
+          .toImage(pixelRatio: 3.0)
+          .then((image) => image.toByteData(format: ImageByteFormat.png));
 
       if (imageBytes != null) {
         Printing.layoutPdf(onLayout: (PdfPageFormat format) async {
@@ -1143,7 +1237,8 @@ class ViewPermitController extends GetxController {
           doc.addPage(
             pw.Page(
               build: (pw.Context context) {
-                return pw.Image(pw.MemoryImage(imageBytes.buffer.asUint8List()));
+                return pw.Image(
+                    pw.MemoryImage(imageBytes.buffer.asUint8List()));
               },
             ),
           );
@@ -1207,7 +1302,8 @@ class ViewPermitController extends GetxController {
   }
 
   Future<void> getTypePermitList() async {
-    final _permitTypeList = await viewPermitPresenter.getTypePermitList(facility_id: facilityId);
+    final _permitTypeList =
+        await viewPermitPresenter.getTypePermitList(facility_id: facilityId);
 
     if (_permitTypeList != null) {
       for (var permitType in _permitTypeList) {
@@ -1369,8 +1465,10 @@ class ViewPermitController extends GetxController {
   //       fileBytes, fileName.value, type, true, facilityId);
   //   return true;
   // }
-  Future<bool> browseFiles({Uint8List? fileBytes, required int position}) async {
-    CreateSOPModel? createSOPModel = await viewPermitPresenter.browseFiles(fileBytes, fileName.value, true);
+  Future<bool> browseFiles(
+      {Uint8List? fileBytes, required int position}) async {
+    CreateSOPModel? createSOPModel =
+        await viewPermitPresenter.browseFiles(fileBytes, fileName.value, true);
 
     fileId = createSOPModel?.jsa_fileId;
     print('fileId:$fileId');
@@ -1378,8 +1476,10 @@ class ViewPermitController extends GetxController {
     return true;
   }
 
-  Future<bool> browseFilesForExtend({Uint8List? fileBytesExtend, required int position}) async {
-    CreateSOPModel? createSOPModel = await viewPermitPresenter.browseFilesForExtend(fileBytesExtend, fileNameExtend.value, true);
+  Future<bool> browseFilesForExtend(
+      {Uint8List? fileBytesExtend, required int position}) async {
+    CreateSOPModel? createSOPModel = await viewPermitPresenter
+        .browseFilesForExtend(fileBytesExtend, fileNameExtend.value, true);
 
     fileIdExtend = createSOPModel?.jsa_fileId;
     print('fileIdExtend:$fileIdExtend');
@@ -1407,7 +1507,8 @@ class ViewPermitController extends GetxController {
             height: 10,
           ),
           Center(
-            child: Text("${fileName.value} \n data uploaded Successfully....", style: TextStyle(fontSize: 16, color: ColorValues.blackColor)),
+            child: Text("${fileName.value} \n data uploaded Successfully....",
+                style: TextStyle(fontSize: 16, color: ColorValues.blackColor)),
           )
         ]),
         actions: [

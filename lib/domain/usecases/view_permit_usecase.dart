@@ -21,8 +21,7 @@ class ViewPermitUsecase {
   ViewPermitUsecase(this.repository);
   Repository repository;
 
-
-   Future<List<BlockModel?>?> getBlocksList({
+  Future<List<BlockModel?>?> getBlocksList({
     String? auth,
     int? facilityId,
     bool? isLoading,
@@ -33,7 +32,7 @@ class ViewPermitUsecase {
         isLoading,
       );
 
-   Future<List<HistoryModel>?> getPermitHistory({
+  Future<List<HistoryModel>?> getPermitHistory({
     moduleType,
     permitId,
     bool? isLoading,
@@ -44,7 +43,7 @@ class ViewPermitUsecase {
         isLoading,
       );
 
-   Future<void> permitApprovedButton({
+  Future<void> permitApprovedButton({
     String? comment,
     String? id,
     String? ptwStatus,
@@ -81,7 +80,7 @@ class ViewPermitUsecase {
   //   );
   // }
 
-   Future<Map<String, dynamic>> permitCancelRequestButton({
+  Future<Map<String, dynamic>> permitCancelRequestButton({
     cancelPermitJsonString,
     bool? isLoading,
   }) async =>
@@ -102,7 +101,6 @@ class ViewPermitUsecase {
     // return true;
   }
 
-
   Future<Map<String, dynamic>> permitExtendButton({
     extendPermitJsonString,
     bool? isLoading,
@@ -112,19 +110,23 @@ class ViewPermitUsecase {
         isLoading,
       );
 
-   Future<void> permitRejectButton({
+  Future<void> permitRejectButton({
     String? comment,
     String? id,
+    String? ptwStatus,
+    int? jobId,
     bool? isLoading,
   }) async {
     await repository.permitRejectButton(
       comment,
       id,
+      ptwStatus,
+      jobId,
       isLoading,
     );
   }
 
-   Future<void> permitCancelByApproverButton({
+  Future<void> permitCancelByApproverButton({
     String? comment,
     String? id,
     String? ptwStatus,
@@ -138,58 +140,40 @@ class ViewPermitUsecase {
     );
   }
 
-
-  Future<List<SafetyMeasureListModel>> getSafetyMeasureList({
-    required bool isLoading,
-    required int? permit_type_id
-   
-  }) async {
+  Future<List<SafetyMeasureListModel>> getSafetyMeasureList(
+      {required bool isLoading, required int? permit_type_id}) async {
     return repository.getSafetyMeasureList(
       isLoading: isLoading,
       permit_type_id: permit_type_id,
-  
     );
   }
 
-  Future<List<PermitCancelListModel>> getPermitConditionList({
-    required bool isLoading,
-    required int? isCancle
-   
-  }) async {
+  Future<List<PermitCancelListModel>> getPermitConditionList(
+      {required bool isLoading, required int? isCancle}) async {
     return repository.getPermitConditionList(
       isLoading: isLoading,
       isCancle: isCancle,
-  
     );
   }
 
-  Future<List<PermitCancelListModel>> getPermitCloseConditionList({
-    required bool isLoading,
-    required int? isClose
-   
-  }) async {
+  Future<List<PermitCancelListModel>> getPermitCloseConditionList(
+      {required bool isLoading, required int? isClose}) async {
     return repository.getPermitCloseConditionList(
       isLoading: isLoading,
       isClose: isClose,
-  
     );
   }
 
-Future<List<PermitCancelListModel>> getPermitExtendConditionList({
-    required bool isLoading,
-    required int? isExtend
-   
-  }) async {
+  Future<List<PermitCancelListModel>> getPermitExtendConditionList(
+      {required bool isLoading, required int? isExtend}) async {
     return repository.getPermitExtendConditionList(
       isLoading: isLoading,
       isExtend: isExtend,
-  
     );
   }
 
-
   Future<NewPermitDetailModel?> getViewPermitDetail({
-    bool? isLoading,  
+    bool? isLoading,
     required int permitId,
   }) async =>
       await repository.getViewPermitDetail(
@@ -197,64 +181,43 @@ Future<List<PermitCancelListModel>> getPermitExtendConditionList({
         isLoading: isLoading ?? false,
       );
 
-
-   Future<List<EmployeeListModel>> getEmployeePermitList({
-    required bool isLoading,
-    required int? facility_id
-   
-  }) async {
+  Future<List<EmployeeListModel>> getEmployeePermitList(
+      {required bool isLoading, required int? facility_id}) async {
     return repository.getEmployeePermitList(
       isLoading: isLoading,
       facility_id: facility_id,
-  
     );
   }
 
-   Future<List<EmployeeListModel>> getPermitIssuerList({
-    required bool isLoading,
-    required int? facility_id
-   
-  }) async {
+  Future<List<EmployeeListModel>> getPermitIssuerList(
+      {required bool isLoading, required int? facility_id}) async {
     return repository.getPermitIssuerList(
       isLoading: isLoading,
       facility_id: facility_id,
-  
     );
   }
 
-   Future<List<EmployeeListModel2>> getPermitApproverList({
-    required bool isLoading,
-    required int? facility_id
-   
-  }) async {
+  Future<List<EmployeeListModel2>> getPermitApproverList(
+      {required bool isLoading, required int? facility_id}) async {
     return repository.getPermitApproverList(
       isLoading: isLoading,
       facility_id: facility_id,
-  
     );
   }
 
-  Future<List<JobTypeListModel>> getJobTypePermitList({
-    required bool isLoading,
-    required int? facility_id
-   
-  }) async {
+  Future<List<JobTypeListModel>> getJobTypePermitList(
+      {required bool isLoading, required int? facility_id}) async {
     return repository.getJobTypePermitList(
       isLoading: isLoading,
       facility_id: facility_id,
-  
     );
   }
 
-   Future<List<SOPListModel>> getSopPermitList({
-    required bool isLoading,
-    required int? job_type_id
-   
-  }) async {
+  Future<List<SOPListModel>> getSopPermitList(
+      {required bool isLoading, required int? job_type_id}) async {
     return repository.getSopPermitList(
       isLoading: isLoading,
       job_type_id: job_type_id,
-  
     );
   }
 
@@ -269,14 +232,14 @@ Future<List<PermitCancelListModel>> getPermitExtendConditionList({
         isLoading,
       );
 
-   Future<List<WorkTypeModel?>?> getWorkTypeList(
+  Future<List<WorkTypeModel?>?> getWorkTypeList(
           {bool? isLoading, String? categoryIds}) async =>
       await repository.getWorkTypeList(
         isLoading,
         categoryIds,
       );
-    
-     Future<List<EmployeeModel?>?> getAssignedToList({
+
+  Future<List<EmployeeModel?>?> getAssignedToList({
     String? auth,
     int? facilityId,
     bool? isLoading,
@@ -298,8 +261,7 @@ Future<List<PermitCancelListModel>> getPermitExtendConditionList({
         isLoading,
       );
 
-
-   Future<List<InventoryModel?>?> getInventoryEquipmentNameList({
+  Future<List<InventoryModel?>?> getInventoryEquipmentNameList({
     required bool isLoading,
     required int? facilityId,
     int? blockId,
@@ -312,8 +274,8 @@ Future<List<PermitCancelListModel>> getPermitExtendConditionList({
       categoryIds: categoryIds,
     );
   }
-  
-   Future<List<InventoryCategoryModel?>?> getInventoryIsolationList({
+
+  Future<List<InventoryCategoryModel?>?> getInventoryIsolationList({
     String? auth,
     int? facilityId,
     bool? isLoading,
@@ -323,8 +285,7 @@ Future<List<PermitCancelListModel>> getPermitExtendConditionList({
         facilityId,
         isLoading,
       );
-  
-   
+
   // Future<void> createCheckList({
   //   bool? isLoading,
   // }) async =>
@@ -334,21 +295,15 @@ Future<List<PermitCancelListModel>> getPermitExtendConditionList({
       await repository.getFacilityList(isLoading);
 
   Future<List<TypePermitModel?>?> getTypePermitList(
-    bool? isLoading,
-    int? facility_id
-    ) async =>
-      await repository.getTypePermitList(
-        isLoading,
-        facility_id
-        );
+          bool? isLoading, int? facility_id) async =>
+      await repository.getTypePermitList(isLoading, facility_id);
 
   Future<Map<String, dynamic>> createNewPermit({
     newPermit,
     bool? isLoading,
   }) async =>
       await repository.createNewPermit(
-         newPermit,
+        newPermit,
         isLoading,
       );
-
 }
