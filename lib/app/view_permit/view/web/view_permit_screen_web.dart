@@ -1908,10 +1908,10 @@ class ViewPermitWebScreen extends GetView<ViewPermitController> {
                                                         0) *
                                                     50) +
                                                 125,
-                                            // width: MediaQuery.of(context)
-                                            //         .size
-                                            //         .width /
-                                            //     1.2,
+                                            width: MediaQuery.of(context)
+                                                    .size
+                                                    .width /
+                                                1.2,
                                             decoration: BoxDecoration(
                                               border: Border.all(
                                                 color: ColorValues
@@ -2563,29 +2563,8 @@ class ViewPermitWebScreen extends GetView<ViewPermitController> {
                                                     .size
                                                     .width /
                                                 1,
-                                            child: Container(
-                                              margin: Dimens.edgeInsets20,
-                                              height: ((controller
-                                                          .listExtendCondition!
-                                                          .length) *
-                                                      20) +
-                                                  130,
-                                              decoration: BoxDecoration(
-                                                border: Border.all(
-                                                  color: ColorValues
-                                                      .lightGreyColorWithOpacity35,
-                                                  width: 1,
-                                                ),
-                                                boxShadow: [
-                                                  BoxShadow(
-                                                    color: ColorValues
-                                                        .appBlueBackgroundColor,
-                                                    spreadRadius: 2,
-                                                    blurRadius: 5,
-                                                    offset: Offset(0, 2),
-                                                  ),
-                                                ],
-                                              ),
+                                            child: Padding(
+                                              padding: const EdgeInsets.all(20),
                                               child: Column(
                                                 crossAxisAlignment:
                                                     CrossAxisAlignment.start,
@@ -2623,16 +2602,111 @@ class ViewPermitWebScreen extends GetView<ViewPermitController> {
                                                                                   children: [
                                                                                     checkBoxMethod(1),
                                                                                     // Text("${l = l! + 1}. "),
-                                                                                    Expanded(child: Text("${element!.name}"))
+                                                                                    Expanded(child: Text("${element!.name}")),
                                                                                   ],
                                                                                 ),
-                                                                              )
+                                                                              ),
                                                                             ],
                                                                           ))),
                                                           ),
                                                           // : Dimens.box0,
                                                           SizedBox(
                                                             height: 20,
+                                                          ),
+                                                          Padding(
+                                                            padding:
+                                                                const EdgeInsets
+                                                                        .only(
+                                                                    left: 10,
+                                                                    right: 10),
+                                                            child: Row(
+                                                              crossAxisAlignment:
+                                                                  CrossAxisAlignment
+                                                                      .start,
+                                                              children: [
+                                                                Column(
+                                                                  crossAxisAlignment:
+                                                                      CrossAxisAlignment
+                                                                          .end,
+                                                                  children: [
+                                                                    Text(
+                                                                      'Attached Files',
+                                                                      style: Styles
+                                                                          .blackBold17,
+                                                                    ),
+                                                                    Text(
+                                                                      'anas zia.jpeg',
+                                                                      style: TextStyle(
+                                                                          decoration: TextDecoration
+                                                                              .underline,
+                                                                          decorationStyle: TextDecorationStyle
+                                                                              .solid,
+                                                                          color: Color.fromARGB(
+                                                                              255,
+                                                                              5,
+                                                                              92,
+                                                                              163),
+                                                                          fontSize:
+                                                                              Dimens.seventeen),
+                                                                    ),
+                                                                  ],
+                                                                ),
+                                                                Spacer(),
+                                                                Column(
+                                                                  crossAxisAlignment:
+                                                                      CrossAxisAlignment
+                                                                          .end,
+                                                                  children: [
+                                                                    Text(
+                                                                      'Comment/Remark',
+                                                                      style: Styles
+                                                                          .blackBold17,
+                                                                    ),
+                                                                    Text(
+                                                                      'Extended Conditions',
+                                                                      style: Styles
+                                                                          .black17,
+                                                                    ),
+                                                                  ],
+                                                                ),
+                                                                Spacer(),
+                                                                Column(
+                                                                  crossAxisAlignment:
+                                                                      CrossAxisAlignment
+                                                                          .end,
+                                                                  children: [
+                                                                    Text(
+                                                                      'Approver Name',
+                                                                      style: Styles
+                                                                          .blackBold17,
+                                                                    ),
+                                                                    Text(
+                                                                      '${controller.viewPermitDetailsModel.value?.requestedByName}',
+                                                                      style: Styles
+                                                                          .black17,
+                                                                    ),
+                                                                  ],
+                                                                ),
+                                                                Spacer(),
+                                                                Column(
+                                                                  crossAxisAlignment:
+                                                                      CrossAxisAlignment
+                                                                          .end,
+                                                                  children: [
+                                                                    Text(
+                                                                      'Date & Time',
+                                                                      style: Styles
+                                                                          .blackBold17,
+                                                                    ),
+                                                                    Text(
+                                                                      '${controller.viewPermitDetailsModel.value?.start_datetime}',
+                                                                      style: Styles
+                                                                          .black17,
+                                                                    ),
+                                                                  ],
+                                                                ),
+                                                              ],
+                                                            ),
                                                           ),
                                                         ],
                                                       )
@@ -2656,29 +2730,8 @@ class ViewPermitWebScreen extends GetView<ViewPermitController> {
                                                     .size
                                                     .width /
                                                 1,
-                                            child: Container(
-                                              margin: Dimens.edgeInsets20,
-                                              height: ((controller
-                                                          .listCancelCondition!
-                                                          .length) *
-                                                      20) +
-                                                  130,
-                                              decoration: BoxDecoration(
-                                                border: Border.all(
-                                                  color: ColorValues
-                                                      .lightGreyColorWithOpacity35,
-                                                  width: 1,
-                                                ),
-                                                boxShadow: [
-                                                  BoxShadow(
-                                                    color: ColorValues
-                                                        .appBlueBackgroundColor,
-                                                    spreadRadius: 2,
-                                                    blurRadius: 5,
-                                                    offset: Offset(0, 2),
-                                                  ),
-                                                ],
-                                              ),
+                                            child: Padding(
+                                              padding: const EdgeInsets.all(20),
                                               child: Column(
                                                 crossAxisAlignment:
                                                     CrossAxisAlignment.start,
@@ -2729,6 +2782,101 @@ class ViewPermitWebScreen extends GetView<ViewPermitController> {
                                                           SizedBox(
                                                             height: 20,
                                                           ),
+                                                          Padding(
+                                                            padding:
+                                                                const EdgeInsets
+                                                                        .only(
+                                                                    left: 10,
+                                                                    right: 10),
+                                                            child: Row(
+                                                              crossAxisAlignment:
+                                                                  CrossAxisAlignment
+                                                                      .start,
+                                                              children: [
+                                                                Column(
+                                                                  crossAxisAlignment:
+                                                                      CrossAxisAlignment
+                                                                          .end,
+                                                                  children: [
+                                                                    Text(
+                                                                      'Attached Files',
+                                                                      style: Styles
+                                                                          .blackBold17,
+                                                                    ),
+                                                                    Text(
+                                                                      'anas zia.jpeg',
+                                                                      style: TextStyle(
+                                                                          decoration: TextDecoration
+                                                                              .underline,
+                                                                          decorationStyle: TextDecorationStyle
+                                                                              .solid,
+                                                                          color: Color.fromARGB(
+                                                                              255,
+                                                                              5,
+                                                                              92,
+                                                                              163),
+                                                                          fontSize:
+                                                                              Dimens.seventeen),
+                                                                    ),
+                                                                  ],
+                                                                ),
+                                                                Spacer(),
+                                                                Column(
+                                                                  crossAxisAlignment:
+                                                                      CrossAxisAlignment
+                                                                          .end,
+                                                                  children: [
+                                                                    Text(
+                                                                      'Comment/Remark',
+                                                                      style: Styles
+                                                                          .blackBold17,
+                                                                    ),
+                                                                    Text(
+                                                                      'Extended Conditions',
+                                                                      style: Styles
+                                                                          .black17,
+                                                                    ),
+                                                                  ],
+                                                                ),
+                                                                Spacer(),
+                                                                Column(
+                                                                  crossAxisAlignment:
+                                                                      CrossAxisAlignment
+                                                                          .end,
+                                                                  children: [
+                                                                    Text(
+                                                                      'Approver Name',
+                                                                      style: Styles
+                                                                          .blackBold17,
+                                                                    ),
+                                                                    Text(
+                                                                      '${controller.viewPermitDetailsModel.value?.requestedByName}',
+                                                                      style: Styles
+                                                                          .black17,
+                                                                    ),
+                                                                  ],
+                                                                ),
+                                                                Spacer(),
+                                                                Column(
+                                                                  crossAxisAlignment:
+                                                                      CrossAxisAlignment
+                                                                          .end,
+                                                                  children: [
+                                                                    Text(
+                                                                      'Date & Time',
+                                                                      style: Styles
+                                                                          .blackBold17,
+                                                                    ),
+                                                                    Text(
+                                                                      '${controller.viewPermitDetailsModel.value?.start_datetime}',
+                                                                      style: Styles
+                                                                          .black17,
+                                                                    ),
+                                                                  ],
+                                                                ),
+                                                              ],
+                                                            ),
+                                                          ),
                                                         ],
                                                       )
                                                     ],
@@ -2748,29 +2896,8 @@ class ViewPermitWebScreen extends GetView<ViewPermitController> {
                                                     .size
                                                     .width /
                                                 1,
-                                            child: Container(
-                                              margin: Dimens.edgeInsets20,
-                                              height: ((controller
-                                                          .listCloseCondition!
-                                                          .length) *
-                                                      20) +
-                                                  130,
-                                              decoration: BoxDecoration(
-                                                border: Border.all(
-                                                  color: ColorValues
-                                                      .lightGreyColorWithOpacity35,
-                                                  width: 1,
-                                                ),
-                                                boxShadow: [
-                                                  BoxShadow(
-                                                    color: ColorValues
-                                                        .appBlueBackgroundColor,
-                                                    spreadRadius: 2,
-                                                    blurRadius: 5,
-                                                    offset: Offset(0, 2),
-                                                  ),
-                                                ],
-                                              ),
+                                            child: Padding(
+                                              padding: const EdgeInsets.all(20),
                                               child: Column(
                                                 crossAxisAlignment:
                                                     CrossAxisAlignment.start,
@@ -2820,6 +2947,101 @@ class ViewPermitWebScreen extends GetView<ViewPermitController> {
                                                           // : Container(),
                                                           SizedBox(
                                                             height: 20,
+                                                          ),
+                                                          Padding(
+                                                            padding:
+                                                                const EdgeInsets
+                                                                        .only(
+                                                                    left: 10,
+                                                                    right: 10),
+                                                            child: Row(
+                                                              crossAxisAlignment:
+                                                                  CrossAxisAlignment
+                                                                      .start,
+                                                              children: [
+                                                                Column(
+                                                                  crossAxisAlignment:
+                                                                      CrossAxisAlignment
+                                                                          .end,
+                                                                  children: [
+                                                                    Text(
+                                                                      'Attached Files',
+                                                                      style: Styles
+                                                                          .blackBold17,
+                                                                    ),
+                                                                    Text(
+                                                                      'anas zia.jpeg',
+                                                                      style: TextStyle(
+                                                                          decoration: TextDecoration
+                                                                              .underline,
+                                                                          decorationStyle: TextDecorationStyle
+                                                                              .solid,
+                                                                          color: Color.fromARGB(
+                                                                              255,
+                                                                              5,
+                                                                              92,
+                                                                              163),
+                                                                          fontSize:
+                                                                              Dimens.seventeen),
+                                                                    ),
+                                                                  ],
+                                                                ),
+                                                                Spacer(),
+                                                                Column(
+                                                                  crossAxisAlignment:
+                                                                      CrossAxisAlignment
+                                                                          .end,
+                                                                  children: [
+                                                                    Text(
+                                                                      'Comment/Remark',
+                                                                      style: Styles
+                                                                          .blackBold17,
+                                                                    ),
+                                                                    Text(
+                                                                      'Extended Conditions',
+                                                                      style: Styles
+                                                                          .black17,
+                                                                    ),
+                                                                  ],
+                                                                ),
+                                                                Spacer(),
+                                                                Column(
+                                                                  crossAxisAlignment:
+                                                                      CrossAxisAlignment
+                                                                          .end,
+                                                                  children: [
+                                                                    Text(
+                                                                      'Approver Name',
+                                                                      style: Styles
+                                                                          .blackBold17,
+                                                                    ),
+                                                                    Text(
+                                                                      '${controller.viewPermitDetailsModel.value?.requestedByName}',
+                                                                      style: Styles
+                                                                          .black17,
+                                                                    ),
+                                                                  ],
+                                                                ),
+                                                                Spacer(),
+                                                                Column(
+                                                                  crossAxisAlignment:
+                                                                      CrossAxisAlignment
+                                                                          .end,
+                                                                  children: [
+                                                                    Text(
+                                                                      'Date & Time',
+                                                                      style: Styles
+                                                                          .blackBold17,
+                                                                    ),
+                                                                    Text(
+                                                                      '${controller.viewPermitDetailsModel.value?.start_datetime}',
+                                                                      style: Styles
+                                                                          .black17,
+                                                                    ),
+                                                                  ],
+                                                                ),
+                                                              ],
+                                                            ),
                                                           ),
                                                         ],
                                                       )
@@ -3276,13 +3498,6 @@ class ViewPermitWebScreen extends GetView<ViewPermitController> {
                                               .kHaveApproveAccess)
                                   .length >
                               0 &&
-                          //       &&
-                          //     controller.viewPermitDetailsModel.value?.ptwStatus ==
-                          //         126 ||
-                          // controller.viewPermitDetailsModel.value?.ptwStatus ==
-                          //     133 ||
-                          // controller.viewPermitDetailsModel.value?.ptwStatus ==
-                          // 130 ||
                           controller.viewPermitDetailsModel.value?.ptwStatus ==
                               121 ||
                       controller.viewPermitDetailsModel.value?.ptwStatus == 133
