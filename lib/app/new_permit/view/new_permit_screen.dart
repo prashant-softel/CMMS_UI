@@ -12,10 +12,7 @@ import 'package:cmms/app/widgets/file_upload_details_widget_web.dart';
 import 'package:cmms/app/widgets/file_upload_with_dropzone_widget.dart';
 import 'package:cmms/app/widgets/view_sop_dialog.dart';
 import 'package:cmms/app/widgets/view_jsa_dialog.dart';
-import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
-import 'package:fluttertoast/fluttertoast.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
 import 'package:multi_select_flutter/multi_select_flutter.dart';
@@ -1596,7 +1593,152 @@ class NewPermitScreen extends GetView<NewPermitController> {
                                                         ),
                                                       ),
                                                       Dimens.boxHeight20,
-
+                                                      controller.pmtaskViewModel
+                                                                  ?.id !=
+                                                              null
+                                                          ? Column(
+                                                              crossAxisAlignment:
+                                                                  CrossAxisAlignment
+                                                                      .start,
+                                                              mainAxisAlignment:
+                                                                  MainAxisAlignment
+                                                                      .start,
+                                                              children: [
+                                                                Dimens
+                                                                    .boxHeight10,
+                                                                Padding(
+                                                                  padding: const EdgeInsets
+                                                                          .only(
+                                                                      left: 70),
+                                                                  child: Text(
+                                                                    'Request a Permit For a PM',
+                                                                    style: Styles
+                                                                        .blue700,
+                                                                  ),
+                                                                ),
+                                                                Padding(
+                                                                  padding: const EdgeInsets
+                                                                          .only(
+                                                                      top: 10,
+                                                                      left: 40,
+                                                                      right:
+                                                                          10),
+                                                                  child: Row(
+                                                                    mainAxisAlignment:
+                                                                        MainAxisAlignment
+                                                                            .center,
+                                                                    children: [
+                                                                      Spacer(),
+                                                                      Column(
+                                                                        crossAxisAlignment:
+                                                                            CrossAxisAlignment.center,
+                                                                        mainAxisAlignment:
+                                                                            MainAxisAlignment.center,
+                                                                        children: [
+                                                                          Text(
+                                                                            'PM Task ID',
+                                                                            style:
+                                                                                TextStyle(color: Color.fromARGB(255, 5, 92, 163)),
+                                                                          ),
+                                                                          Dimens
+                                                                              .boxHeight10,
+                                                                          GestureDetector(
+                                                                            onTap:
+                                                                                () {
+                                                                              //   controller.viewJobDetails();
+                                                                            },
+                                                                            child:
+                                                                                Text(
+                                                                              '${int.tryParse('${controller.pmtaskViewModel?.id ?? 0}')}',
+                                                                              style: TextStyle(
+                                                                                decoration: TextDecoration.underline,
+                                                                                decorationStyle: TextDecorationStyle.solid,
+                                                                                color: Color.fromARGB(255, 5, 92, 163),
+                                                                              ),
+                                                                            ),
+                                                                          )
+                                                                        ],
+                                                                      ),
+                                                                      Spacer(),
+                                                                      Column(
+                                                                        crossAxisAlignment:
+                                                                            CrossAxisAlignment.center,
+                                                                        mainAxisAlignment:
+                                                                            MainAxisAlignment.center,
+                                                                        children: [
+                                                                          Text(
+                                                                            'Plan Title',
+                                                                            style:
+                                                                                TextStyle(color: Color.fromARGB(255, 5, 92, 163)),
+                                                                          ),
+                                                                          Dimens
+                                                                              .boxHeight10,
+                                                                          Text(
+                                                                              '${controller.titleTextCtrlr.text}'),
+                                                                        ],
+                                                                      ),
+                                                                      Spacer(),
+                                                                      Column(
+                                                                        crossAxisAlignment:
+                                                                            CrossAxisAlignment.center,
+                                                                        mainAxisAlignment:
+                                                                            MainAxisAlignment.center,
+                                                                        children: [
+                                                                          Text(
+                                                                            'Equipment Category',
+                                                                            style:
+                                                                                TextStyle(color: Color.fromARGB(255, 5, 92, 163)),
+                                                                          ),
+                                                                          Dimens
+                                                                              .boxHeight10,
+                                                                          Text(
+                                                                              '${controller.pmtaskViewModel?.category_name}'),
+                                                                        ],
+                                                                      ),
+                                                                      Spacer(),
+                                                                      Column(
+                                                                        crossAxisAlignment:
+                                                                            CrossAxisAlignment.center,
+                                                                        mainAxisAlignment:
+                                                                            MainAxisAlignment.center,
+                                                                        children: [
+                                                                          Text(
+                                                                            'Frequency',
+                                                                            style:
+                                                                                TextStyle(color: Color.fromARGB(255, 5, 92, 163)),
+                                                                          ),
+                                                                          Dimens
+                                                                              .boxHeight10,
+                                                                          Text(
+                                                                              '${controller.pmtaskViewModel?.frequency_name}'),
+                                                                        ],
+                                                                      ),
+                                                                      Spacer(),
+                                                                      Column(
+                                                                        crossAxisAlignment:
+                                                                            CrossAxisAlignment.center,
+                                                                        mainAxisAlignment:
+                                                                            MainAxisAlignment.center,
+                                                                        children: [
+                                                                          Text(
+                                                                            'Assigned To',
+                                                                            style:
+                                                                                TextStyle(color: Color.fromARGB(255, 5, 92, 163)),
+                                                                          ),
+                                                                          Dimens
+                                                                              .boxHeight10,
+                                                                          Text(
+                                                                              '${controller.pmtaskViewModel?.assigned_to_name}'),
+                                                                        ],
+                                                                      ),
+                                                                      Spacer(),
+                                                                    ],
+                                                                  ),
+                                                                ),
+                                                              ],
+                                                            )
+                                                          : Container(),
+                                                      Dimens.boxHeight30,
                                                       controller.jobModel?.id !=
                                                               null
                                                           ? Column(
@@ -3393,7 +3535,30 @@ class NewPermitScreen extends GetView<NewPermitController> {
                                                                     },
                                                                   )),
                                                             )
-                                                          : controller.permitId
+                                                          : controller.pmtaskViewModel
+                                                                      ?.id !=
+                                                                  null
+                                                              ? Center(
+                                                                  child:
+                                                                      Container(
+                                                                          height:
+                                                                              45,
+                                                                          child:
+                                                                              CustomElevatedButton(
+                                                                            backgroundColor:
+                                                                                ColorValues.appGreenColor,
+                                                                            text:
+                                                                                "Submit For Task Approval",
+                                                                            onPressed:
+                                                                                () {
+                                                                              // var jobId = controller.jobModel?.id ?? 0;
+                                                                              // print('JobId'),
+                                                                              controller.isCheckedJSA.value == true && controller.isCheckedSOP.value == true ? controller.createNewPermitForPm(pmTaskId: controller.pmtaskViewModel?.id) : Get.dialog<void>(checkboxAlertBox());
+                                                                              // controller.linkToPermit(jobId: controller.jobModel?.id);
+                                                                            },
+                                                                          )),
+                                                                )
+                                                              :controller.permitId
                                                                       .value <=
                                                                   0
                                                               ? Center(
@@ -3408,8 +3573,8 @@ class NewPermitScreen extends GetView<NewPermitController> {
                                                                             text:
                                                                                 "Submit For Approval",
                                                                             onPressed:
-                                                                                () {
-                                                                              controller.isCheckedJSA.value == true && controller.isCheckedSOP.value == true ? controller.createNewPermit() : Get.dialog<void>(checkboxAlertBox());
+
+                                                                              () {controller.isCheckedJSA.value == true && controller.isCheckedSOP.value == true ? controller.createNewPermit() : Get.dialog<void>(checkboxAlertBox());
                                                                             },
                                                                           )),
                                                                 )

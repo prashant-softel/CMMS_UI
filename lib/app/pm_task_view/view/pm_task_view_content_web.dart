@@ -1,7 +1,7 @@
-import 'package:cmms/app/navigators/app_pages.dart';
 import 'package:cmms/app/pm_task_view/pm_task_view_controller.dart';
 import 'package:cmms/app/theme/dimens.dart';
 import 'package:cmms/app/widgets/assign_to_pm_task_dialog.dart';
+import 'package:cmms/app/widgets/execution_approve_dialog.dart';
 import 'package:cmms/app/widgets/observation_pm_task_view_popup_dialog.dart';
 import 'package:cmms/app/widgets/table_action_button.dart';
 import 'package:data_table_2/data_table_2.dart';
@@ -75,7 +75,7 @@ class PreventiveMaintenanceTaskViewContentWeb
               child: Container(
                 width: MediaQuery.of(context).size.width,
 
-                margin: EdgeInsets.only(left: 20, top: 30, right: 20),
+                margin: EdgeInsets.all(20),
                 // height: Get.height,
                 child: Card(
                   color: Color.fromARGB(255, 245, 248, 250),
@@ -101,7 +101,7 @@ class PreventiveMaintenanceTaskViewContentWeb
                                 backgroundColor: ColorValues.appLightBlueColor,
                                 onPressed: () async {},
                                 text:
-                                    "${controller.pmtaskViewModel.value?.status_name ?? ""}",
+                                    "${controller.pmtaskViewModel.value?.status_short ?? ""}",
                               ),
                             ),
                           ],
@@ -124,19 +124,19 @@ class PreventiveMaintenanceTaskViewContentWeb
                                             CrossAxisAlignment.end,
                                         children: [
                                           Text(
-                                            "Maintenance Order Number: ",
+                                            "PM Task ID : ",
                                             style: Styles.black17,
                                           ),
                                           Text(
-                                            "Responsible Person: ",
+                                            "PM Plan Title  :  ",
                                             style: Styles.black17,
                                           ),
                                           Text(
-                                            "Due Date: ",
+                                            "Equipment Category :  ",
                                             style: Styles.black17,
                                           ),
                                           Text(
-                                            "Check List: ",
+                                            "Frequency : ",
                                             style: Styles.black17,
                                           ),
                                         ],
@@ -147,16 +147,16 @@ class PreventiveMaintenanceTaskViewContentWeb
                                             CrossAxisAlignment.start,
                                         children: [
                                           Text(
-                                              "${controller.pmtaskViewModel.value?.maintenance_order_number ?? ""}",
+                                              "${controller.pmtaskViewModel.value?.id ?? ""}",
                                               style: Styles.blue17),
                                           Text(
-                                              "${controller.pmtaskViewModel.value?.assigned_to_name ?? ""}",
+                                              "${controller.pmtaskViewModel.value?.plan_title ?? ""}",
                                               style: Styles.blue17),
                                           Text(
-                                              "${controller.pmtaskViewModel.value?.schedule_date ?? ""}",
+                                              "${controller.pmtaskViewModel.value?.category_name ?? ""}",
                                               style: Styles.blue17),
                                           Text(
-                                              "${controller.pmtaskViewModel.value?.checklist_name ?? ""}",
+                                              "${controller.pmtaskViewModel.value?.frequency_name ?? ""}",
                                               style: Styles.blue17),
                                         ],
                                       ),
@@ -166,7 +166,7 @@ class PreventiveMaintenanceTaskViewContentWeb
                                             CrossAxisAlignment.end,
                                         children: [
                                           Text(
-                                            "Equipment Name: ",
+                                            "Assigned To :  ",
                                             style: Styles.black17,
                                           ),
                                           Text(
@@ -178,7 +178,7 @@ class PreventiveMaintenanceTaskViewContentWeb
                                             style: Styles.black17,
                                           ),
                                           Text(
-                                            "frequency_name: ",
+                                            "Due Date : ",
                                             style: Styles.black17,
                                           ),
                                         ],
@@ -189,124 +189,33 @@ class PreventiveMaintenanceTaskViewContentWeb
                                             CrossAxisAlignment.start,
                                         children: [
                                           Text(
-                                              "${controller.pmtaskViewModel.value?.equipment_name ?? ""}",
+                                              "${controller.pmtaskViewModel.value?.assigned_to_name ?? ""}",
                                               style: Styles.blue17),
                                           Text(
-                                              " ${controller.pmtaskViewModel.value?.completed_date ?? ""}",
+                                              " ${controller.pmtaskViewModel.value?.last_done_date ?? ""}",
                                               style: Styles.blue17),
                                           Text(
-                                              "${controller.pmtaskViewModel.value?.completed_date ?? ""}",
+                                              "${controller.pmtaskViewModel.value?.done_date ?? ""}",
                                               style: Styles.blue17),
                                           Text(
-                                              "${controller.pmtaskViewModel.value?.frequency_name ?? ""}",
+                                              "${controller.pmtaskViewModel.value?.due_date ?? ""}",
                                               style: Styles.blue17),
                                         ],
                                       ),
                                     ],
                                   ),
                                 ),
-                                (controller.scheduleCheckPoint != [] &&
-                                        controller
-                                            .scheduleCheckPoint!.isNotEmpty)
-                                    ? Container(
-                                        margin: Dimens.edgeInsets20,
-                                        height: 400,
-                                        decoration: BoxDecoration(
-                                          border: Border.all(
-                                            color: ColorValues
-                                                .lightGreyColorWithOpacity35,
-                                            width: 1,
-                                          ),
-                                          boxShadow: [
-                                            BoxShadow(
-                                              color: ColorValues
-                                                  .appBlueBackgroundColor,
-                                              spreadRadius: 2,
-                                              blurRadius: 5,
-                                              offset: Offset(0, 2),
-                                            ),
-                                          ],
-                                        ),
-                                        child: Column(
-                                          children: [
-                                            Padding(
-                                              padding:
-                                                  const EdgeInsets.all(10.0),
-                                              child: Row(
-                                                children: [
-                                                  Text(
-                                                    "${controller.pmtaskViewModel.value?.checklist_name ?? ""}",
-                                                    style: Styles.blue700,
-                                                  ),
-                                                ],
-                                              ),
-                                            ),
-                                            Divider(
-                                              color:
-                                                  ColorValues.greyLightColour,
-                                            ),
-                                            Expanded(
-                                              child: ScrollableTableView(
-                                                paginationController: controller
-                                                    .schedulePaginationController,
-                                                columns: [
-                                                  "Check Point No.",
-                                                  "Check Point",
-                                                  "Requirement",
-                                                  "Upload Images",
-                                                  "Observation",
-                                                  "Job ID",
-                                                ].map((column) {
-                                                  return TableViewColumn(
-                                                    minWidth: Get.width * 0.15,
-                                                    label: column,
-                                                  );
-                                                }).toList(),
-                                                rows: //
-                                                    [
-                                                  ...List.generate(
-                                                    controller
-                                                            .scheduleCheckPoint
-                                                            ?.length ??
-                                                        0,
-                                                    (index) {
-                                                      var scheduleCheckPointDetails =
-                                                          controller
-                                                                  .scheduleCheckPoint?[
-                                                              index];
-                                                      return [
-                                                        '${scheduleCheckPointDetails?.check_point_id}',
-                                                        '${scheduleCheckPointDetails?.check_point_name}',
-                                                        '${scheduleCheckPointDetails?.requirement}',
-                                                        "IMG2234",
-                                                        '${scheduleCheckPointDetails?.observation}',
-                                                        "JOB2344"
-                                                      ];
-                                                    },
-                                                  ),
-                                                ].map((record) {
-                                                  return TableViewRow(
-                                                    height: 50,
-                                                    cells: record.map((value) {
-                                                      return TableViewCell(
-                                                        child: Text(value),
-                                                      );
-                                                    }).toList(),
-                                                  );
-                                                }).toList(),
-                                              ),
-                                            ),
-                                          ],
-                                        ),
-                                      )
-                                    : Dimens.box0,
-                                Dimens.boxHeight30,
+                                // Dimens.boxHeight30,
 
                                 ///Assets
 
                                 Container(
                                   margin: Dimens.edgeInsets20,
-                                  height: 400,
+                                  height:
+                                      ((controller.scheduleCheckPoint?.length ??
+                                                  0) *
+                                              45) +
+                                          140,
                                   decoration: BoxDecoration(
                                     border: Border.all(
                                       color: ColorValues
@@ -330,112 +239,116 @@ class PreventiveMaintenanceTaskViewContentWeb
                                         child: Row(
                                           children: [
                                             Text(
-                                              "Assets",
+                                              "Asset(s) ",
                                               style: Styles.blue700,
                                             ),
                                           ],
                                         ),
                                       ),
-                                      Divider(
-                                        color: ColorValues.greyLightColour,
-                                      ),
                                       Expanded(
-                                        child: ScrollableTableView(
+                                        child: DataTable2(
+                                          border: TableBorder.all(
+                                              color: Color.fromARGB(
+                                                  255, 206, 229, 234)),
                                           columns: [
-                                            "SR.No.",
-                                            "Asset",
-                                            "Checklist",
-                                            "Failure Score",
-                                            "Action",
-                                          ].map((column) {
-                                            return TableViewColumn(
-                                              label: column,
-                                              minWidth: Get.width * 0.18,
-                                            );
-                                          }).toList(),
-                                          rows: [
-                                            [
-                                              "1",
-                                              "Demo_Block_1_Inv_1",
-                                              "demo_checklist_1",
-                                              "0%",
-                                              "Action",
-                                            ],
-                                            [
-                                              "2",
-                                              "Demo_Block_2_Inv_2",
-                                              "demo_checklist_2",
-                                              "20%",
-                                              "Action",
-                                            ],
-                                            [
-                                              "3",
-                                              "Demo_Block_3_Inv_3",
-                                              "demo_checklist_3",
-                                              "0%",
-                                              "Action",
-                                            ],
-                                            [
-                                              "4",
-                                              "Demo_Block_4_Inv_4",
-                                              "demo_checklist_4",
-                                              "0%",
-                                              "Action",
-                                            ],
-                                            [
-                                              "5",
-                                              "Demo_Block_5_Inv_5",
-                                              "demo_checklist_5",
-                                              "80%",
-                                              "Action",
-                                            ],
-                                          ].map((record) {
-                                            return TableViewRow(
-                                              height: 40,
-                                              cells: record.map((value) {
-                                                return TableViewCell(
-                                                    child: (value == "0%")
-                                                        ? Text(
-                                                            '0%',
-                                                            style: TextStyle(
-                                                                color: Colors
-                                                                    .green),
-                                                          )
-                                                        : value == "20%"
-                                                            ? Text(
-                                                                '20%',
-                                                                style: TextStyle(
-                                                                    color: Colors
-                                                                        .yellow),
-                                                              )
-                                                            : value == "80%"
-                                                                ? Text(
-                                                                    '80%',
-                                                                    style: TextStyle(
-                                                                        color: Colors
-                                                                            .red),
-                                                                  )
-                                                                : (value ==
-                                                                        "Action")
-                                                                    ? Wrap(
-                                                                        children: [
-                                                                          TableActionButton(
-                                                                            color:
-                                                                                ColorValues.viewColor,
-                                                                            icon:
-                                                                                Icons.remove_red_eye_outlined,
-                                                                            message:
-                                                                                'View',
-                                                                            onPress:
-                                                                                () {},
-                                                                          ),
-                                                                        ],
-                                                                      )
-                                                                    : Text(value
-                                                                        .toString()));
-                                              }).toList(),
-                                            );
-                                          }).toList(),
+                                            DataColumn2(
+                                                fixedWidth: 100,
+                                                label: Text(
+                                                  "SR.No.",
+                                                  style: TextStyle(
+                                                      fontSize: 15,
+                                                      fontWeight:
+                                                          FontWeight.bold),
+                                                )),
+                                            DataColumn2(
+                                                label: Text(
+                                              "Asset",
+                                              style: TextStyle(
+                                                  fontSize: 15,
+                                                  fontWeight: FontWeight.bold),
+                                            )),
+                                            DataColumn2(
+                                                // fixedWidth: 300,
+                                                label: Text(
+                                              "Checklist",
+                                              style: TextStyle(
+                                                  fontSize: 15,
+                                                  fontWeight: FontWeight.bold),
+                                            )),
+                                            DataColumn2(
+                                                fixedWidth: 200,
+                                                label: Text(
+                                                  "Failure Score",
+                                                  style: TextStyle(
+                                                      fontSize: 15,
+                                                      fontWeight:
+                                                          FontWeight.bold),
+                                                )),
+                                            DataColumn2(
+                                                fixedWidth: 150,
+                                                label: Text(
+                                                  'Action',
+                                                  style: TextStyle(
+                                                      fontSize: 15,
+                                                      fontWeight:
+                                                          FontWeight.bold),
+                                                )),
+                                          ],
+                                          rows: List<DataRow>.generate(
+                                            controller.scheduleCheckPoint
+                                                    ?.length ??
+                                                0,
+                                            (index) => DataRow(cells: [
+                                              DataCell(Text('${index + 1}')),
+                                              DataCell(Text(controller
+                                                      .scheduleCheckPoint?[
+                                                          index]
+                                                      ?.asset_name
+                                                      .toString() ??
+                                                  '')),
+                                              DataCell(Text(controller
+                                                      .scheduleCheckPoint?[
+                                                          index]
+                                                      ?.checklist_name ??
+                                                  '')),
+                                              DataCell(Text(
+                                                  // controller
+                                                  //       .scheduleCheckPoint?[
+                                                  //           index]
+                                                  //       ? ??
+                                                  '')),
+                                              DataCell(Row(
+                                                mainAxisAlignment:
+                                                    MainAxisAlignment
+                                                        .spaceEvenly,
+                                                children: [
+                                                  TableActionButton(
+                                                      color:
+                                                          ColorValues.viewColor,
+                                                      icon:
+                                                          Icons.remove_red_eye,
+                                                      message: "View",
+                                                      onPress: () {
+                                                        controller.selectedItem = controller
+                                                            .scheduleCheckPoint!
+                                                            .firstWhere((element) =>
+                                                                "${element?.schedule_id}" ==
+                                                                controller
+                                                                    .scheduleCheckPoint?[
+                                                                        index]
+                                                                    ?.schedule_id
+                                                                    .toString());
+                                                        if (controller
+                                                                .selectedItem !=
+                                                            null) {
+                                                          Get.dialog(
+                                                              ObservationPMTaskViewDialog());
+                                                        }
+                                                      })
+                                                ],
+                                              )),
+                                            ]),
+                                          ),
                                         ),
                                       ),
                                     ],
@@ -443,216 +356,216 @@ class PreventiveMaintenanceTaskViewContentWeb
                                 ),
 
                                 ////Material Used/Issued
-                                Container(
-                                  margin: Dimens.edgeInsets20,
-                                  height: 250,
-                                  decoration: BoxDecoration(
-                                    border: Border.all(
-                                      color: ColorValues
-                                          .lightGreyColorWithOpacity35,
-                                      width: 1,
-                                    ),
-                                    boxShadow: [
-                                      BoxShadow(
-                                        color:
-                                            ColorValues.appBlueBackgroundColor,
-                                        spreadRadius: 2,
-                                        blurRadius: 5,
-                                        offset: Offset(0, 2),
-                                      ),
-                                    ],
-                                  ),
-                                  child: Column(
-                                    children: [
-                                      Padding(
-                                        padding: const EdgeInsets.all(10.0),
-                                        child: Row(
-                                          children: [
-                                            Text(
-                                              "Material Used/Issued",
-                                              style: Styles.blue700,
-                                            ),
-                                            Spacer(),
-                                            TableActionButton(
-                                              color: ColorValues.appGreenColor,
-                                              icon: Icons.add,
-                                              message: '',
-                                              label: "Add New MRS",
-                                              onPress: () {},
-                                            ),
-                                          ],
-                                        ),
-                                      ),
-                                      Divider(
-                                        color: ColorValues.greyLightColour,
-                                      ),
-                                      Expanded(
-                                        child: ScrollableTableView(
-                                          columns: [
-                                            "Sr.No.",
-                                            "MRS ID",
-                                            "MRS Item list",
-                                            "Status",
-                                            "Action",
-                                          ].map((column) {
-                                            return TableViewColumn(
-                                              label: column,
-                                              minWidth: Get.width * 0.15,
-                                            );
-                                          }).toList(),
-                                          rows: [
-                                            [
-                                              "1",
-                                              "MRS45692",
-                                              "String connector 60MM Male,String connector...",
-                                              "Waiting For Approval",
-                                              "Action",
-                                            ],
-                                            [
-                                              "2",
-                                              "MRS45693",
-                                              "String connector 60MM Male,String connector...",
-                                              "Approved",
-                                              "Action",
-                                            ],
-                                          ].map((record) {
-                                            return TableViewRow(
-                                              height: 40,
-                                              cells: record.map((value) {
-                                                return TableViewCell(
-                                                    child: (value == "Action")
-                                                        ? Wrap(children: [
-                                                            TableActionButton(
-                                                              color: ColorValues
-                                                                  .viewColor,
-                                                              icon: Icons
-                                                                  .remove_red_eye_outlined,
-                                                              message: 'View',
-                                                              onPress: () {
-                                                                Get.dialog(
-                                                                    ObservationPMTaskViewDialog());
-                                                              },
-                                                            ),
-                                                            TableActionButton(
-                                                              color: ColorValues
-                                                                  .appGreenColor,
-                                                              icon: Icons.add,
-                                                              message: 'Add',
-                                                              onPress: () {},
-                                                            ),
-                                                            TableActionButton(
-                                                              color: ColorValues
-                                                                  .appRedColor,
-                                                              icon:
-                                                                  Icons.remove,
-                                                              message: 'Delete',
-                                                              onPress: () {},
-                                                            ),
-                                                          ])
-                                                        : Text(value));
-                                              }).toList(),
-                                            );
-                                          }).toList(),
-                                        ),
-                                      ),
-                                    ],
-                                  ),
-                                ),
+                                // Container(
+                                //   margin: Dimens.edgeInsets20,
+                                //   height: 250,
+                                //   decoration: BoxDecoration(
+                                //     border: Border.all(
+                                //       color: ColorValues
+                                //           .lightGreyColorWithOpacity35,
+                                //       width: 1,
+                                //     ),
+                                //     boxShadow: [
+                                //       BoxShadow(
+                                //         color:
+                                //             ColorValues.appBlueBackgroundColor,
+                                //         spreadRadius: 2,
+                                //         blurRadius: 5,
+                                //         offset: Offset(0, 2),
+                                //       ),
+                                //     ],
+                                //   ),
+                                //   child: Column(
+                                //     children: [
+                                //       Padding(
+                                //         padding: const EdgeInsets.all(10.0),
+                                //         child: Row(
+                                //           children: [
+                                //             Text(
+                                //               "Material Used/Issued",
+                                //               style: Styles.blue700,
+                                //             ),
+                                //             Spacer(),
+                                //             TableActionButton(
+                                //               color: ColorValues.appGreenColor,
+                                //               icon: Icons.add,
+                                //               message: '',
+                                //               label: "Add New MRS",
+                                //               onPress: () {},
+                                //             ),
+                                //           ],
+                                //         ),
+                                //       ),
+                                //       Divider(
+                                //         color: ColorValues.greyLightColour,
+                                //       ),
+                                //       Expanded(
+                                //         child: ScrollableTableView(
+                                //           columns: [
+                                //             "Sr.No.",
+                                //             "MRS ID",
+                                //             "MRS Item list",
+                                //             "Status",
+                                //             "Action",
+                                //           ].map((column) {
+                                //             return TableViewColumn(
+                                //               label: column,
+                                //               minWidth: Get.width * 0.15,
+                                //             );
+                                //           }).toList(),
+                                //           rows: [
+                                //             [
+                                //               "1",
+                                //               "MRS45692",
+                                //               "String connector 60MM Male,String connector...",
+                                //               "Waiting For Approval",
+                                //               "Action",
+                                //             ],
+                                //             [
+                                //               "2",
+                                //               "MRS45693",
+                                //               "String connector 60MM Male,String connector...",
+                                //               "Approved",
+                                //               "Action",
+                                //             ],
+                                //           ].map((record) {
+                                //             return TableViewRow(
+                                //               height: 40,
+                                //               cells: record.map((value) {
+                                //                 return TableViewCell(
+                                //                     child: (value == "Action")
+                                //                         ? Wrap(children: [
+                                //                             TableActionButton(
+                                //                               color: ColorValues
+                                //                                   .viewColor,
+                                //                               icon: Icons
+                                //                                   .remove_red_eye_outlined,
+                                //                               message: 'View',
+                                //                               onPress: () {
+                                //                                 // Get.dialog(
+                                //                                 //     ObservationPMTaskViewDialog());
+                                //                               },
+                                //                             ),
+                                //                             TableActionButton(
+                                //                               color: ColorValues
+                                //                                   .appGreenColor,
+                                //                               icon: Icons.add,
+                                //                               message: 'Add',
+                                //                               onPress: () {},
+                                //                             ),
+                                //                             TableActionButton(
+                                //                               color: ColorValues
+                                //                                   .appRedColor,
+                                //                               icon:
+                                //                                   Icons.remove,
+                                //                               message: 'Delete',
+                                //                               onPress: () {},
+                                //                             ),
+                                //                           ])
+                                //                         : Text(value));
+                                //               }).toList(),
+                                //             );
+                                //           }).toList(),
+                                //         ),
+                                //       ),
+                                //     ],
+                                //   ),
+                                // ),
 
                                 // Dimens.boxHeight30,
-                                (controller.historyLog != [] &&
-                                        controller.historyLog!.isNotEmpty)
-                                    ? Container(
-                                        margin: Dimens.edgeInsets20,
-                                        height:
-                                            ((controller.historyLog?.length ??
-                                                        0) *
-                                                    40) +
-                                                150,
-                                        decoration: BoxDecoration(
-                                          border: Border.all(
-                                            color: ColorValues
-                                                .lightGreyColorWithOpacity35,
-                                            width: 1,
-                                          ),
-                                          boxShadow: [
-                                            BoxShadow(
-                                              color: ColorValues
-                                                  .appBlueBackgroundColor,
-                                              spreadRadius: 2,
-                                              blurRadius: 5,
-                                              offset: Offset(0, 2),
-                                            ),
-                                          ],
-                                        ),
-                                        child: Column(
-                                          children: [
-                                            Padding(
-                                              padding:
-                                                  const EdgeInsets.all(10.0),
-                                              child: Row(
-                                                children: [
-                                                  Text(
-                                                    "PM History ",
-                                                    style: Styles.blue700,
-                                                  ),
-                                                ],
-                                              ),
-                                            ),
-                                            Divider(
-                                              color:
-                                                  ColorValues.greyLightColour,
-                                            ),
-                                            Expanded(
-                                              child: ScrollableTableView(
-                                                columns: [
-                                                  "Time Stamp",
-                                                  "Posted By",
-                                                  "Comment",
-                                                  "Location",
-                                                  "Status",
-                                                ].map((column) {
-                                                  return TableViewColumn(
-                                                    label: column,
-                                                    minWidth: Get.width * 0.15,
-                                                  );
-                                                }).toList(),
-                                                rows: [
-                                                  ...List.generate(
-                                                    controller.historyLog
-                                                            ?.length ??
-                                                        0,
-                                                    (index) {
-                                                      var getHistoryListDetails =
-                                                          controller
-                                                                  .historyLog?[
-                                                              index];
-                                                      return [
-                                                        '${getHistoryListDetails?.created_at}',
-                                                        '${getHistoryListDetails?.created_by_name ?? ''}',
-                                                        '${getHistoryListDetails?.comment ?? ''}',
-                                                        '--',
-                                                        '${getHistoryListDetails?.status ?? ''}',
-                                                      ];
-                                                    },
-                                                  ),
-                                                  // [
-                                                ].map((record) {
-                                                  return TableViewRow(
-                                                    height: 50,
-                                                    cells: record.map((value) {
-                                                      return TableViewCell(
-                                                        child: Text(value),
-                                                      );
-                                                    }).toList(),
-                                                  );
-                                                }).toList(),
-                                              ),
-                                            ),
-                                          ],
-                                        ),
-                                      )
-                                    : Dimens.box0,
+                                // (controller.historyLog != [] &&
+                                //         controller.historyLog!.isNotEmpty)
+                                //     ? Container(
+                                //         margin: Dimens.edgeInsets20,
+                                //         height:
+                                //             ((controller.historyLog?.length ??
+                                //                         0) *
+                                //                     40) +
+                                //                 150,
+                                //         decoration: BoxDecoration(
+                                //           border: Border.all(
+                                //             color: ColorValues
+                                //                 .lightGreyColorWithOpacity35,
+                                //             width: 1,
+                                //           ),
+                                //           boxShadow: [
+                                //             BoxShadow(
+                                //               color: ColorValues
+                                //                   .appBlueBackgroundColor,
+                                //               spreadRadius: 2,
+                                //               blurRadius: 5,
+                                //               offset: Offset(0, 2),
+                                //             ),
+                                //           ],
+                                //         ),
+                                //         child: Column(
+                                //           children: [
+                                //             Padding(
+                                //               padding:
+                                //                   const EdgeInsets.all(10.0),
+                                //               child: Row(
+                                //                 children: [
+                                //                   Text(
+                                //                     "PM History ",
+                                //                     style: Styles.blue700,
+                                //                   ),
+                                //                 ],
+                                //               ),
+                                //             ),
+                                //             Divider(
+                                //               color:
+                                //                   ColorValues.greyLightColour,
+                                //             ),
+                                //             Expanded(
+                                //               child: ScrollableTableView(
+                                //                 columns: [
+                                //                   "Time Stamp",
+                                //                   "Posted By",
+                                //                   "Comment",
+                                //                   "Location",
+                                //                   "Status",
+                                //                 ].map((column) {
+                                //                   return TableViewColumn(
+                                //                     label: column,
+                                //                     minWidth: Get.width * 0.15,
+                                //                   );
+                                //                 }).toList(),
+                                //                 rows: [
+                                //                   ...List.generate(
+                                //                     controller.historyLog
+                                //                             ?.length ??
+                                //                         0,
+                                //                     (index) {
+                                //                       var getHistoryListDetails =
+                                //                           controller
+                                //                                   .historyLog?[
+                                //                               index];
+                                //                       return [
+                                //                         '${getHistoryListDetails?.created_at}',
+                                //                         '${getHistoryListDetails?.created_by_name ?? ''}',
+                                //                         '${getHistoryListDetails?.comment ?? ''}',
+                                //                         '--',
+                                //                         '${getHistoryListDetails?.status ?? ''}',
+                                //                       ];
+                                //                     },
+                                //                   ),
+                                //                   // [
+                                //                 ].map((record) {
+                                //                   return TableViewRow(
+                                //                     height: 50,
+                                //                     cells: record.map((value) {
+                                //                       return TableViewCell(
+                                //                         child: Text(value),
+                                //                       );
+                                //                     }).toList(),
+                                //                   );
+                                //                 }).toList(),
+                                //               ),
+                                //             ),
+                                //           ],
+                                //         ),
+                                //       )
+                                //     : Dimens.box0,
                               ],
                             ),
                           ),
@@ -664,24 +577,26 @@ class PreventiveMaintenanceTaskViewContentWeb
               ),
             ),
           ),
-          Dimens.boxHeight20,
+          //  Dimens.boxHeight20,
           Container(
-            margin: EdgeInsets.only(bottom: 30, top: 20),
+            margin: EdgeInsets.only(
+              bottom: 10,
+            ),
             child: Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                Container(
-                  height: 35,
-                  child: CustomElevatedButton(
-                    icon: Icons.print,
-                    backgroundColor: ColorValues.linktopermitColor,
-                    text: "print",
-                    onPressed: () {
-                      //controller.printScreen();
-                    },
-                  ),
-                ),
-                Dimens.boxWidth10,
+                // Container(
+                //   height: 35,
+                //   child: CustomElevatedButton(
+                //     icon: Icons.print,
+                //     backgroundColor: ColorValues.linktopermitColor,
+                //     text: "print",
+                //     onPressed: () {
+                //       //controller.printScreen();
+                //     },
+                //   ),
+                // ),
+                //Dimens.boxWidth10,
                 Container(
                   height: 35,
                   child: CustomElevatedButton(
@@ -695,71 +610,147 @@ class PreventiveMaintenanceTaskViewContentWeb
                   ),
                 ),
                 Dimens.boxWidth10,
-                controller.pmtaskViewModel.value?.status == 161
+                // controller.pmtaskViewModel.value?.status == 161
+                //     ? Container(
+                //         height: 35,
+                //         child: CustomElevatedButton(
+                //           icon: Icons.link,
+                //           backgroundColor: ColorValues.linktopermitColor,
+                //           text: "Link to Permit",
+                //           onPressed: () {
+                //             controller.createNewPermit();
+
+                //             //controller.printScreen();
+                //           },
+                //         ),
+                //       )
+                //     :
+                controller.pmtaskViewModel.value?.status == 163
                     ? Container(
                         height: 35,
                         child: CustomElevatedButton(
-                          icon: Icons.link,
+                          icon: Icons.start,
                           backgroundColor: ColorValues.linktopermitColor,
-                          text: "Link to Permit",
+                          text: "Start",
                           onPressed: () {
-                            controller.showPermitsDialog();
+                            controller.setPmTask();
 
                             //controller.printScreen();
                           },
                         ),
                       )
-                    : controller.pmtaskViewModel.value?.status == 172
-                        ? Container(
-                            height: 35,
-                            child: CustomElevatedButton(
-                              icon: Icons.start,
-                              backgroundColor: ColorValues.linktopermitColor,
-                              text: "Start",
-                              onPressed: () {
-                                controller.setPmTask();
-
-                                //controller.printScreen();
-                              },
-                            ),
-                          )
-                        : Dimens.box0,
+                    : Dimens.box0,
+                controller.pmtaskViewModel.value?.status == 164 ||
+                        controller.pmtaskViewModel.value?.status == 166
+                    ? Container(
+                        height: 35,
+                        child: CustomElevatedButton(
+                          icon: Icons.remove_red_eye_outlined,
+                          backgroundColor: ColorValues.linktopermitColor,
+                          text: "Execute",
+                          onPressed: () {
+                            controller.gotoexecution();
+                          },
+                        ),
+                      )
+                    : Dimens.box0,
                 Dimens.boxWidth10,
+                // controller.pmtaskViewModel.value?.status == 161
+                //     ?
                 Container(
                   height: 35,
                   child: CustomElevatedButton(
-                    // icon: Icons.start,
+                    icon: Icons.link,
                     backgroundColor: ColorValues.appGreenColor,
                     text: "Create New Permit",
                     onPressed: () {
-                      //controller.printScreen();
+                      controller.createNewPermit();
                     },
                   ),
                 ),
-                Dimens.boxWidth10,
-                Container(
-                  height: 35,
-                  child: CustomElevatedButton(
-                    // icon: Icons.start,
-                    backgroundColor: ColorValues.appGreenColor,
-                    text: "Clone Permit",
-                    onPressed: () {
-                      //controller.printScreen();
-                    },
-                  ),
-                ),
+
+                // : Dimens.box0,
+                // Dimens.boxWidth10,
+                // Container(
+                //   height: 35,
+                //   child: CustomElevatedButton(
+                //     // icon: Icons.start,
+                //     backgroundColor: ColorValues.appGreenColor,
+                //     text: "Clone Permit",
+                //     onPressed: () {
+                //       //controller.printScreen();
+                //     },
+                //   ),
+                // ),
                 Dimens.boxWidth10,
                 Container(
                   height: 35,
                   child: CustomElevatedButton(
                     icon: Icons.close,
-                    backgroundColor: ColorValues.cancelColor,
+                    backgroundColor: ColorValues.closeColor,
                     text: "Close",
                     onPressed: () {
-                      Get.back();
+                      Get.dialog(CustonApproveRejectDialog(
+                        text: "Execution Close",
+                        controller: controller,
+                        buttonText: "Close",
+                        style: Styles.redElevatedButtonStyle,
+                        onPressed: () {
+                          controller.closePmTaskExecution();
+                          Get.back();
+                        },
+                      ));
                     },
                   ),
                 ),
+                Dimens.boxWidth10,
+
+                Dimens.boxWidth10,
+                controller.pmtaskViewModel.value?.status == 165
+                    ? Container(
+                        height: 35,
+                        child: CustomElevatedButton(
+                          icon: Icons.check,
+                          backgroundColor: ColorValues.approveColor,
+                          text: "Approve",
+                          onPressed: () {
+                            Get.dialog(CustonApproveRejectDialog(
+                              text: "Execution Approve",
+                              controller: controller,
+                              buttonText: "Approve",
+                              style: Styles.greenElevatedButtonStyle,
+                              onPressed: () {
+                                controller.approvePmTaskExecution();
+                                Get.back();
+                              },
+                            ));
+                          },
+                        ),
+                      )
+                    : Dimens.box0,
+                Dimens.boxWidth10,
+                controller.pmtaskViewModel.value?.status == 165
+                    ? Container(
+                        height: 35,
+                        child: CustomElevatedButton(
+                          icon: Icons.close,
+                          backgroundColor: ColorValues.rejectColor,
+                          text: "Reject",
+                          onPressed: () {
+                            Get.dialog(CustonApproveRejectDialog(
+                              text: "Execution Reject",
+                              controller: controller,
+                              buttonText: "Reject",
+                              style: Styles.redElevatedButtonStyle,
+                              onPressed: () {
+                                controller.rejectPmTaskExecution();
+                                Get.back();
+                              },
+                            ));
+                          },
+                        ),
+                      )
+                    : Dimens.box0
               ],
             ),
           )

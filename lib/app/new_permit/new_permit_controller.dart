@@ -16,6 +16,7 @@ import 'package:cmms/domain/models/job_type_list_model.dart';
 import 'package:cmms/domain/models/linked_jobs_to_permit_model.dart';
 import 'package:cmms/domain/models/new_permit_details_model.dart';
 import 'package:cmms/domain/models/new_permit_list_model.dart';
+import 'package:cmms/domain/models/pm_task_view_list_model.dart';
 import 'package:cmms/domain/models/safety_measure_list_model.dart';
 import 'package:cmms/domain/models/sop_list_model.dart';
 import 'package:flutter/foundation.dart';
@@ -351,7 +352,7 @@ class NewPermitController extends GetxController {
   Rx<int> permitId = 0.obs;
   bool isChecked = false;
   JobDetailsModel? jobModel;
-
+  PmtaskViewModel? pmtaskViewModel;
   int? jcId = 0;
 
   //File Import
@@ -379,7 +380,12 @@ class NewPermitController extends GetxController {
         if (arguments.containsKey('jobModel')) {
           jobModel = arguments['jobModel'];
         }
-
+        if (arguments.containsKey('pmTaskModel')) {
+          pmtaskViewModel = arguments['pmTaskModel'];
+          if (pmtaskViewModel != null) {
+            loadPermitDetailsWithTask(pmtaskViewModel);
+          }
+        }
         if (jobModel != null) {
           loadPermitDetails(jobModel);
         }
@@ -1218,6 +1224,105 @@ class NewPermitController extends GetxController {
     }
   }
 
+  void createNewPermitForPm({int? pmTaskId}) async {
+    {
+      checkForm();
+      if (isFormInvalid.value) {
+        return;
+      }
+      //   if(selectedBlockId <= 0){
+      //   selectedBlockId = getAssignedBlockId(selectedBlock.value) ?? 0;
+      //   }
+
+      // print('JobList BlockId:$selectedBlockId');
+
+      String _description =
+          htmlEscape.convert(permitDescriptionCtrlr.text.trim());
+      String _title = htmlEscape.convert(titleTextCtrlr.text.trim());
+      String _startDate = htmlEscape.convert(startDateTimeCtrlr.text.trim());
+      List<Employeelist> employee_map_list = [];
+      //UserId
+      int userId = varUserAccessModel.value.user_id ?? 0;
+
+      filteredEmployeeNameList.forEach((e) {
+        employee_map_list
+            .add(Employeelist(employeeId: e?.id, responsibility: e?.name));
+      });
+
+      late List<LotoList> loto_map_list = [];
+
+      filteredEquipmentNameList.forEach((e) {
+        loto_map_list.add(LotoList(Loto_id: e?.id, Loto_Key: e?.name));
+      });
+
+      late List<Safetyquestionlist> safety_measure_map_list = [];
+
+      safetyMeasureList.forEach((e) {
+        safety_measure_map_list.add(Safetyquestionlist(
+            safetyMeasureId: e.id, safetyMeasureValue: e.name));
+      });
+
+      //  List<Employeelist> employee_list= <Employeelist>[];
+      // List<Safetyquestionlist> safety_question_list = <Safetyquestionlist>[];
+      // List<LotoList> loto_list = <LotoList>[];
+
+      // for (var _selectedWorkArea in selectedWorkAreaList) {
+      //   var json = '{"asset_id": ${_selectedWorkArea?.id},'
+      //       '"category_ids": ${_selectedWorkArea?.categoryId}}';
+
+      //   // CreatePermitModel _employeeList = addCreatePermitModelFromJson(json);
+      //   // employee_list.add(_employeeList as Employeelist);
+      //   // CreatePermitModel _safetyQuestionList = addCreatePermitModelFromJson(json);
+      //   // safety_question_list.add(_safetyQuestionList as Safetyquestionlist);
+      //   // CreatePermitModel _lotoList = addCreatePermitModelFromJson(json);
+      //   // loto_list.add(_lotoList as LotoList);
+
+      //   // SafetyQuestionList _safetyQuestionList = addSafetyQuestionListFromJson(json);
+      //   // safety_question_list.add(_safetyQuestionList);
+      // }
+
+      CreatePermitModel createPermitModel = CreatePermitModel(
+        facility_id: facilityId,
+        blockId: selectedBlockId,
+        lotoId: selectedEquipmentCategoryIdList.first,
+        permitTypeId: selectedPermitTypeId,
+
+        ///Permit Type Id
+        start_datetime: startDateTimeCtrlrBuffer,
+        end_datetime: validTillTimeCtrlrBuffer,
+        title: _title,
+        description: _description,
+        job_type_id: selectedJobTypesId, ////Job type Id
+        sop_type_id: selectedSOPId,
+        issuer_id: selectedPermitIssuerTypeId,
+        approver_id: selectedPermitApproverTypeId,
+        user_id: userId,
+        latitude: 0,
+        longitude: 0,
+        block_ids: selectedEmployeeNameIdList,
+        category_ids: selectedEquipmentCategoryIdList,
+        is_isolation_required: isToggleOn.value,
+        isolated_category_ids: selectedEquipmentIsolationIdList,
+        Loto_list: loto_map_list,
+        employee_list: employee_map_list,
+        safety_question_list: safety_measure_map_list,
+      );
+      var jobJsonString = createPermitModel.toJson();
+      Map<String, dynamic>? responseNewPermitCreatedForJob =
+          await permitPresenter.createNewPermitForPm(
+        newPermit: jobJsonString,
+        pmTaskId: pmTaskId!,
+        isLoading: true,
+      );
+      if (responseNewPermitCreatedForJob != null) {
+        //  CreateNewPermitDialog();
+        // showAlertDialog();
+      }
+      print('Create permit For Job data: $jobJsonString');
+      print('permit Id For Job data: $permitIdForJob');
+    }
+  }
+
   // static void showAlertDialog({
   //   int? facility_id,
   //   String? message,
@@ -1492,6 +1597,49 @@ class NewPermitController extends GetxController {
         ],
       ),
     );
+  }
+
+  loadPermitDetailsWithTask(PmtaskViewModel? pmtaskViewModel) {
+    titleTextCtrlr.text = pmtaskViewModel?.plan_title ?? '';
+    // selectedBlock.value = jobModel.blockName ?? '';
+    // selectedBlockId = jobModel.blockId ?? 0;
+
+    //// uncomment once work done
+    // listJobModelCategory.value = jobModel.equipmentCatList ?? [];
+    // List<int> idList =
+    //     listJobModelCategory.map((obj) => obj!.equipmentCatId).toList();
+    // List<String> nameList =
+    //     listJobModelCategory.map((obj) => obj!.equipmentCatName).toList();
+
+    // list_working_area_name.value = jobModel.workingAreaList ?? [];
+
+    //  selectedItem = nameList[0];
+    ///end uncomment
+
+    // listAssociatedPermit.value = jobModel.associatedPermitList ?? [];
+    // List<int?> associetdPermitId = listAssociatedPermit.map((element) => element?.permitId).toList();
+    // associatePermitId = associetdPermitId[0];
+    // print("Associated Permit Id:${associatePermitId}");
+
+    // print("Selected Block Id:${selectedBlockId}");
+    //uncomment once work done
+    // selectedEquipmentCategoryIdList.value = idList;
+    // selectedJobModelEquipemntIsolationIdList.value = idList;
+    //print("JobModel Equipment Category Id:${selectedEquipmentCategoryIdList}");
+    // print("Selected Name Category:${jobModel.id ?? 0}");
+
+    ///end uncomment
+
+    // idCtrlr.text = '${int.tryParse(jobModel.id ?? 0)}';
+    // blockNameTextCtrlr.text = pmtaskViewModel.;
+    // assignToTextCtrlr.text = jobModel.assignedName;
+    // breakdownTimeTextCtrlr.text =
+    //     '${DateFormat('yyyy-MM-dd HH:mm').format(DateTime.parse('${jobModel.breakdownTime}')).toString()}';
+
+    // RxList<JobDetailsModel> jobDataList =
+    // filteredEmployeeNameList = jobModel.assignedId;
+    // filteredEmployeeNameList = jobModel.assignedName;
+    // filteredEmployeeNameList.add(EmployeeListModel(id: jobModel.assignedId,name: "${jobModel.assignedName}"));
   }
 
   /// class ends

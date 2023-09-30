@@ -1,9 +1,6 @@
 import 'dart:convert';
 
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
-
-import '../../app/utils/utility.dart';
 
 PmtaskViewModel pmtaskViewModelFromJson(String str) =>
     PmtaskViewModel.fromJson(json.decode(str));
@@ -14,224 +11,206 @@ String pmtaskViewModelToJson(PmtaskViewModel data) =>
 class PmtaskViewModel {
   int? id;
   int? facility_id;
-  String? facility_name;
-  String? maintenance_order_number;
-  String? schedule_date;
-  String? completed_date;
-  int? equipment_id;
-  String? equipment_name;
+  String? task_code;
+  String? plan_title;
+  String? last_done_date;
+  String? due_date;
+  String? done_date;
+
   int? category_id;
   String? category_name;
   int? frequency_id;
   String? frequency_name;
+  int? assigned_to_id;
+
   String? assigned_to_name;
   int? permit_id;
   String? permit_code;
   int? status;
-  String? status_name;
-  // String? schedule_link_job;
-  int? is_custom_check_point;
-  int? is_file_required;
-  int? checklist_id;
-  String? checklist_name;
-  List<ScheduleCheckPoint>? schedule_check_points;
-  List<HistoryLog>? history_log;
-  List<Files>? files;
+  String? status_short;
+
+  List<ScheduleCheckPoint>? schedules;
 
   PmtaskViewModel(
       {this.assigned_to_name,
       this.category_id,
       this.category_name,
-      this.completed_date,
-      this.equipment_id,
-      this.equipment_name,
-      this.facility_name,
       this.frequency_id,
       this.frequency_name,
-      this.history_log,
       this.id,
-      this.maintenance_order_number,
       this.permit_code,
       this.permit_id,
-      this.schedule_check_points,
-      this.schedule_date,
-      // this.schedule_link_job,
       this.status,
-      this.status_name,
-      this.checklist_id,
-      this.checklist_name,
       this.facility_id,
-      // this.files,
-      this.is_custom_check_point,
-      this.is_file_required});
+      this.assigned_to_id,
+      this.done_date,
+      this.due_date,
+      this.last_done_date,
+      this.plan_title,
+      this.status_short,
+      this.task_code,
+      this.schedules});
 
   factory PmtaskViewModel.fromJson(Map<String, dynamic> json) =>
       PmtaskViewModel(
         assigned_to_name: json["assigned_to_name"] ?? "",
         category_id: json["category_id"] ?? "",
         category_name: json["category_name"] ?? "",
-        completed_date: json["completed_date"] != null
-            ? Utility.getFormatedyearMonthDay(json["completed_date"])
-            : "--",
-        equipment_id: json["equipment_id"] ?? "",
-        equipment_name: json["equipment_name"] ?? "",
-        facility_name: json["facility_name"] ?? "",
         frequency_id: json["frequency_id"] ?? "",
         frequency_name: json["frequency_name"] ?? "",
         id: json["id"] ?? "",
-        maintenance_order_number: json["maintenance_order_number"] ?? "",
         permit_code: json["permit_code"] ?? "",
         permit_id: json["permit_id"] ?? "",
-        schedule_date: Utility.getFormatedyearMonthDay(json["schedule_date"]),
-        // schedule_link_job: json["schedule_link_job"] ?? "",
-        status: json["status"] ?? "", facility_id: json["facility_id"] ?? "",
-
-        status_name: json["status_name"] ?? "",
-        is_custom_check_point: json["is_custom_check_point"],
-        is_file_required: json["is_file_required"],
-        checklist_id: json["checklist_id"],
-        checklist_name: json["checklist_name"],
-
-        schedule_check_points: List<ScheduleCheckPoint>.from(
-            json["schedule_check_points"]
-                .map((x) => ScheduleCheckPoint.fromJson(x))),
-        history_log: List<HistoryLog>.from(
-            json["history_log"].map((x) => HistoryLog.fromJson(x))),
-        //  files: List<Files>.from(json["files"].map((x) => Files.fromJson(x)))
+        status: json["status"] ?? "",
+        facility_id: json["facility_id"] ?? "",
+        assigned_to_id: json["assigned_to_id"] ?? "",
+        done_date: json["done_date"] ?? "",
+        due_date: json["due_date"] ?? "",
+        last_done_date: json["last_done_date"] ?? "",
+        plan_title: json["plan_title"] ?? "",
+        status_short: json["status_short"] ?? "",
+        task_code: json["task_code"] ?? "",
+        schedules: List<ScheduleCheckPoint>.from(
+            json["schedules"].map((x) => ScheduleCheckPoint.fromJson(x))),
       );
 
   Map<String, dynamic> toJson() => {
         "assigned_to_name": assigned_to_name,
         "category_id": category_id,
         "category_name": category_name,
-        "completed_date": completed_date,
-        "equipment_id": equipment_id,
-        "equipment_name": equipment_name,
-        "facility_name": facility_name,
+        "assigned_to_id": assigned_to_id,
+        "done_date": done_date,
+        "due_date": due_date,
+        "last_done_date": last_done_date,
         "frequency_id": frequency_id,
         "frequency_name": frequency_name,
         "facility_id": facility_id,
         "id": id,
-        "maintenance_order_number": maintenance_order_number,
+        "plan_title": plan_title,
         "permit_code": permit_code,
         "permit_id": permit_id,
-        "schedule_date": schedule_date,
-        // "schedule_link_job": schedule_link_job,
+        "status_short": status_short,
         "status": status,
-        "status_name": status_name,
-        "is_custom_check_point": is_custom_check_point,
-        "is_file_required": is_file_required,
-        "checklist_id": checklist_id,
-        "checklist_name": checklist_name,
-        "history_log":
-            List<dynamic>.from(history_log?.map((x) => x.toJson()) ?? []),
-        "schedule_check_points":
-            List<dynamic>.from(schedule_check_points?.map((x) => x) ?? []),
+        "task_code": task_code,
+        "schedules":
+            List<dynamic>.from(schedules?.map((x) => x.toJson()) ?? []),
       };
 }
 
 class ScheduleCheckPoint {
+  int? schedule_id;
+  int? clone_of_asset;
+  String? clone_of_name;
+  String? asset_name;
+  String? checklist_name;
+  List<ChecklistObservation>? checklist_observation;
+  List<ScheduleLinkJob>? schedule_link_job;
+
+  ScheduleCheckPoint(
+      {this.asset_name,
+      this.checklist_name,
+      this.clone_of_asset,
+      this.clone_of_name,
+      this.schedule_id,
+      this.checklist_observation,
+      this.schedule_link_job});
+
+  factory ScheduleCheckPoint.fromJson(Map<String, dynamic> json) =>
+      ScheduleCheckPoint(
+          asset_name: json["asset_name"] ?? '',
+          checklist_name: json["checklist_name"] ?? '',
+          clone_of_asset: json["clone_of_asset"] ?? 0,
+          clone_of_name: json["clone_of_name"] ?? '',
+          schedule_id: json["schedule_id"] ?? 0,
+          checklist_observation: List<ChecklistObservation>.from(
+              json["checklist_observation"]
+                  .map((x) => ChecklistObservation.fromJson(x))),
+          schedule_link_job: List<ScheduleLinkJob>.from(
+              json["schedule_link_job"]
+                  .map((x) => ScheduleLinkJob.fromJson(x))));
+
+  Map<String, dynamic> toJson() => {
+        "asset_name": asset_name,
+        "checklist_name": checklist_name,
+        "clone_of_asset": clone_of_asset,
+        "clone_of_name": clone_of_name,
+        "schedule_id": schedule_id,
+        "checklist_observation": List<dynamic>.from(
+            checklist_observation?.map((x) => x.toJson()) ?? []),
+        "schedule_link_job":
+            List<dynamic>.from(schedule_link_job?.map((x) => x.toJson()) ?? []),
+      };
+}
+
+class ChecklistObservation {
   int? execution_id;
   int? check_point_id;
   String? check_point_name;
   String? requirement;
-  RxInt linked_job_id = RxInt(0);
+  int? failure_waightage;
+  List<Files>? files;
+
+  int? check_point_type;
+  int? type_range;
+  int? type_bool;
+  dynamic type_text;
   String? observation;
+  int? linked_job_id;
   int? is_custom_check_point;
   int? is_file_required;
   TextEditingController? observation_value_controller;
-
-  ScheduleCheckPoint(
+  ChecklistObservation(
       {this.check_point_id,
-      this.execution_id,
       this.check_point_name,
+      this.check_point_type,
+      this.execution_id,
+      this.failure_waightage,
       this.is_custom_check_point,
       this.is_file_required,
-      required int linked_job_id,
+      this.linked_job_id,
       this.observation,
-      this.observation_value_controller,
-      this.requirement}) {
-    this.linked_job_id.value = linked_job_id;
-  }
+      this.requirement,
+      this.type_bool,
+      this.type_range,
+      this.type_text,
+      this.files,
+      this.observation_value_controller});
 
-  factory ScheduleCheckPoint.fromJson(Map<String, dynamic> json) =>
-      ScheduleCheckPoint(
+  factory ChecklistObservation.fromJson(Map<String, dynamic> json) =>
+      ChecklistObservation(
           check_point_id: json["check_point_id"] ?? 0,
           check_point_name: json["check_point_name"] ?? '',
-          is_file_required: json["is_file_required"] ?? 0,
+          check_point_type: json["check_point_type"] ?? 0,
+          execution_id: json["execution_id"] ?? '',
+          failure_waightage: json["failure_waightage"] ?? 0,
           is_custom_check_point: json["is_custom_check_point"] ?? 0,
+          is_file_required: json["is_file_required"] ?? 0,
           linked_job_id: json["linked_job_id"] ?? 0,
-          observation: json["observation"] ?? "",
-          requirement: json["requirement"] ?? "",
-          execution_id: json["execution_id"] ?? "",
+          observation: json["observation"] ?? '',
+          requirement: json["requirement"] ?? '',
+          type_bool: json["type_bool"] ?? 0,
+          type_range: json["type_range"] ?? 0,
+          type_text: json["type_text"],
           observation_value_controller: TextEditingController(
             text: json['observation'],
-          ));
+          ),
+          files: List<Files>.from(json["files"].map((x) => Files.fromJson(x))));
 
   Map<String, dynamic> toJson() => {
         "check_point_id": check_point_id,
         "check_point_name": check_point_name,
-        "is_file_required": is_file_required,
+        "check_point_type": check_point_type,
+        "execution_id": execution_id,
+        "failure_waightage": failure_waightage,
         "is_custom_check_point": is_custom_check_point,
+        "is_file_required": is_file_required,
         "linked_job_id": linked_job_id,
         "observation": observation,
         "requirement": requirement,
-        "execution_id": execution_id
-      };
-}
-
-class HistoryLog {
-  int? id;
-  int? module_type;
-  int? module_ref_id;
-  int? secondary_module_type;
-  String? comment;
-  int? created_by_id;
-  String? created_by_name;
-  String? created_at;
-  int? status;
-  String? latitude;
-  String? longitude;
-
-  HistoryLog(
-      {this.comment,
-      this.created_at,
-      this.created_by_id,
-      this.created_by_name,
-      this.id,
-      this.latitude,
-      this.longitude,
-      this.module_ref_id,
-      this.module_type,
-      this.secondary_module_type,
-      this.status});
-
-  factory HistoryLog.fromJson(Map<String, dynamic> json) => HistoryLog(
-        comment: json["comment"] ?? "",
-        created_at: Utility.getFormatedyearMonthDay(json["created_at"]),
-        created_by_id: json["created_by_id"] ?? "",
-        created_by_name: json["created_by_name"] ?? "",
-        id: json["id"] ?? "",
-        latitude: json["latitude"] ?? "",
-        longitude: json["longitude"] ?? "",
-        module_ref_id: json["module_ref_id"] ?? "",
-        module_type: json["module_type"] ?? "",
-        secondary_module_type: json["secondary_module_type"] ?? "",
-        status: json["status"] ?? "",
-      );
-
-  Map<String, dynamic> toJson() => {
-        "status": status,
-        "secondary_module_type": secondary_module_type,
-        "module_type": module_type,
-        "module_ref_id": module_ref_id,
-        "longitude": longitude,
-        "latitude": latitude,
-        "id": id,
-        "created_by_name": created_by_name,
-        "created_by_id": created_by_id,
-        "created_at": created_at,
-        "comment": comment,
+        "type_bool": type_bool,
+        "type_range": type_range,
+        "type_text": type_text,
+        "files": List<dynamic>.from(files?.map((x) => x.toJson()) ?? []),
       };
 }
 
@@ -252,5 +231,37 @@ class Files {
         "_event": event,
         "file_path": file_path,
         "file_description": file_description
+      };
+}
+
+class ScheduleLinkJob {
+  int? job_id;
+  String? job_title;
+  String? job_description;
+  String? job_date;
+  String? job_status;
+
+  ScheduleLinkJob(
+      {this.job_date,
+      this.job_description,
+      this.job_id,
+      this.job_status,
+      this.job_title});
+
+  factory ScheduleLinkJob.fromJson(Map<String, dynamic> json) =>
+      ScheduleLinkJob(
+        job_date: json["_job_date"],
+        job_description: json["job_description"],
+        job_id: json["job_id"],
+        job_status: json["job_status"],
+        job_title: json["job_title"],
+      );
+
+  Map<String, dynamic> toJson() => {
+        "job_title": job_title,
+        "job_status": job_status,
+        "job_id": job_id,
+        "job_description": job_description,
+        "job_date": job_date
       };
 }

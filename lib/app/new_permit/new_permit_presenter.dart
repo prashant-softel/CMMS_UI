@@ -214,6 +214,18 @@ class NewPermitPresenter {
     );
   }
 
+  Future<Map<String, dynamic>?> createNewPermitForPm({
+    newPermit,
+    required int pmTaskId,
+    required bool isLoading,
+  }) async {
+    return newPermitUsecase.createNewPermitForPm(
+      newPermit: newPermit,
+      pmTaskId: pmTaskId,
+      isLoading: isLoading,
+    );
+  }
+
   Future<Map<String, dynamic>?> updateNewPermit({
     newPermit,
     required bool isLoading,

@@ -3,6 +3,8 @@ import 'package:cmms/app/theme/dimens.dart';
 import 'package:cmms/app/widgets/custom_richtext.dart';
 import 'package:cmms/app/widgets/date_picker.dart';
 import 'package:cmms/domain/models/pm_task_model.dart';
+import 'package:cmms/domain/models/pm_task_view_list_model.dart';
+import 'package:data_table_2/data_table_2.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:get/get.dart';
@@ -32,8 +34,10 @@ class _PreventiveMaintenanceTaskContentWebState
     return GetBuilder<PreventiveMaintenanceTaskController>(
         id: 'PreventiveMaintenanceTask',
         builder: (controller) {
-          return Obx(
-            () => Column(
+          return Obx(() {
+            final dataSource = PmTaskDataSource(controller);
+
+            return Column(
               children: [
                 Container(
                   height: 45,
@@ -158,15 +162,62 @@ class _PreventiveMaintenanceTaskContentWebState
                                           onPressed: () {},
                                           text: 'PDF'),
                                     ),
-                                    Container(
-                                      height: 35,
-                                      margin: EdgeInsets.only(left: 10),
-                                      child: CustomElevatedButton(
-                                        backgroundColor:
-                                            ColorValues.appLightBlueColor,
-                                        onPressed: () {},
-                                        text: 'columnVisibility'.tr,
+                                    PopupMenuButton<String>(
+                                      tooltip: "",
+                                      elevation: 25.0,
+                                      child: Container(
+                                        height: 35,
+                                        margin: EdgeInsets.only(left: 10),
+                                        padding: EdgeInsets.only(
+                                            top: 4,
+                                            bottom: 4,
+                                            right: 8,
+                                            left: 8),
+                                        decoration: BoxDecoration(
+                                          color: ColorValues.appLightBlueColor,
+                                          borderRadius:
+                                              BorderRadius.circular(5),
+                                        ),
+                                        child: Text(
+                                          'Column Visibility',
+                                          style: TextStyle(
+                                            color: Colors.white,
+                                            fontSize: 16,
+                                            fontWeight: FontWeight.w400,
+                                          ),
+                                        ),
                                       ),
+                                      itemBuilder: (BuildContext context) => <
+                                          PopupMenuEntry<String>>[]..addAll(
+                                            controller
+                                                .columnVisibility.value.entries
+                                                .map((e) {
+                                          return PopupMenuItem<String>(
+                                              child: ValueListenableBuilder(
+                                                  valueListenable: controller
+                                                      .columnVisibility,
+                                                  builder:
+                                                      (context, value, child) {
+                                                    return Row(
+                                                      children: [
+                                                        Checkbox(
+                                                          value: value[e.key],
+                                                          onChanged:
+                                                              (newValue) {
+                                                            controller
+                                                                .setColumnVisibility(
+                                                                    e.key,
+                                                                    newValue!);
+                                                          },
+                                                        ),
+                                                        Text(e.key),
+                                                      ],
+                                                    );
+                                                  }));
+                                        })),
+                                      onSelected: (String value) {
+                                        // Handle column selection
+                                      },
                                     ),
                                     Spacer(),
                                     Container(
@@ -199,368 +250,56 @@ class _PreventiveMaintenanceTaskContentWebState
                                 SizedBox(
                                   height: 20,
                                 ),
-                                Expanded(
-                                  child: Container(
-                                    margin: Dimens.edgeInsets15,
-                                    decoration: BoxDecoration(
-                                      border: Border.all(
-                                        color: ColorValues
-                                            .lightGreyColorWithOpacity35,
-                                        width: 1,
-                                      ),
-                                      boxShadow: [
-                                        BoxShadow(
-                                          color: ColorValues
-                                              .appBlueBackgroundColor,
-                                          spreadRadius: 2,
-                                          blurRadius: 5,
-                                          offset: Offset(0, 2),
-                                        ),
-                                      ],
-                                    ),
-                                    child: controller.pmTaskList.isEmpty
-                                        ? ScrollableTableView(
-                                            columns: [
-                                              "Order Number",
-                                              "Due Date",
-                                              "Done Date",
-                                              "Equipment Name",
-                                              "Order Frequency",
-                                              "PTW",
-                                              "Status",
-                                              "Action",
-                                            ].map((column) {
-                                              return TableViewColumn(
-                                                label: column,
-                                                minWidth: Get.width * 0.16,
+                                controller.pmTaskList.isEmpty == true
+                                    ? Center(child: Text('No data'))
+                                    : Expanded(
+                                        child: ValueListenableBuilder(
+                                            valueListenable:
+                                                controller.columnVisibility,
+                                            builder: (context, value, child) {
+                                              final dataSource =
+                                                  PmTaskDataSource(controller);
+
+                                              return PaginatedDataTable2(
+                                                // fixedLeftColumns: 1,
+                                                dataRowHeight:
+                                                    Get.height * 0.10,
+                                                columnSpacing: 10,
+                                                source:
+                                                    dataSource, // Custom DataSource class
+                                                headingRowHeight:
+                                                    Get.height * 0.12,
+                                                minWidth:
+                                                    2000, //Get.width * 1.2,
+                                                showCheckboxColumn: false,
+                                                rowsPerPage:
+                                                    10, // Number of rows per page
+                                                availableRowsPerPage: [
+                                                  10,
+                                                  20,
+                                                  30,
+                                                  50
+                                                ],
+                                                columns: [
+                                                  for (var entry
+                                                      in value.entries)
+                                                    if (entry.value)
+                                                      buildDataColumn(
+                                                        entry.key,
+                                                        controller.filterText[
+                                                            entry.key]!,
+                                                        controller.columnwidth[
+                                                            entry.key],
+                                                      ),
+                                                  buildDataColumn(
+                                                    'Actions',
+                                                    controller.titleFilterText,
+                                                    200,
+                                                  ),
+                                                ],
                                               );
-                                            }).toList(),
-                                            rows: [
-                                              ...List.generate(
-                                                controller.pmTaskList.length,
-                                                (index) {
-                                                  return [
-                                                    '',
-                                                    '',
-                                                    '',
-                                                    '',
-                                                    '',
-                                                    '',
-                                                    '',
-                                                    '',
-                                                  ];
-                                                },
-                                              ),
-                                            ].map((record) {
-                                              return TableViewRow(
-                                                height: 60,
-                                                cells: record.map((value) {
-                                                  return TableViewCell(
-                                                    child: Text(value),
-                                                  );
-                                                }).toList(),
-                                              );
-                                            }).toList(),
-                                          )
-                                        : ScrollableTableView(
-                                            // paginationController:
-                                            //     controller.paginationController,
-                                            columns: [
-                                              "Order Number",
-                                              "Due Date",
-                                              "Done Date",
-                                              "Equipment Name",
-                                              "Order Frequency",
-                                              "Assigned To",
-                                              "PTW",
-                                              "Action",
-                                            ].map((column) {
-                                              return TableViewColumn(
-                                                minWidth: Get.width * 0.15,
-                                                label: column,
-                                              );
-                                            }).toList(),
-                                            rows: //
-                                                controller.pmTaskList
-                                                    .map(
-                                                        (pmTaskDetails) =>
-                                                            TableViewRow(
-                                                                onTap: () {
-                                                                  int scheduleId =
-                                                                      pmTaskDetails
-                                                                              ?.id ??
-                                                                          0;
-                                                                  final _flutterSecureStorage =
-                                                                      const FlutterSecureStorage();
-
-                                                                  _flutterSecureStorage
-                                                                      .delete(
-                                                                          key:
-                                                                              "scheduleId");
-                                                                  if (scheduleId !=
-                                                                      null) {
-                                                                    Get.toNamed(
-                                                                        Routes
-                                                                            .pmTaskView,
-                                                                        arguments: {
-                                                                          'scheduleId':
-                                                                              scheduleId
-                                                                        });
-                                                                  }
-                                                                },
-                                                                height: 60,
-                                                                cells: [
-                                                                  TableViewCell(
-                                                                      child:
-                                                                          Column(
-                                                                    children: [
-                                                                      Text(
-                                                                        '${pmTaskDetails?.maintenance_order_number}',
-                                                                      ),
-                                                                      Dimens
-                                                                          .boxHeight10,
-                                                                      Align(
-                                                                        alignment:
-                                                                            Alignment.centerRight,
-                                                                        child:
-                                                                            Container(
-                                                                          padding:
-                                                                              Dimens.edgeInsets8_2_8_2,
-                                                                          decoration:
-                                                                              BoxDecoration(
-                                                                            color:
-                                                                                ColorValues.addNewColor,
-                                                                            borderRadius:
-                                                                                BorderRadius.circular(4),
-                                                                          ),
-                                                                          child:
-                                                                              Text(
-                                                                            '${pmTaskDetails?.status_name}',
-                                                                            style:
-                                                                                Styles.white10.copyWith(
-                                                                              color: Colors.white,
-                                                                            ),
-                                                                          ),
-                                                                        ),
-                                                                      ),
-                                                                    ],
-                                                                  )),
-                                                                  //
-                                                                  TableViewCell(
-                                                                      child: Text(
-                                                                          "${pmTaskDetails?.schedule_date ?? ""}")),
-                                                                  TableViewCell(
-                                                                      child: Text(
-                                                                          '${pmTaskDetails?.completed_date}')),
-                                                                  TableViewCell(
-                                                                      child: Text(
-                                                                          '${pmTaskDetails?.equipment_name}')),
-                                                                  TableViewCell(
-                                                                      child:
-                                                                          Text(
-                                                                    '${pmTaskDetails?.frequency_name}',
-                                                                  )),
-                                                                  TableViewCell(
-                                                                      child:
-                                                                          Text(
-                                                                    '${pmTaskDetails?.assigned_to_name}',
-                                                                  )),
-                                                                  TableViewCell(
-                                                                      child:
-                                                                          Text(
-                                                                    '${pmTaskDetails?.permit_code}',
-                                                                  )),
-                                                                  TableViewCell(
-                                                                      child: Wrap(
-                                                                          children: [
-                                                                        TableActionButton(
-                                                                          color:
-                                                                              ColorValues.viewColor,
-                                                                          icon:
-                                                                              Icons.remove_red_eye_outlined,
-                                                                          message:
-                                                                              'View',
-                                                                          onPress:
-                                                                              () {
-                                                                            int scheduleId =
-                                                                                pmTaskDetails?.id ?? 0;
-                                                                            final _flutterSecureStorage =
-                                                                                const FlutterSecureStorage();
-
-                                                                            _flutterSecureStorage.delete(key: "scheduleId");
-                                                                            if (scheduleId !=
-                                                                                null) {
-                                                                              Get.toNamed(Routes.pmTaskView, arguments: {
-                                                                                'scheduleId': scheduleId
-                                                                              });
-                                                                            }
-                                                                            // controller.pmTaskView();
-                                                                          },
-                                                                        ),
-                                                                        TableActionButton(
-                                                                          color:
-                                                                              ColorValues.appYellowColor,
-                                                                          icon:
-                                                                              Icons.edit,
-                                                                          message:
-                                                                              'Edit',
-                                                                          onPress:
-                                                                              () {},
-                                                                        ),
-                                                                         TableActionButton(
-                                                                          color:
-                                                                              ColorValues.linktopermitColor,
-                                                                          icon:
-                                                                              Icons.link,
-                                                                          message:
-                                                                              'Link To Permit',
-                                                                          onPress:
-                                                                              () {},
-                                                                        ),
-                                                                        TableActionButton(
-                                                                          color:
-                                                                              ColorValues.deleteColor,
-                                                                          icon:
-                                                                              Icons.delete,
-                                                                          message:
-                                                                              'Delete',
-                                                                          onPress:
-                                                                              () {},
-                                                                        ),
-                                                                        // TableActionButton(
-                                                                        //   color: ColorValues
-                                                                        //       .appLightBlueColor,
-                                                                        //   icon: Icons
-                                                                        //       .access_time_filled_outlined,
-                                                                        //   message: 'History',
-                                                                        //   onPress: () {},
-                                                                        // ),
-                                                                        controller.pmTaskList
-                                                                                    .firstWhere(
-                                                                                      (e) => e?.id == pmTaskDetails!.id,
-                                                                                      orElse: () => PmTaskListModel(id: 00),
-                                                                                    )
-                                                                                    ?.status ==
-                                                                                163
-                                                                            ? TableActionButton(
-                                                                                color: ColorValues.executeColor,
-                                                                                icon: Icons.remove_red_eye_outlined,
-                                                                                message: 'Execute',
-                                                                                onPress: () {
-                                                                                  final _flutterSecureStorage = const FlutterSecureStorage();
-
-                                                                                  _flutterSecureStorage.delete(key: "scheduleId");
-
-                                                                                  int scheduleId = pmTaskDetails?.id ?? 0;
-                                                                                  if (scheduleId != null) {
-                                                                                    Get.toNamed(Routes.pmExecution, arguments: {
-                                                                                      'scheduleId': scheduleId
-                                                                                    });
-                                                                                  }
-                                                                                },
-                                                                              )
-                                                                            : Dimens.box0,
-                                                                        // controller.pmTaskList
-                                                                        //             .firstWhere(
-                                                                        //               (e) => e?.id == pmTaskDetails!.id,
-                                                                        //               orElse: () => PmTaskListModel(id: 00),
-                                                                        //             )
-                                                                        //             ?.status ==
-                                                                        //         163
-                                                                        //     ? TableActionButton(
-                                                                        //         color: ColorValues.linktopermitColor,
-                                                                        //         icon: Icons.link_sharp,
-                                                                        //         message: 'Link To Permit',
-                                                                        //         onPress: () {
-                                                                        //           controller.permitscheduleId = pmTaskDetails?.id ?? 0;
-
-                                                                        //           controller.showPermitsDialog();
-                                                                        //         },
-                                                                        //       )
-                                                                        // //     : Dimens.box0,
-                                                                        // TableActionButton(
-                                                                        //   color: ColorValues
-                                                                        //       .pendingColor,
-                                                                        //   icon: Icons
-                                                                        //       .numbers_outlined,
-                                                                        //   message:
-                                                                        //       'PM Pending Jobs',
-                                                                        //   onPress:
-                                                                        //       () {},
-                                                                        // ),
-                                                                      ]))
-                                                                ]))
-                                                    .toList()),
-                                  ),
-                                ),
-                                Padding(
-                                  padding: const EdgeInsets.symmetric(
-                                      horizontal: 25),
-                                  child: ValueListenableBuilder(
-                                      valueListenable:
-                                          controller.paginationController,
-                                      builder: (context, value, child) {
-                                        return Row(children: [
-                                          Text(
-                                              "${controller.paginationController.currentPage}  of ${controller.paginationController.pageCount}"),
-                                          Row(children: [
-                                            IconButton(
-                                              onPressed: controller
-                                                          .paginationController
-                                                          .currentPage <=
-                                                      1
-                                                  ? null
-                                                  : () {
-                                                      controller
-                                                          .paginationController
-                                                          .previous();
-                                                    },
-                                              iconSize: 20,
-                                              splashRadius: 20,
-                                              icon: Icon(
-                                                Icons
-                                                    .arrow_back_ios_new_rounded,
-                                                color: controller
-                                                            .paginationController
-                                                            .currentPage <=
-                                                        1
-                                                    ? Colors.black26
-                                                    : Theme.of(context)
-                                                        .primaryColor,
-                                              ),
-                                            ),
-                                            IconButton(
-                                              onPressed: controller
-                                                          .paginationController
-                                                          .currentPage >=
-                                                      controller
-                                                          .paginationController
-                                                          .pageCount
-                                                  ? null
-                                                  : () {
-                                                      controller
-                                                          .paginationController
-                                                          .next();
-                                                    },
-                                              iconSize: 20,
-                                              splashRadius: 20,
-                                              icon: Icon(
-                                                Icons.arrow_forward_ios_rounded,
-                                                color: controller
-                                                            .paginationController
-                                                            .currentPage >=
-                                                        controller
-                                                            .paginationController
-                                                            .pageCount
-                                                    ? Colors.black26
-                                                    : Theme.of(context)
-                                                        .primaryColor,
-                                              ),
-                                            ),
-                                          ]),
-                                        ]);
-                                      }),
-                                ),
+                                            }),
+                                      )
                               ],
                             ),
                           ),
@@ -613,8 +352,272 @@ class _PreventiveMaintenanceTaskContentWebState
                   ),
                 ),
               ],
-            ),
-          );
+            );
+          });
         });
   }
+
+  DataColumn2 buildDataColumn(
+    // String columnName,
+    String header,
+
+    /// ColumnSize columnSize,
+    RxString filterText,
+    double? fixedWidth,
+    //  {required Function(String) onSearchCallBack}
+  ) {
+    return //
+        DataColumn2(
+      // size: columnSize,
+      fixedWidth: fixedWidth,
+
+      label: //
+          Column(
+              mainAxisAlignment: MainAxisAlignment.center, //
+              children: [
+            SizedBox(
+              height: Get.height * 0.05,
+              child: TextField(
+                onChanged: (value) {
+                  filterText.value = value;
+                  //   onSearchCallBack(value);
+                },
+                textAlign: TextAlign.left,
+                style: TextStyle(height: 1.0),
+                decoration: InputDecoration(
+                  hintText: 'Filter',
+                  contentPadding: EdgeInsets.fromLTRB(
+                      5, 0, 5, 0), // Reduced vertical padding
+                  border: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(5),
+                    borderSide: BorderSide(color: Colors.black),
+                  ),
+                  focusedBorder: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(5),
+                    borderSide: BorderSide(color: Colors.black),
+                  ),
+                  enabledBorder: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(5),
+                    borderSide: BorderSide(color: Colors.black),
+                  ),
+                ),
+              ),
+            ),
+            Align(
+              alignment: Alignment.centerLeft,
+              child: Text(
+                header,
+                style: Styles.black16W500,
+              ),
+            ),
+          ]),
+      // ),
+    );
+  }
+}
+
+class PmTaskDataSource extends DataTableSource {
+  final PreventiveMaintenanceTaskController controller;
+
+  late List<PmTaskListModel?> filteredPmTaskList;
+
+  PmTaskDataSource(this.controller) {
+    filterpmTasks();
+  }
+
+  ///
+  void filterpmTasks() {
+    filteredPmTaskList = <PmTaskListModel?>[];
+    filteredPmTaskList = controller.pmTaskList.where((pmTask) {
+      return (pmTask?.id ?? '')
+                  .toString()
+                  .toLowerCase()
+                  .contains(controller.idFilterText.value.toLowerCase()) &&
+              (pmTask?.plan_title ?? '')
+                  .toLowerCase()
+                  .contains(controller.titleFilterText.value.toLowerCase()) &&
+              (pmTask?.last_done_date ?? '').toString().toLowerCase().contains(
+                  controller.lastDoneDateFilterText.value.toLowerCase()) &&
+              (pmTask?.due_date ?? '')
+                  .toString()
+                  .toLowerCase()
+                  .contains(controller.dueDateFilterText.value.toLowerCase()) &&
+              (pmTask?.done_date ?? '').toString().toLowerCase().contains(
+                  controller.doneDateFilterText.value.toLowerCase()) &&
+              (pmTask?.frequency_name ?? '').toLowerCase().contains(
+                  controller.frequencyFilterText.value.toLowerCase()) &&
+              (pmTask?.assigned_to_name ?? '')
+                  .toLowerCase()
+                  .contains(controller.assignFilterText.value.toLowerCase())
+          //      &&
+          // (pmTask?. ?? '')
+          //     .toLowerCase()
+          //     .contains(controller.frequencyFilterText.value.toLowerCase())
+          ;
+
+      // Add other filter conditions as needed
+    }).toList();
+  }
+
+  @override
+  DataRow? getRow(int index) {
+    // print({"getRow call"});
+    final pmTaskDetails = filteredPmTaskList[index];
+
+    controller.pmTaskId.value = pmTaskDetails?.id ?? 0;
+    var cellsBuffer = [
+      "pmTaskId", // '${pmTaskDetails?.id ?? ''}',
+      '${pmTaskDetails?.plan_title ?? ''}',
+      '${pmTaskDetails?.last_done_date ?? ''}',
+      '${pmTaskDetails?.due_date ?? ''}',
+      '${pmTaskDetails?.done_date ?? ''}',
+      '${pmTaskDetails?.frequency_name ?? ''}',
+      '${pmTaskDetails?.assigned_to_name ?? ''}',
+      '${''}',
+      'Actions',
+    ];
+    var cells = [];
+    int i = 0;
+
+    for (var entry in controller.columnVisibility.value.entries) {
+      // print({"entry.value entry": entry});
+      if (entry.key == "search") {
+        return null;
+      }
+      if (entry.value) {
+        // print({"entry.value removed": entry.key});
+        cells.add(cellsBuffer[i]);
+      }
+      i++;
+    }
+    cells.add('Actions');
+
+    // print({"cell": cells});
+    return DataRow.byIndex(
+      index: index,
+      cells: cells.map((value) {
+        return DataCell(
+          Padding(
+            padding: EdgeInsets.zero,
+            child: (value == 'pmTaskId')
+                ? Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text(
+                        '${pmTaskDetails?.id}',
+                      ),
+                      Dimens.boxHeight5,
+                      Align(
+                        alignment: Alignment.centerRight,
+                        child: Container(
+                          padding: Dimens.edgeInsets8_2_8_2,
+                          decoration: BoxDecoration(
+                            color:
+                                //  controller.pmTaskList
+                                //             .firstWhere(
+                                //               (e) =>
+                                //                   e?.Task_id ==
+                                //                   pmTaskDetails?.Task_id,
+                                //               orElse: () =>
+                                //                   PmTaskListModel(Task_id: 00),
+                                //             )
+                                //             ?.status_id ==
+                                //         406
+                                //     ? ColorValues.rejectedStatusColor
+                                //     : controller.pmTaskList
+                                //                 .firstWhere(
+                                //                   (e) =>
+                                //                       e?.Task_id ==
+                                //                       pmTaskDetails?.Task_id,
+                                //                   orElse: () =>
+                                //                       PmTaskListModel(Task_id: 00),
+                                //                 )
+                                //                 ?.status_id ==
+                                //             401
+                                //         ? ColorValues.appLightBlueColor
+                                //         : controller.pmTaskList
+                                //                     .firstWhere(
+                                //                       (e) =>
+                                //                           e?.Task_id ==
+                                //                           pmTaskDetails?.Task_id,
+                                //                       orElse: () => PmTaskListModel(
+                                //                           Task_id: 00),
+                                //                     )
+                                //                     ?.status_id ==
+                                //                 405
+                                //             ? ColorValues.approveStatusColor
+                                //             :
+                                ColorValues.addNewColor,
+                            borderRadius: BorderRadius.circular(4),
+                          ),
+                          child: Text(
+                            '${pmTaskDetails?.status_short}${pmTaskDetails?.status}',
+                            style: Styles.white10.copyWith(
+                              color: Colors.white,
+                            ),
+                          ),
+                        ),
+                      ),
+                    ],
+                  )
+                : (value == 'Actions')
+                    ? Wrap(children: [
+                        TableActionButton(
+                          color: ColorValues.viewColor,
+                          icon: Icons.remove_red_eye_outlined,
+                          message: 'View',
+                          onPress: () {
+                            final _flutterSecureStorage =
+                                const FlutterSecureStorage();
+
+                            _flutterSecureStorage.delete(key: "pmTaskId");
+                            int pmTaskId = pmTaskDetails?.id ?? 0;
+                            if (pmTaskId != 0) {
+                              Get.toNamed(Routes.pmTaskView,
+                                  arguments: {'pmTaskId': pmTaskId});
+                            }
+                          },
+                        ),
+                        TableActionButton(
+                          color: ColorValues.appGreenColor,
+                          icon: Icons.remove_red_eye_outlined,
+                          message: 'Execute',
+                          onPress: () {
+                            final _flutterSecureStorage =
+                                const FlutterSecureStorage();
+
+                            _flutterSecureStorage.delete(key: "pmTaskId");
+                            int pmTaskId = pmTaskDetails?.id ?? 0;
+                            if (pmTaskId != 0) {
+                              Get.toNamed(Routes.pmExecution,
+                                  arguments: {'pmTaskId': pmTaskId});
+                            }
+                          },
+                        ),
+                      ])
+                    : Text(value.toString()),
+          ),
+        );
+      }).toList(),
+      //   ],
+      onSelectChanged: (_) {
+        final _flutterSecureStorage = const FlutterSecureStorage();
+
+        _flutterSecureStorage.delete(key: "pmTaskId");
+        int pmTaskId = pmTaskDetails?.id ?? 0;
+        if (pmTaskId != 0) {
+          Get.toNamed(Routes.pmTaskView, arguments: {'pmTaskId': pmTaskId});
+        }
+      },
+    );
+  }
+
+  @override
+  int get rowCount => filteredPmTaskList.length;
+
+  @override
+  bool get isRowCountApproximate => false;
+
+  @override
+  int get selectedRowCount => 0;
 }

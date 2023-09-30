@@ -1,17 +1,18 @@
-import 'package:cmms/app/pm_task_view/pm_task_view_controller.dart';
 import 'package:cmms/app/theme/color_values.dart';
 import 'package:cmms/app/widgets/custom_elevated_button.dart';
+import 'package:cmms/app/widgets/custom_textField.dart';
 import 'package:data_table_2/data_table_2.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import '../preventive_maintenance_execution/preventive_maintenance_execution_controller.dart';
 import '../theme/dimens.dart';
 import '../theme/styles.dart';
 // import '../view_incident_report/view_incident_report_controller.dart';
 
-class ObservationPMTaskViewDialog extends GetView {
-  ObservationPMTaskViewDialog();
+class ObservationPmExecutionViewDialog extends GetView {
+  ObservationPmExecutionViewDialog();
 
-  final PreventiveMaintenanceTaskViewController controller = Get.find();
+  final PreventiveMaintenanceExecutionController controller = Get.find();
 
   @override
   Widget build(BuildContext context) {
@@ -97,6 +98,7 @@ class ObservationPMTaskViewDialog extends GetView {
                                 ),
                                 Expanded(
                                   child: DataTable2(
+                                    dataRowHeight: 100,
                                     minWidth: 2000,
                                     border: TableBorder.all(
                                         color:
@@ -106,14 +108,6 @@ class ObservationPMTaskViewDialog extends GetView {
                                           fixedWidth: 100,
                                           label: Text(
                                             "Sr.No.",
-                                            style: TextStyle(
-                                                fontSize: 15,
-                                                fontWeight: FontWeight.bold),
-                                          )),
-                                      DataColumn2(
-                                          fixedWidth: 150,
-                                          label: Text(
-                                            "Check Point No.",
                                             style: TextStyle(
                                                 fontSize: 15,
                                                 fontWeight: FontWeight.bold),
@@ -143,9 +137,9 @@ class ObservationPMTaskViewDialog extends GetView {
                                                 fontWeight: FontWeight.bold),
                                           )),
                                       DataColumn2(
-                                          fixedWidth: 150,
+                                          fixedWidth: 200,
                                           label: Text(
-                                            "CP ok?",
+                                            "Upload Images",
                                             style: TextStyle(
                                                 fontSize: 15,
                                                 fontWeight: FontWeight.bold),
@@ -153,7 +147,7 @@ class ObservationPMTaskViewDialog extends GetView {
                                       DataColumn2(
                                           fixedWidth: 200,
                                           label: Text(
-                                            "Upload Images",
+                                            "CP ok ?",
                                             style: TextStyle(
                                                 fontSize: 15,
                                                 fontWeight: FontWeight.bold),
@@ -184,13 +178,8 @@ class ObservationPMTaskViewDialog extends GetView {
                                         DataCell(Text(controller
                                                 .selectedItem
                                                 ?.checklist_observation?[index]
-                                                .check_point_id
+                                                .check_point_name
                                                 .toString() ??
-                                            '')),
-                                        DataCell(Text(controller
-                                                .selectedItem
-                                                ?.checklist_observation?[index]
-                                                .check_point_name ??
                                             '')),
                                         DataCell(Text(controller
                                                 .selectedItem
@@ -203,13 +192,74 @@ class ObservationPMTaskViewDialog extends GetView {
                                                 .failure_waightage
                                                 .toString() ??
                                             '')),
-                                        DataCell(Text('--')),
-                                        DataCell(Text('--')),
-                                        DataCell(Text(controller
-                                                .selectedItem
-                                                ?.checklist_observation?[index]
-                                                .observation ??
-                                            '')),
+                                        DataCell(
+                                          Row(
+                                            mainAxisAlignment:
+                                                MainAxisAlignment.center,
+                                            children: [
+                                              Container(
+                                                decoration: BoxDecoration(
+                                                  borderRadius:
+                                                      BorderRadius.circular(5),
+                                                  color: ColorValues
+                                                      .appDarkBlueColor,
+                                                  border: Border.all(
+                                                    color: ColorValues
+                                                        .appDarkBlueColor,
+                                                    width: 1,
+                                                  ),
+                                                ),
+                                                child: Icon(Icons.upload,
+                                                    size: 30,
+                                                    color:
+                                                        ColorValues.whiteColor),
+                                              ),
+                                              Dimens.boxWidth15,
+                                              Container(
+                                                width: 60,
+                                                decoration: BoxDecoration(
+                                                  borderRadius:
+                                                      BorderRadius.circular(2),
+                                                  color: ColorValues
+                                                      .appDarkBlueColor,
+                                                  border: Border.all(
+                                                    color: ColorValues
+                                                        .appDarkBlueColor,
+                                                    width: 1,
+                                                  ),
+                                                ),
+                                                child: Text(
+                                                  "0 Files",
+                                                  textAlign: TextAlign.center,
+                                                  style:
+                                                      Styles.white12.copyWith(
+                                                    color: Theme.of(context)
+                                                        .textTheme
+                                                        .displaySmall!
+                                                        .color,
+                                                  ),
+                                                ),
+                                              ),
+                                            ],
+                                          ),
+                                        ),
+                                        DataCell(Text('???')),
+                                        DataCell(Padding(
+                                          padding: const EdgeInsets.all(8.0),
+                                          child: LoginCustomTextfield(
+                                            width: (Get.width * .4),
+                                            // textController:
+                                            //     scheduleCheckPointsDetails?.observation_value_controller as TextEditingController,
+                                            maxLine: 5,
+                                          ),
+                                        )
+                                            // Text(controller
+                                            //       .selectedItem
+                                            //       ?.checklist_observation?[index]
+                                            //       .observation ??
+                                            //   ''
+                                            //   )
+                                            ),
                                         DataCell(Text(controller
                                                 .selectedItem
                                                 ?.checklist_observation?[index]

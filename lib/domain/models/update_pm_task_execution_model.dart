@@ -1,18 +1,42 @@
 import 'package:flutter/material.dart';
 
 class UpdatePmExecutionMdel {
-  UpdatePmExecutionMdel({
+  UpdatePmExecutionMdel(
+      {required this.task_id, required this.schedules, this.comment});
+
+  int task_id;
+  String? comment;
+  List<Schedules> schedules;
+
+  factory UpdatePmExecutionMdel.fromJson(Map<String, dynamic> json) {
+    // AddObservations(observation_value_controller: TextEditingController());
+    return UpdatePmExecutionMdel(
+      task_id: json["task_id"],
+      comment: json["comment"],
+      schedules: List<Schedules>.from(
+          json["Schedules"].map((x) => Schedules.fromJson(x))),
+    );
+  }
+  Map<String, dynamic> toJson() => {
+        "task_id": task_id,
+        "comment": comment,
+        "Schedules": List<dynamic>.from(schedules.map((x) => x.toJson())),
+      };
+}
+
+class Schedules {
+  Schedules({
     required this.schedule_id,
-    required this.add_observations,
+    this.add_observations,
   });
 
   int schedule_id;
 
-  List<AddObservations> add_observations;
+  List<AddObservations>? add_observations;
 
-  factory UpdatePmExecutionMdel.fromJson(Map<String, dynamic> json) {
+  factory Schedules.fromJson(Map<String, dynamic> json) {
     AddObservations(observation_value_controller: TextEditingController());
-    return UpdatePmExecutionMdel(
+    return Schedules(
       schedule_id: json["schedule_id"],
       add_observations: List<AddObservations>.from(
           json["add_observations"].map((x) => AddObservations.fromJson(x))),
@@ -21,7 +45,7 @@ class UpdatePmExecutionMdel {
   Map<String, dynamic> toJson() => {
         "schedule_id": schedule_id,
         "add_observations":
-            List<dynamic>.from(add_observations.map((x) => x.toJson())),
+            List<dynamic>.from(add_observations!.map((x) => x.toJson())),
       };
 }
 
