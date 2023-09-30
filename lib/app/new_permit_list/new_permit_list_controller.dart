@@ -41,6 +41,8 @@ class NewPermitListController extends GetxController {
   RxString RequestByNameFilterText = ''.obs;
   RxString ApprovedByNameFilterText = ''.obs;
   RxString CurrentStatusShortFilterText = ''.obs;
+  RxString PtwStatusFilterText = ''.obs;
+
   RxString ActionFilterText = ''.obs;
 
   Rx<DateTime> fromDate = DateTime.now().subtract(Duration(days: 70)).obs;
@@ -330,10 +332,11 @@ class NewPermitListController extends GetxController {
   }
 
   Future<void> viewNewPermitList({int? permitId}) async {
-    Get.toNamed(Routes.viewPermitWebScreen, arguments: {"permitId": permitId});
+    Get.toNamed(Routes.viewPermitWebScreen,
+        arguments: {"permitId": permitId, "types": 1});
   }
 
-   Future<void> cancelPermitList({int? permitId}) async {
+  Future<void> cancelPermitList({int? permitId}) async {
     Get.toNamed(Routes.viewPermitWebScreen, arguments: {"permitId": permitId});
   }
 

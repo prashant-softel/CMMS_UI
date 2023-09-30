@@ -62,8 +62,8 @@ class PermitApprovedDialog extends GetView {
                         Text(
                           // ptwStatus == '133'
                           //     ? ''
-                          //     : 
-                              """This certifies that I (PERMIT APPROVER) have personally completed a safety inspection of the area where this work is to be done as well as the surrounding areas, with specific attention to the type of work for which this PTW is being issued. I have reviewed the necessary precautions required to be taken for safely executing the work as mentioned in the checkpoints of this PTW to protect man and machinery engaged in this work from injury accident. I have made sure that the assigned personnel know the applicable
+                          //     :
+                          """This certifies that I (PERMIT APPROVER) have personally completed a safety inspection of the area where this work is to be done as well as the surrounding areas, with specific attention to the type of work for which this PTW is being issued. I have reviewed the necessary precautions required to be taken for safely executing the work as mentioned in the checkpoints of this PTW to protect man and machinery engaged in this work from injury accident. I have made sure that the assigned personnel know the applicable
                     
                     work is to be done as well as the surrounding areas, with specific attention to the type of work for which this PTW is being issued. I have reviewed the necessary precautions required to be taken for safely executing the work as mentioned in the checkpoints of this PTW to protect man and machinery engaged in this work from injury accident. I have made sure that the assigned personnel know the applicable safety rules and that they know what to do in an emergency.""",
                           textAlign: TextAlign.left,
@@ -71,191 +71,201 @@ class PermitApprovedDialog extends GetView {
                         ),
                         Dimens.boxHeight20,
                         Container(
-                                             margin: Dimens.edgeInsets20,
-                                          //    decoration: BoxDecoration(
-                                          //   border: Border.all(
-                                          //     color: ColorValues.lightGreyColorWithOpacity35,
-                                          //     width: 1,
-                                          //   ),
-                                          //   boxShadow: [
-                                          //     BoxShadow(
-                                          //       color: ColorValues.appBlueBackgroundColor,
-                                          //       spreadRadius: 2,
-                                          //       blurRadius: 5,
-                                          //       offset: Offset(0, 2),
-                                          //     ),
-                                          //   ],
-                                          // ),
-                                            child: Column(
-                                              children: [
-                                              //   Padding(
-                                              //   padding: const EdgeInsets.all(10.0),
-                                              //   child: Row(
-                                              //     children: [
-                                              //       Text(
-                                              //         "Approve Permit ",
-                                              //         style: Styles.blue700,
-                                              //       ),
-                                              //     ],
-                                              //   ),
-                                              // ),
-                                              Divider(
-                                                color: ColorValues.greyLightColour,
-                                              ),
-                                                Align(
-                                                  alignment: Alignment.centerLeft,
-                                                  child: Padding(
-                                                    padding: const EdgeInsets.only(left: 10),
-                                                    child: Text(
-                                                        'ISSUED BY:',
-                                                        style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
-                                                        
-                                                      ),
-                                                  ),
-                                                ),
-                                                  Padding(
-                                                    padding: const EdgeInsets.only(left: 10, right: 10),
-                                                    child: Row(
-                                                      crossAxisAlignment: CrossAxisAlignment.start,
-                                                      children: [
-                                                        Column(
-                                                          crossAxisAlignment: CrossAxisAlignment.end,
-                                                          children: [
-                                                            Text(
-                                                              'Permit Approver Name',
-                                                              style: Styles.blackBold17,
-                                                            ),
-                                                            Text(
-                                                              '${controller.viewPermitDetailsModel.value?.issuedByName}',
-                                                              style: Styles.black17,
-                                                            ),
-                                                          ],
-                                                        ),
-                                                        Spacer(),
-                                                        Column(
-                                                          crossAxisAlignment: CrossAxisAlignment.end,
-                                                          children: [
-                                                            Text(
-                                                              'Designation',
-                                                              style: Styles.blackBold17,
-                                                            ),
-                                                            Text(
-                                                              '${controller.viewPermitDetailsModel.value?.requestedByName}',
-                                                              style: Styles.black17,
-                                                            ),
-                                                          ],
-                                                        ),
-                                                        Spacer(),
-                                                        Column(
-                                                          crossAxisAlignment: CrossAxisAlignment.end,
-                                                          children: [
-                                                            Text(
-                                                              'Company',
-                                                              style: Styles.blackBold17,
-                                                            ),
-                                                            Text(
-                                                              '${controller.viewPermitDetailsModel.value?.requestedByName}',
-                                                              style: Styles.black17,
-                                                            ),
-                                                          ],
-                                                        ),
-                                                        Spacer(),
-                                                        Column(
-                                                          crossAxisAlignment: CrossAxisAlignment.end,
-                                                          children: [
-                                                            Text(
-                                                              'Date & Time',
-                                                              style: Styles.blackBold17,
-                                                            ),
-                                                            Text(
-                                                              '${controller.viewPermitDetailsModel.value?.start_datetime}',
-                                                              style: Styles.black17,
-                                                            ),
-                                                          ],
-                                                        ),
-                                                      ],
-                                                    ),
-                                                  ),
-                                                  Dimens.boxHeight20,
-                                                  Align(
-                                                    alignment: Alignment.centerLeft,
-                                                    child: Padding(
-                                                      padding: const EdgeInsets.only(left: 10),
-                                                      child: Text(
-                                                        'RESPONSIBILITY ACCEPTED BY:',
-                                                        style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
-                                                        
-                                                      ),
-                                                    ),
-                                                  ),
-                                                  Padding(
-                                                    padding: const EdgeInsets.only(left: 10, right: 10),
-                                                    child: Row(
-                                                      crossAxisAlignment: CrossAxisAlignment.start,
-                                                      children: [
-                                                        Column(
-                                                          crossAxisAlignment: CrossAxisAlignment.end,
-                                                          children: [
-                                                            Text(
-                                                              'Permit Requester Name',
-                                                              style: Styles.blackBold17,
-                                                            ),
-                                                            Text(
-                                                              '${controller.viewPermitDetailsModel.value?.requestedByName}',
-                                                              style: Styles.black17,
-                                                            ),
-                                                          ],
-                                                        ),
-                                                        Spacer(),
-                                                        Column(
-                                                          crossAxisAlignment: CrossAxisAlignment.end,
-                                                          children: [
-                                                            Text(
-                                                              'Designation',
-                                                              style: Styles.blackBold17,
-                                                            ),
-                                                            Text(
-                                                              '${controller.viewPermitDetailsModel.value?.requestedByName}',
-                                                              style: Styles.black17,
-                                                            ),
-                                                          ],
-                                                        ),
-                                                        Spacer(),
-                                                        Column(
-                                                          crossAxisAlignment: CrossAxisAlignment.end,
-                                                          children: [
-                                                            Text(
-                                                              'Company',
-                                                              style: Styles.blackBold17,
-                                                            ),
-                                                            Text(
-                                                              '${controller.viewPermitDetailsModel.value?.requestedByName}',
-                                                              style: Styles.black17,
-                                                            ),
-                                                          ],
-                                                        ),
-                                                        Spacer(),
-                                                        Column(
-                                                          crossAxisAlignment: CrossAxisAlignment.end,
-                                                          children: [
-                                                            Text(
-                                                              'Date & Time',
-                                                              style: Styles.blackBold17,
-                                                            ),
-                                                            Text(
-                                                              '${controller.viewPermitDetailsModel.value?.start_datetime}',
-                                                              style: Styles.black17,
-                                                            ),
-                                                          ],
-                                                        ),
-                                                      ],
-                                                    ),
-                                                  ),
-                                              ],
-                                            ),
-                                          ),
-                                          
-                                         
+                          margin: Dimens.edgeInsets20,
+                          //    decoration: BoxDecoration(
+                          //   border: Border.all(
+                          //     color: ColorValues.lightGreyColorWithOpacity35,
+                          //     width: 1,
+                          //   ),
+                          //   boxShadow: [
+                          //     BoxShadow(
+                          //       color: ColorValues.appBlueBackgroundColor,
+                          //       spreadRadius: 2,
+                          //       blurRadius: 5,
+                          //       offset: Offset(0, 2),
+                          //     ),
+                          //   ],
+                          // ),
+                          child: Column(
+                            children: [
+                              //   Padding(
+                              //   padding: const EdgeInsets.all(10.0),
+                              //   child: Row(
+                              //     children: [
+                              //       Text(
+                              //         "Approve Permit ",
+                              //         style: Styles.blue700,
+                              //       ),
+                              //     ],
+                              //   ),
+                              // ),
+                              Divider(
+                                color: ColorValues.greyLightColour,
+                              ),
+                              Align(
+                                alignment: Alignment.centerLeft,
+                                child: Padding(
+                                  padding: const EdgeInsets.only(left: 10),
+                                  child: Text(
+                                    'ISSUED BY:',
+                                    style: TextStyle(
+                                        fontSize: 18,
+                                        fontWeight: FontWeight.bold),
+                                  ),
+                                ),
+                              ),
+                              Padding(
+                                padding:
+                                    const EdgeInsets.only(left: 10, right: 10),
+                                child: Row(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    Column(
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.end,
+                                      children: [
+                                        Text(
+                                          'Permit Approver Name',
+                                          style: Styles.blackBold17,
+                                        ),
+                                        Text(
+                                          '${controller.viewPermitDetailsModel.value?.issuedByName}',
+                                          style: Styles.black17,
+                                        ),
+                                      ],
+                                    ),
+                                    Spacer(),
+                                    Column(
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.end,
+                                      children: [
+                                        Text(
+                                          'Designation',
+                                          style: Styles.blackBold17,
+                                        ),
+                                        Text(
+                                          '${controller.viewPermitDetailsModel.value?.requestedByName}',
+                                          style: Styles.black17,
+                                        ),
+                                      ],
+                                    ),
+                                    Spacer(),
+                                    Column(
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.end,
+                                      children: [
+                                        Text(
+                                          'Company',
+                                          style: Styles.blackBold17,
+                                        ),
+                                        Text(
+                                          '${controller.viewPermitDetailsModel.value?.requestedByName}',
+                                          style: Styles.black17,
+                                        ),
+                                      ],
+                                    ),
+                                    Spacer(),
+                                    Column(
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.end,
+                                      children: [
+                                        Text(
+                                          'Date & Time',
+                                          style: Styles.blackBold17,
+                                        ),
+                                        Text(
+                                          '${controller.viewPermitDetailsModel.value?.start_datetime}',
+                                          style: Styles.black17,
+                                        ),
+                                      ],
+                                    ),
+                                  ],
+                                ),
+                              ),
+                              Dimens.boxHeight20,
+                              Align(
+                                alignment: Alignment.centerLeft,
+                                child: Padding(
+                                  padding: const EdgeInsets.only(left: 10),
+                                  child: Text(
+                                    'RESPONSIBILITY ACCEPTED BY:',
+                                    style: TextStyle(
+                                        fontSize: 18,
+                                        fontWeight: FontWeight.bold),
+                                  ),
+                                ),
+                              ),
+                              Padding(
+                                padding:
+                                    const EdgeInsets.only(left: 10, right: 10),
+                                child: Row(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    Column(
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.end,
+                                      children: [
+                                        Text(
+                                          'Permit Requester Name',
+                                          style: Styles.blackBold17,
+                                        ),
+                                        Text(
+                                          '${controller.viewPermitDetailsModel.value?.requestedByName}',
+                                          style: Styles.black17,
+                                        ),
+                                      ],
+                                    ),
+                                    Spacer(),
+                                    Column(
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.end,
+                                      children: [
+                                        Text(
+                                          'Designation',
+                                          style: Styles.blackBold17,
+                                        ),
+                                        Text(
+                                          '${controller.viewPermitDetailsModel.value?.requestedByName}',
+                                          style: Styles.black17,
+                                        ),
+                                      ],
+                                    ),
+                                    Spacer(),
+                                    Column(
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.end,
+                                      children: [
+                                        Text(
+                                          'Company',
+                                          style: Styles.blackBold17,
+                                        ),
+                                        Text(
+                                          '${controller.viewPermitDetailsModel.value?.requestedByName}',
+                                          style: Styles.black17,
+                                        ),
+                                      ],
+                                    ),
+                                    Spacer(),
+                                    Column(
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.end,
+                                      children: [
+                                        Text(
+                                          'Date & Time',
+                                          style: Styles.blackBold17,
+                                        ),
+                                        Text(
+                                          '${controller.viewPermitDetailsModel.value?.start_datetime}',
+                                          style: Styles.black17,
+                                        ),
+                                      ],
+                                    ),
+                                  ],
+                                ),
+                              ),
+                            ],
+                          ),
+                        ),
                         CustomRichText(title: 'Comment'),
                         Dimens.boxHeight10,
                         TextField(
@@ -273,7 +283,6 @@ class PermitApprovedDialog extends GetView {
                             ),
                           ),
                         ),
-                       
                       ],
                     ),
                     // SizedBox(
@@ -282,7 +291,7 @@ class PermitApprovedDialog extends GetView {
                     // Row(
                     //     mainAxisAlignment: MainAxisAlignment.center,
                     //     children: [
-            
+
                     //       Dimens.boxWidth10,
                     //       ElevatedButton(
                     //         style: Styles.greenElevatedButtonStyle,
@@ -304,7 +313,6 @@ class PermitApprovedDialog extends GetView {
           );
         }),
         actions: [
-          
           Row(mainAxisAlignment: MainAxisAlignment.center, children: [
             Dimens.boxWidth10,
             ElevatedButton(

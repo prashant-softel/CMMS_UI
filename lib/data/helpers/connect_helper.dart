@@ -1262,15 +1262,16 @@ class ConnectHelper {
     return responseModel;
   }
 
-  Future<ResponseModel> permitRejectButton({
-    required String auth,
-    bool? isLoading,
-    String? comment,
-    String? id,
-  }) async {
+  Future<ResponseModel> permitRejectButton(
+      {required String auth,
+      bool? isLoading,
+      String? comment,
+      String? id,
+      String? ptwStatus,
+      int? jobId}) async {
     // facilityId = 45;
     var responseModel = await apiWrapper.makeRequest(
-      'Permit/PermitReject',
+      ptwStatus == '133' ? 'Permit/PermitExtendCancel' : 'Permit/PermitReject',
       Request.put,
       {'comment': "$comment", 'id': id},
       isLoading ?? true,
@@ -2030,6 +2031,35 @@ class ConnectHelper {
 
   //Update New Permit
   Future<ResponseModel> updateNewPermit({
+    required String auth,
+    newPermit,
+    bool? isLoading,
+    bool? resubmit,
+  }) async {
+    var responseModel = await apiWrapper.makeRequest(
+      'Permit/UpdatePermit?resubmit=$resubmit',
+      Request.patch,
+      newPermit,
+      isLoading ?? false,
+      {
+        'Content-Type': 'application/json',
+        'Authorization': 'Bearer $auth',
+      },
+    );
+
+    print('UpdateNewPermitResponse5:${responseModel.data}');
+    var res = responseModel.data;
+    var parsedJson = json.decode(res);
+    Get.dialog<void>(UpdateNewPermitDialog(
+      data: parsedJson['message'],
+      PtwId: parsedJson['id'],
+    ));
+
+    return responseModel;
+  }
+
+  ///resubmit permit
+  Future<ResponseModel> resubmitPermit({
     required String auth,
     newPermit,
     bool? isLoading,

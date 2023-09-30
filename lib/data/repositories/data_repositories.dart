@@ -804,12 +804,16 @@ class DataRepository extends DomainRepository {
     required String auth,
     String? comment,
     String? id,
+    String? ptwStatus,
+    int? jobId,
     bool? isLoading,
   }) async =>
       await connectHelper.permitRejectButton(
         auth: auth,
         comment: comment,
         id: id,
+        ptwStatus: ptwStatus,
+        jobId: jobId,
         isLoading: isLoading ?? false,
       );
 
@@ -1239,6 +1243,16 @@ class DataRepository extends DomainRepository {
           bool? isLoading,
           bool? resubmit}) async =>
       await connectHelper.updateNewPermit(
+          auth: auth,
+          newPermit: newPermit,
+          isLoading: isLoading ?? false,
+          resubmit: resubmit);
+  Future<ResponseModel> resubmitPermit(
+          {required String auth,
+          newPermit,
+          bool? isLoading,
+          bool? resubmit}) async =>
+      await connectHelper.resubmitPermit(
           auth: auth,
           newPermit: newPermit,
           isLoading: isLoading ?? false,

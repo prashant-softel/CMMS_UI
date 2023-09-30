@@ -479,6 +479,47 @@ class Repository {
     }
   }
 
+  /// sesubmit permit
+  Future<Map<String, dynamic>> resubmitPermit(
+      newPermit, bool? isLoading, bool? resubmit) async {
+    try {
+      final auth = await getSecuredValue(LocalKeys.authToken);
+      final res = await _dataRepository.resubmitPermit(
+        auth: auth,
+        newPermit: newPermit,
+        isLoading: isLoading ?? false,
+        resubmit: resubmit,
+      );
+
+      var resourceData = res.data;
+      // var parsedJson = json.decode(resourceData);
+      print('Response resubmitPermit : ${resourceData}');
+      // Get.dialog(
+      //   CreateNewPermitDialog(
+      //     createPermitData: 'Dialog Title',
+      //     data: parsedJson['message'],
+      //   ),
+      // );
+
+      // data = res.data;
+      //print('Response Create Permit: ${data}');
+
+      if (!res.hasError) {
+        if (res.errorCode == 200) {
+          var responseMap = json.decode(res.data);
+          return responseMap;
+        }
+      } else {
+        Utility.showDialog(res.errorCode.toString() + 'resubmitPermit');
+        //return '';
+      }
+      return Map();
+    } catch (error) {
+      print(error.toString());
+      return Map();
+    }
+  }
+
   //Create SOP
   Future<Map<String, dynamic>> createSOP(
     createSop,
@@ -2696,7 +2737,7 @@ class Repository {
         return _newPermitModelList;
       } //
       else {
-        Utility.showDialog(res.errorCode.toString() + 'getNewPermitList');
+        //  Utility.showDialog(res.errorCode.toString() + 'getNewPermitList');
         return [];
       }
     } catch (error) {
@@ -3091,6 +3132,8 @@ class Repository {
   Future<void> permitRejectButton(
     String? comment,
     String? id,
+    String? ptwStatus,
+    int? jobId,
     bool? isLoading,
   ) async {
     try {
@@ -3100,6 +3143,8 @@ class Repository {
         auth: auth,
         comment: comment,
         id: id,
+        ptwStatus: ptwStatus,
+        jobId: jobId,
         isLoading: isLoading ?? false,
       );
       // print('PermitRejectResponse55: ${res.data}');
