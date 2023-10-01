@@ -103,7 +103,7 @@ class PreventiveMaintenanceTaskViewContentWeb
                                 backgroundColor: ColorValues.appLightBlueColor,
                                 onPressed: () async {},
                                 text:
-                                    "${controller.pmtaskViewModel.value?.status_short ?? ""}",
+                                    "${controller.pmtaskViewModel.value?.status_short ?? ""}${controller.pmtaskViewModel.value?.status}",
                               ),
                             ),
                           ],
@@ -886,7 +886,7 @@ class PreventiveMaintenanceTaskViewContentWeb
                 //         ),
                 //       )
                 //     :
-                controller.pmtaskViewModel.value?.status == 163
+                controller.pmtaskViewModel.value?.status == 167
                     ? Container(
                         height: 35,
                         child: CustomElevatedButton(
@@ -902,7 +902,8 @@ class PreventiveMaintenanceTaskViewContentWeb
                       )
                     : Dimens.box0,
                 controller.pmtaskViewModel.value?.status == 164 ||
-                        controller.pmtaskViewModel.value?.status == 166
+                        controller.pmtaskViewModel.value?.status == 166 ||
+                        controller.pmtaskViewModel.value?.status == 168
                     ? Container(
                         height: 35,
                         child: CustomElevatedButton(

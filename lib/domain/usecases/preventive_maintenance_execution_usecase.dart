@@ -1,4 +1,5 @@
 import 'package:cmms/domain/domain.dart';
+import 'package:cmms/domain/models/history_model.dart';
 
 import '../models/pm_task_view_list_model.dart';
 
@@ -20,6 +21,16 @@ class PreventiveMaintenanceExecutionUsecase {
   }) async =>
       await repository.updatePmExecution(
         pmExecutionJsonString,
+        isLoading,
+      );
+  Future<List<HistoryModel>?> getHistory({
+    moduleType,
+    id,
+    bool? isLoading,
+  }) async =>
+      await repository.getHistory(
+        moduleType,
+        id,
         isLoading,
       );
   Future<bool> closePmTaskExecution({
