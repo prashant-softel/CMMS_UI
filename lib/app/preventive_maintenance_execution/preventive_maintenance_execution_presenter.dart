@@ -23,4 +23,24 @@ class PreventiveMaintenanceExecutionPresenter {
       isLoading: isLoading,
     );
   }
+
+  Future<bool> closePmTaskExecution({
+    closetoJsonString,
+    required bool isLoading,
+  }) async {
+    return preventiveMaintenanceExecutionUsecase.closePmTaskExecution(
+      closetoJsonString: closetoJsonString,
+      isLoading: isLoading,
+    );
+  }
+
+  Future<bool> UpdatePMTaskExecution({
+    updatePMTaskExecutionJsonString,
+    required bool isLoading,
+  }) async {
+    return preventiveMaintenanceExecutionUsecase.UpdatePMTaskExecution(
+      updatePMTaskExecutionJsonString: updatePMTaskExecutionJsonString,
+      isLoading: isLoading,
+    );
+  }
 }

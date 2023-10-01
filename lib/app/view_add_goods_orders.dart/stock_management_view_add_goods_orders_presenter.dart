@@ -33,12 +33,12 @@ class ViewAddGoodsOrdersPresenter {
     );
   }
 
-  Future<List<HistoryModel>?> getGoHistory(
+  Future<List<HistoryModel>?> getHistory(
     moduleType,
     id,
     isLoading,
   ) async =>
-      await viewAddGoodsOrdersUsecase.getGoHistory(
+      await viewAddGoodsOrdersUsecase.getHistory(
         moduleType: moduleType,
         id: id,
         isLoading: isLoading,

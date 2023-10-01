@@ -179,7 +179,7 @@ class StockManagementAddGoodsOrdersController extends GetxController {
     // int tempModuleType = 21;
     //
     historyList?.value =
-        await stockManagementAddGoodsOrdersPresenter.getGoHistory(
+        await stockManagementAddGoodsOrdersPresenter.getHistory(
               // tempModuleType,
               // tempJobCardId,
               moduleType,

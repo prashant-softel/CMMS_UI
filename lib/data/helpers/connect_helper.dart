@@ -2664,6 +2664,23 @@ class ConnectHelper {
     return responseModel;
   }
 
+  Future<ResponseModel> getMrsListByModuleTask({
+    String? auth,
+    int? taskId,
+    bool? isLoading,
+  }) async {
+    var responseModel = await apiWrapper.makeRequest(
+      'MRS/getMRSListByModule?taskId=$taskId',
+      Request.get,
+      null,
+      isLoading ?? false,
+      {
+        'Authorization': 'Bearer $auth',
+      },
+    );
+    return responseModel;
+  }
+
   Future<ResponseModel> createModuleList({
     required String auth,
     bool? isLoading,
@@ -2820,26 +2837,6 @@ class ConnectHelper {
   }
 
   Future<ResponseModel> getRoHistory({
-    required String? auth,
-    int? moduleType,
-    int? id,
-    bool? isLoading,
-  }) async {
-    var responseModel = await apiWrapper.makeRequest(
-      'Utils/GetHistoryLog?module_type=$moduleType&id=$id',
-      Request.get,
-      null,
-      isLoading ?? false,
-      {
-        'Content-Type': 'application/json',
-        'Authorization': 'Bearer $auth',
-      },
-    );
-    print('PermitHistory Response:${responseModel}');
-    return responseModel;
-  }
-
-  Future<ResponseModel> getGoHistory({
     required String? auth,
     int? moduleType,
     int? id,
@@ -3706,7 +3703,7 @@ class ConnectHelper {
     bool? isLoading,
   }) async {
     var responseModel = await apiWrapper.makeRequest(
-      'PMScheduleView/UpdatePMTaskExecution',
+      'PMScheduleView/UpdatePMScheduleExecution',
       Request.patch,
       pmExecutionJsonString,
       isLoading ?? false,
@@ -5140,7 +5137,8 @@ class ConnectHelper {
     var res = responseModel.data;
     var parsedJson = json.decode(res);
     Get.dialog<void>(LinkToPermitDialog(
-        data: parsedJson['message'], taskId: parsedJson['id']));
+        data: parsedJson['message'], taskId: scheduleId //parsedJson['id']
+        ));
     print('jcId2:${parsedJson['id']}');
     return responseModel;
   }
@@ -5604,6 +5602,30 @@ class ConnectHelper {
       Request.put,
       // {'comment': "$comment", 'id': id},
       rejecttoJsonString,
+      isLoading ?? true,
+      {
+        'Content-Type': 'application/json',
+        'Authorization': 'Bearer $auth',
+      },
+    );
+    var res = responseModel.data;
+    var parsedJson = json.decode(res);
+    // Get.dialog<void>(PermitMessageCloseDialog(data: parsedJson['message']));
+
+    return responseModel;
+  }
+
+  Future<ResponseModel> UpdatePMTaskExecution({
+    required String auth,
+    updatePMTaskExecutionJsonString,
+    bool? isLoading,
+  }) async {
+    // facilityId = 45;
+    var responseModel = await apiWrapper.makeRequest(
+      'PMScheduleView/UpdatePMTaskExecution',
+      Request.patch,
+      // {'comment': "$comment", 'id': id},
+      updatePMTaskExecutionJsonString,
       isLoading ?? true,
       {
         'Content-Type': 'application/json',

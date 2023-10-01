@@ -128,7 +128,6 @@ class CreateMrsController extends GetxController {
         facility_ID: facilityId,
         setAsTemplate: _setTemp, //isSetTemplate == true ? 1 : 0,
         activity: _activity,
-        //1 is job,2 is pm
         whereUsedType: whereUsed.value,
         whereUsedTypeId: whereUsedTypeId.value,
         remarks: _remark,

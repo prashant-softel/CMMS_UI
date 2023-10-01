@@ -1,5 +1,7 @@
 import 'package:cmms/app/widgets/reject_go_receive_dialog.dart';
 import 'package:cmms/domain/models/employee_model.dart';
+import 'package:cmms/domain/models/history_model.dart';
+import 'package:cmms/domain/models/mrs_list_by_jobId.dart';
 import 'package:cmms/domain/models/new_permit_list_model.dart';
 import 'package:cmms/domain/models/pm_task_view_list_model.dart';
 
@@ -86,4 +88,23 @@ class PreventiveMaintenanceTaskViewPresenter {
       isLoading: isLoading,
     );
   }
+
+  Future<List<MRSListByJobIdModel>?> getMrsListByModuleTask(
+    taskId,
+    isLoading,
+  ) async =>
+      await preventiveMaintenanceTaskViewUsecase.getMrsListByModuleTask(
+        taskId: taskId,
+        isLoading: isLoading,
+      );
+  Future<List<HistoryModel>?> getHistory(
+    moduleType,
+    id,
+    isLoading,
+  ) async =>
+      await preventiveMaintenanceTaskViewUsecase.getHistory(
+        moduleType: moduleType,
+        id: id,
+        isLoading: isLoading,
+      );
 }

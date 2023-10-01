@@ -4,6 +4,7 @@ import 'package:cmms/app/theme/dimens.dart';
 import 'package:cmms/app/theme/styles.dart';
 import 'package:cmms/app/utils/utility.dart';
 import 'package:cmms/app/widgets/custom_elevated_button.dart';
+import 'package:cmms/domain/models/comment_model.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:fluttertoast/fluttertoast.dart';
@@ -39,6 +40,8 @@ class PreventiveMaintenanceExecutionController extends GetxController {
   // RxList<HistoryLog?>? historyLog = <HistoryLog?>[].obs;
   // HistoryLog? historyLogModel;
   var commentCtrlr = TextEditingController();
+  var updatecommentCtrlr = TextEditingController();
+
   ScheduleCheckPoint? selectedItem;
 
   @override
@@ -87,14 +90,20 @@ class PreventiveMaintenanceExecutionController extends GetxController {
     if (_permitDetails != null) {
       pmtaskViewModel.value = _permitDetails;
       scheduleCheckPoints!.value = _permitDetails.schedules ?? [];
-      for (var checkpoint in scheduleCheckPoints!) {
-        // checklistObservations!.value.add(checkpoint?.checklist_observation);
-      }
+      //   for (var checkpoint in scheduleCheckPoints!) {
+      //     for (var checkpoint2 in checkpoint!.checklist_observation ?? []) {
+      //       checklistObservations!.value.add(checkpoint2);
+      //     }
+      //   }
     }
+    // print({"checklistObservations", checklistObservations});
   }
 
   void updatePmExecution() async {
     List<AddObservations> addObservations = <AddObservations>[];
+    for (var checkpoint in selectedItem!.checklist_observation ?? []) {
+      checklistObservations?.value.add(checkpoint);
+    }
     checklistObservations?.forEach((e) {
       addObservations.add(AddObservations(
           execution_id: e.execution_id ?? 0,
@@ -103,11 +112,11 @@ class PreventiveMaintenanceExecutionController extends GetxController {
           pm_files: []));
     });
     List<Schedules> schedule = <Schedules>[];
-    checklistObservations?.forEach((e) {
-      schedule.add(Schedules(
-          schedule_id: selectedItem?.schedule_id ?? 0,
-          add_observations: addObservations));
-    });
+    // checklistObservations?.forEach((e) {
+    schedule.add(Schedules(
+        schedule_id: selectedItem?.schedule_id ?? 0,
+        add_observations: addObservations));
+    // });
 
     UpdatePmExecutionMdel updatePmExecutionMdel = UpdatePmExecutionMdel(
         task_id: scheduleId.value,
@@ -115,13 +124,13 @@ class PreventiveMaintenanceExecutionController extends GetxController {
         schedules: schedule);
     var pmExecutionJsonString = updatePmExecutionMdel.toJson();
     print({"pmExecutionJsonString", pmExecutionJsonString});
-    List<dynamic>? responsePmScheduleCreated =
+    var responsePmScheduleCreated =
         await preventiveMaintenanceExecutionPresenter.updatePmExecution(
       pmExecutionJsonString: pmExecutionJsonString,
       isLoading: true,
     );
     if (responsePmScheduleCreated != null) {
-      _updatedailog();
+      // _updatedailog();
       Fluttertoast.showToast(
           msg: "PM Schedule Successfully...", fontSize: 16.0);
     }
@@ -207,5 +216,46 @@ class PreventiveMaintenanceExecutionController extends GetxController {
     // if (response == true) {
     //   getCalibrationList(facilityId, true);
     // }
+  }
+  closePmTaskExecution() async {
+    {
+      String _comment = commentCtrlr.text.trim();
+
+      CommentModel commentModel =
+          CommentModel(id: scheduleId.value, comment: _comment);
+
+      var closetoJsonString = commentModel.toJson();
+      final response =
+          await preventiveMaintenanceExecutionPresenter.closePmTaskExecution(
+        closetoJsonString: closetoJsonString,
+        isLoading: true,
+      );
+      if (response == true) {
+        final _flutterSecureStorage = const FlutterSecureStorage();
+
+        _flutterSecureStorage.delete(key: "pmTaskId");
+        Get.offAllNamed(Routes.pmTask);
+      }
+    }
+  }
+
+  void UpdatePMTaskExecution() async {
+    String _comment = updatecommentCtrlr.text.trim();
+
+    var updatePMTaskExecutionJsonString = {
+      "task_id": scheduleId.value,
+      "comment": _comment,
+    }; //commentModel.toJson();
+    final response =
+        await preventiveMaintenanceExecutionPresenter.UpdatePMTaskExecution(
+      updatePMTaskExecutionJsonString: updatePMTaskExecutionJsonString,
+      isLoading: true,
+    );
+    if (response == true) {
+      final _flutterSecureStorage = const FlutterSecureStorage();
+
+      _flutterSecureStorage.delete(key: "pmTaskId");
+      Get.offAllNamed(Routes.pmTask);
+    }
   }
 }

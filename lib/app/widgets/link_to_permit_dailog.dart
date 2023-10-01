@@ -11,7 +11,7 @@ import '../theme/styles.dart';
 class LinkToPermitDialog extends GetView {
   String? approveIncidentReportData;
   String? data;
-  List<dynamic>? taskId;
+  int? taskId;
 
   LinkToPermitDialog(
       {super.key, this.approveIncidentReportData, this.data, this.taskId});
@@ -91,7 +91,7 @@ class LinkToPermitDialog extends GetView {
                 //     false);
                 //  Get.offAllNamed(Routes.createMrs, arguments: {"jcId": jcId![0]});
                 Get.offAllNamed(Routes.createMrs,
-                    arguments: {"whereUsedId": taskId![0], "whereUsed": 1});
+                    arguments: {"whereUsedId": taskId, "whereUsed": 27});
                 Get.back();
               },
               child: const Text('Add Mrs'),

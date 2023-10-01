@@ -162,7 +162,7 @@ class ReceiveGoodsOrdersController extends GetxController {
     int moduleType = 32;
     // int tempModuleType = 21;
     //
-    historyList?.value = await receiveGoodsOrdersPresenter.getGoHistory(
+    historyList?.value = await receiveGoodsOrdersPresenter.getHistory(
           // tempModuleType,
           // tempJobCardId,
           moduleType,
