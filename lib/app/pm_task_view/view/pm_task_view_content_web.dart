@@ -1,7 +1,9 @@
+import 'package:cmms/app/navigators/app_pages.dart';
 import 'package:cmms/app/pm_task_view/pm_task_view_controller.dart';
 import 'package:cmms/app/theme/dimens.dart';
 import 'package:cmms/app/widgets/assign_to_pm_task_dialog.dart';
 import 'package:cmms/app/widgets/execution_approve_dialog.dart';
+import 'package:cmms/app/widgets/history_table_widget_web.dart';
 import 'package:cmms/app/widgets/observation_pm_task_view_popup_dialog.dart';
 import 'package:cmms/app/widgets/table_action_button.dart';
 import 'package:data_table_2/data_table_2.dart';
@@ -354,6 +356,310 @@ class PreventiveMaintenanceTaskViewContentWeb
                                     ],
                                   ),
                                 ),
+                                controller.listMrsByTaskId!.length > 0
+                                    ? Container(
+                                        margin: Dimens.edgeInsets20,
+                                        height: ((controller.listMrsByTaskId
+                                                        ?.length ??
+                                                    0) *
+                                                40) +
+                                            150,
+                                        decoration: BoxDecoration(
+                                          border: Border.all(
+                                            color: ColorValues
+                                                .lightGreyColorWithOpacity35,
+                                            width: 1,
+                                          ),
+                                          boxShadow: [
+                                            BoxShadow(
+                                              color: ColorValues
+                                                  .appBlueBackgroundColor,
+                                              spreadRadius: 2,
+                                              blurRadius: 5,
+                                              offset: Offset(0, 2),
+                                            ),
+                                          ],
+                                        ),
+                                        child: Column(
+                                          children: [
+                                            Padding(
+                                              padding:
+                                                  const EdgeInsets.all(10.0),
+                                              child: Row(
+                                                children: [
+                                                  Text(
+                                                    "Material Issue / Used",
+                                                    style: Styles.blue700,
+                                                  ),
+                                                ],
+                                              ),
+                                            ),
+                                            // Divider(
+                                            //   color:
+                                            //       ColorValues.greyLightColour,
+                                            // ),
+                                            Expanded(
+                                              child: DataTable2(
+                                                border: TableBorder.all(
+                                                    color: Color.fromARGB(
+                                                        255, 206, 229, 234)),
+                                                columns: [
+                                                  DataColumn2(
+                                                      fixedWidth: 100,
+                                                      label: Text(
+                                                        "Sr. No.",
+                                                        style: TextStyle(
+                                                            fontSize: 15,
+                                                            fontWeight:
+                                                                FontWeight
+                                                                    .bold),
+                                                      )),
+                                                  DataColumn2(
+                                                      fixedWidth: 130,
+                                                      label: Text(
+                                                        "Mrs ID",
+                                                        style: TextStyle(
+                                                            fontSize: 15,
+                                                            fontWeight:
+                                                                FontWeight
+                                                                    .bold),
+                                                      )),
+                                                  DataColumn2(
+                                                      // fixedWidth: 200,
+                                                      label: Text(
+                                                    "Mrs Items List ",
+                                                    style: TextStyle(
+                                                        fontSize: 15,
+                                                        fontWeight:
+                                                            FontWeight.bold),
+                                                  )),
+                                                  DataColumn2(
+                                                      //  fixedWidth: 300,
+                                                      label: Text(
+                                                    "Status",
+                                                    style: TextStyle(
+                                                        fontSize: 15,
+                                                        fontWeight:
+                                                            FontWeight.bold),
+                                                  )),
+                                                  DataColumn2(
+                                                      fixedWidth: 300,
+                                                      label: Text(
+                                                        'Action',
+                                                        style: TextStyle(
+                                                            fontSize: 15,
+                                                            fontWeight:
+                                                                FontWeight
+                                                                    .bold),
+                                                      )),
+                                                ],
+                                                rows: List<DataRow>.generate(
+                                                  controller.listMrsByTaskId
+                                                          ?.length ??
+                                                      0,
+                                                  (index) => DataRow(cells: [
+                                                    DataCell(Text(controller
+                                                            .listMrsByTaskId?[
+                                                                index]
+                                                            ?.jobCardId
+                                                            .toString() ??
+                                                        '')),
+                                                    DataCell(Text(controller
+                                                            .listMrsByTaskId?[
+                                                                index]
+                                                            ?.mrsId
+                                                            .toString() ??
+                                                        '')),
+                                                    DataCell(Text(controller
+                                                            .listMrsByTaskId?[
+                                                                index]
+                                                            ?.mrsItems ??
+                                                        '')),
+                                                    DataCell(Text(controller
+                                                            .listMrsByTaskId?[
+                                                                index]
+                                                            ?.status_short ??
+                                                        '')),
+                                                    DataCell(Row(
+                                                      mainAxisAlignment:
+                                                          MainAxisAlignment
+                                                              .spaceEvenly,
+                                                      children: [
+                                                        TableActionButton(
+                                                            color: ColorValues
+                                                                .viewColor,
+                                                            icon: Icons
+                                                                .remove_red_eye,
+                                                            message: "View MRS",
+                                                            onPress: () {
+                                                              final _flutterSecureStorage =
+                                                                  const FlutterSecureStorage();
+
+                                                              _flutterSecureStorage
+                                                                  .delete(
+                                                                      key:
+                                                                          "mrsId");
+                                                              String mrsId = controller
+                                                                      .listMrsByTaskId?[
+                                                                          index]
+                                                                      ?.mrsId
+                                                                      .toString() ??
+                                                                  "";
+                                                              if (mrsId !=
+                                                                  null) {
+                                                                print({
+                                                                  "mrsId": mrsId
+                                                                });
+                                                                Get.toNamed(
+                                                                    Routes
+                                                                        .mrsViewScreen,
+                                                                    arguments: {
+                                                                      'mrsId': int
+                                                                          .tryParse(
+                                                                              "$mrsId")
+                                                                    });
+                                                              }
+                                                            }),
+                                                        TableActionButton(
+                                                            color: ColorValues
+                                                                .editColor,
+                                                            icon: Icons.edit,
+                                                            message: "Edit MRS",
+                                                            onPress: () {
+                                                              final _flutterSecureStorage =
+                                                                  const FlutterSecureStorage();
+
+                                                              _flutterSecureStorage
+                                                                  .delete(
+                                                                      key:
+                                                                          "mrsId");
+                                                              String mrsId = controller
+                                                                      .listMrsByTaskId?[
+                                                                          index]
+                                                                      ?.mrsId
+                                                                      .toString() ??
+                                                                  "";
+                                                              if (mrsId !=
+                                                                  null) {
+                                                                print({
+                                                                  "mrsId": mrsId
+                                                                });
+                                                                Get.toNamed(
+                                                                    Routes
+                                                                        .editMrs,
+                                                                    arguments: {
+                                                                      'mrsId': int
+                                                                          .tryParse(
+                                                                              "$mrsId")
+                                                                    });
+                                                              }
+                                                            })
+                                                      ],
+                                                    )),
+                                                  ]),
+                                                ),
+                                              ),
+                                            ),
+
+                                            // Expanded(
+                                            //   child: ScrollableTableView(
+                                            //     columns: [
+                                            //       "Job Card ID",
+                                            //       "Mrs ID",
+                                            //       "Mrs Items List ",
+                                            //       "Status",
+                                            //       "Action",
+                                            //     ].map((column) {
+                                            //       return TableViewColumn(
+                                            //         label: column,
+                                            //         minWidth: Get.width * 0.15,
+                                            //       );
+                                            //     }).toList(),
+                                            //     rows: [
+                                            //       ...List.generate(
+                                            //         controller.listMrsByTaskId
+                                            //                 ?.length ??
+                                            //             0,
+                                            //         (index) {
+                                            //           var getJobsLinkedMrsList =
+                                            //               controller
+                                            //                       .listMrsByTaskId?[
+                                            //                   index];
+                                            //           return [
+                                            //             '${getJobsLinkedMrsList?.jobCardId}',
+                                            //             '${getJobsLinkedMrsList?.mrsId}',
+                                            //             '${getJobsLinkedMrsList?.mrsItems ?? ''}',
+                                            //             '${getJobsLinkedMrsList?.status_short ?? ''}',
+                                            //             'Action',
+                                            //           ];
+                                            //         },
+                                            //       ),
+                                            //     ].map((record) {
+                                            //       return TableViewRow(
+                                            //         height: 40,
+                                            //         cells: record.map((value) {
+                                            //           return TableViewCell(
+                                            //               child:
+                                            //                   value == 'Action'
+                                            //                       ? Row(
+                                            //                           children: [
+                                            //                             TableActionButton(
+                                            //                                 color: ColorValues
+                                            //                                     .viewColor,
+                                            //                                 icon: Icons
+                                            //                                     .remove_red_eye,
+                                            //                                 message:
+                                            //                                     "View MRS",
+                                            //                                 onPress:
+                                            //                                     () {
+                                            //                                   final _flutterSecureStorage = const FlutterSecureStorage();
+
+                                            //                                   _flutterSecureStorage.delete(key: "mrsId");
+                                            //                                   String mrsId = record[1];
+                                            //                                   if (mrsId != null) {
+                                            //                                     print({
+                                            //                                       "mrsId": mrsId
+                                            //                                     });
+                                            //                                     Get.toNamed(Routes.mrsViewScreen, arguments: {
+                                            //                                       'mrsId': int.tryParse("$mrsId")
+                                            //                                     });
+                                            //                                   }
+                                            //                                 }),
+                                            //                             TableActionButton(
+                                            //                                 color: ColorValues
+                                            //                                     .editColor,
+                                            //                                 icon: Icons
+                                            //                                     .edit,
+                                            //                                 message:
+                                            //                                     "Edit MRS",
+                                            //                                 onPress:
+                                            //                                     () {
+                                            //                                   final _flutterSecureStorage = const FlutterSecureStorage();
+
+                                            //                                   _flutterSecureStorage.delete(key: "mrsId");
+                                            //                                   String mrsId = record[1];
+                                            //                                   if (mrsId != null) {
+                                            //                                     print({
+                                            //                                       "mrsId": mrsId
+                                            //                                     });
+                                            //                                     Get.toNamed(Routes.editMrs, arguments: {
+                                            //                                       'mrsId': int.tryParse("$mrsId")
+                                            //                                     });
+                                            //                                   }
+                                            //                                 })
+                                            //                           ],
+                                            //                         )
+                                            //                       : Text(
+                                            //                           value));
+                                            //         }).toList(),
+                                            //       );
+                                            //     }).toList(),
+                                            //   ),
+                                            // ),
+                                          ],
+                                        ),
+                                      )
+                                    : Dimens.box0,
 
                                 ////Material Used/Issued
                                 // Container(
@@ -473,99 +779,52 @@ class PreventiveMaintenanceTaskViewContentWeb
                                 // ),
 
                                 // Dimens.boxHeight30,
-                                // (controller.historyLog != [] &&
-                                //         controller.historyLog!.isNotEmpty)
-                                //     ? Container(
-                                //         margin: Dimens.edgeInsets20,
-                                //         height:
-                                //             ((controller.historyLog?.length ??
-                                //                         0) *
-                                //                     40) +
-                                //                 150,
-                                //         decoration: BoxDecoration(
-                                //           border: Border.all(
-                                //             color: ColorValues
-                                //                 .lightGreyColorWithOpacity35,
-                                //             width: 1,
-                                //           ),
-                                //           boxShadow: [
-                                //             BoxShadow(
-                                //               color: ColorValues
-                                //                   .appBlueBackgroundColor,
-                                //               spreadRadius: 2,
-                                //               blurRadius: 5,
-                                //               offset: Offset(0, 2),
-                                //             ),
-                                //           ],
-                                //         ),
-                                //         child: Column(
-                                //           children: [
-                                //             Padding(
-                                //               padding:
-                                //                   const EdgeInsets.all(10.0),
-                                //               child: Row(
-                                //                 children: [
-                                //                   Text(
-                                //                     "PM History ",
-                                //                     style: Styles.blue700,
-                                //                   ),
-                                //                 ],
-                                //               ),
-                                //             ),
-                                //             Divider(
-                                //               color:
-                                //                   ColorValues.greyLightColour,
-                                //             ),
-                                //             Expanded(
-                                //               child: ScrollableTableView(
-                                //                 columns: [
-                                //                   "Time Stamp",
-                                //                   "Posted By",
-                                //                   "Comment",
-                                //                   "Location",
-                                //                   "Status",
-                                //                 ].map((column) {
-                                //                   return TableViewColumn(
-                                //                     label: column,
-                                //                     minWidth: Get.width * 0.15,
-                                //                   );
-                                //                 }).toList(),
-                                //                 rows: [
-                                //                   ...List.generate(
-                                //                     controller.historyLog
-                                //                             ?.length ??
-                                //                         0,
-                                //                     (index) {
-                                //                       var getHistoryListDetails =
-                                //                           controller
-                                //                                   .historyLog?[
-                                //                               index];
-                                //                       return [
-                                //                         '${getHistoryListDetails?.created_at}',
-                                //                         '${getHistoryListDetails?.created_by_name ?? ''}',
-                                //                         '${getHistoryListDetails?.comment ?? ''}',
-                                //                         '--',
-                                //                         '${getHistoryListDetails?.status ?? ''}',
-                                //                       ];
-                                //                     },
-                                //                   ),
-                                //                   // [
-                                //                 ].map((record) {
-                                //                   return TableViewRow(
-                                //                     height: 50,
-                                //                     cells: record.map((value) {
-                                //                       return TableViewCell(
-                                //                         child: Text(value),
-                                //                       );
-                                //                     }).toList(),
-                                //                   );
-                                //                 }).toList(),
-                                //               ),
-                                //             ),
-                                //           ],
-                                //         ),
-                                //       )
-                                //     : Dimens.box0,
+                                // Row(children: [
+                                //   Text('History', style: Styles.blackBold16),
+                                // ]),
+                                (controller.historyList != null &&
+                                        controller.historyList!.isNotEmpty)
+                                    ? Container(
+                                        margin: Dimens.edgeInsets20,
+                                        height:
+                                            ((controller.historyList?.length ??
+                                                        0) *
+                                                    40) +
+                                                120,
+                                        decoration: BoxDecoration(
+                                          border: Border.all(
+                                            color: ColorValues
+                                                .lightGreyColorWithOpacity35,
+                                            width: 1,
+                                          ),
+                                        ),
+                                        child: //
+                                            Column(
+                                          children: [
+                                            Padding(
+                                              padding:
+                                                  const EdgeInsets.all(8.0),
+                                              child: Row(
+                                                children: [
+                                                  Text(
+                                                    "PM History ",
+                                                    style: Styles.blue700,
+                                                  ),
+                                                ],
+                                              ),
+                                            ),
+                                            Expanded(
+                                              child: HistoryTableWidgetWeb(
+                                                historyList:
+                                                    controller.historyList,
+                                              ),
+                                            ),
+                                          ],
+                                        ),
+                                      )
+                                    //  )
+                                    : //
+                                    Dimens.box0,
                               ],
                             ),
                           ),
@@ -597,18 +856,20 @@ class PreventiveMaintenanceTaskViewContentWeb
                 //   ),
                 // ),
                 //Dimens.boxWidth10,
-                Container(
-                  height: 35,
-                  child: CustomElevatedButton(
-                    // icon: Icons.link,
-                    backgroundColor: ColorValues.blueColor,
-                    text: "Assign",
-                    onPressed: () {
-                      Get.dialog<void>(AssignToPMTaskDialog());
-                      //controller.printScreen();
-                    },
-                  ),
-                ),
+                controller.pmtaskViewModel.value?.status == 161
+                    ? Container(
+                        height: 35,
+                        child: CustomElevatedButton(
+                          // icon: Icons.link,
+                          backgroundColor: ColorValues.blueColor,
+                          text: "Assign",
+                          onPressed: () {
+                            Get.dialog<void>(AssignToPMTaskDialog());
+                            //controller.printScreen();
+                          },
+                        ),
+                      )
+                    : Dimens.box0,
                 Dimens.boxWidth10,
                 // controller.pmtaskViewModel.value?.status == 161
                 //     ? Container(
@@ -655,21 +916,19 @@ class PreventiveMaintenanceTaskViewContentWeb
                       )
                     : Dimens.box0,
                 Dimens.boxWidth10,
-                // controller.pmtaskViewModel.value?.status == 161
-                //     ?
-                Container(
-                  height: 35,
-                  child: CustomElevatedButton(
-                    icon: Icons.link,
-                    backgroundColor: ColorValues.appGreenColor,
-                    text: "Create New Permit",
-                    onPressed: () {
-                      controller.createNewPermit();
-                    },
-                  ),
-                ),
-
-                // : Dimens.box0,
+                controller.pmtaskViewModel.value?.status == 162
+                    ? Container(
+                        height: 35,
+                        child: CustomElevatedButton(
+                          icon: Icons.link,
+                          backgroundColor: ColorValues.appGreenColor,
+                          text: "Create New Permit",
+                          onPressed: () {
+                            controller.createNewPermit();
+                          },
+                        ),
+                      )
+                    : Dimens.box0,
                 // Dimens.boxWidth10,
                 // Container(
                 //   height: 35,
@@ -682,30 +941,29 @@ class PreventiveMaintenanceTaskViewContentWeb
                 //     },
                 //   ),
                 // ),
-                Dimens.boxWidth10,
-                Container(
-                  height: 35,
-                  child: CustomElevatedButton(
-                    icon: Icons.close,
-                    backgroundColor: ColorValues.closeColor,
-                    text: "Close",
-                    onPressed: () {
-                      Get.dialog(CustonApproveRejectDialog(
-                        text: "Execution Close",
-                        controller: controller,
-                        buttonText: "Close",
-                        style: Styles.redElevatedButtonStyle,
-                        onPressed: () {
-                          controller.closePmTaskExecution();
-                          Get.back();
-                        },
-                      ));
-                    },
-                  ),
-                ),
+                // Dimens.boxWidth10,
+                // Container(
+                //   height: 35,
+                //   child: CustomElevatedButton(
+                //     icon: Icons.close,
+                //     backgroundColor: ColorValues.closeColor,
+                //     text: "Close",
+                //     onPressed: () {
+                //       Get.dialog(CustonApproveRejectDialog(
+                //         text: "Execution Close",
+                //         controller: controller,
+                //         buttonText: "Close",
+                //         style: Styles.redElevatedButtonStyle,
+                //         onPressed: () {
+                //           controller.closePmTaskExecution();
+                //           Get.back();
+                //         },
+                //       ));
+                //     },
+                //   ),
+                // ),
                 Dimens.boxWidth10,
 
-                Dimens.boxWidth10,
                 controller.pmtaskViewModel.value?.status == 165
                     ? Container(
                         height: 35,

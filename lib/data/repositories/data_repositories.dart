@@ -1534,6 +1534,18 @@ class DataRepository extends DomainRepository {
     );
   }
 
+  Future<ResponseModel> getMrsListByModuleTask({
+    String? auth,
+    int? taskId,
+    bool? isLoading,
+  }) async {
+    return await connectHelper.getMrsListByModuleTask(
+      auth: auth,
+      taskId: taskId,
+      isLoading: isLoading,
+    );
+  }
+
   Future<ResponseModel> deleteCkeckpoint({
     auth,
     bool? isLoading,
@@ -1591,20 +1603,6 @@ class DataRepository extends DomainRepository {
       auth: auth,
       moduleType: moduleType,
       permitId: permitId,
-      isLoading: isLoading,
-    );
-  }
-
-  Future<ResponseModel> getGoHistory({
-    String? auth,
-    int? id,
-    int? moduleType,
-    bool? isLoading,
-  }) async {
-    return await connectHelper.getGoHistory(
-      auth: auth,
-      moduleType: moduleType,
-      id: id,
       isLoading: isLoading,
     );
   }
@@ -3352,6 +3350,16 @@ class DataRepository extends DomainRepository {
       await connectHelper.ClosePMTaskExecution(
         auth: auth,
         ClosePMTaskExecutionJsonString: ClosePMTaskExecutionJsonString,
+        isLoading: isLoading ?? false,
+      );
+  Future<ResponseModel> UpdatePMTaskExecution({
+    required String auth,
+    updatePMTaskExecutionJsonString,
+    bool? isLoading,
+  }) async =>
+      await connectHelper.UpdatePMTaskExecution(
+        auth: auth,
+        updatePMTaskExecutionJsonString: updatePMTaskExecutionJsonString,
         isLoading: isLoading ?? false,
       );
   Future<ResponseModel> rejectPmTaskExecution({

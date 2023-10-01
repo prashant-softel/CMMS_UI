@@ -1943,42 +1943,6 @@ class Repository {
     }
   }
 
-  Future<List<HistoryModel>?> getGoHistory(
-    int? moduleType,
-    int? id,
-    bool? isLoading,
-  ) async {
-    try {
-      final auth = await getSecuredValue(LocalKeys.authToken);
-      final res = await _dataRepository.getGoHistory(
-        auth: auth,
-        moduleType: moduleType,
-        id: id,
-        isLoading: isLoading,
-      );
-      // print('Permit History: ${res.data}');
-
-      if (!res.hasError) {
-        final jsonGoDetailsModels = jsonDecode(res.data);
-        final List<HistoryModel> _goDetailsList = jsonGoDetailsModels
-            .map<HistoryModel>(
-              (m) => HistoryModel.fromJson(
-                Map<String, dynamic>.from(m),
-              ),
-            )
-            .toList();
-
-        return _goDetailsList;
-      } else {
-        Utility.showDialog(res.errorCode.toString());
-        return null;
-      }
-    } catch (error) {
-      print(error.toString());
-      return [];
-    }
-  }
-
   Future<List<InventoryDetailModel?>?> getInventoryDetailList(
     String auth,
     int? id,
@@ -4650,6 +4614,40 @@ class Repository {
         return _mrsListByModule;
       } else {
         Utility.showDialog(res.errorCode.toString() + 'getMrsListByModule');
+        return null;
+      }
+    } catch (error) {
+      print(error.toString());
+      return [];
+    }
+  }
+
+  Future<List<MRSListByJobIdModel>?> getMrsListByModuleTask(
+    //String? auth,
+    int? taskId,
+    bool? isLoading,
+  ) async {
+    try {
+      final auth = await getSecuredValue(LocalKeys.authToken);
+      final res = await _dataRepository.getMrsListByModuleTask(
+        auth: auth,
+        isLoading: isLoading,
+        taskId: taskId,
+      );
+
+      if (!res.hasError) {
+        final jsonMrsListByModuleModel = jsonDecode(res.data);
+        final List<MRSListByJobIdModel> _mrsListByModule =
+            jsonMrsListByModuleModel
+                .map<MRSListByJobIdModel>(
+                  (m) => MRSListByJobIdModel.fromJson(
+                      Map<String, dynamic>.from(m)),
+                )
+                .toList();
+        print({"_mrsListByModule", _mrsListByModule});
+        return _mrsListByModule;
+      } else {
+        Utility.showDialog(res.errorCode.toString() + 'getMrsListByModuleTask');
         return null;
       }
     } catch (error) {
@@ -8294,6 +8292,30 @@ class Repository {
           auth: auth,
           isLoading: isLoading,
           ClosePMTaskExecutionJsonString: json.encode(closetoJsonString));
+      print({"res.data", res.data});
+      if (!res.hasError) {
+        Fluttertoast.showToast(msg: res.data, fontSize: 45.0);
+
+        return true;
+      } else {
+        Fluttertoast.showToast(msg: res.data, fontSize: 45.0);
+        return false;
+      }
+    } catch (error) {
+      log(error.toString());
+      return false;
+    }
+  }
+
+  Future<bool> UpdatePMTaskExecution(
+      {bool? isLoading, updatePMTaskExecutionJsonString}) async {
+    try {
+      final auth = await getSecuredValue(LocalKeys.authToken);
+      log(auth);
+      final res = await _dataRepository.UpdatePMTaskExecution(
+          auth: auth,
+          isLoading: isLoading,
+          updatePMTaskExecutionJsonString: updatePMTaskExecutionJsonString);
       print({"res.data", res.data});
       if (!res.hasError) {
         Fluttertoast.showToast(msg: res.data, fontSize: 45.0);

@@ -9,6 +9,7 @@ import 'package:cmms/app/theme/dimens.dart';
 import 'package:cmms/app/utils/utility.dart';
 import 'package:cmms/domain/models/comment_model.dart';
 import 'package:cmms/domain/models/employee_model.dart';
+import 'package:cmms/domain/models/mrs_list_by_jobId.dart';
 import 'package:cmms/domain/models/new_permit_list_model.dart';
 import 'package:cmms/domain/models/pm_task_view_list_model.dart';
 import 'package:flutter/material.dart';
@@ -25,6 +26,7 @@ import 'package:pdf/widgets.dart' as pw;
 
 import 'package:printing/printing.dart';
 
+import '../../domain/models/history_model.dart';
 import '../theme/styles.dart';
 import '../widgets/custom_elevated_button.dart';
 
@@ -74,6 +76,9 @@ class PreventiveMaintenanceTaskViewController extends GetxController {
   Rx<String> selectedAssignedTo = ''.obs;
   Rx<bool> isAssignedToSelected = true.obs;
   int selectedAssignedToId = 0;
+  RxList<HistoryModel?>? historyList = <HistoryModel?>[].obs;
+  RxList<MRSListByJobIdModel?>? listMrsByTaskId = <MRSListByJobIdModel?>[].obs;
+
   //////////////////////////////////
 
   @override
@@ -91,10 +96,12 @@ class PreventiveMaintenanceTaskViewController extends GetxController {
 
       if (scheduleId != 0) {
         await getPmtaskViewList(scheduleId: scheduleId.value, isloading: true);
+        getHistory();
+        getMrsListByModuleTask(taskId: scheduleId.value);
       }
-      textControllers =
-          List.generate(permitValuesCount, (_) => TextEditingController());
-      permitValues = RxList<String>.filled(permitValuesCount, '');
+      // textControllers =
+      //     List.generate(permitValuesCount, (_) => TextEditingController());
+      // permitValues = RxList<String>.filled(permitValuesCount, '');
 
       super.onInit();
     } catch (e) {
@@ -122,6 +129,32 @@ class PreventiveMaintenanceTaskViewController extends GetxController {
     } catch (e) {
       Utility.showDialog(e.toString() + 'scheduleId');
     }
+  }
+
+  Future<void> getMrsListByModuleTask({required int taskId}) async {
+    listMrsByTaskId?.value =
+        await preventiveMaintenanceTaskViewPresenter.getMrsListByModuleTask(
+              taskId,
+              false,
+            ) ??
+            [];
+    update(["JobsLinkdToPermitList"]);
+  }
+
+  Future<void> getHistory() async {
+    /// TODO: CHANGE THESE VALUES
+    int moduleType = 27;
+    //
+    historyList?.value =
+        await preventiveMaintenanceTaskViewPresenter.getHistory(
+              // tempModuleType,
+              // tempJobCardId,
+              moduleType,
+              scheduleId.value,
+              true,
+            ) ??
+            [];
+    update(["historyList"]);
   }
 
   Future<void> getAssignedToList(_facilityId) async {

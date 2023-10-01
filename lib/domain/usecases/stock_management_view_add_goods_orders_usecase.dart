@@ -28,12 +28,12 @@ class ViewAddGoodsOrdersUsecase {
         goodsOrderApproveJsonString,
         isLoading,
       );
-  Future<List<HistoryModel>?> getGoHistory({
+  Future<List<HistoryModel>?> getHistory({
     moduleType,
     id,
     bool? isLoading,
   }) async =>
-      await _repository.getGoHistory(
+      await _repository.getHistory(
         moduleType,
         id,
         isLoading,

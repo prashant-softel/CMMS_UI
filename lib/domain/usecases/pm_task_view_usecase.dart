@@ -1,5 +1,7 @@
 import 'package:cmms/domain/domain.dart';
 import 'package:cmms/domain/models/employee_model.dart';
+import 'package:cmms/domain/models/history_model.dart';
+import 'package:cmms/domain/models/mrs_list_by_jobId.dart';
 import 'package:cmms/domain/models/new_permit_list_model.dart';
 import 'package:cmms/domain/models/pm_task_view_list_model.dart';
 
@@ -73,4 +75,22 @@ class PreventiveMaintenanceTaskViewUsecase {
   }) async =>
       await repository.ClosePMTaskExecution(
           closetoJsonString: closetoJsonString, isLoading: isLoading);
+  Future<List<HistoryModel>?> getHistory({
+    moduleType,
+    id,
+    bool? isLoading,
+  }) async =>
+      await repository.getHistory(
+        moduleType,
+        id,
+        isLoading,
+      );
+  Future<List<MRSListByJobIdModel>?> getMrsListByModuleTask({
+    taskId,
+    bool? isLoading,
+  }) async =>
+      await repository.getMrsListByModuleTask(
+        taskId,
+        isLoading,
+      );
 }

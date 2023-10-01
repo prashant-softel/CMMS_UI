@@ -94,12 +94,12 @@ class StockManagementAddGoodsOrdersPresenter {
 
   Future<List<FacilityModel?>?> getFacilityList() async =>
       await stockManagementAddGoodsOrdersUsecase.getFacilityList();
-  Future<List<HistoryModel>?> getGoHistory(
+  Future<List<HistoryModel>?> getHistory(
     moduleType,
     id,
     isLoading,
   ) async =>
-      await stockManagementAddGoodsOrdersUsecase.getGoHistory(
+      await stockManagementAddGoodsOrdersUsecase.getHistory(
         moduleType: moduleType,
         id: id,
         isLoading: isLoading,

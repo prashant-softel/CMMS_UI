@@ -226,7 +226,7 @@ class ViewAddGoodsOrdersController extends GetxController {
     int moduleType = 32;
     // int tempModuleType = 21;
     //
-    historyList?.value = await viewAddGoodsOrdersPresenter.getGoHistory(
+    historyList?.value = await viewAddGoodsOrdersPresenter.getHistory(
           // tempModuleType,
           // tempJobCardId,
           moduleType,

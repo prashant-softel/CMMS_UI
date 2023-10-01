@@ -1,5 +1,6 @@
 import 'package:cmms/app/theme/dimens.dart';
 import 'package:cmms/app/widgets/custom_textField.dart';
+import 'package:cmms/app/widgets/execution_approve_dialog.dart';
 import 'package:cmms/app/widgets/observation_pm_execution_process_dialog.dart';
 import 'package:cmms/app/widgets/table_action_button.dart';
 import 'package:data_table_2/data_table_2.dart';
@@ -291,19 +292,38 @@ class PreventiveMaintenanceExecutionContentWeb
                                                   '')),
                                               DataCell(Row(
                                                 children: [
+                                                  Container(
+                                                    height: 25,
+                                                    width: 90,
+                                                    child: CustomElevatedButton(
+                                                      size: 12,
+                                                      backgroundColor:
+                                                          ColorValues
+                                                              .appDarkBlueColor,
+                                                      text: "Clone Of",
+                                                      onPressed: () {
+                                                        //   Get.back();
+                                                      },
+                                                    ),
+                                                  ),
+                                                  Dimens.boxWidth10,
                                                   Text(controller
                                                           .scheduleCheckPoints?[
                                                               index]
                                                           ?.checklist_name
                                                           .toString() ??
                                                       ''),
-                                                  Dimens.boxWidth30,
+                                                  Spacer(),
+                                                  // Dimens.boxWidth10,
                                                   TableActionButton(
                                                       color:
                                                           ColorValues.editColor,
                                                       icon: Icons.edit,
                                                       message: "Edit",
                                                       onPress: () {
+                                                        controller
+                                                                .selectedItem =
+                                                            null;
                                                         controller.selectedItem = controller
                                                             .scheduleCheckPoints!
                                                             .firstWhere((element) =>
@@ -706,101 +726,101 @@ class PreventiveMaintenanceExecutionContentWeb
                                     //         ),
                                     //       )
                                     //     : Dimens.box0,
-                                    Dimens.boxHeight20,
                                     Row(
                                       crossAxisAlignment:
                                           CrossAxisAlignment.start,
                                       children: [
                                         CustomRichText(title: "Comment:"),
                                         Dimens.boxWidth10,
-                                        IgnorePointer(
-                                          ignoring:
-                                              !controller.isTouchable.value,
-                                          child: Container(
-                                              width: (Get.width * .6),
-                                              decoration: BoxDecoration(
-                                                boxShadow: [
-                                                  BoxShadow(
-                                                    color: Colors.black26,
-                                                    offset: const Offset(
-                                                      5.0,
-                                                      5.0,
-                                                    ),
-                                                    blurRadius: 5.0,
-                                                    spreadRadius: 1.0,
+                                        Container(
+                                            width: (Get.width * .6),
+                                            decoration: BoxDecoration(
+                                              boxShadow: [
+                                                BoxShadow(
+                                                  color: Colors.black26,
+                                                  offset: const Offset(
+                                                    5.0,
+                                                    5.0,
                                                   ),
-                                                  BoxShadow(
-                                                    color:
-                                                        ColorValues.whiteColor,
-                                                    offset:
-                                                        const Offset(0.0, 0.0),
-                                                    blurRadius: 0.0,
-                                                    spreadRadius: 0.0,
-                                                  ),
-                                                ],
-                                                color: ColorValues.whiteColor,
-                                                borderRadius:
-                                                    BorderRadius.circular(5),
-                                              ),
-                                              child: LoginCustomTextfield(
-                                                maxLine: 5,
-                                              )),
+                                                  blurRadius: 5.0,
+                                                  spreadRadius: 1.0,
+                                                ),
+                                                BoxShadow(
+                                                  color: ColorValues.whiteColor,
+                                                  offset:
+                                                      const Offset(0.0, 0.0),
+                                                  blurRadius: 0.0,
+                                                  spreadRadius: 0.0,
+                                                ),
+                                              ],
+                                              color: ColorValues.whiteColor,
+                                              borderRadius:
+                                                  BorderRadius.circular(5),
+                                            ),
+                                            child: LoginCustomTextfield(
+                                              maxLine: 2,
+                                              textController:
+                                                  controller.updatecommentCtrlr,
+                                            )),
+                                      ],
+                                    ),
+                                    Dimens.boxHeight10,
+
+                                    Row(
+                                      children: [
+                                        Container(
+                                          height: 35,
+                                          child: CustomElevatedButton(
+                                            icon: Icons.close,
+                                            backgroundColor:
+                                                ColorValues.closeColor,
+                                            text: "Update",
+                                            onPressed: () {
+                                              controller
+                                                  .UpdatePMTaskExecution();
+                                              // Get.dialog(
+                                              //     CustonApproveRejectDialog(
+                                              //   text: "Execution Update",
+                                              //   controller: controller,
+                                              //   buttonText: "Update",
+                                              //   style: Styles
+                                              //       .greenElevatedButtonStyle,
+                                              //   onPressed: () {
+                                              //     // controller
+                                              //     //     .closePmTaskExecution();
+                                              //     // Get.back();
+                                              //   },
+                                              // ));
+                                            },
+                                          ),
+                                        ),
+                                        Container(
+                                          height: 35,
+                                          child: CustomElevatedButton(
+                                            icon: Icons.close,
+                                            backgroundColor:
+                                                ColorValues.closeColor,
+                                            text: "Close",
+                                            onPressed: () {
+                                              Get.dialog(
+                                                  CustonApproveRejectDialog(
+                                                text: "Execution Close",
+                                                controller: controller,
+                                                buttonText: "Close",
+                                                style: Styles
+                                                    .redElevatedButtonStyle,
+                                                onPressed: () {
+                                                  controller
+                                                      .closePmTaskExecution();
+                                                  Get.back();
+                                                },
+                                              ));
+                                            },
+                                          ),
                                         ),
                                       ],
                                     ),
-                                    Container(
-                                      margin:
-                                          EdgeInsets.only(bottom: 30, top: 20),
-                                      child: Row(
-                                        mainAxisAlignment:
-                                            MainAxisAlignment.center,
-                                        children: [
-                                          Container(
-                                            height: 35,
-                                            child: CustomElevatedButton(
-                                              backgroundColor:
-                                                  ColorValues.appRedColor,
-                                              text: "Cancel",
-                                              onPressed: () {
-                                                Get.back();
-                                              },
-                                            ),
-                                          ),
-                                          SizedBox(
-                                            width: 20,
-                                          ),
-                                          Container(
-                                            height: 35,
-                                            child: CustomElevatedButton(
-                                              backgroundColor:
-                                                  ColorValues.greenColor,
-                                              text: controller.isTouchable ==
-                                                      false
-                                                  ? 'Start'
-                                                  : "Close",
-                                              onPressed: () {
-                                                // controller.toggleTouch();
-                                                controller.closePmExecution();
-                                              },
-                                            ),
-                                          ),
-                                          SizedBox(
-                                            width: 20,
-                                          ),
-                                          Container(
-                                            height: 35,
-                                            child: CustomElevatedButton(
-                                              backgroundColor:
-                                                  ColorValues.appDarkBlueColor,
-                                              text: "Update",
-                                              onPressed: () {
-                                                controller.updatePmExecution();
-                                              },
-                                            ),
-                                          ),
-                                        ],
-                                      ),
-                                    )
+                                    Dimens.boxHeight20,
                                   ],
                                 )
                               ],
