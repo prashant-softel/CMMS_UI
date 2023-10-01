@@ -5,6 +5,7 @@ import 'package:cmms/app/theme/styles.dart';
 import 'package:cmms/app/utils/utility.dart';
 import 'package:cmms/app/widgets/custom_elevated_button.dart';
 import 'package:cmms/domain/models/comment_model.dart';
+import 'package:cmms/domain/models/history_model.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:fluttertoast/fluttertoast.dart';
@@ -31,14 +32,8 @@ class PreventiveMaintenanceExecutionController extends GetxController {
       <ScheduleCheckPoint?>[].obs;
   RxList<ChecklistObservation>? checklistObservations =
       <ChecklistObservation>[].obs;
-  // ScheduleCheckPoint? scheduleCheckPointsModel;
-  // PaginationController schedulePaginationController = PaginationController(
-  //   rowCount: 0,
-  //   rowsPerPage: 10,
-  // );
-  // RxList<String> scheduleCheckPointsTableColumns = <String>[].obs;
-  // RxList<HistoryLog?>? historyLog = <HistoryLog?>[].obs;
-  // HistoryLog? historyLogModel;
+  RxList<HistoryModel?>? historyList = <HistoryModel?>[].obs;
+
   var commentCtrlr = TextEditingController();
   var updatecommentCtrlr = TextEditingController();
 
@@ -50,6 +45,8 @@ class PreventiveMaintenanceExecutionController extends GetxController {
       await setScheduleId();
       if (scheduleId != 0) {
         await getPmtaskViewList(scheduleId: scheduleId.value, isloading: true);
+
+        getHistory();
       }
       super.onInit();
     } catch (e) {
@@ -77,6 +74,22 @@ class PreventiveMaintenanceExecutionController extends GetxController {
     } catch (e) {
       Utility.showDialog(e.toString() + 'pmTaskId');
     }
+  }
+
+  Future<void> getHistory() async {
+    /// TODO: CHANGE THESE VALUES
+    int moduleType = 27;
+    //
+    historyList?.value =
+        await preventiveMaintenanceExecutionPresenter.getHistory(
+              // tempModuleType,
+              // tempJobCardId,
+              moduleType,
+              scheduleId.value,
+              true,
+            ) ??
+            [];
+    update(["historyList"]);
   }
 
   void toggleTouch() {

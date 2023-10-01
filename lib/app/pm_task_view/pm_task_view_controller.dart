@@ -138,7 +138,7 @@ class PreventiveMaintenanceTaskViewController extends GetxController {
               false,
             ) ??
             [];
-    update(["JobsLinkdToPermitList"]);
+    update(["taskLinkdToPermitList"]);
   }
 
   Future<void> getHistory() async {

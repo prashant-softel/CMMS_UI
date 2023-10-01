@@ -529,25 +529,9 @@ class ObservationPmExecutionViewDialog extends GetView {
                         height: 35,
                         child: CustomElevatedButton(
                           backgroundColor: ColorValues.appRedColor,
-                          text: "Cancel",
+                          text: "Close",
                           onPressed: () {
                             Get.back();
-                          },
-                        ),
-                      ),
-                      SizedBox(
-                        width: 20,
-                      ),
-                      Container(
-                        height: 35,
-                        child: CustomElevatedButton(
-                          backgroundColor: ColorValues.greenColor,
-                          text: controller.isTouchable == false
-                              ? 'Start'
-                              : "Close",
-                          onPressed: () {
-                            // controller.toggleTouch();
-                            controller.closePmExecution();
                           },
                         ),
                       ),
