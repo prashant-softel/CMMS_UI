@@ -3535,8 +3535,8 @@ class ViewPermitWebScreen extends GetView<ViewPermitController> {
                           // controller
                           //     .createNewPermit();
                           Get.dialog(PermitApprovedDialog(
-                            permitId:
-                                '${controller.viewPermitDetailsModel.value?.permitNo}',
+                            permitId: controller
+                                .viewPermitDetailsModel.value?.permitNo,
                             ptwStatus:
                                 '${controller.viewPermitDetailsModel.value?.ptwStatus}',
                             jobId: controller.jobId,
