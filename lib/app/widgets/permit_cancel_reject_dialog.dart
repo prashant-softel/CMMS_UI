@@ -14,7 +14,7 @@ import '../theme/dimens.dart';
 import '../theme/styles.dart';
 
 class PermitCancelRejectDialog extends GetView {
-  String? permitId;
+  int? permitId;
 
   PermitCancelRejectDialog({super.key, this.permitId});
   final ViewPermitController _controller = Get.find();

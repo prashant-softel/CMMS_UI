@@ -747,16 +747,26 @@ class DataRepository extends DomainRepository {
       );
   Future<ResponseModel> permitCancelRejectButton({
     required String auth,
-    String? comment,
-    String? id,
+    rejectCancelPermitJsonString,
     bool? isLoading,
   }) async =>
       await connectHelper.permitCancelRejectButton(
         auth: auth,
-        comment: comment,
-        id: id,
+        rejectCancelPermitJsonString: rejectCancelPermitJsonString,
         isLoading: isLoading ?? false,
       );
+  // Future<ResponseModel> permitCancelRejectButton({
+  //   required String auth,
+  //   String? comment,
+  //   String? id,
+  //   bool? isLoading,
+  // }) async =>
+  //     await connectHelper.permitCancelRejectButton(
+  //       auth: auth,
+  //       comment: comment,
+  //       id: id,
+  //       isLoading: isLoading ?? false,
+  //     );
 
   Future<ResponseModel> permitExtendButton({
     required String auth,

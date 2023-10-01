@@ -32,7 +32,9 @@ class PermitCancelByApproverDialog extends GetView {
         insetPadding: Dimens.edgeInsets10_0_10_0,
         contentPadding: EdgeInsets.zero,
         title: Text(
-          ptwStatus == '123' || ptwStatus == '130' ? 'Cancel Permit By Approver' : 'Cancel Permit Request',
+          ptwStatus == '123' || ptwStatus == '130'
+              ? 'Cancel Permit By Approver'
+              : 'Cancel Permit Request',
           textAlign: TextAlign.center,
           // style: TextStyle(color: Colors.green),
         ),
@@ -58,7 +60,8 @@ class PermitCancelByApproverDialog extends GetView {
                         height: 20,
                       ),
                       TextField(
-                        controller: _controller.cancelCommentByApproverTextFieldCtrlr,
+                        controller:
+                            _controller.cancelCommentByApproverTextFieldCtrlr,
                         maxLines: 4,
                         decoration: InputDecoration(
                           hintText: 'Comment here....',
@@ -117,10 +120,11 @@ class PermitCancelByApproverDialog extends GetView {
             ElevatedButton(
               style: Styles.greenElevatedButtonStyle,
               onPressed: () {
-                _controller.permitCancelByApproverButton(permitId: permitId, ptwStatus: '$ptwStatus');
+                _controller.permitCancelByApproverButton(
+                    permitId: permitId, ptwStatus: '$ptwStatus');
                 Get.back();
               },
-              child:  Text('${ptwStatus == '123' || ptwStatus == '130' ? 'Cancel Permit By Approver' : 'Cancel Permit Request'}'),
+              child: Text('Permit Cancel Reject'),
             ),
           ]),
         ],
