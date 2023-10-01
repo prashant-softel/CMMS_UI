@@ -13,6 +13,7 @@ import 'package:cmms/app/widgets/file_upload_with_dropzone_widget.dart';
 import 'package:cmms/app/widgets/history_table_widget_web.dart';
 import 'package:cmms/app/widgets/permit_approved_dialog.dart';
 import 'package:cmms/app/widgets/permit_cancel_by_approver_dialog.dart';
+import 'package:cmms/app/widgets/permit_cancel_reject_dialog.dart';
 import 'package:cmms/app/widgets/permit_cancel_request_dialog.dart';
 import 'package:cmms/app/widgets/permit_close_dialog.dart';
 import 'package:cmms/app/widgets/permit_extend_dialog.dart';
@@ -3775,11 +3776,9 @@ class ViewPermitWebScreen extends GetView<ViewPermitController> {
                         onPressed: () {
                           // controller
                           //     .createNewPermit();
-                          Get.dialog(PermitCancelByApproverDialog(
-                            permitId:
-                                '${controller.viewPermitDetailsModel.value?.permitNo}',
-                            ptwStatus:
-                                '${controller.viewPermitDetailsModel.value?.ptwStatus}',
+                          Get.dialog(PermitCancelRejectDialog(
+                            permitId: controller
+                                .viewPermitDetailsModel.value?.permitNo,
                           ));
                         },
                       ),

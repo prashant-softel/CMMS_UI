@@ -10,6 +10,7 @@ import 'package:cmms/app/widgets/create_permit_dialog.dart';
 import 'package:cmms/domain/models/block_model.dart';
 import 'package:cmms/domain/models/cancel_permit_request_model.dart';
 import 'package:cmms/domain/models/close_permit_model.dart';
+import 'package:cmms/domain/models/comment_model.dart';
 import 'package:cmms/domain/models/create_sop_model.dart';
 import 'package:cmms/domain/models/employee_list_model.dart';
 import 'package:cmms/domain/models/employee_list_model2.dart';
@@ -685,14 +686,25 @@ class ViewPermitController extends GetxController {
     print('Cancel Button By Approver Data:${permitId}');
   }
 
-  Future<void> permitCancelRejectButton({String? permitId}) async {
-    String _cancelComment = cancelCommentRejectTextFieldCtrlr.text.trim();
+  void permitCancelRejectButton({int? permitId}) async {
+    {
+      String _comment = cancelCommentRejectTextFieldCtrlr.text.trim();
 
-    final _permitCancelByApproverBtn = await viewPermitPresenter
-        .permitCancelRejectButton(comment: _cancelComment, id: permitId);
-    // showAlertPermitApproveDialog();
-    print('Cancel Button  Reject Data:${_cancelComment}');
-    print('Cancel Button  Reject Data:${permitId}');
+      CommentModel commentRejectCancelPermitModel =
+          CommentModel(id: permitId, comment: _comment);
+
+      var rejectCancelPermitJsonString =
+          commentRejectCancelPermitModel.toJson();
+
+      Map<String, dynamic>? response =
+          await viewPermitPresenter.permitCancelRejectButton(
+        rejectCancelPermitJsonString: rejectCancelPermitJsonString,
+        isLoading: true,
+      );
+      if (response == true) {
+        //getCalibrationList(facilityId, true);
+      }
+    }
   }
 
   Future<void> getPermitHistory({required int permitId}) async {

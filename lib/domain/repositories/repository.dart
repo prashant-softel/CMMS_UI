@@ -2853,32 +2853,66 @@ class Repository {
     }
   }
 
-  Future<void> permitCancelRejectButton(
-    String? comment,
-    String? id,
+  Future<Map<String, dynamic>> permitCancelRejectButton(
+    rejectCancelPermitJsonString,
     bool? isLoading,
   ) async {
     try {
       final auth = await getSecuredValue(LocalKeys.authToken);
-
       final res = await _dataRepository.permitCancelRejectButton(
         auth: auth,
-        comment: comment,
-        id: id,
+        rejectCancelPermitJsonString: json.encode(rejectCancelPermitJsonString),
         isLoading: isLoading ?? false,
       );
-      print('PermitCancelRejectResponse: ${res.data}');
+
+      var resourceData = res.data;
+
+      print('Response Permit Cancel Reject Response: ${resourceData}');
 
       if (!res.hasError) {
-        //  return _permitIssueModel;
+        if (res.errorCode == 200) {
+          var responseMap = json.decode(res.data);
+          return responseMap;
+        } else {
+          // Get.dialog<void>(WarrantyClaimErrorDialog());
+        }
       } else {
         Utility.showDialog(
-            res.errorCode.toString() + 'permitCancelRejectButton');
+            res.errorCode.toString() + 'PermitCancelRejectResponse');
+        //return '';
       }
+      return Map();
     } catch (error) {
-      log(error.toString());
+      print(error.toString());
+      return Map();
     }
   }
+  // Future<void> permitCancelRejectButton(
+  //   String? comment,
+  //   String? id,
+  //   bool? isLoading,
+  // ) async {
+  //   try {
+  //     final auth = await getSecuredValue(LocalKeys.authToken);
+
+  //     final res = await _dataRepository.permitCancelRejectButton(
+  //       auth: auth,
+  //       comment: comment,
+  //       id: id,
+  //       isLoading: isLoading ?? false,
+  //     );
+  //     print('PermitCancelRejectResponse: ${res.data}');
+
+  //     if (!res.hasError) {
+  //       //  return _permitIssueModel;
+  //     } else {
+  //       Utility.showDialog(
+  //           res.errorCode.toString() + 'permitCancelRejectButton');
+  //     }
+  //   } catch (error) {
+  //     log(error.toString());
+  //   }
+  // }
 
   ///Extend Permit
   Future<Map<String, dynamic>> permitExtendButton(
