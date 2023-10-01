@@ -224,7 +224,7 @@ class StockManagementAddGoodsOrdersController extends GetxController {
           {
             "key": "Drop_down",
             "value": '${element.assetItem_Name}',
-            'assetItemID': '${element.assetItemID}',
+            'assetMasterItemID': '${element.assetMasterItemID}',
             'id': '${element.id}'
           },
           {
@@ -235,17 +235,17 @@ class StockManagementAddGoodsOrdersController extends GetxController {
           {
             'key': "Requested",
             "value": '${element.requested_qty}',
-            // 'id': '${element.assetItemID}'
+            // 'id': '${element.assetMasterItemID}'
           },
           {
             'key': "Cost",
             "value": '${element.cost}',
-            // 'id': '${element.assetItemID}'
+            // 'id': '${element.assetMasterItemID}'
           },
           {
             'key': "Order",
             "value": '${element.ordered_qty}',
-            // 'id': '${element.assetItemID}'
+            // 'id': '${element.assetMasterItemID}'
           },
         ]);
 
@@ -394,7 +394,7 @@ class StockManagementAddGoodsOrdersController extends GetxController {
       {
         "key": "Drop_down",
         "value": 'Please Select',
-        "assetItemID": '',
+        "assetMasterItemID": '',
         "id": ''
       },
       {'key': "Paid_By", "value": 'Please Select', "id": ''},
@@ -429,14 +429,14 @@ class StockManagementAddGoodsOrdersController extends GetxController {
           accepted_qty: 0,
           damaged_qty: 0,
           requested_qty: int.tryParse(element[2]["value"] ?? '0'),
-          assetItemID: dropdownMapperData[element[0]["value"]]?.id,
+          assetMasterItemID: dropdownMapperData[element[0]["value"]]?.id,
           cost: double.tryParse(element[3]["value"] ?? '0'),
           ordered_qty: int.tryParse(element[4]["value"] ?? '0'),
           paid_by_ID: paiddropdownMapperData[element[1]["value"]]?.id);
       items.add(item);
     });
     CreateGoModel createGoModel = CreateGoModel(
-        // is_submit: 0,
+        is_submit: 1,
         id: 0,
         facility_id: facilityId,
         order_type: 1,
@@ -498,7 +498,7 @@ class StockManagementAddGoodsOrdersController extends GetxController {
         damaged_qty: 0,
         requested_qty: int.tryParse(element[2]["value"] ?? '0'),
         goItemID: int.tryParse('${element[0]["id"]}'),
-        assetItemID: int.tryParse('${element[0]["assetItemID"]}'),
+        assetMasterItemID: int.tryParse('${element[0]["assetMasterItemID"]}'),
         cost: double.tryParse(element[3]["value"] ?? '0'),
         ordered_qty: int.tryParse(element[4]["value"] ?? '0'),
         paid_by_ID: int.tryParse('${element[1]["id"]}'),
@@ -509,6 +509,7 @@ class StockManagementAddGoodsOrdersController extends GetxController {
       items.add(item);
     });
     CreateGoModel createGoModel = CreateGoModel(
+        is_submit: 1,
         id: id.value,
         facility_id: facilityId,
         order_type: 1,

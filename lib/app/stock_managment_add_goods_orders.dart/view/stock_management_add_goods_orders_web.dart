@@ -680,7 +680,7 @@ class _AddGoodsOrdersWebState extends State<AddGoodsOrdersWeb> {
                       height: 40,
                       child: CustomElevatedButton(
                         backgroundColor: ColorValues.submitColor,
-                        text: 'Update',
+                        text: 'Update2',
                         onPressed: () {
                           controller.updateGoodsOrder();
                         },
