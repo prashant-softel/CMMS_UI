@@ -399,6 +399,8 @@ class ViewPermitController extends GetxController {
   TextEditingController rejectCommentTextFieldCtrlr = TextEditingController();
   TextEditingController cancelCommentByApproverTextFieldCtrlr =
       TextEditingController();
+  TextEditingController cancelCommentRejectTextFieldCtrlr =
+      TextEditingController();
 
   RxList<InventoryDetailModel?>? inventoryDetailList =
       <InventoryDetailModel?>[].obs;
@@ -681,6 +683,16 @@ class ViewPermitController extends GetxController {
     // showAlertPermitApproveDialog();
     print('Cancel Button By Approver Data:${_cancelComment}');
     print('Cancel Button By Approver Data:${permitId}');
+  }
+
+  Future<void> permitCancelRejectButton({String? permitId}) async {
+    String _cancelComment = cancelCommentRejectTextFieldCtrlr.text.trim();
+
+    final _permitCancelByApproverBtn = await viewPermitPresenter
+        .permitCancelRejectButton(comment: _cancelComment, id: permitId);
+    // showAlertPermitApproveDialog();
+    print('Cancel Button  Reject Data:${_cancelComment}');
+    print('Cancel Button  Reject Data:${permitId}');
   }
 
   Future<void> getPermitHistory({required int permitId}) async {

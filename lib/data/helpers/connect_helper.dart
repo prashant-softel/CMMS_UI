@@ -1086,6 +1086,33 @@ class ConnectHelper {
     return responseModel;
   }
 
+  Future<ResponseModel> permitCancelRejectButton({
+    required String auth,
+    bool? isLoading,
+    String? comment,
+    String? id,
+    String? ptwStatus,
+  }) async {
+    // facilityId = 45;
+    var responseModel = await apiWrapper.makeRequest(
+      'Permit/PermitCancelReject',
+      Request.put,
+      {'comment': "$comment", 'id': id},
+      isLoading ?? true,
+      {
+        'Authorization': 'Bearer $auth',
+      },
+    );
+    print(
+        'PermitCancelByApprover&CancelRequestResponse: ${responseModel.data}');
+    var res = responseModel.data;
+    var parsedJson = json.decode(res);
+    Get.dialog<void>(
+        PermitMessageCancelByApproverDialog(data: parsedJson['message']));
+
+    return responseModel;
+  }
+
   Future<ResponseModel> permitExtendButton({
     required String auth,
     extendPermitJsonString,

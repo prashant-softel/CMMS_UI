@@ -140,6 +140,18 @@ class ViewPermitUsecase {
     );
   }
 
+  Future<void> permitCancelRejectButton({
+    String? comment,
+    String? id,
+    bool? isLoading,
+  }) async {
+    await repository.permitCancelRejectButton(
+      comment,
+      id,
+      isLoading,
+    );
+  }
+
   Future<List<SafetyMeasureListModel>> getSafetyMeasureList(
       {required bool isLoading, required int? permit_type_id}) async {
     return repository.getSafetyMeasureList(

@@ -143,6 +143,18 @@ class ViewPermitPresenter {
         isLoading: isLoading ?? false,
       );
 
+  Future<void> permitCancelRejectButton({
+    String? comment,
+    String? id,
+    String? ptwStatus,
+    bool? isLoading,
+  }) async =>
+      await viewPermitUsecase.permitCancelRejectButton(
+        comment: comment,
+        id: id,
+        isLoading: isLoading ?? false,
+      );
+
   Future<List<EmployeeModel?>?> getAssignedToList({
     String? auth,
     int? facilityId,

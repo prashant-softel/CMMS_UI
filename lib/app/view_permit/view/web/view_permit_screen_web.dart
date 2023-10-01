@@ -216,7 +216,7 @@ class ViewPermitWebScreen extends GetView<ViewPermitController> {
                                               height: 1,
                                             ),
                                             CustomRichText(
-                                                title: 'Site Permit No.: '),
+                                                title: 'Site Permit No: '),
                                             SizedBox(
                                               height: 2,
                                             ),
@@ -1627,10 +1627,21 @@ class ViewPermitWebScreen extends GetView<ViewPermitController> {
                                       padding: const EdgeInsets.all(10.0),
                                       child: Row(
                                         children: [
-                                          Text(
-                                            '${controller.viewPermitDetailsModel.value?.title}',
-                                            style: Styles.blackBold16,
+                                          Row(
+                                            children: [
+                                              Text(
+                                                'Site Permit No: ',
+                                                style: Styles.black17,
+                                              ),
+                                              Text(
+                                                  '${controller.viewPermitDetailsModel.value?.sitePermitNo}',
+                                                  style: Styles.blue17),
+                                            ],
                                           ),
+                                          // Text(
+                                          //   '${controller.viewPermitDetailsModel.value?.title}',
+                                          //   style: Styles.blackBold16,
+                                          // ),
                                           Spacer(),
                                           Container(
                                             // height: 30,
@@ -1698,7 +1709,13 @@ class ViewPermitWebScreen extends GetView<ViewPermitController> {
                                     Divider(
                                       color: ColorValues.lightGreyColor,
                                     ),
-
+                                    Padding(
+                                      padding: const EdgeInsets.all(8.0),
+                                      child: Text(
+                                        "This permit is valid only when issued Et approved by an authorized issuer. This permit must be obtained before a specified work is started Et it must be closed immediately after completion of the work or at the end of the shift as agreed by the parties identified on this permit. Refer PTW SOP(hyperlink). ",
+                                        style: Styles.grey12,
+                                      ),
+                                    ),
                                     Container(
                                       margin: EdgeInsets.only(
                                           left: 20, right: 20, top: 20),
@@ -1711,12 +1728,11 @@ class ViewPermitWebScreen extends GetView<ViewPermitController> {
                                                 CrossAxisAlignment.end,
                                             children: [
                                               Text(
-                                                'Start Date: ',
+                                                'Plant: ',
                                                 style: Styles.black17,
                                               ),
-                                              Dimens.boxHeight5,
                                               Text(
-                                                'Permit No: ',
+                                                'Start Date: ',
                                                 style: Styles.black17,
                                               ),
                                               Dimens.boxHeight5,
@@ -1730,6 +1746,10 @@ class ViewPermitWebScreen extends GetView<ViewPermitController> {
                                             crossAxisAlignment:
                                                 CrossAxisAlignment.start,
                                             children: [
+                                              Text(
+                                                  '${controller.viewPermitDetailsModel.value?.siteName}',
+                                                  overflow: TextOverflow.clip,
+                                                  style: Styles.blue17),
                                               SizedBox(
                                                 child: Text(
                                                     '${controller.startDateTimeCtrlr.text}',
@@ -1738,11 +1758,7 @@ class ViewPermitWebScreen extends GetView<ViewPermitController> {
                                               Dimens.boxHeight5,
 
                                               // Dimens.boxHeight5,
-                                              SizedBox(
-                                                child: Text(
-                                                    '${controller.viewPermitDetailsModel.value?.permitNo}',
-                                                    style: Styles.blue17),
-                                              ),
+
                                               Dimens.boxHeight5,
 
                                               //  SizedBox(
@@ -1801,12 +1817,47 @@ class ViewPermitWebScreen extends GetView<ViewPermitController> {
                                                 CrossAxisAlignment.end,
                                             children: [
                                               Text(
+                                                'Block: ',
+                                                style: Styles.black17,
+                                              ),
+                                              Text(
                                                 'Valid Till: ',
                                                 style: Styles.black17,
                                               ),
                                               Dimens.boxHeight5,
+                                              // Text(
+                                              //   'Permit Type: ',
+                                              //   style: Styles.black17,
+                                              // ),
+                                            ],
+                                          ),
+                                          Column(
+                                            crossAxisAlignment:
+                                                CrossAxisAlignment.start,
+                                            children: [
                                               Text(
-                                                'Site Permit No.: ',
+                                                  '${controller.viewPermitDetailsModel.value?.blockName}',
+                                                  style: Styles.blue17),
+                                              Text(
+                                                  '${controller.validTillTimeCtrlr.text}',
+                                                  style: Styles.blue17),
+                                              // Text(
+                                              //     '${controller.viewPermitDetailsModel.value?.permitTypeName}',
+                                              //     style: Styles.blue17),
+
+                                              Dimens.boxHeight5,
+                                              // SizedBox(
+                                              //   height: 5,
+                                              // ),
+                                            ],
+                                          ),
+                                          Spacer(),
+                                          Column(
+                                            crossAxisAlignment:
+                                                CrossAxisAlignment.end,
+                                            children: [
+                                              Text(
+                                                'Permit No: ',
                                                 style: Styles.black17,
                                               ),
                                               Dimens.boxHeight5,
@@ -1820,14 +1871,15 @@ class ViewPermitWebScreen extends GetView<ViewPermitController> {
                                             crossAxisAlignment:
                                                 CrossAxisAlignment.start,
                                             children: [
-                                              Text(
-                                                  '${controller.validTillTimeCtrlr.text}',
-                                                  style: Styles.blue17),
-
-                                              Dimens.boxHeight5,
-                                              Text(
-                                                  '${controller.viewPermitDetailsModel.value?.sitePermitNo}',
-                                                  style: Styles.blue17),
+                                              SizedBox(
+                                                child: Text(
+                                                    '${controller.viewPermitDetailsModel.value?.permitNo}',
+                                                    style: Styles.blue17),
+                                              ),
+                                              // Text(
+                                              //     '${controller.viewPermitDetailsModel.value?.siteName}',
+                                              //     overflow: TextOverflow.clip,
+                                              //     style: Styles.blue17),
                                               Dimens.boxHeight5,
                                               // SizedBox(
                                               //   height: 5,
@@ -1837,46 +1889,13 @@ class ViewPermitWebScreen extends GetView<ViewPermitController> {
                                                   style: Styles.blue17),
                                             ],
                                           ),
-                                          Spacer(),
-                                          Column(
-                                            crossAxisAlignment:
-                                                CrossAxisAlignment.end,
-                                            children: [
-                                              Text(
-                                                'Plant: ',
-                                                style: Styles.black17,
-                                              ),
-                                              Dimens.boxHeight5,
-                                              Text(
-                                                'Block: ',
-                                                style: Styles.black17,
-                                              ),
-                                            ],
-                                          ),
-                                          Column(
-                                            crossAxisAlignment:
-                                                CrossAxisAlignment.start,
-                                            children: [
-                                              Text(
-                                                  '${controller.viewPermitDetailsModel.value?.siteName}',
-                                                  overflow: TextOverflow.clip,
-                                                  style: Styles.blue17),
-                                              Dimens.boxHeight5,
-                                              // SizedBox(
-                                              //   height: 5,
-                                              // ),
-                                              Text(
-                                                  '${controller.viewPermitDetailsModel.value?.blockName}',
-                                                  style: Styles.blue17),
-                                            ],
-                                          ),
                                         ],
                                       ),
                                     ),
                                     Dimens.boxHeight5,
 
                                     Padding(
-                                      padding: const EdgeInsets.only(left: 30),
+                                      padding: const EdgeInsets.only(left: 70),
                                       child: Row(
                                         mainAxisAlignment:
                                             MainAxisAlignment.start,
@@ -3664,13 +3683,24 @@ class ViewPermitWebScreen extends GetView<ViewPermitController> {
 
               /// Permit Cancel By approver & Permit Request
               varUserAccessModel.value.access_list!
-                              .where((e) =>
-                                  e.feature_id ==
-                                      UserAccessConstants.kPermitFeatureId &&
-                                  e.approve ==
-                                      UserAccessConstants.kHaveApproveAccess)
-                              .length >
-                          0 ||
+                                  .where((e) =>
+                                      e.feature_id ==
+                                          UserAccessConstants
+                                              .kPermitFeatureId &&
+                                      e.approve ==
+                                          UserAccessConstants
+                                              .kHaveApproveAccess)
+                                  .length >
+                              0 &&
+                          varUserAccessModel.value.access_list!
+                                  .where((e) =>
+                                      e.feature_id ==
+                                          UserAccessConstants
+                                              .kPermitFeatureId &&
+                                      e.edit ==
+                                          UserAccessConstants.kHaveEditAccess)
+                                  .length >
+                              0 ||
                       varUserAccessModel.value.access_list!
                                   .where((e) =>
                                       e.feature_id ==
@@ -3710,8 +3740,8 @@ class ViewPermitWebScreen extends GetView<ViewPermitController> {
                   ? Container(
                       height: 45,
                       child: CustomElevatedButton(
-                        backgroundColor: ColorValues.appRedColor,
-                        text: "Cancel By Approver",
+                        backgroundColor: ColorValues.appGreenColor,
+                        text: "Permit Cancel Appove",
                         icon: Icons.close,
                         onPressed: () {
                           // controller
@@ -3723,7 +3753,37 @@ class ViewPermitWebScreen extends GetView<ViewPermitController> {
                                 '${controller.viewPermitDetailsModel.value?.ptwStatus}',
                           ));
                         },
-                      ))
+                      ),
+                    )
+                  : Dimens.box0,
+              Dimens.boxWidth20,
+              varUserAccessModel.value.access_list!
+                              .where((e) =>
+                                  e.feature_id ==
+                                      UserAccessConstants.kPermitFeatureId &&
+                                  e.approve ==
+                                      UserAccessConstants.kHaveApproveAccess)
+                              .length >
+                          0 &&
+                      controller.viewPermitDetailsModel.value?.ptwStatus == 130
+                  ? Container(
+                      height: 45,
+                      child: CustomElevatedButton(
+                        backgroundColor: ColorValues.appRedColor,
+                        text: "Permit Cancel Reject",
+                        icon: Icons.close,
+                        onPressed: () {
+                          // controller
+                          //     .createNewPermit();
+                          Get.dialog(PermitCancelByApproverDialog(
+                            permitId:
+                                '${controller.viewPermitDetailsModel.value?.permitNo}',
+                            ptwStatus:
+                                '${controller.viewPermitDetailsModel.value?.ptwStatus}',
+                          ));
+                        },
+                      ),
+                    )
                   : Dimens.box0
 
               // // //Permit Extend Approve

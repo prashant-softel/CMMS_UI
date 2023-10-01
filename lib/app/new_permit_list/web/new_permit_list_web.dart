@@ -940,7 +940,7 @@ class PermitListDataSource extends DataTableSource {
                                           color:
                                               Color.fromARGB(255, 113, 15, 149),
                                           icon: Icons.approval_rounded,
-                                          message: 'Cancel By Approver',
+                                          message: ' Approve Cancel',
                                           onPress: () {
                                             controller.viewNewPermitList(
                                                 permitId:
