@@ -142,14 +142,14 @@ class ViewAddGoodsOrdersController extends GetxController {
             "key": "Drop_down",
             "value": '${element.assetItem_Name}',
             // "asset_code": '${element.asset_code}',
-            'assetItemID': '${element.assetItemID}',
+            'assetMasterItemID': '${element.assetMasterItemID}',
             'id': '${element.id}'
           },
           {'key': "Paid_By", "value": '${element.paid_by_name}'},
           {
             'key': "Requested",
             "value": '${element.requested_qty}',
-            // 'id': '${element.assetItemID}'
+            // 'id': '${element.assetMasterItemID}'
           },
           {'key': "Cost", "value": '${element.cost}'},
           {'key': "Order", "value": '${element.ordered_qty}'},
@@ -343,7 +343,7 @@ class ViewAddGoodsOrdersController extends GetxController {
       {
         "key": "Drop_down",
         "value": 'Please Select',
-        "assetItemID": '',
+        "assetMasterItemID": '',
         "id": ''
       },
       {'key': "Paid_By", "value": 'Please Select'},
@@ -386,7 +386,7 @@ class ViewAddGoodsOrdersController extends GetxController {
           accepted_qty: 0,
           damaged_qty: 0,
           requested_qty: int.tryParse(element[2]["value"] ?? '0'),
-          assetItemID: dropdownMapperData[element[0]["value"]]?.id,
+          assetMasterItemID: dropdownMapperData[element[0]["value"]]?.id,
           cost: double.tryParse(element[3]["value"] ?? '0'),
           ordered_qty: int.tryParse(element[4]["value"] ?? '0'),
           paid_by_ID: paiddropdownMapperData[element[1]["value"]]?.id);
@@ -454,14 +454,14 @@ class ViewAddGoodsOrdersController extends GetxController {
         damaged_qty: 0,
         requested_qty: int.tryParse(element[2]["value"] ?? '0'),
         goItemID: int.tryParse('${element[0]["id"]}'),
-        assetItemID: int.tryParse('${element[0]["assetItemID"]}'),
+        assetMasterItemID: int.tryParse('${element[0]["assetMasterItemID"]}'),
         cost: double.tryParse(element[3]["value"] ?? '0'),
         ordered_qty: int.tryParse(element[4]["value"] ?? '0'),
         paid_by_ID: int.tryParse('${element[1]["id"]}'),
       );
       items.add(item);
       // Items item = Items(
-      //     assetItemID: dropdownMapperData[element[0]["value"]]?.id,
+      //     assetMasterItemID: dropdownMapperData[element[0]["value"]]?.id,
       //     cost: int.tryParse(element[2]["value"] ?? '0'),
       //     ordered_qty: int.tryParse(element[3]["value"] ?? '0'),
       //     poID: paiddropdownMapperData[element[1]["value"]]?.id);

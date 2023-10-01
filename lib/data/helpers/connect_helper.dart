@@ -806,28 +806,26 @@ class ConnectHelper {
     return responseModel;
   }
 
-  Future<ResponseModel> permitApprovedButton(
-      {required String auth,
-      bool? isLoading,
-      String? comment,
-      String? id,
-      String? employee_id,
-      String? ptwStatus,
-      int? jobId}) async {
-    // facilityId = 45;
-    // ptwStatus = 123;
+  Future<ResponseModel> permitApprovedButton({
+    required String auth,
+    String? ptwStatus,
+    rejectCancelPermitJsonString,
+    int? jobId,
+    bool? isLoading,
+  }) async {
     var responseModel = await apiWrapper.makeRequest(
       ptwStatus == '133'
           ? 'Permit/PermitExtendApprove'
           : 'Permit/PermitApprove',
       Request.put,
-      {'comment': "$comment", 'id': id},
-      isLoading ?? true,
+      rejectCancelPermitJsonString,
+      isLoading ?? false,
       {
+        'Content-Type': 'application/json',
         'Authorization': 'Bearer $auth',
       },
     );
-    print('PermitApprovedResponse: ${responseModel.data}');
+    print('reqOrderApproveResponse: ${responseModel.data}');
     var res = responseModel.data;
     var parsedJson = json.decode(res);
     Get.dialog<void>(PermitMessageApproveDialog(
@@ -835,9 +833,40 @@ class ConnectHelper {
       jobId: jobId,
       ptwStatus: int.tryParse('$ptwStatus'),
     ));
-
     return responseModel;
   }
+  // Future<ResponseModel> permitApprovedButton(
+  //     {required String auth,
+  //     bool? isLoading,
+  //     String? comment,
+  //     String? id,
+  //     String? employee_id,
+  //     String? ptwStatus,
+  //     int? jobId}) async {
+  //   // facilityId = 45;
+  //   // ptwStatus = 123;
+  //   var responseModel = await apiWrapper.makeRequest(
+  //     ptwStatus == '133'
+  //         ? 'Permit/PermitExtendApprove'
+  //         : 'Permit/PermitApprove',
+  //     Request.put,
+  //     {'comment': "$comment", 'id': id},
+  //     isLoading ?? true,
+  //     {
+  //       'Authorization': 'Bearer $auth',
+  //     },
+  //   );
+  //   print('PermitApprovedResponse: ${responseModel.data}');
+  //   var res = responseModel.data;
+  //   var parsedJson = json.decode(res);
+  //   Get.dialog<void>(PermitMessageApproveDialog(
+  //     data: parsedJson['message'],
+  //     jobId: jobId,
+  //     ptwStatus: int.tryParse('$ptwStatus'),
+  //   ));
+
+  //   return responseModel;
+  // }
 
   Future<ResponseModel> goodsOrderApprovedButton({
     required String auth,

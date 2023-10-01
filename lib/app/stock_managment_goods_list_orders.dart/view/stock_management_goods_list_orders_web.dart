@@ -761,9 +761,9 @@ class GoodsOrderListDataSource extends DataTableSource {
                                             e.feature_id ==
                                                 UserAccessConstants
                                                     .kGoodsFeatureId &&
-                                            e.delete ==
+                                            e.edit ==
                                                 UserAccessConstants
-                                                    .kHaveApproveAccess)
+                                                    .kHaveEditAccess)
                                         .length >
                                     0
                             ? TableActionButton(
@@ -975,13 +975,25 @@ class GoodsOrderListDataSource extends DataTableSource {
                             : Dimens.box0,
 
                         controller.goodsOrdersList
-                                    .firstWhere(
-                                      (e) => e?.id == GoodsOrderListDetails!.id,
-                                      orElse: () =>
-                                          GoodsOrdersListModel(id: 00),
-                                    )
-                                    ?.status ==
-                                305
+                                        .firstWhere(
+                                          (e) =>
+                                              e?.id ==
+                                              GoodsOrderListDetails!.id,
+                                          orElse: () =>
+                                              GoodsOrdersListModel(id: 00),
+                                        )
+                                        ?.status ==
+                                    305 &&
+                                varUserAccessModel.value.access_list!
+                                        .where((e) =>
+                                            e.feature_id ==
+                                                UserAccessConstants
+                                                    .kGoodsFeatureId &&
+                                            e.add ==
+                                                UserAccessConstants
+                                                    .kHaveAddAccess)
+                                        .length >
+                                    0
                             ? TableActionButton(
                                 color: ColorValues.purpleColor,
                                 icon: Icons.ads_click,

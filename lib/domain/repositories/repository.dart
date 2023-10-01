@@ -2737,35 +2737,72 @@ class Repository {
     }
   }
 
-  Future<void> permitApprovedButton(
-    String? comment,
-    String? id,
+  Future<Map<String, dynamic>> permitApprovedButton(
+    rejectCancelPermitJsonString,
     String? ptwStatus,
     int? jobId,
     bool? isLoading,
   ) async {
     try {
       final auth = await getSecuredValue(LocalKeys.authToken);
-
       final res = await _dataRepository.permitApprovedButton(
         auth: auth,
-        comment: comment,
-        id: id,
+        rejectCancelPermitJsonString: json.encode(rejectCancelPermitJsonString),
         ptwStatus: ptwStatus,
         jobId: jobId,
         isLoading: isLoading ?? false,
       );
-      print('PermitApproved&ExtendApproveResponse5: ${res.data}');
+
+      var resourceData = res.data;
+
+      print('Response Approve Extened Response: ${resourceData}');
 
       if (!res.hasError) {
-        //  return _permitIssueModel;
+        if (res.errorCode == 200) {
+          var responseMap = json.decode(res.data);
+          return responseMap;
+        } else {
+          // Get.dialog<void>(WarrantyClaimErrorDialog());
+        }
       } else {
-        Utility.showDialog(res.errorCode.toString() + 'permitIssueButton');
+        Utility.showDialog(res.errorCode.toString() + 'ApproveExtenedResponse');
+        //return '';
       }
+      return Map();
     } catch (error) {
-      log(error.toString());
+      print(error.toString());
+      return Map();
     }
   }
+  // Future<void> permitApprovedButton(
+  //   String? comment,
+  //   String? id,
+  //   String? ptwStatus,
+  //   int? jobId,
+  //   bool? isLoading,
+  // ) async {
+  //   try {
+  //     final auth = await getSecuredValue(LocalKeys.authToken);
+
+  //     final res = await _dataRepository.permitApprovedButton(
+  //       auth: auth,
+  //       comment: comment,
+  //       id: id,
+  //       ptwStatus: ptwStatus,
+  //       jobId: jobId,
+  //       isLoading: isLoading ?? false,
+  //     );
+  //     print('PermitApproved&ExtendApproveResponse5: ${res.data}');
+
+  //     if (!res.hasError) {
+  //       //  return _permitIssueModel;
+  //     } else {
+  //       Utility.showDialog(res.errorCode.toString() + 'permitIssueButton');
+  //     }
+  //   } catch (error) {
+  //     log(error.toString());
+  //   }
+  // }
 
   Future<void> permitCancelByIssuerButton(
     String? comment,

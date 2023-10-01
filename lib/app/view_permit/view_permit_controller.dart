@@ -39,6 +39,7 @@ import 'package:rxdart/subjects.dart';
 import 'package:pdf/widgets.dart' as pw;
 import 'package:scrollable_table_view/scrollable_table_view.dart';
 import '../../../domain/models/inventory_category_model.dart';
+import '../../domain/models/aprove_extend_model.dart';
 import '../theme/color_values.dart';
 
 class ViewPermitController extends GetxController {
@@ -512,20 +513,48 @@ class ViewPermitController extends GetxController {
     }
   }
 
-  Future<void> permitApprovedButton(
-      {String? permitId, String? ptwStatus, int? jobId}) async {
-    String _approveComment = approveCommentTextFieldCtrlr.text.trim();
+  void permitApprovedButton(
+      {int? permitId, String? ptwStatus, int? jobId}) async {
+    {
+      String _approveComment = approveCommentTextFieldCtrlr.text.trim();
 
-    final _permitApprovedBtn = await viewPermitPresenter.permitApprovedButton(
-        comment: _approveComment,
+      AproveExtendPermitModel commentRejectCancelPermitModel =
+          AproveExtendPermitModel(
         id: permitId,
+        comment: _approveComment,
         ptwStatus: ptwStatus,
         jobId: jobId,
-        isLoading: true);
-    // showAlertPermitApproveDialog();
-    print('Approved Data:${_approveComment}');
-    print('Approved Data:${permitId}');
+      );
+
+      var rejectCancelPermitJsonString =
+          commentRejectCancelPermitModel.toJson();
+
+      Map<String, dynamic>? response =
+          await viewPermitPresenter.permitApprovedButton(
+        rejectCancelPermitJsonString: rejectCancelPermitJsonString,
+        ptwStatus: ptwStatus,
+        jobId: jobId,
+        isLoading: true,
+      );
+      if (response == true) {
+        //getCalibrationList(facilityId, true);
+      }
+    }
   }
+  // Future<void> permitApprovedButton(
+  //     {String? permitId, String? ptwStatus, int? jobId}) async {
+  //   String _approveComment = approveCommentTextFieldCtrlr.text.trim();
+
+  //   final _permitApprovedBtn = await viewPermitPresenter.permitApprovedButton(
+  //       comment: _approveComment,
+  //       id: permitId,
+  //       ptwStatus: ptwStatus,
+  //       jobId: jobId,
+  //       isLoading: true);
+  //   // showAlertPermitApproveDialog();
+  //   print('Approved Data:${_approveComment}');
+  //   print('Approved Data:${permitId}');
+  // }
 
   Future<void> permitCloseButton(
       {String? permitId, List<dynamic>? closeFileIds}) async {
