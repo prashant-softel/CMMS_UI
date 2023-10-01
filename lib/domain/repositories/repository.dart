@@ -2889,6 +2889,33 @@ class Repository {
     }
   }
 
+  Future<void> permitCancelRejectButton(
+    String? comment,
+    String? id,
+    bool? isLoading,
+  ) async {
+    try {
+      final auth = await getSecuredValue(LocalKeys.authToken);
+
+      final res = await _dataRepository.permitCancelRejectButton(
+        auth: auth,
+        comment: comment,
+        id: id,
+        isLoading: isLoading ?? false,
+      );
+      print('PermitCancelRejectResponse: ${res.data}');
+
+      if (!res.hasError) {
+        //  return _permitIssueModel;
+      } else {
+        Utility.showDialog(
+            res.errorCode.toString() + 'permitCancelRejectButton');
+      }
+    } catch (error) {
+      log(error.toString());
+    }
+  }
+
   ///Extend Permit
   Future<Map<String, dynamic>> permitExtendButton(
     // String? comment,
