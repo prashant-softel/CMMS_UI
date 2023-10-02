@@ -144,7 +144,7 @@ class GoodsOrdersReqDetailController extends GetxController {
       {
         "key": "Drop_down",
         "value": 'Please Select',
-        "assetItemID": '',
+        "assetMasterItemID": '',
         "id": ''
       },
       {'key': "Cost", "value": ''},
@@ -173,7 +173,7 @@ class GoodsOrdersReqDetailController extends GetxController {
             {
               "key": "Drop_down",
               "value": '${element.asset_name}',
-              'assetItemID': '${element.assetItemID}',
+              'assetMasterItemID': '${element.assetMasterItemID}',
               'itemID': '${element.itemID}'
             },
             // {'key': "Paid_By", "value": '${element.assetItem_Name}'},
@@ -194,7 +194,7 @@ class GoodsOrdersReqDetailController extends GetxController {
     rowItem.value.forEach((element) {
       SubmitItems item = SubmitItems(
           itemID: 0,
-          assetItemID: dropdownMapperData[element[0]["value"]]?.id,
+          assetMasterItemID: dropdownMapperData[element[0]["value"]]?.id,
           cost: int.tryParse(element[1]["value"] ?? '0'),
           ordered_qty: int.tryParse(element[2]["value"] ?? '0'),
           comment: element[3]["value"] ?? '0');
@@ -218,7 +218,7 @@ class GoodsOrdersReqDetailController extends GetxController {
       isLoading: true,
     );
     if (responseCreateGoModel != null) {
-      Get.offAllNamed(Routes.purchaseGoodsorder);
+      // Get.offAllNamed(Routes.purchaseGoodsorder);
     }
 
     print('Create GO  req  data: $createGoReqModelJsonString');
@@ -229,7 +229,7 @@ class GoodsOrdersReqDetailController extends GetxController {
     rowItem.value.forEach((element) {
       SubmitItems item = SubmitItems(
           itemID: int.tryParse('${element[0]["itemID"]}'),
-          assetItemID: int.tryParse('${element[0]["assetItemID"]}'),
+          assetMasterItemID: int.tryParse('${element[0]["assetMasterItemID"]}'),
           cost: int.tryParse(element[1]["value"] ?? '0'),
           ordered_qty: int.tryParse(element[2]["value"] ?? '0'),
           comment: element[3]["value"] ?? '0');

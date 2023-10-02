@@ -81,7 +81,7 @@ class ReqOrderMessageApproveDialog extends GetView {
         actions: [
           Row(
             children: [
-              Dimens.boxWidth10,
+              Spacer(),
               Center(
                 child: ElevatedButton(
                   style: Styles.darkBlueElevatedButtonStyle,
@@ -115,7 +115,7 @@ class ReqOrderMessageApproveDialog extends GetView {
                   child: const Text('View RO'),
                 ),
               ),
-              Dimens.boxWidth10,
+              Spacer(),
             ],
           )
         ],

@@ -38,7 +38,7 @@ class CreateRequestOrderDataModel {
 class SubmitItems {
   SubmitItems({
     // this.itemID,
-    this.assetItemID,
+    this.assetMasterItemID,
     this.cost,
     this.ordered_qty,
     this.comment,
@@ -46,7 +46,7 @@ class SubmitItems {
   });
 
   // int? itemID;
-  int? assetItemID;
+  int? assetMasterItemID;
   int? cost;
   int? ordered_qty;
   String? comment;
@@ -54,7 +54,7 @@ class SubmitItems {
 
   factory SubmitItems.fromJson(Map<String, dynamic> json) => SubmitItems(
         // itemID: json["itemID"],
-        assetItemID: json["assetItemID"],
+        assetMasterItemID: json["assetMasterItemID"],
         itemID: json["itemID"],
 
         cost: json["cost"],
@@ -64,7 +64,7 @@ class SubmitItems {
 
   Map<String, dynamic> toJson() => {
         "itemID": itemID,
-        "assetItemID": assetItemID,
+        "assetMasterItemID": assetMasterItemID,
         "cost": cost,
         "ordered_qty": ordered_qty,
         "comment": comment,

@@ -750,7 +750,10 @@ class Repository {
 
       if (!res.hasError) {
         Fluttertoast.showToast(
-            msg: " Purchase Goods Orders Add Successfully...", fontSize: 16.0);
+            msg: " Request  Orders Add Successfully...", fontSize: 16.0);
+        Get.offNamed(
+          Routes.purchaseGoodsorder,
+        );
 
         // if (res.errorCode == 200) {
         //   var responseMap = json.decode(res.data);
@@ -1170,7 +1173,7 @@ class Repository {
                         Map<String, dynamic>.from(m)))
                 .toList();
 
-        return _goodOrderModelList;
+        return _goodOrderModelList.reversed.toList();
       } //
       else {
         Utility.showDialog(res.errorCode.toString() + 'getIncidentReportList');

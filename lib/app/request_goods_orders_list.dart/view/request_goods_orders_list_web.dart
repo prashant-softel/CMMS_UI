@@ -74,7 +74,7 @@ class _PurchaseGoodsorderListWebState extends State<PurchaseGoodsorderListWeb> {
                             child: Text(" / STOCK MANAGEMENT",
                                 style: Styles.greyMediumLight12),
                           ),
-                          Text(" / REQUEST ORDER DETAIL",
+                          Text(" / REQUEST ORDER LIST",
                               style: Styles.greyMediumLight12)
                         ],
                       ),
@@ -532,7 +532,7 @@ class GoodsOrderListDataSource extends DataTableSource {
                                                   request_order_id: 00),
                                         )
                                         ?.status ==
-                                    341
+                                    342
                                 ? ColorValues.yellowColor
                                 : controller.goodsOrdersList
                                             .firstWhere(
@@ -545,7 +545,7 @@ class GoodsOrderListDataSource extends DataTableSource {
                                                       request_order_id: 00),
                                             )
                                             ?.status ==
-                                        342
+                                        343
                                     ? ColorValues.rejectColor
                                     : controller.goodsOrdersList
                                                 .firstWhere(
@@ -558,9 +558,37 @@ class GoodsOrderListDataSource extends DataTableSource {
                                                           request_order_id: 00),
                                                 )
                                                 ?.status ==
-                                            301
-                                        ? ColorValues.approveColor
-                                        : ColorValues.addNewColor,
+                                            345
+                                        ? Color.fromARGB(255, 152, 145, 145)
+                                        : controller.goodsOrdersList
+                                                    .firstWhere(
+                                                      (e) =>
+                                                          e?.request_order_id ==
+                                                          GoodsOrderListDetails!
+                                                              .request_order_id,
+                                                      orElse: () =>
+                                                          GetRequestOrderListModel(
+                                                              request_order_id:
+                                                                  00),
+                                                    )
+                                                    ?.status ==
+                                                341
+                                            ? Color(0xff77cae7)
+                                            : controller.goodsOrdersList
+                                                        .firstWhere(
+                                                          (e) =>
+                                                              e?.request_order_id ==
+                                                              GoodsOrderListDetails!
+                                                                  .request_order_id,
+                                                          orElse: () =>
+                                                              GetRequestOrderListModel(
+                                                                  request_order_id:
+                                                                      00),
+                                                        )
+                                                        ?.status ==
+                                                    301
+                                                ? ColorValues.approveColor
+                                                : ColorValues.addNewColor,
                             borderRadius: BorderRadius.circular(4),
                           ),
                           child: Text(
@@ -606,7 +634,7 @@ class GoodsOrderListDataSource extends DataTableSource {
                                                   request_order_id: 00),
                                         )
                                         .status ==
-                                    341 &&
+                                    342 &&
                                 varUserAccessModel.value.access_list!
                                         .where((e) =>
                                             e.feature_id ==
@@ -644,7 +672,7 @@ class GoodsOrderListDataSource extends DataTableSource {
                                                   request_order_id: 00),
                                         )
                                         .status ==
-                                    342 &&
+                                    343 &&
                                 varUserAccessModel.value.access_list!
                                         .where((e) =>
                                             e.feature_id ==
@@ -682,7 +710,7 @@ class GoodsOrderListDataSource extends DataTableSource {
                                                   request_order_id: 00),
                                         )
                                         .status ==
-                                    341 &&
+                                    342 &&
                                 varUserAccessModel.value.access_list!
                                         .where((e) =>
                                             e.feature_id ==
