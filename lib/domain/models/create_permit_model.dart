@@ -32,6 +32,7 @@ class CreatePermitModel {
   List<Safetyquestionlist>? safety_question_list;
   List<int?>? block_ids;
   List<int?>? category_ids;
+  List<dynamic?>? uploadfile_ids;
   List<int?>? isolated_category_ids;
 
    CreatePermitModel(
@@ -44,6 +45,7 @@ class CreatePermitModel {
       this.latitude,
       this.longitude,
       this.category_ids,
+      this.uploadfile_ids,
       this.description,
       this.title,
       this.employee_list,
@@ -93,6 +95,8 @@ class CreatePermitModel {
         isolated_category_ids:json["isolated_category_ids"]!=null?
             List<int>.from(json["isolated_category_ids"].map((x) => x)):[],
         category_ids:json["category_ids"]!=null? List<int>.from(json["category_ids"].map((x) => x)):[],
+        uploadfile_ids:json["uploadfile_ids"]!=null? List<int>.from(json["uploadfile_ids"].map((x) => x)):[],
+
       );
 
   Map<String, dynamic> toJson() => {
@@ -119,7 +123,7 @@ class CreatePermitModel {
         "block_ids": List<dynamic>.from(block_ids!.map((x) => x)),
         "isolated_category_ids": List<dynamic>.from(isolated_category_ids!.map((x) => x)),
         "category_ids": List<dynamic>.from(category_ids!.map((x) => x)),
-
+        "uploadfile_ids": List<dynamic>.from(uploadfile_ids!.map((x) => x)),
 
 
       };

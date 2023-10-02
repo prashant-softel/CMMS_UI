@@ -1028,7 +1028,7 @@ class NewPermitController extends GetxController {
   //   return _selectedAssignBlockId;
   //   }
 
-  void createNewPermit() async {
+  void createNewPermit({List<dynamic>? fileIds}) async {
     {
       checkForm();
       if (isFormInvalid.value) {
@@ -1105,6 +1105,7 @@ class NewPermitController extends GetxController {
         longitude: 0,
         block_ids: selectedEmployeeNameIdList,
         category_ids: selectedEquipmentCategoryIdList,
+        uploadfile_ids: fileIds,
         is_isolation_required: isToggleOn.value,
         isolated_category_ids: selectedEquipmentIsolationIdList,
         Loto_list: loto_map_list,
@@ -1405,6 +1406,7 @@ class NewPermitController extends GetxController {
           longitude: 0,
           block_ids: selectedEmployeeNameIdList,
           category_ids: selectedEquipmentCategoryIdList,
+          uploadfile_ids: [618,619],
           is_isolation_required: isToggleOn.value,
           isolated_category_ids: selectedEquipmentIsolationIdList,
           Loto_list: loto_map_list,

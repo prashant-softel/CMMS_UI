@@ -17,6 +17,12 @@ class NewPermitDetailModel {
   int? sop_type_id;
   int? requester_id;
   String? requestedByName;
+  String? cancelRequestByDesignation;
+  String? cancelRequestByCompany;
+  String? approverDesignation;
+  String? requesterDesignation;
+  String? requesterCompany;
+  String? approverCompany;
   String? permitTypeName;
   String? job_type_name;
   String? sop_type_name;
@@ -68,6 +74,12 @@ class NewPermitDetailModel {
     this.sop_type_id,
     this.requester_id,
     this.requestedByName,
+    this.cancelRequestByDesignation,
+    this.cancelRequestByCompany,
+    this.approverDesignation,
+    this.requesterDesignation,
+    this.requesterCompany,
+    this.approverCompany,
     this.permitTypeName,
     this.job_type_name,
     this.sop_type_name,
@@ -120,6 +132,12 @@ class NewPermitDetailModel {
         sop_type_id: json['sop_type_id'],
         requester_id: json['requester_id'],
         requestedByName: json['requestedByName'],
+        cancelRequestByDesignation: json['cancelRequestByDesignation'],
+        cancelRequestByCompany: json['cancelRequestByCompany'],
+        approverDesignation: json['approverDesignation'],
+        approverCompany: json['approverCompany'],
+        requesterDesignation: json['requesterDesignation'],
+        requesterCompany: json['requesterCompany'],
         permitTypeName: json['permitTypeName'],
         job_type_name: json['job_type_name'] ?? '',
         sop_type_name: json['sop_type_name'] ?? '',
@@ -182,6 +200,12 @@ class NewPermitDetailModel {
         "job_type_name": job_type_name,
         "requester_id": requester_id,
         "requestedByName": requestedByName,
+        "requesterDesignation": requesterDesignation,
+        "cancelRequestByDesignation": cancelRequestByDesignation,
+        "cancelRequestByCompany": cancelRequestByCompany,
+        "approverDesignation": approverDesignation,
+        "requesterCompany": requesterCompany,
+        "approverCompany": approverCompany,
         "title": title,
         "description": description,
         "siteName": siteName,

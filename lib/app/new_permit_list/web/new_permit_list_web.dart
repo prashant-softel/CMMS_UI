@@ -1,6 +1,8 @@
 import 'package:cmms/app/constant/constant.dart';
 import 'package:cmms/app/home/home_screen.dart';
+import 'package:cmms/app/new_permit_list/permit_status_constants.dart';
 import 'package:cmms/app/theme/dimens.dart';
+import 'package:cmms/app/utils/app_constants.dart';
 import 'package:cmms/app/widgets/custom_richtext.dart';
 import 'package:cmms/app/widgets/date_picker.dart';
 import 'package:cmms/app/widgets/permit_cancel_request_dialog.dart';
@@ -522,7 +524,8 @@ class PermitListDataSource extends DataTableSource {
                                           NewPermitModel(permitId: 000),
                                     )
                                     ?.ptwStatus ==
-                                121 ||
+                                PermitStatusConstants.PTW_CREATED //121 
+                                ||
                             controller.newPermitList
                                     .firstWhere(
                                       (e) =>
@@ -532,7 +535,8 @@ class PermitListDataSource extends DataTableSource {
                                           NewPermitModel(permitId: 000),
                                     )
                                     ?.ptwStatus ==
-                                125 ||
+                                PermitStatusConstants.PTW_APPROVE //125 
+                                ||
                             controller.newPermitList
                                     .firstWhere(
                                       (e) =>
@@ -542,7 +546,7 @@ class PermitListDataSource extends DataTableSource {
                                           NewPermitModel(permitId: 000),
                                     )
                                     ?.ptwStatus ==
-                                135
+                                PermitStatusConstants.PTW_EXTEND_REQUEST_APPROVE //135
                         ? ColorValues.appGreenColor
                         : ColorValues.appRedColor,
                     borderRadius: BorderRadius.circular(5),
@@ -620,8 +624,9 @@ class PermitListDataSource extends DataTableSource {
                                                             NewPermitModel(
                                                                 permitId: 000),
                                                       )
-                                                      ?.ptwStatus ==
-                                                  121 ||
+                                                      ?.ptwStatus == PermitStatusConstants.PTW_CREATED //121
+                                                  // AppConstants.kPermitStatusCreated ///121
+                                                  ||
                                           controller.newPermitList
                                                   .firstWhere(
                                                     (e) =>
@@ -631,8 +636,8 @@ class PermitListDataSource extends DataTableSource {
                                                         NewPermitModel(
                                                             permitId: 000),
                                                   )
-                                                  ?.ptwStatus ==
-                                              133
+                                                  ?.ptwStatus == PermitStatusConstants.PTW_EXTEND_REQUESTED //133
+                                              // AppConstants.kPermitStatusExtendRequested ///133
                                       // controller.newPermitList
                                       //         .firstWhere(
                                       //           (e) =>
@@ -656,8 +661,8 @@ class PermitListDataSource extends DataTableSource {
                                                             NewPermitModel(
                                                                 permitId: 000),
                                                       )
-                                                      ?.ptwStatus ==
-                                                  121
+                                                      ?.ptwStatus == PermitStatusConstants.PTW_CREATED //121
+                                                  // AppConstants.kPermitStatusCreated ///121
                                               ? 'Approve/Reject Permit'
                                               : "Approve/Reject Extend",
                                           onPress: () {
@@ -689,7 +694,7 @@ class PermitListDataSource extends DataTableSource {
                                                             permitId: 000),
                                                   )
                                                   ?.ptwStatus ==
-                                              121
+                                              PermitStatusConstants.PTW_CREATED //121
                                       // ||
                                       // controller.newPermitList
                                       //         .firstWhere(
@@ -726,7 +731,7 @@ class PermitListDataSource extends DataTableSource {
                                                     permitId: 000),
                                               )
                                               ?.ptwStatus ==
-                                          124
+                                          PermitStatusConstants.PTW_REJECTED_BY_APPROVER //124
                                       ? TableActionButton(
                                           color:
                                               Color.fromARGB(255, 116, 78, 130),
@@ -788,7 +793,7 @@ class PermitListDataSource extends DataTableSource {
                                                                 permitId: 000),
                                                       )
                                                       ?.ptwStatus ==
-                                                  125
+                                                  PermitStatusConstants.PTW_APPROVE //125
                                               //||
                                               // controller.newPermitList
                                               //         .firstWhere(
@@ -841,7 +846,7 @@ class PermitListDataSource extends DataTableSource {
                                                             permitId: 000),
                                                   )
                                                   ?.ptwStatus ==
-                                              121
+                                              PermitStatusConstants.PTW_CREATED //121
                                       ? TableActionButton(
                                           color: ColorValues.appcloseRedColor,
                                           icon: Icons.close,
@@ -888,7 +893,8 @@ class PermitListDataSource extends DataTableSource {
                                                             permitId: 000),
                                                   )
                                                   ?.ptwStatus ==
-                                              125 ||
+                                              PermitStatusConstants.PTW_APPROVE //125
+                                              ||
                                           controller.newPermitList
                                                   .firstWhere(
                                                     (e) =>
@@ -899,7 +905,7 @@ class PermitListDataSource extends DataTableSource {
                                                             permitId: 000),
                                                   )
                                                   ?.ptwStatus ==
-                                              121
+                                              PermitStatusConstants.PTW_CREATED //121
                                       ? TableActionButton(
                                           color: ColorValues.appRedColor,
                                           icon: Icons.close,
@@ -935,7 +941,7 @@ class PermitListDataSource extends DataTableSource {
                                                             permitId: 000),
                                                   )
                                                   ?.ptwStatus ==
-                                              130
+                                              PermitStatusConstants.PTW_CANCEL_REQUESTED //130
                                       ? TableActionButton(
                                           color:
                                               Color.fromARGB(255, 113, 15, 149),

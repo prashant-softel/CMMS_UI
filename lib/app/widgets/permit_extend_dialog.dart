@@ -168,7 +168,7 @@ class PermitExtendDialog extends GetView {
                                       style: Styles.blackBold17,
                                     ),
                                     Text(
-                                      '${controller.viewPermitDetailsModel.value?.requestedByName}',
+                                      '${controller.viewPermitDetailsModel.value?.requesterDesignation}',
                                       style: Styles.black17,
                                     ),
                                   ],
@@ -182,7 +182,7 @@ class PermitExtendDialog extends GetView {
                                       style: Styles.blackBold17,
                                     ),
                                     Text(
-                                      '${controller.viewPermitDetailsModel.value?.requestedByName}',
+                                      '${controller.viewPermitDetailsModel.value?.requesterCompany}',
                                       style: Styles.black17,
                                     ),
                                   ],

@@ -25,7 +25,6 @@ class PermitCancelReQuestDialog extends GetView {
   final ViewPermitController controller = Get.find();
   final FileUploadController dropzoneController = Get.put(FileUploadController());
 
-
   @override
   Widget build(BuildContext context) {
     return StatefulBuilder(builder: ((context, setState) {
@@ -145,28 +144,26 @@ class PermitCancelReQuestDialog extends GetView {
                                     mainAxisAlignment: MainAxisAlignment.start,
                                     crossAxisAlignment: CrossAxisAlignment.start,
                                     children: [
-                                       Row(
-                                          children: [
-                                            // Text('${element!.isChecked}'),
-                                      
-                                             Checkbox(
-                                                value: element!.isChecked,
-                                                onChanged: (bool? value) {
-                                                  // controller.toggleItemSelection(index);
-                                                  element.isChecked = !element.isChecked!;
-                                                  print('Element Cancel:${element.isChecked}');
-                                                },
-                                              ),
-                                            
-                                      
-                                            Expanded(
-                                                child: Text(
-                                              "${element.name}",
-                                              style: Styles.black17,
-                                            ))
-                                          ],
-                                        ),
-                                     
+                                      Row(
+                                        children: [
+                                          // Text('${element!.isChecked}'),
+
+                                          Checkbox(
+                                            value: element!.isChecked,
+                                            onChanged: (bool? value) {
+                                              // controller.toggleItemSelection(index);
+                                              element.isChecked = !element.isChecked!;
+                                              print('Element Cancel:${element.isChecked}');
+                                            },
+                                          ),
+
+                                          Expanded(
+                                              child: Text(
+                                            "${element.name}",
+                                            style: Styles.black17,
+                                          ))
+                                        ],
+                                      ),
                                     ],
                                   ))),
                             ),
@@ -221,7 +218,7 @@ class PermitCancelReQuestDialog extends GetView {
                                         style: Styles.blackBold17,
                                       ),
                                       Text(
-                                        '${controller.viewPermitDetailsModel.value?.requestedByName}',
+                                        '${controller.viewPermitDetailsModel.value?.cancelRequestByDesignation}',
                                         style: Styles.black17,
                                       ),
                                     ],
@@ -235,7 +232,7 @@ class PermitCancelReQuestDialog extends GetView {
                                         style: Styles.blackBold17,
                                       ),
                                       Text(
-                                        '${controller.viewPermitDetailsModel.value?.requestedByName}',
+                                        '${controller.viewPermitDetailsModel.value?.cancelRequestByCompany}',
                                         style: Styles.black17,
                                       ),
                                     ],
@@ -373,7 +370,7 @@ class PermitCancelReQuestDialog extends GetView {
                             //     ),
                             //   ],
                             // ),
-                            
+
                             // Dimens.boxHeight10,
 
                             /// FILE UPLOAD WIDGET

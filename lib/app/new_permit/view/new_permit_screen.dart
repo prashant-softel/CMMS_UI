@@ -3574,7 +3574,7 @@ class NewPermitScreen extends GetView<NewPermitController> {
                                                                                 "Submit For Approval",
                                                                             onPressed:
 
-                                                                              () {controller.isCheckedJSA.value == true && controller.isCheckedSOP.value == true ? controller.createNewPermit() : Get.dialog<void>(checkboxAlertBox());
+                                                                              () {controller.isCheckedJSA.value == true && controller.isCheckedSOP.value == true ? controller.createNewPermit(fileIds: dropzoneController.fileIds) : Get.dialog<void>(checkboxAlertBox());
                                                                             },
                                                                           )),
                                                                 )
