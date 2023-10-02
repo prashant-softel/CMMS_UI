@@ -829,7 +829,7 @@ class Repository {
         Fluttertoast.showToast(
             msg: " GO  update Successfully...", fontSize: 16.0);
 
-        Get.offAndToNamed(
+        Get.offAllNamed(
           Routes.stockManagementGoodsOrdersScreen,
         );
         // Fluttertoast.showToast(msg: "Data add successfully...", fontSize: 16.0);
