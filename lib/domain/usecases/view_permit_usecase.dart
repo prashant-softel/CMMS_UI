@@ -43,21 +43,33 @@ class ViewPermitUsecase {
         isLoading,
       );
 
-  Future<void> permitApprovedButton({
-    String? comment,
-    String? id,
+  Future<Map<String, dynamic>> permitApprovedButton({
+    rejectCancelPermitJsonString,
     String? ptwStatus,
     int? jobId,
     bool? isLoading,
-  }) async {
-    await repository.permitApprovedButton(
-      comment,
-      id,
-      ptwStatus,
-      jobId,
-      isLoading,
-    );
-  }
+  }) async =>
+      await repository.permitApprovedButton(
+        rejectCancelPermitJsonString,
+        ptwStatus,
+        jobId,
+        isLoading,
+      );
+  // Future<void> permitApprovedButton({
+  //   String? comment,
+  //   String? id,
+  //   String? ptwStatus,
+  //   int? jobId,
+  //   bool? isLoading,
+  // }) async {
+  //   await repository.permitApprovedButton(
+  //     comment,
+  //     id,
+  //     ptwStatus,
+  //     jobId,
+  //     isLoading,
+  //   );
+  // }
 
   Future<Map<String, dynamic>> permitCloseButton({
     closePermitJsonString,
@@ -140,17 +152,25 @@ class ViewPermitUsecase {
     );
   }
 
-  Future<void> permitCancelRejectButton({
-    String? comment,
-    String? id,
+  // Future<void> permitCancelRejectButton({
+  //   String? comment,
+  //   String? id,
+  //   bool? isLoading,
+  // }) async {
+  //   await repository.permitCancelRejectButton(
+  //     comment,
+  //     id,
+  //     isLoading,
+  //   );
+  // }
+  Future<Map<String, dynamic>> permitCancelRejectButton({
+    rejectCancelPermitJsonString,
     bool? isLoading,
-  }) async {
-    await repository.permitCancelRejectButton(
-      comment,
-      id,
-      isLoading,
-    );
-  }
+  }) async =>
+      await repository.permitCancelRejectButton(
+        rejectCancelPermitJsonString,
+        isLoading,
+      );
 
   Future<List<SafetyMeasureListModel>> getSafetyMeasureList(
       {required bool isLoading, required int? permit_type_id}) async {

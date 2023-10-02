@@ -45,20 +45,33 @@ class ViewPermitPresenter {
         isLoading: isLoading,
       );
 
-  Future<void> permitApprovedButton({
-    String? comment,
-    String? id,
+  Future<Map<String, dynamic>?> permitApprovedButton({
+    rejectCancelPermitJsonString,
     String? ptwStatus,
     int? jobId,
-    bool? isLoading,
-  }) async =>
-      await viewPermitUsecase.permitApprovedButton(
-        comment: comment,
-        id: id,
-        ptwStatus: ptwStatus,
-        jobId: jobId,
-        isLoading: isLoading ?? false,
-      );
+    required bool isLoading,
+  }) async {
+    return viewPermitUsecase.permitApprovedButton(
+      rejectCancelPermitJsonString: rejectCancelPermitJsonString,
+      ptwStatus: ptwStatus,
+      jobId: jobId,
+      isLoading: isLoading,
+    );
+  }
+  // Future<void> permitApprovedButton({
+  //   String? comment,
+  //   String? id,
+  //   String? ptwStatus,
+  //   int? jobId,
+  //   bool? isLoading,
+  // }) async =>
+  //     await viewPermitUsecase.permitApprovedButton(
+  //       comment: comment,
+  //       id: id,
+  //       ptwStatus: ptwStatus,
+  //       jobId: jobId,
+  //       isLoading: isLoading ?? false,
+  //     );
 
   Future<Map<String, dynamic>?> permitCloseButton({
     closePermitJsonString,
@@ -143,17 +156,15 @@ class ViewPermitPresenter {
         isLoading: isLoading ?? false,
       );
 
-  Future<void> permitCancelRejectButton({
-    String? comment,
-    String? id,
-    String? ptwStatus,
-    bool? isLoading,
-  }) async =>
-      await viewPermitUsecase.permitCancelRejectButton(
-        comment: comment,
-        id: id,
-        isLoading: isLoading ?? false,
-      );
+  Future<Map<String, dynamic>?> permitCancelRejectButton({
+    rejectCancelPermitJsonString,
+    required bool isLoading,
+  }) async {
+    return viewPermitUsecase.permitCancelRejectButton(
+      rejectCancelPermitJsonString: rejectCancelPermitJsonString,
+      isLoading: isLoading,
+    );
+  }
 
   Future<List<EmployeeModel?>?> getAssignedToList({
     String? auth,

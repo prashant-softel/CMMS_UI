@@ -46,6 +46,8 @@ abstract class ColorValues {
   static const Color editColor = appYellowColor;
   static const Color deleteColor = appRedColor;
   static const Color addNewColor = appGreenColor;
+  static const Color draftColor = appblueDraftColor;
+
   static const Color submitColor = appGreenColor;
   static const Color closeColor = appcloseRedColor;
   static const Color cancelColor = appRedColor;
@@ -113,6 +115,8 @@ abstract class ColorValues {
   static const Color appRedColor = Color(appRedColorHex);
   static const Color appYellowColor = Color(appYellowColorHex);
   static const Color appGreenColor = Color(appGreenColorHex);
+  static const Color appblueDraftColor = Color(appblueDraftColorHex);
+
   static const Color appLightGreyColor = Color(appLightGreyColorHex);
   static const Color appPurpleColor = Color(appPurpleColorHex);
   static const Color apptabColor = Color(appTabsColorHex);
@@ -185,6 +189,8 @@ abstract class ColorValues {
   static const int appRedColorHex = 0xffDC4F46;
   static const int appYellowColorHex = 0xffF7CE6D;
   static const int appGreenColorHex = 0xff86C466;
+  static const int appblueDraftColorHex = 0xff77cae7;
+
   static const int appLightGreyColorHex = 0xffEEEEEE;
   static const int appPurpleColorHex = 0xffDA70D6;
   static const int appDarkGreyColorHex = 0xffAFAFAF;

@@ -76,7 +76,7 @@ class ReqOrderRejectDialog extends GetView {
             height: 20,
           ),
           Row(mainAxisAlignment: MainAxisAlignment.center, children: [
-            Dimens.boxWidth10,
+            Spacer(),
             ElevatedButton(
               style: Styles.darkRedElevatedButtonStyle,
               onPressed: () {
@@ -94,6 +94,7 @@ class ReqOrderRejectDialog extends GetView {
               },
               child: Text('Reject RO'),
             ),
+            Spacer()
           ]),
         ],
       );

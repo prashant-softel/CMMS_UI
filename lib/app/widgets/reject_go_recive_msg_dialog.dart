@@ -81,7 +81,7 @@ class RejectGOMsgReceiveDialog extends GetView {
         actions: [
           Row(
             children: [
-              Dimens.boxWidth10,
+              Spacer(),
               Center(
                 child: ElevatedButton(
                   style: Styles.darkBlueElevatedButtonStyle,
@@ -128,7 +128,7 @@ class RejectGOMsgReceiveDialog extends GetView {
                   child: const Text('View Goods Order'),
                 ),
               ),
-              Dimens.boxWidth10,
+              Spacer(),
             ],
           )
         ],

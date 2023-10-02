@@ -545,7 +545,7 @@ class GoodsOrderListDataSource extends DataTableSource {
                                         )
                                         ?.status ==
                                     302
-                                ? ColorValues.submitColor
+                                ? ColorValues.yellowColor
                                 : controller.goodsOrdersList
                                             .firstWhere(
                                               (e) =>
@@ -580,8 +580,8 @@ class GoodsOrderListDataSource extends DataTableSource {
                                                               id: 00),
                                                     )
                                                     ?.status ==
-                                                306
-                                            ? ColorValues.approveStatusColor
+                                                309
+                                            ? ColorValues.rejectColor
                                             : controller.goodsOrdersList
                                                         .firstWhere(
                                                           (e) =>
@@ -593,9 +593,8 @@ class GoodsOrderListDataSource extends DataTableSource {
                                                                   id: 00),
                                                         )
                                                         ?.status ==
-                                                    308
-                                                ? Color.fromARGB(
-                                                    255, 44, 230, 230)
+                                                    306
+                                                ? ColorValues.approveStatusColor
                                                 : controller.goodsOrdersList
                                                             .firstWhere(
                                                               (e) =>
@@ -607,8 +606,9 @@ class GoodsOrderListDataSource extends DataTableSource {
                                                                       id: 00),
                                                             )
                                                             ?.status ==
-                                                        304
-                                                    ? ColorValues.closeColor
+                                                        301
+                                                    ? Color.fromARGB(
+                                                        255, 44, 230, 230)
                                                     : controller.goodsOrdersList
                                                                 .firstWhere(
                                                                   (e) =>
@@ -620,9 +620,8 @@ class GoodsOrderListDataSource extends DataTableSource {
                                                                           id: 00),
                                                                 )
                                                                 ?.status ==
-                                                            309
-                                                        ? ColorValues
-                                                            .rejectColor
+                                                            304
+                                                        ? ColorValues.closeColor
                                                         : controller
                                                                     .goodsOrdersList
                                                                     .firstWhere(
@@ -635,24 +634,11 @@ class GoodsOrderListDataSource extends DataTableSource {
                                                                               id: 00),
                                                                     )
                                                                     ?.status ==
-                                                                310
+                                                                301
                                                             ? ColorValues
-                                                                .greenColor
-                                                            : controller
-                                                                        .goodsOrdersList
-                                                                        .firstWhere(
-                                                                          (e) =>
-                                                                              e?.id ==
-                                                                              GoodsOrderListDetails!.id,
-                                                                          orElse: () =>
-                                                                              GoodsOrdersListModel(id: 00),
-                                                                        )
-                                                                        ?.status ==
-                                                                    301
-                                                                ? ColorValues
-                                                                    .approveColor
-                                                                : ColorValues
-                                                                    .addNewColor,
+                                                                .approveColor
+                                                            : ColorValues
+                                                                .addNewColor,
                             borderRadius: BorderRadius.circular(4),
                           ),
                           child: Text(
@@ -761,9 +747,9 @@ class GoodsOrderListDataSource extends DataTableSource {
                                             e.feature_id ==
                                                 UserAccessConstants
                                                     .kGoodsFeatureId &&
-                                            e.delete ==
+                                            e.edit ==
                                                 UserAccessConstants
-                                                    .kHaveApproveAccess)
+                                                    .kHaveEditAccess)
                                         .length >
                                     0
                             ? TableActionButton(
@@ -975,13 +961,25 @@ class GoodsOrderListDataSource extends DataTableSource {
                             : Dimens.box0,
 
                         controller.goodsOrdersList
-                                    .firstWhere(
-                                      (e) => e?.id == GoodsOrderListDetails!.id,
-                                      orElse: () =>
-                                          GoodsOrdersListModel(id: 00),
-                                    )
-                                    ?.status ==
-                                305
+                                        .firstWhere(
+                                          (e) =>
+                                              e?.id ==
+                                              GoodsOrderListDetails!.id,
+                                          orElse: () =>
+                                              GoodsOrdersListModel(id: 00),
+                                        )
+                                        ?.status ==
+                                    305 &&
+                                varUserAccessModel.value.access_list!
+                                        .where((e) =>
+                                            e.feature_id ==
+                                                UserAccessConstants
+                                                    .kGoodsFeatureId &&
+                                            e.add ==
+                                                UserAccessConstants
+                                                    .kHaveAddAccess)
+                                        .length >
+                                    0
                             ? TableActionButton(
                                 color: ColorValues.purpleColor,
                                 icon: Icons.ads_click,

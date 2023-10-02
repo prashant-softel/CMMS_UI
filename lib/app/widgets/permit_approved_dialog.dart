@@ -15,7 +15,7 @@ import '../theme/styles.dart';
 
 class PermitApprovedDialog extends GetView {
   String? permitApprovedDialog;
-  String? permitId;
+  int? permitId;
   String? ptwStatus;
   int? jobId;
 
@@ -129,7 +129,7 @@ class PermitApprovedDialog extends GetView {
                                           style: Styles.blackBold17,
                                         ),
                                         Text(
-                                          '${controller.viewPermitDetailsModel.value?.issuedByName}',
+                                          '${controller.viewPermitDetailsModel.value?.approvedByName}',
                                           style: Styles.black17,
                                         ),
                                       ],
@@ -144,7 +144,7 @@ class PermitApprovedDialog extends GetView {
                                           style: Styles.blackBold17,
                                         ),
                                         Text(
-                                          '${controller.viewPermitDetailsModel.value?.requestedByName}',
+                                          '${controller.viewPermitDetailsModel.value?.approverDesignation}',
                                           style: Styles.black17,
                                         ),
                                       ],
@@ -159,7 +159,7 @@ class PermitApprovedDialog extends GetView {
                                           style: Styles.blackBold17,
                                         ),
                                         Text(
-                                          '${controller.viewPermitDetailsModel.value?.requestedByName}',
+                                          '${controller.viewPermitDetailsModel.value?.approverCompany}',
                                           style: Styles.black17,
                                         ),
                                       ],
@@ -225,7 +225,7 @@ class PermitApprovedDialog extends GetView {
                                           style: Styles.blackBold17,
                                         ),
                                         Text(
-                                          '${controller.viewPermitDetailsModel.value?.requestedByName}',
+                                          '${controller.viewPermitDetailsModel.value?.requesterDesignation}',
                                           style: Styles.black17,
                                         ),
                                       ],
@@ -240,7 +240,7 @@ class PermitApprovedDialog extends GetView {
                                           style: Styles.blackBold17,
                                         ),
                                         Text(
-                                          '${controller.viewPermitDetailsModel.value?.requestedByName}',
+                                          '${controller.viewPermitDetailsModel.value?.requesterCompany}',
                                           style: Styles.black17,
                                         ),
                                       ],

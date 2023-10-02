@@ -3,6 +3,7 @@ import 'package:cmms/app/constant/constant.dart';
 import 'package:cmms/app/controllers/file_upload_controller.dart';
 import 'package:cmms/app/home/widgets/header_widget.dart';
 import 'package:cmms/app/new_permit_list/new_permit_list_controller.dart';
+import 'package:cmms/app/new_permit_list/permit_status_constants.dart';
 import 'package:cmms/app/utils/user_access_constants.dart';
 import 'package:cmms/app/view_permit/view_permit_controller.dart';
 import 'package:cmms/app/widgets/custom_elevated_button.dart';
@@ -13,6 +14,7 @@ import 'package:cmms/app/widgets/file_upload_with_dropzone_widget.dart';
 import 'package:cmms/app/widgets/history_table_widget_web.dart';
 import 'package:cmms/app/widgets/permit_approved_dialog.dart';
 import 'package:cmms/app/widgets/permit_cancel_by_approver_dialog.dart';
+import 'package:cmms/app/widgets/permit_cancel_reject_dialog.dart';
 import 'package:cmms/app/widgets/permit_cancel_request_dialog.dart';
 import 'package:cmms/app/widgets/permit_close_dialog.dart';
 import 'package:cmms/app/widgets/permit_extend_dialog.dart';
@@ -1658,17 +1660,19 @@ class ViewPermitWebScreen extends GetView<ViewPermitController> {
                                                                 .viewPermitDetailsModel
                                                                 .value
                                                                 ?.ptwStatus ==
-                                                            125 ||
+                                                            PermitStatusConstants.PTW_APPROVE //125 
+                                                            ||
                                                         controller
                                                                 .viewPermitDetailsModel
                                                                 .value
                                                                 ?.ptwStatus ==
-                                                            121 ||
+                                                            PermitStatusConstants.PTW_CREATED //121 
+                                                            ||
                                                         controller
                                                                 .viewPermitDetailsModel
                                                                 .value
                                                                 ?.ptwStatus ==
-                                                            135
+                                                            PermitStatusConstants.PTW_EXTEND_REQUEST_APPROVE //135
                                                     ? ColorValues.approveColor
                                                     : ColorValues.appRedColor,
                                                 width: 1,
@@ -1679,17 +1683,19 @@ class ViewPermitWebScreen extends GetView<ViewPermitController> {
                                                                   .viewPermitDetailsModel
                                                                   .value
                                                                   ?.ptwStatus ==
-                                                              125 ||
+                                                              PermitStatusConstants.PTW_APPROVE //125  
+                                                              ||
                                                           controller
                                                                   .viewPermitDetailsModel
                                                                   .value
                                                                   ?.ptwStatus ==
-                                                              121 ||
+                                                              PermitStatusConstants.PTW_CREATED //121 
+                                                              ||
                                                           controller
                                                                   .viewPermitDetailsModel
                                                                   .value
                                                                   ?.ptwStatus ==
-                                                              135
+                                                              PermitStatusConstants.PTW_EXTEND_REQUEST_APPROVE //135
                                                       ? ColorValues.approveColor
                                                       : ColorValues.appRedColor,
                                                 ),
@@ -2573,10 +2579,11 @@ class ViewPermitWebScreen extends GetView<ViewPermitController> {
 
                                     controller.viewPermitDetailsModel.value
                                                     ?.ptwStatus ==
-                                                133 ||
+                                                PermitStatusConstants.PTW_EXTEND_REQUESTED //133 
+                                                ||
                                             controller.viewPermitDetailsModel
                                                     .value?.ptwStatus ==
-                                                135
+                                                PermitStatusConstants.PTW_EXTEND_REQUEST_APPROVE //135
                                         ? SizedBox(
                                             width: MediaQuery.of(context)
                                                     .size
@@ -2740,10 +2747,11 @@ class ViewPermitWebScreen extends GetView<ViewPermitController> {
                                     ///Cancel Condition List
                                     controller.viewPermitDetailsModel.value
                                                     ?.ptwStatus ==
-                                                129 ||
+                                                PermitStatusConstants.PTW_CANCELLED_BY_APPROVER //129
+                                                 ||
                                             controller.viewPermitDetailsModel
                                                     .value?.ptwStatus ==
-                                                130
+                                                PermitStatusConstants.PTW_CANCEL_REQUESTED //130
                                         ? SizedBox(
                                             width: MediaQuery.of(context)
                                                     .size
@@ -2851,7 +2859,7 @@ class ViewPermitWebScreen extends GetView<ViewPermitController> {
                                                                           .blackBold17,
                                                                     ),
                                                                     Text(
-                                                                      'Extended Conditions',
+                                                                      'cancel Conditions',
                                                                       style: Styles
                                                                           .black17,
                                                                     ),
@@ -2909,7 +2917,7 @@ class ViewPermitWebScreen extends GetView<ViewPermitController> {
                                     ///Close Condition List
                                     controller.viewPermitDetailsModel.value
                                                 ?.ptwStatus ==
-                                            126
+                                            PermitStatusConstants.PTW_CLOSED //126
                                         ? SizedBox(
                                             width: MediaQuery.of(context)
                                                     .size
@@ -3326,11 +3334,27 @@ class ViewPermitWebScreen extends GetView<ViewPermitController> {
                                             crossAxisAlignment:
                                                 CrossAxisAlignment.end,
                                             children: [
+
                                               Text('Requested By: '),
-                                              Text('Issued By: '),
-                                              Text('Approved By: '),
-                                              Text('Closed By: '),
-                                              Text('Cancelled By: '),
+                                              // Text('Issued By: '),
+
+                                              controller.viewPermitDetailsModel.value
+                                                ?.ptwStatus == PermitStatusConstants.PTW_APPROVE //125 
+                                                || controller.viewPermitDetailsModel.value
+                                                ?.ptwStatus == PermitStatusConstants.PTW_CLOSED //126 
+                                                || controller.viewPermitDetailsModel.value
+                                                ?.ptwStatus == PermitStatusConstants.PTW_CANCELLED_BY_APPROVER //129
+                                              ?Text('Approved By: ')
+                                              :Dimens.box0,
+                                              controller.viewPermitDetailsModel.value
+                                                ?.ptwStatus == PermitStatusConstants.PTW_CANCELLED_BY_APPROVER //129 
+                                                || controller.viewPermitDetailsModel.value
+                                                ?.ptwStatus == PermitStatusConstants.PTW_CLOSED //126
+                                              ?Text('Cancelled By: '):Dimens.box0,
+                                              controller.viewPermitDetailsModel.value
+                                                ?.ptwStatus == PermitStatusConstants.PTW_CLOSED //126
+                                              ?Text('Closed By: '):Dimens.box0,
+                                              
                                             ],
                                           ),
                                           Dimens.boxWidth20,
@@ -3339,20 +3363,33 @@ class ViewPermitWebScreen extends GetView<ViewPermitController> {
                                                 CrossAxisAlignment.start,
                                             children: [
                                               Text(
-                                                '${controller.viewPermitDetailsModel.value?.issuedByName}',
+                                                '${controller.viewPermitDetailsModel.value?.requestedByName}',
                                               ),
-                                              Text(
-                                                '${controller.viewPermitDetailsModel.value?.issuedByName}',
-                                              ),
-                                              Text(
+                                              // Text(
+                                              //   '${controller.viewPermitDetailsModel.value?.issuedByName}',
+                                              // ),
+                                               controller.viewPermitDetailsModel.value
+                                                ?.ptwStatus == PermitStatusConstants.PTW_APPROVE //125 
+                                                || controller.viewPermitDetailsModel.value
+                                                ?.ptwStatus == PermitStatusConstants.PTW_CLOSED //126  
+                                                || controller.viewPermitDetailsModel.value
+                                                ?.ptwStatus == PermitStatusConstants.PTW_CANCELLED_BY_APPROVER //129
+                                              ?Text(
                                                 '${controller.viewPermitDetailsModel.value?.approvedByName}',
-                                              ),
-                                              Text(
-                                                '${controller.viewPermitDetailsModel.value?.closedByName}',
-                                              ),
-                                              Text(
+                                              ):Dimens.box0,
+                                              controller.viewPermitDetailsModel.value
+                                                ?.ptwStatus == PermitStatusConstants.PTW_CANCELLED_BY_APPROVER //129 
+                                                || controller.viewPermitDetailsModel.value
+                                                ?.ptwStatus == PermitStatusConstants.PTW_CLOSED //126 
+                                              ?Text(
                                                 '${controller.viewPermitDetailsModel.value?.cancelRequestByName}',
-                                              ),
+                                              ):Dimens.box0,
+                                               controller.viewPermitDetailsModel.value
+                                                ?.ptwStatus == PermitStatusConstants.PTW_CLOSED //126 
+                                              ?Text(
+                                                '${controller.viewPermitDetailsModel.value?.closedByName}',
+                                              ):Dimens.box0
+                                              
                                             ],
                                           ),
                                           Spacer(),
@@ -3361,10 +3398,25 @@ class ViewPermitWebScreen extends GetView<ViewPermitController> {
                                                 CrossAxisAlignment.end,
                                             children: [
                                               Text('Date / Time: '),
-                                              Text('Date / Time: '),
-                                              Text('Date / Time: '),
-                                              Text('Date / Time: '),
-                                              Text('Date / Time: '),
+
+                                              //Issued by
+                                              // Text('Date / Time: '),
+
+                                               controller.viewPermitDetailsModel.value
+                                                ?.ptwStatus == PermitStatusConstants.PTW_APPROVE //125 
+                                                || controller.viewPermitDetailsModel.value
+                                                ?.ptwStatus == PermitStatusConstants.PTW_CLOSED //126  
+                                                || controller.viewPermitDetailsModel.value
+                                                ?.ptwStatus == PermitStatusConstants.PTW_CANCELLED_BY_APPROVER //129 
+                                              ?Text('Date / Time: '):Dimens.box0,
+                                              controller.viewPermitDetailsModel.value
+                                                ?.ptwStatus == PermitStatusConstants.PTW_CANCELLED_BY_APPROVER //129  
+                                                || controller.viewPermitDetailsModel.value
+                                                ?.ptwStatus == PermitStatusConstants.PTW_CLOSED //126 
+                                              ?Text('Date / Time: '):Dimens.box0,
+                                               controller.viewPermitDetailsModel.value
+                                                ?.ptwStatus == PermitStatusConstants.PTW_CLOSED //126 
+                                              ?Text('Date / Time: '):Dimens.box0,
                                             ],
                                           ),
                                           Dimens.boxWidth20,
@@ -3375,18 +3427,32 @@ class ViewPermitWebScreen extends GetView<ViewPermitController> {
                                               Text(
                                                 '${controller.viewPermitDetailsModel.value?.issue_at}',
                                               ),
-                                              Text(
-                                                '${controller.viewPermitDetailsModel.value?.issue_at}',
-                                              ),
-                                              Text(
+                                              // Text(
+                                              //   '${controller.viewPermitDetailsModel.value?.issue_at}',
+                                              // ),
+                                               controller.viewPermitDetailsModel.value
+                                                ?.ptwStatus == PermitStatusConstants.PTW_APPROVE //125  
+                                                || controller.viewPermitDetailsModel.value
+                                                ?.ptwStatus == PermitStatusConstants.PTW_CLOSED //126  
+                                                || controller.viewPermitDetailsModel.value
+                                                ?.ptwStatus == PermitStatusConstants.PTW_CANCELLED_BY_APPROVER //129
+                                              ?Text(
                                                 '${controller.viewPermitDetailsModel.value?.approve_at}',
-                                              ),
-                                              Text(
-                                                '${controller.viewPermitDetailsModel.value?.close_at}',
-                                              ),
-                                              Text(
+                                              ):Dimens.box0,
+                                              controller.viewPermitDetailsModel.value
+                                                ?.ptwStatus == PermitStatusConstants.PTW_CANCELLED_BY_APPROVER //129
+                                                || controller.viewPermitDetailsModel.value
+                                                ?.ptwStatus == PermitStatusConstants.PTW_CLOSED //126
+                                              ?Text(
                                                 '${controller.viewPermitDetailsModel.value?.cancel_at}',
-                                              ),
+                                              ):Dimens.box0,
+
+                                               controller.viewPermitDetailsModel.value
+                                                ?.ptwStatus == PermitStatusConstants.PTW_CLOSED //126
+                                              ?Text(
+                                                '${controller.viewPermitDetailsModel.value?.close_at}',
+                                              ):Dimens.box0,
+                                              
                                             ],
                                           ),
                                           Spacer(),
@@ -3395,10 +3461,25 @@ class ViewPermitWebScreen extends GetView<ViewPermitController> {
                                                 CrossAxisAlignment.end,
                                             children: [
                                               Text('Signature: '),
-                                              Text('Signature: '),
-                                              Text('Signature: '),
-                                              Text('Signature: '),
-                                              Text('Signature: '),
+
+                                              //Issued at
+                                              // Text('Signature: '),
+
+                                               controller.viewPermitDetailsModel.value
+                                                ?.ptwStatus == PermitStatusConstants.PTW_APPROVE //125
+                                                || controller.viewPermitDetailsModel.value
+                                                ?.ptwStatus == PermitStatusConstants.PTW_CLOSED //126
+                                                || controller.viewPermitDetailsModel.value
+                                                ?.ptwStatus == PermitStatusConstants.PTW_CANCELLED_BY_APPROVER //129
+                                              ?Text('Signature: '):Dimens.box0,
+                                              controller.viewPermitDetailsModel.value
+                                                ?.ptwStatus == PermitStatusConstants.PTW_CANCELLED_BY_APPROVER //129
+                                                || controller.viewPermitDetailsModel.value
+                                                ?.ptwStatus == PermitStatusConstants.PTW_CLOSED //126
+                                              ?Text('Signature: '):Dimens.box0,
+                                               controller.viewPermitDetailsModel.value
+                                                ?.ptwStatus == PermitStatusConstants.PTW_CLOSED //126
+                                              ?Text('Signature: '):Dimens.box0,
                                             ],
                                           ),
                                           Spacer()
@@ -3518,15 +3599,16 @@ class ViewPermitWebScreen extends GetView<ViewPermitController> {
                                   .length >
                               0 &&
                           controller.viewPermitDetailsModel.value?.ptwStatus ==
-                              121 ||
-                      controller.viewPermitDetailsModel.value?.ptwStatus == 133
+                              PermitStatusConstants.PTW_CREATED //121
+                               ||
+                      controller.viewPermitDetailsModel.value?.ptwStatus == PermitStatusConstants.PTW_EXTEND_REQUESTED //133
                   ? Container(
                       height: 45,
                       child: CustomElevatedButton(
                         backgroundColor: ColorValues.appGreenColor,
                         text: controller
                                     .viewPermitDetailsModel.value?.ptwStatus ==
-                                133
+                                PermitStatusConstants.PTW_EXTEND_REQUESTED //133
                             ? "Extend Approve"
                             : "Approve Permit",
                         icon: Icons.add,
@@ -3534,8 +3616,8 @@ class ViewPermitWebScreen extends GetView<ViewPermitController> {
                           // controller
                           //     .createNewPermit();
                           Get.dialog(PermitApprovedDialog(
-                            permitId:
-                                '${controller.viewPermitDetailsModel.value?.permitNo}',
+                            permitId: controller
+                                .viewPermitDetailsModel.value?.permitNo,
                             ptwStatus:
                                 '${controller.viewPermitDetailsModel.value?.ptwStatus}',
                             jobId: controller.jobId,
@@ -3552,7 +3634,8 @@ class ViewPermitWebScreen extends GetView<ViewPermitController> {
                       controller.viewPermitDetailsModel.value?.requester_id ==
                               varUserAccessModel.value.user_id &&
                           controller.viewPermitDetailsModel.value?.ptwStatus ==
-                              125 &&
+                              PermitStatusConstants.PTW_APPROVE //125 
+                              &&
                           varUserAccessModel.value.access_list!
                                   .where((e) =>
                                       e.feature_id ==
@@ -3590,7 +3673,7 @@ class ViewPermitWebScreen extends GetView<ViewPermitController> {
                           0 &&
                       controller.viewPermitDetailsModel.value?.permitNo !=
                           null &&
-                      controller.viewPermitDetailsModel.value?.ptwStatus == 121
+                      controller.viewPermitDetailsModel.value?.ptwStatus == PermitStatusConstants.PTW_CREATED //121
                   ? Container(
                       height: 45,
                       child: CustomElevatedButton(
@@ -3620,8 +3703,9 @@ class ViewPermitWebScreen extends GetView<ViewPermitController> {
                                   .length >
                               0 &&
                           controller.viewPermitDetailsModel.value?.ptwStatus ==
-                              121 ||
-                      controller.viewPermitDetailsModel.value?.ptwStatus == 133
+                              PermitStatusConstants.PTW_CREATED //121
+                              ||
+                      controller.viewPermitDetailsModel.value?.ptwStatus == PermitStatusConstants.PTW_EXTEND_REQUESTED //133
                   // ||
                   // controller.viewPermitDetailsModel.value?.ptwStatus == 130
                   // varUserAccessModel.value.access_list!
@@ -3638,7 +3722,7 @@ class ViewPermitWebScreen extends GetView<ViewPermitController> {
                         backgroundColor: ColorValues.appRedColor,
                         text: controller
                                     .viewPermitDetailsModel.value?.ptwStatus ==
-                                133
+                                PermitStatusConstants.PTW_EXTEND_REQUESTED //133
                             ? "Extend Reject"
                             : "Reject Permit",
                         icon: Icons.close,
@@ -3711,8 +3795,9 @@ class ViewPermitWebScreen extends GetView<ViewPermitController> {
                                   .length >
                               0 &&
                           controller.viewPermitDetailsModel.value?.ptwStatus ==
-                              125 ||
-                      controller.viewPermitDetailsModel.value?.ptwStatus == 121
+                              PermitStatusConstants.PTW_APPROVE //125 
+                              ||
+                      controller.viewPermitDetailsModel.value?.ptwStatus == PermitStatusConstants.PTW_CREATED //121
                   ? Container(
                       height: 45,
                       child: CustomElevatedButton(
@@ -3736,12 +3821,12 @@ class ViewPermitWebScreen extends GetView<ViewPermitController> {
                                       UserAccessConstants.kHaveApproveAccess)
                               .length >
                           0 &&
-                      controller.viewPermitDetailsModel.value?.ptwStatus == 130
+                      controller.viewPermitDetailsModel.value?.ptwStatus == PermitStatusConstants.PTW_CANCEL_REQUESTED //130
                   ? Container(
                       height: 45,
                       child: CustomElevatedButton(
                         backgroundColor: ColorValues.appGreenColor,
-                        text: "Permit Cancel Appove",
+                        text: "Permit Cancel Approve",
                         icon: Icons.close,
                         onPressed: () {
                           // controller
@@ -3765,7 +3850,7 @@ class ViewPermitWebScreen extends GetView<ViewPermitController> {
                                       UserAccessConstants.kHaveApproveAccess)
                               .length >
                           0 &&
-                      controller.viewPermitDetailsModel.value?.ptwStatus == 130
+                      controller.viewPermitDetailsModel.value?.ptwStatus == PermitStatusConstants.PTW_CANCEL_REQUESTED //130
                   ? Container(
                       height: 45,
                       child: CustomElevatedButton(
@@ -3775,11 +3860,9 @@ class ViewPermitWebScreen extends GetView<ViewPermitController> {
                         onPressed: () {
                           // controller
                           //     .createNewPermit();
-                          Get.dialog(PermitCancelByApproverDialog(
-                            permitId:
-                                '${controller.viewPermitDetailsModel.value?.permitNo}',
-                            ptwStatus:
-                                '${controller.viewPermitDetailsModel.value?.ptwStatus}',
+                          Get.dialog(PermitCancelRejectDialog(
+                            permitId: controller
+                                .viewPermitDetailsModel.value?.permitNo,
                           ));
                         },
                       ),

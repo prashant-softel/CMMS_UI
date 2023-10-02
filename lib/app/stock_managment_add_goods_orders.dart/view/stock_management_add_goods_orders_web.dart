@@ -62,6 +62,56 @@ class _AddGoodsOrdersWebState extends State<AddGoodsOrdersWeb> {
                                       style: Styles.blackBold16,
                                     ),
                                     Spacer(),
+
+                                    Container(
+                                        padding: EdgeInsets.symmetric(
+                                            vertical: 2, horizontal: 5),
+                                        margin: EdgeInsets.only(top: 5),
+                                        decoration: BoxDecoration(
+                                          color: controller
+                                                      .getPurchaseDetailsByIDModel
+                                                      .value
+                                                      ?.status ==
+                                                  302
+                                              ? ColorValues.createsColor
+                                              : controller.getPurchaseDetailsByIDModel
+                                                          .value?.status ==
+                                                      301
+                                                  ? ColorValues.draftColor
+                                                  : controller.getPurchaseDetailsByIDModel
+                                                              .value?.status ==
+                                                          305
+                                                      ? Color.fromARGB(
+                                                          255, 181, 129, 179)
+                                                      : controller
+                                                                  .getPurchaseDetailsByIDModel
+                                                                  .value
+                                                                  ?.status ==
+                                                              309
+                                                          ? Color.fromARGB(
+                                                              255, 181, 129, 179)
+                                                          : controller
+                                                                      .getPurchaseDetailsByIDModel
+                                                                      .value
+                                                                      ?.status ==
+                                                                  306
+                                                              ? ColorValues
+                                                                  .approveColor
+                                                              : controller
+                                                                          .getPurchaseDetailsByIDModel
+                                                                          .value
+                                                                          ?.status ==
+                                                                      304
+                                                                  ? ColorValues.appPurpleColor
+                                                                  : ColorValues.lightBlueColor,
+                                          borderRadius:
+                                              BorderRadius.circular(5),
+                                        ),
+                                        child: Obx(
+                                          () => Text(
+                                            " ${controller.getPurchaseDetailsByIDModel.value?.status_short ?? ""}",
+                                          ),
+                                        )),
                                     controller.id == null
                                         ? Container()
                                         : Obx(

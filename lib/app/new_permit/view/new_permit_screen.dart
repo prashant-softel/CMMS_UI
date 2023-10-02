@@ -3565,15 +3565,15 @@ class NewPermitScreen extends GetView<NewPermitController> {
                                                                       child: Container(
                                                                           height: 45,
                                                                           child: CustomElevatedButton(
-                                                                            backgroundColor:
-                                                                                ColorValues.appGreenColor,
-                                                                            text:
-                                                                                "Submit For Approval",
-                                                                            onPressed:
+                                                                              backgroundColor: ColorValues.appGreenColor,
+                                                                              text: "Submit For Approval",
+                                                                              onPressed: () {
+                                                                                controller.isCheckedJSA.value == true && controller.isCheckedSOP.value == true ? controller.createNewPermit() : Get.dialog<void>(checkboxAlertBox());
+
                                                                                 () {
-                                                                              controller.isCheckedJSA.value == true && controller.isCheckedSOP.value == true ? controller.createNewPermit() : Get.dialog<void>(checkboxAlertBox());
-                                                                            },
-                                                                          )),
+                                                                                  controller.isCheckedJSA.value == true && controller.isCheckedSOP.value == true ? controller.createNewPermit(fileIds: dropzoneController.fileIds) : Get.dialog<void>(checkboxAlertBox());
+                                                                                };
+                                                                              })),
                                                                     )
                                                                   : Row(
                                                                       children: [

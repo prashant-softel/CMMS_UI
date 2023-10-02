@@ -750,7 +750,10 @@ class Repository {
 
       if (!res.hasError) {
         Fluttertoast.showToast(
-            msg: " Purchase Goods Orders Add Successfully...", fontSize: 16.0);
+            msg: " Request  Orders Add Successfully...", fontSize: 16.0);
+        Get.offNamed(
+          Routes.purchaseGoodsorder,
+        );
 
         // if (res.errorCode == 200) {
         //   var responseMap = json.decode(res.data);
@@ -1170,7 +1173,7 @@ class Repository {
                         Map<String, dynamic>.from(m)))
                 .toList();
 
-        return _goodOrderModelList;
+        return _goodOrderModelList.reversed.toList();
       } //
       else {
         Utility.showDialog(res.errorCode.toString() + 'getIncidentReportList');
@@ -2737,35 +2740,72 @@ class Repository {
     }
   }
 
-  Future<void> permitApprovedButton(
-    String? comment,
-    String? id,
+  Future<Map<String, dynamic>> permitApprovedButton(
+    rejectCancelPermitJsonString,
     String? ptwStatus,
     int? jobId,
     bool? isLoading,
   ) async {
     try {
       final auth = await getSecuredValue(LocalKeys.authToken);
-
       final res = await _dataRepository.permitApprovedButton(
         auth: auth,
-        comment: comment,
-        id: id,
+        rejectCancelPermitJsonString: json.encode(rejectCancelPermitJsonString),
         ptwStatus: ptwStatus,
         jobId: jobId,
         isLoading: isLoading ?? false,
       );
-      print('PermitApproved&ExtendApproveResponse5: ${res.data}');
+
+      var resourceData = res.data;
+
+      print('Response Approve Extened Response: ${resourceData}');
 
       if (!res.hasError) {
-        //  return _permitIssueModel;
+        if (res.errorCode == 200) {
+          var responseMap = json.decode(res.data);
+          return responseMap;
+        } else {
+          // Get.dialog<void>(WarrantyClaimErrorDialog());
+        }
       } else {
-        Utility.showDialog(res.errorCode.toString() + 'permitIssueButton');
+        Utility.showDialog(res.errorCode.toString() + 'ApproveExtenedResponse');
+        //return '';
       }
+      return Map();
     } catch (error) {
-      log(error.toString());
+      print(error.toString());
+      return Map();
     }
   }
+  // Future<void> permitApprovedButton(
+  //   String? comment,
+  //   String? id,
+  //   String? ptwStatus,
+  //   int? jobId,
+  //   bool? isLoading,
+  // ) async {
+  //   try {
+  //     final auth = await getSecuredValue(LocalKeys.authToken);
+
+  //     final res = await _dataRepository.permitApprovedButton(
+  //       auth: auth,
+  //       comment: comment,
+  //       id: id,
+  //       ptwStatus: ptwStatus,
+  //       jobId: jobId,
+  //       isLoading: isLoading ?? false,
+  //     );
+  //     print('PermitApproved&ExtendApproveResponse5: ${res.data}');
+
+  //     if (!res.hasError) {
+  //       //  return _permitIssueModel;
+  //     } else {
+  //       Utility.showDialog(res.errorCode.toString() + 'permitIssueButton');
+  //     }
+  //   } catch (error) {
+  //     log(error.toString());
+  //   }
+  // }
 
   Future<void> permitCancelByIssuerButton(
     String? comment,
@@ -2853,32 +2893,66 @@ class Repository {
     }
   }
 
-  Future<void> permitCancelRejectButton(
-    String? comment,
-    String? id,
+  Future<Map<String, dynamic>> permitCancelRejectButton(
+    rejectCancelPermitJsonString,
     bool? isLoading,
   ) async {
     try {
       final auth = await getSecuredValue(LocalKeys.authToken);
-
       final res = await _dataRepository.permitCancelRejectButton(
         auth: auth,
-        comment: comment,
-        id: id,
+        rejectCancelPermitJsonString: json.encode(rejectCancelPermitJsonString),
         isLoading: isLoading ?? false,
       );
-      print('PermitCancelRejectResponse: ${res.data}');
+
+      var resourceData = res.data;
+
+      print('Response Permit Cancel Reject Response: ${resourceData}');
 
       if (!res.hasError) {
-        //  return _permitIssueModel;
+        if (res.errorCode == 200) {
+          var responseMap = json.decode(res.data);
+          return responseMap;
+        } else {
+          // Get.dialog<void>(WarrantyClaimErrorDialog());
+        }
       } else {
         Utility.showDialog(
-            res.errorCode.toString() + 'permitCancelRejectButton');
+            res.errorCode.toString() + 'PermitCancelRejectResponse');
+        //return '';
       }
+      return Map();
     } catch (error) {
-      log(error.toString());
+      print(error.toString());
+      return Map();
     }
   }
+  // Future<void> permitCancelRejectButton(
+  //   String? comment,
+  //   String? id,
+  //   bool? isLoading,
+  // ) async {
+  //   try {
+  //     final auth = await getSecuredValue(LocalKeys.authToken);
+
+  //     final res = await _dataRepository.permitCancelRejectButton(
+  //       auth: auth,
+  //       comment: comment,
+  //       id: id,
+  //       isLoading: isLoading ?? false,
+  //     );
+  //     print('PermitCancelRejectResponse: ${res.data}');
+
+  //     if (!res.hasError) {
+  //       //  return _permitIssueModel;
+  //     } else {
+  //       Utility.showDialog(
+  //           res.errorCode.toString() + 'permitCancelRejectButton');
+  //     }
+  //   } catch (error) {
+  //     log(error.toString());
+  //   }
+  // }
 
   ///Extend Permit
   Future<Map<String, dynamic>> permitExtendButton(

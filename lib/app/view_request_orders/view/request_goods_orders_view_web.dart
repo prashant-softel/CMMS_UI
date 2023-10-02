@@ -55,7 +55,7 @@ class PurchaseGoodsorderViewWeb
                 child: Text(" / STOCK MANAGEMENT ",
                     style: Styles.greyMediumLight12),
               ),
-              Text(" / Goods Order Request Details",
+              Text(" / Request  Order  Details",
                   style: Styles.greyMediumLight12)
             ],
           ),
@@ -83,14 +83,9 @@ class PurchaseGoodsorderViewWeb
                           Padding(
                             padding: const EdgeInsets.all(10.0),
                             child: Text(
-                              " Goods Order Request Details",
+                              "Request  Order  Details",
                               style: Styles.blackBold14,
                             ),
-                          ),
-                          Spacer(),
-                          Text(
-                            "${controller.getPurchaseDetailsByIDModel.value?.status_long ?? ""}",
-                            style: Styles.blue17,
                           ),
                           Spacer(),
                           Padding(
@@ -114,6 +109,12 @@ class PurchaseGoodsorderViewWeb
 
                     Divider(
                       color: ColorValues.greyLightColour,
+                    ),
+                    Dimens.boxHeight10,
+                    Center(
+                      child: Text(
+                        "${controller.getPurchaseDetailsByIDModel.value?.status_long ?? ""}",
+                      ),
                     ),
                     Dimens.boxHeight10,
                     Row(

@@ -10,6 +10,7 @@ import 'package:cmms/app/widgets/create_permit_dialog.dart';
 import 'package:cmms/domain/models/block_model.dart';
 import 'package:cmms/domain/models/cancel_permit_request_model.dart';
 import 'package:cmms/domain/models/close_permit_model.dart';
+import 'package:cmms/domain/models/comment_model.dart';
 import 'package:cmms/domain/models/create_sop_model.dart';
 import 'package:cmms/domain/models/employee_list_model.dart';
 import 'package:cmms/domain/models/employee_list_model2.dart';
@@ -38,6 +39,7 @@ import 'package:rxdart/subjects.dart';
 import 'package:pdf/widgets.dart' as pw;
 import 'package:scrollable_table_view/scrollable_table_view.dart';
 import '../../../domain/models/inventory_category_model.dart';
+import '../../domain/models/aprove_extend_model.dart';
 import '../theme/color_values.dart';
 
 class ViewPermitController extends GetxController {
@@ -511,20 +513,48 @@ class ViewPermitController extends GetxController {
     }
   }
 
-  Future<void> permitApprovedButton(
-      {String? permitId, String? ptwStatus, int? jobId}) async {
-    String _approveComment = approveCommentTextFieldCtrlr.text.trim();
+  void permitApprovedButton(
+      {int? permitId, String? ptwStatus, int? jobId}) async {
+    {
+      String _approveComment = approveCommentTextFieldCtrlr.text.trim();
 
-    final _permitApprovedBtn = await viewPermitPresenter.permitApprovedButton(
-        comment: _approveComment,
+      AproveExtendPermitModel commentRejectCancelPermitModel =
+          AproveExtendPermitModel(
         id: permitId,
+        comment: _approveComment,
         ptwStatus: ptwStatus,
         jobId: jobId,
-        isLoading: true);
-    // showAlertPermitApproveDialog();
-    print('Approved Data:${_approveComment}');
-    print('Approved Data:${permitId}');
+      );
+
+      var rejectCancelPermitJsonString =
+          commentRejectCancelPermitModel.toJson();
+
+      Map<String, dynamic>? response =
+          await viewPermitPresenter.permitApprovedButton(
+        rejectCancelPermitJsonString: rejectCancelPermitJsonString,
+        ptwStatus: ptwStatus,
+        jobId: jobId,
+        isLoading: true,
+      );
+      if (response == true) {
+        //getCalibrationList(facilityId, true);
+      }
+    }
   }
+  // Future<void> permitApprovedButton(
+  //     {String? permitId, String? ptwStatus, int? jobId}) async {
+  //   String _approveComment = approveCommentTextFieldCtrlr.text.trim();
+
+  //   final _permitApprovedBtn = await viewPermitPresenter.permitApprovedButton(
+  //       comment: _approveComment,
+  //       id: permitId,
+  //       ptwStatus: ptwStatus,
+  //       jobId: jobId,
+  //       isLoading: true);
+  //   // showAlertPermitApproveDialog();
+  //   print('Approved Data:${_approveComment}');
+  //   print('Approved Data:${permitId}');
+  // }
 
   Future<void> permitCloseButton(
       {String? permitId, List<dynamic>? closeFileIds}) async {
@@ -685,14 +715,25 @@ class ViewPermitController extends GetxController {
     print('Cancel Button By Approver Data:${permitId}');
   }
 
-  Future<void> permitCancelRejectButton({String? permitId}) async {
-    String _cancelComment = cancelCommentRejectTextFieldCtrlr.text.trim();
+  void permitCancelRejectButton({int? permitId}) async {
+    {
+      String _comment = cancelCommentRejectTextFieldCtrlr.text.trim();
 
-    final _permitCancelByApproverBtn = await viewPermitPresenter
-        .permitCancelRejectButton(comment: _cancelComment, id: permitId);
-    // showAlertPermitApproveDialog();
-    print('Cancel Button  Reject Data:${_cancelComment}');
-    print('Cancel Button  Reject Data:${permitId}');
+      CommentModel commentRejectCancelPermitModel =
+          CommentModel(id: permitId, comment: _comment);
+
+      var rejectCancelPermitJsonString =
+          commentRejectCancelPermitModel.toJson();
+
+      Map<String, dynamic>? response =
+          await viewPermitPresenter.permitCancelRejectButton(
+        rejectCancelPermitJsonString: rejectCancelPermitJsonString,
+        isLoading: true,
+      );
+      if (response == true) {
+        //getCalibrationList(facilityId, true);
+      }
+    }
   }
 
   Future<void> getPermitHistory({required int permitId}) async {

@@ -1,5 +1,6 @@
 import 'package:cmms/app/theme/color_values.dart';
 import 'package:cmms/app/view_add_goods_orders.dart/stock_management_view_add_goods_orders_controller.dart';
+import 'package:cmms/app/view_permit/view_permit_controller.dart';
 import 'package:cmms/app/view_request_orders/request_goods_orders_view_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -9,12 +10,12 @@ import '../navigators/app_pages.dart';
 import '../theme/dimens.dart';
 import '../theme/styles.dart';
 
-class ReqOrderMessageRejectDialog extends GetView {
+class RejectCancelPermitMessageDialog extends GetView {
   String? data;
   List<dynamic>? id;
 
-  ReqOrderMessageRejectDialog({super.key, this.data, this.id});
-  final PurchaseGoodsorderViewController controller = Get.find();
+  RejectCancelPermitMessageDialog({super.key, this.data, this.id});
+  final ViewPermitController controller = Get.find();
 
   @override
   Widget build(BuildContext context) {
@@ -26,7 +27,7 @@ class ReqOrderMessageRejectDialog extends GetView {
         insetPadding: Dimens.edgeInsets10_0_10_0,
         contentPadding: EdgeInsets.zero,
         title: Text(
-          'Request Order Reject',
+          'Reject Permit Cancel',
           textAlign: TextAlign.center,
           style: TextStyle(color: Colors.black),
         ),
@@ -86,9 +87,9 @@ class ReqOrderMessageRejectDialog extends GetView {
                 child: ElevatedButton(
                   style: Styles.darkBlueElevatedButtonStyle,
                   onPressed: () {
-                    Get.offAllNamed(Routes.purchaseGoodsorder);
+                    Get.offAllNamed(Routes.newPermitList);
                   },
-                  child: const Text('RO List'),
+                  child: const Text('Permit List'),
                 ),
               ),
               Dimens.boxWidth10,
@@ -97,22 +98,8 @@ class ReqOrderMessageRejectDialog extends GetView {
                   style: Styles.yellowElevatedButtonStyle,
                   onPressed: () {
                     Get.back();
-                    Future.delayed(
-                      Duration(seconds: 1),
-                      () {
-                        controller.getAssetList(controller.facilityId);
-
-                        if (controller.id.value != 0) {
-                          Future.delayed(Duration(seconds: 1), () {
-                            controller.getRoDetailsByID(
-                                requestID: controller.id.value);
-                            // getGoHistory(id: id.value);
-                          });
-                        }
-                      },
-                    );
                   },
-                  child: const Text('View RO'),
+                  child: const Text('View  Reject Cancel Permit'),
                 ),
               ),
               Spacer(),
