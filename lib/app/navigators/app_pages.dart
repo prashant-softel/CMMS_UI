@@ -199,6 +199,12 @@ import '../preventive_maintenance_execution_view/view/preventive_maintenance_exe
 import '../preventive_maintenance_task/preventive_maintenance_task_binding.dart';
 import '../preventive_maintenance_task/view/preventive_maintenance_task_screen.dart';
 import '../request_goods_orders_list.dart/view/request_goods_orders__list_screen.dart';
+import '../risk_type/risk_type_binding.dart';
+import '../risk_type/view/risk_type_screen.dart';
+import '../source_of_observation/source_of_obs_binding.dart';
+import '../source_of_observation/view/source_of_obs_screen.dart';
+import '../type_of_observation/type_of_obs_binding.dart';
+import '../type_of_observation/view/type_of_obs_screen.dart';
 import '../view_request_orders/view/request_goods_orders_view_screen.dart';
 import '../receive_goods_order/receive_goods_order_binding.dart';
 import '../receive_goods_order/receive_goods_order_screen.dart';
@@ -855,6 +861,21 @@ class AppPages {
       name: _Paths.viewPmPlanScreen,
       page: ViewPmPlanScreen.new,
       binding: ViewPmPlanBinding(),
+    ),
+    GetPage<dynamic>(
+      name: _Paths.typeofobservation,
+      page: TypeOfObsScreen.new,
+      binding: TypeOfObsBinding(),
+    ),
+    GetPage<dynamic>(
+      name: _Paths.sourceofobservation,
+      page: SourceOfObsScreen.new,
+      binding: SourceOfObsBinding(),
+    ),
+    GetPage<dynamic>(
+      name: _Paths.risktypemaster,
+      page: RiskTypeScreen.new,
+      binding: RiskTypeBinding(),
     ),
   ];
 }

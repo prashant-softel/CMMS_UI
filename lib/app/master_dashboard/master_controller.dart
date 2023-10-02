@@ -199,6 +199,24 @@ class MastersController extends GetxController {
     );
   }
 
+  Future<void> goToTypeOfObservation() async {
+    Get.toNamed(
+      Routes.typeofobservation,
+    );
+  }
+
+  Future<void> goToSourceOfObservation() async {
+    Get.toNamed(
+      Routes.sourceofobservation,
+    );
+  }
+
+  Future<void> goToRiskType() async {
+    Get.toNamed(
+      Routes.risktypemaster,
+    );
+  }
+
   Future<void> goToDesignationScreen() async {
     Get.toNamed(
       Routes.designationScreen,
