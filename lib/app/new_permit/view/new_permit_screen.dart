@@ -3548,7 +3548,7 @@ class NewPermitScreen extends GetView<NewPermitController> {
                                                                             backgroundColor:
                                                                                 ColorValues.appGreenColor,
                                                                             text:
-                                                                                "Submit For Task Approval",
+                                                                                "Submit For Approval",
                                                                             onPressed:
                                                                                 () {
                                                                               // var jobId = controller.jobModel?.id ?? 0;
@@ -3558,63 +3558,56 @@ class NewPermitScreen extends GetView<NewPermitController> {
                                                                             },
                                                                           )),
                                                                 )
-                                                              :controller.permitId
-                                                                      .value <=
-                                                                  0
-                                                              ? Center(
-                                                                  child:
-                                                                      Container(
-                                                                          height:
-                                                                              45,
-                                                                          child:
-                                                                              CustomElevatedButton(
-                                                                            backgroundColor:
-                                                                                ColorValues.appGreenColor,
-                                                                            text:
-                                                                                "Submit For Approval",
-                                                                            onPressed:
-
-                                                                              () {controller.isCheckedJSA.value == true && controller.isCheckedSOP.value == true ? controller.createNewPermit(fileIds: dropzoneController.fileIds) : Get.dialog<void>(checkboxAlertBox());
-                                                                            },
-                                                                          )),
-                                                                )
-                                                              : Row(
-                                                                  children: [
-                                                                    Spacer(),
-                                                                    Center(
+                                                              : controller.permitId
+                                                                          .value <=
+                                                                      0
+                                                                  ? Center(
                                                                       child: Container(
                                                                           height: 45,
                                                                           child: CustomElevatedButton(
-                                                                            backgroundColor:
-                                                                                ColorValues.appDarkBlueColor,
-                                                                            text:
-                                                                                "Update",
-                                                                            onPressed:
+                                                                              backgroundColor: ColorValues.appGreenColor,
+                                                                              text: "Submit For Approval",
+                                                                              onPressed: () {
+                                                                                controller.isCheckedJSA.value == true && controller.isCheckedSOP.value == true ? controller.createNewPermit() : Get.dialog<void>(checkboxAlertBox());
+
                                                                                 () {
-                                                                              controller.updateNewPermit();
-                                                                            },
-                                                                          )),
+                                                                                  controller.isCheckedJSA.value == true && controller.isCheckedSOP.value == true ? controller.createNewPermit(fileIds: dropzoneController.fileIds) : Get.dialog<void>(checkboxAlertBox());
+                                                                                };
+                                                                              })),
+                                                                    )
+                                                                  : Row(
+                                                                      children: [
+                                                                        Spacer(),
+                                                                        Center(
+                                                                          child: Container(
+                                                                              height: 45,
+                                                                              child: CustomElevatedButton(
+                                                                                backgroundColor: ColorValues.appDarkBlueColor,
+                                                                                text: "Update",
+                                                                                onPressed: () {
+                                                                                  controller.updateNewPermit();
+                                                                                },
+                                                                              )),
+                                                                        ),
+                                                                        Dimens
+                                                                            .boxWidth20,
+                                                                        controller.newPermitDetailsModel.value?.ptwStatus ==
+                                                                                124
+                                                                            ? Center(
+                                                                                child: Container(
+                                                                                    height: 45,
+                                                                                    child: CustomElevatedButton(
+                                                                                      backgroundColor: Color.fromARGB(255, 116, 78, 130),
+                                                                                      text: "Re submit Permit",
+                                                                                      onPressed: () {
+                                                                                        controller.resubmitPermit();
+                                                                                      },
+                                                                                    )),
+                                                                              )
+                                                                            : Dimens.box0,
+                                                                        Spacer(),
+                                                                      ],
                                                                     ),
-                                                                    Dimens
-                                                                        .boxWidth20,
-                                                                    controller.newPermitDetailsModel.value?.ptwStatus ==
-                                                                            124
-                                                                        ? Center(
-                                                                            child: Container(
-                                                                                height: 45,
-                                                                                child: CustomElevatedButton(
-                                                                                  backgroundColor: Color.fromARGB(255, 116, 78, 130),
-                                                                                  text: "Re submit Permit",
-                                                                                  onPressed: () {
-                                                                                    controller.resubmitPermit();
-                                                                                  },
-                                                                                )),
-                                                                          )
-                                                                        : Dimens
-                                                                            .box0,
-                                                                    Spacer(),
-                                                                  ],
-                                                                ),
 
                                                       // : checkboxAlertBox(),
 

@@ -24,7 +24,7 @@ class ObservationPMTaskViewDialog extends GetView {
         // contentPadding: EdgeInsets.zero,
         title: Center(
           child: Text(
-            "Observation of  ${controller.selectedItem?.asset_name ?? ""}",
+            "Observation of  ${controller.selectedItem?.name ?? ""}",
             style: Styles.blue700,
           ),
         ),
