@@ -81,14 +81,14 @@ class ReqOrderMessageRejectDialog extends GetView {
         actions: [
           Row(
             children: [
-              Dimens.boxWidth10,
+              Spacer(),
               Center(
                 child: ElevatedButton(
                   style: Styles.darkBlueElevatedButtonStyle,
                   onPressed: () {
                     Get.offAllNamed(Routes.purchaseGoodsorder);
                   },
-                  child: const Text('Request Order List'),
+                  child: const Text('RO List'),
                 ),
               ),
               Dimens.boxWidth10,
@@ -115,7 +115,7 @@ class ReqOrderMessageRejectDialog extends GetView {
                   child: const Text('View RO'),
                 ),
               ),
-              Dimens.boxWidth10,
+              Spacer(),
             ],
           )
         ],

@@ -100,6 +100,54 @@ class _ViewAddGoodsOrdersWebState extends State<ViewAddGoodsOrdersWeb> {
                                       style: Styles.blackBold16,
                                     ),
                                     Spacer(),
+                                    Container(
+                                        padding: EdgeInsets.symmetric(
+                                            vertical: 2, horizontal: 5),
+                                        margin: EdgeInsets.only(top: 5),
+                                        decoration: BoxDecoration(
+                                          color: controller
+                                                      .getPurchaseDetailsByIDModel
+                                                      .value
+                                                      ?.status ==
+                                                  302
+                                              ? ColorValues.createsColor
+                                              : controller.getPurchaseDetailsByIDModel
+                                                          .value?.status ==
+                                                      301
+                                                  ? ColorValues.draftColor
+                                                  : controller.getPurchaseDetailsByIDModel
+                                                              .value?.status ==
+                                                          305
+                                                      ? Color.fromARGB(
+                                                          255, 181, 129, 179)
+                                                      : controller
+                                                                  .getPurchaseDetailsByIDModel
+                                                                  .value
+                                                                  ?.status ==
+                                                              309
+                                                          ? Color.fromARGB(
+                                                              255, 181, 129, 179)
+                                                          : controller
+                                                                      .getPurchaseDetailsByIDModel
+                                                                      .value
+                                                                      ?.status ==
+                                                                  306
+                                                              ? ColorValues
+                                                                  .approveColor
+                                                              : controller
+                                                                          .getPurchaseDetailsByIDModel
+                                                                          .value
+                                                                          ?.status ==
+                                                                      304
+                                                                  ? ColorValues.appPurpleColor
+                                                                  : ColorValues.lightBlueColor,
+                                          borderRadius:
+                                              BorderRadius.circular(5),
+                                        ),
+                                        child: Text(
+                                          " ${controller.getPurchaseDetailsByIDModel.value?.status_short ?? ""}",
+                                        )),
+
                                     Text(
                                       " Order ID :${controller.getPurchaseDetailsByIDModel.value?.id} ",
                                     ),
@@ -117,10 +165,57 @@ class _ViewAddGoodsOrdersWebState extends State<ViewAddGoodsOrdersWeb> {
                               Divider(
                                 color: ColorValues.greyLightColour,
                               ),
-                              Text(
-                                "Status :${controller.getPurchaseDetailsByIDModel.value?.status_long ?? ""} ",
-                                style: Styles.blackBold16,
-                              ),
+                              Container(
+                                  padding: EdgeInsets.symmetric(
+                                      vertical: 2, horizontal: 5),
+                                  margin: EdgeInsets.only(top: 5),
+                                  decoration: BoxDecoration(
+                                    color: controller
+                                                .getPurchaseDetailsByIDModel
+                                                .value
+                                                ?.status ==
+                                            302
+                                        ? ColorValues.createsColor
+                                        : controller.getPurchaseDetailsByIDModel
+                                                    .value?.status ==
+                                                301
+                                            ? ColorValues.draftColor
+                                            : controller.getPurchaseDetailsByIDModel
+                                                        .value?.status ==
+                                                    305
+                                                ? Color.fromARGB(
+                                                    255, 181, 129, 179)
+                                                : controller.getPurchaseDetailsByIDModel
+                                                            .value?.status ==
+                                                        309
+                                                    ? Color.fromARGB(
+                                                        255, 181, 129, 179)
+                                                    : controller
+                                                                .getPurchaseDetailsByIDModel
+                                                                .value
+                                                                ?.status ==
+                                                            306
+                                                        ? ColorValues
+                                                            .approveColor
+                                                        : controller
+                                                                    .getPurchaseDetailsByIDModel
+                                                                    .value
+                                                                    ?.status ==
+                                                                304
+                                                            ? ColorValues
+                                                                .appPurpleColor
+                                                            : ColorValues.lightBlueColor,
+                                    borderRadius: BorderRadius.circular(5),
+                                  ),
+                                  child: Obx(
+                                    () => Text(
+                                      "Status :${controller.getPurchaseDetailsByIDModel.value?.status_long ?? ""} ",
+                                    ),
+                                  )),
+                              // Text(
+                              //   "Status :${controller.getPurchaseDetailsByIDModel.value?.status_long ?? ""} ",
+                              //   style: Styles.blackBold16,
+                              // ),
                               IgnorePointer(
                                 child: Container(
                                   margin: Dimens.edgeInsets20,

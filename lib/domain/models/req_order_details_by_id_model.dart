@@ -22,6 +22,7 @@ class GetRODetailsByIDModel {
   String? approvedBy;
   String? approvedAt;
   String? generatedAt;
+  int? number_of_masters;
 
   List<GoDetails>? request_order_items;
 
@@ -38,6 +39,10 @@ class GetRODetailsByIDModel {
     this.facilityName,
     this.comment,
     this.request_order_items,
+    this.generatedAt,
+    this.number_of_masters,
+    this.rejectedAt,
+    this.rejectedBy,
   });
 
   factory GetRODetailsByIDModel.fromJson(Map<String, dynamic> parsedJson) =>
@@ -53,6 +58,10 @@ class GetRODetailsByIDModel {
         approvedBy: parsedJson["approvedBy"] ?? "",
         approvedAt: parsedJson["approvedAt"] ?? "",
         status_long: parsedJson["status_long"] ?? "",
+        generatedAt: parsedJson["generatedAt"] ?? "",
+        number_of_masters: parsedJson["number_of_masters"] ?? "",
+        rejectedAt: parsedJson["rejectedAt"] ?? "",
+        rejectedBy: parsedJson["rejectedBy"] ?? "",
         request_order_items: List<GoDetails>.from(
             parsedJson["request_order_items"]
                 .map((x) => GoDetails.fromJson(x))),
@@ -70,6 +79,10 @@ class GetRODetailsByIDModel {
         "approvedBy": approvedBy,
         "approvedAt": approvedAt,
         "status_long": status_long,
+        "generatedAt": generatedAt,
+        "number_of_masters": number_of_masters,
+        "rejectedAt": rejectedAt,
+        "rejectedBy": rejectedBy,
         "request_order_items":
             List<dynamic>.from(request_order_items?.map((x) => x) ?? []),
       };
@@ -78,7 +91,7 @@ class GetRODetailsByIDModel {
 class GoDetails {
   int? itemID;
   int? requestID;
-  int? assetItemID;
+  int? assetMasterItemID;
   double? cost;
   double? ordered_qty;
   String? asset_name;
@@ -88,7 +101,7 @@ class GoDetails {
   GoDetails(
       {this.itemID,
       this.requestID,
-      this.assetItemID,
+      this.assetMasterItemID,
       this.cost,
       this.ordered_qty,
       this.asset_name,
@@ -98,7 +111,7 @@ class GoDetails {
   GoDetails.fromJson(Map<String, dynamic> json) {
     itemID = json['itemID'];
     requestID = json['requestID'];
-    assetItemID = json['assetItemID'];
+    assetMasterItemID = json['assetMasterItemID'];
     cost = json['cost'];
     ordered_qty = json['ordered_qty'];
     asset_name = json['asset_name'];
@@ -110,7 +123,7 @@ class GoDetails {
     final Map<String, dynamic> data = new Map<String, dynamic>();
     data['itemID'] = this.itemID;
     data['requestID'] = this.requestID;
-    data['assetItemID'] = this.assetItemID;
+    data['assetMasterItemID'] = this.assetMasterItemID;
     data['cost'] = this.cost;
     data['ordered_qty'] = this.ordered_qty;
     data['asset_name'] = this.asset_name;
