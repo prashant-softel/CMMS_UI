@@ -430,30 +430,31 @@ class PmTaskDataSource extends DataTableSource {
     filteredPmTaskList = <PmTaskListModel?>[];
     filteredPmTaskList = controller.pmTaskList.where((pmTask) {
       return (pmTask?.id ?? '')
-                  .toString()
-                  .toLowerCase()
-                  .contains(controller.idFilterText.value.toLowerCase()) &&
-              (pmTask?.plan_title ?? '')
-                  .toLowerCase()
-                  .contains(controller.titleFilterText.value.toLowerCase()) &&
-              (pmTask?.last_done_date ?? '').toString().toLowerCase().contains(
-                  controller.lastDoneDateFilterText.value.toLowerCase()) &&
-              (pmTask?.due_date ?? '')
-                  .toString()
-                  .toLowerCase()
-                  .contains(controller.dueDateFilterText.value.toLowerCase()) &&
-              (pmTask?.done_date ?? '').toString().toLowerCase().contains(
-                  controller.doneDateFilterText.value.toLowerCase()) &&
-              (pmTask?.frequency_name ?? '').toLowerCase().contains(
-                  controller.frequencyFilterText.value.toLowerCase()) &&
-              (pmTask?.assigned_to_name ?? '')
-                  .toLowerCase()
-                  .contains(controller.assignFilterText.value.toLowerCase())
-          //      &&
-          // (pmTask?. ?? '')
-          //     .toLowerCase()
-          //     .contains(controller.frequencyFilterText.value.toLowerCase())
-          ;
+              .toString()
+              .toLowerCase()
+              .contains(controller.idFilterText.value.toLowerCase()) &&
+          (pmTask?.plan_title ?? '')
+              .toLowerCase()
+              .contains(controller.titleFilterText.value.toLowerCase()) &&
+          (pmTask?.last_done_date ?? '').toString().toLowerCase().contains(
+              controller.lastDoneDateFilterText.value.toLowerCase()) &&
+          (pmTask?.due_date ?? '')
+              .toString()
+              .toLowerCase()
+              .contains(controller.dueDateFilterText.value.toLowerCase()) &&
+          (pmTask?.done_date ?? '')
+              .toString()
+              .toLowerCase()
+              .contains(controller.doneDateFilterText.value.toLowerCase()) &&
+          (pmTask?.frequency_name ?? '')
+              .toLowerCase()
+              .contains(controller.frequencyFilterText.value.toLowerCase()) &&
+          (pmTask?.assigned_to_name ?? '')
+              .toLowerCase()
+              .contains(controller.assignFilterText.value.toLowerCase()) &&
+          (pmTask?.permit_code ?? '')
+              .toLowerCase()
+              .contains(controller.ptwFilterText.value.toLowerCase());
 
       // Add other filter conditions as needed
     }).toList();
@@ -473,7 +474,7 @@ class PmTaskDataSource extends DataTableSource {
       '${pmTaskDetails?.done_date ?? ''}',
       '${pmTaskDetails?.frequency_name ?? ''}',
       '${pmTaskDetails?.assigned_to_name ?? ''}',
-      '${''}',
+      '${pmTaskDetails?.permit_code ?? ''}',
       'Actions',
     ];
     var cells = [];

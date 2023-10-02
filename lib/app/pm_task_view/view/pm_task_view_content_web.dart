@@ -305,7 +305,7 @@ class PreventiveMaintenanceTaskViewContentWeb
                                               DataCell(Text(controller
                                                       .scheduleCheckPoint?[
                                                           index]
-                                                      ?.asset_name
+                                                      ?.name
                                                       .toString() ??
                                                   '')),
                                               DataCell(Text(controller

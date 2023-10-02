@@ -568,8 +568,8 @@ class PmPlanDataSource extends DataTableSource {
         final _flutterSecureStorage = const FlutterSecureStorage();
 
         _flutterSecureStorage.delete(key: "pmPlanId");
-        // Get.toNamed(Routes.viewpmPlanDetail,
-        //     arguments: {'pmPlanId': pmPlanDetails?.plan_id});
+        Get.toNamed(Routes.viewPmPlanScreen,
+            arguments: {'pmPlanId': pmPlanDetails?.plan_id});
       },
     );
   }

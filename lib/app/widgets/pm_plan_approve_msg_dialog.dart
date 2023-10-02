@@ -66,9 +66,32 @@ class PmPlanMessageApproveDialog extends GetView {
               Dimens.boxWidth10,
               Center(
                 child: ElevatedButton(
-                  style: Styles.yellowElevatedButtonStyle,
+                  style: Styles.greenElevatedButtonStyle,
                   onPressed: () {
+                    Get.offAllNamed(Routes.pmTask);
+                  },
+                  child: const Text('PM Task List'),
+                ),
+              ),
+              Dimens.boxWidth10,
+              Center(
+                child: ElevatedButton(
+                  style: Styles.yellowElevatedButtonStyle,
+                  onPressed: () async {
                     Get.back();
+                    try {
+                      await controller.setPMPlanId();
+                      if (controller.pmPlanId != 0) {
+                        //  print({"fghvjbggjhjgk", pmPlanId});
+
+                        await controller.getPmPlanDetails(
+                            pmPlanId: controller.pmPlanId.value,
+                            isloading: true);
+                      }
+                    } catch (e) {
+                      print(e);
+                    }
+
                     // Future.delayed(Duration(seconds: 1), () {
                     //   controller.getUnitCurrencyList();
                     // });

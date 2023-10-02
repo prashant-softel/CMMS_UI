@@ -101,13 +101,13 @@ class ScheduleCheckPoint {
   int? schedule_id;
   int? clone_of_asset;
   String? clone_of_name;
-  String? asset_name;
+  String? name;
   String? checklist_name;
   List<ChecklistObservation>? checklist_observation;
   List<ScheduleLinkJob>? schedule_link_job;
 
   ScheduleCheckPoint(
-      {this.asset_name,
+      {this.name,
       this.checklist_name,
       this.clone_of_asset,
       this.clone_of_name,
@@ -117,7 +117,7 @@ class ScheduleCheckPoint {
 
   factory ScheduleCheckPoint.fromJson(Map<String, dynamic> json) =>
       ScheduleCheckPoint(
-          asset_name: json["asset_name"] ?? '',
+          name: json["asset_name"] ?? '',
           checklist_name: json["checklist_name"] ?? '',
           clone_of_asset: json["clone_of_asset"] ?? 0,
           clone_of_name: json["clone_of_name"] ?? '',
@@ -130,7 +130,7 @@ class ScheduleCheckPoint {
                   .map((x) => ScheduleLinkJob.fromJson(x))));
 
   Map<String, dynamic> toJson() => {
-        "asset_name": asset_name,
+        "asset_name": name,
         "checklist_name": checklist_name,
         "clone_of_asset": clone_of_asset,
         "clone_of_name": clone_of_name,
