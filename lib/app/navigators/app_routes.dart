@@ -140,6 +140,9 @@ abstract class Routes {
   static const editReturnMrs = _Paths.editReturnMrs;
   static const pmPlanList = _Paths.pmPlanList;
   static const viewPmPlanScreen = _Paths.viewPmPlanScreen;
+  static const typeofobservation = _Paths.typeofobservation;
+  static const sourceofobservation = _Paths.sourceofobservation;
+  static const risktypemaster = _Paths.risktypemaster;
 }
 
 abstract class _Paths {
@@ -274,6 +277,9 @@ abstract class _Paths {
   static const editReturnMrs = '/edit-return-mrs';
   static const pmPlanList = '/pm-plan-list';
   static const viewPmPlanScreen = '/view-Pm-Plan-Screen';
+  static const typeofobservation = '/type-of-observation';
+  static const sourceofobservation = '/source-of-observation';
+  static const risktypemaster = '/risk-type-master';
 
 // static const editPermitWebScreen = '/edit-permit-web-screen';
 }
