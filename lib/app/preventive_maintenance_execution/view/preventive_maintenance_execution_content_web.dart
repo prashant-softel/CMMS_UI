@@ -285,7 +285,7 @@ class PreventiveMaintenanceExecutionContentWeb
                                               DataCell(Text(controller
                                                       .scheduleCheckPoints?[
                                                           index]
-                                                      ?.name
+                                                      ?.schedule_id
                                                       .toString() ??
                                                   '')),
                                               DataCell(Text(controller
@@ -305,12 +305,6 @@ class PreventiveMaintenanceExecutionContentWeb
                                                               .appDarkBlueColor,
                                                       text: "Clone Of",
                                                       onPressed: () {
-                                                        print({
-                                                          "selxrr",
-                                                          controller
-                                                              .selectedasset
-                                                              .value
-                                                        });
                                                         controller
                                                                 .selectedItem =
                                                             null;
@@ -352,31 +346,7 @@ class PreventiveMaintenanceExecutionContentWeb
                                                     onValueChanged: controller
                                                         .onValueChanged,
                                                   ),
-                                                  // DropdownWebStock(
-                                                  //   width:
-                                                  //       (MediaQuery.of(context)
-                                                  //                   .size
-                                                  //                   .width *
-                                                  //               .2) -
-                                                  //           100,
-                                                  //   dropdownList: controller
-                                                  //       .scheduleCheckPoints,
-                                                  //   selectedValue: controller
-                                                  //       .selectedasset.value,
-                                                  //   onValueChanged:
-                                                  //       (list, selectedValue) {
-                                                  //     controller.dropdownMapperData[
-                                                  //             selectedValue] =
-                                                  //         list.firstWhere(
-                                                  //             (element) =>
-                                                  //                 element
-                                                  //                     .name ==
-                                                  //                 selectedValue,
-                                                  //             orElse: null);
-                                                  //   },
-                                                  // ),
                                                   Spacer(),
-                                                  // Dimens.boxWidth10,
                                                   TableActionButton(
                                                       color:
                                                           ColorValues.editColor,
