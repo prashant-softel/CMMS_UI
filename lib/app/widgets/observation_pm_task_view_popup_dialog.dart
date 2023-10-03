@@ -210,12 +210,10 @@ class ObservationPMTaskViewDialog extends GetView {
                                                 ?.checklist_observation?[index]
                                                 .observation ??
                                             '')),
-                                        DataCell(Text(controller
-                                                .selectedItem
-                                                ?.checklist_observation?[index]
-                                                .linked_job_id
-                                                .toString() ??
-                                            '')),
+                                        DataCell(Text(
+                                          "JOB${controller.selectedItem?.checklist_observation?[index].linked_job_id.toString() ?? ''}",
+                                          style: Styles.primary15Underlined,
+                                        )),
                                       ]),
                                     ),
                                   ),
@@ -276,7 +274,7 @@ class ObservationPMTaskViewDialog extends GetView {
                                                 fontWeight: FontWeight.bold),
                                           )),
                                       DataColumn2(
-                                          fixedWidth: 150,
+                                          fixedWidth: 300,
                                           label: Text(
                                             "Job ID",
                                             style: TextStyle(
@@ -284,7 +282,7 @@ class ObservationPMTaskViewDialog extends GetView {
                                                 fontWeight: FontWeight.bold),
                                           )),
                                       DataColumn2(
-                                          fixedWidth: 200,
+                                          fixedWidth: 300,
                                           label: Text(
                                             "For Check point No.",
                                             style: TextStyle(
@@ -292,15 +290,15 @@ class ObservationPMTaskViewDialog extends GetView {
                                                 fontWeight: FontWeight.bold),
                                           )),
                                       DataColumn2(
-                                          // fixedWidth: 300,
+                                          fixedWidth: 400,
                                           label: Text(
-                                        "Job Title",
-                                        style: TextStyle(
-                                            fontSize: 15,
-                                            fontWeight: FontWeight.bold),
-                                      )),
+                                            "Job Title",
+                                            style: TextStyle(
+                                                fontSize: 15,
+                                                fontWeight: FontWeight.bold),
+                                          )),
                                       DataColumn2(
-                                          fixedWidth: 200,
+                                          fixedWidth: 300,
                                           label: Text(
                                             "Job Date",
                                             style: TextStyle(
@@ -308,7 +306,7 @@ class ObservationPMTaskViewDialog extends GetView {
                                                 fontWeight: FontWeight.bold),
                                           )),
                                       DataColumn2(
-                                          fixedWidth: 200,
+                                          fixedWidth: 300,
                                           label: Text(
                                             "Job Status",
                                             style: TextStyle(
@@ -322,12 +320,10 @@ class ObservationPMTaskViewDialog extends GetView {
                                           0,
                                       (index) => DataRow(cells: [
                                         DataCell(Text('${index + 1}')),
-                                        DataCell(Text(controller
-                                                .selectedItem
-                                                ?.schedule_link_job?[index]
-                                                .job_id
-                                                .toString() ??
-                                            '')),
+                                        DataCell(Text(
+                                          "JOB${controller.selectedItem?.schedule_link_job?[index].job_id.toString() ?? ''}",
+                                          style: Styles.primary15Underlined,
+                                        )),
                                         DataCell(Text('--')),
                                         DataCell(Text(controller
                                                 .selectedItem

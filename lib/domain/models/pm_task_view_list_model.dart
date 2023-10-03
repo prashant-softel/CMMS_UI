@@ -253,7 +253,7 @@ class ScheduleLinkJob {
 
   factory ScheduleLinkJob.fromJson(Map<String, dynamic> json) =>
       ScheduleLinkJob(
-        job_date: json["_job_date"],
+        job_date: json["job_date"],
         job_description: json["job_description"],
         job_id: json["job_id"],
         job_status: json["job_status"],
