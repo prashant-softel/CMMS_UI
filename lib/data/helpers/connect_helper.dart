@@ -5755,9 +5755,32 @@ class ConnectHelper {
     var responseModel = await apiWrapper.makeRequest(
       'PMScheduleView/UpdatePMTaskExecution',
       Request.patch,
-      // {'comment': "$comment", 'id': id},
       updatePMTaskExecutionJsonString,
       isLoading ?? true,
+      {
+        'Content-Type': 'application/json',
+        'Authorization': 'Bearer $auth',
+      },
+    );
+    var res = responseModel.data;
+    var parsedJson = json.decode(res);
+    // Get.dialog<void>(PermitMessageCloseDialog(data: parsedJson['message']));
+
+    return responseModel;
+  }
+
+  Future<ResponseModel> cloneSchedule(
+      {required String auth,
+      required int from_schedule_id,
+      required int to_schedule_id,
+      required int taskId,
+      bool? isloading}) async {
+    // facilityId = 45;
+    var responseModel = await apiWrapper.makeRequest(
+      'PMScheduleView/cloneSchedule?task_id=${taskId}&from_schedule_id=${from_schedule_id}&to_schedule_id=${to_schedule_id}',
+      Request.patch,
+      null,
+      isloading ?? true,
       {
         'Content-Type': 'application/json',
         'Authorization': 'Bearer $auth',

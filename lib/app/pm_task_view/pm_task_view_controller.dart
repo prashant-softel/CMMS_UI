@@ -281,9 +281,10 @@ class PreventiveMaintenanceTaskViewController extends GetxController {
       isLoading: false,
     );
     if (responseMapStart != null && responseMapStart.length > 0) {
-      getPmtaskViewList(scheduleId: scheduleId.value, isloading: true);
+      // getPmtaskViewList(scheduleId: scheduleId.value, isloading: true);
       startresponseMessage.value = responseMapStart["message"];
-      isPermitLinked.value = true;
+      // print({"jkfdkjfd", startresponseMessage});
+      // isPermitLinked.value = true;
       _updatedailog();
     }
   }
@@ -311,39 +312,90 @@ class PreventiveMaintenanceTaskViewController extends GetxController {
         var height = Get.height;
 
         return Container(
-          // margin: Dimens.edgeInsets15,
-          // padding: Dimens.edgeInsets25,
-          height: height / 7,
+          height: height / 6,
           width: double.infinity,
+          child: Container(
+            margin: Dimens.edgeInsets20,
+            child: Column(
+              children: [
+                Text(startresponseMessage.value),
+                Dimens.boxHeight10,
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    // RichText(
+                    //   text: TextSpan(
+                    //       text: 'PM Execution Submitted with',
+                    //       style: Styles.blue700,
+                    //       children: <TextSpan>[
+                    //         TextSpan(text: ' \n     Code', style: Styles.blue700),
+                    //         TextSpan(
+                    //           text: '  2444',
+                    //           style: Styles.redBold15,
+                    //         ),
+                    //       ]),
+                    // ),
+                    // Dimens.boxHeight12,
+                    //  Text("PM Execution Submitted with code PMSC87456"),
+                    Container(
+                      height: 35,
+                      child: CustomElevatedButton(
+                        text: "View Task",
+                        onPressed: () async {
+                          Get.back();
+                          try {
+                            await setScheduleId();
 
-          child: Column(
-            children: [
-              // RichText(
-              //   text: TextSpan(
-              //       text: 'PM Execution Submitted with',
-              //       style: Styles.blue700,
-              //       children: <TextSpan>[
-              //         TextSpan(text: ' \n     Code', style: Styles.blue700),
-              //         TextSpan(
-              //           text: '  2444',
-              //           style: Styles.redBold15,
-              //         ),
-              //       ]),
-              // ),
-              // Dimens.boxHeight12,
-              //  Text("PM Execution Submitted with code PMSC87456"),
-              Container(
-                height: 40,
-                child: CustomElevatedButton(
-                  text: "Execute",
-                  onPressed: () {
-                    gotoexecution();
-                  },
-                  backgroundColor: ColorValues.appDarkBlueColor,
-                  textColor: ColorValues.whiteColor,
+                            if (scheduleId != 0) {
+                              await getPmtaskViewList(
+                                  scheduleId: scheduleId.value,
+                                  isloading: true);
+                              getHistory();
+                              getMrsListByModuleTask(taskId: scheduleId.value);
+                            }
+                            // textControllers =
+                            //     List.generate(permitValuesCount, (_) => TextEditingController());
+                            // permitValues = RxList<String>.filled(permitValuesCount, '');
+                          } catch (e) {
+                            print(e);
+                          }
+                        },
+                        backgroundColor: ColorValues.appGreenColor,
+                        textColor: ColorValues.whiteColor,
+                      ),
+                    ),
+                    Dimens.boxWidth10,
+                    Container(
+                      height: 35,
+                      child: CustomElevatedButton(
+                        text: "PM Task List",
+                        onPressed: () {
+                          Get.back();
+
+                          Get.offAllNamed(Routes.pmTask);
+                        },
+                        backgroundColor: ColorValues.appDarkBlueColor,
+                        textColor: ColorValues.whiteColor,
+                      ),
+                    ),
+                    Dimens.boxWidth10,
+                    Container(
+                      height: 35,
+                      child: CustomElevatedButton(
+                        text: "Execute",
+                        onPressed: () {
+                          Get.back();
+
+                          gotoexecution();
+                        },
+                        backgroundColor: ColorValues.appYellowColor,
+                        textColor: ColorValues.whiteColor,
+                      ),
+                    ),
+                  ],
                 ),
-              ),
-            ],
+              ],
+            ),
           ),
         );
       }),

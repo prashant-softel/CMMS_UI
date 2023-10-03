@@ -988,8 +988,9 @@ class GoodsOrderListDataSource extends DataTableSource {
                                   int id = GoodsOrderListDetails?.id ?? 0;
                                   if (id != 0) {
                                     Get.toNamed(
-                                        Routes.updateGoodsOrdersDetailsScreen,
-                                        arguments: {"id": id});
+                                      Routes.updateGoodsOrdersDetailsScreen,
+                                      arguments: {"id": id, 'type': 1},
+                                    );
                                   }
                                 },
                               )
@@ -1007,13 +1008,37 @@ class GoodsOrderListDataSource extends DataTableSource {
         );
       }).toList(),
       //   ],
-      // onSelectChanged: (_) {
-      //   final _flutterSecureStorage = const FlutterSecureStorage();
-
-      //   _flutterSecureStorage.delete(key: "UserId");
-      //   Get.toNamed(Routes.viewUserDetail,
-      //       arguments: {'userId': UserDetails?.id});
-      // },
+      onSelectChanged: (_) {
+        GoodsOrderListDetails?.status == 302
+            ? Get.toNamed(Routes.viewGoodsOrders,
+                arguments: {'id': GoodsOrderListDetails?.id, "type": 1})
+            : GoodsOrderListDetails?.status == 309
+                ? Get.toNamed(Routes.receiveGoodsOrders,
+                    arguments: {'id': GoodsOrderListDetails?.id, "type": 1})
+                : GoodsOrderListDetails?.status == 302
+                    ? Get.toNamed(Routes.updateGoodsOrdersDetailsScreen,
+                        arguments: {'id': GoodsOrderListDetails?.id})
+                    : GoodsOrderListDetails?.status == 306
+                        ? Get.toNamed(
+                            Routes.receiveGoodsOrders,
+                            arguments: {
+                              'id': GoodsOrderListDetails?.id,
+                              "type": 1
+                            },
+                          )
+                        : GoodsOrderListDetails?.status == 305
+                            ? Get.toNamed(
+                                Routes.updateGoodsOrdersDetailsScreen,
+                                arguments: {
+                                  'id': GoodsOrderListDetails?.id,
+                                  "type": 1
+                                },
+                              )
+                            : Get.toNamed(
+                                Routes.viewGoodsOrders,
+                                arguments: {"id": GoodsOrderListDetails?.id},
+                              );
+      },
     );
   }
 

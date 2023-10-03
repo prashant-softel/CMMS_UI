@@ -46,4 +46,14 @@ class PreventiveMaintenanceExecutionUsecase {
       await repository.UpdatePMTaskExecution(
           updatePMTaskExecutionJsonString: updatePMTaskExecutionJsonString,
           isLoading: isLoading);
+  Future<bool> cloneSchedule(
+          {required int from_schedule_id,
+          required int to_schedule_id,
+          required int taskId,
+          bool? isloading}) async =>
+      await repository.cloneSchedule(
+          from_schedule_id: from_schedule_id,
+          to_schedule_id: to_schedule_id,
+          taskId: taskId,
+          isloading: isloading);
 }

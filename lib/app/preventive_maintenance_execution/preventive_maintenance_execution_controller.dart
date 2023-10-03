@@ -10,7 +10,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:get/get.dart';
-import 'package:scrollable_table_view/scrollable_table_view.dart';
 
 import '../../domain/models/pm_task_view_list_model.dart';
 import '../../domain/models/update_pm_task_execution_model.dart';
@@ -38,7 +37,11 @@ class PreventiveMaintenanceExecutionController extends GetxController {
   var updatecommentCtrlr = TextEditingController();
 
   ScheduleCheckPoint? selectedItem;
-
+  Rx<String> selectedasset = ''.obs;
+  Rx<bool> isAssetsSelected = true.obs;
+  int selectedAssetsId = 0;
+  // Map<String, ScheduleCheckPoint> dropdownMapperData = {};
+  String selectname = "";
   @override
   void onInit() async {
     try {
@@ -80,6 +83,7 @@ class PreventiveMaintenanceExecutionController extends GetxController {
     /// TODO: CHANGE THESE VALUES
     int moduleType = 27;
     //
+
     historyList?.value =
         await preventiveMaintenanceExecutionPresenter.getHistory(
               // tempModuleType,
@@ -109,6 +113,9 @@ class PreventiveMaintenanceExecutionController extends GetxController {
       //     }
       //   }
     }
+    selectedasset.value = scheduleCheckPoints![0]?.name ?? "";
+    update(["getPmtaskViewList"]);
+
     // print({"checklistObservations", checklistObservations});
   }
 
@@ -121,7 +128,7 @@ class PreventiveMaintenanceExecutionController extends GetxController {
       addObservations.add(AddObservations(
           execution_id: e.execution_id ?? 0,
           observation: e.observation_value_controller?.text ?? "",
-          job_create: e.linked_job_id,
+          job_create: e.linked_job_id.value,
           pm_files: []));
     });
     List<Schedules> schedule = <Schedules>[];
@@ -149,7 +156,7 @@ class PreventiveMaintenanceExecutionController extends GetxController {
     }
   }
 
-  void _updatedailog() {
+  void cloneDialog(String assets) {
     Get.dialog(AlertDialog(
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.all(Radius.circular(15.0)),
@@ -159,7 +166,7 @@ class PreventiveMaintenanceExecutionController extends GetxController {
       title: Column(
         children: [
           Text(
-            'PM Execution Submitted',
+            'CheckList Observation Clone',
             textAlign: TextAlign.center,
             style: Styles.green700,
           ),
@@ -171,42 +178,66 @@ class PreventiveMaintenanceExecutionController extends GetxController {
       content: Builder(builder: (context) {
         var height = Get.height;
 
-        return Container(
-          // margin: Dimens.edgeInsets15,
-          // padding: Dimens.edgeInsets25,
-          height: height / 7,
-          width: double.infinity,
+        return Obx(
+          () => Container(
+            // margin: Dimens.edgeInsets15,
+            // padding: Dimens.edgeInsets25,
+            height: height / 7,
+            width: double.infinity,
 
-          child: Column(
-            children: [
-              // RichText(
-              //   text: TextSpan(
-              //       text: 'PM Execution Submitted with',
-              //       style: Styles.blue700,
-              //       children: <TextSpan>[
-              //         TextSpan(text: ' \n     Code', style: Styles.blue700),
-              //         TextSpan(
-              //           text: '  2444',
-              //           style: Styles.redBold15,
-              //         ),
-              //       ]),
-              // ),
-              // Dimens.boxHeight12,
-              //  Text("PM Execution Submitted with code PMSC87456"),
-              Container(
-                height: 40,
-                child: CustomElevatedButton(
-                  text: "PM Task",
-                  onPressed: () {
-                    Get.toNamed(
-                      Routes.pmTask,
-                    );
-                  },
-                  backgroundColor: ColorValues.appDarkBlueColor,
-                  textColor: ColorValues.whiteColor,
+            child: Column(
+              children: [
+                RichText(
+                  textAlign: TextAlign.center,
+                  text: TextSpan(
+                      text: 'Are You Want to clone the',
+                      style: Styles.blue700,
+                      children: <TextSpan>[
+                        TextSpan(
+                            text: '\n${selectedItem?.name ?? ""}',
+                            style: Styles.green700),
+                        TextSpan(text: '  with', style: Styles.blue700),
+                        TextSpan(
+                          text: '\n ${selectedasset.value}',
+                          style: Styles.redBold15,
+                        ),
+                        TextSpan(text: '  ?', style: Styles.blue700),
+                      ]),
                 ),
-              ),
-            ],
+                Dimens.boxHeight12,
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Container(
+                      height: 35,
+                      child: CustomElevatedButton(
+                        text: "Cancel",
+                        onPressed: () {
+                          Get.back();
+                        },
+                        backgroundColor: ColorValues.cancelColor,
+                        textColor: ColorValues.whiteColor,
+                      ),
+                    ),
+                    // Spacer(),
+                    Dimens.boxWidth20,
+                    Container(
+                      height: 35,
+                      child: CustomElevatedButton(
+                        text: "Clone",
+                        onPressed: () {
+                          cloneSchedule(
+                              from_schedule_id: selectedItem?.schedule_id ?? 0,
+                              to_schedule_id: selectedAssetsId);
+                        },
+                        backgroundColor: ColorValues.appDarkBlueColor,
+                        textColor: ColorValues.whiteColor,
+                      ),
+                    ),
+                  ],
+                ),
+              ],
+            ),
           ),
         );
       }),
@@ -214,22 +245,6 @@ class PreventiveMaintenanceExecutionController extends GetxController {
     ));
   }
 
-  closePmExecution() async {
-    // String _comment = commentCtrlr.text.trim();
-
-    // CommentModel commentCalibrationModel =
-    //     CommentModel(id: int.tryParse(scheduleId.value), comment: _comment);
-
-    // var approveCalibrationtoJsonString = commentCalibrationModel.toJson();
-    // print({"rejectCalibrationJsonString", approveCalibrationtoJsonString});
-    // final response = await calibrationListPresenter.approveCloseCalibration(
-    //   approveCalibrationtoJsonString: approveCalibrationtoJsonString,
-    //   isLoading: true,
-    // );
-    // if (response == true) {
-    //   getCalibrationList(facilityId, true);
-    // }
-  }
   closePmTaskExecution() async {
     {
       String _comment = commentCtrlr.text.trim();
@@ -264,6 +279,40 @@ class PreventiveMaintenanceExecutionController extends GetxController {
       updatePMTaskExecutionJsonString: updatePMTaskExecutionJsonString,
       isLoading: true,
     );
+    if (response == true) {
+      final _flutterSecureStorage = const FlutterSecureStorage();
+
+      _flutterSecureStorage.delete(key: "pmTaskId");
+      Get.offAllNamed(Routes.pmTask);
+    }
+  }
+
+  void onValueChanged(dynamic list, dynamic value) {
+    print({"valuevaluevaluevalue": value});
+    switch (list.runtimeType) {
+      case RxList<ScheduleCheckPoint?>:
+        {
+          int assetsIndex =
+              scheduleCheckPoints!.indexWhere((x) => x?.name == value);
+          selectedAssetsId =
+              scheduleCheckPoints![assetsIndex]?.schedule_id ?? 0;
+          if (selectedAssetsId > 0) {
+            isAssetsSelected.value = true;
+          }
+          selectedasset.value = scheduleCheckPoints![assetsIndex]?.name ?? "";
+        }
+        break;
+    }
+  }
+
+  void cloneSchedule(
+      {required int from_schedule_id, required int to_schedule_id}) async {
+    final response =
+        await preventiveMaintenanceExecutionPresenter.cloneSchedule(
+            from_schedule_id: from_schedule_id,
+            to_schedule_id: to_schedule_id,
+            taskId: scheduleId.value,
+            isloading: true);
     if (response == true) {
       final _flutterSecureStorage = const FlutterSecureStorage();
 

@@ -1,8 +1,10 @@
 import 'package:cmms/app/theme/dimens.dart';
 import 'package:cmms/app/widgets/custom_textField.dart';
+import 'package:cmms/app/widgets/dropdown_web.dart';
 import 'package:cmms/app/widgets/execution_approve_dialog.dart';
 import 'package:cmms/app/widgets/history_table_widget_web.dart';
 import 'package:cmms/app/widgets/observation_pm_execution_process_dialog.dart';
+import 'package:cmms/app/widgets/stock_dropdown.dart';
 import 'package:cmms/app/widgets/table_action_button.dart';
 import 'package:data_table_2/data_table_2.dart';
 import 'package:flutter/material.dart';
@@ -283,7 +285,7 @@ class PreventiveMaintenanceExecutionContentWeb
                                               DataCell(Text(controller
                                                       .scheduleCheckPoints?[
                                                           index]
-                                                      ?.asset_name
+                                                      ?.schedule_id
                                                       .toString() ??
                                                   '')),
                                               DataCell(Text(controller
@@ -303,19 +305,48 @@ class PreventiveMaintenanceExecutionContentWeb
                                                               .appDarkBlueColor,
                                                       text: "Clone Of",
                                                       onPressed: () {
-                                                        //   Get.back();
+                                                        controller
+                                                                .selectedItem =
+                                                            null;
+                                                        controller.selectedItem = controller
+                                                            .scheduleCheckPoints!
+                                                            .firstWhere((element) =>
+                                                                "${element?.schedule_id}" ==
+                                                                controller
+                                                                    .scheduleCheckPoints?[
+                                                                        index]
+                                                                    ?.schedule_id
+                                                                    .toString());
+                                                        if (controller
+                                                                .selectedItem !=
+                                                            null) {
+                                                          controller.cloneDialog(
+                                                              controller
+                                                                  .selectedasset
+                                                                  .value);
+                                                        }
                                                       },
                                                     ),
                                                   ),
                                                   Dimens.boxWidth10,
-                                                  Text(controller
-                                                          .scheduleCheckPoints?[
-                                                              index]
-                                                          ?.checklist_name
-                                                          .toString() ??
-                                                      ''),
+                                                  DropdownWebWidget(
+                                                    width:
+                                                        (MediaQuery.of(context)
+                                                                    .size
+                                                                    .width *
+                                                                .2) -
+                                                            100,
+                                                    controller: controller,
+                                                    dropdownList: controller
+                                                        .scheduleCheckPoints,
+                                                    isValueSelected: controller
+                                                        .isAssetsSelected.value,
+                                                    selectedValue: controller
+                                                        .selectedasset.value,
+                                                    onValueChanged: controller
+                                                        .onValueChanged,
+                                                  ),
                                                   Spacer(),
-                                                  // Dimens.boxWidth10,
                                                   TableActionButton(
                                                       color:
                                                           ColorValues.editColor,

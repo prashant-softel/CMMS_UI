@@ -1,6 +1,7 @@
 import 'dart:convert';
 
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
 PmtaskViewModel pmtaskViewModelFromJson(String str) =>
     PmtaskViewModel.fromJson(json.decode(str));
@@ -101,13 +102,13 @@ class ScheduleCheckPoint {
   int? schedule_id;
   int? clone_of_asset;
   String? clone_of_name;
-  String? asset_name;
+  String? name;
   String? checklist_name;
   List<ChecklistObservation>? checklist_observation;
   List<ScheduleLinkJob>? schedule_link_job;
 
   ScheduleCheckPoint(
-      {this.asset_name,
+      {this.name,
       this.checklist_name,
       this.clone_of_asset,
       this.clone_of_name,
@@ -117,7 +118,7 @@ class ScheduleCheckPoint {
 
   factory ScheduleCheckPoint.fromJson(Map<String, dynamic> json) =>
       ScheduleCheckPoint(
-          asset_name: json["asset_name"] ?? '',
+          name: json["asset_name"] ?? '',
           checklist_name: json["checklist_name"] ?? '',
           clone_of_asset: json["clone_of_asset"] ?? 0,
           clone_of_name: json["clone_of_name"] ?? '',
@@ -130,7 +131,7 @@ class ScheduleCheckPoint {
                   .map((x) => ScheduleLinkJob.fromJson(x))));
 
   Map<String, dynamic> toJson() => {
-        "asset_name": asset_name,
+        "asset_name": name,
         "checklist_name": checklist_name,
         "clone_of_asset": clone_of_asset,
         "clone_of_name": clone_of_name,
@@ -155,7 +156,7 @@ class ChecklistObservation {
   int? type_bool;
   dynamic type_text;
   String? observation;
-  int? linked_job_id;
+  RxInt linked_job_id = RxInt(0);
   int? is_custom_check_point;
   int? is_file_required;
   TextEditingController? observation_value_controller;
@@ -167,14 +168,16 @@ class ChecklistObservation {
       this.failure_waightage,
       this.is_custom_check_point,
       this.is_file_required,
-      this.linked_job_id,
+      required int linked_job_id,
       this.observation,
       this.requirement,
       this.type_bool,
       this.type_range,
       this.type_text,
       this.files,
-      this.observation_value_controller});
+      this.observation_value_controller}) {
+    this.linked_job_id.value = linked_job_id;
+  }
 
   factory ChecklistObservation.fromJson(Map<String, dynamic> json) =>
       ChecklistObservation(
@@ -250,7 +253,7 @@ class ScheduleLinkJob {
 
   factory ScheduleLinkJob.fromJson(Map<String, dynamic> json) =>
       ScheduleLinkJob(
-        job_date: json["_job_date"],
+        job_date: json["job_date"],
         job_description: json["job_description"],
         job_id: json["job_id"],
         job_status: json["job_status"],
