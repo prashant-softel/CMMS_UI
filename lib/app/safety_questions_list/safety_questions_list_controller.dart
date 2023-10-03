@@ -3,9 +3,12 @@ import 'dart:async';
 import 'package:cmms/app/app.dart';
 
 import 'package:cmms/app/safety_questions_list/safety_questions_presenter.dart';
+import 'package:cmms/domain/models/create_safety_measure_model.dart';
 
 import 'package:cmms/domain/models/safety_measure_list_model.dart';
 import 'package:cmms/domain/models/type_permit_model.dart';
+import 'package:flutter/material.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 
 import 'package:get/get.dart';
 import 'package:scrollable_table_view/scrollable_table_view.dart';
@@ -26,6 +29,13 @@ class SafetyQuestionsListController extends GetxController {
   Rx<String> selectedTypeOfPermit = ''.obs;
   Rx<bool> isTypePermit = true.obs;
   int selectedTypePermitId = 0;
+
+  Rx<bool> isTitleInvalid = false.obs;
+  Rx<bool> isDescriptionInvalid = false.obs;
+  Rx<bool> isFormInvalid = false.obs;
+
+  var titleCtrlr = TextEditingController();
+  var descriptionCtrlr = TextEditingController();
 
 
   ////
@@ -83,7 +93,62 @@ class SafetyQuestionsListController extends GetxController {
     super.onInit();
   }
 
-  Future<void> getSafetyMeasureList() async {
+   void checkForm() {
+    if(isTitleInvalid.value == true || isDescriptionInvalid.value == true){
+      isFormInvalid.value = true;
+    } else {
+      isFormInvalid.value = false;
+    }
+  }
+
+   Future<bool> createSafetyMeasure() async {
+    if (titleCtrlr.text.trim() == '' ) {
+      isTitleInvalid.value = true;
+      isFormInvalid.value = true;
+      // isDescriptionInvalid.value = true;
+    }
+    if (descriptionCtrlr.text.trim() == '' ) {
+      // isTitleInvalid.value = true;
+      isFormInvalid.value = true;
+      isDescriptionInvalid.value = true;
+    }
+    checkForm();
+    print("FORMVALIDITIY : $isFormInvalid.value");
+    print("TITLE : $isTitleInvalid.value");
+    print("DES : $isDescriptionInvalid.value");
+    if (isFormInvalid.value == true) {
+      return false;
+    }
+    if (titleCtrlr.text.trim() == '' || descriptionCtrlr.text.trim() == '') {
+      Fluttertoast.showToast(
+          msg: "Please enter required field", fontSize: 16.0);
+    } else {
+      String _title = titleCtrlr.text.trim();
+      String _description = descriptionCtrlr.text.trim();
+
+      CreateSafetyMeasureModel createSafetyMeasure = CreateSafetyMeasureModel(
+          title: _title,
+          description: _description,
+          permitType: selectedTypePermitId,
+          input: 1,
+          required: 1
+        // facilityId:selectedFacilityId
+      );
+      print("OUT ");
+      var safetyMeasurelistJsonString = createSafetyMeasure.toJson(); //createCheckPointToJson([createCheckpoint]);
+
+      print({"safetyMeasureJsonString", safetyMeasurelistJsonString});
+      await safetyQuestionsListPresenter.createSafetyMeasure(
+        safetyMeasurelistJsonString: safetyMeasurelistJsonString,
+        isLoading: true,
+      );
+      return true;
+    }
+    return true;
+  }
+
+
+  Future<void> getSafetyMeasureList(selectedTypePermitId) async {
     safetyMeasureList.value = <SafetyMeasureListModel>[];
     final _safetyMeasureList =
         await safetyQuestionsListPresenter.getSafetyMeasureList(
@@ -143,7 +208,7 @@ class SafetyQuestionsListController extends GetxController {
           int typePermitIndex =
           typePermitList.indexWhere((x) => x?.name == value);
           selectedTypePermitId = typePermitList[typePermitIndex]?.id ?? 0;
-           getSafetyMeasureList();
+          getSafetyMeasureList(selectedTypePermitId);
           print('Permit Type Id:$selectedTypePermitId');
         }
         break;
@@ -155,24 +220,24 @@ class SafetyQuestionsListController extends GetxController {
     }
   }
 
-  Future<void> issuccessCreatechecklist() async {
+  Future<void> issuccessSafetyMeasurelist() async {
     isSuccess.toggle();
     await {_cleardata()};
   }
 
   _cleardata() {
-    // checklistNumberCtrlr.text = '';
-    // durationCtrlr.text = '';
+    titleCtrlr.text = '';
+    descriptionCtrlr.text = '';
     // manpowerCtrlr.text = '';
 
     // selectedequipment.value = '';
 
     // selectedfrequency.value = '';
-    // Future.delayed(Duration(seconds: 1), () {
-    //   getPreventiveCheckList(facilityId, type, true);
-    // });
-    // Future.delayed(Duration(seconds: 5), () {
-    //   isSuccess.value = false;
-    // });
+    Future.delayed(Duration(seconds: 1), () {
+      getSafetyMeasureList(selectedTypePermitId);
+    });
+    Future.delayed(Duration(seconds: 5), () {
+      isSuccess.value = false;
+    });
   }
 }

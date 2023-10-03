@@ -16,6 +16,18 @@ class SafetyQuestionsListPresenter {
         facility_id
         );
 
+  Future<bool> createSafetyMeasure({
+    safetyMeasurelistJsonString,
+    required bool isLoading,
+  }) async {
+    // print("presenter Create Facility type function.");
+    safetyQuestionsListUsecase.createSafetyMeasure(
+      safetyMeasurelistJsonString: safetyMeasurelistJsonString,
+      isLoading: isLoading,
+    );
+    return true;
+  }
+
   Future<List<SafetyMeasureListModel>> getSafetyMeasureList({
     required bool isLoading,
     required int? permit_type_id,

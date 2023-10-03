@@ -1,3 +1,6 @@
+import 'package:cmms/app/controllers/file_upload_controller.dart';
+import 'package:cmms/app/widgets/file_upload_details_widget_web.dart';
+import 'package:cmms/app/widgets/file_upload_with_dropzone_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:get/get.dart';
@@ -25,6 +28,8 @@ class EditJobContentWeb extends StatefulWidget {
 }
 
 class _EditJobContentWebState extends State<EditJobContentWeb> {
+  final FileUploadController dropzoneController = Get.put(FileUploadController());
+
   @override
   Widget build(BuildContext context) {
     return GetBuilder<EditJobController>(
@@ -928,10 +933,30 @@ class _EditJobContentWebState extends State<EditJobContentWeb> {
                                           Dimens.boxHeight10,
                                         ],
                                       ),
+                                      
                                     ],
                                   ),
                                 ),
                               ),
+
+                              ///File Upload
+                            //   SizedBox(
+                            //   width: MediaQuery.of(context).size.width / 1.5,
+                            //   child: Container(
+                            //     height: Get.height * 0.2,
+                            //     width: Get.width,
+                            //     child: Row(
+                            //         //
+                            //         children: [
+                            //           Expanded(
+                            //             flex: 2,
+                            //             child: FileUploadWidgetWithDropzone(),
+                            //           ),
+                            //           Dimens.boxWidth10,
+                            //           Expanded(flex: 8, child: FileUploadDetailsWidgetWeb()),
+                            //         ]),
+                            //   ),
+                            // ),
                               Center(
                                 child: CustomElevatedButton(
                                   text: 'Update',

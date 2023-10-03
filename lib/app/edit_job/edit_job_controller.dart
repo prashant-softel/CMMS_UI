@@ -439,6 +439,7 @@ class EditJobController extends GetxController {
         id: jobID.value,
         facilityId: selectedFacilityId,
         blockId: selectedBlockId,
+        // blockId: [72,73],
         permitId: _permitId,
         assignedId: selectedAssignedToId,
         title: _title,

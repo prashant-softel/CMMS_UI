@@ -27,7 +27,8 @@ AddJobModel {
 
   int? id;
   int facilityId;
-  int blockId;
+  // List<int?> blockId;
+  int? blockId;
   int permitId;
   int assignedId;
   String title;

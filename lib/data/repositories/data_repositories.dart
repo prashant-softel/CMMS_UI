@@ -3281,6 +3281,16 @@ class DataRepository extends DomainRepository {
     return response;
   }
 
+  Future<ResponseModel> createSafetyMeasure({
+    auth,
+    bool? isLoading,
+    safetyMeasurelistJsonString,
+  }) async {
+    var response = await connectHelper.createSafetyMeasure(
+        auth: auth, isLoading: isLoading, safetyMeasurelistJsonString: safetyMeasurelistJsonString);
+    return response;
+  }
+
   Future<ResponseModel> deleteJobType({
     auth,
     bool? isLoading,

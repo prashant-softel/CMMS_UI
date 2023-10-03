@@ -41,6 +41,8 @@ class AddJobController extends GetxController {
   Rx<String> selectedBlock = ''.obs;
   Rx<bool> isBlockSelected = true.obs;
   int selectedBlockId = 0;
+  RxList<int?> selectedBlockIdList = <int>[].obs;
+
   //
   Rx<String> selectedEquipment = ''.obs;
   Rx<bool> isEquipmentSelected = true.obs;
@@ -234,6 +236,9 @@ class AddJobController extends GetxController {
     if (selectedBlock.value == '') {
       isBlockSelected.value = false;
     }
+    //  if (selectedBlockIdList.length < 1) {
+    //   isBlockSelected.value = false;
+    // }
     if (selectedWorkTypeIdList.length < 1) {
       isWorkTypeSelected.value = false;
     }
@@ -288,6 +293,7 @@ class AddJobController extends GetxController {
       AddJobModel addJobModel = AddJobModel(
         id: 0,
         facilityId: facilityId,
+        // blockId: selectedBlockIdList,
         blockId: selectedBlockId,
         permitId: _permitId,
         assignedId: selectedAssignedToId,
@@ -351,6 +357,7 @@ class AddJobController extends GetxController {
             isBlockSelected.value = true;
           }
           selectedBlock.value = value;
+          print('SelectedBlock:$selectedBlock');
           // selectedEquipmentCategory.value ='';
           // selectedToolRequiredToWorkType.value ='';
           // selectedWorkAreaList.value = [];
@@ -454,6 +461,20 @@ class AddJobController extends GetxController {
     var worktypeid =
         selectedWorkTypeIdList.map((id) => id.toString()).join(',');
     getToolsRequiredToWorkTypeList(worktypeid);
+  }
+
+  ///Block
+  void blockSelected(_selectedBlockList) {
+    blockList.value = _selectedBlockList.cast<BlockModel>();
+    selectedBlockIdList.value = <int>[];
+    for (var _selectedWorkType in _selectedBlockList) {
+      selectedBlockIdList.add(_selectedWorkType.id);
+    }
+    print('SelectBlock:$selectedBlockIdList');
+    // var worktypeid = selectedWorkTypeIdList.join(', ').toString();
+    var blockid =
+        selectedBlockIdList.map((id) => id.toString()).join(',');
+    // getToolsRequiredToWorkTypeList(blockid);
   }
 
   /// Show alert dialog

@@ -8025,12 +8025,39 @@ class Repository {
           auth: auth,
           isLoading: isLoading,
           jobTypeJsonString: jobTypeJsonString);
+           
 
       if (!res.hasError) {
         return true;
       } //
       else {
         Utility.showDialog(res.errorCode.toString() + ' jobTypeJsonString');
+        return false;
+      }
+    } catch (error) {
+      print(error.toString());
+      return false;
+    }
+  }
+
+///Create Safety Measure
+  Future<bool> createSafetyMeasure({
+    bool? isLoading, 
+    safetyMeasurelistJsonString
+    }) async {
+    try {
+      final auth = await getSecuredValue(LocalKeys.authToken);
+      final res = await _dataRepository.createSafetyMeasure(
+          auth: auth,
+          isLoading: isLoading,
+          safetyMeasurelistJsonString: safetyMeasurelistJsonString);
+          print({"SafetyMeasureResponse:", res.data});
+
+      if (!res.hasError) {
+        return true;
+      } //
+      else {
+        Utility.showDialog(res.errorCode.toString() + ' SafetyMeasureString');
         return false;
       }
     } catch (error) {
