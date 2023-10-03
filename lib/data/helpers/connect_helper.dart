@@ -5290,6 +5290,28 @@ class ConnectHelper {
     return responseModel;
   }
 
+
+  ///Create Safety Measure
+   Future<ResponseModel> createSafetyMeasure({
+    required String auth,
+    bool? isLoading,
+    required safetyMeasurelistJsonString,
+  }) async {
+    var responseModel = await apiWrapper.makeRequest(
+      'Permit/CreateSafetyMeasure',
+      Request.post,
+      safetyMeasurelistJsonString,
+      isLoading ?? false,
+      {
+        'Content-Type': 'application/json',
+        'Authorization': 'Bearer $auth',
+      },
+    );
+
+    return responseModel;
+  }
+
+
   Future<ResponseModel> approveReturnMrs({
     required String auth,
     bool? isLoading,

@@ -2788,11 +2788,11 @@ class NewPermitScreen extends GetView<NewPermitController> {
                                                               .isEmpty
                                                           ? Dimens.box0
                                                           : SizedBox(
-                                                              height: ((controller
-                                                                          .safetyMeasureList
-                                                                          .length) *
-                                                                      10) +
-                                                                  200,
+                                                              // height: ((controller
+                                                              //             .safetyMeasureList
+                                                              //             .length) *
+                                                              //         10) +
+                                                              //     200,
                                                               width: MediaQuery.of(
                                                                           context)
                                                                       .size
@@ -2800,95 +2800,73 @@ class NewPermitScreen extends GetView<NewPermitController> {
                                                                   1.2,
                                                               child: Center(
                                                                 child:
-                                                                    Container(
-                                                                  margin: Dimens
-                                                                      .edgeInsets16,
-                                                                  height: Get
-                                                                      .height,
-                                                                  decoration:
-                                                                      BoxDecoration(
-                                                                    border: Border.all(
-                                                                        color: Colors
-                                                                            .grey
-                                                                            .withOpacity(.3)),
-                                                                  ),
-                                                                  constraints:
-                                                                      BoxConstraints(
-                                                                    maxWidth:
-                                                                        1100,
-                                                                  ),
-                                                                  child:
-                                                                      SingleChildScrollView(
-                                                                    child:
-                                                                        Column(
-                                                                      children: [
-                                                                        CustomAppBar(
-                                                                          title:
-                                                                              'Following safety Measures taken to carry out the work'.tr,
-                                                                        ),
-                                                                        Dimens
-                                                                            .boxHeight10,
-                                                                        controller.permitId.value <=
-                                                                                0
-                                                                            ? Wrap(
-                                                                                alignment: WrapAlignment.start,
-                                                                                spacing: 100,
-                                                                                children: []..addAll(controller.safetyMeasureList.map((element) => Row(
-                                                                                      mainAxisSize: MainAxisSize.min,
-                                                                                      mainAxisAlignment: MainAxisAlignment.start,
-                                                                                      crossAxisAlignment: CrossAxisAlignment.start,
-                                                                                      children: [
-                                                                                        SizedBox(
-                                                                                          width: 200,
-                                                                                          child: Row(
-                                                                                            children: [
-                                                                                              checkBoxMethod(1),
-                                                                                              // checkBoxMethod(2),
-                                                                                              // checkBoxMethod(3),
-                                                                                              // checkBoxMethod(4),
-                                                                                              // checkBoxMethod(5),
-                                                                                              // checkBoxMethod(6),
-                                                                                              // checkBoxMethod(7),
-                                                                                              // Text("${i= i! + 1}. "),
-                                                                                              // Checkbox(
-                                                                                              //   value: controller.isChecked1.value,
-                                                                                              //   onChanged: (bool? value) {
-                                                                                              //     controller.toggleCheckbox1();
-                                                                                              //   },
-                                                                                              // ),
-                                                                                              Text("${element.name}")
-                                                                                            ],
-                                                                                          ),
-                                                                                        )
-                                                                                      ],
-                                                                                    ))),
-                                                                              )
-                                                                            : Wrap(
-                                                                                alignment: WrapAlignment.start,
-                                                                                spacing: 100,
-                                                                                children: []..addAll(controller.safetyList!.map((element) => Row(
-                                                                                      mainAxisSize: MainAxisSize.min,
-                                                                                      mainAxisAlignment: MainAxisAlignment.start,
-                                                                                      crossAxisAlignment: CrossAxisAlignment.start,
-                                                                                      children: [
-                                                                                        SizedBox(
-                                                                                          width: 200,
-                                                                                          child: Row(
-                                                                                            children: [
-                                                                                              checkBoxMethod(1),
-
-                                                                                              // Text("${j= j! + 1}. "),
-                                                                                              Text("${element?.saftyQuestionName}")
-                                                                                            ],
-                                                                                          ),
-                                                                                        )
-                                                                                      ],
-                                                                                    ))),
-                                                                              ),
-                                                                      ],
+                                                                    Column(
+                                                                    children: [
+                                                                    CustomAppBar(
+                                                                      title:
+                                                                          'permit type checklist'.tr,
                                                                     ),
-                                                                  ),
-                                                                ),
+                                                                    Dimens
+                                                                        .boxHeight10,
+                                                                    controller.permitId.value <=
+                                                                            0
+                                                                        ? Column(
+                                                                            // alignment: WrapAlignment.start,
+                                                                            // spacing: 100,
+                                                                            children: []..addAll(controller.safetyMeasureList.map((element) => Column(
+                                                                                  // mainAxisSize: MainAxisSize.min,
+                                                                                  mainAxisAlignment: MainAxisAlignment.start,
+                                                                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                                                                  children: [
+                                                                                    SizedBox(
+                                                                                      // width: 200,
+                                                                                      child: Row(
+                                                                                        children: [
+                                                                                          checkBoxMethod(1),
+                                                                                          // checkBoxMethod(2),
+                                                                                          // checkBoxMethod(3),
+                                                                                          // checkBoxMethod(4),
+                                                                                          // checkBoxMethod(5),
+                                                                                          // checkBoxMethod(6),
+                                                                                          // checkBoxMethod(7),
+                                                                                          // Text("${i= i! + 1}. "),
+                                                                                          // Checkbox(
+                                                                                          //   value: controller.isChecked1.value,
+                                                                                          //   onChanged: (bool? value) {
+                                                                                          //     controller.toggleCheckbox1();
+                                                                                          //   },
+                                                                                          // ),
+                                                                                          Text("${element.name}")
+                                                                                        ],
+                                                                                      ),
+                                                                                    )
+                                                                                  ],
+                                                                                ))),
+                                                                          )
+                                                                        : Column(
+                                                                            // alignment: WrapAlignment.start,
+                                                                            // spacing: 100,
+                                                                            children: []..addAll(controller.safetyList!.map((element) => Column(
+                                                                                  // mainAxisSize: MainAxisSize.min,
+                                                                                  mainAxisAlignment: MainAxisAlignment.start,
+                                                                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                                                                  children: [
+                                                                                    SizedBox(
+                                                                                      // width: 200,
+                                                                                      child: Row(
+                                                                                        children: [
+                                                                                          checkBoxMethod(1),
+
+                                                                                          // Text("${j= j! + 1}. "),
+                                                                                          Text("${element?.saftyQuestionName}")
+                                                                                        ],
+                                                                                      ),
+                                                                                    )
+                                                                                  ],
+                                                                                ))),
+                                                                          ),
+                                                                    ],
+                                                                    ),
                                                               ),
                                                             ),
 

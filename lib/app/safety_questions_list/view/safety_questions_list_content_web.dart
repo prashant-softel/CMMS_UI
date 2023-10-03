@@ -11,8 +11,7 @@ import 'package:scrollable_table_view/scrollable_table_view.dart';
 import '../../widgets/custom_elevated_button.dart';
 import '../../widgets/custom_richtext.dart';
 
-class SafetyQuestionsListContentWeb
-    extends GetView<SafetyQuestionsListController> {
+class SafetyQuestionsListContentWeb extends GetView<SafetyQuestionsListController> {
   SafetyQuestionsListContentWeb({Key? key}) : super(key: key);
   final SafetyQuestionsListController controller = Get.find();
 
@@ -65,10 +64,7 @@ class SafetyQuestionsListContentWeb
               child: Row(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  varUserAccessModel.value.access_list!
-                              .where((e) => e.feature_id == 5 && e.add == 1)
-                              .length >
-                          0
+                  varUserAccessModel.value.access_list!.where((e) => e.feature_id == 5 && e.add == 0).length > 0
                       ? Container(
                           width: (Get.width * .3),
                           margin: EdgeInsets.only(left: 30, top: 25),
@@ -84,303 +80,429 @@ class SafetyQuestionsListContentWeb
                                 // Text(
                                 //     '${varUserAccessModel.value.access_list!.where((e) => e.feature_id == 5 && e.add == 1).length}'),
                                 Padding(
-                                  padding: const EdgeInsets.only(
-                                      left: 10.0, right: 10, top: 10),
-                                  child: Column(
-                                      crossAxisAlignment:
-                                          CrossAxisAlignment.start,
-                                      children: [
-                                        Text(
-                                          "Add Permit Safety Measurement",
-                                          style: Styles.blackBold16,
-                                        ),
-                                        SizedBox(
-                                          height: 15,
-                                        ),
-                                        Padding(
-                                          padding: const EdgeInsets.only(
-                                              left: 15, right: 15),
-                                          child: CustomRichText(
-                                              title: 'Select permit type: '),
-                                        ),
+                                  padding: const EdgeInsets.only(left: 10.0, right: 10, top: 10),
+                                  child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
+                                    Text(
+                                      "Add Permit Safety Measurement",
+                                      style: Styles.blackBold16,
+                                    ),
+                                    SizedBox(
+                                      height: 15,
+                                    ),
+                                    Padding(
+                                      padding: const EdgeInsets.only(left: 15, right: 15),
+                                      child: CustomRichText(title: 'Select permit type: '),
+                                    ),
 
-                                        Padding(
-                                          padding:
-                                              const EdgeInsets.only(left: 15),
-                                          child: SizedBox(
-                                            height: MediaQuery.of(context)
-                                                    .size
-                                                    .height *
-                                                0.040,
-                                            width: MediaQuery.of(context)
-                                                    .size
-                                                    .width /
-                                                3.9,
-                                            child: DropdownWebWidget(
-                                              boxShadow: [
-                                                BoxShadow(
-                                                  color: Colors.black26,
-                                                  offset: const Offset(
-                                                    5.0,
-                                                    5.0,
-                                                  ),
-                                                  blurRadius: 5.0,
-                                                  spreadRadius: 1.0,
-                                                ),
-                                                BoxShadow(
-                                                  color: ColorValues.whiteColor,
-                                                  offset:
-                                                      const Offset(0.0, 0.0),
-                                                  blurRadius: 0.0,
-                                                  spreadRadius: 0.0,
-                                                ),
-                                              ],
-                                              dropdownList:
-                                                  controller.typePermitList,
-                                              isValueSelected: controller
-                                                  .isTypePermitSelected.value,
-                                              selectedValue: controller
-                                                  .selectedTypePermit.value,
-                                              onValueChanged:
-                                                  controller.onValueChanged,
-                                            ),
-                                          ),
-                                        ),
-                                        SizedBox(
-                                          height: 10,
-                                        ),
-                                        Padding(
-                                          padding:
-                                              const EdgeInsets.only(left: 15),
-                                          child: CustomRichText(
-                                              title:
-                                                  'Safety Measurement Title '),
-                                        ),
-                                        Padding(
-                                          padding: const EdgeInsets.only(
-                                              left: 15, right: 15),
-                                          child: Container(
-                                              decoration: BoxDecoration(
-                                                boxShadow: [
-                                                  BoxShadow(
-                                                    color: Colors.black26,
-                                                    offset: const Offset(
-                                                      5.0,
-                                                      5.0,
-                                                    ),
-                                                    blurRadius: 5.0,
-                                                    spreadRadius: 1.0,
-                                                  ),
-                                                  BoxShadow(
-                                                    color:
-                                                        ColorValues.whiteColor,
-                                                    offset:
-                                                        const Offset(0.0, 0.0),
-                                                    blurRadius: 0.0,
-                                                    spreadRadius: 0.0,
-                                                  ),
-                                                ],
-                                                color: ColorValues.whiteColor,
-                                                borderRadius:
-                                                    BorderRadius.circular(5),
+                                    Padding(
+                                      padding: const EdgeInsets.only(left: 15),
+                                      child: SizedBox(
+                                        height: MediaQuery.of(context).size.height * 0.040,
+                                        width: MediaQuery.of(context).size.width / 3.9,
+                                        child: DropdownWebWidget(
+                                          boxShadow: [
+                                            BoxShadow(
+                                              color: Colors.black26,
+                                              offset: const Offset(
+                                                5.0,
+                                                5.0,
                                               ),
-                                              width: MediaQuery.of(context)
-                                                      .size
-                                                      .width /
-                                                  2,
-                                              child: LoginCustomTextfield(
-                                                  // textController: controller
-                                                  //     .durationCtrlr,
-                                                  )),
-                                        ),
-                                        SizedBox(
-                                          height: 10,
-                                        ),
-
-                                        Padding(
-                                          padding: const EdgeInsets.only(
-                                            left: 15,
-                                          ),
-                                          child: CustomRichText(
-                                              title: 'Description '),
-                                        ),
-                                        Padding(
-                                          padding: const EdgeInsets.only(
-                                              left: 15, right: 15),
-                                          child: Container(
-                                              decoration: BoxDecoration(
-                                                boxShadow: [
-                                                  BoxShadow(
-                                                    color: Colors.black26,
-                                                    offset: const Offset(
-                                                      5.0,
-                                                      5.0,
-                                                    ),
-                                                    blurRadius: 5.0,
-                                                    spreadRadius: 1.0,
-                                                  ),
-                                                  BoxShadow(
-                                                    color:
-                                                        ColorValues.whiteColor,
-                                                    offset:
-                                                        const Offset(0.0, 0.0),
-                                                    blurRadius: 0.0,
-                                                    spreadRadius: 0.0,
-                                                  ),
-                                                ],
-                                                color: ColorValues.whiteColor,
-                                                borderRadius:
-                                                    BorderRadius.circular(5),
-                                              ),
-                                              width: MediaQuery.of(context)
-                                                      .size
-                                                      .width /
-                                                  2,
-                                              child: LoginCustomTextfield(
-                                                  // textController: controller
-                                                  //     .durationCtrlr,
-                                                  )),
-                                        ),
-                                        SizedBox(
-                                          height: 10,
-                                        ),
-                                        Padding(
-                                          padding:
-                                              const EdgeInsets.only(left: 15),
-                                          child: CustomRichText(
-                                              title:
-                                                  'Select confirmation type: '),
-                                        ),
-
-                                        Padding(
-                                          padding:
-                                              const EdgeInsets.only(left: 15),
-                                          child: SizedBox(
-                                            height: MediaQuery.of(context)
-                                                    .size
-                                                    .height *
-                                                0.040,
-                                            width: MediaQuery.of(context)
-                                                    .size
-                                                    .width /
-                                                3.9,
-                                            child: DropdownWebWidget(
-                                              boxShadow: [
-                                                BoxShadow(
-                                                  color: Colors.black26,
-                                                  offset: const Offset(
-                                                    5.0,
-                                                    5.0,
-                                                  ),
-                                                  blurRadius: 5.0,
-                                                  spreadRadius: 1.0,
-                                                ),
-                                                BoxShadow(
-                                                  color: ColorValues.whiteColor,
-                                                  offset:
-                                                      const Offset(0.0, 0.0),
-                                                  blurRadius: 0.0,
-                                                  spreadRadius: 0.0,
-                                                ),
-                                              ],
-                                              dropdownList:
-                                                  controller.typePermitList,
-                                              isValueSelected: controller
-                                                  .isTypePermitSelected.value,
-                                              selectedValue: controller
-                                                  .selectedTypePermit.value,
-                                              onValueChanged:
-                                                  controller.onValueChanged,
+                                              blurRadius: 5.0,
+                                              spreadRadius: 1.0,
                                             ),
-                                          ),
-                                        ),
-
-                                        Row(
-                                          children: [
-                                            Padding(
-                                              padding: const EdgeInsets.only(
-                                                  left: 15),
-                                              child: CustomRichText(
-                                                  title: 'Required: '),
-                                            ),
-                                            Checkbox(
-                                              value: controller
-                                                  .isCheckedRequire.value,
-                                              onChanged: (bool? value) {
-                                                controller
-                                                    .requiretoggleCheckbox();
-                                              },
+                                            BoxShadow(
+                                              color: ColorValues.whiteColor,
+                                              offset: const Offset(0.0, 0.0),
+                                              blurRadius: 0.0,
+                                              spreadRadius: 0.0,
                                             ),
                                           ],
+                                          dropdownList: controller.typePermitList,
+                                          isValueSelected: controller.isTypePermitSelected.value,
+                                          selectedValue: controller.selectedTypePermit.value,
+                                          onValueChanged: controller.onValueChanged,
                                         ),
-                                        SizedBox(
-                                          height: 20,
-                                        )
+                                      ),
+                                    ),
+                                    SizedBox(
+                                      height: 10,
+                                    ),
+                                    // Padding(
+                                    //   padding:
+                                    //       const EdgeInsets.only(left: 15),
+                                    //   child: CustomRichText(
+                                    //       title:
+                                    //           'Safety Measurement Title '),
+                                    // ),
+                                    // Padding(
+                                    //   padding: const EdgeInsets.only(
+                                    //       left: 15, right: 15),
+                                    //   child: Container(
+                                    //       decoration: BoxDecoration(
+                                    //         boxShadow: [
+                                    //           BoxShadow(
+                                    //             color: Colors.black26,
+                                    //             offset: const Offset(
+                                    //               5.0,
+                                    //               5.0,
+                                    //             ),
+                                    //             blurRadius: 5.0,
+                                    //             spreadRadius: 1.0,
+                                    //           ),
+                                    //           BoxShadow(
+                                    //             color:
+                                    //                 ColorValues.whiteColor,
+                                    //             offset:
+                                    //                 const Offset(0.0, 0.0),
+                                    //             blurRadius: 0.0,
+                                    //             spreadRadius: 0.0,
+                                    //           ),
+                                    //         ],
+                                    //         color: ColorValues.whiteColor,
+                                    //         borderRadius:
+                                    //             BorderRadius.circular(5),
+                                    //       ),
+                                    //       width: MediaQuery.of(context)
+                                    //               .size
+                                    //               .width /
+                                    //           2,
+                                    //       child: LoginCustomTextfield(
+                                    //           textController: controller
+                                    //               .durationCtrlr,
+                                    //           )),
+                                    // ),
+                                    Row(
+                                      // mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                      children: [
+                                        Expanded(
+                                          child: CustomRichText(title: 'Safety Measure Title '),
+                                        ),
+                                        Expanded(
+                                          child: Container(
+                                            padding: const EdgeInsets.only(right: 15),
+                                            child: Container(
+                                              decoration: BoxDecoration(
+                                                boxShadow: [
+                                                  BoxShadow(
+                                                    color: Colors.black26,
+                                                    offset: const Offset(
+                                                      5.0,
+                                                      5.0,
+                                                    ),
+                                                    blurRadius: 5.0,
+                                                    spreadRadius: 1.0,
+                                                  ),
+                                                  BoxShadow(
+                                                    color: ColorValues.whiteColor,
+                                                    offset: const Offset(0.0, 0.0),
+                                                    blurRadius: 0.0,
+                                                    spreadRadius: 0.0,
+                                                  ),
+                                                ],
+                                                color: ColorValues.whiteColor,
+                                                borderRadius: BorderRadius.circular(5),
+                                              ),
+                                              width: (MediaQuery.of(context).size.width * .2) - 30,
+                                              // width: MediaQuery.of(context).size.width / 1.5,/
+                                              child: Obx(
+                                                () => TextField(
+                                                  controller: controller.titleCtrlr,
+                                                  keyboardType: TextInputType.multiline,
+                                                  maxLines: 1,
+                                                  autofocus: false,
+                                                  decoration: InputDecoration(
+                                                    fillColor: ColorValues.whiteColor,
+                                                    filled: true,
+                                                    contentPadding: Dimens.edgeInsets05_10,
+                                                    border: InputBorder.none,
+                                                    enabledBorder: OutlineInputBorder(
+                                                      borderRadius: BorderRadius.circular(10.0),
+                                                      borderSide: BorderSide(color: Colors.transparent),
+                                                    ),
+                                                    focusedBorder: OutlineInputBorder(
+                                                      borderRadius: BorderRadius.circular(10.0),
+                                                      borderSide: BorderSide(color: Colors.transparent),
+                                                    ),
+                                                    focusedErrorBorder: controller.isTitleInvalid.value
+                                                        ? OutlineInputBorder(
+                                                            borderRadius: BorderRadius.circular(5),
+                                                            borderSide: BorderSide(
+                                                              color: ColorValues.redColorDark,
+                                                            ),
+                                                          )
+                                                        : InputBorder.none,
+                                                    errorBorder: controller.isTitleInvalid.value
+                                                        ? OutlineInputBorder(
+                                                            borderRadius: BorderRadius.circular(5),
+                                                            borderSide: BorderSide(
+                                                              color: ColorValues.redColorDark,
+                                                            ),
+                                                          )
+                                                        : null,
+                                                    errorText: controller.isTitleInvalid.value ? "Required field" : null,
+                                                  ),
+                                                  onChanged: (value) {
+                                                    if (value.trim().length > 1) {
+                                                      controller.isTitleInvalid.value = false;
+                                                    } else {
+                                                      controller.isTitleInvalid.value = true;
+                                                    }
+                                                  },
+                                                ),
+                                              ),
+                                            ),
+                                          ),
+                                        ),
+                                      ],
+                                    ),
+                                    SizedBox(
+                                      height: 10,
+                                    ),
 
-                                        // SizedBox(
-                                        //   width: MediaQuery.of(context)
-                                        //           .size
-                                        //           .width /
-                                        //       1.82,
-                                        //   child: DropdownWebWidget(
-                                        // boxShadow: [
-                                        //   BoxShadow(
-                                        //     color: Colors.black26,
-                                        //     offset: const Offset(
-                                        //       5.0,
-                                        //       5.0,
-                                        //     ),
-                                        //     blurRadius: 5.0,
-                                        //     spreadRadius: 1.0,
-                                        //   ),
-                                        //   BoxShadow(
-                                        //     color: ColorValues
-                                        //         .whiteColor,
-                                        //     offset: const Offset(
-                                        //         0.0, 0.0),
-                                        //     blurRadius: 0.0,
-                                        //     spreadRadius: 0.0,
-                                        //   ),
-                                        // ],
-                                        //     dropdownList:
-                                        //         controller.typePermitList,
-                                        //     isValueSelected: controller
-                                        //         .isTypePermitSelected.value,
-                                        //     selectedValue: controller
-                                        //         .selectedTypePermit.value,
-                                        //     onValueChanged:
-                                        //         controller.onValueChanged,
-                                        //   ),
-                                        // ),
-                                      ]),
+                                    // Padding(
+                                    //   padding: const EdgeInsets.only(
+                                    //     left: 15,
+                                    //   ),
+                                    //   child: CustomRichText(
+                                    //       title: 'Description '),
+                                    // ),
+                                    // Padding(
+                                    //   padding: const EdgeInsets.only(
+                                    //       left: 15, right: 15),
+                                    //   child: Container(
+                                    //       decoration: BoxDecoration(
+                                    //         boxShadow: [
+                                    //           BoxShadow(
+                                    //             color: Colors.black26,
+                                    //             offset: const Offset(
+                                    //               5.0,
+                                    //               5.0,
+                                    //             ),
+                                    //             blurRadius: 5.0,
+                                    //             spreadRadius: 1.0,
+                                    //           ),
+                                    //           BoxShadow(
+                                    //             color:
+                                    //                 ColorValues.whiteColor,
+                                    //             offset:
+                                    //                 const Offset(0.0, 0.0),
+                                    //             blurRadius: 0.0,
+                                    //             spreadRadius: 0.0,
+                                    //           ),
+                                    //         ],
+                                    //         color: ColorValues.whiteColor,
+                                    //         borderRadius:
+                                    //             BorderRadius.circular(5),
+                                    //       ),
+                                    //       width: MediaQuery.of(context)
+                                    //               .size
+                                    //               .width /
+                                    //           2,
+                                    //       child: LoginCustomTextfield(
+                                    //           // textController: controller
+                                    //           //     .durationCtrlr,
+                                    //           )),
+                                    // ),
+                                    Row(
+                                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                      children: [
+                                        Expanded(
+                                          child: CustomRichText(title: 'Description '),
+                                        ),
+                                        Expanded(
+                                          child: Container(
+                                            padding: const EdgeInsets.only( right: 15),
+                                            child: Container(
+                                                decoration: BoxDecoration(
+                                                  boxShadow: [
+                                                    BoxShadow(
+                                                      color: Colors.black26,
+                                                      offset: const Offset(
+                                                        5.0,
+                                                        5.0,
+                                                      ),
+                                                      blurRadius: 5.0,
+                                                      spreadRadius: 1.0,
+                                                    ),
+                                                    BoxShadow(
+                                                      color: ColorValues.whiteColor,
+                                                      offset: const Offset(0.0, 0.0),
+                                                      blurRadius: 0.0,
+                                                      spreadRadius: 0.0,
+                                                    ),
+                                                  ],
+                                                  color: ColorValues.whiteColor,
+                                                  borderRadius: BorderRadius.circular(5),
+                                                ),
+                                                // width: MediaQuery.of(context).size.width / 2,
+                                                width: (MediaQuery.of(context).size.width * .2) - 30,
+                                                child: Obx(
+                                                  () => TextField(
+                                                    controller: controller.descriptionCtrlr,
+                                                    keyboardType: TextInputType.multiline,
+                                                    maxLines: 1,
+                                                    autofocus: false,
+                                                    decoration: InputDecoration(
+                                                      fillColor: ColorValues.whiteColor,
+                                                      filled: true,
+                                                      contentPadding: Dimens.edgeInsets05_10,
+                                                      border: InputBorder.none,
+                                                      enabledBorder: OutlineInputBorder(
+                                                        borderRadius: BorderRadius.circular(10.0),
+                                                        borderSide: BorderSide(color: Colors.transparent),
+                                                      ),
+                                                      focusedBorder: OutlineInputBorder(
+                                                        borderRadius: BorderRadius.circular(10.0),
+                                                        borderSide: BorderSide(color: Colors.transparent),
+                                                      ),
+                                                      focusedErrorBorder: controller.isDescriptionInvalid.value
+                                                          ? OutlineInputBorder(
+                                                              borderRadius: BorderRadius.circular(5),
+                                                              borderSide: BorderSide(
+                                                                color: ColorValues.redColorDark,
+                                                              ),
+                                                            )
+                                                          : InputBorder.none,
+                                                      errorBorder: controller.isDescriptionInvalid.value
+                                                          ? OutlineInputBorder(
+                                                              borderRadius: BorderRadius.circular(5),
+                                                              borderSide: BorderSide(
+                                                                color: ColorValues.redColorDark,
+                                                              ),
+                                                            )
+                                                          : null,
+                                                      errorText: controller.isDescriptionInvalid.value ? "Required field" : null,
+                                                    ),
+                                                    onChanged: (value) {
+                                                      if (value.trim().length > 1) {
+                                                        controller.isDescriptionInvalid.value = false;
+                                                      } else {
+                                                        controller.isDescriptionInvalid.value = true;
+                                                      }
+                                                    },
+                                                  ),
+                                                )),
+                                          ),
+                                        ),
+                                      ],
+                                    ),
+                                    SizedBox(
+                                      height: 10,
+                                    ),
+                                    Padding(
+                                      padding: const EdgeInsets.only(left: 15),
+                                      child: CustomRichText(title: 'Select confirmation type: '),
+                                    ),
+
+                                    Padding(
+                                      padding: const EdgeInsets.only(left: 15),
+                                      child: SizedBox(
+                                        height: MediaQuery.of(context).size.height * 0.040,
+                                        width: MediaQuery.of(context).size.width / 3.9,
+                                        child: DropdownWebWidget(
+                                          boxShadow: [
+                                            BoxShadow(
+                                              color: Colors.black26,
+                                              offset: const Offset(
+                                                5.0,
+                                                5.0,
+                                              ),
+                                              blurRadius: 5.0,
+                                              spreadRadius: 1.0,
+                                            ),
+                                            BoxShadow(
+                                              color: ColorValues.whiteColor,
+                                              offset: const Offset(0.0, 0.0),
+                                              blurRadius: 0.0,
+                                              spreadRadius: 0.0,
+                                            ),
+                                          ],
+                                          dropdownList: controller.typePermitList,
+                                          isValueSelected: controller.isTypePermitSelected.value,
+                                          selectedValue: controller.selectedTypePermit.value,
+                                          onValueChanged: controller.onValueChanged,
+                                        ),
+                                      ),
+                                    ),
+
+                                    Row(
+                                      children: [
+                                        Padding(
+                                          padding: const EdgeInsets.only(left: 15),
+                                          child: CustomRichText(title: 'Required: '),
+                                        ),
+                                        Checkbox(
+                                          value: controller.isCheckedRequire.value,
+                                          onChanged: (bool? value) {
+                                            controller.requiretoggleCheckbox();
+                                          },
+                                        ),
+                                      ],
+                                    ),
+                                    SizedBox(
+                                      height: 20,
+                                    )
+
+                                    // SizedBox(
+                                    //   width: MediaQuery.of(context)
+                                    //           .size
+                                    //           .width /
+                                    //       1.82,
+                                    //   child: DropdownWebWidget(
+                                    // boxShadow: [
+                                    //   BoxShadow(
+                                    //     color: Colors.black26,
+                                    //     offset: const Offset(
+                                    //       5.0,
+                                    //       5.0,
+                                    //     ),
+                                    //     blurRadius: 5.0,
+                                    //     spreadRadius: 1.0,
+                                    //   ),
+                                    //   BoxShadow(
+                                    //     color: ColorValues
+                                    //         .whiteColor,
+                                    //     offset: const Offset(
+                                    //         0.0, 0.0),
+                                    //     blurRadius: 0.0,
+                                    //     spreadRadius: 0.0,
+                                    //   ),
+                                    // ],
+                                    //     dropdownList:
+                                    //         controller.typePermitList,
+                                    //     isValueSelected: controller
+                                    //         .isTypePermitSelected.value,
+                                    //     selectedValue: controller
+                                    //         .selectedTypePermit.value,
+                                    //     onValueChanged:
+                                    //         controller.onValueChanged,
+                                    //   ),
+                                    // ),
+                                  ]),
                                 ),
                                 Row(
                                   mainAxisAlignment: MainAxisAlignment.center,
                                   children: [
                                     Container(
                                         width: (Get.width * .07),
-                                        child: CustomElevatedButton(
-                                            backgroundColor:
-                                                ColorValues.appRedColor,
-                                            onPressed: () {},
-                                            text: 'Cancel')),
+                                        child: CustomElevatedButton(backgroundColor: ColorValues.appRedColor, onPressed: () {}, text: 'Cancel')),
                                     SizedBox(
                                       width: 10,
                                     ),
                                     Container(
                                         width: (Get.width * .15) - 50,
                                         child: CustomElevatedButton(
-                                            backgroundColor:
-                                                ColorValues.appDarkBlueColor,
+                                            backgroundColor: ColorValues.appDarkBlueColor,
                                             onPressed: () {
-                                              // controller
-                                              //     .createChecklistNumber()
-                                              //     .then((value) {
-                                              //   print("value,$value");
-                                              //   // if (value == true)
-                                              //   //   controller
-                                              //   //       .issuccessCreatechecklist();
-                                              // });
+                                              controller
+                                                  .createSafetyMeasure()
+                                                  .then((value) {
+                                                print("value,$value");
+                                                // if (value == true)
+                                                  controller
+                                                      .issuccessSafetyMeasurelist();
+                                              });
                                             },
                                             text: 'Submit')),
                                   ],
@@ -390,10 +512,7 @@ class SafetyQuestionsListContentWeb
                           ),
                         )
                       : Container(),
-                  varUserAccessModel.value.access_list!
-                              .where((e) => e.feature_id == 5 && e.view == 1)
-                              .length >
-                          0
+                  varUserAccessModel.value.access_list!.where((e) => e.feature_id == 5 && e.view == 0).length > 0
                       ? Expanded(
                           child: Container(
                             width: Get.width * 7,
@@ -424,8 +543,7 @@ class SafetyQuestionsListContentWeb
                                         height: 45,
                                         margin: EdgeInsets.only(left: 10),
                                         child: CustomElevatedButton(
-                                            backgroundColor:
-                                                ColorValues.appLightBlueColor,
+                                            backgroundColor: ColorValues.appLightBlueColor,
                                             onPressed: () {
                                               FlutterClipboard.copy(controller
                                                       // .preventiveCheckList![0]
@@ -439,27 +557,18 @@ class SafetyQuestionsListContentWeb
                                       Container(
                                         height: 45,
                                         margin: EdgeInsets.only(left: 10),
-                                        child: CustomElevatedButton(
-                                            backgroundColor:
-                                                ColorValues.appLightBlueColor,
-                                            onPressed: () {},
-                                            text: 'Excel'),
+                                        child: CustomElevatedButton(backgroundColor: ColorValues.appLightBlueColor, onPressed: () {}, text: 'Excel'),
+                                      ),
+                                      Container(
+                                        height: 45,
+                                        margin: EdgeInsets.only(left: 10),
+                                        child: CustomElevatedButton(backgroundColor: ColorValues.appLightBlueColor, onPressed: () {}, text: 'PDF'),
                                       ),
                                       Container(
                                         height: 45,
                                         margin: EdgeInsets.only(left: 10),
                                         child: CustomElevatedButton(
-                                            backgroundColor:
-                                                ColorValues.appLightBlueColor,
-                                            onPressed: () {},
-                                            text: 'PDF'),
-                                      ),
-                                      Container(
-                                        height: 45,
-                                        margin: EdgeInsets.only(left: 10),
-                                        child: CustomElevatedButton(
-                                          backgroundColor:
-                                              ColorValues.appLightBlueColor,
+                                          backgroundColor: ColorValues.appLightBlueColor,
                                           onPressed: () {},
                                           text: 'columnVisibility'.tr,
                                         ),
@@ -486,16 +595,15 @@ class SafetyQuestionsListContentWeb
                                             }).toList(),
                                             rows: [
                                               ...List.generate(
-                                                controller
-                                                    .safetyMeasureList.length,
+                                                controller.safetyMeasureList.length,
                                                 (index) {
                                                   return [
                                                     '',
                                                     '',
                                                     '',
                                                     '',
-                                                    '',
-                                                    '',
+                                                    // '',
+                                                    // '',
                                                   ];
                                                 },
                                               ),
@@ -513,8 +621,7 @@ class SafetyQuestionsListContentWeb
                                         )
                                       : Expanded(
                                           child: ScrollableTableView(
-                                            paginationController: controller
-                                                .safetyQuestionListPaginationController,
+                                            paginationController: controller.safetyQuestionListPaginationController,
                                             columns: [
                                               "Title",
                                               "Type",
@@ -530,13 +637,9 @@ class SafetyQuestionsListContentWeb
                                             rows: //
                                                 [
                                               ...List.generate(
-                                                controller
-                                                    .safetyMeasureList.length,
+                                                controller.safetyMeasureList.length,
                                                 (index) {
-                                                  var safetyQuestionsListDetails =
-                                                      controller
-                                                              .safetyMeasureList[
-                                                          index];
+                                                  var safetyQuestionsListDetails = controller.safetyMeasureList[index];
                                                   return [
                                                     // '${safetyQuestionsListDetails.id}',
                                                     '${safetyQuestionsListDetails.name}',
@@ -551,8 +654,7 @@ class SafetyQuestionsListContentWeb
                                             ].map((_permitTypeList) {
                                               return TableViewRow(
                                                   height: 60,
-                                                  cells: _permitTypeList
-                                                      .map((value) {
+                                                  cells: _permitTypeList.map((value) {
                                                     return TableViewCell(
                                                         child:
                                                             // (value == 'Action')
@@ -567,38 +669,31 @@ class SafetyQuestionsListContentWeb
                                                             //       )
                                                             //     :
                                                             (value == "Action")
-                                                                ? Wrap(
-                                                                    children: [
-                                                                        // varUserAccessModel.value.access_list!.where((e) => e.feature_id == 5 && e.edit == 1).length >
-                                                                        //         0
-                                                                        //     ?
-                                                                        TableActionButton(
-                                                                          color:
-                                                                              ColorValues.appLightBlueColor,
-                                                                          icon:
-                                                                              Icons.edit,
-                                                                          label:
-                                                                              'Edit',
-                                                                          onPress:
-                                                                              () {},
-                                                                        ),
-                                                                        // : Container(),
-                                                                        // :Container(),
-                                                                        // varUserAccessModel.value.access_list!.where((e) => e.feature_name == "PM Checklist Number" && e.delete == 1).length >
-                                                                        //         0
-                                                                        //     ?
-                                                                        TableActionButton(
-                                                                          color:
-                                                                              ColorValues.appRedColor,
-                                                                          icon:
-                                                                              Icons.delete,
-                                                                          label:
+                                                                ? Row(children: [
+                                                                    // varUserAccessModel.value.access_list!.where((e) => e.feature_id == 5 && e.edit == 1).length >
+                                                                    //         0
+                                                                    //     ?
+                                                                    TableActionButton(
+                                                                      color: ColorValues.editColor,
+                                                                      icon: Icons.edit,
+                                                                      // label: 'Edit',
+                                                                      message: 'Edit',
+                                                                      onPress: () {},
+                                                                    ),
+                                                                    // : Container(),
+                                                                    // :Container(),
+                                                                    // varUserAccessModel.value.access_list!.where((e) => e.feature_name == "PM Checklist Number" && e.delete == 1).length >
+                                                                    //         0
+                                                                    //     ?
+                                                                    TableActionButton(
+                                                                      color: ColorValues.appRedColor,
+                                                                      icon: Icons.delete,
+                                                                       message:
                                                                               'Delete',
-                                                                          onPress:
-                                                                              () {},
-                                                                        )
-                                                                        // : Container()
-                                                                      ])
+                                                                      onPress: () {},
+                                                                    )
+                                                                    // : Container()
+                                                                  ])
                                                                 : Text(
                                                                     value,
                                                                   ));
@@ -617,68 +712,44 @@ class SafetyQuestionsListContentWeb
                                   //     :
 
                                   Padding(
-                                    padding: const EdgeInsets.symmetric(
-                                        horizontal: 25),
+                                    padding: const EdgeInsets.symmetric(horizontal: 25),
                                     child: ValueListenableBuilder(
-                                        valueListenable: controller
-                                            .safetyQuestionListPaginationController,
+                                        valueListenable: controller.safetyQuestionListPaginationController,
                                         builder: (context, value, child) {
                                           return Row(children: [
                                             Text(
                                                 "${controller.safetyQuestionListPaginationController.currentPage}  of ${controller.safetyQuestionListPaginationController.pageCount}"),
                                             Row(children: [
                                               IconButton(
-                                                onPressed: controller
-                                                            .safetyQuestionListPaginationController
-                                                            .currentPage <=
-                                                        1
+                                                onPressed: controller.safetyQuestionListPaginationController.currentPage <= 1
                                                     ? null
                                                     : () {
-                                                        controller
-                                                            .safetyQuestionListPaginationController
-                                                            .previous();
+                                                        controller.safetyQuestionListPaginationController.previous();
                                                       },
                                                 iconSize: 20,
                                                 splashRadius: 20,
                                                 icon: Icon(
-                                                  Icons
-                                                      .arrow_back_ios_new_rounded,
-                                                  color: controller
-                                                              .safetyQuestionListPaginationController
-                                                              .currentPage <=
-                                                          1
+                                                  Icons.arrow_back_ios_new_rounded,
+                                                  color: controller.safetyQuestionListPaginationController.currentPage <= 1
                                                       ? Colors.black26
-                                                      : Theme.of(context)
-                                                          .primaryColor,
+                                                      : Theme.of(context).primaryColor,
                                                 ),
                                               ),
                                               IconButton(
-                                                onPressed: controller
-                                                            .safetyQuestionListPaginationController
-                                                            .currentPage >=
-                                                        controller
-                                                            .safetyQuestionListPaginationController
-                                                            .pageCount
+                                                onPressed: controller.safetyQuestionListPaginationController.currentPage >=
+                                                        controller.safetyQuestionListPaginationController.pageCount
                                                     ? null
                                                     : () {
-                                                        controller
-                                                            .safetyQuestionListPaginationController
-                                                            .next();
+                                                        controller.safetyQuestionListPaginationController.next();
                                                       },
                                                 iconSize: 20,
                                                 splashRadius: 20,
                                                 icon: Icon(
-                                                  Icons
-                                                      .arrow_forward_ios_rounded,
-                                                  color: controller
-                                                              .safetyQuestionListPaginationController
-                                                              .currentPage >=
-                                                          controller
-                                                              .safetyQuestionListPaginationController
-                                                              .pageCount
+                                                  Icons.arrow_forward_ios_rounded,
+                                                  color: controller.safetyQuestionListPaginationController.currentPage >=
+                                                          controller.safetyQuestionListPaginationController.pageCount
                                                       ? Colors.black26
-                                                      : Theme.of(context)
-                                                          .primaryColor,
+                                                      : Theme.of(context).primaryColor,
                                                 ),
                                               ),
                                             ]),
