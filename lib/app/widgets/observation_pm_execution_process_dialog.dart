@@ -1,6 +1,7 @@
 import 'package:cmms/app/theme/color_values.dart';
 import 'package:cmms/app/widgets/custom_elevated_button.dart';
 import 'package:cmms/app/widgets/custom_richtext.dart';
+import 'package:cmms/app/widgets/custom_swich_toggle.dart';
 import 'package:cmms/app/widgets/custom_textField.dart';
 import 'package:data_table_2/data_table_2.dart';
 import 'package:flutter/material.dart';
@@ -17,6 +18,18 @@ class ObservationPmExecutionViewDialog extends GetView {
 
   @override
   Widget build(BuildContext context) {
+    Widget _rowItem(int? defaultValue, {required Function(bool) onCheck}) {
+      return CustomSwitchTroggle(
+          value: defaultValue == 1 ? true : false,
+          onChanged: (value) {
+            print("object");
+            controller.isToggleOn.value = value!;
+            onCheck(value);
+
+            //  controller.toggle();
+          });
+    }
+
     return StatefulBuilder(builder: ((context, setState) {
       return AlertDialog(
         shape: RoundedRectangleBorder(
@@ -262,12 +275,23 @@ class ObservationPmExecutionViewDialog extends GetView {
                                           //   ''
                                           //   )
                                           ),
-                                      DataCell(Text(controller
-                                              .selectedItem
-                                              ?.checklist_observation?[index]
-                                              .linked_job_id
-                                              .toString() ??
-                                          '')),
+                                      DataCell(
+                                        Obx(() {
+                                          return _rowItem(
+                                              controller
+                                                  .selectedItem
+                                                  ?.checklist_observation?[
+                                                      index]
+                                                  .linked_job_id
+                                                  .value, onCheck: (val) {
+                                            controller
+                                                .selectedItem
+                                                ?.checklist_observation?[index]
+                                                .linked_job_id
+                                                .value = val == true ? 1 : 0;
+                                          });
+                                        }),
+                                      ),
                                     ]),
                                   ),
                                 ),

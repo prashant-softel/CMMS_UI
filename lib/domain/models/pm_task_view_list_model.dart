@@ -1,6 +1,7 @@
 import 'dart:convert';
 
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
 PmtaskViewModel pmtaskViewModelFromJson(String str) =>
     PmtaskViewModel.fromJson(json.decode(str));
@@ -155,7 +156,7 @@ class ChecklistObservation {
   int? type_bool;
   dynamic type_text;
   String? observation;
-  int? linked_job_id;
+  RxInt linked_job_id = RxInt(0);
   int? is_custom_check_point;
   int? is_file_required;
   TextEditingController? observation_value_controller;
@@ -167,14 +168,16 @@ class ChecklistObservation {
       this.failure_waightage,
       this.is_custom_check_point,
       this.is_file_required,
-      this.linked_job_id,
+      required int linked_job_id,
       this.observation,
       this.requirement,
       this.type_bool,
       this.type_range,
       this.type_text,
       this.files,
-      this.observation_value_controller});
+      this.observation_value_controller}) {
+    this.linked_job_id.value = linked_job_id;
+  }
 
   factory ChecklistObservation.fromJson(Map<String, dynamic> json) =>
       ChecklistObservation(

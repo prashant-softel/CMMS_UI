@@ -3399,6 +3399,19 @@ class DataRepository extends DomainRepository {
         updatePMTaskExecutionJsonString: updatePMTaskExecutionJsonString,
         isLoading: isLoading ?? false,
       );
+  Future<ResponseModel> cloneSchedule(
+          {required String auth,
+          required int from_schedule_id,
+          required int to_schedule_id,
+          required int taskId,
+          bool? isloading}) async =>
+      await connectHelper.cloneSchedule(
+        auth: auth,
+        from_schedule_id: from_schedule_id,
+        to_schedule_id: to_schedule_id,
+        taskId: taskId,
+        isloading: isloading ?? false,
+      );
   Future<ResponseModel> rejectPmTaskExecution({
     required String auth,
     rejecttoJsonString,

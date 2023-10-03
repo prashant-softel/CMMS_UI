@@ -114,6 +114,8 @@ class PreventiveMaintenanceExecutionController extends GetxController {
       //   }
     }
     selectedasset.value = scheduleCheckPoints![0]?.name ?? "";
+    update(["getPmtaskViewList"]);
+
     // print({"checklistObservations", checklistObservations});
   }
 
@@ -126,7 +128,7 @@ class PreventiveMaintenanceExecutionController extends GetxController {
       addObservations.add(AddObservations(
           execution_id: e.execution_id ?? 0,
           observation: e.observation_value_controller?.text ?? "",
-          job_create: e.linked_job_id,
+          job_create: e.linked_job_id.value,
           pm_files: []));
     });
     List<Schedules> schedule = <Schedules>[];
@@ -223,7 +225,11 @@ class PreventiveMaintenanceExecutionController extends GetxController {
                       height: 35,
                       child: CustomElevatedButton(
                         text: "Clone",
-                        onPressed: () {},
+                        onPressed: () {
+                          cloneSchedule(
+                              from_schedule_id: selectedItem?.schedule_id ?? 0,
+                              to_schedule_id: selectedAssetsId);
+                        },
                         backgroundColor: ColorValues.appDarkBlueColor,
                         textColor: ColorValues.whiteColor,
                       ),
@@ -239,22 +245,6 @@ class PreventiveMaintenanceExecutionController extends GetxController {
     ));
   }
 
-  closePmExecution() async {
-    // String _comment = commentCtrlr.text.trim();
-
-    // CommentModel commentCalibrationModel =
-    //     CommentModel(id: int.tryParse(scheduleId.value), comment: _comment);
-
-    // var approveCalibrationtoJsonString = commentCalibrationModel.toJson();
-    // print({"rejectCalibrationJsonString", approveCalibrationtoJsonString});
-    // final response = await calibrationListPresenter.approveCloseCalibration(
-    //   approveCalibrationtoJsonString: approveCalibrationtoJsonString,
-    //   isLoading: true,
-    // );
-    // if (response == true) {
-    //   getCalibrationList(facilityId, true);
-    // }
-  }
   closePmTaskExecution() async {
     {
       String _comment = commentCtrlr.text.trim();
@@ -300,21 +290,34 @@ class PreventiveMaintenanceExecutionController extends GetxController {
   void onValueChanged(dynamic list, dynamic value) {
     print({"valuevaluevaluevalue": value});
     switch (list.runtimeType) {
-      case RxList<ScheduleCheckPoint>:
+      case RxList<ScheduleCheckPoint?>:
         {
           int assetsIndex =
               scheduleCheckPoints!.indexWhere((x) => x?.name == value);
           selectedAssetsId =
               scheduleCheckPoints![assetsIndex]?.schedule_id ?? 0;
-          // if (selectedAssetsId > 0) {
-          //   isAssetsSelected.value = true;
-          // }
+          if (selectedAssetsId > 0) {
+            isAssetsSelected.value = true;
+          }
           selectedasset.value = scheduleCheckPoints![assetsIndex]?.name ?? "";
-          print({"bjxbjcvxj", selectedasset.value});
         }
         break;
     }
+  }
 
-    // print({"selectedfrequency": selectedfrequency});
+  void cloneSchedule(
+      {required int from_schedule_id, required int to_schedule_id}) async {
+    final response =
+        await preventiveMaintenanceExecutionPresenter.cloneSchedule(
+            from_schedule_id: from_schedule_id,
+            to_schedule_id: to_schedule_id,
+            taskId: scheduleId.value,
+            isloading: true);
+    if (response == true) {
+      final _flutterSecureStorage = const FlutterSecureStorage();
+
+      _flutterSecureStorage.delete(key: "pmTaskId");
+      Get.offAllNamed(Routes.pmTask);
+    }
   }
 }
