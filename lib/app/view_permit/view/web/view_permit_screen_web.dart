@@ -2163,113 +2163,86 @@ class ViewPermitWebScreen extends GetView<ViewPermitController> {
                                                           _buildDateTimeField_web(context),
                                                         ],
                                                       ),
-                                                      Spacer(),
-                                                      Column(crossAxisAlignment: CrossAxisAlignment.end, children: [
-                                                        Text(
-                                                          'TBT Training Attended By',
-                                                          style: Styles.blackBold17,
+                                                      // Spacer(),
+                                                      // Column(crossAxisAlignment: CrossAxisAlignment.end, children: [
+                                                      //   Text(
+                                                      //     'TBT Training Attended By',
+                                                      //     style: Styles.blackBold17,
+                                                      //   ),
+                                                      //   Dimens.boxHeight10,
+
+                                                      //   // Column(
+                                                      //   //   mainAxisAlignment: MainAxisAlignment.start,
+                                                      //   //         crossAxisAlignment: CrossAxisAlignment.start,
+                                                      //   //   // alignment: WrapAlignment.start,
+                                                      //   //   // spacing: 100,
+                                                      //   //   children: []..addAll(controller.employeeList.map((element) => Column(
+                                                      //   //         // mainAxisSize: MainAxisSize.min,
+                                                      //   //         mainAxisAlignment: MainAxisAlignment.start,
+                                                      //   //         crossAxisAlignment: CrossAxisAlignment.start,
+                                                      //   //         children: [
+                                                      //   //           Text("${element.name}")],
+                                                      //   //       ))),
+                                                      //   // ),
+                                                      // ]),
+                                                    ],
+                                                  ),
+                                                ),
+                                                Dimens.boxHeight30,
+                                                Container(
+                                                  margin: Dimens.edgeInsets20,
+                                                  height: ((controller.listEmployee?.length ?? 0) * 40) + 130,
+                                                  decoration: BoxDecoration(
+                                                    border: Border.all(
+                                                      color: ColorValues.lightGreyColorWithOpacity35,
+                                                      width: 1,
+                                                    ),
+                                                    boxShadow: [
+                                                      BoxShadow(
+                                                        color: ColorValues.appBlueBackgroundColor,
+                                                        spreadRadius: 2,
+                                                        blurRadius: 5,
+                                                        offset: Offset(0, 2),
+                                                      ),
+                                                    ],
+                                                  ),
+                                                  child: Column(
+                                                    children: [
+                                                      Padding(
+                                                        padding: const EdgeInsets.all(10.0),
+                                                        child: Row(
+                                                          children: [
+                                                            Text(
+                                                              'TBT Training Attended By',
+                                                              style: Styles.blue700,
+                                                            ),
+                                                          ],
                                                         ),
-                                                        Dimens.boxHeight10,
-
-                                                        Column(
-                                                          mainAxisAlignment: MainAxisAlignment.start,
-                                                                crossAxisAlignment: CrossAxisAlignment.start,
-                                                          // alignment: WrapAlignment.start,
-                                                          // spacing: 100,
-                                                          children: []..addAll(controller.employeeList.map((element) => Column(
-                                                                // mainAxisSize: MainAxisSize.min,
-                                                                mainAxisAlignment: MainAxisAlignment.start,
-                                                                crossAxisAlignment: CrossAxisAlignment.start,
-                                                                children: [
-                                                                  Text("${element.name}")],
-                                                              ))),
+                                                      ),
+                                                      Expanded(
+                                                        child: DataTable2(
+                                                          border: TableBorder.all(color: Color.fromARGB(255, 206, 229, 234)),
+                                                          columns: [
+                                                            DataColumn(
+                                                                label: Text(
+                                                              "Employee Name",
+                                                              style: TextStyle(fontSize: 15, fontWeight: FontWeight.bold),
+                                                            )),
+                                                            DataColumn(
+                                                                label: Text(
+                                                              "Responsibility",
+                                                              style: TextStyle(fontSize: 15, fontWeight: FontWeight.bold),
+                                                            )),
+                                                          ],
+                                                          rows: List<DataRow>.generate(
+                                                            controller.listEmployee?.length ?? 0,
+                                                            (index) => DataRow(cells: [
+                                                              DataCell(Text(controller.listEmployee?[index]?.empName.toString() ?? '')),
+                                                              DataCell(Text(controller.listEmployee?[index]?.resp.toString() ?? '')),
+                                                            ]),
+                                                          ),
                                                         ),
-
-                                                        // Row(
-                                                        //   // mainAxisAlignment: MainAxisAlignment.center,
-                                                        //   children: [
-                                                        //     Container(
-                                                        //       height: 45,
-                                                        //       width: 200,
-                                                        //       decoration: BoxDecoration(
-                                                        //         border: Border.all(
-                                                        //           color: Color.fromARGB(255, 227, 224, 224),
-                                                        //           width: 1,
-                                                        //         ),
-                                                        //         boxShadow: [
-                                                        //           BoxShadow(
-                                                        //             color: Color.fromARGB(255, 236, 234, 234).withOpacity(0.5),
-                                                        //             spreadRadius: 2,
-                                                        //             blurRadius: 5,
-                                                        //             offset: Offset(0, 2),
-                                                        //           ),
-                                                        //         ],
-                                                        //       ),
-                                                        //       child: Padding(
-                                                        //         padding: const EdgeInsets.all(8.0),
-                                                        //         child: Align(
-                                                        //           alignment: Alignment.topLeft,
-                                                        //           child: Text(
-                                                        //             controller.fileName.value == ""
-                                                        //                 ? 'Upload Photo'
-                                                        //                 : controller.fileName.value,
-                                                        //             maxLines: 3,
-                                                        //             textAlign: TextAlign.center,
-                                                        //             style: Styles.greyLight14,
-                                                        //           ),
-                                                        //         ),
-                                                        //       ),
-                                                        //     ),
-                                                        //     Dimens.boxWidth5,
-                                                        //     Container(
-                                                        //       height: 45,
-                                                        //       child: CustomElevatedButton(
-                                                        //         backgroundColor: ColorValues.appDarkBlueColor,
-                                                        //         text: "Browse",
-                                                        //         onPressed: () async {
-                                                        //           final result = await FilePicker.platform.pickFiles();
-                                                        //           if (result != null) {
-                                                        //             // for (var file in result.files) {
-                                                        //             controller.fileName.value = result.files.single.name;
-                                                        //             controller.fileBytes = result.files.single.bytes;
-                                                        //             //controller.filePath.value = file.;
-                                                        //             //  print({"filepathes", fileBytes});
-                                                        //             // }
-                                                        //           }
-                                                        //         },
-                                                        //       ),
-                                                        //     ),
-                                                        //     // Container(
-                                                        //     //   height: 45,
-                                                        //     //   child: CustomElevatedButton(
-                                                        //     //     backgroundColor: ColorValues.greenColor,
-                                                        //     //     text: 'Upload',
-                                                        //     //     onPressed: () {
-                                                        //     //       if (controller.fileName.value != "") {
-                                                        //     //         controller
-                                                        //     //             .browseFiles(
-                                                        //     //           fileBytes: controller.fileBytes,
-                                                        //     //         )
-                                                        //     //             .then((value) {
-                                                        //     //           controller.isSuccessDialog();
-
-                                                        //     //           // Fluttertoast.showToast(
-                                                        //     //           //     msg: "file upload  Successfully",
-                                                        //     //           //     fontSize: 16.0);
-                                                        //     //         });
-                                                        //     //       } else {
-                                                        //     //         Fluttertoast.showToast(
-                                                        //     //             msg: "Please Select file...", fontSize: 16.0);
-                                                        //     //       }
-
-                                                        //     //       //  controller.savePmMapping();
-                                                        //     //     },
-                                                        //     //   ),
-                                                        //     // ),
-
-                                                        //   ],
-                                                        // ),
-                                                      ]),
+                                                      ),
                                                     ],
                                                   ),
                                                 ),
@@ -3753,7 +3726,6 @@ class ViewPermitWebScreen extends GetView<ViewPermitController> {
                 pickDateTime_web(context);
               },
               controller: controller.startDateTimeCtrlr,
-              
               autofocus: false,
               decoration: InputDecoration(
                 fillColor: ColorValues.whiteColor,
