@@ -15,7 +15,7 @@ import '../theme/styles.dart';
 
 class PermitRejectDialog extends GetView {
   String? permitRejectDialog;
-  String? permitId;
+  int? permitId;
   String? ptwStatus;
   int? jobId;
 

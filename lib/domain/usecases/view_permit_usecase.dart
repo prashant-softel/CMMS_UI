@@ -122,21 +122,36 @@ class ViewPermitUsecase {
         isLoading,
       );
 
-  Future<void> permitRejectButton({
-    String? comment,
-    String? id,
+  // Future<void> permitRejectButton({
+  //   String? comment,
+  //   String? id,
+  //   String? ptwStatus,
+  //   int? jobId,
+  //   bool? isLoading,
+  // }) async {
+  //   await repository.permitRejectButton(
+  //     comment,
+  //     id,
+  //     ptwStatus,
+  //     jobId,
+  //     isLoading,
+  //   );
+  // }
+
+   Future<Map<String, dynamic>> permitRejectButton({
+    int? id,
     String? ptwStatus,
     int? jobId,
+    rejectExtendPermitJsonString,
     bool? isLoading,
-  }) async {
-    await repository.permitRejectButton(
-      comment,
-      id,
-      ptwStatus,
-      jobId,
-      isLoading,
-    );
-  }
+  }) async =>
+      await repository.permitRejectButton(
+        rejectExtendPermitJsonString,
+        id,
+        ptwStatus,
+        jobId,
+        isLoading,
+      );
 
   Future<void> permitCancelByApproverButton({
     String? comment,
