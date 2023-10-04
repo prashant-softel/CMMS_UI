@@ -2,7 +2,6 @@ import 'dart:async';
 
 import 'package:cmms/app/home/home_controller.dart';
 import 'package:cmms/app/module_cleaning_list_plan/module_cleaning_list_plan_presenter.dart';
-import 'package:cmms/domain/models/facility_model.dart';
 import 'package:cmms/domain/models/module_cleaning_list_plan_model.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -14,94 +13,89 @@ class ModuleCleaningListPlanController extends GetxController {
   );
   ModuleCleaningListPlanPresenter moduleCleaningListPlanPresenter;
   final HomeController homecontroller = Get.find();
-
-  PaginationController paginationController = PaginationController(
-    rowCount: 0,
-    rowsPerPage: 10,
-  );
   RxList<ModuleCleaningListPlanModel> moduleCleaningListPlan =
       <ModuleCleaningListPlanModel>[].obs;
-  // var moduleCleaningList = <ModuleCleaningListPlanModel>[];
+  RxList<ModuleCleaningListPlanModel> filteredData =
+      <ModuleCleaningListPlanModel>[].obs;
+  // Rx<int> Plan Id = 0.obs;
+  Rx<int> PlanId = 0.obs;
+  RxString planIdFilterText = ''.obs;
+  RxString planTitleFilterText = ''.obs;
+  RxString noOfDaysFilterText = ''.obs;
+  RxString createdByFilterText = ''.obs;
+  RxString frequencyFilterText = ''.obs;
+  RxString statusFilterText = ''.obs;
 
-  RxList<String> moduleCleaningListPlanTableColumns = <String>[].obs;
-  RxList<FacilityModel?> facilityList = <FacilityModel>[].obs;
-  Rx<String> selectedBlock = ''.obs;
-  ModuleCleaningListPlanModel? moduleCleaningListPlanModel;
-  // RxString planId = ''.obs;
-  // RxString title = ''.obs;
-  // RxString noOfCleaningDays = ''.obs;
-  // RxString createdBy = ''.obs;
-  // RxString frequency = ''.obs;
-  // Rx<int> planIdnew = 0.obs;
-
+  Rx<DateTime> fromDate = DateTime.now().subtract(Duration(days: 7)).obs;
+  Rx<DateTime> toDate = DateTime.now().obs;
   final columnVisibility = ValueNotifier<Map<String, bool>>({
     'Plan Id': true,
     'Plan Title': true,
     'No of Days': true,
     'Created By': true,
     'frequency': true,
-    // 'Action': true,
+
+    // "search": true,
   });
-  // final columnSearchText = ValueNotifier<Map<String, String>>({
-  //   'planId': '',
-  //   'title': '',
-  //   'noOfCleaningDays': '',
-  //   'createdBy': '',
-  //   'frequency': '',
-  // });
-  List<ModuleCleaningListPlanModel> get filteredData {
-    final visibilityMap = columnVisibility.value;
-    //  final searchTextMap = columnSearchText.value;
-
-    return moduleCleaningListPlan.value.where((row) {
-      return visibilityMap.entries.every((entry) {
-        //  final columnName = entry.key;
-        final columnVisible = entry.value;
-        // final searchValue = searchTextMap[columnName]?.toLowerCase() ?? '';
-        if (!columnVisible) {
-          return true; // Skip the check if the column is hidden or search text is empty
-        }
-        //   final cellValue = row.columnByName(columnName)?.toLowerCase() ?? '';
-        return true;
-        // cellValue.contains(searchValue);
-      });
-    }).toList();
-  }
-
+  final Map<String, double> columnwidth = {
+    'Plan Id': 153,
+    'Plan Title': 320,
+    'No of Days': 220,
+    'Created By': 200,
+    'frequency': 250,
+  };
+  Map<String, RxString> filterText = {};
   void setColumnVisibility(String columnName, bool isVisible) {
     final newVisibility = Map<String, bool>.from(columnVisibility.value)
       ..[columnName] = isVisible;
     columnVisibility.value = newVisibility;
+    print({"updated columnVisibility": columnVisibility});
   }
 
+  // String get formattedFromdate =>
+  //     DateFormat('dd/MM/yyyy').format(fromDate.value);
+  // String get formattedTodate => DateFormat('dd/MM/yyyy').format(toDate.value);
+  // String get formattedTodate1 => DateFormat('yyyy-MM-dd').format(toDate.value);
+  // String get formattedFromdate1 =>
+  //     DateFormat('yyyy-MM-dd').format(fromDate.value);
+
+  ModuleCleaningListPlanModel? moduleCleaningListModel;
+  RxList<String> moduleCleaningListTableColumns = <String>[].obs;
+  bool openFromDateToStartDatePicker = false;
+
+  PaginationController paginationController = PaginationController(
+    rowCount: 0,
+    rowsPerPage: 10,
+  );
   StreamSubscription<int>? facilityIdStreamSubscription;
   int facilityId = 0;
+
   @override
   void onInit() async {
+    this.filterText = {
+      'Plan Id': planIdFilterText,
+      'Plan Title': planTitleFilterText,
+      'No of Days': noOfDaysFilterText,
+      'Created By': createdByFilterText,
+      'frequency': frequencyFilterText,
+      "Status": statusFilterText,
+    };
     facilityIdStreamSubscription = homecontroller.facilityId$.listen((event) {
       facilityId = event;
-      getModuleCleaningListPlan(facilityId, true);
-      super.onInit();
+      Future.delayed(Duration(seconds: 2), () async {
+        getModuleCleaningListPlan(facilityId, true);
+      });
     });
-  }
-
-  Future<void> getFacilityList({bool? isLoading}) async {
-    facilityList.value = <FacilityModel>[];
-    List<FacilityModel?>? _facilityList = <FacilityModel?>[];
-
-    _facilityList = await moduleCleaningListPlanPresenter.getFacilityList();
-    if (_facilityList != null && _facilityList.isNotEmpty) {
-      facilityList.value = _facilityList;
-    }
-    if (facilityList.isNotEmpty) {
-      selectedBlock.value = facilityList[0]?.name ?? '';
-    }
+    super.onInit();
   }
 
   Future<void> getModuleCleaningListPlan(int facilityId, bool isLoading) async {
     moduleCleaningListPlan.value = <ModuleCleaningListPlanModel>[];
-    final _moduleCleaningListPlan = await moduleCleaningListPlanPresenter
-        .getModuleCleaningListPlan(isLoading: true, facility_id: facilityId);
+    final _moduleCleaningListPlan =
+        await moduleCleaningListPlanPresenter.getModuleCleaningListPlan(
+      isLoading: true,
+      facility_id: facilityId,
+    );
     if (_moduleCleaningListPlan != null) {
       moduleCleaningListPlan.value = _moduleCleaningListPlan;
       paginationController = PaginationController(
@@ -109,28 +103,34 @@ class ModuleCleaningListPlanController extends GetxController {
         rowsPerPage: 10,
       );
 
-      update(['module_plan_list']);
+      if (moduleCleaningListPlan != null &&
+          moduleCleaningListPlan!.isNotEmpty) {
+        moduleCleaningListModel = moduleCleaningListPlan![0];
+        var newPermitListJson = moduleCleaningListModel?.toJson();
+        moduleCleaningListTableColumns.value = <String>[];
+        for (var key in newPermitListJson?.keys.toList() ?? []) {
+          moduleCleaningListTableColumns.add(key);
+        }
+      }
     }
   }
-}
 
-extension DataRowModelExtensions on ModuleCleaningListPlanModel {
-  String? columnByName(String name) {
-    switch (name) {
-      case 'Plan Id':
-        return planId.toString();
-      case 'Plan Title':
-        return title;
-      case 'No of Days':
-        return noOfCleaningDays.toString();
-      case 'Created By':
-        return createdBy;
-      case 'frequency':
-        return frequency;
-      case 'Plan Id':
-        return status_short.toString();
-      default:
-        return null;
+  void onValueChanged(dynamic list, dynamic value) {
+    switch (list.runtimeType) {
+      
     }
+  }
+
+  void search(String keyword) {
+    if (keyword.isEmpty) {
+      moduleCleaningListPlan.value = filteredData;
+      return;
+    }
+
+    moduleCleaningListPlan.value = filteredData
+        .where((item) =>
+            item.description!.toLowerCase().contains(keyword.toLowerCase()))
+        .toList();
+    update(['stock_Mangement_Date']);
   }
 }
