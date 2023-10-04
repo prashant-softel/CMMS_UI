@@ -2,6 +2,7 @@ import 'package:cmms/domain/domain.dart';
 import 'package:cmms/domain/models/employee_list_model.dart';
 import 'package:cmms/domain/models/employee_list_model2.dart';
 import 'package:cmms/domain/models/employee_model.dart';
+import 'package:cmms/domain/models/history_model.dart';
 import 'package:cmms/domain/models/inventory_category_model.dart';
 import 'package:cmms/domain/models/inventory_detail_model.dart';
 import 'package:cmms/domain/models/job_type_list_model.dart';
@@ -185,6 +186,17 @@ class NewPermitUsecase {
   }) async =>
       await repository.createNewPermit(
         newPermit,
+        isLoading,
+      );
+
+   Future<List<HistoryModel>?> getPermitHistory({
+    moduleType,
+    permitId,
+    bool? isLoading,
+  }) async =>
+      await repository.getPermitHistory(
+        moduleType,
+        permitId,
         isLoading,
       );
 
