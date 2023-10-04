@@ -353,4 +353,13 @@ class ViewPermitUsecase {
         newPermit,
         isLoading,
       );
+
+  Future<List<EmployeeListModel>> getEmployeeList(
+      {required bool isLoading, required int? facility_id}) async {
+    return repository.getEmployeeList(
+      isLoading: isLoading,
+      facility_id: facility_id,
+    );
+  }
+
 }

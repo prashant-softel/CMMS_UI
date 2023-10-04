@@ -9,6 +9,7 @@ import 'package:cmms/app/view_permit/view_permit_controller.dart';
 import 'package:cmms/app/widgets/custom_elevated_button.dart';
 import 'package:cmms/app/widgets/custom_multiselect_dialog_field.dart';
 import 'package:cmms/app/widgets/custom_richtext.dart';
+import 'package:cmms/app/widgets/dropdown_web.dart';
 import 'package:cmms/app/widgets/file_upload_details_widget_web.dart';
 import 'package:cmms/app/widgets/file_upload_with_dropzone_widget.dart';
 import 'package:cmms/app/widgets/history_table_widget_web.dart';
@@ -2128,9 +2129,21 @@ class ViewPermitWebScreen extends GetView<ViewPermitController> {
                                                             'Conducted At Job-Site By:',
                                                             style: Styles.blackBold17,
                                                           ),
-                                                          Text(
-                                                            'Ramesh Singh',
-                                                            style: Styles.black17,
+                                                          Dimens.boxHeight10,
+                                                          // Text(
+                                                          //   'Ramesh Singh',
+                                                          //   style: Styles.black17,
+                                                          // ),
+                                                          SizedBox(
+                                                            width: MediaQuery.of(context).size.width / 7,
+                                                            child: Obx(
+                                                              () => DropdownWebWidget(
+                                                                dropdownList: controller.employeeList,
+                                                                isValueSelected: controller.isemployeeListSelected.value,
+                                                                selectedValue: controller.selectedEmployeeList.value,
+                                                                onValueChanged: controller.onValueChanged,
+                                                              ),
+                                                            ),
                                                           ),
                                                         ],
                                                       ),
@@ -2142,110 +2155,121 @@ class ViewPermitWebScreen extends GetView<ViewPermitController> {
                                                             'Date & Time',
                                                             style: Styles.blackBold17,
                                                           ),
-                                                          Text(
-                                                            '17:06:2022 09:30:00',
-                                                            style: Styles.black17,
-                                                          ),
+                                                          Dimens.boxHeight10,
+                                                          // Text(
+                                                          //   '17:06:2022 09:30:00',
+                                                          //   style: Styles.black17,
+                                                          // ),
+                                                          _buildDateTimeField_web(context),
                                                         ],
                                                       ),
                                                       Spacer(),
-                                                      Column(
-                                                        crossAxisAlignment: CrossAxisAlignment.end,
-                                                        children: [
-                                                          Text(
-                                                            'TBT Training Attended By',
-                                                            style: Styles.blackBold17,
-                                                          ),
-                                                          // Row(
-                                                          //   // mainAxisAlignment: MainAxisAlignment.center,
-                                                          //   children: [
-                                                          //     Container(
-                                                          //       height: 45,
-                                                          //       width: 200,
-                                                          //       decoration: BoxDecoration(
-                                                          //         border: Border.all(
-                                                          //           color: Color.fromARGB(255, 227, 224, 224),
-                                                          //           width: 1,
-                                                          //         ),
-                                                          //         boxShadow: [
-                                                          //           BoxShadow(
-                                                          //             color: Color.fromARGB(255, 236, 234, 234).withOpacity(0.5),
-                                                          //             spreadRadius: 2,
-                                                          //             blurRadius: 5,
-                                                          //             offset: Offset(0, 2),
-                                                          //           ),
-                                                          //         ],
-                                                          //       ),
-                                                          //       child: Padding(
-                                                          //         padding: const EdgeInsets.all(8.0),
-                                                          //         child: Align(
-                                                          //           alignment: Alignment.topLeft,
-                                                          //           child: Text(
-                                                          //             controller.fileName.value == ""
-                                                          //                 ? 'Upload Photo'
-                                                          //                 : controller.fileName.value,
-                                                          //             maxLines: 3,
-                                                          //             textAlign: TextAlign.center,
-                                                          //             style: Styles.greyLight14,
-                                                          //           ),
-                                                          //         ),
-                                                          //       ),
-                                                          //     ),
-                                                          //     Dimens.boxWidth5,
-                                                          //     Container(
-                                                          //       height: 45,
-                                                          //       child: CustomElevatedButton(
-                                                          //         backgroundColor: ColorValues.appDarkBlueColor,
-                                                          //         text: "Browse",
-                                                          //         onPressed: () async {
-                                                          //           final result = await FilePicker.platform.pickFiles();
-                                                          //           if (result != null) {
-                                                          //             // for (var file in result.files) {
-                                                          //             controller.fileName.value = result.files.single.name;
-                                                          //             controller.fileBytes = result.files.single.bytes;
-                                                          //             //controller.filePath.value = file.;
-                                                          //             //  print({"filepathes", fileBytes});
-                                                          //             // }
-                                                          //           }
-                                                          //         },
-                                                          //       ),
-                                                          //     ),
-                                                          //     // Container(
-                                                          //     //   height: 45,
-                                                          //     //   child: CustomElevatedButton(
-                                                          //     //     backgroundColor: ColorValues.greenColor,
-                                                          //     //     text: 'Upload',
-                                                          //     //     onPressed: () {
-                                                          //     //       if (controller.fileName.value != "") {
-                                                          //     //         controller
-                                                          //     //             .browseFiles(
-                                                          //     //           fileBytes: controller.fileBytes,
-                                                          //     //         )
-                                                          //     //             .then((value) {
-                                                          //     //           controller.isSuccessDialog();
+                                                      Column(crossAxisAlignment: CrossAxisAlignment.end, children: [
+                                                        Text(
+                                                          'TBT Training Attended By',
+                                                          style: Styles.blackBold17,
+                                                        ),
+                                                        Dimens.boxHeight10,
 
-                                                          //     //           // Fluttertoast.showToast(
-                                                          //     //           //     msg: "file upload  Successfully",
-                                                          //     //           //     fontSize: 16.0);
-                                                          //     //         });
-                                                          //     //       } else {
-                                                          //     //         Fluttertoast.showToast(
-                                                          //     //             msg: "Please Select file...", fontSize: 16.0);
-                                                          //     //       }
+                                                        Column(
+                                                          // alignment: WrapAlignment.start,
+                                                          // spacing: 100,
+                                                          children: []..addAll(controller.employeeList.map((element) => Column(
+                                                                // mainAxisSize: MainAxisSize.min,
+                                                                mainAxisAlignment: MainAxisAlignment.start,
+                                                                crossAxisAlignment: CrossAxisAlignment.start,
+                                                                children: [Text("${element.name}")],
+                                                              ))),
+                                                        ),
 
-                                                          //     //       //  controller.savePmMapping();
-                                                          //     //     },
-                                                          //     //   ),
-                                                          //     // ),
+                                                        // Row(
+                                                        //   // mainAxisAlignment: MainAxisAlignment.center,
+                                                        //   children: [
+                                                        //     Container(
+                                                        //       height: 45,
+                                                        //       width: 200,
+                                                        //       decoration: BoxDecoration(
+                                                        //         border: Border.all(
+                                                        //           color: Color.fromARGB(255, 227, 224, 224),
+                                                        //           width: 1,
+                                                        //         ),
+                                                        //         boxShadow: [
+                                                        //           BoxShadow(
+                                                        //             color: Color.fromARGB(255, 236, 234, 234).withOpacity(0.5),
+                                                        //             spreadRadius: 2,
+                                                        //             blurRadius: 5,
+                                                        //             offset: Offset(0, 2),
+                                                        //           ),
+                                                        //         ],
+                                                        //       ),
+                                                        //       child: Padding(
+                                                        //         padding: const EdgeInsets.all(8.0),
+                                                        //         child: Align(
+                                                        //           alignment: Alignment.topLeft,
+                                                        //           child: Text(
+                                                        //             controller.fileName.value == ""
+                                                        //                 ? 'Upload Photo'
+                                                        //                 : controller.fileName.value,
+                                                        //             maxLines: 3,
+                                                        //             textAlign: TextAlign.center,
+                                                        //             style: Styles.greyLight14,
+                                                        //           ),
+                                                        //         ),
+                                                        //       ),
+                                                        //     ),
+                                                        //     Dimens.boxWidth5,
+                                                        //     Container(
+                                                        //       height: 45,
+                                                        //       child: CustomElevatedButton(
+                                                        //         backgroundColor: ColorValues.appDarkBlueColor,
+                                                        //         text: "Browse",
+                                                        //         onPressed: () async {
+                                                        //           final result = await FilePicker.platform.pickFiles();
+                                                        //           if (result != null) {
+                                                        //             // for (var file in result.files) {
+                                                        //             controller.fileName.value = result.files.single.name;
+                                                        //             controller.fileBytes = result.files.single.bytes;
+                                                        //             //controller.filePath.value = file.;
+                                                        //             //  print({"filepathes", fileBytes});
+                                                        //             // }
+                                                        //           }
+                                                        //         },
+                                                        //       ),
+                                                        //     ),
+                                                        //     // Container(
+                                                        //     //   height: 45,
+                                                        //     //   child: CustomElevatedButton(
+                                                        //     //     backgroundColor: ColorValues.greenColor,
+                                                        //     //     text: 'Upload',
+                                                        //     //     onPressed: () {
+                                                        //     //       if (controller.fileName.value != "") {
+                                                        //     //         controller
+                                                        //     //             .browseFiles(
+                                                        //     //           fileBytes: controller.fileBytes,
+                                                        //     //         )
+                                                        //     //             .then((value) {
+                                                        //     //           controller.isSuccessDialog();
 
-                                                          //   ],
-                                                          // ),
-                                                        ],
-                                                      ),
+                                                        //     //           // Fluttertoast.showToast(
+                                                        //     //           //     msg: "file upload  Successfully",
+                                                        //     //           //     fontSize: 16.0);
+                                                        //     //         });
+                                                        //     //       } else {
+                                                        //     //         Fluttertoast.showToast(
+                                                        //     //             msg: "Please Select file...", fontSize: 16.0);
+                                                        //     //       }
+
+                                                        //     //       //  controller.savePmMapping();
+                                                        //     //     },
+                                                        //     //   ),
+                                                        //     // ),
+
+                                                        //   ],
+                                                        // ),
+                                                      ]),
                                                     ],
                                                   ),
                                                 ),
-                                              
                                               ],
                                             ),
                                           ],
@@ -2254,6 +2278,7 @@ class ViewPermitWebScreen extends GetView<ViewPermitController> {
                                     ),
                                   ),
                                 ),
+
                                 //   SizedBox(height: 10),
 
                                 ////Extend Conditions List
@@ -3687,9 +3712,8 @@ class ViewPermitWebScreen extends GetView<ViewPermitController> {
 
   ///Below All For WEB
 
-  Widget _buildStartValidTillDateField_web(
+  Widget _buildDateTimeField_web(
     BuildContext context,
-    int position,
   ) {
     return Column(//
         children: [
@@ -3719,12 +3743,13 @@ class ViewPermitWebScreen extends GetView<ViewPermitController> {
             borderRadius: BorderRadius.circular(5),
           ),
           child: SizedBox(
-            width: MediaQuery.of(context).size.width / 3.7,
+            width: MediaQuery.of(context).size.width / 7,
+            height: 45,
             child: TextField(
               onTap: () {
-                position == 0 ? pickDateTime_web(context, 0) : pickDateTime_web(context, 1);
+                pickDateTime_web(context);
               },
-              controller: position == 0 ? controller.startDateTimeCtrlr : controller.validTillTimeCtrlr,
+              controller: controller.startDateTimeCtrlr,
               autofocus: false,
               decoration: InputDecoration(
                 fillColor: ColorValues.whiteColor,
@@ -3744,38 +3769,38 @@ class ViewPermitWebScreen extends GetView<ViewPermitController> {
   }
 
 //Start Date and valid Till
-  Future pickDateTime_web(BuildContext context, int position) async {
-    var dateTime = position == 0 ? controller.selectedBreakdownTime.value : controller.selectedValidTillTime.value;
-    final date = await pickDate_web(context, 0);
+  Future pickDateTime_web(BuildContext context) async {
+    var dateTime = controller.selectedBreakdownTime.value;
+    final date = await pickDate_web(context);
     if (date == null) {
       return;
     }
 
-    // final time = await pickTime_web(context);
-    // if (time == null) {
-    //   return;
-    // }
+    final time = await pickTime_web(context);
+    if (time == null) {
+      return;
+    }
 
     dateTime = DateTime(
       date.year,
       date.month,
       date.day,
-      // time.hour,
-      // time.minute,
+      time.hour,
+      time.minute,
     );
-    position == 0 ? controller.selectedBreakdownTime.value : controller.selectedValidTillTime.value = dateTime;
-    position == 0 ? controller.startDateTimeCtrlr : controller.validTillTimeCtrlr
-      ..text = DateFormat('yyyy-MM-dd').format(dateTime)
+    controller.selectedBreakdownTime.value = dateTime;
+    controller.startDateTimeCtrlr
+      ..text = DateFormat('yyyy-MM-dd HH:mm').format(dateTime)
       ..selection = TextSelection.fromPosition(
         TextPosition(
-          offset: position == 0 ? controller.startDateTimeCtrlr.text.length : controller.validTillTimeCtrlr.text.length,
+          offset: controller.startDateTimeCtrlr.text.length,
           affinity: TextAffinity.upstream,
         ),
       );
   }
 
-  Future<DateTime?> pickDate_web(BuildContext context, int position) async {
-    DateTime? dateTime = position == 0 ? controller.selectedBreakdownTime.value : controller.selectedValidTillTime.value;
+  Future<DateTime?> pickDate_web(BuildContext context) async {
+    DateTime? dateTime = controller.selectedBreakdownTime.value;
     //final initialDate = DateTime.now();
     final newDate = await showDatePicker(
       context: context,
@@ -3787,6 +3812,26 @@ class ViewPermitWebScreen extends GetView<ViewPermitController> {
     if (newDate == null) return null;
 
     return newDate;
+  }
+
+  Future<TimeOfDay?> pickTime_web(BuildContext context) async {
+    DateTime dateTime = controller.selectedBreakdownTime.value;
+    //final initialTime = TimeOfDay(hour: 12, minute: 0);
+    final newTime = await showTimePicker(
+        context: context,
+        initialTime: TimeOfDay(hour: dateTime.hour, minute: dateTime.minute),
+        builder: (BuildContext context, Widget? child) {
+          return Theme(
+            data: ThemeData.light(),
+            child: child!,
+          );
+        });
+
+    if (newTime == null) {
+      return null;
+    }
+
+    return newTime;
   }
 
   Widget _buildTitleTextField_web(BuildContext context) {

@@ -1126,7 +1126,7 @@ class NewPermitController extends GetxController {
     }
   }
 
-  void createNewPermitForJob({int? jobId}) async {
+  void createNewPermitForJob({int? jobId,List<dynamic>? fileIds}) async {
     {
       checkForm();
       if (isFormInvalid.value) {
@@ -1198,6 +1198,7 @@ class NewPermitController extends GetxController {
         sop_type_id: selectedSOPId,
         issuer_id: selectedPermitIssuerTypeId,
         approver_id: selectedPermitApproverTypeId,
+        uploadfile_ids: fileIds,
         user_id: userId,
         latitude: 0,
         longitude: 0,
@@ -1225,7 +1226,7 @@ class NewPermitController extends GetxController {
     }
   }
 
-  void createNewPermitForPm({int? pmTaskId}) async {
+  void createNewPermitForPm({int? pmTaskId,List<dynamic>? fileIds}) async {
     {
       checkForm();
       if (isFormInvalid.value) {
@@ -1297,6 +1298,7 @@ class NewPermitController extends GetxController {
         sop_type_id: selectedSOPId,
         issuer_id: selectedPermitIssuerTypeId,
         approver_id: selectedPermitApproverTypeId,
+        uploadfile_ids: fileIds,
         user_id: userId,
         latitude: 0,
         longitude: 0,

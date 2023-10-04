@@ -3507,7 +3507,8 @@ class NewPermitScreen extends GetView<NewPermitController> {
                                                                               controller.isCheckedSOP.value ==
                                                                                   true
                                                                           ? controller.createNewPermitForJob(
-                                                                              jobId: controller.jobModel?.id)
+                                                                              jobId: controller.jobModel?.id,
+                                                                              fileIds: dropzoneController.fileIds)
                                                                           : Get.dialog<void>(checkboxAlertBox());
                                                                       // controller.linkToPermit(jobId: controller.jobModel?.id);
                                                                     },
@@ -3531,7 +3532,7 @@ class NewPermitScreen extends GetView<NewPermitController> {
                                                                                 () {
                                                                               // var jobId = controller.jobModel?.id ?? 0;
                                                                               // print('JobId'),
-                                                                              controller.isCheckedJSA.value == true && controller.isCheckedSOP.value == true ? controller.createNewPermitForPm(pmTaskId: controller.pmtaskViewModel?.id) : Get.dialog<void>(checkboxAlertBox());
+                                                                              controller.isCheckedJSA.value == true && controller.isCheckedSOP.value == true ? controller.createNewPermitForPm(pmTaskId: controller.pmtaskViewModel?.id, fileIds: dropzoneController.fileIds) : Get.dialog<void>(checkboxAlertBox());
                                                                               // controller.linkToPermit(jobId: controller.jobModel?.id);
                                                                             },
                                                                           )),
@@ -3546,11 +3547,11 @@ class NewPermitScreen extends GetView<NewPermitController> {
                                                                               backgroundColor: ColorValues.appGreenColor,
                                                                               text: "Submit For Approval",
                                                                               onPressed: () {
-                                                                                controller.isCheckedJSA.value == true && controller.isCheckedSOP.value == true ? controller.createNewPermit() : Get.dialog<void>(checkboxAlertBox());
+                                                                                controller.isCheckedJSA.value == true && controller.isCheckedSOP.value == true ? controller.createNewPermit(fileIds: dropzoneController.fileIds) : Get.dialog<void>(checkboxAlertBox());
 
-                                                                                () {
-                                                                                  controller.isCheckedJSA.value == true && controller.isCheckedSOP.value == true ? controller.createNewPermit(fileIds: dropzoneController.fileIds) : Get.dialog<void>(checkboxAlertBox());
-                                                                                };
+                                                                                // () {
+                                                                                //   controller.isCheckedJSA.value == true && controller.isCheckedSOP.value == true ? controller.createNewPermit(fileIds: dropzoneController.fileIds) : Get.dialog<void>(checkboxAlertBox());
+                                                                                // };
                                                                               })),
                                                                     )
                                                                   : Row(
