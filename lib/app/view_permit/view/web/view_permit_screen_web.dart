@@ -2013,7 +2013,7 @@ class ViewPermitWebScreen extends GetView<ViewPermitController> {
                                       crossAxisAlignment: CrossAxisAlignment.start,
                                       children: [
                                         Text(
-                                          "Tool Box Talk",
+                                          "Tool Box Talk (TBT) / PRE-JOB DISCUSSION",
                                           style: Styles.blue700,
                                         ),
                                         Dimens.boxHeight10,
