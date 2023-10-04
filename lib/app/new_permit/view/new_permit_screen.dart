@@ -2800,12 +2800,12 @@ class NewPermitScreen extends GetView<NewPermitController> {
                                                                       .width /
                                                                   1.2,
                                                               child: Center(
-                                                                child:
-                                                                    Column(
-                                                                    children: [
+                                                                child: Column(
+                                                                  children: [
                                                                     CustomAppBar(
                                                                       title:
-                                                                          'permit type checklist'.tr,
+                                                                          'permit type checklist'
+                                                                              .tr,
                                                                     ),
                                                                     Dimens
                                                                         .boxHeight10,
@@ -2814,7 +2814,8 @@ class NewPermitScreen extends GetView<NewPermitController> {
                                                                         ? Column(
                                                                             // alignment: WrapAlignment.start,
                                                                             // spacing: 100,
-                                                                            children: []..addAll(controller.safetyMeasureList.map((element) => Column(
+                                                                            children: []..addAll(controller.safetyMeasureList.map((element) =>
+                                                                                Column(
                                                                                   // mainAxisSize: MainAxisSize.min,
                                                                                   mainAxisAlignment: MainAxisAlignment.start,
                                                                                   crossAxisAlignment: CrossAxisAlignment.start,
@@ -2847,7 +2848,8 @@ class NewPermitScreen extends GetView<NewPermitController> {
                                                                         : Column(
                                                                             // alignment: WrapAlignment.start,
                                                                             // spacing: 100,
-                                                                            children: []..addAll(controller.safetyList!.map((element) => Column(
+                                                                            children: []..addAll(controller.safetyList!.map((element) =>
+                                                                                Column(
                                                                                   // mainAxisSize: MainAxisSize.min,
                                                                                   mainAxisAlignment: MainAxisAlignment.start,
                                                                                   crossAxisAlignment: CrossAxisAlignment.start,
@@ -2866,8 +2868,8 @@ class NewPermitScreen extends GetView<NewPermitController> {
                                                                                   ],
                                                                                 ))),
                                                                           ),
-                                                                    ],
-                                                                    ),
+                                                                  ],
+                                                                ),
                                                               ),
                                                             ),
 
@@ -3703,7 +3705,7 @@ class NewPermitScreen extends GetView<NewPermitController> {
                                                                                       backgroundColor: Color.fromARGB(255, 116, 78, 130),
                                                                                       text: "Re submit Permit",
                                                                                       onPressed: () {
-                                                                                        controller.resubmitPermit();
+                                                                                        controller.resubmitPermit(fileIds: dropzoneController.fileIds);
                                                                                       },
                                                                                     )),
                                                                               )
