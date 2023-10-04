@@ -2172,13 +2172,16 @@ class ViewPermitWebScreen extends GetView<ViewPermitController> {
                                                         Dimens.boxHeight10,
 
                                                         Column(
+                                                          mainAxisAlignment: MainAxisAlignment.start,
+                                                                crossAxisAlignment: CrossAxisAlignment.start,
                                                           // alignment: WrapAlignment.start,
                                                           // spacing: 100,
                                                           children: []..addAll(controller.employeeList.map((element) => Column(
                                                                 // mainAxisSize: MainAxisSize.min,
                                                                 mainAxisAlignment: MainAxisAlignment.start,
                                                                 crossAxisAlignment: CrossAxisAlignment.start,
-                                                                children: [Text("${element.name}")],
+                                                                children: [
+                                                                  Text("${element.name}")],
                                                               ))),
                                                         ),
 
@@ -3744,17 +3747,18 @@ class ViewPermitWebScreen extends GetView<ViewPermitController> {
           ),
           child: SizedBox(
             width: MediaQuery.of(context).size.width / 7,
-            height: 45,
+            height: 30,
             child: TextField(
               onTap: () {
                 pickDateTime_web(context);
               },
               controller: controller.startDateTimeCtrlr,
+              
               autofocus: false,
               decoration: InputDecoration(
                 fillColor: ColorValues.whiteColor,
                 filled: true,
-                contentPadding: EdgeInsets.fromLTRB(5.0, 10.0, 5.0, 10.0),
+                contentPadding: EdgeInsets.fromLTRB(5.0, 2.0, 5.0, 5.0),
                 border: InputBorder.none,
                 enabledBorder: InputBorder.none,
                 focusedBorder: InputBorder.none,
