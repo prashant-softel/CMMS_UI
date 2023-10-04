@@ -524,8 +524,8 @@ class PermitListDataSource extends DataTableSource {
                                           NewPermitModel(permitId: 000),
                                     )
                                     ?.ptwStatus ==
-                                PermitStatusConstants.PTW_CREATED //121 
-                                ||
+                                PermitStatusConstants.PTW_CREATED //121
+                            ||
                             controller.newPermitList
                                     .firstWhere(
                                       (e) =>
@@ -535,20 +535,33 @@ class PermitListDataSource extends DataTableSource {
                                           NewPermitModel(permitId: 000),
                                     )
                                     ?.ptwStatus ==
-                                PermitStatusConstants.PTW_APPROVE //125 
+                                PermitStatusConstants.PTW_EXTEND_REQUESTED
+                        ? ColorValues.yellowColor
+                        : controller.newPermitList
+                                        .firstWhere(
+                                          (e) =>
+                                              "${e?.permitId}" ==
+                                              "${PermitDetails?.permitId}",
+                                          orElse: () =>
+                                              NewPermitModel(permitId: 000),
+                                        )
+                                        ?.ptwStatus ==
+                                    PermitStatusConstants.PTW_APPROVE //125
                                 ||
-                            controller.newPermitList
-                                    .firstWhere(
-                                      (e) =>
-                                          "${e?.permitId}" ==
-                                          "${PermitDetails?.permitId}",
-                                      orElse: () =>
-                                          NewPermitModel(permitId: 000),
-                                    )
-                                    ?.ptwStatus ==
-                                PermitStatusConstants.PTW_EXTEND_REQUEST_APPROVE //135
-                        ? ColorValues.appGreenColor
-                        : ColorValues.appRedColor,
+                                controller.newPermitList
+                                        .firstWhere(
+                                          (e) =>
+                                              "${e?.permitId}" ==
+                                              "${PermitDetails?.permitId}",
+                                          orElse: () =>
+                                              NewPermitModel(permitId: 000),
+                                        )
+                                        ?.ptwStatus ==
+                                    PermitStatusConstants
+                                        .PTW_EXTEND_REQUEST_APPROVE //135
+
+                            ? ColorValues.appGreenColor
+                            : ColorValues.appRedColor,
                     borderRadius: BorderRadius.circular(5),
                   ),
                   child: Text(
@@ -584,15 +597,26 @@ class PermitListDataSource extends DataTableSource {
                               Wrap(
                                 children: [
                                   varUserAccessModel.value.access_list!
-                                              .where((e) =>
-                                                  e.feature_id ==
-                                                      UserAccessConstants
-                                                          .kPermitFeatureId &&
-                                                  e.view ==
-                                                      UserAccessConstants
-                                                          .kHaveViewAccess)
-                                              .length >
-                                          0
+                                                  .where((e) =>
+                                                      e.feature_id ==
+                                                          UserAccessConstants
+                                                              .kPermitFeatureId &&
+                                                      e.view ==
+                                                          UserAccessConstants
+                                                              .kHaveViewAccess)
+                                                  .length >
+                                              0 ||
+                                          controller.newPermitList
+                                                  .firstWhere(
+                                                    (e) =>
+                                                        "${e?.permitId}" ==
+                                                        "${PermitDetails?.permitId}",
+                                                    orElse: () =>
+                                                        NewPermitModel(
+                                                            permitId: 000),
+                                                  )
+                                                  ?.ptwStatus ==
+                                              PermitStatusConstants.PTW_CLOSED
                                       ? TableActionButton(
                                           color: ColorValues.appDarkBlueColor,
                                           icon: Icons.visibility,
@@ -606,15 +630,30 @@ class PermitListDataSource extends DataTableSource {
                                       : Container(),
 
                                   varUserAccessModel.value.access_list!
-                                                      .where((e) =>
-                                                          e.feature_id ==
-                                                              UserAccessConstants
-                                                                  .kPermitFeatureId &&
-                                                          e.approve ==
-                                                              UserAccessConstants
-                                                                  .kHaveApproveAccess)
-                                                      .length >
-                                                  0 &&
+                                                  .where((e) =>
+                                                      e.feature_id ==
+                                                          UserAccessConstants
+                                                              .kPermitFeatureId &&
+                                                      e.approve ==
+                                                          UserAccessConstants
+                                                              .kHaveApproveAccess)
+                                                  .length >
+                                              0 ||
+                                          controller.newPermitList
+                                                      .firstWhere(
+                                                        (e) =>
+                                                            "${e?.permitId}" ==
+                                                            "${PermitDetails?.permitId}",
+                                                        orElse: () =>
+                                                            NewPermitModel(
+                                                                permitId: 000),
+                                                      )
+                                                      ?.ptwStatus ==
+                                                  PermitStatusConstants
+                                                      .PTW_CREATED
+                                              //121
+                                              // AppConstants.kPermitStatusCreated ///121
+                                              &&
                                               controller.newPermitList
                                                       .firstWhere(
                                                         (e) =>
@@ -624,31 +663,10 @@ class PermitListDataSource extends DataTableSource {
                                                             NewPermitModel(
                                                                 permitId: 000),
                                                       )
-                                                      ?.ptwStatus == PermitStatusConstants.PTW_CREATED //121
-                                                  // AppConstants.kPermitStatusCreated ///121
-                                                  ||
-                                          controller.newPermitList
-                                                  .firstWhere(
-                                                    (e) =>
-                                                        "${e?.permitId}" ==
-                                                        "${PermitDetails?.permitId}",
-                                                    orElse: () =>
-                                                        NewPermitModel(
-                                                            permitId: 000),
-                                                  )
-                                                  ?.ptwStatus == PermitStatusConstants.PTW_EXTEND_REQUESTED //133
-                                              // AppConstants.kPermitStatusExtendRequested ///133
-                                      // controller.newPermitList
-                                      //         .firstWhere(
-                                      //           (e) =>
-                                      //               "${e?.permitId}" ==
-                                      //               "${PermitDetails?.permitId}",
-                                      //           orElse: () =>
-                                      //               NewPermitModel(
-                                      //                   permitId: 000),
-                                      //         )
-                                      //         ?.ptwStatus ==
-                                      //     130
+                                                      ?.ptwStatus ==
+                                                  PermitStatusConstants
+                                                      .PTW_EXTEND_REQUESTED //133
+
                                       ? TableActionButton(
                                           color: ColorValues.appGreenColor,
                                           icon: Icons.add,
@@ -661,8 +679,10 @@ class PermitListDataSource extends DataTableSource {
                                                             NewPermitModel(
                                                                 permitId: 000),
                                                       )
-                                                      ?.ptwStatus == PermitStatusConstants.PTW_CREATED //121
-                                                  // AppConstants.kPermitStatusCreated ///121
+                                                      ?.ptwStatus ==
+                                                  PermitStatusConstants
+                                                      .PTW_CREATED //121
+                                              // AppConstants.kPermitStatusCreated ///121
                                               ? 'Approve/Reject Permit'
                                               : "Approve/Reject Extend",
                                           onPress: () {
@@ -671,7 +691,7 @@ class PermitListDataSource extends DataTableSource {
                                                     PermitDetails?.permitId);
                                           },
                                         )
-                                      : Container(),
+                                      : Dimens.box0,
 
                                   ///Permit Edit button
                                   varUserAccessModel.value.access_list!
@@ -679,9 +699,9 @@ class PermitListDataSource extends DataTableSource {
                                                       e.feature_id ==
                                                           UserAccessConstants
                                                               .kPermitFeatureId &&
-                                                      e.edit ==
+                                                      e.add ==
                                                           UserAccessConstants
-                                                              .kHaveEditAccess)
+                                                              .kHaveAddAccess)
                                                   .length >
                                               0 &&
                                           controller.newPermitList
@@ -694,7 +714,8 @@ class PermitListDataSource extends DataTableSource {
                                                             permitId: 000),
                                                   )
                                                   ?.ptwStatus ==
-                                              PermitStatusConstants.PTW_CREATED //121
+                                              PermitStatusConstants
+                                                  .PTW_CREATED //121
                                       // ||
                                       // controller.newPermitList
                                       //         .firstWhere(
@@ -723,15 +744,29 @@ class PermitListDataSource extends DataTableSource {
                                         )
                                       : Dimens.box0,
                                   controller.newPermitList
-                                              .firstWhere(
-                                                (e) =>
-                                                    "${e?.permitId}" ==
-                                                    "${PermitDetails?.permitId}",
-                                                orElse: () => NewPermitModel(
-                                                    permitId: 000),
-                                              )
-                                              ?.ptwStatus ==
-                                          PermitStatusConstants.PTW_REJECTED_BY_APPROVER //124
+                                                  .firstWhere(
+                                                    (e) =>
+                                                        "${e?.permitId}" ==
+                                                        "${PermitDetails?.permitId}",
+                                                    orElse: () =>
+                                                        NewPermitModel(
+                                                            permitId: 000),
+                                                  )
+                                                  ?.ptwStatus ==
+                                              PermitStatusConstants
+                                                  .PTW_REJECTED_BY_APPROVER //124
+
+                                          &&
+                                          varUserAccessModel.value.access_list!
+                                                  .where((e) =>
+                                                      e.feature_id ==
+                                                          UserAccessConstants
+                                                              .kPermitFeatureId &&
+                                                      e.add ==
+                                                          UserAccessConstants
+                                                              .kHaveAddAccess)
+                                                  .length >
+                                              0
                                       ? TableActionButton(
                                           color:
                                               Color.fromARGB(255, 116, 78, 130),
@@ -793,7 +828,8 @@ class PermitListDataSource extends DataTableSource {
                                                                 permitId: 000),
                                                       )
                                                       ?.ptwStatus ==
-                                                  PermitStatusConstants.PTW_APPROVE //125
+                                                  PermitStatusConstants
+                                                      .PTW_APPROVE //125
                                               //||
                                               // controller.newPermitList
                                               //         .firstWhere(
@@ -827,15 +863,28 @@ class PermitListDataSource extends DataTableSource {
 
                                   ///Close Permit
                                   varUserAccessModel.value.access_list!
-                                                  .where((e) =>
-                                                      e.feature_id ==
-                                                          UserAccessConstants
-                                                              .kPermitFeatureId &&
-                                                      e.add ==
-                                                          UserAccessConstants
-                                                              .kHaveAddAccess)
-                                                  .length >
-                                              0 &&
+                                                      .where((e) =>
+                                                          e.feature_id ==
+                                                              UserAccessConstants
+                                                                  .kPermitFeatureId &&
+                                                          e.add ==
+                                                              UserAccessConstants
+                                                                  .kHaveAddAccess)
+                                                      .length >
+                                                  0 &&
+                                              controller.newPermitList
+                                                      .firstWhere(
+                                                        (e) =>
+                                                            "${e?.permitId}" ==
+                                                            "${PermitDetails?.permitId}",
+                                                        orElse: () =>
+                                                            NewPermitModel(
+                                                                permitId: 000),
+                                                      )
+                                                      ?.ptwStatus ==
+                                                  PermitStatusConstants
+                                                      .PTW_CANCEL_REQUEST_REJECTED //121
+                                          ||
                                           controller.newPermitList
                                                   .firstWhere(
                                                     (e) =>
@@ -846,7 +895,8 @@ class PermitListDataSource extends DataTableSource {
                                                             permitId: 000),
                                                   )
                                                   ?.ptwStatus ==
-                                              PermitStatusConstants.PTW_CREATED //121
+                                              PermitStatusConstants
+                                                  .PTW_EXTEND_REQUEST_REJECTED
                                       ? TableActionButton(
                                           color: ColorValues.appcloseRedColor,
                                           icon: Icons.close,
@@ -873,16 +923,17 @@ class PermitListDataSource extends DataTableSource {
                                                               .kHaveApproveAccess)
                                                   .length >
                                               0 ||
-                                          varUserAccessModel.value.access_list!
-                                                  .where((e) =>
-                                                      e.feature_id ==
-                                                          UserAccessConstants
-                                                              .kPermitFeatureId &&
-                                                      e.edit ==
-                                                          UserAccessConstants
-                                                              .kHaveEditAccess)
-                                                  .length >
-                                              0 ||
+                                          // varUserAccessModel.value.access_list!
+                                          //         .where((e) =>
+                                          //             e.feature_id ==
+                                          //                 UserAccessConstants
+                                          //                     .kPermitFeatureId &&
+                                          //             e.edit ==
+                                          //                 UserAccessConstants
+                                          //                     .kHaveEditAccess)
+                                          //         .length >
+                                          //     0
+                                          //      ||
                                           controller.newPermitList
                                                   .firstWhere(
                                                     (e) =>
@@ -893,8 +944,9 @@ class PermitListDataSource extends DataTableSource {
                                                             permitId: 000),
                                                   )
                                                   ?.ptwStatus ==
-                                              PermitStatusConstants.PTW_APPROVE //125
-                                              ||
+                                              PermitStatusConstants
+                                                  .PTW_APPROVE //125
+                                          ||
                                           controller.newPermitList
                                                   .firstWhere(
                                                     (e) =>
@@ -905,7 +957,33 @@ class PermitListDataSource extends DataTableSource {
                                                             permitId: 000),
                                                   )
                                                   ?.ptwStatus ==
-                                              PermitStatusConstants.PTW_CREATED //121
+                                              PermitStatusConstants
+                                                  .PTW_CREATED //121
+                                          ||
+                                          controller.newPermitList
+                                                  .firstWhere(
+                                                    (e) =>
+                                                        "${e?.permitId}" ==
+                                                        "${PermitDetails?.permitId}",
+                                                    orElse: () =>
+                                                        NewPermitModel(
+                                                            permitId: 000),
+                                                  )
+                                                  ?.ptwStatus ==
+                                              PermitStatusConstants
+                                                  .PTW_EXTEND_REQUEST_REJECTED ||
+                                          controller.newPermitList
+                                                  .firstWhere(
+                                                    (e) =>
+                                                        "${e?.permitId}" ==
+                                                        "${PermitDetails?.permitId}",
+                                                    orElse: () =>
+                                                        NewPermitModel(
+                                                            permitId: 000),
+                                                  )
+                                                  ?.ptwStatus ==
+                                              PermitStatusConstants
+                                                  .PTW_CANCEL_REQUEST_REJECTED
                                       ? TableActionButton(
                                           color: ColorValues.appRedColor,
                                           icon: Icons.close,
@@ -941,7 +1019,8 @@ class PermitListDataSource extends DataTableSource {
                                                             permitId: 000),
                                                   )
                                                   ?.ptwStatus ==
-                                              PermitStatusConstants.PTW_CANCEL_REQUESTED //130
+                                              PermitStatusConstants
+                                                  .PTW_CANCEL_REQUESTED //130
                                       ? TableActionButton(
                                           color:
                                               Color.fromARGB(255, 113, 15, 149),
