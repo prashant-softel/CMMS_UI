@@ -27,8 +27,12 @@ class UpdateNewPermitDialog extends GetView {
         insetPadding: Dimens.edgeInsets10_0_10_0,
         contentPadding: EdgeInsets.zero,
         title: data == "Permit Updated Successfully"
-         ? Text("Permit Updation !!", textAlign: TextAlign.center, style: TextStyle(color: Colors.black))
-          : Text('Permit Re-Submission !!', textAlign: TextAlign.center, style: TextStyle(color: Colors.black)),
+            ? Text("Permit Updation !!",
+                textAlign: TextAlign.center,
+                style: TextStyle(color: Colors.black))
+            : Text('Permit Re-Submission !!',
+                textAlign: TextAlign.center,
+                style: TextStyle(color: Colors.black)),
         // Text(
         //   '${data == }',
         //   textAlign: TextAlign.center,
@@ -53,13 +57,15 @@ class UpdateNewPermitDialog extends GetView {
                       text: 'The ',
                       style: DefaultTextStyle.of(context).style,
                       children: <TextSpan>[
-          TextSpan(text: '$data',
-           style: TextStyle(
-              color: Colors.green, // Set the desired text color
-              fontWeight: FontWeight.bold, // Set any additional styles as needed
-            ),
-          ),
-          TextSpan(text: ' with Permit Id '),
+                        TextSpan(
+                          text: '$data',
+                          style: TextStyle(
+                            color: Colors.green, // Set the desired text color
+                            fontWeight: FontWeight
+                                .bold, // Set any additional styles as needed
+                          ),
+                        ),
+                        TextSpan(text: ' with Permit Id '),
                         TextSpan(
                           text: '$PtwId.',
                           style: TextStyle(
@@ -112,8 +118,7 @@ class UpdateNewPermitDialog extends GetView {
             child: ElevatedButton(
               style: Styles.darkBlueElevatedButtonStyle,
               onPressed: () {
-                Get.back();
-                Get.offAndToNamed(Routes.newPermitList);
+                Get.offAllNamed(Routes.newPermitList);
                 // _controller.getNewPermitList(
                 //     _controller.facilityId, _controller.userId,_controller.formattedTodate, _controller.formattedFromdate, false, false, false);
               },

@@ -1149,7 +1149,7 @@ class NewPermitController extends GetxController {
     }
   }
 
-  void createNewPermitForJob({int? jobId,List<dynamic>? fileIds}) async {
+  void createNewPermitForJob({int? jobId, List<dynamic>? fileIds}) async {
     {
       checkForm();
       if (isFormInvalid.value) {
@@ -1249,7 +1249,7 @@ class NewPermitController extends GetxController {
     }
   }
 
-  void createNewPermitForPm({int? pmTaskId,List<dynamic>? fileIds}) async {
+  void createNewPermitForPm({int? pmTaskId, List<dynamic>? fileIds}) async {
     {
       checkForm();
       if (isFormInvalid.value) {
@@ -1431,7 +1431,7 @@ class NewPermitController extends GetxController {
           longitude: 0,
           block_ids: selectedEmployeeNameIdList,
           category_ids: selectedEquipmentCategoryIdList,
-          uploadfile_ids: [618,619],
+          uploadfile_ids: [618, 619],
           is_isolation_required: isToggleOn.value,
           isolated_category_ids: selectedEquipmentIsolationIdList,
           Loto_list: loto_map_list,
@@ -1453,7 +1453,7 @@ class NewPermitController extends GetxController {
     }
   }
 
-  void resubmitPermit() async {
+  void resubmitPermit({List<dynamic>? fileIds}) async {
     {
       String _description =
           htmlEscape.convert(permitDescriptionCtrlr.text.trim());
@@ -1497,6 +1497,7 @@ class NewPermitController extends GetxController {
           sop_type_id: selectedSOPId,
           issuer_id: selectedPermitIssuerTypeId,
           approver_id: selectedPermitApproverTypeId,
+          uploadfile_ids: fileIds,
           user_id: userId,
           latitude: 0,
           longitude: 0,
