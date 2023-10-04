@@ -180,6 +180,13 @@ class ViewPermitController extends GetxController {
   Rx<String> selectedBlock = ''.obs;
   Rx<bool> isstartdateFieldSelected = true.obs;
 
+    /// Employee Table
+  Rx<String> selectedEmployeeName = ''.obs;
+  Rx<bool> isEmployeeSelected = true.obs;
+  
+
+
+
   int selectedBlockId = 0;
   RxList<EquipmentModel?> equipmentList = <EquipmentModel>[].obs;
   RxList<InventoryModel?> workAreaList = <InventoryModel>[].obs;
@@ -492,6 +499,8 @@ class ViewPermitController extends GetxController {
     await getPermitConditionList(isCancle: isCancle!);
     await getPermitCloseConditionList(isClose: isClose!);
     await getPermitExtendConditionList(isExtend: isExtend!);
+    await getEmployeeList();
+
 
     super.onInit();
   }
@@ -1513,6 +1522,25 @@ class ViewPermitController extends GetxController {
   //     }
   //   }
   // }
+
+  Future <void> getEmployeeList() async {
+    employeeList.value = <EmployeeListModel>[];
+    final _employeeList =
+        await viewPermitPresenter.getEmployeeList(
+      isLoading: true,
+      // categoryIds: categoryIds,
+      facility_id: facilityId,
+    );
+    print(
+        'employee List:$_employeeList');
+    for (var employee_list
+        in _employeeList) {
+      employeeList.add(employee_list);
+    }
+
+    update(['employee_list']);
+  }
+
 
   static void showAlertDialog({
     int? facility_id,

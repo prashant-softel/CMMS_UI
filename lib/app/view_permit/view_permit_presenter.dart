@@ -366,4 +366,16 @@ class ViewPermitPresenter {
       isLoading: isLoading,
     );
   }
+
+
+   Future<List<EmployeeListModel>> getEmployeeList({
+    required bool isLoading,
+    required int? facility_id,
+  }) async {
+    return viewPermitUsecase.getEmployeeList(
+      isLoading: isLoading,
+      facility_id: facility_id,
+    );
+  }
+
 }

@@ -32,7 +32,7 @@ class CreatePermitModel {
   List<Safetyquestionlist>? safety_question_list;
   List<int?>? block_ids;
   List<int?>? category_ids;
-  List<dynamic?>? uploadfile_ids;
+  List<dynamic>? uploadfile_ids;
   List<int?>? isolated_category_ids;
 
    CreatePermitModel(
