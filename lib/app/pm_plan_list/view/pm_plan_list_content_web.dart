@@ -1,5 +1,7 @@
+import 'package:cmms/app/constant/constant.dart';
 import 'package:cmms/app/pm_plan_list/pm_plan_list_controller.dart';
 import 'package:cmms/app/theme/dimens.dart';
+import 'package:cmms/app/utils/user_access_constants.dart';
 import 'package:cmms/domain/models/pm_plan_list_model.dart';
 import 'package:data_table_2/data_table_2.dart';
 import 'package:flutter/material.dart';
@@ -97,19 +99,31 @@ class _PmPlanListContentWebState extends State<PmPlanListContentWeb> {
                                         style: Styles.blackBold16,
                                       ),
                                       Spacer(),
-                                      ActionButton(
-                                        icon: Icons.add,
-                                        label: "Add New",
-                                        onPressed: () {
-                                          final _flutterSecureStorage =
-                                              const FlutterSecureStorage();
+                                      varUserAccessModel.value.access_list!
+                                                  .where((e) =>
+                                                      e.feature_id ==
+                                                          UserAccessConstants
+                                                              .kPmPlanFeatureId &&
+                                                      e.add ==
+                                                          UserAccessConstants
+                                                              .kHaveAddAccess)
+                                                  .length >
+                                              0
+                                          ? ActionButton(
+                                              icon: Icons.add,
+                                              label: "Add New",
+                                              onPressed: () {
+                                                final _flutterSecureStorage =
+                                                    const FlutterSecureStorage();
 
-                                          _flutterSecureStorage.delete(
-                                              key: "pmPlanId");
-                                          Get.toNamed(Routes.createPmPlan);
-                                        },
-                                        color: ColorValues.addNewColor,
-                                      ),
+                                                _flutterSecureStorage.delete(
+                                                    key: "pmPlanId");
+                                                Get.toNamed(
+                                                    Routes.createPmPlan);
+                                              },
+                                              color: ColorValues.addNewColor,
+                                            )
+                                          : Dimens.box0
                                     ],
                                   ),
                                 ),
@@ -490,47 +504,79 @@ class PmPlanDataSource extends DataTableSource {
                   )
                 : (value == 'Actions')
                     ? Wrap(children: [
-                        TableActionButton(
-                          color: ColorValues.viewColor,
-                          icon: Icons.remove_red_eye_outlined,
-                          message: 'View',
-                          onPress: () {
-                            final _flutterSecureStorage =
-                                const FlutterSecureStorage();
+                        varUserAccessModel.value.access_list!
+                                    .where((e) =>
+                                        e.feature_id ==
+                                            UserAccessConstants
+                                                .kPmPlanFeatureId &&
+                                        e.view ==
+                                            UserAccessConstants.kHaveViewAccess)
+                                    .length >
+                                0
+                            ? TableActionButton(
+                                color: ColorValues.viewColor,
+                                icon: Icons.remove_red_eye_outlined,
+                                message: 'View',
+                                onPress: () {
+                                  final _flutterSecureStorage =
+                                      const FlutterSecureStorage();
 
-                            _flutterSecureStorage.delete(key: "pmPlanId");
-                            int pmPlanId = pmPlanDetails?.plan_id ?? 0;
-                            if (pmPlanId != null) {
-                              Get.toNamed(Routes.viewPmPlanScreen,
-                                  arguments: {'pmPlanId': pmPlanId});
-                            }
-                          },
-                        ),
-                        TableActionButton(
-                          color: ColorValues.editColor,
-                          icon: Icons.edit,
-                          message: 'Edit',
-                          onPress: () {
-                            final _flutterSecureStorage =
-                                const FlutterSecureStorage();
+                                  _flutterSecureStorage.delete(key: "pmPlanId");
+                                  int pmPlanId = pmPlanDetails?.plan_id ?? 0;
+                                  if (pmPlanId != null) {
+                                    Get.toNamed(Routes.viewPmPlanScreen,
+                                        arguments: {'pmPlanId': pmPlanId});
+                                  }
+                                },
+                              )
+                            : Dimens.box0,
+                        varUserAccessModel.value.access_list!
+                                    .where((e) =>
+                                        e.feature_id ==
+                                            UserAccessConstants
+                                                .kPmPlanFeatureId &&
+                                        e.edit ==
+                                            UserAccessConstants
+                                                .kHaveDeleteAccess)
+                                    .length >
+                                0
+                            ? TableActionButton(
+                                color: ColorValues.editColor,
+                                icon: Icons.edit,
+                                message: 'Edit',
+                                onPress: () {
+                                  final _flutterSecureStorage =
+                                      const FlutterSecureStorage();
 
-                            _flutterSecureStorage.delete(key: "pmPlanId");
-                            int pmPlanId = pmPlanDetails?.plan_id ?? 0;
-                            if (pmPlanId != null) {
-                              Get.toNamed(Routes.createPmPlan,
-                                  arguments: {'pmPlanId': pmPlanId});
-                            }
-                          },
-                        ),
+                                  _flutterSecureStorage.delete(key: "pmPlanId");
+                                  int pmPlanId = pmPlanDetails?.plan_id ?? 0;
+                                  if (pmPlanId != null) {
+                                    Get.toNamed(Routes.createPmPlan,
+                                        arguments: {'pmPlanId': pmPlanId});
+                                  }
+                                },
+                              )
+                            : Dimens.box0,
                         controller.pmPlanList
-                                    .firstWhere(
-                                      (e) =>
-                                          e?.plan_id == pmPlanDetails?.plan_id,
-                                      orElse: () =>
-                                          PmPlanListModel(plan_id: 00),
-                                    )
-                                    ?.status_id ==
-                                401
+                                        .firstWhere(
+                                          (e) =>
+                                              e?.plan_id ==
+                                              pmPlanDetails?.plan_id,
+                                          orElse: () =>
+                                              PmPlanListModel(plan_id: 00),
+                                        )
+                                        ?.status_id ==
+                                    401 &&
+                                varUserAccessModel.value.access_list!
+                                        .where((e) =>
+                                            e.feature_id ==
+                                                UserAccessConstants
+                                                    .kPmPlanFeatureId &&
+                                            e.approve ==
+                                                UserAccessConstants
+                                                    .kHaveApproveAccess)
+                                        .length >
+                                    0
                             ? TableActionButton(
                                 color: ColorValues.approveColor,
                                 icon: Icons.approval,
@@ -548,16 +594,28 @@ class PmPlanDataSource extends DataTableSource {
                                 },
                               )
                             : Dimens.box0,
-                        TableActionButton(
-                          color: ColorValues.deleteColor,
-                          icon: Icons.delete,
-                          message: 'Delete',
-                          onPress: () {
-                            controller.isDeleteDialog(
-                                planName: pmPlanDetails?.plan_name,
-                                planId: pmPlanDetails?.plan_id.toString());
-                          },
-                        )
+                        varUserAccessModel.value.access_list!
+                                    .where((e) =>
+                                        e.feature_id ==
+                                            UserAccessConstants
+                                                .kPmPlanFeatureId &&
+                                        e.delete ==
+                                            UserAccessConstants
+                                                .kHaveDeleteAccess)
+                                    .length >
+                                0
+                            ? TableActionButton(
+                                color: ColorValues.deleteColor,
+                                icon: Icons.delete,
+                                message: 'Delete',
+                                onPress: () {
+                                  controller.isDeleteDialog(
+                                      planName: pmPlanDetails?.plan_name,
+                                      planId:
+                                          pmPlanDetails?.plan_id.toString());
+                                },
+                              )
+                            : Dimens.box0
                       ])
                     : Text(value.toString()),
           ),
@@ -568,8 +626,15 @@ class PmPlanDataSource extends DataTableSource {
         final _flutterSecureStorage = const FlutterSecureStorage();
 
         _flutterSecureStorage.delete(key: "pmPlanId");
-        Get.toNamed(Routes.viewPmPlanScreen,
-            arguments: {'pmPlanId': pmPlanDetails?.plan_id});
+        varUserAccessModel.value.access_list!
+                    .where((e) =>
+                        e.feature_id == UserAccessConstants.kPmPlanFeatureId &&
+                        e.view == UserAccessConstants.kHaveViewAccess)
+                    .length >
+                0
+            ? Get.toNamed(Routes.viewPmPlanScreen,
+                arguments: {'pmPlanId': pmPlanDetails?.plan_id})
+            : null;
       },
     );
   }

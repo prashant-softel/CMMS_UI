@@ -1,14 +1,14 @@
+import 'package:cmms/app/constant/constant.dart';
 import 'package:cmms/app/home/home_screen.dart';
 import 'package:cmms/app/theme/dimens.dart';
+import 'package:cmms/app/utils/user_access_constants.dart';
 import 'package:cmms/app/widgets/custom_richtext.dart';
 import 'package:cmms/app/widgets/date_picker.dart';
 import 'package:cmms/domain/models/pm_task_model.dart';
-import 'package:cmms/domain/models/pm_task_view_list_model.dart';
 import 'package:data_table_2/data_table_2.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:get/get.dart';
-import 'package:scrollable_table_view/scrollable_table_view.dart';
 import 'package:syncfusion_flutter_datepicker/datepicker.dart';
 import '../../navigators/app_pages.dart';
 import '../../theme/color_values.dart';
@@ -563,38 +563,48 @@ class PmTaskDataSource extends DataTableSource {
                   )
                 : (value == 'Actions')
                     ? Wrap(children: [
-                        TableActionButton(
-                          color: ColorValues.viewColor,
-                          icon: Icons.remove_red_eye_outlined,
-                          message: 'View',
-                          onPress: () {
-                            final _flutterSecureStorage =
-                                const FlutterSecureStorage();
+                        varUserAccessModel.value.access_list!
+                                    .where((e) =>
+                                        e.feature_id ==
+                                            UserAccessConstants
+                                                .kPmTaskFeatureId &&
+                                        e.view ==
+                                            UserAccessConstants.kHaveViewAccess)
+                                    .length >
+                                0
+                            ? TableActionButton(
+                                color: ColorValues.viewColor,
+                                icon: Icons.remove_red_eye_outlined,
+                                message: 'View',
+                                onPress: () {
+                                  final _flutterSecureStorage =
+                                      const FlutterSecureStorage();
 
-                            _flutterSecureStorage.delete(key: "pmTaskId");
-                            int pmTaskId = pmTaskDetails?.id ?? 0;
-                            if (pmTaskId != 0) {
-                              Get.toNamed(Routes.pmTaskView,
-                                  arguments: {'pmTaskId': pmTaskId});
-                            }
-                          },
-                        ),
-                        TableActionButton(
-                          color: ColorValues.appGreenColor,
-                          icon: Icons.remove_red_eye_outlined,
-                          message: 'Execute',
-                          onPress: () {
-                            final _flutterSecureStorage =
-                                const FlutterSecureStorage();
+                                  _flutterSecureStorage.delete(key: "pmTaskId");
+                                  int pmTaskId = pmTaskDetails?.id ?? 0;
+                                  if (pmTaskId != 0) {
+                                    Get.toNamed(Routes.pmTaskView,
+                                        arguments: {'pmTaskId': pmTaskId});
+                                  }
+                                },
+                              )
+                            : Dimens.box0,
+                        // TableActionButton(
+                        //   color: ColorValues.appGreenColor,
+                        //   icon: Icons.remove_red_eye_outlined,
+                        //   message: 'Execute',
+                        //   onPress: () {
+                        //     final _flutterSecureStorage =
+                        //         const FlutterSecureStorage();
 
-                            _flutterSecureStorage.delete(key: "pmTaskId");
-                            int pmTaskId = pmTaskDetails?.id ?? 0;
-                            if (pmTaskId != 0) {
-                              Get.toNamed(Routes.pmExecution,
-                                  arguments: {'pmTaskId': pmTaskId});
-                            }
-                          },
-                        ),
+                        //     _flutterSecureStorage.delete(key: "pmTaskId");
+                        //     int pmTaskId = pmTaskDetails?.id ?? 0;
+                        //     if (pmTaskId != 0) {
+                        //       Get.toNamed(Routes.pmExecution,
+                        //           arguments: {'pmTaskId': pmTaskId});
+                        //     }
+                        //   },
+                        // ),
                       ])
                     : Text(value.toString()),
           ),
@@ -605,9 +615,19 @@ class PmTaskDataSource extends DataTableSource {
         final _flutterSecureStorage = const FlutterSecureStorage();
 
         _flutterSecureStorage.delete(key: "pmTaskId");
+
         int pmTaskId = pmTaskDetails?.id ?? 0;
         if (pmTaskId != 0) {
-          Get.toNamed(Routes.pmTaskView, arguments: {'pmTaskId': pmTaskId});
+          varUserAccessModel.value.access_list!
+                      .where((e) =>
+                          e.feature_id ==
+                              UserAccessConstants.kPmTaskFeatureId &&
+                          e.view == UserAccessConstants.kHaveViewAccess)
+                      .length >
+                  0
+              ? Get.toNamed(Routes.pmTaskView,
+                  arguments: {'pmTaskId': pmTaskId})
+              : null;
         }
       },
     );

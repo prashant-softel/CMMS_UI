@@ -1,6 +1,7 @@
+import 'package:cmms/app/constant/constant.dart';
 import 'package:cmms/app/theme/color_values.dart';
+import 'package:cmms/app/utils/user_access_constants.dart';
 import 'package:cmms/app/widgets/custom_elevated_button.dart';
-import 'package:cmms/app/widgets/custom_richtext.dart';
 import 'package:cmms/app/widgets/custom_swich_toggle.dart';
 import 'package:cmms/app/widgets/custom_textField.dart';
 import 'package:data_table_2/data_table_2.dart';
@@ -128,21 +129,21 @@ class ObservationPmExecutionViewDialog extends GetView {
                                                 fontWeight: FontWeight.bold),
                                           )),
                                       DataColumn2(
-                                          // fixedWidth: 300,
+                                          fixedWidth: 400,
                                           label: Text(
-                                        "Check Point",
-                                        style: TextStyle(
-                                            fontSize: 15,
-                                            fontWeight: FontWeight.bold),
-                                      )),
+                                            "Check Point",
+                                            style: TextStyle(
+                                                fontSize: 15,
+                                                fontWeight: FontWeight.bold),
+                                          )),
                                       DataColumn2(
-                                          // fixedWidth: 300,
+                                          fixedWidth: 400,
                                           label: Text(
-                                        "Requirement",
-                                        style: TextStyle(
-                                            fontSize: 15,
-                                            fontWeight: FontWeight.bold),
-                                      )),
+                                            "Requirement",
+                                            style: TextStyle(
+                                                fontSize: 15,
+                                                fontWeight: FontWeight.bold),
+                                          )),
                                       DataColumn2(
                                           fixedWidth: 150,
                                           label: Text(
@@ -567,29 +568,49 @@ class ObservationPmExecutionViewDialog extends GetView {
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      Container(
-                        height: 35,
-                        child: CustomElevatedButton(
-                          backgroundColor: ColorValues.appRedColor,
-                          text: "Close",
-                          onPressed: () {
-                            Get.back();
-                          },
-                        ),
-                      ),
+                      varUserAccessModel.value.access_list!
+                                  .where((e) =>
+                                      e.feature_id ==
+                                          UserAccessConstants
+                                              .kFeaturePmExecutionName &&
+                                      e.edit ==
+                                          UserAccessConstants.kHaveEditAccess)
+                                  .length >
+                              0
+                          ? Container(
+                              height: 35,
+                              child: CustomElevatedButton(
+                                backgroundColor: ColorValues.appRedColor,
+                                text: "Close",
+                                onPressed: () {
+                                  Get.back();
+                                },
+                              ),
+                            )
+                          : Dimens.box0,
                       SizedBox(
                         width: 20,
                       ),
-                      Container(
-                        height: 35,
-                        child: CustomElevatedButton(
-                          backgroundColor: ColorValues.appDarkBlueColor,
-                          text: "Update",
-                          onPressed: () {
-                            controller.updatePmExecution();
-                          },
-                        ),
-                      ),
+                      varUserAccessModel.value.access_list!
+                                  .where((e) =>
+                                      e.feature_id ==
+                                          UserAccessConstants
+                                              .kFeaturePmExecutionName &&
+                                      e.edit ==
+                                          UserAccessConstants.kHaveEditAccess)
+                                  .length >
+                              0
+                          ? Container(
+                              height: 35,
+                              child: CustomElevatedButton(
+                                backgroundColor: ColorValues.appDarkBlueColor,
+                                text: "Update",
+                                onPressed: () {
+                                  controller.updatePmExecution();
+                                },
+                              ),
+                            )
+                          : Dimens.box0,
                     ],
                   ),
                 ),

@@ -1,4 +1,6 @@
 import 'package:cmms/app/app.dart';
+import 'package:cmms/app/constant/constant.dart';
+import 'package:cmms/app/utils/user_access_constants.dart';
 import 'package:cmms/app/view_pm_plan/view_pm_plan_controller.dart';
 import 'package:cmms/app/widgets/custom_elevated_button.dart';
 import 'package:cmms/app/widgets/pm_plan_approve_dialog.dart';
@@ -350,8 +352,19 @@ class _ViewPmPlanWebState extends State<ViewPmPlanWeb> {
                                     // ),
                                     //  Dimens.boxWidth10,
                                     controller.pmPlanDetailsModel.value
-                                                ?.status_id ==
-                                            401
+                                                    ?.status_id ==
+                                                401 &&
+                                            varUserAccessModel
+                                                    .value.access_list!
+                                                    .where((e) =>
+                                                        e.feature_id ==
+                                                            UserAccessConstants
+                                                                .kPmPlanFeatureId &&
+                                                        e.approve ==
+                                                            UserAccessConstants
+                                                                .kHaveApproveAccess)
+                                                    .length >
+                                                0
                                         ? Container(
                                             height: 45,
                                             child: CustomElevatedButton(
@@ -369,8 +382,19 @@ class _ViewPmPlanWebState extends State<ViewPmPlanWeb> {
                                         : Dimens.box0,
                                     Dimens.boxWidth10,
                                     controller.pmPlanDetailsModel.value
-                                                ?.status_id ==
-                                            401
+                                                    ?.status_id ==
+                                                401 &&
+                                            varUserAccessModel
+                                                    .value.access_list!
+                                                    .where((e) =>
+                                                        e.feature_id ==
+                                                            UserAccessConstants
+                                                                .kPmPlanFeatureId &&
+                                                        e.approve ==
+                                                            UserAccessConstants
+                                                                .kHaveApproveAccess)
+                                                    .length >
+                                                0
                                         ? Container(
                                             height: 45,
                                             child: CustomElevatedButton(
@@ -397,7 +421,7 @@ class _ViewPmPlanWebState extends State<ViewPmPlanWeb> {
                     ),
                   ),
                 ),
-                Dimens.boxHeight40,
+                // Dimens.boxHeight40,
               ],
             ),
           ),
