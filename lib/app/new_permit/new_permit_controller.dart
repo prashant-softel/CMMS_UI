@@ -11,6 +11,7 @@ import 'package:cmms/domain/models/create_permit_model.dart';
 import 'package:cmms/domain/models/employee_list_model.dart';
 import 'package:cmms/domain/models/employee_list_model2.dart';
 import 'package:cmms/domain/models/employee_model.dart';
+import 'package:cmms/domain/models/history_model.dart';
 import 'package:cmms/domain/models/inventory_detail_model.dart';
 import 'package:cmms/domain/models/job_type_list_model.dart';
 import 'package:cmms/domain/models/linked_jobs_to_permit_model.dart';
@@ -129,6 +130,10 @@ class NewPermitController extends GetxController {
 
   NewPermitPresenter permitPresenter;
   JobListPresenter jobListPresenter;
+
+  //Permit History
+  RxList<HistoryModel?>? historyList = <HistoryModel?>[].obs;
+
 
   // create permit
   Rx<bool> isFormInvalid = false.obs;
@@ -415,6 +420,7 @@ class NewPermitController extends GetxController {
       await getInventoryDetailList();
       await getEmployeePermitList();
       await getJobTypePermitList();
+      await getPermitHistory(permitId: permitId.value);
       // await getPermitIssuerList();
       // await getPermitApproverList();
     } catch (e) {
@@ -580,6 +586,23 @@ class NewPermitController extends GetxController {
 
   //   employee_map[emp_id] = selectedEmployeeNameIdList;
   // }
+
+  Future<void> getPermitHistory({required int permitId}) async {
+    /// TODO: CHANGE THESE VALUES
+    int moduleType = 3;
+    // int tempModuleType = 21;
+    //
+    historyList?.value = await permitPresenter.getPermitHistory(
+          // tempModuleType,
+          // tempJobCardId,
+          moduleType,
+          permitId,
+          true,
+        ) ??
+        [];
+    update(["historyList"]);
+  }
+
 
   void removeRow({required int id}) {
     employeeNameList.removeWhere((element) => element?.id == id);
