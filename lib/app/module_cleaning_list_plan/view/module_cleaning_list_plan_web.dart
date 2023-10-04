@@ -424,11 +424,11 @@ class ModuleCleaningPlanListDataSource extends DataTableSource {
   late List<ModuleCleaningListPlanModel?> filteredModuleCleaningList;
 
   ModuleCleaningPlanListDataSource(this.controller) {
-    filtersGoodsOrder();
+    filtersModuleCliningPlan();
   }
 
   ///
-  void filtersGoodsOrder() {
+  void filtersModuleCliningPlan() {
     filteredModuleCleaningList = <ModuleCleaningListPlanModel?>[];
     filteredModuleCleaningList =
         controller.moduleCleaningListPlan.where((GoodsOrderList) {
@@ -459,16 +459,16 @@ class ModuleCleaningPlanListDataSource extends DataTableSource {
   @override
   DataRow? getRow(int index) {
     // print({"getRow call"});
-    final GoodsOrderListDetails = filteredModuleCleaningList[index];
+    final ModuleCleaningPlanningListDetails = filteredModuleCleaningList[index];
 
-    controller.PlanId.value = GoodsOrderListDetails?.planId ?? 0;
+    controller.PlanId.value = ModuleCleaningPlanningListDetails?.planId ?? 0;
     var cellsBuffer = [
       "planId",
-      '${GoodsOrderListDetails?.title ?? ''}',
-      '${GoodsOrderListDetails?.noOfCleaningDays ?? ''}',
-      '${GoodsOrderListDetails?.createdBy ?? ''}',
-      '${GoodsOrderListDetails?.frequency ?? ''}',
-      // '${GoodsOrderListDetails?.status ?? ''}',
+      '${ModuleCleaningPlanningListDetails?.title ?? ''}',
+      '${ModuleCleaningPlanningListDetails?.noOfCleaningDays ?? ''}',
+      '${ModuleCleaningPlanningListDetails?.createdBy ?? ''}',
+      '${ModuleCleaningPlanningListDetails?.frequency ?? ''}',
+      // '${ModuleCleaningPlanningListDetails?.status ?? ''}',
 
       'Actions',
     ];
@@ -500,7 +500,7 @@ class ModuleCleaningPlanListDataSource extends DataTableSource {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Text(
-                        '${GoodsOrderListDetails?.planId}',
+                        '${ModuleCleaningPlanningListDetails?.planId}',
                       ),
                       Dimens.boxHeight10,
                       Align(
@@ -512,7 +512,8 @@ class ModuleCleaningPlanListDataSource extends DataTableSource {
                                         .firstWhere(
                                           (e) =>
                                               e?.planId ==
-                                              GoodsOrderListDetails!.planId,
+                                              ModuleCleaningPlanningListDetails!
+                                                  .planId,
                                           orElse: () =>
                                               ModuleCleaningListPlanModel(
                                                   planId: 00),
@@ -524,7 +525,7 @@ class ModuleCleaningPlanListDataSource extends DataTableSource {
                             borderRadius: BorderRadius.circular(4),
                           ),
                           child: Text(
-                            '${GoodsOrderListDetails?.status_short}',
+                            '${ModuleCleaningPlanningListDetails?.status_short}',
                             style: Styles.white10.copyWith(
                               color: Colors.white,
                             ),
@@ -541,7 +542,7 @@ class ModuleCleaningPlanListDataSource extends DataTableSource {
                           message: 'view',
                           // onPress: () {
                           //   int id =
-                          //       GoodsOrderListDetails?.planId ?? 0;
+                          //       ModuleCleaningPlanningListDetails?.planId ?? 0;
                           //   if (id != 0) {
                           //     Get.toNamed(Routes.purchaseGoodsorderView,
                           //         arguments: {'id': id});
@@ -560,7 +561,8 @@ class ModuleCleaningPlanListDataSource extends DataTableSource {
                           icon: Icons.edit,
                           message: 'Edit',
                           onPress: () {
-                            int id = GoodsOrderListDetails?.planId ?? 0;
+                            int id =
+                                ModuleCleaningPlanningListDetails?.planId ?? 0;
                             if (id != 0) {
                               Get.toNamed(Routes.GoodsOrdersReqDetailsScreen,
                                   arguments: {"id": id});
@@ -573,7 +575,7 @@ class ModuleCleaningPlanListDataSource extends DataTableSource {
                           message: 'Approve/Reject',
                           // onPress: () {
                           //   int id =
-                          //       GoodsOrderListDetails?.planId ??
+                          //       ModuleCleaningPlanningListDetails?.planId ??
                           //           0;
                           //   if (id != 0) {
                           //     Get.toNamed(Routes.purchaseGoodsorderView,
