@@ -1491,7 +1491,7 @@ class ViewPermitWebScreen extends GetView<ViewPermitController> {
                                   padding: const EdgeInsets.all(8.0),
                                   child: Text(
                                     "This permit is valid only when issued Et approved by an authorized issuer. This permit must be obtained before a specified work is started Et it must be closed immediately after completion of the work or at the end of the shift as agreed by the parties identified on this permit. Refer PTW SOP(hyperlink). ",
-                                    style: Styles.grey12,
+                                    style: Styles.grey15,
                                   ),
                                 ),
                                 Container(
@@ -3179,7 +3179,7 @@ class ViewPermitWebScreen extends GetView<ViewPermitController> {
                           // controller
                           //     .createNewPermit();
                           Get.dialog(PermitRejectDialog(
-                            permitId: '${controller.viewPermitDetailsModel.value?.permitNo}',
+                            permitId: controller.viewPermitDetailsModel.value?.permitNo,
                             ptwStatus: '${controller.viewPermitDetailsModel.value?.ptwStatus}',
                             jobId: controller.jobId,
                           ));

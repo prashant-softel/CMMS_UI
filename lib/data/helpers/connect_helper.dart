@@ -1346,23 +1346,26 @@ class ConnectHelper {
       {required String auth,
       bool? isLoading,
       String? comment,
-      String? id,
+      int? id,
       String? ptwStatus,
+      rejectExtendPermitJsonString,
       int? jobId}) async {
     // facilityId = 45;
     var responseModel = await apiWrapper.makeRequest(
-      ptwStatus == '133' ? 'Permit/PermitExtendCancel' : 'Permit/PermitReject',
+      ptwStatus == '133' ? 'Permit/PermitExtendReject' : 'Permit/PermitReject',
       Request.put,
-      {'comment': "$comment", 'id': id},
+      rejectExtendPermitJsonString,
+      // {'comment': "$comment", 'id': id},
       isLoading ?? true,
       {
+        'Content-Type': 'application/json',
         'Authorization': 'Bearer $auth',
       },
     );
     // print('PermitRejectResponse: ${responseModel.data}');
     var res = responseModel.data;
     var parsedJson = json.decode(res);
-    Get.dialog<void>(PermitMessageRejectDialog(data: parsedJson['message']));
+    Get.dialog<void>(PermitMessageRejectDialog(data: parsedJson['message'], ptwStatus: ptwStatus,));
 
     return responseModel;
   }

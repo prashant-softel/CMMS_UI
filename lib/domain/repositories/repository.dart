@@ -3194,33 +3194,74 @@ class Repository {
     }
   }
 
-  Future<void> permitRejectButton(
-    String? comment,
-    String? id,
+  // Future<void> permitRejectButton(
+  //   String? comment,
+  //   String? id,
+  //   String? ptwStatus,
+  //   int? jobId,
+  //   bool? isLoading,
+  // ) async {
+  //   try {
+  //     final auth = await getSecuredValue(LocalKeys.authToken);
+
+  //     final res = await _dataRepository.permitRejectButton(
+  //       auth: auth,
+  //       comment: comment,
+  //       id: id,
+  //       ptwStatus: ptwStatus,
+  //       jobId: jobId,
+  //       isLoading: isLoading ?? false,
+  //     );
+  //     // print('PermitRejectResponse55: ${res.data}');
+
+  //     if (!res.hasError) {
+  //       //  return _permitIssueModel;
+  //     } else {
+  //       Utility.showDialog(res.errorCode.toString() + 'permitRejectButton');
+  //     }
+  //   } catch (error) {
+  //     log(error.toString());
+  //   }
+  // }
+
+   Future<Map<String, dynamic>> permitRejectButton(
+    rejectExtendPermitJsonString,
+    int? id,
     String? ptwStatus,
     int? jobId,
     bool? isLoading,
   ) async {
     try {
       final auth = await getSecuredValue(LocalKeys.authToken);
-
       final res = await _dataRepository.permitRejectButton(
         auth: auth,
-        comment: comment,
+        rejectExtendPermitJsonString: json.encode(rejectExtendPermitJsonString),
         id: id,
         ptwStatus: ptwStatus,
         jobId: jobId,
         isLoading: isLoading ?? false,
       );
-      // print('PermitRejectResponse55: ${res.data}');
+
+      var resourceData = res.data;
+
+      print('Response Permit Extend Reject Response: ${resourceData}');
 
       if (!res.hasError) {
-        //  return _permitIssueModel;
+        if (res.errorCode == 200) {
+          var responseMap = json.decode(res.data);
+          return responseMap;
+        } else {
+          // Get.dialog<void>(WarrantyClaimErrorDialog());
+        }
       } else {
-        Utility.showDialog(res.errorCode.toString() + 'permitRejectButton');
+        Utility.showDialog(
+            res.errorCode.toString() + 'PermitExtendRejectResponse');
+        //return '';
       }
+      return Map();
     } catch (error) {
-      log(error.toString());
+      print(error.toString());
+      return Map();
     }
   }
 

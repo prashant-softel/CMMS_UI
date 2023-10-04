@@ -688,19 +688,43 @@ class ViewPermitController extends GetxController {
     }
   }
 
-  Future<void> permitRejectButton(
-      {String? permitId, String? ptwStatus, int? jobId}) async {
-    String _rejectComment = rejectCommentTextFieldCtrlr.text.trim();
+  // Future<void> permitRejectButton(
+  //     {String? permitId, String? ptwStatus, int? jobId}) async {
+  //   String _rejectComment = rejectCommentTextFieldCtrlr.text.trim();
 
-    final _permitRejectBtn = await viewPermitPresenter.permitRejectButton(
-        comment: _rejectComment,
+  //   final _permitRejectBtn = await viewPermitPresenter.permitRejectButton(
+  //       comment: _rejectComment,
+  //       id: permitId,
+  //       ptwStatus: ptwStatus,
+  //       jobId: jobId,
+  //       isLoading: true);
+  //   // showAlertPermitApproveDialog();
+  //   print('Reject Button Data:${_rejectComment}');
+  //   print('Reject Button Data:${permitId}');
+  // }
+
+   void permitRejectButton({int? permitId, String? ptwStatus, int? jobId}) async {
+    {
+      String _rejectComment = rejectCommentTextFieldCtrlr.text.trim();
+
+      CommentModel commentRejectExtendPermitModel =
+          CommentModel(id: permitId, comment: _rejectComment);
+
+      var rejectExtendPermitJsonString =
+          commentRejectExtendPermitModel.toJson();
+
+      Map<String, dynamic>? response =
+          await viewPermitPresenter.permitRejectButton(
+        rejectExtendPermitJsonString: rejectExtendPermitJsonString,
         id: permitId,
         ptwStatus: ptwStatus,
         jobId: jobId,
-        isLoading: true);
-    // showAlertPermitApproveDialog();
-    print('Reject Button Data:${_rejectComment}');
-    print('Reject Button Data:${permitId}');
+        isLoading: true,
+      );
+      if (response == true) {
+        //getCalibrationList(facilityId, true);
+      }
+    }
   }
 
   Future<void> permitCancelByApproverButton(

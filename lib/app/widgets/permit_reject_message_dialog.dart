@@ -13,8 +13,9 @@ import '../theme/styles.dart';
 class PermitMessageRejectDialog extends GetView {
   String? createPermitData;
   String? data;
+  String? ptwStatus;
 
-  PermitMessageRejectDialog({super.key, this.createPermitData, this.data});
+  PermitMessageRejectDialog({super.key, this.createPermitData, this.data, this.ptwStatus});
   final ViewPermitController _controller = Get.find();
 
   @override
@@ -27,7 +28,7 @@ class PermitMessageRejectDialog extends GetView {
         insetPadding: Dimens.edgeInsets10_0_10_0,
         contentPadding: EdgeInsets.zero,
         title: Text(
-          'Permit Reject',
+          ptwStatus == '133' ? 'Permit Extend Reject' : 'Permit Reject',
           textAlign: TextAlign.center,
           style: TextStyle(color: Colors.black),
         ),

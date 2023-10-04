@@ -837,20 +837,37 @@ class DataRepository extends DomainRepository {
         isLoading: isLoading ?? false,
       );
 
-  Future<ResponseModel> permitRejectButton({
+  // Future<ResponseModel> permitRejectButton({
+  //   required String auth,
+  //   String? comment,
+  //   String? id,
+  //   String? ptwStatus,
+  //   int? jobId,
+  //   bool? isLoading,
+  // }) async =>
+  //     await connectHelper.permitRejectButton(
+  //       auth: auth,
+  //       comment: comment,
+  //       id: id,
+  //       ptwStatus: ptwStatus,
+  //       jobId: jobId,
+  //       isLoading: isLoading ?? false,
+  //     );
+
+   Future<ResponseModel> permitRejectButton({
     required String auth,
-    String? comment,
-    String? id,
+     int? id,
     String? ptwStatus,
     int? jobId,
+    rejectExtendPermitJsonString,
     bool? isLoading,
   }) async =>
       await connectHelper.permitRejectButton(
         auth: auth,
-        comment: comment,
+        rejectExtendPermitJsonString: rejectExtendPermitJsonString,
         id: id,
-        ptwStatus: ptwStatus,
         jobId: jobId,
+        ptwStatus: ptwStatus,
         isLoading: isLoading ?? false,
       );
 
