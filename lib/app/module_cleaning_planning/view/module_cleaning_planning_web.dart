@@ -67,7 +67,7 @@ class _ModuleCleaningPlanningState extends State<ModuleCleaningPlanning> {
                       child: Text(" / MODULE CLEANING",
                           style: Styles.greyMediumLight12),
                     ),
-                    Text(" / Add Module Cleaning Plan",
+                    Text(" / ADD MODULE CLEANING PLAN",
                         style: Styles.greyMediumLight12)
                   ],
                 ),
@@ -256,7 +256,7 @@ class _ModuleCleaningPlanningState extends State<ModuleCleaningPlanning> {
                                             Dimens.boxWidth10,
                                             CustomRichText(
                                                 title:
-                                                    'Estimated Duration\n                       In Day'),
+                                                    'Estimated Duration In Day'),
                                             Dimens.boxWidth10,
                                             SizedBox(
                                               child: LoginCustomTextfield(
