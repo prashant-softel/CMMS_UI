@@ -1,6 +1,8 @@
+import 'package:cmms/app/constant/constant.dart';
 import 'package:cmms/app/navigators/app_pages.dart';
 import 'package:cmms/app/pm_task_view/pm_task_view_controller.dart';
 import 'package:cmms/app/theme/dimens.dart';
+import 'package:cmms/app/utils/user_access_constants.dart';
 import 'package:cmms/app/widgets/assign_to_pm_task_dialog.dart';
 import 'package:cmms/app/widgets/execution_approve_dialog.dart';
 import 'package:cmms/app/widgets/history_table_widget_web.dart';
@@ -10,7 +12,6 @@ import 'package:data_table_2/data_table_2.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:get/get.dart';
-import 'package:scrollable_table_view/scrollable_table_view.dart';
 import '../../theme/color_values.dart';
 import '../../theme/styles.dart';
 import '../../widgets/custom_elevated_button.dart';
@@ -886,7 +887,15 @@ class PreventiveMaintenanceTaskViewContentWeb
                 //         ),
                 //       )
                 //     :
-                controller.pmtaskViewModel.value?.status == 167
+                controller.pmtaskViewModel.value?.status == 167 &&
+                        varUserAccessModel.value.access_list!
+                                .where((e) =>
+                                    e.feature_id ==
+                                        UserAccessConstants
+                                            .kFeaturePmTaskName &&
+                                    e.add == UserAccessConstants.kHaveAddAccess)
+                                .length >
+                            0
                     ? Container(
                         height: 35,
                         child: CustomElevatedButton(
@@ -895,15 +904,40 @@ class PreventiveMaintenanceTaskViewContentWeb
                           text: "Start",
                           onPressed: () {
                             controller.setPmTask();
-
-                            //controller.printScreen();
                           },
                         ),
                       )
                     : Dimens.box0,
-                controller.pmtaskViewModel.value?.status == 164 ||
-                        controller.pmtaskViewModel.value?.status == 166 ||
-                        controller.pmtaskViewModel.value?.status == 168
+                controller.pmtaskViewModel.value?.status == 164 &&
+                            varUserAccessModel.value.access_list!
+                                    .where((e) =>
+                                        e.feature_id ==
+                                            UserAccessConstants
+                                                .kFeaturePmTaskName &&
+                                        e.add ==
+                                            UserAccessConstants.kHaveAddAccess)
+                                    .length >
+                                0 ||
+                        controller.pmtaskViewModel.value?.status == 166 &&
+                            varUserAccessModel.value.access_list!
+                                    .where((e) =>
+                                        e.feature_id ==
+                                            UserAccessConstants
+                                                .kFeaturePmTaskName &&
+                                        e.add ==
+                                            UserAccessConstants.kHaveAddAccess)
+                                    .length >
+                                0 ||
+                        controller.pmtaskViewModel.value?.status == 168 &&
+                            varUserAccessModel.value.access_list!
+                                    .where((e) =>
+                                        e.feature_id ==
+                                            UserAccessConstants
+                                                .kFeaturePmTaskName &&
+                                        e.add ==
+                                            UserAccessConstants.kHaveAddAccess)
+                                    .length >
+                                0
                     ? Container(
                         height: 35,
                         child: CustomElevatedButton(
@@ -917,7 +951,14 @@ class PreventiveMaintenanceTaskViewContentWeb
                       )
                     : Dimens.box0,
                 Dimens.boxWidth10,
-                controller.pmtaskViewModel.value?.status == 162
+                controller.pmtaskViewModel.value?.status == 162 &&
+                        varUserAccessModel.value.access_list!
+                                .where((e) =>
+                                    e.feature_id ==
+                                        UserAccessConstants.kPermitFeatureId &&
+                                    e.add == UserAccessConstants.kHaveAddAccess)
+                                .length >
+                            0
                     ? Container(
                         height: 35,
                         child: CustomElevatedButton(
@@ -965,7 +1006,15 @@ class PreventiveMaintenanceTaskViewContentWeb
                 // ),
                 Dimens.boxWidth10,
 
-                controller.pmtaskViewModel.value?.status == 165
+                controller.pmtaskViewModel.value?.status == 165 &&
+                        varUserAccessModel.value.access_list!
+                                .where((e) =>
+                                    e.feature_id ==
+                                        UserAccessConstants.kPmTaskFeatureId &&
+                                    e.approve ==
+                                        UserAccessConstants.kHaveApproveAccess)
+                                .length >
+                            0
                     ? Container(
                         height: 35,
                         child: CustomElevatedButton(
@@ -988,7 +1037,15 @@ class PreventiveMaintenanceTaskViewContentWeb
                       )
                     : Dimens.box0,
                 Dimens.boxWidth10,
-                controller.pmtaskViewModel.value?.status == 165
+                controller.pmtaskViewModel.value?.status == 165 &&
+                        varUserAccessModel.value.access_list!
+                                .where((e) =>
+                                    e.feature_id ==
+                                        UserAccessConstants.kPmTaskFeatureId &&
+                                    e.approve ==
+                                        UserAccessConstants.kHaveApproveAccess)
+                                .length >
+                            0
                     ? Container(
                         height: 35,
                         child: CustomElevatedButton(

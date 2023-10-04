@@ -42,6 +42,18 @@ abstract class UserAccessConstants {
 
   static int kMrsFeatureId = 15;
   static String kFeatureMrsName = "SM MRS";
+  //MRS
+
+  static int kPmPlanFeatureId = 38;
+  static String kFeaturePmPlanName = "PM Plan";
+  //MRS
+
+  static int kPmTaskFeatureId = 9;
+  static String kFeaturePmTaskName = "PM Schedule View";
+  //MRS
+
+  static int kPmExecutionFeatureId = 10;
+  static String kFeaturePmExecutionName = "PM Execution";
 
   ///USER ACCESS
   static int kHaveAddAccess = 1;
