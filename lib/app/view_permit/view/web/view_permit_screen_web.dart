@@ -4134,7 +4134,7 @@ class ViewPermitWebScreen extends GetView<ViewPermitController> {
                           //     .createNewPermit();
                           Get.dialog(PermitCancelByApproverDialog(
                             permitId:
-                                '${controller.viewPermitDetailsModel.value?.permitNo}',
+                                controller.viewPermitDetailsModel.value?.permitNo,
                             ptwStatus:
                                 '${controller.viewPermitDetailsModel.value?.ptwStatus}',
                           ));

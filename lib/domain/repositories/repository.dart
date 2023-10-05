@@ -2864,32 +2864,40 @@ class Repository {
     }
   }
 
-  Future<void> permitCancelByApproverButton(
-    String? comment,
-    String? id,
-    String? ptwStatus,
+   Future<Map<String, dynamic>> permitCancelByApproverButton(
+   String? ptwStatus,
+    cancelByApproverJsonString,
     bool? isLoading,
   ) async {
     try {
       final auth = await getSecuredValue(LocalKeys.authToken);
-
       final res = await _dataRepository.permitCancelByApproverButton(
         auth: auth,
-        comment: comment,
-        id: id,
         ptwStatus: ptwStatus,
+        cancelByApproverJsonString: json.encode(cancelByApproverJsonString),
         isLoading: isLoading ?? false,
       );
-      print('PermitCancelByApproverResponse: ${res.data}');
+
+      var resourceData = res.data;
+
+      print('PermitCancelByApprover Response: ${resourceData}');
 
       if (!res.hasError) {
-        //  return _permitIssueModel;
+        if (res.errorCode == 200) {
+          var responseMap = json.decode(res.data);
+          return responseMap;
+        } else {
+          // Get.dialog<void>(WarrantyClaimErrorDialog());
+        }
       } else {
         Utility.showDialog(
-            res.errorCode.toString() + 'permitCancelByApproverButton');
+            res.errorCode.toString() + 'PermitCancelByApproverResponse');
+        //return '';
       }
+      return Map();
     } catch (error) {
-      log(error.toString());
+      print(error.toString());
+      return Map();
     }
   }
 

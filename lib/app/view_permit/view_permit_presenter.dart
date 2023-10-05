@@ -159,18 +159,30 @@ class ViewPermitPresenter {
     );
   }
 
-  Future<void> permitCancelByApproverButton({
-    String? comment,
-    String? id,
+  // Future<void> permitCancelByApproverButton({
+  //   String? comment,
+  //   String? id,
+  //   String? ptwStatus,
+  //   bool? isLoading,
+  // }) async =>
+  //     await viewPermitUsecase.permitCancelByApproverButton(
+  //       comment: comment,
+  //       id: id,
+  //       ptwStatus: ptwStatus,
+  //       isLoading: isLoading ?? false,
+  //     );
+
+   Future<Map<String, dynamic>?> permitCancelByApproverButton({
+    cancelByApproverJsonString,
     String? ptwStatus,
-    bool? isLoading,
-  }) async =>
-      await viewPermitUsecase.permitCancelByApproverButton(
-        comment: comment,
-        id: id,
-        ptwStatus: ptwStatus,
-        isLoading: isLoading ?? false,
-      );
+    required bool isLoading,
+  }) async {
+    return viewPermitUsecase.permitCancelByApproverButton(
+      cancelByApproverJsonString: cancelByApproverJsonString,
+      ptwStatus: ptwStatus,
+      isLoading: isLoading,
+    );
+  }
 
   Future<Map<String, dynamic>?> permitCancelRejectButton({
     rejectCancelPermitJsonString,

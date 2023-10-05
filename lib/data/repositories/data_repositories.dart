@@ -83,16 +83,14 @@ class DataRepository extends DomainRepository {
   }
 
   @override
-  Future<ResponseModel> getStateList(int countryCode) async =>
-      await connectHelper.getStateList(countryCode);
+  Future<ResponseModel> getStateList(int countryCode) async => await connectHelper.getStateList(countryCode);
 
   @override
   Future<ResponseModel> generateToken({
     auth,
     bool? isLoading,
   }) async {
-    var response =
-        await connectHelper.generateToken(auth: auth, isLoading: isLoading);
+    var response = await connectHelper.generateToken(auth: auth, isLoading: isLoading);
     return response;
   }
 
@@ -512,10 +510,7 @@ class DataRepository extends DomainRepository {
   }
 
   @override
-  Future<ResponseModel> getEquipmentList(
-          {required bool isLoading,
-          required String facilityId,
-          required String auth}) async =>
+  Future<ResponseModel> getEquipmentList({required bool isLoading, required String facilityId, required String auth}) async =>
       await connectHelper.getEquipmentList(
         isLoading: isLoading,
         facilityId: facilityId,
@@ -748,18 +743,21 @@ class DataRepository extends DomainRepository {
 
   Future<ResponseModel> permitCancelByApproverButton({
     required String auth,
-    String? comment,
-    String? id,
+    // String? comment,
+    // String? id,
+    cancelByApproverJsonString,
     String? ptwStatus,
     bool? isLoading,
   }) async =>
       await connectHelper.permitCancelByApproverButton(
         auth: auth,
-        comment: comment,
-        id: id,
+        // comment: comment,
+        // id: id,
+        cancelByApproverJsonString: cancelByApproverJsonString,
         ptwStatus: ptwStatus,
         isLoading: isLoading ?? false,
       );
+
   Future<ResponseModel> permitCancelRejectButton({
     required String auth,
     rejectCancelPermitJsonString,
@@ -810,8 +808,7 @@ class DataRepository extends DomainRepository {
     bool? isLoading,
     rejectJsonString,
   }) async {
-    var response = await connectHelper.rejectJobCard(
-        auth: auth, isLoading: isLoading, rejectJsonString: rejectJsonString);
+    var response = await connectHelper.rejectJobCard(auth: auth, isLoading: isLoading, rejectJsonString: rejectJsonString);
     return response;
   }
 
@@ -854,9 +851,9 @@ class DataRepository extends DomainRepository {
   //       isLoading: isLoading ?? false,
   //     );
 
-   Future<ResponseModel> permitRejectButton({
+  Future<ResponseModel> permitRejectButton({
     required String auth,
-     int? id,
+    int? id,
     String? ptwStatus,
     int? jobId,
     rejectExtendPermitJsonString,
@@ -930,33 +927,13 @@ class DataRepository extends DomainRepository {
       );
 
   Future<ResponseModel> getPreventiveCheckList(
-          {required String auth,
-          int? facilityId,
-          int? type,
-          bool? isLoading,
-          int? frequencyid,
-          int? categoryId}) async =>
+          {required String auth, int? facilityId, int? type, bool? isLoading, int? frequencyid, int? categoryId}) async =>
       await connectHelper.getPreventiveCheckList(
-          auth: auth,
-          facilityId: facilityId ?? 0,
-          type: type,
-          isLoading: isLoading ?? false,
-          categoryId: categoryId,
-          frequencyid: frequencyid);
+          auth: auth, facilityId: facilityId ?? 0, type: type, isLoading: isLoading ?? false, categoryId: categoryId, frequencyid: frequencyid);
   Future<ResponseModel> getPreventiveCheckListForPm(
-          {required String auth,
-          int? facilityId,
-          int? type,
-          bool? isLoading,
-          int? frequencyid,
-          int? categoryId}) async =>
+          {required String auth, int? facilityId, int? type, bool? isLoading, int? frequencyid, int? categoryId}) async =>
       await connectHelper.getPreventiveCheckListForPm(
-          auth: auth,
-          facilityId: facilityId ?? 0,
-          type: type,
-          isLoading: isLoading ?? false,
-          categoryId: categoryId,
-          frequencyid: frequencyid);
+          auth: auth, facilityId: facilityId ?? 0, type: type, isLoading: isLoading ?? false, categoryId: categoryId, frequencyid: frequencyid);
 
   Future<ResponseModel> getModuleList({
     required String auth,
@@ -1213,10 +1190,7 @@ class DataRepository extends DomainRepository {
     bool? isLoading,
     checklistJsonString,
   }) async {
-    var response = await connectHelper.createCheckList(
-        auth: auth,
-        isLoading: isLoading,
-        checklistJsonString: checklistJsonString);
+    var response = await connectHelper.createCheckList(auth: auth, isLoading: isLoading, checklistJsonString: checklistJsonString);
     return response;
   }
 
@@ -1225,10 +1199,7 @@ class DataRepository extends DomainRepository {
     bool? isLoading,
     modulelistJsonString,
   }) async {
-    var response = await connectHelper.createModuleList(
-        auth: auth,
-        isLoading: isLoading,
-        modulelistJsonString: modulelistJsonString);
+    var response = await connectHelper.createModuleList(auth: auth, isLoading: isLoading, modulelistJsonString: modulelistJsonString);
     return response;
   }
 
@@ -1237,10 +1208,7 @@ class DataRepository extends DomainRepository {
     bool? isLoading,
     checkpointJsonString,
   }) async {
-    var response = await connectHelper.createCheckpoint(
-        auth: auth,
-        isLoading: isLoading,
-        checkpointJsonString: checkpointJsonString);
+    var response = await connectHelper.createCheckpoint(auth: auth, isLoading: isLoading, checkpointJsonString: checkpointJsonString);
     return response;
   }
 
@@ -1249,10 +1217,7 @@ class DataRepository extends DomainRepository {
     bool? isLoading,
     saveRolelistJsonString,
   }) async {
-    var response = await connectHelper.saveRoleAccess(
-        auth: auth,
-        isLoading: isLoading,
-        saveRolelistJsonString: saveRolelistJsonString);
+    var response = await connectHelper.saveRoleAccess(auth: auth, isLoading: isLoading, saveRolelistJsonString: saveRolelistJsonString);
     return response;
   }
 
@@ -1291,26 +1256,11 @@ class DataRepository extends DomainRepository {
         pmTaskId: pmTaskId,
         isLoading: isLoading ?? false,
       );
-  Future<ResponseModel> updateNewPermit(
-          {required String auth,
-          newPermit,
-          bool? isLoading,
-          bool? resubmit}) async =>
-      await connectHelper.updateNewPermit(
-          auth: auth,
-          newPermit: newPermit,
-          isLoading: isLoading ?? false,
-          resubmit: resubmit);
-  Future<ResponseModel> resubmitPermit(
-          {required String auth,
-          newPermit,
-          bool? isLoading,
-          bool? resubmit}) async =>
-      await connectHelper.resubmitPermit(
-          auth: auth,
-          newPermit: newPermit,
-          isLoading: isLoading ?? false,
-          resubmit: resubmit);
+  Future<ResponseModel> updateNewPermit({required String auth, newPermit, bool? isLoading, bool? resubmit}) async =>
+      await connectHelper.updateNewPermit(auth: auth, newPermit: newPermit, isLoading: isLoading ?? false, resubmit: resubmit);
+      
+  Future<ResponseModel> resubmitPermit({required String auth, newPermit, bool? isLoading, bool? resubmit}) async =>
+      await connectHelper.resubmitPermit(auth: auth, newPermit: newPermit, isLoading: isLoading ?? false, resubmit: resubmit);
 
   Future<ResponseModel> createSOP({
     required String auth,
@@ -1447,8 +1397,7 @@ class DataRepository extends DomainRepository {
   }) async =>
       await connectHelper.updateMCScheduleExecution(
         auth: auth,
-        updateMCScheduleExecutionJsonString:
-            updateMCScheduleExecutionJsonString,
+        updateMCScheduleExecutionJsonString: updateMCScheduleExecutionJsonString,
         isLoading: isLoading ?? false,
       );
 
@@ -1605,8 +1554,7 @@ class DataRepository extends DomainRepository {
     bool? isLoading,
     check_point_id,
   }) async {
-    var response = await connectHelper.deleteCkeckpoint(
-        auth: auth, isLoading: isLoading, check_point_id: check_point_id);
+    var response = await connectHelper.deleteCkeckpoint(auth: auth, isLoading: isLoading, check_point_id: check_point_id);
     return response;
   }
 
@@ -1615,8 +1563,7 @@ class DataRepository extends DomainRepository {
     bool? isLoading,
     planId,
   }) async {
-    var response = await connectHelper.deletePmPlan(
-        auth: auth, isLoading: isLoading, planId: planId);
+    var response = await connectHelper.deletePmPlan(auth: auth, isLoading: isLoading, planId: planId);
     return response;
   }
 
@@ -1728,8 +1675,7 @@ class DataRepository extends DomainRepository {
     bool? isLoading,
     approveJsonString,
   }) async {
-    var response = await connectHelper.approveJobCards(
-        auth: auth, isLoading: isLoading, approveJsonString: approveJsonString);
+    var response = await connectHelper.approveJobCards(auth: auth, isLoading: isLoading, approveJsonString: approveJsonString);
     return response;
   }
 
@@ -1796,16 +1742,14 @@ class DataRepository extends DomainRepository {
     bool? isLoading,
     int? facility_id,
   }) async =>
-      await connectHelper.getTypePermitList(
-          auth: auth, isLoading: isLoading, facility_id: facility_id);
+      await connectHelper.getTypePermitList(auth: auth, isLoading: isLoading, facility_id: facility_id);
 
   Future<ResponseModel> getModulesList({
     String? auth,
     bool? isLoading,
     int? facility_id,
   }) async =>
-      await connectHelper.getModulesList(
-          auth: auth, isLoading: isLoading, facility_id: facility_id);
+      await connectHelper.getModulesList(auth: auth, isLoading: isLoading, facility_id: facility_id);
 
   Future<ResponseModel> getUserAccessList({
     required String auth,
@@ -1910,10 +1854,7 @@ class DataRepository extends DomainRepository {
     bool? isLoading,
     requestCalibration,
   }) async {
-    var response = await connectHelper.requestCalibration(
-        auth: auth,
-        isLoading: isLoading,
-        requestCalibration: requestCalibration);
+    var response = await connectHelper.requestCalibration(auth: auth, isLoading: isLoading, requestCalibration: requestCalibration);
     return response;
   }
 
@@ -1922,10 +1863,8 @@ class DataRepository extends DomainRepository {
     bool? isLoading,
     rejectCalibrationtoJsonString,
   }) async {
-    var response = await connectHelper.rejectRequestCalibration(
-        auth: auth,
-        isLoading: isLoading,
-        rejectCalibrationtoJsonString: rejectCalibrationtoJsonString);
+    var response =
+        await connectHelper.rejectRequestCalibration(auth: auth, isLoading: isLoading, rejectCalibrationtoJsonString: rejectCalibrationtoJsonString);
     return response;
   }
 
@@ -1935,9 +1874,7 @@ class DataRepository extends DomainRepository {
     approveCalibrationtoJsonString,
   }) async {
     var response = await connectHelper.approveRequestCalibration(
-        auth: auth,
-        isLoading: isLoading,
-        approveCalibrationtoJsonString: approveCalibrationtoJsonString);
+        auth: auth, isLoading: isLoading, approveCalibrationtoJsonString: approveCalibrationtoJsonString);
     return response;
   }
 
@@ -1946,10 +1883,8 @@ class DataRepository extends DomainRepository {
     bool? isLoading,
     approveCalibrationtoJsonString,
   }) async {
-    var response = await connectHelper.approveCloseCalibration(
-        auth: auth,
-        isLoading: isLoading,
-        approveCalibrationtoJsonString: approveCalibrationtoJsonString);
+    var response =
+        await connectHelper.approveCloseCalibration(auth: auth, isLoading: isLoading, approveCalibrationtoJsonString: approveCalibrationtoJsonString);
     return response;
   }
 
@@ -1958,10 +1893,8 @@ class DataRepository extends DomainRepository {
     bool? isLoading,
     rejectCalibrationtoJsonString,
   }) async {
-    var response = await connectHelper.rejectCloseCalibration(
-        auth: auth,
-        isLoading: isLoading,
-        rejectCalibrationtoJsonString: rejectCalibrationtoJsonString);
+    var response =
+        await connectHelper.rejectCloseCalibration(auth: auth, isLoading: isLoading, rejectCalibrationtoJsonString: rejectCalibrationtoJsonString);
     return response;
   }
 
@@ -1970,10 +1903,7 @@ class DataRepository extends DomainRepository {
     bool? isLoading,
     closeCalibrationtoJsonString,
   }) async {
-    var response = await connectHelper.closeCalibration(
-        auth: auth,
-        isLoading: isLoading,
-        closeCalibrationtoJsonString: closeCalibrationtoJsonString);
+    var response = await connectHelper.closeCalibration(auth: auth, isLoading: isLoading, closeCalibrationtoJsonString: closeCalibrationtoJsonString);
     return response;
   }
 
@@ -1982,10 +1912,8 @@ class DataRepository extends DomainRepository {
     bool? isLoading,
     completeCalibrationtoJsonString,
   }) async {
-    var response = await connectHelper.completeCalibration(
-        auth: auth,
-        isLoading: isLoading,
-        completeCalibrationtoJsonString: completeCalibrationtoJsonString);
+    var response =
+        await connectHelper.completeCalibration(auth: auth, isLoading: isLoading, completeCalibrationtoJsonString: completeCalibrationtoJsonString);
     return response;
   }
 
@@ -2011,18 +1939,9 @@ class DataRepository extends DomainRepository {
         pmScheduleJsonString: pmScheduleJsonString,
         isLoading: isLoading ?? false,
       );
-  Future<ResponseModel> getPmTaskList(
-          {required String auth,
-          int? facilityId,
-          bool? isLoading,
-          dynamic startDate,
-          dynamic endDate}) async =>
+  Future<ResponseModel> getPmTaskList({required String auth, int? facilityId, bool? isLoading, dynamic startDate, dynamic endDate}) async =>
       await connectHelper.getPmTaskList(
-          auth: auth,
-          facilityId: facilityId ?? 0,
-          isLoading: isLoading ?? false,
-          startDate: startDate,
-          endDate: endDate);
+          auth: auth, facilityId: facilityId ?? 0, isLoading: isLoading ?? false, startDate: startDate, endDate: endDate);
   Future<ResponseModel> getPmtaskViewList({
     String? auth,
     int? scheduleId,
@@ -2043,12 +1962,7 @@ class DataRepository extends DomainRepository {
       required bool isLoading,
       required int facilityId}) async {
     return await connectHelper.browseFiles(
-        auth: auth,
-        fileBytes: fileBytes,
-        fileName: fileName,
-        importType: importType,
-        isLoading: true,
-        facilityId: facilityId);
+        auth: auth, fileBytes: fileBytes, fileName: fileName, importType: importType, isLoading: true, facilityId: facilityId);
     // return true;
   }
 
@@ -2057,8 +1971,7 @@ class DataRepository extends DomainRepository {
     bool? isLoading,
     checklist_id,
   }) async {
-    var response = await connectHelper.deleteCkecklist(
-        auth: auth, isLoading: isLoading, checklist_id: checklist_id);
+    var response = await connectHelper.deleteCkecklist(auth: auth, isLoading: isLoading, checklist_id: checklist_id);
     return response;
   }
 
@@ -2067,8 +1980,7 @@ class DataRepository extends DomainRepository {
     bool? isLoading,
     module_id,
   }) async {
-    var response = await connectHelper.deleteModulelist(
-        auth: auth, isLoading: isLoading, module_id: module_id);
+    var response = await connectHelper.deleteModulelist(auth: auth, isLoading: isLoading, module_id: module_id);
     return response;
   }
 
@@ -2103,10 +2015,7 @@ class DataRepository extends DomainRepository {
     bool? isLoading,
     checkpointJsonString,
   }) async {
-    var response = await connectHelper.updateCheckPoint(
-        auth: auth,
-        isLoading: isLoading,
-        checkpointJsonString: checkpointJsonString);
+    var response = await connectHelper.updateCheckPoint(auth: auth, isLoading: isLoading, checkpointJsonString: checkpointJsonString);
     return response;
   }
 
@@ -2135,8 +2044,7 @@ class DataRepository extends DomainRepository {
     bool? isLoading,
     int? selectedCountryId,
   }) async {
-    return await connectHelper.getStateListnew(
-        auth: auth, isLoading: isLoading, selectedCountryId: selectedCountryId);
+    return await connectHelper.getStateListnew(auth: auth, isLoading: isLoading, selectedCountryId: selectedCountryId);
   }
 
   Future<ResponseModel> getCityList({
@@ -2144,8 +2052,7 @@ class DataRepository extends DomainRepository {
     bool? isLoading,
     int? selectedStateId,
   }) async {
-    return await connectHelper.getCityList(
-        auth: auth, isLoading: isLoading, selectedStateId: selectedStateId);
+    return await connectHelper.getCityList(auth: auth, isLoading: isLoading, selectedStateId: selectedStateId);
   }
 
   Future<ResponseModel> getRoleAccessList({
@@ -2253,8 +2160,7 @@ class DataRepository extends DomainRepository {
     bool? isLoading,
     adduserJsonString,
   }) async {
-    var response = await connectHelper.addUser(
-        auth: auth, isLoading: isLoading, adduserJsonString: adduserJsonString);
+    var response = await connectHelper.addUser(auth: auth, isLoading: isLoading, adduserJsonString: adduserJsonString);
     return response;
   }
 
@@ -2263,8 +2169,7 @@ class DataRepository extends DomainRepository {
     bool? isLoading,
     adduserJsonString,
   }) async {
-    var response = await connectHelper.updateUser(
-        auth: auth, isLoading: isLoading, adduserJsonString: adduserJsonString);
+    var response = await connectHelper.updateUser(auth: auth, isLoading: isLoading, adduserJsonString: adduserJsonString);
     return response;
   }
 
@@ -2288,11 +2193,7 @@ class DataRepository extends DomainRepository {
         pmExecutionJsonString: pmExecutionJsonString,
         isLoading: isLoading ?? false,
       );
-  Future<AddUserModel> uploadImge(
-      {required String auth,
-      Uint8List? fileBytes,
-      required String fileName,
-      required bool isLoading}) async {
+  Future<AddUserModel> uploadImge({required String auth, Uint8List? fileBytes, required String fileName, required bool isLoading}) async {
     return await connectHelper.uploadImge(
       auth: auth,
       fileBytes: fileBytes,
@@ -2303,10 +2204,7 @@ class DataRepository extends DomainRepository {
   }
 
   Future<AddInventoryRequestModel> uploadImgeInventory(
-      {required String auth,
-      Uint8List? fileBytes,
-      required String fileName,
-      required bool isLoading}) async {
+      {required String auth, Uint8List? fileBytes, required String fileName, required bool isLoading}) async {
     return await connectHelper.uploadImgeInventory(
       auth: auth,
       fileBytes: fileBytes,
@@ -2332,10 +2230,7 @@ class DataRepository extends DomainRepository {
     bool? isLoading,
     businesslistJsonString,
   }) async {
-    var response = await connectHelper.createBusinessList(
-        auth: auth,
-        isLoading: isLoading,
-        businesslistJsonString: businesslistJsonString);
+    var response = await connectHelper.createBusinessList(auth: auth, isLoading: isLoading, businesslistJsonString: businesslistJsonString);
     return response;
   }
 
@@ -2344,10 +2239,7 @@ class DataRepository extends DomainRepository {
     bool? isLoading,
     businesslistJsonString,
   }) async {
-    var response = await connectHelper.createSPV(
-        auth: auth,
-        isLoading: isLoading,
-        businesslistJsonString: businesslistJsonString);
+    var response = await connectHelper.createSPV(auth: auth, isLoading: isLoading, businesslistJsonString: businesslistJsonString);
     return response;
   }
 
@@ -2392,10 +2284,7 @@ class DataRepository extends DomainRepository {
     bool? isLoading,
     addInventoryJsonString,
   }) async {
-    var response = await connectHelper.AddInventory(
-        auth: auth,
-        isLoading: isLoading,
-        addInventoryJsonString: addInventoryJsonString);
+    var response = await connectHelper.AddInventory(auth: auth, isLoading: isLoading, addInventoryJsonString: addInventoryJsonString);
     return response;
   }
 
@@ -2404,23 +2293,12 @@ class DataRepository extends DomainRepository {
     bool? isLoading,
     addInventoryJsonString,
   }) async {
-    var response = await connectHelper.updateInventory(
-        auth: auth,
-        isLoading: isLoading,
-        addInventoryJsonString: addInventoryJsonString);
+    var response = await connectHelper.updateInventory(auth: auth, isLoading: isLoading, addInventoryJsonString: addInventoryJsonString);
     return response;
   }
 
-  Future<ResponseModel> inventoryList(
-      {int? facilityId,
-      required bool isLoading,
-      required String auth,
-      int? categoryId}) async {
-    return await connectHelper.inventoryList(
-        isLoading: isLoading,
-        auth: auth,
-        facilityId: facilityId,
-        categoryId: categoryId);
+  Future<ResponseModel> inventoryList({int? facilityId, required bool isLoading, required String auth, int? categoryId}) async {
+    return await connectHelper.inventoryList(isLoading: isLoading, auth: auth, facilityId: facilityId, categoryId: categoryId);
   }
 
   Future<ResponseModel> startCalibration({
@@ -2428,8 +2306,7 @@ class DataRepository extends DomainRepository {
     bool? isLoading,
     calibrationId,
   }) async {
-    var response = await connectHelper.startCalibration(
-        auth: auth, isLoading: isLoading, calibrationId: calibrationId);
+    var response = await connectHelper.startCalibration(auth: auth, isLoading: isLoading, calibrationId: calibrationId);
     return response;
   }
 
@@ -2438,10 +2315,7 @@ class DataRepository extends DomainRepository {
     bool? isLoading,
     facilitylistJsonString,
   }) async {
-    var response = await connectHelper.createFacilityType(
-        auth: auth,
-        isLoading: isLoading,
-        facilitylistJsonString: facilitylistJsonString);
+    var response = await connectHelper.createFacilityType(auth: auth, isLoading: isLoading, facilitylistJsonString: facilitylistJsonString);
     return response;
   }
 
@@ -2450,10 +2324,7 @@ class DataRepository extends DomainRepository {
     bool? isLoading,
     facilitylistJsonString,
   }) async {
-    var response = await connectHelper.createBlockType(
-        auth: auth,
-        isLoading: isLoading,
-        blockTypeJsonString: facilitylistJsonString);
+    var response = await connectHelper.createBlockType(auth: auth, isLoading: isLoading, blockTypeJsonString: facilitylistJsonString);
     return response;
   }
 
@@ -2499,8 +2370,7 @@ class DataRepository extends DomainRepository {
     bool? isLoading,
     business_id,
   }) async {
-    var response = await connectHelper.deleteBusinessList(
-        auth: auth, isLoading: isLoading, business_id: business_id);
+    var response = await connectHelper.deleteBusinessList(auth: auth, isLoading: isLoading, business_id: business_id);
     return response;
   }
 
@@ -2509,8 +2379,7 @@ class DataRepository extends DomainRepository {
     bool? isLoading,
     business_id,
   }) async {
-    var response = await connectHelper.deleteBlock(
-        auth: auth, isLoading: isLoading, business_id: business_id);
+    var response = await connectHelper.deleteBlock(auth: auth, isLoading: isLoading, business_id: business_id);
     return response;
   }
 
@@ -2519,8 +2388,7 @@ class DataRepository extends DomainRepository {
     bool? isLoading,
     business_id,
   }) async {
-    var response = await connectHelper.deleteSPV(
-        auth: auth, isLoading: isLoading, business_id: business_id);
+    var response = await connectHelper.deleteSPV(auth: auth, isLoading: isLoading, business_id: business_id);
     return response;
   }
 
@@ -2529,8 +2397,7 @@ class DataRepository extends DomainRepository {
     bool? isLoading,
     business_id,
   }) async {
-    var response = await connectHelper.deleteFacility(
-        auth: auth, isLoading: isLoading, business_id: business_id);
+    var response = await connectHelper.deleteFacility(auth: auth, isLoading: isLoading, business_id: business_id);
     return response;
   }
 
@@ -2565,8 +2432,7 @@ class DataRepository extends DomainRepository {
     bool? isLoading,
     id,
   }) async {
-    var response = await connectHelper.deleteGoodsOrders(
-        auth: auth, isLoading: isLoading, id: id);
+    var response = await connectHelper.deleteGoodsOrders(auth: auth, isLoading: isLoading, id: id);
     return response;
   }
 
@@ -2597,10 +2463,7 @@ class DataRepository extends DomainRepository {
     bool? isLoading,
     competencyJsonString,
   }) async {
-    var response = await connectHelper.createCompetency(
-        auth: auth,
-        isLoading: isLoading,
-        competencyJsonString: competencyJsonString);
+    var response = await connectHelper.createCompetency(auth: auth, isLoading: isLoading, competencyJsonString: competencyJsonString);
     return response;
   }
 
@@ -2622,8 +2485,7 @@ class DataRepository extends DomainRepository {
     bool? isLoading,
     checklist_id,
   }) async {
-    var response = await connectHelper.deleteCompetencyList(
-        auth: auth, isLoading: isLoading, checklist_id: checklist_id);
+    var response = await connectHelper.deleteCompetencyList(auth: auth, isLoading: isLoading, checklist_id: checklist_id);
     return response;
   }
 
@@ -2632,10 +2494,7 @@ class DataRepository extends DomainRepository {
     bool? isLoading,
     checklistJsonString,
   }) async {
-    var response = await connectHelper.createPermitType(
-        auth: auth,
-        isLoading: isLoading,
-        checklistJsonString: checklistJsonString);
+    var response = await connectHelper.createPermitType(auth: auth, isLoading: isLoading, checklistJsonString: checklistJsonString);
     return response;
   }
 
@@ -2644,8 +2503,7 @@ class DataRepository extends DomainRepository {
     bool? isLoading,
     permit_id,
   }) async {
-    var response = await connectHelper.deletePermitType(
-        auth: auth, isLoading: isLoading, permit_id: permit_id);
+    var response = await connectHelper.deletePermitType(auth: auth, isLoading: isLoading, permit_id: permit_id);
     return response;
   }
 
@@ -2654,8 +2512,7 @@ class DataRepository extends DomainRepository {
     bool? isLoading,
     id,
   }) async {
-    var response = await connectHelper.deleteSafetyMeasure(
-        auth: auth, isLoading: isLoading, id: id);
+    var response = await connectHelper.deleteSafetyMeasure(auth: auth, isLoading: isLoading, id: id);
     return response;
   }
 
@@ -2677,10 +2534,7 @@ class DataRepository extends DomainRepository {
     bool? isLoading,
     modulelistJsonString,
   }) async {
-    var response = await connectHelper.createRoleList(
-        auth: auth,
-        isLoading: isLoading,
-        modulelistJsonString: modulelistJsonString);
+    var response = await connectHelper.createRoleList(auth: auth, isLoading: isLoading, modulelistJsonString: modulelistJsonString);
     return response;
   }
 
@@ -2702,8 +2556,7 @@ class DataRepository extends DomainRepository {
     bool? isLoading,
     module_id,
   }) async {
-    var response = await connectHelper.deleteRole(
-        auth: auth, isLoading: isLoading, module_id: module_id);
+    var response = await connectHelper.deleteRole(auth: auth, isLoading: isLoading, module_id: module_id);
     return response;
   }
 
@@ -2712,10 +2565,7 @@ class DataRepository extends DomainRepository {
     bool? isLoading,
     designationJsonString,
   }) async {
-    var response = await connectHelper.createDesignation(
-        auth: auth,
-        isLoading: isLoading,
-        designationJsonString: designationJsonString);
+    var response = await connectHelper.createDesignation(auth: auth, isLoading: isLoading, designationJsonString: designationJsonString);
     return response;
   }
 
@@ -2737,8 +2587,7 @@ class DataRepository extends DomainRepository {
     bool? isLoading,
     module_id,
   }) async {
-    var response = await connectHelper.deleteDesignation(
-        auth: auth, isLoading: isLoading, module_id: module_id);
+    var response = await connectHelper.deleteDesignation(auth: auth, isLoading: isLoading, module_id: module_id);
     return response;
   }
 
@@ -2747,10 +2596,7 @@ class DataRepository extends DomainRepository {
     bool? isLoading,
     businessTypeJsonString,
   }) async {
-    var response = await connectHelper.createBusinessType(
-        auth: auth,
-        isLoading: isLoading,
-        businessTypeJsonString: businessTypeJsonString);
+    var response = await connectHelper.createBusinessType(auth: auth, isLoading: isLoading, businessTypeJsonString: businessTypeJsonString);
     return response;
   }
 
@@ -2759,8 +2605,7 @@ class DataRepository extends DomainRepository {
     bool? isLoading,
     businesstype_id,
   }) async {
-    var response = await connectHelper.deleteBusinessType(
-        auth: auth, isLoading: isLoading, businesstype_id: businesstype_id);
+    var response = await connectHelper.deleteBusinessType(auth: auth, isLoading: isLoading, businesstype_id: businesstype_id);
     return response;
   }
 
@@ -2777,34 +2622,13 @@ class DataRepository extends DomainRepository {
     return response;
   }
 
-  Future<ResponseModel> getMrsList(
-          {required String auth,
-          int? facilityId,
-          bool? isLoading,
-          dynamic startDate,
-          dynamic endDate,
-          int? userId}) async =>
+  Future<ResponseModel> getMrsList({required String auth, int? facilityId, bool? isLoading, dynamic startDate, dynamic endDate, int? userId}) async =>
       await connectHelper.getMrsList(
-          auth: auth,
-          facilityId: facilityId ?? 0,
-          isLoading: isLoading ?? false,
-          startDate: startDate,
-          endDate: endDate,
-          userId: userId);
+          auth: auth, facilityId: facilityId ?? 0, isLoading: isLoading ?? false, startDate: startDate, endDate: endDate, userId: userId);
   Future<ResponseModel> getPlantStockList(
-          {required String auth,
-          int? facilityId,
-          bool? isLoading,
-          dynamic startDate,
-          dynamic endDate,
-          int? userId}) async =>
+          {required String auth, int? facilityId, bool? isLoading, dynamic startDate, dynamic endDate, int? userId}) async =>
       await connectHelper.getPlantStockList(
-          auth: auth,
-          facilityId: facilityId ?? 0,
-          isLoading: isLoading ?? false,
-          startDate: startDate,
-          endDate: endDate,
-          userId: userId);
+          auth: auth, facilityId: facilityId ?? 0, isLoading: isLoading ?? false, startDate: startDate, endDate: endDate, userId: userId);
   Future<ResponseModel> getFaultyMaterialReportList({
     required String auth,
     int? facilityId,
@@ -2886,10 +2710,7 @@ class DataRepository extends DomainRepository {
     bool? isLoading,
     riskTypeJsonString,
   }) async {
-    var response = await connectHelper.createRiskType(
-        auth: auth,
-        isLoading: isLoading,
-        riskTypeJsonString: riskTypeJsonString);
+    var response = await connectHelper.createRiskType(auth: auth, isLoading: isLoading, riskTypeJsonString: riskTypeJsonString);
     return response;
   }
 
@@ -2898,8 +2719,7 @@ class DataRepository extends DomainRepository {
     bool? isLoading,
     businesstype_id,
   }) async {
-    var response = await connectHelper.deleteRiskType(
-        auth: auth, isLoading: isLoading, businesstype_id: businesstype_id);
+    var response = await connectHelper.deleteRiskType(auth: auth, isLoading: isLoading, businesstype_id: businesstype_id);
     return response;
   }
 
@@ -2945,10 +2765,7 @@ class DataRepository extends DomainRepository {
     bool? isLoading,
     checkpointJsonString,
   }) async {
-    var response = await connectHelper.createInventoryStatus(
-        auth: auth,
-        isLoading: isLoading,
-        checkpointJsonString: checkpointJsonString);
+    var response = await connectHelper.createInventoryStatus(auth: auth, isLoading: isLoading, checkpointJsonString: checkpointJsonString);
     return response;
   }
 
@@ -2957,8 +2774,7 @@ class DataRepository extends DomainRepository {
     bool? isLoading,
     check_point_id,
   }) async {
-    var response = await connectHelper.deleteInventoryStatus(
-        auth: auth, isLoading: isLoading, check_point_id: check_point_id);
+    var response = await connectHelper.deleteInventoryStatus(auth: auth, isLoading: isLoading, check_point_id: check_point_id);
     return response;
   }
 
@@ -2980,10 +2796,7 @@ class DataRepository extends DomainRepository {
     bool? isLoading,
     checkpointJsonString,
   }) async {
-    var response = await connectHelper.createInventoryType(
-        auth: auth,
-        isLoading: isLoading,
-        checkpointJsonString: checkpointJsonString);
+    var response = await connectHelper.createInventoryType(auth: auth, isLoading: isLoading, checkpointJsonString: checkpointJsonString);
     return response;
   }
 
@@ -2992,8 +2805,7 @@ class DataRepository extends DomainRepository {
     bool? isLoading,
     check_point_id,
   }) async {
-    var response = await connectHelper.deleteInventoryType(
-        auth: auth, isLoading: isLoading, check_point_id: check_point_id);
+    var response = await connectHelper.deleteInventoryType(auth: auth, isLoading: isLoading, check_point_id: check_point_id);
     return response;
   }
 
@@ -3015,10 +2827,7 @@ class DataRepository extends DomainRepository {
     bool? isLoading,
     checkpointJsonString,
   }) async {
-    var response = await connectHelper.createInventoryCategory(
-        auth: auth,
-        isLoading: isLoading,
-        checkpointJsonString: checkpointJsonString);
+    var response = await connectHelper.createInventoryCategory(auth: auth, isLoading: isLoading, checkpointJsonString: checkpointJsonString);
     return response;
   }
 
@@ -3027,8 +2836,7 @@ class DataRepository extends DomainRepository {
     bool? isLoading,
     check_point_id,
   }) async {
-    var response = await connectHelper.deleteInventoryCategory(
-        auth: auth, isLoading: isLoading, check_point_id: check_point_id);
+    var response = await connectHelper.deleteInventoryCategory(auth: auth, isLoading: isLoading, check_point_id: check_point_id);
     return response;
   }
 
@@ -3063,10 +2871,7 @@ class DataRepository extends DomainRepository {
     bool? isLoading,
     approvetoJsonString,
   }) async {
-    var response = await connectHelper.approveMrs(
-        auth: auth,
-        isLoading: isLoading,
-        approvetoJsonString: approvetoJsonString);
+    var response = await connectHelper.approveMrs(auth: auth, isLoading: isLoading, approvetoJsonString: approvetoJsonString);
     return response;
   }
 
@@ -3075,10 +2880,7 @@ class DataRepository extends DomainRepository {
     bool? isLoading,
     rejecttoJsonString,
   }) async {
-    var response = await connectHelper.rejectMrs(
-        auth: auth,
-        isLoading: isLoading,
-        rejecttoJsonString: rejecttoJsonString);
+    var response = await connectHelper.rejectMrs(auth: auth, isLoading: isLoading, rejecttoJsonString: rejecttoJsonString);
     return response;
   }
 
@@ -3133,10 +2935,8 @@ class DataRepository extends DomainRepository {
     bool? isLoading,
     saveRoleNotificationJsonString,
   }) async {
-    var response = await connectHelper.saveRoleNotification(
-        auth: auth,
-        isLoading: isLoading,
-        saveRoleNotificationJsonString: saveRoleNotificationJsonString);
+    var response =
+        await connectHelper.saveRoleNotification(auth: auth, isLoading: isLoading, saveRoleNotificationJsonString: saveRoleNotificationJsonString);
     return response;
   }
 
@@ -3145,8 +2945,7 @@ class DataRepository extends DomainRepository {
     bool? isLoading,
     issuetoJsonString,
   }) async {
-    var response = await connectHelper.issueMrs(
-        auth: auth, isLoading: isLoading, issuetoJsonString: issuetoJsonString);
+    var response = await connectHelper.issueMrs(auth: auth, isLoading: isLoading, issuetoJsonString: issuetoJsonString);
     return response;
   }
 
@@ -3155,10 +2954,7 @@ class DataRepository extends DomainRepository {
     bool? isLoading,
     issuemrsapprovetoJsonString,
   }) async {
-    var response = await connectHelper.approveIssueMrs(
-        auth: auth,
-        isLoading: isLoading,
-        issuemrsapprovetoJsonString: issuemrsapprovetoJsonString);
+    var response = await connectHelper.approveIssueMrs(auth: auth, isLoading: isLoading, issuemrsapprovetoJsonString: issuemrsapprovetoJsonString);
     return response;
   }
 
@@ -3167,23 +2963,12 @@ class DataRepository extends DomainRepository {
     bool? isLoading,
     rejectIssuetoJsonString,
   }) async {
-    var response = await connectHelper.rejectIssueMrs(
-        auth: auth,
-        isLoading: isLoading,
-        rejectIssuetoJsonString: rejectIssuetoJsonString);
+    var response = await connectHelper.rejectIssueMrs(auth: auth, isLoading: isLoading, rejectIssuetoJsonString: rejectIssuetoJsonString);
     return response;
   }
 
-  Future<ResponseModel> getReturnMrsList(
-          {required String auth,
-          int? facilityId,
-          bool? isLoading,
-          int? userId}) async =>
-      await connectHelper.getReturnMrsList(
-          auth: auth,
-          facilityId: facilityId ?? 0,
-          isLoading: isLoading ?? false,
-          userId: userId);
+  Future<ResponseModel> getReturnMrsList({required String auth, int? facilityId, bool? isLoading, int? userId}) async =>
+      await connectHelper.getReturnMrsList(auth: auth, facilityId: facilityId ?? 0, isLoading: isLoading ?? false, userId: userId);
   Future<ResponseModel> scheduleLinkToPermit({
     required String auth,
     scheduleId,
@@ -3211,10 +2996,7 @@ class DataRepository extends DomainRepository {
     bool? isLoading,
     approvetoJsonString,
   }) async {
-    var response = await connectHelper.approveReturnMrs(
-        auth: auth,
-        isLoading: isLoading,
-        approvetoJsonString: approvetoJsonString);
+    var response = await connectHelper.approveReturnMrs(auth: auth, isLoading: isLoading, approvetoJsonString: approvetoJsonString);
     return response;
   }
 
@@ -3245,10 +3027,7 @@ class DataRepository extends DomainRepository {
     bool? isLoading,
     approvetoJsonString,
   }) async {
-    var response = await connectHelper.approveGOReceive(
-        auth: auth,
-        isLoading: isLoading,
-        approvetoJsonString: approvetoJsonString);
+    var response = await connectHelper.approveGOReceive(auth: auth, isLoading: isLoading, approvetoJsonString: approvetoJsonString);
     return response;
   }
 
@@ -3279,10 +3058,7 @@ class DataRepository extends DomainRepository {
     bool? isLoading,
     rejecttoJsonString,
   }) async {
-    var response = await connectHelper.rejectRetrunMrs(
-        auth: auth,
-        isLoading: isLoading,
-        rejecttoJsonString: rejecttoJsonString);
+    var response = await connectHelper.rejectRetrunMrs(auth: auth, isLoading: isLoading, rejecttoJsonString: rejecttoJsonString);
     return response;
   }
 
@@ -3303,8 +3079,7 @@ class DataRepository extends DomainRepository {
     bool? isLoading,
     jobTypeJsonString,
   }) async {
-    var response = await connectHelper.createJobType(
-        auth: auth, isLoading: isLoading, jobTypeJsonString: jobTypeJsonString);
+    var response = await connectHelper.createJobType(auth: auth, isLoading: isLoading, jobTypeJsonString: jobTypeJsonString);
     return response;
   }
 
@@ -3313,8 +3088,8 @@ class DataRepository extends DomainRepository {
     bool? isLoading,
     safetyMeasurelistJsonString,
   }) async {
-    var response = await connectHelper.createSafetyMeasure(
-        auth: auth, isLoading: isLoading, safetyMeasurelistJsonString: safetyMeasurelistJsonString);
+    var response =
+        await connectHelper.createSafetyMeasure(auth: auth, isLoading: isLoading, safetyMeasurelistJsonString: safetyMeasurelistJsonString);
     return response;
   }
 
@@ -3323,8 +3098,7 @@ class DataRepository extends DomainRepository {
     bool? isLoading,
     check_point_id,
   }) async {
-    var response = await connectHelper.deleteJobType(
-        auth: auth, isLoading: isLoading, check_point_id: check_point_id);
+    var response = await connectHelper.deleteJobType(auth: auth, isLoading: isLoading, check_point_id: check_point_id);
     return response;
   }
 
@@ -3346,8 +3120,7 @@ class DataRepository extends DomainRepository {
     bool? isLoading,
     check_point_id,
   }) async {
-    var response = await connectHelper.deleteSopType(
-        auth: auth, isLoading: isLoading, check_point_id: check_point_id);
+    var response = await connectHelper.deleteSopType(auth: auth, isLoading: isLoading, check_point_id: check_point_id);
     return response;
   }
 
@@ -3370,11 +3143,7 @@ class DataRepository extends DomainRepository {
     int? facilityId,
     int? userId,
   }) async {
-    return await connectHelper.getCmmsItemList(
-        auth: auth,
-        isLoading: isLoading,
-        facilityId: facilityId,
-        userId: userId);
+    return await connectHelper.getCmmsItemList(auth: auth, isLoading: isLoading, facilityId: facilityId, userId: userId);
   }
 
   Future<ResponseModel> createReturnMrs({
@@ -3389,33 +3158,14 @@ class DataRepository extends DomainRepository {
       );
 
   Future<ResponseModel> getEmployeeStockReportList(
-      {String? auth,
-      bool? isLoading,
-      int? facilityId,
-      int? userId,
-      dynamic startDate,
-      dynamic endDate}) async {
+      {String? auth, bool? isLoading, int? facilityId, int? userId, dynamic startDate, dynamic endDate}) async {
     return await connectHelper.getEmployeeStockReportList(
-        auth: auth,
-        isLoading: isLoading,
-        facilityId: facilityId,
-        userId: userId,
-        startDate: startDate,
-        endDate: endDate);
+        auth: auth, isLoading: isLoading, facilityId: facilityId, userId: userId, startDate: startDate, endDate: endDate);
   }
 
-  Future<ResponseModel> getPmPlanList(
-          {required String auth,
-          int? facilityId,
-          bool? isLoading,
-          dynamic startDate,
-          dynamic endDate}) async =>
+  Future<ResponseModel> getPmPlanList({required String auth, int? facilityId, bool? isLoading, dynamic startDate, dynamic endDate}) async =>
       await connectHelper.getPmPlanList(
-          auth: auth,
-          facilityId: facilityId ?? 0,
-          isLoading: isLoading ?? false,
-          startDate: startDate,
-          endDate: endDate);
+          auth: auth, facilityId: facilityId ?? 0, isLoading: isLoading ?? false, startDate: startDate, endDate: endDate);
   Future<ResponseModel> ClosePMTaskExecution({
     required String auth,
     ClosePMTaskExecutionJsonString,
@@ -3437,11 +3187,7 @@ class DataRepository extends DomainRepository {
         isLoading: isLoading ?? false,
       );
   Future<ResponseModel> cloneSchedule(
-          {required String auth,
-          required int from_schedule_id,
-          required int to_schedule_id,
-          required int taskId,
-          bool? isloading}) async =>
+          {required String auth, required int from_schedule_id, required int to_schedule_id, required int taskId, bool? isloading}) async =>
       await connectHelper.cloneSchedule(
         auth: auth,
         from_schedule_id: from_schedule_id,

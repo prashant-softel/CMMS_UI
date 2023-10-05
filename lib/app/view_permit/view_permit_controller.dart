@@ -737,15 +737,34 @@ class ViewPermitController extends GetxController {
   }
 
   Future<void> permitCancelByApproverButton(
-      {String? permitId, String? ptwStatus}) async {
-    String _cancelComment = cancelCommentByApproverTextFieldCtrlr.text.trim();
+      {int? permitId, String? ptwStatus}) async {
+    // String _cancelComment = cancelCommentByApproverTextFieldCtrlr.text.trim();
 
-    final _permitCancelByApproverBtn =
-        await viewPermitPresenter.permitCancelByApproverButton(
-            comment: _cancelComment, id: permitId, ptwStatus: ptwStatus);
-    // showAlertPermitApproveDialog();
-    print('Cancel Button By Approver Data:${_cancelComment}');
-    print('Cancel Button By Approver Data:${permitId}');
+    // final _permitCancelByApproverBtn =
+    //     await viewPermitPresenter.permitCancelByApproverButton(
+    //         comment: _cancelComment, id: permitId, ptwStatus: ptwStatus);
+    // // showAlertPermitApproveDialog();
+    // print('Cancel Button By Approver Data:${_cancelComment}');
+    // print('Cancel Button By Approver Data:${permitId}');
+     {
+      String _cancelComment = cancelCommentByApproverTextFieldCtrlr.text.trim();
+
+      CommentModel commentCancelByApproverPermitModel =
+          CommentModel(id: permitId, comment: _cancelComment);
+
+      var cancelByApproverJsonString =
+          commentCancelByApproverPermitModel.toJson();
+
+      Map<String, dynamic>? response =
+          await viewPermitPresenter.permitCancelByApproverButton(
+        cancelByApproverJsonString: cancelByApproverJsonString,
+        ptwStatus: ptwStatus,
+        isLoading: true,
+      );
+      if (response == true) {
+        //getCalibrationList(facilityId, true);
+      }
+    }
   }
 
   void permitCancelRejectButton({int? permitId}) async {
