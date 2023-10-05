@@ -2,6 +2,8 @@ import 'package:cmms/app/module_cleaning_planning/module_cleaning_planning_prese
 import 'package:cmms/domain/models/facility_model.dart';
 import 'package:cmms/domain/models/frequency_model.dart';
 import 'package:cmms/domain/models/inventory_category_model.dart';
+import 'package:cmms/domain/models/paiyed_model.dart';
+import 'package:cmms/domain/models/type_model.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
 
@@ -12,7 +14,11 @@ class ModuleCleaningPlanningController extends GetxController {
   ModuleCleaningPlanningController(
     this.moduleCleaningPlanningPresenter,
   );
+
+  Rx<List<List<Map<String, String>>>> rowItem =
+      Rx<List<List<Map<String, String>>>>([]);
   RxList<FacilityModel?> facilityList = <FacilityModel>[].obs;
+  var typeDropdownList = 'Select Gender'.obs;
   var startDateTc = TextEditingController();
   bool openStartDatePicker = false;
   int facilityId = 0;
@@ -23,6 +29,13 @@ class ModuleCleaningPlanningController extends GetxController {
       <InventoryCategoryModel>[].obs;
   int selectedEquipmentId = 0;
   int selectedfrequencyId = 0;
+  Map<String, TypeModel> typedropdownMapperData = {};
+
+  var type = <TypeModel>[
+    TypeModel(name: "Please Select", id: 0),
+    TypeModel(name: 'Dry', id: 1),
+    TypeModel(name: 'Wet', id: 2),
+  ];
   RxList<FrequencyModel?> frequencyList = <FrequencyModel>[].obs;
   ModuleCleaningPlanningPresenter moduleCleaningPlanningPresenter;
   final HomeController homecontroller = Get.find();
@@ -31,6 +44,7 @@ class ModuleCleaningPlanningController extends GetxController {
   @override
   void onInit() async {
     getFrequencyList();
+
     super.onInit();
   }
 
@@ -47,6 +61,17 @@ class ModuleCleaningPlanningController extends GetxController {
         frequencyList.add(_frequencyList);
       }
     }
+  }
+
+  void addRowItem() {
+    rowItem.value.add([
+      {"key": "day", "value": ''},
+      {"key": "noOfInverters", "value": ''},
+      {'key': "noOfSMBs", "value": ''},
+      {'key': "noOfModules", "value": ''},
+      {'key': "type", "value": ''},
+      // {'key': "checklist", "value": '', "checkListId": ''},
+    ]);
   }
 
   void onValueChanged(dynamic list, dynamic value) {
