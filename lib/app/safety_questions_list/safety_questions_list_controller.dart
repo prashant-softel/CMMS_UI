@@ -30,6 +30,9 @@ class SafetyQuestionsListController extends GetxController {
   Rx<bool> isTypePermit = true.obs;
   int selectedTypePermitId = 0;
 
+  SafetyMeasureListModel? selectedItem;
+
+
   Rx<bool> isTitleInvalid = false.obs;
   Rx<bool> isDescriptionInvalid = false.obs;
   Rx<bool> isFormInvalid = false.obs;
@@ -85,6 +88,7 @@ class SafetyQuestionsListController extends GetxController {
       Future.delayed(Duration(seconds: 1), () {
        
         getTypePermitList();
+        getSafetyMeasureList(selectedTypePermitId);
       });
       
       // getPreventiveCheckList(facilityId, type, true);
@@ -145,6 +149,65 @@ class SafetyQuestionsListController extends GetxController {
       return true;
     }
     return true;
+  }
+
+  void isDeleteDialog({String? safetyMeasure_id, String? safetyMeasure}) {
+    Get.dialog(
+      AlertDialog(
+        content: Column(mainAxisSize: MainAxisSize.min, children: [
+          Icon(Icons.delete, size: 35, color: ColorValues.redColor),
+          SizedBox(
+            height: 10,
+          ),
+          RichText(
+            text: TextSpan(
+                text: 'Are you sure you want to delete the permit ',
+                style: Styles.blackBold16,
+                children: [
+                  TextSpan(
+                    text: safetyMeasure,
+                    style: TextStyle(
+                      color: ColorValues.orangeColor,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
+                ]),
+          ),
+        ]),
+        actions: [
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+            children: [
+              TextButton(
+                onPressed: () {
+                  Get.back();
+                },
+                child: Text('NO'),
+              ),
+              TextButton(
+                onPressed: () {
+                  deleteSafetyMeasure(safetyMeasure_id).then((value) {
+                    Get.back();
+                    getSafetyMeasureList(selectedTypePermitId);
+                  });
+                },
+                child: Text('YES'),
+              ),
+            ],
+          )
+        ],
+      ),
+    );
+  }
+
+  Future<void> deleteSafetyMeasure(String? id) async {
+    {
+      await safetyQuestionsListPresenter.deleteSafetyMeasure(
+        id,
+        isLoading: true,
+      );
+      getSafetyMeasureList(selectedTypePermitId);
+    }
   }
 
 

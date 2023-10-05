@@ -2804,7 +2804,7 @@ class NewPermitScreen extends GetView<NewPermitController> {
                                                                   children: [
                                                                     CustomAppBar(
                                                                       title:
-                                                                          'permit type checklist'
+                                                                          'Permit Type Checklist'
                                                                               .tr,
                                                                     ),
                                                                     Dimens

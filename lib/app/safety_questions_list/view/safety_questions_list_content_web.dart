@@ -64,7 +64,7 @@ class SafetyQuestionsListContentWeb extends GetView<SafetyQuestionsListControlle
               child: Row(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  varUserAccessModel.value.access_list!.where((e) => e.feature_id == 5 && e.add == 0).length > 0
+                  varUserAccessModel.value.access_list!.where((e) => e.feature_id == 5 && e.add == 1).length > 0
                       ? Container(
                           width: (Get.width * .3),
                           margin: EdgeInsets.only(left: 30, top: 25),
@@ -512,7 +512,7 @@ class SafetyQuestionsListContentWeb extends GetView<SafetyQuestionsListControlle
                           ),
                         )
                       : Container(),
-                  varUserAccessModel.value.access_list!.where((e) => e.feature_id == 5 && e.view == 0).length > 0
+                  varUserAccessModel.value.access_list!.where((e) => e.feature_id == 5 && e.view == 1).length > 0
                       ? Expanded(
                           child: Container(
                             width: Get.width * 7,
@@ -582,6 +582,7 @@ class SafetyQuestionsListContentWeb extends GetView<SafetyQuestionsListControlle
                                       ? Expanded(
                                           child: ScrollableTableView(
                                             columns: [
+                                              "Id",
                                               "Title",
                                               "Type",
                                               "Confirmation",
@@ -602,7 +603,7 @@ class SafetyQuestionsListContentWeb extends GetView<SafetyQuestionsListControlle
                                                     '',
                                                     '',
                                                     '',
-                                                    // '',
+                                                    '',
                                                     // '',
                                                   ];
                                                 },
@@ -623,6 +624,7 @@ class SafetyQuestionsListContentWeb extends GetView<SafetyQuestionsListControlle
                                           child: ScrollableTableView(
                                             paginationController: controller.safetyQuestionListPaginationController,
                                             columns: [
+                                              "Id",
                                               "Title",
                                               "Type",
                                               "Confirmation",
@@ -641,7 +643,7 @@ class SafetyQuestionsListContentWeb extends GetView<SafetyQuestionsListControlle
                                                 (index) {
                                                   var safetyQuestionsListDetails = controller.safetyMeasureList[index];
                                                   return [
-                                                    // '${safetyQuestionsListDetails.id}',
+                                                    '${safetyQuestionsListDetails.id}',
                                                     '${safetyQuestionsListDetails.name}',
                                                     '${safetyQuestionsListDetails.permitType}',
                                                     '${safetyQuestionsListDetails.inputName}',
@@ -651,10 +653,10 @@ class SafetyQuestionsListContentWeb extends GetView<SafetyQuestionsListControlle
                                                   ];
                                                 },
                                               ),
-                                            ].map((_permitTypeList) {
+                                            ].map((_safetyMeasureList) {
                                               return TableViewRow(
                                                   height: 60,
-                                                  cells: _permitTypeList.map((value) {
+                                                  cells: _safetyMeasureList.map((value) {
                                                     return TableViewCell(
                                                         child:
                                                             // (value == 'Action')
@@ -690,7 +692,11 @@ class SafetyQuestionsListContentWeb extends GetView<SafetyQuestionsListControlle
                                                                       icon: Icons.delete,
                                                                        message:
                                                                               'Delete',
-                                                                      onPress: () {},
+                                                                      onPress: () {
+                                                                        controller.isDeleteDialog(
+                                                                        safetyMeasure_id: _safetyMeasureList[0],
+                                                                        safetyMeasure: _safetyMeasureList[1]);
+                                                                      },
                                                                     )
                                                                     // : Container()
                                                                   ])

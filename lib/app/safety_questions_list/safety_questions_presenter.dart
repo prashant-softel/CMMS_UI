@@ -28,6 +28,12 @@ class SafetyQuestionsListPresenter {
     return true;
   }
 
+   deleteSafetyMeasure(String? id, {required bool isLoading}) async =>
+      await safetyQuestionsListUsecase.deleteSafetyMeasure(
+        id: id ?? 0,
+        isLoading: isLoading,
+      );
+
   Future<List<SafetyMeasureListModel>> getSafetyMeasureList({
     required bool isLoading,
     required int? permit_type_id,
