@@ -1090,8 +1090,9 @@ class ConnectHelper {
   Future<ResponseModel> permitCancelByApproverButton({
     required String auth,
     bool? isLoading,
-    String? comment,
-    String? id,
+    // String? comment,
+    // String? id,
+    cancelByApproverJsonString,
     String? ptwStatus,
   }) async {
     // facilityId = 45;
@@ -1100,9 +1101,11 @@ class ConnectHelper {
           ? 'Permit/PermitCancelByApprover'
           : 'Permit/PermitCancelRequest',
       Request.put,
-      {'comment': "$comment", 'id': id},
+      // {'comment': "$comment", 'id': id},
+      cancelByApproverJsonString,
       isLoading ?? true,
       {
+        'Content-Type': 'application/json',
         'Authorization': 'Bearer $auth',
       },
     );

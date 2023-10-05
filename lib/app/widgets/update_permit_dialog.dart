@@ -1,12 +1,11 @@
 import 'package:cmms/app/app.dart';
+import 'package:cmms/app/new_permit/new_permit_controller.dart';
 import 'package:cmms/app/new_permit_list/new_permit_list_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 import '../navigators/app_pages.dart';
 // import '../theme/colors_value.dart';
-import '../theme/dimens.dart';
-import '../theme/styles.dart';
 
 class UpdateNewPermitDialog extends GetView {
   String? createPermitData;
@@ -15,7 +14,7 @@ class UpdateNewPermitDialog extends GetView {
 
   UpdateNewPermitDialog(
       {super.key, this.createPermitData, this.data, this.PtwId});
-  final NewPermitListController _controller = Get.find();
+  final NewPermitController _controller = Get.find();
 
   @override
   Widget build(BuildContext context) {
