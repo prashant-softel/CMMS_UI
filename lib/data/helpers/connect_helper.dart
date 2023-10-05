@@ -4417,6 +4417,27 @@ class ConnectHelper {
     return responseModel;
   }
 
+
+///Delete Safety Measure
+  Future<ResponseModel> deleteSafetyMeasure({
+    required String auth,
+    bool? isLoading,
+    required id,
+  }) async {
+    var responseModel = await apiWrapper.makeRequest(
+      'Permit/DeleteSafetyMeasure?id=$id',
+      Request.delete,
+      id,
+      isLoading ?? false,
+      {
+        'Content-Type': 'application/json',
+        'Authorization': 'Bearer $auth',
+      },
+    );
+
+    return responseModel;
+  }
+
   Future<ResponseModel> updatePermitType({
     required String auth,
     bool? isLoading,

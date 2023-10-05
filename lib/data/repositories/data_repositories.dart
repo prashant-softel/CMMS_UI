@@ -2649,6 +2649,16 @@ class DataRepository extends DomainRepository {
     return response;
   }
 
+  Future<ResponseModel> deleteSafetyMeasure({
+    auth,
+    bool? isLoading,
+    id,
+  }) async {
+    var response = await connectHelper.deleteSafetyMeasure(
+        auth: auth, isLoading: isLoading, id: id);
+    return response;
+  }
+
   Future<ResponseModel> updatePermitType({
     auth,
     bool? isLoading,

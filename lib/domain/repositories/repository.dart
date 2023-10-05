@@ -6860,6 +6860,25 @@ class Repository {
     }
   }
 
+   Future<void> deleteSafetyMeasure(Object id, bool isLoading) async {
+    try {
+      final auth = await getSecuredValue(LocalKeys.authToken);
+      final res = await _dataRepository.deleteSafetyMeasure(
+        auth: auth,
+        id: id,
+        isLoading: isLoading,
+      );
+
+      if (!res.hasError) {
+        //get delete response back from API
+      } else {
+        Utility.showDialog(res.errorCode.toString() + 'deleteSafetyMeasure');
+      }
+    } catch (error) {
+      print(error.toString());
+    }
+  }
+
   Future<bool> updatePermitType({
     bool? isLoading,
     checklistJsonString,

@@ -31,6 +31,13 @@ class SafetyQuestionsListUsecase {
     );
   }
 
+  deleteSafetyMeasure(
+      {required Object id, required bool isLoading}) async =>
+      await repository.deleteSafetyMeasure(
+        id,
+        isLoading,
+      );
+
   Future<bool> createSafetyMeasure({
     safetyMeasurelistJsonString,
     bool? isLoading,
