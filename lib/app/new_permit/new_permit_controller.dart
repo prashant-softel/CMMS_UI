@@ -126,6 +126,8 @@ class NewPermitController extends GetxController {
   int? selectedFacilityId = 0;
   int selectedTypePermitId = 0;
   int? selectedPermitTypeId = 0;
+  // int? selectedPermitTypeIdForSafetyList = 0;
+
   int selectedJobTypesId = 0;
 
   NewPermitPresenter permitPresenter;
@@ -483,14 +485,20 @@ class NewPermitController extends GetxController {
       selectedBlock.value = newPermitDetailsModel.value?.blockName ?? "";
       selectedTypePermit.value =
           newPermitDetailsModel.value?.permitTypeName ?? '';
+      selectedPermitTypeId = newPermitDetailsModel.value?.permitTypeid ?? 0;
+      print('PermitTyepId:$selectedPermitTypeId');
       // selectedJobTypeList.value = newPermitDetailsModel.value.
       selectedPermitIssuerLists.value =
           newPermitDetailsModel.value?.issuedByName ?? '';
       selectedPermitApproverLists.value =
           newPermitDetailsModel.value?.approvedByName ?? '';
       listEmployee?.value = newPermitDetailsModel.value?.employee_list ?? [];
-      safetyList?.value =
-          newPermitDetailsModel.value?.safety_question_list ?? [];
+      // safetyList?.value =
+      //     newPermitDetailsModel.value?.safety_question_list ?? [];
+      if(selectedPermitTypeId != 0){
+        getSafetyMeasureList();
+      }
+      
       selectedJobType.value = newPermitDetailsModel.value?.job_type_name ?? "";
       selectedSopPermit.value =
           newPermitDetailsModel.value?.sop_type_name ?? '';
@@ -839,15 +847,15 @@ class NewPermitController extends GetxController {
         {
           int permitTypeIndex =
               typePermitList.indexWhere((x) => x?.name == value);
-          selectedTypePermitId = facilityList[permitTypeIndex]?.id ?? 0;
+          // selectedTypePermitId = facilityList[permitTypeIndex]?.id ?? 0;
           selectedPermitTypeId = typePermitList[permitTypeIndex]?.id ?? 0;
           getSafetyMeasureList();
           print('PErmit Type Id: $selectedPermitTypeId');
-          if (selectedTypePermitId != 0) {
+          if (selectedPermitTypeId != 0) {
             isTypePermitSelected.value = true;
           }
           selectedTypePermit.value = value;
-          getBlocksList(selectedTypePermitId);
+          getBlocksList(selectedPermitTypeId ?? 0);
         }
         break;
       case RxList<EmployeeListModel>:
