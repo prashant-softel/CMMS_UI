@@ -2419,7 +2419,7 @@ class NewPermitScreen extends GetView<NewPermitController> {
                                                           children: [
                                                             CustomRichText(
                                                                 title:
-                                                                    'Isolation Required '),
+                                                                    'Electrical Isolation Required '),
                                                             Switch(
                                                               value: _controller
                                                                   .isToggleOn
@@ -2570,7 +2570,7 @@ class NewPermitScreen extends GetView<NewPermitController> {
                                                                   child: Column(
                                                                     children: [
                                                                       CustomAppBar(
-                                                                        title: 'Equipment List'
+                                                                        title: 'Loto Equipment List'
                                                                             .tr,
                                                                         action: ActionButton(
                                                                             label: 'Add New',
@@ -2786,9 +2786,14 @@ class NewPermitScreen extends GetView<NewPermitController> {
                                                       ///Safety measures
                                                       controller
                                                               .safetyMeasureList
-                                                              .isEmpty
+                                                              .isEmpty 
+                                                              // ||  controller
+                                                              // .safetyList!
+                                                              // .isEmpty
                                                           ? Dimens.box0
-                                                          : SizedBox(
+                                                          : 
+                                                          
+                                                          SizedBox(
                                                               // height: ((controller
                                                               //             .safetyMeasureList
                                                               //             .length) *
@@ -2798,7 +2803,7 @@ class NewPermitScreen extends GetView<NewPermitController> {
                                                                           context)
                                                                       .size
                                                                       .width /
-                                                                  1.2,
+                                                                   1.25,
                                                               child: Center(
                                                                 child: Column(
                                                                   children: [
@@ -2809,9 +2814,12 @@ class NewPermitScreen extends GetView<NewPermitController> {
                                                                     ),
                                                                     Dimens
                                                                         .boxHeight10,
-                                                                    controller.permitId.value <=
-                                                                            0
-                                                                        ? Column(
+                                                                    // controller.permitId.value <=
+                                                                    //         0
+                                                                    controller.safetyMeasureList.length > 0
+                                                                        ? 
+
+                                                                        Column(
                                                                             // alignment: WrapAlignment.start,
                                                                             // spacing: 100,
                                                                             children: []..addAll(controller.safetyMeasureList.map((element) =>
@@ -2825,19 +2833,7 @@ class NewPermitScreen extends GetView<NewPermitController> {
                                                                                       child: Row(
                                                                                         children: [
                                                                                           checkBoxMethod(1),
-                                                                                          // checkBoxMethod(2),
-                                                                                          // checkBoxMethod(3),
-                                                                                          // checkBoxMethod(4),
-                                                                                          // checkBoxMethod(5),
-                                                                                          // checkBoxMethod(6),
-                                                                                          // checkBoxMethod(7),
-                                                                                          // Text("${i= i! + 1}. "),
-                                                                                          // Checkbox(
-                                                                                          //   value: controller.isChecked1.value,
-                                                                                          //   onChanged: (bool? value) {
-                                                                                          //     controller.toggleCheckbox1();
-                                                                                          //   },
-                                                                                          // ),
+                                                                                          
                                                                                           Text("${element.name}")
                                                                                         ],
                                                                                       ),
@@ -2845,34 +2841,40 @@ class NewPermitScreen extends GetView<NewPermitController> {
                                                                                   ],
                                                                                 ))),
                                                                           )
-                                                                        : Column(
-                                                                            // alignment: WrapAlignment.start,
-                                                                            // spacing: 100,
-                                                                            children: []..addAll(controller.safetyList!.map((element) =>
-                                                                                Column(
-                                                                                  // mainAxisSize: MainAxisSize.min,
-                                                                                  mainAxisAlignment: MainAxisAlignment.start,
-                                                                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                                                                  children: [
-                                                                                    SizedBox(
-                                                                                      // width: 200,
-                                                                                      child: Row(
-                                                                                        children: [
-                                                                                          checkBoxMethod(1),
+                                                                          
+                                                                        : Dimens.box0,
+                                                                        // controller.selectedPermitTypeIdForSafetyList != null
+                                                                        // ?Column(
+                                                                        //     // alignment: WrapAlignment.start,
+                                                                        //     // spacing: 100,
+                                                                        //     children: []..addAll(controller.safetyList!.map((element) =>
+                                                                        //         Column(
+                                                                        //           // mainAxisSize: MainAxisSize.min,
+                                                                        //           mainAxisAlignment: MainAxisAlignment.start,
+                                                                        //           crossAxisAlignment: CrossAxisAlignment.start,
+                                                                        //           children: [
+                                                                        //             SizedBox(
+                                                                        //               // width: 200,
+                                                                        //               child: Row(
+                                                                        //                 children: [
+                                                                        //                   checkBoxMethod(1),
 
-                                                                                          // Text("${j= j! + 1}. "),
-                                                                                          Text("${element?.saftyQuestionName}")
-                                                                                        ],
-                                                                                      ),
-                                                                                    )
-                                                                                  ],
-                                                                                ))),
-                                                                          ),
+                                                                        //                   // Text("${j= j! + 1}. "),
+                                                                        //                   Text("${element?.saftyQuestionName}")
+                                                                        //                 ],
+                                                                        //               ),
+                                                                        //             )
+                                                                        //           ],
+                                                                        //         ))),
+                                                                        //   ) : Dimens.box0
+
                                                                   ],
                                                                 ),
                                                               ),
-                                                            ),
-
+                                                            )
+                                                            ,
+                                                            
+                                                        
                                                       SizedBox(
                                                         height: 10,
                                                       ),
