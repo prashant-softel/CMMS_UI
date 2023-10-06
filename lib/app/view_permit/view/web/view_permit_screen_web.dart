@@ -2649,85 +2649,127 @@ class ViewPermitWebScreen extends GetView<ViewPermitController> {
                                                             ],
                                                           ),
                                                           // Spacer(),
-                                                      // Column(crossAxisAlignment: CrossAxisAlignment.end, children: [
-                                                      //   Text(
-                                                      //     'TBT Training Attended By',
-                                                      //     style: Styles.blackBold17,
-                                                      //   ),
-                                                      //   Dimens.boxHeight10,
+                                                          // Column(crossAxisAlignment: CrossAxisAlignment.end, children: [
+                                                          //   Text(
+                                                          //     'TBT Training Attended By',
+                                                          //     style: Styles.blackBold17,
+                                                          //   ),
+                                                          //   Dimens.boxHeight10,
 
-                                                      //   // Column(
-                                                      //   //   mainAxisAlignment: MainAxisAlignment.start,
-                                                      //   //         crossAxisAlignment: CrossAxisAlignment.start,
-                                                      //   //   // alignment: WrapAlignment.start,
-                                                      //   //   // spacing: 100,
-                                                      //   //   children: []..addAll(controller.employeeList.map((element) => Column(
-                                                      //   //         // mainAxisSize: MainAxisSize.min,
-                                                      //   //         mainAxisAlignment: MainAxisAlignment.start,
-                                                      //   //         crossAxisAlignment: CrossAxisAlignment.start,
-                                                      //   //         children: [
-                                                      //   //           Text("${element.name}")],
-                                                      //   //       ))),
-                                                      //   // ),
-                                                      // ]),
-                                                    ],
-                                                  ),
-                                                ),
-                                                Dimens.boxHeight30,
-                                                Container(
-                                                  margin: Dimens.edgeInsets20,
-                                                  height: ((controller.listEmployee?.length ?? 0) * 40) + 130,
-                                                  decoration: BoxDecoration(
-                                                    border: Border.all(
-                                                      color: ColorValues.lightGreyColorWithOpacity35,
-                                                      width: 1,
+                                                          //   // Column(
+                                                          //   //   mainAxisAlignment: MainAxisAlignment.start,
+                                                          //   //         crossAxisAlignment: CrossAxisAlignment.start,
+                                                          //   //   // alignment: WrapAlignment.start,
+                                                          //   //   // spacing: 100,
+                                                          //   //   children: []..addAll(controller.employeeList.map((element) => Column(
+                                                          //   //         // mainAxisSize: MainAxisSize.min,
+                                                          //   //         mainAxisAlignment: MainAxisAlignment.start,
+                                                          //   //         crossAxisAlignment: CrossAxisAlignment.start,
+                                                          //   //         children: [
+                                                          //   //           Text("${element.name}")],
+                                                          //   //       ))),
+                                                          //   // ),
+                                                          // ]),
+                                                        ],
+                                                      ),
                                                     ),
-                                                    boxShadow: [
-                                                      BoxShadow(
-                                                        color: ColorValues.appBlueBackgroundColor,
-                                                                spreadRadius: 2,
-                                                        blurRadius: 5,
-                                                        offset: Offset(0, 2),
-                                                      ),
-                                                    ],
-                                                  ),
-                                                  child: Column(
-                                                    children: [
-                                                      Padding(
-                                                        padding: const EdgeInsets.all(10.0),
-                                                                child: Row(
-                                                          children: [
-                                                            Text(
-                                                              'TBT Training Attended By',
-                                                                      style: Styles.blue700,
-                                                                    ),
-                                                          ],
-                                                                ),
-                                                      ),
-                                                      Expanded(
-                                                                child: DataTable2(
-                                                          border: TableBorder.all(color: Color.fromARGB(255, 206, 229, 234)),
-                                                          columns: [
-                                                            DataColumn(
-                                                                label: Text(
-                                                              "Employee Name",
-                                                              style: TextStyle(fontSize: 15, fontWeight: FontWeight.bold),
-                                                                    )),
-                                                            DataColumn(
-                                                                label: Text(
-                                                              "Responsibility",
-                                                              style: TextStyle(fontSize: 15, fontWeight: FontWeight.bold),
-                                                            )),
-                                                          ],
-                                                          rows: List<DataRow>.generate(
-                                                            controller.listEmployee?.length ?? 0,
-                                                            (index) => DataRow(cells: [
-                                                              DataCell(Text(controller.listEmployee?[index]?.empName.toString() ?? '')),
-                                                              DataCell(Text(controller.listEmployee?[index]?.resp.toString() ?? '')),
-                                                            ]),
+                                                    Dimens.boxHeight30,
+                                                    Container(
+                                                      margin:
+                                                          Dimens.edgeInsets20,
+                                                      height: ((controller
+                                                                      .listEmployee
+                                                                      ?.length ??
+                                                                  0) *
+                                                              40) +
+                                                          130,
+                                                      decoration: BoxDecoration(
+                                                        border: Border.all(
+                                                          color: ColorValues
+                                                              .lightGreyColorWithOpacity35,
+                                                          width: 1,
+                                                        ),
+                                                        boxShadow: [
+                                                          BoxShadow(
+                                                            color: ColorValues
+                                                                .appBlueBackgroundColor,
+                                                            spreadRadius: 2,
+                                                            blurRadius: 5,
+                                                            offset:
+                                                                Offset(0, 2),
                                                           ),
-                                                                ),
+                                                        ],
                                                       ),
+                                                      child: Column(
+                                                        children: [
+                                                          Padding(
+                                                            padding:
+                                                                const EdgeInsets
+                                                                    .all(10.0),
+                                                            child: Row(
+                                                              children: [
+                                                                Text(
+                                                                  'TBT Training Attended By',
+                                                                  style: Styles
+                                                                      .blue700,
+                                                                ),
+                                                              ],
+                                                            ),
+                                                          ),
+                                                          Expanded(
+                                                            child: DataTable2(
+                                                              border: TableBorder.all(
+                                                                  color: Color
+                                                                      .fromARGB(
+                                                                          255,
+                                                                          206,
+                                                                          229,
+                                                                          234)),
+                                                              columns: [
+                                                                DataColumn(
+                                                                    label: Text(
+                                                                  "Employee Name",
+                                                                  style: TextStyle(
+                                                                      fontSize:
+                                                                          15,
+                                                                      fontWeight:
+                                                                          FontWeight
+                                                                              .bold),
+                                                                )),
+                                                                DataColumn(
+                                                                    label: Text(
+                                                                  "Responsibility",
+                                                                  style: TextStyle(
+                                                                      fontSize:
+                                                                          15,
+                                                                      fontWeight:
+                                                                          FontWeight
+                                                                              .bold),
+                                                                )),
+                                                              ],
+                                                              rows: List<
+                                                                  DataRow>.generate(
+                                                                controller
+                                                                        .listEmployee
+                                                                        ?.length ??
+                                                                    0,
+                                                                (index) =>
+                                                                    DataRow(
+                                                                        cells: [
+                                                                      DataCell(Text(controller
+                                                                              .listEmployee?[index]
+                                                                              ?.empName
+                                                                              .toString() ??
+                                                                          '')),
+                                                                      DataCell(Text(controller
+                                                                              .listEmployee?[index]
+                                                                              ?.resp
+                                                                              .toString() ??
+                                                                          '')),
+                                                                    ]),
+                                                              ),
+                                                            ),
+                                                          ),
                                                         ],
                                                       ),
                                                     ),
@@ -4114,15 +4156,30 @@ class ViewPermitWebScreen extends GetView<ViewPermitController> {
               Dimens.boxWidth20,
               ////cancel approver
               varUserAccessModel.value.access_list!
-                              .where((e) =>
-                                  e.feature_id ==
-                                      UserAccessConstants.kPermitFeatureId &&
-                                  e.approve ==
-                                      UserAccessConstants.kHaveApproveAccess)
-                              .length >
-                          0 &&
-                      controller.viewPermitDetailsModel.value?.ptwStatus ==
-                          PermitStatusConstants.PTW_CANCEL_REQUESTED //130
+                                  .where((e) =>
+                                      e.feature_id ==
+                                          UserAccessConstants
+                                              .kPermitFeatureId &&
+                                      e.approve ==
+                                          UserAccessConstants
+                                              .kHaveApproveAccess)
+                                  .length >
+                              0 &&
+                          controller.viewPermitDetailsModel.value?.ptwStatus ==
+                              PermitStatusConstants.PTW_CANCEL_REQUESTED ||
+                      varUserAccessModel.value.access_list!
+                                  .where((e) =>
+                                      e.feature_id ==
+                                          UserAccessConstants
+                                              .kPermitFeatureId &&
+                                      e.approve ==
+                                          UserAccessConstants
+                                              .kHaveApproveAccess)
+                                  .length >
+                              0 &&
+                          controller.viewPermitDetailsModel.value?.ptwStatus ==
+                              PermitStatusConstants.PTW_CREATED
+                  //130
                   ? Container(
                       height: 45,
                       child: CustomElevatedButton(
@@ -4144,15 +4201,30 @@ class ViewPermitWebScreen extends GetView<ViewPermitController> {
                   : Dimens.box0,
               Dimens.boxWidth20,
               varUserAccessModel.value.access_list!
-                              .where((e) =>
-                                  e.feature_id ==
-                                      UserAccessConstants.kPermitFeatureId &&
-                                  e.approve ==
-                                      UserAccessConstants.kHaveApproveAccess)
-                              .length >
-                          0 &&
-                      controller.viewPermitDetailsModel.value?.ptwStatus ==
-                          PermitStatusConstants.PTW_CANCEL_REQUESTED //130
+                                  .where((e) =>
+                                      e.feature_id ==
+                                          UserAccessConstants
+                                              .kPermitFeatureId &&
+                                      e.approve ==
+                                          UserAccessConstants
+                                              .kHaveApproveAccess)
+                                  .length >
+                              0 &&
+                          controller.viewPermitDetailsModel.value?.ptwStatus ==
+                              PermitStatusConstants.PTW_CANCEL_REQUESTED ||
+                      varUserAccessModel.value.access_list!
+                                  .where((e) =>
+                                      e.feature_id ==
+                                          UserAccessConstants
+                                              .kPermitFeatureId &&
+                                      e.approve ==
+                                          UserAccessConstants
+                                              .kHaveApproveAccess)
+                                  .length >
+                              0 &&
+                          controller.viewPermitDetailsModel.value?.ptwStatus ==
+                              PermitStatusConstants.PTW_CREATED
+                  //130
                   ? Container(
                       height: 45,
                       child: CustomElevatedButton(
