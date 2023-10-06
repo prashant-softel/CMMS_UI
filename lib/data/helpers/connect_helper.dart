@@ -1368,7 +1368,10 @@ class ConnectHelper {
     // print('PermitRejectResponse: ${responseModel.data}');
     var res = responseModel.data;
     var parsedJson = json.decode(res);
-    Get.dialog<void>(PermitMessageRejectDialog(data: parsedJson['message'], ptwStatus: ptwStatus,));
+    Get.dialog<void>(PermitMessageRejectDialog(
+      data: parsedJson['message'],
+      ptwStatus: ptwStatus,
+    ));
 
     return responseModel;
   }
@@ -1740,7 +1743,7 @@ class ConnectHelper {
     int? facilityId,
   }) async =>
       await apiWrapper.makeRequest(
-        'SMMaster/GetAssetMasterList',
+        'SMMaster/GetAssetMasterList?facility_id=$facilityId',
         Request.getMultiparts,
         null,
         isLoading ?? false,
@@ -4420,8 +4423,7 @@ class ConnectHelper {
     return responseModel;
   }
 
-
-///Delete Safety Measure
+  ///Delete Safety Measure
   Future<ResponseModel> deleteSafetyMeasure({
     required String auth,
     bool? isLoading,
@@ -5317,9 +5319,8 @@ class ConnectHelper {
     return responseModel;
   }
 
-
   ///Create Safety Measure
-   Future<ResponseModel> createSafetyMeasure({
+  Future<ResponseModel> createSafetyMeasure({
     required String auth,
     bool? isLoading,
     required safetyMeasurelistJsonString,
@@ -5337,7 +5338,6 @@ class ConnectHelper {
 
     return responseModel;
   }
-
 
   Future<ResponseModel> approveReturnMrs({
     required String auth,

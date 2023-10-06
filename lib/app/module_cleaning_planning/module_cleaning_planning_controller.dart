@@ -70,7 +70,6 @@ class ModuleCleaningPlanningController extends GetxController {
       {'key': "noOfSMBs", "value": ''},
       {'key': "noOfModules", "value": ''},
       {'key': "type", "value": ''},
-      // {'key': "checklist", "value": '', "checkListId": ''},
     ]);
   }
 
