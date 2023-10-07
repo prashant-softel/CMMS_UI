@@ -30,6 +30,8 @@ class NewPermitDetailModel {
   String? description;
   String? siteName;
   String? blockName;
+  String? tbT_Done_By;
+  DateTime? tbT_Done_At;
   DateTime? start_datetime;
   String? end_datetime;
   String? permitArea;
@@ -73,6 +75,7 @@ class NewPermitDetailModel {
     this.job_type_id,
     this.sop_type_id,
     this.requester_id,
+    this.tbT_Done_By,
     this.requestedByName,
     this.cancelRequestByDesignation,
     this.cancelRequestByCompany,
@@ -100,6 +103,7 @@ class NewPermitDetailModel {
     this.closedByName,
     this.cancelRequestByName,
     this.cancel_at,
+    this.tbT_Done_At,
     this.current_status_short,
     this.safety_question_list,
     this.employee_list,
@@ -111,14 +115,7 @@ class NewPermitDetailModel {
     this.cancelDetails,
     this.closeDetails,
 
-    // this.approver_id,
-    // this.block_ids,
-    // this.category_ids,
-    // this.is_isolation_required,
-    // this.isolated_category_ids,
-    // this.issuer_id,
-    // this.sop_type_id,
-    // this.user_id,
+  
   });
 
   factory NewPermitDetailModel.fromJson(Map<String, dynamic> json) => NewPermitDetailModel(
@@ -130,6 +127,7 @@ class NewPermitDetailModel {
         permitTypeid: json["permitTypeid"],
         job_type_id: json['job_type_id'],
         sop_type_id: json['sop_type_id'],
+        tbT_Done_By: json['tbT_Done_By'],
         requester_id: json['requester_id'],
         requestedByName: json['requestedByName'],
         cancelRequestByDesignation: json['cancelRequestByDesignation'],
@@ -158,6 +156,7 @@ class NewPermitDetailModel {
         closedByName: json['closedByName'],
         cancelRequestByName: json['cancelRequestByName'] ?? '',
         cancel_at: json["cancel_at"] == null ? null : DateTime.parse(json['cancel_at'] as String),
+        tbT_Done_At: json["tbT_Done_At"] == null ? null : DateTime.parse(json['tbT_Done_At'] as String),
         current_status_short: json['current_status_short'],
         safety_question_list: json["safety_question_list"] != null
             ? List<ListSafetyQuestion>.from(json["safety_question_list"].map((x) => ListSafetyQuestion.fromJson(x)))
@@ -195,6 +194,7 @@ class NewPermitDetailModel {
         "permitTypeid": permitTypeid,
         "job_type_id": job_type_id,
         "sop_type_id": sop_type_id,
+        "tbT_Done_By": tbT_Done_By,
         "sop_type_name": sop_type_name,
         "permitTypeName": permitTypeName,
         "job_type_name": job_type_name,
@@ -223,6 +223,7 @@ class NewPermitDetailModel {
         "closedByName": closedByName,
         "cancelRequestByName": cancelRequestByName,
         "cancel_at": cancel_at,
+        "tbT_Done_At": tbT_Done_At,
         "current_status_short": current_status_short,
         "safety_question_list": List<dynamic>.from(safety_question_list!.map((x) => x)),
         "employee_list": List<dynamic>.from(employee_list!.map((x) => x)),

@@ -1352,6 +1352,7 @@ abstract class Dimens {
   static SizedBox boxWidth120 = SizedBox(width: hundredTwenty);
   static SizedBox boxWidth150 = SizedBox(width: hundredFifty);
   static SizedBox boxWidth200 = SizedBox(width: twoHundred);
+  static SizedBox boxWidth300 = SizedBox(width: threeHundred);
   static SizedBox boxWidth180 = SizedBox(width: oneHundredEighty);
   static SizedBox boxWidth170 = SizedBox(width: oneHundredSeventy);
   static SizedBox boxWidth175 = SizedBox(width: oneHundredSeventyFive);
