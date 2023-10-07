@@ -152,7 +152,9 @@ class PermitCancelReQuestDialog extends GetView {
                                             value: element!.isChecked,
                                             onChanged: (bool? value) {
                                               // controller.toggleItemSelection(index);
-                                              element.isChecked = !element.isChecked!;
+                                              setState(() {
+                                                element.isChecked = !element.isChecked!;
+                                              },);
                                               print('Element Cancel:${element.isChecked}');
                                             },
                                           ),

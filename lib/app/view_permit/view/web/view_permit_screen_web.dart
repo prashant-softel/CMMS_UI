@@ -2272,87 +2272,87 @@ class ViewPermitWebScreen extends GetView<ViewPermitController> {
                                     ),
 
                                     ///Team Deployed
-                                    Container(
-                                      margin: Dimens.edgeInsets20,
-                                      height:
-                                          ((controller.listEmployee?.length ??
-                                                      0) *
-                                                  40) +
-                                              130,
-                                      decoration: BoxDecoration(
-                                        border: Border.all(
-                                          color: ColorValues
-                                              .lightGreyColorWithOpacity35,
-                                          width: 1,
-                                        ),
-                                        boxShadow: [
-                                          BoxShadow(
-                                            color: ColorValues
-                                                .appBlueBackgroundColor,
-                                            spreadRadius: 2,
-                                            blurRadius: 5,
-                                            offset: Offset(0, 2),
-                                          ),
-                                        ],
-                                      ),
-                                      child: Column(
-                                        children: [
-                                          Padding(
-                                            padding: const EdgeInsets.all(10.0),
-                                            child: Row(
-                                              children: [
-                                                Text(
-                                                  'Team deploying to carry out the Job',
-                                                  style: Styles.blue700,
-                                                ),
-                                              ],
-                                            ),
-                                          ),
-                                          Expanded(
-                                            child: DataTable2(
-                                              border: TableBorder.all(
-                                                  color: Color.fromARGB(
-                                                      255, 206, 229, 234)),
-                                              columns: [
-                                                DataColumn(
-                                                    label: Text(
-                                                  "Employee Name",
-                                                  style: TextStyle(
-                                                      fontSize: 15,
-                                                      fontWeight:
-                                                          FontWeight.bold),
-                                                )),
-                                                DataColumn(
-                                                    label: Text(
-                                                  "Responsibility",
-                                                  style: TextStyle(
-                                                      fontSize: 15,
-                                                      fontWeight:
-                                                          FontWeight.bold),
-                                                )),
-                                              ],
-                                              rows: List<DataRow>.generate(
-                                                controller
-                                                        .listEmployee?.length ??
-                                                    0,
-                                                (index) => DataRow(cells: [
-                                                  DataCell(Text(controller
-                                                          .listEmployee?[index]
-                                                          ?.empName
-                                                          .toString() ??
-                                                      '')),
-                                                  DataCell(Text(controller
-                                                          .listEmployee?[index]
-                                                          ?.resp
-                                                          .toString() ??
-                                                      '')),
-                                                ]),
-                                              ),
-                                            ),
-                                          ),
-                                        ],
-                                      ),
-                                    ),
+                                    // Container(
+                                    //   margin: Dimens.edgeInsets20,
+                                    //   height:
+                                    //       ((controller.listEmployee?.length ??
+                                    //                   0) *
+                                    //               40) +
+                                    //           130,
+                                    //   decoration: BoxDecoration(
+                                    //     border: Border.all(
+                                    //       color: ColorValues
+                                    //           .lightGreyColorWithOpacity35,
+                                    //       width: 1,
+                                    //     ),
+                                    //     boxShadow: [
+                                    //       BoxShadow(
+                                    //         color: ColorValues
+                                    //             .appBlueBackgroundColor,
+                                    //         spreadRadius: 2,
+                                    //         blurRadius: 5,
+                                    //         offset: Offset(0, 2),
+                                    //       ),
+                                    //     ],
+                                    //   ),
+                                    //   child: Column(
+                                    //     children: [
+                                    //       Padding(
+                                    //         padding: const EdgeInsets.all(10.0),
+                                    //         child: Row(
+                                    //           children: [
+                                    //             Text(
+                                    //               'Team deploying to carry out the Job',
+                                    //               style: Styles.blue700,
+                                    //             ),
+                                    //           ],
+                                    //         ),
+                                    //       ),
+                                    //       Expanded(
+                                    //         child: DataTable2(
+                                    //           border: TableBorder.all(
+                                    //               color: Color.fromARGB(
+                                    //                   255, 206, 229, 234)),
+                                    //           columns: [
+                                    //             DataColumn(
+                                    //                 label: Text(
+                                    //               "Employee Name",
+                                    //               style: TextStyle(
+                                    //                   fontSize: 15,
+                                    //                   fontWeight:
+                                    //                       FontWeight.bold),
+                                    //             )),
+                                    //             DataColumn(
+                                    //                 label: Text(
+                                    //               "Responsibility",
+                                    //               style: TextStyle(
+                                    //                   fontSize: 15,
+                                    //                   fontWeight:
+                                    //                       FontWeight.bold),
+                                    //             )),
+                                    //           ],
+                                    //           rows: List<DataRow>.generate(
+                                    //             controller
+                                    //                     .listEmployee?.length ??
+                                    //                 0,
+                                    //             (index) => DataRow(cells: [
+                                    //               DataCell(Text(controller
+                                    //                       .listEmployee?[index]
+                                    //                       ?.empName
+                                    //                       .toString() ??
+                                    //                   '')),
+                                    //               DataCell(Text(controller
+                                    //                       .listEmployee?[index]
+                                    //                       ?.resp
+                                    //                       .toString() ??
+                                    //                   '')),
+                                    //             ]),
+                                    //           ),
+                                    //         ),
+                                    //       ),
+                                    //     ],
+                                    //   ),
+                                    // ),
 
                                     ///Safety measures
                                     controller.safetyMeasureList.isEmpty
@@ -2457,7 +2457,7 @@ class ViewPermitWebScreen extends GetView<ViewPermitController> {
                                               CrossAxisAlignment.start,
                                           children: [
                                             Text(
-                                              "Tool Box Talk (TBT) / PRE-JOB DISCUSSION",
+                                              "Tool Box Talk",
                                               style: Styles.blue700,
                                             ),
                                             Dimens.boxHeight10,
@@ -2572,7 +2572,41 @@ class ViewPermitWebScreen extends GetView<ViewPermitController> {
                                                             )),
                                                       ],
                                                     ),
-                                                    Dimens.boxHeight30,
+                                                 
+                                                  ],
+                                                ),
+                                              ],
+                                            ),
+                                          ],
+                                        ),
+                                      ),
+                                    ),
+                                    
+                                     //Tool box talk / Pre Job Discussion
+                                    Container(
+                                      margin: EdgeInsets.all(20),
+                                      decoration: BoxDecoration(
+                                        border: Border.all(
+                                            color: Colors.grey.withOpacity(.3)),
+                                      ),
+                                      child: Container(
+                                        color:
+                                            ColorValues.appBlueBackgroundColor,
+                                        padding: const EdgeInsets.all(8.0),
+                                        child: Column(
+                                          crossAxisAlignment:
+                                              CrossAxisAlignment.start,
+                                          children: [
+                                            Text(
+                                              "Tool Box Talk (TBT) / PRE-JOB DISCUSSION",
+                                              style: Styles.blue700,
+                                            ),
+                                            Dimens.boxHeight10,
+                                            Wrap(
+                                              children: [
+                                                Column(
+                                                  children: [
+                                                    
                                                     Padding(
                                                       padding:
                                                           const EdgeInsets.only(
