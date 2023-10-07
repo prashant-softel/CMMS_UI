@@ -678,7 +678,7 @@ class AddModuleCleaningExecutionContentWeb
                                                   height: 28,
                                                   child: CustomElevatedButton(
                                                     backgroundColor: ColorValues
-                                                        .appGreenColor,
+                                                        .addNewColor,
                                                     text: "Start",
                                                     onPressed: () {
                                                       controller
@@ -698,7 +698,7 @@ class AddModuleCleaningExecutionContentWeb
                                                   height: 28,
                                                   child: CustomElevatedButton(
                                                     backgroundColor: ColorValues
-                                                        .appGreenColor,
+                                                        .cancelColor,
                                                     text: "End",
                                                     onPressed: () {
                                                       Get.dialog(
@@ -714,7 +714,7 @@ class AddModuleCleaningExecutionContentWeb
                                             height: 28,
                                             child: CustomElevatedButton(
                                               backgroundColor:
-                                                  ColorValues.appRedColor,
+                                                  Color.fromARGB(255, 244, 116, 248),
                                               text: "Abandoned All",
                                               onPressed: () {
                                                 Get.dialog(AbandonAllDialog(
