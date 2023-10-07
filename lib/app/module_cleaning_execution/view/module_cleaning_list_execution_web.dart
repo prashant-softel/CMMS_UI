@@ -340,31 +340,34 @@ class ModuleCleaningListExecution
                                               ),
                                             ].map((record) {
                                               return TableViewRow(
-                                                
                                                 onTap: () {
-                                                   controller.viewMCExecution(
-                                                                      id: int.tryParse(
-                                                                          '${record[0]}'));
+                                                  controller.viewMCExecution(
+                                                      id: int.tryParse(
+                                                          '${record[0]}'));
                                                 },
                                                 height: 55,
                                                 cells: record.map((value) {
-                                                   final Map<String, dynamic> dataList = {
-                                                                              'id': int.tryParse('${record[0]}'),
-                                                                              'status': '${record[8]}',
-                                                                              'planId': int.tryParse('${record[1]}'),
-                                                                              'cleaningDays': int.tryParse('${record[4]}'),
-                                                                              'waterUsed': int.tryParse('${record[5]}'),
-                                                                              // {'id': 2, 'name': 'Item 2'},
-                                                                              // {'id': 3, 'name': 'Item 3'},
-                                                                              // {'id': 4, 'name': 'Item 4'},
-                                                                              // {'id': 5, 'name': 'Item 5'},
-                                                   };
+                                                  final Map<String, dynamic>
+                                                      dataList = {
+                                                    'id': int.tryParse(
+                                                        '${record[0]}'),
+                                                    'status': '${record[8]}',
+                                                    'planId': int.tryParse(
+                                                        '${record[1]}'),
+                                                    'cleaningDays':
+                                                        int.tryParse(
+                                                            '${record[4]}'),
+                                                    'waterUsed': int.tryParse(
+                                                        '${record[5]}'),
+                                                    // {'id': 2, 'name': 'Item 2'},
+                                                    // {'id': 3, 'name': 'Item 3'},
+                                                    // {'id': 4, 'name': 'Item 4'},
+                                                    // {'id': 5, 'name': 'Item 5'},
+                                                  };
                                                   return TableViewCell(
                                                     child: value == "Actions"
                                                         ? Wrap(
                                                             children: [
-
-
                                                               TableActionButton(
                                                                 color: ColorValues
                                                                     .appDarkBlueColor,
@@ -384,8 +387,9 @@ class ModuleCleaningListExecution
                                                                     Icons.edit,
                                                                 message: 'Edit',
                                                                 onPress: () {
-                                                                controller.StartEndMCExecution(dataList: dataList);
-                                                                  
+                                                                  controller.StartEndMCExecution(
+                                                                      dataList:
+                                                                          dataList);
                                                                 },
                                                               ),
                                                               record[8] ==
@@ -419,7 +423,9 @@ class ModuleCleaningListExecution
                                                                         //     planId:
                                                                         //         int.tryParse('${record[1]}'));
                                                                         // controller.startMCExecution(planId:int.tryParse('${record[1]}'),);
-                                                                        controller.StartEndMCExecution(dataList: dataList);
+                                                                        controller.StartEndMCExecution(
+                                                                            dataList:
+                                                                                dataList);
                                                                       },
                                                                     )
                                                                   : Container(),
@@ -434,8 +440,9 @@ class ModuleCleaningListExecution
                                                                           'End',
                                                                       onPress:
                                                                           () {
-                                                                           
-                                                                            controller.StartEndMCExecution(dataList: dataList);
+                                                                        controller.StartEndMCExecution(
+                                                                            dataList:
+                                                                                dataList);
                                                                         // controller
                                                                         //     .editIncidentReport(
                                                                         //         id: int.tryParse(

@@ -1,6 +1,6 @@
 class TypeModel {
   final String name;
-  final int id;
+  final String id;
 
   TypeModel({required this.name, required this.id});
 }

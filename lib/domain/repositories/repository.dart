@@ -2864,8 +2864,8 @@ class Repository {
     }
   }
 
-   Future<Map<String, dynamic>> permitCancelByApproverButton(
-   String? ptwStatus,
+  Future<Map<String, dynamic>> permitCancelByApproverButton(
+    String? ptwStatus,
     cancelByApproverJsonString,
     bool? isLoading,
   ) async {
@@ -3232,7 +3232,7 @@ class Repository {
   //   }
   // }
 
-   Future<Map<String, dynamic>> permitRejectButton(
+  Future<Map<String, dynamic>> permitRejectButton(
     rejectExtendPermitJsonString,
     int? id,
     String? ptwStatus,
@@ -6868,7 +6868,7 @@ class Repository {
     }
   }
 
-   Future<void> deleteSafetyMeasure(Object id, bool isLoading) async {
+  Future<void> deleteSafetyMeasure(Object id, bool isLoading) async {
     try {
       final auth = await getSecuredValue(LocalKeys.authToken);
       final res = await _dataRepository.deleteSafetyMeasure(
@@ -8093,7 +8093,6 @@ class Repository {
           auth: auth,
           isLoading: isLoading,
           jobTypeJsonString: jobTypeJsonString);
-           
 
       if (!res.hasError) {
         return true;
@@ -8108,18 +8107,16 @@ class Repository {
     }
   }
 
-///Create Safety Measure
-  Future<bool> createSafetyMeasure({
-    bool? isLoading, 
-    safetyMeasurelistJsonString
-    }) async {
+  ///Create Safety Measure
+  Future<bool> createSafetyMeasure(
+      {bool? isLoading, safetyMeasurelistJsonString}) async {
     try {
       final auth = await getSecuredValue(LocalKeys.authToken);
       final res = await _dataRepository.createSafetyMeasure(
           auth: auth,
           isLoading: isLoading,
           safetyMeasurelistJsonString: safetyMeasurelistJsonString);
-          print({"SafetyMeasureResponse:", res.data});
+      print({"SafetyMeasureResponse:", res.data});
 
       if (!res.hasError) {
         return true;

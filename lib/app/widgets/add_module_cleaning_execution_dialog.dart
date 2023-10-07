@@ -196,8 +196,11 @@ class AddModuleCleaningExecutionDialog extends GetView {
                                               children: [
                                                 ExpansionTile(
                                                   title: Row(
-                                                    mainAxisAlignment : MainAxisAlignment.start,
-                                                    crossAxisAlignment : CrossAxisAlignment.start,
+                                                    mainAxisAlignment:
+                                                        MainAxisAlignment.start,
+                                                    crossAxisAlignment:
+                                                        CrossAxisAlignment
+                                                            .start,
                                                     children: [
                                                       SizedBox(
                                                         width: 200,
@@ -266,8 +269,10 @@ class AddModuleCleaningExecutionDialog extends GetView {
                                                                   .map(
                                                                       (e) =>
                                                                           Row(
-                                                                            mainAxisAlignment : MainAxisAlignment.end,
-                                                                            crossAxisAlignment : CrossAxisAlignment.end,
+                                                                            mainAxisAlignment:
+                                                                                MainAxisAlignment.end,
+                                                                            crossAxisAlignment:
+                                                                                CrossAxisAlignment.end,
                                                                             children: [
                                                                               Text('${e?.smbName}'),
                                                                               Dimens.boxWidth50,
@@ -338,6 +343,7 @@ class AddModuleCleaningExecutionDialog extends GetView {
                                               ],
                                             ))),
                                 ),
+
                                 // ExpansionTile(
                                 //   title: Text(
                                 //     "Inventor_2",
