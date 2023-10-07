@@ -196,8 +196,11 @@ class AddModuleCleaningExecutionDialog extends GetView {
                                               children: [
                                                 ExpansionTile(
                                                   title: Row(
-                                                    mainAxisAlignment : MainAxisAlignment.start,
-                                                    crossAxisAlignment : CrossAxisAlignment.start,
+                                                    mainAxisAlignment:
+                                                        MainAxisAlignment.start,
+                                                    crossAxisAlignment:
+                                                        CrossAxisAlignment
+                                                            .start,
                                                     children: [
                                                       SizedBox(
                                                         // width: 200,
@@ -211,7 +214,7 @@ class AddModuleCleaningExecutionDialog extends GetView {
                                                         ),
                                                       ),
                                                       Spacer(),
-                                                       
+
                                                       SizedBox(
                                                         // width: 200,
                                                         child: Text(
@@ -245,15 +248,17 @@ class AddModuleCleaningExecutionDialog extends GetView {
                                                             MainAxisAlignment
                                                                 .spaceAround,
                                                         children: [
-                                                         
+
                                                         ]
                                                           ..addAll(
                                                               element!.smbs!
                                                                   .map(
                                                                       (e) =>
                                                                           Row(
-                                                                            mainAxisAlignment : MainAxisAlignment.end,
-                                                                            crossAxisAlignment : CrossAxisAlignment.end,
+                                                                            mainAxisAlignment:
+                                                                                MainAxisAlignment.end,
+                                                                            crossAxisAlignment:
+                                                                                CrossAxisAlignment.end,
                                                                             children: [
                                                                               Text('${e?.smbName}'),
                                                                               // Dimens.boxWidth50,
@@ -286,13 +291,14 @@ class AddModuleCleaningExecutionDialog extends GetView {
                                                                           ))),
                                                       ),
                                                     ),
-                                                   
+
                                                   ],
                                                 ),
                                               ],
                                             ))),
                                 ),
-                               
+
+
                                 Dimens.boxHeight150,
                                 Row(
                                   mainAxisAlignment: MainAxisAlignment.center,
@@ -330,7 +336,7 @@ class AddModuleCleaningExecutionDialog extends GetView {
                     ),
                   ],
                 ),
-              
+
               ],
             ),
           );

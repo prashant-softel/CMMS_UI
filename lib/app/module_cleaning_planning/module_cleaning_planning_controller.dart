@@ -1,4 +1,5 @@
 import 'package:cmms/app/module_cleaning_planning/module_cleaning_planning_presenter.dart';
+import 'package:cmms/domain/models/equipment_list_model.dart';
 import 'package:cmms/domain/models/facility_model.dart';
 import 'package:cmms/domain/models/frequency_model.dart';
 import 'package:cmms/domain/models/inventory_category_model.dart';
@@ -14,6 +15,7 @@ class ModuleCleaningPlanningController extends GetxController {
   ModuleCleaningPlanningController(
     this.moduleCleaningPlanningPresenter,
   );
+  RxList<EquipmentListModel?> equipmentList = <EquipmentListModel?>[].obs;
 
   Rx<List<List<Map<String, String>>>> rowItem =
       Rx<List<List<Map<String, String>>>>([]);
@@ -21,6 +23,7 @@ class ModuleCleaningPlanningController extends GetxController {
   var typeDropdownList = 'Select Gender'.obs;
   var startDateTc = TextEditingController();
   bool openStartDatePicker = false;
+
   int facilityId = 0;
   Rx<String> selectedBlock = ''.obs;
   Rx<String> selectedfrequency = ''.obs;
@@ -32,18 +35,47 @@ class ModuleCleaningPlanningController extends GetxController {
   Map<String, TypeModel> typedropdownMapperData = {};
 
   var type = <TypeModel>[
-    TypeModel(name: "Please Select", id: 0),
-    TypeModel(name: 'Dry', id: 1),
-    TypeModel(name: 'Wet', id: 2),
+    TypeModel(name: "Please Select", id: "0"),
+    TypeModel(name: 'Dry', id: "1"),
+    TypeModel(name: 'Wet', id: "2"),
+  ];
+  var days = <TypeModel>[
+    TypeModel(name: "Please Select", id: "0"),
+    TypeModel(name: 'Day 1', id: "1"),
+    TypeModel(name: 'Day 2', id: "2"),
+    TypeModel(name: 'Day 3', id: "3"),
   ];
   RxList<FrequencyModel?> frequencyList = <FrequencyModel>[].obs;
   ModuleCleaningPlanningPresenter moduleCleaningPlanningPresenter;
   final HomeController homecontroller = Get.find();
 
+  Future<void> getEquipmentModelList(int facilityId, bool isLoading) async {
+    equipmentList.value = <EquipmentListModel>[];
+
+    final list = await moduleCleaningPlanningPresenter.getEquipmentModelList(
+        isLoading: isLoading, facilityId: facilityId);
+    // print('incidentReportFacilityId$facilityId');
+    // print('Incident Report List:$list');
+    for (var equipment_list in list) {
+      equipmentList.add(equipment_list);
+    }
+
+    if (list != null) {
+      equipmentList.value = list;
+
+      // }
+    }
+
+    update(['equipment_list']);
+  }
+
   ///
   @override
   void onInit() async {
     getFrequencyList();
+    Future.delayed(Duration(seconds: 1), () {
+      getEquipmentModelList(facilityId, true);
+    });
 
     super.onInit();
   }
@@ -69,7 +101,7 @@ class ModuleCleaningPlanningController extends GetxController {
       {"key": "noOfInverters", "value": ''},
       {'key': "noOfSMBs", "value": ''},
       {'key': "noOfModules", "value": ''},
-      {'key': "type", "value": ''},
+      {'key': "type", "value": 'Please Select'},
     ]);
   }
 

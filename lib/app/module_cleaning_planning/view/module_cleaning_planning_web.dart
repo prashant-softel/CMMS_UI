@@ -1,10 +1,12 @@
 import 'package:cmms/app/module_cleaning_planning/module_cleaning_planning_controller.dart';
 
 import 'package:cmms/app/theme/dimens.dart';
+import 'package:cmms/app/widgets/add_module_cleaning_execution_dialog.dart';
 import 'package:cmms/app/widgets/create%20_schedule_dialog.dart';
 import 'package:cmms/app/widgets/custom_richtext.dart';
 import 'package:cmms/app/widgets/custom_textField.dart';
 import 'package:cmms/app/widgets/dropdown_web.dart';
+import 'package:cmms/app/widgets/set_equipments_dialog.dart';
 import 'package:cmms/app/widgets/stock_dropdown.dart';
 import 'package:data_table_2/data_table_2.dart';
 import 'package:flutter/material.dart';
@@ -271,8 +273,12 @@ class _ModuleCleaningPlanningState extends State<ModuleCleaningPlanning> {
                                       Spacer(),
                                       GestureDetector(
                                         onTap: () {
-                                          controller.addRowItem();
+                                          Get.dialog(SetEquipmentDialog());
                                         },
+                                        // color: ColorValues.appDarkBlueColor,
+                                        // onTap: () {
+                                        //   controller.addRowItem();
+                                        // },
                                         child: Container(
                                           height: 30,
                                           width: 150,
@@ -359,37 +365,51 @@ class _ModuleCleaningPlanningState extends State<ModuleCleaningPlanning> {
                                         cells: record.map((mapData) {
                                           return DataCell(
                                             (mapData['key'] == "type")
-                                                ? DropdownWebStock(
-                                                    width:
-                                                        MediaQuery.of(context)
-                                                                .size
-                                                                .width /
-                                                            4,
-                                                    dropdownList:
-                                                        controller.type,
-                                                    selectedValue:
-                                                        mapData["value"],
-                                                    onValueChanged:
-                                                        (list, selectedValue) {
-                                                      print({
-                                                        selectedValue:
-                                                            selectedValue
-                                                      });
-                                                      mapData["value"] =
-                                                          selectedValue;
-                                                      controller.typedropdownMapperData[
-                                                              selectedValue] =
-                                                          list.firstWhere(
-                                                              (element) =>
-                                                                  element
-                                                                      .name ==
-                                                                  selectedValue,
-                                                              orElse: null);
-                                                      // mapData["value"] =
-                                                      //     selectedValue;
-                                                    },
+                                                ? Padding(
+                                                    padding:
+                                                        const EdgeInsets.only(
+                                                      left: 10,
+                                                      right: 10,
+                                                      top: 10,
+                                                    ),
+                                                    child: Column(
+                                                      mainAxisAlignment:
+                                                          MainAxisAlignment
+                                                              .start,
+                                                      crossAxisAlignment:
+                                                          CrossAxisAlignment
+                                                              .start,
+                                                      children: [
+                                                        DropdownWebStock(
+                                                          width: MediaQuery.of(
+                                                                  context)
+                                                              .size
+                                                              .width,
+                                                          dropdownList:
+                                                              controller.type,
+                                                          selectedValue:
+                                                              mapData["value"],
+                                                          onValueChanged: (list,
+                                                              selectedValue) {
+                                                            // print('paifcghb:${controller.assetList}');
+                                                            // print({selectedValue: selectedValue});
+                                                            mapData["value"] =
+                                                                selectedValue;
+                                                            controller.typedropdownMapperData[
+                                                                    selectedValue] =
+                                                                list.firstWhere(
+                                                                    (element) =>
+                                                                        element
+                                                                            .name ==
+                                                                        selectedValue,
+                                                                    orElse:
+                                                                        null);
+                                                          },
+                                                        ),
+                                                      ],
+                                                    ),
                                                   )
-                                                : (mapData['key'] == "day")
+                                                : (mapData['key'] == "")
                                                     ? Text(
                                                         mapData['value'] ?? "")
                                                     : Text(
