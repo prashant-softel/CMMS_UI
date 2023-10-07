@@ -1908,7 +1908,7 @@ class ViewPermitWebScreen extends GetView<ViewPermitController> {
                                     Dimens.boxHeight5,
 
                                     Padding(
-                                      padding: const EdgeInsets.only(left: 70),
+                                      padding: const EdgeInsets.only(left: 60),
                                       child: Row(
                                         mainAxisAlignment:
                                             MainAxisAlignment.start,
@@ -2363,12 +2363,13 @@ class ViewPermitWebScreen extends GetView<ViewPermitController> {
                                                     .width /
                                                 1,
                                             child: Container(
-                                              margin: Dimens.edgeInsets20,
-                                              height: ((controller
-                                                          .safetyMeasureList
-                                                          .length) *
-                                                      28) +
-                                                  180,
+                                              margin: EdgeInsets.all(20),
+                                              // margin: Dimens.edgeInsets20,
+                                              // height: ((controller
+                                              //             .safetyMeasureList
+                                              //             .length) *
+                                              //         28) +
+                                              //     180,
                                               decoration: BoxDecoration(
                                                 border: Border.all(
                                                   color: ColorValues
@@ -2392,9 +2393,12 @@ class ViewPermitWebScreen extends GetView<ViewPermitController> {
                                                   // CustomAppBar(
                                                   //   title: 'Following safety Measures taken to carry out the work'.tr,
                                                   // ),
-                                                  Text(
-                                                    'Following safety Measures taken to carry out the work',
-                                                    style: Styles.blue700,
+                                                  Padding(
+                                                    padding: const EdgeInsets.only(left: 10, right: 10, top: 10),
+                                                    child: Text(
+                                                      'Permit Type Checklist',
+                                                      style: Styles.blue700,
+                                                    ),
                                                   ),
                                                   Dimens.boxHeight10,
                                                   Wrap(
@@ -2415,14 +2419,18 @@ class ViewPermitWebScreen extends GetView<ViewPermitController> {
                                                                               mainAxisAlignment: MainAxisAlignment.start,
                                                                               crossAxisAlignment: CrossAxisAlignment.start,
                                                                               children: [
-                                                                                SizedBox(
-                                                                                  // width: 200,
-                                                                                  child: Row(
-                                                                                    children: [
-                                                                                      checkBoxMethod(1),
-                                                                                      // Text("${l = l! + 1}. "),
-                                                                                      Expanded(child: Text("${element.name}"))
-                                                                                    ],
+                                                                                
+                                                                                Padding(
+                                                                                  padding: const EdgeInsets.only(left: 20),
+                                                                                  child: SizedBox(
+                                                                                    // width: 200,
+                                                                                    child: Row(
+                                                                                      children: [
+                                                                                        checkBoxMethod(1),
+                                                                                        // Text("${l = l! + 1}. "),
+                                                                                        Expanded(child: Text("${element.name}"))
+                                                                                      ],
+                                                                                    ),
                                                                                   ),
                                                                                 )
                                                                               ],
@@ -2629,85 +2637,68 @@ class ViewPermitWebScreen extends GetView<ViewPermitController> {
                                                               ),
                                                               Dimens
                                                                   .boxHeight10,
-                                                              // Text(
-                                                              //   'Ramesh Singh',
-                                                              //   style: Styles.black17,
-                                                              // ),
-                                                              SizedBox(
-                                                                width: MediaQuery.of(
-                                                                            context)
-                                                                        .size
-                                                                        .width /
-                                                                    7,
-                                                                child: Obx(
-                                                                  () =>
-                                                                      DropdownWebWidget(
-                                                                    dropdownList:
-                                                                        controller
-                                                                            .employeeList,
-                                                                    isValueSelected:
-                                                                        controller
-                                                                            .isemployeeListSelected
-                                                                            .value,
-                                                                    selectedValue:
-                                                                        controller
-                                                                            .selectedEmployeeList
-                                                                            .value,
-                                                                    onValueChanged:
-                                                                        controller
-                                                                            .onValueChanged,
-                                                                  ),
-                                                                ),
+                                                              Text(
+                                                                '${controller.viewPermitDetailsModel.value?.tbT_Done_By}',
+                                                                style: Styles.black17,
                                                               ),
+                                                              // SizedBox(
+                                                              //   width: MediaQuery.of(
+                                                              //               context)
+                                                              //           .size
+                                                              //           .width /
+                                                              //       7,
+                                                              //   child: Obx(
+                                                              //     () =>
+                                                              //         DropdownWebWidget(
+                                                              //       dropdownList:
+                                                              //           controller
+                                                              //               .employeeList,
+                                                              //       isValueSelected:
+                                                              //           controller
+                                                              //               .isemployeeListSelected
+                                                              //               .value,
+                                                              //       selectedValue:
+                                                              //           controller
+                                                              //               .selectedEmployeeList
+                                                              //               .value,
+                                                              //       onValueChanged:
+                                                              //           controller
+                                                              //               .onValueChanged,
+                                                              //     ),
+                                                              //   ),
+                                                              // ),
+                                                           
                                                             ],
                                                           ),
                                                           Spacer(),
-                                                          Column(
-                                                            crossAxisAlignment:
-                                                                CrossAxisAlignment
-                                                                    .end,
-                                                            children: [
-                                                              Text(
-                                                                'Date & Time',
-                                                                style: Styles
-                                                                    .blackBold17,
-                                                              ),
-                                                              Dimens
-                                                                  .boxHeight10,
-                                                              // Text(
-                                                              //   '17:06:2022 09:30:00',
-                                                              //   style: Styles.black17,
-                                                              // ),
-                                                              _buildDateTimeField_web(
-                                                                  context),
-                                                            ],
+                                                          Padding(
+                                                            padding: const EdgeInsets.only(right: 450),
+                                                            child: Column(
+                                                              crossAxisAlignment:
+                                                                  CrossAxisAlignment
+                                                                      .end,
+                                                              mainAxisAlignment : MainAxisAlignment.center,
+                                                              children: [
+                                                                Text(
+                                                                  'Date & Time',
+                                                                  style: Styles
+                                                                      .blackBold17,
+                                                                ),
+                                                               
+                                                                Text(
+                                                                  '${controller.viewPermitDetailsModel.value?.tbT_Done_At}',
+                                                                  style: Styles.black17,
+                                                                ),
+                                                                // _buildDateTimeField_web(
+                                                                //     context),
+                                                              ],
+                                                            ),
                                                           ),
-                                                          // Spacer(),
-                                                          // Column(crossAxisAlignment: CrossAxisAlignment.end, children: [
-                                                          //   Text(
-                                                          //     'TBT Training Attended By',
-                                                          //     style: Styles.blackBold17,
-                                                          //   ),
-                                                          //   Dimens.boxHeight10,
-
-                                                          //   // Column(
-                                                          //   //   mainAxisAlignment: MainAxisAlignment.start,
-                                                          //   //         crossAxisAlignment: CrossAxisAlignment.start,
-                                                          //   //   // alignment: WrapAlignment.start,
-                                                          //   //   // spacing: 100,
-                                                          //   //   children: []..addAll(controller.employeeList.map((element) => Column(
-                                                          //   //         // mainAxisSize: MainAxisSize.min,
-                                                          //   //         mainAxisAlignment: MainAxisAlignment.start,
-                                                          //   //         crossAxisAlignment: CrossAxisAlignment.start,
-                                                          //   //         children: [
-                                                          //   //           Text("${element.name}")],
-                                                          //   //       ))),
-                                                          //   // ),
-                                                          // ]),
+                                                        
                                                         ],
                                                       ),
                                                     ),
-                                                    Dimens.boxHeight30,
+                                                    
                                                     Container(
                                                       margin:
                                                           Dimens.edgeInsets20,

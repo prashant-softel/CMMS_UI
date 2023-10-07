@@ -168,6 +168,12 @@ class NewPermitController extends GetxController {
   var validTillTimeCtrlrBuffer;
   var startDateTimeCtrlrBuffer;
 
+//For date Time
+  var dateTimeCtrlr = TextEditingController();
+  Rx<DateTime> selectedDateTime = DateTime.now().obs;
+
+
+
   var permitDescriptionCtrlr = TextEditingController();
   var titleTextCtrlr = TextEditingController();
   var blockNameTextCtrlr = TextEditingController();
@@ -244,7 +250,12 @@ class NewPermitController extends GetxController {
   RxList<EmployeeListModel?> selectedEmployeeNameList =
       <EmployeeListModel>[].obs;
   RxList<int> selectedEmployeeNameIdList = <int>[].obs;
+
+  //
   RxList<EmployeeListModel?> employeeNameList = <EmployeeListModel>[].obs;
+   Rx<bool> isemployeeNameListSelected = true.obs;
+  Rx<String> selectedEmployeeNamesList = ''.obs;
+  
   RxList<EmployeeListModel?> filteredEmployeeNameList =
       <EmployeeListModel>[].obs;
 

@@ -481,19 +481,7 @@ class ViewPermitController extends GetxController {
       await getViewPermitDetail(permitId: permitId!);
     }
 
-    // await getInventoryCategoryList();
-    //   await getInventoryIsolationList();
-    //  await getInventoryEquipmentNameList();
-    // await getAssignedToList();
-    // await getFacilityLists();
-    // await getFacilitiesLists();
-    // await getTypePermitList();
-    // await getInventoryDetailList();
-    // await getEmployeePermitList();
-    // await getJobTypePermitList();
-    // await getPermitIssuerList();
-    // await getPermitApproverList();
-
+  
     await getSafetyMeasureList();
     await getPermitHistory(permitId: permitId!);
     await getPermitConditionList(isCancle: isCancle!);

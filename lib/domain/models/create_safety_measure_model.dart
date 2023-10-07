@@ -15,7 +15,7 @@ class CreateSafetyMeasureModel {
   CreateSafetyMeasureModel({
     // this.id,
     this.title,
-    this.description,
+    // this.description,
     this.permitType,
     this.input,
     this.required,
@@ -25,7 +25,7 @@ class CreateSafetyMeasureModel {
 
   // int? id;
   String? title;
-  String? description;
+  // String? description;
   int? permitType;
   int? input;
   int? required;
@@ -36,7 +36,7 @@ class CreateSafetyMeasureModel {
   factory CreateSafetyMeasureModel.fromJson(Map<String, dynamic> json) => CreateSafetyMeasureModel(
     // id: json["id"],
     title: json["title"],
-    description: json["description"],
+    // description: json["description"],
     permitType: json["permitType"],
     input: json['input'],
     required: json['required'],
@@ -45,7 +45,7 @@ class CreateSafetyMeasureModel {
   Map<String, dynamic> toJson() => {
     // "id": id,
     "title": title,
-    "description": description,
+    // "description": description,
     "permitType": permitType,
     "input": input,
     "required": required
