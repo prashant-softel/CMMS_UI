@@ -33,6 +33,12 @@ class SafetyQuestionsListController extends GetxController {
 
   SafetyMeasureListModel? selectedItem;
 
+  var updateType = ''.obs;
+
+  void updateChecklistType(String value) {
+    updateType.value = value;
+  }
+
   Rx<bool> isTitleInvalid = false.obs;
   Rx<bool> isDescriptionInvalid = false.obs;
   Rx<bool> isFormInvalid = false.obs;
@@ -43,11 +49,10 @@ class SafetyQuestionsListController extends GetxController {
   ////
   RxBool isCheckedRequire = false.obs;
   void requiretoggleCheckbox() {
-    isCheckedRequire.value =
-        !isCheckedRequire.value; // Toggle the checkbox state
+    isCheckedRequire.value = !isCheckedRequire.value; // Toggle the checkbox state
   }
-Rx<List<List<Map<String, String>>>> rowItem =
-      Rx<List<List<Map<String, String>>>>([]);
+
+  Rx<List<List<Map<String, String>>>> rowItem = Rx<List<List<Map<String, String>>>>([]);
   // var type2 = <TypeModel>[
   //   TypeModel(name: "Please Select", id: "0"),
   //   TypeModel(name: 'Dry', id: "1"),
@@ -79,11 +84,9 @@ Rx<List<List<Map<String, String>>>> rowItem =
   StreamSubscription<int>? facilityIdStreamSubscription;
 
   ///Safety Measurement Question List
-  RxList<SafetyMeasureListModel> safetyMeasureList =
-      <SafetyMeasureListModel>[].obs;
+  RxList<SafetyMeasureListModel> safetyMeasureList = <SafetyMeasureListModel>[].obs;
 
-  PaginationController safetyQuestionListPaginationController =
-      PaginationController(
+  PaginationController safetyQuestionListPaginationController = PaginationController(
     rowCount: 0,
     rowsPerPage: 10,
   );
@@ -134,10 +137,10 @@ Rx<List<List<Map<String, String>>>> rowItem =
     if (isFormInvalid.value == true) {
       return false;
     }
-    if (titleCtrlr.text.trim() == '') {
+    if (titleCtrlr.text.trim() == '' ||
+    updateType.value == '') {
       //|| descriptionCtrlr.text.trim() == ''
-      Fluttertoast.showToast(
-          msg: "Please enter required field", fontSize: 16.0);
+      Fluttertoast.showToast(msg: "Please enter required field", fontSize: 16.0);
     } else {
       String _title = titleCtrlr.text.trim();
       // String _description = descriptionCtrlr.text.trim();
@@ -146,11 +149,15 @@ Rx<List<List<Map<String, String>>>> rowItem =
           title: _title,
           // description: "",
           permitType: selectedTypePermitId,
-          input: 1,
-          required: 1);
+          input: updateType.value == "Checkbox"
+              ? 1
+              : updateType.value == "Radio"
+                  ? 2
+                  : 3,
+          required: 1
+          );
       print("OUT ");
-      var safetyMeasurelistJsonString = createSafetyMeasure
-          .toJson(); //createCheckPointToJson([createCheckpoint]);
+      var safetyMeasurelistJsonString = createSafetyMeasure.toJson(); //createCheckPointToJson([createCheckpoint]);
 
       print({"safetyMeasureJsonString", safetyMeasurelistJsonString});
       await safetyQuestionsListPresenter.createSafetyMeasure(
@@ -178,18 +185,15 @@ Rx<List<List<Map<String, String>>>> rowItem =
             height: 10,
           ),
           RichText(
-            text: TextSpan(
-                text: 'Are you sure you want to delete the permit ',
-                style: Styles.blackBold16,
-                children: [
-                  TextSpan(
-                    text: safetyMeasure,
-                    style: TextStyle(
-                      color: ColorValues.orangeColor,
-                      fontWeight: FontWeight.bold,
-                    ),
-                  ),
-                ]),
+            text: TextSpan(text: 'Are you sure you want to delete the permit ', style: Styles.blackBold16, children: [
+              TextSpan(
+                text: safetyMeasure,
+                style: TextStyle(
+                  color: ColorValues.orangeColor,
+                  fontWeight: FontWeight.bold,
+                ),
+              ),
+            ]),
           ),
         ]),
         actions: [
@@ -228,11 +232,9 @@ Rx<List<List<Map<String, String>>>> rowItem =
     }
   }
 
-  Future<void> getSafetyMeasureList(
-      bool isLoading, int selectedTypePermitId) async {
+  Future<void> getSafetyMeasureList(bool isLoading, int selectedTypePermitId) async {
     safetyMeasureList.value = <SafetyMeasureListModel>[];
-    final _safetyMeasureList =
-        await safetyQuestionsListPresenter.getSafetyMeasureList(
+    final _safetyMeasureList = await safetyQuestionsListPresenter.getSafetyMeasureList(
       isLoading: isLoading,
       // categoryIds: categoryIds,
       permit_type_id: selectedTypePermitId,
@@ -252,10 +254,9 @@ Rx<List<List<Map<String, String>>>> rowItem =
   }
 
   Future<void> getTypePermitList() async {
-    final _permitTypeList = await safetyQuestionsListPresenter
-        .getTypePermitList(facility_id: facilityId
-            // facility_id: 45
-            );
+    final _permitTypeList = await safetyQuestionsListPresenter.getTypePermitList(facility_id: facilityId
+        // facility_id: 45
+        );
     print('FacilityIdForSafetyQuestions$facilityId');
 
     if (_permitTypeList != null) {
@@ -288,8 +289,7 @@ Rx<List<List<Map<String, String>>>> rowItem =
         break;
       case RxList<TypePermitModel>:
         {
-          int typePermitIndex =
-              typePermitList.indexWhere((x) => x?.name == value);
+          int typePermitIndex = typePermitList.indexWhere((x) => x?.name == value);
           selectedTypePermitId = typePermitList[typePermitIndex]?.id ?? 0;
           getSafetyMeasureList(true, selectedTypePermitId!);
           print('Permit Type Id:$selectedTypePermitId');

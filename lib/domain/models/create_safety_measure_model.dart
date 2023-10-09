@@ -19,6 +19,7 @@ class CreateSafetyMeasureModel {
     this.permitType,
     this.input,
     this.required,
+    
 
 
   });
