@@ -36,6 +36,7 @@ class AddModuleCleaningExecutionController extends GetxController {
   List<Escalation> days = [];
   Map<String, Schedules> dropdownMapperData = {};
   Map<String, PaiedModel> paiddropdownMapperData = {};
+  RxList<Schedules?>? schedules = <Schedules?>[].obs;
 
   // void addRowItem() {
   //   rowItem.value.add([
@@ -66,32 +67,29 @@ class AddModuleCleaningExecutionController extends GetxController {
   Rx<String> selectedTypeOfPermit = ''.obs;
   Rx<bool> isTypePermit = true.obs;
 
-
   ///Mc Execution details
   Rx<EndMCExecutionDetailsModel?> mcExecutionDetailsModel =
       EndMCExecutionDetailsModel().obs;
   RxList<EndMCExecutionDetailsModel?>? mcExecutionDetailsList =
       <EndMCExecutionDetailsModel?>[].obs;
 
+  TextEditingController scheduleExecutionTextFieldCtrlr =
+      TextEditingController();
+  TextEditingController remarkScheduleExecutionTextFieldCtrlr =
+      TextEditingController();
 
-  TextEditingController scheduleExecutionTextFieldCtrlr = TextEditingController();
-  TextEditingController remarkScheduleExecutionTextFieldCtrlr = TextEditingController();
-
-  
-
-
-///Equipment 
-RxList<InventoryCategoryModel?> equipmentCategoryList =
+  ///Equipment
+  RxList<InventoryCategoryModel?> equipmentCategoryList =
       <InventoryCategoryModel>[].obs;
   RxList<int> selectedEquipmentCategoryIdList = <int>[].obs;
 
   var equipments = <Equipments>[].obs;
-  RxList<InventoryCategoryModel?> filteredequipmentsList = <InventoryCategoryModel>[].obs;
+  RxList<InventoryCategoryModel?> filteredequipmentsList =
+      <InventoryCategoryModel>[].obs;
 
   ///Date Time
   var startedAtDateTimeCtrlrWeb = TextEditingController();
   var plannedAtDateTimeCtrlrWeb = TextEditingController();
-
 
   ///Checkbox
   var isChecked = false.obs; // This makes `isChecked` observable
@@ -102,20 +100,14 @@ RxList<InventoryCategoryModel?> equipmentCategoryList =
   //   isCheckedList[index] = !isCheckedList[index];
   // }
 
-  
-
   ///
   TextEditingController remarkTextFieldCtrlr = TextEditingController();
-
 
   ///Schedule List
   RxList<Schedules?>? listSchedules = <Schedules?>[].obs;
   TextEditingController commentTextFieldCtrlr = TextEditingController();
 
-  RxList<EquipmentListModel?> equipmentList =
-      <EquipmentListModel?>[].obs;
-
-  
+  RxList<EquipmentListModel?> equipmentList = <EquipmentListModel?>[].obs;
 
   RxList<FacilityModel?> facilityList = <FacilityModel>[].obs;
   Rx<bool> isFacilitySelected = true.obs;
@@ -139,7 +131,6 @@ RxList<InventoryCategoryModel?> equipmentCategoryList =
   dynamic planId = [];
   @override
   void onInit() async {
-
     //  isCheckedList.assignAll(List.generate(equipmentList.length, (index) => false));
 
     data = Get.arguments;
@@ -148,8 +139,6 @@ RxList<InventoryCategoryModel?> equipmentCategoryList =
     print('plan Id:${data['planId']}');
     print('cleaning Days:${data['cleaningDays']}');
     print('water Used:${data['waterUsed']}');
-
-
 
     facilityIdStreamSubscription = homeController.facilityId$.listen((event) {
       facilityId = event;
@@ -161,15 +150,15 @@ RxList<InventoryCategoryModel?> equipmentCategoryList =
     Future.delayed(Duration(seconds: 1), () {
       getTypePermitList();
     });
-      
-     Future.delayed(Duration(seconds: 1), () {
+
+    Future.delayed(Duration(seconds: 1), () {
       getInventoryCategoryList();
     });
-     Future.delayed(Duration(seconds: 1), () {
+    Future.delayed(Duration(seconds: 1), () {
       getEquipmentModelList(facilityId, true);
     });
 
-      if (data['id'] != null) {
+    if (data['id'] != null) {
       Future.delayed(Duration(seconds: 1), () {
         getMCExecutionDetail(executionId: data['id']!);
       });
@@ -192,12 +181,11 @@ RxList<InventoryCategoryModel?> equipmentCategoryList =
     }
   }
 
-  Future<void> getEquipmentModelList(int facilityId,  bool isLoading) async {
+  Future<void> getEquipmentModelList(int facilityId, bool isLoading) async {
     equipmentList.value = <EquipmentListModel>[];
 
-    final list = await addModuleCleaningExecutionPresenter.getEquipmentModelList(
-        isLoading: isLoading,
-        facilityId: facilityId);
+    final list = await addModuleCleaningExecutionPresenter
+        .getEquipmentModelList(isLoading: isLoading, facilityId: facilityId);
     // print('incidentReportFacilityId$facilityId');
     // print('Incident Report List:$list');
     for (var equipment_list in list) {
@@ -208,7 +196,7 @@ RxList<InventoryCategoryModel?> equipmentCategoryList =
       equipmentList.value = list;
       // filteredData.value = incidentReportList.value;
       // print('Filtered data:${filteredData.value}');
-     
+
       // if (filteredData != null && filteredData.isNotEmpty) {
       //   incidentReportModelList = filteredData[0];
       //   var incidentListJson = incidentReportModelList?.toJson();
@@ -222,7 +210,7 @@ RxList<InventoryCategoryModel?> equipmentCategoryList =
     update(['equipment_list']);
   }
 
-   void abandonScheduleExecutionButton({int? id}) async {
+  void abandonScheduleExecutionButton({int? id}) async {
     {
       String _comment = scheduleExecutionTextFieldCtrlr.text.trim();
 
@@ -231,7 +219,8 @@ RxList<InventoryCategoryModel?> equipmentCategoryList =
 
       var abandoneScheduleJsonString = commentAbandonScheduleModel.toJson();
       // print({"rejectCalibrationJsonString", approveCalibrationtoJsonString});
-      Map<String, dynamic>? response = await addModuleCleaningExecutionPresenter.abandonScheduleExecutionButton(
+      Map<String, dynamic>? response = await addModuleCleaningExecutionPresenter
+          .abandonScheduleExecutionButton(
         abandoneScheduleJsonString: abandoneScheduleJsonString,
         isLoading: true,
       );
@@ -242,7 +231,8 @@ RxList<InventoryCategoryModel?> equipmentCategoryList =
   }
 
   ///Update MC Schedule Execution
-  void updateMCScheduleExecution({int? scheduleId, int? cleaningDay, int? waterUsed}) async {
+  void updateMCScheduleExecution(
+      {int? scheduleId, int? cleaningDay, int? waterUsed}) async {
     {
       // checkForm();
       // if (isFormInvalid.value) {
@@ -255,39 +245,39 @@ RxList<InventoryCategoryModel?> equipmentCategoryList =
       //     htmlEscape.convert(insuranceRemarkTextCtrlr.text.trim());
       // String _insuranceAvailable =
       //     htmlEscape.convert(insuranceAvailableTextCtrlr.text.trim());
-    
-     var remark;
-    rowItem.value.forEach((element) {
-     
-      // items.add(item);
-    });
-    print('data${rowItem.value}');
-    
-    // String remark = items.join(', ');
-    // print('Items remark:${remark}');
+
+      var remark;
+      rowItem.value.forEach((element) {
+        // items.add(item);
+      });
+      print('data${rowItem.value}');
+
+      // String remark = items.join(', ');
+      // print('Items remark:${remark}');
 
       UpdateMcScheduleExecutionModel updateMCScheduleExecutionModel =
           UpdateMcScheduleExecutionModel(
-            scheduleId: scheduleId,
-            cleaningDay: cleaningDay,
-            waterUsed: waterUsed,  
-            remark: rowItem.value[0][8]["value"],
-            cleanedEquipmentIds:[10,11],
-            abandonedEquipmentIds:[12]
-             
-             );
+              scheduleId: scheduleId,
+              cleaningDay: cleaningDay,
+              waterUsed: waterUsed,
+              remark: rowItem.value[0][8]["value"],
+              cleanedEquipmentIds: [10, 11],
+              abandonedEquipmentIds: [12]);
 
-      var updateMCScheduleExecutionJsonString = updateMCScheduleExecutionModel.toJson();
+      var updateMCScheduleExecutionJsonString =
+          updateMCScheduleExecutionModel.toJson();
       Map<String, dynamic>? responseUpdateMCExecution =
           await addModuleCleaningExecutionPresenter.updateMCScheduleExecution(
-        updateMCScheduleExecutionJsonString: updateMCScheduleExecutionJsonString,
+        updateMCScheduleExecutionJsonString:
+            updateMCScheduleExecutionJsonString,
         isLoading: true,
       );
 
       if (responseUpdateMCExecution == null) {
         // showAlertDialog();
       }
-      print('Update MC Schedule Execution data: $updateMCScheduleExecutionJsonString');
+      print(
+          'Update MC Schedule Execution data: $updateMCScheduleExecutionJsonString');
     }
   }
 
@@ -312,7 +302,8 @@ RxList<InventoryCategoryModel?> equipmentCategoryList =
 
       var abandoneJsonString = commentAbandonModel.toJson();
       // print({"rejectCalibrationJsonString", approveCalibrationtoJsonString});
-      Map<String, dynamic>? response = await addModuleCleaningExecutionPresenter.abandonAllExecutionButton(
+      Map<String, dynamic>? response =
+          await addModuleCleaningExecutionPresenter.abandonAllExecutionButton(
         abandoneJsonString: abandoneJsonString,
         isLoading: true,
       );
@@ -322,7 +313,7 @@ RxList<InventoryCategoryModel?> equipmentCategoryList =
     }
   }
 
-   Future<void> getInventoryCategoryList({String? facilityId}) async {
+  Future<void> getInventoryCategoryList({String? facilityId}) async {
     equipmentCategoryList.value = <InventoryCategoryModel>[];
     final _equipmentCategoryList =
         await addModuleCleaningExecutionPresenter.getInventoryCategoryList(
@@ -342,7 +333,7 @@ RxList<InventoryCategoryModel?> equipmentCategoryList =
   //   }
   // }
 
-   void equipmentCategoriesSelected(_selectedEquipmentNameIds) {
+  void equipmentCategoriesSelected(_selectedEquipmentNameIds) {
     selectedEquipmentCategoryIdList.value = <int>[];
     filteredequipmentsList.value = <InventoryCategoryModel>[];
     for (var _selectedNameId in _selectedEquipmentNameIds) {
@@ -352,61 +343,61 @@ RxList<InventoryCategoryModel?> equipmentCategoryList =
       });
       filteredequipmentsList.add(e);
     }
-      print({"selectedEquipmentsIdList le":selectedEquipmentCategoryIdList.value.length,"filteredEquipmentsList":filteredequipmentsList.value.length});
+    print({
+      "selectedEquipmentsIdList le":
+          selectedEquipmentCategoryIdList.value.length,
+      "filteredEquipmentsList": filteredequipmentsList.value.length
+    });
   }
 
-
-
-   Future<void> startMCExecutionButton() async {
+  Future<void> startMCExecutionButton() async {
     final _startMCExecutionBtn =
         await addModuleCleaningExecutionPresenter.startMCExecutionButton(
       planId: data['planId'],
-      
     );
-    
+
     // print('Plan Data:${data['planId']}');
   }
 
   Future<void> startMCExecutionScheduleButton({int? scheduleID}) async {
     final _startMCScheduleExecutionBtn =
-        await addModuleCleaningExecutionPresenter.startMCExecutionScheduleButton(
+        await addModuleCleaningExecutionPresenter
+            .startMCExecutionScheduleButton(
       scheduleId: scheduleId.first,
-      
     );
-    
+
     // print('Plan Data:${data['planId']}');
   }
 
-
-   void endMCExecutionButton({int? id}) async {
+  void endMCExecutionButton({int? id}) async {
     {
       String _remark = remarkTextFieldCtrlr.text.trim();
 
-       late List<Equipments> equipments_list = [];
+      late List<Equipments> equipments_list = [];
 
       filteredequipmentsList.forEach((e) {
         equipments_list.add(Equipments(id: e?.id));
       });
 
-      EndMCExecutionModel endMCModel =
-          EndMCExecutionModel(
-            scheduleId: data['planId'],
-            // scheduleId: scheduleId.first,
-            executionId: data['id'],
-            cleaningDay: data['cleaningDays'],
-            waterUsed: data['waterUsed'],  
-            remark: _remark,
-            equipments: equipments_list
-            // [
-              
-            //  Equipments(id: 10),
-            //  Equipments(id: 9)
-            //  ]
-            );
+      EndMCExecutionModel endMCModel = EndMCExecutionModel(
+          scheduleId: data['planId'],
+          // scheduleId: scheduleId.first,
+          executionId: data['id'],
+          cleaningDay: data['cleaningDays'],
+          waterUsed: data['waterUsed'],
+          remark: _remark,
+          equipments: equipments_list
+          // [
+
+          //  Equipments(id: 10),
+          //  Equipments(id: 9)
+          //  ]
+          );
 
       var endJsonString = endMCModel.toJson();
       // print({"rejectCalibrationJsonString", approveCalibrationtoJsonString});
-      Map<String, dynamic>? response = await addModuleCleaningExecutionPresenter.endMCExecutionButton(
+      Map<String, dynamic>? response =
+          await addModuleCleaningExecutionPresenter.endMCExecutionButton(
         endJsonString: endJsonString,
         isLoading: true,
       );
@@ -416,7 +407,6 @@ RxList<InventoryCategoryModel?> equipmentCategoryList =
       }
     }
   }
-
 
   Future<void> getMCExecutionDetail({required int executionId}) async {
     // newPermitDetails!.value = <NewPermitListModel>[];
@@ -428,33 +418,35 @@ RxList<InventoryCategoryModel?> equipmentCategoryList =
 
     if (_mcExecutionDetails != null) {
       mcExecutionDetailsModel.value = _mcExecutionDetails;
-      plannedAtDateTimeCtrlrWeb.text = '${DateFormat('yyyy-MM-dd HH:mm:ss').format(DateTime.parse('${mcExecutionDetailsModel.value?.plannedAt}'))}';
-      startedAtDateTimeCtrlrWeb.text = '${DateFormat('yyyy-MM-dd HH:mm:ss').format(DateTime.parse('${mcExecutionDetailsModel.value?.startedAt}'))}';
+      plannedAtDateTimeCtrlrWeb.text =
+          '${DateFormat('yyyy-MM-dd HH:mm:ss').format(DateTime.parse('${mcExecutionDetailsModel.value?.plannedAt}'))}';
+      startedAtDateTimeCtrlrWeb.text =
+          '${DateFormat('yyyy-MM-dd HH:mm:ss').format(DateTime.parse('${mcExecutionDetailsModel.value?.startedAt}'))}';
       listSchedules?.value = mcExecutionDetailsModel.value?.schedules ?? [];
-      scheduleId = listSchedules!.map((element) => element?.scheduleId).toList();
+      scheduleId =
+          listSchedules!.map((element) => element?.scheduleId).toList();
       print('ScheduleId: ${scheduleId}');
 
-        rowItem.value = [];
-      _mcExecutionDetails.schedules!.forEach((element) { 
-        rowItem.value.add([
-      {"key": "Schedule Id", "value": '${element!.scheduleId}'},
-      {"key": "Days", "value": '${element.cleaningDay}'},
-      {"key": "Scheduled Module", "value": '${element.scheduledModules}'},
-      {"key": "Cleaned", "value": '${element.cleanedModules}'},
-      {"key": "Abandoned", "value": '${element.abandonedModules}'},
-      {"key": "Pending", "value": '${element.pendingModules}'},
-      {"key": "Type", "value": '${element.cleaningTypeName}'},
-      {"key": "Water Used", "value": '${element.waterUsed}'},
-      {"key": "Remark", "value": '${element.remark}'},
-      {"key": "Status", "value": '${element.status_short}'},
-      {'key': "Actions", "value": ''},
-    ]);
+      rowItem.value = [];
+      schedules?.value = _mcExecutionDetails.schedules;
 
+      _mcExecutionDetails.schedules.forEach((element) {
+        rowItem.value.add([
+          {"key": "Schedule Id", "value": '${element!.scheduleId}'},
+          {"key": "Days", "value": '${element.cleaningDay}'},
+          {"key": "Scheduled Module", "value": '${element.scheduledModules}'},
+          {"key": "Cleaned", "value": '${element.cleanedModules}'},
+          {"key": "Abandoned", "value": '${element.abandonedModules}'},
+          {"key": "Pending", "value": '${element.pendingModules}'},
+          {"key": "Type", "value": '${element.cleaningTypeName}'},
+          {"key": "Water Used", "value": '${element.waterUsed}'},
+          {"key": "Remark", "value": '${element.remark}'},
+          {"key": "Status", "value": '${element.status_short}'},
+          {'key': "Actions", "value": ''},
+        ]);
       });
-      
     }
   }
-
 
   void onValueChanged(dynamic list, dynamic value) {
     print('Valuesd:${value}');
