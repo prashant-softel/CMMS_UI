@@ -1,12 +1,10 @@
 import 'dart:async';
 
 import 'package:cmms/app/view_mc_plan/view_mc_planning_presenter.dart';
-import 'package:cmms/domain/models/employee_model.dart';
-import 'package:cmms/domain/models/equipment_list_model.dart';
-import 'package:cmms/domain/models/frequency_model.dart';
+import 'package:cmms/domain/models/end_mc_execution_detail_model.dart';
+
 import 'package:cmms/domain/models/type_model.dart';
 import 'package:get/get.dart';
-import '../../domain/models/inventory_category_model.dart';
 import '../home/home_controller.dart';
 
 class ViewMcPlaningController extends GetxController {
@@ -17,30 +15,22 @@ class ViewMcPlaningController extends GetxController {
   ViewMcPlaningPresenter viewMcPlaningPresenter;
   final HomeController homecontroller = Get.find();
 
-  RxList<FrequencyModel?> frequencyList = <FrequencyModel>[].obs;
   Rx<List<List<Map<String, String>>>> rowItem =
       Rx<List<List<Map<String, String>>>>([]);
-  RxList<EmployeeModel?> assignedToList = <EmployeeModel>[].obs;
-  Rx<bool> isAssignedToSelected = true.obs;
-  Rx<String> selectedAssignedTo = ''.obs;
-  int selectedAssignedToId = 0;
+  Map<String, dynamic> data = {};
 
-  Rx<String> selectedfrequency = ''.obs;
-  Rx<bool> isSelectedfrequency = true.obs;
-  int selectedfrequencyId = 0;
+  RxList<EndMCExecutionDetailsModel?>? mcPlanDetailsList =
+      <EndMCExecutionDetailsModel?>[].obs;
+  Rx<EndMCExecutionDetailsModel?> mcPlanDetailsModel =
+      EndMCExecutionDetailsModel().obs;
+  RxList<Schedules?>? listSchedules = <Schedules?>[].obs;
+  List<int?> scheduleId = [];
+  RxList<Schedules?>? schedules = <Schedules?>[].obs;
 
-  var selectedOption = ''.obs;
-  RxList<InventoryCategoryModel?> equipmentCategoryList =
-      <InventoryCategoryModel>[].obs;
   StreamSubscription<int>? facilityIdStreamSubscription;
   int facilityId = 0;
+  int id = 0;
 
-  RxList<EquipmentListModel?> equipmentList = <EquipmentListModel?>[].obs;
-  var days = <TypeModel>[
-    TypeModel(name: 'Day 1', id: "0"),
-    TypeModel(name: 'Day 2', id: "1"),
-    TypeModel(name: 'Day 3', id: "2"),
-  ];
   Map<String, TypeModel> typedropdownMapperData = {};
 
   var type = <TypeModel>[
@@ -48,12 +38,7 @@ class ViewMcPlaningController extends GetxController {
     TypeModel(name: 'Dry', id: "0"),
     TypeModel(name: 'Wet', id: "1"),
   ];
-  // var days = <TypeModel>[
-  //   TypeModel(name: "Please Select", id: "0"),
-  //   TypeModel(name: 'Day 1', id: "1"),
-  //   TypeModel(name: 'Day 2', id: "2"),
-  //   TypeModel(name: 'Day 3', id: "3"),
-  // ];
+
   void addRowItem() {
     rowItem.value.add([
       {"key": "day", "value": ''},
@@ -66,21 +51,18 @@ class ViewMcPlaningController extends GetxController {
 
   @override
   void onInit() async {
+    id = Get.arguments["id"];
+    print('AddStock:$id');
+
     try {
       facilityIdStreamSubscription = homecontroller.facilityId$.listen((event) {
         facilityId = event;
-
-        Future.delayed(Duration(seconds: 1), () {
-          getFrequencyList();
-        });
-
-        Future.delayed(Duration(seconds: 1), () {
-          getEquipmentModelList(facilityId, true);
-        });
-        Future.delayed(Duration(seconds: 1), () {
-          getAssignedToList();
-        });
       });
+      if (id != 0) {
+        Future.delayed(Duration(seconds: 1), () {
+          getMcPlanDetail(planId: id);
+        });
+      }
       super.onInit();
     } catch (e) {
       print(e);
@@ -89,74 +71,49 @@ class ViewMcPlaningController extends GetxController {
     super.onInit();
   }
 
-  Future<void> getEquipmentModelList(int facilityId, bool isLoading) async {
-    equipmentList.value = <EquipmentListModel>[];
+  Future<void> getMcPlanDetail({required int planId}) async {
+    // newPermitDetails!.value = <NewPermitListModel>[];
+    mcPlanDetailsList?.value = <EndMCExecutionDetailsModel>[];
 
-    final list = await viewMcPlaningPresenter.getEquipmentModelList(
-        isLoading: isLoading, facilityId: facilityId);
-    // print('incidentReportFacilityId$facilityId');
-    // print('Incident Report List:$list');
-    for (var equipment_list in list) {
-      equipmentList.add(equipment_list);
-    }
+    final _mcPlanDetails =
+        await viewMcPlaningPresenter.getMcPlanDetail(planId: planId);
+    print('MC plan Detail:$_mcPlanDetails');
 
-    if (list != null) {
-      equipmentList.value = list;
+    if (_mcPlanDetails != null) {
+      mcPlanDetailsModel.value = _mcPlanDetails;
+      // plannedAtDateTimeCtrlrWeb.text =
+      //     '${DateFormat('yyyy-MM-dd HH:mm:ss').format(DateTime.parse('${mcPlanDetailsModel.value?.plannedAt}'))}';
+      // startedAtDateTimeCtrlrWeb.text =
+      //     '${DateFormat('yyyy-MM-dd HH:mm:ss').format(DateTime.parse('${mcPlanDetailsModel.value?.startedAt}'))}';
+      listSchedules?.value = mcPlanDetailsModel.value?.schedules ?? [];
+      scheduleId =
+          listSchedules!.map((element) => element?.scheduleId).toList();
+      print('ScheduleId: ${scheduleId}');
 
-      // }
-    }
+      // rowItem.value = [];
+      // schedules?.value = _mcPlanDetails.schedules;
 
-    update(['equipment_list']);
-  }
-
-  Future<void> getAssignedToList() async {
-    assignedToList.clear();
-    final _assignedToList = await viewMcPlaningPresenter.getAssignedToList(
-      facilityId: facilityId,
-    );
-
-    if (_assignedToList != null) {
-      for (var assignedTo in _assignedToList) {
-        assignedToList.add(assignedTo);
-      }
-      // selectedAssignedTo.value =
-      //     getAssignedToName(jobDetailsModel.value?.assignedId ?? 0) ?? '';
-    }
-  }
-
-  Future<void> getFrequencyList() async {
-    final list = await viewMcPlaningPresenter.getFrequencyList(isLoading: true);
-
-    if (list != null) {
-      for (var _frequencyList in list) {
-        frequencyList.add(_frequencyList);
-      }
+      // _mcPlanDetails.schedules.forEach((element) {
+      //   rowItem.value.add([
+      //     {"key": "Schedule Id", "value": '${element!.scheduleId}'},
+      //     {"key": "Days", "value": '${element.cleaningDay}'},ß
+      //     {"key": "Scheduled Module", "value": '${element.scheduledModules}'},
+      //     {"key": "Cleaned", "value": '${element.cleanedModules}'},
+      //     {"key": "Abandoned", "value": '${element.abandonedModules}'},
+      //     {"key": "Pending", "value": '${element.pendingModules}'},
+      //     {"key": "Type", "value": '${element.cleaningTypeName}'},
+      //     {"key": "Water Used", "value": '${element.waterUsed}'},
+      //     {"key": "Remark", "value": '${element.remark}'},
+      //     {"key": "Status", "value": '${element.status_short}'},
+      //     {'key': "Actions", "value": ''},
+      //   ]);
+      // });
     }
   }
 
   void onValueChanged(dynamic list, dynamic value) {
     print({"valuevaluevaluevalue": value});
     switch (list.runtimeType) {
-      case RxList<FrequencyModel>:
-        {
-          int frequencyIndex =
-              frequencyList.indexWhere((x) => x?.name == value);
-          selectedfrequencyId = frequencyList[frequencyIndex]?.id ?? 0;
-          selectedfrequency.value = value;
-        }
-        break;
-      case RxList<EmployeeModel>:
-        {
-          int assignedToIndex =
-              assignedToList.indexWhere((x) => x?.name == value);
-          selectedAssignedToId = assignedToList[assignedToIndex]?.id ?? 0;
-          if (selectedAssignedToId != 0) {
-            isAssignedToSelected.value = true;
-          }
-          selectedAssignedTo.value = value;
-        }
-        break;
-
       default:
         {}
         break;

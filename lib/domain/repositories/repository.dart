@@ -1475,6 +1475,40 @@ class Repository {
     }
   }
 
+  Future<EndMCExecutionDetailsModel?> getMcPlanDetail({
+    bool? isLoading,
+    int? planId,
+  }) async {
+    try {
+      final auth = await getSecuredValue(LocalKeys.authToken);
+      final res = await _dataRepository.getMcPlanDetail(
+        auth: auth,
+        planId: planId,
+        isLoading: isLoading ?? false,
+      );
+
+      print({"MCPlandetail", res.data});
+
+      if (!res.hasError) {
+        if (res.errorCode == 200) {
+          final EndMCExecutionDetailsModel _mcPlanDetailModel =
+              endMCExecutionDetailsModelFromJson(res.data);
+
+          var responseMap = _mcPlanDetailModel;
+          print({"MCPlandetail", responseMap});
+          return responseMap;
+        }
+      } else {
+        Utility.showDialog(res.errorCode.toString() + 'MCPlanDetail');
+        //return '';
+      }
+      return null;
+    } catch (error) {
+      print(error.toString());
+      return null;
+    }
+  }
+
   Future<IncidentReportDetailsModel?> getIncidentReportDetail({
     bool? isLoading,
     int? id,
