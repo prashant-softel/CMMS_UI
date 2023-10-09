@@ -1,14 +1,11 @@
 import 'package:cmms/app/app.dart';
 import 'package:cmms/app/view_mc_plan/view_mc_planning_controller.dart';
 import 'package:cmms/app/widgets/custom_richtext.dart';
-import 'package:cmms/app/widgets/custom_textfield.dart';
-import 'package:cmms/app/widgets/dropdown_web.dart';
 import 'package:cmms/app/widgets/set_equipments_dialog.dart';
 import 'package:cmms/app/widgets/stock_dropdown.dart';
 import 'package:data_table_2/data_table_2.dart';
 
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 
 import 'package:get/get.dart';
 
@@ -102,42 +99,6 @@ class _ViewMcPlaningWebState extends State<ViewMcPlaningWeb> {
                                           margin: EdgeInsets.only(top: 5),
                                           decoration: BoxDecoration(
                                             color: ColorValues.addNewColor,
-                                            //  controller
-                                            //             .getPurchaseDetailsByIDModel
-                                            //             .value
-                                            //             ?.status ==
-                                            //         302
-                                            //     ? ColorValues.createsColor
-                                            //     : controller.getPurchaseDetailsByIDModel
-                                            //                 .value?.status ==
-                                            //             301
-                                            //         ? ColorValues.draftColor
-                                            //         : controller
-                                            //                     .getPurchaseDetailsByIDModel
-                                            //                     .value
-                                            //                     ?.status ==
-                                            //                 305
-                                            //             ? Color.fromARGB(
-                                            //                 255, 181, 129, 179)
-                                            //             : controller
-                                            //                         .getPurchaseDetailsByIDModel
-                                            //                         .value
-                                            //                         ?.status ==
-                                            //                     309
-                                            //                 ? Color.fromARGB(
-                                            //                     255, 181, 129, 179)
-                                            //                 : controller
-                                            //                             .getPurchaseDetailsByIDModel
-                                            //                             .value
-                                            //                             ?.status ==
-                                            //                         306
-                                            //                     ? ColorValues
-                                            //                         .approveColor
-                                            //                     : controller.getPurchaseDetailsByIDModel.value?.status ==
-                                            //                             304
-                                            //                         ? ColorValues.appPurpleColor
-                                            //                         : ColorValues.lightBlueColor,
-
                                             borderRadius:
                                                 BorderRadius.circular(5),
                                           ),
@@ -172,8 +133,8 @@ class _ViewMcPlaningWebState extends State<ViewMcPlaningWeb> {
                                               CustomRichText(
                                                   title: 'Plan Title  :'),
                                               Dimens.boxWidth10,
-                                              Text("hjre",
-                                                  // '${controller.pmPlanDetailsModel.value?.plan_name ?? ''}', //  "Block 2 all Inverter maintenance plan",
+                                              Text(
+                                                  '${controller.mcPlanDetailsModel.value?.title ?? ''}',
                                                   style: Styles.blue17),
                                             ],
                                           ),
@@ -186,9 +147,11 @@ class _ViewMcPlaningWebState extends State<ViewMcPlaningWeb> {
                                                 title: 'Frequency :',
                                               ),
                                               Dimens.boxWidth10,
-                                              Text("hjre",
-                                                  // '${controller.pmPlanDetailsModel.value?.plan_name ?? ''}', //  "Block 2 all Inverter maintenance plan",
-                                                  style: Styles.blue17),
+                                              Obx(
+                                                () => Text(
+                                                    '${controller.mcPlanDetailsModel.value?.frequency}', //  "Block 2 all Inverter maintenance plan",
+                                                    style: Styles.blue17),
+                                              ),
                                             ],
                                           ),
 
@@ -207,9 +170,11 @@ class _ViewMcPlaningWebState extends State<ViewMcPlaningWeb> {
                                                   CustomRichText(
                                                       title: 'Planning by :'),
                                                   Dimens.boxWidth10,
-                                                  Text("hjre",
-                                                      // '${controller.pmPlanDetailsModel.value?.plan_name ?? ''}', //  "Block 2 all Inverter maintenance plan",
-                                                      style: Styles.blue17),
+                                                  Obx(
+                                                    () => Text(
+                                                        '${controller.mcPlanDetailsModel.value?.plannedBy ?? ''}', //  "Block 2 all Inverter maintenance plan",
+                                                        style: Styles.blue17),
+                                                  ),
                                                 ],
                                               ),
                                               Dimens.boxHeight10
@@ -222,8 +187,8 @@ class _ViewMcPlaningWebState extends State<ViewMcPlaningWeb> {
                                               CustomRichText(
                                                   title: 'Site Name  :'),
                                               Dimens.boxWidth10,
-                                              Text("hjre",
-                                                  // '${controller.pmPlanDetailsModel.value?.plan_name ?? ''}', //  "Block 2 all Inverter maintenance plan",
+                                              Text(
+                                                  '${controller.mcPlanDetailsModel.value?.plannedBy ?? ''}', //  "Block 2 all Inverter maintenance plan",
                                                   style: Styles.blue17),
                                             ],
                                           ),
@@ -241,8 +206,8 @@ class _ViewMcPlaningWebState extends State<ViewMcPlaningWeb> {
                                                   title:
                                                       'Planning Date & Time :'),
                                               Dimens.boxWidth10,
-                                              Text("hjre",
-                                                  // '${controller.pmPlanDetailsModel.value?.plan_name ?? ''}', //  "Block 2 all Inverter maintenance plan",
+                                              Text(
+                                                  '${controller.mcPlanDetailsModel.value?.plannedAt ?? ''}', //  "Block 2 all Inverter maintenance plan",
                                                   style: Styles.blue17),
                                             ],
                                           ),

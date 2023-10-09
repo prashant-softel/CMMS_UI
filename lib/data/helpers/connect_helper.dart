@@ -2641,6 +2641,24 @@ class ConnectHelper {
     return responseModel;
   }
 
+  Future<ResponseModel> getMcPlanDetail({
+    required String auth,
+    bool? isLoading,
+    int? planId,
+  }) async {
+    var responseModel = await apiWrapper.makeRequest(
+      'MC/GetMCPlanDetails?planId=$planId',
+      Request.get,
+      null,
+      isLoading ?? false,
+      {
+        'Authorization': 'Bearer $auth',
+      },
+    );
+    print('MCExecutionResponseModel${responseModel.data}');
+    return responseModel;
+  }
+
   Future<ResponseModel> getIncidentReportDetail({
     required String auth,
     bool? isLoading,
