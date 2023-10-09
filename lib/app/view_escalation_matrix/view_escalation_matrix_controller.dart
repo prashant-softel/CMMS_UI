@@ -16,9 +16,7 @@ import 'package:cmms/domain/models/type_permit_model.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:get/get.dart';
-import 'package:pdf/widgets.dart' as pw;
-import 'package:pdf/pdf.dart';
-import 'package:printing/printing.dart';
+
 import 'package:rxdart/subjects.dart';
 import 'package:scrollable_table_view/scrollable_table_view.dart';
 import '../../domain/models/facility_model.dart';
@@ -43,16 +41,15 @@ class ViewEscalationMatrixController extends GetxController {
   // final TextEditingController supplierActionSrNumberTextFieldController =
   //     TextEditingController();
 
-Rx<List<List<Map<String, String>>>> rowItem =
+  Rx<List<List<Map<String, String>>>> rowItem =
       Rx<List<List<Map<String, String>>>>([]);
-      Map<String, GetAssetDataModel> dropdownMapperData = {};
+  Map<String, GetAssetDataModel> dropdownMapperData = {};
   Map<String, PaiedModel> paiddropdownMapperData = {};
-  
-      void addRowItem() {
+
+  void addRowItem() {
     rowItem.value.add([
       {"key": "Duration (Days)", "value": 'Please Select'},
       {'key': "Escalation Roles and Levels", "value": 'Please Select'},
-     
     ]);
   }
 
@@ -241,7 +238,6 @@ Rx<List<List<Map<String, String>>>> rowItem =
     Future.delayed(Duration(seconds: 1), () {
       getuserAccessData();
     });
-   
 
     super.onInit();
   }
@@ -297,8 +293,6 @@ Rx<List<List<Map<String, String>>>> rowItem =
     }
   }
 
- 
-
   Future<void> getuserAccessData() async {
     final _userAccessList =
         await viewIncidentReportPresenter.getUserAccessList();
@@ -327,33 +321,6 @@ Rx<List<List<Map<String, String>>>> rowItem =
           //statements;
         }
         break;
-    }
-  }
-
-  Future<void> printScreen() async {
-    try {
-      final RenderRepaintBoundary boundary =
-          printKey.currentContext!.findRenderObject() as RenderRepaintBoundary;
-      final imageBytes = await boundary
-          .toImage(pixelRatio: 3.0)
-          .then((image) => image.toByteData(format: ImageByteFormat.png));
-
-      if (imageBytes != null) {
-        Printing.layoutPdf(onLayout: (PdfPageFormat format) async {
-          final doc = pw.Document();
-          doc.addPage(
-            pw.Page(
-              build: (pw.Context context) {
-                return pw.Image(
-                    pw.MemoryImage(imageBytes.buffer.asUint8List()));
-              },
-            ),
-          );
-          return doc.save();
-        });
-      }
-    } catch (e) {
-      print('Error printing: $e');
     }
   }
 

@@ -21,10 +21,6 @@ import 'package:scrollable_table_view/scrollable_table_view.dart';
 import 'dart:ui';
 
 import 'package:flutter/rendering.dart';
-import 'package:pdf/pdf.dart';
-import 'package:pdf/widgets.dart' as pw;
-
-import 'package:printing/printing.dart';
 
 import '../../domain/models/history_model.dart';
 import '../theme/styles.dart';
@@ -176,33 +172,6 @@ class PreventiveMaintenanceTaskViewController extends GetxController {
     if (_permitDetails != null) {
       pmtaskViewModel.value = _permitDetails;
       scheduleCheckPoint!.value = _permitDetails.schedules ?? [];
-    }
-  }
-
-  Future<void> printScreen() async {
-    try {
-      final RenderRepaintBoundary boundary =
-          printKey.currentContext!.findRenderObject() as RenderRepaintBoundary;
-      final imageBytes = await boundary
-          .toImage(pixelRatio: 3.0)
-          .then((image) => image.toByteData(format: ImageByteFormat.png));
-
-      if (imageBytes != null) {
-        Printing.layoutPdf(onLayout: (PdfPageFormat format) async {
-          final doc = pw.Document();
-          doc.addPage(
-            pw.Page(
-              build: (pw.Context context) {
-                return pw.Image(
-                    pw.MemoryImage(imageBytes.buffer.asUint8List()));
-              },
-            ),
-          );
-          return doc.save();
-        });
-      }
-    } catch (e) {
-      print('Error printing: $e');
     }
   }
 

@@ -33,10 +33,7 @@ import 'package:flutter/widgets.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
-import 'package:pdf/pdf.dart';
-import 'package:printing/printing.dart';
 import 'package:rxdart/subjects.dart';
-import 'package:pdf/widgets.dart' as pw;
 import 'package:scrollable_table_view/scrollable_table_view.dart';
 import '../../../domain/models/inventory_category_model.dart';
 import '../../domain/models/aprove_extend_model.dart';
@@ -180,12 +177,9 @@ class ViewPermitController extends GetxController {
   Rx<String> selectedBlock = ''.obs;
   Rx<bool> isstartdateFieldSelected = true.obs;
 
-    /// Employee Table
+  /// Employee Table
   Rx<String> selectedEmployeeName = ''.obs;
   Rx<bool> isEmployeeSelected = true.obs;
-  
-
-
 
   int selectedBlockId = 0;
   RxList<EquipmentModel?> equipmentList = <EquipmentModel>[].obs;
@@ -481,14 +475,12 @@ class ViewPermitController extends GetxController {
       await getViewPermitDetail(permitId: permitId!);
     }
 
-  
     await getSafetyMeasureList();
     await getPermitHistory(permitId: permitId!);
     await getPermitConditionList(isCancle: isCancle!);
     await getPermitCloseConditionList(isClose: isClose!);
     await getPermitExtendConditionList(isExtend: isExtend!);
     await getEmployeeList();
-
 
     super.onInit();
   }
@@ -700,7 +692,8 @@ class ViewPermitController extends GetxController {
   //   print('Reject Button Data:${permitId}');
   // }
 
-   void permitRejectButton({int? permitId, String? ptwStatus, int? jobId}) async {
+  void permitRejectButton(
+      {int? permitId, String? ptwStatus, int? jobId}) async {
     {
       String _rejectComment = rejectCommentTextFieldCtrlr.text.trim();
 
@@ -734,7 +727,7 @@ class ViewPermitController extends GetxController {
     // // showAlertPermitApproveDialog();
     // print('Cancel Button By Approver Data:${_cancelComment}');
     // print('Cancel Button By Approver Data:${permitId}');
-     {
+    {
       String _cancelComment = cancelCommentByApproverTextFieldCtrlr.text.trim();
 
       CommentModel commentCancelByApproverPermitModel =
@@ -1316,33 +1309,6 @@ class ViewPermitController extends GetxController {
     }
   }
 
-  Future<void> printScreen() async {
-    try {
-      final RenderRepaintBoundary boundary =
-          printKey.currentContext!.findRenderObject() as RenderRepaintBoundary;
-      final imageBytes = await boundary
-          .toImage(pixelRatio: 3.0)
-          .then((image) => image.toByteData(format: ImageByteFormat.png));
-
-      if (imageBytes != null) {
-        Printing.layoutPdf(onLayout: (PdfPageFormat format) async {
-          final doc = pw.Document();
-          doc.addPage(
-            pw.Page(
-              build: (pw.Context context) {
-                return pw.Image(
-                    pw.MemoryImage(imageBytes.buffer.asUint8List()));
-              },
-            ),
-          );
-          return doc.save();
-        });
-      }
-    } catch (e) {
-      print('Error printing: ${e}');
-    }
-  }
-
   //  Future<void> getInventoryIsolationList({String? facilityId}) async {
   //   equipmentIsolationList.value = <InventoryCategoryModel>[];
   //   final _equipmentIsolationList =
@@ -1530,24 +1496,20 @@ class ViewPermitController extends GetxController {
   //   }
   // }
 
-  Future <void> getEmployeeList() async {
+  Future<void> getEmployeeList() async {
     employeeList.value = <EmployeeListModel>[];
-    final _employeeList =
-        await viewPermitPresenter.getEmployeeList(
+    final _employeeList = await viewPermitPresenter.getEmployeeList(
       isLoading: true,
       // categoryIds: categoryIds,
       facility_id: facilityId,
     );
-    print(
-        'employee List:$_employeeList');
-    for (var employee_list
-        in _employeeList) {
+    print('employee List:$_employeeList');
+    for (var employee_list in _employeeList) {
       employeeList.add(employee_list);
     }
 
     update(['employee_list']);
   }
-
 
   static void showAlertDialog({
     int? facility_id,

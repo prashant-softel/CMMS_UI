@@ -1533,7 +1533,7 @@ class ViewPermitWebScreen extends GetView<ViewPermitController> {
                                                             163), //  foreground
                                                   ),
                                                   onPressed: () {
-                                                    controller.printScreen();
+                                                    // controller.printScreen();
                                                     print('HelloPrint');
                                                   },
                                                   icon: Icon(Icons
@@ -2394,7 +2394,11 @@ class ViewPermitWebScreen extends GetView<ViewPermitController> {
                                                   //   title: 'Following safety Measures taken to carry out the work'.tr,
                                                   // ),
                                                   Padding(
-                                                    padding: const EdgeInsets.only(left: 10, right: 10, top: 10),
+                                                    padding:
+                                                        const EdgeInsets.only(
+                                                            left: 10,
+                                                            right: 10,
+                                                            top: 10),
                                                     child: Text(
                                                       'Permit Type Checklist',
                                                       style: Styles.blue700,
@@ -2419,7 +2423,6 @@ class ViewPermitWebScreen extends GetView<ViewPermitController> {
                                                                               mainAxisAlignment: MainAxisAlignment.start,
                                                                               crossAxisAlignment: CrossAxisAlignment.start,
                                                                               children: [
-                                                                                
                                                                                 Padding(
                                                                                   padding: const EdgeInsets.only(left: 20),
                                                                                   child: SizedBox(
@@ -2580,7 +2583,6 @@ class ViewPermitWebScreen extends GetView<ViewPermitController> {
                                                             )),
                                                       ],
                                                     ),
-                                                 
                                                   ],
                                                 ),
                                               ],
@@ -2589,8 +2591,8 @@ class ViewPermitWebScreen extends GetView<ViewPermitController> {
                                         ),
                                       ),
                                     ),
-                                    
-                                     //Tool box talk / Pre Job Discussion
+
+                                    //Tool box talk / Pre Job Discussion
                                     Container(
                                       margin: EdgeInsets.all(20),
                                       decoration: BoxDecoration(
@@ -2614,7 +2616,6 @@ class ViewPermitWebScreen extends GetView<ViewPermitController> {
                                               children: [
                                                 Column(
                                                   children: [
-                                                    
                                                     Padding(
                                                       padding:
                                                           const EdgeInsets.only(
@@ -2639,7 +2640,8 @@ class ViewPermitWebScreen extends GetView<ViewPermitController> {
                                                                   .boxHeight10,
                                                               Text(
                                                                 '${controller.viewPermitDetailsModel.value?.tbT_Done_By}',
-                                                                style: Styles.black17,
+                                                                style: Styles
+                                                                    .black17,
                                                               ),
                                                               // SizedBox(
                                                               //   width: MediaQuery.of(
@@ -2667,38 +2669,41 @@ class ViewPermitWebScreen extends GetView<ViewPermitController> {
                                                               //     ),
                                                               //   ),
                                                               // ),
-                                                           
                                                             ],
                                                           ),
                                                           Spacer(),
                                                           Padding(
-                                                            padding: const EdgeInsets.only(right: 450),
+                                                            padding:
+                                                                const EdgeInsets
+                                                                        .only(
+                                                                    right: 450),
                                                             child: Column(
                                                               crossAxisAlignment:
                                                                   CrossAxisAlignment
                                                                       .end,
-                                                              mainAxisAlignment : MainAxisAlignment.center,
+                                                              mainAxisAlignment:
+                                                                  MainAxisAlignment
+                                                                      .center,
                                                               children: [
                                                                 Text(
                                                                   'Date & Time',
                                                                   style: Styles
                                                                       .blackBold17,
                                                                 ),
-                                                               
+
                                                                 Text(
                                                                   '${controller.viewPermitDetailsModel.value?.tbT_Done_At}',
-                                                                  style: Styles.black17,
+                                                                  style: Styles
+                                                                      .black17,
                                                                 ),
                                                                 // _buildDateTimeField_web(
                                                                 //     context),
                                                               ],
                                                             ),
                                                           ),
-                                                        
                                                         ],
                                                       ),
                                                     ),
-                                                    
                                                     Container(
                                                       margin:
                                                           Dimens.edgeInsets20,
@@ -4215,8 +4220,8 @@ class ViewPermitWebScreen extends GetView<ViewPermitController> {
                           // controller
                           //     .createNewPermit();
                           Get.dialog(PermitCancelByApproverDialog(
-                            permitId:
-                                controller.viewPermitDetailsModel.value?.permitNo,
+                            permitId: controller
+                                .viewPermitDetailsModel.value?.permitNo,
                             ptwStatus:
                                 '${controller.viewPermitDetailsModel.value?.ptwStatus}',
                           ));
