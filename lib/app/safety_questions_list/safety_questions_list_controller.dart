@@ -154,7 +154,8 @@ class SafetyQuestionsListController extends GetxController {
               : updateType.value == "Radio"
                   ? 2
                   : 3,
-          required: 1
+          required: 1,
+          isRequiredValue: isCheckedRequire.value 
           );
       print("OUT ");
       var safetyMeasurelistJsonString = createSafetyMeasure.toJson(); //createCheckPointToJson([createCheckpoint]);

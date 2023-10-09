@@ -541,6 +541,8 @@ class SafetyQuestionsListContentWeb
                                               onChanged: (bool? value) {
                                                 controller
                                                     .requiretoggleCheckbox();
+                                              print('Checkbox:${controller
+                                                  .isCheckedRequire.value}');
                                               },
                                             ),
                                           ],

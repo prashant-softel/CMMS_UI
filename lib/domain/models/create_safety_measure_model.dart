@@ -19,6 +19,7 @@ class CreateSafetyMeasureModel {
     this.permitType,
     this.input,
     this.required,
+    this.isRequiredValue
     
 
 
@@ -30,6 +31,7 @@ class CreateSafetyMeasureModel {
   int? permitType;
   int? input;
   int? required;
+  bool? isRequiredValue;
   
   
 
@@ -41,6 +43,7 @@ class CreateSafetyMeasureModel {
     permitType: json["permitType"],
     input: json['input'],
     required: json['required'],
+    isRequiredValue: json['isRequiredValue'],
   );
 
   Map<String, dynamic> toJson() => {
@@ -49,7 +52,9 @@ class CreateSafetyMeasureModel {
     // "description": description,
     "permitType": permitType,
     "input": input,
-    "required": required
+    "required": required,
+    "isRequiredValue": isRequiredValue
+
     
   };
 }

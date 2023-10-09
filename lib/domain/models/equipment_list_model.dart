@@ -18,6 +18,7 @@ class EquipmentListModel {
   List<SMBS> smbs;
   bool isExpanded;
   String? selectedDay;
+  
 
   EquipmentListModel(
       {this.invId,
@@ -41,7 +42,7 @@ class EquipmentListModel {
         "invId": invId,
         "invName": invName,
         "moduleQuantity": moduleQuantity,
-        "smbs": List<dynamic>.from(smbs!.map((x) => x)),
+        "smbs": List<dynamic>.from(smbs.map((x) => x)),
       };
 }
 
