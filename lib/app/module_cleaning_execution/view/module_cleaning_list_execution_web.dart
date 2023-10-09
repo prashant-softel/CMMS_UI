@@ -343,7 +343,8 @@ class ModuleCleaningListExecution
                                                 onTap: () {
                                                   controller.viewMCExecution(
                                                       id: int.tryParse(
-                                                          '${record[0]}'));
+                                                          '${record[0]}')
+                                                          );
                                                 },
                                                 height: 55,
                                                 cells: record.map((value) {
@@ -377,7 +378,11 @@ class ModuleCleaningListExecution
                                                                 onPress: () {
                                                                   controller.viewMCExecution(
                                                                       id: int.tryParse(
-                                                                          '${record[0]}'));
+                                                                          '${record[0]}'),
+                                                                      planId: int.tryParse(
+                                                                          '${record[1]}'),
+                                                                      
+                                                                          );
                                                                 },
                                                               ),
                                                               TableActionButton(

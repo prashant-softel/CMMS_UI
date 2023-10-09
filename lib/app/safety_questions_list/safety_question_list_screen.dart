@@ -22,7 +22,7 @@ class SafetyQestionsListScreen extends GetView<SafetyQuestionsListController> {
               automaticallyImplyLeading: false,
             )
           : AppBar(
-              title: Text('Safety Questions List'),
+              title: Text('Permit Type Checklist'),
               centerTitle: true,
               elevation: 0,
             ),

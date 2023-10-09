@@ -46,11 +46,12 @@ class SafetyQuestionsListController extends GetxController {
     isCheckedRequire.value =
         !isCheckedRequire.value; // Toggle the checkbox state
   }
-
+Rx<List<List<Map<String, String>>>> rowItem =
+      Rx<List<List<Map<String, String>>>>([]);
   // var type2 = <TypeModel>[
-  //   TypeModel(name: "Please Select", id: 0),
-  //   TypeModel(name: 'Dry', id: 1),
-  //   TypeModel(name: 'Wet', id: 2),
+  //   TypeModel(name: "Please Select", id: "0"),
+  //   TypeModel(name: 'Dry', id: "1"),
+  //   TypeModel(name: 'Wet', id: "2"),
   // ];
 
   Map<String, TypeModel> typedropdownMapperData = {};

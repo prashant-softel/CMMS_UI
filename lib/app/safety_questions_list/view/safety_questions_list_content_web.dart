@@ -5,6 +5,7 @@ import 'package:cmms/app/safety_questions_list/safety_questions_list_controller.
 import 'package:cmms/app/widgets/dropdown.dart';
 import 'package:cmms/app/widgets/dropdown_web.dart';
 import 'package:cmms/app/widgets/stock_dropdown.dart';
+import 'package:data_table_2/data_table_2.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:cmms/app/widgets/custom_textfield.dart';
@@ -58,7 +59,7 @@ class SafetyQuestionsListContentWeb
                     },
                     child: Text(" / MASTERS", style: Styles.greyMediumLight12),
                   ),
-                  Text(" / SAFETY QUESTIONS", style: Styles.greyMediumLight12)
+                  Text(" / Permit Type Checklist", style: Styles.greyMediumLight12)
                 ],
               ),
             ),
@@ -297,163 +298,165 @@ class SafetyQuestionsListContentWeb
                                           height: 10,
                                         ),
 
-                                        ///Description
-                                        // Row(
-                                        //   mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                                        //   children: [
-                                        //     Expanded(
-                                        //       child: CustomRichText(title: 'Description '),
-                                        //     ),
-                                        //     Expanded(
-                                        //       child: Container(
-                                        //         padding: const EdgeInsets.only(right: 15),
-                                        //         child: Container(
-                                        //             decoration: BoxDecoration(
-                                        //               boxShadow: [
-                                        //                 BoxShadow(
-                                        //                   color: Colors.black26,
-                                        //                   offset: const Offset(
-                                        //                     5.0,
-                                        //                     5.0,
-                                        //                   ),
-                                        //                   blurRadius: 5.0,
-                                        //                   spreadRadius: 1.0,
-                                        //                 ),
-                                        //                 BoxShadow(
-                                        //                   color: ColorValues.whiteColor,
-                                        //                   offset: const Offset(0.0, 0.0),
-                                        //                   blurRadius: 0.0,
-                                        //                   spreadRadius: 0.0,
-                                        //                 ),
-                                        //               ],
-                                        //               color: ColorValues.whiteColor,
-                                        //               borderRadius: BorderRadius.circular(5),
-                                        //             ),
-                                        //             // width: MediaQuery.of(context).size.width / 2,
-                                        //             width: (MediaQuery.of(context).size.width * .2) - 30,
-                                        //             child: Obx(
-                                        //               () => TextField(
-                                        //                 controller: controller.descriptionCtrlr,
-                                        //                 keyboardType: TextInputType.multiline,
-                                        //                 maxLines: 1,
-                                        //                 autofocus: false,
-                                        //                 decoration: InputDecoration(
-                                        //                   fillColor: ColorValues.whiteColor,
-                                        //                   filled: true,
-                                        //                   contentPadding: Dimens.edgeInsets05_10,
-                                        //                   border: InputBorder.none,
-                                        //                   enabledBorder: OutlineInputBorder(
-                                        //                     borderRadius: BorderRadius.circular(10.0),
-                                        //                     borderSide: BorderSide(color: Colors.transparent),
-                                        //                   ),
-                                        //                   focusedBorder: OutlineInputBorder(
-                                        //                     borderRadius: BorderRadius.circular(10.0),
-                                        //                     borderSide: BorderSide(color: Colors.transparent),
-                                        //                   ),
-                                        //                   focusedErrorBorder: controller.isDescriptionInvalid.value
-                                        //                       ? OutlineInputBorder(
-                                        //                           borderRadius: BorderRadius.circular(5),
-                                        //                           borderSide: BorderSide(
-                                        //                             color: ColorValues.redColorDark,
-                                        //                           ),
-                                        //                         )
-                                        //                       : InputBorder.none,
-                                        //                   errorBorder: controller.isDescriptionInvalid.value
-                                        //                       ? OutlineInputBorder(
-                                        //                           borderRadius: BorderRadius.circular(5),
-                                        //                           borderSide: BorderSide(
-                                        //                             color: ColorValues.redColorDark,
-                                        //                           ),
-                                        //                         )
-                                        //                       : null,
-                                        //                   errorText: controller.isDescriptionInvalid.value ? "Required field" : null,
-                                        //                 ),
-                                        //                 onChanged: (value) {
-                                        //                   if (value.trim().length > 1) {
-                                        //                     controller.isDescriptionInvalid.value = false;
-                                        //                   } else {
-                                        //                     controller.isDescriptionInvalid.value = true;
-                                        //                   }
-                                        //                 },
-                                        //               ),
-                                        //             )),
-                                        //       ),
-                                        //     ),
-                                        //   ],
-                                        // ),
+                                    ///Description
+                                    // Row(
+                                    //   mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                    //   children: [
+                                    //     Expanded(
+                                    //       child: CustomRichText(title: 'Description '),
+                                    //     ),
+                                    //     Expanded(
+                                    //       child: Container(
+                                    //         padding: const EdgeInsets.only(right: 15),
+                                    //         child: Container(
+                                    //             decoration: BoxDecoration(
+                                    //               boxShadow: [
+                                    //                 BoxShadow(
+                                    //                   color: Colors.black26,
+                                    //                   offset: const Offset(
+                                    //                     5.0,
+                                    //                     5.0,
+                                    //                   ),
+                                    //                   blurRadius: 5.0,
+                                    //                   spreadRadius: 1.0,
+                                    //                 ),
+                                    //                 BoxShadow(
+                                    //                   color: ColorValues.whiteColor,
+                                    //                   offset: const Offset(0.0, 0.0),
+                                    //                   blurRadius: 0.0,
+                                    //                   spreadRadius: 0.0,
+                                    //                 ),
+                                    //               ],
+                                    //               color: ColorValues.whiteColor,
+                                    //               borderRadius: BorderRadius.circular(5),
+                                    //             ),
+                                    //             // width: MediaQuery.of(context).size.width / 2,
+                                    //             width: (MediaQuery.of(context).size.width * .2) - 30,
+                                    //             child: Obx(
+                                    //               () => TextField(
+                                    //                 controller: controller.descriptionCtrlr,
+                                    //                 keyboardType: TextInputType.multiline,
+                                    //                 maxLines: 1,
+                                    //                 autofocus: false,
+                                    //                 decoration: InputDecoration(
+                                    //                   fillColor: ColorValues.whiteColor,
+                                    //                   filled: true,
+                                    //                   contentPadding: Dimens.edgeInsets05_10,
+                                    //                   border: InputBorder.none,
+                                    //                   enabledBorder: OutlineInputBorder(
+                                    //                     borderRadius: BorderRadius.circular(10.0),
+                                    //                     borderSide: BorderSide(color: Colors.transparent),
+                                    //                   ),
+                                    //                   focusedBorder: OutlineInputBorder(
+                                    //                     borderRadius: BorderRadius.circular(10.0),
+                                    //                     borderSide: BorderSide(color: Colors.transparent),
+                                    //                   ),
+                                    //                   focusedErrorBorder: controller.isDescriptionInvalid.value
+                                    //                       ? OutlineInputBorder(
+                                    //                           borderRadius: BorderRadius.circular(5),
+                                    //                           borderSide: BorderSide(
+                                    //                             color: ColorValues.redColorDark,
+                                    //                           ),
+                                    //                         )
+                                    //                       : InputBorder.none,
+                                    //                   errorBorder: controller.isDescriptionInvalid.value
+                                    //                       ? OutlineInputBorder(
+                                    //                           borderRadius: BorderRadius.circular(5),
+                                    //                           borderSide: BorderSide(
+                                    //                             color: ColorValues.redColorDark,
+                                    //                           ),
+                                    //                         )
+                                    //                       : null,
+                                    //                   errorText: controller.isDescriptionInvalid.value ? "Required field" : null,
+                                    //                 ),
+                                    //                 onChanged: (value) {
+                                    //                   if (value.trim().length > 1) {
+                                    //                     controller.isDescriptionInvalid.value = false;
+                                    //                   } else {
+                                    //                     controller.isDescriptionInvalid.value = true;
+                                    //                   }
+                                    //                 },
+                                    //               ),
+                                    //             )),
+                                    //       ),
+                                    //     ),
+                                    //   ],
+                                    // ),
+                                   
+                                    SizedBox(
+                                      height: 10,
+                                    ),
+                                    Padding(
+                                      padding: const EdgeInsets.only(left: 15),
+                                      child: CustomRichText(title: 'Select confirmation type: '),
+                                    ),
+                                    //  DropdownWebStock(
+                                    //                   width:
+                                    //                       MediaQuery.of(context)
+                                    //                               .size
+                                    //                               .width /
+                                    //                           4,
+                                    //                   dropdownList:
+                                    //                       controller.type2,
+                                    //                   // selectedValue:
+                                    //                   //     mapData["value"],
+                                    //                   onValueChanged:
+                                    //                       (list, selectedValue) {
+                                    //                     print({
+                                    //                       selectedValue:
+                                    //                           selectedValue
+                                    //                     });
+                                    //                     // mapData["value"] =
+                                    //                     //     selectedValue;
+                                    //                     controller.typedropdownMapperData[
+                                    //                             selectedValue] =
+                                    //                         list.firstWhere(
+                                    //                             (element) =>
+                                    //                                 element
+                                    //                                     .name ==
+                                    //                                 selectedValue,
+                                    //                             orElse: null);
+                                    //                     // mapData["value"] =
+                                    //                     //     selectedValue;
+                                    //                   },
+                                    //                 ),
 
-                                        SizedBox(
-                                          height: 10,
-                                        ),
-                                        Padding(
-                                          padding:
-                                              const EdgeInsets.only(left: 15),
-                                          child: CustomRichText(
-                                              title:
-                                                  'Select confirmation type: '),
-                                        ),
-                                        DropdownWebStock(
-                                          width: MediaQuery.of(context)
-                                                  .size
-                                                  .width /
-                                              4,
-                                          // dropdownList:
-                                          //     controller.type2,
-                                          // selectedValue:
-                                          //     mapData["value"],
-                                          onValueChanged:
-                                              (list, selectedValue) {
-                                            print(
-                                                {selectedValue: selectedValue});
-                                            // mapData["value"] =
-                                            //     selectedValue;
-                                            controller.typedropdownMapperData[
-                                                    selectedValue] =
-                                                list.firstWhere(
-                                                    (element) =>
-                                                        element.name ==
-                                                        selectedValue,
-                                                    orElse: null);
-                                            // mapData["value"] =
-                                            //     selectedValue;
-                                          },
-                                        ),
 
-                                        // Padding(
-                                        //   padding: const EdgeInsets.only(left: 15),
-                                        //   child: SizedBox(
-                                        //     height: MediaQuery.of(context).size.height * 0.040,
-                                        //     width: MediaQuery.of(context).size.width / 3.9,
-                                        //     child:
-                                        //     DropdownWebWidget(
-                                        //       boxShadow: [
-                                        //         BoxShadow(
-                                        //           color: Colors.black26,
-                                        //           offset: const Offset(
-                                        //             5.0,
-                                        //             5.0,
-                                        //           ),
-                                        //           blurRadius: 5.0,
-                                        //           spreadRadius: 1.0,
-                                        //         ),
-                                        //         BoxShadow(
-                                        //           color: ColorValues.whiteColor,
-                                        //           offset: const Offset(0.0, 0.0),
-                                        //           blurRadius: 0.0,
-                                        //           spreadRadius: 0.0,
-                                        //         ),
-                                        //       ],
-                                        //       dropdownList: [],
-                                        //       onValueChanged: (p0, p1) {
+                                    // Padding(
+                                    //   padding: const EdgeInsets.only(left: 15),
+                                    //   child: SizedBox(
+                                    //     height: MediaQuery.of(context).size.height * 0.040,
+                                    //     width: MediaQuery.of(context).size.width / 3.9,
+                                    //     child:
+                                    //     DropdownWebWidget(
+                                    //       boxShadow: [
+                                    //         BoxShadow(
+                                    //           color: Colors.black26,
+                                    //           offset: const Offset(
+                                    //             5.0,
+                                    //             5.0,
+                                    //           ),
+                                    //           blurRadius: 5.0,
+                                    //           spreadRadius: 1.0,
+                                    //         ),
+                                    //         BoxShadow(
+                                    //           color: ColorValues.whiteColor,
+                                    //           offset: const Offset(0.0, 0.0),
+                                    //           blurRadius: 0.0,
+                                    //           spreadRadius: 0.0,
+                                    //         ),
+                                    //       ],
+                                    //       // dropdownList: [],
+                                    //       // onValueChanged: (p0, p1) {
 
-                                        //       },
-                                        //       // dropdownList: controller.typePermitList,
-                                        //       // isValueSelected: controller.isTypePermitSelected.value,
-                                        //       // selectedValue: controller.selectedTypePermit.value,
-                                        //       // onValueChanged: controller.onValueChanged,
-                                        //     ),
-                                        //   ),
-                                        // ),
+                                    //       // },
+                                    //       dropdownList: controller.type2,
+                                    //       isValueSelected: controller.isTypePermitSelected.value,
+                                    //       selectedValue: controller.selectedTypePermit.value,
+                                    //       onValueChanged: controller.onValueChanged,
+                                    //     ),
+                                    //   ),
+                                    // ),
 
                                         Row(
                                           children: [
@@ -636,7 +639,7 @@ class SafetyQuestionsListContentWeb
                                               // "Id",
 
                                               "Title",
-                                              "Type",
+                                              // "Type",
                                               "Confirmation",
                                               "Required",
                                               "Action"
@@ -653,7 +656,7 @@ class SafetyQuestionsListContentWeb
                                                 (index) {
                                                   return [
                                                     '',
-                                                    '',
+                                                    // '',
                                                     '',
                                                     '',
                                                     '',
@@ -679,7 +682,7 @@ class SafetyQuestionsListContentWeb
                                             columns: [
                                               // "Id",
                                               "Title",
-                                              "Type",
+                                              // "Type",
                                               "Confirmation",
                                               "Required",
                                               "Action"
@@ -702,7 +705,7 @@ class SafetyQuestionsListContentWeb
                                                   return [
                                                     // '${safetyQuestionsListDetails.id}',
                                                     '${safetyQuestionsListDetails.name}',
-                                                    '${safetyQuestionsListDetails.permitType}',
+                                                    // '${safetyQuestionsListDetails.permitType}',
                                                     '${safetyQuestionsListDetails.inputName}',
                                                     'checkbox',
                                                     // 'yes',
