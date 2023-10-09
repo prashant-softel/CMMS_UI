@@ -763,7 +763,7 @@ class ViewIncidentReportContentWeb
                                                 ColorValues.appDarkBlueColor,
                                             text: "Print",
                                             onPressed: () {
-                                              controller.printScreen();
+                                              // controller.printScreen();
                                             },
                                           ),
                                         ),
@@ -793,8 +793,11 @@ class ViewIncidentReportContentWeb
                                                         .value.access_list!
                                                         .where((e) =>
                                                             e.feature_id ==
-                                                                UserAccessConstants.kIncidentReportFeatureId &&
-                                                            e.edit == UserAccessConstants.kHaveEditAccess)
+                                                                UserAccessConstants
+                                                                    .kIncidentReportFeatureId &&
+                                                            e.edit ==
+                                                                UserAccessConstants
+                                                                    .kHaveEditAccess)
                                                         .length >
                                                     0
                                             ? CustomElevatedButton(
@@ -820,8 +823,11 @@ class ViewIncidentReportContentWeb
                                         varUserAccessModel.value.access_list!
                                                         .where((e) =>
                                                             e.feature_id ==
-                                                                UserAccessConstants.kIncidentReportFeatureId &&
-                                                            e.approve == UserAccessConstants.kHaveApproveAccess)
+                                                                UserAccessConstants
+                                                                    .kIncidentReportFeatureId &&
+                                                            e.approve ==
+                                                                UserAccessConstants
+                                                                    .kHaveApproveAccess)
                                                         .length >
                                                     0 &&
                                                 controller
@@ -849,8 +855,11 @@ class ViewIncidentReportContentWeb
                                         varUserAccessModel.value.access_list!
                                                         .where((e) =>
                                                             e.feature_id ==
-                                                                UserAccessConstants.kIncidentReportFeatureId &&
-                                                            e.delete == UserAccessConstants.kHaveDeleteAccess)
+                                                                UserAccessConstants
+                                                                    .kIncidentReportFeatureId &&
+                                                            e.delete ==
+                                                                UserAccessConstants
+                                                                    .kHaveDeleteAccess)
                                                         .length >
                                                     0 &&
                                                 controller

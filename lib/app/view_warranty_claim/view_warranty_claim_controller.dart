@@ -16,14 +16,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
-import 'package:pdf/pdf.dart';
-import 'package:pdf/widgets.dart' as pw;
-import 'package:printing/printing.dart';
 import 'package:rxdart/subjects.dart';
 import 'package:scrollable_table_view/scrollable_table_view.dart';
 import '../../domain/models/facility_model.dart';
 import '../../domain/models/user_access_model.dart';
-
 
 class ViewWarrantyClaimController extends GetxController {
   ViewWarrantyClaimController(this.viewWarrantyClaimPresenter);
@@ -31,16 +27,11 @@ class ViewWarrantyClaimController extends GetxController {
 
   final HomeController homeController = Get.find();
 
-
   ///Print Global key
   final GlobalKey<State<StatefulWidget>> printKey = GlobalKey();
 
 //History Widget
   RxList<HistoryModel?>? historyList = <HistoryModel?>[].obs;
-
-  
-
-
 
   ///
   var startDateTimeCtrlr2 = TextEditingController();
@@ -99,7 +90,7 @@ class ViewWarrantyClaimController extends GetxController {
   final equipmentSerialNoTextController = TextEditingController();
   final orderReferenceNoTextController = TextEditingController();
   final failureDateTimeTextController = TextEditingController();
-    var startDateTimeCtrlrWeb = TextEditingController();
+  var startDateTimeCtrlrWeb = TextEditingController();
   Rx<DateTime> selectedDateTimeWeb = DateTime.now().obs;
   final categoryTextController = TextEditingController();
   final costOfReplacementTextController = TextEditingController();
@@ -110,8 +101,6 @@ class ViewWarrantyClaimController extends GetxController {
   final requestToSupplierTextController = TextEditingController();
   final approverNametextController = TextEditingController();
 
-  
-
   final blockTextController = TextEditingController();
   var selectedBlock = BlockModel();
   var selectedEquipment = EquipmentModel();
@@ -121,16 +110,19 @@ class ViewWarrantyClaimController extends GetxController {
   Rx<String> selectedFacility = ''.obs;
   String username = '';
 
-   ///External Emails list from api
-  RxList<ExternalsEmailsList?>? externalEmailsList = <ExternalsEmailsList?>[].obs;
+  ///External Emails list from api
+  RxList<ExternalsEmailsList?>? externalEmailsList =
+      <ExternalsEmailsList?>[].obs;
 
-   ///Supplier ACtion
-  RxList<SuppliersActionsList?>? supplierActionsList = <SuppliersActionsList?>[].obs;
-
+  ///Supplier ACtion
+  RxList<SuppliersActionsList?>? supplierActionsList =
+      <SuppliersActionsList?>[].obs;
 
   ///View Warranty Claim Details
-  Rx<ViewWarrantyClaimModel?> viewWarrantyClaimDetailsModel = ViewWarrantyClaimModel().obs;
-  RxList<ViewWarrantyClaimModel?>? viewWarrantyClaimDetailsList = <ViewWarrantyClaimModel?>[].obs;
+  Rx<ViewWarrantyClaimModel?> viewWarrantyClaimDetailsModel =
+      ViewWarrantyClaimModel().obs;
+  RxList<ViewWarrantyClaimModel?>? viewWarrantyClaimDetailsList =
+      <ViewWarrantyClaimModel?>[].obs;
 
   RxList<FacilityModel?> facilityList = <FacilityModel>[].obs;
   Rx<bool> isFacilitySelected = true.obs;
@@ -152,10 +144,9 @@ class ViewWarrantyClaimController extends GetxController {
 
   /// SIDE MENU WEB
   Rx<int> selectedIndex = 0.obs;
- 
 
   ///
-int? wc_id = 0;
+  int? wc_id = 0;
   @override
   void onInit() async {
     wc_id = Get.arguments;
@@ -168,17 +159,16 @@ int? wc_id = 0;
       getuserAccessData();
     });
 
-   if(wc_id != null){
-     Future.delayed(Duration(seconds: 1), () {
-      getViewWarrantyClaimDetail(wc_id: wc_id!);
-    });
-
-   }
+    if (wc_id != null) {
+      Future.delayed(Duration(seconds: 1), () {
+        getViewWarrantyClaimDetail(wc_id: wc_id!);
+      });
+    }
 
     Future.delayed(Duration(seconds: 1), () {
       getWarrantyClaimHistory(id: wc_id!);
     });
-   
+
     super.onInit();
   }
 
@@ -201,19 +191,21 @@ int? wc_id = 0;
     // int tempModuleType = 21;
     int id = wc_id!;
     //
-    historyList?.value = await viewWarrantyClaimPresenter.getWarrantyClaimHistory(
-          // tempModuleType,
-          // tempJobCardId,
-          moduleType,
-          id,
-          true,
-        ) ??
-        [];
+    historyList?.value =
+        await viewWarrantyClaimPresenter.getWarrantyClaimHistory(
+              // tempModuleType,
+              // tempJobCardId,
+              moduleType,
+              id,
+              true,
+            ) ??
+            [];
     update(["historyList"]);
   }
 
   Future<void> getuserAccessData() async {
-    final _userAccessList = await viewWarrantyClaimPresenter.getUserAccessList();
+    final _userAccessList =
+        await viewWarrantyClaimPresenter.getUserAccessList();
 
     if (_userAccessList != null) {
       final userAccessModelList = jsonDecode(_userAccessList);
@@ -223,77 +215,52 @@ int? wc_id = 0;
     }
   }
 
-   Future <void> getViewWarrantyClaimDetail({required int wc_id}) async{
-   // newPermitDetails!.value = <NewPermitListModel>[];
-      viewWarrantyClaimDetailsList?.value = <ViewWarrantyClaimModel>[];
+  Future<void> getViewWarrantyClaimDetail({required int wc_id}) async {
+    // newPermitDetails!.value = <NewPermitListModel>[];
+    viewWarrantyClaimDetailsList?.value = <ViewWarrantyClaimModel>[];
 
-    final _viewWarrantyClaimDetails = await viewWarrantyClaimPresenter.getViewWarrantyClaimDetail(
-        wc_id: wc_id
-        );
-        print('New Warranty Claim Detail:$_viewWarrantyClaimDetails');
+    final _viewWarrantyClaimDetails = await viewWarrantyClaimPresenter
+        .getViewWarrantyClaimDetail(wc_id: wc_id);
+    print('New Warranty Claim Detail:$_viewWarrantyClaimDetails');
 
-        if(_viewWarrantyClaimDetails != null ){
+    if (_viewWarrantyClaimDetails != null) {
       viewWarrantyClaimDetailsModel.value = _viewWarrantyClaimDetails;
       // listEmployee?.value = viewPermitDetailsModel.value?.employee_list ?? [];
       // safetyList?.value = viewPermitDetailsModel.value?.safety_question_list ?? [];
       // listCategory?.value = viewPermitDetailsModel.value?.lstCategory ?? [];
       // listLoto?.value = viewPermitDetailsModel.value?.loto_list ?? [];
-      categoryTextController.text = viewWarrantyClaimDetailsModel.value?.equipment_category ?? '';
-      equipmentNameTextController.text = viewWarrantyClaimDetailsModel.value?.equipment_name ?? '';
-      supplierNameTextController.text = viewWarrantyClaimDetailsModel.value?.supplier_name ?? '';
-      equipmentSerialNoTextController.text = viewWarrantyClaimDetailsModel.value?.equipment_sr_no ?? '';
-      orderReferenceNoTextController.text = viewWarrantyClaimDetailsModel.value?.order_reference_number ?? '';
-      failureDateTimeTextController.text = '${DateFormat('yyyy-MM-dd HH:mm').format(DateTime.parse('${viewWarrantyClaimDetailsModel.value?.failure_time}'))}';
-      costOfReplacementTextController.text = viewWarrantyClaimDetailsModel.value?.cost_of_replacement ?? '';
+      categoryTextController.text =
+          viewWarrantyClaimDetailsModel.value?.equipment_category ?? '';
+      equipmentNameTextController.text =
+          viewWarrantyClaimDetailsModel.value?.equipment_name ?? '';
+      supplierNameTextController.text =
+          viewWarrantyClaimDetailsModel.value?.supplier_name ?? '';
+      equipmentSerialNoTextController.text =
+          viewWarrantyClaimDetailsModel.value?.equipment_sr_no ?? '';
+      orderReferenceNoTextController.text =
+          viewWarrantyClaimDetailsModel.value?.order_reference_number ?? '';
+      failureDateTimeTextController.text =
+          '${DateFormat('yyyy-MM-dd HH:mm').format(DateTime.parse('${viewWarrantyClaimDetailsModel.value?.failure_time}'))}';
+      costOfReplacementTextController.text =
+          viewWarrantyClaimDetailsModel.value?.cost_of_replacement ?? '';
       // warrantyStartDateTextController.text = '${DateFormat('yyyy-MM-dd HH:mm').format(DateTime.parse('${viewWarrantyClaimDetailsModel.value?.date_of_claim ?? ''}'))}';
-      warrantyClaimTitleTextController.text = viewWarrantyClaimDetailsModel.value?.warranty_claim_title ?? '';
-      warrantyBriefDescriptionTextController.text = viewWarrantyClaimDetailsModel.value?.warranty_description ?? '';
-      correctiveActionByBuyerTextController.text = viewWarrantyClaimDetailsModel.value?.corrective_action_by_buyer ?? '';
-      requestToSupplierTextController.text = viewWarrantyClaimDetailsModel.value?.request_to_supplier ?? '';
-      approverNametextController.text = viewWarrantyClaimDetailsModel.value?.approver_name ?? '';
-      externalEmailsList?.value = viewWarrantyClaimDetailsModel.value?.externalEmails ?? [];
-      supplierActionsList?.value = viewWarrantyClaimDetailsModel.value?.supplierActions ?? [];
-     
-      
-      
-      
-
-        }
-    
-        
-    
-  }
-
-   Future<void> printScreen() async {
-    try {
-      final RenderRepaintBoundary boundary =
-          printKey.currentContext!.findRenderObject() as RenderRepaintBoundary;
-      final imageBytes = await boundary
-          .toImage(pixelRatio: 3.0)
-          .then((image) => image.toByteData(format: ImageByteFormat.png));
-
-      if (imageBytes != null) {
-        Printing.layoutPdf(onLayout: (PdfPageFormat format) async {
-          final doc = pw.Document();
-          doc.addPage(
-            pw.Page(
-              build: (pw.Context context) {
-                return pw.Image(
-                    pw.MemoryImage(imageBytes.buffer.asUint8List()));
-              },
-            ),
-          );
-          return doc.save();
-        });
-      }
-    } catch (e) {
-      print('Error printing: $e');
+      warrantyClaimTitleTextController.text =
+          viewWarrantyClaimDetailsModel.value?.warranty_claim_title ?? '';
+      warrantyBriefDescriptionTextController.text =
+          viewWarrantyClaimDetailsModel.value?.warranty_description ?? '';
+      correctiveActionByBuyerTextController.text =
+          viewWarrantyClaimDetailsModel.value?.corrective_action_by_buyer ?? '';
+      requestToSupplierTextController.text =
+          viewWarrantyClaimDetailsModel.value?.request_to_supplier ?? '';
+      approverNametextController.text =
+          viewWarrantyClaimDetailsModel.value?.approver_name ?? '';
+      externalEmailsList?.value =
+          viewWarrantyClaimDetailsModel.value?.externalEmails ?? [];
+      supplierActionsList?.value =
+          viewWarrantyClaimDetailsModel.value?.supplierActions ?? [];
     }
   }
 
- 
-
- 
   void onSelectBlock(BlockModel block) {
     selectedBlock = block;
     blockTextController.text = selectedBlock.name ?? '';
@@ -354,5 +321,4 @@ int? wc_id = 0;
         break;
     }
   }
-
 }

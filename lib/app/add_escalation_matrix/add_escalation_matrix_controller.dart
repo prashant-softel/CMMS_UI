@@ -13,9 +13,6 @@ import 'package:cmms/domain/models/type_permit_model.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:get/get.dart';
-import 'package:pdf/widgets.dart' as pw;
-import 'package:pdf/pdf.dart';
-import 'package:printing/printing.dart';
 import 'package:rxdart/subjects.dart';
 import 'package:scrollable_table_view/scrollable_table_view.dart';
 import '../../domain/models/facility_model.dart';
@@ -25,7 +22,6 @@ class AddEscalationMatrixController extends GetxController {
   AddEscalationMatrixPresenter addEscalationPresenter;
 
   final HomeController homeController = Get.find();
-
 
   RxList<int> dayList = <int>[].obs;
 
@@ -82,8 +78,7 @@ class AddEscalationMatrixController extends GetxController {
   Rx<bool> isStartdate = true.obs;
   Rx<bool> isEnddate = true.obs;
 
-
-   Rx<bool> isFormInvalid = false.obs;
+  Rx<bool> isFormInvalid = false.obs;
 
   Rx<String> selectedFacility = ''.obs;
   String username = '';
@@ -95,7 +90,6 @@ class AddEscalationMatrixController extends GetxController {
     rowsPerPage: 10,
   );
 
-
   ///Plant Name
   RxList<FacilityModel?> facilityPlantList = <FacilityModel>[].obs;
   Rx<bool> isFacilityPlantSelected = true.obs;
@@ -106,7 +100,6 @@ class AddEscalationMatrixController extends GetxController {
   Rx<String> selectedEquipmentName = ''.obs;
   Rx<bool> isEquipmentNameSelected = true.obs;
   int selectedEquipmentnameId = 0;
-
 
   ///duration in days
   // Rx<bool> isDurationDaysTextInvalid = false.obs;
@@ -235,33 +228,6 @@ class AddEscalationMatrixController extends GetxController {
           //statements;
         }
         break;
-    }
-  }
-
-  Future<void> printScreen() async {
-    try {
-      final RenderRepaintBoundary boundary =
-          printKey.currentContext!.findRenderObject() as RenderRepaintBoundary;
-      final imageBytes = await boundary
-          .toImage(pixelRatio: 3.0)
-          .then((image) => image.toByteData(format: ImageByteFormat.png));
-
-      if (imageBytes != null) {
-        Printing.layoutPdf(onLayout: (PdfPageFormat format) async {
-          final doc = pw.Document();
-          doc.addPage(
-            pw.Page(
-              build: (pw.Context context) {
-                return pw.Image(
-                    pw.MemoryImage(imageBytes.buffer.asUint8List()));
-              },
-            ),
-          );
-          return doc.save();
-        });
-      }
-    } catch (e) {
-      print('Error printing: $e');
     }
   }
 

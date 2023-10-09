@@ -15,9 +15,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
-import 'package:pdf/widgets.dart' as pw;
-import 'package:pdf/pdf.dart';
-import 'package:printing/printing.dart';
 import 'package:rxdart/subjects.dart';
 import 'package:scrollable_table_view/scrollable_table_view.dart';
 import '../../domain/models/facility_model.dart';
@@ -34,10 +31,9 @@ class ViewIncidentReportController extends GetxController {
   var rowList2 = <String>[].obs;
   var rowList3 = <String>[].obs;
 
-    ///Print Global key
+  ///Print Global key
   final GlobalKey<State<StatefulWidget>> printKey = GlobalKey();
 
- 
   final TextEditingController supplierActionTextFieldController =
       TextEditingController();
   final TextEditingController supplierActionSrNumberTextFieldController =
@@ -57,8 +53,7 @@ class ViewIncidentReportController extends GetxController {
   //   // Toggle the checkbox state
   // }
 
-  
-///Permit Type
+  ///Permit Type
   RxList<TypePermitModel?> typePermitList = <TypePermitModel>[].obs;
   Rx<bool> isTypePermitSelected = true.obs;
   Rx<String> selectedTypePermit = ''.obs;
@@ -73,7 +68,6 @@ class ViewIncidentReportController extends GetxController {
   final TextEditingController nameTextFieldController = TextEditingController();
   final TextEditingController emailTextFieldController =
       TextEditingController();
-
 
   //   ///Failure Date Time For Web
   // var failureDateTimeCtrlrWeb = TextEditingController();
@@ -90,22 +84,21 @@ class ViewIncidentReportController extends GetxController {
 
   ///Reporting Date & Time
   var reportingDateTimeCtrlrWeb = TextEditingController();
-  
 
-   ///Reject Incident Report Controller
-  
-   final TextEditingController rejectCommentTextFieldCtrlr =
+  ///Reject Incident Report Controller
+
+  final TextEditingController rejectCommentTextFieldCtrlr =
       TextEditingController();
 
 //Incident Report List
   var incidentReportList = <IncidentReportListModel>[];
 
+  ///Incident Report Details
+  Rx<IncidentReportDetailsModel?> incidentReportDetailsModel =
+      IncidentReportDetailsModel().obs;
+  RxList<IncidentReportDetailsModel?>? incidentReportDetailsList =
+      <IncidentReportDetailsModel?>[].obs;
 
- ///Incident Report Details
-  Rx<IncidentReportDetailsModel?> incidentReportDetailsModel = IncidentReportDetailsModel().obs;
-  RxList<IncidentReportDetailsModel?>? incidentReportDetailsList = <IncidentReportDetailsModel?>[].obs;
-  
- 
   var inventoryList = <InventoryModel>[];
   var blockList = <BlockModel>[];
   var equipmentList = <EquipmentModel>[];
@@ -123,9 +116,9 @@ class ViewIncidentReportController extends GetxController {
   final blockTextController = TextEditingController();
   final parentEquipmentTextController = TextEditingController();
 
-///Incident Report List
-  RxList<IncidentReportListModel?> incidentReportModelList = <IncidentReportListModel>[].obs;
-
+  ///Incident Report List
+  RxList<IncidentReportListModel?> incidentReportModelList =
+      <IncidentReportListModel>[].obs;
 
   var selectedBlock = BlockModel();
   var selectedEquipment = EquipmentModel();
@@ -142,7 +135,8 @@ class ViewIncidentReportController extends GetxController {
     rowCount: 0,
     rowsPerPage: 10,
   );
-  PaginationController paginationIncidentReportController = PaginationController(
+  PaginationController paginationIncidentReportController =
+      PaginationController(
     rowCount: 0,
     rowsPerPage: 10,
   );
@@ -152,23 +146,20 @@ class ViewIncidentReportController extends GetxController {
   Rx<bool> isFacilityPlantSelected = true.obs;
   Rx<String> selectedPlantFacility = ''.obs;
 
-
   ///Equipment name List
   RxList<InventoryModel?> eqipmentNameList = <InventoryModel>[].obs;
   Rx<String> selectedEquipmentName = ''.obs;
   Rx<bool> isEquipmentNameSelected = true.obs;
   int selectedEquipmentnameId = 0;
 
-
-
-   var startDateTimeCtrlr = TextEditingController();
+  var startDateTimeCtrlr = TextEditingController();
   var validTillTimeCtrlr = TextEditingController();
   var validTillTimeCtrlrBuffer;
   var startDateTimeCtrlrBuffer;
 
   var incidentreportDescriptionCtrlr = TextEditingController();
   var titleTextCtrlr = TextEditingController();
-  
+
   Rx<DateTime> selectedBreakdownTime = DateTime.now().obs;
   Rx<DateTime> selectedValidTillTime = DateTime.now().obs;
   Rx<bool> isJobDescriptionInvalid = false.obs;
@@ -181,39 +172,26 @@ class ViewIncidentReportController extends GetxController {
   Rx<bool> isDamagedAssetCostTextInvalid = false.obs;
   var damagedAssetCostTextCtrlr = TextEditingController();
 
-   ///Gen Loss Due To Asset Loss
+  ///Gen Loss Due To Asset Loss
   Rx<bool> isGenLossAssetDamageTextInvalid = false.obs;
   var genLossAssetDamageTextCtrlr = TextEditingController();
 
-     ///Gen Loss Due To Asset Loss
+  ///Gen Loss Due To Asset Loss
   Rx<bool> isInsuranceRemarkTextInvalid = false.obs;
   var insuranceRemarkTextCtrlr = TextEditingController();
-
-
-
 
   ///Incident Reporting date Time
   var actionTakenDateTimeCtrlr = TextEditingController();
   Rx<DateTime> selectedActionTakenTime = DateTime.now().obs;
 
-
-///Incident Report History
+  ///Incident Report History
   RxList<HistoryModel?>? historyList = <HistoryModel?>[].obs;
-
-
 
   ///For Switch case
   RxBool switchValue = false.obs;
   RxBool switchValue2 = false.obs;
   RxBool switchValue3 = false.obs;
   RxBool switchValue4 = false.obs;
-
-
-
-
-  
-
-
 
   // PaginationController paginationBusinessListController = PaginationController(
   //   rowCount: 0,
@@ -222,31 +200,27 @@ class ViewIncidentReportController extends GetxController {
   BehaviorSubject<int> _facilityId = BehaviorSubject.seeded(0);
   Stream<int> get facilityId$ => _facilityId.stream;
   int get facilityId1 => _facilityId.value;
- 
+
   StreamSubscription<int>? facilityIdStreamSubscription;
   int facilityId = 0;
 
-
-  
-
   ///
-int? id = 0;
+  int? id = 0;
   @override
   void onInit() async {
     id = Get.arguments;
     print('IncidentReport_Id:$id');
-     facilityIdStreamSubscription = homeController.facilityId$.listen((event) {
+    facilityIdStreamSubscription = homeController.facilityId$.listen((event) {
       facilityId = event;
       Future.delayed(Duration(seconds: 1), () {
-      getFacilityList();
-    });
+        getFacilityList();
+      });
     });
 
-    if(id != null){
+    if (id != null) {
       Future.delayed(Duration(seconds: 1), () {
-      getIncidentReportDetail(id: id!);
-    });
-
+        getIncidentReportDetail(id: id!);
+      });
     }
     // Future.delayed(Duration(seconds: 1), () {
     //   getFacilityPlantList();
@@ -265,28 +239,24 @@ int? id = 0;
     super.onInit();
   }
 
+  Future<void> getIncidentReportDetail({required int id}) async {
+    // newPermitDetails!.value = <NewPermitListModel>[];
+    incidentReportDetailsList?.value = <IncidentReportDetailsModel>[];
 
-   Future <void> getIncidentReportDetail({required int id}) async{
-   // newPermitDetails!.value = <NewPermitListModel>[];
-      incidentReportDetailsList?.value = <IncidentReportDetailsModel>[];
+    final _incidentReportDetails =
+        await viewIncidentReportPresenter.getIncidentReportDetail(id: id);
+    print('Incident Report Detail:$_incidentReportDetails');
 
-    final _incidentReportDetails = await viewIncidentReportPresenter.getIncidentReportDetail(
-        id: id
-        );
-        print('Incident Report Detail:$_incidentReportDetails');
-
-        if(_incidentReportDetails != null ){
+    if (_incidentReportDetails != null) {
       incidentReportDetailsModel.value = _incidentReportDetails;
 
-      incidentDateTimeCtrlrWeb.text = '${DateFormat('yyyy-MM-dd HH:mm:ss').format(DateTime.parse('${incidentReportDetailsModel.value?.incident_datetime}'))}';
-      actionTakenDateTimeCtrlrWeb.text = '${DateFormat('yyyy-MM-dd HH:mm:ss').format(DateTime.parse('${incidentReportDetailsModel.value?.action_taken_datetime}'))}';
-      reportingDateTimeCtrlrWeb.text = '${DateFormat('yyyy-MM-dd HH:mm:ss').format(DateTime.parse('${incidentReportDetailsModel.value?.reporting_datetime}'))}';
-
-
-        }
-    
-        
-    
+      incidentDateTimeCtrlrWeb.text =
+          '${DateFormat('yyyy-MM-dd HH:mm:ss').format(DateTime.parse('${incidentReportDetailsModel.value?.incident_datetime}'))}';
+      actionTakenDateTimeCtrlrWeb.text =
+          '${DateFormat('yyyy-MM-dd HH:mm:ss').format(DateTime.parse('${incidentReportDetailsModel.value?.action_taken_datetime}'))}';
+      reportingDateTimeCtrlrWeb.text =
+          '${DateFormat('yyyy-MM-dd HH:mm:ss').format(DateTime.parse('${incidentReportDetailsModel.value?.reporting_datetime}'))}';
+    }
   }
 
   Future<void> incidentReportApproveButton() async {
@@ -299,7 +269,6 @@ int? id = 0;
     );
     // showAlertPermitApproveDialog();
     print('Incident Report Approve Button Data:${id}');
-    
   }
 
   Future<void> incidentReportRejectButton({String? id}) async {
@@ -313,7 +282,6 @@ int? id = 0;
     // showAlertPermitApproveDialog();
     print('Incident Report Reject Button Data:${_rejectComment}');
     print('Incident Report Reject Button Data:${id}');
-    
   }
 
   Future<void> getIncidentReportHistory({required int id}) async {
@@ -322,17 +290,17 @@ int? id = 0;
     // int tempModuleType = 21;
     int id = Get.arguments;
     //
-    historyList?.value = await viewIncidentReportPresenter.getIncidentReportHistory(
-          // tempModuleType,
-          // tempJobCardId,
-          moduleType,
-          id,
-          true,
-        ) ??
-        [];
+    historyList?.value =
+        await viewIncidentReportPresenter.getIncidentReportHistory(
+              // tempModuleType,
+              // tempJobCardId,
+              moduleType,
+              id,
+              true,
+            ) ??
+            [];
     update(["historyList"]);
   }
-
 
   Future<void> getFacilityList() async {
     final _facilityList = await viewIncidentReportPresenter.getFacilityList();
@@ -347,9 +315,9 @@ int? id = 0;
     }
   }
 
- 
   Future<void> getuserAccessData() async {
-    final _userAccessList = await viewIncidentReportPresenter.getUserAccessList();
+    final _userAccessList =
+        await viewIncidentReportPresenter.getUserAccessList();
 
     if (_userAccessList != null) {
       final userAccessModelList = jsonDecode(_userAccessList);
@@ -359,7 +327,6 @@ int? id = 0;
     }
   }
 
- 
   void onValueChanged(dynamic list, dynamic value) {
     print('Valuesd:${value}');
     switch (list.runtimeType) {
@@ -370,7 +337,6 @@ int? id = 0;
           _facilityId.add(facilityList[facilityIndex]?.id ?? 0);
         }
         break;
-    
 
       default:
         {
@@ -380,37 +346,8 @@ int? id = 0;
     }
   }
 
- 
-  Future<void> printScreen() async {
-    try {
-      final RenderRepaintBoundary boundary =
-          printKey.currentContext!.findRenderObject() as RenderRepaintBoundary;
-      final imageBytes = await boundary
-          .toImage(pixelRatio: 3.0)
-          .then((image) => image.toByteData(format: ImageByteFormat.png));
-
-      if (imageBytes != null) {
-        Printing.layoutPdf(onLayout: (PdfPageFormat format) async {
-          final doc = pw.Document();
-          doc.addPage(
-            pw.Page(
-              build: (pw.Context context) {
-                return pw.Image(
-                    pw.MemoryImage(imageBytes.buffer.asUint8List()));
-              },
-            ),
-          );
-          return doc.save();
-        });
-      }
-    } catch (e) {
-      print('Error printing: $e');
-    }
-  }
-
   Future<void> editIncidentReport({int? id}) async {
     Get.toNamed(Routes.addIncidentReportContentWeb, arguments: id);
     print('Argument$id');
   }
-
 }
