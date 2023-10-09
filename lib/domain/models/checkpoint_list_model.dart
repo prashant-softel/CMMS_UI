@@ -6,7 +6,6 @@ List<CheckPointModel> checkPointModelFromJson(String str) =>
 
 String checkPointModelToJson(List<CheckPointModel> data) =>
     json.encode(List<dynamic>.from(data.map((x) => x.toJson())));
-    
 
 class CheckPointModel {
   int? id;
@@ -20,23 +19,48 @@ class CheckPointModel {
   int? status;
   int? updated_by_id;
 
-  CheckPointModel({
-    this.id,
-    this.check_point,
-    this.checklist_id,
-    this.checklist_name,
-    this.created_by_id,
-    this.created_by_name,
-    this.requirement,
-    this.updated_by_id,
-    this.is_document_required,
-    this.status,
-   
-  });
+  String? action_to_be_done;
+  int? failure_weightage;
+  String? checkpoint_type;
+  int? min;
+  int? max;
+
+  String? created_at;
+
+  dynamic updated_by_name;
+  dynamic updated_at;
+
+  CheckPointModel(
+      {this.id,
+      this.check_point,
+      this.checklist_id,
+      this.checklist_name,
+      this.created_by_id,
+      this.created_by_name,
+      this.requirement,
+      this.updated_by_id,
+      this.is_document_required,
+      this.status,
+      this.action_to_be_done,
+      this.checkpoint_type,
+      this.created_at,
+      this.failure_weightage,
+      this.max,
+      this.min,
+      this.updated_at,
+      this.updated_by_name});
 
   factory CheckPointModel.fromJson(Map<String, dynamic> json) =>
       CheckPointModel(
         id: json['id'],
+        action_to_be_done: json['action_to_be_done'],
+        checkpoint_type: json['checkpoint_type'],
+        created_at: json['created_at'],
+        failure_weightage: json['failure_weightage'],
+        max: json['max'],
+        min: json['min'],
+        updated_at: json['updated_at'],
+        updated_by_name: json['updated_by_name'],
         check_point: json['check_point'],
         checklist_id: json['checklist_id'],
         checklist_name: json['checklist_name'],
@@ -46,11 +70,18 @@ class CheckPointModel {
         requirement: json['requirement'],
         updated_by_id: json['updated_by_id'],
         status: json['status'],
-       
       );
 
   Map<String, dynamic> toJson() => {
         "id": id,
+        "action_to_be_done": action_to_be_done,
+        "checkpoint_type": checkpoint_type,
+        "created_at": created_at,
+        "failure_weightage": failure_weightage,
+        "max": max,
+        "min": min,
+        "updated_at": updated_at,
+        "updated_by_name": updated_by_name,
         "check_point": check_point,
         "checklist_id": checklist_id,
         "checklist_name": checklist_name,
@@ -60,6 +91,5 @@ class CheckPointModel {
         "requirement": requirement,
         "updated_by_id": updated_by_id,
         "status": status,
-       
       };
 }

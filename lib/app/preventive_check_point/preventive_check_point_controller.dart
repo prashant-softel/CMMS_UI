@@ -28,7 +28,11 @@ class PreventiveCheckPointController extends GetxController {
   int facilityId = 0;
   int type = 1;
   var checkPointCtrlr = TextEditingController();
+  var minRangeCtrlr = TextEditingController();
+  var maxRangeCtrlr = TextEditingController();
+
   var requirementCtrlr = TextEditingController();
+  var failurewtgCtrlr = TextEditingController();
   int selectedEquipmentId = 0;
   Rx<String> selectedchecklistId = "".obs;
   RxList<CheckPointModel?>? preventiveCheckpoint = <CheckPointModel?>[].obs;
@@ -58,6 +62,12 @@ class PreventiveCheckPointController extends GetxController {
     super.onInit();
   }
 
+  var checkpointType = ''.obs;
+
+  void updatecheCkpointType(String value) {
+    checkpointType.value = value;
+  }
+
   var isToggleOn = false.obs;
   final isSuccess = false.obs;
 
@@ -85,18 +95,39 @@ class PreventiveCheckPointController extends GetxController {
   }
 
   Future<bool> createCheckpoint() async {
+    int _failurewtg = int.tryParse(failurewtgCtrlr.text.trim()) ?? 0;
+    String _checkPoint = checkPointCtrlr.text.trim();
+    String _requirement = requirementCtrlr.text.trim();
+    int _max = int.tryParse(maxRangeCtrlr.text.trim()) ?? 0;
+    int _min = int.tryParse(minRangeCtrlr.text.trim()) ?? 0;
+
+    int _checklistId = int.tryParse(selectedchecklistId.value) ?? 0;
     if (checkPointCtrlr.text.trim() == '' ||
-        requirementCtrlr.text.trim() == '') {
+        requirementCtrlr.text.trim() == '' ||
+        failurewtgCtrlr.text.trim() == '' ||
+        _failurewtg > 100 ||
+        _failurewtg == 0 ||
+        checkpointType.value == '') {
       Fluttertoast.showToast(
-          msg: "Please enter required field", fontSize: 16.0);
+          msg:
+              "Please enter required field and Failure waightage must be number beetween 1-100",
+          fontSize: 16.0);
     } else {
-      String _checkPoint = checkPointCtrlr.text.trim();
-      String _requirement = requirementCtrlr.text.trim();
-      int _checklistId = int.tryParse(selectedchecklistId.value) ?? 0;
+      CheckpointType checkpoint_type = CheckpointType(
+          id: checkpointType.value == "Text"
+              ? 0
+              : checkpointType.value == "Bool"
+                  ? 1
+                  : 2,
+          max: _max,
+          min: _min);
+
       CreateCheckpoint createCheckpoint = CreateCheckpoint(
           check_point: _checkPoint,
           requirement: _requirement,
           checklist_id: _checklistId,
+          failure_weightage: _failurewtg,
+          checkpoint_type: checkpoint_type,
           is_document_required: isToggleOn.value ? 1 : 0,
           id: 0,
           status: 1);
@@ -105,13 +136,15 @@ class PreventiveCheckPointController extends GetxController {
       ]; //createCheckPointToJson([createCheckpoint]);
 
       print({"checkpointJsonString", checkpointJsonString});
-      await preventiveCheckPointPresenter.createCheckPoint(
+      var rsponse = preventiveCheckPointPresenter.createCheckPoint(
         checkpointJsonString: checkpointJsonString,
         isLoading: true,
       );
-      return true;
+      if (rsponse != null) {
+        return true;
+      }
     }
-    return true;
+    return false;
   }
 
   Future<void> getCheckPointlist({required String selectedchecklistId}) async {
@@ -143,6 +176,10 @@ class PreventiveCheckPointController extends GetxController {
     requirementCtrlr.text = '';
     isToggleOn.value = false;
     selectedItem = null;
+    failurewtgCtrlr.text = '';
+    maxRangeCtrlr.text = '';
+    minRangeCtrlr.text = '';
+    checkpointType.value = '';
   }
 
   void issuccessCreatecheckpont() {
@@ -151,6 +188,10 @@ class PreventiveCheckPointController extends GetxController {
     requirementCtrlr.text = '';
     isToggleOn.value = false;
     selectedItem = null;
+    failurewtgCtrlr.text = '';
+    maxRangeCtrlr.text = '';
+    minRangeCtrlr.text = '';
+    checkpointType.value = '';
     Future.delayed(Duration(seconds: 1), () {
       getCheckPointlist(selectedchecklistId: selectedchecklistId.value);
     });
@@ -220,6 +261,7 @@ class PreventiveCheckPointController extends GetxController {
           int checklistIndex = checkList.indexWhere((x) => x?.name == value);
           selectedchecklistId.value =
               checkList[checklistIndex]?.id.toString() ?? "";
+          cleardata();
           getCheckPointlist(selectedchecklistId: selectedchecklistId.value);
         }
 
@@ -246,6 +288,18 @@ class PreventiveCheckPointController extends GetxController {
     String _checkPoint = checkPointCtrlr.text.trim();
     String _requirement = requirementCtrlr.text.trim();
     int _checklistId = int.tryParse(selectedchecklist.value) ?? 0;
+    int _failurewtg = int.tryParse(failurewtgCtrlr.text.trim()) ?? 0;
+    int _max = int.tryParse(maxRangeCtrlr.text.trim()) ?? 0;
+    int _min = int.tryParse(minRangeCtrlr.text.trim()) ?? 0;
+
+    CheckpointType checkpoint_type = CheckpointType(
+        id: checkpointType.value == "Text"
+            ? 0
+            : checkpointType.value == "Bool"
+                ? 1
+                : 2,
+        max: _max,
+        min: _min);
 
     CreateCheckpoint createCheckpoint = CreateCheckpoint(
         check_point: _checkPoint,
@@ -253,6 +307,8 @@ class PreventiveCheckPointController extends GetxController {
         checklist_id: _checklistId,
         id: checkPontId,
         is_document_required: isToggleOn.value ? 1 : 0,
+        failure_weightage: _failurewtg,
+        checkpoint_type: checkpoint_type,
         status: 1);
     var checkpointJsonString =
         createCheckpoint.toJson(); //createCheckPointToJson([createCheckpoint]);
