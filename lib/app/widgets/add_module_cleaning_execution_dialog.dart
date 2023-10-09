@@ -228,17 +228,20 @@ class AddModuleCleaningExecutionDialog extends GetView {
                                                       ),
                                                       // Dimens.boxWidth30,
                                                       Spacer(),
-                                                      Obx(
-                                                        () => Checkbox(
-                                                          value: controller
-                                                              .isChecked.value,
+                                                      // Obx(
+                                                      //   () => 
+                                                        Checkbox(
+                                                          value: element!.isExpanded,
                                                           onChanged:
                                                               (bool? value) {
-                                                            controller
-                                                                .toggleCheckbox();
+                                                            // controller
+                                                            //     .toggleCheckbox();
+                                                            setState(() {
+                                                              element.isExpanded = element.isExpanded;
+                                                            },);
                                                           },
                                                         ),
-                                                      ),
+                                                      // ),
                                                     ],
                                                   ),
                                                   children: <Widget>[
@@ -251,7 +254,7 @@ class AddModuleCleaningExecutionDialog extends GetView {
 
                                                         ]
                                                           ..addAll(
-                                                              element!.smbs!
+                                                              element.smbs
                                                                   .map(
                                                                       (e) =>
                                                                           Row(
@@ -260,20 +263,24 @@ class AddModuleCleaningExecutionDialog extends GetView {
                                                                             crossAxisAlignment:
                                                                                 CrossAxisAlignment.end,
                                                                             children: [
-                                                                              Text('${e?.smbName}'),
+                                                                              Text('${e.smbName}'),
                                                                               // Dimens.boxWidth50,
                                                                               Spacer(),
-                                                                              Text('${e?.moduleQuantity}'),
+                                                                              Text('${e.moduleQuantity}'),
                                                                               // Dimens.boxWidth120,
                                                                               Spacer(),
-                                                                              Obx(
-                                                                                () => Checkbox(
-                                                                                  value: controller.isChecked.value,
+                                                                              // Obx(
+                                                                              //   () =>
+                                                                                 Checkbox(
+                                                                                  value: element.isExpanded,
                                                                                   onChanged: (bool? value) {
-                                                                                    controller.toggleCheckbox();
+                                                                                    // controller.toggleCheckbox();
+                                                                                    setState(() {
+                                                                                      element.isExpanded = element.isExpanded;
+                                                                                    },);
                                                                                   },
                                                                                 ),
-                                                                              ),
+                                                                              // ),
                                                                               // Dimens.boxWidth150,
                                                                               Spacer(),
                                                                               Obx(
