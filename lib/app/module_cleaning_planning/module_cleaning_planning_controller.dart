@@ -1,13 +1,23 @@
+import 'dart:async';
+
+import 'package:cmms/app/create_pm_plan/create_pm_plan_presenter.dart';
 import 'package:cmms/app/module_cleaning_planning/module_cleaning_planning_presenter.dart';
+import 'package:cmms/app/navigators/app_pages.dart';
+import 'package:cmms/app/utils/utility.dart';
+import 'package:cmms/domain/models/create_pm_plan_model.dart';
+import 'package:cmms/domain/models/employee_model.dart';
 import 'package:cmms/domain/models/equipment_list_model.dart';
-import 'package:cmms/domain/models/facility_model.dart';
 import 'package:cmms/domain/models/frequency_model.dart';
-import 'package:cmms/domain/models/inventory_category_model.dart';
-import 'package:cmms/domain/models/paiyed_model.dart';
+import 'package:cmms/domain/models/get_asset_data_list_model.dart';
+import 'package:cmms/domain/models/get_pm_plan_detail_model.dart';
+import 'package:cmms/domain/models/inventory_model.dart';
+import 'package:cmms/domain/models/preventive_checklist_model.dart';
 import 'package:cmms/domain/models/type_model.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:get/get.dart';
-
+import '../../domain/models/facility_model.dart';
+import '../../domain/models/inventory_category_model.dart';
 import '../home/home_controller.dart';
 
 class ModuleCleaningPlanningController extends GetxController {
@@ -15,23 +25,29 @@ class ModuleCleaningPlanningController extends GetxController {
   ModuleCleaningPlanningController(
     this.moduleCleaningPlanningPresenter,
   );
-  RxList<EquipmentListModel?> equipmentList = <EquipmentListModel?>[].obs;
+  ModuleCleaningPlanningPresenter moduleCleaningPlanningPresenter;
+  final HomeController homecontroller = Get.find();
 
+  RxList<FrequencyModel?> frequencyList = <FrequencyModel>[].obs;
   Rx<List<List<Map<String, String>>>> rowItem =
       Rx<List<List<Map<String, String>>>>([]);
-  RxList<FacilityModel?> facilityList = <FacilityModel>[].obs;
-  var typeDropdownList = 'Select Gender'.obs;
-  var startDateTc = TextEditingController();
-  bool openStartDatePicker = false;
-
-  int facilityId = 0;
-  Rx<String> selectedBlock = ''.obs;
   Rx<String> selectedfrequency = ''.obs;
   Rx<bool> isSelectedfrequency = true.obs;
+  int selectedfrequencyId = 0;
+
+  var selectedOption = ''.obs;
   RxList<InventoryCategoryModel?> equipmentCategoryList =
       <InventoryCategoryModel>[].obs;
-  int selectedEquipmentId = 0;
-  int selectedfrequencyId = 0;
+  StreamSubscription<int>? facilityIdStreamSubscription;
+  int facilityId = 0;
+
+  RxList<EquipmentListModel?> equipmentList = <EquipmentListModel?>[].obs;
+  var days = <TypeModel>[
+    TypeModel(name: "Please Select", id: "0"),
+    TypeModel(name: 'Day 1', id: "1"),
+    TypeModel(name: 'Day 2', id: "2"),
+    TypeModel(name: 'Day 3', id: "3"),
+  ];
   Map<String, TypeModel> typedropdownMapperData = {};
 
   var type = <TypeModel>[
@@ -39,15 +55,43 @@ class ModuleCleaningPlanningController extends GetxController {
     TypeModel(name: 'Dry', id: "1"),
     TypeModel(name: 'Wet', id: "2"),
   ];
-  var days = <TypeModel>[
-    TypeModel(name: "Please Select", id: "0"),
-    TypeModel(name: 'Day 1', id: "1"),
-    TypeModel(name: 'Day 2', id: "2"),
-    TypeModel(name: 'Day 3', id: "3"),
-  ];
-  RxList<FrequencyModel?> frequencyList = <FrequencyModel>[].obs;
-  ModuleCleaningPlanningPresenter moduleCleaningPlanningPresenter;
-  final HomeController homecontroller = Get.find();
+  // var days = <TypeModel>[
+  //   TypeModel(name: "Please Select", id: "0"),
+  //   TypeModel(name: 'Day 1', id: "1"),
+  //   TypeModel(name: 'Day 2', id: "2"),
+  //   TypeModel(name: 'Day 3', id: "3"),
+  // ];
+  void addRowItem() {
+    rowItem.value.add([
+      {"key": "day", "value": ''},
+      {"key": "noOfInverters", "value": ''},
+      {'key': "noOfSMBs", "value": ''},
+      {'key': "noOfModules", "value": ''},
+      {'key': "type", "value": 'Please Select'},
+    ]);
+  }
+
+  @override
+  void onInit() async {
+    try {
+      facilityIdStreamSubscription = homecontroller.facilityId$.listen((event) {
+        facilityId = event;
+
+        Future.delayed(Duration(seconds: 1), () {
+          getFrequencyList();
+        });
+
+        Future.delayed(Duration(seconds: 1), () {
+          getEquipmentModelList(facilityId, true);
+        });
+      });
+      super.onInit();
+    } catch (e) {
+      print(e);
+    }
+
+    super.onInit();
+  }
 
   Future<void> getEquipmentModelList(int facilityId, bool isLoading) async {
     equipmentList.value = <EquipmentListModel>[];
@@ -69,24 +113,9 @@ class ModuleCleaningPlanningController extends GetxController {
     update(['equipment_list']);
   }
 
-  ///
-  @override
-  void onInit() async {
-    getFrequencyList();
-    Future.delayed(Duration(seconds: 1), () {
-      getEquipmentModelList(facilityId, true);
-    });
-
-    super.onInit();
-  }
-
-  void switchFacility(String? facilityName) {
-    facilityId =
-        facilityList.indexWhere((facility) => facility?.name == facilityName);
-  }
-
   Future<void> getFrequencyList() async {
-    final list = await moduleCleaningPlanningPresenter.getFrequencyList();
+    final list =
+        await moduleCleaningPlanningPresenter.getFrequencyList(isLoading: true);
 
     if (list != null) {
       for (var _frequencyList in list) {
@@ -95,51 +124,21 @@ class ModuleCleaningPlanningController extends GetxController {
     }
   }
 
-  void addRowItem() {
-    rowItem.value.add([
-      {"key": "day", "value": ''},
-      {"key": "noOfInverters", "value": ''},
-      {'key': "noOfSMBs", "value": ''},
-      {'key': "noOfModules", "value": ''},
-      {'key': "type", "value": 'Please Select'},
-    ]);
-  }
-
   void onValueChanged(dynamic list, dynamic value) {
+    print({"valuevaluevaluevalue": value});
     switch (list.runtimeType) {
-      case RxList<InventoryCategoryModel>:
-        {
-          int equipmentIndex =
-              equipmentCategoryList.indexWhere((x) => x?.name == value);
-          selectedEquipmentId = equipmentCategoryList[equipmentIndex]?.id ?? 0;
-        }
-
-        break;
       case RxList<FrequencyModel>:
         {
           int frequencyIndex =
               frequencyList.indexWhere((x) => x?.name == value);
           selectedfrequencyId = frequencyList[frequencyIndex]?.id ?? 0;
+          selectedfrequency.value = value;
         }
         break;
+
       default:
-        {
-          //statements;
-        }
+        {}
         break;
-    }
-  }
-
-  Future<void> getFacilityList({bool? isLoading}) async {
-    facilityList.value = <FacilityModel>[];
-    List<FacilityModel?>? _facilityList = <FacilityModel?>[];
-
-    _facilityList = await moduleCleaningPlanningPresenter.getFacilityList();
-    if (_facilityList != null && _facilityList.isNotEmpty) {
-      facilityList.value = _facilityList;
-    }
-    if (facilityList.isNotEmpty) {
-      selectedBlock.value = facilityList[0]?.name ?? '';
     }
   }
 }
