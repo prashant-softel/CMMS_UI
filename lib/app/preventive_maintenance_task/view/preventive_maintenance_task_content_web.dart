@@ -513,42 +513,88 @@ class PmTaskDataSource extends DataTableSource {
                         child: Container(
                           padding: Dimens.edgeInsets8_2_8_2,
                           decoration: BoxDecoration(
-                            color:
-                                //  controller.pmTaskList
-                                //             .firstWhere(
-                                //               (e) =>
-                                //                   e?.Task_id ==
-                                //                   pmTaskDetails?.Task_id,
-                                //               orElse: () =>
-                                //                   PmTaskListModel(Task_id: 00),
-                                //             )
-                                //             ?.status_id ==
-                                //         406
-                                //     ? ColorValues.rejectedStatusColor
-                                //     : controller.pmTaskList
-                                //                 .firstWhere(
-                                //                   (e) =>
-                                //                       e?.Task_id ==
-                                //                       pmTaskDetails?.Task_id,
-                                //                   orElse: () =>
-                                //                       PmTaskListModel(Task_id: 00),
-                                //                 )
-                                //                 ?.status_id ==
-                                //             401
-                                //         ? ColorValues.appLightBlueColor
-                                //         : controller.pmTaskList
-                                //                     .firstWhere(
-                                //                       (e) =>
-                                //                           e?.Task_id ==
-                                //                           pmTaskDetails?.Task_id,
-                                //                       orElse: () => PmTaskListModel(
-                                //                           Task_id: 00),
-                                //                     )
-                                //                     ?.status_id ==
-                                //                 405
-                                //             ? ColorValues.approveStatusColor
-                                //             :
-                                ColorValues.addNewColor,
+                            color: controller.pmTaskList
+                                        .firstWhere(
+                                          (e) => e?.id == pmTaskDetails?.id,
+                                          orElse: () => PmTaskListModel(id: 00),
+                                        )
+                                        ?.status ==
+                                    164
+                                ? ColorValues.linktopermitColor
+                                : controller.pmTaskList
+                                            .firstWhere(
+                                              (e) => e?.id == pmTaskDetails?.id,
+                                              orElse: () =>
+                                                  PmTaskListModel(id: 00),
+                                            )
+                                            ?.status ==
+                                        162
+                                    ? ColorValues.appLightBlueColor
+                                    : controller.pmTaskList
+                                                .firstWhere(
+                                                  (e) =>
+                                                      e?.id ==
+                                                      pmTaskDetails?.id,
+                                                  orElse: () =>
+                                                      PmTaskListModel(id: 00),
+                                                )
+                                                ?.status ==
+                                            163
+                                        ? ColorValues.appYellowColor
+                                        : controller.pmTaskList
+                                                    .firstWhere(
+                                                      (e) =>
+                                                          e?.id ==
+                                                          pmTaskDetails?.id,
+                                                      orElse: () =>
+                                                          PmTaskListModel(
+                                                              id: 00),
+                                                    )
+                                                    ?.status ==
+                                                167
+                                            ? ColorValues.approveStatusColor
+                                            : controller.pmTaskList
+                                                        .firstWhere(
+                                                          (e) =>
+                                                              e?.id ==
+                                                              pmTaskDetails?.id,
+                                                          orElse: () =>
+                                                              PmTaskListModel(
+                                                                  id: 00),
+                                                        )
+                                                        ?.status ==
+                                                    165
+                                                ? ColorValues.closeColor
+                                                : controller.pmTaskList
+                                                            .firstWhere(
+                                                              (e) =>
+                                                                  e?.id ==
+                                                                  pmTaskDetails
+                                                                      ?.id,
+                                                              orElse: () =>
+                                                                  PmTaskListModel(
+                                                                      id: 00),
+                                                            )
+                                                            ?.status ==
+                                                        169
+                                                    ? ColorValues
+                                                        .approveStatusColor
+                                                    : controller.pmTaskList
+                                                                .firstWhere(
+                                                                  (e) =>
+                                                                      e?.id ==
+                                                                      pmTaskDetails
+                                                                          ?.id,
+                                                                  orElse: () =>
+                                                                      PmTaskListModel(
+                                                                          id: 00),
+                                                                )
+                                                                ?.status ==
+                                                            168
+                                                        ? ColorValues
+                                                            .rejectedStatusColor
+                                                        : ColorValues
+                                                            .addNewColor,
                             borderRadius: BorderRadius.circular(4),
                           ),
                           child: Text(
