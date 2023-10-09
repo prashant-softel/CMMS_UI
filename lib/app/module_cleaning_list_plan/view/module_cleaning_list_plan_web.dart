@@ -540,21 +540,14 @@ class ModuleCleaningPlanListDataSource extends DataTableSource {
                           color: ColorValues.viewColor,
                           icon: Icons.remove_red_eye_outlined,
                           message: 'view',
-                          // onPress: () {
-                          //   int id =
-                          //       ModuleCleaningPlanningListDetails?.planId ?? 0;
-                          //   if (id != 0) {
-                          //     Get.toNamed(Routes.purchaseGoodsorderView,
-                          //         arguments: {'id': id});
-                          //   }
-                          // },
-                          // onPress: () {
-                          //   // controller.viewAddGoodsOrdersDetails(
-                          //   //     id: int.tryParse(
-                          //   //         '${record[0]}'));
-                          //   // Get.toNamed(Routes
-                          //   //     .viewGoodsOrders);
-                          // },
+                          onPress: () {
+                            int id =
+                                ModuleCleaningPlanningListDetails?.planId ?? 0;
+                            if (id != 0) {
+                              Get.toNamed(Routes.viewMcPlaning,
+                                  arguments: {'id': id});
+                            }
+                          },
                         ),
                         TableActionButton(
                           color: ColorValues.editColor,
@@ -564,7 +557,7 @@ class ModuleCleaningPlanListDataSource extends DataTableSource {
                             int id =
                                 ModuleCleaningPlanningListDetails?.planId ?? 0;
                             if (id != 0) {
-                              Get.toNamed(Routes.GoodsOrdersReqDetailsScreen,
+                              Get.toNamed(Routes.moduleCleaningPlanning,
                                   arguments: {"id": id});
                             }
                           },
