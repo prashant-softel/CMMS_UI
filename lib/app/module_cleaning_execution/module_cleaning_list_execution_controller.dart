@@ -162,9 +162,11 @@ class ModuleCleaningListExecutionController extends GetxController {
     getMCTaskList(facilityId, formattedFromdate, formattedTodate, false);
   }
 
-  Future<void> viewMCExecution({int? id}) async {
-    Get.toNamed(Routes.viewModuleCleaningExecutionScreen, arguments: id);
+  Future<void> viewMCExecution({int? id,  planId}) async {
+    Get.toNamed(Routes.viewModuleCleaningExecutionScreen, arguments: {"id": id, "planId": planId});
     print('Argument$id');
+    
+    print('Argument$planId');
   }
 
    

@@ -96,9 +96,13 @@ class viewModuleCleaningExecutionController extends GetxController {
 
   ///
   int? id = 0;
+  int? planId = 0;
   @override
   void onInit() async {
-    id = Get.arguments;
+    id = Get.arguments['id'];
+    planId = Get.arguments['planId'];
+    print('Id:$id');
+    print('PlanId:$planId');
     print('View MC Execution_Id:$id');
     facilityIdStreamSubscription = homeController.facilityId$.listen((event) {
       facilityId = event;
@@ -150,7 +154,7 @@ class viewModuleCleaningExecutionController extends GetxController {
     /// TODO: CHANGE THESE VALUES
     int moduleType = 81;
     // int tempModuleType = 21;
-    int id = Get.arguments;
+    // int id = Get.arguments;
     //
     historyList?.value = await viewModuleCleaningExecutionPresenter.getMCExecutionHistory(
           // tempModuleType,
