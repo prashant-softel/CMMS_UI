@@ -3224,7 +3224,7 @@ class Repository {
   //   }
   // }
 
-   Future<Map<String, dynamic>> permitRejectButton(
+  Future<Map<String, dynamic>> permitRejectButton(
     rejectExtendPermitJsonString,
     int? id,
     String? ptwStatus,
@@ -8066,7 +8066,6 @@ class Repository {
           auth: auth,
           isLoading: isLoading,
           jobTypeJsonString: jobTypeJsonString);
-           
 
       if (!res.hasError) {
         return true;
@@ -8081,18 +8080,16 @@ class Repository {
     }
   }
 
-///Create Safety Measure
-  Future<bool> createSafetyMeasure({
-    bool? isLoading, 
-    safetyMeasurelistJsonString
-    }) async {
+  ///Create Safety Measure
+  Future<bool> createSafetyMeasure(
+      {bool? isLoading, safetyMeasurelistJsonString}) async {
     try {
       final auth = await getSecuredValue(LocalKeys.authToken);
       final res = await _dataRepository.createSafetyMeasure(
           auth: auth,
           isLoading: isLoading,
           safetyMeasurelistJsonString: safetyMeasurelistJsonString);
-          print({"SafetyMeasureResponse:", res.data});
+      print({"SafetyMeasureResponse:", res.data});
 
       if (!res.hasError) {
         return true;
@@ -8356,7 +8353,7 @@ class Repository {
                     PmPlanListModel.fromJson(Map<String, dynamic>.from(m)))
                 .toList();
         // print({"object", _PmPlanListModelList});
-        return _PmPlanListModelList;
+        return _PmPlanListModelList.reversed.toList();
       } else {
         Utility.showDialog(res.errorCode.toString() + 'getPmPlanList');
         return [];
