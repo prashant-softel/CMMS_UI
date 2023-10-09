@@ -33,14 +33,12 @@ class SafetyQuestionsListController extends GetxController {
 
   SafetyMeasureListModel? selectedItem;
 
-
   Rx<bool> isTitleInvalid = false.obs;
   Rx<bool> isDescriptionInvalid = false.obs;
   Rx<bool> isFormInvalid = false.obs;
 
   var titleCtrlr = TextEditingController();
   var descriptionCtrlr = TextEditingController();
-
 
   ////
   RxBool isCheckedRequire = false.obs;
@@ -49,17 +47,16 @@ class SafetyQuestionsListController extends GetxController {
         !isCheckedRequire.value; // Toggle the checkbox state
   }
 
-  var type2 = <TypeModel>[
-    TypeModel(name: "Please Select", id: 0),
-    TypeModel(name: 'Dry', id: 1),
-    TypeModel(name: 'Wet', id: 2),
-  ];
+  // var type2 = <TypeModel>[
+  //   TypeModel(name: "Please Select", id: 0),
+  //   TypeModel(name: 'Dry', id: 1),
+  //   TypeModel(name: 'Wet', id: 2),
+  // ];
 
   Map<String, TypeModel> typedropdownMapperData = {};
 
-
-    //checkbox
-   RxBool isChecked = true.obs;
+  //checkbox
+  RxBool isChecked = true.obs;
 
   Rx<String> selectedequipment = ''.obs;
   Rx<bool> isSelectedequipment = true.obs;
@@ -99,27 +96,27 @@ class SafetyQuestionsListController extends GetxController {
       facilityId = event;
       print('FacilityIdSafetyQuestion$facilityId');
       Future.delayed(Duration(seconds: 1), () {
-       
         getTypePermitList();
         // getSafetyMeasureList(true,selectedTypePermitId!);
       });
-      
+
       // getPreventiveCheckList(facilityId, type, true);
     });
 
     super.onInit();
   }
 
-   void checkForm() {
-    if(isTitleInvalid.value == true ){ //|| isDescriptionInvalid.value == true
+  void checkForm() {
+    if (isTitleInvalid.value == true) {
+      //|| isDescriptionInvalid.value == true
       isFormInvalid.value = true;
     } else {
       isFormInvalid.value = false;
     }
   }
 
-   Future<bool> createSafetyMeasure() async {
-    if (titleCtrlr.text.trim() == '' ) {
+  Future<bool> createSafetyMeasure() async {
+    if (titleCtrlr.text.trim() == '') {
       isTitleInvalid.value = true;
       isFormInvalid.value = true;
       // isDescriptionInvalid.value = true;
@@ -136,7 +133,8 @@ class SafetyQuestionsListController extends GetxController {
     if (isFormInvalid.value == true) {
       return false;
     }
-    if (titleCtrlr.text.trim() == '' ) {     //|| descriptionCtrlr.text.trim() == ''
+    if (titleCtrlr.text.trim() == '') {
+      //|| descriptionCtrlr.text.trim() == ''
       Fluttertoast.showToast(
           msg: "Please enter required field", fontSize: 16.0);
     } else {
@@ -148,11 +146,10 @@ class SafetyQuestionsListController extends GetxController {
           // description: "",
           permitType: selectedTypePermitId,
           input: 1,
-          required: 1
-        
-      );
+          required: 1);
       print("OUT ");
-      var safetyMeasurelistJsonString = createSafetyMeasure.toJson(); //createCheckPointToJson([createCheckpoint]);
+      var safetyMeasurelistJsonString = createSafetyMeasure
+          .toJson(); //createCheckPointToJson([createCheckpoint]);
 
       print({"safetyMeasureJsonString", safetyMeasurelistJsonString});
       await safetyQuestionsListPresenter.createSafetyMeasure(
@@ -164,16 +161,12 @@ class SafetyQuestionsListController extends GetxController {
     return true;
   }
 
-  dynamic
-
-  onFetchNameFromId(dynamic value) {
+  dynamic onFetchNameFromId(dynamic value) {
     int permitTypeIndex = typePermitList.indexWhere((x) => x?.id == value);
-    selectedTypePermit.value =
-        typePermitList[permitTypeIndex]?.name ?? '';
+    selectedTypePermit.value = typePermitList[permitTypeIndex]?.name ?? '';
     // selectedBusinessType.value = value;
     return selectedTypePermit.value;
   }
-
 
   void isDeleteDialog({String? safetyMeasure_id, String? safetyMeasure}) {
     Get.dialog(
@@ -212,7 +205,7 @@ class SafetyQuestionsListController extends GetxController {
                 onPressed: () {
                   deleteSafetyMeasure(safetyMeasure_id).then((value) {
                     Get.back();
-                    getSafetyMeasureList(true,selectedTypePermitId!);
+                    getSafetyMeasureList(true, selectedTypePermitId!);
                   });
                 },
                 child: Text('YES'),
@@ -234,8 +227,8 @@ class SafetyQuestionsListController extends GetxController {
     }
   }
 
-
-  Future<void> getSafetyMeasureList(bool isLoading,int selectedTypePermitId) async {
+  Future<void> getSafetyMeasureList(
+      bool isLoading, int selectedTypePermitId) async {
     safetyMeasureList.value = <SafetyMeasureListModel>[];
     final _safetyMeasureList =
         await safetyQuestionsListPresenter.getSafetyMeasureList(
@@ -258,9 +251,8 @@ class SafetyQuestionsListController extends GetxController {
   }
 
   Future<void> getTypePermitList() async {
-    final _permitTypeList =
-        await safetyQuestionsListPresenter.getTypePermitList(
-            facility_id:facilityId 
+    final _permitTypeList = await safetyQuestionsListPresenter
+        .getTypePermitList(facility_id: facilityId
             // facility_id: 45
             );
     print('FacilityIdForSafetyQuestions$facilityId');
@@ -269,11 +261,10 @@ class SafetyQuestionsListController extends GetxController {
       for (var permitType in _permitTypeList) {
         typePermitList.add(permitType);
       }
-       selectedTypePermit.value = typePermitList[0]?.name ?? '';
+      selectedTypePermit.value = typePermitList[0]?.name ?? '';
       selectedTypePermitId = typePermitList[0]?.id;
       print('PermitTypeId:$selectedTypePermitId');
-      getSafetyMeasureList(true,selectedTypePermitId!);
-      
+      getSafetyMeasureList(true, selectedTypePermitId!);
     }
   }
 
@@ -294,10 +285,10 @@ class SafetyQuestionsListController extends GetxController {
           // selectedfrequencyId = frequencyList[frequencyIndex]?.id ?? 0;
         }
         break;
-        case RxList<TypePermitModel>:
+      case RxList<TypePermitModel>:
         {
           int typePermitIndex =
-          typePermitList.indexWhere((x) => x?.name == value);
+              typePermitList.indexWhere((x) => x?.name == value);
           selectedTypePermitId = typePermitList[typePermitIndex]?.id ?? 0;
           getSafetyMeasureList(true, selectedTypePermitId!);
           print('Permit Type Id:$selectedTypePermitId');
@@ -325,7 +316,7 @@ class SafetyQuestionsListController extends GetxController {
 
     // selectedfrequency.value = '';
     Future.delayed(Duration(seconds: 1), () {
-      getSafetyMeasureList(true,selectedTypePermitId!);
+      getSafetyMeasureList(true, selectedTypePermitId!);
     });
     Future.delayed(Duration(seconds: 5), () {
       isSuccess.value = false;
