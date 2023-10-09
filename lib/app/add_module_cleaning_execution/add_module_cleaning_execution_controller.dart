@@ -234,18 +234,6 @@ class AddModuleCleaningExecutionController extends GetxController {
   void updateMCScheduleExecution(
       {int? scheduleId, int? cleaningDay, int? waterUsed}) async {
     {
-      // checkForm();
-      // if (isFormInvalid.value) {
-      //   return;
-      // }
-      // String _title = htmlEscape.convert(titleTextCtrlr.text.trim());
-      // String _incidentDescription =
-      //     htmlEscape.convert(incidentreportDescriptionCtrlr.text.trim());
-      // String _insuranceRemark =
-      //     htmlEscape.convert(insuranceRemarkTextCtrlr.text.trim());
-      // String _insuranceAvailable =
-      //     htmlEscape.convert(insuranceAvailableTextCtrlr.text.trim());
-
       var remark;
       rowItem.value.forEach((element) {
         // items.add(item);
@@ -289,7 +277,6 @@ class AddModuleCleaningExecutionController extends GetxController {
       for (var permitType in _permitTypeList) {
         typePermitList.add(permitType);
       }
-      // selectedTypePermit.value = typePermitList[0]?.name ?? '';
     }
   }
 

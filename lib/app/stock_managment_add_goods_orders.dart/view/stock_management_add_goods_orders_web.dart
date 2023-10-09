@@ -1090,33 +1090,6 @@ class AddRowInGoodsOrder extends StatelessWidget {
                                                       FilteringTextInputFormatter
                                                           .digitsOnly
                                                     ],
-                                                    // enabled: controller
-                                                    //                     .getPurchaseDetailsByIDModel
-                                                    //                     .value
-                                                    //                     ?.status ==
-                                                    //                 306 &&
-                                                    //             varUserAccessModel.value.access_list!.where((e) => e.feature_id == UserAccessConstants.kGoodsFeatureId && e.add == UserAccessConstants.kHaveAddAccess).length >
-                                                    //                 0 ||
-                                                    //         controller
-                                                    //                     .getPurchaseDetailsByIDModel
-                                                    //                     .value
-                                                    //                     ?.status ==
-                                                    //                 307 &&
-                                                    //             varUserAccessModel.value.access_list!.where((e) => e.feature_id == UserAccessConstants.kGoodsFeatureId && e.add == UserAccessConstants.kHaveAddAccess).length >
-                                                    //                 0 ||
-                                                    //         controller
-                                                    //                     .getPurchaseDetailsByIDModel
-                                                    //                     .value
-                                                    //                     ?.status ==
-                                                    //                 309 &&
-                                                    //             varUserAccessModel
-                                                    //                     .value
-                                                    //                     .access_list!
-                                                    //                     .where((e) => e.feature_id == UserAccessConstants.kGoodsFeatureId && e.add == UserAccessConstants.kHaveAddAccess)
-                                                    //                     .length >
-                                                    //                 0
-                                                    //     ? true
-                                                    //     : false,
                                                     maxLine: 1,
                                                     textController:
                                                         new TextEditingController(
