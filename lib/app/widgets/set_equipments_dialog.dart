@@ -1,8 +1,5 @@
 import 'package:cmms/app/module_cleaning_planning/module_cleaning_planning_controller.dart';
 import 'package:cmms/app/theme/color_values.dart';
-import 'package:cmms/app/widgets/custom_richtext.dart';
-import 'package:cmms/app/widgets/stock_dropdown.dart';
-import 'package:cmms/domain/models/submit_purchase_order_data_model.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -80,7 +77,12 @@ class SetEquipmentDialog extends GetView {
                     children: [
                   Row(
                     children: [
-                      Expanded(child: Text("Assets")),
+                      Expanded(
+                        child: Text(
+                          "Assets",
+                          style: TextStyle(color: Color(0xff31576D)),
+                        ),
+                      ),
                       Expanded(child: Text("Modules")),
                       Expanded(child: Text("Select Day")),
                     ],
