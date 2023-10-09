@@ -1,3 +1,4 @@
+import 'package:cmms/app/add_job/views/widgets/assigned_to_widget.dart';
 import 'package:cmms/app/app.dart';
 import 'package:cmms/app/create_pm_plan/create_pm_plan_controller.dart';
 import 'package:cmms/app/module_cleaning_planning/module_cleaning_planning_controller.dart';
@@ -205,25 +206,47 @@ class _ModuleCleaningPlanningWebState extends State<ModuleCleaningPlanningWeb> {
                                             children: [
                                               Row(
                                                 children: [
-                                                  Dimens.boxWidth10,
                                                   CustomRichText(
                                                       title: 'Created by:'),
                                                   Dimens.boxWidth10,
-                                                  SizedBox(
+                                                  Container(
+                                                    decoration: BoxDecoration(
+                                                      borderRadius:
+                                                          BorderRadius.circular(
+                                                              10),
+                                                      border: Border.all(
+                                                        color: Color.fromARGB(
+                                                            255, 227, 224, 224),
+                                                        width: 1,
+                                                      ),
+                                                      boxShadow: [
+                                                        BoxShadow(
+                                                          color: Color.fromARGB(
+                                                                  255,
+                                                                  236,
+                                                                  234,
+                                                                  234)
+                                                              .withOpacity(0.5),
+                                                          spreadRadius: 2,
+                                                          blurRadius: 5,
+                                                          offset: Offset(0, 2),
+                                                        ),
+                                                      ],
+                                                    ),
+                                                    width:
+                                                        (MediaQuery.of(context)
+                                                                .size
+                                                                .width *
+                                                            .2),
                                                     child: DropdownWebWidget(
-                                                      width:
-                                                          MediaQuery.of(context)
-                                                                  .size
-                                                                  .width /
-                                                              5,
                                                       controller: controller,
                                                       dropdownList: controller
-                                                          .frequencyList,
+                                                          .assignedToList,
                                                       isValueSelected: controller
-                                                          .isSelectedfrequency
+                                                          .isAssignedToSelected
                                                           .value,
                                                       selectedValue: controller
-                                                          .selectedfrequency
+                                                          .selectedAssignedTo
                                                           .value,
                                                       onValueChanged: controller
                                                           .onValueChanged,

@@ -1,5 +1,6 @@
 import 'package:cmms/app/module_cleaning_planning/module_cleaning_planning_controller.dart';
 import 'package:cmms/app/theme/color_values.dart';
+import 'package:cmms/app/widgets/custom_elevated_button.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -27,27 +28,27 @@ class SetEquipmentDialog extends GetView {
                 fontSize: 15,
               ),
             ),
-            Spacer(),
-            Container(
-              width: 150,
-              height: 25,
-              margin: Dimens.edgeInsets0_0_16_0,
-              child: TextField(
-                decoration: InputDecoration(
-                  enabledBorder: const OutlineInputBorder(
-                    borderSide:
-                        const BorderSide(color: Colors.grey, width: 0.0),
-                  ),
-                  focusedBorder: const OutlineInputBorder(
-                    borderSide:
-                        const BorderSide(color: Colors.grey, width: 0.0),
-                  ),
-                  contentPadding: Dimens.edgeInsets10_0_0_0,
-                  hintText: 'search'.tr,
-                  hintStyle: Styles.grey12,
-                ),
-              ),
-            ),
+            // Spacer(),
+            // Container(
+            //   width: 150,
+            //   height: 25,
+            //   margin: Dimens.edgeInsets0_0_16_0,
+            //   child: TextField(
+            //     decoration: InputDecoration(
+            //       enabledBorder: const OutlineInputBorder(
+            //         borderSide:
+            //             const BorderSide(color: Colors.grey, width: 0.0),
+            //       ),
+            //       focusedBorder: const OutlineInputBorder(
+            //         borderSide:
+            //             const BorderSide(color: Colors.grey, width: 0.0),
+            //       ),
+            //       contentPadding: Dimens.edgeInsets10_0_0_0,
+            //       hintText: 'search'.tr,
+            //       hintStyle: Styles.grey12,
+            //     ),
+            //   ),
+            // ),
           ],
         ),
         content: Builder(builder: (context) {
@@ -75,89 +76,94 @@ class SetEquipmentDialog extends GetView {
               child: SingleChildScrollView(
                 child: Column(
                     children: [
-                  Row(
-                    children: [
-                      Expanded(
-                        child: Text(
-                          "Assets",
-                          style: TextStyle(color: Color(0xff31576D)),
+                  Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: Row(
+                      children: [
+                        Expanded(
+                          child: Text(
+                            "Assets",
+                            style: TextStyle(color: Color(0xff31576D)),
+                          ),
                         ),
-                      ),
-                      Expanded(child: Text("Modules")),
-                      Expanded(child: Text("Select Day")),
-                    ],
+                        Expanded(
+                          child: Text("Modules",
+                              style: TextStyle(color: Color(0xff31576D))),
+                        ),
+                        Expanded(
+                            child: Text("Select Day",
+                                style: TextStyle(color: Color(0xff31576D)))),
+                      ],
+                    ),
                   )
                 ]..addAll(controller.equipmentList.value.map((e) {
-                        return Column(
-                          children: [
-                            Row(
-                              children: [
-                                Expanded(
-                                  child: GestureDetector(
-                                    onTap: () {
-                                      setState(
-                                        () {
-                                          e!.isExpanded = !e.isExpanded;
-                                        },
-                                      );
-                                    },
-                                    child: Row(
-                                      children: [
-                                        Text(
-                                          "${e?.invName}",
-                                          style: TextStyle(
-                                              fontSize: 12.0,
-                                              fontWeight: FontWeight.bold),
-                                        ),
-                                        Icon(e!.isExpanded
-                                            ? Icons.arrow_drop_down
-                                            : Icons.arrow_drop_up)
-                                      ],
+                        return Padding(
+                          padding: const EdgeInsets.only(left: 20),
+                          child: Column(
+                            children: [
+                              Row(
+                                children: [
+                                  Expanded(
+                                    child: GestureDetector(
+                                      onTap: () {
+                                        setState(
+                                          () {
+                                            e!.isExpanded = !e.isExpanded;
+                                          },
+                                        );
+                                      },
+                                      child: Row(
+                                        children: [
+                                          Text(
+                                            "${e?.invName}",
+                                            style: TextStyle(
+                                                fontSize: 12.0,
+                                                fontWeight: FontWeight.bold),
+                                          ),
+                                          Icon(e!.isExpanded
+                                              ? Icons.arrow_drop_down
+                                              : Icons.arrow_drop_up)
+                                        ],
+                                      ),
                                     ),
                                   ),
-                                ),
-                                Expanded(
-                                  child: Text(
-                                    "${e?.moduleQuantity}",
-                                    style: TextStyle(
-                                        fontSize: 12.0,
-                                        fontWeight: FontWeight.bold),
+                                  Expanded(
+                                    child: Text(
+                                      "${e?.moduleQuantity}",
+                                      style: TextStyle(
+                                          fontSize: 12.0,
+                                          fontWeight: FontWeight.bold),
+                                    ),
                                   ),
-                                ),
-                                Expanded(
-                                  child: DropdownButton<String>(
-                                    value: e.selectedDay,
-                                    onChanged: (newValue) {
-                                      setState(() {
-                                        e.selectedDay = newValue!;
-                                        e.smbs.forEach((element) {
-                                          element.selectedDay = newValue;
+                                  Expanded(
+                                    child: DropdownButton<String>(
+                                      value: e.selectedDay,
+                                      onChanged: (newValue) {
+                                        setState(() {
+                                          e.selectedDay = newValue!;
+                                          e.smbs.forEach((element) {
+                                            element.selectedDay = newValue;
+                                          });
                                         });
-                                      });
-                                    },
-                                    items: controller.days
-                                        .map(
-                                          (map) => DropdownMenuItem(
-                                            child: Text(map.name),
-                                            value: map.id,
-                                          ),
-                                        )
-                                        .toList(),
+                                      },
+                                      items: controller.days
+                                          .map(
+                                            (map) => DropdownMenuItem(
+                                              child: Text(map.name),
+                                              value: map.id,
+                                            ),
+                                          )
+                                          .toList(),
+                                    ),
                                   ),
-                                ),
-                              ],
-                            ),
-                            e.isExpanded
-                                ? Column(
-                                    children: []..addAll(
-                                        e.smbs!.map(
-                                          (smbItems) {
-                                            return Padding(
-                                              padding:
-                                                  const EdgeInsets.symmetric(
-                                                      horizontal: 20,
-                                                      vertical: 10),
-                                              child: Row(
+                                ],
+                              ),
+                              e.isExpanded
+                                  ? Column(
+                                      children: []..addAll(
+                                          e.smbs!.map(
+                                            (smbItems) {
+                                              return Row(
                                                 children: [
                                                   Expanded(
                                                       child: Text(
@@ -190,18 +196,53 @@ class SetEquipmentDialog extends GetView {
                                                     ),
                                                   ),
                                                 ],
-                                              ),
-                                            );
-                                          },
+                                              );
+                                            },
+                                          ),
                                         ),
-                                      ),
-                                  )
-                                : Dimens.box0
-                          ],
+                                    )
+                                  : Dimens.box0
+                            ],
+                          ),
                         );
                       }))),
               ));
         }),
+        actions: [
+          Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Container(
+                height: 35,
+                child: CustomElevatedButton(
+                  backgroundColor: ColorValues.greenColor,
+                  text: 'Submit',
+                  onPressed: () {
+                    // controller.addUser();
+                    //  controller.saveAccessLevel();
+                  },
+                ),
+              ),
+              Dimens.boxWidth20,
+              Container(
+                height: 35,
+                child: CustomElevatedButton(
+                  backgroundColor: ColorValues.redColor,
+                  text: "Cancel",
+                  onPressed: () {
+                    final _flutterSecureStorage =
+                        // const FlutterSecureStorage();
+
+                        // _flutterSecureStorage.delete(
+                        // key: "userId");
+
+                        Get.back();
+                  },
+                ),
+              ),
+            ],
+          ),
+        ],
       );
     }));
   }

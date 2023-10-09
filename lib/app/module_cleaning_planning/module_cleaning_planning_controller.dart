@@ -1,22 +1,11 @@
 import 'dart:async';
 
-import 'package:cmms/app/create_pm_plan/create_pm_plan_presenter.dart';
 import 'package:cmms/app/module_cleaning_planning/module_cleaning_planning_presenter.dart';
-import 'package:cmms/app/navigators/app_pages.dart';
-import 'package:cmms/app/utils/utility.dart';
-import 'package:cmms/domain/models/create_pm_plan_model.dart';
 import 'package:cmms/domain/models/employee_model.dart';
 import 'package:cmms/domain/models/equipment_list_model.dart';
 import 'package:cmms/domain/models/frequency_model.dart';
-import 'package:cmms/domain/models/get_asset_data_list_model.dart';
-import 'package:cmms/domain/models/get_pm_plan_detail_model.dart';
-import 'package:cmms/domain/models/inventory_model.dart';
-import 'package:cmms/domain/models/preventive_checklist_model.dart';
 import 'package:cmms/domain/models/type_model.dart';
-import 'package:flutter/cupertino.dart';
-import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:get/get.dart';
-import '../../domain/models/facility_model.dart';
 import '../../domain/models/inventory_category_model.dart';
 import '../home/home_controller.dart';
 
@@ -31,6 +20,11 @@ class ModuleCleaningPlanningController extends GetxController {
   RxList<FrequencyModel?> frequencyList = <FrequencyModel>[].obs;
   Rx<List<List<Map<String, String>>>> rowItem =
       Rx<List<List<Map<String, String>>>>([]);
+  RxList<EmployeeModel?> assignedToList = <EmployeeModel>[].obs;
+  Rx<bool> isAssignedToSelected = true.obs;
+  Rx<String> selectedAssignedTo = ''.obs;
+  int selectedAssignedToId = 0;
+
   Rx<String> selectedfrequency = ''.obs;
   Rx<bool> isSelectedfrequency = true.obs;
   int selectedfrequencyId = 0;
@@ -43,17 +37,16 @@ class ModuleCleaningPlanningController extends GetxController {
 
   RxList<EquipmentListModel?> equipmentList = <EquipmentListModel?>[].obs;
   var days = <TypeModel>[
-    TypeModel(name: "Please Select", id: "0"),
-    TypeModel(name: 'Day 1', id: "1"),
-    TypeModel(name: 'Day 2', id: "2"),
-    TypeModel(name: 'Day 3', id: "3"),
+    TypeModel(name: 'Day 1', id: "0"),
+    TypeModel(name: 'Day 2', id: "1"),
+    TypeModel(name: 'Day 3', id: "2"),
   ];
   Map<String, TypeModel> typedropdownMapperData = {};
 
   var type = <TypeModel>[
     TypeModel(name: "Please Select", id: "0"),
-    TypeModel(name: 'Dry', id: "1"),
-    TypeModel(name: 'Wet', id: "2"),
+    TypeModel(name: 'Dry', id: "0"),
+    TypeModel(name: 'Wet', id: "1"),
   ];
   // var days = <TypeModel>[
   //   TypeModel(name: "Please Select", id: "0"),
@@ -84,6 +77,9 @@ class ModuleCleaningPlanningController extends GetxController {
         Future.delayed(Duration(seconds: 1), () {
           getEquipmentModelList(facilityId, true);
         });
+        Future.delayed(Duration(seconds: 1), () {
+          getAssignedToList();
+        });
       });
       super.onInit();
     } catch (e) {
@@ -113,6 +109,22 @@ class ModuleCleaningPlanningController extends GetxController {
     update(['equipment_list']);
   }
 
+  Future<void> getAssignedToList() async {
+    assignedToList.clear();
+    final _assignedToList =
+        await moduleCleaningPlanningPresenter.getAssignedToList(
+      facilityId: facilityId,
+    );
+
+    if (_assignedToList != null) {
+      for (var assignedTo in _assignedToList) {
+        assignedToList.add(assignedTo);
+      }
+      // selectedAssignedTo.value =
+      //     getAssignedToName(jobDetailsModel.value?.assignedId ?? 0) ?? '';
+    }
+  }
+
   Future<void> getFrequencyList() async {
     final list =
         await moduleCleaningPlanningPresenter.getFrequencyList(isLoading: true);
@@ -133,6 +145,17 @@ class ModuleCleaningPlanningController extends GetxController {
               frequencyList.indexWhere((x) => x?.name == value);
           selectedfrequencyId = frequencyList[frequencyIndex]?.id ?? 0;
           selectedfrequency.value = value;
+        }
+        break;
+      case RxList<EmployeeModel>:
+        {
+          int assignedToIndex =
+              assignedToList.indexWhere((x) => x?.name == value);
+          selectedAssignedToId = assignedToList[assignedToIndex]?.id ?? 0;
+          if (selectedAssignedToId != 0) {
+            isAssignedToSelected.value = true;
+          }
+          selectedAssignedTo.value = value;
         }
         break;
 
