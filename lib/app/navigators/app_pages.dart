@@ -58,6 +58,8 @@ import 'package:cmms/app/mrs_view/mrs_view_binding.dart';
 import 'package:cmms/app/mrs_view/view/mrs_view_screen.dart';
 import 'package:cmms/app/pm_plan_list/pm_plan_list_binding.dart';
 import 'package:cmms/app/request_goods_orders_list.dart/request_goods_orders_list_binding.dart';
+import 'package:cmms/app/view_mc_plan/view/view_mc_planning_screen.dart';
+import 'package:cmms/app/view_mc_plan/view_mc_planning_binding.dart';
 import 'package:cmms/app/view_request_orders/request_goods_orders_view_binding.dart';
 import 'package:cmms/app/role_access/role_access_binding.dart';
 import 'package:cmms/app/role_access/view/role_access_screen.dart';
@@ -876,6 +878,11 @@ class AppPages {
       name: _Paths.risktypemaster,
       page: RiskTypeScreen.new,
       binding: RiskTypeBinding(),
+    ),
+    GetPage<dynamic>(
+      name: _Paths.viewMcPlaning,
+      page: ViewMcPlaningScreen.new,
+      binding: ViewMcPlaningBinding(),
     ),
   ];
 }
