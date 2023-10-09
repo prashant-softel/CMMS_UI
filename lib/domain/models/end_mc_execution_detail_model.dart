@@ -2,13 +2,11 @@ import 'dart:convert';
 
 import 'package:cmms/app/utils/utility.dart';
 
-
-
 EndMCExecutionDetailsModel endMCExecutionDetailsModelFromJson(String str) =>
     EndMCExecutionDetailsModel.fromJson(json.decode(str));
 
-String endMCExecutionDetailsModelToJson(EndMCExecutionDetailsModel data) => json.encode(data.toJson());
-
+String endMCExecutionDetailsModelToJson(EndMCExecutionDetailsModel data) =>
+    json.encode(data.toJson());
 
 class EndMCExecutionDetailsModel {
   int? id;
@@ -22,32 +20,30 @@ class EndMCExecutionDetailsModel {
   String? startedBy;
   String? startedAt;
   String? abandonedBy;
-  String? abandonedAt; 
+  String? abandonedAt;
   int? status;
   String? status_short;
   String? status_long;
-  List<Schedules?>? schedules;
- 
+  List<Schedules> schedules;
 
-   EndMCExecutionDetailsModel(
-       {
-      this.id,
-      this.executionId,
-      this.title,
-      this.description,
-      this.frequency,
-      this.noOfDays,
-      this.plannedBy,
-      this.plannedAt,
-      this.startedBy,
-      this.startedAt,
-      this.abandonedBy,
-      this.abandonedAt,
-      this.status,
-      this.status_short,
-      this.status_long,
-      this.schedules,
-       });
+  EndMCExecutionDetailsModel({
+    this.id,
+    this.executionId,
+    this.title,
+    this.description,
+    this.frequency,
+    this.noOfDays,
+    this.plannedBy,
+    this.plannedAt,
+    this.startedBy,
+    this.startedAt,
+    this.abandonedBy,
+    this.abandonedAt,
+    this.status,
+    this.status_short,
+    this.status_long,
+    this.schedules = const [],
+  });
 
   factory EndMCExecutionDetailsModel.fromJson(Map<String, dynamic> json) =>
       EndMCExecutionDetailsModel(
@@ -66,10 +62,10 @@ class EndMCExecutionDetailsModel {
         status: json['status'],
         status_short: json['status_short'],
         status_long: json['status_long'],
-        schedules: json["schedules"]!=null? List<Schedules>.from(
-            json["schedules"].map((x) => Schedules.fromJson(x))):[],
-        
-       
+        schedules: json["schedules"] != null
+            ? List<Schedules>.from(
+                json["schedules"].map((x) => Schedules.fromJson(x)))
+            : [],
       );
 
   Map<String, dynamic> toJson() => {
@@ -89,11 +85,8 @@ class EndMCExecutionDetailsModel {
         "status_short": status_short,
         "status_long": status_long,
         "schedules": List<dynamic>.from(schedules!.map((x) => x)),
-
       };
 }
-
-
 
 class Schedules {
   Schedules({
@@ -111,8 +104,6 @@ class Schedules {
     this.remark,
     this.status_short,
     this.equipments,
-    
-    
   });
 
   int? id;
@@ -130,8 +121,6 @@ class Schedules {
   String? status_short;
   List<EquipmentsList?>? equipments;
 
-
-
   factory Schedules.fromJson(Map<String, dynamic> json) => Schedules(
         id: json["id"],
         scheduleId: json['scheduleId'],
@@ -145,10 +134,11 @@ class Schedules {
         waterUsed: json['waterUsed'],
         execution_date: Utility.getFormatedyearMonthDay(json['execution_date']),
         remark: json['remark'] ?? '',
-        status_short:json['status_short'],
-        equipments: json["equipments"]!=null? List<EquipmentsList>.from(
-            json["equipments"].map((x) => EquipmentsList.fromJson(x))):[],
-
+        status_short: json['status_short'],
+        equipments: json["equipments"] != null
+            ? List<EquipmentsList>.from(
+                json["equipments"].map((x) => EquipmentsList.fromJson(x)))
+            : [],
       );
 
   Map<String, dynamic> toJson() => {
@@ -166,7 +156,6 @@ class Schedules {
         "remark": remark,
         "status_short": status_short,
         "equipments": List<dynamic>.from(equipments!.map((x) => x)),
-
       };
 }
 
@@ -179,7 +168,6 @@ class EquipmentsList {
     this.cleaningDay,
     this.moduleQuantity,
     this.short_status,
-    
   });
 
   int? id;
@@ -189,16 +177,13 @@ class EquipmentsList {
   int? moduleQuantity;
   String? short_status;
 
-
-
   factory EquipmentsList.fromJson(Map<String, dynamic> json) => EquipmentsList(
         id: json["id"],
         equipmentName: json['equipmentName'],
         parentId: json['parentId'],
         cleaningDay: json['cleaningDay'],
         moduleQuantity: json['moduleQuantity'],
-        short_status:json['short_status'],
-       
+        short_status: json['short_status'],
       );
 
   Map<String, dynamic> toJson() => {
@@ -208,17 +193,9 @@ class EquipmentsList {
         "cleaningDay": cleaningDay,
         "moduleQuantity": moduleQuantity,
         "short_status": short_status,
-
       };
 }
 
-
-
-
-
-
-
 String endExecutionModelToJson(Schedules data) => json.encode(data.toJson());
-String endExecutionDetailModelToJson(EquipmentsList data) => json.encode(data.toJson());
-
-
+String endExecutionDetailModelToJson(EquipmentsList data) =>
+    json.encode(data.toJson());
