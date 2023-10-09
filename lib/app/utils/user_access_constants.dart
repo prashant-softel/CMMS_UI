@@ -42,15 +42,15 @@ abstract class UserAccessConstants {
 
   static int kMrsFeatureId = 15;
   static String kFeatureMrsName = "SM MRS";
-  //MRS
+  //Pm plan
 
   static int kPmPlanFeatureId = 38;
   static String kFeaturePmPlanName = "PM Plan";
-  //MRS
+  //pm task
 
-  static int kPmTaskFeatureId = 9;
-  static String kFeaturePmTaskName = "PM Schedule View";
-  //MRS
+  static int kPmTaskFeatureId = 39;
+  static String kFeaturePmTaskName = "PM Task";
+  //pm execution
 
   static int kPmExecutionFeatureId = 10;
   static String kFeaturePmExecutionName = "PM Execution";

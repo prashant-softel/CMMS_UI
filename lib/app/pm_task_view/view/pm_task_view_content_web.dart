@@ -101,10 +101,45 @@ class PreventiveMaintenanceTaskViewContentWeb
                             Container(
                               height: 30,
                               child: CustomElevatedButton(
-                                backgroundColor: ColorValues.appLightBlueColor,
+                                backgroundColor: controller
+                                            .pmtaskViewModel.value?.status ==
+                                        164
+                                    ? ColorValues.linktopermitColor
+                                    : controller.pmtaskViewModel.value
+                                                ?.status ==
+                                            162
+                                        ? ColorValues.appLightBlueColor
+                                        : controller.pmtaskViewModel.value
+                                                    ?.status ==
+                                                163
+                                            ? ColorValues.appYellowColor
+                                            : controller.pmtaskViewModel.value
+                                                        ?.status ==
+                                                    167
+                                                ? ColorValues.approveStatusColor
+                                                : controller.pmtaskViewModel
+                                                            .value?.status ==
+                                                        165
+                                                    ? ColorValues.closeColor
+                                                    : controller
+                                                                .pmtaskViewModel
+                                                                .value
+                                                                ?.status ==
+                                                            169
+                                                        ? ColorValues
+                                                            .approveStatusColor
+                                                        : controller
+                                                                    .pmtaskViewModel
+                                                                    .value
+                                                                    ?.status ==
+                                                                168
+                                                            ? ColorValues
+                                                                .rejectedStatusColor
+                                                            : ColorValues
+                                                                .addNewColor,
                                 onPressed: () async {},
                                 text:
-                                    "${controller.pmtaskViewModel.value?.status_short ?? ""}${controller.pmtaskViewModel.value?.status}",
+                                    "${controller.pmtaskViewModel.value?.status_short ?? ""}",
                               ),
                             ),
                           ],
@@ -891,8 +926,7 @@ class PreventiveMaintenanceTaskViewContentWeb
                         varUserAccessModel.value.access_list!
                                 .where((e) =>
                                     e.feature_id ==
-                                        UserAccessConstants
-                                            .kFeaturePmTaskName &&
+                                        UserAccessConstants.kPmTaskFeatureId &&
                                     e.add == UserAccessConstants.kHaveAddAccess)
                                 .length >
                             0
@@ -913,7 +947,7 @@ class PreventiveMaintenanceTaskViewContentWeb
                                     .where((e) =>
                                         e.feature_id ==
                                             UserAccessConstants
-                                                .kFeaturePmTaskName &&
+                                                .kPmTaskFeatureId &&
                                         e.add ==
                                             UserAccessConstants.kHaveAddAccess)
                                     .length >
@@ -923,7 +957,7 @@ class PreventiveMaintenanceTaskViewContentWeb
                                     .where((e) =>
                                         e.feature_id ==
                                             UserAccessConstants
-                                                .kFeaturePmTaskName &&
+                                                .kPmTaskFeatureId &&
                                         e.add ==
                                             UserAccessConstants.kHaveAddAccess)
                                     .length >
@@ -933,7 +967,7 @@ class PreventiveMaintenanceTaskViewContentWeb
                                     .where((e) =>
                                         e.feature_id ==
                                             UserAccessConstants
-                                                .kFeaturePmTaskName &&
+                                                .kPmTaskFeatureId &&
                                         e.add ==
                                             UserAccessConstants.kHaveAddAccess)
                                     .length >
