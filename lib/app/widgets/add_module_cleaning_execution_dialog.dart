@@ -71,13 +71,13 @@ class AddModuleCleaningExecutionDialog extends GetView {
                 )
               ],
             ),
-            Dimens.boxWidth10,
+            Dimens.boxWidth200,
             Row(
               children: [
                 CustomRichText(title: 'Water Used: '),
                 Dimens.boxWidth20,
                 Text('1000 ltr'),
-                Dimens.boxWidth50,
+                // Dimens.boxWidth50,
                 // Container(
                 //     decoration: BoxDecoration(
                 //       borderRadius: BorderRadius.circular(10),
@@ -99,29 +99,29 @@ class AddModuleCleaningExecutionDialog extends GetView {
                 //     child: LoginCustomTextfield(
                 //         // textController: controller.girNoCtrlr,
                 //         )),
-                Dimens.boxWidth10,
-                Container(
-                  width: 150,
-                  height: 25,
-                  margin: Dimens.edgeInsets0_0_16_0,
-                  child: TextField(
-                    // onChanged: (value) =>
-                    //     controller.search(value),
-                    decoration: InputDecoration(
-                      enabledBorder: const OutlineInputBorder(
-                        borderSide:
-                            const BorderSide(color: Colors.grey, width: 0.0),
-                      ),
-                      focusedBorder: const OutlineInputBorder(
-                        borderSide:
-                            const BorderSide(color: Colors.grey, width: 0.0),
-                      ),
-                      contentPadding: Dimens.edgeInsets10_0_0_0,
-                      hintText: 'search'.tr,
-                      hintStyle: Styles.grey12,
-                    ),
-                  ),
-                ),
+                // Dimens.boxWidth10,
+                // Container(
+                //   width: 150,
+                //   height: 25,
+                //   margin: Dimens.edgeInsets0_0_16_0,
+                //   child: TextField(
+                //     // onChanged: (value) =>
+                //     //     controller.search(value),
+                //     decoration: InputDecoration(
+                //       enabledBorder: const OutlineInputBorder(
+                //         borderSide:
+                //             const BorderSide(color: Colors.grey, width: 0.0),
+                //       ),
+                //       focusedBorder: const OutlineInputBorder(
+                //         borderSide:
+                //             const BorderSide(color: Colors.grey, width: 0.0),
+                //       ),
+                //       contentPadding: Dimens.edgeInsets10_0_0_0,
+                //       hintText: 'search'.tr,
+                //       hintStyle: Styles.grey12,
+                //     ),
+                //   ),
+                // ),
               ],
             ),
           ],

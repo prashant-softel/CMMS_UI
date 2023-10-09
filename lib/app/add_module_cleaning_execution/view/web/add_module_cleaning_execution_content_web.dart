@@ -19,8 +19,7 @@ import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:scrollable_table_view/scrollable_table_view.dart';
 
-class AddModuleCleaningExecutionContentWeb
-    extends GetView<AddModuleCleaningExecutionController> {
+class AddModuleCleaningExecutionContentWeb extends GetView<AddModuleCleaningExecutionController> {
   AddModuleCleaningExecutionContentWeb({super.key});
 
   // final homeController = Get.find<HomeController>();
@@ -54,8 +53,7 @@ class AddModuleCleaningExecutionContentWeb
                       ),
                       boxShadow: [
                         BoxShadow(
-                          color: Color.fromARGB(255, 236, 234, 234)
-                              .withOpacity(0.5),
+                          color: Color.fromARGB(255, 236, 234, 234).withOpacity(0.5),
                           spreadRadius: 2,
                           blurRadius: 5,
                           offset: Offset(0, 2),
@@ -76,11 +74,9 @@ class AddModuleCleaningExecutionContentWeb
                           onTap: () {
                             Get.back();
                           },
-                          child: Text(" / MODULE CLEANING EXECUTION LIST",
-                              style: Styles.greyMediumLight12),
+                          child: Text(" / MODULE CLEANING EXECUTION LIST", style: Styles.greyMediumLight12),
                         ),
-                        Text(" / CREATE MODULE CLEANING EXECUTION",
-                            style: Styles.greyMediumLight12)
+                        Text(" / CREATE MODULE CLEANING EXECUTION", style: Styles.greyMediumLight12)
                       ],
                     ),
                   ),
@@ -100,112 +96,182 @@ class AddModuleCleaningExecutionContentWeb
                                 return Obx(
                                   () => Column(
                                     children: [
-                                      CustomAppBar(
-                                        title:
-                                            'Create Module Cleaning Execution'
-                                                .tr,
-                                      ),
-                                      Dimens.boxHeight20,
+                                     
                                       Row(
-                                        crossAxisAlignment:
-                                            CrossAxisAlignment.start,
-                                        mainAxisAlignment:
-                                            MainAxisAlignment.center,
                                         children: [
-                                          Column(
-                                            crossAxisAlignment:
-                                                CrossAxisAlignment.end,
+                                          Text('Create Module Cleaning Execution',
+                                          style: Styles.black17,),
+                                          Spacer(),
+                                          Container(
+                                            // height: 30,
+                                            // width: MediaQuery.of(context)
+                                            //         .size
+                                            //         .width /
+                                            //     5,
+                                            padding: EdgeInsets.all(5),
+                                            decoration: BoxDecoration(
+                                              borderRadius:
+                                                  BorderRadius.circular(10),
+                                              border: Border.all(
+                                                color: controller
+                                                                .mcExecutionDetailsModel
+                                                                .value
+                                                                ?.status ==
+                                                            380
+                                                       
+                                                    ? ColorValues.approveColor
+                                                    : ColorValues.appRedColor,
+                                                width: 1,
+                                              ),
+                                              boxShadow: [
+                                                BoxShadow(
+                                                  color: controller
+                                                                  .mcExecutionDetailsModel
+                                                                  .value
+                                                                  ?.status ==
+                                                              380 //125
+                                                         
+                                                      ? ColorValues.approveColor
+                                                      : ColorValues.appRedColor,
+                                                ),
+                                              ],
+                                            ),
+                                            child: Center(
+                                                child: Text(
+                                              '${controller.mcExecutionDetailsModel.value?.status_short}',
+                                              style: TextStyle(
+                                                  color: Colors.white),
+                                            )),
+                                          )
+                                       
+
+                                        ],
+                                      ),
+                                      Divider(color: ColorValues.lightGreyColor),
+                                      // Dimens.boxHeight20,
+                                      Row(
+                                        crossAxisAlignment: CrossAxisAlignment.start,
+                                        mainAxisAlignment: MainAxisAlignment.center,
+                                        children: [
+                                           Column(
+                                            crossAxisAlignment: CrossAxisAlignment.end,
                                             children: [
-                                              CustomRichText(
-                                                  title: 'Plan Title: '),
-                                              Dimens.boxHeight20,
-                                              CustomRichText(
-                                                  title: 'Frequency: '),
+                                              Text(
+                                                'Plan Id: ',
+                                                style: Styles.black17,
+                                              ),
+                                               Text(
+                                                'Schedule Id: ',
+                                                style: Styles.black17,
+                                              ),
+                                              
                                             ],
                                           ),
-                                          Column(
-                                            crossAxisAlignment:
-                                                CrossAxisAlignment.start,
+                                          
+                                           Column(
+                                            crossAxisAlignment: CrossAxisAlignment.start,
                                             children: [
+                                              Text(
+                                                ' ${controller.data['planId']}',
+                                                style: Styles.blue17,
+                                              ),
+                                              Text(
+                                                ' ${controller.data['id']}',
+                                                style: Styles.blue17,
+                                              ),
+                                            ],
+                                          ),
+                                          Spacer(),
+                                          Column(
+                                            crossAxisAlignment: CrossAxisAlignment.end,
+                                            children: [
+                                              Text(
+                                                'Plan Title: ',
+                                                style: Styles.black17,
+                                              ),
+                                               Text(
+                                                'Frequency: ',
+                                                style: Styles.black17,
+                                              ),
+                                              
+                                            ],
+                                          ),
+                                          
+                                          Column(
+                                            crossAxisAlignment: CrossAxisAlignment.start,
+                                            children: [
+                                              
                                               Text(
                                                 ' ${controller.mcExecutionDetailsModel.value?.title}',
-                                                style: TextStyle(
-                                                    color: Color.fromARGB(
-                                                        255, 5, 92, 163)),
+                                                style: Styles.blue17,
                                               ),
-                                              Dimens.boxHeight15,
                                               Text(
                                                 ' ${controller.mcExecutionDetailsModel.value?.frequency}',
-                                                style: TextStyle(
-                                                    color: Color.fromARGB(
-                                                        255, 5, 92, 163)),
+                                                style: Styles.blue17,
                                               ),
                                             ],
                                           ),
-                                          Dimens.boxWidth30,
+                                         Spacer(),
                                           Column(
-                                            crossAxisAlignment:
-                                                CrossAxisAlignment.end,
+                                            crossAxisAlignment: CrossAxisAlignment.end,
                                             children: [
-                                              CustomRichText(
-                                                  title: 'Planned By: '),
-                                              Dimens.boxHeight20,
-                                              CustomRichText(
-                                                  title: 'Start Date: '),
+                                              Text(
+                                                'Planned By: ',
+                                                style: Styles.black17,
+                                              ),
+                                              Text(
+                                                'Start Date Time: ',
+                                                style: Styles.black17,
+                                              ),
+                                              
                                             ],
                                           ),
+                                          
                                           Column(
-                                            crossAxisAlignment:
-                                                CrossAxisAlignment.start,
+                                            crossAxisAlignment: CrossAxisAlignment.start,
                                             children: [
                                               Text(
                                                 ' ${controller.mcExecutionDetailsModel.value?.plannedBy}',
-                                                style: TextStyle(
-                                                    color: Color.fromARGB(
-                                                        255, 5, 92, 163)),
+                                                style: Styles.blue17,
                                               ),
-                                              Dimens.boxHeight15,
                                               Text(
                                                 ' ${controller.startedAtDateTimeCtrlrWeb.text}',
-                                                style: TextStyle(
-                                                    color: Color.fromARGB(
-                                                        255, 5, 92, 163)),
+                                                style: Styles.blue17,
                                               ),
                                             ],
                                           ),
-                                          Dimens.boxWidth30,
+                                          Spacer(),
+                                          // Dimens.boxWidth30,
                                           Column(
-                                            crossAxisAlignment:
-                                                CrossAxisAlignment.end,
+                                            crossAxisAlignment: CrossAxisAlignment.end,
                                             children: [
-                                              CustomRichText(
-                                                  title:
-                                                      'Planning Date & Time: '),
-                                              Dimens.boxHeight20,
-                                              CustomRichText(
-                                                  title:
-                                                      'Execution started by: '),
+                                              Text(
+                                                'Planning Date Time: ',
+                                                style: Styles.black17,
+                                              ),
+                                              Text(
+                                                'Execution started by: ',
+                                                style: Styles.black17,
+                                              ),
+                                              
+                                              
                                             ],
                                           ),
+                                          
                                           Column(
-                                            crossAxisAlignment:
-                                                CrossAxisAlignment.start,
+                                            crossAxisAlignment: CrossAxisAlignment.start,
                                             children: [
                                               Text(
                                                 ' ${controller.plannedAtDateTimeCtrlrWeb.text}',
-                                                style: TextStyle(
-                                                    color: Color.fromARGB(
-                                                        255, 5, 92, 163)),
+                                                style: Styles.blue17,
                                               ),
-                                              Dimens.boxHeight15,
                                               Text(
                                                 ' ${controller.mcExecutionDetailsModel.value?.startedBy}',
-                                                style: TextStyle(
-                                                    color: Color.fromARGB(
-                                                        255, 5, 92, 163)),
+                                                style: Styles.blue17,
                                               ),
                                             ],
-                                          )
+                                          ),
+                                          Spacer(),
                                         ],
                                       ),
 
@@ -216,21 +282,16 @@ class AddModuleCleaningExecutionContentWeb
                                       Wrap(
                                         children: [
                                           Container(
-                                            height: 300,
-                                            width: MediaQuery.of(context)
-                                                    .size
-                                                    .width /
-                                                1.5,
+                                            margin: EdgeInsets.all(20),
+                                            width: Get.width,
                                             decoration: BoxDecoration(
                                               border: Border.all(
-                                                color: ColorValues
-                                                    .lightGreyColorWithOpacity35,
+                                                color: ColorValues.lightGreyColorWithOpacity35,
                                                 width: 1,
                                               ),
                                               boxShadow: [
                                                 BoxShadow(
-                                                  color: ColorValues
-                                                      .appBlueBackgroundColor,
+                                                  color: ColorValues.appBlueBackgroundColor,
                                                   spreadRadius: 2,
                                                   blurRadius: 5,
                                                   offset: Offset(0, 2),
@@ -240,22 +301,16 @@ class AddModuleCleaningExecutionContentWeb
                                             child: Column(
                                               children: [
                                                 Padding(
-                                                  padding: const EdgeInsets
-                                                          .symmetric(
-                                                      horizontal: 20,
-                                                      vertical: 5),
+                                                  padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 5),
                                                   child: Row(
                                                     children: [
-                                                      Text(
-                                                          "Schedule Execution"),
+                                                      Text("Schedule Execution"),
                                                       Spacer(),
                                                       GestureDetector(
                                                           onTap: () {
-                                                            controller
-                                                                .addRowItem();
+                                                            // controller.addRowItem();
                                                           },
-                                                          child: Icon(Icons
-                                                              .exposure_plus_1)),
+                                                          child: Icon(Icons.exposure_plus_1)),
                                                     ],
                                                   ),
                                                 ),
@@ -291,54 +346,38 @@ class AddModuleCleaningExecutionContentWeb
                                                     ].map((column) {
                                                       return TableViewColumn(
                                                         label: column,
-                                                        minWidth:
-                                                            Get.width * 0.12,
+                                                        minWidth: Get.width * 0.12,
                                                         height: Get.height / 2,
                                                       );
                                                     }).toList(),
-                                                    rows: controller
-                                                        .rowItem.value
-                                                        .map((record) {
+                                                    rows: controller.rowItem.value.map((record) {
                                                       return TableViewRow(
                                                         height: 70,
-                                                        cells: record
-                                                            .map((mapData) {
+                                                        cells: record.map((mapData) {
                                                           return TableViewCell(
-                                                            child: (mapData[
-                                                                        'key'] ==
-                                                                    "Schedule Id")
+                                                            child: (mapData['key'] == "Schedule Id")
                                                                 ? Column(
-                                                                    mainAxisAlignment:
-                                                                        MainAxisAlignment
-                                                                            .center,
-                                                                    crossAxisAlignment:
-                                                                        CrossAxisAlignment
-                                                                            .center,
+                                                                    mainAxisAlignment: MainAxisAlignment.center,
+                                                                    crossAxisAlignment: CrossAxisAlignment.center,
                                                                     children: [
                                                                       // Text(
                                                                       //     '1')
-                                                                    ]..addAll(controller
-                                                                        .listSchedules!
-                                                                        .map((element) =>
-                                                                            Row(
-                                                                              mainAxisSize: MainAxisSize.min,
-                                                                              mainAxisAlignment: MainAxisAlignment.start,
-                                                                              crossAxisAlignment: CrossAxisAlignment.start,
-                                                                              children: [
-                                                                                Text(
-                                                                                  "${element?.scheduleId}",
-                                                                                  style: TextStyle(color: Color.fromARGB(255, 5, 92, 163)),
-                                                                                ),
-                                                                              ],
-                                                                            ))),
+                                                                    ]..addAll(controller.listSchedules!.map((element) => Row(
+                                                                          mainAxisSize: MainAxisSize.min,
+                                                                          mainAxisAlignment: MainAxisAlignment.start,
+                                                                          crossAxisAlignment: CrossAxisAlignment.start,
+                                                                          children: [
+                                                                            Text(
+                                                                              "${element?.scheduleId}",
+                                                                              style: TextStyle(color: Color.fromARGB(255, 5, 92, 163)),
+                                                                            ),
+                                                                          ],
+                                                                        ))),
                                                                   )
-                                                                : (mapData['key'] ==
-                                                                        "Days")
+                                                                : (mapData['key'] == "Days")
                                                                     ? Column(
-                                                                        mainAxisAlignment:
-                                                                            MainAxisAlignment.center,
-                                                                        crossAxisAlignment:
-                                                                            CrossAxisAlignment.center,
+                                                                        mainAxisAlignment: MainAxisAlignment.center,
+                                                                        crossAxisAlignment: CrossAxisAlignment.center,
                                                                         children: [
                                                                           // Text(
                                                                           //     '1')
@@ -354,13 +393,10 @@ class AddModuleCleaningExecutionContentWeb
                                                                               ],
                                                                             ))),
                                                                       )
-                                                                    : (mapData['key'] ==
-                                                                            "Scheduled Module")
+                                                                    : (mapData['key'] == "Scheduled Module")
                                                                         ? Column(
-                                                                            mainAxisAlignment:
-                                                                                MainAxisAlignment.center,
-                                                                            crossAxisAlignment:
-                                                                                CrossAxisAlignment.center,
+                                                                            mainAxisAlignment: MainAxisAlignment.center,
+                                                                            crossAxisAlignment: CrossAxisAlignment.center,
                                                                             children: [
                                                                               // Text('2000')
                                                                             ]..addAll(controller.listSchedules!.map((element) => Row(
@@ -375,8 +411,7 @@ class AddModuleCleaningExecutionContentWeb
                                                                                   ],
                                                                                 ))),
                                                                           )
-                                                                        : (mapData['key'] ==
-                                                                                "Cleaned")
+                                                                        : (mapData['key'] == "Cleaned")
                                                                             ? Column(
                                                                                 mainAxisAlignment: MainAxisAlignment.center,
                                                                                 crossAxisAlignment: CrossAxisAlignment.center,
@@ -407,7 +442,8 @@ class AddModuleCleaningExecutionContentWeb
                                                                                           children: [
                                                                                             Text(
                                                                                               "${element?.abandonedModules}",
-                                                                                              style: TextStyle(color: Color.fromARGB(255, 5, 92, 163)),
+                                                                                              style:
+                                                                                                  TextStyle(color: Color.fromARGB(255, 5, 92, 163)),
                                                                                             ),
                                                                                           ],
                                                                                         ))),
@@ -425,7 +461,8 @@ class AddModuleCleaningExecutionContentWeb
                                                                                               children: [
                                                                                                 Text(
                                                                                                   "${element?.pendingModules}",
-                                                                                                  style: TextStyle(color: Color.fromARGB(255, 5, 92, 163)),
+                                                                                                  style: TextStyle(
+                                                                                                      color: Color.fromARGB(255, 5, 92, 163)),
                                                                                                 ),
                                                                                               ],
                                                                                             ))),
@@ -443,7 +480,8 @@ class AddModuleCleaningExecutionContentWeb
                                                                                                   children: [
                                                                                                     Text(
                                                                                                       "${element?.cleaningTypeName}",
-                                                                                                      style: TextStyle(color: Color.fromARGB(255, 5, 92, 163)),
+                                                                                                      style: TextStyle(
+                                                                                                          color: Color.fromARGB(255, 5, 92, 163)),
                                                                                                     ),
                                                                                                   ],
                                                                                                 ))),
@@ -454,49 +492,65 @@ class AddModuleCleaningExecutionContentWeb
                                                                                                 crossAxisAlignment: CrossAxisAlignment.center,
                                                                                                 children: [
                                                                                                   // Text('-')
-                                                                                                ]..addAll(controller.listSchedules!.map((element) => Row(
-                                                                                                      mainAxisSize: MainAxisSize.min,
-                                                                                                      mainAxisAlignment: MainAxisAlignment.start,
-                                                                                                      crossAxisAlignment: CrossAxisAlignment.start,
-                                                                                                      children: [
-                                                                                                        Text(
-                                                                                                          "${element?.waterUsed}",
-                                                                                                          style: TextStyle(color: Color.fromARGB(255, 5, 92, 163)),
-                                                                                                        ),
-                                                                                                      ],
-                                                                                                    ))),
+                                                                                                ]..addAll(
+                                                                                                    controller.listSchedules!.map((element) => Row(
+                                                                                                          mainAxisSize: MainAxisSize.min,
+                                                                                                          mainAxisAlignment: MainAxisAlignment.start,
+                                                                                                          crossAxisAlignment:
+                                                                                                              CrossAxisAlignment.start,
+                                                                                                          children: [
+                                                                                                            Text(
+                                                                                                              "${element?.waterUsed}",
+                                                                                                              style: TextStyle(
+                                                                                                                  color: Color.fromARGB(
+                                                                                                                      255, 5, 92, 163)),
+                                                                                                            ),
+                                                                                                          ],
+                                                                                                        ))),
                                                                                               )
                                                                                             : (mapData['key'] == "Remark")
                                                                                                 ? Column(
                                                                                                     mainAxisAlignment: MainAxisAlignment.center,
                                                                                                     crossAxisAlignment: CrossAxisAlignment.center,
-                                                                                                    children: []..addAll(controller.listSchedules!.map((element) => Row(
-                                                                                                          mainAxisSize: MainAxisSize.min,
-                                                                                                          mainAxisAlignment: MainAxisAlignment.start,
-                                                                                                          crossAxisAlignment: CrossAxisAlignment.start,
-                                                                                                          children: [
-                                                                                                            Padding(
-                                                                                                              padding: const EdgeInsets.only(bottom: 5),
-                                                                                                              child: SizedBox(
-                                                                                                                width: MediaQuery.of(context).size.width / 9,
-                                                                                                                height: 30,
-                                                                                                                child: 
-                                                                                                                LoginCustomTextfield(
-                                                                                                                  keyboardType: TextInputType.number,
-                                                                                                                  inputFormatters: <TextInputFormatter>[
-                                                                                                                    // FilteringTextInputFormatter.digitsOnly
-                                                                                                                  ],
-                                                                                                                  maxLine: 1,
-                                                                                                                  textController: new TextEditingController(text: mapData["value"] ?? ''),
-                                                                                                                  onChanged: (txt) {
-                                                                                                                    mapData["value"] = txt;
-                                                                                                                    print('RemarkData${mapData["value"]}');
-                                                                                                                  },
-                                                                                                                )
-                                                                                                              ),
-                                                                                                            ),
-                                                                                                          ],
-                                                                                                        ))),
+                                                                                                    children: []..addAll(controller.listSchedules!
+                                                                                                        .map((element) => Row(
+                                                                                                              mainAxisSize: MainAxisSize.min,
+                                                                                                              mainAxisAlignment:
+                                                                                                                  MainAxisAlignment.start,
+                                                                                                              crossAxisAlignment:
+                                                                                                                  CrossAxisAlignment.start,
+                                                                                                              children: [
+                                                                                                                Padding(
+                                                                                                                  padding: const EdgeInsets.only(
+                                                                                                                      bottom: 5),
+                                                                                                                  child: SizedBox(
+                                                                                                                      width: MediaQuery.of(context)
+                                                                                                                              .size
+                                                                                                                              .width /
+                                                                                                                          9,
+                                                                                                                      height: 30,
+                                                                                                                      child: LoginCustomTextfield(
+                                                                                                                        keyboardType:
+                                                                                                                            TextInputType.number,
+                                                                                                                        inputFormatters: <
+                                                                                                                            TextInputFormatter>[
+                                                                                                                          // FilteringTextInputFormatter.digitsOnly
+                                                                                                                        ],
+                                                                                                                        maxLine: 1,
+                                                                                                                        textController:
+                                                                                                                            new TextEditingController(
+                                                                                                                                text: mapData[
+                                                                                                                                        "value"] ??
+                                                                                                                                    ''),
+                                                                                                                        onChanged: (txt) {
+                                                                                                                          mapData["value"] = txt;
+                                                                                                                          print(
+                                                                                                                              'RemarkData${mapData["value"]}');
+                                                                                                                        },
+                                                                                                                      )),
+                                                                                                                ),
+                                                                                                              ],
+                                                                                                            ))),
                                                                                                   )
                                                                                                 : (mapData['key'] == "Status")
                                                                                                     ? Column(
@@ -504,96 +558,152 @@ class AddModuleCleaningExecutionContentWeb
                                                                                                         crossAxisAlignment: CrossAxisAlignment.center,
                                                                                                         children: [
                                                                                                           // Text('-')
-                                                                                                        ]..addAll(controller.listSchedules!.map((element) => Row(
-                                                                                                              mainAxisSize: MainAxisSize.min,
-                                                                                                              mainAxisAlignment: MainAxisAlignment.start,
-                                                                                                              crossAxisAlignment: CrossAxisAlignment.start,
-                                                                                                              children: [
-                                                                                                                Text(
-                                                                                                                  "${element?.status_short}",
-                                                                                                                  style: TextStyle(color: Color.fromARGB(255, 5, 92, 163)),
-                                                                                                                ),
-                                                                                                              ],
-                                                                                                            ))),
+                                                                                                        ]..addAll(controller.listSchedules!
+                                                                                                            .map((element) => Row(
+                                                                                                                  mainAxisSize: MainAxisSize.min,
+                                                                                                                  mainAxisAlignment:
+                                                                                                                      MainAxisAlignment.start,
+                                                                                                                  crossAxisAlignment:
+                                                                                                                      CrossAxisAlignment.start,
+                                                                                                                  children: [
+                                                                                                                    Text(
+                                                                                                                      "${element?.status_short}",
+                                                                                                                      style: TextStyle(
+                                                                                                                          color: Color.fromARGB(
+                                                                                                                              255, 5, 92, 163)),
+                                                                                                                    ),
+                                                                                                                  ],
+                                                                                                                ))),
                                                                                                       )
                                                                                                     : (mapData['key'] == "Actions")
                                                                                                         ? Padding(
                                                                                                             padding: const EdgeInsets.only(left: 20),
                                                                                                             child: Column(
-                                                                                                              children: []..addAll(controller.listSchedules!.map((element) => Row(
-                                                                                                                    mainAxisSize: MainAxisSize.min,
-                                                                                                                    mainAxisAlignment: MainAxisAlignment.start,
-                                                                                                                    crossAxisAlignment: CrossAxisAlignment.start,
-                                                                                                                    children: [
-                                                                                                                      controller.listSchedules!
-                                                                                                                                  .firstWhere(
-                                                                                                                                    (e) => "${e?.status_short}" == e?.status_short,
-                                                                                                                                    orElse: () => Schedules(status_short: ""),
-                                                                                                                                  )
-                                                                                                                                  ?.status_short ==
-                                                                                                                              "Scheduled"
-                                                                                                                          ? TableActionButton(
-                                                                                                                              // label: 'Start',
-                                                                                                                              onPress: () {
-                                                                                                                                var filterdData = controller.listSchedules?.firstWhere((e) => e?.scheduleId == element?.scheduleId);
-                                                                                                                                //  selectedData = filterdData;
-                                                                                                                                controller.startMCExecutionScheduleButton(scheduleID: filterdData?.scheduleId);
-                                                                                                                                print({'scheduledata:': filterdData?.scheduleId});
-                                                                                                                              },
-                                                                                                                              color: Colors.green,
-                                                                                                                              icon: Icons.add,
-                                                                                                                              message: 'Start',
-                                                                                                                            )
-                                                                                                                          : Container(),
+                                                                                                              children: []..addAll(controller
+                                                                                                                  .listSchedules!
+                                                                                                                  .map((element) => Row(
+                                                                                                                        mainAxisSize:
+                                                                                                                            MainAxisSize.min,
+                                                                                                                        mainAxisAlignment:
+                                                                                                                            MainAxisAlignment.start,
+                                                                                                                        crossAxisAlignment:
+                                                                                                                            CrossAxisAlignment.start,
+                                                                                                                        children: [
+                                                                                                                          controller.listSchedules!
+                                                                                                                                      .firstWhere(
+                                                                                                                                        (e) =>
+                                                                                                                                            "${e?.status_short}" ==
+                                                                                                                                            e?.status_short,
+                                                                                                                                        orElse: () =>
+                                                                                                                                            Schedules(
+                                                                                                                                                status_short:
+                                                                                                                                                    ""),
+                                                                                                                                      )
+                                                                                                                                      ?.status_short ==
+                                                                                                                                  "Scheduled"
+                                                                                                                              ? TableActionButton(
+                                                                                                                                  // label: 'Start',
+                                                                                                                                  onPress: () {
+                                                                                                                                    var filterdData = controller
+                                                                                                                                        .listSchedules
+                                                                                                                                        ?.firstWhere((e) =>
+                                                                                                                                            e?.scheduleId ==
+                                                                                                                                            element
+                                                                                                                                                ?.scheduleId);
+                                                                                                                                    //  selectedData = filterdData;
+                                                                                                                                    controller.startMCExecutionScheduleButton(
+                                                                                                                                        scheduleID:
+                                                                                                                                            filterdData
+                                                                                                                                                ?.scheduleId);
+                                                                                                                                    print({
+                                                                                                                                      'scheduledata:':
+                                                                                                                                          filterdData
+                                                                                                                                              ?.scheduleId
+                                                                                                                                    });
+                                                                                                                                  },
+                                                                                                                                  color: Colors.green,
+                                                                                                                                  icon: Icons.add,
+                                                                                                                                  message: 'Start',
+                                                                                                                                )
+                                                                                                                              : Container(),
+                                                                                                                                Spacer(),
+                                                                                                                          // controller.listSchedules!
+                                                                                                                          //             .firstWhere(
+                                                                                                                          //               (e) => "${e?.status_short}" == e?.status_short,
+                                                                                                                          //               orElse: () => Schedules(status_short: ""),
+                                                                                                                          //             )
+                                                                                                                          //             ?.status_short ==
+                                                                                                                          //         "In Progress"
+                                                                                                                          //     ?
+                                                                                                                          TableActionButton(
+                                                                                                                            // label: 'Abandon',
+                                                                                                                            onPress: () {
+                                                                                                                              // Get.dialog(AddModuleCleaningExecutionDialog());
+                                                                                                                              var filterdData = controller
+                                                                                                                                  .listSchedules
+                                                                                                                                  ?.firstWhere((e) =>
+                                                                                                                                      e?.scheduleId ==
+                                                                                                                                      element
+                                                                                                                                          ?.scheduleId);
 
-                                                                                                                      // controller.listSchedules!
-                                                                                                                      //             .firstWhere(
-                                                                                                                      //               (e) => "${e?.status_short}" == e?.status_short,
-                                                                                                                      //               orElse: () => Schedules(status_short: ""),
-                                                                                                                      //             )
-                                                                                                                      //             ?.status_short ==
-                                                                                                                      //         "In Progress"
-                                                                                                                      //     ?
-                                                                                                                      TableActionButton(
-                                                                                                                        // label: 'Abandon',
-                                                                                                                        onPress: () {
-                                                                                                                          // Get.dialog(AddModuleCleaningExecutionDialog());
-                                                                                                                          var filterdData = controller.listSchedules?.firstWhere((e) => e?.scheduleId == element?.scheduleId);
-
-                                                                                                                          controller.updateMCScheduleExecution(scheduleId: filterdData?.scheduleId, cleaningDay: filterdData?.cleaningDay, waterUsed: filterdData?.waterUsed);
-                                                                                                                        },
-                                                                                                                        color: ColorValues.appLightBlueColor,
-                                                                                                                        icon: Icons.add,
-                                                                                                                        message: 'Update',
-                                                                                                                      ),
-                                                                                                                      //  : Container(),
-
-                                                                                                                      ///Abandon
-                                                                                                                      TableActionButton(
-                                                                                                                        // label: 'Abandon',
-                                                                                                                        onPress: () {
-                                                                                                                          var filterdData = controller.listSchedules?.firstWhere((e) => e?.executionId == element?.executionId);
-                                                                                                                          print({'Executiondata:': filterdData?.executionId});
-                                                                                                                          Get.dialog(AbandoneScheduleExecutionDialog(
-                                                                                                                            id: filterdData?.executionId,
-                                                                                                                          ));
-                                                                                                                        },
-                                                                                                                        color: Colors.red,
-                                                                                                                        icon: Icons.close,
-                                                                                                                        message: 'Abandon',
-                                                                                                                      ),
-
-                                                                                                                      TableActionButton(
-                                                                                                                        // label: 'Equipments',
-                                                                                                                        onPress: () {
-                                                                                                                          Get.dialog(AddModuleCleaningExecutionDialog());
-                                                                                                                        },
-                                                                                                                        color: ColorValues.appDarkBlueColor,
-                                                                                                                        icon: Icons.category,
-                                                                                                                        message: 'Equipments',
-                                                                                                                      ),
-                                                                                                                    ],
-                                                                                                                  ))),
+                                                                                                                              controller.updateMCScheduleExecution(
+                                                                                                                                  scheduleId:
+                                                                                                                                      filterdData
+                                                                                                                                          ?.scheduleId,
+                                                                                                                                  cleaningDay:
+                                                                                                                                      filterdData
+                                                                                                                                          ?.cleaningDay,
+                                                                                                                                  waterUsed:
+                                                                                                                                      filterdData
+                                                                                                                                          ?.waterUsed);
+                                                                                                                            },
+                                                                                                                            color: ColorValues
+                                                                                                                                .appLightBlueColor,
+                                                                                                                            icon: Icons.add,
+                                                                                                                            message: 'Update',
+                                                                                                                          ),
+                                                                                                                          //  : Container(),
+                                                                                                                          Spacer(),
+                                                                                                                          ///Abandon
+                                                                                                                          TableActionButton(
+                                                                                                                            // label: 'Abandon',
+                                                                                                                            onPress: () {
+                                                                                                                              var filterdData = controller
+                                                                                                                                  .listSchedules
+                                                                                                                                  ?.firstWhere((e) =>
+                                                                                                                                      e?.executionId ==
+                                                                                                                                      element
+                                                                                                                                          ?.executionId);
+                                                                                                                              print({
+                                                                                                                                'Executiondata:':
+                                                                                                                                    filterdData
+                                                                                                                                        ?.executionId
+                                                                                                                              });
+                                                                                                                              Get.dialog(
+                                                                                                                                  AbandoneScheduleExecutionDialog(
+                                                                                                                                id: filterdData
+                                                                                                                                    ?.executionId,
+                                                                                                                              ));
+                                                                                                                            },
+                                                                                                                            color: Colors.red,
+                                                                                                                            icon: Icons.close,
+                                                                                                                            message: 'Abandon',
+                                                                                                                          ),
+                                                                                                                          Spacer(),
+                                                                                                                          TableActionButton(
+                                                                                                                            // label: 'Equipments',
+                                                                                                                            onPress: () {
+                                                                                                                              Get.dialog(
+                                                                                                                                  AddModuleCleaningExecutionDialog());
+                                                                                                                            },
+                                                                                                                            color: ColorValues
+                                                                                                                                .appDarkBlueColor,
+                                                                                                                            icon: Icons.category,
+                                                                                                                            message: 'Equipments',
+                                                                                                                          ),
+                                                                                                                          Spacer(),
+                                                                                                                        ],
+                                                                                                                      ))),
                                                                                                             ),
                                                                                                           )
                                                                                                         : Text(mapData['key'] ?? ''),
@@ -639,8 +749,7 @@ class AddModuleCleaningExecutionContentWeb
                                       // ),
 
                                       Row(
-                                        mainAxisAlignment:
-                                            MainAxisAlignment.center,
+                                        mainAxisAlignment: MainAxisAlignment.center,
                                         children: [
                                           SizedBox(
                                             height: 150,
@@ -652,8 +761,7 @@ class AddModuleCleaningExecutionContentWeb
                                           CustomElevatedButton(
                                             backgroundColor: Colors.red,
                                             onPressed: () {
-                                              Get.offAndToNamed(Routes
-                                                  .moduleCleaningListExecution);
+                                              Get.offAndToNamed(Routes.moduleCleaningListExecution);
                                             },
                                             text: 'Cancel',
                                           ),
@@ -663,8 +771,7 @@ class AddModuleCleaningExecutionContentWeb
                                           Container(
                                             height: 28,
                                             child: CustomElevatedButton(
-                                              backgroundColor:
-                                                  ColorValues.appLightBlueColor,
+                                              backgroundColor: ColorValues.appLightBlueColor,
                                               text: "Update",
                                               onPressed: () {},
                                             ),
@@ -672,17 +779,14 @@ class AddModuleCleaningExecutionContentWeb
                                           SizedBox(
                                             width: 20,
                                           ),
-                                          controller.data['status'] ==
-                                                  "Scheduled"
+                                          controller.data['status'] == "Scheduled"
                                               ? Container(
                                                   height: 28,
                                                   child: CustomElevatedButton(
-                                                    backgroundColor: ColorValues
-                                                        .addNewColor,
+                                                    backgroundColor: ColorValues.addNewColor,
                                                     text: "Start",
                                                     onPressed: () {
-                                                      controller
-                                                          .startMCExecutionButton();
+                                                      controller.startMCExecutionButton();
                                                     },
                                                   ),
                                                 )
@@ -692,17 +796,14 @@ class AddModuleCleaningExecutionContentWeb
                                             width: 20,
                                           ),
 
-                                          controller.data['status'] ==
-                                                  "Abandoned"
+                                          controller.data['status'] == "Abandoned"
                                               ? Container(
                                                   height: 28,
                                                   child: CustomElevatedButton(
-                                                    backgroundColor: ColorValues
-                                                        .cancelColor,
+                                                    backgroundColor: ColorValues.cancelColor,
                                                     text: "End",
                                                     onPressed: () {
-                                                      Get.dialog(
-                                                          EndMCExecutionDialog());
+                                                      Get.dialog(EndMCExecutionDialog());
                                                     },
                                                   ),
                                                 )
@@ -713,12 +814,10 @@ class AddModuleCleaningExecutionContentWeb
                                           Container(
                                             height: 28,
                                             child: CustomElevatedButton(
-                                              backgroundColor:
-                                                  Color.fromARGB(255, 244, 116, 248),
+                                              backgroundColor: Color.fromARGB(255, 244, 116, 248),
                                               text: "Abandoned All",
                                               onPressed: () {
-                                                Get.dialog(AbandonAllDialog(
-                                                    id: controller.data['id']));
+                                                Get.dialog(AbandonAllDialog(id: controller.data['id']));
                                                 // controller
                                                 //     .createEscalationMatrix();
                                               },

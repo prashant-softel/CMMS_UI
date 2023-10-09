@@ -37,21 +37,21 @@ class AddModuleCleaningExecutionController extends GetxController {
   Map<String, Schedules> dropdownMapperData = {};
   Map<String, PaiedModel> paiddropdownMapperData = {};
 
-  void addRowItem() {
-    rowItem.value.add([
-      {"key": "Schedule Id", "value": ''},
-      {"key": "Days", "value": ''},
-      {"key": "Scheduled Module", "value": ''},
-      {"key": "Cleaned", "value": ''},
-      {"key": "Abandoned", "value": ''},
-      {"key": "Pending", "value": ''},
-      {"key": "Type", "value": ''},
-      {"key": "Water Used", "value": ''},
-      {"key": "Remark", "value": ''},
-      {"key": "Status", "value": ''},
-      {'key': "Actions", "value": ''},
-    ]);
-  }
+  // void addRowItem() {
+  //   rowItem.value.add([
+  //     {"key": "Schedule Id", "value": ''},
+  //     {"key": "Days", "value": ''},
+  //     {"key": "Scheduled Module", "value": ''},
+  //     {"key": "Cleaned", "value": ''},
+  //     {"key": "Abandoned", "value": ''},
+  //     {"key": "Pending", "value": ''},
+  //     {"key": "Type", "value": ''},
+  //     {"key": "Water Used", "value": ''},
+  //     {"key": "Remark", "value": ''},
+  //     {"key": "Status", "value": ''},
+  //     {'key': "Actions", "value": ''},
+  //   ]);
+  // }
 
   RxList<ModuleListModel?> moduleList = <ModuleListModel>[].obs;
   Rx<bool> isModuleListSelected = true.obs;
@@ -433,6 +433,24 @@ RxList<InventoryCategoryModel?> equipmentCategoryList =
       listSchedules?.value = mcExecutionDetailsModel.value?.schedules ?? [];
       scheduleId = listSchedules!.map((element) => element?.scheduleId).toList();
       print('ScheduleId: ${scheduleId}');
+
+        rowItem.value = [];
+      _mcExecutionDetails.schedules!.forEach((element) { 
+        rowItem.value.add([
+      {"key": "Schedule Id", "value": '${element!.scheduleId}'},
+      {"key": "Days", "value": '${element.cleaningDay}'},
+      {"key": "Scheduled Module", "value": '${element.scheduledModules}'},
+      {"key": "Cleaned", "value": '${element.cleanedModules}'},
+      {"key": "Abandoned", "value": '${element.abandonedModules}'},
+      {"key": "Pending", "value": '${element.pendingModules}'},
+      {"key": "Type", "value": '${element.cleaningTypeName}'},
+      {"key": "Water Used", "value": '${element.waterUsed}'},
+      {"key": "Remark", "value": '${element.remark}'},
+      {"key": "Status", "value": '${element.status_short}'},
+      {'key': "Actions", "value": ''},
+    ]);
+
+      });
       
     }
   }

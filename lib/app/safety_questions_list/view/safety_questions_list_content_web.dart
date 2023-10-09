@@ -5,6 +5,7 @@ import 'package:cmms/app/safety_questions_list/safety_questions_list_controller.
 import 'package:cmms/app/widgets/dropdown.dart';
 import 'package:cmms/app/widgets/dropdown_web.dart';
 import 'package:cmms/app/widgets/stock_dropdown.dart';
+import 'package:data_table_2/data_table_2.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:cmms/app/widgets/custom_textfield.dart';
@@ -57,7 +58,7 @@ class SafetyQuestionsListContentWeb extends GetView<SafetyQuestionsListControlle
                     },
                     child: Text(" / MASTERS", style: Styles.greyMediumLight12),
                   ),
-                  Text(" / SAFETY QUESTIONS", style: Styles.greyMediumLight12)
+                  Text(" / Permit Type Checklist", style: Styles.greyMediumLight12)
                 ],
               ),
             ),
@@ -310,38 +311,38 @@ class SafetyQuestionsListContentWeb extends GetView<SafetyQuestionsListControlle
                                       padding: const EdgeInsets.only(left: 15),
                                       child: CustomRichText(title: 'Select confirmation type: '),
                                     ),
-                                     DropdownWebStock(
-                                                      width:
-                                                          MediaQuery.of(context)
-                                                                  .size
-                                                                  .width /
-                                                              4,
-                                                      dropdownList:
-                                                          controller.type2,
-                                                      // selectedValue:
-                                                      //     mapData["value"],
-                                                      onValueChanged:
-                                                          (list, selectedValue) {
-                                                        print({
-                                                          selectedValue:
-                                                              selectedValue
-                                                        });
-                                                        // mapData["value"] =
-                                                        //     selectedValue;
-                                                        controller.typedropdownMapperData[
-                                                                selectedValue] =
-                                                            list.firstWhere(
-                                                                (element) =>
-                                                                    element
-                                                                        .name ==
-                                                                    selectedValue,
-                                                                orElse: null);
-                                                        // mapData["value"] =
-                                                        //     selectedValue;
-                                                      },
-                                                    ),
-                                    
-
+                                    //  DropdownWebStock(
+                                    //                   width:
+                                    //                       MediaQuery.of(context)
+                                    //                               .size
+                                    //                               .width /
+                                    //                           4,
+                                    //                   dropdownList:
+                                    //                       controller.type2,
+                                    //                   // selectedValue:
+                                    //                   //     mapData["value"],
+                                    //                   onValueChanged:
+                                    //                       (list, selectedValue) {
+                                    //                     print({
+                                    //                       selectedValue:
+                                    //                           selectedValue
+                                    //                     });
+                                    //                     // mapData["value"] =
+                                    //                     //     selectedValue;
+                                    //                     controller.typedropdownMapperData[
+                                    //                             selectedValue] =
+                                    //                         list.firstWhere(
+                                    //                             (element) =>
+                                    //                                 element
+                                    //                                     .name ==
+                                    //                                 selectedValue,
+                                    //                             orElse: null);
+                                    //                     // mapData["value"] =
+                                    //                     //     selectedValue;
+                                    //                   },
+                                    //                 ),
+              
+                                   
                                     // Padding(
                                     //   padding: const EdgeInsets.only(left: 15),
                                     //   child: SizedBox(
@@ -366,14 +367,14 @@ class SafetyQuestionsListContentWeb extends GetView<SafetyQuestionsListControlle
                                     //           spreadRadius: 0.0,
                                     //         ),
                                     //       ],
-                                    //       dropdownList: [],
-                                    //       onValueChanged: (p0, p1) {
+                                    //       // dropdownList: [],
+                                    //       // onValueChanged: (p0, p1) {
                                             
-                                    //       },
-                                    //       // dropdownList: controller.typePermitList,
-                                    //       // isValueSelected: controller.isTypePermitSelected.value,
-                                    //       // selectedValue: controller.selectedTypePermit.value,
-                                    //       // onValueChanged: controller.onValueChanged,
+                                    //       // },
+                                    //       dropdownList: controller.type2,
+                                    //       isValueSelected: controller.isTypePermitSelected.value,
+                                    //       selectedValue: controller.selectedTypePermit.value,
+                                    //       onValueChanged: controller.onValueChanged,
                                     //     ),
                                     //   ),
                                     // ),
@@ -534,7 +535,7 @@ class SafetyQuestionsListContentWeb extends GetView<SafetyQuestionsListControlle
                                               // "Id",
                                              
                                               "Title",
-                                              "Type",
+                                              // "Type",
                                               "Confirmation",
                                               "Required",
                                               "Action"
@@ -551,7 +552,7 @@ class SafetyQuestionsListContentWeb extends GetView<SafetyQuestionsListControlle
                                                   return [
            
                                                     '',
-                                                    '',
+                                                    // '',
                                                     '',
                                                     '',
                                                     '',
@@ -576,7 +577,7 @@ class SafetyQuestionsListContentWeb extends GetView<SafetyQuestionsListControlle
                                             columns: [
                                               // "Id",
                                               "Title",
-                                              "Type",
+                                              // "Type",
                                               "Confirmation",
                                               "Required",
                                               "Action"
@@ -595,7 +596,7 @@ class SafetyQuestionsListContentWeb extends GetView<SafetyQuestionsListControlle
                                                   return [
                                                     // '${safetyQuestionsListDetails.id}',
                                                     '${safetyQuestionsListDetails.name}',
-                                                    '${safetyQuestionsListDetails.permitType}',
+                                                    // '${safetyQuestionsListDetails.permitType}',
                                                     '${safetyQuestionsListDetails.inputName}',
                                                     'checkbox',
                                                     // 'yes',

@@ -269,7 +269,7 @@ class BreakdownMaintenanceScreen
                               controller.goToPermitTypeScreen();
                             }),
                         createContentTile(
-                            title: "Safety Questions",
+                            title: "Permit Type Checklist",
                             onTap: () {
                               controller.gotToSafetyQuestionsList();
                             }),
