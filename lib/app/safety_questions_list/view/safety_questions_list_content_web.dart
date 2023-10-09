@@ -152,147 +152,142 @@ class SafetyQuestionsListContentWeb
                                           height: 10,
                                         ),
 
-                                        Row(
-                                          // mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                                          mainAxisAlignment:
-                                              MainAxisAlignment.spaceBetween,
-                                          children: [
-                                            Expanded(
-                                              child: CustomRichText(
-                                                  title:
-                                                      'Safety Measure Title '),
-                                            ),
-                                            Expanded(
-                                              child: Container(
-                                                padding: const EdgeInsets.only(
-                                                    right: 15),
-                                                child: Container(
-                                                  decoration: BoxDecoration(
-                                                    boxShadow: [
-                                                      BoxShadow(
-                                                        color: Colors.black26,
-                                                        offset: const Offset(
-                                                          5.0,
-                                                          5.0,
-                                                        ),
-                                                        blurRadius: 5.0,
-                                                        spreadRadius: 1.0,
-                                                      ),
-                                                      BoxShadow(
-                                                        color: ColorValues
-                                                            .whiteColor,
-                                                        offset: const Offset(
-                                                            0.0, 0.0),
-                                                        blurRadius: 0.0,
-                                                        spreadRadius: 0.0,
-                                                      ),
-                                                    ],
-                                                    color:
-                                                        ColorValues.whiteColor,
-                                                    borderRadius:
-                                                        BorderRadius.circular(
-                                                            5),
-                                                  ),
-                                                  width: (MediaQuery.of(context)
-                                                              .size
-                                                              .width *
-                                                          .2) -
-                                                      30,
-                                                  // width: MediaQuery.of(context).size.width / 1.5,/
-                                                  child: Obx(
-                                                    () => TextField(
-                                                      controller:
-                                                          controller.titleCtrlr,
-                                                      keyboardType:
-                                                          TextInputType
-                                                              .multiline,
-                                                      maxLines: 1,
-                                                      autofocus: false,
-                                                      decoration:
-                                                          InputDecoration(
-                                                        fillColor: ColorValues
-                                                            .whiteColor,
-                                                        filled: true,
-                                                        contentPadding: Dimens
-                                                            .edgeInsets05_10,
-                                                        border:
-                                                            InputBorder.none,
-                                                        enabledBorder:
-                                                            OutlineInputBorder(
-                                                          borderRadius:
-                                                              BorderRadius
-                                                                  .circular(
-                                                                      10.0),
-                                                          borderSide: BorderSide(
-                                                              color: Colors
-                                                                  .transparent),
-                                                        ),
-                                                        focusedBorder:
-                                                            OutlineInputBorder(
-                                                          borderRadius:
-                                                              BorderRadius
-                                                                  .circular(
-                                                                      10.0),
-                                                          borderSide: BorderSide(
-                                                              color: Colors
-                                                                  .transparent),
-                                                        ),
-                                                        focusedErrorBorder: controller
-                                                                .isTitleInvalid
-                                                                .value
-                                                            ? OutlineInputBorder(
-                                                                borderRadius:
-                                                                    BorderRadius
-                                                                        .circular(
-                                                                            5),
-                                                                borderSide:
-                                                                    BorderSide(
-                                                                  color: ColorValues
-                                                                      .redColorDark,
-                                                                ),
-                                                              )
-                                                            : InputBorder.none,
-                                                        errorBorder: controller
-                                                                .isTitleInvalid
-                                                                .value
-                                                            ? OutlineInputBorder(
-                                                                borderRadius:
-                                                                    BorderRadius
-                                                                        .circular(
-                                                                            5),
-                                                                borderSide:
-                                                                    BorderSide(
-                                                                  color: ColorValues
-                                                                      .redColorDark,
-                                                                ),
-                                                              )
-                                                            : null,
-                                                        errorText: controller
-                                                                .isTitleInvalid
-                                                                .value
-                                                            ? "Required field"
-                                                            : null,
-                                                      ),
-                                                      onChanged: (value) {
-                                                        if (value
-                                                                .trim()
-                                                                .length >
-                                                            1) {
-                                                          controller
-                                                              .isTitleInvalid
-                                                              .value = false;
-                                                        } else {
-                                                          controller
-                                                              .isTitleInvalid
-                                                              .value = true;
-                                                        }
-                                                      },
+                                        Padding(
+                                          padding: const EdgeInsets.only(left: 15, right: 15),
+                                          child: CustomRichText(
+                                              title:
+                                                  'Safety Measure Title '),
+                                        ),
+                                        Padding(
+                                          padding: const EdgeInsets.only(left: 15),
+                                          child: Container(
+                                            padding: const EdgeInsets.only(
+                                                right: 15),
+                                            child: Container(
+                                              decoration: BoxDecoration(
+                                                boxShadow: [
+                                                  BoxShadow(
+                                                    color: Colors.black26,
+                                                    offset: const Offset(
+                                                      5.0,
+                                                      5.0,
                                                     ),
+                                                    blurRadius: 5.0,
+                                                    spreadRadius: 1.0,
                                                   ),
+                                                  BoxShadow(
+                                                    color: ColorValues
+                                                        .whiteColor,
+                                                    offset: const Offset(
+                                                        0.0, 0.0),
+                                                    blurRadius: 0.0,
+                                                    spreadRadius: 0.0,
+                                                  ),
+                                                ],
+                                                color:
+                                                    ColorValues.whiteColor,
+                                                borderRadius:
+                                                    BorderRadius.circular(
+                                                        5),
+                                              ),
+                                              width: (MediaQuery.of(context)
+                                                          .size
+                                                          .width *
+                                                      .17) -
+                                                  30,
+                                              // width: MediaQuery.of(context).size.width / 1.5,/
+                                              child: Obx(
+                                                () => TextField(
+                                                  controller:
+                                                      controller.titleCtrlr,
+                                                  keyboardType:
+                                                      TextInputType
+                                                          .multiline,
+                                                  maxLines: 1,
+                                                  autofocus: false,
+                                                  decoration:
+                                                      InputDecoration(
+                                                    fillColor: ColorValues
+                                                        .whiteColor,
+                                                    filled: true,
+                                                    contentPadding: Dimens
+                                                        .edgeInsets05_10,
+                                                    border:
+                                                        InputBorder.none,
+                                                    enabledBorder:
+                                                        OutlineInputBorder(
+                                                      borderRadius:
+                                                          BorderRadius
+                                                              .circular(
+                                                                  10.0),
+                                                      borderSide: BorderSide(
+                                                          color: Colors
+                                                              .transparent),
+                                                    ),
+                                                    focusedBorder:
+                                                        OutlineInputBorder(
+                                                      borderRadius:
+                                                          BorderRadius
+                                                              .circular(
+                                                                  10.0),
+                                                      borderSide: BorderSide(
+                                                          color: Colors
+                                                              .transparent),
+                                                    ),
+                                                    focusedErrorBorder: controller
+                                                            .isTitleInvalid
+                                                            .value
+                                                        ? OutlineInputBorder(
+                                                            borderRadius:
+                                                                BorderRadius
+                                                                    .circular(
+                                                                        5),
+                                                            borderSide:
+                                                                BorderSide(
+                                                              color: ColorValues
+                                                                  .redColorDark,
+                                                            ),
+                                                          )
+                                                        : InputBorder.none,
+                                                    errorBorder: controller
+                                                            .isTitleInvalid
+                                                            .value
+                                                        ? OutlineInputBorder(
+                                                            borderRadius:
+                                                                BorderRadius
+                                                                    .circular(
+                                                                        5),
+                                                            borderSide:
+                                                                BorderSide(
+                                                              color: ColorValues
+                                                                  .redColorDark,
+                                                            ),
+                                                          )
+                                                        : null,
+                                                    errorText: controller
+                                                            .isTitleInvalid
+                                                            .value
+                                                        ? "Required field"
+                                                        : null,
+                                                  ),
+                                                  onChanged: (value) {
+                                                    if (value
+                                                            .trim()
+                                                            .length >
+                                                        1) {
+                                                      controller
+                                                          .isTitleInvalid
+                                                          .value = false;
+                                                    } else {
+                                                      controller
+                                                          .isTitleInvalid
+                                                          .value = true;
+                                                    }
+                                                  },
                                                 ),
                                               ),
                                             ),
-                                          ],
+                                          ),
                                         ),
                                         SizedBox(
                                           height: 10,
@@ -388,8 +383,82 @@ class SafetyQuestionsListContentWeb
                                     ),
                                     Padding(
                                       padding: const EdgeInsets.only(left: 15),
-                                      child: CustomRichText(title: 'Select confirmation type: '),
+                                      child: CustomRichText(title: 'Select Type: '),
                                     ),
+                                     Padding(
+                                       padding: const EdgeInsets.only(left: 15),
+                                       child: Container(
+                                         decoration: BoxDecoration(
+                                           borderRadius:
+                                               BorderRadius.circular(6),
+                                           border: Border.all(
+                                             color: Color.fromARGB(
+                                                 255, 227, 224, 224),
+                                             width: 1,
+                                           ),
+                                           boxShadow: [
+                                             BoxShadow(
+                                               color: Colors.black26,
+                                               offset: const Offset(
+                                                 5.0,
+                                                 5.0,
+                                               ),
+                                               blurRadius: 5.0,
+                                               spreadRadius: 1.0,
+                                             ),
+                                             BoxShadow(
+                                               color: ColorValues
+                                                   .whiteColor,
+                                               offset: const Offset(
+                                                   0.0, 0.0),
+                                               blurRadius: 0.0,
+                                               spreadRadius: 0.0,
+                                             ),
+                                           ],
+                                         ),
+                                         width: (MediaQuery.of(context)
+                                                 .size
+                                                 .width *
+                                             .15),
+                                         height: 35,
+                                         child:
+                                             DropdownButtonHideUnderline(
+                                           child: DropdownButton<String>(
+                                             isExpanded: true,
+                                             value: controller
+                                                 .updateType.value,
+                                             onChanged: (value) =>
+                                                 controller
+                                                   ..updateChecklistType(
+                                                       value!),
+                                             items: <String>[
+                                               '',
+                                               'Checkbox',
+                                               'Radio',
+                                               'Text'
+                                             ].map<
+                                                     DropdownMenuItem<
+                                                         String>>(
+                                                 (String value) {
+                                               return DropdownMenuItem<
+                                                   String>(
+                                                 value: value,
+                                                 child: Container(
+                                                   margin:
+                                                       EdgeInsets.only(
+                                                           left: 10),
+                                                   child: Text(
+                                                     value,
+                                                     style:
+                                                         Styles.black12,
+                                                   ),
+                                                 ),
+                                               );
+                                             }).toList(),
+                                           ),
+                                         ),
+                                       ),
+                                     ),
                                     //  DropdownWebStock(
                                     //                   width:
                                     //                       MediaQuery.of(context)
