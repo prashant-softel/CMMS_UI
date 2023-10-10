@@ -2,6 +2,7 @@ import 'package:cmms/app/constant/constant.dart';
 import 'package:cmms/app/navigators/app_pages.dart';
 import 'package:cmms/app/pm_task_view/pm_task_view_controller.dart';
 import 'package:cmms/app/theme/dimens.dart';
+import 'package:cmms/app/utils/printing.dart';
 import 'package:cmms/app/utils/user_access_constants.dart';
 import 'package:cmms/app/widgets/assign_to_pm_task_dialog.dart';
 import 'package:cmms/app/widgets/execution_approve_dialog.dart';
@@ -880,18 +881,18 @@ class PreventiveMaintenanceTaskViewContentWeb
             child: Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                // Container(
-                //   height: 35,
-                //   child: CustomElevatedButton(
-                //     icon: Icons.print,
-                //     backgroundColor: ColorValues.linktopermitColor,
-                //     text: "print",
-                //     onPressed: () {
-                //       //controller.printScreen();
-                //     },
-                //   ),
-                // ),
-                //Dimens.boxWidth10,
+                Container(
+                  height: 35,
+                  child: CustomElevatedButton(
+                    icon: Icons.print,
+                    backgroundColor: ColorValues.linktopermitColor,
+                    text: "print",
+                    onPressed: () {
+                      // controller.generateInvoice();
+                    },
+                  ),
+                ),
+                Dimens.boxWidth10,
                 controller.pmtaskViewModel.value?.status == 161
                     ? Container(
                         height: 35,
