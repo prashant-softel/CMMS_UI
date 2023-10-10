@@ -582,24 +582,27 @@ class ModuleCleaningPlanListDataSource extends DataTableSource {
                           // },
                         ),
                         TableActionButton(
-                          color: ColorValues.appGreenColor,
+                          color: Color.fromARGB(255, 141, 183, 180),
                           icon: Icons.add,
                           // label: 'Execute',
                           message: 'Schedule Execution',
                           onPress: () {
-                              Get.dialog(AddMCExecutionDialog(planId: ModuleCleaningPlanningListDetails?.planId,
-                              frequency: ModuleCleaningPlanningListDetails?.frequency,));
-                          //   int id =
-                          //       ModuleCleaningPlanningListDetails?.planId ??
-                          //           0;
-                          //   if (id != 0) {
-                          //     Get.toNamed(Routes.purchaseGoodsorderView,
-                          //         arguments: {'id': id, "type": 1});
-                          //   }
-                          // },
-                          // onPress: () {
-                          //   controller.viewAddGoodsOrdersDetails(
-                          //       planId: int.tryParse('${record[0]}'));
+                            Get.dialog(AddMCExecutionDialog(
+                              planId: ModuleCleaningPlanningListDetails?.planId,
+                              frequency:
+                                  ModuleCleaningPlanningListDetails?.frequency,
+                            ));
+                            //   int id =
+                            //       ModuleCleaningPlanningListDetails?.planId ??
+                            //           0;
+                            //   if (id != 0) {
+                            //     Get.toNamed(Routes.purchaseGoodsorderView,
+                            //         arguments: {'id': id, "type": 1});
+                            //   }
+                            // },
+                            // onPress: () {
+                            //   controller.viewAddGoodsOrdersDetails(
+                            //       planId: int.tryParse('${record[0]}'));
                           },
                         )
                       ])

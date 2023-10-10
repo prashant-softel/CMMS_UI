@@ -152,12 +152,12 @@ class _ModuleCleaningPlanningWebState extends State<ModuleCleaningPlanningWeb> {
                                                       title: 'Frequency : '),
                                                   Dimens.boxWidth10,
                                                   SizedBox(
-                                                    child: DropdownWebStock(
-                                                      width: (MediaQuery.of(
-                                                                  context)
-                                                              .size
-                                                              .width *
-                                                          .5),
+                                                    child: DropdownWebWidget(
+                                                      width:
+                                                          MediaQuery.of(context)
+                                                                  .size
+                                                                  .width /
+                                                              5,
                                                       controller: controller,
                                                       dropdownList: controller
                                                           .frequencyList,
@@ -222,16 +222,23 @@ class _ModuleCleaningPlanningWebState extends State<ModuleCleaningPlanningWeb> {
                                                       title:
                                                           'Estimated Duration In Day'),
                                                   Dimens.boxWidth10,
-                                                  GoodsOrderTextField(
-                                                    keyboardType:
-                                                        TextInputType.number,
-                                                    inputFormatters: <
-                                                        TextInputFormatter>[
-                                                      FilteringTextInputFormatter
-                                                          .digitsOnly
-                                                    ],
-                                                    textController: controller
-                                                        .durationInDayCtrlr,
+                                                  SizedBox(
+                                                    child: LoginCustomTextfield(
+                                                      keyboardType:
+                                                          TextInputType.number,
+                                                      inputFormatters: <
+                                                          TextInputFormatter>[
+                                                        FilteringTextInputFormatter
+                                                            .digitsOnly
+                                                      ],
+                                                      textController: controller
+                                                          .durationInDayCtrlr,
+                                                      width:
+                                                          MediaQuery.of(context)
+                                                                  .size
+                                                                  .width /
+                                                              5,
+                                                    ),
                                                   ),
                                                 ],
                                               ),
