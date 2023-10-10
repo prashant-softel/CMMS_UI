@@ -28,7 +28,8 @@ class EditJobContentWeb extends StatefulWidget {
 }
 
 class _EditJobContentWebState extends State<EditJobContentWeb> {
-  final FileUploadController dropzoneController = Get.put(FileUploadController());
+  final FileUploadController dropzoneController =
+      Get.put(FileUploadController());
 
   @override
   Widget build(BuildContext context) {
@@ -136,7 +137,7 @@ class _EditJobContentWebState extends State<EditJobContentWeb> {
                                             Row(
                                               children: [
                                                 CustomRichText(
-                                                    title: 'Select Block :'),
+                                                    title: 'Job Title: '),
                                                 Dimens.boxWidth10,
                                                 Container(
                                                   decoration: BoxDecoration(
@@ -166,25 +167,208 @@ class _EditJobContentWebState extends State<EditJobContentWeb> {
                                                           .size
                                                           .width *
                                                       .2),
+                                                  height: MediaQuery.of(context)
+                                                          .size
+                                                          .height *
+                                                      0.040,
                                                   child: Obx(
-                                                    () => DropdownWebWidget(
-                                                      dropdownList:
-                                                          controller.blockList,
-                                                      isValueSelected:
+                                                    () => TextField(
+                                                      controller: controller
+                                                          .jobTitleCtrlr,
+                                                      autofocus: false,
+                                                      decoration:
+                                                          InputDecoration(
+                                                        fillColor: ColorValues
+                                                            .whiteColor,
+                                                        filled: true,
+                                                        contentPadding:
+                                                            EdgeInsets.fromLTRB(
+                                                                5.0,
+                                                                10.0,
+                                                                5.0,
+                                                                10.0),
+                                                        border:
+                                                            InputBorder.none,
+                                                        enabledBorder:
+                                                            OutlineInputBorder(
+                                                          borderRadius:
+                                                              BorderRadius
+                                                                  .circular(
+                                                                      10.0),
+                                                          borderSide: BorderSide(
+                                                              color: Colors
+                                                                  .transparent),
+                                                        ),
+                                                        focusedBorder:
+                                                            OutlineInputBorder(
+                                                          borderRadius:
+                                                              BorderRadius
+                                                                  .circular(
+                                                                      5.0),
+                                                          borderSide: BorderSide(
+                                                              color: Colors
+                                                                  .transparent),
+                                                        ),
+                                                        focusedErrorBorder: controller
+                                                                .isJobTitleInvalid
+                                                                .value
+                                                            ? OutlineInputBorder(
+                                                                borderRadius:
+                                                                    BorderRadius
+                                                                        .circular(
+                                                                            5),
+                                                                borderSide:
+                                                                    BorderSide(
+                                                                  color: ColorValues
+                                                                      .redColorDark,
+                                                                ),
+                                                              )
+                                                            : InputBorder.none,
+                                                        errorBorder: controller
+                                                                .isJobTitleInvalid
+                                                                .value
+                                                            ? OutlineInputBorder(
+                                                                borderRadius:
+                                                                    BorderRadius
+                                                                        .circular(
+                                                                            5),
+                                                                borderSide:
+                                                                    BorderSide(
+                                                                  color: ColorValues
+                                                                      .redColorDark,
+                                                                ),
+                                                              )
+                                                            : null,
+                                                        errorText: controller
+                                                                .isJobTitleInvalid
+                                                                .value
+                                                            ? "Required field"
+                                                            : null,
+                                                      ),
+                                                      onChanged: (value) {
+                                                        if (value
+                                                                .trim()
+                                                                .length >
+                                                            3) {
                                                           controller
-                                                              .isBlockSelected
-                                                              .value,
-                                                      selectedValue: controller
-                                                          .selectedBlock.value,
-                                                      onValueChanged: controller
-                                                          .onDropdownValueChanged,
-                                                      // focusNode: controller.focusNode,
+                                                              .isJobTitleInvalid
+                                                              .value = false;
+                                                        } else {
+                                                          controller
+                                                              .isJobTitleInvalid
+                                                              .value = true;
+                                                        }
+                                                      },
                                                     ),
                                                   ),
                                                 ),
                                               ],
                                             ),
+
                                             Dimens.boxHeight10,
+                                            IgnorePointer(
+                                              child: Row(
+                                                children: [
+                                                  CustomRichText(
+                                                      title: 'Work Type :'),
+                                                  Dimens.boxWidth10,
+                                                  Container(
+                                                    decoration: BoxDecoration(
+                                                      borderRadius:
+                                                          BorderRadius.circular(
+                                                              10),
+                                                      border: Border.all(
+                                                        color: Color.fromARGB(
+                                                            255, 227, 224, 224),
+                                                        width: 1,
+                                                      ),
+                                                      boxShadow: [
+                                                        BoxShadow(
+                                                          color: Color.fromARGB(
+                                                                  255,
+                                                                  236,
+                                                                  234,
+                                                                  234)
+                                                              .withOpacity(0.5),
+                                                          spreadRadius: 2,
+                                                          blurRadius: 5,
+                                                          offset: Offset(0, 2),
+                                                        ),
+                                                      ],
+                                                    ),
+                                                    width:
+                                                        (MediaQuery.of(context)
+                                                                .size
+                                                                .width *
+                                                            .2),
+                                                    child: Obx(
+                                                      () =>
+                                                          MultiSelectDialogField(
+                                                        searchable: true,
+                                                        initialValue: //
+                                                            controller
+                                                                .selectedWorkTypeIdList
+                                                                .map((workTypeId) =>
+                                                                    workTypeId) // Extract the IDs from the list of WorkTypeModel objects
+                                                                .toList(),
+                                                        validator:
+                                                            (selectedItems) {
+                                                          if (controller
+                                                                  .isWorkTypeSelected
+                                                                  .value ==
+                                                              false) {
+                                                            return "Required field";
+                                                          } else {
+                                                            return null;
+                                                          }
+                                                        },
+                                                        autovalidateMode:
+                                                            AutovalidateMode
+                                                                .always,
+                                                        decoration:
+                                                            BoxDecoration(
+                                                          border: Border.all(
+                                                            color: controller
+                                                                        .isWorkTypeSelected
+                                                                        .value ==
+                                                                    false
+                                                                ? Colors.red
+                                                                : Colors
+                                                                    .transparent,
+                                                            width: 1.0,
+                                                          ),
+                                                          borderRadius:
+                                                              BorderRadius
+                                                                  .circular(5),
+                                                        ),
+                                                        buttonIcon: Icon(Icons
+                                                            .arrow_drop_down),
+                                                        items: controller
+                                                            .workTypeList
+                                                            .map((workType) =>
+                                                                MultiSelectItem(
+                                                                    workType
+                                                                        ?.id,
+                                                                    workType?.workType ??
+                                                                        ''))
+                                                            .toList(),
+                                                        onConfirm:
+                                                            (selectedOptionsList) =>
+                                                                {
+                                                          controller
+                                                              .workTypesSelected(
+                                                                  selectedOptionsList)
+                                                        },
+                                                        chipDisplay:
+                                                            MultiSelectChipDisplay(),
+                                                      ),
+                                                    ),
+                                                  ),
+                                                ],
+                                              ),
+                                            ),
+                                            Dimens.boxHeight10,
+
                                             Row(
                                               children: [
                                                 CustomRichText(
@@ -386,136 +570,7 @@ class _EditJobContentWebState extends State<EditJobContentWeb> {
                                               ],
                                             ),
                                             Dimens.boxHeight10,
-                                            Row(
-                                              children: [
-                                                CustomRichText(
-                                                    title: 'Job Title: '),
-                                                Dimens.boxWidth10,
-                                                Container(
-                                                  decoration: BoxDecoration(
-                                                    borderRadius:
-                                                        BorderRadius.circular(
-                                                            10),
-                                                    border: Border.all(
-                                                      color: Color.fromARGB(
-                                                          255, 227, 224, 224),
-                                                      width: 1,
-                                                    ),
-                                                    boxShadow: [
-                                                      BoxShadow(
-                                                        color: Color.fromARGB(
-                                                                255,
-                                                                236,
-                                                                234,
-                                                                234)
-                                                            .withOpacity(0.5),
-                                                        spreadRadius: 2,
-                                                        blurRadius: 5,
-                                                        offset: Offset(0, 2),
-                                                      ),
-                                                    ],
-                                                  ),
-                                                  width: (MediaQuery.of(context)
-                                                          .size
-                                                          .width *
-                                                      .2),
-                                                  height: MediaQuery.of(context)
-                                                          .size
-                                                          .height *
-                                                      0.040,
-                                                  child: Obx(
-                                                    () => TextField(
-                                                      controller: controller
-                                                          .jobTitleCtrlr,
-                                                      autofocus: false,
-                                                      decoration:
-                                                          InputDecoration(
-                                                        fillColor: ColorValues
-                                                            .whiteColor,
-                                                        filled: true,
-                                                        contentPadding:
-                                                            EdgeInsets.fromLTRB(
-                                                                5.0,
-                                                                10.0,
-                                                                5.0,
-                                                                10.0),
-                                                        border:
-                                                            InputBorder.none,
-                                                        enabledBorder:
-                                                            OutlineInputBorder(
-                                                          borderRadius:
-                                                              BorderRadius
-                                                                  .circular(
-                                                                      10.0),
-                                                          borderSide: BorderSide(
-                                                              color: Colors
-                                                                  .transparent),
-                                                        ),
-                                                        focusedBorder:
-                                                            OutlineInputBorder(
-                                                          borderRadius:
-                                                              BorderRadius
-                                                                  .circular(
-                                                                      5.0),
-                                                          borderSide: BorderSide(
-                                                              color: Colors
-                                                                  .transparent),
-                                                        ),
-                                                        focusedErrorBorder: controller
-                                                                .isJobTitleInvalid
-                                                                .value
-                                                            ? OutlineInputBorder(
-                                                                borderRadius:
-                                                                    BorderRadius
-                                                                        .circular(
-                                                                            5),
-                                                                borderSide:
-                                                                    BorderSide(
-                                                                  color: ColorValues
-                                                                      .redColorDark,
-                                                                ),
-                                                              )
-                                                            : InputBorder.none,
-                                                        errorBorder: controller
-                                                                .isJobTitleInvalid
-                                                                .value
-                                                            ? OutlineInputBorder(
-                                                                borderRadius:
-                                                                    BorderRadius
-                                                                        .circular(
-                                                                            5),
-                                                                borderSide:
-                                                                    BorderSide(
-                                                                  color: ColorValues
-                                                                      .redColorDark,
-                                                                ),
-                                                              )
-                                                            : null,
-                                                        errorText: controller
-                                                                .isJobTitleInvalid
-                                                                .value
-                                                            ? "Required field"
-                                                            : null,
-                                                      ),
-                                                      onChanged: (value) {
-                                                        if (value
-                                                                .trim()
-                                                                .length >
-                                                            3) {
-                                                          controller
-                                                              .isJobTitleInvalid
-                                                              .value = false;
-                                                        } else {
-                                                          controller
-                                                              .isJobTitleInvalid
-                                                              .value = true;
-                                                        }
-                                                      },
-                                                    ),
-                                                  ),
-                                                ),
-                                              ],
-                                            ),
+
                                             Dimens.boxHeight10,
                                             Row(
                                               children: [
@@ -551,6 +606,53 @@ class _EditJobContentWebState extends State<EditJobContentWeb> {
                                         crossAxisAlignment:
                                             CrossAxisAlignment.end,
                                         children: [
+                                          Row(
+                                            children: [
+                                              CustomRichText(
+                                                  title: 'Select Block :'),
+                                              Dimens.boxWidth10,
+                                              Container(
+                                                decoration: BoxDecoration(
+                                                  borderRadius:
+                                                      BorderRadius.circular(10),
+                                                  border: Border.all(
+                                                    color: Color.fromARGB(
+                                                        255, 227, 224, 224),
+                                                    width: 1,
+                                                  ),
+                                                  boxShadow: [
+                                                    BoxShadow(
+                                                      color: Color.fromARGB(255,
+                                                              236, 234, 234)
+                                                          .withOpacity(0.5),
+                                                      spreadRadius: 2,
+                                                      blurRadius: 5,
+                                                      offset: Offset(0, 2),
+                                                    ),
+                                                  ],
+                                                ),
+                                                width: (MediaQuery.of(context)
+                                                        .size
+                                                        .width *
+                                                    .2),
+                                                child: Obx(
+                                                  () => DropdownWebWidget(
+                                                    dropdownList:
+                                                        controller.blockList,
+                                                    isValueSelected: controller
+                                                        .isBlockSelected.value,
+                                                    selectedValue: controller
+                                                        .selectedBlock.value,
+                                                    onValueChanged: controller
+                                                        .onDropdownValueChanged,
+                                                    // focusNode: controller.focusNode,
+                                                  ),
+                                                ),
+                                              ),
+                                            ],
+                                          ),
+                                          Dimens.boxHeight10,
+
                                           ///
                                           IgnorePointer(
                                             child: Row(
@@ -657,105 +759,7 @@ class _EditJobContentWebState extends State<EditJobContentWeb> {
                                               ],
                                             ),
                                           ),
-                                          Dimens.boxHeight10,
-                                          IgnorePointer(
-                                            child: Row(
-                                              children: [
-                                                CustomRichText(
-                                                    title: 'Work Type :'),
-                                                Dimens.boxWidth10,
-                                                Container(
-                                                  decoration: BoxDecoration(
-                                                    borderRadius:
-                                                        BorderRadius.circular(
-                                                            10),
-                                                    border: Border.all(
-                                                      color: Color.fromARGB(
-                                                          255, 227, 224, 224),
-                                                      width: 1,
-                                                    ),
-                                                    boxShadow: [
-                                                      BoxShadow(
-                                                        color: Color.fromARGB(
-                                                                255,
-                                                                236,
-                                                                234,
-                                                                234)
-                                                            .withOpacity(0.5),
-                                                        spreadRadius: 2,
-                                                        blurRadius: 5,
-                                                        offset: Offset(0, 2),
-                                                      ),
-                                                    ],
-                                                  ),
-                                                  width: (MediaQuery.of(context)
-                                                          .size
-                                                          .width *
-                                                      .2),
-                                                  child: Obx(
-                                                    () =>
-                                                        MultiSelectDialogField(
-                                                      searchable: true,
-                                                      initialValue: //
-                                                          controller
-                                                              .selectedWorkTypeIdList
-                                                              .map((workTypeId) =>
-                                                                  workTypeId) // Extract the IDs from the list of WorkTypeModel objects
-                                                              .toList(),
-                                                      validator:
-                                                          (selectedItems) {
-                                                        if (controller
-                                                                .isWorkTypeSelected
-                                                                .value ==
-                                                            false) {
-                                                          return "Required field";
-                                                        } else {
-                                                          return null;
-                                                        }
-                                                      },
-                                                      autovalidateMode:
-                                                          AutovalidateMode
-                                                              .always,
-                                                      decoration: BoxDecoration(
-                                                        border: Border.all(
-                                                          color: controller
-                                                                      .isWorkTypeSelected
-                                                                      .value ==
-                                                                  false
-                                                              ? Colors.red
-                                                              : Colors
-                                                                  .transparent,
-                                                          width: 1.0,
-                                                        ),
-                                                        borderRadius:
-                                                            BorderRadius
-                                                                .circular(5),
-                                                      ),
-                                                      buttonIcon: Icon(Icons
-                                                          .arrow_drop_down),
-                                                      items: controller
-                                                          .workTypeList
-                                                          .map((workType) =>
-                                                              MultiSelectItem(
-                                                                  workType?.id,
-                                                                  workType?.workType ??
-                                                                      ''))
-                                                          .toList(),
-                                                      onConfirm:
-                                                          (selectedOptionsList) =>
-                                                              {
-                                                        controller
-                                                            .workTypesSelected(
-                                                                selectedOptionsList)
-                                                      },
-                                                      chipDisplay:
-                                                          MultiSelectChipDisplay(),
-                                                    ),
-                                                  ),
-                                                ),
-                                              ],
-                                            ),
-                                          ),
+
                                           Dimens.boxHeight10,
                                           Row(
                                             children: [
@@ -933,30 +937,29 @@ class _EditJobContentWebState extends State<EditJobContentWeb> {
                                           Dimens.boxHeight10,
                                         ],
                                       ),
-                                      
                                     ],
                                   ),
                                 ),
                               ),
 
                               ///File Upload
-                            //   SizedBox(
-                            //   width: MediaQuery.of(context).size.width / 1.5,
-                            //   child: Container(
-                            //     height: Get.height * 0.2,
-                            //     width: Get.width,
-                            //     child: Row(
-                            //         //
-                            //         children: [
-                            //           Expanded(
-                            //             flex: 2,
-                            //             child: FileUploadWidgetWithDropzone(),
-                            //           ),
-                            //           Dimens.boxWidth10,
-                            //           Expanded(flex: 8, child: FileUploadDetailsWidgetWeb()),
-                            //         ]),
-                            //   ),
-                            // ),
+                              //   SizedBox(
+                              //   width: MediaQuery.of(context).size.width / 1.5,
+                              //   child: Container(
+                              //     height: Get.height * 0.2,
+                              //     width: Get.width,
+                              //     child: Row(
+                              //         //
+                              //         children: [
+                              //           Expanded(
+                              //             flex: 2,
+                              //             child: FileUploadWidgetWithDropzone(),
+                              //           ),
+                              //           Dimens.boxWidth10,
+                              //           Expanded(flex: 8, child: FileUploadDetailsWidgetWeb()),
+                              //         ]),
+                              //   ),
+                              // ),
                               Center(
                                 child: CustomElevatedButton(
                                   text: 'Update',
