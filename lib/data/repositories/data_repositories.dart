@@ -1360,6 +1360,16 @@ class DataRepository extends DomainRepository {
         isLoading: isLoading ?? false,
       );
 
+  Future<ResponseModel> createMcPlan({
+    required String auth,
+    createMcPlans,
+    bool? isLoading,
+  }) async =>
+      await connectHelper.createMcPlan(
+        auth: auth,
+        createMcPlans: createMcPlans,
+        isLoading: isLoading ?? false,
+      );
   Future<ResponseModel> createGoodsOrder({
     required String auth,
     createGo,

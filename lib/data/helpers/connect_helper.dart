@@ -2331,6 +2331,32 @@ class ConnectHelper {
     return responseModel;
   }
 
+  Future<ResponseModel> createMcPlan({
+    required String auth,
+    createMcPlans,
+    bool? isLoading,
+  }) async {
+    var responseModel = await apiWrapper.makeRequest(
+      'MC/CreateMCPlan',
+      Request.post,
+      createMcPlans,
+      isLoading ?? false,
+      {
+        'Content-Type': 'application/json',
+        'Authorization': 'Bearer $auth',
+      },
+    );
+
+    print('Create MC Response:${responseModel.data}');
+    var res = responseModel.data;
+    var parsedJson = json.decode(res);
+    // if (res.e != null) {
+    //   Get.dialog<void>(WarrantyClaimErrorDialog());
+    // } else {
+
+    return responseModel;
+  }
+
   Future<ResponseModel> submitPurchaseOrderData({
     required String auth,
     createGoReq,
