@@ -1,7 +1,8 @@
 import 'dart:async';
 
 import 'package:cmms/app/view_mc_plan/view_mc_planning_presenter.dart';
-import 'package:cmms/domain/models/end_mc_execution_detail_model.dart';
+
+import 'package:cmms/domain/models/mc_details_plan_model.dart';
 
 import 'package:cmms/domain/models/type_model.dart';
 import 'package:get/get.dart';
@@ -19,10 +20,9 @@ class ViewMcPlaningController extends GetxController {
       Rx<List<List<Map<String, String>>>>([]);
   Map<String, dynamic> data = {};
 
-  RxList<EndMCExecutionDetailsModel?>? mcPlanDetailsList =
-      <EndMCExecutionDetailsModel?>[].obs;
-  Rx<EndMCExecutionDetailsModel?> mcPlanDetailsModel =
-      EndMCExecutionDetailsModel().obs;
+  RxList<McPalningDetailsModel?>? mcPlanDetailsList =
+      <McPalningDetailsModel?>[].obs;
+  Rx<McPalningDetailsModel?> mcPlanDetailsModel = McPalningDetailsModel().obs;
   RxList<Schedules?>? listSchedules = <Schedules?>[].obs;
   List<int?> scheduleId = [];
   RxList<Schedules?>? schedules = <Schedules?>[].obs;
@@ -73,7 +73,7 @@ class ViewMcPlaningController extends GetxController {
 
   Future<void> getMcPlanDetail({required int planId}) async {
     // newPermitDetails!.value = <NewPermitListModel>[];
-    mcPlanDetailsList?.value = <EndMCExecutionDetailsModel>[];
+    mcPlanDetailsList?.value = <McPalningDetailsModel>[];
 
     final _mcPlanDetails =
         await viewMcPlaningPresenter.getMcPlanDetail(planId: planId);

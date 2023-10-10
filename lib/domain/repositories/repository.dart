@@ -46,6 +46,7 @@ import 'package:cmms/domain/models/job_card_model.dart';
 import 'package:cmms/domain/models/job_type_list_model.dart';
 import 'package:cmms/domain/models/linked_jobs_to_permit_model.dart';
 import 'package:cmms/domain/models/manufacturer_model.dart';
+import 'package:cmms/domain/models/mc_details_plan_model.dart';
 import 'package:cmms/domain/models/mc_task_list_model.dart';
 import 'package:cmms/domain/models/models.dart';
 import 'package:cmms/domain/models/module_cleaning_list_plan_model.dart';
@@ -1475,7 +1476,7 @@ class Repository {
     }
   }
 
-  Future<EndMCExecutionDetailsModel?> getMcPlanDetail({
+  Future<McPalningDetailsModel?> getMcPlanDetail({
     bool? isLoading,
     int? planId,
   }) async {
@@ -1487,12 +1488,12 @@ class Repository {
         isLoading: isLoading ?? false,
       );
 
-      print({"MCPlandetail", res.data});
+      // print({"MCPlandetail", res.data});
 
       if (!res.hasError) {
         if (res.errorCode == 200) {
-          final EndMCExecutionDetailsModel _mcPlanDetailModel =
-              endMCExecutionDetailsModelFromJson(res.data);
+          final McPalningDetailsModel _mcPlanDetailModel =
+              mcPlaningDetailsModelFromJson(res.data);
 
           var responseMap = _mcPlanDetailModel;
           print({"MCPlandetail", responseMap});
