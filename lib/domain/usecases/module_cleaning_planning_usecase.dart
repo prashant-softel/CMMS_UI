@@ -23,6 +23,14 @@ class ModuleCleaningPlanningUsecase {
       await repository.getFrequencyList(
         isLoading,
       );
+  Future<Map<String, dynamic>> createMcPlan({
+    createMcPlans,
+    bool? isLoading,
+  }) async =>
+      await repository.createMcPlan(
+        createMcPlans,
+        isLoading,
+      );
   Future<List<InventoryCategoryModel?>?> getInventoryCategoryList({
     String? auth,
     int? facilityId,

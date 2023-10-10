@@ -1,10 +1,12 @@
 import 'dart:async';
 
 import 'package:cmms/app/module_cleaning_planning/module_cleaning_planning_presenter.dart';
+import 'package:cmms/domain/models/create_mc_plan_model.dart';
 import 'package:cmms/domain/models/employee_model.dart';
 import 'package:cmms/domain/models/equipment_list_model.dart';
 import 'package:cmms/domain/models/frequency_model.dart';
 import 'package:cmms/domain/models/type_model.dart';
+import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import '../../domain/models/inventory_category_model.dart';
 import '../home/home_controller.dart';
@@ -24,6 +26,10 @@ class ModuleCleaningPlanningController extends GetxController {
   Rx<bool> isAssignedToSelected = true.obs;
   Rx<String> selectedAssignedTo = ''.obs;
   int selectedAssignedToId = 0;
+  bool openStartDatePicker = false;
+  var startDateTc = TextEditingController();
+  var mcTitelCtrlr = TextEditingController();
+  var durationInDayCtrlr = TextEditingController();
 
   Rx<String> selectedfrequency = ''.obs;
   Rx<bool> isSelectedfrequency = true.obs;
@@ -109,6 +115,51 @@ class ModuleCleaningPlanningController extends GetxController {
     update(['equipment_list']);
   }
 
+  void createMcPlan() async {
+    CreateMcPalningsModel createMcModel = CreateMcPalningsModel(
+        // id: 0,
+
+        );
+
+    var createMcModelJsonString = [
+      {
+        "facilityId": 1779,
+        "title": "Dry cleaning",
+        "noOfCleaningDays": 3,
+        "frequencyId": 4,
+        "startDate": "2023/10/10",
+        "schedules": [
+          {
+            "cleaningDay": 1,
+            "cleaningType": 2,
+            "equipments": [
+              {"id": 10},
+              {"id": 11},
+              {"id": 12}
+            ]
+          },
+          {
+            "cleaningDay": 2,
+            "cleaningType": 1,
+            "equipments": [
+              {"id": 10},
+              {"id": 11},
+              {"id": 12}
+            ]
+          }
+        ]
+      }
+    ]; //createMcModel.toJson();
+    Map<String, dynamic>? responseCreateMcModel =
+        await moduleCleaningPlanningPresenter.createMcPlan(
+      createMcPlans: createMcModelJsonString,
+      isLoading: true,
+    );
+
+    if (responseCreateMcModel == null) {}
+    print('Create Mc  data: $createMcModelJsonString');
+  }
+
   Future<void> getAssignedToList() async {
     assignedToList.clear();
     final _assignedToList =
@@ -145,17 +196,6 @@ class ModuleCleaningPlanningController extends GetxController {
               frequencyList.indexWhere((x) => x?.name == value);
           selectedfrequencyId = frequencyList[frequencyIndex]?.id ?? 0;
           selectedfrequency.value = value;
-        }
-        break;
-      case RxList<EmployeeModel>:
-        {
-          int assignedToIndex =
-              assignedToList.indexWhere((x) => x?.name == value);
-          selectedAssignedToId = assignedToList[assignedToIndex]?.id ?? 0;
-          if (selectedAssignedToId != 0) {
-            isAssignedToSelected.value = true;
-          }
-          selectedAssignedTo.value = value;
         }
         break;
 
