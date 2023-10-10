@@ -21,8 +21,7 @@ import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:scrollable_table_view/scrollable_table_view.dart';
 
-class AddModuleCleaningExecutionContentWeb
-    extends GetView<AddModuleCleaningExecutionController> {
+class AddModuleCleaningExecutionContentWeb extends GetView<AddModuleCleaningExecutionController> {
   AddModuleCleaningExecutionContentWeb({super.key});
 
   // final homeController = Get.find<HomeController>();
@@ -56,8 +55,7 @@ class AddModuleCleaningExecutionContentWeb
                       ),
                       boxShadow: [
                         BoxShadow(
-                          color: Color.fromARGB(255, 236, 234, 234)
-                              .withOpacity(0.5),
+                          color: Color.fromARGB(255, 236, 234, 234).withOpacity(0.5),
                           spreadRadius: 2,
                           blurRadius: 5,
                           offset: Offset(0, 2),
@@ -78,11 +76,9 @@ class AddModuleCleaningExecutionContentWeb
                           onTap: () {
                             Get.back();
                           },
-                          child: Text(" / MODULE CLEANING EXECUTION LIST",
-                              style: Styles.greyMediumLight12),
+                          child: Text(" / MODULE CLEANING EXECUTION LIST", style: Styles.greyMediumLight12),
                         ),
-                        Text(" / CREATE MODULE CLEANING EXECUTION",
-                            style: Styles.greyMediumLight12)
+                        Text(" / CREATE MODULE CLEANING EXECUTION", style: Styles.greyMediumLight12)
                       ],
                     ),
                   ),
@@ -117,25 +113,16 @@ class AddModuleCleaningExecutionContentWeb
                                             //     5,
                                             padding: EdgeInsets.all(5),
                                             decoration: BoxDecoration(
-                                              borderRadius:
-                                                  BorderRadius.circular(10),
+                                              borderRadius: BorderRadius.circular(10),
                                               border: Border.all(
-                                                color: controller
-                                                            .mcExecutionDetailsModel
-                                                            .value
-                                                            ?.status ==
-                                                        380
+                                                color: controller.mcExecutionDetailsModel.value?.status == 380
                                                     ? ColorValues.approveColor
                                                     : ColorValues.appRedColor,
                                                 width: 1,
                                               ),
                                               boxShadow: [
                                                 BoxShadow(
-                                                  color: controller
-                                                              .mcExecutionDetailsModel
-                                                              .value
-                                                              ?.status ==
-                                                          380 //125
+                                                  color: controller.mcExecutionDetailsModel.value?.status == 380 //125
 
                                                       ? ColorValues.approveColor
                                                       : ColorValues.appRedColor,
@@ -145,44 +132,39 @@ class AddModuleCleaningExecutionContentWeb
                                             child: Center(
                                                 child: Text(
                                               '${controller.mcExecutionDetailsModel.value?.status_short}',
-                                              style: TextStyle(
-                                                  color: Colors.white),
+                                              style: TextStyle(color: Colors.white),
                                             )),
                                           )
                                         ],
                                       ),
-                                      Divider(
-                                          color: ColorValues.lightGreyColor),
+                                      Divider(color: ColorValues.lightGreyColor),
                                       // Dimens.boxHeight20,
                                       Row(
-                                        crossAxisAlignment:
-                                            CrossAxisAlignment.start,
-                                        mainAxisAlignment:
-                                            MainAxisAlignment.center,
+                                        crossAxisAlignment: CrossAxisAlignment.start,
+                                        mainAxisAlignment: MainAxisAlignment.center,
                                         children: [
                                           Column(
-                                            crossAxisAlignment:
-                                                CrossAxisAlignment.end,
+                                            crossAxisAlignment: CrossAxisAlignment.end,
                                             children: [
                                               Text(
                                                 'Plan Id: ',
                                                 style: Styles.black17,
                                               ),
                                               Text(
-                                                'Schedule Id: ',
+                                                'Execution Id: ',
                                                 style: Styles.black17,
                                               ),
                                             ],
                                           ),
 
                                           Column(
-                                            crossAxisAlignment:
-                                                CrossAxisAlignment.start,
+                                            crossAxisAlignment: CrossAxisAlignment.start,
                                             children: [
                                               Text(
                                                 ' ${controller.data['planId']}',
                                                 style: Styles.blue17,
                                               ),
+                                             
                                               Text(
                                                 ' ${controller.data['id']}',
                                                 style: Styles.blue17,
@@ -191,8 +173,7 @@ class AddModuleCleaningExecutionContentWeb
                                           ),
                                           Spacer(),
                                           Column(
-                                            crossAxisAlignment:
-                                                CrossAxisAlignment.end,
+                                            crossAxisAlignment: CrossAxisAlignment.end,
                                             children: [
                                               Text(
                                                 'Plan Title: ',
@@ -206,8 +187,7 @@ class AddModuleCleaningExecutionContentWeb
                                           ),
 
                                           Column(
-                                            crossAxisAlignment:
-                                                CrossAxisAlignment.start,
+                                            crossAxisAlignment: CrossAxisAlignment.start,
                                             children: [
                                               Text(
                                                 ' ${controller.mcExecutionDetailsModel.value?.title}',
@@ -221,8 +201,7 @@ class AddModuleCleaningExecutionContentWeb
                                           ),
                                           Spacer(),
                                           Column(
-                                            crossAxisAlignment:
-                                                CrossAxisAlignment.end,
+                                            crossAxisAlignment: CrossAxisAlignment.end,
                                             children: [
                                               Text(
                                                 'Planned By: ',
@@ -236,8 +215,7 @@ class AddModuleCleaningExecutionContentWeb
                                           ),
 
                                           Column(
-                                            crossAxisAlignment:
-                                                CrossAxisAlignment.start,
+                                            crossAxisAlignment: CrossAxisAlignment.start,
                                             children: [
                                               Text(
                                                 ' ${controller.mcExecutionDetailsModel.value?.plannedBy}',
@@ -252,8 +230,7 @@ class AddModuleCleaningExecutionContentWeb
                                           Spacer(),
                                           // Dimens.boxWidth30,
                                           Column(
-                                            crossAxisAlignment:
-                                                CrossAxisAlignment.end,
+                                            crossAxisAlignment: CrossAxisAlignment.end,
                                             children: [
                                               Text(
                                                 'Planning Date Time: ',
@@ -267,8 +244,7 @@ class AddModuleCleaningExecutionContentWeb
                                           ),
 
                                           Column(
-                                            crossAxisAlignment:
-                                                CrossAxisAlignment.start,
+                                            crossAxisAlignment: CrossAxisAlignment.start,
                                             children: [
                                               Text(
                                                 ' ${controller.plannedAtDateTimeCtrlrWeb.text}',
@@ -291,20 +267,15 @@ class AddModuleCleaningExecutionContentWeb
                                       Container(
                                         margin: Dimens.edgeInsets20,
                                         //  height: 300,
-                                        height:
-                                            ((controller.rowItem.value.length) *
-                                                    90) +
-                                                170,
+                                        height: ((controller.rowItem.value.length) * 90) + 170,
                                         decoration: BoxDecoration(
                                           border: Border.all(
-                                            color: ColorValues
-                                                .lightGreyColorWithOpacity35,
+                                            color: ColorValues.lightGreyColorWithOpacity35,
                                             width: 1,
                                           ),
                                           boxShadow: [
                                             BoxShadow(
-                                              color: ColorValues
-                                                  .appBlueBackgroundColor,
+                                              color: ColorValues.appBlueBackgroundColor,
                                               spreadRadius: 2,
                                               blurRadius: 5,
                                               offset: Offset(0, 2),
@@ -320,9 +291,7 @@ class AddModuleCleaningExecutionContentWeb
                                           Padding(
                                             padding: const EdgeInsets.all(10.0),
                                             child: Row(
-                                              mainAxisAlignment:
-                                                  MainAxisAlignment
-                                                      .spaceBetween,
+                                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
                                               children: [
                                                 Text(
                                                   "Schedule Execution",
@@ -336,175 +305,111 @@ class AddModuleCleaningExecutionContentWeb
                                               // minWidth: 2000,
                                               dataRowHeight: 105,
                                               columnSpacing: 10,
-                                              border: TableBorder.all(
-                                                  color: Color.fromARGB(
-                                                      255, 206, 229, 234)),
+                                              border: TableBorder.all(color: Color.fromARGB(255, 206, 229, 234)),
                                               columns: [
                                                 DataColumn2(
                                                     fixedWidth: 60,
                                                     label: Text(
                                                       "Id",
-                                                      style: TextStyle(
-                                                          fontSize: 15,
-                                                          fontWeight:
-                                                              FontWeight.bold),
+                                                      style: TextStyle(fontSize: 15, fontWeight: FontWeight.bold),
                                                     )),
                                                 DataColumn2(
                                                     fixedWidth: 60,
                                                     label: Text(
                                                       "Days",
-                                                      style: TextStyle(
-                                                          fontSize: 15,
-                                                          fontWeight:
-                                                              FontWeight.bold),
+                                                      style: TextStyle(fontSize: 15, fontWeight: FontWeight.bold),
                                                     )),
                                                 DataColumn2(
                                                     fixedWidth: 100,
                                                     label: Text(
                                                       "Scheduled ",
-                                                      style: TextStyle(
-                                                          fontSize: 15,
-                                                          fontWeight:
-                                                              FontWeight.bold),
+                                                      style: TextStyle(fontSize: 15, fontWeight: FontWeight.bold),
                                                     )),
                                                 DataColumn2(
                                                     fixedWidth: 90,
                                                     label: Text(
                                                       "Cleaned",
-                                                      style: TextStyle(
-                                                          fontSize: 15,
-                                                          fontWeight:
-                                                              FontWeight.bold),
+                                                      style: TextStyle(fontSize: 15, fontWeight: FontWeight.bold),
                                                     )),
                                                 DataColumn2(
                                                     fixedWidth: 100,
                                                     label: Text(
                                                       "Abandoned",
-                                                      style: TextStyle(
-                                                          fontSize: 15,
-                                                          fontWeight:
-                                                              FontWeight.bold),
+                                                      style: TextStyle(fontSize: 15, fontWeight: FontWeight.bold),
                                                     )),
                                                 DataColumn2(
                                                     fixedWidth: 80,
                                                     label: Text(
                                                       "Pending",
-                                                      style: TextStyle(
-                                                          fontSize: 15,
-                                                          fontWeight:
-                                                              FontWeight.bold),
+                                                      style: TextStyle(fontSize: 15, fontWeight: FontWeight.bold),
                                                     )),
                                                 DataColumn2(
                                                     fixedWidth: 70,
                                                     label: Text(
                                                       "Type",
-                                                      style: TextStyle(
-                                                          fontSize: 15,
-                                                          fontWeight:
-                                                              FontWeight.bold),
+                                                      style: TextStyle(fontSize: 15, fontWeight: FontWeight.bold),
                                                     )),
                                                 DataColumn2(
                                                     fixedWidth: 100,
                                                     label: Text(
                                                       "Water Used",
-                                                      style: TextStyle(
-                                                          fontSize: 15,
-                                                          fontWeight:
-                                                              FontWeight.bold),
+                                                      style: TextStyle(fontSize: 15, fontWeight: FontWeight.bold),
                                                     )),
                                                 DataColumn2(
                                                     // fixedWidth: 200,
                                                     label: Text(
                                                   "Remark",
-                                                  style: TextStyle(
-                                                      fontSize: 15,
-                                                      fontWeight:
-                                                          FontWeight.bold),
+                                                  style: TextStyle(fontSize: 15, fontWeight: FontWeight.bold),
                                                 )),
                                                 DataColumn2(
                                                     fixedWidth: 100,
                                                     label: Text(
                                                       "Status",
-                                                      style: TextStyle(
-                                                          fontSize: 15,
-                                                          fontWeight:
-                                                              FontWeight.bold),
+                                                      style: TextStyle(fontSize: 15, fontWeight: FontWeight.bold),
                                                     )),
                                                 DataColumn2(
                                                     fixedWidth: 150,
                                                     label: Text(
                                                       "Actions",
-                                                      style: TextStyle(
-                                                          fontSize: 15,
-                                                          fontWeight:
-                                                              FontWeight.bold),
+                                                      style: TextStyle(fontSize: 15, fontWeight: FontWeight.bold),
                                                     )),
                                               ],
-                                              rows: controller.rowItem.value
-                                                  .map((record) {
+                                              rows: controller.rowItem.value.map((record) {
                                                 return DataRow(
                                                   // height: 130,
                                                   cells: record.map((mapData) {
                                                     return DataCell(
-                                                      (mapData['key'] ==
-                                                              "Schedule Id")
+                                                      (mapData['key'] == "Schedule Id")
                                                           ? Text(
-                                                              mapData["value"] ??
-                                                                  "",
+                                                              mapData["value"] ?? "",
                                                               // "${element?.scheduleId}",
-                                                              style: TextStyle(
-                                                                  color: Color
-                                                                      .fromARGB(
-                                                                          255,
-                                                                          5,
-                                                                          92,
-                                                                          163)),
+                                                              style: TextStyle(color: Color.fromARGB(255, 5, 92, 163)),
                                                             )
-                                                          : (mapData['key'] ==
-                                                                  "Days")
+                                                          : (mapData['key'] == "Days")
                                                               ? Center(
                                                                   child: Text(
-                                                                    mapData["value"] ??
-                                                                        "",
+                                                                    mapData["value"] ?? "",
                                                                     // "${element?.scheduleId}",
-                                                                    style: TextStyle(
-                                                                        color: Color.fromARGB(
-                                                                            255,
-                                                                            5,
-                                                                            92,
-                                                                            163)),
+                                                                    style: TextStyle(color: Color.fromARGB(255, 5, 92, 163)),
                                                                   ),
                                                                 )
-                                                              : (mapData['key'] ==
-                                                                      "Scheduled Module")
+                                                              : (mapData['key'] == "Scheduled Module")
                                                                   ? Center(
-                                                                      child:
-                                                                          Text(
-                                                                        mapData["value"] ??
-                                                                            "",
+                                                                      child: Text(
+                                                                        mapData["value"] ?? "",
                                                                         // "${element?.scheduleId}",
-                                                                        style: TextStyle(
-                                                                            color: Color.fromARGB(
-                                                                                255,
-                                                                                5,
-                                                                                92,
-                                                                                163)),
+                                                                        style: TextStyle(color: Color.fromARGB(255, 5, 92, 163)),
                                                                       ),
                                                                     )
-                                                                  : (mapData['key'] ==
-                                                                          "Cleaned")
+                                                                  : (mapData['key'] == "Cleaned")
                                                                       ? Center(
-                                                                          child:
-                                                                              Text(
-                                                                            mapData["value"] ??
-                                                                                "",
+                                                                          child: Text(
+                                                                            mapData["value"] ?? "",
                                                                             // "${element?.scheduleId}",
-                                                                            style:
-                                                                                TextStyle(color: Color.fromARGB(255, 5, 92, 163)),
+                                                                            style: TextStyle(color: Color.fromARGB(255, 5, 92, 163)),
                                                                           ),
                                                                         )
-                                                                      : (mapData['key'] ==
-                                                                              "Abandoned")
+                                                                      : (mapData['key'] == "Abandoned")
                                                                           ? Center(
                                                                               child: Text(
                                                                                 mapData["value"] ?? "",
@@ -560,7 +465,8 @@ class AddModuleCleaningExecutionContentWeb
                                                                                                     child: LoginCustomTextfield(
                                                                                                       width: MediaQuery.of(context).size.width / 2,
                                                                                                       maxLine: 1,
-                                                                                                      textController: new TextEditingController(text: mapData["value"] ?? ''),
+                                                                                                      textController: new TextEditingController(
+                                                                                                          text: mapData["value"] ?? ''),
                                                                                                       onChanged: (txt) {
                                                                                                         mapData["value"] = txt;
                                                                                                       },
@@ -571,88 +477,190 @@ class AddModuleCleaningExecutionContentWeb
                                                                                               ? Text(
                                                                                                   mapData["value"] ?? "",
                                                                                                   // "${element?.scheduleId}",
-                                                                                                  style: TextStyle(color: Color.fromARGB(255, 5, 92, 163)),
+                                                                                                  style: TextStyle(
+                                                                                                      color: Color.fromARGB(255, 5, 92, 163)),
                                                                                                 )
                                                                                               : (mapData['key'] == "Actions")
                                                                                                   ? Column(
                                                                                                       mainAxisAlignment: MainAxisAlignment.center,
                                                                                                       crossAxisAlignment: CrossAxisAlignment.center,
-                                                                                                      children: []..addAll(controller.listSchedules!.map((element) => Row(
-                                                                                                            mainAxisSize: MainAxisSize.min,
-                                                                                                            mainAxisAlignment: MainAxisAlignment.start,
-                                                                                                            crossAxisAlignment: CrossAxisAlignment.start,
-                                                                                                            children: [
-                                                                                                              controller.listSchedules!
-                                                                                                                          .firstWhere(
-                                                                                                                            (e) => "${e?.status_short}" == e?.status_short,
-                                                                                                                            orElse: () => Schedules(status_short: ""),
-                                                                                                                          )
-                                                                                                                          ?.status_short ==
-                                                                                                                      "Scheduled"
-                                                                                                                  ? TableActionButton(
-                                                                                                                      // label: 'Start',
-                                                                                                                      onPress: () {
-                                                                                                                        var filterdData = controller.listSchedules?.firstWhere((e) => e?.scheduleId == element?.scheduleId);
-                                                                                                                        //  selectedData = filterdData;
-                                                                                                                        controller.startMCExecutionScheduleButton(scheduleID: filterdData?.scheduleId);
-                                                                                                                        print({'scheduledata:': filterdData?.scheduleId});
-                                                                                                                      },
-                                                                                                                      color: Colors.green,
-                                                                                                                      icon: Icons.add,
-                                                                                                                      message: 'Start',
-                                                                                                                    )
-                                                                                                                  : Dimens.box0,
+                                                                                                      children: [
+                                                                                                        
+                                                                                                          controller.listSchedules!
+                                                                                                                      .firstWhere(
+                                                                                                                        (e) =>
+                                                                                                                            "${e?.status_short}" ==
+                                                                                                                            e?.status_short,
+                                                                                                                        orElse: () => Schedules(
+                                                                                                                            status_short: ""),
+                                                                                                                      )
+                                                                                                                      ?.status_short ==
+                                                                                                                  "Scheduled"
+                                                                                                              ?
+                                                                                                          TableActionButton(
+                                                                                                            // label: 'Start',
+                                                                                                            onPress: () {
+                                                                                                                var filterdData = controller.listSchedules?.firstWhere((e) => "${e?.scheduleId}" == record[0]['value']);
+                                                                                                              
+                                                                                                              print('filteredData:${filterdData!.scheduleId}');
+                                                                                                              //  selectedData = filterdData;
 
-                                                                                                              // controller.listSchedules!
-                                                                                                              //             .firstWhere(
-                                                                                                              //               (e) => "${e?.status_short}" == e?.status_short,
-                                                                                                              //               orElse: () => Schedules(status_short: ""),
-                                                                                                              //             )
-                                                                                                              //             ?.status_short ==
-                                                                                                              //         "In Progress"
-                                                                                                              //     ?
-                                                                                                              TableActionButton(
-                                                                                                                // label: 'Abandon',
-                                                                                                                onPress: () {
-                                                                                                                  // Get.dialog(AddModuleCleaningExecutionDialog());
-                                                                                                                  var filterdData = controller.listSchedules?.firstWhere((e) => e?.scheduleId == element?.scheduleId);
+                                                                                                              controller
+                                                                                                                  .startMCExecutionScheduleButton(
+                                                                                                                      scheduleID:
+                                                                                                                          filterdData.scheduleId);
+                                                                                                              // print({
+                                                                                                              //   'scheduledata:':
+                                                                                                              //       filterdData.scheduleId
+                                                                                                              // });
+                                                                                                            },
+                                                                                                            color: Colors.green,
+                                                                                                            icon: Icons.add,
+                                                                                                            message: 'Start',
+                                                                                                          )
+                                                                                                          : Dimens.box0,
 
-                                                                                                                  controller.updateMCScheduleExecution(scheduleId: filterdData?.scheduleId, cleaningDay: filterdData?.cleaningDay, waterUsed: filterdData?.waterUsed);
-                                                                                                                },
-                                                                                                                color: ColorValues.appLightBlueColor,
-                                                                                                                icon: Icons.add,
-                                                                                                                message: 'Update',
-                                                                                                              ),
+                                                                                                          controller.listSchedules!
+                                                                                                                      .firstWhere(
+                                                                                                                        (e) => "${e?.status_short}" == e?.status_short,
+                                                                                                                        orElse: () => Schedules(status_short: ""),
+                                                                                                                      )
+                                                                                                                      ?.status_short ==
+                                                                                                                  "In Progress"
+                                                                                                              ?
+                                                                                                          TableActionButton(
+                                                                                                            // label: 'Abandon',
+                                                                                                            onPress: () {
+                                                                                                              // Get.dialog(AddModuleCleaningExecutionDialog());
+                                                                                                              var filterdData = controller
+                                                                                                                  .listSchedules
+                                                                                                                  ?.firstWhere((e) =>
+                                                                                                                      "${e?.scheduleId}" ==
+                                                                                                                      record[0]['value']);
 
-                                                                                                              ///Abandon
-                                                                                                              TableActionButton(
-                                                                                                                // label: 'Abandon',
-                                                                                                                onPress: () {
-                                                                                                                  var filterdData = controller.listSchedules?.firstWhere((e) => e?.executionId == element?.executionId);
-                                                                                                                  print({
-                                                                                                                    'Executiondata:': filterdData?.executionId
-                                                                                                                  });
-                                                                                                                  Get.dialog(AbandoneScheduleExecutionDialog(
-                                                                                                                    id: filterdData?.executionId,
-                                                                                                                  ));
-                                                                                                                },
-                                                                                                                color: Colors.red,
-                                                                                                                icon: Icons.close,
-                                                                                                                message: 'Abandon',
-                                                                                                              ),
+                                                                                                              controller.updateMCScheduleExecution(
+                                                                                                                  scheduleId: filterdData?.scheduleId,
+                                                                                                                  cleaningDay:filterdData?.cleaningDay,
+                                                                                                                  waterUsed: filterdData?.waterUsed);
+                                                                                                              // print({"filteredData:${filterdData?.scheduleId}"});
+                                                                                                              // print({"filteredData:${filterdData!.cleaningDay}"});
+                                                                                                              // print({"filteredData:${filterdData.waterUsed}"});
 
-                                                                                                              TableActionButton(
-                                                                                                                // label: 'Equipments',
-                                                                                                                onPress: () {
-                                                                                                                  Get.dialog(AddModuleCleaningExecutionDialog());
-                                                                                                                },
-                                                                                                                color: ColorValues.appDarkBlueColor,
-                                                                                                                icon: Icons.category,
-                                                                                                                message: 'Equipments',
-                                                                                                              ),
-                                                                                                            ],
-                                                                                                          ))),
-                                                                                                    )
+
+                                                                                                            },
+                                                                                                            color: ColorValues.appLightBlueColor,
+                                                                                                            icon: Icons.add,
+                                                                                                            message: 'Update',
+                                                                                                          )
+                                                                                                          :Dimens.box0,
+
+                                                                                                          ///Abandon
+                                                                                                          TableActionButton(
+                                                                                                            // label: 'Abandon',
+                                                                                                            onPress: () {
+                                                                                                               var filterdData = controller.listSchedules?.firstWhere((e) => "${e?.scheduleId}" == record[0]['value']);
+                                                                                                               controller.scheduledId = filterdData?.scheduleId;
+                                                                                                              print({
+                                                                                                                'Executiondata:': filterdData?.executionId
+                                                                                                              });
+                                                                                                              Get.dialog(
+                                                                                                                  AbandoneScheduleExecutionDialog(
+                                                                                                                      id: filterdData?.executionId,
+                                                                                                                      ));
+                                                                                                            },
+                                                                                                            color: Colors.red,
+                                                                                                            icon: Icons.close,
+                                                                                                            message: 'Abandon',
+                                                                                                          ),
+
+                                                                                                          TableActionButton(
+                                                                                                            // label: 'Equipments',
+                                                                                                            onPress: () {
+                                                                                                              Get.dialog(
+                                                                                                                  AddModuleCleaningExecutionDialog());
+                                                                                                            },
+                                                                                                            color: ColorValues.appDarkBlueColor,
+                                                                                                            icon: Icons.category,
+                                                                                                            message: 'Equipments',
+                                                                                                          ),
+                                                                                                        ]
+                                                                                                      // ..addAll(controller.listSchedules!.map((element) => Row(
+                                                                                                      //       mainAxisSize: MainAxisSize.min,
+                                                                                                      //       mainAxisAlignment: MainAxisAlignment.start,
+                                                                                                      //       crossAxisAlignment: CrossAxisAlignment.start,
+                                                                                                      //       children: [
+                                                                                                      //         controller.listSchedules!
+                                                                                                      //                     .firstWhere(
+                                                                                                      //                       (e) => "${e?.status_short}" == e?.status_short,
+                                                                                                      //                       orElse: () => Schedules(status_short: ""),
+                                                                                                      //                     )
+                                                                                                      //                     ?.status_short ==
+                                                                                                      //                 "Scheduled"
+                                                                                                      //             ? TableActionButton(
+                                                                                                      //                 // label: 'Start',
+                                                                                                      //                 onPress: () {
+                                                                                                      //                   var filterdData = controller.listSchedules?.firstWhere((e) => e?.scheduleId == element?.scheduleId);
+                                                                                                      //                   //  selectedData = filterdData;
+                                                                                                      //                   controller.startMCExecutionScheduleButton(scheduleID: filterdData?.scheduleId);
+                                                                                                      //                   print({'scheduledata:': filterdData?.scheduleId});
+                                                                                                      //                 },
+                                                                                                      //                 color: Colors.green,
+                                                                                                      //                 icon: Icons.add,
+                                                                                                      //                 message: 'Start',
+                                                                                                      //               )
+                                                                                                      //             : Dimens.box0,
+
+                                                                                                      //         // controller.listSchedules!
+                                                                                                      //         //             .firstWhere(
+                                                                                                      //         //               (e) => "${e?.status_short}" == e?.status_short,
+                                                                                                      //         //               orElse: () => Schedules(status_short: ""),
+                                                                                                      //         //             )
+                                                                                                      //         //             ?.status_short ==
+                                                                                                      //         //         "In Progress"
+                                                                                                      //         //     ?
+                                                                                                      //         TableActionButton(
+                                                                                                      //           // label: 'Abandon',
+                                                                                                      //           onPress: () {
+                                                                                                      //             // Get.dialog(AddModuleCleaningExecutionDialog());
+                                                                                                      //             var filterdData = controller.listSchedules?.firstWhere((e) => e?.scheduleId == element?.scheduleId);
+
+                                                                                                      //             controller.updateMCScheduleExecution(scheduleId: filterdData?.scheduleId, cleaningDay: filterdData?.cleaningDay, waterUsed: filterdData?.waterUsed);
+                                                                                                      //           },
+                                                                                                      //           color: ColorValues.appLightBlueColor,
+                                                                                                      //           icon: Icons.add,
+                                                                                                      //           message: 'Update',
+                                                                                                      //         ),
+
+                                                                                                      //         ///Abandon
+                                                                                                      //         TableActionButton(
+                                                                                                      //           // label: 'Abandon',
+                                                                                                      //           onPress: () {
+                                                                                                      //             var filterdData = controller.listSchedules?.firstWhere((e) => e?.executionId == element?.executionId);
+                                                                                                      //             print({
+                                                                                                      //               'Executiondata:': filterdData?.executionId
+                                                                                                      //             });
+                                                                                                      //             Get.dialog(AbandoneScheduleExecutionDialog(
+                                                                                                      //               id: filterdData?.executionId,
+                                                                                                      //             ));
+                                                                                                      //           },
+                                                                                                      //           color: Colors.red,
+                                                                                                      //           icon: Icons.close,
+                                                                                                      //           message: 'Abandon',
+                                                                                                      //         ),
+
+                                                                                                      //         TableActionButton(
+                                                                                                      //           // label: 'Equipments',
+                                                                                                      //           onPress: () {
+                                                                                                      //             Get.dialog(AddModuleCleaningExecutionDialog());
+                                                                                                      //           },
+                                                                                                      //           color: ColorValues.appDarkBlueColor,
+                                                                                                      //           icon: Icons.category,
+                                                                                                      //           message: 'Equipments',
+                                                                                                      //         ),
+                                                                                                      //       ],
+                                                                                                      //     )
+                                                                                                      //     )),
+                                                                                                      )
                                                                                                   : Text(mapData['key'] ?? ''),
                                                     );
                                                   }).toList(),
@@ -664,8 +672,7 @@ class AddModuleCleaningExecutionContentWeb
                                       ),
 
                                       Row(
-                                        mainAxisAlignment:
-                                            MainAxisAlignment.center,
+                                        mainAxisAlignment: MainAxisAlignment.center,
                                         children: [
                                           SizedBox(
                                             height: 150,
@@ -677,8 +684,7 @@ class AddModuleCleaningExecutionContentWeb
                                           CustomElevatedButton(
                                             backgroundColor: Colors.red,
                                             onPressed: () {
-                                              Get.offAndToNamed(Routes
-                                                  .moduleCleaningListExecution);
+                                              Get.offAndToNamed(Routes.moduleCleaningListExecution);
                                             },
                                             text: 'Cancel',
                                           ),
@@ -697,17 +703,14 @@ class AddModuleCleaningExecutionContentWeb
                                           SizedBox(
                                             width: 20,
                                           ),
-                                          controller.data['status'] ==
-                                                  "Scheduled"
+                                          controller.data['status'] == "Scheduled"
                                               ? Container(
                                                   height: 28,
                                                   child: CustomElevatedButton(
-                                                    backgroundColor:
-                                                        ColorValues.addNewColor,
+                                                    backgroundColor: ColorValues.addNewColor,
                                                     text: "Start",
                                                     onPressed: () {
-                                                      controller
-                                                          .startMCExecutionButton();
+                                                      controller.startMCExecutionButton();
                                                     },
                                                   ),
                                                 )
@@ -717,17 +720,14 @@ class AddModuleCleaningExecutionContentWeb
                                             width: 20,
                                           ),
 
-                                          controller.data['status'] ==
-                                                  "Abandoned"
+                                          controller.data['status'] == "Abandoned"
                                               ? Container(
                                                   height: 28,
                                                   child: CustomElevatedButton(
-                                                    backgroundColor:
-                                                        ColorValues.cancelColor,
+                                                    backgroundColor: ColorValues.cancelColor,
                                                     text: "End",
                                                     onPressed: () {
-                                                      Get.dialog(
-                                                          EndMCExecutionDialog());
+                                                      Get.dialog(EndMCExecutionDialog());
                                                     },
                                                   ),
                                                 )
@@ -738,12 +738,10 @@ class AddModuleCleaningExecutionContentWeb
                                           Container(
                                             height: 28,
                                             child: CustomElevatedButton(
-                                              backgroundColor: Color.fromARGB(
-                                                  255, 244, 116, 248),
+                                              backgroundColor: Color.fromARGB(255, 244, 116, 248),
                                               text: "Abandoned All",
                                               onPressed: () {
-                                                Get.dialog(AbandonAllDialog(
-                                                    id: controller.data['id']));
+                                                Get.dialog(AbandonAllDialog(id: controller.data['id']));
                                                 // controller
                                                 //     .createEscalationMatrix();
                                               },
