@@ -1,11 +1,12 @@
 import 'package:cmms/domain/models/end_mc_execution_detail_model.dart';
+import 'package:cmms/domain/models/mc_details_plan_model.dart';
 
 import 'package:cmms/domain/repositories/repository.dart';
 
 class ViewMcPlaningUsecase {
   ViewMcPlaningUsecase(this.repository);
   Repository repository;
-  Future<EndMCExecutionDetailsModel?> getMcPlanDetail({
+  Future<McPalningDetailsModel?> getMcPlanDetail({
     bool? isLoading,
     required int planId,
   }) async =>

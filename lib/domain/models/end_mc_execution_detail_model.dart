@@ -5,8 +5,8 @@ import 'package:cmms/app/utils/utility.dart';
 EndMCExecutionDetailsModel endMCExecutionDetailsModelFromJson(String str) =>
     EndMCExecutionDetailsModel.fromJson(json.decode(str));
 
-String endMCExecutionDetailsModelToJson(EndMCExecutionDetailsModel data) =>
-    json.encode(data.toJson());
+// String endMCExecutionDetailsModelToJson(EndMCExecutionDetailsModel data) =>
+//     json.encode(data.toJson());
 
 class EndMCExecutionDetailsModel {
   int? id;

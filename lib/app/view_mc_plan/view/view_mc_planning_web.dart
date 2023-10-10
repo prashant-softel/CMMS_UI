@@ -172,7 +172,7 @@ class _ViewMcPlaningWebState extends State<ViewMcPlaningWeb> {
                                                   Dimens.boxWidth10,
                                                   Obx(
                                                     () => Text(
-                                                        '${controller.mcPlanDetailsModel.value?.plannedBy ?? ''}', //  "Block 2 all Inverter maintenance plan",
+                                                        '${controller.mcPlanDetailsModel.value?.createdBy ?? ''}', //  "Block 2 all Inverter maintenance plan",
                                                         style: Styles.blue17),
                                                   ),
                                                 ],
@@ -188,7 +188,7 @@ class _ViewMcPlaningWebState extends State<ViewMcPlaningWeb> {
                                                   title: 'Site Name  :'),
                                               Dimens.boxWidth10,
                                               Text(
-                                                  '${controller.mcPlanDetailsModel.value?.plannedBy ?? ''}', //  "Block 2 all Inverter maintenance plan",
+                                                  '${controller.mcPlanDetailsModel.value?.title ?? ''}', //  "Block 2 all Inverter maintenance plan",
                                                   style: Styles.blue17),
                                             ],
                                           ),
@@ -207,7 +207,7 @@ class _ViewMcPlaningWebState extends State<ViewMcPlaningWeb> {
                                                       'Planning Date & Time :'),
                                               Dimens.boxWidth10,
                                               Text(
-                                                  '${controller.mcPlanDetailsModel.value?.plannedAt ?? ''}', //  "Block 2 all Inverter maintenance plan",
+                                                  '${controller.mcPlanDetailsModel.value?.createdAt ?? ''}', //  "Block 2 all Inverter maintenance plan",
                                                   style: Styles.blue17),
                                             ],
                                           ),
