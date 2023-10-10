@@ -144,6 +144,7 @@ abstract class Routes {
   static const sourceofobservation = _Paths.sourceofobservation;
   static const risktypemaster = _Paths.risktypemaster;
   static const viewMcPlaning = _Paths.viewMcPlaning;
+  static const print = _Paths.print;
 }
 
 abstract class _Paths {
@@ -282,6 +283,7 @@ abstract class _Paths {
   static const sourceofobservation = '/source-of-observation';
   static const risktypemaster = '/risk-type-master';
   static const viewMcPlaning = '/view-mc-planing';
+  static const print = '/print';
 
 // static const editPermitWebScreen = '/edit-permit-web-screen';
 }

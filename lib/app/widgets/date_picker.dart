@@ -1,10 +1,9 @@
 import 'package:cmms/app/theme/theme.dart';
 import 'package:flutter/material.dart';
-import 'package:get/get_core/src/get_main.dart';
-import 'package:get/get_navigation/get_navigation.dart';
+import 'package:get/get.dart';
 import 'package:syncfusion_flutter_datepicker/datepicker.dart';
 
-class DatePickerWidget extends StatelessWidget {
+class DatePickerWidget extends GetView {
   DatePickerWidget({
     this.selectionChanges,
     this.controller,
