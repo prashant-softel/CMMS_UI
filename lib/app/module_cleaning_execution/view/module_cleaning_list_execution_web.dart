@@ -7,6 +7,7 @@ import 'package:cmms/app/theme/dimens.dart';
 import 'package:cmms/app/utils/user_access_constants.dart';
 import 'package:cmms/app/widgets/abandon_execution_dialog.dart';
 import 'package:cmms/app/widgets/action_button.dart';
+import 'package:cmms/app/widgets/add_mc_execution_dialog.dart';
 import 'package:cmms/app/widgets/custom_richtext.dart';
 import 'package:cmms/app/widgets/date_picker.dart';
 import 'package:cmms/app/widgets/table_action_button.dart';
@@ -210,26 +211,27 @@ class ModuleCleaningListExecution
                                       ),
                                     ),
                                     Dimens.boxWidth10,
-                                    varUserAccessModel.value.access_list!
-                                                .where((e) =>
-                                                    e.feature_id ==
-                                                        UserAccessConstants
-                                                            .kModuleCleaningExecutionFeatureId &&
-                                                    e.add ==
-                                                        UserAccessConstants
-                                                            .kNotHaveAddAccess)
-                                                .length >
-                                            0
-                                        ? ActionButton(
-                                            icon: Icons.add,
-                                            label: 'Add MC Execution',
-                                            onPressed: () {
-                                              Get.toNamed(Routes
-                                                  .addModuleCleaningExecutionContentWeb);
-                                            },
-                                            color: ColorValues.appGreenColor,
-                                          )
-                                        : Container(),
+                                    // varUserAccessModel.value.access_list!
+                                    //             .where((e) =>
+                                    //                 e.feature_id ==
+                                    //                     UserAccessConstants
+                                    //                         .kModuleCleaningExecutionFeatureId &&
+                                    //                 e.add ==
+                                    //                     UserAccessConstants
+                                    //                         .kNotHaveAddAccess)
+                                    //             .length >
+                                    //         0
+                                    //     ? ActionButton(
+                                    //         icon: Icons.add,
+                                    //         label: 'Add MC Execution',
+                                    //         onPressed: () {
+                                    //           // Get.toNamed(Routes
+                                    //           //     .addModuleCleaningExecutionContentWeb);
+                                    //           Get.dialog(AddMCExecutionDialog());
+                                    //         },
+                                    //         color: ColorValues.appGreenColor,
+                                    //       )
+                                    //     : Container(),
                                   ],
                                 ),
                                 SizedBox(

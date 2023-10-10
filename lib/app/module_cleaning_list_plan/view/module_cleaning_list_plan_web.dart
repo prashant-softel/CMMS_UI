@@ -1,6 +1,7 @@
 import 'package:cmms/app/module_cleaning_list_plan/module_cleaning_list_plan_controller.dart';
 import 'package:cmms/app/navigators/app_pages.dart';
 import 'package:cmms/app/theme/dimens.dart';
+import 'package:cmms/app/widgets/add_mc_execution_dialog.dart';
 import 'package:cmms/domain/models/module_cleaning_list_plan_model.dart';
 import 'package:data_table_2/data_table_2.dart';
 import 'package:flutter/material.dart';
@@ -579,6 +580,27 @@ class ModuleCleaningPlanListDataSource extends DataTableSource {
                           //   controller.viewAddGoodsOrdersDetails(
                           //       planId: int.tryParse('${record[0]}'));
                           // },
+                        ),
+                        TableActionButton(
+                          color: ColorValues.appGreenColor,
+                          icon: Icons.add,
+                          // label: 'Execute',
+                          message: 'Schedule Execution',
+                          onPress: () {
+                              Get.dialog(AddMCExecutionDialog(planId: ModuleCleaningPlanningListDetails?.planId,
+                              frequency: ModuleCleaningPlanningListDetails?.frequency,));
+                          //   int id =
+                          //       ModuleCleaningPlanningListDetails?.planId ??
+                          //           0;
+                          //   if (id != 0) {
+                          //     Get.toNamed(Routes.purchaseGoodsorderView,
+                          //         arguments: {'id': id, "type": 1});
+                          //   }
+                          // },
+                          // onPress: () {
+                          //   controller.viewAddGoodsOrdersDetails(
+                          //       planId: int.tryParse('${record[0]}'));
+                          },
                         )
                       ])
                     : Text(value.toString()),

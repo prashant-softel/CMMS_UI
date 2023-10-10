@@ -26,6 +26,11 @@ class ModuleCleaningListPlanController extends GetxController {
   RxString frequencyFilterText = ''.obs;
   RxString statusFilterText = ''.obs;
 
+  //Start DateTime
+  bool openStartDatePicker = false;
+  var startDateTimeCtrlr = TextEditingController();
+
+
   Rx<DateTime> fromDate = DateTime.now().subtract(Duration(days: 7)).obs;
   Rx<DateTime> toDate = DateTime.now().obs;
   final columnVisibility = ValueNotifier<Map<String, bool>>({

@@ -38,6 +38,8 @@ class AddModuleCleaningExecutionController extends GetxController {
   Map<String, PaiedModel> paiddropdownMapperData = {};
   RxList<Schedules?>? schedules = <Schedules?>[].obs;
 
+  int? scheduledId = 0;
+
   // void addRowItem() {
   //   rowItem.value.add([
   //     {"key": "Schedule Id", "value": ''},
