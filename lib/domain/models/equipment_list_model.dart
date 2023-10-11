@@ -18,15 +18,20 @@ class EquipmentListModel {
   List<SMBS> smbs;
   bool isExpanded;
   String? selectedDay;
-  
+  bool? isChecked;
+  bool? isCleanedChecked;
 
-  EquipmentListModel(
-      {this.invId,
+
+  EquipmentListModel({
+    this.invId,
       this.invName,
       this.moduleQuantity,
       this.smbs = const [],
       this.isExpanded = false,
-      this.selectedDay});
+      this.isChecked = false,
+      this.isCleanedChecked = false,
+      this.selectedDay,
+  });
 
   factory EquipmentListModel.fromJson(Map<String, dynamic> json) =>
       EquipmentListModel(

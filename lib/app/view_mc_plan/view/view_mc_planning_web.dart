@@ -1,6 +1,9 @@
 import 'package:cmms/app/app.dart';
 import 'package:cmms/app/view_mc_plan/view_mc_planning_controller.dart';
+import 'package:cmms/app/widgets/custom_elevated_button.dart';
 import 'package:cmms/app/widgets/custom_richtext.dart';
+import 'package:cmms/app/widgets/mc_approve_dialog.dart';
+import 'package:cmms/app/widgets/mc_reject_dialog.dart';
 import 'package:cmms/app/widgets/set_equipments_dialog.dart';
 import 'package:cmms/app/widgets/stock_dropdown.dart';
 import 'package:data_table_2/data_table_2.dart';
@@ -63,7 +66,7 @@ class _ViewMcPlaningWebState extends State<ViewMcPlaningWeb> {
                         child: Text(" / MODULE CLEANING",
                             style: Styles.greyMediumLight12),
                       ),
-                      Text(" / MODULE CLEANING PLANNING VIEW",
+                      Text(" / VIEW MODULE CLEANING PLANNING ",
                           style: Styles.greyMediumLight12)
                     ],
                   ),
@@ -94,20 +97,23 @@ class _ViewMcPlaningWebState extends State<ViewMcPlaningWeb> {
                                       ),
                                       Spacer(),
                                       Container(
-                                          padding: EdgeInsets.symmetric(
-                                              vertical: 2, horizontal: 5),
-                                          margin: EdgeInsets.only(top: 5),
-                                          decoration: BoxDecoration(
-                                            color: ColorValues.addNewColor,
-                                            borderRadius:
-                                                BorderRadius.circular(5),
-                                          ),
-                                          child: Text("text3"
-                                              // " ${controller.getPurchaseDetailsByIDModel.value?.status_short ?? ""}",
-                                              )),
-                                      Text("text"
-                                          // " Order ID :${controller.getPurchaseDetailsByIDModel.value?.id} ",
-                                          ),
+                                        padding: EdgeInsets.symmetric(
+                                            vertical: 2, horizontal: 5),
+                                        margin: EdgeInsets.only(top: 5),
+                                        decoration: BoxDecoration(
+                                          color: ColorValues.addNewColor,
+                                          borderRadius:
+                                              BorderRadius.circular(5),
+                                        ),
+                                        child: Text(
+                                          "Status"
+                                          " ${controller.mcPlanDetailsModel.value?.status_short ?? ""}",
+                                        ),
+                                      ),
+                                      Dimens.boxWidth10,
+                                      Text(
+                                        "Id:${controller.mcPlanDetailsModel.value?.planId} ",
+                                      ),
                                     ],
                                   ),
                                 ),
@@ -116,6 +122,17 @@ class _ViewMcPlaningWebState extends State<ViewMcPlaningWeb> {
                                 ),
 
                                 Dimens.boxHeight15,
+                                Row(
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  children: [
+                                    Text(
+                                      "Current Status:",
+                                    ),
+                                    Text(
+                                      " ${controller.mcPlanDetailsModel.value?.status_long ?? ""}",
+                                    )
+                                  ],
+                                ),
                                 Container(
                                   margin: Dimens.edgeInsets20,
                                   child: Row(
@@ -149,7 +166,7 @@ class _ViewMcPlaningWebState extends State<ViewMcPlaningWeb> {
                                               Dimens.boxWidth10,
                                               Obx(
                                                 () => Text(
-                                                    '${controller.mcPlanDetailsModel.value?.frequency}', //  "Block 2 all Inverter maintenance plan",
+                                                    '${controller.mcPlanDetailsModel.value?.frequency ?? ""}', //  "Block 2 all Inverter maintenance plan",
                                                     style: Styles.blue17),
                                               ),
                                             ],
@@ -421,6 +438,47 @@ class _ViewMcPlaningWebState extends State<ViewMcPlaningWeb> {
                                     ],
                                   ),
                                 ),
+                                Dimens.boxHeight12,
+
+                                Row(
+                                  children: [
+                                    Spacer(),
+
+                                    Container(
+                                      height: 45,
+                                      child: CustomElevatedButton(
+                                        backgroundColor:
+                                            ColorValues.rejectColor,
+                                        text: "Reject",
+                                        icon: Icons.close,
+                                        onPressed: () {
+                                          Get.dialog(RejectMcPlan(
+                                            id: controller.id.value,
+                                          ));
+                                        },
+                                      ),
+                                    ),
+                                    Dimens.boxWidth10,
+
+                                    Container(
+                                      height: 45,
+                                      child: CustomElevatedButton(
+                                        backgroundColor:
+                                            ColorValues.appGreenColor,
+                                        text: "Approve",
+                                        icon: Icons.add,
+                                        onPressed: () {
+                                          Get.dialog(ApproveMcPlan(
+                                            id: controller.id.value,
+                                          ));
+                                        },
+                                      ),
+                                    ),
+
+                                    // : Dimens.box0,
+                                    Spacer(),
+                                  ],
+                                )
                               ],
                             ),
                           ),

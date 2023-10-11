@@ -30,6 +30,7 @@ class AddModuleCleaningExecutionController extends GetxController {
   final HomeController homeController = Get.find();
 
   Rx<String> selectedFacility = ''.obs;
+  List<int> checkboxIds = [];
 
   Rx<List<List<Map<String, String>>>> rowItem =
       Rx<List<List<Map<String, String>>>>([]);
@@ -242,8 +243,28 @@ class AddModuleCleaningExecutionController extends GetxController {
       });
       print('data${rowItem.value}');
 
-      // String remark = items.join(', ');
-      // print('Items remark:${remark}');
+      // List<int> data = [];
+
+      // equipmentList.value.forEach((element) {
+      //   if (element!.isChecked!) {
+      //     data.add(element.invId!);
+      //   }
+      // });
+      List<int?>? equipments = [];
+      equipmentList.forEach((e) {
+        if (e?.isChecked ?? false) {
+          e?.smbs.forEach((element) {
+            equipments.add(element.smbId ?? 0);
+          });
+        } else {
+          if (e?.isCleanedChecked ?? false) {
+            e?.smbs.forEach((element) {
+              equipments.add(element.smbId ?? 0);
+            });
+          }
+        }
+      });
+      print('cleaned:$equipments');
 
       UpdateMcScheduleExecutionModel updateMCScheduleExecutionModel =
           UpdateMcScheduleExecutionModel(
@@ -251,8 +272,8 @@ class AddModuleCleaningExecutionController extends GetxController {
               cleaningDay: cleaningDay,
               waterUsed: waterUsed,
               remark: rowItem.value[0][8]["value"],
-              cleanedEquipmentIds: [10, 11],
-              abandonedEquipmentIds: [12]);
+              cleanedEquipmentIds: equipments,
+              abandonedEquipmentIds: equipments);
 
       var updateMCScheduleExecutionJsonString =
           updateMCScheduleExecutionModel.toJson();

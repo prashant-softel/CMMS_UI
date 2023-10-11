@@ -734,10 +734,6 @@ class GoodsOrderListDataSource extends DataTableSource {
                                         arguments: {'id': id, "type": 1});
                                   }
                                 },
-                                // onPress: () {
-                                //   controller.viewAddGoodsOrdersDetails(
-                                //       request_order_id: int.tryParse('${record[0]}'));
-                                // },
                               )
                             : Dimens.box0,
                       ])
