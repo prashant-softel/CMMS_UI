@@ -14,7 +14,9 @@ import '../theme/styles.dart';
 // import '../view_incident_report/view_incident_report_controller.dart';
 
 class AddModuleCleaningExecutionDialog extends GetView {
+
   AddModuleCleaningExecutionDialog();
+
 
   final AddModuleCleaningExecutionController controller = Get.find();
 

@@ -314,11 +314,11 @@ class AppPages {
       page: LoginScreen.new,
       binding: LoginBinding(),
     ),
-    GetPage<dynamic>(
-      name: _Paths.print,
-      page: CreatePdfStatefulWidget.new,
-      // binding: LoginBinding(),
-    ),
+    // GetPage<dynamic>(
+    //   name: _Paths.print,
+    //   page: CreatePdfStatefulWidget.new,
+    //   // binding: LoginBinding(),
+    // ),
     GetPage<dynamic>(
       name: _Paths.preventive,
       page: PreventiveScreen.new,
