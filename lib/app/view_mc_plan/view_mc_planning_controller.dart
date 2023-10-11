@@ -1,10 +1,12 @@
 import 'dart:async';
 
 import 'package:cmms/app/view_mc_plan/view_mc_planning_presenter.dart';
+import 'package:cmms/domain/models/comment_model.dart';
 
 import 'package:cmms/domain/models/mc_details_plan_model.dart';
 
 import 'package:cmms/domain/models/type_model.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
 import '../home/home_controller.dart';
 
@@ -19,6 +21,7 @@ class ViewMcPlaningController extends GetxController {
   Rx<List<List<Map<String, String>>>> rowItem =
       Rx<List<List<Map<String, String>>>>([]);
   Map<String, dynamic> data = {};
+  TextEditingController approveCommentTextFieldCtrlr = TextEditingController();
 
   RxList<McPalningDetailsModel?>? mcPlanDetailsList =
       <McPalningDetailsModel?>[].obs;
@@ -108,6 +111,26 @@ class ViewMcPlaningController extends GetxController {
       //     {'key': "Actions", "value": ''},
       //   ]);
       // });
+    }
+  }
+
+  void mcPlanApprovedButton({int? id}) async {
+    {
+      String _comment = approveCommentTextFieldCtrlr.text.trim();
+
+      CommentModel commentGoodsOrderAproveModel =
+          CommentModel(id: id, comment: _comment);
+
+      var mcApproveJsonString = commentGoodsOrderAproveModel.toJson();
+
+      Map<String, dynamic>? response =
+          await viewMcPlaningPresenter.mcPlanApprovedButton(
+        mcApproveJsonString: mcApproveJsonString,
+        isLoading: true,
+      );
+      if (response == true) {
+        //getCalibrationList(facilityId, true);
+      }
     }
   }
 
