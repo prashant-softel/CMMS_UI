@@ -345,10 +345,9 @@ class ModuleCleaningListExecution
                                                 onTap: () {
                                                   controller.viewMCExecution(
                                                       id: int.tryParse(
-                                                          '${record[0]}')
-                                                          );
+                                                          '${record[0]}'));
                                                 },
-                                                height: 55,
+                                                height: 80,
                                                 cells: record.map((value) {
                                                   final Map<String, dynamic>
                                                       dataList = {
@@ -378,13 +377,14 @@ class ModuleCleaningListExecution
                                                                     .remove_red_eye_outlined,
                                                                 message: 'View',
                                                                 onPress: () {
-                                                                  controller.viewMCExecution(
-                                                                      id: int.tryParse(
-                                                                          '${record[0]}'),
-                                                                      planId: int.tryParse(
-                                                                          '${record[1]}'),
-                                                                      
-                                                                          );
+                                                                  controller
+                                                                      .viewMCExecution(
+                                                                    id: int.tryParse(
+                                                                        '${record[0]}'),
+                                                                    planId: int
+                                                                        .tryParse(
+                                                                            '${record[1]}'),
+                                                                  );
                                                                 },
                                                               ),
                                                               TableActionButton(
@@ -414,7 +414,7 @@ class ModuleCleaningListExecution
                                                                             AbandoneExecutionDialog(id: int.tryParse('${record[0]}')));
                                                                       },
                                                                     )
-                                                                  : Container(),
+                                                                  : Dimens.box0,
                                                               record[8] ==
                                                                       "Scheduled"
                                                                   ? TableActionButton(
@@ -435,7 +435,7 @@ class ModuleCleaningListExecution
                                                                                 dataList);
                                                                       },
                                                                     )
-                                                                  : Container(),
+                                                                  : Dimens.box0,
                                                               record[8] ==
                                                                       "Abandoned"
                                                                   ? TableActionButton(
@@ -458,7 +458,7 @@ class ModuleCleaningListExecution
                                                                         //     'edit record:${int.tryParse('${record[0]}')}');
                                                                       },
                                                                     )
-                                                                  : Container(),
+                                                                  : Dimens.box0,
                                                             ],
                                                           )
                                                         : Text(value),

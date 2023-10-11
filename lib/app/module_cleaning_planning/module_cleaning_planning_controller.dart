@@ -127,26 +127,25 @@ class ModuleCleaningPlanningController extends GetxController {
         "title": "Dry cleaning",
         "noOfCleaningDays": 3,
         "frequencyId": 4,
-        "startDate": "2023/10/10",
         "schedules": [
-          {
-            "cleaningDay": 1,
-            "cleaningType": 2,
-            "equipments": [
-              {"id": 10},
-              {"id": 11},
-              {"id": 12}
-            ]
-          },
-          {
-            "cleaningDay": 2,
-            "cleaningType": 1,
-            "equipments": [
-              {"id": 10},
-              {"id": 11},
-              {"id": 12}
-            ]
-          }
+          // {
+          //   "cleaningDay": 1,
+          //   "cleaningType": 2,
+          //   "equipments": [
+          //     {"id": 10},
+          //     {"id": 11},
+          //     {"id": 12}
+          //   ]
+          // },
+          // {
+          //   "cleaningDay": 2,
+          //   "cleaningType": 1,
+          //   "equipments": [
+          //     {"id": 10},
+          //     {"id": 11},
+          //     {"id": 12}
+          //   ]
+          // }
         ]
       }
     ]; //createMcModel.toJson();
