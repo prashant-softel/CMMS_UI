@@ -1,20 +1,22 @@
 import 'package:cmms/app/add_module_cleaning_execution/add_module_cleaning_execution_controller.dart';
+import 'package:cmms/app/module_cleaning_planning/module_cleaning_planning_controller.dart';
 import 'package:cmms/app/theme/color_values.dart';
+import 'package:cmms/app/widgets/custom_elevated_button.dart';
+import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:cmms/app/widgets/custom_multiselect_dialog_field.dart';
 import 'package:cmms/app/widgets/custom_richtext.dart';
 import 'package:cmms/app/widgets/custom_textField.dart';
 import 'package:cmms/app/widgets/stock_dropdown.dart';
-import 'package:flutter/material.dart';
-import 'package:get/get.dart';
 import 'package:multi_select_flutter/multi_select_flutter.dart';
 import '../theme/dimens.dart';
 import '../theme/styles.dart';
 // import '../view_incident_report/view_incident_report_controller.dart';
 
 class AddModuleCleaningExecutionDialog extends GetView {
- 
+
   AddModuleCleaningExecutionDialog();
-  
+
 
   final AddModuleCleaningExecutionController controller = Get.find();
 
@@ -26,7 +28,6 @@ class AddModuleCleaningExecutionDialog extends GetView {
           borderRadius: BorderRadius.all(Radius.circular(15.0)),
         ),
         insetPadding: Dimens.edgeInsets0_0_10_0,
-        // contentPadding: EdgeInsets.zero,
         title: Row(
           children: [
             Text(
@@ -79,51 +80,6 @@ class AddModuleCleaningExecutionDialog extends GetView {
                 CustomRichText(title: 'Water Used: '),
                 Dimens.boxWidth20,
                 Text('1000 ltr'),
-                // Dimens.boxWidth50,
-                // Container(
-                //     decoration: BoxDecoration(
-                //       borderRadius: BorderRadius.circular(10),
-                //       border: Border.all(
-                //         color: Color.fromARGB(255, 227, 224, 224),
-                //         width: 1,
-                //       ),
-                //       boxShadow: [
-                //         BoxShadow(
-                //           color: Color.fromARGB(255, 236, 234, 234)
-                //               .withOpacity(0.5),
-                //           spreadRadius: 2,
-                //           blurRadius: 5,
-                //           offset: Offset(0, 2),
-                //         ),
-                //       ],
-                //     ),
-                //     width: MediaQuery.of(context).size.width / 7,
-                //     child: LoginCustomTextfield(
-                //         // textController: controller.girNoCtrlr,
-                //         )),
-                // Dimens.boxWidth10,
-                // Container(
-                //   width: 150,
-                //   height: 25,
-                //   margin: Dimens.edgeInsets0_0_16_0,
-                //   child: TextField(
-                //     // onChanged: (value) =>
-                //     //     controller.search(value),
-                //     decoration: InputDecoration(
-                //       enabledBorder: const OutlineInputBorder(
-                //         borderSide:
-                //             const BorderSide(color: Colors.grey, width: 0.0),
-                //       ),
-                //       focusedBorder: const OutlineInputBorder(
-                //         borderSide:
-                //             const BorderSide(color: Colors.grey, width: 0.0),
-                //       ),
-                //       contentPadding: Dimens.edgeInsets10_0_0_0,
-                //       hintText: 'search'.tr,
-                //       hintStyle: Styles.grey12,
-                //     ),
-                //   ),
-                // ),
               ],
             ),
           ],
@@ -132,225 +88,188 @@ class AddModuleCleaningExecutionDialog extends GetView {
           var height = MediaQuery.of(context).size.height;
 
           return Container(
-            decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(10),
-              border: Border.all(
-                color: ColorValues.lightGreyColorWithOpacity35,
-                width: 1,
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(10),
+                border: Border.all(
+                  color: ColorValues.lightGreyColorWithOpacity35,
+                  width: 1,
+                ),
+                boxShadow: [
+                  BoxShadow(
+                    color: ColorValues.appBlueBackgroundColor,
+                    spreadRadius: 2,
+                    blurRadius: 5,
+                    offset: Offset(0, 2),
+                  ),
+                ],
               ),
-              boxShadow: [
-                BoxShadow(
-                  color: ColorValues.appBlueBackgroundColor,
-                  spreadRadius: 2,
-                  blurRadius: 5,
-                  offset: Offset(0, 2),
-                ),
-              ],
-            ),
-            padding: EdgeInsets.only(right: 120, top: 10),
-            height: height / 1.5,
-            width: double.infinity,
-            child: Column(
-              children: [
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceAround,
-                  // crossAxisAlignment : CrossAxisAlignment.stretch,
-                  children: [
-                    // Dimens.boxWidth20,
-                    Text('Assets'),
-                    Dimens.boxWidth30,
-                    Text('Modules'),
-                    // Dimens.boxWidth100,
-                    Padding(
-                      padding: const EdgeInsets.only(right: 40),
-                      child: Text('Cleaned'),
-                    ),
-                    // Dimens.boxWidth100,
-                    Padding(
-                      padding: const EdgeInsets.only(right: 50),
-                      child: Text('Abandoned'),
-                    ),
-                    // Dimens.boxWidth100,
-                    Padding(
-                      padding: const EdgeInsets.only(right: 50),
-                      child: Text('Day'),
-                    ),
-                  ],
-                ),
-                SizedBox(height: 5),
-                Column(
-                  children: [
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.start,
+              // padding: EdgeInsets.only(right: 120, top: 10),
+              height: height / 1.5,
+              width: double.infinity,
+              child: SingleChildScrollView(
+                child: Column(
+                    children: [
+                  Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: Row(
                       children: [
-                        Dimens.boxWidth10,
-                        Container(
-                          height: MediaQuery.of(context).size.height / 1.7,
-                          width: MediaQuery.of(context).size.width / 1.5,
-                          child: SingleChildScrollView(
-                            child: Column(
-                              children: <Widget>[
-                                SizedBox(height: 20.0),
-                                Column(
-                                  children: []
-                                    ..addAll(controller.equipmentList
-                                        .map((element) => Column(
-                                              children: [
-                                                ExpansionTile(
-                                                  title: Row(
-                                                    mainAxisAlignment:
-                                                        MainAxisAlignment.start,
-                                                    crossAxisAlignment:
-                                                        CrossAxisAlignment
-                                                            .start,
-                                                    children: [
-                                                      SizedBox(
-                                                        // width: 200,
-                                                        child: Text(
-                                                          "${element?.invName}",
-                                                          style: TextStyle(
-                                                              fontSize: 12.0,
-                                                              fontWeight:
-                                                                  FontWeight
-                                                                      .bold),
-                                                        ),
-                                                      ),
-                                                      Spacer(),
-
-                                                      SizedBox(
-                                                        // width: 200,
-                                                        child: Text(
-                                                          "${element?.moduleQuantity}",
-                                                          style: TextStyle(
-                                                              fontSize: 12.0,
-                                                              fontWeight:
-                                                                  FontWeight
-                                                                      .bold),
-                                                        ),
-                                                      ),
-                                                      // Dimens.boxWidth30,
-                                                      Spacer(),
-                                                      // Obx(
-                                                      //   () => 
-                                                        Checkbox(
-                                                          value: element!.isChecked,
-                                                          onChanged:
-                                                              (bool? value) {
-                                                            // controller
-                                                            //     .toggleCheckbox();
-                                                            setState(() {
-                                                              element.isChecked = element.isChecked;
-                                                            },);
-                                                          },
-                                                        ),
-                                                      // ),
-                                                    ],
-                                                  ),
-                                                  children: <Widget>[
-                                                    ListTile(
-                                                      title: Column(
-                                                        mainAxisAlignment:
-                                                            MainAxisAlignment
-                                                                .spaceAround,
-                                                        children: [
-
-                                                        ]
-                                                          ..addAll(
-                                                              element.smbs
-                                                                  .map(
-                                                                      (e) =>
-                                                                          Row(
-                                                                            mainAxisAlignment:
-                                                                                MainAxisAlignment.end,
-                                                                            crossAxisAlignment:
-                                                                                CrossAxisAlignment.end,
-                                                                            children: [
-                                                                              Text('${e.smbName}'),
-                                                                              // Dimens.boxWidth50,
-                                                                              Spacer(),
-                                                                              Text('${e.moduleQuantity}'),
-                                                                              // Dimens.boxWidth120,
-                                                                              Spacer(),
-                                                                              // Obx(
-                                                                              //   () =>
-                                                                                 Checkbox(
-                                                                                  value: element.isChecked,
-                                                                                  onChanged: (bool? value) {
-                                                                                    // controller.toggleCheckbox();
-                                                                                    setState(() {
-                                                                                      element.isChecked = element.isChecked;
-                                                                                    },);
-                                                                                  },
-                                                                                ),
-                                                                              // ),
-                                                                              // Dimens.boxWidth150,
-                                                                              Spacer(),
-                                                                              Obx(
-                                                                                () => Checkbox(
-                                                                                  value: controller.isChecked.value,
-                                                                                  onChanged: (bool? value) {
-                                                                                    controller.toggleCheckbox();
-                                                                                  },
-                                                                                ),
-                                                                              ),
-                                                                              Dimens.boxWidth100,
-                                                                              // Spacer(),
-                                                                              Text('Day1')
-                                                                            ],
-                                                                          ))),
-                                                      ),
-                                                    ),
-
-                                                  ],
-                                                ),
-                                              ],
-                                            ))),
-                                ),
-
-
-                                Dimens.boxHeight150,
-                                Row(
-                                  mainAxisAlignment: MainAxisAlignment.center,
-                                  children: [
-                                    Spacer(),
-                                    SizedBox(
-                                      width: 25,
-                                    ),
-                                    ElevatedButton(
-                                      style: Styles.greenElevatedButtonStyle,
-                                      onPressed: () {
-                                        // print('Incident Report Id${incidentReportId![0]}');
-                                        controller.updateMCScheduleExecution();
-                                        Get.back();
-                                      },
-                                      child: const Text('Save'),
-                                    ),
-                                    SizedBox(
-                                      width: 20,
-                                    ),
-                                    ElevatedButton(
-                                      style: Styles.darkRedElevatedButtonStyle,
-                                      onPressed: () {
-                                        // Get.offAllNamed(Routes.moduleCleaningPlanning);
-                                      },
-                                      child: const Text('Cancel'),
-                                    ),
-                                    Spacer(),
-                                  ],
-                                ),
-                              ],
-                            ),
+                        Expanded(
+                          child: Text(
+                            "Assets",
+                            style: TextStyle(color: Color(0xff31576D)),
                           ),
                         ),
+                        Expanded(
+                          child: Text("Modules",
+                              style: TextStyle(color: Color(0xff31576D))),
+                        ),
+                        Expanded(
+                          child: Text("Cleaned",
+                              style: TextStyle(color: Color(0xff31576D))),
+                        ),
+                        Expanded(
+                            child: Text("Abandoned",
+                                style: TextStyle(color: Color(0xff31576D)))),
+                        // Expanded(
+                        //     child: Text("Day",
+                        //         style: TextStyle(color: Color(0xff31576D)))),
                       ],
                     ),
-                  ],
-                ),
+                  )
+                ]..addAll(controller.equipmentList.value.map((e) {
+                        return Padding(
+                          padding: const EdgeInsets.only(left: 20),
+                          child: Column(
+                            children: [
+                              Row(
+                                children: [
+                                  Expanded(
+                                    child: GestureDetector(
+                                      onTap: () {
+                                        setState(
+                                          () {
+                                            e!.isExpanded = !e.isExpanded;
+                                          },
+                                        );
+                                      },
+                                      child: Row(
+                                        children: [
+                                          Text(
+                                            "${e?.invName}",
+                                            style: TextStyle(
+                                                fontSize: 12.0,
+                                                fontWeight: FontWeight.bold),
+                                          ),
+                                          Icon(e!.isExpanded
+                                              ? Icons.arrow_drop_down
+                                              : Icons.arrow_drop_up)
+                                        ],
+                                      ),
+                                    ),
+                                  ),
+                                  Expanded(
+                                    child: Text(
+                                      "${e?.moduleQuantity}",
+                                      style: TextStyle(
+                                          fontSize: 12.0,
+                                          fontWeight: FontWeight.bold),
+                                    ),
+                                  ),
+                                  Expanded(
+                                    child: Checkbox(
+                                      value: e!.isChecked,
+                                      onChanged: (bool? value) {
+                                        // controller.toggleItemSelection(index);
+                                        setState(
+                                          () {
+                                            e.isChecked = !e.isChecked!;
+                                          },
+                                        );
+                                        print('Element Cancel:${e.isChecked}');
+                                      },
+                                    ),
+                                  ),
+                                ],
+                              ),
+                              e.isExpanded
+                                  ? Column(
+                                      children: []..addAll(
+                                          e.smbs!.map(
+                                            (smbItems) {
+                                              return Row(
+                                                children: [
+                                                  Expanded(
+                                                      child: Text(
+                                                          smbItems.smbName ??
+                                                              "")),
+                                                  Expanded(
+                                                      child: Text(
+                                                          "${smbItems.moduleQuantity}")),
+                                                  Expanded(
+                                                    child: Checkbox(
+                                                      value: e!.isChecked,
+                                                      onChanged: (bool? value) {
+                                                        // controller.toggleItemSelection(index);
+                                                        setState(
+                                                          () {
+                                                            e.isChecked =
+                                                                !e.isChecked!;
+                                                          },
+                                                        );
 
-              ],
-            ),
-          );
+                                                        print(
+                                                            'Element Cancel:${e.isChecked}');
+                                                      },
+                                                    ),
+                                                  ),
+                                                ],
+                                              );
+                                            },
+                                          ),
+                                        ),
+                                    )
+                                  : Dimens.box0
+                            ],
+                          ),
+                        );
+                      }))),
+              ));
         }),
+        actions: [
+          Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Container(
+                height: 35,
+                child: CustomElevatedButton(
+                  backgroundColor: ColorValues.greenColor,
+                  text: 'Submit',
+                  onPressed: () {
+                    // controller.createMcPlan();
+                    controller.updateMCScheduleExecution();
+                  },
+                ),
+              ),
+              Dimens.boxWidth20,
+              Container(
+                height: 35,
+                child: CustomElevatedButton(
+                  backgroundColor: ColorValues.redColor,
+                  text: "Cancel",
+                  onPressed: () {
+                    final _flutterSecureStorage =
+                        // const FlutterSecureStorage();
+
+                        // _flutterSecureStorage.delete(
+                        // key: "userId");
+
+                        Get.back();
+                  },
+                ),
+              ),
+            ],
+          ),
+        ],
       );
     }));
   }
