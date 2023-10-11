@@ -41,33 +41,59 @@
 //     );
 //   }
 
+//   Future<void> generateInvoice() async {
+//     //Create a PDF document.
+//     final PdfDocument document = PdfDocument();
+//     //Add page to the PDF
+//     final PdfPage page = document.pages.add();
+//     //Get page client size
+//     final Size pageSize = page.getClientSize();
+//     //Draw rectangle
+//     page.graphics.drawRectangle(
+//         bounds: Rect.fromLTWH(0, 0, pageSize.width, pageSize.height),
+//         pen: PdfPen(PdfColor(142, 170, 219)));
+//     //Generate PDF grid.
+//     final PdfGrid grid = getGrid();
+//     //Draw the header section by creating text element
+//     final PdfLayoutResult result = drawHeader(page, pageSize, grid);
+//     //Draw grid
+//     drawGrid(page, grid, result);
+//     //Add invoice footer
+//     drawFooter(page, pageSize);
+//     //Save the PDF document
+//     final List<int> bytes = document.save();
+//     //Dispose the document.
+//     document.dispose();
+//     //Save and launch the file.
+//     await saveAndLaunchFile(bytes, 'Invoice.pdf');
+//   }
 
-  Future<void> generateInvoice() async {
-    //Create a PDF document.
-    final PdfDocument document = PdfDocument();
-    //Add page to the PDF
-    final PdfPage page = document.pages.add();
-    //Get page client size
-    final Size pageSize = page.getClientSize();
-    //Draw rectangle
-    page.graphics.drawRectangle(
-        bounds: Rect.fromLTWH(0, 0, pageSize.width, pageSize.height),
-        pen: PdfPen(PdfColor(142, 170, 219)));
-    //Generate PDF grid.
-    final PdfGrid grid = getGrid();
-    //Draw the header section by creating text element
-    final PdfLayoutResult result = drawHeader(page, pageSize, grid);
-    //Draw grid
-    drawGrid(page, grid, result);
-    //Add invoice footer
-    drawFooter(page, pageSize);
-    //Save the PDF document
-    final List<int> bytes = document.save();
-    //Dispose the document.
-    document.dispose();
-    //Save and launch the file.
-    await saveAndLaunchFile(bytes, 'Invoice.pdf');
-  }
+Future<void> generateInvoice() async {
+  //Create a PDF document.
+  final PdfDocument document = PdfDocument();
+  //Add page to the PDF
+  final PdfPage page = document.pages.add();
+  //Get page client size
+  final Size pageSize = page.getClientSize();
+  //Draw rectangle
+  page.graphics.drawRectangle(
+      bounds: Rect.fromLTWH(0, 0, pageSize.width, pageSize.height),
+      pen: PdfPen(PdfColor(142, 170, 219)));
+  //Generate PDF grid.
+  final PdfGrid grid = getGrid();
+  //Draw the header section by creating text element
+  final PdfLayoutResult result = drawHeader(page, pageSize, grid);
+  //Draw grid
+  drawGrid(page, grid, result);
+  //Add invoice footer
+  drawFooter(page, pageSize);
+  //Save the PDF document
+  final List<int> bytes = document.save();
+  //Dispose the document.
+  document.dispose();
+  //Save and launch the file.
+  await saveAndLaunchFile(bytes, 'Invoice.pdf');
+}
 
 
 //   //Draws the invoice header
@@ -109,8 +135,8 @@
 //         'Invoice Number: 2058557939\r\n\r\nDate: ${format.format(DateTime.now())}';
 //     final Size contentSize = contentFont.measureString(invoiceNumber);
 //     // ignore: leading_newlines_in_multiline_strings
-//     const String address = '''Bill To: \r\n\r\nAbraham Swearegin, 
-//         \r\n\r\nUnited States, California, San Mateo, 
+//     const String address = '''Bill To: \r\n\r\nAbraham Swearegin,
+//         \r\n\r\nUnited States, California, San Mateo,
 //         \r\n\r\n9920 BridgePointe Parkway, \r\n\r\n9365550136''';
 
 //     PdfTextElement(text: invoiceNumber, font: contentFont).draw(

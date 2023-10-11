@@ -55,7 +55,6 @@ dependencies:
   rxdart: ^0.27.7
   filesize: ^2.0.1
   synchronized: ^3.0.1
-
   syncfusion_flutter_datepicker: ^19.1.55-beta
   html_unescape: ^2.0.0
   data_table_2: ^2.4.2
