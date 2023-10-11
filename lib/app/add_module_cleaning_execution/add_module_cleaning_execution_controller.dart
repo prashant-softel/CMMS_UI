@@ -30,6 +30,7 @@ class AddModuleCleaningExecutionController extends GetxController {
   final HomeController homeController = Get.find();
 
   Rx<String> selectedFacility = ''.obs;
+  List<int> checkboxIds = [];
 
   Rx<List<List<Map<String, String>>>> rowItem =
       Rx<List<List<Map<String, String>>>>([]);
@@ -244,6 +245,13 @@ class AddModuleCleaningExecutionController extends GetxController {
 
       // String remark = items.join(', ');
       // print('Items remark:${remark}');
+      List<int> data = [];
+      equipmentList.value.forEach((element) {
+        if (element!.isChecked!) {
+          data.add(element.invId!);
+        }
+      });
+      print('cleaned:$data');
 
       UpdateMcScheduleExecutionModel updateMCScheduleExecutionModel =
           UpdateMcScheduleExecutionModel(
