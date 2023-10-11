@@ -246,6 +246,7 @@ class AddModuleCleaningExecutionController extends GetxController {
       // String remark = items.join(', ');
       // print('Items remark:${remark}');
       List<int> data = [];
+      
       equipmentList.value.forEach((element) {
         if (element!.isChecked!) {
           data.add(element.invId!);
