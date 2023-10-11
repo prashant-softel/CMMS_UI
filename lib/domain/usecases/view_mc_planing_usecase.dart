@@ -14,4 +14,12 @@ class ViewMcPlaningUsecase {
         planId: planId,
         isLoading: isLoading ?? false,
       );
+  Future<Map<String, dynamic>> mcPlanApprovedButton({
+    mcApproveJsonString,
+    bool? isLoading,
+  }) async =>
+      await repository.mcPlanApprovedButton(
+        mcApproveJsonString,
+        isLoading,
+      );
 }

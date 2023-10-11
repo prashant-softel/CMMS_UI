@@ -2,6 +2,7 @@ import 'package:cmms/app/app.dart';
 import 'package:cmms/app/view_mc_plan/view_mc_planning_controller.dart';
 import 'package:cmms/app/widgets/custom_elevated_button.dart';
 import 'package:cmms/app/widgets/custom_richtext.dart';
+import 'package:cmms/app/widgets/mc_approve_dialog.dart';
 import 'package:cmms/app/widgets/set_equipments_dialog.dart';
 import 'package:cmms/app/widgets/stock_dropdown.dart';
 import 'package:data_table_2/data_table_2.dart';
@@ -446,24 +447,6 @@ class _ViewMcPlaningWebState extends State<ViewMcPlaningWeb> {
                                       height: 45,
                                       child: CustomElevatedButton(
                                         backgroundColor:
-                                            ColorValues.appGreenColor,
-                                        text: "Approve",
-                                        icon: Icons.add,
-                                        onPressed: () {
-                                          // Get.dialog(
-                                          //     GoodsOrderApprovedDialog(
-                                          //   id: controller.id,
-                                          // ));
-                                        },
-                                      ),
-                                    ),
-
-                                    Dimens.boxWidth10,
-
-                                    Container(
-                                      height: 45,
-                                      child: CustomElevatedButton(
-                                        backgroundColor:
                                             ColorValues.rejectColor,
                                         text: "Reject",
                                         icon: Icons.close,
@@ -472,6 +455,22 @@ class _ViewMcPlaningWebState extends State<ViewMcPlaningWeb> {
                                           //     GoodsOrderRejectDialog(
                                           //   id: controller.id,
                                           // ));
+                                        },
+                                      ),
+                                    ),
+                                    Dimens.boxWidth10,
+
+                                    Container(
+                                      height: 45,
+                                      child: CustomElevatedButton(
+                                        backgroundColor:
+                                            ColorValues.appGreenColor,
+                                        text: "Approve",
+                                        icon: Icons.add,
+                                        onPressed: () {
+                                          Get.dialog(ApproveMcPlan(
+                                            id: controller.id,
+                                          ));
                                         },
                                       ),
                                     ),

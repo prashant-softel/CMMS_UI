@@ -1745,6 +1745,40 @@ class Repository {
     }
   }
 
+  Future<Map<String, dynamic>> mcPlanApprovedButton(
+    mcApproveJsonString,
+    bool? isLoading,
+  ) async {
+    try {
+      final auth = await getSecuredValue(LocalKeys.authToken);
+      final res = await _dataRepository.mcPlanApprovedButton(
+        auth: auth,
+        mcApproveJsonString: json.encode(mcApproveJsonString),
+        isLoading: isLoading ?? false,
+      );
+
+      var resourceData = res.data;
+
+      print('Response MC Approve: ${resourceData}');
+
+      if (!res.hasError) {
+        if (res.errorCode == 200) {
+          var responseMap = json.decode(res.data);
+          return responseMap;
+        } else {
+          // Get.dialog<void>(WarrantyClaimErrorDialog());
+        }
+      } else {
+        Utility.showDialog(res.errorCode.toString() + 'mcApprovedButton');
+        //return '';
+      }
+      return Map();
+    } catch (error) {
+      print(error.toString());
+      return Map();
+    }
+  }
+
   Future<Map<String, dynamic>> pmPlanApprovedButton(
     pmPlanApproveJsonString,
     bool? isLoading,
