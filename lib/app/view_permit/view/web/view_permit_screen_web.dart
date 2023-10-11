@@ -3872,35 +3872,19 @@ class ViewPermitWebScreen extends GetView<ViewPermitController> {
               // SizedBox(
               //   width: MediaQuery.of(context).size.width * 0.19,
               // ),
-              // Container(
-              //   child: ElevatedButton.icon(
-              //     style: ElevatedButton.styleFrom(
-              //       padding: EdgeInsets.symmetric(vertical: 19, horizontal: 30),
-
-              //       foregroundColor: Colors.white,
-              //       backgroundColor: ColorValues.appDarkBlueColor, //  foreground
-              //     ),
-              //     onPressed: () {
-              //  controller.printScreen();
-              //     },
-              //     icon: Icon(Icons.print), //icon data for elevated button
-              //     label: Text("Print"), //label text
-              //     // style: ButtonStyle( backgroundColor:Color(value)),
-              //   ),
-              // ),
 
               ///Printing functionality
-              // Container(
-              //   height: 35,
-              //   child: CustomElevatedButton(
-              //     icon: Icons.print_outlined,
-              //     backgroundColor: ColorValues.appDarkBlueColor,
-              //     text: "Print",
-              //     onPressed: () {
-              //       controller.printScreen();
-              //     },
-              //   ),
-              // ),
+              Container(
+                height: 35,
+                child: CustomElevatedButton(
+                  icon: Icons.print_outlined,
+                  backgroundColor: ColorValues.appDarkBlueColor,
+                  text: "Print",
+                  onPressed: () {
+                    controller.generateInvoice();
+                  },
+                ),
+              ),
               Dimens.boxWidth10,
               // Container(
               //     height: 45,
