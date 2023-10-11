@@ -567,19 +567,14 @@ class ModuleCleaningPlanListDataSource extends DataTableSource {
                           color: ColorValues.appGreenColor,
                           icon: Icons.add,
                           message: 'Approve/Reject',
-                          // onPress: () {
-                          //   int id =
-                          //       ModuleCleaningPlanningListDetails?.planId ??
-                          //           0;
-                          //   if (id != 0) {
-                          //     Get.toNamed(Routes.purchaseGoodsorderView,
-                          //         arguments: {'id': id, "type": 1});
-                          //   }
-                          // },
-                          // onPress: () {
-                          //   controller.viewAddGoodsOrdersDetails(
-                          //       planId: int.tryParse('${record[0]}'));
-                          // },
+                          onPress: () {
+                            int id =
+                                ModuleCleaningPlanningListDetails?.planId ?? 0;
+                            if (id != 0) {
+                              Get.toNamed(Routes.viewMcPlaning,
+                                  arguments: {'id': id, "type": 1});
+                            }
+                          },
                         ),
                         TableActionButton(
                           color: Color.fromARGB(255, 141, 183, 180),

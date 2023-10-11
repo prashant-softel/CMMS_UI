@@ -1,5 +1,4 @@
 import 'package:cmms/app/theme/color_values.dart';
-import 'package:cmms/app/view_add_goods_orders.dart/stock_management_view_add_goods_orders_controller.dart';
 import 'package:cmms/app/view_mc_plan/view_mc_planning_controller.dart';
 import 'package:cmms/app/widgets/custom_richtext.dart';
 import 'package:flutter/material.dart';
@@ -9,10 +8,10 @@ import 'package:get/get.dart';
 import '../theme/dimens.dart';
 import '../theme/styles.dart';
 
-class ApproveMcPlan extends GetView {
+class RejectMcPlan extends GetView {
   int? id;
 
-  ApproveMcPlan({super.key, this.id});
+  RejectMcPlan({super.key, this.id});
   final ViewMcPlaningController _controller = Get.find();
 
   @override
@@ -25,7 +24,7 @@ class ApproveMcPlan extends GetView {
         insetPadding: Dimens.edgeInsets10_0_10_0,
         contentPadding: EdgeInsets.zero,
         title: Text(
-          "Approve MC Plan",
+          "Reject MC Plan",
           textAlign: TextAlign.center,
           // style: TextStyle(color: Colors.green),
         ),
@@ -85,13 +84,13 @@ class ApproveMcPlan extends GetView {
             ),
             Dimens.boxWidth20,
             ElevatedButton(
-              style: Styles.greenElevatedButtonStyle,
+              style: Styles.darkRedElevatedButtonStyle,
               onPressed: () {
-                _controller.mcPlanApprovedButton(id: id);
+                _controller.mcPlanRejectButton(id: id);
                 print('Goods order id:$id');
                 Get.back();
               },
-              child: Text('Approve  MC Plan'),
+              child: Text('Reject MC Plan'),
             ),
           ]),
         ],

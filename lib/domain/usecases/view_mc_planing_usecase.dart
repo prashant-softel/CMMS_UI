@@ -22,4 +22,12 @@ class ViewMcPlaningUsecase {
         mcApproveJsonString,
         isLoading,
       );
+  Future<Map<String, dynamic>> mcPlanRejectButton({
+    mcRejectJsonString,
+    bool? isLoading,
+  }) async =>
+      await repository.mcPlanRejectButton(
+        mcRejectJsonString,
+        isLoading,
+      );
 }

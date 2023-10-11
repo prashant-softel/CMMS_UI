@@ -32,7 +32,8 @@ class ViewMcPlaningController extends GetxController {
 
   StreamSubscription<int>? facilityIdStreamSubscription;
   int facilityId = 0;
-  int id = 0;
+
+  Rx<int> id = 0.obs;
 
   Map<String, TypeModel> typedropdownMapperData = {};
 
@@ -54,16 +55,14 @@ class ViewMcPlaningController extends GetxController {
 
   @override
   void onInit() async {
-    id = Get.arguments["id"];
-    print('AddStock:$id');
-
     try {
+      await setUserId();
       facilityIdStreamSubscription = homecontroller.facilityId$.listen((event) {
         facilityId = event;
       });
       if (id != 0) {
         Future.delayed(Duration(seconds: 1), () {
-          getMcPlanDetail(planId: id);
+          getMcPlanDetail(planId: id.value);
         });
       }
       super.onInit();
@@ -72,6 +71,18 @@ class ViewMcPlaningController extends GetxController {
     }
 
     super.onInit();
+  }
+
+  Future<void> setUserId() async {
+    try {
+      var dataFromPreviousScreen = Get.arguments;
+
+      id.value = dataFromPreviousScreen['id'];
+      // id= Get.arguments;
+      print('AddStock:$id');
+    } catch (e) {
+      print(e.toString() + 'userId');
+    }
   }
 
   Future<void> getMcPlanDetail({required int planId}) async {
@@ -126,6 +137,26 @@ class ViewMcPlaningController extends GetxController {
       Map<String, dynamic>? response =
           await viewMcPlaningPresenter.mcPlanApprovedButton(
         mcApproveJsonString: mcApproveJsonString,
+        isLoading: true,
+      );
+      if (response == true) {
+        //getCalibrationList(facilityId, true);
+      }
+    }
+  }
+
+  void mcPlanRejectButton({int? id}) async {
+    {
+      String _comment = approveCommentTextFieldCtrlr.text.trim();
+
+      CommentModel commentGoodsOrderAproveModel =
+          CommentModel(id: id, comment: _comment);
+
+      var mcRejectJsonString = commentGoodsOrderAproveModel.toJson();
+
+      Map<String, dynamic>? response =
+          await viewMcPlaningPresenter.mcPlanRejectButton(
+        mcRejectJsonString: mcRejectJsonString,
         isLoading: true,
       );
       if (response == true) {
