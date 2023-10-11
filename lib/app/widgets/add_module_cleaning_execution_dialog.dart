@@ -1,16 +1,11 @@
 import 'package:cmms/app/add_module_cleaning_execution/add_module_cleaning_execution_controller.dart';
-import 'package:cmms/app/module_cleaning_planning/module_cleaning_planning_controller.dart';
 import 'package:cmms/app/theme/color_values.dart';
 import 'package:cmms/app/widgets/custom_elevated_button.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:cmms/app/widgets/custom_multiselect_dialog_field.dart';
 import 'package:cmms/app/widgets/custom_richtext.dart';
-import 'package:cmms/app/widgets/custom_textField.dart';
-import 'package:cmms/app/widgets/stock_dropdown.dart';
 import 'package:multi_select_flutter/multi_select_flutter.dart';
 import '../theme/dimens.dart';
-import '../theme/styles.dart';
 // import '../view_incident_report/view_incident_report_controller.dart';
 
 class AddModuleCleaningExecutionDialog extends GetView {
@@ -18,8 +13,11 @@ class AddModuleCleaningExecutionDialog extends GetView {
   int? cleaningDay;
   int? waterUsed;
 
-  AddModuleCleaningExecutionDialog({required this.scheduleId, required this.cleaningDay, required this.waterUsed,});
-
+  AddModuleCleaningExecutionDialog({
+    required this.scheduleId,
+    required this.cleaningDay,
+    required this.waterUsed,
+  });
 
   final AddModuleCleaningExecutionController controller = Get.find();
 
@@ -115,6 +113,7 @@ class AddModuleCleaningExecutionDialog extends GetView {
                   Padding(
                     padding: const EdgeInsets.all(8.0),
                     child: Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
                       children: [
                         Expanded(
                           child: Text(
@@ -122,12 +121,9 @@ class AddModuleCleaningExecutionDialog extends GetView {
                             style: TextStyle(color: Color(0xff31576D)),
                           ),
                         ),
-                        Padding(
-                          padding: const EdgeInsets.only(left: 50),
-                          child: Expanded(
-                            child: Text("Modules",
-                                style: TextStyle(color: Color(0xff31576D))),
-                          ),
+                        Expanded(
+                          child: Text("Modules",
+                              style: TextStyle(color: Color(0xff31576D))),
                         ),
                         Expanded(
                           child: Text("Cleaned",
@@ -148,6 +144,8 @@ class AddModuleCleaningExecutionDialog extends GetView {
                           child: Column(
                             children: [
                               Row(
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceAround,
                                 children: [
                                   Expanded(
                                     child: GestureDetector(
@@ -183,6 +181,22 @@ class AddModuleCleaningExecutionDialog extends GetView {
                                   ),
                                   Expanded(
                                     child: Checkbox(
+                                      value: e.isCleanedChecked,
+                                      onChanged: (bool? value) {
+                                        // controller.toggleItemSelection(index);
+                                        setState(
+                                          () {
+                                            e.isCleanedChecked =
+                                                !e.isCleanedChecked!;
+                                          },
+                                        );
+                                        print(
+                                            'Element Cancel:${e.isCleanedChecked}');
+                                      },
+                                    ),
+                                  ),
+                                  Expanded(
+                                    child: Checkbox(
                                       value: e.isChecked,
                                       onChanged: (bool? value) {
                                         // controller.toggleItemSelection(index);
@@ -203,6 +217,8 @@ class AddModuleCleaningExecutionDialog extends GetView {
                                           e.smbs.map(
                                             (smbItems) {
                                               return Row(
+                                                mainAxisAlignment:
+                                                    MainAxisAlignment.center,
                                                 children: [
                                                   Expanded(
                                                       child: Text(
@@ -224,7 +240,7 @@ class AddModuleCleaningExecutionDialog extends GetView {
                                                         );
 
                                                         print(
-                                                            'Element Cancel:${e.isChecked}');
+                                                            'Element Cancel:${e.isCleanedChecked}');
                                                       },
                                                     ),
                                                   ),
@@ -269,7 +285,10 @@ class AddModuleCleaningExecutionDialog extends GetView {
                   text: 'Submit',
                   onPressed: () {
                     // controller.createMcPlan();
-                    controller.updateMCScheduleExecution(scheduleId: scheduleId, cleaningDay: cleaningDay, waterUsed: waterUsed);
+                    controller.updateMCScheduleExecution(
+                        scheduleId: scheduleId,
+                        cleaningDay: cleaningDay,
+                        waterUsed: waterUsed);
                   },
                 ),
               ),
