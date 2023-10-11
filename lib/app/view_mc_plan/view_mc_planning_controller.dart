@@ -2,6 +2,7 @@ import 'dart:async';
 
 import 'package:cmms/app/view_mc_plan/view_mc_planning_presenter.dart';
 import 'package:cmms/domain/models/comment_model.dart';
+import 'package:cmms/domain/models/history_model.dart';
 
 import 'package:cmms/domain/models/mc_details_plan_model.dart';
 
@@ -21,6 +22,7 @@ class ViewMcPlaningController extends GetxController {
   Rx<List<List<Map<String, String>>>> rowItem =
       Rx<List<List<Map<String, String>>>>([]);
   Map<String, dynamic> data = {};
+  RxList<HistoryModel?>? historyList = <HistoryModel?>[].obs;
   TextEditingController approveCommentTextFieldCtrlr = TextEditingController();
 
   RxList<McPalningDetailsModel?>? mcPlanDetailsList =
@@ -65,6 +67,7 @@ class ViewMcPlaningController extends GetxController {
           getMcPlanDetail(planId: id.value);
         });
       }
+      getMcPlanHistory(id: id.value);
       super.onInit();
     } catch (e) {
       print(e);
@@ -83,6 +86,20 @@ class ViewMcPlaningController extends GetxController {
     } catch (e) {
       print(e.toString() + 'userId');
     }
+  }
+
+  Future<void> getMcPlanHistory({required int id}) async {
+    /// TODO: CHANGE THESE VALUES
+    int moduleType = 81;
+    historyList?.value = await viewMcPlaningPresenter.getHistory(
+          // tempModuleType,
+          // tempJobCardId,
+          moduleType,
+          id,
+          true,
+        ) ??
+        [];
+    update(["historyList"]);
   }
 
   Future<void> getMcPlanDetail({required int planId}) async {
