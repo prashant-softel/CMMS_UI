@@ -42,6 +42,8 @@ class ModuleCleaningPlanningController extends GetxController {
   int facilityId = 0;
 
   RxList<EquipmentListModel?> equipmentList = <EquipmentListModel?>[].obs;
+  RxList<SMBS> smblist = <SMBS>[].obs;
+
   var days = <TypeModel>[
     TypeModel(name: 'Day 1', id: "0"),
     TypeModel(name: 'Day 2', id: "1"),
@@ -102,12 +104,15 @@ class ModuleCleaningPlanningController extends GetxController {
         isLoading: isLoading, facilityId: facilityId);
     // print('incidentReportFacilityId$facilityId');
     // print('Incident Report List:$list');
-    for (var equipment_list in list) {
-      equipmentList.add(equipment_list);
-    }
+    // for (var equipment_list in list) {
+    //   equipmentList.add(equipment_list);
+    // }
 
     if (list != null) {
       equipmentList.value = list;
+      // for (var equimentCategory in list) {
+      //   smblist.add(equimentCategory.smbs as SMBS);
+      // }
 
       // }
     }
@@ -116,39 +121,28 @@ class ModuleCleaningPlanningController extends GetxController {
   }
 
   void createMcPlan() async {
+    String _durationInDayCtrlr = durationInDayCtrlr.text.trim();
+    String _mcTitelCtrlr = mcTitelCtrlr.text.trim();
+    List<Schedules> schedules = [];
+    List<EquipmentsList?>? equipments = [];
+    equipmentList.forEach((e) {
+      e?.smbs.forEach((element) {
+        equipments.add(EquipmentsList(id: element.smbId ?? 0));
+      });
+    });
+    equipmentList.forEach((e) {
+      schedules.add(
+          Schedules(cleaningDay: 1, cleaningType: 1, equipments: equipments));
+    });
     CreateMcPalningsModel createMcModel = CreateMcPalningsModel(
         // id: 0,
+        facilityId: facilityId,
+        frequencyId: selectedfrequencyId,
+        noOfCleaningDays: int.tryParse(_durationInDayCtrlr) ?? 0,
+        title: _mcTitelCtrlr,
+        schedules: schedules);
 
-        );
-
-    var createMcModelJsonString = [
-      {
-        "facilityId": 1779,
-        "title": "Dry cleaning",
-        "noOfCleaningDays": 3,
-        "frequencyId": 4,
-        "schedules": [
-          // {
-          //   "cleaningDay": 1,
-          //   "cleaningType": 2,
-          //   "equipments": [
-          //     {"id": 10},
-          //     {"id": 11},
-          //     {"id": 12}
-          //   ]
-          // },
-          // {
-          //   "cleaningDay": 2,
-          //   "cleaningType": 1,
-          //   "equipments": [
-          //     {"id": 10},
-          //     {"id": 11},
-          //     {"id": 12}
-          //   ]
-          // }
-        ]
-      }
-    ]; //createMcModel.toJson();
+    var createMcModelJsonString = [createMcModel.toJson()];
     Map<String, dynamic>? responseCreateMcModel =
         await moduleCleaningPlanningPresenter.createMcPlan(
       createMcPlans: createMcModelJsonString,
