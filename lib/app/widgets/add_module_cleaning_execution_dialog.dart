@@ -12,7 +12,9 @@ import '../theme/styles.dart';
 // import '../view_incident_report/view_incident_report_controller.dart';
 
 class AddModuleCleaningExecutionDialog extends GetView {
+ 
   AddModuleCleaningExecutionDialog();
+  
 
   final AddModuleCleaningExecutionController controller = Get.find();
 
@@ -231,13 +233,13 @@ class AddModuleCleaningExecutionDialog extends GetView {
                                                       // Obx(
                                                       //   () => 
                                                         Checkbox(
-                                                          value: element!.isExpanded,
+                                                          value: element!.isChecked,
                                                           onChanged:
                                                               (bool? value) {
                                                             // controller
                                                             //     .toggleCheckbox();
                                                             setState(() {
-                                                              element.isExpanded = element.isExpanded;
+                                                              element.isChecked = element.isChecked;
                                                             },);
                                                           },
                                                         ),
@@ -272,11 +274,11 @@ class AddModuleCleaningExecutionDialog extends GetView {
                                                                               // Obx(
                                                                               //   () =>
                                                                                  Checkbox(
-                                                                                  value: element.isExpanded,
+                                                                                  value: element.isChecked,
                                                                                   onChanged: (bool? value) {
                                                                                     // controller.toggleCheckbox();
                                                                                     setState(() {
-                                                                                      element.isExpanded = element.isExpanded;
+                                                                                      element.isChecked = element.isChecked;
                                                                                     },);
                                                                                   },
                                                                                 ),
@@ -318,6 +320,7 @@ class AddModuleCleaningExecutionDialog extends GetView {
                                       style: Styles.greenElevatedButtonStyle,
                                       onPressed: () {
                                         // print('Incident Report Id${incidentReportId![0]}');
+                                        controller.updateMCScheduleExecution();
                                         Get.back();
                                       },
                                       child: const Text('Save'),

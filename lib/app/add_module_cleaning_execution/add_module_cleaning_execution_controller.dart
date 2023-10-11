@@ -244,7 +244,7 @@ class AddModuleCleaningExecutionController extends GetxController {
 
       // String remark = items.join(', ');
       // print('Items remark:${remark}');
-
+// List ids=equipmentList.value.forEach((e) { e?.invId??0;});
       UpdateMcScheduleExecutionModel updateMCScheduleExecutionModel =
           UpdateMcScheduleExecutionModel(
               scheduleId: scheduleId,
