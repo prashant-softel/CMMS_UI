@@ -668,6 +668,17 @@ class DataRepository extends DomainRepository {
         mcApproveJsonString: mcApproveJsonString,
         isLoading: isLoading ?? false,
       );
+  Future<ResponseModel> mcPlanRejectButton({
+    required String auth,
+    mcRejectJsonString,
+    bool? isLoading,
+  }) async =>
+      await connectHelper.mcPlanRejectButton(
+        auth: auth,
+        mcRejectJsonString: mcRejectJsonString,
+        isLoading: isLoading ?? false,
+      );
+
   Future<ResponseModel> pmPlanApprovedButton({
     required String auth,
     pmPlanApproveJsonString,
