@@ -14,8 +14,11 @@ import '../theme/styles.dart';
 // import '../view_incident_report/view_incident_report_controller.dart';
 
 class AddModuleCleaningExecutionDialog extends GetView {
+  int? scheduleId;
+  int? cleaningDay;
+  int? waterUsed;
 
-  AddModuleCleaningExecutionDialog();
+  AddModuleCleaningExecutionDialog({required this.scheduleId, required this.cleaningDay, required this.waterUsed,});
 
 
   final AddModuleCleaningExecutionController controller = Get.find();
@@ -148,7 +151,7 @@ class AddModuleCleaningExecutionDialog extends GetView {
                                       onTap: () {
                                         setState(
                                           () {
-                                            e!.isExpanded = !e.isExpanded;
+                                            e.isExpanded = !e.isExpanded;
                                           },
                                         );
                                       },
@@ -169,7 +172,7 @@ class AddModuleCleaningExecutionDialog extends GetView {
                                   ),
                                   Expanded(
                                     child: Text(
-                                      "${e?.moduleQuantity}",
+                                      "${e.moduleQuantity}",
                                       style: TextStyle(
                                           fontSize: 12.0,
                                           fontWeight: FontWeight.bold),
@@ -177,7 +180,7 @@ class AddModuleCleaningExecutionDialog extends GetView {
                                   ),
                                   Expanded(
                                     child: Checkbox(
-                                      value: e!.isChecked,
+                                      value: e.isChecked,
                                       onChanged: (bool? value) {
                                         // controller.toggleItemSelection(index);
                                         setState(
@@ -194,7 +197,7 @@ class AddModuleCleaningExecutionDialog extends GetView {
                               e.isExpanded
                                   ? Column(
                                       children: []..addAll(
-                                          e.smbs!.map(
+                                          e.smbs.map(
                                             (smbItems) {
                                               return Row(
                                                 children: [
@@ -207,7 +210,24 @@ class AddModuleCleaningExecutionDialog extends GetView {
                                                           "${smbItems.moduleQuantity}")),
                                                   Expanded(
                                                     child: Checkbox(
-                                                      value: e!.isChecked,
+                                                      value: e.isCleanedChecked,
+                                                      onChanged: (bool? value) {
+                                                        // controller.toggleItemSelection(index);
+                                                        setState(
+                                                          () {
+                                                            e.isCleanedChecked =
+                                                                !e.isCleanedChecked!;
+                                                          },
+                                                        );
+
+                                                        print(
+                                                            'Element Cancel:${e.isChecked}');
+                                                      },
+                                                    ),
+                                                  ),
+                                                  Expanded(
+                                                    child: Checkbox(
+                                                      value: e.isChecked,
                                                       onChanged: (bool? value) {
                                                         // controller.toggleItemSelection(index);
                                                         setState(
@@ -246,7 +266,7 @@ class AddModuleCleaningExecutionDialog extends GetView {
                   text: 'Submit',
                   onPressed: () {
                     // controller.createMcPlan();
-                    controller.updateMCScheduleExecution();
+                    controller.updateMCScheduleExecution(scheduleId: scheduleId, cleaningDay: cleaningDay, waterUsed: waterUsed);
                   },
                 ),
               ),
