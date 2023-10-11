@@ -19,6 +19,7 @@ class EquipmentListModel {
   bool isExpanded;
   String? selectedDay;
   bool? isChecked;
+  bool? isCleanedChecked;
 
 
   EquipmentListModel({
@@ -28,6 +29,7 @@ class EquipmentListModel {
       this.smbs = const [],
       this.isExpanded = false,
       this.isChecked = false,
+      this.isCleanedChecked = false,
       this.selectedDay,
   });
 

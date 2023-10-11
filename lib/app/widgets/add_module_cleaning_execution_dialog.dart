@@ -210,13 +210,13 @@ class AddModuleCleaningExecutionDialog extends GetView {
                                                           "${smbItems.moduleQuantity}")),
                                                   Expanded(
                                                     child: Checkbox(
-                                                      value: e.isChecked,
+                                                      value: e.isCleanedChecked,
                                                       onChanged: (bool? value) {
                                                         // controller.toggleItemSelection(index);
                                                         setState(
                                                           () {
-                                                            e.isChecked =
-                                                                !e.isChecked!;
+                                                            e.isCleanedChecked =
+                                                                !e.isCleanedChecked!;
                                                           },
                                                         );
 
