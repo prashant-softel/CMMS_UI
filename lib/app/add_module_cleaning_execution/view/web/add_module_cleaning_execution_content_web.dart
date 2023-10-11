@@ -576,8 +576,10 @@ class AddModuleCleaningExecutionContentWeb extends GetView<AddModuleCleaningExec
                                                                                                           TableActionButton(
                                                                                                             // label: 'Equipments',
                                                                                                             onPress: () {
+                                                                                                               var filterdData = controller.listSchedules?.firstWhere((e) => "${e?.scheduleId}" == record[0]['value']);
+                                                                                                               
                                                                                                               Get.dialog(
-                                                                                                                  AddModuleCleaningExecutionDialog());
+                                                                                                                  AddModuleCleaningExecutionDialog(scheduleId: filterdData!.scheduleId, cleaningDay: filterdData.cleaningDay, waterUsed: filterdData.waterUsed,));
                                                                                                             },
                                                                                                             color: ColorValues.appDarkBlueColor,
                                                                                                             icon: Icons.category,

@@ -16,4 +16,24 @@ class ViewMcPlaningPresenter {
       isLoading: isLoading ?? false,
     );
   }
+
+  Future<Map<String, dynamic>?> mcPlanApprovedButton({
+    mcApproveJsonString,
+    required bool isLoading,
+  }) async {
+    return viewMcPlaningUsecase.mcPlanApprovedButton(
+      mcApproveJsonString: mcApproveJsonString,
+      isLoading: isLoading,
+    );
+  }
+
+  Future<Map<String, dynamic>?> mcPlanRejectButton({
+    mcRejectJsonString,
+    required bool isLoading,
+  }) async {
+    return viewMcPlaningUsecase.mcPlanRejectButton(
+      mcRejectJsonString: mcRejectJsonString,
+      isLoading: isLoading,
+    );
+  }
 }
