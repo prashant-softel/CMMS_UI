@@ -571,8 +571,10 @@ class ModuleCleaningPlanListDataSource extends DataTableSource {
                             int id =
                                 ModuleCleaningPlanningListDetails?.planId ?? 0;
                             if (id != 0) {
-                              Get.toNamed(Routes.viewMcPlaning,
-                                  arguments: {'id': id, "type": 1});
+                              Get.toNamed(
+                                Routes.viewMcPlaning,
+                                arguments: {'id': id, "type": 1},
+                              );
                             }
                           },
                         ),

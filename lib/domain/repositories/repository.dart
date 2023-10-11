@@ -1211,7 +1211,7 @@ class Repository {
                         Map<String, dynamic>.from(m)))
                 .toList();
 
-        return _moduleCleaningListPlan;
+        return _moduleCleaningListPlan.reversed.toList();
       } //
       else {
         Utility.showDialog(
