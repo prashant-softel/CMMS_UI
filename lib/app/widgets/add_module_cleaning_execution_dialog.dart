@@ -122,9 +122,12 @@ class AddModuleCleaningExecutionDialog extends GetView {
                             style: TextStyle(color: Color(0xff31576D)),
                           ),
                         ),
-                        Expanded(
-                          child: Text("Modules",
-                              style: TextStyle(color: Color(0xff31576D))),
+                        Padding(
+                          padding: const EdgeInsets.only(left: 50),
+                          child: Expanded(
+                            child: Text("Modules",
+                                style: TextStyle(color: Color(0xff31576D))),
+                          ),
                         ),
                         Expanded(
                           child: Text("Cleaned",

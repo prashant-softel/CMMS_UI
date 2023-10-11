@@ -63,6 +63,7 @@ class AddModuleCleaningExecutionController extends GetxController {
   int? selectedModuleListId = 0;
   int type = 1;
 
+
   ///Permit Type
   RxList<TypePermitModel?> typePermitList = <TypePermitModel>[].obs;
   Rx<bool> isTypePermitSelected = true.obs;
@@ -245,6 +246,11 @@ class AddModuleCleaningExecutionController extends GetxController {
 
       // String remark = items.join(', ');
       // print('Items remark:${remark}');
+      //  late List<LotoList> loto_map_list = [];
+
+      // filteredEquipmentNameList.forEach((e) {
+      //   loto_map_list.add(LotoList(Loto_id: e?.id, Loto_Key: e?.name));
+      // });
       List<int> data = [];
       
       equipmentList.value.forEach((element) {
