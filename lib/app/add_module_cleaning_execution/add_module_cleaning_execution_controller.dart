@@ -63,7 +63,6 @@ class AddModuleCleaningExecutionController extends GetxController {
   int? selectedModuleListId = 0;
   int type = 1;
 
-
   ///Permit Type
   RxList<TypePermitModel?> typePermitList = <TypePermitModel>[].obs;
   Rx<bool> isTypePermitSelected = true.obs;
@@ -244,21 +243,28 @@ class AddModuleCleaningExecutionController extends GetxController {
       });
       print('data${rowItem.value}');
 
-      // String remark = items.join(', ');
-      // print('Items remark:${remark}');
-      //  late List<LotoList> loto_map_list = [];
+      // List<int> data = [];
 
-      // filteredEquipmentNameList.forEach((e) {
-      //   loto_map_list.add(LotoList(Loto_id: e?.id, Loto_Key: e?.name));
+      // equipmentList.value.forEach((element) {
+      //   if (element!.isChecked!) {
+      //     data.add(element.invId!);
+      //   }
       // });
-      List<int> data = [];
-      
-      equipmentList.value.forEach((element) {
-        if (element!.isChecked!) {
-          data.add(element.invId!);
+      List<int?>? equipments = [];
+      equipmentList.forEach((e) {
+        if (e?.isChecked ?? false) {
+          e?.smbs.forEach((element) {
+            equipments.add(element.smbId ?? 0);
+          });
+        } else {
+          if (e?.isCleanedChecked ?? false) {
+            e?.smbs.forEach((element) {
+              equipments.add(element.smbId ?? 0);
+            });
+          }
         }
       });
-      print('cleaned:$data');
+      print('cleaned:$equipments');
 
       UpdateMcScheduleExecutionModel updateMCScheduleExecutionModel =
           UpdateMcScheduleExecutionModel(
@@ -266,8 +272,8 @@ class AddModuleCleaningExecutionController extends GetxController {
               cleaningDay: cleaningDay,
               waterUsed: waterUsed,
               remark: rowItem.value[0][8]["value"],
-              cleanedEquipmentIds: [10, 11],
-              abandonedEquipmentIds: [12]);
+              cleanedEquipmentIds: equipments,
+              abandonedEquipmentIds: equipments);
 
       var updateMCScheduleExecutionJsonString =
           updateMCScheduleExecutionModel.toJson();
