@@ -289,6 +289,7 @@ class AddModuleCleaningExecutionDialog extends GetView {
                         scheduleId: scheduleId,
                         cleaningDay: cleaningDay,
                         waterUsed: waterUsed);
+                        Get.back();
                   },
                 ),
               ),
