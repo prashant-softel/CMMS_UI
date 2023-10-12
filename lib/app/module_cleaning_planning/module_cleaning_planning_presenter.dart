@@ -1,4 +1,5 @@
 import 'package:cmms/domain/models/employee_model.dart';
+import 'package:cmms/domain/models/mc_details_plan_model.dart';
 import '../../domain/models/equipment_list_model.dart';
 import '../../domain/models/frequency_model.dart';
 import '../../domain/models/inventory_model.dart';
@@ -49,4 +50,13 @@ class ModuleCleaningPlanningPresenter {
         facilityId: facilityId ?? 0,
         isLoading: isLoading ?? false,
       );
+  Future<McPalningDetailsModel?> getMcPlanDetail({
+    bool? isLoading,
+    required int planId,
+  }) async {
+    return moduleCleaningPlanningUsecase.getMcPlanDetail(
+      planId: planId,
+      isLoading: isLoading ?? false,
+    );
+  }
 }

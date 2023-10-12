@@ -218,7 +218,7 @@ class SetEquipmentDialog extends GetView {
                   backgroundColor: ColorValues.greenColor,
                   text: 'Submit',
                   onPressed: () {
-                    controller.createMcPlan();
+                    // controller.createMcPlan();
                   },
                 ),
               ),
