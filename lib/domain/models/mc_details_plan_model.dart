@@ -27,7 +27,7 @@ class McPalningDetailsModel {
   int? status;
   String? status_short;
   String? status_long;
-  List<Schedule> schedules;
+  List<Schedules> schedules;
 
   McPalningDetailsModel({
     this.id,
@@ -72,8 +72,8 @@ class McPalningDetailsModel {
         status_short: json['status_short'],
         status_long: json['status_long'],
         schedules: json["schedules"] != null
-            ? List<Schedule>.from(
-                json["schedules"].map((x) => Schedule.fromJson(x)))
+            ? List<Schedules>.from(
+                json["schedules"].map((x) => Schedules.fromJson(x)))
             : [],
       );
 
@@ -99,8 +99,8 @@ class McPalningDetailsModel {
       };
 }
 
-class Schedule {
-  Schedule({
+class Schedules {
+  Schedules({
     this.id,
     this.scheduleId,
     this.executionId,
@@ -134,9 +134,9 @@ class Schedule {
   String? plannedDate;
   int? status;
 
-  List<Equipments?>? equipments;
+  List<EquipmentsList?>? equipments;
 
-  factory Schedule.fromJson(Map<String, dynamic> json) => Schedule(
+  factory Schedules.fromJson(Map<String, dynamic> json) => Schedules(
         id: json["id"],
         scheduleId: json['scheduleId'],
         executionId: json['executionId'],
@@ -152,8 +152,8 @@ class Schedule {
         status: json['status'],
         status_short: json['status_short'],
         equipments: json["equipments"] != null
-            ? List<Equipments>.from(
-                json["equipments"].map((x) => Equipments.fromJson(x)))
+            ? List<EquipmentsList>.from(
+                json["equipments"].map((x) => EquipmentsList.fromJson(x)))
             : [],
       );
 
@@ -177,8 +177,8 @@ class Schedule {
 }
 
 ///Equipments List Detail Model
-class Equipments {
-  Equipments({
+class EquipmentsList {
+  EquipmentsList({
     this.id,
     this.equipmentName,
     this.parentId,
@@ -200,7 +200,7 @@ class Equipments {
   int? moduleQuantity;
   int? grassCuttingArea;
 
-  factory Equipments.fromJson(Map<String, dynamic> json) => Equipments(
+  factory EquipmentsList.fromJson(Map<String, dynamic> json) => EquipmentsList(
         id: json["id"],
         equipmentName: json['equipmentName'],
         parentId: json['parentId'],
@@ -226,6 +226,6 @@ class Equipments {
       };
 }
 
-String mcPlainigModelToJson(Schedule data) => json.encode(data.toJson());
-String mcPlaningDetailModelToJson(Equipments data) =>
+String mcPlainigModelToJson(Schedules data) => json.encode(data.toJson());
+String mcPlaningDetailModelToJson(EquipmentsList data) =>
     json.encode(data.toJson());

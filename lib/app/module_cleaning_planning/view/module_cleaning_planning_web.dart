@@ -1,7 +1,6 @@
 import 'package:cmms/app/app.dart';
 import 'package:cmms/app/module_cleaning_planning/module_cleaning_planning_controller.dart';
 import 'package:cmms/app/stock_managment_add_goods_orders.dart/view/stock_management_add_goods_orders_web.dart';
-import 'package:cmms/app/widgets/custom_elevated_button.dart';
 import 'package:cmms/app/widgets/custom_richtext.dart';
 import 'package:cmms/app/widgets/custom_textfield.dart';
 import 'package:cmms/app/widgets/date_picker.dart';
@@ -448,41 +447,6 @@ class _ModuleCleaningPlanningWebState extends State<ModuleCleaningPlanningWeb> {
                                           ),
                                         ],
                                       ),
-                                    ),
-                                    Row(
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.center,
-                                      children: [
-                                        Container(
-                                          height: 35,
-                                          child: CustomElevatedButton(
-                                            backgroundColor:
-                                                ColorValues.redColor,
-                                            text: "Cancel",
-                                            onPressed: () {
-                                              final _flutterSecureStorage =
-                                                  // const FlutterSecureStorage();
-
-                                                  // _flutterSecureStorage.delete(
-                                                  // key: "userId");
-
-                                                  Get.back();
-                                            },
-                                          ),
-                                        ),
-                                        Dimens.boxWidth20,
-                                        Container(
-                                          height: 35,
-                                          child: CustomElevatedButton(
-                                            backgroundColor:
-                                                ColorValues.greenColor,
-                                            text: 'Submit',
-                                            onPressed: () {
-                                              controller.createMcPlan();
-                                            },
-                                          ),
-                                        ),
-                                      ],
                                     ),
                                   ],
                                 ),
