@@ -28,15 +28,14 @@ class ViewMcPlaningController extends GetxController {
   RxList<McPalningDetailsModel?>? mcPlanDetailsList =
       <McPalningDetailsModel?>[].obs;
   Rx<McPalningDetailsModel?> mcPlanDetailsModel = McPalningDetailsModel().obs;
-  RxList<Schedule?>? listSchedules = <Schedule?>[].obs;
+  RxList<Schedules?>? listSchedules = <Schedules?>[].obs;
   List<int?> scheduleId = [];
-  RxList<Schedule?>? schedules = <Schedule?>[].obs;
+  RxList<Schedules?>? schedules = <Schedules?>[].obs;
 
   StreamSubscription<int>? facilityIdStreamSubscription;
   int facilityId = 0;
 
   Rx<int> id = 0.obs;
-  Rx<int> type1 = 0.obs;
 
   Map<String, TypeModel> typedropdownMapperData = {};
 
@@ -82,10 +81,8 @@ class ViewMcPlaningController extends GetxController {
       var dataFromPreviousScreen = Get.arguments;
 
       id.value = dataFromPreviousScreen['id'];
-      type1.value = dataFromPreviousScreen['type'];
-
       // id= Get.arguments;
-      print('AddStock:$type1');
+      print('AddStock:$id');
     } catch (e) {
       print(e.toString() + 'userId');
     }
