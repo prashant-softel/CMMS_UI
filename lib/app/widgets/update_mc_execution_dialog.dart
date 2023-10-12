@@ -1,3 +1,4 @@
+import 'package:cmms/app/add_module_cleaning_execution/add_module_cleaning_execution_controller.dart';
 import 'package:cmms/app/theme/color_values.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -12,7 +13,7 @@ class UpdateMCExecutionDialog extends GetView {
   String? data;
 
   UpdateMCExecutionDialog({super.key, this.mcExecutionId, this.data});
-  // final WarrantyClaimController controller = Get.find();
+  final AddModuleCleaningExecutionController controller = Get.find();
 
   @override
   Widget build(BuildContext context) {
@@ -35,46 +36,79 @@ class UpdateMCExecutionDialog extends GetView {
             padding: Dimens.edgeInsets05_0_5_0,
             height: 50,
             width: double.infinity,
-            child: Column(
-                crossAxisAlignment: CrossAxisAlignment.stretch,
-                children: [
-                  Divider(
-                    color: ColorValues.greyLightColour,
-                    thickness: 1,
-                  ),
-                  RichText(
-                    text: TextSpan(
-                      text: 'MC Execution Updated Successfully with Id ',
-                      style: DefaultTextStyle.of(context).style,
-                      children: <TextSpan>[
-                        TextSpan(
-                          text: '$mcExecutionId',
-                          style: TextStyle(
-                            color: Colors.blue, // Set the desired text color
-                            fontWeight: FontWeight
-                                .bold, // Set any additional styles as needed
-                          ),
-                        ),
-                       
-                      ],
+            child: Column(crossAxisAlignment: CrossAxisAlignment.stretch, children: [
+              Divider(
+                color: ColorValues.greyLightColour,
+                thickness: 1,
+              ),
+              RichText(
+                text: TextSpan(
+                  text: 'MC Execution Updated Successfully with Id ',
+                  style: DefaultTextStyle.of(context).style,
+                  children: <TextSpan>[
+                    TextSpan(
+                      text: '$mcExecutionId',
+                      style: TextStyle(
+                        color: Colors.blue, // Set the desired text color
+                        fontWeight: FontWeight.bold, // Set any additional styles as needed
+                      ),
                     ),
-                  ),
-                ]),
+                  ],
+                ),
+              ),
+            ]),
           );
         }),
         actions: [
           Dimens.boxWidth10,
-          Center(
-            child: ElevatedButton(
-              style: Styles.darkBlueElevatedButtonStyle,
-              onPressed: () {
-                Get.offAllNamed(Routes.moduleCleaningListExecution);
-                // controller.getNewPermitList(_controller.facilityId, _controller.userId);
-                // controller.getWarrantyClaimList();
-                Get.back();
-              },
-              child: const Text('Ok'),
-            ),
+          Row(
+            mainAxisAlignment : MainAxisAlignment.center,
+            children: [
+              Dimens.boxWidth10,
+              Center(
+                child: ElevatedButton(
+                  style: Styles.greenElevatedButtonStyle,
+                  onPressed: () {
+                    Get.offAllNamed(Routes.moduleCleaningListExecution);
+                    // controller.getNewPermitList(_controller.facilityId, _controller.userId);
+                    // controller.getWarrantyClaimList();
+                    
+                  },
+                  child: const Text('Execution List'),
+                ),
+              ),
+              Dimens.boxWidth10,
+              Center(
+                child: ElevatedButton(
+                  style: Styles.darkBlueElevatedButtonStyle,
+                  onPressed: () {
+                    Get.back();
+                    Future.delayed(Duration(seconds: 1), () {
+                      controller.getTypePermitList();
+                    });
+
+                    Future.delayed(Duration(seconds: 1), () {
+                     controller. getInventoryCategoryList();
+                    });
+                    Future.delayed(Duration(seconds: 1), () {
+                      controller.getEquipmentModelList(controller.facilityId, true);
+                    });
+
+                    
+                     if(mcExecutionId![0] != null){
+                       Future.delayed(Duration(seconds: 1), () {
+                        controller.getMCExecutionDetail(executionId: controller.data['id']!);
+                      });
+
+                     }
+                    
+                    // Get.offAllNamed(Routes.addModuleCleaningExecutionContentWeb);
+                  },
+                  child: const Text('View MC Details'),
+                ),
+              ),
+              Dimens.boxWidth10,
+            ],
           ),
         ],
       );

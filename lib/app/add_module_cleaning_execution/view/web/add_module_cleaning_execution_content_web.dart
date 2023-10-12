@@ -526,7 +526,7 @@ class AddModuleCleaningExecutionContentWeb extends GetView<AddModuleCleaningExec
                                                                                                                         orElse: () => Schedules(status_short: ""),
                                                                                                                       )
                                                                                                                       ?.status_short ==
-                                                                                                                  "In Progress"
+                                                                                                                  "Completed"
                                                                                                               ?
                                                                                                           TableActionButton(
                                                                                                             // label: 'Abandon',
@@ -555,6 +555,14 @@ class AddModuleCleaningExecutionContentWeb extends GetView<AddModuleCleaningExec
                                                                                                           :Dimens.box0,
 
                                                                                                           ///Abandon
+                                                                                                          // controller.listSchedules!
+                                                                                                          //             .firstWhere(
+                                                                                                          //               (e) => "${e?.status_short}" == e?.status_short,
+                                                                                                          //               orElse: () => Schedules(status_short: ""),
+                                                                                                          //             )
+                                                                                                          //             ?.status_short ==
+                                                                                                          //         "In Progress"
+                                                                                                          //     ?
                                                                                                           TableActionButton(
                                                                                                             // label: 'Abandon',
                                                                                                             onPress: () {
@@ -572,7 +580,16 @@ class AddModuleCleaningExecutionContentWeb extends GetView<AddModuleCleaningExec
                                                                                                             icon: Icons.close,
                                                                                                             message: 'Abandon',
                                                                                                           ),
+                                                                                                          // :Dimens.box0,
 
+                                                                                                          // controller.listSchedules!
+                                                                                                          //             .firstWhere(
+                                                                                                          //               (e) => "${e?.status_short}" == e?.status_short,
+                                                                                                          //               orElse: () => Schedules(status_short: ""),
+                                                                                                          //             )
+                                                                                                          //             ?.status_short ==
+                                                                                                          //         "In Progress"
+                                                                                                          //     ?
                                                                                                           TableActionButton(
                                                                                                             // label: 'Equipments',
                                                                                                             onPress: () {
@@ -584,7 +601,8 @@ class AddModuleCleaningExecutionContentWeb extends GetView<AddModuleCleaningExec
                                                                                                             color: ColorValues.appDarkBlueColor,
                                                                                                             icon: Icons.category,
                                                                                                             message: 'Equipments',
-                                                                                                          ),
+                                                                                                          )
+                                                                                                          // :Dimens.box0
                                                                                                         ]
                                                                                                       // ..addAll(controller.listSchedules!.map((element) => Row(
                                                                                                       //       mainAxisSize: MainAxisSize.min,
