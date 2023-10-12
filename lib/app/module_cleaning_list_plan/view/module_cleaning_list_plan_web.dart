@@ -573,7 +573,7 @@ class ModuleCleaningPlanListDataSource extends DataTableSource {
                             if (id != 0) {
                               Get.toNamed(
                                 Routes.viewMcPlaning,
-                                arguments: {'id': id, "type": 1},
+                                arguments: {'id': id, 'type': 1},
                               );
                             }
                           },

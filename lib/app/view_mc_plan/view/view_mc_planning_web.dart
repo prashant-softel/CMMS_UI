@@ -564,45 +564,48 @@ class _ViewMcPlaningWebState extends State<ViewMcPlaningWeb> {
 
                                 Dimens.boxHeight12,
 
-                                Row(
-                                  children: [
-                                    Spacer(),
+                                // controller.type1 != 0 &&
+                                controller.type1.value != null
+                                    ? Row(
+                                        children: [
+                                          Spacer(),
 
-                                    Container(
-                                      height: 45,
-                                      child: CustomElevatedButton(
-                                        backgroundColor:
-                                            ColorValues.rejectColor,
-                                        text: "Reject",
-                                        icon: Icons.close,
-                                        onPressed: () {
-                                          Get.dialog(RejectMcPlan(
-                                            id: controller.id.value,
-                                          ));
-                                        },
-                                      ),
-                                    ),
-                                    Dimens.boxWidth10,
+                                          Container(
+                                            height: 45,
+                                            child: CustomElevatedButton(
+                                              backgroundColor:
+                                                  ColorValues.rejectColor,
+                                              text: "Reject1",
+                                              icon: Icons.close,
+                                              onPressed: () {
+                                                Get.dialog(RejectMcPlan(
+                                                  id: controller.id.value,
+                                                ));
+                                              },
+                                            ),
+                                          ),
+                                          Dimens.boxWidth10,
 
-                                    Container(
-                                      height: 45,
-                                      child: CustomElevatedButton(
-                                        backgroundColor:
-                                            ColorValues.appGreenColor,
-                                        text: "Approve",
-                                        icon: Icons.add,
-                                        onPressed: () {
-                                          Get.dialog(ApproveMcPlan(
-                                            id: controller.id.value,
-                                          ));
-                                        },
-                                      ),
-                                    ),
+                                          Container(
+                                            height: 45,
+                                            child: CustomElevatedButton(
+                                              backgroundColor:
+                                                  ColorValues.appGreenColor,
+                                              text: "Approve",
+                                              icon: Icons.add,
+                                              onPressed: () {
+                                                Get.dialog(ApproveMcPlan(
+                                                  id: controller.id.value,
+                                                ));
+                                              },
+                                            ),
+                                          ),
 
-                                    // : Dimens.box0,
-                                    Spacer(),
-                                  ],
-                                )
+                                          // : Dimens.box0,
+                                          Spacer(),
+                                        ],
+                                      )
+                                    : Container()
                               ],
                             ),
                           ),
