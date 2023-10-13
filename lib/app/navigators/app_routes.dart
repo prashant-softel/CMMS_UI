@@ -145,6 +145,8 @@ abstract class Routes {
   static const risktypemaster = _Paths.risktypemaster;
   static const viewMcPlaning = _Paths.viewMcPlaning;
   static const print = _Paths.print;
+  static const hotoListScreenContentWeb = _Paths.hotoListScreenContentWeb;
+  static const auditListScreenContentWeb = _Paths.auditListScreenContentWeb;
 }
 
 abstract class _Paths {
@@ -284,6 +286,8 @@ abstract class _Paths {
   static const risktypemaster = '/risk-type-master';
   static const viewMcPlaning = '/view-mc-planing';
   static const print = '/print';
+  static const hotoListScreenContentWeb = '/hoto-list-screen';
+  static const auditListScreenContentWeb = '/audit-list-screen';
 
 // static const editPermitWebScreen = '/edit-permit-web-screen';
 }

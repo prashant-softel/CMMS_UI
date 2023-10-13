@@ -12,6 +12,8 @@ import 'package:cmms/app/add_module_cleaning_execution/add_module_cleaning_execu
 import 'package:cmms/app/add_user/add_user_binding.dart';
 import 'package:cmms/app/add_user/view/add_user_screen.dart';
 import 'package:cmms/app/app.dart';
+import 'package:cmms/app/audit/audit_list_binding.dart';
+import 'package:cmms/app/audit/view/audit_list_screen.dart';
 import 'package:cmms/app/breakdown_maintenance/view/breakdown_maintenance_screen.dart';
 import 'package:cmms/app/business_List/view/business_list_screen.dart';
 import 'package:cmms/app/calibration/view/calibration_list_screen.dart';
@@ -34,6 +36,8 @@ import 'package:cmms/app/escalation_matrix_list/escalation_matrix_list_binding.d
 import 'package:cmms/app/escalation_matrix_list/escalation_matrix_list_screen.dart';
 import 'package:cmms/app/faulty_material_report/faulty_material_report_binding.dart';
 import 'package:cmms/app/faulty_material_report/view/faulty_material_report_screen.dart';
+import 'package:cmms/app/hoto/hoto_list_binding.dart';
+import 'package:cmms/app/hoto/view/hoto_list_screen.dart';
 import 'package:cmms/app/incident_report_list/incident_report_list_binding.dart';
 import 'package:cmms/app/incident_report_list/incident_report_list_screen.dart';
 import 'package:cmms/app/inventory_list/inventory_list_binding.dart';
@@ -260,7 +264,7 @@ class AppPages {
   static var transitionDuration = const Duration(milliseconds: 300);
 
   //static const initial = Routes.home;
-  static const initial = Routes.login;
+  static const initial = Routes.auditListScreenContentWeb;
 
   static final pages = <GetPage<dynamic>>[
     GetPage<SplashScreen>(
@@ -744,6 +748,16 @@ class AppPages {
       name: _Paths.moduleCleaningPlanning,
       page: ModuleCleaningPlanningScreen.new,
       binding: ModuleCleaningPlanningBinding(),
+    ),
+     GetPage<dynamic>(
+      name: _Paths.hotoListScreenContentWeb,
+      page: HotoListScreen.new,
+      binding: HotoListScreenBinding(),
+    ),
+     GetPage<dynamic>(
+      name: _Paths.auditListScreenContentWeb,
+      page: AuditListScreen.new,
+      binding: AuditListScreenBinding(),
     ),
     GetPage<dynamic>(
       name: _Paths.addModuleCleaningExecutionContentWeb,
