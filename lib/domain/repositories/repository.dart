@@ -1813,8 +1813,7 @@ class Repository {
     }
   }
 
-
-   Future<Map<String, dynamic>> mcExecutionApprovedButton(
+  Future<Map<String, dynamic>> mcExecutionApprovedButton(
     mcExecutionApproveJsonString,
     bool? isLoading,
   ) async {
@@ -1838,7 +1837,8 @@ class Repository {
           // Get.dialog<void>(WarrantyClaimErrorDialog());
         }
       } else {
-        Utility.showDialog(res.errorCode.toString() + 'mcExecutionApprovedButton');
+        Utility.showDialog(
+            res.errorCode.toString() + 'mcExecutionApprovedButton');
         //return '';
       }
       return Map();
@@ -1848,8 +1848,7 @@ class Repository {
     }
   }
 
-
-   Future<Map<String, dynamic>> rejectMcExecutionApprovedButton(
+  Future<Map<String, dynamic>> rejectMcExecutionApprovedButton(
     rejectMcExecutionApproveJsonString,
     bool? isLoading,
   ) async {
@@ -1857,7 +1856,8 @@ class Repository {
       final auth = await getSecuredValue(LocalKeys.authToken);
       final res = await _dataRepository.rejectMcExecutionApprovedButton(
         auth: auth,
-        rejectMcExecutionApproveJsonString: json.encode(rejectMcExecutionApproveJsonString),
+        rejectMcExecutionApproveJsonString:
+            json.encode(rejectMcExecutionApproveJsonString),
         isLoading: isLoading ?? false,
       );
 
@@ -1873,7 +1873,8 @@ class Repository {
           // Get.dialog<void>(WarrantyClaimErrorDialog());
         }
       } else {
-        Utility.showDialog(res.errorCode.toString() + 'mcExecutionRejectButton');
+        Utility.showDialog(
+            res.errorCode.toString() + 'mcExecutionRejectButton');
         //return '';
       }
       return Map();
@@ -1882,8 +1883,6 @@ class Repository {
       return Map();
     }
   }
-
-
 
   Future<Map<String, dynamic>> pmPlanApprovedButton(
     pmPlanApproveJsonString,
@@ -2710,7 +2709,7 @@ class Repository {
 
       if (!res.hasError) {
         var mcTaskList = mcTaskListModelFromJson(res.data);
-        return mcTaskList;
+        return mcTaskList.reversed.toList();
       } //
       else {
         Utility.showDialog(res.errorCode.toString() + 'getMCTaskList');
@@ -3377,7 +3376,6 @@ class Repository {
     }
   }
 
-
   Future<void> endMCScheduleExecutionButton(
     int? scheduleId,
     bool? isLoading,
@@ -3402,7 +3400,6 @@ class Repository {
       log(error.toString());
     }
   }
-
 
   // Future<void> permitRejectButton(
   //   String? comment,
