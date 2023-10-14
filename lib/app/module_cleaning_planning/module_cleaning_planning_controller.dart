@@ -21,7 +21,8 @@ class ModuleCleaningPlanningController extends GetxController {
   final HomeController homecontroller = Get.find();
 
   RxList<FrequencyModel?> frequencyList = <FrequencyModel>[].obs;
-  Rx<List<List<Map<String, String>>>> rowItem = Rx<List<List<Map<String, String>>>>([]);
+  Rx<List<List<Map<String, String>>>> rowItem =
+      Rx<List<List<Map<String, String>>>>([]);
   RxList<EmployeeModel?> assignedToList = <EmployeeModel>[].obs;
   RxList<Schedules?> schedules = <Schedules>[].obs;
 
@@ -34,8 +35,10 @@ class ModuleCleaningPlanningController extends GetxController {
   TextEditingController mcTitelCtrlr = TextEditingController();
 
   var durationInDayCtrlr = TextEditingController();
-  RxList<McPalningDetailsModel?>? getMcDetailsByIDModelList = <McPalningDetailsModel?>[].obs;
-  Rx<McPalningDetailsModel?> getMcDetailsByIDModel = McPalningDetailsModel().obs;
+  RxList<McPalningDetailsModel?>? getMcDetailsByIDModelList =
+      <McPalningDetailsModel?>[].obs;
+  Rx<McPalningDetailsModel?> getMcDetailsByIDModel =
+      McPalningDetailsModel().obs;
 
   Rx<String> selectedfrequency = ''.obs;
   Rx<bool> isSelectedfrequency = true.obs;
@@ -50,7 +53,8 @@ class ModuleCleaningPlanningController extends GetxController {
   RxList<EquipmentListModel?> equipmentList = <EquipmentListModel?>[].obs;
   RxList<SMBS> smblist = <SMBS>[].obs;
 
-  RxList<McPalningDetailsModel?>? mcPlanDetailsList = <McPalningDetailsModel?>[].obs;
+  RxList<McPalningDetailsModel?>? mcPlanDetailsList =
+      <McPalningDetailsModel?>[].obs;
   Rx<McPalningDetailsModel?> mcPlanDetailsModel = McPalningDetailsModel().obs;
   var days = <TypeModel>[
     TypeModel(name: 'Day 1', id: "0"),
@@ -140,7 +144,7 @@ class ModuleCleaningPlanningController extends GetxController {
   //           getMcPlanDetail(planId: id.value);
   //         });
   //       }
-  //     });
+//     });
   //     super.onInit();
   //   } catch (e) {
   //     print(e);
@@ -152,7 +156,8 @@ class ModuleCleaningPlanningController extends GetxController {
   Future<void> getEquipmentModelList(int facilityId, bool isLoading) async {
     equipmentList.value = <EquipmentListModel>[];
 
-    final list = await moduleCleaningPlanningPresenter.getEquipmentModelList(isLoading: isLoading, facilityId: facilityId);
+    final list = await moduleCleaningPlanningPresenter.getEquipmentModelList(
+        isLoading: isLoading, facilityId: facilityId);
     // print('incidentReportFacilityId$facilityId');
     // print('Incident Report List:$list');
     // for (var equipment_list in list) {
@@ -182,10 +187,12 @@ class ModuleCleaningPlanningController extends GetxController {
       });
     });
     equipmentList.forEach((e) {
-      schedules.add(Schedule(cleaningDay: 1, cleaningType: 1, equipments: equipments));
+      schedules.add(
+          Schedule(cleaningDay: 1, cleaningType: 1, equipments: equipments));
     });
     CreateMcPalningsModel createMcModel = CreateMcPalningsModel(
-        // id: 0,
+        // planId: 0,
+        // assignedToId: 0,
         facilityId: facilityId,
         frequencyId: selectedfrequencyId,
         noOfCleaningDays: int.tryParse(_durationInDayCtrlr) ?? 0,
@@ -193,7 +200,8 @@ class ModuleCleaningPlanningController extends GetxController {
         schedules: schedules);
 
     var createMcModelJsonString = [createMcModel.toJson()];
-    Map<String, dynamic>? responseCreateMcModel = await moduleCleaningPlanningPresenter.createMcPlan(
+    Map<String, dynamic>? responseCreateMcModel =
+        await moduleCleaningPlanningPresenter.createMcPlan(
       createMcPlans: createMcModelJsonString,
       isLoading: true,
     );
@@ -219,21 +227,22 @@ class ModuleCleaningPlanningController extends GetxController {
     //       Schedule(cleaningDay: 1, cleaningType: 1, equipments: equipments));
     // });
     CreateMcPalningsModel updateMcModel = CreateMcPalningsModel(
-      planId: 63,
-      facilityId: 1779,
-      title: "new test",
-      noOfCleaningDays: 3,
-      frequencyId: 2,
-      startDate: "2023-10-11",
-      assignedToId: 12,
-      schedules: []
-      // noOfCleaningDays: int.tryParse(_durationInDayCtrlr) ?? 0,
-      // title: _mcTitelCtrlr,
-      // schedules: schedules
-    );
+        // planId: 63,
+        facilityId: 1779,
+        title: "new test",
+        noOfCleaningDays: 3,
+        frequencyId: 2,
+        // startDate: "2023-10-11",
+        // assignedToId: 12,
+        schedules: []
+        // noOfCleaningDays: int.tryParse(_durationInDayCtrlr) ?? 0,
+        // title: _mcTitelCtrlr,
+        // schedules: schedules
+        );
 
     var updateMcModelJsonString = updateMcModel.toJson();
-    Map<String, dynamic>? responseCreateMcModel = await moduleCleaningPlanningPresenter.updateMcPlan(
+    Map<String, dynamic>? responseCreateMcModel =
+        await moduleCleaningPlanningPresenter.updateMcPlan(
       updateMcModelJsonString: updateMcModelJsonString,
       isLoading: true,
     );
@@ -249,7 +258,8 @@ class ModuleCleaningPlanningController extends GetxController {
     // newPermitDetails!.value = <NewPermitListModel>[];
     mcPlanDetailsList?.value = <McPalningDetailsModel>[];
 
-    final _mcPlanDetails = await moduleCleaningPlanningPresenter.getMcPlanDetail(planId: planId, isLoading: true);
+    final _mcPlanDetails = await moduleCleaningPlanningPresenter
+        .getMcPlanDetail(planId: planId, isLoading: true);
     print('MC plan Detail:$_mcPlanDetails');
 
     if (_mcPlanDetails != null) {
@@ -298,7 +308,8 @@ class ModuleCleaningPlanningController extends GetxController {
 
   Future<void> getAssignedToList() async {
     assignedToList.clear();
-    final _assignedToList = await moduleCleaningPlanningPresenter.getAssignedToList(
+    final _assignedToList =
+        await moduleCleaningPlanningPresenter.getAssignedToList(
       facilityId: facilityId,
     );
 
@@ -312,7 +323,8 @@ class ModuleCleaningPlanningController extends GetxController {
   }
 
   Future<void> getFrequencyList() async {
-    final list = await moduleCleaningPlanningPresenter.getFrequencyList(isLoading: true);
+    final list =
+        await moduleCleaningPlanningPresenter.getFrequencyList(isLoading: true);
 
     if (list != null) {
       for (var _frequencyList in list) {
@@ -326,7 +338,8 @@ class ModuleCleaningPlanningController extends GetxController {
     switch (list.runtimeType) {
       case RxList<FrequencyModel>:
         {
-          int frequencyIndex = frequencyList.indexWhere((x) => x?.name == value);
+          int frequencyIndex =
+              frequencyList.indexWhere((x) => x?.name == value);
           selectedfrequencyId = frequencyList[frequencyIndex]?.id ?? 0;
           selectedfrequency.value = value;
         }

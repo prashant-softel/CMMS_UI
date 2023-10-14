@@ -691,7 +691,6 @@ class DataRepository extends DomainRepository {
         isLoading: isLoading ?? false,
       );
 
-
   Future<ResponseModel> mcPlanRejectButton({
     required String auth,
     mcRejectJsonString,
@@ -865,12 +864,12 @@ class DataRepository extends DomainRepository {
 
   Future<ResponseModel> startMCExecutionButton({
     required String auth,
-    int? planId,
+    int? executionId,
     bool? isLoading,
   }) async =>
       await connectHelper.startMCExecutionButton(
         auth: auth,
-        planId: planId,
+        executionId: executionId,
         isLoading: isLoading ?? false,
       );
 
@@ -896,7 +895,7 @@ class DataRepository extends DomainRepository {
         isLoading: isLoading ?? false,
       );
 
-   Future<ResponseModel> endMCScheduleExecutionButton({
+  Future<ResponseModel> endMCScheduleExecutionButton({
     required String auth,
     int? scheduleId,
     bool? isLoading,

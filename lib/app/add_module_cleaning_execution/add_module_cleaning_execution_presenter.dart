@@ -1,4 +1,3 @@
-
 import 'package:cmms/domain/models/end_mc_execution_detail_model.dart';
 import 'package:cmms/domain/models/equipment_list_model.dart';
 import 'package:cmms/domain/models/inventory_category_model.dart';
@@ -11,14 +10,12 @@ class AddModuleCleaningExecutionPresenter {
   AddModuleCleaningExecutionPresenter(this.addModuleCleaningExecutionUsecase);
   AddModuleCleaningExecutionUsecase addModuleCleaningExecutionUsecase;
 
- 
-
   Future<void> startMCExecutionButton({
-    int? planId,
+    int? executionId,
     bool? isLoading,
   }) async =>
       await addModuleCleaningExecutionUsecase.startMCExecutionButton(
-        planId: planId,
+        executionId: executionId,
         isLoading: isLoading ?? false,
       );
 
@@ -36,10 +33,10 @@ class AddModuleCleaningExecutionPresenter {
   required bool isLoading,
     
   }) async {
-     return addModuleCleaningExecutionUsecase.abandonAllExecutionButton(
-        abandoneJsonString: abandoneJsonString,
+    return addModuleCleaningExecutionUsecase.abandonAllExecutionButton(
+      abandoneJsonString: abandoneJsonString,
       isLoading: isLoading,
-      );
+    );
   }
 
   Future<void> startMCExecutionScheduleButton({
@@ -51,7 +48,7 @@ class AddModuleCleaningExecutionPresenter {
         isLoading: isLoading ?? false,
       );
 
-   Future<void> endMCScheduleExecutionButton({
+  Future<void> endMCScheduleExecutionButton({
     int? scheduleId,
     bool? isLoading,
   }) async =>
@@ -60,65 +57,56 @@ class AddModuleCleaningExecutionPresenter {
         isLoading: isLoading ?? false,
       );
 
-   Future<List<TypePermitModel?>?> getTypePermitList(
-    {required int facility_id}
-   ) async =>
+  Future<List<TypePermitModel?>?> getTypePermitList(
+          {required int facility_id}) async =>
       await addModuleCleaningExecutionUsecase.getTypePermitList(
-        true,
-        facility_id
-        );
+          true, facility_id);
 
   Future<List<InventoryCategoryModel?>?> getInventoryCategoryList({
     String? auth,
     int? facilityId,
     bool? isLoading,
   }) async =>
-      await addModuleCleaningExecutionUsecase.getInventoryCategoryList(
-      );
+      await addModuleCleaningExecutionUsecase.getInventoryCategoryList();
 
-   Future<EndMCExecutionDetailsModel?> getMCExecutionDetail({
-    bool? isLoading,  
+  Future<EndMCExecutionDetailsModel?> getMCExecutionDetail({
+    bool? isLoading,
     required int executionId,
   }) async {
-      return addModuleCleaningExecutionUsecase.getMCExecutionDetail(
-        executionId: executionId,
-        isLoading: isLoading ?? false,
-      );
+    return addModuleCleaningExecutionUsecase.getMCExecutionDetail(
+      executionId: executionId,
+      isLoading: isLoading ?? false,
+    );
   }
 
-
   Future<Map<String, dynamic>?> endMCExecutionButton({
-   endJsonString,
-  required bool isLoading,
-    
+    endJsonString,
+    required bool isLoading,
   }) async {
-     return addModuleCleaningExecutionUsecase.endMCExecutionButton(
-        endJsonString: endJsonString,
+    return addModuleCleaningExecutionUsecase.endMCExecutionButton(
+      endJsonString: endJsonString,
       isLoading: isLoading,
-      );
+    );
   }
 
   Future<List<EquipmentListModel>> getEquipmentModelList({
     required bool isLoading,
     required int? facilityId,
-    
   }) async {
     return addModuleCleaningExecutionUsecase.getEquipmentModelList(
       isLoading: isLoading,
       facilityId: facilityId,
-      
     );
   }
 
-   Future<Map<String, dynamic>?> abandonScheduleExecutionButton({
-   abandoneScheduleJsonString,
-  required bool isLoading,
-    
+  Future<Map<String, dynamic>?> abandonScheduleExecutionButton({
+    abandoneScheduleJsonString,
+    required bool isLoading,
   }) async {
-     return addModuleCleaningExecutionUsecase.abandonScheduleExecutionButton(
-        abandoneScheduleJsonString: abandoneScheduleJsonString,
+    return addModuleCleaningExecutionUsecase.abandonScheduleExecutionButton(
+      abandoneScheduleJsonString: abandoneScheduleJsonString,
       isLoading: isLoading,
-      );
+    );
   }
 
   Future<Map<String, dynamic>?> updateMCScheduleExecution({
@@ -130,7 +118,6 @@ class AddModuleCleaningExecutionPresenter {
       isLoading: isLoading,
     );
   }
-
 
   Future<List<FacilityModel?>?> getFacilityList() async =>
       await addModuleCleaningExecutionUsecase.getFacilityList();

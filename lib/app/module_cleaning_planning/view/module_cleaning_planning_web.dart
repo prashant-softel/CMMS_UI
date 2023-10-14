@@ -284,18 +284,18 @@ class _ModuleCleaningPlanningWebState extends State<ModuleCleaningPlanningWeb> {
                                                 Spacer(),
                                                 GestureDetector(
                                                   onTap: () {
-                                                    
                                                     // controller.schedules.
-                                                  
+
                                                     Get.dialog(
                                                         SetEquipmentDialog(
-                                                        planId: controller.id.value, 
-                                                        facilityId: controller.facilityId, 
-                                                        noOfCleaningDays: 1,
-                                                        frequencyId: 25,
-                                                        assignedToId: 25,
-                                                        )
-                                                        );
+                                                      planId:
+                                                          controller.id.value,
+                                                      facilityId:
+                                                          controller.facilityId,
+                                                      noOfCleaningDays: 1,
+                                                      frequencyId: 25,
+                                                      assignedToId: 25,
+                                                    ));
                                                   },
                                                   // color: ColorValues.appDarkBlueColor,
                                                   // onTap: () {
@@ -488,7 +488,7 @@ class _ModuleCleaningPlanningWebState extends State<ModuleCleaningPlanningWeb> {
                                                 ColorValues.greenColor,
                                             text: 'Submit',
                                             onPressed: () {
-                                              controller.createMcPlan();
+                                              // controller.createMcPlan();
                                             },
                                           ),
                                         ),
