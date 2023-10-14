@@ -1813,6 +1813,78 @@ class Repository {
     }
   }
 
+
+   Future<Map<String, dynamic>> mcExecutionApprovedButton(
+    mcExecutionApproveJsonString,
+    bool? isLoading,
+  ) async {
+    try {
+      final auth = await getSecuredValue(LocalKeys.authToken);
+      final res = await _dataRepository.mcExecutionApprovedButton(
+        auth: auth,
+        mcExecutionApproveJsonString: json.encode(mcExecutionApproveJsonString),
+        isLoading: isLoading ?? false,
+      );
+
+      var resourceData = res.data;
+
+      print('Response MC Execution Approve: ${resourceData}');
+
+      if (!res.hasError) {
+        if (res.errorCode == 200) {
+          var responseMap = json.decode(res.data);
+          return responseMap;
+        } else {
+          // Get.dialog<void>(WarrantyClaimErrorDialog());
+        }
+      } else {
+        Utility.showDialog(res.errorCode.toString() + 'mcExecutionApprovedButton');
+        //return '';
+      }
+      return Map();
+    } catch (error) {
+      print(error.toString());
+      return Map();
+    }
+  }
+
+
+   Future<Map<String, dynamic>> rejectMcExecutionApprovedButton(
+    rejectMcExecutionApproveJsonString,
+    bool? isLoading,
+  ) async {
+    try {
+      final auth = await getSecuredValue(LocalKeys.authToken);
+      final res = await _dataRepository.rejectMcExecutionApprovedButton(
+        auth: auth,
+        rejectMcExecutionApproveJsonString: json.encode(rejectMcExecutionApproveJsonString),
+        isLoading: isLoading ?? false,
+      );
+
+      var resourceData = res.data;
+
+      print('Response MC Execution Reject: ${resourceData}');
+
+      if (!res.hasError) {
+        if (res.errorCode == 200) {
+          var responseMap = json.decode(res.data);
+          return responseMap;
+        } else {
+          // Get.dialog<void>(WarrantyClaimErrorDialog());
+        }
+      } else {
+        Utility.showDialog(res.errorCode.toString() + 'mcExecutionRejectButton');
+        //return '';
+      }
+      return Map();
+    } catch (error) {
+      print(error.toString());
+      return Map();
+    }
+  }
+
+
+
   Future<Map<String, dynamic>> pmPlanApprovedButton(
     pmPlanApproveJsonString,
     bool? isLoading,
@@ -3304,6 +3376,33 @@ class Repository {
       log(error.toString());
     }
   }
+
+
+  Future<void> endMCScheduleExecutionButton(
+    int? scheduleId,
+    bool? isLoading,
+  ) async {
+    try {
+      final auth = await getSecuredValue(LocalKeys.authToken);
+
+      final res = await _dataRepository.endMCScheduleExecutionButton(
+        auth: auth,
+        scheduleId: scheduleId,
+        isLoading: isLoading ?? false,
+      );
+      print('EndScheduleExecutionResponse55: ${res.data}');
+
+      if (!res.hasError) {
+        //  return _permitIssueModel;
+      } else {
+        Utility.showDialog(
+            res.errorCode.toString() + 'endMCScheduleExecutionButton');
+      }
+    } catch (error) {
+      log(error.toString());
+    }
+  }
+
 
   // Future<void> permitRejectButton(
   //   String? comment,

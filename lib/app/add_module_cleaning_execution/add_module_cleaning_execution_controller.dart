@@ -373,7 +373,17 @@ class AddModuleCleaningExecutionController extends GetxController {
     final _startMCScheduleExecutionBtn =
         await addModuleCleaningExecutionPresenter
             .startMCExecutionScheduleButton(
-      scheduleId: scheduleId.first,
+      scheduleId: scheduleID,
+    );
+
+    // print('Plan Data:${data['planId']}');
+  }
+
+  Future<void> endMCScheduleExecutionButton({int? scheduleID}) async {
+    final _endMCScheduleExecutionBtn =
+        await addModuleCleaningExecutionPresenter
+            .endMCScheduleExecutionButton(
+      scheduleId: scheduleID,
     );
 
     // print('Plan Data:${data['planId']}');

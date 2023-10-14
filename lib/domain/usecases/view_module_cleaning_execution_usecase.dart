@@ -25,6 +25,26 @@ class ViewModuleCleaningExecutionUsecase {
         isLoading,
       );
 
+   Future<Map<String, dynamic>> mcExecutionApprovedButton({
+    mcExecutionApproveJsonString,
+    bool? isLoading,
+  }) async =>
+      await _repository.mcExecutionApprovedButton(
+        mcExecutionApproveJsonString,
+        isLoading,
+      );
+
+
+  Future<Map<String, dynamic>> rejectMcExecutionApprovedButton({
+    rejectMcExecutionApproveJsonString,
+    bool? isLoading,
+  }) async =>
+      await _repository.rejectMcExecutionApprovedButton(
+        rejectMcExecutionApproveJsonString,
+        isLoading,
+      );
+
+
   Future<EndMCExecutionDetailsModel?> getMCExecutionDetail({
     bool? isLoading,  
     required int executionId,

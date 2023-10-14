@@ -668,6 +668,30 @@ class DataRepository extends DomainRepository {
         mcApproveJsonString: mcApproveJsonString,
         isLoading: isLoading ?? false,
       );
+
+  Future<ResponseModel> mcExecutionApprovedButton({
+    required String auth,
+    mcExecutionApproveJsonString,
+    bool? isLoading,
+  }) async =>
+      await connectHelper.mcExecutionApprovedButton(
+        auth: auth,
+        mcExecutionApproveJsonString: mcExecutionApproveJsonString,
+        isLoading: isLoading ?? false,
+      );
+
+  Future<ResponseModel> rejectMcExecutionApprovedButton({
+    required String auth,
+    rejectMcExecutionApproveJsonString,
+    bool? isLoading,
+  }) async =>
+      await connectHelper.rejectMcExecutionApprovedButton(
+        auth: auth,
+        rejectMcExecutionApproveJsonString: rejectMcExecutionApproveJsonString,
+        isLoading: isLoading ?? false,
+      );
+
+
   Future<ResponseModel> mcPlanRejectButton({
     required String auth,
     mcRejectJsonString,
@@ -856,6 +880,17 @@ class DataRepository extends DomainRepository {
     bool? isLoading,
   }) async =>
       await connectHelper.startMCExecutionScheduleButton(
+        auth: auth,
+        scheduleId: scheduleId,
+        isLoading: isLoading ?? false,
+      );
+
+   Future<ResponseModel> endMCScheduleExecutionButton({
+    required String auth,
+    int? scheduleId,
+    bool? isLoading,
+  }) async =>
+      await connectHelper.endMCScheduleExecutionButton(
         auth: auth,
         scheduleId: scheduleId,
         isLoading: isLoading ?? false,

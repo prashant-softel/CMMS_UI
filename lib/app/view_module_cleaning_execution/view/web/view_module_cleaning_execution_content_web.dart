@@ -2,8 +2,10 @@
 
 import 'package:cmms/app/app.dart';
 import 'package:cmms/app/view_module_cleaning_execution/view_module_cleaning_execution_controller.dart';
+import 'package:cmms/app/widgets/approve_mc_execution_dialog.dart';
 import 'package:cmms/app/widgets/custom_elevated_button.dart';
 import 'package:cmms/app/widgets/custom_richtext.dart';
+import 'package:cmms/app/widgets/reject_mc_execution_dialog.dart';
 import 'package:data_table_2/data_table_2.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -892,6 +894,38 @@ class ViewModuleCleaningExecutionContentWeb extends GetView<viewModuleCleaningEx
                                           SizedBox(
                                             width: 20,
                                           ),
+                                     
+                                          Container(
+                                      height: 28,
+                                      child: CustomElevatedButton(
+                                        backgroundColor:
+                                            ColorValues.rejectColor,
+                                        text: "Reject",
+                                        icon: Icons.close,
+                                        onPressed: () {
+                                          Get.dialog(RejectMcExecutionDialog(
+                                            id: controller.id,
+                                          ));
+                                        },
+                                      ),
+                                    ),
+                                    Dimens.boxWidth10,
+                                         Container(
+                                      height: 28,
+                                      child: CustomElevatedButton(
+                                        backgroundColor:
+                                            ColorValues.appGreenColor,
+                                        text: "Approve",
+                                        icon: Icons.add,
+                                        onPressed: () {
+                                          Get.dialog(ApproveMcExecutionDialog(
+                                            id: controller.id,
+                                          ));
+                                        },
+                                      ),
+                                    ),
+                                    Dimens.boxWidth10,
+                                    
                                           Container(
                                             height: 28,
                                             child: CustomElevatedButton(

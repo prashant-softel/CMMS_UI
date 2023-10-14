@@ -102,6 +102,7 @@ class Schedules {
     this.waterUsed,
     this.execution_date,
     this.remark,
+    this.status,
     this.status_short,
     this.equipments,
   });
@@ -118,6 +119,7 @@ class Schedules {
   int? waterUsed;
   String? execution_date;
   String? remark;
+  int? status;
   String? status_short;
   List<EquipmentsList?>? equipments;
 
@@ -135,6 +137,7 @@ class Schedules {
         execution_date: Utility.getFormatedyearMonthDay(json['execution_date']),
         remark: json['remark'] ?? '',
         status_short: json['status_short'],
+        status: json['status'],
         equipments: json["equipments"] != null
             ? List<EquipmentsList>.from(
                 json["equipments"].map((x) => EquipmentsList.fromJson(x)))
@@ -154,6 +157,7 @@ class Schedules {
         "waterUsed": waterUsed,
         "execution_date": execution_date,
         "remark": remark,
+        "status": status,
         "status_short": status_short,
         "equipments": List<dynamic>.from(equipments!.map((x) => x)),
       };

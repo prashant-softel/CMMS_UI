@@ -2,6 +2,7 @@ import 'dart:async';
 
 import 'package:cmms/app/app.dart';
 import 'package:cmms/app/navigators/app_pages.dart';
+import 'package:cmms/domain/models/comment_model.dart';
 import 'package:cmms/domain/models/create_escalation_matrix_model.dart';
 import 'package:cmms/domain/models/end_mc_execution_detail_model.dart';
 import 'package:cmms/domain/models/history_model.dart';
@@ -32,6 +33,11 @@ class viewModuleCleaningExecutionController extends GetxController {
   List<Escalation> days = [];
   Map<String, RoleModel> dropdownMapperData = {};
   Map<String, PaiedModel> paiddropdownMapperData = {};
+
+  TextEditingController approveCommentTextFieldCtrlr = TextEditingController();
+  TextEditingController rejectCommentTextFieldCtrlr = TextEditingController();
+
+
 
   void addRowItem() {
     rowItem.value.add([
@@ -150,9 +156,51 @@ class viewModuleCleaningExecutionController extends GetxController {
   //   }
   // }
 
+  void mcExecutionApprovedButton({int? id}) async {
+    {
+      String _comment = approveCommentTextFieldCtrlr.text.trim();
+
+      CommentModel commentMCExecutionAproveModel =
+          CommentModel(id: id, comment: _comment);
+
+      var mcExecutionApproveJsonString = commentMCExecutionAproveModel.toJson();
+
+      Map<String, dynamic>? response =
+          await viewModuleCleaningExecutionPresenter.mcExecutionApprovedButton(
+        mcExecutionApproveJsonString: mcExecutionApproveJsonString,
+        isLoading: true,
+      );
+      if (response == true) {
+        //getCalibrationList(facilityId, true);
+      }
+    }
+
+  }
+
+  void rejectMcExecutionApprovedButton({int? id}) async {
+    {
+      String _comment = rejectCommentTextFieldCtrlr.text.trim();
+
+      CommentModel commentMCExecutionAproveModel =
+          CommentModel(id: id, comment: _comment);
+
+      var rejectMcExecutionApproveJsonString = commentMCExecutionAproveModel.toJson();
+
+      Map<String, dynamic>? response =
+          await viewModuleCleaningExecutionPresenter.rejectMcExecutionApprovedButton(
+        rejectMcExecutionApproveJsonString: rejectMcExecutionApproveJsonString,
+        isLoading: true,
+      );
+      if (response == true) {
+        //getCalibrationList(facilityId, true);
+      }
+    }
+  }
+
+
     Future<void> getMCExecutionHistory({required int id}) async {
     /// TODO: CHANGE THESE VALUES
-    int moduleType = 81;
+    int moduleType = 82;
     // int tempModuleType = 21;
     // int id = Get.arguments;
     //
