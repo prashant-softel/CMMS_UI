@@ -4,6 +4,7 @@ import 'package:cmms/domain/models/frequency_model.dart';
 import 'package:cmms/domain/models/get_pm_plan_detail_model.dart';
 import 'package:cmms/domain/models/inventory_category_model.dart';
 import 'package:cmms/domain/models/inventory_model.dart';
+import 'package:cmms/domain/models/mc_details_plan_model.dart';
 import 'package:cmms/domain/models/preventive_checklist_model.dart';
 
 import 'package:cmms/domain/repositories/repository.dart';
@@ -88,5 +89,13 @@ class ModuleCleaningPlanningUsecase {
       await repository.getPmPlanDetails(
         pmPlanId,
         isLoading,
+      );
+  Future<McPalningDetailsModel?> getMcPlanDetail({
+    bool? isLoading,
+    required int planId,
+  }) async =>
+      await repository.getMcPlanDetail(
+        planId: planId,
+        isLoading: isLoading ?? false,
       );
 }

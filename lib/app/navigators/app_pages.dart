@@ -264,7 +264,7 @@ class AppPages {
   static var transitionDuration = const Duration(milliseconds: 300);
 
   //static const initial = Routes.home;
-  static const initial = Routes.auditListScreenContentWeb;
+  static const initial = Routes.login;
 
   static final pages = <GetPage<dynamic>>[
     GetPage<SplashScreen>(
@@ -749,12 +749,12 @@ class AppPages {
       page: ModuleCleaningPlanningScreen.new,
       binding: ModuleCleaningPlanningBinding(),
     ),
-     GetPage<dynamic>(
+    GetPage<dynamic>(
       name: _Paths.hotoListScreenContentWeb,
       page: HotoListScreen.new,
       binding: HotoListScreenBinding(),
     ),
-     GetPage<dynamic>(
+    GetPage<dynamic>(
       name: _Paths.auditListScreenContentWeb,
       page: AuditListScreen.new,
       binding: AuditListScreenBinding(),
