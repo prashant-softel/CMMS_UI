@@ -18,11 +18,13 @@ class McPalningDetailsModel {
   String? frequency;
   int? noOfCleaningDays;
   int? createdById;
+  int? scheduledModules;
   String? createdBy;
   String? createdAt;
   int? approvedById;
   String? approvedBy;
   String? approvedAt;
+  String? startDate;
   String? deletedBy;
   int? status;
   String? status_short;
@@ -34,6 +36,7 @@ class McPalningDetailsModel {
     this.approvedAt,
     this.title,
     this.description,
+    this.scheduledModules,
     this.frequency,
     this.approvedBy,
     this.approvedById,
@@ -43,6 +46,7 @@ class McPalningDetailsModel {
     this.deletedBy,
     this.facilityId,
     this.frequencyId,
+    this.startDate,
     this.noOfCleaningDays,
     this.planId,
     this.status,
@@ -59,11 +63,13 @@ class McPalningDetailsModel {
         title: json['title'] ?? '',
         description: json['description'],
         frequencyId: json["frequencyId"],
+        scheduledModules: json['scheduledModules'],
         frequency: json['frequency'],
         noOfCleaningDays: json['crnoOfCleaningDayseatedAt'],
         createdById: json['createdById'],
         createdBy: json['createdBy'],
         createdAt: json['createdAt'],
+        startDate: json['startDate'],
         approvedById: json['approvedById'],
         approvedBy: json['approvedBy'],
         approvedAt: json['approvedAt'],
@@ -85,9 +91,11 @@ class McPalningDetailsModel {
         "description": description,
         "frequency": frequency,
         "noOfCleaningDays": noOfCleaningDays,
+        "scheduledModules": scheduledModules,
         "createdById": createdById,
         "createdBy": createdBy,
         "createdAt": createdAt,
+        "startDate": startDate,
         "approvedById": approvedById,
         "approvedBy": approvedBy,
         "approvedAt": approvedAt,
