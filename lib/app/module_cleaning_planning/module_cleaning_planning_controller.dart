@@ -31,16 +31,20 @@ class ModuleCleaningPlanningController extends GetxController {
   var startDateTc = TextEditingController();
   var mcTitelCtrlr = TextEditingController();
   var durationInDayCtrlr = TextEditingController();
+  RxList<McPalningDetailsModel?>? getMcDetailsByIDModelList =
+      <McPalningDetailsModel?>[].obs;
+  Rx<McPalningDetailsModel?> getMcDetailsByIDModel =
+      McPalningDetailsModel().obs;
 
   Rx<String> selectedfrequency = ''.obs;
   Rx<bool> isSelectedfrequency = true.obs;
   int selectedfrequencyId = 0;
 
   var selectedOption = ''.obs;
-  RxList<InventoryCategoryModel?> equipmentCategoryList =
-      <InventoryCategoryModel>[].obs;
+
   StreamSubscription<int>? facilityIdStreamSubscription;
   int facilityId = 0;
+  Rx<int> id = 0.obs;
 
   RxList<EquipmentListModel?> equipmentList = <EquipmentListModel?>[].obs;
   RxList<SMBS> smblist = <SMBS>[].obs;
@@ -79,20 +83,24 @@ class ModuleCleaningPlanningController extends GetxController {
   @override
   void onInit() async {
     try {
+      await setUserId();
       facilityIdStreamSubscription = homecontroller.facilityId$.listen((event) {
         facilityId = event;
-
-        Future.delayed(Duration(seconds: 1), () {
-          getFrequencyList();
-        });
-
-        Future.delayed(Duration(seconds: 1), () {
-          getEquipmentModelList(facilityId, true);
-        });
-        Future.delayed(Duration(seconds: 1), () {
-          getAssignedToList();
-        });
       });
+      if (id != 0) {
+        Future.delayed(Duration(seconds: 1), () {
+          getMcPlanDetail(planId: id.value);
+        });
+      }
+      Future.delayed(Duration(seconds: 1), () {
+        getFrequencyList();
+      });
+
+      Future.delayed(Duration(seconds: 1), () {
+        getEquipmentModelList(facilityId, true);
+      });
+
+      // getMcPlanHistory(id: id.value);
       super.onInit();
     } catch (e) {
       print(e);
@@ -100,6 +108,46 @@ class ModuleCleaningPlanningController extends GetxController {
 
     super.onInit();
   }
+
+  Future<void> setUserId() async {
+    try {
+      var dataFromPreviousScreen = Get.arguments;
+
+      id.value = dataFromPreviousScreen['id'];
+      // id= Get.arguments;
+      print('AddStock:$id');
+    } catch (e) {
+      print(e.toString() + 'userId');
+    }
+  }
+  // void onInit() async {
+  //   try {
+  //     facilityIdStreamSubscription = homecontroller.facilityId$.listen((event) {
+  //       facilityId = event;
+
+  //       Future.delayed(Duration(seconds: 1), () {
+  //         getFrequencyList();
+  //       });
+
+  //       Future.delayed(Duration(seconds: 1), () {
+  //         getEquipmentModelList(facilityId, true);
+  //       });
+  //       Future.delayed(Duration(seconds: 1), () {
+  //         getAssignedToList();
+  //       });
+  //       if (id != 0) {
+  //         Future.delayed(Duration(seconds: 1), () {
+  //           getMcPlanDetail(planId: id.value);
+  //         });
+  //       }
+  //     });
+  //     super.onInit();
+  //   } catch (e) {
+  //     print(e);
+  //   }
+
+  //   super.onInit();
+  // }
 
   Future<void> getEquipmentModelList(int facilityId, bool isLoading) async {
     equipmentList.value = <EquipmentListModel>[];
@@ -169,11 +217,7 @@ class ModuleCleaningPlanningController extends GetxController {
 
     if (_mcPlanDetails != null) {
       mcPlanDetailsModel.value = _mcPlanDetails;
-      // plannedAtDateTimeCtrlrWeb.text =
-      //     '${DateFormat('yyyy-MM-dd HH:mm:ss').format(DateTime.parse('${mcPlanDetailsModel.value?.plannedAt}'))}';
-      // startedAtDateTimeCtrlrWeb.text =
-      //     '${DateFormat('yyyy-MM-dd HH:mm:ss').format(DateTime.parse('${mcPlanDetailsModel.value?.startedAt}'))}';
-      // listSchedules?.value = mcPlanDetailsModel.value?.schedules ?? [];
+      mcTitelCtrlr.text = getMcDetailsByIDModel.value?.title ?? "";
       // scheduleId =
       //     listSchedules!.map((element) => element?.scheduleId).toList();
       // print('ScheduleId: ${scheduleId}');
