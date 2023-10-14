@@ -170,61 +170,6 @@ class StockManagementGoodsOrdersController extends GetxController {
     getGoodsOrdersList(facilityId, formattedFromdate1, formattedTodate1, false);
   }
 
-  void isDeleteDialog({String? id, String? generatedBy}) {
-    Get.dialog(
-      AlertDialog(
-        content: Column(mainAxisSize: MainAxisSize.min, children: [
-          Icon(Icons.delete, size: 35, color: ColorValues.redColor),
-          SizedBox(
-            height: 10,
-          ),
-          RichText(
-            text: TextSpan(
-              text: 'Are you sure you want to delete the SPV ',
-              style: Styles.blackBold16,
-              children: [
-                TextSpan(
-                  text: generatedBy,
-                  style: TextStyle(
-                    color: ColorValues.orangeColor,
-                    fontWeight: FontWeight.bold,
-                  ),
-                ),
-              ],
-            ),
-          ),
-        ]),
-        actions: [
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-            children: [
-              TextButton(
-                onPressed: () {
-                  Get.back();
-                },
-                child: Text('NO'),
-              ),
-              TextButton(
-                onPressed: () {
-                  deleteGoodsOrders(id).then((value) {
-                    Get.back();
-                    getGoodsOrdersList(
-                      facilityId,
-                      formattedTodate1,
-                      formattedFromdate1,
-                      false,
-                    );
-                  });
-                },
-                child: Text('YES'),
-              ),
-            ],
-          )
-        ],
-      ),
-    );
-  }
-
   Future<void> deleteGoodsOrders(String? id) async {
     await stockManagementGoodsOrdersPresenter.deleteFacility(
       id,
