@@ -529,13 +529,36 @@ class AddModuleCleaningExecutionContentWeb
                                                                                       ),
                                                                                     )
                                                                                   : (mapData['key'] == "Water Used")
-                                                                                      ? Center(
-                                                                                          child: Text(
-                                                                                            mapData["value"] ?? "",
-                                                                                            // "${element?.scheduleId}",
-                                                                                            style: TextStyle(color: Color.fromARGB(255, 5, 92, 163)),
-                                                                                          ),
-                                                                                        )
+                                                                                      ? Column(
+                                                                                              mainAxisAlignment: MainAxisAlignment.center,
+                                                                                              crossAxisAlignment: CrossAxisAlignment.center,
+                                                                                              children: [
+                                                                                                Container(
+                                                                                                    decoration: BoxDecoration(
+                                                                                                      boxShadow: [
+                                                                                                        BoxShadow(
+                                                                                                          color: Colors.black26,
+                                                                                                          offset: const Offset(
+                                                                                                            5.0,
+                                                                                                            5.0,
+                                                                                                          ),
+                                                                                                          blurRadius: 5.0,
+                                                                                                          spreadRadius: 1.0,
+                                                                                                        ),
+                                                                                                      ],
+                                                                                                      color: ColorValues.whiteColor,
+                                                                                                      borderRadius: BorderRadius.circular(5),
+                                                                                                    ),
+                                                                                                    child: LoginCustomTextfield(
+                                                                                                      width: MediaQuery.of(context).size.width / 2,
+                                                                                                      maxLine: 1,
+                                                                                                      textController: new TextEditingController(text: mapData["value"] ?? ''),
+                                                                                                      onChanged: (txt) {
+                                                                                                        mapData["value"] = txt;
+                                                                                                      },
+                                                                                                    )),
+                                                                                              ],
+                                                                                            )
                                                                                       : (mapData['key'] == "Remark")
                                                                                           ? Column(
                                                                                               mainAxisAlignment: MainAxisAlignment.center,
@@ -623,14 +646,15 @@ class AddModuleCleaningExecutionContentWeb
                                                                                                           message: 'End',
                                                                                                         ),
 
-                                                                                                        controller.listSchedules!
-                                                                                                                    .firstWhere(
-                                                                                                                      (e) => "${e?.status_short}" == e?.status_short,
-                                                                                                                      orElse: () => Schedules(status_short: ""),
-                                                                                                                    )
-                                                                                                                    ?.status_short ==
-                                                                                                                "Completed"
-                                                                                                            ? TableActionButton(
+                                                                                                        // controller.listSchedules!
+                                                                                                        //             .firstWhere(
+                                                                                                        //               (e) => "${e?.status_short}" == e?.status_short,
+                                                                                                        //               orElse: () => Schedules(status_short: ""),
+                                                                                                        //             )
+                                                                                                        //             ?.status_short ==
+                                                                                                        //         "Completed"
+                                                                                                        //     ? 
+                                                                                                            TableActionButton(
                                                                                                                 // label: 'Abandon',
                                                                                                                 onPress: () {
                                                                                                                   // Get.dialog(AddModuleCleaningExecutionDialog());
@@ -644,8 +668,8 @@ class AddModuleCleaningExecutionContentWeb
                                                                                                                 color: ColorValues.appLightBlueColor,
                                                                                                                 icon: Icons.add,
                                                                                                                 message: 'Update',
-                                                                                                              )
-                                                                                                            : Dimens.box0,
+                                                                                                              ),
+                                                                                                            // : Dimens.box0,
 
                                                                                                         ///Abandon
                                                                                                         // controller.listSchedules!
