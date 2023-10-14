@@ -120,7 +120,6 @@ class AddModuleCleaningExecutionDialog extends GetView {
                   ),
                 ],
               ),
-              // padding: EdgeInsets.only(right: 120, top: 10),
               height: height / 1.5,
               width: double.infinity,
               child: SingleChildScrollView(
@@ -140,14 +139,22 @@ class AddModuleCleaningExecutionDialog extends GetView {
                         ),
                         Expanded(
                           flex: 1,
-                          child: Text("Modules", style: TextStyle(color: Color(0xff31576D))),
+                          child: Text("Modules",
+                              style: TextStyle(color: Color(0xff31576D))),
                         ),
                         Expanded(
                           flex: 1,
-                          child: Text("Cleaned", style: TextStyle(color: Color(0xff31576D))),
+                          child: Text("Cleaned",
+                              style: TextStyle(color: Color(0xff31576D))),
                         ),
-                        Expanded(flex: 1, child: Text("Abandoned", style: TextStyle(color: Color(0xff31576D)))),
-                        Expanded(flex: 1, child: Text("Days", style: TextStyle(color: Color(0xff31576D)))),
+                        Expanded(
+                            flex: 1,
+                            child: Text("Abandoned",
+                                style: TextStyle(color: Color(0xff31576D)))),
+                        Expanded(
+                            flex: 1,
+                            child: Text("Days",
+                                style: TextStyle(color: Color(0xff31576D)))),
 
                         // Expanded(
                         //     child: Text("Day",
@@ -156,58 +163,69 @@ class AddModuleCleaningExecutionDialog extends GetView {
                     ),
                   )
                 ]..addAll(controller.equipmentList.value.map((e) {
-                        return Padding(
-                          padding: const EdgeInsets.only(left: 20),
-                          child: Column(
-                            children: [
-                              Row(
-                                mainAxisAlignment: MainAxisAlignment.spaceAround,
-                                children: [
-                                  Expanded(
-                                    flex: 2,
-                                    child: GestureDetector(
-                                      onTap: () {
-                                        setState(
-                                          () {
-                                            e.isExpanded = !e.isExpanded;
-                                          },
-                                        );
-                                      },
-                                      child: Row(
-                                        children: [
-                                          Text(
-                                            "${e?.invName}",
-                                            style: TextStyle(fontSize: 12.0, fontWeight: FontWeight.bold),
-                                          ),
-                                          Icon(e!.isExpanded ? Icons.arrow_drop_down : Icons.arrow_drop_up)
-                                        ],
-                                      ),
+                        return Column(
+                          children: [
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceAround,
+                              children: [
+                                Expanded(
+                                  flex: 2,
+                                  child: GestureDetector(
+                                    onTap: () {
+                                      setState(
+                                        () {
+                                          e.isExpanded = !e.isExpanded;
+                                        },
+                                      );
+                                    },
+                                    child: Row(
+                                      children: [
+                                        Text(
+                                          "${e?.invName}",
+                                          style: TextStyle(
+                                              fontSize: 12.0,
+                                              fontWeight: FontWeight.bold),
+                                        ),
+                                        Icon(e!.isExpanded
+                                            ? Icons.arrow_drop_down
+                                            : Icons.arrow_drop_up)
+                                      ],
                                     ),
                                   ),
-                                  Expanded(
-                                    flex: 1,
-                                    child: Text(
-                                      "${e.moduleQuantity}",
-                                      style: TextStyle(fontSize: 12.0, fontWeight: FontWeight.bold),
-                                    ),
+                                ),
+                                Expanded(
+                                  flex: 1,
+                                  child: Text(
+                                    "${e.moduleQuantity}",
+                                    style: TextStyle(
+                                        fontSize: 12.0,
+                                        fontWeight: FontWeight.bold),
                                   ),
-                                  Expanded(
-                                    flex: 1,
+                                ),
+                                Expanded(
+                                  flex: 1,
+                                  child: Container(
+                                    alignment: Alignment.centerLeft,
                                     child: Checkbox(
                                       value: e.isCleanedChecked,
                                       onChanged: (bool? value) {
                                         // controller.toggleItemSelection(index);
                                         setState(
                                           () {
-                                            e.isCleanedChecked = !e.isCleanedChecked!;
+                                            e.isCleanedChecked =
+                                                !e.isCleanedChecked!;
                                           },
                                         );
-                                        print('Element Cancel:${e.isCleanedChecked}');
+                                        print(
+                                            'Element Cancel:${e.isCleanedChecked}');
                                       },
                                     ),
                                   ),
-                                  Expanded(
-                                    flex: 1,
+                                ),
+                                Expanded(
+                                  flex: 1,
+                                  child: Container(
+                                    alignment: Alignment.centerLeft,
                                     child: Checkbox(
                                       value: e.isChecked,
                                       onChanged: (bool? value) {
@@ -221,59 +239,83 @@ class AddModuleCleaningExecutionDialog extends GetView {
                                       },
                                     ),
                                   ),
-                                  Expanded(flex: 1, child: Container())
-                                ],
-                              ),
-                              e.isExpanded
-                                  ? Column(
-                                      children: []..addAll(
-                                          e.smbs.map(
-                                            (smbItems) {
-                                              return Row(
-                                                // mainAxisAlignment: MainAxisAlignment.center,
-                                                children: [
-                                                  Expanded(child: Text(smbItems.smbName ?? "")),
-                                                  Expanded(child: Text("${smbItems.moduleQuantity}")),
-                                                  Expanded(
+                                ),
+                                Expanded(flex: 1, child: Container())
+                              ],
+                            ),
+                            e.isExpanded
+                                ? Column(
+                                    children: []..addAll(
+                                        e.smbs.map(
+                                          (smbItems) {
+                                            return Row(
+                                              // mainAxisAlignment: MainAxisAlignment.center,
+                                              children: [
+                                                Expanded(
+                                                    flex: 2,
+                                                    child: Text(
+                                                        smbItems.smbName ??
+                                                            "")),
+                                                Expanded(
+                                                    flex: 1,
+                                                    child: Text(
+                                                        "${smbItems.moduleQuantity}")),
+                                                Expanded(
+                                                  flex: 1,
+                                                  child: Container(
+                                                    alignment:
+                                                        Alignment.centerLeft,
                                                     child: Checkbox(
                                                       value: e.isCleanedChecked,
                                                       onChanged: (bool? value) {
                                                         // controller.toggleItemSelection(index);
                                                         setState(
                                                           () {
-                                                            e.isCleanedChecked = !e.isCleanedChecked!;
+                                                            e.isCleanedChecked =
+                                                                !e.isCleanedChecked!;
                                                           },
                                                         );
 
-                                                        print('Element Cancel:${e.isCleanedChecked}');
+                                                        print(
+                                                            'Element Cancel:${e.isCleanedChecked}');
                                                       },
                                                     ),
                                                   ),
-                                                  Expanded(
+                                                ),
+                                                Expanded(
+                                                  flex: 1,
+                                                  child: Container(
+                                                    alignment:
+                                                        Alignment.centerLeft,
                                                     child: Checkbox(
                                                       value: e.isChecked,
                                                       onChanged: (bool? value) {
                                                         // controller.toggleItemSelection(index);
                                                         setState(
                                                           () {
-                                                            e.isChecked = !e.isChecked!;
+                                                            e.isChecked =
+                                                                !e.isChecked!;
                                                           },
                                                         );
 
-                                                        print('Element Cancel:${e.isChecked}');
+                                                        print(
+                                                            'Element Cancel:${e.isChecked}');
                                                       },
                                                     ),
                                                   ),
-                                                  Expanded(child: Text('Day 1 (15/06/2023)'))
-                                                ],
-                                              );
-                                            },
-                                          ),
+                                                ),
+                                                Expanded(
+                                                    flex: 1,
+                                                    child: Text(
+                                                        'Day 1 (15/06/2023)'))
+                                              ],
+                                            );
+                                          },
                                         ),
-                                    )
-                                  : Dimens.box0
-                            ],
-                          ),
+                                      ),
+                                  )
+                                : Dimens.box0
+                          ],
                         );
                       }))),
               ));
@@ -289,7 +331,10 @@ class AddModuleCleaningExecutionDialog extends GetView {
                   text: 'Submit',
                   onPressed: () {
                     // controller.createMcPlan();
-                    controller.updateMCScheduleExecution(scheduleId: scheduleId, cleaningDay: cleaningDay, waterUsed: waterUsed);
+                    controller.updateMCScheduleExecution(
+                        scheduleId: scheduleId,
+                        cleaningDay: cleaningDay,
+                        waterUsed: waterUsed);
                     Get.back();
                   },
                 ),
