@@ -155,9 +155,9 @@ class AddModuleCleaningExecutionController extends GetxController {
       });
     });
 
-    Future.delayed(Duration(seconds: 1), () {
-      getTypePermitList();
-    });
+    // Future.delayed(Duration(seconds: 1), () {
+    //   getTypePermitList();
+    // });
 
     Future.delayed(Duration(seconds: 1), () {
       getInventoryCategoryList();
@@ -275,7 +275,7 @@ class AddModuleCleaningExecutionController extends GetxController {
           UpdateMcScheduleExecutionModel(
               scheduleId: scheduleId,
               cleaningDay: cleaningDay,
-              waterUsed: waterUsed,
+              waterUsed: int.tryParse('${rowItem.value[0][7]["value"]}'),
               remark: rowItem.value[0][8]["value"],
               cleanedEquipmentIds: equipments,
               abandonedEquipmentIds: equipments);
