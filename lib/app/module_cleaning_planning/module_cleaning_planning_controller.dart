@@ -267,7 +267,8 @@ class ModuleCleaningPlanningController extends GetxController {
       mcTitelCtrlr.text = mcPlanDetailsModel.value?.title ?? "";
       selectedfrequency.value = mcPlanDetailsModel.value?.frequency ?? '';
       startDateTc.text = mcPlanDetailsModel.value?.startDate ?? '';
-      // durationInDayCtrlr.text = mcPlanDetailsModel.value.es'
+      durationInDayCtrlr.text =
+          mcPlanDetailsModel.value?.noOfCleaningDays.toString() ?? "";
 
       rowItem.value = [];
       schedules.value = _mcPlanDetails.schedules;
