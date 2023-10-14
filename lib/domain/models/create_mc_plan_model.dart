@@ -51,7 +51,7 @@ class CreateMcPalningsModel {
         // "planId": planId,
         "frequencyId": frequencyId,
         "noOfCleaningDays": noOfCleaningDays,
-        "schedules": List<dynamic>.from(schedules!.map((x) => x)),
+        "schedules": List<dynamic>.from(schedules!.map((x) => x.toJson())),
       };
 }
 
@@ -75,11 +75,16 @@ class Schedule {
             : [],
       );
 
-  Map<String, dynamic> toJson() => {
-        "cleaningDay": cleaningDay,
-        "cleaningType": cleaningType,
-        "equipments": List<dynamic>.from(equipments!.map((x) => x)),
-      };
+  Map<String, dynamic> toJson() {
+    var initialData = {
+      "cleaningDay": cleaningDay,
+      "equipments": List<dynamic>.from(equipments!.map((x) => x)),
+    };
+    if (cleaningType != null) {
+      initialData["cleaningType"] = cleaningType;
+    }
+    return initialData;
+  }
 }
 
 ///Equipments List Detail Model

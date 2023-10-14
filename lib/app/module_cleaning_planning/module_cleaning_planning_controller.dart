@@ -63,11 +63,11 @@ class ModuleCleaningPlanningController extends GetxController {
   ];
   Map<String, TypeModel> typedropdownMapperData = {};
 
-  var type = <TypeModel>[
+  RxList<TypeModel> type = <TypeModel>[
     TypeModel(name: "Please Select", id: "0"),
-    TypeModel(name: 'Dry', id: "0"),
-    TypeModel(name: 'Wet', id: "1"),
-  ];
+    TypeModel(name: 'Dry', id: "1"),
+    TypeModel(name: 'Wet', id: "2"),
+  ].obs;
   // var days = <TypeModel>[
   //   TypeModel(name: "Please Select", id: "0"),
   //   TypeModel(name: 'Day 1', id: "1"),
@@ -177,19 +177,32 @@ class ModuleCleaningPlanningController extends GetxController {
   }
 
   void createMcPlan() async {
-    String _durationInDayCtrlr = durationInDayCtrlr.text.trim();
-    String _mcTitelCtrlr = mcTitelCtrlr.text.trim();
+    var mappedData = {};
     List<Schedule> schedules = [];
-    List<Equipments?>? equipments = [];
-    equipmentList.forEach((e) {
-      e?.smbs.forEach((element) {
-        equipments.add(Equipments(id: element.smbId ?? 0));
+
+    equipmentList.value.forEach((element) {
+      (element?.smbs ?? []).forEach((smbsItem) {
+        if (smbsItem.selectedDay != null) {
+          mappedData[smbsItem.selectedDay] = [
+            ...(mappedData[smbsItem.selectedDay] ?? []),
+            smbsItem.smbId
+          ];
+        }
       });
     });
-    equipmentList.forEach((e) {
-      schedules.add(
-          Schedule(cleaningDay: 1, cleaningType: 1, equipments: equipments));
+    mappedData.forEach((key, value) {
+      List<Equipments> eqp = value.map<Equipments>((e) {
+        return Equipments(id: e);
+      }).toList();
+      schedules
+          .add(Schedule(cleaningDay: int.tryParse('${key}'), equipments: eqp));
     });
+
+    print({"mappedData": mappedData});
+
+    String _durationInDayCtrlr = durationInDayCtrlr.text.trim();
+    String _mcTitelCtrlr = mcTitelCtrlr.text.trim();
+
     CreateMcPalningsModel createMcModel = CreateMcPalningsModel(
         // planId: 0,
         // assignedToId: 0,
@@ -205,11 +218,8 @@ class ModuleCleaningPlanningController extends GetxController {
       createMcPlans: createMcModelJsonString,
       isLoading: true,
     );
-
-    if (responseCreateMcModel != null) {
-      getMcPlanDetail(planId: responseCreateMcModel['id'][0]);
-    }
-    // print('Create Mc  data: ${responseCreateMcModel!['id'][0]}');
+    if (responseCreateMcModel == null) {}
+    print('Create  Create GO  data: $createMcModelJsonString');
   }
 
   void updateMcPlan() async {
@@ -272,38 +282,19 @@ class ModuleCleaningPlanningController extends GetxController {
 
       rowItem.value = [];
       schedules.value = _mcPlanDetails.schedules;
-      _mcPlanDetails.schedules.forEach((element) {
-        rowItem.value.add([
-          {"key": "day", "value": '${element.cleaningDay}'},
-          {"key": "noOfInverters", "value": '${element.invs}'},
-          {'key': "noOfSMBs", "value": '${element.smbs}'},
-          {'key': "noOfModules", "value": '${element.scheduledModules}'},
-          {'key': "type", "value": 'Please Select'},
-        ]);
-      });
-
-      // scheduleId =
-      //     listSchedules!.map((element) => element?.scheduleId).toList();
-      // print('ScheduleId: ${scheduleId}');
-
-      // rowItem.value = [];
-      // schedules?.value = _mcPlanDetails.schedules;
-
-      // _mcPlanDetails.schedules.forEach((element) {
-      //   rowItem.value.add([
-      //     {"key": "Schedule Id", "value": '${element!.scheduleId}'},
-      //     {"key": "Days", "value": '${element.cleaningDay}'},ß
-      //     {"key": "Scheduled Module", "value": '${element.scheduledModules}'},
-      //     {"key": "Cleaned", "value": '${element.cleanedModules}'},
-      //     {"key": "Abandoned", "value": '${element.abandonedModules}'},
-      //     {"key": "Pending", "value": '${element.pendingModules}'},
-      //     {"key": "Type", "value": '${element.cleaningTypeName}'},
-      //     {"key": "Water Used", "value": '${element.waterUsed}'},
-      //     {"key": "Remark", "value": '${element.remark}'},
-      //     {"key": "Status", "value": '${element.status_short}'},
-      //     {'key': "Actions", "value": ''},
-      //   ]);
-      // });
+      _mcPlanDetails.schedules.forEach(
+        (element) {
+          rowItem.value.add(
+            [
+              {"key": "day", "value": '${element.cleaningDay}'},
+              {"key": "noOfInverters", "value": '${element.invs}'},
+              {'key': "noOfSMBs", "value": '${element.smbs}'},
+              {'key': "noOfModules", "value": '${element.scheduledModules}'},
+              {'key': "type", "value": 'Please Select'},
+            ],
+          );
+        },
+      );
     }
   }
 

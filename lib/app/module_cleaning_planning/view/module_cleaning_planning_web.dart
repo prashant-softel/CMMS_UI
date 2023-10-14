@@ -246,49 +246,48 @@ class _ModuleCleaningPlanningWebState extends State<ModuleCleaningPlanningWeb> {
                                       ),
                                     ),
                                     Dimens.boxHeight12,
+                                    controller.id == 0
+                                        ? Center(
+                                            child: GestureDetector(
+                                              onTap: () {
+                                                // controller.schedules.
 
-                                    Center(
-                                      child: GestureDetector(
-                                        onTap: () {
-                                          // controller.schedules.
-
-                                          Get.dialog(SetEquipmentDialog(
-                                            planId: controller.id.value,
-                                            facilityId: controller.facilityId,
-                                            noOfCleaningDays: 1,
-                                            frequencyId: 25,
-                                            assignedToId: 25,
-                                          ));
-                                        },
-                                        // color: ColorValues.appDarkBlueColor,
-                                        // onTap: () {
-                                        //   controller.addRowItem();
-                                        // },
-                                        child: Container(
-                                          height: 30,
-                                          width: 150,
-                                          decoration: BoxDecoration(
-                                            color: ColorValues.addNewColor,
-                                            border: Border.all(
-                                              color: ColorValues
-                                                  .lightGreyColorWithOpacity35,
-                                              width: 1,
+                                                Get.dialog(
+                                                    SetEquipmentDialog());
+                                              },
+                                              // color: ColorValues.appDarkBlueColor,
+                                              // onTap: () {
+                                              //   controller.addRowItem();
+                                              // },
+                                              child: Container(
+                                                height: 30,
+                                                width: 150,
+                                                decoration: BoxDecoration(
+                                                  color:
+                                                      ColorValues.addNewColor,
+                                                  border: Border.all(
+                                                    color: ColorValues
+                                                        .lightGreyColorWithOpacity35,
+                                                    width: 1,
+                                                  ),
+                                                  borderRadius:
+                                                      BorderRadius.all(
+                                                          Radius.circular(5)),
+                                                ),
+                                                child: Center(
+                                                  child: Text(
+                                                    "Set Equipments",
+                                                    style: TextStyle(
+                                                        fontSize: 18,
+                                                        fontWeight:
+                                                            FontWeight.w100,
+                                                        color: Colors.white),
+                                                  ),
+                                                ),
+                                              ),
                                             ),
-                                            borderRadius: BorderRadius.all(
-                                                Radius.circular(5)),
-                                          ),
-                                          child: Center(
-                                            child: Text(
-                                              "Set Equipments",
-                                              style: TextStyle(
-                                                  fontSize: 18,
-                                                  fontWeight: FontWeight.w100,
-                                                  color: Colors.white),
-                                            ),
-                                          ),
-                                        ),
-                                      ),
-                                    ),
+                                          )
+                                        : Dimens.box0,
 
                                     // controller.filteredInventoryNameList.length > 0
                                     //     ?
@@ -301,7 +300,7 @@ class _ModuleCleaningPlanningWebState extends State<ModuleCleaningPlanningWeb> {
                                                 // ((controller.filteredInventoryNameList
                                                 //             .length) *
                                                 //         40) +
-                                                150,
+                                                300,
                                             decoration: BoxDecoration(
                                               border: Border.all(
                                                 color: ColorValues
@@ -335,16 +334,7 @@ class _ModuleCleaningPlanningWebState extends State<ModuleCleaningPlanningWeb> {
                                                           // controller.schedules.
 
                                                           Get.dialog(
-                                                              SetEquipmentDialog(
-                                                            planId: controller
-                                                                .id.value,
-                                                            facilityId:
-                                                                controller
-                                                                    .facilityId,
-                                                            noOfCleaningDays: 1,
-                                                            frequencyId: 25,
-                                                            assignedToId: 25,
-                                                          ));
+                                                              SetEquipmentDialog());
                                                         },
                                                         // color: ColorValues.appDarkBlueColor,
                                                         // onTap: () {
