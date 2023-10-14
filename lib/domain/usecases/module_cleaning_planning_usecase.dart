@@ -33,7 +33,7 @@ class ModuleCleaningPlanningUsecase {
         isLoading,
       );
 
-   Future<Map<String, dynamic>> updateMcPlan({
+  Future<Map<String, dynamic>> updateMcPlan({
     updateMcModelJsonString,
     bool? isLoading,
   }) async =>
@@ -41,7 +41,6 @@ class ModuleCleaningPlanningUsecase {
         updateMcModelJsonString,
         isLoading,
       );
-
 
   Future<List<InventoryCategoryModel?>?> getInventoryCategoryList({
     String? auth,

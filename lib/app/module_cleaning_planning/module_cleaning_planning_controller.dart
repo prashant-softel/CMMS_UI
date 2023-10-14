@@ -144,7 +144,7 @@ class ModuleCleaningPlanningController extends GetxController {
   //           getMcPlanDetail(planId: id.value);
   //         });
   //       }
-  //     });
+//     });
   //     super.onInit();
   //   } catch (e) {
   //     print(e);
@@ -191,7 +191,8 @@ class ModuleCleaningPlanningController extends GetxController {
           Schedule(cleaningDay: 1, cleaningType: 1, equipments: equipments));
     });
     CreateMcPalningsModel createMcModel = CreateMcPalningsModel(
-        // id: 0,
+        // planId: 0,
+        // assignedToId: 0,
         facilityId: facilityId,
         frequencyId: selectedfrequencyId,
         noOfCleaningDays: int.tryParse(_durationInDayCtrlr) ?? 0,
@@ -226,13 +227,13 @@ class ModuleCleaningPlanningController extends GetxController {
     //       Schedule(cleaningDay: 1, cleaningType: 1, equipments: equipments));
     // });
     CreateMcPalningsModel updateMcModel = CreateMcPalningsModel(
-        planId: 63,
+        // planId: 63,
         facilityId: 1779,
         title: "new test",
         noOfCleaningDays: 3,
         frequencyId: 2,
-        startDate: "2023-10-11",
-        assignedToId: 12,
+        // startDate: "2023-10-11",
+        // assignedToId: 12,
         schedules: []
         // noOfCleaningDays: int.tryParse(_durationInDayCtrlr) ?? 0,
         // title: _mcTitelCtrlr,
