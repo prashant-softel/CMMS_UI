@@ -749,12 +749,12 @@ class AppPages {
       page: ModuleCleaningPlanningScreen.new,
       binding: ModuleCleaningPlanningBinding(),
     ),
-     GetPage<dynamic>(
+    GetPage<dynamic>(
       name: _Paths.hotoListScreenContentWeb,
       page: HotoListScreen.new,
       binding: HotoListScreenBinding(),
     ),
-     GetPage<dynamic>(
+    GetPage<dynamic>(
       name: _Paths.auditListScreenContentWeb,
       page: AuditListScreen.new,
       binding: AuditListScreenBinding(),

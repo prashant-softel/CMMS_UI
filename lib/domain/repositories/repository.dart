@@ -3910,16 +3910,16 @@ class Repository {
       print('Response Create Goods order : ${resourceData}');
 
       if (!res.hasError) {
-        Fluttertoast.showToast(
-            msg: " paln  Add Successfully...", fontSize: 16.0);
-        Get.offNamed(
-          Routes.moduleCleaningListPlan,
-        );
+        // Fluttertoast.showToast(
+        //     msg: " paln  Add Successfully...", fontSize: 16.0);
+        // Get.offNamed(
+        //   Routes.moduleCleaningListPlan,
+        // );
 
-        // if (res.errorCode == 200) {
-        //   var responseMap = json.decode(res.data);
-        //   return responseMap;
-        // }
+        if (res.errorCode == 200) {
+          var responseMap = json.decode(res.data);
+          return responseMap;
+        }
 
         // Fluttertoast.showToast(msg: "Data add successfully...", fontSize: 16.0);
       } else {

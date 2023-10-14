@@ -5,6 +5,7 @@ import 'package:cmms/domain/models/create_mc_plan_model.dart';
 import 'package:cmms/domain/models/employee_model.dart';
 import 'package:cmms/domain/models/equipment_list_model.dart';
 import 'package:cmms/domain/models/frequency_model.dart';
+import 'package:cmms/domain/models/mc_details_plan_model.dart';
 import 'package:cmms/domain/models/type_model.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -44,6 +45,9 @@ class ModuleCleaningPlanningController extends GetxController {
   RxList<EquipmentListModel?> equipmentList = <EquipmentListModel?>[].obs;
   RxList<SMBS> smblist = <SMBS>[].obs;
 
+  RxList<McPalningDetailsModel?>? mcPlanDetailsList =
+      <McPalningDetailsModel?>[].obs;
+  Rx<McPalningDetailsModel?> mcPlanDetailsModel = McPalningDetailsModel().obs;
   var days = <TypeModel>[
     TypeModel(name: 'Day 1', id: "0"),
     TypeModel(name: 'Day 2', id: "1"),
@@ -123,16 +127,16 @@ class ModuleCleaningPlanningController extends GetxController {
   void createMcPlan() async {
     String _durationInDayCtrlr = durationInDayCtrlr.text.trim();
     String _mcTitelCtrlr = mcTitelCtrlr.text.trim();
-    List<Schedules> schedules = [];
-    List<EquipmentsList?>? equipments = [];
+    List<Schedule> schedules = [];
+    List<Equipments?>? equipments = [];
     equipmentList.forEach((e) {
       e?.smbs.forEach((element) {
-        equipments.add(EquipmentsList(id: element.smbId ?? 0));
+        equipments.add(Equipments(id: element.smbId ?? 0));
       });
     });
     equipmentList.forEach((e) {
       schedules.add(
-          Schedules(cleaningDay: 1, cleaningType: 1, equipments: equipments));
+          Schedule(cleaningDay: 1, cleaningType: 1, equipments: equipments));
     });
     CreateMcPalningsModel createMcModel = CreateMcPalningsModel(
         // id: 0,
@@ -149,8 +153,50 @@ class ModuleCleaningPlanningController extends GetxController {
       isLoading: true,
     );
 
-    if (responseCreateMcModel == null) {}
-    print('Create Mc  data: $createMcModelJsonString');
+    if (responseCreateMcModel != null) {
+      getMcPlanDetail(planId: responseCreateMcModel['id'][0]);
+    }
+    // print('Create Mc  data: ${responseCreateMcModel!['id'][0]}');
+  }
+
+  Future<void> getMcPlanDetail({required int planId}) async {
+    // newPermitDetails!.value = <NewPermitListModel>[];
+    mcPlanDetailsList?.value = <McPalningDetailsModel>[];
+
+    final _mcPlanDetails = await moduleCleaningPlanningPresenter
+        .getMcPlanDetail(planId: planId, isLoading: true);
+    print('MC plan Detail:$_mcPlanDetails');
+
+    if (_mcPlanDetails != null) {
+      mcPlanDetailsModel.value = _mcPlanDetails;
+      // plannedAtDateTimeCtrlrWeb.text =
+      //     '${DateFormat('yyyy-MM-dd HH:mm:ss').format(DateTime.parse('${mcPlanDetailsModel.value?.plannedAt}'))}';
+      // startedAtDateTimeCtrlrWeb.text =
+      //     '${DateFormat('yyyy-MM-dd HH:mm:ss').format(DateTime.parse('${mcPlanDetailsModel.value?.startedAt}'))}';
+      // listSchedules?.value = mcPlanDetailsModel.value?.schedules ?? [];
+      // scheduleId =
+      //     listSchedules!.map((element) => element?.scheduleId).toList();
+      // print('ScheduleId: ${scheduleId}');
+
+      // rowItem.value = [];
+      // schedules?.value = _mcPlanDetails.schedules;
+
+      // _mcPlanDetails.schedules.forEach((element) {
+      //   rowItem.value.add([
+      //     {"key": "Schedule Id", "value": '${element!.scheduleId}'},
+      //     {"key": "Days", "value": '${element.cleaningDay}'},ß
+      //     {"key": "Scheduled Module", "value": '${element.scheduledModules}'},
+      //     {"key": "Cleaned", "value": '${element.cleanedModules}'},
+      //     {"key": "Abandoned", "value": '${element.abandonedModules}'},
+      //     {"key": "Pending", "value": '${element.pendingModules}'},
+      //     {"key": "Type", "value": '${element.cleaningTypeName}'},
+      //     {"key": "Water Used", "value": '${element.waterUsed}'},
+      //     {"key": "Remark", "value": '${element.remark}'},
+      //     {"key": "Status", "value": '${element.status_short}'},
+      //     {'key': "Actions", "value": ''},
+      //   ]);
+      // });
+    }
   }
 
   Future<void> getAssignedToList() async {
