@@ -23,6 +23,7 @@ class MCTaskListModel {
     this.water_used,
     this.startDate,
     this.doneDate,
+    this.status,
     this.status_short,
   });
 
@@ -34,6 +35,7 @@ class MCTaskListModel {
   int? water_used;
   String? startDate;
   String? doneDate;
+  int? status;
   String? status_short;
 
   factory MCTaskListModel.fromJson(Map<String, dynamic> json) =>
@@ -46,6 +48,7 @@ class MCTaskListModel {
         water_used: json["water_used"],
         startDate: Utility.getFormatedyearMonthDay(json['startDate']),
         doneDate: Utility.getFormatedyearMonthDay(json['doneDate']),
+        status: json['status'],
         status_short: json["status_short"],
       );
 
@@ -58,6 +61,7 @@ class MCTaskListModel {
         "water_used": water_used,
         "startDate": startDate,
         "doneDate": doneDate,
+        "status": status,
         "status_short": status_short,
       };
 }

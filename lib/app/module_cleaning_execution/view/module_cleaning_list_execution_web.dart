@@ -267,6 +267,7 @@ class ModuleCleaningListExecution
                                               "Start Date",
                                               "Done Date",
                                               "Status",
+                                              "Status code",
                                               "Action",
                                             ].map((column) {
                                               return TableViewColumn(
@@ -279,6 +280,7 @@ class ModuleCleaningListExecution
                                                 controller.mcTaskList.length,
                                                 (index) {
                                                   return [
+                                                    '',
                                                     '',
                                                     '',
                                                     '',
@@ -316,6 +318,7 @@ class ModuleCleaningListExecution
                                               "Start Date",
                                               "Done Date",
                                               "Status",
+                                              "Status code",
                                               "Action",
                                             ].map((column) {
                                               return TableViewColumn(
@@ -337,6 +340,7 @@ class ModuleCleaningListExecution
                                                   '${controller.mcTaskList[index]!.startDate}',
                                                   '${controller.mcTaskList[index]!.doneDate}',
                                                   '${controller.mcTaskList[index]!.status_short}',
+                                                  '${controller.mcTaskList[index]!.status}',
                                                   'Actions'
                                                 ],
                                               ),
@@ -349,6 +353,9 @@ class ModuleCleaningListExecution
                                                 },
                                                 height: 80,
                                                 cells: record.map((value) {
+                                                 
+                                
+                                                 
                                                   final Map<String, dynamic>
                                                       dataList = {
                                                     'id': int.tryParse(
