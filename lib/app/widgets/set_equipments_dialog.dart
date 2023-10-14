@@ -14,7 +14,12 @@ class SetEquipmentDialog extends GetView {
   int? frequencyId;
   int? assignedToId;
 
-  SetEquipmentDialog({required this.planId, required this.facilityId, required this.noOfCleaningDays, required this.frequencyId, required this.assignedToId });
+  SetEquipmentDialog(
+      {required this.planId,
+      required this.facilityId,
+      required this.noOfCleaningDays,
+      required this.frequencyId,
+      required this.assignedToId});
 
   final ModuleCleaningPlanningController controller = Get.find();
 
@@ -224,7 +229,7 @@ class SetEquipmentDialog extends GetView {
                   backgroundColor: ColorValues.greenColor,
                   text: 'Submit',
                   onPressed: () {
-                    controller.updateMcPlan();
+                    controller.createMcPlan();
                   },
                 ),
               ),

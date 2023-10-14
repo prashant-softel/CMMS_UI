@@ -3328,7 +3328,7 @@ class Repository {
   }
 
   Future<void> startMCExecutionButton(
-    int? planId,
+    int? executionId,
     bool? isLoading,
   ) async {
     try {
@@ -3336,7 +3336,7 @@ class Repository {
 
       final res = await _dataRepository.startMCExecutionButton(
         auth: auth,
-        planId: planId,
+        executionId: executionId,
         isLoading: isLoading ?? false,
       );
       print('StartExecutionResponse55: ${res.data}');
@@ -3904,19 +3904,19 @@ class Repository {
 
       var resourceData = res.data;
 
-      print('Response Create Goods order : ${resourceData}');
+      print('Response Create MC  : ${resourceData}');
 
       if (!res.hasError) {
-        // Fluttertoast.showToast(
-        //     msg: " paln  Add Successfully...", fontSize: 16.0);
-        // Get.offNamed(
-        //   Routes.moduleCleaningListPlan,
-        // );
+        Fluttertoast.showToast(
+            msg: " paln  Add Successfully...", fontSize: 16.0);
+        Get.offNamed(
+          Routes.moduleCleaningListPlan,
+        );
 
-        if (res.errorCode == 200) {
-          var responseMap = json.decode(res.data);
-          return responseMap;
-        }
+        // if (res.errorCode == 200) {
+        //   var responseMap = json.decode(res.data);
+        //   return responseMap;
+        // }
 
         // Fluttertoast.showToast(msg: "Data add successfully...", fontSize: 16.0);
       } else {
@@ -3930,18 +3930,15 @@ class Repository {
     }
   }
 
-
-   Future<Map<String, dynamic>> updateMcPlan(
-        updateMcModelJsonString,
-
+  Future<Map<String, dynamic>> updateMcPlan(
+    updateMcModelJsonString,
     bool? isLoading,
   ) async {
     try {
       final auth = await getSecuredValue(LocalKeys.authToken);
       final res = await _dataRepository.updateMcPlan(
         auth: auth,
-        updateMcModelJsonString:updateMcModelJsonString,
-
+        updateMcModelJsonString: updateMcModelJsonString,
         isLoading: isLoading ?? false,
       );
 
@@ -3972,7 +3969,6 @@ class Repository {
       return Map();
     }
   }
-
 
   Future<List<JobDetailsModel>> getJobDetails(
     String? auth,
