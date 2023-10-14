@@ -1,7 +1,10 @@
 import 'package:cmms/app/add_module_cleaning_execution/add_module_cleaning_execution_controller.dart';
+import 'package:cmms/app/stock_managment_add_goods_orders.dart/view/stock_management_add_goods_orders_web.dart';
 import 'package:cmms/app/theme/color_values.dart';
+import 'package:cmms/app/theme/styles.dart';
 import 'package:cmms/app/widgets/custom_elevated_button.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:cmms/app/widgets/custom_richtext.dart';
 import 'package:multi_select_flutter/multi_select_flutter.dart';
@@ -12,11 +15,13 @@ class AddModuleCleaningExecutionDialog extends GetView {
   int? scheduleId;
   int? cleaningDay;
   int? waterUsed;
+  // int? day;
 
   AddModuleCleaningExecutionDialog({
     required this.scheduleId,
     required this.cleaningDay,
     required this.waterUsed,
+    // required this.day
   });
 
   final AddModuleCleaningExecutionController controller = Get.find();
@@ -31,8 +36,10 @@ class AddModuleCleaningExecutionDialog extends GetView {
         insetPadding: Dimens.edgeInsets0_0_10_0,
         title: Row(
           children: [
+            Text("Update For Day", style: Styles.blue17),
+            Dimens.boxWidth10,
             Text(
-              "Set Equipments",
+              "${cleaningDay}",
               style: TextStyle(
                 fontSize: 15,
               ),
@@ -42,37 +49,42 @@ class AddModuleCleaningExecutionDialog extends GetView {
                 SizedBox(
                   width: 50,
                 ),
-                CustomRichText(title: 'Type: '),
+                CustomRichText(title: 'Remark: '),
                 SizedBox(
                   width: 5,
                 ),
-                SizedBox(
-                  width: MediaQuery.of(context).size.width / 5,
-                  child: MultiSelectDialogField(
-                    dialogWidth: 300,
-                    dialogHeight: 400,
-                    // title: 'Select Equipments',
-                    // buttonText: 'Equipment Category',
-                    initialValue:
-                        (controller.selectedEquipmentCategoryIdList.isNotEmpty)
-                            ? controller.selectedEquipmentCategoryIdList
-                            : [],
-                    items: controller.equipmentCategoryList
-                        .map(
-                          (equipmentCategory) => MultiSelectItem(
-                            equipmentCategory?.id,
-                            equipmentCategory?.name ?? '',
-                          ),
-                        )
-                        .toList(),
-                    onConfirm: (selectedOptionsList) => {
-                      controller
-                          .equipmentCategoriesSelected(selectedOptionsList),
-                      print(
-                          'Equipment list ids ${controller.selectedEquipmentCategoryIdList}')
-                    },
-                  ),
-                )
+                GoodsOrderTextField(
+                  keyboardType: TextInputType.number,
+                  // inputFormatters: <TextInputFormatter>[FilteringTextInputFormatter.digitsOnly],
+                  textController: controller.remarkCtrlrWeb,
+                ),
+                // SizedBox(
+                //   width: MediaQuery.of(context).size.width / 5,
+                //   child: MultiSelectDialogField(
+                //     dialogWidth: 300,
+                //     dialogHeight: 400,
+                //     // title: 'Select Equipments',
+                //     // buttonText: 'Equipment Category',
+                //     initialValue:
+                //         (controller.selectedEquipmentCategoryIdList.isNotEmpty)
+                //             ? controller.selectedEquipmentCategoryIdList
+                //             : [],
+                //     items: controller.equipmentCategoryList
+                //         .map(
+                //           (equipmentCategory) => MultiSelectItem(
+                //             equipmentCategory?.id,
+                //             equipmentCategory?.name ?? '',
+                //           ),
+                //         )
+                //         .toList(),
+                //     onConfirm: (selectedOptionsList) => {
+                //       controller
+                //           .equipmentCategoriesSelected(selectedOptionsList),
+                //       print(
+                //           'Equipment list ids ${controller.selectedEquipmentCategoryIdList}')
+                //     },
+                //   ),
+                // )
               ],
             ),
             Dimens.boxWidth200,
@@ -80,7 +92,11 @@ class AddModuleCleaningExecutionDialog extends GetView {
               children: [
                 CustomRichText(title: 'Water Used: '),
                 Dimens.boxWidth20,
-                Text('1000 ltr'),
+                GoodsOrderTextField(
+                  keyboardType: TextInputType.number,
+                  // inputFormatters: <TextInputFormatter>[FilteringTextInputFormatter.digitsOnly],
+                  textController: controller.waterUsedCtrlrWeb,
+                ),
               ],
             ),
           ],
@@ -116,22 +132,23 @@ class AddModuleCleaningExecutionDialog extends GetView {
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
                         Expanded(
+                          flex: 2,
                           child: Text(
                             "Assets",
                             style: TextStyle(color: Color(0xff31576D)),
                           ),
                         ),
                         Expanded(
-                          child: Text("Modules",
-                              style: TextStyle(color: Color(0xff31576D))),
+                          flex: 1,
+                          child: Text("Modules", style: TextStyle(color: Color(0xff31576D))),
                         ),
                         Expanded(
-                          child: Text("Cleaned",
-                              style: TextStyle(color: Color(0xff31576D))),
+                          flex: 1,
+                          child: Text("Cleaned", style: TextStyle(color: Color(0xff31576D))),
                         ),
-                        Expanded(
-                            child: Text("Abandoned",
-                                style: TextStyle(color: Color(0xff31576D)))),
+                        Expanded(flex: 1, child: Text("Abandoned", style: TextStyle(color: Color(0xff31576D)))),
+                        Expanded(flex: 1, child: Text("Days", style: TextStyle(color: Color(0xff31576D)))),
+
                         // Expanded(
                         //     child: Text("Day",
                         //         style: TextStyle(color: Color(0xff31576D)))),
@@ -144,10 +161,10 @@ class AddModuleCleaningExecutionDialog extends GetView {
                           child: Column(
                             children: [
                               Row(
-                                mainAxisAlignment:
-                                    MainAxisAlignment.spaceAround,
+                                mainAxisAlignment: MainAxisAlignment.spaceAround,
                                 children: [
                                   Expanded(
+                                    flex: 2,
                                     child: GestureDetector(
                                       onTap: () {
                                         setState(
@@ -160,42 +177,37 @@ class AddModuleCleaningExecutionDialog extends GetView {
                                         children: [
                                           Text(
                                             "${e?.invName}",
-                                            style: TextStyle(
-                                                fontSize: 12.0,
-                                                fontWeight: FontWeight.bold),
+                                            style: TextStyle(fontSize: 12.0, fontWeight: FontWeight.bold),
                                           ),
-                                          Icon(e!.isExpanded
-                                              ? Icons.arrow_drop_down
-                                              : Icons.arrow_drop_up)
+                                          Icon(e!.isExpanded ? Icons.arrow_drop_down : Icons.arrow_drop_up)
                                         ],
                                       ),
                                     ),
                                   ),
                                   Expanded(
+                                    flex: 1,
                                     child: Text(
                                       "${e.moduleQuantity}",
-                                      style: TextStyle(
-                                          fontSize: 12.0,
-                                          fontWeight: FontWeight.bold),
+                                      style: TextStyle(fontSize: 12.0, fontWeight: FontWeight.bold),
                                     ),
                                   ),
                                   Expanded(
+                                    flex: 1,
                                     child: Checkbox(
                                       value: e.isCleanedChecked,
                                       onChanged: (bool? value) {
                                         // controller.toggleItemSelection(index);
                                         setState(
                                           () {
-                                            e.isCleanedChecked =
-                                                !e.isCleanedChecked!;
+                                            e.isCleanedChecked = !e.isCleanedChecked!;
                                           },
                                         );
-                                        print(
-                                            'Element Cancel:${e.isCleanedChecked}');
+                                        print('Element Cancel:${e.isCleanedChecked}');
                                       },
                                     ),
                                   ),
                                   Expanded(
+                                    flex: 1,
                                     child: Checkbox(
                                       value: e.isChecked,
                                       onChanged: (bool? value) {
@@ -209,6 +221,7 @@ class AddModuleCleaningExecutionDialog extends GetView {
                                       },
                                     ),
                                   ),
+                                  Expanded(flex: 1, child: Container())
                                 ],
                               ),
                               e.isExpanded
@@ -217,16 +230,10 @@ class AddModuleCleaningExecutionDialog extends GetView {
                                           e.smbs.map(
                                             (smbItems) {
                                               return Row(
-                                                mainAxisAlignment:
-                                                    MainAxisAlignment.center,
+                                                // mainAxisAlignment: MainAxisAlignment.center,
                                                 children: [
-                                                  Expanded(
-                                                      child: Text(
-                                                          smbItems.smbName ??
-                                                              "")),
-                                                  Expanded(
-                                                      child: Text(
-                                                          "${smbItems.moduleQuantity}")),
+                                                  Expanded(child: Text(smbItems.smbName ?? "")),
+                                                  Expanded(child: Text("${smbItems.moduleQuantity}")),
                                                   Expanded(
                                                     child: Checkbox(
                                                       value: e.isCleanedChecked,
@@ -234,13 +241,11 @@ class AddModuleCleaningExecutionDialog extends GetView {
                                                         // controller.toggleItemSelection(index);
                                                         setState(
                                                           () {
-                                                            e.isCleanedChecked =
-                                                                !e.isCleanedChecked!;
+                                                            e.isCleanedChecked = !e.isCleanedChecked!;
                                                           },
                                                         );
 
-                                                        print(
-                                                            'Element Cancel:${e.isCleanedChecked}');
+                                                        print('Element Cancel:${e.isCleanedChecked}');
                                                       },
                                                     ),
                                                   ),
@@ -251,16 +256,15 @@ class AddModuleCleaningExecutionDialog extends GetView {
                                                         // controller.toggleItemSelection(index);
                                                         setState(
                                                           () {
-                                                            e.isChecked =
-                                                                !e.isChecked!;
+                                                            e.isChecked = !e.isChecked!;
                                                           },
                                                         );
 
-                                                        print(
-                                                            'Element Cancel:${e.isChecked}');
+                                                        print('Element Cancel:${e.isChecked}');
                                                       },
                                                     ),
                                                   ),
+                                                  Expanded(child: Text('Day 1 (15/06/2023)'))
                                                 ],
                                               );
                                             },
@@ -285,11 +289,8 @@ class AddModuleCleaningExecutionDialog extends GetView {
                   text: 'Submit',
                   onPressed: () {
                     // controller.createMcPlan();
-                    controller.updateMCScheduleExecution(
-                        scheduleId: scheduleId,
-                        cleaningDay: cleaningDay,
-                        waterUsed: waterUsed);
-                        Get.back();
+                    controller.updateMCScheduleExecution(scheduleId: scheduleId, cleaningDay: cleaningDay, waterUsed: waterUsed);
+                    Get.back();
                   },
                 ),
               ),

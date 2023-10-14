@@ -14,6 +14,7 @@ import 'package:cmms/app/widgets/create_incident_report_dialog.dart';
 import 'package:cmms/app/widgets/create_jc_success_message_dialog.dart';
 import 'package:cmms/app/widgets/create_permit_dialog.dart';
 import 'package:cmms/app/widgets/create_sop_dialog.dart';
+import 'package:cmms/app/widgets/end_execution_message_dialog.dart';
 import 'package:cmms/app/widgets/end_mc_execution_message_dialog.dart';
 import 'package:cmms/app/widgets/end_mc_schedule_execution_message.dart';
 import 'package:cmms/app/widgets/goods_order_message_approve_dialog.dart';
@@ -1419,6 +1420,35 @@ class ConnectHelper {
 
     return responseModel;
   }
+
+
+   Future<ResponseModel> endMcExecutionButton({
+    required String auth,
+    bool? isLoading,
+    int? executionId,
+  }) async {
+    // facilityId = 45;
+    var responseModel = await apiWrapper.makeRequest(
+      'MC/EndMCExecution?executionId=$executionId',
+      Request.put,
+      // {'comment': "$comment", 'id': id},
+      null,
+      isLoading ?? true,
+      {
+        'Authorization': 'Bearer $auth',
+      },
+    );
+    // print('StartExecutionResponse: ${responseModel.data}');
+    var res = responseModel.data;
+    var parsedJson = json.decode(res);
+    Get.dialog<void>(EndMcExecutionMessageDialog(
+      data: parsedJson['message'],
+      endMCId: parsedJson['id'],
+    ));
+
+    return responseModel;
+  }
+
 
   Future<ResponseModel> startMCExecutionScheduleButton({
     required String auth,

@@ -94,6 +94,11 @@ class AddModuleCleaningExecutionController extends GetxController {
   var startedAtDateTimeCtrlrWeb = TextEditingController();
   var plannedAtDateTimeCtrlrWeb = TextEditingController();
 
+  var remarkCtrlrWeb = TextEditingController();
+  var waterUsedCtrlrWeb = TextEditingController();
+
+
+
   ///Checkbox
   var isChecked = false.obs; // This makes `isChecked` observable
   void toggleCheckbox() => isChecked.value = !isChecked.value;
@@ -363,6 +368,15 @@ class AddModuleCleaningExecutionController extends GetxController {
   Future<void> startMCExecutionButton() async {
     final _startMCExecutionBtn =
         await addModuleCleaningExecutionPresenter.startMCExecutionButton(
+      executionId: data['id'],
+    );
+
+    // print('Plan Data:${data['planId']}');
+  }
+
+  Future<void> endMcExecutionButton() async {
+    final _endMCExecutionBtn =
+        await addModuleCleaningExecutionPresenter.endMcExecutionButton(
       executionId: data['id'],
     );
 

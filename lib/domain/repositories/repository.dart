@@ -3351,6 +3351,32 @@ class Repository {
     }
   }
 
+
+   Future<void> endMcExecutionButton(
+    int? executionId,
+    bool? isLoading,
+  ) async {
+    try {
+      final auth = await getSecuredValue(LocalKeys.authToken);
+
+      final res = await _dataRepository.endMcExecutionButton(
+        auth: auth,
+        executionId: executionId,
+        isLoading: isLoading ?? false,
+      );
+      print('endExecutionResponse55: ${res.data}');
+
+      if (!res.hasError) {
+        //  return _permitIssueModel;
+      } else {
+        Utility.showDialog(res.errorCode.toString() + 'endMCExecutionButton');
+      }
+    } catch (error) {
+      log(error.toString());
+    }
+  }
+
+
   Future<void> startMCExecutionScheduleButton(
     int? scheduleId,
     bool? isLoading,

@@ -688,18 +688,15 @@ class AddModuleCleaningExecutionContentWeb
                                                                                                             var filterdData = controller.listSchedules?.firstWhere((e) => "${e?.scheduleId}" == record[0]['value']);
 
                                                                                                             Get.dialog(AddModuleCleaningExecutionDialog(
-                                                                                                              scheduleId: filterdData!.scheduleId,
-                                                                                                              cleaningDay: filterdData.cleaningDay,
-                                                                                                              waterUsed: filterdData.waterUsed,
-                                                                                                            ));
-                                                                                                          },
-                                                                                                          color: ColorValues.appDarkBlueColor,
-                                                                                                          icon: Icons.category,
-                                                                                                          message: 'Equipments',
-                                                                                                        ),
-                                                                                                      ],
-                                                                                                    )
-                                                                                                  : Text(mapData['key'] ?? ''),
+                                                                                                              scheduleId: filterdData!.scheduleId, cleaningDay: filterdData.cleaningDay, waterUsed: filterdData.waterUsed,));
+                                                                                                            },
+                                                                                                            color: ColorValues.appDarkBlueColor,
+                                                                                                            icon: Icons.category,
+                                                                                                            message: 'Equipments',
+                                                 ),
+                                               ],
+                                                )
+                                                  : Text(mapData['key'] ?? ''),
                                                     );
                                                   }).toList(),
                                                 );
@@ -745,40 +742,34 @@ class AddModuleCleaningExecutionContentWeb
                                           ),
                                           // controller.data['status'] == "Scheduled"
                                           //     ?
-                                          Container(
-                                            height: 28,
-                                            child: CustomElevatedButton(
-                                              backgroundColor:
-                                                  ColorValues.addNewColor,
-                                              text: "Start",
-                                              onPressed: () {
-                                                controller
-                                                    .startMCExecutionButton();
-                                              },
-                                            ),
-                                          )
-                                          // : Container(),
-                                          ,
-                                          SizedBox(
-                                            width: 20,
-                                          ),
+                                              Container(
+                                                  height: 28,
+                                                  child: CustomElevatedButton(
+                                                    backgroundColor: ColorValues.addNewColor,
+                                                    text: "Start",
+                                                    onPressed: () {
+                                                      controller.startMCExecutionButton();
+                                                    },
+                                                  ),
+                                                ),
+                                              // : Container(),
 
-                                          // controller.data['status'] ==
-                                          //         "Abandoned"
+                                         Dimens.boxWidth10,
+
+                                          // controller.data['status'] == "Abandoned"
                                           //     ?
-                                          Container(
-                                            height: 28,
-                                            child: CustomElevatedButton(
-                                              backgroundColor:
-                                                  ColorValues.cancelColor,
-                                              text: "End",
-                                              onPressed: () {
-                                                Get.dialog(
-                                                    EndMCExecutionDialog());
-                                              },
-                                            ),
-                                          ),
-                                          // : Dimens.box0,
+                                              Container(
+                                                  height: 28,
+                                                  child: CustomElevatedButton(
+                                                    backgroundColor: ColorValues.cancelColor,
+                                                    text: "End",
+                                                    onPressed: () {
+                                                      // Get.dialog(EndMCExecutionDialog());
+                                                      controller.endMcExecutionButton();
+                                                    },
+                                                  ),
+                                                ),
+                                              // : Dimens.box0,
                                           SizedBox(
                                             width: 10,
                                           ),
