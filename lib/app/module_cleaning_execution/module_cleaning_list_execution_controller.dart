@@ -2,6 +2,7 @@ import 'dart:async';
 
 import 'package:cmms/app/home/home_controller.dart';
 import 'package:cmms/app/module_cleaning_execution/module_cleaning_list_execution_presenter.dart';
+import 'package:cmms/domain/models/comment_model.dart';
 import 'package:cmms/domain/models/mc_task_list_model.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -14,6 +15,7 @@ class ModuleCleaningListExecutionController extends GetxController {
   );
   ModuleCleaningListExecutionPresenter moduleCleaningListExecutionPresenter;
   final HomeController homecontroller = Get.find();
+  TextEditingController commentTextFieldCtrlr = TextEditingController();
   RxList<MCTaskListModel?> mcTaskList = <MCTaskListModel?>[].obs;
   RxList<MCTaskListModel?> filteredData = <MCTaskListModel>[].obs;
 
@@ -63,9 +65,9 @@ class ModuleCleaningListExecutionController extends GetxController {
   });
   final Map<String, double> columnwidth = {
     "ID": 153,
-    "Plan ID": 220,
+    "Plan ID": 150,
     "Responsibility": 200,
-    "Frequency": 223,
+    "Frequency": 163,
     "No Of Days": 153,
     "Start Date": 130,
     "Done Date": 120,
@@ -120,6 +122,23 @@ class ModuleCleaningListExecutionController extends GetxController {
             item!.responsibility!.toLowerCase().contains(keyword.toLowerCase()))
         .toList();
     update(['mc_task_list']);
+  }
+
+  Future<void> abandonExecutionButton({int? id}) async {
+    String _Comment = commentTextFieldCtrlr.text.trim();
+
+    CommentModel commentAbandonModel = CommentModel(id: id, comment: _Comment);
+
+    var abandoneJsonString = commentAbandonModel.toJson();
+
+    final _abandonExecutionBtn =
+        await moduleCleaningListExecutionPresenter.abandonExecutionButton(
+      abandoneJsonString: abandoneJsonString,
+      isLoading: true,
+    );
+    // showAlertPermitApproveDialog();
+    // print('abandon Button Data:${_Comment}');
+    // print('abandon id Button Data:${id}');
   }
 
   Future<void> getMCTaskList(int facilityId, dynamic startDate, dynamic endDate,
@@ -236,22 +255,22 @@ class ModuleCleaningListExecutionController extends GetxController {
 //     }
 //   }
 
-//   // Future<void> abandonExecutionButton({int? id}) async {
-//   //   String _Comment = commentTextFieldCtrlr.text.trim();
+  // Future<void> abandonExecutionButton({int? id}) async {
+  //   String _Comment = commentTextFieldCtrlr.text.trim();
 
-//   //   CommentModel commentAbandonModel =
-//   //         CommentModel(id: id, comment: _Comment);
+  //   CommentModel commentAbandonModel =
+  //         CommentModel(id: id, comment: _Comment);
 
-//   //     var abandoneJsonString = commentAbandonModel.toJson();
+  //     var abandoneJsonString = commentAbandonModel.toJson();
 
-//   //   final _abandonExecutionBtn = await moduleCleaningListExecutionPresenter.abandonExecutionButton(
-//   //    abandoneJsonString: abandoneJsonString,
-//   //       isLoading: true,
-//   //   );
-//   //   // showAlertPermitApproveDialog();
-//   //   // print('abandon Button Data:${_Comment}');
-//   //   // print('abandon id Button Data:${id}');
-//   // }
+  //   final _abandonExecutionBtn = await moduleCleaningListExecutionPresenter.abandonExecutionButton(
+  //    abandoneJsonString: abandoneJsonString,
+  //       isLoading: true,
+  //   );
+  //   // showAlertPermitApproveDialog();
+  //   // print('abandon Button Data:${_Comment}');
+  //   // print('abandon id Button Data:${id}');
+  // }
 
 //   void abandonExecutionButton({int? id}) async {
 //     {

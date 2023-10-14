@@ -51,7 +51,7 @@ class AbandoneExecutionDialog extends GetView {
                         height: 20,
                       ),
                       TextField(
-                        // controller: _controller.commentTextFieldCtrlr,
+                        controller: _controller.commentTextFieldCtrlr,
                         maxLines: 4,
                         decoration: InputDecoration(
                           hintText: 'Comment here....',
@@ -110,7 +110,7 @@ class AbandoneExecutionDialog extends GetView {
             ElevatedButton(
               style: Styles.greenElevatedButtonStyle,
               onPressed: () {
-                // _controller.abandonExecutionButton(id:id);
+                _controller.abandonExecutionButton(id: id);
                 Get.back();
               },
               child: const Text('Abandone MC Execution'),

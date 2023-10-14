@@ -1,13 +1,11 @@
-import 'package:cmms/app/constant/constant.dart';
 import 'package:cmms/app/home/home_screen.dart';
 import 'package:cmms/app/module_cleaning_execution/module_cleaning_list_execution_controller.dart';
 import 'package:cmms/app/navigators/app_pages.dart';
 import 'package:cmms/app/theme/dimens.dart';
-import 'package:cmms/app/utils/user_access_constants.dart';
+import 'package:cmms/app/widgets/abandon_execution_dialog.dart';
 import 'package:cmms/app/widgets/custom_richtext.dart';
 import 'package:cmms/app/widgets/date_picker.dart';
 import 'package:cmms/domain/models/mc_task_list_model.dart';
-import 'package:cmms/domain/models/stock_management_update_goods_orders_model.dart';
 import 'package:data_table_2/data_table_2.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -16,8 +14,6 @@ import 'package:syncfusion_flutter_datepicker/datepicker.dart';
 
 import '../../theme/color_values.dart';
 import '../../theme/styles.dart';
-import '../../widgets/action_button.dart';
-import '../../widgets/custom_elevated_button.dart';
 import '../../widgets/table_action_button.dart';
 
 class ModuleCleaningListExecution extends StatefulWidget {
@@ -563,12 +559,6 @@ class MCExcutionListDataSource extends DataTableSource {
                                     arguments: {'id': id, "planId": planId});
                               }
                             },
-                            // onPress: () {
-                            //   controller.viewMCExecution(
-                            //     id: int.tryParse('${record[0]}'),
-                            //     planId: int.tryParse('${record[1]}'),
-                            //   );
-                            // },
                           ),
                           TableActionButton(
                             color: ColorValues.appYellowColor,
@@ -579,7 +569,9 @@ class MCExcutionListDataSource extends DataTableSource {
                               if (id != 0) {
                                 Get.toNamed(
                                     Routes.addModuleCleaningExecutionContentWeb,
-                                    arguments: {"id": id});
+                                    arguments: {
+                                      "id": id,
+                                    });
                               }
                             },
                             // onPress: () {
@@ -588,30 +580,47 @@ class MCExcutionListDataSource extends DataTableSource {
                             // },
                           ),
                           // record[8] == "Abandoned"
-                          //     ? TableActionButton(
-                          //         color: ColorValues.appRedColor,
-                          //         icon: Icons.close,
-                          //         message: 'Abandon',
-                          //         onPress: () {
-                          //           Get.dialog(AbandoneExecutionDialog(
-                          //               id: int.tryParse('${record[0]}')));
-                          //         },
-                          //       )
+                          //     ?
+                          // TableActionButton(
+                          //   color: ColorValues.appRedColor,
+                          //   icon: Icons.close,
+                          //   message: 'Abandon',
+                          //   onPress: () {
+                          //     int id = McExcutionListDetails?.id ?? 0;
+                          //     if (id != 0) {
+                          //       Get.dialog(AbandoneExecutionDialog(
+                          //         id: id,
+                          //       ));
+                          //       // Get.toNamed(
+                          //       //     Routes.addModuleCleaningExecutionContentWeb,
+                          //       //     arguments: {
+                          //       //       "id": id,
+                          //       //     });
+                          //     }
+                          //   },
+                          //   // onPress: () {
+                          //   //   Get.dialog(AbandoneExecutionDialog(
+                          //   //       id: int.tryParse('${record[0]}')));
+                          //   // },
+                          // ),
                           //     : Dimens.box0,
                           // record[8] == "Scheduled"
-                          //     ? TableActionButton(
-                          //         color: ColorValues.appGreenColor,
-                          //         icon: Icons.add,
-                          //         message: 'Start',
-                          //         onPress: () {
-                          //           // controller.startMCExecutionButton(
-                          //           //     planId:
-                          //           //         int.tryParse('${record[1]}'));
-                          //           // controller.startMCExecution(planId:int.tryParse('${record[1]}'),);
-                          //           controller.StartEndMCExecution(
-                          //               dataList: dataList);
-                          //         },
-                          //       )
+                          //     ?
+                          TableActionButton(
+                            color: ColorValues.appGreenColor,
+                            icon: Icons.add,
+                            message: 'Start/End',
+                            onPress: () {
+                              int id = McExcutionListDetails?.id ?? 0;
+                              if (id != 0) {
+                                Get.toNamed(
+                                    Routes.addModuleCleaningExecutionContentWeb,
+                                    arguments: {
+                                      "id": id,
+                                    });
+                              }
+                            },
+                          )
                           // : Dimens.box0,
                           // record[8] == "Abandoned"
                           //     ? TableActionButton(
@@ -650,11 +659,6 @@ class MCExcutionListDataSource extends DataTableSource {
   @override
   int get selectedRowCount => 0;
 }
-
-
-
-
-
 
 // import 'package:cmms/app/constant/constant.dart';
 // import 'package:cmms/app/home/home_screen.dart';
@@ -1011,9 +1015,7 @@ class MCExcutionListDataSource extends DataTableSource {
 //                                                 },
 //                                                 height: 80,
 //                                                 cells: record.map((value) {
-                                                 
-                                
-                                                 
+
 //                                                   final Map<String, dynamic>
 //                                                       dataList = {
 //                                                     'id': int.tryParse(
@@ -1033,7 +1035,7 @@ class MCExcutionListDataSource extends DataTableSource {
 //                                                   };
 //                                                   return TableViewCell(
 //                                                     child: value == "Actions"
-//                                                         ? 
+//                                                         ?
 //                                                         Wrap(
 //                                                             children: [
 //                                                               TableActionButton(
@@ -1127,7 +1129,7 @@ class MCExcutionListDataSource extends DataTableSource {
 //                                                                   : Dimens.box0,
 //                                                             ],
 //                                                           )
-                                                     
+
 //                                                         : Text(value),
 //                                                   );
 //                                                 }).toList(),
