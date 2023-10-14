@@ -559,7 +559,7 @@ class ModuleCleaningPlanListDataSource extends DataTableSource {
                                 ModuleCleaningPlanningListDetails?.planId ?? 0;
                             if (id != 0) {
                               Get.toNamed(Routes.moduleCleaningPlanning,
-                                  arguments: {"id": id});
+                                  arguments: {"id": id, "planId":  ModuleCleaningPlanningListDetails?.planId});
                             }
                           },
                         ),

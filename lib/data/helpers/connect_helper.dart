@@ -24,6 +24,7 @@ import 'package:cmms/app/widgets/incident_report_reject_message_dialog.dart';
 import 'package:cmms/app/widgets/link_to_permit_dailog.dart';
 import 'package:cmms/app/widgets/mc_execution_approve_message_dialog.dart';
 import 'package:cmms/app/widgets/mc_plan_message_approve_dialog.dart';
+import 'package:cmms/app/widgets/mc_plan_message_dialog.dart';
 import 'package:cmms/app/widgets/mc_plan_message_reject_dialog.dart';
 import 'package:cmms/app/widgets/new_warranty_claim_dialog.dart';
 import 'package:cmms/app/widgets/permit_approve_message_dialog.dart';
@@ -2486,6 +2487,38 @@ class ConnectHelper {
     // if (res.e != null) {
     //   Get.dialog<void>(WarrantyClaimErrorDialog());
     // } else {
+
+    return responseModel;
+  }
+
+
+   Future<ResponseModel> updateMcPlan({
+    required String auth,
+    updateMcModelJsonString,
+    bool? isLoading,
+  }) async {
+    var responseModel = await apiWrapper.makeRequest(
+      'MC/UpdateMCPlan',
+      Request.post,
+      updateMcModelJsonString,
+      isLoading ?? false,
+      {
+        'Content-Type': 'application/json',
+        'Authorization': 'Bearer $auth',
+      },
+    );
+
+    print('Update MC Response:${responseModel.data}');
+    var res = responseModel.data;
+    var parsedJson = json.decode(res);
+    // if (res.e != null) {
+    //   Get.dialog<void>(WarrantyClaimErrorDialog());
+    // } else {
+
+    Get.dialog<void>(MCPlanUpdatedMessageDialog(
+      data: parsedJson['message'],
+      warrantyClaimId: parsedJson['id'],
+    ));
 
     return responseModel;
   }
