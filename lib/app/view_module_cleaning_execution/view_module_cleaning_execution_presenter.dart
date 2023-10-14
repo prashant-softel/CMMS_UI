@@ -22,6 +22,26 @@ class ViewModuleCleaningExecutionPresenter {
         isLoading: isLoading,
       );
 
+   Future<Map<String, dynamic>?> mcExecutionApprovedButton({
+    mcExecutionApproveJsonString,
+    required bool isLoading,
+  }) async {
+    return viewModuleCleaningExecutionUsecase.mcExecutionApprovedButton(
+      mcExecutionApproveJsonString: mcExecutionApproveJsonString,
+      isLoading: isLoading,
+    );
+  }
+
+   Future<Map<String, dynamic>?> rejectMcExecutionApprovedButton({
+    rejectMcExecutionApproveJsonString,
+    required bool isLoading,
+  }) async {
+    return viewModuleCleaningExecutionUsecase.rejectMcExecutionApprovedButton(
+      rejectMcExecutionApproveJsonString: rejectMcExecutionApproveJsonString,
+      isLoading: isLoading,
+    );
+  }
+
    Future<EndMCExecutionDetailsModel?> getMCExecutionDetail({
     bool? isLoading,  
     required int executionId,
