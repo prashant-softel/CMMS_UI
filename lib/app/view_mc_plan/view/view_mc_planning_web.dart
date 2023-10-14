@@ -275,8 +275,8 @@ class _ViewMcPlaningWebState extends State<ViewMcPlaningWeb> {
                                             Spacer(),
                                             GestureDetector(
                                               onTap: () {
-                                                Get.dialog(
-                                                    SetEquipmentDialog());
+                                                // Get.dialog(
+                                                //     SetEquipmentDialog());
                                               },
                                               // color: ColorValues.appDarkBlueColor,
                                               // onTap: () {

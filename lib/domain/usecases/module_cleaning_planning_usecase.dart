@@ -32,6 +32,17 @@ class ModuleCleaningPlanningUsecase {
         createMcPlans,
         isLoading,
       );
+
+   Future<Map<String, dynamic>> updateMcPlan({
+    updateMcModelJsonString,
+    bool? isLoading,
+  }) async =>
+      await repository.updateMcPlan(
+        updateMcModelJsonString,
+        isLoading,
+      );
+
+
   Future<List<InventoryCategoryModel?>?> getInventoryCategoryList({
     String? auth,
     int? facilityId,

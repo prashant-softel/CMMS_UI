@@ -8,7 +8,13 @@ import '../theme/dimens.dart';
 import '../theme/styles.dart';
 
 class SetEquipmentDialog extends GetView {
-  SetEquipmentDialog();
+  int? planId;
+  int? facilityId;
+  int? noOfCleaningDays;
+  int? frequencyId;
+  int? assignedToId;
+
+  SetEquipmentDialog({required this.planId, required this.facilityId, required this.noOfCleaningDays, required this.frequencyId, required this.assignedToId });
 
   final ModuleCleaningPlanningController controller = Get.find();
 
@@ -218,7 +224,7 @@ class SetEquipmentDialog extends GetView {
                   backgroundColor: ColorValues.greenColor,
                   text: 'Submit',
                   onPressed: () {
-                    controller.createMcPlan();
+                    controller.updateMcPlan();
                   },
                 ),
               ),

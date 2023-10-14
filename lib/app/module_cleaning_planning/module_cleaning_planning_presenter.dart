@@ -30,6 +30,16 @@ class ModuleCleaningPlanningPresenter {
     );
   }
 
+  Future<Map<String, dynamic>?> updateMcPlan({
+    updateMcModelJsonString,
+    required bool isLoading,
+  }) async {
+    return moduleCleaningPlanningUsecase.updateMcPlan(
+      updateMcModelJsonString: updateMcModelJsonString,
+      isLoading: isLoading,
+    );
+  }
+
   Future<List<EquipmentListModel>> getEquipmentModelList({
     required bool isLoading,
     required int? facilityId,
