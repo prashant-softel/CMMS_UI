@@ -24,12 +24,16 @@ class ModuleCleaningPlanningController extends GetxController {
   Rx<List<List<Map<String, String>>>> rowItem =
       Rx<List<List<Map<String, String>>>>([]);
   RxList<EmployeeModel?> assignedToList = <EmployeeModel>[].obs;
+  RxList<Schedules?> schedules = <Schedules>[].obs;
+
   Rx<bool> isAssignedToSelected = true.obs;
   Rx<String> selectedAssignedTo = ''.obs;
   int selectedAssignedToId = 0;
   bool openStartDatePicker = false;
   var startDateTc = TextEditingController();
-  var mcTitelCtrlr = TextEditingController();
+  // var mcTitelCtrlr = TextEditingController();
+  TextEditingController mcTitelCtrlr = TextEditingController();
+
   var durationInDayCtrlr = TextEditingController();
   RxList<McPalningDetailsModel?>? getMcDetailsByIDModelList =
       <McPalningDetailsModel?>[].obs;
@@ -70,15 +74,15 @@ class ModuleCleaningPlanningController extends GetxController {
   //   TypeModel(name: 'Day 2', id: "2"),
   //   TypeModel(name: 'Day 3', id: "3"),
   // ];
-  void addRowItem() {
-    rowItem.value.add([
-      {"key": "day", "value": ''},
-      {"key": "noOfInverters", "value": ''},
-      {'key': "noOfSMBs", "value": ''},
-      {'key': "noOfModules", "value": ''},
-      {'key': "type", "value": 'Please Select'},
-    ]);
-  }
+  // void addRowItem() {
+  //   rowItem.value.add([
+  //     {"key": "day", "value": ''},
+  //     {"key": "noOfInverters", "value": ''},
+  //     {'key': "noOfSMBs", "value": ''},
+  //     {'key': "noOfModules", "value": ''},
+  //     {'key': "type", "value": 'Please Select'},
+  //   ]);
+  // }
 
   @override
   void onInit() async {
@@ -217,7 +221,23 @@ class ModuleCleaningPlanningController extends GetxController {
 
     if (_mcPlanDetails != null) {
       mcPlanDetailsModel.value = _mcPlanDetails;
-      mcTitelCtrlr.text = getMcDetailsByIDModel.value?.title ?? "";
+      mcTitelCtrlr.text = mcPlanDetailsModel.value?.title ?? "";
+      selectedfrequency.value = mcPlanDetailsModel.value?.frequency ?? '';
+      startDateTc.text = mcPlanDetailsModel.value?.startDate ?? '';
+      // durationInDayCtrlr.text = mcPlanDetailsModel.value.es'
+
+      rowItem.value = [];
+      schedules.value = _mcPlanDetails.schedules;
+      _mcPlanDetails.schedules.forEach((element) {
+        rowItem.value.add([
+          {"key": "day", "value": '${element.cleaningDay}'},
+          {"key": "noOfInverters", "value": '${element.invs}'},
+          {'key': "noOfSMBs", "value": '${element.smbs}'},
+          {'key': "noOfModules", "value": '${element.scheduledModules}'},
+          {'key': "type", "value": 'Please Select'},
+        ]);
+      });
+
       // scheduleId =
       //     listSchedules!.map((element) => element?.scheduleId).toList();
       // print('ScheduleId: ${scheduleId}');
