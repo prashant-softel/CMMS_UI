@@ -621,10 +621,10 @@ class AddModuleCleaningExecutionContentWeb extends GetView<AddModuleCleaningExec
                                                                                                             color: ColorValues.appDarkBlueColor,
                                                                                                             icon: Icons.category,
                                                                                                             message: 'Equipments',
-                                                                                                          ),
-                                                                                                        ],
-                                                                                                  )
-                                                                                                  : Text(mapData['key'] ?? ''),
+                                                 ),
+                                               ],
+                                                )
+                                                  : Text(mapData['key'] ?? ''),
                                                     );
                                                   }).toList(),
                                                 );
@@ -666,8 +666,9 @@ class AddModuleCleaningExecutionContentWeb extends GetView<AddModuleCleaningExec
                                           SizedBox(
                                             width: 20,
                                           ),
-                                          controller.data['status'] == "Scheduled"
-                                              ? Container(
+                                          // controller.data['status'] == "Scheduled"
+                                          //     ? 
+                                              Container(
                                                   height: 28,
                                                   child: CustomElevatedButton(
                                                     backgroundColor: ColorValues.addNewColor,
@@ -676,25 +677,25 @@ class AddModuleCleaningExecutionContentWeb extends GetView<AddModuleCleaningExec
                                                       controller.startMCExecutionButton();
                                                     },
                                                   ),
-                                                )
-                                              : Container(),
+                                                ),
+                                              // : Container(),
 
-                                          SizedBox(
-                                            width: 20,
-                                          ),
+                                         Dimens.boxWidth10,
 
-                                          controller.data['status'] == "Abandoned"
-                                              ? Container(
+                                          // controller.data['status'] == "Abandoned"
+                                          //     ? 
+                                              Container(
                                                   height: 28,
                                                   child: CustomElevatedButton(
                                                     backgroundColor: ColorValues.cancelColor,
                                                     text: "End",
                                                     onPressed: () {
-                                                      Get.dialog(EndMCExecutionDialog());
+                                                      // Get.dialog(EndMCExecutionDialog());
+                                                      controller.endMcExecutionButton();
                                                     },
                                                   ),
-                                                )
-                                              : Dimens.box0,
+                                                ),
+                                              // : Dimens.box0,
                                           SizedBox(
                                             width: 10,
                                           ),

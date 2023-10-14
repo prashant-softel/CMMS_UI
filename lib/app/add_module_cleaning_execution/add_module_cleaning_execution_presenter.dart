@@ -22,6 +22,15 @@ class AddModuleCleaningExecutionPresenter {
         isLoading: isLoading ?? false,
       );
 
+  Future<void> endMcExecutionButton({
+    int? executionId,
+    bool? isLoading,
+  }) async =>
+      await addModuleCleaningExecutionUsecase.endMcExecutionButton(
+        executionId: executionId,
+        isLoading: isLoading ?? false,
+      );
+
    Future<Map<String, dynamic>?> abandonAllExecutionButton({
    abandoneJsonString,
   required bool isLoading,

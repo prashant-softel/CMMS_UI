@@ -874,6 +874,17 @@ class DataRepository extends DomainRepository {
         isLoading: isLoading ?? false,
       );
 
+  Future<ResponseModel> endMcExecutionButton({
+    required String auth,
+    int? executionId,
+    bool? isLoading,
+  }) async =>
+      await connectHelper.endMcExecutionButton(
+        auth: auth,
+        executionId: executionId,
+        isLoading: isLoading ?? false,
+      );
+
   Future<ResponseModel> startMCExecutionScheduleButton({
     required String auth,
     int? scheduleId,

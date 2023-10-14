@@ -27,6 +27,17 @@ class AddModuleCleaningExecutionUsecase {
     );
   }
 
+  Future<void> endMcExecutionButton({
+   
+    int? executionId,
+    bool? isLoading,
+  }) async {
+    await _repository.endMcExecutionButton(
+      executionId,
+      isLoading,
+    );
+  }
+
    Future<Map<String, dynamic>> abandonAllExecutionButton({
     abandoneJsonString,
     bool? isLoading,
