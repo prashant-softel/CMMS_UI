@@ -15,19 +15,17 @@ class AddModuleCleaningExecutionUsecase {
     return await _repository.generateToken();
   }
 
-   
   Future<void> startMCExecutionButton({
-   
-    int? planId,
+    int? executionId,
     bool? isLoading,
   }) async {
     await _repository.startMCExecutionButton(
-      planId,
+      executionId,
       isLoading,
     );
   }
 
-   Future<Map<String, dynamic>> abandonAllExecutionButton({
+  Future<Map<String, dynamic>> abandonAllExecutionButton({
     abandoneJsonString,
     bool? isLoading,
   }) async =>
@@ -36,9 +34,7 @@ class AddModuleCleaningExecutionUsecase {
         isLoading,
       );
 
-
   Future<void> startMCExecutionScheduleButton({
-   
     int? scheduleId,
     bool? isLoading,
   }) async {
@@ -49,7 +45,6 @@ class AddModuleCleaningExecutionUsecase {
   }
 
   Future<void> endMCScheduleExecutionButton({
-   
     int? scheduleId,
     bool? isLoading,
   }) async {
@@ -59,7 +54,7 @@ class AddModuleCleaningExecutionUsecase {
     );
   }
 
-   Future<Map<String, dynamic>> endMCExecutionButton({
+  Future<Map<String, dynamic>> endMCExecutionButton({
     endJsonString,
     bool? isLoading,
   }) async =>
@@ -68,15 +63,13 @@ class AddModuleCleaningExecutionUsecase {
         isLoading,
       );
 
-   Future<List<EquipmentListModel>> getEquipmentModelList({
+  Future<List<EquipmentListModel>> getEquipmentModelList({
     required bool isLoading,
     required int? facilityId,
-    
   }) async {
     return _repository.getEquipmentModelList(
       isLoading: isLoading,
       facilityId: facilityId,
-      
     );
   }
 
@@ -88,16 +81,11 @@ class AddModuleCleaningExecutionUsecase {
         abandoneScheduleJsonString,
         isLoading,
       );
-   Future<List<TypePermitModel?>?> getTypePermitList(
-    bool? isLoading,
-    int? facility_id
-    ) async =>
-      await _repository.getTypePermitList(
-        isLoading,
-        facility_id
-        );
+  Future<List<TypePermitModel?>?> getTypePermitList(
+          bool? isLoading, int? facility_id) async =>
+      await _repository.getTypePermitList(isLoading, facility_id);
 
-   Future<List<InventoryCategoryModel?>?> getInventoryCategoryList({
+  Future<List<InventoryCategoryModel?>?> getInventoryCategoryList({
     String? auth,
     int? facilityId,
     bool? isLoading,
@@ -108,7 +96,7 @@ class AddModuleCleaningExecutionUsecase {
         isLoading,
       );
 
-   Future<Map<String, dynamic>> updateMCScheduleExecution({
+  Future<Map<String, dynamic>> updateMCScheduleExecution({
     updateMCScheduleExecutionJsonString,
     bool? isLoading,
   }) async =>
@@ -118,7 +106,7 @@ class AddModuleCleaningExecutionUsecase {
       );
 
   Future<EndMCExecutionDetailsModel?> getMCExecutionDetail({
-    bool? isLoading,  
+    bool? isLoading,
     required int executionId,
   }) async =>
       await _repository.getMCExecutionDetail(
@@ -126,11 +114,10 @@ class AddModuleCleaningExecutionUsecase {
         isLoading: isLoading ?? false,
       );
 
-
   Future<List<FacilityModel?>?> getFacilityList() async =>
       await _repository.getFacilityList(true);
 
-   Future<List<FacilityModel?>?> getFacilityPlantList() async =>
+  Future<List<FacilityModel?>?> getFacilityPlantList() async =>
       await _repository.getFacilityList(true);
 
   Future<String?> getUserAccessList() async =>

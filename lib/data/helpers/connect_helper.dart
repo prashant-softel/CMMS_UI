@@ -922,7 +922,6 @@ class ConnectHelper {
     return responseModel;
   }
 
-
   Future<ResponseModel> mcExecutionApprovedButton({
     required String auth,
     mcExecutionApproveJsonString,
@@ -947,8 +946,7 @@ class ConnectHelper {
     return responseModel;
   }
 
-
-   Future<ResponseModel> rejectMcExecutionApprovedButton({
+  Future<ResponseModel> rejectMcExecutionApprovedButton({
     required String auth,
     rejectMcExecutionApproveJsonString,
     bool? isLoading,
@@ -971,7 +969,6 @@ class ConnectHelper {
 
     return responseModel;
   }
-
 
   Future<ResponseModel> mcPlanRejectButton({
     required String auth,
@@ -1399,11 +1396,11 @@ class ConnectHelper {
   Future<ResponseModel> startMCExecutionButton({
     required String auth,
     bool? isLoading,
-    int? planId,
+    int? executionId,
   }) async {
     // facilityId = 45;
     var responseModel = await apiWrapper.makeRequest(
-      'MC/StartMCExecution?planId=$planId',
+      'MC/StartMCExecution?executionId=$executionId',
       Request.put,
       // {'comment': "$comment", 'id': id},
       null,
@@ -1450,8 +1447,7 @@ class ConnectHelper {
     return responseModel;
   }
 
-
-   Future<ResponseModel> endMCScheduleExecutionButton({
+  Future<ResponseModel> endMCScheduleExecutionButton({
     required String auth,
     bool? isLoading,
     int? scheduleId,
@@ -1477,7 +1473,6 @@ class ConnectHelper {
 
     return responseModel;
   }
-
 
   Future<ResponseModel> permitRejectButton(
       {required String auth,
@@ -2491,8 +2486,7 @@ class ConnectHelper {
     return responseModel;
   }
 
-
-   Future<ResponseModel> updateMcPlan({
+  Future<ResponseModel> updateMcPlan({
     required String auth,
     updateMcModelJsonString,
     bool? isLoading,
