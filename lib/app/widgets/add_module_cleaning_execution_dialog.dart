@@ -94,7 +94,7 @@ class AddModuleCleaningExecutionDialog extends GetView {
                 Dimens.boxWidth20,
                 GoodsOrderTextField(
                   keyboardType: TextInputType.number,
-                  // inputFormatters: <TextInputFormatter>[FilteringTextInputFormatter.digitsOnly],
+                  inputFormatters: <TextInputFormatter>[FilteringTextInputFormatter.digitsOnly],
                   textController: controller.waterUsedCtrlrWeb,
                 ),
               ],
@@ -323,7 +323,11 @@ class AddModuleCleaningExecutionDialog extends GetView {
                   text: 'Submit',
                   onPressed: () {
                     // controller.createMcPlan();
-                    controller.updateMCScheduleExecution(scheduleId: scheduleId, cleaningDay: cleaningDay, waterUsed: waterUsed);
+                    controller.updateMCScheduleExecution(
+                        scheduleId: scheduleId,
+                        cleaningDay: cleaningDay,
+                        waterUsed: int.tryParse('${controller.waterUsedCtrlrWeb.text}'),
+                        remark: '${controller.remarkCtrlrWeb.text}');
                     Get.back();
                   },
                 ),
