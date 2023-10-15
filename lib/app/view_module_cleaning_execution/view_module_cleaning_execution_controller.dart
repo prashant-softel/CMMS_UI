@@ -28,20 +28,15 @@ class viewModuleCleaningExecutionController extends GetxController {
 
   RxList<EquipmentListModel?> equipmentList = <EquipmentListModel?>[].obs;
 
+  Schedules? selectedSchedule;
 
-
-
- 
-  Rx<List<List<Map<String, String>>>> rowItem =
-      Rx<List<List<Map<String, String>>>>([]);
+  Rx<List<List<Map<String, String>>>> rowItem = Rx<List<List<Map<String, String>>>>([]);
   List<Escalation> days = [];
   Map<String, RoleModel> dropdownMapperData = {};
   Map<String, PaiedModel> paiddropdownMapperData = {};
 
   TextEditingController approveCommentTextFieldCtrlr = TextEditingController();
   TextEditingController rejectCommentTextFieldCtrlr = TextEditingController();
-
-
 
   void addRowItem() {
     rowItem.value.add([
@@ -55,7 +50,6 @@ class viewModuleCleaningExecutionController extends GetxController {
       {"key": "Start Date", "value": ''},
       {'key': "End Date", "value": ''},
       {'key': "Remark", "value": ''},
-
     ]);
   }
 
@@ -65,8 +59,6 @@ class viewModuleCleaningExecutionController extends GetxController {
   int? selectedModuleListId = 0;
   int type = 1;
 
- 
-
   RxList<FacilityModel?> facilityList = <FacilityModel>[].obs;
   Rx<bool> isFacilitySelected = true.obs;
   PaginationController paginationController = PaginationController(
@@ -74,31 +66,21 @@ class viewModuleCleaningExecutionController extends GetxController {
     rowsPerPage: 10,
   );
 
-///MC Execution History
+  ///MC Execution History
   RxList<HistoryModel?>? historyList = <HistoryModel?>[].obs;
 
-///Schedule List
+  ///Schedule List
   RxList<Schedules?>? listSchedules = <Schedules?>[].obs;
   RxList<EquipmentsList?>? listEquipmentsList = <EquipmentsList?>[].obs;
 
+  ///Mc Execution details
+  Rx<EndMCExecutionDetailsModel?> mcExecutionDetailsModel = EndMCExecutionDetailsModel().obs;
+  RxList<EndMCExecutionDetailsModel?>? mcExecutionDetailsList = <EndMCExecutionDetailsModel?>[].obs;
 
-
-   ///Mc Execution details
-  Rx<EndMCExecutionDetailsModel?> mcExecutionDetailsModel =
-      EndMCExecutionDetailsModel().obs;
-  RxList<EndMCExecutionDetailsModel?>? mcExecutionDetailsList =
-      <EndMCExecutionDetailsModel?>[].obs;
-
-
-    ///Date Time
+  ///Date Time
   var startedAtDateTimeCtrlrWeb = TextEditingController();
   var plannedAtDateTimeCtrlrWeb = TextEditingController();
 
-
-
-
-
- 
   BehaviorSubject<int> _facilityId = BehaviorSubject.seeded(0);
   Stream<int> get facilityId$ => _facilityId.stream;
   int get facilityId1 => _facilityId.value;
@@ -123,11 +105,11 @@ class viewModuleCleaningExecutionController extends GetxController {
       // });
     });
     await getMCExecutionHistory(id: id!);
-     Future.delayed(Duration(seconds: 1), () {
+    Future.delayed(Duration(seconds: 1), () {
       getEquipmentModelList(facilityId, true);
     });
 
-     if (id != null) {
+    if (id != null) {
       Future.delayed(Duration(seconds: 1), () {
         getMCExecutionDetail(executionId: id!);
       });
@@ -136,12 +118,11 @@ class viewModuleCleaningExecutionController extends GetxController {
     super.onInit();
   }
 
-   Future<void> getMCExecutionDetail({required int executionId}) async {
+  Future<void> getMCExecutionDetail({required int executionId}) async {
     // newPermitDetails!.value = <NewPermitListModel>[];
     mcExecutionDetailsList?.value = <EndMCExecutionDetailsModel>[];
 
-    final _mcExecutionDetails = await viewModuleCleaningExecutionPresenter
-        .getMCExecutionDetail(executionId: executionId);
+    final _mcExecutionDetails = await viewModuleCleaningExecutionPresenter.getMCExecutionDetail(executionId: executionId);
     print('View MC Execution Detail:$_mcExecutionDetails');
 
     if (_mcExecutionDetails != null) {
@@ -156,16 +137,26 @@ class viewModuleCleaningExecutionController extends GetxController {
   Future<void> getEquipmentModelList(int facilityId, bool isLoading) async {
     equipmentList.value = <EquipmentListModel>[];
 
-    final list = await viewModuleCleaningExecutionPresenter
-        .getEquipmentModelList(isLoading: isLoading, facilityId: facilityId);
+    final list = await viewModuleCleaningExecutionPresenter.getEquipmentModelList(isLoading: isLoading, facilityId: facilityId);
     // print('incidentReportFacilityId$facilityId');
     // print('Incident Report List:$list');
+    var selectedEquipment = selectedSchedule?.equipments ?? [];
     for (var equipment_list in list) {
+      equipment_list.smbs.map((e) {
+        SMBS smbs = e;
+        EquipmentsList? eqp = selectedEquipment.firstWhere((element) {
+          return element?.id == e.smbId;
+        });
+        if (eqp != null) {
+          e.isCleanedSmbCheck = eqp.status == 407 ? true : false;
+        }
+        // e.isCleanedSmbCheck =
+      });
       equipmentList.add(equipment_list);
     }
 
     if (list != null) {
-      equipmentList.value = list;
+      // equipmentList.value = list;
       // filteredData.value = incidentReportList.value;
       // print('Filtered data:${filteredData.value}');
 
@@ -199,13 +190,11 @@ class viewModuleCleaningExecutionController extends GetxController {
     {
       String _comment = approveCommentTextFieldCtrlr.text.trim();
 
-      CommentModel commentMCExecutionAproveModel =
-          CommentModel(id: id, comment: _comment);
+      CommentModel commentMCExecutionAproveModel = CommentModel(id: id, comment: _comment);
 
       var mcExecutionApproveJsonString = commentMCExecutionAproveModel.toJson();
 
-      Map<String, dynamic>? response =
-          await viewModuleCleaningExecutionPresenter.mcExecutionApprovedButton(
+      Map<String, dynamic>? response = await viewModuleCleaningExecutionPresenter.mcExecutionApprovedButton(
         mcExecutionApproveJsonString: mcExecutionApproveJsonString,
         isLoading: true,
       );
@@ -213,20 +202,17 @@ class viewModuleCleaningExecutionController extends GetxController {
         //getCalibrationList(facilityId, true);
       }
     }
-
   }
 
   void rejectMcExecutionApprovedButton({int? id}) async {
     {
       String _comment = rejectCommentTextFieldCtrlr.text.trim();
 
-      CommentModel commentMCExecutionAproveModel =
-          CommentModel(id: id, comment: _comment);
+      CommentModel commentMCExecutionAproveModel = CommentModel(id: id, comment: _comment);
 
       var rejectMcExecutionApproveJsonString = commentMCExecutionAproveModel.toJson();
 
-      Map<String, dynamic>? response =
-          await viewModuleCleaningExecutionPresenter.rejectMcExecutionApprovedButton(
+      Map<String, dynamic>? response = await viewModuleCleaningExecutionPresenter.rejectMcExecutionApprovedButton(
         rejectMcExecutionApproveJsonString: rejectMcExecutionApproveJsonString,
         isLoading: true,
       );
@@ -236,8 +222,7 @@ class viewModuleCleaningExecutionController extends GetxController {
     }
   }
 
-
-    Future<void> getMCExecutionHistory({required int id}) async {
+  Future<void> getMCExecutionHistory({required int id}) async {
     /// TODO: CHANGE THESE VALUES
     int moduleType = 82;
     // int tempModuleType = 21;
@@ -254,7 +239,6 @@ class viewModuleCleaningExecutionController extends GetxController {
     update(["historyList"]);
   }
 
- 
   void onValueChanged(dynamic list, dynamic value) {
     print('Valuesd:${value}');
     switch (list.runtimeType) {
@@ -272,7 +256,6 @@ class viewModuleCleaningExecutionController extends GetxController {
           print('Module List Id: $selectedModuleListId');
         }
         break;
-     
 
       default:
         {
@@ -282,8 +265,6 @@ class viewModuleCleaningExecutionController extends GetxController {
     }
   }
 
- 
- 
   // Future<void> editIncidentReport({int? id}) async {
   //   Get.toNamed(Routes.addIncidentReportContentWeb, arguments: id);
   //   print('Argument$id');
