@@ -18,6 +18,7 @@ class viewModuleCleaningExecutionDialog extends GetView {
   // int? cleaningDay;
   int? waterUsed;
   Schedules schedule;
+  Map mappedData;
   // int? day;
 
   viewModuleCleaningExecutionDialog(
@@ -25,7 +26,8 @@ class viewModuleCleaningExecutionDialog extends GetView {
       // required this.scheduleId,
       // required this.cleaningDay,
       required this.waterUsed,
-      required this.schedule
+      required this.schedule,
+      required this.mappedData
       // required this.day
       });
 
@@ -151,14 +153,22 @@ class viewModuleCleaningExecutionDialog extends GetView {
                         ),
                         Expanded(
                           flex: 1,
-                          child: Text("Modules", style: TextStyle(color: Color(0xff31576D))),
+                          child: Text("Modules",
+                              style: TextStyle(color: Color(0xff31576D))),
                         ),
                         Expanded(
                           flex: 1,
-                          child: Text("Cleaned", style: TextStyle(color: Color(0xff31576D))),
+                          child: Text("Cleaned",
+                              style: TextStyle(color: Color(0xff31576D))),
                         ),
-                        Expanded(flex: 1, child: Text("Abandoned", style: TextStyle(color: Color(0xff31576D)))),
-                        Expanded(flex: 1, child: Text("Days", style: TextStyle(color: Color(0xff31576D)))),
+                        Expanded(
+                            flex: 1,
+                            child: Text("Abandoned",
+                                style: TextStyle(color: Color(0xff31576D)))),
+                        Expanded(
+                            flex: 1,
+                            child: Text("Days",
+                                style: TextStyle(color: Color(0xff31576D)))),
 
                         // Expanded(
                         //     child: Text("Day",
@@ -186,9 +196,13 @@ class viewModuleCleaningExecutionDialog extends GetView {
                                       children: [
                                         Text(
                                           "${e?.invName}",
-                                          style: TextStyle(fontSize: 12.0, fontWeight: FontWeight.bold),
+                                          style: TextStyle(
+                                              fontSize: 12.0,
+                                              fontWeight: FontWeight.bold),
                                         ),
-                                        Icon(e!.isExpanded ? Icons.arrow_drop_down : Icons.arrow_drop_up)
+                                        Icon(e!.isExpanded
+                                            ? Icons.arrow_drop_down
+                                            : Icons.arrow_drop_up)
                                       ],
                                     ),
                                   ),
@@ -197,7 +211,9 @@ class viewModuleCleaningExecutionDialog extends GetView {
                                   flex: 1,
                                   child: Text(
                                     "${e.moduleQuantity}",
-                                    style: TextStyle(fontSize: 12.0, fontWeight: FontWeight.bold),
+                                    style: TextStyle(
+                                        fontSize: 12.0,
+                                        fontWeight: FontWeight.bold),
                                   ),
                                 ),
                                 Expanded(
@@ -208,21 +224,9 @@ class viewModuleCleaningExecutionDialog extends GetView {
                                       value: e.isCleanedChecked,
                                       onChanged: (bool? value) {
                                         // controller.toggleItemSelection(index);
-                                        setState(
-                                          () {
-                                            e.isCleanedChecked = !e.isCleanedChecked!;
-                                            if (e.isCleanedChecked!) {
-                                              e.isAbandonedChecked = false;
-                                            }
-                                            e.smbs.forEach((smbItem) {
-                                              smbItem.isCleanedSmbCheck = e.isCleanedChecked;
-                                              if (e.isCleanedChecked!) {
-                                                smbItem.isAbandonSmbCheck = false;
-                                              }
-                                            });
-                                          },
-                                        );
-                                        print('Element Cancel:${e.isCleanedChecked}');
+
+                                        print(
+                                            'Element Cancel:${e.isCleanedChecked}');
                                       },
                                     ),
                                   ),
@@ -235,21 +239,9 @@ class viewModuleCleaningExecutionDialog extends GetView {
                                       value: e.isAbandonedChecked,
                                       onChanged: (bool? value) {
                                         // controller.toggleItemSelection(index);
-                                        setState(
-                                          () {
-                                            e.isAbandonedChecked = !e.isAbandonedChecked!;
-                                            if (e.isAbandonedChecked!) {
-                                              e.isCleanedChecked = false;
-                                            }
-                                            e.smbs.forEach((smbItem) {
-                                              smbItem.isAbandonSmbCheck = e.isAbandonedChecked;
-                                              if (e.isAbandonedChecked!) {
-                                                smbItem.isCleanedSmbCheck = false;
-                                              }
-                                            });
-                                          },
-                                        );
-                                        print('Element Cancel:${e.isAbandonedChecked}');
+
+                                        print(
+                                            'Element Cancel:${e.isAbandonedChecked}');
                                       },
                                     ),
                                   ),
@@ -257,7 +249,7 @@ class viewModuleCleaningExecutionDialog extends GetView {
                                 Expanded(flex: 1, child: Container())
                               ],
                             ),
-                            e.isExpanded
+                            true || e.isExpanded
                                 ? Column(
                                     children: []..addAll(
                                         e.smbs.map(
@@ -265,26 +257,29 @@ class viewModuleCleaningExecutionDialog extends GetView {
                                             return Row(
                                               // mainAxisAlignment: MainAxisAlignment.center,
                                               children: [
-                                                Expanded(flex: 2, child: Text(("${smbItems.smbName}"))),
-                                                Expanded(flex: 1, child: Text("${smbItems.moduleQuantity}")),
+                                                Expanded(
+                                                    flex: 2,
+                                                    child: Text(
+                                                        ("${smbItems.smbName}"))),
+                                                Expanded(
+                                                    flex: 1,
+                                                    child: Text(
+                                                        "${smbItems.moduleQuantity}")),
                                                 Expanded(
                                                   flex: 1,
                                                   child: Container(
-                                                    alignment: Alignment.centerLeft,
+                                                    alignment:
+                                                        Alignment.centerLeft,
                                                     child: Checkbox(
-                                                      value: smbItems.isCleanedSmbCheck,
+                                                      value: mappedData[smbItems
+                                                                  .smbId]
+                                                              ?.isCleanedSmbCheck ??
+                                                          false,
                                                       onChanged: (bool? value) {
                                                         // controller.toggleItemSelection(index);
-                                                        setState(
-                                                          () {
-                                                            smbItems.isCleanedSmbCheck = !smbItems.isCleanedSmbCheck!;
-                                                            if (smbItems.isCleanedSmbCheck!) {
-                                                              smbItems.isAbandonSmbCheck = false;
-                                                            }
-                                                          },
-                                                        );
 
-                                                        print('Element Cancel:${e.isCleanedChecked}');
+                                                        print(
+                                                            'Element Cancel:${e.isCleanedChecked}');
                                                       },
                                                     ),
                                                   ),
@@ -292,26 +287,26 @@ class viewModuleCleaningExecutionDialog extends GetView {
                                                 Expanded(
                                                   flex: 1,
                                                   child: Container(
-                                                    alignment: Alignment.centerLeft,
+                                                    alignment:
+                                                        Alignment.centerLeft,
                                                     child: Checkbox(
-                                                      value: smbItems.isAbandonSmbCheck,
+                                                      value: mappedData[smbItems
+                                                                  .smbId]
+                                                              ?.isAbandonSmbCheck ??
+                                                          false,
                                                       onChanged: (bool? value) {
                                                         // controller.toggleItemSelection(index);
-                                                        setState(
-                                                          () {
-                                                            smbItems.isAbandonSmbCheck = !smbItems.isAbandonSmbCheck!;
-                                                            if (smbItems.isAbandonSmbCheck!) {
-                                                              smbItems.isCleanedSmbCheck = false;
-                                                            }
-                                                          },
-                                                        );
 
-                                                        print('Element Cancel:${smbItems.isAbandonSmbCheck}');
+                                                        print(
+                                                            'Element Cancel:${smbItems.isAbandonSmbCheck}');
                                                       },
                                                     ),
                                                   ),
                                                 ),
-                                                Expanded(flex: 1, child: Text('Day 1 (15/06/2023)'))
+                                                Expanded(
+                                                    flex: 1,
+                                                    child: Text(
+                                                        'Day 1 (15/06/2023)'))
                                               ],
                                             );
                                           },
