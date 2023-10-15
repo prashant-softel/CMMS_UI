@@ -34,11 +34,11 @@ class ModuleCleaningPlanningUsecase {
       );
 
   Future<Map<String, dynamic>> updateMcPlan({
-    updateMcModelJsonString,
+    updateMcPlans,
     bool? isLoading,
   }) async =>
       await repository.updateMcPlan(
-        updateMcModelJsonString,
+        updateMcPlans,
         isLoading,
       );
 

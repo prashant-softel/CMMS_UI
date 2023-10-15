@@ -147,7 +147,7 @@ class SetEquipmentDialog extends GetView {
                                       items: controller.days
                                           .map(
                                             (map) => DropdownMenuItem(
-                                              child: Text(map.name),
+                                              child: Text(map.name.toString()),
                                               value: map.id,
                                             ),
                                           )
@@ -185,8 +185,9 @@ class SetEquipmentDialog extends GetView {
                                                           .map(
                                                             (map) =>
                                                                 DropdownMenuItem(
-                                                              child: Text(
-                                                                  map.name),
+                                                              child: Text(map
+                                                                  .name
+                                                                  .toString()),
                                                               value: map.id,
                                                             ),
                                                           )

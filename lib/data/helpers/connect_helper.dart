@@ -1421,8 +1421,7 @@ class ConnectHelper {
     return responseModel;
   }
 
-
-   Future<ResponseModel> endMcExecutionButton({
+  Future<ResponseModel> endMcExecutionButton({
     required String auth,
     bool? isLoading,
     int? executionId,
@@ -1448,7 +1447,6 @@ class ConnectHelper {
 
     return responseModel;
   }
-
 
   Future<ResponseModel> startMCExecutionScheduleButton({
     required String auth,
@@ -2518,13 +2516,13 @@ class ConnectHelper {
 
   Future<ResponseModel> updateMcPlan({
     required String auth,
-    updateMcModelJsonString,
+    updateMcPlans,
     bool? isLoading,
   }) async {
     var responseModel = await apiWrapper.makeRequest(
       'MC/UpdateMCPlan',
       Request.post,
-      updateMcModelJsonString,
+      updateMcPlans,
       isLoading ?? false,
       {
         'Content-Type': 'application/json',
