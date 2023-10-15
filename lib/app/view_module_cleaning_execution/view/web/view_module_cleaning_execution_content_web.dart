@@ -388,12 +388,15 @@ class ViewModuleCleaningExecutionContentWeb extends GetView<viewModuleCleaningEx
                                                           icon: Icons.remove_red_eye_outlined,
                                                           message: 'View',
                                                           onPress: () {
-                                                            print('filteredData:${controller.listSchedules?[index]?.waterUsed}');
+                                                             var selectedSchedule = controller.listSchedules?.firstWhere((e) => "${e?.scheduleId}" == controller.listSchedules?[index]?.scheduleId.toString());
 
-                                                            // Get.dialog(viewModuleCleaningExecutionDialog(
-                                                            //   waterUsed: controller.listSchedules?[index]?.waterUsed,
-                                                            //   dataList: controller.listSchedules[index],
-                                                            // ));
+                          
+                                                            print('filteredData:${selectedSchedule!}');
+
+                                                            Get.dialog(viewModuleCleaningExecutionDialog(
+                                                              waterUsed: controller.listSchedules?[index]?.waterUsed,
+                                                              schedule: selectedSchedule!,
+                                                            ));
                                                           },
                                                         ),
                                                       ],

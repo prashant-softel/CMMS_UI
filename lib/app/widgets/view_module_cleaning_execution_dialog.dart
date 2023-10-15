@@ -4,6 +4,7 @@ import 'package:cmms/app/theme/color_values.dart';
 import 'package:cmms/app/theme/styles.dart';
 import 'package:cmms/app/view_module_cleaning_execution/view_module_cleaning_execution_controller.dart';
 import 'package:cmms/app/widgets/custom_elevated_button.dart';
+import 'package:cmms/domain/models/end_mc_execution_detail_model.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
@@ -16,21 +17,23 @@ class viewModuleCleaningExecutionDialog extends GetView {
   // int? scheduleId;
   // int? cleaningDay;
   int? waterUsed;
-  List<dynamic>? dataList;
+  Schedules schedule;
   // int? day;
 
-  viewModuleCleaningExecutionDialog({
-    // required this.scheduleId,
-    // required this.cleaningDay,
-    required this.waterUsed,
-    required this.dataList
-    // required this.day
-  });
+  viewModuleCleaningExecutionDialog(
+      {
+      // required this.scheduleId,
+      // required this.cleaningDay,
+      required this.waterUsed,
+      required this.schedule
+      // required this.day
+      });
 
   final viewModuleCleaningExecutionController controller = Get.find();
 
   @override
   Widget build(BuildContext context) {
+    controller.selectedSchedule = schedule;
     return StatefulBuilder(builder: ((context, setState) {
       return AlertDialog(
         shape: RoundedRectangleBorder(
@@ -56,9 +59,7 @@ class viewModuleCleaningExecutionDialog extends GetView {
                 SizedBox(
                   width: 5,
                 ),
-                SizedBox(
-                  width: 300,
-                  child: Text('${dataList}'))
+                // SizedBox(width: 300, child: Text('${schedule.toJson()}'))
                 // GoodsOrderTextField(
                 //   keyboardType: TextInputType.number,
                 //   // inputFormatters: <TextInputFormatter>[FilteringTextInputFormatter.digitsOnly],
@@ -264,8 +265,7 @@ class viewModuleCleaningExecutionDialog extends GetView {
                                             return Row(
                                               // mainAxisAlignment: MainAxisAlignment.center,
                                               children: [
-                                                Expanded(flex: 2, child: Text(("${smbItems.smbName}" ))),
-                                                
+                                                Expanded(flex: 2, child: Text(("${smbItems.smbName}"))),
                                                 Expanded(flex: 1, child: Text("${smbItems.moduleQuantity}")),
                                                 Expanded(
                                                   flex: 1,
