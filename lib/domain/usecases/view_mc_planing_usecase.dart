@@ -1,4 +1,5 @@
 import 'package:cmms/domain/models/end_mc_execution_detail_model.dart';
+import 'package:cmms/domain/models/equipment_list_model.dart';
 import 'package:cmms/domain/models/history_model.dart';
 import 'package:cmms/domain/models/mc_details_plan_model.dart';
 
@@ -33,6 +34,16 @@ class ViewMcPlaningUsecase {
         id,
         isLoading,
       );
+  Future<List<EquipmentListModel>> getEquipmentModelList({
+    required bool isLoading,
+    required int? facilityId,
+  }) async {
+    return repository.getEquipmentModelList(
+      isLoading: isLoading,
+      facilityId: facilityId,
+    );
+  }
+
   Future<Map<String, dynamic>> mcPlanRejectButton({
     mcRejectJsonString,
     bool? isLoading,

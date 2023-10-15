@@ -302,7 +302,7 @@ class _ModuleCleaningPlanningWebState extends State<ModuleCleaningPlanningWeb> {
                                             height:
                                                 ((controller.schedules.length) *
                                                         40) +
-                                                    150,
+                                                    200,
                                             decoration: BoxDecoration(
                                               border: Border.all(
                                                 color: ColorValues
@@ -458,16 +458,16 @@ class _ModuleCleaningPlanningWebState extends State<ModuleCleaningPlanningWeb> {
                                                     ],
                                                   ),
                                                 ),
-                                                Column(
-                                                    children: []..addAll(
-                                                          controller
-                                                              .rowItem.value
-                                                              .map((e) {
-                                                        return Text(
-                                                            jsonEncode(e));
-                                                      }))),
-                                                Text(jsonEncode(controller
-                                                    .typedropdownMapperData)),
+                                                // Column(
+                                                //     children: []..addAll(
+                                                //           controller
+                                                //               .rowItem.value
+                                                //               .map((e) {
+                                                //         return Text(
+                                                //             jsonEncode(e));
+                                                //       }))),
+                                                // Text(jsonEncode(controller
+                                                //     .typedropdownMapperData)),
                                                 Expanded(
                                                   child: DataTable2(
                                                     border: TableBorder.all(

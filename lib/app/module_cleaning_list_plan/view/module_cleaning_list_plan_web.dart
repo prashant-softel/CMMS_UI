@@ -525,11 +525,16 @@ class ModuleCleaningPlanListDataSource extends DataTableSource {
                                 : ColorValues.addNewColor,
                             borderRadius: BorderRadius.circular(4),
                           ),
-                          child: Text(
-                            '${ModuleCleaningPlanningListDetails?.status_short}',
-                            style: Styles.white10.copyWith(
-                              color: Colors.white,
-                            ),
+                          child: Row(
+                            children: [
+                              Text(
+                                '${ModuleCleaningPlanningListDetails?.status_short}'
+                                '${ModuleCleaningPlanningListDetails?.status}',
+                                style: Styles.white10.copyWith(
+                                  color: Colors.white,
+                                ),
+                              ),
+                            ],
                           ),
                         ),
                       ),
@@ -559,7 +564,11 @@ class ModuleCleaningPlanListDataSource extends DataTableSource {
                                 ModuleCleaningPlanningListDetails?.planId ?? 0;
                             if (id != 0) {
                               Get.toNamed(Routes.moduleCleaningPlanning,
-                                  arguments: {"id": id, "planId":  ModuleCleaningPlanningListDetails?.planId});
+                                  arguments: {
+                                    "id": id,
+                                    "planId": ModuleCleaningPlanningListDetails
+                                        ?.planId
+                                  });
                             }
                           },
                         ),

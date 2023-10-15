@@ -551,13 +551,15 @@ class AddModuleCleaningExecutionContentWeb
                                                                                                   color: ColorValues.whiteColor,
                                                                                                   borderRadius: BorderRadius.circular(5),
                                                                                                 ),
-                                                                                                child: LoginCustomTextfield(
-                                                                                                  width: MediaQuery.of(context).size.width / 2,
-                                                                                                  maxLine: 1,
-                                                                                                  textController: new TextEditingController(text: mapData["value"] ?? ''),
-                                                                                                  onChanged: (txt) {
-                                                                                                    mapData["value"] = txt;
-                                                                                                  },
+                                                                                                child: IgnorePointer(
+                                                                                                  child: LoginCustomTextfield(
+                                                                                                    width: MediaQuery.of(context).size.width / 2,
+                                                                                                    maxLine: 1,
+                                                                                                    textController: new TextEditingController(text: mapData["value"] ?? ''),
+                                                                                                    onChanged: (txt) {
+                                                                                                      mapData["value"] = txt;
+                                                                                                    },
+                                                                                                  ),
                                                                                                 )),
                                                                                           ],
                                                                                         )
@@ -582,13 +584,15 @@ class AddModuleCleaningExecutionContentWeb
                                                                                                       color: ColorValues.whiteColor,
                                                                                                       borderRadius: BorderRadius.circular(5),
                                                                                                     ),
-                                                                                                    child: LoginCustomTextfield(
-                                                                                                      width: MediaQuery.of(context).size.width / 2,
-                                                                                                      maxLine: 1,
-                                                                                                      textController: new TextEditingController(text: mapData["value"] ?? ''),
-                                                                                                      onChanged: (txt) {
-                                                                                                        mapData["value"] = txt;
-                                                                                                      },
+                                                                                                    child: IgnorePointer(
+                                                                                                      child: LoginCustomTextfield(
+                                                                                                        width: MediaQuery.of(context).size.width / 2,
+                                                                                                        maxLine: 1,
+                                                                                                        textController: new TextEditingController(text: mapData["value"] ?? ''),
+                                                                                                        onChanged: (txt) {
+                                                                                                          mapData["value"] = txt;
+                                                                                                        },
+                                                                                                      ),
                                                                                                     )),
                                                                                               ],
                                                                                             )

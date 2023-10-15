@@ -6,6 +6,7 @@ import 'package:cmms/app/widgets/mc_approve_dialog.dart';
 import 'package:cmms/app/widgets/mc_reject_dialog.dart';
 import 'package:cmms/app/widgets/set_equipments_dialog.dart';
 import 'package:cmms/app/widgets/stock_dropdown.dart';
+import 'package:cmms/app/widgets/view_set_eqp_dialog.dart';
 import 'package:data_table_2/data_table_2.dart';
 
 import 'package:flutter/material.dart';
@@ -76,7 +77,7 @@ class _ViewMcPlaningWebState extends State<ViewMcPlaningWeb> {
                     child: Column(
                       children: [
                         Container(
-                          height: Get.height,
+                          // height: Get.height,
                           child: Card(
                             margin: EdgeInsets.all(20),
                             color: Color.fromARGB(255, 245, 248, 250),
@@ -242,10 +243,8 @@ class _ViewMcPlaningWebState extends State<ViewMcPlaningWeb> {
                                 Container(
                                   margin: Dimens.edgeInsets20,
                                   height:
-                                      // ((controller.filteredInventoryNameList
-                                      //             .length) *
-                                      //         40) +
-                                      150,
+                                      ((controller.schedules!.length) * 40) +
+                                          200,
                                   decoration: BoxDecoration(
                                     border: Border.all(
                                       color: ColorValues
@@ -275,8 +274,83 @@ class _ViewMcPlaningWebState extends State<ViewMcPlaningWeb> {
                                             Spacer(),
                                             GestureDetector(
                                               onTap: () {
-                                                // Get.dialog(
-                                                //     SetEquipmentDialog());
+                                                var selectedEqp = [];
+                                                controller.mcPlanDetailsModel
+                                                    .value?.schedules
+                                                    .forEach((schedule) {
+                                                  schedule.equipments
+                                                      ?.forEach((element) {
+                                                    var ee = element;
+                                                    ee!.cleaningDay =
+                                                        schedule.cleaningDay;
+                                                    ;
+                                                    selectedEqp.add(element);
+                                                    print(element?.toJson());
+                                                  });
+                                                });
+                                                selectedEqp.forEach((element) {
+                                                  try {
+                                                    var selectedParentIndex =
+                                                        controller
+                                                            .equipmentList.value
+                                                            .indexWhere((eqp) =>
+                                                                eqp?.invId ==
+                                                                element
+                                                                    .parentId);
+                                                    print({
+                                                      "selectedParentIndex":
+                                                          selectedParentIndex
+                                                    });
+                                                    if (selectedParentIndex >
+                                                        -1) {
+                                                      var selectedChildIndex = controller
+                                                              .equipmentList
+                                                              .value[
+                                                                  selectedParentIndex]
+                                                              ?.smbs
+                                                              .indexWhere((smb) =>
+                                                                  smb.smbId ==
+                                                                  element.id) ??
+                                                          -1;
+
+                                                      if (selectedChildIndex >
+                                                          -1) {
+                                                        var ss = controller
+                                                                .equipmentList
+                                                                .value[
+                                                                    selectedParentIndex]
+                                                                ?.smbs[
+                                                            selectedChildIndex];
+                                                        ss?.selectedDay =
+                                                            "${element.cleaningDay}";
+                                                        controller
+                                                                .equipmentList
+                                                                .value[
+                                                                    selectedParentIndex]
+                                                                ?.smbs[
+                                                            selectedChildIndex] = ss!;
+                                                      }
+                                                      print({
+                                                        "selectedChildIndex":
+                                                            selectedChildIndex
+                                                      });
+                                                    }
+                                                  } catch (e) {
+                                                    print({"eadfds": e});
+                                                  }
+                                                });
+                                                // controller
+                                                //     .equipmentList
+                                                //     .value
+                                                //     .forEach(
+                                                //         (element) {
+
+                                                //         });
+
+                                                // print(
+                                                //     'MC plan Detail:${controller.schedules.toJson()}');
+                                                Get.dialog(
+                                                    ViewSetEquipmentDialog());
                                               },
                                               // color: ColorValues.appDarkBlueColor,
                                               // onTap: () {
@@ -375,7 +449,8 @@ class _ViewMcPlaningWebState extends State<ViewMcPlaningWeb> {
                                               // height: 130,
                                               cells: record.map((mapData) {
                                                 return DataCell(
-                                                  (mapData['key'] == "type")
+                                                  (mapData['key'] ==
+                                                          "cleaningType")
                                                       ? Padding(
                                                           padding:
                                                               const EdgeInsets
@@ -399,7 +474,7 @@ class _ViewMcPlaningWebState extends State<ViewMcPlaningWeb> {
                                                                     .width,
                                                                 dropdownList:
                                                                     controller
-                                                                        .type,
+                                                                        .cleaningType,
                                                                 selectedValue:
                                                                     mapData[
                                                                         "value"],
@@ -602,7 +677,8 @@ class _ViewMcPlaningWebState extends State<ViewMcPlaningWeb> {
                                     // : Dimens.box0,
                                     Spacer(),
                                   ],
-                                )
+                                ),
+                                Dimens.boxHeight12,
                               ],
                             ),
                           ),

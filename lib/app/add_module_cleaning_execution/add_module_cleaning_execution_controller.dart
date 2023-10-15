@@ -97,8 +97,6 @@ class AddModuleCleaningExecutionController extends GetxController {
   var remarkCtrlrWeb = TextEditingController();
   var waterUsedCtrlrWeb = TextEditingController();
 
-
-
   ///Checkbox
   var isChecked = false.obs; // This makes `isChecked` observable
   void toggleCheckbox() => isChecked.value = !isChecked.value;
@@ -240,9 +238,11 @@ class AddModuleCleaningExecutionController extends GetxController {
 
   ///Update MC Schedule Execution
   void updateMCScheduleExecution(
-      {int? scheduleId, int? cleaningDay, int? waterUsed, String? remark}) async {
+      {int? scheduleId,
+      int? cleaningDay,
+      int? waterUsed,
+      String? remark}) async {
     {
-      var remark;
       rowItem.value.forEach((element) {
         // items.add(item);
       });
@@ -258,14 +258,14 @@ class AddModuleCleaningExecutionController extends GetxController {
       List<int> cleanedEquipmentIds = [];
       List<int> abandonedEquipmentIds = [];
       equipmentList.forEach((e) {
-          e?.smbs.forEach((element) {
-            if(element.isAbandonSmbCheck!){
+        e?.smbs.forEach((element) {
+          if (element.isAbandonSmbCheck!) {
             abandonedEquipmentIds.add(element.smbId ?? 0);
-            }
-            if(element.isCleanedSmbCheck!){
-              cleanedEquipmentIds.add(element.smbId!);
-            }
-          });
+          }
+          if (element.isCleanedSmbCheck!) {
+            cleanedEquipmentIds.add(element.smbId!);
+          }
+        });
       });
       print('cleaned:$equipments');
 

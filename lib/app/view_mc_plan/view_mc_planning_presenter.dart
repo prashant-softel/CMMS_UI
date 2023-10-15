@@ -1,4 +1,5 @@
 import 'package:cmms/domain/models/end_mc_execution_detail_model.dart';
+import 'package:cmms/domain/models/equipment_list_model.dart';
 import 'package:cmms/domain/models/history_model.dart';
 import 'package:cmms/domain/models/mc_details_plan_model.dart';
 import 'package:cmms/domain/usecases/view_mc_planing_usecase.dart';
@@ -28,6 +29,16 @@ class ViewMcPlaningPresenter {
         id: id,
         isLoading: isLoading,
       );
+
+  Future<List<EquipmentListModel>> getEquipmentModelList({
+    required bool isLoading,
+    required int? facilityId,
+  }) async {
+    return viewMcPlaningUsecase.getEquipmentModelList(
+      isLoading: isLoading,
+      facilityId: facilityId,
+    );
+  }
 
   Future<Map<String, dynamic>?> mcPlanApprovedButton({
     mcApproveJsonString,
