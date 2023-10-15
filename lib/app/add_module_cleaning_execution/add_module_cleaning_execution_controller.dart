@@ -240,7 +240,7 @@ class AddModuleCleaningExecutionController extends GetxController {
 
   ///Update MC Schedule Execution
   void updateMCScheduleExecution(
-      {int? scheduleId, int? cleaningDay, int? waterUsed}) async {
+      {int? scheduleId, int? cleaningDay, int? waterUsed, String? remark}) async {
     {
       var remark;
       rowItem.value.forEach((element) {
@@ -273,8 +273,10 @@ class AddModuleCleaningExecutionController extends GetxController {
           UpdateMcScheduleExecutionModel(
               scheduleId: scheduleId,
               cleaningDay: cleaningDay,
-              waterUsed: int.tryParse('${rowItem.value[0][7]["value"]}'),
-              remark: rowItem.value[0][8]["value"],
+              // waterUsed: int.tryParse('${rowItem.value[0][7]["value"]}'),
+              waterUsed: waterUsed,
+              remark: remark,
+              // remark: rowItem.value[0][8]["value"],
               cleanedEquipmentIds: cleanedEquipmentIds,
               abandonedEquipmentIds: abandonedEquipmentIds);
 
