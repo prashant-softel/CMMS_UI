@@ -55,6 +55,10 @@ abstract class UserAccessConstants {
   static int kPmExecutionFeatureId = 10;
   static String kFeaturePmExecutionName = "PM Execution";
 
+  /// MODULE CLEANING ACCESS
+  static int kModuleCleaningFeatureId = 32;
+  static String kFeatureModuleCleaning = "Job";
+
   ///USER ACCESS
   static int kHaveAddAccess = 1;
   static int kNotHaveAddAccess = 0;

@@ -1,11 +1,14 @@
 // import 'package:cmms/app/add_job/views/widgets/work_area_widget.dart';
 
 import 'package:cmms/app/app.dart';
+import 'package:cmms/app/constant/constant.dart';
+import 'package:cmms/app/utils/user_access_constants.dart';
 import 'package:cmms/app/view_module_cleaning_execution/view_module_cleaning_execution_controller.dart';
 import 'package:cmms/app/widgets/approve_mc_execution_dialog.dart';
 import 'package:cmms/app/widgets/custom_elevated_button.dart';
 import 'package:cmms/app/widgets/custom_richtext.dart';
 import 'package:cmms/app/widgets/reject_mc_execution_dialog.dart';
+import 'package:cmms/app/widgets/view_module_cleaning_execution_dialog.dart';
 import 'package:data_table_2/data_table_2.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -288,77 +291,78 @@ class ViewModuleCleaningExecutionContentWeb extends GetView<viewModuleCleaningEx
                                             ),
                                             Expanded(
                                               child: DataTable2(
+                                                columnSpacing: 10,
                                                 border: TableBorder.all(color: Color.fromARGB(255, 206, 229, 234)),
                                                 columns: [
                                                   DataColumn(
                                                       label: Text(
-                                                    "Schedule Id",
-                                                    style: TextStyle(fontSize: 15, fontWeight: FontWeight.bold),
+                                                    "Schedule\nId",
+                                                    style: TextStyle(fontSize: 13, fontWeight: FontWeight.bold),
                                                   )),
                                                   DataColumn(
                                                       label: Text(
-                                                    "Execution Id",
-                                                    style: TextStyle(fontSize: 15, fontWeight: FontWeight.bold),
+                                                    "Execution\nId",
+                                                    style: TextStyle(fontSize: 13, fontWeight: FontWeight.bold),
                                                   )),
                                                   DataColumn(
                                                       label: Text(
                                                     "Days",
-                                                    style: TextStyle(fontSize: 15, fontWeight: FontWeight.bold),
+                                                    style: TextStyle(fontSize: 13, fontWeight: FontWeight.bold),
                                                   )),
                                                   DataColumn(
                                                       label: Text(
-                                                    "Scheduled Module",
-                                                    style: TextStyle(fontSize: 15, fontWeight: FontWeight.bold),
+                                                    "Scheduled\nModule",
+                                                    style: TextStyle(fontSize: 13, fontWeight: FontWeight.bold),
                                                   )),
                                                   DataColumn(
                                                       label: Text(
                                                     "Cleaned",
-                                                    style: TextStyle(fontSize: 15, fontWeight: FontWeight.bold),
+                                                    style: TextStyle(fontSize: 13, fontWeight: FontWeight.bold),
                                                   )),
                                                   DataColumn(
                                                       label: Text(
                                                     "Abandoned",
-                                                    style: TextStyle(fontSize: 15, fontWeight: FontWeight.bold),
+                                                    style: TextStyle(fontSize: 13, fontWeight: FontWeight.bold),
                                                   )),
                                                   DataColumn(
                                                       label: Text(
                                                     "Pending",
-                                                    style: TextStyle(fontSize: 15, fontWeight: FontWeight.bold),
+                                                    style: TextStyle(fontSize: 13, fontWeight: FontWeight.bold),
                                                   )),
                                                   DataColumn(
                                                       label: Text(
                                                     "Type",
-                                                    style: TextStyle(fontSize: 15, fontWeight: FontWeight.bold),
+                                                    style: TextStyle(fontSize: 13, fontWeight: FontWeight.bold),
                                                   )),
                                                   DataColumn(
                                                       label: Text(
-                                                    "Water Used",
-                                                    style: TextStyle(fontSize: 15, fontWeight: FontWeight.bold),
+                                                    "Water\nUsed",
+                                                    style: TextStyle(fontSize: 13, fontWeight: FontWeight.bold),
                                                   )),
                                                   DataColumn(
                                                       label: Text(
-                                                    "Start Date",
-                                                    style: TextStyle(fontSize: 15, fontWeight: FontWeight.bold),
+                                                    "Start\nDate",
+                                                    style: TextStyle(fontSize: 13, fontWeight: FontWeight.bold),
                                                   )),
                                                   DataColumn(
                                                       label: Text(
-                                                    "End Date",
-                                                    style: TextStyle(fontSize: 15, fontWeight: FontWeight.bold),
+                                                    "End\nDate",
+                                                    style: TextStyle(fontSize: 13, fontWeight: FontWeight.bold),
                                                   )),
                                                   DataColumn(
                                                       label: Text(
                                                     "Remark",
-                                                    style: TextStyle(fontSize: 15, fontWeight: FontWeight.bold),
+                                                    style: TextStyle(fontSize: 13, fontWeight: FontWeight.bold),
                                                   )),
                                                   DataColumn(
                                                       label: Text(
                                                     "Status",
-                                                    style: TextStyle(fontSize: 15, fontWeight: FontWeight.bold),
+                                                    style: TextStyle(fontSize: 13, fontWeight: FontWeight.bold),
                                                   )),
                                                   DataColumn(
                                                       label: Text(
                                                     "Execution",
-                                                    style: TextStyle(fontSize: 15, fontWeight: FontWeight.bold),
+                                                    style: TextStyle(fontSize: 13, fontWeight: FontWeight.bold),
                                                   )),
                                                 ],
                                                 rows: List<DataRow>.generate(
@@ -384,8 +388,12 @@ class ViewModuleCleaningExecutionContentWeb extends GetView<viewModuleCleaningEx
                                                           icon: Icons.remove_red_eye_outlined,
                                                           message: 'View',
                                                           onPress: () {
-                                                            // controller.showNewPermitListDetails(
-                                                            //     controller.permitId.value);
+                                                            print('filteredData:${controller.listSchedules?[index]?.waterUsed}');
+
+                                                            // Get.dialog(viewModuleCleaningExecutionDialog(
+                                                            //   waterUsed: controller.listSchedules?[index]?.waterUsed,
+                                                            //   dataList: controller.listSchedules[index],
+                                                            // ));
                                                           },
                                                         ),
                                                       ],
@@ -621,176 +629,119 @@ class ViewModuleCleaningExecutionContentWeb extends GetView<viewModuleCleaningEx
 
                                       ///MC Execution History
                                       Container(
-                                            margin: Dimens.edgeInsets20,
-                                            height: ((controller.historyList
-                                                            ?.length ??
-                                                        0) *
-                                                    50) +
-                                                125,
-                                            decoration: BoxDecoration(
-                                              border: Border.all(
-                                                color: ColorValues
-                                                    .lightGreyColorWithOpacity35,
-                                                width: 1,
-                                              ),
-                                              boxShadow: [
-                                                BoxShadow(
-                                                  color: ColorValues
-                                                      .appBlueBackgroundColor,
-                                                  spreadRadius: 2,
-                                                  blurRadius: 5,
-                                                  offset: Offset(0, 2),
-                                                ),
-                                              ],
-                                            ),
-                                            child: Column(
-                                              children: [
-                                                Padding(
-                                                  padding: const EdgeInsets.all(
-                                                      10.0),
-                                                  child: Row(
-                                                    children: [
-                                                      Text(
-                                                        "MC Execution History ",
-                                                        style: Styles.blue700,
-                                                      ),
-                                                    ],
-                                                  ),
-                                                ),
-                                                Divider(
-                                                  color: ColorValues
-                                                      .greyLightColour,
-                                                ),
-                                                // Column(
-                                                //   children: [
-                                                //     Row(
-                                                //       children: [
-                                                //         Text(
-                                                //             "Time Stamp"),
-                                                //         Text(
-                                                //             "Posted By"),
-                                                //         Text("Comment"),
-                                                //         Text(
-                                                //             "Location"),
-                                                //         Text("Status"),
-                                                //       ],
-                                                //     )
-                                                //   ]..addAll([
-                                                //       ...(controller
-                                                //               .historyList?.value ??
-                                                //           [])
-                                                //     ].map((e) {
-                                                //       return Row(
-                                                //         children: [
-                                                //           Text(
-                                                //               "${e?.createdAt??''}"),
-                                                //           Text(
-                                                //               "${e?.createdByName}"),
-                                                //           Text(
-                                                //               "${e?.comment}"),
-                                                //           Text(
-                                                //               "--"),
-                                                //           Text(
-                                                //               "${e?.status_name ??''}"),
-                                                //         ],
-                                                //       );
-                                                //     })),
-                                                // ),
-
-                                                Expanded(
-                                                  child: DataTable2(
-                                                    border: TableBorder.all(
-                                                        color: Color.fromARGB(
-                                                            255,
-                                                            206,
-                                                            229,
-                                                            234)),
-                                                    columns: [
-                                                      DataColumn(
-                                                          label: Text(
-                                                        "Time Stamp",
-                                                        style: TextStyle(
-                                                            fontSize: 15,
-                                                            fontWeight:
-                                                                FontWeight
-                                                                    .bold),
-                                                      )),
-                                                      DataColumn(
-                                                          label: Text(
-                                                        "Posted By",
-                                                        style: TextStyle(
-                                                            fontSize: 15,
-                                                            fontWeight:
-                                                                FontWeight
-                                                                    .bold),
-                                                      )),
-                                                      DataColumn(
-                                                          label: Text(
-                                                        "Comment",
-                                                        style: TextStyle(
-                                                            fontSize: 15,
-                                                            fontWeight:
-                                                                FontWeight
-                                                                    .bold),
-                                                      )),
-                                                      DataColumn(
-                                                          label: Text(
-                                                        "Location",
-                                                        style: TextStyle(
-                                                            fontSize: 15,
-                                                            fontWeight:
-                                                                FontWeight
-                                                                    .bold),
-                                                      )),
-                                                      DataColumn(
-                                                          label: Text(
-                                                        "Status",
-                                                        style: TextStyle(
-                                                            fontSize: 15,
-                                                            fontWeight:
-                                                                FontWeight
-                                                                    .bold),
-                                                      )),
-                                                    ],
-                                                    rows:
-                                                        List<DataRow>.generate(
-                                                      controller.historyList
-                                                              ?.length ??
-                                                          0,
-                                                      (index) =>
-                                                          DataRow(cells: [
-                                                        DataCell(Text(controller
-                                                                .historyList?[
-                                                                    index]
-                                                                ?.createdAt
-                                                                .toString() ??
-                                                            '')),
-                                                        DataCell(Text(controller
-                                                                .historyList?[
-                                                                    index]
-                                                                ?.createdByName
-                                                                .toString() ??
-                                                            '')),
-                                                        DataCell(Text(controller
-                                                                .historyList?[
-                                                                    index]
-                                                                ?.comment
-                                                                .toString() ??
-                                                            '')),
-                                                        DataCell(Text('--')),
-                                                        DataCell(Text(controller
-                                                                .historyList?[
-                                                                    index]
-                                                                ?.status_name
-                                                                .toString() ??
-                                                            '')),
-                                                      ]),
-                                                    ),
-                                                  ),
-                                                ),
-                                              ],
-                                            ),
+                                        margin: Dimens.edgeInsets20,
+                                        height: ((controller.historyList?.length ?? 0) * 50) + 125,
+                                        decoration: BoxDecoration(
+                                          border: Border.all(
+                                            color: ColorValues.lightGreyColorWithOpacity35,
+                                            width: 1,
                                           ),
+                                          boxShadow: [
+                                            BoxShadow(
+                                              color: ColorValues.appBlueBackgroundColor,
+                                              spreadRadius: 2,
+                                              blurRadius: 5,
+                                              offset: Offset(0, 2),
+                                            ),
+                                          ],
+                                        ),
+                                        child: Column(
+                                          children: [
+                                            Padding(
+                                              padding: const EdgeInsets.all(10.0),
+                                              child: Row(
+                                                children: [
+                                                  Text(
+                                                    "MC Execution History ",
+                                                    style: Styles.blue700,
+                                                  ),
+                                                ],
+                                              ),
+                                            ),
+                                            Divider(
+                                              color: ColorValues.greyLightColour,
+                                            ),
+                                            // Column(
+                                            //   children: [
+                                            //     Row(
+                                            //       children: [
+                                            //         Text(
+                                            //             "Time Stamp"),
+                                            //         Text(
+                                            //             "Posted By"),
+                                            //         Text("Comment"),
+                                            //         Text(
+                                            //             "Location"),
+                                            //         Text("Status"),
+                                            //       ],
+                                            //     )
+                                            //   ]..addAll([
+                                            //       ...(controller
+                                            //               .historyList?.value ??
+                                            //           [])
+                                            //     ].map((e) {
+                                            //       return Row(
+                                            //         children: [
+                                            //           Text(
+                                            //               "${e?.createdAt??''}"),
+                                            //           Text(
+                                            //               "${e?.createdByName}"),
+                                            //           Text(
+                                            //               "${e?.comment}"),
+                                            //           Text(
+                                            //               "--"),
+                                            //           Text(
+                                            //               "${e?.status_name ??''}"),
+                                            //         ],
+                                            //       );
+                                            //     })),
+                                            // ),
+
+                                            Expanded(
+                                              child: DataTable2(
+                                                border: TableBorder.all(color: Color.fromARGB(255, 206, 229, 234)),
+                                                columns: [
+                                                  DataColumn(
+                                                      label: Text(
+                                                    "Time Stamp",
+                                                    style: TextStyle(fontSize: 15, fontWeight: FontWeight.bold),
+                                                  )),
+                                                  DataColumn(
+                                                      label: Text(
+                                                    "Posted By",
+                                                    style: TextStyle(fontSize: 15, fontWeight: FontWeight.bold),
+                                                  )),
+                                                  DataColumn(
+                                                      label: Text(
+                                                    "Comment",
+                                                    style: TextStyle(fontSize: 15, fontWeight: FontWeight.bold),
+                                                  )),
+                                                  DataColumn(
+                                                      label: Text(
+                                                    "Location",
+                                                    style: TextStyle(fontSize: 15, fontWeight: FontWeight.bold),
+                                                  )),
+                                                  DataColumn(
+                                                      label: Text(
+                                                    "Status",
+                                                    style: TextStyle(fontSize: 15, fontWeight: FontWeight.bold),
+                                                  )),
+                                                ],
+                                                rows: List<DataRow>.generate(
+                                                  controller.historyList?.length ?? 0,
+                                                  (index) => DataRow(cells: [
+                                                    DataCell(Text(controller.historyList?[index]?.createdAt.toString() ?? '')),
+                                                    DataCell(Text(controller.historyList?[index]?.createdByName.toString() ?? '')),
+                                                    DataCell(Text(controller.historyList?[index]?.comment.toString() ?? '')),
+                                                    DataCell(Text('--')),
+                                                    DataCell(Text(controller.historyList?[index]?.status_name.toString() ?? '')),
+                                                  ]),
+                                                ),
+                                              ),
+                                            ),
+                                          ],
+                                        ),
+                                      ),
                                       // ///old MC Execution history
                                       // Container(
                                       //   margin: Dimens.edgeInsets20,
@@ -894,38 +845,48 @@ class ViewModuleCleaningExecutionContentWeb extends GetView<viewModuleCleaningEx
                                           SizedBox(
                                             width: 20,
                                           ),
-                                     
-                                          Container(
-                                      height: 28,
-                                      child: CustomElevatedButton(
-                                        backgroundColor:
-                                            ColorValues.rejectColor,
-                                        text: "Reject",
-                                        icon: Icons.close,
-                                        onPressed: () {
-                                          Get.dialog(RejectMcExecutionDialog(
-                                            id: controller.id,
-                                          ));
-                                        },
-                                      ),
-                                    ),
-                                    Dimens.boxWidth10,
-                                         Container(
-                                      height: 28,
-                                      child: CustomElevatedButton(
-                                        backgroundColor:
-                                            ColorValues.appGreenColor,
-                                        text: "Approve",
-                                        icon: Icons.add,
-                                        onPressed: () {
-                                          Get.dialog(ApproveMcExecutionDialog(
-                                            id: controller.id,
-                                          ));
-                                        },
-                                      ),
-                                    ),
-                                    Dimens.boxWidth10,
-                                    
+                                          varUserAccessModel.value.access_list!
+                                                      .where((e) =>
+                                                          e.feature_id == UserAccessConstants.kModuleCleaningFeatureId &&
+                                                          e.approve == UserAccessConstants.kHaveApproveAccess)
+                                                      .length >
+                                                  0
+                                              ? Container(
+                                                  height: 28,
+                                                  child: CustomElevatedButton(
+                                                    backgroundColor: ColorValues.rejectColor,
+                                                    text: "Reject",
+                                                    icon: Icons.close,
+                                                    onPressed: () {
+                                                      Get.dialog(RejectMcExecutionDialog(
+                                                        id: controller.id,
+                                                      ));
+                                                    },
+                                                  ),
+                                                )
+                                              : Dimens.box0,
+                                          Dimens.boxWidth10,
+                                          varUserAccessModel.value.access_list!
+                                                      .where((e) =>
+                                                          e.feature_id == UserAccessConstants.kModuleCleaningFeatureId &&
+                                                          e.approve == UserAccessConstants.kHaveApproveAccess)
+                                                      .length >
+                                                  0
+                                              ? Container(
+                                                  height: 28,
+                                                  child: CustomElevatedButton(
+                                                    backgroundColor: ColorValues.appGreenColor,
+                                                    text: "Approve",
+                                                    icon: Icons.add,
+                                                    onPressed: () {
+                                                      Get.dialog(ApproveMcExecutionDialog(
+                                                        id: controller.id,
+                                                      ));
+                                                    },
+                                                  ),
+                                                )
+                                              : Dimens.box0,
+                                          Dimens.boxWidth10,
                                           Container(
                                             height: 28,
                                             child: CustomElevatedButton(

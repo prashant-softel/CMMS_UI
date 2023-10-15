@@ -171,6 +171,7 @@ class EquipmentsList {
     this.parentId,
     this.cleaningDay,
     this.moduleQuantity,
+    this.status,
     this.short_status,
   });
 
@@ -179,6 +180,7 @@ class EquipmentsList {
   int? parentId;
   int? cleaningDay;
   int? moduleQuantity;
+  int? status;
   String? short_status;
 
   factory EquipmentsList.fromJson(Map<String, dynamic> json) => EquipmentsList(
@@ -187,6 +189,7 @@ class EquipmentsList {
         parentId: json['parentId'],
         cleaningDay: json['cleaningDay'],
         moduleQuantity: json['moduleQuantity'],
+        status: json['status'],
         short_status: json['short_status'],
       );
 
@@ -196,6 +199,7 @@ class EquipmentsList {
         "parentId": parentId,
         "cleaningDay": cleaningDay,
         "moduleQuantity": moduleQuantity,
+        "status": status,
         "short_status": short_status,
       };
 }
