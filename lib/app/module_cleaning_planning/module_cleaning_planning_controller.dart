@@ -182,18 +182,21 @@ class ModuleCleaningPlanningController extends GetxController {
   }
 
   void updateMcPlan() async {
-    var mappedData = {};
-    List<Schedule> schedules = [];
-    print({"dsfdsfdsfdsf": mcPlanDetailsModel.value});
-    return;
+    // return;
+    int i = -1;
 
-    mappedData.forEach((key, value) {
-      List<Equipments> eqp = value.map<Equipments>((e) {
-        return Equipments(id: e);
-      }).toList();
-      schedules
-          .add(Schedule(cleaningDay: int.tryParse('${key}'), equipments: eqp));
-    });
+    List<Schedule>? sch =
+        mcPlanDetailsModel.value?.schedules.map<Schedule>((e) {
+      i++;
+      var row = rowItem.value[i];
+      return Schedule(
+          cleaningDay: e.cleaningDay,
+          cleaningType: int.tryParse("${row[4]['value']}") ?? 0,
+          equipments: e.equipments?.map((e) {
+            return Equipments(id: e?.id);
+          }).toList());
+    }).toList();
+    print({"sch": sch});
     // rowItem.value.forEach((element) {
     //   Schedule item = Schedule(
     //     cleaningType: int.tryParse('${element[4]["id"]}'),
@@ -201,19 +204,16 @@ class ModuleCleaningPlanningController extends GetxController {
 
     //   // Schedule.add(item);
     // });
-    print({"mappedData": mappedData});
 
     String _durationInDayCtrlr = durationInDayCtrlr.text.trim();
     String _mcTitelCtrlr = mcTitelCtrlr.text.trim();
 
     CreateMcPalningsModel createMcModel = CreateMcPalningsModel(
-
-        // assignedToId: 0,
         facilityId: facilityId,
         frequencyId: selectedfrequencyId,
         noOfCleaningDays: int.tryParse(_durationInDayCtrlr) ?? 0,
         title: _mcTitelCtrlr,
-        schedules: schedules);
+        schedules: sch ?? []);
 
     var updateMcModelJsonString = [createMcModel.toJson()];
     Map<String, dynamic>? responseCreateMcModel =
