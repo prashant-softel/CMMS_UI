@@ -2,6 +2,7 @@ import 'dart:async';
 
 import 'package:cmms/app/view_mc_plan/view_mc_planning_presenter.dart';
 import 'package:cmms/domain/models/comment_model.dart';
+import 'package:cmms/domain/models/equipment_list_model.dart';
 import 'package:cmms/domain/models/history_model.dart';
 
 import 'package:cmms/domain/models/mc_details_plan_model.dart';
@@ -18,10 +19,12 @@ class ViewMcPlaningController extends GetxController {
   );
   ViewMcPlaningPresenter viewMcPlaningPresenter;
   final HomeController homecontroller = Get.find();
-
+  TextEditingController mcTitelCtrlr = TextEditingController();
   Rx<List<List<Map<String, String>>>> rowItem =
       Rx<List<List<Map<String, String>>>>([]);
   Map<String, dynamic> data = {};
+  RxList<EquipmentListModel?> equipmentList = <EquipmentListModel?>[].obs;
+
   RxList<HistoryModel?>? historyList = <HistoryModel?>[].obs;
   TextEditingController approveCommentTextFieldCtrlr = TextEditingController();
 
@@ -34,16 +37,26 @@ class ViewMcPlaningController extends GetxController {
 
   StreamSubscription<int>? facilityIdStreamSubscription;
   int facilityId = 0;
+  var durationInDayCtrlr = TextEditingController();
 
   Rx<int> id = 0.obs;
+  Rx<String> selectedfrequency = ''.obs;
+  Rx<bool> isSelectedfrequency = true.obs;
+  int selectedfrequencyId = 0;
+  var startDateTc = TextEditingController();
 
   Map<String, TypeModel> typedropdownMapperData = {};
 
-  var type = <TypeModel>[
-    TypeModel(name: "Please Select", id: "0"),
-    TypeModel(name: 'Dry', id: "0"),
-    TypeModel(name: 'Wet', id: "1"),
+  var days = <TypeModel>[
+    TypeModel(name: 'Day 1', id: "1"),
+    TypeModel(name: 'Day 2', id: "2"),
+    TypeModel(name: 'Day 3', id: "3"),
   ];
+  RxList<TypeModel> cleaningType = <TypeModel>[
+    TypeModel(name: "Please Select", id: "0"),
+    TypeModel(name: 'Dry', id: "1"),
+    TypeModel(name: 'Wet', id: "2"),
+  ].obs;
 
   void addRowItem() {
     rowItem.value.add([
@@ -51,7 +64,7 @@ class ViewMcPlaningController extends GetxController {
       {"key": "noOfInverters", "value": ''},
       {'key': "noOfSMBs", "value": ''},
       {'key': "noOfModules", "value": ''},
-      {'key': "type", "value": 'Please Select'},
+      {'key': "cleaningType", "value": 'Please Select', "id": ""},
     ]);
   }
 
@@ -67,6 +80,9 @@ class ViewMcPlaningController extends GetxController {
           getMcPlanDetail(planId: id.value);
         });
       }
+      Future.delayed(Duration(seconds: 1), () {
+        getEquipmentModelList(facilityId, true);
+      });
       getMcPlanHistory(id: id.value);
       super.onInit();
     } catch (e) {
@@ -88,6 +104,19 @@ class ViewMcPlaningController extends GetxController {
     }
   }
 
+  Future<void> getEquipmentModelList(int facilityId, bool isLoading) async {
+    equipmentList.value = <EquipmentListModel>[];
+
+    final list = await viewMcPlaningPresenter.getEquipmentModelList(
+        isLoading: isLoading, facilityId: facilityId);
+
+    if (list != null) {
+      equipmentList.value = list;
+    }
+
+    update(['equipment_list']);
+  }
+
   Future<void> getMcPlanHistory({required int id}) async {
     /// TODO: CHANGE THESE VALUES
     int moduleType = 81;
@@ -104,41 +133,35 @@ class ViewMcPlaningController extends GetxController {
 
   Future<void> getMcPlanDetail({required int planId}) async {
     // newPermitDetails!.value = <NewPermitListModel>[];
-    mcPlanDetailsList?.value = <McPalningDetailsModel>[];
+    // mcPlanDetailsList?.value = <McPalningDetailsModel>[];
 
-    final _mcPlanDetails =
-        await viewMcPlaningPresenter.getMcPlanDetail(planId: planId);
+    final _mcPlanDetails = await viewMcPlaningPresenter.getMcPlanDetail(
+        planId: planId, isLoading: true);
     print('MC plan Detail:$_mcPlanDetails');
 
     if (_mcPlanDetails != null) {
       mcPlanDetailsModel.value = _mcPlanDetails;
-      // plannedAtDateTimeCtrlrWeb.text =
-      //     '${DateFormat('yyyy-MM-dd HH:mm:ss').format(DateTime.parse('${mcPlanDetailsModel.value?.plannedAt}'))}';
-      // startedAtDateTimeCtrlrWeb.text =
-      //     '${DateFormat('yyyy-MM-dd HH:mm:ss').format(DateTime.parse('${mcPlanDetailsModel.value?.startedAt}'))}';
-      listSchedules?.value = mcPlanDetailsModel.value?.schedules ?? [];
-      scheduleId =
-          listSchedules!.map((element) => element?.scheduleId).toList();
-      print('ScheduleId: ${scheduleId}');
+      mcTitelCtrlr.text = mcPlanDetailsModel.value?.title ?? "";
+      selectedfrequency.value = mcPlanDetailsModel.value?.frequency ?? '';
+      startDateTc.text = mcPlanDetailsModel.value?.startDate ?? '';
+      durationInDayCtrlr.text =
+          mcPlanDetailsModel.value?.noOfCleaningDays.toString() ?? "";
 
-      // rowItem.value = [];
-      // schedules?.value = _mcPlanDetails.schedules;
-
-      // _mcPlanDetails.schedules.forEach((element) {
-      //   rowItem.value.add([
-      //     {"key": "Schedule Id", "value": '${element!.scheduleId}'},
-      //     {"key": "Days", "value": '${element.cleaningDay}'},ß
-      //     {"key": "Scheduled Module", "value": '${element.scheduledModules}'},
-      //     {"key": "Cleaned", "value": '${element.cleanedModules}'},
-      //     {"key": "Abandoned", "value": '${element.abandonedModules}'},
-      //     {"key": "Pending", "value": '${element.pendingModules}'},
-      //     {"key": "Type", "value": '${element.cleaningTypeName}'},
-      //     {"key": "Water Used", "value": '${element.waterUsed}'},
-      //     {"key": "Remark", "value": '${element.remark}'},
-      //     {"key": "Status", "value": '${element.status_short}'},
-      //     {'key': "Actions", "value": ''},
-      //   ]);
-      // });
+      rowItem.value = [];
+      schedules!.value = _mcPlanDetails.schedules;
+      _mcPlanDetails.schedules.forEach(
+        (element) {
+          rowItem.value.add(
+            [
+              {"key": "day", "value": '${element.cleaningDay}'},
+              {"key": "noOfInverters", "value": '${element.invs}'},
+              {'key': "noOfSMBs", "value": '${element.smbs}'},
+              {'key': "noOfModules", "value": '${element.scheduledModules}'},
+              {'key': "cleaningType", "value": 'Please Select'},
+            ],
+          );
+        },
+      );
     }
   }
 
