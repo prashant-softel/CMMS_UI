@@ -160,12 +160,14 @@ class ModuleCleaningPlanningController extends GetxController {
 
     String _durationInDayCtrlr = durationInDayCtrlr.text.trim();
     String _mcTitelCtrlr = mcTitelCtrlr.text.trim();
+    String _startDateTc = startDateTc.text.trim();
 
     CreateMcPalningsModel createMcModel = CreateMcPalningsModel(
-        // planId: 0,
+        planId: 0,
         // assignedToId: 0,
 
         facilityId: facilityId,
+        startDate: _startDateTc,
         frequencyId: selectedfrequencyId,
         noOfCleaningDays: int.tryParse(_durationInDayCtrlr) ?? 0,
         title: _mcTitelCtrlr,
@@ -191,7 +193,9 @@ class ModuleCleaningPlanningController extends GetxController {
       var row = rowItem.value[i];
       return Schedule(
           cleaningDay: e.cleaningDay,
-          cleaningType: int.tryParse("${row[4]['value']}") ?? 0,
+          cleaningType: int.tryParse(
+                  "${row[4]['value'] == 'Dry' ? 1 : (row[4]['value'] == 'Wel' ? 2 : null)}") ??
+              null,
           equipments: e.equipments?.map((e) {
             return Equipments(id: e?.id);
           }).toList());
@@ -207,9 +211,12 @@ class ModuleCleaningPlanningController extends GetxController {
 
     String _durationInDayCtrlr = durationInDayCtrlr.text.trim();
     String _mcTitelCtrlr = mcTitelCtrlr.text.trim();
+    String _startDateTc = startDateTc.text.trim();
 
     CreateMcPalningsModel createMcModel = CreateMcPalningsModel(
+        planId: id.value,
         facilityId: facilityId,
+        startDate: _startDateTc,
         frequencyId: selectedfrequencyId,
         noOfCleaningDays: int.tryParse(_durationInDayCtrlr) ?? 0,
         title: _mcTitelCtrlr,
