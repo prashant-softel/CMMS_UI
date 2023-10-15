@@ -4,7 +4,9 @@ import 'dart:convert';
 
 import 'package:cmms/app/add_module_cleaning_execution/add_module_cleaning_execution_controller.dart';
 import 'package:cmms/app/app.dart';
+import 'package:cmms/app/constant/constant.dart';
 import 'package:cmms/app/navigators/navigators.dart';
+import 'package:cmms/app/utils/user_access_constants.dart';
 import 'package:cmms/app/widgets/abandon_all_dialog.dart';
 import 'package:cmms/app/widgets/abandon_schedule_execution_dialog.dart';
 import 'package:cmms/app/widgets/add_module_cleaning_execution_dialog.dart';
@@ -124,7 +126,7 @@ class AddModuleCleaningExecutionContentWeb
                                                             .mcExecutionDetailsModel
                                                             .value
                                                             ?.status ==
-                                                        380
+                                                        360
                                                     ? ColorValues.approveColor
                                                     : ColorValues.appRedColor,
                                                 width: 1,
@@ -135,7 +137,7 @@ class AddModuleCleaningExecutionContentWeb
                                                               .mcExecutionDetailsModel
                                                               .value
                                                               ?.status ==
-                                                          380 //125
+                                                          360 //125
 
                                                       ? ColorValues.approveColor
                                                       : ColorValues.appRedColor,
@@ -530,35 +532,35 @@ class AddModuleCleaningExecutionContentWeb
                                                                                     )
                                                                                   : (mapData['key'] == "Water Used")
                                                                                       ? Column(
-                                                                                              mainAxisAlignment: MainAxisAlignment.center,
-                                                                                              crossAxisAlignment: CrossAxisAlignment.center,
-                                                                                              children: [
-                                                                                                Container(
-                                                                                                    decoration: BoxDecoration(
-                                                                                                      boxShadow: [
-                                                                                                        BoxShadow(
-                                                                                                          color: Colors.black26,
-                                                                                                          offset: const Offset(
-                                                                                                            5.0,
-                                                                                                            5.0,
-                                                                                                          ),
-                                                                                                          blurRadius: 5.0,
-                                                                                                          spreadRadius: 1.0,
-                                                                                                        ),
-                                                                                                      ],
-                                                                                                      color: ColorValues.whiteColor,
-                                                                                                      borderRadius: BorderRadius.circular(5),
+                                                                                          mainAxisAlignment: MainAxisAlignment.center,
+                                                                                          crossAxisAlignment: CrossAxisAlignment.center,
+                                                                                          children: [
+                                                                                            Container(
+                                                                                                decoration: BoxDecoration(
+                                                                                                  boxShadow: [
+                                                                                                    BoxShadow(
+                                                                                                      color: Colors.black26,
+                                                                                                      offset: const Offset(
+                                                                                                        5.0,
+                                                                                                        5.0,
+                                                                                                      ),
+                                                                                                      blurRadius: 5.0,
+                                                                                                      spreadRadius: 1.0,
                                                                                                     ),
-                                                                                                    child: LoginCustomTextfield(
-                                                                                                      width: MediaQuery.of(context).size.width / 2,
-                                                                                                      maxLine: 1,
-                                                                                                      textController: new TextEditingController(text: mapData["value"] ?? ''),
-                                                                                                      onChanged: (txt) {
-                                                                                                        mapData["value"] = txt;
-                                                                                                      },
-                                                                                                    )),
-                                                                                              ],
-                                                                                            )
+                                                                                                  ],
+                                                                                                  color: ColorValues.whiteColor,
+                                                                                                  borderRadius: BorderRadius.circular(5),
+                                                                                                ),
+                                                                                                child: LoginCustomTextfield(
+                                                                                                  width: MediaQuery.of(context).size.width / 2,
+                                                                                                  maxLine: 1,
+                                                                                                  textController: new TextEditingController(text: mapData["value"] ?? ''),
+                                                                                                  onChanged: (txt) {
+                                                                                                    mapData["value"] = txt;
+                                                                                                  },
+                                                                                                )),
+                                                                                          ],
+                                                                                        )
                                                                                       : (mapData['key'] == "Remark")
                                                                                           ? Column(
                                                                                               mainAxisAlignment: MainAxisAlignment.center,
@@ -653,23 +655,23 @@ class AddModuleCleaningExecutionContentWeb
                                                                                                         //             )
                                                                                                         //             ?.status_short ==
                                                                                                         //         "Completed"
-                                                                                                        //     ? 
-                                                                                                            TableActionButton(
-                                                                                                                // label: 'Abandon',
-                                                                                                                onPress: () {
-                                                                                                                  // Get.dialog(AddModuleCleaningExecutionDialog());
-                                                                                                                  var filterdData = controller.listSchedules?.firstWhere((e) => "${e?.scheduleId}" == record[0]['value']);
+                                                                                                        //     ?
+                                                                                                        TableActionButton(
+                                                                                                          // label: 'Abandon',
+                                                                                                          onPress: () {
+                                                                                                            // Get.dialog(AddModuleCleaningExecutionDialog());
+                                                                                                            var filterdData = controller.listSchedules?.firstWhere((e) => "${e?.scheduleId}" == record[0]['value']);
 
-                                                                                                                  controller.updateMCScheduleExecution(scheduleId: filterdData?.scheduleId, cleaningDay: filterdData?.cleaningDay, waterUsed: filterdData?.waterUsed);
-                                                                                                                  // print({"filteredData:${filterdData?.scheduleId}"});
-                                                                                                                  // print({"filteredData:${filterdData!.cleaningDay}"});
-                                                                                                                  // print({"filteredData:${filterdData.waterUsed}"});
-                                                                                                                },
-                                                                                                                color: ColorValues.appLightBlueColor,
-                                                                                                                icon: Icons.add,
-                                                                                                                message: 'Update',
-                                                                                                              ),
-                                                                                                            // : Dimens.box0,
+                                                                                                            controller.updateMCScheduleExecution(scheduleId: filterdData?.scheduleId, cleaningDay: filterdData?.cleaningDay, waterUsed: filterdData?.waterUsed);
+                                                                                                            // print({"filteredData:${filterdData?.scheduleId}"});
+                                                                                                            // print({"filteredData:${filterdData!.cleaningDay}"});
+                                                                                                            // print({"filteredData:${filterdData.waterUsed}"});
+                                                                                                          },
+                                                                                                          color: ColorValues.appLightBlueColor,
+                                                                                                          icon: Icons.add,
+                                                                                                          message: 'Update',
+                                                                                                        ),
+                                                                                                        // : Dimens.box0,
 
                                                                                                         ///Abandon
                                                                                                         // controller.listSchedules!
@@ -712,15 +714,18 @@ class AddModuleCleaningExecutionContentWeb
                                                                                                             var filterdData = controller.listSchedules?.firstWhere((e) => "${e?.scheduleId}" == record[0]['value']);
 
                                                                                                             Get.dialog(AddModuleCleaningExecutionDialog(
-                                                                                                              scheduleId: filterdData!.scheduleId, cleaningDay: filterdData.cleaningDay, waterUsed: filterdData.waterUsed,));
-                                                                                                            },
-                                                                                                            color: ColorValues.appDarkBlueColor,
-                                                                                                            icon: Icons.category,
-                                                                                                            message: 'Equipments',
-                                                 ),
-                                               ],
-                                                )
-                                                  : Text(mapData['key'] ?? ''),
+                                                                                                              scheduleId: filterdData!.scheduleId,
+                                                                                                              cleaningDay: filterdData.cleaningDay,
+                                                                                                              waterUsed: filterdData.waterUsed,
+                                                                                                            ));
+                                                                                                          },
+                                                                                                          color: ColorValues.appDarkBlueColor,
+                                                                                                          icon: Icons.category,
+                                                                                                          message: 'Equipments',
+                                                                                                        ),
+                                                                                                      ],
+                                                                                                    )
+                                                                                                  : Text(mapData['key'] ?? ''),
                                                     );
                                                   }).toList(),
                                                 );
@@ -766,53 +771,104 @@ class AddModuleCleaningExecutionContentWeb
                                           ),
                                           // controller.data['status'] == "Scheduled"
                                           //     ?
-                                              Container(
+                                          varUserAccessModel.value.access_list!
+                                                      .where((e) =>
+                                                          e.feature_id ==
+                                                              UserAccessConstants
+                                                                  .kModuleCleaningFeatureId &&
+                                                          e.edit ==
+                                                              UserAccessConstants
+                                                                  .kHaveEditAccess)
+                                                      .length >
+                                                  0
+                                              ? Container(
                                                   height: 28,
                                                   child: CustomElevatedButton(
-                                                    backgroundColor: ColorValues.addNewColor,
+                                                    backgroundColor:
+                                                        ColorValues.addNewColor,
                                                     text: "Start",
                                                     onPressed: () {
-                                                      controller.startMCExecutionButton();
+                                                      controller
+                                                          .startMCExecutionButton();
                                                     },
                                                   ),
-                                                ),
-                                              // : Container(),
+                                                )
+                                              : Dimens.box0,
+                                          // : Container(),
 
-                                         Dimens.boxWidth10,
+                                          Dimens.boxWidth10,
 
                                           // controller.data['status'] == "Abandoned"
                                           //     ?
-                                              Container(
+                                          varUserAccessModel.value.access_list!
+                                                      .where((e) =>
+                                                          e.feature_id ==
+                                                              UserAccessConstants
+                                                                  .kModuleCleaningFeatureId &&
+                                                          e.edit ==
+                                                              UserAccessConstants
+                                                                  .kHaveEditAccess)
+                                                      .length >
+                                                  0
+                                              ? Container(
                                                   height: 28,
                                                   child: CustomElevatedButton(
-                                                    backgroundColor: ColorValues.cancelColor,
+                                                    backgroundColor:
+                                                        ColorValues.cancelColor,
                                                     text: "End",
                                                     onPressed: () {
                                                       // Get.dialog(EndMCExecutionDialog());
-                                                      controller.endMcExecutionButton();
+                                                      controller
+                                                          .endMcExecutionButton();
                                                     },
                                                   ),
-                                                ),
-                                              // : Dimens.box0,
+                                                )
+                                              : Dimens.box0,
+
                                           SizedBox(
                                             width: 10,
                                           ),
                                           Dimens.boxWidth10,
 
-                                          Container(
-                                            height: 28,
-                                            child: CustomElevatedButton(
-                                              backgroundColor: Color.fromARGB(
-                                                  255, 244, 116, 248),
-                                              text: "Abandoned All",
-                                              onPressed: () {
-                                                Get.dialog(AbandonAllDialog(
-                                                    id: controller.data['id']));
-                                                // controller
-                                                //     .createEscalationMatrix();
-                                              },
-                                            ),
-                                          ),
+                                          varUserAccessModel.value.access_list!
+                                                          .where((e) =>
+                                                              e.feature_id ==
+                                                                  UserAccessConstants
+                                                                      .kModuleCleaningFeatureId &&
+                                                              e.edit ==
+                                                                  UserAccessConstants
+                                                                      .kHaveEditAccess)
+                                                          .length >
+                                                      0 ||
+                                                  varUserAccessModel
+                                                          .value.access_list!
+                                                          .where((e) =>
+                                                              e.feature_id ==
+                                                                  UserAccessConstants
+                                                                      .kModuleCleaningFeatureId &&
+                                                              e.approve ==
+                                                                  UserAccessConstants
+                                                                      .kHaveApproveAccess)
+                                                          .length >
+                                                      0
+                                              ? Container(
+                                                  height: 28,
+                                                  child: CustomElevatedButton(
+                                                    backgroundColor:
+                                                        Color.fromARGB(
+                                                            255, 244, 116, 248),
+                                                    text: "Abandoned All",
+                                                    onPressed: () {
+                                                      Get.dialog(
+                                                          AbandonAllDialog(
+                                                              id: controller
+                                                                  .data['id']));
+                                                      // controller
+                                                      //     .createEscalationMatrix();
+                                                    },
+                                                  ),
+                                                )
+                                              : Dimens.box0,
 
                                           //           varUserAccessModel.value.access_list!
                                           // .where((e) => e.feature_id == 3 && e.edit == 1)

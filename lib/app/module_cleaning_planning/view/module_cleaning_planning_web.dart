@@ -10,6 +10,7 @@ import 'package:cmms/app/widgets/date_picker.dart';
 import 'package:cmms/app/widgets/dropdown_web.dart';
 import 'package:cmms/app/widgets/set_equipments_dialog.dart';
 import 'package:cmms/app/widgets/stock_dropdown.dart';
+import 'package:cmms/domain/models/end_mc_execution_detail_model.dart';
 import 'package:data_table_2/data_table_2.dart';
 
 import 'package:flutter/material.dart';
@@ -332,8 +333,89 @@ class _ModuleCleaningPlanningWebState extends State<ModuleCleaningPlanningWeb> {
                                                       Spacer(),
                                                       GestureDetector(
                                                         onTap: () {
-                                                          // controller.schedules.
+                                                          var selectedEqp = [];
+                                                          controller
+                                                              .mcPlanDetailsModel
+                                                              .value
+                                                              ?.schedules
+                                                              .forEach(
+                                                                  (schedule) {
+                                                            schedule.equipments
+                                                                ?.forEach(
+                                                                    (element) {
+                                                              var ee = element;
+                                                              ee!.cleaningDay =
+                                                                  schedule
+                                                                      .cleaningDay;
+                                                              ;
+                                                              selectedEqp
+                                                                  .add(element);
+                                                              print(element
+                                                                  ?.toJson());
+                                                            });
+                                                          });
+                                                          selectedEqp.forEach(
+                                                              (element) {
+                                                            try {
+                                                              var selectedParentIndex = controller
+                                                                  .equipmentList
+                                                                  .value
+                                                                  .indexWhere((eqp) =>
+                                                                      eqp?.invId ==
+                                                                      element
+                                                                          .parentId);
+                                                              print({
+                                                                "selectedParentIndex":
+                                                                    selectedParentIndex
+                                                              });
+                                                              if (selectedParentIndex >
+                                                                  -1) {
+                                                                var selectedChildIndex = controller
+                                                                        .equipmentList
+                                                                        .value[
+                                                                            selectedParentIndex]
+                                                                        ?.smbs
+                                                                        .indexWhere((smb) =>
+                                                                            smb.smbId ==
+                                                                            element.id) ??
+                                                                    -1;
 
+                                                                if (selectedChildIndex >
+                                                                    -1) {
+                                                                  var ss = controller
+                                                                      .equipmentList
+                                                                      .value[
+                                                                          selectedParentIndex]
+                                                                      ?.smbs[selectedChildIndex];
+                                                                  ss?.selectedDay =
+                                                                      "${element.cleaningDay}";
+                                                                  controller
+                                                                      .equipmentList
+                                                                      .value[
+                                                                          selectedParentIndex]
+                                                                      ?.smbs[selectedChildIndex] = ss!;
+                                                                }
+                                                                print({
+                                                                  "selectedChildIndex":
+                                                                      selectedChildIndex
+                                                                });
+                                                              }
+                                                            } catch (e) {
+                                                              print({
+                                                                "eadfds": e
+                                                              });
+                                                            }
+                                                          });
+                                                          // controller
+                                                          //     .equipmentList
+                                                          //     .value
+                                                          //     .forEach(
+                                                          //         (element) {
+
+                                                          //         });
+
+                                                          // print(
+                                                          //     'MC plan Detail:${controller.schedules.toJson()}');
                                                           Get.dialog(
                                                               SetEquipmentDialog());
                                                         },

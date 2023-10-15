@@ -186,17 +186,17 @@ class Schedules {
 
 ///Equipments List Detail Model
 class EquipmentsList {
-  EquipmentsList({
-    this.id,
-    this.equipmentName,
-    this.parentId,
-    this.actualCleaningDate,
-    this.moduleQuantity,
-    this.short_status,
-    this.grassCuttingArea,
-    this.scheduledCleaningDate,
-    this.updatedById,
-  });
+  EquipmentsList(
+      {this.id,
+      this.equipmentName,
+      this.parentId,
+      this.actualCleaningDate,
+      this.moduleQuantity,
+      this.short_status,
+      this.grassCuttingArea,
+      this.scheduledCleaningDate,
+      this.updatedById,
+      this.cleaningDay});
 
   int? id;
   String? equipmentName;
@@ -207,6 +207,7 @@ class EquipmentsList {
   int? updatedById;
   int? moduleQuantity;
   int? grassCuttingArea;
+  int? cleaningDay;
 
   factory EquipmentsList.fromJson(Map<String, dynamic> json) => EquipmentsList(
         id: json["id"],
