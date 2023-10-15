@@ -272,8 +272,8 @@ class viewModuleCleaningExecutionDialog extends GetView {
                                                         Alignment.centerLeft,
                                                     child: Checkbox(
                                                       value: mappedData[smbItems
-                                                                  .smbId]
-                                                              ?.isCleanedSmbCheck ??
+                                                                  .smbId]?[
+                                                              "isCleanedSmbCheck"] ??
                                                           false,
                                                       onChanged: (bool? value) {
                                                         // controller.toggleItemSelection(index);
@@ -291,8 +291,8 @@ class viewModuleCleaningExecutionDialog extends GetView {
                                                         Alignment.centerLeft,
                                                     child: Checkbox(
                                                       value: mappedData[smbItems
-                                                                  .smbId]
-                                                              ?.isAbandonSmbCheck ??
+                                                                  .smbId]?[
+                                                              "isAbandonSmbCheck"] ??
                                                           false,
                                                       onChanged: (bool? value) {
                                                         // controller.toggleItemSelection(index);
