@@ -255,19 +255,17 @@ class AddModuleCleaningExecutionController extends GetxController {
       //     data.add(element.invId!);
       //   }
       // });
-      List<int?>? equipments = [];
+      List<int> cleanedEquipmentIds = [];
+      List<int> abandonedEquipmentIds = [];
       equipmentList.forEach((e) {
-        if (e?.isChecked ?? false) {
           e?.smbs.forEach((element) {
-            equipments.add(element.smbId ?? 0);
+            if(element.isAbandonSmbCheck!){
+            abandonedEquipmentIds.add(element.smbId ?? 0);
+            }
+            if(element.isCleanedSmbCheck!){
+              cleanedEquipmentIds.add(element.smbId!);
+            }
           });
-        } else {
-          if (e?.isCleanedChecked ?? false) {
-            e?.smbs.forEach((element) {
-              equipments.add(element.smbId ?? 0);
-            });
-          }
-        }
       });
       print('cleaned:$equipments');
 
@@ -277,8 +275,8 @@ class AddModuleCleaningExecutionController extends GetxController {
               cleaningDay: cleaningDay,
               waterUsed: int.tryParse('${rowItem.value[0][7]["value"]}'),
               remark: rowItem.value[0][8]["value"],
-              cleanedEquipmentIds: equipments,
-              abandonedEquipmentIds: equipments);
+              cleanedEquipmentIds: cleanedEquipmentIds,
+              abandonedEquipmentIds: abandonedEquipmentIds);
 
       var updateMCScheduleExecutionJsonString =
           updateMCScheduleExecutionModel.toJson();

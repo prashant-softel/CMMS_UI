@@ -5,6 +5,7 @@ import 'package:cmms/app/navigators/app_pages.dart';
 import 'package:cmms/domain/models/comment_model.dart';
 import 'package:cmms/domain/models/create_escalation_matrix_model.dart';
 import 'package:cmms/domain/models/end_mc_execution_detail_model.dart';
+import 'package:cmms/domain/models/equipment_list_model.dart';
 import 'package:cmms/domain/models/history_model.dart';
 import 'package:cmms/domain/models/modulelist_model.dart';
 import 'package:cmms/domain/models/paiyed_model.dart';
@@ -24,6 +25,9 @@ class viewModuleCleaningExecutionController extends GetxController {
   final HomeController homeController = Get.find();
 
   Rx<String> selectedFacility = ''.obs;
+
+  RxList<EquipmentListModel?> equipmentList = <EquipmentListModel?>[].obs;
+
 
 
 
@@ -75,6 +79,8 @@ class viewModuleCleaningExecutionController extends GetxController {
 
 ///Schedule List
   RxList<Schedules?>? listSchedules = <Schedules?>[].obs;
+  RxList<EquipmentsList?>? listEquipmentsList = <EquipmentsList?>[].obs;
+
 
 
    ///Mc Execution details
@@ -117,6 +123,9 @@ class viewModuleCleaningExecutionController extends GetxController {
       // });
     });
     await getMCExecutionHistory(id: id!);
+     Future.delayed(Duration(seconds: 1), () {
+      getEquipmentModelList(facilityId, true);
+    });
 
      if (id != null) {
       Future.delayed(Duration(seconds: 1), () {
@@ -140,7 +149,37 @@ class viewModuleCleaningExecutionController extends GetxController {
       plannedAtDateTimeCtrlrWeb.text = '${DateFormat('yyyy-MM-dd HH:mm:ss').format(DateTime.parse('${mcExecutionDetailsModel.value?.plannedAt}'))}';
       startedAtDateTimeCtrlrWeb.text = '${DateFormat('yyyy-MM-dd HH:mm:ss').format(DateTime.parse('${mcExecutionDetailsModel.value?.startedAt}'))}';
       listSchedules?.value = mcExecutionDetailsModel.value?.schedules ?? [];
+      // listEquipmentsList!.value = mcExecutionDetailsModel.value.
     }
+  }
+
+  Future<void> getEquipmentModelList(int facilityId, bool isLoading) async {
+    equipmentList.value = <EquipmentListModel>[];
+
+    final list = await viewModuleCleaningExecutionPresenter
+        .getEquipmentModelList(isLoading: isLoading, facilityId: facilityId);
+    // print('incidentReportFacilityId$facilityId');
+    // print('Incident Report List:$list');
+    for (var equipment_list in list) {
+      equipmentList.add(equipment_list);
+    }
+
+    if (list != null) {
+      equipmentList.value = list;
+      // filteredData.value = incidentReportList.value;
+      // print('Filtered data:${filteredData.value}');
+
+      // if (filteredData != null && filteredData.isNotEmpty) {
+      //   incidentReportModelList = filteredData[0];
+      //   var incidentListJson = incidentReportModelList?.toJson();
+      //   incidentListTableColumns.value = <String>[];
+      //   for (var key in incidentListJson?.keys.toList() ?? []) {
+      //     incidentListTableColumns.add(key);
+      //   }
+      // }
+    }
+
+    update(['equipment_list']);
   }
 
   // Future<void> getFacilityList() async {
