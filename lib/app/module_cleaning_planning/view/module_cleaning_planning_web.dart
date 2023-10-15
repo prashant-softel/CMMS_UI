@@ -601,43 +601,43 @@ class _ModuleCleaningPlanningWebState extends State<ModuleCleaningPlanningWeb> {
                                             ),
                                           ),
 
-                                    controller.id == 0
-                                        ? Container()
-                                        : Row(
-                                            mainAxisAlignment:
-                                                MainAxisAlignment.center,
-                                            children: [
-                                              Container(
-                                                height: 35,
-                                                child: CustomElevatedButton(
-                                                  backgroundColor:
-                                                      ColorValues.redColor,
-                                                  text: "Cancel",
-                                                  onPressed: () {
-                                                    // final _flutterSecureStorage =
-                                                    // const FlutterSecureStorage();
+                                    // controller.id == 0
+                                    //     ? Container()
+                                    //     : Row(
+                                    //         mainAxisAlignment:
+                                    //             MainAxisAlignment.center,
+                                    //         children: [
+                                    //           Container(
+                                    //             height: 35,
+                                    //             child: CustomElevatedButton(
+                                    //               backgroundColor:
+                                    //                   ColorValues.redColor,
+                                    //               text: "Cancel",
+                                    //               onPressed: () {
+                                    //                 // final _flutterSecureStorage =
+                                    //                 // const FlutterSecureStorage();
 
-                                                    // _flutterSecureStorage.delete(
-                                                    // key: "userId");
+                                    //                 // _flutterSecureStorage.delete(
+                                    //                 // key: "userId");
 
-                                                    Get.back();
-                                                  },
-                                                ),
-                                              ),
-                                              Dimens.boxWidth20,
-                                              Container(
-                                                height: 35,
-                                                child: CustomElevatedButton(
-                                                  backgroundColor:
-                                                      ColorValues.greenColor,
-                                                  text: 'Submit',
-                                                  onPressed: () {
-                                                    controller.updateMcPlan();
-                                                  },
-                                                ),
-                                              ),
-                                            ],
-                                          ),
+                                    //                 Get.back();
+                                    //               },
+                                    //             ),
+                                    //           ),
+                                    //           Dimens.boxWidth20,
+                                    //           Container(
+                                    //             height: 35,
+                                    //             child: CustomElevatedButton(
+                                    //               backgroundColor:
+                                    //                   ColorValues.greenColor,
+                                    //               text: 'Submit',
+                                    //               onPressed: () {
+                                    //                 controller.updateMcPlan();
+                                    //               },
+                                    //             ),
+                                    //           ),
+                                    //         ],
+                                    //       ),
                                   ],
                                 ),
                               ),
