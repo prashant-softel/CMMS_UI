@@ -15,7 +15,8 @@ import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:scrollable_table_view/scrollable_table_view.dart';
 
-class ViewModuleCleaningExecutionContentWeb extends GetView<viewModuleCleaningExecutionController> {
+class ViewModuleCleaningExecutionContentWeb
+    extends GetView<viewModuleCleaningExecutionController> {
   ViewModuleCleaningExecutionContentWeb({super.key});
 
   // final homeController = Get.find<HomeController>();
@@ -49,7 +50,8 @@ class ViewModuleCleaningExecutionContentWeb extends GetView<viewModuleCleaningEx
                       ),
                       boxShadow: [
                         BoxShadow(
-                          color: Color.fromARGB(255, 236, 234, 234).withOpacity(0.5),
+                          color: Color.fromARGB(255, 236, 234, 234)
+                              .withOpacity(0.5),
                           spreadRadius: 2,
                           blurRadius: 5,
                           offset: Offset(0, 2),
@@ -70,9 +72,11 @@ class ViewModuleCleaningExecutionContentWeb extends GetView<viewModuleCleaningEx
                           onTap: () {
                             Get.back();
                           },
-                          child: Text(" / MODULE CLEANING EXECUTION LIST", style: Styles.greyMediumLight12),
+                          child: Text(" / MODULE CLEANING EXECUTION LIST",
+                              style: Styles.greyMediumLight12),
                         ),
-                        Text(" / VIEW MODULE CLEANING EXECUTION", style: Styles.greyMediumLight12)
+                        Text(" / VIEW MODULE CLEANING EXECUTION",
+                            style: Styles.greyMediumLight12)
                       ],
                     ),
                   ),
@@ -112,16 +116,25 @@ class ViewModuleCleaningExecutionContentWeb extends GetView<viewModuleCleaningEx
                                             //     5,
                                             padding: EdgeInsets.all(5),
                                             decoration: BoxDecoration(
-                                              borderRadius: BorderRadius.circular(10),
+                                              borderRadius:
+                                                  BorderRadius.circular(10),
                                               border: Border.all(
-                                                color: controller.mcExecutionDetailsModel.value?.status == 380
+                                                color: controller
+                                                            .mcExecutionDetailsModel
+                                                            .value
+                                                            ?.status ==
+                                                        380
                                                     ? ColorValues.approveColor
                                                     : ColorValues.appRedColor,
                                                 width: 1,
                                               ),
                                               boxShadow: [
                                                 BoxShadow(
-                                                  color: controller.mcExecutionDetailsModel.value?.status == 380 //125
+                                                  color: controller
+                                                              .mcExecutionDetailsModel
+                                                              .value
+                                                              ?.status ==
+                                                          380 //125
 
                                                       ? ColorValues.approveColor
                                                       : ColorValues.appRedColor,
@@ -131,19 +144,24 @@ class ViewModuleCleaningExecutionContentWeb extends GetView<viewModuleCleaningEx
                                             child: Center(
                                                 child: Text(
                                               '${controller.mcExecutionDetailsModel.value?.status_short}',
-                                              style: TextStyle(color: Colors.white),
+                                              style: TextStyle(
+                                                  color: Colors.white),
                                             )),
                                           )
                                         ],
                                       ),
-                                      Divider(color: ColorValues.lightGreyColor),
+                                      Divider(
+                                          color: ColorValues.lightGreyColor),
                                       Dimens.boxHeight24,
                                       Row(
-                                        crossAxisAlignment: CrossAxisAlignment.start,
-                                        mainAxisAlignment: MainAxisAlignment.center,
+                                        crossAxisAlignment:
+                                            CrossAxisAlignment.start,
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.center,
                                         children: [
                                           Column(
-                                            crossAxisAlignment: CrossAxisAlignment.end,
+                                            crossAxisAlignment:
+                                                CrossAxisAlignment.end,
                                             children: [
                                               Text(
                                                 'Plan Id: ',
@@ -156,7 +174,8 @@ class ViewModuleCleaningExecutionContentWeb extends GetView<viewModuleCleaningEx
                                             ],
                                           ),
                                           Column(
-                                            crossAxisAlignment: CrossAxisAlignment.start,
+                                            crossAxisAlignment:
+                                                CrossAxisAlignment.start,
                                             children: [
                                               Text(
                                                 ' ${controller.planId}',
@@ -170,7 +189,8 @@ class ViewModuleCleaningExecutionContentWeb extends GetView<viewModuleCleaningEx
                                           ),
                                           Spacer(),
                                           Column(
-                                            crossAxisAlignment: CrossAxisAlignment.end,
+                                            crossAxisAlignment:
+                                                CrossAxisAlignment.end,
                                             children: [
                                               Text(
                                                 'Plan Title: ',
@@ -183,7 +203,8 @@ class ViewModuleCleaningExecutionContentWeb extends GetView<viewModuleCleaningEx
                                             ],
                                           ),
                                           Column(
-                                            crossAxisAlignment: CrossAxisAlignment.start,
+                                            crossAxisAlignment:
+                                                CrossAxisAlignment.start,
                                             children: [
                                               Text(
                                                 ' ${controller.mcExecutionDetailsModel.value?.title}',
@@ -197,7 +218,8 @@ class ViewModuleCleaningExecutionContentWeb extends GetView<viewModuleCleaningEx
                                           ),
                                           Spacer(),
                                           Column(
-                                            crossAxisAlignment: CrossAxisAlignment.end,
+                                            crossAxisAlignment:
+                                                CrossAxisAlignment.end,
                                             children: [
                                               Text(
                                                 'Planned By: ',
@@ -210,7 +232,8 @@ class ViewModuleCleaningExecutionContentWeb extends GetView<viewModuleCleaningEx
                                             ],
                                           ),
                                           Column(
-                                            crossAxisAlignment: CrossAxisAlignment.start,
+                                            crossAxisAlignment:
+                                                CrossAxisAlignment.start,
                                             children: [
                                               Text(
                                                 ' ${controller.mcExecutionDetailsModel.value?.plannedBy}',
@@ -224,7 +247,8 @@ class ViewModuleCleaningExecutionContentWeb extends GetView<viewModuleCleaningEx
                                           ),
                                           Spacer(),
                                           Column(
-                                            crossAxisAlignment: CrossAxisAlignment.end,
+                                            crossAxisAlignment:
+                                                CrossAxisAlignment.end,
                                             children: [
                                               Text(
                                                 'Planning Date Time: ',
@@ -237,7 +261,8 @@ class ViewModuleCleaningExecutionContentWeb extends GetView<viewModuleCleaningEx
                                             ],
                                           ),
                                           Column(
-                                            crossAxisAlignment: CrossAxisAlignment.start,
+                                            crossAxisAlignment:
+                                                CrossAxisAlignment.start,
                                             children: [
                                               Text(
                                                 ' ${controller.plannedAtDateTimeCtrlrWeb.text}',
@@ -258,15 +283,21 @@ class ViewModuleCleaningExecutionContentWeb extends GetView<viewModuleCleaningEx
                                       ///Schedule Execution
                                       Container(
                                         margin: Dimens.edgeInsets20,
-                                        height: ((controller.listSchedules?.length ?? 0) * 50) + 125,
+                                        height: ((controller.listSchedules
+                                                        ?.length ??
+                                                    0) *
+                                                50) +
+                                            125,
                                         decoration: BoxDecoration(
                                           border: Border.all(
-                                            color: ColorValues.lightGreyColorWithOpacity35,
+                                            color: ColorValues
+                                                .lightGreyColorWithOpacity35,
                                             width: 1,
                                           ),
                                           boxShadow: [
                                             BoxShadow(
-                                              color: ColorValues.appBlueBackgroundColor,
+                                              color: ColorValues
+                                                  .appBlueBackgroundColor,
                                               spreadRadius: 2,
                                               blurRadius: 5,
                                               offset: Offset(0, 2),
@@ -276,7 +307,8 @@ class ViewModuleCleaningExecutionContentWeb extends GetView<viewModuleCleaningEx
                                         child: Column(
                                           children: [
                                             Padding(
-                                              padding: const EdgeInsets.all(10.0),
+                                              padding:
+                                                  const EdgeInsets.all(10.0),
                                               child: Row(
                                                 children: [
                                                   Text(
@@ -287,116 +319,263 @@ class ViewModuleCleaningExecutionContentWeb extends GetView<viewModuleCleaningEx
                                               ),
                                             ),
                                             Divider(
-                                              color: ColorValues.greyLightColour,
+                                              color:
+                                                  ColorValues.greyLightColour,
                                             ),
                                             Expanded(
                                               child: DataTable2(
                                                 columnSpacing: 10,
-                                                border: TableBorder.all(color: Color.fromARGB(255, 206, 229, 234)),
+                                                border: TableBorder.all(
+                                                    color: Color.fromARGB(
+                                                        255, 206, 229, 234)),
                                                 columns: [
                                                   DataColumn(
                                                       label: Text(
                                                     "Schedule\nId",
-                                                    style: TextStyle(fontSize: 13, fontWeight: FontWeight.bold),
+                                                    style: TextStyle(
+                                                        fontSize: 13,
+                                                        fontWeight:
+                                                            FontWeight.bold),
                                                   )),
                                                   DataColumn(
                                                       label: Text(
                                                     "Execution\nId",
-                                                    style: TextStyle(fontSize: 13, fontWeight: FontWeight.bold),
+                                                    style: TextStyle(
+                                                        fontSize: 13,
+                                                        fontWeight:
+                                                            FontWeight.bold),
                                                   )),
                                                   DataColumn(
                                                       label: Text(
                                                     "Days",
-                                                    style: TextStyle(fontSize: 13, fontWeight: FontWeight.bold),
+                                                    style: TextStyle(
+                                                        fontSize: 13,
+                                                        fontWeight:
+                                                            FontWeight.bold),
                                                   )),
                                                   DataColumn(
                                                       label: Text(
                                                     "Scheduled\nModule",
-                                                    style: TextStyle(fontSize: 13, fontWeight: FontWeight.bold),
+                                                    style: TextStyle(
+                                                        fontSize: 13,
+                                                        fontWeight:
+                                                            FontWeight.bold),
                                                   )),
                                                   DataColumn(
                                                       label: Text(
                                                     "Cleaned",
-                                                    style: TextStyle(fontSize: 13, fontWeight: FontWeight.bold),
+                                                    style: TextStyle(
+                                                        fontSize: 13,
+                                                        fontWeight:
+                                                            FontWeight.bold),
                                                   )),
                                                   DataColumn(
                                                       label: Text(
                                                     "Abandoned",
-                                                    style: TextStyle(fontSize: 13, fontWeight: FontWeight.bold),
+                                                    style: TextStyle(
+                                                        fontSize: 13,
+                                                        fontWeight:
+                                                            FontWeight.bold),
                                                   )),
                                                   DataColumn(
                                                       label: Text(
                                                     "Pending",
-                                                    style: TextStyle(fontSize: 13, fontWeight: FontWeight.bold),
+                                                    style: TextStyle(
+                                                        fontSize: 13,
+                                                        fontWeight:
+                                                            FontWeight.bold),
                                                   )),
                                                   DataColumn(
                                                       label: Text(
                                                     "Type",
-                                                    style: TextStyle(fontSize: 13, fontWeight: FontWeight.bold),
+                                                    style: TextStyle(
+                                                        fontSize: 13,
+                                                        fontWeight:
+                                                            FontWeight.bold),
                                                   )),
                                                   DataColumn(
                                                       label: Text(
                                                     "Water\nUsed",
-                                                    style: TextStyle(fontSize: 13, fontWeight: FontWeight.bold),
+                                                    style: TextStyle(
+                                                        fontSize: 13,
+                                                        fontWeight:
+                                                            FontWeight.bold),
                                                   )),
                                                   DataColumn(
                                                       label: Text(
                                                     "Start\nDate",
-                                                    style: TextStyle(fontSize: 13, fontWeight: FontWeight.bold),
+                                                    style: TextStyle(
+                                                        fontSize: 13,
+                                                        fontWeight:
+                                                            FontWeight.bold),
                                                   )),
                                                   DataColumn(
                                                       label: Text(
                                                     "End\nDate",
-                                                    style: TextStyle(fontSize: 13, fontWeight: FontWeight.bold),
+                                                    style: TextStyle(
+                                                        fontSize: 13,
+                                                        fontWeight:
+                                                            FontWeight.bold),
                                                   )),
                                                   DataColumn(
                                                       label: Text(
                                                     "Remark",
-                                                    style: TextStyle(fontSize: 13, fontWeight: FontWeight.bold),
+                                                    style: TextStyle(
+                                                        fontSize: 13,
+                                                        fontWeight:
+                                                            FontWeight.bold),
                                                   )),
                                                   DataColumn(
                                                       label: Text(
                                                     "Status",
-                                                    style: TextStyle(fontSize: 13, fontWeight: FontWeight.bold),
+                                                    style: TextStyle(
+                                                        fontSize: 13,
+                                                        fontWeight:
+                                                            FontWeight.bold),
                                                   )),
                                                   DataColumn(
                                                       label: Text(
                                                     "Execution",
-                                                    style: TextStyle(fontSize: 13, fontWeight: FontWeight.bold),
+                                                    style: TextStyle(
+                                                        fontSize: 13,
+                                                        fontWeight:
+                                                            FontWeight.bold),
                                                   )),
                                                 ],
                                                 rows: List<DataRow>.generate(
-                                                  controller.listSchedules?.length ?? 5,
+                                                  controller.listSchedules
+                                                          ?.length ??
+                                                      5,
                                                   (index) => DataRow(cells: [
-                                                    DataCell(Text(controller.listSchedules?[index]?.scheduleId.toString() ?? '')),
-                                                    DataCell(Text(controller.listSchedules?[index]?.executionId.toString() ?? '')),
-                                                    DataCell(Text(controller.listSchedules?[index]?.cleaningDay.toString() ?? '')),
-                                                    DataCell(Text(controller.listSchedules?[index]?.scheduledModules.toString() ?? '')),
-                                                    DataCell(Text(controller.listSchedules?[index]?.cleanedModules.toString() ?? '')),
-                                                    DataCell(Text(controller.listSchedules?[index]?.abandonedModules.toString() ?? '')),
-                                                    DataCell(Text(controller.listSchedules?[index]?.pendingModules.toString() ?? '')),
-                                                    DataCell(Text(controller.listSchedules?[index]?.cleaningTypeName.toString() ?? '')),
-                                                    DataCell(Text(controller.listSchedules?[index]?.waterUsed.toString() ?? '')),
-                                                    DataCell(Text(controller.listSchedules?[index]?.execution_date.toString() ?? '')),
-                                                    DataCell(Text(controller.listSchedules?[index]?.execution_date.toString() ?? '')),
-                                                    DataCell(Text(controller.listSchedules?[index]?.remark.toString() ?? '')),
-                                                    DataCell(Text(controller.listSchedules?[index]?.status_short.toString() ?? '')),
+                                                    DataCell(Text(controller
+                                                            .listSchedules?[
+                                                                index]
+                                                            ?.scheduleId
+                                                            .toString() ??
+                                                        '')),
+                                                    DataCell(Text(controller
+                                                            .listSchedules?[
+                                                                index]
+                                                            ?.executionId
+                                                            .toString() ??
+                                                        '')),
+                                                    DataCell(Text(controller
+                                                            .listSchedules?[
+                                                                index]
+                                                            ?.cleaningDay
+                                                            .toString() ??
+                                                        '')),
+                                                    DataCell(Text(controller
+                                                            .listSchedules?[
+                                                                index]
+                                                            ?.scheduledModules
+                                                            .toString() ??
+                                                        '')),
+                                                    DataCell(Text(controller
+                                                            .listSchedules?[
+                                                                index]
+                                                            ?.cleanedModules
+                                                            .toString() ??
+                                                        '')),
+                                                    DataCell(Text(controller
+                                                            .listSchedules?[
+                                                                index]
+                                                            ?.abandonedModules
+                                                            .toString() ??
+                                                        '')),
+                                                    DataCell(Text(controller
+                                                            .listSchedules?[
+                                                                index]
+                                                            ?.pendingModules
+                                                            .toString() ??
+                                                        '')),
+                                                    DataCell(Text(controller
+                                                            .listSchedules?[
+                                                                index]
+                                                            ?.cleaningTypeName
+                                                            .toString() ??
+                                                        '')),
+                                                    DataCell(Text(controller
+                                                            .listSchedules?[
+                                                                index]
+                                                            ?.waterUsed
+                                                            .toString() ??
+                                                        '')),
+                                                    DataCell(Text(controller
+                                                            .listSchedules?[
+                                                                index]
+                                                            ?.execution_date
+                                                            .toString() ??
+                                                        '')),
+                                                    DataCell(Text(controller
+                                                            .listSchedules?[
+                                                                index]
+                                                            ?.execution_date
+                                                            .toString() ??
+                                                        '')),
+                                                    DataCell(Text(controller
+                                                            .listSchedules?[
+                                                                index]
+                                                            ?.remark
+                                                            .toString() ??
+                                                        '')),
+                                                    DataCell(Text(controller
+                                                            .listSchedules?[
+                                                                index]
+                                                            ?.status_short
+                                                            .toString() ??
+                                                        '')),
                                                     DataCell(Column(
                                                       children: [
                                                         TableActionButton(
-                                                          color: ColorValues.appDarkBlueColor,
-                                                          icon: Icons.remove_red_eye_outlined,
+                                                          color: ColorValues
+                                                              .appDarkBlueColor,
+                                                          icon: Icons
+                                                              .remove_red_eye_outlined,
                                                           message: 'View',
                                                           onPress: () {
-                                                             var selectedSchedule = controller.listSchedules?.firstWhere((e) => "${e?.scheduleId}" == controller.listSchedules?[index]?.scheduleId.toString());
+                                                            var selectedSchedule = controller
+                                                                .listSchedules
+                                                                ?.firstWhere((e) =>
+                                                                    "${e?.scheduleId}" ==
+                                                                    controller
+                                                                        .listSchedules?[
+                                                                            index]
+                                                                        ?.scheduleId
+                                                                        .toString());
 
-                          
-                                                            print('filteredData:${selectedSchedule!}');
+                                                            var mappedData = {};
+
+                                                            selectedSchedule!
+                                                                .equipments
+                                                                ?.forEach((e) {
+                                                              mappedData[
+                                                                  e?.id] = {
+                                                                'isCleanedSmbCheck':
+                                                                    e?.status ==
+                                                                            407
+                                                                        ? true
+                                                                        : false,
+                                                                'isAbandonSmbCheck':
+                                                                    e?.status ==
+                                                                            407
+                                                                        ? true
+                                                                        : false
+                                                              };
+                                                            });
+
+                                                            print(
+                                                                'filteredData:${selectedSchedule!}');
 
                                                             Get.dialog(viewModuleCleaningExecutionDialog(
-                                                              waterUsed: controller.listSchedules?[index]?.waterUsed,
-                                                              schedule: selectedSchedule!,
-                                                            ));
+                                                                waterUsed: controller
+                                                                    .listSchedules?[
+                                                                        index]
+                                                                    ?.waterUsed,
+                                                                schedule:
+                                                                    selectedSchedule!,
+                                                                mappedData:
+                                                                    mappedData));
                                                           },
                                                         ),
                                                       ],
@@ -633,15 +812,21 @@ class ViewModuleCleaningExecutionContentWeb extends GetView<viewModuleCleaningEx
                                       ///MC Execution History
                                       Container(
                                         margin: Dimens.edgeInsets20,
-                                        height: ((controller.historyList?.length ?? 0) * 50) + 125,
+                                        height:
+                                            ((controller.historyList?.length ??
+                                                        0) *
+                                                    50) +
+                                                125,
                                         decoration: BoxDecoration(
                                           border: Border.all(
-                                            color: ColorValues.lightGreyColorWithOpacity35,
+                                            color: ColorValues
+                                                .lightGreyColorWithOpacity35,
                                             width: 1,
                                           ),
                                           boxShadow: [
                                             BoxShadow(
-                                              color: ColorValues.appBlueBackgroundColor,
+                                              color: ColorValues
+                                                  .appBlueBackgroundColor,
                                               spreadRadius: 2,
                                               blurRadius: 5,
                                               offset: Offset(0, 2),
@@ -651,7 +836,8 @@ class ViewModuleCleaningExecutionContentWeb extends GetView<viewModuleCleaningEx
                                         child: Column(
                                           children: [
                                             Padding(
-                                              padding: const EdgeInsets.all(10.0),
+                                              padding:
+                                                  const EdgeInsets.all(10.0),
                                               child: Row(
                                                 children: [
                                                   Text(
@@ -662,7 +848,8 @@ class ViewModuleCleaningExecutionContentWeb extends GetView<viewModuleCleaningEx
                                               ),
                                             ),
                                             Divider(
-                                              color: ColorValues.greyLightColour,
+                                              color:
+                                                  ColorValues.greyLightColour,
                                             ),
                                             // Column(
                                             //   children: [
@@ -702,42 +889,77 @@ class ViewModuleCleaningExecutionContentWeb extends GetView<viewModuleCleaningEx
 
                                             Expanded(
                                               child: DataTable2(
-                                                border: TableBorder.all(color: Color.fromARGB(255, 206, 229, 234)),
+                                                border: TableBorder.all(
+                                                    color: Color.fromARGB(
+                                                        255, 206, 229, 234)),
                                                 columns: [
                                                   DataColumn(
                                                       label: Text(
                                                     "Time Stamp",
-                                                    style: TextStyle(fontSize: 15, fontWeight: FontWeight.bold),
+                                                    style: TextStyle(
+                                                        fontSize: 15,
+                                                        fontWeight:
+                                                            FontWeight.bold),
                                                   )),
                                                   DataColumn(
                                                       label: Text(
                                                     "Posted By",
-                                                    style: TextStyle(fontSize: 15, fontWeight: FontWeight.bold),
+                                                    style: TextStyle(
+                                                        fontSize: 15,
+                                                        fontWeight:
+                                                            FontWeight.bold),
                                                   )),
                                                   DataColumn(
                                                       label: Text(
                                                     "Comment",
-                                                    style: TextStyle(fontSize: 15, fontWeight: FontWeight.bold),
+                                                    style: TextStyle(
+                                                        fontSize: 15,
+                                                        fontWeight:
+                                                            FontWeight.bold),
                                                   )),
                                                   DataColumn(
                                                       label: Text(
                                                     "Location",
-                                                    style: TextStyle(fontSize: 15, fontWeight: FontWeight.bold),
+                                                    style: TextStyle(
+                                                        fontSize: 15,
+                                                        fontWeight:
+                                                            FontWeight.bold),
                                                   )),
                                                   DataColumn(
                                                       label: Text(
                                                     "Status",
-                                                    style: TextStyle(fontSize: 15, fontWeight: FontWeight.bold),
+                                                    style: TextStyle(
+                                                        fontSize: 15,
+                                                        fontWeight:
+                                                            FontWeight.bold),
                                                   )),
                                                 ],
                                                 rows: List<DataRow>.generate(
-                                                  controller.historyList?.length ?? 0,
+                                                  controller.historyList
+                                                          ?.length ??
+                                                      0,
                                                   (index) => DataRow(cells: [
-                                                    DataCell(Text(controller.historyList?[index]?.createdAt.toString() ?? '')),
-                                                    DataCell(Text(controller.historyList?[index]?.createdByName.toString() ?? '')),
-                                                    DataCell(Text(controller.historyList?[index]?.comment.toString() ?? '')),
+                                                    DataCell(Text(controller
+                                                            .historyList?[index]
+                                                            ?.createdAt
+                                                            .toString() ??
+                                                        '')),
+                                                    DataCell(Text(controller
+                                                            .historyList?[index]
+                                                            ?.createdByName
+                                                            .toString() ??
+                                                        '')),
+                                                    DataCell(Text(controller
+                                                            .historyList?[index]
+                                                            ?.comment
+                                                            .toString() ??
+                                                        '')),
                                                     DataCell(Text('--')),
-                                                    DataCell(Text(controller.historyList?[index]?.status_name.toString() ?? '')),
+                                                    DataCell(Text(controller
+                                                            .historyList?[index]
+                                                            ?.status_name
+                                                            .toString() ??
+                                                        '')),
                                                   ]),
                                                 ),
                                               ),
@@ -830,7 +1052,8 @@ class ViewModuleCleaningExecutionContentWeb extends GetView<viewModuleCleaningEx
                                       // ),
 
                                       Row(
-                                        mainAxisAlignment: MainAxisAlignment.center,
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.center,
                                         children: [
                                           SizedBox(
                                             height: 150,
@@ -850,18 +1073,24 @@ class ViewModuleCleaningExecutionContentWeb extends GetView<viewModuleCleaningEx
                                           ),
                                           varUserAccessModel.value.access_list!
                                                       .where((e) =>
-                                                          e.feature_id == UserAccessConstants.kModuleCleaningFeatureId &&
-                                                          e.approve == UserAccessConstants.kHaveApproveAccess)
+                                                          e.feature_id ==
+                                                              UserAccessConstants
+                                                                  .kModuleCleaningFeatureId &&
+                                                          e.approve ==
+                                                              UserAccessConstants
+                                                                  .kHaveApproveAccess)
                                                       .length >
                                                   0
                                               ? Container(
                                                   height: 28,
                                                   child: CustomElevatedButton(
-                                                    backgroundColor: ColorValues.rejectColor,
+                                                    backgroundColor:
+                                                        ColorValues.rejectColor,
                                                     text: "Reject",
                                                     icon: Icons.close,
                                                     onPressed: () {
-                                                      Get.dialog(RejectMcExecutionDialog(
+                                                      Get.dialog(
+                                                          RejectMcExecutionDialog(
                                                         id: controller.id,
                                                       ));
                                                     },
@@ -871,18 +1100,24 @@ class ViewModuleCleaningExecutionContentWeb extends GetView<viewModuleCleaningEx
                                           Dimens.boxWidth10,
                                           varUserAccessModel.value.access_list!
                                                       .where((e) =>
-                                                          e.feature_id == UserAccessConstants.kModuleCleaningFeatureId &&
-                                                          e.approve == UserAccessConstants.kHaveApproveAccess)
+                                                          e.feature_id ==
+                                                              UserAccessConstants
+                                                                  .kModuleCleaningFeatureId &&
+                                                          e.approve ==
+                                                              UserAccessConstants
+                                                                  .kHaveApproveAccess)
                                                       .length >
                                                   0
                                               ? Container(
                                                   height: 28,
                                                   child: CustomElevatedButton(
-                                                    backgroundColor: ColorValues.appGreenColor,
+                                                    backgroundColor: ColorValues
+                                                        .appGreenColor,
                                                     text: "Approve",
                                                     icon: Icons.add,
                                                     onPressed: () {
-                                                      Get.dialog(ApproveMcExecutionDialog(
+                                                      Get.dialog(
+                                                          ApproveMcExecutionDialog(
                                                         id: controller.id,
                                                       ));
                                                     },
@@ -894,7 +1129,8 @@ class ViewModuleCleaningExecutionContentWeb extends GetView<viewModuleCleaningEx
                                             height: 28,
                                             child: CustomElevatedButton(
                                               icon: Icons.print_outlined,
-                                              backgroundColor: ColorValues.appDarkBlueColor,
+                                              backgroundColor:
+                                                  ColorValues.appDarkBlueColor,
                                               text: "Print",
                                               onPressed: () {
                                                 // controller.printScreen();

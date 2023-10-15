@@ -19,7 +19,8 @@ import '../../domain/models/facility_model.dart';
 import 'view_module_cleaning_execution_presenter.dart';
 
 class viewModuleCleaningExecutionController extends GetxController {
-  viewModuleCleaningExecutionController(this.viewModuleCleaningExecutionPresenter);
+  viewModuleCleaningExecutionController(
+      this.viewModuleCleaningExecutionPresenter);
   ViewModuleCleaningExecutionPresenter viewModuleCleaningExecutionPresenter;
 
   final HomeController homeController = Get.find();
@@ -30,7 +31,8 @@ class viewModuleCleaningExecutionController extends GetxController {
 
   Schedules? selectedSchedule;
 
-  Rx<List<List<Map<String, String>>>> rowItem = Rx<List<List<Map<String, String>>>>([]);
+  Rx<List<List<Map<String, String>>>> rowItem =
+      Rx<List<List<Map<String, String>>>>([]);
   List<Escalation> days = [];
   Map<String, RoleModel> dropdownMapperData = {};
   Map<String, PaiedModel> paiddropdownMapperData = {};
@@ -74,8 +76,10 @@ class viewModuleCleaningExecutionController extends GetxController {
   RxList<EquipmentsList?>? listEquipmentsList = <EquipmentsList?>[].obs;
 
   ///Mc Execution details
-  Rx<EndMCExecutionDetailsModel?> mcExecutionDetailsModel = EndMCExecutionDetailsModel().obs;
-  RxList<EndMCExecutionDetailsModel?>? mcExecutionDetailsList = <EndMCExecutionDetailsModel?>[].obs;
+  Rx<EndMCExecutionDetailsModel?> mcExecutionDetailsModel =
+      EndMCExecutionDetailsModel().obs;
+  RxList<EndMCExecutionDetailsModel?>? mcExecutionDetailsList =
+      <EndMCExecutionDetailsModel?>[].obs;
 
   ///Date Time
   var startedAtDateTimeCtrlrWeb = TextEditingController();
@@ -122,13 +126,16 @@ class viewModuleCleaningExecutionController extends GetxController {
     // newPermitDetails!.value = <NewPermitListModel>[];
     mcExecutionDetailsList?.value = <EndMCExecutionDetailsModel>[];
 
-    final _mcExecutionDetails = await viewModuleCleaningExecutionPresenter.getMCExecutionDetail(executionId: executionId);
+    final _mcExecutionDetails = await viewModuleCleaningExecutionPresenter
+        .getMCExecutionDetail(executionId: executionId);
     print('View MC Execution Detail:$_mcExecutionDetails');
 
     if (_mcExecutionDetails != null) {
       mcExecutionDetailsModel.value = _mcExecutionDetails;
-      plannedAtDateTimeCtrlrWeb.text = '${DateFormat('yyyy-MM-dd HH:mm:ss').format(DateTime.parse('${mcExecutionDetailsModel.value?.plannedAt}'))}';
-      startedAtDateTimeCtrlrWeb.text = '${DateFormat('yyyy-MM-dd HH:mm:ss').format(DateTime.parse('${mcExecutionDetailsModel.value?.startedAt}'))}';
+      plannedAtDateTimeCtrlrWeb.text =
+          '${DateFormat('yyyy-MM-dd HH:mm:ss').format(DateTime.parse('${mcExecutionDetailsModel.value?.plannedAt}'))}';
+      startedAtDateTimeCtrlrWeb.text =
+          '${DateFormat('yyyy-MM-dd HH:mm:ss').format(DateTime.parse('${mcExecutionDetailsModel.value?.startedAt}'))}';
       listSchedules?.value = mcExecutionDetailsModel.value?.schedules ?? [];
       // listEquipmentsList!.value = mcExecutionDetailsModel.value.
     }
@@ -137,21 +144,11 @@ class viewModuleCleaningExecutionController extends GetxController {
   Future<void> getEquipmentModelList(int facilityId, bool isLoading) async {
     equipmentList.value = <EquipmentListModel>[];
 
-    final list = await viewModuleCleaningExecutionPresenter.getEquipmentModelList(isLoading: isLoading, facilityId: facilityId);
+    final list = await viewModuleCleaningExecutionPresenter
+        .getEquipmentModelList(isLoading: isLoading, facilityId: facilityId);
     // print('incidentReportFacilityId$facilityId');
     // print('Incident Report List:$list');
-    var selectedEquipment = selectedSchedule?.equipments ?? [];
     for (var equipment_list in list) {
-      equipment_list.smbs.map((e) {
-        SMBS smbs = e;
-        EquipmentsList? eqp = selectedEquipment.firstWhere((element) {
-          return element?.id == e.smbId;
-        });
-        if (eqp != null) {
-          e.isCleanedSmbCheck = eqp.status == 407 ? true : false;
-        }
-        // e.isCleanedSmbCheck =
-      });
       equipmentList.add(equipment_list);
     }
 
@@ -190,11 +187,13 @@ class viewModuleCleaningExecutionController extends GetxController {
     {
       String _comment = approveCommentTextFieldCtrlr.text.trim();
 
-      CommentModel commentMCExecutionAproveModel = CommentModel(id: id, comment: _comment);
+      CommentModel commentMCExecutionAproveModel =
+          CommentModel(id: id, comment: _comment);
 
       var mcExecutionApproveJsonString = commentMCExecutionAproveModel.toJson();
 
-      Map<String, dynamic>? response = await viewModuleCleaningExecutionPresenter.mcExecutionApprovedButton(
+      Map<String, dynamic>? response =
+          await viewModuleCleaningExecutionPresenter.mcExecutionApprovedButton(
         mcExecutionApproveJsonString: mcExecutionApproveJsonString,
         isLoading: true,
       );
@@ -208,11 +207,15 @@ class viewModuleCleaningExecutionController extends GetxController {
     {
       String _comment = rejectCommentTextFieldCtrlr.text.trim();
 
-      CommentModel commentMCExecutionAproveModel = CommentModel(id: id, comment: _comment);
+      CommentModel commentMCExecutionAproveModel =
+          CommentModel(id: id, comment: _comment);
 
-      var rejectMcExecutionApproveJsonString = commentMCExecutionAproveModel.toJson();
+      var rejectMcExecutionApproveJsonString =
+          commentMCExecutionAproveModel.toJson();
 
-      Map<String, dynamic>? response = await viewModuleCleaningExecutionPresenter.rejectMcExecutionApprovedButton(
+      Map<String, dynamic>? response =
+          await viewModuleCleaningExecutionPresenter
+              .rejectMcExecutionApprovedButton(
         rejectMcExecutionApproveJsonString: rejectMcExecutionApproveJsonString,
         isLoading: true,
       );
@@ -228,14 +231,15 @@ class viewModuleCleaningExecutionController extends GetxController {
     // int tempModuleType = 21;
     // int id = Get.arguments;
     //
-    historyList?.value = await viewModuleCleaningExecutionPresenter.getMCExecutionHistory(
-          // tempModuleType,
-          // tempJobCardId,
-          moduleType,
-          id,
-          true,
-        ) ??
-        [];
+    historyList?.value =
+        await viewModuleCleaningExecutionPresenter.getMCExecutionHistory(
+              // tempModuleType,
+              // tempJobCardId,
+              moduleType,
+              id,
+              true,
+            ) ??
+            [];
     update(["historyList"]);
   }
 
