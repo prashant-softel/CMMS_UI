@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:cmms/app/app.dart';
 import 'package:cmms/app/module_cleaning_planning/module_cleaning_planning_controller.dart';
 import 'package:cmms/app/stock_managment_add_goods_orders.dart/view/stock_management_add_goods_orders_web.dart';
@@ -297,10 +299,9 @@ class _ModuleCleaningPlanningWebState extends State<ModuleCleaningPlanningWeb> {
                                         : Container(
                                             margin: Dimens.edgeInsets20,
                                             height:
-                                                // ((controller.filteredInventoryNameList
-                                                //             .length) *
-                                                //         40) +
-                                                300,
+                                                ((controller.schedules.length) *
+                                                        40) +
+                                                    150,
                                             decoration: BoxDecoration(
                                               border: Border.all(
                                                 color: ColorValues
@@ -375,6 +376,16 @@ class _ModuleCleaningPlanningWebState extends State<ModuleCleaningPlanningWeb> {
                                                     ],
                                                   ),
                                                 ),
+                                                Column(
+                                                    children: []..addAll(
+                                                          controller
+                                                              .rowItem.value
+                                                              .map((e) {
+                                                        return Text(
+                                                            jsonEncode(e));
+                                                      }))),
+                                                Text(jsonEncode(controller
+                                                    .typedropdownMapperData)),
                                                 Expanded(
                                                   child: DataTable2(
                                                     border: TableBorder.all(
@@ -439,6 +450,8 @@ class _ModuleCleaningPlanningWebState extends State<ModuleCleaningPlanningWeb> {
                                                                       .bold),
                                                         ),
                                                       ),
+
+                                                      // print({"mappedData": mappedData});
                                                     ],
                                                     rows: controller
                                                         .rowItem.value
@@ -449,7 +462,7 @@ class _ModuleCleaningPlanningWebState extends State<ModuleCleaningPlanningWeb> {
                                                             .map((mapData) {
                                                           return DataCell(
                                                             (mapData['key'] ==
-                                                                    "type")
+                                                                    "cleaningType")
                                                                 ? Padding(
                                                                     padding:
                                                                         const EdgeInsets
@@ -472,7 +485,7 @@ class _ModuleCleaningPlanningWebState extends State<ModuleCleaningPlanningWeb> {
                                                                               .size
                                                                               .width,
                                                                           dropdownList:
-                                                                              controller.type,
+                                                                              controller.cleaningType,
                                                                           selectedValue:
                                                                               mapData["value"],
                                                                           onValueChanged:
@@ -537,7 +550,7 @@ class _ModuleCleaningPlanningWebState extends State<ModuleCleaningPlanningWeb> {
                                                       ColorValues.greenColor,
                                                   text: 'Submit',
                                                   onPressed: () {
-                                                    // controller.createMcPlan();
+                                                    controller.updateMcPlan();
                                                   },
                                                 ),
                                               ),

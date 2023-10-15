@@ -1439,12 +1439,12 @@ class DataRepository extends DomainRepository {
 
   Future<ResponseModel> updateMcPlan({
     required String auth,
-    updateMcModelJsonString,
+    updateMcPlans,
     bool? isLoading,
   }) async =>
       await connectHelper.updateMcPlan(
         auth: auth,
-        updateMcModelJsonString: updateMcModelJsonString,
+        updateMcPlans: updateMcPlans,
         isLoading: isLoading ?? false,
       );
 

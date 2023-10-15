@@ -31,11 +31,11 @@ class ModuleCleaningPlanningPresenter {
   }
 
   Future<Map<String, dynamic>?> updateMcPlan({
-    updateMcModelJsonString,
+    updateMcPlans,
     required bool isLoading,
   }) async {
     return moduleCleaningPlanningUsecase.updateMcPlan(
-      updateMcModelJsonString: updateMcModelJsonString,
+      updateMcPlans: updateMcPlans,
       isLoading: isLoading,
     );
   }

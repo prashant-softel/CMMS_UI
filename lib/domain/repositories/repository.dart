@@ -3351,8 +3351,7 @@ class Repository {
     }
   }
 
-
-   Future<void> endMcExecutionButton(
+  Future<void> endMcExecutionButton(
     int? executionId,
     bool? isLoading,
   ) async {
@@ -3375,7 +3374,6 @@ class Repository {
       log(error.toString());
     }
   }
-
 
   Future<void> startMCExecutionScheduleButton(
     int? scheduleId,
@@ -3957,14 +3955,14 @@ class Repository {
   }
 
   Future<Map<String, dynamic>> updateMcPlan(
-    updateMcModelJsonString,
+    updateMcPlans,
     bool? isLoading,
   ) async {
     try {
       final auth = await getSecuredValue(LocalKeys.authToken);
       final res = await _dataRepository.updateMcPlan(
         auth: auth,
-        updateMcModelJsonString: updateMcModelJsonString,
+        updateMcPlans: updateMcPlans,
         isLoading: isLoading ?? false,
       );
 

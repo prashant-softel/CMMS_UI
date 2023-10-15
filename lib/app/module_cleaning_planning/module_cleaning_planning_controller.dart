@@ -35,10 +35,6 @@ class ModuleCleaningPlanningController extends GetxController {
   TextEditingController mcTitelCtrlr = TextEditingController();
 
   var durationInDayCtrlr = TextEditingController();
-  RxList<McPalningDetailsModel?>? getMcDetailsByIDModelList =
-      <McPalningDetailsModel?>[].obs;
-  Rx<McPalningDetailsModel?> getMcDetailsByIDModel =
-      McPalningDetailsModel().obs;
 
   Rx<String> selectedfrequency = ''.obs;
   Rx<bool> isSelectedfrequency = true.obs;
@@ -53,17 +49,17 @@ class ModuleCleaningPlanningController extends GetxController {
   RxList<EquipmentListModel?> equipmentList = <EquipmentListModel?>[].obs;
   RxList<SMBS> smblist = <SMBS>[].obs;
 
-  RxList<McPalningDetailsModel?>? mcPlanDetailsList =
-      <McPalningDetailsModel?>[].obs;
+  // RxList<McPalningDetailsModel?>? mcPlanDetailsList =
+  //     <McPalningDetailsModel?>[].obs;
   Rx<McPalningDetailsModel?> mcPlanDetailsModel = McPalningDetailsModel().obs;
   var days = <TypeModel>[
-    TypeModel(name: 'Day 1', id: "0"),
-    TypeModel(name: 'Day 2', id: "1"),
-    TypeModel(name: 'Day 3', id: "2"),
+    TypeModel(name: 'Day 1', id: "1"),
+    TypeModel(name: 'Day 2', id: "2"),
+    TypeModel(name: 'Day 3', id: "3"),
   ];
   Map<String, TypeModel> typedropdownMapperData = {};
 
-  RxList<TypeModel> type = <TypeModel>[
+  RxList<TypeModel> cleaningType = <TypeModel>[
     TypeModel(name: "Please Select", id: "0"),
     TypeModel(name: 'Dry', id: "1"),
     TypeModel(name: 'Wet', id: "2"),
@@ -74,15 +70,15 @@ class ModuleCleaningPlanningController extends GetxController {
   //   TypeModel(name: 'Day 2', id: "2"),
   //   TypeModel(name: 'Day 3', id: "3"),
   // ];
-  // void addRowItem() {
-  //   rowItem.value.add([
-  //     {"key": "day", "value": ''},
-  //     {"key": "noOfInverters", "value": ''},
-  //     {'key': "noOfSMBs", "value": ''},
-  //     {'key': "noOfModules", "value": ''},
-  //     {'key': "type", "value": 'Please Select'},
-  //   ]);
-  // }
+  void addRowItem() {
+    rowItem.value.add([
+      {"key": "day", "value": ''},
+      {"key": "noOfInverters", "value": ''},
+      {'key': "noOfSMBs", "value": ''},
+      {'key': "noOfModules", "value": ''},
+      {'key': "cleaningType", "value": 'Please Select', "id": ""},
+    ]);
+  }
 
   @override
   void onInit() async {
@@ -124,53 +120,15 @@ class ModuleCleaningPlanningController extends GetxController {
       print(e.toString() + 'userId');
     }
   }
-  // void onInit() async {
-  //   try {
-  //     facilityIdStreamSubscription = homecontroller.facilityId$.listen((event) {
-  //       facilityId = event;
-
-  //       Future.delayed(Duration(seconds: 1), () {
-  //         getFrequencyList();
-  //       });
-
-  //       Future.delayed(Duration(seconds: 1), () {
-  //         getEquipmentModelList(facilityId, true);
-  //       });
-  //       Future.delayed(Duration(seconds: 1), () {
-  //         getAssignedToList();
-  //       });
-  //       if (id != 0) {
-  //         Future.delayed(Duration(seconds: 1), () {
-  //           getMcPlanDetail(planId: id.value);
-  //         });
-  //       }
-//     });
-  //     super.onInit();
-  //   } catch (e) {
-  //     print(e);
-  //   }
-
-  //   super.onInit();
-  // }
 
   Future<void> getEquipmentModelList(int facilityId, bool isLoading) async {
     equipmentList.value = <EquipmentListModel>[];
 
     final list = await moduleCleaningPlanningPresenter.getEquipmentModelList(
         isLoading: isLoading, facilityId: facilityId);
-    // print('incidentReportFacilityId$facilityId');
-    // print('Incident Report List:$list');
-    // for (var equipment_list in list) {
-    //   equipmentList.add(equipment_list);
-    // }
 
     if (list != null) {
       equipmentList.value = list;
-      // for (var equimentCategory in list) {
-      //   smblist.add(equimentCategory.smbs as SMBS);
-      // }
-
-      // }
     }
 
     update(['equipment_list']);
@@ -206,6 +164,7 @@ class ModuleCleaningPlanningController extends GetxController {
     CreateMcPalningsModel createMcModel = CreateMcPalningsModel(
         // planId: 0,
         // assignedToId: 0,
+
         facilityId: facilityId,
         frequencyId: selectedfrequencyId,
         noOfCleaningDays: int.tryParse(_durationInDayCtrlr) ?? 0,
@@ -223,50 +182,52 @@ class ModuleCleaningPlanningController extends GetxController {
   }
 
   void updateMcPlan() async {
-    // String _durationInDayCtrlr = durationInDayCtrlr.text.trim();
-    // String _mcTitelCtrlr = mcTitelCtrlr.text.trim();
-    // List<Schedule> schedules = [];
-    // List<Equipments?>? equipments = [];
-    // equipmentList.forEach((e) {
-    //   e?.smbs.forEach((element) {
-    //     equipments.add(Equipments(id: element.smbId ?? 0));
-    //   });
-    // });
-    // equipmentList.forEach((e) {
-    //   schedules.add(
-    //       Schedule(cleaningDay: 1, cleaningType: 1, equipments: equipments));
-    // });
-    CreateMcPalningsModel updateMcModel = CreateMcPalningsModel(
-        // planId: 63,
-        facilityId: 1779,
-        title: "new test",
-        noOfCleaningDays: 3,
-        frequencyId: 2,
-        // startDate: "2023-10-11",
-        // assignedToId: 12,
-        schedules: []
-        // noOfCleaningDays: int.tryParse(_durationInDayCtrlr) ?? 0,
-        // title: _mcTitelCtrlr,
-        // schedules: schedules
-        );
+    var mappedData = {};
+    List<Schedule> schedules = [];
+    print({"dsfdsfdsfdsf": mcPlanDetailsModel.value});
+    return;
 
-    var updateMcModelJsonString = updateMcModel.toJson();
+    mappedData.forEach((key, value) {
+      List<Equipments> eqp = value.map<Equipments>((e) {
+        return Equipments(id: e);
+      }).toList();
+      schedules
+          .add(Schedule(cleaningDay: int.tryParse('${key}'), equipments: eqp));
+    });
+    // rowItem.value.forEach((element) {
+    //   Schedule item = Schedule(
+    //     cleaningType: int.tryParse('${element[4]["id"]}'),
+    //   );
+
+    //   // Schedule.add(item);
+    // });
+    print({"mappedData": mappedData});
+
+    String _durationInDayCtrlr = durationInDayCtrlr.text.trim();
+    String _mcTitelCtrlr = mcTitelCtrlr.text.trim();
+
+    CreateMcPalningsModel createMcModel = CreateMcPalningsModel(
+
+        // assignedToId: 0,
+        facilityId: facilityId,
+        frequencyId: selectedfrequencyId,
+        noOfCleaningDays: int.tryParse(_durationInDayCtrlr) ?? 0,
+        title: _mcTitelCtrlr,
+        schedules: schedules);
+
+    var updateMcModelJsonString = [createMcModel.toJson()];
     Map<String, dynamic>? responseCreateMcModel =
         await moduleCleaningPlanningPresenter.updateMcPlan(
-      updateMcModelJsonString: updateMcModelJsonString,
+      updateMcPlans: updateMcModelJsonString,
       isLoading: true,
     );
-
-    if (responseCreateMcModel != null) {
-      print('UpdateMCExecution:$updateMcModelJsonString');
-      // getMcPlanDetail(planId: responseCreateMcModel['id'][0]);
-    }
-    // print('Create Mc  data: ${responseCreateMcModel!['id'][0]}');
+    if (responseCreateMcModel == null) {}
+    print('update MC   data: $updateMcModelJsonString');
   }
 
   Future<void> getMcPlanDetail({required int planId}) async {
     // newPermitDetails!.value = <NewPermitListModel>[];
-    mcPlanDetailsList?.value = <McPalningDetailsModel>[];
+    // mcPlanDetailsList?.value = <McPalningDetailsModel>[];
 
     final _mcPlanDetails = await moduleCleaningPlanningPresenter
         .getMcPlanDetail(planId: planId, isLoading: true);
@@ -290,7 +251,7 @@ class ModuleCleaningPlanningController extends GetxController {
               {"key": "noOfInverters", "value": '${element.invs}'},
               {'key': "noOfSMBs", "value": '${element.smbs}'},
               {'key': "noOfModules", "value": '${element.scheduledModules}'},
-              {'key': "type", "value": 'Please Select'},
+              {'key': "cleaningType", "value": 'Please Select'},
             ],
           );
         },
