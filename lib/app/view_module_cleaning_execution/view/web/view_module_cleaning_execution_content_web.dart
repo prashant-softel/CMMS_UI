@@ -553,12 +553,12 @@ class ViewModuleCleaningExecutionContentWeb
                                                                   e?.id] = {
                                                                 'isCleanedSmbCheck':
                                                                     e?.status ==
-                                                                            407
+                                                                            408
                                                                         ? true
                                                                         : false,
                                                                 'isAbandonSmbCheck':
                                                                     e?.status ==
-                                                                            407
+                                                                            409
                                                                         ? true
                                                                         : false
                                                               };
