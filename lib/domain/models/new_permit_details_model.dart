@@ -1,17 +1,17 @@
 import 'dart:convert';
 
-import 'package:get/get_rx/src/rx_types/rx_types.dart';
+NewPermitDetailModel newPermitDetailModelFromJson(String str) =>
+    NewPermitDetailModel.fromJson(json.decode(str));
 
-NewPermitDetailModel newPermitDetailModelFromJson(String str) => NewPermitDetailModel.fromJson(json.decode(str));
-
-String newPermitDetailModelToJson(NewPermitDetailModel data) => json.encode(data.toJson());
+String newPermitDetailModelToJson(NewPermitDetailModel data) =>
+    json.encode(data.toJson());
 
 class NewPermitDetailModel {
   int? isExpired;
   int? insertedId;
   int? ptwStatus;
   int? permitNo;
-  int? sitePermitNo;
+  String? sitePermitNo;
   int? permitTypeid;
   int? job_type_id;
   int? sop_type_id;
@@ -114,11 +114,10 @@ class NewPermitDetailModel {
     this.extendDetails,
     this.cancelDetails,
     this.closeDetails,
-
-  
   });
 
-  factory NewPermitDetailModel.fromJson(Map<String, dynamic> json) => NewPermitDetailModel(
+  factory NewPermitDetailModel.fromJson(Map<String, dynamic> json) =>
+      NewPermitDetailModel(
         isExpired: json['isExpired'],
         insertedId: json["insertedId"],
         ptwStatus: json["ptwStatus"],
@@ -143,30 +142,56 @@ class NewPermitDetailModel {
         description: json["description"],
         siteName: json['siteName'],
         blockName: json['blockName'],
-        start_datetime: json["start_datetime"] == null ? null : DateTime.parse(json['start_datetime'] as String),
+        start_datetime: json["start_datetime"] == null
+            ? null
+            : DateTime.parse(json['start_datetime'] as String),
         end_datetime: json["end_datetime"],
         permitArea: json['permitArea'],
         workingTime: json['workingTime'],
         issuedByName: json['issuedByName'],
-        issue_at: json["issue_at"] == null ? null : DateTime.parse(json['issue_at'] as String),
+        issue_at: json["issue_at"] == null
+            ? null
+            : DateTime.parse(json['issue_at'] as String),
         approvedByName: json['approvedByName'],
-        approve_at: json["approve_at"] == null ? null : DateTime.parse(json['approve_at'] as String),
+        approve_at: json["approve_at"] == null
+            ? null
+            : DateTime.parse(json['approve_at'] as String),
         completedByName: json['completedByName'],
-        close_at: json["close_at"] == null ? null : DateTime.parse(json['close_at'] as String),
+        close_at: json["close_at"] == null
+            ? null
+            : DateTime.parse(json['close_at'] as String),
         closedByName: json['closedByName'],
         cancelRequestByName: json['cancelRequestByName'] ?? '',
-        cancel_at: json["cancel_at"] == null ? null : DateTime.parse(json['cancel_at'] as String),
-        tbT_Done_At: json["tbT_Done_At"] == null ? null : DateTime.parse(json['tbT_Done_At'] as String),
+        cancel_at: json["cancel_at"] == null
+            ? null
+            : DateTime.parse(json['cancel_at'] as String),
+        tbT_Done_At: json["tbT_Done_At"] == null
+            ? null
+            : DateTime.parse(json['tbT_Done_At'] as String),
         current_status_short: json['current_status_short'],
         safety_question_list: json["safety_question_list"] != null
-            ? List<ListSafetyQuestion>.from(json["safety_question_list"].map((x) => ListSafetyQuestion.fromJson(x)))
+            ? List<ListSafetyQuestion>.from(json["safety_question_list"]
+                .map((x) => ListSafetyQuestion.fromJson(x)))
             : [],
-        employee_list: json["employee_list"] != null ? List<ListEmployees>.from(json["employee_list"].map((x) => ListEmployees.fromJson(x))) : [],
-        lstIsolation: json["lstIsolation"] != null ? List<ListIsolation>.from(json["lstIsolation"].map((x) => ListIsolation.fromJson(x))) : [],
-        loto_list: json["loto_list"] != null ? List<LotoLists>.from(json["loto_list"]?.map((x) => LotoLists.fromJson(x))) : [],
-        lstCategory: json["lstCategory"] != null ? List<ListCategory>.from(json["lstCategory"].map((x) => ListCategory.fromJson(x))) : [],
+        employee_list: json["employee_list"] != null
+            ? List<ListEmployees>.from(
+                json["employee_list"].map((x) => ListEmployees.fromJson(x)))
+            : [],
+        lstIsolation: json["lstIsolation"] != null
+            ? List<ListIsolation>.from(
+                json["lstIsolation"].map((x) => ListIsolation.fromJson(x)))
+            : [],
+        loto_list: json["loto_list"] != null
+            ? List<LotoLists>.from(
+                json["loto_list"]?.map((x) => LotoLists.fromJson(x)))
+            : [],
+        lstCategory: json["lstCategory"] != null
+            ? List<ListCategory>.from(
+                json["lstCategory"].map((x) => ListCategory.fromJson(x)))
+            : [],
         lstAssociatedJobs: json["lstAssociatedJobs"] != null
-            ? List<ListAssociatedJob>.from(json["lstAssociatedJobs"].map((x) => ListAssociatedJob.fromJson(x)))
+            ? List<ListAssociatedJob>.from(json["lstAssociatedJobs"]
+                .map((x) => ListAssociatedJob.fromJson(x)))
             : [],
 
         extendDetails: ExtendDetails.fromJson(json['extendDetails']),
@@ -225,13 +250,15 @@ class NewPermitDetailModel {
         "cancel_at": cancel_at,
         "tbT_Done_At": tbT_Done_At,
         "current_status_short": current_status_short,
-        "safety_question_list": List<dynamic>.from(safety_question_list!.map((x) => x)),
+        "safety_question_list":
+            List<dynamic>.from(safety_question_list!.map((x) => x)),
         "employee_list": List<dynamic>.from(employee_list!.map((x) => x)),
         "lstIsolation": List<dynamic>.from(lstIsolation!.map((x) => x)),
         "lstCategory": List<dynamic>.from(lstCategory!.map((x) => x)),
         "loto_list": List<dynamic>.from(loto_list!.map((x) => x.toJson())),
 
-        "lstAssociatedJobs": List<dynamic>.from(lstAssociatedJobs!.map((x) => x)),
+        "lstAssociatedJobs":
+            List<dynamic>.from(lstAssociatedJobs!.map((x) => x)),
         "extendDetails": extendDetails,
         "cancelDetails": cancelDetails,
         "closeDetails": closeDetails,
@@ -258,10 +285,13 @@ class LotoLists {
   String? asset_name;
   String? locksrno;
 
-  factory LotoLists.fromJson(Map<String, dynamic> json) =>
-      LotoLists(asset_id: json["asset_id"], asset_name: json["asset_name"], locksrno: json['locksrno']);
+  factory LotoLists.fromJson(Map<String, dynamic> json) => LotoLists(
+      asset_id: json["asset_id"],
+      asset_name: json["asset_name"],
+      locksrno: json['locksrno']);
 
-  Map<String, dynamic> toJson() => {"asset_id": asset_id, "asset_name": asset_name, "locksrno": locksrno};
+  Map<String, dynamic> toJson() =>
+      {"asset_id": asset_id, "asset_name": asset_name, "locksrno": locksrno};
 }
 
 class ListEmployees {
@@ -296,7 +326,10 @@ class ListSafetyQuestion {
   int? input;
 
   factory ListSafetyQuestion.fromJson(Map<String, dynamic> json) =>
-      ListSafetyQuestion(saftyQuestionId: json["saftyQuestionId"], saftyQuestionName: json["saftyQuestionName"], input: json['input']);
+      ListSafetyQuestion(
+          saftyQuestionId: json["saftyQuestionId"],
+          saftyQuestionName: json["saftyQuestionName"],
+          input: json['input']);
 
   Map<String, dynamic> toJson() => {
         "saftyQuestionId": saftyQuestionId,
@@ -306,7 +339,13 @@ class ListSafetyQuestion {
 }
 
 class FileList {
-  FileList({this.id, this.fileName, this.fileCategory, this.fileSize, this.status, this.ptwFiles});
+  FileList(
+      {this.id,
+      this.fileName,
+      this.fileCategory,
+      this.fileSize,
+      this.status,
+      this.ptwFiles});
 
   int? id;
   String? fileName;
@@ -323,8 +362,14 @@ class FileList {
       status: json['status'],
       ptwFiles: json['ptwFiles'] ?? '');
 
-  Map<String, dynamic> toJson() =>
-      {"id": id, "fileName": fileName, "fileCategory": fileCategory, "fileSize": fileSize, "status": status, "ptwFiles": ptwFiles};
+  Map<String, dynamic> toJson() => {
+        "id": id,
+        "fileName": fileName,
+        "fileCategory": fileCategory,
+        "fileSize": fileSize,
+        "status": status,
+        "ptwFiles": ptwFiles
+      };
 }
 
 class ListIsolation {
@@ -386,13 +431,16 @@ class ListAssociatedJob {
   int? status;
   String? status_short;
 
-  factory ListAssociatedJob.fromJson(Map<String, dynamic> json) => ListAssociatedJob(
+  factory ListAssociatedJob.fromJson(Map<String, dynamic> json) =>
+      ListAssociatedJob(
         jobId: json['jobId'],
         permitId: json['permitId'],
         title: json["title"] ?? '',
         equipmentCat: json['equipmentCat'],
         equipment: json['equipment'],
-        breakdownTime: json['breakdownTime'] == null ? DateTime.now() : DateTime.parse(json['breakdownTime'] as String),
+        breakdownTime: json['breakdownTime'] == null
+            ? DateTime.now()
+            : DateTime.parse(json['breakdownTime'] as String),
         assignedTo: json['assignedTo'] ?? '',
         status: json['status'],
         status_short: json['status_short'],
@@ -421,8 +469,13 @@ class ExtendDetails {
   List<Files>? files;
 
   factory ExtendDetails.fromJson(Map<String, dynamic> json) => ExtendDetails(
-        conditions: json["conditions"] != null ? List<ExtendConditions>.from(json["conditions"].map((x) => ExtendConditions.fromJson(x))) : [],
-        files: json["files"] != null ? List<Files>.from(json["files"].map((x) => Files.fromJson(x))) : [],
+        conditions: json["conditions"] != null
+            ? List<ExtendConditions>.from(
+                json["conditions"].map((x) => ExtendConditions.fromJson(x)))
+            : [],
+        files: json["files"] != null
+            ? List<Files>.from(json["files"].map((x) => Files.fromJson(x)))
+            : [],
       );
 
   Map<String, dynamic> toJson() => {
@@ -442,7 +495,8 @@ class ExtendConditions {
   int? value;
   String? name;
 
-  factory ExtendConditions.fromJson(Map<String, dynamic> json) => ExtendConditions(
+  factory ExtendConditions.fromJson(Map<String, dynamic> json) =>
+      ExtendConditions(
         id: json['id'],
         value: json['value'],
         name: json['name'],
@@ -475,7 +529,6 @@ class Files {
       };
 }
 
-
 class CancelDetails {
   CancelDetails({
     this.conditions,
@@ -486,8 +539,14 @@ class CancelDetails {
   List<CancelFiles>? files;
 
   factory CancelDetails.fromJson(Map<String, dynamic> json) => CancelDetails(
-        conditions: json["conditions"] != null ? List<CancelConditions>.from(json["conditions"].map((x) => CancelConditions.fromJson(x))) : [],
-        files: json["files"] != null ? List<CancelFiles>.from(json["files"].map((x) => CancelFiles.fromJson(x))) : [],
+        conditions: json["conditions"] != null
+            ? List<CancelConditions>.from(
+                json["conditions"].map((x) => CancelConditions.fromJson(x)))
+            : [],
+        files: json["files"] != null
+            ? List<CancelFiles>.from(
+                json["files"].map((x) => CancelFiles.fromJson(x)))
+            : [],
       );
 
   Map<String, dynamic> toJson() => {
@@ -507,7 +566,8 @@ class CancelConditions {
   int? value;
   String? name;
 
-  factory CancelConditions.fromJson(Map<String, dynamic> json) => CancelConditions(
+  factory CancelConditions.fromJson(Map<String, dynamic> json) =>
+      CancelConditions(
         id: json['id'],
         value: json['value'],
         name: json['name'],
@@ -550,8 +610,14 @@ class CloseDetails {
   List<CloseFiles>? files;
 
   factory CloseDetails.fromJson(Map<String, dynamic> json) => CloseDetails(
-        conditions: json["conditions"] != null ? List<CloseConditions>.from(json["conditions"].map((x) => CloseConditions.fromJson(x))) : [],
-        files: json["files"] != null ? List<CloseFiles>.from(json["files"].map((x) => CloseFiles.fromJson(x))) : [],
+        conditions: json["conditions"] != null
+            ? List<CloseConditions>.from(
+                json["conditions"].map((x) => CloseConditions.fromJson(x)))
+            : [],
+        files: json["files"] != null
+            ? List<CloseFiles>.from(
+                json["files"].map((x) => CloseFiles.fromJson(x)))
+            : [],
       );
 
   Map<String, dynamic> toJson() => {
@@ -571,7 +637,8 @@ class CloseConditions {
   int? value;
   String? name;
 
-  factory CloseConditions.fromJson(Map<String, dynamic> json) => CloseConditions(
+  factory CloseConditions.fromJson(Map<String, dynamic> json) =>
+      CloseConditions(
         id: json['id'],
         value: json['value'],
         name: json['name'],
@@ -604,8 +671,6 @@ class CloseFiles {
       };
 }
 
-
-
 String addsafetyToJson(ListSafetyQuestion data) => json.encode(data.toJson());
 
 String addEmploylistToJson(ListEmployees data) => json.encode(data.toJson());
@@ -618,20 +683,20 @@ String addListIsolationToJson(ListIsolation data) => json.encode(data.toJson());
 
 String addListCategoryToJson(ListCategory data) => json.encode(data.toJson());
 
-String addListAssocitedJobsToJson(ListAssociatedJob data) => json.encode(data.toJson());
+String addListAssocitedJobsToJson(ListAssociatedJob data) =>
+    json.encode(data.toJson());
 
-String addListExtendConditionsToJson(ExtendConditions data) => json.encode(data.toJson());
+String addListExtendConditionsToJson(ExtendConditions data) =>
+    json.encode(data.toJson());
 
 String addListFilesToJson(Files data) => json.encode(data.toJson());
 
-String addListCancelConditionsToJson(CancelConditions data) => json.encode(data.toJson());
+String addListCancelConditionsToJson(CancelConditions data) =>
+    json.encode(data.toJson());
 
 String addListCancelFilesToJson(CancelFiles data) => json.encode(data.toJson());
 
-String addListCloseConditionsToJson(CloseConditions data) => json.encode(data.toJson());
+String addListCloseConditionsToJson(CloseConditions data) =>
+    json.encode(data.toJson());
 
 String addListCloseFilesToJson(CloseFiles data) => json.encode(data.toJson());
-
-
-
-

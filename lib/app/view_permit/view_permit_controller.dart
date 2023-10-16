@@ -1642,6 +1642,178 @@ class ViewPermitController extends GetxController {
     PdfPage page,
     Size pageSize,
   ) {
+    // page.graphics.drawRectangle(
+    //   brush: PdfSolidBrush(PdfColor(142, 170, 219)),
+    //   bounds: Rect.fromLTWH(0, 0, pageSize.width, 40),
+    // ); //Draw string
+    page.graphics.drawString(
+        'This permit is valid only when issued Et approved by an authorized issuer.This permit must be obtained before a specified work is started Et it must be closed immediately after completion of the work or at the end of the shift as agreed by ther parties identified on this permit. Refer PTW SOP(hyperlink).',
+        PdfStandardFont(PdfFontFamily.helvetica, 10),
+        brush: PdfBrushes.black,
+        bounds: Rect.fromLTWH(25, 0, pageSize.width - 50, 90),
+        format: PdfStringFormat(lineAlignment: PdfVerticalAlignment.middle));
+    page.graphics.drawString(
+        'Plant: ',
+        PdfStandardFont(
+          PdfFontFamily.helvetica,
+          10,
+        ),
+        bounds: Rect.fromLTWH(30, 100, 0, 0),
+        format: PdfStringFormat(lineAlignment: PdfVerticalAlignment.middle));
+    page.graphics.drawString('${viewPermitDetailsModel.value?.siteName ?? ""}',
+        PdfStandardFont(PdfFontFamily.helvetica, 10),
+        bounds: Rect.fromLTWH(60, 100, 0, 0),
+        format: PdfStringFormat(lineAlignment: PdfVerticalAlignment.middle));
+
+    //Draw Rectangle to highlight margin
+    page.graphics.drawRectangle(
+        pen: PdfPen(PdfColor(142, 170, 219)),
+        bounds: Rect.fromLTWH(25, 90, pageSize.width - 270, 25));
+    page.graphics.drawString(
+        'Block: ',
+        PdfStandardFont(
+          PdfFontFamily.helvetica,
+          10,
+        ),
+        bounds: Rect.fromLTWH(280, 100, 0, 0),
+        format: PdfStringFormat(lineAlignment: PdfVerticalAlignment.middle));
+    page.graphics.drawString('${viewPermitDetailsModel.value?.blockName ?? ""}',
+        PdfStandardFont(PdfFontFamily.helvetica, 10),
+        bounds: Rect.fromLTWH(310, 100, 0, 0),
+        format: PdfStringFormat(lineAlignment: PdfVerticalAlignment.middle));
+
+    //Draw Rectangle to highlight margin
+    page.graphics.drawRectangle(
+        pen: PdfPen(PdfColor(142, 170, 219)),
+        bounds: Rect.fromLTWH(270, 90, pageSize.width - 290, 25));
+    page.graphics.drawString(
+        'Permit No.: ',
+        PdfStandardFont(
+          PdfFontFamily.helvetica,
+          10,
+        ),
+        bounds: Rect.fromLTWH(30, 130, 0, 0),
+        format: PdfStringFormat(lineAlignment: PdfVerticalAlignment.middle));
+    page.graphics.drawString('${viewPermitDetailsModel.value?.permitNo ?? ""}',
+        PdfStandardFont(PdfFontFamily.helvetica, 10),
+        bounds: Rect.fromLTWH(83, 130, 0, 0),
+        format: PdfStringFormat(lineAlignment: PdfVerticalAlignment.middle));
+
+    //Draw Rectangle to highlight margin
+    page.graphics.drawRectangle(
+        pen: PdfPen(PdfColor(142, 170, 219)),
+        bounds: Rect.fromLTWH(25, 115, pageSize.width - 270, 25));
+    page.graphics.drawString(
+        'Start Date: ',
+        PdfStandardFont(
+          PdfFontFamily.helvetica,
+          10,
+        ),
+        bounds: Rect.fromLTWH(280, 130, 0, 0),
+        format: PdfStringFormat(lineAlignment: PdfVerticalAlignment.middle));
+    page.graphics.drawString(
+        '${viewPermitDetailsModel.value?.start_datetime ?? ""}',
+        PdfStandardFont(PdfFontFamily.helvetica, 10),
+        bounds: Rect.fromLTWH(330, 130, 0, 0),
+        format: PdfStringFormat(lineAlignment: PdfVerticalAlignment.middle));
+
+    //Draw Rectangle to highlight margin
+    page.graphics.drawRectangle(
+        pen: PdfPen(PdfColor(142, 170, 219)),
+        bounds: Rect.fromLTWH(270, 115, pageSize.width - 290, 25));
+
+    page.graphics.drawString(
+        'Valid Date: ',
+        PdfStandardFont(
+          PdfFontFamily.helvetica,
+          10,
+        ),
+        bounds: Rect.fromLTWH(30, 150, 0, 0),
+        format: PdfStringFormat(lineAlignment: PdfVerticalAlignment.middle));
+    page.graphics.drawString(
+        '${viewPermitDetailsModel.value?.end_datetime ?? ""}',
+        PdfStandardFont(PdfFontFamily.helvetica, 10),
+        bounds: Rect.fromLTWH(83, 150, 0, 0),
+        format: PdfStringFormat(lineAlignment: PdfVerticalAlignment.middle));
+
+    //Draw Rectangle to highlight margin
+    page.graphics.drawRectangle(
+        pen: PdfPen(PdfColor(142, 170, 219)),
+        bounds: Rect.fromLTWH(25, 140, pageSize.width - 270, 25));
+    page.graphics.drawString(
+        'Permit Type: ',
+        PdfStandardFont(
+          PdfFontFamily.helvetica,
+          10,
+        ),
+        bounds: Rect.fromLTWH(280, 150, 0, 0),
+        format: PdfStringFormat(lineAlignment: PdfVerticalAlignment.middle));
+    page.graphics.drawString(
+        '${viewPermitDetailsModel.value?.permitTypeName ?? ""}',
+        PdfStandardFont(PdfFontFamily.helvetica, 10),
+        bounds: Rect.fromLTWH(336, 150, 0, 0),
+        format: PdfStringFormat(lineAlignment: PdfVerticalAlignment.middle));
+
+    //Draw Rectangle to highlight margin
+    page.graphics.drawRectangle(
+        pen: PdfPen(PdfColor(142, 170, 219)),
+        bounds: Rect.fromLTWH(270, 140, pageSize.width - 290, 25));
+    page.graphics.drawString(
+        'Equipment Category: ',
+        PdfStandardFont(
+          PdfFontFamily.helvetica,
+          10,
+        ),
+        bounds: Rect.fromLTWH(30, 175, 0, 0),
+        format: PdfStringFormat(lineAlignment: PdfVerticalAlignment.middle));
+    page.graphics.drawString(
+        "", // '${viewPermitDetailsModel.value?.lstCategory?? ""}',
+        PdfStandardFont(PdfFontFamily.helvetica, 10),
+        bounds: Rect.fromLTWH(100, 175, 0, 0),
+        format: PdfStringFormat(lineAlignment: PdfVerticalAlignment.middle));
+
+    //Draw Rectangle to highlight margin
+    page.graphics.drawRectangle(
+        pen: PdfPen(PdfColor(142, 170, 219)),
+        bounds: Rect.fromLTWH(25, 165, pageSize.width - 45, 25));
+    page.graphics.drawString(
+        'Description: ',
+        PdfStandardFont(
+          PdfFontFamily.helvetica,
+          10,
+        ),
+        bounds: Rect.fromLTWH(30, 200, 0, 0),
+        format: PdfStringFormat(lineAlignment: PdfVerticalAlignment.middle));
+    page.graphics.drawString(
+        '${viewPermitDetailsModel.value?.description ?? ""}',
+        PdfStandardFont(PdfFontFamily.helvetica, 10),
+        bounds: Rect.fromLTWH(100, 200, 0, 0),
+        format: PdfStringFormat(lineAlignment: PdfVerticalAlignment.middle));
+
+    //Draw Rectangle to highlight margin
+    page.graphics.drawRectangle(
+        pen: PdfPen(PdfColor(142, 170, 219)),
+        bounds: Rect.fromLTWH(25, 190, pageSize.width - 45, 45));
+
+    final PdfFont contentFont = PdfStandardFont(PdfFontFamily.helvetica, 9);
+    //Draw string
+
+    final String invoiceNumber = 'Signature:      ';
+    final Size contentSize = contentFont.measureString(invoiceNumber);
+    // ignore: leading_newlines_in_multiline_strings
+    String address =
+        'Requested By: ${viewPermitDetailsModel.value?.requestedByName ?? ""}';
+
+    PdfTextElement(text: invoiceNumber, font: contentFont).draw(
+        page: page,
+        bounds: Rect.fromLTWH(pageSize.width - (contentSize.width + 30), 400,
+            contentSize.width - 100, pageSize.height - 120));
+
+    return PdfTextElement(text: address, font: contentFont).draw(
+        page: page,
+        bounds: Rect.fromLTWH(30, 400,
+            pageSize.width - (contentSize.width + 30), pageSize.height - 120))!;
+
     //Draw rectangle
     // page.graphics.drawRectangle(
     //     brush: PdfSolidBrush(PdfColor(91, 126, 215)),
@@ -1657,14 +1829,15 @@ class ViewPermitController extends GetxController {
     //     bounds: Rect.fromLTWH(400, 0, pageSize.width - 400, 90),
     //     brush: PdfSolidBrush(PdfColor(65, 104, 205)));
 
-    // page.graphics.drawString(r'$', PdfStandardFont(PdfFontFamily.helvetica, 18),
+    // page.graphics.drawString(r'viewPermitDetailsModel.value?.siteName ',
+    //     PdfStandardFont(PdfFontFamily.helvetica, 18),
     //     bounds: Rect.fromLTWH(400, 0, pageSize.width - 400, 100),
     //     brush: PdfBrushes.white,
     //     format: PdfStringFormat(
     //         alignment: PdfTextAlignment.center,
     //         lineAlignment: PdfVerticalAlignment.middle));
 
-    final PdfFont contentFont = PdfStandardFont(PdfFontFamily.helvetica, 9);
+    //final PdfFont contentFont = PdfStandardFont(PdfFontFamily.helvetica, 9);
     //Draw string
     // page.graphics.drawString('Amount', contentFont,
     //     brush: PdfBrushes.white,
@@ -1677,22 +1850,22 @@ class ViewPermitController extends GetxController {
     // final String invoiceNumber =
     //     'Invoice Number: 2058557939\r\n\r\nDate: ${format.format(DateTime.now())}';
     // ignore: leading_newlines_in_multiline_strings
-    String text =
-        '''This permit is valid only when issued Et approved by an authorized issuer.This permit must be obtained before a specified\r\nwork is started Et it must be closed immediately after completion of the work or at the end of the shift as agreed by ther\r\nparties identified on this permit. Refer PTW SOP(hyperlink). 
- \r\n\r\nPlant: ${viewPermitDetailsModel.value?.siteName ?? ""} Block:${viewPermitDetailsModel.value?.blockName ?? ""} Permit No.: ${viewPermitDetailsModel.value?.permitNo ?? ""}  , 
-       
-        ''';
-    final Size contentSize = contentFont.measureString(text);
+//     String text =
+//         '''This permit is valid only when issued Et approved by an authorized issuer.This permit must be obtained before a specified\r\nwork is started Et it must be closed immediately after completion of the work or at the end of the shift as agreed by ther\r\nparties identified on this permit. Refer PTW SOP(hyperlink).
+//  \r\n\r\nPlant: ${viewPermitDetailsModel.value?.siteName ?? ""} Block:${viewPermitDetailsModel.value?.blockName ?? ""} Permit No.: ${viewPermitDetailsModel.value?.permitNo ?? ""}  ,
 
-    // PdfTextElement(text: invoiceNumber, font: contentFont).draw(
-    //     page: page,
-    //     bounds: Rect.fromLTWH(pageSize.width - (contentSize.width + 30), 120,
-    //         contentSize.width + 30, pageSize.height - 120));
+//         ''';
+//     final Size contentSize = contentFont.measureString(text);
 
-    return PdfTextElement(text: text, font: contentFont).draw(
-        page: page,
-        bounds: Rect.fromLTWH(
-            10, 30, contentSize.width + 30, pageSize.height - 120))!;
+//     // PdfTextElement(text: invoiceNumber, font: contentFont).draw(
+//     //     page: page,
+//     //     bounds: Rect.fromLTWH(pageSize.width - (contentSize.width + 30), 120,
+//     //         contentSize.width + 30, pageSize.height - 120));
+
+//     return PdfTextElement(text: text, font: contentFont).draw(
+//         page: page,
+//         bounds: Rect.fromLTWH(
+//             10, 30, contentSize.width + 30, pageSize.height - 120))!;
   }
 
   PdfGrid getGrid() {
