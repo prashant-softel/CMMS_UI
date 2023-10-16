@@ -1,7 +1,9 @@
+import 'package:cmms/app/constant/constant.dart';
 import 'package:cmms/app/home/home_screen.dart';
 import 'package:cmms/app/module_cleaning_execution/module_cleaning_list_execution_controller.dart';
 import 'package:cmms/app/navigators/app_pages.dart';
 import 'package:cmms/app/theme/dimens.dart';
+import 'package:cmms/app/utils/user_access_constants.dart';
 import 'package:cmms/app/widgets/abandon_execution_dialog.dart';
 import 'package:cmms/app/widgets/custom_richtext.dart';
 import 'package:cmms/app/widgets/date_picker.dart';
@@ -570,10 +572,7 @@ class MCExcutionListDataSource extends DataTableSource {
                               if (id != 0) {
                                 Get.toNamed(
                                     Routes.addModuleCleaningExecutionContentWeb,
-                                    arguments: {
-                                      "id": id,
-                                      "planId": planId
-                                    });
+                                    arguments: {"id": id, "planId": planId});
                               }
                             },
                             // onPress: () {
@@ -608,6 +607,28 @@ class MCExcutionListDataSource extends DataTableSource {
                           //     : Dimens.box0,
                           // record[8] == "Scheduled"
                           //     ?
+
+                          // controller.mcTaskList
+                          //             .firstWhere(
+                          //               (e) =>
+                          //                   e!.id == McExcutionListDetails!.id,
+                          //               orElse: () => MCTaskListModel(id: 00),
+                          //             )!
+                          //             .status ==
+                          //         361
+                          //     ?
+                          //         &&
+                          //     varUserAccessModel.value.access_list!
+                          //             .where((e) =>
+                          //                 e.feature_id ==
+                          //                     UserAccessConstants
+                          //                         .kModuleCleaningFeatureId &&
+                          //                 e.approve ==
+                          //                     UserAccessConstants
+                          //                         .kHaveApproveAccess)
+                          //             .length >
+                          //         0
+                          // ?
                           TableActionButton(
                             color: ColorValues.appGreenColor,
                             icon: Icons.add,
@@ -618,14 +639,11 @@ class MCExcutionListDataSource extends DataTableSource {
                               if (id != 0) {
                                 Get.toNamed(
                                     Routes.addModuleCleaningExecutionContentWeb,
-                                    arguments: {
-                                      "id": id,
-                                      "planId": planId
-                                      
-                                    });
+                                    arguments: {"id": id, "planId": planId});
                               }
                             },
                           )
+                          // : Dimens.box0
                           // : Dimens.box0,
                           // record[8] == "Abandoned"
                           //     ? TableActionButton(

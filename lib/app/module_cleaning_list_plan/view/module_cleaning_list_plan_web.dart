@@ -1,3 +1,6 @@
+import 'dart:math';
+
+import 'package:cmms/app/constant/constant.dart';
 import 'package:cmms/app/module_cleaning_list_plan/module_cleaning_list_plan_controller.dart';
 import 'package:cmms/app/navigators/app_pages.dart';
 import 'package:cmms/app/theme/dimens.dart';
@@ -9,6 +12,7 @@ import 'package:get/get.dart';
 
 import '../../theme/color_values.dart';
 import '../../theme/styles.dart';
+import '../../utils/user_access_constants.dart';
 import '../../widgets/action_button.dart';
 import '../../widgets/table_action_button.dart';
 
@@ -525,16 +529,11 @@ class ModuleCleaningPlanListDataSource extends DataTableSource {
                                 : ColorValues.addNewColor,
                             borderRadius: BorderRadius.circular(4),
                           ),
-                          child: Row(
-                            children: [
-                              Text(
-                                '${ModuleCleaningPlanningListDetails?.status_short}'
-                                '${ModuleCleaningPlanningListDetails?.status}',
-                                style: Styles.white10.copyWith(
-                                  color: Colors.white,
-                                ),
-                              ),
-                            ],
+                          child: Text(
+                            '${ModuleCleaningPlanningListDetails?.status_short}',
+                            style: Styles.white10.copyWith(
+                              color: Colors.white,
+                            ),
                           ),
                         ),
                       ),
@@ -555,62 +554,98 @@ class ModuleCleaningPlanListDataSource extends DataTableSource {
                             }
                           },
                         ),
-                        TableActionButton(
-                          color: ColorValues.editColor,
-                          icon: Icons.edit,
-                          message: 'Edit',
-                          onPress: () {
-                            int id =
-                                ModuleCleaningPlanningListDetails?.planId ?? 0;
-                            if (id != 0) {
-                              Get.toNamed(Routes.moduleCleaningPlanning,
-                                  arguments: {
-                                    "id": id,
-                                    "planId": ModuleCleaningPlanningListDetails
-                                        ?.planId
-                                  });
-                            }
-                          },
-                        ),
-                        TableActionButton(
-                          color: ColorValues.appGreenColor,
-                          icon: Icons.add,
-                          message: 'Approve/Reject',
-                          onPress: () {
-                            int id =
-                                ModuleCleaningPlanningListDetails?.planId ?? 0;
-                            if (id != 0) {
-                              Get.toNamed(
-                                Routes.viewMcPlaning,
-                                arguments: {'id': id, "type": 1},
-                              );
-                            }
-                          },
-                        ),
-                        TableActionButton(
-                          color: Color.fromARGB(255, 141, 183, 180),
-                          icon: Icons.add,
-                          // label: 'Execute',
-                          message: 'Schedule Execution',
-                          onPress: () {
-                            Get.dialog(AddMCExecutionDialog(
-                              planId: ModuleCleaningPlanningListDetails?.planId,
-                              frequency:
-                                  ModuleCleaningPlanningListDetails?.frequency,
-                            ));
-                            //   int id =
-                            //       ModuleCleaningPlanningListDetails?.planId ??
-                            //           0;
-                            //   if (id != 0) {
-                            //     Get.toNamed(Routes.purchaseGoodsorderView,
-                            //         arguments: {'id': id, "type": 1});
-                            //   }
-                            // },
-                            // onPress: () {
-                            //   controller.viewAddGoodsOrdersDetails(
-                            //       planId: int.tryParse('${record[0]}'));
-                          },
-                        )
+                        varUserAccessModel.value.access_list!
+                                    .where((e) =>
+                                        e.feature_id ==
+                                            UserAccessConstants
+                                                .kModuleCleaningFeatureId &&
+                                        e.add ==
+                                            UserAccessConstants.kHaveAddAccess)
+                                    .length >
+                                0
+                            ? TableActionButton(
+                                color: ColorValues.editColor,
+                                icon: Icons.edit,
+                                message: 'Edit',
+                                onPress: () {
+                                  int id = ModuleCleaningPlanningListDetails
+                                          ?.planId ??
+                                      0;
+                                  if (id != 0) {
+                                    Get.toNamed(Routes.moduleCleaningPlanning,
+                                        arguments: {
+                                          "id": id,
+                                          "planId":
+                                              ModuleCleaningPlanningListDetails
+                                                  ?.planId
+                                        });
+                                  }
+                                },
+                              )
+                            : Dimens.box0,
+                        controller.moduleCleaningListPlan
+                                        .firstWhere(
+                                          (e) =>
+                                              e.planId ==
+                                              ModuleCleaningPlanningListDetails!
+                                                  .planId,
+                                          orElse: () =>
+                                              ModuleCleaningListPlanModel(
+                                                  planId: 00),
+                                        )
+                                        .status ==
+                                    353 &&
+                                varUserAccessModel.value.access_list!
+                                        .where((e) =>
+                                            e.feature_id ==
+                                                UserAccessConstants
+                                                    .kModuleCleaningFeatureId &&
+                                            e.approve ==
+                                                UserAccessConstants
+                                                    .kHaveApproveAccess)
+                                        .length >
+                                    0
+                            ? TableActionButton(
+                                color: ColorValues.appGreenColor,
+                                icon: Icons.add,
+                                message: 'Approve/Reject',
+                                onPress: () {
+                                  int id = ModuleCleaningPlanningListDetails
+                                          ?.planId ??
+                                      0;
+                                  if (id != 0) {
+                                    Get.toNamed(
+                                      Routes.viewMcPlaning,
+                                      arguments: {'id': id, "type": 1},
+                                    );
+                                  }
+                                },
+                              )
+                            : Dimens.box0,
+                        // TableActionButton(
+                        //   color: Color.fromARGB(255, 141, 183, 180),
+                        //   icon: Icons.add,
+                        //   // label: 'Execute',
+                        //   message: 'Schedule Execution',
+                        //   onPress: () {
+                        //     Get.dialog(AddMCExecutionDialog(
+                        //       planId: ModuleCleaningPlanningListDetails?.planId,
+                        //       frequency:
+                        //           ModuleCleaningPlanningListDetails?.frequency,
+                        //     ));
+                        //     //   int id =
+                        //     //       ModuleCleaningPlanningListDetails?.planId ??
+                        //     //           0;
+                        //     //   if (id != 0) {
+                        //     //     Get.toNamed(Routes.purchaseGoodsorderView,
+                        //     //         arguments: {'id': id, "type": 1});
+                        //     //   }
+                        //     // },
+                        //     // onPress: () {
+                        //     //   controller.viewAddGoodsOrdersDetails(
+                        //     //       planId: int.tryParse('${record[0]}'));
+                        //   },
+                        // )
                       ])
                     : Text(value.toString()),
           ),

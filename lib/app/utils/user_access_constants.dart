@@ -57,7 +57,7 @@ abstract class UserAccessConstants {
 
   /// MODULE CLEANING ACCESS
   static int kModuleCleaningFeatureId = 32;
-  static String kFeatureModuleCleaning = "Job";
+  static String kFeatureModuleCleaning = "MC";
 
   ///USER ACCESS
   static int kHaveAddAccess = 1;
