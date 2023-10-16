@@ -560,7 +560,9 @@ class ViewModuleCleaningExecutionContentWeb
                                                                     e?.status ==
                                                                             409
                                                                         ? true
-                                                                        : false
+                                                                        : false,
+                                                                "cleaningDay": e
+                                                                    ?.cleaningDay
                                                               };
                                                             });
 
