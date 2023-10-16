@@ -529,16 +529,11 @@ class ModuleCleaningPlanListDataSource extends DataTableSource {
                                 : ColorValues.addNewColor,
                             borderRadius: BorderRadius.circular(4),
                           ),
-                          child: Row(
-                            children: [
-                              Text(
-                                '${ModuleCleaningPlanningListDetails?.status_short}'
-                                '${ModuleCleaningPlanningListDetails?.status}',
-                                style: Styles.white10.copyWith(
-                                  color: Colors.white,
-                                ),
-                              ),
-                            ],
+                          child: Text(
+                            '${ModuleCleaningPlanningListDetails?.status_short}',
+                            style: Styles.white10.copyWith(
+                              color: Colors.white,
+                            ),
                           ),
                         ),
                       ),
