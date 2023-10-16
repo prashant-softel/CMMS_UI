@@ -1,6 +1,5 @@
 // import 'package:cmms/app/add_job/views/widgets/work_area_widget.dart';
 
-import 'dart:convert';
 
 import 'package:cmms/app/add_module_cleaning_execution/add_module_cleaning_execution_controller.dart';
 import 'package:cmms/app/app.dart';
@@ -11,17 +10,12 @@ import 'package:cmms/app/widgets/abandon_all_dialog.dart';
 import 'package:cmms/app/widgets/abandon_schedule_execution_dialog.dart';
 import 'package:cmms/app/widgets/add_module_cleaning_execution_dialog.dart';
 import 'package:cmms/app/widgets/custom_elevated_button.dart';
-import 'package:cmms/app/widgets/custom_richtext.dart';
-import 'package:cmms/app/widgets/custom_textField.dart';
-import 'package:cmms/app/widgets/end_mc_execution_dialog.dart';
-import 'package:cmms/app/widgets/stock_dropdown.dart';
 import 'package:cmms/domain/models/end_mc_execution_detail_model.dart';
 import 'package:data_table_2/data_table_2.dart';
 
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
-import 'package:scrollable_table_view/scrollable_table_view.dart';
 
 class AddModuleCleaningExecutionContentWeb extends GetView<AddModuleCleaningExecutionController> {
   AddModuleCleaningExecutionContentWeb({super.key});
@@ -311,7 +305,7 @@ class AddModuleCleaningExecutionContentWeb extends GetView<AddModuleCleaningExec
                                                 DataColumn2(
                                                     fixedWidth: 60,
                                                     label: Text(
-                                                      "Id",
+                                                      "Sch. Id",
                                                       style: TextStyle(fontSize: 15, fontWeight: FontWeight.bold),
                                                     )),
                                                 DataColumn2(
@@ -435,73 +429,88 @@ class AddModuleCleaningExecutionContentWeb extends GetView<AddModuleCleaningExec
                                                                                       ),
                                                                                     )
                                                                                   : (mapData['key'] == "Water Used")
-                                                                                      ? Column(
-                                                                                          mainAxisAlignment: MainAxisAlignment.center,
-                                                                                          crossAxisAlignment: CrossAxisAlignment.center,
-                                                                                          children: [
-                                                                                            Container(
-                                                                                                decoration: BoxDecoration(
-                                                                                                  boxShadow: [
-                                                                                                    BoxShadow(
-                                                                                                      color: Colors.black26,
-                                                                                                      offset: const Offset(
-                                                                                                        5.0,
-                                                                                                        5.0,
-                                                                                                      ),
-                                                                                                      blurRadius: 5.0,
-                                                                                                      spreadRadius: 1.0,
-                                                                                                    ),
-                                                                                                  ],
-                                                                                                  color: ColorValues.whiteColor,
-                                                                                                  borderRadius: BorderRadius.circular(5),
-                                                                                                ),
-                                                                                                child: IgnorePointer(
-                                                                                                  child: LoginCustomTextfield(
-                                                                                                    width: MediaQuery.of(context).size.width / 2,
-                                                                                                    maxLine: 1,
-                                                                                                    textController: new TextEditingController(
-                                                                                                      text: mapData["value"] ?? ''),
-                                                                                                    onChanged: (txt) {
-                                                                                                      mapData["value"] = txt;
-                                                                                                    },
-                                                                                                  ),
-                                                                                                )),
-                                                                                          ],
-                                                                                        )
+                                                                                      // ? Column(
+                                                                                      //     mainAxisAlignment: MainAxisAlignment.center,
+                                                                                      //     crossAxisAlignment: CrossAxisAlignment.center,
+                                                                                      //     children: [
+                                                                                      //       Container(
+                                                                                      //           decoration: BoxDecoration(
+                                                                                      //             boxShadow: [
+                                                                                      //               BoxShadow(
+                                                                                      //                 color: Colors.black26,
+                                                                                      //                 offset: const Offset(
+                                                                                      //                   5.0,
+                                                                                      //                   5.0,
+                                                                                      //                 ),
+                                                                                      //                 blurRadius: 5.0,
+                                                                                      //                 spreadRadius: 1.0,
+                                                                                      //               ),
+                                                                                      //             ],
+                                                                                      //             color: ColorValues.whiteColor,
+                                                                                      //             borderRadius: BorderRadius.circular(5),
+                                                                                      //           ),
+                                                                                      //           child: IgnorePointer(
+                                                                                      //             child: LoginCustomTextfield(
+                                                                                      //               width: MediaQuery.of(context).size.width / 2,
+                                                                                      //               maxLine: 1,
+                                                                                      //               textController: new TextEditingController(
+                                                                                      //                   text: mapData["value"] ?? ''),
+                                                                                      //               onChanged: (txt) {
+                                                                                      //                 mapData["value"] = txt;
+                                                                                      //               },
+                                                                                      //             ),
+                                                                                      //           )),
+                                                                                      //     ],
+                                                                                      //   )
+                                                                                      ?Center(
+                                                                                      child: Text(
+                                                                                        mapData["value"] ?? "",
+                                                                                        // "${element?.scheduleId}",
+                                                                                        style: TextStyle(color: Color.fromARGB(255, 5, 92, 163)),
+                                                                                      ),
+                                                                                    )
                                                                                       : (mapData['key'] == "Remark")
-                                                                                          ? Column(
-                                                                                              mainAxisAlignment: MainAxisAlignment.center,
-                                                                                              crossAxisAlignment: CrossAxisAlignment.center,
-                                                                                              children: [
-                                                                                                Container(
-                                                                                                    decoration: BoxDecoration(
-                                                                                                      boxShadow: [
-                                                                                                        BoxShadow(
-                                                                                                          color: Colors.black26,
-                                                                                                          offset: const Offset(
-                                                                                                            5.0,
-                                                                                                            5.0,
-                                                                                                          ),
-                                                                                                          blurRadius: 5.0,
-                                                                                                          spreadRadius: 1.0,
-                                                                                                        ),
-                                                                                                      ],
-                                                                                                      color: ColorValues.whiteColor,
-                                                                                                      borderRadius: BorderRadius.circular(5),
-                                                                                                    ),
-                                                                                                    child: IgnorePointer(
-                                                                                                      child: LoginCustomTextfield(
-                                                                                                        width: MediaQuery.of(context).size.width / 2,
-                                                                                                        maxLine: 1,
-                                                                                                        textController: new TextEditingController(
-                                                                                                          text: mapData["value"] ?? ''),
-                                                                                                        onChanged: (txt) {
-                                                                                                          mapData["value"] = txt;
-                                                                                                        },
-                                                                                                      ),
-                                                                                                    )),
-                                                                                              ],
-                                                                                            )
+                                                                                          ? 
+                                                                                          // Column(
+                                                                                          //     mainAxisAlignment: MainAxisAlignment.center,
+                                                                                          //     crossAxisAlignment: CrossAxisAlignment.center,
+                                                                                          //     children: [
+                                                                                          //       Container(
+                                                                                          //           decoration: BoxDecoration(
+                                                                                          //             boxShadow: [
+                                                                                          //               BoxShadow(
+                                                                                          //                 color: Colors.black26,
+                                                                                          //                 offset: const Offset(
+                                                                                          //                   5.0,
+                                                                                          //                   5.0,
+                                                                                          //                 ),
+                                                                                          //                 blurRadius: 5.0,
+                                                                                          //                 spreadRadius: 1.0,
+                                                                                          //               ),
+                                                                                          //             ],
+                                                                                          //             color: ColorValues.whiteColor,
+                                                                                          //             borderRadius: BorderRadius.circular(5),
+                                                                                          //           ),
+                                                                                          //           child: IgnorePointer(
+                                                                                          //             child: LoginCustomTextfield(
+                                                                                          //               width: MediaQuery.of(context).size.width / 2,
+                                                                                          //               maxLine: 1,
+                                                                                          //               textController: new TextEditingController(
+                                                                                          //                   text: mapData["value"] ?? ''),
+                                                                                          //               onChanged: (txt) {
+                                                                                          //                 mapData["value"] = txt;
+                                                                                          //               },
+                                                                                          //             ),
+                                                                                          //           )),
+                                                                                          //     ],
+                                                                                          //   )
+                                                                                          Center(
+                                                                                      child: Text(
+                                                                                        mapData["value"] ?? "",
+                                                                                        // "${element?.scheduleId}",
+                                                                                        style: TextStyle(color: Color.fromARGB(255, 5, 92, 163)),
+                                                                                      ),
+                                                                                    ) 
                                                                                           : (mapData['key'] == "Status")
                                                                                               ? Text(
                                                                                                   mapData["value"] ?? "",
@@ -511,17 +520,16 @@ class AddModuleCleaningExecutionContentWeb extends GetView<AddModuleCleaningExec
                                                                                                 )
                                                                                               : (mapData['key'] == "Actions")
                                                                                                   ? Wrap(
+
                                                                                                       children: [
-                                                                                                        controller.listSchedules!
-                                                                                                                    .firstWhere(
-                                                                                                                      (e) =>
-                                                                                                                          "${e?.status}" == e?.status,
-                                                                                                                      orElse: () =>
-                                                                                                                          Schedules(status_short: ""),
-                                                                                                                    )
-                                                                                                                    ?.status ==
-                                                                                                                380
-                                                                                                            ? TableActionButton(
+                                                                                                        
+                                                                                                      //  record[9]['value'] == "Scheduled"
+                                                                                                      controller.listSchedules!
+                                                                                                                  .firstWhere(
+                                                                                                                    (e) => "${e?.scheduleId}" == record[0]['value'],
+                                                                                                                    orElse: () => Schedules(status: -1))?.status == 360
+                                                                                                            ? 
+                                                                                                            TableActionButton(
                                                                                                                 // label: 'Start',
                                                                                                                 onPress: () {
                                                                                                                   var filterdData = controller
@@ -547,9 +555,17 @@ class AddModuleCleaningExecutionContentWeb extends GetView<AddModuleCleaningExec
                                                                                                                 icon: Icons.add,
                                                                                                                 message: 'Start',
                                                                                                               )
-                                                                                                            : Dimens.box0,
+                                                                                                            
+                                                                                                             : Dimens.box0,
 
                                                                                                         //End MC Schedule Execution
+                                                                                                        //  record[9]['value'] == "In Progress"
+                                                                                                        controller.listSchedules!
+                                                                                                                  .firstWhere(
+                                                                                                                    (e) => "${e?.scheduleId}" == record[0]['value'],
+                                                                                                                    orElse: () => Schedules(status: -1))?.status == 361
+                                                                                                                    
+                                                                                                            ? 
                                                                                                         TableActionButton(
                                                                                                           // label: 'Start',
                                                                                                           onPress: () {
@@ -572,7 +588,8 @@ class AddModuleCleaningExecutionContentWeb extends GetView<AddModuleCleaningExec
                                                                                                           color: Color.fromARGB(255, 70, 95, 57),
                                                                                                           icon: Icons.add,
                                                                                                           message: 'End',
-                                                                                                        ),
+                                                                                                        )
+                                                                                                        :Dimens.box0,
 
                                                                                                         // controller.listSchedules!
                                                                                                         //             .firstWhere(
@@ -583,7 +600,6 @@ class AddModuleCleaningExecutionContentWeb extends GetView<AddModuleCleaningExec
                                                                                                         //         "Completed"
                                                                                                         //     ?
                                                                                                         // TableActionButton(
-                                                                                                        //   // label: 'Abandon',
                                                                                                         //   onPress: () {
                                                                                                         //     // Get.dialog(AddModuleCleaningExecutionDialog());
                                                                                                         //     var filterdData = controller.listSchedules?.firstWhere((e) => "${e?.scheduleId}" == record[0]['value']);
@@ -703,8 +719,8 @@ class AddModuleCleaningExecutionContentWeb extends GetView<AddModuleCleaningExec
                                           SizedBox(
                                             width: 20,
                                           ),
-                                          // controller.data['status'] == "Scheduled"
-                                          //     ?
+                                          controller.mcExecutionDetailsModel.value?.status == 360
+                                              ?
                                           varUserAccessModel.value.access_list!
                                                       .where((e) =>
                                                           e.feature_id == UserAccessConstants.kModuleCleaningFeatureId &&
@@ -721,13 +737,14 @@ class AddModuleCleaningExecutionContentWeb extends GetView<AddModuleCleaningExec
                                                     },
                                                   ),
                                                 )
+                                              : Dimens.box0
                                               : Dimens.box0,
                                           // : Container(),
 
                                           Dimens.boxWidth10,
 
-                                          // controller.data['status'] == "Abandoned"
-                                          //     ?
+                                          controller.mcExecutionDetailsModel.value?.status == 361
+                                              ?
                                           varUserAccessModel.value.access_list!
                                                       .where((e) =>
                                                           e.feature_id == UserAccessConstants.kModuleCleaningFeatureId &&
@@ -745,7 +762,8 @@ class AddModuleCleaningExecutionContentWeb extends GetView<AddModuleCleaningExec
                                                     },
                                                   ),
                                                 )
-                                              : Dimens.box0,
+                                              : Dimens.box0
+                                              :Dimens.box0,
 
                                           SizedBox(
                                             width: 10,

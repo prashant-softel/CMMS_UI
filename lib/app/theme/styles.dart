@@ -803,6 +803,11 @@ abstract class Styles {
     fontWeight: FontWeight.w700,
     fontSize: Dimens.seventeen,
   );
+   static TextStyle blue25 = TextStyle(
+    color: ColorValues.appDarkBlueColor,
+    fontWeight: FontWeight.w700,
+    fontSize: Dimens.twentyFive,
+  );
   static BoxDecoration cardLikeDecoration = BoxDecoration(
     boxShadow: [
       BoxShadow(
