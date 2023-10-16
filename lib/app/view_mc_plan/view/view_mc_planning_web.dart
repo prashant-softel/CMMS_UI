@@ -1,4 +1,5 @@
 import 'package:cmms/app/app.dart';
+import 'package:cmms/app/utils/user_access_constants.dart';
 import 'package:cmms/app/view_mc_plan/view_mc_planning_controller.dart';
 import 'package:cmms/app/widgets/custom_elevated_button.dart';
 import 'package:cmms/app/widgets/custom_richtext.dart';
@@ -7,11 +8,14 @@ import 'package:cmms/app/widgets/mc_reject_dialog.dart';
 import 'package:cmms/app/widgets/set_equipments_dialog.dart';
 import 'package:cmms/app/widgets/stock_dropdown.dart';
 import 'package:cmms/app/widgets/view_set_eqp_dialog.dart';
+import 'package:cmms/domain/models/mc_details_plan_model.dart';
 import 'package:data_table_2/data_table_2.dart';
 
 import 'package:flutter/material.dart';
 
 import 'package:get/get.dart';
+
+import '../../constant/constant.dart';
 
 class ViewMcPlaningWeb extends StatefulWidget {
   ViewMcPlaningWeb({
@@ -467,32 +471,34 @@ class _ViewMcPlaningWebState extends State<ViewMcPlaningWeb> {
                                                                 CrossAxisAlignment
                                                                     .start,
                                                             children: [
-                                                              DropdownWebStock(
-                                                                width: MediaQuery.of(
-                                                                        context)
-                                                                    .size
-                                                                    .width,
-                                                                dropdownList:
-                                                                    controller
-                                                                        .cleaningType,
-                                                                selectedValue:
-                                                                    mapData[
-                                                                        "value"],
-                                                                onValueChanged:
-                                                                    (list,
-                                                                        selectedValue) {
-                                                                  // print('paifcghb:${controller.assetList}');
-                                                                  // print({selectedValue: selectedValue});
-                                                                  mapData["value"] =
-                                                                      selectedValue;
-                                                                  controller.typedropdownMapperData[selectedValue] = list.firstWhere(
-                                                                      (element) =>
-                                                                          element
-                                                                              .name ==
-                                                                          selectedValue,
-                                                                      orElse:
-                                                                          null);
-                                                                },
+                                                              IgnorePointer(
+                                                                child:
+                                                                    DropdownWebStock(
+                                                                  width: MediaQuery.of(
+                                                                          context)
+                                                                      .size
+                                                                      .width,
+                                                                  dropdownList:
+                                                                      controller
+                                                                          .cleaningType,
+                                                                  selectedValue:
+                                                                      mapData[
+                                                                          "value"],
+                                                                  onValueChanged:
+                                                                      (list,
+                                                                          selectedValue) {
+                                                                    // print('paifcghb:${controller.assetList}');
+                                                                    // print({selectedValue: selectedValue});
+                                                                    mapData["value"] =
+                                                                        selectedValue;
+                                                                    controller.typedropdownMapperData[selectedValue] = list.firstWhere(
+                                                                        (element) =>
+                                                                            element.name ==
+                                                                            selectedValue,
+                                                                        orElse:
+                                                                            null);
+                                                                  },
+                                                                ),
                                                               ),
                                                             ],
                                                           ),
@@ -638,46 +644,69 @@ class _ViewMcPlaningWebState extends State<ViewMcPlaningWeb> {
                                       ),
 
                                 Dimens.boxHeight12,
+// controller.mcPlanDetailsList!
+//                                         .firstWhere(
+//                                           (e) =>
+//                                               e!.planId ==
+//                                               McPalningDetailsModel
+//                                                   .
+//                                           orElse: () =>
+//                                               ModuleCleaningListPlanModel(
+//                                                   planId: 00),
+//                                         )
+//                                         .status ==
+//                                     353
+//                                      &&
+                                varUserAccessModel.value.access_list!
+                                            .where((e) =>
+                                                e.feature_id ==
+                                                    UserAccessConstants
+                                                        .kModuleCleaningFeatureId &&
+                                                e.approve ==
+                                                    UserAccessConstants
+                                                        .kHaveApproveAccess)
+                                            .length >
+                                        0
+                                    ? Row(
+                                        children: [
+                                          Spacer(),
 
-                                Row(
-                                  children: [
-                                    Spacer(),
+                                          Container(
+                                            height: 45,
+                                            child: CustomElevatedButton(
+                                              backgroundColor:
+                                                  ColorValues.rejectColor,
+                                              text: "Reject",
+                                              icon: Icons.close,
+                                              onPressed: () {
+                                                Get.dialog(RejectMcPlan(
+                                                  id: controller.id.value,
+                                                ));
+                                              },
+                                            ),
+                                          ),
+                                          Dimens.boxWidth10,
 
-                                    Container(
-                                      height: 45,
-                                      child: CustomElevatedButton(
-                                        backgroundColor:
-                                            ColorValues.rejectColor,
-                                        text: "Reject",
-                                        icon: Icons.close,
-                                        onPressed: () {
-                                          Get.dialog(RejectMcPlan(
-                                            id: controller.id.value,
-                                          ));
-                                        },
-                                      ),
-                                    ),
-                                    Dimens.boxWidth10,
+                                          Container(
+                                            height: 45,
+                                            child: CustomElevatedButton(
+                                              backgroundColor:
+                                                  ColorValues.appGreenColor,
+                                              text: "Approve",
+                                              icon: Icons.add,
+                                              onPressed: () {
+                                                Get.dialog(ApproveMcPlan(
+                                                  id: controller.id.value,
+                                                ));
+                                              },
+                                            ),
+                                          ),
 
-                                    Container(
-                                      height: 45,
-                                      child: CustomElevatedButton(
-                                        backgroundColor:
-                                            ColorValues.appGreenColor,
-                                        text: "Approve",
-                                        icon: Icons.add,
-                                        onPressed: () {
-                                          Get.dialog(ApproveMcPlan(
-                                            id: controller.id.value,
-                                          ));
-                                        },
-                                      ),
-                                    ),
-
-                                    // : Dimens.box0,
-                                    Spacer(),
-                                  ],
-                                ),
+                                          // : Dimens.box0,
+                                          Spacer(),
+                                        ],
+                                      )
+                                    : Dimens.box0,
                                 Dimens.boxHeight12,
                               ],
                             ),
