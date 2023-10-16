@@ -321,7 +321,7 @@ class AddModuleCleaningExecutionDialog extends GetView {
                                                     ),
                                                   ),
                                                 ),
-                                                Expanded(flex: 1, child: Text('Day 1'))
+                                                Expanded(flex: 1, child: Text(''))
                                               ],
                                             );
                                           },
