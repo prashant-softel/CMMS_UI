@@ -668,6 +668,29 @@ class DataRepository extends DomainRepository {
         mcApproveJsonString: mcApproveJsonString,
         isLoading: isLoading ?? false,
       );
+
+  Future<ResponseModel> mcExecutionApprovedButton({
+    required String auth,
+    mcExecutionApproveJsonString,
+    bool? isLoading,
+  }) async =>
+      await connectHelper.mcExecutionApprovedButton(
+        auth: auth,
+        mcExecutionApproveJsonString: mcExecutionApproveJsonString,
+        isLoading: isLoading ?? false,
+      );
+
+  Future<ResponseModel> rejectMcExecutionApprovedButton({
+    required String auth,
+    rejectMcExecutionApproveJsonString,
+    bool? isLoading,
+  }) async =>
+      await connectHelper.rejectMcExecutionApprovedButton(
+        auth: auth,
+        rejectMcExecutionApproveJsonString: rejectMcExecutionApproveJsonString,
+        isLoading: isLoading ?? false,
+      );
+
   Future<ResponseModel> mcPlanRejectButton({
     required String auth,
     mcRejectJsonString,
@@ -841,12 +864,23 @@ class DataRepository extends DomainRepository {
 
   Future<ResponseModel> startMCExecutionButton({
     required String auth,
-    int? planId,
+    int? executionId,
     bool? isLoading,
   }) async =>
       await connectHelper.startMCExecutionButton(
         auth: auth,
-        planId: planId,
+        executionId: executionId,
+        isLoading: isLoading ?? false,
+      );
+
+  Future<ResponseModel> endMcExecutionButton({
+    required String auth,
+    int? executionId,
+    bool? isLoading,
+  }) async =>
+      await connectHelper.endMcExecutionButton(
+        auth: auth,
+        executionId: executionId,
         isLoading: isLoading ?? false,
       );
 
@@ -856,6 +890,17 @@ class DataRepository extends DomainRepository {
     bool? isLoading,
   }) async =>
       await connectHelper.startMCExecutionScheduleButton(
+        auth: auth,
+        scheduleId: scheduleId,
+        isLoading: isLoading ?? false,
+      );
+
+  Future<ResponseModel> endMCScheduleExecutionButton({
+    required String auth,
+    int? scheduleId,
+    bool? isLoading,
+  }) async =>
+      await connectHelper.endMCScheduleExecutionButton(
         auth: auth,
         scheduleId: scheduleId,
         isLoading: isLoading ?? false,
@@ -1391,6 +1436,18 @@ class DataRepository extends DomainRepository {
         createMcPlans: createMcPlans,
         isLoading: isLoading ?? false,
       );
+
+  Future<ResponseModel> updateMcPlan({
+    required String auth,
+    updateMcPlans,
+    bool? isLoading,
+  }) async =>
+      await connectHelper.updateMcPlan(
+        auth: auth,
+        updateMcPlans: updateMcPlans,
+        isLoading: isLoading ?? false,
+      );
+
   Future<ResponseModel> createGoodsOrder({
     required String auth,
     createGo,

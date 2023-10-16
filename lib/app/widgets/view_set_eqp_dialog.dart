@@ -1,7 +1,6 @@
-import 'package:cmms/app/constant/constant.dart';
 import 'package:cmms/app/module_cleaning_planning/module_cleaning_planning_controller.dart';
 import 'package:cmms/app/theme/color_values.dart';
-import 'package:cmms/app/utils/user_access_constants.dart';
+import 'package:cmms/app/view_mc_plan/view_mc_planning_controller.dart';
 import 'package:cmms/app/widgets/custom_elevated_button.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -9,8 +8,8 @@ import 'package:get/get.dart';
 import '../theme/dimens.dart';
 import '../theme/styles.dart';
 
-class SetEquipmentDialog extends GetView {
-  final ModuleCleaningPlanningController controller = Get.find();
+class ViewSetEquipmentDialog extends GetView {
+  final ViewMcPlaningController controller = Get.find();
 
   @override
   Widget build(BuildContext context) {
@@ -209,82 +208,73 @@ class SetEquipmentDialog extends GetView {
                       }))),
               ));
         }),
-        actions: [
-          controller.id == 0
-              ? Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Container(
-                      height: 35,
-                      child: CustomElevatedButton(
-                        backgroundColor: ColorValues.greenColor,
-                        text: 'Submit',
-                        onPressed: () {
-                          controller.createMcPlan();
-                        },
-                      ),
-                    ),
-                    Dimens.boxWidth20,
-                    Container(
-                      height: 35,
-                      child: CustomElevatedButton(
-                        backgroundColor: ColorValues.redColor,
-                        text: "Cancel",
-                        onPressed: () {
-                          final _flutterSecureStorage =
-                              // const FlutterSecureStorage();
+        // actions: [
+        //   controller.id == 0
+        //       ? Row(
+        //           mainAxisAlignment: MainAxisAlignment.center,
+        //           children: [
+        //             Container(
+        //               height: 35,
+        //               child: CustomElevatedButton(
+        //                 backgroundColor: ColorValues.greenColor,
+        //                 text: 'Submit',
+        //                 onPressed: () {
+        //                   // controller.createMcPlan();
+        //                 },
+        //               ),
+        //             ),
+        //             Dimens.boxWidth20,
+        //             Container(
+        //               height: 35,
+        //               child: CustomElevatedButton(
+        //                 backgroundColor: ColorValues.redColor,
+        //                 text: "Cancel",
+        //                 onPressed: () {
+        //                   final _flutterSecureStorage =
+        //                       // const FlutterSecureStorage();
 
-                              // _flutterSecureStorage.delete(
-                              // key: "userId");
+        //                       // _flutterSecureStorage.delete(
+        //                       // key: "userId");
 
-                              Get.back();
-                        },
-                      ),
-                    ),
-                  ],
-                )
-              : varUserAccessModel.value.access_list!
-                          .where((e) =>
-                              e.feature_id ==
-                                  UserAccessConstants
-                                      .kModuleCleaningFeatureId &&
-                              e.add == UserAccessConstants.kHaveAddAccess)
-                          .length >
-                      0
-                  ? Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        Container(
-                          height: 35,
-                          child: CustomElevatedButton(
-                            backgroundColor: ColorValues.redColor,
-                            text: "Cancel",
-                            onPressed: () {
-                              // final _flutterSecureStorage =
-                              // const FlutterSecureStorage();
+        //                       Get.back();
+        //                 },
+        //               ),
+        //             ),
+        //           ],
+        //         )
+        //       : Row(
+        //           mainAxisAlignment: MainAxisAlignment.center,
+        //           children: [
+        //             Container(
+        //               height: 35,
+        //               child: CustomElevatedButton(
+        //                 backgroundColor: ColorValues.redColor,
+        //                 text: "Cancel",
+        //                 onPressed: () {
+        //                   // final _flutterSecureStorage =
+        //                   // const FlutterSecureStorage();
 
-                              // _flutterSecureStorage.delete(
-                              // key: "userId");
+        //                   // _flutterSecureStorage.delete(
+        //                   // key: "userId");
 
-                              Get.back();
-                            },
-                          ),
-                        ),
-                        Dimens.boxWidth20,
-                        Container(
-                          height: 35,
-                          child: CustomElevatedButton(
-                            backgroundColor: ColorValues.greenColor,
-                            text: 'Update',
-                            onPressed: () {
-                              controller.updateMcPlan();
-                            },
-                          ),
-                        ),
-                      ],
-                    )
-                  : Dimens.box0
-        ],
+        //                   Get.back();
+        //                 },
+        //               ),
+        //             ),
+        //             Dimens.boxWidth20,
+        //             Container(
+        //               height: 35,
+        //               child: CustomElevatedButton(
+        //                 backgroundColor: ColorValues.greenColor,
+        //                 text: 'Update',
+        //                 onPressed: () {
+        //                   // controller.updateMcPlan();
+        //                 },
+        //               ),
+        //             ),
+        //           ],
+        //         ),
+        // ],
       );
     }));
   }

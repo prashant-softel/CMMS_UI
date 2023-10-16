@@ -5,11 +5,9 @@
 import 'dart:convert';
 
 List<EquipmentListModel> equipmentListModelFromJson(String str) =>
-    List<EquipmentListModel>.from(
-        json.decode(str).map((x) => EquipmentListModel.fromJson(x)));
+    List<EquipmentListModel>.from(json.decode(str).map((x) => EquipmentListModel.fromJson(x)));
 
-String equipmentListModelToJson(List<EquipmentListModel> data) =>
-    json.encode(List<dynamic>.from(data.map((x) => x.toJson())));
+String equipmentListModelToJson(List<EquipmentListModel> data) => json.encode(List<dynamic>.from(data.map((x) => x.toJson())));
 
 class EquipmentListModel {
   int? invId;
@@ -18,29 +16,25 @@ class EquipmentListModel {
   List<SMBS> smbs;
   bool isExpanded;
   String? selectedDay;
-  bool? isChecked;
+  bool? isAbandonedChecked;
   bool? isCleanedChecked;
-
 
   EquipmentListModel({
     this.invId,
-      this.invName,
-      this.moduleQuantity,
-      this.smbs = const [],
-      this.isExpanded = false,
-      this.isChecked = false,
-      this.isCleanedChecked = false,
-      this.selectedDay,
+    this.invName,
+    this.moduleQuantity,
+    this.smbs = const [],
+    this.isExpanded = false,
+    this.isAbandonedChecked = false,
+    this.isCleanedChecked = false,
+    this.selectedDay,
   });
 
-  factory EquipmentListModel.fromJson(Map<String, dynamic> json) =>
-      EquipmentListModel(
+  factory EquipmentListModel.fromJson(Map<String, dynamic> json) => EquipmentListModel(
         invId: json["invId"],
         invName: json["invName"],
         moduleQuantity: json["moduleQuantity"],
-        smbs: json["smbs"] != null
-            ? List<SMBS>.from(json["smbs"].map((x) => SMBS.fromJson(x)))
-            : [],
+        smbs: json["smbs"] != null ? List<SMBS>.from(json["smbs"].map((x) => SMBS.fromJson(x))) : [],
       );
 
   Map<String, dynamic> toJson() => {
@@ -56,29 +50,44 @@ class SMBS {
     this.parentId,
     this.smbId,
     this.smbName,
+    this.isCleanedSmbCheck = false,
+    this.isAbandonSmbCheck = false,
     this.moduleQuantity,
     this.selectedDay,
+    // this.status,
+    // this.short_status,
   });
 
   int? parentId;
   int? smbId;
   String? smbName;
+  bool? isCleanedSmbCheck;
+  bool? isAbandonSmbCheck;
   int? moduleQuantity;
   String? selectedDay;
+  // int? status;
+  // String? short_status;
 
   factory SMBS.fromJson(Map<String, dynamic> json) => SMBS(
       parentId: json["parentId"],
       smbId: json['smbId'],
       smbName: json['smbName'],
       moduleQuantity: json['moduleQuantity'],
-      selectedDay: json["selectedDay"]);
+      selectedDay: json["selectedDay"],
+      // status: json['status'],
+      // short_status: json['short_status'],
+      // isCleanedSmbCheck:  json['status'] == 407 ? true : false,
+      // isAbandonSmbCheck: json['status'] == 408 ? true : false
+      );
 
   Map<String, dynamic> toJson() => {
         "parentId": parentId,
         "smbId": smbId,
         "smbName": smbName,
         "moduleQuantity": moduleQuantity,
-        "selectedDay": selectedDay
+        "selectedDay": selectedDay,
+        // "status": status,
+        // "short_status": short_status
       };
 }
 

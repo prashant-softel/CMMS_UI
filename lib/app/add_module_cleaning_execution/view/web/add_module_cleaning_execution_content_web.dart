@@ -4,7 +4,9 @@ import 'dart:convert';
 
 import 'package:cmms/app/add_module_cleaning_execution/add_module_cleaning_execution_controller.dart';
 import 'package:cmms/app/app.dart';
+import 'package:cmms/app/constant/constant.dart';
 import 'package:cmms/app/navigators/navigators.dart';
+import 'package:cmms/app/utils/user_access_constants.dart';
 import 'package:cmms/app/widgets/abandon_all_dialog.dart';
 import 'package:cmms/app/widgets/abandon_schedule_execution_dialog.dart';
 import 'package:cmms/app/widgets/add_module_cleaning_execution_dialog.dart';
@@ -115,14 +117,14 @@ class AddModuleCleaningExecutionContentWeb extends GetView<AddModuleCleaningExec
                                             decoration: BoxDecoration(
                                               borderRadius: BorderRadius.circular(10),
                                               border: Border.all(
-                                                color: controller.mcExecutionDetailsModel.value?.status == 380
+                                                color: controller.mcExecutionDetailsModel.value?.status == 360
                                                     ? ColorValues.approveColor
                                                     : ColorValues.appRedColor,
                                                 width: 1,
                                               ),
                                               boxShadow: [
                                                 BoxShadow(
-                                                  color: controller.mcExecutionDetailsModel.value?.status == 380 //125
+                                                  color: controller.mcExecutionDetailsModel.value?.status == 360 //125
 
                                                       ? ColorValues.approveColor
                                                       : ColorValues.appRedColor,
@@ -164,7 +166,6 @@ class AddModuleCleaningExecutionContentWeb extends GetView<AddModuleCleaningExec
                                                 ' ${controller.data['planId']}',
                                                 style: Styles.blue17,
                                               ),
-                                             
                                               Text(
                                                 ' ${controller.data['id']}',
                                                 style: Styles.blue17,
@@ -434,12 +435,38 @@ class AddModuleCleaningExecutionContentWeb extends GetView<AddModuleCleaningExec
                                                                                       ),
                                                                                     )
                                                                                   : (mapData['key'] == "Water Used")
-                                                                                      ? Center(
-                                                                                          child: Text(
-                                                                                            mapData["value"] ?? "",
-                                                                                            // "${element?.scheduleId}",
-                                                                                            style: TextStyle(color: Color.fromARGB(255, 5, 92, 163)),
-                                                                                          ),
+                                                                                      ? Column(
+                                                                                          mainAxisAlignment: MainAxisAlignment.center,
+                                                                                          crossAxisAlignment: CrossAxisAlignment.center,
+                                                                                          children: [
+                                                                                            Container(
+                                                                                                decoration: BoxDecoration(
+                                                                                                  boxShadow: [
+                                                                                                    BoxShadow(
+                                                                                                      color: Colors.black26,
+                                                                                                      offset: const Offset(
+                                                                                                        5.0,
+                                                                                                        5.0,
+                                                                                                      ),
+                                                                                                      blurRadius: 5.0,
+                                                                                                      spreadRadius: 1.0,
+                                                                                                    ),
+                                                                                                  ],
+                                                                                                  color: ColorValues.whiteColor,
+                                                                                                  borderRadius: BorderRadius.circular(5),
+                                                                                                ),
+                                                                                                child: IgnorePointer(
+                                                                                                  child: LoginCustomTextfield(
+                                                                                                    width: MediaQuery.of(context).size.width / 2,
+                                                                                                    maxLine: 1,
+                                                                                                    textController: new TextEditingController(
+                                                                                                      text: mapData["value"] ?? ''),
+                                                                                                    onChanged: (txt) {
+                                                                                                      mapData["value"] = txt;
+                                                                                                    },
+                                                                                                  ),
+                                                                                                )),
+                                                                                          ],
                                                                                         )
                                                                                       : (mapData['key'] == "Remark")
                                                                                           ? Column(
@@ -462,14 +489,16 @@ class AddModuleCleaningExecutionContentWeb extends GetView<AddModuleCleaningExec
                                                                                                       color: ColorValues.whiteColor,
                                                                                                       borderRadius: BorderRadius.circular(5),
                                                                                                     ),
-                                                                                                    child: LoginCustomTextfield(
-                                                                                                      width: MediaQuery.of(context).size.width / 2,
-                                                                                                      maxLine: 1,
-                                                                                                      textController: new TextEditingController(
+                                                                                                    child: IgnorePointer(
+                                                                                                      child: LoginCustomTextfield(
+                                                                                                        width: MediaQuery.of(context).size.width / 2,
+                                                                                                        maxLine: 1,
+                                                                                                        textController: new TextEditingController(
                                                                                                           text: mapData["value"] ?? ''),
-                                                                                                      onChanged: (txt) {
-                                                                                                        mapData["value"] = txt;
-                                                                                                      },
+                                                                                                        onChanged: (txt) {
+                                                                                                          mapData["value"] = txt;
+                                                                                                        },
+                                                                                                      ),
                                                                                                     )),
                                                                                               ],
                                                                                             )
@@ -481,206 +510,157 @@ class AddModuleCleaningExecutionContentWeb extends GetView<AddModuleCleaningExec
                                                                                                       color: Color.fromARGB(255, 5, 92, 163)),
                                                                                                 )
                                                                                               : (mapData['key'] == "Actions")
-                                                                                                  ? Column(
-                                                                                                      mainAxisAlignment: MainAxisAlignment.center,
-                                                                                                      crossAxisAlignment: CrossAxisAlignment.center,
+                                                                                                  ? Wrap(
                                                                                                       children: [
-                                                                                                        
-                                                                                                          controller.listSchedules!
-                                                                                                                      .firstWhere(
-                                                                                                                        (e) =>
-                                                                                                                            "${e?.status_short}" ==
-                                                                                                                            e?.status_short,
-                                                                                                                        orElse: () => Schedules(
-                                                                                                                            status_short: ""),
-                                                                                                                      )
-                                                                                                                      ?.status_short ==
-                                                                                                                  "Scheduled"
-                                                                                                              ?
-                                                                                                          TableActionButton(
-                                                                                                            // label: 'Start',
-                                                                                                            onPress: () {
-                                                                                                                var filterdData = controller.listSchedules?.firstWhere((e) => "${e?.scheduleId}" == record[0]['value']);
-                                                                                                              
-                                                                                                              print('filteredData:${filterdData!.scheduleId}');
-                                                                                                              //  selectedData = filterdData;
+                                                                                                        controller.listSchedules!
+                                                                                                                    .firstWhere(
+                                                                                                                      (e) =>
+                                                                                                                          "${e?.status}" == e?.status,
+                                                                                                                      orElse: () =>
+                                                                                                                          Schedules(status_short: ""),
+                                                                                                                    )
+                                                                                                                    ?.status ==
+                                                                                                                380
+                                                                                                            ? TableActionButton(
+                                                                                                                // label: 'Start',
+                                                                                                                onPress: () {
+                                                                                                                  var filterdData = controller
+                                                                                                                      .listSchedules
+                                                                                                                      ?.firstWhere((e) =>
+                                                                                                                          "${e?.scheduleId}" ==
+                                                                                                                          record[0]['value']);
 
-                                                                                                              controller
-                                                                                                                  .startMCExecutionScheduleButton(
-                                                                                                                      scheduleID:
-                                                                                                                          filterdData.scheduleId);
-                                                                                                              // print({
-                                                                                                              //   'scheduledata:':
-                                                                                                              //       filterdData.scheduleId
-                                                                                                              // });
-                                                                                                            },
-                                                                                                            color: Colors.green,
-                                                                                                            icon: Icons.add,
-                                                                                                            message: 'Start',
-                                                                                                          )
-                                                                                                          : Dimens.box0,
+                                                                                                                  print(
+                                                                                                                      'filteredData:${filterdData!.scheduleId}');
+                                                                                                                  //  selectedData = filterdData;
 
-                                                                                                          controller.listSchedules!
-                                                                                                                      .firstWhere(
-                                                                                                                        (e) => "${e?.status_short}" == e?.status_short,
-                                                                                                                        orElse: () => Schedules(status_short: ""),
-                                                                                                                      )
-                                                                                                                      ?.status_short ==
-                                                                                                                  "Completed"
-                                                                                                              ?
-                                                                                                          TableActionButton(
-                                                                                                            // label: 'Abandon',
-                                                                                                            onPress: () {
-                                                                                                              // Get.dialog(AddModuleCleaningExecutionDialog());
-                                                                                                              var filterdData = controller
-                                                                                                                  .listSchedules
-                                                                                                                  ?.firstWhere((e) =>
-                                                                                                                      "${e?.scheduleId}" ==
-                                                                                                                      record[0]['value']);
+                                                                                                                  controller
+                                                                                                                      .startMCExecutionScheduleButton(
+                                                                                                                          scheduleID:
+                                                                                                                              filterdData.scheduleId);
+                                                                                                                  // print({
+                                                                                                                  //   'scheduledata:':
+                                                                                                                  //       filterdData.scheduleId
+                                                                                                                  // });
+                                                                                                                },
+                                                                                                                color: Colors.green,
+                                                                                                                icon: Icons.add,
+                                                                                                                message: 'Start',
+                                                                                                              )
+                                                                                                            : Dimens.box0,
 
-                                                                                                              controller.updateMCScheduleExecution(
-                                                                                                                  scheduleId: filterdData?.scheduleId,
-                                                                                                                  cleaningDay:filterdData?.cleaningDay,
-                                                                                                                  waterUsed: filterdData?.waterUsed);
-                                                                                                              // print({"filteredData:${filterdData?.scheduleId}"});
-                                                                                                              // print({"filteredData:${filterdData!.cleaningDay}"});
-                                                                                                              // print({"filteredData:${filterdData.waterUsed}"});
+                                                                                                        //End MC Schedule Execution
+                                                                                                        TableActionButton(
+                                                                                                          // label: 'Start',
+                                                                                                          onPress: () {
+                                                                                                            var filterdData = controller.listSchedules
+                                                                                                                ?.firstWhere((e) =>
+                                                                                                                    "${e?.scheduleId}" ==
+                                                                                                                    record[0]['value']);
 
+                                                                                                            print(
+                                                                                                                'filteredData:${filterdData!.scheduleId}');
+                                                                                                            //  selectedData = filterdData;
 
-                                                                                                            },
-                                                                                                            color: ColorValues.appLightBlueColor,
-                                                                                                            icon: Icons.add,
-                                                                                                            message: 'Update',
-                                                                                                          )
-                                                                                                          :Dimens.box0,
+                                                                                                            controller.endMCScheduleExecutionButton(
+                                                                                                                scheduleID: filterdData.scheduleId);
+                                                                                                            // print({
+                                                                                                            //   'scheduledata:':
+                                                                                                            //       filterdData.scheduleId
+                                                                                                            // });
+                                                                                                          },
+                                                                                                          color: Color.fromARGB(255, 70, 95, 57),
+                                                                                                          icon: Icons.add,
+                                                                                                          message: 'End',
+                                                                                                        ),
 
-                                                                                                          ///Abandon
-                                                                                                          // controller.listSchedules!
-                                                                                                          //             .firstWhere(
-                                                                                                          //               (e) => "${e?.status_short}" == e?.status_short,
-                                                                                                          //               orElse: () => Schedules(status_short: ""),
-                                                                                                          //             )
-                                                                                                          //             ?.status_short ==
-                                                                                                          //         "In Progress"
-                                                                                                          //     ?
-                                                                                                          TableActionButton(
-                                                                                                            // label: 'Abandon',
-                                                                                                            onPress: () {
-                                                                                                               var filterdData = controller.listSchedules?.firstWhere((e) => "${e?.scheduleId}" == record[0]['value']);
-                                                                                                               controller.scheduledId = filterdData?.scheduleId;
-                                                                                                              print({
-                                                                                                                'Executiondata:': filterdData?.executionId
-                                                                                                              });
-                                                                                                              Get.dialog(
-                                                                                                                  AbandoneScheduleExecutionDialog(
-                                                                                                                      id: filterdData?.executionId,
-                                                                                                                      ));
-                                                                                                            },
-                                                                                                            color: Colors.red,
-                                                                                                            icon: Icons.close,
-                                                                                                            message: 'Abandon',
-                                                                                                          ),
-                                                                                                          // :Dimens.box0,
+                                                                                                        // controller.listSchedules!
+                                                                                                        //             .firstWhere(
+                                                                                                        //               (e) => "${e?.status_short}" == e?.status_short,
+                                                                                                        //               orElse: () => Schedules(status_short: ""),
+                                                                                                        //             )
+                                                                                                        //             ?.status_short ==
+                                                                                                        //         "Completed"
+                                                                                                        //     ?
+                                                                                                        // TableActionButton(
+                                                                                                        //   // label: 'Abandon',
+                                                                                                        //   onPress: () {
+                                                                                                        //     // Get.dialog(AddModuleCleaningExecutionDialog());
+                                                                                                        //     var filterdData = controller.listSchedules?.firstWhere((e) => "${e?.scheduleId}" == record[0]['value']);
 
-                                                                                                          // controller.listSchedules!
-                                                                                                          //             .firstWhere(
-                                                                                                          //               (e) => "${e?.status_short}" == e?.status_short,
-                                                                                                          //               orElse: () => Schedules(status_short: ""),
-                                                                                                          //             )
-                                                                                                          //             ?.status_short ==
-                                                                                                          //         "In Progress"
-                                                                                                          //     ?
-                                                                                                          TableActionButton(
-                                                                                                            // label: 'Equipments',
-                                                                                                            onPress: () {
-                                                                                                               var filterdData = controller.listSchedules?.firstWhere((e) => "${e?.scheduleId}" == record[0]['value']);
-                                                                                                               
-                                                                                                              Get.dialog(
-                                                                                                                  AddModuleCleaningExecutionDialog(scheduleId: filterdData!.scheduleId, cleaningDay: filterdData.cleaningDay, waterUsed: filterdData.waterUsed,));
-                                                                                                            },
-                                                                                                            color: ColorValues.appDarkBlueColor,
-                                                                                                            icon: Icons.category,
-                                                                                                            message: 'Equipments',
-                                                                                                          )
-                                                                                                          // :Dimens.box0
-                                                                                                        ]
-                                                                                                      // ..addAll(controller.listSchedules!.map((element) => Row(
-                                                                                                      //       mainAxisSize: MainAxisSize.min,
-                                                                                                      //       mainAxisAlignment: MainAxisAlignment.start,
-                                                                                                      //       crossAxisAlignment: CrossAxisAlignment.start,
-                                                                                                      //       children: [
-                                                                                                      //         controller.listSchedules!
-                                                                                                      //                     .firstWhere(
-                                                                                                      //                       (e) => "${e?.status_short}" == e?.status_short,
-                                                                                                      //                       orElse: () => Schedules(status_short: ""),
-                                                                                                      //                     )
-                                                                                                      //                     ?.status_short ==
-                                                                                                      //                 "Scheduled"
-                                                                                                      //             ? TableActionButton(
-                                                                                                      //                 // label: 'Start',
-                                                                                                      //                 onPress: () {
-                                                                                                      //                   var filterdData = controller.listSchedules?.firstWhere((e) => e?.scheduleId == element?.scheduleId);
-                                                                                                      //                   //  selectedData = filterdData;
-                                                                                                      //                   controller.startMCExecutionScheduleButton(scheduleID: filterdData?.scheduleId);
-                                                                                                      //                   print({'scheduledata:': filterdData?.scheduleId});
-                                                                                                      //                 },
-                                                                                                      //                 color: Colors.green,
-                                                                                                      //                 icon: Icons.add,
-                                                                                                      //                 message: 'Start',
-                                                                                                      //               )
-                                                                                                      //             : Dimens.box0,
+                                                                                                        //     controller.updateMCScheduleExecution(scheduleId: filterdData?.scheduleId, cleaningDay: filterdData?.cleaningDay, waterUsed: filterdData?.waterUsed);
+                                                                                                        //     // print({"filteredData:${filterdData?.scheduleId}"});
+                                                                                                        //     // print({"filteredData:${filterdData!.cleaningDay}"});
+                                                                                                        //     // print({"filteredData:${filterdData.waterUsed}"});
+                                                                                                        //   },
+                                                                                                        //   color: ColorValues.appLightBlueColor,
+                                                                                                        //   icon: Icons.add,
+                                                                                                        //   message: 'Update',
+                                                                                                        // ),
+                                                                                                        // : Dimens.box0,
 
-                                                                                                      //         // controller.listSchedules!
-                                                                                                      //         //             .firstWhere(
-                                                                                                      //         //               (e) => "${e?.status_short}" == e?.status_short,
-                                                                                                      //         //               orElse: () => Schedules(status_short: ""),
-                                                                                                      //         //             )
-                                                                                                      //         //             ?.status_short ==
-                                                                                                      //         //         "In Progress"
-                                                                                                      //         //     ?
-                                                                                                      //         TableActionButton(
-                                                                                                      //           // label: 'Abandon',
-                                                                                                      //           onPress: () {
-                                                                                                      //             // Get.dialog(AddModuleCleaningExecutionDialog());
-                                                                                                      //             var filterdData = controller.listSchedules?.firstWhere((e) => e?.scheduleId == element?.scheduleId);
+                                                                                                        ///Abandon
+                                                                                                        // controller.listSchedules!
+                                                                                                        //             .firstWhere(
+                                                                                                        //               (e) => "${e?.status_short}" == e?.status_short,
+                                                                                                        //               orElse: () => Schedules(status_short: ""),
+                                                                                                        //             )
+                                                                                                        //             ?.status_short ==
+                                                                                                        //         "In Progress"
+                                                                                                        //     ?
+                                                                                                        TableActionButton(
+                                                                                                          // label: 'Abandon',
+                                                                                                          onPress: () {
+                                                                                                            var filterdData = controller.listSchedules
+                                                                                                                ?.firstWhere((e) =>
+                                                                                                                    "${e?.scheduleId}" ==
+                                                                                                                    record[0]['value']);
+                                                                                                            controller.scheduledId =
+                                                                                                                filterdData?.scheduleId;
+                                                                                                            print({
+                                                                                                              'Executiondata:':
+                                                                                                                  filterdData?.executionId
+                                                                                                            });
+                                                                                                            Get.dialog(
+                                                                                                                AbandoneScheduleExecutionDialog(
+                                                                                                              id: filterdData?.executionId,
+                                                                                                            ));
+                                                                                                          },
+                                                                                                          color: Colors.red,
+                                                                                                          icon: Icons.close,
+                                                                                                          message: 'Abandon',
+                                                                                                        ),
+                                                                                                        // :Dimens.box0,
 
-                                                                                                      //             controller.updateMCScheduleExecution(scheduleId: filterdData?.scheduleId, cleaningDay: filterdData?.cleaningDay, waterUsed: filterdData?.waterUsed);
-                                                                                                      //           },
-                                                                                                      //           color: ColorValues.appLightBlueColor,
-                                                                                                      //           icon: Icons.add,
-                                                                                                      //           message: 'Update',
-                                                                                                      //         ),
+                                                                                                        // controller.listSchedules!
+                                                                                                        //             .firstWhere(
+                                                                                                        //               (e) => "${e?.status_short}" == e?.status_short,
+                                                                                                        //               orElse: () => Schedules(status_short: ""),
+                                                                                                        //             )
+                                                                                                        //             ?.status_short ==
+                                                                                                        //         "In Progress"
+                                                                                                        //     ?
+                                                                                                        TableActionButton(
+                                                                                                          // label: 'Equipments',
+                                                                                                          onPress: () {
+                                                                                                            var filterdData = controller.listSchedules
+                                                                                                                ?.firstWhere((e) =>
+                                                                                                                    "${e?.scheduleId}" ==
+                                                                                                                    record[0]['value']);
 
-                                                                                                      //         ///Abandon
-                                                                                                      //         TableActionButton(
-                                                                                                      //           // label: 'Abandon',
-                                                                                                      //           onPress: () {
-                                                                                                      //             var filterdData = controller.listSchedules?.firstWhere((e) => e?.executionId == element?.executionId);
-                                                                                                      //             print({
-                                                                                                      //               'Executiondata:': filterdData?.executionId
-                                                                                                      //             });
-                                                                                                      //             Get.dialog(AbandoneScheduleExecutionDialog(
-                                                                                                      //               id: filterdData?.executionId,
-                                                                                                      //             ));
-                                                                                                      //           },
-                                                                                                      //           color: Colors.red,
-                                                                                                      //           icon: Icons.close,
-                                                                                                      //           message: 'Abandon',
-                                                                                                      //         ),
-
-                                                                                                      //         TableActionButton(
-                                                                                                      //           // label: 'Equipments',
-                                                                                                      //           onPress: () {
-                                                                                                      //             Get.dialog(AddModuleCleaningExecutionDialog());
-                                                                                                      //           },
-                                                                                                      //           color: ColorValues.appDarkBlueColor,
-                                                                                                      //           icon: Icons.category,
-                                                                                                      //           message: 'Equipments',
-                                                                                                      //         ),
-                                                                                                      //       ],
-                                                                                                      //     )
-                                                                                                      //     )),
-                                                                                                      )
+                                                                                                            Get.dialog(
+                                                                                                                AddModuleCleaningExecutionDialog(
+                                                                                                              scheduleId: filterdData!.scheduleId,
+                                                                                                              cleaningDay: filterdData.cleaningDay,
+                                                                                                              waterUsed: filterdData.waterUsed,
+                                                                                                            ));
+                                                                                                          },
+                                                                                                          color: ColorValues.appDarkBlueColor,
+                                                                                                          icon: Icons.category,
+                                                                                                          message: 'Equipments',
+                                                                                                        ),
+                                                                                                      ],
+                                                                                                    )
                                                                                                   : Text(mapData['key'] ?? ''),
                                                     );
                                                   }).toList(),
@@ -723,7 +703,14 @@ class AddModuleCleaningExecutionContentWeb extends GetView<AddModuleCleaningExec
                                           SizedBox(
                                             width: 20,
                                           ),
-                                          controller.data['status'] == "Scheduled"
+                                          // controller.data['status'] == "Scheduled"
+                                          //     ?
+                                          varUserAccessModel.value.access_list!
+                                                      .where((e) =>
+                                                          e.feature_id == UserAccessConstants.kModuleCleaningFeatureId &&
+                                                          e.edit == UserAccessConstants.kHaveEditAccess)
+                                                      .length >
+                                                  0
                                               ? Container(
                                                   height: 28,
                                                   child: CustomElevatedButton(
@@ -734,39 +721,62 @@ class AddModuleCleaningExecutionContentWeb extends GetView<AddModuleCleaningExec
                                                     },
                                                   ),
                                                 )
-                                              : Container(),
+                                              : Dimens.box0,
+                                          // : Container(),
 
-                                          SizedBox(
-                                            width: 20,
-                                          ),
+                                          Dimens.boxWidth10,
 
-                                          controller.data['status'] == "Abandoned"
+                                          // controller.data['status'] == "Abandoned"
+                                          //     ?
+                                          varUserAccessModel.value.access_list!
+                                                      .where((e) =>
+                                                          e.feature_id == UserAccessConstants.kModuleCleaningFeatureId &&
+                                                          e.edit == UserAccessConstants.kHaveEditAccess)
+                                                      .length >
+                                                  0
                                               ? Container(
                                                   height: 28,
                                                   child: CustomElevatedButton(
                                                     backgroundColor: ColorValues.cancelColor,
                                                     text: "End",
                                                     onPressed: () {
-                                                      Get.dialog(EndMCExecutionDialog());
+                                                      // Get.dialog(EndMCExecutionDialog());
+                                                      controller.endMcExecutionButton();
                                                     },
                                                   ),
                                                 )
-                                              : Container(),
+                                              : Dimens.box0,
+
                                           SizedBox(
-                                            width: 20,
+                                            width: 10,
                                           ),
-                                          Container(
-                                            height: 28,
-                                            child: CustomElevatedButton(
-                                              backgroundColor: Color.fromARGB(255, 244, 116, 248),
-                                              text: "Abandoned All",
-                                              onPressed: () {
-                                                Get.dialog(AbandonAllDialog(id: controller.data['id']));
-                                                // controller
-                                                //     .createEscalationMatrix();
-                                              },
-                                            ),
-                                          ),
+                                          Dimens.boxWidth10,
+
+                                          varUserAccessModel.value.access_list!
+                                                          .where((e) =>
+                                                              e.feature_id == UserAccessConstants.kModuleCleaningFeatureId &&
+                                                              e.edit == UserAccessConstants.kHaveEditAccess)
+                                                          .length >
+                                                      0 ||
+                                                  varUserAccessModel.value.access_list!
+                                                          .where((e) =>
+                                                              e.feature_id == UserAccessConstants.kModuleCleaningFeatureId &&
+                                                              e.approve == UserAccessConstants.kHaveApproveAccess)
+                                                          .length >
+                                                      0
+                                              ? Container(
+                                                  height: 28,
+                                                  child: CustomElevatedButton(
+                                                    backgroundColor: Color.fromARGB(255, 244, 116, 248),
+                                                    text: "Abandoned All",
+                                                    onPressed: () {
+                                                      Get.dialog(AbandonAllDialog(id: controller.data['id']));
+                                                      // controller
+                                                      //     .createEscalationMatrix();
+                                                    },
+                                                  ),
+                                                )
+                                              : Dimens.box0,
 
                                           //           varUserAccessModel.value.access_list!
                                           // .where((e) => e.feature_id == 3 && e.edit == 1)

@@ -8,15 +8,21 @@ CreateMcPalningsModel createMcPlaningModelFromJson(String str) =>
 
 class CreateMcPalningsModel {
   int? facilityId;
+  int? planId;
   String? title;
+  String? startDate;
   int? noOfCleaningDays;
+  // int? assignedToId;
   int? frequencyId;
 
-  List<Schedules> schedules;
+  List<Schedule> schedules;
 
   CreateMcPalningsModel({
     this.title,
     this.facilityId,
+    this.startDate,
+    // this.assignedToId,
+    this.planId,
     this.frequencyId,
     this.noOfCleaningDays,
     this.schedules = const [],
@@ -26,25 +32,31 @@ class CreateMcPalningsModel {
       CreateMcPalningsModel(
         facilityId: json['facilityId'],
         title: json['title'] ?? '',
+        startDate: json['startDate'],
+        // assignedToId: json['assignedToId'],
+        planId: json['planId'],
         frequencyId: json["frequencyId"],
         noOfCleaningDays: json['crnoOfCleaningDayseatedAt'],
         schedules: json["schedules"] != null
-            ? List<Schedules>.from(
-                json["schedules"].map((x) => Schedules.fromJson(x)))
+            ? List<Schedule>.from(
+                json["schedules"].map((x) => Schedule.fromJson(x)))
             : [],
       );
 
   Map<String, dynamic> toJson() => {
         "title": title,
         "facilityId": facilityId,
+        "startDate": startDate,
+        // "assignedToId": assignedToId,
+        "planId": planId,
         "frequencyId": frequencyId,
         "noOfCleaningDays": noOfCleaningDays,
-        "schedules": List<dynamic>.from(schedules!.map((x) => x)),
+        "schedules": List<dynamic>.from(schedules!.map((x) => x.toJson())),
       };
 }
 
-class Schedules {
-  Schedules({
+class Schedule {
+  Schedule({
     this.cleaningDay,
     this.cleaningType,
     this.equipments,
@@ -52,33 +64,38 @@ class Schedules {
 
   int? cleaningDay;
   int? cleaningType;
-  List<EquipmentsList?>? equipments;
+  List<Equipments?>? equipments;
 
-  factory Schedules.fromJson(Map<String, dynamic> json) => Schedules(
+  factory Schedule.fromJson(Map<String, dynamic> json) => Schedule(
         cleaningDay: json['cleaningDay'],
         cleaningType: json['cleaningType'],
         equipments: json["equipments"] != null
-            ? List<EquipmentsList>.from(
-                json["equipments"].map((x) => EquipmentsList.fromJson(x)))
+            ? List<Equipments>.from(
+                json["equipments"].map((x) => Equipments.fromJson(x)))
             : [],
       );
 
-  Map<String, dynamic> toJson() => {
-        "cleaningDay": cleaningDay,
-        "cleaningType": cleaningType,
-        "equipments": List<dynamic>.from(equipments!.map((x) => x)),
-      };
+  Map<String, dynamic> toJson() {
+    var initialData = {
+      "cleaningDay": cleaningDay,
+      "equipments": List<dynamic>.from(equipments!.map((x) => x)),
+    };
+    if (cleaningType != null) {
+      initialData["cleaningType"] = cleaningType;
+    }
+    return initialData;
+  }
 }
 
 ///Equipments List Detail Model
-class EquipmentsList {
-  EquipmentsList({
+class Equipments {
+  Equipments({
     this.id,
   });
 
   int? id;
 
-  factory EquipmentsList.fromJson(Map<String, dynamic> json) => EquipmentsList(
+  factory Equipments.fromJson(Map<String, dynamic> json) => Equipments(
         id: json["id"],
       );
 
@@ -87,6 +104,5 @@ class EquipmentsList {
       };
 }
 
-String createMcModelToJson(Schedules data) => json.encode(data.toJson());
-String createMcDetailModelToJson(EquipmentsList data) =>
-    json.encode(data.toJson());
+String createMcModelToJson(Schedule data) => json.encode(data.toJson());
+String createMcDetailModelToJson(Equipments data) => json.encode(data.toJson());

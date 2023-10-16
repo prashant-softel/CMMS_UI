@@ -94,6 +94,9 @@ class AddModuleCleaningExecutionController extends GetxController {
   var startedAtDateTimeCtrlrWeb = TextEditingController();
   var plannedAtDateTimeCtrlrWeb = TextEditingController();
 
+  var remarkCtrlrWeb = TextEditingController();
+  var waterUsedCtrlrWeb = TextEditingController();
+
   ///Checkbox
   var isChecked = false.obs; // This makes `isChecked` observable
   void toggleCheckbox() => isChecked.value = !isChecked.value;
@@ -150,9 +153,9 @@ class AddModuleCleaningExecutionController extends GetxController {
       });
     });
 
-    Future.delayed(Duration(seconds: 1), () {
-      getTypePermitList();
-    });
+    // Future.delayed(Duration(seconds: 1), () {
+    //   getTypePermitList();
+    // });
 
     Future.delayed(Duration(seconds: 1), () {
       getInventoryCategoryList();
@@ -235,9 +238,11 @@ class AddModuleCleaningExecutionController extends GetxController {
 
   ///Update MC Schedule Execution
   void updateMCScheduleExecution(
-      {int? scheduleId, int? cleaningDay, int? waterUsed}) async {
+      {int? scheduleId,
+      int? cleaningDay,
+      int? waterUsed,
+      String? remark}) async {
     {
-      var remark;
       rowItem.value.forEach((element) {
         // items.add(item);
       });
@@ -250,19 +255,17 @@ class AddModuleCleaningExecutionController extends GetxController {
       //     data.add(element.invId!);
       //   }
       // });
-      List<int?>? equipments = [];
+      List<int> cleanedEquipmentIds = [];
+      List<int> abandonedEquipmentIds = [];
       equipmentList.forEach((e) {
-        if (e?.isChecked ?? false) {
-          e?.smbs.forEach((element) {
-            equipments.add(element.smbId ?? 0);
-          });
-        } else {
-          if (e?.isCleanedChecked ?? false) {
-            e?.smbs.forEach((element) {
-              equipments.add(element.smbId ?? 0);
-            });
+        e?.smbs.forEach((element) {
+          if (element.isAbandonSmbCheck!) {
+            abandonedEquipmentIds.add(element.smbId ?? 0);
           }
-        }
+          if (element.isCleanedSmbCheck!) {
+            cleanedEquipmentIds.add(element.smbId!);
+          }
+        });
       });
       print('cleaned:$equipments');
 
@@ -270,10 +273,12 @@ class AddModuleCleaningExecutionController extends GetxController {
           UpdateMcScheduleExecutionModel(
               scheduleId: scheduleId,
               cleaningDay: cleaningDay,
+              // waterUsed: int.tryParse('${rowItem.value[0][7]["value"]}'),
               waterUsed: waterUsed,
-              remark: rowItem.value[0][8]["value"],
-              cleanedEquipmentIds: equipments,
-              abandonedEquipmentIds: equipments);
+              remark: remark,
+              // remark: rowItem.value[0][8]["value"],
+              cleanedEquipmentIds: cleanedEquipmentIds,
+              abandonedEquipmentIds: abandonedEquipmentIds);
 
       var updateMCScheduleExecutionJsonString =
           updateMCScheduleExecutionModel.toJson();
@@ -363,7 +368,16 @@ class AddModuleCleaningExecutionController extends GetxController {
   Future<void> startMCExecutionButton() async {
     final _startMCExecutionBtn =
         await addModuleCleaningExecutionPresenter.startMCExecutionButton(
-      planId: data['planId'],
+      executionId: data['id'],
+    );
+
+    // print('Plan Data:${data['planId']}');
+  }
+
+  Future<void> endMcExecutionButton() async {
+    final _endMCExecutionBtn =
+        await addModuleCleaningExecutionPresenter.endMcExecutionButton(
+      executionId: data['id'],
     );
 
     // print('Plan Data:${data['planId']}');
@@ -373,7 +387,16 @@ class AddModuleCleaningExecutionController extends GetxController {
     final _startMCScheduleExecutionBtn =
         await addModuleCleaningExecutionPresenter
             .startMCExecutionScheduleButton(
-      scheduleId: scheduleId.first,
+      scheduleId: scheduleID,
+    );
+
+    // print('Plan Data:${data['planId']}');
+  }
+
+  Future<void> endMCScheduleExecutionButton({int? scheduleID}) async {
+    final _endMCScheduleExecutionBtn =
+        await addModuleCleaningExecutionPresenter.endMCScheduleExecutionButton(
+      scheduleId: scheduleID,
     );
 
     // print('Plan Data:${data['planId']}');

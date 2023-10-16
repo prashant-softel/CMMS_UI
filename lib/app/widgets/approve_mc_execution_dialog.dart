@@ -1,5 +1,7 @@
-import 'package:cmms/app/module_cleaning_execution/module_cleaning_list_execution_controller.dart';
 import 'package:cmms/app/theme/color_values.dart';
+import 'package:cmms/app/view_add_goods_orders.dart/stock_management_view_add_goods_orders_controller.dart';
+import 'package:cmms/app/view_mc_plan/view_mc_planning_controller.dart';
+import 'package:cmms/app/view_module_cleaning_execution/view_module_cleaning_execution_controller.dart';
 import 'package:cmms/app/widgets/custom_richtext.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -8,12 +10,11 @@ import 'package:get/get.dart';
 import '../theme/dimens.dart';
 import '../theme/styles.dart';
 
-class AbandoneExecutionDialog extends GetView {
-  String? permitCloseDialog;
+class ApproveMcExecutionDialog extends GetView {
   int? id;
 
-  AbandoneExecutionDialog({super.key, this.permitCloseDialog, this.id});
-  final ModuleCleaningListExecutionController _controller = Get.find();
+  ApproveMcExecutionDialog({super.key, this.id});
+  final viewModuleCleaningExecutionController _controller = Get.find();
 
   @override
   Widget build(BuildContext context) {
@@ -25,7 +26,7 @@ class AbandoneExecutionDialog extends GetView {
         insetPadding: Dimens.edgeInsets10_0_10_0,
         contentPadding: EdgeInsets.zero,
         title: Text(
-          'Abandon MC Execution',
+          "Approve MC Execution",
           textAlign: TextAlign.center,
           // style: TextStyle(color: Colors.green),
         ),
@@ -35,7 +36,7 @@ class AbandoneExecutionDialog extends GetView {
           return Container(
             padding: Dimens.edgeInsets05_0_5_0,
             height: 200,
-            width: double.infinity,
+            width: 400,
             child: Column(
                 crossAxisAlignment: CrossAxisAlignment.stretch,
                 children: [
@@ -46,12 +47,12 @@ class AbandoneExecutionDialog extends GetView {
                   Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      CustomRichText(title: 'Comment '),
+                      CustomRichText(title: 'Comment'),
                       SizedBox(
                         height: 20,
                       ),
                       TextField(
-                        controller: _controller.commentTextFieldCtrlr,
+                        controller: _controller.approveCommentTextFieldCtrlr,
                         maxLines: 4,
                         decoration: InputDecoration(
                           hintText: 'Comment here....',
@@ -67,29 +68,6 @@ class AbandoneExecutionDialog extends GetView {
                       ),
                     ],
                   ),
-                  // SizedBox(
-                  //   height: 20,
-                  // ),
-                  // Row(
-                  //     mainAxisAlignment: MainAxisAlignment.center,
-                  //     children: [
-
-                  //       Dimens.boxWidth10,
-                  //       ElevatedButton(
-                  //         style: Styles.greenElevatedButtonStyle,
-                  //         onPressed: () {
-                  //           _controller.permitApprovedButton(permitId:permitId);
-                  //           Get.back();
-                  //         },
-                  //         child: const Text('Permit Approve'),
-                  //       ),
-                  //       // Dimens.boxWidth10,
-                  //       // ElevatedButton(
-                  //       //   style: Styles.redElevatedButtonStyle,
-                  //       //   onPressed: () => Get.offAndToNamed(Routes.addJob),
-                  //       //   child: const Text('Add New Job'),
-                  //       // ),
-                  //     ]),
                 ]),
           );
         }),
@@ -110,10 +88,11 @@ class AbandoneExecutionDialog extends GetView {
             ElevatedButton(
               style: Styles.greenElevatedButtonStyle,
               onPressed: () {
-                _controller.abandonExecutionButton(id: id);
+                _controller.mcExecutionApprovedButton(id: id);
+                print('Goods order id:$id');
                 Get.back();
               },
-              child: const Text('Abandone MC Execution'),
+              child: Text('Approve MC Execution'),
             ),
           ]),
         ],

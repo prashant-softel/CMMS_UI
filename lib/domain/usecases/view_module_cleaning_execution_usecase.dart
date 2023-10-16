@@ -1,5 +1,6 @@
 import 'package:cmms/domain/domain.dart';
 import 'package:cmms/domain/models/end_mc_execution_detail_model.dart';
+import 'package:cmms/domain/models/equipment_list_model.dart';
 import 'package:cmms/domain/models/history_model.dart';
 
 import '../models/facility_model.dart';
@@ -24,6 +25,36 @@ class ViewModuleCleaningExecutionUsecase {
         id,
         isLoading,
       );
+
+   Future<Map<String, dynamic>> mcExecutionApprovedButton({
+    mcExecutionApproveJsonString,
+    bool? isLoading,
+  }) async =>
+      await _repository.mcExecutionApprovedButton(
+        mcExecutionApproveJsonString,
+        isLoading,
+      );
+
+   Future<List<EquipmentListModel>> getEquipmentModelList({
+    required bool isLoading,
+    required int? facilityId,
+  }) async {
+    return _repository.getEquipmentModelList(
+      isLoading: isLoading,
+      facilityId: facilityId,
+    );
+  }
+
+
+  Future<Map<String, dynamic>> rejectMcExecutionApprovedButton({
+    rejectMcExecutionApproveJsonString,
+    bool? isLoading,
+  }) async =>
+      await _repository.rejectMcExecutionApprovedButton(
+        rejectMcExecutionApproveJsonString,
+        isLoading,
+      );
+
 
   Future<EndMCExecutionDetailsModel?> getMCExecutionDetail({
     bool? isLoading,  

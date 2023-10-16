@@ -14,14 +14,18 @@ import 'package:cmms/app/widgets/create_incident_report_dialog.dart';
 import 'package:cmms/app/widgets/create_jc_success_message_dialog.dart';
 import 'package:cmms/app/widgets/create_permit_dialog.dart';
 import 'package:cmms/app/widgets/create_sop_dialog.dart';
+import 'package:cmms/app/widgets/end_execution_message_dialog.dart';
 import 'package:cmms/app/widgets/end_mc_execution_message_dialog.dart';
+import 'package:cmms/app/widgets/end_mc_schedule_execution_message.dart';
 import 'package:cmms/app/widgets/goods_order_message_approve_dialog.dart';
 import 'package:cmms/app/widgets/goods_order_message_close_dialog.dart';
 import 'package:cmms/app/widgets/goods_order_message_reject_dialog.dart';
 import 'package:cmms/app/widgets/incident_report_approve_message_dialog.dart';
 import 'package:cmms/app/widgets/incident_report_reject_message_dialog.dart';
 import 'package:cmms/app/widgets/link_to_permit_dailog.dart';
+import 'package:cmms/app/widgets/mc_execution_approve_message_dialog.dart';
 import 'package:cmms/app/widgets/mc_plan_message_approve_dialog.dart';
+import 'package:cmms/app/widgets/mc_plan_message_dialog.dart';
 import 'package:cmms/app/widgets/mc_plan_message_reject_dialog.dart';
 import 'package:cmms/app/widgets/new_warranty_claim_dialog.dart';
 import 'package:cmms/app/widgets/permit_approve_message_dialog.dart';
@@ -36,6 +40,7 @@ import 'package:cmms/app/widgets/pm_plan_reject_msg_dialog.dart';
 import 'package:cmms/app/widgets/recive_go_msg_dialog.dart';
 import 'package:cmms/app/widgets/reject_cancel_permit_msg_dailog.dart';
 import 'package:cmms/app/widgets/reject_go_recive_msg_dialog.dart';
+import 'package:cmms/app/widgets/reject_mc_execution_message_dialog.dart';
 import 'package:cmms/app/widgets/req_message_approve_dialog.dart';
 import 'package:cmms/app/widgets/req_message_reject_dialog.dart';
 import 'package:cmms/app/widgets/start_mc_execution_dialog.dart';
@@ -918,6 +923,54 @@ class ConnectHelper {
     return responseModel;
   }
 
+  Future<ResponseModel> mcExecutionApprovedButton({
+    required String auth,
+    mcExecutionApproveJsonString,
+    bool? isLoading,
+  }) async {
+    var responseModel = await apiWrapper.makeRequest(
+      'MC/ApproveMCExecution',
+      Request.put,
+      mcExecutionApproveJsonString,
+      isLoading ?? false,
+      {
+        'Content-Type': 'application/json',
+        'Authorization': 'Bearer $auth',
+      },
+    );
+    print('McExecutionApproveResponse: ${responseModel.data}');
+    var res = responseModel.data;
+    var parsedJson = json.decode(res);
+    Get.dialog<void>(McExecutionMessageApproveDialog(
+        data: parsedJson['message'], id: parsedJson['id']));
+
+    return responseModel;
+  }
+
+  Future<ResponseModel> rejectMcExecutionApprovedButton({
+    required String auth,
+    rejectMcExecutionApproveJsonString,
+    bool? isLoading,
+  }) async {
+    var responseModel = await apiWrapper.makeRequest(
+      'MC/RejectMCPExecution',
+      Request.put,
+      rejectMcExecutionApproveJsonString,
+      isLoading ?? false,
+      {
+        'Content-Type': 'application/json',
+        'Authorization': 'Bearer $auth',
+      },
+    );
+    print('McExecutionRejectResponse: ${responseModel.data}');
+    var res = responseModel.data;
+    var parsedJson = json.decode(res);
+    Get.dialog<void>(RejectMcExecutionMessageApproveDialog(
+        data: parsedJson['message'], id: parsedJson['id']));
+
+    return responseModel;
+  }
+
   Future<ResponseModel> mcPlanRejectButton({
     required String auth,
     mcRejectJsonString,
@@ -1344,11 +1397,11 @@ class ConnectHelper {
   Future<ResponseModel> startMCExecutionButton({
     required String auth,
     bool? isLoading,
-    int? planId,
+    int? executionId,
   }) async {
     // facilityId = 45;
     var responseModel = await apiWrapper.makeRequest(
-      'MC/StartMCExecution?planId=$planId',
+      'MC/StartMCExecution?executionId=$executionId',
       Request.put,
       // {'comment': "$comment", 'id': id},
       null,
@@ -1363,6 +1416,33 @@ class ConnectHelper {
     Get.dialog<void>(StartMcExecutionMessageDialog(
       data: parsedJson['message'],
       startMCId: parsedJson['id'],
+    ));
+
+    return responseModel;
+  }
+
+  Future<ResponseModel> endMcExecutionButton({
+    required String auth,
+    bool? isLoading,
+    int? executionId,
+  }) async {
+    // facilityId = 45;
+    var responseModel = await apiWrapper.makeRequest(
+      'MC/EndMCExecution?executionId=$executionId',
+      Request.put,
+      // {'comment': "$comment", 'id': id},
+      null,
+      isLoading ?? true,
+      {
+        'Authorization': 'Bearer $auth',
+      },
+    );
+    // print('StartExecutionResponse: ${responseModel.data}');
+    var res = responseModel.data;
+    var parsedJson = json.decode(res);
+    Get.dialog<void>(EndMcExecutionMessageDialog(
+      data: parsedJson['message'],
+      endMCId: parsedJson['id'],
     ));
 
     return responseModel;
@@ -1390,6 +1470,33 @@ class ConnectHelper {
     Get.dialog<void>(StartMcExecutionMessageDialog(
       data: parsedJson['message'],
       startMCId: parsedJson['id'],
+    ));
+
+    return responseModel;
+  }
+
+  Future<ResponseModel> endMCScheduleExecutionButton({
+    required String auth,
+    bool? isLoading,
+    int? scheduleId,
+  }) async {
+    // facilityId = 45;
+    var responseModel = await apiWrapper.makeRequest(
+      'MC/EndMCScheduleExecution?scheduleId=$scheduleId',
+      Request.put,
+      // {'comment': "$comment", 'id': id},
+      null,
+      isLoading ?? true,
+      {
+        'Authorization': 'Bearer $auth',
+      },
+    );
+    // print('StartExecutionResponse: ${responseModel.data}');
+    var res = responseModel.data;
+    var parsedJson = json.decode(res);
+    Get.dialog<void>(EndMCScheduleExecutionMessageDialog(
+      data: parsedJson['message'],
+      endMCId: parsedJson['id'],
     ));
 
     return responseModel;
@@ -2403,6 +2510,37 @@ class ConnectHelper {
     // if (res.e != null) {
     //   Get.dialog<void>(WarrantyClaimErrorDialog());
     // } else {
+
+    return responseModel;
+  }
+
+  Future<ResponseModel> updateMcPlan({
+    required String auth,
+    updateMcPlans,
+    bool? isLoading,
+  }) async {
+    var responseModel = await apiWrapper.makeRequest(
+      'MC/UpdateMCPlan',
+      Request.post,
+      updateMcPlans,
+      isLoading ?? false,
+      {
+        'Content-Type': 'application/json',
+        'Authorization': 'Bearer $auth',
+      },
+    );
+
+    print('Update MC Response:${responseModel.data}');
+    var res = responseModel.data;
+    var parsedJson = json.decode(res);
+    // if (res.e != null) {
+    //   Get.dialog<void>(WarrantyClaimErrorDialog());
+    // } else {
+
+    Get.dialog<void>(MCPlanUpdatedMessageDialog(
+      data: parsedJson['message'],
+      warrantyClaimId: parsedJson['id'],
+    ));
 
     return responseModel;
   }
