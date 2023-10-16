@@ -282,7 +282,7 @@ class viewModuleCleaningExecutionDialog extends GetView {
                                                 Expanded(
                                                     flex: 1,
                                                     child: Text(
-                                                        "${smbItems.moduleQuantity}")),
+                                                        "${mappedData[smbItems.smbId]?["cleaningDay"] ?? ''}")),
                                                 Expanded(
                                                   flex: 1,
                                                   child: Container(

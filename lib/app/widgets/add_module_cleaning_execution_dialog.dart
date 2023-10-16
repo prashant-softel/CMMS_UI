@@ -146,6 +146,11 @@ class AddModuleCleaningExecutionDialog extends GetView {
                         ),
                         Expanded(
                           flex: 1,
+                          child: Text("Scheduled Day",
+                              style: TextStyle(color: Color(0xff31576D))),
+                        ),
+                        Expanded(
+                          flex: 1,
                           child: Text("Cleaned",
                               style: TextStyle(color: Color(0xff31576D))),
                         ),
@@ -155,7 +160,7 @@ class AddModuleCleaningExecutionDialog extends GetView {
                                 style: TextStyle(color: Color(0xff31576D)))),
                         Expanded(
                             flex: 1,
-                            child: Text("Days",
+                            child: Text("Executed Day",
                                 style: TextStyle(color: Color(0xff31576D)))),
 
                         // Expanded(
@@ -199,6 +204,15 @@ class AddModuleCleaningExecutionDialog extends GetView {
                                   flex: 1,
                                   child: Text(
                                     "${e.moduleQuantity}",
+                                    style: TextStyle(
+                                        fontSize: 12.0,
+                                        fontWeight: FontWeight.bold),
+                                  ),
+                                ),
+                                Expanded(
+                                  flex: 1,
+                                  child: Text(
+                                    "",
                                     style: TextStyle(
                                         fontSize: 12.0,
                                         fontWeight: FontWeight.bold),
@@ -287,6 +301,10 @@ class AddModuleCleaningExecutionDialog extends GetView {
                                                     child: Text(
                                                         "${smbItems.moduleQuantity}")),
                                                 Expanded(
+                                                    flex: 1,
+                                                    child:
+                                                        Text("${cleaningDay}")),
+                                                Expanded(
                                                   flex: 1,
                                                   child: Container(
                                                     alignment:
@@ -346,8 +364,7 @@ class AddModuleCleaningExecutionDialog extends GetView {
                                                 ),
                                                 Expanded(
                                                     flex: 1,
-                                                    child: Text(
-                                                        'Day 1 (15/06/2023)'))
+                                                    child: Text('Day 1'))
                                               ],
                                             );
                                           },
