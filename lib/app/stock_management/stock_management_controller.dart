@@ -51,4 +51,7 @@ class StockManagementDashboardController extends GetxController {
     //   Routes.pmExecution,
     // );
   }
+  Future<void> importMaterial() async {
+    Get.toNamed(Routes.importInventory, arguments: 5);
+  }
 }
