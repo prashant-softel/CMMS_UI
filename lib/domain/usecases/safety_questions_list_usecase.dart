@@ -45,5 +45,10 @@ class SafetyQuestionsListUsecase {
       await repository.createSafetyMeasure(
           isLoading: isLoading, safetyMeasurelistJsonString: safetyMeasurelistJsonString);
 
-       
+  Future<bool> updateSafetyMeasure({
+    createSafetyMeasureJsonString,
+    bool? isLoading,
+  }) async =>
+      await repository.updateSafetyMeasure(
+          isLoading: isLoading, createSafetyMeasureJsonString: createSafetyMeasureJsonString);
 }

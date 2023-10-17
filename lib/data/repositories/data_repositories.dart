@@ -2213,6 +2213,20 @@ class DataRepository extends DomainRepository {
     return response;
   }
 
+  Future<ResponseModel> updateSafetyMeasure({
+    auth,
+    bool? isLoading,
+    createSafetyMeasureJsonString,
+  }) async {
+    var response = await connectHelper.updateSafetyMeasure(
+        auth: auth,
+        isLoading: isLoading,
+        createSafetyMeasureJsonString: createSafetyMeasureJsonString);
+    return response;
+  }
+
+
+
   Future<ResponseModel> getCountryList({
     required String auth,
     bool? isLoading,

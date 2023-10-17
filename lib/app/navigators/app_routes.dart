@@ -194,7 +194,7 @@ abstract class _Paths {
   static const pmTaskView = '/pm-task-view-screen';
   static const inventory = '/inventory';
   static const inventoryList = '/inventoryList';
-  static const safetyQuestionsList = '/safety-question-list-screen';
+  static const safetyQuestionsList = '/permit_type-checklist-screen';
   static const tbtTypeListScreen = '/tbt-type-list-screen';
   static const tbtSOPListScreen = '/tbt-sop-list-screen';
   static const assetTypeListScreen = '/asset-type-list-screen';

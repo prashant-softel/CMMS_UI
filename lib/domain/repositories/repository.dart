@@ -5726,6 +5726,29 @@ class Repository {
     }
   }
 
+   Future<bool> updateSafetyMeasure({bool? isLoading, createSafetyMeasureJsonString}) async {
+    try {
+      final auth = await getSecuredValue(LocalKeys.authToken);
+      log(auth);
+      final res = await _dataRepository.updateSafetyMeasure(
+          auth: auth,
+          isLoading: isLoading,
+          createSafetyMeasureJsonString: createSafetyMeasureJsonString);
+
+        print('Response updateSafetyMeasure: ${res.data}');
+      if (!res.hasError) {
+        return true;
+      } else {
+        Utility.showDialog(res.errorCode.toString() + 'getSafetyMeasureList');
+        return true;
+      }
+    } catch (error) {
+      print(error.toString());
+      return false;
+    }
+  }
+
+
   Future<List<CountryModel?>?> getCountryList(
     bool? isLoading,
   ) async {

@@ -147,6 +147,7 @@ class SafetyQuestionsListController extends GetxController {
 
       CreateSafetyMeasureModel createSafetyMeasure = CreateSafetyMeasureModel(
           title: _title,
+          id: 0,
           // description: "",
           permitType: selectedTypePermitId,
           input: updateType.value == "Checkbox"
@@ -154,7 +155,7 @@ class SafetyQuestionsListController extends GetxController {
               : updateType.value == "Radio"
                   ? 2
                   : 3,
-          required: 1,
+          required: isCheckedRequire.value ? 1 : 0,
           isRequiredValue: isCheckedRequire.value 
           );
       print("OUT ");
@@ -169,6 +170,49 @@ class SafetyQuestionsListController extends GetxController {
     }
     return true;
   }
+
+  Future<bool> updateSafetyMeasure(checkPontId) async {
+    // String _checkPoint = checkPointCtrlr.text.trim();
+    // String _requirement = requirementCtrlr.text.trim();
+    // int _checklistId = int.tryParse(selectedchecklist.value) ?? 0;
+    // int _failurewtg = int.tryParse(failurewtgCtrlr.text.trim()) ?? 0;
+    // int _max = int.tryParse(maxRangeCtrlr.text.trim()) ?? 0;
+    // int _min = int.tryParse(minRangeCtrlr.text.trim()) ?? 0;
+
+    // CheckpointType checkpoint_type = CheckpointType(
+    //     id: checkpointType.value == "Text"
+    //         ? 0
+    //         : checkpointType.value == "Bool"
+    //             ? 1
+    //             : 2,
+    //     max: _max,
+    //     min: _min);
+    String _title = titleCtrlr.text.trim();
+
+    CreateSafetyMeasureModel createSafetyMeasure = CreateSafetyMeasureModel(
+        id: checkPontId,
+        title: _title,
+          // description: "",
+          permitType: selectedTypePermitId,
+          input: updateType.value == "Checkbox"
+              ? 1
+              : updateType.value == "Radio"
+                  ? 2
+                  : 3,
+          required: isCheckedRequire.value ? 1 : 0,
+          isRequiredValue: isCheckedRequire.value 
+        );
+    var createSafetyMeasureJsonString =
+        createSafetyMeasure.toJson(); //createCheckPointToJson([createCheckpoint]);
+
+    print({"updateSafetyMeasureJsonString", createSafetyMeasureJsonString});
+    await safetyQuestionsListPresenter.updateSafetyMeasure(
+      createSafetyMeasureJsonString: createSafetyMeasureJsonString,
+      isLoading: true,
+    );
+    return true;
+  }
+
 
   dynamic onFetchNameFromId(dynamic value) {
     int permitTypeIndex = typePermitList.indexWhere((x) => x?.id == value);
@@ -306,12 +350,16 @@ class SafetyQuestionsListController extends GetxController {
 
   Future<void> issuccessSafetyMeasurelist() async {
     isSuccess.toggle();
+    selectedItem = null;
+    isCheckedRequire.value = false;
     await {_cleardata()};
   }
 
   _cleardata() {
     titleCtrlr.text = '';
     descriptionCtrlr.text = '';
+    selectedItem = null;
+    isCheckedRequire.value = false;
     // manpowerCtrlr.text = '';
 
     // selectedequipment.value = '';

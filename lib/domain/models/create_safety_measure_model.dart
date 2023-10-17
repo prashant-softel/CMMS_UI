@@ -13,7 +13,7 @@ String safetyMeasureListModelToJson(List<CreateSafetyMeasureModel> data) =>
 
 class CreateSafetyMeasureModel {
   CreateSafetyMeasureModel({
-    // this.id,
+    this.id,
     this.title,
     // this.description,
     this.permitType,
@@ -25,7 +25,7 @@ class CreateSafetyMeasureModel {
 
   });
 
-  // int? id;
+  int? id;
   String? title;
   // String? description;
   int? permitType;
@@ -37,7 +37,7 @@ class CreateSafetyMeasureModel {
 
 
   factory CreateSafetyMeasureModel.fromJson(Map<String, dynamic> json) => CreateSafetyMeasureModel(
-    // id: json["id"],
+    id: json["id"],
     title: json["title"],
     // description: json["description"],
     permitType: json["permitType"],
@@ -47,7 +47,7 @@ class CreateSafetyMeasureModel {
   );
 
   Map<String, dynamic> toJson() => {
-    // "id": id,
+    "id": id,
     "title": title,
     // "description": description,
     "permitType": permitType,
