@@ -81,6 +81,10 @@ class PreventiveController extends GetxController {
     Get.toNamed(Routes.importInventory, arguments: 3);
   }
 
+  Future<void> importPlan() async {
+    Get.toNamed(Routes.importInventory, arguments: 6);
+  }
+
   Future<void> createPmPlan() async {
     Get.toNamed(
       Routes.createPmPlan,

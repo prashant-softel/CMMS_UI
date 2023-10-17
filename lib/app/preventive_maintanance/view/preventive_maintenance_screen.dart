@@ -155,6 +155,7 @@ class PreventiveScreen extends GetView<PreventiveController> {
                             ontap: () {
                               controller.importChecklist();
                             }),
+
                         // _priventiveList(
                         //     tittle: "Create PM Plan",
                         //     ontap: () {
@@ -193,6 +194,11 @@ class PreventiveScreen extends GetView<PreventiveController> {
                             tittle: "PM Tasks",
                             ontap: () {
                               controller.pmTask();
+                            }),
+                        _priventiveList(
+                            tittle: "Import Plan",
+                            ontap: () {
+                              controller.importPlan();
                             }),
                         // _priventiveList(
                         //     tittle: "PM Execution",

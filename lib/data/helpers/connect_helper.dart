@@ -3677,6 +3677,12 @@ class ConnectHelper {
         importMaterial(
             auth: auth,
             fileId: jsonResponse["id"][0].toString(),
+            isLoading: true,
+            facilityId: facilityId);
+      } else if (importType == 6) {
+        importPlan(
+            auth: auth,
+            fileId: jsonResponse["id"][0].toString(),
             isLoading: true);
       }
     }
@@ -5863,13 +5869,31 @@ class ConnectHelper {
     return responseModel;
   }
 
-  Future<ResponseModel> importMaterial({
+  Future<ResponseModel> importMaterial(
+      {required String auth,
+      required String fileId,
+      required bool isLoading,
+      required int facilityId}) async {
+    var responseModel = await apiWrapper.makeRequest(
+      'SMMaster/ImportMaterialFile?file_id=$fileId&facilityID=$facilityId',
+      Request.post,
+      null,
+      false,
+      {
+        'Content-Type': 'application/json',
+        'Authorization': 'Bearer $auth',
+      },
+    );
+    return responseModel;
+  }
+
+  Future<ResponseModel> importPlan({
     required String auth,
     required String fileId,
     required bool isLoading,
   }) async {
     var responseModel = await apiWrapper.makeRequest(
-      'SMMaster/ImportMaterialFile?file_id=$fileId',
+      'PM/ImportPMPlanFile?file_id=$fileId',
       Request.post,
       null,
       false,

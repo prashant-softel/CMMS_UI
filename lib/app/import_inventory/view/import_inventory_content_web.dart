@@ -96,31 +96,53 @@ class ImportInventoryContentWeb extends GetView<ImportInventoryController> {
                                   child: Text(" / MASTER",
                                       style: Styles.greyMediumLight12),
                                 ),
-                                Text(" / IMPORT PLAN",
+                                Text(" / IMPORT  MATERIAL ",
                                     style: Styles.greyMediumLight12),
                               ],
                             )
-                          : Row(
-                              children: [
-                                Icon(
-                                  Icons.home,
-                                  color: ColorValues.greyLightColor,
-                                ),
-                                Text(
-                                  "DASHBOARD",
-                                  style: Styles.greyLight14,
-                                ),
-                                GestureDetector(
-                                  onTap: () {
-                                    Get.back();
-                                  },
-                                  child: Text(" / PREVENTIVE MAINTENANCE",
-                                      style: Styles.greyMediumLight12),
-                                ),
-                                Text(" / CHECK POINT CREATOR",
-                                    style: Styles.greyMediumLight12)
-                              ],
-                            )),
+                          : controller.type == 6
+                              ? Row(
+                                  children: [
+                                    Icon(
+                                      Icons.home,
+                                      color: ColorValues.greyLightColor,
+                                    ),
+                                    Text(
+                                      "DASHBOARD",
+                                      style: Styles.greyLight14,
+                                    ),
+                                    GestureDetector(
+                                      onTap: () {
+                                        Get.back();
+                                      },
+                                      child: Text(" / MASTER",
+                                          style: Styles.greyMediumLight12),
+                                    ),
+                                    Text(" / IMPORT PLAN",
+                                        style: Styles.greyMediumLight12),
+                                  ],
+                                )
+                              : Row(
+                                  children: [
+                                    Icon(
+                                      Icons.home,
+                                      color: ColorValues.greyLightColor,
+                                    ),
+                                    Text(
+                                      "DASHBOARD",
+                                      style: Styles.greyLight14,
+                                    ),
+                                    GestureDetector(
+                                      onTap: () {
+                                        Get.back();
+                                      },
+                                      child: Text(" / PREVENTIVE MAINTENANCE",
+                                          style: Styles.greyMediumLight12),
+                                    ),
+                                    Text(" / CHECK POINT CREATOR",
+                                        style: Styles.greyMediumLight12)
+                                  ],
+                                )),
           //  Dimens.boxHeight20,
           Flexible(
             child: Container(
