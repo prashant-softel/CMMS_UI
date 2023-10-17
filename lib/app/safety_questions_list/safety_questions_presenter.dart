@@ -28,6 +28,18 @@ class SafetyQuestionsListPresenter {
     return true;
   }
 
+  Future<bool> updateSafetyMeasure({
+    createSafetyMeasureJsonString,
+    required bool isLoading,
+  }) async {
+    print("presenter");
+    safetyQuestionsListUsecase.updateSafetyMeasure(
+      createSafetyMeasureJsonString: createSafetyMeasureJsonString,
+      isLoading: isLoading,
+    );
+    return true;
+  }
+
    deleteSafetyMeasure(String? id, {required bool isLoading}) async =>
       await safetyQuestionsListUsecase.deleteSafetyMeasure(
         id: id ?? 0,

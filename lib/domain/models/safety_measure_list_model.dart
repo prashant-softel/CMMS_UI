@@ -18,6 +18,7 @@ class SafetyMeasureListModel {
     this.inputID,
     this.inputName,
     this.permitType,
+    this.isRequired,
     
    
 
@@ -28,6 +29,7 @@ class SafetyMeasureListModel {
   int? inputID;
   String? inputName;
   String? permitType;
+  int? isRequired;
  
   
 
@@ -37,6 +39,7 @@ class SafetyMeasureListModel {
         inputID: json['inputID'],
         inputName: json['inputName'],
         permitType: json['permitType'],
+        isRequired: json['isRequired'],
        
         
       );
@@ -47,6 +50,7 @@ class SafetyMeasureListModel {
         "inputID": inputID,
         "inputName": inputName,
         "permitType": permitType,
+        "isRequired":isRequired
        
       };
 }

@@ -3808,6 +3808,27 @@ class ConnectHelper {
     return responseModel;
   }
 
+
+  Future<ResponseModel> updateSafetyMeasure({
+    required String auth,
+    bool? isLoading,
+    required createSafetyMeasureJsonString,
+  }) async {
+    var responseModel = await apiWrapper.makeRequest(
+      'Permit/UpdateSafetyMeasure',
+      Request.patch,
+      createSafetyMeasureJsonString,
+      isLoading ?? false,
+      {
+        'Content-Type': 'application/json',
+        'Authorization': 'Bearer $auth',
+      },
+    );
+
+    return responseModel;
+  }
+
+
   Future<ResponseModel> getCountryList({
     String? auth,
     bool? isLoading,
