@@ -3673,6 +3673,17 @@ class ConnectHelper {
             auth: auth,
             fileId: jsonResponse["id"][0].toString(),
             isLoading: true);
+      } else if (importType == 5) {
+        importMaterial(
+            auth: auth,
+            fileId: jsonResponse["id"][0].toString(),
+            isLoading: true,
+            facilityId: facilityId);
+      } else if (importType == 6) {
+        importPlan(
+            auth: auth,
+            fileId: jsonResponse["id"][0].toString(),
+            isLoading: true);
       }
     }
 
@@ -5847,6 +5858,42 @@ class ConnectHelper {
   }) async {
     var responseModel = await apiWrapper.makeRequest(
       'CheckList/ImportChecklistCheckpoint?file_id=$fileId',
+      Request.post,
+      null,
+      false,
+      {
+        'Content-Type': 'application/json',
+        'Authorization': 'Bearer $auth',
+      },
+    );
+    return responseModel;
+  }
+
+  Future<ResponseModel> importMaterial(
+      {required String auth,
+      required String fileId,
+      required bool isLoading,
+      required int facilityId}) async {
+    var responseModel = await apiWrapper.makeRequest(
+      'SMMaster/ImportMaterialFile?file_id=$fileId&facilityID=$facilityId',
+      Request.post,
+      null,
+      false,
+      {
+        'Content-Type': 'application/json',
+        'Authorization': 'Bearer $auth',
+      },
+    );
+    return responseModel;
+  }
+
+  Future<ResponseModel> importPlan({
+    required String auth,
+    required String fileId,
+    required bool isLoading,
+  }) async {
+    var responseModel = await apiWrapper.makeRequest(
+      'PM/ImportPMPlanFile?file_id=$fileId',
       Request.post,
       null,
       false,

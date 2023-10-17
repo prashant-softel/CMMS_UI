@@ -130,7 +130,11 @@ class StockManagementDashboardScreen
                             ontap: () {
                               controller.createChecklist();
                             }),
-
+                        _importPlan(
+                            tittle: "Import Material",
+                            ontap: () {
+                              controller.importMaterial();
+                            }),
                         //  if (Responsive.isDesktop(context))
                         _stockManagementList(
                             tittle: "Goods Order  List",
@@ -300,6 +304,38 @@ class StockManagementDashboardScreen
   }
 
   _stockManagementList({required String tittle, Function()? ontap}) {
+    return MouseRegion(
+      cursor: SystemMouseCursors.click,
+      child: GestureDetector(
+        onTap: ontap,
+        child: Container(
+          decoration: BoxDecoration(
+            color: ColorValues.skyBlueColor,
+            borderRadius: BorderRadius.circular(2),
+          ),
+          padding: EdgeInsets.all(9),
+          child: Row(
+            crossAxisAlignment: CrossAxisAlignment.center,
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Expanded(
+                child: Text(
+                  tittle,
+                  style: TextStyle(
+                      color: ColorValues.whiteColor,
+                      fontSize: 16,
+                      fontWeight: FontWeight.w700),
+                  textAlign: TextAlign.center,
+                ),
+              ),
+            ],
+          ),
+        ),
+      ),
+    );
+  }
+
+  _importPlan({required String tittle, Function()? ontap}) {
     return MouseRegion(
       cursor: SystemMouseCursors.click,
       child: GestureDetector(

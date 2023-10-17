@@ -78,13 +78,13 @@ class ModuleCleaningDashboardScreen
                             ),
                             SizedBox(
                                 width:
-                                10), // Add some space between the text and the line
+                                    10), // Add some space between the text and the line
                             Expanded(
                               child: Divider(
                                 color: Colors
                                     .grey, // Customize the color of the line if needed
                                 height:
-                                1, // Adjust the height of the line if needed
+                                    1, // Adjust the height of the line if needed
                               ),
                             ),
                           ],
@@ -138,25 +138,25 @@ class ModuleCleaningDashboardScreen
           ),
           padding: EdgeInsets.symmetric(horizontal: 12, vertical: 8),
           child:
-          // Row(
-          //   crossAxisAlignment: CrossAxisAlignment.center,
-          //   mainAxisAlignment: MainAxisAlignment.center,
-          //   children: [
+              // Row(
+              //   crossAxisAlignment: CrossAxisAlignment.center,
+              //   mainAxisAlignment: MainAxisAlignment.center,
+              //   children: [
               Center(
-                child: Text(
-                  tittle,
-                  style: TextStyle(
-                      color: ColorValues.whiteColor,
-                      fontSize: 14,
-                      fontWeight: FontWeight.w700),
+            child: Text(
+              tittle,
+              style: TextStyle(
+                  color: ColorValues.whiteColor,
+                  fontSize: 14,
+                  fontWeight: FontWeight.w700),
 
-                textAlign: TextAlign.center, //☺ Updated
-                ),
-              ),
-              // SizedBox(
-              //   height: 5,
-              // ),
-            // ],
+              textAlign: TextAlign.center, //☺ Updated
+            ),
+          ),
+          // SizedBox(
+          //   height: 5,
+          // ),
+          // ],
           // ),
         ),
       ),
