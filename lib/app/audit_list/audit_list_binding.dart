@@ -1,6 +1,6 @@
 import 'package:cmms/app/app.dart';
-import 'package:cmms/app/audit/audit_list_controller.dart';
-import 'package:cmms/app/audit/audit_list_presenter.dart';
+import 'package:cmms/app/audit_list/audit_list_controller.dart';
+import 'package:cmms/app/audit_list/audit_list_presenter.dart';
 import 'package:cmms/app/hoto/hoto_list_controller.dart';
 import 'package:cmms/app/hoto/hoto_list_presenter.dart';
 import 'package:cmms/app/module_cleaning_list_plan/module_cleaning_list_plan_controller.dart';

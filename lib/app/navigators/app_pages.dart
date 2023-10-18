@@ -12,8 +12,10 @@ import 'package:cmms/app/add_module_cleaning_execution/add_module_cleaning_execu
 import 'package:cmms/app/add_user/add_user_binding.dart';
 import 'package:cmms/app/add_user/view/add_user_screen.dart';
 import 'package:cmms/app/app.dart';
-import 'package:cmms/app/audit/audit_list_binding.dart';
-import 'package:cmms/app/audit/view/audit_list_screen.dart';
+import 'package:cmms/app/audit/audit_binding.dart';
+import 'package:cmms/app/audit/view/audit_screen.dart';
+import 'package:cmms/app/audit_list/audit_list_binding.dart';
+import 'package:cmms/app/audit_list/view/audit_list_screen.dart';
 import 'package:cmms/app/breakdown_maintenance/view/breakdown_maintenance_screen.dart';
 import 'package:cmms/app/business_List/view/business_list_screen.dart';
 import 'package:cmms/app/calibration/view/calibration_list_screen.dart';
@@ -327,6 +329,11 @@ class AppPages {
       name: _Paths.preventive,
       page: PreventiveScreen.new,
       binding: PreventiveBinding(),
+    ),
+    GetPage<dynamic>(
+      name: _Paths.audit,
+      page: AuditScreen.new,
+      binding: AuditBinding(),
     ),
     GetPage<dynamic>(
       name: _Paths.stockManagementDashboardScreen,
@@ -755,7 +762,7 @@ class AppPages {
       binding: HotoListScreenBinding(),
     ),
     GetPage<dynamic>(
-      name: _Paths.auditListScreenContentWeb,
+      name: _Paths.auditListScreen,
       page: AuditListScreen.new,
       binding: AuditListScreenBinding(),
     ),
