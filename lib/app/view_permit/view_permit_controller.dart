@@ -1802,20 +1802,192 @@ class ViewPermitController extends GetxController {
     //Draw Rectangle to highlight margin
     page.graphics.drawRectangle(
         pen: PdfPen(PdfColor(142, 170, 219)),
-        bounds: Rect.fromLTWH(25, 165, pageSize.width - 45, 25));
+        bounds: Rect.fromLTWH(25, 240, pageSize.width - 45, 25));
     page.graphics.drawString(
         'Isolation Required: ',
         PdfStandardFont(
           PdfFontFamily.helvetica,
           10,
         ),
-        bounds: Rect.fromLTWH(30, 200, 0, 0),
+        bounds: Rect.fromLTWH(30, 250, 0, 0),
         format: PdfStringFormat(lineAlignment: PdfVerticalAlignment.middle));
     page.graphics.drawString(
         '',
         PdfStandardFont(PdfFontFamily.helvetica, 10),
-        bounds: Rect.fromLTWH(100, 200, 0, 0),
+        bounds: Rect.fromLTWH(100, 240, 0, 0),
         format: PdfStringFormat(lineAlignment: PdfVerticalAlignment.middle));
+
+
+///Loto Applied
+    
+    page.graphics.drawString(
+        'Loto Applied: ',
+        PdfStandardFont(
+          PdfFontFamily.helvetica,
+          10,
+        ),
+        bounds: Rect.fromLTWH(180, 250, 0, 0),
+        format: PdfStringFormat(lineAlignment: PdfVerticalAlignment.middle));
+    page.graphics.drawString(
+        '',
+        PdfStandardFont(PdfFontFamily.helvetica, 10),
+        bounds: Rect.fromLTWH(100, 240, 0, 0),
+        format: PdfStringFormat(lineAlignment: PdfVerticalAlignment.middle));
+
+
+    /// Isolated Equipments
+     page.graphics.drawString(
+        'Isolated Equipments: ',
+        PdfStandardFont(
+          PdfFontFamily.helvetica,
+          10,
+        ),
+        bounds: Rect.fromLTWH(300, 250, 0, 0),
+        format: PdfStringFormat(lineAlignment: PdfVerticalAlignment.middle));
+    page.graphics.drawString(
+        '',
+        PdfStandardFont(PdfFontFamily.helvetica, 10),
+        bounds: Rect.fromLTWH(100, 240, 0, 0),
+        format: PdfStringFormat(lineAlignment: PdfVerticalAlignment.middle));
+
+    /////
+     //ISolation
+    //Draw Rectangle to highlight margin
+    page.graphics.drawRectangle(
+        pen: PdfPen(PdfColor(142, 170, 219)),
+        bounds: Rect.fromLTWH(25, 270, pageSize.width - 45, 55));
+    page.graphics.drawString(
+        'Isolated Category ',
+        PdfStandardFont(
+          PdfFontFamily.helvetica,
+          10,
+        ),
+        bounds: Rect.fromLTWH(30, 280, 0, 0),
+        format: PdfStringFormat(lineAlignment: PdfVerticalAlignment.middle));
+    page.graphics.drawString(
+        '',
+        PdfStandardFont(PdfFontFamily.helvetica, 10),
+        bounds: Rect.fromLTWH(100, 280, 0, 0),
+        format: PdfStringFormat(lineAlignment: PdfVerticalAlignment.middle));
+
+
+///Loto Applied
+    
+    page.graphics.drawString(
+        'Loto Applied On: ',
+        PdfStandardFont(
+          PdfFontFamily.helvetica,
+          10,
+        ),
+        bounds: Rect.fromLTWH(30, 295, 0, 0),
+        format: PdfStringFormat(lineAlignment: PdfVerticalAlignment.middle));
+    page.graphics.drawString(
+        'Inverter',
+        PdfStandardFont(PdfFontFamily.helvetica, 10),
+        bounds: Rect.fromLTWH(30, 310, 0, 0),
+        format: PdfStringFormat(lineAlignment: PdfVerticalAlignment.middle));
+
+
+    /// Isolated Equipments
+     page.graphics.drawString(
+        'Loto Lock Sr. No.: ',
+        PdfStandardFont(
+          PdfFontFamily.helvetica,
+          10,
+        ),
+        bounds: Rect.fromLTWH(300, 295, 0, 0),
+        format: PdfStringFormat(lineAlignment: PdfVerticalAlignment.middle));
+    page.graphics.drawString(
+        '253479',
+        PdfStandardFont(PdfFontFamily.helvetica, 10),
+        bounds: Rect.fromLTWH(300, 310, 0, 0),
+        format: PdfStringFormat(lineAlignment: PdfVerticalAlignment.middle));
+
+
+    //Permit Type checklist
+     page.graphics.drawRectangle(
+        pen: PdfPen(PdfColor(142, 170, 219)),
+        bounds: Rect.fromLTWH(25, 330, pageSize.width - 45, 55));
+    page.graphics.drawString(
+        'Permit Type Checklist ',
+        PdfStandardFont(
+          PdfFontFamily.helvetica,
+          10,
+        ),
+        bounds: Rect.fromLTWH(30, 340, 0, 0),
+        format: PdfStringFormat(lineAlignment: PdfVerticalAlignment.middle));
+    page.graphics.drawString(
+        'djhbfh',
+        PdfStandardFont(PdfFontFamily.helvetica, 10),
+        bounds: Rect.fromLTWH(30, 350, 0, 0),
+        format: PdfStringFormat(lineAlignment: PdfVerticalAlignment.middle));
+
+
+    ///Toolbox talk
+    //ISolation
+    //Draw Rectangle to highlight margin
+    page.graphics.drawRectangle(
+        pen: PdfPen(PdfColor(142, 170, 219)),
+        bounds: Rect.fromLTWH(25, 390, pageSize.width - 45, 45));
+    page.graphics.drawString(
+        'Tool Box Talk ',
+        PdfStandardFont(
+          PdfFontFamily.helvetica,
+          10,
+        ),
+        bounds: Rect.fromLTWH(30, 400, 0, 0),
+        format: PdfStringFormat(lineAlignment: PdfVerticalAlignment.middle));
+   
+
+///Job Type
+    
+    page.graphics.drawString(
+        'Job Type: ',
+        PdfStandardFont(
+          PdfFontFamily.helvetica,
+          10,
+        ),
+        bounds: Rect.fromLTWH(180, 410, 0, 0),
+        format: PdfStringFormat(lineAlignment: PdfVerticalAlignment.middle));
+    page.graphics.drawString(
+        'Project',
+        PdfStandardFont(PdfFontFamily.helvetica, 10),
+        bounds: Rect.fromLTWH(30, 400, 0, 0),
+        format: PdfStringFormat(lineAlignment: PdfVerticalAlignment.middle));
+
+
+    /// SOP
+     page.graphics.drawString(
+        'SOP: ',
+        PdfStandardFont(
+          PdfFontFamily.helvetica,
+          10,
+        ),
+        bounds: Rect.fromLTWH(200, 410, 0, 0),
+        format: PdfStringFormat(lineAlignment: PdfVerticalAlignment.middle));
+    page.graphics.drawString(
+        'new sop',
+        PdfStandardFont(PdfFontFamily.helvetica, 10),
+        bounds: Rect.fromLTWH(30, 400, 0, 0),
+        format: PdfStringFormat(lineAlignment: PdfVerticalAlignment.middle));
+    
+    ///JSA
+    page.graphics.drawString(
+        'JSA: ',
+        PdfStandardFont(
+          PdfFontFamily.helvetica,
+          10,
+        ),
+        bounds: Rect.fromLTWH(300, 400, 0, 0),
+        format: PdfStringFormat(lineAlignment: PdfVerticalAlignment.middle));
+    page.graphics.drawString(
+        'new',
+        PdfStandardFont(PdfFontFamily.helvetica, 10),
+        bounds: Rect.fromLTWH(100, 400, 0, 0),
+        format: PdfStringFormat(lineAlignment: PdfVerticalAlignment.middle));
+
+
+
 
     final String invoiceNumber = 'Signature:      ';
     final Size contentSize = contentFont.measureString(invoiceNumber);
@@ -1825,12 +1997,12 @@ class ViewPermitController extends GetxController {
 
     PdfTextElement(text: invoiceNumber, font: contentFont).draw(
         page: page,
-        bounds: Rect.fromLTWH(pageSize.width - (contentSize.width + 30), 400,
+        bounds: Rect.fromLTWH(pageSize.width - (contentSize.width + 30), 440,
             contentSize.width - 100, pageSize.height - 120));
 
     return PdfTextElement(text: address, font: contentFont).draw(
         page: page,
-        bounds: Rect.fromLTWH(30, 400,
+        bounds: Rect.fromLTWH(30, 440,
             pageSize.width - (contentSize.width + 30), pageSize.height - 120))!;
 
     //Draw rectangle
