@@ -46,7 +46,7 @@ class ApproveMcPlan extends GetView {
                   Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      CustomRichText(title: 'Comment'),
+                      Text("Comment"),
                       SizedBox(
                         height: 20,
                       ),

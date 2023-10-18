@@ -505,7 +505,7 @@ class ModuleCleaningPlanListDataSource extends DataTableSource {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Text(
-                        '${ModuleCleaningPlanningListDetails?.planId}',
+                        'MC ${ModuleCleaningPlanningListDetails?.planId}',
                       ),
                       Dimens.boxHeight10,
                       Align(
@@ -530,7 +530,7 @@ class ModuleCleaningPlanListDataSource extends DataTableSource {
                             borderRadius: BorderRadius.circular(4),
                           ),
                           child: Text(
-                            '${ModuleCleaningPlanningListDetails?.status_short}',
+                            'MC ${ModuleCleaningPlanningListDetails?.status_short}',
                             style: Styles.white10.copyWith(
                               color: Colors.white,
                             ),
