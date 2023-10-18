@@ -39,12 +39,12 @@ class AddModuleCleaningExecutionDialog extends GetView {
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                Text("Update For Day", style: Styles.blue25),
+                Text("Update For Day", style: Styles.blue20),
                 Dimens.boxWidth10,
                 Text(
                   "${cleaningDay}",
                   style: TextStyle(
-                    fontSize: 25,
+                    fontSize: 20,
                   ),
                 ),
               ],
@@ -57,7 +57,7 @@ class AddModuleCleaningExecutionDialog extends GetView {
                     SizedBox(
                       width: 50,
                     ),
-                    CustomRichText(title: 'Remark: '),
+                    Text('Remark: ',style: TextStyle(fontSize: 17 )),
                     SizedBox(
                       width: 5,
                     ),
@@ -98,7 +98,7 @@ class AddModuleCleaningExecutionDialog extends GetView {
                 Dimens.boxWidth200,
                 Row(
                   children: [
-                    CustomRichText(title: 'Water Used: '),
+                    Text('Water Used: ',style: TextStyle(fontSize: 17),),
                     Dimens.boxWidth20,
                     GoodsOrderTextField(
                       keyboardType: TextInputType.number,

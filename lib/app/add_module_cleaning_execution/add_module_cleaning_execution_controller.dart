@@ -274,8 +274,8 @@ class AddModuleCleaningExecutionController extends GetxController {
               scheduleId: scheduleId,
               cleaningDay: cleaningDay,
               // waterUsed: int.tryParse('${rowItem.value[0][7]["value"]}'),
-              waterUsed: waterUsed,
-              remark: remark,
+              waterUsed: waterUsed == null ? 0 : waterUsed,
+              remark: remark == null ? "" : remark,
               // remark: rowItem.value[0][8]["value"],
               cleanedEquipmentIds: cleanedEquipmentIds,
               abandonedEquipmentIds: abandonedEquipmentIds);

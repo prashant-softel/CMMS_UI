@@ -17,6 +17,7 @@ class viewModuleCleaningExecutionDialog extends GetView {
   // int? scheduleId;
   // int? cleaningDay;
   int? waterUsed;
+  String? remark;
   Schedules schedule;
   Map mappedData;
   // int? day;
@@ -26,6 +27,7 @@ class viewModuleCleaningExecutionDialog extends GetView {
       // required this.scheduleId,
       // required this.cleaningDay,
       required this.waterUsed,
+      required this.remark,
       required this.schedule,
       required this.mappedData
       // required this.day
@@ -42,75 +44,54 @@ class viewModuleCleaningExecutionDialog extends GetView {
           borderRadius: BorderRadius.all(Radius.circular(15.0)),
         ),
         insetPadding: Dimens.edgeInsets0_0_10_0,
-        title: Row(
+        title: Column(
           children: [
             Text("View Equipments", style: Styles.blue17),
-            // Dimens.boxWidth10,
-            // Text(
-            //   "",
-            //   style: TextStyle(
-            //     fontSize: 15,
-            //   ),
-            // ),
+            Dimens.boxHeight20,
             Row(
               children: [
-                SizedBox(
-                  width: 50,
-                ),
-                // CustomRichText(title: 'Remark: '),
-                SizedBox(
-                  width: 5,
-                ),
-                // SizedBox(width: 300, child: Text('${schedule.toJson()}'))
-                // GoodsOrderTextField(
-                //   keyboardType: TextInputType.number,
-                //   // inputFormatters: <TextInputFormatter>[FilteringTextInputFormatter.digitsOnly],
-                //   textController: controller.remarkCtrlrWeb,
-                // ),
-                // SizedBox(
-                //   width: MediaQuery.of(context).size.width / 5,
-                //   child: MultiSelectDialogField(
-                //     dialogWidth: 300,
-                //     dialogHeight: 400,
-                //     // title: 'Select Equipments',
-                //     // buttonText: 'Equipment Category',
-                //     initialValue:
-                //         (controller.selectedEquipmentCategoryIdList.isNotEmpty)
-                //             ? controller.selectedEquipmentCategoryIdList
-                //             : [],
-                //     items: controller.equipmentCategoryList
-                //         .map(
-                //           (equipmentCategory) => MultiSelectItem(
-                //             equipmentCategory?.id,
-                //             equipmentCategory?.name ?? '',
-                //           ),
-                //         )
-                //         .toList(),
-                //     onConfirm: (selectedOptionsList) => {
-                //       controller
-                //           .equipmentCategoriesSelected(selectedOptionsList),
-                //       print(
-                //           'Equipment list ids ${controller.selectedEquipmentCategoryIdList}')
-                //     },
+                
+                // Dimens.boxWidth10,
+                // Text(
+                //   "",
+                //   style: TextStyle(
+                //     fontSize: 15,
                 //   ),
-                // )
-              ],
-            ),
-            Spacer(),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.end,
-              children: [
-                Text('Water Used:', style: Styles.blue17),
-                Dimens.boxWidth20,
-                Text(
-                  '${waterUsed}',
-                  style: Styles.black17,
-                )
-                // GoodsOrderTextField(
-                //   keyboardType: TextInputType.number,
-                //   // inputFormatters: <TextInputFormatter>[FilteringTextInputFormatter.digitsOnly],
-                //   textController: controller.waterUsedCtrlrWeb,
                 // ),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.end,
+                  children: [
+                    Text('Remark:', style: Styles.blue17),
+                    Dimens.boxWidth20,
+                    Text(
+                      '${remark}',
+                      style: Styles.black17,
+                    )
+                    // GoodsOrderTextField(
+                    //   keyboardType: TextInputType.number,
+                    //   // inputFormatters: <TextInputFormatter>[FilteringTextInputFormatter.digitsOnly],
+                    //   textController: controller.waterUsedCtrlrWeb,
+                    // ),
+                  ],
+                ),
+              
+                Spacer(),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.end,
+                  children: [
+                    Text('Water Used:', style: Styles.blue17),
+                    Dimens.boxWidth20,
+                    Text(
+                      '${waterUsed}',
+                      style: Styles.black17,
+                    )
+                    // GoodsOrderTextField(
+                    //   keyboardType: TextInputType.number,
+                    //   // inputFormatters: <TextInputFormatter>[FilteringTextInputFormatter.digitsOnly],
+                    //   textController: controller.waterUsedCtrlrWeb,
+                    // ),
+                  ],
+                ),
               ],
             ),
           ],
