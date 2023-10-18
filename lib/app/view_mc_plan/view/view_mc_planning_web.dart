@@ -148,8 +148,7 @@ class _ViewMcPlaningWebState extends State<ViewMcPlaningWeb> {
                                         crossAxisAlignment:
                                             CrossAxisAlignment.end,
                                         children: [
-                                          CustomRichText(
-                                              title: 'Plan Title  :'),
+                                          CustomRichText(title: 'Site Name  :'),
                                           Dimens.boxHeight10,
                                           CustomRichText(
                                             title: 'Frequency :',
@@ -162,7 +161,7 @@ class _ViewMcPlaningWebState extends State<ViewMcPlaningWeb> {
                                             CrossAxisAlignment.start,
                                         children: [
                                           Text(
-                                              '${controller.mcPlanDetailsModel.value?.title ?? ''}',
+                                              '${controller.mcPlanDetailsModel.value?.title ?? ''}', //  "Block 2 all Inverter maintenance plan",
                                               style: Styles.blue17),
                                           Dimens.boxHeight10,
                                           Obx(
@@ -178,9 +177,10 @@ class _ViewMcPlaningWebState extends State<ViewMcPlaningWeb> {
                                             CrossAxisAlignment.end,
                                         children: [
                                           CustomRichText(
-                                              title: 'Planning by :'),
+                                              title: 'Plan Title  :'),
                                           Dimens.boxHeight10,
-                                          CustomRichText(title: 'Site Name  :'),
+                                          CustomRichText(
+                                              title: 'Planning by :'),
                                         ],
                                       ),
                                       Dimens.boxWidth10,
@@ -188,15 +188,15 @@ class _ViewMcPlaningWebState extends State<ViewMcPlaningWeb> {
                                         crossAxisAlignment:
                                             CrossAxisAlignment.start,
                                         children: [
+                                          Text(
+                                              '${controller.mcPlanDetailsModel.value?.title ?? ''}',
+                                              style: Styles.blue17),
                                           Obx(
                                             () => Text(
                                                 '${controller.mcPlanDetailsModel.value?.createdBy ?? ''}', //  "Block 2 all Inverter maintenance plan",
                                                 style: Styles.blue17),
                                           ),
                                           Dimens.boxHeight10,
-                                          Text(
-                                              '${controller.mcPlanDetailsModel.value?.title ?? ''}', //  "Block 2 all Inverter maintenance plan",
-                                              style: Styles.blue17),
                                         ],
                                       ),
                                       Spacer(),
