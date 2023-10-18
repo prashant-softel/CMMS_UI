@@ -14,6 +14,9 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:scrollable_table_view/scrollable_table_view.dart';
 
+import '../../domain/models/acdclistmodel.dart';
+import '../../domain/models/asset_category_model.dart';
+import '../../domain/models/asset_type_list_sm_model.dart';
 import '../../domain/models/blood_model.dart';
 import '../../domain/models/city_model.dart';
 import '../../domain/models/get_notification_by_userid_model.dart';
@@ -22,20 +25,28 @@ import '../../domain/models/role_model.dart';
 import '../../domain/models/save_access_level_model.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 
+import '../../domain/models/unit_measurement_model.dart';
 import '../../domain/models/user_detail_model.dart';
 import '../navigators/app_pages.dart';
 import 'add_asset_master_presenter.dart';
 
 class AddAssetMasterController extends GetxController {
   AddAssetMasterController(
-    this.addUserPresenter,
-  );
+      this.addUserPresenter,
+      );
 
   AddAssetMasterPresenter addUserPresenter;
   var assesDiscriptionCtrlr = TextEditingController();
   // String _assesDiscriptionCtrlr = assesDiscriptionCtrlr.text.trim();
+  RxList<UnitMeasurementModel?> unitMeasurementList = <UnitMeasurementModel>[].obs;
+  RxList<AssetTypeListSMModel?> materialList = <AssetTypeListSMModel>[].obs;
+  RxList<AssetCategoryModel?> materialCategoryList = <AssetCategoryModel>[].obs;
 
   RxList<CountryModel?> countryList = <CountryModel>[].obs;
+  RxList<ACDCModel?> acdclist = <ACDCModel>[
+    ACDCModel(id: 1, name: "AC"),
+    ACDCModel(id: 2, name: "DC"),
+  ].obs;
   Rx<String> selectedMaterialType = 'Select Material Type'.obs;
   Rx<bool> isSelectedMaterialType = true.obs;
   int selectedMaterialTypeId = 0;
@@ -109,6 +120,9 @@ class AddAssetMasterController extends GetxController {
   Rx<UserDetailsModel?> userDetailModel = UserDetailsModel().obs;
   RxList<PlantList?> plantListModel = <PlantList?>[].obs;
   var loginIdCtrlr = TextEditingController();
+  var reqQty = TextEditingController();
+  var descCtrlr = TextEditingController();
+  var reorderQty = TextEditingController();
   var firstNameCtrlr = TextEditingController();
 
   var mobileNoCtrlr = TextEditingController();
@@ -134,17 +148,22 @@ class AddAssetMasterController extends GetxController {
   );
 
   ///
-  void onInit() async {
-    userId = Get.arguments;
-    await getBloodList();
-    await getCountryList();
-    await getRoleList();
-    await getFacilityList();
-    if (userId != null) {
-      await getUserDetails(userId: userId, isloading: true);
-    }
+  void onInit()  {
+    // userId = Get.arguments;
+    getUnitMeasurementList();
+    getAssetCategoryList();
+
+
+    getAssetType();
+
+    // await getRoleList();
+    // await getFacilityList();
+    // if (userId != null) {
+    //   await getUserDetails(userId: userId, isloading: true);
+    // }
     super.onInit();
   }
+
 
   var selectedImagePath = ''.obs;
   var selectedImageSize = ''.obs;
@@ -165,7 +184,27 @@ class AddAssetMasterController extends GetxController {
     );
     update(['permit_facility_list']);
   }
+  Future<void> getAssetType() async {
 
+    final list = await addUserPresenter.getAssetType();
+
+    if (list != null) {
+      for (var _materialList in list) {
+        materialList.add(_materialList);
+      }
+    }
+
+  }
+  Future<void> getUnitMeasurementList() async {
+
+    final list = await addUserPresenter.getUnitMeasurementList();
+
+    if (list != null) {
+      for (var _unitList in list) {
+        unitMeasurementList.add(_unitList);
+      }
+    }
+  }
   void facilityNameSelected(_selectedfacilityNameIds) {
     selectedfacilityNameIdList.value = <int>[];
     filteredfacilityNameList.value = <FacilityModel>[];
@@ -196,7 +235,7 @@ class AddAssetMasterController extends GetxController {
 
   Future<void> uploadImge({Uint8List? fileBytes}) async {
     AddUserModel? addUserModel =
-        await addUserPresenter.uploadImge(fileBytes, imageName.value, true);
+    await addUserPresenter.uploadImge(fileBytes, imageName.value, true);
     photoId = addUserModel?.photo_id;
     print({"photooo", photoId});
     // return true;
@@ -270,126 +309,62 @@ class AddAssetMasterController extends GetxController {
     }
   }
 
-  Future<void> getCountryList() async {
-    final list = await addUserPresenter.getCountryList();
+  // Future<void> getCountryList() async {
+  //   final list = await addUserPresenter.getCountryList();
+  //
+  //   if (list != null) {
+  //     for (var _countryList in list) {
+  //       countryList.add(_countryList);
+  //     }
+  //   }
+  // }
+
+
+  Future<void> getAssetCategoryList() async {
+    final list = await addUserPresenter.getAssetCategoryList();
 
     if (list != null) {
-      for (var _countryList in list) {
-        countryList.add(_countryList);
+      for (var _materialcatList in list) {
+        materialCategoryList.add(_materialcatList);
       }
-    }
-  }
-
-  Future<void> getBloodList() async {
-    final list = await addUserPresenter.getBloodList();
-
-    if (list != null) {
-      for (var _bloodList in list) {
-        bloodList.add(_bloodList);
-      }
-    }
-  }
-
-  Future<void> getStateList(int selectedCountryId) async {
-    final list = await addUserPresenter.getStateList(
-        selectedCountryId: selectedCountryId);
-
-    if (list != null) {
-      for (var _stateList in list) {
-        stateList.add(_stateList);
-      }
-    }
-  }
-
-  Future<void> getCityList(int selectedStateId) async {
-    final list =
-        await addUserPresenter.getCityList(selectedStateId: selectedStateId);
-
-    if (list != null) {
-      for (var _cityList in list) {
-        cityList.add(_cityList);
-      }
-    }
-  }
-
-  Future<void> getRoleAccessList({int? roleId, bool? isloading}) async {
-    final _accessLevelModel = await addUserPresenter.getRoleAccessList(
-        roleId: roleId, isLoading: isloading);
-    Set<String> moduleNameSet = {};
-
-    if (_accessLevelModel != null) {
-      accessLevelModel.value = _accessLevelModel;
-      accesslevel.value = accessLevelModel.value?.access_list ?? [];
-      // for (var _accesslevel in accesslevel) {
-      //   if (_accesslevel?.feature_name != null) {
-      //     moduleNameSet.add(_accesslevel?.feature_name.value ?? "");
-      //   }
-      // }
-      // moduleNameList.addAll(moduleNameSet.toList());
-    }
-  }
-
-  Future<void> getRoleNotificationList({int? roleId, bool? isloading}) async {
-    final _notificationModel = await addUserPresenter.getRoleNotificationList(
-        roleId: roleId, isLoading: isloading);
-    print({"ddddd", _notificationModel});
-    if (_notificationModel != null) {
-      notificationModel.value = _notificationModel;
-      notificationList.value = notificationModel.value?.notification_list ?? [];
-      // for (var _accesslevel in accesslevel) {
-      //   if (_accesslevel?.feature_name != null) {
-      //     moduleNameSet.add(_accesslevel?.feature_name.value ?? "");
-      //   }
-      // }
-      // moduleNameList.addAll(moduleNameSet.toList());
     }
   }
 
   void onValueChanged(dynamic list, dynamic value) {
     switch (list.runtimeType) {
-      case RxList<CountryModel>:
+      case RxList<UnitMeasurementModel>:
         {
-          int countryIndex = countryList.indexWhere((x) => x?.name == value);
-          selectedCountryId = countryList[countryIndex]?.id ?? 0;
-          cityList.clear();
-          stateList.clear();
-          selectedCity.value = "Please Select";
-          selectedCityId = 0;
-          selectedState.value = "Please Select";
-          selectedStateId = 0;
-
-          getStateList(selectedCountryId);
-        }
-
-        break;
-      case RxList<StateModel>:
-        {
-          int stateIndex = stateList.indexWhere((x) => x?.name == value);
-          selectedStateId = stateList[stateIndex]?.id ?? 0;
-          cityList.clear();
-          selectedCity.value = "Please Select";
-          selectedCityId = 0;
-          getCityList(selectedStateId);
+          int Index = unitMeasurementList.indexWhere((x) => x?.name == value);
+          selectedUnitOfMeasurementId = unitMeasurementList[Index]?.id ?? 0;
+          selectedUnitOfMeasurement.value = value;
         }
         break;
-      case RxList<CityModel>:
+      case RxList<AssetCategoryModel>:
         {
-          int cityIndex = cityList.indexWhere((x) => x?.name == value);
-          selectedCityId = cityList[cityIndex]?.id ?? 0;
+          int Index = materialCategoryList.indexWhere((x) => x?.name == value);
+          selectedMaterialCategoryId = unitMeasurementList[Index]?.id ?? 0;
+          selectedMaterialCategory.value = value;
         }
         break;
-      case RxList<BloodModel>:
+      case RxList<ACDCModel>:
         {
-          int bloodIndex = bloodList.indexWhere((x) => x?.name == value);
-          selectedBloodId = bloodList[bloodIndex]?.id ?? 0;
+          int Index = acdclist.indexWhere((x) => x?.name == value);
+          selectedACDCId = unitMeasurementList[Index]?.id ?? 0;
+          selectedACDC.value = value;
         }
         break;
-      case RxList<RoleModel>:
+      case RxList<AssetTypeListSMModel>:
         {
-          int roleIndex = roleList.indexWhere((x) => x?.name == value);
-          selectedRoleId = roleList[roleIndex]?.id ?? 0;
-          getRoleAccessList(roleId: selectedRoleId, isloading: true);
-          getRoleNotificationList(roleId: selectedRoleId, isloading: true);
+          int Index = materialList.indexWhere((x) => x?.name == value);
+          selectedMaterialTypeId = unitMeasurementList[Index]?.id ?? 0;
+          selectedMaterialType.value = value;
+        }
+        break;
+      case RxList<ACDCModel>:
+        {
+          int Index = acdclist.indexWhere((x) => x?.name == value);
+          selectedACDCId = acdclist[Index]?.id ?? 0;
+          selectedACDC.value = value;
         }
         break;
       default:
@@ -400,200 +375,265 @@ class AddAssetMasterController extends GetxController {
     }
   }
 
-  void saveAccessLevel() async {
-    List<SaveAccessList> accesslist = <SaveAccessList>[];
-    userId == null
-        ? accesslevel.forEach((e) {
-            accesslist.add(SaveAccessList(
-                feature_id: e?.feature_id.value ?? 0,
-                add: e?.add.value ?? 0,
-                delete: e?.delete.value ?? 0,
-                edit: e?.edit.value ?? 0,
-                selfView: e?.selfView.value ?? 0,
-                approve: e?.approve.value ?? 0,
-                issue: e?.issue.value ?? 0,
-                view: e?.view.value ?? 0));
-          })
-        : accessList.forEach((e) {
-            accesslist.add(SaveAccessList(
-                feature_id: e?.feature_id.value ?? 0,
-                add: e?.add.value ?? 0,
-                delete: e?.delete.value ?? 0,
-                edit: e?.edit.value ?? 0,
-                selfView: e?.selfView.value ?? 0,
-                approve: e?.approve.value ?? 0,
-                issue: e?.issue.value ?? 0,
-                view: e?.view.value ?? 0));
-          });
-    SaveAccessLevelModel saveAccessLevelModel = SaveAccessLevelModel(
-        user_id: userId, // varUserAccessModel.value.user_id ?? 0,
-        access_list: accesslist);
-    var accessLevelJsonString = saveAccessLevelModel.toJson();
-    print({"accessLevelJsonString", accessLevelJsonString});
-    if (accessList.isNotEmpty) {
-      Map<String, dynamic>? responsePmMapCreated =
-          await addUserPresenter.saveAccessLevel(
-        accessLevelJsonString: accessLevelJsonString,
-        isLoading: true,
-      );
-      if (responsePmMapCreated != null) {
-        saveNotification();
-        // userId = 0;
-        // Get.offNamed(
-        //   Routes.userList,
-        // );
-      }
-    } else {
-      Fluttertoast.showToast(
-          msg: "Unable to update the access level", fontSize: 16.0);
-    }
-  }
+// void saveAccessLevel() async {
+//   List<SaveAccessList> accesslist = <SaveAccessList>[];
+//   userId == null
+//       ? accesslevel.forEach((e) {
+//           accesslist.add(SaveAccessList(
+//               feature_id: e?.feature_id.value ?? 0,
+//               add: e?.add.value ?? 0,
+//               delete: e?.delete.value ?? 0,
+//               edit: e?.edit.value ?? 0,
+//               selfView: e?.selfView.value ?? 0,
+//               approve: e?.approve.value ?? 0,
+//               issue: e?.issue.value ?? 0,
+//               view: e?.view.value ?? 0));
+//         })
+//       : accessList.forEach((e) {
+//           accesslist.add(SaveAccessList(
+//               feature_id: e?.feature_id.value ?? 0,
+//               add: e?.add.value ?? 0,
+//               delete: e?.delete.value ?? 0,
+//               edit: e?.edit.value ?? 0,
+//               selfView: e?.selfView.value ?? 0,
+//               approve: e?.approve.value ?? 0,
+//               issue: e?.issue.value ?? 0,
+//               view: e?.view.value ?? 0));
+//         });
+//   SaveAccessLevelModel saveAccessLevelModel = SaveAccessLevelModel(
+//       user_id: userId, // varUserAccessModel.value.user_id ?? 0,
+//       access_list: accesslist);
+//   var accessLevelJsonString = saveAccessLevelModel.toJson();
+//   print({"accessLevelJsonString", accessLevelJsonString});
+//   if (accessList.isNotEmpty) {
+//     Map<String, dynamic>? responsePmMapCreated =
+//         await addUserPresenter.saveAccessLevel(
+//       accessLevelJsonString: accessLevelJsonString,
+//       isLoading: true,
+//     );
+//     if (responsePmMapCreated != null) {
+//       saveNotification();
+//       // userId = 0;
+//       // Get.offNamed(
+//       //   Routes.userList,
+//       // );
+//     }
+//   } else {
+//     Fluttertoast.showToast(
+//         msg: "Unable to update the access level", fontSize: 16.0);
+//   }
+// }
+//
+// void saveNotification() async {
+//   List<SaveNotificationList> notificationlist = <SaveNotificationList>[];
+//   userId == null
+//       ? notificationList.forEach((e) {
+//           notificationlist.add(SaveNotificationList(
+//               notification_id: e?.notification_id.value ?? 0,
+//               user_flag: e?.user_flag.value ?? 0));
+//         })
+//       : notificationListByUserId.forEach((e) {
+//           notificationlist.add(SaveNotificationList(
+//               notification_id: e?.notification_id.value ?? 0,
+//               user_flag: e?.user_flag.value ?? 0));
+//         });
+//   SaveUserNotificationModel saveUserNotificationModel =
+//       SaveUserNotificationModel(
+//           user_id: userId, // varUserAccessModel.value.user_id ?? 0,
+//           notification_list: notificationlist);
+//   var saveNotificationJsonString = saveUserNotificationModel.toJson();
+//   print({"saveNotificationJsonString", saveNotificationJsonString});
+//   if (notificationlist.isNotEmpty) {
+//     Map<String, dynamic>? responseSaveNotification =
+//         await addUserPresenter.saveNotification(
+//       saveNotificationJsonString: saveNotificationJsonString,
+//       isLoading: true,
+//     );
+//     if (responseSaveNotification != null) {
+//       userId = 0;
+//       Get.offNamed(
+//         Routes.userList,
+//       );
+//     }
+//   } else {
+//     Fluttertoast.showToast(
+//         msg: "Unable to update the  notification", fontSize: 16.0);
+//   }
+// }
+//
+// Future<bool> addUser() async {
+//   List<AddAccessList> add_accessList = <AddAccessList>[];
+//   accesslevel.forEach((e) {
+//     add_accessList.add(AddAccessList(
+//         feature_id: e?.feature_id.value ?? 0,
+//         add: e?.add.value ?? 0,
+//         delete: e?.delete.value ?? 0,
+//         edit: e?.edit.value ?? 0,
+//         selfView: e?.selfView.value ?? 0,
+//         approve: e?.approve.value ?? 0,
+//         issue: e?.issue.value ?? 0,
+//         view: e?.view.value ?? 0));
+//   });
+//   String _loginId = loginIdCtrlr.text.trim();
+//   String _firstname = firstNameCtrlr.text.trim();
+//   String _mobileno = mobileNoCtrlr.text.trim();
+//   String _secandoryId = secandoryIdCtrlr.text.trim();
+//   String _lastname = lastNameCtrlr.text.trim();
+//   String _dob = dobCtrlr.text.trim();
+//   String _landline = landlineCtrlr.text.trim();
+//   String _zipcode = zipcodeCtrlr.text.trim();
+//   String _password = passwordCtrlr.text.trim();
+//   String _joiningdate = joingdateCtrlr.text.trim();
+//   Credentials credentials =
+//       Credentials(password: _password, user_name: _loginId);
+//
+//   AddUserModel adduser = AddUserModel(
+//       id: 0,
+//       secondaryEmail: _secandoryId,
+//       first_name: _firstname,
+//       landline_number: _landline,
+//       last_name: _lastname,
+//       add_access_list: [], //add_accessList,
+//       gender_id: gender.value == "Male"
+//           ? 1
+//           : gender.value == "FeMale"
+//               ? 2
+//               : 3,
+//       DOB: _dob,
+//       city_id: selectedCityId,
+//       contact_no: _mobileno,
+//       country_id: selectedCountryId,
+//       joiningDate: _joiningdate,
+//       blood_group_id: selectedBloodId,
+//       state_id: selectedStateId,
+//       photo_id: photoId,
+//       role_id: selectedRoleId,
+//       zipcode: int.parse(_zipcode),
+//       isEmployee: 1,
+//       facilities: selectedfacilityNameIdList,
+//       credentials: credentials);
+//   var adduserJsonString = [adduser.toJson()];
+//
+//   print({"adduserJsonString", adduserJsonString});
+//   await addUserPresenter.addUser(
+//     adduserJsonString: adduserJsonString,
+//     isLoading: true,
+//   );
+//   return true;
+// }
+//
+// Future<bool> updateUser() async {
+//   String _loginId = loginIdCtrlr.text.trim();
+//   String _firstname = firstNameCtrlr.text.trim();
+//   String _mobileno = mobileNoCtrlr.text.trim();
+//   String _secandoryId = secandoryIdCtrlr.text.trim();
+//   String _lastname = lastNameCtrlr.text.trim();
+//   String _dob = dobCtrlr.text.trim();
+//   String _landline = landlineCtrlr.text.trim();
+//   String _zipcode = zipcodeCtrlr.text.trim();
+//   String _password = passwordCtrlr.text.trim();
+//   String _joiningdate = joingdateCtrlr.text.trim();
+//
+//   Credentials credentials =
+//       Credentials(password: _password, user_name: _loginId);
+//
+//   AddUserModel adduser = AddUserModel(
+//       id: userDetailModel.value?.id ?? 0,
+//       secondaryEmail: _secandoryId,
+//       first_name: _firstname,
+//       landline_number: _landline,
+//       last_name: _lastname,
+//       add_access_list: [], //add_accessList,
+//       gender_id: gender.value == "Male"
+//           ? 1
+//           : gender.value == "FeMale"
+//               ? 2
+//               : 3,
+//       DOB: _dob,
+//       city_id: selectedCityId,
+//       contact_no: _mobileno,
+//       country_id: selectedCountryId,
+//       joiningDate: _joiningdate,
+//       blood_group_id: selectedBloodId,
+//       state_id: selectedStateId,
+//       photo_id: photoId,
+//       role_id: selectedRoleId,
+//       zipcode: int.parse(_zipcode),
+//       facilities: selectedfacilityNameIdList,
+//       isEmployee: 1,
+//       credentials: credentials);
+//   var adduserJsonString = adduser.toJson();
+//
+//   print({"adduserJsonString", adduserJsonString});
+//   await addUserPresenter.updateUser(
+//     adduserJsonString: adduserJsonString,
+//     isLoading: true,
+//   );
+//   return true;
+// }
+// Future<void> getBloodList() async {
+//   final list = await addUserPresenter.getBloodList();
+//
+//   if (list != null) {
+//     for (var _bloodList in list) {
+//       bloodList.add(_bloodList);
+//     }
+//   }
+// }
+//
+// Future<void> getStateList(int selectedCountryId) async {
+//   final list = await addUserPresenter.getStateList(
+//       selectedCountryId: selectedCountryId);
+//
+//   if (list != null) {
+//     for (var _stateList in list) {
+//       stateList.add(_stateList);
+//     }
+//   }
+// }
+//
+// Future<void> getCityList(int selectedStateId) async {
+//   final list =
+//   await addUserPresenter.getCityList(selectedStateId: selectedStateId);
+//
+//   if (list != null) {
+//     for (var _cityList in list) {
+//       cityList.add(_cityList);
+//     }
+//   }
+// }
+//
+// Future<void> getRoleAccessList({int? roleId, bool? isloading}) async {
+//   final _accessLevelModel = await addUserPresenter.getRoleAccessList(
+//       roleId: roleId, isLoading: isloading);
+//   Set<String> moduleNameSet = {};
+//
+//   if (_accessLevelModel != null) {
+//     accessLevelModel.value = _accessLevelModel;
+//     accesslevel.value = accessLevelModel.value?.access_list ?? [];
+//     // for (var _accesslevel in accesslevel) {
+//     //   if (_accesslevel?.feature_name != null) {
+//     //     moduleNameSet.add(_accesslevel?.feature_name.value ?? "");
+//     //   }
+//     // }
+//     // moduleNameList.addAll(moduleNameSet.toList());
+//   }
+// }
+//
+// Future<void> getRoleNotificationList({int? roleId, bool? isloading}) async {
+//   final _notificationModel = await addUserPresenter.getRoleNotificationList(
+//       roleId: roleId, isLoading: isloading);
+//   print({"ddddd", _notificationModel});
+//   if (_notificationModel != null) {
+//     notificationModel.value = _notificationModel;
+//     notificationList.value = notificationModel.value?.notification_list ?? [];
+//     // for (var _accesslevel in accesslevel) {
+//     //   if (_accesslevel?.feature_name != null) {
+//     //     moduleNameSet.add(_accesslevel?.feature_name.value ?? "");
+//     //   }
+//     // }
+//     // moduleNameList.addAll(moduleNameSet.toList());
+//   }
+// }
 
-  void saveNotification() async {
-    List<SaveNotificationList> notificationlist = <SaveNotificationList>[];
-    userId == null
-        ? notificationList.forEach((e) {
-            notificationlist.add(SaveNotificationList(
-                notification_id: e?.notification_id.value ?? 0,
-                user_flag: e?.user_flag.value ?? 0));
-          })
-        : notificationListByUserId.forEach((e) {
-            notificationlist.add(SaveNotificationList(
-                notification_id: e?.notification_id.value ?? 0,
-                user_flag: e?.user_flag.value ?? 0));
-          });
-    SaveUserNotificationModel saveUserNotificationModel =
-        SaveUserNotificationModel(
-            user_id: userId, // varUserAccessModel.value.user_id ?? 0,
-            notification_list: notificationlist);
-    var saveNotificationJsonString = saveUserNotificationModel.toJson();
-    print({"saveNotificationJsonString", saveNotificationJsonString});
-    if (notificationlist.isNotEmpty) {
-      Map<String, dynamic>? responseSaveNotification =
-          await addUserPresenter.saveNotification(
-        saveNotificationJsonString: saveNotificationJsonString,
-        isLoading: true,
-      );
-      if (responseSaveNotification != null) {
-        userId = 0;
-        Get.offNamed(
-          Routes.userList,
-        );
-      }
-    } else {
-      Fluttertoast.showToast(
-          msg: "Unable to update the  notification", fontSize: 16.0);
-    }
-  }
-
-  Future<bool> addUser() async {
-    List<AddAccessList> add_accessList = <AddAccessList>[];
-    accesslevel.forEach((e) {
-      add_accessList.add(AddAccessList(
-          feature_id: e?.feature_id.value ?? 0,
-          add: e?.add.value ?? 0,
-          delete: e?.delete.value ?? 0,
-          edit: e?.edit.value ?? 0,
-          selfView: e?.selfView.value ?? 0,
-          approve: e?.approve.value ?? 0,
-          issue: e?.issue.value ?? 0,
-          view: e?.view.value ?? 0));
-    });
-    String _loginId = loginIdCtrlr.text.trim();
-    String _firstname = firstNameCtrlr.text.trim();
-    String _mobileno = mobileNoCtrlr.text.trim();
-    String _secandoryId = secandoryIdCtrlr.text.trim();
-    String _lastname = lastNameCtrlr.text.trim();
-    String _dob = dobCtrlr.text.trim();
-    String _landline = landlineCtrlr.text.trim();
-    String _zipcode = zipcodeCtrlr.text.trim();
-    String _password = passwordCtrlr.text.trim();
-    String _joiningdate = joingdateCtrlr.text.trim();
-    Credentials credentials =
-        Credentials(password: _password, user_name: _loginId);
-
-    AddUserModel adduser = AddUserModel(
-        id: 0,
-        secondaryEmail: _secandoryId,
-        first_name: _firstname,
-        landline_number: _landline,
-        last_name: _lastname,
-        add_access_list: [], //add_accessList,
-        gender_id: gender.value == "Male"
-            ? 1
-            : gender.value == "FeMale"
-                ? 2
-                : 3,
-        DOB: _dob,
-        city_id: selectedCityId,
-        contact_no: _mobileno,
-        country_id: selectedCountryId,
-        joiningDate: _joiningdate,
-        blood_group_id: selectedBloodId,
-        state_id: selectedStateId,
-        photo_id: photoId,
-        role_id: selectedRoleId,
-        zipcode: int.parse(_zipcode),
-        isEmployee: 1,
-        facilities: selectedfacilityNameIdList,
-        credentials: credentials);
-    var adduserJsonString = [adduser.toJson()];
-
-    print({"adduserJsonString", adduserJsonString});
-    await addUserPresenter.addUser(
-      adduserJsonString: adduserJsonString,
-      isLoading: true,
-    );
-    return true;
-  }
-
-  Future<bool> updateUser() async {
-    String _loginId = loginIdCtrlr.text.trim();
-    String _firstname = firstNameCtrlr.text.trim();
-    String _mobileno = mobileNoCtrlr.text.trim();
-    String _secandoryId = secandoryIdCtrlr.text.trim();
-    String _lastname = lastNameCtrlr.text.trim();
-    String _dob = dobCtrlr.text.trim();
-    String _landline = landlineCtrlr.text.trim();
-    String _zipcode = zipcodeCtrlr.text.trim();
-    String _password = passwordCtrlr.text.trim();
-    String _joiningdate = joingdateCtrlr.text.trim();
-
-    Credentials credentials =
-        Credentials(password: _password, user_name: _loginId);
-
-    AddUserModel adduser = AddUserModel(
-        id: userDetailModel.value?.id ?? 0,
-        secondaryEmail: _secandoryId,
-        first_name: _firstname,
-        landline_number: _landline,
-        last_name: _lastname,
-        add_access_list: [], //add_accessList,
-        gender_id: gender.value == "Male"
-            ? 1
-            : gender.value == "FeMale"
-                ? 2
-                : 3,
-        DOB: _dob,
-        city_id: selectedCityId,
-        contact_no: _mobileno,
-        country_id: selectedCountryId,
-        joiningDate: _joiningdate,
-        blood_group_id: selectedBloodId,
-        state_id: selectedStateId,
-        photo_id: photoId,
-        role_id: selectedRoleId,
-        zipcode: int.parse(_zipcode),
-        facilities: selectedfacilityNameIdList,
-        isEmployee: 1,
-        credentials: credentials);
-    var adduserJsonString = adduser.toJson();
-
-    print({"adduserJsonString", adduserJsonString});
-    await addUserPresenter.updateUser(
-      adduserJsonString: adduserJsonString,
-      isLoading: true,
-    );
-    return true;
-  }
 }

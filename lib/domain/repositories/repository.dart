@@ -87,7 +87,9 @@ import '../models/IncidentRiskTypeModel.dart';
 import '../models/InsuranceProviderModel.dart';
 import '../models/SPV_list_model.dart';
 import '../models/access_level_model.dart';
+import '../models/asset_category_model.dart';
 import '../models/asset_master_model.dart';
+import '../models/asset_type_list_sm_model.dart';
 import '../models/blood_model.dart';
 import '../models/business_type_model.dart';
 import '../models/calibration_certificate_model.dart';
@@ -108,6 +110,7 @@ import '../models/permit_details_model.dart';
 import '../models/pm_mapping_list_model.dart';
 import '../models/role_model.dart';
 import '../models/state.dart';
+import '../models/unit_measurement_model.dart';
 import '../models/user_access_model.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 
@@ -8876,6 +8879,89 @@ class Repository {
     } catch (error) {
       log(error.toString());
       return false;
+    }
+  }
+  Future<List<AssetCategoryModel>> getAssetCategoryList({
+    // required int? job_type_id,
+    required bool isLoading,
+  }) async {
+    try {
+      final auth = await getSecuredValue(LocalKeys.authToken);
+
+      log(auth);
+      final res = await _dataRepository.getAssetCategoryList(
+        // job_type_id: job_type_id,
+        isLoading: isLoading,
+        auth: auth,
+      );
+      print('Asset type List Data: ${res.data}');
+
+      if (!res.hasError) {
+        var facilityTypeList = AssetCategoryModelFromJson(res.data);
+        return facilityTypeList;
+      }
+      return [];
+    } catch (error) {
+      log(error.toString());
+      return [];
+    }
+  }
+
+  Future<List<AssetTypeListSMModel>> getAssetTypeSMList({
+    required bool isLoading,
+
+  }) async {
+    try {
+      final auth = await getSecuredValue(LocalKeys.authToken);
+
+      log(auth);
+      final res = await _dataRepository.getAssetTypeSMList(
+        isLoading: isLoading,
+        auth: auth,
+      );
+      print('Asset type List Data: ${res.data}');
+
+      if (!res.hasError) {
+        var assetTypeList = AssetTypeListSMModelFromJson(res.data);
+        return assetTypeList;
+      }
+      return [];
+    } catch (error) {
+      log(error.toString());
+      return [];
+    }
+  }
+
+  Future<List<UnitMeasurementModel>> getUnitMeasurementList({
+    // required int? businessType,
+    // int? blockId,
+    // required String categoryIds,
+    int? blockId,
+    String? categoryIds,
+    required bool isLoading,
+  }) async {
+    try {
+      final auth = await getSecuredValue(LocalKeys.authToken);
+      final res = await _dataRepository.getUnitMeasurementList(
+        // facilityId: businessType,
+        // blockId: blockId,
+        // categoryIds: categoryIds ?? "",
+        // businessType: businessType,
+        isLoading: isLoading,
+        auth: auth,
+      );
+      if (!res.hasError) {
+        var businessList = UnitMeasurementModelFromJson(res.data);
+        return businessList;
+      }
+//
+      else {
+        Utility.showDialog(res.errorCode.toString() + 'getBusinessList');
+        return [];
+      }
+    } catch (error) {
+      print(error.toString());
+      return [];
     }
   }
   //end

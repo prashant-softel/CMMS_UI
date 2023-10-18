@@ -3588,5 +3588,39 @@ class DataRepository extends DomainRepository {
         approvetoJsonString: approvetoJsonString,
         isLoading: isLoading ?? false,
       );
+
+  Future<ResponseModel> getAssetCategoryList({
+    required bool isLoading,
+    required String auth,
+  }) async {
+    return await connectHelper.getAssetCategoryList(
+      isLoading: isLoading,
+      auth: auth,
+      // job_type_id: job_type_id,
+      // businessType: businessType,
+      // blockId: blockId,
+      // categoryIds: categoryIds,
+    );
+  }
+  Future<ResponseModel> getAssetTypeSMList({
+    required bool isLoading,
+    required String auth,
+  }) async {
+    return await connectHelper.getAssetTypeSMList(
+      auth: auth,
+      isLoading: isLoading,
+    );
+  }
+  Future<ResponseModel> getUnitMeasurementList({
+    // int? facilityId,
+    required bool isLoading,
+    required String auth,
+  }) async {
+    return await connectHelper.getUnitMeasurementList(
+      isLoading: isLoading,
+      auth: auth,
+      // facilityId: facilityId,
+    );
+  }
 //end
 }
