@@ -138,81 +138,37 @@ class _ViewMcPlaningWebState extends State<ViewMcPlaningWeb> {
                                     )
                                   ],
                                 ),
+                                Dimens.boxHeight10,
                                 Container(
                                   margin: Dimens.edgeInsets20,
                                   child: Row(
-                                    crossAxisAlignment:
-                                        CrossAxisAlignment.start,
                                     children: [
                                       Spacer(),
                                       Column(
                                         crossAxisAlignment:
                                             CrossAxisAlignment.end,
                                         children: [
-                                          //
-                                          Row(
-                                            children: [
-                                              CustomRichText(
-                                                  title: 'Plan Title  :'),
-                                              Dimens.boxWidth10,
-                                              Text(
-                                                  '${controller.mcPlanDetailsModel.value?.title ?? ''}',
-                                                  style: Styles.blue17),
-                                            ],
-                                          ),
-
+                                          CustomRichText(
+                                              title: 'Plan Title  :'),
                                           Dimens.boxHeight10,
-                                          Row(
-                                            children: [
-                                              Dimens.boxWidth10,
-                                              CustomRichText(
-                                                title: 'Frequency :',
-                                              ),
-                                              Dimens.boxWidth10,
-                                              Obx(
-                                                () => Text(
-                                                    '${controller.mcPlanDetailsModel.value?.frequency ?? ""}', //  "Block 2 all Inverter maintenance plan",
-                                                    style: Styles.blue17),
-                                              ),
-                                            ],
+                                          CustomRichText(
+                                            title: 'Frequency :',
                                           ),
-
-                                          Dimens.boxHeight10,
                                         ],
                                       ),
-                                      Spacer(),
+                                      Dimens.boxWidth10,
                                       Column(
                                         crossAxisAlignment:
-                                            CrossAxisAlignment.end,
+                                            CrossAxisAlignment.start,
                                         children: [
-                                          Row(
-                                            children: [
-                                              Row(
-                                                children: [
-                                                  CustomRichText(
-                                                      title: 'Planning by :'),
-                                                  Dimens.boxWidth10,
-                                                  Obx(
-                                                    () => Text(
-                                                        '${controller.mcPlanDetailsModel.value?.createdBy ?? ''}', //  "Block 2 all Inverter maintenance plan",
-                                                        style: Styles.blue17),
-                                                  ),
-                                                ],
-                                              ),
-                                              Dimens.boxHeight10
-                                            ],
-                                          ),
+                                          Text(
+                                              '${controller.mcPlanDetailsModel.value?.title ?? ''}',
+                                              style: Styles.blue17),
                                           Dimens.boxHeight10,
-                                          Row(
-                                            children: [
-                                              Dimens.boxWidth10,
-                                              CustomRichText(
-                                                  title: 'Site Name  :'),
-                                              Dimens.boxWidth10,
-                                              Text(
-                                                  '${controller.mcPlanDetailsModel.value?.title ?? ''}', //  "Block 2 all Inverter maintenance plan",
-                                                  style: Styles.blue17),
-                                            ],
+                                          Obx(
+                                            () => Text(
+                                                '${controller.mcPlanDetailsModel.value?.frequency ?? ""}', //  "Block 2 all Inverter maintenance plan",
+                                                style: Styles.blue17),
                                           ),
                                         ],
                                       ),
@@ -221,18 +177,45 @@ class _ViewMcPlaningWebState extends State<ViewMcPlaningWeb> {
                                         crossAxisAlignment:
                                             CrossAxisAlignment.end,
                                         children: [
-                                          //
-                                          Row(
-                                            children: [
-                                              CustomRichText(
-                                                  title:
-                                                      'Planning Date & Time :'),
-                                              Dimens.boxWidth10,
-                                              Text(
-                                                  '${controller.mcPlanDetailsModel.value?.createdAt ?? ''}', //  "Block 2 all Inverter maintenance plan",
-                                                  style: Styles.blue17),
-                                            ],
+                                          CustomRichText(
+                                              title: 'Planning by :'),
+                                          Dimens.boxHeight10,
+                                          CustomRichText(title: 'Site Name  :'),
+                                        ],
+                                      ),
+                                      Dimens.boxWidth10,
+                                      Column(
+                                        crossAxisAlignment:
+                                            CrossAxisAlignment.start,
+                                        children: [
+                                          Obx(
+                                            () => Text(
+                                                '${controller.mcPlanDetailsModel.value?.createdBy ?? ''}', //  "Block 2 all Inverter maintenance plan",
+                                                style: Styles.blue17),
                                           ),
+                                          Dimens.boxHeight10,
+                                          Text(
+                                              '${controller.mcPlanDetailsModel.value?.title ?? ''}', //  "Block 2 all Inverter maintenance plan",
+                                              style: Styles.blue17),
+                                        ],
+                                      ),
+                                      Spacer(),
+                                      Column(
+                                        crossAxisAlignment:
+                                            CrossAxisAlignment.end,
+                                        children: [
+                                          CustomRichText(
+                                              title: 'Planning Date & Time :'),
+                                        ],
+                                      ),
+                                      Dimens.boxWidth10,
+                                      Column(
+                                        crossAxisAlignment:
+                                            CrossAxisAlignment.start,
+                                        children: [
+                                          Text(
+                                              '${controller.mcPlanDetailsModel.value?.createdAt ?? ''}', //  "Block 2 all Inverter maintenance plan",
+                                              style: Styles.blue17),
 
                                           // Dimens.boxHeight10,
                                         ],
