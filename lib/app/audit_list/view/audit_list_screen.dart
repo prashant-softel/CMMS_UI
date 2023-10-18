@@ -1,4 +1,4 @@
-import 'package:cmms/app/audit/view/audit_list_content_web.dart';
+import 'package:cmms/app/audit_list/view/audit_list_content_web.dart';
 import 'package:cmms/app/hoto/hoto_list_controller.dart';
 import 'package:cmms/app/hoto/view/hoto_list_content_web.dart';
 
@@ -9,8 +9,7 @@ import '../../home/widgets/home_drawer.dart';
 import '../../theme/dimens.dart';
 import '../../utils/responsive.dart';
 
-class AuditListScreen
-    extends GetView<HotoListScreenController> {
+class AuditListScreen extends GetView<HotoListScreenController> {
   AuditListScreen({super.key});
 
   ///
