@@ -6119,4 +6119,43 @@ class ConnectHelper {
 
     return responseModel;
   }
+  Future<ResponseModel> getAssetCategoryList(
+      {required bool isLoading, required String auth}) async {
+    ResponseModel responseModel = await apiWrapper.makeRequest(
+      'SMMaster/GetAssetCategoryList',
+      Request.getMultiparts,
+      null,
+      isLoading,
+      {
+        'Authorization': 'Bearer $auth',
+      },
+    );
+    return responseModel;
+  }
+  Future<ResponseModel> getAssetTypeSMList(
+      {required bool isLoading, required String auth, int? asset_id}) async {
+    ResponseModel responseModel = await apiWrapper.makeRequest(
+      'SMMaster/GetAssetTypeList',
+      Request.getMultiparts,
+      null,
+      isLoading,
+      {
+        'Authorization': 'Bearer $auth',
+      },
+    );
+    return responseModel;
+  }
+  Future<ResponseModel> getUnitMeasurementList(
+      {required bool isLoading, required String auth, int? facilityId}) async {
+    ResponseModel responseModel = await apiWrapper.makeRequest(
+      'SMMaster/GetUnitMeasurementList',
+      Request.getMultiparts,
+      null,
+      isLoading,
+      {
+        'Authorization': 'Bearer $auth',
+      },
+    );
+    return responseModel;
+  }
 }

@@ -8,10 +8,13 @@ import 'package:cmms/domain/models/get_notification_by_userid_model.dart';
 import 'package:cmms/domain/models/get_notification_model.dart';
 import 'package:cmms/domain/models/getuser_access_byId_model.dart';
 
+import '../../domain/models/asset_category_model.dart';
+import '../../domain/models/asset_type_list_sm_model.dart';
 import '../../domain/models/blood_model.dart';
 import '../../domain/models/city_model.dart';
 import '../../domain/models/role_model.dart';
 import '../../domain/models/state_model.dart';
+import '../../domain/models/unit_measurement_model.dart';
 import '../../domain/models/user_detail_model.dart';
 import '../../domain/usecases/add_asset_master_usecase.dart';
 import '../../domain/usecases/add_user_usecase.dart';
@@ -19,7 +22,7 @@ import '../../domain/usecases/add_user_usecase.dart';
 class AddAssetMasterPresenter {
   AddAssetMasterPresenter(this.addUserUsecase);
   AddAssetMasterUsecase addUserUsecase;
-  Future<List<CountryModel?>?> getCountryList({
+    Future<List<CountryModel?>?> getCountryList({
     bool? isLoading,
   }) async =>
       await addUserUsecase.getCountryList(
@@ -38,11 +41,11 @@ class AddAssetMasterPresenter {
         isLoading: isLoading ?? false,
       );
   Future<List<StateModel?>?> getStateList(
-          {bool? isLoading, int? selectedCountryId}) async =>
+      {bool? isLoading, int? selectedCountryId}) async =>
       await addUserUsecase.getStateList(
           isLoading: isLoading ?? false, selectedCountryId: selectedCountryId);
   Future<List<CityModel?>?> getCityList(
-          {bool? isLoading, int? selectedStateId}) async =>
+      {bool? isLoading, int? selectedStateId}) async =>
       await addUserUsecase.getCityList(
           isLoading: isLoading ?? false, selectedStateId: selectedStateId);
   Future<AccessLevelModel?> getRoleAccessList({
@@ -142,4 +145,27 @@ class AddAssetMasterPresenter {
       isLoading: isLoading,
     );
   }
+  Future<List<UnitMeasurementModel?>?> getUnitMeasurementList({
+    bool? isLoading,
+  }) async =>
+      await addUserUsecase.getUnitMeasurementList(
+        isLoading: isLoading ?? false,
+      );
+  Future<List<AssetTypeListSMModel?>?> getAssetType(
+
+      {
+        bool? isLoading,
+      }) async =>
+      await addUserUsecase.getAssetType(
+        isLoading: isLoading ?? false,
+      );
+
+  Future<List<AssetCategoryModel?>?> getAssetCategoryList({
+    bool? isLoading,
+  }) async =>
+      await addUserUsecase.getAssetCategoryList(
+        isLoading: isLoading ?? false,
+      );
+
+
 }
