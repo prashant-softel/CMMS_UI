@@ -574,6 +574,10 @@ class ViewModuleCleaningExecutionContentWeb
                                                                     .listSchedules?[
                                                                         index]
                                                                     ?.waterUsed,
+                                                                remark: controller
+                                                                    .listSchedules?[
+                                                                        index]
+                                                                    ?.remark,
                                                                 schedule:
                                                                     selectedSchedule!,
                                                                 mappedData:

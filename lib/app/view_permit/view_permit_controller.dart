@@ -1797,6 +1797,25 @@ class ViewPermitController extends GetxController {
 
     final PdfFont contentFont = PdfStandardFont(PdfFontFamily.helvetica, 9);
     //Draw string
+    
+    //ISolation
+    //Draw Rectangle to highlight margin
+    page.graphics.drawRectangle(
+        pen: PdfPen(PdfColor(142, 170, 219)),
+        bounds: Rect.fromLTWH(25, 165, pageSize.width - 45, 25));
+    page.graphics.drawString(
+        'Isolation Required: ',
+        PdfStandardFont(
+          PdfFontFamily.helvetica,
+          10,
+        ),
+        bounds: Rect.fromLTWH(30, 200, 0, 0),
+        format: PdfStringFormat(lineAlignment: PdfVerticalAlignment.middle));
+    page.graphics.drawString(
+        '',
+        PdfStandardFont(PdfFontFamily.helvetica, 10),
+        bounds: Rect.fromLTWH(100, 200, 0, 0),
+        format: PdfStringFormat(lineAlignment: PdfVerticalAlignment.middle));
 
     final String invoiceNumber = 'Signature:      ';
     final Size contentSize = contentFont.measureString(invoiceNumber);
