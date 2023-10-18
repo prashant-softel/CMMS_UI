@@ -1,6 +1,6 @@
 import 'dart:async';
 
-import 'package:cmms/app/audit/audit_list_presenter.dart';
+import 'package:cmms/app/audit_list/audit_list_presenter.dart';
 import 'package:cmms/app/home/home_controller.dart';
 import 'package:cmms/app/hoto/hoto_list_presenter.dart';
 import 'package:cmms/app/module_cleaning_list_plan/module_cleaning_list_plan_presenter.dart';
@@ -26,30 +26,32 @@ class AuditListScreenController extends GetxController {
   RxString noOfDaysFilterText = ''.obs;
   RxString createdByFilterText = ''.obs;
   RxString frequencyFilterText = ''.obs;
+  RxString startdateFilterText = ''.obs;
+
   RxString statusFilterText = ''.obs;
 
   //Start DateTime
   bool openStartDatePicker = false;
   var startDateTimeCtrlr = TextEditingController();
 
-
   Rx<DateTime> fromDate = DateTime.now().subtract(Duration(days: 7)).obs;
   Rx<DateTime> toDate = DateTime.now().obs;
   final columnVisibility = ValueNotifier<Map<String, bool>>({
-    'Plan Id': true,
-    'Plan Title': true,
-    'No of Days': true,
-    'Created By': true,
-    'frequency': true,
+    'Audit Plan ID': true,
+    'Title': true,
+    'Checklist': true,
+    'Site Name': true,
+    'Start Date': true, 'Frequency Name': true,
 
     // "search": true,
   });
   final Map<String, double> columnwidth = {
-    'Plan Id': 153,
-    'Plan Title': 320,
-    'No of Days': 220,
-    'Created By': 200,
-    'frequency': 250,
+    'Audit Plan ID': 153,
+    'Title': 320,
+    'Checklist': 220,
+    'Site Name': 200,
+    'Start Date': 250,
+    'Frequency Name': 250,
   };
   Map<String, RxString> filterText = {};
   void setColumnVisibility(String columnName, bool isVisible) {
@@ -80,17 +82,18 @@ class AuditListScreenController extends GetxController {
   @override
   void onInit() async {
     this.filterText = {
-      'Plan Id': planIdFilterText,
-      'Plan Title': planTitleFilterText,
-      'No of Days': noOfDaysFilterText,
-      'Created By': createdByFilterText,
-      'frequency': frequencyFilterText,
+      'Audit Plan ID': planIdFilterText,
+      'Title': planTitleFilterText,
+      'Checklist': noOfDaysFilterText,
+      'Site Name': createdByFilterText,
+      'Start Date': frequencyFilterText,
+      'Frequency Name': startdateFilterText,
       "Status": statusFilterText,
     };
     facilityIdStreamSubscription = homecontroller.facilityId$.listen((event) {
       facilityId = event;
       Future.delayed(Duration(seconds: 2), () async {
-        getModuleCleaningListPlan(facilityId, true);
+        getModuleCleaningListPlan(facilityId, false);
       });
     });
     super.onInit();

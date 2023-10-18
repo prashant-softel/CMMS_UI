@@ -1,13 +1,13 @@
-import 'package:cmms/app/audit/audit_list_controller.dart';
-import 'package:cmms/app/hoto/hoto_list_controller.dart';
-import 'package:cmms/app/module_cleaning_list_plan/module_cleaning_list_plan_controller.dart';
+import 'package:cmms/app/audit_list/audit_list_controller.dart';
 import 'package:cmms/app/navigators/app_pages.dart';
 import 'package:cmms/app/theme/dimens.dart';
-import 'package:cmms/app/widgets/add_mc_execution_dialog.dart';
+import 'package:cmms/app/widgets/custom_elevated_button.dart';
+import 'package:cmms/app/widgets/date_picker.dart';
 import 'package:cmms/domain/models/module_cleaning_list_plan_model.dart';
 import 'package:data_table_2/data_table_2.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:syncfusion_flutter_datepicker/datepicker.dart';
 
 import '../../theme/color_values.dart';
 import '../../theme/styles.dart';
@@ -20,8 +20,7 @@ class AuditListContentWeb extends StatefulWidget {
   }) : super(key: key);
 
   @override
-  State<AuditListContentWeb> createState() =>
-      _PurchaseGoodsorderListWebState();
+  State<AuditListContentWeb> createState() => _PurchaseGoodsorderListWebState();
 }
 
 class _PurchaseGoodsorderListWebState extends State<AuditListContentWeb> {
@@ -199,34 +198,33 @@ class _PurchaseGoodsorderListWebState extends State<AuditListContentWeb> {
                                         // Handle column selection
                                       },
                                     ),
-
-                                    // Container(
-                                    //   height: 35,
-                                    //   margin: EdgeInsets.only(left: 10),
-                                    //   child: CustomElevatedButton(
-                                    //       backgroundColor:
-                                    //           ColorValues.appLightBlueColor,
-                                    //       onPressed: () {},
-                                    //       text: 'Copy'),
-                                    // ),
-                                    // Container(
-                                    //   height: 35,
-                                    //   margin: EdgeInsets.only(left: 10),
-                                    //   child: CustomElevatedButton(
-                                    //       backgroundColor:
-                                    //           ColorValues.appLightBlueColor,
-                                    //       onPressed: () {},
-                                    //       text: 'Excel'),
-                                    // ),
-                                    // Container(
-                                    //   height: 35,
-                                    //   margin: EdgeInsets.only(left: 10),
-                                    //   child: CustomElevatedButton(
-                                    //       backgroundColor:
-                                    //           ColorValues.appLightBlueColor,
-                                    //       onPressed: () {},
-                                    //       text: 'PDF'),
-                                    // ),
+                                    Container(
+                                      height: 35,
+                                      margin: EdgeInsets.only(left: 10),
+                                      child: CustomElevatedButton(
+                                          backgroundColor:
+                                              ColorValues.appLightBlueColor,
+                                          onPressed: () {},
+                                          text: 'Copy'),
+                                    ),
+                                    Container(
+                                      height: 35,
+                                      margin: EdgeInsets.only(left: 10),
+                                      child: CustomElevatedButton(
+                                          backgroundColor:
+                                              ColorValues.appLightBlueColor,
+                                          onPressed: () {},
+                                          text: 'Excel'),
+                                    ),
+                                    Container(
+                                      height: 35,
+                                      margin: EdgeInsets.only(left: 10),
+                                      child: CustomElevatedButton(
+                                          backgroundColor:
+                                              ColorValues.appLightBlueColor,
+                                          onPressed: () {},
+                                          text: 'PDF'),
+                                    ),
                                     Spacer(),
                                     Container(
                                       width: 200,
@@ -260,8 +258,7 @@ class _PurchaseGoodsorderListWebState extends State<AuditListContentWeb> {
                                 ),
                                 controller.moduleCleaningListPlan.isNotEmpty
                                     ? Center(child: Text('No data'))
-                                    : 
-                                    Expanded(
+                                    : Expanded(
                                         child: ValueListenableBuilder(
                                             valueListenable:
                                                 controller.columnVisibility,
@@ -311,48 +308,48 @@ class _PurchaseGoodsorderListWebState extends State<AuditListContentWeb> {
                             ),
                           ),
                         ),
-                        // if (controller.openFromDateToStartDatePicker)
-                        //   Positioned(
-                        //     right: 150,
-                        //     top: 85,
-                        //     child: DatePickerWidget(
-                        //       selectionMode: DateRangePickerSelectionMode.range,
-                        //       monthCellStyle: DateRangePickerMonthCellStyle(
-                        //         todayCellDecoration: BoxDecoration(
-                        //             shape: BoxShape.circle,
-                        //             color: ColorValues.appDarkBlueColor),
-                        //       ), // last date of this year
-                        //       // controller: DateRangePickerController(),
-                        //       initialSelectedRange: PickerDateRange(
-                        //         controller.fromDate.value,
-                        //         controller.toDate.value,
-                        //       ),
+                        if (controller.openFromDateToStartDatePicker)
+                          Positioned(
+                            right: 150,
+                            top: 85,
+                            child: DatePickerWidget(
+                              selectionMode: DateRangePickerSelectionMode.range,
+                              monthCellStyle: DateRangePickerMonthCellStyle(
+                                todayCellDecoration: BoxDecoration(
+                                    shape: BoxShape.circle,
+                                    color: ColorValues.appDarkBlueColor),
+                              ), // last date of this year
+                              // controller: DateRangePickerController(),
+                              initialSelectedRange: PickerDateRange(
+                                controller.fromDate.value,
+                                controller.toDate.value,
+                              ),
 
-                        //       onSubmit: (value) {
-                        //         print('po valu ${value.toString()}');
-                        //         PickerDateRange? data =
-                        //             value as PickerDateRange;
+                              onSubmit: (value) {
+                                print('po valu ${value.toString()}');
+                                PickerDateRange? data =
+                                    value as PickerDateRange;
 
-                        //         var pickUpDate =
-                        //             DateTime.parse(data.startDate.toString());
-                        //         controller.fromDate.value = pickUpDate;
-                        //         var dropDate =
-                        //             DateTime.parse(data.endDate.toString());
-                        //         dropDate != null
-                        //             ? controller.toDate.value = dropDate
-                        //             : controller.toDate.value = pickUpDate;
+                                var pickUpDate =
+                                    DateTime.parse(data.startDate.toString());
+                                controller.fromDate.value = pickUpDate;
+                                var dropDate =
+                                    DateTime.parse(data.endDate.toString());
+                                dropDate != null
+                                    ? controller.toDate.value = dropDate
+                                    : controller.toDate.value = pickUpDate;
 
-                        //         controller.getPmTaskListByDate();
-                        //         controller.openFromDateToStartDatePicker =
-                        //             !controller.openFromDateToStartDatePicker;
-                        //         controller.update(['stock_Mangement_Date']);
+                                //  controller.getPmTaskListByDate();
+                                controller.openFromDateToStartDatePicker =
+                                    !controller.openFromDateToStartDatePicker;
+                                controller.update(['stock_Mangement_Date']);
 
-                        //         // Get.toNamed(
-                        //         //   Routes.stockManagementGoodsOrdersScreen,
-                        //         // );
-                        //       },
-                        //     ),
-                        //   ),
+                                // Get.toNamed(
+                                //   Routes.stockManagementGoodsOrdersScreen,
+                                // );
+                              },
+                            ),
+                          ),
                       ],
                     ),
                   ],
@@ -455,7 +452,7 @@ class AuditListListDataSource extends DataTableSource {
       //         .toString()
       //         .contains(controller.statusFilterText.value.toLowerCase());
 
-       return (GoodsOrderList.planId ?? '')
+      return (GoodsOrderList.planId ?? '')
               .toString()
               .contains(controller.planIdFilterText.value.toLowerCase()) &&
           (GoodsOrderList.title ?? '')
@@ -473,7 +470,6 @@ class AuditListListDataSource extends DataTableSource {
           (GoodsOrderList.status ?? '')
               .toString()
               .contains(controller.statusFilterText.value.toLowerCase());
-        
 
       // Add other filter conditions as needed
     }).toList();
