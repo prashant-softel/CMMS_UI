@@ -513,7 +513,7 @@ class GoodsOrderListDataSource extends DataTableSource {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Text(
-                        '${GoodsOrderListDetails?.request_order_id}',
+                        ' RO ${GoodsOrderListDetails?.request_order_id}',
                       ),
                       Dimens.boxHeight10,
                       Align(

@@ -57,6 +57,14 @@ class ModuleCleaningPlanningController extends GetxController {
     TypeModel(name: 'Day 2', id: "2"),
     TypeModel(name: 'Day 3', id: "3"),
   ];
+  void dayCount() {
+    List<TypeModel> dayCount = [];
+    for (int i = 1; i <= 30; i++) {
+      dayCount.add(TypeModel(id: dayCount.toString(), name: "Day ${dayCount}"));
+      print('efwvwervtwr:${dayCount.length}');
+    }
+  }
+
   Map<String, TypeModel> typedropdownMapperData = {};
 
   RxList<TypeModel> cleaningType = <TypeModel>[
@@ -99,6 +107,7 @@ class ModuleCleaningPlanningController extends GetxController {
       Future.delayed(Duration(seconds: 1), () {
         getEquipmentModelList(facilityId, true);
       });
+      dayCount();
 
       // getMcPlanHistory(id: id.value);
       super.onInit();
