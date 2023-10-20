@@ -3269,7 +3269,7 @@ class ViewPermitWebScreen extends GetView<ViewPermitController> {
                                                                           .blackBold17,
                                                                     ),
                                                                     Text(
-                                                                      'Extended Conditions',
+                                                                      'Close Conditions',
                                                                       style: Styles
                                                                           .black17,
                                                                     ),
@@ -3875,7 +3875,7 @@ class ViewPermitWebScreen extends GetView<ViewPermitController> {
 
               ///Printing functionality
               Container(
-                height: 35,
+                height: 45,
                 child: CustomElevatedButton(
                   icon: Icons.print_outlined,
                   backgroundColor: ColorValues.appDarkBlueColor,

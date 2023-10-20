@@ -1,10 +1,13 @@
 import 'dart:async';
+import 'dart:io';
 import 'dart:typed_data';
 import 'dart:ui';
 
 import 'package:cmms/app/home/home_controller.dart';
 import 'package:cmms/app/job_list/job_list_presenter.dart';
 import 'package:cmms/app/navigators/navigators.dart';
+import 'package:cmms/app/new_permit_list/permit_status_constants.dart';
+import 'package:cmms/app/theme/dimens.dart';
 import 'package:cmms/app/utils/save_file_web.dart';
 import 'package:cmms/app/view_permit/view_permit_presenter.dart';
 import 'package:cmms/app/widgets/create_permit_dialog.dart';
@@ -33,6 +36,7 @@ import 'package:cmms/domain/models/type_permit_model.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:get/get.dart';
+import 'package:http/http.dart';
 import 'package:intl/intl.dart';
 import 'package:rxdart/subjects.dart';
 import 'package:scrollable_table_view/scrollable_table_view.dart';
@@ -1624,8 +1628,21 @@ class ViewPermitController extends GetxController {
         pen: PdfPen(PdfColor(142, 170, 219)));
     //Generate PDF grid.
     //  final PdfGrid grid = getGrid();
+    var url =
+        "assets/files/logo.png";
+    var response = await get(Uri.parse(url));
+    var data = response.bodyBytes;
+
+//Load image data into PDF bitmap object
+    PdfBitmap image = PdfBitmap(data);
+
+    document.pages
+        .add()
+        .graphics
+        .drawImage(image, const Rect.fromLTWH(0, 0, 100, 100));
     //Draw the header section by creating text element
     final PdfLayoutResult result = drawHeader(page, pageSize);
+    
     //Draw grid
     // drawGrid(page, grid, result);
     //Add invoice footer
@@ -1646,6 +1663,12 @@ class ViewPermitController extends GetxController {
     //   brush: PdfSolidBrush(PdfColor(142, 170, 219)),
     //   bounds: Rect.fromLTWH(0, 0, pageSize.width, 40),
     // ); //Draw string
+    //Draw the image
+
+    // page.graphics.drawImage(
+    //     PdfBitmap(image),
+    //     Rect.fromLTWH(20, 10, 50, 50));
+
     page.graphics.drawString(
         'This permit is valid only when issued Et approved by an authorized issuer.This permit must be obtained before a specified work is started Et it must be closed immediately after completion of the work or at the end of the shift as agreed by ther parties identified on this permit. Refer PTW SOP(hyperlink).',
         PdfStandardFont(PdfFontFamily.helvetica, 10),
@@ -1767,9 +1790,9 @@ class ViewPermitController extends GetxController {
         bounds: Rect.fromLTWH(30, 175, 0, 0),
         format: PdfStringFormat(lineAlignment: PdfVerticalAlignment.middle));
     page.graphics.drawString(
-        "", // '${viewPermitDetailsModel.value?.lstCategory?? ""}',
+        "${listCategory!.isEmpty ? '' : listCategory!.map((element) => element!.equipmentCat)}", // '${viewPermitDetailsModel.value?.lstCategory?? ""}',
         PdfStandardFont(PdfFontFamily.helvetica, 10),
-        bounds: Rect.fromLTWH(100, 175, 0, 0),
+        bounds: Rect.fromLTWH(130, 175, 0, 0),
         format: PdfStringFormat(lineAlignment: PdfVerticalAlignment.middle));
 
     //Draw Rectangle to highlight margin
@@ -1797,41 +1820,925 @@ class ViewPermitController extends GetxController {
 
     final PdfFont contentFont = PdfStandardFont(PdfFontFamily.helvetica, 9);
     //Draw string
-    
+
     //ISolation
     //Draw Rectangle to highlight margin
     page.graphics.drawRectangle(
         pen: PdfPen(PdfColor(142, 170, 219)),
-        bounds: Rect.fromLTWH(25, 165, pageSize.width - 45, 25));
+        bounds: Rect.fromLTWH(25, 240, pageSize.width - 45, 25));
     page.graphics.drawString(
         'Isolation Required: ',
         PdfStandardFont(
           PdfFontFamily.helvetica,
           10,
         ),
-        bounds: Rect.fromLTWH(30, 200, 0, 0),
+        bounds: Rect.fromLTWH(30, 250, 0, 0),
+        format: PdfStringFormat(lineAlignment: PdfVerticalAlignment.middle));
+    page.graphics.drawString('', PdfStandardFont(PdfFontFamily.helvetica, 10),
+        bounds: Rect.fromLTWH(100, 240, 0, 0),
+        format: PdfStringFormat(lineAlignment: PdfVerticalAlignment.middle));
+
+    ///Loto Applied
+
+    page.graphics.drawString(
+        'Loto Applied: ',
+        PdfStandardFont(
+          PdfFontFamily.helvetica,
+          10,
+        ),
+        bounds: Rect.fromLTWH(180, 250, 0, 0),
+        format: PdfStringFormat(lineAlignment: PdfVerticalAlignment.middle));
+    page.graphics.drawString('', PdfStandardFont(PdfFontFamily.helvetica, 10),
+        bounds: Rect.fromLTWH(100, 240, 0, 0),
+        format: PdfStringFormat(lineAlignment: PdfVerticalAlignment.middle));
+
+    /// Isolated Equipments
+    page.graphics.drawString(
+        'Isolated Equipments: ',
+        PdfStandardFont(
+          PdfFontFamily.helvetica,
+          10,
+        ),
+        bounds: Rect.fromLTWH(300, 250, 0, 0),
         format: PdfStringFormat(lineAlignment: PdfVerticalAlignment.middle));
     page.graphics.drawString(
-        '',
+        '${listIsolation!.isEmpty ? '' : listIsolation?.map((element) => element?.isolationAssetsCatName!.split(','))}',
         PdfStandardFont(PdfFontFamily.helvetica, 10),
-        bounds: Rect.fromLTWH(100, 200, 0, 0),
+        bounds: Rect.fromLTWH(400, 250, 0, 0),
         format: PdfStringFormat(lineAlignment: PdfVerticalAlignment.middle));
+
+    /////
+    //ISolation
+    //Draw Rectangle to highlight margin
+    page.graphics.drawRectangle(
+        pen: PdfPen(PdfColor(142, 170, 219)),
+        bounds: Rect.fromLTWH(25, 270, pageSize.width - 45, 55));
+    page.graphics.drawString(
+        'Isolated Category ',
+        PdfStandardFont(
+          PdfFontFamily.helvetica,
+          10,
+        ),
+        bounds: Rect.fromLTWH(30, 280, 0, 0),
+        format: PdfStringFormat(lineAlignment: PdfVerticalAlignment.middle));
+    page.graphics.drawString('', PdfStandardFont(PdfFontFamily.helvetica, 10),
+        bounds: Rect.fromLTWH(100, 280, 0, 0),
+        format: PdfStringFormat(lineAlignment: PdfVerticalAlignment.middle));
+
+    ///Loto Applied
+
+    page.graphics.drawString(
+        'Loto Applied On: ',
+        PdfStandardFont(
+          PdfFontFamily.helvetica,
+          10,
+        ),
+        bounds: Rect.fromLTWH(30, 295, 0, 0),
+        format: PdfStringFormat(lineAlignment: PdfVerticalAlignment.middle));
+    page.graphics.drawString(
+        '${listLoto!.map((element) => element!.asset_name)}',
+        PdfStandardFont(PdfFontFamily.helvetica, 10),
+        bounds: Rect.fromLTWH(30, 310, 0, 0),
+        format: PdfStringFormat(lineAlignment: PdfVerticalAlignment.middle));
+
+    /// Isolated Equipments
+    page.graphics.drawString(
+        'Loto Lock Sr. No.: ',
+        PdfStandardFont(
+          PdfFontFamily.helvetica,
+          10,
+        ),
+        bounds: Rect.fromLTWH(300, 295, 0, 0),
+        format: PdfStringFormat(lineAlignment: PdfVerticalAlignment.middle));
+    page.graphics.drawString('${listLoto!.map((element) => element!.locksrno)}',
+        PdfStandardFont(PdfFontFamily.helvetica, 10),
+        bounds: Rect.fromLTWH(300, 310, 0, 0),
+        format: PdfStringFormat(lineAlignment: PdfVerticalAlignment.middle));
+
+    //Permit Type checklist
+    page.graphics.drawRectangle(
+        pen: PdfPen(PdfColor(142, 170, 219)),
+        bounds: Rect.fromLTWH(25, 330, pageSize.width - 45, 55));
+    page.graphics.drawString(
+        'Permit Type Checklist ',
+        PdfStandardFont(
+          PdfFontFamily.helvetica,
+          10,
+        ),
+        bounds: Rect.fromLTWH(30, 340, 0, 0),
+        format: PdfStringFormat(lineAlignment: PdfVerticalAlignment.middle));
+    page.graphics.drawString(
+        '${safetyMeasureList.map((element) => element.name)}',
+        PdfStandardFont(PdfFontFamily.helvetica, 10),
+        bounds: Rect.fromLTWH(30, 350, 0, 0),
+        format: PdfStringFormat(lineAlignment: PdfVerticalAlignment.middle));
+    // page.graphics.drawString(
+    //     'confine', PdfStandardFont(PdfFontFamily.helvetica, 10),
+    //     bounds: Rect.fromLTWH(30, 360, 0, 0),
+    //     format: PdfStringFormat(lineAlignment: PdfVerticalAlignment.middle));
+
+    ///Toolbox talk
+    //ISolation
+    //Draw Rectangle to highlight margin
+    page.graphics.drawRectangle(
+        pen: PdfPen(PdfColor(142, 170, 219)),
+        bounds: Rect.fromLTWH(25, 390, pageSize.width - 45, 45));
+    page.graphics.drawString(
+        'Tool Box Talk ',
+        PdfStandardFont(
+          PdfFontFamily.helvetica,
+          10,
+        ),
+        bounds: Rect.fromLTWH(30, 400, 0, 0),
+        format: PdfStringFormat(lineAlignment: PdfVerticalAlignment.middle));
+
+    ///Job Type
+
+    page.graphics.drawString(
+        'Job Type: ',
+        PdfStandardFont(
+          PdfFontFamily.helvetica,
+          10,
+        ),
+        bounds: Rect.fromLTWH(30, 415, 0, 0),
+        format: PdfStringFormat(lineAlignment: PdfVerticalAlignment.middle));
+    page.graphics.drawString(
+        '${viewPermitDetailsModel.value?.job_type_name ?? 'No Data Found'}',
+        PdfStandardFont(PdfFontFamily.helvetica, 10),
+        bounds: Rect.fromLTWH(80, 415, 0, 0),
+        format: PdfStringFormat(lineAlignment: PdfVerticalAlignment.middle));
+
+    /// SOP
+    page.graphics.drawString(
+        'SOP: ',
+        PdfStandardFont(
+          PdfFontFamily.helvetica,
+          10,
+        ),
+        bounds: Rect.fromLTWH(200, 415, 0, 0),
+        format: PdfStringFormat(lineAlignment: PdfVerticalAlignment.middle));
+    page.graphics.drawString(
+        '${viewPermitDetailsModel.value?.sop_type_name ?? 'No Data Found'}',
+        PdfStandardFont(PdfFontFamily.helvetica, 10),
+        bounds: Rect.fromLTWH(230, 415, 0, 0),
+        format: PdfStringFormat(lineAlignment: PdfVerticalAlignment.middle));
+
+    ///JSA
+    page.graphics.drawString(
+        'JSA: ',
+        PdfStandardFont(
+          PdfFontFamily.helvetica,
+          10,
+        ),
+        bounds: Rect.fromLTWH(340, 415, 0, 0),
+        format: PdfStringFormat(lineAlignment: PdfVerticalAlignment.middle));
+    page.graphics.drawString('', PdfStandardFont(PdfFontFamily.helvetica, 10),
+        bounds: Rect.fromLTWH(370, 415, 0, 0),
+        format: PdfStringFormat(lineAlignment: PdfVerticalAlignment.middle));
+
+    ///Pre Job Description
+    //ISolation
+    //Draw Rectangle to highlight margin
+    page.graphics.drawRectangle(
+        pen: PdfPen(PdfColor(142, 170, 219)),
+        bounds: Rect.fromLTWH(25, 440, pageSize.width - 45, 150));
+    page.graphics.drawString(
+        'Tool Box Talk (TBT) / PRE-JOB DISCUSSION',
+        PdfStandardFont(
+          PdfFontFamily.helvetica,
+          10,
+        ),
+        bounds: Rect.fromLTWH(30, 450, 0, 0),
+        format: PdfStringFormat(lineAlignment: PdfVerticalAlignment.middle));
+
+    ///Job Type
+
+    page.graphics.drawString(
+        'Conducted At Job-Site By: ',
+        PdfStandardFont(
+          PdfFontFamily.helvetica,
+          10,
+        ),
+        bounds: Rect.fromLTWH(30, 470, 0, 0),
+        format: PdfStringFormat(lineAlignment: PdfVerticalAlignment.middle));
+    page.graphics.drawString('${viewPermitDetailsModel.value?.tbT_Done_By}',
+        PdfStandardFont(PdfFontFamily.helvetica, 10),
+        bounds: Rect.fromLTWH(150, 470, 0, 0),
+        format: PdfStringFormat(lineAlignment: PdfVerticalAlignment.middle));
+
+    /// SOP
+    page.graphics.drawString(
+        'Date & Time: ',
+        PdfStandardFont(
+          PdfFontFamily.helvetica,
+          10,
+        ),
+        bounds: Rect.fromLTWH(230, 470, 0, 0),
+        format: PdfStringFormat(lineAlignment: PdfVerticalAlignment.middle));
+    page.graphics.drawString('${viewPermitDetailsModel.value?.tbT_Done_At}',
+        PdfStandardFont(PdfFontFamily.helvetica, 10),
+        bounds: Rect.fromLTWH(290, 470, 0, 0),
+        format: PdfStringFormat(lineAlignment: PdfVerticalAlignment.middle));
+
+    //Traning attended by
+    page.graphics.drawRectangle(
+        pen: PdfPen(PdfColor(142, 170, 219)),
+        bounds: Rect.fromLTWH(45, 500, pageSize.width - 75, 60));
+    page.graphics.drawString(
+        'TBT Training Attended By',
+        PdfStandardFont(
+          PdfFontFamily.helvetica,
+          10,
+        ),
+        bounds: Rect.fromLTWH(50, 510, 0, 0),
+        format: PdfStringFormat(lineAlignment: PdfVerticalAlignment.middle));
+
+    ///Job Type
+
+    page.graphics.drawString(
+        'Employee Name: ',
+        PdfStandardFont(
+          PdfFontFamily.helvetica,
+          10,
+        ),
+        bounds: Rect.fromLTWH(50, 525, 0, 0),
+        format: PdfStringFormat(lineAlignment: PdfVerticalAlignment.middle));
+    page.graphics.drawString(
+        '${listEmployee!.map((element) => element!.empName)}',
+        PdfStandardFont(PdfFontFamily.helvetica, 10),
+        bounds: Rect.fromLTWH(50, 535, 0, 0),
+        format: PdfStringFormat(lineAlignment: PdfVerticalAlignment.middle));
+
+    /// SOP
+    page.graphics.drawString(
+        'Responsibility: ',
+        PdfStandardFont(
+          PdfFontFamily.helvetica,
+          10,
+        ),
+        bounds: Rect.fromLTWH(230, 525, 0, 0),
+        format: PdfStringFormat(lineAlignment: PdfVerticalAlignment.middle));
+    page.graphics.drawString('${listEmployee!.map((element) => element!.resp)}',
+        PdfStandardFont(PdfFontFamily.helvetica, 10),
+        bounds: Rect.fromLTWH(230, 535, 0, 0),
+        format: PdfStringFormat(lineAlignment: PdfVerticalAlignment.middle));
+
+    ///Extend Condition Lists
+    viewPermitDetailsModel.value?.ptwStatus ==
+                PermitStatusConstants.PTW_EXTEND_REQUESTED //133
+            ||
+            viewPermitDetailsModel.value?.ptwStatus ==
+                PermitStatusConstants.PTW_EXTEND_REQUEST_APPROVE //135
+        ?
+        //ISolation
+        //Draw Rectangle to highlight margin
+        page.graphics.drawRectangle(
+            pen: PdfPen(PdfColor(142, 170, 219)),
+            bounds: Rect.fromLTWH(25, 595, pageSize.width - 45, 110),
+          )
+        : Dimens.box0;
+    viewPermitDetailsModel.value?.ptwStatus ==
+                PermitStatusConstants.PTW_EXTEND_REQUESTED //133
+            ||
+            viewPermitDetailsModel.value?.ptwStatus ==
+                PermitStatusConstants.PTW_EXTEND_REQUEST_APPROVE //135
+        ? page.graphics.drawString(
+            'Extend Condition List',
+            PdfStandardFont(
+              PdfFontFamily.helvetica,
+              10,
+            ),
+            bounds: Rect.fromLTWH(30, 610, 0, 0),
+            format: PdfStringFormat(lineAlignment: PdfVerticalAlignment.middle))
+        : Dimens.box0;
+
+    ///
+
+    viewPermitDetailsModel.value?.ptwStatus ==
+                PermitStatusConstants.PTW_EXTEND_REQUESTED //133
+            ||
+            viewPermitDetailsModel.value?.ptwStatus ==
+                PermitStatusConstants.PTW_EXTEND_REQUEST_APPROVE //135
+        ? page.graphics.drawString(
+            '${listExtendCondition!.map((element) => element!.name)}',
+            PdfStandardFont(PdfFontFamily.helvetica, 10),
+            bounds: Rect.fromLTWH(30, 640, pageSize.width - 50, 0),
+            format: PdfStringFormat(lineAlignment: PdfVerticalAlignment.middle))
+        : Dimens.box0;
+
+    ///
+    viewPermitDetailsModel.value?.ptwStatus ==
+                PermitStatusConstants.PTW_EXTEND_REQUESTED //133
+            ||
+            viewPermitDetailsModel.value?.ptwStatus ==
+                PermitStatusConstants.PTW_EXTEND_REQUEST_APPROVE //135
+        ? page.graphics.drawString(
+            'Attached Files: ',
+            PdfStandardFont(
+              PdfFontFamily.helvetica,
+              10,
+            ),
+            bounds: Rect.fromLTWH(30, 670, 0, 0),
+            format: PdfStringFormat(lineAlignment: PdfVerticalAlignment.middle))
+        : Dimens.box0;
+
+    ////
+    viewPermitDetailsModel.value?.ptwStatus ==
+                PermitStatusConstants.PTW_EXTEND_REQUESTED //133
+            ||
+            viewPermitDetailsModel.value?.ptwStatus ==
+                PermitStatusConstants.PTW_EXTEND_REQUEST_APPROVE //135
+        ? page.graphics.drawString(
+            'anaszia.jpeg', PdfStandardFont(PdfFontFamily.helvetica, 10),
+            bounds: Rect.fromLTWH(30, 682, 0, 0),
+            format: PdfStringFormat(lineAlignment: PdfVerticalAlignment.middle))
+        : Dimens.box0;
+
+    ////Comment/remark
+    viewPermitDetailsModel.value?.ptwStatus ==
+                PermitStatusConstants.PTW_EXTEND_REQUESTED //133
+            ||
+            viewPermitDetailsModel.value?.ptwStatus ==
+                PermitStatusConstants.PTW_EXTEND_REQUEST_APPROVE //135
+        ? page.graphics.drawString(
+            'Comment/Remark: ',
+            PdfStandardFont(
+              PdfFontFamily.helvetica,
+              10,
+            ),
+            bounds: Rect.fromLTWH(140, 670, 0, 0),
+            format: PdfStringFormat(lineAlignment: PdfVerticalAlignment.middle))
+        : Dimens.box0;
+
+    ////
+    viewPermitDetailsModel.value?.ptwStatus ==
+                PermitStatusConstants.PTW_EXTEND_REQUESTED //133
+            ||
+            viewPermitDetailsModel.value?.ptwStatus ==
+                PermitStatusConstants.PTW_EXTEND_REQUEST_APPROVE //135
+        ? page.graphics.drawString(
+            'Extended Conditions', PdfStandardFont(PdfFontFamily.helvetica, 10),
+            bounds: Rect.fromLTWH(140, 682, 0, 0),
+            format: PdfStringFormat(lineAlignment: PdfVerticalAlignment.middle))
+        : Dimens.box0;
+
+    //Approver Name
+    ////Comment/remark
+    viewPermitDetailsModel.value?.ptwStatus ==
+                PermitStatusConstants.PTW_EXTEND_REQUESTED //133
+            ||
+            viewPermitDetailsModel.value?.ptwStatus ==
+                PermitStatusConstants.PTW_EXTEND_REQUEST_APPROVE //135
+        ? page.graphics.drawString(
+            'Approver Name: ',
+            PdfStandardFont(
+              PdfFontFamily.helvetica,
+              10,
+            ),
+            bounds: Rect.fromLTWH(260, 670, 0, 0),
+            format: PdfStringFormat(lineAlignment: PdfVerticalAlignment.middle))
+        : Dimens.box0;
+
+    ////
+    viewPermitDetailsModel.value?.ptwStatus ==
+                PermitStatusConstants.PTW_EXTEND_REQUESTED //133
+            ||
+            viewPermitDetailsModel.value?.ptwStatus ==
+                PermitStatusConstants.PTW_EXTEND_REQUEST_APPROVE //135
+        ? page.graphics.drawString(
+            '${viewPermitDetailsModel.value?.requestedByName}',
+            PdfStandardFont(PdfFontFamily.helvetica, 10),
+            bounds: Rect.fromLTWH(260, 682, 0, 0),
+            format: PdfStringFormat(lineAlignment: PdfVerticalAlignment.middle))
+        : Dimens.box0;
+
+    //Date Time
+    ////Comment/remark
+    viewPermitDetailsModel.value?.ptwStatus ==
+                PermitStatusConstants.PTW_EXTEND_REQUESTED //133
+            ||
+            viewPermitDetailsModel.value?.ptwStatus ==
+                PermitStatusConstants.PTW_EXTEND_REQUEST_APPROVE //135
+        ? page.graphics.drawString(
+            'Date & Time: ',
+            PdfStandardFont(
+              PdfFontFamily.helvetica,
+              10,
+            ),
+            bounds: Rect.fromLTWH(360, 670, 0, 0),
+            format: PdfStringFormat(lineAlignment: PdfVerticalAlignment.middle))
+        : Dimens.box0;
+
+    ////
+    viewPermitDetailsModel.value?.ptwStatus ==
+                PermitStatusConstants.PTW_EXTEND_REQUESTED //133
+            ||
+            viewPermitDetailsModel.value?.ptwStatus ==
+                PermitStatusConstants.PTW_EXTEND_REQUEST_APPROVE //135
+        ? page.graphics.drawString(
+            '${viewPermitDetailsModel.value?.start_datetime}',
+            PdfStandardFont(PdfFontFamily.helvetica, 10),
+            bounds: Rect.fromLTWH(360, 682, 0, 0),
+            format: PdfStringFormat(lineAlignment: PdfVerticalAlignment.middle))
+        : Dimens.box0;
+
+    ///Cancel Condition Lists
+    viewPermitDetailsModel.value?.ptwStatus ==
+                PermitStatusConstants.PTW_CANCELLED_BY_APPROVER //129
+            ||
+            viewPermitDetailsModel.value?.ptwStatus ==
+                PermitStatusConstants.PTW_CANCEL_REQUESTED //130
+        ?
+        //ISolation
+        //Draw Rectangle to highlight margin
+        page.graphics.drawRectangle(
+            pen: PdfPen(PdfColor(142, 170, 219)),
+            bounds: Rect.fromLTWH(25, 595, pageSize.width - 45, 110),
+          )
+        : Dimens.box0;
+    viewPermitDetailsModel.value?.ptwStatus ==
+                PermitStatusConstants.PTW_CANCELLED_BY_APPROVER //129
+            ||
+            viewPermitDetailsModel.value?.ptwStatus ==
+                PermitStatusConstants.PTW_CANCEL_REQUESTED //130
+        ? page.graphics.drawString(
+            'Cancel Condition List',
+            PdfStandardFont(
+              PdfFontFamily.helvetica,
+              10,
+            ),
+            bounds: Rect.fromLTWH(30, 610, 0, 0),
+            format: PdfStringFormat(lineAlignment: PdfVerticalAlignment.middle))
+        : Dimens.box0;
+
+    ///
+
+    viewPermitDetailsModel.value?.ptwStatus ==
+                PermitStatusConstants.PTW_CANCELLED_BY_APPROVER //129
+            ||
+            viewPermitDetailsModel.value?.ptwStatus ==
+                PermitStatusConstants.PTW_CANCEL_REQUESTED //130
+        ? page.graphics.drawString(
+            '${listCancelCondition!.map((element) => element!.name)}',
+            PdfStandardFont(PdfFontFamily.helvetica, 10),
+            bounds: Rect.fromLTWH(30, 640, pageSize.width - 50, 0),
+            format: PdfStringFormat(lineAlignment: PdfVerticalAlignment.middle))
+        : Dimens.box0;
+
+    ///
+
+    ///
+    viewPermitDetailsModel.value?.ptwStatus ==
+                PermitStatusConstants.PTW_CANCELLED_BY_APPROVER //129
+            ||
+            viewPermitDetailsModel.value?.ptwStatus ==
+                PermitStatusConstants.PTW_CANCEL_REQUESTED //130
+        ? page.graphics.drawString(
+            'Attached Files: ',
+            PdfStandardFont(
+              PdfFontFamily.helvetica,
+              10,
+            ),
+            bounds: Rect.fromLTWH(30, 675, 0, 0),
+            format: PdfStringFormat(lineAlignment: PdfVerticalAlignment.middle))
+        : Dimens.box0;
+
+    ////
+    viewPermitDetailsModel.value?.ptwStatus ==
+                PermitStatusConstants.PTW_CANCELLED_BY_APPROVER //129
+            ||
+            viewPermitDetailsModel.value?.ptwStatus ==
+                PermitStatusConstants.PTW_CANCEL_REQUESTED //130
+        ? page.graphics.drawString(
+            'anaszia.jpeg', PdfStandardFont(PdfFontFamily.helvetica, 10),
+            bounds: Rect.fromLTWH(30, 687, 0, 0),
+            format: PdfStringFormat(lineAlignment: PdfVerticalAlignment.middle))
+        : Dimens.box0;
+
+    ////Comment/remark
+    viewPermitDetailsModel.value?.ptwStatus ==
+                PermitStatusConstants.PTW_CANCELLED_BY_APPROVER //129
+            ||
+            viewPermitDetailsModel.value?.ptwStatus ==
+                PermitStatusConstants.PTW_CANCEL_REQUESTED //130
+        ? page.graphics.drawString(
+            'Comment/Remark: ',
+            PdfStandardFont(
+              PdfFontFamily.helvetica,
+              10,
+            ),
+            bounds: Rect.fromLTWH(140, 675, 0, 0),
+            format: PdfStringFormat(lineAlignment: PdfVerticalAlignment.middle))
+        : Dimens.box0;
+
+    ////
+    viewPermitDetailsModel.value?.ptwStatus ==
+                PermitStatusConstants.PTW_CANCELLED_BY_APPROVER //129
+            ||
+            viewPermitDetailsModel.value?.ptwStatus ==
+                PermitStatusConstants.PTW_CANCEL_REQUESTED //130
+        ? page.graphics.drawString(
+            'Cancel Conditions', PdfStandardFont(PdfFontFamily.helvetica, 10),
+            bounds: Rect.fromLTWH(140, 687, 0, 0),
+            format: PdfStringFormat(lineAlignment: PdfVerticalAlignment.middle))
+        : Dimens.box0;
+
+    //Approver Name
+    ////Comment/remark
+    viewPermitDetailsModel.value?.ptwStatus ==
+                PermitStatusConstants.PTW_CANCELLED_BY_APPROVER //129
+            ||
+            viewPermitDetailsModel.value?.ptwStatus ==
+                PermitStatusConstants.PTW_CANCEL_REQUESTED //130
+        ? page.graphics.drawString(
+            'Approver Name: ',
+            PdfStandardFont(
+              PdfFontFamily.helvetica,
+              10,
+            ),
+            bounds: Rect.fromLTWH(260, 675, 0, 0),
+            format: PdfStringFormat(lineAlignment: PdfVerticalAlignment.middle))
+        : Dimens.box0;
+
+    ////
+    viewPermitDetailsModel.value?.ptwStatus ==
+                PermitStatusConstants.PTW_CANCELLED_BY_APPROVER //129
+            ||
+            viewPermitDetailsModel.value?.ptwStatus ==
+                PermitStatusConstants.PTW_CANCEL_REQUESTED //130
+        ? page.graphics.drawString(
+            '${viewPermitDetailsModel.value?.requestedByName}',
+            PdfStandardFont(PdfFontFamily.helvetica, 10),
+            bounds: Rect.fromLTWH(260, 687, 0, 0),
+            format: PdfStringFormat(lineAlignment: PdfVerticalAlignment.middle))
+        : Dimens.box0;
+
+    //Date Time
+    ////Comment/remark
+    viewPermitDetailsModel.value?.ptwStatus ==
+                PermitStatusConstants.PTW_CANCELLED_BY_APPROVER //129
+            ||
+            viewPermitDetailsModel.value?.ptwStatus ==
+                PermitStatusConstants.PTW_CANCEL_REQUESTED //130
+        ? page.graphics.drawString(
+            'Date & Time: ',
+            PdfStandardFont(
+              PdfFontFamily.helvetica,
+              10,
+            ),
+            bounds: Rect.fromLTWH(360, 675, 0, 0),
+            format: PdfStringFormat(lineAlignment: PdfVerticalAlignment.middle))
+        : Dimens.box0;
+
+    ////
+    viewPermitDetailsModel.value?.ptwStatus ==
+                PermitStatusConstants.PTW_CANCELLED_BY_APPROVER //129
+            ||
+            viewPermitDetailsModel.value?.ptwStatus ==
+                PermitStatusConstants.PTW_CANCEL_REQUESTED //130
+        ? page.graphics.drawString(
+            '${viewPermitDetailsModel.value?.start_datetime}',
+            PdfStandardFont(PdfFontFamily.helvetica, 10),
+            bounds: Rect.fromLTWH(360, 687, 0, 0),
+            format: PdfStringFormat(lineAlignment: PdfVerticalAlignment.middle))
+        : Dimens.box0;
+
+    ///cancel condition list end here
+
+    ///CLose Condition Lists
+    viewPermitDetailsModel.value?.ptwStatus ==
+            PermitStatusConstants.PTW_CLOSED //126
+        ?
+        //ISolation
+        //Draw Rectangle to highlight margin
+        page.graphics.drawRectangle(
+            pen: PdfPen(PdfColor(142, 170, 219)),
+            bounds: Rect.fromLTWH(25, 595, pageSize.width - 45, 110),
+          )
+        : Dimens.box0;
+    viewPermitDetailsModel.value?.ptwStatus ==
+            PermitStatusConstants.PTW_CLOSED //126
+        ? page.graphics.drawString(
+            'Close Condition List',
+            PdfStandardFont(
+              PdfFontFamily.helvetica,
+              10,
+            ),
+            bounds: Rect.fromLTWH(30, 610, 0, 0),
+            format: PdfStringFormat(lineAlignment: PdfVerticalAlignment.middle))
+        : Dimens.box0;
+
+    ///
+
+    viewPermitDetailsModel.value?.ptwStatus ==
+            PermitStatusConstants.PTW_CLOSED //126
+        ? page.graphics.drawString(
+            '${listCloseCondition!.map((element) => element!.name)}',
+            PdfStandardFont(PdfFontFamily.helvetica, 10),
+            bounds: Rect.fromLTWH(30, 640, pageSize.width - 50, 0),
+            format: PdfStringFormat(lineAlignment: PdfVerticalAlignment.middle))
+        : Dimens.box0;
+
+    ///
+
+    ///
+    viewPermitDetailsModel.value?.ptwStatus ==
+            PermitStatusConstants.PTW_CLOSED //126
+        ? page.graphics.drawString(
+            'Attached Files: ',
+            PdfStandardFont(
+              PdfFontFamily.helvetica,
+              10,
+            ),
+            bounds: Rect.fromLTWH(30, 670, 0, 0),
+            format: PdfStringFormat(lineAlignment: PdfVerticalAlignment.middle))
+        : Dimens.box0;
+
+    ////
+    viewPermitDetailsModel.value?.ptwStatus ==
+            PermitStatusConstants.PTW_CLOSED //126
+        ? page.graphics.drawString(
+            'anaszia.jpeg', PdfStandardFont(PdfFontFamily.helvetica, 10),
+            bounds: Rect.fromLTWH(30, 682, 0, 0),
+            format: PdfStringFormat(lineAlignment: PdfVerticalAlignment.middle))
+        : Dimens.box0;
+
+    ////Comment/remark
+    viewPermitDetailsModel.value?.ptwStatus ==
+            PermitStatusConstants.PTW_CLOSED //126
+        ? page.graphics.drawString(
+            'Comment/Remark: ',
+            PdfStandardFont(
+              PdfFontFamily.helvetica,
+              10,
+            ),
+            bounds: Rect.fromLTWH(140, 670, 0, 0),
+            format: PdfStringFormat(lineAlignment: PdfVerticalAlignment.middle))
+        : Dimens.box0;
+
+    ////
+    viewPermitDetailsModel.value?.ptwStatus ==
+            PermitStatusConstants.PTW_CLOSED //126
+        ? page.graphics.drawString(
+            'Close Conditions', PdfStandardFont(PdfFontFamily.helvetica, 10),
+            bounds: Rect.fromLTWH(140, 682, 0, 0),
+            format: PdfStringFormat(lineAlignment: PdfVerticalAlignment.middle))
+        : Dimens.box0;
+
+    //Approver Name
+    ////Comment/remark
+    viewPermitDetailsModel.value?.ptwStatus ==
+            PermitStatusConstants.PTW_CLOSED //126
+        ? page.graphics.drawString(
+            'Approver Name: ',
+            PdfStandardFont(
+              PdfFontFamily.helvetica,
+              10,
+            ),
+            bounds: Rect.fromLTWH(260, 670, 0, 0),
+            format: PdfStringFormat(lineAlignment: PdfVerticalAlignment.middle))
+        : Dimens.box0;
+
+    ////
+    viewPermitDetailsModel.value?.ptwStatus ==
+            PermitStatusConstants.PTW_CLOSED //126
+        ? page.graphics.drawString(
+            '${viewPermitDetailsModel.value?.requestedByName}',
+            PdfStandardFont(PdfFontFamily.helvetica, 10),
+            bounds: Rect.fromLTWH(260, 682, 0, 0),
+            format: PdfStringFormat(lineAlignment: PdfVerticalAlignment.middle))
+        : Dimens.box0;
+
+    //Date Time
+    ////Comment/remark
+    viewPermitDetailsModel.value?.ptwStatus ==
+            PermitStatusConstants.PTW_CLOSED //126
+        ? page.graphics.drawString(
+            'Date & Time: ',
+            PdfStandardFont(
+              PdfFontFamily.helvetica,
+              10,
+            ),
+            bounds: Rect.fromLTWH(360, 670, 0, 0),
+            format: PdfStringFormat(lineAlignment: PdfVerticalAlignment.middle))
+        : Dimens.box0;
+
+    ////
+    viewPermitDetailsModel.value?.ptwStatus ==
+            PermitStatusConstants.PTW_CLOSED //126
+        ? page.graphics.drawString(
+            '${viewPermitDetailsModel.value?.start_datetime}',
+            PdfStandardFont(PdfFontFamily.helvetica, 10),
+            bounds: Rect.fromLTWH(360, 682, 0, 0),
+            format: PdfStringFormat(lineAlignment: PdfVerticalAlignment.middle))
+        : Dimens.box0;
+
+    ///close condition list end here
 
     final String invoiceNumber = 'Signature:      ';
     final Size contentSize = contentFont.measureString(invoiceNumber);
     // ignore: leading_newlines_in_multiline_strings
+
     String address =
         'Requested By: ${viewPermitDetailsModel.value?.requestedByName ?? ""}';
 
+    String date = 'Date / Time: ${viewPermitDetailsModel.value?.issue_at}';
+
+    // viewPermitDetailsModel
+    //                                                           .value?.ptwStatus ==
+    //                                                       PermitStatusConstants
+    //                                                           .PTW_APPROVE //125
+    //                                                   ||
+    //                                                   viewPermitDetailsModel
+    //                                                           .value
+    //                                                           ?.ptwStatus ==
+    //                                                       PermitStatusConstants
+    //                                                           .PTW_CLOSED //126
+    //                                                   ||
+    //                                                  viewPermitDetailsModel
+    //                                                           .value
+    //                                                           ?.ptwStatus ==
+    //                                                       PermitStatusConstants
+    //                                                           .PTW_CANCELLED_BY_APPROVER //129
+    String approvedBy =
+        'Approved By: ${viewPermitDetailsModel.value?.approvedByName ?? ""}';
+
+    String dateApproved =
+        'Date / Time: ${viewPermitDetailsModel.value?.approve_at}';
+
+    final String approvedSignature = 'Signature:      ';
+
+    ///Cancelled By
+    String datecancelledBy =
+        'Date / Time: ${viewPermitDetailsModel.value?.cancel_at}';
+
+    String cancelledBy =
+        'Cancelled By: ${viewPermitDetailsModel.value?.cancelRequestByName ?? ""}';
+
+    final String cancelledSignature = 'Signature:      ';
+
+    ///Closed By
+    String dateClosedBy =
+        'Date / Time: ${viewPermitDetailsModel.value?.close_at}';
+
+    String closedBy =
+        'Closed By: ${viewPermitDetailsModel.value?.closedByName ?? ""}';
+
+    final String closedSignature = 'Signature:      ';
+
     PdfTextElement(text: invoiceNumber, font: contentFont).draw(
         page: page,
-        bounds: Rect.fromLTWH(pageSize.width - (contentSize.width + 30), 400,
+        bounds: Rect.fromLTWH(pageSize.width - (contentSize.width + 30), 710,
             contentSize.width - 100, pageSize.height - 120));
+
+    PdfTextElement(text: date, font: contentFont).draw(
+        page: page,
+        bounds: Rect.fromLTWH(pageSize.width - (contentSize.width + 230), 710,
+            contentSize.width - 100, pageSize.height - 120));
+
+    PdfTextElement(
+            text: viewPermitDetailsModel.value?.ptwStatus ==
+                        PermitStatusConstants.PTW_APPROVE //125
+                    ||
+                    viewPermitDetailsModel.value?.ptwStatus ==
+                        PermitStatusConstants.PTW_CLOSED //126
+                    ||
+                    viewPermitDetailsModel.value?.ptwStatus ==
+                        PermitStatusConstants.PTW_CANCELLED_BY_APPROVER //129,
+                ? approvedBy
+                : '',
+            font: contentFont)
+        .draw(
+            page: page,
+            bounds: Rect.fromLTWH(
+                35, 720, contentSize.width - 100, pageSize.height - 120));
+
+    PdfTextElement(
+            text: viewPermitDetailsModel.value?.ptwStatus ==
+                        PermitStatusConstants.PTW_APPROVE //125
+                    ||
+                    viewPermitDetailsModel.value?.ptwStatus ==
+                        PermitStatusConstants.PTW_CLOSED //126
+                    ||
+                    viewPermitDetailsModel.value?.ptwStatus ==
+                        PermitStatusConstants.PTW_CANCELLED_BY_APPROVER //129,
+                ? dateApproved
+                : '',
+            font: contentFont)
+        .draw(
+            page: page,
+            bounds: Rect.fromLTWH(pageSize.width - (contentSize.width + 230),
+                720, contentSize.width - 100, pageSize.height - 120));
+
+    PdfTextElement(
+            text: viewPermitDetailsModel.value?.ptwStatus ==
+                        PermitStatusConstants.PTW_APPROVE //125
+                    ||
+                    viewPermitDetailsModel.value?.ptwStatus ==
+                        PermitStatusConstants.PTW_CLOSED //126
+                    ||
+                    viewPermitDetailsModel.value?.ptwStatus ==
+                        PermitStatusConstants.PTW_CANCELLED_BY_APPROVER //129,
+                ? approvedSignature
+                : '',
+            font: contentFont)
+        .draw(
+            page: page,
+            bounds: Rect.fromLTWH(
+                445,
+                720,
+                pageSize.width - (contentSize.width + 30),
+                pageSize.height - 120))!;
+
+    ////Cancelled by
+    PdfTextElement(
+            text: viewPermitDetailsModel.value?.ptwStatus ==
+                        PermitStatusConstants.PTW_CANCELLED_BY_APPROVER //129
+                    ||
+                    viewPermitDetailsModel.value?.ptwStatus ==
+                        PermitStatusConstants.PTW_CLOSED //126,
+                ? cancelledBy
+                : '',
+            font: contentFont)
+        .draw(
+            page: page,
+            bounds: Rect.fromLTWH(
+                33, 730, contentSize.width - 100, pageSize.height - 120));
+
+    PdfTextElement(
+            text: viewPermitDetailsModel.value?.ptwStatus ==
+                        PermitStatusConstants.PTW_CANCELLED_BY_APPROVER //129
+                    ||
+                    viewPermitDetailsModel.value?.ptwStatus ==
+                        PermitStatusConstants.PTW_CLOSED //126,
+                ? datecancelledBy
+                : '',
+            font: contentFont)
+        .draw(
+            page: page,
+            bounds: Rect.fromLTWH(pageSize.width - (contentSize.width + 230),
+                730, contentSize.width - 100, pageSize.height - 120));
+
+    PdfTextElement(
+            text: viewPermitDetailsModel.value?.ptwStatus ==
+                        PermitStatusConstants.PTW_CANCELLED_BY_APPROVER //129
+                    ||
+                    viewPermitDetailsModel.value?.ptwStatus ==
+                        PermitStatusConstants.PTW_CLOSED //126,
+                ? cancelledSignature
+                : '',
+            font: contentFont)
+        .draw(
+            page: page,
+            bounds: Rect.fromLTWH(
+                445,
+                730,
+                pageSize.width - (contentSize.width + 30),
+                pageSize.height - 120))!;
+
+    ////Closed by
+    PdfTextElement(
+            text: viewPermitDetailsModel.value?.ptwStatus ==
+                    PermitStatusConstants.PTW_CLOSED //126,
+                ? closedBy
+                : '',
+            font: contentFont)
+        .draw(
+            page: page,
+            bounds: Rect.fromLTWH(
+                45, 740, contentSize.width - 100, pageSize.height - 120));
+
+    PdfTextElement(
+            text: viewPermitDetailsModel.value?.ptwStatus ==
+                    PermitStatusConstants.PTW_CLOSED //126,
+                ? dateClosedBy
+                : '',
+            font: contentFont)
+        .draw(
+            page: page,
+            bounds: Rect.fromLTWH(pageSize.width - (contentSize.width + 230),
+                740, contentSize.width - 100, pageSize.height - 120));
+
+    PdfTextElement(
+            text: viewPermitDetailsModel.value?.ptwStatus ==
+                    PermitStatusConstants.PTW_CLOSED //126,
+                ? closedSignature
+                : '',
+            font: contentFont)
+        .draw(
+            page: page,
+            bounds: Rect.fromLTWH(
+                445,
+                740,
+                pageSize.width - (contentSize.width + 30),
+                pageSize.height - 120))!;
 
     return PdfTextElement(text: address, font: contentFont).draw(
         page: page,
-        bounds: Rect.fromLTWH(30, 400,
+        bounds: Rect.fromLTWH(30, 710,
             pageSize.width - (contentSize.width + 30), pageSize.height - 120))!;
+
+    /////1
 
     //Draw rectangle
     // page.graphics.drawRectangle(
