@@ -1638,7 +1638,7 @@ class ViewPermitController extends GetxController {
     document.pages
         .add()
         .graphics
-        .drawImage(image, const Rect.fromLTWH(0, 0, 100, 100));
+        .drawImage(image, const Rect.fromLTWH(0, 0, 100, 80));
     //Draw the header section by creating text element
     final PdfLayoutResult result = drawHeader(page, pageSize);
 
