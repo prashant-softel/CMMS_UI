@@ -1628,8 +1628,7 @@ class ViewPermitController extends GetxController {
         pen: PdfPen(PdfColor(142, 170, 219)));
     //Generate PDF grid.
     //  final PdfGrid grid = getGrid();
-    var url =
-        "assets/files/logo.png";
+    var url = "assets/files/logo.png";
     var response = await get(Uri.parse(url));
     var data = response.bodyBytes;
 
@@ -1642,7 +1641,7 @@ class ViewPermitController extends GetxController {
         .drawImage(image, const Rect.fromLTWH(0, 0, 100, 100));
     //Draw the header section by creating text element
     final PdfLayoutResult result = drawHeader(page, pageSize);
-    
+
     //Draw grid
     // drawGrid(page, grid, result);
     //Add invoice footer
