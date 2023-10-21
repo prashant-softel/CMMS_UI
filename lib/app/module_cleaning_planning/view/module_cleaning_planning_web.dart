@@ -250,9 +250,16 @@ class _ModuleCleaningPlanningWebState extends State<ModuleCleaningPlanningWeb> {
                                             child: GestureDetector(
                                               onTap: () {
                                                 // controller.schedules.
+                                                controller.dayCount(
+                                                    dayCount: int.tryParse(
+                                                            '${controller.durationInDayCtrlr.text}') ??
+                                                        0);
 
-                                                Get.dialog(
-                                                    SetEquipmentDialog());
+                                                Get.dialog(SetEquipmentDialog(
+                                                  estimateDurationDays:
+                                                      int.tryParse(
+                                                          '${controller.durationInDayCtrlr.text}'),
+                                                ));
                                               },
                                               // color: ColorValues.appDarkBlueColor,
                                               // onTap: () {
@@ -412,8 +419,19 @@ class _ModuleCleaningPlanningWebState extends State<ModuleCleaningPlanningWeb> {
 
                                                           // print(
                                                           //     'MC plan Detail:${controller.schedules.toJson()}');
+
+                                                          controller.dayCount(
+                                                              dayCount:
+                                                                  int.tryParse(
+                                                                          '${controller.durationInDayCtrlr.text}') ??
+                                                                      0);
+
                                                           Get.dialog(
-                                                              SetEquipmentDialog());
+                                                              SetEquipmentDialog(
+                                                            estimateDurationDays:
+                                                                int.tryParse(
+                                                                    '${controller.durationInDayCtrlr.text}'),
+                                                          ));
                                                         },
                                                         // color: ColorValues.appDarkBlueColor,
                                                         // onTap: () {
