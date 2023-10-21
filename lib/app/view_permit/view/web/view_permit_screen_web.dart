@@ -1770,10 +1770,6 @@ class ViewPermitWebScreen extends GetView<ViewPermitController> {
                                               ),
                                               Dimens.boxHeight5,
 
-                                              // Dimens.boxHeight5,
-
-                                              Dimens.boxHeight5,
-
                                               //  SizedBox(
                                               //     width: 150,
                                               //     child: Text(
@@ -1790,38 +1786,35 @@ class ViewPermitWebScreen extends GetView<ViewPermitController> {
 
                                               controller.permitId != null
                                                   ? SizedBox(
-                                                      width: 100,
+                                                      // width: 100,
                                                       child: Wrap(
-                                                        alignment:
-                                                            WrapAlignment.start,
-                                                        spacing: 100,
-                                                        children: []
-                                                          ..addAll(controller
-                                                              .listCategory!
-                                                              .map(
-                                                                  (element) =>
-                                                                      Row(
-                                                                        mainAxisSize:
-                                                                            MainAxisSize.min,
-                                                                        mainAxisAlignment:
-                                                                            MainAxisAlignment.start,
-                                                                        crossAxisAlignment:
-                                                                            CrossAxisAlignment.start,
-                                                                        children: [
-                                                                          SizedBox(
-                                                                            height:
-                                                                                20,
-                                                                            child:
-                                                                                Text(
-                                                                              "${element?.equipmentCat}",
-                                                                              style: Styles.blue17,
-                                                                            ),
-                                                                          )
-                                                                        ],
-                                                                      ))),
+                                                        // alignment:
+                                                        //     WrapAlignment.start,
+                                                        // spacing: 100,
+                                                        children: []..addAll(
+                                                            controller
+                                                                .listCategory!
+                                                                .map(
+                                                                    (element) =>
+                                                                        Row(
+                                                                          // mainAxisSize:
+                                                                          //     MainAxisSize.min,
+                                                                          // mainAxisAlignment:
+                                                                          //     MainAxisAlignment.start,
+                                                                          // crossAxisAlignment:
+                                                                          //     CrossAxisAlignment.start,
+                                                                          children: [
+                                                                            SizedBox(
+                                                                              child: Text(
+                                                                                "${element?.equipmentCat}",
+                                                                                style: Styles.blue17,
+                                                                              ),
+                                                                            )
+                                                                          ],
+                                                                        ))),
                                                       ),
                                                     )
-                                                  : Container(),
+                                                  : Dimens.box0,
                                             ],
                                           ),
                                           Spacer(),
