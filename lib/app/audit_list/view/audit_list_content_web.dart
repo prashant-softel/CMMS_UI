@@ -130,7 +130,7 @@ class _PurchaseGoodsorderListWebState extends State<AuditListContentWeb> {
                                     icon: Icons.add,
                                     label: "Add New",
                                     onPressed: () {
-                                      Get.offNamed(Routes.viewAudit);
+                                      Get.offNamed(Routes.createAudit);
                                     },
                                     color: ColorValues.addNewColor,
                                   ),
