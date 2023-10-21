@@ -5,6 +5,7 @@ import 'package:cmms/app/widgets/custom_elevated_button.dart';
 import 'package:cmms/domain/models/checkpoint_list_model.dart';
 import 'package:cmms/domain/models/preventive_checklist_model.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:get/get.dart';
 import 'package:scrollable_table_view/scrollable_table_view.dart';
 import '../../domain/models/create_checkpoint_model.dart';
@@ -26,7 +27,7 @@ class PreventiveCheckPointController extends GetxController {
   Rx<String> selectedchecklist = ''.obs;
   Rx<bool> isSelectedchecklist = true.obs;
   int facilityId = 0;
-  int type = 1;
+  Rx<int> type = 0.obs;
   var checkPointCtrlr = TextEditingController();
   var minRangeCtrlr = TextEditingController();
   var maxRangeCtrlr = TextEditingController();
@@ -49,17 +50,45 @@ class PreventiveCheckPointController extends GetxController {
 
   @override
   void onInit() async {
-    facilityIdStreamSubscription = homecontroller.facilityId$.listen((event) {
-      facilityId = event;
+    try {
+      await setType();
 
-      Future.delayed(Duration(seconds: 1), () {
-        getPreventiveCheckList(
-          facilityId,
-          type,
+      if (type.value != 0) {
+        facilityIdStreamSubscription =
+            homecontroller.facilityId$.listen((event) {
+          facilityId = event;
+          Future.delayed(Duration(seconds: 2), () {
+            getPreventiveCheckList(facilityId, type.value);
+          });
+        });
+      }
+      super.onInit();
+    } catch (e) {
+      print(e);
+    }
+  }
+
+  Future<void> setType() async {
+    try {
+      final _flutterSecureStorage = const FlutterSecureStorage();
+      // Read jobId
+      String? _type = await _flutterSecureStorage.read(key: "type");
+      if (_type == null || _type == '' || _type == "null") {
+        var dataFromPreviousScreen = Get.arguments;
+
+        type.value = dataFromPreviousScreen['type'];
+        await _flutterSecureStorage.write(
+          key: "type",
+          value: type.value == null ? '' : type.value.toString(),
         );
-      });
-    });
-    super.onInit();
+      } else {
+        type.value = int.tryParse(_type) ?? 0;
+      }
+      //  await _flutterSecureStorage.delete(key: "type");
+    } catch (e) {
+      print(e.toString() + 'type');
+      //  Utility.showDialog(e.toString() + 'type');
+    }
   }
 
   var checkpointType = ''.obs;

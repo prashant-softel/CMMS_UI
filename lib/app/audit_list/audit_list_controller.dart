@@ -103,7 +103,7 @@ class AuditListScreenController extends GetxController {
     moduleCleaningListPlan.value = <ModuleCleaningListPlanModel>[];
     final _moduleCleaningListPlan =
         await auditListPresenter.getModuleCleaningListPlan(
-      isLoading: true,
+      isLoading: false,
       facility_id: facilityId,
     );
     if (_moduleCleaningListPlan != null) {

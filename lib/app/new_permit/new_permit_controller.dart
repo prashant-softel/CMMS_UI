@@ -136,7 +136,6 @@ class NewPermitController extends GetxController {
   //Permit History
   RxList<HistoryModel?>? historyList = <HistoryModel?>[].obs;
 
-
   // create permit
   Rx<bool> isFormInvalid = false.obs;
   int selectedFacility_id = 0;
@@ -171,8 +170,6 @@ class NewPermitController extends GetxController {
 //For date Time
   var dateTimeCtrlr = TextEditingController();
   Rx<DateTime> selectedDateTime = DateTime.now().obs;
-
-
 
   var permitDescriptionCtrlr = TextEditingController();
   var titleTextCtrlr = TextEditingController();
@@ -253,9 +250,9 @@ class NewPermitController extends GetxController {
 
   //
   RxList<EmployeeListModel?> employeeNameList = <EmployeeListModel>[].obs;
-   Rx<bool> isemployeeNameListSelected = true.obs;
+  Rx<bool> isemployeeNameListSelected = true.obs;
   Rx<String> selectedEmployeeNamesList = ''.obs;
-  
+
   RxList<EmployeeListModel?> filteredEmployeeNameList =
       <EmployeeListModel>[].obs;
 
@@ -506,10 +503,10 @@ class NewPermitController extends GetxController {
       listEmployee?.value = newPermitDetailsModel.value?.employee_list ?? [];
       // safetyList?.value =
       //     newPermitDetailsModel.value?.safety_question_list ?? [];
-      if(selectedPermitTypeId != 0){
+      if (selectedPermitTypeId != 0) {
         getSafetyMeasureList();
       }
-      
+
       selectedJobType.value = newPermitDetailsModel.value?.job_type_name ?? "";
       selectedSopPermit.value =
           newPermitDetailsModel.value?.sop_type_name ?? '';
@@ -621,7 +618,6 @@ class NewPermitController extends GetxController {
         [];
     update(["historyList"]);
   }
-
 
   void removeRow({required int id}) {
     employeeNameList.removeWhere((element) => element?.id == id);

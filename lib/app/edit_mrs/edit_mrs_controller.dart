@@ -1,14 +1,11 @@
 import 'dart:async';
 
 import 'package:cmms/app/edit_mrs/edit_mrs_presenter.dart';
-import 'package:cmms/app/navigators/app_pages.dart';
 import 'package:cmms/domain/models/create_mrs_model.dart';
 import 'package:cmms/domain/models/get_asset_items_model.dart';
-import 'package:cmms/domain/models/mrs_detail_model.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:get/get.dart';
-import 'package:intl/intl.dart';
 import '../home/home_controller.dart';
 import '../utils/utility.dart';
 
@@ -144,7 +141,6 @@ class EditMrsController extends GetxController {
         asset_code: dropdownMapperData[element[0]["value"]]?.asset_code,
         equipmentID: dropdownMapperData[element[0]["value"]]?.asset_ID,
         asset_type_ID: dropdownMapperData[element[0]["value"]]?.asset_type_ID,
-        approval_required: 1,
         requested_qty: int.tryParse(element[4]["value"] ?? '0'),
       );
       items.add(item);
@@ -159,6 +155,10 @@ class EditMrsController extends GetxController {
         //1 is job,2 is pm
         whereUsedType: 2,
         whereUsedTypeId: whereUsedId,
+        from_actor_id: facilityId,
+        to_actor_id: whereUsedId,
+        to_actor_type_id: 2,
+        from_actor_type_id: 3,
         remarks: _remark,
         equipments: items);
     var editMrsJsonString = editMrs.toJson();

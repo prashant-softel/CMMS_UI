@@ -148,6 +148,8 @@ abstract class Routes {
   static const hotoListScreenContentWeb = _Paths.hotoListScreenContentWeb;
   static const auditListScreen = _Paths.auditListScreen;
   static const audit = _Paths.audit;
+  static const createAudit = _Paths.createAudit;
+  static const viewAudit = _Paths.viewAudit;
 }
 
 abstract class _Paths {
@@ -290,6 +292,8 @@ abstract class _Paths {
   static const hotoListScreenContentWeb = '/hoto-list-screen';
   static const auditListScreen = '/audit-list-screen';
   static const audit = '/audit';
+  static const createAudit = '/create-audit';
+  static const viewAudit = '/view-audit';
 
 // static const editPermitWebScreen = '/edit-permit-web-screen';
 }

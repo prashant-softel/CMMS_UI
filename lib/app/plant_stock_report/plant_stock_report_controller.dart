@@ -40,6 +40,8 @@ class PlantStockReportController extends GetxController {
 
   RxString assetNameFilterText = ''.obs;
   RxString assetsCodeFilterText = ''.obs;
+  RxString assetTypeFilterText = ''.obs;
+
   RxString openingFilterText = ''.obs;
   RxString inwardFilterText = ''.obs;
   RxString outwardFilterText = ''.obs;
@@ -48,6 +50,7 @@ class PlantStockReportController extends GetxController {
   final columnVisibility = ValueNotifier<Map<String, bool>>({
     "Assets Name": true,
     "Assets Code": true,
+    "Assets Type": true,
     "Opening": true,
     "Inward": true,
     "Outward": true,
@@ -56,6 +59,7 @@ class PlantStockReportController extends GetxController {
   final Map<String, double> columnwidth = {
     "Assets Name": 300,
     "Assets Code": 250,
+    "Assets Type": 250,
     "Opening": 100,
     "Inward": 100,
     "Outward": 100,
@@ -75,6 +79,7 @@ class PlantStockReportController extends GetxController {
     this.filterText = {
       "Assets Name": assetNameFilterText,
       "Assets Code": assetsCodeFilterText,
+      "Assets Type": assetTypeFilterText,
       "Opening": openingFilterText,
       "Inward": inwardFilterText,
       "Outward": outwardFilterText,

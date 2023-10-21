@@ -1,4 +1,5 @@
 import 'package:cmms/app/preventive_maintanance/preventive_maintenance_presenter.dart';
+import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:get/get.dart';
 
 import '../../domain/models/facility_model.dart';
@@ -42,15 +43,17 @@ class PreventiveController extends GetxController {
 
   void switchFacility(String? facilityName) {}
   Future<void> createChecklist() async {
-    Get.toNamed(
-      Routes.preventiveList,
-    );
+    final _flutterSecureStorage = const FlutterSecureStorage();
+
+    _flutterSecureStorage.delete(key: "type");
+    Get.toNamed(Routes.preventiveList, arguments: {'type': 1});
   }
 
   Future<void> checkPoint() async {
-    Get.toNamed(
-      Routes.preventiveCheckPoint,
-    );
+    final _flutterSecureStorage = const FlutterSecureStorage();
+
+    _flutterSecureStorage.delete(key: "type");
+    Get.toNamed(Routes.preventiveCheckPoint, arguments: {'type': 1});
   }
 
   Future<void> pmMapping() async {
