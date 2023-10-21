@@ -11,7 +11,7 @@ import '../home/home_presenter.dart';
 class PreventiveCheckPointBinding extends Bindings {
   @override
   void dependencies() {
-    Get.find<PreventiveController>();
+    // Get.find<PreventiveController>();
 
     Get.lazyPut(
       () => PreventiveCheckPointController(

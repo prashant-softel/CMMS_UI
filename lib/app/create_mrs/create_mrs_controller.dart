@@ -30,7 +30,7 @@ class CreateMrsController extends GetxController {
   var isSetTemplate = false.obs;
   Rx<int> whereUsedTypeId = 0.obs;
   Rx<int> whereUsed = 0.obs;
-  // int? jcId = 0;
+  Rx<int> fromActorTypeId = 0.obs;
 
   void setTemplatetoggle() {
     isSetTemplate.value = !isSetTemplate.value;
@@ -51,6 +51,9 @@ class CreateMrsController extends GetxController {
         }
         if (arguments.containsKey('whereUsed')) {
           whereUsed.value = arguments['whereUsed'];
+        }
+        if (arguments.containsKey('fromActorTypeId')) {
+          fromActorTypeId.value = arguments['fromActorTypeId'];
         }
         if (whereUsedTypeId != 0) {
           whereUsedCtrlr.text = whereUsedTypeId.toString();
@@ -117,7 +120,6 @@ class CreateMrsController extends GetxController {
         asset_code: dropdownMapperData[element[0]["value"]]?.asset_code,
         equipmentID: dropdownMapperData[element[0]["value"]]?.asset_ID,
         asset_type_ID: dropdownMapperData[element[0]["value"]]?.asset_type_ID,
-        approval_required: 1,
         requested_qty: int.tryParse(element[4]["value"] ?? '0'),
       );
       items.add(item);
@@ -128,8 +130,13 @@ class CreateMrsController extends GetxController {
         facility_ID: facilityId,
         setAsTemplate: _setTemp, //isSetTemplate == true ? 1 : 0,
         activity: _activity,
-        whereUsedType: whereUsed.value,
-        whereUsedTypeId: whereUsedTypeId.value,
+        whereUsedType: 27, //whereUsed.value,
+        whereUsedTypeId: 46, //whereUsedTypeId.value,
+        to_actor_id: 46, // whereUsedTypeId.value,
+        to_actor_type_id: 3,
+        from_actor_id: facilityId,
+        //whereUsed.value,
+        from_actor_type_id: 2, // fromActorTypeId.value,
         remarks: _remark,
         equipments: items);
     var createMrsJsonString = createMrs.toJson();

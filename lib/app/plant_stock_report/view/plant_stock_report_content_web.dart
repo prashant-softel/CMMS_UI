@@ -8,7 +8,6 @@ import 'package:data_table_2/data_table_2.dart';
 import 'package:flutter/material.dart';
 
 import 'package:get/get.dart';
-import 'package:scrollable_table_view/scrollable_table_view.dart';
 import 'package:syncfusion_flutter_datepicker/datepicker.dart';
 import '../../theme/color_values.dart';
 import '../../theme/styles.dart';
@@ -392,7 +391,11 @@ class PlantListDataSource extends DataTableSource {
           (Plant?.balance ?? '')
               .toString()
               .toLowerCase()
-              .contains(controller.balanceFilterText.value.toLowerCase());
+              .contains(controller.balanceFilterText.value.toLowerCase()) &&
+          (Plant?.asset_type ?? '')
+              .toString()
+              .toLowerCase()
+              .contains(controller.assetTypeFilterText.value.toLowerCase());
 
       // Add other filter conditions as needed
     }).toList();
@@ -408,6 +411,7 @@ class PlantListDataSource extends DataTableSource {
     var cellsBuffer = [
       '${PlantDetails?.asset_name ?? ''}',
       '${PlantDetails?.asset_code ?? ''}',
+      '${PlantDetails?.asset_type ?? ''}',
       '${PlantDetails?.opening ?? ''}',
       '${PlantDetails?.inward ?? ''}',
       '${PlantDetails?.outward ?? ''}',

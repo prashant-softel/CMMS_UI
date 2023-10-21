@@ -23,6 +23,8 @@ import 'package:cmms/app/calibration_detail/calibration_detail_binding.dart';
 import 'package:cmms/app/calibration_history/calibration_history_binding.dart';
 import 'package:cmms/app/calibration_history/view/calibration_history_screen.dart';
 import 'package:cmms/app/calibration_view/calibration_view_binding.dart';
+import 'package:cmms/app/create_audit/create_audit_binding.dart';
+import 'package:cmms/app/create_audit/view/create_audit_screen.dart';
 import 'package:cmms/app/create_mrs/create_mrs_binding.dart';
 import 'package:cmms/app/create_mrs/view/create_mrs_screen.dart';
 import 'package:cmms/app/create_pm_plan/create_pm_plan_binding.dart';
@@ -65,6 +67,8 @@ import 'package:cmms/app/mrs_view/view/mrs_view_screen.dart';
 import 'package:cmms/app/pm_plan_list/pm_plan_list_binding.dart';
 import 'package:cmms/app/request_goods_orders_list.dart/request_goods_orders_list_binding.dart';
 import 'package:cmms/app/utils/printing.dart';
+import 'package:cmms/app/view_audit_detail/view/view_audit_detail_screen.dart';
+import 'package:cmms/app/view_audit_detail/view_audit_detail_binding.dart';
 import 'package:cmms/app/view_mc_plan/view/view_mc_planning_screen.dart';
 import 'package:cmms/app/view_mc_plan/view_mc_planning_binding.dart';
 import 'package:cmms/app/view_request_orders/request_goods_orders_view_binding.dart';
@@ -910,6 +914,16 @@ class AppPages {
       name: _Paths.viewMcPlaning,
       page: ViewMcPlaningScreen.new,
       binding: ViewMcPlaningBinding(),
+    ),
+    GetPage<dynamic>(
+      name: _Paths.createAudit,
+      page: CreateAuditScreen.new,
+      binding: CreateAuditBinding(),
+    ),
+    GetPage<dynamic>(
+      name: _Paths.viewAudit,
+      page: ViewAuditDetailScreen.new,
+      binding: ViewAuditDetailBinding(),
     ),
   ];
 }

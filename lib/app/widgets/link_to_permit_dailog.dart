@@ -13,8 +13,12 @@ class LinkToPermitDialog extends GetView {
   String? data;
   int? taskId;
 
-  LinkToPermitDialog(
-      {super.key, this.approveIncidentReportData, this.data, this.taskId});
+  LinkToPermitDialog({
+    super.key,
+    this.approveIncidentReportData,
+    this.data,
+    this.taskId,
+  });
   final NewPermitController controller = Get.find();
 
   @override
@@ -90,8 +94,11 @@ class LinkToPermitDialog extends GetView {
                 //     _controller.formattedFromdate,
                 //     false);
                 //  Get.offAllNamed(Routes.createMrs, arguments: {"jcId": jcId![0]});
-                Get.offAllNamed(Routes.createMrs,
-                    arguments: {"whereUsedId": taskId, "whereUsed": 27});
+                Get.offAllNamed(Routes.createMrs, arguments: {
+                  "whereUsedId": taskId,
+                  "whereUsed": 27,
+                  "fromActorTypeId": 3
+                });
                 Get.back();
               },
               child: const Text('Add Mrs'),

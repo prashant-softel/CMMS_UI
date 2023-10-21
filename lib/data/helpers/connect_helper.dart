@@ -3808,7 +3808,6 @@ class ConnectHelper {
     return responseModel;
   }
 
-
   Future<ResponseModel> updateSafetyMeasure({
     required String auth,
     bool? isLoading,
@@ -3827,7 +3826,6 @@ class ConnectHelper {
 
     return responseModel;
   }
-
 
   Future<ResponseModel> getCountryList({
     String? auth,
@@ -4950,7 +4948,7 @@ class ConnectHelper {
       dynamic endDate,
       int? userId}) async {
     var responseModel = await apiWrapper.makeRequest(
-      'SMReports/GetPlantStockReport?facility_id=$facilityId&StartDate=$endDate&EndDate=$startDate',
+      'SMReports/GetStockReport?facility_id=$facilityId&actorTypeID=2&actorID=$facilityId&StartDate=$endDate&EndDate=$startDate',
       // 'SMReports/GetPlantStockReport?facility_id=45&StartDate=2002-01-01&EndDate=2023-05-01',
       Request.get,
       null,
@@ -5539,8 +5537,9 @@ class ConnectHelper {
     var res = responseModel.data;
     var parsedJson = json.decode(res);
     Get.dialog<void>(LinkToPermitDialog(
-        data: parsedJson['message'], taskId: scheduleId //parsedJson['id']
-        ));
+      data: parsedJson['message'],
+      taskId: scheduleId,
+    ));
     print('jcId2:${parsedJson['id']}');
     return responseModel;
   }
@@ -6119,6 +6118,7 @@ class ConnectHelper {
 
     return responseModel;
   }
+
   Future<ResponseModel> getAssetCategoryList(
       {required bool isLoading, required String auth}) async {
     ResponseModel responseModel = await apiWrapper.makeRequest(
@@ -6132,6 +6132,7 @@ class ConnectHelper {
     );
     return responseModel;
   }
+
   Future<ResponseModel> getAssetTypeSMList(
       {required bool isLoading, required String auth, int? asset_id}) async {
     ResponseModel responseModel = await apiWrapper.makeRequest(
@@ -6145,6 +6146,7 @@ class ConnectHelper {
     );
     return responseModel;
   }
+
   Future<ResponseModel> getUnitMeasurementList(
       {required bool isLoading, required String auth, int? facilityId}) async {
     ResponseModel responseModel = await apiWrapper.makeRequest(

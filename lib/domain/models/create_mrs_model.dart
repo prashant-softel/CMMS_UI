@@ -2,42 +2,44 @@ class CreateMrsModel {
   int? ID;
   int? isEditMode;
   int? facility_ID;
-  // int? requested_by_Id;
-  // String? requestd_date;
   String? setAsTemplate;
   String? activity;
   int? whereUsedType;
   int? whereUsedTypeId;
   String? remarks;
-  // String? approved_date;
+  int? from_actor_type_id;
+  int? from_actor_id;
+  int? to_actor_type_id;
+  int? to_actor_id;
   List<Equipments>? equipments;
   CreateMrsModel(
-      {
-      // this.approved_date,
-      this.ID,
+      {this.ID,
       this.activity,
       this.equipments,
       this.isEditMode,
       this.facility_ID,
-      // this.requestd_date,
-      // this.requested_by_Id,
       this.remarks,
       this.setAsTemplate,
       this.whereUsedType,
-      this.whereUsedTypeId});
+      this.whereUsedTypeId,
+      this.from_actor_id,
+      this.from_actor_type_id,
+      this.to_actor_id,
+      this.to_actor_type_id});
 
   factory CreateMrsModel.fromJson(Map<String, dynamic> json) => CreateMrsModel(
-        // approved_date: json["approved_date"],
         ID: json["ID"],
         activity: json["activity"],
         isEditMode: json["isEditMode"],
         facility_ID: json["facility_ID"],
-        // requestd_date: json["requestd_date"],
-        // requested_by_Id: json["requested_by_Id"],
         remarks: json["remarks"],
         setAsTemplate: json["setAsTemplate"],
         whereUsedType: json["whereUsedType"],
         whereUsedTypeId: json["whereUsedRefID"],
+        from_actor_id: json["from_actor_id"],
+        from_actor_type_id: json["from_actor_type_id"],
+        to_actor_id: json["to_actor_id"],
+        to_actor_type_id: json["to_actor_type_id"],
         equipments: List<Equipments>.from(
             json["cmmrsItems"].map((x) => Equipments.fromJson(x))),
       );
@@ -54,14 +56,18 @@ class CreateMrsModel {
         "setAsTemplate": setAsTemplate,
         "whereUsedType": whereUsedType,
         "whereUsedRefID": whereUsedTypeId,
+        "from_actor_id": from_actor_id,
+        "from_actor_type_id": from_actor_type_id,
+        "to_actor_id": to_actor_id,
+        "to_actor_type_id": to_actor_type_id,
+
         "cmmrsItems": List<dynamic>.from(equipments!.map((x) => x.toJson())),
       };
 }
 
 class Equipments {
   Equipments(
-      {this.approval_required,
-      this.asset_code,
+      {this.asset_code,
       this.asset_type_ID,
       this.equipmentID,
       this.id,
@@ -70,7 +76,6 @@ class Equipments {
 
   int? id;
   int? equipmentID;
-  int? approval_required;
   int? asset_type_ID;
   String? asset_code;
   int? requested_qty;
@@ -82,7 +87,6 @@ class Equipments {
   factory Equipments.fromJson(Map<String, dynamic> json) => Equipments(
         id: json["id"],
         equipmentID: json["asset_item_ID"],
-        approval_required: json["approval_required"],
         asset_type_ID: json["asset_type_ID"],
         asset_code: json["asset_code"],
         requested_qty: json["requested_qty"],
@@ -94,7 +98,6 @@ class Equipments {
         "requested_qty": requested_qty,
         "asset_code": asset_code,
         "asset_type_ID": asset_type_ID,
-        "approval_required": approval_required,
         "asset_item_ID": equipmentID,
         "id": id,
       };
