@@ -311,6 +311,8 @@ class CreatePmPlanController extends GetxController {
           // selectedInventoryNameIdList.value = [];
           rowItem.value = [];
           preventiveCheckList.value = <PreventiveCheckListModel>[];
+          selectedInventoryNameIdList.value = [];
+
           if (value != null) {
             for (var selectedItem in value) {
               int equipCatIndex =

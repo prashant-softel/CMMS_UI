@@ -235,6 +235,14 @@ class StockManagementDashboardScreen
                               //  controller.checkPoint();
                             }),
                         _stockManagementList(
+                            tittle: "Transaction Stock Report",
+                            ontap: () {
+                              Get.toNamed(
+                                Routes.transactionReport,
+                              );
+                              //  controller.checkPoint();
+                            }),
+                        _stockManagementList(
                             tittle: "Employee Stock Report",
                             ontap: () {
                               Get.toNamed(Routes.employeeStockReport);

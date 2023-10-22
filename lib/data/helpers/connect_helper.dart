@@ -4946,10 +4946,35 @@ class ConnectHelper {
       int? facilityId,
       dynamic startDate,
       dynamic endDate,
-      int? userId}) async {
+      int? userId,
+      List<int>? selectedAssetsNameIdList}) async {
+    String assets = selectedAssetsNameIdList.toString();
+    final assetsItems = assets.substring(1, assets.length - 1);
     var responseModel = await apiWrapper.makeRequest(
-      'SMReports/GetStockReport?facility_id=$facilityId&actorTypeID=2&actorID=$facilityId&StartDate=$endDate&EndDate=$startDate',
+      'SMReports/GetStockReport?facility_id=$facilityId&actorTypeID=2&actorID=$facilityId&StartDate=$endDate&EndDate=$startDate&assetMasterIDs=$assetsItems',
       // 'SMReports/GetPlantStockReport?facility_id=45&StartDate=2002-01-01&EndDate=2023-05-01',
+      Request.get,
+      null,
+      isLoading ?? false,
+      {
+        'Authorization': 'Bearer $auth',
+        'Content-Type': 'application/json',
+      },
+    );
+
+    return responseModel;
+  }
+
+  Future<ResponseModel> getTransactionStockList({
+    required String auth,
+    bool? isLoading,
+    int? facilityId,
+    dynamic startDate,
+    dynamic endDate,
+    int? userId,
+  }) async {
+    var responseModel = await apiWrapper.makeRequest(
+      'SMReports/GetTransactionReport?facility_id=$facilityId&actorType=2&actorID=$facilityId&fromDate=$endDate&toDate=$startDate',
       Request.get,
       null,
       isLoading ?? false,

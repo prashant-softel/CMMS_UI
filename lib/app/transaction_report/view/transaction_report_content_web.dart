@@ -1,10 +1,10 @@
 import 'package:cmms/app/home/home_screen.dart';
-import 'package:cmms/app/plant_stock_report/plant_stock_report_controller.dart';
 import 'package:cmms/app/theme/dimens.dart';
+import 'package:cmms/app/transaction_report/transaction_report_controller.dart';
 import 'package:cmms/app/widgets/custom_richtext.dart';
 import 'package:cmms/app/widgets/date_picker.dart';
-import 'package:cmms/app/widgets/multipule_dropdown_web.dart';
 import 'package:cmms/domain/models/get_plant_Stock_list.dart';
+import 'package:cmms/domain/models/get_transction_report_model.dart';
 import 'package:data_table_2/data_table_2.dart';
 import 'package:flutter/material.dart';
 
@@ -14,21 +14,21 @@ import '../../theme/color_values.dart';
 import '../../theme/styles.dart';
 import '../../widgets/custom_elevated_button.dart';
 
-class PlantStockReportContentWeb extends StatefulWidget {
-  PlantStockReportContentWeb({
+class TransactionStockReportContentWeb extends StatefulWidget {
+  TransactionStockReportContentWeb({
     Key? key,
   }) : super(key: key);
 
   @override
-  State<PlantStockReportContentWeb> createState() =>
-      _PlantStockReportContentWebState();
+  State<TransactionStockReportContentWeb> createState() =>
+      _TransactionStockReportContentWebState();
 }
 
-class _PlantStockReportContentWebState
-    extends State<PlantStockReportContentWeb> {
+class _TransactionStockReportContentWebState
+    extends State<TransactionStockReportContentWeb> {
   @override
   Widget build(BuildContext context) {
-    return GetBuilder<PlantStockReportController>(
+    return GetBuilder<TransactionStockReportController>(
         id: 'stock_Mangement_Date',
         builder: (controller) {
           return Obx(() {
@@ -69,7 +69,7 @@ class _PlantStockReportContentWebState
                       child: Text(" / STOCK MANAGEMENT",
                           style: Styles.greyMediumLight12),
                     ),
-                    Text(" / PLANT STOCK REPORT",
+                    Text(" / TRANSACTION STOCK REPORT",
                         style: Styles.greyMediumLight12),
                   ],
                 ),
@@ -96,19 +96,19 @@ class _PlantStockReportContentWebState
                                 // mainAxisAlignment: MainAxisAlignment.spaceBetween,
                                 children: [
                                   Text(
-                                    "Plant Stock Report",
+                                    "Transaction Stock Report",
                                     style: Styles.blackBold16,
                                   ),
-                                  Spacer(),
-                                  MultipDropdownWebWidget(
-                                    width: (MediaQuery.of(context).size.width *
-                                        .2),
-                                    //  height: 35,
-                                    dropdownList: controller.assetList,
-                                    selectedItems:
-                                        controller.selectedAssetsNameList,
-                                    onValueChanged: controller.onValueChanged,
-                                  ),
+                                  //  Spacer(),
+                                  // MultipDropdownWebWidget(
+                                  //   width: (MediaQuery.of(context).size.width *
+                                  //       .2),
+                                  //   //  height: 35,
+                                  //   dropdownList: controller.assetList,
+                                  //   selectedItems:
+                                  //       controller.selectedAssetsNameList,
+                                  //   onValueChanged: controller.onValueChanged,
+                                  // ),
                                   Spacer(),
                                   Row(
                                     children: [
@@ -213,7 +213,7 @@ class _PlantStockReportContentWebState
                                 ),
                               ],
                             ),
-                            controller.StockDetailsList?.isEmpty == true
+                            controller.transactionStockList?.isEmpty == true
                                 ? Center(child: Text('No data'))
                                 : Expanded(
                                     child: ValueListenableBuilder(
@@ -289,7 +289,7 @@ class _PlantStockReportContentWebState
                                 ? controller.toDate.value = dropDate
                                 : controller.toDate.value = pickUpDate;
 
-                            controller.getPlantStockListByDate();
+                            controller.gettransactionStockListByDate();
                             controller.openFromDateToStartDatePicker =
                                 !controller.openFromDateToStartDatePicker;
                             controller.update(['stock_Mangement_Date']);
@@ -368,9 +368,9 @@ class _PlantStockReportContentWebState
 }
 
 class PlantListDataSource extends DataTableSource {
-  final PlantStockReportController controller;
+  final TransactionStockReportController controller;
 
-  late List<StockDetails?> filteredPlantList;
+  late List<TransactionStockReportListModel?> filteredTransactionList;
 
   PlantListDataSource(this.controller) {
     filterMrss();
@@ -378,55 +378,46 @@ class PlantListDataSource extends DataTableSource {
 
   ///
   void filterMrss() {
-    filteredPlantList = <StockDetails?>[];
-    filteredPlantList = controller.StockDetailsList!.where((Plant) {
-      return (Plant?.asset_name ?? '')
+    filteredTransactionList = <TransactionStockReportListModel?>[];
+    filteredTransactionList = controller.transactionStockList!.where((Report) {
+      return (Report?.assetItemID ?? '')
+              .toString()
+              .toLowerCase()
+              .contains(controller.assetsIdFilterText.value.toLowerCase()) &&
+          (Report?.assetItemName ?? '')
               .toString()
               .toLowerCase()
               .contains(controller.assetNameFilterText.value.toLowerCase()) &&
-          (Plant?.asset_code ?? '')
-              .toLowerCase()
-              .contains(controller.assetsCodeFilterText.value.toLowerCase()) &&
-          (Plant?.opening ?? '')
+          (Report?.fromActorType ?? '')
               .toString()
               .toLowerCase()
-              .contains(controller.openingFilterText.value.toLowerCase()) &&
-          (Plant?.inward ?? '')
+              .contains(controller.fromActorFilterText.value.toLowerCase()) &&
+          (Report?.toActorType ?? '')
               .toString()
               .toLowerCase()
-              .contains(controller.inwardFilterText.value.toLowerCase()) &&
-          (Plant?.outward ?? '')
+              .contains(controller.toActorFilterText.value.toLowerCase()) &&
+          (Report?.qty ?? '')
               .toString()
               .toLowerCase()
-              .contains(controller.outwardFilterText.value.toLowerCase()) &&
-          (Plant?.balance ?? '')
-              .toString()
-              .toLowerCase()
-              .contains(controller.balanceFilterText.value.toLowerCase()) &&
-          (Plant?.asset_type ?? '')
-              .toString()
-              .toLowerCase()
-              .contains(controller.assetTypeFilterText.value.toLowerCase());
+              .contains(controller.quntityFilterText.value.toLowerCase()); // &&
 
       // Add other filter conditions as needed
     }).toList();
-    // print({"filteredPlantList": filteredPlantList});
+    // print({"filteredReportList": filteredTransactionList});
   }
 
   @override
   DataRow? getRow(int index) {
     // print({"getRow call"});
-    final PlantDetails = filteredPlantList[index];
+    final PlantDetails = filteredTransactionList[index];
 
     // controller.PlantId.value = PlantDetails?.asset_name ?? 0;
     var cellsBuffer = [
-      '${PlantDetails?.asset_name ?? ''}',
-      '${PlantDetails?.asset_code ?? ''}',
-      '${PlantDetails?.asset_type ?? ''}',
-      '${PlantDetails?.opening ?? ''}',
-      '${PlantDetails?.inward ?? ''}',
-      '${PlantDetails?.outward ?? ''}',
-      '${PlantDetails?.balance ?? ''}',
+      '${PlantDetails?.assetItemID ?? ''}',
+      '${PlantDetails?.assetItemName ?? ''}',
+      '${PlantDetails?.fromActorType ?? ''}',
+      '${PlantDetails?.toActorType ?? ''}',
+      '${PlantDetails?.qty ?? ''}',
     ];
     var cells = [];
     int i = 0;
@@ -465,7 +456,7 @@ class PlantListDataSource extends DataTableSource {
   }
 
   @override
-  int get rowCount => filteredPlantList.length;
+  int get rowCount => filteredTransactionList.length;
 
   @override
   bool get isRowCountApproximate => false;
