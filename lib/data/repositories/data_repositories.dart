@@ -2225,8 +2225,6 @@ class DataRepository extends DomainRepository {
     return response;
   }
 
-
-
   Future<ResponseModel> getCountryList({
     required String auth,
     bool? isLoading,
@@ -2914,14 +2912,32 @@ class DataRepository extends DomainRepository {
           bool? isLoading,
           dynamic startDate,
           dynamic endDate,
-          int? userId}) async =>
+          int? userId,
+          List<int>? selectedAssetsNameIdList}) async =>
       await connectHelper.getPlantStockList(
           auth: auth,
           facilityId: facilityId ?? 0,
           isLoading: isLoading ?? false,
           startDate: startDate,
           endDate: endDate,
-          userId: userId);
+          userId: userId,
+          selectedAssetsNameIdList: selectedAssetsNameIdList);
+  Future<ResponseModel> getTransactionStockList({
+    required String auth,
+    int? facilityId,
+    bool? isLoading,
+    dynamic startDate,
+    dynamic endDate,
+    int? userId,
+  }) async =>
+      await connectHelper.getTransactionStockList(
+        auth: auth,
+        facilityId: facilityId ?? 0,
+        isLoading: isLoading ?? false,
+        startDate: startDate,
+        endDate: endDate,
+        userId: userId,
+      );
   Future<ResponseModel> getFaultyMaterialReportList({
     required String auth,
     int? facilityId,
@@ -3602,6 +3618,7 @@ class DataRepository extends DomainRepository {
       // categoryIds: categoryIds,
     );
   }
+
   Future<ResponseModel> getAssetTypeSMList({
     required bool isLoading,
     required String auth,
@@ -3611,6 +3628,7 @@ class DataRepository extends DomainRepository {
       isLoading: isLoading,
     );
   }
+
   Future<ResponseModel> getUnitMeasurementList({
     // int? facilityId,
     required bool isLoading,

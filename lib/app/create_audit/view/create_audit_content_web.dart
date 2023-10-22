@@ -3,10 +3,14 @@ import 'package:cmms/app/create_audit/create_audit_controller.dart';
 import 'package:cmms/app/widgets/custom_elevated_button.dart';
 import 'package:cmms/app/widgets/custom_richtext.dart';
 import 'package:cmms/app/widgets/custom_textfield.dart';
+import 'package:cmms/app/widgets/date_picker.dart';
+import 'package:cmms/app/widgets/stock_dropdown.dart';
 
 import 'package:flutter/material.dart';
 
 import 'package:get/get.dart';
+import 'package:intl/intl.dart';
+import 'package:syncfusion_flutter_datepicker/datepicker.dart';
 
 class CreateAuditWeb extends StatefulWidget {
   CreateAuditWeb({
@@ -178,32 +182,20 @@ class _CreateAuditWebState extends State<CreateAuditWeb> {
                                   Spacer(),
                                   CustomRichText(title: 'Audit Checklist :'),
                                   Dimens.boxWidth30,
-                                  Container(
-                                      decoration: BoxDecoration(
-                                        borderRadius: BorderRadius.circular(10),
-                                        border: Border.all(
-                                          color: Color.fromARGB(
-                                              255, 227, 224, 224),
-                                          width: 1,
-                                        ),
-                                        boxShadow: [
-                                          BoxShadow(
-                                            color: Color.fromARGB(
-                                                    255, 236, 234, 234)
-                                                .withOpacity(0.5),
-                                            spreadRadius: 2,
-                                            blurRadius: 5,
-                                            offset: Offset(0, 2),
-                                          ),
-                                        ],
-                                      ),
+                                  SizedBox(
+                                    child: DropdownWebStock(
                                       width:
                                           (MediaQuery.of(context).size.width *
-                                              .3),
-                                      child: LoginCustomTextfield(
-                                          // textController: controller
-                                          //     .planTittleCtrlr,
-                                          )),
+                                              .2),
+                                      controller: controller,
+                                      dropdownList: controller.checkList,
+                                      isValueSelected:
+                                          controller.isSelectedchecklist.value,
+                                      selectedValue:
+                                          controller.selectedchecklist.value,
+                                      onValueChanged: controller.onValueChanged,
+                                    ),
+                                  ),
                                   Spacer()
                                 ],
                               ),
@@ -214,32 +206,17 @@ class _CreateAuditWebState extends State<CreateAuditWeb> {
                                   CustomRichText(
                                       title: 'Audit Schedule Date :'),
                                   Dimens.boxWidth30,
-                                  Container(
-                                      decoration: BoxDecoration(
-                                        borderRadius: BorderRadius.circular(10),
-                                        border: Border.all(
-                                          color: Color.fromARGB(
-                                              255, 227, 224, 224),
-                                          width: 1,
-                                        ),
-                                        boxShadow: [
-                                          BoxShadow(
-                                            color: Color.fromARGB(
-                                                    255, 236, 234, 234)
-                                                .withOpacity(0.5),
-                                            spreadRadius: 2,
-                                            blurRadius: 5,
-                                            offset: Offset(0, 2),
-                                          ),
-                                        ],
-                                      ),
-                                      width:
-                                          (MediaQuery.of(context).size.width *
-                                              .3),
-                                      child: LoginCustomTextfield(
-                                          // textController: controller
-                                          //     .planTittleCtrlr,
-                                          )),
+                                  CustomTextFieldForStock(
+                                    width:
+                                        MediaQuery.of(context).size.width / 5,
+                                    numberTextField: true,
+                                    onTap: () {
+                                      controller.openStartDatePicker =
+                                          !controller.openStartDatePicker;
+                                      controller.update(['stock_Mangement']);
+                                    },
+                                    textController: controller.startDateDateTc,
+                                  ),
                                   Spacer()
                                 ],
                               ),
@@ -249,33 +226,20 @@ class _CreateAuditWebState extends State<CreateAuditWeb> {
                                   Spacer(),
                                   CustomRichText(title: 'Audit Frequency :'),
                                   Dimens.boxWidth30,
-                                  Container(
-                                      decoration: BoxDecoration(
-                                        borderRadius: BorderRadius.circular(10),
-                                        border: Border.all(
-                                          color: Color.fromARGB(
-                                              255, 227, 224, 224),
-                                          width: 1,
-                                        ),
-                                        boxShadow: [
-                                          BoxShadow(
-                                            color: Color.fromARGB(
-                                                    255, 236, 234, 234)
-                                                .withOpacity(0.5),
-                                            spreadRadius: 2,
-                                            blurRadius: 5,
-                                            offset: Offset(0, 2),
-                                          ),
-                                        ],
-                                      ),
+                                  SizedBox(
+                                    child: DropdownWebStock(
                                       width:
                                           (MediaQuery.of(context).size.width *
-                                              .3),
-                                      child: LoginCustomTextfield(
-                                          // maxLine: 3,
-                                          // textController: controller
-                                          //     .planTittleCtrlr,
-                                          )),
+                                              .2),
+                                      controller: controller,
+                                      dropdownList: controller.frequencyList,
+                                      isValueSelected:
+                                          controller.isSelectedfrequency.value,
+                                      selectedValue:
+                                          controller.selectedfrequency.value,
+                                      onValueChanged: controller.onValueChanged,
+                                    ),
+                                  ),
                                   Spacer()
                                 ],
                               ),
@@ -314,6 +278,25 @@ class _CreateAuditWebState extends State<CreateAuditWeb> {
                           ),
                         ),
                       ),
+                      if (controller.openStartDatePicker)
+                        Positioned(
+                          right: 550,
+                          top: 300,
+                          child: DatePickerWidget(
+                            minDate: DateTime(DateTime.now().year),
+                            maxDate: DateTime(DateTime.now().year, 13,
+                                0), // last date of this year
+                            controller: DateRangePickerController(),
+                            selectionChanges: (p0) {
+                              print('po valu ${p0.value.toString()}');
+                              controller.startDateDateTc.text =
+                                  DateFormat('yyyy-MM-dd').format(p0.value);
+                              controller.openStartDatePicker =
+                                  !controller.openStartDatePicker;
+                              controller.update(['stock_Mangement']);
+                            },
+                          ),
+                        ),
                     ],
                   ),
                 ),

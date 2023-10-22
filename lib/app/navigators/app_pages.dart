@@ -66,6 +66,8 @@ import 'package:cmms/app/mrs_view/mrs_view_binding.dart';
 import 'package:cmms/app/mrs_view/view/mrs_view_screen.dart';
 import 'package:cmms/app/pm_plan_list/pm_plan_list_binding.dart';
 import 'package:cmms/app/request_goods_orders_list.dart/request_goods_orders_list_binding.dart';
+import 'package:cmms/app/transaction_report/transaction_report_binding.dart';
+import 'package:cmms/app/transaction_report/view/transaction_report_screen.dart';
 import 'package:cmms/app/utils/printing.dart';
 import 'package:cmms/app/view_audit_detail/view/view_audit_detail_screen.dart';
 import 'package:cmms/app/view_audit_detail/view_audit_detail_binding.dart';
@@ -924,6 +926,11 @@ class AppPages {
       name: _Paths.viewAudit,
       page: ViewAuditDetailScreen.new,
       binding: ViewAuditDetailBinding(),
+    ),
+    GetPage<dynamic>(
+      name: _Paths.transactionReport,
+      page: TransactionStockReportScreen.new,
+      binding: TransactionStockReportBinding(),
     ),
   ];
 }
