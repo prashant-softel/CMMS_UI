@@ -106,7 +106,13 @@ class DeviceRepository extends DomainRepository {
   @override
   Future<void> saveUserAcessData(String key, String value) async {
     try {
-      await _flutterSecureStorage.write(key: key, value: value);
+      await _lock.synchronized(() async {
+        if (kIsWeb) {
+          saveValue(key, value);
+        } else {
+          await _flutterSecureStorage.write(key: key, value: value);
+        }
+      });
     } catch (e) {
       print(e);
     }
