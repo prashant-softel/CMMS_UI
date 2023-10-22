@@ -135,6 +135,7 @@ class Repository {
   ///
   var tokenFetchCount = 0;
   var tokenSaveCount = 0;
+  var accessSavedataCount = 0;
 
   /// Clear data from local storage for [key].
   void clearData(dynamic key) {
@@ -279,6 +280,9 @@ class Repository {
 
   void saveUserAcessData(String key, String value) async {
     try {
+      if (key == "user-access") {
+        accessSavedataCount++;
+      }
       await _deviceRepository.saveUserAcessData(
         key,
         value,
