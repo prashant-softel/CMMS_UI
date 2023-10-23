@@ -6,7 +6,6 @@ import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:get/get.dart';
 
 import '../../navigators/app_pages.dart';
-import '../../widgets/dropdown.dart';
 
 class HeaderWidget extends GetView<HomeController> {
   HeaderWidget({

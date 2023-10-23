@@ -4317,7 +4317,8 @@ class Repository {
       );
 
       if (!res.hasError) {
-        saveUserAcessData(LocalKeys.userAccess, res.data);
+        saveValue(LocalKeys.setUserAccess, res.data);
+        // saveUserAcessData(LocalKeys.userAccess, res.data);
         Get.offAndToNamed(Routes.home);
         return null;
       } //

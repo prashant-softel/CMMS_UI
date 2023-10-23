@@ -13,6 +13,8 @@ class DeviceRepository extends DomainRepository {
   /// initialize flutter secure storage
   final _flutterSecureStorage = const FlutterSecureStorage();
   bool isTokenStored = false;
+  bool isAccessDataStored = false;
+
   var _lock = new Lock();
 
   /// initialize the hive box
@@ -113,6 +115,8 @@ class DeviceRepository extends DomainRepository {
           await _flutterSecureStorage.write(key: key, value: value);
         }
       });
+      isAccessDataStored = true;
+      print("Token saved");
     } catch (e) {
       print(e);
     }
