@@ -370,7 +370,7 @@ class ReceiveGoodsOrdersController extends GetxController {
 
       {'key': "Cost", "value": ''},
       {'key': "Order", "value": ''},
-      {'key': "Received", "value": ''},
+      {'key': "Received", "value": '', "sr_no": '0'},
       {'key': "Accepted", "value": ''},
       {'key': "Damaged", "value": ''},
       // {'key': "Pending", "value": ''},
@@ -517,6 +517,7 @@ class ReceiveGoodsOrdersController extends GetxController {
         cost: double.tryParse(element[3]["value"] ?? '0'),
         ordered_qty: int.tryParse(element[4]["value"] ?? '0'),
         received_qty: int.tryParse(element[5]["value"] ?? '0'),
+        sr_no: int.tryParse(element[5]["sr_no"] ?? '0'),
         accepted_qty: double.tryParse(element[6]["value"] ?? '0'),
         damaged_qty: int.tryParse(element[7]["value"] ?? '0'),
         requested_qty: int.tryParse(element[2]["value"] ?? '0'),
