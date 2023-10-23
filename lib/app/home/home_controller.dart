@@ -199,7 +199,9 @@ class HomeController extends GetxController {
   }
 
   Future<void> getuserAccessData() async {
-    final _userAccessList = await homePresenter.getUserAccessList();
+    final _userAccessList = await homePresenter.getUserAcessValue();
+
+    // final _userAccessList = await homePresenter.getUserAccessList();
 
     if (_userAccessList != null) {
       final userAccessModelList = jsonDecode(_userAccessList);
