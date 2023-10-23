@@ -113,7 +113,6 @@ class HomeController extends GetxController {
 
     Future.delayed(Duration(seconds: 1), () {
       getFacilityList();
-      getuserAccessData();
     });
     //  Future.delayed(Duration(seconds: 1), () {
     //   getInventoryCategoryList();
@@ -143,6 +142,8 @@ class HomeController extends GetxController {
       for (var facility in _facilityList) {
         facilityList.add(facility);
       }
+      getuserAccessData();
+
       final facilityData = await homePresenter.getValue();
       print({"facilityData": facilityData});
 
