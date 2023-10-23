@@ -104,15 +104,16 @@ class HomeController extends GetxController {
     //   });
     // });
 
-    Future.delayed(Duration(seconds: 1), () async {
-      await getuserAccessData();
-    });
+    // Future.delayed(Duration(seconds: 1), () async {
+    //   await getuserAccessData();
+    // });
     //  Future.delayed(Duration(seconds: 1), () {
     //   getInventoryList();
     // });
 
     Future.delayed(Duration(seconds: 1), () {
       getFacilityList();
+      getuserAccessData();
     });
     //  Future.delayed(Duration(seconds: 1), () {
     //   getInventoryCategoryList();
@@ -200,6 +201,7 @@ class HomeController extends GetxController {
 
   Future<void> getuserAccessData() async {
     final _userAccessList = await homePresenter.getUserAcessValue();
+    print({"_userAccessList": _userAccessList});
 
     // final _userAccessList = await homePresenter.getUserAccessList();
 
