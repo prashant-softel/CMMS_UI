@@ -1,5 +1,4 @@
 import 'package:cmms/domain/domain.dart';
-import 'package:cmms/domain/models/get_asset_data_list_model.dart';
 import 'package:cmms/domain/models/get_plant_Stock_list.dart';
 
 class PlantStockReportUsecase {
@@ -10,18 +9,7 @@ class PlantStockReportUsecase {
           {int? facilityId,
           bool? isLoading,
           dynamic endDate,
-          dynamic startDate,
-          List<int>? selectedAssetsNameIdList}) async =>
+          dynamic startDate}) async =>
       await _repository.getPlantStockList(
-          facilityId, isLoading, startDate, endDate, selectedAssetsNameIdList);
-  Future<List<GetAssetDataModel?>?> getAssetList({
-    String? auth,
-    int? facilityId,
-    bool? isLoading,
-  }) async =>
-      await _repository.getAssetList(
-        auth,
-        facilityId,
-        isLoading,
-      );
+          facilityId, isLoading, startDate, endDate);
 }

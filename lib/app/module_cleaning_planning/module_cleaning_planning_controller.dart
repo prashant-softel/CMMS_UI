@@ -52,12 +52,16 @@ class ModuleCleaningPlanningController extends GetxController {
   // RxList<McPalningDetailsModel?>? mcPlanDetailsList =
   //     <McPalningDetailsModel?>[].obs;
   Rx<McPalningDetailsModel?> mcPlanDetailsModel = McPalningDetailsModel().obs;
-  RxList<TypeModel> days = <TypeModel>[].obs;
-  void dayCount({required int dayCount}) {
-    days = <TypeModel>[].obs;
-
-    for (int i = 1; i <= dayCount; i++) {
-      days.add(TypeModel(name: 'Day $i', id: "$i"));
+  var days = <TypeModel>[
+    TypeModel(name: 'Day 1', id: "1"),
+    TypeModel(name: 'Day 2', id: "2"),
+    TypeModel(name: 'Day 3', id: "3"),
+  ];
+  void dayCount() {
+    List<TypeModel> dayCount = [];
+    for (int i = 1; i <= 30; i++) {
+      dayCount.add(TypeModel(id: dayCount.toString(), name: "Day ${dayCount}"));
+      print('efwvwervtwr:${dayCount.length}');
     }
   }
 
@@ -103,6 +107,7 @@ class ModuleCleaningPlanningController extends GetxController {
       Future.delayed(Duration(seconds: 1), () {
         getEquipmentModelList(facilityId, true);
       });
+      dayCount();
 
       // getMcPlanHistory(id: id.value);
       super.onInit();

@@ -30,7 +30,7 @@ class CreateMrsController extends GetxController {
   var isSetTemplate = false.obs;
   Rx<int> whereUsedTypeId = 0.obs;
   Rx<int> whereUsed = 0.obs;
-  Rx<int> fromActorTypeId = 0.obs;
+  // int? jcId = 0;
 
   void setTemplatetoggle() {
     isSetTemplate.value = !isSetTemplate.value;
@@ -42,35 +42,32 @@ class CreateMrsController extends GetxController {
     //  whereUsedTypeId = Get.arguments["jcId"];
 //    print('JCId:$jcId');
     // whereUsedTypeId = Get.arguments;
-    //  try {
-    //   final arguments = Get.arguments;
-    //   if (arguments != null) {
-    //     if (arguments.containsKey('whereUsedId')) {
-    //       whereUsedTypeId.value = arguments['whereUsedId'];
-    //       print('PermitId:${whereUsedTypeId.value}');
-    //     }
-    //     if (arguments.containsKey('whereUsed')) {
-    //       whereUsed.value = arguments['whereUsed'];
-    //     }
-    //     if (arguments.containsKey('fromActorTypeId')) {
-    //       fromActorTypeId.value = arguments['fromActorTypeId'];
-    //     }
-    //     if (whereUsedTypeId != 0) {
-    //       whereUsedCtrlr.text = whereUsedTypeId.toString();
-    //     }
-    //     facilityIdStreamSubscription =
-    homecontroller.facilityId$.listen((event) {
-      facilityId = event;
-      Future.delayed(Duration(seconds: 1), () {
-        getEquipmentList(
-          facilityId,
-        );
-      });
-    });
-    //  }
-    // } catch (e) {
-    //   print('jobModelError: $e');
-    // }
+    try {
+      final arguments = Get.arguments;
+      if (arguments != null) {
+        if (arguments.containsKey('whereUsedId')) {
+          whereUsedTypeId.value = arguments['whereUsedId'];
+          print('PermitId:${whereUsedTypeId.value}');
+        }
+        if (arguments.containsKey('whereUsed')) {
+          whereUsed.value = arguments['whereUsed'];
+        }
+        if (whereUsedTypeId != 0) {
+          whereUsedCtrlr.text = whereUsedTypeId.toString();
+        }
+        facilityIdStreamSubscription =
+            homecontroller.facilityId$.listen((event) {
+          facilityId = event;
+          Future.delayed(Duration(seconds: 1), () {
+            getEquipmentList(
+              facilityId,
+            );
+          });
+        });
+      }
+    } catch (e) {
+      print('jobModelError: $e');
+    }
 
     super.onInit();
   }
@@ -120,6 +117,7 @@ class CreateMrsController extends GetxController {
         asset_code: dropdownMapperData[element[0]["value"]]?.asset_code,
         equipmentID: dropdownMapperData[element[0]["value"]]?.asset_ID,
         asset_type_ID: dropdownMapperData[element[0]["value"]]?.asset_type_ID,
+        approval_required: 1,
         requested_qty: int.tryParse(element[4]["value"] ?? '0'),
       );
       items.add(item);
@@ -130,13 +128,8 @@ class CreateMrsController extends GetxController {
         facility_ID: facilityId,
         setAsTemplate: _setTemp, //isSetTemplate == true ? 1 : 0,
         activity: _activity,
-        whereUsedType: 27, //whereUsed.value,
-        whereUsedTypeId: 47, //whereUsedTypeId.value,
-        to_actor_id: 47, // whereUsedTypeId.value,
-        to_actor_type_id: 3,
-        from_actor_id: facilityId,
-        //whereUsed.value,
-        from_actor_type_id: 2, // fromActorTypeId.value,
+        whereUsedType: whereUsed.value,
+        whereUsedTypeId: whereUsedTypeId.value,
         remarks: _remark,
         equipments: items);
     var createMrsJsonString = createMrs.toJson();

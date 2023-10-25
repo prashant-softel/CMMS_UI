@@ -10,8 +10,6 @@ import '../theme/dimens.dart';
 import '../theme/styles.dart';
 
 class SetEquipmentDialog extends GetView {
-  int? estimateDurationDays;
-  SetEquipmentDialog({required this.estimateDurationDays});
   final ModuleCleaningPlanningController controller = Get.find();
 
   @override
@@ -25,7 +23,7 @@ class SetEquipmentDialog extends GetView {
         title: Row(
           children: [
             Text(
-              "Set Equipments $estimateDurationDays",
+              "Set Equipments",
               style: TextStyle(
                 fontSize: 15,
               ),

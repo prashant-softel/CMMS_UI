@@ -13,8 +13,6 @@ class DeviceRepository extends DomainRepository {
   /// initialize flutter secure storage
   final _flutterSecureStorage = const FlutterSecureStorage();
   bool isTokenStored = false;
-  bool isAccessDataStored = false;
-
   var _lock = new Lock();
 
   /// initialize the hive box
@@ -108,15 +106,7 @@ class DeviceRepository extends DomainRepository {
   @override
   Future<void> saveUserAcessData(String key, String value) async {
     try {
-      await _lock.synchronized(() async {
-        if (kIsWeb) {
-          saveValue(key, value);
-        } else {
-          await _flutterSecureStorage.write(key: key, value: value);
-        }
-      });
-      isAccessDataStored = true;
-      print("Token saved");
+      await _flutterSecureStorage.write(key: key, value: value);
     } catch (e) {
       print(e);
     }

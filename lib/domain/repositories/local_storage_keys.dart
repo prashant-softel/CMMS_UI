@@ -6,8 +6,6 @@ abstract class LocalKeys {
   static const guestToken = 'guest-token';
   static const authToken = 'auth-token';
   static const userAccess = 'user-access';
-  static const setUserAccess = 'set-user-access';
-
   static const selectFacalityDropdowndata = 'selectFacalityDropdowndata';
 
   static const refreshToken = 'refresh-token';

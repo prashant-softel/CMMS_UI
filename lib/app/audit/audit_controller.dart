@@ -1,5 +1,4 @@
 import 'package:cmms/app/audit/audit_presenter.dart';
-import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:get/get.dart';
 
 import '../../domain/models/facility_model.dart';
@@ -43,17 +42,15 @@ class AuditController extends GetxController {
 
   void switchFacility(String? facilityName) {}
   Future<void> createChecklist() async {
-    final _flutterSecureStorage = const FlutterSecureStorage();
-
-    _flutterSecureStorage.delete(key: "type");
-    Get.toNamed(Routes.preventiveList, arguments: {'type': 2});
+    Get.toNamed(
+      Routes.preventiveList,
+    );
   }
 
   Future<void> checkPoint() async {
-    final _flutterSecureStorage = const FlutterSecureStorage();
-
-    _flutterSecureStorage.delete(key: "type");
-    Get.toNamed(Routes.preventiveCheckPoint, arguments: {'type': 2});
+    Get.toNamed(
+      Routes.preventiveCheckPoint,
+    );
   }
 
   Future<void> auditList() async {

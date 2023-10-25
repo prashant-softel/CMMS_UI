@@ -39,7 +39,6 @@ class StockDetails {
   String? asset_name;
   String? asset_code;
   int? asset_type_ID;
-  String? asset_type;
   double? opening;
   double? inward;
   double? outward;
@@ -50,7 +49,6 @@ class StockDetails {
       this.asset_code,
       this.asset_name,
       this.asset_type_ID,
-      this.asset_type,
       this.balance,
       this.facility_Is_Block,
       this.facility_Is_Block_of_name,
@@ -64,7 +62,6 @@ class StockDetails {
       asset_code: parsedJson['asset_code'],
       asset_type_ID: parsedJson['asset_type_ID'],
       balance: parsedJson['balance'],
-      asset_type: parsedJson['asset_type'],
       facility_Is_Block: parsedJson['facility_Is_Block'],
       facility_Is_Block_of_name: parsedJson['facility_Is_Block_of_name'],
       asset_name: parsedJson['asset_name'],
@@ -78,7 +75,6 @@ class StockDetails {
         "asset_code": asset_code,
         "asset_type_ID": asset_type_ID,
         "balance": balance,
-        "asset_type": asset_type,
         "facility_Is_Block": facility_Is_Block,
         "facility_Is_Block_of_name": facility_Is_Block_of_name,
         "asset_name": asset_name,
