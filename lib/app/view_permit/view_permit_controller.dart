@@ -1634,6 +1634,7 @@ class ViewPermitController extends GetxController {
 
 //Load image data into PDF bitmap object
     PdfBitmap image = PdfBitmap(data);
+
     //Draw the header section by creating text element
     final PdfLayoutResult result = drawHeader(page, pageSize, document, image);
 
@@ -1660,7 +1661,7 @@ class ViewPermitController extends GetxController {
     //     .graphics
     //     .drawImage(image, const Rect.fromLTWH(0, 0, 100, 80));
     page.graphics.drawImage(image, Rect.fromLTWH(15, 10, 100, 80));
-    page.graphics.drawImage(image, Rect.fromLTWH(390, 595, 100, 50));
+    page.graphics.drawImage(image, Rect.fromLTWH(370, 590, 100, 50));
 
     // page.graphics.drawRectangle(
     //   brush: PdfSolidBrush(PdfColor(142, 170, 219)),
