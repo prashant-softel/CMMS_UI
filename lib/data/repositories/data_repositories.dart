@@ -3622,5 +3622,16 @@ class DataRepository extends DomainRepository {
       // facilityId: facilityId,
     );
   }
+  Future<ResponseModel> createAssetSM({
+    auth,
+    bool? isLoading,
+    assetListJsonString,
+  }) async {
+    var response = await connectHelper.createAssetSM(
+        auth: auth,
+        isLoading: isLoading,
+        assetListJsonString: assetListJsonString);
+    return response;
+  }
 //end
 }

@@ -19,6 +19,7 @@ import '../../domain/models/asset_category_model.dart';
 import '../../domain/models/asset_type_list_sm_model.dart';
 import '../../domain/models/blood_model.dart';
 import '../../domain/models/city_model.dart';
+import '../../domain/models/create_asset_sm_model.dart';
 import '../../domain/models/get_notification_by_userid_model.dart';
 import '../../domain/models/pm_task_view_list_model.dart';
 import '../../domain/models/role_model.dart';
@@ -27,87 +28,92 @@ import 'package:fluttertoast/fluttertoast.dart';
 
 import '../../domain/models/unit_measurement_model.dart';
 import '../../domain/models/user_detail_model.dart';
+import '../controllers/file_upload_controller.dart';
 import '../navigators/app_pages.dart';
 import 'add_asset_master_presenter.dart';
 
 class AddAssetMasterController extends GetxController {
   AddAssetMasterController(
-      this.addUserPresenter,
+      this.addAssetPresenter,
       );
 
-  AddAssetMasterPresenter addUserPresenter;
+  AddAssetMasterPresenter addAssetPresenter;
   var assesDiscriptionCtrlr = TextEditingController();
   // String _assesDiscriptionCtrlr = assesDiscriptionCtrlr.text.trim();
   RxList<UnitMeasurementModel?> unitMeasurementList = <UnitMeasurementModel>[].obs;
   RxList<AssetTypeListSMModel?> materialList = <AssetTypeListSMModel>[].obs;
   RxList<AssetCategoryModel?> materialCategoryList = <AssetCategoryModel>[].obs;
 
-  RxList<CountryModel?> countryList = <CountryModel>[].obs;
+  // RxList<CountryModel?> countryList = <CountryModel>[].obs;
   RxList<ACDCModel?> acdclist = <ACDCModel>[
     ACDCModel(id: 1, name: "AC"),
     ACDCModel(id: 2, name: "DC"),
   ].obs;
-  Rx<String> selectedMaterialType = 'Select Material Type'.obs;
+  Rx<String> selectedMaterialType = ''.obs;
   Rx<bool> isSelectedMaterialType = true.obs;
   int selectedMaterialTypeId = 0;
   // RxList<StateModel?> stateList = <StateModel>[].obs;
-  Rx<String> selectedUnitOfMeasurement = 'Select Unit of Measurement'.obs;
+  Rx<String> selectedUnitOfMeasurement = ''.obs;
   Rx<bool> isSelectedUnitOfMeasurement = true.obs;
   int selectedUnitOfMeasurementId = 0;
   // RxList<CountryModel?> countryList = <CountryModel>[].obs;
-  Rx<String> selectedMinRequiredQty = 'Select Required Qty'.obs;
+  Rx<String> selectedMinRequiredQty = ''.obs;
   Rx<bool> isSelectedMinRequiredQty = true.obs;
   int selectedMinRequiredQtyId = 0;
   // RxList<StateModel?> stateList = <StateModel>[].obs;
-  Rx<String> selectedMaterialCategory = 'Select Material Category'.obs;
+  Rx<String> selectedMaterialCategory = ''.obs;
   Rx<bool> isSelectedMaterialCategory = true.obs;
   int selectedMaterialCategoryId = 0;
   // RxList<CountryModel?> countryList = <CountryModel>[].obs;
-  Rx<String> selectedACDC = 'Select AC / DC'.obs;
+  Rx<String> selectedACDC = ''.obs;
   Rx<bool> isSelectedACDC = true.obs;
   int selectedACDCId = 0;
   // RxList<StateModel?> stateList = <StateModel>[].obs;
-  Rx<String> selectedMinReorderQty = 'Select Reorder Qty'.obs;
+  Rx<String> selectedMinReorderQty = ''.obs;
   Rx<bool> isSelectedMinReorderQty = true.obs;
   int selectedMinReorderQtyId = 0;
-  Rx<String> selectedDocumentType = 'Select Document Type'.obs;
+  Rx<String> selectedDocumentType = ''.obs;
   Rx<bool> isSelectedDocumentType = true.obs;
   int selectedDocumentTypeId = 0;
-  Rx<String> selectedCountry = 'Select Country'.obs;
-  Rx<bool> isSelectedCountry = true.obs;
-  int selectedCountryId = 0;
-  RxList<StateModel?> stateList = <StateModel>[].obs;
-  Rx<String> selectedState = 'Select State'.obs;
-  Rx<bool> isSelectedState = true.obs;
-  int selectedStateId = 0;
-  RxList<CityModel?> cityList = <CityModel>[].obs;
-  Rx<String> selectedCity = 'Select City'.obs;
-  Rx<bool> isSelectedCity = true.obs;
-  int selectedCityId = 0;
-  RxList<BloodModel?> bloodList = <BloodModel>[].obs;
-  Rx<String> selectedBlood = 'Select Blood'.obs;
-  Rx<bool> isSelectedBlood = true.obs;
-  int selectedBloodId = 0;
-  RxList<RoleModel?> roleList = <RoleModel>[].obs;
-  Rx<String> selectedRole = 'Select Role'.obs;
-  Rx<bool> isSelectedRole = true.obs;
-  int selectedRoleId = 0;
-  Rx<AccessLevelModel?> accessLevelModel = AccessLevelModel().obs;
-  RxList<AccessLevel?> accesslevel = <AccessLevel>[].obs;
-
-  Rx<GetAccessLevelByIdModel?> accessListModel = GetAccessLevelByIdModel().obs;
-  RxList<GetAccessLevel?> accessList = <GetAccessLevel>[].obs;
-
-  Rx<GetNotificationModel?> notificationModel = GetNotificationModel().obs;
-  RxList<NotificationList?> notificationList = <NotificationList>[].obs;
-  Rx<GetNotificationByUserIdModel?> notificationByUserIdModel =
-      GetNotificationByUserIdModel().obs;
-  RxList<NotificationListByUserId?> notificationListByUserId =
-      <NotificationListByUserId>[].obs;
+  // Rx<String> selectedCountry = ''.obs;
+  // Rx<bool> isSelectedCountry = true.obs;
+  // int selectedCountryId = 0;
+  // RxList<StateModel?> stateList = <StateModel>[].obs;
+  // Rx<String> selectedState = 'Select State'.obs;
+  // Rx<bool> isSelectedState = true.obs;
+  // int selectedStateId = 0;
+  // RxList<CityModel?> cityList = <CityModel>[].obs;
+  // Rx<String> selectedCity = 'Select City'.obs;
+  // Rx<bool> isSelectedCity = true.obs;
+  // int selectedCityId = 0;
+  // RxList<BloodModel?> bloodList = <BloodModel>[].obs;
+  // Rx<String> selectedBlood = 'Select Blood'.obs;
+  // Rx<bool> isSelectedBlood = true.obs;
+  // int selectedBloodId = 0;
+  // RxList<RoleModel?> roleList = <RoleModel>[].obs;
+  // Rx<String> selectedRole = 'Select Role'.obs;
+  // Rx<bool> isSelectedRole = true.obs;
+  // int selectedRoleId = 0;
+  // Rx<AccessLevelModel?> accessLevelModel = AccessLevelModel().obs;
+  // RxList<AccessLevel?> accesslevel = <AccessLevel>[].obs;
+  //
+  // Rx<GetAccessLevelByIdModel?> accessListModel = GetAccessLevelByIdModel().obs;
+  // RxList<GetAccessLevel?> accessList = <GetAccessLevel>[].obs;
+  //
+  // Rx<GetNotificationModel?> notificationModel = GetNotificationModel().obs;
+  // RxList<NotificationList?> notificationList = <NotificationList>[].obs;
+  // Rx<GetNotificationByUserIdModel?> notificationByUserIdModel =
+  //     GetNotificationByUserIdModel().obs;
+  // RxList<NotificationListByUserId?> notificationListByUserId =
+  //     <NotificationListByUserId>[].obs;
   PaginationController schedulePaginationController = PaginationController(
     rowCount: 0,
     rowsPerPage: 10,
   );
+  RxString fileName = "".obs;
+  RxString filePath = "".obs;
+  RxString fileType   = "".obs;
+  Uint8List? fileBytes;
   RxList<ScheduleCheckPoint?>? scheduleCheckPoints =
       <ScheduleCheckPoint?>[].obs;
   RxList<String> moduleNameList = <String>[].obs;
@@ -119,14 +125,14 @@ class AddAssetMasterController extends GetxController {
   AccessLevel? selectedItem;
   Rx<UserDetailsModel?> userDetailModel = UserDetailsModel().obs;
   RxList<PlantList?> plantListModel = <PlantList?>[].obs;
-  var loginIdCtrlr = TextEditingController();
+  var matNameCtrlr = TextEditingController();
   var reqQty = TextEditingController();
   var descCtrlr = TextEditingController();
   var reorderQty = TextEditingController();
   var firstNameCtrlr = TextEditingController();
-
+  bool visible = true;
   var mobileNoCtrlr = TextEditingController();
-  var secandoryIdCtrlr = TextEditingController();
+  var mdmcodeCtrlr = TextEditingController();
   var lastNameCtrlr = TextEditingController();
   var dobCtrlr = TextEditingController();
   var landlineCtrlr = TextEditingController();
@@ -142,6 +148,13 @@ class AddAssetMasterController extends GetxController {
   RxList<FacilityModel?> facilityNameList = <FacilityModel>[].obs;
   RxList<FacilityModel?> filteredfacilityNameList = <FacilityModel>[].obs;
   Map<dynamic, dynamic> facility_map = {};
+  final isSuccess = false.obs;
+  Rx<bool> isNameInvalid = false.obs;
+  Rx<bool> isCodeInvalid = false.obs;
+  Rx<bool> isRequiredInvalid = false.obs;
+  Rx<bool> isReorderInvalid = false.obs;
+  Rx<bool> isDescriptionInvalid = false.obs;
+  Rx<bool> isFormInvalid = false.obs;
   PaginationController facilityNamepaginationController = PaginationController(
     rowCount: 0,
     rowsPerPage: 10,
@@ -155,6 +168,8 @@ class AddAssetMasterController extends GetxController {
 
 
     getAssetType();
+    Get.put(FileUploadController());
+
 
     // await getRoleList();
     // await getFacilityList();
@@ -171,7 +186,7 @@ class AddAssetMasterController extends GetxController {
   var photoId;
   Future<void> getFacilityList() async {
     facilityNameList.value = <FacilityModel>[];
-    final _facilityNameList = await addUserPresenter.getFacilityList(
+    final _facilityNameList = await addAssetPresenter.getFacilityList(
       isLoading: true,
       // categoryIds: categoryIds,
     );
@@ -186,7 +201,7 @@ class AddAssetMasterController extends GetxController {
   }
   Future<void> getAssetType() async {
 
-    final list = await addUserPresenter.getAssetType();
+    final list = await addAssetPresenter.getAssetType();
 
     if (list != null) {
       for (var _materialList in list) {
@@ -197,7 +212,7 @@ class AddAssetMasterController extends GetxController {
   }
   Future<void> getUnitMeasurementList() async {
 
-    final list = await addUserPresenter.getUnitMeasurementList();
+    final list = await addAssetPresenter.getUnitMeasurementList();
 
     if (list != null) {
       for (var _unitList in list) {
@@ -205,112 +220,112 @@ class AddAssetMasterController extends GetxController {
       }
     }
   }
-  void facilityNameSelected(_selectedfacilityNameIds) {
-    selectedfacilityNameIdList.value = <int>[];
-    filteredfacilityNameList.value = <FacilityModel>[];
-    late int emp_id = 0;
-    for (var _selectedfacilityNameId in _selectedfacilityNameIds) {
-      selectedfacilityNameIdList.add(_selectedfacilityNameId);
-      FacilityModel? e = facilityNameList.firstWhere((element) {
-        return element?.id == _selectedfacilityNameId;
-      });
-      filteredfacilityNameList.add(e);
-    }
+  // void facilityNameSelected(_selectedfacilityNameIds) {
+  //   selectedfacilityNameIdList.value = <int>[];
+  //   filteredfacilityNameList.value = <FacilityModel>[];
+  //   late int emp_id = 0;
+  //   for (var _selectedfacilityNameId in _selectedfacilityNameIds) {
+  //     selectedfacilityNameIdList.add(_selectedfacilityNameId);
+  //     FacilityModel? e = facilityNameList.firstWhere((element) {
+  //       return element?.id == _selectedfacilityNameId;
+  //     });
+  //     filteredfacilityNameList.add(e);
+  //   }
+  //
+  //   facility_map[emp_id] = selectedfacilityNameIdList;
+  // }
+  //
+  // getImage(ImageSource imageSource) async {
+  //   final pickedFile = await ImagePicker().pickImage(source: imageSource);
+  //   if (pickedFile != null) {
+  //     selectedImagePath.value = pickedFile.path;
+  //     imageName.value = pickedFile.name;
+  //     selectedImageBytes.value = await pickedFile.readAsBytes();
+  //
+  //     uploadImge(
+  //       fileBytes: selectedImageBytes.value,
+  //     );
+  //   }
+  // }
+  //
+  // Future<void> uploadImge({Uint8List? fileBytes}) async {
+  //   AddUserModel? addUserModel =
+  //   await addAssetPresenter.uploadImge(fileBytes, imageName.value, true);
+  //   photoId = addUserModel?.photo_id;
+  //   print({"photooo", photoId});
+  //   // return true;
+  // }
+  //
+  // Future<void> getUserDetails({int? userId, bool? isloading}) async {
+  //   final _userDetailModel = await addAssetPresenter.getUserDetails(
+  //       userId: userId, isLoading: isloading);
+  //
+  //   if (_userDetailModel != null) {
+  //     userDetailModel.value = _userDetailModel;
+  //     landlineCtrlr.text = userDetailModel.value?.landline_number ?? "";
+  //     mobileNoCtrlr.text = userDetailModel.value?.contact_no ?? "";
+  //     loginIdCtrlr.text = userDetailModel.value?.user_name ?? "";
+  //     secandoryIdCtrlr.text = userDetailModel.value?.secondaryEmail ?? "";
+  //     firstNameCtrlr.text = userDetailModel.value?.first_name ?? "";
+  //     lastNameCtrlr.text = userDetailModel.value?.last_name ?? "";
+  //     zipcodeCtrlr.text = userDetailModel.value?.zipcode.toString() ?? "";
+  //     dobCtrlr.text = userDetailModel.value?.dob ?? "";
+  //     joingdateCtrlr.text = userDetailModel.value?.joiningDate ?? "";
+  //     selectedCity.value = userDetailModel.value?.city_name ?? "";
+  //     selectedCityId = userDetailModel.value?.city_id ?? 0;
+  //     selectedState.value = userDetailModel.value?.state_name ?? "";
+  //     selectedStateId = userDetailModel.value?.state_id ?? 0;
+  //     selectedCountry.value = userDetailModel.value?.country_name ?? "";
+  //     selectedCountryId = userDetailModel.value?.country_id ?? 0;
+  //     selectedBlood.value = userDetailModel.value?.blood_group_name ?? "";
+  //     selectedBloodId = userDetailModel.value?.blood_group_id ?? 0;
+  //     selectedRole.value = userDetailModel.value?.role_name ?? "";
+  //     selectedRoleId = userDetailModel.value?.role_id ?? 0;
+  //     photoId = userDetailModel.value?.photoId ?? 0;
+  //     gender.value = userDetailModel.value?.gender_name ?? "";
+  //     plantListModel.value = _userDetailModel.plant_list ?? [];
+  //
+  //     await getUserAccessListById(userId: userId, isloading: true);
+  //     await getUserNotificationListById(userId: userId, isloading: true);
+  //   }
+  // }
+  //
+  // Future<void> getUserNotificationListById(
+  //     {int? userId, bool? isloading}) async {
+  //   final _notificationListModel = await addAssetPresenter
+  //       .getUserNotificationListById(userId: userId, isLoading: isloading);
+  //   if (_notificationListModel != null) {
+  //     notificationByUserIdModel.value = _notificationListModel;
+  //     notificationListByUserId.value =
+  //         notificationByUserIdModel.value?.notification_list ?? [];
+  //   }
+  // }
+  //
+  // Future<void> getUserAccessListById({int? userId, bool? isloading}) async {
+  //   final _accessListModel = await addAssetPresenter.getUserAccessListById(
+  //       userId: userId, isLoading: isloading);
+  //   if (_accessListModel != null) {
+  //     accessListModel.value = _accessListModel;
+  //     accessList.value = accessListModel.value?.access_list ?? [];
+  //   }
+  // }
+  //
+  // void updateGender(String value) {
+  //   gender.value = value;
+  // }
 
-    facility_map[emp_id] = selectedfacilityNameIdList;
-  }
-
-  getImage(ImageSource imageSource) async {
-    final pickedFile = await ImagePicker().pickImage(source: imageSource);
-    if (pickedFile != null) {
-      selectedImagePath.value = pickedFile.path;
-      imageName.value = pickedFile.name;
-      selectedImageBytes.value = await pickedFile.readAsBytes();
-
-      uploadImge(
-        fileBytes: selectedImageBytes.value,
-      );
-    }
-  }
-
-  Future<void> uploadImge({Uint8List? fileBytes}) async {
-    AddUserModel? addUserModel =
-    await addUserPresenter.uploadImge(fileBytes, imageName.value, true);
-    photoId = addUserModel?.photo_id;
-    print({"photooo", photoId});
-    // return true;
-  }
-
-  Future<void> getUserDetails({int? userId, bool? isloading}) async {
-    final _userDetailModel = await addUserPresenter.getUserDetails(
-        userId: userId, isLoading: isloading);
-
-    if (_userDetailModel != null) {
-      userDetailModel.value = _userDetailModel;
-      landlineCtrlr.text = userDetailModel.value?.landline_number ?? "";
-      mobileNoCtrlr.text = userDetailModel.value?.contact_no ?? "";
-      loginIdCtrlr.text = userDetailModel.value?.user_name ?? "";
-      secandoryIdCtrlr.text = userDetailModel.value?.secondaryEmail ?? "";
-      firstNameCtrlr.text = userDetailModel.value?.first_name ?? "";
-      lastNameCtrlr.text = userDetailModel.value?.last_name ?? "";
-      zipcodeCtrlr.text = userDetailModel.value?.zipcode.toString() ?? "";
-      dobCtrlr.text = userDetailModel.value?.dob ?? "";
-      joingdateCtrlr.text = userDetailModel.value?.joiningDate ?? "";
-      selectedCity.value = userDetailModel.value?.city_name ?? "";
-      selectedCityId = userDetailModel.value?.city_id ?? 0;
-      selectedState.value = userDetailModel.value?.state_name ?? "";
-      selectedStateId = userDetailModel.value?.state_id ?? 0;
-      selectedCountry.value = userDetailModel.value?.country_name ?? "";
-      selectedCountryId = userDetailModel.value?.country_id ?? 0;
-      selectedBlood.value = userDetailModel.value?.blood_group_name ?? "";
-      selectedBloodId = userDetailModel.value?.blood_group_id ?? 0;
-      selectedRole.value = userDetailModel.value?.role_name ?? "";
-      selectedRoleId = userDetailModel.value?.role_id ?? 0;
-      photoId = userDetailModel.value?.photoId ?? 0;
-      gender.value = userDetailModel.value?.gender_name ?? "";
-      plantListModel.value = _userDetailModel.plant_list ?? [];
-
-      await getUserAccessListById(userId: userId, isloading: true);
-      await getUserNotificationListById(userId: userId, isloading: true);
-    }
-  }
-
-  Future<void> getUserNotificationListById(
-      {int? userId, bool? isloading}) async {
-    final _notificationListModel = await addUserPresenter
-        .getUserNotificationListById(userId: userId, isLoading: isloading);
-    if (_notificationListModel != null) {
-      notificationByUserIdModel.value = _notificationListModel;
-      notificationListByUserId.value =
-          notificationByUserIdModel.value?.notification_list ?? [];
-    }
-  }
-
-  Future<void> getUserAccessListById({int? userId, bool? isloading}) async {
-    final _accessListModel = await addUserPresenter.getUserAccessListById(
-        userId: userId, isLoading: isloading);
-    if (_accessListModel != null) {
-      accessListModel.value = _accessListModel;
-      accessList.value = accessListModel.value?.access_list ?? [];
-    }
-  }
-
-  void updateGender(String value) {
-    gender.value = value;
-  }
-
-  Future<void> getRoleList() async {
-    final list = await addUserPresenter.getRoleList();
-
-    if (list != null) {
-      for (var _roleList in list) {
-        roleList.add(_roleList);
-      }
-    }
-  }
+  // Future<void> getRoleList() async {
+  //   final list = await addAssetPresenter.getRoleList();
+  //
+  //   if (list != null) {
+  //     for (var _roleList in list) {
+  //       roleList.add(_roleList);
+  //     }
+  //   }
+  // }
 
   // Future<void> getCountryList() async {
-  //   final list = await addUserPresenter.getCountryList();
+  //   final list = await addAssetPresenter.getCountryList();
   //
   //   if (list != null) {
   //     for (var _countryList in list) {
@@ -321,7 +336,7 @@ class AddAssetMasterController extends GetxController {
 
 
   Future<void> getAssetCategoryList() async {
-    final list = await addUserPresenter.getAssetCategoryList();
+    final list = await addAssetPresenter.getAssetCategoryList();
 
     if (list != null) {
       for (var _materialcatList in list) {
@@ -407,7 +422,7 @@ class AddAssetMasterController extends GetxController {
 //   print({"accessLevelJsonString", accessLevelJsonString});
 //   if (accessList.isNotEmpty) {
 //     Map<String, dynamic>? responsePmMapCreated =
-//         await addUserPresenter.saveAccessLevel(
+//         await addAssetPresenter.saveAccessLevel(
 //       accessLevelJsonString: accessLevelJsonString,
 //       isLoading: true,
 //     );
@@ -445,7 +460,7 @@ class AddAssetMasterController extends GetxController {
 //   print({"saveNotificationJsonString", saveNotificationJsonString});
 //   if (notificationlist.isNotEmpty) {
 //     Map<String, dynamic>? responseSaveNotification =
-//         await addUserPresenter.saveNotification(
+//         await addAssetPresenter.saveNotification(
 //       saveNotificationJsonString: saveNotificationJsonString,
 //       isLoading: true,
 //     );
@@ -461,6 +476,146 @@ class AddAssetMasterController extends GetxController {
 //   }
 // }
 //
+  Future<bool> addAsset() async {
+
+    if (matNameCtrlr.text.trim() == '' ) {
+      isNameInvalid.value = true;
+      isFormInvalid.value = true;
+    }
+
+    if (mdmcodeCtrlr.text.trim() == '' ) {
+      isCodeInvalid.value = true;
+      isFormInvalid.value = true;
+    }
+
+    if (reqQty.text.trim() == '' ) {
+      isRequiredInvalid.value = true;
+      isFormInvalid.value = true;
+    }
+
+    if (reorderQty.text.trim() == '' ) {
+      isReorderInvalid.value = true;
+      isFormInvalid.value = true;
+    }
+
+    if (descCtrlr.text.trim() == '' ) {
+      isDescriptionInvalid.value = true;
+      isFormInvalid.value = true;
+    }
+
+
+
+    checkForm();
+    if (isFormInvalid.value) {
+      return false;
+    }
+
+    if (matNameCtrlr.text.trim() == '' ||
+        mdmcodeCtrlr.text.trim() == ''  ||
+        reorderQty.text.trim() == '' ||
+        reqQty.text.trim() == '' ||
+        descCtrlr.text.trim() == ''
+
+    ) {
+      Fluttertoast.showToast(
+          msg: "Please enter required field", fontSize: 16.0);
+    } else {
+      String _name = matNameCtrlr.text.trim();
+      String _mdmcode = mdmcodeCtrlr.text.trim();
+      String _reorderQty = reorderQty.text.trim();
+      String _reqQty = reqQty.text.trim();
+      String _desc = descCtrlr.text.trim();
+
+      CreateAssetSMModel createAssetSMModel = CreateAssetSMModel
+        (
+          asset_code : _mdmcode,
+          asset_name : _name,
+          asset_description : _desc,
+          asset_type_ID : selectedMaterialTypeId, 
+
+          item_category_ID: selectedMaterialCategoryId,
+          unit_measurement_ID: selectedUnitOfMeasurementId,
+          min_req_qty: int.parse(_reqQty),
+          reorder_qty: int.parse(_reorderQty),
+          approval_required_ID: 1,
+
+          // fileData:
+          fileData : {
+                "File_path"  : filePath.value,
+                "File_name": fileName.value,
+                "File_type": fileType.value,
+                "File_size": fileBytes.toString(),
+            }
+      );
+      //function to write sum of 2 numbers
+
+      var assetListJsonString =
+      createAssetSMModel.toJson(); //createCheckListToJson([createChecklist]);
+
+      print({"checklistJsonString", assetListJsonString});
+      await addAssetPresenter.createAssetSM(
+        assetListJsonString: assetListJsonString,
+        isLoading: true,
+      );
+      return true;
+    }
+    return true;
+  }
+
+  Future<void> issuccessCreateAssetlist() async {
+    isSuccess.toggle();
+
+    // isToggleOn.value = false;
+    await {cleardata()};
+  }
+
+  void checkForm() {
+
+    if(selectedMaterialType.value == ''){
+      isSelectedMaterialType.value = false;
+    }
+    if(selectedMaterialCategory.value == ''){
+      isSelectedMaterialCategory.value = false;
+    }
+    if(selectedUnitOfMeasurement.value == ''){
+      isSelectedUnitOfMeasurement.value = false;
+    }
+    if(selectedACDC.value == ''){
+      isSelectedACDC.value = false;
+    }
+
+    if(isNameInvalid.value == true || isSelectedMaterialType.value == false ||
+        isSelectedMaterialCategory.value == false || isSelectedUnitOfMeasurement.value == false ||
+        isSelectedACDC.value == false ||
+        isReorderInvalid.value == true || isRequiredInvalid.value == true || isDescriptionInvalid.value == true || isCodeInvalid.value == true
+    ){
+      isFormInvalid.value = true;
+    } else {
+      isFormInvalid.value = false;
+    }
+  }
+
+
+  cleardata() {
+    matNameCtrlr.text = '';
+    mdmcodeCtrlr.text = '';
+    descCtrlr.text = '';
+    reorderQty.text = '';
+    reqQty.text = '';
+    // selectedBusinessType.value = '';
+    selectedUnitOfMeasurement.value = '';
+    selectedMaterialCategory.value = '';
+    selectedMaterialType.value = '';
+    selectedACDC.value = '';
+    selectedItem = null;
+    visible = false;
+    // Future.delayed(Duration(seconds: 1), () {
+    //   getBusinessList(selectedBusinessTypeId, true);
+    // });
+    Future.delayed(Duration(seconds: 5), () {
+      isSuccess.value = false;
+    });
+  }
 // Future<bool> addUser() async {
 //   List<AddAccessList> add_accessList = <AddAccessList>[];
 //   accesslevel.forEach((e) {
@@ -515,7 +670,7 @@ class AddAssetMasterController extends GetxController {
 //   var adduserJsonString = [adduser.toJson()];
 //
 //   print({"adduserJsonString", adduserJsonString});
-//   await addUserPresenter.addUser(
+//   await addAssetPresenter.addUser(
 //     adduserJsonString: adduserJsonString,
 //     isLoading: true,
 //   );
@@ -565,14 +720,14 @@ class AddAssetMasterController extends GetxController {
 //   var adduserJsonString = adduser.toJson();
 //
 //   print({"adduserJsonString", adduserJsonString});
-//   await addUserPresenter.updateUser(
+//   await addAssetPresenter.updateUser(
 //     adduserJsonString: adduserJsonString,
 //     isLoading: true,
 //   );
 //   return true;
 // }
 // Future<void> getBloodList() async {
-//   final list = await addUserPresenter.getBloodList();
+//   final list = await addAssetPresenter.getBloodList();
 //
 //   if (list != null) {
 //     for (var _bloodList in list) {
@@ -582,7 +737,7 @@ class AddAssetMasterController extends GetxController {
 // }
 //
 // Future<void> getStateList(int selectedCountryId) async {
-//   final list = await addUserPresenter.getStateList(
+//   final list = await addAssetPresenter.getStateList(
 //       selectedCountryId: selectedCountryId);
 //
 //   if (list != null) {
@@ -594,7 +749,7 @@ class AddAssetMasterController extends GetxController {
 //
 // Future<void> getCityList(int selectedStateId) async {
 //   final list =
-//   await addUserPresenter.getCityList(selectedStateId: selectedStateId);
+//   await addAssetPresenter.getCityList(selectedStateId: selectedStateId);
 //
 //   if (list != null) {
 //     for (var _cityList in list) {
@@ -604,7 +759,7 @@ class AddAssetMasterController extends GetxController {
 // }
 //
 // Future<void> getRoleAccessList({int? roleId, bool? isloading}) async {
-//   final _accessLevelModel = await addUserPresenter.getRoleAccessList(
+//   final _accessLevelModel = await addAssetPresenter.getRoleAccessList(
 //       roleId: roleId, isLoading: isloading);
 //   Set<String> moduleNameSet = {};
 //
@@ -621,7 +776,7 @@ class AddAssetMasterController extends GetxController {
 // }
 //
 // Future<void> getRoleNotificationList({int? roleId, bool? isloading}) async {
-//   final _notificationModel = await addUserPresenter.getRoleNotificationList(
+//   final _notificationModel = await addAssetPresenter.getRoleNotificationList(
 //       roleId: roleId, isLoading: isloading);
 //   print({"ddddd", _notificationModel});
 //   if (_notificationModel != null) {

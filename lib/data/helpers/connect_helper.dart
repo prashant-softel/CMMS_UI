@@ -6158,4 +6158,25 @@ class ConnectHelper {
     );
     return responseModel;
   }
+
+  Future<ResponseModel> createAssetSM({
+    required String auth,
+    bool? isLoading,
+    required assetListJsonString,
+  }) async {
+    var responseModel =
+    // responseModel =
+    await apiWrapper.makeRequest(
+      'SMMaster/AddAssetMaster', //AddBusiness
+      Request.post,
+      assetListJsonString ,
+      isLoading ?? false,
+      {
+        'Content-Type': 'application/json',
+        'Authorization': 'Bearer $auth',
+      },
+    );
+
+    return responseModel;
+  }
 }
