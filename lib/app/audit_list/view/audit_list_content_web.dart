@@ -103,33 +103,35 @@ class _AuditListContentWebState extends State<AuditListContentWeb> {
                                       ),
                                       Spacer(),
                                       Row(
-                                    children: [
-                                      CustomRichText(title: 'Date Range'),
-                                      Dimens.boxWidth10,
-                                      CustomTextFieldForStock(
-                                        width:
-                                            MediaQuery.of(context).size.width /
+                                        children: [
+                                          CustomRichText(title: 'Date Range'),
+                                          Dimens.boxWidth10,
+                                          CustomTextFieldForStock(
+                                            width: MediaQuery.of(context)
+                                                    .size
+                                                    .width /
                                                 5,
                                             numberTextField: true,
-                                        onTap: () {
-                                          controller
-                                                  .openFromDateToStartDatePicker =
-                                              !controller
-                                                  .openFromDateToStartDatePicker;
-                                          controller
-                                              .update(['stock_Mangement_Date']);
-                                        },
-                                        hintText:
-                                            '${controller.formattedFromdate} - ${controller.formattedTodate}',
+                                            onTap: () {
+                                              controller
+                                                      .openFromDateToStartDatePicker =
+                                                  !controller
+                                                      .openFromDateToStartDatePicker;
+                                              controller.update(
+                                                  ['stock_Mangement_Date']);
+                                            },
+                                            hintText:
+                                                '${controller.formattedFromdate} - ${controller.formattedTodate}',
+                                          ),
+                                        ],
                                       ),
-                                    ],
-                                  ),
-                                  Dimens.boxWidth10,
-                                  ActionButton(
-                                    icon: Icons.add,
-                                    label: "Add New",
-                                    onPressed: () {
-                                      Get.offNamed(Routes.moduleCleaningPlanning);
+                                      Dimens.boxWidth10,
+                                      ActionButton(
+                                        icon: Icons.add,
+                                        label: "Add New",
+                                        onPressed: () {
+                                          Get.offNamed(
+                                              Routes.moduleCleaningPlanning);
                                         },
                                         color: ColorValues.addNewColor,
                                       ),
@@ -232,28 +234,31 @@ class _AuditListContentWebState extends State<AuditListContentWeb> {
                                       margin: Dimens.edgeInsets0_0_16_0,
                                       child: TextField(
                                         onChanged: (value) {}, // =>
-                                    //       controller.search(value),
-                                    decoration: InputDecoration(
-                                      enabledBorder: const OutlineInputBorder(
-                                        borderSide: const BorderSide(
-                                            color: Colors.grey, width: 0.0),
+                                        //       controller.search(value),
+                                        decoration: InputDecoration(
+                                          enabledBorder:
+                                              const OutlineInputBorder(
+                                            borderSide: const BorderSide(
+                                                color: Colors.grey, width: 0.0),
+                                          ),
+                                          focusedBorder:
+                                              const OutlineInputBorder(
+                                            borderSide: const BorderSide(
+                                                color: Colors.grey, width: 0.0),
+                                          ),
+                                          contentPadding:
+                                              Dimens.edgeInsets10_0_0_0,
+                                          hintText: 'search'.tr,
+                                          hintStyle: Styles.grey12,
+                                        ),
                                       ),
-                                      focusedBorder: const OutlineInputBorder(
-                                        borderSide: const BorderSide(
-                                            color: Colors.grey, width: 0.0),
-                                      ),
-                                      contentPadding: Dimens.edgeInsets10_0_0_0,
-                                      hintText: 'search'.tr,
-                                      hintStyle: Styles.grey12,
                                     ),
-                                  ),
+                                  ],
                                 ),
-                              ],
-                            ),
-                            SizedBox(
-                              height: 20,
-                            ),
-                             controller.AuditPlanListPlan.isNotEmpty
+                                SizedBox(
+                                  height: 20,
+                                ),
+                                controller.auditPlanList.isNotEmpty
                                     ? Center(child: Text('No data'))
                                     : Expanded(
                                         child: ValueListenableBuilder(

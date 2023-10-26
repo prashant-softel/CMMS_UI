@@ -8,6 +8,11 @@ class CreateMrsModel {
   String? activity;
   int? whereUsedType;
   int? whereUsedTypeId;
+  int? to_actor_id;
+  int? to_actor_type_id;
+  int? from_actor_id;
+  int? from_actor_type_id;
+
   String? remarks;
   // String? approved_date;
   List<Equipments>? equipments;
@@ -24,14 +29,22 @@ class CreateMrsModel {
       this.remarks,
       this.setAsTemplate,
       this.whereUsedType,
-      this.whereUsedTypeId});
+      this.whereUsedTypeId,
+      this.from_actor_id,
+      this.from_actor_type_id,
+      this.to_actor_id,
+      this.to_actor_type_id});
 
   factory CreateMrsModel.fromJson(Map<String, dynamic> json) => CreateMrsModel(
         // approved_date: json["approved_date"],
         ID: json["ID"],
         activity: json["activity"],
         isEditMode: json["isEditMode"],
-        facility_ID: json["facility_ID"],
+        facility_ID: json["facility_ID"], from_actor_id: json["from_actor_id"],
+        from_actor_type_id: json["from_actor_type_id"],
+        to_actor_id: json["to_actor_id"],
+        to_actor_type_id: json["to_actor_type_id"],
+
         // requestd_date: json["requestd_date"],
         // requested_by_Id: json["requested_by_Id"],
         remarks: json["remarks"],
@@ -43,7 +56,11 @@ class CreateMrsModel {
       );
 
   Map<String, dynamic> toJson() => {
-        "ID": ID,
+        "ID": ID, "to_actor_id": to_actor_id,
+        "to_actor_type_id": to_actor_type_id,
+        "from_actor_id": from_actor_id,
+        "from_actor_type_id": from_actor_type_id,
+
         // "approved_date": approved_date,
         "activity": activity,
         "facility_ID": facility_ID,

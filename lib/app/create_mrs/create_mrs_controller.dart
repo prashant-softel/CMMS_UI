@@ -30,6 +30,8 @@ class CreateMrsController extends GetxController {
   var isSetTemplate = false.obs;
   Rx<int> whereUsedTypeId = 0.obs;
   Rx<int> whereUsed = 0.obs;
+  Rx<int> fromActorTypeId = 0.obs;
+
   // int? jcId = 0;
 
   void setTemplatetoggle() {
