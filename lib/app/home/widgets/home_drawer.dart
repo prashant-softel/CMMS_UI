@@ -13,7 +13,7 @@ class HomeDrawer extends GetView<HomeController> {
     return
         //
         Obx(() => Drawer(
-              width: controller.isExpanded.value ? 250 : 50,
+              width: controller.isExpanded.value ? 250 : 60,
 
               // Get.width * 0.19
               // : 50, // Get.width * 0.35,
@@ -275,21 +275,25 @@ class MenuItem extends StatelessWidget {
       padding: const EdgeInsets.only(left: 10),
       child: Container(
           child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        //  mainAxisAlignment: MainAxisAlignment.start,
+        // crossAxisAlignment: CrossAxisAlignment.center,
+        // mainAxisAlignment: MainAxisAlignment.start,
         children: [
           Dimens.boxHeight15,
           GestureDetector(
             onTap: press,
             child: Row(
               mainAxisAlignment: MainAxisAlignment.start,
+              crossAxisAlignment: CrossAxisAlignment.center,
               children: [
-                Image.asset(
-                  icon,
-                  height: 13,
-                  color: Color(0xffD2D0D0),
+                SizedBox(
+                  width: 40,
+                  child: Image.asset(
+                    icon,
+                    height: 16,
+                    color: Color(0xffD2D0D0),
+                  ),
                 ),
-                Dimens.boxWidth15,
+                // Dimens.boxWidth15,
                 isexpand!
                     ? Text(
                         title ?? "",
