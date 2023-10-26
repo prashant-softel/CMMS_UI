@@ -1623,9 +1623,9 @@ class ViewPermitController extends GetxController {
     //Get page client size
     final Size pageSize = page.getClientSize();
     //Draw rectangle
-    page.graphics.drawRectangle(
-        bounds: Rect.fromLTWH(0, 0, pageSize.width, pageSize.height),
-        pen: PdfPen(PdfColor(142, 170, 219)));
+    // page.graphics.drawRectangle(
+    //     bounds: Rect.fromLTWH(0, 0, pageSize.width, pageSize.height),
+    //     pen: PdfPen(PdfColor(142, 170, 219)));
     //Generate PDF grid.
     //  final PdfGrid grid = getGrid();
     var url = "assets/files/logo.png";
@@ -1635,12 +1635,8 @@ class ViewPermitController extends GetxController {
 //Load image data into PDF bitmap object
     PdfBitmap image = PdfBitmap(data);
 
-    document.pages
-        .add()
-        .graphics
-        .drawImage(image, const Rect.fromLTWH(0, 0, 100, 80));
     //Draw the header section by creating text element
-    final PdfLayoutResult result = drawHeader(page, pageSize);
+    final PdfLayoutResult result = drawHeader(page, pageSize, document, image);
 
     //Draw grid
     // drawGrid(page, grid, result);
@@ -1657,16 +1653,22 @@ class ViewPermitController extends GetxController {
   PdfLayoutResult drawHeader(
     PdfPage page,
     Size pageSize,
+    PdfDocument document,
+    PdfBitmap image,
   ) {
-    // page.graphics.drawRectangle(
-    //   brush: PdfSolidBrush(PdfColor(142, 170, 219)),
-    //   bounds: Rect.fromLTWH(0, 0, pageSize.width, 40),
-    // ); //Draw string
+    // document.pages
+    //     .add()
+    //     .graphics
+    //     .drawImage(image, const Rect.fromLTWH(0, 0, 100, 80));
+    page.graphics.drawImage(image, Rect.fromLTWH(15, 10, 100, 80));
+    page.graphics.drawImage(image, Rect.fromLTWH(370, 590, 100, 50));
+
     //Draw the image
 
     // page.graphics.drawImage(
     //     PdfBitmap(image),
     //     Rect.fromLTWH(20, 10, 50, 50));
+
     page.graphics.drawString(
         'WORK PERMIT TYPE ',
         PdfStandardFont(
@@ -1675,6 +1677,8 @@ class ViewPermitController extends GetxController {
         ),
         bounds: Rect.fromLTWH(180, 20, 0, 0),
         format: PdfStringFormat(lineAlignment: PdfVerticalAlignment.middle));
+
+    //Draw Rectangle to highlight margin
 
     page.graphics.drawString(
         'PTW No: ',
@@ -1698,6 +1702,8 @@ class ViewPermitController extends GetxController {
         ),
         bounds: Rect.fromLTWH(150, 40, 0, 0),
         format: PdfStringFormat(lineAlignment: PdfVerticalAlignment.middle));
+
+    //Draw Rectangle to highlight margin
 
     page.graphics.drawString(
         'LOTO No: ',
@@ -1741,6 +1747,10 @@ class ViewPermitController extends GetxController {
         bounds: Rect.fromLTWH(75, 150, 0, 0),
         format: PdfStringFormat(lineAlignment: PdfVerticalAlignment.middle));
 
+    //Draw Rectangle to highlight margin
+    // page.graphics.drawRectangle(
+    //     pen: PdfPen(PdfColor(142, 170, 219)),
+    //     bounds: Rect.fromLTWH(270, 140, pageSize.width - 290, 25));
     page.graphics.drawString(
         'Softel Technologies', PdfStandardFont(PdfFontFamily.helvetica, 10),
         bounds: Rect.fromLTWH(170, 150, 0, 0),
@@ -1751,7 +1761,7 @@ class ViewPermitController extends GetxController {
         bounds: Rect.fromLTWH(330, 150, 0, 0),
         format: PdfStringFormat(lineAlignment: PdfVerticalAlignment.middle));
 
-//Name
+    //Name
     page.graphics.drawString(
         'Name', PdfStandardFont(PdfFontFamily.helvetica, 10),
         bounds: Rect.fromLTWH(75, 160, 0, 0),
@@ -1844,7 +1854,7 @@ class ViewPermitController extends GetxController {
         bounds: Rect.fromLTWH(25, 255, pageSize.width - 50, 90),
         format: PdfStringFormat(lineAlignment: PdfVerticalAlignment.middle));
 
-//Permit Issuer name
+    //Permit Issuer name
     page.graphics.drawString(
         'Permit issuer name:  ',
         PdfStandardFont(
@@ -1911,6 +1921,7 @@ class ViewPermitController extends GetxController {
         bounds: Rect.fromLTWH(85, 410, 0, 0),
         format: PdfStringFormat(lineAlignment: PdfVerticalAlignment.middle));
 
+    /// SOP
     page.graphics.drawString(
         'Date', PdfStandardFont(PdfFontFamily.helvetica, 10),
         bounds: Rect.fromLTWH(250, 410, 0, 0),
@@ -1998,6 +2009,7 @@ class ViewPermitController extends GetxController {
             format: PdfStringFormat(lineAlignment: PdfVerticalAlignment.middle))
         : Dimens.box0;
 
+    ///
     viewPermitDetailsModel.value?.ptwStatus ==
             PermitStatusConstants.PTW_CLOSED //126
         ? page.graphics.drawString(
@@ -2010,6 +2022,7 @@ class ViewPermitController extends GetxController {
             format: PdfStringFormat(lineAlignment: PdfVerticalAlignment.middle))
         : Dimens.box0;
 
+    ////
     viewPermitDetailsModel.value?.ptwStatus ==
             PermitStatusConstants.PTW_CLOSED //126
         ? page.graphics.drawString(
@@ -2195,6 +2208,8 @@ class ViewPermitController extends GetxController {
             bounds: Rect.fromLTWH(200, 570, 0, 0),
             format: PdfStringFormat(lineAlignment: PdfVerticalAlignment.middle))
         : Dimens.box0;
+
+    ////
     viewPermitDetailsModel.value?.ptwStatus ==
                 PermitStatusConstants.PTW_CANCELLED_BY_APPROVER //129
             ||
@@ -2226,6 +2241,8 @@ class ViewPermitController extends GetxController {
             bounds: Rect.fromLTWH(180, 520, 0, 0),
             format: PdfStringFormat(lineAlignment: PdfVerticalAlignment.middle))
         : Dimens.box0;
+
+    ///
 
     viewPermitDetailsModel.value?.ptwStatus ==
                 PermitStatusConstants.PTW_EXTEND_REQUESTED //133
@@ -2538,7 +2555,7 @@ class ViewPermitController extends GetxController {
 
     //Draw rectangle
     // page.graphics.drawRectangle(
-    //     brush: PdfSolidBrush(PdfColor(91, 126, 220)),
+    //     brush: PdfSolidBrush(PdfColor(91, 126, 215)),
     //     bounds: Rect.fromLTWH(0, 0, pageSize.width - 115, 90));
     //Draw string
     // page.graphics.drawString(

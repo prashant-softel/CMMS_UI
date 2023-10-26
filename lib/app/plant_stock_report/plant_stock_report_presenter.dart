@@ -1,4 +1,3 @@
-import '../../domain/models/get_asset_data_list_model.dart';
 import '../../domain/models/get_plant_Stock_list.dart';
 import '../../domain/usecases/plant_stock_report_usecase.dart';
 
@@ -9,22 +8,10 @@ class PlantStockReportPresenter {
           {int? facilityId,
           bool? isLoading,
           dynamic endDate,
-          dynamic startDate,
-          List<int>? selectedAssetsNameIdList}) async =>
+          dynamic startDate}) async =>
       await plantStockReportUsecase.getPlantStockList(
           facilityId: facilityId ?? 0,
           isLoading: isLoading ?? false,
           endDate: endDate,
-          startDate: startDate,
-          selectedAssetsNameIdList: selectedAssetsNameIdList);
-  Future<List<GetAssetDataModel?>?> getAssetList({
-    String? auth,
-    int? facilityId,
-    bool? isLoading,
-  }) async =>
-      await plantStockReportUsecase.getAssetList(
-        auth: auth ?? "",
-        facilityId: facilityId ?? 0,
-        isLoading: isLoading ?? false,
-      );
+          startDate: startDate);
 }

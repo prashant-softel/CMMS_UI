@@ -5,7 +5,6 @@ import 'package:cmms/app/preventive_List/preventive_list_presenter.dart';
 import 'package:cmms/domain/models/create_checklist_model.dart';
 import 'package:cmms/domain/models/preventive_checklist_model.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:get/get.dart';
 import 'package:scrollable_table_view/scrollable_table_view.dart';
 import '../../domain/models/frequency_model.dart';
@@ -30,8 +29,7 @@ class PreventiveListController extends GetxController {
   RxList<PreventiveCheckListModel?>? preventiveCheckList =
       <PreventiveCheckListModel?>[].obs;
   int facilityId = 0;
-  Rx<int> type = 0.obs;
-
+  int type = 1;
   PaginationController paginationController = PaginationController(
     rowCount: 0,
     rowsPerPage: 10,
@@ -52,47 +50,16 @@ class PreventiveListController extends GetxController {
   StreamSubscription<int>? facilityIdStreamSubscription;
   @override
   void onInit() async {
-    try {
-      await setType();
-      getInventoryCategoryList();
-      getFrequencyList();
+    getInventoryCategoryList();
+    getFrequencyList();
 
-      if (type.value != 0) {
-        facilityIdStreamSubscription =
-            homecontroller.facilityId$.listen((event) {
-          facilityId = event;
-          Future.delayed(Duration(seconds: 2), () {
-            getPreventiveCheckList(facilityId, type.value, true);
-          });
-        });
-      }
-      super.onInit();
-    } catch (e) {
-      print(e);
-    }
-  }
-
-  Future<void> setType() async {
-    try {
-      final _flutterSecureStorage = const FlutterSecureStorage();
-      // Read jobId
-      String? _type = await _flutterSecureStorage.read(key: "type");
-      if (_type == null || _type == '' || _type == "null") {
-        var dataFromPreviousScreen = Get.arguments;
-
-        type.value = dataFromPreviousScreen['type'];
-        await _flutterSecureStorage.write(
-          key: "type",
-          value: type.value == null ? '' : type.value.toString(),
-        );
-      } else {
-        type.value = int.tryParse(_type) ?? 0;
-      }
-      //  await _flutterSecureStorage.delete(key: "type");
-    } catch (e) {
-      print(e.toString() + 'type');
-      //  Utility.showDialog(e.toString() + 'type');
-    }
+    facilityIdStreamSubscription = homecontroller.facilityId$.listen((event) {
+      facilityId = event;
+      Future.delayed(Duration(seconds: 2), () {
+        getPreventiveCheckList(facilityId, type, true);
+      });
+    });
+    super.onInit();
   }
 
   Future<void> getFrequencyList() async {
@@ -189,7 +156,7 @@ class PreventiveListController extends GetxController {
           facility_id: facilityId,
           frequency_id: selectedfrequencyId,
           status: 1,
-          type: type.value,
+          type: 1,
           id: 0,
           checklist_number: _checklistNumber);
       var checklistJsonString = [
@@ -234,7 +201,7 @@ class PreventiveListController extends GetxController {
     selectedItem = null;
 
     Future.delayed(Duration(seconds: 1), () {
-      getPreventiveCheckList(facilityId, type.value, true);
+      getPreventiveCheckList(facilityId, type, true);
     });
     Future.delayed(Duration(seconds: 5), () {
       isSuccess.value = false;
@@ -283,7 +250,7 @@ class PreventiveListController extends GetxController {
                   onPressed: () {
                     deleteCkecklist(checklist_id).then((value) {
                       Get.back();
-                      getPreventiveCheckList(facilityId, type.value, true);
+                      getPreventiveCheckList(facilityId, type, true);
                     });
                   },
                   text: 'Yes'),

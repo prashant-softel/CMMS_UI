@@ -81,7 +81,6 @@ class _ReceiveGoodsOrderWebState extends State<ReceiveGoodsOrderWeb> {
                       ],
                     ),
                   ),
-
                   Expanded(
                     child: ScrollConfiguration(
                       behavior: ScrollConfiguration.of(context)
@@ -103,57 +102,58 @@ class _ReceiveGoodsOrderWebState extends State<ReceiveGoodsOrderWeb> {
                                         ),
                                         Spacer(),
                                         Container(
-                                        padding: EdgeInsets.symmetric(
-                                            vertical: 2, horizontal: 5),
-                                        margin: EdgeInsets.only(top: 5),
-                                        decoration: BoxDecoration(
-                                          color: controller
-                                                      .getPurchaseDetailsByIDModel
-                                                      .value
-                                                      ?.status ==
-                                                  302
-                                              ? ColorValues.createsColor
-                                              : controller.getPurchaseDetailsByIDModel
-                                                          .value?.status ==
-                                                      301
-                                                  ? ColorValues.draftColor
+                                            padding: EdgeInsets.symmetric(
+                                                vertical: 2, horizontal: 5),
+                                            margin: EdgeInsets.only(top: 5),
+                                            decoration: BoxDecoration(
+                                              color: controller
+                                                          .getPurchaseDetailsByIDModel
+                                                          .value
+                                                          ?.status ==
+                                                      302
+                                                  ? ColorValues.createsColor
                                                   : controller.getPurchaseDetailsByIDModel
                                                               .value?.status ==
-                                                          305
-                                                      ? Color.fromARGB(
-                                                          255, 181, 129, 179)
+                                                          301
+                                                      ? ColorValues.draftColor
                                                       : controller
                                                                   .getPurchaseDetailsByIDModel
                                                                   .value
                                                                   ?.status ==
-                                                              309
+                                                              305
                                                           ? Color.fromARGB(
                                                               255, 181, 129, 179)
                                                           : controller
                                                                       .getPurchaseDetailsByIDModel
                                                                       .value
                                                                       ?.status ==
-                                                                  306
-                                                              ? ColorValues
-                                                                  .approveColor
+                                                                  309
+                                                              ? Color.fromARGB(
+                                                                  255,
+                                                                  181,
+                                                                  129,
+                                                                  179)
                                                               : controller
                                                                           .getPurchaseDetailsByIDModel
                                                                           .value
                                                                           ?.status ==
-                                                                      304
-                                                                  ? ColorValues.appPurpleColor
-                                                                  : ColorValues.lightBlueColor,
-                                          borderRadius:
-                                              BorderRadius.circular(5),
-                                        ),
-                                        child: Text(
-                                          " ${controller.getPurchaseDetailsByIDModel.value?.status_short ?? ""}",
-                                        )),
+                                                                      306
+                                                                  ? ColorValues
+                                                                      .approveColor
+                                                                  : controller.getPurchaseDetailsByIDModel.value?.status ==
+                                                                          304
+                                                                      ? ColorValues.appPurpleColor
+                                                                      : ColorValues.lightBlueColor,
+                                              borderRadius:
+                                                  BorderRadius.circular(5),
+                                            ),
+                                            child: Text(
+                                              " ${controller.getPurchaseDetailsByIDModel.value?.status_short ?? ""}",
+                                            )),
                                         controller.id == null
                                             ? Container()
                                             : Text(
                                                 " Order ID :${controller.getPurchaseDetailsByIDModel.value?.id} ",
-                                            
                                               )
 
                                         // ActionButton(
@@ -170,53 +170,54 @@ class _ReceiveGoodsOrderWebState extends State<ReceiveGoodsOrderWeb> {
                                   Divider(
                                     color: ColorValues.greyLightColour,
                                   ),
-                                   Container(
-                                  padding: EdgeInsets.symmetric(
-                                      vertical: 2, horizontal: 5),
-                                  margin: EdgeInsets.only(top: 5),
-                                  decoration: BoxDecoration(
-                                    color: controller
-                                                .getPurchaseDetailsByIDModel
-                                                .value
-                                                ?.status ==
-                                            302
-                                        ? ColorValues.createsColor
-                                        : controller.getPurchaseDetailsByIDModel
-                                                    .value?.status ==
-                                                301
-                                            ? ColorValues.draftColor
+                                  Container(
+                                      padding: EdgeInsets.symmetric(
+                                          vertical: 2, horizontal: 5),
+                                      margin: EdgeInsets.only(top: 5),
+                                      decoration: BoxDecoration(
+                                        color: controller
+                                                    .getPurchaseDetailsByIDModel
+                                                    .value
+                                                    ?.status ==
+                                                302
+                                            ? ColorValues.createsColor
                                             : controller.getPurchaseDetailsByIDModel
                                                         .value?.status ==
-                                                    305
-                                                ? Color.fromARGB(
-                                                    255, 181, 129, 179)
+                                                    301
+                                                ? ColorValues.draftColor
                                                 : controller.getPurchaseDetailsByIDModel
                                                             .value?.status ==
-                                                        309
+                                                        305
                                                     ? Color.fromARGB(
                                                         255, 181, 129, 179)
                                                     : controller
                                                                 .getPurchaseDetailsByIDModel
                                                                 .value
                                                                 ?.status ==
-                                                            306
-                                                        ? ColorValues
-                                                            .approveColor
+                                                            309
+                                                        ? Color.fromARGB(
+                                                            255, 181, 129, 179)
                                                         : controller
                                                                     .getPurchaseDetailsByIDModel
                                                                     .value
                                                                     ?.status ==
-                                                                304
+                                                                306
                                                             ? ColorValues
-                                                                .appPurpleColor
-                                                            : ColorValues.lightBlueColor,
-                                    borderRadius: BorderRadius.circular(5),
-                                  ),
-                                  child: Obx(
-                                    () => Text(
-                                      "Status :${controller.getPurchaseDetailsByIDModel.value?.status_long ?? ""} ",
-                                    ),
-                                  )),
+                                                                .approveColor
+                                                            : controller
+                                                                        .getPurchaseDetailsByIDModel
+                                                                        .value
+                                                                        ?.status ==
+                                                                    304
+                                                                ? ColorValues.appPurpleColor
+                                                                : ColorValues.lightBlueColor,
+                                        borderRadius: BorderRadius.circular(5),
+                                      ),
+                                      child: Obx(
+                                        () => Text(
+                                          "Status :${controller.getPurchaseDetailsByIDModel.value?.status_long ?? ""} ",
+                                        ),
+                                      )),
                                   IgnorePointer(
                                     child: Container(
                                       margin: Dimens.edgeInsets20,
@@ -1179,10 +1180,7 @@ class _ReceiveGoodsOrderWebState extends State<ReceiveGoodsOrderWeb> {
                                                                   ),
                                                                 )
                                                               : (mapData['key'] ==
-                                                                          "Received") ||
-                                                                      (mapData[
-                                                                              'key'] ==
-                                                                          "Accepted")
+                                                                      "Received")
                                                                   ? Padding(
                                                                       padding: EdgeInsets
                                                                           .only(
@@ -1191,72 +1189,95 @@ class _ReceiveGoodsOrderWebState extends State<ReceiveGoodsOrderWeb> {
                                                                           Column(
                                                                         mainAxisAlignment:
                                                                             MainAxisAlignment.start,
+                                                                        crossAxisAlignment:
+                                                                            CrossAxisAlignment.start,
                                                                         children: [
                                                                           Container(
-
-                                                                              // padding: EdgeInsets.all(value),
-                                                                              decoration: BoxDecoration(
-                                                                                boxShadow: [
-                                                                                  BoxShadow(
-                                                                                    color: Colors.black26,
-                                                                                    offset: const Offset(
-                                                                                      5.0,
-                                                                                      5.0,
-                                                                                    ),
-                                                                                    blurRadius: 5.0,
-                                                                                    spreadRadius: 1.0,
+                                                                            // padding: EdgeInsets.all(value),
+                                                                            decoration:
+                                                                                BoxDecoration(
+                                                                              boxShadow: [
+                                                                                BoxShadow(
+                                                                                  color: Colors.black26,
+                                                                                  offset: const Offset(
+                                                                                    5.0,
+                                                                                    5.0,
                                                                                   ),
-                                                                                ],
-                                                                                color: ColorValues.whiteColor,
-                                                                                borderRadius: BorderRadius.circular(5),
-                                                                              ),
-                                                                              child: LoginCustomTextfield(
-                                                                                width: (Get.width * .4),
-                                                                                keyboardType: TextInputType.number,
-                                                                                inputFormatters: <TextInputFormatter>[
-                                                                                  FilteringTextInputFormatter.digitsOnly
-                                                                                ],
-                                                                                enabled: controller.getPurchaseDetailsByIDModel.value?.status == 306 && varUserAccessModel.value.access_list!.where((e) => e.feature_id == UserAccessConstants.kGoodsFeatureId && e.add == UserAccessConstants.kHaveAddAccess).length > 0 || controller.getPurchaseDetailsByIDModel.value?.status == 309 && varUserAccessModel.value.access_list!.where((e) => e.feature_id == UserAccessConstants.kGoodsFeatureId && e.add == UserAccessConstants.kHaveAddAccess).length > 0 || controller.getPurchaseDetailsByIDModel.value?.status == 307 && varUserAccessModel.value.access_list!.where((e) => e.feature_id == UserAccessConstants.kGoodsFeatureId && e.add == UserAccessConstants.kHaveAddAccess).length > 0 ? true : false,
-                                                                                maxLine: 1,
-                                                                                textController: new TextEditingController(text: mapData["value"] ?? ''),
-                                                                                onChanged: (txt) {
-                                                                                  mapData["value"] = txt;
-                                                                                },
-                                                                              )),
+                                                                                  blurRadius: 5.0,
+                                                                                  spreadRadius: 1.0,
+                                                                                ),
+                                                                              ],
+                                                                              color: ColorValues.whiteColor,
+                                                                              borderRadius: BorderRadius.circular(5),
+                                                                            ),
+                                                                            child:
+                                                                                LoginCustomTextfield(
+                                                                              width: (Get.width * .4),
+                                                                              keyboardType: TextInputType.number,
+                                                                              inputFormatters: <TextInputFormatter>[
+                                                                                FilteringTextInputFormatter.digitsOnly
+                                                                              ],
+                                                                              enabled: controller.getPurchaseDetailsByIDModel.value?.status == 306 && varUserAccessModel.value.access_list!.where((e) => e.feature_id == UserAccessConstants.kGoodsFeatureId && e.add == UserAccessConstants.kHaveAddAccess).length > 0 || controller.getPurchaseDetailsByIDModel.value?.status == 309 && varUserAccessModel.value.access_list!.where((e) => e.feature_id == UserAccessConstants.kGoodsFeatureId && e.add == UserAccessConstants.kHaveAddAccess).length > 0 || controller.getPurchaseDetailsByIDModel.value?.status == 307 && varUserAccessModel.value.access_list!.where((e) => e.feature_id == UserAccessConstants.kGoodsFeatureId && e.add == UserAccessConstants.kHaveAddAccess).length > 0 ? true : false,
+                                                                              maxLine: 1,
+                                                                              textController: new TextEditingController(text: mapData["value"] ?? ''),
+                                                                              onChanged: (txt) {
+                                                                                mapData["value"] = txt;
+                                                                              },
+                                                                            ),
+                                                                          ),
+                                                                          Dimens
+                                                                              .boxHeight10,
+                                                                          controller.dropdownMapperData[record[0]['value']]?.asset_type == "Spare"
+                                                                              ? Text(
+                                                                                  "Sr No",
+                                                                                  style: TextStyle(fontSize: 15, fontWeight: FontWeight.bold),
+                                                                                )
+                                                                              : Dimens.box0,
+                                                                          controller.dropdownMapperData[record[0]['value']]?.asset_type == "Spare"
+                                                                              ? Container(
+                                                                                  // padding: EdgeInsets.all(value),
+                                                                                  decoration: BoxDecoration(
+                                                                                    boxShadow: [
+                                                                                      BoxShadow(
+                                                                                        color: Colors.black26,
+                                                                                        offset: const Offset(
+                                                                                          5.0,
+                                                                                          5.0,
+                                                                                        ),
+                                                                                        blurRadius: 5.0,
+                                                                                        spreadRadius: 1.0,
+                                                                                      ),
+                                                                                    ],
+                                                                                    color: ColorValues.whiteColor,
+                                                                                    borderRadius: BorderRadius.circular(5),
+                                                                                  ),
+                                                                                  child: LoginCustomTextfield(
+                                                                                    width: (Get.width * .4),
+                                                                                    enabled: controller.getPurchaseDetailsByIDModel.value?.status == 306 && varUserAccessModel.value.access_list!.where((e) => e.feature_id == UserAccessConstants.kGoodsFeatureId && e.add == UserAccessConstants.kHaveAddAccess).length > 0 || controller.getPurchaseDetailsByIDModel.value?.status == 309 && varUserAccessModel.value.access_list!.where((e) => e.feature_id == UserAccessConstants.kGoodsFeatureId && e.add == UserAccessConstants.kHaveAddAccess).length > 0 || controller.getPurchaseDetailsByIDModel.value?.status == 307 && varUserAccessModel.value.access_list!.where((e) => e.feature_id == UserAccessConstants.kGoodsFeatureId && e.add == UserAccessConstants.kHaveAddAccess).length > 0 ? true : false,
+                                                                                    maxLine: 1,
+                                                                                    textController: new TextEditingController(text: mapData["sr_no"] ?? ''),
+                                                                                    onChanged: (txt) {
+                                                                                      mapData["sr_no"] = txt;
+                                                                                    },
+                                                                                  ),
+                                                                                )
+                                                                              : Dimens.box0,
                                                                         ],
                                                                       ),
                                                                     )
-                                                                  :
-                                                                  //  (mapData['key'] ==
-                                                                  //         "Pending")
-                                                                  //     ? Padding(
-                                                                  //         padding:
-                                                                  //             const EdgeInsets
-                                                                  //                 .only(
-                                                                  //           left:
-                                                                  //               20,
-                                                                  //           right:
-                                                                  //               20,
-                                                                  //         ),
-                                                                  //         child:
-                                                                  //             Checkbox(
-                                                                  //           onChanged:
-                                                                  //               (value) {},
-                                                                  //           value:
-                                                                  //               false,
-                                                                  //         ))
-                                                                  //     :
-                                                                  (mapData['key'] ==
-                                                                          "Damaged")
+                                                                  : (mapData['key'] ==
+                                                                          "Accepted")
                                                                       ? Padding(
                                                                           padding:
-                                                                              const EdgeInsets.only(top: 10),
+                                                                              EdgeInsets.only(top: 10),
                                                                           child:
                                                                               Column(
                                                                             mainAxisAlignment:
                                                                                 MainAxisAlignment.start,
                                                                             children: [
                                                                               Container(
+
+                                                                                  // padding: EdgeInsets.all(value),
                                                                                   decoration: BoxDecoration(
                                                                                     boxShadow: [
                                                                                       BoxShadow(
@@ -1278,7 +1299,7 @@ class _ReceiveGoodsOrderWebState extends State<ReceiveGoodsOrderWeb> {
                                                                                     inputFormatters: <TextInputFormatter>[
                                                                                       FilteringTextInputFormatter.digitsOnly
                                                                                     ],
-                                                                                    enabled: controller.getPurchaseDetailsByIDModel.value?.status == 306 && varUserAccessModel.value.access_list!.where((e) => e.feature_id == UserAccessConstants.kGoodsFeatureId && e.add == UserAccessConstants.kHaveAddAccess).length > 0 || controller.getPurchaseDetailsByIDModel.value?.status == 307 && varUserAccessModel.value.access_list!.where((e) => e.feature_id == UserAccessConstants.kGoodsFeatureId && e.add == UserAccessConstants.kHaveAddAccess).length > 0 || controller.getPurchaseDetailsByIDModel.value?.status == 309 && varUserAccessModel.value.access_list!.where((e) => e.feature_id == UserAccessConstants.kGoodsFeatureId && e.add == UserAccessConstants.kHaveAddAccess).length > 0 ? true : false,
+                                                                                    enabled: controller.getPurchaseDetailsByIDModel.value?.status == 306 && varUserAccessModel.value.access_list!.where((e) => e.feature_id == UserAccessConstants.kGoodsFeatureId && e.add == UserAccessConstants.kHaveAddAccess).length > 0 || controller.getPurchaseDetailsByIDModel.value?.status == 309 && varUserAccessModel.value.access_list!.where((e) => e.feature_id == UserAccessConstants.kGoodsFeatureId && e.add == UserAccessConstants.kHaveAddAccess).length > 0 || controller.getPurchaseDetailsByIDModel.value?.status == 307 && varUserAccessModel.value.access_list!.where((e) => e.feature_id == UserAccessConstants.kGoodsFeatureId && e.add == UserAccessConstants.kHaveAddAccess).length > 0 ? true : false,
                                                                                     maxLine: 1,
                                                                                     textController: new TextEditingController(text: mapData["value"] ?? ''),
                                                                                     onChanged: (txt) {
@@ -1289,47 +1310,84 @@ class _ReceiveGoodsOrderWebState extends State<ReceiveGoodsOrderWeb> {
                                                                           ),
                                                                         )
                                                                       : (mapData['key'] ==
-                                                                              "Requested")
+                                                                              "Damaged")
                                                                           ? Padding(
                                                                               padding: const EdgeInsets.only(top: 10),
                                                                               child: Column(
                                                                                 mainAxisAlignment: MainAxisAlignment.start,
                                                                                 children: [
                                                                                   Container(
-                                                                                    decoration: BoxDecoration(
-                                                                                      boxShadow: [
-                                                                                        BoxShadow(
-                                                                                          color: Colors.black26,
-                                                                                          offset: const Offset(
-                                                                                            5.0,
-                                                                                            5.0,
+                                                                                      decoration: BoxDecoration(
+                                                                                        boxShadow: [
+                                                                                          BoxShadow(
+                                                                                            color: Colors.black26,
+                                                                                            offset: const Offset(
+                                                                                              5.0,
+                                                                                              5.0,
+                                                                                            ),
+                                                                                            blurRadius: 5.0,
+                                                                                            spreadRadius: 1.0,
                                                                                           ),
-                                                                                          blurRadius: 5.0,
-                                                                                          spreadRadius: 1.0,
-                                                                                        ),
-                                                                                      ],
-                                                                                      color: ColorValues.whiteColor,
-                                                                                      borderRadius: BorderRadius.circular(5),
-                                                                                    ),
-                                                                                    child: LoginCustomTextfield(
-                                                                                      width: (Get.width * .4),
-                                                                                      keyboardType: TextInputType.number,
-                                                                                      inputFormatters: <TextInputFormatter>[
-                                                                                        FilteringTextInputFormatter.digitsOnly
-                                                                                      ],
-                                                                                      enabled: controller.getPurchaseDetailsByIDModel.value?.status == 306 && varUserAccessModel.value.access_list!.where((e) => e.feature_id == UserAccessConstants.kGoodsFeatureId && e.add == UserAccessConstants.kHaveAddAccess).length > 0 || controller.getPurchaseDetailsByIDModel.value?.status == 307 && varUserAccessModel.value.access_list!.where((e) => e.feature_id == UserAccessConstants.kGoodsFeatureId && e.add == UserAccessConstants.kHaveAddAccess).length > 0 || controller.getPurchaseDetailsByIDModel.value?.status == 309 && varUserAccessModel.value.access_list!.where((e) => e.feature_id == UserAccessConstants.kGoodsFeatureId && e.add == UserAccessConstants.kHaveAddAccess).length > 0 ? true : false,
-                                                                                      maxLine: 1,
-                                                                                      textController: new TextEditingController(text: mapData["value"] ?? ''),
-                                                                                      onChanged: (txt) {
-                                                                                        mapData["value"] = txt;
-                                                                                      },
-                                                                                    ),
-                                                                                  ),
+                                                                                        ],
+                                                                                        color: ColorValues.whiteColor,
+                                                                                        borderRadius: BorderRadius.circular(5),
+                                                                                      ),
+                                                                                      child: LoginCustomTextfield(
+                                                                                        width: (Get.width * .4),
+                                                                                        keyboardType: TextInputType.number,
+                                                                                        inputFormatters: <TextInputFormatter>[
+                                                                                          FilteringTextInputFormatter.digitsOnly
+                                                                                        ],
+                                                                                        enabled: controller.getPurchaseDetailsByIDModel.value?.status == 306 && varUserAccessModel.value.access_list!.where((e) => e.feature_id == UserAccessConstants.kGoodsFeatureId && e.add == UserAccessConstants.kHaveAddAccess).length > 0 || controller.getPurchaseDetailsByIDModel.value?.status == 307 && varUserAccessModel.value.access_list!.where((e) => e.feature_id == UserAccessConstants.kGoodsFeatureId && e.add == UserAccessConstants.kHaveAddAccess).length > 0 || controller.getPurchaseDetailsByIDModel.value?.status == 309 && varUserAccessModel.value.access_list!.where((e) => e.feature_id == UserAccessConstants.kGoodsFeatureId && e.add == UserAccessConstants.kHaveAddAccess).length > 0 ? true : false,
+                                                                                        maxLine: 1,
+                                                                                        textController: new TextEditingController(text: mapData["value"] ?? ''),
+                                                                                        onChanged: (txt) {
+                                                                                          mapData["value"] = txt;
+                                                                                        },
+                                                                                      )),
                                                                                 ],
                                                                               ),
                                                                             )
-                                                                          : Text(mapData['key'] ??
-                                                                              ''),
+                                                                          : (mapData['key'] == "Requested")
+                                                                              ? Padding(
+                                                                                  padding: const EdgeInsets.only(top: 10),
+                                                                                  child: Column(
+                                                                                    mainAxisAlignment: MainAxisAlignment.start,
+                                                                                    children: [
+                                                                                      Container(
+                                                                                        decoration: BoxDecoration(
+                                                                                          boxShadow: [
+                                                                                            BoxShadow(
+                                                                                              color: Colors.black26,
+                                                                                              offset: const Offset(
+                                                                                                5.0,
+                                                                                                5.0,
+                                                                                              ),
+                                                                                              blurRadius: 5.0,
+                                                                                              spreadRadius: 1.0,
+                                                                                            ),
+                                                                                          ],
+                                                                                          color: ColorValues.whiteColor,
+                                                                                          borderRadius: BorderRadius.circular(5),
+                                                                                        ),
+                                                                                        child: LoginCustomTextfield(
+                                                                                          width: (Get.width * .4),
+                                                                                          keyboardType: TextInputType.number,
+                                                                                          inputFormatters: <TextInputFormatter>[
+                                                                                            FilteringTextInputFormatter.digitsOnly
+                                                                                          ],
+                                                                                          enabled: controller.getPurchaseDetailsByIDModel.value?.status == 306 && varUserAccessModel.value.access_list!.where((e) => e.feature_id == UserAccessConstants.kGoodsFeatureId && e.add == UserAccessConstants.kHaveAddAccess).length > 0 || controller.getPurchaseDetailsByIDModel.value?.status == 307 && varUserAccessModel.value.access_list!.where((e) => e.feature_id == UserAccessConstants.kGoodsFeatureId && e.add == UserAccessConstants.kHaveAddAccess).length > 0 || controller.getPurchaseDetailsByIDModel.value?.status == 309 && varUserAccessModel.value.access_list!.where((e) => e.feature_id == UserAccessConstants.kGoodsFeatureId && e.add == UserAccessConstants.kHaveAddAccess).length > 0 ? true : false,
+                                                                                          maxLine: 1,
+                                                                                          textController: new TextEditingController(text: mapData["value"] ?? ''),
+                                                                                          onChanged: (txt) {
+                                                                                            mapData["value"] = txt;
+                                                                                          },
+                                                                                        ),
+                                                                                      ),
+                                                                                    ],
+                                                                                  ),
+                                                                                )
+                                                                              : Text(mapData['key'] ?? ''),
                                                 );
                                               }).toList(),
                                             );
@@ -1560,16 +1618,17 @@ class _ReceiveGoodsOrderWebState extends State<ReceiveGoodsOrderWeb> {
                                     .where((e) => e.feature_id == UserAccessConstants.kGoodsFeatureId && e.add == UserAccessConstants.kHaveAddAccess)
                                     .length >
                                 0
-                    ?  Container(
-                  height: 40,
-                  child: CustomElevatedButton(
-                    backgroundColor: Color(0xFF77CAE7),
-                    text: 'Save as Drafts',
-                    onPressed: () {
-                      controller.updateGOReceiveIsSubmit0();
-                    },
-                  ),
-                )   : Dimens.box0,
+                    ? Container(
+                        height: 40,
+                        child: CustomElevatedButton(
+                          backgroundColor: Color(0xFF77CAE7),
+                          text: 'Save as Drafts',
+                          onPressed: () {
+                            controller.updateGOReceiveIsSubmit0();
+                          },
+                        ),
+                      )
+                    : Dimens.box0,
                 varUserAccessModel.value.access_list!
                             .where((e) =>
                                 e.feature_id ==

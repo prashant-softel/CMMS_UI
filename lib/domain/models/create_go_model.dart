@@ -131,7 +131,7 @@ class Items {
     this.cat_name,
     this.asset_type,
     this.asset_code,
-    // this.sr_no,
+    this.sr_no,
   });
   int? id;
   int? assetMasterItemID;
@@ -154,7 +154,7 @@ class Items {
   String? asset_type;
   String? asset_code;
   int? goItemID;
-  // String? sr_no;
+  int? sr_no;
   factory Items.fromJson(Map<String, dynamic> json) => Items(
         assetMasterItemID: json["assetMasterItemID"],
         goItemID: json["goItemID"],
@@ -177,7 +177,7 @@ class Items {
         cat_name: json['cat_name'],
         asset_type: json['asset_type'],
         asset_code: json['asset_code'],
-        // sr_no: json['sr_no'],
+        sr_no: json['sr_no'],
       );
 
   Map<String, dynamic> toJson() => {
@@ -202,6 +202,6 @@ class Items {
         "cat_name": cat_name == null ? "" : cat_name,
         "asset_type": asset_type == null ? "" : asset_type,
         "asset_code": asset_code == null ? "" : asset_code,
-        // "sr_no": sr_no == null ? "" : sr_no,
+        "sr_no": sr_no == null ? "" : sr_no,
       };
 }

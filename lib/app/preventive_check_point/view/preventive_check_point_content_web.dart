@@ -56,10 +56,8 @@ class PreventiveCheckPointContentWeb
                     onTap: () {
                       Get.back();
                     },
-                    child: controller.type.value == 1
-                        ? Text(" / PREVENTIVE MAINTENANCE",
-                            style: Styles.greyMediumLight12)
-                        : Text(" / AUDIT", style: Styles.greyMediumLight12),
+                    child: Text(" / PREVENTIVE MAINTENANCE",
+                        style: Styles.greyMediumLight12),
                   ),
                   Text(" / CHECK POINT CREATOR",
                       style: Styles.greyMediumLight12)

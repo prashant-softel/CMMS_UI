@@ -13,12 +13,8 @@ class LinkToPermitDialog extends GetView {
   String? data;
   int? taskId;
 
-  LinkToPermitDialog({
-    super.key,
-    this.approveIncidentReportData,
-    this.data,
-    this.taskId,
-  });
+  LinkToPermitDialog(
+      {super.key, this.approveIncidentReportData, this.data, this.taskId});
   final NewPermitController controller = Get.find();
 
   @override

@@ -22,7 +22,12 @@ import '../models/user_detail_model.dart';
 class AddAssetMasterUsecase {
   AddAssetMasterUsecase(this.repository);
   Repository repository;
-
+  Future<bool> createAssetSM({
+    assetListJsonString,
+    bool? isLoading,
+  }) async =>
+      await repository.createAssetSM(
+          isLoading: isLoading, assetListJsonString: assetListJsonString);
   Future<List<CountryModel?>?> getCountryList({
     bool? isLoading,
   }) async =>

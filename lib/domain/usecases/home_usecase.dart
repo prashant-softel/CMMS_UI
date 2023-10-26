@@ -139,6 +139,4 @@ class HomeUsecase {
       _repository.saveValue(LocalKeys.selectFacalityDropdowndata, facilitydata);
   Future<String?> getValue() async =>
       await _repository.getStringValue(LocalKeys.selectFacalityDropdowndata);
-  Future<String?> getUserAcessValue() async =>
-      await _repository.getStringValue(LocalKeys.setUserAccess);
 }

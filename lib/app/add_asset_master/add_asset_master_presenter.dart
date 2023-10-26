@@ -20,39 +20,50 @@ import '../../domain/usecases/add_asset_master_usecase.dart';
 import '../../domain/usecases/add_user_usecase.dart';
 
 class AddAssetMasterPresenter {
-  AddAssetMasterPresenter(this.addUserUsecase);
-  AddAssetMasterUsecase addUserUsecase;
+  AddAssetMasterPresenter(this.addAssetUsecase);
+  AddAssetMasterUsecase addAssetUsecase;
+  Future<bool> createAssetSM({
+    assetListJsonString,
+    required bool isLoading,
+  }) async {
+    print("presenter");
+    addAssetUsecase.createAssetSM(
+      assetListJsonString: assetListJsonString,
+      isLoading: isLoading,
+    );
+    return true;
+  }
     Future<List<CountryModel?>?> getCountryList({
     bool? isLoading,
   }) async =>
-      await addUserUsecase.getCountryList(
+      await addAssetUsecase.getCountryList(
         isLoading: isLoading ?? false,
       );
   Future<List<BloodModel?>?> getBloodList({
     bool? isLoading,
   }) async =>
-      await addUserUsecase.getBloodList(
+      await addAssetUsecase.getBloodList(
         isLoading: isLoading ?? false,
       );
   Future<List<RoleModel?>?> getRoleList({
     bool? isLoading,
   }) async =>
-      await addUserUsecase.getRoleList(
+      await addAssetUsecase.getRoleList(
         isLoading: isLoading ?? false,
       );
   Future<List<StateModel?>?> getStateList(
       {bool? isLoading, int? selectedCountryId}) async =>
-      await addUserUsecase.getStateList(
+      await addAssetUsecase.getStateList(
           isLoading: isLoading ?? false, selectedCountryId: selectedCountryId);
   Future<List<CityModel?>?> getCityList(
       {bool? isLoading, int? selectedStateId}) async =>
-      await addUserUsecase.getCityList(
+      await addAssetUsecase.getCityList(
           isLoading: isLoading ?? false, selectedStateId: selectedStateId);
   Future<AccessLevelModel?> getRoleAccessList({
     int? roleId,
     bool? isLoading,
   }) async =>
-      await addUserUsecase.getRoleAccessList(
+      await addAssetUsecase.getRoleAccessList(
         roleId: roleId,
         isLoading: isLoading,
       );
@@ -60,7 +71,7 @@ class AddAssetMasterPresenter {
     int? roleId,
     bool? isLoading,
   }) async =>
-      await addUserUsecase.getRoleNotificationList(
+      await addAssetUsecase.getRoleNotificationList(
         roleId: roleId,
         isLoading: isLoading,
       );
@@ -68,7 +79,7 @@ class AddAssetMasterPresenter {
     int? userId,
     bool? isLoading,
   }) async =>
-      await addUserUsecase.getUserAccessListById(
+      await addAssetUsecase.getUserAccessListById(
         userId: userId,
         isLoading: isLoading,
       );
@@ -76,7 +87,7 @@ class AddAssetMasterPresenter {
     int? userId,
     bool? isLoading,
   }) async =>
-      await addUserUsecase.getUserNotificationListById(
+      await addAssetUsecase.getUserNotificationListById(
         userId: userId,
         isLoading: isLoading,
       );
@@ -84,7 +95,7 @@ class AddAssetMasterPresenter {
     accessLevelJsonString,
     required bool isLoading,
   }) async {
-    return addUserUsecase.saveAccessLevel(
+    return addAssetUsecase.saveAccessLevel(
       accessLevelJsonString: accessLevelJsonString,
       isLoading: isLoading,
     );
@@ -95,7 +106,7 @@ class AddAssetMasterPresenter {
     required bool isLoading,
   }) async {
     print("presenter");
-    addUserUsecase.addUser(
+    addAssetUsecase.addUser(
       adduserJsonString: adduserJsonString,
       isLoading: isLoading,
     );
@@ -106,7 +117,7 @@ class AddAssetMasterPresenter {
     int? userId,
     bool? isLoading,
   }) async =>
-      await addUserUsecase.getUserDetails(
+      await addAssetUsecase.getUserDetails(
         userId: userId,
         isLoading: isLoading,
       );
@@ -115,7 +126,7 @@ class AddAssetMasterPresenter {
     required bool isLoading,
   }) async {
     print("presenter");
-    addUserUsecase.updateUser(
+    addAssetUsecase.updateUser(
       adduserJsonString: adduserJsonString,
       isLoading: isLoading,
     );
@@ -124,7 +135,7 @@ class AddAssetMasterPresenter {
 
   Future<AddUserModel?> uploadImge(
       Uint8List? fileBytes, String fileName, bool isLoading) async {
-    return await addUserUsecase.uploadImge(fileBytes, fileName, isLoading);
+    return await addAssetUsecase.uploadImge(fileBytes, fileName, isLoading);
     // return true;
   }
 
@@ -132,7 +143,7 @@ class AddAssetMasterPresenter {
     saveNotificationJsonString,
     required bool isLoading,
   }) async {
-    return addUserUsecase.saveNotification(
+    return addAssetUsecase.saveNotification(
       saveNotificationJsonString: saveNotificationJsonString,
       isLoading: isLoading,
     );
@@ -141,14 +152,14 @@ class AddAssetMasterPresenter {
   Future<List<FacilityModel?>?> getFacilityList({
     required bool isLoading,
   }) async {
-    return addUserUsecase.getFacilityList(
+    return addAssetUsecase.getFacilityList(
       isLoading: isLoading,
     );
   }
   Future<List<UnitMeasurementModel?>?> getUnitMeasurementList({
     bool? isLoading,
   }) async =>
-      await addUserUsecase.getUnitMeasurementList(
+      await addAssetUsecase.getUnitMeasurementList(
         isLoading: isLoading ?? false,
       );
   Future<List<AssetTypeListSMModel?>?> getAssetType(
@@ -156,14 +167,14 @@ class AddAssetMasterPresenter {
       {
         bool? isLoading,
       }) async =>
-      await addUserUsecase.getAssetType(
+      await addAssetUsecase.getAssetType(
         isLoading: isLoading ?? false,
       );
 
   Future<List<AssetCategoryModel?>?> getAssetCategoryList({
     bool? isLoading,
   }) async =>
-      await addUserUsecase.getAssetCategoryList(
+      await addAssetUsecase.getAssetCategoryList(
         isLoading: isLoading ?? false,
       );
 

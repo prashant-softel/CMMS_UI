@@ -117,7 +117,7 @@ class CreatePmPlanController extends GetxController {
       }
       //  await _flutterSecureStorage.delete(key: "pmPlanId");
     } catch (e) {
-      //Utility.showDialog(e.toString() + 'pmPlanId');
+      Utility.showDialog(e.toString() + 'pmPlanId');
     }
   }
 
@@ -311,8 +311,6 @@ class CreatePmPlanController extends GetxController {
           // selectedInventoryNameIdList.value = [];
           rowItem.value = [];
           preventiveCheckList.value = <PreventiveCheckListModel>[];
-          selectedInventoryNameIdList.value = [];
-
           if (value != null) {
             for (var selectedItem in value) {
               int equipCatIndex =

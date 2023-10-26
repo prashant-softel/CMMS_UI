@@ -35,7 +35,6 @@ import 'package:cmms/domain/models/get_pm_plan_detail_model.dart';
 import 'package:cmms/domain/models/get_purchase_details_model.dart';
 import 'package:cmms/domain/models/get_return_mrs_detail.dart';
 import 'package:cmms/domain/models/get_return_mrs_list.dart';
-import 'package:cmms/domain/models/get_transction_report_model.dart';
 import 'package:cmms/domain/models/getuser_access_byId_model.dart';
 import 'package:cmms/domain/models/history_model.dart';
 import 'package:cmms/domain/models/incident_report_details_model.dart';
@@ -136,7 +135,6 @@ class Repository {
   ///
   var tokenFetchCount = 0;
   var tokenSaveCount = 0;
-  var accessSavedataCount = 0;
 
   /// Clear data from local storage for [key].
   void clearData(dynamic key) {
@@ -281,9 +279,6 @@ class Repository {
 
   void saveUserAcessData(String key, String value) async {
     try {
-      if (key == "user-access") {
-        accessSavedataCount++;
-      }
       await _deviceRepository.saveUserAcessData(
         key,
         value,
@@ -4318,8 +4313,7 @@ class Repository {
       );
 
       if (!res.hasError) {
-        saveValue(LocalKeys.setUserAccess, res.data);
-        // saveUserAcessData(LocalKeys.userAccess, res.data);
+        saveUserAcessData(LocalKeys.userAccess, res.data);
         Get.offAndToNamed(Routes.home);
         return null;
       } //
@@ -5736,8 +5730,7 @@ class Repository {
     }
   }
 
-  Future<bool> updateSafetyMeasure(
-      {bool? isLoading, createSafetyMeasureJsonString}) async {
+   Future<bool> updateSafetyMeasure({bool? isLoading, createSafetyMeasureJsonString}) async {
     try {
       final auth = await getSecuredValue(LocalKeys.authToken);
       log(auth);
@@ -5746,7 +5739,7 @@ class Repository {
           isLoading: isLoading,
           createSafetyMeasureJsonString: createSafetyMeasureJsonString);
 
-      print('Response updateSafetyMeasure: ${res.data}');
+        print('Response updateSafetyMeasure: ${res.data}');
       if (!res.hasError) {
         return true;
       } else {
@@ -5758,6 +5751,7 @@ class Repository {
       return false;
     }
   }
+
 
   Future<List<CountryModel?>?> getCountryList(
     bool? isLoading,
@@ -7478,12 +7472,8 @@ class Repository {
     }
   }
 
-  Future<List<PlantStockListModel?>?> getPlantStockList(
-      int? facilityId,
-      bool? isLoading,
-      dynamic startDate,
-      dynamic endDate,
-      List<int>? selectedAssetsNameIdList) async {
+  Future<List<PlantStockListModel?>?> getPlantStockList(int? facilityId,
+      bool? isLoading, dynamic startDate, dynamic endDate) async {
     try {
       final auth = await getSecuredValue(LocalKeys.authToken);
       int userId = varUserAccessModel.value.user_id ?? 0;
@@ -7493,8 +7483,7 @@ class Repository {
           isLoading: isLoading ?? false,
           startDate: startDate,
           endDate: endDate,
-          userId: userId,
-          selectedAssetsNameIdList: selectedAssetsNameIdList);
+          userId: userId);
 
       if (!res.hasError) {
         final jsonPlantStockListModels = jsonDecode(res.data);
@@ -7506,46 +7495,6 @@ class Repository {
                 .toList();
 
         return _plantStockListModels;
-      } else {
-        Utility.showDialog(res.errorCode.toString() + ' getPlantStockList');
-        return [];
-      }
-    } catch (error) {
-      print(error.toString());
-      return [];
-    }
-  }
-
-  Future<List<TransactionStockReportListModel?>?> getTransactionStockList(
-    int? facilityId,
-    bool? isLoading,
-    dynamic startDate,
-    dynamic endDate,
-  ) async {
-    try {
-      final auth = await getSecuredValue(LocalKeys.authToken);
-      int userId = varUserAccessModel.value.user_id ?? 0;
-      final res = await _dataRepository.getTransactionStockList(
-        auth: auth,
-        facilityId: facilityId ?? 0,
-        isLoading: isLoading ?? false,
-        startDate: startDate,
-        endDate: endDate,
-        userId: userId,
-      );
-
-      if (!res.hasError) {
-        final jsonTransactionStockReportListModels = jsonDecode(res.data);
-        // print(res.data);
-        final List<TransactionStockReportListModel>
-            _TransactionStockReportListModels =
-            jsonTransactionStockReportListModels
-                .map<TransactionStockReportListModel>((m) =>
-                    TransactionStockReportListModel.fromJson(
-                        Map<String, dynamic>.from(m)))
-                .toList();
-
-        return _TransactionStockReportListModels;
       } else {
         Utility.showDialog(res.errorCode.toString() + ' getPlantStockList');
         return [];
@@ -8933,7 +8882,6 @@ class Repository {
       return false;
     }
   }
-
   Future<List<AssetCategoryModel>> getAssetCategoryList({
     // required int? job_type_id,
     required bool isLoading,
@@ -8962,6 +8910,7 @@ class Repository {
 
   Future<List<AssetTypeListSMModel>> getAssetTypeSMList({
     required bool isLoading,
+
   }) async {
     try {
       final auth = await getSecuredValue(LocalKeys.authToken);
@@ -9070,6 +9019,28 @@ class Repository {
       log(error.toString());
 
       return [];
+    }
+  }
+
+  Future<bool> createAssetSM(
+      {bool? isLoading, assetListJsonString}) async {
+    try {
+      final auth = await getSecuredValue(LocalKeys.authToken);
+      final res = await _dataRepository.createAssetSM(
+          auth: auth,
+          isLoading: isLoading,
+          assetListJsonString: assetListJsonString);
+
+      if (!res.hasError) {
+        return true;
+      } //
+      else {
+        Utility.showDialog(res.errorCode.toString() + ' createCheckListNumber');
+        return false;
+      }
+    } catch (error) {
+      print(error.toString());
+      return false;
     }
   }
   //end
