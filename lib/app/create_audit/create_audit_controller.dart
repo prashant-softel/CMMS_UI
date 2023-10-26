@@ -1,6 +1,7 @@
 import 'dart:async';
 
 import 'package:cmms/app/create_audit/create_audit_presenter.dart';
+import 'package:cmms/domain/models/create_audit_plan_model.dart';
 import 'package:cmms/domain/models/frequency_model.dart';
 import 'package:cmms/domain/models/preventive_checklist_model.dart';
 import 'package:flutter/material.dart';
@@ -20,6 +21,9 @@ class CreateAuditController extends GetxController {
   int selectedfrequencyId = 0;
   bool openStartDatePicker = false;
   var startDateDateTc = TextEditingController();
+  var planTitleTc = TextEditingController();
+  var descriptionTc = TextEditingController();
+
   RxList<PreventiveCheckListModel?> checkList =
       <PreventiveCheckListModel>[].obs;
   Rx<String> selectedchecklist = ''.obs;
@@ -103,4 +107,34 @@ class CreateAuditController extends GetxController {
     selectedchecklist.value = checkList[0]?.name.toString() ?? '';
     selectedchecklistId.value = checkList[0]?.id.toString() ?? "";
   }
+
+  Future<bool> createAuditNumber() async {
+    // if (checklistNumberCtrlr.text.trim() == '' ||
+    //     selectedEquipmentId == 0 ||
+    //     selectedfrequencyId == 0) {
+    //   Fluttertoast.showToast(
+    //       msg: "Please enter required field", fontSize: 16.0);
+    // } else {
+    String _planTitle = planTitleTc.text.trim();
+    String _description = descriptionTc.text.trim();
+    String _startDate = startDateDateTc.text.trim();
+
+    CreateAuditPlan createAuditPlan = CreateAuditPlan(
+        plan_number: _planTitle,
+        facility_id: facilityId,
+        auditee_id: 101,
+        auditor_id: facilityId,
+        ApplyFrequency: selectedfrequencyId);
+    var checkAuditJsonString =
+        createAuditPlan.toJson(); //createCheckListToJson([createChecklist]);
+
+    print({"checkAuditJsonString", checkAuditJsonString});
+    await createAuditPresenter.createAuditNumber(
+      checkAuditJsonString: checkAuditJsonString,
+      isLoading: true,
+    );
+    return true;
+  }
+  //  return true;
+  // }
 }

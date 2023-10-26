@@ -21,4 +21,14 @@ class CreateAuditPresenter {
         type: type,
         isLoading: isLoading ?? false,
       );
+  Future<bool> createAuditNumber({
+    checkAuditJsonString,
+    required bool isLoading,
+  }) async {
+    createAuditUsecase.createAuditNumber(
+      checkAuditJsonString: checkAuditJsonString,
+      isLoading: isLoading,
+    );
+    return true;
+  }
 }

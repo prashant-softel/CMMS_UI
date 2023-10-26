@@ -1,6 +1,6 @@
 import 'dart:convert';
 
-List<PmPlanListModel> MrsModelFromJson(String str) =>
+List<PmPlanListModel> pmPlanModelFromJson(String str) =>
     List<PmPlanListModel>.from(
         json.decode(str).map((x) => PmPlanListModel.fromJson(x)));
 

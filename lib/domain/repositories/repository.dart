@@ -11,6 +11,7 @@ import 'package:cmms/device/device.dart';
 import 'package:cmms/domain/models/add_inventory_details_model.dart';
 import 'package:cmms/domain/models/add_inventory_model.dart';
 import 'package:cmms/domain/models/add_user_model.dart';
+import 'package:cmms/domain/models/audit_plan_list_model.dart';
 import 'package:cmms/domain/models/business_list_model.dart';
 import 'package:cmms/domain/models/calibration_detail_model.dart';
 import 'package:cmms/domain/models/calibration_list_model.dart';
@@ -9012,6 +9013,62 @@ class Repository {
       }
     } catch (error) {
       print(error.toString());
+      return [];
+    }
+  }
+
+  Future<bool> createAuditNumber(
+      {bool? isLoading, checkAuditJsonString}) async {
+    try {
+      final auth = await getSecuredValue(LocalKeys.authToken);
+      final res = await _dataRepository.createAuditNumber(
+          auth: auth,
+          isLoading: isLoading,
+          checkAuditJsonString: checkAuditJsonString);
+
+      if (!res.hasError) {
+        Get.offAllNamed(Routes.auditListScreen);
+
+        return true;
+      } //
+      else {
+        Utility.showDialog(res.errorCode.toString() + ' createAuditNumber');
+        return false;
+      }
+    } catch (error) {
+      print(error.toString());
+      return false;
+    }
+  }
+
+  Future<List<AuditPlanListModel>?> getAuditPlanList(int? facilityId,
+      bool? isLoading, dynamic startDate, dynamic endDate) async {
+    try {
+      final auth = await getSecuredValue(LocalKeys.authToken);
+      final res = await _dataRepository.getAuditPlanList(
+          auth: auth,
+          facilityId: facilityId ?? 0,
+          isLoading: isLoading ?? false,
+          startDate: startDate,
+          endDate: endDate);
+      // print(res.data);
+      if (!res.hasError) {
+        final jsonAuditPlanListModelModels = jsonDecode(res.data);
+
+        final List<AuditPlanListModel> _AuditPlanListModelList =
+            jsonAuditPlanListModelModels
+                .map<AuditPlanListModel>((m) =>
+                    AuditPlanListModel.fromJson(Map<String, dynamic>.from(m)))
+                .toList();
+        // print({"object", _AuditPlanListModelList});
+        return _AuditPlanListModelList.reversed.toList();
+      } else {
+        Utility.showDialog(res.errorCode.toString() + 'getAuditPlanList');
+        return [];
+      }
+    } catch (error) {
+      log(error.toString());
+
       return [];
     }
   }

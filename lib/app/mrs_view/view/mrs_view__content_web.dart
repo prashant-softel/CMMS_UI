@@ -205,7 +205,8 @@ class MrsViewContentWeb extends GetView<MrsViewController> {
                                           "",
                                       style: Styles.blue17),
                                   Dimens.boxHeight10,
-                                  Text(controller.whereUsedType,
+                                  Text(
+                                      '${controller.mrsDetailsModel.value?.whereUsedType.toString().toUpperCase() ?? ''}${controller.mrsDetailsModel.value?.whereUsedTypeId ?? ''}',
                                       style: Styles.blue17),
                                   Dimens.boxHeight10,
                                   Text(

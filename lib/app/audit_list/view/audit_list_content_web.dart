@@ -1,9 +1,11 @@
 import 'package:cmms/app/audit_list/audit_list_controller.dart';
+import 'package:cmms/app/home/home_screen.dart';
 import 'package:cmms/app/navigators/app_pages.dart';
 import 'package:cmms/app/theme/dimens.dart';
 import 'package:cmms/app/widgets/custom_elevated_button.dart';
+import 'package:cmms/app/widgets/custom_richtext.dart';
 import 'package:cmms/app/widgets/date_picker.dart';
-import 'package:cmms/domain/models/module_cleaning_list_plan_model.dart';
+import 'package:cmms/domain/models/audit_plan_list_model.dart';
 import 'package:data_table_2/data_table_2.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
@@ -21,10 +23,10 @@ class AuditListContentWeb extends StatefulWidget {
   }) : super(key: key);
 
   @override
-  State<AuditListContentWeb> createState() => _PurchaseGoodsorderListWebState();
+  State<AuditListContentWeb> createState() => _AuditListContentWebState();
 }
 
-class _PurchaseGoodsorderListWebState extends State<AuditListContentWeb> {
+class _AuditListContentWebState extends State<AuditListContentWeb> {
   @override
   Widget build(BuildContext context) {
     return GetBuilder<AuditListScreenController>(
@@ -33,7 +35,7 @@ class _PurchaseGoodsorderListWebState extends State<AuditListContentWeb> {
           //  return
           //  Obx(
           //   () {
-          // final dataSource = ModuleCleaningPlanListDataSource(controller);
+          // final dataSource = AuditPlanPlanListDataSource(controller);
           return SingleChildScrollView(
             child: Column(
               children: [
@@ -102,29 +104,28 @@ class _PurchaseGoodsorderListWebState extends State<AuditListContentWeb> {
                                     style: Styles.blackBold16,
                                   ),
                                   Spacer(),
-                                  // Row(
-                                  //   children: [
-                                  //     CustomRichText(title: 'Date Range'),
-                                  //     Dimens.boxWidth10,
-                                  //     CustomTextFieldForStock(
-                                  //       width: MediaQuery.of(context)
-                                  //               .size
-                                  //               .width /
-                                  //           5,
-                                  //       numberTextField: true,
-                                  //       onTap: () {
-                                  //         controller
-                                  //                 .openFromDateToStartDatePicker =
-                                  //             !controller
-                                  //                 .openFromDateToStartDatePicker;
-                                  //         controller.update(
-                                  //             ['stock_Mangement_Date']);
-                                  //       },
-                                  //       hintText:
-                                  //           '${controller.formattedFromdate} - ${controller.formattedTodate}',
-                                  //     ),
-                                  //   ],
-                                  // ),
+                                  Row(
+                                    children: [
+                                      CustomRichText(title: 'Date Range'),
+                                      Dimens.boxWidth10,
+                                      CustomTextFieldForStock(
+                                        width:
+                                            MediaQuery.of(context).size.width /
+                                                5,
+                                        numberTextField: true,
+                                        onTap: () {
+                                          controller
+                                                  .openFromDateToStartDatePicker =
+                                              !controller
+                                                  .openFromDateToStartDatePicker;
+                                          controller
+                                              .update(['stock_Mangement_Date']);
+                                        },
+                                        hintText:
+                                            '${controller.formattedFromdate} - ${controller.formattedTodate}',
+                                      ),
+                                    ],
+                                  ),
                                   Dimens.boxWidth10,
                                   ActionButton(
                                     icon: Icons.add,
@@ -226,8 +227,8 @@ class _PurchaseGoodsorderListWebState extends State<AuditListContentWeb> {
                                   height: 35,
                                   margin: Dimens.edgeInsets0_0_16_0,
                                   child: TextField(
-                                    onChanged: (value) =>
-                                        controller.search(value),
+                                    onChanged: (value) {}, // =>
+                                    //       controller.search(value),
                                     decoration: InputDecoration(
                                       enabledBorder: const OutlineInputBorder(
                                         borderSide: const BorderSide(
@@ -248,7 +249,7 @@ class _PurchaseGoodsorderListWebState extends State<AuditListContentWeb> {
                             SizedBox(
                               height: 20,
                             ),
-                            // controller.moduleCleaningListPlan.isNotEmpty
+                            // controller.AuditPlanListPlan.isNotEmpty
                             //     ? Center(child: Text('No data'))
                             //     :
                             Expanded(
@@ -403,7 +404,7 @@ DataColumn2 buildDataColumn(
 class AuditListListDataSource extends DataTableSource {
   final AuditListScreenController controller;
 
-  late List<ModuleCleaningListPlanModel?> filteredModuleCleaningList;
+  late List<AuditPlanListModel?> filteredAuditPlanList;
 
   AuditListListDataSource(this.controller) {
     filtersModuleCliningPlan();
@@ -411,66 +412,64 @@ class AuditListListDataSource extends DataTableSource {
 
   ///
   void filtersModuleCliningPlan() {
-    filteredModuleCleaningList = <ModuleCleaningListPlanModel?>[];
-    filteredModuleCleaningList =
-        controller.moduleCleaningListPlan.where((GoodsOrderList) {
-      // return (GoodsOrderList.planId ?? '')
+    filteredAuditPlanList = <AuditPlanListModel?>[];
+    filteredAuditPlanList = controller.auditPlanList.where((auditList) {
+      // return (auditList.planId ?? '')
       //         .toString()
       //         .contains(controller.planIdFilterText.value.toLowerCase()) &&
-      //     (GoodsOrderList.title ?? '')
+      //     (auditList.title ?? '')
       //         .toString()
       //         .contains(controller.planTitleFilterText.value.toLowerCase()) &&
-      //     (GoodsOrderList.noOfCleaningDays ?? '')
+      //     (auditList.noOfCleaningDays ?? '')
       //         .toString()
       //         .contains(controller.noOfDaysFilterText.value.toLowerCase()) &&
-      //     (GoodsOrderList.createdBy ?? '')
+      //     (auditList.createdBy ?? '')
       //         .toString()
       //         .contains(controller.createdByFilterText.value.toLowerCase()) &&
-      //     (GoodsOrderList.frequency ?? '')
+      //     (auditList.frequency ?? '')
       //         .toString()
       //         .contains(controller.frequencyFilterText.value.toLowerCase()) &&
-      //     (GoodsOrderList.status ?? '')
+      //     (auditList.status ?? '')
       //         .toString()
       //         .contains(controller.statusFilterText.value.toLowerCase());
 
-      return (GoodsOrderList.planId ?? '')
+      return (auditList.id ?? '')
               .toString()
               .contains(controller.planIdFilterText.value.toLowerCase()) &&
-          (GoodsOrderList.title ?? '')
+          (auditList.plan_number ?? '')
               .toString()
               .contains(controller.planTitleFilterText.value.toLowerCase()) &&
-          (GoodsOrderList.noOfCleaningDays ?? '')
+          (auditList.plan_number ?? '')
               .toString()
               .contains(controller.noOfDaysFilterText.value.toLowerCase()) &&
-          (GoodsOrderList.createdBy ?? '')
+          (auditList.plan_number ?? '')
               .toString()
               .contains(controller.createdByFilterText.value.toLowerCase()) &&
-          (GoodsOrderList.frequency ?? '')
+          (auditList.facility_name ?? '')
               .toString()
               .contains(controller.frequencyFilterText.value.toLowerCase()) &&
-          (GoodsOrderList.status ?? '')
+          (auditList.status ?? '')
               .toString()
               .contains(controller.statusFilterText.value.toLowerCase());
 
       // Add other filter conditions as needed
     }).toList();
-    // print({"filteredModuleCleaningList": filteredModuleCleaningList});
+    // print({"filteredAuditPlanList": filteredAuditPlanList});
   }
 
   @override
   DataRow? getRow(int index) {
     // print({"getRow call"});
-    // final ModuleCleaningPlanningListDetails = filteredModuleCleaningList[index];
+    final AuditPlanPlanningListDetails = filteredAuditPlanList[index];
 
-    // controller.PlanId.value = ModuleCleaningPlanningListDetails?.planId ?? 0;
+    // controller.PlanId.value = AuditPlanPlanningListDetails?.planId ?? 0;
     var cellsBuffer = [
       "planId",
-      '24',
-      '25',
-      '25',
-      '25',
-      // '${ModuleCleaningPlanningListDetails?.status ?? ''}',
-
+      '${AuditPlanPlanningListDetails?.plan_number ?? ''}',
+      '${AuditPlanPlanningListDetails?.status ?? ''}',
+      '${AuditPlanPlanningListDetails?.status ?? ''}',
+      '${AuditPlanPlanningListDetails?.status ?? ''}',
+      '${AuditPlanPlanningListDetails?.frequency ?? ''}',
       'Actions',
     ];
     var cells = [];
@@ -509,14 +508,14 @@ class AuditListListDataSource extends DataTableSource {
                         child: Container(
                           padding: Dimens.edgeInsets8_2_8_2,
                           decoration: BoxDecoration(
-                            // color: controller.moduleCleaningListPlan
+                            // color: controller.AuditPlanListPlan
                             //             .firstWhere(
                             //               (e) =>
                             //                   e?.planId ==
-                            //                   ModuleCleaningPlanningListDetails!
+                            //                   AuditPlanPlanningListDetails!
                             //                       .planId,
                             //               orElse: () =>
-                            //                   ModuleCleaningListPlanModel(
+                            //                   AuditPlanListPlanModel(
                             //                       planId: 00),
                             //             )
                             //             ?.status ==
@@ -543,7 +542,7 @@ class AuditListListDataSource extends DataTableSource {
                           message: 'view',
                           onPress: () {
                             // int id =
-                            //     ModuleCleaningPlanningListDetails?.planId ?? 0;
+                            //     AuditPlanPlanningListDetails?.planId ?? 0;
                             // if (id != 0) {
                             //   Get.toNamed(Routes.viewMcPlaning,
                             //       arguments: {'id': id});
@@ -556,9 +555,9 @@ class AuditListListDataSource extends DataTableSource {
                           message: 'Edit',
                           onPress: () {
                             // int id =
-                            //     ModuleCleaningPlanningListDetails?.planId ?? 0;
+                            //     AuditPlanPlanningListDetails?.planId ?? 0;
                             // if (id != 0) {
-                            //   Get.toNamed(Routes.moduleCleaningPlanning,
+                            //   Get.toNamed(Routes.AuditPlanPlanning,
                             //       arguments: {"id": id});
                             // }
                           },
@@ -569,7 +568,7 @@ class AuditListListDataSource extends DataTableSource {
                           message: 'Approve/Reject',
                           onPress: () {
                             // int id =
-                            //     ModuleCleaningPlanningListDetails?.planId ?? 0;
+                            //     AuditPlanPlanningListDetails?.planId ?? 0;
                             // if (id != 0) {
                             //   Get.toNamed(
                             //     Routes.viewMcPlaning,
@@ -585,12 +584,12 @@ class AuditListListDataSource extends DataTableSource {
                           message: 'Schedule Execution',
                           onPress: () {
                             // Get.dialog(AddMCExecutionDialog(
-                            //   planId: ModuleCleaningPlanningListDetails?.planId,
+                            //   planId: AuditPlanPlanningListDetails?.planId,
                             //   frequency:
-                            //       ModuleCleaningPlanningListDetails?.frequency,
+                            //       AuditPlanPlanningListDetails?.frequency,
                             // ));
                             //   int id =
-                            //       ModuleCleaningPlanningListDetails?.planId ??
+                            //       AuditPlanPlanningListDetails?.planId ??
                             //           0;
                             //   if (id != 0) {
                             //     Get.toNamed(Routes.purchaseGoodsorderView,
@@ -618,7 +617,7 @@ class AuditListListDataSource extends DataTableSource {
   }
 
   @override
-  int get rowCount => filteredModuleCleaningList.length;
+  int get rowCount => filteredAuditPlanList.length;
 
   @override
   bool get isRowCountApproximate => false;

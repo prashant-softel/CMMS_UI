@@ -202,7 +202,7 @@ class HomeController extends GetxController {
 
   Future<void> getuserAccessData() async {
     final _userAccessList = await homePresenter.getUserAcessValue();
-    print({"_userAccessList": _userAccessList});
+    // print({"_userAccessList": _userAccessList});
 
     // final _userAccessList = await homePresenter.getUserAccessList();
 

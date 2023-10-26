@@ -2,11 +2,10 @@ import 'dart:async';
 
 import 'package:cmms/app/audit_list/audit_list_presenter.dart';
 import 'package:cmms/app/home/home_controller.dart';
-import 'package:cmms/app/hoto/hoto_list_presenter.dart';
-import 'package:cmms/app/module_cleaning_list_plan/module_cleaning_list_plan_presenter.dart';
-import 'package:cmms/domain/models/module_cleaning_list_plan_model.dart';
+import 'package:cmms/domain/models/audit_plan_list_model.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:intl/intl.dart';
 import 'package:scrollable_table_view/scrollable_table_view.dart';
 
 class AuditListScreenController extends GetxController {
@@ -15,10 +14,8 @@ class AuditListScreenController extends GetxController {
   );
   AuditListScreenPresenter auditListPresenter;
   final HomeController homecontroller = Get.find();
-  RxList<ModuleCleaningListPlanModel> moduleCleaningListPlan =
-      <ModuleCleaningListPlanModel>[].obs;
-  RxList<ModuleCleaningListPlanModel> filteredData =
-      <ModuleCleaningListPlanModel>[].obs;
+  RxList<AuditPlanListModel> auditPlanList = <AuditPlanListModel>[].obs;
+  RxList<AuditPlanListModel> filteredData = <AuditPlanListModel>[].obs;
   // Rx<int> Plan Id = 0.obs;
   Rx<int> PlanId = 0.obs;
   RxString planIdFilterText = ''.obs;
@@ -36,6 +33,13 @@ class AuditListScreenController extends GetxController {
 
   Rx<DateTime> fromDate = DateTime.now().subtract(Duration(days: 7)).obs;
   Rx<DateTime> toDate = DateTime.now().obs;
+  String get formattedFromdate =>
+      DateFormat('dd/MM/yyyy').format(fromDate.value);
+  String get formattedTodate => DateFormat('dd/MM/yyyy').format(toDate.value);
+  String get formattedTodate1 => DateFormat('yyyy-MM-dd').format(toDate.value);
+  String get formattedFromdate1 =>
+      DateFormat('yyyy-MM-dd').format(fromDate.value);
+
   final columnVisibility = ValueNotifier<Map<String, bool>>({
     'Audit Plan ID': true,
     'Title': true,
@@ -68,8 +72,6 @@ class AuditListScreenController extends GetxController {
   // String get formattedFromdate1 =>
   //     DateFormat('yyyy-MM-dd').format(fromDate.value);
 
-  ModuleCleaningListPlanModel? moduleCleaningListModel;
-  RxList<String> moduleCleaningListTableColumns = <String>[].obs;
   bool openFromDateToStartDatePicker = false;
 
   PaginationController paginationController = PaginationController(
@@ -93,54 +95,26 @@ class AuditListScreenController extends GetxController {
     facilityIdStreamSubscription = homecontroller.facilityId$.listen((event) {
       facilityId = event;
       Future.delayed(Duration(seconds: 2), () async {
-        getModuleCleaningListPlan(facilityId, false);
+        getAuditPlanList(
+            facilityId, formattedTodate1, formattedFromdate1, true);
       });
     });
     super.onInit();
   }
 
-  Future<void> getModuleCleaningListPlan(int facilityId, bool isLoading) async {
-    moduleCleaningListPlan.value = <ModuleCleaningListPlanModel>[];
-    final _moduleCleaningListPlan =
-        await auditListPresenter.getModuleCleaningListPlan(
-      isLoading: false,
-      facility_id: facilityId,
-    );
-    if (_moduleCleaningListPlan != null) {
-      moduleCleaningListPlan.value = _moduleCleaningListPlan;
-      paginationController = PaginationController(
-        rowCount: moduleCleaningListPlan.length,
-        rowsPerPage: 10,
-      );
-
-      if (moduleCleaningListPlan != null &&
-          moduleCleaningListPlan!.isNotEmpty) {
-        moduleCleaningListModel = moduleCleaningListPlan![0];
-        var newPermitListJson = moduleCleaningListModel?.toJson();
-        moduleCleaningListTableColumns.value = <String>[];
-        for (var key in newPermitListJson?.keys.toList() ?? []) {
-          moduleCleaningListTableColumns.add(key);
-        }
-      }
-    }
-  }
-
-  void onValueChanged(dynamic list, dynamic value) {
-    switch (list.runtimeType) {
-      
-    }
-  }
-
-  void search(String keyword) {
-    if (keyword.isEmpty) {
-      moduleCleaningListPlan.value = filteredData;
-      return;
+  Future<void> getAuditPlanList(int facilityId, dynamic startDate,
+      dynamic endDate, bool isLoading) async {
+    auditPlanList.value = <AuditPlanListModel>[];
+    // pmPlanList?.clear();
+    final _auditPlanList = await auditListPresenter.getAuditPlanList(
+        facilityId: facilityId,
+        isLoading: isLoading,
+        startDate: startDate,
+        endDate: endDate);
+    if (_auditPlanList != null) {
+      auditPlanList.value = _auditPlanList;
     }
 
-    moduleCleaningListPlan.value = filteredData
-        .where((item) =>
-            item.description!.toLowerCase().contains(keyword.toLowerCase()))
-        .toList();
-    update(['stock_Mangement_Date']);
+    update(['pmPlan_list']);
   }
 }

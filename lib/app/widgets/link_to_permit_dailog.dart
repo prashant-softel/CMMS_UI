@@ -97,7 +97,7 @@ class LinkToPermitDialog extends GetView {
                 Get.offAllNamed(Routes.createMrs, arguments: {
                   "whereUsedId": taskId,
                   "whereUsed": 27,
-                  "fromActorTypeId": 3
+                  "fromActorTypeId": 2
                 });
                 Get.back();
               },

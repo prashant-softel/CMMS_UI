@@ -21,4 +21,10 @@ class CreateAuditUsecase {
         facilityId: facilityId,
         isLoading: isLoading,
       );
+  Future<bool> createAuditNumber({
+    checkAuditJsonString,
+    bool? isLoading,
+  }) async =>
+      await repository.createAuditNumber(
+          isLoading: isLoading, checkAuditJsonString: checkAuditJsonString);
 }

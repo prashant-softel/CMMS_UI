@@ -134,9 +134,8 @@ class _CreateAuditWebState extends State<CreateAuditWeb> {
                                           (MediaQuery.of(context).size.width *
                                               .3),
                                       child: LoginCustomTextfield(
-                                          // textController: controller
-                                          //     .planTittleCtrlr,
-                                          )),
+                                        textController: controller.planTitleTc,
+                                      )),
                                   Spacer()
                                 ],
                               ),
@@ -170,8 +169,8 @@ class _CreateAuditWebState extends State<CreateAuditWeb> {
                                               .3),
                                       child: LoginCustomTextfield(
                                         maxLine: 3,
-                                        // textController: controller
-                                        //     .planTittleCtrlr,
+                                        textController:
+                                            controller.descriptionTc,
                                       )),
                                   Spacer()
                                 ],
@@ -259,7 +258,7 @@ class _CreateAuditWebState extends State<CreateAuditWeb> {
                                     backgroundColor: ColorValues.appGreenColor,
                                     text: 'Submit',
                                     onPressed: () {
-                                      //     controller.createPmPlan();
+                                      controller.createAuditNumber();
                                     },
                                   ),
                                   // Dimens.boxWidth15,

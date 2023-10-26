@@ -42,35 +42,35 @@ class CreateMrsController extends GetxController {
     //  whereUsedTypeId = Get.arguments["jcId"];
 //    print('JCId:$jcId');
     // whereUsedTypeId = Get.arguments;
-    //  try {
-    //   final arguments = Get.arguments;
-    //   if (arguments != null) {
-    //     if (arguments.containsKey('whereUsedId')) {
-    //       whereUsedTypeId.value = arguments['whereUsedId'];
-    //       print('PermitId:${whereUsedTypeId.value}');
-    //     }
-    //     if (arguments.containsKey('whereUsed')) {
-    //       whereUsed.value = arguments['whereUsed'];
-    //     }
-    //     if (arguments.containsKey('fromActorTypeId')) {
-    //       fromActorTypeId.value = arguments['fromActorTypeId'];
-    //     }
-    //     if (whereUsedTypeId != 0) {
-    //       whereUsedCtrlr.text = whereUsedTypeId.toString();
-    //     }
-    //     facilityIdStreamSubscription =
-    homecontroller.facilityId$.listen((event) {
-      facilityId = event;
-      Future.delayed(Duration(seconds: 1), () {
-        getEquipmentList(
-          facilityId,
-        );
-      });
-    });
-    //  }
-    // } catch (e) {
-    //   print('jobModelError: $e');
-    // }
+    try {
+      final arguments = Get.arguments;
+      if (arguments != null) {
+        if (arguments.containsKey('whereUsedId')) {
+          whereUsedTypeId.value = arguments['whereUsedId'];
+          print('PermitId:${whereUsedTypeId.value}');
+        }
+        if (arguments.containsKey('whereUsed')) {
+          whereUsed.value = arguments['whereUsed'];
+        }
+        if (arguments.containsKey('fromActorTypeId')) {
+          fromActorTypeId.value = arguments['fromActorTypeId'];
+        }
+        if (whereUsedTypeId != 0) {
+          whereUsedCtrlr.text = whereUsedTypeId.toString();
+        }
+        facilityIdStreamSubscription =
+            homecontroller.facilityId$.listen((event) {
+          facilityId = event;
+          Future.delayed(Duration(seconds: 1), () {
+            getEquipmentList(
+              facilityId,
+            );
+          });
+        });
+      }
+    } catch (e) {
+      print('jobModelError: $e');
+    }
 
     super.onInit();
   }
@@ -130,13 +130,13 @@ class CreateMrsController extends GetxController {
         facility_ID: facilityId,
         setAsTemplate: _setTemp, //isSetTemplate == true ? 1 : 0,
         activity: _activity,
-        whereUsedType: 27, //whereUsed.value,
-        whereUsedTypeId: 47, //whereUsedTypeId.value,
-        to_actor_id: 47, // whereUsedTypeId.value,
+        whereUsedType: whereUsed.value,
+        whereUsedTypeId: whereUsedTypeId.value,
+        to_actor_id: whereUsedTypeId.value,
         to_actor_type_id: 3,
         from_actor_id: facilityId,
         //whereUsed.value,
-        from_actor_type_id: 2, // fromActorTypeId.value,
+        from_actor_type_id: fromActorTypeId.value,
         remarks: _remark,
         equipments: items);
     var createMrsJsonString = createMrs.toJson();
