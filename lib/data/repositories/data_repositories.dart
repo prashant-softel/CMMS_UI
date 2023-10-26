@@ -3535,6 +3535,18 @@ class DataRepository extends DomainRepository {
           isLoading: isLoading ?? false,
           startDate: startDate,
           endDate: endDate);
+  Future<ResponseModel> getAuditPlanList(
+          {required String auth,
+          int? facilityId,
+          bool? isLoading,
+          dynamic startDate,
+          dynamic endDate}) async =>
+      await connectHelper.getAuditPlanList(
+          auth: auth,
+          facilityId: facilityId ?? 0,
+          isLoading: isLoading ?? false,
+          startDate: startDate,
+          endDate: endDate);
   Future<ResponseModel> ClosePMTaskExecution({
     required String auth,
     ClosePMTaskExecutionJsonString,
@@ -3621,6 +3633,18 @@ class DataRepository extends DomainRepository {
       auth: auth,
       // facilityId: facilityId,
     );
+  }
+
+  Future<ResponseModel> createAuditNumber({
+    auth,
+    bool? isLoading,
+    checkAuditJsonString,
+  }) async {
+    var response = await connectHelper.createAuditNumber(
+        auth: auth,
+        isLoading: isLoading,
+        checkAuditJsonString: checkAuditJsonString);
+    return response;
   }
   Future<ResponseModel> createAssetSM({
     auth,

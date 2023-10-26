@@ -30,6 +30,8 @@ class CreateMrsController extends GetxController {
   var isSetTemplate = false.obs;
   Rx<int> whereUsedTypeId = 0.obs;
   Rx<int> whereUsed = 0.obs;
+  Rx<int> fromActorTypeId = 0.obs;
+
   // int? jcId = 0;
 
   void setTemplatetoggle() {
@@ -51,6 +53,9 @@ class CreateMrsController extends GetxController {
         }
         if (arguments.containsKey('whereUsed')) {
           whereUsed.value = arguments['whereUsed'];
+        }
+        if (arguments.containsKey('fromActorTypeId')) {
+          fromActorTypeId.value = arguments['fromActorTypeId'];
         }
         if (whereUsedTypeId != 0) {
           whereUsedCtrlr.text = whereUsedTypeId.toString();
@@ -130,6 +135,11 @@ class CreateMrsController extends GetxController {
         activity: _activity,
         whereUsedType: whereUsed.value,
         whereUsedTypeId: whereUsedTypeId.value,
+        to_actor_id: whereUsedTypeId.value,
+        to_actor_type_id: 3,
+        from_actor_id: facilityId,
+        //whereUsed.value,
+        from_actor_type_id: fromActorTypeId.value,
         remarks: _remark,
         equipments: items);
     var createMrsJsonString = createMrs.toJson();

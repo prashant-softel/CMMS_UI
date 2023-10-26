@@ -12,7 +12,6 @@ import 'package:intl/intl.dart';
 import 'package:scrollable_table_view/scrollable_table_view.dart';
 
 import '../../domain/models/new_permit_list_model.dart';
-import '../../domain/models/pm_task_model.dart';
 import '../home/home_controller.dart';
 
 class PmPlanListController extends GetxController {

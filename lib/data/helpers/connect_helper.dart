@@ -6179,4 +6179,43 @@ class ConnectHelper {
 
     return responseModel;
   }
+
+  Future<ResponseModel> createAuditNumber({
+    required String auth,
+    bool? isLoading,
+    required checkAuditJsonString,
+  }) async {
+    var responseModel = await apiWrapper.makeRequest(
+      'AuditPlan/CreateAuditPlan',
+      Request.post,
+      checkAuditJsonString,
+      isLoading ?? false,
+      {
+        'Content-Type': 'application/json',
+        'Authorization': 'Bearer $auth',
+      },
+    );
+
+    return responseModel;
+  }
+
+  Future<ResponseModel> getAuditPlanList(
+      {required String auth,
+      bool? isLoading,
+      int? facilityId,
+      dynamic startDate,
+      dynamic endDate}) async {
+    var responseModel = await apiWrapper.makeRequest(
+      'AuditPlan/GetAuditPlanList?facility_id=45&fromDate=2023-10-01&toDate=2023-10-30',
+      //   'PMScheduleView/GetPMTaskList?facility_id=${facilityId}&start_date=${endDate}&end_date=${startDate}',
+      Request.get,
+      null,
+      isLoading ?? true,
+      {
+        'Authorization': 'Bearer $auth',
+      },
+    );
+
+    return responseModel;
+  }
 }

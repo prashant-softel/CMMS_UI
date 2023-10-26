@@ -575,7 +575,7 @@ class MrsListDataSource extends DataTableSource {
                             borderRadius: BorderRadius.circular(4),
                           ),
                           child: Text(
-                            '${MrsDetails?.status_short}',
+                            '${MrsDetails?.status_short}mmkk${MrsDetails?.status}',
                             style: Styles.white10.copyWith(
                               color: Colors.white,
                             ),
@@ -625,13 +625,6 @@ class MrsListDataSource extends DataTableSource {
                                         )
                                         ?.status ==
                                     321 &&
-                                controller.mrsList!
-                                        .firstWhere(
-                                          (e) => e?.id == MrsDetails!.id,
-                                          orElse: () => MrsListModel(id: 00),
-                                        )
-                                        ?.approval_status ==
-                                    1 &&
                                 varUserAccessModel.value.access_list!
                                         .where((e) =>
                                             e.feature_id ==
@@ -671,7 +664,7 @@ class MrsListDataSource extends DataTableSource {
                                             e.feature_id ==
                                                 UserAccessConstants
                                                     .kMrsFeatureId &&
-                                            e.delete ==
+                                            e.issue ==
                                                 UserAccessConstants
                                                     .kHaveIssueAccess)
                                         .length >
