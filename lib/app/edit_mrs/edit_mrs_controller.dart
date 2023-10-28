@@ -62,17 +62,12 @@ class EditMrsController extends GetxController {
 
   Future<void> setMrsId() async {
     try {
-      final _flutterSecureStorage = const FlutterSecureStorage();
-      // Read jobId
-      String? _mrsId = await _flutterSecureStorage.read(key: "mrsId");
+      final _mrsId = await editMrsPresenter.getValue();
       if (_mrsId == null || _mrsId == '' || _mrsId == "null") {
         var dataFromPreviousScreen = Get.arguments;
 
         mrsId.value = dataFromPreviousScreen['mrsId'];
-        await _flutterSecureStorage.write(
-          key: "mrsId",
-          value: mrsId.value == null ? '' : mrsId.value.toString(),
-        );
+        editMrsPresenter.saveValue(mrsId: mrsId.value.toString());
       } else {
         mrsId.value = int.tryParse(_mrsId) ?? 0;
       }

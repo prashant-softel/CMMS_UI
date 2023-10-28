@@ -21,4 +21,10 @@ class MrsIssuePresenter {
       isLoading: isLoading,
     );
   }
+
+  void saveValue({String? mrsId}) async {
+    return mrsIssueUsecase.saveValue(mrsId: mrsId);
+  }
+
+  Future<String?> getValue() async => await mrsIssueUsecase.getValue();
 }

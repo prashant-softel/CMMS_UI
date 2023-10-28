@@ -14,4 +14,5 @@ class UserListUsecase {
         facilityId,
         isLoading,
       );
+  void clearValue() async => repository.clearData(LocalKeys.userDetailId);
 }

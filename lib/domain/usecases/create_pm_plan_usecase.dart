@@ -4,6 +4,7 @@ import 'package:cmms/domain/models/get_pm_plan_detail_model.dart';
 import 'package:cmms/domain/models/inventory_category_model.dart';
 import 'package:cmms/domain/models/inventory_model.dart';
 import 'package:cmms/domain/models/preventive_checklist_model.dart';
+import 'package:cmms/domain/repositories/local_storage_keys.dart';
 
 import 'package:cmms/domain/repositories/repository.dart';
 
@@ -70,4 +71,8 @@ class CreatePmPlanUsecase {
         pmPlanId,
         isLoading,
       );
+  void saveValue({String? pmPlanId}) async =>
+      repository.saveValue(LocalKeys.pmPlanId, pmPlanId);
+  Future<String?> getValue() async =>
+      await repository.getStringValue(LocalKeys.pmPlanId);
 }

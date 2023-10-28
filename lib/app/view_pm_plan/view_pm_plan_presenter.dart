@@ -34,4 +34,9 @@ class ViewPmPlanPresenter {
         pmPlanId: pmPlanId,
         isLoading: isLoading,
       );
+  void saveValue({String? pmPlanId}) async {
+    return viewPmPlanUsecase.saveValue(pmPlanId: pmPlanId);
+  }
+
+  Future<String?> getValue() async => await viewPmPlanUsecase.getValue();
 }

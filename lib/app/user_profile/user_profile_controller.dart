@@ -42,21 +42,15 @@ class UserProfileController extends GetxController {
 
   Future<void> setUserId() async {
     try {
-      final _flutterSecureStorage = const FlutterSecureStorage();
-      // Read jobId
-      String? _userId = await _flutterSecureStorage.read(key: "userId");
+      final _userId = await userProfilePresenter.getValue();
       if (_userId == null || _userId == '' || _userId == "null") {
         var dataFromPreviousScreen = Get.arguments;
 
         userId.value = dataFromPreviousScreen['userId'];
-        await _flutterSecureStorage.write(
-          key: "userId",
-          value: userId.value == null ? '' : userId.value.toString(),
-        );
+        userProfilePresenter.saveValue(userId: userId.value.toString());
       } else {
         userId.value = int.tryParse(_userId) ?? 0;
       }
-      //  await _flutterSecureStorage.delete(key: "userId");
     } catch (e) {
       print(e.toString() + 'userId');
       //  Utility.showDialog(e.toString() + 'userId');

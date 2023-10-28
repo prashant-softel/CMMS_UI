@@ -31,4 +31,9 @@ class EditMrsPresenter {
         mrsId: mrsId,
         isLoading: isLoading,
       );
+  void saveValue({String? mrsId}) async {
+    return editmrsUsecase.saveValue(mrsId: mrsId);
+  }
+
+  Future<String?> getValue() async => await editmrsUsecase.getValue();
 }

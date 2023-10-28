@@ -219,4 +219,8 @@ class PmPlanListController extends GetxController {
       );
     }
   }
+
+  void clearStoreData() {
+    pmPlanListPresenter.clearValue();
+  }
 }

@@ -109,11 +109,7 @@ class _PmPlanListContentWebState extends State<PmPlanListContentWeb> {
                                           icon: Icons.add,
                                           label: "Add New",
                                           onPressed: () {
-                                            final _flutterSecureStorage =
-                                                const FlutterSecureStorage();
-
-                                            _flutterSecureStorage.delete(
-                                                key: "pmPlanId");
+                                            controller.clearStoreData();
                                             Get.toNamed(Routes.createPmPlan);
                                           },
                                           color: ColorValues.addNewColor,
@@ -499,10 +495,12 @@ class PmPlanDataSource extends DataTableSource {
                                 icon: Icons.remove_red_eye_outlined,
                                 message: 'View',
                                 onPress: () {
-                                  final _flutterSecureStorage =
-                                      const FlutterSecureStorage();
+                                  controller.clearStoreData();
 
-                                  _flutterSecureStorage.delete(key: "pmPlanId");
+                                  // final _flutterSecureStorage =
+                                  //     const FlutterSecureStorage();
+
+                                  // _flutterSecureStorage.delete(key: "pmPlanId");
                                   int pmPlanId = pmPlanDetails?.plan_id ?? 0;
                                   if (pmPlanId != null) {
                                     Get.toNamed(Routes.viewPmPlanScreen,
@@ -526,10 +524,12 @@ class PmPlanDataSource extends DataTableSource {
                                 icon: Icons.edit,
                                 message: 'Edit',
                                 onPress: () {
-                                  final _flutterSecureStorage =
-                                      const FlutterSecureStorage();
+                                  controller.clearStoreData();
 
-                                  _flutterSecureStorage.delete(key: "pmPlanId");
+                                  // final _flutterSecureStorage =
+                                  //     const FlutterSecureStorage();
+
+                                  // _flutterSecureStorage.delete(key: "pmPlanId");
                                   int pmPlanId = pmPlanDetails?.plan_id ?? 0;
                                   if (pmPlanId != null) {
                                     Get.toNamed(Routes.createPmPlan,
@@ -563,10 +563,12 @@ class PmPlanDataSource extends DataTableSource {
                                 icon: Icons.approval,
                                 message: 'Approve/Reject',
                                 onPress: () {
-                                  final _flutterSecureStorage =
-                                      const FlutterSecureStorage();
+                                  controller.clearStoreData();
 
-                                  _flutterSecureStorage.delete(key: "pmPlanId");
+                                  // final _flutterSecureStorage =
+                                  //     const FlutterSecureStorage();
+
+                                  // _flutterSecureStorage.delete(key: "pmPlanId");
                                   int pmPlanId = pmPlanDetails?.plan_id ?? 0;
                                   if (pmPlanId != null) {
                                     Get.toNamed(Routes.viewPmPlanScreen,
@@ -604,9 +606,11 @@ class PmPlanDataSource extends DataTableSource {
       }).toList(),
       //   ],
       onSelectChanged: (_) {
-        final _flutterSecureStorage = const FlutterSecureStorage();
+        controller.clearStoreData();
 
-        _flutterSecureStorage.delete(key: "pmPlanId");
+        // final _flutterSecureStorage = const FlutterSecureStorage();
+
+        // _flutterSecureStorage.delete(key: "pmPlanId");
         varUserAccessModel.value.access_list!
                     .where((e) =>
                         e.feature_id == UserAccessConstants.kPmPlanFeatureId &&

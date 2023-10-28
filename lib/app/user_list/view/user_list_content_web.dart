@@ -2,7 +2,6 @@ import 'package:cmms/app/theme/dimens.dart';
 import 'package:cmms/domain/models/user_list_model.dart';
 import 'package:data_table_2/data_table_2.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:get/get.dart';
 import '../../navigators/app_pages.dart';
 import '../../theme/color_values.dart';
@@ -101,6 +100,8 @@ class _UserListContentWebState extends State<UserListContentWeb> {
                                         icon: Icons.add,
                                         label: "Add New",
                                         onPressed: () {
+                                          controller.clearStoreData();
+
                                           Get.toNamed(Routes.addUser);
                                         },
                                         color: ColorValues.greenlightColor,
@@ -436,10 +437,12 @@ class UserDataSource extends DataTableSource {
                       icon: Icons.remove_red_eye_outlined,
                       message: 'view',
                       onPress: () {
-                        final _flutterSecureStorage =
-                            const FlutterSecureStorage();
+                        controller.clearStoreData();
 
-                        _flutterSecureStorage.delete(key: "userId");
+                        // final _flutterSecureStorage =
+                        //     const FlutterSecureStorage();
+
+                        // _flutterSecureStorage.delete(key: "userId");
                         int userId = UserDetails?.id ?? 0;
                         if (userId != 0) {
                           Get.toNamed(Routes.viewUserDetail,
@@ -452,10 +455,12 @@ class UserDataSource extends DataTableSource {
                       icon: Icons.edit,
                       message: 'Edit',
                       onPress: () {
-                        final _flutterSecureStorage =
-                            const FlutterSecureStorage();
+                        controller.clearStoreData();
 
-                        _flutterSecureStorage.delete(key: "userId");
+                        // final _flutterSecureStorage =
+                        //     const FlutterSecureStorage();
+
+                        // _flutterSecureStorage.delete(key: "userId");
                         int userId = UserDetails?.id ?? 0;
                         if (userId != 0) {
                           Get.toNamed(Routes.addUser,
@@ -476,9 +481,11 @@ class UserDataSource extends DataTableSource {
       }).toList(),
       //   ],
       onSelectChanged: (_) {
-        final _flutterSecureStorage = const FlutterSecureStorage();
+        controller.clearStoreData();
 
-        _flutterSecureStorage.delete(key: "UserId");
+        // final _flutterSecureStorage = const FlutterSecureStorage();
+
+        // _flutterSecureStorage.delete(key: "UserId");
         Get.toNamed(Routes.viewUserDetail,
             arguments: {'userId': UserDetails?.id});
       },

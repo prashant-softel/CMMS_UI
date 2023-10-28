@@ -1,4 +1,5 @@
 import 'package:cmms/domain/models/pm_plan_list_model.dart';
+import 'package:cmms/domain/repositories/local_storage_keys.dart';
 import 'package:cmms/domain/repositories/repository.dart';
 
 class PmPlanListUsecase {
@@ -15,4 +16,5 @@ class PmPlanListUsecase {
         planId,
         isLoading,
       );
+  void clearValue() async => repository.clearData(LocalKeys.pmPlanId);
 }

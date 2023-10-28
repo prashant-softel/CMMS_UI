@@ -131,6 +131,8 @@ class HomePresenter {
   }
 
   Future<String?> getValue() async => await homeUsecase.getValue();
+  Future<String?> getUserAcessValue() async =>
+      await homeUsecase.getUserAcessValue();
 
   ///
 }

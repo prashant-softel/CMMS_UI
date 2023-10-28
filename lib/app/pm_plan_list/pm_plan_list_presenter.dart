@@ -19,4 +19,5 @@ class PmPlanListPresenter {
         planId: planId ?? 0,
         isLoading: isLoading,
       );
+  void clearValue() async => pmPlanListUsecase.clearValue();
 }

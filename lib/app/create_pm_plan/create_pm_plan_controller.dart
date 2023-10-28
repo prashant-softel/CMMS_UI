@@ -101,17 +101,13 @@ class CreatePmPlanController extends GetxController {
 
   Future<void> setPmPlanId() async {
     try {
-      final _flutterSecureStorage = const FlutterSecureStorage();
-      // Read jobId
-      String? _pmPlanId = await _flutterSecureStorage.read(key: "pmPlanId");
+      final _pmPlanId = await createPmPlanPresenter.getValue();
+
       if (_pmPlanId == null || _pmPlanId == '' || _pmPlanId == "null") {
         var dataFromPreviousScreen = Get.arguments;
 
         pmPlanId.value = dataFromPreviousScreen['pmPlanId'];
-        await _flutterSecureStorage.write(
-          key: "pmPlanId",
-          value: pmPlanId.value == null ? '' : pmPlanId.value.toString(),
-        );
+        createPmPlanPresenter.saveValue(pmPlanId: pmPlanId.value.toString());
       } else {
         pmPlanId.value = int.tryParse(_pmPlanId) ?? 0;
       }

@@ -6,6 +6,7 @@ import 'package:cmms/domain/models/get_notification_by_userid_model.dart';
 import 'package:cmms/domain/models/get_notification_model.dart';
 import 'package:cmms/domain/models/getuser_access_byId_model.dart';
 import 'package:cmms/domain/models/user_access_model.dart';
+import 'package:cmms/domain/repositories/local_storage_keys.dart';
 import 'package:cmms/domain/repositories/repository.dart';
 
 import '../models/access_level_model.dart';
@@ -127,4 +128,9 @@ class AddUserUsecase {
   }) async {
     return repository.getFacilityList(isLoading);
   }
+
+  void saveValue({String? userId}) async =>
+      repository.saveValue(LocalKeys.userDetailId, userId);
+  Future<String?> getValue() async =>
+      await repository.getStringValue(LocalKeys.userDetailId);
 }

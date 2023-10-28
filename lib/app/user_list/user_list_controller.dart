@@ -120,4 +120,8 @@ class UserListController extends GetxController {
     }
     update(['user_list']);
   }
+
+  void clearStoreData() {
+    userListPresenter.clearValue();
+  }
 }

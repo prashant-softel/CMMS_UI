@@ -4313,7 +4313,7 @@ class Repository {
       );
 
       if (!res.hasError) {
-        saveUserAcessData(LocalKeys.userAccess, res.data);
+        saveValue(LocalKeys.setUserAccess, res.data);
         Get.offAndToNamed(Routes.home);
         return null;
       } //
@@ -5730,7 +5730,8 @@ class Repository {
     }
   }
 
-   Future<bool> updateSafetyMeasure({bool? isLoading, createSafetyMeasureJsonString}) async {
+  Future<bool> updateSafetyMeasure(
+      {bool? isLoading, createSafetyMeasureJsonString}) async {
     try {
       final auth = await getSecuredValue(LocalKeys.authToken);
       log(auth);
@@ -5739,7 +5740,7 @@ class Repository {
           isLoading: isLoading,
           createSafetyMeasureJsonString: createSafetyMeasureJsonString);
 
-        print('Response updateSafetyMeasure: ${res.data}');
+      print('Response updateSafetyMeasure: ${res.data}');
       if (!res.hasError) {
         return true;
       } else {
@@ -5751,7 +5752,6 @@ class Repository {
       return false;
     }
   }
-
 
   Future<List<CountryModel?>?> getCountryList(
     bool? isLoading,
@@ -8882,6 +8882,7 @@ class Repository {
       return false;
     }
   }
+
   Future<List<AssetCategoryModel>> getAssetCategoryList({
     // required int? job_type_id,
     required bool isLoading,
@@ -8910,7 +8911,6 @@ class Repository {
 
   Future<List<AssetTypeListSMModel>> getAssetTypeSMList({
     required bool isLoading,
-
   }) async {
     try {
       final auth = await getSecuredValue(LocalKeys.authToken);
@@ -9022,8 +9022,7 @@ class Repository {
     }
   }
 
-  Future<bool> createAssetSM(
-      {bool? isLoading, assetListJsonString}) async {
+  Future<bool> createAssetSM({bool? isLoading, assetListJsonString}) async {
     try {
       final auth = await getSecuredValue(LocalKeys.authToken);
       final res = await _dataRepository.createAssetSM(

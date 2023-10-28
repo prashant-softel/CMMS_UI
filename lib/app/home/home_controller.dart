@@ -9,7 +9,6 @@ import 'package:cmms/domain/models/currency_list_model.dart';
 import 'package:cmms/domain/models/employee_list_model.dart';
 import 'package:cmms/domain/models/inventory_category_model.dart';
 import 'package:cmms/domain/models/type_permit_model.dart';
-import 'package:cmms/domain/models/warranty_claim_model.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:rxdart/subjects.dart';
@@ -200,7 +199,7 @@ class HomeController extends GetxController {
   }
 
   Future<void> getuserAccessData() async {
-    final _userAccessList = await homePresenter.getUserAccessList();
+    final _userAccessList = await homePresenter.getUserAcessValue();
 
     if (_userAccessList != null) {
       final userAccessModelList = jsonDecode(_userAccessList);

@@ -1,6 +1,8 @@
 import 'package:cmms/domain/models/get_pm_plan_detail_model.dart';
 import 'package:cmms/domain/repositories/repository.dart';
 
+import '../repositories/local_storage_keys.dart';
+
 class ViewPmPlanUsecase {
   ViewPmPlanUsecase(this.repository);
   Repository repository;
@@ -29,4 +31,8 @@ class ViewPmPlanUsecase {
         pmPlanId,
         isLoading,
       );
+  void saveValue({String? pmPlanId}) async =>
+      repository.saveValue(LocalKeys.pmPlanId, pmPlanId);
+  Future<String?> getValue() async =>
+      await repository.getStringValue(LocalKeys.pmPlanId);
 }

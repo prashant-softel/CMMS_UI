@@ -13,4 +13,9 @@ class MrsReturnViewPresenter {
         mrsId: mrsId,
         isLoading: isLoading,
       );
+  void saveValue({String? mrsId}) async {
+    return mrsReturnViewUsecase.saveValue(mrsId: mrsId);
+  }
+
+  Future<String?> getValue() async => await mrsReturnViewUsecase.getValue();
 }

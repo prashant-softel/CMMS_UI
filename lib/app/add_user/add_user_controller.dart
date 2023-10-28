@@ -1,5 +1,4 @@
 import 'package:cmms/app/theme/dimens.dart';
-import 'package:cmms/app/utils/utility.dart';
 import 'package:cmms/app/widgets/custom_elevated_button.dart';
 import 'package:cmms/domain/models/facility_model.dart';
 import 'package:cmms/domain/models/get_notification_model.dart';
@@ -134,21 +133,15 @@ class AddUserController extends GetxController {
 
   Future<void> setUserId() async {
     try {
-      final _flutterSecureStorage = const FlutterSecureStorage();
-      // Read jobId
-      String? _userId = await _flutterSecureStorage.read(key: "userId");
+      final _userId = await addUserPresenter.getValue();
       if (_userId == null || _userId == '' || _userId == "null") {
         var dataFromPreviousScreen = Get.arguments;
 
         userId.value = dataFromPreviousScreen['userId'];
-        await _flutterSecureStorage.write(
-          key: "userId",
-          value: userId.value == null ? '' : userId.value.toString(),
-        );
+        addUserPresenter.saveValue(userId: userId.value.toString());
       } else {
         userId.value = int.tryParse(_userId) ?? 0;
       }
-      //  await _flutterSecureStorage.delete(key: "userId");
     } catch (e) {
       print(e.toString() + 'userId');
       //  Utility.showDialog(e.toString() + 'userId');

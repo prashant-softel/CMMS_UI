@@ -116,4 +116,8 @@ class MrsListController extends GetxController {
   void getMrsListByDate() {
     getMrsList(facilityId, formattedTodate1, formattedFromdate1, true);
   }
+
+  void clearStoreData() {
+    mrsListPresenter.clearValue();
+  }
 }

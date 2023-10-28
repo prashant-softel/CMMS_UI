@@ -18,10 +18,6 @@ import 'package:get/get.dart';
 import 'package:intl/intl.dart';
 import 'package:scrollable_table_view/scrollable_table_view.dart';
 
-import 'dart:ui';
-
-import 'package:flutter/rendering.dart';
-
 import '../../domain/models/history_model.dart';
 import '../theme/styles.dart';
 import '../widgets/custom_elevated_button.dart';
