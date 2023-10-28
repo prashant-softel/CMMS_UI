@@ -148,12 +148,12 @@ class IssueMrsApproveContentWeb extends GetView<IssueMrsApproveController> {
                                 crossAxisAlignment: CrossAxisAlignment.end,
                                 children: [
                                   Text(
-                                    'Requested Date Time: ',
+                                    'Requested Date Time:',
                                     style: Styles.black17,
                                   ),
                                   Dimens.boxHeight10,
                                   Text(
-                                    'Where Used: ',
+                                    'Where Used:',
                                     style: Styles.black17,
                                   ),
                                 ],

@@ -180,24 +180,24 @@ class JobDetailsWebView extends GetView<JobDetailsController> {
                                                 CrossAxisAlignment.end,
                                             children: [
                                               Text(
-                                                "Job Id",
+                                                "Job Id:",
                                                 style: Styles.black14,
                                               ),
                                               Text(
-                                                "Job Title",
+                                                "Job Title:",
                                                 style: Styles.black14,
                                               ),
 
                                               Text(
-                                                "Plant Name: ",
+                                                "Plant Name:",
                                                 style: Styles.black14,
                                               ),
                                               Text(
-                                                "Equipment Categories ",
+                                                "Equipment Categories:",
                                                 style: Styles.black14,
                                               ),
                                               Text(
-                                                "Work Type ",
+                                                "Work Type:",
                                                 style: Styles.black14,
                                               ),
                                               // Text(
@@ -265,19 +265,19 @@ class JobDetailsWebView extends GetView<JobDetailsController> {
                                                 CrossAxisAlignment.end,
                                             children: [
                                               Text(
-                                                "Block Name: ",
+                                                "Block Name:",
                                                 style: Styles.black14,
                                               ),
                                               Text(
-                                                "Equipment Name ",
+                                                "Equipment Name:",
                                                 style: Styles.black14,
                                               ),
                                               Text(
-                                                "Raised By ",
+                                                "Raised By:",
                                                 style: Styles.black14,
                                               ),
                                               Text(
-                                                "Assigned To ",
+                                                "Assigned To:",
                                                 style: Styles.black14,
                                               ),
                                               // Text(
@@ -285,7 +285,7 @@ class JobDetailsWebView extends GetView<JobDetailsController> {
                                               //   style: Styles.black14,
                                               // ),
                                               Text(
-                                                "BreakDown Time ",
+                                                "BreakDown Time:",
                                                 style: Styles.black14,
                                               ),
                                             ],
@@ -359,7 +359,7 @@ class JobDetailsWebView extends GetView<JobDetailsController> {
                                               MainAxisAlignment.start,
                                           children: [
                                             Text(
-                                              "Job Description: ",
+                                              "Job Description:",
                                               style: Styles.black14,
                                             ),
                                             Dimens.boxWidth10,

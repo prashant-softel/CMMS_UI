@@ -70,7 +70,7 @@ class LoginScreen extends GetView<LoginController> {
                                 Container(
                                   margin: EdgeInsets.only(top: 20, bottom: 20),
                                   child: Image.asset(
-                                    'assets/files/logo.png',
+                                    'assets/files/logodrawer.png',
                                   ),
                                 ),
                                 Text(
@@ -90,7 +90,8 @@ class LoginScreen extends GetView<LoginController> {
                                     child: LoginCustomTextfield(
                                       textController: controller.emailCtrlr,
                                       ishint: "Email Id",
-                                      onChanged: (value) => controller.updateemail(value),
+                                      onChanged: (value) =>
+                                          controller.updateemail(value),
                                       widget: Icon(
                                         Icons.email_outlined,
                                         color: ColorValues.greyLightColor,
@@ -106,12 +107,16 @@ class LoginScreen extends GetView<LoginController> {
                                       controller.login();
                                     },
                                     textController: controller.passwordCtrlr,
-                                    obscureText: controller.passwordVisible.value,
+                                    obscureText:
+                                        controller.passwordVisible.value,
                                     ishint: "Password",
-                                    onChanged: (value) => controller.updatepassword(value),
+                                    onChanged: (value) =>
+                                        controller.updatepassword(value),
                                     widget: MouseRegion(
-                                      onEnter: (_) => controller.passwordVisible(false),
-                                      onExit: (_) => controller.passwordVisible(true),
+                                      onEnter: (_) =>
+                                          controller.passwordVisible(false),
+                                      onExit: (_) =>
+                                          controller.passwordVisible(true),
                                       child: Icon(
                                         controller.passwordVisible.value
                                             ? Icons.visibility_off
@@ -128,7 +133,9 @@ class LoginScreen extends GetView<LoginController> {
                                   alignment: Alignment.centerRight,
                                   child: Text(
                                     'Forgot Password',
-                                    style: TextStyle(fontSize: 13, color: ColorValues.greyColor),
+                                    style: TextStyle(
+                                        fontSize: 13,
+                                        color: ColorValues.greyColor),
                                   ),
                                 ),
                                 SizedBox(
@@ -140,7 +147,8 @@ class LoginScreen extends GetView<LoginController> {
                                     width: (Get.width * .3) - 50,
                                     height: 45,
                                     child: CustomElevatedButton(
-                                      backgroundColor: ColorValues.appDarkBlueColor,
+                                      backgroundColor:
+                                          ColorValues.appDarkBlueColor,
                                       text: "Login",
                                       onPressed: () {
                                         controller.login();
@@ -174,7 +182,8 @@ class LoginScreen extends GetView<LoginController> {
                           Text(
                             'Login',
                             textAlign: TextAlign.right,
-                            style: TextStyle(fontSize: 30, fontWeight: FontWeight.w700),
+                            style: TextStyle(
+                                fontSize: 30, fontWeight: FontWeight.w700),
                           ),
                           SizedBox(
                             height: 10,
@@ -195,7 +204,8 @@ class LoginScreen extends GetView<LoginController> {
                             textController: controller.passwordCtrlr,
                             obscureText: controller.passwordVisible.value,
                             ishint: "Password",
-                            onChanged: (value) => controller.updatepassword(value),
+                            onChanged: (value) =>
+                                controller.updatepassword(value),
                             widget: IconButton(
                               icon: Icon(
                                 controller.passwordVisible.value
@@ -203,7 +213,8 @@ class LoginScreen extends GetView<LoginController> {
                                     : Icons.visibility,
                                 color: ColorValues.greyLightColor,
                               ),
-                              onPressed: () => controller.passwordVisible.toggle(),
+                              onPressed: () =>
+                                  controller.passwordVisible.toggle(),
                             ),
                           ),
                           SizedBox(

@@ -130,12 +130,12 @@ class MrsViewContentWeb extends GetView<MrsViewController> {
                                   ),
                                   Dimens.boxHeight10,
                                   Text(
-                                    'Approved By: ',
+                                    'Approved By:',
                                     style: Styles.black17,
                                   ),
                                   Dimens.boxHeight10,
                                   Text(
-                                    'Issued By: ',
+                                    'Issued By:',
                                     style: Styles.black17,
                                   ),
                                 ],
@@ -174,22 +174,22 @@ class MrsViewContentWeb extends GetView<MrsViewController> {
                                 crossAxisAlignment: CrossAxisAlignment.end,
                                 children: [
                                   Text(
-                                    'Requested Date Time: ',
+                                    'Requested Date Time:',
                                     style: Styles.black17,
                                   ),
                                   Dimens.boxHeight10,
                                   Text(
-                                    'Where Used: ',
+                                    'Where Used:',
                                     style: Styles.black17,
                                   ),
                                   Dimens.boxHeight10,
                                   Text(
-                                    'Approved Date Time: ',
+                                    'Approved Date Time:',
                                     style: Styles.black17,
                                   ),
                                   Dimens.boxHeight10,
                                   Text(
-                                    'Issued Date time: ',
+                                    'Issued Date time:',
                                     style: Styles.black17,
                                   ),
                                 ],

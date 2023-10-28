@@ -112,22 +112,22 @@ class CalibrationViewContentWeb extends GetView<CalibrationViewController> {
                                   crossAxisAlignment: CrossAxisAlignment.end,
                                   children: [
                                     Text(
-                                      'Equipment Name: ',
+                                      'Equipment Name:',
                                       style: Styles.black17,
                                     ),
                                     Dimens.boxHeight10,
                                     Text(
-                                      'Last Calibration Date: ',
+                                      'Last Calibration Date:',
                                       style: Styles.black17,
                                     ),
                                     Dimens.boxHeight10,
                                     Text(
-                                      'Vender Name: ',
+                                      'Vender Name:',
                                       style: Styles.black17,
                                     ),
                                     Dimens.boxHeight10,
                                     Text(
-                                      'Calibration Done Date: ',
+                                      'Calibration Done Date:',
                                       style: Styles.black17,
                                     ),
                                   ],
@@ -158,22 +158,22 @@ class CalibrationViewContentWeb extends GetView<CalibrationViewController> {
                                   crossAxisAlignment: CrossAxisAlignment.end,
                                   children: [
                                     Text(
-                                      'Equipment Category: ',
+                                      'Equipment Category:',
                                       style: Styles.black17,
                                     ),
                                     Dimens.boxHeight10,
                                     Text(
-                                      'Next Calibration Due Date: ',
+                                      'Next Calibration Due Date:',
                                       style: Styles.black17,
                                     ),
                                     Dimens.boxHeight10,
                                     Text(
-                                      'Responsible Person: ',
+                                      'Responsible Person:',
                                       style: Styles.black17,
                                     ),
                                     Dimens.boxHeight10,
                                     Text(
-                                      'Recieved date: ',
+                                      'Recieved date:',
                                       style: Styles.black17,
                                     ),
                                   ],

@@ -114,532 +114,551 @@ class JobCardDetailsContentWeb extends GetView<JobCardDetailsController> {
               try {
                 return //
 
-                    SingleChildScrollView(
-                  child: Column(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      //
-                      children: [
-                        /// TABLE - PLANT DETAILS
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-                            Text("JOB CARD DETAIL ", style: Styles.blackBold16),
-                            Container(
-                                padding: EdgeInsets.symmetric(
-                                    vertical: 2, horizontal: 5),
-                                margin: EdgeInsets.only(top: 5),
-                                decoration: BoxDecoration(
-                                  color: controller.jobCardDetailsModel.value
-                                              ?.status ==
-                                          151
-                                      ? ColorValues.createsColor
-                                      : controller.jobCardDetailsModel.value
-                                                  ?.status ==
-                                              152
-                                          ? ColorValues.startColor
-                                          : controller.jobCardDetailsModel.value
-                                                      ?.status ==
-                                                  153
-                                              ? Color.fromARGB(
-                                                  255, 181, 129, 179)
-                                              : controller.jobCardDetailsModel
-                                                          .value?.status ==
-                                                      155
-                                                  ? ColorValues
-                                                      .waitingForApproveStatusColor
-                                                  : ColorValues.lightBlueColor,
-                                  borderRadius: BorderRadius.circular(5),
-                                ),
-                                child: Text(
-                                  " ${controller.jobCardDetailsModel.value?.status_short ?? ""}",
-                                )),
-                          ],
-                        ),
-                        Divider(
-                          color: ColorValues.greyLightColour,
-                        ),
-                        Container(
-                          margin: Dimens.edgeInsets40_0_40_0,
-                          child: Column(
+                    ScrollConfiguration(
+                  behavior: ScrollConfiguration.of(context)
+                      .copyWith(scrollbars: false),
+                  child: SingleChildScrollView(
+                    child: Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        //
+                        children: [
+                          /// TABLE - PLANT DETAILS
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
-                              Row(
-                                children: [
-                                  Spacer(),
-                                  Column(
-                                    crossAxisAlignment: CrossAxisAlignment.end,
-                                    children: [
-                                      Text(
-                                        ""
-                                        "Job Card Id :",
-                                        style: Styles.black14,
-                                      ),
-                                      Text(
-                                        "Asset Category Name :",
-                                        style: Styles.black14,
-                                      ),
-                                      Text(
-                                        "Job Id :",
-                                        style: Styles.black14,
-                                      ),
-                                      Text(
-                                        "Ptw Id :",
-                                        style: Styles.black14,
-                                      ),
-                                      Text(
-                                        "Created By :",
-                                        style: Styles.black14,
-                                      ),
-                                    ],
+                              Text("JOB CARD DETAIL ",
+                                  style: Styles.blackBold16),
+                              Container(
+                                  padding: EdgeInsets.symmetric(
+                                      vertical: 2, horizontal: 5),
+                                  margin: EdgeInsets.only(top: 5),
+                                  decoration: BoxDecoration(
+                                    color: controller.jobCardDetailsModel.value
+                                                ?.status ==
+                                            151
+                                        ? ColorValues.createsColor
+                                        : controller.jobCardDetailsModel.value
+                                                    ?.status ==
+                                                152
+                                            ? ColorValues.startColor
+                                            : controller.jobCardDetailsModel
+                                                        .value?.status ==
+                                                    153
+                                                ? Color.fromARGB(
+                                                    255, 181, 129, 179)
+                                                : controller.jobCardDetailsModel
+                                                            .value?.status ==
+                                                        155
+                                                    ? ColorValues
+                                                        .waitingForApproveStatusColor
+                                                    : ColorValues
+                                                        .lightBlueColor,
+                                    borderRadius: BorderRadius.circular(5),
                                   ),
-                                  Dimens.boxWidth10,
-                                  Column(
-                                    crossAxisAlignment:
-                                        CrossAxisAlignment.start,
-                                    children: [
-                                      Text(" ${controller.jobCardId.value}",
-                                          style: Styles.blue14),
-                                      Text(
-                                          " ${controller.jobCardDetailsModel.value?.assetCategoryName ?? ""}",
-                                          style: Styles.blue14),
-                                      Text(
-                                          " ${controller.jobCardDetailsModel.value?.jobId ?? ""}",
-                                          style: Styles.blue14),
-                                      Text(
-                                          " ${controller.jobCardDetailsModel.value?.ptwId ?? ""}",
-                                          style: Styles.blue14),
-                                      Text(
-                                          " ${controller.jobCardDetailsModel.value?.created_by ?? ""}",
-                                          style: Styles.blue14),
-                                    ],
-                                  ),
-                                  Spacer(),
-                                  Column(
-                                    crossAxisAlignment: CrossAxisAlignment.end,
-                                    children: [
-                                      Text(
-                                        "Plant Name :",
-                                        style: Styles.black14,
-                                      ),
-                                      Text(
-                                        "Title :",
-                                        style: Styles.black14,
-                                      ),
-                                      Text(
-                                        "JC Closed By Name :",
-                                        style: Styles.black14,
-                                      ),
-                                      Text(
-                                        "JC Start By Name :",
-                                        style: Styles.black14,
-                                      ),
-                                      Text(
-                                        "JC Approved By Name :",
-                                        style: Styles.black14,
-                                      ),
-                                    ],
-                                  ),
-                                  Dimens.boxWidth10,
-                                  Column(
-                                    crossAxisAlignment:
-                                        CrossAxisAlignment.start,
-                                    children: [
-                                      Text(
-                                          " ${controller.jobCardDetailsModel.value?.plantName ?? ""}",
-                                          style: Styles.blue14),
-                                      Text(
-                                          " ${controller.jobCardDetailsModel.value?.title ?? ""}",
-                                          style: Styles.blue14),
-                                      Text(
-                                          " ${controller.jobCardDetailsModel.value?.jcClosedByName ?? ""}",
-                                          style: Styles.blue14),
-                                      Text(
-                                          " ${controller.jobCardDetailsModel.value?.jC_Start_By_Name ?? ""}",
-                                          style: Styles.blue14),
-                                      Text(
-                                          " ${controller.jobCardDetailsModel.value?.jcApprovedByName ?? ""}",
-                                          style: Styles.blue14),
-                                    ],
-                                  ),
-                                  Spacer(),
-                                ],
-                              ),
+                                  child: Text(
+                                    " ${controller.jobCardDetailsModel.value?.status_short ?? ""}",
+                                  )),
                             ],
                           ),
-                        ),
-                        Row(children: [
-                          Text('Plant Details :', style: Styles.blackBold16),
-                        ]),
-                        TransposedTable(controller.plantDetails),
-                        Dimens.boxHeight20,
-
-                        /// TABLE - JOB DETAILS
-                        Row(//
-                            children: [
-                          Text('Job Details :', style: Styles.blackBold16),
-                        ]),
-                        TransposedTable(controller.jobDetails),
-                        Dimens.boxHeight20,
-
-                        /// TABLE - PERMIT DETAILS
-                        Row(//
-                            children: [
-                          Text('Permit Details :', style: Styles.blackBold16),
-                        ]),
-                        TransposedTable(controller.permitDetails),
-                        Dimens.boxHeight20,
-
-                        /// ISOLATED ASSETS TABLE WIDGET
-                        (controller.isolationAssetsCategoryList.isNotEmpty)
-                            ? IsolatedAssetsWidget()
-                            : Dimens.boxHeight0,
-
-                        /// LOTO APPLIED ASSETS TABLE WIDGET
-                        (controller.lotoAppliedAssets.isNotEmpty)
-                            ? LotoAppliedAssetsWidget()
-                            : Dimens.boxHeight20,
-                        CustomDivider(),
-
-                        /// EMPLOYEE TABLE
-
-                        EmployeeTableWidget(
-                            controller: controller, isWeb: true),
-                        Dimens.boxHeight20,
-                        CustomDivider(),
-
-                        /// FILE UPLOAD WIDGET
-                        Container(
-                          height: Get.height * 0.2,
-                          width: Get.width,
-                          child: Row(//
+                          Divider(
+                            color: ColorValues.greyLightColour,
+                          ),
+                          Container(
+                            margin: Dimens.edgeInsets40_0_40_0,
+                            child: Column(
                               children: [
-                            Expanded(
-                              flex: 2,
-                              child: FileUploadWidgetWithDropzone(),
-                            ),
-                            Dimens.boxWidth10,
-                            Expanded(
-                                flex: 8, child: FileUploadDetailsWidgetWeb()),
-                          ]),
-                        ),
-                        Dimens.boxHeight20,
-                        CustomDivider(),
-                        Row(//
-                            children: [
-                          Text('History', style: Styles.blackBold16),
-                        ]),
-
-                        ///HISTORY
-                        (controller.historyList != null &&
-                                controller.historyList!.isNotEmpty)
-                            ? Container(
-                                margin: Dimens.edgeInsets20,
-                                height: ((controller.historyList?.length ?? 0) *
-                                        40) +
-                                    120,
-                                child: //
-                                    HistoryTableWidgetWeb(
-                                  historyList: controller.historyList,
-                                ),
-                              )
-                            //  )
-                            : //
-                            Dimens.box0,
-
-                        /// DESCRIPTION OF WORK DONE
-                        (controller.jobCardList[0]!.status == 151)
-                            ? Container()
-                            : Row(children: [
-                                Text('Description of work done: '),
-                                Expanded(
-                                  child: TextField(
-                                    controller:
-                                        controller.descriptionOfWorkDoneCtrlr,
-                                    // enabled: controller.isJobCardStarted.value,
-                                    decoration: InputDecoration(
-                                      disabledBorder: OutlineInputBorder(
-                                        borderSide: BorderSide(
-                                          color: ColorValues.appLightGreyColor,
-                                          width: 1.0,
+                                Row(
+                                  children: [
+                                    Spacer(),
+                                    Column(
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.end,
+                                      children: [
+                                        Text(
+                                          ""
+                                          "Job Card Id :",
+                                          style: Styles.black14,
                                         ),
-                                      ),
-                                      enabledBorder: OutlineInputBorder(
-                                        borderSide: BorderSide(
-                                          color: ColorValues.appLightBlueColor,
-                                          width: 1.0,
+                                        Text(
+                                          "Asset Category Name :",
+                                          style: Styles.black14,
                                         ),
-                                      ),
-                                      focusedBorder: OutlineInputBorder(
-                                        borderSide: BorderSide(
-                                          color: ColorValues.appLightBlueColor,
-                                          width: 1.0,
+                                        Text(
+                                          "Job Id :",
+                                          style: Styles.black14,
                                         ),
-                                      ),
+                                        Text(
+                                          "Ptw Id :",
+                                          style: Styles.black14,
+                                        ),
+                                        Text(
+                                          "Created By :",
+                                          style: Styles.black14,
+                                        ),
+                                      ],
                                     ),
-                                    keyboardType: TextInputType.multiline,
-                                    minLines: 5,
-                                    maxLines: null,
-                                  ),
+                                    Dimens.boxWidth10,
+                                    Column(
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.start,
+                                      children: [
+                                        Text(" ${controller.jobCardId.value}",
+                                            style: Styles.blue14),
+                                        Text(
+                                            " ${controller.jobCardDetailsModel.value?.assetCategoryName ?? ""}",
+                                            style: Styles.blue14),
+                                        Text(
+                                            " ${controller.jobCardDetailsModel.value?.jobId ?? ""}",
+                                            style: Styles.blue14),
+                                        Text(
+                                            " ${controller.jobCardDetailsModel.value?.ptwId ?? ""}",
+                                            style: Styles.blue14),
+                                        Text(
+                                            " ${controller.jobCardDetailsModel.value?.created_by ?? ""}",
+                                            style: Styles.blue14),
+                                      ],
+                                    ),
+                                    Spacer(),
+                                    Column(
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.end,
+                                      children: [
+                                        Text(
+                                          "Plant Name :",
+                                          style: Styles.black14,
+                                        ),
+                                        Text(
+                                          "Title :",
+                                          style: Styles.black14,
+                                        ),
+                                        Text(
+                                          "JC Closed By Name :",
+                                          style: Styles.black14,
+                                        ),
+                                        Text(
+                                          "JC Start By Name :",
+                                          style: Styles.black14,
+                                        ),
+                                        Text(
+                                          "JC Approved By Name :",
+                                          style: Styles.black14,
+                                        ),
+                                      ],
+                                    ),
+                                    Dimens.boxWidth10,
+                                    Column(
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.start,
+                                      children: [
+                                        Text(
+                                            " ${controller.jobCardDetailsModel.value?.plantName ?? ""}",
+                                            style: Styles.blue14),
+                                        Text(
+                                            " ${controller.jobCardDetailsModel.value?.title ?? ""}",
+                                            style: Styles.blue14),
+                                        Text(
+                                            " ${controller.jobCardDetailsModel.value?.jcClosedByName ?? ""}",
+                                            style: Styles.blue14),
+                                        Text(
+                                            " ${controller.jobCardDetailsModel.value?.jC_Start_By_Name ?? ""}",
+                                            style: Styles.blue14),
+                                        Text(
+                                            " ${controller.jobCardDetailsModel.value?.jcApprovedByName ?? ""}",
+                                            style: Styles.blue14),
+                                      ],
+                                    ),
+                                    Spacer(),
+                                  ],
                                 ),
-                              ]),
+                              ],
+                            ),
+                          ),
+                          Row(children: [
+                            Text('Plant Details :', style: Styles.blackBold16),
+                          ]),
+                          TransposedTable(controller.plantDetails),
+                          Dimens.boxHeight20,
 
-                        Dimens.boxHeight20,
+                          /// TABLE - JOB DETAILS
+                          Row(//
+                              children: [
+                            Text('Job Details :', style: Styles.blackBold16),
+                          ]),
+                          TransposedTable(controller.jobDetails),
+                          Dimens.boxHeight20,
 
-                        /// START JOB CARD BUTTON
-                        // (controller.isJobCardStarted == false)
-                        controller.jobCardList[0]!.status == 151 &&
-                                controller.permitList?[0].status == 125
-                            ? //
-                            Row(
-                                mainAxisAlignment: MainAxisAlignment.center, //
+                          /// TABLE - PERMIT DETAILS
+                          Row(//
+                              children: [
+                            Text('Permit Details :', style: Styles.blackBold16),
+                          ]),
+                          TransposedTable(controller.permitDetails),
+                          Dimens.boxHeight20,
+
+                          /// ISOLATED ASSETS TABLE WIDGET
+                          (controller.isolationAssetsCategoryList.isNotEmpty)
+                              ? IsolatedAssetsWidget()
+                              : Dimens.boxHeight0,
+
+                          /// LOTO APPLIED ASSETS TABLE WIDGET
+                          (controller.lotoAppliedAssets.isNotEmpty)
+                              ? LotoAppliedAssetsWidget()
+                              : Dimens.boxHeight20,
+                          CustomDivider(),
+
+                          /// EMPLOYEE TABLE
+
+                          EmployeeTableWidget(
+                              controller: controller, isWeb: true),
+                          Dimens.boxHeight20,
+                          CustomDivider(),
+
+                          /// FILE UPLOAD WIDGET
+                          Container(
+                            height: Get.height * 0.2,
+                            width: Get.width,
+                            child: Row(//
                                 children: [
-                                    CustomElevatedButton(
-                                      text: 'Start Job Card',
-                                      onPressed: () => controller.startJobCard(
-                                          controller.jobCardId.value),
-                                      backgroundColor: ColorValues.addNewColor,
-                                    )
-                                    // CustomElevatedButton(
-                                    //   text: 'Update',
-                                    //   onPressed: () => controller.updateJobCard(),
-                                    //   backgroundColor: ColorValues.appYellowColor,
-                                    // ),
-                                  ])
-                            : //
-                            controller.jobCardList[0]!.status == 152 ||
-                                    controller.jobCardList[0]!.status == 154
-                                ? Row(
-                                    mainAxisAlignment: MainAxisAlignment.center,
-                                    //
-                                    children: [
-                                        CustomElevatedButton(
-                                          text: 'Cancel',
-                                          onPressed: () =>
-                                              controller.startStopJobCard(),
-                                          backgroundColor:
-                                              ColorValues.appRedColor,
-                                        ),
-                                        Dimens.boxWidth10,
-                                        CustomElevatedButton(
-                                          text: 'Update',
-                                          backgroundColor:
-                                              ColorValues.appYellowColor,
-                                          onPressed: () async {
-                                            bool? confirmed =
-                                                await showConfirmationDialog(
-                                              context,
-                                              'Are you sure you want to Update job ?',
-                                            );
-                                            if (confirmed == true) {
-                                              controller.updateJobCard();
+                              Expanded(
+                                flex: 2,
+                                child: FileUploadWidgetWithDropzone(),
+                              ),
+                              Dimens.boxWidth10,
+                              Expanded(
+                                  flex: 8, child: FileUploadDetailsWidgetWeb()),
+                            ]),
+                          ),
+                          Dimens.boxHeight20,
+                          CustomDivider(),
+                          Row(//
+                              children: [
+                            Text('History', style: Styles.blackBold16),
+                          ]),
 
-                                              Text(
-                                                  'Are you sure you want to Update job ?');
-                                            }
-                                          },
+                          ///HISTORY
+                          (controller.historyList != null &&
+                                  controller.historyList!.isNotEmpty)
+                              ? Container(
+                                  margin: Dimens.edgeInsets20,
+                                  height:
+                                      ((controller.historyList?.length ?? 0) *
+                                              40) +
+                                          120,
+                                  child: //
+                                      HistoryTableWidgetWeb(
+                                    historyList: controller.historyList,
+                                  ),
+                                )
+                              //  )
+                              : //
+                              Dimens.box0,
+
+                          /// DESCRIPTION OF WORK DONE
+                          (controller.jobCardList[0]!.status == 151)
+                              ? Container()
+                              : Row(children: [
+                                  Text('Description of work done: '),
+                                  Expanded(
+                                    child: TextField(
+                                      controller:
+                                          controller.descriptionOfWorkDoneCtrlr,
+                                      // enabled: controller.isJobCardStarted.value,
+                                      decoration: InputDecoration(
+                                        disabledBorder: OutlineInputBorder(
+                                          borderSide: BorderSide(
+                                            color:
+                                                ColorValues.appLightGreyColor,
+                                            width: 1.0,
+                                          ),
                                         ),
-                                        Dimens.boxWidth10,
-                                        varUserAccessModel.value.access_list!
-                                                    .where((e) =>
-                                                        e.feature_id == 4 &&
-                                                        e.add == 1)
-                                                    .length >
-                                                0
-                                            ? CustomElevatedButton(
+                                        enabledBorder: OutlineInputBorder(
+                                          borderSide: BorderSide(
+                                            color:
+                                                ColorValues.appLightBlueColor,
+                                            width: 1.0,
+                                          ),
+                                        ),
+                                        focusedBorder: OutlineInputBorder(
+                                          borderSide: BorderSide(
+                                            color:
+                                                ColorValues.appLightBlueColor,
+                                            width: 1.0,
+                                          ),
+                                        ),
+                                      ),
+                                      keyboardType: TextInputType.multiline,
+                                      minLines: 5,
+                                      maxLines: null,
+                                    ),
+                                  ),
+                                ]),
+
+                          Dimens.boxHeight20,
+
+                          /// START JOB CARD BUTTON
+                          // (controller.isJobCardStarted == false)
+                          controller.jobCardList[0]!.status == 151 &&
+                                  controller.permitList?[0].status == 125
+                              ? //
+                              Row(
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.center, //
+                                  children: [
+                                      CustomElevatedButton(
+                                        text: 'Start Job Card',
+                                        onPressed: () =>
+                                            controller.startJobCard(
+                                                controller.jobCardId.value),
+                                        backgroundColor:
+                                            ColorValues.addNewColor,
+                                      )
+                                      // CustomElevatedButton(
+                                      //   text: 'Update',
+                                      //   onPressed: () => controller.updateJobCard(),
+                                      //   backgroundColor: ColorValues.appYellowColor,
+                                      // ),
+                                    ])
+                              : //
+                              controller.jobCardList[0]!.status == 152 ||
+                                      controller.jobCardList[0]!.status == 154
+                                  ? Row(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.center,
+                                      //
+                                      children: [
+                                          CustomElevatedButton(
+                                            text: 'Cancel',
+                                            onPressed: () =>
+                                                controller.startStopJobCard(),
+                                            backgroundColor:
+                                                ColorValues.appRedColor,
+                                          ),
+                                          Dimens.boxWidth10,
+                                          CustomElevatedButton(
+                                            text: 'Update',
+                                            backgroundColor:
+                                                ColorValues.appYellowColor,
+                                            onPressed: () async {
+                                              bool? confirmed =
+                                                  await showConfirmationDialog(
+                                                context,
+                                                'Are you sure you want to Update job ?',
+                                              );
+                                              if (confirmed == true) {
+                                                controller.updateJobCard();
+
+                                                Text(
+                                                    'Are you sure you want to Update job ?');
+                                              }
+                                            },
+                                          ),
+                                          Dimens.boxWidth10,
+                                          varUserAccessModel.value.access_list!
+                                                      .where((e) =>
+                                                          e.feature_id == 4 &&
+                                                          e.add == 1)
+                                                      .length >
+                                                  0
+                                              ? CustomElevatedButton(
+                                                  backgroundColor:
+                                                      ColorValues.appGreenColor,
+                                                  text: 'Close Job',
+                                                  onPressed: () async {
+                                                    bool? confirmed =
+                                                        await showConfirmationDialog(
+                                                      context,
+                                                      'Are you sure you want to Close Job ?',
+                                                    );
+                                                    if (confirmed == true) {
+                                                      controller.closeJob();
+
+                                                      Text(
+                                                          'Are you sure you want to Close Job ?');
+                                                    }
+                                                  },
+                                                )
+                                              : Container(),
+                                          Dimens.boxWidth10,
+                                          CustomElevatedButton(
+                                            backgroundColor:
+                                                ColorValues.appLightBlueColor,
+                                            text: 'Carry Forward Job',
+                                            onPressed: () async {
+                                              bool? confirmed =
+                                                  await showConfirmationDialog(
+                                                context,
+                                                'Are you sure you want to Carry Forward Job ?',
+                                              );
+                                              if (confirmed == true) {
+                                                controller.carryForwardJob();
+
+                                                Text(
+                                                    'Are you sure you want to Carry Forward Job ?');
+                                              }
+                                            },
+                                          ),
+                                          Dimens.boxWidth10,
+                                        ])
+                                  : controller.jobCardList[0]!.status == 153 ||
+                                          controller.jobCardList[0]!.status ==
+                                              156
+                                      ? Row(
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.center,
+                                          //
+                                          children: [
+                                              CustomElevatedButton(
+                                                text: 'Cancel',
+                                                onPressed: () => controller
+                                                    .startStopJobCard(),
                                                 backgroundColor:
-                                                    ColorValues.appGreenColor,
-                                                text: 'Close Job',
+                                                    ColorValues.appRedColor,
+                                              ),
+                                              Dimens.boxWidth10,
+                                              CustomElevatedButton(
+                                                backgroundColor:
+                                                    ColorValues.appYellowColor,
+                                                text: 'Update',
                                                 onPressed: () async {
                                                   bool? confirmed =
                                                       await showConfirmationDialog(
                                                     context,
-                                                    'Are you sure you want to Close Job ?',
+                                                    'Are you sure you want to Update job ?',
                                                   );
                                                   if (confirmed == true) {
-                                                    controller.closeJob();
+                                                    controller.updateJobCard();
 
                                                     Text(
-                                                        'Are you sure you want to Close Job ?');
+                                                        'Are you sure you want to Update job ?');
                                                   }
                                                 },
-                                              )
-                                            : Container(),
-                                        Dimens.boxWidth10,
-                                        CustomElevatedButton(
-                                          backgroundColor:
-                                              ColorValues.appLightBlueColor,
-                                          text: 'Carry Forward Job',
-                                          onPressed: () async {
-                                            bool? confirmed =
-                                                await showConfirmationDialog(
-                                              context,
-                                              'Are you sure you want to Carry Forward Job ?',
-                                            );
-                                            if (confirmed == true) {
-                                              controller.carryForwardJob();
+                                              ),
+                                              Dimens.boxWidth10,
+                                              // CustomElevatedButton(
+                                              //   backgroundColor:
+                                              //       ColorValues.approveColor,
+                                              //   text: 'Approve',
+                                              //   onPressed: () async {
+                                              //     bool? confirmed =
+                                              //         await showConfirmationDialog(
+                                              //       context,
+                                              //       'Are you sure you want to Approve ?',
+                                              //     );
+                                              //     if (confirmed == true) {
+                                              // controller.approveJobCards();
 
-                                              Text(
-                                                  'Are you sure you want to Carry Forward Job ?');
-                                            }
-                                          },
-                                        ),
-                                        Dimens.boxWidth10,
-                                      ])
-                                : controller.jobCardList[0]!.status == 153 ||
-                                        controller.jobCardList[0]!.status == 156
-                                    ? Row(
-                                        mainAxisAlignment:
-                                            MainAxisAlignment.center,
-                                        //
-                                        children: [
-                                            CustomElevatedButton(
-                                              text: 'Cancel',
-                                              onPressed: () =>
-                                                  controller.startStopJobCard(),
-                                              backgroundColor:
-                                                  ColorValues.appRedColor,
-                                            ),
-                                            Dimens.boxWidth10,
-                                            CustomElevatedButton(
-                                              backgroundColor:
-                                                  ColorValues.appYellowColor,
-                                              text: 'Update',
-                                              onPressed: () async {
-                                                bool? confirmed =
-                                                    await showConfirmationDialog(
-                                                  context,
-                                                  'Are you sure you want to Update job ?',
-                                                );
-                                                if (confirmed == true) {
-                                                  controller.updateJobCard();
+                                              //       Text(
+                                              //           'Are you sure you want to Approve ?');
+                                              //     }
+                                              //   },
+                                              // ),
 
-                                                  Text(
-                                                      'Are you sure you want to Update job ?');
-                                                }
-                                              },
-                                            ),
-                                            Dimens.boxWidth10,
-                                            // CustomElevatedButton(
-                                            //   backgroundColor:
-                                            //       ColorValues.approveColor,
-                                            //   text: 'Approve',
-                                            //   onPressed: () async {
-                                            //     bool? confirmed =
-                                            //         await showConfirmationDialog(
-                                            //       context,
-                                            //       'Are you sure you want to Approve ?',
-                                            //     );
-                                            //     if (confirmed == true) {
-                                            // controller.approveJobCards();
+                                              Dimens.boxWidth10,
 
-                                            //       Text(
-                                            //           'Are you sure you want to Approve ?');
-                                            //     }
-                                            //   },
-                                            // ),
+                                              varUserAccessModel.value
+                                                                  .access_list!
+                                                                  .where((e) =>
+                                                                      e.feature_id ==
+                                                                          4 &&
+                                                                      e.approve ==
+                                                                          1)
+                                                                  .length >
+                                                              0 &&
+                                                          controller
+                                                                  .jobCardList[
+                                                                      0]!
+                                                                  .status ==
+                                                              153 ||
+                                                      varUserAccessModel.value
+                                                                  .access_list!
+                                                                  .where((e) =>
+                                                                      e.feature_id ==
+                                                                          4 &&
+                                                                      e.approve ==
+                                                                          1)
+                                                                  .length >
+                                                              0 &&
+                                                          controller
+                                                                  .jobCardList[0]!
+                                                                  .status ==
+                                                              156
+                                                  ? Container(
+                                                      height: 30,
+                                                      child: CustomElevatedButton(
+                                                        backgroundColor:
+                                                            ColorValues
+                                                                .appGreenColor,
+                                                        text: "Approve",
+                                                        icon: Icons.add,
+                                                        onPressed: () {
+                                                          // controller
+                                                          //     .createNewPermit();
+                                                          Get.dialog(
+                                                              JobCardApproveDialog(
+                                                            JobCardId:
+                                                                '${controller.jobCardId.value}',
+                                                            // ptwStatus:
+                                                            //     '${controller.viewPermitDetailsModel.value?.ptwStatus}'
+                                                          ));
+                                                        },
+                                                      ))
+                                                  : Container(),
+                                              Dimens.boxWidth10,
+                                              varUserAccessModel.value
+                                                                  .access_list!
+                                                                  .where((e) =>
+                                                                      e.feature_id ==
+                                                                          4 &&
+                                                                      e.approve ==
+                                                                          1)
+                                                                  .length >
+                                                              0 &&
+                                                          controller
+                                                                  .jobCardList[
+                                                                      0]!
+                                                                  .status ==
+                                                              153 ||
+                                                      varUserAccessModel.value
+                                                                  .access_list!
+                                                                  .where((e) =>
+                                                                      e.feature_id ==
+                                                                          4 &&
+                                                                      e.approve ==
+                                                                          1)
+                                                                  .length >
+                                                              0 &&
+                                                          controller
+                                                                  .jobCardList[0]!
+                                                                  .status ==
+                                                              156
+                                                  ? Container(
+                                                      height: 30,
+                                                      child: CustomElevatedButton(
+                                                        backgroundColor:
+                                                            ColorValues
+                                                                .rejectColor,
+                                                        text: "Reject",
+                                                        icon: Icons.add,
+                                                        onPressed: () {
+                                                          // controller
+                                                          //     .createNewPermit();
+                                                          Get.dialog(
+                                                              JobCardRejectDialog(
+                                                            JobCardId:
+                                                                '${controller.jobCardId.value}',
+                                                            // ptwStatus:
+                                                            //     '${controller.viewPermitDetailsModel.value?.ptwStatus}'
+                                                          ));
+                                                        },
+                                                      ))
+                                                  : Container(),
+                                            ])
+                                      : Container(),
 
-                                            Dimens.boxWidth10,
-
-                                            varUserAccessModel.value
-                                                                .access_list!
-                                                                .where((e) =>
-                                                                    e.feature_id ==
-                                                                        4 &&
-                                                                    e.approve ==
-                                                                        1)
-                                                                .length >
-                                                            0 &&
-                                                        controller
-                                                                .jobCardList[0]!
-                                                                .status ==
-                                                            153 ||
-                                                    varUserAccessModel.value
-                                                                .access_list!
-                                                                .where((e) =>
-                                                                    e.feature_id ==
-                                                                        4 &&
-                                                                    e.approve ==
-                                                                        1)
-                                                                .length >
-                                                            0 &&
-                                                        controller
-                                                                .jobCardList[0]!
-                                                                .status ==
-                                                            156
-                                                ? Container(
-                                                    height: 30,
-                                                    child: CustomElevatedButton(
-                                                      backgroundColor:
-                                                          ColorValues
-                                                              .appGreenColor,
-                                                      text: "Approve",
-                                                      icon: Icons.add,
-                                                      onPressed: () {
-                                                        // controller
-                                                        //     .createNewPermit();
-                                                        Get.dialog(
-                                                            JobCardApproveDialog(
-                                                          JobCardId:
-                                                              '${controller.jobCardId.value}',
-                                                          // ptwStatus:
-                                                          //     '${controller.viewPermitDetailsModel.value?.ptwStatus}'
-                                                        ));
-                                                      },
-                                                    ))
-                                                : Container(),
-                                            Dimens.boxWidth10,
-                                            varUserAccessModel.value
-                                                                .access_list!
-                                                                .where((e) =>
-                                                                    e.feature_id ==
-                                                                        4 &&
-                                                                    e.approve ==
-                                                                        1)
-                                                                .length >
-                                                            0 &&
-                                                        controller
-                                                                .jobCardList[0]!
-                                                                .status ==
-                                                            153 ||
-                                                    varUserAccessModel.value
-                                                                .access_list!
-                                                                .where((e) =>
-                                                                    e.feature_id ==
-                                                                        4 &&
-                                                                    e.approve ==
-                                                                        1)
-                                                                .length >
-                                                            0 &&
-                                                        controller
-                                                                .jobCardList[0]!
-                                                                .status ==
-                                                            156
-                                                ? Container(
-                                                    height: 30,
-                                                    child: CustomElevatedButton(
-                                                      backgroundColor:
-                                                          ColorValues
-                                                              .rejectColor,
-                                                      text: "Reject",
-                                                      icon: Icons.add,
-                                                      onPressed: () {
-                                                        // controller
-                                                        //     .createNewPermit();
-                                                        Get.dialog(
-                                                            JobCardRejectDialog(
-                                                          JobCardId:
-                                                              '${controller.jobCardId.value}',
-                                                          // ptwStatus:
-                                                          //     '${controller.viewPermitDetailsModel.value?.ptwStatus}'
-                                                        ));
-                                                      },
-                                                    ))
-                                                : Container(),
-                                          ])
-                                    : Container(),
-
-                        Dimens.boxHeight20,
-                      ]),
+                          Dimens.boxHeight20,
+                        ]),
+                  ),
                 );
               } //
               catch (e) {
