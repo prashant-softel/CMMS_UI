@@ -160,4 +160,8 @@ class PreventiveMaintenanceTaskController extends GetxController {
   void getPmTaskListByDate() {
     getPmTaskList(facilityId, formattedTodate1, formattedFromdate1, false);
   }
+
+  void clearStoreData() {
+    preventiveMaintenanceTaskPresenter.clearValue();
+  }
 }

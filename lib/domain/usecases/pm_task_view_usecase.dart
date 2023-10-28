@@ -93,4 +93,8 @@ class PreventiveMaintenanceTaskViewUsecase {
         taskId,
         isLoading,
       );
+  void saveValue({String? pmTaskId}) async =>
+      repository.saveValue(LocalKeys.pmTaskId, pmTaskId);
+  Future<String?> getValue() async =>
+      await repository.getStringValue(LocalKeys.pmTaskId);
 }

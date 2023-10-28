@@ -16,4 +16,5 @@ class PreventiveMaintenanceTaskPresenter {
           isLoading: isLoading ?? false,
           endDate: endDate,
           startDate: startDate);
+  void clearValue() async => preventiveMaintenanceTaskUsecase.clearValue();
 }
