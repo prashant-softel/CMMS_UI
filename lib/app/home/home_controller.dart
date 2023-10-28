@@ -104,9 +104,9 @@ class HomeController extends GetxController {
     //   });
     // });
 
-    Future.delayed(Duration(seconds: 1), () async {
-      await getuserAccessData();
-    });
+    // Future.delayed(Duration(seconds: 1), () async {
+    //   await getuserAccessData();
+    // });
     //  Future.delayed(Duration(seconds: 1), () {
     //   getInventoryList();
     // });
@@ -142,9 +142,10 @@ class HomeController extends GetxController {
       for (var facility in _facilityList) {
         facilityList.add(facility);
       }
+      getuserAccessData();
+
       final facilityData = await homePresenter.getValue();
       print({"facilityData": facilityData});
-
       Map<String, dynamic> savaData =
           facilityData != '' ? jsonDecode(facilityData ?? '{}') : {};
       selectedFacility.value = savaData['name'] ?? facilityList[0]?.name ?? '';
