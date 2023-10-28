@@ -121,7 +121,7 @@ class CreateAuditController extends GetxController {
 
     CreateAuditPlan createAuditPlan = CreateAuditPlan(
         plan_number: _planTitle,
-        facility_id: facilityId,
+        Facility_id: facilityId,
         auditee_id: 101,
         auditor_id: facilityId,
         ApplyFrequency: selectedfrequencyId);
