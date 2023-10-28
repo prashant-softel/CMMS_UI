@@ -107,4 +107,10 @@ class PreventiveMaintenanceTaskViewPresenter {
         id: id,
         isLoading: isLoading,
       );
+  void saveValue({String? pmTaskId}) async {
+    return preventiveMaintenanceTaskViewUsecase.saveValue(pmTaskId: pmTaskId);
+  }
+
+  Future<String?> getValue() async =>
+      await preventiveMaintenanceTaskViewUsecase.getValue();
 }

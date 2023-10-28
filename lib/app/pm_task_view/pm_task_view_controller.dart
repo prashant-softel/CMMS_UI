@@ -107,17 +107,23 @@ class PreventiveMaintenanceTaskViewController extends GetxController {
 
   Future<void> setScheduleId() async {
     try {
-      final _flutterSecureStorage = const FlutterSecureStorage();
-      // Read jobId
-      String? _scheduleId = await _flutterSecureStorage.read(key: "pmTaskId");
+      // final _flutterSecureStorage = const FlutterSecureStorage();
+      // // Read jobId
+      final _scheduleId =
+          await preventiveMaintenanceTaskViewPresenter.getValue();
+
+      //  String? _scheduleId = await _flutterSecureStorage.read(key: "pmTaskId");
       if (_scheduleId == null || _scheduleId == '' || _scheduleId == "null") {
         var dataFromPreviousScreen = Get.arguments;
 
         scheduleId.value = dataFromPreviousScreen['pmTaskId'];
-        await _flutterSecureStorage.write(
-          key: "pmTaskId",
-          value: scheduleId.value == null ? '' : scheduleId.value.toString(),
-        );
+        preventiveMaintenanceTaskViewPresenter.saveValue(
+            pmTaskId: scheduleId.value.toString());
+
+        // await _flutterSecureStorage.write(
+        //   key: "pmTaskId",
+        //   value: scheduleId.value == null ? '' : scheduleId.value.toString(),
+        // );
       } else {
         scheduleId.value = int.tryParse(_scheduleId) ?? 0;
       }

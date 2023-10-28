@@ -608,10 +608,10 @@ class PmTaskDataSource extends DataTableSource {
                                 icon: Icons.remove_red_eye_outlined,
                                 message: 'View',
                                 onPress: () {
-                                  final _flutterSecureStorage =
-                                      const FlutterSecureStorage();
+                                  // final _flutterSecureStorage =
+                                  //     const FlutterSecureStorage();
 
-                                  _flutterSecureStorage.delete(key: "pmTaskId");
+                                  // _flutterSecureStorage.delete(key: "pmTaskId");
                                   int pmTaskId = pmTaskDetails?.id ?? 0;
                                   if (pmTaskId != 0) {
                                     Get.toNamed(Routes.pmTaskView,
@@ -643,10 +643,10 @@ class PmTaskDataSource extends DataTableSource {
       }).toList(),
       //   ],
       onSelectChanged: (_) {
-        final _flutterSecureStorage = const FlutterSecureStorage();
+        // final _flutterSecureStorage = const FlutterSecureStorage();
 
-        _flutterSecureStorage.delete(key: "pmTaskId");
-
+        // _flutterSecureStorage.delete(key: "pmTaskId");
+        controller.clearStoreData();
         int pmTaskId = pmTaskDetails?.id ?? 0;
         if (pmTaskId != 0) {
           varUserAccessModel.value.access_list!
