@@ -35,21 +35,15 @@ class MrsViewController extends GetxController {
 
   Future<void> setMrsId() async {
     try {
-      final _flutterSecureStorage = const FlutterSecureStorage();
-      // Read jobId
-      String? _mrsId = await _flutterSecureStorage.read(key: "mrsId");
+      final _mrsId = await mrsViewPresenter.getValue();
       if (_mrsId == null || _mrsId == '' || _mrsId == "null") {
         var dataFromPreviousScreen = Get.arguments;
 
         mrsId.value = dataFromPreviousScreen['mrsId'];
-        await _flutterSecureStorage.write(
-          key: "mrsId",
-          value: mrsId.value == null ? '' : mrsId.value.toString(),
-        );
+        mrsViewPresenter.saveValue(mrsId: mrsId.value.toString());
       } else {
         mrsId.value = int.tryParse(_mrsId) ?? 0;
       }
-      //  await _flutterSecureStorage.delete(key: "mrsId");
     } catch (e) {
       Utility.showDialog(e.toString() + 'mrsId');
     }

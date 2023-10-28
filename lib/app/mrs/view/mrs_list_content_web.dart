@@ -3,14 +3,12 @@ import 'package:cmms/app/mrs/Mrs_list_controller.dart';
 import 'package:cmms/app/navigators/app_pages.dart';
 import 'package:cmms/app/theme/dimens.dart';
 import 'package:cmms/app/utils/user_access_constants.dart';
-import 'package:cmms/app/widgets/action_button.dart';
 import 'package:cmms/app/widgets/custom_richtext.dart';
 import 'package:cmms/app/widgets/date_picker.dart';
 import 'package:cmms/app/widgets/table_action_button.dart';
 import 'package:cmms/domain/models/get_mrs_list_model.dart';
 import 'package:data_table_2/data_table_2.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 
 import 'package:get/get.dart';
 import 'package:syncfusion_flutter_datepicker/datepicker.dart';
@@ -588,10 +586,12 @@ class MrsListDataSource extends DataTableSource {
                           icon: Icons.remove_red_eye_outlined,
                           message: "View",
                           onPress: () {
-                            final _flutterSecureStorage =
-                                const FlutterSecureStorage();
+                            controller.clearStoreData();
 
-                            _flutterSecureStorage.delete(key: "mrsId");
+                            // final _flutterSecureStorage =
+                            //     const FlutterSecureStorage();
+
+                            // _flutterSecureStorage.delete(key: "mrsId");
                             int mrsId = MrsDetails?.id ?? 0;
                             if (mrsId != null) {
                               Get.toNamed(Routes.mrsViewScreen,
@@ -604,10 +604,12 @@ class MrsListDataSource extends DataTableSource {
                           icon: Icons.edit,
                           message: 'edit',
                           onPress: () {
-                            final _flutterSecureStorage =
-                                const FlutterSecureStorage();
+                            controller.clearStoreData();
 
-                            _flutterSecureStorage.delete(key: "mrsId");
+                            // final _flutterSecureStorage =
+                            //     const FlutterSecureStorage();
+
+                            // _flutterSecureStorage.delete(key: "mrsId");
                             int mrsId = MrsDetails?.id ?? 0;
                             if (mrsId != null) {
                               Get.toNamed(Routes.editMrs,
@@ -637,10 +639,12 @@ class MrsListDataSource extends DataTableSource {
                                 icon: Icons.check,
                                 message: 'Approve',
                                 onPress: () {
-                                  final _flutterSecureStorage =
-                                      const FlutterSecureStorage();
+                                  controller.clearStoreData();
 
-                                  _flutterSecureStorage.delete(key: "mrsId");
+                                  // final _flutterSecureStorage =
+                                  //     const FlutterSecureStorage();
+
+                                  // _flutterSecureStorage.delete(key: "mrsId");
                                   int mrsId = MrsDetails?.id ?? 0;
                                   if (mrsId != null) {
                                     Get.toNamed(Routes.mrsApprovalScreen,
@@ -671,10 +675,12 @@ class MrsListDataSource extends DataTableSource {
                                 icon: Icons.report,
                                 message: 'issue',
                                 onPress: () {
-                                  final _flutterSecureStorage =
-                                      const FlutterSecureStorage();
+                                  controller.clearStoreData();
 
-                                  _flutterSecureStorage.delete(key: "mrsId");
+                                  // final _flutterSecureStorage =
+                                  //     const FlutterSecureStorage();
+
+                                  // _flutterSecureStorage.delete(key: "mrsId");
                                   int mrsId = MrsDetails?.id ?? 0;
                                   if (mrsId != null) {
                                     Get.toNamed(Routes.mrsIssueScreen,
@@ -712,10 +718,12 @@ class MrsListDataSource extends DataTableSource {
                                 icon: Icons.close,
                                 message: 'Reject',
                                 onPress: () {
-                                  final _flutterSecureStorage =
-                                      const FlutterSecureStorage();
+                                  controller.clearStoreData();
 
-                                  _flutterSecureStorage.delete(key: "mrsId");
+                                  // final _flutterSecureStorage =
+                                  //     const FlutterSecureStorage();
+
+                                  // _flutterSecureStorage.delete(key: "mrsId");
                                   int mrsId = MrsDetails?.id ?? 0;
                                   if (mrsId != null) {
                                     Get.toNamed(Routes.mrsApprovalScreen,
@@ -746,10 +754,12 @@ class MrsListDataSource extends DataTableSource {
                                 icon: Icons.approval,
                                 message: 'approval',
                                 onPress: () {
-                                  final _flutterSecureStorage =
-                                      const FlutterSecureStorage();
+                                  controller.clearStoreData();
 
-                                  _flutterSecureStorage.delete(key: "mrsId");
+                                  // final _flutterSecureStorage =
+                                  //     const FlutterSecureStorage();
+
+                                  // _flutterSecureStorage.delete(key: "mrsId");
                                   int mrsId = MrsDetails?.id ?? 0;
                                   if (mrsId != null) {
                                     Get.toNamed(Routes.issueMrsApprove,
@@ -780,10 +790,12 @@ class MrsListDataSource extends DataTableSource {
                                 icon: Icons.close_fullscreen,
                                 message: 'issue',
                                 onPress: () {
-                                  final _flutterSecureStorage =
-                                      const FlutterSecureStorage();
+                                  controller.clearStoreData();
 
-                                  _flutterSecureStorage.delete(key: "mrsId");
+                                  // final _flutterSecureStorage =
+                                  //     const FlutterSecureStorage();
+
+                                  // _flutterSecureStorage.delete(key: "mrsId");
                                   int mrsId = MrsDetails?.id ?? 0;
                                   if (mrsId != null) {
                                     Get.toNamed(Routes.issueMrsApprove,
@@ -799,9 +811,11 @@ class MrsListDataSource extends DataTableSource {
       }).toList(),
       //   ],
       onSelectChanged: (_) {
-        final _flutterSecureStorage = const FlutterSecureStorage();
+        controller.clearStoreData();
 
-        _flutterSecureStorage.delete(key: "mrsId");
+        // final _flutterSecureStorage = const FlutterSecureStorage();
+
+        // _flutterSecureStorage.delete(key: "mrsId");
         Get.toNamed(Routes.mrsViewScreen, arguments: {'mrsId': MrsDetails?.id});
       },
     );

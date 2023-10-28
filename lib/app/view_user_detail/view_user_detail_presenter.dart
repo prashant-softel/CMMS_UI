@@ -40,4 +40,9 @@ class ViewUserDetailPresenter {
         userId: userId,
         isLoading: isLoading,
       );
+  void saveValue({String? userId}) async {
+    return viewUserDetailUsecase.saveValue(userId: userId);
+  }
+
+  Future<String?> getValue() async => await viewUserDetailUsecase.getValue();
 }

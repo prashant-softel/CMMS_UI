@@ -141,4 +141,10 @@ class AddUserPresenter {
       isLoading: isLoading,
     );
   }
+
+  void saveValue({String? userId}) async {
+    return addUserUsecase.saveValue(userId: userId);
+  }
+
+  Future<String?> getValue() async => await addUserUsecase.getValue();
 }

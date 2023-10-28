@@ -3,7 +3,6 @@ import 'package:cmms/app/view_pm_plan/view_pm_plan_presenter.dart';
 import 'package:cmms/domain/models/comment_model.dart';
 import 'package:cmms/domain/models/get_pm_plan_detail_model.dart';
 import 'package:flutter/cupertino.dart';
-import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:get/get.dart';
 import '../home/home_controller.dart';
 
@@ -36,17 +35,21 @@ class ViewPmPlanController extends GetxController {
 
   Future<void> setPMPlanId() async {
     try {
-      final _flutterSecureStorage = const FlutterSecureStorage();
-      // Read jobId
-      String? _pmPlanId = await _flutterSecureStorage.read(key: "pmPlanId");
+      // final _flutterSecureStorage = const FlutterSecureStorage();
+      // // Read jobId
+      // String? _pmPlanId = await _flutterSecureStorage.read(key: "pmPlanId");
+      final _pmPlanId = await viewPmPlanPresenter.getValue();
+
       if (_pmPlanId == null || _pmPlanId == '' || _pmPlanId == "null") {
         var dataFromPreviousScreen = Get.arguments;
 
         pmPlanId.value = dataFromPreviousScreen['pmPlanId'];
-        await _flutterSecureStorage.write(
-          key: "pmPlanId",
-          value: pmPlanId.value == null ? '' : pmPlanId.value.toString(),
-        );
+        viewPmPlanPresenter.saveValue(pmPlanId: pmPlanId.value.toString());
+
+        // await _flutterSecureStorage.write(
+        //   key: "pmPlanId",
+        //   value: pmPlanId.value == null ? '' : pmPlanId.value.toString(),
+        // );
       } else {
         pmPlanId.value = int.tryParse(_pmPlanId) ?? 0;
       }

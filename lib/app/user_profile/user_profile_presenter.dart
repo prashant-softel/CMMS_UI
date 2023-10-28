@@ -41,4 +41,9 @@ class UserProfilePresenter {
         userId: userId,
         isLoading: isLoading,
       );
+  void saveValue({String? userId}) async {
+    return userProfileUsecase.saveValue(userId: userId);
+  }
+
+  Future<String?> getValue() async => await userProfileUsecase.getValue();
 }

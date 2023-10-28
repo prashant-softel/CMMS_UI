@@ -31,4 +31,10 @@ class MrsApprovePresenter {
       isLoading: isLoading,
     );
   }
+
+  void saveValue({String? mrsId}) async {
+    return mrsApproveUsecase.saveValue(mrsId: mrsId);
+  }
+
+  Future<String?> getValue() async => await mrsApproveUsecase.getValue();
 }

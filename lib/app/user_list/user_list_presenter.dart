@@ -12,4 +12,5 @@ class UserListPresenter {
         facilityId: facilityId ?? 0,
         isLoading: isLoading ?? false,
       );
+  void clearValue() async => userListUsecase.clearValue();
 }
