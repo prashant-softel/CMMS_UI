@@ -38,7 +38,7 @@ dependencies:
   loading_overlay_pro: ^2.1.1
   logger: ^1.0.0
 
-  package_info_plus: ^1.4.3+1
+  # package_info_plus: ^1.4.3+1
   path_provider: ^2.0.9
   permission_handler: ^10.0.0
 
@@ -59,6 +59,7 @@ dependencies:
   html_unescape: ^2.0.0
   data_table_2: ^2.4.2
   syncfusion_flutter_pdf: ^19.4.56-beta
+  package_info_plus: ^4.2.0
 
 dev_dependencies:
   hive_generator:

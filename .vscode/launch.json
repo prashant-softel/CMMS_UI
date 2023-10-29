@@ -13,7 +13,7 @@
                 "--web-enable-expression-evaluation",
                 "--flavor",
                 "dev",
-                "--no-sound-null-safety"
+               
             ]
         },
         // {

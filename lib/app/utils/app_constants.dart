@@ -15,7 +15,7 @@ abstract class AppConstants {
   static String userGenderLocal = 'userGenderLocal';
   static String mixPannelId = appFlavor == AppFlavor.PROD ? '' : '';
   static String appStoreId = '';
-  static String androidPackageName = 'com.cmms';
+  static String androidPackageName = 'com.softel.cmms';
 
   /// JOB STATUSES
   static String kJobStatusCreated = "CREATED";
