@@ -1647,7 +1647,7 @@ class ViewPermitController extends GetxController {
     //Dispose the document.
     document.dispose();
     //Save and launch the file.
-    // await saveAndLaunchFile(bytes, 'permit.pdf');
+    await saveAndLaunchFile(bytes, 'permit.pdf');
   }
 
   PdfLayoutResult drawHeader(

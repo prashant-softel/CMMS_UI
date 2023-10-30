@@ -26,7 +26,7 @@ class ViewIncidentReportContentWeb
   bool _switchValue = false;
 
   // final homeController = Get.find<HomeController>();
-  final ViewIncidentReportController controller = Get.find();
+  // final ViewIncidentReportController controller = Get.find();
 
   @override
   Widget build(BuildContext context) => Scaffold(
@@ -536,7 +536,7 @@ class ViewIncidentReportContentWeb
                                               ColorValues.appDarkBlueColor,
                                           text: "Print",
                                           onPressed: () {
-                                            // controller.printScreen();
+                                            controller.generateInvoice();
                                           },
                                         ),
                                       ),
