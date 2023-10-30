@@ -19,9 +19,8 @@ class NewWarrantyClaimWeb extends GetView<WarrantyClaimController> {
   NewWarrantyClaimWeb({super.key});
 
   bool valuefirst = false;
-   final FileUploadController dropzoneController =
+  final FileUploadController dropzoneController =
       Get.put(FileUploadController());
-
 
   // final controller = Get.find<HomeController>();
   final WarrantyClaimController controller = Get.find();
@@ -116,8 +115,7 @@ class NewWarrantyClaimWeb extends GetView<WarrantyClaimController> {
                                                     .width /
                                                 2.55,
                                             child: CustomTextField(
-                                              label:
-                                                  'Warranty Claim Title: *',
+                                              label: 'Warranty Claim Title: ',
                                               textController: controller
                                                   .warrantyClaimTitleTextController,
                                             ),
@@ -131,9 +129,10 @@ class NewWarrantyClaimWeb extends GetView<WarrantyClaimController> {
                                                     .size
                                                     .width /
                                                 1.3,
+                                            height: 80,
                                             child: CustomTextField(
                                               label:
-                                                  'Warranty Brief Description: *',
+                                                  'Warranty Brief Description: ',
                                               textController: controller
                                                   .warrantyClaimBriefDescTextController,
                                             ),
@@ -161,9 +160,7 @@ class NewWarrantyClaimWeb extends GetView<WarrantyClaimController> {
                                                         .size
                                                         .width /
                                                     4.2,
-                                                child:
-                                                   
-                                                    Obx(
+                                                child: Obx(
                                                   () => DropdownWebWidget(
                                                     dropdownList: controller
                                                         .equipmentCategoryList,
@@ -186,7 +183,6 @@ class NewWarrantyClaimWeb extends GetView<WarrantyClaimController> {
                                               SizedBox(
                                                 width: 15,
                                               ),
-
                                               SizedBox(
                                                 width: MediaQuery.of(context)
                                                         .size
@@ -209,8 +205,6 @@ class NewWarrantyClaimWeb extends GetView<WarrantyClaimController> {
 
                                                 // LoginCustomTextfield(),
                                               ),
-
-                                            
                                             ],
                                           ),
                                         ],
@@ -222,10 +216,9 @@ class NewWarrantyClaimWeb extends GetView<WarrantyClaimController> {
                                       ///Affected Part
                                       SizedBox(
                                         height: 220,
-                                        width: MediaQuery.of(context)
-                                                .size
-                                                .width /
-                                            1.2,
+                                        width:
+                                            MediaQuery.of(context).size.width /
+                                                1.2,
                                         child: Center(
                                           child: Container(
                                             margin: Dimens.edgeInsets16,
@@ -338,11 +331,9 @@ class NewWarrantyClaimWeb extends GetView<WarrantyClaimController> {
                                                             SizedBox(
                                                               width: 100,
                                                             ),
-                                                           
                                                           ],
                                                         ),
                                                       ),
-                                                     
                                                     ],
                                                   ),
                                                 ],
@@ -356,7 +347,7 @@ class NewWarrantyClaimWeb extends GetView<WarrantyClaimController> {
                                             MainAxisAlignment.start,
                                         children: [
                                           CustomTextField(
-                                            label: 'Failure Date & Time: *',
+                                            label: 'Failure Date & Time: ',
                                             suffixIcon: Icon(
                                               Icons.calendar_month,
                                             ),
@@ -366,8 +357,7 @@ class NewWarrantyClaimWeb extends GetView<WarrantyClaimController> {
                                                 .failureDateTimeCtrlrWeb,
 
                                             onTap: () {
-                                              pickFailureDateTime_web(
-                                                  context);
+                                              pickFailureDateTime_web(context);
                                             },
                                           ),
                                         ],
@@ -377,8 +367,7 @@ class NewWarrantyClaimWeb extends GetView<WarrantyClaimController> {
                                             MainAxisAlignment.start,
                                         children: [
                                           CustomTextField(
-                                            label: 'Approximate Daily Loss:*',
-                                            
+                                            label: 'Approximate Daily Loss: ',
                                           ),
                                           SizedBox(
                                             width: 40,
@@ -388,12 +377,14 @@ class NewWarrantyClaimWeb extends GetView<WarrantyClaimController> {
                                             // mainAxisAlignment:
                                             //     MainAxisAlignment.spaceAround,
                                             children: [
-                                               buildRadioButton('Critical',Colors.red,context),
-                                               buildRadioButton('High',Colors.orange,context),
-                                               buildRadioButton('Medium',Colors.yellow,context),
-                                               buildRadioButton('Low',Colors.green,context),
-
-                                            
+                                              buildRadioButton('Critical',
+                                                  Colors.red, context),
+                                              buildRadioButton('High',
+                                                  Colors.orange, context),
+                                              buildRadioButton('Medium',
+                                                  Colors.yellow, context),
+                                              buildRadioButton(
+                                                  'Low', Colors.green, context),
                                             ],
                                           ),
                                         ],
@@ -424,14 +415,14 @@ class NewWarrantyClaimWeb extends GetView<WarrantyClaimController> {
                                                 textController: controller
                                                     .orderReferenceNoTextController,
                                                 label:
-                                                    'Order/Contract Reference No.:',
+                                                    'Contract Reference No.:',
                                               ),
                                               CustomTextField(
                                                 textController: controller
                                                     .warrantyStartDateTimeCtrlrWeb,
                                                 label: 'Warranty Start Date:',
-                                                suffixIcon: Icon(
-                                                    Icons.calendar_month),
+                                                suffixIcon:
+                                                    Icon(Icons.calendar_month),
                                                 onTap: () {
                                                   pickWarrantyStartDateTime_web(
                                                       context);
@@ -441,8 +432,8 @@ class NewWarrantyClaimWeb extends GetView<WarrantyClaimController> {
                                                 textController: controller
                                                     .warrantyEndDateTimeCtrlrWeb,
                                                 label: 'Warranty End Date:',
-                                                suffixIcon: Icon(
-                                                    Icons.calendar_month),
+                                                suffixIcon:
+                                                    Icon(Icons.calendar_month),
                                                 onTap: () {
                                                   pickWarrantyEndDateTime_web(
                                                       context);
@@ -504,7 +495,8 @@ class NewWarrantyClaimWeb extends GetView<WarrantyClaimController> {
                                                             Column(
                                                               children: [
                                                                 SizedBox(
-                                                                  width: MediaQuery.of(context)
+                                                                  width: MediaQuery.of(
+                                                                              context)
                                                                           .size
                                                                           .width /
                                                                       1.5,
@@ -519,13 +511,16 @@ class NewWarrantyClaimWeb extends GetView<WarrantyClaimController> {
                                                                               const EdgeInsets.all(1.0),
                                                                           child:
                                                                               Container(
-                                                                            height: 45,
-                                                                            decoration: BoxDecoration(
+                                                                            height:
+                                                                                45,
+                                                                            decoration:
+                                                                                BoxDecoration(
                                                                               border: Border.all(color: Colors.grey),
                                                                               color: Colors.white,
                                                                               borderRadius: BorderRadius.circular(1),
                                                                             ),
-                                                                            child: TabBar(
+                                                                            child:
+                                                                                TabBar(
                                                                               labelPadding: EdgeInsets.symmetric(horizontal: 10.0),
                                                                               labelColor: Colors.black,
                                                                               indicator: BoxDecoration(color: Colors.blue, borderRadius: BorderRadius.circular(1)),
@@ -671,7 +666,10 @@ class NewWarrantyClaimWeb extends GetView<WarrantyClaimController> {
                                                                                       controller.nameTextFieldController.clear();
                                                                                       controller.emailTextFieldController.clear();
                                                                                     },
-                                                                                    child: Text('Add', style: TextStyle(color: ColorValues.appGreenColor),),
+                                                                                    child: Text(
+                                                                                      'Add',
+                                                                                      style: TextStyle(color: ColorValues.appGreenColor),
+                                                                                    ),
                                                                                   ),
                                                                                 ],
                                                                               ),
@@ -722,35 +720,32 @@ class NewWarrantyClaimWeb extends GetView<WarrantyClaimController> {
                                                   padding:
                                                       const EdgeInsets.only(
                                                           left: 20, top: 15),
-                                                  child: Text(
-                                                      'Equipment Images'),
+                                                  child:
+                                                      Text('Equipment Images'),
                                                 ),
                                                 Dimens.boxHeight30,
                                                 Row(
                                                   children: [
-                                                   
                                                     ////
-                                                     /// FILE UPLOAD WIDGET
-                                                        Container(
-                                                          height: Get.height * 0.2,
-                                                          width: Get.width / 1.3,
-                                                          child: Row(
-                                                              //
-                                                              children: [
-                                                                Expanded(
-                                                                  flex: 2,
-                                                                  child:
-                                                                      FileUploadWidgetWithDropzone(),
-                                                                ),
-                                                                Dimens.boxWidth10,
-                                                                Expanded(
-                                                                    flex: 8,
-                                                                    child:
-                                                                        FileUploadDetailsWidgetWeb()),
-                                                              ]),
-                                                        ),
-                                          
-                                                  
+                                                    /// FILE UPLOAD WIDGET
+                                                    Container(
+                                                      height: Get.height * 0.2,
+                                                      width: Get.width / 1.3,
+                                                      child: Row(
+                                                          //
+                                                          children: [
+                                                            Expanded(
+                                                              flex: 2,
+                                                              child:
+                                                                  FileUploadWidgetWithDropzone(),
+                                                            ),
+                                                            Dimens.boxWidth10,
+                                                            Expanded(
+                                                                flex: 8,
+                                                                child:
+                                                                    FileUploadDetailsWidgetWeb()),
+                                                          ]),
+                                                    ),
                                                   ],
                                                 ),
                                               ],
@@ -762,29 +757,43 @@ class NewWarrantyClaimWeb extends GetView<WarrantyClaimController> {
                                       SizedBox(
                                         height: 20,
                                       ),
-                                      Wrap(
+                                      Row(
+                                        crossAxisAlignment:
+                                            CrossAxisAlignment.start,
                                         children: [
-                                          Row(
-                                            mainAxisSize: MainAxisSize.min,
+                                          Column(
                                             children: [
-                                              CustomTextField(
-                                                textController: controller
-                                                    .immediateCorrectiveActionTextController,
-                                                label:
-                                                    'Immediate Corrective Action by Buyer: *',
+                                              Row(
+                                                mainAxisSize: MainAxisSize.min,
+                                                children: [
+                                                  SizedBox(
+                                                    height: 80,
+                                                    child: CustomTextField(
+                                                      textController: controller
+                                                          .immediateCorrectiveActionTextController,
+                                                      label:
+                                                          'Immediate Corrective Action by Buyer: ',
+                                                    ),
+                                                  ),
+                                                ],
                                               ),
                                             ],
                                           ),
-                                          SizedBox(
-                                            width: 210,
-                                          ),
-                                          CustomTextField(
-                                            textController: controller
-                                                .requestManufactureTextController,
-                                            readOnly: true,
-                                            label: 'Request to Supplier: *',
-                                            hintText:
-                                                '${controller.inventoryDetailsModel.value?.supplierName}',
+                                          Spacer(),
+                                          // SizedBox(
+                                          //   width: 210,
+                                          // ),
+                                          Column(
+                                            children: [
+                                              CustomTextField(
+                                                textController: controller
+                                                    .requestManufactureTextController,
+                                                readOnly: true,
+                                                label: 'Request to Supplier: ',
+                                                hintText:
+                                                    '${controller.inventoryDetailsModel.value?.supplierName}',
+                                              ),
+                                            ],
                                           ),
                                         ],
                                       ),
@@ -799,11 +808,8 @@ class NewWarrantyClaimWeb extends GetView<WarrantyClaimController> {
                                             width: 20,
                                           ),
                                           CustomRichText(
-                                              title:
-                                                  'Select Currency Unit: '),
-                                          SizedBox(
-                                            width: 30,
-                                          ),
+                                              title: 'Select Currency Unit: '),
+                                          Dimens.boxWidth5,
                                           SizedBox(
                                             width: MediaQuery.of(context)
                                                     .size
@@ -811,14 +817,13 @@ class NewWarrantyClaimWeb extends GetView<WarrantyClaimController> {
                                                 6.3,
                                             child: Obx(
                                               () => DropdownWebWidget(
-                                                dropdownList: controller
-                                                    .unitCurrencyList,
+                                                dropdownList:
+                                                    controller.unitCurrencyList,
                                                 isValueSelected: controller
                                                     .isUnitCurrencySelected
                                                     .value,
                                                 selectedValue: controller
-                                                    .selectedUnitCurrency
-                                                    .value,
+                                                    .selectedUnitCurrency.value,
                                                 onValueChanged:
                                                     controller.onValueChanged,
                                               ),
@@ -834,288 +839,279 @@ class NewWarrantyClaimWeb extends GetView<WarrantyClaimController> {
                                 }),
 
                             ////Supplier Actions
-                            SizedBox(
-                              height: 400,
-                              width: MediaQuery.of(context).size.width / 1.2,
-                              child: Center(
-                                child: Container(
-                                  margin: Dimens.edgeInsets16,
-                                  height: Get.height,
-                                  decoration: BoxDecoration(
-                                    border: Border.all(
-                                        color: Colors.grey.withOpacity(.3)),
-                                  ),
-                                  constraints: BoxConstraints(
-                                    maxWidth: 1100,
-                                  ),
-                                  child: SingleChildScrollView(
-                                    child: Column(
-                                      children: [
-                                        CustomAppBar(
-                                          title:
-                                              'Schedule of Supplier Actions'
-                                                  .tr,
-                                          // action: ActionButton(
-                                          //   icon: Icons.add,
-                                          //   label: 'Add',
-                                          //   // onPress:
-                                          //   //     () async {},
-                                          //   color: Colors.blue,
-                                          //   onPressed: () {
-                                          //     controller
-                                          //         .updateSupplierActionText(
-                                          //       controller
-                                          //           .supplierActionTextFieldController
-                                          //           .text,
-                                          //       controller
-                                          //           .supplierActionDateTimeCtrlrWeb
-                                          //           .text,
-                                          //       // controller.isCheckedRequire
-                                          //       //     .value
-                                          //     );
-                                          //     controller
-                                          //         .supplierActionTextFieldController
-                                          //         .clear();
-                                          //     controller
-                                          //         .supplierActionDateTimeCtrlrWeb
-                                          //         .clear();
-                                          //     // controller.isCheckedRequire
-                                          //     //     .value = false;
-                                          //   },
-                                          // ),
+                            Container(
+                              // width: MediaQuery.of(context).size.width / 1.15,
+                              margin: Dimens.edgeInsets20,
+                              // height: Get.height,
+                              decoration: BoxDecoration(
+                                border: Border.all(
+                                    color: Colors.grey.withOpacity(.3)),
+                              ),
+                              constraints: BoxConstraints(
+                                maxWidth: 1100,
+                              ),
+                              child: SingleChildScrollView(
+                                child: Column(
+                                  children: [
+                                    CustomAppBar(
+                                      title: 'Schedule of Supplier Actions'.tr,
+                                      // action: ActionButton(
+                                      //   icon: Icons.add,
+                                      //   label: 'Add',
+                                      //   // onPress:
+                                      //   //     () async {},
+                                      //   color: Colors.blue,
+                                      //   onPressed: () {
+                                      //     controller
+                                      //         .updateSupplierActionText(
+                                      //       controller
+                                      //           .supplierActionTextFieldController
+                                      //           .text,
+                                      //       controller
+                                      //           .supplierActionDateTimeCtrlrWeb
+                                      //           .text,
+                                      //       // controller.isCheckedRequire
+                                      //       //     .value
+                                      //     );
+                                      //     controller
+                                      //         .supplierActionTextFieldController
+                                      //         .clear();
+                                      //     controller
+                                      //         .supplierActionDateTimeCtrlrWeb
+                                      //         .clear();
+                                      //     // controller.isCheckedRequire
+                                      //     //     .value = false;
+                                      //   },
+                                      // ),
+                                    ),
+                                    Dimens.boxHeight10,
+                                    Obx(
+                                      () => Wrap(children: [
+                                        Row(children: [
+                                          SizedBox(
+                                            width: 20,
+                                          ),
+                                          Text('#'),
+                                          SizedBox(
+                                            width: 35,
+                                          ),
+                                          Text('Supplier Action'),
+                                          SizedBox(
+                                            width: 215,
+                                          ),
+                                          Text('Required'),
+                                          SizedBox(
+                                            width: 180,
+                                          ),
+                                          Text('Required by Date'),
+                                          SizedBox(
+                                            width: 150,
+                                          ),
+                                          // Text('Action'),
+                                        ]),
+                                        SizedBox(
+                                          height: 20,
                                         ),
-                                        Dimens.boxHeight10,
-                                        Obx(
-                                          () => Wrap(children: [
-                                            Row(children: [
-                                              SizedBox(
-                                                width: 10,
-                                              ),
-                                              Text('#'),
-                                              SizedBox(
-                                                width: 25,
-                                              ),
-                                              Text('Supplier Action'),
-                                              SizedBox(
-                                                width: 160,
-                                              ),
-                                              Text('Required'),
-                                              SizedBox(
-                                                width: 170,
-                                              ),
-                                              Text('Required by Date'),
-                                              SizedBox(
-                                                width: 150,
-                                              ),
-                                              Text('Action'),
-                                            ]),
+                                        Column(
+                                          children: []..addAll(controller
+                                              .supplierActions
+                                              .map((element) => Row(
+                                                    children: [
+                                                      // Text('${element.name}'),
+                                                      // Text('${element.required_by_date}')
+
+                                                      supplierActionData(
+                                                          '${element.srNumber}',
+                                                          '${element.name}',
+                                                          context,
+                                                          0,
+                                                          '${element.required_by_date}'),
+                                                    ],
+                                                  ))),
+                                        ),
+
+                                        // supplierActionData(
+                                        //     '2',
+                                        //     'Material Replinishment',
+                                        //     context,
+                                        //     1),
+                                        // supplierActionData(
+                                        //     '3',
+                                        //     'Preventive Action Plan',
+                                        //     context,
+                                        //     2),
+                                        // supplierActionData(
+                                        //     '4',
+                                        //     'Claim Closure Date',
+                                        //     context,
+                                        //     3)
+                                        Column(
+                                          children: [
                                             SizedBox(
-                                              height: 20,
-                                            ),
-                                            Column(
-                                              children: []..addAll(controller
-                                                  .supplierActions
-                                                  .map((element) => Row(
-                                                        children: [
-                                                          // Text('${element.name}'),
-                                                          // Text('${element.required_by_date}')
+                                                width: MediaQuery.of(context)
+                                                        .size
+                                                        .width /
+                                                    3,
+                                                child: CustomTextField(
+                                                  textController: controller
+                                                      .supplierActionSrNumberTextFieldController,
+                                                  label: '  Serial Number',
+                                                )),
+                                            SizedBox(
+                                                width: MediaQuery.of(context)
+                                                        .size
+                                                        .width /
+                                                    3,
+                                                child: CustomTextField(
+                                                  textController: controller
+                                                      .supplierActionTextFieldController,
+                                                  label: 'Supplier Action',
+                                                )),
 
-                                                          supplierActionData(
-                                                              '${element.srNumber}',
-                                                              '${element.name}',
-                                                              context,
-                                                              0,
-                                                              '${element.required_by_date}'),
-                                                        ],
-                                                      ))),
-                                            ),
-
-                                            // supplierActionData(
-                                            //     '2',
-                                            //     'Material Replinishment',
-                                            //     context,
-                                            //     1),
-                                            // supplierActionData(
-                                            //     '3',
-                                            //     'Preventive Action Plan',
-                                            //     context,
-                                            //     2),
-                                            // supplierActionData(
-                                            //     '4',
-                                            //     'Claim Closure Date',
-                                            //     context,
-                                            //     3)
-                                            Column(
+                                            ///Checkbox
+                                            Row(
                                               children: [
-                                                SizedBox(
-                                                    width:
-                                                        MediaQuery.of(context)
-                                                                .size
-                                                                .width /
-                                                            3,
-                                                    child: CustomTextField(
-                                                      textController: controller
-                                                          .supplierActionSrNumberTextFieldController,
-                                                      label:
-                                                          '  Serial Number',
-                                                    )),
-                                                SizedBox(
-                                                    width:
-                                                        MediaQuery.of(context)
-                                                                .size
-                                                                .width /
-                                                            3,
-                                                    child: CustomTextField(
-                                                      textController: controller
-                                                          .supplierActionTextFieldController,
-                                                      label:
-                                                          'Supplier Action',
-                                                    )),
-
-                                                ///Checkbox
-                                                Row(
-                                                  children: [
-                                                    Padding(
-                                                      padding:
-                                                          const EdgeInsets
-                                                                  .only(
-                                                              left: 340),
-                                                      child: Text(
-                                                        'Required',
-                                                        style: TextStyle(
-                                                            fontSize: 15),
-                                                      ),
-                                                    ),
-                                                    SizedBox(
-                                                      width: 70,
-                                                    ),
-                                                    Checkbox(
-                                                        value: controller
-                                                            .isCheckedRequire
-                                                            .value,
-                                                        onChanged:
-                                                            (bool? value) {
-                                                          controller
-                                                              .requireToggleCheckbox();
-                                                        }),
-                                                  ],
-                                                ),
-
-                                                SizedBox(
-                                                  width:
-                                                      MediaQuery.of(context)
-                                                              .size
-                                                              .width /
-                                                          3,
-                                                  child: CustomTextField(
-                                                    label: ' Required Date ',
-                                                    suffixIcon: Icon(
-                                                      Icons.calendar_month,
-                                                    ),
-                                                    // textController:
-                                                    //     controller.categoryTextController,
-                                                    textController: controller
-                                                        .supplierActionDateTimeCtrlrWeb,
-
-                                                    onTap: () {
-                                                      pickRequiredSupplierDate_web(
-                                                          context);
-                                                    },
+                                                Padding(
+                                                  padding:
+                                                      const EdgeInsets.only(
+                                                          left: 340),
+                                                  child: Text(
+                                                    'Required',
+                                                    style:
+                                                        TextStyle(fontSize: 15),
                                                   ),
                                                 ),
-                                              
-                                                ElevatedButton(
-                                                  child: Text('Add', style: TextStyle(color: ColorValues.appGreenColor),),
-                                                  onPressed: () {
-                                                    controller
-                                                        .updateSupplierActionText(
+                                                SizedBox(
+                                                  width: 70,
+                                                ),
+                                                Checkbox(
+                                                    value: controller
+                                                        .isCheckedRequire.value,
+                                                    onChanged: (bool? value) {
                                                       controller
-                                                          .supplierActionTextFieldController
-                                                          .text,
-                                                      controller
-                                                          .supplierActionDateTimeCtrlrWeb
-                                                          .text,
-                                                      controller
-                                                          .supplierActionSrNumberTextFieldController
-                                                          .text,
-
-                                                      // controller.isCheckedRequire
-                                                      //     .value
-                                                    );
-                                                    controller
-                                                        .supplierActionSrNumberTextFieldController
-                                                        .clear();
-                                                    controller
-                                                        .supplierActionTextFieldController
-                                                        .clear();
-                                                    controller
-                                                        .supplierActionDateTimeCtrlrWeb
-                                                        .clear();
-                                                    // controller.isCheckedRequire
-                                                    //     .value = false;
-                                                  },
-                                                )
+                                                          .requireToggleCheckbox();
+                                                    }),
                                               ],
                                             ),
-                                          ]),
+
+                                            SizedBox(
+                                              width: MediaQuery.of(context)
+                                                      .size
+                                                      .width /
+                                                  3,
+                                              child: CustomTextField(
+                                                label: ' Required Date ',
+                                                suffixIcon: Icon(
+                                                  Icons.calendar_month,
+                                                ),
+                                                // textController:
+                                                //     controller.categoryTextController,
+                                                textController: controller
+                                                    .supplierActionDateTimeCtrlrWeb,
+
+                                                onTap: () {
+                                                  pickRequiredSupplierDate_web(
+                                                      context);
+                                                },
+                                              ),
+                                            ),
+
+                                            ElevatedButton(
+                                              child: Text(
+                                                'Add',
+                                                style: TextStyle(
+                                                    color: ColorValues
+                                                        .appGreenColor),
+                                              ),
+                                              onPressed: () {
+                                                controller
+                                                    .updateSupplierActionText(
+                                                  controller
+                                                      .supplierActionTextFieldController
+                                                      .text,
+                                                  controller
+                                                      .supplierActionDateTimeCtrlrWeb
+                                                      .text,
+                                                  controller
+                                                      .supplierActionSrNumberTextFieldController
+                                                      .text,
+
+                                                  // controller.isCheckedRequire
+                                                  //     .value
+                                                );
+                                                controller
+                                                    .supplierActionSrNumberTextFieldController
+                                                    .clear();
+                                                controller
+                                                    .supplierActionTextFieldController
+                                                    .clear();
+                                                controller
+                                                    .supplierActionDateTimeCtrlrWeb
+                                                    .clear();
+                                                // controller.isCheckedRequire
+                                                //     .value = false;
+                                              },
+                                            )
+                                          ],
                                         ),
-                                      ],
+                                      ]),
                                     ),
-                                  ),
+                                  ],
                                 ),
                               ),
                             ),
-
-                            Wrap(
-                              children: [
-                                SizedBox(
-                                  width: 20,
-                                ),
-                                Container(
-                                  height: 250,
-                                  width: MediaQuery.of(context).size.width /
-                                      1.15,
-                                  decoration: BoxDecoration(
-                                      border: Border.all(color: Colors.grey)),
-                                  child: Column(
-                                    crossAxisAlignment:
-                                        CrossAxisAlignment.start,
-                                    children: [
-                                      Padding(
-                                        padding: const EdgeInsets.only(
-                                            left: 20, top: 15),
-                                        child: Text('Attachments'),
-                                      ),
-                                      Dimens.boxHeight30,
-                                      Row(
-                                        children: [
-                                         
-                                          /// File Upload Widget
-                                                        Container(
-                                                          height: Get.height * 0.2,
-                                                          width: Get.width / 1.3,
-                                                          child: Row(
-                                                              //
-                                                              children: [
-                                                                Expanded(
-                                                                  flex: 2,
-                                                                  child:
-                                                                      FileUploadWidgetWithDropzone(),
-                                                                ),
-                                                                Dimens.boxWidth10,
-                                                                Expanded(
-                                                                    flex: 8,
-                                                                    child:
-                                                                        FileUploadDetailsWidgetWeb()),
-                                                              ]),
-                                                        ),
-
-                                        ],
-                                      ),
-                                    ],
+                            Dimens.boxHeight10,
+                            Padding(
+                              padding: const EdgeInsets.only(top: 20),
+                              child: Wrap(
+                                children: [
+                                  SizedBox(
+                                    width: 20,
                                   ),
-                                )
-                              ],
+                                  Container(
+                                    height: 250,
+                                    width: MediaQuery.of(context).size.width /
+                                        1.15,
+                                    decoration: BoxDecoration(
+                                        border: Border.all(color: Colors.grey)),
+                                    child: Column(
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.start,
+                                      children: [
+                                        Padding(
+                                          padding: const EdgeInsets.only(
+                                              left: 20, top: 15),
+                                          child: Text('Attachments'),
+                                        ),
+                                        Dimens.boxHeight30,
+                                        Row(
+                                          children: [
+                                            /// File Upload Widget
+                                            Container(
+                                              height: Get.height * 0.2,
+                                              width: Get.width / 1.3,
+                                              child: Row(
+                                                  //
+                                                  children: [
+                                                    Expanded(
+                                                      flex: 2,
+                                                      child:
+                                                          FileUploadWidgetWithDropzone(),
+                                                    ),
+                                                    Dimens.boxWidth10,
+                                                    Expanded(
+                                                        flex: 8,
+                                                        child:
+                                                            FileUploadDetailsWidgetWeb()),
+                                                  ]),
+                                            ),
+                                          ],
+                                        ),
+                                      ],
+                                    ),
+                                  )
+                                ],
+                              ),
                             ),
 
                             Padding(
@@ -1130,8 +1126,8 @@ class NewWarrantyClaimWeb extends GetView<WarrantyClaimController> {
                                     width: 15,
                                   ),
                                   SizedBox(
-                                    width: MediaQuery.of(context).size.width /
-                                        4.2,
+                                    width:
+                                        MediaQuery.of(context).size.width / 4.2,
                                     child: Obx(
                                       () => DropdownWebWidget(
                                         dropdownList: controller.employeeList,
@@ -1174,7 +1170,6 @@ class NewWarrantyClaimWeb extends GetView<WarrantyClaimController> {
                                 ),
                               ],
                             )
-
                           ],
                         ),
                       ),
@@ -1582,14 +1577,17 @@ class NewWarrantyClaimWeb extends GetView<WarrantyClaimController> {
     );
   }
 
-  Widget buildRadioButton(String severity, Color color,BuildContext context) {
+  Widget buildRadioButton(String severity, Color color, BuildContext context) {
     return Obx(() {
       return Container(
         height: 35,
         width: MediaQuery.of(context).size.width / 10,
         child: RadioListTile(
           dense: true,
-          title: Text(severity, style: TextStyle(color: color),),
+          title: Text(
+            severity,
+            style: TextStyle(color: color),
+          ),
           value: severity,
           groupValue: controller.selectedSeverity.value,
           onChanged: (value) {
@@ -1598,8 +1596,6 @@ class NewWarrantyClaimWeb extends GetView<WarrantyClaimController> {
           },
         ),
       );
-    }
-    );
+    });
   }
-
 }
