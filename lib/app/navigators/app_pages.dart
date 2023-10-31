@@ -64,6 +64,7 @@ import 'package:cmms/app/mrs_view/mrs_view_binding.dart';
 import 'package:cmms/app/mrs_view/view/mrs_view_screen.dart';
 import 'package:cmms/app/pm_plan_list/pm_plan_list_binding.dart';
 import 'package:cmms/app/request_goods_orders_list.dart/request_goods_orders_list_binding.dart';
+import 'package:cmms/app/transaction_report/view/transaction_report_list_screen.dart';
 import 'package:cmms/app/utils/printing.dart';
 import 'package:cmms/app/view_mc_plan/view/view_mc_planning_screen.dart';
 import 'package:cmms/app/view_mc_plan/view_mc_planning_binding.dart';
@@ -212,6 +213,7 @@ import '../risk_type/risk_type_binding.dart';
 import '../risk_type/view/risk_type_screen.dart';
 import '../source_of_observation/source_of_obs_binding.dart';
 import '../source_of_observation/view/source_of_obs_screen.dart';
+import '../transaction_report/transaction_report_list_binding.dart';
 import '../type_of_observation/type_of_obs_binding.dart';
 import '../type_of_observation/view/type_of_obs_screen.dart';
 import '../view_request_orders/view/request_goods_orders_view_screen.dart';
@@ -865,6 +867,11 @@ class AppPages {
       name: _Paths.employeeStockReport,
       page: EmployeeStockReportScreen.new,
       binding: EmployeeStockReportBinding(),
+    ),
+    GetPage<dynamic>(
+      name: _Paths.transactionReport,
+      page: TransactionReportListScreen.new,
+      binding: TransactionReportListBinding(),
     ),
     GetPage<dynamic>(
       name: _Paths.faultyMaterialReport,
