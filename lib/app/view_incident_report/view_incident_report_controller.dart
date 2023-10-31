@@ -447,6 +447,30 @@ class ViewIncidentReportController extends GetxController {
         pen: PdfPen(PdfColor(142, 180, 219)),
         bounds: Rect.fromLTWH(255, 200, pageSize.width - 260, 25));
 
+    //6
+    page.graphics.drawRectangle(
+        pen: PdfPen(PdfColor(142, 180, 219)),
+        bounds: Rect.fromLTWH(0, 225, pageSize.width - 260, 40));
+    page.graphics.drawRectangle(
+        pen: PdfPen(PdfColor(142, 180, 219)),
+        bounds: Rect.fromLTWH(255, 225, pageSize.width - 260, 40));
+
+    //7
+    page.graphics.drawRectangle(
+        pen: PdfPen(PdfColor(142, 180, 219)),
+        bounds: Rect.fromLTWH(0, 265, pageSize.width - 260, 25));
+    page.graphics.drawRectangle(
+        pen: PdfPen(PdfColor(142, 180, 219)),
+        bounds: Rect.fromLTWH(255, 265, pageSize.width - 260, 25));
+
+    //8
+    page.graphics.drawRectangle(
+        pen: PdfPen(PdfColor(142, 180, 219)),
+        bounds: Rect.fromLTWH(0, 290, pageSize.width - 260, 25));
+    page.graphics.drawRectangle(
+        pen: PdfPen(PdfColor(142, 180, 219)),
+        bounds: Rect.fromLTWH(255, 290, pageSize.width - 260, 25));
+
     //1
     page.graphics.drawString(
         'Id: ',
@@ -622,10 +646,116 @@ class ViewIncidentReportController extends GetxController {
         bounds: Rect.fromLTWH(390, 215, 0, 0),
         format: PdfStringFormat(lineAlignment: PdfVerticalAlignment.middle));
 
+    ///6
+    page.graphics.drawString(
+        'Victim Name: ',
+        PdfStandardFont(
+          PdfFontFamily.helvetica,
+          10,
+        ),
+        bounds: Rect.fromLTWH(10, 240, 0, 0),
+        format: PdfStringFormat(lineAlignment: PdfVerticalAlignment.middle));
+
+    page.graphics.drawString(
+        '${incidentReportDetailsModel.value?.victim_name}',
+        // 'jhshjdgh',
+        PdfStandardFont(
+          PdfFontFamily.helvetica,
+          10,
+        ),
+        bounds: Rect.fromLTWH(75, 240, 0, 0),
+        format: PdfStringFormat(lineAlignment: PdfVerticalAlignment.middle));
+    page.graphics.drawString(
+        'Incident Investigation Verification\ndone by: ',
+        PdfStandardFont(
+          PdfFontFamily.helvetica,
+          10,
+        ),
+        bounds: Rect.fromLTWH(265, 240, 0, 0),
+        format: PdfStringFormat(lineAlignment: PdfVerticalAlignment.middle));
+    page.graphics.drawString(
+        '${incidentReportDetailsModel.value?.verified_by_name}',
+        PdfStandardFont(
+          PdfFontFamily.helvetica,
+          10,
+        ),
+        bounds: Rect.fromLTWH(310, 247, 0, 0),
+        format: PdfStringFormat(lineAlignment: PdfVerticalAlignment.middle));
+
+    ///7
+    page.graphics.drawString(
+        'Incident Investigation Done By: ',
+        PdfStandardFont(
+          PdfFontFamily.helvetica,
+          10,
+        ),
+        bounds: Rect.fromLTWH(10, 280, 0, 0),
+        format: PdfStringFormat(lineAlignment: PdfVerticalAlignment.middle));
+
+    page.graphics.drawString(
+        '${incidentReportDetailsModel.value?.inverstigated_by_name}',
+        PdfStandardFont(
+          PdfFontFamily.helvetica,
+          10,
+        ),
+        bounds: Rect.fromLTWH(150, 280, 0, 0),
+        format: PdfStringFormat(lineAlignment: PdfVerticalAlignment.middle));
+    page.graphics.drawString(
+        'ESI Applicability: ',
+        PdfStandardFont(
+          PdfFontFamily.helvetica,
+          10,
+        ),
+        bounds: Rect.fromLTWH(265, 280, 0, 0),
+        format: PdfStringFormat(lineAlignment: PdfVerticalAlignment.middle));
+    page.graphics.drawString(
+        '${incidentReportDetailsModel.value?.esi_applicability_name}',
+        PdfStandardFont(
+          PdfFontFamily.helvetica,
+          10,
+        ),
+        bounds: Rect.fromLTWH(345, 280, 0, 0),
+        format: PdfStringFormat(lineAlignment: PdfVerticalAlignment.middle));
+
+    ///8
+    page.graphics.drawString(
+        'Risk Type: ',
+        PdfStandardFont(
+          PdfFontFamily.helvetica,
+          10,
+        ),
+        bounds: Rect.fromLTWH(10, 305, 0, 0),
+        format: PdfStringFormat(lineAlignment: PdfVerticalAlignment.middle));
+
+    page.graphics.drawString(
+        '${incidentReportDetailsModel.value?.risk_type_name}',
+        PdfStandardFont(
+          PdfFontFamily.helvetica,
+          10,
+        ),
+        bounds: Rect.fromLTWH(70, 305, 0, 0),
+        format: PdfStringFormat(lineAlignment: PdfVerticalAlignment.middle));
+    page.graphics.drawString(
+        'RCA Upload Required: ',
+        PdfStandardFont(
+          PdfFontFamily.helvetica,
+          10,
+        ),
+        bounds: Rect.fromLTWH(265, 305, 0, 0),
+        format: PdfStringFormat(lineAlignment: PdfVerticalAlignment.middle));
+    page.graphics.drawString(
+        '${incidentReportDetailsModel.value?.rca_required_name}',
+        PdfStandardFont(
+          PdfFontFamily.helvetica,
+          10,
+        ),
+        bounds: Rect.fromLTWH(370, 305, 0, 0),
+        format: PdfStringFormat(lineAlignment: PdfVerticalAlignment.middle));
+
     final PdfFont contentFont = PdfStandardFont(PdfFontFamily.helvetica, 9);
     //Draw string
 
-    final String invoiceNumber = 'Signature of trainer';
+    final String invoiceNumber = '';
     final Size contentSize = contentFont.measureString(invoiceNumber);
     // ignore: leading_newlines_in_multiline_strings
 
