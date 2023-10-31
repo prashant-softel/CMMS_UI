@@ -1,6 +1,7 @@
 import 'package:cmms/domain/models/employee_model.dart';
 import 'package:cmms/domain/models/inventory_category_model.dart';
 import 'package:cmms/domain/models/work_type_model.dart';
+import 'package:cmms/domain/repositories/local_storage_keys.dart';
 import 'package:cmms/domain/repositories/repository.dart';
 
 import '../models/block_model.dart';
@@ -48,7 +49,8 @@ class EditJobUsecase {
   ///
   Future<List<ToolsModel?>?> getToolsRequiredToWorkTypeList({
     String? workTypeIds,
-    bool? isLoading,String? auth,
+    bool? isLoading,
+    String? auth,
   }) async =>
       await repository.getToolsRequiredToWorkTypeList(
         workTypeIds,
@@ -85,6 +87,10 @@ class EditJobUsecase {
         assignedToId,
         isLoading,
       );
+  void saveValue({String? jobId}) async =>
+      repository.saveValue(LocalKeys.jobId, jobId);
+  Future<String?> getValue() async =>
+      await repository.getStringValue(LocalKeys.jobId);
 
   ///
 }

@@ -2820,7 +2820,7 @@ class Repository {
         self_view: self_view,
         isLoading: isLoading ?? false,
       );
-      print({"res.data", res.data});
+      // print({"res.data", res.data});
       if (!res.hasError) {
         final jsonJobModels = jsonDecode(res.data);
         final List<JobModel> _jobModelList = jsonJobModels

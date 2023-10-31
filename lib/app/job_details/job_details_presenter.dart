@@ -47,7 +47,7 @@ class JobDetailsPresenter {
         isLoading: isLoading,
       );
 
-   Future<List<MRSListByJobIdModel>?> getMrsListByModule(
+  Future<List<MRSListByJobIdModel>?> getMrsListByModule(
     jobId,
     isLoading,
   ) async =>
@@ -77,4 +77,9 @@ class JobDetailsPresenter {
         jobId: jobId,
         isLoading: isLoading,
       );
+  void saveValue({String? jobId}) async {
+    return jobDetailsUsecase.saveValue(jobId: jobId);
+  }
+
+  Future<String?> getValue() async => await jobDetailsUsecase.getValue();
 }

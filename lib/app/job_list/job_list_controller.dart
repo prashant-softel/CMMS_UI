@@ -148,17 +148,20 @@ class JobListController extends GetxController {
   }
 
   void goToJobCardScreen(int? jobId) {
+    clearStoreData();
+
     Get.toNamed(Routes.jobCard, arguments: {'jobId': jobId});
   }
 
   void goToEditJobScreen(int? _jobId) {
+    clearStoreData();
+
     Get.toNamed(Routes.editJob, arguments: {'jobId': _jobId});
   }
 
   void goToJobDetailsScreen(int? _jobId) {
-    final _flutterSecureStorage = const FlutterSecureStorage();
+    clearStoreData();
 
-    _flutterSecureStorage.delete(key: "jobId");
     Get.toNamed(Routes.jobDetails, arguments: {'jobId': _jobId});
   }
 
@@ -301,6 +304,10 @@ class JobListController extends GetxController {
     }
     selectedBlock.value = selectedValue;
     getJobList(userId, false);
+  }
+
+  void clearStoreData() {
+    jobListPresenter.clearValue();
   }
 
   ///

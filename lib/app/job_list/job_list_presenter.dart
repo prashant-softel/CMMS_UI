@@ -23,4 +23,5 @@ class JobListPresenter {
         self_view: self_view,
         isLoading: isLoading ?? false,
       );
+  void clearValue() async => jobUsecase.clearValue();
 }

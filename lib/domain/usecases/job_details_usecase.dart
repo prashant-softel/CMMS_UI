@@ -1,4 +1,5 @@
 import 'package:cmms/domain/models/mrs_list_by_jobId.dart';
+import 'package:cmms/domain/repositories/local_storage_keys.dart';
 import 'package:cmms/domain/repositories/repository.dart';
 
 import '../models/job_details_model.dart';
@@ -48,16 +49,13 @@ class JobDetailsUsecase {
       );
 
   Future<List<MRSListByJobIdModel>?> getMrsListByModule({
-    
     jobId,
     bool? isLoading,
   }) async =>
       await repository.getMrsListByModule(
-       
         jobId,
         isLoading,
       );
-
 
   ///
   Future<Map<String, dynamic>?> linkToPermit({
@@ -80,4 +78,8 @@ class JobDetailsUsecase {
         jobId,
         isLoading,
       );
+  void saveValue({String? jobId}) async =>
+      repository.saveValue(LocalKeys.jobId, jobId);
+  Future<String?> getValue() async =>
+      await repository.getStringValue(LocalKeys.jobId);
 }
