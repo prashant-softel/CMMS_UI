@@ -680,6 +680,28 @@ class DataRepository extends DomainRepository {
         isLoading: isLoading ?? false,
       );
 
+  Future<ResponseModel> wcApprovedButton({
+    required String auth,
+    WCApproveJsonString,
+    bool? isLoading,
+  }) async =>
+      await connectHelper.wcApprovedButton(
+        auth: auth,
+        WCApproveJsonString: WCApproveJsonString,
+        isLoading: isLoading ?? false,
+      );
+
+  Future<ResponseModel> wcRejectdButton({
+    required String auth,
+    WCRejectJsonString,
+    bool? isLoading,
+  }) async =>
+      await connectHelper.wcRejectdButton(
+        auth: auth,
+        WCRejectJsonString: WCRejectJsonString,
+        isLoading: isLoading ?? false,
+      );
+
   Future<ResponseModel> rejectMcExecutionApprovedButton({
     required String auth,
     rejectMcExecutionApproveJsonString,
@@ -2225,8 +2247,6 @@ class DataRepository extends DomainRepository {
     return response;
   }
 
-
-
   Future<ResponseModel> getCountryList({
     required String auth,
     bool? isLoading,
@@ -3614,6 +3634,7 @@ class DataRepository extends DomainRepository {
       // categoryIds: categoryIds,
     );
   }
+
   Future<ResponseModel> getAssetTypeSMList({
     required bool isLoading,
     required String auth,
@@ -3623,6 +3644,7 @@ class DataRepository extends DomainRepository {
       isLoading: isLoading,
     );
   }
+
   Future<ResponseModel> getUnitMeasurementList({
     // int? facilityId,
     required bool isLoading,
@@ -3646,6 +3668,7 @@ class DataRepository extends DomainRepository {
         checkAuditJsonString: checkAuditJsonString);
     return response;
   }
+
   Future<ResponseModel> createAssetSM({
     auth,
     bool? isLoading,
