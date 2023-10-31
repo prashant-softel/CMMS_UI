@@ -3,12 +3,12 @@ import 'package:cmms/app/plant_stock_report/plant_stock_report_controller.dart';
 import 'package:cmms/app/theme/dimens.dart';
 import 'package:cmms/app/widgets/custom_richtext.dart';
 import 'package:cmms/app/widgets/date_picker.dart';
+import 'package:cmms/app/widgets/multipule_dropdown_web.dart';
 import 'package:cmms/domain/models/get_plant_Stock_list.dart';
 import 'package:data_table_2/data_table_2.dart';
 import 'package:flutter/material.dart';
 
 import 'package:get/get.dart';
-import 'package:scrollable_table_view/scrollable_table_view.dart';
 import 'package:syncfusion_flutter_datepicker/datepicker.dart';
 import '../../theme/color_values.dart';
 import '../../theme/styles.dart';
@@ -98,6 +98,16 @@ class _PlantStockReportContentWebState
                                   Text(
                                     "Plant Stock Report",
                                     style: Styles.blackBold16,
+                                  ),
+                                  Spacer(),
+                                  MultipDropdownWebWidget(
+                                    width: (MediaQuery.of(context).size.width *
+                                        .2),
+                                    //  height: 35,
+                                    dropdownList: controller.assetList,
+                                    selectedItems:
+                                        controller.selectedAssetsNameList,
+                                    onValueChanged: controller.onValueChanged,
                                   ),
                                   Spacer(),
                                   Row(
@@ -392,7 +402,11 @@ class PlantListDataSource extends DataTableSource {
           (Plant?.balance ?? '')
               .toString()
               .toLowerCase()
-              .contains(controller.balanceFilterText.value.toLowerCase());
+              .contains(controller.balanceFilterText.value.toLowerCase()) &&
+          (Plant?.asset_type ?? '')
+              .toString()
+              .toLowerCase()
+              .contains(controller.assetTypeFilterText.value.toLowerCase());
 
       // Add other filter conditions as needed
     }).toList();
@@ -408,6 +422,7 @@ class PlantListDataSource extends DataTableSource {
     var cellsBuffer = [
       '${PlantDetails?.asset_name ?? ''}',
       '${PlantDetails?.asset_code ?? ''}',
+      '${PlantDetails?.asset_type ?? ''}',
       '${PlantDetails?.opening ?? ''}',
       '${PlantDetails?.inward ?? ''}',
       '${PlantDetails?.outward ?? ''}',

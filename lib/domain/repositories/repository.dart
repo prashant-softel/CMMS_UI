@@ -7578,8 +7578,12 @@ class Repository {
     }
   }
 
-  Future<List<PlantStockListModel?>?> getPlantStockList(int? facilityId,
-      bool? isLoading, dynamic startDate, dynamic endDate) async {
+  Future<List<PlantStockListModel?>?> getPlantStockList(
+      int? facilityId,
+      bool? isLoading,
+      dynamic startDate,
+      dynamic endDate,
+      List<int>? selectedAssetsNameIdList) async {
     try {
       final auth = await getSecuredValue(LocalKeys.authToken);
       int userId = varUserAccessModel.value.user_id ?? 0;
@@ -7589,7 +7593,8 @@ class Repository {
           isLoading: isLoading ?? false,
           startDate: startDate,
           endDate: endDate,
-          userId: userId);
+          userId: userId,
+          selectedAssetsNameIdList: selectedAssetsNameIdList);
 
       if (!res.hasError) {
         final jsonPlantStockListModels = jsonDecode(res.data);

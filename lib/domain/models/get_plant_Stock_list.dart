@@ -39,6 +39,7 @@ class StockDetails {
   String? asset_name;
   String? asset_code;
   int? asset_type_ID;
+  String? asset_type;
   double? opening;
   double? inward;
   double? outward;
@@ -49,6 +50,7 @@ class StockDetails {
       this.asset_code,
       this.asset_name,
       this.asset_type_ID,
+      this.asset_type,
       this.balance,
       this.facility_Is_Block,
       this.facility_Is_Block_of_name,
