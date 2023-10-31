@@ -133,5 +133,9 @@ class JobCardDetailsPresenter {
     );
   }
 
-  ///
+  void saveValue({String? jobCardId}) async {
+    return jobCardDetailsUsecase.saveValue(jobCardId: jobCardId);
+  }
+
+  Future<String?> getValue() async => await jobCardDetailsUsecase.getValue();
 }

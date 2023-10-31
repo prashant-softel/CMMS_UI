@@ -31,6 +31,7 @@ class CreateMrsController extends GetxController {
   Rx<int> whereUsedTypeId = 0.obs;
   Rx<int> whereUsed = 0.obs;
   Rx<int> fromActorTypeId = 0.obs;
+  Rx<int> to_actor_type_id = 0.obs;
 
   // int? jcId = 0;
 
@@ -53,6 +54,9 @@ class CreateMrsController extends GetxController {
         }
         if (arguments.containsKey('whereUsed')) {
           whereUsed.value = arguments['whereUsed'];
+        }
+        if (arguments.containsKey('to_actor_type_id')) {
+          to_actor_type_id.value = arguments['to_actor_type_id'];
         }
         if (arguments.containsKey('fromActorTypeId')) {
           fromActorTypeId.value = arguments['fromActorTypeId'];
@@ -136,7 +140,7 @@ class CreateMrsController extends GetxController {
         whereUsedType: whereUsed.value,
         whereUsedTypeId: whereUsedTypeId.value,
         to_actor_id: whereUsedTypeId.value,
-        to_actor_type_id: 3,
+        to_actor_type_id: to_actor_type_id.value,
         from_actor_id: facilityId,
         //whereUsed.value,
         from_actor_type_id: fromActorTypeId.value,

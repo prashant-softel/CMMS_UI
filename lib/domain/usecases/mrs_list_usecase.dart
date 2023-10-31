@@ -11,5 +11,5 @@ class MrsListUsecase {
           dynamic endDate,
           dynamic startDate}) async =>
       await _repository.getMrsList(facilityId, isLoading, startDate, endDate);
-  void clearValue() async => _repository.clearData(LocalKeys.pmTaskId);
+  void clearValue() async => _repository.clearData(LocalKeys.mrsId);
 }

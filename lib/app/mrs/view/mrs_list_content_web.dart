@@ -696,13 +696,6 @@ class MrsListDataSource extends DataTableSource {
                                         )
                                         ?.status ==
                                     321 &&
-                                controller.mrsList!
-                                        .firstWhere(
-                                          (e) => e?.id == MrsDetails!.id,
-                                          orElse: () => MrsListModel(id: 00),
-                                        )
-                                        ?.approval_status ==
-                                    0 &&
                                 varUserAccessModel.value.access_list!
                                         .where((e) =>
                                             e.feature_id ==

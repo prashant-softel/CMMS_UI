@@ -511,13 +511,9 @@ class JobDetailsWebView extends GetView<JobDetailsController> {
                                                             message:
                                                                 "View Job Card",
                                                             onPress: () {
-                                                              final _flutterSecureStorage =
-                                                                  const FlutterSecureStorage();
+                                                              controller
+                                                                  .clearStoreData();
 
-                                                              _flutterSecureStorage
-                                                                  .delete(
-                                                                      key:
-                                                                          "JcId");
                                                               String jobCardId = controller
                                                                       .jobAssociatedModelsList?[
                                                                           index]

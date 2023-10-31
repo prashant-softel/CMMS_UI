@@ -4249,13 +4249,13 @@ class Repository {
         auth: auth,
         jobId: jobId,
         permitId: permitId,
-        isLoading: isLoading ?? false,
+        isLoading: isLoading,
       );
 
       if (!res.hasError) {
         if (res.errorCode == 200) {
           var responseMap = json.decode(res.data);
-          createJobCard(auth, jobId, false);
+          createJobCard(auth, jobId, true);
           return responseMap;
         }
       } //

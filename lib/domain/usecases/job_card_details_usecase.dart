@@ -1,5 +1,6 @@
 import 'package:cmms/domain/models/employee_model.dart';
 import 'package:cmms/domain/models/history_model.dart';
+import 'package:cmms/domain/repositories/local_storage_keys.dart';
 import 'package:cmms/domain/repositories/repository.dart';
 
 import '../models/job_card_details_model.dart';
@@ -116,5 +117,8 @@ class JobCardDetailsUsecase {
       await repository.rejectJobCard(
           rejectJsonString: rejectJsonString, isLoading: isLoading);
 
-  ///
+  void saveValue({String? jobCardId}) async =>
+      repository.saveValue(LocalKeys.jobCardId, jobCardId);
+  Future<String?> getValue() async =>
+      await repository.getStringValue(LocalKeys.jobCardId);
 }

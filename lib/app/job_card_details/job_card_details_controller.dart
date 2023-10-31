@@ -97,19 +97,20 @@ class JobCardDetailsController extends GetxController {
     try {
       Get.put(FileUploadController());
 
-      final _flutterSecureStorage = const FlutterSecureStorage();
+      // final _flutterSecureStorage = const FlutterSecureStorage();
 
       // await _flutterSecureStorage.delete(key: "JcId");
 
-      jobCardId.value = Get.arguments["JcId"];
+      // jobCardId.value = Get.arguments["JcId"];
 
-      //   await setJcId();
-
-      jobCardList.value = await jobCardDetailsPresenter.getJobCardDetails(
-            jobCardId: jobCardId.value,
-            isLoading: true,
-          ) ??
-          [];
+      await setJcId();
+      if (jobCardId.value != 0) {
+        jobCardList.value = await jobCardDetailsPresenter.getJobCardDetails(
+              jobCardId: jobCardId.value,
+              isLoading: true,
+            ) ??
+            [];
+      }
       getHistory();
       createPlantDetailsTableData();
 
@@ -129,21 +130,17 @@ class JobCardDetailsController extends GetxController {
 
   Future<void> setJcId() async {
     try {
-      final _flutterSecureStorage = const FlutterSecureStorage();
-      // Read jobId
-      String? _jobCardId = await _flutterSecureStorage.read(key: "JcId");
+      final _jobCardId = await jobCardDetailsPresenter.getValue();
+
       if (_jobCardId == null || _jobCardId == '' || _jobCardId == "null") {
         var dataFromPreviousScreen = Get.arguments;
 
         jobCardId.value = dataFromPreviousScreen['JcId'];
-        await _flutterSecureStorage.write(
-          key: "JcId",
-          value: jobCardId.value == null ? '' : jobCardId.value.toString(),
-        );
+        jobCardDetailsPresenter.saveValue(
+            jobCardId: jobCardId.value.toString());
       } else {
         jobCardId.value = int.tryParse(_jobCardId) ?? 0;
       }
-      await _flutterSecureStorage.delete(key: "JcId");
     } catch (e) {
       Utility.showDialog(e.toString() + 'JcId');
     }

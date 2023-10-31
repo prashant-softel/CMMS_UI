@@ -142,7 +142,7 @@ class EditJobController extends GetxController {
         //  await getToolsRequiredToWorkTypeList(workTypeIds.toString());
       });
     } catch (e) {
-      print(e);
+      print({"editjoberror", e});
     }
     super.onInit();
   }
@@ -457,7 +457,7 @@ class EditJobController extends GetxController {
       Map<String, dynamic>? responseMapJobUpdated =
           await editJobPresenter.updateJob(
         job: addJobModel,
-        isLoading: false,
+        isLoading: true,
       );
       if (responseMapJobUpdated != null) {
         var _jobId = 0;

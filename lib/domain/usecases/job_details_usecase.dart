@@ -82,4 +82,5 @@ class JobDetailsUsecase {
       repository.saveValue(LocalKeys.jobId, jobId);
   Future<String?> getValue() async =>
       await repository.getStringValue(LocalKeys.jobId);
+  void clearValue() async => repository.clearData(LocalKeys.jobCardId);
 }

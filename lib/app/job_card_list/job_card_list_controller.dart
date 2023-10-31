@@ -88,4 +88,8 @@ class JobCardListController extends GetxController {
     }
     update(['job_list']);
   }
+
+  void clearStoreData() {
+    jobCardPresenter.clearValue();
+  }
 }
