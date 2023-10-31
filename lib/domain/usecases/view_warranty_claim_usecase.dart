@@ -19,14 +19,31 @@ class ViewWarrantyClaimUsecase {
     return await _repository.generateToken();
   }
 
-
-   Future<ViewWarrantyClaimModel?> getViewWarrantyClaimDetail({
-    bool? isLoading,  
+  Future<ViewWarrantyClaimModel?> getViewWarrantyClaimDetail({
+    bool? isLoading,
     required int wc_id,
   }) async =>
       await _repository.getViewWarrantyClaimDetail(
         wc_id: wc_id,
         isLoading: isLoading ?? false,
+      );
+
+  Future<Map<String, dynamic>> wcApprovedButton({
+    WCApproveJsonString,
+    bool? isLoading,
+  }) async =>
+      await _repository.wcApprovedButton(
+        WCApproveJsonString,
+        isLoading,
+      );
+
+  Future<Map<String, dynamic>> wcRejectdButton({
+    WCRejectJsonString,
+    bool? isLoading,
+  }) async =>
+      await _repository.wcRejectdButton(
+        WCRejectJsonString,
+        isLoading,
       );
 
   Future<List<HistoryModel>?> getWarrantyClaimHistory({
@@ -39,7 +56,7 @@ class ViewWarrantyClaimUsecase {
         id,
         isLoading,
       );
-      
+
   Future<List<FacilityModel?>?> getFacilityList() async =>
       await _repository.getFacilityList(true);
   Future<String?> getUserAccessList() async =>

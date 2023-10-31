@@ -1,6 +1,8 @@
 import 'package:cmms/app/navigators/app_pages.dart';
 import 'package:cmms/app/stock_managment_add_goods_orders.dart/stock_management_add_goods_orders_controller.dart';
 import 'package:cmms/app/theme/color_values.dart';
+import 'package:cmms/app/view_incident_report/view_incident_report_controller.dart';
+import 'package:cmms/app/warranty_claim_list/warranty_claim_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import '../theme/dimens.dart';
@@ -14,6 +16,7 @@ class NewWarrantyClaimDialog extends GetView {
   NewWarrantyClaimDialog(
       {super.key, this.createPermitData, this.data, this.warrantyClaimId});
   // final StockManagementAddGoodsOrdersController controller = Get.find();
+  final WarrantyClaimController _controller = Get.find();
 
   @override
   Widget build(BuildContext context) {
@@ -101,8 +104,11 @@ class NewWarrantyClaimDialog extends GetView {
                         Dimens.boxWidth10,
                         ElevatedButton(
                           style: Styles.yellowElevatedButtonStyle,
-                          onPressed: () =>
-                              Get.offAndToNamed(Routes.viewWarrantyClaim),
+                          onPressed: () {
+                            // Get.offAllNamed(Routes.viewWarrantyClaim);
+                            _controller.viewWarrantyClaim(
+                                wc_id: warrantyClaimId![0]);
+                          },
                           child: const Text('View This Warranty Claim'),
                         ),
                         Dimens.boxWidth10,

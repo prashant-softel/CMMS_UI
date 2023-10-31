@@ -244,7 +244,7 @@ class _WarrantyClaimListWebState extends State<WarrantyClaimListWeb> {
                                                             return TableViewColumn(
                                                               minWidth:
                                                                   Get.width *
-                                                                      0.08,
+                                                                      0.1,
                                                               label: column,
                                                             );
                                                           }).toList(),
@@ -319,6 +319,28 @@ class _WarrantyClaimListWebState extends State<WarrantyClaimListWeb> {
                                                                                             },
                                                                                           )
                                                                                         : Container(),
+
+                                                                                    varUserAccessModel.value.access_list!.where((e) => e.feature_id == UserAccessConstants.kWarrantyClaimFeatureId && e.approve == UserAccessConstants.kHaveApproveAccess).length > 0
+                                                                                        ? TableActionButton(
+                                                                                            color: ColorValues.appGreenColor,
+                                                                                            icon: Icons.edit,
+                                                                                            message: 'Approve/Reject',
+                                                                                            onPress: () {
+                                                                                              controller.viewWarrantyClaim(wc_id: int.tryParse('${record[0]}'));
+                                                                                              print('record:${int.tryParse('${record[0]}')}');
+                                                                                            },
+                                                                                          )
+                                                                                        : Container(),
+
+                                                                                    // TableActionButton(
+                                                                                    //   color: Colors.green,
+                                                                                    //   icon: Icons.visibility,
+                                                                                    //   label: 'Approve/Reject',
+                                                                                    //   onPress: () {
+                                                                                    //     controller.viewWarrantyClaim(wc_id: int.tryParse('${record[0]}'));
+                                                                                    //   },
+                                                                                    // ),
+
                                                                                     //),
 
                                                                                     // TableActionButton(
@@ -330,14 +352,7 @@ class _WarrantyClaimListWebState extends State<WarrantyClaimListWeb> {
                                                                                     // ),
                                                                                     //),
                                                                                   ]),
-                                                                                  // TableActionButton(
-                                                                                  //   color: Colors.green,
-                                                                                  //   icon: Icons
-                                                                                  //       .visibility,
-                                                                                  //   label:
-                                                                                  //       'Approve Request',
-                                                                                  //   onPress: () {},
-                                                                                  // ),
+
                                                                                   // TableActionButton(
                                                                                   //   color: Colors.red,
                                                                                   //   icon: Icons
