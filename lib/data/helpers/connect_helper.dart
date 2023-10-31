@@ -753,6 +753,27 @@ class ConnectHelper {
     return responseModel;
   }
 
+  Future<ResponseModel> transactionReport({
+    required bool isLoading,
+    required String auth,
+    int? facility_id,
+    String? start_date,
+    required String end_date,
+  }) async {
+    ResponseModel responseModel = await apiWrapper.makeRequest(
+      'SMReports/GetTransactionReport?facility_id=45&actorType=2&actorID=45&fromDate=2023-10-15&toDate=2023-10-20',
+      // 'SMReports/GetTransactionReport?facility_id=$facility_id&actorType=2&actorID=45&fromDate=$end_date&toDate=$start_date',
+      Request.getMultiparts,
+      null,
+      isLoading,
+      {
+        'Authorization': 'Bearer $auth',
+      },
+    );
+
+    return responseModel;
+  }
+
   Future<ResponseModel> getRequestOrderList({
     required bool isLoading,
     required String auth,

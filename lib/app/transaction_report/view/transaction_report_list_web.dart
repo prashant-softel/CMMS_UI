@@ -5,6 +5,7 @@ import 'package:cmms/app/theme/dimens.dart';
 import 'package:cmms/app/utils/user_access_constants.dart';
 import 'package:cmms/app/widgets/custom_richtext.dart';
 import 'package:cmms/app/widgets/date_picker.dart';
+import 'package:cmms/domain/models/%20%20transaction_report_list_model.dart';
 import 'package:cmms/domain/models/stock_management_update_goods_orders_model.dart';
 import 'package:data_table_2/data_table_2.dart';
 import 'package:flutter/material.dart';
@@ -37,7 +38,7 @@ class _TransactionReportListWebState extends State<TransactionReportListWeb> {
         builder: (controller) {
           return Obx(
             () {
-              final dataSource = GoodsOrderListDataSource(controller);
+              final dataSource = TransactionReportListDataSource(controller);
               return SingleChildScrollView(
                 child: Column(
                   children: [
@@ -75,7 +76,7 @@ class _TransactionReportListWebState extends State<TransactionReportListWeb> {
                             child: Text(" / STOCK MANAGEMENT",
                                 style: Styles.greyMediumLight12),
                           ),
-                          Text(" / GOODS ORDER LIST",
+                          Text(" / TRANSACTION REPORT LIST ",
                               style: Styles.greyMediumLight12)
                         ],
                       ),
@@ -102,7 +103,7 @@ class _TransactionReportListWebState extends State<TransactionReportListWeb> {
                                         MainAxisAlignment.spaceBetween,
                                     children: [
                                       Text(
-                                        "Goods Order List",
+                                        "Transaction Report List",
                                         style: Styles.blackBold16,
                                       ),
                                       Spacer(),
@@ -129,27 +130,15 @@ class _TransactionReportListWebState extends State<TransactionReportListWeb> {
                                           ),
                                         ],
                                       ),
-                                      Dimens.boxWidth10,
-                                      varUserAccessModel.value.access_list!
-                                                  .where((e) =>
-                                                      e.feature_id ==
-                                                          UserAccessConstants
-                                                              .kGoodsFeatureId &&
-                                                      e.add ==
-                                                          UserAccessConstants
-                                                              .kHaveApproveAccess)
-                                                  .length >
-                                              0
-                                          ? ActionButton(
-                                              icon: Icons.add,
-                                              label: "Add New",
-                                              onPressed: () {
-                                                Get.offNamed(Routes
-                                                    .updateGoodsOrdersDetailsScreen);
-                                              },
-                                              color: ColorValues.addNewColor,
-                                            )
-                                          : Dimens.box0,
+                                      ActionButton(
+                                        icon: Icons.add,
+                                        label: "Add New",
+                                        onPressed: () {
+                                          // Get.offNamed(Routes
+                                          //     .updateGoodsOrdersDetailsScreen);
+                                        },
+                                        color: ColorValues.addNewColor,
+                                      )
                                     ],
                                   ),
                                 ),
@@ -248,7 +237,7 @@ class _TransactionReportListWebState extends State<TransactionReportListWeb> {
                                 SizedBox(
                                   height: 20,
                                 ),
-                                controller.goodsOrdersList.isEmpty
+                                controller.transactionReportList.isEmpty
                                     ? Center(child: Text('No data'))
                                     : Expanded(
                                         child: ValueListenableBuilder(
@@ -256,7 +245,7 @@ class _TransactionReportListWebState extends State<TransactionReportListWeb> {
                                                 controller.columnVisibility,
                                             builder: (context, value, child) {
                                               final dataSource =
-                                                  GoodsOrderListDataSource(
+                                                  TransactionReportListDataSource(
                                                       controller);
 
                                               return PaginatedDataTable2(
@@ -412,64 +401,65 @@ DataColumn2 buildDataColumn(
   );
 }
 
-class GoodsOrderListDataSource extends DataTableSource {
+class TransactionReportListDataSource extends DataTableSource {
   final TransactionReportListController controller;
 
-  late List<GoodsOrdersListModel?> filteredGoodsOrderList;
+  late List<TransactionReportListModel?> filteredTransactionReportList;
 
-  GoodsOrderListDataSource(this.controller) {
-    filtersGoodsOrder();
+  TransactionReportListDataSource(this.controller) {
+    filtersTransactionReport();
   }
 
   ///
-  void filtersGoodsOrder() {
-    filteredGoodsOrderList = <GoodsOrdersListModel?>[];
-    filteredGoodsOrderList = controller.goodsOrdersList.where((GoodsOrderList) {
-      return (GoodsOrderList!.id ?? '')
+  void filtersTransactionReport() {
+    filteredTransactionReportList = <TransactionReportListModel?>[];
+    filteredTransactionReportList =
+        controller.transactionReportList.where((transactionReportList) {
+      return (transactionReportList!.fromActorID ?? '')
               .toString()
-              .contains(controller.orderIdFilterText.value.toLowerCase()) &&
-          (GoodsOrderList.vendor_name ?? '')
+              .contains(controller.fromActorIDFilterText.value.toLowerCase()) &&
+          (transactionReportList.fromActorType ?? '').toString().contains(
+              controller.fromActorTypeFilterText.value.toLowerCase()) &&
+          (transactionReportList.fromActorName ?? '').toString().contains(
+              controller.fromActorNameFilterText.value.toLowerCase()) &&
+          (transactionReportList.toActorType ?? '')
               .toString()
-              .contains(controller.challanNoFilterText.value.toLowerCase()) &&
-          (GoodsOrderList.challan_no ?? '')
+              .contains(controller.toActorTypeFilterText.value.toLowerCase()) &&
+          (transactionReportList.toActorName ?? '')
               .toString()
-              .contains(controller.challanNoFilterText.value.toLowerCase()) &&
-          (GoodsOrderList.generatedBy ?? '')
+              .contains(controller.toActorNameFilterText.value.toLowerCase()) &&
+          (transactionReportList.assetItemName ?? '').contains(
+              controller.assetItemNameFilterText.value.toLowerCase()) &&
+          (transactionReportList.qty ?? '')
               .toString()
-              .contains(controller.generatedByFilterText.value.toLowerCase()) &&
-          (GoodsOrderList.cost ?? '')
+              .contains(controller.qtyFilterText.value.toLowerCase()) &&
+          (transactionReportList.lastUpdated ?? '')
               .toString()
-              .contains(controller.costFilterText.value.toLowerCase()) &&
-          (GoodsOrderList.purchaseDate ?? '')
-              .contains(controller.orderDateFilterText.value.toLowerCase()) &&
-          (GoodsOrderList.currency ?? '')
-              .toString()
-              .contains(controller.currencyFilterText.value.toLowerCase());
+              .contains(controller.lastUpdatedFilterText.value.toLowerCase());
 
       // Add other filter conditions as needed
     }).toList();
-    // print({"filteredGoodsOrderList": filteredGoodsOrderList});
+    // print({"filteredTransactionReportList": filteredTransactionReportList});
   }
 
   @override
   DataRow? getRow(int index) {
     // print({"getRow call"});
-    final GoodsOrderListDetails = filteredGoodsOrderList[index];
+    final transactionReportListDetails = filteredTransactionReportList[index];
 
-    controller.GoodsOrderId.value = GoodsOrderListDetails?.id ?? 0;
+    controller.fromActorID.value =
+        transactionReportListDetails?.fromActorID ?? 0;
     var cellsBuffer = [
-      // '${GoodsOrderListDetails?.id ?? ''}',
       "id",
-      '${GoodsOrderListDetails?.vendor_name ?? ''}',
-
-      '${GoodsOrderListDetails?.challan_no ?? ''}',
-
-      '${GoodsOrderListDetails?.generatedBy ?? ''}',
-      '${GoodsOrderListDetails?.purchaseDate ?? ''}',
-      '${GoodsOrderListDetails?.cost ?? ''}',
-      '${GoodsOrderListDetails?.currency ?? ''}',
-      '${GoodsOrderListDetails?.status ?? ''}',
-
+      '${transactionReportListDetails?.fromActorID ?? ''}',
+      '${transactionReportListDetails?.fromActorType ?? ''}',
+      '${transactionReportListDetails?.fromActorName ?? ''}',
+      '${transactionReportListDetails?.toActorType ?? ''}',
+      '${transactionReportListDetails?.toActorName ?? ''}',
+      '${transactionReportListDetails?.assetItemID ?? ''}',
+      '${transactionReportListDetails?.assetItemName ?? ''}',
+      '${transactionReportListDetails?.qty ?? ''}',
+      '${transactionReportListDetails?.lastUpdated ?? ''}',
       'Actions',
     ];
     var cells = [];
@@ -500,7 +490,7 @@ class GoodsOrderListDataSource extends DataTableSource {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Text(
-                        ' GO ${GoodsOrderListDetails?.id}',
+                        ' TR ${transactionReportListDetails?.fromActorID}',
                       ),
                       Dimens.boxHeight10,
                       Align(
@@ -512,7 +502,8 @@ class GoodsOrderListDataSource extends DataTableSource {
                             borderRadius: BorderRadius.circular(4),
                           ),
                           child: Text(
-                            '${GoodsOrderListDetails?.status_short}',
+                            "status_short",
+                            // '${transactionReportListDetails?.status_short}',
                             style: Styles.white10.copyWith(
                               color: Colors.white,
                             ),
@@ -527,25 +518,25 @@ class GoodsOrderListDataSource extends DataTableSource {
                           color: ColorValues.viewColor,
                           icon: Icons.remove_red_eye_outlined,
                           message: 'view',
-                          onPress: () {
-                            int id = GoodsOrderListDetails?.id ?? 0;
-                            if (id != 0) {
-                              Get.toNamed(Routes.viewGoodsOrders,
-                                  arguments: {'id': id});
-                            }
-                          },
+                          // onPress: () {
+                          //   int id = transactionReportListDetails?.id ?? 0;
+                          //   if (id != 0) {
+                          //     Get.toNamed(Routes.viewGoodsOrders,
+                          //         arguments: {'id': id});
+                          //   }
+                          // },
                         ),
                         TableActionButton(
                           color: ColorValues.editColor,
                           icon: Icons.edit,
                           message: 'Edit',
-                          onPress: () {
-                            int id = GoodsOrderListDetails?.id ?? 0;
-                            if (id != 0) {
-                              Get.toNamed(Routes.updateGoodsOrdersDetailsScreen,
-                                  arguments: {"id": id});
-                            }
-                          },
+                          // onPress: () {
+                          //   int id = transactionReportListDetails?.id ?? 0;
+                          //   if (id != 0) {
+                          //     Get.toNamed(Routes.updateGoodsOrdersDetailsScreen,
+                          //         arguments: {"id": id});
+                          //   }
+                          // },
                         ),
                       ])
                     : Text(value.toString()),
@@ -558,7 +549,7 @@ class GoodsOrderListDataSource extends DataTableSource {
   }
 
   @override
-  int get rowCount => filteredGoodsOrderList.length;
+  int get rowCount => filteredTransactionReportList.length;
 
   @override
   bool get isRowCountApproximate => false;
