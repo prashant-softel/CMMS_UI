@@ -240,6 +240,11 @@ class StockManagementDashboardScreen
                               Get.toNamed(Routes.employeeStockReport);
                             }),
                         _stockManagementList(
+                            tittle: "Transaction Report",
+                            ontap: () {
+                              Get.toNamed(Routes.transactionReport);
+                            }),
+                        _stockManagementList(
                             tittle: "Faulty Material Report",
                             ontap: () {
                               Get.offNamed(Routes.faultyMaterialReport);
