@@ -9,6 +9,7 @@ import 'package:cmms/app/job_card_details/views/widgets/job_card_updated_dialog.
 import 'package:cmms/app/widgets/abandon_execution_message_dialog.dart';
 import 'package:cmms/app/widgets/abandon_schedule_execution_message_dialog.dart';
 import 'package:cmms/app/widgets/approve_go_receive_dialog.dart';
+import 'package:cmms/app/widgets/approve_wc_message_dialog.dart';
 import 'package:cmms/app/widgets/create_escalation_matrix_dialog.dart';
 import 'package:cmms/app/widgets/create_incident_report_dialog.dart';
 import 'package:cmms/app/widgets/create_jc_success_message_dialog.dart';
@@ -41,6 +42,7 @@ import 'package:cmms/app/widgets/recive_go_msg_dialog.dart';
 import 'package:cmms/app/widgets/reject_cancel_permit_msg_dailog.dart';
 import 'package:cmms/app/widgets/reject_go_recive_msg_dialog.dart';
 import 'package:cmms/app/widgets/reject_mc_execution_message_dialog.dart';
+import 'package:cmms/app/widgets/reject_wc_message_dialog.dart';
 import 'package:cmms/app/widgets/req_message_approve_dialog.dart';
 import 'package:cmms/app/widgets/req_message_reject_dialog.dart';
 import 'package:cmms/app/widgets/start_mc_execution_dialog.dart';
@@ -942,6 +944,56 @@ class ConnectHelper {
     var res = responseModel.data;
     var parsedJson = json.decode(res);
     Get.dialog<void>(McExecutionMessageApproveDialog(
+        data: parsedJson['message'], id: parsedJson['id']));
+
+    return responseModel;
+  }
+
+  ///Approve Warranty claim
+  Future<ResponseModel> wcApprovedButton({
+    required String auth,
+    WCApproveJsonString,
+    bool? isLoading,
+  }) async {
+    var responseModel = await apiWrapper.makeRequest(
+      'WC/ApproveWC',
+      Request.post,
+      WCApproveJsonString,
+      isLoading ?? false,
+      {
+        'Content-Type': 'application/json',
+        'Authorization': 'Bearer $auth',
+      },
+    );
+    print('WCResponse: ${responseModel.data}');
+    var res = responseModel.data;
+    var parsedJson = json.decode(res);
+    Get.dialog<void>(WCMessageApproveDialog(
+        data: parsedJson['message'], id: parsedJson['id']));
+
+    return responseModel;
+  }
+
+  ///Reject Warranty claim
+  Future<ResponseModel> wcRejectdButton({
+    required String auth,
+    WCRejectJsonString,
+    bool? isLoading,
+  }) async {
+    var responseModel = await apiWrapper.makeRequest(
+      'WC/RejectWC',
+      Request.put,
+      WCRejectJsonString,
+      isLoading ?? false,
+      {
+        'Content-Type': 'application/json',
+        'Authorization': 'Bearer $auth',
+      },
+    );
+    print('WCResponse: ${responseModel.data}');
+    var res = responseModel.data;
+    var parsedJson = json.decode(res);
+    Get.dialog<void>(WCMessageRejectDialog(
         data: parsedJson['message'], id: parsedJson['id']));
 
     return responseModel;

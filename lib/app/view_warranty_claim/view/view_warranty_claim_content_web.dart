@@ -1,9 +1,13 @@
 import 'package:cmms/app/app.dart';
+import 'package:cmms/app/constant/constant.dart';
 import 'package:cmms/app/home/widgets/header_widget.dart';
+import 'package:cmms/app/utils/user_access_constants.dart';
 import 'package:cmms/app/view_warranty_claim/view_warranty_claim_controller.dart';
+import 'package:cmms/app/widgets/approve_wc_dialog.dart';
 import 'package:cmms/app/widgets/custom_elevated_button.dart';
 import 'package:cmms/app/widgets/history_table_widget_web.dart';
 import 'package:cmms/app/widgets/new_warranty_claim_dialog.dart';
+import 'package:cmms/app/widgets/reject_wc_dialog.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
@@ -994,10 +998,12 @@ class ViewWarrantyClaimWeb extends GetView<ViewWarrantyClaimController> {
                               ),
 
                               ///Warranty Claim History
-                              ///Incident Report History
+
                               Container(
                                 margin: Dimens.edgeInsets20,
-                                height: 200,
+                                height: ((controller.historyList?.length ?? 0) *
+                                        50) +
+                                    125,
                                 decoration: BoxDecoration(
                                   border: Border.all(
                                     color:
@@ -1094,6 +1100,62 @@ class ViewWarrantyClaimWeb extends GetView<ViewWarrantyClaimController> {
                                       },
                                     ),
                                   ),
+
+                                  ///Approve WC
+                                  Dimens.boxWidth10,
+                                  varUserAccessModel.value.access_list!
+                                              .where((e) =>
+                                                  e.feature_id ==
+                                                      UserAccessConstants
+                                                          .kWarrantyClaimFeatureId &&
+                                                  e.approve ==
+                                                      UserAccessConstants
+                                                          .kHaveApproveAccess)
+                                              .length >
+                                          0
+                                      ? Container(
+                                          height: 28,
+                                          child: CustomElevatedButton(
+                                            backgroundColor:
+                                                ColorValues.appGreenColor,
+                                            text: "Approve",
+                                            icon: Icons.add,
+                                            onPressed: () {
+                                              Get.dialog(ApproveWCDialog(
+                                                id: controller.wc_id,
+                                              ));
+                                            },
+                                          ),
+                                        )
+                                      : Dimens.box0,
+
+                                  ///Reject WC Dialog
+                                  Dimens.boxWidth10,
+                                  varUserAccessModel.value.access_list!
+                                              .where((e) =>
+                                                  e.feature_id ==
+                                                      UserAccessConstants
+                                                          .kWarrantyClaimFeatureId &&
+                                                  e.approve ==
+                                                      UserAccessConstants
+                                                          .kHaveApproveAccess)
+                                              .length >
+                                          0
+                                      ? Container(
+                                          height: 28,
+                                          child: CustomElevatedButton(
+                                            backgroundColor:
+                                                ColorValues.appRedColor,
+                                            text: "Reject",
+                                            icon: Icons.close,
+                                            onPressed: () {
+                                              Get.dialog(RejectWCDialog(
+                                                id: controller.wc_id,
+                                              ));
+                                            },
+                                          ),
+                                        )
+                                      : Dimens.box0,
                                 ],
                               ),
 

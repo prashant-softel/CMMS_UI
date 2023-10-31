@@ -6,6 +6,7 @@ import 'package:cmms/app/constant/constant.dart';
 import 'package:cmms/app/view_warranty_claim/view_warranty_claim_presenter.dart';
 import 'package:cmms/domain/domain.dart';
 import 'package:cmms/domain/models/business_list_model.dart';
+import 'package:cmms/domain/models/comment_model.dart';
 import 'package:cmms/domain/models/currency_list_model.dart';
 import 'package:cmms/domain/models/employee_list_model.dart';
 import 'package:cmms/domain/models/history_model.dart';
@@ -78,6 +79,9 @@ class ViewWarrantyClaimController extends GetxController {
   Rx<String> selectedEmployeeList = ''.obs;
   RxList<String?> selectedEmployeeDataList = <String>[].obs;
   RxList<int?> selectedEmployeeIdList = <int>[].obs;
+
+  TextEditingController approveCommentTextFieldCtrlr = TextEditingController();
+  TextEditingController rejectCommentTextFieldCtrlr = TextEditingController();
 
   var inventoryList = <InventoryModel>[];
   var blockList = <BlockModel>[];
@@ -258,6 +262,46 @@ class ViewWarrantyClaimController extends GetxController {
           viewWarrantyClaimDetailsModel.value?.externalEmails ?? [];
       supplierActionsList?.value =
           viewWarrantyClaimDetailsModel.value?.supplierActions ?? [];
+    }
+  }
+
+  void wcApprovedButton({int? id}) async {
+    {
+      String _comment = approveCommentTextFieldCtrlr.text.trim();
+
+      CommentModel commentWCAproveModel =
+          CommentModel(id: id, comment: _comment);
+
+      var WCApproveJsonString = commentWCAproveModel.toJson();
+
+      Map<String, dynamic>? response =
+          await viewWarrantyClaimPresenter.wcApprovedButton(
+        WCApproveJsonString: WCApproveJsonString,
+        isLoading: true,
+      );
+      if (response == true) {
+        //getCalibrationList(facilityId, true);
+      }
+    }
+  }
+
+  void wcRejectdButton({int? id}) async {
+    {
+      String _comment = rejectCommentTextFieldCtrlr.text.trim();
+
+      CommentModel commentWCRejectModel =
+          CommentModel(id: id, comment: _comment);
+
+      var WCRejectJsonString = commentWCRejectModel.toJson();
+
+      Map<String, dynamic>? response =
+          await viewWarrantyClaimPresenter.wcRejectdButton(
+        WCRejectJsonString: WCRejectJsonString,
+        isLoading: true,
+      );
+      if (response == true) {
+        //getCalibrationList(facilityId, true);
+      }
     }
   }
 
