@@ -572,7 +572,7 @@ class ObservationPmExecutionViewDialog extends GetView {
                                   .where((e) =>
                                       e.feature_id ==
                                           UserAccessConstants
-                                              .kFeaturePmExecutionName &&
+                                              .kPmExecutionFeatureId &&
                                       e.edit ==
                                           UserAccessConstants.kHaveEditAccess)
                                   .length >
@@ -595,7 +595,7 @@ class ObservationPmExecutionViewDialog extends GetView {
                                   .where((e) =>
                                       e.feature_id ==
                                           UserAccessConstants
-                                              .kFeaturePmExecutionName &&
+                                              .kPmExecutionFeatureId &&
                                       e.edit ==
                                           UserAccessConstants.kHaveEditAccess)
                                   .length >
