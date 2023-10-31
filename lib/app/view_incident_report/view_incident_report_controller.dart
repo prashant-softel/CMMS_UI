@@ -14,11 +14,14 @@ import 'package:cmms/domain/models/type_permit_model.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:get/get.dart';
+import 'package:http/http.dart';
 import 'package:intl/intl.dart';
 import 'package:rxdart/subjects.dart';
 import 'package:scrollable_table_view/scrollable_table_view.dart';
+import 'package:syncfusion_flutter_pdf/pdf.dart';
 import '../../domain/models/facility_model.dart';
 import '../../domain/models/user_access_model.dart';
+import '../utils/save_file_web.dart';
 
 class ViewIncidentReportController extends GetxController {
   ViewIncidentReportController(this.viewIncidentReportPresenter);
@@ -349,5 +352,409 @@ class ViewIncidentReportController extends GetxController {
   Future<void> editIncidentReport({int? id}) async {
     Get.toNamed(Routes.addIncidentReportContentWeb, arguments: id);
     print('Argument$id');
+  }
+
+  Future<void> generateInvoice() async {
+    //Create a PDF document.
+    final PdfDocument document = PdfDocument();
+    //Add page to the PDF
+    final PdfPage page = document.pages.add();
+    //Get page client size
+    final Size pageSize = page.getClientSize();
+    //Draw rectangle
+    // page.graphics.drawRectangle(
+    //     bounds: Rect.fromLTWH(0, 0, pageSize.width, pageSize.height),
+    //     pen: PdfPen(PdfColor(142, 170, 219)));
+    //Generate PDF grid.
+    //  final PdfGrid grid = getGrid();
+    var url = "assets/files/logo.png";
+    var response = await get(Uri.parse(url));
+    var data = response.bodyBytes;
+
+//Load image data into PDF bitmap object
+    PdfBitmap image = PdfBitmap(data);
+
+    //Draw the header section by creating text element
+    final PdfLayoutResult result = drawHeader(page, pageSize, document, image);
+
+    //Draw grid
+    // drawGrid(page, grid, result);
+    //Add invoice footer
+    // drawFooter(page, pageSize);
+    //Save the PDF document
+    final List<int> bytes = document.save();
+    //Dispose the document.
+    document.dispose();
+    //Save and launch the file.
+    await saveAndLaunchFile(bytes, 'incidentReport.pdf');
+  }
+
+  PdfLayoutResult drawHeader(
+    PdfPage page,
+    Size pageSize,
+    PdfDocument document,
+    PdfBitmap image,
+  ) {
+    // document.pages
+    //     .add()
+    //     .graphics
+    //     .drawImage(image, const Rect.fromLTWH(0, 0, 100, 80));
+    page.graphics.drawImage(image, Rect.fromLTWH(0, 10, 100, 80));
+
+    //Draw the image
+
+    // page.graphics.drawImage(
+    //     PdfBitmap(image),
+    //     Rect.fromLTWH(20, 10, 50, 50));
+
+    ///Table
+    ///1
+    page.graphics.drawRectangle(
+        pen: PdfPen(PdfColor(142, 180, 219)),
+        bounds: Rect.fromLTWH(0, 100, pageSize.width - 260, 25));
+    page.graphics.drawRectangle(
+        pen: PdfPen(PdfColor(142, 180, 219)),
+        bounds: Rect.fromLTWH(255, 100, pageSize.width - 260, 25));
+    //2
+    page.graphics.drawRectangle(
+        pen: PdfPen(PdfColor(142, 180, 219)),
+        bounds: Rect.fromLTWH(0, 125, pageSize.width - 260, 25));
+    page.graphics.drawRectangle(
+        pen: PdfPen(PdfColor(142, 180, 219)),
+        bounds: Rect.fromLTWH(255, 125, pageSize.width - 260, 25));
+
+    //3
+    page.graphics.drawRectangle(
+        pen: PdfPen(PdfColor(142, 180, 219)),
+        bounds: Rect.fromLTWH(0, 150, pageSize.width - 260, 25));
+    page.graphics.drawRectangle(
+        pen: PdfPen(PdfColor(142, 180, 219)),
+        bounds: Rect.fromLTWH(255, 150, pageSize.width - 260, 25));
+
+    //4
+    page.graphics.drawRectangle(
+        pen: PdfPen(PdfColor(142, 180, 219)),
+        bounds: Rect.fromLTWH(0, 175, pageSize.width - 260, 25));
+    page.graphics.drawRectangle(
+        pen: PdfPen(PdfColor(142, 180, 219)),
+        bounds: Rect.fromLTWH(255, 175, pageSize.width - 260, 25));
+
+    //5
+    page.graphics.drawRectangle(
+        pen: PdfPen(PdfColor(142, 180, 219)),
+        bounds: Rect.fromLTWH(0, 200, pageSize.width - 260, 25));
+    page.graphics.drawRectangle(
+        pen: PdfPen(PdfColor(142, 180, 219)),
+        bounds: Rect.fromLTWH(255, 200, pageSize.width - 260, 25));
+
+    //1
+    page.graphics.drawString(
+        'Id: ',
+        PdfStandardFont(
+          PdfFontFamily.helvetica,
+          10,
+        ),
+        bounds: Rect.fromLTWH(10, 115, 0, 0),
+        format: PdfStringFormat(lineAlignment: PdfVerticalAlignment.middle));
+
+    page.graphics.drawString(
+        '${incidentReportDetailsModel.value?.id}',
+        PdfStandardFont(
+          PdfFontFamily.helvetica,
+          10,
+        ),
+        bounds: Rect.fromLTWH(25, 115, 0, 0),
+        format: PdfStringFormat(lineAlignment: PdfVerticalAlignment.middle));
+    page.graphics.drawString(
+        'Title: ',
+        PdfStandardFont(
+          PdfFontFamily.helvetica,
+          10,
+        ),
+        bounds: Rect.fromLTWH(265, 115, 0, 0),
+        format: PdfStringFormat(lineAlignment: PdfVerticalAlignment.middle));
+    page.graphics.drawString(
+        '${incidentReportDetailsModel.value?.title}',
+        PdfStandardFont(
+          PdfFontFamily.helvetica,
+          10,
+        ),
+        bounds: Rect.fromLTWH(290, 115, 0, 0),
+        format: PdfStringFormat(lineAlignment: PdfVerticalAlignment.middle));
+
+    //2
+    page.graphics.drawString(
+        'Plant: ',
+        PdfStandardFont(
+          PdfFontFamily.helvetica,
+          10,
+        ),
+        bounds: Rect.fromLTWH(10, 140, 0, 0),
+        format: PdfStringFormat(lineAlignment: PdfVerticalAlignment.middle));
+
+    page.graphics.drawString(
+        '${incidentReportDetailsModel.value?.facility_name}',
+        PdfStandardFont(
+          PdfFontFamily.helvetica,
+          10,
+        ),
+        bounds: Rect.fromLTWH(40, 140, 0, 0),
+        format: PdfStringFormat(lineAlignment: PdfVerticalAlignment.middle));
+    page.graphics.drawString(
+        'Equipment Categories: ',
+        PdfStandardFont(
+          PdfFontFamily.helvetica,
+          10,
+        ),
+        bounds: Rect.fromLTWH(265, 140, 0, 0),
+        format: PdfStringFormat(lineAlignment: PdfVerticalAlignment.middle));
+    page.graphics.drawString(
+        '${incidentReportDetailsModel.value?.equipment_name}',
+        PdfStandardFont(
+          PdfFontFamily.helvetica,
+          10,
+        ),
+        bounds: Rect.fromLTWH(370, 140, 0, 0),
+        format: PdfStringFormat(lineAlignment: PdfVerticalAlignment.middle));
+
+    //3
+    page.graphics.drawString(
+        'Block: ',
+        PdfStandardFont(
+          PdfFontFamily.helvetica,
+          10,
+        ),
+        bounds: Rect.fromLTWH(10, 165, 0, 0),
+        format: PdfStringFormat(lineAlignment: PdfVerticalAlignment.middle));
+
+    page.graphics.drawString(
+        '${incidentReportDetailsModel.value?.block_name}',
+        PdfStandardFont(
+          PdfFontFamily.helvetica,
+          10,
+        ),
+        bounds: Rect.fromLTWH(40, 165, 0, 0),
+        format: PdfStringFormat(lineAlignment: PdfVerticalAlignment.middle));
+    page.graphics.drawString(
+        'Reporting Date & Time: ',
+        PdfStandardFont(
+          PdfFontFamily.helvetica,
+          10,
+        ),
+        bounds: Rect.fromLTWH(265, 165, 0, 0),
+        format: PdfStringFormat(lineAlignment: PdfVerticalAlignment.middle));
+    page.graphics.drawString(
+        '${reportingDateTimeCtrlrWeb.text}',
+        PdfStandardFont(
+          PdfFontFamily.helvetica,
+          10,
+        ),
+        bounds: Rect.fromLTWH(375, 165, 0, 0),
+        format: PdfStringFormat(lineAlignment: PdfVerticalAlignment.middle));
+
+    //4
+    page.graphics.drawString(
+        'Incident Date & Time: ',
+        PdfStandardFont(
+          PdfFontFamily.helvetica,
+          10,
+        ),
+        bounds: Rect.fromLTWH(10, 190, 0, 0),
+        format: PdfStringFormat(lineAlignment: PdfVerticalAlignment.middle));
+
+    page.graphics.drawString(
+        '${incidentDateTimeCtrlrWeb.text}',
+        PdfStandardFont(
+          PdfFontFamily.helvetica,
+          10,
+        ),
+        bounds: Rect.fromLTWH(110, 190, 0, 0),
+        format: PdfStringFormat(lineAlignment: PdfVerticalAlignment.middle));
+    page.graphics.drawString(
+        'Incident Severity: ',
+        PdfStandardFont(
+          PdfFontFamily.helvetica,
+          10,
+        ),
+        bounds: Rect.fromLTWH(265, 190, 0, 0),
+        format: PdfStringFormat(lineAlignment: PdfVerticalAlignment.middle));
+    page.graphics.drawString(
+        '${incidentReportDetailsModel.value?.severity}',
+        PdfStandardFont(
+          PdfFontFamily.helvetica,
+          10,
+        ),
+        bounds: Rect.fromLTWH(347, 190, 0, 0),
+        format: PdfStringFormat(lineAlignment: PdfVerticalAlignment.middle));
+
+    //5
+    page.graphics.drawString(
+        'Incident Description: ',
+        PdfStandardFont(
+          PdfFontFamily.helvetica,
+          10,
+        ),
+        bounds: Rect.fromLTWH(10, 215, 0, 0),
+        format: PdfStringFormat(lineAlignment: PdfVerticalAlignment.middle));
+
+    page.graphics.drawString(
+        '${incidentReportDetailsModel.value?.description}',
+        PdfStandardFont(
+          PdfFontFamily.helvetica,
+          10,
+        ),
+        bounds: Rect.fromLTWH(105, 215, 0, 0),
+        format: PdfStringFormat(lineAlignment: PdfVerticalAlignment.middle));
+    page.graphics.drawString(
+        'Action Taken Date & Time: ',
+        PdfStandardFont(
+          PdfFontFamily.helvetica,
+          10,
+        ),
+        bounds: Rect.fromLTWH(265, 215, 0, 0),
+        format: PdfStringFormat(lineAlignment: PdfVerticalAlignment.middle));
+    page.graphics.drawString(
+        '${actionTakenDateTimeCtrlrWeb.text}',
+        PdfStandardFont(
+          PdfFontFamily.helvetica,
+          10,
+        ),
+        bounds: Rect.fromLTWH(390, 215, 0, 0),
+        format: PdfStringFormat(lineAlignment: PdfVerticalAlignment.middle));
+
+    final PdfFont contentFont = PdfStandardFont(PdfFontFamily.helvetica, 9);
+    //Draw string
+
+    final String invoiceNumber = 'Signature of trainer';
+    final Size contentSize = contentFont.measureString(invoiceNumber);
+    // ignore: leading_newlines_in_multiline_strings
+
+    return PdfTextElement(text: invoiceNumber, font: contentFont).draw(
+        page: page,
+        bounds: Rect.fromLTWH(400, 740,
+            pageSize.width - (contentSize.width + 30), pageSize.height - 120))!;
+
+    /////1
+
+    //Draw rectangle
+    // page.graphics.drawRectangle(
+    //     brush: PdfSolidBrush(PdfColor(91, 126, 215)),
+    //     bounds: Rect.fromLTWH(0, 0, pageSize.width - 115, 90));
+    //Draw string
+    // page.graphics.drawString(
+    //     'INVOICE', PdfStandardFont(PdfFontFamily.helvetica, 30),
+    //     brush: PdfBrushes.white,
+    //     bounds: Rect.fromLTWH(25, 0, pageSize.width - 115, 90),
+    //     format: PdfStringFormat(lineAlignment: PdfVerticalAlignment.middle));
+
+    // page.graphics.drawRectangle(
+    //     bounds: Rect.fromLTWH(400, 0, pageSize.width - 400, 90),
+    //     brush: PdfSolidBrush(PdfColor(65, 104, 205)));
+
+    // page.graphics.drawString(r'viewPermitDetailsModel.value?.siteName ',
+    //     PdfStandardFont(PdfFontFamily.helvetica, 18),
+    //     bounds: Rect.fromLTWH(400, 0, pageSize.width - 400, 100),
+    //     brush: PdfBrushes.white,
+    //     format: PdfStringFormat(
+    //         alignment: PdfTextAlignment.center,
+    //         lineAlignment: PdfVerticalAlignment.middle));
+
+    //final PdfFont contentFont = PdfStandardFont(PdfFontFamily.helvetica, 9);
+    //Draw string
+    // page.graphics.drawString('Amount', contentFont,
+    //     brush: PdfBrushes.white,
+    //     bounds: Rect.fromLTWH(0, 0, pageSize.width - 400, 33),
+    //     format: PdfStringFormat(
+    //         alignment: PdfTextAlignment.center,
+    //         lineAlignment: PdfVerticalAlignment.bottom));
+    //Create data foramt and convert it to text.
+    // final DateFormat format = DateFormat.yMMMMd('en_US');
+    // final String invoiceNumber =
+    //     'Invoice Number: 2058557939\r\n\r\nDate: ${format.format(DateTime.now())}';
+    // ignore: leading_newlines_in_multiline_strings
+//     String text =
+//         '''This permit is valid only when issued Et approved by an authorized issuer.This permit must be obtained before a specified\r\nwork is started Et it must be closed immediately after completion of the work or at the end of the shift as agreed by ther\r\nparties identified on this permit. Refer PTW SOP(hyperlink).
+//  \r\n\r\nPlant: ${viewPermitDetailsModel.value?.siteName ?? ""} Block:${viewPermitDetailsModel.value?.blockName ?? ""} Permit No.: ${viewPermitDetailsModel.value?.permitNo ?? ""}  ,
+
+//         ''';
+//     final Size contentSize = contentFont.measureString(text);
+
+//     // PdfTextElement(text: invoiceNumber, font: contentFont).draw(
+//     //     page: page,
+//     //     bounds: Rect.fromLTWH(pageSize.width - (contentSize.width + 30), 120,
+//     //         contentSize.width + 30, pageSize.height - 120));
+
+//     return PdfTextElement(text: text, font: contentFont).draw(
+//         page: page,
+//         bounds: Rect.fromLTWH(
+//             10, 30, contentSize.width + 30, pageSize.height - 120))!;
+  }
+
+  PdfGrid getGrid() {
+    //Create a PDF grid
+    final PdfGrid grid = PdfGrid();
+    //Secify the columns count to the grid.
+    grid.columns.add(count: 8);
+    //Create the header row of the grid.
+    final PdfGridRow headerRow = grid.headers.add(1)[0];
+    //Set style
+    headerRow.style.backgroundBrush = PdfSolidBrush(PdfColor(68, 114, 196));
+    headerRow.style.textBrush = PdfBrushes.white;
+    headerRow.cells[0].value = 'Product Id';
+    headerRow.cells[0].stringFormat.alignment = PdfTextAlignment.center;
+    headerRow.cells[1].value = 'Product Name';
+    headerRow.cells[2].value = 'Price';
+    headerRow.cells[3].value = 'Quantity';
+    headerRow.cells[4].value = 'Quantity1';
+    headerRow.cells[5].value = 'Quantity2';
+    headerRow.cells[6].value = 'Quantity3';
+
+    headerRow.cells[7].value = 'Total';
+    //Add rows
+    addProducts('CA-1098', 'AWC Logo Cap', 8.99, 2, 2, 2, 2, 17.98, grid);
+    addProducts('CA-1098', 'AWC Logo Cap', 8.99, 2, 2, 2, 2, 17.98, grid);
+    addProducts('CA-1098', 'AWC Logo Cap', 8.99, 2, 2, 2, 2, 17.98, grid);
+    addProducts('CA-1098', 'AWC Logo Cap', 8.99, 2, 2, 2, 2, 17.98, grid);
+    grid.applyBuiltInStyle(PdfGridBuiltInStyle.listTable4Accent5);
+    //Set gird columns width
+    grid.columns[1].width = 200;
+    for (int i = 0; i < headerRow.cells.count; i++) {
+      headerRow.cells[i].style.cellPadding =
+          PdfPaddings(bottom: 5, left: 5, right: 5, top: 5);
+    }
+    for (int i = 0; i < grid.rows.count; i++) {
+      final PdfGridRow row = grid.rows[i];
+      for (int j = 0; j < row.cells.count; j++) {
+        final PdfGridCell cell = row.cells[j];
+        if (j == 0) {
+          cell.stringFormat.alignment = PdfTextAlignment.center;
+        }
+        cell.style.cellPadding =
+            PdfPaddings(bottom: 5, left: 5, right: 5, top: 5);
+      }
+    }
+    return grid;
+  }
+
+  void addProducts(
+      String productId,
+      String productName,
+      double price,
+      int quantity,
+      int quantity1,
+      int quantity2,
+      int quantity3,
+      double total,
+      PdfGrid grid) {
+    final PdfGridRow row = grid.rows.add();
+    row.cells[0].value = productId;
+    row.cells[1].value = productName;
+    row.cells[2].value = price.toString();
+    row.cells[3].value = quantity.toString();
+    row.cells[4].value = quantity.toString();
+    row.cells[5].value = quantity.toString();
+    row.cells[6].value = quantity.toString();
+
+    row.cells[7].value = total.toString();
   }
 }

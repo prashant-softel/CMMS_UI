@@ -161,7 +161,7 @@ class InventoryScreen extends GetView<InventoryController> {
                                             UserAccessConstants
                                                 .kWarrantyClaimFeatureId &&
                                         e.view ==
-                                            UserAccessConstants.kNotHaveViewAccess)
+                                            UserAccessConstants.kHaveViewAccess)
                                     .length >
                                 0
                             ? _inventoryList(
@@ -336,21 +336,21 @@ class InventoryScreen extends GetView<InventoryController> {
           padding: EdgeInsets.symmetric(horizontal: 12, vertical: 8),
           // padding: EdgeInsets.all(9),
           child:
-          // Row(
-          //   crossAxisAlignment: CrossAxisAlignment.center,
-          //   mainAxisAlignment: MainAxisAlignment.center,
-          //   children: [
+              // Row(
+              //   crossAxisAlignment: CrossAxisAlignment.center,
+              //   mainAxisAlignment: MainAxisAlignment.center,
+              //   children: [
               Center(
-                child: Text(
-                  tittle,
-                  style: TextStyle(
-                      color: ColorValues.whiteColor,
-                      fontSize: 15,
-                      fontWeight: FontWeight.w700),
+            child: Text(
+              tittle,
+              style: TextStyle(
+                  color: ColorValues.whiteColor,
+                  fontSize: 15,
+                  fontWeight: FontWeight.w700),
 
-                  textAlign: TextAlign.center, // Updated
-                ),
-              // ),
+              textAlign: TextAlign.center, // Updated
+            ),
+            // ),
             // ],
           ),
         ),

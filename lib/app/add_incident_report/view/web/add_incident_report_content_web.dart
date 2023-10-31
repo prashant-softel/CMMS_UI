@@ -40,1044 +40,1075 @@ class AddIncidentReportContentWeb extends GetView<AddIncidentReportController> {
                 ? Dimens.box0
                 : HomeDrawer(),
             Expanded(
-              child: Center(
-                child: Container(
-                  // margin: Dimens.edgeInsets16,
-                  height: Get.height,
-                  decoration: BoxDecoration(
-                    border: Border.all(color: Colors.grey.withOpacity(.3)),
-                  ),
-                  constraints: BoxConstraints(
-                    maxWidth: 1100,
-                  ),
-                  child: SingleChildScrollView(
-                    child: Column(
-                      children: [
-                        Container(
-                          height: 55,
-                          decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(0),
-                            border: Border.all(
-                              color: Color.fromARGB(255, 227, 224, 224),
-                              width: 1,
+              child: Container(
+                // margin: Dimens.edgeInsets16,
+                height: Get.height,
+                decoration: BoxDecoration(
+                  border: Border.all(color: Colors.grey.withOpacity(.3)),
+                ),
+                constraints: BoxConstraints(
+                  maxWidth: 1100,
+                ),
+                child: SingleChildScrollView(
+                  child: Column(
+                    children: [
+                      Container(
+                        height: 55,
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(0),
+                          border: Border.all(
+                            color: Color.fromARGB(255, 227, 224, 224),
+                            width: 1,
+                          ),
+                          boxShadow: [
+                            BoxShadow(
+                              color: Color.fromARGB(255, 236, 234, 234)
+                                  .withOpacity(0.5),
+                              spreadRadius: 2,
+                              blurRadius: 5,
+                              offset: Offset(0, 2),
                             ),
-                            boxShadow: [
-                              BoxShadow(
-                                color: Color.fromARGB(255, 236, 234, 234)
-                                    .withOpacity(0.5),
-                                spreadRadius: 2,
-                                blurRadius: 5,
-                                offset: Offset(0, 2),
-                              ),
-                            ],
-                          ),
-                          child: Row(
-                            children: [
-                              Icon(
-                                Icons.home,
-                                color: ColorValues.greyLightColor,
-                              ),
-                              Text(
-                                "Dashboard",
-                                style: Styles.greyLight14,
-                              ),
-                              GestureDetector(
-                                onTap: () {
-                                  Get.back();
-                                },
-                                child: Text(" / Incident Report",
-                                    style: Styles.greyMediumLight12),
-                              ),
-                              Text(" / Add Incident Report",
-                                  style: Styles.greyMediumLight12)
-                            ],
-                          ),
+                          ],
                         ),
-                        Dimens.boxHeight10,
-                        SizedBox(
-                          width: MediaQuery.of(context).size.width / 1,
-                          // height: MediaQuery.of(context).size.height / 1,
-                          child: Card(
-                            color: Colors.lightBlue.shade50,
-                            child: Wrap(
-                              children: [
-                                GetBuilder<AddIncidentReportController>(
-                                    id: 'incident-report',
-                                    builder: (controller) {
-                                      return Obx(
-                                        () => Column(
-                                          children: [
-                                            CustomAppBar(
-                                              title: 'Add Incident Report'.tr,
-                                            ),
-                                            Padding(
-                                              padding: const EdgeInsets.only(
-                                                  left: 50),
-                                              child: Column(
-                                                children: [
-                                                  Row(
-                                                    crossAxisAlignment:
-                                                        CrossAxisAlignment
-                                                            .start,
-                                                    children: [
-                                                      Column(
-                                                        crossAxisAlignment:
-                                                            CrossAxisAlignment
-                                                                .end,
-                                                        children: [
-                                                          Row(
-                                                            children: [
-                                                              CustomRichText(
-                                                                  title:
-                                                                      'Block Name: '),
-                                                              Dimens.boxWidth10,
-                                                              SizedBox(
-                                                                width: MediaQuery.of(
-                                                                            context)
-                                                                        .size
-                                                                        .width /
-                                                                    5,
-                                                                child: Obx(
-                                                                  () =>
-                                                                      DropdownWebWidget(
-                                                                    // margin: Dimens.edgeInsets5,
-                                                                    dropdownList:
-                                                                        controller
-                                                                            .blockList,
-                                                                    isValueSelected:
-                                                                        controller
-                                                                            .isBlockSelected
-                                                                            .value,
-                                                                    selectedValue:
-                                                                        controller
-                                                                            .selectedBlock
-                                                                            .value,
-                                                                    onValueChanged:
-                                                                        controller
-                                                                            .onValueChanged,
-                                                                  ),
-                                                                ),
-                                                              ),
-                                                            ],
-                                                          ),
-                                                          Row(
-                                                            children: [
-                                                              CustomRichText(
-                                                                  title:
-                                                                      'Incident date & Time: '),
-                                                              Dimens.boxWidth10,
-                                                              SizedBox(
-                                                                width: MediaQuery.of(
-                                                                            context)
-                                                                        .size
-                                                                        .width /
-                                                                    5,
-                                                                child:
-                                                                    _buildIncidentDateTimeField_web(
-                                                                  context,
-                                                                ),
-                                                              ),
-                                                            ],
-                                                          ),
-                                                          Row(
-                                                            children: [
-                                                              CustomRichText(
-                                                                  title:
-                                                                      'Incident Title: '),
-                                                              Dimens.boxWidth10,
-                                                              SizedBox(
-                                                                  width: MediaQuery.of(
-                                                                              context)
-                                                                          .size
-                                                                          .width /
-                                                                      5,
-                                                                  child: _buildIncidentReportTitleTextField_web(
-                                                                      context)),
-                                                            ],
-                                                          ),
-                                                          Row(
-                                                            children: [
-                                                              CustomRichText(
-                                                                  title:
-                                                                      'Incident Description: '),
-                                                              Dimens.boxWidth10,
-                                                              SizedBox(
-                                                                  width: MediaQuery.of(
-                                                                              context)
-                                                                          .size
-                                                                          .width /
-                                                                      5,
-                                                                  child: _buildIncidentReportDescriptionField_web(
-                                                                      context)),
-                                                            ],
-                                                          ),
-                                                          Row(
-                                                            children: [
-                                                              CustomRichText(
-                                                                  title:
-                                                                      'Incident Severity: '),
-                                                              Dimens.boxWidth10,
-                                                              SizedBox(
-                                                                child: Column(
-                                                                  children: [
-                                                                    buildRadioButton(
-                                                                        'Critical',
-                                                                        Colors
-                                                                            .red,
-                                                                        Colors
-                                                                            .white,
-                                                                        context),
-                                                                    buildRadioButton(
-                                                                        'High',
-                                                                        Colors
-                                                                            .orange,
-                                                                        Colors
-                                                                            .white,
-                                                                        context),
-                                                                    buildRadioButton(
-                                                                        'Medium',
-                                                                        Colors
-                                                                            .yellow,
-                                                                        Colors
-                                                                            .white,
-                                                                        context),
-                                                                    buildRadioButton(
-                                                                        'Low',
-                                                                        Colors
-                                                                            .green,
-                                                                        Colors
-                                                                            .white,
-                                                                        context),
-                                                                  ],
-                                                                ),
-                                                              ),
-                                                            ],
-                                                          ),
-                                                          Dimens.boxWidth10,
-                                                          Row(
-                                                            children: [
-                                                              CustomRichText(
-                                                                  title:
-                                                                      'Victim Name: '),
-                                                              Dimens.boxWidth10,
-                                                              SizedBox(
-                                                                width: MediaQuery.of(
-                                                                            context)
-                                                                        .size
-                                                                        .width /
-                                                                    5,
-                                                                child: Obx(
-                                                                  () =>
-                                                                      DropdownWebWidget(
-                                                                    dropdownList:
-                                                                        controller
-                                                                            .victimNameList,
-                                                                    isValueSelected:
-                                                                        controller
-                                                                            .isVictimNameListSelected
-                                                                            .value,
-                                                                    selectedValue:
-                                                                        controller
-                                                                            .selectedVictimNameList
-                                                                            .value,
-                                                                    onValueChanged:
-                                                                        controller
-                                                                            .onValueVictimNameChanged,
-                                                                  ),
-                                                                ),
-                                                              ),
-                                                            ],
-                                                          ),
-                                                          Dimens.boxHeight5,
-                                                          Row(
-                                                            children: [
-                                                              SizedBox(
-                                                                width: 140,
-                                                                child: CustomRichText(
-                                                                    title:
-                                                                        'Incident Investigation Done By: '),
-                                                              ),
-                                                              Dimens.boxWidth10,
-                                                              SizedBox(
-                                                                width: MediaQuery.of(
-                                                                            context)
-                                                                        .size
-                                                                        .width /
-                                                                    5,
-                                                                child: Obx(
-                                                                  () =>
-                                                                      DropdownWebWidget(
-                                                                    dropdownList:
-                                                                        controller
-                                                                            .incidentInvestigationDoneByList,
-                                                                    isValueSelected:
-                                                                        controller
-                                                                            .isincidentInvestigationDoneByListSelected
-                                                                            .value,
-                                                                    selectedValue:
-                                                                        controller
-                                                                            .selectedIncidentInvestigationDoneByList
-                                                                            .value,
-                                                                    onValueChanged:
-                                                                        controller
-                                                                            .onValueChanged,
-                                                                  ),
-                                                                ),
-                                                              ),
-                                                            ],
-                                                          ),
-                                                          Dimens.boxHeight5,
-                                                          Row(
-                                                            children: [
-                                                              CustomRichText(
-                                                                  title:
-                                                                      'Risk Type: '),
-                                                              Dimens.boxWidth10,
-                                                              SizedBox(
-                                                                width: MediaQuery.of(
-                                                                            context)
-                                                                        .size
-                                                                        .width /
-                                                                    5,
-                                                                child: Obx(
-                                                                  () =>
-                                                                      DropdownWebWidget(
-                                                                    dropdownList:
-                                                                        controller
-                                                                            .riskTypeList,
-                                                                    isValueSelected:
-                                                                        controller
-                                                                            .isRiskTypeListSelected
-                                                                            .value,
-                                                                    selectedValue:
-                                                                        controller
-                                                                            .selectedRiskTypeList
-                                                                            .value,
-                                                                    onValueChanged:
-                                                                        controller
-                                                                            .onValueChanged,
-                                                                  ),
-                                                                ),
-                                                              ),
-                                                            ],
-                                                          ),
-                                                          Dimens.boxHeight20,
-                                                          Row(
-                                                            children: [
-                                                              CustomRichText(
-                                                                  title:
-                                                                      'Legal Applicability: '),
-                                                              Dimens.boxWidth10,
-                                                              SizedBox(
-                                                                width: MediaQuery.of(
-                                                                            context)
-                                                                        .size
-                                                                        .width /
-                                                                    5,
-                                                                child: controller
-                                                                            .id !=
-                                                                        null
-                                                                    ? controller.incidentReportDetailsModel.value?.legal_applicability_name ==
-                                                                            "YES"
-                                                                        ? Obx(
-                                                                            () =>
-                                                                                Switch(
-                                                                              activeColor: Colors.green,
-                                                                              value: controller.legalApplicabilityDetailValue.value,
-                                                                              onChanged: (value) {
-                                                                                controller.legalApplicabilityDetailValue.value = value;
-                                                                                print('Legal Detail applicability: ${controller.legalApplicabilityValue.value}');
-                                                                              },
-                                                                            ),
-                                                                          )
-                                                                        : Obx(
-                                                                            () =>
-                                                                                Switch(
-                                                                              activeColor: Colors.green,
-                                                                              value: controller.legalApplicabilityDetailFalseValue.value,
-                                                                              onChanged: (value) {
-                                                                                controller.legalApplicabilityDetailFalseValue.value = value;
-                                                                                print('Legal Detail False applicability: ${controller.legalApplicabilityValue.value}');
-                                                                              },
-                                                                            ),
-                                                                          )
-                                                                    : Obx(
-                                                                        () =>
-                                                                            Switch(
-                                                                          activeColor:
-                                                                              Colors.green,
-                                                                          value: controller
-                                                                              .legalApplicabilityValue
-                                                                              .value,
-                                                                          onChanged:
-                                                                              (value) {
-                                                                            controller.legalApplicabilityValue.value =
-                                                                                value;
-                                                                            print('Legal applicability: ${controller.legalApplicabilityValue.value}');
-                                                                          },
-                                                                        ),
-                                                                      ),
-                                                              )
-                                                            ],
-                                                          ),
-                                                          //   Dimens.boxHeight5,
-                                                          // /// FILE UPLOAD WIDGET
-                                                          // SizedBox(
-                                                          //    width: MediaQuery.of(
-                                                          //             context)
-                                                          //         .size
-                                                          //         .width /
-                                                          //     3,
-                                                          //   child: Container(
-                                                          //     height: Get.height * 0.2,
-                                                          //     width: Get.width,
-                                                          //     child: Row(
-                                                          //         //
-                                                          //         children: [
-                                                          //           Expanded(
-                                                          //             flex: 2,
-                                                          //             child:
-                                                          //                 FileUploadWidgetWithDropzone(),
-                                                          //           ),
-                                                          //           Dimens.boxWidth10,
-                                                          //           Expanded(
-                                                          //               flex: 8,
-                                                          //               child:
-                                                          //                   FileUploadDetailsWidgetWeb()),
-                                                          //         ]),
-                                                          //   ),
-                                                          // ),
-
-                                                          Dimens.boxHeight5,
-                                                          Row(
-                                                            children: [
-                                                              SizedBox(
-                                                                width: 140,
-                                                                child: CustomRichText(
-                                                                    title:
-                                                                        'Damaged Asset Cost Approx: '),
-                                                              ),
-                                                              Dimens.boxWidth10,
-                                                              SizedBox(
-                                                                  width: MediaQuery.of(
-                                                                              context)
-                                                                          .size
-                                                                          .width /
-                                                                      5,
-                                                                  child: _buildDamagedAssetsCostTextField_web(
-                                                                      context)),
-                                                            ],
-                                                          ),
-                                                          Dimens.boxHeight5,
-                                                          Row(
-                                                            children: [
-                                                              SizedBox(
-                                                                width: 140,
-                                                                child: CustomRichText(
-                                                                    title:
-                                                                        'Asset Restoration Action Taken By: '),
-                                                              ),
-                                                              Dimens.boxWidth10,
-                                                              SizedBox(
-                                                                width: MediaQuery.of(
-                                                                            context)
-                                                                        .size
-                                                                        .width /
-                                                                    5,
-                                                                child: Obx(
-                                                                  () =>
-                                                                      DropdownWebWidget(
-                                                                    dropdownList:
-                                                                        controller
-                                                                            .assetRestorationActionTakenByList,
-                                                                    isValueSelected:
-                                                                        controller
-                                                                            .isAssetRestorationActionTakenByListSelected
-                                                                            .value,
-                                                                    selectedValue:
-                                                                        controller
-                                                                            .selectedAssetRestorationActionTakenByList
-                                                                            .value,
-                                                                    onValueChanged:
-                                                                        controller
-                                                                            .onValueAssetRestorationActionTakenByChanged,
-                                                                  ),
-                                                                ),
-                                                              ),
-                                                            ],
-                                                          ),
-                                                          Dimens.boxHeight5,
-                                                          Row(
-                                                            children: [
-                                                              CustomRichText(
-                                                                  title:
-                                                                      'Insurance Applicable: '),
-                                                              Dimens.boxWidth10,
-                                                              Obx(
-                                                                () => SizedBox(
-                                                                  width: MediaQuery.of(
-                                                                              context)
-                                                                          .size
-                                                                          .width /
-                                                                      5,
-                                                                  child: Switch(
-                                                                    activeColor:
-                                                                        Colors
-                                                                            .green,
-                                                                    value: controller
-                                                                        .insuranceApplicableValue
-                                                                        .value,
-                                                                    onChanged:
-                                                                        (value) {
+                        child: Row(
+                          children: [
+                            Icon(
+                              Icons.home,
+                              color: ColorValues.greyLightColor,
+                            ),
+                            Text(
+                              "Dashboard",
+                              style: Styles.greyLight14,
+                            ),
+                            GestureDetector(
+                              onTap: () {
+                                Get.back();
+                              },
+                              child: Text(" / Incident Report",
+                                  style: Styles.greyMediumLight12),
+                            ),
+                            Text(" / Add Incident Report",
+                                style: Styles.greyMediumLight12)
+                          ],
+                        ),
+                      ),
+                      Dimens.boxHeight10,
+                      SizedBox(
+                        width: MediaQuery.of(context).size.width / 1,
+                        // height: MediaQuery.of(context).size.height / 1,
+                        child: Card(
+                          color: Colors.lightBlue.shade50,
+                          child: Wrap(
+                            children: [
+                              GetBuilder<AddIncidentReportController>(
+                                  id: 'incident-report',
+                                  builder: (controller) {
+                                    return Obx(
+                                      () => Column(
+                                        children: [
+                                          CustomAppBar(
+                                            title: 'Add Incident Report'.tr,
+                                          ),
+                                          Padding(
+                                            padding:
+                                                const EdgeInsets.only(left: 50),
+                                            child: Column(
+                                              children: [
+                                                Row(
+                                                  crossAxisAlignment:
+                                                      CrossAxisAlignment.start,
+                                                  children: [
+                                                    Column(
+                                                      crossAxisAlignment:
+                                                          CrossAxisAlignment
+                                                              .end,
+                                                      children: [
+                                                        Row(
+                                                          children: [
+                                                            CustomRichText(
+                                                                title:
+                                                                    'Block Name: '),
+                                                            Dimens.boxWidth10,
+                                                            SizedBox(
+                                                              width: MediaQuery.of(
+                                                                          context)
+                                                                      .size
+                                                                      .width /
+                                                                  5,
+                                                              child: Obx(
+                                                                () =>
+                                                                    DropdownWebWidget(
+                                                                  // margin: Dimens.edgeInsets5,
+                                                                  dropdownList:
                                                                       controller
-                                                                          .insuranceApplicableValue
-                                                                          .value = value;
-                                                                    },
-                                                                  ),
+                                                                          .blockList,
+                                                                  isValueSelected:
+                                                                      controller
+                                                                          .isBlockSelected
+                                                                          .value,
+                                                                  selectedValue:
+                                                                      controller
+                                                                          .selectedBlock
+                                                                          .value,
+                                                                  onValueChanged:
+                                                                      controller
+                                                                          .onValueChanged,
                                                                 ),
                                                               ),
-                                                            ],
-                                                          ),
-                                                          Dimens.boxHeight5,
-                                                          Row(
-                                                            children: [
-                                                              controller.insuranceApplicableValue ==
-                                                                      true
-                                                                  ? CustomRichText(
-                                                                      title:
-                                                                          'Insurance Available: ')
-                                                                  : Container(),
-                                                              Dimens.boxWidth10,
-                                                              controller.insuranceApplicableValue ==
-                                                                      true
-                                                                  ? SizedBox(
-                                                                      width: MediaQuery.of(context)
-                                                                              .size
-                                                                              .width /
-                                                                          5,
-                                                                      child: _buildInsuranceAvailableTextField_web(
-                                                                          context))
-                                                                  : Container(),
-                                                            ],
-                                                          ),
-                                                          Dimens.boxHeight5,
-                                                          Row(
-                                                            children: [
-                                                              CustomRichText(
-                                                                  title:
-                                                                      'Insurance Remark: '),
-                                                              Dimens.boxWidth10,
-                                                              SizedBox(
-                                                                  width: MediaQuery.of(
-                                                                              context)
-                                                                          .size
-                                                                          .width /
-                                                                      5,
-                                                                  child: _buildInsuranceRemarkField_web(
-                                                                      context)),
-                                                            ],
-                                                          )
-                                                        ],
-                                                      ),
-                                                      ////Changes from here top for left Column
-
-                                                      ///Changes from here below for right Column
-                                                      Dimens.boxWidth50,
-                                                      Column(
-                                                        crossAxisAlignment:
-                                                            CrossAxisAlignment
-                                                                .end,
-                                                        children: [
-                                                          Row(
-                                                            children: [
-                                                              CustomRichText(
-                                                                  title:
-                                                                      'Equipment Name: '),
-                                                              Dimens.boxWidth10,
-                                                              SizedBox(
-                                                                width: MediaQuery.of(
-                                                                            context)
-                                                                        .size
-                                                                        .width /
-                                                                    5,
-                                                                child: Obx(
-                                                                  () =>
-                                                                      DropdownWebWidget(
-                                                                    dropdownList:
-                                                                        controller
-                                                                            .eqipmentNameList,
-                                                                    isValueSelected:
-                                                                        controller
-                                                                            .isEquipmentNameSelected
-                                                                            .value,
-                                                                    selectedValue:
-                                                                        controller
-                                                                            .selectedEquipmentName
-                                                                            .value,
-                                                                    onValueChanged:
-                                                                        controller
-                                                                            .onValueChanged,
-                                                                  ),
-                                                                ),
+                                                            ),
+                                                          ],
+                                                        ),
+                                                        Row(
+                                                          children: [
+                                                            CustomRichText(
+                                                                title:
+                                                                    'Incident date & Time: '),
+                                                            Dimens.boxWidth10,
+                                                            SizedBox(
+                                                              width: MediaQuery.of(
+                                                                          context)
+                                                                      .size
+                                                                      .width /
+                                                                  5,
+                                                              child:
+                                                                  _buildIncidentDateTimeField_web(
+                                                                context,
                                                               ),
-                                                            ],
-                                                          ),
-                                                          // Dimens.boxHeight5,
-                                                          Row(
-                                                            children: [
-                                                              CustomRichText(
-                                                                  title:
-                                                                      'Reporting date & Time: '),
-                                                              Dimens.boxWidth10,
-                                                              SizedBox(
+                                                            ),
+                                                          ],
+                                                        ),
+                                                        Row(
+                                                          children: [
+                                                            CustomRichText(
+                                                                title:
+                                                                    'Incident Title: '),
+                                                            Dimens.boxWidth10,
+                                                            SizedBox(
                                                                 width: MediaQuery.of(
                                                                             context)
                                                                         .size
                                                                         .width /
                                                                     5,
                                                                 child:
-                                                                    _buildReportingDateTimeField_web(
-                                                                  context,
+                                                                    _buildIncidentReportTitleTextField_web(
+                                                                        context)),
+                                                          ],
+                                                        ),
+                                                        Row(
+                                                          children: [
+                                                            CustomRichText(
+                                                                title:
+                                                                    'Incident Description: '),
+                                                            Dimens.boxWidth10,
+                                                            SizedBox(
+                                                                width: MediaQuery.of(
+                                                                            context)
+                                                                        .size
+                                                                        .width /
+                                                                    5,
+                                                                child:
+                                                                    _buildIncidentReportDescriptionField_web(
+                                                                        context)),
+                                                          ],
+                                                        ),
+                                                        Row(
+                                                          children: [
+                                                            CustomRichText(
+                                                                title:
+                                                                    'Incident Severity: '),
+                                                            Dimens.boxWidth10,
+                                                            SizedBox(
+                                                              child: Column(
+                                                                children: [
+                                                                  buildRadioButton(
+                                                                      'Critical',
+                                                                      Colors
+                                                                          .red,
+                                                                      Colors
+                                                                          .white,
+                                                                      context),
+                                                                  buildRadioButton(
+                                                                      'High',
+                                                                      Colors
+                                                                          .orange,
+                                                                      Colors
+                                                                          .white,
+                                                                      context),
+                                                                  buildRadioButton(
+                                                                      'Medium',
+                                                                      Colors
+                                                                          .yellow,
+                                                                      Colors
+                                                                          .white,
+                                                                      context),
+                                                                  buildRadioButton(
+                                                                      'Low',
+                                                                      Colors
+                                                                          .green,
+                                                                      Colors
+                                                                          .white,
+                                                                      context),
+                                                                ],
+                                                              ),
+                                                            ),
+                                                          ],
+                                                        ),
+                                                        Dimens.boxWidth10,
+                                                        Row(
+                                                          children: [
+                                                            CustomRichText(
+                                                                title:
+                                                                    'Victim Name: '),
+                                                            Dimens.boxWidth10,
+                                                            SizedBox(
+                                                              width: MediaQuery.of(
+                                                                          context)
+                                                                      .size
+                                                                      .width /
+                                                                  5,
+                                                              child: Obx(
+                                                                () =>
+                                                                    DropdownWebWidget(
+                                                                  dropdownList:
+                                                                      controller
+                                                                          .victimNameList,
+                                                                  isValueSelected:
+                                                                      controller
+                                                                          .isVictimNameListSelected
+                                                                          .value,
+                                                                  selectedValue:
+                                                                      controller
+                                                                          .selectedVictimNameList
+                                                                          .value,
+                                                                  onValueChanged:
+                                                                      controller
+                                                                          .onValueVictimNameChanged,
                                                                 ),
                                                               ),
-                                                            ],
-                                                          ),
-                                                          Dimens.boxHeight370,
-                                                          Row(
-                                                            children: [
-                                                              CustomRichText(
+                                                            ),
+                                                          ],
+                                                        ),
+                                                        Dimens.boxHeight5,
+                                                        Row(
+                                                          children: [
+                                                            SizedBox(
+                                                              width: 140,
+                                                              child: CustomRichText(
                                                                   title:
-                                                                      'Action taken Date & Time: '),
-                                                              Dimens.boxWidth10,
-                                                              SizedBox(
-                                                                  width: MediaQuery.of(
-                                                                              context)
-                                                                          .size
-                                                                          .width /
-                                                                      5,
-                                                                  child: _buildActionTakenDateTimeField_web(
-                                                                      context)),
-                                                            ],
-                                                          ),
-                                                          Dimens.boxHeight5,
-                                                          Row(
-                                                            children: [
-                                                              SizedBox(
-                                                                width: 140,
+                                                                      'Incident Investigation Done By: '),
+                                                            ),
+                                                            Dimens.boxWidth10,
+                                                            SizedBox(
+                                                              width: MediaQuery.of(
+                                                                          context)
+                                                                      .size
+                                                                      .width /
+                                                                  5,
+                                                              child: Obx(
+                                                                () =>
+                                                                    DropdownWebWidget(
+                                                                  dropdownList:
+                                                                      controller
+                                                                          .incidentInvestigationDoneByList,
+                                                                  isValueSelected:
+                                                                      controller
+                                                                          .isincidentInvestigationDoneByListSelected
+                                                                          .value,
+                                                                  selectedValue:
+                                                                      controller
+                                                                          .selectedIncidentInvestigationDoneByList
+                                                                          .value,
+                                                                  onValueChanged:
+                                                                      controller
+                                                                          .onValueChanged,
+                                                                ),
+                                                              ),
+                                                            ),
+                                                          ],
+                                                        ),
+                                                        Dimens.boxHeight5,
+                                                        Row(
+                                                          children: [
+                                                            CustomRichText(
+                                                                title:
+                                                                    'Risk Type: '),
+                                                            Dimens.boxWidth10,
+                                                            SizedBox(
+                                                              width: MediaQuery.of(
+                                                                          context)
+                                                                      .size
+                                                                      .width /
+                                                                  5,
+                                                              child: Obx(
+                                                                () =>
+                                                                    DropdownWebWidget(
+                                                                  dropdownList:
+                                                                      controller
+                                                                          .riskTypeList,
+                                                                  isValueSelected:
+                                                                      controller
+                                                                          .isRiskTypeListSelected
+                                                                          .value,
+                                                                  selectedValue:
+                                                                      controller
+                                                                          .selectedRiskTypeList
+                                                                          .value,
+                                                                  onValueChanged:
+                                                                      controller
+                                                                          .onValueChanged,
+                                                                ),
+                                                              ),
+                                                            ),
+                                                          ],
+                                                        ),
+                                                        Dimens.boxHeight20,
+                                                        Row(
+                                                          children: [
+                                                            CustomRichText(
+                                                                title:
+                                                                    'Legal Applicability: '),
+                                                            Dimens.boxWidth10,
+                                                            SizedBox(
+                                                              width: MediaQuery.of(
+                                                                          context)
+                                                                      .size
+                                                                      .width /
+                                                                  5,
+                                                              child: controller
+                                                                          .id !=
+                                                                      null
+                                                                  ? controller
+                                                                              .incidentReportDetailsModel
+                                                                              .value
+                                                                              ?.legal_applicability_name ==
+                                                                          "YES"
+                                                                      ? Obx(
+                                                                          () =>
+                                                                              Switch(
+                                                                            activeColor:
+                                                                                Colors.green,
+                                                                            value:
+                                                                                controller.legalApplicabilityDetailValue.value,
+                                                                            onChanged:
+                                                                                (value) {
+                                                                              controller.legalApplicabilityDetailValue.value = value;
+                                                                              print('Legal Detail applicability: ${controller.legalApplicabilityValue.value}');
+                                                                            },
+                                                                          ),
+                                                                        )
+                                                                      : Obx(
+                                                                          () =>
+                                                                              Switch(
+                                                                            activeColor:
+                                                                                Colors.green,
+                                                                            value:
+                                                                                controller.legalApplicabilityDetailFalseValue.value,
+                                                                            onChanged:
+                                                                                (value) {
+                                                                              controller.legalApplicabilityDetailFalseValue.value = value;
+                                                                              print('Legal Detail False applicability: ${controller.legalApplicabilityValue.value}');
+                                                                            },
+                                                                          ),
+                                                                        )
+                                                                  : Obx(
+                                                                      () =>
+                                                                          Switch(
+                                                                        activeColor:
+                                                                            Colors.green,
+                                                                        value: controller
+                                                                            .legalApplicabilityValue
+                                                                            .value,
+                                                                        onChanged:
+                                                                            (value) {
+                                                                          controller
+                                                                              .legalApplicabilityValue
+                                                                              .value = value;
+                                                                          print(
+                                                                              'Legal applicability: ${controller.legalApplicabilityValue.value}');
+                                                                        },
+                                                                      ),
+                                                                    ),
+                                                            )
+                                                          ],
+                                                        ),
+                                                        //   Dimens.boxHeight5,
+                                                        // /// FILE UPLOAD WIDGET
+                                                        // SizedBox(
+                                                        //    width: MediaQuery.of(
+                                                        //             context)
+                                                        //         .size
+                                                        //         .width /
+                                                        //     3,
+                                                        //   child: Container(
+                                                        //     height: Get.height * 0.2,
+                                                        //     width: Get.width,
+                                                        //     child: Row(
+                                                        //         //
+                                                        //         children: [
+                                                        //           Expanded(
+                                                        //             flex: 2,
+                                                        //             child:
+                                                        //                 FileUploadWidgetWithDropzone(),
+                                                        //           ),
+                                                        //           Dimens.boxWidth10,
+                                                        //           Expanded(
+                                                        //               flex: 8,
+                                                        //               child:
+                                                        //                   FileUploadDetailsWidgetWeb()),
+                                                        //         ]),
+                                                        //   ),
+                                                        // ),
+
+                                                        Dimens.boxHeight5,
+                                                        Row(
+                                                          children: [
+                                                            SizedBox(
+                                                              width: 140,
+                                                              child: CustomRichText(
+                                                                  title:
+                                                                      'Damaged Asset Cost Approx: '),
+                                                            ),
+                                                            Dimens.boxWidth10,
+                                                            SizedBox(
+                                                                width: MediaQuery.of(
+                                                                            context)
+                                                                        .size
+                                                                        .width /
+                                                                    5,
+                                                                child:
+                                                                    _buildDamagedAssetsCostTextField_web(
+                                                                        context)),
+                                                          ],
+                                                        ),
+                                                        Dimens.boxHeight5,
+                                                        Row(
+                                                          children: [
+                                                            SizedBox(
+                                                              width: 140,
+                                                              child: CustomRichText(
+                                                                  title:
+                                                                      'Asset Restoration Action Taken By: '),
+                                                            ),
+                                                            Dimens.boxWidth10,
+                                                            SizedBox(
+                                                              width: MediaQuery.of(
+                                                                          context)
+                                                                      .size
+                                                                      .width /
+                                                                  5,
+                                                              child: Obx(
+                                                                () =>
+                                                                    DropdownWebWidget(
+                                                                  dropdownList:
+                                                                      controller
+                                                                          .assetRestorationActionTakenByList,
+                                                                  isValueSelected:
+                                                                      controller
+                                                                          .isAssetRestorationActionTakenByListSelected
+                                                                          .value,
+                                                                  selectedValue:
+                                                                      controller
+                                                                          .selectedAssetRestorationActionTakenByList
+                                                                          .value,
+                                                                  onValueChanged:
+                                                                      controller
+                                                                          .onValueAssetRestorationActionTakenByChanged,
+                                                                ),
+                                                              ),
+                                                            ),
+                                                          ],
+                                                        ),
+                                                        Dimens.boxHeight5,
+                                                        Row(
+                                                          children: [
+                                                            CustomRichText(
+                                                                title:
+                                                                    'Insurance Applicable: '),
+                                                            Dimens.boxWidth10,
+                                                            Obx(
+                                                              () => SizedBox(
+                                                                width: MediaQuery.of(
+                                                                            context)
+                                                                        .size
+                                                                        .width /
+                                                                    5,
+                                                                child: Switch(
+                                                                  activeColor:
+                                                                      Colors
+                                                                          .green,
+                                                                  value: controller
+                                                                      .insuranceApplicableValue
+                                                                      .value,
+                                                                  onChanged:
+                                                                      (value) {
+                                                                    controller
+                                                                        .insuranceApplicableValue
+                                                                        .value = value;
+                                                                  },
+                                                                ),
+                                                              ),
+                                                            ),
+                                                          ],
+                                                        ),
+                                                        Dimens.boxHeight5,
+                                                        Row(
+                                                          children: [
+                                                            controller.insuranceApplicableValue ==
+                                                                    true
+                                                                ? CustomRichText(
+                                                                    title:
+                                                                        'Insurance Available: ')
+                                                                : Container(),
+                                                            Dimens.boxWidth10,
+                                                            controller.insuranceApplicableValue ==
+                                                                    true
+                                                                ? SizedBox(
+                                                                    width: MediaQuery.of(context)
+                                                                            .size
+                                                                            .width /
+                                                                        5,
+                                                                    child: _buildInsuranceAvailableTextField_web(
+                                                                        context))
+                                                                : Container(),
+                                                          ],
+                                                        ),
+                                                        Dimens.boxHeight5,
+                                                        Row(
+                                                          children: [
+                                                            CustomRichText(
+                                                                title:
+                                                                    'Insurance Remark: '),
+                                                            Dimens.boxWidth10,
+                                                            SizedBox(
+                                                                width: MediaQuery.of(
+                                                                            context)
+                                                                        .size
+                                                                        .width /
+                                                                    5,
+                                                                child:
+                                                                    _buildInsuranceRemarkField_web(
+                                                                        context)),
+                                                          ],
+                                                        )
+                                                      ],
+                                                    ),
+                                                    ////Changes from here top for left Column
+
+                                                    ///Changes from here below for right Column
+                                                    Dimens.boxWidth50,
+                                                    Column(
+                                                      crossAxisAlignment:
+                                                          CrossAxisAlignment
+                                                              .end,
+                                                      children: [
+                                                        Row(
+                                                          children: [
+                                                            CustomRichText(
+                                                                title:
+                                                                    'Equipment Name: '),
+                                                            Dimens.boxWidth10,
+                                                            SizedBox(
+                                                              width: MediaQuery.of(
+                                                                          context)
+                                                                      .size
+                                                                      .width /
+                                                                  5,
+                                                              child: Obx(
+                                                                () =>
+                                                                    DropdownWebWidget(
+                                                                  dropdownList:
+                                                                      controller
+                                                                          .eqipmentNameList,
+                                                                  isValueSelected:
+                                                                      controller
+                                                                          .isEquipmentNameSelected
+                                                                          .value,
+                                                                  selectedValue:
+                                                                      controller
+                                                                          .selectedEquipmentName
+                                                                          .value,
+                                                                  onValueChanged:
+                                                                      controller
+                                                                          .onValueChanged,
+                                                                ),
+                                                              ),
+                                                            ),
+                                                          ],
+                                                        ),
+                                                        // Dimens.boxHeight5,
+                                                        Row(
+                                                          children: [
+                                                            CustomRichText(
+                                                                title:
+                                                                    'Reporting date & Time: '),
+                                                            Dimens.boxWidth10,
+                                                            SizedBox(
+                                                              width: MediaQuery.of(
+                                                                          context)
+                                                                      .size
+                                                                      .width /
+                                                                  5,
+                                                              child:
+                                                                  _buildReportingDateTimeField_web(
+                                                                context,
+                                                              ),
+                                                            ),
+                                                          ],
+                                                        ),
+                                                        Dimens.boxHeight370,
+                                                        Row(
+                                                          children: [
+                                                            CustomRichText(
+                                                                title:
+                                                                    'Action taken Date & Time: '),
+                                                            Dimens.boxWidth10,
+                                                            SizedBox(
+                                                                width: MediaQuery.of(
+                                                                            context)
+                                                                        .size
+                                                                        .width /
+                                                                    5,
+                                                                child:
+                                                                    _buildActionTakenDateTimeField_web(
+                                                                        context)),
+                                                          ],
+                                                        ),
+                                                        Dimens.boxHeight5,
+                                                        Row(
+                                                          children: [
+                                                            SizedBox(
+                                                              width: 140,
+                                                              child: CustomRichText(
+                                                                  title:
+                                                                      'Incident Investigation Verification Done By: '),
+                                                            ),
+                                                            Dimens.boxWidth10,
+                                                            SizedBox(
+                                                              width: MediaQuery.of(
+                                                                          context)
+                                                                      .size
+                                                                      .width /
+                                                                  5,
+                                                              child: Obx(
+                                                                () =>
+                                                                    DropdownWebWidget(
+                                                                  dropdownList:
+                                                                      controller
+                                                                          .incidentInvestigationVerificationDoneByList,
+                                                                  isValueSelected:
+                                                                      controller
+                                                                          .isincidentInvestigationVerificationDoneByListSelected
+                                                                          .value,
+                                                                  selectedValue:
+                                                                      controller
+                                                                          .selectedIncidentInvestigationVerificationDoneByList
+                                                                          .value,
+                                                                  onValueChanged:
+                                                                      controller
+                                                                          .onValueIncidentVerificationChanged,
+                                                                ),
+                                                              ),
+                                                            ),
+                                                          ],
+                                                        ),
+                                                        Dimens.boxHeight5,
+                                                        Row(
+                                                          children: [
+                                                            CustomRichText(
+                                                                title:
+                                                                    'ESI Applicability: '),
+                                                            Dimens.boxWidth10,
+                                                            SizedBox(
+                                                              width: MediaQuery.of(
+                                                                          context)
+                                                                      .size
+                                                                      .width /
+                                                                  5,
+                                                              child: controller
+                                                                          .id !=
+                                                                      null
+                                                                  ? controller
+                                                                              .incidentReportDetailsModel
+                                                                              .value
+                                                                              ?.esi_applicability_name ==
+                                                                          "YES"
+                                                                      ? Obx(
+                                                                          () =>
+                                                                              Switch(
+                                                                            activeColor:
+                                                                                Colors.green,
+                                                                            value:
+                                                                                controller.esiApplicabilityDetailValue.value,
+                                                                            onChanged:
+                                                                                (value) {
+                                                                              controller.esiApplicabilityDetailValue.value = value;
+                                                                              print('ESI Detail applicability: ${controller.esiApplicabilityDetailValue.value}');
+                                                                            },
+                                                                          ),
+                                                                        )
+                                                                      : Obx(
+                                                                          () =>
+                                                                              Switch(
+                                                                            activeColor:
+                                                                                Colors.green,
+                                                                            value:
+                                                                                controller.esiApplicabilityDetailFalseValue.value,
+                                                                            onChanged:
+                                                                                (value) {
+                                                                              controller.esiApplicabilityDetailFalseValue.value = value;
+                                                                              print('ESI Detail False applicability: ${controller.esiApplicabilityDetailFalseValue.value}');
+                                                                            },
+                                                                          ),
+                                                                        )
+                                                                  : Obx(
+                                                                      () =>
+                                                                          Switch(
+                                                                        activeColor:
+                                                                            Colors.green,
+                                                                        value: controller
+                                                                            .esiApplicabilityValue
+                                                                            .value,
+                                                                        onChanged:
+                                                                            (value) {
+                                                                          controller
+                                                                              .esiApplicabilityValue
+                                                                              .value = value;
+                                                                        },
+                                                                      ),
+                                                                    ),
+                                                            ),
+                                                          ],
+                                                        ),
+                                                        Dimens.boxHeight5,
+                                                        Row(
+                                                          children: [
+                                                            CustomRichText(
+                                                                title:
+                                                                    'RCA Upload Required: '),
+                                                            Dimens.boxWidth10,
+                                                            SizedBox(
+                                                              width: MediaQuery.of(
+                                                                          context)
+                                                                      .size
+                                                                      .width /
+                                                                  5,
+                                                              child: controller
+                                                                          .id !=
+                                                                      null
+                                                                  ? controller
+                                                                              .incidentReportDetailsModel
+                                                                              .value
+                                                                              ?.rca_required_name ==
+                                                                          "YES"
+                                                                      ? Obx(
+                                                                          () =>
+                                                                              Switch(
+                                                                            activeColor:
+                                                                                Colors.green,
+                                                                            value:
+                                                                                controller.rCAUploadRequiredDetailValue.value,
+                                                                            onChanged:
+                                                                                (value) {
+                                                                              controller.rCAUploadRequiredDetailValue.value = value;
+                                                                              print('RCA Detail Upload Required: ${controller.rCAUploadRequiredDetailValue.value}');
+                                                                            },
+                                                                          ),
+                                                                        )
+                                                                      : Obx(
+                                                                          () =>
+                                                                              Switch(
+                                                                            activeColor:
+                                                                                Colors.green,
+                                                                            value:
+                                                                                controller.rCAUploadRequiredDetailFalseValue.value,
+                                                                            onChanged:
+                                                                                (value) {
+                                                                              controller.rCAUploadRequiredDetailFalseValue.value = value;
+                                                                              print('RCA Detail False Upload Required: ${controller.rCAUploadRequiredDetailFalseValue.value}');
+                                                                            },
+                                                                          ),
+                                                                        )
+                                                                  : Obx(
+                                                                      () =>
+                                                                          Switch(
+                                                                        activeColor:
+                                                                            Colors.green,
+                                                                        value: controller
+                                                                            .rCAUploadRequiredValue
+                                                                            .value,
+                                                                        onChanged:
+                                                                            (value) {
+                                                                          controller
+                                                                              .rCAUploadRequiredValue
+                                                                              .value = value;
+                                                                        },
+                                                                      ),
+                                                                    ),
+                                                            )
+                                                          ],
+                                                        ),
+                                                        Dimens.boxHeight10,
+                                                        Row(
+                                                          children: [
+                                                            SizedBox(
+                                                                width: 150,
                                                                 child: CustomRichText(
                                                                     title:
-                                                                        'Incident Investigation Verification Done By: '),
-                                                              ),
-                                                              Dimens.boxWidth10,
-                                                              SizedBox(
+                                                                        'Gen Loss Due To Asset Damage')),
+                                                            Dimens.boxWidth10,
+                                                            SizedBox(
                                                                 width: MediaQuery.of(
                                                                             context)
                                                                         .size
                                                                         .width /
                                                                     5,
-                                                                child: Obx(
-                                                                  () =>
-                                                                      DropdownWebWidget(
-                                                                    dropdownList:
-                                                                        controller
-                                                                            .incidentInvestigationVerificationDoneByList,
-                                                                    isValueSelected:
-                                                                        controller
-                                                                            .isincidentInvestigationVerificationDoneByListSelected
-                                                                            .value,
-                                                                    selectedValue:
-                                                                        controller
-                                                                            .selectedIncidentInvestigationVerificationDoneByList
-                                                                            .value,
-                                                                    onValueChanged:
-                                                                        controller
-                                                                            .onValueIncidentVerificationChanged,
-                                                                  ),
-                                                                ),
-                                                              ),
-                                                            ],
-                                                          ),
-                                                          Dimens.boxHeight5,
-                                                          Row(
-                                                            children: [
-                                                              CustomRichText(
-                                                                  title:
-                                                                      'ESI Applicability: '),
-                                                              Dimens.boxWidth10,
-                                                              SizedBox(
-                                                                width: MediaQuery.of(
-                                                                            context)
-                                                                        .size
-                                                                        .width /
-                                                                    5,
-                                                                child: controller
-                                                                            .id !=
-                                                                        null
-                                                                    ? controller.incidentReportDetailsModel.value?.esi_applicability_name ==
-                                                                            "YES"
-                                                                        ? Obx(
-                                                                            () =>
-                                                                                Switch(
-                                                                              activeColor: Colors.green,
-                                                                              value: controller.esiApplicabilityDetailValue.value,
-                                                                              onChanged: (value) {
-                                                                                controller.esiApplicabilityDetailValue.value = value;
-                                                                                print('ESI Detail applicability: ${controller.esiApplicabilityDetailValue.value}');
-                                                                              },
-                                                                            ),
-                                                                          )
-                                                                        : Obx(
-                                                                            () =>
-                                                                                Switch(
-                                                                              activeColor: Colors.green,
-                                                                              value: controller.esiApplicabilityDetailFalseValue.value,
-                                                                              onChanged: (value) {
-                                                                                controller.esiApplicabilityDetailFalseValue.value = value;
-                                                                                print('ESI Detail False applicability: ${controller.esiApplicabilityDetailFalseValue.value}');
-                                                                              },
-                                                                            ),
-                                                                          )
-                                                                    : Obx(
-                                                                        () =>
-                                                                            Switch(
-                                                                          activeColor:
-                                                                              Colors.green,
-                                                                          value: controller
-                                                                              .esiApplicabilityValue
-                                                                              .value,
-                                                                          onChanged:
-                                                                              (value) {
-                                                                            controller.esiApplicabilityValue.value =
-                                                                                value;
-                                                                          },
-                                                                        ),
-                                                                      ),
-                                                              ),
-                                                            ],
-                                                          ),
-                                                          Dimens.boxHeight5,
-                                                          Row(
-                                                            children: [
-                                                              CustomRichText(
-                                                                  title:
-                                                                      'RCA Upload Required: '),
-                                                              Dimens.boxWidth10,
-                                                              SizedBox(
-                                                                width: MediaQuery.of(
-                                                                            context)
-                                                                        .size
-                                                                        .width /
-                                                                    5,
-                                                                child: controller
-                                                                            .id !=
-                                                                        null
-                                                                    ? controller.incidentReportDetailsModel.value?.rca_required_name ==
-                                                                            "YES"
-                                                                        ? Obx(
-                                                                            () =>
-                                                                                Switch(
-                                                                              activeColor: Colors.green,
-                                                                              value: controller.rCAUploadRequiredDetailValue.value,
-                                                                              onChanged: (value) {
-                                                                                controller.rCAUploadRequiredDetailValue.value = value;
-                                                                                print('RCA Detail Upload Required: ${controller.rCAUploadRequiredDetailValue.value}');
-                                                                              },
-                                                                            ),
-                                                                          )
-                                                                        : Obx(
-                                                                            () =>
-                                                                                Switch(
-                                                                              activeColor: Colors.green,
-                                                                              value: controller.rCAUploadRequiredDetailFalseValue.value,
-                                                                              onChanged: (value) {
-                                                                                controller.rCAUploadRequiredDetailFalseValue.value = value;
-                                                                                print('RCA Detail False Upload Required: ${controller.rCAUploadRequiredDetailFalseValue.value}');
-                                                                              },
-                                                                            ),
-                                                                          )
-                                                                    : Obx(
-                                                                        () =>
-                                                                            Switch(
-                                                                          activeColor:
-                                                                              Colors.green,
-                                                                          value: controller
-                                                                              .rCAUploadRequiredValue
-                                                                              .value,
-                                                                          onChanged:
-                                                                              (value) {
-                                                                            controller.rCAUploadRequiredValue.value =
-                                                                                value;
-                                                                          },
-                                                                        ),
-                                                                      ),
-                                                              )
-                                                            ],
-                                                          ),
-                                                          Dimens.boxHeight10,
-                                                          Row(
-                                                            children: [
-                                                              SizedBox(
-                                                                  width: 150,
-                                                                  child: CustomRichText(
-                                                                      title:
-                                                                          'Gen Loss Due To Asset Damage')),
-                                                              Dimens.boxWidth10,
-                                                              SizedBox(
-                                                                  width: MediaQuery.of(
-                                                                              context)
-                                                                          .size
-                                                                          .width /
-                                                                      5,
-                                                                  child: _buildGenLossAssetDamageTextField_web(
-                                                                      context)),
-                                                            ],
-                                                          ),
+                                                                child:
+                                                                    _buildGenLossAssetDamageTextField_web(
+                                                                        context)),
+                                                          ],
+                                                        ),
 
-                                                          Dimens.boxHeight100,
-                                                          Row(
-                                                            children: [
-                                                              CustomRichText(
-                                                                  title:
-                                                                      'Insurance Status'),
-                                                              Dimens.boxWidth10,
-                                                              SizedBox(
-                                                                width: MediaQuery.of(
-                                                                            context)
-                                                                        .size
-                                                                        .width /
-                                                                    5,
-                                                                child: Obx(
-                                                                  () =>
-                                                                      DropdownWebWidget(
-                                                                    dropdownList:
-                                                                        controller
-                                                                            .typePermitList,
-                                                                    isValueSelected:
-                                                                        controller
-                                                                            .isTypePermitSelected
-                                                                            .value,
-                                                                    selectedValue:
-                                                                        controller
-                                                                            .selectedTypePermit
-                                                                            .value,
-                                                                    onValueChanged:
-                                                                        controller
-                                                                            .onValueChanged,
-                                                                  ),
+                                                        Dimens.boxHeight100,
+                                                        Row(
+                                                          children: [
+                                                            CustomRichText(
+                                                                title:
+                                                                    'Insurance Status'),
+                                                            Dimens.boxWidth10,
+                                                            SizedBox(
+                                                              width: MediaQuery.of(
+                                                                          context)
+                                                                      .size
+                                                                      .width /
+                                                                  5,
+                                                              child: Obx(
+                                                                () =>
+                                                                    DropdownWebWidget(
+                                                                  dropdownList:
+                                                                      controller
+                                                                          .typePermitList,
+                                                                  isValueSelected:
+                                                                      controller
+                                                                          .isTypePermitSelected
+                                                                          .value,
+                                                                  selectedValue:
+                                                                      controller
+                                                                          .selectedTypePermit
+                                                                          .value,
+                                                                  onValueChanged:
+                                                                      controller
+                                                                          .onValueChanged,
                                                                 ),
                                                               ),
-                                                            ],
-                                                          )
-                                                        ],
+                                                            ),
+                                                          ],
+                                                        )
+                                                      ],
+                                                    ),
+                                                  ],
+                                                ),
+                                                Dimens.boxHeight20,
+
+                                                /// FILE UPLOAD WIDGET
+                                                Container(
+                                                  height: Get.height * 0.2,
+                                                  width: Get.width,
+                                                  child: Row(
+                                                      //
+                                                      children: [
+                                                        Expanded(
+                                                          flex: 2,
+                                                          child:
+                                                              FileUploadWidgetWithDropzone(),
+                                                        ),
+                                                        Dimens.boxWidth10,
+                                                        Expanded(
+                                                            flex: 8,
+                                                            child:
+                                                                FileUploadDetailsWidgetWeb()),
+                                                      ]),
+                                                ),
+
+                                                ////Container used
+                                                // Container(
+                                                //       width: MediaQuery.of(context).size.width / 1,
+                                                //       height: 50,
+                                                //       color: Colors.red,
+                                                //     ),
+                                              ],
+                                            ),
+                                          ),
+                                          ////
+
+                                          ///Incident Report History
+                                          controller.id != null
+                                              ? Container(
+                                                  margin: Dimens.edgeInsets20,
+                                                  height: 200,
+                                                  decoration: BoxDecoration(
+                                                    border: Border.all(
+                                                      color: ColorValues
+                                                          .lightGreyColorWithOpacity35,
+                                                      width: 1,
+                                                    ),
+                                                    boxShadow: [
+                                                      BoxShadow(
+                                                        color: ColorValues
+                                                            .appBlueBackgroundColor,
+                                                        spreadRadius: 2,
+                                                        blurRadius: 5,
+                                                        offset: Offset(0, 2),
                                                       ),
                                                     ],
                                                   ),
-                                                  Dimens.boxHeight20,
-
-                                                  /// FILE UPLOAD WIDGET
-                                                  Container(
-                                                    height: Get.height * 0.2,
-                                                    width: Get.width,
-                                                    child: Row(
-                                                        //
-                                                        children: [
-                                                          Expanded(
-                                                            flex: 2,
-                                                            child:
-                                                                FileUploadWidgetWithDropzone(),
-                                                          ),
-                                                          Dimens.boxWidth10,
-                                                          Expanded(
-                                                              flex: 8,
-                                                              child:
-                                                                  FileUploadDetailsWidgetWeb()),
-                                                        ]),
-                                                  ),
-
-                                                  ////Container used
-                                                  // Container(
-                                                  //       width: MediaQuery.of(context).size.width / 1,
-                                                  //       height: 50,
-                                                  //       color: Colors.red,
-                                                  //     ),
-                                                ],
-                                              ),
-                                            ),
-                                            ////
-
-                                            ///Incident Report History
-                                            controller.id != null
-                                                ? Container(
-                                                    margin: Dimens.edgeInsets20,
-                                                    height: 200,
-                                                    decoration: BoxDecoration(
-                                                      border: Border.all(
+                                                  child: Column(
+                                                    children: [
+                                                      Padding(
+                                                        padding:
+                                                            const EdgeInsets
+                                                                .all(10.0),
+                                                        child: Row(
+                                                          children: [
+                                                            Text(
+                                                              "Incident Report History ",
+                                                              style: Styles
+                                                                  .blue700,
+                                                            ),
+                                                          ],
+                                                        ),
+                                                      ),
+                                                      Divider(
                                                         color: ColorValues
-                                                            .lightGreyColorWithOpacity35,
-                                                        width: 1,
+                                                            .greyLightColour,
                                                       ),
-                                                      boxShadow: [
-                                                        BoxShadow(
-                                                          color: ColorValues
-                                                              .appBlueBackgroundColor,
-                                                          spreadRadius: 2,
-                                                          blurRadius: 5,
-                                                          offset: Offset(0, 2),
+                                                      Expanded(
+                                                        child:
+                                                            ScrollableTableView(
+                                                          columns: [
+                                                            "Time Stamp",
+                                                            "Module Ref ID",
+                                                            "Comment",
+                                                            "Module Type",
+                                                            "Status",
+                                                          ].map((column) {
+                                                            return TableViewColumn(
+                                                              label: column,
+                                                              minWidth:
+                                                                  Get.width *
+                                                                      0.15,
+                                                            );
+                                                          }).toList(),
+                                                          rows: [
+                                                            ...List.generate(
+                                                              controller
+                                                                      .historyList
+                                                                      ?.length ??
+                                                                  0,
+                                                              (index) {
+                                                                var getHistoryListDetails =
+                                                                    controller
+                                                                            .historyList?[
+                                                                        index];
+                                                                return [
+                                                                  '${getHistoryListDetails?.createdAt}',
+                                                                  '${getHistoryListDetails?.moduleRefId ?? ''}',
+                                                                  '${getHistoryListDetails?.comment ?? ''}',
+                                                                  '${getHistoryListDetails?.moduleType ?? ''}',
+                                                                  '${getHistoryListDetails?.status_name ?? ''}',
+                                                                ];
+                                                              },
+                                                            ),
+                                                            // [
+                                                          ].map((record) {
+                                                            return TableViewRow(
+                                                              height: 30,
+                                                              cells: record
+                                                                  .map((value) {
+                                                                return TableViewCell(
+                                                                  child: Text(
+                                                                      value),
+                                                                );
+                                                              }).toList(),
+                                                            );
+                                                          }).toList(),
                                                         ),
-                                                      ],
-                                                    ),
-                                                    child: Column(
-                                                      children: [
-                                                        Padding(
-                                                          padding:
-                                                              const EdgeInsets
-                                                                  .all(10.0),
-                                                          child: Row(
-                                                            children: [
-                                                              Text(
-                                                                "Incident Report History ",
-                                                                style: Styles
-                                                                    .blue700,
-                                                              ),
-                                                            ],
-                                                          ),
-                                                        ),
-                                                        Divider(
-                                                          color: ColorValues
-                                                              .greyLightColour,
-                                                        ),
-                                                        Expanded(
-                                                          child:
-                                                              ScrollableTableView(
-                                                            columns: [
-                                                              "Time Stamp",
-                                                              "Module Ref ID",
-                                                              "Comment",
-                                                              "Module Type",
-                                                              "Status",
-                                                            ].map((column) {
-                                                              return TableViewColumn(
-                                                                label: column,
-                                                                minWidth:
-                                                                    Get.width *
-                                                                        0.15,
-                                                              );
-                                                            }).toList(),
-                                                            rows: [
-                                                              ...List.generate(
-                                                                controller
-                                                                        .historyList
-                                                                        ?.length ??
-                                                                    0,
-                                                                (index) {
-                                                                  var getHistoryListDetails =
-                                                                      controller
-                                                                              .historyList?[
-                                                                          index];
-                                                                  return [
-                                                                    '${getHistoryListDetails?.createdAt}',
-                                                                    '${getHistoryListDetails?.moduleRefId ?? ''}',
-                                                                    '${getHistoryListDetails?.comment ?? ''}',
-                                                                    '${getHistoryListDetails?.moduleType ?? ''}',
-                                                                    '${getHistoryListDetails?.status_name ?? ''}',
-                                                                  ];
-                                                                },
-                                                              ),
-                                                              // [
-                                                            ].map((record) {
-                                                              return TableViewRow(
-                                                                height: 30,
-                                                                cells: record
-                                                                    .map(
-                                                                        (value) {
-                                                                  return TableViewCell(
-                                                                    child: Text(
-                                                                        value),
-                                                                  );
-                                                                }).toList(),
-                                                              );
-                                                            }).toList(),
-                                                          ),
-                                                        ),
-                                                      ],
-                                                    ),
-                                                  )
-                                                : Container(),
+                                                      ),
+                                                    ],
+                                                  ),
+                                                )
+                                              : Container(),
 
-                                            Row(
-                                              mainAxisAlignment:
-                                                  MainAxisAlignment.center,
-                                              children: [
-                                                SizedBox(
-                                                  height: 150,
-                                                ),
-                                                CustomElevatedButton(
-                                                  backgroundColor:
-                                                      ColorValues.appRedColor,
-                                                  onPressed: () {
-                                                    Get.offAndToNamed(Routes
-                                                        .incidentReportListWeb);
-                                                  },
-                                                  text: 'Cancel',
-                                                ),
-                                                SizedBox(
-                                                  width: 20,
-                                                ),
-                                                controller.id == null
-                                                    ? CustomElevatedButton(
-                                                        backgroundColor:
-                                                            ColorValues
-                                                                .appGreenColor,
-                                                        onPressed: () {
-                                                          // showAlertDialog();
-                                                          controller
-                                                              .createIncidentReport();
-                                                        },
-                                                        text: 'Submit',
-                                                      )
-                                                    : CustomElevatedButton(
-                                                        backgroundColor:
-                                                            ColorValues
-                                                                .appDarkBlueColor,
-                                                        onPressed: () {
-                                                          // showAlertDialog();
-                                                          controller
-                                                              .updateIncidentReport();
-                                                        },
-                                                        text: 'Update',
-                                                      ),
-                                                SizedBox(
-                                                  width: 20,
-                                                ),
-                                                controller
-                                                            .incidentReportDetailsModel
-                                                            .value
-                                                            ?.status_short ==
-                                                        "Rejected"
-                                                    ? CustomElevatedButton(
-                                                        backgroundColor:
-                                                            ColorValues
-                                                                .appGreenColor,
-                                                        onPressed: () {
-                                                          // showAlertDialog();
-                                                          controller
-                                                              .createIncidentReport();
-                                                        },
-                                                        text: 'Re-Submit',
-                                                      )
-                                                    : Container()
-                                              ],
-                                            ),
-                                          ],
-                                        ),
-                                      );
-                                    }),
-                              ],
-                            ),
+                                          Row(
+                                            mainAxisAlignment:
+                                                MainAxisAlignment.center,
+                                            children: [
+                                              SizedBox(
+                                                height: 150,
+                                              ),
+                                              CustomElevatedButton(
+                                                backgroundColor:
+                                                    ColorValues.appRedColor,
+                                                onPressed: () {
+                                                  Get.offAndToNamed(Routes
+                                                      .incidentReportListWeb);
+                                                },
+                                                text: 'Cancel',
+                                              ),
+                                              SizedBox(
+                                                width: 20,
+                                              ),
+                                              controller.id == null
+                                                  ? CustomElevatedButton(
+                                                      backgroundColor:
+                                                          ColorValues
+                                                              .appGreenColor,
+                                                      onPressed: () {
+                                                        // showAlertDialog();
+                                                        controller
+                                                            .createIncidentReport();
+                                                      },
+                                                      text: 'Submit',
+                                                    )
+                                                  : CustomElevatedButton(
+                                                      backgroundColor:
+                                                          ColorValues
+                                                              .appDarkBlueColor,
+                                                      onPressed: () {
+                                                        // showAlertDialog();
+                                                        controller
+                                                            .updateIncidentReport();
+                                                      },
+                                                      text: 'Update',
+                                                    ),
+                                              SizedBox(
+                                                width: 20,
+                                              ),
+                                              controller.incidentReportDetailsModel
+                                                          .value?.status_short ==
+                                                      "Rejected"
+                                                  ? CustomElevatedButton(
+                                                      backgroundColor:
+                                                          ColorValues
+                                                              .appGreenColor,
+                                                      onPressed: () {
+                                                        // showAlertDialog();
+                                                        controller
+                                                            .createIncidentReport();
+                                                      },
+                                                      text: 'Re-Submit',
+                                                    )
+                                                  : Container()
+                                            ],
+                                          ),
+                                        ],
+                                      ),
+                                    );
+                                  }),
+                            ],
                           ),
                         ),
-                      ],
-                    ),
+                      ),
+                    ],
                   ),
                 ),
               ),

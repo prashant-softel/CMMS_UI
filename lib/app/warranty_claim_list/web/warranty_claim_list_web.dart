@@ -131,7 +131,7 @@ class _WarrantyClaimListWebState extends State<WarrantyClaimListWeb> {
                                                                 .kWarrantyClaimFeatureId &&
                                                         e.add ==
                                                             UserAccessConstants
-                                                                .kNotHaveAddAccess)
+                                                                .kHaveAddAccess)
                                                     .length >
                                                 0
                                             ? ActionButton(
@@ -244,7 +244,7 @@ class _WarrantyClaimListWebState extends State<WarrantyClaimListWeb> {
                                                             return TableViewColumn(
                                                               minWidth:
                                                                   Get.width *
-                                                                      0.06,
+                                                                      0.08,
                                                               label: column,
                                                             );
                                                           }).toList(),
