@@ -3808,7 +3808,6 @@ class ConnectHelper {
     return responseModel;
   }
 
-
   Future<ResponseModel> updateSafetyMeasure({
     required String auth,
     bool? isLoading,
@@ -3827,7 +3826,6 @@ class ConnectHelper {
 
     return responseModel;
   }
-
 
   Future<ResponseModel> getCountryList({
     String? auth,
@@ -6119,6 +6117,7 @@ class ConnectHelper {
 
     return responseModel;
   }
+
   Future<ResponseModel> getAssetCategoryList(
       {required bool isLoading, required String auth}) async {
     ResponseModel responseModel = await apiWrapper.makeRequest(
@@ -6132,6 +6131,7 @@ class ConnectHelper {
     );
     return responseModel;
   }
+
   Future<ResponseModel> getAssetTypeSMList(
       {required bool isLoading, required String auth, int? asset_id}) async {
     ResponseModel responseModel = await apiWrapper.makeRequest(
@@ -6145,6 +6145,7 @@ class ConnectHelper {
     );
     return responseModel;
   }
+
   Future<ResponseModel> getUnitMeasurementList(
       {required bool isLoading, required String auth, int? facilityId}) async {
     ResponseModel responseModel = await apiWrapper.makeRequest(
@@ -6165,11 +6166,11 @@ class ConnectHelper {
     required assetListJsonString,
   }) async {
     var responseModel =
-    // responseModel =
-    await apiWrapper.makeRequest(
+        // responseModel =
+        await apiWrapper.makeRequest(
       'SMMaster/AddAssetMaster', //AddBusiness
       Request.post,
-      assetListJsonString ,
+      assetListJsonString,
       isLoading ?? false,
       {
         'Content-Type': 'application/json',
@@ -6206,8 +6207,8 @@ class ConnectHelper {
       dynamic startDate,
       dynamic endDate}) async {
     var responseModel = await apiWrapper.makeRequest(
-      'AuditPlan/GetAuditPlanList?facility_id=45&fromDate=2023-10-01&toDate=2023-10-30',
-      //   'PMScheduleView/GetPMTaskList?facility_id=${facilityId}&start_date=${endDate}&end_date=${startDate}',
+      // 'AuditPlan/GetAuditPlanList?facility_id=45&fromDate=2023-07-01&toDate=2023-10-21',
+      'AuditPlan/GetAuditPlanList?facility_id=${facilityId}&fromDate=${endDate}&toDate=${startDate}',
       Request.get,
       null,
       isLoading ?? true,

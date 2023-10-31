@@ -71,10 +71,10 @@ class JobListController extends GetxController {
     facilityIdStreamSubscription = homeController.facilityId$.listen((event) {
       facilityId = event;
       // Future.delayed(Duration(seconds: 1), () {
-      userId = varUserAccessModel.value.user_id ?? 0;
-      if (userId > 0) {
-        getJobList(userId, false);
-      }
+      // userId = varUserAccessModel.value.user_id ?? 0;
+      // if (userId != null) {
+      getJobList(userId, true);
+      // }
       // });
     });
     facilityNameStreamSubscription =
@@ -113,7 +113,7 @@ class JobListController extends GetxController {
     if (facilityId > 0) {
       final _jobList = await jobListPresenter.getJobList(
         facilityId: facilityId,
-        userId: userId,
+        // userId: userId,
         self_view: varUserAccessModel.value.access_list!
                     .where((e) =>
                         e.feature_id == UserAccessConstants.kJobFeatureId &&

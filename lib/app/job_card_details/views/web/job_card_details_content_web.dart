@@ -103,7 +103,7 @@ class JobCardDetailsContentWeb extends GetView<JobCardDetailsController> {
             margin: Dimens.edgeInsets5,
             decoration: BoxDecoration(
               color: ColorValues.whiteColor,
-              // border: Border.all(
+              // border: Border.all(jobli
               //   color: ColorValues.appDarkBlueColor,
               //   style: BorderStyle.solid,
               //   width: 3,

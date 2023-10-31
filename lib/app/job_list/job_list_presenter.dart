@@ -13,7 +13,7 @@ class JobListPresenter {
   Future<List<JobModel?>?> getJobList({
     String? auth,
     int? facilityId,
-    int? userId,
+    // int? userId,
     required bool self_view,
     bool? isLoading,
   }) async =>
@@ -23,5 +23,4 @@ class JobListPresenter {
         self_view: self_view,
         isLoading: isLoading ?? false,
       );
-      
 }

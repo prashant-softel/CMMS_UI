@@ -13,8 +13,11 @@ class AuditPlanListModel {
   int? frequency;
   int? status;
   String? short_status;
-  bool? frequencyApplicable;
+  String? frequencyApplicable;
 
+  int? checklist_id;
+  String? description;
+  String? schedule_Date;
   AuditPlanListModel(
       {this.auditee_Emp_Name,
       this.auditor_Emp_Name,
@@ -24,7 +27,10 @@ class AuditPlanListModel {
       this.id,
       this.plan_number,
       this.short_status,
-      this.status});
+      this.status,
+      this.checklist_id,
+      this.description,
+      this.schedule_Date});
 
   factory AuditPlanListModel.fromJson(Map<String, dynamic> parsedJson) {
     return AuditPlanListModel(
@@ -37,6 +43,9 @@ class AuditPlanListModel {
       plan_number: parsedJson['plan_number'],
       short_status: parsedJson['short_status'],
       status: parsedJson['status'],
+      checklist_id: parsedJson['checklist_id'],
+      description: parsedJson['description'],
+      schedule_Date: parsedJson['schedule_Date'],
     );
   }
   Map<String, dynamic> toJson() => {
@@ -49,5 +58,8 @@ class AuditPlanListModel {
         "plan_number": plan_number,
         "short_status": short_status,
         "status": status,
+        "checklist_id": checklist_id,
+        "description": description,
+        "schedule_Date": schedule_Date,
       };
 }
