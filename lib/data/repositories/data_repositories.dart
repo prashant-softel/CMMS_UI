@@ -552,6 +552,22 @@ class DataRepository extends DomainRepository {
     );
   }
 
+  Future<ResponseModel> transactionReport({
+    int? facility_id,
+    String? start_date,
+    required String end_date,
+    required bool isLoading,
+    required String auth,
+  }) async {
+    return await connectHelper.transactionReport(
+      isLoading: isLoading,
+      auth: auth,
+      facility_id: facility_id,
+      start_date: start_date,
+      end_date: end_date,
+    );
+  }
+
   Future<ResponseModel> getRequestOrderList({
     int? facility_id,
     String? start_date,
@@ -2225,8 +2241,6 @@ class DataRepository extends DomainRepository {
     return response;
   }
 
-
-
   Future<ResponseModel> getCountryList({
     required String auth,
     bool? isLoading,
@@ -3614,6 +3628,7 @@ class DataRepository extends DomainRepository {
       // categoryIds: categoryIds,
     );
   }
+
   Future<ResponseModel> getAssetTypeSMList({
     required bool isLoading,
     required String auth,
@@ -3623,6 +3638,7 @@ class DataRepository extends DomainRepository {
       isLoading: isLoading,
     );
   }
+
   Future<ResponseModel> getUnitMeasurementList({
     // int? facilityId,
     required bool isLoading,
@@ -3646,6 +3662,7 @@ class DataRepository extends DomainRepository {
         checkAuditJsonString: checkAuditJsonString);
     return response;
   }
+
   Future<ResponseModel> createAssetSM({
     auth,
     bool? isLoading,

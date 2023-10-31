@@ -8,6 +8,7 @@ import 'package:cmms/app/utils/utility.dart';
 import 'package:cmms/app/widgets/warranty_claim_error_dialog.dart';
 import 'package:cmms/data/data.dart';
 import 'package:cmms/device/device.dart';
+import 'package:cmms/domain/models/%20%20transaction_report_list_model.dart';
 import 'package:cmms/domain/models/add_inventory_details_model.dart';
 import 'package:cmms/domain/models/add_inventory_model.dart';
 import 'package:cmms/domain/models/add_user_model.dart';
@@ -1138,6 +1139,47 @@ class Repository {
                 .toList();
 
         return _goodOrderModelList.reversed.toList();
+      } //
+      else {
+        Utility.showDialog(res.errorCode.toString() + 'getIncidentReportList');
+        return [];
+      }
+    } catch (error) {
+      print(error.toString());
+      return [];
+    }
+  }
+
+  Future<List<TransactionReportListModel>> transactionReport({
+    required int? facility_id,
+    String? start_date,
+    required String end_date,
+    required bool isLoading,
+  }) async {
+    try {
+      final auth = await getSecuredValue(LocalKeys.authToken);
+
+      log(auth);
+      final res = await _dataRepository.transactionReport(
+        facility_id: facility_id,
+        start_date: start_date,
+        end_date: end_date,
+        isLoading: isLoading,
+        auth: auth,
+      );
+      print('getGoodsOrdersList: ${res.data}');
+
+      if (!res.hasError) {
+        final jsonTransactionReportListModels = jsonDecode(res.data);
+        // print(res.data); `6
+        final List<TransactionReportListModel> _transactionReportList =
+            jsonTransactionReportListModels
+                .map<TransactionReportListModel>((m) =>
+                    TransactionReportListModel.fromJson(
+                        Map<String, dynamic>.from(m)))
+                .toList();
+
+        return _transactionReportList.reversed.toList();
       } //
       else {
         Utility.showDialog(res.errorCode.toString() + 'getIncidentReportList');

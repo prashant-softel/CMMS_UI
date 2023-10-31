@@ -751,6 +751,27 @@ class ConnectHelper {
     return responseModel;
   }
 
+  Future<ResponseModel> transactionReport({
+    required bool isLoading,
+    required String auth,
+    int? facility_id,
+    String? start_date,
+    required String end_date,
+  }) async {
+    ResponseModel responseModel = await apiWrapper.makeRequest(
+      'SMReports/GetTransactionReport?facility_id=45&actorType=2&actorID=45&fromDate=2023-10-15&toDate=2023-10-20',
+      // 'SMReports/GetTransactionReport?facility_id=$facility_id&actorType=2&actorID=45&fromDate=$end_date&toDate=$start_date',
+      Request.getMultiparts,
+      null,
+      isLoading,
+      {
+        'Authorization': 'Bearer $auth',
+      },
+    );
+
+    return responseModel;
+  }
+
   Future<ResponseModel> getRequestOrderList({
     required bool isLoading,
     required String auth,
@@ -3808,7 +3829,6 @@ class ConnectHelper {
     return responseModel;
   }
 
-
   Future<ResponseModel> updateSafetyMeasure({
     required String auth,
     bool? isLoading,
@@ -3827,7 +3847,6 @@ class ConnectHelper {
 
     return responseModel;
   }
-
 
   Future<ResponseModel> getCountryList({
     String? auth,
@@ -6119,6 +6138,7 @@ class ConnectHelper {
 
     return responseModel;
   }
+
   Future<ResponseModel> getAssetCategoryList(
       {required bool isLoading, required String auth}) async {
     ResponseModel responseModel = await apiWrapper.makeRequest(
@@ -6132,6 +6152,7 @@ class ConnectHelper {
     );
     return responseModel;
   }
+
   Future<ResponseModel> getAssetTypeSMList(
       {required bool isLoading, required String auth, int? asset_id}) async {
     ResponseModel responseModel = await apiWrapper.makeRequest(
@@ -6145,6 +6166,7 @@ class ConnectHelper {
     );
     return responseModel;
   }
+
   Future<ResponseModel> getUnitMeasurementList(
       {required bool isLoading, required String auth, int? facilityId}) async {
     ResponseModel responseModel = await apiWrapper.makeRequest(
@@ -6165,11 +6187,11 @@ class ConnectHelper {
     required assetListJsonString,
   }) async {
     var responseModel =
-    // responseModel =
-    await apiWrapper.makeRequest(
+        // responseModel =
+        await apiWrapper.makeRequest(
       'SMMaster/AddAssetMaster', //AddBusiness
       Request.post,
-      assetListJsonString ,
+      assetListJsonString,
       isLoading ?? false,
       {
         'Content-Type': 'application/json',
