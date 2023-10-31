@@ -23,6 +23,9 @@ import 'package:cmms/app/calibration_detail/calibration_detail_binding.dart';
 import 'package:cmms/app/calibration_history/calibration_history_binding.dart';
 import 'package:cmms/app/calibration_history/view/calibration_history_screen.dart';
 import 'package:cmms/app/calibration_view/calibration_view_binding.dart';
+import 'package:cmms/app/create_audit/craete_audit_binding.dart';
+
+import 'package:cmms/app/create_audit/view/create_audit_screen.dart';
 import 'package:cmms/app/create_mrs/create_mrs_binding.dart';
 import 'package:cmms/app/create_mrs/view/create_mrs_screen.dart';
 import 'package:cmms/app/create_pm_plan/create_pm_plan_binding.dart';
@@ -918,5 +921,20 @@ class AppPages {
       page: ViewMcPlaningScreen.new,
       binding: ViewMcPlaningBinding(),
     ),
+    GetPage<dynamic>(
+      name: _Paths.createAudit,
+      page: CreateAuditScreen.new,
+      binding: CreateAuditBinding(),
+    ),
+    // GetPage<dynamic>(
+    //   name: _Paths.viewAudit,
+    //   page: ViewAuditDetailScreen.new,
+    //   binding: ViewAuditDetailBinding(),
+    // ),
+    // GetPage<dynamic>(
+    //   name: _Paths.transactionReport,
+    //   page: TransactionStockReportScreen.new,
+    //   binding: TransactionStockReportBinding(),
+    // ),
   ];
 }

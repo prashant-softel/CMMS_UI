@@ -130,8 +130,7 @@ class _AuditListContentWebState extends State<AuditListContentWeb> {
                                         icon: Icons.add,
                                         label: "Add New",
                                         onPressed: () {
-                                          Get.offNamed(
-                                              Routes.moduleCleaningPlanning);
+                                          Get.offNamed(Routes.createAudit);
                                         },
                                         color: ColorValues.addNewColor,
                                       ),
@@ -258,7 +257,7 @@ class _AuditListContentWebState extends State<AuditListContentWeb> {
                                 SizedBox(
                                   height: 20,
                                 ),
-                                controller.auditPlanList.isNotEmpty
+                                controller.auditPlanList.isEmpty
                                     ? Center(child: Text('No data'))
                                     : Expanded(
                                         child: ValueListenableBuilder(

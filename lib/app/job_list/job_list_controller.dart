@@ -71,10 +71,10 @@ class JobListController extends GetxController {
     facilityIdStreamSubscription = homeController.facilityId$.listen((event) {
       facilityId = event;
       // Future.delayed(Duration(seconds: 1), () {
-      userId = varUserAccessModel.value.user_id ?? 0;
-      if (userId > 0) {
-        getJobList(userId, false);
-      }
+      // userId = varUserAccessModel.value.user_id ?? 0;
+      // if (userId != null) {
+      getJobList(userId, true);
+      // }
       // });
     });
     facilityNameStreamSubscription =
@@ -113,7 +113,7 @@ class JobListController extends GetxController {
     if (facilityId > 0) {
       final _jobList = await jobListPresenter.getJobList(
         facilityId: facilityId,
-        userId: userId,
+        // userId: userId,
         self_view: varUserAccessModel.value.access_list!
                     .where((e) =>
                         e.feature_id == UserAccessConstants.kJobFeatureId &&
@@ -148,17 +148,20 @@ class JobListController extends GetxController {
   }
 
   void goToJobCardScreen(int? jobId) {
+    clearStoreData();
+
     Get.toNamed(Routes.jobCard, arguments: {'jobId': jobId});
   }
 
   void goToEditJobScreen(int? _jobId) {
+    clearStoreData();
+
     Get.toNamed(Routes.editJob, arguments: {'jobId': _jobId});
   }
 
   void goToJobDetailsScreen(int? _jobId) {
-    final _flutterSecureStorage = const FlutterSecureStorage();
+    clearStoreData();
 
-    _flutterSecureStorage.delete(key: "jobId");
     Get.toNamed(Routes.jobDetails, arguments: {'jobId': _jobId});
   }
 
@@ -301,6 +304,10 @@ class JobListController extends GetxController {
     }
     selectedBlock.value = selectedValue;
     getJobList(userId, false);
+  }
+
+  void clearStoreData() {
+    jobListPresenter.clearValue();
   }
 
   ///

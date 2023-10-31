@@ -2881,10 +2881,7 @@ class Repository {
   ) async {
     try {
       final auth = await getSecuredValue(LocalKeys.authToken);
-      final userAcessData = await getUserAccessData(LocalKeys.userAccess);
-      final userAccessModelList = jsonDecode(userAcessData);
-      var userAccess = AccessListModel.fromJson(userAccessModelList);
-      int userId = userAccess.user_id ?? 0;
+      int userId = varUserAccessModel.value.user_id ?? 0;
 
       final res = await _dataRepository.getJobList(
         auth: auth,
@@ -2893,7 +2890,7 @@ class Repository {
         self_view: self_view,
         isLoading: isLoading ?? false,
       );
-
+      // print({"res.data", res.data});
       if (!res.hasError) {
         final jsonJobModels = jsonDecode(res.data);
         final List<JobModel> _jobModelList = jsonJobModels
@@ -2924,10 +2921,7 @@ class Repository {
     try {
       final auth = await getSecuredValue(LocalKeys.authToken);
 
-      final userAcessData = await getUserAccessData(LocalKeys.userAccess);
-      final userAccessModelList = jsonDecode(userAcessData);
-      var userAccess = AccessListModel.fromJson(userAccessModelList);
-      int userId = userAccess.user_id ?? 0;
+      int userId = varUserAccessModel.value.user_id ?? 0;
 
       final res = await _dataRepository.getNewPermitList(
         auth: auth,
@@ -9070,7 +9064,7 @@ class Repository {
           isLoading: isLoading ?? false,
           startDate: startDate,
           endDate: endDate);
-      // print(res.data);
+      print({"res.data", res.data});
       if (!res.hasError) {
         final jsonAuditPlanListModelModels = jsonDecode(res.data);
 
@@ -9079,7 +9073,7 @@ class Repository {
                 .map<AuditPlanListModel>((m) =>
                     AuditPlanListModel.fromJson(Map<String, dynamic>.from(m)))
                 .toList();
-        // print({"object", _AuditPlanListModelList});
+        print({"object", _AuditPlanListModelList});
         return _AuditPlanListModelList.reversed.toList();
       } else {
         Utility.showDialog(res.errorCode.toString() + 'getAuditPlanList');

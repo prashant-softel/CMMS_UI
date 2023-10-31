@@ -1,7 +1,6 @@
 import 'package:cmms/app/constant/constant.dart';
 import 'package:data_table_2/data_table_2.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:get/get.dart';
 
 import '../../../../domain/models/job_model.dart';
@@ -149,6 +148,8 @@ class JobListContentWeb extends StatelessWidget {
                                     icon: Icons.add,
                                     label: "Add New",
                                     onPressed: () {
+                                      controller.clearStoreData();
+
                                       controller.goToAddJobScreen();
                                     },
                                     color: ColorValues.greenlightColor,
@@ -484,10 +485,8 @@ class JobDataSource extends DataTableSource {
                         icon: Icons.visibility,
                         message: 'View',
                         onPress: () {
-                          final _flutterSecureStorage =
-                              const FlutterSecureStorage();
+                          controller.clearStoreData();
 
-                          _flutterSecureStorage.delete(key: "jobId");
                           controller.goToJobDetailsScreen(
                             int.tryParse('${jobDetails?.id}'),
                           );
@@ -499,6 +498,8 @@ class JobDataSource extends DataTableSource {
                           icon: Icons.assignment_ind,
                           message: 'Re-Assign',
                           onPress: () {
+                                                                  controller.clearStoreData();
+
                             controller.goToEditJobScreen(
                                 int.tryParse('${jobDetails?.id}'));
                           },
@@ -535,9 +536,8 @@ class JobDataSource extends DataTableSource {
         }).toList(),
       ],
       onSelectChanged: (_) {
-        final _flutterSecureStorage = const FlutterSecureStorage();
+                                           controller.clearStoreData();
 
-        _flutterSecureStorage.delete(key: "jobId");
         controller.goToJobDetailsScreen(int.tryParse('${jobDetails?.id}'));
       },
     );

@@ -93,5 +93,11 @@ class EditJobPresenter {
     );
   }
 
+  void saveValue({String? jobId}) async {
+    return editJobUsecase.saveValue(jobId: jobId);
+  }
+
+  Future<String?> getValue() async => await editJobUsecase.getValue();
+
   ///
 }

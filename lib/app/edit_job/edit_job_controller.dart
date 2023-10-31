@@ -114,22 +114,31 @@ class EditJobController extends GetxController {
     try {
       await setJobId();
       //
-      facilityIdStreamSubscription =
-          homeController.facilityId$.listen((event) async {
+      if (jobID.value != 0) {
+        getJobDetails(jobID.value);
+      }
+      facilityIdStreamSubscription = homeController.facilityId$.listen((event) {
         selectedFacilityId = event;
-        if (selectedFacilityId > 0) {
-          isFacilitySelected.value = true;
-        }
-        await getJobDetails(jobID.value);
-        await getFacilityList();
-        await getBlocksList(selectedFacilityId);
-        await getInventoryCategoryList(selectedFacilityId.toString());
-        await getInventoryList(
-          facilityId: selectedFacilityId,
-          blockId: selectedBlockId,
-        );
-        await getWorkTypeList();
-        await getAssignedToList();
+
+        // await getFacilityList();
+        Future.delayed(Duration(seconds: 1), () {
+          getBlocksList(selectedFacilityId);
+        });
+        Future.delayed(Duration(seconds: 1), () {
+          getInventoryCategoryList(selectedFacilityId.toString());
+        });
+        Future.delayed(Duration(seconds: 1), () {
+          getInventoryList(
+            facilityId: selectedFacilityId,
+            blockId: selectedBlockId,
+          );
+        });
+        // Future.delayed(Duration(seconds: 1), () {
+        //   getWorkTypeList();
+        // });
+        Future.delayed(Duration(seconds: 1), () {
+          getAssignedToList();
+        });
         //  await getToolsRequiredToWorkTypeList(workTypeIds.toString());
       });
     } catch (e) {
@@ -140,24 +149,20 @@ class EditJobController extends GetxController {
 
   ///
   Future<void> setJobId() async {
-    final _flutterSecureStorage = const FlutterSecureStorage();
-    String? _jobId = '';
-    // Read jobId from storage
-    _jobId = await _flutterSecureStorage.read(key: "jobId");
+    try {
+      final _jobId = await editJobPresenter.getValue();
 
-    // If jobId is unavailable, take it from the arguments received
-    if (_jobId == null || _jobId == '' || _jobId == "null") {
-      var data = Get.arguments;
-      jobID.value = data["jobId"];
-      // Update jobId in storage with the new value
-      await _flutterSecureStorage.write(
-        key: "jobId",
-        value: jobID.value == null ? '' : jobID.value.toString(),
-      );
-    } else {
-      jobID.value = int.tryParse(_jobId) ?? 0;
+      // If jobId is unavailable, take it from the arguments received
+      if (_jobId == null || _jobId == '' || _jobId == "null") {
+        var data = Get.arguments;
+        jobID.value = data["jobId"];
+        editJobPresenter.saveValue(jobId: jobID.value.toString());
+      } else {
+        jobID.value = int.tryParse(_jobId) ?? 0;
+      }
+    } catch (e) {
+      Utility.showDialog(e.toString() + 'jobId');
     }
-    await _flutterSecureStorage.delete(key: "jobId");
   }
 
   Future<void> getJobDetails(int _jobId) async {
