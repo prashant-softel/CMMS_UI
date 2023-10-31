@@ -406,6 +406,14 @@ class JobDataSource extends DataTableSource {
 
     return DataRow.byIndex(
       index: index,
+      onSelectChanged: (value) {
+        controller.clearStoreData();
+        controller.clearStoreData();
+        int jobCardId = JobDetails?.jobCardId ?? 0;
+        if (jobCardId != 0) {
+          Get.toNamed(Routes.jobCard, arguments: {'JcId': jobCardId});
+        }
+      },
       cells: [
         // '${JobDetails?.id ?? ''}',
         '${JobDetails?.jobCardId ?? ''}',
@@ -428,13 +436,7 @@ class JobDataSource extends DataTableSource {
                       icon: Icons.remove_red_eye_outlined,
                       message: 'view',
                       onPress: () {
-                        final _flutterSecureStorage =
-                            const FlutterSecureStorage();
-
-                        _flutterSecureStorage.delete(key: "JcId");
-                        // controller.selectedItem = controller.filteredData
-                        //     .firstWhere(
-                        //         (element) => "${element?.name}" == value[1]);
+                        controller.clearStoreData();
                         int jobCardId = JobDetails?.jobCardId ?? 0;
                         if (jobCardId != 0) {
                           Get.toNamed(Routes.jobCard,

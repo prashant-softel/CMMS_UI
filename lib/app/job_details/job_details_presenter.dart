@@ -82,4 +82,5 @@ class JobDetailsPresenter {
   }
 
   Future<String?> getValue() async => await jobDetailsUsecase.getValue();
+  void clearValue() async => jobDetailsUsecase.clearValue();
 }

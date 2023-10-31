@@ -320,4 +320,7 @@ class JobDetailsController extends GetxController {
   // }
 
   ///
+  void clearStoreData() {
+    jobDetailsPresenter.clearValue();
+  }
 }

@@ -14,6 +14,7 @@ abstract class LocalKeys {
   static const pmPlanId = 'pmPlanId';
   static const mrsId = 'mrsId';
   static const userDetailId = 'userId';
+  static const jobCardId = 'JcId';
 
   static const refreshToken = 'refresh-token';
   static const userType = 'userType';

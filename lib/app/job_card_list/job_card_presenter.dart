@@ -83,4 +83,5 @@ class JobCardPresenter {
         jobCardId: jobCardId,
         isLoading: isLoading,
       );
+  void clearValue() async => jobCardDetailsUsecase.clearValue();
 }
