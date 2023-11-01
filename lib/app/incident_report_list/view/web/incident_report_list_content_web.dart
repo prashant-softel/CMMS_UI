@@ -121,8 +121,12 @@ class _IncidentReportListWebState extends State<IncidentReportListWeb> {
                                           Dimens.boxWidth10,
                                           varUserAccessModel.value.access_list!
                                                       .where((e) =>
-                                                          e.feature_id == UserAccessConstants.kIncidentReportFeatureId &&
-                                                          e.add == UserAccessConstants.kHaveAddAccess)
+                                                          e.feature_id ==
+                                                              UserAccessConstants
+                                                                  .kIncidentReportFeatureId &&
+                                                          e.add ==
+                                                              UserAccessConstants
+                                                                  .kHaveAddAccess)
                                                       .length >
                                                   0
                                               ? ActionButton(
@@ -322,7 +326,7 @@ class _IncidentReportListWebState extends State<IncidentReportListWeb> {
                                                                                         ? TableActionButton(
                                                                                             color: ColorValues.appYellowColor,
                                                                                             icon: Icons.edit,
-                                                                                            message: 'Delete',
+                                                                                            message: 'Edit',
                                                                                             onPress: () {
                                                                                               controller.editIncidentReport(id: int.tryParse('${record[0]}'));
                                                                                               print('edit record:${int.tryParse('${record[0]}')}');

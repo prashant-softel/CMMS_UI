@@ -14,9 +14,9 @@ class IncidentReportMessageRejectDialog extends GetView {
   String? createIncidentReportData;
   String? data;
 
-  IncidentReportMessageRejectDialog({super.key, this.createIncidentReportData, this.data});
+  IncidentReportMessageRejectDialog(
+      {super.key, this.createIncidentReportData, this.data});
   final IncidentReportListController _controller = Get.find();
-
 
   @override
   Widget build(BuildContext context) {
@@ -46,9 +46,10 @@ class IncidentReportMessageRejectDialog extends GetView {
                     color: ColorValues.greyLightColour,
                     thickness: 1,
                   ),
-                  Text(
-                      '${data}', style: TextStyle(color: Colors.green),textAlign: TextAlign.center),
-                      // SizedBox(height: 20,),
+                  Text('${data}',
+                      style: TextStyle(color: Colors.green),
+                      textAlign: TextAlign.center),
+                  // SizedBox(height: 20,),
                   // Row(
                   //     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   //     children: [
@@ -82,7 +83,12 @@ class IncidentReportMessageRejectDialog extends GetView {
             child: ElevatedButton(
               style: Styles.darkBlueElevatedButtonStyle,
               onPressed: () {
-                _controller.getIncidentReportList(_controller.facilityId, _controller.formattedTodate, _controller.formattedFromdate, false);
+                Get.offAllNamed(Routes.incidentReportListWeb);
+                _controller.getIncidentReportList(
+                    _controller.facilityId,
+                    _controller.formattedTodate,
+                    _controller.formattedFromdate,
+                    false);
                 Get.back();
               },
               child: const Text('Ok'),

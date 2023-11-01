@@ -213,6 +213,26 @@ class AddIncidentReportContentWeb extends GetView<AddIncidentReportController> {
                                                         ),
                                                         Row(
                                                           children: [
+                                                            SizedBox(
+                                                              width: 140,
+                                                              child: CustomRichText(
+                                                                  title:
+                                                                      'Corrective & Preventive action taken By: '),
+                                                            ),
+                                                            Dimens.boxWidth10,
+                                                            SizedBox(
+                                                                width: MediaQuery.of(
+                                                                            context)
+                                                                        .size
+                                                                        .width /
+                                                                    5,
+                                                                child:
+                                                                    _buildCorrectiveActionTextField_web(
+                                                                        context)),
+                                                          ],
+                                                        ),
+                                                        Row(
+                                                          children: [
                                                             CustomRichText(
                                                                 title:
                                                                     'Incident Severity: '),
@@ -331,7 +351,7 @@ class AddIncidentReportContentWeb extends GetView<AddIncidentReportController> {
                                                           children: [
                                                             CustomRichText(
                                                                 title:
-                                                                    'Risk Type: '),
+                                                                    'Type of Incident: '),
                                                             Dimens.boxWidth10,
                                                             SizedBox(
                                                               width: MediaQuery.of(
@@ -577,7 +597,7 @@ class AddIncidentReportContentWeb extends GetView<AddIncidentReportController> {
                                                           children: [
                                                             CustomRichText(
                                                                 title:
-                                                                    'Insurance Remark: '),
+                                                                    'Remark: '),
                                                             Dimens.boxWidth10,
                                                             SizedBox(
                                                                 width: MediaQuery.of(
@@ -589,272 +609,16 @@ class AddIncidentReportContentWeb extends GetView<AddIncidentReportController> {
                                                                     _buildInsuranceRemarkField_web(
                                                                         context)),
                                                           ],
-                                                        )
-                                                      ],
-                                                    ),
-                                                    ////Changes from here top for left Column
-
-                                                    ///Changes from here below for right Column
-                                                    Dimens.boxWidth50,
-                                                    Column(
-                                                      crossAxisAlignment:
-                                                          CrossAxisAlignment
-                                                              .end,
-                                                      children: [
-                                                        Row(
-                                                          children: [
-                                                            CustomRichText(
-                                                                title:
-                                                                    'Equipment Name: '),
-                                                            Dimens.boxWidth10,
-                                                            SizedBox(
-                                                              width: MediaQuery.of(
-                                                                          context)
-                                                                      .size
-                                                                      .width /
-                                                                  5,
-                                                              child: Obx(
-                                                                () =>
-                                                                    DropdownWebWidget(
-                                                                  dropdownList:
-                                                                      controller
-                                                                          .eqipmentNameList,
-                                                                  isValueSelected:
-                                                                      controller
-                                                                          .isEquipmentNameSelected
-                                                                          .value,
-                                                                  selectedValue:
-                                                                      controller
-                                                                          .selectedEquipmentName
-                                                                          .value,
-                                                                  onValueChanged:
-                                                                      controller
-                                                                          .onValueChanged,
-                                                                ),
-                                                              ),
-                                                            ),
-                                                          ],
                                                         ),
-                                                        // Dimens.boxHeight5,
-                                                        Row(
-                                                          children: [
-                                                            CustomRichText(
-                                                                title:
-                                                                    'Reporting date & Time: '),
-                                                            Dimens.boxWidth10,
-                                                            SizedBox(
-                                                              width: MediaQuery.of(
-                                                                          context)
-                                                                      .size
-                                                                      .width /
-                                                                  5,
-                                                              child:
-                                                                  _buildReportingDateTimeField_web(
-                                                                context,
-                                                              ),
-                                                            ),
-                                                          ],
-                                                        ),
-                                                        Dimens.boxHeight370,
-                                                        Row(
-                                                          children: [
-                                                            CustomRichText(
-                                                                title:
-                                                                    'Action taken Date & Time: '),
-                                                            Dimens.boxWidth10,
-                                                            SizedBox(
-                                                                width: MediaQuery.of(
-                                                                            context)
-                                                                        .size
-                                                                        .width /
-                                                                    5,
-                                                                child:
-                                                                    _buildActionTakenDateTimeField_web(
-                                                                        context)),
-                                                          ],
-                                                        ),
-                                                        Dimens.boxHeight5,
+                                                        Dimens.boxHeight20,
                                                         Row(
                                                           children: [
                                                             SizedBox(
                                                               width: 140,
                                                               child: CustomRichText(
                                                                   title:
-                                                                      'Incident Investigation Verification Done By: '),
+                                                                      'Verified/Approved by: '),
                                                             ),
-                                                            Dimens.boxWidth10,
-                                                            SizedBox(
-                                                              width: MediaQuery.of(
-                                                                          context)
-                                                                      .size
-                                                                      .width /
-                                                                  5,
-                                                              child: Obx(
-                                                                () =>
-                                                                    DropdownWebWidget(
-                                                                  dropdownList:
-                                                                      controller
-                                                                          .incidentInvestigationVerificationDoneByList,
-                                                                  isValueSelected:
-                                                                      controller
-                                                                          .isincidentInvestigationVerificationDoneByListSelected
-                                                                          .value,
-                                                                  selectedValue:
-                                                                      controller
-                                                                          .selectedIncidentInvestigationVerificationDoneByList
-                                                                          .value,
-                                                                  onValueChanged:
-                                                                      controller
-                                                                          .onValueIncidentVerificationChanged,
-                                                                ),
-                                                              ),
-                                                            ),
-                                                          ],
-                                                        ),
-                                                        Dimens.boxHeight5,
-                                                        Row(
-                                                          children: [
-                                                            CustomRichText(
-                                                                title:
-                                                                    'ESI Applicability: '),
-                                                            Dimens.boxWidth10,
-                                                            SizedBox(
-                                                              width: MediaQuery.of(
-                                                                          context)
-                                                                      .size
-                                                                      .width /
-                                                                  5,
-                                                              child: controller
-                                                                          .id !=
-                                                                      null
-                                                                  ? controller
-                                                                              .incidentReportDetailsModel
-                                                                              .value
-                                                                              ?.esi_applicability_name ==
-                                                                          "YES"
-                                                                      ? Obx(
-                                                                          () =>
-                                                                              Switch(
-                                                                            activeColor:
-                                                                                Colors.green,
-                                                                            value:
-                                                                                controller.esiApplicabilityDetailValue.value,
-                                                                            onChanged:
-                                                                                (value) {
-                                                                              controller.esiApplicabilityDetailValue.value = value;
-                                                                              print('ESI Detail applicability: ${controller.esiApplicabilityDetailValue.value}');
-                                                                            },
-                                                                          ),
-                                                                        )
-                                                                      : Obx(
-                                                                          () =>
-                                                                              Switch(
-                                                                            activeColor:
-                                                                                Colors.green,
-                                                                            value:
-                                                                                controller.esiApplicabilityDetailFalseValue.value,
-                                                                            onChanged:
-                                                                                (value) {
-                                                                              controller.esiApplicabilityDetailFalseValue.value = value;
-                                                                              print('ESI Detail False applicability: ${controller.esiApplicabilityDetailFalseValue.value}');
-                                                                            },
-                                                                          ),
-                                                                        )
-                                                                  : Obx(
-                                                                      () =>
-                                                                          Switch(
-                                                                        activeColor:
-                                                                            Colors.green,
-                                                                        value: controller
-                                                                            .esiApplicabilityValue
-                                                                            .value,
-                                                                        onChanged:
-                                                                            (value) {
-                                                                          controller
-                                                                              .esiApplicabilityValue
-                                                                              .value = value;
-                                                                        },
-                                                                      ),
-                                                                    ),
-                                                            ),
-                                                          ],
-                                                        ),
-                                                        Dimens.boxHeight5,
-                                                        Row(
-                                                          children: [
-                                                            CustomRichText(
-                                                                title:
-                                                                    'RCA Upload Required: '),
-                                                            Dimens.boxWidth10,
-                                                            SizedBox(
-                                                              width: MediaQuery.of(
-                                                                          context)
-                                                                      .size
-                                                                      .width /
-                                                                  5,
-                                                              child: controller
-                                                                          .id !=
-                                                                      null
-                                                                  ? controller
-                                                                              .incidentReportDetailsModel
-                                                                              .value
-                                                                              ?.rca_required_name ==
-                                                                          "YES"
-                                                                      ? Obx(
-                                                                          () =>
-                                                                              Switch(
-                                                                            activeColor:
-                                                                                Colors.green,
-                                                                            value:
-                                                                                controller.rCAUploadRequiredDetailValue.value,
-                                                                            onChanged:
-                                                                                (value) {
-                                                                              controller.rCAUploadRequiredDetailValue.value = value;
-                                                                              print('RCA Detail Upload Required: ${controller.rCAUploadRequiredDetailValue.value}');
-                                                                            },
-                                                                          ),
-                                                                        )
-                                                                      : Obx(
-                                                                          () =>
-                                                                              Switch(
-                                                                            activeColor:
-                                                                                Colors.green,
-                                                                            value:
-                                                                                controller.rCAUploadRequiredDetailFalseValue.value,
-                                                                            onChanged:
-                                                                                (value) {
-                                                                              controller.rCAUploadRequiredDetailFalseValue.value = value;
-                                                                              print('RCA Detail False Upload Required: ${controller.rCAUploadRequiredDetailFalseValue.value}');
-                                                                            },
-                                                                          ),
-                                                                        )
-                                                                  : Obx(
-                                                                      () =>
-                                                                          Switch(
-                                                                        activeColor:
-                                                                            Colors.green,
-                                                                        value: controller
-                                                                            .rCAUploadRequiredValue
-                                                                            .value,
-                                                                        onChanged:
-                                                                            (value) {
-                                                                          controller
-                                                                              .rCAUploadRequiredValue
-                                                                              .value = value;
-                                                                        },
-                                                                      ),
-                                                                    ),
-                                                            )
-                                                          ],
-                                                        ),
-                                                        Dimens.boxHeight10,
-                                                        Row(
-                                                          children: [
-                                                            SizedBox(
-                                                                width: 150,
-                                                                child: CustomRichText(
-                                                                    title:
-                                                                        'Gen Loss Due To Asset Damage')),
                                                             Dimens.boxWidth10,
                                                             SizedBox(
                                                                 width: MediaQuery.of(
@@ -863,47 +627,313 @@ class AddIncidentReportContentWeb extends GetView<AddIncidentReportController> {
                                                                         .width /
                                                                     5,
                                                                 child:
-                                                                    _buildGenLossAssetDamageTextField_web(
+                                                                    _buildVerifiedApprovedTextField_web(
                                                                         context)),
                                                           ],
                                                         ),
+                                                      ],
+                                                    ),
+                                                    ////Changes from here top for left Column
 
-                                                        Dimens.boxHeight100,
-                                                        Row(
-                                                          children: [
-                                                            CustomRichText(
-                                                                title:
-                                                                    'Insurance Status'),
-                                                            Dimens.boxWidth10,
-                                                            SizedBox(
-                                                              width: MediaQuery.of(
-                                                                          context)
-                                                                      .size
-                                                                      .width /
-                                                                  5,
-                                                              child: Obx(
-                                                                () =>
-                                                                    DropdownWebWidget(
-                                                                  dropdownList:
-                                                                      controller
-                                                                          .typePermitList,
-                                                                  isValueSelected:
-                                                                      controller
-                                                                          .isTypePermitSelected
-                                                                          .value,
-                                                                  selectedValue:
-                                                                      controller
-                                                                          .selectedTypePermit
-                                                                          .value,
-                                                                  onValueChanged:
-                                                                      controller
-                                                                          .onValueChanged,
+                                                    ///Changes from here below for right Column
+                                                    Spacer(),
+                                                    // Dimens.boxWidth50,
+                                                    Padding(
+                                                      padding:
+                                                          const EdgeInsets.only(
+                                                              right: 20),
+                                                      child: Column(
+                                                        crossAxisAlignment:
+                                                            CrossAxisAlignment
+                                                                .end,
+                                                        children: [
+                                                          Row(
+                                                            children: [
+                                                              CustomRichText(
+                                                                  title:
+                                                                      'Equipment Name: '),
+                                                              Dimens.boxWidth10,
+                                                              SizedBox(
+                                                                width: MediaQuery.of(
+                                                                            context)
+                                                                        .size
+                                                                        .width /
+                                                                    5,
+                                                                child: Obx(
+                                                                  () =>
+                                                                      DropdownWebWidget(
+                                                                    dropdownList:
+                                                                        controller
+                                                                            .eqipmentNameList,
+                                                                    isValueSelected:
+                                                                        controller
+                                                                            .isEquipmentNameSelected
+                                                                            .value,
+                                                                    selectedValue:
+                                                                        controller
+                                                                            .selectedEquipmentName
+                                                                            .value,
+                                                                    onValueChanged:
+                                                                        controller
+                                                                            .onValueChanged,
+                                                                  ),
                                                                 ),
                                                               ),
-                                                            ),
-                                                          ],
-                                                        )
-                                                      ],
+                                                            ],
+                                                          ),
+                                                          // Dimens.boxHeight5,
+                                                          Row(
+                                                            children: [
+                                                              CustomRichText(
+                                                                  title:
+                                                                      'Reporting date & Time: '),
+                                                              Dimens.boxWidth10,
+                                                              SizedBox(
+                                                                width: MediaQuery.of(
+                                                                            context)
+                                                                        .size
+                                                                        .width /
+                                                                    5,
+                                                                child:
+                                                                    _buildReportingDateTimeField_web(
+                                                                  context,
+                                                                ),
+                                                              ),
+                                                            ],
+                                                          ),
+                                                          Dimens.boxHeight370,
+                                                          Row(
+                                                            children: [
+                                                              CustomRichText(
+                                                                  title:
+                                                                      'Action taken Date & Time: '),
+                                                              Dimens.boxWidth10,
+                                                              SizedBox(
+                                                                  width: MediaQuery.of(
+                                                                              context)
+                                                                          .size
+                                                                          .width /
+                                                                      5,
+                                                                  child: _buildActionTakenDateTimeField_web(
+                                                                      context)),
+                                                            ],
+                                                          ),
+                                                          Dimens.boxHeight5,
+                                                          Row(
+                                                            children: [
+                                                              SizedBox(
+                                                                width: 200,
+                                                                child:
+                                                                    CustomRichText(
+                                                                  // title:'Incident Investigation Verification Done By: '
+                                                                  title:
+                                                                      'Responsible Person Name',
+                                                                ),
+                                                              ),
+                                                              Dimens.boxWidth10,
+                                                              SizedBox(
+                                                                width: MediaQuery.of(
+                                                                            context)
+                                                                        .size
+                                                                        .width /
+                                                                    5,
+                                                                child: Obx(
+                                                                  () =>
+                                                                      DropdownWebWidget(
+                                                                    dropdownList:
+                                                                        controller
+                                                                            .incidentInvestigationVerificationDoneByList,
+                                                                    isValueSelected:
+                                                                        controller
+                                                                            .isincidentInvestigationVerificationDoneByListSelected
+                                                                            .value,
+                                                                    selectedValue:
+                                                                        controller
+                                                                            .selectedIncidentInvestigationVerificationDoneByList
+                                                                            .value,
+                                                                    onValueChanged:
+                                                                        controller
+                                                                            .onValueIncidentVerificationChanged,
+                                                                  ),
+                                                                ),
+                                                              ),
+                                                            ],
+                                                          ),
+                                                          Dimens.boxHeight5,
+                                                          Row(
+                                                            children: [
+                                                              CustomRichText(
+                                                                  title:
+                                                                      'ESI Applicability: '),
+                                                              Dimens.boxWidth10,
+                                                              SizedBox(
+                                                                width: MediaQuery.of(
+                                                                            context)
+                                                                        .size
+                                                                        .width /
+                                                                    5,
+                                                                child: controller
+                                                                            .id !=
+                                                                        null
+                                                                    ? controller.incidentReportDetailsModel.value?.esi_applicability_name ==
+                                                                            "YES"
+                                                                        ? Obx(
+                                                                            () =>
+                                                                                Switch(
+                                                                              activeColor: Colors.green,
+                                                                              value: controller.esiApplicabilityDetailValue.value,
+                                                                              onChanged: (value) {
+                                                                                controller.esiApplicabilityDetailValue.value = value;
+                                                                                print('ESI Detail applicability: ${controller.esiApplicabilityDetailValue.value}');
+                                                                              },
+                                                                            ),
+                                                                          )
+                                                                        : Obx(
+                                                                            () =>
+                                                                                Switch(
+                                                                              activeColor: Colors.green,
+                                                                              value: controller.esiApplicabilityDetailFalseValue.value,
+                                                                              onChanged: (value) {
+                                                                                controller.esiApplicabilityDetailFalseValue.value = value;
+                                                                                print('ESI Detail False applicability: ${controller.esiApplicabilityDetailFalseValue.value}');
+                                                                              },
+                                                                            ),
+                                                                          )
+                                                                    : Obx(
+                                                                        () =>
+                                                                            Switch(
+                                                                          activeColor:
+                                                                              Colors.green,
+                                                                          value: controller
+                                                                              .esiApplicabilityValue
+                                                                              .value,
+                                                                          onChanged:
+                                                                              (value) {
+                                                                            controller.esiApplicabilityValue.value =
+                                                                                value;
+                                                                          },
+                                                                        ),
+                                                                      ),
+                                                              ),
+                                                            ],
+                                                          ),
+                                                          Dimens.boxHeight5,
+                                                          Row(
+                                                            children: [
+                                                              CustomRichText(
+                                                                  title:
+                                                                      'RCA Upload Required: '),
+                                                              Dimens.boxWidth10,
+                                                              SizedBox(
+                                                                width: MediaQuery.of(
+                                                                            context)
+                                                                        .size
+                                                                        .width /
+                                                                    5,
+                                                                child: controller
+                                                                            .id !=
+                                                                        null
+                                                                    ? controller.incidentReportDetailsModel.value?.rca_required_name ==
+                                                                            "YES"
+                                                                        ? Obx(
+                                                                            () =>
+                                                                                Switch(
+                                                                              activeColor: Colors.green,
+                                                                              value: controller.rCAUploadRequiredDetailValue.value,
+                                                                              onChanged: (value) {
+                                                                                controller.rCAUploadRequiredDetailValue.value = value;
+                                                                                print('RCA Detail Upload Required: ${controller.rCAUploadRequiredDetailValue.value}');
+                                                                              },
+                                                                            ),
+                                                                          )
+                                                                        : Obx(
+                                                                            () =>
+                                                                                Switch(
+                                                                              activeColor: Colors.green,
+                                                                              value: controller.rCAUploadRequiredDetailFalseValue.value,
+                                                                              onChanged: (value) {
+                                                                                controller.rCAUploadRequiredDetailFalseValue.value = value;
+                                                                                print('RCA Detail False Upload Required: ${controller.rCAUploadRequiredDetailFalseValue.value}');
+                                                                              },
+                                                                            ),
+                                                                          )
+                                                                    : Obx(
+                                                                        () =>
+                                                                            Switch(
+                                                                          activeColor:
+                                                                              Colors.green,
+                                                                          value: controller
+                                                                              .rCAUploadRequiredValue
+                                                                              .value,
+                                                                          onChanged:
+                                                                              (value) {
+                                                                            controller.rCAUploadRequiredValue.value =
+                                                                                value;
+                                                                          },
+                                                                        ),
+                                                                      ),
+                                                              )
+                                                            ],
+                                                          ),
+                                                          Dimens.boxHeight10,
+                                                          Row(
+                                                            children: [
+                                                              SizedBox(
+                                                                  width: 150,
+                                                                  child: CustomRichText(
+                                                                      title:
+                                                                          'Gen Loss Due To Asset Damage')),
+                                                              Dimens.boxWidth10,
+                                                              SizedBox(
+                                                                  width: MediaQuery.of(
+                                                                              context)
+                                                                          .size
+                                                                          .width /
+                                                                      5,
+                                                                  child: _buildGenLossAssetDamageTextField_web(
+                                                                      context)),
+                                                            ],
+                                                          ),
+
+                                                          Dimens.boxHeight100,
+                                                          Row(
+                                                            children: [
+                                                              CustomRichText(
+                                                                  title:
+                                                                      'Insurance Status'),
+                                                              Dimens.boxWidth10,
+                                                              SizedBox(
+                                                                width: MediaQuery.of(
+                                                                            context)
+                                                                        .size
+                                                                        .width /
+                                                                    5,
+                                                                child: Text(
+                                                                    '${controller.incidentReportDetailsModel.value?.insurance_status_name}'),
+                                                                // Obx(
+                                                                //   () =>
+                                                                //       DropdownWebWidget(
+                                                                //     dropdownList:
+                                                                //         controller
+                                                                //             .typePermitList,
+                                                                //     isValueSelected:
+                                                                //         controller
+                                                                //             .isTypePermitSelected
+                                                                //             .value,
+                                                                //     selectedValue:
+                                                                //         controller
+                                                                //             .selectedTypePermit
+                                                                //             .value,
+                                                                //     onValueChanged:
+                                                                //         controller
+                                                                //             .onValueChanged,
+                                                                //   ),
+                                                                // ),
+                                                              ),
+                                                            ],
+                                                          )
+                                                        ],
+                                                      ),
                                                     ),
                                                   ],
                                                 ),
@@ -944,7 +974,12 @@ class AddIncidentReportContentWeb extends GetView<AddIncidentReportController> {
                                           controller.id != null
                                               ? Container(
                                                   margin: Dimens.edgeInsets20,
-                                                  height: 200,
+                                                  height: ((controller
+                                                                  .historyList
+                                                                  ?.length ??
+                                                              0) *
+                                                          50) +
+                                                      125,
                                                   decoration: BoxDecoration(
                                                     border: Border.all(
                                                       color: ColorValues
@@ -1879,6 +1914,194 @@ class AddIncidentReportContentWeb extends GetView<AddIncidentReportController> {
         ),
       );
     });
+  }
+
+  Widget _buildVerifiedApprovedTextField_web(BuildContext context) {
+    return Column(//
+        children: [
+      // Align(
+      //   alignment: Alignment.centerLeft,
+      //   child: Padding(
+      //     padding: const EdgeInsets.only(left: 10),
+      //     child: RichText(
+      //       text:
+      //           TextSpan(text: 'Title: ', style: Styles.blackBold16, children: [
+      //         TextSpan(
+      //           text: '*',
+      //           style: TextStyle(
+      //             color: ColorValues.orangeColor,
+      //             fontWeight: FontWeight.bold,
+      //           ),
+      //         ),
+      //       ]),
+      //     ),
+      //   ),
+      // ),
+
+      Container(
+        height: MediaQuery.of(context).size.height * 0.050,
+        width: Responsive.isDesktop(context)
+            ? MediaQuery.of(context).size.width / 1.44
+            : MediaQuery.of(context).size.width / 1.1,
+        decoration: BoxDecoration(
+          boxShadow: [
+            BoxShadow(
+              color: Colors.black26,
+              offset: const Offset(
+                5.0,
+                5.0,
+              ),
+              blurRadius: 5.0,
+              spreadRadius: 1.0,
+            ),
+            BoxShadow(
+              color: ColorValues.whiteColor,
+              offset: const Offset(0.0, 0.0),
+              blurRadius: 0.0,
+              spreadRadius: 0.0,
+            ),
+          ],
+          color: ColorValues.whiteColor,
+          borderRadius: BorderRadius.circular(5),
+        ),
+        child: SizedBox(
+          width: MediaQuery.of(context).size.width / 1.4,
+          child: TextField(
+            controller: controller.verifiedApprovedTextCtrlr,
+            keyboardType: TextInputType.multiline,
+            autofocus: false,
+            decoration: InputDecoration(
+              fillColor: ColorValues.whiteColor,
+              filled: true,
+              contentPadding: Dimens.edgeInsets05_10,
+              border: InputBorder.none,
+              enabledBorder: InputBorder.none,
+              focusedBorder: InputBorder.none,
+              focusedErrorBorder: controller.isCorrectiveTextInvalid.value
+                  ? OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(5),
+                      borderSide: BorderSide(
+                        color: ColorValues.redColorDark,
+                      ),
+                    )
+                  : InputBorder.none,
+              errorBorder: controller.isVerifiedApprovedextInvalid.value
+                  ? OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(5),
+                      borderSide: BorderSide(
+                        color: ColorValues.redColorDark,
+                      ),
+                    )
+                  : null,
+              errorText: controller.isVerifiedApprovedextInvalid.value
+                  ? "Required field"
+                  : null,
+            ),
+            onChanged: (value) {
+              if (value.trim().length > 3) {
+                controller.isVerifiedApprovedextInvalid.value = false;
+              } else {
+                controller.isVerifiedApprovedextInvalid.value = true;
+              }
+            },
+          ),
+        ),
+      ),
+    ]);
+  }
+
+  Widget _buildCorrectiveActionTextField_web(BuildContext context) {
+    return Column(//
+        children: [
+      // Align(
+      //   alignment: Alignment.centerLeft,
+      //   child: Padding(
+      //     padding: const EdgeInsets.only(left: 10),
+      //     child: RichText(
+      //       text:
+      //           TextSpan(text: 'Title: ', style: Styles.blackBold16, children: [
+      //         TextSpan(
+      //           text: '*',
+      //           style: TextStyle(
+      //             color: ColorValues.orangeColor,
+      //             fontWeight: FontWeight.bold,
+      //           ),
+      //         ),
+      //       ]),
+      //     ),
+      //   ),
+      // ),
+
+      Container(
+        height: MediaQuery.of(context).size.height * 0.050,
+        width: Responsive.isDesktop(context)
+            ? MediaQuery.of(context).size.width / 1.44
+            : MediaQuery.of(context).size.width / 1.1,
+        decoration: BoxDecoration(
+          boxShadow: [
+            BoxShadow(
+              color: Colors.black26,
+              offset: const Offset(
+                5.0,
+                5.0,
+              ),
+              blurRadius: 5.0,
+              spreadRadius: 1.0,
+            ),
+            BoxShadow(
+              color: ColorValues.whiteColor,
+              offset: const Offset(0.0, 0.0),
+              blurRadius: 0.0,
+              spreadRadius: 0.0,
+            ),
+          ],
+          color: ColorValues.whiteColor,
+          borderRadius: BorderRadius.circular(5),
+        ),
+        child: SizedBox(
+          width: MediaQuery.of(context).size.width / 1.4,
+          child: TextField(
+            controller: controller.correctiveActionTextCtrlr,
+            keyboardType: TextInputType.multiline,
+            autofocus: false,
+            decoration: InputDecoration(
+              fillColor: ColorValues.whiteColor,
+              filled: true,
+              contentPadding: Dimens.edgeInsets05_10,
+              border: InputBorder.none,
+              enabledBorder: InputBorder.none,
+              focusedBorder: InputBorder.none,
+              focusedErrorBorder: controller.isCorrectiveTextInvalid.value
+                  ? OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(5),
+                      borderSide: BorderSide(
+                        color: ColorValues.redColorDark,
+                      ),
+                    )
+                  : InputBorder.none,
+              errorBorder: controller.isCorrectiveTextInvalid.value
+                  ? OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(5),
+                      borderSide: BorderSide(
+                        color: ColorValues.redColorDark,
+                      ),
+                    )
+                  : null,
+              errorText: controller.isCorrectiveTextInvalid.value
+                  ? "Required field"
+                  : null,
+            ),
+            onChanged: (value) {
+              if (value.trim().length > 3) {
+                controller.isCorrectiveTextInvalid.value = false;
+              } else {
+                controller.isCorrectiveTextInvalid.value = true;
+              }
+            },
+          ),
+        ),
+      ),
+    ]);
   }
 
   Widget _buildIncidentReportTitleTextField_web(BuildContext context) {
