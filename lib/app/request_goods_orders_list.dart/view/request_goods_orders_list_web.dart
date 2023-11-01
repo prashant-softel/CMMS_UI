@@ -182,34 +182,36 @@ class _PurchaseGoodsorderListWebState extends State<PurchaseGoodsorderListWeb> {
                                           ),
                                         ),
                                       ),
-                                      itemBuilder: (BuildContext context) => <
-                                          PopupMenuEntry<String>>[]..addAll(
-                                            controller
-                                                .columnVisibility.value.entries
-                                                .map((e) {
-                                          return PopupMenuItem<String>(
-                                              child: ValueListenableBuilder(
-                                                  valueListenable: controller
-                                                      .columnVisibility,
-                                                  builder:
-                                                      (context, value, child) {
-                                                    return Row(
-                                                      children: [
-                                                        Checkbox(
-                                                          value: value[e.key],
-                                                          onChanged:
-                                                              (newValue) {
-                                                            controller
-                                                                .setColumnVisibility(
-                                                                    e.key,
-                                                                    newValue!);
-                                                          },
-                                                        ),
-                                                        Text(e.key),
-                                                      ],
-                                                    );
-                                                  }));
-                                        })),
+                                      itemBuilder: (BuildContext context) =>
+                                          <PopupMenuEntry<String>>[]..addAll(
+                                                controller.columnVisibility
+                                                    .value.entries
+                                                    .map((e) {
+                                              return PopupMenuItem<String>(
+                                                  child: ValueListenableBuilder(
+                                                      valueListenable:
+                                                          controller
+                                                              .columnVisibility,
+                                                      builder: (context, value,
+                                                          child) {
+                                                        return Row(
+                                                          children: [
+                                                            Checkbox(
+                                                              value:
+                                                                  value[e.key],
+                                                              onChanged:
+                                                                  (newValue) {
+                                                                controller
+                                                                    .setColumnVisibility(
+                                                                        e.key,
+                                                                        newValue!);
+                                                              },
+                                                            ),
+                                                            Text(e.key),
+                                                          ],
+                                                        );
+                                                      }));
+                                            })),
                                       onSelected: (String value) {
                                         // Handle column selection
                                       },
@@ -608,11 +610,11 @@ class GoodsOrderListDataSource extends DataTableSource {
                           icon: Icons.remove_red_eye_outlined,
                           message: 'view',
                           onPress: () {
-                            int id =
+                            int roId =
                                 GoodsOrderListDetails?.request_order_id ?? 0;
-                            if (id != 0) {
+                            if (roId != 0) {
                               Get.toNamed(Routes.purchaseGoodsorderView,
-                                  arguments: {'id': id});
+                                  arguments: {'roId': roId});
                             }
                           },
                           // onPress: () {
@@ -650,13 +652,13 @@ class GoodsOrderListDataSource extends DataTableSource {
                                 icon: Icons.edit,
                                 message: 'Edit',
                                 onPress: () {
-                                  int id =
+                                  int roId =
                                       GoodsOrderListDetails?.request_order_id ??
                                           0;
-                                  if (id != 0) {
+                                  if (roId != 0) {
                                     Get.toNamed(
                                         Routes.GoodsOrdersReqDetailsScreen,
-                                        arguments: {"id": id});
+                                        arguments: {"roId": roId});
                                   }
                                 },
                               )
@@ -688,13 +690,13 @@ class GoodsOrderListDataSource extends DataTableSource {
                                 icon: Icons.ads_click,
                                 message: 'Re-Submit RO',
                                 onPress: () {
-                                  int id =
+                                  int roId =
                                       GoodsOrderListDetails?.request_order_id ??
                                           0;
-                                  if (id != 0) {
+                                  if (roId != 0) {
                                     Get.toNamed(
                                         Routes.GoodsOrdersReqDetailsScreen,
-                                        arguments: {"id": id});
+                                        arguments: {"roId": roId});
                                   }
                                 },
                               )
@@ -726,12 +728,12 @@ class GoodsOrderListDataSource extends DataTableSource {
                                 icon: Icons.add,
                                 message: 'Approve/Reject',
                                 onPress: () {
-                                  int id =
+                                  int roId =
                                       GoodsOrderListDetails?.request_order_id ??
                                           0;
-                                  if (id != 0) {
+                                  if (roId != 0) {
                                     Get.toNamed(Routes.purchaseGoodsorderView,
-                                        arguments: {'id': id, "type": 1});
+                                        arguments: {'roId': roId, "roType": 1});
                                   }
                                 },
                               )
