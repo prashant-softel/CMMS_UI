@@ -184,34 +184,36 @@ class _StockManagementGoodsOrdersWebState
                                           ),
                                         ),
                                       ),
-                                      itemBuilder: (BuildContext context) => <
-                                          PopupMenuEntry<String>>[]..addAll(
-                                            controller
-                                                .columnVisibility.value.entries
-                                                .map((e) {
-                                          return PopupMenuItem<String>(
-                                              child: ValueListenableBuilder(
-                                                  valueListenable: controller
-                                                      .columnVisibility,
-                                                  builder:
-                                                      (context, value, child) {
-                                                    return Row(
-                                                      children: [
-                                                        Checkbox(
-                                                          value: value[e.key],
-                                                          onChanged:
-                                                              (newValue) {
-                                                            controller
-                                                                .setColumnVisibility(
-                                                                    e.key,
-                                                                    newValue!);
-                                                          },
-                                                        ),
-                                                        Text(e.key),
-                                                      ],
-                                                    );
-                                                  }));
-                                        })),
+                                      itemBuilder: (BuildContext context) =>
+                                          <PopupMenuEntry<String>>[]..addAll(
+                                                controller.columnVisibility
+                                                    .value.entries
+                                                    .map((e) {
+                                              return PopupMenuItem<String>(
+                                                  child: ValueListenableBuilder(
+                                                      valueListenable:
+                                                          controller
+                                                              .columnVisibility,
+                                                      builder: (context, value,
+                                                          child) {
+                                                        return Row(
+                                                          children: [
+                                                            Checkbox(
+                                                              value:
+                                                                  value[e.key],
+                                                              onChanged:
+                                                                  (newValue) {
+                                                                controller
+                                                                    .setColumnVisibility(
+                                                                        e.key,
+                                                                        newValue!);
+                                                              },
+                                                            ),
+                                                            Text(e.key),
+                                                          ],
+                                                        );
+                                                      }));
+                                            })),
                                       onSelected: (String value) {
                                         // Handle column selection
                                       },
@@ -668,10 +670,10 @@ class GoodsOrderListDataSource extends DataTableSource {
                                 icon: Icons.remove_red_eye_outlined,
                                 message: 'view',
                                 onPress: () {
-                                  int id = GoodsOrderListDetails?.id ?? 0;
-                                  if (id != 0) {
+                                  int goId = GoodsOrderListDetails?.id ?? 0;
+                                  if (goId != 0) {
                                     Get.toNamed(Routes.viewGoodsOrders,
-                                        arguments: {'id': id});
+                                        arguments: {'goId': goId});
                                   }
                                 },
                               )
@@ -722,12 +724,12 @@ class GoodsOrderListDataSource extends DataTableSource {
                                     icon: Icons.edit,
                                     message: 'Edit',
                                     onPress: () {
-                                      int id = GoodsOrderListDetails?.id ?? 0;
-                                      if (id != 0) {
+                                      int goId = GoodsOrderListDetails?.id ?? 0;
+                                      if (goId != 0) {
                                         Get.toNamed(
                                             Routes
                                                 .updateGoodsOrdersDetailsScreen,
-                                            arguments: {"id": id});
+                                            arguments: {"goId": goId});
                                       }
                                     },
                                   )
@@ -757,10 +759,10 @@ class GoodsOrderListDataSource extends DataTableSource {
                                 icon: Icons.close,
                                 message: 'Close',
                                 onPress: () {
-                                  int id = GoodsOrderListDetails?.id ?? 0;
-                                  if (id != 0) {
+                                  int goId = GoodsOrderListDetails?.id ?? 0;
+                                  if (goId != 0) {
                                     Get.toNamed(Routes.viewGoodsOrders,
-                                        arguments: {'id': id});
+                                        arguments: {'goId': goId});
                                   }
                                 },
                               )
@@ -850,10 +852,10 @@ class GoodsOrderListDataSource extends DataTableSource {
                                 icon: Icons.shopping_cart,
                                 message: 'Receive GO',
                                 onPress: () {
-                                  int id = GoodsOrderListDetails?.id ?? 0;
-                                  if (id != 0) {
+                                  int goId = GoodsOrderListDetails?.id ?? 0;
+                                  if (goId != 0) {
                                     Get.toNamed(Routes.receiveGoodsOrders,
-                                        arguments: {'id': id, "type": 1});
+                                        arguments: {'goId': goId, "goType": 1});
                                   }
                                 },
                               )
@@ -884,10 +886,10 @@ class GoodsOrderListDataSource extends DataTableSource {
                                 icon: Icons.ads_click,
                                 message: 'Re-Submit Receive GO',
                                 onPress: () {
-                                  int id = GoodsOrderListDetails?.id ?? 0;
-                                  if (id != 0) {
+                                  int goId = GoodsOrderListDetails?.id ?? 0;
+                                  if (goId != 0) {
                                     Get.toNamed(Routes.receiveGoodsOrders,
-                                        arguments: {'id': id, "type": 1});
+                                        arguments: {'goId': goId, "goType": 1});
                                   }
                                 },
                               )
@@ -951,10 +953,10 @@ class GoodsOrderListDataSource extends DataTableSource {
                                 icon: Icons.approval_rounded,
                                 message: 'Approve/Reject GO',
                                 onPress: () {
-                                  int id = GoodsOrderListDetails?.id ?? 0;
-                                  if (id != 0) {
+                                  int goId = GoodsOrderListDetails?.id ?? 0;
+                                  if (goId != 0) {
                                     Get.toNamed(Routes.viewGoodsOrders,
-                                        arguments: {'id': id, "type": 1});
+                                        arguments: {'goId': goId, "goType": 1});
                                   }
                                 },
                               )
@@ -985,11 +987,11 @@ class GoodsOrderListDataSource extends DataTableSource {
                                 icon: Icons.ads_click,
                                 message: 'Re-Submit GO',
                                 onPress: () {
-                                  int id = GoodsOrderListDetails?.id ?? 0;
-                                  if (id != 0) {
+                                  int goId = GoodsOrderListDetails?.id ?? 0;
+                                  if (goId != 0) {
                                     Get.toNamed(
                                       Routes.updateGoodsOrdersDetailsScreen,
-                                      arguments: {"id": id, 'type': 1},
+                                      arguments: {"goId": goId, 'goType': 1},
                                     );
                                   }
                                 },
@@ -1011,32 +1013,32 @@ class GoodsOrderListDataSource extends DataTableSource {
       onSelectChanged: (_) {
         GoodsOrderListDetails?.status == 302
             ? Get.toNamed(Routes.viewGoodsOrders,
-                arguments: {'id': GoodsOrderListDetails?.id, "type": 1})
+                arguments: {'goId': GoodsOrderListDetails?.id, "goType": 1})
             : GoodsOrderListDetails?.status == 309
                 ? Get.toNamed(Routes.receiveGoodsOrders,
-                    arguments: {'id': GoodsOrderListDetails?.id, "type": 1})
+                    arguments: {'goId': GoodsOrderListDetails?.id, "goType": 1})
                 : GoodsOrderListDetails?.status == 302
                     ? Get.toNamed(Routes.updateGoodsOrdersDetailsScreen,
-                        arguments: {'id': GoodsOrderListDetails?.id})
+                        arguments: {'goId': GoodsOrderListDetails?.id})
                     : GoodsOrderListDetails?.status == 306
                         ? Get.toNamed(
                             Routes.receiveGoodsOrders,
                             arguments: {
-                              'id': GoodsOrderListDetails?.id,
-                              "type": 1
+                              'goId': GoodsOrderListDetails?.id,
+                              "goType": 1
                             },
                           )
                         : GoodsOrderListDetails?.status == 305
                             ? Get.toNamed(
                                 Routes.updateGoodsOrdersDetailsScreen,
                                 arguments: {
-                                  'id': GoodsOrderListDetails?.id,
-                                  "type": 1
+                                  'goId': GoodsOrderListDetails?.id,
+                                  "goType": 1
                                 },
                               )
                             : Get.toNamed(
                                 Routes.viewGoodsOrders,
-                                arguments: {"id": GoodsOrderListDetails?.id},
+                                arguments: {"goId": GoodsOrderListDetails?.id},
                               );
       },
     );

@@ -150,7 +150,7 @@ class _ReceiveGoodsOrderWebState extends State<ReceiveGoodsOrderWeb> {
                                             child: Text(
                                               " ${controller.getPurchaseDetailsByIDModel.value?.status_short ?? ""}",
                                             )),
-                                        controller.id == null
+                                        controller.goId == null
                                             ? Container()
                                             : Text(
                                                 " Order ID :${controller.getPurchaseDetailsByIDModel.value?.id} ",
@@ -1002,7 +1002,7 @@ class _ReceiveGoodsOrderWebState extends State<ReceiveGoodsOrderWeb> {
                                                       ? Padding(
                                                           padding:
                                                               const EdgeInsets
-                                                                      .only(
+                                                                  .only(
                                                                   left: 10,
                                                                   right: 10,
                                                                   top: 10),
@@ -1079,7 +1079,7 @@ class _ReceiveGoodsOrderWebState extends State<ReceiveGoodsOrderWeb> {
                                                           ? Padding(
                                                               padding:
                                                                   const EdgeInsets
-                                                                          .only(
+                                                                      .only(
                                                                       left: 10,
                                                                       right: 10,
                                                                       top: 10),
@@ -1645,7 +1645,7 @@ class _ReceiveGoodsOrderWebState extends State<ReceiveGoodsOrderWeb> {
                           // icon: Icons.add,
                           onPressed: () {
                             Get.dialog(ApproveGOReceiveDialog(
-                              id: controller.id.value,
+                              id: controller.goId.value,
                             ));
                           },
                         ),
@@ -1668,7 +1668,7 @@ class _ReceiveGoodsOrderWebState extends State<ReceiveGoodsOrderWeb> {
                           text: 'Reject GO Receive',
                           onPressed: () {
                             Get.dialog(RejectGOReceiveDialog(
-                              id: controller.id.value,
+                              id: controller.goId.value,
                             ));
                           },
                         ),

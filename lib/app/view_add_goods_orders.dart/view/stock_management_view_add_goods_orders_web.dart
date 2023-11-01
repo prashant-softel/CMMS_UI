@@ -1294,7 +1294,7 @@ class _ViewAddGoodsOrdersWebState extends State<ViewAddGoodsOrdersWeb> {
                                         icon: Icons.close,
                                         onPressed: () {
                                           Get.dialog(GoodsOrderCloseDialog(
-                                            id: controller.id,
+                                            id: controller.goId,
                                           ));
                                         },
                                       ),
@@ -1306,7 +1306,7 @@ class _ViewAddGoodsOrdersWebState extends State<ViewAddGoodsOrdersWeb> {
                                       controller.getPurchaseDetailsByIDModel
                                                   .value?.status ==
                                               301 &&
-                                          controller.type == 1
+                                          controller.goType == 1
                                   //     ||
                                   // controller.getPurchaseDetailsByIDModel
                                   //             .value?.status ==
@@ -1345,7 +1345,7 @@ class _ViewAddGoodsOrdersWebState extends State<ViewAddGoodsOrdersWeb> {
                                                   onPressed: () {
                                                     Get.dialog(
                                                         GoodsOrderApprovedDialog(
-                                                      id: controller.id,
+                                                      id: controller.goId,
                                                     ));
                                                   },
                                                 ),
@@ -1366,7 +1366,7 @@ class _ViewAddGoodsOrdersWebState extends State<ViewAddGoodsOrdersWeb> {
                                                 controller.getPurchaseDetailsByIDModel
                                                             .value?.status ==
                                                         301 &&
-                                                    controller.type == 1 &&
+                                                    controller.goType == 1 &&
                                                     varUserAccessModel
                                                             .value.access_list!
                                                             .where((e) =>
@@ -1385,7 +1385,7 @@ class _ViewAddGoodsOrdersWebState extends State<ViewAddGoodsOrdersWeb> {
                                                   onPressed: () {
                                                     Get.dialog(
                                                         GoodsOrderRejectDialog(
-                                                      id: controller.id,
+                                                      id: controller.goId,
                                                     ));
                                                   },
                                                 ),

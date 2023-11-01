@@ -48,9 +48,9 @@ class ViewAddGoodsOrdersController extends GetxController {
   int selectedBusinessTypeId = 1;
   int paidId = 0;
   RxBool showAdditionalColumn = false.obs;
-  int id = 0;
+  int goId = 0;
 
-  int? type = 0;
+  int? goType = 0;
 
   //drop down list of assets
   // RxList<GetAssetDataModel?> assetList = <GetAssetDataModel>[].obs;
@@ -101,10 +101,10 @@ class ViewAddGoodsOrdersController extends GetxController {
   ///
   @override
   void onInit() async {
-    id = Get.arguments["id"];
-    type = Get.arguments["type"];
+    goId = Get.arguments["goId"];
+    goType = Get.arguments["goType"];
 
-    print('AddStock:$id');
+    print('AddStock:$goId');
     Future.delayed(Duration(seconds: 1), () {
       getUnitCurrencyList();
     });
@@ -113,10 +113,10 @@ class ViewAddGoodsOrdersController extends GetxController {
     });
     Future.delayed(Duration(seconds: 1), () {
       getAssetList(facilityId);
-      if (id != 0) {
+      if (goId != 0) {
         Future.delayed(Duration(seconds: 1), () {
-          getPurchaseDetailsById(id: id);
-          getGoHistory(id: id);
+          getPurchaseDetailsById(id: goId);
+          getGoHistory(id: goId);
         });
       }
     });
@@ -468,7 +468,7 @@ class ViewAddGoodsOrdersController extends GetxController {
       // items.add(item);
     });
     CreateGoModel createGoModel = CreateGoModel(
-        id: id,
+        id: goId,
         facility_id: facilityId,
         order_type: 1,
         location_ID: 1,
