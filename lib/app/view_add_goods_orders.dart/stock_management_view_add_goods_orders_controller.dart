@@ -361,73 +361,73 @@ class ViewAddGoodsOrdersController extends GetxController {
   //   ]);
   // }
 
-  void createGoodsOrder() async {
-    String _challanNoCtrlr = challanNoCtrlr.text.trim();
-    String _pOCtrlr = pOCtrlr.text.trim();
-    String _frieghtToPayPaidCtrlr = frieghtToPayPaidCtrlr.text.trim();
-    String _noOfPackagesReceivedCtrlr = noOfPackagesReceivedCtrlr.text.trim();
-    String _conditionOfPackagesReceivedCtrlr =
-        conditionOfPackagesReceivedCtrlr.text.trim();
-    String _girNoCtrlr = girNoCtrlr.text.trim();
-    String _amountCtrlr = amountCtrlr.text.trim();
-    String _purchaseDateTc = purchaseDateTc.text.trim();
-    String _challanDateTc = challanDateTc.text.trim();
-    String _poDateDateTc = poDateDateTc.text.trim();
-    String _receivedDateTc = receivedDateTc.text.trim();
-    String _lrNoCtrlr = lrNoCtrlr.text.trim();
-    String _vehicleNoCtrlr = vehicleNoCtrlr.text.trim();
-    String _jobRefCtrlr = jobRefCtrlr.text.trim();
-    List<Items> items = [];
-    rowItem.value.forEach((element) {
-      Items item = Items(
-          goItemID: 0,
-          received_qty: 0,
-          lost_qty: 0,
-          accepted_qty: 0,
-          damaged_qty: 0,
-          requested_qty: int.tryParse(element[2]["value"] ?? '0'),
-          assetMasterItemID: dropdownMapperData[element[0]["value"]]?.id,
-          cost: double.tryParse(element[3]["value"] ?? '0'),
-          ordered_qty: int.tryParse(element[4]["value"] ?? '0'),
-          paid_by_ID: paiddropdownMapperData[element[1]["value"]]?.id);
-      items.add(item);
-    });
-    CreateGoModel createGoModel = CreateGoModel(
-        id: 0,
-        facility_id: facilityId,
-        order_type: 1,
-        location_ID: 1,
-        vendorID: selectedBusinessTypeId,
-        purchaseDate: _purchaseDateTc,
-        challan_no: _challanNoCtrlr,
-        challan_date: _challanDateTc,
-        po_no: _pOCtrlr,
-        po_date: _poDateDateTc,
-        freight: _frieghtToPayPaidCtrlr,
-        receivedAt: _receivedDateTc,
-        no_pkg_received: _noOfPackagesReceivedCtrlr,
-        lr_no: _lrNoCtrlr,
-        condition_pkg_received: _conditionOfPackagesReceivedCtrlr,
-        vehicle_no: _vehicleNoCtrlr,
-        gir_no: _girNoCtrlr,
-        job_ref: _jobRefCtrlr,
-        amount: int.tryParse(_amountCtrlr) ?? 0,
-        currencyID: selectedUnitCurrencyId,
-        items: items);
+  // void createGoodsOrder() async {
+  //   String _challanNoCtrlr = challanNoCtrlr.text.trim();
+  //   String _pOCtrlr = pOCtrlr.text.trim();
+  //   String _frieghtToPayPaidCtrlr = frieghtToPayPaidCtrlr.text.trim();
+  //   String _noOfPackagesReceivedCtrlr = noOfPackagesReceivedCtrlr.text.trim();
+  //   String _conditionOfPackagesReceivedCtrlr =
+  //       conditionOfPackagesReceivedCtrlr.text.trim();
+  //   String _girNoCtrlr = girNoCtrlr.text.trim();
+  //   String _amountCtrlr = amountCtrlr.text.trim();
+  //   String _purchaseDateTc = purchaseDateTc.text.trim();
+  //   String _challanDateTc = challanDateTc.text.trim();
+  //   String _poDateDateTc = poDateDateTc.text.trim();
+  //   String _receivedDateTc = receivedDateTc.text.trim();
+  //   String _lrNoCtrlr = lrNoCtrlr.text.trim();
+  //   String _vehicleNoCtrlr = vehicleNoCtrlr.text.trim();
+  //   String _jobRefCtrlr = jobRefCtrlr.text.trim();
+  //   List<Items> items = [];
+  //   rowItem.value.forEach((element) {
+  //     Items item = Items(
+  //         goItemID: 0,
+  //         received_qty: 0,
+  //         lost_qty: 0,
+  //         accepted_qty: 0,
+  //         damaged_qty: 0,
+  //         requested_qty: int.tryParse(element[2]["value"] ?? '0'),
+  //         assetMasterItemID: dropdownMapperData[element[0]["value"]]?.id,
+  //         cost: double.tryParse(element[3]["value"] ?? '0'),
+  //         ordered_qty: int.tryParse(element[4]["value"] ?? '0'),
+  //         paid_by_ID: paiddropdownMapperData[element[1]["value"]]?.id);
+  //     items.add(item);
+  //   });
+  //   CreateGoModel createGoModel = CreateGoModel(
+  //       id: 0,
+  //       facility_id: facilityId,
+  //       order_type: 1,
+  //       location_ID: 1,
+  //       vendorID: selectedBusinessTypeId,
+  //       purchaseDate: _purchaseDateTc,
+  //       challan_no: _challanNoCtrlr,
+  //       challan_date: _challanDateTc,
+  //       po_no: _pOCtrlr,
+  //       po_date: _poDateDateTc,
+  //       freight: _frieghtToPayPaidCtrlr,
+  //       receivedAt: _receivedDateTc,
+  //       no_pkg_received: _noOfPackagesReceivedCtrlr,
+  //       lr_no: _lrNoCtrlr,
+  //       condition_pkg_received: _conditionOfPackagesReceivedCtrlr,
+  //       vehicle_no: _vehicleNoCtrlr,
+  //       gir_no: _girNoCtrlr,
+  //       job_ref: _jobRefCtrlr,
+  //       amount: int.tryParse(_amountCtrlr) ?? 0,
+  //       currencyID: selectedUnitCurrencyId,
+  //       items: items);
 
-    var createGoModelJsonString = createGoModel.toJson();
-    Map<String, dynamic>? responseCreateGoModel =
-        await viewAddGoodsOrdersPresenter.createGoodsOrder(
-      createGo: createGoModelJsonString,
-      isLoading: true,
-    );
+  //   var createGoModelJsonString = createGoModel.toJson();
+  //   Map<String, dynamic>? responseCreateGoModel =
+  //       await viewAddGoodsOrdersPresenter.createGoodsOrder(
+  //     createGo: createGoModelJsonString,
+  //     isLoading: true,
+  //   );
 
-    if (responseCreateGoModel == null) {
-      //  CreateNewPermitDialog();
-      // showAlertDialog();
-    }
-    print('Create  Create GO  data: $createGoModelJsonString');
-  }
+  //   if (responseCreateGoModel == null) {
+  //     //  CreateNewPermitDialog();
+  //     // showAlertDialog();
+  //   }
+  //   print('Create  Create GO  data: $createGoModelJsonString');
+  // }
 
   void updateGoodsOrder() async {
     String _challanNoCtrlr = challanNoCtrlr.text.trim();
@@ -452,11 +452,11 @@ class ViewAddGoodsOrdersController extends GetxController {
         lost_qty: 0,
         accepted_qty: 0,
         damaged_qty: 0,
-        requested_qty: int.tryParse(element[2]["value"] ?? '0'),
+        requested_qty: double.tryParse(element[2]["value"] ?? '0'),
         goItemID: int.tryParse('${element[0]["id"]}'),
         assetMasterItemID: int.tryParse('${element[0]["assetMasterItemID"]}'),
         cost: double.tryParse(element[3]["value"] ?? '0'),
-        ordered_qty: int.tryParse(element[4]["value"] ?? '0'),
+        ordered_qty: double.tryParse(element[4]["value"] ?? '0'),
         paid_by_ID: int.tryParse('${element[1]["id"]}'),
       );
       items.add(item);

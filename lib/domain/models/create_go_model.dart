@@ -122,7 +122,7 @@ class Items {
     this.damaged_qty,
     this.id,
     this.assetItem_Name,
-    this.locationID,
+    // this.locationID,
     this.spare_status,
     this.remarks,
     this.receive_later,
@@ -136,16 +136,16 @@ class Items {
   int? id;
   int? assetMasterItemID;
   String? assetItem_Name;
-  int? locationID;
+  // int? locationID;
   double? cost;
-  int? ordered_qty;
-  int? received_qty;
-  int? lost_qty;
-  int? requested_qty;
-  int? damaged_qty;
+  double? ordered_qty;
+  double? received_qty;
+  double? lost_qty;
+  double? requested_qty;
+  double? damaged_qty;
   double? accepted_qty;
   int? spare_status;
-  int? remarks;
+  String? remarks;
   int? receive_later;
   int? asset_type_ID;
   String? paid_by_name;
@@ -154,7 +154,7 @@ class Items {
   String? asset_type;
   String? asset_code;
   int? goItemID;
-  int? sr_no;
+  String? sr_no;
   factory Items.fromJson(Map<String, dynamic> json) => Items(
         assetMasterItemID: json["assetMasterItemID"],
         goItemID: json["goItemID"],
@@ -168,7 +168,7 @@ class Items {
         paid_by_ID: json["paid_by_ID"],
         id: json['id'],
         assetItem_Name: json['assetItem_Name'],
-        locationID: json['location_ID'],
+        // locationID: json['location_ID'],
         spare_status: json['spare_status'],
         remarks: json['remarks'],
         receive_later: json['receive_later'],
@@ -193,9 +193,9 @@ class Items {
         "damaged_qty": damaged_qty,
         "id": id == null ? 0 : id,
         "assetItem_Name": assetItem_Name == null ? "" : assetItem_Name,
-        "locationID": locationID == null ? 0 : locationID,
+        // // // "locationID": locationID == null ? 0 : locationID,
         "spare_status": spare_status == null ? 0 : spare_status,
-        "remarks": remarks == null ? 0 : remarks,
+        "remarks": remarks == null ? "" : remarks,
         "receive_later": receive_later == null ? 0 : receive_later,
         "asset_type_ID": asset_type_ID == null ? 0 : asset_type_ID,
         "paid_by_name": paid_by_name == null ? "" : paid_by_name,

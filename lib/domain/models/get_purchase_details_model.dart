@@ -13,7 +13,7 @@ class GetPurchaseDetailsByIDModel {
   int? id;
   int? facility_id;
   // int? asset_type_ID;
-  int? vendorId;
+  int? vendorID;
   int? status;
   String? status_short;
   String? status_long;
@@ -46,7 +46,7 @@ class GetPurchaseDetailsByIDModel {
     this.id,
     this.facility_id,
     // this.asset_type_ID,
-    this.vendorId,
+    this.vendorID,
     this.status,
     this.status_short,
     this.status_long,
@@ -77,20 +77,21 @@ class GetPurchaseDetailsByIDModel {
           Map<String, dynamic> parsedJson) =>
       GetPurchaseDetailsByIDModel(
         facilityName: parsedJson["facilityName"] ?? "",
-        id: parsedJson["id"] ?? "",
+        id: parsedJson["id"] ?? 0,
 
         facility_id: parsedJson["facility_id"] ?? "",
         // asset_type_ID: parsedJson["asset_type_ID"] ?? "",
-        vendorId: parsedJson["vendorID"] ?? "",
-        status: parsedJson["status"] ?? "",
+        vendorID: parsedJson["vendorID"] ?? 0,
+        status: parsedJson["status"] ?? 0,
         status_short: parsedJson["status_short"] ?? "",
         status_long: parsedJson["status_long"] ?? "",
-        accepted_qty: parsedJson["accepted_qty"] ?? "",
-        receivedAt: Utility.getFormatedyearMonthDay(parsedJson['receivedAt']),
+        accepted_qty: parsedJson["accepted_qty"] ?? 0.0,
+        receivedAt:
+            Utility.getFormatedyearMonthDay(parsedJson['receivedAt'] ?? ""),
 
-        currencyID: parsedJson["currencyID"] ?? "",
+        currencyID: parsedJson["currencyID"] ?? 0,
         currency: parsedJson["currency"] ?? "",
-        amount: parsedJson["amount"] ?? "",
+        amount: parsedJson["amount"] ?? 0,
         job_ref: parsedJson["job_ref"] ?? "",
         gir_no: parsedJson["gir_no"] ?? "",
         vehicle_no: parsedJson["vehicle_no"] ?? "",
@@ -98,14 +99,14 @@ class GetPurchaseDetailsByIDModel {
         lr_no: parsedJson["lr_no"] ?? "",
         no_pkg_received: parsedJson["no_pkg_received"] ?? "",
         freight: parsedJson["freight"] ?? "",
-        po_date: Utility.getFormatedyearMonthDay(parsedJson['po_date']),
+        po_date: Utility.getFormatedyearMonthDay(parsedJson['po_date'] ?? ""),
         po_no: parsedJson["po_no"] ?? "",
         challan_date:
-            Utility.getFormatedyearMonthDay(parsedJson['challan_date']),
+            Utility.getFormatedyearMonthDay(parsedJson['challan_date'] ?? ""),
         challan_no: parsedJson["challan_no"] ?? "",
         purchaseDate:
-            Utility.getFormatedyearMonthDay(parsedJson['purchaseDate']),
-        location_ID: parsedJson["location_ID"] ?? "",
+            Utility.getFormatedyearMonthDay(parsedJson['purchaseDate'] ?? ""),
+        location_ID: parsedJson["location_ID"] ?? 0,
         vendor_name: parsedJson["vendor_name"] ?? "",
         goDetails: List<Items>.from(
             parsedJson["goDetails"].map((x) => Items.fromJson(x))),
@@ -117,7 +118,7 @@ class GetPurchaseDetailsByIDModel {
         "facilityName": facilityName,
         "facility_id": facility_id,
         // "asset_type_ID": asset_type_ID,
-        "vendorId": vendorId,
+        "vendorID": vendorID,
         "status": status,
         "status_short": status_short,
         "status_long": status_long,
