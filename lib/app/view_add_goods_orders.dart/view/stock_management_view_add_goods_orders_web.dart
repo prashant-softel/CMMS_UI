@@ -1,6 +1,6 @@
 import 'package:cmms/app/app.dart';
 import 'package:cmms/app/constant/constant.dart';
-import 'package:cmms/app/stock_managment_add_goods_orders.dart/view/stock_management_add_goods_orders_web.dart';
+
 import 'package:cmms/app/utils/user_access_constants.dart';
 import 'package:cmms/app/view_add_goods_orders.dart/stock_management_view_add_goods_orders_controller.dart';
 import 'package:cmms/app/widgets/close_goods_order_dialog.dart';
@@ -14,7 +14,6 @@ import 'package:data_table_2/data_table_2.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
-import 'package:scrollable_table_view/scrollable_table_view.dart';
 
 import '../../widgets/custom_richtext.dart';
 import '../../widgets/custom_textField.dart';
@@ -977,7 +976,7 @@ class _ViewAddGoodsOrdersWebState extends State<ViewAddGoodsOrdersWeb> {
                                                           child: Padding(
                                                             padding:
                                                                 const EdgeInsets
-                                                                        .only(
+                                                                    .only(
                                                                     left: 10,
                                                                     right: 10,
                                                                     top: 10),
@@ -1028,7 +1027,7 @@ class _ViewAddGoodsOrdersWebState extends State<ViewAddGoodsOrdersWeb> {
                                                           ? Padding(
                                                               padding:
                                                                   const EdgeInsets
-                                                                          .only(
+                                                                      .only(
                                                                       top: 10),
                                                               child: Column(
                                                                 mainAxisAlignment:
@@ -1069,8 +1068,7 @@ class _ViewAddGoodsOrdersWebState extends State<ViewAddGoodsOrdersWeb> {
                                                                               (Get.width * .4),
                                                                           keyboardType:
                                                                               TextInputType.number,
-                                                                          inputFormatters: <
-                                                                              TextInputFormatter>[
+                                                                          inputFormatters: <TextInputFormatter>[
                                                                             FilteringTextInputFormatter.digitsOnly
                                                                           ],
                                                                           maxLine:

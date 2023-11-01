@@ -436,10 +436,10 @@ class ReceiveGoodsOrdersController extends GetxController {
     List<Items> items = [];
     rowItem.value.forEach((element) {
       Items item = Items(
-          goItemID: 0,
+          id: 0,
           assetMasterItemID: dropdownMapperData[element[0]["value"]]?.id,
           cost: double.tryParse(element[2]["value"] ?? '0'),
-          ordered_qty: int.tryParse(element[3]["value"] ?? '0'),
+          ordered_qty: double.tryParse(element[3]["value"] ?? '0'),
           paid_by_ID: paiddropdownMapperData[element[1]["value"]]?.id);
       items.add(item);
     });
@@ -510,17 +510,17 @@ class ReceiveGoodsOrdersController extends GetxController {
         // accepted_qty: int.tryParse(element[6]["value"] ?? '0'),
         // damaged_qty: int.tryParse(element[7]["value"] ?? '0'),
         // requested_qty: int.tryParse(element[2]["value"] ?? '0'),
-        goItemID: int.tryParse('${element[0]["id"]}'),
+        id: int.tryParse('${element[0]["id"]}'),
         lost_qty: 0, //int.tryParse('${element[4]["lostQty"]}'),
         assetMasterItemID: int.tryParse('${element[0]["assetMasterItemID"]}'),
         paid_by_ID: int.tryParse('${element[1]["id"]}'),
         cost: double.tryParse(element[3]["value"] ?? '0'),
-        ordered_qty: int.tryParse(element[4]["value"] ?? '0'),
-        received_qty: int.tryParse(element[5]["value"] ?? '0'),
-        sr_no: int.tryParse(element[5]["sr_no"] ?? '0'),
+        ordered_qty: double.tryParse(element[4]["value"] ?? '0'),
+        received_qty: double.tryParse(element[5]["value"] ?? '0'),
+        sr_no: element[5]["sr_no"],
         accepted_qty: double.tryParse(element[6]["value"] ?? '0'),
-        damaged_qty: int.tryParse(element[7]["value"] ?? '0'),
-        requested_qty: int.tryParse(element[2]["value"] ?? '0'),
+        damaged_qty: double.tryParse(element[7]["value"] ?? '0'),
+        requested_qty: double.tryParse(element[2]["value"] ?? '0'),
       );
 
       // poID: paiddropdownMapperData[element[1]["value"]]?.id)
@@ -584,16 +584,16 @@ class ReceiveGoodsOrdersController extends GetxController {
     List<Items> items = [];
     rowItem.value.forEach((element) {
       Items item = Items(
-        goItemID: int.tryParse('${element[0]["id"]}'),
+        id: int.tryParse('${element[0]["id"]}'),
         lost_qty: 0, //int.tryParse('${element[4]["lostQty"]}'),
         assetMasterItemID: int.tryParse('${element[0]["assetMasterItemID"]}'),
         paid_by_ID: int.tryParse('${element[1]["id"]}'),
         cost: double.tryParse(element[3]["value"] ?? '0'),
-        ordered_qty: int.tryParse(element[4]["value"] ?? '0'),
-        received_qty: int.tryParse(element[5]["value"] ?? '0'),
+        ordered_qty: double.tryParse(element[4]["value"] ?? '0'),
+        received_qty: double.tryParse(element[5]["value"] ?? '0'),
         accepted_qty: double.tryParse(element[6]["value"] ?? '0'),
-        damaged_qty: int.tryParse(element[7]["value"] ?? '0'),
-        requested_qty: int.tryParse(element[2]["value"] ?? '0'),
+        damaged_qty: double.tryParse(element[7]["value"] ?? '0'),
+        requested_qty: double.tryParse(element[2]["value"] ?? '0'),
       );
 
       // poID: paiddropdownMapperData[element[1]["value"]]?.id)
