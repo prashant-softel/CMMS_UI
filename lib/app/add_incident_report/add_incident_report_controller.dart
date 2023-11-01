@@ -36,13 +36,11 @@ class AddIncidentReportController extends GetxController {
   ///Incident Report History
   RxList<HistoryModel?>? historyList = <HistoryModel?>[].obs;
 
-   ///Radio
+  ///Radio
   RxString selectedSeverity = RxString('');
-   void setSelectedSeverity(String severity) {
+  void setSelectedSeverity(String severity) {
     selectedSeverity.value = severity;
   }
-
- 
 
   // void addRow(String rowData) {
   //   rowList.add(rowData);
@@ -139,8 +137,6 @@ class AddIncidentReportController extends GetxController {
   // var blockList = <BlockModel>[];
   var equipmentList = <EquipmentModel>[];
 
-
-
   ///Incident Report List
   RxList<IncidentReportListModel?> incidentReportModelList =
       <IncidentReportListModel>[].obs;
@@ -195,6 +191,11 @@ class AddIncidentReportController extends GetxController {
   Rx<bool> isIncidentDescriptionInvalid = false.obs;
 
   var titleTextCtrlr = TextEditingController();
+  var correctiveActionTextCtrlr = TextEditingController();
+  Rx<bool> isCorrectiveTextInvalid = false.obs;
+
+  var verifiedApprovedTextCtrlr = TextEditingController();
+  Rx<bool> isVerifiedApprovedextInvalid = false.obs;
 
   Rx<DateTime> selectedBreakdownTime = DateTime.now().obs;
   Rx<DateTime> selectedValidTillTime = DateTime.now().obs;
@@ -410,9 +411,11 @@ class AddIncidentReportController extends GetxController {
           '${incidentReportDetailsModel.value?.damaged_cost ?? 0}';
       genLossAssetDamageTextCtrlr.text =
           '${incidentReportDetailsModel.value?.generation_loss ?? 0}';
-      selectedSeverity.value = '${incidentReportDetailsModel.value?.severity ?? ''}';
+      selectedSeverity.value =
+          '${incidentReportDetailsModel.value?.severity ?? ''}';
       selectedRiskTypeId = incidentReportDetailsModel.value?.risk_type ?? 0;
-      selectedRiskTypeList.value = incidentReportDetailsModel.value?.risk_type_name ?? '';
+      selectedRiskTypeList.value =
+          incidentReportDetailsModel.value?.risk_type_name ?? '';
     }
   }
 
@@ -685,12 +688,12 @@ class AddIncidentReportController extends GetxController {
               'Incident Investigation Done By Id: $selectedIncidentInvestigationDoneById');
         }
         break;
-        case RxList<RiskTypeModel>:
+      case RxList<RiskTypeModel>:
         {
-          int riskTypeListIndex = riskTypeList.indexWhere((x) => x.name == value);
+          int riskTypeListIndex =
+              riskTypeList.indexWhere((x) => x.name == value);
           selectedRiskTypeId = riskTypeList[riskTypeListIndex].id ?? 0;
           print('Risk Type id: $selectedRiskTypeId');
-         
         }
         break;
 

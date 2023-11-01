@@ -429,7 +429,11 @@ class ViewIncidentReportContentWeb
                                             ///Incident Report History
                                             Container(
                                               margin: Dimens.edgeInsets20,
-                                              height: 200,
+                                              height: ((controller.historyList
+                                                              ?.length ??
+                                                          0) *
+                                                      50) +
+                                                  125,
                                               decoration: BoxDecoration(
                                                 border: Border.all(
                                                   color: ColorValues

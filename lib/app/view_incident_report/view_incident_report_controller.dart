@@ -267,9 +267,9 @@ class ViewIncidentReportController extends GetxController {
 
     final _incidentReportApproveBtn =
         await viewIncidentReportPresenter.incidentReportApproveButton(
-      // comment: _rejectComment,
-      incidentId: '$id',
-    );
+            // comment: _rejectComment,
+            incidentId: '$id',
+            isLoading: true);
     // showAlertPermitApproveDialog();
     print('Incident Report Approve Button Data:${id}');
   }
@@ -279,9 +279,7 @@ class ViewIncidentReportController extends GetxController {
 
     final _incidentReportRejectBtn =
         await viewIncidentReportPresenter.incidentReportRejectButton(
-      comment: _rejectComment,
-      id: '$id',
-    );
+            comment: _rejectComment, id: '$id', isLoading: true);
     // showAlertPermitApproveDialog();
     print('Incident Report Reject Button Data:${_rejectComment}');
     print('Incident Report Reject Button Data:${id}');

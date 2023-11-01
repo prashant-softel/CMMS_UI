@@ -47,10 +47,11 @@ class IncidentReportMessageApproveDialog extends GetView {
                     thickness: 1,
                   ),
                   Center(
-                    child: Text(
-                        '${data}', style: TextStyle(color: Colors.green),textAlign: TextAlign.center),
+                    child: Text('${data}',
+                        style: TextStyle(color: Colors.green),
+                        textAlign: TextAlign.center),
                   ),
-                      // SizedBox(height: 20,),
+                  // SizedBox(height: 20,),
                   // Row(
                   //     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   //     children: [
@@ -89,7 +90,7 @@ class IncidentReportMessageApproveDialog extends GetView {
                 //     _controller.formattedTodate,
                 //     _controller.formattedFromdate,
                 //     false);
-                    Get.offAndToNamed(Routes.incidentReportListWeb);
+                Get.offAllNamed(Routes.incidentReportListWeb);
                 Get.back();
               },
               child: const Text('Ok'),
