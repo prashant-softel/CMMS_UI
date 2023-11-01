@@ -321,7 +321,7 @@ class _TransactionReportListWebState extends State<TransactionReportListWeb> {
                                     ? controller.toDate.value = dropDate
                                     : controller.toDate.value = pickUpDate;
 
-                                controller.getPmTaskListByDate();
+                                controller.getTransactionListByDate();
                                 controller.openFromDateToStartDatePicker =
                                     !controller.openFromDateToStartDatePicker;
                                 controller.update(['stock_Mangement_Date']);

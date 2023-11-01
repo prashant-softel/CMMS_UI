@@ -553,6 +553,8 @@ class DataRepository extends DomainRepository {
   }
 
   Future<ResponseModel> transactionReport({
+    int? actorID,
+    int? actorType,
     int? facility_id,
     String? start_date,
     required String end_date,
@@ -565,6 +567,8 @@ class DataRepository extends DomainRepository {
       facility_id: facility_id,
       start_date: start_date,
       end_date: end_date,
+      actorID: actorID,
+      actorType: actorType,
     );
   }
 

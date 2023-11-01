@@ -21,12 +21,16 @@ class TransactionReportListPresenter {
     required int? facility_id,
     String? start_date,
     required String end_date,
+    int? actorID,
+    int? actorType,
   }) async {
     return transactionReportListUsecase.transactionReport(
       isLoading: isLoading,
       facility_id: facility_id,
       start_date: start_date,
       end_date: end_date,
+      actorID: actorID,
+      actorType: actorType,
     );
   }
 }

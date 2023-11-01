@@ -106,11 +106,12 @@ class TransactionReportListController extends GetxController {
       facilityId = event;
       Future.delayed(Duration(seconds: 2), () async {
         await transactionReport(
-          facilityId,
-          formattedTodate1,
-          formattedFromdate1,
-          false,
-        );
+            facilityId: facilityId,
+            startDate: formattedTodate1,
+            // actorType: actorType,
+            actorID: facilityId,
+            endDate: formattedFromdate1,
+            isLoading: false);
       });
     });
     super.onInit();
@@ -129,14 +130,21 @@ class TransactionReportListController extends GetxController {
     update(['stock_Mangement_Date']);
   }
 
-  Future<void> transactionReport(int facilityId, dynamic startDate,
-      dynamic endDate, bool isLoading) async {
+  Future<void> transactionReport(
+      {int? facilityId,
+      dynamic startDate,
+      int? actorType,
+      int? actorID,
+      dynamic endDate,
+      bool? isLoading}) async {
     transactionReportList.value = <TransactionReportListModel>[];
     final _goodsordersList =
         await transactionReportListPresenter.transactionReport(
       isLoading: true,
       start_date: startDate,
       end_date: endDate,
+      actorID: actorID,
+      actorType: actorType,
       facility_id: facilityId,
     );
     transactionReportList.value = _goodsordersList;
@@ -159,7 +167,13 @@ class TransactionReportListController extends GetxController {
     switch (list.runtimeType) {}
   }
 
-  void getPmTaskListByDate() {
-    transactionReport(facilityId, formattedFromdate1, formattedTodate1, false);
+  void getTransactionListByDate() {
+    transactionReport(
+        facilityId: facilityId,
+        startDate: formattedTodate1,
+        // actorType: actorType,
+        actorID: facilityId,
+        endDate: formattedFromdate1,
+        isLoading: false);
   }
 }
