@@ -40,7 +40,7 @@ class GoodsOrdersReqDetailController extends GetxController {
   StreamSubscription<int>? facilityIdStreamSubscription;
   final HomeController homeController = Get.find();
   int facilityId = 0;
-  Rx<int> id = 0.obs;
+  Rx<int> roId = 0.obs;
 
   @override
   void onInit() async {
@@ -53,10 +53,10 @@ class GoodsOrdersReqDetailController extends GetxController {
       Future.delayed(Duration(seconds: 1), () {
         getAssetList(facilityId);
 
-        if (id.value != 0) {
+        if (roId.value != 0) {
           Future.delayed(Duration(seconds: 1), () {
-            getRoDetailsByID(requestID: id.value);
-            getRoHistory(id: id.value);
+            getRoDetailsByID(requestID: roId.value);
+            getRoHistory(id: roId.value);
           });
         }
       });
@@ -84,9 +84,9 @@ class GoodsOrdersReqDetailController extends GetxController {
     try {
       var dataFromPreviousScreen = Get.arguments;
 
-      id.value = dataFromPreviousScreen['id'];
+      roId.value = dataFromPreviousScreen['roId'];
       // id= Get.arguments;
-      print('AddStock:$id');
+      print('AddStock:$roId');
       // final _flutterSecureStorage = const FlutterSecureStorage();
       // // Read jobId
       // String? _userId = await _flutterSecureStorage.read(key: "userId");
@@ -244,7 +244,7 @@ class GoodsOrdersReqDetailController extends GetxController {
             facilityID: facilityId,
             items: items,
             comment: commentCtrlr.text,
-            request_order_id: id.value);
+            request_order_id: roId.value);
 
     var createGoReqModelJsonString = createRequestOrderDataModel.toJson();
     Map<String, dynamic>? responseCreateGoModel =

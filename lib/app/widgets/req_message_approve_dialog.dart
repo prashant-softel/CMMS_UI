@@ -102,10 +102,10 @@ class ReqOrderMessageApproveDialog extends GetView {
                       () {
                         controller.getAssetList(controller.facilityId);
 
-                        if (controller.id.value != 0) {
+                        if (controller.roId.value != 0) {
                           Future.delayed(Duration(seconds: 1), () {
                             controller.getRoDetailsByID(
-                                requestID: controller.id.value);
+                                requestID: controller.roId.value);
                             // getGoHistory(id: id.value);
                           });
                         }

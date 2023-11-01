@@ -281,7 +281,7 @@ class PurchaseGoodsorderViewWeb
                                   text: ' Reject ',
                                   onPressed: () {
                                     Get.dialog(ReqOrderRejectDialog(
-                                      id: controller.id.value,
+                                      id: controller.roId.value,
                                     ));
                                   },
                                   // onPressed: () {
@@ -297,7 +297,7 @@ class PurchaseGoodsorderViewWeb
                                     text: 'Approve',
                                     onPressed: () {
                                       Get.dialog(ReqOrderApprovedDialog(
-                                        id: controller.id.value,
+                                        id: controller.roId.value,
                                       ));
                                     },
                                     // onPressed: () {
@@ -509,8 +509,7 @@ class AddRowInReqGoodsOrder extends StatelessWidget {
                                           ),
                                           child: LoginCustomTextfield(
                                             keyboardType: TextInputType.number,
-                                            inputFormatters: <
-                                                TextInputFormatter>[
+                                            inputFormatters: <TextInputFormatter>[
                                               FilteringTextInputFormatter
                                                   .digitsOnly
                                             ],

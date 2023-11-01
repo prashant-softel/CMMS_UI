@@ -255,7 +255,7 @@ class GoodsOrdersReqDetailsWeb extends GetView<GoodsOrdersReqDetailController> {
                         },
                       ),
                       Dimens.boxWidth15,
-                      controller.id == 0
+                      controller.roId == 0
                           ? CustomElevatedButton(
                               backgroundColor: ColorValues.appGreenColor,
                               text: 'Submit',
@@ -474,8 +474,7 @@ class AddRowInReqGoodsOrder extends StatelessWidget {
                                           ),
                                           child: LoginCustomTextfield(
                                             keyboardType: TextInputType.number,
-                                            inputFormatters: <
-                                                TextInputFormatter>[
+                                            inputFormatters: <TextInputFormatter>[
                                               FilteringTextInputFormatter
                                                   .digitsOnly
                                             ],
