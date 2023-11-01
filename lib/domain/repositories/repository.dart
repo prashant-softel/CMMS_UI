@@ -1151,6 +1151,8 @@ class Repository {
   }
 
   Future<List<TransactionReportListModel>> transactionReport({
+    int? actorID,
+    int? actorType,
     required int? facility_id,
     String? start_date,
     required String end_date,
@@ -1165,6 +1167,8 @@ class Repository {
         start_date: start_date,
         end_date: end_date,
         isLoading: isLoading,
+        actorID: actorID,
+        actorType: actorType,
         auth: auth,
       );
       print('getGoodsOrdersList: ${res.data}');
