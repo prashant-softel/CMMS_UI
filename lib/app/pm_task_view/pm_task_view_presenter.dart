@@ -113,4 +113,5 @@ class PreventiveMaintenanceTaskViewPresenter {
 
   Future<String?> getValue() async =>
       await preventiveMaintenanceTaskViewUsecase.getValue();
+  void clearValue() async => preventiveMaintenanceTaskViewUsecase.clearValue();
 }

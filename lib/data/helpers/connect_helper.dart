@@ -3073,7 +3073,7 @@ class ConnectHelper {
     bool? isLoading,
   }) async {
     var responseModel = await apiWrapper.makeRequest(
-      'MRS/getMRSListByModule?taskId=$taskId',
+      'MRS/getMRSListByModule?pmId=$taskId',
       Request.get,
       null,
       isLoading ?? false,

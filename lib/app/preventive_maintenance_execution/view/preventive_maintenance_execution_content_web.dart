@@ -282,7 +282,7 @@ class PreventiveMaintenanceExecutionContentWeb
                                               DataCell(Text(controller
                                                       .scheduleCheckPoints?[
                                                           index]
-                                                      ?.schedule_id
+                                                      ?.name
                                                       .toString() ??
                                                   '')),
                                               DataCell(Text(controller
