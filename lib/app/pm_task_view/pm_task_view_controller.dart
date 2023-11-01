@@ -136,7 +136,8 @@ class PreventiveMaintenanceTaskViewController extends GetxController {
               false,
             ) ??
             [];
-    update(["taskLinkdToPermitList"]);
+    print({"listMrsByTaskId", listMrsByTaskId});
+    // update(["taskLinkdToPermitList"]);
   }
 
   Future<void> getHistory() async {
@@ -420,9 +421,6 @@ class PreventiveMaintenanceTaskViewController extends GetxController {
         isLoading: true,
       );
       if (response == true) {
-        final _flutterSecureStorage = const FlutterSecureStorage();
-
-        _flutterSecureStorage.delete(key: "pmTaskId");
         Get.offAllNamed(Routes.pmTask);
       }
     }
@@ -442,9 +440,6 @@ class PreventiveMaintenanceTaskViewController extends GetxController {
         isLoading: true,
       );
       if (response == true) {
-        final _flutterSecureStorage = const FlutterSecureStorage();
-
-        _flutterSecureStorage.delete(key: "pmTaskId");
         Get.offAllNamed(Routes.pmTask);
       }
     }
@@ -464,11 +459,12 @@ class PreventiveMaintenanceTaskViewController extends GetxController {
         isLoading: true,
       );
       if (response == true) {
-        final _flutterSecureStorage = const FlutterSecureStorage();
-
-        _flutterSecureStorage.delete(key: "pmTaskId");
         Get.offAllNamed(Routes.pmTask);
       }
     }
+  }
+
+  void clearMrsStoreData() {
+    preventiveMaintenanceTaskViewPresenter.clearValue();
   }
 }

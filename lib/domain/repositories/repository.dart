@@ -5201,7 +5201,6 @@ class Repository {
         isLoading: isLoading,
         taskId: taskId,
       );
-
       if (!res.hasError) {
         final jsonMrsListByModuleModel = jsonDecode(res.data);
         final List<MRSListByJobIdModel> _mrsListByModule =

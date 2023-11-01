@@ -97,4 +97,5 @@ class PreventiveMaintenanceTaskViewUsecase {
       repository.saveValue(LocalKeys.pmTaskId, pmTaskId);
   Future<String?> getValue() async =>
       await repository.getStringValue(LocalKeys.pmTaskId);
+  void clearValue() async => repository.clearData(LocalKeys.mrsId);
 }
