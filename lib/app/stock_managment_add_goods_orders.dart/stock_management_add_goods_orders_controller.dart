@@ -49,7 +49,7 @@ class StockManagementAddGoodsOrdersController extends GetxController {
   int selectedBusinessTypeId = 1;
   int paidId = 0;
   RxBool showAdditionalColumn = false.obs;
-  Rx<int> id = 0.obs;
+  Rx<int> goId = 0.obs;
   int facilityId = 0;
 
   //drop down list of assets
@@ -132,10 +132,10 @@ class StockManagementAddGoodsOrdersController extends GetxController {
       Future.delayed(Duration(seconds: 1), () {
         getAssetList(facilityId);
 
-        if (id.value != 0) {
+        if (goId.value != 0) {
           Future.delayed(Duration(seconds: 1), () {
-            getPurchaseDetailsById(id: id.value);
-            getGoHistory(id: id.value);
+            getPurchaseDetailsById(id: goId.value);
+            getGoHistory(id: goId.value);
           });
         }
       });
@@ -148,9 +148,9 @@ class StockManagementAddGoodsOrdersController extends GetxController {
     try {
       var dataFromPreviousScreen = Get.arguments;
 
-      id.value = dataFromPreviousScreen['id'];
+      goId.value = dataFromPreviousScreen['goId'];
       // id= Get.arguments;
-      print('AddStock:$id');
+      print('AddStock:$goId');
       // final _flutterSecureStorage = const FlutterSecureStorage();
       // // Read jobId
       // String? _userId = await _flutterSecureStorage.read(key: "userId");
@@ -510,7 +510,7 @@ class StockManagementAddGoodsOrdersController extends GetxController {
     });
     CreateGoModel createGoModel = CreateGoModel(
         is_submit: 1,
-        id: id.value,
+        id: goId.value,
         facility_id: facilityId,
         order_type: 1,
         location_ID: 1,

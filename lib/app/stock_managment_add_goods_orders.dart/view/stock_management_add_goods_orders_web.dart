@@ -116,7 +116,7 @@ class _AddGoodsOrdersWebState extends State<AddGoodsOrdersWeb> {
                                                   " ${controller.getPurchaseDetailsByIDModel.value?.status_short ?? ""}",
                                                 ),
                                               )),
-                                          controller.id == null
+                                          controller.goId == null
                                               ? Container()
                                               : Obx(
                                                   () => Text(
@@ -188,8 +188,7 @@ class _AddGoodsOrdersWebState extends State<AddGoodsOrdersWeb> {
                                                   GoodsOrderTextField(
                                                     keyboardType:
                                                         TextInputType.number,
-                                                    inputFormatters: <
-                                                        TextInputFormatter>[
+                                                    inputFormatters: <TextInputFormatter>[
                                                       FilteringTextInputFormatter
                                                           .digitsOnly
                                                     ],
@@ -207,8 +206,7 @@ class _AddGoodsOrdersWebState extends State<AddGoodsOrdersWeb> {
                                                   GoodsOrderTextField(
                                                     keyboardType:
                                                         TextInputType.number,
-                                                    inputFormatters: <
-                                                        TextInputFormatter>[
+                                                    inputFormatters: <TextInputFormatter>[
                                                       FilteringTextInputFormatter
                                                           .digitsOnly
                                                     ],
@@ -227,8 +225,7 @@ class _AddGoodsOrdersWebState extends State<AddGoodsOrdersWeb> {
                                                   GoodsOrderTextField(
                                                     keyboardType:
                                                         TextInputType.number,
-                                                    inputFormatters: <
-                                                        TextInputFormatter>[
+                                                    inputFormatters: <TextInputFormatter>[
                                                       FilteringTextInputFormatter
                                                           .digitsOnly
                                                     ],
@@ -260,8 +257,7 @@ class _AddGoodsOrdersWebState extends State<AddGoodsOrdersWeb> {
                                                   GoodsOrderTextField(
                                                     keyboardType:
                                                         TextInputType.number,
-                                                    inputFormatters: <
-                                                        TextInputFormatter>[
+                                                    inputFormatters: <TextInputFormatter>[
                                                       FilteringTextInputFormatter
                                                           .digitsOnly
                                                     ],
@@ -280,8 +276,7 @@ class _AddGoodsOrdersWebState extends State<AddGoodsOrdersWeb> {
                                                   GoodsOrderTextField(
                                                     keyboardType:
                                                         TextInputType.number,
-                                                    inputFormatters: <
-                                                        TextInputFormatter>[
+                                                    inputFormatters: <TextInputFormatter>[
                                                       FilteringTextInputFormatter
                                                           .digitsOnly
                                                     ],
@@ -298,8 +293,7 @@ class _AddGoodsOrdersWebState extends State<AddGoodsOrdersWeb> {
                                                 GoodsOrderTextField(
                                                   keyboardType:
                                                       TextInputType.number,
-                                                  inputFormatters: <
-                                                      TextInputFormatter>[
+                                                  inputFormatters: <TextInputFormatter>[
                                                     FilteringTextInputFormatter
                                                         .digitsOnly
                                                   ],
@@ -433,8 +427,7 @@ class _AddGoodsOrdersWebState extends State<AddGoodsOrdersWeb> {
                                                   GoodsOrderTextField(
                                                     keyboardType:
                                                         TextInputType.number,
-                                                    inputFormatters: <
-                                                        TextInputFormatter>[
+                                                    inputFormatters: <TextInputFormatter>[
                                                       FilteringTextInputFormatter
                                                           .digitsOnly
                                                     ],
@@ -452,8 +445,7 @@ class _AddGoodsOrdersWebState extends State<AddGoodsOrdersWeb> {
                                                   GoodsOrderTextField(
                                                     keyboardType:
                                                         TextInputType.number,
-                                                    inputFormatters: <
-                                                        TextInputFormatter>[
+                                                    inputFormatters: <TextInputFormatter>[
                                                       FilteringTextInputFormatter
                                                           .digitsOnly
                                                     ],
@@ -471,8 +463,7 @@ class _AddGoodsOrdersWebState extends State<AddGoodsOrdersWeb> {
                                                   GoodsOrderTextField(
                                                     keyboardType:
                                                         TextInputType.number,
-                                                    inputFormatters: <
-                                                        TextInputFormatter>[
+                                                    inputFormatters: <TextInputFormatter>[
                                                       FilteringTextInputFormatter
                                                           .digitsOnly
                                                     ],
@@ -765,7 +756,7 @@ class _AddGoodsOrdersWebState extends State<AddGoodsOrdersWeb> {
                             ),
                           ),
                           Dimens.boxWidth15,
-                          controller.id == 0
+                          controller.goId == 0
                               ? Container(
                                   height: 40,
                                   child: CustomElevatedButton(
@@ -1034,8 +1025,7 @@ class AddRowInGoodsOrder extends StatelessWidget {
                                                 width: (Get.width * .4),
                                                 keyboardType:
                                                     TextInputType.number,
-                                                inputFormatters: <
-                                                    TextInputFormatter>[
+                                                inputFormatters: <TextInputFormatter>[
                                                   FilteringTextInputFormatter
                                                       .digitsOnly
                                                 ],
@@ -1085,8 +1075,7 @@ class AddRowInGoodsOrder extends StatelessWidget {
                                                     width: (Get.width * .4),
                                                     keyboardType:
                                                         TextInputType.number,
-                                                    inputFormatters: <
-                                                        TextInputFormatter>[
+                                                    inputFormatters: <TextInputFormatter>[
                                                       FilteringTextInputFormatter
                                                           .digitsOnly
                                                     ],

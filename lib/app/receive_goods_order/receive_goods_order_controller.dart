@@ -46,7 +46,7 @@ class ReceiveGoodsOrdersController extends GetxController {
   int selectedBusinessTypeId = 1;
   int paidId = 0;
   RxBool showAdditionalColumn = false.obs;
-  Rx<int> id = 0.obs;
+  Rx<int> goId = 0.obs;
   int facilityId = 0;
 
   TextEditingController approveCommentTextFieldCtrlr = TextEditingController();
@@ -120,14 +120,14 @@ class ReceiveGoodsOrdersController extends GetxController {
       Future.delayed(Duration(seconds: 1), () {
         getAssetList(facilityId);
 
-        if (id.value != 0) {
+        if (goId.value != 0) {
           Future.delayed(Duration(seconds: 1), () {
-            getPurchaseDetailsById(id: id.value);
+            getPurchaseDetailsById(id: goId.value);
           });
         }
       });
     } catch (e) {}
-    await getGoHistory(id: id.value);
+    await getGoHistory(id: goId.value);
     super.onInit();
   }
 
@@ -135,9 +135,9 @@ class ReceiveGoodsOrdersController extends GetxController {
     try {
       var dataFromPreviousScreen = Get.arguments;
 
-      id.value = dataFromPreviousScreen['id'];
+      goId.value = dataFromPreviousScreen['goId'];
       // id= Get.arguments;
-      print('AddStock:$id');
+      print('AddStock:$goId');
     } catch (e) {
       print(e.toString() + 'userId');
       //  Utility.showDialog(e.toString() + 'userId');
@@ -528,7 +528,7 @@ class ReceiveGoodsOrdersController extends GetxController {
       items.add(item);
     });
     CreateGoModel createGoModel = CreateGoModel(
-        id: id.value,
+        id: goId.value,
         facility_id: facilityId,
         is_submit: 1,
         order_type: 1,
@@ -601,7 +601,7 @@ class ReceiveGoodsOrdersController extends GetxController {
       items.add(item);
     });
     CreateGoModel createGoModel = CreateGoModel(
-        id: id.value,
+        id: goId.value,
         facility_id: facilityId,
         is_submit: 0,
         order_type: 1,
