@@ -110,4 +110,8 @@ class ReceiveGoodsOrdersUsecase {
         id: id,
         isLoading: isLoading ?? false,
       );
+  void saveValue({String? goId}) async =>
+      _repository.saveValue(LocalKeys.goId, goId);
+  Future<String?> getValue() async =>
+      await _repository.getStringValue(LocalKeys.goId);
 }

@@ -133,11 +133,15 @@ class ReceiveGoodsOrdersController extends GetxController {
 
   Future<void> setUserId() async {
     try {
-      var dataFromPreviousScreen = Get.arguments;
+      final _goId = await receiveGoodsOrdersPresenter.getValue();
+      if (_goId == null || _goId == '' || _goId == "null") {
+        var dataFromPreviousScreen = Get.arguments;
 
-      goId.value = dataFromPreviousScreen['goId'];
-      // id= Get.arguments;
-      print('AddStock:$goId');
+        goId.value = dataFromPreviousScreen['goId'];
+        receiveGoodsOrdersPresenter.saveValue(goId: goId.value.toString());
+      } else {
+        goId.value = int.tryParse(_goId) ?? 0;
+      }
     } catch (e) {
       print(e.toString() + 'userId');
       //  Utility.showDialog(e.toString() + 'userId');

@@ -976,7 +976,7 @@ class _ViewAddGoodsOrdersWebState extends State<ViewAddGoodsOrdersWeb> {
                                                           child: Padding(
                                                             padding:
                                                                 const EdgeInsets
-                                                                    .only(
+                                                                        .only(
                                                                     left: 10,
                                                                     right: 10,
                                                                     top: 10),
@@ -1027,7 +1027,7 @@ class _ViewAddGoodsOrdersWebState extends State<ViewAddGoodsOrdersWeb> {
                                                           ? Padding(
                                                               padding:
                                                                   const EdgeInsets
-                                                                      .only(
+                                                                          .only(
                                                                       top: 10),
                                                               child: Column(
                                                                 mainAxisAlignment:
@@ -1068,7 +1068,8 @@ class _ViewAddGoodsOrdersWebState extends State<ViewAddGoodsOrdersWeb> {
                                                                               (Get.width * .4),
                                                                           keyboardType:
                                                                               TextInputType.number,
-                                                                          inputFormatters: <TextInputFormatter>[
+                                                                          inputFormatters: <
+                                                                              TextInputFormatter>[
                                                                             FilteringTextInputFormatter.digitsOnly
                                                                           ],
                                                                           maxLine:
@@ -1294,7 +1295,7 @@ class _ViewAddGoodsOrdersWebState extends State<ViewAddGoodsOrdersWeb> {
                                         icon: Icons.close,
                                         onPressed: () {
                                           Get.dialog(GoodsOrderCloseDialog(
-                                            id: controller.goId,
+                                            id: controller.goId.value,
                                           ));
                                         },
                                       ),
@@ -1306,7 +1307,7 @@ class _ViewAddGoodsOrdersWebState extends State<ViewAddGoodsOrdersWeb> {
                                       controller.getPurchaseDetailsByIDModel
                                                   .value?.status ==
                                               301 &&
-                                          controller.goType == 1
+                                          controller.goType.value == 1
                                   //     ||
                                   // controller.getPurchaseDetailsByIDModel
                                   //             .value?.status ==
@@ -1345,7 +1346,7 @@ class _ViewAddGoodsOrdersWebState extends State<ViewAddGoodsOrdersWeb> {
                                                   onPressed: () {
                                                     Get.dialog(
                                                         GoodsOrderApprovedDialog(
-                                                      id: controller.goId,
+                                                      id: controller.goId.value,
                                                     ));
                                                   },
                                                 ),
@@ -1355,9 +1356,12 @@ class _ViewAddGoodsOrdersWebState extends State<ViewAddGoodsOrdersWeb> {
                                         controller.getPurchaseDetailsByIDModel
                                                             .value?.status ==
                                                         302 &&
-                                                    varUserAccessModel.value.access_list!
+                                                    varUserAccessModel
+                                                            .value.access_list!
                                                             .where((e) =>
-                                                                e.feature_id == UserAccessConstants.kGoodsFeatureId &&
+                                                                e.feature_id ==
+                                                                    UserAccessConstants
+                                                                        .kGoodsFeatureId &&
                                                                 e.approve ==
                                                                     UserAccessConstants
                                                                         .kHaveApproveAccess)
@@ -1366,13 +1370,11 @@ class _ViewAddGoodsOrdersWebState extends State<ViewAddGoodsOrdersWeb> {
                                                 controller.getPurchaseDetailsByIDModel
                                                             .value?.status ==
                                                         301 &&
-                                                    controller.goType == 1 &&
+                                                    controller.goType.value ==
+                                                        1 &&
                                                     varUserAccessModel
                                                             .value.access_list!
-                                                            .where((e) =>
-                                                                e.feature_id ==
-                                                                    UserAccessConstants.kGoodsFeatureId &&
-                                                                e.approve == UserAccessConstants.kHaveApproveAccess)
+                                                            .where((e) => e.feature_id == UserAccessConstants.kGoodsFeatureId && e.approve == UserAccessConstants.kHaveApproveAccess)
                                                             .length >
                                                         0
                                             ? Container(
@@ -1385,7 +1387,7 @@ class _ViewAddGoodsOrdersWebState extends State<ViewAddGoodsOrdersWeb> {
                                                   onPressed: () {
                                                     Get.dialog(
                                                         GoodsOrderRejectDialog(
-                                                      id: controller.goId,
+                                                      id: controller.goId.value,
                                                     ));
                                                   },
                                                 ),

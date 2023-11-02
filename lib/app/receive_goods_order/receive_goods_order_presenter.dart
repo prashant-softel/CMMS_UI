@@ -125,4 +125,10 @@ class ReceiveGoodsOrdersPresenter {
         id: id,
         isLoading: isLoading,
       );
+  void saveValue({String? goId}) async {
+    return receiveGoodsOrdersUsecase.saveValue(goId: goId);
+  }
+
+  Future<String?> getValue() async =>
+      await receiveGoodsOrdersUsecase.getValue();
 }

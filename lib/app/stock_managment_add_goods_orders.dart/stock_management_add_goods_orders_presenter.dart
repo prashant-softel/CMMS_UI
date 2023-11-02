@@ -3,7 +3,6 @@ import 'package:cmms/domain/models/business_list_model.dart';
 import 'package:cmms/domain/models/currency_list_model.dart';
 import 'package:cmms/domain/models/facility_model.dart';
 import 'package:cmms/domain/models/get_asset_data_list_model.dart';
-import 'package:cmms/domain/models/get_asset_items_model.dart';
 import 'package:cmms/domain/models/get_purchase_details_model.dart';
 import 'package:cmms/domain/models/history_model.dart';
 
@@ -104,4 +103,10 @@ class StockManagementAddGoodsOrdersPresenter {
         id: id,
         isLoading: isLoading,
       );
+  void saveValue({String? goId}) async {
+    return stockManagementAddGoodsOrdersUsecase.saveValue(goId: goId);
+  }
+
+  Future<String?> getValue() async =>
+      await stockManagementAddGoodsOrdersUsecase.getValue();
 }

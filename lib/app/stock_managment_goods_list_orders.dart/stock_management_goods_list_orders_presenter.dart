@@ -1,7 +1,6 @@
 import 'package:cmms/domain/models/stock_management_update_goods_orders_model.dart';
 import 'package:cmms/domain/usecases/stock_management_goods_orders_usecase.dart';
 
-import '../../domain/models/facility_model.dart';
 import '../../domain/models/user_list_model.dart';
 
 class StockManagementGoodsOrdersPresenter {
@@ -33,4 +32,8 @@ class StockManagementGoodsOrdersPresenter {
       end_date: end_date,
     );
   }
+
+  void clearValue() async => stockManagementGoodsOrdersUsecase.clearValue();
+  void clearTypeValue() async =>
+      stockManagementGoodsOrdersUsecase.clearTypeValue();
 }
