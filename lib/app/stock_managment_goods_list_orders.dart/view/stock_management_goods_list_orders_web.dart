@@ -144,6 +144,8 @@ class _StockManagementGoodsOrdersWebState
                                               icon: Icons.add,
                                               label: "Add New",
                                               onPressed: () {
+                                                controller.clearStoreData();
+                                                controller.clearTypeStoreData();
                                                 Get.offNamed(Routes
                                                     .updateGoodsOrdersDetailsScreen);
                                               },
@@ -183,34 +185,36 @@ class _StockManagementGoodsOrdersWebState
                                           ),
                                         ),
                                       ),
-                                      itemBuilder: (BuildContext context) => <
-                                          PopupMenuEntry<String>>[]..addAll(
-                                            controller
-                                                .columnVisibility.value.entries
-                                                .map((e) {
-                                          return PopupMenuItem<String>(
-                                              child: ValueListenableBuilder(
-                                                  valueListenable: controller
-                                                      .columnVisibility,
-                                                  builder:
-                                                      (context, value, child) {
-                                                    return Row(
-                                                      children: [
-                                                        Checkbox(
-                                                          value: value[e.key],
-                                                          onChanged:
-                                                              (newValue) {
-                                                            controller
-                                                                .setColumnVisibility(
-                                                                    e.key,
-                                                                    newValue!);
-                                                          },
-                                                        ),
-                                                        Text(e.key),
-                                                      ],
-                                                    );
-                                                  }));
-                                        })),
+                                      itemBuilder: (BuildContext context) =>
+                                          <PopupMenuEntry<String>>[]..addAll(
+                                                controller.columnVisibility
+                                                    .value.entries
+                                                    .map((e) {
+                                              return PopupMenuItem<String>(
+                                                  child: ValueListenableBuilder(
+                                                      valueListenable:
+                                                          controller
+                                                              .columnVisibility,
+                                                      builder: (context, value,
+                                                          child) {
+                                                        return Row(
+                                                          children: [
+                                                            Checkbox(
+                                                              value:
+                                                                  value[e.key],
+                                                              onChanged:
+                                                                  (newValue) {
+                                                                controller
+                                                                    .setColumnVisibility(
+                                                                        e.key,
+                                                                        newValue!);
+                                                              },
+                                                            ),
+                                                            Text(e.key),
+                                                          ],
+                                                        );
+                                                      }));
+                                            })),
                                       onSelected: (String value) {
                                         // Handle column selection
                                       },
@@ -1020,6 +1024,8 @@ class GoodsOrderListDataSource extends DataTableSource {
       }).toList(),
       //   ],
       onSelectChanged: (_) {
+        controller.clearStoreData();
+        controller.clearTypeStoreData();
         GoodsOrderListDetails?.status == 302
             ? Get.toNamed(Routes.viewGoodsOrders,
                 arguments: {'goId': GoodsOrderListDetails?.id, "goType": 1})

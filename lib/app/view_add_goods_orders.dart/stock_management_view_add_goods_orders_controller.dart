@@ -99,8 +99,7 @@ class ViewAddGoodsOrdersController extends GetxController {
   ///
   @override
   void onInit() async {
-    // goId = Get.arguments["goId"];
-    // goType = Get.arguments["goType"];
+    await setUserId();
 
     print('AddStock:$goId');
     Future.delayed(Duration(seconds: 1), () {
