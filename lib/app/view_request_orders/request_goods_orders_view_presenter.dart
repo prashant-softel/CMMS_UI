@@ -77,4 +77,10 @@ class PurchaseGoodsorderViewPresenter {
         id: id,
         isLoading: isLoading,
       );
+  void saveValue({String? roId}) async {
+    return purchaseGoodsorderViewUsecase.saveValue(roId: roId);
+  }
+
+  Future<String?> getValue() async =>
+      await purchaseGoodsorderViewUsecase.getValue();
 }

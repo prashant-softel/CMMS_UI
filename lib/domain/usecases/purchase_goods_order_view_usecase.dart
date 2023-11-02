@@ -66,4 +66,8 @@ class PurchaseGoodsorderViewUsecase {
         id,
         isLoading,
       );
+  void saveValue({String? roId}) async =>
+      _repository.saveValue(LocalKeys.roId, roId);
+  Future<String?> getValue() async =>
+      await _repository.getStringValue(LocalKeys.roId);
 }

@@ -10,6 +10,7 @@ abstract class LocalKeys {
   static const jobId = 'jobId';
   static const goId = 'goId';
   static const goType = 'goType';
+  static const roId = 'roId';
 
   static const selectFacalityDropdowndata = 'selectFacalityDropdowndata';
   static const pmTaskId = 'pmTaskId';

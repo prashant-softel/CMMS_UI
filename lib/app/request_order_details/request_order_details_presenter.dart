@@ -56,4 +56,11 @@ class GoodsOrdersReqDetailPresenter {
       isLoading: isLoading,
     );
   }
+
+  void saveValue({String? roId}) async {
+    return goodsOrdersReqDetailUsecase.saveValue(roId: roId);
+  }
+
+  Future<String?> getValue() async =>
+      await goodsOrdersReqDetailUsecase.getValue();
 }
