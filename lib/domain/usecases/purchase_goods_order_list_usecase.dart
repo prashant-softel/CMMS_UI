@@ -34,5 +34,6 @@ class PurchaseGoodsorderListUsecase {
     );
   }
 
-  void clearValue() async => repository.clearData(LocalKeys.goId);
+  void clearValue() async => repository.clearData(LocalKeys.roId);
+  void clearTypeValue() async => repository.clearData(LocalKeys.roType);
 }

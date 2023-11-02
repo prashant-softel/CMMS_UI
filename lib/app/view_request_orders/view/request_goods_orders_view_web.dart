@@ -263,14 +263,18 @@ class PurchaseGoodsorderViewWeb
                     //     :
 
                     varUserAccessModel.value.access_list!
-                                .where((e) =>
-                                    e.feature_id ==
-                                        UserAccessConstants
-                                            .kReqOrderFeatureId &&
-                                    e.approve ==
-                                        UserAccessConstants.kHaveApproveAccess)
-                                .length >
-                            0
+                                    .where((e) =>
+                                        e.feature_id ==
+                                            UserAccessConstants
+                                                .kReqOrderFeatureId &&
+                                        e.approve ==
+                                            UserAccessConstants
+                                                .kHaveApproveAccess)
+                                    .length >
+                                0 &&
+                            controller.getPurchaseDetailsByIDModel.value
+                                    ?.status ==
+                                342
                         ? Row(
                             children: [
                               Spacer(),
