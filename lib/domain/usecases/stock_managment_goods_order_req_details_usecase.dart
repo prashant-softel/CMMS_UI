@@ -1,6 +1,7 @@
 import 'package:cmms/domain/models/get_asset_data_list_model.dart';
 import 'package:cmms/domain/models/history_model.dart';
 import 'package:cmms/domain/models/req_order_details_by_id_model.dart';
+import 'package:cmms/domain/repositories/local_storage_keys.dart';
 import 'package:cmms/domain/repositories/repository.dart';
 
 class GoodsOrdersReqDetailUsecase {
@@ -50,4 +51,8 @@ class GoodsOrdersReqDetailUsecase {
         requestID: requestID,
         isLoading: isLoading ?? false,
       );
+  void saveValue({String? roId}) async =>
+      repository.saveValue(LocalKeys.roId, roId);
+  Future<String?> getValue() async =>
+      await repository.getStringValue(LocalKeys.roId);
 }

@@ -33,4 +33,6 @@ class PurchaseGoodsorderListPresenter {
       end_date: end_date,
     );
   }
+
+  void clearValue() async => purchaseGoodsorderListUsecase.clearValue();
 }

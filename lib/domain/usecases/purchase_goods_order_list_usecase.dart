@@ -33,4 +33,6 @@ class PurchaseGoodsorderListUsecase {
       end_date: end_date,
     );
   }
+
+  void clearValue() async => repository.clearData(LocalKeys.goId);
 }

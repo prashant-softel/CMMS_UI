@@ -1,17 +1,14 @@
 import 'dart:async';
 
 import 'package:cmms/app/home/home_controller.dart';
-import 'package:cmms/app/navigators/navigators.dart';
 import 'package:cmms/app/utils/module_type_constants.dart';
 import 'package:cmms/app/view_request_orders/request_goods_orders_view_presenter.dart';
-import 'package:cmms/app/return_mrs/return_mrs_presenter.dart';
 import 'package:cmms/domain/models/comment_model.dart';
 import 'package:cmms/domain/models/get_asset_data_list_model.dart';
 import 'package:cmms/domain/models/history_model.dart';
 import 'package:cmms/domain/models/req_order_details_by_id_model.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:rxdart/subjects.dart';
 
 class PurchaseGoodsorderViewController extends GetxController {
   RxList<GetRODetailsByIDModel?>? getPurchaseDetailsByIDModelList =
@@ -66,29 +63,19 @@ class PurchaseGoodsorderViewController extends GetxController {
 
   Future<void> setUserId() async {
     try {
-      var dataFromPreviousScreen = Get.arguments;
+      final _roId = await purchaseGoodsorderViewPresenter.getValue();
 
-      roId.value = dataFromPreviousScreen['roId'];
-      // id= Get.arguments;
-      print('AddStock:$roId');
-      // final _flutterSecureStorage = const FlutterSecureStorage();
-      // // Read jobId
-      // String? _userId = await _flutterSecureStorage.read(key: "userId");
-      // if (_userId == null || _userId == '' || _userId == "null") {
-      //   var dataFromPreviousScreen = Get.arguments;
+      if (_roId == null || _roId == '' || _roId == "null") {
+        var dataFromPreviousScreen = Get.arguments;
 
-      //   userId.value = dataFromPreviousScreen['userId'];
-      //   await _flutterSecureStorage.write(
-      //     key: "userId",
-      //     value: userId.value == null ? '' : userId.value.toString(),
-      //   );
-      // } else {
-      //   userId.value = int.tryParse(_userId) ?? 0;
-      // }
-      //  await _flutterSecureStorage.delete(key: "userId");
+        roId.value = dataFromPreviousScreen['roId'];
+
+        purchaseGoodsorderViewPresenter.saveValue(roId: roId.value.toString());
+      } else {
+        roId.value = int.tryParse(_roId) ?? 0;
+      }
     } catch (e) {
       print(e.toString() + 'userId');
-      //  Utility.showDialog(e.toString() + 'userId');
     }
   }
 

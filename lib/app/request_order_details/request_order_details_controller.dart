@@ -82,28 +82,19 @@ class GoodsOrdersReqDetailController extends GetxController {
 
   Future<void> setUserId() async {
     try {
-      var dataFromPreviousScreen = Get.arguments;
+      final _roId = await goodsOrdersReqDetailPresenter.getValue();
 
-      roId.value = dataFromPreviousScreen['roId'];
-      // id= Get.arguments;
-      print('AddStock:$roId');
-      // final _flutterSecureStorage = const FlutterSecureStorage();
-      // // Read jobId
-      // String? _userId = await _flutterSecureStorage.read(key: "userId");
-      // if (_userId == null || _userId == '' || _userId == "null") {
-      //   var dataFromPreviousScreen = Get.arguments;
+      if (_roId == null || _roId == '' || _roId == "null") {
+        var dataFromPreviousScreen = Get.arguments;
 
-      //   userId.value = dataFromPreviousScreen['userId'];
-      //   await _flutterSecureStorage.write(
-      //     key: "userId",
-      //     value: userId.value == null ? '' : userId.value.toString(),
-      //   );
-      // } else {
-      //   userId.value = int.tryParse(_userId) ?? 0;
-      // }
-      //  await _flutterSecureStorage.delete(key: "userId");
+        roId.value = dataFromPreviousScreen['roId'];
+
+        goodsOrdersReqDetailPresenter.saveValue(roId: roId.value.toString());
+      } else {
+        roId.value = int.tryParse(_roId) ?? 0;
+      }
     } catch (e) {
-      print(e.toString() + 'userId');
+      print(e.toString() + 'roId');
       //  Utility.showDialog(e.toString() + 'userId');
     }
   }
