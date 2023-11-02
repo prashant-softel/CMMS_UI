@@ -469,6 +469,54 @@ class ViewIncidentReportController extends GetxController {
         pen: PdfPen(PdfColor(142, 180, 219)),
         bounds: Rect.fromLTWH(255, 290, pageSize.width - 260, 25));
 
+    //9
+    page.graphics.drawRectangle(
+        pen: PdfPen(PdfColor(142, 180, 219)),
+        bounds: Rect.fromLTWH(0, 315, pageSize.width - 260, 25));
+    page.graphics.drawRectangle(
+        pen: PdfPen(PdfColor(142, 180, 219)),
+        bounds: Rect.fromLTWH(255, 315, pageSize.width - 260, 25));
+
+    //10
+    page.graphics.drawRectangle(
+        pen: PdfPen(PdfColor(142, 180, 219)),
+        bounds: Rect.fromLTWH(0, 340, pageSize.width - 260, 25));
+    page.graphics.drawRectangle(
+        pen: PdfPen(PdfColor(142, 180, 219)),
+        bounds: Rect.fromLTWH(255, 340, pageSize.width - 260, 25));
+
+    //11
+    page.graphics.drawRectangle(
+        pen: PdfPen(PdfColor(142, 180, 219)),
+        bounds: Rect.fromLTWH(0, 365, pageSize.width - 260, 25));
+    page.graphics.drawRectangle(
+        pen: PdfPen(PdfColor(142, 180, 219)),
+        bounds: Rect.fromLTWH(255, 365, pageSize.width - 260, 25));
+
+    //12
+    page.graphics.drawRectangle(
+        pen: PdfPen(PdfColor(142, 180, 219)),
+        bounds: Rect.fromLTWH(0, 390, pageSize.width - 260, 25));
+    page.graphics.drawRectangle(
+        pen: PdfPen(PdfColor(142, 180, 219)),
+        bounds: Rect.fromLTWH(255, 390, pageSize.width - 260, 25));
+
+    //13
+    page.graphics.drawRectangle(
+        pen: PdfPen(PdfColor(142, 180, 219)),
+        bounds: Rect.fromLTWH(0, 415, pageSize.width - 260, 25));
+    page.graphics.drawRectangle(
+        pen: PdfPen(PdfColor(142, 180, 219)),
+        bounds: Rect.fromLTWH(255, 415, pageSize.width - 260, 25));
+
+    //14
+    page.graphics.drawRectangle(
+        pen: PdfPen(PdfColor(142, 180, 219)),
+        bounds: Rect.fromLTWH(0, 440, pageSize.width - 260, 25));
+    page.graphics.drawRectangle(
+        pen: PdfPen(PdfColor(142, 180, 219)),
+        bounds: Rect.fromLTWH(255, 440, pageSize.width - 260, 25));
+
     //1
     page.graphics.drawString(
         'Id: ',
@@ -748,6 +796,136 @@ class ViewIncidentReportController extends GetxController {
           10,
         ),
         bounds: Rect.fromLTWH(370, 305, 0, 0),
+        format: PdfStringFormat(lineAlignment: PdfVerticalAlignment.middle));
+
+    ///9
+    page.graphics.drawString(
+        'Legal Applicability: ',
+        PdfStandardFont(
+          PdfFontFamily.helvetica,
+          10,
+        ),
+        bounds: Rect.fromLTWH(10, 325, 0, 0),
+        format: PdfStringFormat(lineAlignment: PdfVerticalAlignment.middle));
+
+    page.graphics.drawString(
+        '${incidentReportDetailsModel.value?.legal_applicability_name}',
+        PdfStandardFont(
+          PdfFontFamily.helvetica,
+          10,
+        ),
+        bounds: Rect.fromLTWH(95, 325, 0, 0),
+        format: PdfStringFormat(lineAlignment: PdfVerticalAlignment.middle));
+    page.graphics.drawString(
+        'Gen loss due to asset damage: ',
+        PdfStandardFont(
+          PdfFontFamily.helvetica,
+          10,
+        ),
+        bounds: Rect.fromLTWH(265, 325, 0, 0),
+        format: PdfStringFormat(lineAlignment: PdfVerticalAlignment.middle));
+    page.graphics.drawString(
+        '${incidentReportDetailsModel.value?.generation_loss}',
+        PdfStandardFont(
+          PdfFontFamily.helvetica,
+          10,
+        ),
+        bounds: Rect.fromLTWH(410, 325, 0, 0),
+        format: PdfStringFormat(lineAlignment: PdfVerticalAlignment.middle));
+
+    ///10
+    page.graphics.drawString(
+        'Damaged Assets cost approx.: ',
+        PdfStandardFont(
+          PdfFontFamily.helvetica,
+          10,
+        ),
+        bounds: Rect.fromLTWH(10, 350, 0, 0),
+        format: PdfStringFormat(lineAlignment: PdfVerticalAlignment.middle));
+
+    page.graphics.drawString(
+        '${incidentReportDetailsModel.value?.damaged_cost}',
+        PdfStandardFont(
+          PdfFontFamily.helvetica,
+          10,
+        ),
+        bounds: Rect.fromLTWH(150, 350, 0, 0),
+        format: PdfStringFormat(lineAlignment: PdfVerticalAlignment.middle));
+
+    ///11
+    page.graphics.drawString(
+        'Asset Restoration action taken by: ',
+        PdfStandardFont(
+          PdfFontFamily.helvetica,
+          10,
+        ),
+        bounds: Rect.fromLTWH(10, 375, 0, 0),
+        format: PdfStringFormat(lineAlignment: PdfVerticalAlignment.middle));
+
+    page.graphics.drawString(
+        '${incidentReportDetailsModel.value?.action_taken_by_name}',
+        PdfStandardFont(
+          PdfFontFamily.helvetica,
+          10,
+        ),
+        bounds: Rect.fromLTWH(165, 375, 0, 0),
+        format: PdfStringFormat(lineAlignment: PdfVerticalAlignment.middle));
+
+    ///12
+    page.graphics.drawString(
+        'Insurance Available: ',
+        PdfStandardFont(
+          PdfFontFamily.helvetica,
+          10,
+        ),
+        bounds: Rect.fromLTWH(10, 400, 0, 0),
+        format: PdfStringFormat(lineAlignment: PdfVerticalAlignment.middle));
+
+    page.graphics.drawString(
+        '${incidentReportDetailsModel.value?.is_insurance_applicable_name}',
+        PdfStandardFont(
+          PdfFontFamily.helvetica,
+          10,
+        ),
+        bounds: Rect.fromLTWH(105, 400, 0, 0),
+        format: PdfStringFormat(lineAlignment: PdfVerticalAlignment.middle));
+
+    ///13
+    page.graphics.drawString(
+        'Insurance Status: ',
+        PdfStandardFont(
+          PdfFontFamily.helvetica,
+          10,
+        ),
+        bounds: Rect.fromLTWH(10, 425, 0, 0),
+        format: PdfStringFormat(lineAlignment: PdfVerticalAlignment.middle));
+
+    page.graphics.drawString(
+        '${incidentReportDetailsModel.value?.insurance_status_name}',
+        PdfStandardFont(
+          PdfFontFamily.helvetica,
+          10,
+        ),
+        bounds: Rect.fromLTWH(95, 425, 0, 0),
+        format: PdfStringFormat(lineAlignment: PdfVerticalAlignment.middle));
+
+    ///14
+    page.graphics.drawString(
+        'Insurance Remarks: ',
+        PdfStandardFont(
+          PdfFontFamily.helvetica,
+          10,
+        ),
+        bounds: Rect.fromLTWH(10, 450, 0, 0),
+        format: PdfStringFormat(lineAlignment: PdfVerticalAlignment.middle));
+
+    page.graphics.drawString(
+        '${incidentReportDetailsModel.value?.insurance_remark}',
+        PdfStandardFont(
+          PdfFontFamily.helvetica,
+          10,
+        ),
+        bounds: Rect.fromLTWH(105, 450, 0, 0),
         format: PdfStringFormat(lineAlignment: PdfVerticalAlignment.middle));
 
     final PdfFont contentFont = PdfStandardFont(PdfFontFamily.helvetica, 9);
