@@ -107,7 +107,7 @@ class GoodsOrderMessageApproveDialog extends GetView {
                       if (id != null) {
                         Future.delayed(Duration(seconds: 1), () {
                           controller.getPurchaseDetailsById(
-                              id: controller.goId);
+                              id: controller.goId.value);
                         });
                       }
                     });
