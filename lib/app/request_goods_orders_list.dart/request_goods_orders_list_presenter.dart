@@ -35,4 +35,5 @@ class PurchaseGoodsorderListPresenter {
   }
 
   void clearValue() async => purchaseGoodsorderListUsecase.clearValue();
+  void clearTypeValue() async => purchaseGoodsorderListUsecase.clearTypeValue();
 }

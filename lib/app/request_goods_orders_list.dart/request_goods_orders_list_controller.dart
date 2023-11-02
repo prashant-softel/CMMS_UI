@@ -125,9 +125,7 @@ class PurchaseGoodsorderListController extends GetxController {
   }
 
   void onValueChanged(dynamic list, dynamic value) {
-    switch (list.runtimeType) {
-      
-    }
+    switch (list.runtimeType) {}
   }
 
   // void showAddGoodsOrdersDetails({int? id}) {
@@ -228,5 +226,9 @@ class PurchaseGoodsorderListController extends GetxController {
 
   void clearStoreData() {
     purchaseGoodsorderListPresenter.clearValue();
+  }
+
+  void clearTypeStoreData() {
+    purchaseGoodsorderListPresenter.clearTypeValue();
   }
 }

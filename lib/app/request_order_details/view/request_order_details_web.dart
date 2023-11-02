@@ -55,47 +55,47 @@ class GoodsOrdersReqDetailsWeb extends GetView<GoodsOrdersReqDetailController> {
       ),
       Expanded(
         child: SingleChildScrollView(
-          child: Container(
-            width: Get.width * 7,
-            margin: EdgeInsets.only(left: 10, top: 10, right: 10),
-            // height: Get.height,
-            child: Card(
-              color: ColorValues.cardColor,
-              elevation: 10,
-              shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(10.0),
-              ),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Padding(
-                    padding:
-                        const EdgeInsets.only(top: 10, right: 10, left: 10),
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        Padding(
-                          padding: const EdgeInsets.only(
-                              top: 10, right: 10, left: 10),
-                          child: Text(
-                            " Request  Orders",
-                            style: Styles.blackBold14,
+          child: Obx(
+            () => Container(
+              width: Get.width * 7,
+              margin: EdgeInsets.only(left: 10, top: 10, right: 10),
+              // height: Get.height,
+              child: Card(
+                color: ColorValues.cardColor,
+                elevation: 10,
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(10.0),
+                ),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Padding(
+                      padding:
+                          const EdgeInsets.only(top: 10, right: 10, left: 10),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Padding(
+                            padding: const EdgeInsets.only(
+                                top: 10, right: 10, left: 10),
+                            child: Text(
+                              " Request  Orders",
+                              style: Styles.blackBold14,
+                            ),
                           ),
-                        ),
-                      ],
+                        ],
+                      ),
                     ),
-                  ),
-                  Divider(
-                    color: ColorValues.greyLightColour,
-                  ),
-                  Dimens.boxHeight10,
-                  AddRowInReqGoodsOrder(),
+                    Divider(
+                      color: ColorValues.greyLightColour,
+                    ),
+                    Dimens.boxHeight10,
+                    AddRowInReqGoodsOrder(),
 
-                  Dimens.boxHeight15,
-                  controller.historyList!.isEmpty
-                      ? Dimens.box0
-                      : Obx(
-                          () => Container(
+                    Dimens.boxHeight15,
+                    controller.historyList!.isEmpty
+                        ? Dimens.box0
+                        : Container(
                             margin: Dimens.edgeInsets20,
                             height:
                                 ((controller.historyList?.length ?? 0) * 50) +
@@ -201,80 +201,80 @@ class GoodsOrdersReqDetailsWeb extends GetView<GoodsOrdersReqDetailController> {
                               ],
                             ),
                           ),
-                        ),
 
-                  // (controller.getPurchaseDetailsByIDModel.value?.status !=
-                  //         341)
-                  //     ? Container()
-                  //     :
-                  Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 20),
-                    child: Row(children: [
-                      Text('Comment: '),
-                      Expanded(
-                        child: TextField(
-                          controller: controller.commentCtrlr,
-                          // enabled: controller.isJobCardStarted.value,
-                          decoration: InputDecoration(
-                            disabledBorder: OutlineInputBorder(
-                              borderSide: BorderSide(
-                                color: ColorValues.appLightGreyColor,
-                                width: 1.0,
+                    // (controller.getPurchaseDetailsByIDModel.value?.status !=
+                    //         341)
+                    //     ? Container()
+                    //     :
+                    Padding(
+                      padding: const EdgeInsets.symmetric(horizontal: 20),
+                      child: Row(children: [
+                        Text('Comment: '),
+                        Expanded(
+                          child: TextField(
+                            controller: controller.commentCtrlr,
+                            // enabled: controller.isJobCardStarted.value,
+                            decoration: InputDecoration(
+                              disabledBorder: OutlineInputBorder(
+                                borderSide: BorderSide(
+                                  color: ColorValues.appLightGreyColor,
+                                  width: 1.0,
+                                ),
+                              ),
+                              enabledBorder: OutlineInputBorder(
+                                borderSide: BorderSide(
+                                  color: ColorValues.appLightBlueColor,
+                                  width: 1.0,
+                                ),
+                              ),
+                              focusedBorder: OutlineInputBorder(
+                                borderSide: BorderSide(
+                                  color: ColorValues.appLightBlueColor,
+                                  width: 1.0,
+                                ),
                               ),
                             ),
-                            enabledBorder: OutlineInputBorder(
-                              borderSide: BorderSide(
-                                color: ColorValues.appLightBlueColor,
-                                width: 1.0,
-                              ),
-                            ),
-                            focusedBorder: OutlineInputBorder(
-                              borderSide: BorderSide(
-                                color: ColorValues.appLightBlueColor,
-                                width: 1.0,
-                              ),
-                            ),
+                            keyboardType: TextInputType.multiline,
+                            minLines: 5,
+                            maxLines: null,
                           ),
-                          keyboardType: TextInputType.multiline,
-                          minLines: 5,
-                          maxLines: null,
                         ),
-                      ),
-                    ]),
-                  ),
+                      ]),
+                    ),
 
-                  Dimens.boxHeight15,
-                  Row(
-                    children: [
-                      Spacer(),
-                      CustomElevatedButton(
-                        backgroundColor: ColorValues.appRedColor,
-                        text: 'cancel',
-                        onPressed: () {
-                          // controller.AddInventory();
-                        },
-                      ),
-                      Dimens.boxWidth15,
-                      controller.roId == 0
-                          ? CustomElevatedButton(
-                              backgroundColor: ColorValues.appGreenColor,
-                              text: 'Submit',
-                              onPressed: () {
-                                controller.submitPurchaseOrderData();
-                              },
-                            )
-                          : CustomElevatedButton(
-                              backgroundColor: ColorValues.updateColor,
-                              text: 'Update',
-                              onPressed: () {
-                                controller.updatePurchaseOrderData();
-                              },
-                            ),
-                      Spacer()
-                    ],
-                  ),
-                  Dimens.boxHeight15,
-                ],
+                    Dimens.boxHeight15,
+                    Row(
+                      children: [
+                        Spacer(),
+                        CustomElevatedButton(
+                          backgroundColor: ColorValues.appRedColor,
+                          text: 'cancel',
+                          onPressed: () {
+                            // controller.AddInventory();
+                          },
+                        ),
+                        Dimens.boxWidth15,
+                        controller.roId == 0
+                            ? CustomElevatedButton(
+                                backgroundColor: ColorValues.appGreenColor,
+                                text: 'Submit',
+                                onPressed: () {
+                                  controller.submitPurchaseOrderData();
+                                },
+                              )
+                            : CustomElevatedButton(
+                                backgroundColor: ColorValues.updateColor,
+                                text: 'Update',
+                                onPressed: () {
+                                  controller.updatePurchaseOrderData();
+                                },
+                              ),
+                        Spacer()
+                      ],
+                    ),
+                    Dimens.boxHeight15,
+                  ],
+                ),
               ),
             ),
           ),
