@@ -15,7 +15,6 @@ import 'package:syncfusion_flutter_datepicker/datepicker.dart';
 import '../../theme/color_values.dart';
 import '../../theme/styles.dart';
 import '../../widgets/action_button.dart';
-import '../../widgets/custom_elevated_button.dart';
 import '../../widgets/table_action_button.dart';
 import '../stock_management_goods_list_orders_controller.dart';
 
@@ -184,36 +183,34 @@ class _StockManagementGoodsOrdersWebState
                                           ),
                                         ),
                                       ),
-                                      itemBuilder: (BuildContext context) =>
-                                          <PopupMenuEntry<String>>[]..addAll(
-                                                controller.columnVisibility
-                                                    .value.entries
-                                                    .map((e) {
-                                              return PopupMenuItem<String>(
-                                                  child: ValueListenableBuilder(
-                                                      valueListenable:
-                                                          controller
-                                                              .columnVisibility,
-                                                      builder: (context, value,
-                                                          child) {
-                                                        return Row(
-                                                          children: [
-                                                            Checkbox(
-                                                              value:
-                                                                  value[e.key],
-                                                              onChanged:
-                                                                  (newValue) {
-                                                                controller
-                                                                    .setColumnVisibility(
-                                                                        e.key,
-                                                                        newValue!);
-                                                              },
-                                                            ),
-                                                            Text(e.key),
-                                                          ],
-                                                        );
-                                                      }));
-                                            })),
+                                      itemBuilder: (BuildContext context) => <
+                                          PopupMenuEntry<String>>[]..addAll(
+                                            controller
+                                                .columnVisibility.value.entries
+                                                .map((e) {
+                                          return PopupMenuItem<String>(
+                                              child: ValueListenableBuilder(
+                                                  valueListenable: controller
+                                                      .columnVisibility,
+                                                  builder:
+                                                      (context, value, child) {
+                                                    return Row(
+                                                      children: [
+                                                        Checkbox(
+                                                          value: value[e.key],
+                                                          onChanged:
+                                                              (newValue) {
+                                                            controller
+                                                                .setColumnVisibility(
+                                                                    e.key,
+                                                                    newValue!);
+                                                          },
+                                                        ),
+                                                        Text(e.key),
+                                                      ],
+                                                    );
+                                                  }));
+                                        })),
                                       onSelected: (String value) {
                                         // Handle column selection
                                       },
@@ -670,6 +667,7 @@ class GoodsOrderListDataSource extends DataTableSource {
                                 icon: Icons.remove_red_eye_outlined,
                                 message: 'view',
                                 onPress: () {
+                                  controller.clearStoreData();
                                   int goId = GoodsOrderListDetails?.id ?? 0;
                                   if (goId != 0) {
                                     Get.toNamed(Routes.viewGoodsOrders,
@@ -724,6 +722,7 @@ class GoodsOrderListDataSource extends DataTableSource {
                                     icon: Icons.edit,
                                     message: 'Edit',
                                     onPress: () {
+                                      controller.clearStoreData();
                                       int goId = GoodsOrderListDetails?.id ?? 0;
                                       if (goId != 0) {
                                         Get.toNamed(
@@ -759,6 +758,7 @@ class GoodsOrderListDataSource extends DataTableSource {
                                 icon: Icons.close,
                                 message: 'Close',
                                 onPress: () {
+                                  controller.clearStoreData();
                                   int goId = GoodsOrderListDetails?.id ?? 0;
                                   if (goId != 0) {
                                     Get.toNamed(Routes.viewGoodsOrders,
@@ -852,6 +852,7 @@ class GoodsOrderListDataSource extends DataTableSource {
                                 icon: Icons.shopping_cart,
                                 message: 'Receive GO',
                                 onPress: () {
+                                  controller.clearStoreData();
                                   int goId = GoodsOrderListDetails?.id ?? 0;
                                   if (goId != 0) {
                                     Get.toNamed(Routes.receiveGoodsOrders,
@@ -886,6 +887,9 @@ class GoodsOrderListDataSource extends DataTableSource {
                                 icon: Icons.ads_click,
                                 message: 'Re-Submit Receive GO',
                                 onPress: () {
+                                  controller.clearStoreData();
+                                  controller.clearTypeStoreData();
+
                                   int goId = GoodsOrderListDetails?.id ?? 0;
                                   if (goId != 0) {
                                     Get.toNamed(Routes.receiveGoodsOrders,
@@ -953,6 +957,8 @@ class GoodsOrderListDataSource extends DataTableSource {
                                 icon: Icons.approval_rounded,
                                 message: 'Approve/Reject GO',
                                 onPress: () {
+                                  controller.clearStoreData();
+                                  controller.clearTypeStoreData();
                                   int goId = GoodsOrderListDetails?.id ?? 0;
                                   if (goId != 0) {
                                     Get.toNamed(Routes.viewGoodsOrders,
@@ -987,6 +993,9 @@ class GoodsOrderListDataSource extends DataTableSource {
                                 icon: Icons.ads_click,
                                 message: 'Re-Submit GO',
                                 onPress: () {
+                                  controller.clearStoreData();
+                                  controller.clearTypeStoreData();
+
                                   int goId = GoodsOrderListDetails?.id ?? 0;
                                   if (goId != 0) {
                                     Get.toNamed(

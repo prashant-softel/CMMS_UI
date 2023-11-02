@@ -1,7 +1,6 @@
 import 'package:cmms/app/mrs_view/mrs_view_presenter.dart';
 import 'package:cmms/app/utils/utility.dart';
 import 'package:cmms/domain/models/mrs_detail_model.dart';
-import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:get/get.dart';
 import '../home/home_controller.dart';
 
@@ -23,8 +22,6 @@ class MrsViewController extends GetxController {
     try {
       await setMrsId();
       if (mrsId != 0) {
-        print({"fghvjbggjhjgk", mrsId});
-
         await getMrsDetails(mrsId: mrsId.value, isloading: true);
       }
       super.onInit();

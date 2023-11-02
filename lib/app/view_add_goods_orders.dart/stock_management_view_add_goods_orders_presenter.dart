@@ -6,8 +6,6 @@ import 'package:cmms/domain/models/get_asset_items_model.dart';
 import 'package:cmms/domain/models/get_purchase_details_model.dart';
 import 'package:cmms/domain/models/history_model.dart';
 
-import 'package:cmms/domain/usecases/stock_management_add_goods_orders_usecase.dart';
-
 import '../../domain/usecases/stock_management_view_add_goods_orders_usecase.dart';
 
 class ViewAddGoodsOrdersPresenter {
@@ -119,4 +117,17 @@ class ViewAddGoodsOrdersPresenter {
       isLoading: isLoading ?? false,
     );
   }
+
+  void saveValue({String? goId}) async {
+    return viewAddGoodsOrdersUsecase.saveValue(goId: goId);
+  }
+
+  Future<String?> getValue() async =>
+      await viewAddGoodsOrdersUsecase.getValue();
+  void saveTypeValue({String? goType}) async {
+    return viewAddGoodsOrdersUsecase.saveTypeValue(goType: goType);
+  }
+
+  Future<String?> getGoTypeValue() async =>
+      await viewAddGoodsOrdersUsecase.getGoTypeValue();
 }

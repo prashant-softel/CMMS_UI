@@ -2,8 +2,6 @@ import 'package:cmms/domain/domain.dart';
 import 'package:cmms/domain/models/stock_management_update_goods_orders_model.dart';
 import 'package:cmms/domain/models/user_list_model.dart';
 
-import '../models/facility_model.dart';
-
 class StockManagementGoodsOrdersUsecase {
   Repository repository;
 
@@ -35,4 +33,7 @@ class StockManagementGoodsOrdersUsecase {
       end_date: end_date,
     );
   }
+
+  void clearValue() async => repository.clearData(LocalKeys.goId);
+  void clearTypeValue() async => repository.clearData(LocalKeys.goType);
 }

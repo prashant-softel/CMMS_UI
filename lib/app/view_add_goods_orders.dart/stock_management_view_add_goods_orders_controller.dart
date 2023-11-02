@@ -1,10 +1,8 @@
-import 'package:cmms/app/navigators/app_pages.dart';
 import 'package:cmms/domain/models/business_type_model.dart';
 import 'package:cmms/domain/models/comment_model.dart';
 import 'package:cmms/domain/models/create_go_model.dart';
 import 'package:cmms/domain/models/currency_list_model.dart';
 import 'package:cmms/domain/models/get_asset_data_list_model.dart';
-import 'package:cmms/domain/models/get_asset_items_model.dart';
 import 'package:cmms/domain/models/get_purchase_details_model.dart';
 import 'package:cmms/domain/models/history_model.dart';
 import 'package:cmms/domain/models/paiyed_model.dart';
@@ -48,9 +46,9 @@ class ViewAddGoodsOrdersController extends GetxController {
   int selectedBusinessTypeId = 1;
   int paidId = 0;
   RxBool showAdditionalColumn = false.obs;
-  int goId = 0;
+  Rx<int> goId = 0.obs;
 
-  int? goType = 0;
+  Rx<int> goType = 0.obs;
 
   //drop down list of assets
   // RxList<GetAssetDataModel?> assetList = <GetAssetDataModel>[].obs;
@@ -101,8 +99,8 @@ class ViewAddGoodsOrdersController extends GetxController {
   ///
   @override
   void onInit() async {
-    goId = Get.arguments["goId"];
-    goType = Get.arguments["goType"];
+    // goId = Get.arguments["goId"];
+    // goType = Get.arguments["goType"];
 
     print('AddStock:$goId');
     Future.delayed(Duration(seconds: 1), () {
@@ -115,12 +113,36 @@ class ViewAddGoodsOrdersController extends GetxController {
       getAssetList(facilityId);
       if (goId != 0) {
         Future.delayed(Duration(seconds: 1), () {
-          getPurchaseDetailsById(id: goId);
-          getGoHistory(id: goId);
+          getPurchaseDetailsById(id: goId.value);
+          getGoHistory(id: goId.value);
         });
       }
     });
     super.onInit();
+  }
+
+  Future<void> setUserId() async {
+    try {
+      final _goId = await viewAddGoodsOrdersPresenter.getValue();
+      final _goType = await viewAddGoodsOrdersPresenter.getGoTypeValue();
+
+      if (_goId == null || _goId == '' || _goId == "null") {
+        var dataFromPreviousScreen = Get.arguments;
+
+        goId.value = dataFromPreviousScreen['goId'];
+        goType.value = dataFromPreviousScreen['goType'];
+
+        viewAddGoodsOrdersPresenter.saveValue(goId: goId.value.toString());
+        viewAddGoodsOrdersPresenter.saveTypeValue(
+            goType: goType.value.toString());
+      } else {
+        goId.value = int.tryParse(_goId) ?? 0;
+        goType.value = int.tryParse(_goType ?? "") ?? 0;
+      }
+    } catch (e) {
+      print(e.toString() + 'goId');
+      //  Utility.showDialog(e.toString() + 'userId');
+    }
   }
 
   Future<void> getPurchaseDetailsById({required int id}) async {
@@ -468,7 +490,7 @@ class ViewAddGoodsOrdersController extends GetxController {
       // items.add(item);
     });
     CreateGoModel createGoModel = CreateGoModel(
-        id: goId,
+        id: goId.value,
         facility_id: facilityId,
         order_type: 1,
         location_ID: 1,
