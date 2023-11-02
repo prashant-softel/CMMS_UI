@@ -283,25 +283,25 @@ class ViewAddGoodsOrdersController extends GetxController {
     }
   }
 
-  void goodsOrderCloseButton({int? id}) async {
-    {
-      String _comment = closeCommentTextFieldCtrlr.text.trim();
+  // void goodsOrderCloseButton({int? id}) async {
+  //   {
+  //     String _comment = closeCommentTextFieldCtrlr.text.trim();
 
-      CommentModel commentGoodsOrderCloseModel =
-          CommentModel(id: id, comment: _comment);
+  //     CommentModel commentGoodsOrderCloseModel =
+  //         CommentModel(id: id, comment: _comment);
 
-      var goodsOrderCloseJsonString = commentGoodsOrderCloseModel.toJson();
+  //     var goodsOrderCloseJsonString = commentGoodsOrderCloseModel.toJson();
 
-      Map<String, dynamic>? response =
-          await viewAddGoodsOrdersPresenter.goodsOrderCloseButton(
-        goodsOrderCloseJsonString: goodsOrderCloseJsonString,
-        isLoading: true,
-      );
-      if (response == true) {
-        //getCalibrationList(facilityId, true);
-      }
-    }
-  }
+  //     Map<String, dynamic>? response =
+  //         await viewAddGoodsOrdersPresenter.goodsOrderCloseButton(
+  //       goodsOrderCloseJsonString: goodsOrderCloseJsonString,
+  //       isLoading: true,
+  //     );
+  //     if (response == true) {
+  //       //getCalibrationList(facilityId, true);
+  //     }
+  //   }
+  // }
 
   Future<void> getAssetList(int _facilityId) async {
     assetList.value = <GetAssetDataModel>[];

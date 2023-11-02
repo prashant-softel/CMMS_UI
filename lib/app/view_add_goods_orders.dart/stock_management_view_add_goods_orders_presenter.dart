@@ -61,15 +61,15 @@ class ViewAddGoodsOrdersPresenter {
         facilityId: facilityId ?? 0,
         isLoading: isLoading ?? false,
       );
-  Future<Map<String, dynamic>?> goodsOrderCloseButton({
-    goodsOrderCloseJsonString,
-    required bool isLoading,
-  }) async {
-    return viewAddGoodsOrdersUsecase.goodsOrderCloseButton(
-      goodsOrderCloseJsonString: goodsOrderCloseJsonString,
-      isLoading: isLoading,
-    );
-  }
+  // Future<Map<String, dynamic>?> goodsOrderCloseButton({
+  //   goodsOrderCloseJsonString,
+  //   required bool isLoading,
+  // }) async {
+  //   return viewAddGoodsOrdersUsecase.goodsOrderCloseButton(
+  //     goodsOrderCloseJsonString: goodsOrderCloseJsonString,
+  //     isLoading: isLoading,
+  //   );
+  // }
 
   Future<List<BusinessListModel?>?> getBusinessList({
     required int ListType,

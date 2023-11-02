@@ -59,7 +59,7 @@ class ReceiveGoodsOrdersController extends GetxController {
 
   Rx<bool> isAssetSelected = true.obs;
   Rx<String> selectedAsset = ''.obs;
-
+  TextEditingController closeCommentTextFieldCtrlr = TextEditingController();
   // Rx<List<List<Map<String, String>>>> rowItem = Rx<List<List<Map<String, String>>>>([]);
   final rowItem = Rx<List<List<Map<String, String>>>>([]);
   Map<String, GetAssetDataModel> dropdownMapperData = {};
@@ -484,6 +484,26 @@ class ReceiveGoodsOrdersController extends GetxController {
     print('Create  Create GO  data: $createGoModelJsonString');
   }
 
+  void goodsOrderCloseButton({int? id}) async {
+    {
+      String _comment = closeCommentTextFieldCtrlr.text.trim();
+
+      CommentModel commentGoodsOrderCloseModel =
+          CommentModel(id: id, comment: _comment);
+
+      var goodsOrderCloseJsonString = commentGoodsOrderCloseModel.toJson();
+
+      Map<String, dynamic>? response =
+          await receiveGoodsOrdersPresenter.goodsOrderCloseButton(
+        goodsOrderCloseJsonString: goodsOrderCloseJsonString,
+        isLoading: true,
+      );
+      if (response == true) {
+        //getCalibrationList(facilityId, true);
+      }
+    }
+  }
+
   void updateGOReceive() async {
     String _challanNoCtrlr = challanNoCtrlr.text.trim();
     String _pOCtrlr = pOCtrlr.text.trim();
@@ -604,6 +624,7 @@ class ReceiveGoodsOrdersController extends GetxController {
       ;
       items.add(item);
     });
+
     CreateGoModel createGoModel = CreateGoModel(
         id: goId.value,
         facility_id: facilityId,

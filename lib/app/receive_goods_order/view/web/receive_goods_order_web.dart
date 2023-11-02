@@ -3,6 +3,7 @@ import 'package:cmms/app/constant/constant.dart';
 import 'package:cmms/app/receive_goods_order/receive_goods_order_controller.dart';
 import 'package:cmms/app/utils/user_access_constants.dart';
 import 'package:cmms/app/widgets/approve_go_receive_dialog.dart';
+import 'package:cmms/app/widgets/close_goods_order_dialog.dart';
 import 'package:cmms/app/widgets/custom_elevated_button.dart';
 import 'package:cmms/app/widgets/custom_richtext.dart';
 import 'package:cmms/app/widgets/custom_textField.dart';
@@ -1674,6 +1675,30 @@ class _ReceiveGoodsOrderWebState extends State<ReceiveGoodsOrderWeb> {
                         ),
                       )
                     : Dimens.box0,
+                controller.getPurchaseDetailsByIDModel.value?.status == 310 &&
+                        varUserAccessModel.value.access_list!
+                                .where((e) =>
+                                    e.feature_id ==
+                                        UserAccessConstants.kGoodsFeatureId &&
+                                    e.edit ==
+                                        UserAccessConstants.kHaveEditAccess)
+                                .length >
+                            0
+                    ? Container(
+                        height: 45,
+                        child: CustomElevatedButton(
+                          backgroundColor: ColorValues.rejectColor,
+                          text: "Close",
+                          icon: Icons.close,
+                          onPressed: () {
+                            Get.dialog(GoodsOrderCloseDialog(
+                              id: controller.goId.value,
+                            ));
+                          },
+                        ),
+                      )
+                    : Dimens.box0,
+
                 // :
                 // Container(),
                 Spacer()
