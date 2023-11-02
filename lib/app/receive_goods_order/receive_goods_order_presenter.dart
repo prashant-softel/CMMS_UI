@@ -25,6 +25,16 @@ class ReceiveGoodsOrdersPresenter {
     );
   }
 
+  Future<Map<String, dynamic>?> goodsOrderCloseButton({
+    goodsOrderCloseJsonString,
+    required bool isLoading,
+  }) async {
+    return receiveGoodsOrdersUsecase.goodsOrderCloseButton(
+      goodsOrderCloseJsonString: goodsOrderCloseJsonString,
+      isLoading: isLoading,
+    );
+  }
+
   Future<List<PaiedModel?>?> updatePaidBy({
     required bool isLoading,
     required int? facilityId,

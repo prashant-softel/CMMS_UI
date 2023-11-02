@@ -1272,34 +1272,34 @@ class _ViewAddGoodsOrdersWebState extends State<ViewAddGoodsOrdersWeb> {
                                         ],
                                       ),
                                     ),
-                              controller.getPurchaseDetailsByIDModel.value
-                                              ?.status ==
-                                          310 &&
-                                      varUserAccessModel.value.access_list!
-                                              .where((e) =>
-                                                  e.feature_id ==
-                                                      UserAccessConstants
-                                                          .kGoodsFeatureId &&
-                                                  e.edit ==
-                                                      UserAccessConstants
-                                                          .kHaveEditAccess)
-                                              .length >
-                                          0
-                                  ? Container(
-                                      height: 45,
-                                      child: CustomElevatedButton(
-                                        backgroundColor:
-                                            ColorValues.rejectColor,
-                                        text: "Close",
-                                        icon: Icons.close,
-                                        onPressed: () {
-                                          Get.dialog(GoodsOrderCloseDialog(
-                                            id: controller.goId.value,
-                                          ));
-                                        },
-                                      ),
-                                    )
-                                  : Dimens.box0,
+                              // controller.getPurchaseDetailsByIDModel.value
+                              //                 ?.status ==
+                              //             310 &&
+                              //         varUserAccessModel.value.access_list!
+                              //                 .where((e) =>
+                              //                     e.feature_id ==
+                              //                         UserAccessConstants
+                              //                             .kGoodsFeatureId &&
+                              //                     e.edit ==
+                              //                         UserAccessConstants
+                              //                             .kHaveEditAccess)
+                              //                 .length >
+                              //             0
+                              //     ? Container(
+                              //         height: 45,
+                              //         child: CustomElevatedButton(
+                              //           backgroundColor:
+                              //               ColorValues.rejectColor,
+                              //           text: "Close",
+                              //           icon: Icons.close,
+                              //           onPressed: () {
+                              //             Get.dialog(GoodsOrderCloseDialog(
+                              //               id: controller.goId.value,
+                              //             ));
+                              //           },
+                              //         ),
+                              //       )
+                              // : Dimens.box0,
                               (controller.getPurchaseDetailsByIDModel.value
                                               ?.status ==
                                           302 ||

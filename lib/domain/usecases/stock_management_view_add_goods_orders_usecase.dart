@@ -55,14 +55,14 @@ class ViewAddGoodsOrdersUsecase {
         facilityId,
         isLoading,
       );
-  Future<Map<String, dynamic>> goodsOrderCloseButton({
-    goodsOrderCloseJsonString,
-    bool? isLoading,
-  }) async =>
-      await _repository.goodsOrderCloseButton(
-        goodsOrderCloseJsonString,
-        isLoading,
-      );
+  // Future<Map<String, dynamic>> goodsOrderCloseButton({
+  //   goodsOrderCloseJsonString,
+  //   bool? isLoading,
+  // }) async =>
+  //     await _repository.goodsOrderCloseButton(
+  //       goodsOrderCloseJsonString,
+  //       isLoading,
+  //     );
   Future<List<BusinessListModel?>?> getBusinessList({
     required int type,
     bool isLoading = true,

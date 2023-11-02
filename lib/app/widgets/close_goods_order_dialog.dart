@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 // import '../theme/colors_value.dart';
+import '../receive_goods_order/receive_goods_order_controller.dart';
 import '../theme/dimens.dart';
 import '../theme/styles.dart';
 
@@ -12,7 +13,7 @@ class GoodsOrderCloseDialog extends GetView {
   int? id;
 
   GoodsOrderCloseDialog({super.key, this.id});
-  final ViewAddGoodsOrdersController _controller = Get.find();
+  final ReceiveGoodsOrdersController _controller = Get.find();
 
   @override
   Widget build(BuildContext context) {
