@@ -976,7 +976,7 @@ class _ViewAddGoodsOrdersWebState extends State<ViewAddGoodsOrdersWeb> {
                                                           child: Padding(
                                                             padding:
                                                                 const EdgeInsets
-                                                                        .only(
+                                                                    .only(
                                                                     left: 10,
                                                                     right: 10,
                                                                     top: 10),
@@ -1027,7 +1027,7 @@ class _ViewAddGoodsOrdersWebState extends State<ViewAddGoodsOrdersWeb> {
                                                           ? Padding(
                                                               padding:
                                                                   const EdgeInsets
-                                                                          .only(
+                                                                      .only(
                                                                       top: 10),
                                                               child: Column(
                                                                 mainAxisAlignment:
@@ -1068,8 +1068,7 @@ class _ViewAddGoodsOrdersWebState extends State<ViewAddGoodsOrdersWeb> {
                                                                               (Get.width * .4),
                                                                           keyboardType:
                                                                               TextInputType.number,
-                                                                          inputFormatters: <
-                                                                              TextInputFormatter>[
+                                                                          inputFormatters: <TextInputFormatter>[
                                                                             FilteringTextInputFormatter.digitsOnly
                                                                           ],
                                                                           maxLine:

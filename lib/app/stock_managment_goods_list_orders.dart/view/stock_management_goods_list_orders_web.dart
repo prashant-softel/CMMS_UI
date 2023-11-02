@@ -657,29 +657,59 @@ class GoodsOrderListDataSource extends DataTableSource {
                 : (value == 'Actions')
                     ? Wrap(children: [
                         varUserAccessModel.value.access_list!
-                                    .where((e) =>
-                                        e.feature_id ==
-                                            UserAccessConstants
-                                                .kGoodsFeatureId &&
-                                        e.view ==
-                                            UserAccessConstants
-                                                .kHaveApproveAccess)
-                                    .length >
-                                0
+                                        .where((e) =>
+                                            e.feature_id ==
+                                                UserAccessConstants
+                                                    .kGoodsFeatureId &&
+                                            e.add ==
+                                                UserAccessConstants
+                                                    .kHaveAddAccess)
+                                        .length >
+                                    0 &&
+                                GoodsOrderListDetails?.status == 308
                             ? TableActionButton(
                                 color: ColorValues.viewColor,
                                 icon: Icons.remove_red_eye_outlined,
-                                message: 'view',
+                                message: 'View RO',
                                 onPress: () {
                                   controller.clearStoreData();
                                   int goId = GoodsOrderListDetails?.id ?? 0;
                                   if (goId != 0) {
-                                    Get.toNamed(Routes.viewGoodsOrders,
-                                        arguments: {'goId': goId});
+                                    Get.toNamed(Routes.receiveGoodsOrders,
+                                        arguments: {
+                                          'goId': GoodsOrderListDetails?.id,
+                                          "goType": 1
+                                        });
                                   }
                                 },
                               )
-                            : Dimens.box0,
+                            : varUserAccessModel.value.access_list!
+                                        .where((e) =>
+                                            e.feature_id ==
+                                                UserAccessConstants
+                                                    .kGoodsFeatureId &&
+                                            e.view ==
+                                                UserAccessConstants
+                                                    .kHaveApproveAccess)
+                                        .length >
+                                    0
+                                ? TableActionButton(
+                                    color: ColorValues.viewColor,
+                                    icon: Icons.remove_red_eye_outlined,
+                                    message: 'View',
+                                    onPress: () {
+                                      controller.clearStoreData();
+                                      int goId = GoodsOrderListDetails?.id ?? 0;
+                                      if (goId != 0) {
+                                        Get.toNamed(Routes.viewGoodsOrders,
+                                            arguments: {
+                                              'goId': goId,
+                                              "goType": 1
+                                            });
+                                      }
+                                    },
+                                  )
+                                : Dimens.box0,
                         controller.goodsOrdersList
                                         .firstWhere(
                                           (e) =>
@@ -766,7 +796,7 @@ class GoodsOrderListDataSource extends DataTableSource {
                                   int goId = GoodsOrderListDetails?.id ?? 0;
                                   if (goId != 0) {
                                     Get.toNamed(Routes.viewGoodsOrders,
-                                        arguments: {'goId': goId});
+                                        arguments: {'goId': goId, "goType": 1});
                                   }
                                 },
                               )
@@ -1035,26 +1065,56 @@ class GoodsOrderListDataSource extends DataTableSource {
                 : GoodsOrderListDetails?.status == 302
                     ? Get.toNamed(Routes.updateGoodsOrdersDetailsScreen,
                         arguments: {'goId': GoodsOrderListDetails?.id})
-                    : GoodsOrderListDetails?.status == 306
+                    : GoodsOrderListDetails?.status == 306 &&
+                            varUserAccessModel.value.access_list!
+                                    .where((e) =>
+                                        e.feature_id == UserAccessConstants.kGoodsFeatureId &&
+                                        e.approve ==
+                                            UserAccessConstants
+                                                .kHaveApproveAccess)
+                                    .length >
+                                0
                         ? Get.toNamed(
-                            Routes.receiveGoodsOrders,
+                            Routes.viewGoodsOrders,
                             arguments: {
                               'goId': GoodsOrderListDetails?.id,
                               "goType": 1
                             },
                           )
-                        : GoodsOrderListDetails?.status == 305
-                            ? Get.toNamed(
-                                Routes.updateGoodsOrdersDetailsScreen,
-                                arguments: {
-                                  'goId': GoodsOrderListDetails?.id,
-                                  "goType": 1
-                                },
-                              )
-                            : Get.toNamed(
-                                Routes.viewGoodsOrders,
-                                arguments: {"goId": GoodsOrderListDetails?.id},
-                              );
+                        : GoodsOrderListDetails?.status == 306 &&
+                                varUserAccessModel.value.access_list!
+                                        .where((e) =>
+                                            e.feature_id == UserAccessConstants.kGoodsFeatureId &&
+                                            e.add ==
+                                                UserAccessConstants
+                                                    .kHaveAddAccess)
+                                        .length >
+                                    0
+                            ? Get.toNamed(Routes.receiveGoodsOrders,
+                                arguments: {'goId': GoodsOrderListDetails?.id, "goType": 1})
+                            : GoodsOrderListDetails?.status == 305
+                                ? Get.toNamed(
+                                    Routes.updateGoodsOrdersDetailsScreen,
+                                    arguments: {
+                                      'goId': GoodsOrderListDetails?.id,
+                                      "goType": 0
+                                    },
+                                  )
+                                : GoodsOrderListDetails?.status == 308
+                                    ? Get.toNamed(
+                                        Routes.receiveGoodsOrders,
+                                        arguments: {
+                                          'goId': GoodsOrderListDetails?.id,
+                                          "goType": 1
+                                        },
+                                      )
+                                    : Get.toNamed(
+                                        Routes.viewGoodsOrders,
+                                        arguments: {
+                                          "goId": GoodsOrderListDetails?.id,
+                                          "goType": 0
+                                        },
+                                      );
       },
     );
   }

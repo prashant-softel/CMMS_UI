@@ -1,4 +1,3 @@
-
 import 'package:cmms/app/constant/constant.dart';
 import 'package:cmms/app/utils/user_access_constants.dart';
 import 'package:data_table_2/data_table_2.dart';
@@ -733,7 +732,8 @@ class _AddGoodsOrdersWebState extends State<AddGoodsOrdersWeb> {
                     ],
                   ),
                 ),
-                floatingActionButton: varUserAccessModel.value.access_list!
+                floatingActionButton: Obx(() => varUserAccessModel
+                            .value.access_list!
                             .where((e) =>
                                 e.feature_id ==
                                     UserAccessConstants.kGoodsFeatureId &&
@@ -777,7 +777,7 @@ class _AddGoodsOrdersWebState extends State<AddGoodsOrdersWeb> {
                           Spacer()
                         ],
                       )
-                    : Dimens.box0);
+                    : Dimens.box0));
         // );
       },
     );

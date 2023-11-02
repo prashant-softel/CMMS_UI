@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:cmms/domain/models/business_type_model.dart';
 import 'package:cmms/domain/models/comment_model.dart';
 import 'package:cmms/domain/models/create_go_model.dart';
@@ -8,7 +10,6 @@ import 'package:cmms/domain/models/history_model.dart';
 import 'package:cmms/domain/models/paiyed_model.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
-import 'package:rxdart/subjects.dart';
 
 import '../../domain/models/business_list_model.dart';
 import '../home/home_controller.dart';
@@ -27,9 +28,7 @@ class ViewAddGoodsOrdersController extends GetxController {
   RxList<String?> selectedUnitCurrencyList = <String>[].obs;
   int selectedUnitCurrencyId = 0;
   RxList<int?> selectedUnitCurrencyIdList = <int>[].obs;
-  BehaviorSubject<int> _facilityId = BehaviorSubject.seeded(0);
-  Stream<int> get facilityId$ => _facilityId.stream;
-  int get facilityId => _facilityId.value;
+
   RxList<BusinessListModel?> ownerList = <BusinessListModel>[].obs;
   Rx<String> selectedBusinessType = ''.obs;
   RxList<PaiedModel?> paid = <PaiedModel>[].obs;
@@ -83,6 +82,7 @@ class ViewAddGoodsOrdersController extends GetxController {
   var vehicleNoCtrlr = TextEditingController();
   var jobRefCtrlr = TextEditingController();
   var textController = TextEditingController();
+  StreamSubscription<int>? facilityIdStreamSubscription;
 
   /// date picker
   bool openPurchaseDatePicker = false;
@@ -95,28 +95,33 @@ class ViewAddGoodsOrdersController extends GetxController {
   //   PaiedModel(name: 'Owner', id: 2),
   // ];
   // var selectedCountry = PaiedModel(name: "Please Select", id: 0).obs;
+  int facilityId = 0;
+  final HomeController homeController = Get.find();
 
   ///
   @override
   void onInit() async {
-    await setUserId();
-
-    print('AddStock:$goId');
-    Future.delayed(Duration(seconds: 1), () {
-      getUnitCurrencyList();
-    });
-    Future.delayed(Duration(seconds: 1), () {
-      getBusinessList(4);
-    });
-    Future.delayed(Duration(seconds: 1), () {
-      getAssetList(facilityId);
-      if (goId != 0) {
+    try {
+      await setUserId();
+      facilityIdStreamSubscription = homeController.facilityId$.listen((event) {
+        facilityId = event;
         Future.delayed(Duration(seconds: 1), () {
-          getPurchaseDetailsById(id: goId.value);
-          getGoHistory(id: goId.value);
+          getUnitCurrencyList();
         });
-      }
-    });
+        Future.delayed(Duration(seconds: 1), () {
+          getBusinessList(4);
+        });
+        Future.delayed(Duration(seconds: 1), () {
+          getAssetList(facilityId);
+          if (goId != 0) {
+            Future.delayed(Duration(seconds: 1), () {
+              getPurchaseDetailsById(id: goId.value);
+              getGoHistory(id: goId.value);
+            });
+          }
+        });
+      });
+    } catch (e) {}
     super.onInit();
   }
 
