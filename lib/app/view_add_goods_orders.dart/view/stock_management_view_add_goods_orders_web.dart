@@ -1,5 +1,6 @@
 import 'package:cmms/app/app.dart';
 import 'package:cmms/app/constant/constant.dart';
+import 'package:cmms/app/navigators/app_pages.dart';
 
 import 'package:cmms/app/utils/user_access_constants.dart';
 import 'package:cmms/app/view_add_goods_orders.dart/stock_management_view_add_goods_orders_controller.dart';
@@ -69,7 +70,8 @@ class _ViewAddGoodsOrdersWebState extends State<ViewAddGoodsOrdersWeb> {
                         ),
                         GestureDetector(
                           onTap: () {
-                            Get.back();
+                            Get.offNamed(
+                                Routes.stockManagementGoodsOrdersScreen);
                           },
                           child: Text(" / STOCK MANAGEMENT",
                               style: Styles.greyMediumLight12),

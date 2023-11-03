@@ -1,4 +1,5 @@
 import 'package:cmms/app/constant/constant.dart';
+import 'package:cmms/app/navigators/app_pages.dart';
 import 'package:cmms/app/utils/user_access_constants.dart';
 import 'package:data_table_2/data_table_2.dart';
 import 'package:flutter/material.dart';
@@ -1176,14 +1177,11 @@ class AppBarGoodsOrder extends StatelessWidget {
           ),
           GestureDetector(
             onTap: () {
-              Get.back();
+              Get.offNamed(Routes.stockManagementGoodsOrdersScreen);
             },
             child: Text(" / STOCK MANAGEMENT", style: Styles.greyMediumLight12),
           ),
           GestureDetector(
-              onTap: () {
-                Get.back();
-              },
               child: Text(" /  ADD GOODS ORDER DETAILS",
                   style: Styles.greyMediumLight12)),
         ],
