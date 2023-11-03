@@ -70,7 +70,8 @@ class _StockManagementGoodsOrdersWebState
                           ),
                           GestureDetector(
                             onTap: () {
-                              Get.back();
+                              Get.offAllNamed(
+                                  Routes.stockManagementDashboardScreen);
                             },
                             child: Text(" / STOCK MANAGEMENT",
                                 style: Styles.greyMediumLight12),

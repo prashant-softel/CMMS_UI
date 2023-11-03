@@ -1,5 +1,6 @@
 import 'package:cmms/app/app.dart';
 import 'package:cmms/app/constant/constant.dart';
+import 'package:cmms/app/navigators/app_pages.dart';
 import 'package:cmms/app/receive_goods_order/receive_goods_order_controller.dart';
 import 'package:cmms/app/utils/user_access_constants.dart';
 import 'package:cmms/app/widgets/approve_go_receive_dialog.dart';
@@ -68,7 +69,8 @@ class _ReceiveGoodsOrderWebState extends State<ReceiveGoodsOrderWeb> {
                         ),
                         GestureDetector(
                           onTap: () {
-                            Get.back();
+                            Get.offNamed(
+                                Routes.stockManagementGoodsOrdersScreen);
                           },
                           child: Text(" / STOCK MANAGEMENT",
                               style: Styles.greyMediumLight12),

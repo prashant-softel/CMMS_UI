@@ -1,5 +1,6 @@
 import 'package:cmms/app/app.dart';
 import 'package:cmms/app/constant/constant.dart';
+import 'package:cmms/app/navigators/app_pages.dart';
 import 'package:cmms/app/utils/user_access_constants.dart';
 import 'package:cmms/app/view_request_orders/request_goods_orders_view_controller.dart';
 import 'package:cmms/app/widgets/custom_elevated_button.dart';
@@ -50,12 +51,12 @@ class PurchaseGoodsorderViewWeb
               ),
               GestureDetector(
                 onTap: () {
-                  Get.back();
+                  Get.offAllNamed(Routes.purchaseGoodsorder);
                 },
                 child: Text(" / STOCK MANAGEMENT ",
                     style: Styles.greyMediumLight12),
               ),
-              Text(" / Request  Order  Details",
+              Text(" / VIEW REQUEST ORDER DETAILS",
                   style: Styles.greyMediumLight12)
             ],
           ),
@@ -83,7 +84,7 @@ class PurchaseGoodsorderViewWeb
                           Padding(
                             padding: const EdgeInsets.all(10.0),
                             child: Text(
-                              "Request  Order  Details",
+                              " View Request  Order  Details",
                               style: Styles.blackBold14,
                             ),
                           ),
