@@ -56,4 +56,8 @@ class PreventiveMaintenanceExecutionUsecase {
           to_schedule_id: to_schedule_id,
           taskId: taskId,
           isloading: isloading);
+  void saveValue({String? pmTaskId}) async =>
+      repository.saveValue(LocalKeys.pmTaskId, pmTaskId);
+  Future<String?> getValue() async =>
+      await repository.getStringValue(LocalKeys.pmTaskId);
 }

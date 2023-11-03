@@ -13,7 +13,6 @@ import 'package:cmms/domain/models/mrs_list_by_jobId.dart';
 import 'package:cmms/domain/models/new_permit_list_model.dart';
 import 'package:cmms/domain/models/pm_task_view_list_model.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
 import 'package:scrollable_table_view/scrollable_table_view.dart';
@@ -103,8 +102,6 @@ class PreventiveMaintenanceTaskViewController extends GetxController {
 
   Future<void> setScheduleId() async {
     try {
-      // final _flutterSecureStorage = const FlutterSecureStorage();
-      // // Read jobId
       final _scheduleId =
           await preventiveMaintenanceTaskViewPresenter.getValue();
 

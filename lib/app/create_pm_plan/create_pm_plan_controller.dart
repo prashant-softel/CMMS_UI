@@ -111,7 +111,7 @@ class CreatePmPlanController extends GetxController {
         pmPlanId.value = int.tryParse(_pmPlanId) ?? 0;
       }
     } catch (e) {
-      Utility.showDialog(e.toString() + 'pmPlanId');
+      // Utility.showDialog(e.toString() + 'pmPlanId');
     }
   }
 
@@ -285,16 +285,24 @@ class CreatePmPlanController extends GetxController {
               equipmentCategoryList[equipCatIndex]?.id ?? 0;
 
           // selectedInventory.value = value;
-          // filteredInventoryNameList.value = <InventoryModel>[];
+          filteredInventoryNameList.value = <InventoryModel>[];
           // inventoryNameList.value = <InventoryModel>[];
           // selectedInventoryNameIdList.value = [];
-          // rowItem.value = [];
+          rowItem.value = [];
           preventiveCheckList.value = <PreventiveCheckListModel>[];
-          selectedInventoryNameList.value = <InventoryModel>[];
+          selectedInventoryNameIdList.value = [];
+
+          selectedInventoryNameList.value = [];
           Future.delayed(Duration(seconds: 1), () {
             inventoryList(
                 facilityId: facilityId,
                 categoryId: selectedInventoryCategoryId);
+          });
+          Future.delayed(Duration(seconds: 2), () {
+            if (selectedInventoryCategoryId > 0 && selectedfrequencyId > 0) {
+              getPreventiveCheckList(facilityId, 1, true, selectedfrequencyId,
+                  selectedInventoryCategoryId);
+            }
           });
         }
         break;
@@ -304,7 +312,9 @@ class CreatePmPlanController extends GetxController {
           // inventoryNameList.value = <InventoryModel>[];
           // selectedInventoryNameIdList.value = [];
           rowItem.value = [];
-          preventiveCheckList.value = <PreventiveCheckListModel>[];
+          // preventiveCheckList.value = <PreventiveCheckListModel>[];
+          selectedInventoryNameIdList.value = [];
+
           if (value != null) {
             for (var selectedItem in value) {
               int equipCatIndex =
@@ -322,12 +332,6 @@ class CreatePmPlanController extends GetxController {
 
             facilityNameSelected(selectedInventoryNameIdList);
           }
-          Future.delayed(Duration(seconds: 2), () {
-            if (selectedInventoryCategoryId > 0 && selectedfrequencyId > 0) {
-              getPreventiveCheckList(facilityId, 1, true, selectedfrequencyId,
-                  selectedInventoryCategoryId);
-            }
-          });
         }
         break;
       case RxList<FrequencyModel>:
@@ -336,6 +340,12 @@ class CreatePmPlanController extends GetxController {
               frequencyList.indexWhere((x) => x?.name == value);
           selectedfrequencyId = frequencyList[frequencyIndex]?.id ?? 0;
           selectedfrequency.value = value;
+          Future.delayed(Duration(seconds: 2), () {
+            if (selectedInventoryCategoryId > 0 && selectedfrequencyId > 0) {
+              getPreventiveCheckList(facilityId, 1, true, selectedfrequencyId,
+                  selectedInventoryCategoryId);
+            }
+          });
         }
         break;
       case RxList<PreventiveCheckListModel>:

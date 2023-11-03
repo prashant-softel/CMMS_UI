@@ -160,6 +160,7 @@ class ChecklistObservation {
   int? is_custom_check_point;
   int? is_file_required;
   TextEditingController? observation_value_controller;
+
   ChecklistObservation(
       {this.check_point_id,
       this.check_point_name,

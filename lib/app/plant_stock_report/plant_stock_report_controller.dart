@@ -122,6 +122,8 @@ class PlantStockReportController extends GetxController {
       bool isLoading,
       List<int>? selectedAssetsNameIdList) async {
     plantStockList?.value = <PlantStockListModel>[];
+    StockDetailsList?.value = <StockDetails>[];
+
     final _plantStockList = await pantStockReportPresenter.getPlantStockList(
         facilityId: facilityId,
         isLoading: isLoading,
@@ -135,18 +137,6 @@ class PlantStockReportController extends GetxController {
           StockDetailsList!.add(stockDetail);
         }
       }
-      //   paginationController = PaginationController(
-      //     rowCount: StockDetailsList?.length ?? 0,
-      //     rowsPerPage: 10,
-      //   );
-      //   if (StockDetailsList != null && StockDetailsList!.isNotEmpty) {
-      //     plantStockListModel = StockDetailsList![0];
-      //     var plantStockListJson = plantStockListModel?.toJson();
-      //     plantStockTableColumns.value = <String>[];
-      //     for (var key in plantStockListJson?.keys.toList() ?? []) {
-      //       plantStockTableColumns.add(key);
-      //     }
-      //   }
     }
   }
 

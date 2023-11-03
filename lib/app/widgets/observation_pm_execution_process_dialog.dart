@@ -208,57 +208,6 @@ class ObservationPmExecutionViewDialog extends GetView {
                                                 .failure_waightage
                                                 .toString() ??
                                             '')),
-                                        // DataCell(
-                                        //   Row(
-                                        //     mainAxisAlignment:
-                                        //         MainAxisAlignment.center,
-                                        //     children: [
-                                        //       Container(
-                                        //         decoration: BoxDecoration(
-                                        //           borderRadius:
-                                        //               BorderRadius.circular(5),
-                                        //           color: ColorValues
-                                        //               .appDarkBlueColor,
-                                        //           border: Border.all(
-                                        //             color: ColorValues
-                                        //                 .appDarkBlueColor,
-                                        //             width: 1,
-                                        //           ),
-                                        //         ),
-                                        //         child: Icon(Icons.upload,
-                                        //             size: 30,
-                                        //             color:
-                                        //                 ColorValues.whiteColor),
-                                        //       ),
-                                        //       Dimens.boxWidth15,
-                                        //       Container(
-                                        //         width: 60,
-                                        //         decoration: BoxDecoration(
-                                        //           borderRadius:
-                                        //               BorderRadius.circular(2),
-                                        //           color: ColorValues
-                                        //               .appDarkBlueColor,
-                                        //           border: Border.all(
-                                        //             color: ColorValues
-                                        //                 .appDarkBlueColor,
-                                        //             width: 1,
-                                        //           ),
-                                        //         ),
-                                        //         child: Text(
-                                        //           "0 Files",
-                                        //           textAlign: TextAlign.center,
-                                        //           style: Styles.white12.copyWith(
-                                        //             color: Theme.of(context)
-                                        //                 .textTheme
-                                        //                 .displaySmall!
-                                        //                 .color,
-                                        //           ),
-                                        //         ),
-                                        //       ),
-                                        //     ],
-                                        //   ),
-                                        // ),
-
                                         DataCell(Text('???')),
                                         DataCell(Padding(
                                           padding: const EdgeInsets.all(8.0),
@@ -271,14 +220,7 @@ class ObservationPmExecutionViewDialog extends GetView {
                                                 as TextEditingController,
                                             maxLine: 5,
                                           ),
-                                        )
-                                            // Text(controller
-                                            //       .selectedItem
-                                            //       ?.checklist_observation?[index]
-                                            //       .observation ??
-                                            //   ''
-                                            //   )
-                                            ),
+                                        )),
                                         DataCell(controller
                                                     .selectedItem
                                                     ?.checklist_observation?[
@@ -606,6 +548,7 @@ class ObservationPmExecutionViewDialog extends GetView {
                                 backgroundColor: ColorValues.appDarkBlueColor,
                                 text: "Update",
                                 onPressed: () {
+                                  Get.back();
                                   controller.updatePmExecution();
                                 },
                               ),
