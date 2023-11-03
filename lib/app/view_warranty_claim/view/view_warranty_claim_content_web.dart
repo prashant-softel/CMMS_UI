@@ -5,7 +5,6 @@ import 'package:cmms/app/utils/user_access_constants.dart';
 import 'package:cmms/app/view_warranty_claim/view_warranty_claim_controller.dart';
 import 'package:cmms/app/widgets/approve_wc_dialog.dart';
 import 'package:cmms/app/widgets/custom_elevated_button.dart';
-import 'package:cmms/app/widgets/history_table_widget_web.dart';
 import 'package:cmms/app/widgets/new_warranty_claim_dialog.dart';
 import 'package:cmms/app/widgets/reject_wc_dialog.dart';
 import 'package:flutter/material.dart';

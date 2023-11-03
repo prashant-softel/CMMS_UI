@@ -1,6 +1,5 @@
 import 'dart:async';
 import 'dart:convert';
-import 'dart:ui';
 
 import 'package:cmms/app/app.dart';
 import 'package:cmms/app/constant/constant.dart';
@@ -12,9 +11,7 @@ import 'package:cmms/domain/models/history_model.dart';
 import 'package:cmms/domain/models/incident_report_details_model.dart';
 import 'package:cmms/domain/models/incident_report_list_model.dart';
 import 'package:cmms/domain/models/paiyed_model.dart';
-import 'package:cmms/domain/models/type_permit_model.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/rendering.dart';
 import 'package:get/get.dart';
 
 import 'package:rxdart/subjects.dart';

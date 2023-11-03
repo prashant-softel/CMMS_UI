@@ -1,13 +1,11 @@
 import 'package:cmms/app/app.dart';
 import 'package:cmms/app/role_access/rele_access_controller.dart';
 import 'package:cmms/app/widgets/custom_elevated_button.dart';
-import 'package:cmms/app/widgets/dropdown.dart';
 import 'package:cmms/app/widgets/dropdown_web.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:scrollable_table_view/scrollable_table_view.dart';
 
-import '../../widgets/custom_richtext.dart';
 import '../../widgets/custom_swich_toggle.dart';
 
 class RoleAccessContentWeb extends GetView<RoleAccessController> {

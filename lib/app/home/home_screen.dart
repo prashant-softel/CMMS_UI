@@ -5,7 +5,6 @@ import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:scrollable_table_view/scrollable_table_view.dart';
 
-import '../inventory_list/views/inventory_list_screen.dart';
 
 class HomeScreen extends GetView<HomeController> {
   HomeScreen({super.key});

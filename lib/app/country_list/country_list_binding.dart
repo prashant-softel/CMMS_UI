@@ -1,5 +1,4 @@
 import 'package:get/get.dart';
-import '../../domain/usecases/blood_list_usecase.dart';
 
 import '../../domain/usecases/country_list_usecase.dart';
 import '../../domain/usecases/home_usecase.dart';

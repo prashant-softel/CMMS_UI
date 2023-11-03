@@ -2,7 +2,6 @@ import 'dart:async';
 import 'dart:convert';
 
 import 'package:cmms/app/app.dart';
-import 'package:cmms/app/constant/constant.dart';
 import 'package:cmms/app/navigators/app_pages.dart';
 import 'package:cmms/app/warranty_claim_list/warranty_claim_presenter.dart';
 import 'package:cmms/domain/domain.dart';
@@ -21,7 +20,6 @@ import 'package:intl/intl.dart';
 import 'package:rxdart/subjects.dart';
 import 'package:scrollable_table_view/scrollable_table_view.dart';
 import '../../domain/models/facility_model.dart';
-import '../../domain/models/user_access_model.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 
 class WarrantyClaimController extends GetxController {
@@ -506,7 +504,7 @@ class WarrantyClaimController extends GetxController {
       rowCount: warrantyClaimList.length,
       rowsPerPage: 10,
     );
-    if (filteredData != null && filteredData.isNotEmpty) {
+    if (filteredData.isNotEmpty) {
       warrantyClaimListModel = filteredData[0];
       var warrantyClaimListJson = warrantyClaimListModel?.toJson();
       warrantyClaimListTableColumns.value = <String>[];

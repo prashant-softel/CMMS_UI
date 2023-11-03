@@ -35,12 +35,12 @@ class NewPermitListMobile extends GetView<NewPermitListController> {
                   //physics: const NeverScrollableScrollPhysics(),
                   shrinkWrap: true,
                   itemCount: controller.newPermitList != null
-                      ? controller.newPermitList?.length
+                      ? controller.newPermitList.length
                       : 0,
                   itemBuilder: (context, index) {
                     final newPermitListModel =
                         (controller.newPermitList != null)
-                            ? controller.newPermitList![index]
+                            ? controller.newPermitList[index]
                             : NewPermitModel();
                     var status =
                         newPermitListModel?.current_status_short.toString() ??

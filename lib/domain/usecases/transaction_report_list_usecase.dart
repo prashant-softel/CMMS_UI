@@ -1,9 +1,7 @@
 import 'package:cmms/domain/domain.dart';
 import 'package:cmms/domain/models/%20%20transaction_report_list_model.dart';
-import 'package:cmms/domain/models/stock_management_update_goods_orders_model.dart';
 import 'package:cmms/domain/models/user_list_model.dart';
 
-import '../models/facility_model.dart';
 
 class TransactionReportListUsecase {
   Repository repository;

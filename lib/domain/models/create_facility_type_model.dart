@@ -1,4 +1,3 @@
-import 'dart:convert';
 
 class CreateFacilityType {
   String name;

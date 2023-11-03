@@ -84,7 +84,7 @@ class EndMCExecutionDetailsModel {
         "status": status,
         "status_short": status_short,
         "status_long": status_long,
-        "schedules": List<dynamic>.from(schedules!.map((x) => x)),
+        "schedules": List<dynamic>.from(schedules.map((x) => x)),
       };
 }
 

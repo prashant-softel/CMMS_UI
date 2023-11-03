@@ -5,7 +5,6 @@ import 'package:get/get.dart';
 import '../../widgets/custom_elevated_button.dart';
 import '../../widgets/custom_richtext.dart';
 import '../../widgets/custom_textField.dart';
-import '../../widgets/dropdown.dart';
 import '../create_preventive_checklist_controller.dart';
 
 class CreatePriventiveListScreen

@@ -1,5 +1,4 @@
 import 'package:cmms/domain/models/asset_type_list_model.dart';
-import 'package:cmms/domain/models/job_model.dart';
 import 'package:cmms/domain/repositories/repository.dart';
 
 // class AssetTypeListUsecase {

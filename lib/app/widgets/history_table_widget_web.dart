@@ -4,7 +4,6 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 import '../../domain/models/history_model.dart';
-import '../theme/color_values.dart';
 
 ///
 class HistoryTableWidgetWeb extends StatelessWidget {

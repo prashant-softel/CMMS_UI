@@ -1,7 +1,5 @@
 import 'package:cmms/app/permit_type/permit_type_controller.dart';
 import 'package:cmms/app/permit_type/view/permit_type_content_web.dart';
-import 'package:cmms/app/preventive_List/view/preventive_listContent_mobile.dart';
-import 'package:cmms/app/preventive_List/view/preventive_listContent_web.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'permit_type_mobile.dart';

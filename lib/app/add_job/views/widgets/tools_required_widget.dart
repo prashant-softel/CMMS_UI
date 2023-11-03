@@ -1,14 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:multi_select_flutter/util/multi_select_item.dart';
-import '../../../../domain/models/tools_model.dart';
 import '../../../theme/dimens.dart';
 import '../../../theme/styles.dart';
 import '../../add_job_controller.dart';
-import '../../../widgets/dropdown.dart';
 import '../../../theme/color_values.dart';
 import 'package:multi_select_flutter/multi_select_flutter.dart';
-import '../../../theme/styles.dart';
 
 class ToolsRequiredWidget extends StatelessWidget {
   ToolsRequiredWidget({super.key});

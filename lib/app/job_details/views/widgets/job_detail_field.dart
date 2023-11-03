@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import '../../../../domain/models/job_model.dart';
 import '../../../theme/dimens.dart';
 import '../../../theme/styles.dart';
 import '../../../utils/responsive.dart';

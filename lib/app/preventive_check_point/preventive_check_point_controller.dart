@@ -140,10 +140,8 @@ class PreventiveCheckPointController extends GetxController {
         checkpointJsonString: checkpointJsonString,
         isLoading: true,
       );
-      if (rsponse != null) {
-        return true;
-      }
-    }
+      return true;
+        }
     return false;
   }
 

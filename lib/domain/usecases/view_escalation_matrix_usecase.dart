@@ -1,8 +1,5 @@
 import 'package:cmms/domain/domain.dart';
-import 'package:cmms/domain/models/history_model.dart';
-import 'package:cmms/domain/models/incident_report_details_model.dart';
 import 'package:cmms/domain/models/incident_report_list_model.dart';
-import 'package:cmms/domain/models/type_permit_model.dart';
 
 import '../models/facility_model.dart';
 

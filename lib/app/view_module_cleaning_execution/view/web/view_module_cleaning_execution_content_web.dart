@@ -6,14 +6,11 @@ import 'package:cmms/app/utils/user_access_constants.dart';
 import 'package:cmms/app/view_module_cleaning_execution/view_module_cleaning_execution_controller.dart';
 import 'package:cmms/app/widgets/approve_mc_execution_dialog.dart';
 import 'package:cmms/app/widgets/custom_elevated_button.dart';
-import 'package:cmms/app/widgets/custom_richtext.dart';
 import 'package:cmms/app/widgets/reject_mc_execution_dialog.dart';
 import 'package:cmms/app/widgets/view_module_cleaning_execution_dialog.dart';
 import 'package:data_table_2/data_table_2.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:get/get.dart';
-import 'package:scrollable_table_view/scrollable_table_view.dart';
 
 class ViewModuleCleaningExecutionContentWeb
     extends GetView<viewModuleCleaningExecutionController> {
@@ -567,7 +564,7 @@ class ViewModuleCleaningExecutionContentWeb
                                                             });
 
                                                             print(
-                                                                'filteredData:${selectedSchedule!}');
+                                                                'filteredData:${selectedSchedule}');
 
                                                             Get.dialog(viewModuleCleaningExecutionDialog(
                                                                 waterUsed: controller
@@ -579,7 +576,7 @@ class ViewModuleCleaningExecutionContentWeb
                                                                         index]
                                                                     ?.remark,
                                                                 schedule:
-                                                                    selectedSchedule!,
+                                                                    selectedSchedule,
                                                                 mappedData:
                                                                     mappedData));
                                                           },

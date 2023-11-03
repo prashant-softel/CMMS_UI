@@ -1,6 +1,5 @@
 import 'package:cmms/app/audit_list/view/audit_list_content_web.dart';
 import 'package:cmms/app/hoto/hoto_list_controller.dart';
-import 'package:cmms/app/hoto/view/hoto_list_content_web.dart';
 
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';

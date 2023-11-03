@@ -2,8 +2,6 @@ import 'package:clipboard/clipboard.dart';
 import 'package:cmms/app/app.dart';
 import 'package:cmms/app/constant/constant.dart';
 import 'package:cmms/app/facility_type_list/facility_type_list_controller.dart';
-import 'package:cmms/app/widgets/custom_swich_toggle.dart';
-import 'package:cmms/app/widgets/dropdown.dart';
 import 'package:cmms/app/widgets/dropdown_web.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -1440,7 +1438,7 @@ class FacilityTypeListContentWeb extends GetView<FacilityTypeListController> {
                             SizedBox(
                               height: 20,
                             ),
-                            controller.facilityTypeList!.isEmpty
+                            controller.facilityTypeList.isEmpty
                                 ? Expanded(
                               child: ScrollableTableView(
                                 columns: [
@@ -1463,7 +1461,7 @@ class FacilityTypeListContentWeb extends GetView<FacilityTypeListController> {
                                 rows: [
                                   ...List.generate(
                                     controller.facilityTypeList
-                                        ?.length ??
+                                        .length ??
                                         0,
                                         (index) {
                                       return [

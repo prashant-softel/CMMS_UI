@@ -1,18 +1,12 @@
 import 'package:cmms/domain/domain.dart';
-import 'package:cmms/domain/models/business_list_model.dart';
 import 'package:cmms/domain/models/currency_list_model.dart';
 import 'package:cmms/domain/models/employee_list_model.dart';
 import 'package:cmms/domain/models/employee_list_model2.dart';
 import 'package:cmms/domain/models/inventory_category_model.dart';
-import 'package:cmms/domain/models/inventory_model2.dart';
 import 'package:cmms/domain/models/view_warranty_claim_model.dart';
-import 'package:cmms/domain/models/warranty_claim_model.dart';
 import 'package:cmms/domain/usecases/edit_warranty_claim_usecase.dart';
-import 'package:cmms/domain/usecases/view_warranty_claim_usecase.dart';
-import 'package:cmms/domain/usecases/warranty_claim_usecase.dart';
 
 import '../../domain/models/facility_model.dart';
-import '../../domain/models/user_access_model.dart';
 
 class EditWarrantyClaimPresenter {
   EditWarrantyClaimPresenter(this.editWarrantyClaimUsecase);

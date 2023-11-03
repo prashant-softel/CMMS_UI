@@ -520,23 +520,20 @@ class JobDetailsWebView extends GetView<JobDetailsController> {
                                                                       ?.jobCardId
                                                                       .toString() ??
                                                                   "";
-                                                              if (jobCardId !=
-                                                                  null) {
-                                                                print({
-                                                                  "JcId":
-                                                                      jobCardId
-                                                                });
+                                                              print({
+                                                                "JcId":
+                                                                    jobCardId
+                                                              });
 
-                                                                Get.toNamed(
-                                                                    Routes
-                                                                        .jobCard,
-                                                                    arguments: {
-                                                                      'JcId': int
-                                                                          .tryParse(
-                                                                              "$jobCardId")
-                                                                    });
-                                                              }
-                                                            }),
+                                                              Get.toNamed(
+                                                                  Routes
+                                                                      .jobCard,
+                                                                  arguments: {
+                                                                    'JcId': int
+                                                                        .tryParse(
+                                                                            "$jobCardId")
+                                                                  });
+                                                                                                                        }),
                                                         varUserAccessModel.value
                                                                     .access_list!
                                                                     .where((e) =>
@@ -785,21 +782,18 @@ class JobDetailsWebView extends GetView<JobDetailsController> {
                                                                       ?.mrsId
                                                                       .toString() ??
                                                                   "";
-                                                              if (mrsId !=
-                                                                  null) {
-                                                                print({
-                                                                  "mrsId": mrsId
-                                                                });
-                                                                Get.toNamed(
-                                                                    Routes
-                                                                        .mrsViewScreen,
-                                                                    arguments: {
-                                                                      'mrsId': int
-                                                                          .tryParse(
-                                                                              "$mrsId")
-                                                                    });
-                                                              }
-                                                            }),
+                                                              print({
+                                                                "mrsId": mrsId
+                                                              });
+                                                              Get.toNamed(
+                                                                  Routes
+                                                                      .mrsViewScreen,
+                                                                  arguments: {
+                                                                    'mrsId': int
+                                                                        .tryParse(
+                                                                            "$mrsId")
+                                                                  });
+                                                                                                                        }),
                                                         TableActionButton(
                                                             color: ColorValues
                                                                 .editColor,
@@ -819,21 +813,18 @@ class JobDetailsWebView extends GetView<JobDetailsController> {
                                                                       ?.mrsId
                                                                       .toString() ??
                                                                   "";
-                                                              if (mrsId !=
-                                                                  null) {
-                                                                print({
-                                                                  "mrsId": mrsId
-                                                                });
-                                                                Get.toNamed(
-                                                                    Routes
-                                                                        .editMrs,
-                                                                    arguments: {
-                                                                      'mrsId': int
-                                                                          .tryParse(
-                                                                              "$mrsId")
-                                                                    });
-                                                              }
-                                                            })
+                                                              print({
+                                                                "mrsId": mrsId
+                                                              });
+                                                              Get.toNamed(
+                                                                  Routes
+                                                                      .editMrs,
+                                                                  arguments: {
+                                                                    'mrsId': int
+                                                                        .tryParse(
+                                                                            "$mrsId")
+                                                                  });
+                                                                                                                        })
                                                       ],
                                                     )),
                                                   ]),

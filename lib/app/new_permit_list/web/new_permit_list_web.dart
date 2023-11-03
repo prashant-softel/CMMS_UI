@@ -2,12 +2,8 @@ import 'package:cmms/app/constant/constant.dart';
 import 'package:cmms/app/home/home_screen.dart';
 import 'package:cmms/app/new_permit_list/permit_status_constants.dart';
 import 'package:cmms/app/theme/dimens.dart';
-import 'package:cmms/app/utils/app_constants.dart';
 import 'package:cmms/app/widgets/custom_richtext.dart';
 import 'package:cmms/app/widgets/date_picker.dart';
-import 'package:cmms/app/widgets/permit_cancel_request_dialog.dart';
-import 'package:cmms/app/widgets/permit_close_dialog.dart';
-import 'package:cmms/app/widgets/permit_extend_dialog.dart';
 import 'package:cmms/domain/models/new_permit_list_model.dart';
 
 import 'package:data_table_2/data_table_2.dart';

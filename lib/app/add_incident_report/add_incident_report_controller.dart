@@ -3,11 +3,9 @@ import 'dart:convert';
 
 import 'package:cmms/app/add_incident_report/add_incident_report_presenter.dart';
 import 'package:cmms/app/app.dart';
-import 'package:cmms/app/constant/constant.dart';
 import 'package:cmms/domain/domain.dart';
 import 'package:cmms/domain/models/create_incident_report_model.dart';
 import 'package:cmms/domain/models/employee_list_model.dart';
-import 'package:cmms/domain/models/employee_list_model2.dart';
 import 'package:cmms/domain/models/history_model.dart';
 import 'package:cmms/domain/models/incident_report_details_model.dart';
 import 'package:cmms/domain/models/incident_report_list_model.dart';
@@ -19,7 +17,6 @@ import 'package:intl/intl.dart';
 import 'package:rxdart/subjects.dart';
 import 'package:scrollable_table_view/scrollable_table_view.dart';
 import '../../domain/models/facility_model.dart';
-import '../../domain/models/user_access_model.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 
 class AddIncidentReportController extends GetxController {

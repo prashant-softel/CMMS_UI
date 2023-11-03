@@ -1,5 +1,4 @@
 import 'package:cmms/domain/models/request_order_list.model.dart';
-import 'package:cmms/domain/models/stock_management_update_goods_orders_model.dart';
 import 'package:cmms/domain/usecases/purchase_goods_order_list_usecase.dart';
 
 import '../../domain/models/user_list_model.dart';

@@ -1,4 +1,3 @@
-import 'package:cmms/app/add_inventory/add_inventory_controller.dart';
 
 import 'package:cmms/app/app.dart';
 import 'package:cmms/app/view_add_inventory/view_add_inventory_controller.dart';

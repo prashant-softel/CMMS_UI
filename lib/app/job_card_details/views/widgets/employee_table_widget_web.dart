@@ -7,7 +7,6 @@ import 'package:get/get.dart';
 import '../../../theme/color_values.dart';
 import '../../../theme/dimens.dart';
 import '../../../widgets/action_button.dart';
-import '../../../widgets/dropdown.dart';
 
 class EmployeeTableWidgetWeb extends GetView<JobCardDetailsController> {
   EmployeeTableWidgetWeb({

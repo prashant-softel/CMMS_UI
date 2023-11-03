@@ -2,7 +2,6 @@ import 'package:cmms/app/approve_return_mrs/approve_return_mrs_presenter.dart';
 import 'package:cmms/app/navigators/app_pages.dart';
 import 'package:cmms/app/utils/utility.dart';
 import 'package:cmms/domain/models/get_return_mrs_detail.dart';
-import 'package:cmms/domain/models/mrs_detail_model.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:get/get.dart';

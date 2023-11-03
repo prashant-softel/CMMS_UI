@@ -141,7 +141,7 @@ class PmPlanListController extends GetxController {
         rowsPerPage: 10,
       );
 
-      if (filteredData != null && filteredData.isNotEmpty) {
+      if (filteredData.isNotEmpty) {
         pmPlanListModel = filteredData[0];
         var calibrationListJson = pmPlanListModel?.toJson();
         pmPlanListTableColumns.value = <String>[];

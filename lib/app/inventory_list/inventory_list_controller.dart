@@ -65,25 +65,23 @@ class InventoryListController extends GetxController {
     for (var inventory_list in _inventoryList) {
       inventoryList.add(inventory_list);
     }
-    if (_inventoryList != null) {
-      inventoryList.value = _inventoryList;
-      filteredData.value = inventoryList;
-      // print('equipment Name List:$inventoryList');
+    inventoryList.value = _inventoryList;
+    filteredData.value = inventoryList;
+    // print('equipment Name List:$inventoryList');
 
-      paginationController = PaginationController(
-        rowCount: inventoryList.length,
-        rowsPerPage: 10,
-      );
-      if (filteredData != null && filteredData.isNotEmpty) {
-        inventoryModelList = filteredData[0];
-        var inventoryListJson = inventoryModelList?.toJson();
-        inventoryListTableColumns.value = <String>[];
-        for (var key in inventoryListJson?.keys.toList() ?? []) {
-          inventoryListTableColumns.add(key);
-        }
+    paginationController = PaginationController(
+      rowCount: inventoryList.length,
+      rowsPerPage: 10,
+    );
+    if (filteredData.isNotEmpty) {
+      inventoryModelList = filteredData[0];
+      var inventoryListJson = inventoryModelList?.toJson();
+      inventoryListTableColumns.value = <String>[];
+      for (var key in inventoryListJson?.keys.toList() ?? []) {
+        inventoryListTableColumns.add(key);
       }
     }
-    update(['inventory_list']);
+      update(['inventory_list']);
   }
 
   void showAddInventoryDetails({int? id}) {

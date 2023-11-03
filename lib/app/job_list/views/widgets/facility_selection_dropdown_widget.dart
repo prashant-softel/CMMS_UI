@@ -5,7 +5,6 @@ import 'package:get/get.dart';
 import '../../../theme/color_values.dart';
 import '../../../theme/dimens.dart';
 import '../../../theme/styles.dart';
-import '../../../widgets/dropdown.dart';
 import '../../job_list_controller.dart';
 
 class FacilitySelectionDropdownWidget extends GetView<JobListController> {

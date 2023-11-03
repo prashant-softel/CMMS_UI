@@ -4,7 +4,6 @@ import 'package:cmms/domain/usecases/home_usecase.dart';
 import 'package:cmms/domain/usecases/view_pm_plan_usecase.dart';
 import 'package:get/get.dart';
 
-import '../../domain/usecases/create_pm_plan_usecase.dart';
 import 'view_pm_plan_controller.dart';
 import 'view_pm_plan_presenter.dart';
 

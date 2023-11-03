@@ -1,7 +1,6 @@
 import 'package:cmms/domain/models/facility_model.dart';
 import 'package:cmms/domain/models/module_cleaning_list_plan_model.dart';
 import 'package:cmms/domain/usecases/hoto_list_screen_usecase.dart';
-import 'package:cmms/domain/usecases/module_cleaning_list_plan_usecase.dart';
 
 class HotoListScreenPresenter {
   HotoListScreenPresenter(this.hotoListUsecase);

@@ -494,16 +494,14 @@ class ObservationPMTaskViewDialog extends GetView {
                                                           ?.mrsId
                                                           .toString() ??
                                                       "";
-                                                  if (mrsId != null) {
-                                                    print({"mrsId": mrsId});
-                                                    Get.toNamed(
-                                                        Routes.mrsViewScreen,
-                                                        arguments: {
-                                                          'mrsId': int.tryParse(
-                                                              "$mrsId")
-                                                        });
-                                                  }
-                                                }),
+                                                  print({"mrsId": mrsId});
+                                                  Get.toNamed(
+                                                      Routes.mrsViewScreen,
+                                                      arguments: {
+                                                        'mrsId': int.tryParse(
+                                                            "$mrsId")
+                                                      });
+                                                                                                }),
                                             TableActionButton(
                                                 color: ColorValues.editColor,
                                                 icon: Icons.edit,
@@ -517,15 +515,13 @@ class ObservationPMTaskViewDialog extends GetView {
                                                           ?.mrsId
                                                           .toString() ??
                                                       "";
-                                                  if (mrsId != null) {
-                                                    print({"mrsId": mrsId});
-                                                    Get.toNamed(Routes.editMrs,
-                                                        arguments: {
-                                                          'mrsId': int.tryParse(
-                                                              "$mrsId")
-                                                        });
-                                                  }
-                                                })
+                                                  print({"mrsId": mrsId});
+                                                  Get.toNamed(Routes.editMrs,
+                                                      arguments: {
+                                                        'mrsId': int.tryParse(
+                                                            "$mrsId")
+                                                      });
+                                                                                                })
                                           ],
                                         )),
                                       ]),

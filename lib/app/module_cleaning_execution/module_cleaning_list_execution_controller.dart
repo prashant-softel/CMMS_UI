@@ -155,23 +155,21 @@ class ModuleCleaningListExecutionController extends GetxController {
       mcTaskList.add(mc_task_list);
     }
 
-    if (list != null) {
-      mcTaskList.value = list;
-      filteredData.value = mcTaskList.value;
-      paginationController = PaginationController(
-        rowCount: mcTaskList.length,
-        rowsPerPage: 10,
-      );
-      if (filteredData != null && filteredData.isNotEmpty) {
-        mcTaskModelList = filteredData[0];
-        var mcTaskListJson = mcTaskModelList?.toJson();
-        mcTaskListTableColumns.value = <String>[];
-        for (var key in mcTaskListJson?.keys.toList() ?? []) {
-          mcTaskListTableColumns.add(key);
-        }
+    mcTaskList.value = list;
+    filteredData.value = mcTaskList.value;
+    paginationController = PaginationController(
+      rowCount: mcTaskList.length,
+      rowsPerPage: 10,
+    );
+    if (filteredData.isNotEmpty) {
+      mcTaskModelList = filteredData[0];
+      var mcTaskListJson = mcTaskModelList?.toJson();
+      mcTaskListTableColumns.value = <String>[];
+      for (var key in mcTaskListJson?.keys.toList() ?? []) {
+        mcTaskListTableColumns.add(key);
       }
     }
-
+  
     update(['mc_task_list']);
   }
 

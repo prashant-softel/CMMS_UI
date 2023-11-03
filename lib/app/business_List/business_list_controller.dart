@@ -1,24 +1,16 @@
 import 'dart:async';
 
 import 'package:cmms/app/app.dart';
-import 'package:cmms/app/preventive_List/preventive_list_presenter.dart';
-import 'package:cmms/domain/models/create_checklist_model.dart';
-import 'package:cmms/domain/models/preventive_checklist_model.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:intl/intl.dart';
 import 'package:scrollable_table_view/scrollable_table_view.dart';
 import '../../domain/models/business_list_model.dart';
 import '../../domain/models/business_type_model.dart';
 import '../../domain/models/city_model.dart';
 import '../../domain/models/country_model.dart';
 import '../../domain/models/create_business_list_model.dart';
-import '../../domain/models/create_modulelist_model.dart';
 import '../../domain/models/frequency_model.dart';
-import '../../domain/models/inventory_category_model.dart';
-import '../../domain/models/modulelist_model.dart';
 import '../../domain/models/state.dart';
-import '../../domain/models/state_model.dart';
 import '../navigators/app_pages.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import '../../domain/models/update_business_list_model.dart';
@@ -134,12 +126,10 @@ class BusinessListController extends GetxController {
     print("$selectedBusinessTypeId");
       final list = await businessListPresenter.getBusinessTypeList();
 
-      if (list != null) {
-        for (var _equipmentCategoryList in list) {
-          businessCategoryList.add(_equipmentCategoryList);
-        }
+      for (var _equipmentCategoryList in list) {
+        businessCategoryList.add(_equipmentCategoryList);
       }
-      // if(selectedBusinessType.value != '')
+          // if(selectedBusinessType.value != '')
 
       //   print("$selectedBusinessTypeId");
       //
@@ -302,8 +292,8 @@ class BusinessListController extends GetxController {
           rowsPerPage: 10,
         );
 
-        if (filteredData != null && filteredData!.isNotEmpty) {
-          moduleListModel = filteredData![0];
+        if (filteredData.isNotEmpty) {
+          moduleListModel = filteredData[0];
           var preventiveCheckListJson = moduleListModel?.toJson();
           moduleListTableColumns.value = <String>[];
           for (var key in preventiveCheckListJson?.keys.toList() ?? []) {

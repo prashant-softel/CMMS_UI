@@ -1,16 +1,11 @@
 import 'package:cmms/domain/models/business_type_model.dart';
-import 'package:cmms/domain/models/preventive_checklist_model.dart';
 
 import '../../domain/models/business_list_model.dart';
 import '../../domain/models/city_model.dart';
 import '../../domain/models/country_model.dart';
 import '../../domain/models/frequency_model.dart';
-import '../../domain/models/inventory_category_model.dart';
-import '../../domain/models/modulelist_model.dart';
 import '../../domain/models/state.dart';
-import '../../domain/models/state_model.dart';
 import '../../domain/usecases/business_list_usecase.dart';
-import '../../domain/usecases/module_list_usecase.dart';
 
 class BusinessListPresenter {
   BusinessListPresenter(this.businessUsecase);

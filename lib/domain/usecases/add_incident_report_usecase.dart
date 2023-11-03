@@ -1,6 +1,5 @@
 import 'package:cmms/domain/domain.dart';
 import 'package:cmms/domain/models/employee_list_model.dart';
-import 'package:cmms/domain/models/employee_list_model2.dart';
 import 'package:cmms/domain/models/history_model.dart';
 import 'package:cmms/domain/models/incident_report_details_model.dart';
 import 'package:cmms/domain/models/incident_report_list_model.dart';

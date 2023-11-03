@@ -5,10 +5,8 @@ import 'package:cmms/app/widgets/custom_elevated_button.dart';
 import 'package:cmms/app/widgets/custom_richtext.dart';
 import 'package:cmms/app/widgets/mc_approve_dialog.dart';
 import 'package:cmms/app/widgets/mc_reject_dialog.dart';
-import 'package:cmms/app/widgets/set_equipments_dialog.dart';
 import 'package:cmms/app/widgets/stock_dropdown.dart';
 import 'package:cmms/app/widgets/view_set_eqp_dialog.dart';
-import 'package:cmms/domain/models/mc_details_plan_model.dart';
 import 'package:data_table_2/data_table_2.dart';
 
 import 'package:flutter/material.dart';

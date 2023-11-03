@@ -1,5 +1,4 @@
 import 'dart:async';
-import 'dart:convert';
 
 import 'package:cmms/app/add_module_cleaning_execution/add_module_cleaning_execution_presenter.dart';
 import 'package:cmms/app/app.dart';
@@ -12,7 +11,6 @@ import 'package:cmms/domain/models/equipment_list_model.dart';
 import 'package:cmms/domain/models/inventory_category_model.dart';
 import 'package:cmms/domain/models/modulelist_model.dart';
 import 'package:cmms/domain/models/paiyed_model.dart';
-import 'package:cmms/domain/models/role_model.dart';
 import 'package:cmms/domain/models/type_permit_model.dart';
 import 'package:cmms/domain/models/update_mc_execution_model.dart';
 import 'package:flutter/material.dart';
@@ -198,21 +196,19 @@ class AddModuleCleaningExecutionController extends GetxController {
       equipmentList.add(equipment_list);
     }
 
-    if (list != null) {
-      equipmentList.value = list;
-      // filteredData.value = incidentReportList.value;
-      // print('Filtered data:${filteredData.value}');
+    equipmentList.value = list;
+    // filteredData.value = incidentReportList.value;
+    // print('Filtered data:${filteredData.value}');
 
-      // if (filteredData != null && filteredData.isNotEmpty) {
-      //   incidentReportModelList = filteredData[0];
-      //   var incidentListJson = incidentReportModelList?.toJson();
-      //   incidentListTableColumns.value = <String>[];
-      //   for (var key in incidentListJson?.keys.toList() ?? []) {
-      //     incidentListTableColumns.add(key);
-      //   }
-      // }
-    }
-
+    // if (filteredData != null && filteredData.isNotEmpty) {
+    //   incidentReportModelList = filteredData[0];
+    //   var incidentListJson = incidentReportModelList?.toJson();
+    //   incidentListTableColumns.value = <String>[];
+    //   for (var key in incidentListJson?.keys.toList() ?? []) {
+    //     incidentListTableColumns.add(key);
+    //   }
+    // }
+  
     update(['equipment_list']);
   }
 
@@ -465,7 +461,7 @@ class AddModuleCleaningExecutionController extends GetxController {
 
       _mcExecutionDetails.schedules.forEach((element) {
         rowItem.value.add([
-          {"key": "Schedule Id", "value": '${element!.scheduleId}'},
+          {"key": "Schedule Id", "value": '${element.scheduleId}'},
           {"key": "Days", "value": '${element.cleaningDay}'},
           {"key": "Scheduled Module", "value": '${element.scheduledModules}'},
           {"key": "Cleaned", "value": '${element.cleanedModules}'},

@@ -1,9 +1,6 @@
 import 'dart:convert';
 
-import 'package:cmms/app/theme/color_values.dart';
-import 'package:flutter/material.dart';
 
-import '../../app/utils/app_constants.dart';
 
 List<JobModel> jobListFromJson(String str) =>
     List<JobModel>.from(json.decode(str).map(JobModel.fromJson));

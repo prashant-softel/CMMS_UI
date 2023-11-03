@@ -110,10 +110,8 @@ class ViewMcPlaningController extends GetxController {
     final list = await viewMcPlaningPresenter.getEquipmentModelList(
         isLoading: isLoading, facilityId: facilityId);
 
-    if (list != null) {
-      equipmentList.value = list;
-    }
-
+    equipmentList.value = list;
+  
     update(['equipment_list']);
   }
 

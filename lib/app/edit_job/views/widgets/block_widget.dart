@@ -5,7 +5,6 @@ import 'package:get/get.dart';
 import '../../../theme/color_values.dart';
 import '../../../theme/dimens.dart';
 import '../../../theme/styles.dart';
-import '../../../widgets/dropdown.dart';
 import '../../edit_job_controller.dart';
 
 class BlockWidget extends StatelessWidget {

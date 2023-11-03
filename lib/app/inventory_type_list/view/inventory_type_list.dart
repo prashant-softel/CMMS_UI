@@ -3,7 +3,6 @@ import 'package:cmms/app/inventory_type_list/view/inventory_type_list_web.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-import '../../home/home_controller.dart';
 import '../../home/widgets/header_widget.dart';
 import '../../home/widgets/home_drawer.dart';
 import '../../theme/dimens.dart';

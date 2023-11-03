@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 import '../../home/widgets/header_widget.dart';
-import '../../navigators/app_pages.dart';
 import '../preventive_maintenance_controller.dart';
 
 class PreventiveScreen extends GetView<PreventiveController> {

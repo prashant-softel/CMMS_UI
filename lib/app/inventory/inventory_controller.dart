@@ -1,4 +1,3 @@
-import 'package:cmms/app/breakdown_maintenance/breakdown_maintenance_binding.dart';
 import 'package:get/get.dart';
 
 import '../../domain/models/facility_model.dart';

@@ -1,6 +1,5 @@
 import 'package:cmms/domain/domain.dart';
 import 'package:cmms/domain/models/business_list_model.dart';
-import 'package:cmms/domain/models/business_type_model.dart';
 
 import 'package:cmms/domain/models/currency_list_model.dart';
 import 'package:cmms/domain/models/facility_model.dart';

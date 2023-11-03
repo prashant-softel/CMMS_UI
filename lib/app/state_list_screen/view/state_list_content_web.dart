@@ -1,5 +1,4 @@
 import 'package:cmms/app/app.dart';
-import 'package:cmms/app/pm_schedule/pm_schedule_controller.dart';
 import 'package:cmms/app/widgets/custom_textField.dart';
 import 'package:cmms/app/widgets/dropdown_web.dart';
 import 'package:flutter/material.dart';
@@ -8,8 +7,6 @@ import 'package:scrollable_table_view/scrollable_table_view.dart';
 
 import '../../../domain/models/set_pm_schedule_model.dart';
 import '../../widgets/custom_elevated_button.dart';
-import '../../widgets/custom_richtext.dart';
-import '../../widgets/dropdown.dart';
 import '../state_list_controller.dart';
 
 class StateListContentWeb extends GetView<StateListController> {

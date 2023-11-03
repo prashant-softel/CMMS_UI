@@ -94,12 +94,10 @@ class CalibrationListController extends GetxController {
       isLoading: true,
       businessType: 4,
     );
-    if (_venderNameList != null) {
-      for (var supplier_list in _venderNameList) {
-        venderNameList.add(supplier_list);
-      }
+    for (var supplier_list in _venderNameList) {
+      venderNameList.add(supplier_list);
     }
-  }
+    }
 
   Future<void> calibrationHistory() async {
     Get.toNamed(

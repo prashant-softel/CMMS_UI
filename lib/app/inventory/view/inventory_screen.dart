@@ -1,4 +1,3 @@
-import 'package:cmms/app/add_inventory/view/add_inventory_ui.dart';
 import 'package:cmms/app/app.dart';
 import 'package:cmms/app/constant/constant.dart';
 import 'package:cmms/app/utils/user_access_constants.dart';

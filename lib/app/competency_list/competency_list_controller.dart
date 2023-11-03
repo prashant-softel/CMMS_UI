@@ -1,7 +1,6 @@
 import 'dart:async';
 
 import 'package:cmms/app/app.dart';
-import 'package:cmms/domain/models/create_checklist_model.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:scrollable_table_view/scrollable_table_view.dart';

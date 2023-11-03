@@ -1,16 +1,11 @@
 import 'dart:async';
 
 import 'package:cmms/app/app.dart';
-import 'package:cmms/app/preventive_List/preventive_list_presenter.dart';
-import 'package:cmms/domain/models/create_checklist_model.dart';
-import 'package:cmms/domain/models/preventive_checklist_model.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:scrollable_table_view/scrollable_table_view.dart';
 import '../../domain/models/business_type_model.dart';
 import '../../domain/models/create_business_type_list_model.dart';
-import '../../domain/models/frequency_model.dart';
-import '../../domain/models/inventory_category_model.dart';
 import '../navigators/app_pages.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 
@@ -80,14 +75,14 @@ class BusinessTypeListController extends GetxController {
 
     if (_businessTypeList != null) {
       businessTypeList!.value = _businessTypeList;
-      filteredData!.value = _businessTypeList;
+      filteredData.value = _businessTypeList;
       paginationController = PaginationController(
         rowCount: businessTypeList?.length ?? 0,
         rowsPerPage: 10,
       );
 
-      if (filteredData != null && filteredData!.isNotEmpty) {
-        businessTypeListModel = filteredData![0];
+      if (filteredData.isNotEmpty) {
+        businessTypeListModel = filteredData[0];
         var preventiveCheckListJson = businessTypeListModel?.toJson();
         businessTypeListTableColumns.value = <String>[];
         for (var key in preventiveCheckListJson?.keys.toList() ?? []) {

@@ -12,7 +12,7 @@ class ModuleCleaningListPlanModel {
   int? planId;
   int? facilityId;
   String? title;
-  dynamic? description;
+  dynamic description;
   String? frequency;
   int? frequencyId;
   int? noOfCleaningDays;
@@ -22,11 +22,11 @@ class ModuleCleaningListPlanModel {
   int? approvedById;
   dynamic approvedBy;
   String? approvedAt;
-  dynamic? deletedBy;
+  dynamic deletedBy;
   int? status;
   String? status_short;
-  dynamic? status_long;
-  dynamic? schedules;
+  dynamic status_long;
+  dynamic schedules;
 
   ModuleCleaningListPlanModel({
     this.id,

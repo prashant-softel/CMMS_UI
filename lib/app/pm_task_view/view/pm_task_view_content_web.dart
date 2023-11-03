@@ -2,9 +2,7 @@ import 'package:cmms/app/constant/constant.dart';
 import 'package:cmms/app/navigators/app_pages.dart';
 import 'package:cmms/app/pm_task_view/pm_task_view_controller.dart';
 import 'package:cmms/app/theme/dimens.dart';
-import 'package:cmms/app/utils/printing.dart';
 import 'package:cmms/app/utils/user_access_constants.dart';
-import 'package:cmms/app/widgets/action_button.dart';
 import 'package:cmms/app/widgets/assign_to_pm_task_dialog.dart';
 import 'package:cmms/app/widgets/execution_approve_dialog.dart';
 import 'package:cmms/app/widgets/history_table_widget_web.dart';
@@ -563,20 +561,18 @@ class PreventiveMaintenanceTaskViewContentWeb
                                                                   ?.mrsId
                                                                   .toString() ??
                                                               "";
-                                                          if (mrsId != null) {
-                                                            print({
-                                                              "mrsId": mrsId
-                                                            });
-                                                            Get.toNamed(
-                                                                Routes
-                                                                    .mrsViewScreen,
-                                                                arguments: {
-                                                                  'mrsId': int
-                                                                      .tryParse(
-                                                                          "$mrsId")
-                                                                });
-                                                          }
-                                                        }),
+                                                          print({
+                                                            "mrsId": mrsId
+                                                          });
+                                                          Get.toNamed(
+                                                              Routes
+                                                                  .mrsViewScreen,
+                                                              arguments: {
+                                                                'mrsId': int
+                                                                    .tryParse(
+                                                                        "$mrsId")
+                                                              });
+                                                                                                                }),
                                                     TableActionButton(
                                                         color: ColorValues
                                                             .editColor,
@@ -595,19 +591,17 @@ class PreventiveMaintenanceTaskViewContentWeb
                                                                   ?.mrsId
                                                                   .toString() ??
                                                               "";
-                                                          if (mrsId != null) {
-                                                            print({
-                                                              "mrsId": mrsId
-                                                            });
-                                                            Get.toNamed(
-                                                                Routes.editMrs,
-                                                                arguments: {
-                                                                  'mrsId': int
-                                                                      .tryParse(
-                                                                          "$mrsId")
-                                                                });
-                                                          }
-                                                        })
+                                                          print({
+                                                            "mrsId": mrsId
+                                                          });
+                                                          Get.toNamed(
+                                                              Routes.editMrs,
+                                                              arguments: {
+                                                                'mrsId': int
+                                                                    .tryParse(
+                                                                        "$mrsId")
+                                                              });
+                                                                                                                })
                                                   ],
                                                 )),
                                               ]),

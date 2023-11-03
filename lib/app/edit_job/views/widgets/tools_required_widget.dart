@@ -6,7 +6,6 @@ import 'package:multi_select_flutter/util/multi_select_item.dart';
 import '../../../theme/dimens.dart';
 import '../../../theme/styles.dart';
 import '../../edit_job_controller.dart';
-import '../../../widgets/dropdown.dart';
 
 class ToolsRequiredWidget extends StatelessWidget {
   ToolsRequiredWidget({super.key});

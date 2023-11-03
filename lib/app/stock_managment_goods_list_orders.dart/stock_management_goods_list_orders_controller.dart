@@ -130,23 +130,21 @@ class StockManagementGoodsOrdersController extends GetxController {
       end_date: endDate,
       facility_id: facilityId,
     );
-    if (_goodsordersList != null) {
-      goodsOrdersList.value = _goodsordersList;
-      paginationController = PaginationController(
-        rowCount: goodsOrdersList.length,
-        rowsPerPage: 10,
-      );
+    goodsOrdersList.value = _goodsordersList;
+    paginationController = PaginationController(
+      rowCount: goodsOrdersList.length,
+      rowsPerPage: 10,
+    );
 
-      if (goodsOrdersList != null && goodsOrdersList.isNotEmpty) {
-        goodsOrdersListModel = goodsOrdersList[0];
-        var newPermitListJson = goodsOrdersListModel?.toJson();
-        goodsOrdersListTableColumns.value = <String>[];
-        for (var key in newPermitListJson?.keys.toList() ?? []) {
-          goodsOrdersListTableColumns.add(key);
-        }
+    if (goodsOrdersList.isNotEmpty) {
+      goodsOrdersListModel = goodsOrdersList[0];
+      var newPermitListJson = goodsOrdersListModel?.toJson();
+      goodsOrdersListTableColumns.value = <String>[];
+      for (var key in newPermitListJson?.keys.toList() ?? []) {
+        goodsOrdersListTableColumns.add(key);
       }
     }
-  }
+    }
 
   void onValueChanged(dynamic list, dynamic value) {
     switch (list.runtimeType) {

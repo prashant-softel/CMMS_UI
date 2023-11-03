@@ -1,12 +1,9 @@
-import 'package:cmms/app/module_cleaning_planning/module_cleaning_planning_controller.dart';
 import 'package:cmms/app/theme/color_values.dart';
 import 'package:cmms/app/view_mc_plan/view_mc_planning_controller.dart';
-import 'package:cmms/app/widgets/custom_elevated_button.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 import '../theme/dimens.dart';
-import '../theme/styles.dart';
 
 class ViewSetEquipmentDialog extends GetView {
   final ViewMcPlaningController controller = Get.find();
@@ -107,7 +104,7 @@ class ViewSetEquipmentDialog extends GetView {
                                       onTap: () {
                                         setState(
                                           () {
-                                            e!.isExpanded = !e.isExpanded;
+                                            e.isExpanded = !e.isExpanded;
                                           },
                                         );
                                       },
@@ -128,7 +125,7 @@ class ViewSetEquipmentDialog extends GetView {
                                   ),
                                   Expanded(
                                     child: Text(
-                                      "${e?.moduleQuantity}",
+                                      "${e.moduleQuantity}",
                                       style: TextStyle(
                                           fontSize: 12.0,
                                           fontWeight: FontWeight.bold),
@@ -160,7 +157,7 @@ class ViewSetEquipmentDialog extends GetView {
                               e.isExpanded
                                   ? Column(
                                       children: []..addAll(
-                                          e.smbs!.map(
+                                          e.smbs.map(
                                             (smbItems) {
                                               return Row(
                                                 children: [

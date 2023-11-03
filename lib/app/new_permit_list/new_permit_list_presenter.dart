@@ -1,8 +1,6 @@
 import 'package:cmms/domain/models/facility_model.dart';
 import 'package:cmms/domain/models/new_permit_list_model.dart';
-import 'package:cmms/domain/models/permit_issue_model.dart';
 import 'package:cmms/domain/usecases/new_permit_list_usecase.dart';
-import 'package:flutter/material.dart';
 
 class NewPermitListPresenter {
   NewPermitListPresenter(this.newPermitListUsecase);

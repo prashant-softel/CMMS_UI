@@ -37,7 +37,6 @@ import 'job_details_presenter.dart';
 // import 'package:get/get.dart';
 
 import '../home/home_controller.dart';
-import '../home/home_presenter.dart';
 // import 'job_details_controller.dart';
 // import 'job_details_presenter.dart';
 

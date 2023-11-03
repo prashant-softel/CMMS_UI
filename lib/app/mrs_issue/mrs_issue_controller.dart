@@ -1,6 +1,5 @@
 import 'package:cmms/app/mrs_issue/mrs_issue_presenter.dart';
 import 'package:cmms/app/utils/utility.dart';
-import 'package:cmms/domain/models/comment_model.dart';
 import 'package:cmms/domain/models/mrs_detail_model.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';

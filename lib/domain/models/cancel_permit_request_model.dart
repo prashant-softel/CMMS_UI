@@ -8,7 +8,7 @@ class CancelPermitRequestModel {
   int? id;
   String? comment;
   List<int?>? conditionIds;
-  List<dynamic?>? fileIds;
+  List<dynamic>? fileIds;
 
   factory CancelPermitRequestModel.fromJson(Map<String, dynamic> json) => CancelPermitRequestModel(
         id: json["id"],

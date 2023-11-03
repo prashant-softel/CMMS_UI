@@ -1,6 +1,5 @@
 import 'dart:async';
 
-import 'package:cmms/app/navigators/app_pages.dart';
 import 'package:cmms/app/receive_goods_order/receive_goods_order_presenter.dart';
 import 'package:cmms/domain/models/business_type_model.dart';
 import 'package:cmms/domain/models/comment_model.dart';
@@ -188,10 +187,10 @@ class ReceiveGoodsOrdersController extends GetxController {
       getPurchaseDetailsByIDModel.value = _getPurchaseDetailsById;
 
       print(
-          'Additioanl Email Employees${_getPurchaseDetailsById.goDetails?.length ?? 0}');
+          'Additioanl Email Employees${_getPurchaseDetailsById.goDetails.length ?? 0}');
       rowItem.value = [];
       goDetails?.value = _getPurchaseDetailsById.goDetails ?? [];
-      _getPurchaseDetailsById.goDetails?.forEach((element) {
+      _getPurchaseDetailsById.goDetails.forEach((element) {
         rowItem.value.add([
           {
             "key": "Drop_down",

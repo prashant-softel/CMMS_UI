@@ -6,9 +6,7 @@ import '../models/business_list_model.dart';
 import '../models/city_model.dart';
 import '../models/country_model.dart';
 import '../models/frequency_model.dart';
-import '../models/modulelist_model.dart';
 import '../models/state.dart';
-import '../models/state_model.dart';
 
 class BusinessListUsecase {
   BusinessListUsecase(this.repository);

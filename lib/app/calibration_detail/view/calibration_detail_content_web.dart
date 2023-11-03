@@ -2,7 +2,6 @@ import 'package:cmms/app/calibration_detail/calibration_detail_controller.dart';
 import 'package:cmms/app/home/home.dart';
 import 'package:cmms/app/widgets/custom_elevated_button.dart';
 import 'package:cmms/app/widgets/custom_richtext.dart';
-import 'package:cmms/app/widgets/dropdown.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:scrollable_table_view/scrollable_table_view.dart';

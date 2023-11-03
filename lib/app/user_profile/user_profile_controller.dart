@@ -1,7 +1,5 @@
-import 'package:cmms/app/constant/constant.dart';
 import 'package:cmms/app/navigators/app_pages.dart';
 import 'package:cmms/app/user_profile/user_profile_presenter.dart';
-import 'package:cmms/app/view_user_detail/view_user_detail_presenter.dart';
 import 'package:cmms/domain/models/get_notification_by_userid_model.dart';
 import 'package:cmms/domain/models/getuser_access_byId_model.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';

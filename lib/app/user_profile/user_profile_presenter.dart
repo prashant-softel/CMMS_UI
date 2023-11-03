@@ -4,7 +4,6 @@ import 'package:cmms/domain/models/user_detail_model.dart';
 
 import '../../domain/models/access_level_model.dart';
 import '../../domain/usecases/user_profile_usecase.dart';
-import '../../domain/usecases/view_user_detail_usecase.dart';
 
 class UserProfilePresenter {
   UserProfilePresenter(this.userProfileUsecase);

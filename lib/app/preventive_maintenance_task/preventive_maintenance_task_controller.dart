@@ -146,7 +146,7 @@ class PreventiveMaintenanceTaskController extends GetxController {
         rowsPerPage: 10,
       );
 
-      if (filteredData != null && filteredData.isNotEmpty) {
+      if (filteredData.isNotEmpty) {
         pmTaskListModel = filteredData[0];
         var calibrationListJson = pmTaskListModel?.toJson();
         pmTaskListTableColumns.value = <String>[];

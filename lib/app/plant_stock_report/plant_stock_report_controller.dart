@@ -171,13 +171,11 @@ class PlantStockReportController extends GetxController {
           }
 
           print('First Category Id:$selectedAssetsNameIdList');
-          if (selectedAssetsNameIdList != null) {
-            plantStockList?.value = <PlantStockListModel>[];
+          plantStockList?.value = <PlantStockListModel>[];
 
-            getPlantStockList(facilityId, formattedTodate1, formattedFromdate1,
-                true, selectedAssetsNameIdList.value);
-          }
-        }
+          getPlantStockList(facilityId, formattedTodate1, formattedFromdate1,
+              true, selectedAssetsNameIdList.value);
+                }
         break;
     }
     // print({"selectedfrequency": selectedfrequency});

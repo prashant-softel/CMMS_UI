@@ -2,7 +2,6 @@ import 'package:cmms/app/utils/utility.dart';
 import 'package:cmms/app/view_user_detail/view_user_detail_presenter.dart';
 import 'package:cmms/domain/models/get_notification_by_userid_model.dart';
 import 'package:cmms/domain/models/getuser_access_byId_model.dart';
-import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:get/get.dart';
 
 import '../../domain/models/user_detail_model.dart';

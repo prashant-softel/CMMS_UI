@@ -1,4 +1,3 @@
-import 'package:cmms/app/pm_schedule/view/pm_schedule_content_web.dart';
 import 'package:cmms/app/state_list_screen/view/state_list_content_web.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';

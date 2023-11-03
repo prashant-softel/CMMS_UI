@@ -1,4 +1,3 @@
-import 'package:cmms/domain/models/preventive_checklist_model.dart';
 
 import '../../domain/models/competency_model.dart';
 import '../../domain/models/frequency_model.dart';

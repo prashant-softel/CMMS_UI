@@ -2,7 +2,6 @@ import 'dart:async';
 
 import 'package:cmms/app/home/home_controller.dart';
 import 'package:cmms/app/hoto/hoto_list_presenter.dart';
-import 'package:cmms/app/module_cleaning_list_plan/module_cleaning_list_plan_presenter.dart';
 import 'package:cmms/domain/models/module_cleaning_list_plan_model.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -102,24 +101,21 @@ class HotoListScreenController extends GetxController {
       isLoading: true,
       facility_id: facilityId,
     );
-    if (_moduleCleaningListPlan != null) {
-      moduleCleaningListPlan.value = _moduleCleaningListPlan;
-      paginationController = PaginationController(
-        rowCount: moduleCleaningListPlan.length,
-        rowsPerPage: 10,
-      );
+    moduleCleaningListPlan.value = _moduleCleaningListPlan;
+    paginationController = PaginationController(
+      rowCount: moduleCleaningListPlan.length,
+      rowsPerPage: 10,
+    );
 
-      if (moduleCleaningListPlan != null &&
-          moduleCleaningListPlan!.isNotEmpty) {
-        moduleCleaningListModel = moduleCleaningListPlan![0];
-        var newPermitListJson = moduleCleaningListModel?.toJson();
-        moduleCleaningListTableColumns.value = <String>[];
-        for (var key in newPermitListJson?.keys.toList() ?? []) {
-          moduleCleaningListTableColumns.add(key);
-        }
+    if (moduleCleaningListPlan.isNotEmpty) {
+      moduleCleaningListModel = moduleCleaningListPlan[0];
+      var newPermitListJson = moduleCleaningListModel?.toJson();
+      moduleCleaningListTableColumns.value = <String>[];
+      for (var key in newPermitListJson?.keys.toList() ?? []) {
+        moduleCleaningListTableColumns.add(key);
       }
     }
-  }
+    }
 
   void onValueChanged(dynamic list, dynamic value) {
     switch (list.runtimeType) {

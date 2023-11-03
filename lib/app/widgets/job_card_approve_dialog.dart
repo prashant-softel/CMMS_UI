@@ -1,5 +1,4 @@
 import 'package:cmms/app/job_card_details/job_card_details_controller.dart';
-import 'package:cmms/app/job_list/job_list_controller.dart';
 import 'package:cmms/app/theme/color_values.dart';
 import 'package:cmms/app/widgets/custom_richtext.dart';
 import 'package:flutter/material.dart';

@@ -1,16 +1,5 @@
 import 'package:cmms/domain/domain.dart';
-import 'package:cmms/domain/models/business_list_model.dart';
-import 'package:cmms/domain/models/currency_list_model.dart';
-import 'package:cmms/domain/models/employee_list_model.dart';
-import 'package:cmms/domain/models/employee_list_model2.dart';
 import 'package:cmms/domain/models/incident_report_list_model.dart';
-import 'package:cmms/domain/models/inventory_category_model.dart';
-import 'package:cmms/domain/models/inventory_category_model2.dart';
-import 'package:cmms/domain/models/inventory_detail_model.dart';
-import 'package:cmms/domain/models/inventory_details_model.dart';
-import 'package:cmms/domain/models/inventory_model2.dart';
-import 'package:cmms/domain/models/user_access_model.dart';
-import 'package:cmms/domain/models/warranty_claim_model.dart';
 
 import '../models/facility_model.dart';
 

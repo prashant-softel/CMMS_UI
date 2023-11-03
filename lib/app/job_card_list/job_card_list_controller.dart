@@ -77,7 +77,7 @@ class JobCardListController extends GetxController {
         rowsPerPage: 10,
       );
 
-      if (filteredData != null && filteredData.isNotEmpty) {
+      if (filteredData.isNotEmpty) {
         jobListModel = filteredData[0];
         var jobListJson = jobListModel?.toJson();
         jobListTableColumns.value = <String>[];

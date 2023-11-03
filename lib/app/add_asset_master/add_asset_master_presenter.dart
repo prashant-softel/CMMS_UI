@@ -17,7 +17,6 @@ import '../../domain/models/state_model.dart';
 import '../../domain/models/unit_measurement_model.dart';
 import '../../domain/models/user_detail_model.dart';
 import '../../domain/usecases/add_asset_master_usecase.dart';
-import '../../domain/usecases/add_user_usecase.dart';
 
 class AddAssetMasterPresenter {
   AddAssetMasterPresenter(this.addAssetUsecase);

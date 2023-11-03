@@ -1,19 +1,14 @@
 import 'dart:async';
 
-import 'package:cmms/app/pm_schedule/pm_schedule_presenter.dart';
 import 'package:cmms/app/state_list_screen/state_list_presenter.dart';
-import 'package:cmms/domain/models/set_pm_schedule_model.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
 import 'package:scrollable_table_view/scrollable_table_view.dart';
 
-import '../../../domain/models/inventory_category_model.dart';
 import '../../domain/models/country_model.dart';
 import '../../domain/models/frequency_model.dart';
-import '../../domain/models/save_pm_schedule_model.dart';
 import '../../domain/models/state_model.dart';
 import '../home/home_controller.dart';
-import 'package:fluttertoast/fluttertoast.dart';
 
 class StateListController extends GetxController {
   StateListController(

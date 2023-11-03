@@ -9,7 +9,6 @@ import '../../domain/models/country_model.dart';
 import '../../domain/models/create_modulelist_model.dart';
 import '../../domain/models/frequency_model.dart';
 import '../../domain/models/inventory_category_model.dart';
-import '../../domain/models/modulelist_model.dart';
 import '../navigators/app_pages.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 
