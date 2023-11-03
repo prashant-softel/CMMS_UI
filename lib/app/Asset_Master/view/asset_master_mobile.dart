@@ -1,10 +1,7 @@
 import 'package:cmms/app/app.dart';
-import 'package:cmms/domain/models/preventive_checklist_model.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import '../../../domain/models/asset_master_model.dart';
-import '../../../domain/models/modulelist_model.dart';
-import '../../preventive_List/preventive_list_controller.dart';
 import '../asset_master_Controller.dart';
 // import '../module_list_controller.dart';
 // import '../mrs_Details_Controller.dart';

@@ -1,15 +1,7 @@
 import 'package:cmms/domain/models/facility_model.dart';
-import 'package:cmms/domain/models/get_notification_model.dart';
-import 'package:cmms/domain/models/getuser_access_byId_model.dart';
-import 'package:cmms/domain/models/save_user_notification_model.dart';
 import 'package:flutter/services.dart';
-import 'package:image_picker/image_picker.dart';
 
-import 'package:cmms/app/add_user/add_user_presenter.dart';
-import 'package:cmms/domain/domain.dart';
 import 'package:cmms/domain/models/access_level_model.dart';
-import 'package:cmms/domain/models/add_user_model.dart';
-import 'package:cmms/domain/models/country_model.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:scrollable_table_view/scrollable_table_view.dart';
@@ -17,19 +9,13 @@ import 'package:scrollable_table_view/scrollable_table_view.dart';
 import '../../domain/models/acdclistmodel.dart';
 import '../../domain/models/asset_category_model.dart';
 import '../../domain/models/asset_type_list_sm_model.dart';
-import '../../domain/models/blood_model.dart';
-import '../../domain/models/city_model.dart';
 import '../../domain/models/create_asset_sm_model.dart';
-import '../../domain/models/get_notification_by_userid_model.dart';
 import '../../domain/models/pm_task_view_list_model.dart';
-import '../../domain/models/role_model.dart';
-import '../../domain/models/save_access_level_model.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 
 import '../../domain/models/unit_measurement_model.dart';
 import '../../domain/models/user_detail_model.dart';
 import '../controllers/file_upload_controller.dart';
-import '../navigators/app_pages.dart';
 import 'add_asset_master_presenter.dart';
 
 class AddAssetMasterController extends GetxController {

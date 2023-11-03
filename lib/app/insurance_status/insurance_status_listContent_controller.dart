@@ -1,20 +1,14 @@
 import 'dart:async';
 
 import 'package:cmms/app/app.dart';
-import 'package:cmms/app/preventive_List/preventive_list_presenter.dart';
-import 'package:cmms/domain/models/create_checklist_model.dart';
-import 'package:cmms/domain/models/preventive_checklist_model.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:scrollable_table_view/scrollable_table_view.dart';
 import '../../domain/models/IncidentRiskTypeModel.dart';
-import '../../domain/models/InsuranceProviderModel.dart';
-import '../../domain/models/create_modulelist_model.dart';
 import '../../domain/models/create_risk_type_model.dart';
 import '../../domain/models/frequency_model.dart';
 import '../../domain/models/insurance_status_model.dart';
 import '../../domain/models/inventory_category_model.dart';
-import '../../domain/models/modulelist_model.dart';
 import '../navigators/app_pages.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 

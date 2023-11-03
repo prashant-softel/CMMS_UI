@@ -285,12 +285,10 @@ class SafetyQuestionsListController extends GetxController {
       permit_type_id: selectedTypePermitId,
       // job_type_id: 36,
     );
-    if (_safetyMeasureList != null) {
-      for (var safetyMeasure_list in _safetyMeasureList) {
-        safetyMeasureList.add(safetyMeasure_list);
-      }
+    for (var safetyMeasure_list in _safetyMeasureList) {
+      safetyMeasureList.add(safetyMeasure_list);
     }
-    // supplierNameList = _supplierNameList;
+      // supplierNameList = _supplierNameList;
     safetyQuestionListPaginationController = PaginationController(
       rowCount: safetyMeasureList.length,
       rowsPerPage: 10,

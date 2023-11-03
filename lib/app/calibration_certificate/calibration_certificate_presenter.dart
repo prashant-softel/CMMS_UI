@@ -1,11 +1,6 @@
-import 'package:cmms/domain/models/preventive_checklist_model.dart';
 
 import '../../domain/models/calibration_certificate_model.dart';
-import '../../domain/models/frequency_model.dart';
-import '../../domain/models/inventory_category_model.dart';
-import '../../domain/models/modulelist_model.dart';
 import '../../domain/usecases/calibration_certificate_usecase.dart';
-import '../../domain/usecases/module_list_usecase.dart';
 
 class CalibrationCertificatePresenter {
   CalibrationCertificatePresenter(this.calibrationCertificateusecase);

@@ -10,7 +10,6 @@ import '../../navigators/app_pages.dart';
 import '../../theme/color_values.dart';
 import '../../theme/styles.dart';
 import '../../widgets/custom_elevated_button.dart';
-import '../../widgets/dropdown.dart';
 import '../../widgets/table_action_button.dart';
 import '../calibration_list_controller.dart';
 
@@ -391,15 +390,12 @@ class CalibrationListContentWeb extends GetView<CalibrationListController> {
                                                           calibrationListListDetails
                                                                   ?.calibration_id ??
                                                               0;
-                                                      if (calibrationId !=
-                                                          null) {
-                                                        Get.toNamed(
-                                                            Routes
-                                                                .calibrationViewScreen,
-                                                            arguments:
-                                                                calibrationId);
-                                                      }
-                                                    },
+                                                      Get.toNamed(
+                                                          Routes
+                                                              .calibrationViewScreen,
+                                                          arguments:
+                                                              calibrationId);
+                                                                                                        },
                                                   ),
                                             // TableActionButton(
                                             //   color: ColorValues

@@ -9,12 +9,10 @@ import 'package:cmms/domain/models/supplier_name_model.dart';
 import 'package:cmms/domain/models/type_permit_model.dart';
 import 'package:cmms/domain/models/warranty_type_model.dart';
 import 'package:cmms/domain/models/warranty_usage_term_list_model.dart';
-import 'package:cmms/domain/usecases/add_inventory_usecase.dart';
 import 'package:cmms/domain/usecases/view_add_inventory_usecase.dart';
 
 import '../../domain/models/facility_model.dart';
 import '../../domain/models/inventory_status_list_model.dart';
-import '../../domain/models/inventory_type_model.dart';
 
 class ViewAddInventoryPresenter {
   ViewAddInventoryPresenter(this.viewaddInventoryUsecase);

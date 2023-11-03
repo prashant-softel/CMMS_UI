@@ -1,5 +1,4 @@
 import 'package:cmms/domain/models/facility_type_list_model.dart';
-import 'package:cmms/domain/models/job_model.dart';
 import 'package:cmms/domain/repositories/repository.dart';
 
 import '../models/SPV_list_model.dart';

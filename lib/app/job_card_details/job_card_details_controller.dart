@@ -1,4 +1,3 @@
-import 'package:cmms/domain/models/employee_list_model.dart';
 import 'package:cmms/domain/models/employee_model.dart';
 import 'package:cmms/domain/models/permit_details_model.dart';
 import 'package:data_table_2/data_table_2.dart';

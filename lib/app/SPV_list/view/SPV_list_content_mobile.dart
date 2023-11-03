@@ -1,5 +1,4 @@
 import 'package:cmms/app/app.dart';
-import 'package:cmms/domain/models/preventive_checklist_model.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import '../../../domain/models/SPV_list_model.dart';
@@ -25,12 +24,12 @@ class SPVListContentMobile
                     //physics: const NeverScrollableScrollPhysics(),
                     shrinkWrap: true,
                     itemCount: controller.SPVList != null
-                        ? controller.SPVList?.length
+                        ? controller.SPVList.length
                         : 0,
                     itemBuilder: (context, index) {
                       final preventiveCheckListModel =
                           (controller.SPVList != null)
-                              ? controller.SPVList![index]
+                              ? controller.SPVList[index]
                               : SPVListModel();
                       return Container(
                         margin: EdgeInsets.only(left: 10, right: 10),
@@ -55,7 +54,7 @@ class SPVListContentMobile
                                             fontWeight: FontWeight.w400),
                                       ),
                                       Text(
-                                        '${preventiveCheckListModel?.id ?? 0}',
+                                        '${preventiveCheckListModel.id ?? 0}',
                                         style: const TextStyle(
                                           fontWeight: FontWeight.bold,
                                           color: ColorValues.navyBlueColor,
@@ -75,7 +74,7 @@ class SPVListContentMobile
                                     ),
                                     Expanded(
                                       child: Text(
-                                        '${preventiveCheckListModel?.name}'
+                                        '${preventiveCheckListModel.name}'
                                         '',
                                         style: const TextStyle(
                                           color: ColorValues.navyBlueColor,

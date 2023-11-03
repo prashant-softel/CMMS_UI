@@ -471,14 +471,12 @@ class AddUserController extends GetxController {
         accessLevelJsonString: accessLevelJsonString,
         isLoading: true,
       );
-      if (responsePmMapCreated != null) {
-        saveNotification();
-        // userId = 0;
-        // Get.offNamed(
-        //   Routes.userList,
-        // );
-      }
-    } else {
+      saveNotification();
+      // userId = 0;
+      // Get.offNamed(
+      //   Routes.userList,
+      // );
+        } else {
       Fluttertoast.showToast(
           msg: "Unable to update the access level", fontSize: 16.0);
     }
@@ -509,15 +507,13 @@ class AddUserController extends GetxController {
         saveNotificationJsonString: saveNotificationJsonString,
         isLoading: true,
       );
-      if (responseSaveNotification != null) {
-        final _flutterSecureStorage = const FlutterSecureStorage();
+      final _flutterSecureStorage = const FlutterSecureStorage();
 
-        _flutterSecureStorage.delete(key: "userId");
-        Get.offAllNamed(
-          Routes.userList,
-        );
-      }
-    } else {
+      _flutterSecureStorage.delete(key: "userId");
+      Get.offAllNamed(
+        Routes.userList,
+      );
+        } else {
       Fluttertoast.showToast(
           msg: "Unable to update the  notification", fontSize: 16.0);
     }

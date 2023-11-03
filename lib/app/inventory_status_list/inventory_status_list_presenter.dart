@@ -1,7 +1,6 @@
 import 'package:cmms/domain/models/inventory_status_list_model.dart';
 
 import '../../domain/models/frequency_model.dart';
-import '../../domain/models/inventory_category_model.dart';
 import '../../domain/usecases/inventory_status_list_usecase.dart';
 
 class InventoryStatusListPresenter {

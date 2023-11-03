@@ -2,7 +2,6 @@ import 'package:cmms/app/app.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import '../../../domain/models/blood_model.dart';
-import '../../../domain/models/modulelist_model.dart';
 import '../blood_list_controller.dart';
 
 class BloodListContentMobile

@@ -1,16 +1,11 @@
 import 'package:cmms/app/app.dart';
-import 'package:cmms/app/breakdown_maintenance/breakdown_presenter.dart';
 import 'package:cmms/app/job_list/job_list_controller.dart';
-import 'package:cmms/app/job_list/job_list_presenter.dart';
 import 'package:cmms/app/master_dashboard/master_presenter.dart';
 import 'package:cmms/app/navigators/navigators.dart';
 // import 'package:cmms/app/preventive_maintanance/preventive.dart';
 // import 'package:cmms/breakdown_maintenance/breakdown_presenter.dart';
 import 'package:cmms/domain/models/facility_model.dart';
-import 'package:cmms/domain/usecases/job_list_usecase.dart';
 import 'package:get/get.dart';
-import 'package:scrollable_table_view/scrollable_table_view.dart';
-import '../../../domain/models/inventory_category_model.dart';
 
 class MastersController extends GetxController {
   MastersController(

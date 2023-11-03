@@ -1,12 +1,6 @@
 import 'package:cmms/domain/domain.dart';
-import 'package:cmms/domain/models/business_list_model.dart';
-import 'package:cmms/domain/models/currency_list_model.dart';
-import 'package:cmms/domain/models/employee_list_model.dart';
 import 'package:cmms/domain/models/history_model.dart';
-import 'package:cmms/domain/models/inventory_category_model.dart';
-import 'package:cmms/domain/models/user_access_model.dart';
 import 'package:cmms/domain/models/view_warranty_claim_model.dart';
-import 'package:cmms/domain/models/warranty_claim_model.dart';
 
 import '../models/facility_model.dart';
 

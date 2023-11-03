@@ -1,4 +1,3 @@
-import 'package:cmms/app/module_cleaning_list_plan/view/module_cleaning_list_plan_web.dart';
 import 'package:cmms/domain/domain.dart';
 import 'package:cmms/domain/models/module_cleaning_list_plan_model.dart';
 

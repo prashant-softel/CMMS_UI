@@ -2,7 +2,6 @@ import 'package:cmms/app/app.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import '../../../domain/models/business_list_model.dart';
-import '../../../domain/models/modulelist_model.dart';
 import '../business_list_controller.dart';
 
 class BusinessListContentMobile

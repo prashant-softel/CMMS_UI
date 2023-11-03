@@ -1,7 +1,6 @@
 import 'dart:typed_data';
 
 import 'package:cmms/domain/domain.dart';
-import 'package:get/get_connect/http/src/utils/utils.dart';
 
 class ImportInventoryUsecase {
   final Repository repository;

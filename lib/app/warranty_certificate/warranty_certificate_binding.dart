@@ -1,9 +1,6 @@
-import 'package:cmms/app/preventive_List/preventive_list_controller.dart';
-import 'package:cmms/app/preventive_List/preventive_list_presenter.dart';
 import 'package:cmms/app/warranty_certificate/warranty_certificate_controller.dart';
 import 'package:cmms/app/warranty_certificate/warranty_certificate_presenter.dart';
 import 'package:get/get.dart';
-import '../../domain/usecases/module_list_usecase.dart';
 
 import '../../domain/usecases/home_usecase.dart';
 import '../../domain/usecases/warranty_certificate_usecase.dart';

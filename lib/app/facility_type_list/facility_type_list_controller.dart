@@ -14,10 +14,7 @@ import '../../domain/models/SPV_list_model.dart';
 import '../../domain/models/business_list_model.dart';
 import '../../domain/models/country_model.dart';
 import '../../domain/models/create_facility_type_model.dart';
-import '../../domain/models/frequency_model.dart';
-import '../../domain/models/inventory_category_model.dart';
 import '../../domain/models/state.dart';
-import '../../domain/models/state_model.dart';
 import '../../domain/models/update_facility_type_model.dart';
 
 class FacilityTypeListController extends GetxController {
@@ -179,13 +176,11 @@ class FacilityTypeListController extends GetxController {
       // job_type_id: selectedJobSOPId,
       // job_type_id: 36,
     );
-    if (_facilityTypePermitList != null) {
-      for (var facilityType_list in _facilityTypePermitList) {
-        facilityTypeList.add(facilityType_list);
-      }
-      // selectedSopPermit.value = _facilityTypeList[0].name ?? '';
+    for (var facilityType_list in _facilityTypePermitList) {
+      facilityTypeList.add(facilityType_list);
     }
-
+    // selectedSopPermit.value = _facilityTypeList[0].name ?? '';
+  
     // supplierNameList = _supplierNameList;
     facilityTypeListPaginationController = PaginationController(
       rowCount: facilityTypeList.length,
@@ -234,7 +229,7 @@ class FacilityTypeListController extends GetxController {
 
     facilityTypeList.value = filteredData
         .where((item) =>
-        item!.name!.toString().toLowerCase().contains(keyword.toLowerCase()))
+        item.name!.toString().toLowerCase().contains(keyword.toLowerCase()))
         .toList();
   }
 

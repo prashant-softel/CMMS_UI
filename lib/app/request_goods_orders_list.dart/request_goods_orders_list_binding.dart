@@ -2,7 +2,6 @@ import 'package:cmms/app/app.dart';
 import 'package:cmms/app/request_goods_orders_list.dart/request_goods_orders_list_controller.dart';
 import 'package:cmms/app/request_goods_orders_list.dart/request_goods_orders_list_presenter.dart';
 import 'package:cmms/domain/domain.dart';
-import 'package:cmms/domain/usecases/stock_management_goods_orders_usecase.dart';
 
 import 'package:get/get.dart';
 

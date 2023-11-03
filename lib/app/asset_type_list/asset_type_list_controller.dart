@@ -91,13 +91,11 @@ class AssetTypeListController extends GetxController {
       job_type_id: selectedJobSOPId,
       // job_type_id: 36,
     );
-    if (_assetTypePermitList != null) {
-      for (var assetType_list in _assetTypePermitList) {
-        assetTypeList.add(assetType_list);
-      }
-      // selectedSopPermit.value = _assetTypeList[0].name ?? '';
+    for (var assetType_list in _assetTypePermitList) {
+      assetTypeList.add(assetType_list);
     }
-
+    // selectedSopPermit.value = _assetTypeList[0].name ?? '';
+  
     // supplierNameList = _supplierNameList;
     assetTypeListPaginationController = PaginationController(
       rowCount: assetTypeList.length,

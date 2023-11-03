@@ -2,14 +2,10 @@ import 'package:clipboard/clipboard.dart';
 import 'package:cmms/app/app.dart';
 import 'package:cmms/app/constant/constant.dart';
 import 'package:cmms/app/block_type_list/block_type_list_controller.dart';
-import 'package:cmms/app/widgets/custom_swich_toggle.dart';
-import 'package:cmms/app/widgets/dropdown.dart';
 import 'package:cmms/app/widgets/dropdown_web.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:cmms/app/widgets/custom_textfield.dart';
 import 'package:scrollable_table_view/scrollable_table_view.dart';
-import '../../widgets/custom_dropdown.dart';
 import '../../widgets/custom_elevated_button.dart';
 import '../../widgets/custom_richtext.dart';
 
@@ -748,7 +744,7 @@ class BlockTypeListContentWeb extends GetView<BlockTypeListController> {
                                   SizedBox(
                                     height: 20,
                                   ),
-                                  controller.blockTypeList!.isEmpty
+                                  controller.blockTypeList.isEmpty
                                       ? Expanded(
                                           child: ScrollableTableView(
                                             columns: [
@@ -770,7 +766,7 @@ class BlockTypeListContentWeb extends GetView<BlockTypeListController> {
                                             rows: [
                                               ...List.generate(
                                                 controller.blockTypeList
-                                                        ?.length ??
+                                                        .length ??
                                                     0,
                                                 (index) {
                                                   return [
@@ -881,7 +877,7 @@ class BlockTypeListContentWeb extends GetView<BlockTypeListController> {
                                                                                     icon: Icons.edit,
                                                                                     message: 'Edit',
                                                                                     onPress: () {
-                                                                                      controller.selectedItem = controller.blockTypeList!.firstWhere((element) => "${element?.id}" == _permitTypeList[0]);
+                                                                                      controller.selectedItem = controller.blockTypeList.firstWhere((element) => "${element.id}" == _permitTypeList[0]);
                                                                                       // controller.selectedfacility.value = controller.onFetchNameBusinessTypeFromId(controller.selectedItem?. )!;
                                                                                       // print(controller.selectedBusinessType.value);
                                                                                       // controller.

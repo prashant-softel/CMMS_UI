@@ -130,7 +130,7 @@ class PmScheduleController extends GetxController {
         rowsPerPage: 10,
       );
 
-      if (getPmScheduleList != null && getPmScheduleList.isNotEmpty) {
+      if (getPmScheduleList.isNotEmpty) {
         getPmScheduleListModel = getPmScheduleList[0];
         var getPmScheduleListModelJson = getPmScheduleListModel!.toJson();
         preventiveCheckListTableColumns.value = <String>[];

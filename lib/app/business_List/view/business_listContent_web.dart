@@ -7,12 +7,9 @@ import 'package:get/get.dart';
 import 'package:cmms/app/widgets/custom_textfield.dart';
 import 'package:scrollable_table_view/scrollable_table_view.dart';
 import '../../../domain/models/business_list_model.dart';
-import '../../../domain/models/modulelist_model.dart';
-import '../../preventive_List/preventive_list_controller.dart';
 import '../../widgets/custom_elevated_button.dart';
 import '../../widgets/custom_richtext.dart';
 import '../../widgets/custom_swich_toggle.dart';
-import '../../widgets/dropdown.dart';
 import '../business_list_controller.dart';
 // import '../preventive_list_controller.dart';
 
@@ -1620,7 +1617,7 @@ class BusinessListContentWeb extends GetView<BusinessListController> {
                                                                               'Edit',
                                                                           onPress:
                                                                               () {
-                                                                            controller.selectedItem = controller.filteredData!.firstWhere((element) =>
+                                                                            controller.selectedItem = controller.filteredData.firstWhere((element) =>
                                                                                 "${element?.id}" ==
                                                                                 _businessList[0]);
                                                                             controller.selectedBusinessType.value =

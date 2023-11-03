@@ -3,7 +3,6 @@ import 'package:cmms/domain/models/create_sop_model.dart';
 import 'package:cmms/domain/models/job_type_list_model.dart';
 import 'package:cmms/domain/models/sop_list_model.dart';
 import 'package:cmms/domain/usecases/tbt_list_sop_usecase.dart';
-import 'package:cmms/domain/usecases/tbt_type_list_usecase.dart';
 import 'package:flutter/services.dart';
 
 

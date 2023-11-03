@@ -9,7 +9,6 @@ import 'package:cmms/domain/models/mc_details_plan_model.dart';
 import 'package:cmms/domain/models/type_model.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import '../../domain/models/inventory_category_model.dart';
 import '../home/home_controller.dart';
 
 class ModuleCleaningPlanningController extends GetxController {
@@ -131,10 +130,8 @@ class ModuleCleaningPlanningController extends GetxController {
     final list = await moduleCleaningPlanningPresenter.getEquipmentModelList(
         isLoading: isLoading, facilityId: facilityId);
 
-    if (list != null) {
-      equipmentList.value = list;
-    }
-
+    equipmentList.value = list;
+  
     update(['equipment_list']);
   }
 

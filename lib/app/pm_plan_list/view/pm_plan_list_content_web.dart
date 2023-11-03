@@ -5,7 +5,6 @@ import 'package:cmms/app/utils/user_access_constants.dart';
 import 'package:cmms/domain/models/pm_plan_list_model.dart';
 import 'package:data_table_2/data_table_2.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:get/get.dart';
 import '../../navigators/app_pages.dart';
 import '../../theme/color_values.dart';
@@ -502,11 +501,9 @@ class PmPlanDataSource extends DataTableSource {
 
                                   // _flutterSecureStorage.delete(key: "pmPlanId");
                                   int pmPlanId = pmPlanDetails?.plan_id ?? 0;
-                                  if (pmPlanId != null) {
-                                    Get.toNamed(Routes.viewPmPlanScreen,
-                                        arguments: {'pmPlanId': pmPlanId});
-                                  }
-                                },
+                                  Get.toNamed(Routes.viewPmPlanScreen,
+                                      arguments: {'pmPlanId': pmPlanId});
+                                                                },
                               )
                             : Dimens.box0,
                         varUserAccessModel.value.access_list!
@@ -531,11 +528,9 @@ class PmPlanDataSource extends DataTableSource {
 
                                   // _flutterSecureStorage.delete(key: "pmPlanId");
                                   int pmPlanId = pmPlanDetails?.plan_id ?? 0;
-                                  if (pmPlanId != null) {
-                                    Get.toNamed(Routes.createPmPlan,
-                                        arguments: {'pmPlanId': pmPlanId});
-                                  }
-                                },
+                                  Get.toNamed(Routes.createPmPlan,
+                                      arguments: {'pmPlanId': pmPlanId});
+                                                                },
                               )
                             : Dimens.box0,
                         controller.pmPlanList
@@ -570,11 +565,9 @@ class PmPlanDataSource extends DataTableSource {
 
                                   // _flutterSecureStorage.delete(key: "pmPlanId");
                                   int pmPlanId = pmPlanDetails?.plan_id ?? 0;
-                                  if (pmPlanId != null) {
-                                    Get.toNamed(Routes.viewPmPlanScreen,
-                                        arguments: {'pmPlanId': pmPlanId});
-                                  }
-                                },
+                                  Get.toNamed(Routes.viewPmPlanScreen,
+                                      arguments: {'pmPlanId': pmPlanId});
+                                                                },
                               )
                             : Dimens.box0,
                         varUserAccessModel.value.access_list!

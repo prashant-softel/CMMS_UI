@@ -1,11 +1,9 @@
 import 'package:cmms/app/change_password/change_password_controller.dart';
 import 'package:cmms/app/theme/dimens.dart';
-import 'package:cmms/app/widgets/custom_elevated_button.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import '../../theme/color_values.dart';
 import '../../theme/styles.dart';
-import '../../widgets/custom_richtext.dart';
 import '../../widgets/custom_textField.dart';
 
 class ChangePasswordContentWeb extends GetView<ChangePasswordController> {

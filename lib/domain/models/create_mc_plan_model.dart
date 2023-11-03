@@ -51,7 +51,7 @@ class CreateMcPalningsModel {
         "planId": planId,
         "frequencyId": frequencyId,
         "noOfCleaningDays": noOfCleaningDays,
-        "schedules": List<dynamic>.from(schedules!.map((x) => x.toJson())),
+        "schedules": List<dynamic>.from(schedules.map((x) => x.toJson())),
       };
 }
 

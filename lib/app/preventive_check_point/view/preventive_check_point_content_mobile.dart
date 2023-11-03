@@ -1,7 +1,6 @@
 import 'package:cmms/app/app.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import '../../navigators/app_pages.dart';
 import '../preventive_check_point_controller.dart';
 
 class PreventiveCheckPointContentMobile

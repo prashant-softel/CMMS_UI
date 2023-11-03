@@ -1,9 +1,7 @@
-import 'package:cmms/domain/models/end_mc_execution_detail_model.dart';
 import 'package:cmms/domain/models/equipment_list_model.dart';
 import 'package:cmms/domain/models/history_model.dart';
 import 'package:cmms/domain/models/mc_details_plan_model.dart';
 import 'package:cmms/domain/usecases/view_mc_planing_usecase.dart';
-import '../../domain/models/inventory_model.dart';
 
 class ViewMcPlaningPresenter {
   ViewMcPlaningPresenter(this.viewMcPlaningUsecase);

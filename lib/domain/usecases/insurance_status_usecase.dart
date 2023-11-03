@@ -1,15 +1,8 @@
-import 'package:cmms/domain/models/facility_type_list_model.dart';
-import 'package:cmms/domain/models/job_model.dart';
 import 'package:cmms/domain/repositories/repository.dart';
 
-import '../models/IncidentRiskTypeModel.dart';
-import '../models/InsuranceProviderModel.dart';
 import '../models/SPV_list_model.dart';
 import '../models/business_list_model.dart';
-import '../models/city_model.dart';
-import '../models/country_model.dart';
 import '../models/insurance_status_model.dart';
-import '../models/state.dart';
 
 // class AssetTypeListUsecase {
 //   AssetTypeListUsecase(this.repository);

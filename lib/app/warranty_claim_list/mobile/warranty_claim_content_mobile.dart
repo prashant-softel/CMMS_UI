@@ -2,7 +2,6 @@ import 'package:cmms/app/app.dart';
 import 'package:cmms/app/warranty_claim_list/warranty_claim_controller.dart';
 import 'package:cmms/app/widgets/custom_elevated_button.dart';
 import 'package:cmms/domain/models/new_permit_list_model.dart';
-import 'package:cmms/app/new_permit_list/new_permit_list_controller.dart';
 import 'package:cmms/app/new_permit_list/widgets/facility_selection_dropdown_widgets.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';

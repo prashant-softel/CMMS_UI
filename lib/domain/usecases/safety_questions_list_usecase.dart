@@ -1,10 +1,7 @@
-import 'package:cmms/domain/models/inventory_category_model.dart';
-import 'package:cmms/domain/models/preventive_checklist_model.dart';
 import 'package:cmms/domain/models/safety_measure_list_model.dart';
 import 'package:cmms/domain/models/type_permit_model.dart';
 import 'package:cmms/domain/repositories/repository.dart';
 
-import '../models/frequency_model.dart';
 
 class SafetyQuestionsListUsecase {
   SafetyQuestionsListUsecase(this.repository);

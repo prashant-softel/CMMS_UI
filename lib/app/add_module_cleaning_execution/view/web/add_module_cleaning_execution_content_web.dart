@@ -14,7 +14,6 @@ import 'package:cmms/domain/models/end_mc_execution_detail_model.dart';
 import 'package:data_table_2/data_table_2.dart';
 
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 
 class AddModuleCleaningExecutionContentWeb extends GetView<AddModuleCleaningExecutionController> {

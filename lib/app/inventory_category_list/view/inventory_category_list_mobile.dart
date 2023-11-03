@@ -1,9 +1,7 @@
 import 'package:cmms/app/app.dart';
-import 'package:cmms/domain/models/inventory_status_list_model.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-import '../../../domain/models/inventory_category_model.dart';
 import '../../../domain/models/inventory_category_model2.dart';
 import '../inventory_category_list_controller.dart';
 

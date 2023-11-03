@@ -4,15 +4,12 @@ import 'package:cmms/app/app.dart';
 import 'package:cmms/app/block_type_list/block_type_list_presenter.dart';
 import 'package:cmms/domain/models/block_model.dart';
 import 'package:cmms/domain/models/block_type_list_model.dart';
-import 'package:flutter/cupertino.dart';
 import'package:fluttertoast/fluttertoast.dart';
 import 'package:get/get.dart';
 import 'package:rxdart/subjects.dart';
 import 'package:scrollable_table_view/scrollable_table_view.dart';
 import '../../domain/models/create_block_type_model copy.dart';
 import '../../domain/models/facility_type_list_model.dart';
-import '../../domain/models/frequency_model.dart';
-import '../../domain/models/inventory_category_model.dart';
 import '../../domain/models/update_block_type_list_model.dart';
 
 class BlockTypeListController extends GetxController {
@@ -105,12 +102,10 @@ class BlockTypeListController extends GetxController {
       job_type_id: selectedFacilityId,
       // job_type_id: 36,
     );
-    if (_FacilityTypeList != null) {
-      for (var facilityType_list in _FacilityTypeList) {
-        facilityTypeList.add(facilityType_list);
-      }
+    for (var facilityType_list in _FacilityTypeList) {
+      facilityTypeList.add(facilityType_list);
     }
-    selectedfacility.value = facilityTypeList[0].name!;
+      selectedfacility.value = facilityTypeList[0].name!;
     selectedFacilityId = facilityTypeList[0].id! ;
     getBlockTypeList(selectedFacilityId);
   }
@@ -128,13 +123,11 @@ class BlockTypeListController extends GetxController {
       job_type_id: selectedFacilityId,
       // job_type_id: 36,
     );
-    if (_blockTypePermitList != null) {
-      for (var blockType_list in _blockTypePermitList) {
-        blockTypeList.add(blockType_list);
-      }
-      // selectedSopPermit.value = _facilityTypeList[0].name ?? '';
+    for (var blockType_list in _blockTypePermitList) {
+      blockTypeList.add(blockType_list);
     }
-
+    // selectedSopPermit.value = _facilityTypeList[0].name ?? '';
+  
     // supplierNameList = _supplierNameList;
     blockTypeListPaginationController = PaginationController(
       rowCount: blockTypeList.length,

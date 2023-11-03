@@ -529,46 +529,46 @@ class GoodsOrderListDataSource extends DataTableSource {
                             color: controller.goodsOrdersList
                                         .firstWhere(
                                           (e) =>
-                                              e?.request_order_id ==
+                                              e.request_order_id ==
                                               GoodsOrderListDetails!
                                                   .request_order_id,
                                           orElse: () =>
                                               GetRequestOrderListModel(
                                                   request_order_id: 00),
                                         )
-                                        ?.status ==
+                                        .status ==
                                     342
                                 ? ColorValues.yellowColor
                                 : controller.goodsOrdersList
                                             .firstWhere(
                                               (e) =>
-                                                  e?.request_order_id ==
+                                                  e.request_order_id ==
                                                   GoodsOrderListDetails!
                                                       .request_order_id,
                                               orElse: () =>
                                                   GetRequestOrderListModel(
                                                       request_order_id: 00),
                                             )
-                                            ?.status ==
+                                            .status ==
                                         343
                                     ? ColorValues.rejectColor
                                     : controller.goodsOrdersList
                                                 .firstWhere(
                                                   (e) =>
-                                                      e?.request_order_id ==
+                                                      e.request_order_id ==
                                                       GoodsOrderListDetails!
                                                           .request_order_id,
                                                   orElse: () =>
                                                       GetRequestOrderListModel(
                                                           request_order_id: 00),
                                                 )
-                                                ?.status ==
+                                                .status ==
                                             345
                                         ? Color.fromARGB(255, 152, 145, 145)
                                         : controller.goodsOrdersList
                                                     .firstWhere(
                                                       (e) =>
-                                                          e?.request_order_id ==
+                                                          e.request_order_id ==
                                                           GoodsOrderListDetails!
                                                               .request_order_id,
                                                       orElse: () =>
@@ -576,13 +576,13 @@ class GoodsOrderListDataSource extends DataTableSource {
                                                               request_order_id:
                                                                   00),
                                                     )
-                                                    ?.status ==
+                                                    .status ==
                                                 341
                                             ? Color(0xff77cae7)
                                             : controller.goodsOrdersList
                                                         .firstWhere(
                                                           (e) =>
-                                                              e?.request_order_id ==
+                                                              e.request_order_id ==
                                                               GoodsOrderListDetails!
                                                                   .request_order_id,
                                                           orElse: () =>
@@ -590,7 +590,7 @@ class GoodsOrderListDataSource extends DataTableSource {
                                                                   request_order_id:
                                                                       00),
                                                         )
-                                                        ?.status ==
+                                                        .status ==
                                                     301
                                                 ? ColorValues.approveColor
                                                 : ColorValues.addNewColor,
@@ -632,7 +632,7 @@ class GoodsOrderListDataSource extends DataTableSource {
                         controller.goodsOrdersList
                                         .firstWhere(
                                           (e) =>
-                                              e?.request_order_id ==
+                                              e.request_order_id ==
                                               GoodsOrderListDetails!
                                                   .request_order_id,
                                           orElse: () =>
@@ -671,7 +671,7 @@ class GoodsOrderListDataSource extends DataTableSource {
                         controller.goodsOrdersList
                                         .firstWhere(
                                           (e) =>
-                                              e?.request_order_id ==
+                                              e.request_order_id ==
                                               GoodsOrderListDetails!
                                                   .request_order_id,
                                           orElse: () =>
@@ -710,7 +710,7 @@ class GoodsOrderListDataSource extends DataTableSource {
                         controller.goodsOrdersList
                                         .firstWhere(
                                           (e) =>
-                                              e?.request_order_id ==
+                                              e.request_order_id ==
                                               GoodsOrderListDetails!
                                                   .request_order_id,
                                           orElse: () =>

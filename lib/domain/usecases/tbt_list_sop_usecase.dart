@@ -1,5 +1,4 @@
 import 'package:cmms/domain/models/create_sop_model.dart';
-import 'package:cmms/domain/models/facility_model.dart';
 import 'package:cmms/domain/models/job_type_list_model.dart';
 import 'package:cmms/domain/models/sop_list_model.dart';
 import 'package:cmms/domain/repositories/repository.dart';

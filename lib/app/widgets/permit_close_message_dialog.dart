@@ -1,7 +1,5 @@
-import 'package:cmms/app/new_permit_list/new_permit_list_controller.dart';
 import 'package:cmms/app/theme/color_values.dart';
 import 'package:cmms/app/view_permit/view_permit_controller.dart';
-import 'package:cmms/domain/repositories/repository.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 

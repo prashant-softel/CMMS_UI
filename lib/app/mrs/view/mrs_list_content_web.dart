@@ -593,11 +593,9 @@ class MrsListDataSource extends DataTableSource {
 
                             // _flutterSecureStorage.delete(key: "mrsId");
                             int mrsId = MrsDetails?.id ?? 0;
-                            if (mrsId != null) {
-                              Get.toNamed(Routes.mrsViewScreen,
-                                  arguments: {'mrsId': mrsId});
-                            }
-                          },
+                            Get.toNamed(Routes.mrsViewScreen,
+                                arguments: {'mrsId': mrsId});
+                                                    },
                         ),
                         TableActionButton(
                           color: ColorValues.editColor,
@@ -611,11 +609,9 @@ class MrsListDataSource extends DataTableSource {
 
                             // _flutterSecureStorage.delete(key: "mrsId");
                             int mrsId = MrsDetails?.id ?? 0;
-                            if (mrsId != null) {
-                              Get.toNamed(Routes.editMrs,
-                                  arguments: {'mrsId': mrsId});
-                            }
-                          },
+                            Get.toNamed(Routes.editMrs,
+                                arguments: {'mrsId': mrsId});
+                                                    },
                         ),
                         controller.mrsList!
                                         .firstWhere(
@@ -646,11 +642,9 @@ class MrsListDataSource extends DataTableSource {
 
                                   // _flutterSecureStorage.delete(key: "mrsId");
                                   int mrsId = MrsDetails?.id ?? 0;
-                                  if (mrsId != null) {
-                                    Get.toNamed(Routes.mrsApprovalScreen,
-                                        arguments: {'mrsId': mrsId});
-                                  }
-                                },
+                                  Get.toNamed(Routes.mrsApprovalScreen,
+                                      arguments: {'mrsId': mrsId});
+                                                                },
                               )
                             : Dimens.box0,
                         controller.mrsList!
@@ -682,11 +676,9 @@ class MrsListDataSource extends DataTableSource {
 
                                   // _flutterSecureStorage.delete(key: "mrsId");
                                   int mrsId = MrsDetails?.id ?? 0;
-                                  if (mrsId != null) {
-                                    Get.toNamed(Routes.mrsIssueScreen,
-                                        arguments: {'mrsId': mrsId});
-                                  }
-                                },
+                                  Get.toNamed(Routes.mrsIssueScreen,
+                                      arguments: {'mrsId': mrsId});
+                                                                },
                               )
                             : Dimens.box0,
                         controller.mrsList!
@@ -718,11 +710,9 @@ class MrsListDataSource extends DataTableSource {
 
                                   // _flutterSecureStorage.delete(key: "mrsId");
                                   int mrsId = MrsDetails?.id ?? 0;
-                                  if (mrsId != null) {
-                                    Get.toNamed(Routes.mrsApprovalScreen,
-                                        arguments: {'mrsId': mrsId});
-                                  }
-                                },
+                                  Get.toNamed(Routes.mrsApprovalScreen,
+                                      arguments: {'mrsId': mrsId});
+                                                                },
                               )
                             : Dimens.box0,
                         controller.mrsList!
@@ -754,11 +744,9 @@ class MrsListDataSource extends DataTableSource {
 
                                   // _flutterSecureStorage.delete(key: "mrsId");
                                   int mrsId = MrsDetails?.id ?? 0;
-                                  if (mrsId != null) {
-                                    Get.toNamed(Routes.issueMrsApprove,
-                                        arguments: {'mrsId': mrsId});
-                                  }
-                                },
+                                  Get.toNamed(Routes.issueMrsApprove,
+                                      arguments: {'mrsId': mrsId});
+                                                                },
                               )
                             : Dimens.box0,
                         controller.mrsList!
@@ -790,11 +778,9 @@ class MrsListDataSource extends DataTableSource {
 
                                   // _flutterSecureStorage.delete(key: "mrsId");
                                   int mrsId = MrsDetails?.id ?? 0;
-                                  if (mrsId != null) {
-                                    Get.toNamed(Routes.issueMrsApprove,
-                                        arguments: {'mrsId': mrsId});
-                                  }
-                                },
+                                  Get.toNamed(Routes.issueMrsApprove,
+                                      arguments: {'mrsId': mrsId});
+                                                                },
                               )
                             : Dimens.box0,
                       ])

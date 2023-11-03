@@ -132,10 +132,8 @@ class PmMappingController extends GetxController {
         pmJsonString: pmJsonString,
         isLoading: true,
       );
-      if (responsePmMapCreated != null) {
-        isSuccessDialog();
-      }
-    } else {
+      isSuccessDialog();
+        } else {
       Fluttertoast.showToast(msg: "Please Map the Checklist", fontSize: 16.0);
     }
   }

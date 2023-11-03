@@ -109,7 +109,7 @@ class UserListController extends GetxController {
         rowsPerPage: 10,
       );
 
-      if (filteredData != null && filteredData.isNotEmpty) {
+      if (filteredData.isNotEmpty) {
         userListModel = filteredData[0];
         var userListJson = userListModel?.toJson();
         userListTableColumns.value = <String>[];

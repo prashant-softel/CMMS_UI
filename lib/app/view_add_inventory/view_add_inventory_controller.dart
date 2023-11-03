@@ -3,7 +3,6 @@ import 'dart:convert';
 import 'package:cmms/app/view_add_inventory/view_add_inventory_presenter.dart';
 import 'package:cmms/domain/models/add_inventory_details_model.dart';
 import 'package:cmms/domain/models/add_inventory_model.dart';
-import 'package:cmms/app/add_inventory/add_inventory_presenter.dart';
 import 'package:cmms/app/constant/constant.dart';
 import 'package:cmms/app/home/home_controller.dart';
 import 'package:cmms/domain/domain.dart';

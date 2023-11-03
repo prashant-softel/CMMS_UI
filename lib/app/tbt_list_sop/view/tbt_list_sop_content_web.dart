@@ -2,10 +2,6 @@ import 'package:clipboard/clipboard.dart';
 import 'package:cmms/app/app.dart';
 import 'package:cmms/app/constant/constant.dart';
 import 'package:cmms/app/tbt_list_sop/tbt_list_sop_controller.dart';
-import 'package:cmms/app/tbt_type_list/tbt_type_list_controller.dart';
-import 'package:cmms/app/widgets/custom_dropdown.dart';
-import 'package:cmms/app/widgets/custom_swich_toggle.dart';
-import 'package:cmms/app/widgets/dropdown.dart';
 import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -15,7 +11,6 @@ import '../../widgets/custom_elevated_button.dart';
 import '../../widgets/custom_richtext.dart';
 import '../../widgets/dropdown_web.dart';
 import 'package:fluttertoast/fluttertoast.dart';
-import 'package:flutter/cupertino.dart';
 
 class TBTSOPListContentWeb extends GetView<TBTSOPListController> {
   TBTSOPListContentWeb({Key? key}) : super(key: key);

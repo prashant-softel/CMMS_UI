@@ -166,11 +166,11 @@ class NewPermitListController extends GetxController {
 
   void search(String keyword) {
     if (keyword.isEmpty) {
-      newPermitList!.value = filteredData;
+      newPermitList.value = filteredData;
       return;
     }
 
-    newPermitList!.value = filteredData
+    newPermitList.value = filteredData
         .where((item) =>
             item!.description!.toLowerCase().contains(keyword.toLowerCase()))
         .toList();
@@ -197,9 +197,9 @@ class NewPermitListController extends GetxController {
         non_expired: false);
 
     if (_newPermitList != null) {
-      newPermitList!.value = _newPermitList;
-      filteredData.value = newPermitList!.value;
-      if (newPermitList != null && newPermitList!.isNotEmpty) {
+      newPermitList.value = _newPermitList;
+      filteredData.value = newPermitList.value;
+      if (newPermitList.isNotEmpty) {
         // newPermitListModel = newPermitList![0];
         newPermitListModel = filteredData[0];
         var newPermitListJson = newPermitListModel?.toJson();
@@ -210,7 +210,7 @@ class NewPermitListController extends GetxController {
       }
     }
     newPermitPaginationController = PaginationController(
-      rowCount: newPermitList!.length,
+      rowCount: newPermitList.length,
       rowsPerPage: 10,
     );
 

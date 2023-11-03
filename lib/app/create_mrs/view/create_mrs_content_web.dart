@@ -8,7 +8,6 @@ import 'package:get/get.dart';
 import 'package:scrollable_table_view/scrollable_table_view.dart';
 
 import '../../widgets/custom_richtext.dart';
-import '../../widgets/custom_swich_toggle.dart';
 import '../../widgets/dropdown_web.dart';
 
 class CreateMrsContentWeb extends GetView<CreateMrsController> {

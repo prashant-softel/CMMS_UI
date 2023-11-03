@@ -1,8 +1,6 @@
 import 'dart:async';
-import 'dart:convert';
 
 import 'package:cmms/app/app.dart';
-import 'package:cmms/app/constant/constant.dart';
 import 'package:cmms/app/incident_report_list/incident_report_list_presenter.dart';
 import 'package:cmms/app/navigators/app_pages.dart';
 import 'package:cmms/domain/domain.dart';
@@ -13,7 +11,6 @@ import 'package:intl/intl.dart';
 import 'package:rxdart/subjects.dart';
 import 'package:scrollable_table_view/scrollable_table_view.dart';
 import '../../domain/models/facility_model.dart';
-import '../../domain/models/user_access_model.dart';
 
 class IncidentReportListController extends GetxController {
   IncidentReportListController(this.incidentReportPresenter);
@@ -197,24 +194,22 @@ class IncidentReportListController extends GetxController {
       incidentReportList.add(incident_list);
     }
 
-    if (list != null) {
-      incidentReportList.value = list;
-      filteredData.value = incidentReportList.value;
-      // print('Filtered data:${filteredData.value}');
-      paginationIncidentReportController = PaginationController(
-        rowCount: incidentReportList.length,
-        rowsPerPage: 10,
-      );
-      if (filteredData != null && filteredData.isNotEmpty) {
-        incidentReportModelList = filteredData[0];
-        var incidentListJson = incidentReportModelList?.toJson();
-        incidentListTableColumns.value = <String>[];
-        for (var key in incidentListJson?.keys.toList() ?? []) {
-          incidentListTableColumns.add(key);
-        }
+    incidentReportList.value = list;
+    filteredData.value = incidentReportList.value;
+    // print('Filtered data:${filteredData.value}');
+    paginationIncidentReportController = PaginationController(
+      rowCount: incidentReportList.length,
+      rowsPerPage: 10,
+    );
+    if (filteredData.isNotEmpty) {
+      incidentReportModelList = filteredData[0];
+      var incidentListJson = incidentReportModelList?.toJson();
+      incidentListTableColumns.value = <String>[];
+      for (var key in incidentListJson?.keys.toList() ?? []) {
+        incidentListTableColumns.add(key);
       }
     }
-
+  
     update(['incident_report_list']);
   }
 

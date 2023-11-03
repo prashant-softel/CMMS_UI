@@ -201,25 +201,23 @@ class PurchaseGoodsorderViewController extends GetxController {
 
     if (_getPurchaseDetailsById != null) {
       getPurchaseDetailsByIDModel.value = _getPurchaseDetailsById;
-      if (_getPurchaseDetailsById != null) {
-        getPurchaseDetailsByIDModel.value = _getPurchaseDetailsById;
+      getPurchaseDetailsByIDModel.value = _getPurchaseDetailsById;
 
-        print(
-            'Additioanl Email Employees${_getPurchaseDetailsById.request_order_items?.length ?? 0}');
-        rowItem.value = [];
-        _getPurchaseDetailsById.request_order_items?.forEach((element) {
-          rowItem.value.add([
-            {"key": "Drop_down", "value": '${element.asset_name}'},
-            // {'key': "Paid_By", "value": '${element.assetItem_Name}'},
-            {'key': "Cost", "value": '${element.cost}'},
-            {'key': "Order", "value": '${element.ordered_qty}'},
-            {'key': "Comment", "value": '${element.comment}'},
-          ]);
-          commentCtrlr.text = getPurchaseDetailsByIDModel.value?.comment ?? "";
-          dropdownMapperData[element.asset_name ?? ""] = assetList
-              .firstWhere((e) => e?.name == element.asset_name, orElse: null)!;
-        });
-      }
-    }
+      print(
+          'Additioanl Email Employees${_getPurchaseDetailsById.request_order_items?.length ?? 0}');
+      rowItem.value = [];
+      _getPurchaseDetailsById.request_order_items?.forEach((element) {
+        rowItem.value.add([
+          {"key": "Drop_down", "value": '${element.asset_name}'},
+          // {'key': "Paid_By", "value": '${element.assetItem_Name}'},
+          {'key': "Cost", "value": '${element.cost}'},
+          {'key': "Order", "value": '${element.ordered_qty}'},
+          {'key': "Comment", "value": '${element.comment}'},
+        ]);
+        commentCtrlr.text = getPurchaseDetailsByIDModel.value?.comment ?? "";
+        dropdownMapperData[element.asset_name ?? ""] = assetList
+            .firstWhere((e) => e?.name == element.asset_name, orElse: null)!;
+      });
+        }
   }
 }

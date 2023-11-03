@@ -1,20 +1,11 @@
 import 'package:cmms/app/app.dart';
-import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:image_picker/image_picker.dart';
-import 'package:multi_select_flutter/util/multi_select_item.dart';
-import 'package:scrollable_table_view/scrollable_table_view.dart';
 
-import '../../controllers/file_upload_controller.dart';
 import '../../widgets/custom_elevated_button.dart';
-import '../../widgets/custom_multiselect_dialog_field.dart';
 import '../../widgets/custom_richtext.dart';
-import '../../widgets/custom_textField.dart';
-import '../../widgets/dropdown.dart';
 import '../../widgets/dropdown_web.dart';
 import '../../widgets/file_upload_details_widget_web.dart';
-import '../../widgets/file_upload_with_dropzone_widget.dart';
 import '../add_asset_master_controller.dart';
 import 'FileUploadWidgetWithDropzoneAssets.dart';
 

@@ -2238,6 +2238,7 @@ class Repository {
       log(error.toString());
       return [];
     }
+    return null;
   }
 
   Future<List<InventoryDetailModel?>?> getInventoryDetailList(

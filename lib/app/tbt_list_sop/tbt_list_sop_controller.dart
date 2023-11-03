@@ -3,12 +3,10 @@ import 'dart:convert';
 
 import 'package:cmms/app/app.dart';
 import 'package:cmms/app/tbt_list_sop/tbt_list_sop_presenter.dart';
-import 'package:cmms/app/tbt_type_list/tbt_type_list_presenter.dart';
 import 'package:cmms/domain/models/create_sop_model.dart';
 import 'package:cmms/domain/models/facility_model.dart';
 import 'package:cmms/domain/models/job_type_list_model.dart';
 import 'package:cmms/domain/models/sop_list_model.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 
@@ -146,16 +144,14 @@ class TBTSOPListController extends GetxController {
 
     );
     
-    if (_sopPermitList != null) {
-      
-      for (var sopPermit_list in _sopPermitList) {
-        sopPermitList.add(sopPermit_list);
-      }
-      // selectedSopPermit.value = _sopPermitList[0].name ?? '';
-      // selectedSopPermit.value = sopPermitList[0].name!;
-
+    
+    for (var sopPermit_list in _sopPermitList) {
+      sopPermitList.add(sopPermit_list);
     }
+    // selectedSopPermit.value = _sopPermitList[0].name ?? '';
+    // selectedSopPermit.value = sopPermitList[0].name!;
 
+  
     // supplierNameList = _supplierNameList;
     jobSOPListPaginationController = PaginationController(
       rowCount: sopPermitList.length,

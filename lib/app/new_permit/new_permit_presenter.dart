@@ -7,23 +7,15 @@ import 'package:cmms/domain/models/history_model.dart';
 import 'package:cmms/domain/models/inventory_detail_model.dart';
 import 'package:cmms/domain/models/inventory_model.dart';
 import 'package:cmms/domain/models/job_type_list_model.dart';
-import 'package:cmms/domain/models/linked_jobs_to_permit_model.dart';
 import 'package:cmms/domain/models/new_permit_details_model.dart';
-import 'package:cmms/domain/models/preventive_checklist_model.dart';
 import 'package:cmms/domain/models/safety_measure_list_model.dart';
 import 'package:cmms/domain/models/sop_list_model.dart';
 import 'package:cmms/domain/models/type_permit_model.dart';
 import 'package:cmms/domain/models/work_type_model.dart';
-import 'package:cmms/domain/repositories/repositories.dart';
-import 'package:cmms/domain/usecases/breakdown_usecase.dart';
-import 'package:cmms/domain/usecases/breakdown_usecase.dart';
 import 'package:cmms/domain/usecases/new_permit_usecase.dart';
 import 'package:flutter/foundation.dart';
 
 import '../../../domain/models/inventory_category_model.dart';
-import '../../../domain/usecases/preventive_list_usecase.dart';
-import '../../domain/models/create_permit_model.dart';
-import '../../domain/usecases/breakdown_usecase.dart';
 
 class NewPermitPresenter {
   NewPermitPresenter(this.newPermitUsecase);

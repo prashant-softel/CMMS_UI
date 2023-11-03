@@ -7,10 +7,7 @@ import 'package:get/get.dart';
 import 'package:scrollable_table_view/scrollable_table_view.dart';
 import '../../domain/models/frequency_model.dart';
 import '../../domain/models/inventory_category_model.dart';
-import '../../domain/models/modulelist_model.dart';
 import '../../domain/models/warranty_certificate_model.dart';
-import '../navigators/app_pages.dart';
-import 'package:fluttertoast/fluttertoast.dart';
 
 
 class WarrantyCertificateController extends GetxController {

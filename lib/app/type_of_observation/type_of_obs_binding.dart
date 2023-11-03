@@ -1,5 +1,3 @@
-import 'package:cmms/app/preventive_List/preventive_list_controller.dart';
-import 'package:cmms/app/preventive_List/preventive_list_presenter.dart';
 import 'package:cmms/app/type_of_observation/type_of_obs_controller.dart';
 import 'package:cmms/app/type_of_observation/type_of_obs_presenter.dart';
 import 'package:get/get.dart';

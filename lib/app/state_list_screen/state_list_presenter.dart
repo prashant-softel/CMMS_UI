@@ -1,11 +1,8 @@
-import 'package:cmms/domain/models/set_pm_schedule_model.dart';
 
 import '../../../domain/models/inventory_category_model.dart';
-import '../../../domain/usecases/pm_schedule_usecase.dart';
 import '../../domain/models/country_model.dart';
 import '../../domain/models/frequency_model.dart';
 import '../../domain/models/state.dart';
-import '../../domain/models/state_model.dart';
 import '../../domain/usecases/state_list_usecase.dart';
 
 class StateListPresenter {

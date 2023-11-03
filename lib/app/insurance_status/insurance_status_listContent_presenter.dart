@@ -1,15 +1,5 @@
-import 'package:cmms/domain/models/city_model.dart';
-import 'package:cmms/domain/models/facility_type_list_model.dart';
-import 'package:cmms/domain/usecases/incident_riskType_usecase.dart';
 
-import '../../domain/models/IncidentRiskTypeModel.dart';
-import '../../domain/models/InsuranceProviderModel.dart';
-import '../../domain/models/SPV_list_model.dart';
-import '../../domain/models/business_list_model.dart';
-import '../../domain/models/country_model.dart';
 import '../../domain/models/insurance_status_model.dart';
-import '../../domain/models/state.dart';
-import '../../domain/usecases/insurance_provider_usecase.dart';
 import '../../domain/usecases/insurance_status_usecase.dart';
 
 class InsuranceStatusPresenter {

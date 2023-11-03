@@ -1,10 +1,8 @@
-import 'dart:math';
 
 import 'package:cmms/app/constant/constant.dart';
 import 'package:cmms/app/module_cleaning_list_plan/module_cleaning_list_plan_controller.dart';
 import 'package:cmms/app/navigators/app_pages.dart';
 import 'package:cmms/app/theme/dimens.dart';
-import 'package:cmms/app/widgets/add_mc_execution_dialog.dart';
 import 'package:cmms/domain/models/module_cleaning_list_plan_model.dart';
 import 'package:data_table_2/data_table_2.dart';
 import 'package:flutter/material.dart';
@@ -516,14 +514,14 @@ class ModuleCleaningPlanListDataSource extends DataTableSource {
                             color: controller.moduleCleaningListPlan
                                         .firstWhere(
                                           (e) =>
-                                              e?.planId ==
+                                              e.planId ==
                                               ModuleCleaningPlanningListDetails!
                                                   .planId,
                                           orElse: () =>
                                               ModuleCleaningListPlanModel(
                                                   planId: 00),
                                         )
-                                        ?.status ==
+                                        .status ==
                                     342
                                 ? ColorValues.approveColor
                                 : ColorValues.addNewColor,

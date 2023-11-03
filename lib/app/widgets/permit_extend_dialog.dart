@@ -1,15 +1,11 @@
 import 'package:cmms/app/controllers/file_upload_controller.dart';
-import 'package:cmms/app/home/home.dart';
 import 'package:cmms/app/theme/color_values.dart';
 import 'package:cmms/app/utils/strings/string_constants.dart';
 import 'package:cmms/app/view_permit/view_permit_controller.dart';
-import 'package:cmms/app/widgets/custom_elevated_button.dart';
 import 'package:cmms/app/widgets/custom_richtext.dart';
 import 'package:cmms/app/widgets/file_upload_details_widget_web.dart';
 import 'package:cmms/app/widgets/file_upload_with_dropzone_widget.dart';
-import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
-import 'package:fluttertoast/fluttertoast.dart';
 import 'package:get/get.dart';
 
 // import '../theme/colors_value.dart';

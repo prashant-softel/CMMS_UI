@@ -4,12 +4,10 @@ import 'package:cmms/app/constant/constant.dart';
 import 'package:cmms/app/permit_type/permit_type_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:cmms/app/widgets/custom_textfield.dart';
 import 'package:scrollable_table_view/scrollable_table_view.dart';
 import '../../widgets/custom_elevated_button.dart';
 import '../../widgets/custom_richtext.dart';
 import '../../widgets/custom_swich_toggle.dart';
-import '../../widgets/dropdown.dart';
 import '../../widgets/dropdown_web.dart';
 
 class PermitTypeContentWeb extends GetView<PermitTypeController> {

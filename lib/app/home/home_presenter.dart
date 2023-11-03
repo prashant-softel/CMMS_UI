@@ -3,12 +3,10 @@ import 'package:cmms/domain/models/business_list_model.dart';
 import 'package:cmms/domain/models/currency_list_model.dart';
 import 'package:cmms/domain/models/employee_list_model.dart';
 import 'package:cmms/domain/models/inventory_category_model.dart';
-import 'package:cmms/domain/models/safety_measure_list_model.dart';
 import 'package:cmms/domain/models/type_permit_model.dart';
 import 'package:cmms/domain/models/warranty_claim_model.dart';
 
 import '../../domain/models/facility_model.dart';
-import '../../domain/models/user_access_model.dart';
 
 class HomePresenter {
   HomePresenter(this.homeUsecase);

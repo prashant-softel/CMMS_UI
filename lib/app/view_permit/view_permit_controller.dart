@@ -1,7 +1,5 @@
 import 'dart:async';
-import 'dart:io';
 import 'dart:typed_data';
-import 'dart:ui';
 
 import 'package:cmms/app/home/home_controller.dart';
 import 'package:cmms/app/job_list/job_list_presenter.dart';
@@ -28,12 +26,10 @@ import 'package:cmms/domain/models/permit_cancel_condition_list_model.dart';
 import 'package:cmms/domain/models/safety_measure_list_model.dart';
 import 'package:cmms/domain/models/sop_list_model.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/rendering.dart';
 import 'package:cmms/domain/models/equipment_model.dart';
 import 'package:cmms/domain/models/facility_model.dart';
 import 'package:cmms/domain/models/inventory_model.dart';
 import 'package:cmms/domain/models/type_permit_model.dart';
-import 'package:flutter/widgets.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:get/get.dart';
 import 'package:http/http.dart';
@@ -844,12 +840,10 @@ class ViewPermitController extends GetxController {
       // job_type_id: 36,
     );
     print('Permit condition List${permitCancelConditionList}');
-    if (_permitCancelConditionList != null) {
-      for (var permitCancelCondition_list in _permitCancelConditionList) {
-        permitCancelConditionList!.add(permitCancelCondition_list);
-      }
+    for (var permitCancelCondition_list in _permitCancelConditionList) {
+      permitCancelConditionList!.add(permitCancelCondition_list);
     }
-    // supplierNameList = _supplierNameList;
+      // supplierNameList = _supplierNameList;
     // employeeNamepaginationController = PaginationController(
     //   rowCount: employeeNameList.length,
     //   rowsPerPage: 10,
@@ -867,12 +861,10 @@ class ViewPermitController extends GetxController {
       // job_type_id: 36,
     );
     // print('Permit condition List${permitCancelConditionList}');
-    if (_permitCloseConditionList != null) {
-      for (var permitCloseCondition_list in _permitCloseConditionList) {
-        permitCloseConditionList!.add(permitCloseCondition_list);
-      }
+    for (var permitCloseCondition_list in _permitCloseConditionList) {
+      permitCloseConditionList!.add(permitCloseCondition_list);
     }
-    // supplierNameList = _supplierNameList;
+      // supplierNameList = _supplierNameList;
     // employeeNamepaginationController = PaginationController(
     //   rowCount: employeeNameList.length,
     //   rowsPerPage: 10,
@@ -890,12 +882,10 @@ class ViewPermitController extends GetxController {
       // job_type_id: 36,
     );
     // print('Permit condition List${permitCancelConditionList}');
-    if (_permitExtendConditionList != null) {
-      for (var permitExtendCondition_list in _permitExtendConditionList) {
-        permitExtendConditionList!.add(permitExtendCondition_list);
-      }
+    for (var permitExtendCondition_list in _permitExtendConditionList) {
+      permitExtendConditionList!.add(permitExtendCondition_list);
     }
-    // supplierNameList = _supplierNameList;
+      // supplierNameList = _supplierNameList;
     // employeeNamepaginationController = PaginationController(
     //   rowCount: employeeNameList.length,
     //   rowsPerPage: 10,
@@ -912,12 +902,10 @@ class ViewPermitController extends GetxController {
       // job_type_id: 36,
     );
     print('View SafetyrMeasure${selectedSafetyMeasureId}');
-    if (_safetyMeasureList != null) {
-      for (var safetyMeasure_list in _safetyMeasureList) {
-        safetyMeasureList.add(safetyMeasure_list);
-      }
+    for (var safetyMeasure_list in _safetyMeasureList) {
+      safetyMeasureList.add(safetyMeasure_list);
     }
-    // supplierNameList = _supplierNameList;
+      // supplierNameList = _supplierNameList;
     // employeeNamepaginationController = PaginationController(
     //   rowCount: employeeNameList.length,
     //   rowsPerPage: 10,
@@ -1054,12 +1042,10 @@ class ViewPermitController extends GetxController {
       facility_id: facilityId,
     );
     print('Employee List:$employeeNameList');
-    if (_employeeNameList != null) {
-      for (var employee_list in _employeeNameList) {
-        employeeNameList.add(employee_list);
-      }
+    for (var employee_list in _employeeNameList) {
+      employeeNameList.add(employee_list);
     }
-    // supplierNameList = _supplierNameList;
+      // supplierNameList = _supplierNameList;
     employeeNamepaginationController = PaginationController(
       rowCount: employeeNameList.length,
       rowsPerPage: 10,
@@ -1075,12 +1061,10 @@ class ViewPermitController extends GetxController {
       facility_id: facilityId,
     );
     print('Permit Issuer List:$permitIssuerList');
-    if (_permitIssuerList != null) {
-      for (var permit_issuer_list in _permitIssuerList) {
-        permitIssuerList.add(permit_issuer_list);
-      }
+    for (var permit_issuer_list in _permitIssuerList) {
+      permitIssuerList.add(permit_issuer_list);
     }
-    // supplierNameList = _supplierNameList;
+      // supplierNameList = _supplierNameList;
     // employeeNamepaginationController = PaginationController(
     //   rowCount: employeeNameList.length,
     //   rowsPerPage: 10,
@@ -1096,12 +1080,10 @@ class ViewPermitController extends GetxController {
       facility_id: facilityId,
     );
     print('Permit Approver List:$permitApproverList');
-    if (_permitApproverList != null) {
-      for (var permit_approver_list in _permitApproverList) {
-        permitApproverList.add(permit_approver_list);
-      }
+    for (var permit_approver_list in _permitApproverList) {
+      permitApproverList.add(permit_approver_list);
     }
-    // supplierNameList = _supplierNameList;
+      // supplierNameList = _supplierNameList;
     // employeeNamepaginationController = PaginationController(
     //   rowCount: employeeNameList.length,
     //   rowsPerPage: 10,
@@ -1117,12 +1099,10 @@ class ViewPermitController extends GetxController {
       facility_id: facilityId,
     );
     print('Job Type List:${jobTypeList}');
-    if (_jobTypeList != null) {
-      for (var jobType_list in _jobTypeList) {
-        jobTypeList.add(jobType_list);
-      }
+    for (var jobType_list in _jobTypeList) {
+      jobTypeList.add(jobType_list);
     }
-    // supplierNameList = _supplierNameList;
+      // supplierNameList = _supplierNameList;
     // employeeNamepaginationController = PaginationController(
     //   rowCount: employeeNameList.length,
     //   rowsPerPage: 10,
@@ -1139,12 +1119,10 @@ class ViewPermitController extends GetxController {
       // job_type_id: 36,
     );
     print('SOP Permit List:${sopPermitList}');
-    if (_sopPermitList != null) {
-      for (var sopPermit_list in _sopPermitList) {
-        sopPermitList.add(sopPermit_list);
-      }
+    for (var sopPermit_list in _sopPermitList) {
+      sopPermitList.add(sopPermit_list);
     }
-    // supplierNameList = _supplierNameList;
+      // supplierNameList = _supplierNameList;
     // employeeNamepaginationController = PaginationController(
     //   rowCount: employeeNameList.length,
     //   rowsPerPage: 10,

@@ -7,7 +7,6 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 import '../theme/dimens.dart';
-import '../theme/styles.dart';
 
 class SetEquipmentDialog extends GetView {
   int? estimateDurationDays;
@@ -110,7 +109,7 @@ class SetEquipmentDialog extends GetView {
                                       onTap: () {
                                         setState(
                                           () {
-                                            e!.isExpanded = !e.isExpanded;
+                                            e.isExpanded = !e.isExpanded;
                                           },
                                         );
                                       },
@@ -131,7 +130,7 @@ class SetEquipmentDialog extends GetView {
                                   ),
                                   Expanded(
                                     child: Text(
-                                      "${e?.moduleQuantity}",
+                                      "${e.moduleQuantity}",
                                       style: TextStyle(
                                           fontSize: 12.0,
                                           fontWeight: FontWeight.bold),
@@ -163,7 +162,7 @@ class SetEquipmentDialog extends GetView {
                               e.isExpanded
                                   ? Column(
                                       children: []..addAll(
-                                          e.smbs!.map(
+                                          e.smbs.map(
                                             (smbItems) {
                                               return Row(
                                                 children: [

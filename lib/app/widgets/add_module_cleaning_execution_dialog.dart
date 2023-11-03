@@ -6,8 +6,6 @@ import 'package:cmms/app/widgets/custom_elevated_button.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
-import 'package:cmms/app/widgets/custom_richtext.dart';
-import 'package:multi_select_flutter/multi_select_flutter.dart';
 import '../theme/dimens.dart';
 // import '../view_incident_report/view_incident_report_controller.dart';
 

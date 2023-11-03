@@ -1,7 +1,6 @@
 import 'dart:async';
 
 import 'package:cmms/app/app.dart';
-import 'package:cmms/app/navigators/app_pages.dart';
 import 'package:cmms/domain/models/comment_model.dart';
 import 'package:cmms/domain/models/create_escalation_matrix_model.dart';
 import 'package:cmms/domain/models/end_mc_execution_detail_model.dart';
@@ -152,21 +151,19 @@ class viewModuleCleaningExecutionController extends GetxController {
       equipmentList.add(equipment_list);
     }
 
-    if (list != null) {
-      // equipmentList.value = list;
-      // filteredData.value = incidentReportList.value;
-      // print('Filtered data:${filteredData.value}');
+    // equipmentList.value = list;
+    // filteredData.value = incidentReportList.value;
+    // print('Filtered data:${filteredData.value}');
 
-      // if (filteredData != null && filteredData.isNotEmpty) {
-      //   incidentReportModelList = filteredData[0];
-      //   var incidentListJson = incidentReportModelList?.toJson();
-      //   incidentListTableColumns.value = <String>[];
-      //   for (var key in incidentListJson?.keys.toList() ?? []) {
-      //     incidentListTableColumns.add(key);
-      //   }
-      // }
-    }
-
+    // if (filteredData != null && filteredData.isNotEmpty) {
+    //   incidentReportModelList = filteredData[0];
+    //   var incidentListJson = incidentReportModelList?.toJson();
+    //   incidentListTableColumns.value = <String>[];
+    //   for (var key in incidentListJson?.keys.toList() ?? []) {
+    //     incidentListTableColumns.add(key);
+    //   }
+    // }
+  
     update(['equipment_list']);
   }
 

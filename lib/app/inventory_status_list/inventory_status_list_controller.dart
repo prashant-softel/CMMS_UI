@@ -2,7 +2,6 @@ import 'dart:async';
 
 import 'package:cmms/app/app.dart';
 import 'package:cmms/app/inventory_status_list/inventory_status_list_presenter.dart';
-import 'package:cmms/domain/models/create_checklist_model.dart';
 import 'package:cmms/domain/models/inventory_status_list_model.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';

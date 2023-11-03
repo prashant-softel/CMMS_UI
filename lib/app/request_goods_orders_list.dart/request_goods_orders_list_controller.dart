@@ -98,7 +98,7 @@ class PurchaseGoodsorderListController extends GetxController {
 
   Future<void> getRequestOrderList(int facilityId, dynamic startDate,
       dynamic endDate, bool isLoading) async {
-    goodsOrdersList!.value = <GetRequestOrderListModel>[];
+    goodsOrdersList.value = <GetRequestOrderListModel>[];
     final _goodsordersList =
         await purchaseGoodsorderListPresenter.getRequestOrderList(
       isLoading: true,
@@ -106,23 +106,21 @@ class PurchaseGoodsorderListController extends GetxController {
       end_date: endDate,
       facility_id: facilityId,
     );
-    if (_goodsordersList != null) {
-      goodsOrdersList!.value = _goodsordersList;
-      paginationController = PaginationController(
-        rowCount: goodsOrdersList?.length ?? 0,
-        rowsPerPage: 10,
-      );
+    goodsOrdersList.value = _goodsordersList;
+    paginationController = PaginationController(
+      rowCount: goodsOrdersList.length ?? 0,
+      rowsPerPage: 10,
+    );
 
-      if (goodsOrdersList != null && goodsOrdersList!.isNotEmpty) {
-        goodsOrdersListModel = goodsOrdersList![0];
-        var newPermitListJson = goodsOrdersListModel?.toJson();
-        goodsOrdersListTableColumns.value = <String>[];
-        for (var key in newPermitListJson?.keys.toList() ?? []) {
-          goodsOrdersListTableColumns.add(key);
-        }
+    if (goodsOrdersList.isNotEmpty) {
+      goodsOrdersListModel = goodsOrdersList[0];
+      var newPermitListJson = goodsOrdersListModel?.toJson();
+      goodsOrdersListTableColumns.value = <String>[];
+      for (var key in newPermitListJson?.keys.toList() ?? []) {
+        goodsOrdersListTableColumns.add(key);
       }
     }
-  }
+    }
 
   void onValueChanged(dynamic list, dynamic value) {
     switch (list.runtimeType) {}

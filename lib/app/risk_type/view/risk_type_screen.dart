@@ -1,11 +1,8 @@
 import 'package:cmms/app/risk_type/view/risk_type_mobile.dart';
 import 'package:cmms/app/risk_type/view/risk_type_web.dart';
-import 'package:cmms/app/type_of_observation/view/type_of_obs_mobile.dart';
-import 'package:cmms/app/type_of_observation/view/type_of_obs_web.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-import '../../home/home_controller.dart';
 import '../../home/widgets/header_widget.dart';
 import '../../home/widgets/home_drawer.dart';
 import '../../theme/dimens.dart';

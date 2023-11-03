@@ -15,7 +15,6 @@ import 'package:flutter/foundation.dart';
 
 import '../../domain/models/facility_model.dart';
 import '../../domain/models/inventory_status_list_model.dart';
-import '../../domain/models/inventory_type_model.dart';
 
 class AddInventoryPresenter {
   AddInventoryPresenter(this.addInventoryUsecase);

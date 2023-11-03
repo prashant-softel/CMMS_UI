@@ -5,7 +5,6 @@ import '../../../theme/color_values.dart';
 import '../../../theme/dimens.dart';
 import '../../../theme/styles.dart';
 import '../../edit_job_controller.dart';
-import '../../../widgets/dropdown.dart';
 
 class AssignedToWidget extends StatelessWidget {
   AssignedToWidget({super.key});

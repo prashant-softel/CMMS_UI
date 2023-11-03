@@ -1,11 +1,5 @@
-import 'package:cmms/app/warranty_certificate/view/warranty_certificate_mobile.dart';
-import 'package:cmms/domain/models/preventive_checklist_model.dart';
 
-import '../../domain/models/frequency_model.dart';
-import '../../domain/models/inventory_category_model.dart';
-import '../../domain/models/modulelist_model.dart';
 import '../../domain/models/warranty_certificate_model.dart';
-import '../../domain/usecases/module_list_usecase.dart';
 import '../../domain/usecases/warranty_certificate_usecase.dart';
 
 class WarrantyCertificatePresenter {

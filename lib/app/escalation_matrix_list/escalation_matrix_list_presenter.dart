@@ -1,4 +1,3 @@
-import 'package:cmms/domain/models/incident_report_list_model.dart';
 import 'package:cmms/domain/usecases/escalation_matrix_list_usecase.dart';
 
 import '../../domain/models/facility_model.dart';

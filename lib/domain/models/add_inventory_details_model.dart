@@ -43,28 +43,28 @@ class AddInventoryDetailsModel {
   int? specialTool;
   dynamic specialToolEmp;
   int? warrantyId;
-  dynamic? warrantyDescription;
-  dynamic? certificateNumber;
+  dynamic warrantyDescription;
+  dynamic certificateNumber;
   int? warrantyTypeId;
-  dynamic? warrantyTypeName;
+  dynamic warrantyTypeName;
   int? warrantyProviderId;
-  dynamic? warrantyProviderName;
+  dynamic warrantyProviderName;
   int? warrantyTermTypeId;
-  dynamic? warrantyTermTypeName;
-  dynamic? attachments;
+  dynamic warrantyTermTypeName;
+  dynamic attachments;
   int? multiplier;
   int? statusId;
-  dynamic? status;
-  dynamic? statusShort;
-  dynamic? statusLong;
-  dynamic? importedAt;
-  dynamic? importedBy;
-  dynamic? addedAt;
-  dynamic? addedBy;
-  dynamic? updatedAt;
-  dynamic? updatedBy;
-  dynamic? deletedAt;
-  dynamic? deletedBy;
+  dynamic status;
+  dynamic statusShort;
+  dynamic statusLong;
+  dynamic importedAt;
+  dynamic importedBy;
+  dynamic addedAt;
+  dynamic addedBy;
+  dynamic updatedAt;
+  dynamic updatedBy;
+  dynamic deletedAt;
+  dynamic deletedBy;
 
   AddInventoryDetailsModel({
     this.id,

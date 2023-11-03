@@ -1,17 +1,13 @@
 import 'package:clipboard/clipboard.dart';
 import 'package:cmms/app/app.dart';
 import 'package:cmms/app/constant/constant.dart';
-import 'package:cmms/domain/models/preventive_checklist_model.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:cmms/app/widgets/custom_textfield.dart';
 import 'package:scrollable_table_view/scrollable_table_view.dart';
-import '../../../domain/models/modulelist_model.dart';
-import '../../preventive_List/preventive_list_controller.dart';
 import '../../widgets/custom_elevated_button.dart';
 import '../../widgets/custom_richtext.dart';
 import '../../widgets/custom_swich_toggle.dart';
-import '../../widgets/dropdown.dart';
 import '../role_list_controller.dart';
 // import '../preventive_list_controller.dart';
 

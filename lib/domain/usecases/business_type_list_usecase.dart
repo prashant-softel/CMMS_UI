@@ -1,9 +1,6 @@
 import 'package:cmms/domain/models/business_type_model.dart';
-import 'package:cmms/domain/models/inventory_category_model.dart';
 import 'package:cmms/domain/repositories/repository.dart';
 import '../models/business_list_model.dart';
-import '../models/frequency_model.dart';
-import '../models/modulelist_model.dart';
 
 class BusinessTypeListUsecase {
   BusinessTypeListUsecase(this.repository);

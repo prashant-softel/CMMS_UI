@@ -6,7 +6,6 @@ import 'package:get/get.dart';
 import '../../../../domain/models/employee_model.dart';
 import '../../../theme/color_values.dart';
 import '../../../widgets/action_button.dart';
-import '../../../widgets/dropdown.dart';
 import '../../job_card_details_controller.dart';
 
 ///

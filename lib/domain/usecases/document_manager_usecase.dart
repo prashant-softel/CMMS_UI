@@ -1,7 +1,6 @@
 import 'package:cmms/domain/domain.dart';
 
 import '../models/document_manager_model.dart';
-import '../models/user_list_model.dart';
 
 class DocumentManagerUsecase {
   final Repository repository;

@@ -149,12 +149,10 @@ class PreventiveMaintenanceExecutionController extends GetxController {
       pmExecutionJsonString: pmExecutionJsonString,
       isLoading: true,
     );
-    if (responsePmScheduleCreated != null) {
-      // _updatedailog();
-      Fluttertoast.showToast(
-          msg: "PM Schedule Successfully...", fontSize: 16.0);
+    // _updatedailog();
+    Fluttertoast.showToast(
+        msg: "PM Schedule Successfully...", fontSize: 16.0);
     }
-  }
 
   void cloneDialog(String assets) {
     Get.dialog(AlertDialog(

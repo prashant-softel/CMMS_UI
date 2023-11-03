@@ -14,13 +14,13 @@ class GetRequestOrderListModel {
   int? status;
   String? status_short;
   String? status_long;
-  dynamic? rejectedRemark;
+  dynamic rejectedRemark;
   dynamic generatedBy;
   dynamic approvedBy;
   String? approvedAt;
   dynamic generatedAt;
   double? cost;
-  dynamic? go_items;
+  dynamic go_items;
 
   GetRequestOrderListModel({
     this.request_order_id,

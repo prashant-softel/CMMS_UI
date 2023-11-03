@@ -1,5 +1,4 @@
 import 'package:cmms/domain/domain.dart';
-import 'package:cmms/domain/models/add_inventory_details_model.dart';
 
 class InventoryListUsecase {
   final Repository _repository;

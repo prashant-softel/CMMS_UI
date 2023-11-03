@@ -9,7 +9,6 @@ import 'package:scrollable_table_view/scrollable_table_view.dart';
 import '../../../domain/models/set_pm_schedule_model.dart';
 import '../../widgets/custom_elevated_button.dart';
 import '../../widgets/custom_richtext.dart';
-import '../../widgets/dropdown.dart';
 
 class PmScheduleContentWeb extends GetView<PmScheduleController> {
   PmScheduleContentWeb({Key? key}) : super(key: key);
