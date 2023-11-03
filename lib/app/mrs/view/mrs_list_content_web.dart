@@ -570,7 +570,7 @@ class MrsListDataSource extends DataTableSource {
                             borderRadius: BorderRadius.circular(4),
                           ),
                           child: Text(
-                            '${MrsDetails?.status_short}mmkk${MrsDetails?.status}',
+                            '${MrsDetails?.status_short}',
                             style: Styles.white10.copyWith(
                               color: Colors.white,
                             ),

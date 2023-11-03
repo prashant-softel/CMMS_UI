@@ -582,7 +582,7 @@ class PmTaskDataSource extends DataTableSource {
                             borderRadius: BorderRadius.circular(4),
                           ),
                           child: Text(
-                            '${pmTaskDetails?.status_short}${pmTaskDetails?.status}',
+                            '${pmTaskDetails?.status_short}',
                             style: Styles.white10.copyWith(
                               color: Colors.white,
                             ),

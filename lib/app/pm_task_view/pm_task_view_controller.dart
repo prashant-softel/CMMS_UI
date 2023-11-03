@@ -102,8 +102,6 @@ class PreventiveMaintenanceTaskViewController extends GetxController {
 
   Future<void> setScheduleId() async {
     try {
-      // final _flutterSecureStorage = const FlutterSecureStorage();
-      // // Read jobId
       final _scheduleId =
           await preventiveMaintenanceTaskViewPresenter.getValue();
 

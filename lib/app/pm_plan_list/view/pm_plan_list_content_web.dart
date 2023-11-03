@@ -469,7 +469,7 @@ class PmPlanDataSource extends DataTableSource {
                             borderRadius: BorderRadius.circular(4),
                           ),
                           child: Text(
-                            '${pmPlanDetails?.status_name}${pmPlanDetails?.status_id}',
+                            '${pmPlanDetails?.status_name}',
                             style: Styles.white10.copyWith(
                               color: Colors.white,
                             ),
