@@ -109,83 +109,59 @@ class _CreateAuditWebState extends State<CreateAuditWeb> {
                               Row(
                                 children: [
                                   Spacer(),
-                                  CustomRichText(title: 'Plan Title :'),
-                                  Dimens.boxWidth30,
-                                  Container(
-                                      decoration: BoxDecoration(
-                                        borderRadius: BorderRadius.circular(10),
-                                        border: Border.all(
-                                          color: Color.fromARGB(
-                                              255, 227, 224, 224),
-                                          width: 1,
-                                        ),
-                                        boxShadow: [
-                                          BoxShadow(
-                                            color: Color.fromARGB(
-                                                    255, 236, 234, 234)
-                                                .withOpacity(0.5),
-                                            spreadRadius: 2,
-                                            blurRadius: 5,
-                                            offset: Offset(0, 2),
-                                          ),
-                                        ],
-                                      ),
-                                      width:
-                                          (MediaQuery.of(context).size.width *
-                                              .3),
-                                      child: LoginCustomTextfield(
-                                        textController: controller.planTitleTc,
+                                  SizedBox(
+                                      width: 180,
+                                      child: Padding(
+                                        padding:
+                                            const EdgeInsets.only(left: 80),
+                                        child: CustomRichText(
+                                            title: ' Plan Title :'),
                                       )),
-                                  Spacer()
+                                  Container(
+                                    decoration: BoxDecoration(
+                                      borderRadius: BorderRadius.circular(10),
+                                      border: Border.all(
+                                        color:
+                                            Color.fromARGB(255, 227, 224, 224),
+                                        width: 1,
+                                      ),
+                                      boxShadow: [
+                                        BoxShadow(
+                                          color:
+                                              Color.fromARGB(255, 236, 234, 234)
+                                                  .withOpacity(0.5),
+                                          spreadRadius: 2,
+                                          blurRadius: 5,
+                                          offset: Offset(0, 2),
+                                        ),
+                                      ],
+                                    ),
+                                    width: (MediaQuery.of(context).size.width *
+                                        .3),
+                                    child: LoginCustomTextfield(
+                                      textController: controller.planTitleTc,
+                                    ),
+                                  ),
+                                  Spacer(),
                                 ],
                               ),
                               Dimens.boxHeight10,
                               Row(
                                 children: [
                                   Spacer(),
-                                  CustomRichText(title: 'Description :'),
-                                  Dimens.boxWidth30,
-                                  Container(
-                                      decoration: BoxDecoration(
-                                        borderRadius: BorderRadius.circular(10),
-                                        border: Border.all(
-                                          color: Color.fromARGB(
-                                              255, 227, 224, 224),
-                                          width: 1,
-                                        ),
-                                        boxShadow: [
-                                          BoxShadow(
-                                            color: Color.fromARGB(
-                                                    255, 236, 234, 234)
-                                                .withOpacity(0.5),
-                                            spreadRadius: 2,
-                                            blurRadius: 5,
-                                            offset: Offset(0, 2),
-                                          ),
-                                        ],
-                                      ),
-                                      width:
-                                          (MediaQuery.of(context).size.width *
-                                              .3),
-                                      child: LoginCustomTextfield(
-                                        maxLine: 3,
-                                        textController:
-                                            controller.descriptionTc,
+                                  SizedBox(
+                                      width: 180,
+                                      child: Padding(
+                                        padding:
+                                            const EdgeInsets.only(left: 40),
+                                        child: CustomRichText(
+                                            title: 'Audit Checklist :'),
                                       )),
-                                  Spacer()
-                                ],
-                              ),
-                              Dimens.boxHeight10,
-                              Row(
-                                children: [
-                                  Spacer(),
-                                  CustomRichText(title: 'Audit Checklist :'),
-                                  Dimens.boxWidth30,
                                   SizedBox(
                                     child: DropdownWebStock(
                                       width:
                                           (MediaQuery.of(context).size.width *
-                                              .2),
+                                              .3),
                                       controller: controller,
                                       dropdownList: controller.checkList,
                                       isValueSelected:
@@ -195,19 +171,21 @@ class _CreateAuditWebState extends State<CreateAuditWeb> {
                                       onValueChanged: controller.onValueChanged,
                                     ),
                                   ),
-                                  Spacer()
+                                  Spacer(),
                                 ],
                               ),
                               Dimens.boxHeight10,
                               Row(
                                 children: [
                                   Spacer(),
-                                  CustomRichText(
-                                      title: 'Audit Schedule Date :'),
-                                  Dimens.boxWidth30,
+                                  SizedBox(
+                                    width: 180,
+                                    child: CustomRichText(
+                                        title: 'Audit Schedule Date :'),
+                                  ),
                                   CustomTextFieldForStock(
-                                    width:
-                                        MediaQuery.of(context).size.width / 5,
+                                    width: (MediaQuery.of(context).size.width *
+                                        .3),
                                     numberTextField: true,
                                     onTap: () {
                                       controller.openStartDatePicker =
@@ -216,20 +194,26 @@ class _CreateAuditWebState extends State<CreateAuditWeb> {
                                     },
                                     textController: controller.startDateDateTc,
                                   ),
-                                  Spacer()
+                                  Spacer(),
                                 ],
                               ),
                               Dimens.boxHeight10,
                               Row(
                                 children: [
                                   Spacer(),
-                                  CustomRichText(title: 'Audit Frequency :'),
-                                  Dimens.boxWidth30,
+                                  SizedBox(
+                                    width: 180,
+                                    child: Padding(
+                                      padding: const EdgeInsets.only(left: 30),
+                                      child: CustomRichText(
+                                          title: 'Audit Frequency :'),
+                                    ),
+                                  ),
                                   SizedBox(
                                     child: DropdownWebStock(
                                       width:
                                           (MediaQuery.of(context).size.width *
-                                              .2),
+                                              .3),
                                       controller: controller,
                                       dropdownList: controller.frequencyList,
                                       isValueSelected:
@@ -239,7 +223,48 @@ class _CreateAuditWebState extends State<CreateAuditWeb> {
                                       onValueChanged: controller.onValueChanged,
                                     ),
                                   ),
-                                  Spacer()
+                                  Spacer(),
+                                ],
+                              ),
+                              Dimens.boxHeight10,
+                              Row(
+                                children: [
+                                  Spacer(),
+                                  SizedBox(
+                                      width: 180,
+                                      child: Padding(
+                                        padding:
+                                            const EdgeInsets.only(left: 67),
+                                        child: CustomRichText(
+                                            title: 'Description :'),
+                                      )),
+                                  Container(
+                                    decoration: BoxDecoration(
+                                      borderRadius: BorderRadius.circular(10),
+                                      border: Border.all(
+                                        color:
+                                            Color.fromARGB(255, 227, 224, 224),
+                                        width: 1,
+                                      ),
+                                      boxShadow: [
+                                        BoxShadow(
+                                          color:
+                                              Color.fromARGB(255, 236, 234, 234)
+                                                  .withOpacity(0.5),
+                                          spreadRadius: 2,
+                                          blurRadius: 5,
+                                          offset: Offset(0, 2),
+                                        ),
+                                      ],
+                                    ),
+                                    width: (MediaQuery.of(context).size.width *
+                                        .3),
+                                    child: LoginCustomTextfield(
+                                      maxLine: 3,
+                                      textController: controller.descriptionTc,
+                                    ),
+                                  ),
+                                  Spacer(),
                                 ],
                               ),
                               Dimens.boxHeight15,
@@ -261,6 +286,7 @@ class _CreateAuditWebState extends State<CreateAuditWeb> {
                                       controller.createAuditNumber();
                                     },
                                   ),
+                                  Spacer(),
                                   // Dimens.boxWidth15,
                                   // CustomElevatedButton(
                                   //   backgroundColor: Color(0xff77cae7),
@@ -269,7 +295,6 @@ class _CreateAuditWebState extends State<CreateAuditWeb> {
                                   //     // controller.submitPurchaseOrderData();
                                   //   },
                                   // ),
-                                  Spacer()
                                 ],
                               ),
                               Dimens.boxHeight15,
@@ -279,8 +304,8 @@ class _CreateAuditWebState extends State<CreateAuditWeb> {
                       ),
                       if (controller.openStartDatePicker)
                         Positioned(
-                          right: 550,
-                          top: 300,
+                          right: 400,
+                          top: 200,
                           child: DatePickerWidget(
                             minDate: DateTime(DateTime.now().year),
                             maxDate: DateTime(DateTime.now().year, 13,
