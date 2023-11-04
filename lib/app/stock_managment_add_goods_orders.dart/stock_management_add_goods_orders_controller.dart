@@ -207,34 +207,36 @@ class StockManagementAddGoodsOrdersController extends GetxController {
       goDetails?.value = _getPurchaseDetailsById.goDetails;
 
       _getPurchaseDetailsById.goDetails.forEach((element) {
-        rowItem.value.add([
-          {
-            "key": "Drop_down",
-            "value": '${element.assetItem_Name}',
-            'assetMasterItemID': '${element.assetMasterItemID}',
-            'id': '${element.id}'
-          },
-          {
-            'key': "Paid_By",
-            "value": '${element.paid_by_name}',
-            'id': '${element.paid_by_ID}'
-          },
-          {
-            'key': "Requested",
-            "value": '${element.requested_qty}',
-            // 'id': '${element.assetMasterItemID}'
-          },
-          {
-            'key': "Cost",
-            "value": '${element.cost}',
-            // 'id': '${element.assetMasterItemID}'
-          },
-          {
-            'key': "Order",
-            "value": '${element.ordered_qty}',
-            // 'id': '${element.assetMasterItemID}'
-          },
-        ]);
+        rowItem.value.add(
+          [
+            {
+              "key": "Drop_down",
+              "value": '${element.assetItem_Name}',
+              'assetMasterItemID': '${element.assetMasterItemID}',
+              'id': '${element.id}'
+            },
+            {
+              'key': "Paid_By",
+              "value": '${element.paid_by_name}',
+              'id': '${element.paid_by_ID}'
+            },
+            {
+              'key': "Requested",
+              "value": '${element.requested_qty}',
+              // 'id': '${element.assetMasterItemID}'
+            },
+            {
+              'key': "Cost",
+              "value": '${element.cost}',
+              // 'id': '${element.assetMasterItemID}'
+            },
+            {
+              'key': "Order",
+              "value": '${element.ordered_qty}',
+              // 'id': '${element.assetMasterItemID}'
+            },
+          ],
+        );
 
         dropdownMapperData[element.assetItem_Name ?? ""] = assetList.firstWhere(
             (e) => e?.name == element.assetItem_Name,

@@ -80,20 +80,25 @@ class EditMrsController extends GetxController {
     if (_mrsDetailsModel != null) {
       rowItem.value = [];
       _mrsDetailsModel.cmmrsItems?.forEach((element) {
-        rowItem.value.add([
-          {"key": "Drop_down", "value": '${element.asset_name}'},
-          {'key': "Material_Type", "value": '${element.asset_type}'},
-          {'key': "Image", "value": '${element.approved_date}'},
-          {'key': "Available_Qty", "value": '${element.available_qty}'},
-          {'key': "Requested_Qty", "value": '${element.requested_qty}'},
-        ]);
+        rowItem.value.add(
+          [
+            {"key": "Drop_down", "value": '${element.asset_name}'},
+            {'key': "Material_Type", "value": '${element.asset_type}'},
+            {'key': "Image", "value": '${element.approved_date}'},
+            {'key': "Available_Qty", "value": '${element.available_qty}'},
+            {'key': "Requested_Qty", "value": '${element.requested_qty}'},
+          ],
+        );
         // dropdownMapperData = element.approval_required;
+        dropdownMapperData[element.asset_name ?? ""] = assetItemList
+            .firstWhere((e) => e?.name == element.asset_name, orElse: null)!;
       });
+
       whereUsedId = _mrsDetailsModel.whereUsedTypeId ?? 0;
       activityCtrlr.text = _mrsDetailsModel.activity ?? "";
       // activityCtrlr.text = _mrsDetailsModel. ?? "";
       remarkCtrlr.text = _mrsDetailsModel.remarks ?? "";
-      whereUsedCtrlr.text = _mrsDetailsModel.whereUsedType.toString();
+      whereUsedCtrlr.text = _mrsDetailsModel.whereUsedRefID.toString();
     }
     print({"mrsdetailss", _mrsDetailsModel});
   }
@@ -126,7 +131,7 @@ class EditMrsController extends GetxController {
     String _activity = activityCtrlr.text.trim();
     String _remark = remarkCtrlr.text.trim();
     String _setTemp = setTemlateCtrlr.text.trim();
-
+    String _wheredused = whereUsedCtrlr.text.trim();
     List<Equipments> items = [];
     rowItem.value.forEach((element) {
       Equipments item = Equipments(
@@ -144,12 +149,14 @@ class EditMrsController extends GetxController {
         ID: mrsId.value,
         isEditMode: 1,
         facility_ID: facilityId,
-        //  requestd_date: formattedFromdate,
         setAsTemplate: _setTemp,
         activity: _activity,
-        //1 is job,2 is pm
-        whereUsedType: 2,
-        whereUsedTypeId: whereUsedId,
+        whereUsedType: 27,
+        whereUsedTypeId: int.tryParse(_wheredused),
+        to_actor_id: int.tryParse(_wheredused),
+        to_actor_type_id: 3,
+        from_actor_id: facilityId,
+        from_actor_type_id: 2,
         remarks: _remark,
         equipments: items);
     var editMrsJsonString = editMrs.toJson();
@@ -160,10 +167,6 @@ class EditMrsController extends GetxController {
       isLoading: true,
     );
     if (responseEditMrs == null) {
-    } else {
-      // Get.offAllNamed(
-      //   Routes.mrsListScreen,
-      // );
-    }
+    } else {}
   }
 }
