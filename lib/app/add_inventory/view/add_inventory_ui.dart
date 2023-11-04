@@ -462,8 +462,7 @@ class AddInventoryScreen extends GetView<AddInventoryController> {
                                           ),
                                           child: LoginCustomTextfield(
                                             keyboardType: TextInputType.number,
-                                            inputFormatters: <
-                                                TextInputFormatter>[
+                                            inputFormatters: <TextInputFormatter>[
                                               FilteringTextInputFormatter
                                                   .digitsOnly
                                             ],
