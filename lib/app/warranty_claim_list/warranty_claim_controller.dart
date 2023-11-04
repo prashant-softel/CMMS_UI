@@ -214,6 +214,48 @@ class WarrantyClaimController extends GetxController {
   final blockTextController = TextEditingController();
   final parentEquipmentTextController = TextEditingController();
 
+  //WC Grid
+
+  final columnVisibility = ValueNotifier<Map<String, bool>>({
+    "WC Id": true,
+    "Date Of Claim": true,
+    "Warranty Claim Title": true,
+    "Equipment Serial No.": true,
+    "Equipment Category": true,
+    "Equipment Name": true,
+    "Estimated Cost": true,
+    "Status": true,
+
+    // "search": true,
+  });
+  final Map<String, double> columnwidth = {
+    "WC Id": 153,
+    "Date Of Claim": 320,
+    "Warranty Claim Title": 220,
+    "Equipment Serial No.": 200,
+    "Equipment Category": 250,
+    "Equipment Name": 250,
+    "Estimated Cost": 250,
+    "Status": 250,
+  };
+  Map<String, RxString> filterText = {};
+  void setColumnVisibility(String columnName, bool isVisible) {
+    final newVisibility = Map<String, bool>.from(columnVisibility.value)
+      ..[columnName] = isVisible;
+    columnVisibility.value = newVisibility;
+    print({"updated columnVisibility": columnVisibility});
+  }
+
+  RxString warrantyClaimIdFilterText = ''.obs;
+  RxString dateOfClaimFilterText = ''.obs;
+  RxString wcTitleFilterText = ''.obs;
+  RxString equipmentSrNoFilterText = ''.obs;
+  RxString equipmentCategoryFilterText = ''.obs;
+  RxString equipmentNameFilterText = ''.obs;
+  RxString estimatedCostFilterText = ''.obs;
+  RxString statusFilterText = ''.obs;
+  RxString actionFilterText = ''.obs;
+
   /// Inventory Details Model
   Rx<InventoryDetailsModel?> inventoryDetailsModel =
       InventoryDetailsModel().obs;
@@ -248,18 +290,29 @@ class WarrantyClaimController extends GetxController {
   int get facilityId1 => _facilityId.value;
 
   StreamSubscription<int>? facilityIdStreamSubscription;
+  Rx<int> wc_id = 0.obs;
 
   ///
 // int? wc_id = 0;
   @override
   void onInit() async {
+    this.filterText = {
+      "WC Id": warrantyClaimIdFilterText,
+      "Date Of Claim": dateOfClaimFilterText,
+      "Warranty Claim Title": wcTitleFilterText,
+      "Equipment Serial No.": equipmentSrNoFilterText,
+      "Equipment Category": equipmentCategoryFilterText,
+      "Equipment Name": equipmentNameFilterText,
+      "Estimated Cost": estimatedCostFilterText,
+      "Status": statusFilterText
+    };
     // wc_id = Get.arguments;
     // print('WC_Id:$wc_id');
     facilityIdStreamSubscription = homeController.facilityId$.listen((event) {
       facilityId = event;
       Future.delayed(Duration(seconds: 1), () {
         getWarrantyClaimList(
-            facilityId, formattedTodate, formattedFromdate, false);
+            facilityId, formattedTodate, formattedFromdate, true);
       });
     });
 
@@ -992,6 +1045,6 @@ class WarrantyClaimController extends GetxController {
   }
 
   void getWarrantyClaimtListByDate() {
-    getWarrantyClaimList(facilityId, formattedFromdate, formattedTodate, false);
+    getWarrantyClaimList(facilityId, formattedFromdate, formattedTodate, true);
   }
 }
