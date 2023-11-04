@@ -8,6 +8,7 @@ import 'package:cmms/app/widgets/custom_richtext.dart';
 import 'package:cmms/app/widgets/dropdown_web.dart';
 import 'package:cmms/app/widgets/file_upload_details_widget_web.dart';
 import 'package:cmms/app/widgets/file_upload_with_dropzone_widget.dart';
+import 'package:cmms/app/widgets/stock_dropdown.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
@@ -220,14 +221,34 @@ class AddIncidentReportContentWeb extends GetView<AddIncidentReportController> {
                                                             ),
                                                             Dimens.boxWidth10,
                                                             SizedBox(
-                                                                width: MediaQuery.of(
-                                                                            context)
-                                                                        .size
-                                                                        .width /
-                                                                    5,
-                                                                child:
-                                                                    _buildCorrectiveActionTextField_web(
-                                                                        context)),
+                                                              width: MediaQuery.of(
+                                                                          context)
+                                                                      .size
+                                                                      .width /
+                                                                  5,
+                                                              child: Obx(
+                                                                () =>
+                                                                    DropdownWebWidget(
+                                                                  // margin: Dimens.edgeInsets5,
+                                                                  dropdownList:
+                                                                      controller
+                                                                          .blockList,
+                                                                  isValueSelected:
+                                                                      controller
+                                                                          .isBlockSelected
+                                                                          .value,
+                                                                  selectedValue:
+                                                                      controller
+                                                                          .selectedBlock
+                                                                          .value,
+                                                                  onValueChanged:
+                                                                      controller
+                                                                          .onValueChanged,
+                                                                ),
+                                                              ),
+                                                              // _buildCorrectiveActionTextField_web(
+                                                              //     context)
+                                                            ),
                                                           ],
                                                         ),
                                                         Row(
