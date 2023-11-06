@@ -25,8 +25,6 @@ class IncidentReportListController extends GetxController {
 
   bool openFromDateToStartDatePicker = false;
 
-  
-
   ///Failure Date Time For Web
   var failureDateTimeCtrlrWeb = TextEditingController();
   var failureDateTimeCtrlrWebBuffer;
@@ -93,6 +91,52 @@ class IncidentReportListController extends GetxController {
     rowsPerPage: 10,
   );
 
+  //Incident Report Grid
+
+  final columnVisibility = ValueNotifier<Map<String, bool>>({
+    "Id": true,
+    "Description": true,
+    "Block Name": true,
+    "Equipment Name": true,
+    "Approved By": true,
+    "Approved At": true,
+    "Reported By": true,
+    "Reported At": true,
+    "Status": true,
+
+    // "search": true,
+  });
+  final Map<String, double> columnwidth = {
+    "Id": 153,
+    "Description": 320,
+    "Block Name": 220,
+    "Equipment Name": 200,
+    "Approved By": 250,
+    "Approved At": 250,
+    "Reported By": 250,
+    "Reported At": 250,
+    "Status": 250,
+  };
+  Map<String, RxString> filterText = {};
+  void setColumnVisibility(String columnName, bool isVisible) {
+    final newVisibility = Map<String, bool>.from(columnVisibility.value)
+      ..[columnName] = isVisible;
+    columnVisibility.value = newVisibility;
+    print({"updated columnVisibility": columnVisibility});
+  }
+
+  RxString incidentReportIdFilterText = ''.obs;
+  RxString descriptionFilterText = ''.obs;
+  RxString block_nameFilterText = ''.obs;
+  RxString equipment_nameFilterText = ''.obs;
+  RxString approved_byFilterText = ''.obs;
+  RxString approved_atFilterText = ''.obs;
+  RxString reported_by_nameFilterText = ''.obs;
+  RxString reported_atFilterText = ''.obs;
+  RxString statusFilterText = ''.obs;
+  RxString actionFilterText = ''.obs;
+  Rx<int> id = 0.obs;
+
   Rx<DateTime> fromDate = DateTime.now().obs;
   Rx<DateTime> toDate = DateTime.now().obs;
   String get formattedFromdate =>
@@ -108,20 +152,30 @@ class IncidentReportListController extends GetxController {
 
   @override
   void onInit() async {
+    this.filterText = {
+      "Id": incidentReportIdFilterText,
+      "Description": descriptionFilterText,
+      "Block Name": block_nameFilterText,
+      "Equipment Name": equipment_nameFilterText,
+      "Approved By": approved_byFilterText,
+      "Approved At": approved_atFilterText,
+      "Reported By": reported_by_nameFilterText,
+      "Reported At": reported_atFilterText,
+      "Status": statusFilterText
+    };
     // wc_id = Get.arguments;
     // print('WC_Id:$wc_id');
     facilityIdStreamSubscription = homeController.facilityId$.listen((event) {
       facilityId = event;
       Future.delayed(Duration(seconds: 2), () {
         getIncidentReportList(
-            facilityId,  formattedFromdate, formattedTodate, false);
+            facilityId, formattedFromdate, formattedTodate, false);
       });
     });
 
     Future.delayed(Duration(seconds: 1), () {
       getFacilityList();
     });
-   
 
     super.onInit();
   }
@@ -138,8 +192,6 @@ class IncidentReportListController extends GetxController {
       _facilityId.sink.add(facilityList[0]?.id ?? 0);
     }
   }
-
- 
 
   Future<void> incidentReportRejectButton({String? id}) async {
     String _rejectComment = rejectCommentTextFieldCtrlr.text.trim();
@@ -209,7 +261,7 @@ class IncidentReportListController extends GetxController {
         incidentListTableColumns.add(key);
       }
     }
-  
+
     update(['incident_report_list']);
   }
 
