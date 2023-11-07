@@ -39,6 +39,12 @@ class AddIncidentReportController extends GetxController {
     selectedSeverity.value = severity;
   }
 
+  ///Gender Radio
+  RxString selectedGender = RxString('');
+  void setSelectedGender(String gender) {
+    selectedGender.value = gender;
+  }
+
   // void addRow(String rowData) {
   //   rowList.add(rowData);
   //   // rowList2.add(rowData);
@@ -201,6 +207,10 @@ class AddIncidentReportController extends GetxController {
 
   Rx<bool> isInsuranceAvailableInvalid = false.obs;
   var insuranceAvailableTextCtrlr = TextEditingController();
+
+//RCA text
+  Rx<bool> isRCAInvalid = false.obs;
+  var rcaTextCtrlr = TextEditingController();
 
   ///damaged Asset Cost
   Rx<bool> isDamagedAssetCostTextInvalid = false.obs;
