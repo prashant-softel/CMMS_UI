@@ -10,6 +10,7 @@ import 'package:cmms/domain/models/get_purchase_details_model.dart';
 import 'package:cmms/domain/models/history_model.dart';
 
 import 'package:cmms/domain/models/paiyed_model.dart';
+import 'package:cmms/domain/models/req_order_details_by_id_model.dart';
 import 'package:cmms/domain/models/request_order_list.model.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
@@ -36,7 +37,8 @@ class StockManagementAddGoodsOrdersController extends GetxController {
   Rx<bool> isReqOrderSelected = true.obs;
   Rx<String> selectedReqOrder = ''.obs;
   int selectedReqOrderId = 0;
-
+  Rx<int> roId = 0.obs;
+  var commentCtrlr = TextEditingController();
   Rx<String> selectedFacility = ''.obs;
   Rx<String> selectedUnitCurrency = ''.obs;
 
@@ -92,6 +94,10 @@ class StockManagementAddGoodsOrdersController extends GetxController {
       <GetPurchaseDetailsByIDModel?>[].obs;
   Rx<GetPurchaseDetailsByIDModel?> getPurchaseDetailsByIDModel =
       GetPurchaseDetailsByIDModel().obs;
+  Rx<GetRODetailsByIDModel?> getRoDetailsByIDModel =
+      GetRODetailsByIDModel().obs;
+  RxList<GetRODetailsByIDModel?>? getRoDetailsByIDModelList =
+      <GetRODetailsByIDModel?>[].obs;
   RxList<Items?>? goDetails = <Items?>[].obs;
 
 //all textfield tc
@@ -150,8 +156,12 @@ class StockManagementAddGoodsOrdersController extends GetxController {
           false,
         );
       });
+
       Future.delayed(Duration(seconds: 1), () {
         getUnitCurrencyList();
+      });
+      Future.delayed(Duration(seconds: 1), () {
+        getRoDetailsByID(requestID: roId.value);
       });
 
       Future.delayed(Duration(seconds: 1), () {
@@ -575,6 +585,35 @@ class StockManagementAddGoodsOrdersController extends GetxController {
       // showAlertDialog();
     }
     print('update  Create GO  data: $createGoModelJsonString');
+  }
+
+  Future<void> getRoDetailsByID({required int requestID}) async {
+    getRoDetailsByIDModelList?.value = <GetRODetailsByIDModel>[];
+
+    final _getRoDetailsById = await stockManagementAddGoodsOrdersPresenter
+        .getRoDetailsByID(requestID: requestID);
+    // print('Edit goods order  Detail:$_getRoDetailsById');
+
+    if (_getRoDetailsById != null) {
+      getRoDetailsByIDModel.value = _getRoDetailsById;
+      getRoDetailsByIDModel.value = _getRoDetailsById;
+
+      print(
+          'Additioanl Email Employees${_getRoDetailsById.request_order_items?.length ?? 0}');
+      rowItem.value = [];
+      _getRoDetailsById.request_order_items?.forEach((element) {
+        rowItem.value.add([
+          {"key": "Drop_down", "value": '${element.asset_name}'},
+          // {'key': "Paid_By", "value": '${element.assetItem_Name}'},
+          {'key': "Cost", "value": '${element.cost}'},
+          {'key': "Order", "value": '${element.ordered_qty}'},
+          {'key': "Comment", "value": '${element.comment}'},
+        ]);
+        commentCtrlr.text = getRoDetailsByIDModel.value?.comment ?? "";
+        dropdownMapperData[element.asset_name ?? ""] = assetList
+            .firstWhere((e) => e?.name == element.asset_name, orElse: null)!;
+      });
+    }
   }
 
   Future<void> getRequestOrderList(int facilityId, dynamic startDate,
