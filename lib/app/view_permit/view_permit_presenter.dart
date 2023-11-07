@@ -143,7 +143,7 @@ class ViewPermitPresenter {
   //       isLoading: isLoading ?? false,
   //     );
 
-   Future<Map<String, dynamic>?> permitRejectButton({
+  Future<Map<String, dynamic>?> permitRejectButton({
     int? id,
     String? ptwStatus,
     int? jobId,
@@ -172,7 +172,7 @@ class ViewPermitPresenter {
   //       isLoading: isLoading ?? false,
   //     );
 
-   Future<Map<String, dynamic>?> permitCancelByApproverButton({
+  Future<Map<String, dynamic>?> permitCancelByApproverButton({
     cancelByApproverJsonString,
     String? ptwStatus,
     required bool isLoading,
@@ -379,8 +379,7 @@ class ViewPermitPresenter {
     );
   }
 
-
-   Future<List<EmployeeListModel>> getEmployeeList({
+  Future<List<EmployeeListModel>> getEmployeeList({
     required bool isLoading,
     required int? facility_id,
   }) async {
@@ -390,4 +389,15 @@ class ViewPermitPresenter {
     );
   }
 
+  void saveValue({String? permitId}) async {
+    return viewPermitUsecase.saveValue(permitId: permitId);
+  }
+
+  Future<String?> getValue() async => await viewPermitUsecase.getValue();
+  void saveJobIdValue({String? jobId}) async {
+    return viewPermitUsecase.saveJobIdValue(jobId: jobId);
+  }
+
+  Future<String?> getJobIdValue() async =>
+      await viewPermitUsecase.getJobIdValue();
 }

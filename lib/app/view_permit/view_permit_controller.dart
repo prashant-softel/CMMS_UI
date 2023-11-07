@@ -438,53 +438,67 @@ class ViewPermitController extends GetxController {
   int? isCancle = 1;
   int? isClose = 1;
   int? isExtend = 1;
+  Rx<int> permitId = 0.obs;
+  Rx<int> jobId = 0.obs;
 
-  int? permitId = 0;
-  int? jobId = 0;
   Map<String, dynamic> data = {};
   @override
   void onInit() async {
-    // types = Get.arguments["types"];
-    final _flutterSecureStorage = const FlutterSecureStorage();
-    // Read jobId
-    String? _permitId = await _flutterSecureStorage.read(key: "permitId");
-    //  data = Get.arguments;
-    // print('Data permitId ${data['permitId']}');
-    // print('Data JobId ${data['jobId']}');
+    try {
+      await setPermitId();
 
-    // // if(data['jobId'] != null){
-    //   permitId = int.tryParse('${data['permitId']}');
-    // // }
+      // permitId = Get.arguments["permitId"];
+      // jobId = Get.arguments["jobId"];
 
-    permitId = Get.arguments["permitId"];
-    jobId = Get.arguments["jobId"];
+      // print('PermitIdView:${permitId}');
+      // print('JobIdIdView:${jobId}');
 
-    // jobId = Get.arguments[1];
-
-    print('PermitIdView:${permitId}');
-    print('JobIdIdView:${jobId}');
-
-    //homePresenter.generateToken();
-    //  Future.delayed(Duration(seconds: 1), () {
-    facilityIdStreamSubscription = homeController.facilityId$.listen((event) {
-      facilityId = event;
-      print('FacilityIdsss$facilityId');
-      Future.delayed(Duration(seconds: 1), () {
-        getBlocksList(facilityId);
+      //homePresenter.generateToken();
+      //  Future.delayed(Duration(seconds: 1), () {
+      facilityIdStreamSubscription = homeController.facilityId$.listen((event) {
+        facilityId = event;
+        print('FacilityIdsss$facilityId');
+        Future.delayed(Duration(seconds: 1), () {
+          getBlocksList(facilityId);
+        });
       });
-    });
-    if (permitId != null) {
-      await getViewPermitDetail(permitId: permitId!);
+      if (permitId.value != null) {
+        await getViewPermitDetail(permitId: permitId.value);
+      }
+
+      await getSafetyMeasureList();
+      await getPermitHistory(permitId: permitId.value);
+      await getPermitConditionList(isCancle: isCancle!);
+      await getPermitCloseConditionList(isClose: isClose!);
+      await getPermitExtendConditionList(isExtend: isExtend!);
+      await getEmployeeList();
+
+      super.onInit();
+    } catch (e) {
+      print(e);
     }
+  }
 
-    await getSafetyMeasureList();
-    await getPermitHistory(permitId: permitId!);
-    await getPermitConditionList(isCancle: isCancle!);
-    await getPermitCloseConditionList(isClose: isClose!);
-    await getPermitExtendConditionList(isExtend: isExtend!);
-    await getEmployeeList();
+  Future<void> setPermitId() async {
+    try {
+      final _permitId = await viewPermitPresenter.getValue();
+      final _jobId = await viewPermitPresenter.getJobIdValue();
 
-    super.onInit();
+      if (_permitId == null || _permitId == '' || _permitId == "null") {
+        var dataFromPreviousScreen = Get.arguments;
+
+        permitId.value = dataFromPreviousScreen['permitId'];
+        jobId.value = dataFromPreviousScreen['jobId'];
+
+        viewPermitPresenter.saveValue(permitId: permitId.value.toString());
+        viewPermitPresenter.saveJobIdValue(jobId: jobId.value.toString());
+      } else {
+        permitId.value = int.tryParse(_permitId) ?? 0;
+        jobId.value = int.tryParse(_jobId ?? "") ?? 0;
+      }
+    } catch (e) {
+      // Utility.showDialog(e.toString() + 'permitId');
+    }
   }
 
   Future<void> getFacilitiesLists() async {
@@ -679,21 +693,6 @@ class ViewPermitController extends GetxController {
     }
   }
 
-  // Future<void> permitRejectButton(
-  //     {String? permitId, String? ptwStatus, int? jobId}) async {
-  //   String _rejectComment = rejectCommentTextFieldCtrlr.text.trim();
-
-  //   final _permitRejectBtn = await viewPermitPresenter.permitRejectButton(
-  //       comment: _rejectComment,
-  //       id: permitId,
-  //       ptwStatus: ptwStatus,
-  //       jobId: jobId,
-  //       isLoading: true);
-  //   // showAlertPermitApproveDialog();
-  //   print('Reject Button Data:${_rejectComment}');
-  //   print('Reject Button Data:${permitId}');
-  // }
-
   void permitRejectButton(
       {int? permitId, String? ptwStatus, int? jobId}) async {
     {
@@ -843,7 +842,7 @@ class ViewPermitController extends GetxController {
     for (var permitCancelCondition_list in _permitCancelConditionList) {
       permitCancelConditionList!.add(permitCancelCondition_list);
     }
-      // supplierNameList = _supplierNameList;
+    // supplierNameList = _supplierNameList;
     // employeeNamepaginationController = PaginationController(
     //   rowCount: employeeNameList.length,
     //   rowsPerPage: 10,
@@ -864,7 +863,7 @@ class ViewPermitController extends GetxController {
     for (var permitCloseCondition_list in _permitCloseConditionList) {
       permitCloseConditionList!.add(permitCloseCondition_list);
     }
-      // supplierNameList = _supplierNameList;
+    // supplierNameList = _supplierNameList;
     // employeeNamepaginationController = PaginationController(
     //   rowCount: employeeNameList.length,
     //   rowsPerPage: 10,
@@ -885,7 +884,7 @@ class ViewPermitController extends GetxController {
     for (var permitExtendCondition_list in _permitExtendConditionList) {
       permitExtendConditionList!.add(permitExtendCondition_list);
     }
-      // supplierNameList = _supplierNameList;
+    // supplierNameList = _supplierNameList;
     // employeeNamepaginationController = PaginationController(
     //   rowCount: employeeNameList.length,
     //   rowsPerPage: 10,
@@ -905,7 +904,7 @@ class ViewPermitController extends GetxController {
     for (var safetyMeasure_list in _safetyMeasureList) {
       safetyMeasureList.add(safetyMeasure_list);
     }
-      // supplierNameList = _supplierNameList;
+    // supplierNameList = _supplierNameList;
     // employeeNamepaginationController = PaginationController(
     //   rowCount: employeeNameList.length,
     //   rowsPerPage: 10,
@@ -1045,7 +1044,7 @@ class ViewPermitController extends GetxController {
     for (var employee_list in _employeeNameList) {
       employeeNameList.add(employee_list);
     }
-      // supplierNameList = _supplierNameList;
+    // supplierNameList = _supplierNameList;
     employeeNamepaginationController = PaginationController(
       rowCount: employeeNameList.length,
       rowsPerPage: 10,
@@ -1064,7 +1063,7 @@ class ViewPermitController extends GetxController {
     for (var permit_issuer_list in _permitIssuerList) {
       permitIssuerList.add(permit_issuer_list);
     }
-      // supplierNameList = _supplierNameList;
+    // supplierNameList = _supplierNameList;
     // employeeNamepaginationController = PaginationController(
     //   rowCount: employeeNameList.length,
     //   rowsPerPage: 10,
@@ -1083,7 +1082,7 @@ class ViewPermitController extends GetxController {
     for (var permit_approver_list in _permitApproverList) {
       permitApproverList.add(permit_approver_list);
     }
-      // supplierNameList = _supplierNameList;
+    // supplierNameList = _supplierNameList;
     // employeeNamepaginationController = PaginationController(
     //   rowCount: employeeNameList.length,
     //   rowsPerPage: 10,
@@ -1102,7 +1101,7 @@ class ViewPermitController extends GetxController {
     for (var jobType_list in _jobTypeList) {
       jobTypeList.add(jobType_list);
     }
-      // supplierNameList = _supplierNameList;
+    // supplierNameList = _supplierNameList;
     // employeeNamepaginationController = PaginationController(
     //   rowCount: employeeNameList.length,
     //   rowsPerPage: 10,
@@ -1122,7 +1121,7 @@ class ViewPermitController extends GetxController {
     for (var sopPermit_list in _sopPermitList) {
       sopPermitList.add(sopPermit_list);
     }
-      // supplierNameList = _supplierNameList;
+    // supplierNameList = _supplierNameList;
     // employeeNamepaginationController = PaginationController(
     //   rowCount: employeeNameList.length,
     //   rowsPerPage: 10,

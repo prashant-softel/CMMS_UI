@@ -5,9 +5,11 @@ import 'package:cmms/app/home/home_controller.dart';
 import 'package:cmms/app/navigators/app_pages.dart';
 import 'package:cmms/app/utils/user_access_constants.dart';
 import 'package:cmms/domain/models/facility_model.dart';
+import 'package:cmms/domain/models/job_details_model.dart';
 import 'package:cmms/domain/models/new_permit_list_model.dart';
 import 'package:cmms/app/new_permit_list/new_permit_list_presenter.dart';
 import 'package:cmms/domain/models/permit_issue_model.dart';
+import 'package:cmms/domain/models/pm_task_view_list_model.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
@@ -42,6 +44,8 @@ class NewPermitListController extends GetxController {
   RxString ApprovedByNameFilterText = ''.obs;
   RxString CurrentStatusShortFilterText = ''.obs;
   RxString PtwStatusFilterText = ''.obs;
+  Rx<PmtaskViewModel?> pmtaskViewModel = PmtaskViewModel().obs;
+  Rx<JobDetailsModel?> jobDetailsModel = JobDetailsModel().obs;
 
   RxString ActionFilterText = ''.obs;
 
@@ -138,9 +142,9 @@ class NewPermitListController extends GetxController {
       });
     });
 
-    Future.delayed(Duration(seconds: 1), () {
-      getFacilityList(isLoading: true);
-    });
+    // Future.delayed(Duration(seconds: 1), () {
+    //   getFacilityList(isLoading: true);
+    // });
 
     super.onInit();
   }
@@ -254,98 +258,70 @@ class NewPermitListController extends GetxController {
     print('Cancel Button Data:${permitId}');
   }
 
-  // Future<void> permitCancelRequestButton({String? permitId}) async {
-  //   String _cancelComment = cancelCommentRequestTextFieldCtrlr.text.trim();
-
-  //   final _permitCancelRequestBtn =
-  //       await newPermitListPresenter.permitCancelRequestButton(
-  //     comment: _cancelComment,
-  //     id: permitId,
-  //   );
-  //   // showAlertPermitApproveDialog();
-  //   print('Cancel Request Button Data:${_cancelComment}');
-  //   print('Cancel Request Button Data:${permitId}');
-  // }
-
-  // Future<void> permitCancelByApproverButton(
-  //     {String? permitId, String? ptwStatus}) async {
-  //   String _cancelComment = cancelCommentByApproverTextFieldCtrlr.text.trim();
-
-  //   final _permitCancelByApproverBtn =
-  //       await newPermitListPresenter.permitCancelByApproverButton(
-  //           comment: _cancelComment, id: permitId, ptwStatus: ptwStatus);
-  //   // showAlertPermitApproveDialog();
-  //   print('Cancel Button By Approver Data:${_cancelComment}');
-  //   print('Cancel Button By Approver Data:${permitId}');
-  // }
-
-  // Future<void> permitExtendButton({String? permitId}) async {
-  //   String _reasonForExtensionComment =
-  //       extendReasonCommentTextFieldCtrlr.text.trim();
-  //   String _timeForExtensionComment = timeTextFieldCtrlr.text.trim();
-
-  //   final _permitextendBtn = await newPermitListPresenter.permitExtendButton(
-  //     comment: _reasonForExtensionComment,
-  //     Time: _timeForExtensionComment,
-  //     id: permitId,
-  //   );
-  //   // showAlertPermitApproveDialog();
-
-  //   print('Extend Button Data:${_reasonForExtensionComment}');
-  //   print('Extend Button Data:${_timeForExtensionComment}');
-  //   print('Extend Button Data:${permitId}');
-  // }
-
-  // Future<void> permitCloseButton({String? permitId}) async {
-  //   String _closeComment = closeCommentTextFieldCtrlr.text.trim();
-
-  //   final _permitCloseBtn = await newPermitListPresenter.permitCloseButton(
-  //     comment: _closeComment,
-  //     id: permitId,
-  //   );
-  //   // showAlertPermitApproveDialog();
-  //   print('Close Button Data:${_closeComment}');
-  //   print('Close Button Data:${permitId}');
-  // }
-
-  // Future<void> permitRejectButton({String? permitId}) async {
-  //   String _rejectComment = rejectCommentTextFieldCtrlr.text.trim();
-
-  //   final _permitRejectBtn = await newPermitListPresenter.permitRejectButton(
-  //     comment: _rejectComment,
-  //     id: permitId,
-  //   );
-  //   // showAlertPermitApproveDialog();
-  //   print('Reject Button Data:${_rejectComment}');
-  //   print('Reject Button Data:${permitId}');
-  // }
-
   Future<void> addNewPermitList({String? permitId}) async {
-    Get.toNamed(Routes.newPermit, arguments: permitId);
+    clearStoreData();
+    clearTypeStoreData();
+    clearisCheckedtoreData();
+    clearjobmodelValue();
+    clearpmTaskValue();
+    Get.toNamed(Routes.newPermit, arguments: {
+      'permitId': permitId,
+      'isChecked': false,
+      "jobModel": jobDetailsModel.value,
+      "pmTaskModel": pmtaskViewModel.value
+    });
   }
 
 // {'permitId':permitId}
   Future<void> editNewPermit({int? permitId, bool? isChecked}) async {
-    Get.toNamed(Routes.newPermit,
-        arguments: {'permitId': permitId, 'isChecked': isChecked});
-    print('PermitIdArgument:$permitId');
+    clearStoreData();
+    clearTypeStoreData();
+    clearisCheckedtoreData();
+    clearjobmodelValue();
+    clearpmTaskValue();
+    Get.toNamed(Routes.newPermit, arguments: {
+      'permitId': permitId,
+      'isChecked': isChecked,
+      "jobModel": jobDetailsModel.value,
+      "pmTaskModel": pmtaskViewModel.value
+    });
+    print('PermitIdArgument:$isChecked');
   }
 
   Future<void> viewNewPermitList({int? permitId}) async {
+    clearStoreData();
+    clearTypeStoreData();
+    clearisCheckedtoreData();
     Get.toNamed(Routes.viewPermitWebScreen,
         arguments: {"permitId": permitId, "types": 1});
   }
 
   Future<void> cancelPermitList({int? permitId}) async {
-    Get.toNamed(Routes.viewPermitWebScreen, arguments: {"permitId": permitId});
+    clearStoreData();
+    clearTypeStoreData();
+    clearisCheckedtoreData();
+    Get.toNamed(Routes.viewPermitWebScreen,
+        arguments: {"permitId": permitId, "types": 0});
   }
 
   Future<void> extendPermitList({int? permitId}) async {
-    Get.toNamed(Routes.viewPermitWebScreen, arguments: {"permitId": permitId});
+    clearStoreData();
+    clearTypeStoreData();
+    clearisCheckedtoreData();
+    clearjobmodelValue();
+    clearpmTaskValue();
+    Get.toNamed(Routes.viewPermitWebScreen,
+        arguments: {"permitId": permitId, "types": 0});
   }
 
   Future<void> closePermitRequestList({int? permitId}) async {
-    Get.toNamed(Routes.viewPermitWebScreen, arguments: {"permitId": permitId});
+    clearStoreData();
+    clearTypeStoreData();
+    clearisCheckedtoreData();
+    clearjobmodelValue();
+    clearpmTaskValue();
+    Get.toNamed(Routes.viewPermitWebScreen,
+        arguments: {"permitId": permitId, "types": 0});
   }
 
   void goToJobCardScreen(int? jobId) {
@@ -361,28 +337,23 @@ class NewPermitListController extends GetxController {
         false, false, false);
   }
 
-  //  Future<void> viewPermit({int? id}) async {
-  //   Get.toNamed(Routes.viewPermitWebScreen, arguments: id);
-  //   print('Argument$id');
-  // }
+  void clearStoreData() {
+    newPermitListPresenter.clearValue();
+  }
 
-  //  static void showAlertPermitIssueDialog({
-  //   String? comment,
-  //   int? employee_id,
-  //   int? id,
-  //   Function()? onPress,
-  // }) async {
-  //   await Get.dialog<void>(PermitMessageIssueDialog());
-  // }
+  void clearTypeStoreData() {
+    newPermitListPresenter.clearTypeValue();
+  }
 
-  // static void showAlertPermitApproveDialog({
-  //   String? comment,
-  //   int? employee_id,
-  //   int? id,
-  //   Function()? onPress,
-  // }) async {
-  //   await Get.dialog<void>(PermitMessageApproveDialog());
-  // }
+  void clearisCheckedtoreData() {
+    newPermitListPresenter.clearisCheckedValue();
+  }
 
-  ///
+  void clearjobmodelValue() {
+    newPermitListPresenter.clearjobmodelValue();
+  }
+
+  void clearpmTaskValue() {
+    newPermitListPresenter.clearpmTaskValue();
+  }
 }

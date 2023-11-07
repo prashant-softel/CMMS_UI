@@ -113,4 +113,14 @@ class PreventiveMaintenanceTaskViewPresenter {
   Future<String?> getValue() async =>
       await preventiveMaintenanceTaskViewUsecase.getValue();
   void clearValue() async => preventiveMaintenanceTaskViewUsecase.clearValue();
+  void clearStoreData() async =>
+      preventiveMaintenanceTaskViewUsecase.clearStoreData();
+  void clearTypeValue() async =>
+      preventiveMaintenanceTaskViewUsecase.clearTypeValue();
+  void clearisCheckedValue() async =>
+      preventiveMaintenanceTaskViewUsecase.clearisCheckedValue();
+  void clearjobmodelValue() async =>
+      preventiveMaintenanceTaskViewUsecase.clearjobmodelValue();
+  void clearpmTaskValue() async =>
+      preventiveMaintenanceTaskViewUsecase.clearpmTaskValue();
 }

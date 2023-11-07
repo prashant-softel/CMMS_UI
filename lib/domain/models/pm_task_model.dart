@@ -11,7 +11,7 @@ class PmTaskListModel {
   int? id;
   int? facility_id;
   String? task_code;
-  String? plan_title;
+  String? name;
   String? last_done_date;
   String? due_date;
   String? done_date;
@@ -39,7 +39,7 @@ class PmTaskListModel {
       this.last_done_date,
       this.permit_code,
       this.permit_id,
-      this.plan_title,
+      this.name,
       this.status,
       this.status_short,
       this.task_code});
@@ -61,7 +61,7 @@ class PmTaskListModel {
         frequency_name: json['frequency_name'] ?? '',
         id: json['id'] ?? 0,
         last_done_date: json['last_done_date'] ?? '',
-        plan_title: json['plan_title'] ?? '',
+        name: json['plan_title'] ?? '',
       );
 
   Map<String, dynamic> toJson() => {
@@ -76,7 +76,7 @@ class PmTaskListModel {
         "status": status,
         "status_short": status_short,
         "last_done_date": last_done_date,
-        "plan_title": plan_title,
+        "plan_title": name,
         "due_date": due_date,
         "done_date": done_date,
         "assigned_to_id": assigned_to_id,

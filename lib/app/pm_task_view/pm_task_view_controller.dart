@@ -9,6 +9,7 @@ import 'package:cmms/app/theme/dimens.dart';
 import 'package:cmms/app/utils/utility.dart';
 import 'package:cmms/domain/models/comment_model.dart';
 import 'package:cmms/domain/models/employee_model.dart';
+import 'package:cmms/domain/models/job_details_model.dart';
 import 'package:cmms/domain/models/mrs_list_by_jobId.dart';
 import 'package:cmms/domain/models/new_permit_list_model.dart';
 import 'package:cmms/domain/models/pm_task_view_list_model.dart';
@@ -61,6 +62,7 @@ class PreventiveMaintenanceTaskViewController extends GetxController {
   var dueToDateTimeCtrlr = TextEditingController();
   Rx<DateTime> selectedDueTime = DateTime.now().obs;
   TextEditingController commentCtrlr = TextEditingController();
+  Rx<JobDetailsModel?> jobDetailsModel = JobDetailsModel().obs;
 
   ///Assigned To
   RxList<EmployeeModel?> assignedToList = <EmployeeModel>[].obs;
@@ -398,8 +400,16 @@ class PreventiveMaintenanceTaskViewController extends GetxController {
   }
 
   createNewPermit() {
+    clearStoreData();
+    clearTypeStoreData();
+    clearisCheckedtoreData();
+    clearjobmodelValue();
+    clearpmTaskValue();
     Get.toNamed(Routes.newPermit, arguments: {
       "pmTaskModel": pmtaskViewModel.value,
+      "jobModel": jobDetailsModel.value,
+      "permitId": 0,
+      "isChecked": false,
       "isFromPmTaskDetails": true,
     });
   }
@@ -463,5 +473,25 @@ class PreventiveMaintenanceTaskViewController extends GetxController {
 
   void clearMrsStoreData() {
     preventiveMaintenanceTaskViewPresenter.clearValue();
+  }
+
+  void clearStoreData() {
+    preventiveMaintenanceTaskViewPresenter.clearStoreData();
+  }
+
+  void clearTypeStoreData() {
+    preventiveMaintenanceTaskViewPresenter.clearTypeValue();
+  }
+
+  void clearisCheckedtoreData() {
+    preventiveMaintenanceTaskViewPresenter.clearisCheckedValue();
+  }
+
+  void clearjobmodelValue() {
+    preventiveMaintenanceTaskViewPresenter.clearjobmodelValue();
+  }
+
+  void clearpmTaskValue() {
+    preventiveMaintenanceTaskViewPresenter.clearpmTaskValue();
   }
 }

@@ -83,4 +83,12 @@ class JobDetailsUsecase {
   Future<String?> getValue() async =>
       await repository.getStringValue(LocalKeys.jobId);
   void clearValue() async => repository.clearData(LocalKeys.jobCardId);
+  void clearMrsIdStoreData() async => repository.clearData(LocalKeys.mrsId);
+
+  void clearPermitStoreData() async => repository.clearData(LocalKeys.permitId);
+  void clearJobDetailStoreData() async =>
+      repository.clearData(LocalKeys.jobModel);
+  void clearTypeValue() async => repository.clearData(LocalKeys.types);
+  void clearisCheckedValue() async => repository.clearData(LocalKeys.isChecked);
+  void clearpmTaskValue() async => repository.clearData(LocalKeys.pmTaskModel);
 }

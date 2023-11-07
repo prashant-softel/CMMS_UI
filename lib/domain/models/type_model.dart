@@ -6,10 +6,10 @@
 // }
 
 class TypeModel {
-  final String? name;
+  final String name;
   final String? id;
 
-  TypeModel({this.name, this.id});
+  TypeModel({required this.name, this.id});
 
   TypeModel.fromJson(Map<String, dynamic> json)
       : name = json['name'],

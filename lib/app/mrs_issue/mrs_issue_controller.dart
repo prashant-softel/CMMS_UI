@@ -1,5 +1,6 @@
 import 'package:cmms/app/mrs_issue/mrs_issue_presenter.dart';
 import 'package:cmms/app/utils/utility.dart';
+import 'package:cmms/domain/models/issue_mrs_model.dart';
 import 'package:cmms/domain/models/mrs_detail_model.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
@@ -16,6 +17,7 @@ class MrsIssueController extends GetxController {
   final HomeController homecontroller = Get.find();
   Rx<int> mrsId = 0.obs;
   Rx<MrsDetailsModel?> mrsDetailsModel = MrsDetailsModel().obs;
+  RxList<CmmrsItems?> cmmrsItemsDetail = <CmmrsItems>[].obs;
   String whereUsedType = "";
   var commentCtrlr = TextEditingController();
 
@@ -56,6 +58,7 @@ class MrsIssueController extends GetxController {
 
     if (_mrsDetailsModel != null) {
       mrsDetailsModel.value = _mrsDetailsModel;
+      cmmrsItemsDetail.value = _mrsDetailsModel.cmmrsItems ?? [];
       // whereUsedType = mrsDetailsModel.value?.whereUsedType == 1 ? "JC" : "PM";
     }
     // print({"mrsdetailss", mrsDetailsModel});
@@ -64,19 +67,18 @@ class MrsIssueController extends GetxController {
   issueMrs() async {
     {
       String _comment = commentCtrlr.text.trim();
-
-      var issuetoJsonString = {
-        "ID": mrsId.value,
-        "issue_comment": _comment,
-        "cmmrsItems": [
-          {
-            "id": 298,
-            "issued_qty": 10
-            // "issue_remarks":"test item wise issue remark"
-          }
-        ]
-      };
-      // commentModel.toJson();
+      List<CmmrsItemsModel> cmmrsItems = <CmmrsItemsModel>[];
+      cmmrsItemsDetail.forEach((element) {
+        cmmrsItems.add(CmmrsItemsModel(
+            mrs_item_id: element?.id ?? 0,
+            material_id: element?.materialID ?? 0,
+            asset_item_ID: element?.asset_item_ID ?? 0,
+            issued_qty:
+                int.tryParse(element!.issued_qty_controller!.text) ?? 0));
+      });
+      IssueMrsModel issueMrs = IssueMrsModel(
+          issue_comment: _comment, ID: mrsId.value, cmmrsItems: cmmrsItems);
+      var issuetoJsonString = issueMrs.toJson();
       final response = await mrsIssuePresenter.issueMrs(
         issuetoJsonString: issuetoJsonString,
         isLoading: true,

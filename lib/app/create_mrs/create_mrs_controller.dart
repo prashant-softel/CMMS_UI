@@ -42,15 +42,11 @@ class CreateMrsController extends GetxController {
   ///
   @override
   void onInit() async {
-    //  whereUsedTypeId = Get.arguments["jcId"];
-//    print('JCId:$jcId');
-    // whereUsedTypeId = Get.arguments;
     try {
       final arguments = Get.arguments;
       if (arguments != null) {
         if (arguments.containsKey('whereUsedId')) {
           whereUsedTypeId.value = arguments['whereUsedId'];
-          print('PermitId:${whereUsedTypeId.value}');
         }
         if (arguments.containsKey('whereUsed')) {
           whereUsed.value = arguments['whereUsed'];

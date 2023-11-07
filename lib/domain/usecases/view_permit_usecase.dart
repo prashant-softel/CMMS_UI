@@ -138,7 +138,7 @@ class ViewPermitUsecase {
   //   );
   // }
 
-   Future<Map<String, dynamic>> permitRejectButton({
+  Future<Map<String, dynamic>> permitRejectButton({
     int? id,
     String? ptwStatus,
     int? jobId,
@@ -167,7 +167,7 @@ class ViewPermitUsecase {
   //   );
   // }
 
-   Future<Map<String, dynamic>> permitCancelByApproverButton({
+  Future<Map<String, dynamic>> permitCancelByApproverButton({
     String? ptwStatus,
     cancelByApproverJsonString,
     bool? isLoading,
@@ -177,7 +177,6 @@ class ViewPermitUsecase {
         cancelByApproverJsonString,
         isLoading,
       );
-
 
   // Future<void> permitCancelRejectButton({
   //   String? comment,
@@ -374,4 +373,12 @@ class ViewPermitUsecase {
     );
   }
 
+  void saveValue({String? permitId}) async =>
+      repository.saveValue(LocalKeys.permitId, permitId);
+  Future<String?> getValue() async =>
+      await repository.getStringValue(LocalKeys.permitId);
+  void saveJobIdValue({String? jobId}) async =>
+      repository.saveValue(LocalKeys.jobId, jobId);
+  Future<String?> getJobIdValue() async =>
+      await repository.getStringValue(LocalKeys.jobId);
 }
