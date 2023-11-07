@@ -965,7 +965,7 @@ class AddRowInGoodsOrder extends StatelessWidget {
                                 children: [
                                   DropdownWebStock(
                                     width: MediaQuery.of(context).size.width,
-                                    dropdownList: controller.assetList,
+                                    dropdownList: controller.goDetailsList,
                                     selectedValue: mapData["value"],
                                     onValueChanged: (list, selectedValue) {
                                       // print('paifcghb:${controller.assetList}');
@@ -983,21 +983,21 @@ class AddRowInGoodsOrder extends StatelessWidget {
                                     children: [
                                       Text("Assets Code :"),
                                       Text(
-                                          "${controller.dropdownMapperData[mapData['value']]?.asset_code ?? ''}")
+                                          "${controller.dropdownMapperData[mapData['value']]?.accepted_qty ?? ''}")
                                     ],
                                   ),
                                   Row(
                                     children: [
                                       Text("Assets type :"),
                                       Text(
-                                          "${controller.dropdownMapperData[mapData['value']]?.asset_type ?? ''}")
+                                          "${controller.dropdownMapperData[mapData['value']]?.accepted_qty ?? ''}")
                                     ],
                                   ),
                                   Row(
                                     children: [
                                       Text("Assets Category :"),
                                       Text(
-                                          "${controller.dropdownMapperData[mapData['value']]?.cat_name ?? ''}")
+                                          "${controller.dropdownMapperData[mapData['value']]?.accepted_qty ?? ''}")
                                     ],
                                   )
                                 ],

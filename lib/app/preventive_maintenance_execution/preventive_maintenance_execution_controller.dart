@@ -54,7 +54,6 @@ class PreventiveMaintenanceExecutionController extends GetxController {
       await setScheduleId();
       if (scheduleId != 0) {
         await getPmtaskViewList(scheduleId: scheduleId.value, isloading: true);
-        getMrsListByModuleTask(taskId: scheduleId.value);
 
         getHistory();
       }
@@ -68,9 +67,8 @@ class PreventiveMaintenanceExecutionController extends GetxController {
     rowItem.value.add([
       {"key": "Drop_down", "value": 'Please Select'},
       {'key': "Material_Type", "value": ''},
-      {'key': "Image", "value": ''},
-      {'key': "Available_Qty", "value": ''},
-      {'key': "Requested_Qty", "value": ''},
+      {'key': "Issued_Qty", "value": ''},
+      {'key': "Consumed_Qty", "value": ''},
     ]);
   }
 
@@ -86,6 +84,8 @@ class PreventiveMaintenanceExecutionController extends GetxController {
       for (var asset in _assetsList!) {
         cmmrsItems!.add(asset);
       }
+      print({"mrsit", listMrsByTaskId});
+      addRowItem();
     }
   }
 
@@ -142,11 +142,7 @@ class PreventiveMaintenanceExecutionController extends GetxController {
     if (_permitDetails != null) {
       pmtaskViewModel.value = _permitDetails;
       scheduleCheckPoints!.value = _permitDetails.schedules ?? [];
-      //   for (var checkpoint in scheduleCheckPoints!) {
-      //     for (var checkpoint2 in checkpoint!.checklist_observation ?? []) {
-      //       checklistObservations!.value.add(checkpoint2);
-      //     }
-      //   }
+      getMrsListByModuleTask(taskId: scheduleId ?? 0);
     }
     selectedasset.value = scheduleCheckPoints![0]?.name ?? "";
     update(["getPmtaskViewList"]);

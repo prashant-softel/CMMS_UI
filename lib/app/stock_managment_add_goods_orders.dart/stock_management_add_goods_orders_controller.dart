@@ -88,7 +88,9 @@ class StockManagementAddGoodsOrdersController extends GetxController {
 
   // Rx<List<List<Map<String, String>>>> rowItem = Rx<List<List<Map<String, String>>>>([]);
   final rowItem = Rx<List<List<Map<String, String>>>>([]);
-  Map<String, GetAssetDataModel> dropdownMapperData = {};
+  // Map<String, GetAssetDataModel> dropdownMapperData = {};
+  Map<String, GoDetails> dropdownMapperData = {};
+
   Map<String, PaiedModel> paiddropdownMapperData = {};
   RxList<GetPurchaseDetailsByIDModel?>? getPurchaseDetailsByIDModelList =
       <GetPurchaseDetailsByIDModel?>[].obs;
@@ -98,6 +100,7 @@ class StockManagementAddGoodsOrdersController extends GetxController {
       GetRODetailsByIDModel().obs;
   RxList<GetRODetailsByIDModel?>? getRoDetailsByIDModelList =
       <GetRODetailsByIDModel?>[].obs;
+  RxList<GoDetails?>? goDetailsList = <GoDetails?>[].obs;
   RxList<Items?>? goDetails = <Items?>[].obs;
 
 //all textfield tc
@@ -160,9 +163,6 @@ class StockManagementAddGoodsOrdersController extends GetxController {
       Future.delayed(Duration(seconds: 1), () {
         getUnitCurrencyList();
       });
-      Future.delayed(Duration(seconds: 1), () {
-        getRoDetailsByID(requestID: roId.value);
-      });
 
       Future.delayed(Duration(seconds: 1), () {
         updatePaidBy();
@@ -171,7 +171,7 @@ class StockManagementAddGoodsOrdersController extends GetxController {
         getBusinessList(4);
       });
       Future.delayed(Duration(seconds: 1), () {
-        getAssetList(facilityId);
+        //  getAssetList(facilityId);
 
         if (goId.value != 0) {
           Future.delayed(Duration(seconds: 1), () {
@@ -282,9 +282,9 @@ class StockManagementAddGoodsOrdersController extends GetxController {
           ],
         );
 
-        dropdownMapperData[element.assetItem_Name ?? ""] = assetList.firstWhere(
-            (e) => e?.name == element.assetItem_Name,
-            orElse: null)!;
+        dropdownMapperData[element.assetItem_Name ?? ""] = goDetailsList!
+            .firstWhere((e) => e?.name == element.assetItem_Name,
+                orElse: null)!;
       });
 
       challanDateTc.text =
@@ -359,6 +359,22 @@ class StockManagementAddGoodsOrdersController extends GetxController {
     addRowItem();
   }
 
+  Future<void> getRoDetailsByID({required int requestID}) async {
+    goDetailsList?.value = [];
+
+    final _getRoDetailsById = await stockManagementAddGoodsOrdersPresenter
+        .getRoDetailsByID(requestID: requestID);
+    // print('Edit goods order  Detail:$_getRoDetailsById');
+
+    if (_getRoDetailsById != null) {
+      var _godetail = _getRoDetailsById.request_order_items;
+      for (var asset in _godetail!) {
+        goDetailsList!.add(asset);
+      }
+    }
+    addRowItem();
+  }
+
   Future<void> updatePaidBy() async {
     paid.value = <PaiedModel>[];
     final _paid = await stockManagementAddGoodsOrdersPresenter.updatePaidBy(
@@ -413,6 +429,7 @@ class StockManagementAddGoodsOrdersController extends GetxController {
               goodsOrdersList.indexWhere((x) => x?.name == value);
           selectedReqOrderId =
               int.tryParse(goodsOrdersList[reqOrderIndex]?.name ?? "") ?? 0;
+          getRoDetailsByID(requestID: selectedReqOrderId);
         }
         break;
       case RxList<BusinessTypeModel>:
@@ -470,7 +487,7 @@ class StockManagementAddGoodsOrdersController extends GetxController {
           accepted_qty: 0,
           damaged_qty: 0,
           requested_qty: double.tryParse(element[2]["value"] ?? '0'),
-          assetMasterItemID: dropdownMapperData[element[0]["value"]]?.id,
+          assetMasterItemID: dropdownMapperData[element[0]["value"]]?.itemID,
           cost: double.tryParse(element[3]["value"] ?? '0'),
           ordered_qty: double.tryParse(element[4]["value"] ?? '0'),
           paid_by_ID: paiddropdownMapperData[element[1]["value"]]?.id);
@@ -585,35 +602,6 @@ class StockManagementAddGoodsOrdersController extends GetxController {
       // showAlertDialog();
     }
     print('update  Create GO  data: $createGoModelJsonString');
-  }
-
-  Future<void> getRoDetailsByID({required int requestID}) async {
-    getRoDetailsByIDModelList?.value = <GetRODetailsByIDModel>[];
-
-    final _getRoDetailsById = await stockManagementAddGoodsOrdersPresenter
-        .getRoDetailsByID(requestID: requestID);
-    // print('Edit goods order  Detail:$_getRoDetailsById');
-
-    if (_getRoDetailsById != null) {
-      getRoDetailsByIDModel.value = _getRoDetailsById;
-      getRoDetailsByIDModel.value = _getRoDetailsById;
-
-      print(
-          'Additioanl Email Employees${_getRoDetailsById.request_order_items?.length ?? 0}');
-      rowItem.value = [];
-      _getRoDetailsById.request_order_items?.forEach((element) {
-        rowItem.value.add([
-          {"key": "Drop_down", "value": '${element.asset_name}'},
-          // {'key': "Paid_By", "value": '${element.assetItem_Name}'},
-          {'key': "Cost", "value": '${element.cost}'},
-          {'key': "Order", "value": '${element.ordered_qty}'},
-          {'key': "Comment", "value": '${element.comment}'},
-        ]);
-        commentCtrlr.text = getRoDetailsByIDModel.value?.comment ?? "";
-        dropdownMapperData[element.asset_name ?? ""] = assetList
-            .firstWhere((e) => e?.name == element.asset_name, orElse: null)!;
-      });
-    }
   }
 
   Future<void> getRequestOrderList(int facilityId, dynamic startDate,
