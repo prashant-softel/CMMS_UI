@@ -3,7 +3,6 @@ import 'package:cmms/app/theme/dimens.dart';
 import 'package:cmms/app/widgets/custom_richtext.dart';
 import 'package:cmms/app/widgets/date_picker.dart';
 import 'package:cmms/app/widgets/dropdown_web.dart';
-import 'package:cmms/app/widgets/stock_dropdown.dart';
 import 'package:cmms/domain/models/%20%20transaction_report_list_model.dart';
 import 'package:data_table_2/data_table_2.dart';
 import 'package:flutter/material.dart';
@@ -13,7 +12,6 @@ import 'package:syncfusion_flutter_datepicker/datepicker.dart';
 
 import '../../theme/color_values.dart';
 import '../../theme/styles.dart';
-import '../../widgets/action_button.dart';
 
 import '../../widgets/table_action_button.dart';
 import '../transaction_report_list_controller.dart';
@@ -254,24 +252,71 @@ class _TransactionReportListWebState extends State<TransactionReportListWeb> {
                                         style: Styles.blackBold14,
                                       ),
                                       Dimens.boxWidth20,
-                                      Container(
-                                        width:
-                                            (MediaQuery.of(context).size.width *
-                                                .2),
-                                        child: DropdownWebWidget(
-                                          width: MediaQuery.of(context)
-                                                  .size
-                                                  .width *
-                                              2,
-                                          dropdownList: controller.pmTaskList,
-                                          isValueSelected:
-                                              controller.isSelectedpmtask.value,
-                                          selectedValue:
-                                              controller.selectedpmtask.value,
-                                          onValueChanged:
-                                              controller.onValueChanged,
-                                        ),
-                                      ),
+                                      controller.selectedactorTypeId == 3
+                                          ? Container(
+                                              width: (MediaQuery.of(context)
+                                                      .size
+                                                      .width *
+                                                  .2),
+                                              child: DropdownWebWidget(
+                                                width: MediaQuery.of(context)
+                                                        .size
+                                                        .width *
+                                                    2,
+                                                dropdownList:
+                                                    controller.pmTaskList,
+                                                isValueSelected: controller
+                                                    .isSelectedpmtask.value,
+                                                selectedValue: controller
+                                                    .selectedpmtask.value,
+                                                onValueChanged:
+                                                    controller.onValueChanged,
+                                              ),
+                                            )
+                                          : controller.selectedactorTypeId == 5
+                                              ? Container(
+                                                  width: (MediaQuery.of(context)
+                                                          .size
+                                                          .width *
+                                                      .2),
+                                                  child: DropdownWebWidget(
+                                                    width:
+                                                        MediaQuery.of(context)
+                                                                .size
+                                                                .width *
+                                                            2,
+                                                    dropdownList:
+                                                        controller.userList,
+                                                    isValueSelected: controller
+                                                        .isSelectedUser.value,
+                                                    selectedValue: controller
+                                                        .selectedUser.value,
+                                                    onValueChanged: controller
+                                                        .onValueChanged,
+                                                  ),
+                                                )
+                                              : Container(
+                                                  width: (MediaQuery.of(context)
+                                                          .size
+                                                          .width *
+                                                      .2),
+                                                  child: DropdownWebWidget(
+                                                    width:
+                                                        MediaQuery.of(context)
+                                                                .size
+                                                                .width *
+                                                            2,
+                                                    dropdownList: controller
+                                                        .facilityNameList,
+                                                    isValueSelected: controller
+                                                        .isSelectedfacility
+                                                        .value,
+                                                    selectedValue: controller
+                                                        .selectedfacility.value,
+                                                    onValueChanged: controller
+                                                        .onValueChanged,
+                                                  ),
+                                                ),
                                     ],
                                   ),
                                 ),
