@@ -7,6 +7,7 @@ import 'package:cmms/domain/models/get_asset_data_list_model.dart';
 import 'package:cmms/domain/models/get_purchase_details_model.dart';
 import 'package:cmms/domain/models/history_model.dart';
 import 'package:cmms/domain/models/paiyed_model.dart';
+import 'package:cmms/domain/models/request_order_list.model.dart';
 
 class StockManagementAddGoodsOrdersUsecase {
   final Repository _repository;
@@ -103,4 +104,17 @@ class StockManagementAddGoodsOrdersUsecase {
       _repository.saveValue(LocalKeys.goId, goId);
   Future<String?> getValue() async =>
       await _repository.getStringValue(LocalKeys.goId);
+  Future<List<GetRequestOrderListModel>> getRequestOrderList({
+    required bool isLoading,
+    required int? facility_id,
+    String? start_date,
+    required String end_date,
+  }) async {
+    return _repository.getRequestOrderList(
+      isLoading: isLoading,
+      facility_id: facility_id,
+      start_date: start_date,
+      end_date: end_date,
+    );
+  }
 }

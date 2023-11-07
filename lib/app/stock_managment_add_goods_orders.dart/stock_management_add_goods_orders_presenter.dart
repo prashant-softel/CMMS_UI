@@ -5,6 +5,7 @@ import 'package:cmms/domain/models/facility_model.dart';
 import 'package:cmms/domain/models/get_asset_data_list_model.dart';
 import 'package:cmms/domain/models/get_purchase_details_model.dart';
 import 'package:cmms/domain/models/history_model.dart';
+import 'package:cmms/domain/models/request_order_list.model.dart';
 
 import 'package:cmms/domain/usecases/stock_management_add_goods_orders_usecase.dart';
 
@@ -109,4 +110,17 @@ class StockManagementAddGoodsOrdersPresenter {
 
   Future<String?> getValue() async =>
       await stockManagementAddGoodsOrdersUsecase.getValue();
+  Future<List<GetRequestOrderListModel>> getRequestOrderList({
+    required bool isLoading,
+    required int? facility_id,
+    String? start_date,
+    required String end_date,
+  }) async {
+    return stockManagementAddGoodsOrdersUsecase.getRequestOrderList(
+      isLoading: isLoading,
+      facility_id: facility_id,
+      start_date: start_date,
+      end_date: end_date,
+    );
+  }
 }

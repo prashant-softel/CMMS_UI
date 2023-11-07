@@ -284,21 +284,53 @@ class _AddGoodsOrdersWebState extends State<AddGoodsOrdersWeb> {
                                                 ],
                                               ),
                                               Dimens.boxHeight5,
-                                              Row(children: [
-                                                CustomRichText(
-                                                    title: 'Amount : '),
-                                                Dimens.boxWidth10,
-                                                GoodsOrderTextField(
-                                                  keyboardType:
-                                                      TextInputType.number,
-                                                  inputFormatters: <TextInputFormatter>[
-                                                    FilteringTextInputFormatter
-                                                        .digitsOnly
-                                                  ],
-                                                  textController:
-                                                      controller.amountCtrlr,
-                                                ),
-                                              ]),
+                                              Row(
+                                                children: [
+                                                  CustomRichText(
+                                                      title: 'Amount : '),
+                                                  Dimens.boxWidth10,
+                                                  GoodsOrderTextField(
+                                                    keyboardType:
+                                                        TextInputType.number,
+                                                    inputFormatters: <TextInputFormatter>[
+                                                      FilteringTextInputFormatter
+                                                          .digitsOnly
+                                                    ],
+                                                    textController:
+                                                        controller.amountCtrlr,
+                                                  ),
+                                                ],
+                                              ),
+                                              Dimens.boxHeight5,
+                                              Row(
+                                                children: [
+                                                  CustomRichText(
+                                                      title: 'Req Order: '),
+                                                  Dimens.boxWidth10,
+                                                  SizedBox(
+                                                    child: Obx(
+                                                      () => DropdownWebStock(
+                                                        width: MediaQuery.of(
+                                                                    context)
+                                                                .size
+                                                                .width /
+                                                            5,
+                                                        dropdownList: controller
+                                                            .goodsOrdersList,
+                                                        isValueSelected: controller
+                                                            .isReqOrderSelected
+                                                            .value,
+                                                        selectedValue: controller
+                                                            .selectedReqOrder
+                                                            .value,
+                                                        onValueChanged:
+                                                            controller
+                                                                .onValueChanged,
+                                                      ),
+                                                    ),
+                                                  ),
+                                                ],
+                                              ),
                                             ],
                                           ),
                                           Spacer(),
@@ -416,7 +448,9 @@ class _AddGoodsOrdersWebState extends State<AddGoodsOrdersWeb> {
                                                   ),
                                                 ],
                                               ),
-                                              Dimens.boxHeight5,
+                                              SizedBox(
+                                                height: 6,
+                                              ),
                                               Row(
                                                 children: [
                                                   CustomRichText(
@@ -434,7 +468,9 @@ class _AddGoodsOrdersWebState extends State<AddGoodsOrdersWeb> {
                                                   ),
                                                 ],
                                               ),
-                                              Dimens.boxHeight5,
+                                              SizedBox(
+                                                height: 6,
+                                              ),
                                               Row(
                                                 children: [
                                                   CustomRichText(
@@ -452,7 +488,9 @@ class _AddGoodsOrdersWebState extends State<AddGoodsOrdersWeb> {
                                                   ),
                                                 ],
                                               ),
-                                              Dimens.boxHeight5,
+                                              SizedBox(
+                                                height: 6,
+                                              ),
                                               Row(
                                                 children: [
                                                   CustomRichText(
@@ -470,7 +508,9 @@ class _AddGoodsOrdersWebState extends State<AddGoodsOrdersWeb> {
                                                   ),
                                                 ],
                                               ),
-                                              Dimens.boxHeight5,
+                                              SizedBox(
+                                                height: 6,
+                                              ),
                                               Row(
                                                 children: [
                                                   Dimens.boxWidth10,
