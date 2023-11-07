@@ -2,6 +2,8 @@ import 'package:cmms/app/home/home_screen.dart';
 import 'package:cmms/app/theme/dimens.dart';
 import 'package:cmms/app/widgets/custom_richtext.dart';
 import 'package:cmms/app/widgets/date_picker.dart';
+import 'package:cmms/app/widgets/dropdown_web.dart';
+import 'package:cmms/app/widgets/stock_dropdown.dart';
 import 'package:cmms/domain/models/%20%20transaction_report_list_model.dart';
 import 'package:data_table_2/data_table_2.dart';
 import 'package:flutter/material.dart';
@@ -126,15 +128,6 @@ class _TransactionReportListWebState extends State<TransactionReportListWeb> {
                                           ),
                                         ],
                                       ),
-                                      ActionButton(
-                                        icon: Icons.add,
-                                        label: "Add New",
-                                        onPressed: () {
-                                          // Get.offNamed(Routes
-                                          //     .updateGoodsOrdersDetailsScreen);
-                                        },
-                                        color: ColorValues.addNewColor,
-                                      )
                                     ],
                                   ),
                                 ),
@@ -168,36 +161,34 @@ class _TransactionReportListWebState extends State<TransactionReportListWeb> {
                                           ),
                                         ),
                                       ),
-                                      itemBuilder: (BuildContext context) =>
-                                          <PopupMenuEntry<String>>[]..addAll(
-                                                controller.columnVisibility
-                                                    .value.entries
-                                                    .map((e) {
-                                              return PopupMenuItem<String>(
-                                                  child: ValueListenableBuilder(
-                                                      valueListenable:
-                                                          controller
-                                                              .columnVisibility,
-                                                      builder: (context, value,
-                                                          child) {
-                                                        return Row(
-                                                          children: [
-                                                            Checkbox(
-                                                              value:
-                                                                  value[e.key],
-                                                              onChanged:
-                                                                  (newValue) {
-                                                                controller
-                                                                    .setColumnVisibility(
-                                                                        e.key,
-                                                                        newValue!);
-                                                              },
-                                                            ),
-                                                            Text(e.key),
-                                                          ],
-                                                        );
-                                                      }));
-                                            })),
+                                      itemBuilder: (BuildContext context) => <
+                                          PopupMenuEntry<String>>[]..addAll(
+                                            controller
+                                                .columnVisibility.value.entries
+                                                .map((e) {
+                                          return PopupMenuItem<String>(
+                                              child: ValueListenableBuilder(
+                                                  valueListenable: controller
+                                                      .columnVisibility,
+                                                  builder:
+                                                      (context, value, child) {
+                                                    return Row(
+                                                      children: [
+                                                        Checkbox(
+                                                          value: value[e.key],
+                                                          onChanged:
+                                                              (newValue) {
+                                                            controller
+                                                                .setColumnVisibility(
+                                                                    e.key,
+                                                                    newValue!);
+                                                          },
+                                                        ),
+                                                        Text(e.key),
+                                                      ],
+                                                    );
+                                                  }));
+                                        })),
                                       onSelected: (String value) {
                                         // Handle column selection
                                       },
@@ -229,6 +220,60 @@ class _TransactionReportListWebState extends State<TransactionReportListWeb> {
                                       ),
                                     ),
                                   ],
+                                ),
+                                Container(
+                                  margin: EdgeInsets.all(20),
+                                  child: Row(
+                                    children: [
+                                      Text(
+                                        'Actor Type: ',
+                                        style: Styles.blackBold14,
+                                      ),
+                                      Dimens.boxWidth20,
+                                      Container(
+                                        width:
+                                            (MediaQuery.of(context).size.width *
+                                                .2),
+                                        child: DropdownWebWidget(
+                                          width: MediaQuery.of(context)
+                                                  .size
+                                                  .width *
+                                              2,
+                                          dropdownList: controller.actorType,
+                                          isValueSelected: controller
+                                              .isSelectedactorType.value,
+                                          selectedValue: controller
+                                              .selectedActorType.value,
+                                          onValueChanged:
+                                              controller.onValueChanged,
+                                        ),
+                                      ),
+                                      Spacer(),
+                                      Text(
+                                        'Actor ID: ',
+                                        style: Styles.blackBold14,
+                                      ),
+                                      Dimens.boxWidth20,
+                                      Container(
+                                        width:
+                                            (MediaQuery.of(context).size.width *
+                                                .2),
+                                        child: DropdownWebWidget(
+                                          width: MediaQuery.of(context)
+                                                  .size
+                                                  .width *
+                                              2,
+                                          dropdownList: controller.pmTaskList,
+                                          isValueSelected:
+                                              controller.isSelectedpmtask.value,
+                                          selectedValue:
+                                              controller.selectedpmtask.value,
+                                          onValueChanged:
+                                              controller.onValueChanged,
+                                        ),
+                                      ),
+                                    ],
+                                  ),
                                 ),
                                 SizedBox(
                                   height: 20,
@@ -447,12 +492,10 @@ class TransactionReportListDataSource extends DataTableSource {
         transactionReportListDetails?.fromActorID ?? 0;
     var cellsBuffer = [
       "id",
-      '${transactionReportListDetails?.fromActorID ?? ''}',
       '${transactionReportListDetails?.fromActorType ?? ''}',
       '${transactionReportListDetails?.fromActorName ?? ''}',
       '${transactionReportListDetails?.toActorType ?? ''}',
       '${transactionReportListDetails?.toActorName ?? ''}',
-      '${transactionReportListDetails?.assetItemID ?? ''}',
       '${transactionReportListDetails?.assetItemName ?? ''}',
       '${transactionReportListDetails?.qty ?? ''}',
       '${transactionReportListDetails?.lastUpdated ?? ''}',
@@ -488,24 +531,24 @@ class TransactionReportListDataSource extends DataTableSource {
                       Text(
                         ' TR ${transactionReportListDetails?.fromActorID}',
                       ),
-                      Dimens.boxHeight10,
-                      Align(
-                        alignment: Alignment.centerRight,
-                        child: Container(
-                          padding: Dimens.edgeInsets8_2_8_2,
-                          decoration: BoxDecoration(
-                            color: ColorValues.addNewColor,
-                            borderRadius: BorderRadius.circular(4),
-                          ),
-                          child: Text(
-                            "status_short",
-                            // '${transactionReportListDetails?.status_short}',
-                            style: Styles.white10.copyWith(
-                              color: Colors.white,
-                            ),
-                          ),
-                        ),
-                      ),
+                      // Dimens.boxHeight10,
+                      // Align(
+                      //   alignment: Alignment.centerRight,
+                      //   child: Container(
+                      //     padding: Dimens.edgeInsets8_2_8_2,
+                      //     decoration: BoxDecoration(
+                      //       color: ColorValues.addNewColor,
+                      //       borderRadius: BorderRadius.circular(4),
+                      //     ),
+                      //     child: Text(
+                      //       "status_short",
+                      //       // '${transactionReportListDetails?.status_short}',
+                      //       style: Styles.white10.copyWith(
+                      //         color: Colors.white,
+                      //       ),
+                      //     ),
+                      //   ),
+                      // ),
                     ],
                   )
                 : (value == 'Actions')

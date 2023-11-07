@@ -1,3 +1,8 @@
+import 'package:cmms/domain/models/business_list_model.dart';
+import 'package:cmms/domain/models/facility_model.dart';
+import 'package:cmms/domain/models/inventory_model.dart';
+import 'package:cmms/domain/models/job_card_model.dart';
+import 'package:cmms/domain/models/pm_task_model.dart';
 
 import '../../domain/models/  transaction_report_list_model.dart';
 import '../../domain/models/user_list_model.dart';
@@ -32,4 +37,43 @@ class TransactionReportListPresenter {
       actorType: actorType,
     );
   }
+
+  Future<List<FacilityModel?>?> getFacilityList({
+    required bool isLoading,
+  }) async {
+    return transactionReportListUsecase.getFacilityList(
+      isLoading: isLoading,
+    );
+  }
+
+  Future<List<PmTaskListModel?>?> getPmTaskList(
+          {int? facilityId,
+          bool? isLoading,
+          dynamic endDate,
+          dynamic startDate}) async =>
+      await transactionReportListUsecase.getPmTaskList(
+          facilityId: facilityId ?? 0,
+          isLoading: isLoading ?? false,
+          endDate: endDate,
+          startDate: startDate);
+  Future<List<JobCardModel?>?> jobCardList({
+    int? facilityId,
+    bool? isLoading,
+  }) async =>
+      await transactionReportListUsecase.jobCardList(
+        facilityId: facilityId ?? 0,
+        isLoading: isLoading ?? false,
+      );
+  Future<List<InventoryModel?>?> inventoryList({
+    required bool isLoading,
+    int? facilityId,
+  }) async {
+    return transactionReportListUsecase.inventoryList(
+      isLoading: isLoading,
+      facilityId: facilityId,
+    );
+  }
+
+  Future<List<BusinessListModel?>?> getBusinessList() async =>
+      await transactionReportListUsecase.getBusinessList();
 }

@@ -11,8 +11,13 @@ abstract class LocalKeys {
   static const goId = 'goId';
   static const goType = 'goType';
   static const roType = 'roType';
+  static const types = 'types';
 
   static const roId = 'roId';
+  static const permitId = 'permitId';
+  static const isChecked = 'isChecked';
+  static const jobModel = 'jobModel';
+  static const pmTaskModel = 'pmTaskModel';
 
   static const selectFacalityDropdowndata = 'selectFacalityDropdowndata';
   static const pmTaskId = 'pmTaskId';

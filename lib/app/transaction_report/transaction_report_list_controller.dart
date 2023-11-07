@@ -3,6 +3,13 @@ import 'dart:async';
 import 'package:cmms/app/home/home_controller.dart';
 import 'package:cmms/app/transaction_report/transaction_report_list_presenter.dart';
 import 'package:cmms/domain/models/%20%20transaction_report_list_model.dart';
+import 'package:cmms/domain/models/business_list_model.dart';
+import 'package:cmms/domain/models/facility_model.dart';
+import 'package:cmms/domain/models/inventory_model.dart';
+import 'package:cmms/domain/models/job_card_model.dart';
+import 'package:cmms/domain/models/pm_task_model.dart';
+import 'package:cmms/domain/models/type_model.dart';
+import 'package:cmms/domain/models/user_list_model.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
@@ -38,8 +45,20 @@ class TransactionReportListController extends GetxController {
   );
   StreamSubscription<int>? facilityIdStreamSubscription;
   int facilityId = 0;
-
+  RxList<JobCardModel?> jobList = <JobCardModel?>[].obs;
+  RxList<BusinessListModel?>? businessNameList = <BusinessListModel?>[].obs;
   Rx<int> fromActorID = 0.obs;
+  RxList<TypeModel> actorType = <TypeModel>[
+    TypeModel(name: 'Vendor', id: "1"),
+    TypeModel(name: 'Store', id: "2"),
+    TypeModel(name: 'Task', id: "3"),
+    TypeModel(name: 'JobCard', id: "4"),
+    TypeModel(name: 'Engineer', id: "5"),
+    TypeModel(name: 'Inventory', id: "6"),
+  ].obs;
+  Rx<bool> isSelectedactorType = true.obs;
+  int selectedactorTypeId = 0;
+  Rx<String> selectedActorType = ''.obs;
 
   RxString fromActorIDFilterText = ''.obs;
   RxString fromActorTypeFilterText = ''.obs;
@@ -52,8 +71,15 @@ class TransactionReportListController extends GetxController {
   RxString statusFilterText = ''.obs;
 
   RxString vendorFilterText = ''.obs;
+  RxList<InventoryModel?> inventoryNameList = <InventoryModel>[].obs;
 
   RxString userDateFilterText = ''.obs;
+  RxList<PmTaskListModel?> pmTaskList = <PmTaskListModel?>[].obs;
+  Rx<bool> isSelectedpmtask = true.obs;
+  int selectedpmtaskId = 0;
+  Rx<String> selectedpmtask = ''.obs;
+  RxList<FacilityModel?> facilityNameList = <FacilityModel>[].obs;
+  RxList<UserListModel?> userList = <UserListModel?>[].obs;
 
   final columnVisibility = ValueNotifier<Map<String, bool>>({
     "From Actor ID": true,
@@ -71,7 +97,7 @@ class TransactionReportListController extends GetxController {
   final Map<String, double> columnwidth = {
     "From Actor ID": 153,
     "From Actor Type": 220,
-    "From Actor Name": 120,
+    "From Actor Name": 200,
     "To Actor Type": 200,
     "To Actor Name": 223,
     "Asset Item Name": 153,
@@ -89,6 +115,9 @@ class TransactionReportListController extends GetxController {
 
   @override
   void onInit() async {
+    selectedActorType.value = actorType[2].name;
+    selectedactorTypeId = int.tryParse(actorType[2].id ?? "") ?? 0;
+
     this.filterText = {
       "From Actor ID": fromActorIDFilterText,
       "From Actor Type": fromActorTypeFilterText,
@@ -102,14 +131,11 @@ class TransactionReportListController extends GetxController {
     };
     facilityIdStreamSubscription = homecontroller.facilityId$.listen((event) {
       facilityId = event;
-      Future.delayed(Duration(seconds: 2), () async {
-        await transactionReport(
-            facilityId: facilityId,
-            startDate: formattedTodate1,
-            // actorType: actorType,
-            actorID: facilityId,
-            endDate: formattedFromdate1,
-            isLoading: false);
+      Future.delayed(Duration(seconds: 1), () async {
+        if (selectedactorTypeId == 3) {
+          getPmTaskList(
+              facilityId, formattedTodate1, formattedFromdate1, false);
+        }
       });
     });
     super.onInit();
@@ -128,6 +154,31 @@ class TransactionReportListController extends GetxController {
     update(['stock_Mangement_Date']);
   }
 
+  Future<void> getPmTaskList(int facilityId, dynamic startDate, dynamic endDate,
+      bool isLoading) async {
+    pmTaskList.value = <PmTaskListModel>[];
+    // pmTaskList?.clear();
+    final _pmTaskList = await transactionReportListPresenter.getPmTaskList(
+        facilityId: facilityId,
+        isLoading: isLoading,
+        startDate: startDate,
+        endDate: endDate);
+    if (_pmTaskList != null) {
+      for (var taskName in _pmTaskList) {
+        pmTaskList.add(taskName);
+      }
+      selectedpmtaskId = pmTaskList[0]!.id ?? 0;
+      selectedpmtask.value = pmTaskList[0]!.name ?? "";
+      transactionReport(
+          facilityId: facilityId,
+          startDate: formattedTodate1,
+          actorType: selectedactorTypeId,
+          actorID: selectedpmtaskId,
+          endDate: formattedFromdate1,
+          isLoading: false);
+    }
+  }
+
   Future<void> transactionReport(
       {int? facilityId,
       dynamic startDate,
@@ -142,27 +193,96 @@ class TransactionReportListController extends GetxController {
       start_date: startDate,
       end_date: endDate,
       actorID: actorID,
-      actorType: actorType,
+      actorType: 3,
       facility_id: facilityId,
     );
     transactionReportList.value = _goodsordersList;
-    paginationController = PaginationController(
-      rowCount: transactionReportList.length,
-      rowsPerPage: 10,
-    );
+  }
 
-    if (transactionReportList.isNotEmpty) {
-      transactionReportListModel = transactionReportList[0];
-      var newPermitListJson = transactionReportListModel?.toJson();
-      transactionReportListTableColumns.value = <String>[];
-      for (var key in newPermitListJson?.keys.toList() ?? []) {
-        transactionReportListTableColumns.add(key);
+  void onValueChanged(dynamic list, dynamic value) {
+    switch (list.runtimeType) {
+      case RxList<TypeModel>:
+        {
+          int userIndex = actorType.indexWhere((x) => x.name == value);
+          selectedactorTypeId =
+              int.tryParse(actorType[userIndex].id ?? "") ?? 0;
+          selectedActorType.value = actorType[userIndex].name;
+          if (selectedactorTypeId == 3) {
+            getPmTaskList(
+                facilityId, formattedTodate1, formattedFromdate1, false);
+          } else if (selectedactorTypeId == 2) {
+            getFacilityList();
+          } else if (selectedactorTypeId == 4) {
+            jobCardList(facilityId, true);
+          } else if (selectedactorTypeId == 5) {
+            getUserList(facilityId, true);
+          } else if (selectedactorTypeId == 6) {
+            inventoryList(facilityId: facilityId);
+          } else if (selectedactorTypeId == 1) {
+            getBusinessList();
+          }
+        }
+        break;
+      case RxList<PmTaskListModel?>:
+        {
+          int pmtaskIndex = pmTaskList.indexWhere((x) => x!.name == value);
+          selectedpmtaskId = pmTaskList[pmtaskIndex]!.id ?? 0;
+          selectedpmtask.value = value;
+          transactionReport(
+              facilityId: facilityId,
+              startDate: formattedTodate1,
+              actorType: selectedactorTypeId,
+              actorID: selectedpmtaskId,
+              endDate: formattedFromdate1,
+              isLoading: false);
+        }
+        break;
+      default:
+        {
+          //statements;
+        }
+        break;
+    }
+  }
+
+  Future<void> inventoryList({int? facilityId}) async {
+    inventoryNameList.value = <InventoryModel>[];
+
+    final _equipmentNameList =
+        await transactionReportListPresenter.inventoryList(
+      isLoading: true,
+      facilityId: facilityId,
+    );
+    if (_equipmentNameList != null) {
+      for (var equipmentName in _equipmentNameList) {
+        inventoryNameList.add(equipmentName);
       }
     }
   }
 
-  void onValueChanged(dynamic list, dynamic value) {
-    switch (list.runtimeType) {}
+  Future<void> getBusinessList() async {
+    businessNameList?.value = <BusinessListModel>[];
+    final _businessNameList =
+        await transactionReportListPresenter.getBusinessList();
+
+    if (_businessNameList != null) {
+      businessNameList!.value = _businessNameList;
+
+      for (var businessName in _businessNameList) {
+        businessNameList?.add(businessName);
+      }
+    }
+  }
+
+  Future<void> getUserList(int facilityId, bool isLoading) async {
+    userList.value = <UserListModel>[];
+    final list = await transactionReportListPresenter.getUserList(
+        facilityId: facilityId, isLoading: isLoading);
+    if (list != null) {
+      for (var _userList in list) {
+        userList.add(_userList);
+      }
+    }
   }
 
   void getTransactionListByDate() {
@@ -173,5 +293,30 @@ class TransactionReportListController extends GetxController {
         actorID: facilityId,
         endDate: formattedFromdate1,
         isLoading: false);
+  }
+
+  Future<void> getFacilityList() async {
+    facilityNameList.value = <FacilityModel>[];
+    final _facilityNameList =
+        await transactionReportListPresenter.getFacilityList(
+      isLoading: true,
+      // categoryIds: categoryIds,
+    );
+    for (var facility_list in _facilityNameList!) {
+      facilityNameList.add(facility_list);
+    }
+
+    update(['permit_facility_list']);
+  }
+
+  Future<void> jobCardList(int facilityId, bool isLoading) async {
+    jobList.value = <JobCardModel>[];
+    final _jobList = await transactionReportListPresenter.jobCardList(
+        facilityId: facilityId, isLoading: isLoading);
+
+    for (var job_list in _jobList!) {
+      jobList.add(job_list);
+    }
+    update(['job_list']);
   }
 }

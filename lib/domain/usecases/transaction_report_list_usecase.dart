@@ -1,7 +1,12 @@
-import 'package:cmms/domain/domain.dart';
-import 'package:cmms/domain/models/%20%20transaction_report_list_model.dart';
+import 'package:cmms/domain/models/business_list_model.dart';
+import 'package:cmms/domain/models/facility_model.dart';
+import 'package:cmms/domain/models/job_card_model.dart';
+import 'package:cmms/domain/models/pm_task_model.dart';
 import 'package:cmms/domain/models/user_list_model.dart';
+import 'package:cmms/domain/models/inventory_model.dart';
+import 'package:cmms/domain/repositories/repository.dart';
 
+import '../models/  transaction_report_list_model.dart';
 
 class TransactionReportListUsecase {
   Repository repository;
@@ -34,4 +39,39 @@ class TransactionReportListUsecase {
       actorType: actorType,
     );
   }
+
+  Future<List<FacilityModel?>?> getFacilityList({
+    required bool isLoading,
+  }) async {
+    return repository.getFacilityList(isLoading);
+  }
+
+  Future<List<PmTaskListModel?>?> getPmTaskList(
+          {int? facilityId,
+          bool? isLoading,
+          dynamic endDate,
+          dynamic startDate}) async =>
+      await repository.getPmTaskList(facilityId, isLoading, startDate, endDate);
+  Future<List<JobCardModel?>?> jobCardList({
+    int? facilityId,
+    bool? isLoading,
+  }) async =>
+      await repository.jobCardList(
+        facilityId,
+        isLoading,
+      );
+  Future<List<InventoryModel?>?> inventoryList({
+    required bool isLoading,
+    int? facilityId,
+  }) async {
+    return repository.inventoryList(
+      isLoading: isLoading,
+      facilityId: facilityId,
+    );
+  }
+
+  Future<List<BusinessListModel?>?> getBusinessList() async =>
+      await repository.getBusinessList(
+        isLoading: true,
+      );
 }

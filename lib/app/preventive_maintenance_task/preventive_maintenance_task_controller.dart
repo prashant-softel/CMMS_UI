@@ -140,20 +140,6 @@ class PreventiveMaintenanceTaskController extends GetxController {
     if (_pmTaskList != null) {
       pmTaskList.value = _pmTaskList;
       filteredData.value = pmTaskList.value;
-
-      paginationController = PaginationController(
-        rowCount: filteredData.length,
-        rowsPerPage: 10,
-      );
-
-      if (filteredData.isNotEmpty) {
-        pmTaskListModel = filteredData[0];
-        var calibrationListJson = pmTaskListModel?.toJson();
-        pmTaskListTableColumns.value = <String>[];
-        for (var key in calibrationListJson?.keys.toList() ?? []) {
-          pmTaskListTableColumns.add(key);
-        }
-      }
     }
   }
 

@@ -5520,7 +5520,7 @@ class ConnectHelper {
     required issuetoJsonString,
   }) async {
     var responseModel = await apiWrapper.makeRequest(
-      'MRS/CreateMRSIssue',
+      'MRS/MRSIssue',
       Request.post,
       issuetoJsonString,
       isLoading ?? false,
@@ -5625,6 +5625,7 @@ class ConnectHelper {
   }) async {
     var responseModel = await apiWrapper.makeRequest(
       //  'PMScheduleView/SetPMTask?schedule_id=$scheduleId',
+
       'PMScheduleView/StartPMTask?task_id=$scheduleId',
       Request.post,
       null,

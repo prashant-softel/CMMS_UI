@@ -29,7 +29,6 @@ class NewPermitListPresenter {
         non_expired: non_expired,
         start_date: start_date,
         end_date: end_date,
-        
       );
 
   Future<void> permitIssueButton({
@@ -67,78 +66,10 @@ class NewPermitListPresenter {
         isLoading: isLoading ?? false,
       );
 
-  // Future<void> permitCancelRequestButton({
-  //   String? comment,
-  //   String? id,
-  //   bool? isLoading,
-  // }) async =>
-  //     await newPermitListUsecase.permitCancelRequestButton(
-  //       comment: comment,
-  //       id: id,
-  //       isLoading: isLoading ?? false,
-  //     );
-
-  // Future<void> permitCancelByApproverButton({
-  //   String? comment,
-  //   String? id,
-  //   String? ptwStatus,
-  //   bool? isLoading,
-  // }) async =>
-  //     await newPermitListUsecase.permitCancelByApproverButton(
-  //       comment: comment,
-  //       id: id,
-  //       ptwStatus: ptwStatus,
-  //       isLoading: isLoading ?? false,
-  //     );
-
-  // Future<void> permitExtendButton({
-  //   String? comment,
-  //   String? Time,
-  //   String? id,
-  //   bool? isLoading,
-  // }) async =>
-  //     await newPermitListUsecase.permitExtendButton(
-  //       comment: comment,
-  //       Time: Time,
-  //       id: id,
-  //       isLoading: isLoading ?? false,
-  //     );
-
-  // Future<void> permitCloseButton({
-  //   String? comment,
-  //   String? id,
-  //   bool? isLoading,
-  // }) async =>
-  //     await newPermitListUsecase.permitCloseButton(
-  //       comment: comment,
-  //       id: id,
-  //       isLoading: isLoading ?? false,
-  //     );
-
-  // Future<void> permitRejectButton({
-  //   String? comment,
-  //   String? id,
-  //   bool? isLoading,
-  // }) async =>
-  //     await newPermitListUsecase.permitRejectButton(
-  //       comment: comment,
-  //       id: id,
-  //       isLoading: isLoading ?? false,
-  //     );
-
-  // Future<List<NewPermitListModel>>getNewPermitList({
-  //   required bool isLoading,
-  //   required int? facilityId,
-  //   required int? userId,
-  //   // int? blockId,
-  //   // required String categoryIds,
-  // }) async {
-  //   return newPermitListUsecase.getNewPermitList(
-  //     isLoading: isLoading,
-  //     facilityId: facilityId,
-  //     userId: 33,
-  //     // blockId: blockId,
-  //     // categoryIds: categoryIds,
-  //   );
-  // }
+  void clearValue() async => newPermitListUsecase.clearValue();
+  void clearTypeValue() async => newPermitListUsecase.clearTypeValue();
+  void clearisCheckedValue() async =>
+      newPermitListUsecase.clearisCheckedValue();
+  void clearjobmodelValue() async => newPermitListUsecase.clearjobmodelValue();
+  void clearpmTaskValue() async => newPermitListUsecase.clearpmTaskValue();
 }

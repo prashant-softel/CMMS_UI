@@ -1,5 +1,6 @@
 import 'package:cmms/domain/models/facility_model.dart';
 import 'package:cmms/domain/models/new_permit_list_model.dart';
+import 'package:cmms/domain/repositories/local_storage_keys.dart';
 import 'package:cmms/domain/repositories/repository.dart';
 
 class NewPermitListUsecase {
@@ -21,15 +22,8 @@ class NewPermitListUsecase {
     String? start_date,
     required String end_date,
   }) async =>
-      await repository.getNewPermitList(
-        auth,
-        facilityId,
-        isLoading,
-        self_view,
-        non_expired,
-        start_date,
-        end_date
-      );
+      await repository.getNewPermitList(auth, facilityId, isLoading, self_view,
+          non_expired, start_date, end_date);
 
   Future<void> permitIssueButton({
     String? comment,
@@ -57,8 +51,7 @@ class NewPermitListUsecase {
   //   );
   // }
 
-
-   Future<void> permitCancelByIssuerButton({
+  Future<void> permitCancelByIssuerButton({
     String? comment,
     String? id,
     bool? isLoading,
@@ -70,84 +63,9 @@ class NewPermitListUsecase {
     );
   }
 
-  //  Future<void> permitCancelRequestButton({
-  //   String? comment,
-  //   String? id,
-  //   bool? isLoading,
-  // }) async {
-  //   await repository.permitCancelRequestButton(
-  //     comment,
-  //     id,
-  //     isLoading,
-  //   );
-  // }
-
-  // Future<void> permitCancelByApproverButton({
-  //   String? comment,
-  //   String? id,
-  //   String? ptwStatus,
-  //   bool? isLoading,
-  // }) async {
-  //   await repository.permitCancelByApproverButton(
-  //     comment,
-  //     id,
-  //     ptwStatus,
-  //     isLoading,
-  //   );
-  // }
-
-  //  Future<void> permitExtendButton({
-  //   String? comment,
-  //   String? Time,
-  //   String? id,
-  //   bool? isLoading,
-  // }) async {
-  //   await repository.permitExtendButton(
-  //     comment,
-  //     Time,
-  //     id,
-  //     isLoading,
-  //   );
-  // }
-
-  // Future<void> permitCloseButton({
-  //   String? comment,
-  //   String? id,
-  //   bool? isLoading,
-  // }) async {
-  //   await repository.permitCloseButton(
-  //     comment,
-  //     id,
-  //     isLoading,
-  //   );
-  // }
-
-
-  //  Future<void> permitRejectButton({
-  //   String? comment,
-  //   String? id,
-  //   bool? isLoading,
-  // }) async {
-  //   await repository.permitRejectButton(
-  //     comment,
-  //     id,
-  //     isLoading,
-  //   );
-  // }
-
-  // Future<List<NewPermitListModel>> getNewPermitList({
-  //   required bool isLoading,
-  //   required int? facilityId,
-  //   required int? userId,
-  //   // int? blockId,
-  //   // required String categoryIds,
-  // }) async {
-  //   return repository.getNewPermitList(
-  //     isLoading: isLoading,
-  //     facilityId: facilityId,
-  //     userId: 33
-  //     // blockId: blockId,
-  //     // categoryIds: categoryIds,
-  //   );
-  // }
+  void clearValue() async => repository.clearData(LocalKeys.permitId);
+  void clearTypeValue() async => repository.clearData(LocalKeys.types);
+  void clearisCheckedValue() async => repository.clearData(LocalKeys.isChecked);
+  void clearjobmodelValue() async => repository.clearData(LocalKeys.jobModel);
+  void clearpmTaskValue() async => repository.clearData(LocalKeys.pmTaskModel);
 }

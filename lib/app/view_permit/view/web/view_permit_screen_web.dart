@@ -3960,7 +3960,7 @@ class ViewPermitWebScreen extends GetView<ViewPermitController> {
                                 .viewPermitDetailsModel.value?.permitNo,
                             ptwStatus:
                                 '${controller.viewPermitDetailsModel.value?.ptwStatus}',
-                            jobId: controller.jobId,
+                            jobId: controller.jobId.value,
                           ));
                         },
                       ))
@@ -4082,7 +4082,7 @@ class ViewPermitWebScreen extends GetView<ViewPermitController> {
                                 .viewPermitDetailsModel.value?.permitNo,
                             ptwStatus:
                                 '${controller.viewPermitDetailsModel.value?.ptwStatus}',
-                            jobId: controller.jobId,
+                            jobId: controller.jobId.value,
                           ));
                         },
                       ))

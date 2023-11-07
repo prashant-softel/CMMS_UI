@@ -1339,7 +1339,7 @@ class Repository {
 //   }
 
   Future<List<BusinessListModel>> getBusinessList({
-    required int? businessType,
+    int? businessType,
     // int? blockId,
     // required String categoryIds,
     int? blockId,

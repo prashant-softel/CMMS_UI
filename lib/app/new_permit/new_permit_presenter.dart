@@ -188,7 +188,7 @@ class NewPermitPresenter {
     );
   }
 
-   Future<List<HistoryModel>?> getPermitHistory(
+  Future<List<HistoryModel>?> getPermitHistory(
     moduleType,
     permitId,
     isLoading,
@@ -198,7 +198,6 @@ class NewPermitPresenter {
         permitId: permitId,
         isLoading: isLoading,
       );
-
 
   Future<bool> browseFiles(Uint8List? fileBytes, String fileName,
       int importType, bool isLoading, int facilityId) async {
@@ -269,4 +268,27 @@ class NewPermitPresenter {
         jobId: jobId,
         isLoading: isLoading,
       );
+  void saveValue({String? permitId}) async {
+    return newPermitUsecase.saveValue(permitId: permitId);
+  }
+
+  Future<String?> getValue() async => await newPermitUsecase.getValue();
+  void saveisCheckedValue({bool? isChecked}) async {
+    return newPermitUsecase.saveisCheckedValue(isChecked: isChecked);
+  }
+
+  Future<bool?> getisCheckedValue() async =>
+      await newPermitUsecase.getisCheckedValue();
+  void saveJobModelValue({String? jobModel}) async {
+    return newPermitUsecase.saveJobModelValue(jobModel: jobModel);
+  }
+
+  Future<String> getJobModelValue() async =>
+      await newPermitUsecase.getJobModelValue();
+  void savePmTaskModelValue({String? pmtaskModel}) async {
+    return newPermitUsecase.savePmTaskModelValue(pmtaskModel: pmtaskModel);
+  }
+
+  Future<String> getPmtaskModelValue() async =>
+      await newPermitUsecase.getPmTaskModelValue();
 }

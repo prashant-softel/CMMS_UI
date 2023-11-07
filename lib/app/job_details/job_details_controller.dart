@@ -1,6 +1,7 @@
 import 'package:cmms/app/constant/constant.dart';
 import 'package:cmms/app/facility/facility_presenter.dart';
 import 'package:cmms/domain/models/mrs_list_by_jobId.dart';
+import 'package:cmms/domain/models/pm_task_view_list_model.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 
@@ -65,6 +66,7 @@ class JobDetailsController extends GetxController {
   var breakdownTime;
   var facilityId = 0;
   Rx<int> jobCardId = 0.obs;
+  Rx<PmtaskViewModel?> pmtaskViewModel = PmtaskViewModel().obs;
 
   ///
   // @override
@@ -244,9 +246,17 @@ class JobDetailsController extends GetxController {
   }
 
   createNewPermit() {
+    clearJobDetailStoreData();
+    clearTypeStoreData();
+    clearisCheckedtoreData();
+    clearpmTaskValue();
+    clearPermitStoreData();
     Get.toNamed(Routes.newPermit, arguments: {
       "jobModel": jobDetailsModel.value,
+      "permitId": 0,
+      "isChecked": false,
       "isFromJobDetails": true,
+      "pmTaskModel": pmtaskViewModel.value
     });
   }
 
@@ -322,5 +332,29 @@ class JobDetailsController extends GetxController {
   ///
   void clearStoreData() {
     jobDetailsPresenter.clearValue();
+  }
+
+  void clearMrsIdStoreData() {
+    jobDetailsPresenter.clearMrsIdStoreData();
+  }
+
+  void clearPermitStoreData() {
+    jobDetailsPresenter.clearPermitStoreData();
+  }
+
+  void clearJobDetailStoreData() {
+    jobDetailsPresenter.clearJobDetailStoreData();
+  }
+
+  void clearTypeStoreData() {
+    jobDetailsPresenter.clearTypeValue();
+  }
+
+  void clearisCheckedtoreData() {
+    jobDetailsPresenter.clearisCheckedValue();
+  }
+
+  void clearpmTaskValue() {
+    jobDetailsPresenter.clearpmTaskValue();
   }
 }

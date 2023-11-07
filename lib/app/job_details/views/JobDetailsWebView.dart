@@ -533,7 +533,7 @@ class JobDetailsWebView extends GetView<JobDetailsController> {
                                                                         .tryParse(
                                                                             "$jobCardId")
                                                                   });
-                                                                                                                        }),
+                                                            }),
                                                         varUserAccessModel.value
                                                                     .access_list!
                                                                     .where((e) =>
@@ -554,6 +554,8 @@ class JobDetailsWebView extends GetView<JobDetailsController> {
                                                                 message:
                                                                     "View Permit",
                                                                 onPress: () {
+                                                                  controller
+                                                                      .clearPermitStoreData();
                                                                   controller.viewNewPermitList(
                                                                       permitId:
                                                                           controller.jobAssociatedModelsList?[index]?.permitId ??
@@ -769,13 +771,8 @@ class JobDetailsWebView extends GetView<JobDetailsController> {
                                                                 .remove_red_eye,
                                                             message: "View MRS",
                                                             onPress: () {
-                                                              final _flutterSecureStorage =
-                                                                  const FlutterSecureStorage();
-
-                                                              _flutterSecureStorage
-                                                                  .delete(
-                                                                      key:
-                                                                          "mrsId");
+                                                              controller
+                                                                  .clearMrsIdStoreData();
                                                               String mrsId = controller
                                                                       .listMrsByJobId?[
                                                                           index]
@@ -793,7 +790,7 @@ class JobDetailsWebView extends GetView<JobDetailsController> {
                                                                         .tryParse(
                                                                             "$mrsId")
                                                                   });
-                                                                                                                        }),
+                                                            }),
                                                         TableActionButton(
                                                             color: ColorValues
                                                                 .editColor,
@@ -824,7 +821,7 @@ class JobDetailsWebView extends GetView<JobDetailsController> {
                                                                         .tryParse(
                                                                             "$mrsId")
                                                                   });
-                                                                                                                        })
+                                                            })
                                                       ],
                                                     )),
                                                   ]),

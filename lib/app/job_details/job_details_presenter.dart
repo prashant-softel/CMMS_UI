@@ -83,4 +83,12 @@ class JobDetailsPresenter {
 
   Future<String?> getValue() async => await jobDetailsUsecase.getValue();
   void clearValue() async => jobDetailsUsecase.clearValue();
+  void clearMrsIdStoreData() async => jobDetailsUsecase.clearMrsIdStoreData();
+
+  void clearPermitStoreData() async => jobDetailsUsecase.clearPermitStoreData();
+  void clearJobDetailStoreData() async =>
+      jobDetailsUsecase.clearJobDetailStoreData();
+  void clearTypeValue() async => jobDetailsUsecase.clearTypeValue();
+  void clearisCheckedValue() async => jobDetailsUsecase.clearisCheckedValue();
+  void clearpmTaskValue() async => jobDetailsUsecase.clearpmTaskValue();
 }

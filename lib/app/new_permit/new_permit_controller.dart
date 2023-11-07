@@ -134,7 +134,6 @@ class NewPermitController extends GetxController {
   //Permit History
   RxList<HistoryModel?>? historyList = <HistoryModel?>[].obs;
 
-
   // create permit
   Rx<bool> isFormInvalid = false.obs;
   int selectedFacility_id = 0;
@@ -169,8 +168,6 @@ class NewPermitController extends GetxController {
 //For date Time
   var dateTimeCtrlr = TextEditingController();
   Rx<DateTime> selectedDateTime = DateTime.now().obs;
-
-
 
   var permitDescriptionCtrlr = TextEditingController();
   var titleTextCtrlr = TextEditingController();
@@ -251,9 +248,9 @@ class NewPermitController extends GetxController {
 
   //
   RxList<EmployeeListModel?> employeeNameList = <EmployeeListModel>[].obs;
-   Rx<bool> isemployeeNameListSelected = true.obs;
+  Rx<bool> isemployeeNameListSelected = true.obs;
   Rx<String> selectedEmployeeNamesList = ''.obs;
-  
+
   RxList<EmployeeListModel?> filteredEmployeeNameList =
       <EmployeeListModel>[].obs;
 
@@ -366,7 +363,7 @@ class NewPermitController extends GetxController {
   int userId = varUserAccessModel.value.user_id ?? 0;
   bool isFromJobDetails = false;
   Rx<int> permitId = 0.obs;
-  bool isChecked = false;
+  Rx<bool> isChecked = false.obs;
   JobDetailsModel? jobModel;
   PmtaskViewModel? pmtaskViewModel;
   int? jcId = 0;
@@ -380,32 +377,34 @@ class NewPermitController extends GetxController {
   @override
   void onInit() async {
     // jcId = Get.arguments["jcId"];
-    print('JobCardId:$jcId');
+    // print('JobCardId:$jcId');
     try {
-      final arguments = Get.arguments;
-      if (arguments != null) {
-        if (arguments.containsKey('permitId')) {
-          permitId.value = arguments['permitId'];
-          print('PermitId:${permitId.value}');
-        }
-        if (arguments.containsKey('isChecked')) {
-          isChecked = arguments['isChecked'];
-        }
-        print('Edit Data:${isChecked}');
+      await setId();
 
-        if (arguments.containsKey('jobModel')) {
-          jobModel = arguments['jobModel'];
-        }
-        if (arguments.containsKey('pmTaskModel')) {
-          pmtaskViewModel = arguments['pmTaskModel'];
-          if (pmtaskViewModel != null) {
-            loadPermitDetailsWithTask(pmtaskViewModel);
-          }
-        }
-        if (jobModel != null) {
-          loadPermitDetails(jobModel);
-        }
-      }
+      // final arguments = Get.arguments;
+      // if (arguments != null) {
+      //   if (arguments.containsKey('permitId')) {
+      //     permitId.value = arguments['permitId'];
+      //     print('PermitId:${permitId.value}');
+      //   }
+      //   if (arguments.containsKey('isChecked')) {
+      //     isChecked.value = arguments['isChecked'];
+      //   }
+      //   print('Edit Data:${isChecked}');
+
+      //   if (arguments.containsKey('jobModel')) {
+      //     jobModel = arguments['jobModel'];
+      //   }
+      //   if (arguments.containsKey('pmTaskModel')) {
+      //     pmtaskViewModel = arguments['pmTaskModel'];
+      //     if (pmtaskViewModel != null) {
+      //       loadPermitDetailsWithTask(pmtaskViewModel);
+      //     }
+      //   }
+      //   if (jobModel != null) {
+      //     loadPermitDetails(jobModel);
+      //   }
+      // }
 
       //homePresenter.generateToken();
       //  Future.delayed(Duration(seconds: 1), () {
@@ -418,20 +417,23 @@ class NewPermitController extends GetxController {
         Future.delayed(Duration(seconds: 1), () {
           getTypePermitList(facilityId);
         });
+        getInventoryCategoryList();
+        getInventoryIsolationList();
+        getAssignedToList();
+        getFacilityLists();
+        getInventoryDetailList();
+        getEmployeePermitList();
+        getJobTypePermitList();
+        if (jobModel != null) {
+          loadPermitDetails(jobModel);
+        }
       });
 
       if (permitId.value > 0) {
         await getNewPermitDetail(intPermitId: permitId.value);
+        await getPermitHistory(permitId: permitId.value);
       }
 
-      await getInventoryCategoryList();
-      await getInventoryIsolationList();
-      await getAssignedToList();
-      await getFacilityLists();
-      await getInventoryDetailList();
-      await getEmployeePermitList();
-      await getJobTypePermitList();
-      await getPermitHistory(permitId: permitId.value);
       // await getPermitIssuerList();
       // await getPermitApproverList();
     } catch (e) {
@@ -439,6 +441,55 @@ class NewPermitController extends GetxController {
     }
 
     super.onInit();
+  }
+
+  Future<void> setId() async {
+    try {
+      var jobDetail;
+      var pmdetail;
+
+      final _permitId = await permitPresenter.getValue();
+      final _isChecked = await permitPresenter.getisCheckedValue();
+      final _pmTaskModel = await permitPresenter.getPmtaskModelValue();
+      final _jobModel = await permitPresenter.getJobModelValue();
+
+      if (_jobModel.isNotEmpty) {
+        final jobdetaildata = jsonDecode(_jobModel);
+        jobDetail = JobDetailsModel.fromJson(jobdetaildata);
+      }
+      if (_pmTaskModel.isNotEmpty) {
+        final pmtaskdata = jsonDecode(_pmTaskModel);
+        pmdetail = PmtaskViewModel.fromJson(pmtaskdata);
+      }
+      if (_permitId == null || _permitId == "" || _permitId == "null") {
+        var dataFromPreviousScreen = Get.arguments;
+
+        permitId.value = dataFromPreviousScreen['permitId'];
+        isChecked.value = dataFromPreviousScreen['isChecked'];
+        jobModel = dataFromPreviousScreen['jobModel'];
+        pmtaskViewModel = dataFromPreviousScreen['pmTaskModel'];
+
+        permitPresenter.saveValue(permitId: permitId.value.toString());
+        permitPresenter.savePmTaskModelValue(
+            pmtaskModel: pmtaskViewModel.toString());
+        permitPresenter.saveJobModelValue(jobModel: jobModel.toString());
+
+        permitPresenter.saveisCheckedValue(isChecked: isChecked.value);
+      } else {
+        permitId.value = int.tryParse(_permitId) ?? 0;
+        if (jobDetail != null) {
+          jobModel = jobDetail;
+        }
+        if (pmdetail != null) {
+          pmtaskViewModel = pmdetail;
+        }
+        isChecked.value = _isChecked ?? false;
+        // print({"permit11", permitId});
+        // print({"isChecked", isChecked});
+      }
+    } catch (e) {
+      print({"error on permit", e});
+    }
   }
 
   Future<void> createJobCard() async {
@@ -504,10 +555,10 @@ class NewPermitController extends GetxController {
       listEmployee?.value = newPermitDetailsModel.value?.employee_list ?? [];
       // safetyList?.value =
       //     newPermitDetailsModel.value?.safety_question_list ?? [];
-      if(selectedPermitTypeId != 0){
+      if (selectedPermitTypeId != 0) {
         getSafetyMeasureList();
       }
-      
+
       selectedJobType.value = newPermitDetailsModel.value?.job_type_name ?? "";
       selectedSopPermit.value =
           newPermitDetailsModel.value?.sop_type_name ?? '';
@@ -619,7 +670,6 @@ class NewPermitController extends GetxController {
         [];
     update(["historyList"]);
   }
-
 
   void removeRow({required int id}) {
     employeeNameList.removeWhere((element) => element?.id == id);
@@ -1454,12 +1504,12 @@ class NewPermitController extends GetxController {
           Loto_list: loto_map_list,
           employee_list: employee_map_list,
           safety_question_list: safety_measure_map_list,
-          resubmit: isChecked);
+          resubmit: isChecked.value);
       var jobJsonString = updatePermitModel.toJson();
       Map<String, dynamic>? responseUpdatePermit =
           await permitPresenter.updateNewPermit(
         newPermit: jobJsonString,
-        resubmit: isChecked,
+        resubmit: isChecked.value,
         isLoading: true,
       );
       if (responseUpdatePermit != null) {

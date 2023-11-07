@@ -187,7 +187,7 @@ class NewPermitUsecase {
         isLoading,
       );
 
-   Future<List<HistoryModel>?> getPermitHistory({
+  Future<List<HistoryModel>?> getPermitHistory({
     moduleType,
     permitId,
     bool? isLoading,
@@ -252,4 +252,20 @@ class NewPermitUsecase {
         jobId,
         isLoading,
       );
+  void saveValue({String? permitId}) async =>
+      repository.saveValue(LocalKeys.permitId, permitId);
+  Future<String?> getValue() async =>
+      await repository.getStringValue(LocalKeys.permitId);
+  void saveisCheckedValue({bool? isChecked}) async =>
+      repository.saveValue(LocalKeys.isChecked, isChecked);
+  Future<bool?> getisCheckedValue() async =>
+      await repository.getBoolValue(LocalKeys.isChecked);
+  void saveJobModelValue({String? jobModel}) async =>
+      repository.saveValue(LocalKeys.jobModel, jobModel);
+  Future<String> getJobModelValue() async =>
+      await repository.getStringValue(LocalKeys.jobModel);
+  void savePmTaskModelValue({String? pmtaskModel}) async =>
+      repository.saveValue(LocalKeys.pmTaskModel, pmtaskModel);
+  Future<String> getPmTaskModelValue() async =>
+      await repository.getStringValue(LocalKeys.pmTaskModel);
 }

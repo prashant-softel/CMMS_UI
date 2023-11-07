@@ -89,7 +89,7 @@ class EmployeeStockReportController extends GetxController {
         {
           int userIndex = userList.indexWhere((x) => x?.name == value);
           selectedUserId = userList[userIndex]?.id ?? 0;
-          selectedUser.value = userList[0]?.name ?? '';
+          selectedUser.value = userList[userIndex]?.name ?? '';
 
           getEmployeeStockReportList(facilityId, selectedUserId,
               formattedTodate1, formattedFromdate1, false);

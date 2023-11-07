@@ -75,7 +75,7 @@ class _NewPermitListWebState extends State<NewPermitListWeb> {
                             child: Text(" / BREAKDOWN MAINTAINANCE",
                                 style: Styles.greyMediumLight12),
                           ),
-                          Text(" / NEW PERMIT LIST",
+                          Text(" / NEW PERMIT LIST11",
                               style: Styles.greyMediumLight12),
                         ],
                       ),
@@ -145,6 +145,11 @@ class _NewPermitListWebState extends State<NewPermitListWeb> {
                                                   icon: Icons.add,
                                                   label: "Add New",
                                                   onPressed: () {
+                                                    controller.clearStoreData();
+                                                    controller
+                                                        .clearTypeStoreData();
+                                                    controller
+                                                        .clearisCheckedtoreData();
                                                     Get.toNamed(
                                                         Routes.newPermit);
                                                   },
@@ -605,9 +610,8 @@ class PermitListDataSource extends DataTableSource {
                                                 (e) =>
                                                     "${e?.permitId}" ==
                                                     "${PermitDetails?.permitId}",
-                                                orElse: () =>
-                                                    NewPermitModel(
-                                                        permitId: 000),
+                                                orElse: () => NewPermitModel(
+                                                    permitId: 000),
                                               )
                                               ?.ptwStatus ==
                                           PermitStatusConstants.PTW_CLOSED
@@ -617,8 +621,7 @@ class PermitListDataSource extends DataTableSource {
                                       message: 'View Permit',
                                       onPress: () {
                                         controller.viewNewPermitList(
-                                            permitId:
-                                                PermitDetails?.permitId);
+                                            permitId: PermitDetails?.permitId);
                                       },
                                     )
                                   : Container(),
@@ -643,8 +646,7 @@ class PermitListDataSource extends DataTableSource {
                                                             permitId: 000),
                                                   )
                                                   ?.ptwStatus ==
-                                              PermitStatusConstants
-                                                  .PTW_CREATED
+                                              PermitStatusConstants.PTW_CREATED
                                           //121
                                           // AppConstants.kPermitStatusCreated ///121
                                           &&
@@ -681,8 +683,7 @@ class PermitListDataSource extends DataTableSource {
                                           : "Approve/Reject Extend",
                                       onPress: () {
                                         controller.viewNewPermitList(
-                                            permitId:
-                                                PermitDetails?.permitId);
+                                            permitId: PermitDetails?.permitId);
                                       },
                                     )
                                   : Dimens.box0,
@@ -703,9 +704,8 @@ class PermitListDataSource extends DataTableSource {
                                                 (e) =>
                                                     "${e?.permitId}" ==
                                                     "${PermitDetails?.permitId}",
-                                                orElse: () =>
-                                                    NewPermitModel(
-                                                        permitId: 000),
+                                                orElse: () => NewPermitModel(
+                                                    permitId: 000),
                                               )
                                               ?.ptwStatus ==
                                           PermitStatusConstants
@@ -728,8 +728,7 @@ class PermitListDataSource extends DataTableSource {
                                       message: 'Edit Permit',
                                       onPress: () {
                                         controller.editNewPermit(
-                                            permitId:
-                                                PermitDetails?.permitId,
+                                            permitId: PermitDetails?.permitId,
                                             isChecked:
                                                 controller.isChecked.value);
                                         print(
@@ -742,9 +741,8 @@ class PermitListDataSource extends DataTableSource {
                                                 (e) =>
                                                     "${e?.permitId}" ==
                                                     "${PermitDetails?.permitId}",
-                                                orElse: () =>
-                                                    NewPermitModel(
-                                                        permitId: 000),
+                                                orElse: () => NewPermitModel(
+                                                    permitId: 000),
                                               )
                                               ?.ptwStatus ==
                                           PermitStatusConstants
@@ -762,14 +760,12 @@ class PermitListDataSource extends DataTableSource {
                                               .length >
                                           0
                                   ? TableActionButton(
-                                      color:
-                                          Color.fromARGB(255, 116, 78, 130),
+                                      color: Color.fromARGB(255, 116, 78, 130),
                                       icon: Icons.ads_click,
                                       message: 'Re-Submit Permit',
                                       onPress: () {
                                         controller.editNewPermit(
-                                            permitId:
-                                                PermitDetails?.permitId,
+                                            permitId: PermitDetails?.permitId,
                                             isChecked:
                                                 controller.isChecked.value);
                                         print(
@@ -847,8 +843,7 @@ class PermitListDataSource extends DataTableSource {
                                         //     permitId: PermitDetails?.permitId
                                         //         .toString()));
                                         controller.extendPermitList(
-                                            permitId:
-                                                PermitDetails?.permitId);
+                                            permitId: PermitDetails?.permitId);
                                       },
                                     )
                                   : Container(),
@@ -884,9 +879,8 @@ class PermitListDataSource extends DataTableSource {
                                                 (e) =>
                                                     "${e?.permitId}" ==
                                                     "${PermitDetails?.permitId}",
-                                                orElse: () =>
-                                                    NewPermitModel(
-                                                        permitId: 000),
+                                                orElse: () => NewPermitModel(
+                                                    permitId: 000),
                                               )
                                               ?.ptwStatus ==
                                           PermitStatusConstants
@@ -900,8 +894,7 @@ class PermitListDataSource extends DataTableSource {
                                         //     permitId: PermitDetails?.permitId
                                         //         .toString()));
                                         controller.closePermitRequestList(
-                                            permitId:
-                                                PermitDetails?.permitId);
+                                            permitId: PermitDetails?.permitId);
                                       },
                                     )
                                   : Container(),
@@ -933,9 +926,8 @@ class PermitListDataSource extends DataTableSource {
                                                 (e) =>
                                                     "${e?.permitId}" ==
                                                     "${PermitDetails?.permitId}",
-                                                orElse: () =>
-                                                    NewPermitModel(
-                                                        permitId: 000),
+                                                orElse: () => NewPermitModel(
+                                                    permitId: 000),
                                               )
                                               ?.ptwStatus ==
                                           PermitStatusConstants
@@ -946,9 +938,8 @@ class PermitListDataSource extends DataTableSource {
                                                 (e) =>
                                                     "${e?.permitId}" ==
                                                     "${PermitDetails?.permitId}",
-                                                orElse: () =>
-                                                    NewPermitModel(
-                                                        permitId: 000),
+                                                orElse: () => NewPermitModel(
+                                                    permitId: 000),
                                               )
                                               ?.ptwStatus ==
                                           PermitStatusConstants
@@ -959,9 +950,8 @@ class PermitListDataSource extends DataTableSource {
                                                 (e) =>
                                                     "${e?.permitId}" ==
                                                     "${PermitDetails?.permitId}",
-                                                orElse: () =>
-                                                    NewPermitModel(
-                                                        permitId: 000),
+                                                orElse: () => NewPermitModel(
+                                                    permitId: 000),
                                               )
                                               ?.ptwStatus ==
                                           PermitStatusConstants
@@ -971,9 +961,8 @@ class PermitListDataSource extends DataTableSource {
                                                 (e) =>
                                                     "${e?.permitId}" ==
                                                     "${PermitDetails?.permitId}",
-                                                orElse: () =>
-                                                    NewPermitModel(
-                                                        permitId: 000),
+                                                orElse: () => NewPermitModel(
+                                                    permitId: 000),
                                               )
                                               ?.ptwStatus ==
                                           PermitStatusConstants
@@ -984,8 +973,7 @@ class PermitListDataSource extends DataTableSource {
                                       message: 'Cancel Permit',
                                       onPress: () {
                                         controller.cancelPermitList(
-                                            permitId:
-                                                PermitDetails?.permitId);
+                                            permitId: PermitDetails?.permitId);
                                         // Get.dialog(PermitCancelReQuestDialog(
                                         //     permitId: PermitDetails?.permitId
                                         //         .toString()));
@@ -1008,22 +996,19 @@ class PermitListDataSource extends DataTableSource {
                                                 (e) =>
                                                     "${e?.permitId}" ==
                                                     "${PermitDetails?.permitId}",
-                                                orElse: () =>
-                                                    NewPermitModel(
-                                                        permitId: 000),
+                                                orElse: () => NewPermitModel(
+                                                    permitId: 000),
                                               )
                                               ?.ptwStatus ==
                                           PermitStatusConstants
                                               .PTW_CANCEL_REQUESTED //130
                                   ? TableActionButton(
-                                      color:
-                                          Color.fromARGB(255, 113, 15, 149),
+                                      color: Color.fromARGB(255, 113, 15, 149),
                                       icon: Icons.approval_rounded,
                                       message: ' Approve Cancel',
                                       onPress: () {
                                         controller.viewNewPermitList(
-                                            permitId:
-                                                PermitDetails?.permitId);
+                                            permitId: PermitDetails?.permitId);
                                       },
                                     )
                                   : Dimens.box0

@@ -417,7 +417,7 @@ class PmTaskDataSource extends DataTableSource {
               .toString()
               .toLowerCase()
               .contains(controller.idFilterText.value.toLowerCase()) &&
-          (pmTask?.plan_title ?? '')
+          (pmTask?.name ?? '')
               .toLowerCase()
               .contains(controller.titleFilterText.value.toLowerCase()) &&
           (pmTask?.last_done_date ?? '').toString().toLowerCase().contains(
@@ -452,7 +452,7 @@ class PmTaskDataSource extends DataTableSource {
     controller.pmTaskId.value = pmTaskDetails?.id ?? 0;
     var cellsBuffer = [
       "pmTaskId", // '${pmTaskDetails?.id ?? ''}',
-      '${pmTaskDetails?.plan_title ?? ''}',
+      '${pmTaskDetails?.name ?? ''}',
       '${pmTaskDetails?.last_done_date ?? ''}',
       '${pmTaskDetails?.due_date ?? ''}',
       '${pmTaskDetails?.done_date ?? ''}',
