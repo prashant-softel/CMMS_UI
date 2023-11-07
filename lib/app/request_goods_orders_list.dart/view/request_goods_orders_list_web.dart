@@ -454,7 +454,7 @@ class GoodsOrderListDataSource extends DataTableSource {
   void filtersGoodsOrder() {
     filteredGoodsOrderList = <GetRequestOrderListModel?>[];
     filteredGoodsOrderList = controller.goodsOrdersList.where((GoodsOrderList) {
-      return (GoodsOrderList.request_order_id ?? '')
+      return (GoodsOrderList.name ?? '')
               .toString()
               .contains(controller.orderIdFilterText.value.toLowerCase()) &&
           (GoodsOrderList.generatedBy ?? '')
@@ -481,7 +481,7 @@ class GoodsOrderListDataSource extends DataTableSource {
     final GoodsOrderListDetails = filteredGoodsOrderList[index];
 
     controller.GoodsOrderId.value =
-        GoodsOrderListDetails?.request_order_id ?? 0;
+        int.tryParse(GoodsOrderListDetails?.name ?? "") ?? 0;
     var cellsBuffer = [
       "request_order_id",
       '${GoodsOrderListDetails?.generatedBy ?? ''}',
@@ -518,7 +518,7 @@ class GoodsOrderListDataSource extends DataTableSource {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Text(
-                        ' RO ${GoodsOrderListDetails?.request_order_id}',
+                        ' RO ${GoodsOrderListDetails?.name}',
                       ),
                       Dimens.boxHeight10,
                       Align(
@@ -529,12 +529,11 @@ class GoodsOrderListDataSource extends DataTableSource {
                             color: controller.goodsOrdersList
                                         .firstWhere(
                                           (e) =>
-                                              e.request_order_id ==
-                                              GoodsOrderListDetails!
-                                                  .request_order_id,
+                                              e.name ==
+                                              GoodsOrderListDetails!.name,
                                           orElse: () =>
                                               GetRequestOrderListModel(
-                                                  request_order_id: 00),
+                                                  name: ""),
                                         )
                                         .status ==
                                     342
@@ -542,12 +541,11 @@ class GoodsOrderListDataSource extends DataTableSource {
                                 : controller.goodsOrdersList
                                             .firstWhere(
                                               (e) =>
-                                                  e.request_order_id ==
-                                                  GoodsOrderListDetails!
-                                                      .request_order_id,
+                                                  e.name ==
+                                                  GoodsOrderListDetails!.name,
                                               orElse: () =>
                                                   GetRequestOrderListModel(
-                                                      request_order_id: 00),
+                                                      name: ""),
                                             )
                                             .status ==
                                         343
@@ -555,12 +553,12 @@ class GoodsOrderListDataSource extends DataTableSource {
                                     : controller.goodsOrdersList
                                                 .firstWhere(
                                                   (e) =>
-                                                      e.request_order_id ==
+                                                      e.name ==
                                                       GoodsOrderListDetails!
-                                                          .request_order_id,
+                                                          .name,
                                                   orElse: () =>
                                                       GetRequestOrderListModel(
-                                                          request_order_id: 00),
+                                                          name: ""),
                                                 )
                                                 .status ==
                                             345
@@ -568,13 +566,12 @@ class GoodsOrderListDataSource extends DataTableSource {
                                         : controller.goodsOrdersList
                                                     .firstWhere(
                                                       (e) =>
-                                                          e.request_order_id ==
+                                                          e.name ==
                                                           GoodsOrderListDetails!
-                                                              .request_order_id,
+                                                              .name,
                                                       orElse: () =>
                                                           GetRequestOrderListModel(
-                                                              request_order_id:
-                                                                  00),
+                                                              name: ""),
                                                     )
                                                     .status ==
                                                 341
@@ -582,13 +579,12 @@ class GoodsOrderListDataSource extends DataTableSource {
                                             : controller.goodsOrdersList
                                                         .firstWhere(
                                                           (e) =>
-                                                              e.request_order_id ==
+                                                              e.name ==
                                                               GoodsOrderListDetails!
-                                                                  .request_order_id,
+                                                                  .name,
                                                           orElse: () =>
                                                               GetRequestOrderListModel(
-                                                                  request_order_id:
-                                                                      00),
+                                                                  name: ""),
                                                         )
                                                         .status ==
                                                     301
@@ -614,8 +610,9 @@ class GoodsOrderListDataSource extends DataTableSource {
                           message: 'view',
                           onPress: () {
                             controller.clearStoreData();
-                            int roId =
-                                GoodsOrderListDetails?.request_order_id ?? 0;
+                            int roId = int.tryParse(
+                                    GoodsOrderListDetails?.name ?? "") ??
+                                0;
                             if (roId != 0) {
                               Get.toNamed(Routes.purchaseGoodsorderView,
                                   arguments: {'roId': roId, "roType": 1});
@@ -632,12 +629,11 @@ class GoodsOrderListDataSource extends DataTableSource {
                         controller.goodsOrdersList
                                         .firstWhere(
                                           (e) =>
-                                              e.request_order_id ==
-                                              GoodsOrderListDetails!
-                                                  .request_order_id,
+                                              e.name ==
+                                              GoodsOrderListDetails!.name,
                                           orElse: () =>
                                               GetRequestOrderListModel(
-                                                  request_order_id: 00),
+                                                  name: ""),
                                         )
                                         .status ==
                                     342 &&
@@ -657,9 +653,9 @@ class GoodsOrderListDataSource extends DataTableSource {
                                 message: 'Edit',
                                 onPress: () {
                                   controller.clearStoreData();
-                                  int roId =
-                                      GoodsOrderListDetails?.request_order_id ??
-                                          0;
+                                  int roId = int.tryParse(
+                                          GoodsOrderListDetails?.name ?? "") ??
+                                      0;
                                   if (roId != 0) {
                                     Get.toNamed(
                                         Routes.GoodsOrdersReqDetailsScreen,
@@ -671,12 +667,11 @@ class GoodsOrderListDataSource extends DataTableSource {
                         controller.goodsOrdersList
                                         .firstWhere(
                                           (e) =>
-                                              e.request_order_id ==
-                                              GoodsOrderListDetails!
-                                                  .request_order_id,
+                                              e.name ==
+                                              GoodsOrderListDetails!.name,
                                           orElse: () =>
                                               GetRequestOrderListModel(
-                                                  request_order_id: 00),
+                                                  name: ""),
                                         )
                                         .status ==
                                     343 &&
@@ -696,9 +691,9 @@ class GoodsOrderListDataSource extends DataTableSource {
                                 message: 'Re-Submit RO',
                                 onPress: () {
                                   controller.clearStoreData();
-                                  int roId =
-                                      GoodsOrderListDetails?.request_order_id ??
-                                          0;
+                                  int roId = int.tryParse(
+                                          GoodsOrderListDetails?.name ?? "") ??
+                                      0;
                                   if (roId != 0) {
                                     Get.toNamed(
                                         Routes.GoodsOrdersReqDetailsScreen,
@@ -710,12 +705,11 @@ class GoodsOrderListDataSource extends DataTableSource {
                         controller.goodsOrdersList
                                         .firstWhere(
                                           (e) =>
-                                              e.request_order_id ==
-                                              GoodsOrderListDetails!
-                                                  .request_order_id,
+                                              e.name ==
+                                              GoodsOrderListDetails!.name,
                                           orElse: () =>
                                               GetRequestOrderListModel(
-                                                  request_order_id: 00),
+                                                  name: ""),
                                         )
                                         .status ==
                                     342 &&
@@ -735,9 +729,9 @@ class GoodsOrderListDataSource extends DataTableSource {
                                 message: 'Approve/Reject',
                                 onPress: () {
                                   controller.clearStoreData();
-                                  int roId =
-                                      GoodsOrderListDetails?.request_order_id ??
-                                          0;
+                                  int roId = int.tryParse(
+                                          GoodsOrderListDetails?.name ?? "") ??
+                                      0;
                                   if (roId != 0) {
                                     Get.toNamed(Routes.purchaseGoodsorderView,
                                         arguments: {'roId': roId, "roType": 1});

@@ -7,7 +7,7 @@ List<GetRequestOrderListModel> getRequestOrderListModelFromJson(String str) =>
         json.decode(str).map(GetRequestOrderListModel.fromJson));
 
 class GetRequestOrderListModel {
-  int? request_order_id;
+  String? name;
 
   int? facilityID;
   String? facilityName;
@@ -23,7 +23,7 @@ class GetRequestOrderListModel {
   dynamic go_items;
 
   GetRequestOrderListModel({
-    this.request_order_id,
+    this.name,
     this.facilityID,
     this.facilityName,
     this.rejectedRemark,
@@ -41,7 +41,7 @@ class GetRequestOrderListModel {
   // Factory method to create a GetRequestOrderListModel instance from JSON
   factory GetRequestOrderListModel.fromJson(Map<String, dynamic> json) {
     return GetRequestOrderListModel(
-      request_order_id: json['request_order_id'],
+      name: json['request_order_id'].toString(),
       facilityID: json['facilityID'],
       facilityName: json['facilityName'],
       rejectedRemark: json['rejectedRemark'],
@@ -59,7 +59,7 @@ class GetRequestOrderListModel {
 
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['request_order_id'] = this.request_order_id;
+    data['request_order_id'] = this.name;
 
     data['facilityID'] = this.facilityID;
     data['facilityName'] = this.facilityName;

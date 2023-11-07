@@ -10,9 +10,12 @@ import 'package:cmms/domain/models/get_purchase_details_model.dart';
 import 'package:cmms/domain/models/history_model.dart';
 
 import 'package:cmms/domain/models/paiyed_model.dart';
+import 'package:cmms/domain/models/request_order_list.model.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
+import 'package:intl/intl.dart';
 import 'package:rxdart/subjects.dart';
+import 'package:scrollable_table_view/scrollable_table_view.dart';
 
 import '../../domain/models/business_list_model.dart';
 import '../home/home_controller.dart';
@@ -27,9 +30,16 @@ class StockManagementAddGoodsOrdersController extends GetxController {
 
   final HomeController homeController = Get.find();
   RxList<CurrencyListModel?> unitCurrencyList = <CurrencyListModel>[].obs;
+  RxList<GetRequestOrderListModel?> goodsOrdersList =
+      <GetRequestOrderListModel>[].obs;
   Rx<bool> isUnitCurrencySelected = true.obs;
+  Rx<bool> isReqOrderSelected = true.obs;
+  Rx<String> selectedReqOrder = ''.obs;
+  int selectedReqOrderId = 0;
+
   Rx<String> selectedFacility = ''.obs;
   Rx<String> selectedUnitCurrency = ''.obs;
+
   RxList<String?> selectedUnitCurrencyList = <String>[].obs;
   int selectedUnitCurrencyId = 0;
   RxList<int?> selectedUnitCurrencyIdList = <int>[].obs;
@@ -42,12 +52,28 @@ class StockManagementAddGoodsOrdersController extends GetxController {
   Rx<String> selectedBusinessType = ''.obs;
   RxList<HistoryModel?>? historyList = <HistoryModel?>[].obs;
 
+  RxList<String> goodsOrdersListTableColumns = <String>[].obs;
+  String get formattedFromdate =>
+      DateFormat('dd/MM/yyyy').format(fromDate.value);
+  String get formattedTodate => DateFormat('dd/MM/yyyy').format(toDate.value);
+  String get formattedTodate1 => DateFormat('yyyy-MM-dd').format(toDate.value);
+  String get formattedFromdate1 =>
+      DateFormat('yyyy-MM-dd').format(fromDate.value);
+  Rx<DateTime> fromDate = DateTime.now().subtract(Duration(days: 7)).obs;
+  Rx<DateTime> toDate = DateTime.now().obs;
+
   Rx<bool> isSelectedBusinessType = true.obs;
+
   int selectedBusinessTypeId = 1;
   int paidId = 0;
   RxBool showAdditionalColumn = false.obs;
   Rx<int> goId = 0.obs;
   int facilityId = 0;
+  PaginationController paginationController = PaginationController(
+    rowCount: 0,
+    rowsPerPage: 10,
+  );
+  GetRequestOrderListModel? goodsOrdersListModel;
 
   //drop down list of assets
   RxList<GetAssetDataModel?> assetList = <GetAssetDataModel>[].obs;
@@ -115,6 +141,14 @@ class StockManagementAddGoodsOrdersController extends GetxController {
         Future.delayed(Duration(seconds: 1), () {
           getFacilityList();
         });
+      });
+      Future.delayed(Duration(seconds: 2), () async {
+        await getRequestOrderList(
+          facilityId,
+          formattedTodate1,
+          formattedFromdate1,
+          false,
+        );
       });
       Future.delayed(Duration(seconds: 1), () {
         getUnitCurrencyList();
@@ -363,6 +397,14 @@ class StockManagementAddGoodsOrdersController extends GetxController {
           selectedUnitCurrencyId = unitCurrencyList[currencyIndex]?.id ?? 0;
         }
         break;
+      case RxList<GetRequestOrderListModel>:
+        {
+          int reqOrderIndex =
+              goodsOrdersList.indexWhere((x) => x?.name == value);
+          selectedReqOrderId =
+              int.tryParse(goodsOrdersList[reqOrderIndex]?.name ?? "") ?? 0;
+        }
+        break;
       case RxList<BusinessTypeModel>:
         {
           int equipmentIndex = ownerList.indexWhere((x) => x?.name == value);
@@ -534,10 +576,23 @@ class StockManagementAddGoodsOrdersController extends GetxController {
     }
     print('update  Create GO  data: $createGoModelJsonString');
   }
-}
 
-class RowItem {
-  final List<List<Map<String, String>>> data;
+  Future<void> getRequestOrderList(int facilityId, dynamic startDate,
+      dynamic endDate, bool isLoading) async {
+    goodsOrdersList.value = <GetRequestOrderListModel>[];
+    final _goodsordersList =
+        await stockManagementAddGoodsOrdersPresenter.getRequestOrderList(
+      isLoading: true,
+      start_date: startDate,
+      end_date: endDate,
+      facility_id: facilityId,
+    );
+    if (_goodsordersList != null) {
+      for (var requ in _goodsordersList) {
+        goodsOrdersList.add(requ);
+      }
 
-  RowItem(this.data);
+      update(['requ']);
+    }
+  }
 }

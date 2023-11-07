@@ -120,27 +120,11 @@ class PurchaseGoodsorderListController extends GetxController {
         goodsOrdersListTableColumns.add(key);
       }
     }
-    }
+  }
 
   void onValueChanged(dynamic list, dynamic value) {
     switch (list.runtimeType) {}
   }
-
-  // void showAddGoodsOrdersDetails({int? id}) {
-  //   Get.toNamed(Routes.updateGoodsOrdersDetailsScreen, arguments: id);
-  //   print('Argument5:$id');
-  // }
-
-  // void viewAddGoodsOrdersDetails({int? request_order_id}) {
-  //   Get.toNamed(Routes.purchaseGoodsorderView, arguments: request_order_id);
-  //   print('Argument85:$request_order_id');
-  // }
-
-  // void editReqDetails({int? request_order_id}) {
-  //   Get.toNamed(Routes.GoodsOrdersReqDetailsScreen,
-  //       arguments: request_order_id);
-  //   print('Argument:$request_order_id');
-  // }
 
   void getPmTaskListByDate() {
     getRequestOrderList(
