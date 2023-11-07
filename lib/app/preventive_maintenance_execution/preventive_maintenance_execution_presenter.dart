@@ -1,4 +1,5 @@
 import 'package:cmms/domain/models/history_model.dart';
+import 'package:cmms/domain/models/mrs_list_by_jobId.dart';
 
 import '../../domain/models/pm_task_view_list_model.dart';
 import '../../domain/usecases/preventive_maintenance_execution_usecase.dart';
@@ -74,4 +75,12 @@ class PreventiveMaintenanceExecutionPresenter {
 
   Future<String?> getValue() async =>
       await preventiveMaintenanceExecutionUsecase.getValue();
+  Future<List<MRSListByJobIdModel>?> getMrsListByModuleTask(
+    taskId,
+    isLoading,
+  ) async =>
+      await preventiveMaintenanceExecutionUsecase.getMrsListByModuleTask(
+        taskId: taskId,
+        isLoading: isLoading,
+      );
 }

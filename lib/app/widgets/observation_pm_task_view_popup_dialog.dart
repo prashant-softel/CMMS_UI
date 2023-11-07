@@ -501,7 +501,7 @@ class ObservationPMTaskViewDialog extends GetView {
                                                         'mrsId': int.tryParse(
                                                             "$mrsId")
                                                       });
-                                                                                                }),
+                                                }),
                                             TableActionButton(
                                                 color: ColorValues.editColor,
                                                 icon: Icons.edit,
@@ -521,7 +521,7 @@ class ObservationPMTaskViewDialog extends GetView {
                                                         'mrsId': int.tryParse(
                                                             "$mrsId")
                                                       });
-                                                                                                })
+                                                })
                                           ],
                                         )),
                                       ]),

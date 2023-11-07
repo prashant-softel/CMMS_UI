@@ -4,9 +4,11 @@ import 'package:cmms/app/utils/user_access_constants.dart';
 import 'package:cmms/app/widgets/custom_elevated_button.dart';
 import 'package:cmms/app/widgets/custom_swich_toggle.dart';
 import 'package:cmms/app/widgets/custom_textField.dart';
+import 'package:cmms/app/widgets/dropdown_web.dart';
 import 'package:data_table_2/data_table_2.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:scrollable_table_view/scrollable_table_view.dart';
 import '../preventive_maintenance_execution/preventive_maintenance_execution_controller.dart';
 import '../theme/dimens.dart';
 import '../theme/styles.dart';
@@ -290,97 +292,81 @@ class ObservationPmExecutionViewDialog extends GetView {
                                   child: Row(
                                     children: [
                                       Text(
-                                        "Associated JobCard(s) ",
+                                        "Material Used ",
                                         style: Styles.blue700,
                                       ),
                                     ],
                                   ),
                                 ),
-                                Expanded(
-                                  child: DataTable2(
-                                    minWidth: 2000,
-                                    border: TableBorder.all(
-                                        color:
-                                            Color.fromARGB(255, 206, 229, 234)),
-                                    columns: [
-                                      DataColumn2(
-                                          fixedWidth: 100,
-                                          label: Text(
-                                            "Sr.No.",
-                                            style: TextStyle(
-                                                fontSize: 15,
-                                                fontWeight: FontWeight.bold),
-                                          )),
-                                      DataColumn2(
-                                          fixedWidth: 150,
-                                          label: Text(
-                                            "Job ID",
-                                            style: TextStyle(
-                                                fontSize: 15,
-                                                fontWeight: FontWeight.bold),
-                                          )),
-                                      DataColumn2(
-                                          fixedWidth: 300,
-                                          label: Text(
-                                            "For Check point No.",
-                                            style: TextStyle(
-                                                fontSize: 15,
-                                                fontWeight: FontWeight.bold),
-                                          )),
-                                      DataColumn2(
-                                          fixedWidth: 400,
-                                          label: Text(
-                                            "Job Title",
-                                            style: TextStyle(
-                                                fontSize: 15,
-                                                fontWeight: FontWeight.bold),
-                                          )),
-                                      DataColumn2(
-                                          fixedWidth: 300,
-                                          label: Text(
-                                            "Job Date",
-                                            style: TextStyle(
-                                                fontSize: 15,
-                                                fontWeight: FontWeight.bold),
-                                          )),
-                                      DataColumn2(
-                                          fixedWidth: 300,
-                                          label: Text(
-                                            "Job Status",
-                                            style: TextStyle(
-                                                fontSize: 15,
-                                                fontWeight: FontWeight.bold),
-                                          )),
-                                    ],
-                                    rows: List<DataRow>.generate(
-                                      controller.selectedItem?.schedule_link_job
-                                              ?.length ??
-                                          0,
-                                      (index) => DataRow(cells: [
-                                        DataCell(Text('${index + 1}')),
-                                        DataCell(Text(
-                                          "JOB${controller.selectedItem?.schedule_link_job?[index].job_id.toString() ?? ''}",
-                                          style: Styles.primary15Underlined,
-                                        )),
-                                        DataCell(Text('--')),
-                                        DataCell(Text(controller
-                                                .selectedItem
-                                                ?.schedule_link_job?[index]
-                                                .job_title ??
-                                            '')),
-                                        DataCell(Text(controller
-                                                .selectedItem
-                                                ?.schedule_link_job?[index]
-                                                .job_date ??
-                                            '')),
-                                        DataCell(Text(controller
-                                                .selectedItem
-                                                ?.schedule_link_job?[index]
-                                                .job_status ??
-                                            '')),
-                                      ]),
-                                    ),
-                                  ),
+                                ScrollableTableView(
+                                  columns: [
+                                    "Material Name",
+                                    "Material Type",
+                                    "Image",
+                                    "Available Qty",
+                                  ].map((column) {
+                                    return TableViewColumn(
+                                      label: column,
+                                      minWidth: Get.width * 0.18,
+                                      //  height: Get.height / 2,
+                                    );
+                                  }).toList(),
+                                  rows: controller.rowItem.value.map((record) {
+                                    return TableViewRow(
+                                      height: 85,
+                                      cells: record.map((mapData) {
+                                        return TableViewCell(
+                                          child: (mapData['key'] == "Drop_down")
+                                              ? Padding(
+                                                  padding:
+                                                      const EdgeInsets.all(5.0),
+                                                  child: Column(
+                                                    children: [
+                                                      DropdownWebWidget(
+                                                        width: MediaQuery.of(
+                                                                    context)
+                                                                .size
+                                                                .width /
+                                                            4,
+                                                        dropdownList: controller
+                                                            .cmmrsItems,
+                                                        selectedValue:
+                                                            mapData["value"],
+                                                        onValueChanged: (list,
+                                                            selectedValue) {
+                                                          // print({
+                                                          //   selectedValue:
+                                                          //       selectedValue
+                                                          // });
+                                                          mapData["value"] =
+                                                              selectedValue;
+                                                          controller.dropdownMapperData[
+                                                                  selectedValue] =
+                                                              list.firstWhere(
+                                                                  (element) =>
+                                                                      element
+                                                                          .name ==
+                                                                      selectedValue,
+                                                                  orElse: null);
+                                                        },
+                                                      ),
+                                                    ],
+                                                  ),
+                                                )
+                                              : (mapData['key'] ==
+                                                      "Available_Qty")
+                                                  ? Text(
+                                                      "${controller.dropdownMapperData[record[0]['value']]?.asset_type ?? ""}")
+                                                  : (mapData['key'] ==
+                                                          "Material_Type")
+                                                      ? Text(
+                                                          "${controller.dropdownMapperData[record[0]['value']]?.issued_qty ?? ""}")
+                                                      : Text(
+                                                          mapData['key'] ?? ''),
+                                        );
+                                      }).toList(),
+                                    );
+                                  }).toList(),
                                 ),
                               ],
                             ),

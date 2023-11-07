@@ -6,6 +6,7 @@ import 'package:cmms/app/utils/utility.dart';
 import 'package:cmms/app/widgets/custom_elevated_button.dart';
 import 'package:cmms/domain/models/comment_model.dart';
 import 'package:cmms/domain/models/history_model.dart';
+import 'package:cmms/domain/models/mrs_list_by_jobId.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:fluttertoast/fluttertoast.dart';
@@ -25,6 +26,8 @@ class PreventiveMaintenanceExecutionController extends GetxController {
   Rx<int> scheduleId = 0.obs;
   RxBool isTouchable = true.obs;
   var isToggleOn = false.obs;
+  Rx<List<List<Map<String, String>>>> rowItem =
+      Rx<List<List<Map<String, String>>>>([]);
 
   Rx<PmtaskViewModel?> pmtaskViewModel = PmtaskViewModel().obs;
   RxList<ScheduleCheckPoint?>? scheduleCheckPoints =
@@ -32,9 +35,12 @@ class PreventiveMaintenanceExecutionController extends GetxController {
   RxList<ChecklistObservation>? checklistObservations =
       <ChecklistObservation>[].obs;
   RxList<HistoryModel?>? historyList = <HistoryModel?>[].obs;
+  RxList<MRSListByJobIdModel?>? listMrsByTaskId = <MRSListByJobIdModel?>[].obs;
+  RxList<CmmrsItems?>? cmmrsItems = <CmmrsItems?>[].obs;
 
   var commentCtrlr = TextEditingController();
   var updatecommentCtrlr = TextEditingController();
+  Map<String, CmmrsItems> dropdownMapperData = {};
 
   ScheduleCheckPoint? selectedItem;
   Rx<String> selectedasset = ''.obs;
@@ -48,12 +54,38 @@ class PreventiveMaintenanceExecutionController extends GetxController {
       await setScheduleId();
       if (scheduleId != 0) {
         await getPmtaskViewList(scheduleId: scheduleId.value, isloading: true);
+        getMrsListByModuleTask(taskId: scheduleId.value);
 
         getHistory();
       }
       super.onInit();
     } catch (e) {
       print(e);
+    }
+  }
+
+  void addRowItem() {
+    rowItem.value.add([
+      {"key": "Drop_down", "value": 'Please Select'},
+      {'key': "Material_Type", "value": ''},
+      {'key': "Image", "value": ''},
+      {'key': "Available_Qty", "value": ''},
+      {'key': "Requested_Qty", "value": ''},
+    ]);
+  }
+
+  Future<void> getMrsListByModuleTask({required int taskId}) async {
+    listMrsByTaskId?.value =
+        await preventiveMaintenanceExecutionPresenter.getMrsListByModuleTask(
+              taskId,
+              false,
+            ) ??
+            [];
+    if (listMrsByTaskId!.value != null) {
+      var _assetsList = listMrsByTaskId!.value[0]!.cmmrsItems;
+      for (var asset in _assetsList!) {
+        cmmrsItems!.add(asset);
+      }
     }
   }
 
@@ -153,9 +185,8 @@ class PreventiveMaintenanceExecutionController extends GetxController {
       isLoading: true,
     );
     // _updatedailog();
-    Fluttertoast.showToast(
-        msg: "PM Schedule Successfully...", fontSize: 16.0);
-    }
+    Fluttertoast.showToast(msg: "PM Schedule Successfully...", fontSize: 16.0);
+  }
 
   void cloneDialog(String assets) {
     Get.dialog(AlertDialog(
