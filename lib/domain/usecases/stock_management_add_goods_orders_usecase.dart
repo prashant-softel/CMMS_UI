@@ -7,6 +7,7 @@ import 'package:cmms/domain/models/get_asset_data_list_model.dart';
 import 'package:cmms/domain/models/get_purchase_details_model.dart';
 import 'package:cmms/domain/models/history_model.dart';
 import 'package:cmms/domain/models/paiyed_model.dart';
+import 'package:cmms/domain/models/req_order_details_by_id_model.dart';
 import 'package:cmms/domain/models/request_order_list.model.dart';
 
 class StockManagementAddGoodsOrdersUsecase {
@@ -117,4 +118,13 @@ class StockManagementAddGoodsOrdersUsecase {
       end_date: end_date,
     );
   }
+
+  Future<GetRODetailsByIDModel?> getRoDetailsByID({
+    bool? isLoading,
+    required int requestID,
+  }) async =>
+      await _repository.getRoDetailsByID(
+        requestID: requestID,
+        isLoading: isLoading ?? false,
+      );
 }

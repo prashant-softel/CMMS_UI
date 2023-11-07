@@ -5,6 +5,7 @@ import 'package:cmms/domain/models/facility_model.dart';
 import 'package:cmms/domain/models/get_asset_data_list_model.dart';
 import 'package:cmms/domain/models/get_purchase_details_model.dart';
 import 'package:cmms/domain/models/history_model.dart';
+import 'package:cmms/domain/models/req_order_details_by_id_model.dart';
 import 'package:cmms/domain/models/request_order_list.model.dart';
 
 import 'package:cmms/domain/usecases/stock_management_add_goods_orders_usecase.dart';
@@ -121,6 +122,16 @@ class StockManagementAddGoodsOrdersPresenter {
       facility_id: facility_id,
       start_date: start_date,
       end_date: end_date,
+    );
+  }
+
+  Future<GetRODetailsByIDModel?> getRoDetailsByID({
+    bool? isLoading,
+    required int requestID,
+  }) async {
+    return stockManagementAddGoodsOrdersUsecase.getRoDetailsByID(
+      requestID: requestID,
+      isLoading: isLoading ?? false,
     );
   }
 }
