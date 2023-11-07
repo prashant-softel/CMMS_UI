@@ -14,15 +14,15 @@ String linkedJobsToPermitModelToJson(List<MRSListByJobIdModel> data) =>
     json.encode(List<dynamic>.from(data.map((x) => x.toJson())));
 
 class MRSListByJobIdModel {
-  MRSListByJobIdModel({
-    this.mrsId,
-    this.jobId,
-    this.jobCardId,
-    this.pmId,
-    this.mrsItems,
-    this.status,
-    this.status_short,
-  });
+  MRSListByJobIdModel(
+      {this.mrsId,
+      this.jobId,
+      this.jobCardId,
+      this.pmId,
+      this.mrsItems,
+      this.status,
+      this.status_short,
+      this.cmmrsItems});
 
   int? mrsId;
   int? jobId;
@@ -33,8 +33,11 @@ class MRSListByJobIdModel {
   String? status_short;
   List<CmmrsItems>? cmmrsItems;
 
-  factory MRSListByJobIdModel.fromJson(Map<String, dynamic> json) =>
-      MRSListByJobIdModel(
+  factory MRSListByJobIdModel.fromJson(Map<String, dynamic> json) {
+    var list = json['cmmrsItems'] == null ? [] : json['cmmrsItems'] as List;
+    List<CmmrsItems> cmmrsItems =
+        list.map((i) => CmmrsItems.fromJson(i)).toList();
+    return MRSListByJobIdModel(
         mrsId: json['mrsId'] == null ? 0 : json['mrsId'],
         jobId: json["jobId"] == null ? 0 : json["jobId"],
         jobCardId: json["jobCardId"] == null ? 0 : json["jobCardId"],
@@ -42,8 +45,8 @@ class MRSListByJobIdModel {
         mrsItems: json["mrsItems"] == null ? '' : json["mrsItems"],
         status: json["status"] == null ? 0 : json["status"],
         status_short: json['status_short'] == null ? '' : json['status_short'],
-      );
-
+        cmmrsItems: cmmrsItems);
+  }
   Map<String, dynamic> toJson() => {
         "mrsId": mrsId,
         "jobId": jobId,
@@ -68,7 +71,7 @@ class CmmrsItems {
   String? issued_date;
   double? requested_qty;
   String? approval_required;
-  String? asset_name;
+  String? name;
   int? asset_type_ID;
   String? asset_type;
   int? status;
@@ -83,7 +86,7 @@ class CmmrsItems {
       this.approved_date,
       this.asset_MDM_code,
       this.asset_item_ID,
-      this.asset_name,
+      this.name,
       this.asset_type,
       this.asset_type_ID,
       this.available_qty,
@@ -138,8 +141,7 @@ class CmmrsItems {
         approval_required: parsedJson["approval_required"] == null
             ? ""
             : parsedJson['approval_required'],
-        asset_name:
-            parsedJson["asset_name"] == null ? "" : parsedJson['asset_name'],
+        name: parsedJson["asset_name"] == null ? "" : parsedJson['asset_name'],
         asset_type_ID: parsedJson["asset_type_ID"] == null
             ? 0
             : parsedJson['asset_type_ID'],

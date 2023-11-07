@@ -4,11 +4,11 @@ import 'package:cmms/app/utils/user_access_constants.dart';
 import 'package:cmms/app/widgets/custom_elevated_button.dart';
 import 'package:cmms/app/widgets/custom_swich_toggle.dart';
 import 'package:cmms/app/widgets/custom_textField.dart';
-import 'package:cmms/app/widgets/dropdown_web.dart';
+import 'package:cmms/app/widgets/stock_dropdown.dart';
 import 'package:data_table_2/data_table_2.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:get/get.dart';
-import 'package:scrollable_table_view/scrollable_table_view.dart';
 import '../preventive_maintenance_execution/preventive_maintenance_execution_controller.dart';
 import '../theme/dimens.dart';
 import '../theme/styles.dart';
@@ -265,11 +265,7 @@ class ObservationPmExecutionViewDialog extends GetView {
                           ////Associated Job cards
                           Container(
                             margin: Dimens.edgeInsets20,
-                            height: ((controller.selectedItem?.schedule_link_job
-                                            ?.length ??
-                                        0) *
-                                    40) +
-                                120,
+                            height: 300,
                             width: MediaQuery.of(context).size.width / 1.2,
                             decoration: BoxDecoration(
                               border: Border.all(
@@ -290,201 +286,186 @@ class ObservationPmExecutionViewDialog extends GetView {
                                 Padding(
                                   padding: const EdgeInsets.all(10.0),
                                   child: Row(
+                                    mainAxisAlignment:
+                                        MainAxisAlignment.spaceBetween,
                                     children: [
                                       Text(
                                         "Material Used ",
                                         style: Styles.blue700,
                                       ),
+                                      GestureDetector(
+                                        onTap: () {
+                                          controller.addRowItem();
+                                        },
+                                        child: Container(
+                                          height: 25,
+                                          width: 70,
+                                          decoration: BoxDecoration(
+                                            color: ColorValues.addNewColor,
+                                            border: Border.all(
+                                              color: ColorValues
+                                                  .lightGreyColorWithOpacity35,
+                                              width: 1,
+                                            ),
+                                            borderRadius: BorderRadius.all(
+                                                Radius.circular(5)),
+                                          ),
+                                          child: Center(
+                                            child: Text(
+                                              " + Add ",
+                                              style: TextStyle(
+                                                  fontSize: 18,
+                                                  fontWeight: FontWeight.w100,
+                                                  color: Colors.white),
+                                            ),
+                                          ),
+                                        ),
+                                      )
                                     ],
                                   ),
                                 ),
-                                ScrollableTableView(
-                                  columns: [
-                                    "Material Name",
-                                    "Material Type",
-                                    "Image",
-                                    "Available Qty",
-                                  ].map((column) {
-                                    return TableViewColumn(
-                                      label: column,
-                                      minWidth: Get.width * 0.18,
-                                      //  height: Get.height / 2,
-                                    );
-                                  }).toList(),
-                                  rows: controller.rowItem.value.map((record) {
-                                    return TableViewRow(
-                                      height: 85,
-                                      cells: record.map((mapData) {
-                                        return TableViewCell(
-                                          child: (mapData['key'] == "Drop_down")
-                                              ? Padding(
-                                                  padding:
-                                                      const EdgeInsets.all(5.0),
-                                                  child: Column(
-                                                    children: [
-                                                      DropdownWebWidget(
-                                                        width: MediaQuery.of(
-                                                                    context)
-                                                                .size
-                                                                .width /
-                                                            4,
-                                                        dropdownList: controller
-                                                            .cmmrsItems,
-                                                        selectedValue:
-                                                            mapData["value"],
-                                                        onValueChanged: (list,
-                                                            selectedValue) {
-                                                          // print({
-                                                          //   selectedValue:
-                                                          //       selectedValue
-                                                          // });
-                                                          mapData["value"] =
-                                                              selectedValue;
-                                                          controller.dropdownMapperData[
-                                                                  selectedValue] =
-                                                              list.firstWhere(
-                                                                  (element) =>
-                                                                      element
-                                                                          .name ==
-                                                                      selectedValue,
-                                                                  orElse: null);
-                                                        },
-                                                      ),
-                                                    ],
-                                                  ),
-                                                )
-                                              : (mapData['key'] ==
-                                                      "Available_Qty")
-                                                  ? Text(
-                                                      "${controller.dropdownMapperData[record[0]['value']]?.asset_type ?? ""}")
-                                                  : (mapData['key'] ==
-                                                          "Material_Type")
-                                                      ? Text(
-                                                          "${controller.dropdownMapperData[record[0]['value']]?.issued_qty ?? ""}")
-                                                      : Text(
-                                                          mapData['key'] ?? ''),
-                                        );
-                                      }).toList(),
-                                    );
-                                  }).toList(),
+                                Expanded(
+                                  child: DataTable2(
+                                    // minWidth: 2000,
+                                    dataRowHeight: 70,
+                                    columnSpacing: 10,
+                                    border: TableBorder.all(
+                                        color:
+                                            Color.fromARGB(255, 206, 229, 234)),
+                                    columns: [
+                                      DataColumn2(
+                                          //  fixedWidth: 500,
+                                          label: Text(
+                                        "Asset Name",
+                                        style: TextStyle(
+                                            fontSize: 15,
+                                            fontWeight: FontWeight.bold),
+                                      )),
+                                      DataColumn2(
+                                          // fixedWidth: 350,
+                                          label: Text(
+                                        "Asset Type",
+                                        style: TextStyle(
+                                            fontSize: 15,
+                                            fontWeight: FontWeight.bold),
+                                      )),
+                                      DataColumn2(
+                                          //  fixedWidth: 350,
+                                          label: Text(
+                                        "Issued Qty",
+                                        style: TextStyle(
+                                            fontSize: 15,
+                                            fontWeight: FontWeight.bold),
+                                      )),
+                                      DataColumn2(
+                                          //  fixedWidth: 350,
+                                          label: Text(
+                                        "Consumed  Qty",
+                                        style: TextStyle(
+                                            fontSize: 15,
+                                            fontWeight: FontWeight.bold),
+                                      )),
+                                    ],
+                                    rows:
+                                        controller.rowItem.value.map((record) {
+                                      return DataRow(
+                                        // height: 130,
+                                        cells: record.map((mapData) {
+                                          return DataCell(
+                                            (mapData['key'] == "Drop_down")
+                                                ? DropdownWebStock(
+                                                    width:
+                                                        MediaQuery.of(context)
+                                                            .size
+                                                            .width,
+                                                    dropdownList:
+                                                        controller.cmmrsItems,
+                                                    selectedValue:
+                                                        mapData["value"],
+                                                    onValueChanged:
+                                                        (list, selectedValue) {
+                                                      // print('paifcghb:${controller.assetList}');
+                                                      // print({selectedValue: selectedValue});
+                                                      mapData["value"] =
+                                                          selectedValue;
+                                                      controller.dropdownMapperData[
+                                                              selectedValue] =
+                                                          list.firstWhere(
+                                                              (element) =>
+                                                                  element
+                                                                      .name ==
+                                                                  selectedValue,
+                                                              orElse: null);
+                                                    },
+                                                  )
+                                                : (mapData['key'] ==
+                                                        "Material_Type")
+                                                    ? Text(
+                                                        "${controller.dropdownMapperData[record[0]['value']]?.asset_type ?? ""}")
+                                                    : (mapData['key'] ==
+                                                            "Issued_Qty")
+                                                        ? Text(
+                                                            "${controller.dropdownMapperData[record[0]['value']]?.issued_qty ?? ""}")
+                                                        : (mapData['key'] ==
+                                                                "Consumed_Qty")
+                                                            ? Padding(
+                                                                padding:
+                                                                    const EdgeInsets
+                                                                        .only(
+                                                                        top:
+                                                                            10),
+                                                                child:
+                                                                    Container(
+                                                                        decoration:
+                                                                            BoxDecoration(
+                                                                          boxShadow: [
+                                                                            BoxShadow(
+                                                                              color: Colors.black26,
+                                                                              offset: const Offset(
+                                                                                5.0,
+                                                                                5.0,
+                                                                              ),
+                                                                              blurRadius: 5.0,
+                                                                              spreadRadius: 1.0,
+                                                                            ),
+                                                                          ],
+                                                                          color:
+                                                                              ColorValues.whiteColor,
+                                                                          borderRadius:
+                                                                              BorderRadius.circular(5),
+                                                                        ),
+                                                                        child:
+                                                                            LoginCustomTextfield(
+                                                                          width:
+                                                                              (Get.width * .4),
+                                                                          keyboardType:
+                                                                              TextInputType.number,
+                                                                          inputFormatters: <TextInputFormatter>[
+                                                                            FilteringTextInputFormatter.digitsOnly
+                                                                          ],
+                                                                          maxLine:
+                                                                              1,
+                                                                          textController:
+                                                                              new TextEditingController(text: mapData["value"] ?? ''),
+                                                                          onChanged:
+                                                                              (txt) {
+                                                                            mapData["value"] =
+                                                                                txt;
+                                                                          },
+                                                                        )),
+                                                              )
+                                                            : Text(mapData[
+                                                                    'key'] ??
+                                                                ''),
+                                          );
+                                        }).toList(),
+                                      );
+                                    }).toList(),
+                                  ),
                                 ),
                               ],
                             ),
                           ),
-
-                          ////Material Used/Issued
-                          // SizedBox(
-                          //   height: 270,
-                          //   width: MediaQuery.of(context).size.width / 1.2,
-                          //   child: Container(
-                          //     margin: Dimens.edgeInsets20,
-                          //     height: 250,
-                          //     decoration: BoxDecoration(
-                          //       border: Border.all(
-                          //         color:
-                          //             ColorValues.lightGreyColorWithOpacity35,
-                          //         width: 1,
-                          //       ),
-                          //       boxShadow: [
-                          //         BoxShadow(
-                          //           color: ColorValues.appBlueBackgroundColor,
-                          //           spreadRadius: 2,
-                          //           blurRadius: 5,
-                          //           offset: Offset(0, 2),
-                          //         ),
-                          //       ],
-                          //     ),
-                          //     child: Column(
-                          //       children: [
-                          //         Padding(
-                          //           padding: const EdgeInsets.all(10.0),
-                          //           child: Row(
-                          //             children: [
-                          //               Text(
-                          //                 "Material Used/Issued",
-                          //                 style: Styles.blue700,
-                          //               ),
-                          //             ],
-                          //           ),
-                          //         ),
-                          //         Divider(
-                          //           color: ColorValues.greyLightColour,
-                          //         ),
-                          //         Expanded(
-                          //           child: Theme(
-                          //             data: ThemeData(
-                          //                 scrollbarTheme: ScrollbarThemeData(
-                          //                     isAlwaysShown: false,
-                          //                     thumbColor: MaterialStateProperty
-                          //                         .all<Color>(
-                          //                             Colors.transparent))),
-                          //             child: ScrollableTableView(
-                          //               columns: [
-                          //                 "Sr.No.",
-                          //                 "Asset Name",
-                          //                 "Asset Type",
-                          //                 "Consumed Quantity",
-                          //               ].map((column) {
-                          //                 return TableViewColumn(
-                          //                   label: column,
-                          //                   minWidth: Get.width * 0.18,
-                          //                 );
-                          //               }).toList(),
-                          //               rows: [
-                          //                 [
-                          //                   "1",
-                          //                   "GasKit",
-                          //                   "Consumable",
-                          //                   "2",
-                          //                 ],
-                          //                 [
-                          //                   "2",
-                          //                   "String connected 85Qmm male MC4",
-                          //                   "spare",
-                          //                   "1",
-                          //                 ],
-                          //               ].map((record) {
-                          //                 return TableViewRow(
-                          //                   height: 50,
-                          //                   cells: record.map((value) {
-                          //                     return TableViewCell(
-                          //                         child: Text(value));
-                          //                     //  (value == "Action")
-                          //                     //     ? Wrap(children: [
-                          //                     //         TableActionButton(
-                          //                     //           color: ColorValues
-                          //                     //               .viewColor,
-                          //                     //           icon: Icons
-                          //                     //               .remove_red_eye_outlined,
-                          //                     //           message: 'View',
-                          //                     //           onPress: () {},
-                          //                     //         ),
-                          //                     //         TableActionButton(
-                          //                     //           color: ColorValues
-                          //                     //               .appGreenColor,
-                          //                     //           icon: Icons.add,
-                          //                     //           message: 'Add',
-                          //                     //           onPress: () {},
-                          //                     //         ),
-                          //                     //         TableActionButton(
-                          //                     //           color: ColorValues
-                          //                     //               .appRedColor,
-                          //                     //           icon: Icons.remove,
-                          //                     //           message: 'Delete',
-                          //                     //           onPress: () {},
-                          //                     //         ),
-                          //                     //       ])
-                          //                     //     : Text(value));
-                          //                   }).toList(),
-                          //                 );
-                          //               }).toList(),
-                          //             ),
-                          //           ),
-                          //         ),
-                          //       ],
-                          //     ),
-                          //   ),
-                          // ),
                         ],
                       ),
                     ),

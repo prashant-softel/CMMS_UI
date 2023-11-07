@@ -94,7 +94,7 @@ class GoDetails {
   int? assetMasterItemID;
   double? cost;
   double? ordered_qty;
-  String? asset_name;
+  String? name;
   int? accepted_qty;
   String? comment;
 
@@ -104,7 +104,7 @@ class GoDetails {
       this.assetMasterItemID,
       this.cost,
       this.ordered_qty,
-      this.asset_name,
+      this.name,
       this.accepted_qty,
       this.comment});
 
@@ -114,7 +114,7 @@ class GoDetails {
     assetMasterItemID = json['assetMasterItemID'];
     cost = json['cost'];
     ordered_qty = json['ordered_qty'];
-    asset_name = json['asset_name'];
+    name = json['asset_name'];
     accepted_qty = json['accepted_qty'];
     comment = json['comment'];
   }
@@ -126,7 +126,7 @@ class GoDetails {
     data['assetMasterItemID'] = this.assetMasterItemID;
     data['cost'] = this.cost;
     data['ordered_qty'] = this.ordered_qty;
-    data['asset_name'] = this.asset_name;
+    data['asset_name'] = this.name;
     data['accepted_qty'] = this.accepted_qty;
     data['comment'] = this.comment;
 

@@ -162,7 +162,7 @@ class GoodsOrdersReqDetailController extends GetxController {
         rowItem.value.add([
           {
             "key": "Drop_down",
-            "value": '${element.asset_name}',
+            "value": '${element.name}',
             'assetMasterItemID': '${element.assetMasterItemID}',
             'itemID': '${element.itemID}'
           },
@@ -172,10 +172,10 @@ class GoodsOrdersReqDetailController extends GetxController {
           {'key': "Comment", "value": '${element.comment}'},
         ]);
         commentCtrlr.text = getPurchaseDetailsByIDModel.value?.comment ?? "";
-        dropdownMapperData[element.asset_name ?? ""] = assetList
-            .firstWhere((e) => e?.name == element.asset_name, orElse: null)!;
+        dropdownMapperData[element.name ?? ""] =
+            assetList.firstWhere((e) => e?.name == element.name, orElse: null)!;
       });
-        }
+    }
   }
 
   void submitPurchaseOrderData() async {

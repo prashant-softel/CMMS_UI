@@ -219,7 +219,7 @@ class TransactionReportListController extends GetxController {
           } else if (selectedactorTypeId == 6) {
             inventoryList(facilityId: facilityId);
           } else if (selectedactorTypeId == 1) {
-            getBusinessList();
+            //  getBusinessList();
           }
         }
         break;
