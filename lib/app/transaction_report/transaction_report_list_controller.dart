@@ -79,8 +79,15 @@ class TransactionReportListController extends GetxController {
   int selectedpmtaskId = 0;
   Rx<String> selectedpmtask = ''.obs;
   RxList<FacilityModel?> facilityNameList = <FacilityModel>[].obs;
+  Rx<bool> isSelectedfacility = true.obs;
+  int selectedfacilityId = 0;
+  Rx<String> selectedfacility = ''.obs;
   RxList<UserListModel?> userList = <UserListModel?>[].obs;
+  Rx<bool> isSelectedUser = true.obs;
+  int selectedUserId = 0;
+  int actorId = 0;
 
+  Rx<String> selectedUser = ''.obs;
   final columnVisibility = ValueNotifier<Map<String, bool>>({
     "From Actor ID": true,
     "From Actor Type": true,
@@ -168,12 +175,13 @@ class TransactionReportListController extends GetxController {
         pmTaskList.add(taskName);
       }
       selectedpmtaskId = pmTaskList[0]!.id ?? 0;
+      actorId = selectedpmtaskId;
       selectedpmtask.value = pmTaskList[0]!.name ?? "";
       transactionReport(
           facilityId: facilityId,
           startDate: formattedTodate1,
           actorType: selectedactorTypeId,
-          actorID: selectedpmtaskId,
+          actorID: actorId,
           endDate: formattedFromdate1,
           isLoading: false);
     }
@@ -193,7 +201,7 @@ class TransactionReportListController extends GetxController {
       start_date: startDate,
       end_date: endDate,
       actorID: actorID,
-      actorType: 3,
+      actorType: actorType,
       facility_id: facilityId,
     );
     transactionReportList.value = _goodsordersList;
@@ -227,12 +235,44 @@ class TransactionReportListController extends GetxController {
         {
           int pmtaskIndex = pmTaskList.indexWhere((x) => x!.name == value);
           selectedpmtaskId = pmTaskList[pmtaskIndex]!.id ?? 0;
+          actorId = selectedpmtaskId;
           selectedpmtask.value = value;
           transactionReport(
               facilityId: facilityId,
               startDate: formattedTodate1,
               actorType: selectedactorTypeId,
-              actorID: selectedpmtaskId,
+              actorID: actorId,
+              endDate: formattedFromdate1,
+              isLoading: false);
+        }
+        break;
+      case RxList<FacilityModel?>:
+        {
+          int facilityIndex =
+              facilityNameList.indexWhere((x) => x!.name == value);
+          selectedfacilityId = facilityNameList[facilityIndex]!.id;
+          actorId = selectedfacilityId;
+          selectedfacility.value = value;
+          transactionReport(
+              facilityId: facilityId,
+              startDate: formattedTodate1,
+              actorType: selectedactorTypeId,
+              actorID: actorId,
+              endDate: formattedFromdate1,
+              isLoading: false);
+        }
+        break;
+      case RxList<UserListModel?>:
+        {
+          int userIndex = userList.indexWhere((x) => x!.name == value);
+          selectedUserId = userList[userIndex]!.id ?? 0;
+          selectedUser.value = value;
+          actorId = selectedUserId;
+          transactionReport(
+              facilityId: facilityId,
+              startDate: formattedTodate1,
+              actorType: selectedactorTypeId,
+              actorID: actorId,
               endDate: formattedFromdate1,
               isLoading: false);
         }
@@ -282,6 +322,16 @@ class TransactionReportListController extends GetxController {
       for (var _userList in list) {
         userList.add(_userList);
       }
+      selectedUserId = userList[0]!.id ?? 0;
+      actorId - selectedUserId;
+      selectedUser.value = userList[0]!.name ?? "";
+      transactionReport(
+          facilityId: facilityId,
+          startDate: formattedTodate1,
+          actorType: selectedactorTypeId,
+          actorID: actorId,
+          endDate: formattedFromdate1,
+          isLoading: false);
     }
   }
 
@@ -289,8 +339,8 @@ class TransactionReportListController extends GetxController {
     transactionReport(
         facilityId: facilityId,
         startDate: formattedTodate1,
-        // actorType: actorType,
-        actorID: facilityId,
+        actorType: selectedactorTypeId,
+        actorID: actorId,
         endDate: formattedFromdate1,
         isLoading: false);
   }
@@ -305,7 +355,16 @@ class TransactionReportListController extends GetxController {
     for (var facility_list in _facilityNameList!) {
       facilityNameList.add(facility_list);
     }
-
+    selectedfacilityId = facilityNameList[0]!.id;
+    actorId = selectedfacilityId;
+    selectedfacility.value = facilityNameList[0]!.name;
+    transactionReport(
+        facilityId: facilityId,
+        startDate: formattedTodate1,
+        actorType: selectedactorTypeId,
+        actorID: actorId,
+        endDate: formattedFromdate1,
+        isLoading: false);
     update(['permit_facility_list']);
   }
 
