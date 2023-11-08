@@ -1,5 +1,6 @@
 import 'package:cmms/app/home/home_screen.dart';
 import 'package:cmms/app/theme/dimens.dart';
+import 'package:cmms/app/utils/app_constants.dart';
 import 'package:cmms/app/widgets/custom_richtext.dart';
 import 'package:cmms/app/widgets/date_picker.dart';
 import 'package:cmms/app/widgets/dropdown_web.dart';
@@ -159,34 +160,36 @@ class _TransactionReportListWebState extends State<TransactionReportListWeb> {
                                           ),
                                         ),
                                       ),
-                                      itemBuilder: (BuildContext context) => <
-                                          PopupMenuEntry<String>>[]..addAll(
-                                            controller
-                                                .columnVisibility.value.entries
-                                                .map((e) {
-                                          return PopupMenuItem<String>(
-                                              child: ValueListenableBuilder(
-                                                  valueListenable: controller
-                                                      .columnVisibility,
-                                                  builder:
-                                                      (context, value, child) {
-                                                    return Row(
-                                                      children: [
-                                                        Checkbox(
-                                                          value: value[e.key],
-                                                          onChanged:
-                                                              (newValue) {
-                                                            controller
-                                                                .setColumnVisibility(
-                                                                    e.key,
-                                                                    newValue!);
-                                                          },
-                                                        ),
-                                                        Text(e.key),
-                                                      ],
-                                                    );
-                                                  }));
-                                        })),
+                                      itemBuilder: (BuildContext context) =>
+                                          <PopupMenuEntry<String>>[]..addAll(
+                                                controller.columnVisibility
+                                                    .value.entries
+                                                    .map((e) {
+                                              return PopupMenuItem<String>(
+                                                  child: ValueListenableBuilder(
+                                                      valueListenable:
+                                                          controller
+                                                              .columnVisibility,
+                                                      builder: (context, value,
+                                                          child) {
+                                                        return Row(
+                                                          children: [
+                                                            Checkbox(
+                                                              value:
+                                                                  value[e.key],
+                                                              onChanged:
+                                                                  (newValue) {
+                                                                controller
+                                                                    .setColumnVisibility(
+                                                                        e.key,
+                                                                        newValue!);
+                                                              },
+                                                            ),
+                                                            Text(e.key),
+                                                          ],
+                                                        );
+                                                      }));
+                                            })),
                                       onSelected: (String value) {
                                         // Handle column selection
                                       },
@@ -252,7 +255,8 @@ class _TransactionReportListWebState extends State<TransactionReportListWeb> {
                                         style: Styles.blackBold14,
                                       ),
                                       Dimens.boxWidth20,
-                                      controller.selectedactorTypeId == 3
+                                      controller.selectedactorTypeId ==
+                                              AppConstants.kTask
                                           ? Container(
                                               width: (MediaQuery.of(context)
                                                       .size
@@ -273,7 +277,8 @@ class _TransactionReportListWebState extends State<TransactionReportListWeb> {
                                                     controller.onValueChanged,
                                               ),
                                             )
-                                          : controller.selectedactorTypeId == 5
+                                          : controller.selectedactorTypeId ==
+                                                  AppConstants.kEngineer
                                               ? Container(
                                                   width: (MediaQuery.of(context)
                                                           .size
@@ -295,28 +300,65 @@ class _TransactionReportListWebState extends State<TransactionReportListWeb> {
                                                         .onValueChanged,
                                                   ),
                                                 )
-                                              : Container(
-                                                  width: (MediaQuery.of(context)
-                                                          .size
-                                                          .width *
-                                                      .2),
-                                                  child: DropdownWebWidget(
-                                                    width:
-                                                        MediaQuery.of(context)
+                                              : controller.selectedactorTypeId ==
+                                                      AppConstants.kStore
+                                                  ? Container(
+                                                      width: (MediaQuery.of(
+                                                                  context)
+                                                              .size
+                                                              .width *
+                                                          .2),
+                                                      child: DropdownWebWidget(
+                                                        width: MediaQuery.of(
+                                                                    context)
                                                                 .size
                                                                 .width *
                                                             2,
-                                                    dropdownList: controller
-                                                        .facilityNameList,
-                                                    isValueSelected: controller
-                                                        .isSelectedfacility
-                                                        .value,
-                                                    selectedValue: controller
-                                                        .selectedfacility.value,
-                                                    onValueChanged: controller
-                                                        .onValueChanged,
-                                                  ),
-                                                ),
+                                                        dropdownList: controller
+                                                            .facilityNameList,
+                                                        isValueSelected: controller
+                                                            .isSelectedfacility
+                                                            .value,
+                                                        selectedValue: controller
+                                                            .selectedfacility
+                                                            .value,
+                                                        onValueChanged:
+                                                            controller
+                                                                .onValueChanged,
+                                                      ),
+                                                    )
+                                                  : controller.selectedactorTypeId ==
+                                                          AppConstants
+                                                              .kInventory
+                                                      ? Container(
+                                                          width: (MediaQuery.of(
+                                                                      context)
+                                                                  .size
+                                                                  .width *
+                                                              .2),
+                                                          child:
+                                                              DropdownWebWidget(
+                                                            width: MediaQuery.of(
+                                                                        context)
+                                                                    .size
+                                                                    .width *
+                                                                2,
+                                                            dropdownList: controller
+                                                                .inventoryNameList,
+                                                            isValueSelected:
+                                                                controller
+                                                                    .isSelectedInventory
+                                                                    .value,
+                                                            selectedValue:
+                                                                controller
+                                                                    .selectedInventory
+                                                                    .value,
+                                                            onValueChanged:
+                                                                controller
+                                                                    .onValueChanged,
+                                                          ),
+                                                        )
+                                                      : Dimens.box0
                                     ],
                                   ),
                                 ),
