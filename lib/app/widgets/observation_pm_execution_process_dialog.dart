@@ -411,7 +411,7 @@ class ObservationPmExecutionViewDialog extends GetView {
                                                             ? Padding(
                                                                 padding:
                                                                     const EdgeInsets
-                                                                        .only(
+                                                                            .only(
                                                                         top:
                                                                             10),
                                                                 child:
@@ -440,7 +440,8 @@ class ObservationPmExecutionViewDialog extends GetView {
                                                                               (Get.width * .4),
                                                                           keyboardType:
                                                                               TextInputType.number,
-                                                                          inputFormatters: <TextInputFormatter>[
+                                                                          inputFormatters: <
+                                                                              TextInputFormatter>[
                                                                             FilteringTextInputFormatter.digitsOnly
                                                                           ],
                                                                           maxLine:

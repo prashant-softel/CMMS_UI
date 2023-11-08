@@ -162,38 +162,38 @@ class PmScheduleContentWeb extends GetView<PmScheduleController> {
                     Dimens.boxHeight20,
                     Row(
                       children: [
-                        Container(
-                          height: 40,
-                          margin: EdgeInsets.only(left: 10),
-                          child: CustomElevatedButton(
-                              backgroundColor: ColorValues.appLightBlueColor,
-                              onPressed: () {},
-                              text: 'Copy'),
-                        ),
-                        Container(
-                          height: 40,
-                          margin: EdgeInsets.only(left: 10),
-                          child: CustomElevatedButton(
-                              backgroundColor: ColorValues.appLightBlueColor,
-                              onPressed: () {},
-                              text: 'Excel'),
-                        ),
-                        Container(
-                          height: 40,
-                          margin: EdgeInsets.only(left: 10),
-                          child: CustomElevatedButton(
-                              backgroundColor: ColorValues.appLightBlueColor,
-                              onPressed: () {},
-                              text: 'PDF'),
-                        ),
-                        Container(
-                          height: 40,
-                          margin: EdgeInsets.only(left: 10),
-                          child: CustomElevatedButton(
-                              backgroundColor: ColorValues.appLightBlueColor,
-                              onPressed: () {},
-                              text: 'Column Visibility'),
-                        ),
+                        // Container(
+                        //   height: 40,
+                        //   margin: EdgeInsets.only(left: 10),
+                        //   child: CustomElevatedButton(
+                        //       backgroundColor: ColorValues.appLightBlueColor,
+                        //       onPressed: () {},
+                        //       text: 'Copy'),
+                        // ),
+                        // Container(
+                        //   height: 40,
+                        //   margin: EdgeInsets.only(left: 10),
+                        //   child: CustomElevatedButton(
+                        //       backgroundColor: ColorValues.appLightBlueColor,
+                        //       onPressed: () {},
+                        //       text: 'Excel'),
+                        // ),
+                        // Container(
+                        //   height: 40,
+                        //   margin: EdgeInsets.only(left: 10),
+                        //   child: CustomElevatedButton(
+                        //       backgroundColor: ColorValues.appLightBlueColor,
+                        //       onPressed: () {},
+                        //       text: 'PDF'),
+                        // ),
+                        // Container(
+                        //   height: 40,
+                        //   margin: EdgeInsets.only(left: 10),
+                        //   child: CustomElevatedButton(
+                        //       backgroundColor: ColorValues.appLightBlueColor,
+                        //       onPressed: () {},
+                        //       text: 'Column Visibility'),
+                        // ),
                         Spacer(),
                         Container(
                           width: 200,

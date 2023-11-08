@@ -77,8 +77,7 @@ class CreateMrsModel {
 
 class Equipments {
   Equipments(
-      {this.approval_required,
-      this.asset_code,
+      {this.asset_code,
       this.asset_type_ID,
       this.equipmentID,
       this.id,
@@ -87,7 +86,6 @@ class Equipments {
 
   int? id;
   int? equipmentID;
-  int? approval_required;
   int? asset_type_ID;
   String? asset_code;
   int? requested_qty;
@@ -99,7 +97,6 @@ class Equipments {
   factory Equipments.fromJson(Map<String, dynamic> json) => Equipments(
         id: json["id"],
         equipmentID: json["asset_item_ID"],
-        approval_required: json["approval_required"],
         asset_type_ID: json["asset_type_ID"],
         asset_code: json["asset_code"],
         requested_qty: json["requested_qty"],
@@ -111,7 +108,6 @@ class Equipments {
         "requested_qty": requested_qty,
         "asset_code": asset_code,
         "asset_type_ID": asset_type_ID,
-        "approval_required": approval_required,
         "asset_item_ID": equipmentID,
         "id": id,
       };
