@@ -10,6 +10,7 @@ import 'package:cmms/app/widgets/file_upload_details_widget_web.dart';
 import 'package:cmms/app/widgets/file_upload_with_dropzone_widget.dart';
 import 'package:cmms/app/widgets/stock_dropdown.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
 import 'package:multi_select_flutter/multi_select_flutter.dart';
@@ -668,41 +669,6 @@ class AddIncidentReportContentWeb extends GetView<AddIncidentReportController> {
                                                             CrossAxisAlignment
                                                                 .end,
                                                         children: [
-                                                          // Row(
-                                                          //   children: [
-                                                          //     CustomRichText(
-                                                          //         title:
-                                                          //             'Equipment Name: '),
-                                                          //     Dimens.boxWidth10,
-                                                          //     SizedBox(
-                                                          //       width: MediaQuery.of(
-                                                          //                   context)
-                                                          //               .size
-                                                          //               .width /
-                                                          //           5,
-                                                          //       child: Obx(
-                                                          //         () =>
-                                                          //             DropdownWebWidget(
-                                                          //           dropdownList:
-                                                          //               controller
-                                                          //                   .eqipmentNameList,
-                                                          //           isValueSelected:
-                                                          //               controller
-                                                          //                   .isEquipmentNameSelected
-                                                          //                   .value,
-                                                          //           selectedValue:
-                                                          //               controller
-                                                          //                   .selectedEquipmentName
-                                                          //                   .value,
-                                                          //           onValueChanged:
-                                                          //               controller
-                                                          //                   .onValueChanged,
-                                                          //         ),
-                                                          //       ),
-                                                          //     ),
-                                                          //   ],
-                                                          // ),
-
                                                           Dimens.boxHeight10,
                                                           Row(
                                                             children: [
@@ -1079,14 +1045,20 @@ class AddIncidentReportContentWeb extends GetView<AddIncidentReportController> {
                                                           style: Styles.blue700,
                                                         ),
                                                         Dimens.boxHeight10,
-                                                        Wrap(
+                                                        Row(
+                                                          crossAxisAlignment:
+                                                              CrossAxisAlignment
+                                                                  .start,
                                                           children: [
                                                             Column(
-                                                              mainAxisAlignment:
-                                                                  MainAxisAlignment
-                                                                      .start,
+                                                              crossAxisAlignment:
+                                                                  CrossAxisAlignment
+                                                                      .end,
                                                               children: [
                                                                 Row(
+                                                                  mainAxisAlignment:
+                                                                      MainAxisAlignment
+                                                                          .start,
                                                                   children: [
                                                                     Text(
                                                                       'Name of the person involved/ injured: ',
@@ -1120,9 +1092,12 @@ class AddIncidentReportContentWeb extends GetView<AddIncidentReportController> {
                                                                   ],
                                                                 ),
                                                                 Row(
+                                                                  mainAxisAlignment:
+                                                                      MainAxisAlignment
+                                                                          .start,
                                                                   children: [
                                                                     Text(
-                                                                      'Gender: ',
+                                                                      'Gender:',
                                                                       style: Styles
                                                                           .black15,
                                                                     ),
@@ -1133,7 +1108,221 @@ class AddIncidentReportContentWeb extends GetView<AddIncidentReportController> {
                                                                         'Female',
                                                                         context),
                                                                   ],
-                                                                )
+                                                                ),
+                                                                Row(
+                                                                  mainAxisAlignment:
+                                                                      MainAxisAlignment
+                                                                          .start,
+                                                                  children: [
+                                                                    Text(
+                                                                      'Trade/ designation:  ',
+                                                                      style: Styles
+                                                                          .black15,
+                                                                    ),
+                                                                    SizedBox(
+                                                                      width: MediaQuery.of(context)
+                                                                              .size
+                                                                              .width /
+                                                                          5,
+                                                                      child:
+                                                                          Obx(
+                                                                        () =>
+                                                                            DropdownWebWidget(
+                                                                          dropdownList:
+                                                                              controller.incidentInvestigationVerificationDoneByList,
+                                                                          isValueSelected: controller
+                                                                              .isincidentInvestigationVerificationDoneByListSelected
+                                                                              .value,
+                                                                          selectedValue: controller
+                                                                              .selectedIncidentInvestigationVerificationDoneByList
+                                                                              .value,
+                                                                          onValueChanged:
+                                                                              controller.onValueIncidentVerificationChanged,
+                                                                        ),
+                                                                      ),
+                                                                      // _buildCorrectiveActionTextField_web(
+                                                                      //     context)
+                                                                    ),
+                                                                  ],
+                                                                ),
+                                                                Row(
+                                                                  mainAxisAlignment:
+                                                                      MainAxisAlignment
+                                                                          .start,
+                                                                  children: [
+                                                                    Text(
+                                                                      'Address:  ',
+                                                                      style: Styles
+                                                                          .black15,
+                                                                    ),
+                                                                    SizedBox(
+                                                                        width:
+                                                                            MediaQuery.of(context).size.width /
+                                                                                5,
+                                                                        child: _buildAddressTextField_web(
+                                                                            context)
+                                                                        // _buildCorrectiveActionTextField_web(
+                                                                        //     context)
+                                                                        ),
+                                                                  ],
+                                                                ),
+                                                                Dimens
+                                                                    .boxHeight5,
+                                                                Row(
+                                                                  mainAxisAlignment:
+                                                                      MainAxisAlignment
+                                                                          .start,
+                                                                  children: [
+                                                                    Text(
+                                                                      'Name of the contractor:  ',
+                                                                      style: Styles
+                                                                          .black15,
+                                                                    ),
+                                                                    SizedBox(
+                                                                      width: MediaQuery.of(context)
+                                                                              .size
+                                                                              .width /
+                                                                          5,
+                                                                      child:
+                                                                          Obx(
+                                                                        () =>
+                                                                            DropdownWebWidget(
+                                                                          dropdownList:
+                                                                              controller.incidentInvestigationVerificationDoneByList,
+                                                                          isValueSelected: controller
+                                                                              .isincidentInvestigationVerificationDoneByListSelected
+                                                                              .value,
+                                                                          selectedValue: controller
+                                                                              .selectedIncidentInvestigationVerificationDoneByList
+                                                                              .value,
+                                                                          onValueChanged:
+                                                                              controller.onValueIncidentVerificationChanged,
+                                                                        ),
+                                                                      ),
+                                                                      // _buildCorrectiveActionTextField_web(
+                                                                      //     context)
+                                                                    ),
+                                                                  ],
+                                                                ),
+                                                                Dimens
+                                                                    .boxHeight5,
+                                                                Row(
+                                                                  mainAxisAlignment:
+                                                                      MainAxisAlignment
+                                                                          .start,
+                                                                  children: [
+                                                                    Text(
+                                                                      'Body part injured / involved & nature of injury:   ',
+                                                                      style: Styles
+                                                                          .black15,
+                                                                    ),
+                                                                    SizedBox(
+                                                                      width: MediaQuery.of(context)
+                                                                              .size
+                                                                              .width /
+                                                                          5,
+                                                                      child:
+                                                                          Obx(
+                                                                        () =>
+                                                                            DropdownWebWidget(
+                                                                          dropdownList:
+                                                                              controller.incidentInvestigationVerificationDoneByList,
+                                                                          isValueSelected: controller
+                                                                              .isincidentInvestigationVerificationDoneByListSelected
+                                                                              .value,
+                                                                          selectedValue: controller
+                                                                              .selectedIncidentInvestigationVerificationDoneByList
+                                                                              .value,
+                                                                          onValueChanged:
+                                                                              controller.onValueIncidentVerificationChanged,
+                                                                        ),
+                                                                      ),
+                                                                      // _buildCorrectiveActionTextField_web(
+                                                                      //     context)
+                                                                    ),
+                                                                  ],
+                                                                ),
+                                                                Dimens
+                                                                    .boxHeight5,
+                                                                Row(
+                                                                  mainAxisAlignment:
+                                                                      MainAxisAlignment
+                                                                          .start,
+                                                                  children: [
+                                                                    Text(
+                                                                      'Work experience (in years):  ',
+                                                                      style: Styles
+                                                                          .black15,
+                                                                    ),
+                                                                    SizedBox(
+                                                                        width:
+                                                                            MediaQuery.of(context).size.width /
+                                                                                5,
+                                                                        child: _buildWorkExperienceTextField_web(
+                                                                            context)
+                                                                        // _buildCorrectiveActionTextField_web(
+                                                                        //     context)
+                                                                        ),
+                                                                  ],
+                                                                ),
+                                                                Dimens
+                                                                    .boxHeight5,
+                                                                Row(
+                                                                  children: [
+                                                                    Text(
+                                                                      'Plant & Equipment involved: ',
+                                                                      style: Styles
+                                                                          .black15,
+                                                                    ),
+                                                                    Dimens
+                                                                        .boxWidth10,
+                                                                    SizedBox(
+                                                                      width: MediaQuery.of(context)
+                                                                              .size
+                                                                              .width /
+                                                                          5,
+                                                                      child:
+                                                                          Obx(
+                                                                        () =>
+                                                                            DropdownWebWidget(
+                                                                          dropdownList:
+                                                                              controller.eqipmentNameList,
+                                                                          isValueSelected: controller
+                                                                              .isEquipmentNameSelected
+                                                                              .value,
+                                                                          selectedValue: controller
+                                                                              .selectedEquipmentName
+                                                                              .value,
+                                                                          onValueChanged:
+                                                                              controller.onValueChanged,
+                                                                        ),
+                                                                      ),
+                                                                    ),
+                                                                  ],
+                                                                ),
+                                                                Dimens
+                                                                    .boxHeight5,
+                                                                Row(
+                                                                  mainAxisAlignment:
+                                                                      MainAxisAlignment
+                                                                          .start,
+                                                                  children: [
+                                                                    Text(
+                                                                      'Exact location of incident:   ',
+                                                                      style: Styles
+                                                                          .black15,
+                                                                    ),
+                                                                    SizedBox(
+                                                                        width:
+                                                                            MediaQuery.of(context).size.width /
+                                                                                5,
+                                                                        child: _buildExactLocationTextField_web(
+                                                                            context)
+                                                                        // _buildCorrectiveActionTextField_web(
+                                                                        //     context)
+                                                                        ),
+                                                                  ],
+                                                                ),
                                                               ],
                                                             ),
                                                           ],
@@ -2122,7 +2311,7 @@ class AddIncidentReportContentWeb extends GetView<AddIncidentReportController> {
     return Obx(() {
       return Container(
         height: 35,
-        width: MediaQuery.of(context).size.width / 8,
+        width: MediaQuery.of(context).size.width / 9.8,
         child: RadioListTile(
           dense: true,
           title: Container(
@@ -2518,6 +2707,198 @@ class AddIncidentReportContentWeb extends GetView<AddIncidentReportController> {
     ]);
   }
 
+  //Exact location Textfield
+  Widget _buildExactLocationTextField_web(BuildContext context) {
+    return Column(//
+        children: [
+      // Align(
+      //   alignment: Alignment.centerLeft,
+      //   child: Padding(
+      //     padding: const EdgeInsets.only(left: 10),
+      //     child: RichText(
+      //       text:
+      //           TextSpan(text: 'Title: ', style: Styles.blackBold16, children: [
+      //         TextSpan(
+      //           text: '*',
+      //           style: TextStyle(
+      //             color: ColorValues.orangeColor,
+      //             fontWeight: FontWeight.bold,
+      //           ),
+      //         ),
+      //       ]),
+      //     ),
+      //   ),
+      // ),
+      Dimens.boxHeight5,
+      Container(
+        // height: MediaQuery.of(context).size.height * 0.050,
+        // width: Responsive.isDesktop(context)
+        //     ? MediaQuery.of(context).size.width / 1.44
+        //     : MediaQuery.of(context).size.width / 1.1,
+        decoration: BoxDecoration(
+          boxShadow: [
+            BoxShadow(
+              color: Colors.black26,
+              offset: const Offset(
+                5.0,
+                5.0,
+              ),
+              blurRadius: 5.0,
+              spreadRadius: 1.0,
+            ),
+            BoxShadow(
+              color: ColorValues.whiteColor,
+              offset: const Offset(0.0, 0.0),
+              blurRadius: 0.0,
+              spreadRadius: 0.0,
+            ),
+          ],
+          color: ColorValues.whiteColor,
+          borderRadius: BorderRadius.circular(5),
+        ),
+        child: SizedBox(
+          width: MediaQuery.of(context).size.width / 1.4,
+          child: TextField(
+            controller: controller.exactLocationTextCtrlr,
+            keyboardType: TextInputType.multiline,
+            autofocus: false,
+            maxLines: 5,
+            maxLength: 200,
+            decoration: InputDecoration(
+              fillColor: ColorValues.whiteColor,
+              filled: true,
+              contentPadding: Dimens.edgeInsets05_10,
+              border: InputBorder.none,
+              enabledBorder: InputBorder.none,
+              focusedBorder: InputBorder.none,
+              focusedErrorBorder: controller.isExactLoactionInvalid.value
+                  ? OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(5),
+                      borderSide: BorderSide(
+                        color: ColorValues.redColorDark,
+                      ),
+                    )
+                  : InputBorder.none,
+              errorBorder: controller.isExactLoactionInvalid.value
+                  ? OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(5),
+                      borderSide: BorderSide(
+                        color: ColorValues.redColorDark,
+                      ),
+                    )
+                  : null,
+              errorText: controller.isExactLoactionInvalid.value
+                  ? "Required field"
+                  : null,
+            ),
+            onChanged: (value) {
+              if (value.trim().length > 3) {
+                controller.isExactLoactionInvalid.value = false;
+              } else {
+                controller.isExactLoactionInvalid.value = true;
+              }
+            },
+          ),
+        ),
+      ),
+    ]);
+  }
+
+  Widget _buildAddressTextField_web(BuildContext context) {
+    return Column(//
+        children: [
+      // Align(
+      //   alignment: Alignment.centerLeft,
+      //   child: Padding(
+      //     padding: const EdgeInsets.only(left: 10),
+      //     child: RichText(
+      //       text:
+      //           TextSpan(text: 'Title: ', style: Styles.blackBold16, children: [
+      //         TextSpan(
+      //           text: '*',
+      //           style: TextStyle(
+      //             color: ColorValues.orangeColor,
+      //             fontWeight: FontWeight.bold,
+      //           ),
+      //         ),
+      //       ]),
+      //     ),
+      //   ),
+      // ),
+      Dimens.boxHeight5,
+      Container(
+        // height: MediaQuery.of(context).size.height * 0.050,
+        // width: Responsive.isDesktop(context)
+        //     ? MediaQuery.of(context).size.width / 1.44
+        //     : MediaQuery.of(context).size.width / 1.1,
+        decoration: BoxDecoration(
+          boxShadow: [
+            BoxShadow(
+              color: Colors.black26,
+              offset: const Offset(
+                5.0,
+                5.0,
+              ),
+              blurRadius: 5.0,
+              spreadRadius: 1.0,
+            ),
+            BoxShadow(
+              color: ColorValues.whiteColor,
+              offset: const Offset(0.0, 0.0),
+              blurRadius: 0.0,
+              spreadRadius: 0.0,
+            ),
+          ],
+          color: ColorValues.whiteColor,
+          borderRadius: BorderRadius.circular(5),
+        ),
+        child: SizedBox(
+          width: MediaQuery.of(context).size.width / 1.4,
+          child: TextField(
+            controller: controller.addressTextCtrlr,
+            keyboardType: TextInputType.multiline,
+            autofocus: false,
+            maxLines: 5,
+            maxLength: 200,
+            decoration: InputDecoration(
+              fillColor: ColorValues.whiteColor,
+              filled: true,
+              contentPadding: Dimens.edgeInsets05_10,
+              border: InputBorder.none,
+              enabledBorder: InputBorder.none,
+              focusedBorder: InputBorder.none,
+              focusedErrorBorder: controller.isAddressInvalid.value
+                  ? OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(5),
+                      borderSide: BorderSide(
+                        color: ColorValues.redColorDark,
+                      ),
+                    )
+                  : InputBorder.none,
+              errorBorder: controller.isAddressInvalid.value
+                  ? OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(5),
+                      borderSide: BorderSide(
+                        color: ColorValues.redColorDark,
+                      ),
+                    )
+                  : null,
+              errorText:
+                  controller.isAddressInvalid.value ? "Required field" : null,
+            ),
+            onChanged: (value) {
+              if (value.trim().length > 3) {
+                controller.isAddressInvalid.value = false;
+              } else {
+                controller.isAddressInvalid.value = true;
+              }
+            },
+          ),
+        ),
+      ),
+    ]);
+  }
+
   Widget _buildInsuranceAvailableTextField_web(BuildContext context) {
     return Column(//
         children: [
@@ -2604,6 +2985,104 @@ class AddIncidentReportContentWeb extends GetView<AddIncidentReportController> {
                 controller.isInsuranceAvailableInvalid.value = false;
               } else {
                 controller.isInsuranceAvailableInvalid.value = true;
+              }
+            },
+          ),
+        ),
+      ),
+    ]);
+  }
+
+//Work experience
+  Widget _buildWorkExperienceTextField_web(BuildContext context) {
+    return Column(//
+        children: [
+      // Align(
+      //   alignment: Alignment.centerLeft,
+      //   child: Padding(
+      //     padding: const EdgeInsets.only(left: 10),
+      //     child: RichText(
+      //       text:
+      //           TextSpan(text: 'Title: ', style: Styles.blackBold16, children: [
+      //         TextSpan(
+      //           text: '*',
+      //           style: TextStyle(
+      //             color: ColorValues.orangeColor,
+      //             fontWeight: FontWeight.bold,
+      //           ),
+      //         ),
+      //       ]),
+      //     ),
+      //   ),
+      // ),
+      Container(
+        height: MediaQuery.of(context).size.height * 0.050,
+        width: Responsive.isDesktop(context)
+            ? MediaQuery.of(context).size.width / 1.44
+            : MediaQuery.of(context).size.width / 1.1,
+        decoration: BoxDecoration(
+          boxShadow: [
+            BoxShadow(
+              color: Colors.black26,
+              offset: const Offset(
+                5.0,
+                5.0,
+              ),
+              blurRadius: 5.0,
+              spreadRadius: 1.0,
+            ),
+            BoxShadow(
+              color: ColorValues.whiteColor,
+              offset: const Offset(0.0, 0.0),
+              blurRadius: 0.0,
+              spreadRadius: 0.0,
+            ),
+          ],
+          color: ColorValues.whiteColor,
+          borderRadius: BorderRadius.circular(5),
+        ),
+        child: SizedBox(
+          width: MediaQuery.of(context).size.width / 1.4,
+          child: TextField(
+            controller: controller.workExperienceTextCtrlr,
+            inputFormatters: [FilteringTextInputFormatter.digitsOnly],
+            keyboardType: TextInputType.number,
+            autofocus: false,
+            decoration: InputDecoration(
+              fillColor: ColorValues.whiteColor,
+              filled: true,
+              contentPadding: Dimens.edgeInsets05_10,
+              border: InputBorder.none,
+              enabledBorder: InputBorder.none,
+              focusedBorder: InputBorder.none,
+              suffixText: 'Number',
+              // label: Text('INR'),
+              focusedErrorBorder: controller.isWorkExperienceInvalid.value
+                  ? OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(5),
+                      borderSide: BorderSide(
+                        color: ColorValues.redColorDark,
+                      ),
+                    )
+                  : InputBorder.none,
+              errorBorder: controller.isWorkExperienceInvalid.value
+                  ? OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(5),
+                      borderSide: BorderSide(
+                        color: ColorValues.redColorDark,
+                      ),
+                    )
+                  : null,
+              errorText: controller.isWorkExperienceInvalid.value
+                  ? "Required field"
+                  : null,
+            ),
+            onChanged: (value) {
+              print('value Damaged${value.length}');
+              if (value.trim().length > 2) {
+                controller.isWorkExperienceInvalid.value = false;
+              } else {
+                controller.isWorkExperienceInvalid.value = true;
               }
             },
           ),

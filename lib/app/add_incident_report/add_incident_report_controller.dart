@@ -208,6 +208,14 @@ class AddIncidentReportController extends GetxController {
   Rx<bool> isInsuranceAvailableInvalid = false.obs;
   var insuranceAvailableTextCtrlr = TextEditingController();
 
+//Address textfield
+  Rx<bool> isAddressInvalid = false.obs;
+  var addressTextCtrlr = TextEditingController();
+
+  //Exact location textfield
+  Rx<bool> isExactLoactionInvalid = false.obs;
+  var exactLocationTextCtrlr = TextEditingController();
+
 //RCA text
   Rx<bool> isRCAInvalid = false.obs;
   var rcaTextCtrlr = TextEditingController();
@@ -215,6 +223,10 @@ class AddIncidentReportController extends GetxController {
   ///damaged Asset Cost
   Rx<bool> isDamagedAssetCostTextInvalid = false.obs;
   var damagedAssetCostTextCtrlr = TextEditingController();
+
+  ///work experience
+  Rx<bool> isWorkExperienceInvalid = false.obs;
+  var workExperienceTextCtrlr = TextEditingController();
 
   ///Gen Loss Due To Asset Loss
   Rx<bool> isGenLossAssetDamageTextInvalid = false.obs;
