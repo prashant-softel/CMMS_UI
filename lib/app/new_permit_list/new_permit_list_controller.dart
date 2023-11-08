@@ -33,7 +33,7 @@ class NewPermitListController extends GetxController {
   ///Column Visibility
   final columnVisibility = ValueNotifier<Map<String, bool>>({
     "Permit Id": true,
-    "Description": true,
+    "Title": true,
     "Permit Type Name": true,
     "Equipment Category": true,
     "Working Area": true,
@@ -46,7 +46,7 @@ class NewPermitListController extends GetxController {
   });
   final Map<String, double> columnwidth = {
     "Permit Id": 153,
-    "Description": 150,
+    "Title": 150,
     "Permit Type Name": 200,
     "Equipment Category": 200,
     "Working Area": 153,
@@ -168,7 +168,7 @@ class NewPermitListController extends GetxController {
   void onInit() async {
     this.filterText = {
       "Permit Id": PermitIdFilterText,
-      "Description": DescriptionFilterText,
+      "Title": DescriptionFilterText,
       "Permit Type Name": PermitTypeNameFilterText,
       "Equipment Category": EquipmentCategoriesFilterText,
       "Working Area": WorkingAreaNameFilterText,
