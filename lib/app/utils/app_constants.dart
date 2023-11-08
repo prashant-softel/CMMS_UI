@@ -54,6 +54,13 @@ abstract class AppConstants {
   static const String kPermitStatusLinkedToAudit = "LINKED_TO_AUDIT";
   static const String kPermitStatusLinkedToHOTO = "LINKED_TO_HOTO";
   static const String kPermitStatusExpired = "EXPIRED";
+  static const int kVendor = 1;
+  static const int kStore = 2;
+  static const int kTask = 3;
+  static const int kJobCard = 4;
+  static const int kEngineer = 5;
+  static const int kInventory = 6;
+  static const int kScrap = 7;
 }
 
 AppFlavor? appFlavor;

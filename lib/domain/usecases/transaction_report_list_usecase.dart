@@ -65,9 +65,7 @@ class TransactionReportListUsecase {
     int? facilityId,
   }) async {
     return repository.inventoryList(
-      isLoading: isLoading,
-      facilityId: facilityId,
-    );
+        isLoading: isLoading, facilityId: facilityId, categoryId: 0);
   }
 
   Future<List<BusinessListModel?>?> getBusinessList() async =>

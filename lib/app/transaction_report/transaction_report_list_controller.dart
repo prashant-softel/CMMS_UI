@@ -2,6 +2,7 @@ import 'dart:async';
 
 import 'package:cmms/app/home/home_controller.dart';
 import 'package:cmms/app/transaction_report/transaction_report_list_presenter.dart';
+import 'package:cmms/app/utils/app_constants.dart';
 import 'package:cmms/domain/models/%20%20transaction_report_list_model.dart';
 import 'package:cmms/domain/models/business_list_model.dart';
 import 'package:cmms/domain/models/facility_model.dart';
@@ -45,7 +46,6 @@ class TransactionReportListController extends GetxController {
   );
   StreamSubscription<int>? facilityIdStreamSubscription;
   int facilityId = 0;
-  RxList<JobCardModel?> jobList = <JobCardModel?>[].obs;
   RxList<BusinessListModel?>? businessNameList = <BusinessListModel?>[].obs;
   Rx<int> fromActorID = 0.obs;
   RxList<TypeModel> actorType = <TypeModel>[
@@ -72,7 +72,9 @@ class TransactionReportListController extends GetxController {
 
   RxString vendorFilterText = ''.obs;
   RxList<InventoryModel?> inventoryNameList = <InventoryModel>[].obs;
-
+  Rx<bool> isSelectedInventory = true.obs;
+  int selectedInventoryId = 0;
+  Rx<String> selectedInventory = ''.obs;
   RxString userDateFilterText = ''.obs;
   RxList<PmTaskListModel?> pmTaskList = <PmTaskListModel?>[].obs;
   Rx<bool> isSelectedpmtask = true.obs;
@@ -85,9 +87,14 @@ class TransactionReportListController extends GetxController {
   RxList<UserListModel?> userList = <UserListModel?>[].obs;
   Rx<bool> isSelectedUser = true.obs;
   int selectedUserId = 0;
+  Rx<String> selectedUser = ''.obs;
+  RxList<JobCardModel?> jobList = <JobCardModel?>[].obs;
+  Rx<bool> isSelectedJob = true.obs;
+  int selectedJobId = 0;
+  Rx<String> selectedJob = ''.obs;
+
   int actorId = 0;
 
-  Rx<String> selectedUser = ''.obs;
   final columnVisibility = ValueNotifier<Map<String, bool>>({
     "From Actor ID": true,
     "From Actor Type": true,
@@ -215,18 +222,20 @@ class TransactionReportListController extends GetxController {
           selectedactorTypeId =
               int.tryParse(actorType[userIndex].id ?? "") ?? 0;
           selectedActorType.value = actorType[userIndex].name;
-          if (selectedactorTypeId == 3) {
+          if (selectedactorTypeId == AppConstants.kTask) {
             getPmTaskList(
                 facilityId, formattedTodate1, formattedFromdate1, false);
-          } else if (selectedactorTypeId == 2) {
+          } else if (selectedactorTypeId == AppConstants.kStore) {
             getFacilityList();
-          } else if (selectedactorTypeId == 4) {
+          } else if (selectedactorTypeId == AppConstants.kJobCard) {
             jobCardList(facilityId, true);
-          } else if (selectedactorTypeId == 5) {
+          } else if (selectedactorTypeId == AppConstants.kEngineer) {
             getUserList(facilityId, true);
-          } else if (selectedactorTypeId == 6) {
+          } else if (selectedactorTypeId == AppConstants.kInventory) {
             inventoryList(facilityId: facilityId);
-          } else if (selectedactorTypeId == 1) {
+          } else if (selectedactorTypeId == AppConstants.kVendor) {
+            //  getBusinessList();
+          } else if (selectedactorTypeId == AppConstants.kScrap) {
             //  getBusinessList();
           }
         }
@@ -277,6 +286,37 @@ class TransactionReportListController extends GetxController {
               isLoading: false);
         }
         break;
+      case RxList<InventoryModel?>:
+        {
+          int inventoryIndex =
+              inventoryNameList.indexWhere((x) => x!.name == value);
+          selectedInventoryId = inventoryNameList[inventoryIndex]!.id ?? 0;
+          selectedInventory.value = value;
+          actorId = selectedInventoryId;
+          transactionReport(
+              facilityId: facilityId,
+              startDate: formattedTodate1,
+              actorType: selectedactorTypeId,
+              actorID: actorId,
+              endDate: formattedFromdate1,
+              isLoading: false);
+        }
+        break;
+      case RxList<JobCardModel?>:
+        {
+          //  int jobIndex = jobList.indexWhere((x) => x!.name == value);
+          //  selectedJobId = jobList[jobIndex]!.id ?? 0;
+          selectedJob.value = value;
+          actorId = selectedJobId;
+          transactionReport(
+              facilityId: facilityId,
+              startDate: formattedTodate1,
+              actorType: selectedactorTypeId,
+              actorID: actorId,
+              endDate: formattedFromdate1,
+              isLoading: false);
+        }
+        break;
       default:
         {
           //statements;
@@ -297,6 +337,16 @@ class TransactionReportListController extends GetxController {
       for (var equipmentName in _equipmentNameList) {
         inventoryNameList.add(equipmentName);
       }
+      selectedInventoryId = inventoryNameList[0]!.id ?? 0;
+      actorId - selectedInventoryId;
+      selectedInventory.value = inventoryNameList[0]!.name ?? "";
+      transactionReport(
+          facilityId: facilityId,
+          startDate: formattedTodate1,
+          actorType: selectedactorTypeId,
+          actorID: actorId,
+          endDate: formattedFromdate1,
+          isLoading: false);
     }
   }
 
