@@ -481,7 +481,7 @@ class AssetMasterWeb extends GetView<AssetMasterController> {
                           child: Container(
                             width: Get.width * 7,
                             margin: EdgeInsets.only(left: 10, top: 30),
-                            height: Get.height/1.1,
+                            height: Get.height / 1.1,
                             child: Card(
                               color: Color.fromARGB(255, 251, 252, 253),
                               elevation: 10,
@@ -509,50 +509,50 @@ class AssetMasterWeb extends GetView<AssetMasterController> {
                                   ),
                                   Row(
                                     children: [
-                                      Container(
-                                        height: 45,
-                                        margin: EdgeInsets.only(left: 10),
-                                        child: CustomElevatedButton(
-                                            backgroundColor:
-                                                ColorValues.appLightBlueColor,
-                                            onPressed: () {
-                                              FlutterClipboard.copy(controller
-                                                      .moduleList![0]
-                                                      .toString())
-                                                  .then((value) {
-                                                print("copy data");
-                                              });
-                                            },
-                                            text: 'Copy'),
-                                      ),
-                                      Container(
-                                        height: 45,
-                                        margin: EdgeInsets.only(left: 10),
-                                        child: CustomElevatedButton(
-                                            backgroundColor:
-                                                ColorValues.appLightBlueColor,
-                                            onPressed: () {},
-                                            text: 'Excel'),
-                                      ),
-                                      Container(
-                                        height: 45,
-                                        margin: EdgeInsets.only(left: 10),
-                                        child: CustomElevatedButton(
-                                            backgroundColor:
-                                                ColorValues.appLightBlueColor,
-                                            onPressed: () {},
-                                            text: 'PDF'),
-                                      ),
-                                      Container(
-                                        height: 45,
-                                        margin: EdgeInsets.only(left: 10),
-                                        child: CustomElevatedButton(
-                                          backgroundColor:
-                                              ColorValues.appLightBlueColor,
-                                          onPressed: () {},
-                                          text: 'columnVisibility'.tr,
-                                        ),
-                                      )
+                                      // Container(
+                                      //   height: 45,
+                                      //   margin: EdgeInsets.only(left: 10),
+                                      //   child: CustomElevatedButton(
+                                      //       backgroundColor:
+                                      //           ColorValues.appLightBlueColor,
+                                      //       onPressed: () {
+                                      //         FlutterClipboard.copy(controller
+                                      //                 .moduleList![0]
+                                      //                 .toString())
+                                      //             .then((value) {
+                                      //           print("copy data");
+                                      //         });
+                                      //       },
+                                      //       text: 'Copy'),
+                                      // ),
+                                      // Container(
+                                      //   height: 45,
+                                      //   margin: EdgeInsets.only(left: 10),
+                                      //   child: CustomElevatedButton(
+                                      //       backgroundColor:
+                                      //           ColorValues.appLightBlueColor,
+                                      //       onPressed: () {},
+                                      //       text: 'Excel'),
+                                      // ),
+                                      // Container(
+                                      //   height: 45,
+                                      //   margin: EdgeInsets.only(left: 10),
+                                      //   child: CustomElevatedButton(
+                                      //       backgroundColor:
+                                      //           ColorValues.appLightBlueColor,
+                                      //       onPressed: () {},
+                                      //       text: 'PDF'),
+                                      // ),
+                                      // Container(
+                                      //   height: 45,
+                                      //   margin: EdgeInsets.only(left: 10),
+                                      //   child: CustomElevatedButton(
+                                      //     backgroundColor:
+                                      //         ColorValues.appLightBlueColor,
+                                      //     onPressed: () {},
+                                      //     text: 'columnVisibility'.tr,
+                                      //   ),
+                                      // )
                                     ],
                                   ),
                                   SizedBox(

@@ -194,43 +194,43 @@ class _MrsListContentWebState extends State<MrsListContentWeb> {
                               //   },
                               // ),
 
-                              Container(
-                                height: 35,
-                                margin: EdgeInsets.only(left: 10),
-                                child: CustomElevatedButton(
-                                  backgroundColor:
-                                      ColorValues.appLightBlueColor,
-                                  onPressed: () {},
-                                  text: 'Column Visibility',
-                                ),
-                              ),
-                              Container(
-                                height: 35,
-                                margin: EdgeInsets.only(left: 10),
-                                child: CustomElevatedButton(
-                                    backgroundColor:
-                                        ColorValues.appLightBlueColor,
-                                    onPressed: () {},
-                                    text: 'Copy'),
-                              ),
-                              Container(
-                                height: 35,
-                                margin: EdgeInsets.only(left: 10),
-                                child: CustomElevatedButton(
-                                    backgroundColor:
-                                        ColorValues.appLightBlueColor,
-                                    onPressed: () {},
-                                    text: 'Excel'),
-                              ),
-                              Container(
-                                height: 35,
-                                margin: EdgeInsets.only(left: 10),
-                                child: CustomElevatedButton(
-                                    backgroundColor:
-                                        ColorValues.appLightBlueColor,
-                                    onPressed: () {},
-                                    text: 'PDF'),
-                              ),
+                              // Container(
+                              //   height: 35,
+                              //   margin: EdgeInsets.only(left: 10),
+                              //   child: CustomElevatedButton(
+                              //     backgroundColor:
+                              //         ColorValues.appLightBlueColor,
+                              //     onPressed: () {},
+                              //     text: 'Column Visibility',
+                              //   ),
+                              // ),
+                              // Container(
+                              //   height: 35,
+                              //   margin: EdgeInsets.only(left: 10),
+                              //   child: CustomElevatedButton(
+                              //       backgroundColor:
+                              //           ColorValues.appLightBlueColor,
+                              //       onPressed: () {},
+                              //       text: 'Copy'),
+                              // ),
+                              // Container(
+                              //   height: 35,
+                              //   margin: EdgeInsets.only(left: 10),
+                              //   child: CustomElevatedButton(
+                              //       backgroundColor:
+                              //           ColorValues.appLightBlueColor,
+                              //       onPressed: () {},
+                              //       text: 'Excel'),
+                              // ),
+                              // Container(
+                              //   height: 35,
+                              //   margin: EdgeInsets.only(left: 10),
+                              //   child: CustomElevatedButton(
+                              //       backgroundColor:
+                              //           ColorValues.appLightBlueColor,
+                              //       onPressed: () {},
+                              //       text: 'PDF'),
+                              // ),
                               Spacer(),
                               Container(
                                 width: 200,
@@ -595,7 +595,7 @@ class MrsListDataSource extends DataTableSource {
                             int mrsId = MrsDetails?.id ?? 0;
                             Get.toNamed(Routes.mrsViewScreen,
                                 arguments: {'mrsId': mrsId});
-                                                    },
+                          },
                         ),
                         TableActionButton(
                           color: ColorValues.editColor,
@@ -611,7 +611,7 @@ class MrsListDataSource extends DataTableSource {
                             int mrsId = MrsDetails?.id ?? 0;
                             Get.toNamed(Routes.editMrs,
                                 arguments: {'mrsId': mrsId});
-                                                    },
+                          },
                         ),
                         controller.mrsList!
                                         .firstWhere(
@@ -644,7 +644,7 @@ class MrsListDataSource extends DataTableSource {
                                   int mrsId = MrsDetails?.id ?? 0;
                                   Get.toNamed(Routes.mrsApprovalScreen,
                                       arguments: {'mrsId': mrsId});
-                                                                },
+                                },
                               )
                             : Dimens.box0,
                         controller.mrsList!
@@ -678,7 +678,7 @@ class MrsListDataSource extends DataTableSource {
                                   int mrsId = MrsDetails?.id ?? 0;
                                   Get.toNamed(Routes.mrsIssueScreen,
                                       arguments: {'mrsId': mrsId});
-                                                                },
+                                },
                               )
                             : Dimens.box0,
                         controller.mrsList!
@@ -712,7 +712,7 @@ class MrsListDataSource extends DataTableSource {
                                   int mrsId = MrsDetails?.id ?? 0;
                                   Get.toNamed(Routes.mrsApprovalScreen,
                                       arguments: {'mrsId': mrsId});
-                                                                },
+                                },
                               )
                             : Dimens.box0,
                         controller.mrsList!
@@ -746,7 +746,7 @@ class MrsListDataSource extends DataTableSource {
                                   int mrsId = MrsDetails?.id ?? 0;
                                   Get.toNamed(Routes.issueMrsApprove,
                                       arguments: {'mrsId': mrsId});
-                                                                },
+                                },
                               )
                             : Dimens.box0,
                         controller.mrsList!
@@ -780,7 +780,7 @@ class MrsListDataSource extends DataTableSource {
                                   int mrsId = MrsDetails?.id ?? 0;
                                   Get.toNamed(Routes.issueMrsApprove,
                                       arguments: {'mrsId': mrsId});
-                                                                },
+                                },
                               )
                             : Dimens.box0,
                       ])

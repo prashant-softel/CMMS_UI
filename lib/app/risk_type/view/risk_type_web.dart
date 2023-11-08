@@ -60,8 +60,8 @@ class RiskTypeWeb extends GetView<RiskTypeController> {
                     onTap: () {
                       Get.back();
                     },
-                    child:
-                        Text(" /RISK TYPE LIST", style: Styles.greyMediumLight12),
+                    child: Text(" /RISK TYPE LIST",
+                        style: Styles.greyMediumLight12),
                   ),
                   // Text(" / CREATE CHECKLIST NUMBER",
                   //     style: Styles.greyMediumLight12)
@@ -231,8 +231,6 @@ class RiskTypeWeb extends GetView<RiskTypeController> {
                                             ),
                                           ],
                                         ),
-
-
                                         SizedBox(
                                           height: 15,
                                         ),
@@ -268,7 +266,9 @@ class RiskTypeWeb extends GetView<RiskTypeController> {
                                         child: CustomElevatedButton(
                                             backgroundColor:
                                                 ColorValues.appRedColor,
-                                            onPressed: () {controller.cleardata();},
+                                            onPressed: () {
+                                              controller.cleardata();
+                                            },
                                             text: 'Cancel')),
                                     SizedBox(
                                       width: 10,
@@ -344,50 +344,50 @@ class RiskTypeWeb extends GetView<RiskTypeController> {
                                   ),
                                   Row(
                                     children: [
-                                      Container(
-                                        height: 35,
-                                        margin: EdgeInsets.only(left: 10),
-                                        child: CustomElevatedButton(
-                                            backgroundColor:
-                                                ColorValues.appLightBlueColor,
-                                            onPressed: () {
-                                              FlutterClipboard.copy(controller
-                                                      .moduleList![0]
-                                                      .toString())
-                                                  .then((value) {
-                                                print("copy data");
-                                              });
-                                            },
-                                            text: 'Copy'),
-                                      ),
-                                      Container(
-                                        height: 35,
-                                        margin: EdgeInsets.only(left: 10),
-                                        child: CustomElevatedButton(
-                                            backgroundColor:
-                                                ColorValues.appLightBlueColor,
-                                            onPressed: () {},
-                                            text: 'Excel'),
-                                      ),
-                                      Container(
-                                        height: 35,
-                                        margin: EdgeInsets.only(left: 10),
-                                        child: CustomElevatedButton(
-                                            backgroundColor:
-                                                ColorValues.appLightBlueColor,
-                                            onPressed: () {},
-                                            text: 'PDF'),
-                                      ),
-                                      Container(
-                                        height: 35,
-                                        margin: EdgeInsets.only(left: 10),
-                                        child: CustomElevatedButton(
-                                          backgroundColor:
-                                              ColorValues.appLightBlueColor,
-                                          onPressed: () {},
-                                          text: 'columnVisibility'.tr,
-                                        ),
-                                      )
+                                      // Container(
+                                      //   height: 35,
+                                      //   margin: EdgeInsets.only(left: 10),
+                                      //   child: CustomElevatedButton(
+                                      //       backgroundColor:
+                                      //           ColorValues.appLightBlueColor,
+                                      //       onPressed: () {
+                                      //         FlutterClipboard.copy(controller
+                                      //                 .moduleList![0]
+                                      //                 .toString())
+                                      //             .then((value) {
+                                      //           print("copy data");
+                                      //         });
+                                      //       },
+                                      //       text: 'Copy'),
+                                      // ),
+                                      // Container(
+                                      //   height: 35,
+                                      //   margin: EdgeInsets.only(left: 10),
+                                      //   child: CustomElevatedButton(
+                                      //       backgroundColor:
+                                      //           ColorValues.appLightBlueColor,
+                                      //       onPressed: () {},
+                                      //       text: 'Excel'),
+                                      // ),
+                                      // Container(
+                                      //   height: 35,
+                                      //   margin: EdgeInsets.only(left: 10),
+                                      //   child: CustomElevatedButton(
+                                      //       backgroundColor:
+                                      //           ColorValues.appLightBlueColor,
+                                      //       onPressed: () {},
+                                      //       text: 'PDF'),
+                                      // ),
+                                      // Container(
+                                      //   height: 35,
+                                      //   margin: EdgeInsets.only(left: 10),
+                                      //   child: CustomElevatedButton(
+                                      //     backgroundColor:
+                                      //         ColorValues.appLightBlueColor,
+                                      //     onPressed: () {},
+                                      //     text: 'columnVisibility'.tr,
+                                      //   ),
+                                      // )
                                     ],
                                   ),
                                   SizedBox(
@@ -487,7 +487,9 @@ class RiskTypeWeb extends GetView<RiskTypeController> {
                                                             : (value ==
                                                                     "Action")
                                                                 ? Row(
-                                                          mainAxisAlignment: MainAxisAlignment.center,
+                                                                    mainAxisAlignment:
+                                                                        MainAxisAlignment
+                                                                            .center,
                                                                     children: [
                                                                         // varUserAccessModel.value.access_list!.where((e) => e.feature_id == 5 && e.edit == 1).length >
                                                                         //     0
@@ -509,7 +511,6 @@ class RiskTypeWeb extends GetView<RiskTypeController> {
                                                                                 controller.selectedItem?.name ?? '';
                                                                             controller.featureCtrlr.text =
                                                                                 controller.selectedItem?.featureName ?? '';
-
 
                                                                             // controller.durationCtrlr.text = "${controller.selectedItem?.featureName}";
                                                                             // // controller.manpowerCtrlr.text = "${controller.selectedItem?.menuImage}";

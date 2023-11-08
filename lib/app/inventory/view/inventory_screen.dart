@@ -146,14 +146,14 @@ class InventoryScreen extends GetView<InventoryController> {
                           ? (itemWidth / itemHeight)
                           : (itemWidth / itemHeightWeb),
                       children: <Widget>[
-                        _inventoryList(
-                            tittle: "Warranty Certificates",
-                            ontap: () {
-                              // controller.pmSchedule();
-                              Get.toNamed(
-                                Routes.warrantyCertificate,
-                              );
-                            }),
+                        // _inventoryList(
+                        //     tittle: "Warranty Certificates",
+                        //     ontap: () {
+                        //       // controller.pmSchedule();
+                        //       Get.toNamed(
+                        //         Routes.warrantyCertificate,
+                        //       );
+                        //     }),
                         varUserAccessModel.value.access_list!
                                     .where((e) =>
                                         e.feature_id ==
@@ -219,13 +219,13 @@ class InventoryScreen extends GetView<InventoryController> {
                           ? (itemWidth / itemHeight)
                           : (itemWidth / itemHeightWeb),
                       children: <Widget>[
-                        _inventoryList(
-                            tittle: "Calibration Certificates",
-                            ontap: () {
-                              Get.toNamed(
-                                Routes.calibrationCertificate,
-                              );
-                            }),
+                        // _inventoryList(
+                        //     tittle: "Calibration Certificates",
+                        //     ontap: () {
+                        //       Get.toNamed(
+                        //         Routes.calibrationCertificate,
+                        //       );
+                        //     }),
                         _inventoryList(
                             tittle: "Calibration List",
                             ontap: () {

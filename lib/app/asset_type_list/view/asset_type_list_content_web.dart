@@ -310,50 +310,50 @@ class AssetTypeListContentWeb extends GetView<AssetTypeListController> {
                                   ),
                                   Row(
                                     children: [
-                                      Container(
-                                        width: (Get.width * .1) - 60,
-                                        margin: EdgeInsets.only(left: 10),
-                                        child: CustomElevatedButton(
-                                            backgroundColor:
-                                                ColorValues.appLightBlueColor,
-                                            onPressed: () {
-                                              FlutterClipboard.copy(controller
-                                                      // .preventiveCheckList![0]
-                                                      .toString())
-                                                  .then((value) {
-                                                print("copy data");
-                                              });
-                                            },
-                                            text: 'Copy'),
-                                      ),
-                                      Container(
-                                        width: (Get.width * .1) - 60,
-                                        margin: EdgeInsets.only(left: 10),
-                                        child: CustomElevatedButton(
-                                            backgroundColor:
-                                                ColorValues.appLightBlueColor,
-                                            onPressed: () {},
-                                            text: 'Excel'),
-                                      ),
-                                      Container(
-                                        width: (Get.width * .1) - 70,
-                                        margin: EdgeInsets.only(left: 10),
-                                        child: CustomElevatedButton(
-                                            backgroundColor:
-                                                ColorValues.appLightBlueColor,
-                                            onPressed: () {},
-                                            text: 'PDF'),
-                                      ),
-                                      Container(
-                                        width: (Get.width * .2) - 100,
-                                        margin: EdgeInsets.only(left: 10),
-                                        child: CustomElevatedButton(
-                                          backgroundColor:
-                                              ColorValues.appLightBlueColor,
-                                          onPressed: () {},
-                                          text: 'columnVisibility'.tr,
-                                        ),
-                                      )
+                                      // Container(
+                                      //   width: (Get.width * .1) - 60,
+                                      //   margin: EdgeInsets.only(left: 10),
+                                      //   child: CustomElevatedButton(
+                                      //       backgroundColor:
+                                      //           ColorValues.appLightBlueColor,
+                                      //       onPressed: () {
+                                      //         FlutterClipboard.copy(controller
+                                      //                 // .preventiveCheckList![0]
+                                      //                 .toString())
+                                      //             .then((value) {
+                                      //           print("copy data");
+                                      //         });
+                                      //       },
+                                      //       text: 'Copy'),
+                                      // ),
+                                      // Container(
+                                      //   width: (Get.width * .1) - 60,
+                                      //   margin: EdgeInsets.only(left: 10),
+                                      //   child: CustomElevatedButton(
+                                      //       backgroundColor:
+                                      //           ColorValues.appLightBlueColor,
+                                      //       onPressed: () {},
+                                      //       text: 'Excel'),
+                                      // ),
+                                      // Container(
+                                      //   width: (Get.width * .1) - 70,
+                                      //   margin: EdgeInsets.only(left: 10),
+                                      //   child: CustomElevatedButton(
+                                      //       backgroundColor:
+                                      //           ColorValues.appLightBlueColor,
+                                      //       onPressed: () {},
+                                      //       text: 'PDF'),
+                                      // ),
+                                      // Container(
+                                      //   width: (Get.width * .2) - 100,
+                                      //   margin: EdgeInsets.only(left: 10),
+                                      //   child: CustomElevatedButton(
+                                      //     backgroundColor:
+                                      //         ColorValues.appLightBlueColor,
+                                      //     onPressed: () {},
+                                      //     text: 'columnVisibility'.tr,
+                                      //   ),
+                                      // )
                                     ],
                                   ),
                                   SizedBox(

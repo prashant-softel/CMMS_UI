@@ -152,7 +152,7 @@ class JobListContentWeb extends StatelessWidget {
 
                                       controller.goToAddJobScreen();
                                     },
-                                    color: ColorValues.greenlightColor,
+                                    color: ColorValues.addNewColor,
                                   )
                                 : Dimens.box0
                           ],

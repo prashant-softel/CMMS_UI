@@ -60,8 +60,8 @@ class SourceOfObsWeb extends GetView<SourceOfObsController> {
                     onTap: () {
                       Get.back();
                     },
-                    child:
-                        Text(" / SOURCE OBSERVATION LIST", style: Styles.greyMediumLight12),
+                    child: Text(" / SOURCE OBSERVATION LIST",
+                        style: Styles.greyMediumLight12),
                   ),
                   // Text(" / CREATE CHECKLIST NUMBER",
                   //     style: Styles.greyMediumLight12)
@@ -252,7 +252,6 @@ class SourceOfObsWeb extends GetView<SourceOfObsController> {
                                             ),
                                           ],
                                         ),
-
                                         SizedBox(
                                           height: 15,
                                         ),
@@ -267,7 +266,9 @@ class SourceOfObsWeb extends GetView<SourceOfObsController> {
                                         child: CustomElevatedButton(
                                             backgroundColor:
                                                 ColorValues.appRedColor,
-                                            onPressed: () {controller.cleardata();},
+                                            onPressed: () {
+                                              controller.cleardata();
+                                            },
                                             text: 'Cancel')),
                                     SizedBox(
                                       width: 10,
@@ -289,7 +290,8 @@ class SourceOfObsWeb extends GetView<SourceOfObsController> {
                                                           .issuccessCreatemodulelist();
                                                   });
                                                 },
-                                                text: 'Create Source Observation ')
+                                                text:
+                                                    'Create Source Observation ')
                                             : CustomElevatedButton(
                                                 backgroundColor: ColorValues
                                                     .appDarkBlueColor,
@@ -343,50 +345,50 @@ class SourceOfObsWeb extends GetView<SourceOfObsController> {
                                   ),
                                   Row(
                                     children: [
-                                      Container(
-                                        height: 35,
-                                        margin: EdgeInsets.only(left: 10),
-                                        child: CustomElevatedButton(
-                                            backgroundColor:
-                                                ColorValues.appLightBlueColor,
-                                            onPressed: () {
-                                              FlutterClipboard.copy(controller
-                                                      .moduleList![0]
-                                                      .toString())
-                                                  .then((value) {
-                                                print("copy data");
-                                              });
-                                            },
-                                            text: 'Copy'),
-                                      ),
-                                      Container(
-                                        height: 35,
-                                        margin: EdgeInsets.only(left: 10),
-                                        child: CustomElevatedButton(
-                                            backgroundColor:
-                                                ColorValues.appLightBlueColor,
-                                            onPressed: () {},
-                                            text: 'Excel'),
-                                      ),
-                                      Container(
-                                        height: 35,
-                                        margin: EdgeInsets.only(left: 10),
-                                        child: CustomElevatedButton(
-                                            backgroundColor:
-                                                ColorValues.appLightBlueColor,
-                                            onPressed: () {},
-                                            text: 'PDF'),
-                                      ),
-                                      Container(
-                                        height: 35,
-                                        margin: EdgeInsets.only(left: 10),
-                                        child: CustomElevatedButton(
-                                          backgroundColor:
-                                              ColorValues.appLightBlueColor,
-                                          onPressed: () {},
-                                          text: 'columnVisibility'.tr,
-                                        ),
-                                      )
+                                      // Container(
+                                      //   height: 35,
+                                      //   margin: EdgeInsets.only(left: 10),
+                                      //   child: CustomElevatedButton(
+                                      //       backgroundColor:
+                                      //           ColorValues.appLightBlueColor,
+                                      //       onPressed: () {
+                                      //         FlutterClipboard.copy(controller
+                                      //                 .moduleList![0]
+                                      //                 .toString())
+                                      //             .then((value) {
+                                      //           print("copy data");
+                                      //         });
+                                      //       },
+                                      //       text: 'Copy'),
+                                      // ),
+                                      // Container(
+                                      //   height: 35,
+                                      //   margin: EdgeInsets.only(left: 10),
+                                      //   child: CustomElevatedButton(
+                                      //       backgroundColor:
+                                      //           ColorValues.appLightBlueColor,
+                                      //       onPressed: () {},
+                                      //       text: 'Excel'),
+                                      // ),
+                                      // Container(
+                                      //   height: 35,
+                                      //   margin: EdgeInsets.only(left: 10),
+                                      //   child: CustomElevatedButton(
+                                      //       backgroundColor:
+                                      //           ColorValues.appLightBlueColor,
+                                      //       onPressed: () {},
+                                      //       text: 'PDF'),
+                                      // ),
+                                      // Container(
+                                      //   height: 35,
+                                      //   margin: EdgeInsets.only(left: 10),
+                                      //   child: CustomElevatedButton(
+                                      //     backgroundColor:
+                                      //         ColorValues.appLightBlueColor,
+                                      //     onPressed: () {},
+                                      //     text: 'columnVisibility'.tr,
+                                      //   ),
+                                      // )
                                     ],
                                   ),
                                   SizedBox(
@@ -399,7 +401,6 @@ class SourceOfObsWeb extends GetView<SourceOfObsController> {
                                               "Id",
                                               "Observation Name ",
                                               "Description ",
-
                                               "Action"
                                             ].map((column) {
                                               return TableViewColumn(
@@ -487,7 +488,9 @@ class SourceOfObsWeb extends GetView<SourceOfObsController> {
                                                             : (value ==
                                                                     "Action")
                                                                 ? Row(
-                                                          mainAxisAlignment: MainAxisAlignment.center,
+                                                                    mainAxisAlignment:
+                                                                        MainAxisAlignment
+                                                                            .center,
                                                                     children: [
                                                                         // varUserAccessModel.value.access_list!.where((e) => e.feature_id == 5 && e.edit == 1).length >
                                                                         //     0
@@ -509,7 +512,6 @@ class SourceOfObsWeb extends GetView<SourceOfObsController> {
                                                                                 controller.selectedItem?.name ?? '';
                                                                             controller.featureCtrlr.text =
                                                                                 controller.selectedItem?.featureName ?? '';
-
 
                                                                             // controller.durationCtrlr.text = "${controller.selectedItem?.featureName}";
                                                                             // // controller.manpowerCtrlr.text = "${controller.selectedItem?.menuImage}";

@@ -155,90 +155,100 @@ class BusinessListContentWeb extends GetView<BusinessListController> {
                                                   ),
                                                   Expanded(
                                                     child: Container(
-                                                      width: (MediaQuery.of(
-                                                                      context)
-                                                                  .size
-                                                                  .width *
-                                                              .2) -
-                                                          35,
-                                                      height:
-                                                          MediaQuery.of(context)
-                                                                  .size
-                                                                  .height *
-                                                              0.040,
-                                                      child : Obx(
-                                                            () => DropdownWebWidget(
-                                                          boxShadow: [
-                                                            BoxShadow(
-                                                              color: Colors.black26,
-                                                              offset: const Offset(
-                                                                5.0,
-                                                                5.0,
+                                                        width: (MediaQuery.of(
+                                                                        context)
+                                                                    .size
+                                                                    .width *
+                                                                .2) -
+                                                            35,
+                                                        height: MediaQuery.of(
+                                                                    context)
+                                                                .size
+                                                                .height *
+                                                            0.040,
+                                                        child: Obx(
+                                                          () =>
+                                                              DropdownWebWidget(
+                                                            boxShadow: [
+                                                              BoxShadow(
+                                                                color: Colors
+                                                                    .black26,
+                                                                offset:
+                                                                    const Offset(
+                                                                  5.0,
+                                                                  5.0,
+                                                                ),
+                                                                blurRadius: 5.0,
+                                                                spreadRadius:
+                                                                    1.0,
                                                               ),
-                                                              blurRadius: 5.0,
-                                                              spreadRadius: 1.0,
-                                                            ),
-                                                            BoxShadow(
-                                                              color: ColorValues
-                                                                  .whiteColor,
-                                                              offset: const Offset(
-                                                                  0.0, 0.0),
-                                                              blurRadius: 0.0,
-                                                              spreadRadius: 0.0,
-                                                            ),
-                                                          ],
-                                                          controller: controller,
-                                                          dropdownList: controller
+                                                              BoxShadow(
+                                                                color: ColorValues
+                                                                    .whiteColor,
+                                                                offset:
+                                                                    const Offset(
+                                                                        0.0,
+                                                                        0.0),
+                                                                blurRadius: 0.0,
+                                                                spreadRadius:
+                                                                    0.0,
+                                                              ),
+                                                            ],
+                                                            controller:
+                                                                controller,
+                                                            dropdownList: controller
                                                                 .businessCategoryList,
-                                                            isValueSelected: controller
-                                                                .isSelectedBusinessType
-                                                                .value,
-                                                            selectedValue: controller
-                                                                .selectedBusinessType
-                                                                .value,
+                                                            isValueSelected:
+                                                                controller
+                                                                    .isSelectedBusinessType
+                                                                    .value,
+                                                            selectedValue:
+                                                                controller
+                                                                    .selectedBusinessType
+                                                                    .value,
                                                             onValueChanged:
                                                                 controller
                                                                     .onValueChanged,
-                                                          // },
+                                                            // },
+                                                          ),
+                                                        )
+                                                        // child: DropdownWebWidget(
+                                                        //   boxShadow: [
+                                                        //     BoxShadow(
+                                                        //       color:
+                                                        //           Colors.black26,
+                                                        //       offset:
+                                                        //           const Offset(
+                                                        //         5.0,
+                                                        //         5.0,
+                                                        //       ),
+                                                        //       blurRadius: 5.0,
+                                                        //       spreadRadius: 1.0,
+                                                        //     ),
+                                                        //     BoxShadow(
+                                                        //       color: ColorValues
+                                                        //           .whiteColor,
+                                                        //       offset:
+                                                        //           const Offset(
+                                                        //               0.0, 0.0),
+                                                        //       blurRadius: 0.0,
+                                                        //       spreadRadius: 0.0,
+                                                        //     ),
+                                                        //   ],
+                                                        //   controller: controller,
+                                                        //   dropdownList: controller
+                                                        //       .businessCategoryList,
+                                                        //   isValueSelected: controller
+                                                        //       .isSelectedBusinessType
+                                                        //       .value,
+                                                        //   selectedValue: controller
+                                                        //       .selectedBusinessType
+                                                        //       .value,
+                                                        //   onValueChanged:
+                                                        //       controller
+                                                        //           .onValueChanged,
+                                                        // ),
                                                         ),
-                                                      )
-                                                      // child: DropdownWebWidget(
-                                                      //   boxShadow: [
-                                                      //     BoxShadow(
-                                                      //       color:
-                                                      //           Colors.black26,
-                                                      //       offset:
-                                                      //           const Offset(
-                                                      //         5.0,
-                                                      //         5.0,
-                                                      //       ),
-                                                      //       blurRadius: 5.0,
-                                                      //       spreadRadius: 1.0,
-                                                      //     ),
-                                                      //     BoxShadow(
-                                                      //       color: ColorValues
-                                                      //           .whiteColor,
-                                                      //       offset:
-                                                      //           const Offset(
-                                                      //               0.0, 0.0),
-                                                      //       blurRadius: 0.0,
-                                                      //       spreadRadius: 0.0,
-                                                      //     ),
-                                                      //   ],
-                                                      //   controller: controller,
-                                                      //   dropdownList: controller
-                                                      //       .businessCategoryList,
-                                                      //   isValueSelected: controller
-                                                      //       .isSelectedBusinessType
-                                                      //       .value,
-                                                      //   selectedValue: controller
-                                                      //       .selectedBusinessType
-                                                      //       .value,
-                                                      //   onValueChanged:
-                                                      //       controller
-                                                      //           .onValueChanged,
-                                                      // ),
-                                                    ),
                                                   ),
                                                 ],
                                               ),
@@ -257,129 +267,131 @@ class BusinessListContentWeb extends GetView<BusinessListController> {
                                                               'Business Name: ')),
                                                   Expanded(
                                                     child: Container(
-                                                        width: (MediaQuery.of(
-                                                                        context)
-                                                                    .size
-                                                                    .width *
-                                                                .2) -
-                                                            30,
-                                                        decoration:
-                                                            BoxDecoration(
-                                                          boxShadow: [
-                                                            BoxShadow(
-                                                              color: Colors
-                                                                  .black26,
-                                                              offset:
-                                                                  const Offset(
-                                                                5.0,
-                                                                5.0,
-                                                              ),
-                                                              blurRadius: 5.0,
-                                                              spreadRadius: 1.0,
+                                                      width: (MediaQuery.of(
+                                                                      context)
+                                                                  .size
+                                                                  .width *
+                                                              .2) -
+                                                          30,
+                                                      decoration: BoxDecoration(
+                                                        boxShadow: [
+                                                          BoxShadow(
+                                                            color:
+                                                                Colors.black26,
+                                                            offset:
+                                                                const Offset(
+                                                              5.0,
+                                                              5.0,
                                                             ),
-                                                            BoxShadow(
-                                                              color: ColorValues
-                                                                  .whiteColor,
-                                                              offset:
-                                                                  const Offset(
-                                                                      0.0, 0.0),
-                                                              blurRadius: 0.0,
-                                                              spreadRadius: 0.0,
-                                                            ),
-                                                          ],
-                                                          color: ColorValues
-                                                              .whiteColor,
-                                                          borderRadius:
-                                                              BorderRadius
-                                                                  .circular(5),
-                                                        ),
-                                                        child:
-                                                        Obx(
-                                                              () => TextField
-                                                            (
-                                                            controller: controller
-                                                                .businesslistNumberCtrlr,
-                                                            keyboardType:
-                                                            TextInputType.multiline,
-                                                            maxLines: 1,
-
-                                                            autofocus: false,
-                                                            decoration: InputDecoration(
-                                                              fillColor: ColorValues
-                                                                  .whiteColor,
-                                                              filled: true,
-                                                              contentPadding: Dimens
-                                                                  .edgeInsets05_10,
-                                                              border: InputBorder.none,
-                                                              enabledBorder:
-                                                              OutlineInputBorder(
-                                                                borderRadius:
-                                                                BorderRadius
-                                                                    .circular(10.0),
-                                                                borderSide: BorderSide(
-                                                                    color: Colors
-                                                                        .transparent),
-                                                              ),
-                                                              focusedBorder:
-                                                              OutlineInputBorder(
-                                                                borderRadius:
-                                                                BorderRadius
-                                                                    .circular(10.0),
-                                                                borderSide: BorderSide(
-                                                                    color: Colors
-                                                                        .transparent),
-                                                              ),
-                                                              focusedErrorBorder: controller
-                                                                  .isNameInvalid
-                                                                  .value
-                                                                  ? OutlineInputBorder(
-                                                                borderRadius:
-                                                                BorderRadius
-                                                                    .circular(
-                                                                    5),
-                                                                borderSide:
-                                                                BorderSide(
-                                                                  color: ColorValues
-                                                                      .redColorDark,
-                                                                ),
-                                                              )
-                                                                  : InputBorder.none,
-                                                              errorBorder: controller
-                                                                  .isNameInvalid
-                                                                  .value
-                                                                  ? OutlineInputBorder(
-                                                                borderRadius:
-                                                                BorderRadius
-                                                                    .circular(
-                                                                    5),
-                                                                borderSide:
-                                                                BorderSide(
-                                                                  color: ColorValues
-                                                                      .redColorDark,
-                                                                ),
-                                                              )
-                                                                  : null,
-                                                              errorText: controller
-                                                                  .isNameInvalid
-                                                                  .value
-                                                                  ? "Required field"
-                                                                  : null,
-                                                            ),
-                                                            onChanged: (value) {
-                                                              if (value.trim().length >
-                                                                  1) {
-                                                                controller
-                                                                    .isNameInvalid
-                                                                    .value = false;
-                                                              } else {
-                                                                controller
-                                                                    .isNameInvalid
-                                                                    .value = true;
-                                                              }
-                                                            },
-
+                                                            blurRadius: 5.0,
+                                                            spreadRadius: 1.0,
                                                           ),
+                                                          BoxShadow(
+                                                            color: ColorValues
+                                                                .whiteColor,
+                                                            offset:
+                                                                const Offset(
+                                                                    0.0, 0.0),
+                                                            blurRadius: 0.0,
+                                                            spreadRadius: 0.0,
+                                                          ),
+                                                        ],
+                                                        color: ColorValues
+                                                            .whiteColor,
+                                                        borderRadius:
+                                                            BorderRadius
+                                                                .circular(5),
+                                                      ),
+                                                      child: Obx(
+                                                        () => TextField(
+                                                          controller: controller
+                                                              .businesslistNumberCtrlr,
+                                                          keyboardType:
+                                                              TextInputType
+                                                                  .multiline,
+                                                          maxLines: 1,
+                                                          autofocus: false,
+                                                          decoration:
+                                                              InputDecoration(
+                                                            fillColor:
+                                                                ColorValues
+                                                                    .whiteColor,
+                                                            filled: true,
+                                                            contentPadding: Dimens
+                                                                .edgeInsets05_10,
+                                                            border: InputBorder
+                                                                .none,
+                                                            enabledBorder:
+                                                                OutlineInputBorder(
+                                                              borderRadius:
+                                                                  BorderRadius
+                                                                      .circular(
+                                                                          10.0),
+                                                              borderSide: BorderSide(
+                                                                  color: Colors
+                                                                      .transparent),
+                                                            ),
+                                                            focusedBorder:
+                                                                OutlineInputBorder(
+                                                              borderRadius:
+                                                                  BorderRadius
+                                                                      .circular(
+                                                                          10.0),
+                                                              borderSide: BorderSide(
+                                                                  color: Colors
+                                                                      .transparent),
+                                                            ),
+                                                            focusedErrorBorder:
+                                                                controller
+                                                                        .isNameInvalid
+                                                                        .value
+                                                                    ? OutlineInputBorder(
+                                                                        borderRadius:
+                                                                            BorderRadius.circular(5),
+                                                                        borderSide:
+                                                                            BorderSide(
+                                                                          color:
+                                                                              ColorValues.redColorDark,
+                                                                        ),
+                                                                      )
+                                                                    : InputBorder
+                                                                        .none,
+                                                            errorBorder: controller
+                                                                    .isNameInvalid
+                                                                    .value
+                                                                ? OutlineInputBorder(
+                                                                    borderRadius:
+                                                                        BorderRadius
+                                                                            .circular(5),
+                                                                    borderSide:
+                                                                        BorderSide(
+                                                                      color: ColorValues
+                                                                          .redColorDark,
+                                                                    ),
+                                                                  )
+                                                                : null,
+                                                            errorText: controller
+                                                                    .isNameInvalid
+                                                                    .value
+                                                                ? "Required field"
+                                                                : null,
+                                                          ),
+                                                          onChanged: (value) {
+                                                            if (value
+                                                                    .trim()
+                                                                    .length >
+                                                                1) {
+                                                              controller
+                                                                  .isNameInvalid
+                                                                  .value = false;
+                                                            } else {
+                                                              controller
+                                                                  .isNameInvalid
+                                                                  .value = true;
+                                                            }
+                                                          },
                                                         ),
+                                                      ),
                                                     ),
                                                   ),
                                                 ],
@@ -397,130 +409,132 @@ class BusinessListContentWeb extends GetView<BusinessListController> {
                                                           title: 'Email: ')),
                                                   Expanded(
                                                     child: Container(
-                                                        width: (MediaQuery.of(
-                                                                        context)
-                                                                    .size
-                                                                    .width *
-                                                                .2) -
-                                                            30,
-                                                        decoration:
-                                                            BoxDecoration(
-                                                          boxShadow: [
-                                                            BoxShadow(
-                                                              color: Colors
-                                                                  .black26,
-                                                              offset:
-                                                                  const Offset(
-                                                                5.0,
-                                                                5.0,
-                                                              ),
-                                                              blurRadius: 5.0,
-                                                              spreadRadius: 1.0,
+                                                      width: (MediaQuery.of(
+                                                                      context)
+                                                                  .size
+                                                                  .width *
+                                                              .2) -
+                                                          30,
+                                                      decoration: BoxDecoration(
+                                                        boxShadow: [
+                                                          BoxShadow(
+                                                            color:
+                                                                Colors.black26,
+                                                            offset:
+                                                                const Offset(
+                                                              5.0,
+                                                              5.0,
                                                             ),
-                                                            BoxShadow(
-                                                              color: ColorValues
-                                                                  .whiteColor,
-                                                              offset:
-                                                                  const Offset(
-                                                                      0.0, 0.0),
-                                                              blurRadius: 0.0,
-                                                              spreadRadius: 0.0,
-                                                            ),
-                                                          ],
-                                                          color: ColorValues
-                                                              .whiteColor,
-                                                          borderRadius:
-                                                              BorderRadius
-                                                                  .circular(5),
-                                                        ),
-                                                        child:
-                                                        Obx(
-                                                              () => TextField
-                                                            (
-                                                            controller: controller
-                                                                .emailCtrlr,
-                                                            keyboardType:
-                                                            TextInputType.multiline,
-                                                            maxLines: 1,
-
-                                                            autofocus: false,
-                                                            decoration: InputDecoration(
-                                                              fillColor: ColorValues
-                                                                  .whiteColor,
-                                                              filled: true,
-                                                              contentPadding: Dimens
-                                                                  .edgeInsets05_10,
-                                                              border: InputBorder.none,
-                                                              enabledBorder:
-                                                              OutlineInputBorder(
-                                                                borderRadius:
-                                                                BorderRadius
-                                                                    .circular(10.0),
-                                                                borderSide: BorderSide(
-                                                                    color: Colors
-                                                                        .transparent),
-                                                              ),
-                                                              focusedBorder:
-                                                              OutlineInputBorder(
-                                                                borderRadius:
-                                                                BorderRadius
-                                                                    .circular(10.0),
-                                                                borderSide: BorderSide(
-                                                                    color: Colors
-                                                                        .transparent),
-                                                              ),
-                                                              focusedErrorBorder: controller
-                                                                  .isEmailInvalid
-                                                                  .value
-                                                                  ? OutlineInputBorder(
-
-                                                                borderRadius:
-                                                                BorderRadius
-                                                                    .circular(
-                                                                    5),
-                                                                borderSide:
-                                                                BorderSide(
-                                                                  color: ColorValues
-                                                                      .redColorDark,
-                                                                ),
-                                                              )
-                                                                  : InputBorder.none,
-                                                              errorBorder: controller
-                                                                  .isEmailInvalid
-                                                                  .value
-                                                                  ? OutlineInputBorder(
-                                                                borderRadius:
-                                                                BorderRadius
-                                                                    .circular(
-                                                                    5),
-                                                                borderSide:
-                                                                BorderSide(
-                                                                  color: ColorValues
-                                                                      .redColorDark,
-                                                                ),
-                                                              )
-                                                                  : null,
-                                                              errorText: controller
-                                                                  .isEmailInvalid
-                                                                  .value
-                                                                  ? "Required field"
-                                                                  : null,
-                                                            ),
-                                                            onChanged: (value) {
-                                                              if (value.trim().length >
-                                                                  1) {
-                                                                controller
-                                                                    .isEmailInvalid
-                                                                    .value = false;
-                                                              } else {
-                                                                controller
-                                                                    .isEmailInvalid
-                                                                    .value = true;
-                                                              }
-                                                            },
-
+                                                            blurRadius: 5.0,
+                                                            spreadRadius: 1.0,
                                                           ),
-                                                        ),),
+                                                          BoxShadow(
+                                                            color: ColorValues
+                                                                .whiteColor,
+                                                            offset:
+                                                                const Offset(
+                                                                    0.0, 0.0),
+                                                            blurRadius: 0.0,
+                                                            spreadRadius: 0.0,
+                                                          ),
+                                                        ],
+                                                        color: ColorValues
+                                                            .whiteColor,
+                                                        borderRadius:
+                                                            BorderRadius
+                                                                .circular(5),
+                                                      ),
+                                                      child: Obx(
+                                                        () => TextField(
+                                                          controller: controller
+                                                              .emailCtrlr,
+                                                          keyboardType:
+                                                              TextInputType
+                                                                  .multiline,
+                                                          maxLines: 1,
+                                                          autofocus: false,
+                                                          decoration:
+                                                              InputDecoration(
+                                                            fillColor:
+                                                                ColorValues
+                                                                    .whiteColor,
+                                                            filled: true,
+                                                            contentPadding: Dimens
+                                                                .edgeInsets05_10,
+                                                            border: InputBorder
+                                                                .none,
+                                                            enabledBorder:
+                                                                OutlineInputBorder(
+                                                              borderRadius:
+                                                                  BorderRadius
+                                                                      .circular(
+                                                                          10.0),
+                                                              borderSide: BorderSide(
+                                                                  color: Colors
+                                                                      .transparent),
+                                                            ),
+                                                            focusedBorder:
+                                                                OutlineInputBorder(
+                                                              borderRadius:
+                                                                  BorderRadius
+                                                                      .circular(
+                                                                          10.0),
+                                                              borderSide: BorderSide(
+                                                                  color: Colors
+                                                                      .transparent),
+                                                            ),
+                                                            focusedErrorBorder:
+                                                                controller
+                                                                        .isEmailInvalid
+                                                                        .value
+                                                                    ? OutlineInputBorder(
+                                                                        borderRadius:
+                                                                            BorderRadius.circular(5),
+                                                                        borderSide:
+                                                                            BorderSide(
+                                                                          color:
+                                                                              ColorValues.redColorDark,
+                                                                        ),
+                                                                      )
+                                                                    : InputBorder
+                                                                        .none,
+                                                            errorBorder: controller
+                                                                    .isEmailInvalid
+                                                                    .value
+                                                                ? OutlineInputBorder(
+                                                                    borderRadius:
+                                                                        BorderRadius
+                                                                            .circular(5),
+                                                                    borderSide:
+                                                                        BorderSide(
+                                                                      color: ColorValues
+                                                                          .redColorDark,
+                                                                    ),
+                                                                  )
+                                                                : null,
+                                                            errorText: controller
+                                                                    .isEmailInvalid
+                                                                    .value
+                                                                ? "Required field"
+                                                                : null,
+                                                          ),
+                                                          onChanged: (value) {
+                                                            if (value
+                                                                    .trim()
+                                                                    .length >
+                                                                1) {
+                                                              controller
+                                                                  .isEmailInvalid
+                                                                  .value = false;
+                                                            } else {
+                                                              controller
+                                                                  .isEmailInvalid
+                                                                  .value = true;
+                                                            }
+                                                          },
+                                                        ),
+                                                      ),
+                                                    ),
                                                   ),
                                                 ],
                                               ), // Email
@@ -538,129 +552,132 @@ class BusinessListContentWeb extends GetView<BusinessListController> {
                                                               'Contact Person: ')),
                                                   Expanded(
                                                     child: Container(
-                                                        width: (MediaQuery.of(
-                                                                        context)
-                                                                    .size
-                                                                    .width *
-                                                                .2) -
-                                                            30,
-                                                        decoration:
-                                                            BoxDecoration(
-                                                          boxShadow: [
-                                                            BoxShadow(
-                                                              color: Colors
-                                                                  .black26,
-                                                              offset:
-                                                                  const Offset(
-                                                                5.0,
-                                                                5.0,
-                                                              ),
-                                                              blurRadius: 5.0,
-                                                              spreadRadius: 1.0,
+                                                      width: (MediaQuery.of(
+                                                                      context)
+                                                                  .size
+                                                                  .width *
+                                                              .2) -
+                                                          30,
+                                                      decoration: BoxDecoration(
+                                                        boxShadow: [
+                                                          BoxShadow(
+                                                            color:
+                                                                Colors.black26,
+                                                            offset:
+                                                                const Offset(
+                                                              5.0,
+                                                              5.0,
                                                             ),
-                                                            BoxShadow(
-                                                              color: ColorValues
-                                                                  .whiteColor,
-                                                              offset:
-                                                                  const Offset(
-                                                                      0.0, 0.0),
-                                                              blurRadius: 0.0,
-                                                              spreadRadius: 0.0,
-                                                            ),
-                                                          ],
-                                                          color: ColorValues
-                                                              .whiteColor,
-                                                          borderRadius:
-                                                              BorderRadius
-                                                                  .circular(5),
-                                                        ),
-                                                        child:
-                                                        Obx(
-                                                              () => TextField
-                                                            (
-                                                            controller: controller
-                                                                .contactpersonCtrlr,
-                                                            keyboardType:
-                                                            TextInputType.multiline,
-                                                            maxLines: 1,
-
-                                                            autofocus: false,
-                                                            decoration: InputDecoration(
-                                                              fillColor: ColorValues
-                                                                  .whiteColor,
-                                                              filled: true,
-                                                              contentPadding: Dimens
-                                                                  .edgeInsets05_10,
-                                                              border: InputBorder.none,
-                                                              enabledBorder:
-                                                              OutlineInputBorder(
-                                                                borderRadius:
-                                                                BorderRadius
-                                                                    .circular(10.0),
-                                                                borderSide: BorderSide(
-                                                                    color: Colors
-                                                                        .transparent),
-                                                              ),
-                                                              focusedBorder:
-                                                              OutlineInputBorder(
-                                                                borderRadius:
-                                                                BorderRadius
-                                                                    .circular(10.0),
-                                                                borderSide: BorderSide(
-                                                                    color: Colors
-                                                                        .transparent),
-                                                              ),
-                                                              focusedErrorBorder: controller
-                                                                  .isPersonInvalid
-                                                                  .value
-                                                                  ? OutlineInputBorder(
-                                                                borderRadius:
-                                                                BorderRadius
-                                                                    .circular(
-                                                                    5),
-                                                                borderSide:
-                                                                BorderSide(
-                                                                  color: ColorValues
-                                                                      .redColorDark,
-                                                                ),
-                                                              )
-                                                                  : InputBorder.none,
-                                                              errorBorder: controller
-                                                                  .isPersonInvalid
-                                                                  .value
-                                                                  ? OutlineInputBorder(
-                                                                borderRadius:
-                                                                BorderRadius
-                                                                    .circular(
-                                                                    5),
-                                                                borderSide:
-                                                                BorderSide(
-                                                                  color: ColorValues
-                                                                      .redColorDark,
-                                                                ),
-                                                              )
-                                                                  : null,
-                                                              errorText: controller
-                                                                  .isPersonInvalid
-                                                                  .value
-                                                                  ? "Required field"
-                                                                  : null,
-                                                            ),
-                                                            onChanged: (value) {
-                                                              if (value.trim().length >
-                                                                  1) {
-                                                                controller
-                                                                    .isPersonInvalid
-                                                                    .value = false;
-                                                              } else {
-                                                                controller
-                                                                    .isPersonInvalid
-                                                                    .value = true;
-                                                              }
-                                                            },
-
+                                                            blurRadius: 5.0,
+                                                            spreadRadius: 1.0,
                                                           ),
-                                                        ),),
+                                                          BoxShadow(
+                                                            color: ColorValues
+                                                                .whiteColor,
+                                                            offset:
+                                                                const Offset(
+                                                                    0.0, 0.0),
+                                                            blurRadius: 0.0,
+                                                            spreadRadius: 0.0,
+                                                          ),
+                                                        ],
+                                                        color: ColorValues
+                                                            .whiteColor,
+                                                        borderRadius:
+                                                            BorderRadius
+                                                                .circular(5),
+                                                      ),
+                                                      child: Obx(
+                                                        () => TextField(
+                                                          controller: controller
+                                                              .contactpersonCtrlr,
+                                                          keyboardType:
+                                                              TextInputType
+                                                                  .multiline,
+                                                          maxLines: 1,
+                                                          autofocus: false,
+                                                          decoration:
+                                                              InputDecoration(
+                                                            fillColor:
+                                                                ColorValues
+                                                                    .whiteColor,
+                                                            filled: true,
+                                                            contentPadding: Dimens
+                                                                .edgeInsets05_10,
+                                                            border: InputBorder
+                                                                .none,
+                                                            enabledBorder:
+                                                                OutlineInputBorder(
+                                                              borderRadius:
+                                                                  BorderRadius
+                                                                      .circular(
+                                                                          10.0),
+                                                              borderSide: BorderSide(
+                                                                  color: Colors
+                                                                      .transparent),
+                                                            ),
+                                                            focusedBorder:
+                                                                OutlineInputBorder(
+                                                              borderRadius:
+                                                                  BorderRadius
+                                                                      .circular(
+                                                                          10.0),
+                                                              borderSide: BorderSide(
+                                                                  color: Colors
+                                                                      .transparent),
+                                                            ),
+                                                            focusedErrorBorder:
+                                                                controller
+                                                                        .isPersonInvalid
+                                                                        .value
+                                                                    ? OutlineInputBorder(
+                                                                        borderRadius:
+                                                                            BorderRadius.circular(5),
+                                                                        borderSide:
+                                                                            BorderSide(
+                                                                          color:
+                                                                              ColorValues.redColorDark,
+                                                                        ),
+                                                                      )
+                                                                    : InputBorder
+                                                                        .none,
+                                                            errorBorder: controller
+                                                                    .isPersonInvalid
+                                                                    .value
+                                                                ? OutlineInputBorder(
+                                                                    borderRadius:
+                                                                        BorderRadius
+                                                                            .circular(5),
+                                                                    borderSide:
+                                                                        BorderSide(
+                                                                      color: ColorValues
+                                                                          .redColorDark,
+                                                                    ),
+                                                                  )
+                                                                : null,
+                                                            errorText: controller
+                                                                    .isPersonInvalid
+                                                                    .value
+                                                                ? "Required field"
+                                                                : null,
+                                                          ),
+                                                          onChanged: (value) {
+                                                            if (value
+                                                                    .trim()
+                                                                    .length >
+                                                                1) {
+                                                              controller
+                                                                  .isPersonInvalid
+                                                                  .value = false;
+                                                            } else {
+                                                              controller
+                                                                  .isPersonInvalid
+                                                                  .value = true;
+                                                            }
+                                                          },
+                                                        ),
+                                                      ),
+                                                    ),
                                                   ),
                                                 ],
                                               ), //Contact Person
@@ -678,129 +695,132 @@ class BusinessListContentWeb extends GetView<BusinessListController> {
                                                               'Contact Number: ')),
                                                   Expanded(
                                                     child: Container(
-                                                        width: (MediaQuery.of(
-                                                                        context)
-                                                                    .size
-                                                                    .width *
-                                                                .2) -
-                                                            30,
-                                                        decoration:
-                                                            BoxDecoration(
-                                                          boxShadow: [
-                                                            BoxShadow(
-                                                              color: Colors
-                                                                  .black26,
-                                                              offset:
-                                                                  const Offset(
-                                                                5.0,
-                                                                5.0,
-                                                              ),
-                                                              blurRadius: 5.0,
-                                                              spreadRadius: 1.0,
+                                                      width: (MediaQuery.of(
+                                                                      context)
+                                                                  .size
+                                                                  .width *
+                                                              .2) -
+                                                          30,
+                                                      decoration: BoxDecoration(
+                                                        boxShadow: [
+                                                          BoxShadow(
+                                                            color:
+                                                                Colors.black26,
+                                                            offset:
+                                                                const Offset(
+                                                              5.0,
+                                                              5.0,
                                                             ),
-                                                            BoxShadow(
-                                                              color: ColorValues
-                                                                  .whiteColor,
-                                                              offset:
-                                                                  const Offset(
-                                                                      0.0, 0.0),
-                                                              blurRadius: 0.0,
-                                                              spreadRadius: 0.0,
-                                                            ),
-                                                          ],
-                                                          color: ColorValues
-                                                              .whiteColor,
-                                                          borderRadius:
-                                                              BorderRadius
-                                                                  .circular(5),
-                                                        ),
-                                                        child:
-                                                        Obx(
-                                                              () => TextField
-                                                            (
-                                                            controller: controller
-                                                                .contactnumberCtrlr,
-                                                            keyboardType:
-                                                            TextInputType.multiline,
-                                                            maxLines: 1,
-
-                                                            autofocus: false,
-                                                            decoration: InputDecoration(
-                                                              fillColor: ColorValues
-                                                                  .whiteColor,
-                                                              filled: true,
-                                                              contentPadding: Dimens
-                                                                  .edgeInsets05_10,
-                                                              border: InputBorder.none,
-                                                              enabledBorder:
-                                                              OutlineInputBorder(
-                                                                borderRadius:
-                                                                BorderRadius
-                                                                    .circular(10.0),
-                                                                borderSide: BorderSide(
-                                                                    color: Colors
-                                                                        .transparent),
-                                                              ),
-                                                              focusedBorder:
-                                                              OutlineInputBorder(
-                                                                borderRadius:
-                                                                BorderRadius
-                                                                    .circular(10.0),
-                                                                borderSide: BorderSide(
-                                                                    color: Colors
-                                                                        .transparent),
-                                                              ),
-                                                              focusedErrorBorder: controller
-                                                                  .isNumberInvalid
-                                                                  .value
-                                                                  ? OutlineInputBorder(
-                                                                borderRadius:
-                                                                BorderRadius
-                                                                    .circular(
-                                                                    5),
-                                                                borderSide:
-                                                                BorderSide(
-                                                                  color: ColorValues
-                                                                      .redColorDark,
-                                                                ),
-                                                              )
-                                                                  : InputBorder.none,
-                                                              errorBorder: controller
-                                                                  .isNumberInvalid
-                                                                  .value
-                                                                  ? OutlineInputBorder(
-                                                                borderRadius:
-                                                                BorderRadius
-                                                                    .circular(
-                                                                    5),
-                                                                borderSide:
-                                                                BorderSide(
-                                                                  color: ColorValues
-                                                                      .redColorDark,
-                                                                ),
-                                                              )
-                                                                  : null,
-                                                              errorText: controller
-                                                                  .isNumberInvalid
-                                                                  .value
-                                                                  ? "Required field"
-                                                                  : null,
-                                                            ),
-                                                            onChanged: (value) {
-                                                              if (value.trim().length >
-                                                                  1) {
-                                                                controller
-                                                                    .isNumberInvalid
-                                                                    .value = false;
-                                                              } else {
-                                                                controller
-                                                                    .isNumberInvalid
-                                                                    .value = true;
-                                                              }
-                                                            },
-
+                                                            blurRadius: 5.0,
+                                                            spreadRadius: 1.0,
                                                           ),
-                                                        ),),
+                                                          BoxShadow(
+                                                            color: ColorValues
+                                                                .whiteColor,
+                                                            offset:
+                                                                const Offset(
+                                                                    0.0, 0.0),
+                                                            blurRadius: 0.0,
+                                                            spreadRadius: 0.0,
+                                                          ),
+                                                        ],
+                                                        color: ColorValues
+                                                            .whiteColor,
+                                                        borderRadius:
+                                                            BorderRadius
+                                                                .circular(5),
+                                                      ),
+                                                      child: Obx(
+                                                        () => TextField(
+                                                          controller: controller
+                                                              .contactnumberCtrlr,
+                                                          keyboardType:
+                                                              TextInputType
+                                                                  .multiline,
+                                                          maxLines: 1,
+                                                          autofocus: false,
+                                                          decoration:
+                                                              InputDecoration(
+                                                            fillColor:
+                                                                ColorValues
+                                                                    .whiteColor,
+                                                            filled: true,
+                                                            contentPadding: Dimens
+                                                                .edgeInsets05_10,
+                                                            border: InputBorder
+                                                                .none,
+                                                            enabledBorder:
+                                                                OutlineInputBorder(
+                                                              borderRadius:
+                                                                  BorderRadius
+                                                                      .circular(
+                                                                          10.0),
+                                                              borderSide: BorderSide(
+                                                                  color: Colors
+                                                                      .transparent),
+                                                            ),
+                                                            focusedBorder:
+                                                                OutlineInputBorder(
+                                                              borderRadius:
+                                                                  BorderRadius
+                                                                      .circular(
+                                                                          10.0),
+                                                              borderSide: BorderSide(
+                                                                  color: Colors
+                                                                      .transparent),
+                                                            ),
+                                                            focusedErrorBorder:
+                                                                controller
+                                                                        .isNumberInvalid
+                                                                        .value
+                                                                    ? OutlineInputBorder(
+                                                                        borderRadius:
+                                                                            BorderRadius.circular(5),
+                                                                        borderSide:
+                                                                            BorderSide(
+                                                                          color:
+                                                                              ColorValues.redColorDark,
+                                                                        ),
+                                                                      )
+                                                                    : InputBorder
+                                                                        .none,
+                                                            errorBorder: controller
+                                                                    .isNumberInvalid
+                                                                    .value
+                                                                ? OutlineInputBorder(
+                                                                    borderRadius:
+                                                                        BorderRadius
+                                                                            .circular(5),
+                                                                    borderSide:
+                                                                        BorderSide(
+                                                                      color: ColorValues
+                                                                          .redColorDark,
+                                                                    ),
+                                                                  )
+                                                                : null,
+                                                            errorText: controller
+                                                                    .isNumberInvalid
+                                                                    .value
+                                                                ? "Required field"
+                                                                : null,
+                                                          ),
+                                                          onChanged: (value) {
+                                                            if (value
+                                                                    .trim()
+                                                                    .length >
+                                                                1) {
+                                                              controller
+                                                                  .isNumberInvalid
+                                                                  .value = false;
+                                                            } else {
+                                                              controller
+                                                                  .isNumberInvalid
+                                                                  .value = true;
+                                                            }
+                                                          },
+                                                        ),
+                                                      ),
+                                                    ),
                                                   ),
                                                 ],
                                               ), //Contact Number
@@ -813,16 +833,24 @@ class BusinessListContentWeb extends GetView<BusinessListController> {
                                                     MainAxisAlignment
                                                         .spaceBetween,
                                                 children: [
-                                                  Expanded(child: RichText(
-                                                    text: TextSpan(text: "Website", style: Styles.blackBold16, children: [
-                                                      TextSpan(
-                                                        style: TextStyle(
-                                                          color: ColorValues.orangeColor,
-                                                          fontWeight: FontWeight.bold,
-                                                        ),
-                                                      ),
-                                                    ]),
-                                                  ),
+                                                  Expanded(
+                                                    child: RichText(
+                                                      text: TextSpan(
+                                                          text: "Website",
+                                                          style: Styles
+                                                              .blackBold16,
+                                                          children: [
+                                                            TextSpan(
+                                                              style: TextStyle(
+                                                                color: ColorValues
+                                                                    .orangeColor,
+                                                                fontWeight:
+                                                                    FontWeight
+                                                                        .bold,
+                                                              ),
+                                                            ),
+                                                          ]),
+                                                    ),
                                                   ),
                                                   Expanded(
                                                     child: Container(
@@ -879,16 +907,24 @@ class BusinessListContentWeb extends GetView<BusinessListController> {
                                                     MainAxisAlignment
                                                         .spaceBetween,
                                                 children: [
-                                                  Expanded(child: RichText(
-                                                    text: TextSpan(text: "Location", style: Styles.blackBold16, children: [
-                                                      TextSpan(
-                                                        style: TextStyle(
-                                                          color: ColorValues.orangeColor,
-                                                          fontWeight: FontWeight.bold,
-                                                        ),
-                                                      ),
-                                                    ]),
-                                                  ),
+                                                  Expanded(
+                                                    child: RichText(
+                                                      text: TextSpan(
+                                                          text: "Location",
+                                                          style: Styles
+                                                              .blackBold16,
+                                                          children: [
+                                                            TextSpan(
+                                                              style: TextStyle(
+                                                                color: ColorValues
+                                                                    .orangeColor,
+                                                                fontWeight:
+                                                                    FontWeight
+                                                                        .bold,
+                                                              ),
+                                                            ),
+                                                          ]),
+                                                    ),
                                                   ),
                                                   Expanded(
                                                     child: Container(
@@ -945,16 +981,24 @@ class BusinessListContentWeb extends GetView<BusinessListController> {
                                                     MainAxisAlignment
                                                         .spaceBetween,
                                                 children: [
-                                                  Expanded(child: RichText(
-                                                    text: TextSpan(text: "Address", style: Styles.blackBold16, children: [
-                                                      TextSpan(
-                                                        style: TextStyle(
-                                                          color: ColorValues.orangeColor,
-                                                          fontWeight: FontWeight.bold,
-                                                        ),
-                                                      ),
-                                                    ]),
-                                                  ),
+                                                  Expanded(
+                                                    child: RichText(
+                                                      text: TextSpan(
+                                                          text: "Address",
+                                                          style: Styles
+                                                              .blackBold16,
+                                                          children: [
+                                                            TextSpan(
+                                                              style: TextStyle(
+                                                                color: ColorValues
+                                                                    .orangeColor,
+                                                                fontWeight:
+                                                                    FontWeight
+                                                                        .bold,
+                                                              ),
+                                                            ),
+                                                          ]),
+                                                    ),
                                                   ),
                                                   Expanded(
                                                     child: Container(
@@ -1011,16 +1055,24 @@ class BusinessListContentWeb extends GetView<BusinessListController> {
                                                     MainAxisAlignment
                                                         .spaceBetween,
                                                 children: [
-                                                  Expanded(child: RichText(
-                                                    text: TextSpan(text: "Country", style: Styles.blackBold16, children: [
-                                                      TextSpan(
-                                                        style: TextStyle(
-                                                          color: ColorValues.orangeColor,
-                                                          fontWeight: FontWeight.bold,
-                                                        ),
-                                                      ),
-                                                    ]),
-                                                  ),
+                                                  Expanded(
+                                                    child: RichText(
+                                                      text: TextSpan(
+                                                          text: "Country",
+                                                          style: Styles
+                                                              .blackBold16,
+                                                          children: [
+                                                            TextSpan(
+                                                              style: TextStyle(
+                                                                color: ColorValues
+                                                                    .orangeColor,
+                                                                fontWeight:
+                                                                    FontWeight
+                                                                        .bold,
+                                                              ),
+                                                            ),
+                                                          ]),
+                                                    ),
                                                   ),
                                                   Expanded(
                                                     child: Container(
@@ -1085,16 +1137,24 @@ class BusinessListContentWeb extends GetView<BusinessListController> {
                                                     MainAxisAlignment
                                                         .spaceBetween,
                                                 children: [
-                                                  Expanded(child: RichText(
-                                                    text: TextSpan(text: "State", style: Styles.blackBold16, children: [
-                                                      TextSpan(
-                                                        style: TextStyle(
-                                                          color: ColorValues.orangeColor,
-                                                          fontWeight: FontWeight.bold,
-                                                        ),
-                                                      ),
-                                                    ]),
-                                                  ),
+                                                  Expanded(
+                                                    child: RichText(
+                                                      text: TextSpan(
+                                                          text: "State",
+                                                          style: Styles
+                                                              .blackBold16,
+                                                          children: [
+                                                            TextSpan(
+                                                              style: TextStyle(
+                                                                color: ColorValues
+                                                                    .orangeColor,
+                                                                fontWeight:
+                                                                    FontWeight
+                                                                        .bold,
+                                                              ),
+                                                            ),
+                                                          ]),
+                                                    ),
                                                   ),
                                                   Expanded(
                                                     child: Container(
@@ -1158,16 +1218,24 @@ class BusinessListContentWeb extends GetView<BusinessListController> {
                                                     MainAxisAlignment
                                                         .spaceBetween,
                                                 children: [
-                                                  Expanded(child: RichText(
-                                                    text: TextSpan(text: "City", style: Styles.blackBold16, children: [
-                                                      TextSpan(
-                                                        style: TextStyle(
-                                                          color: ColorValues.orangeColor,
-                                                          fontWeight: FontWeight.bold,
-                                                        ),
-                                                      ),
-                                                    ]),
-                                                  ),
+                                                  Expanded(
+                                                    child: RichText(
+                                                      text: TextSpan(
+                                                          text: "City",
+                                                          style: Styles
+                                                              .blackBold16,
+                                                          children: [
+                                                            TextSpan(
+                                                              style: TextStyle(
+                                                                color: ColorValues
+                                                                    .orangeColor,
+                                                                fontWeight:
+                                                                    FontWeight
+                                                                        .bold,
+                                                              ),
+                                                            ),
+                                                          ]),
+                                                    ),
                                                   ),
                                                   Expanded(
                                                     child: Container(
@@ -1231,16 +1299,24 @@ class BusinessListContentWeb extends GetView<BusinessListController> {
                                                     MainAxisAlignment
                                                         .spaceBetween,
                                                 children: [
-                                                  Expanded(child: RichText(
-                                                    text: TextSpan(text: "Zip", style: Styles.blackBold16, children: [
-                                                      TextSpan(
-                                                        style: TextStyle(
-                                                          color: ColorValues.orangeColor,
-                                                          fontWeight: FontWeight.bold,
-                                                        ),
-                                                      ),
-                                                    ]),
-                                                  ),
+                                                  Expanded(
+                                                    child: RichText(
+                                                      text: TextSpan(
+                                                          text: "Zip",
+                                                          style: Styles
+                                                              .blackBold16,
+                                                          children: [
+                                                            TextSpan(
+                                                              style: TextStyle(
+                                                                color: ColorValues
+                                                                    .orangeColor,
+                                                                fontWeight:
+                                                                    FontWeight
+                                                                        .bold,
+                                                              ),
+                                                            ),
+                                                          ]),
+                                                    ),
                                                   ),
                                                   Expanded(
                                                     child: Container(
@@ -1309,7 +1385,9 @@ class BusinessListContentWeb extends GetView<BusinessListController> {
                                         child: CustomElevatedButton(
                                             backgroundColor:
                                                 ColorValues.appRedColor,
-                                            onPressed: () {controller.cleardata();},
+                                            onPressed: () {
+                                              controller.cleardata();
+                                            },
                                             text: 'Cancel')),
                                     SizedBox(
                                       width: 10,
@@ -1391,50 +1469,50 @@ class BusinessListContentWeb extends GetView<BusinessListController> {
                                   ),
                                   Row(
                                     children: [
-                                      Container(
-                                        height: 45,
-                                        margin: EdgeInsets.only(left: 10),
-                                        child: CustomElevatedButton(
-                                            backgroundColor:
-                                                ColorValues.appLightBlueColor,
-                                            onPressed: () {
-                                              FlutterClipboard.copy(controller
-                                                      .moduleList![0]
-                                                      .toString())
-                                                  .then((value) {
-                                                print("copy data");
-                                              });
-                                            },
-                                            text: 'Copy'),
-                                      ),
-                                      Container(
-                                        height: 45,
-                                        margin: EdgeInsets.only(left: 10),
-                                        child: CustomElevatedButton(
-                                            backgroundColor:
-                                                ColorValues.appLightBlueColor,
-                                            onPressed: () {},
-                                            text: 'Excel'),
-                                      ),
-                                      Container(
-                                        height: 45,
-                                        margin: EdgeInsets.only(left: 10),
-                                        child: CustomElevatedButton(
-                                            backgroundColor:
-                                                ColorValues.appLightBlueColor,
-                                            onPressed: () {},
-                                            text: 'PDF'),
-                                      ),
-                                      Container(
-                                        height: 45,
-                                        margin: EdgeInsets.only(left: 10),
-                                        child: CustomElevatedButton(
-                                          backgroundColor:
-                                              ColorValues.appLightBlueColor,
-                                          onPressed: () {},
-                                          text: 'columnVisibility'.tr,
-                                        ),
-                                      ),
+                                      // Container(
+                                      //   height: 45,
+                                      //   margin: EdgeInsets.only(left: 10),
+                                      //   child: CustomElevatedButton(
+                                      //       backgroundColor:
+                                      //           ColorValues.appLightBlueColor,
+                                      //       onPressed: () {
+                                      //         FlutterClipboard.copy(controller
+                                      //                 .moduleList![0]
+                                      //                 .toString())
+                                      //             .then((value) {
+                                      //           print("copy data");
+                                      //         });
+                                      //       },
+                                      //       text: 'Copy'),
+                                      // ),
+                                      // Container(
+                                      //   height: 45,
+                                      //   margin: EdgeInsets.only(left: 10),
+                                      //   child: CustomElevatedButton(
+                                      //       backgroundColor:
+                                      //           ColorValues.appLightBlueColor,
+                                      //       onPressed: () {},
+                                      //       text: 'Excel'),
+                                      // ),
+                                      // Container(
+                                      //   height: 45,
+                                      //   margin: EdgeInsets.only(left: 10),
+                                      //   child: CustomElevatedButton(
+                                      //       backgroundColor:
+                                      //           ColorValues.appLightBlueColor,
+                                      //       onPressed: () {},
+                                      //       text: 'PDF'),
+                                      // ),
+                                      // Container(
+                                      //   height: 45,
+                                      //   margin: EdgeInsets.only(left: 10),
+                                      //   child: CustomElevatedButton(
+                                      //     backgroundColor:
+                                      //         ColorValues.appLightBlueColor,
+                                      //     onPressed: () {},
+                                      //     text: 'columnVisibility'.tr,
+                                      //   ),
+                                      // ),
                                       Spacer(),
                                       Container(
                                         width: 200,
@@ -1591,89 +1669,128 @@ class BusinessListContentWeb extends GetView<BusinessListController> {
                                                   cells: _businessList
                                                       .map((value) {
                                                     return TableViewCell(
-                                                        child: (value == 'No')
-                                                            ? CustomSwitchTroggle(
-                                                                value: value ==
-                                                                        'No'
-                                                                    ? true
-                                                                    : false,
-                                                                onChanged:
-                                                                    (value) {},
-                                                              )
-                                                            : (value ==
-                                                                    "Action")
-                                                                ? Row(
-                                                                    mainAxisAlignment: MainAxisAlignment.center,
-                                                                    children: [
-                                                                        // varUserAccessModel.value.access_list!.where((e) => e.feature_id == 5 && e.edit == 1).length >
-                                                                        //     0
-                                                                        //     ?
-                                                                        TableActionButton(
-                                                                          color:
-                                                                              ColorValues.editColor,
-                                                                          icon:
-                                                                              Icons.edit,
-                                                                          message:
-                                                                              'Edit',
-                                                                          onPress:
-                                                                              () {
-                                                                            controller.selectedItem = controller.filteredData.firstWhere((element) =>
-                                                                                "${element?.id}" ==
-                                                                                _businessList[0]);
-                                                                            controller.selectedBusinessType.value =
-                                                                                controller.onFetchNameBusinessTypeFromId(controller.selectedItem?.type)!;
-                                                                            // print(controller.selectedBusinessType.value);
-                                                                            // print(controller.onFetchNameFromId(controller.selectedItem?.type)!);
-                                                                            controller.businesslistNumberCtrlr.text =
-                                                                                controller.selectedItem?.name ?? '';
-                                                                            controller.emailCtrlr.text =
-                                                                                controller.selectedItem?.email ?? '';
-                                                                            controller.contactpersonCtrlr.text =
-                                                                                controller.selectedItem?.contactPerson ?? '';
-                                                                            controller.contactnumberCtrlr.text =
-                                                                                controller.selectedItem?.contactnumber ?? '';
-                                                                            controller.websiteCtrlr.text =
-                                                                                controller.selectedItem?.website ?? '';
-                                                                            controller.locationCtrlr.text =
-                                                                                controller.selectedItem?.location ?? '';
-                                                                            controller.addressCtrlr.text =
-                                                                                controller.selectedItem?.address ?? '';
-                                                                            controller.zipCtrlr.text =
-                                                                                controller.selectedItem?.zip ?? '';
+                                                      child: (value == 'No')
+                                                          ? CustomSwitchTroggle(
+                                                              value:
+                                                                  value == 'No'
+                                                                      ? true
+                                                                      : false,
+                                                              onChanged:
+                                                                  (value) {},
+                                                            )
+                                                          : (value == "Action")
+                                                              ? Row(
+                                                                  mainAxisAlignment:
+                                                                      MainAxisAlignment
+                                                                          .center,
+                                                                  children: [
+                                                                      // varUserAccessModel.value.access_list!.where((e) => e.feature_id == 5 && e.edit == 1).length >
+                                                                      //     0
+                                                                      //     ?
+                                                                      TableActionButton(
+                                                                        color: ColorValues
+                                                                            .editColor,
+                                                                        icon: Icons
+                                                                            .edit,
+                                                                        message:
+                                                                            'Edit',
+                                                                        onPress:
+                                                                            () {
+                                                                          controller.selectedItem = controller.filteredData.firstWhere((element) =>
+                                                                              "${element?.id}" ==
+                                                                              _businessList[0]);
+                                                                          controller
+                                                                              .selectedBusinessType
+                                                                              .value = controller.onFetchNameBusinessTypeFromId(controller.selectedItem?.type)!;
+                                                                          // print(controller.selectedBusinessType.value);
+                                                                          // print(controller.onFetchNameFromId(controller.selectedItem?.type)!);
+                                                                          controller
+                                                                              .businesslistNumberCtrlr
+                                                                              .text = controller
+                                                                                  .selectedItem?.name ??
+                                                                              '';
+                                                                          controller
+                                                                              .emailCtrlr
+                                                                              .text = controller
+                                                                                  .selectedItem?.email ??
+                                                                              '';
+                                                                          controller
+                                                                              .contactpersonCtrlr
+                                                                              .text = controller
+                                                                                  .selectedItem?.contactPerson ??
+                                                                              '';
+                                                                          controller
+                                                                              .contactnumberCtrlr
+                                                                              .text = controller
+                                                                                  .selectedItem?.contactnumber ??
+                                                                              '';
+                                                                          controller
+                                                                              .websiteCtrlr
+                                                                              .text = controller
+                                                                                  .selectedItem?.website ??
+                                                                              '';
+                                                                          controller
+                                                                              .locationCtrlr
+                                                                              .text = controller
+                                                                                  .selectedItem?.location ??
+                                                                              '';
+                                                                          controller
+                                                                              .addressCtrlr
+                                                                              .text = controller
+                                                                                  .selectedItem?.address ??
+                                                                              '';
+                                                                          controller
+                                                                              .zipCtrlr
+                                                                              .text = controller
+                                                                                  .selectedItem?.zip ??
+                                                                              '';
 
-                                                                            controller.selectedCountry.value =
-                                                                                controller.selectedItem?.country ?? '';
-                                                                            controller.selectedState.value =
-                                                                                controller.selectedItem?.state ?? '';
-                                                                            controller.selectedCity.value =
-                                                                                controller.selectedItem?.city ?? '';
-                                                                          },
-                                                                        ),
-                                                                        //     : Container(),
-                                                                        // varUserAccessModel.value.access_list!.where((e) => e.feature_id == 5 && e.delete == 1).length >
-                                                                        //     0
-                                                                        //     ?
-                                                                        TableActionButton(
-                                                                          color:
-                                                                              ColorValues.deleteColor,
-                                                                          icon:
-                                                                              Icons.delete,
-                                                                          message:
-                                                                              'Delete',
-                                                                          onPress:
-                                                                              () {
-                                                                            controller.isDeleteDialog(
-                                                                                business_id: _businessList[0],
-                                                                                business: _businessList[1]);
-                                                                          },
-                                                                        )
-                                                                        // : Container()
-                                                                      ])
-                                                                : Align(
-                                                          // Align the text in the center
-                                                          alignment: Alignment.center,
-                                                          child: Text(value),
-                                                        ),);
+                                                                          controller
+                                                                              .selectedCountry
+                                                                              .value = controller
+                                                                                  .selectedItem?.country ??
+                                                                              '';
+                                                                          controller
+                                                                              .selectedState
+                                                                              .value = controller
+                                                                                  .selectedItem?.state ??
+                                                                              '';
+                                                                          controller
+                                                                              .selectedCity
+                                                                              .value = controller
+                                                                                  .selectedItem?.city ??
+                                                                              '';
+                                                                        },
+                                                                      ),
+                                                                      //     : Container(),
+                                                                      // varUserAccessModel.value.access_list!.where((e) => e.feature_id == 5 && e.delete == 1).length >
+                                                                      //     0
+                                                                      //     ?
+                                                                      TableActionButton(
+                                                                        color: ColorValues
+                                                                            .deleteColor,
+                                                                        icon: Icons
+                                                                            .delete,
+                                                                        message:
+                                                                            'Delete',
+                                                                        onPress:
+                                                                            () {
+                                                                          controller.isDeleteDialog(
+                                                                              business_id: _businessList[0],
+                                                                              business: _businessList[1]);
+                                                                        },
+                                                                      )
+                                                                      // : Container()
+                                                                    ])
+                                                              : Align(
+                                                                  // Align the text in the center
+                                                                  alignment:
+                                                                      Alignment
+                                                                          .center,
+                                                                  child: Text(
+                                                                      value),
+                                                                ),
+                                                    );
                                                   }).toList());
                                             }).toList(),
                                           ),
