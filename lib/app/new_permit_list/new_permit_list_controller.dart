@@ -30,6 +30,39 @@ class NewPermitListController extends GetxController {
   ///
   // var newPermitLists = <NewPermitListModel>[];
 
+  ///Column Visibility
+  final columnVisibility = ValueNotifier<Map<String, bool>>({
+    "Permit Id": true,
+    "Description": true,
+    "Permit Type Name": true,
+    "Equipment Category": true,
+    "Working Area": true,
+    "Requested By": true,
+    "Approved By": true,
+    "Status": true,
+    // "Status code": true,
+
+    // "search": true,
+  });
+  final Map<String, double> columnwidth = {
+    "Permit Id": 153,
+    "Description": 150,
+    "Permit Type Name": 200,
+    "Equipment Category": 200,
+    "Working Area": 153,
+    "Requested By": 130,
+    "Approved By": 150,
+    "Status": 100,
+    // "Status code": 120,
+  };
+  Map<String, RxString> filterText = {};
+  void setColumnVisibility(String columnName, bool isVisible) {
+    final newVisibility = Map<String, bool>.from(columnVisibility.value)
+      ..[columnName] = isVisible;
+    columnVisibility.value = newVisibility;
+    print({"updated columnVisibility": columnVisibility});
+  }
+
   ///Checkbox
   RxBool isChecked = false.obs;
 
@@ -133,6 +166,17 @@ class NewPermitListController extends GetxController {
   ///
   @override
   void onInit() async {
+    this.filterText = {
+      "Permit Id": PermitIdFilterText,
+      "Description": DescriptionFilterText,
+      "Permit Type Name": PermitTypeNameFilterText,
+      "Equipment Category": EquipmentCategoriesFilterText,
+      "Working Area": WorkingAreaNameFilterText,
+      "Requested By": RequestByNameFilterText,
+      "Approved By": ApprovedByNameFilterText,
+      "Status": CurrentStatusShortFilterText,
+      // "Status code": PtwStatusFilterText,
+    };
     //homePresenter.generateToken();
     facilityIdStreamSubscription = controller.facilityId$.listen((event) {
       facilityId = event;
