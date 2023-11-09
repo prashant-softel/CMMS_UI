@@ -97,6 +97,10 @@ class GoDetails {
   String? name;
   int? accepted_qty;
   String? comment;
+  String? asset_name;
+  String? asset_code;
+  String? asset_type;
+  String? asset_cat;
 
   GoDetails(
       {this.itemID,
@@ -106,7 +110,11 @@ class GoDetails {
       this.ordered_qty,
       this.name,
       this.accepted_qty,
-      this.comment});
+      this.comment,
+      this.asset_code,
+      this.asset_name,
+      this.asset_type,
+      this.asset_cat});
 
   GoDetails.fromJson(Map<String, dynamic> json) {
     itemID = json['itemID'];
@@ -117,6 +125,10 @@ class GoDetails {
     name = json['asset_name'];
     accepted_qty = json['accepted_qty'];
     comment = json['comment'];
+    asset_code = json['asset_code'];
+    asset_name = json['asset_name'];
+    asset_type = json['asset_type'];
+    asset_cat = json['asset_cat'];
   }
 
   Map<String, dynamic> toJson() {
@@ -129,6 +141,10 @@ class GoDetails {
     data['asset_name'] = this.name;
     data['accepted_qty'] = this.accepted_qty;
     data['comment'] = this.comment;
+    data['asset_code'] = this.asset_code;
+    data['asset_name'] = this.asset_name;
+    data['asset_type'] = this.asset_type;
+    data['asset_cat'] = this.asset_cat;
 
     return data;
   }
