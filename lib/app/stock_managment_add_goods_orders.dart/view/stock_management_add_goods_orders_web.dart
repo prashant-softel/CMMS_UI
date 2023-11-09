@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:cmms/app/constant/constant.dart';
 import 'package:cmms/app/navigators/app_pages.dart';
 import 'package:cmms/app/utils/user_access_constants.dart';
@@ -302,35 +304,6 @@ class _AddGoodsOrdersWebState extends State<AddGoodsOrdersWeb> {
                                                 ],
                                               ),
                                               Dimens.boxHeight5,
-                                              Row(
-                                                children: [
-                                                  CustomRichText(
-                                                      title: 'Req Order: '),
-                                                  Dimens.boxWidth10,
-                                                  SizedBox(
-                                                    child: Obx(
-                                                      () => DropdownWebStock(
-                                                        width: MediaQuery.of(
-                                                                    context)
-                                                                .size
-                                                                .width /
-                                                            5,
-                                                        dropdownList: controller
-                                                            .goodsOrdersList,
-                                                        isValueSelected: controller
-                                                            .isReqOrderSelected
-                                                            .value,
-                                                        selectedValue: controller
-                                                            .selectedReqOrder
-                                                            .value,
-                                                        onValueChanged:
-                                                            controller
-                                                                .onValueChanged,
-                                                      ),
-                                                    ),
-                                                  ),
-                                                ],
-                                              ),
                                             ],
                                           ),
                                           Spacer(),
@@ -853,11 +826,11 @@ class AddRowInGoodsOrder extends StatelessWidget {
           ],
         ),
         child: Column(children: [
-          // Column(
-          //     children: []..addAll(controller.rowItem.value.map((e) {
-          //         return Text(jsonEncode(e));
-          //       }))),
-          // Text(jsonEncode(controller.dropdownMapperData)),
+          Column(
+              children: []..addAll(controller.rowItem.value.map((e) {
+                  return Text(jsonEncode(e));
+                }))),
+          Text(jsonEncode(controller.dropdownMapperData)),
           Padding(
             padding: const EdgeInsets.all(10.0),
             child: Row(
@@ -914,9 +887,38 @@ class AddRowInGoodsOrder extends StatelessWidget {
               columns: [
                 DataColumn2(
                     // fixedWidth: 500,
-                    label: Text(
-                  "Material",
-                  style: TextStyle(fontSize: 15, fontWeight: FontWeight.bold),
+                    label: Row(
+                  children: [
+                    // Text(
+                    //   "  ",
+                    //   style:
+                    //       TextStyle(fontSize: 15, fontWeight: FontWeight.bold),
+                    // ),
+                    // Dimens.boxWidth5,
+                    Row(
+                      children: [
+                        Text(
+                          "Select Material For Req Order:",
+                          style: TextStyle(
+                              fontSize: 15, fontWeight: FontWeight.bold),
+                        ),
+                        // CustomRichText(title: 'Req Order: '),
+                        Dimens.boxWidth10,
+                        SizedBox(
+                          child: Obx(
+                            () => DropdownWebStock(
+                              width: MediaQuery.of(context).size.width / 5,
+                              dropdownList: controller.goodsOrdersList,
+                              isValueSelected:
+                                  controller.isReqOrderSelected.value,
+                              selectedValue: controller.selectedReqOrder.value,
+                              onValueChanged: controller.onValueChanged,
+                            ),
+                          ),
+                        ),
+                      ],
+                    ),
+                  ],
                 )),
                 DataColumn2(
                     fixedWidth: 250,
@@ -983,21 +985,21 @@ class AddRowInGoodsOrder extends StatelessWidget {
                                     children: [
                                       Text("Assets Code :"),
                                       Text(
-                                          "${controller.dropdownMapperData[mapData['value']]?.accepted_qty ?? ''}")
+                                          "${controller.dropdownMapperData[mapData['value']]?.asset_code ?? ''}")
                                     ],
                                   ),
                                   Row(
                                     children: [
                                       Text("Assets type :"),
                                       Text(
-                                          "${controller.dropdownMapperData[mapData['value']]?.accepted_qty ?? ''}")
+                                          "${controller.dropdownMapperData[mapData['value']]?.asset_type ?? ''}")
                                     ],
                                   ),
                                   Row(
                                     children: [
                                       Text("Assets Category :"),
                                       Text(
-                                          "${controller.dropdownMapperData[mapData['value']]?.accepted_qty ?? ''}")
+                                          "${controller.dropdownMapperData[mapData['value']]?.asset_cat ?? ''}")
                                     ],
                                   )
                                 ],
