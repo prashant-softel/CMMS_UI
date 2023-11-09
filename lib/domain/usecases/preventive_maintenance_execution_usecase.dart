@@ -69,4 +69,12 @@ class PreventiveMaintenanceExecutionUsecase {
         taskId,
         isLoading,
       );
+  Future<bool> transferItem({
+    transferItemJsonString,
+    bool? isLoading,
+  }) async =>
+      await repository.transferItem(
+        isLoading: isLoading,
+        transferItemJsonString: transferItemJsonString,
+      );
 }

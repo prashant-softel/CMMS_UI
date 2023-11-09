@@ -9157,6 +9157,28 @@ class Repository {
       return false;
     }
   }
+
+  Future<bool> transferItem({bool? isLoading, transferItemJsonString}) async {
+    try {
+      final auth = await getSecuredValue(LocalKeys.authToken);
+      final res = await _dataRepository.transferItem(
+          auth: auth,
+          isLoading: isLoading,
+          transferItemJsonString: transferItemJsonString);
+      print({"res.datanew", res.data});
+      if (!res.hasError) {
+        return true;
+      } //
+      else {
+        Utility.showDialog(
+            res.errorCode.toString() + ' createtransferItemNumber');
+        return false;
+      }
+    } catch (error) {
+      print(error.toString());
+      return false;
+    }
+  }
   //end
   //end
 }

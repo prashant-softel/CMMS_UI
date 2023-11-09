@@ -3703,5 +3703,16 @@ class DataRepository extends DomainRepository {
         assetListJsonString: assetListJsonString);
     return response;
   }
+
+  Future<ResponseModel> transferItem({
+    required String auth,
+    transferItemJsonString,
+    bool? isLoading,
+  }) async =>
+      await connectHelper.transferItem(
+        auth: auth,
+        transferItemJsonString: transferItemJsonString,
+        isLoading: isLoading ?? false,
+      );
 //end
 }

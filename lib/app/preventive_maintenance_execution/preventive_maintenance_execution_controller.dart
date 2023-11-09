@@ -1,3 +1,4 @@
+import 'package:cmms/app/app.dart';
 import 'package:cmms/app/navigators/app_pages.dart';
 import 'package:cmms/app/theme/color_values.dart';
 import 'package:cmms/app/theme/dimens.dart';
@@ -7,6 +8,7 @@ import 'package:cmms/app/widgets/custom_elevated_button.dart';
 import 'package:cmms/domain/models/comment_model.dart';
 import 'package:cmms/domain/models/history_model.dart';
 import 'package:cmms/domain/models/mrs_list_by_jobId.dart';
+import 'package:cmms/domain/models/transferItems_model.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:fluttertoast/fluttertoast.dart';
@@ -148,6 +150,37 @@ class PreventiveMaintenanceExecutionController extends GetxController {
     update(["getPmtaskViewList"]);
 
     // print({"checklistObservations", checklistObservations});
+  }
+
+  Future<void> transferItem() async {
+    List<TranferItems> items = [];
+    rowItem.value.forEach((element) {
+      TranferItems item = TranferItems(
+          assetItemID:
+              dropdownMapperData[element[0]["value"]]?.asset_item_ID ?? 0,
+          facilityID: pmtaskViewModel.value?.facility_id ?? 0,
+          fromActorID: scheduleId.value,
+          fromActorType: AppConstants.kTask,
+          mrsID: listMrsByTaskId![0]!.mrsId ?? 0,
+          qty: int.tryParse(element[3]["value"] ?? '0') ?? 0,
+          refID: scheduleId.value,
+          refType: AppConstants.kTask,
+          remarks: "remarks",
+          toActorID:
+              dropdownMapperData[element[0]["value"]]?.asset_type_ID ?? 0,
+          toActorType: AppConstants.kInventory);
+
+      items.add(item);
+    });
+    var transferItemJsonString = items;
+    print({"transferItemJsonString", transferItemJsonString});
+
+    var responsetransferItem =
+        await preventiveMaintenanceExecutionPresenter.transferItem(
+      transferItemJsonString: transferItemJsonString,
+      isLoading: true,
+    );
+    if (responsetransferItem == null) {}
   }
 
   void updatePmExecution() async {

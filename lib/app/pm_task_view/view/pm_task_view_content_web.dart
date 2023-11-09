@@ -561,9 +561,8 @@ class PreventiveMaintenanceTaskViewContentWeb
                                                                   ?.mrsId
                                                                   .toString() ??
                                                               "";
-                                                          print({
-                                                            "mrsId": mrsId
-                                                          });
+                                                          print(
+                                                              {"mrsId": mrsId});
                                                           Get.toNamed(
                                                               Routes
                                                                   .mrsViewScreen,
@@ -572,7 +571,7 @@ class PreventiveMaintenanceTaskViewContentWeb
                                                                     .tryParse(
                                                                         "$mrsId")
                                                               });
-                                                                                                                }),
+                                                        }),
                                                     TableActionButton(
                                                         color: ColorValues
                                                             .editColor,
@@ -591,9 +590,8 @@ class PreventiveMaintenanceTaskViewContentWeb
                                                                   ?.mrsId
                                                                   .toString() ??
                                                               "";
-                                                          print({
-                                                            "mrsId": mrsId
-                                                          });
+                                                          print(
+                                                              {"mrsId": mrsId});
                                                           Get.toNamed(
                                                               Routes.editMrs,
                                                               arguments: {
@@ -601,7 +599,7 @@ class PreventiveMaintenanceTaskViewContentWeb
                                                                     .tryParse(
                                                                         "$mrsId")
                                                               });
-                                                                                                                })
+                                                        })
                                                   ],
                                                 )),
                                               ]),
@@ -676,18 +674,18 @@ class PreventiveMaintenanceTaskViewContentWeb
             child: Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                Container(
-                  height: 35,
-                  child: CustomElevatedButton(
-                    icon: Icons.print,
-                    backgroundColor: ColorValues.linktopermitColor,
-                    text: "print",
-                    onPressed: () {
-                      // controller.generateInvoice();
-                    },
-                  ),
-                ),
-                Dimens.boxWidth10,
+                // Container(
+                //   height: 35,
+                //   child: CustomElevatedButton(
+                //     icon: Icons.print,
+                //     backgroundColor: ColorValues.linktopermitColor,
+                //     text: "print",
+                //     onPressed: () {
+                //       // controller.generateInvoice();
+                //     },
+                //   ),
+                // ),
+                // Dimens.boxWidth10,
                 controller.pmtaskViewModel.value?.status == 161
                     ? Container(
                         height: 35,
