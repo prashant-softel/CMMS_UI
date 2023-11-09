@@ -5089,6 +5089,24 @@ class ConnectHelper {
     return responseModel;
   }
 
+  Future<ResponseModel> transferItem({
+    required String auth,
+    transferItemJsonString,
+    bool? isLoading,
+  }) async {
+    var responseModel = await apiWrapper.makeRequest(
+      'MRS/TransferItems',
+      Request.post,
+      transferItemJsonString,
+      isLoading ?? false,
+      {
+        'Content-Type': 'application/json',
+        'Authorization': 'Bearer $auth',
+      },
+    );
+    return responseModel;
+  }
+
   Future<ResponseModel> createPmPlan({
     required String auth,
     createPmPlanJsonString,

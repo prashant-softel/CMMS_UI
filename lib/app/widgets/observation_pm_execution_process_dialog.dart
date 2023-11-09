@@ -517,7 +517,8 @@ class ObservationPmExecutionViewDialog extends GetView {
                                 text: "Update",
                                 onPressed: () {
                                   Get.back();
-                                  controller.updatePmExecution();
+                                  controller.transferItem();
+                                  // controller.updatePmExecution();
                                 },
                               ),
                             )

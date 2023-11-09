@@ -297,7 +297,7 @@ class MrsIssueContentWeb extends GetView<MrsIssueController> {
                                                 .mrsDetailsModel
                                                 .value!
                                                 .cmmrsItems![index]
-                                                .approved_date
+                                                .requested_qty
                                                 .toString())),
                                             DataCell(
                                               Padding(

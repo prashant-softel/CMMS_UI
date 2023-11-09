@@ -83,4 +83,13 @@ class PreventiveMaintenanceExecutionPresenter {
         taskId: taskId,
         isLoading: isLoading,
       );
+  Future<bool> transferItem({
+    transferItemJsonString,
+    required bool isLoading,
+  }) async {
+    return preventiveMaintenanceExecutionUsecase.transferItem(
+      transferItemJsonString: transferItemJsonString,
+      isLoading: isLoading,
+    );
+  }
 }

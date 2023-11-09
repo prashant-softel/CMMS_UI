@@ -126,15 +126,11 @@ class StockManagementDashboardScreen
                           : (itemWidth / itemHeightWeb),
                       children: <Widget>[
                         _stockManagementList(
-                            tittle: "Stock List",
+                            tittle: "Request Orders",
                             ontap: () {
-                              controller.createChecklist();
+                              Get.offNamed(Routes.purchaseGoodsorder);
                             }),
-                        _importPlan(
-                            tittle: "Import Material",
-                            ontap: () {
-                              controller.importMaterial();
-                            }),
+
                         //  if (Responsive.isDesktop(context))
                         _stockManagementList(
                             tittle: "Goods Order  List",
@@ -182,10 +178,23 @@ class StockManagementDashboardScreen
                         //   //   controller.pmTask();
                         //   // }
                         // ),
-                        _stockManagementList(
-                            tittle: "Request Orders",
+                      ],
+                    ),
+                    GridView.count(
+                      shrinkWrap: true,
+                      primary: false,
+                      padding: const EdgeInsets.all(16),
+                      crossAxisSpacing: 70,
+                      mainAxisSpacing: 6,
+                      crossAxisCount: Responsive.isMobile(context) ? 2 : 5,
+                      childAspectRatio: Responsive.isMobile(context)
+                          ? (itemWidth / itemHeight)
+                          : (itemWidth / itemHeightWeb),
+                      children: <Widget>[
+                        _importPlan(
+                            tittle: "Import Material",
                             ontap: () {
-                              Get.offNamed(Routes.purchaseGoodsorder);
+                              controller.importMaterial();
                             }),
                       ],
                     ),
