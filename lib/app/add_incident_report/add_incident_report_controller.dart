@@ -220,6 +220,48 @@ class AddIncidentReportController extends GetxController {
   Rx<bool> isRCAInvalid = false.obs;
   var rcaTextCtrlr = TextEditingController();
 
+  ///Textfields for Investigation Blocks
+
+  ////1
+  Rx<bool> isTypeOfJobInvalid = false.obs;
+  var typeOfJbTextCtrlr = TextEditingController();
+
+  ///2
+  Rx<bool> isPersonInvolvedInvalid = false.obs;
+  var personInvolvedTextCtrlr = TextEditingController();
+
+  ///3
+  Rx<bool> isPersonAuthorizedInvolvedInvalid = false.obs;
+  var personAuthorizedInvolvedTextCtrlr = TextEditingController();
+
+  ///4
+  Rx<bool> isInstructionsInvalid = false.obs;
+  var instructionsTextCtrlr = TextEditingController();
+
+  ///5
+  Rx<bool> isSafetyEquipmentsInvalid = false.obs;
+  var SafetyEquipmetsTextCtrlr = TextEditingController();
+
+  ///6
+  Rx<bool> isCorrectSafeInvalid = false.obs;
+  var correctSafeTextCtrlr = TextEditingController();
+
+  ///7
+  Rx<bool> isUnsafeConditionsInvalid = false.obs;
+  var unsafeConditionsTextCtrlr = TextEditingController();
+
+  ///8
+  Rx<bool> isUnsafeIncidentInvalid = false.obs;
+  var unsafeIncidentTextCtrlr = TextEditingController();
+
+  ///Legal Applicability Remark Textfield
+  Rx<bool> isLegalApplicabilityInvalid = false.obs;
+  var legalApplicabilityRemarkTextCtrlr = TextEditingController();
+
+  ///ESI Applicability Remark Textfield
+  Rx<bool> isESIApplicabilityInvalid = false.obs;
+  var ESIApplicabilityRemarkTextCtrlr = TextEditingController();
+
   ///damaged Asset Cost
   Rx<bool> isDamagedAssetCostTextInvalid = false.obs;
   var damagedAssetCostTextCtrlr = TextEditingController();
@@ -227,6 +269,22 @@ class AddIncidentReportController extends GetxController {
   ///work experience
   Rx<bool> isWorkExperienceInvalid = false.obs;
   var workExperienceTextCtrlr = TextEditingController();
+
+  ////Why Why analysis textfields
+  var why1TextCtrlr = TextEditingController();
+  var cause1TextCtrlr = TextEditingController();
+
+  var why2TextCtrlr = TextEditingController();
+  var cause2TextCtrlr = TextEditingController();
+
+  var why3TextCtrlr = TextEditingController();
+  var cause3TextCtrlr = TextEditingController();
+
+  var why4TextCtrlr = TextEditingController();
+  var cause4TextCtrlr = TextEditingController();
+
+  var why5TextCtrlr = TextEditingController();
+  var cause5TextCtrlr = TextEditingController();
 
   ///Gen Loss Due To Asset Loss
   Rx<bool> isGenLossAssetDamageTextInvalid = false.obs;
@@ -252,6 +310,13 @@ class AddIncidentReportController extends GetxController {
   RxBool rCAUploadRequiredDetailValue = true.obs;
   RxBool legalApplicabilityDetailValue = true.obs;
   RxBool insuranceApplicableDetailValue = true.obs;
+
+  ///For Why Why analysis switch
+  RxBool whyWhyAnalysisRequiredValue = true.obs;
+  RxBool whyWhyAnalysisValue = false.obs;
+
+  ///For Why Why analysis false switch
+  RxBool whyWhyAnalysisFalseValue = false.obs;
 
   ///For False Detail Switch
   RxBool legalApplicabilityDetailFalseValue = false.obs;
