@@ -1,6 +1,5 @@
 import 'dart:convert';
 
-
 CreateIncidentReportModel createIncidentReportModelFromJson(String str) =>
     CreateIncidentReportModel.fromJson(json.decode(str));
 
@@ -8,7 +7,6 @@ String createIncidentReportModelToJson(CreateIncidentReportModel data) =>
     json.encode(data.toJson());
 
 class CreateIncidentReportModel {
-  
   int? facility_id;
   int? block_id;
   int? equipment_id;
@@ -35,14 +33,9 @@ class CreateIncidentReportModel {
   String? insurance_remark;
   int? id;
   String? severity;
-
-
- 
-  
-
+  List<InvestigationTeam?>? investigationTeam;
 
   CreateIncidentReportModel({
-    
     this.facility_id,
     this.block_id,
     this.equipment_id,
@@ -69,11 +62,7 @@ class CreateIncidentReportModel {
     this.insurance_remark,
     this.id,
     this.severity,
-
-
-    
-   
-   
+    this.investigationTeam,
   });
 
   factory CreateIncidentReportModel.fromJson(Map<String, dynamic> json) =>
@@ -104,14 +93,13 @@ class CreateIncidentReportModel {
         insurance_remark: json['insurance_remark'],
         id: json['id'],
         severity: json['severity'],
-
-
-
-       
+        investigationTeam: json["supplierActions"] != null
+            ? List<InvestigationTeam>.from(json["supplierActions"]
+                ?.map((x) => InvestigationTeam.fromJson(x)))
+            : [],
       );
 
   Map<String, dynamic> toJson() => {
-        
         "facility_id": facility_id,
         "block_id": block_id,
         "equipment_id": equipment_id,
@@ -137,10 +125,42 @@ class CreateIncidentReportModel {
         "insurance_remark": insurance_remark,
         "id": id,
         "severity": severity,
-
-
-
-
+        "investigationTeam":
+            List<dynamic>.from(investigationTeam!.map((x) => x)),
       };
 }
 
+class InvestigationTeam {
+  InvestigationTeam(
+      {this.srNumber,
+      this.name,
+      // this.is_required,
+      // this.required_by_date,
+
+      this.designation});
+
+  String? srNumber;
+  String? name;
+  // bool? is_required;
+  // String? required_by_date;
+
+  String? designation;
+
+  factory InvestigationTeam.fromJson(Map<String, dynamic> json) =>
+      InvestigationTeam(
+          srNumber: json['srNumber'],
+          name: json["name"],
+          // is_required: json["is_required"],
+          // required_by_date: json["required_by_date"],
+
+          designation: json['designation']);
+
+  Map<String, dynamic> toJson() => {
+        "srNumber": srNumber,
+        "name": name,
+        // "is_required": is_required,
+        // "required_by_date": required_by_date,
+
+        "designation": designation
+      };
+}

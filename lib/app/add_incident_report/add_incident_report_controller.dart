@@ -52,9 +52,11 @@ class AddIncidentReportController extends GetxController {
 
   // }
 
-  final TextEditingController supplierActionTextFieldController =
+  final TextEditingController investigationTeamNameTextFieldController =
       TextEditingController();
-  final TextEditingController supplierActionSrNumberTextFieldController =
+  final TextEditingController investigationTeamSrNumberTextFieldController =
+      TextEditingController();
+  final TextEditingController investigationTeamDesignationTextFieldController =
       TextEditingController();
 
   /// Incident Investigation Done By List
@@ -190,6 +192,10 @@ class AddIncidentReportController extends GetxController {
   var validTillTimeCtrlrBuffer;
   var startDateTimeCtrlrBuffer;
 
+  ///target date
+  var targetDateTimeCtrlr = TextEditingController();
+  Rx<DateTime> selectedtargetDateTime = DateTime.now().obs;
+
   var incidentreportDescriptionCtrlr = TextEditingController();
   Rx<bool> isIncidentDescriptionInvalid = false.obs;
 
@@ -216,9 +222,42 @@ class AddIncidentReportController extends GetxController {
   Rx<bool> isExactLoactionInvalid = false.obs;
   var exactLocationTextCtrlr = TextEditingController();
 
+  ///Supplier Action Part
+  var investigationTeam = <InvestigationTeam>[].obs;
+  void updateInvestigationTeamText(
+      String srNumber,
+      String name,
+      // String required_by_data,
+
+      String designation) {
+    investigationTeam.add(InvestigationTeam(
+        srNumber: srNumber,
+        name: name,
+        // required_by_date: required_by_data,
+        // is_required: is_required
+
+        designation: designation));
+  }
+
 //RCA text
   Rx<bool> isRCAInvalid = false.obs;
   var rcaTextCtrlr = TextEditingController();
+
+  ///Root cause textfields
+  var rootCause1TextCtrlr = TextEditingController();
+  var rootCause2TextCtrlr = TextEditingController();
+  var rootCause3TextCtrlr = TextEditingController();
+
+  ///Immediate Corection textfields
+  var immediateCorrection1TextCtrlr = TextEditingController();
+  var immediateCorrection2TextCtrlr = TextEditingController();
+  var immediateCorrection3TextCtrlr = TextEditingController();
+
+  ///action plan
+  var actionPlanTextCtrlr = TextEditingController();
+
+  ///remark textfield
+  var remarkTextCtrlr = TextEditingController();
 
   ///Textfields for Investigation Blocks
 
