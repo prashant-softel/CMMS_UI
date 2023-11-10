@@ -1,6 +1,5 @@
 import 'dart:convert';
 
-
 CreateWarrantyClaimModel createWarrantyClaimModelFromJson(String str) =>
     CreateWarrantyClaimModel.fromJson(json.decode(str));
 
@@ -31,9 +30,7 @@ class CreateWarrantyClaimModel {
   List<SupplierActions?>? supplierActions;
   int? status;
 
-
   CreateWarrantyClaimModel({
-    
     this.facilityId,
     this.equipmentId,
     this.goodsOrderId,
@@ -59,7 +56,6 @@ class CreateWarrantyClaimModel {
 
   factory CreateWarrantyClaimModel.fromJson(Map<String, dynamic> json) =>
       CreateWarrantyClaimModel(
-        
         facilityId: json["facilityId"],
         equipmentId: json["equipmentId"],
         goodsOrderId: json["goodsOrderId"],
@@ -77,22 +73,21 @@ class CreateWarrantyClaimModel {
         correctiveActionByBuyer: json['correctiveActionByBuyer'],
         approverId: json['approverId'],
         failureTime: json['failureTime'],
-
-        additionalEmailEmployees:json["additionalEmailEmployees"]!=null?
-            List<int>.from(json["additionalEmailEmployees"].map((x) => x)):[],
-
-        externalEmails: json["externalEmails"]!=null? List<ExternalEmails>.from(
-            json["externalEmails"]?.map((x) => ExternalEmails.fromJson(x))):[],
-
-        supplierActions: json["supplierActions"]!=null? List<SupplierActions>.from(
-            json["supplierActions"]?.map((x) => SupplierActions.fromJson(x))):[],
-        
+        additionalEmailEmployees: json["additionalEmailEmployees"] != null
+            ? List<int>.from(json["additionalEmailEmployees"].map((x) => x))
+            : [],
+        externalEmails: json["externalEmails"] != null
+            ? List<ExternalEmails>.from(
+                json["externalEmails"]?.map((x) => ExternalEmails.fromJson(x)))
+            : [],
+        supplierActions: json["supplierActions"] != null
+            ? List<SupplierActions>.from(json["supplierActions"]
+                ?.map((x) => SupplierActions.fromJson(x)))
+            : [],
         status: json['status'],
-
       );
 
   Map<String, dynamic> toJson() => {
-        
         "facilityId": facilityId,
         "equipmentId": equipmentId,
         "goodsOrderId": goodsOrderId,
@@ -110,7 +105,8 @@ class CreateWarrantyClaimModel {
         "correctiveActionByBuyer": correctiveActionByBuyer,
         "approverId": approverId,
         "failureTime": failureTime,
-        "additionalEmailEmployees": List<dynamic>.from(additionalEmailEmployees!.map((x) => x)),
+        "additionalEmailEmployees":
+            List<dynamic>.from(additionalEmailEmployees!.map((x) => x)),
         "externalEmails": List<dynamic>.from(externalEmails!.map((x) => x)),
         "supplierActions": List<dynamic>.from(supplierActions!.map((x) => x)),
         "status": status,
@@ -118,23 +114,17 @@ class CreateWarrantyClaimModel {
 }
 
 class ExternalEmails {
-  ExternalEmails( {
-    this.name,
-    this.email,
-  });
+  ExternalEmails({this.name, this.email, this.mobile});
 
   String? name;
   String? email;
+  int? mobile;
 
   factory ExternalEmails.fromJson(Map<String, dynamic> json) => ExternalEmails(
-        name: json["name"],
-        email: json["email"],
-      );
+      name: json["name"], email: json["email"], mobile: json['mobile']);
 
-  Map<String, dynamic> toJson() => {
-        "name": name,
-        "email": email,
-      };
+  Map<String, dynamic> toJson() =>
+      {"name": name, "email": email, "mobile": mobile};
 }
 
 class SupplierActions {
@@ -150,7 +140,8 @@ class SupplierActions {
   String? required_by_date;
   String? srNumber;
 
-  factory SupplierActions.fromJson(Map<String, dynamic> json) => SupplierActions(
+  factory SupplierActions.fromJson(Map<String, dynamic> json) =>
+      SupplierActions(
         name: json["name"],
         // is_required: json["is_required"],
         required_by_date: json["required_by_date"],
@@ -165,8 +156,7 @@ class SupplierActions {
       };
 }
 
-
-String addExternalEmailsToJson(ExternalEmails data) => json.encode(data.toJson());
-String addSupplierActionsToJson(SupplierActions data) => json.encode(data.toJson());
-
-
+String addExternalEmailsToJson(ExternalEmails data) =>
+    json.encode(data.toJson());
+String addSupplierActionsToJson(SupplierActions data) =>
+    json.encode(data.toJson());

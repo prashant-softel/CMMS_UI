@@ -40,8 +40,9 @@ class WarrantyClaimController extends GetxController {
 
   ///External Emails Part
   var externalEmails = <ExternalEmails>[].obs;
-  void updateText(String name, String email) {
-    externalEmails.add(ExternalEmails(email: email, name: name));
+  void updateText(String name, String email, int? mobile) {
+    externalEmails
+        .add(ExternalEmails(email: email, name: name, mobile: mobile));
   }
 
   ///Radio
@@ -88,6 +89,8 @@ class WarrantyClaimController extends GetxController {
       TextEditingController();
   final TextEditingController nameTextFieldController = TextEditingController();
   final TextEditingController emailTextFieldController =
+      TextEditingController();
+  final TextEditingController mobileTextFieldController =
       TextEditingController();
 
   ///Failure Date Time For Web

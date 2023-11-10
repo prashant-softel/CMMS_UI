@@ -104,6 +104,8 @@ abstract class Dimens {
   static double hundredNinty = 190.sp;
   static double hundredNintyThree = 193.sp;
   static double twoHundred = 200.sp;
+  static double twoHundredThirty = 230.sp;
+
   static double oneHundredEighty = 180.sp;
   static double oneHundredSeventy = 170.sp;
   static double oneHundredSeventyFive = 175.sp;
@@ -143,6 +145,9 @@ abstract class Dimens {
   static double twoHundredStatic = 200;
   static double twoHundredFifteen = 215;
   static double twoHundredSeventy = 270;
+  static double twoHundredNinty = 290;
+  static double twoHundredNintyFive = 295;
+  static double twoHundredNintyEight = 298;
 
   static double pointZeroZeroEight = 0.08.sp;
   static double pointZeroZeroNine = 0.09.sp;
@@ -1351,7 +1356,14 @@ abstract class Dimens {
   static SizedBox boxWidth130 = SizedBox(width: hundredThirty);
   static SizedBox boxWidth120 = SizedBox(width: hundredTwenty);
   static SizedBox boxWidth150 = SizedBox(width: hundredFifty);
+  static SizedBox boxWidth140 = SizedBox(width: hundredFourty);
   static SizedBox boxWidth200 = SizedBox(width: twoHundred);
+  static SizedBox boxWidth230 = SizedBox(width: twoHundredThirty);
+  static SizedBox boxWidth270 = SizedBox(width: twoHundredSeventy);
+  static SizedBox boxWidth290 = SizedBox(width: twoHundredNinty);
+  static SizedBox boxWidth295 = SizedBox(width: twoHundredNintyFive);
+  static SizedBox boxWidth298 = SizedBox(width: twoHundredNintyEight);
+
   static SizedBox boxWidth300 = SizedBox(width: threeHundred);
   static SizedBox boxWidth180 = SizedBox(width: oneHundredEighty);
   static SizedBox boxWidth170 = SizedBox(width: oneHundredSeventy);

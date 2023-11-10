@@ -6,10 +6,12 @@ import 'package:cmms/app/warranty_claim_list/warranty_claim_controller.dart';
 import 'package:cmms/app/widgets/custom_elevated_button.dart';
 import 'package:cmms/app/widgets/custom_multiselect_dialog_field.dart';
 import 'package:cmms/app/widgets/custom_richtext.dart';
+import 'package:cmms/app/widgets/custom_textField.dart';
 import 'package:cmms/app/widgets/dropdown_web.dart';
 import 'package:cmms/app/widgets/file_upload_details_widget_web.dart';
 import 'package:cmms/app/widgets/file_upload_with_dropzone_widget.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
 import 'package:multi_select_flutter/multi_select_flutter.dart';
@@ -454,11 +456,11 @@ class NewWarrantyClaimWeb extends GetView<WarrantyClaimController> {
 
                                           ///Additional Email
                                           SizedBox(
-                                            height: 400,
+                                            height: 500,
                                             width: MediaQuery.of(context)
                                                     .size
                                                     .width /
-                                                2.5,
+                                                2.2,
                                             child: Center(
                                               child: Container(
                                                 margin: Dimens.edgeInsets16,
@@ -576,6 +578,7 @@ class NewWarrantyClaimWeb extends GetView<WarrantyClaimController> {
                                                                             )),
 
                                                                             ////Second TabBar View
+                                                                            ///
                                                                             // Center(child: Text('Second Tab'))
                                                                             SingleChildScrollView(
                                                                               child: Column(
@@ -597,11 +600,14 @@ class NewWarrantyClaimWeb extends GetView<WarrantyClaimController> {
                                                                                         'Name',
                                                                                         style: TextStyle(fontWeight: FontWeight.bold),
                                                                                       ),
-                                                                                      SizedBox(
-                                                                                        width: 175,
-                                                                                      ),
+                                                                                      Dimens.boxWidth140,
                                                                                       Text(
                                                                                         'Email',
+                                                                                        style: TextStyle(fontWeight: FontWeight.bold),
+                                                                                      ),
+                                                                                      Dimens.boxWidth150,
+                                                                                      Text(
+                                                                                        'Mobile',
                                                                                         style: TextStyle(fontWeight: FontWeight.bold),
                                                                                       ),
                                                                                     ],
@@ -626,10 +632,8 @@ class NewWarrantyClaimWeb extends GetView<WarrantyClaimController> {
                                                                                                 width: 75,
                                                                                               ),
                                                                                               SizedBox(width: 200, child: Text('${data.name}')),
-                                                                                              SizedBox(
-                                                                                                width: 20,
-                                                                                              ),
                                                                                               SizedBox(width: 200, child: Text('${data.email}')),
+                                                                                              SizedBox(width: 100, child: Text('${data.mobile}')),
                                                                                             ],
                                                                                           )))),
 
@@ -639,18 +643,90 @@ class NewWarrantyClaimWeb extends GetView<WarrantyClaimController> {
                                                                                   //       textController: controller.serialNoTextFieldController,
                                                                                   //       label: 'Sr. No.',
                                                                                   //     )),
+                                                                                  Dimens.boxHeight10,
                                                                                   SizedBox(
                                                                                       width: MediaQuery.of(context).size.width / 3,
-                                                                                      child: CustomTextField(
-                                                                                        textController: controller.nameTextFieldController,
-                                                                                        label: 'Name',
+                                                                                      child: Row(
+                                                                                        children: [
+                                                                                          Text(
+                                                                                            'Name: ',
+                                                                                            style: Styles.black12,
+                                                                                          ),
+                                                                                          Container(
+                                                                                            decoration: BoxDecoration(
+                                                                                                border: Border.all(
+                                                                                              color: Color(0xFE50000),
+                                                                                              width: 0.5,
+                                                                                            )),
+                                                                                            height: MediaQuery.of(context).size.height * 0.040,
+                                                                                            // margin: Dimens.edgeInsets5,
+                                                                                            constraints: BoxConstraints(
+                                                                                              maxWidth: MediaQuery.of(context).size.width / 4,
+                                                                                              minWidth: 100,
+                                                                                            ),
+                                                                                            child: LoginCustomTextfield(
+                                                                                              textController: controller.nameTextFieldController,
+                                                                                            ),
+                                                                                          ),
+                                                                                        ],
                                                                                       )),
                                                                                   SizedBox(
-                                                                                      width: MediaQuery.of(context).size.width / 3,
-                                                                                      child: CustomTextField(
-                                                                                        textController: controller.emailTextFieldController,
-                                                                                        label: 'Email',
-                                                                                      )),
+                                                                                    width: MediaQuery.of(context).size.width / 3,
+                                                                                    child: Row(
+                                                                                      children: [
+                                                                                        Text(
+                                                                                          '  Email: ',
+                                                                                          style: Styles.black12,
+                                                                                        ),
+                                                                                        Container(
+                                                                                          decoration: BoxDecoration(
+                                                                                              border: Border.all(
+                                                                                            color: Color(0xFE50000),
+                                                                                            width: 0.5,
+                                                                                          )),
+                                                                                          height: MediaQuery.of(context).size.height * 0.040,
+                                                                                          // margin: Dimens.edgeInsets5,
+                                                                                          constraints: BoxConstraints(
+                                                                                            maxWidth: MediaQuery.of(context).size.width / 4,
+                                                                                            minWidth: 100,
+                                                                                          ),
+                                                                                          child: LoginCustomTextfield(
+                                                                                            textController: controller.emailTextFieldController,
+                                                                                          ),
+                                                                                        ),
+                                                                                      ],
+                                                                                    ),
+                                                                                  ),
+                                                                                  SizedBox(
+                                                                                    width: MediaQuery.of(context).size.width / 3,
+                                                                                    child: Row(
+                                                                                      children: [
+                                                                                        Text(
+                                                                                          'Mobile: ',
+                                                                                          style: Styles.black12,
+                                                                                        ),
+                                                                                        Container(
+                                                                                          decoration: BoxDecoration(
+                                                                                              border: Border.all(
+                                                                                            color: Color(0xFE50000),
+                                                                                            width: 0.5,
+                                                                                          )),
+                                                                                          height: MediaQuery.of(context).size.height * 0.040,
+                                                                                          // margin: Dimens.edgeInsets5,
+                                                                                          constraints: BoxConstraints(
+                                                                                            maxWidth: MediaQuery.of(context).size.width / 4,
+                                                                                            minWidth: 100,
+                                                                                          ),
+                                                                                          child: LoginCustomTextfield(
+                                                                                            inputFormatters: [
+                                                                                              FilteringTextInputFormatter.digitsOnly
+                                                                                            ],
+                                                                                            textController: controller.mobileTextFieldController,
+                                                                                          ),
+                                                                                        ),
+                                                                                      ],
+                                                                                    ),
+                                                                                  ),
                                                                                   ElevatedButton(
                                                                                     onPressed: () {
                                                                                       // controller.addRow(controller.serialNoTextFieldController.text);
@@ -661,13 +737,14 @@ class NewWarrantyClaimWeb extends GetView<WarrantyClaimController> {
 
                                                                                       // controller.addRow(controller.emailTextFieldController.text);
                                                                                       // controller.emailTextFieldController.clear();
-                                                                                      controller.updateText(controller.nameTextFieldController.text, controller.emailTextFieldController.text);
+                                                                                      controller.updateText(controller.nameTextFieldController.text, controller.emailTextFieldController.text, int.tryParse('${controller.mobileTextFieldController.text}'));
                                                                                       controller.nameTextFieldController.clear();
                                                                                       controller.emailTextFieldController.clear();
+                                                                                      controller.mobileTextFieldController.clear();
                                                                                     },
                                                                                     child: Text(
                                                                                       'Add',
-                                                                                      style: TextStyle(color: ColorValues.appGreenColor),
+                                                                                      style: TextStyle(color: ColorValues.whiteColor),
                                                                                     ),
                                                                                   ),
                                                                                 ],
@@ -694,64 +771,64 @@ class NewWarrantyClaimWeb extends GetView<WarrantyClaimController> {
                                           )
                                         ],
                                       ),
-                                      SizedBox(
-                                        height: 20,
-                                      ),
-                                      Wrap(
-                                        children: [
-                                          SizedBox(
-                                            width: 20,
-                                          ),
-                                          Container(
-                                            height: 250,
-                                            width: MediaQuery.of(context)
-                                                    .size
-                                                    .width /
-                                                1.15,
-                                            decoration: BoxDecoration(
-                                                border: Border.all(
-                                                    color: Colors.grey)),
-                                            child: Column(
-                                              crossAxisAlignment:
-                                                  CrossAxisAlignment.start,
-                                              children: [
-                                                Padding(
-                                                  padding:
-                                                      const EdgeInsets.only(
-                                                          left: 20, top: 15),
-                                                  child:
-                                                      Text('Equipment Images'),
-                                                ),
-                                                Dimens.boxHeight30,
-                                                Row(
-                                                  children: [
-                                                    ////
-                                                    /// FILE UPLOAD WIDGET
-                                                    Container(
-                                                      height: Get.height * 0.2,
-                                                      width: Get.width / 1.3,
-                                                      child: Row(
-                                                          //
-                                                          children: [
-                                                            Expanded(
-                                                              flex: 2,
-                                                              child:
-                                                                  FileUploadWidgetWithDropzone(),
-                                                            ),
-                                                            Dimens.boxWidth10,
-                                                            Expanded(
-                                                                flex: 8,
-                                                                child:
-                                                                    FileUploadDetailsWidgetWeb()),
-                                                          ]),
-                                                    ),
-                                                  ],
-                                                ),
-                                              ],
-                                            ),
-                                          )
-                                        ],
-                                      ),
+                                      // SizedBox(
+                                      //   height: 20,
+                                      // ),
+                                      // Wrap(
+                                      //   children: [
+                                      //     SizedBox(
+                                      //       width: 20,
+                                      //     ),
+                                      //     Container(
+                                      //       height: 250,
+                                      //       width: MediaQuery.of(context)
+                                      //               .size
+                                      //               .width /
+                                      //           1.15,
+                                      //       decoration: BoxDecoration(
+                                      //           border: Border.all(
+                                      //               color: Colors.grey)),
+                                      //       child: Column(
+                                      //         crossAxisAlignment:
+                                      //             CrossAxisAlignment.start,
+                                      //         children: [
+                                      //           Padding(
+                                      //             padding:
+                                      //                 const EdgeInsets.only(
+                                      //                     left: 20, top: 15),
+                                      //             child:
+                                      //                 Text('Equipment Images'),
+                                      //           ),
+                                      //           Dimens.boxHeight30,
+                                      //           Row(
+                                      //             children: [
+                                      //               ////
+                                      //               /// FILE UPLOAD WIDGET
+                                      //               Container(
+                                      //                 height: Get.height * 0.2,
+                                      //                 width: Get.width / 1.3,
+                                      //                 child: Row(
+                                      //                     //
+                                      //                     children: [
+                                      //                       Expanded(
+                                      //                         flex: 2,
+                                      //                         child:
+                                      //                             FileUploadWidgetWithDropzone(),
+                                      //                       ),
+                                      //                       Dimens.boxWidth10,
+                                      //                       Expanded(
+                                      //                           flex: 8,
+                                      //                           child:
+                                      //                               FileUploadDetailsWidgetWeb()),
+                                      //                     ]),
+                                      //               ),
+                                      //             ],
+                                      //           ),
+                                      //         ],
+                                      //       ),
+                                      //     )
+                                      //   ],
+                                      // ),
 
                                       SizedBox(
                                         height: 20,

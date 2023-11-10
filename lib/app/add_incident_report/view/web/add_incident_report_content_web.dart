@@ -1987,6 +1987,437 @@ class AddIncidentReportContentWeb extends GetView<AddIncidentReportController> {
                                                       )
                                                     : Dimens.box0,
 
+                                                ///Root Cause
+                                                Container(
+                                                  margin: EdgeInsets.all(20),
+                                                  decoration: BoxDecoration(
+                                                    border: Border.all(
+                                                        color: Colors.grey
+                                                            .withOpacity(.3)),
+                                                  ),
+                                                  child: Container(
+                                                    color: Color.fromARGB(
+                                                        255, 237, 240, 242),
+                                                    padding:
+                                                        const EdgeInsets.all(
+                                                            8.0),
+                                                    child: Column(
+                                                      crossAxisAlignment:
+                                                          CrossAxisAlignment
+                                                              .start,
+                                                      children: [
+                                                        Text(
+                                                          "Root Cause (s)/ Underlying causes",
+                                                          style: Styles.blue700,
+                                                        ),
+                                                        Dimens.boxHeight10,
+                                                        Column(
+                                                          crossAxisAlignment:
+                                                              CrossAxisAlignment
+                                                                  .start,
+                                                          children: [
+                                                            Row(
+                                                              children: [
+                                                                Text(
+                                                                  ' 1. ',
+                                                                  style: Styles
+                                                                      .black15,
+                                                                ),
+                                                                rootCauseTextfields(
+                                                                    context, 1)
+                                                              ],
+                                                            ),
+                                                            Dimens.boxHeight5,
+                                                            Row(
+                                                              children: [
+                                                                Text(
+                                                                  '2. ',
+                                                                  style: Styles
+                                                                      .black15,
+                                                                ),
+                                                                rootCauseTextfields(
+                                                                    context, 2)
+                                                              ],
+                                                            ),
+                                                            Dimens.boxHeight5,
+                                                            Row(
+                                                              children: [
+                                                                Text(
+                                                                  '3. ',
+                                                                  style: Styles
+                                                                      .black15,
+                                                                ),
+                                                                rootCauseTextfields(
+                                                                    context, 3)
+                                                              ],
+                                                            ),
+                                                          ],
+                                                        ),
+                                                      ],
+                                                    ),
+                                                  ),
+                                                ),
+
+                                                ///Immediate Correction
+                                                Container(
+                                                  margin: EdgeInsets.all(20),
+                                                  decoration: BoxDecoration(
+                                                    border: Border.all(
+                                                        color: Colors.grey
+                                                            .withOpacity(.3)),
+                                                  ),
+                                                  child: Container(
+                                                    color: Color.fromARGB(
+                                                        255, 237, 240, 242),
+                                                    padding:
+                                                        const EdgeInsets.all(
+                                                            8.0),
+                                                    child: Column(
+                                                      crossAxisAlignment:
+                                                          CrossAxisAlignment
+                                                              .start,
+                                                      children: [
+                                                        Text(
+                                                          "Immediate Correction",
+                                                          style: Styles.blue700,
+                                                        ),
+                                                        Dimens.boxHeight10,
+                                                        Column(
+                                                          crossAxisAlignment:
+                                                              CrossAxisAlignment
+                                                                  .start,
+                                                          children: [
+                                                            Row(
+                                                              children: [
+                                                                Text(
+                                                                  ' 1. ',
+                                                                  style: Styles
+                                                                      .black15,
+                                                                ),
+                                                                immediateCorrectionTextfields(
+                                                                    context, 1)
+                                                              ],
+                                                            ),
+                                                            Dimens.boxHeight5,
+                                                            Row(
+                                                              children: [
+                                                                Text(
+                                                                  '2. ',
+                                                                  style: Styles
+                                                                      .black15,
+                                                                ),
+                                                                immediateCorrectionTextfields(
+                                                                    context, 2)
+                                                              ],
+                                                            ),
+                                                            Dimens.boxHeight5,
+                                                            Row(
+                                                              children: [
+                                                                Text(
+                                                                  '3. ',
+                                                                  style: Styles
+                                                                      .black15,
+                                                                ),
+                                                                immediateCorrectionTextfields(
+                                                                    context, 3)
+                                                              ],
+                                                            ),
+                                                          ],
+                                                        ),
+                                                      ],
+                                                    ),
+                                                  ),
+                                                ),
+
+                                                ///Proposed action plan
+                                                Container(
+                                                  margin: EdgeInsets.all(20),
+                                                  decoration: BoxDecoration(
+                                                    border: Border.all(
+                                                        color: Colors.grey
+                                                            .withOpacity(.3)),
+                                                  ),
+                                                  child: Container(
+                                                    color: Color.fromARGB(
+                                                        255, 237, 240, 242),
+                                                    padding:
+                                                        const EdgeInsets.all(
+                                                            8.0),
+                                                    child: Column(
+                                                      crossAxisAlignment:
+                                                          CrossAxisAlignment
+                                                              .start,
+                                                      children: [
+                                                        Text(
+                                                          "Proposed Action Plan (based on CA & PA)",
+                                                          style: Styles.blue700,
+                                                        ),
+                                                        Dimens.boxHeight10,
+                                                        Row(
+                                                          crossAxisAlignment:
+                                                              CrossAxisAlignment
+                                                                  .start,
+                                                          children: [
+                                                            Column(
+                                                              children: [
+                                                                Text(
+                                                                  'Action as per plan ',
+                                                                  style: Styles
+                                                                      .black15,
+                                                                ),
+                                                                actionPlanTextfields(
+                                                                    context)
+                                                              ],
+                                                            ),
+                                                            Spacer(),
+                                                            Column(
+                                                              children: [
+                                                                Text(
+                                                                  'Responsibility ',
+                                                                  style: Styles
+                                                                      .black15,
+                                                                ),
+                                                                SizedBox(
+                                                                  width: MediaQuery.of(
+                                                                              context)
+                                                                          .size
+                                                                          .width /
+                                                                      5,
+                                                                  child: Obx(
+                                                                    () =>
+                                                                        DropdownWebWidget(
+                                                                      dropdownList:
+                                                                          controller
+                                                                              .eqipmentNameList,
+                                                                      isValueSelected: controller
+                                                                          .isEquipmentNameSelected
+                                                                          .value,
+                                                                      selectedValue: controller
+                                                                          .selectedEquipmentName
+                                                                          .value,
+                                                                      onValueChanged:
+                                                                          controller
+                                                                              .onValueChanged,
+                                                                    ),
+                                                                  ),
+                                                                ),
+                                                              ],
+                                                            ),
+                                                            Spacer(),
+                                                            Column(
+                                                              children: [
+                                                                Text(
+                                                                  'Target Date ',
+                                                                  style: Styles
+                                                                      .black15,
+                                                                ),
+                                                                SizedBox(
+                                                                  width: MediaQuery.of(
+                                                                              context)
+                                                                          .size
+                                                                          .width /
+                                                                      5,
+                                                                  child:
+                                                                      _buildTargetDateField_web(
+                                                                    context,
+                                                                  ),
+                                                                ),
+                                                              ],
+                                                            ),
+                                                            Spacer(),
+                                                            Column(
+                                                              children: [
+                                                                Text(
+                                                                  'Remark ',
+                                                                  style: Styles
+                                                                      .black15,
+                                                                ),
+                                                                remarkTextfields(
+                                                                    context)
+                                                              ],
+                                                            )
+                                                          ],
+                                                        ),
+                                                      ],
+                                                    ),
+                                                  ),
+                                                ),
+
+                                                ////Investigation team
+                                                Container(
+                                                  // width: MediaQuery.of(context).size.width / 1.15,
+                                                  margin: EdgeInsets.all(20),
+                                                  // height: Get.height,
+                                                  decoration: BoxDecoration(
+                                                    border: Border.all(
+                                                        color: Colors.grey
+                                                            .withOpacity(.3)),
+                                                  ),
+                                                  constraints: BoxConstraints(
+                                                    maxWidth: 1100,
+                                                  ),
+                                                  child: Column(
+                                                    crossAxisAlignment:
+                                                        CrossAxisAlignment
+                                                            .start,
+                                                    children: [
+                                                      Padding(
+                                                        padding:
+                                                            const EdgeInsets
+                                                                .all(8.0),
+                                                        child: Text(
+                                                          "Investigation Team",
+                                                          style: Styles.blue700,
+                                                        ),
+                                                      ),
+                                                      Dimens.boxHeight10,
+                                                      Obx(
+                                                        () => Wrap(children: [
+                                                          Row(children: [
+                                                            Dimens.boxWidth80,
+                                                            Text('Sr.No.'),
+                                                            Dimens.boxWidth180,
+                                                            Text('Name'),
+                                                            SizedBox(
+                                                              width: 310,
+                                                            ),
+                                                            Text('Designation'),
+                                                            Dimens.boxWidth200,
+                                                            Text('Signature'),
+
+                                                            // Text('Action'),
+                                                          ]),
+                                                          SizedBox(
+                                                            height: 20,
+                                                          ),
+                                                          Column(
+                                                            children: []
+                                                              ..addAll(controller
+                                                                  .investigationTeam
+                                                                  .map(
+                                                                      (element) =>
+                                                                          Row(
+                                                                            children: [
+                                                                              // Text('${element.name}'),
+                                                                              // Text('${element.required_by_date}')
+
+                                                                              investigationTeamData('${element.srNumber}', '${element.name}', '${element.designation}', context),
+                                                                            ],
+                                                                          ))),
+                                                          ),
+
+                                                          // supplierActionData(
+                                                          //     '2',
+                                                          //     'Material Replinishment',
+                                                          //     context,
+                                                          //     1),
+                                                          // supplierActionData(
+                                                          //     '3',
+                                                          //     'Preventive Action Plan',
+                                                          //     context,
+                                                          //     2),
+                                                          // supplierActionData(
+                                                          //     '4',
+                                                          //     'Claim Closure Date',
+                                                          //     context,
+                                                          //     3)
+                                                          Column(
+                                                            crossAxisAlignment:
+                                                                CrossAxisAlignment
+                                                                    .center,
+                                                            mainAxisAlignment:
+                                                                MainAxisAlignment
+                                                                    .center,
+                                                            children: [
+                                                              SizedBox(
+                                                                  width: MediaQuery.of(
+                                                                              context)
+                                                                          .size
+                                                                          .width /
+                                                                      3,
+                                                                  child:
+                                                                      CustomTextField(
+                                                                    textController:
+                                                                        controller
+                                                                            .investigationTeamSrNumberTextFieldController,
+                                                                    label:
+                                                                        'Serial Number',
+                                                                  )),
+                                                              SizedBox(
+                                                                  width: MediaQuery.of(
+                                                                              context)
+                                                                          .size
+                                                                          .width /
+                                                                      3,
+                                                                  child:
+                                                                      CustomTextField(
+                                                                    textController:
+                                                                        controller
+                                                                            .investigationTeamNameTextFieldController,
+                                                                    label:
+                                                                        'Name',
+                                                                  )),
+
+                                                              //Designation
+                                                              SizedBox(
+                                                                  width: MediaQuery.of(
+                                                                              context)
+                                                                          .size
+                                                                          .width /
+                                                                      3,
+                                                                  child:
+                                                                      CustomTextField(
+                                                                    textController:
+                                                                        controller
+                                                                            .investigationTeamDesignationTextFieldController,
+                                                                    label:
+                                                                        'Designation',
+                                                                  )),
+
+                                                              ElevatedButton(
+                                                                child: Text(
+                                                                  'Add',
+                                                                  style: TextStyle(
+                                                                      color: ColorValues
+                                                                          .whiteColor),
+                                                                ),
+                                                                onPressed: () {
+                                                                  controller
+                                                                      .updateInvestigationTeamText(
+                                                                    controller
+                                                                        .investigationTeamSrNumberTextFieldController
+                                                                        .text,
+                                                                    controller
+                                                                        .investigationTeamNameTextFieldController
+                                                                        .text,
+                                                                    controller
+                                                                        .investigationTeamDesignationTextFieldController
+                                                                        .text,
+
+                                                                    // controller.isCheckedRequire
+                                                                    //     .value
+                                                                  );
+                                                                  controller
+                                                                      .investigationTeamSrNumberTextFieldController
+                                                                      .clear();
+                                                                  controller
+                                                                      .investigationTeamNameTextFieldController
+                                                                      .clear();
+                                                                  controller
+                                                                      .investigationTeamDesignationTextFieldController
+                                                                      .clear();
+                                                                  // controller.isCheckedRequire
+                                                                  //     .value = false;
+                                                                },
+                                                              )
+                                                            ],
+                                                          ),
+                                                        ]),
+                                                      ),
+                                                    ],
+                                                  ),
+                                                ),
+
                                                 /// FILE UPLOAD WIDGET
                                                 Container(
                                                   height: Get.height * 0.2,
@@ -2201,6 +2632,75 @@ class AddIncidentReportContentWeb extends GetView<AddIncidentReportController> {
 
         // ),
       );
+
+  investigationTeamData(
+    String? serialNumber,
+    String? name,
+    String? designation,
+    BuildContext context,
+  ) {
+    return SizedBox(
+      width: MediaQuery.of(context).size.width / 1.5,
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+        children: [
+          Spacer(),
+          Text('$serialNumber'),
+          Spacer(),
+          Dimens.boxWidth10,
+          SizedBox(
+            width: MediaQuery.of(context).size.width / 5,
+            child: Container(
+                child: Container(
+              height: 30,
+              // decoration:
+              //     BoxDecoration(color: Color.fromARGB(255, 206, 204, 204)),
+              child: Center(child: Text('$name')),
+            )),
+          ),
+          Spacer(),
+
+          SizedBox(
+            width: MediaQuery.of(context).size.width / 5,
+            child: Container(
+                child: Container(
+              height: 30,
+              // decoration:
+              //     BoxDecoration(color: Color.fromARGB(255, 206, 204, 204)),
+              child: Center(child: Text('$designation')),
+            )),
+          ),
+          Spacer(),
+          // SizedBox(
+          //   width: MediaQuery.of(context).size.width / 5,
+          //   child: Container(
+          //       child: Container(
+          //     height: 30,
+          //     // decoration:
+          //     //     BoxDecoration(color: Color.fromARGB(255, 206, 204, 204)),
+          //     child: Center(child: Text('')),
+          //   )),
+          // ),
+          // Spacer(),
+
+          // position == 1 || position == 2 || position == 3
+          // ?
+          // ActionButton(
+          //   icon: Icons.remove,
+          //   label: 'Delete',
+          //   // onPress:
+          //   //     () async {},
+          //   color: Colors.red,
+          //   onPressed: () {
+          //     controller.removeRow(index: 0);
+          //   },
+          // )
+
+          // : Text('data')
+        ],
+      ),
+    );
+  }
 
   ///Below All For WEB
   ///
@@ -2723,6 +3223,191 @@ class AddIncidentReportContentWeb extends GetView<AddIncidentReportController> {
     BuildContext context,
   ) async {
     DateTime dateTime = controller.selectedBreakdownTime.value;
+
+    //final initialTime = TimeOfDay(hour: 12, minute: 0);
+    final newTime = await showTimePicker(
+        context: context,
+        initialTime: TimeOfDay(hour: dateTime.hour, minute: dateTime.minute),
+        builder: (BuildContext context, Widget? child) {
+          return Theme(
+            data: ThemeData.light(),
+            child: child!,
+          );
+        });
+
+    if (newTime == null) {
+      return null;
+    }
+
+    return newTime;
+  }
+
+  ///Target Date
+
+  Widget _buildTargetDateField_web(
+    BuildContext context,
+  ) {
+    return Column(//
+        children: [
+      // Align(
+      //   alignment: Alignment.topLeft,
+      //   child: Padding(
+      //     padding: const EdgeInsets.only(right: 385),
+      //     child: RichText(
+      //       text: TextSpan(
+      //           text: position == 0 ? 'Start Date: ' : 'Valid Till: ',
+      //           style: Styles.blackBold16, children: []),
+      //     ),
+      //   ),
+      // ),
+      // Align(
+      //     alignment: Alignment.topLeft,
+      //     child: Padding(
+      //       padding: const EdgeInsets.only(right: 385),
+      //       child: CustomRichText(
+      //         title: position == 0 ? '$title1' : '$title2',
+      //       ),
+      //     )),
+
+      Container(
+        height: MediaQuery.of(context).size.height * 0.040,
+        decoration: BoxDecoration(
+          boxShadow: [
+            BoxShadow(
+              color: Colors.black26,
+              offset: const Offset(
+                5.0,
+                5.0,
+              ),
+              blurRadius: 5.0,
+              spreadRadius: 1.0,
+            ), //BoxShadow
+            BoxShadow(
+              color: ColorValues.whiteColor,
+              offset: const Offset(0.0, 0.0),
+              blurRadius: 0.0,
+              spreadRadius: 0.0,
+            ), //BoxShadow
+          ],
+          color: ColorValues.whiteColor,
+          borderRadius: BorderRadius.circular(5),
+        ),
+        child: SizedBox(
+          width: Responsive.isDesktop(context)
+              ? MediaQuery.of(context).size.width / 3.9
+              : MediaQuery.of(context).size.width / 1.0,
+          child: TextField(
+            onTap: () {
+              pickTargetDateTime_web(context);
+
+              // : null;
+            },
+            controller: controller.targetDateTimeCtrlr,
+
+            // :null,
+            autofocus: false,
+            decoration: InputDecoration(
+                fillColor: ColorValues.whiteColor,
+                filled: true,
+                contentPadding: EdgeInsets.fromLTRB(5.0, 10.0, 5.0, 10.0),
+                border: InputBorder.none,
+                enabledBorder: InputBorder.none,
+                focusedBorder: InputBorder.none,
+                suffixIcon: Icon(Icons.calendar_month)
+                // focusedErrorBorder:
+                // hintText: '${position == 1 ? DateFormat.yMEd() : ''}',
+                //     controller.isJobTitleInvalid.value
+                //         ? OutlineInputBorder(
+                //             borderRadius:
+                //                 BorderRadius.circular(5),
+                //             borderSide: BorderSide(
+                //               color: ColorsValue.redColorDark,
+                //             ),
+                //           )
+                //         : InputBorder.none,
+                // errorBorder:
+                //     controller.isJobTitleInvalid.value
+                //         ? OutlineInputBorder(
+                //             borderRadius:
+                //                 BorderRadius.circular(5),
+                //             borderSide: BorderSide(
+                //               color: ColorsValue.redColorDark,
+                //             ),
+                //           )
+                //         : null,
+                // errorText: controller.isJobTitleInvalid.value
+                //     ? "Required field"
+                //     : null,
+                ),
+          ),
+        ),
+      ),
+    ]);
+  }
+
+//Start Date and valid Till
+  Future pickTargetDateTime_web(
+    BuildContext context,
+  ) async {
+    var dateTime = controller.selectedtargetDateTime.value;
+
+    final date = await pickTargetDate_web(context);
+    if (date == null) {
+      return;
+    }
+
+    // final time = await pickTargetTime_web(context);
+    // if (time == null) {
+    //   return;
+    // }
+
+    dateTime = DateTime(
+      date.year,
+      date.month,
+      date.day,
+      // time.hour,
+      // time.minute,
+    );
+    controller.selectedtargetDateTime.value;
+
+    controller.targetDateTimeCtrlr
+      ..text = DateFormat("yyyy-MM-dd HH:mm").format(dateTime)
+      ..selection = TextSelection.fromPosition(
+        TextPosition(
+          offset: controller.targetDateTimeCtrlr.text.length,
+          affinity: TextAffinity.upstream,
+        ),
+      );
+    controller.targetDateTimeCtrlr.text =
+        DateFormat("yyyy-MM-dd HH:mm").format(dateTime);
+
+    // controller.startDateTimeCtrlrBuffer =
+    //     DateFormat("yyyy-MM-dd'T'HH:mm:ss").format(dateTime);
+    // print('Incident reportDate & Time ${controller.startDateTimeCtrlrBuffer}');
+  }
+
+  Future<DateTime?> pickTargetDate_web(
+    BuildContext context,
+  ) async {
+    DateTime? dateTime = controller.selectedtargetDateTime.value;
+
+    //final initialDate = DateTime.now();
+    final newDate = await showDatePicker(
+      context: context,
+      initialDate: dateTime,
+      firstDate: DateTime(DateTime.now().year - 5),
+      lastDate: DateTime(DateTime.now().year + 5),
+    );
+
+    if (newDate == null) return null;
+
+    return newDate;
+  }
+
+  Future<TimeOfDay?> pickTargetTime_web(
+    BuildContext context,
+  ) async {
+    DateTime dateTime = controller.selectedtargetDateTime.value;
 
     //final initialTime = TimeOfDay(hour: 12, minute: 0);
     final newTime = await showTimePicker(
@@ -3457,6 +4142,96 @@ class AddIncidentReportContentWeb extends GetView<AddIncidentReportController> {
         ),
       ),
     ]);
+  }
+
+  ///Root cause block Textfield
+  rootCauseTextfields(BuildContext context, int position) {
+    return Container(
+      decoration: BoxDecoration(
+          border: Border.all(
+        color: Color(0xFE50000),
+        width: 0.5,
+      )),
+      height: MediaQuery.of(context).size.height * 0.040,
+      // margin: Dimens.edgeInsets5,
+      constraints: BoxConstraints(
+        maxWidth: MediaQuery.of(context).size.width / 4,
+        minWidth: 100,
+      ),
+      child: LoginCustomTextfield(
+        textController: position == 1
+            ? controller.rootCause1TextCtrlr
+            : position == 2
+                ? controller.rootCause2TextCtrlr
+                : position == 3
+                    ? controller.rootCause3TextCtrlr
+                    : null,
+      ),
+    );
+  }
+
+  ///action plan Textfield
+  actionPlanTextfields(BuildContext context) {
+    return Container(
+      decoration: BoxDecoration(
+          border: Border.all(
+        color: Color(0xFE50000),
+        width: 0.5,
+      )),
+      height: MediaQuery.of(context).size.height * 0.040,
+      // margin: Dimens.edgeInsets5,
+      constraints: BoxConstraints(
+        maxWidth: MediaQuery.of(context).size.width / 7,
+        minWidth: 100,
+      ),
+      child:
+          LoginCustomTextfield(textController: controller.actionPlanTextCtrlr),
+    );
+  }
+
+  ///Remark for proposed action block textfield
+  ///action plan Textfield
+  remarkTextfields(BuildContext context) {
+    return Container(
+      decoration: BoxDecoration(
+          border: Border.all(
+        color: Color(0xFE50000),
+        width: 0.5,
+      )),
+      height: MediaQuery.of(context).size.height * 0.040,
+      // margin: Dimens.edgeInsets5,
+      constraints: BoxConstraints(
+        maxWidth: MediaQuery.of(context).size.width / 7,
+        minWidth: 100,
+      ),
+      child: LoginCustomTextfield(textController: controller.remarkTextCtrlr),
+    );
+  }
+
+  ///Immediate Correction block Textfield
+  immediateCorrectionTextfields(BuildContext context, int position) {
+    return Container(
+      decoration: BoxDecoration(
+          border: Border.all(
+        color: Color(0xFE50000),
+        width: 0.5,
+      )),
+      height: MediaQuery.of(context).size.height * 0.040,
+      // margin: Dimens.edgeInsets5,
+      constraints: BoxConstraints(
+        maxWidth: MediaQuery.of(context).size.width / 4,
+        minWidth: 100,
+      ),
+      child: LoginCustomTextfield(
+        textController: position == 1
+            ? controller.immediateCorrection1TextCtrlr
+            : position == 2
+                ? controller.immediateCorrection2TextCtrlr
+                : position == 3
+                    ? controller.immediateCorrection3TextCtrlr
+                    : null,
+      ),
+    );
   }
 
   ///Investigation Textfield
