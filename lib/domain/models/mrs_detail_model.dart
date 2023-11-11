@@ -120,6 +120,8 @@ class CmmrsItems {
   TextEditingController? issued_qty_controller;
   int? materialID;
   int? assetMasterID;
+  String? serial_number;
+  TextEditingController? serial_number_controller;
 
   CmmrsItems(
       {this.approval_required,
@@ -142,7 +144,9 @@ class CmmrsItems {
       this.used_qty,
       this.issued_qty_controller,
       this.assetMasterID,
-      this.materialID});
+      this.materialID,
+      this.serial_number_controller,
+      this.serial_number});
 
   factory CmmrsItems.fromJson(Map<String, dynamic> parsedJson) {
     return CmmrsItems(
@@ -170,6 +174,9 @@ class CmmrsItems {
         used_qty: parsedJson["used_qty"] == null ? 0.0 : parsedJson['used_qty'],
         issued_qty:
             parsedJson["issued_qty"] == null ? 0.0 : parsedJson['issued_qty'],
+        serial_number: parsedJson["serial_number"] == null
+            ? ""
+            : parsedJson['serial_number'],
         approved_date: parsedJson["approved_date"] == null
             ? ""
             : parsedJson['approved_date'],
@@ -194,6 +201,10 @@ class CmmrsItems {
             : parsedJson['status_short'],
         status_long:
             parsedJson["status_long"] == null ? "" : parsedJson['status_long'],
+        serial_number_controller: TextEditingController(
+            text: parsedJson["serial_number_controller"] == null
+                ? ""
+                : parsedJson['serial_number'].toString()),
         issued_qty_controller: TextEditingController(
             text: parsedJson["issued_qty_controller"] == null
                 ? ""

@@ -1,13 +1,16 @@
 import 'dart:async';
 
+import 'package:cmms/app/constant/constant.dart';
 import 'package:cmms/app/home/home_controller.dart';
 import 'package:cmms/app/transaction_report/transaction_report_list_presenter.dart';
 import 'package:cmms/app/utils/app_constants.dart';
+import 'package:cmms/app/utils/user_access_constants.dart';
 import 'package:cmms/domain/models/%20%20transaction_report_list_model.dart';
 import 'package:cmms/domain/models/business_list_model.dart';
 import 'package:cmms/domain/models/facility_model.dart';
 import 'package:cmms/domain/models/inventory_model.dart';
 import 'package:cmms/domain/models/job_card_model.dart';
+import 'package:cmms/domain/models/job_model.dart';
 import 'package:cmms/domain/models/pm_task_model.dart';
 import 'package:cmms/domain/models/type_model.dart';
 import 'package:cmms/domain/models/user_list_model.dart';
@@ -88,7 +91,7 @@ class TransactionReportListController extends GetxController {
   Rx<bool> isSelectedUser = true.obs;
   int selectedUserId = 0;
   Rx<String> selectedUser = ''.obs;
-  RxList<JobCardModel?> jobList = <JobCardModel?>[].obs;
+  RxList<JobModel?> jobList = <JobModel?>[].obs;
   Rx<bool> isSelectedJob = true.obs;
   int selectedJobId = 0;
   Rx<String> selectedJob = ''.obs;
@@ -252,7 +255,7 @@ class TransactionReportListController extends GetxController {
               actorType: selectedactorTypeId,
               actorID: actorId,
               endDate: formattedFromdate1,
-              isLoading: false);
+              isLoading: true);
         }
         break;
       case RxList<FacilityModel?>:
@@ -268,7 +271,7 @@ class TransactionReportListController extends GetxController {
               actorType: selectedactorTypeId,
               actorID: actorId,
               endDate: formattedFromdate1,
-              isLoading: false);
+              isLoading: true);
         }
         break;
       case RxList<UserListModel?>:
@@ -283,7 +286,7 @@ class TransactionReportListController extends GetxController {
               actorType: selectedactorTypeId,
               actorID: actorId,
               endDate: formattedFromdate1,
-              isLoading: false);
+              isLoading: true);
         }
         break;
       case RxList<InventoryModel?>:
@@ -299,13 +302,13 @@ class TransactionReportListController extends GetxController {
               actorType: selectedactorTypeId,
               actorID: actorId,
               endDate: formattedFromdate1,
-              isLoading: false);
+              isLoading: true);
         }
         break;
       case RxList<JobCardModel?>:
         {
-          //  int jobIndex = jobList.indexWhere((x) => x!.name == value);
-          //  selectedJobId = jobList[jobIndex]!.id ?? 0;
+          int jobIndex = jobList.indexWhere((x) => x!.name == value);
+          selectedJobId = jobList[jobIndex]!.id ?? 0;
           selectedJob.value = value;
           actorId = selectedJobId;
           transactionReport(
@@ -314,7 +317,7 @@ class TransactionReportListController extends GetxController {
               actorType: selectedactorTypeId,
               actorID: actorId,
               endDate: formattedFromdate1,
-              isLoading: false);
+              isLoading: true);
         }
         break;
       default:
@@ -346,7 +349,7 @@ class TransactionReportListController extends GetxController {
           actorType: selectedactorTypeId,
           actorID: actorId,
           endDate: formattedFromdate1,
-          isLoading: false);
+          isLoading: true);
     }
   }
 
@@ -381,7 +384,7 @@ class TransactionReportListController extends GetxController {
           actorType: selectedactorTypeId,
           actorID: actorId,
           endDate: formattedFromdate1,
-          isLoading: false);
+          isLoading: true);
     }
   }
 
@@ -392,7 +395,7 @@ class TransactionReportListController extends GetxController {
         actorType: selectedactorTypeId,
         actorID: actorId,
         endDate: formattedFromdate1,
-        isLoading: false);
+        isLoading: true);
   }
 
   Future<void> getFacilityList() async {
@@ -414,18 +417,41 @@ class TransactionReportListController extends GetxController {
         actorType: selectedactorTypeId,
         actorID: actorId,
         endDate: formattedFromdate1,
-        isLoading: false);
+        isLoading: true);
     update(['permit_facility_list']);
   }
 
   Future<void> jobCardList(int facilityId, bool isLoading) async {
-    jobList.value = <JobCardModel>[];
-    final _jobList = await transactionReportListPresenter.jobCardList(
-        facilityId: facilityId, isLoading: isLoading);
+    jobList.value = <JobModel>[];
+    if (facilityId > 0) {
+      final _jobList = await transactionReportListPresenter.getJobList(
+        facilityId: facilityId,
+        // userId: userId,
+        self_view: varUserAccessModel.value.access_list!
+                    .where((e) =>
+                        e.feature_id == UserAccessConstants.kJobFeatureId &&
+                        e.selfView == UserAccessConstants.kHaveSelfViewAccess)
+                    .length >
+                0
+            ? true
+            : false,
+        isLoading: true,
+      );
 
-    for (var job_list in _jobList!) {
-      jobList.add(job_list);
+      if (_jobList != null && _jobList.isNotEmpty) {
+        jobList.value = _jobList;
+      }
+      selectedJobId = jobList[0]!.id ?? 0;
+      actorId = selectedJobId;
+      selectedJob.value = jobList[0]!.name ?? "";
+      transactionReport(
+          facilityId: facilityId,
+          startDate: formattedTodate1,
+          actorType: selectedactorTypeId,
+          actorID: actorId,
+          endDate: formattedFromdate1,
+          isLoading: true);
+      update(['job_list']);
     }
-    update(['job_list']);
   }
 }

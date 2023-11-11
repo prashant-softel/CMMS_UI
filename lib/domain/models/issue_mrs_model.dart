@@ -27,16 +27,16 @@ class CmmrsItemsModel {
       {required this.issued_qty,
       required this.asset_item_ID,
       required this.mrs_item_id,
-      required this.material_id});
+      required this.serial_number});
 
   int mrs_item_id;
   int issued_qty;
-  int material_id;
+  String serial_number;
   int asset_item_ID;
   factory CmmrsItemsModel.fromJson(Map<String, dynamic> json) =>
       CmmrsItemsModel(
         mrs_item_id: json["mrs_item_id"],
-        material_id: json["material_id"],
+        serial_number: json["serial_number"],
         asset_item_ID: json["asset_item_ID"],
         issued_qty: json["issued_qty"],
       );
@@ -45,6 +45,6 @@ class CmmrsItemsModel {
         "mrs_item_id": mrs_item_id,
         "issued_qty": issued_qty,
         "asset_item_ID": asset_item_ID,
-        "material_id": material_id,
+        "serial_number": serial_number,
       };
 }

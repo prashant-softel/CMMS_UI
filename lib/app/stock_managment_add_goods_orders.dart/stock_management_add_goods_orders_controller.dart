@@ -481,13 +481,14 @@ class StockManagementAddGoodsOrdersController extends GetxController {
     List<Items> items = [];
     rowItem.value.forEach((element) {
       Items item = Items(
-          goItemID: 0,
+          goItemID: dropdownMapperData[element[0]["value"]]?.itemID,
           received_qty: 0,
           lost_qty: 0,
           accepted_qty: 0,
           damaged_qty: 0,
           requested_qty: double.tryParse(element[2]["value"] ?? '0'),
-          assetMasterItemID: dropdownMapperData[element[0]["value"]]?.itemID,
+          assetMasterItemID:
+              dropdownMapperData[element[0]["value"]]?.assetMasterItemID,
           cost: double.tryParse(element[3]["value"] ?? '0'),
           ordered_qty: double.tryParse(element[4]["value"] ?? '0'),
           paid_by_ID: paiddropdownMapperData[element[1]["value"]]?.id);

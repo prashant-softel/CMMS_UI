@@ -71,7 +71,7 @@ class MrsIssueController extends GetxController {
       cmmrsItemsDetail.forEach((element) {
         cmmrsItems.add(CmmrsItemsModel(
             mrs_item_id: element?.id ?? 0,
-            material_id: element?.materialID ?? 0,
+            serial_number: element?.serial_number_controller?.text ?? "",
             asset_item_ID: element?.asset_item_ID ?? 0,
             issued_qty:
                 int.tryParse(element!.issued_qty_controller!.text) ?? 0));

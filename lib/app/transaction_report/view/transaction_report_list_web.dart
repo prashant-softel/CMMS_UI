@@ -160,36 +160,34 @@ class _TransactionReportListWebState extends State<TransactionReportListWeb> {
                                           ),
                                         ),
                                       ),
-                                      itemBuilder: (BuildContext context) =>
-                                          <PopupMenuEntry<String>>[]..addAll(
-                                                controller.columnVisibility
-                                                    .value.entries
-                                                    .map((e) {
-                                              return PopupMenuItem<String>(
-                                                  child: ValueListenableBuilder(
-                                                      valueListenable:
-                                                          controller
-                                                              .columnVisibility,
-                                                      builder: (context, value,
-                                                          child) {
-                                                        return Row(
-                                                          children: [
-                                                            Checkbox(
-                                                              value:
-                                                                  value[e.key],
-                                                              onChanged:
-                                                                  (newValue) {
-                                                                controller
-                                                                    .setColumnVisibility(
-                                                                        e.key,
-                                                                        newValue!);
-                                                              },
-                                                            ),
-                                                            Text(e.key),
-                                                          ],
-                                                        );
-                                                      }));
-                                            })),
+                                      itemBuilder: (BuildContext context) => <
+                                          PopupMenuEntry<String>>[]..addAll(
+                                            controller
+                                                .columnVisibility.value.entries
+                                                .map((e) {
+                                          return PopupMenuItem<String>(
+                                              child: ValueListenableBuilder(
+                                                  valueListenable: controller
+                                                      .columnVisibility,
+                                                  builder:
+                                                      (context, value, child) {
+                                                    return Row(
+                                                      children: [
+                                                        Checkbox(
+                                                          value: value[e.key],
+                                                          onChanged:
+                                                              (newValue) {
+                                                            controller
+                                                                .setColumnVisibility(
+                                                                    e.key,
+                                                                    newValue!);
+                                                          },
+                                                        ),
+                                                        Text(e.key),
+                                                      ],
+                                                    );
+                                                  }));
+                                        })),
                                       onSelected: (String value) {
                                         // Handle column selection
                                       },
@@ -358,7 +356,39 @@ class _TransactionReportListWebState extends State<TransactionReportListWeb> {
                                                                     .onValueChanged,
                                                           ),
                                                         )
-                                                      : Dimens.box0
+                                                      : controller.selectedactorTypeId ==
+                                                              AppConstants
+                                                                  .kJobCard
+                                                          ? Container(
+                                                              width: (MediaQuery.of(
+                                                                          context)
+                                                                      .size
+                                                                      .width *
+                                                                  .2),
+                                                              child:
+                                                                  DropdownWebWidget(
+                                                                width: MediaQuery.of(
+                                                                            context)
+                                                                        .size
+                                                                        .width *
+                                                                    2,
+                                                                dropdownList:
+                                                                    controller
+                                                                        .jobList,
+                                                                isValueSelected:
+                                                                    controller
+                                                                        .isSelectedJob
+                                                                        .value,
+                                                                selectedValue:
+                                                                    controller
+                                                                        .selectedJob
+                                                                        .value,
+                                                                onValueChanged:
+                                                                    controller
+                                                                        .onValueChanged,
+                                                              ),
+                                                            )
+                                                          : Dimens.box0
                                     ],
                                   ),
                                 ),
