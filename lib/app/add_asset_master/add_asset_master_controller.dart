@@ -20,13 +20,14 @@ import 'add_asset_master_presenter.dart';
 
 class AddAssetMasterController extends GetxController {
   AddAssetMasterController(
-      this.addAssetPresenter,
-      );
+    this.addAssetPresenter,
+  );
 
   AddAssetMasterPresenter addAssetPresenter;
   var assesDiscriptionCtrlr = TextEditingController();
   // String _assesDiscriptionCtrlr = assesDiscriptionCtrlr.text.trim();
-  RxList<UnitMeasurementModel?> unitMeasurementList = <UnitMeasurementModel>[].obs;
+  RxList<UnitMeasurementModel?> unitMeasurementList =
+      <UnitMeasurementModel>[].obs;
   RxList<AssetTypeListSMModel?> materialList = <AssetTypeListSMModel>[].obs;
   RxList<AssetCategoryModel?> materialCategoryList = <AssetCategoryModel>[].obs;
 
@@ -98,7 +99,7 @@ class AddAssetMasterController extends GetxController {
   );
   RxString fileName = "".obs;
   RxString filePath = "".obs;
-  RxString fileType   = "".obs;
+  RxString fileType = "".obs;
   Uint8List? fileBytes;
   RxList<ScheduleCheckPoint?>? scheduleCheckPoints =
       <ScheduleCheckPoint?>[].obs;
@@ -147,15 +148,13 @@ class AddAssetMasterController extends GetxController {
   );
 
   ///
-  void onInit()  {
+  void onInit() {
     // userId = Get.arguments;
     getUnitMeasurementList();
     getAssetCategoryList();
 
-
     getAssetType();
     Get.put(FileUploadController());
-
 
     // await getRoleList();
     // await getFacilityList();
@@ -164,7 +163,6 @@ class AddAssetMasterController extends GetxController {
     // }
     super.onInit();
   }
-
 
   var selectedImagePath = ''.obs;
   var selectedImageSize = ''.obs;
@@ -185,8 +183,8 @@ class AddAssetMasterController extends GetxController {
     );
     update(['permit_facility_list']);
   }
-  Future<void> getAssetType() async {
 
+  Future<void> getAssetType() async {
     final list = await addAssetPresenter.getAssetType();
 
     if (list != null) {
@@ -194,10 +192,9 @@ class AddAssetMasterController extends GetxController {
         materialList.add(_materialList);
       }
     }
-
   }
-  Future<void> getUnitMeasurementList() async {
 
+  Future<void> getUnitMeasurementList() async {
     final list = await addAssetPresenter.getUnitMeasurementList();
 
     if (list != null) {
@@ -319,7 +316,6 @@ class AddAssetMasterController extends GetxController {
   //     }
   //   }
   // }
-
 
   Future<void> getAssetCategoryList() async {
     final list = await addAssetPresenter.getAssetCategoryList();
@@ -463,89 +459,83 @@ class AddAssetMasterController extends GetxController {
 // }
 //
   Future<bool> addAsset() async {
+    // if (matNameCtrlr.text.trim() == '' ) {
+    //   isNameInvalid.value = true;
+    //   isFormInvalid.value = true;
+    // }
 
-    if (matNameCtrlr.text.trim() == '' ) {
-      isNameInvalid.value = true;
-      isFormInvalid.value = true;
-    }
+    // if (mdmcodeCtrlr.text.trim() == '' ) {
+    //   isCodeInvalid.value = true;
+    //   isFormInvalid.value = true;
+    // }
 
-    if (mdmcodeCtrlr.text.trim() == '' ) {
-      isCodeInvalid.value = true;
-      isFormInvalid.value = true;
-    }
+    // if (reqQty.text.trim() == '' ) {
+    //   isRequiredInvalid.value = true;
+    //   isFormInvalid.value = true;
+    // }
 
-    if (reqQty.text.trim() == '' ) {
-      isRequiredInvalid.value = true;
-      isFormInvalid.value = true;
-    }
+    // if (reorderQty.text.trim() == '' ) {
+    //   isReorderInvalid.value = true;
+    //   isFormInvalid.value = true;
+    // }
 
-    if (reorderQty.text.trim() == '' ) {
-      isReorderInvalid.value = true;
-      isFormInvalid.value = true;
-    }
+    // if (descCtrlr.text.trim() == '' ) {
+    //   isDescriptionInvalid.value = true;
+    //   isFormInvalid.value = true;
+    // }
 
-    if (descCtrlr.text.trim() == '' ) {
-      isDescriptionInvalid.value = true;
-      isFormInvalid.value = true;
-    }
+    // checkForm();
+    // if (isFormInvalid.value) {
+    //   return false;
+    // }
 
+    // if (matNameCtrlr.text.trim() == '' ||
+    //     mdmcodeCtrlr.text.trim() == ''  ||
+    //     reorderQty.text.trim() == '' ||
+    //     reqQty.text.trim() == '' ||
+    //     descCtrlr.text.trim() == ''
 
+    // ) {
+    //   Fluttertoast.showToast(
+    //       msg: "Please enter required field", fontSize: 16.0);
+    // } else {
+    String _name = matNameCtrlr.text.trim();
+    String _mdmcode = mdmcodeCtrlr.text.trim();
+    String _reorderQty = reorderQty.text.trim();
+    String _reqQty = reqQty.text.trim();
+    String _desc = descCtrlr.text.trim();
 
-    checkForm();
-    if (isFormInvalid.value) {
-      return false;
-    }
+    CreateAssetSMModel createAssetSMModel = CreateAssetSMModel(
+        asset_code: _mdmcode,
+        asset_name: _name,
+        asset_description: _desc,
+        asset_type_ID: selectedMaterialTypeId,
+        item_category_ID: selectedMaterialCategoryId,
+        unit_measurement_ID: selectedUnitOfMeasurementId,
+        min_req_qty: int.parse(_reqQty),
+        reorder_qty: int.parse(_reorderQty),
+        approval_required_ID: 1,
 
-    if (matNameCtrlr.text.trim() == '' ||
-        mdmcodeCtrlr.text.trim() == ''  ||
-        reorderQty.text.trim() == '' ||
-        reqQty.text.trim() == '' ||
-        descCtrlr.text.trim() == ''
+        // fileData:
+        fileData: {
+          "File_path": filePath.value,
+          "File_name": fileName.value,
+          "File_type": fileType.value,
+          "File_size": fileBytes.toString(),
+        });
+    //function to write sum of 2 numbers
 
-    ) {
-      Fluttertoast.showToast(
-          msg: "Please enter required field", fontSize: 16.0);
-    } else {
-      String _name = matNameCtrlr.text.trim();
-      String _mdmcode = mdmcodeCtrlr.text.trim();
-      String _reorderQty = reorderQty.text.trim();
-      String _reqQty = reqQty.text.trim();
-      String _desc = descCtrlr.text.trim();
+    var assetListJsonString =
+        createAssetSMModel.toJson(); //createCheckListToJson([createChecklist]);
 
-      CreateAssetSMModel createAssetSMModel = CreateAssetSMModel
-        (
-          asset_code : _mdmcode,
-          asset_name : _name,
-          asset_description : _desc,
-          asset_type_ID : selectedMaterialTypeId, 
-
-          item_category_ID: selectedMaterialCategoryId,
-          unit_measurement_ID: selectedUnitOfMeasurementId,
-          min_req_qty: int.parse(_reqQty),
-          reorder_qty: int.parse(_reorderQty),
-          approval_required_ID: 1,
-
-          // fileData:
-          fileData : {
-                "File_path"  : filePath.value,
-                "File_name": fileName.value,
-                "File_type": fileType.value,
-                "File_size": fileBytes.toString(),
-            }
-      );
-      //function to write sum of 2 numbers
-
-      var assetListJsonString =
-      createAssetSMModel.toJson(); //createCheckListToJson([createChecklist]);
-
-      print({"checklistJsonString", assetListJsonString});
-      await addAssetPresenter.createAssetSM(
-        assetListJsonString: assetListJsonString,
-        isLoading: true,
-      );
-      return true;
-    }
+    print({"checklistJsonString", assetListJsonString});
+    await addAssetPresenter.createAssetSM(
+      assetListJsonString: assetListJsonString,
+      isLoading: true,
+    );
     return true;
+    // }
+    //   return true;
   }
 
   Future<void> issuccessCreateAssetlist() async {
@@ -556,31 +546,33 @@ class AddAssetMasterController extends GetxController {
   }
 
   void checkForm() {
-
-    if(selectedMaterialType.value == ''){
+    if (selectedMaterialType.value == '') {
       isSelectedMaterialType.value = false;
     }
-    if(selectedMaterialCategory.value == ''){
+    if (selectedMaterialCategory.value == '') {
       isSelectedMaterialCategory.value = false;
     }
-    if(selectedUnitOfMeasurement.value == ''){
+    if (selectedUnitOfMeasurement.value == '') {
       isSelectedUnitOfMeasurement.value = false;
     }
-    if(selectedACDC.value == ''){
+    if (selectedACDC.value == '') {
       isSelectedACDC.value = false;
     }
 
-    if(isNameInvalid.value == true || isSelectedMaterialType.value == false ||
-        isSelectedMaterialCategory.value == false || isSelectedUnitOfMeasurement.value == false ||
+    if (isNameInvalid.value == true ||
+        isSelectedMaterialType.value == false ||
+        isSelectedMaterialCategory.value == false ||
+        isSelectedUnitOfMeasurement.value == false ||
         isSelectedACDC.value == false ||
-        isReorderInvalid.value == true || isRequiredInvalid.value == true || isDescriptionInvalid.value == true || isCodeInvalid.value == true
-    ){
+        isReorderInvalid.value == true ||
+        isRequiredInvalid.value == true ||
+        isDescriptionInvalid.value == true ||
+        isCodeInvalid.value == true) {
       isFormInvalid.value = true;
     } else {
       isFormInvalid.value = false;
     }
   }
-
 
   cleardata() {
     matNameCtrlr.text = '';
@@ -776,5 +768,4 @@ class AddAssetMasterController extends GetxController {
 //     // moduleNameList.addAll(moduleNameSet.toList());
 //   }
 // }
-
 }

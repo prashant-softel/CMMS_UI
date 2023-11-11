@@ -1,7 +1,5 @@
 import 'dart:convert';
 
-
-
 List<JobModel> jobListFromJson(String str) =>
     List<JobModel>.from(json.decode(str).map(JobModel.fromJson));
 
@@ -21,7 +19,7 @@ class JobModel {
             json['equipmentCat'] == null ? null : json['equipmentCat'],
         workingArea: json['workingArea'] == null ? null : json['workingArea'],
         description: json['description'] == null ? null : json['description'],
-        jobDetails: json['jobDetails'] == null ? null : json['jobDetails'],
+        name: json['jobDetails'] == null ? null : json['jobDetails'],
         workType: json['workType'] == null ? null : json['workType'] ?? '',
         raisedBy: json['raisedBy'] == null ? null : json['raisedBy'] ?? '',
         raisedByName:
@@ -65,7 +63,7 @@ class JobModel {
       this.equipmentCat,
       this.workingArea,
       this.description,
-      this.jobDetails,
+      this.name,
       this.workType,
       this.raisedBy,
       this.raisedByName,
@@ -87,7 +85,7 @@ class JobModel {
   String? equipmentCat;
   String? workingArea;
   String? description;
-  String? jobDetails;
+  String? name;
   String? workType;
   int? raisedBy;
   String? raisedByName;
@@ -110,7 +108,7 @@ class JobModel {
         'equipmentCat': equipmentCat,
         'workingArea': workingArea,
         'description': description,
-        'jobDetails': jobDetails,
+        'jobDetails': name,
         'workType': workType,
         'raisedBy': raisedBy,
         'raisedByName': raisedByName,

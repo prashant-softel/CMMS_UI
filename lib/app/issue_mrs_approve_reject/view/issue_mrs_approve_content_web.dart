@@ -233,6 +233,13 @@ class IssueMrsApproveContentWeb extends GetView<IssueMrsApproveController> {
                                     )),
                                     DataColumn(
                                         label: Text(
+                                      "Serial No.",
+                                      style: TextStyle(
+                                          fontSize: 15,
+                                          fontWeight: FontWeight.bold),
+                                    )),
+                                    DataColumn(
+                                        label: Text(
                                       "Available Qyt.",
                                       style: TextStyle(
                                           fontSize: 15,
@@ -276,6 +283,12 @@ class IssueMrsApproveContentWeb extends GetView<IssueMrsApproveController> {
                                                 .cmmrsItems![index]
                                                 .asset_type
                                                 .toString())),
+                                            DataCell(Text(controller
+                                                    .mrsDetailsModel
+                                                    .value!
+                                                    .cmmrsItems![index]
+                                                    .serial_number ??
+                                                "3")),
                                             DataCell(Text(controller
                                                 .mrsDetailsModel
                                                 .value!

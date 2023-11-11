@@ -240,7 +240,7 @@ class JobListController extends GetxController {
       excel.updateCell(
           sheetName,
           CellIndex.indexByColumnRow(columnIndex: 6, rowIndex: i + 1),
-          job?.jobDetails ?? '');
+          job?.name ?? '');
       excel.updateCell(
           sheetName,
           CellIndex.indexByColumnRow(columnIndex: 7, rowIndex: i + 1),

@@ -368,7 +368,7 @@ class JobDataSource extends DataTableSource {
               .toString()
               .toLowerCase()
               .contains(controller.idFilterText.value.toLowerCase()) &&
-          (job?.jobDetails ?? '')
+          (job?.name ?? '')
               .toLowerCase()
               .contains(controller.jobDetailsFilterText.value.toLowerCase()) &&
           (job?.jobDate ?? '')
@@ -426,7 +426,7 @@ class JobDataSource extends DataTableSource {
             mainAxisAlignment: MainAxisAlignment.center,
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Text('${jobDetails?.jobDetails ?? ''}'),
+              Text('${jobDetails?.name ?? ''}'),
               Container(
                 padding: EdgeInsets.symmetric(vertical: 2, horizontal: 5),
                 margin: EdgeInsets.only(top: 5),
@@ -498,7 +498,7 @@ class JobDataSource extends DataTableSource {
                           icon: Icons.assignment_ind,
                           message: 'Re-Assign',
                           onPress: () {
-                                                                  controller.clearStoreData();
+                            controller.clearStoreData();
 
                             controller.goToEditJobScreen(
                                 int.tryParse('${jobDetails?.id}'));
@@ -536,7 +536,7 @@ class JobDataSource extends DataTableSource {
         }).toList(),
       ],
       onSelectChanged: (_) {
-                                           controller.clearStoreData();
+        controller.clearStoreData();
 
         controller.goToJobDetailsScreen(int.tryParse('${jobDetails?.id}'));
       },

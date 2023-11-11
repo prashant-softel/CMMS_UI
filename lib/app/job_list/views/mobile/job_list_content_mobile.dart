@@ -122,7 +122,7 @@ class JobListContentMobile extends GetView<JobListController> {
                                             children: [
                                           Expanded(
                                             child: Text(
-                                              jobModel?.jobDetails ?? '',
+                                              jobModel?.name ?? '',
                                               style: const TextStyle(
                                                 fontWeight: FontWeight.bold,
                                                 color: Color.fromARGB(

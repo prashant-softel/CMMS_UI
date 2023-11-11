@@ -2,6 +2,7 @@ import 'package:cmms/domain/models/business_list_model.dart';
 import 'package:cmms/domain/models/facility_model.dart';
 import 'package:cmms/domain/models/inventory_model.dart';
 import 'package:cmms/domain/models/job_card_model.dart';
+import 'package:cmms/domain/models/job_model.dart';
 import 'package:cmms/domain/models/pm_task_model.dart';
 
 import '../../domain/models/  transaction_report_list_model.dart';
@@ -56,12 +57,17 @@ class TransactionReportListPresenter {
           isLoading: isLoading ?? false,
           endDate: endDate,
           startDate: startDate);
-  Future<List<JobCardModel?>?> jobCardList({
+  Future<List<JobModel?>?> getJobList({
+    String? auth,
     int? facilityId,
+    // int? userId,
+    required bool self_view,
     bool? isLoading,
   }) async =>
-      await transactionReportListUsecase.jobCardList(
+      await transactionReportListUsecase.getJobList(
+        auth: auth ?? "",
         facilityId: facilityId ?? 0,
+        self_view: self_view,
         isLoading: isLoading ?? false,
       );
   Future<List<InventoryModel?>?> inventoryList({

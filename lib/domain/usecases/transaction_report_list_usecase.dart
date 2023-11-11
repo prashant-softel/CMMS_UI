@@ -1,6 +1,7 @@
 import 'package:cmms/domain/models/business_list_model.dart';
 import 'package:cmms/domain/models/facility_model.dart';
 import 'package:cmms/domain/models/job_card_model.dart';
+import 'package:cmms/domain/models/job_model.dart';
 import 'package:cmms/domain/models/pm_task_model.dart';
 import 'package:cmms/domain/models/user_list_model.dart';
 import 'package:cmms/domain/models/inventory_model.dart';
@@ -52,12 +53,16 @@ class TransactionReportListUsecase {
           dynamic endDate,
           dynamic startDate}) async =>
       await repository.getPmTaskList(facilityId, isLoading, startDate, endDate);
-  Future<List<JobCardModel?>?> jobCardList({
+  Future<List<JobModel?>?> getJobList({
+    required String auth,
     int? facilityId,
+    bool? self_view,
     bool? isLoading,
   }) async =>
-      await repository.jobCardList(
+      await repository.getJobList(
+        auth,
         facilityId,
+        self_view,
         isLoading,
       );
   Future<List<InventoryModel?>?> inventoryList({
