@@ -81,6 +81,17 @@ class HomeDrawer extends GetView<HomeController> {
                                                     Routes.breakdown);
                                               },
                                             ),
+                                            MenuItem(
+                                              isexpand:
+                                                  controller.isExpanded.value,
+                                              title: "MIS",
+                                              icon: "assets/files/warranty.png",
+                                              press: () {
+                                                Get.offAllNamed(Routes
+                                                    .stockManagementDashboardScreen);
+                                              },
+                                            ),
+
                                             // MenuItem(
                                             ////                                              isexpand: controller.isExpanded.valu
                                             ///e,
@@ -156,6 +167,7 @@ class HomeDrawer extends GetView<HomeController> {
                                                     .stockManagementDashboardScreen);
                                               },
                                             ),
+
                                             // MenuItem(
                                             //   isexpand:
                                             //       controller.isExpanded.value,

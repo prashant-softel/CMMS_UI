@@ -6,7 +6,6 @@ import 'package:cmms/app/utils/user_access_constants.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-
 import '../../home/widgets/header_widget.dart';
 
 // import '../../navigators/app_pages.dart';
@@ -24,7 +23,7 @@ class BreakdownMaintenanceScreen
     ///
     var size = Get;
     final double itemHeight = (size.height - kToolbarHeight - 50) / 9;
-    final double itemHeightWeb = (size.height - kToolbarHeight - 70) /4;
+    final double itemHeightWeb = (size.height - kToolbarHeight - 70) / 4;
     final double itemWidth = size.width / 2;
 
     return //
@@ -119,13 +118,13 @@ class BreakdownMaintenanceScreen
                             ),
                             SizedBox(
                                 width:
-                                10), // Add some space between the text and the line
+                                    10), // Add some space between the text and the line
                             Expanded(
                               child: Divider(
                                 color: Colors
                                     .grey, // Customize the color of the line if needed
                                 height:
-                                1, // Adjust the height of the line if needed
+                                    1, // Adjust the height of the line if needed
                               ),
                             ),
                           ],
@@ -144,45 +143,49 @@ class BreakdownMaintenanceScreen
                           ? (itemWidth / itemHeight)
                           : (itemWidth / itemHeightWeb),
                       children: <Widget>[
-
                         varUserAccessModel.value.access_list!
-                                      .where((e) =>
-                                          e.feature_id == UserAccessConstants.kJobFeatureId && e.view == UserAccessConstants.kHaveViewAccess)
-                                      .length >
-                                  0
-                              ?
-                        createContentTile(
-                            title: "Job List",
-                            onTap: () {
-                              controller.goToJobListScreen();
-                            }):
-                            Container(),
-
-                             varUserAccessModel.value.access_list!
-                                      .where((e) =>
-                                          e.feature_id == UserAccessConstants.kJobFeatureId && e.add == UserAccessConstants.kHaveAddAccess)
-                                      .length >
-                                  0
-                              ?
-                        createContentTile(
-                            title: 'Add New Job',
-                            onTap: () {
-                              controller.addNewJob();
-                            })
-                            :Container(),
-
-                         varUserAccessModel.value.access_list!
-                                      .where((e) =>
-                                          e.feature_id == UserAccessConstants.kJobCardFeatureId && e.view == UserAccessConstants.kHaveViewAccess)
-                                      .length >
-                                  0
-                              ?
-                        createContentTile(
-                            title: "JobCard List",
-                            onTap: () {
-                              controller.goToJobCardList();
-                            }):Container(),
-                            
+                                    .where((e) =>
+                                        e.feature_id ==
+                                            UserAccessConstants.kJobFeatureId &&
+                                        e.view ==
+                                            UserAccessConstants.kHaveViewAccess)
+                                    .length >
+                                0
+                            ? createContentTile(
+                                title: "Job List",
+                                onTap: () {
+                                  controller.goToJobListScreen();
+                                })
+                            : Container(),
+                        varUserAccessModel.value.access_list!
+                                    .where((e) =>
+                                        e.feature_id ==
+                                            UserAccessConstants.kJobFeatureId &&
+                                        e.add ==
+                                            UserAccessConstants.kHaveAddAccess)
+                                    .length >
+                                0
+                            ? createContentTile(
+                                title: 'Add New Job',
+                                onTap: () {
+                                  controller.addNewJob();
+                                })
+                            : Container(),
+                        varUserAccessModel.value.access_list!
+                                    .where((e) =>
+                                        e.feature_id ==
+                                            UserAccessConstants
+                                                .kJobCardFeatureId &&
+                                        e.view ==
+                                            UserAccessConstants.kHaveViewAccess)
+                                    .length >
+                                0
+                            ? createContentTile(
+                                title: "JobCard List",
+                                onTap: () {
+                                  controller.goToJobCardList();
+                                })
+                            : Container(),
                       ],
                     ),
                     GridView.count(
@@ -197,32 +200,37 @@ class BreakdownMaintenanceScreen
                           : (itemWidth / itemHeightWeb),
                       children: <Widget>[
                         varUserAccessModel.value.access_list!
-                                      .where((e) =>
-                                          e.feature_id == UserAccessConstants.kPermitFeatureId && e.view == UserAccessConstants.kHaveViewAccess)
-                                      .length >
-                                  0
-                              ?
-                        createContentTile(
-                            title: "Permit List",
-                            onTap: () {
-                              controller.newPermitList();
-                            })
+                                    .where((e) =>
+                                        e.feature_id ==
+                                            UserAccessConstants
+                                                .kPermitFeatureId &&
+                                        e.view ==
+                                            UserAccessConstants.kHaveViewAccess)
+                                    .length >
+                                0
+                            ? createContentTile(
+                                title: "Permit List",
+                                onTap: () {
+                                  controller.newPermitList();
+                                })
                             : Container(),
 
-                            //Add New Permit
-                            varUserAccessModel.value.access_list!
-                                      .where((e) =>
-                                          e.feature_id == UserAccessConstants.kPermitFeatureId && e.add == UserAccessConstants.kHaveAddAccess)
-                                      .length >
-                                  0
-                              ?
-                        createContentTile(
-                            title: "Add New Permit",
-                            onTap: () {
-                              controller.createNewPermit();
-                            })
+                        //Add New Permit
+                        varUserAccessModel.value.access_list!
+                                    .where((e) =>
+                                        e.feature_id ==
+                                            UserAccessConstants
+                                                .kPermitFeatureId &&
+                                        e.add ==
+                                            UserAccessConstants.kHaveAddAccess)
+                                    .length >
+                                0
+                            ? createContentTile(
+                                title: "Add New Permit",
+                                onTap: () {
+                                  controller.createNewPermit();
+                                })
                             : Container(),
-
                       ],
                     ),
 
@@ -240,13 +248,13 @@ class BreakdownMaintenanceScreen
                           ),
                           SizedBox(
                               width:
-                              10), // Add some space between the text and the line
+                                  10), // Add some space between the text and the line
                           Expanded(
                             child: Divider(
                               color: Colors
                                   .grey, // Customize the color of the line if needed
                               height:
-                              1, // Adjust the height of the line if needed
+                                  1, // Adjust the height of the line if needed
                             ),
                           ),
                         ],
@@ -299,28 +307,28 @@ class BreakdownMaintenanceScreen
       child: GestureDetector(
         onTap: onTap,
         child: Container(
-          decoration: BoxDecoration(
-            color: ColorValues.skyBlueColor,
-            borderRadius: BorderRadius.circular(2),
-          ),
-          padding: EdgeInsets.symmetric(horizontal: 12, vertical: 8),
-          // child: Row(
-          //   crossAxisAlignment: CrossAxisAlignment.center,
-          //   mainAxisAlignment: MainAxisAlignment.center,
-          //   children: [
-              child : Center(
-                child: Text(
-                  title,
-                  style: TextStyle(
-                      color: ColorValues.whiteColor,
-                      fontSize: 14,
-                      fontWeight: FontWeight.w700),
-                  textAlign: TextAlign.center, // Updated
-                ),
-              )
-          //   ],
-          // ),
-        ),
+            decoration: BoxDecoration(
+              color: ColorValues.skyBlueColor,
+              borderRadius: BorderRadius.circular(2),
+            ),
+            padding: EdgeInsets.symmetric(horizontal: 12, vertical: 8),
+            // child: Row(
+            //   crossAxisAlignment: CrossAxisAlignment.center,
+            //   mainAxisAlignment: MainAxisAlignment.center,
+            //   children: [
+            child: Center(
+              child: Text(
+                title,
+                style: TextStyle(
+                    color: ColorValues.whiteColor,
+                    fontSize: 14,
+                    fontWeight: FontWeight.w700),
+                textAlign: TextAlign.center, // Updated
+              ),
+            )
+            //   ],
+            // ),
+            ),
       ),
     );
   }
