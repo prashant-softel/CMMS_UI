@@ -476,7 +476,9 @@ class SafetyQuestionsListContentWeb
                                         child: CustomElevatedButton(
                                             backgroundColor:
                                                 ColorValues.appRedColor,
-                                            onPressed: () {},
+                                            onPressed: () {
+                                              controller.clearData();
+                                            },
                                             text: 'Cancel')),
                                     SizedBox(
                                       width: 10,
