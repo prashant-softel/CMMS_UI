@@ -57,7 +57,9 @@ class LoginCustomTextfield extends GetView {
         keyboardType: keyboardType,
         inputFormatters: inputFormatters,
         decoration: InputDecoration(
-          fillColor: ColorValues.whiteColor,
+          fillColor: readOnly == true
+              ? Color.fromARGB(255, 206, 205, 205)
+              : Colors.white,
           floatingLabelBehavior: FloatingLabelBehavior.never,
           filled: true,
           errorBorder: OutlineInputBorder(

@@ -49,10 +49,12 @@ class SafetyQuestionsListController extends GetxController {
   ////
   RxBool isCheckedRequire = false.obs;
   void requiretoggleCheckbox() {
-    isCheckedRequire.value = !isCheckedRequire.value; // Toggle the checkbox state
+    isCheckedRequire.value =
+        !isCheckedRequire.value; // Toggle the checkbox state
   }
 
-  Rx<List<List<Map<String, String>>>> rowItem = Rx<List<List<Map<String, String>>>>([]);
+  Rx<List<List<Map<String, String>>>> rowItem =
+      Rx<List<List<Map<String, String>>>>([]);
   // var type2 = <TypeModel>[
   //   TypeModel(name: "Please Select", id: "0"),
   //   TypeModel(name: 'Dry', id: "1"),
@@ -84,9 +86,11 @@ class SafetyQuestionsListController extends GetxController {
   StreamSubscription<int>? facilityIdStreamSubscription;
 
   ///Safety Measurement Question List
-  RxList<SafetyMeasureListModel> safetyMeasureList = <SafetyMeasureListModel>[].obs;
+  RxList<SafetyMeasureListModel> safetyMeasureList =
+      <SafetyMeasureListModel>[].obs;
 
-  PaginationController safetyQuestionListPaginationController = PaginationController(
+  PaginationController safetyQuestionListPaginationController =
+      PaginationController(
     rowCount: 0,
     rowsPerPage: 10,
   );
@@ -137,10 +141,10 @@ class SafetyQuestionsListController extends GetxController {
     if (isFormInvalid.value == true) {
       return false;
     }
-    if (titleCtrlr.text.trim() == '' ||
-    updateType.value == '') {
+    if (titleCtrlr.text.trim() == '' || updateType.value == '') {
       //|| descriptionCtrlr.text.trim() == ''
-      Fluttertoast.showToast(msg: "Please enter required field", fontSize: 16.0);
+      Fluttertoast.showToast(
+          msg: "Please enter required field", fontSize: 16.0);
     } else {
       String _title = titleCtrlr.text.trim();
       // String _description = descriptionCtrlr.text.trim();
@@ -156,10 +160,10 @@ class SafetyQuestionsListController extends GetxController {
                   ? 2
                   : 3,
           required: isCheckedRequire.value ? 1 : 0,
-          isRequiredValue: isCheckedRequire.value 
-          );
+          isRequiredValue: isCheckedRequire.value);
       print("OUT ");
-      var safetyMeasurelistJsonString = createSafetyMeasure.toJson(); //createCheckPointToJson([createCheckpoint]);
+      var safetyMeasurelistJsonString = createSafetyMeasure
+          .toJson(); //createCheckPointToJson([createCheckpoint]);
 
       print({"safetyMeasureJsonString", safetyMeasurelistJsonString});
       await safetyQuestionsListPresenter.createSafetyMeasure(
@@ -192,18 +196,17 @@ class SafetyQuestionsListController extends GetxController {
     CreateSafetyMeasureModel createSafetyMeasure = CreateSafetyMeasureModel(
         id: checkPontId,
         title: _title,
-          // description: "",
-          permitType: selectedTypePermitId,
-          input: updateType.value == "Checkbox"
-              ? 1
-              : updateType.value == "Radio"
-                  ? 2
-                  : 3,
-          required: isCheckedRequire.value ? 1 : 0,
-          isRequiredValue: isCheckedRequire.value 
-        );
-    var createSafetyMeasureJsonString =
-        createSafetyMeasure.toJson(); //createCheckPointToJson([createCheckpoint]);
+        // description: "",
+        permitType: selectedTypePermitId,
+        input: updateType.value == "Checkbox"
+            ? 1
+            : updateType.value == "Radio"
+                ? 2
+                : 3,
+        required: isCheckedRequire.value ? 1 : 0,
+        isRequiredValue: isCheckedRequire.value);
+    var createSafetyMeasureJsonString = createSafetyMeasure
+        .toJson(); //createCheckPointToJson([createCheckpoint]);
 
     print({"updateSafetyMeasureJsonString", createSafetyMeasureJsonString});
     await safetyQuestionsListPresenter.updateSafetyMeasure(
@@ -212,7 +215,6 @@ class SafetyQuestionsListController extends GetxController {
     );
     return true;
   }
-
 
   dynamic onFetchNameFromId(dynamic value) {
     int permitTypeIndex = typePermitList.indexWhere((x) => x?.id == value);
@@ -230,15 +232,18 @@ class SafetyQuestionsListController extends GetxController {
             height: 10,
           ),
           RichText(
-            text: TextSpan(text: 'Are you sure you want to delete the permit ', style: Styles.blackBold16, children: [
-              TextSpan(
-                text: safetyMeasure,
-                style: TextStyle(
-                  color: ColorValues.orangeColor,
-                  fontWeight: FontWeight.bold,
-                ),
-              ),
-            ]),
+            text: TextSpan(
+                text: 'Are you sure you want to delete the permit ',
+                style: Styles.blackBold16,
+                children: [
+                  TextSpan(
+                    text: safetyMeasure,
+                    style: TextStyle(
+                      color: ColorValues.orangeColor,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
+                ]),
           ),
         ]),
         actions: [
@@ -277,9 +282,11 @@ class SafetyQuestionsListController extends GetxController {
     }
   }
 
-  Future<void> getSafetyMeasureList(bool isLoading, int selectedTypePermitId) async {
+  Future<void> getSafetyMeasureList(
+      bool isLoading, int selectedTypePermitId) async {
     safetyMeasureList.value = <SafetyMeasureListModel>[];
-    final _safetyMeasureList = await safetyQuestionsListPresenter.getSafetyMeasureList(
+    final _safetyMeasureList =
+        await safetyQuestionsListPresenter.getSafetyMeasureList(
       isLoading: isLoading,
       // categoryIds: categoryIds,
       permit_type_id: selectedTypePermitId,
@@ -288,7 +295,7 @@ class SafetyQuestionsListController extends GetxController {
     for (var safetyMeasure_list in _safetyMeasureList) {
       safetyMeasureList.add(safetyMeasure_list);
     }
-      // supplierNameList = _supplierNameList;
+    // supplierNameList = _supplierNameList;
     safetyQuestionListPaginationController = PaginationController(
       rowCount: safetyMeasureList.length,
       rowsPerPage: 10,
@@ -297,9 +304,10 @@ class SafetyQuestionsListController extends GetxController {
   }
 
   Future<void> getTypePermitList() async {
-    final _permitTypeList = await safetyQuestionsListPresenter.getTypePermitList(facility_id: facilityId
-        // facility_id: 45
-        );
+    final _permitTypeList = await safetyQuestionsListPresenter
+        .getTypePermitList(facility_id: facilityId
+            // facility_id: 45
+            );
     print('FacilityIdForSafetyQuestions$facilityId');
 
     if (_permitTypeList != null) {
@@ -332,7 +340,8 @@ class SafetyQuestionsListController extends GetxController {
         break;
       case RxList<TypePermitModel>:
         {
-          int typePermitIndex = typePermitList.indexWhere((x) => x?.name == value);
+          int typePermitIndex =
+              typePermitList.indexWhere((x) => x?.name == value);
           selectedTypePermitId = typePermitList[typePermitIndex]?.id ?? 0;
           getSafetyMeasureList(true, selectedTypePermitId!);
           print('Permit Type Id:$selectedTypePermitId');
@@ -351,6 +360,11 @@ class SafetyQuestionsListController extends GetxController {
     selectedItem = null;
     isCheckedRequire.value = false;
     await {_cleardata()};
+  }
+
+  clearData() {
+    titleCtrlr.text = '';
+    descriptionCtrlr.text = '';
   }
 
   _cleardata() {

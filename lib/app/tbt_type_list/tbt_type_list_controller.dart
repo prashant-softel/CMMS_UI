@@ -11,6 +11,7 @@ import 'package:rxdart/subjects.dart';
 import 'package:scrollable_table_view/scrollable_table_view.dart';
 import '../../domain/models/create_tbt_type_list_model.dart';
 import 'package:fluttertoast/fluttertoast.dart';
+
 class TBTTypeListController extends GetxController {
   TBTTypeListController(
     this.tbtTypeListPresenter,
@@ -18,13 +19,14 @@ class TBTTypeListController extends GetxController {
   TBTTypeListPresenter tbtTypeListPresenter;
   final HomeController homecontroller = Get.find();
 
- RxBool isCheckedRequire = false.obs;
+  RxBool isCheckedRequire = false.obs;
   void requiretoggleCheckbox() {
-    isCheckedRequire.value = !isCheckedRequire.value; // Toggle the checkbox state
+    isCheckedRequire.value =
+        !isCheckedRequire.value; // Toggle the checkbox state
   }
 
   //checkbox
-   RxBool isChecked = true.obs;
+  RxBool isChecked = true.obs;
   JobTypeListModel? selectedItem;
   Rx<bool> isTitleInvalid = false.obs;
   Rx<bool> isDescriptionInvalid = false.obs;
@@ -35,7 +37,7 @@ class TBTTypeListController extends GetxController {
   Rx<String> selectedequipment = ''.obs;
   Rx<bool> isSelectedequipment = true.obs;
   RxList<int> selectedEquipmentCategoryIdList = <int>[].obs;
-  
+
   int facilityId = 0;
   int type = 1;
   PaginationController paginationController = PaginationController(
@@ -43,8 +45,6 @@ class TBTTypeListController extends GetxController {
     rowsPerPage: 10,
   );
   // PreventiveCheckListModel? preventiveCheckListModel;
-
-  
 
   RxList<String> preventiveCheckListTableColumns = <String>[].obs;
   // RxList<FrequencyModel?> frequencyList = <FrequencyModel>[].obs;
@@ -55,14 +55,14 @@ class TBTTypeListController extends GetxController {
   final isSuccess = false.obs;
   StreamSubscription<int>? facilityIdStreamSubscription;
 
-/// Job Type Permit List
+  /// Job Type Permit List
   RxList<JobTypeListModel> jobTypeList = <JobTypeListModel>[].obs;
   Rx<bool> isJobTypeListSelected = true.obs;
   Rx<String> selectedJobType = ''.obs;
   RxList<String?> selectedJobTypeDataList = <String>[].obs;
   RxList<int?> selectedJobTypeIdList = <int>[].obs;
-  
-   PaginationController jobTypeListPaginationController = PaginationController(
+
+  PaginationController jobTypeListPaginationController = PaginationController(
     rowCount: 0,
     rowsPerPage: 10,
   );
@@ -74,7 +74,6 @@ class TBTTypeListController extends GetxController {
   BehaviorSubject<int> _facilityId = BehaviorSubject.seeded(0);
   Stream<int> get facilityId$ => _facilityId.stream;
 
-
   @override
   void onInit() async {
     // getInventoryCategoryList();
@@ -82,20 +81,18 @@ class TBTTypeListController extends GetxController {
 
     facilityIdStreamSubscription = homecontroller.facilityId$.listen((event) {
       facilityId = event;
-       Future.delayed(Duration(seconds: 1), () {
+      Future.delayed(Duration(seconds: 1), () {
         getJobTypePermitList(selectedFacilityId);
       });
-       Future.delayed(Duration(seconds: 1), () {
-      getFacilityList();
+      Future.delayed(Duration(seconds: 1), () {
+        getFacilityList();
+      });
     });
-      
-    });
-    
+
     super.onInit();
   }
 
-
-   Future<void> getFacilityList() async {
+  Future<void> getFacilityList() async {
     final _facilityList = await tbtTypeListPresenter.getFacilityList();
     //print('Facility25:$_facilityList');
     if (_facilityList != null) {
@@ -105,12 +102,10 @@ class TBTTypeListController extends GetxController {
 
       selectedFacility.value = facilityList[0]?.name ?? '';
       _facilityId.sink.add(facilityList[0]?.id ?? 0);
-      selectedFacilityId = facilityList[0]?.id ;
+      selectedFacilityId = facilityList[0]?.id;
       getJobTypePermitList(selectedFacilityId);
     }
   }
-
-
 
   Future<void> getJobTypePermitList(selectedFacilityId) async {
     jobTypeList.value = <JobTypeListModel>[];
@@ -123,8 +118,8 @@ class TBTTypeListController extends GetxController {
       jobTypeList.add(jobType_list);
     }
     // selectedJobType.value = _jobTypeList[0].name ?? '';
-    
-      // supplierNameList = _supplierNameList;
+
+    // supplierNameList = _supplierNameList;
     jobTypeListPaginationController = PaginationController(
       rowCount: jobTypeList.length,
       rowsPerPage: 10,
@@ -132,21 +127,21 @@ class TBTTypeListController extends GetxController {
     update(['job_Type_list']);
   }
 
-
   void checkForm() {
-    if(isTitleInvalid.value == true || isDescriptionInvalid.value == true){
+    if (isTitleInvalid.value == true || isDescriptionInvalid.value == true) {
       isFormInvalid.value = true;
     } else {
       isFormInvalid.value = false;
     }
   }
+
   Future<bool> createJobType() async {
-    if (titleCtrlr.text.trim() == '' ) {
+    if (titleCtrlr.text.trim() == '') {
       isTitleInvalid.value = true;
       isFormInvalid.value = true;
       // isDescriptionInvalid.value = true;
     }
-    if (descriptionCtrlr.text.trim() == '' ) {
+    if (descriptionCtrlr.text.trim() == '') {
       // isTitleInvalid.value = true;
       isFormInvalid.value = true;
       isDescriptionInvalid.value = true;
@@ -168,10 +163,10 @@ class TBTTypeListController extends GetxController {
       CreateTbtTypeModel createCheckpoint = CreateTbtTypeModel(
           title: _title,
           description: _description,
-        facilityId:selectedFacilityId
-      );
+          facilityId: selectedFacilityId);
       print("OUT ");
-      var facilitylistJsonString = createCheckpoint.toJson(); //createCheckPointToJson([createCheckpoint]);
+      var facilitylistJsonString = createCheckpoint
+          .toJson(); //createCheckPointToJson([createCheckpoint]);
 
       print({"checkpointJsonString", facilitylistJsonString});
       await tbtTypeListPresenter.createJobType(
@@ -185,8 +180,7 @@ class TBTTypeListController extends GetxController {
 
   void onValueChanged(dynamic list, dynamic value) {
     switch (list.runtimeType) {
-
-       case RxList<FacilityModel>:
+      case RxList<FacilityModel>:
         {
           int facilityIndex = facilityList.indexWhere((x) => x?.name == value);
           // int facilityId = 0;
@@ -206,16 +200,16 @@ class TBTTypeListController extends GetxController {
         break;
     }
   }
+
   Future<bool> updateTbt(checklistId) async {
     String _name = titleCtrlr.text.trim();
 
     JobTypeListModel createTbt = JobTypeListModel(
       id: checklistId,
-      name : _name,
+      name: _name,
       facilityId: selectedFacilityId,
     );
-    var updateTbt =
-    createTbt.toJson();
+    var updateTbt = createTbt.toJson();
 
     print({"updateTbt", updateTbt});
     await tbtTypeListPresenter.updateTbt(
@@ -224,15 +218,18 @@ class TBTTypeListController extends GetxController {
     );
     return true;
   }
- 
 
   Future<void> issuccessCreatechecklist() async {
     isSuccess.toggle();
-    await {cleardata()};
+    await {_cleardata()};
   }
 
-  cleardata() {
+  clearData() {
+    titleCtrlr.text = '';
+    descriptionCtrlr.text = '';
+  }
 
+  _cleardata() {
     titleCtrlr.text = '';
     descriptionCtrlr.text = '';
     selectedItem = null;
@@ -245,15 +242,11 @@ class TBTTypeListController extends GetxController {
     });
   }
 
-  void isDeleteDialog({
-    String? business_id ,
-    String? business
-  }) {
+  void isDeleteDialog({String? business_id, String? business}) {
     Get.dialog(
       AlertDialog(
         content: Column(mainAxisSize: MainAxisSize.min, children: [
           Icon(Icons.delete, size: 35, color: ColorValues.redColor),
-
           SizedBox(
             height: 10,
           ),
@@ -297,6 +290,7 @@ class TBTTypeListController extends GetxController {
       ),
     );
   }
+
   Future<void> deleteJobType(String? business_id) async {
     {
       await tbtTypeListPresenter.deleteJobType(
@@ -305,5 +299,4 @@ class TBTTypeListController extends GetxController {
       );
     }
   }
-
 }

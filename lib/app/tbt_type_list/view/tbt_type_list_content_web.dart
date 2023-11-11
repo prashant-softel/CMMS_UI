@@ -495,7 +495,7 @@ class TBTTypeListContentWeb extends GetView<TBTTypeListController> {
                                             backgroundColor:
                                                 ColorValues.appRedColor,
                                             onPressed: () {
-                                              controller.cleardata;
+                                              controller.clearData();
                                             },
                                             text: 'Cancel')),
                                     SizedBox(
