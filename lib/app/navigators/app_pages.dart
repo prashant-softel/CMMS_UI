@@ -49,6 +49,8 @@ import 'package:cmms/app/inventory_list/inventory_list_binding.dart';
 import 'package:cmms/app/issue_mrs_approve_reject/issue_mrs_approve_binding.dart';
 import 'package:cmms/app/mis/mis_dashboard_binding.dart';
 import 'package:cmms/app/mis/view/mis_dashboard_screen.dart';
+import 'package:cmms/app/mis_list_of_observation/observation_list_binding.dart';
+import 'package:cmms/app/mis_list_of_observation/views/observation_list_screen.dart';
 import 'package:cmms/app/module_cleaning_dashboard/module_binding.dart';
 import 'package:cmms/app/module_cleaning_execution/module_cleaning_list_execution_binding.dart';
 import 'package:cmms/app/module_cleaning_execution/view/module_cleaning_list_execution_screen.dart.dart';
@@ -930,6 +932,11 @@ class AppPages {
       name: _Paths.createAudit,
       page: CreateAuditScreen.new,
       binding: CreateAuditBinding(),
+    ),
+    GetPage<dynamic>(
+      name: _Paths.observationListScreen,
+      page: ObservationListScreen.new,
+      binding: ObservationListBinding(),
     ),
     // GetPage<dynamic>(
     //   name: _Paths.viewAudit,

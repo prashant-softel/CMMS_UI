@@ -48,6 +48,6 @@ class MisDashboardController extends GetxController {
   }
 
   void goToJobListScreen() {
-    Get.toNamed(Routes.jobList);
+    Get.toNamed(Routes.observationListScreen);
   }
 }
