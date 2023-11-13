@@ -43,57 +43,11 @@ class MisDashboardController extends GetxController {
         selectedFacility.value = facilityList[0]?.name ?? '';
       }
     } catch (e) {
-      Utility.showDialog(e.toString() + ' BMController - getFacilityList');
+      Utility.showDialog(e.toString() + ' MisController - getFacilityList');
     }
-  }
-
-  Future<void> goToPermitTypeScreen() async {
-    Get.toNamed(
-      Routes.permitTypeScreen,
-    );
-  }
-
-  Future<void> gotToSafetyQuestionsList() async {
-    Get.toNamed(
-      Routes.safetyQuestionsList,
-    );
-  }
-
-  Future<void> goToJobTypeList() async {
-    Get.toNamed(
-      Routes.tbtTypeListScreen,
-    );
-  }
-
-  Future<void> goToJobSOPList() async {
-    Get.toNamed(
-      Routes.tbtSOPListScreen,
-    );
   }
 
   void goToJobListScreen() {
     Get.toNamed(Routes.jobList);
-  }
-
-  void addNewJob() {
-    Get.toNamed(Routes.addJob);
-  }
-
-  Future<void> newPermitList() async {
-    Get.toNamed(
-      Routes.newPermitList,
-    );
-  }
-
-  Future<void> createNewPermit() async {
-    Get.toNamed(
-      Routes.newPermit,
-    );
-  }
-
-  Future<void> goToJobCardList() async {
-    Get.toNamed(
-      Routes.goToJobCardList,
-    );
   }
 }

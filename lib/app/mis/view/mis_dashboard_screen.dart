@@ -142,154 +142,16 @@ class MisDashboardScreen extends GetView<MisDashboardController> {
                           ? (itemWidth / itemHeight)
                           : (itemWidth / itemHeightWeb),
                       children: <Widget>[
-                        varUserAccessModel.value.access_list!
-                                    .where((e) =>
-                                        e.feature_id ==
-                                            UserAccessConstants.kJobFeatureId &&
-                                        e.view ==
-                                            UserAccessConstants.kHaveViewAccess)
-                                    .length >
-                                0
-                            ? createContentTile(
-                                title: "Job List",
-                                onTap: () {
-                                  controller.goToJobListScreen();
-                                })
-                            : Container(),
-                        varUserAccessModel.value.access_list!
-                                    .where((e) =>
-                                        e.feature_id ==
-                                            UserAccessConstants.kJobFeatureId &&
-                                        e.add ==
-                                            UserAccessConstants.kHaveAddAccess)
-                                    .length >
-                                0
-                            ? createContentTile(
-                                title: 'Add New Job',
-                                onTap: () {
-                                  controller.addNewJob();
-                                })
-                            : Container(),
-                        varUserAccessModel.value.access_list!
-                                    .where((e) =>
-                                        e.feature_id ==
-                                            UserAccessConstants
-                                                .kJobCardFeatureId &&
-                                        e.view ==
-                                            UserAccessConstants.kHaveViewAccess)
-                                    .length >
-                                0
-                            ? createContentTile(
-                                title: "JobCard List",
-                                onTap: () {
-                                  controller.goToJobCardList();
-                                })
-                            : Container(),
-                      ],
-                    ),
-                    GridView.count(
-                      shrinkWrap: true,
-                      primary: false,
-                      padding: Dimens.edgeInsets15,
-                      crossAxisSpacing: 70,
-                      mainAxisSpacing: 6,
-                      crossAxisCount: Responsive.isMobile(context) ? 2 : 5,
-                      childAspectRatio: Responsive.isMobile(context)
-                          ? (itemWidth / itemHeight)
-                          : (itemWidth / itemHeightWeb),
-                      children: <Widget>[
-                        varUserAccessModel.value.access_list!
-                                    .where((e) =>
-                                        e.feature_id ==
-                                            UserAccessConstants
-                                                .kPermitFeatureId &&
-                                        e.view ==
-                                            UserAccessConstants.kHaveViewAccess)
-                                    .length >
-                                0
-                            ? createContentTile(
-                                title: "Permit List",
-                                onTap: () {
-                                  controller.newPermitList();
-                                })
-                            : Container(),
-
-                        //Add New Permit
-                        varUserAccessModel.value.access_list!
-                                    .where((e) =>
-                                        e.feature_id ==
-                                            UserAccessConstants
-                                                .kPermitFeatureId &&
-                                        e.add ==
-                                            UserAccessConstants.kHaveAddAccess)
-                                    .length >
-                                0
-                            ? createContentTile(
-                                title: "Add New Permit",
-                                onTap: () {
-                                  controller.createNewPermit();
-                                })
-                            : Container(),
-                      ],
-                    ),
-
-                    Container(
-                      margin: EdgeInsets.only(left: 20),
-                      child: Row(
-                        children: [
-                          Text(
-                            "Masters",
-                            style: TextStyle(
-                              color: Color.fromARGB(255, 159, 156, 156),
-                              fontSize: 16,
-                              fontWeight: FontWeight.w400,
-                            ),
-                          ),
-                          SizedBox(
-                              width:
-                                  10), // Add some space between the text and the line
-                          Expanded(
-                            child: Divider(
-                              color: Colors
-                                  .grey, // Customize the color of the line if needed
-                              height:
-                                  1, // Adjust the height of the line if needed
-                            ),
-                          ),
-                        ],
-                      ),
-                    ),
-                    GridView.count(
-                      shrinkWrap: true,
-                      primary: false,
-                      padding: Dimens.edgeInsets15,
-                      crossAxisSpacing: 70,
-                      mainAxisSpacing: 6,
-                      crossAxisCount: Responsive.isMobile(context) ? 2 : 5,
-                      childAspectRatio: Responsive.isMobile(context)
-                          ? (itemWidth / itemHeight)
-                          : (itemWidth / itemHeightWeb),
-                      children: <Widget>[
                         createContentTile(
-                            title: "Permit Type",
+                            title: "List Of observation",
                             onTap: () {
-                              controller.goToPermitTypeScreen();
+                              controller.goToJobListScreen();
                             }),
                         createContentTile(
-                            title: "Permit Type Checklist",
+                            title: 'Create observation ',
                             onTap: () {
-                              controller.gotToSafetyQuestionsList();
-                            }),
-                        createContentTile(
-                            title: "TBT Type",
-                            onTap: () {
-                              controller.goToJobTypeList();
-                            }),
-                        createContentTile(
-                            title: "TBT SOP List",
-                            onTap: () {
-                              controller.goToJobSOPList();
-                            }),
+                              // controller.addNewJob();
+                            })
                       ],
                     ),
                   ]),
