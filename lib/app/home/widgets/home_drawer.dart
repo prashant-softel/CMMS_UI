@@ -87,8 +87,8 @@ class HomeDrawer extends GetView<HomeController> {
                                               title: "MIS",
                                               icon: "assets/files/warranty.png",
                                               press: () {
-                                                Get.offAllNamed(Routes
-                                                    .stockManagementDashboardScreen);
+                                                Get.offAllNamed(
+                                                    Routes.listOfObservation);
                                               },
                                             ),
 
