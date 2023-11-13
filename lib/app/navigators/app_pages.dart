@@ -47,6 +47,8 @@ import 'package:cmms/app/incident_report_list/incident_report_list_binding.dart'
 import 'package:cmms/app/incident_report_list/incident_report_list_screen.dart';
 import 'package:cmms/app/inventory_list/inventory_list_binding.dart';
 import 'package:cmms/app/issue_mrs_approve_reject/issue_mrs_approve_binding.dart';
+import 'package:cmms/app/mis/mis_dashboard_binding.dart';
+import 'package:cmms/app/mis/view/mis_dashboard_screen.dart';
 import 'package:cmms/app/module_cleaning_dashboard/module_binding.dart';
 import 'package:cmms/app/module_cleaning_execution/module_cleaning_list_execution_binding.dart';
 import 'package:cmms/app/module_cleaning_execution/view/module_cleaning_list_execution_screen.dart.dart';
@@ -403,6 +405,10 @@ class AppPages {
         name: _Paths.breakdown,
         page: BreakdownMaintenanceScreen.new,
         binding: BreakdownMaintenanceBinding()),
+    GetPage<dynamic>(
+        name: _Paths.listOfObservation,
+        page: ListOfObservationScreen.new,
+        binding: ListOfObservationBinding()),
     GetPage<dynamic>(
         name: _Paths.viewWarrantyClaim,
         page: ViewWarrantyClaimWeb.new,
