@@ -6,15 +6,15 @@ import 'package:cmms/app/navigators/navigators.dart';
 import 'package:cmms/domain/models/facility_model.dart';
 import 'package:get/get.dart';
 
-class ListOfObservationController extends GetxController {
-  ListOfObservationController(
-    this.listOfObservationPresenter,
+class MisDashboardController extends GetxController {
+  MisDashboardController(
+    this.misDashboardPresenter,
   );
 
   // final HomeController controller = Get.find();
 
-  ListOfObservationPresenter listOfObservationPresenter;
-  late ListOfObservationController listOfObservationController;
+  MisDashboardPresenter misDashboardPresenter;
+  late MisDashboardController listOfObservationController;
 
   String username = '';
   Rx<String> selectedFacility = ''.obs;
@@ -34,8 +34,7 @@ class ListOfObservationController extends GetxController {
 
   Future<void> getFacilityList() async {
     try {
-      final _facilityList =
-          await listOfObservationPresenter.getFacilityList(false);
+      final _facilityList = await misDashboardPresenter.getFacilityList(false);
 
       if (_facilityList != null) {
         for (var facility in _facilityList) {

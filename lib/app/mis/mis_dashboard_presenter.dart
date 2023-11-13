@@ -1,11 +1,11 @@
 import 'package:cmms/domain/models/facility_model.dart';
 
-import 'package:cmms/domain/usecases/list_of_observation_usecase.dart';
+import 'package:cmms/domain/usecases/mis_dashboard_usecase.dart';
 
-class ListOfObservationPresenter {
-  ListOfObservationPresenter(this.listOfObservationUsecase);
-  ListOfObservationUsecase listOfObservationUsecase;
+class MisDashboardPresenter {
+  MisDashboardPresenter(this.misDashboardUsecase);
+  MisDashboardUsecase misDashboardUsecase;
 
   Future<List<FacilityModel?>?> getFacilityList(bool isLoading) async =>
-      await listOfObservationUsecase.getFacilityList(isLoading);
+      await misDashboardUsecase.getFacilityList(isLoading);
 }

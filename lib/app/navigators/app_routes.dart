@@ -24,7 +24,7 @@ abstract class Routes {
   static const preventiveList = _Paths.preventiveList;
   static const preventiveCheckPoint = _Paths.preventiveCheckPoint;
   static const breakdown = _Paths.breakdown;
-  static const listOfObservation = _Paths.listOfObservation;
+  static const misDashboard = _Paths.misDashboard;
 
   static const newPermit = _Paths.newPermit;
   static const newPermitList = _Paths.newPermitList;
@@ -174,7 +174,7 @@ abstract class _Paths {
   // static const create_checkList = '/create_preventive_checklist-screen';
   // static const preventive_List = '/preventive-list-screen';
   static const breakdown = '/breakdown-maintenance';
-  static const listOfObservation = '/listOfObservation';
+  static const misDashboard = '/misDashboard';
 
   static const newPermit = '/new-permit';
   static const createCheckList = '/create_preventive_checklist-screen';
