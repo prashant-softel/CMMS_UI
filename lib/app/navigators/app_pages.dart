@@ -406,9 +406,9 @@ class AppPages {
         page: BreakdownMaintenanceScreen.new,
         binding: BreakdownMaintenanceBinding()),
     GetPage<dynamic>(
-        name: _Paths.listOfObservation,
-        page: ListOfObservationScreen.new,
-        binding: ListOfObservationBinding()),
+        name: _Paths.misDashboard,
+        page: MisDashboardScreen.new,
+        binding: MisDashboardBinding()),
     GetPage<dynamic>(
         name: _Paths.viewWarrantyClaim,
         page: ViewWarrantyClaimWeb.new,

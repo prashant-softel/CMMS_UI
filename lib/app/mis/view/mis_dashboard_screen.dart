@@ -10,11 +10,11 @@ import '../../home/widgets/header_widget.dart';
 
 // import '../../navigators/app_pages.dart';
 
-class ListOfObservationScreen extends GetView<ListOfObservationController> {
+class MisDashboardScreen extends GetView<MisDashboardController> {
   ///
-  ListOfObservationScreen({super.key});
+  MisDashboardScreen({super.key});
 
-  final ListOfObservationController controller = Get.find();
+  final MisDashboardController controller = Get.find();
 
   ///
   @override
