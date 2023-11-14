@@ -1,5 +1,4 @@
-import 'package:cmms/app/job_list/views/mobile/job_list_content_mobile.dart';
-import 'package:cmms/app/mis_list_of_observation/views/mobile/job_list_content_mobile.dart';
+import 'package:cmms/app/mis_list_of_observation/views/mobile/observation_list_mobile.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import '../../home/widgets/header_widget.dart';
@@ -27,7 +26,14 @@ class ObservationListScreen extends StatelessWidget {
               automaticallyImplyLeading: false,
             )
           : AppBar(
-              title: Text('Mis'),
+              title: Text(
+                "LIST OF OBSERVATION",
+                style: TextStyle(
+                  color: Color.fromARGB(255, 159, 156, 156),
+                  fontSize: 16,
+                  fontWeight: FontWeight.w400,
+                ),
+              ),
               centerTitle: true,
               elevation: 0,
               leading: IconButton(
