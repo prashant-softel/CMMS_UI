@@ -2,10 +2,7 @@ import 'dart:async';
 
 import 'package:cmms/app/app.dart';
 import 'package:cmms/domain/models/facility_model.dart';
-import 'package:cmms/domain/models/job_model.dart';
-import 'package:excel/excel.dart';
 import 'package:get/get.dart';
-import 'package:scrollable_table_view/scrollable_table_view.dart';
 import 'observation_list_presenter.dart';
 
 class ObservationListController extends GetxController {
