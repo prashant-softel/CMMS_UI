@@ -32,7 +32,7 @@ class ObservationListBinding extends Bindings {
           permanent: true,
         ),
       ),
-      //permanent: true,
+      // permanent: true,
     );
   }
 }

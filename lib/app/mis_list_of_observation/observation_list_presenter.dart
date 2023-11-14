@@ -10,19 +10,4 @@ class ObservationListPresenter {
 
   Future<List<FacilityModel?>?> getFacilityList({bool? isLoading}) async =>
       await observationListUsecase.getFacilityList(isLoading: isLoading);
-
-  Future<List<JobModel?>?> getJobList({
-    String? auth,
-    int? facilityId,
-    // int? userId,
-    required bool self_view,
-    bool? isLoading,
-  }) async =>
-      await observationListUsecase.getJobList(
-        auth: auth ?? "",
-        facilityId: facilityId ?? 0,
-        self_view: self_view,
-        isLoading: isLoading ?? false,
-      );
-  void clearValue() async => observationListUsecase.clearValue();
 }
