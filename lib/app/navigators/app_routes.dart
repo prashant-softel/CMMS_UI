@@ -30,6 +30,8 @@ abstract class Routes {
   static const preventiveMaintenanceMapping =
       _Paths.preventiveMaintenanceMapping;
   static const calibrationList = _Paths.calibrationList;
+  static const warrantyCertificatesList = _Paths.warrantyCertificatesList;
+
   static const CalibrationHistory = _Paths.calibrationHistory;
   static const viewWarrantyClaim = _Paths.viewWarrantyClaim;
   static const newWarrantyClaimList = _Paths.newWarrantyClaimList;
@@ -184,6 +186,7 @@ abstract class _Paths {
 
   static const preventiveMaintenanceMapping = '/pm-mapping-screen';
   static const calibrationList = '/calibration-list-screen';
+  static const warrantyCertificatesList = '/warranty-certificates-list-screen';
   static const calibrationHistory = '/calibration-history-screen';
   static const viewWarrantyClaim = '/view-warranty-claim';
   static const newWarrantyClaimList = '/new-warranty-claim';

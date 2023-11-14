@@ -233,6 +233,13 @@ class InventoryScreen extends GetView<InventoryController> {
                                 Routes.calibrationList,
                               );
                             }),
+                        _inventoryList(
+                            tittle: "WC Certificates List",
+                            ontap: () {
+                              Get.toNamed(
+                                Routes.warrantyCertificatesList,
+                              );
+                            }),
                         // _inventoryList(
                         //     tittle: "Inventory Category",
                         //     ontap: () {

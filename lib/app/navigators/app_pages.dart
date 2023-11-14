@@ -125,6 +125,8 @@ import 'package:cmms/app/new_permit_list/new_permit_list_screen.dart';
 import 'package:cmms/app/view_pm_plan/view_pm_plan_binding.dart';
 import 'package:cmms/app/view_warranty_claim/view/view_warranty_claim_content_web.dart';
 import 'package:cmms/app/view_warranty_claim/view_warranty_claim_binding.dart';
+import 'package:cmms/app/warranty_certificates_list/warranty_certificates_list_binding.dart';
+import 'package:cmms/app/warranty_certificates_list/warranty_certificates_list_screen.dart';
 import 'package:cmms/app/warranty_claim_list/warranty_claim_binding.dart';
 import '../approve_return_mrs/approve_return_mrs_binding.dart';
 import '../approve_return_mrs/view/approve_return_mrs_screen.dart';
@@ -393,6 +395,11 @@ class AppPages {
       name: _Paths.calibrationList,
       page: CalibrationListScreen.new,
       binding: CalibrationListBinding(),
+    ),
+    GetPage<dynamic>(
+      name: _Paths.warrantyCertificatesList,
+      page: WarrantyCertificatesListScreen.new,
+      binding: WarrantyCertificatesListBinding(),
     ),
     GetPage<dynamic>(
       name: _Paths.calibrationHistory,
