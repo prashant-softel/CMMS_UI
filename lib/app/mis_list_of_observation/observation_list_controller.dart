@@ -23,36 +23,36 @@ class ObservationListController extends GetxController {
   Rx<String> selectedBlock = ''.obs;
 
   ///
-  final excel = Excel.createExcel();
-  int facilityId = 0;
-  int userId = 0;
-  String? facilityName;
-  JobModel? jobModel;
-  PaginationController paginationController = PaginationController(
-    rowCount: 0,
-    rowsPerPage: 10,
-  );
+  // final excel = Excel.createExcel();
+  // int facilityId = 0;
+  // int userId = 0;
+  // String? facilityName;
+  // JobModel? jobModel;
+  // PaginationController paginationController = PaginationController(
+  //   rowCount: 0,
+  //   rowsPerPage: 10,
+  // );
   StreamSubscription<int>? facilityIdStreamSubscription;
   StreamSubscription<String>? facilityNameStreamSubscription;
 
   ///
   @override
   void onInit() async {
-    facilityIdStreamSubscription = homeController.facilityId$.listen((event) {
-      facilityId = event;
-      // Future.delayed(Duration(seconds: 1), () {
-      // userId = varUserAccessModel.value.user_id ?? 0;
-      // if (userId != null) {
+    // facilityIdStreamSubscription = homeController.facilityId$.listen((event) {
+    //   facilityId = event;
+    //   // Future.delayed(Duration(seconds: 1), () {
+    //   // userId = varUserAccessModel.value.user_id ?? 0;
+    //   // if (userId != null) {
 
-      // }
-      // });
-    });
-    facilityNameStreamSubscription =
-        homeController.facilityName$.listen((event) {
-      facilityName = event;
+    //   // }
+    //   // });
+    // });
+    // facilityNameStreamSubscription =
+    //     homeController.facilityName$.listen((event) {
+    //   facilityName = event;
 
-      // });
-    });
+    //   // });
+    // });
     super.onInit();
   }
 
