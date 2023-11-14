@@ -108,7 +108,7 @@ class MisDashboardScreen extends GetView<MisDashboardController> {
                         child: Row(
                           children: [
                             Text(
-                              "BreakDown Maintenance",
+                              "MIS",
                               style: TextStyle(
                                 color: Color.fromARGB(255, 159, 156, 156),
                                 fontSize: 16,
