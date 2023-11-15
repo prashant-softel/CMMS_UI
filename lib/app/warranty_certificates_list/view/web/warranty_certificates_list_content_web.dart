@@ -53,66 +53,66 @@ class WarrantyCertificatesListContentWeb
                 ),
                 Text(" / WARRANTY CERTIFICATES LIST",
                     style: Styles.greyMediumLight12),
-                Spacer(),
-                ActionButton(
-                  icon: Icons.download,
-                  label: 'exportAsset'.tr,
-                  onPressed: () {},
-                  color: ColorValues.appLightBlueColor,
-                ),
-                Dimens.boxWidth10,
-                ActionButton(
-                  icon: Icons.upload,
-                  label: 'importAsset'.tr,
-                  onPressed: () {
-                    Get.toNamed(Routes.importInventory, arguments: 1);
-                  },
-                  color: ColorValues.appDarkBlueColor,
-                ),
-                Dimens.boxWidth10,
-                ActionButton(
-                  icon: Icons.add,
-                  label: 'addAsset'.tr,
-                  onPressed: () {
-                    Get.toNamed(
-                      Routes.addInventoryScreen,
-                    );
-                  },
-                  color: ColorValues.appGreenColor,
-                ),
-                Dimens.boxWidth10,
-                ActionButton(
-                  icon: Icons.close,
-                  label: 'retireAsset'.tr,
-                  onPressed: () async {},
-                  color: ColorValues.appRedColor,
-                ),
+                // Spacer(),
+                // ActionButton(
+                //   icon: Icons.download,
+                //   label: 'exportAsset'.tr,
+                //   onPressed: () {},
+                //   color: ColorValues.appLightBlueColor,
+                // ),
+                // Dimens.boxWidth10,
+                // ActionButton(
+                //   icon: Icons.upload,
+                //   label: 'importAsset'.tr,
+                //   onPressed: () {
+                //     Get.toNamed(Routes.importInventory, arguments: 1);
+                //   },
+                //   color: ColorValues.appDarkBlueColor,
+                // ),
+                // Dimens.boxWidth10,
+                // ActionButton(
+                //   icon: Icons.add,
+                //   label: 'addAsset'.tr,
+                //   onPressed: () {
+                //     Get.toNamed(
+                //       Routes.addInventoryScreen,
+                //     );
+                //   },
+                //   color: ColorValues.appGreenColor,
+                // ),
+                // Dimens.boxWidth10,
+                // ActionButton(
+                //   icon: Icons.close,
+                //   label: 'retireAsset'.tr,
+                //   onPressed: () async {},
+                //   color: ColorValues.appRedColor,
+                // ),
               ],
             ),
           ),
 
-          Align(
-            alignment: Alignment.centerLeft,
-            child: Container(
-              width: 400,
-              child: TabBar(
-                tabs: [
-                  CustomTabBar(
-                    label: 'listView'.tr,
-                    icon: Icons.menu,
-                  ),
-                  // CustomTabBar(
-                  //   label: 'treeView'.tr,
-                  //   icon: Icons.account_tree_sharp,
-                  // ),
-                  // CustomTabBar(
-                  //   label: 'mapView'.tr,
-                  //   icon: Icons.location_on,
-                  // ),
-                ],
-              ),
-            ),
-          ),
+          // Align(
+          //   alignment: Alignment.centerLeft,
+          //   child: Container(
+          //     width: 400,
+          //     child: TabBar(
+          //       tabs: [
+          //         CustomTabBar(
+          //           label: 'listView'.tr,
+          //           icon: Icons.menu,
+          //         ),
+          //         // CustomTabBar(
+          //         //   label: 'treeView'.tr,
+          //         //   icon: Icons.account_tree_sharp,
+          //         // ),
+          //         // CustomTabBar(
+          //         //   label: 'mapView'.tr,
+          //         //   icon: Icons.location_on,
+          //         // ),
+          //       ],
+          //     ),
+          //   ),
+          // ),
 
           ///
           Row(
@@ -200,128 +200,126 @@ class WarrantyCertificatesListContentWeb
                                                   onTap: () {
                                                     print('${value} $record');
                                                   },
-                                                  child:
-                                                      value.runtimeType
-                                                                  .toString() ==
-                                                              'AssetName'
-                                                          ? Builder(builder:
-                                                              (context) {
-                                                              final val = value
-                                                                  as AssetName;
-                                                              return Column(
-                                                                children: [
-                                                                  Text(
-                                                                      '${val.name}'),
-                                                                  Spacer(),
-                                                                  // Align(
-                                                                  //   alignment: Alignment
-                                                                  //       .centerRight,
-                                                                  //   child: Container(
-                                                                  //     padding: Dimens
-                                                                  //         .edgeInsets8_2_8_2,
-                                                                  //     decoration:
-                                                                  //         BoxDecoration(
-                                                                  //       color: val.requirementStatus ==
-                                                                  //               1
-                                                                  //           ? ColorValues
-                                                                  //               .appRedColor
-                                                                  //           : ColorValues
-                                                                  //               .appGreenColor,
-                                                                  //       borderRadius:
-                                                                  //           BorderRadius
-                                                                  //               .circular(
-                                                                  //                   4),
-                                                                  //     ),
-                                                                  //     // child: Text(
-                                                                  //     //   val.name == 1
-                                                                  //     //       ? 'requirementRejected'
-                                                                  //     //           .tr
-                                                                  //     //       : 'requirementAccepted'
-                                                                  //     //           .tr,
-                                                                  //     //   style: Styles
-                                                                  //     //       .white10
-                                                                  //     //       .copyWith(
-                                                                  //     //     color: Colors
-                                                                  //     //         .white,
-                                                                  //     //   ),
-                                                                  //     // ),
-                                                                  //   ),
+                                                  child: value.runtimeType
+                                                              .toString() ==
+                                                          'AssetName'
+                                                      ? Builder(
+                                                          builder: (context) {
+                                                          final val = value
+                                                              as AssetName;
+                                                          return Column(
+                                                            children: [
+                                                              Text(
+                                                                  '${val.name}'),
+                                                              Spacer(),
+                                                              // Align(
+                                                              //   alignment: Alignment
+                                                              //       .centerRight,
+                                                              //   child: Container(
+                                                              //     padding: Dimens
+                                                              //         .edgeInsets8_2_8_2,
+                                                              //     decoration:
+                                                              //         BoxDecoration(
+                                                              //       color: val.requirementStatus ==
+                                                              //               1
+                                                              //           ? ColorValues
+                                                              //               .appRedColor
+                                                              //           : ColorValues
+                                                              //               .appGreenColor,
+                                                              //       borderRadius:
+                                                              //           BorderRadius
+                                                              //               .circular(
+                                                              //                   4),
+                                                              //     ),
+                                                              //     // child: Text(
+                                                              //     //   val.name == 1
+                                                              //     //       ? 'requirementRejected'
+                                                              //     //           .tr
+                                                              //     //       : 'requirementAccepted'
+                                                              //     //           .tr,
+                                                              //     //   style: Styles
+                                                              //     //       .white10
+                                                              //     //       .copyWith(
+                                                              //     //     color: Colors
+                                                              //     //         .white,
+                                                              //     //   ),
+                                                              //     // ),
+                                                              //   ),
+                                                              // ),
+
+                                                              Dimens
+                                                                  .boxHeight10,
+                                                            ],
+                                                          );
+                                                        })
+                                                      : value == 'Actions'
+                                                          ? Wrap(
+                                                              children: [
+                                                                Row(children: [
+                                                                  TableActionButton(
+                                                                    color: ColorValues
+                                                                        .viewColor,
+                                                                    icon: Icons
+                                                                        .visibility,
+                                                                    message:
+                                                                        'View',
+                                                                    onPress:
+                                                                        () {
+                                                                      // controller.viewAddInventoryDetails(id: int.tryParse('${record[2]}'));
+                                                                      // Get.toNamed(Routes.viewAddInventoryScreen);
+                                                                    },
+                                                                  ),
+                                                                  //),p
+
+                                                                  TableActionButton(
+                                                                    color: ColorValues
+                                                                        .appLightBlueColor,
+                                                                    icon: Icons
+                                                                        .edit,
+                                                                    message:
+                                                                        'Edit',
+                                                                    onPress:
+                                                                        () {
+                                                                      // controller.showAddInventoryDetails(id: int.tryParse('${record[2]}'));
+                                                                      // print('AddInV:${record[2]}');
+                                                                    },
+                                                                  ),
                                                                   // ),
 
-                                                                  Dimens
-                                                                      .boxHeight10,
-                                                                ],
-                                                              );
-                                                            })
-                                                          : value == 'Actions'
-                                                              ? Wrap(
-                                                                  children: [
-                                                                    Row(
-                                                                        children: [
-                                                                          TableActionButton(
-                                                                            color:
-                                                                                ColorValues.viewColor,
-                                                                            icon:
-                                                                                Icons.visibility,
-                                                                            message:
-                                                                                'View',
-                                                                            onPress:
-                                                                                () {
-                                                                              controller.viewAddInventoryDetails(id: int.tryParse('${record[2]}'));
-                                                                              Get.toNamed(Routes.viewAddInventoryScreen);
-                                                                            },
-                                                                          ),
-                                                                          //),p
-
-                                                                          TableActionButton(
-                                                                            color:
-                                                                                ColorValues.appLightBlueColor,
-                                                                            icon:
-                                                                                Icons.edit,
-                                                                            message:
-                                                                                'Edit',
-                                                                            onPress:
-                                                                                () {
-                                                                              controller.showAddInventoryDetails(id: int.tryParse('${record[2]}'));
-                                                                              print('AddInV:${record[2]}');
-                                                                            },
-                                                                          ),
-                                                                          //),
-
-                                                                          TableActionButton(
-                                                                            color:
-                                                                                ColorValues.appRedColor,
-                                                                            icon:
-                                                                                Icons.delete,
-                                                                            message:
-                                                                                'Delete',
-                                                                            onPress:
-                                                                                () {},
-                                                                          ),
-                                                                          //),
-                                                                        ]),
-                                                                    // TableActionButton(
-                                                                    //   color: ColorValues
-                                                                    //       .appGreenColor,
-                                                                    //   icon: Icons
-                                                                    //       .visibility,
-                                                                    //  message:
-                                                                    ////       'Approve Request',
-                                                                    //   onPress: () {},
-                                                                    // ),
-                                                                    // TableActionButton(
-                                                                    //   color: ColorValues
-                                                                    //       .appRedColor,
-                                                                    //   icon: Icons
-                                                                    //       .visibility,
-                                                                    //  message:
-                                                                    //       'Reject Request',
-                                                                    //   onPress: () {},
-                                                                    // ),
-                                                                  ],
-                                                                )
-                                                              : Text(value
-                                                                  .toString()),
+                                                                  TableActionButton(
+                                                                    color: ColorValues
+                                                                        .appRedColor,
+                                                                    icon: Icons
+                                                                        .delete,
+                                                                    message:
+                                                                        'Delete',
+                                                                    onPress:
+                                                                        () {},
+                                                                  ),
+                                                                  //),
+                                                                ]),
+                                                                // TableActionButton(
+                                                                //   color: ColorValues
+                                                                //       .appGreenColor,
+                                                                //   icon: Icons
+                                                                //       .visibility,
+                                                                //  message:
+                                                                ////       'Approve Request',
+                                                                //   onPress: () {},
+                                                                // ),
+                                                                // TableActionButton(
+                                                                //   color: ColorValues
+                                                                //       .appRedColor,
+                                                                //   icon: Icons
+                                                                //       .visibility,
+                                                                //  message:
+                                                                //       'Reject Request',
+                                                                //   onPress: () {},
+                                                                // ),
+                                                              ],
+                                                            )
+                                                          : Text(
+                                                              value.toString()),
                                                 ),
                                               );
                                             },
@@ -390,11 +388,11 @@ class WarrantyCertificatesListContentWeb
                                                                     .visibility,
                                                                 message: 'View',
                                                                 onPress: () {
-                                                                  controller.viewAddInventoryDetails(
-                                                                      id: int.tryParse(
-                                                                          '${record[2]}'));
-                                                                  Get.toNamed(Routes
-                                                                      .viewAddInventoryScreen);
+                                                                  // controller.viewAddInventoryDetails(
+                                                                  //     id: int.tryParse(
+                                                                  //         '${record[2]}'));
+                                                                  // Get.toNamed(Routes
+                                                                  //     .viewAddInventoryScreen);
                                                                 },
                                                               ),
                                                               //),p
@@ -406,11 +404,11 @@ class WarrantyCertificatesListContentWeb
                                                                     Icons.edit,
                                                                 message: 'Edit',
                                                                 onPress: () {
-                                                                  controller.showAddInventoryDetails(
-                                                                      id: int.tryParse(
-                                                                          '${record[2]}'));
-                                                                  print(
-                                                                      'AddInV:${record[2]}');
+                                                                  // controller.showAddInventoryDetails(
+                                                                  //     id: int.tryParse(
+                                                                  //         '${record[2]}'));
+                                                                  // print(
+                                                                  //     'AddInV:${record[2]}');
                                                                 },
                                                               ),
                                                               //),
