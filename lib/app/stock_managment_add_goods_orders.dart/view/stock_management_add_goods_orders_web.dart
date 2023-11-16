@@ -826,11 +826,11 @@ class AddRowInGoodsOrder extends StatelessWidget {
           ],
         ),
         child: Column(children: [
-          Column(
-              children: []..addAll(controller.rowItem.value.map((e) {
-                  return Text(jsonEncode(e));
-                }))),
-          Text(jsonEncode(controller.dropdownMapperData)),
+          // Column(
+          //     children: []..addAll(controller.rowItem.value.map((e) {
+          //         return Text(jsonEncode(e));
+          //       }))),
+          // Text(jsonEncode(controller.dropdownMapperData)),
           Padding(
             padding: const EdgeInsets.all(10.0),
             child: Row(
