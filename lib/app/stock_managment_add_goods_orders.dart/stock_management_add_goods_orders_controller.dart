@@ -481,7 +481,7 @@ class StockManagementAddGoodsOrdersController extends GetxController {
     List<Items> items = [];
     rowItem.value.forEach((element) {
       Items item = Items(
-          goItemID: dropdownMapperData[element[0]["value"]]?.itemID,
+          goItemID: 0,
           received_qty: 0,
           lost_qty: 0,
           accepted_qty: 0,
