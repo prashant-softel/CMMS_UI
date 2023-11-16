@@ -1,5 +1,5 @@
 import 'package:cmms/app/create_observation/create_observation_controller.dart';
-import 'package:cmms/domain/usecases/create_observation_usecase%20copy.dart';
+import 'package:cmms/domain/usecases/create_observation_usecase.dart';
 import 'package:get/get.dart';
 
 import '../../domain/usecases/home_usecase.dart';

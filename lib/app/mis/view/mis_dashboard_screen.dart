@@ -143,15 +143,23 @@ class MisDashboardScreen extends GetView<MisDashboardController> {
                           : (itemWidth / itemHeightWeb),
                       children: <Widget>[
                         createContentTile(
-                            title: "List Of observation",
-                            onTap: () {
-                              controller.goToJobListScreen();
-                            }),
+                          title: "List Of observation",
+                          onTap: () {
+                            controller.goToJobListScreen();
+                          },
+                        ),
                         createContentTile(
-                            title: 'Create observation ',
-                            onTap: () {
-                              controller.goToCreateObservation();
-                            })
+                          title: 'Create observation ',
+                          onTap: () {
+                            controller.goToCreateObservation();
+                          },
+                        ),
+                        createContentTile(
+                          title: 'Check List Of observation',
+                          onTap: () {
+                            controller.goToCheckListOfObservation();
+                          },
+                        )
                       ],
                     ),
                   ]),

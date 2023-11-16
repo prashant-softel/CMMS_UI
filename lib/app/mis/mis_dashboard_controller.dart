@@ -54,4 +54,8 @@ class MisDashboardController extends GetxController {
   void goToCreateObservation() {
     Get.toNamed(Routes.createObservation);
   }
+
+  void goToCheckListOfObservation() {
+    Get.toNamed(Routes.checkListOfObservation);
+  }
 }
