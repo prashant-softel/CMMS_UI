@@ -10,6 +10,15 @@ import 'create_observation_presenter.dart';
 class CreateObservationBinding extends Bindings {
   @override
   void dependencies() {
+    Get.lazyPut<CreateObservationController>(
+      () => CreateObservationController(
+        CreateObservationPresenter(
+          CreateObservationUsecase(
+            Get.find(),
+          ),
+        ),
+      ),
+    );
     Get.lazyPut(
       () => HomeController(
         Get.put(
@@ -20,17 +29,6 @@ class CreateObservationBinding extends Bindings {
           ),
         ),
       ),
-    );
-    Get.lazyPut(
-      () => CreateObservationController(
-        Get.put(
-          CreateObservationPresenter(
-            Get.put(CreateObservationUsecase(Get.find())),
-          ),
-          permanent: true,
-        ),
-      ),
-      // permanent: true,
     );
   }
 }

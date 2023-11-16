@@ -2,6 +2,8 @@ import 'dart:async';
 
 import 'package:cmms/app/app.dart';
 import 'package:cmms/app/create_observation/create_observation_presenter.dart';
+import 'package:cmms/domain/models/business_list_model.dart';
+import 'package:cmms/domain/models/business_type_model.dart';
 import 'package:cmms/domain/models/facility_model.dart';
 import 'package:get/get.dart';
 
@@ -12,6 +14,11 @@ class CreateObservationController extends GetxController {
   );
   CreateObservationPresenter createObservationPresenter;
   HomeController homeController = Get.find();
+  RxList<BusinessListModel?> ownerList = <BusinessListModel>[].obs;
+  Rx<bool> isSelectedBusinessType = true.obs;
+
+  int selectedBusinessTypeId = 1;
+  Rx<String> selectedBusinessType = ''.obs;
 
   ///
 
@@ -63,6 +70,17 @@ class CreateObservationController extends GetxController {
     }
     if (facilityList.isNotEmpty) {
       selectedBlock.value = facilityList[0]?.name ?? '';
+    }
+  }
+
+  void onValueChanged(dynamic list, dynamic value) {
+    switch (list.runtimeType) {
+      case RxList<BusinessTypeModel>:
+        {
+          int equipmentIndex = ownerList.indexWhere((x) => x?.name == value);
+          selectedBusinessTypeId = ownerList[equipmentIndex]?.id ?? 0;
+        }
+        break;
     }
   }
 }
