@@ -2,7 +2,6 @@ import 'package:cmms/app/app.dart';
 import 'package:cmms/app/create_observation/create_observation_controller.dart';
 import 'package:cmms/app/widgets/custom_elevated_button.dart';
 import 'package:cmms/app/widgets/custom_richtext.dart';
-import 'package:cmms/app/widgets/custom_textField.dart';
 import 'package:cmms/app/widgets/stock_dropdown.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -25,9 +24,7 @@ class CreateObservationMobile extends GetView<CreateObservationController> {
                     children: [
                       Dimens.boxHeight10,
                       CustomRichText(title: 'Contractor Name'),
-                      SizedBox(
-                        height: 10,
-                      ),
+                      Dimens.boxHeight10,
                       TextField(
                         style: TextStyle(
                           fontSize: 15.0,
@@ -41,9 +38,7 @@ class CreateObservationMobile extends GetView<CreateObservationController> {
                       ),
                       Dimens.boxHeight10,
                       CustomRichText(title: 'Location of Observation'),
-                      SizedBox(
-                        height: 10,
-                      ),
+                      Dimens.boxHeight10,
                       TextField(
                         style: TextStyle(
                           fontSize: 15.0,
@@ -57,9 +52,7 @@ class CreateObservationMobile extends GetView<CreateObservationController> {
                       ),
                       Dimens.boxHeight10,
                       CustomRichText(title: 'Type of Observation'),
-                      SizedBox(
-                        height: 10,
-                      ),
+                      Dimens.boxHeight10,
                       SizedBox(
                         height: 45,
                         child: Obx(
@@ -76,9 +69,7 @@ class CreateObservationMobile extends GetView<CreateObservationController> {
                       ),
                       Dimens.boxHeight10,
                       CustomRichText(title: 'Source of Observation'),
-                      SizedBox(
-                        height: 10,
-                      ),
+                      Dimens.boxHeight10,
                       SizedBox(
                         height: 45,
                         child: Obx(
@@ -95,9 +86,7 @@ class CreateObservationMobile extends GetView<CreateObservationController> {
                       ),
                       Dimens.boxHeight10,
                       CustomRichText(title: 'Risk Type'),
-                      SizedBox(
-                        height: 10,
-                      ),
+                      Dimens.boxHeight10,
                       SizedBox(
                         height: 45,
                         child: Obx(
@@ -114,9 +103,7 @@ class CreateObservationMobile extends GetView<CreateObservationController> {
                       ),
                       Dimens.boxHeight10,
                       CustomRichText(title: 'Observation Description'),
-                      SizedBox(
-                        height: 10,
-                      ),
+                      Dimens.boxHeight10,
                       TextField(
                         style: TextStyle(
                           fontSize: 15.0,
@@ -130,9 +117,7 @@ class CreateObservationMobile extends GetView<CreateObservationController> {
                       ),
                       Dimens.boxHeight10,
                       CustomRichText(title: 'Corrective/Preventive Action'),
-                      SizedBox(
-                        height: 10,
-                      ),
+                      Dimens.boxHeight10,
                       TextField(
                         style: TextStyle(
                           fontSize: 15.0,
@@ -162,9 +147,7 @@ class CreateObservationMobile extends GetView<CreateObservationController> {
                       // ),
                       Dimens.boxHeight10,
                       CustomRichText(title: 'Responsible Person'),
-                      SizedBox(
-                        height: 10,
-                      ),
+                      Dimens.boxHeight10,
                       TextField(
                         style: TextStyle(
                           fontSize: 15.0,
@@ -178,9 +161,7 @@ class CreateObservationMobile extends GetView<CreateObservationController> {
                       ),
                       Dimens.boxHeight10,
                       CustomRichText(title: 'Contact Number'),
-                      SizedBox(
-                        height: 10,
-                      ),
+                      Dimens.boxHeight10,
                       TextField(
                         style: TextStyle(
                           fontSize: 15.0,
@@ -194,9 +175,7 @@ class CreateObservationMobile extends GetView<CreateObservationController> {
                       ),
                       Dimens.boxHeight10,
                       CustomRichText(title: 'Target Date'),
-                      SizedBox(
-                        height: 10,
-                      ),
+                      Dimens.boxHeight10,
                       TextField(
                         style: TextStyle(
                           fontSize: 15.0,
@@ -210,9 +189,7 @@ class CreateObservationMobile extends GetView<CreateObservationController> {
                       ),
                       Dimens.boxHeight10,
                       CustomRichText(title: 'Action Taken'),
-                      SizedBox(
-                        height: 10,
-                      ),
+                      Dimens.boxHeight10,
                       TextField(
                         style: TextStyle(
                           fontSize: 15.0,
@@ -226,9 +203,7 @@ class CreateObservationMobile extends GetView<CreateObservationController> {
                       ),
                       Dimens.boxHeight10,
                       CustomRichText(title: 'Cost Type*'),
-                      SizedBox(
-                        height: 10,
-                      ),
+                      Dimens.boxHeight10,
 
                       SizedBox(
                         height: 45,
@@ -245,17 +220,31 @@ class CreateObservationMobile extends GetView<CreateObservationController> {
                         ),
                       ),
                       Dimens.boxHeight10,
+                      CustomRichText(title: 'Observation Description'),
+                      Dimens.boxHeight10,
+                      TextField(
+                        style: TextStyle(
+                          fontSize: 15.0,
+                          height: 0.1,
+                          color: Colors.black,
+                        ),
+                        decoration: InputDecoration(
+                          hintText: 'Enter Observation Description',
+                          alignLabelWithHint: true,
+                        ),
+                      ),
+                      Dimens.boxHeight10,
                       Center(
                         child: Container(
-                            height: 40,
-                            child: CustomElevatedButton(
-                              backgroundColor: ColorValues.submitColor,
-                              text: 'Submit',
-                              onPressed: () {
-                                // controller.createGoodsOrder();
-                              },
-                            )),
-                      )
+                          height: 40,
+                          child: CustomElevatedButton(
+                            backgroundColor: ColorValues.submitColor,
+                            text: 'Submit',
+                            onPressed: () {},
+                          ),
+                        ),
+                      ),
+                      Dimens.boxHeight10,
                     ],
                   ),
                 ),
