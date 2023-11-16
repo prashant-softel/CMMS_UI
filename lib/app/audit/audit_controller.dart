@@ -42,15 +42,18 @@ class AuditController extends GetxController {
 
   void switchFacility(String? facilityName) {}
   Future<void> createChecklist() async {
-    Get.toNamed(
-      Routes.preventiveList,
-    );
+    // final _flutterSecureStorage = const FlutterSecureStorage();
+
+    // _flutterSecureStorage.delete(key: "type");
+    Get.toNamed(Routes.preventiveList, arguments: {'type': 2});
   }
 
   Future<void> checkPoint() async {
-    Get.toNamed(
-      Routes.preventiveCheckPoint,
-    );
+    //   uture<void> checkPoint() async {
+    // final _flutterSecureStorage = const FlutterSecureStorage();
+
+    // _flutterSecureStorage.delete(key: "type");
+    Get.toNamed(Routes.preventiveCheckPoint, arguments: {'type': 2});
   }
 
   Future<void> auditList() async {

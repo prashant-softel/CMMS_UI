@@ -340,7 +340,7 @@ class _AuditListContentWebState extends State<AuditListContentWeb> {
                                     ? controller.toDate.value = dropDate
                                     : controller.toDate.value = pickUpDate;
 
-                                //  controller.getPmTaskListByDate();
+                                controller.getAuditListByDate();
                                 controller.openFromDateToStartDatePicker =
                                     !controller.openFromDateToStartDatePicker;
                                 controller.update(['stock_Mangement_Date']);

@@ -117,4 +117,8 @@ class AuditListScreenController extends GetxController {
 
     update(['pmPlan_list']);
   }
+
+  void getAuditListByDate() {
+    getAuditPlanList(facilityId, formattedTodate1, formattedFromdate1, true);
+  }
 }

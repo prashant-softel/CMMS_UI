@@ -1,8 +1,6 @@
 import 'package:cmms/app/app.dart';
 
-import 'package:cmms/app/constant/constant.dart';
 import 'package:cmms/app/mis/mis_dashboard_controller.dart';
-import 'package:cmms/app/utils/user_access_constants.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -160,6 +158,33 @@ class MisDashboardScreen extends GetView<MisDashboardController> {
                             controller.goToCheckListOfObservation();
                           },
                         )
+                      ],
+                    ),
+                    GridView.count(
+                      shrinkWrap: true,
+                      primary: false,
+                      padding: const EdgeInsets.all(16),
+                      crossAxisSpacing: 40,
+                      mainAxisSpacing: 6,
+                      crossAxisCount: Responsive.isMobile(context) ? 2 : 5,
+                      childAspectRatio: Responsive.isMobile(context)
+                          ? (itemWidth / itemHeight)
+                          : (itemWidth / itemHeightWeb),
+                      children: <Widget>[
+                        createContentTile(
+                            title: "Check List",
+                            onTap: () {
+                              controller.createChecklist();
+                            }),
+                        //  if (Responsive.isDesktop(context))
+                        createContentTile(
+                            title: "Check Point",
+                            onTap: () {
+                              // Get.toNamed(
+                              //   Routes.preventive_checkPoint,
+                              // );
+                              controller.checkPoint();
+                            }),
                       ],
                     ),
                   ]),
