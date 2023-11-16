@@ -681,11 +681,10 @@ class IncidentReportListDataSource extends DataTableSource {
         );
       }).toList(),
       //   ],
-      // onSelectChanged: (_) {
-      // controller.clearStoreData();
-      //   Get.toNamed(Routes.viewUserDetail,
-      //       arguments: {'userId': UserDetails?.id});
-      // },
+      onSelectChanged: (_) {
+        // controller.clearStoreData();
+        controller.viewIncidentReport(id: incidentReportListDetails?.id);
+      },
     );
   }
 
