@@ -55,8 +55,10 @@ class PreventiveChecklistListContentWeb
                     onTap: () {
                       Get.back();
                     },
-                    child: Text(" / PREVENTIVE MAINTENANCE",
-                        style: Styles.greyMediumLight12),
+                    child: controller.type.value == 1
+                        ? Text(" / PREVENTIVE MAINTENANCE",
+                            style: Styles.greyMediumLight12)
+                        : Text(" / AUDIT", style: Styles.greyMediumLight12),
                   ),
                   Text(" / CREATE CHECKLIST NUMBER",
                       style: Styles.greyMediumLight12)

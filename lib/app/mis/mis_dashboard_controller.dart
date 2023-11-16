@@ -54,4 +54,16 @@ class MisDashboardController extends GetxController {
   void goToCreateObservation() {
     Get.toNamed(Routes.createObservation);
   }
+
+  Future<void> createChecklist() async {
+    Get.toNamed(
+      Routes.preventiveList,
+    );
+  }
+
+  Future<void> checkPoint() async {
+    Get.toNamed(
+      Routes.preventiveCheckPoint,
+    );
+  }
 }
