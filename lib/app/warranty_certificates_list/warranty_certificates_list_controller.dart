@@ -4,7 +4,9 @@ import 'package:cmms/app/home/home_controller.dart';
 import 'package:cmms/app/navigators/app_pages.dart';
 import 'package:cmms/app/warranty_certificates_list/warranty_certificates_list_presenter.dart';
 import 'package:cmms/domain/domain.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
+import 'package:intl/intl.dart';
 import 'package:scrollable_table_view/scrollable_table_view.dart';
 
 class WarrantyCertificatesListController extends GetxController {
@@ -21,19 +23,70 @@ class WarrantyCertificatesListController extends GetxController {
 
   InventoryModel? inventoryModelList;
   RxList<String> inventoryListTableColumns = <String>[].obs;
+  Rx<int> id = 0.obs;
 
-  //Edit
-  /// Edit WarrantyClaim Details
+  bool openFromDateToStartDatePicker = false;
+  //From and To date format
+  Rx<DateTime> fromDate = DateTime.now().obs;
+  Rx<DateTime> toDate = DateTime.now().obs;
+  String get formattedFromdate =>
+      DateFormat('dd/MM/yyyy').format(fromDate.value);
+  String get formattedTodate => DateFormat('dd/MM/yyyy').format(toDate.value);
 
   PaginationController paginationController = PaginationController(
     rowCount: 0,
     rowsPerPage: 10,
   );
 
+  //WC Grid
+
+  final columnVisibility = ValueNotifier<Map<String, bool>>({
+    "Name": true,
+    "Serial Number": true,
+    "Id": true,
+    "Parent Name": true,
+    "Category": true,
+    "Asset Facility Name": true,
+
+    // "search": true,
+  });
+  final Map<String, double> columnwidth = {
+    "Name": 153,
+    "Serial Number": 320,
+    "Id": 220,
+    "Parent Name": 200,
+    "Category": 250,
+    "Asset Facility Name": 250,
+  };
+  Map<String, RxString> filterText = {};
+  void setColumnVisibility(String columnName, bool isVisible) {
+    final newVisibility = Map<String, bool>.from(columnVisibility.value)
+      ..[columnName] = isVisible;
+    columnVisibility.value = newVisibility;
+    print({"updated columnVisibility": columnVisibility});
+  }
+
+  RxString nameFilterText = ''.obs;
+  RxString serialNumberFilterText = ''.obs;
+  RxString idFilterText = ''.obs;
+  RxString parentNameFilterText = ''.obs;
+  RxString categoryNameFilterText = ''.obs;
+  RxString operatorNameFilterText = ''.obs;
+  RxString actionFilterText = ''.obs;
+
   ///
-  int? id = 0;
+  // int? id = 0;
   @override
   void onInit() async {
+    this.filterText = {
+      "Name": nameFilterText,
+      "Serial Number": serialNumberFilterText,
+      "Id": idFilterText,
+      "Parent Name": parentNameFilterText,
+      "Category": categoryNameFilterText,
+      "Asset Facility Name": operatorNameFilterText,
+    };
+
     facilityIdStreamSubscription = homeController.facilityId$.listen((event) {
       facilityId = event;
       Future.delayed(Duration(seconds: 2), () {
@@ -83,18 +136,18 @@ class WarrantyCertificatesListController extends GetxController {
     update(['inventory_list']);
   }
 
-  void showAddInventoryDetails({int? id}) {
-    Get.toNamed(Routes.addInventoryScreen, arguments: id);
-    print('Argument5:$id');
-  }
+  // void showAddInventoryDetails({int? id}) {
+  //   Get.toNamed(Routes.addInventoryScreen, arguments: id);
+  //   print('Argument5:$id');
+  // }
 
-  void viewAddInventoryDetails({int? id}) {
-    Get.toNamed(Routes.viewAddInventoryScreen, arguments: id);
-    print('Argument5:$id');
-  }
+  // void viewAddInventoryDetails({int? id}) {
+  //   Get.toNamed(Routes.viewAddInventoryScreen, arguments: id);
+  //   print('Argument5:$id');
+  // }
 
-  void addInventoryDetails({int? id}) {
-    Get.toNamed(Routes.addInventoryScreen);
-    print('Argument5:$id');
-  }
+  // void addInventoryDetails({int? id}) {
+  //   Get.toNamed(Routes.addInventoryScreen);
+  //   print('Argument5:$id');
+  // }
 }

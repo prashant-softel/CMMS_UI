@@ -634,11 +634,10 @@ class WarrantyClaimListDataSource extends DataTableSource {
         );
       }).toList(),
       //   ],
-      // onSelectChanged: (_) {
-      // controller.clearStoreData();
-      //   Get.toNamed(Routes.viewUserDetail,
-      //       arguments: {'userId': UserDetails?.id});
-      // },
+      onSelectChanged: (_) {
+        // controller.clearStoreData();
+        controller.viewWarrantyClaim(wc_id: WarrantyClaimListDetails?.wc_id);
+      },
     );
   }
 
