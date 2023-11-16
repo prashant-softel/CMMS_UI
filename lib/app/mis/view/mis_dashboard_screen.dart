@@ -150,7 +150,7 @@ class MisDashboardScreen extends GetView<MisDashboardController> {
                         createContentTile(
                             title: 'Create observation ',
                             onTap: () {
-                              // controller.addNewJob();
+                              controller.goToCreateObservation();
                             })
                       ],
                     ),

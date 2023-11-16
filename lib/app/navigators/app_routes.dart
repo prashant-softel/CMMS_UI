@@ -156,6 +156,7 @@ abstract class Routes {
   static const audit = _Paths.audit;
   static const createAudit = _Paths.createAudit;
   static const observationListScreen = _Paths.observationListScreen;
+  static const createObservation = _Paths.createObservation;
 }
 
 abstract class _Paths {
@@ -305,6 +306,7 @@ abstract class _Paths {
   static const audit = '/audit';
   static const createAudit = '/create-audit';
   static const observationListScreen = '/observationListScreen';
+  static const createObservation = '/createObservation';
 
 // static const editPermitWebScreen = '/edit-permit-web-screen';
 }

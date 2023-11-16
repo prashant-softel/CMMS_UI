@@ -28,6 +28,7 @@ import 'package:cmms/app/create_audit/craete_audit_binding.dart';
 import 'package:cmms/app/create_audit/view/create_audit_screen.dart';
 import 'package:cmms/app/create_mrs/create_mrs_binding.dart';
 import 'package:cmms/app/create_mrs/view/create_mrs_screen.dart';
+import 'package:cmms/app/create_observation/views/create_observation_screen.dart';
 import 'package:cmms/app/create_pm_plan/create_pm_plan_binding.dart';
 import 'package:cmms/app/create_pm_plan/view/create_pm_plan_screen.dart';
 import 'package:cmms/app/create_preventive_checklist/view/create_preventive_screen.dart';
@@ -138,6 +139,7 @@ import '../calibration_certificate/calibration_certificate_binding.dart';
 import '../calibration_certificate/view/calibration_certificate_screen.dart';
 import '../change_password/change_password_binding.dart';
 import '../change_password/view/change_password_screen.dart';
+import '../create_observation/create_observation_binding.dart';
 import '../employee_stock_report/employee_stock_report_binding.dart';
 import '../insurance_status/insurance_status_listContent_binding.dart';
 import '../insurance_status/view/insurance_status_listContent_screen.dart';
@@ -945,6 +947,12 @@ class AppPages {
       page: ObservationListScreen.new,
       binding: ObservationListBinding(),
     ),
+    GetPage<dynamic>(
+      name: _Paths.createObservation,
+      page: CreateObservationScreen.new,
+      binding: CreateObservationBinding(),
+    ),
+
     // GetPage<dynamic>(
     //   name: _Paths.viewAudit,
     //   page: ViewAuditDetailScreen.new,
