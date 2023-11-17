@@ -666,7 +666,14 @@ class MCExcutionListDataSource extends DataTableSource {
         );
       }).toList(),
       //   ],
-      onSelectChanged: (_) {},
+      onSelectChanged: (_) {
+        int id = McExcutionListDetails?.id ?? 0;
+        int planId = McExcutionListDetails?.planId ?? 0;
+        if (id != 0) {
+          Get.toNamed(Routes.addModuleCleaningExecutionContentWeb,
+              arguments: {"id": id, "planId": planId});
+        }
+      },
     );
   }
 

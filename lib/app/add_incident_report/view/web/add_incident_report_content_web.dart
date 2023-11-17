@@ -4,6 +4,7 @@ import 'package:cmms/app/controllers/file_upload_controller.dart';
 import 'package:cmms/app/home/widgets/header_widget.dart';
 import 'package:cmms/app/navigators/app_pages.dart';
 import 'package:cmms/app/widgets/custom_elevated_button.dart';
+import 'package:cmms/app/widgets/custom_multiselect_dialog_field.dart';
 import 'package:cmms/app/widgets/custom_richtext.dart';
 import 'package:cmms/app/widgets/custom_textField.dart';
 import 'package:cmms/app/widgets/dropdown_web.dart';
@@ -220,93 +221,135 @@ class AddIncidentReportContentWeb extends GetView<AddIncidentReportController> {
                                                                       .size
                                                                       .width /
                                                                   5,
-                                                              child: Obx(
-                                                                () =>
-                                                                    MultiSelectDialogField(
-                                                                  dialogWidth:
-                                                                      300,
-                                                                  dialogHeight:
-                                                                      400,
-                                                                  searchable:
-                                                                      true,
-                                                                  validator:
-                                                                      (selectedItems) {
-                                                                    if (controller
-                                                                            .isVictimNameListSelected
-                                                                            .value ==
-                                                                        false) {
-                                                                      return "Required field";
-                                                                    } else {
-                                                                      return null;
-                                                                    }
-                                                                  },
-                                                                  autovalidateMode:
-                                                                      AutovalidateMode
-                                                                          .always,
-                                                                  decoration:
-                                                                      BoxDecoration(
-                                                                    border:
-                                                                        Border
-                                                                            .all(
-                                                                      color: controller.isVictimNameListSelected.value ==
-                                                                              false
-                                                                          ? Colors
-                                                                              .red
-                                                                          : Colors
-                                                                              .grey,
-                                                                      width:
-                                                                          1.0,
-                                                                    ),
-                                                                    borderRadius:
-                                                                        BorderRadius
-                                                                            .circular(5),
-                                                                  ),
-                                                                  buttonIcon:
-                                                                      Icon(Icons
-                                                                          .arrow_drop_down),
-                                                                  items: controller
-                                                                      .victimNameList
-                                                                      .map((e) =>
+                                                              child:
+                                                                  CustomMultiSelectDialogField(
+                                                                buttonText:
+                                                                    'Select Victim Name',
+                                                                title:
+                                                                    'Employees',
+                                                                // initialValue: [],
+                                                                initialValue: (controller
+                                                                        .selectedVictimNameIdList
+                                                                        .isNotEmpty)
+                                                                    ? controller
+                                                                        .selectedVictimNameIdList
+                                                                    : [],
+                                                                items: controller
+                                                                    .victimNameList
+                                                                    .map(
+                                                                      (victimName) =>
                                                                           MultiSelectItem(
-                                                                              e,
-                                                                              e.name ?? ''))
-                                                                      .toList(),
-                                                                  onConfirm:
-                                                                      (selectedOptionsList) =>
-                                                                          {
-                                                                    controller
-                                                                        .onValueVictimNameChanged,
-                                                                    controller
-                                                                            .isVictimNameListSelected
-                                                                            .value =
-                                                                        selectedOptionsList
-                                                                            .isNotEmpty,
-                                                                  },
-                                                                  chipDisplay:
-                                                                      MultiSelectChipDisplay(),
-                                                                ),
+                                                                        victimName
+                                                                            .id,
+                                                                        victimName.name ??
+                                                                            '',
+                                                                      ),
+                                                                    )
+                                                                    .toList(),
+                                                                onConfirm:
+                                                                    (selectedOptionsList) =>
+                                                                        {
+                                                                  controller
+                                                                      .victimNameSelected(
+                                                                          selectedOptionsList),
+                                                                  print(
+                                                                      'Victim Name list Ids ${controller.selectedVictimNameIdList}')
+                                                                },
                                                               ),
-
-                                                              // Obx(
-                                                              //   () =>
-                                                              //       DropdownWebWidget(
-                                                              //     dropdownList:
-                                                              //         controller
-                                                              //             .victimNameList,
-                                                              //     isValueSelected:
-                                                              //         controller
-                                                              //             .isVictimNameListSelected
-                                                              //             .value,
-                                                              //     selectedValue:
-                                                              //         controller
-                                                              //             .selectedVictimNameList
-                                                              //             .value,
-                                                              //     onValueChanged:
-                                                              //         controller
-                                                              //             .onValueVictimNameChanged,
-                                                              //   ),
-                                                              // ),
                                                             ),
+                                                            // SizedBox(
+                                                            //   width: MediaQuery.of(
+                                                            //               context)
+                                                            //           .size
+                                                            //           .width /
+                                                            //       5,
+                                                            //   child: Obx(
+                                                            //     () =>
+                                                            //         MultiSelectDialogField(
+                                                            //       dialogWidth:
+                                                            //           300,
+                                                            //       dialogHeight:
+                                                            //           400,
+                                                            //       searchable:
+                                                            //           true,
+                                                            //       validator:
+                                                            //           (selectedItems) {
+                                                            //         if (controller
+                                                            //                 .isVictimNameListSelected
+                                                            //                 .value ==
+                                                            //             false) {
+                                                            //           return "Required field";
+                                                            //         } else {
+                                                            //           return null;
+                                                            //         }
+                                                            //       },
+                                                            //       autovalidateMode:
+                                                            //           AutovalidateMode
+                                                            //               .always,
+                                                            //       decoration:
+                                                            //           BoxDecoration(
+                                                            //         border:
+                                                            //             Border
+                                                            //                 .all(
+                                                            //           color: controller.isVictimNameListSelected.value ==
+                                                            //                   false
+                                                            //               ? Colors
+                                                            //                   .red
+                                                            //               : Colors
+                                                            //                   .grey,
+                                                            //           width:
+                                                            //               1.0,
+                                                            //         ),
+                                                            //         borderRadius:
+                                                            //             BorderRadius
+                                                            //                 .circular(5),
+                                                            //       ),
+                                                            //       buttonIcon:
+                                                            //           Icon(Icons
+                                                            //               .arrow_drop_down),
+                                                            //       items: controller
+                                                            //           .victimNameList
+                                                            //           .map((e) =>
+                                                            //               MultiSelectItem(
+                                                            //                   e,
+                                                            //                   e.name ?? ''))
+                                                            //           .toList(),
+                                                            //       onConfirm:
+                                                            //           (selectedOptionsList) =>
+                                                            //               {
+                                                            //         controller
+                                                            //             .onValueVictimNameChanged,
+                                                            //         controller
+                                                            //                 .isVictimNameListSelected
+                                                            //                 .value =
+                                                            //             selectedOptionsList
+                                                            //                 .isNotEmpty,
+                                                            //       },
+                                                            //       chipDisplay:
+                                                            //           MultiSelectChipDisplay(),
+                                                            //     ),
+                                                            //   ),
+
+                                                            //   // Obx(
+                                                            //   //   () =>
+                                                            //   //       DropdownWebWidget(
+                                                            //   //     dropdownList:
+                                                            //   //         controller
+                                                            //   //             .victimNameList,
+                                                            //   //     isValueSelected:
+                                                            //   //         controller
+                                                            //   //             .isVictimNameListSelected
+                                                            //   //             .value,
+                                                            //   //     selectedValue:
+                                                            //   //         controller
+                                                            //   //             .selectedVictimNameList
+                                                            //   //             .value,
+                                                            //   //     onValueChanged:
+                                                            //   //         controller
+                                                            //   //             .onValueVictimNameChanged,
+                                                            //   //   ),
+                                                            //   // ),
+                                                            // ),
                                                           ],
                                                         ),
                                                         Dimens.boxHeight5,
