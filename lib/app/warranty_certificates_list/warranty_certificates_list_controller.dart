@@ -47,6 +47,7 @@ class WarrantyCertificatesListController extends GetxController {
     "Parent Name": true,
     "Category": true,
     "Asset Facility Name": true,
+    "Status": true,
 
     // "search": true,
   });
@@ -57,6 +58,7 @@ class WarrantyCertificatesListController extends GetxController {
     "Parent Name": 200,
     "Category": 250,
     "Asset Facility Name": 250,
+    "Status": 250,
   };
   Map<String, RxString> filterText = {};
   void setColumnVisibility(String columnName, bool isVisible) {
@@ -72,6 +74,7 @@ class WarrantyCertificatesListController extends GetxController {
   RxString parentNameFilterText = ''.obs;
   RxString categoryNameFilterText = ''.obs;
   RxString operatorNameFilterText = ''.obs;
+  RxString statusFilterText = ''.obs;
   RxString actionFilterText = ''.obs;
 
   ///
@@ -85,6 +88,7 @@ class WarrantyCertificatesListController extends GetxController {
       "Parent Name": parentNameFilterText,
       "Category": categoryNameFilterText,
       "Asset Facility Name": operatorNameFilterText,
+      "Status": statusFilterText,
     };
 
     facilityIdStreamSubscription = homeController.facilityId$.listen((event) {

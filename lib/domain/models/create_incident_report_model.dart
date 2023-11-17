@@ -33,7 +33,7 @@ class CreateIncidentReportModel {
   String? insurance_remark;
   int? id;
   String? severity;
-  List<InvestigationTeam?>? investigationTeam;
+  // List<InvestigationTeam?>? investigationTeam;
 
   CreateIncidentReportModel({
     this.facility_id,
@@ -62,7 +62,7 @@ class CreateIncidentReportModel {
     this.insurance_remark,
     this.id,
     this.severity,
-    this.investigationTeam,
+    // this.investigationTeam,
   });
 
   factory CreateIncidentReportModel.fromJson(Map<String, dynamic> json) =>
@@ -93,10 +93,10 @@ class CreateIncidentReportModel {
         insurance_remark: json['insurance_remark'],
         id: json['id'],
         severity: json['severity'],
-        investigationTeam: json["supplierActions"] != null
-            ? List<InvestigationTeam>.from(json["supplierActions"]
-                ?.map((x) => InvestigationTeam.fromJson(x)))
-            : [],
+        // investigationTeam: json["supplierActions"] != null
+        //     ? List<InvestigationTeam>.from(json["supplierActions"]
+        //         ?.map((x) => InvestigationTeam.fromJson(x)))
+        //     : [],
       );
 
   Map<String, dynamic> toJson() => {
@@ -125,8 +125,8 @@ class CreateIncidentReportModel {
         "insurance_remark": insurance_remark,
         "id": id,
         "severity": severity,
-        "investigationTeam":
-            List<dynamic>.from(investigationTeam!.map((x) => x)),
+        // "investigationTeam":
+        //     List<dynamic>.from(investigationTeam!.map((x) => x)),
       };
 }
 

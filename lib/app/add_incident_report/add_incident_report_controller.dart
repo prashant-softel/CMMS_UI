@@ -542,6 +542,13 @@ class AddIncidentReportController extends GetxController {
     }
   }
 
+  void victimNameSelected(_selectedVictimNameIds) {
+    selectedVictimNameIdList.value = <int>[];
+    for (var _selectedVictimId in _selectedVictimNameIds) {
+      selectedVictimNameIdList.add(_selectedVictimId);
+    }
+  }
+
   void getIncidentInvestigationDoneByList() async {
     incidentInvestigationDoneByList.value = <EmployeeListModel>[];
     final _incidentInvestigationDoneByList =
@@ -892,12 +899,12 @@ class AddIncidentReportController extends GetxController {
           msg: 'Incident Date & Time Field cannot be empty',
           timeInSecForIosWeb: 5);
     }
-    if (reportingDateTimeCtrlr.text == '') {
-      Fluttertoast.showToast(
-          msg: 'Reporting Date & Time Field cannot be empty',
-          timeInSecForIosWeb: 5);
-    }
-    if (selectedVictimNameList.value == '') {
+    // if (reportingDateTimeCtrlr.text == '') {
+    //   Fluttertoast.showToast(
+    //       msg: 'Reporting Date & Time Field cannot be empty',
+    //       timeInSecForIosWeb: 5);
+    // }
+    if (selectedVictimNameIdList.length < 1) {
       isVictimNameListSelected.value = false;
     }
     if (actionTakenDateTimeCtrlr.text == '') {
@@ -933,10 +940,10 @@ class AddIncidentReportController extends GetxController {
           msg: 'Insurance Available Field cannot be empty',
           timeInSecForIosWeb: 5);
     }
-    if (insuranceRemarkTextCtrlr.text == '') {
-      Fluttertoast.showToast(
-          msg: 'Insurance Remark Field cannot be empty', timeInSecForIosWeb: 5);
-    }
+    // if (insuranceRemarkTextCtrlr.text == '') {
+    //   Fluttertoast.showToast(
+    //       msg: 'Insurance Remark Field cannot be empty', timeInSecForIosWeb: 5);
+    // }
     // if (immediateCorrectiveActionTextController.text == '') {
     //   Fluttertoast.showToast(
     //       msg: 'Corrective Action Field cannot be empty',
@@ -1009,8 +1016,10 @@ class AddIncidentReportController extends GetxController {
               equipment_id: selectedEquipmentnameId,
               risk_level: 1,
               incident_datetime: startDateTimeCtrlrBuffer,
-              reporting_datetime: reportingDateTimeCtrlrBuffer,
-              victim_id: selectedVictimNameId,
+              reporting_datetime: startDateTimeCtrlrBuffer,
+              // reporting_datetime: reportingDateTimeCtrlrBuffer,
+              // victim_id: selectedVictimNameId,
+              victim_id: 5,
               action_taken_by: selectedAssetRestorationActionTakenById,
               action_taken_datetime: actionTakenDateTimeCtrlrBuffer,
               inverstigated_by: selectedIncidentInvestigationDoneById,
@@ -1029,7 +1038,8 @@ class AddIncidentReportController extends GetxController {
               is_insurance_applicable: insuranceApplicableValue.value,
               insurance: _insuranceAvailable,
               insurance_status: 2,
-              insurance_remark: _insuranceRemark,
+              // insurance_remark: _insuranceRemark,
+              insurance_remark: _insuranceAvailable,
               severity: selectedSeverity.value);
 
       var incidentReportJsonString = createIncidentReportModel.toJson();

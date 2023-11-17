@@ -465,7 +465,11 @@ class WarrantyClaimCertificateListDataSource extends DataTableSource {
                   controller.categoryNameFilterText.value.toLowerCase()) &&
           (WarrantyClaimCertificateList?.operatorName ?? '')
               .toString()
-              .contains(controller.operatorNameFilterText.value.toLowerCase());
+              .contains(
+                  controller.operatorNameFilterText.value.toLowerCase()) &&
+          (WarrantyClaimCertificateList?.status ?? '')
+              .toString()
+              .contains(controller.statusFilterText.value.toLowerCase());
 
       // Add other filter conditions as needed
     }).toList();
@@ -486,7 +490,7 @@ class WarrantyClaimCertificateListDataSource extends DataTableSource {
       '${WarrantyClaimCertificateListDetails?.parentName ?? ''}',
       '${WarrantyClaimCertificateListDetails?.categoryName ?? ''}',
       '${WarrantyClaimCertificateListDetails?.operatorName ?? ''}',
-      // '${WarrantyClaimListDetails?.estimated_cost ?? ''}',
+      '${WarrantyClaimCertificateListDetails?.status ?? ''}',
       // '${WarrantyClaimListDetails?.status ?? ''}',
       // 'Actions',
     ];
@@ -513,59 +517,97 @@ class WarrantyClaimCertificateListDataSource extends DataTableSource {
         return DataCell(
           Padding(
             padding: EdgeInsets.zero,
-            child: (value == 'id')
-                ? Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Text(
-                        '${WarrantyClaimCertificateListDetails?.id}',
-                      ),
-                      Dimens.boxHeight10,
-                      // Align(
-                      //   alignment: Alignment.centerRight,
-                      //   child: Container(
-                      //     padding: Dimens.edgeInsets8_2_8_2,
-                      //     decoration: BoxDecoration(
-                      //         color: controller.warrantyClaimList
-                      //                     .firstWhere(
-                      //                       (e) =>
-                      //                           e?.wc_id ==
-                      //                           WarrantyClaimListDetails!.wc_id,
-                      //                       orElse: () =>
-                      //                           WarrantyClaimModel(wc_id: 00),
-                      //                     )
-                      //                     ?.status ==
-                      //                 "Waiting for Submit Approval"
-                      //             ? ColorValues.appGreenColor
-                      //             : ColorValues.appRedColor),
-                      //     child: Text(
-                      //       '${WarrantyClaimListDetails?.status}',
-                      //       style: Styles.white10.copyWith(
-                      //         color: Colors.white,
-                      //       ),
-                      //     ),
-                      //   ),
-                      // ),
-                    ],
-                  )
-                : (value == 'Actions')
-                    ? Wrap(children: [
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            TableActionButton(
-                              color: ColorValues.viewColor,
-                              icon: Icons.visibility,
-                              message: 'View',
-                              onPress: () {
-                                // controller.viewAddInventoryDetails(id: int.tryParse('${record[2]}'));
-                                // Get.toNamed(Routes.viewAddInventoryScreen);
-                              },
+            child:
+                (value == '${WarrantyClaimCertificateListDetails?.name ?? ''}')
+                    ? Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text(
+                            '${WarrantyClaimCertificateListDetails?.name}',
+                            overflow: TextOverflow.ellipsis,
+                          ),
+                          Dimens.boxHeight10,
+                          Align(
+                            alignment: Alignment.centerLeft,
+                            child: Container(
+                              padding: Dimens.edgeInsets8_2_8_2,
+                              decoration: BoxDecoration(
+                                  color: controller.inventoryList
+                                              .firstWhere(
+                                                (e) =>
+                                                    e?.id ==
+                                                    WarrantyClaimCertificateListDetails!
+                                                        .id,
+                                                orElse: () =>
+                                                    InventoryModel(id: 00),
+                                              )
+                                              ?.status ==
+                                          "In Operation"
+                                      ? ColorValues.appGreenColor
+                                      : ColorValues.appRedColor),
+                              child: Text(
+                                '${WarrantyClaimCertificateListDetails?.status}',
+                                style: Styles.white10.copyWith(
+                                  color: Colors.white,
+                                ),
+                              ),
                             ),
-                          ],
-                        )
-                      ])
-                    : Text(value.toString()),
+                          ),
+                        ],
+                      )
+                    : (value == 'id')
+                        ? Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Text(
+                                '${WarrantyClaimCertificateListDetails?.id}',
+                              ),
+                              Dimens.boxHeight10,
+                              // Align(
+                              //   alignment: Alignment.centerRight,
+                              //   child: Container(
+                              //     padding: Dimens.edgeInsets8_2_8_2,
+                              //     decoration: BoxDecoration(
+                              //         color: controller.warrantyClaimList
+                              //                     .firstWhere(
+                              //                       (e) =>
+                              //                           e?.wc_id ==
+                              //                           WarrantyClaimListDetails!.wc_id,
+                              //                       orElse: () =>
+                              //                           WarrantyClaimModel(wc_id: 00),
+                              //                     )
+                              //                     ?.status ==
+                              //                 "Waiting for Submit Approval"
+                              //             ? ColorValues.appGreenColor
+                              //             : ColorValues.appRedColor),
+                              //     child: Text(
+                              //       '${WarrantyClaimListDetails?.status}',
+                              //       style: Styles.white10.copyWith(
+                              //         color: Colors.white,
+                              //       ),
+                              //     ),
+                              //   ),
+                              // ),
+                            ],
+                          )
+                        : (value == 'Actions')
+                            ? Wrap(children: [
+                                Row(
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  children: [
+                                    TableActionButton(
+                                      color: ColorValues.viewColor,
+                                      icon: Icons.visibility,
+                                      message: 'View',
+                                      onPress: () {
+                                        // controller.viewAddInventoryDetails(id: int.tryParse('${record[2]}'));
+                                        // Get.toNamed(Routes.viewAddInventoryScreen);
+                                      },
+                                    ),
+                                  ],
+                                )
+                              ])
+                            : Text(value.toString()),
           ),
         );
       }).toList(),
@@ -586,11 +628,6 @@ class WarrantyClaimCertificateListDataSource extends DataTableSource {
   @override
   int get selectedRowCount => 0;
 }
-
-
-
-
-
 
 ///////from below
 
