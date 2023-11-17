@@ -8,4 +8,5 @@ class MisDashboardPresenter {
 
   Future<List<FacilityModel?>?> getFacilityList(bool isLoading) async =>
       await misDashboardUsecase.getFacilityList(isLoading);
+  void clearValue() async => misDashboardUsecase.clearValue();
 }

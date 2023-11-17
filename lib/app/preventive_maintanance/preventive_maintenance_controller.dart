@@ -43,16 +43,14 @@ class PreventiveController extends GetxController {
 
   void switchFacility(String? facilityName) {}
   Future<void> createChecklist() async {
-    final _flutterSecureStorage = const FlutterSecureStorage();
+    preventivePresenter.clearValue();
 
-    _flutterSecureStorage.delete(key: "type");
     Get.toNamed(Routes.preventiveList, arguments: {'type': 1});
   }
 
   Future<void> checkPoint() async {
-    final _flutterSecureStorage = const FlutterSecureStorage();
+    preventivePresenter.clearValue();
 
-    _flutterSecureStorage.delete(key: "type");
     Get.toNamed(Routes.preventiveCheckPoint, arguments: {'type': 1});
   }
 

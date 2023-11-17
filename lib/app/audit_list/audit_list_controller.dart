@@ -65,13 +65,6 @@ class AuditListScreenController extends GetxController {
     print({"updated columnVisibility": columnVisibility});
   }
 
-  // String get formattedFromdate =>
-  //     DateFormat('dd/MM/yyyy').format(fromDate.value);
-  // String get formattedTodate => DateFormat('dd/MM/yyyy').format(toDate.value);
-  // String get formattedTodate1 => DateFormat('yyyy-MM-dd').format(toDate.value);
-  // String get formattedFromdate1 =>
-  //     DateFormat('yyyy-MM-dd').format(fromDate.value);
-
   bool openFromDateToStartDatePicker = false;
 
   PaginationController paginationController = PaginationController(

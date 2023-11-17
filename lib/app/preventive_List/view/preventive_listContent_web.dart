@@ -1,4 +1,3 @@
-import 'package:clipboard/clipboard.dart';
 import 'package:cmms/app/app.dart';
 import 'package:cmms/app/constant/constant.dart';
 import 'package:cmms/app/widgets/dropdown_web.dart';
@@ -58,7 +57,9 @@ class PreventiveChecklistListContentWeb
                     child: controller.type.value == 1
                         ? Text(" / PREVENTIVE MAINTENANCE",
                             style: Styles.greyMediumLight12)
-                        : Text(" / AUDIT", style: Styles.greyMediumLight12),
+                        : controller.type.value == 2
+                            ? Text(" / AUDIT", style: Styles.greyMediumLight12)
+                            : Text(" / MIS", style: Styles.greyMediumLight12),
                   ),
                   Text(" / CREATE CHECKLIST NUMBER",
                       style: Styles.greyMediumLight12)

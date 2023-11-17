@@ -5,7 +5,6 @@ import 'package:cmms/app/widgets/custom_elevated_button.dart';
 import 'package:cmms/domain/models/checkpoint_list_model.dart';
 import 'package:cmms/domain/models/preventive_checklist_model.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:get/get.dart';
 import 'package:scrollable_table_view/scrollable_table_view.dart';
 import '../../domain/models/create_checkpoint_model.dart';
@@ -70,21 +69,16 @@ class PreventiveCheckPointController extends GetxController {
 
   Future<void> setType() async {
     try {
-      final _flutterSecureStorage = const FlutterSecureStorage();
       // Read jobId
-      // String? _type = await _flutterSecureStorage.read(key: "type");
-      // if (_type == null || _type == '' || _type == "null") {
-      var dataFromPreviousScreen = Get.arguments;
+      String? _type = await preventiveCheckPointPresenter.getValue();
+      if (_type == null || _type == '' || _type == "null") {
+        var dataFromPreviousScreen = Get.arguments;
 
-      type.value = dataFromPreviousScreen['type'];
-      await _flutterSecureStorage.write(
-        key: "type",
-        value: type.value == null ? '' : type.value.toString(),
-      );
-      // } else {
-      //   type.value = int.tryParse(_type) ?? 0;
-      // }
-      await _flutterSecureStorage.delete(key: "type");
+        type.value = dataFromPreviousScreen['type'];
+        preventiveCheckPointPresenter.saveValue(type: type.value.toString());
+      } else {
+        type.value = int.tryParse(_type) ?? 0;
+      }
     } catch (e) {
       print(e.toString() + 'type');
       //  Utility.showDialog(e.toString() + 'type');
