@@ -56,4 +56,10 @@ class PreventiveListPresenter {
     );
     return true;
   }
+
+  void saveValue({String? type}) async {
+    return preventivelistUsecase.saveValue(type: type);
+  }
+
+  Future<String?> getValue() async => await preventivelistUsecase.getValue();
 }

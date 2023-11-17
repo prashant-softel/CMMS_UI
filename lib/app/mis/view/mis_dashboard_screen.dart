@@ -101,32 +101,6 @@ class MisDashboardScreen extends GetView<MisDashboardController> {
                         ),
                       ),
                     if (Responsive.isDesktop(context))
-                      Container(
-                        margin: EdgeInsets.only(left: 20),
-                        child: Row(
-                          children: [
-                            Text(
-                              "MIS",
-                              style: TextStyle(
-                                color: Color.fromARGB(255, 159, 156, 156),
-                                fontSize: 16,
-                                fontWeight: FontWeight.w400,
-                              ),
-                            ),
-                            SizedBox(
-                                width:
-                                    10), // Add some space between the text and the line
-                            Expanded(
-                              child: Divider(
-                                color: Colors
-                                    .grey, // Customize the color of the line if needed
-                                height:
-                                    1, // Adjust the height of the line if needed
-                              ),
-                            ),
-                          ],
-                        ),
-                      ),
 
                     /// GRID TILES
                     GridView.count(
@@ -160,6 +134,57 @@ class MisDashboardScreen extends GetView<MisDashboardController> {
                         )
                       ],
                     ),
+                      /// GRID TILES
+                      GridView.count(
+                        shrinkWrap: true,
+                        primary: false,
+                        padding: Dimens.edgeInsets15,
+                        crossAxisSpacing: 70,
+                        mainAxisSpacing: 6,
+                        crossAxisCount: Responsive.isMobile(context) ? 2 : 5,
+                        childAspectRatio: Responsive.isMobile(context)
+                            ? (itemWidth / itemHeight)
+                            : (itemWidth / itemHeightWeb),
+                        children: <Widget>[
+                          createContentTile(
+                              title: "List Of observation",
+                              onTap: () {
+                                controller.goToJobListScreen();
+                              }),
+                          createContentTile(
+                              title: 'Create observation ',
+                              onTap: () {
+                                controller.goToCreateObservation();
+                              })
+                        ],
+                      ),
+                    if (Responsive.isDesktop(context))
+                      Container(
+                        margin: EdgeInsets.only(left: 20),
+                        child: Row(
+                          children: [
+                            Text(
+                              "Masters",
+                              style: TextStyle(
+                                color: Color.fromARGB(255, 159, 156, 156),
+                                fontSize: 16,
+                                fontWeight: FontWeight.w400,
+                              ),
+                            ),
+                            SizedBox(
+                                width:
+                                    10), // Add some space between the text and the line
+                            Expanded(
+                              child: Divider(
+                                color: Colors
+                                    .grey, // Customize the color of the line if needed
+                                height:
+                                    1, // Adjust the height of the line if needed
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
                     GridView.count(
                       shrinkWrap: true,
                       primary: false,

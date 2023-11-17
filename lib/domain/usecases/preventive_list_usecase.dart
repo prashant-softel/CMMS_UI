@@ -1,5 +1,6 @@
 import 'package:cmms/domain/models/inventory_category_model.dart';
 import 'package:cmms/domain/models/preventive_checklist_model.dart';
+import 'package:cmms/domain/repositories/local_storage_keys.dart';
 import 'package:cmms/domain/repositories/repository.dart';
 
 import '../models/frequency_model.dart';
@@ -54,4 +55,8 @@ class PreventivelistUsecase {
         isLoading: isLoading,
         checklistJsonString: checklistJsonString,
       );
+  void saveValue({String? type}) async =>
+      repository.saveValue(LocalKeys.type, type);
+  Future<String?> getValue() async =>
+      await repository.getStringValue(LocalKeys.type);
 }
