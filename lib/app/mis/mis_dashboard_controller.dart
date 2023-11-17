@@ -66,4 +66,8 @@ class MisDashboardController extends GetxController {
 
     Get.toNamed(Routes.preventiveCheckPoint, arguments: {'type': 3});
   }
+
+  void goToCheckListOfObservation() {
+    Get.toNamed(Routes.checkListOfObservation);
+  }
 }
