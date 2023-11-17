@@ -433,25 +433,6 @@ class AuditListListDataSource extends DataTableSource {
   void filtersModuleCliningPlan() {
     filteredAuditPlanList = <AuditPlanListModel?>[];
     filteredAuditPlanList = controller.auditPlanList.where((auditList) {
-      // return (auditList.planId ?? '')
-      //         .toString()
-      //         .contains(controller.planIdFilterText.value.toLowerCase()) &&
-      //     (auditList.title ?? '')
-      //         .toString()
-      //         .contains(controller.planTitleFilterText.value.toLowerCase()) &&
-      //     (auditList.noOfCleaningDays ?? '')
-      //         .toString()
-      //         .contains(controller.noOfDaysFilterText.value.toLowerCase()) &&
-      //     (auditList.createdBy ?? '')
-      //         .toString()
-      //         .contains(controller.createdByFilterText.value.toLowerCase()) &&
-      //     (auditList.frequency ?? '')
-      //         .toString()
-      //         .contains(controller.frequencyFilterText.value.toLowerCase()) &&
-      //     (auditList.status ?? '')
-      //         .toString()
-      //         .contains(controller.statusFilterText.value.toLowerCase());
-
       return (auditList.id ?? '')
               .toString()
               .contains(controller.planIdFilterText.value.toLowerCase()) &&
@@ -519,7 +500,7 @@ class AuditListListDataSource extends DataTableSource {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Text(
-                        '',
+                        '${AuditPlanPlanningListDetails?.id}',
                       ),
                       Dimens.boxHeight10,
                       Align(
@@ -527,24 +508,26 @@ class AuditListListDataSource extends DataTableSource {
                         child: Container(
                           padding: Dimens.edgeInsets8_2_8_2,
                           decoration: BoxDecoration(
-                            // color: controller.AuditPlanListPlan
-                            //             .firstWhere(
-                            //               (e) =>
-                            //                   e?.planId ==
-                            //                   AuditPlanPlanningListDetails!
-                            //                       .planId,
-                            //               orElse: () =>
-                            //                   AuditPlanListPlanModel(
-                            //                       planId: 00),
-                            //             )
-                            //             ?.status ==
-                            //         342
-                            //     ? ColorValues.approveColor
-                            //     : ColorValues.addNewColor,
+                            color:
+                                // controller.AuditPlanListPlan
+                                //         .firstWhere(
+                                //           (e) =>
+                                //               e?.planId ==
+                                //               AuditPlanPlanningListDetails!
+                                //                   .planId,
+                                //           orElse: () =>
+                                //               AuditPlanListPlanModel(
+                                //                   planId: 00),
+                                //         )
+                                //         ?.status ==
+                                //     342
+                                // ? ColorValues.approveColor
+                                // :
+                                ColorValues.addNewColor,
                             borderRadius: BorderRadius.circular(4),
                           ),
                           child: Text(
-                            '',
+                            '${AuditPlanPlanningListDetails?.short_status}',
                             style: Styles.white10.copyWith(
                               color: Colors.white,
                             ),
@@ -560,12 +543,11 @@ class AuditListListDataSource extends DataTableSource {
                           icon: Icons.remove_red_eye_outlined,
                           message: 'view',
                           onPress: () {
-                            // int id =
-                            //     AuditPlanPlanningListDetails?.planId ?? 0;
-                            // if (id != 0) {
-                            //   Get.toNamed(Routes.viewMcPlaning,
-                            //       arguments: {'id': id});
-                            // }
+                            int id = AuditPlanPlanningListDetails?.id ?? 0;
+                            if (id != 0) {
+                              // Get.toNamed(Routes.viewa,
+                              //     arguments: {'id': id});
+                            }
                           },
                         ),
                         TableActionButton(

@@ -1,3 +1,4 @@
+import 'package:cmms/domain/repositories/local_storage_keys.dart';
 import 'package:cmms/domain/repositories/repository.dart';
 
 import '../models/preventive_checklist_model.dart';
@@ -42,4 +43,8 @@ class PreventiveCheckPointUsecase {
   }) async =>
       await repository.updateCheckPoint(
           isLoading: isLoading, checkpointJsonString: checkpointJsonString);
+  void saveValue({String? type}) async =>
+      repository.saveValue(LocalKeys.type, type);
+  Future<String?> getValue() async =>
+      await repository.getStringValue(LocalKeys.type);
 }

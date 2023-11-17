@@ -9,4 +9,5 @@ class MisDashboardUsecase {
 
   Future<List<FacilityModel?>?> getFacilityList(isLoading) async =>
       await _repository.getFacilityList(isLoading);
+  void clearValue() async => _repository.clearData(LocalKeys.type);
 }

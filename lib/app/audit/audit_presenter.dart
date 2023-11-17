@@ -7,4 +7,5 @@ class AuditPresenter {
   AuditUsecase auditUsecase;
   Future<List<FacilityModel?>?> getFacilityList() async =>
       await auditUsecase.getFacilityList();
+  void clearValue() async => auditUsecase.clearValue();
 }
