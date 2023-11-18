@@ -29,7 +29,7 @@ class CheckListOfObservationScreen extends StatelessWidget {
             )
           : AppBar(
               title: Text(
-                "CHECKLIST OF OBSERVATION",
+                "CHECKLIST INSPECTION",
                 style: TextStyle(
                   color: Color.fromARGB(255, 159, 156, 156),
                   fontSize: 16,

@@ -44,12 +44,12 @@ class CheckListOfObservationWeb extends StatelessWidget {
                   },
                   child: Text(" / MIS", style: Styles.greyMediumLight12),
                 ),
-                Text(" / CHECKLIST OF OBSERVATION ",
+                Text(" / CHECKLIST INSPECTION ",
                     style: Styles.greyMediumLight12),
               ],
             ),
           ),
-          Center(child: Text("CHECKLIST OF OBSERVATION"))
+          Center(child: Text("CHECKLIST INSPECTION"))
         ],
       ),
     );
