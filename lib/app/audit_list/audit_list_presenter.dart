@@ -15,4 +15,9 @@ class AuditListScreenPresenter {
           isLoading: isLoading ?? false,
           endDate: endDate,
           startDate: startDate);
+  void saveValue({String? type}) async {
+    return auditListUsecase.saveValue(type: type);
+  }
+
+  Future<String?> getValue() async => await auditListUsecase.getValue();
 }

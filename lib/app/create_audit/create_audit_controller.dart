@@ -31,6 +31,7 @@ class CreateAuditController extends GetxController {
   Rx<String> selectedchecklistId = "".obs;
   StreamSubscription<int>? facilityIdStreamSubscription;
   int facilityId = 0;
+  Rx<int> type = 0.obs;
 
   @override
   void onInit() async {
@@ -50,6 +51,24 @@ class CreateAuditController extends GetxController {
     }
 
     super.onInit();
+  }
+
+  Future<void> setType() async {
+    try {
+      // Read jobId
+      String? _type = await createAuditPresenter.getValue();
+      if (_type == null || _type == '' || _type == "null") {
+        var dataFromPreviousScreen = Get.arguments;
+
+        type.value = dataFromPreviousScreen['type'];
+        createAuditPresenter.saveValue(type: type.value.toString());
+      } else {
+        type.value = int.tryParse(_type) ?? 0;
+      }
+    } catch (e) {
+      print(e.toString() + 'type');
+      //  Utility.showDialog(e.toString() + 'type');
+    }
   }
 
   Future<void> getFrequencyList() async {

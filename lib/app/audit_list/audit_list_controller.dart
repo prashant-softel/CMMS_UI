@@ -73,9 +73,12 @@ class AuditListScreenController extends GetxController {
   );
   StreamSubscription<int>? facilityIdStreamSubscription;
   int facilityId = 0;
+  Rx<int> type = 0.obs;
 
   @override
   void onInit() async {
+    await setType();
+
     this.filterText = {
       'Audit Plan ID': planIdFilterText,
       'Title': planTitleFilterText,
@@ -109,6 +112,24 @@ class AuditListScreenController extends GetxController {
     }
 
     update(['pmPlan_list']);
+  }
+
+  Future<void> setType() async {
+    try {
+      // Read jobId
+      String? _type = await auditListPresenter.getValue();
+      if (_type == null || _type == '' || _type == "null") {
+        var dataFromPreviousScreen = Get.arguments;
+
+        type.value = dataFromPreviousScreen['type'];
+        auditListPresenter.saveValue(type: type.value.toString());
+      } else {
+        type.value = int.tryParse(_type) ?? 0;
+      }
+    } catch (e) {
+      print(e.toString() + 'type');
+      //  Utility.showDialog(e.toString() + 'type');
+    }
   }
 
   void getAuditListByDate() {
