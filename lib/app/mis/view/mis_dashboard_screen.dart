@@ -102,38 +102,6 @@ class MisDashboardScreen extends GetView<MisDashboardController> {
                       ),
                     if (Responsive.isDesktop(context))
 
-                    /// GRID TILES
-                    GridView.count(
-                      shrinkWrap: true,
-                      primary: false,
-                      padding: Dimens.edgeInsets15,
-                      crossAxisSpacing: 70,
-                      mainAxisSpacing: 6,
-                      crossAxisCount: Responsive.isMobile(context) ? 2 : 5,
-                      childAspectRatio: Responsive.isMobile(context)
-                          ? (itemWidth / itemHeight)
-                          : (itemWidth / itemHeightWeb),
-                      children: <Widget>[
-                        createContentTile(
-                          title: "List Of observation",
-                          onTap: () {
-                            controller.goToJobListScreen();
-                          },
-                        ),
-                        createContentTile(
-                          title: 'Create observation ',
-                          onTap: () {
-                            controller.goToCreateObservation();
-                          },
-                        ),
-                        createContentTile(
-                          title: 'Check List Of observation',
-                          onTap: () {
-                            controller.goToCheckListOfObservation();
-                          },
-                        )
-                      ],
-                    ),
                       /// GRID TILES
                       GridView.count(
                         shrinkWrap: true,
@@ -147,17 +115,50 @@ class MisDashboardScreen extends GetView<MisDashboardController> {
                             : (itemWidth / itemHeightWeb),
                         children: <Widget>[
                           createContentTile(
-                              title: "List Of observation",
-                              onTap: () {
-                                controller.goToJobListScreen();
-                              }),
+                            title: "List Of observation",
+                            onTap: () {
+                              controller.goToJobListScreen();
+                            },
+                          ),
                           createContentTile(
-                              title: 'Create observation ',
-                              onTap: () {
-                                controller.goToCreateObservation();
-                              })
+                            title: 'Create observation ',
+                            onTap: () {
+                              controller.goToCreateObservation();
+                            },
+                          ),
+                          createContentTile(
+                            title: 'Check List Of observation',
+                            onTap: () {
+                              controller.goToCheckListOfObservation();
+                            },
+                          )
                         ],
                       ),
+
+                    /// GRID TILES
+                    // GridView.count(
+                    //   shrinkWrap: true,
+                    //   primary: false,
+                    //   padding: Dimens.edgeInsets15,
+                    //   crossAxisSpacing: 70,
+                    //   mainAxisSpacing: 6,
+                    //   crossAxisCount: Responsive.isMobile(context) ? 2 : 5,
+                    //   childAspectRatio: Responsive.isMobile(context)
+                    //       ? (itemWidth / itemHeight)
+                    //       : (itemWidth / itemHeightWeb),
+                    //   children: <Widget>[
+                    //     createContentTile(
+                    //         title: "List Of observation",
+                    //         onTap: () {
+                    //           controller.goToJobListScreen();
+                    //         }),
+                    //     createContentTile(
+                    //         title: 'Create observation ',
+                    //         onTap: () {
+                    //           controller.goToCreateObservation();
+                    //         })
+                    //   ],
+                    // ),
                     if (Responsive.isDesktop(context))
                       Container(
                         margin: EdgeInsets.only(left: 20),
