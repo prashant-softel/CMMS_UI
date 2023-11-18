@@ -31,4 +31,10 @@ class CreateAuditPresenter {
     );
     return true;
   }
+
+  void saveValue({String? type}) async {
+    return createAuditUsecase.saveValue(type: type);
+  }
+
+  Future<String?> getValue() async => await createAuditUsecase.getValue();
 }

@@ -1,5 +1,6 @@
 import 'package:cmms/domain/models/frequency_model.dart';
 import 'package:cmms/domain/models/preventive_checklist_model.dart';
+import 'package:cmms/domain/repositories/local_storage_keys.dart';
 import 'package:cmms/domain/repositories/repository.dart';
 
 class CreateAuditUsecase {
@@ -27,4 +28,8 @@ class CreateAuditUsecase {
   }) async =>
       await repository.createAuditNumber(
           isLoading: isLoading, checkAuditJsonString: checkAuditJsonString);
+  void saveValue({String? type}) async =>
+      repository.saveValue(LocalKeys.type, type);
+  Future<String?> getValue() async =>
+      await repository.getStringValue(LocalKeys.type);
 }

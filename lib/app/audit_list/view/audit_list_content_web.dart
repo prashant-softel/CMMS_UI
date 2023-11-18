@@ -130,7 +130,8 @@ class _AuditListContentWebState extends State<AuditListContentWeb> {
                                         icon: Icons.add,
                                         label: "Add New",
                                         onPressed: () {
-                                          Get.offNamed(Routes.createAudit);
+                                          Get.offNamed(Routes.createAudit,
+                                              arguments: {'type': 2});
                                         },
                                         color: ColorValues.addNewColor,
                                       ),

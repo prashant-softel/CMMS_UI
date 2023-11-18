@@ -54,8 +54,6 @@ class AuditController extends GetxController {
   }
 
   Future<void> auditList() async {
-    Get.toNamed(
-      Routes.auditListScreen,
-    );
+    Get.toNamed(Routes.auditListScreen, arguments: {'type': 2});
   }
 }
