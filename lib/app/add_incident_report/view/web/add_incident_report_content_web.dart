@@ -153,26 +153,7 @@ class AddIncidentReportContentWeb extends GetView<AddIncidentReportController> {
                                                           CrossAxisAlignment
                                                               .end,
                                                       children: [
-                                                        Row(
-                                                          children: [
-                                                            CustomRichText(
-                                                                title:
-                                                                    'Incident date & Time: '),
-                                                            Dimens.boxWidth10,
-                                                            SizedBox(
-                                                              width: MediaQuery.of(
-                                                                          context)
-                                                                      .size
-                                                                      .width /
-                                                                  5,
-                                                              child:
-                                                                  _buildIncidentDateTimeField_web(
-                                                                context,
-                                                              ),
-                                                            ),
-                                                          ],
-                                                        ),
-
+                                                        Dimens.boxHeight10,
                                                         Row(
                                                           children: [
                                                             CustomRichText(
@@ -203,6 +184,26 @@ class AddIncidentReportContentWeb extends GetView<AddIncidentReportController> {
                                                                       controller
                                                                           .onValueChanged,
                                                                 ),
+                                                              ),
+                                                            ),
+                                                          ],
+                                                        ),
+                                                        Dimens.boxHeight5,
+                                                        Row(
+                                                          children: [
+                                                            CustomRichText(
+                                                                title:
+                                                                    'Incident date & Time: '),
+                                                            Dimens.boxWidth10,
+                                                            SizedBox(
+                                                              width: MediaQuery.of(
+                                                                          context)
+                                                                      .size
+                                                                      .width /
+                                                                  5,
+                                                              child:
+                                                                  _buildIncidentDateTimeField_web(
+                                                                context,
                                                               ),
                                                             ),
                                                           ],
@@ -576,40 +577,23 @@ class AddIncidentReportContentWeb extends GetView<AddIncidentReportController> {
                                                         Row(
                                                           children: [
                                                             SizedBox(
-                                                              width: 140,
-                                                              child: CustomRichText(
-                                                                  title:
-                                                                      'Asset Restoration Action Taken By: '),
-                                                            ),
+                                                                width: 150,
+                                                                child: CustomRichText(
+                                                                    title:
+                                                                        'Gen Loss Due To Asset Damage')),
                                                             Dimens.boxWidth10,
                                                             SizedBox(
-                                                              width: MediaQuery.of(
-                                                                          context)
-                                                                      .size
-                                                                      .width /
-                                                                  5,
-                                                              child: Obx(
-                                                                () =>
-                                                                    DropdownWebWidget(
-                                                                  dropdownList:
-                                                                      controller
-                                                                          .assetRestorationActionTakenByList,
-                                                                  isValueSelected:
-                                                                      controller
-                                                                          .isAssetRestorationActionTakenByListSelected
-                                                                          .value,
-                                                                  selectedValue:
-                                                                      controller
-                                                                          .selectedAssetRestorationActionTakenByList
-                                                                          .value,
-                                                                  onValueChanged:
-                                                                      controller
-                                                                          .onValueAssetRestorationActionTakenByChanged,
-                                                                ),
-                                                              ),
-                                                            ),
+                                                                width: MediaQuery.of(
+                                                                            context)
+                                                                        .size
+                                                                        .width /
+                                                                    5,
+                                                                child:
+                                                                    _buildGenLossAssetDamageTextField_web(
+                                                                        context)),
                                                           ],
                                                         ),
+
                                                         Dimens.boxHeight5,
                                                         Row(
                                                           children: [
@@ -976,22 +960,42 @@ class AddIncidentReportContentWeb extends GetView<AddIncidentReportController> {
                                                           ),
 
                                                           // Dimens.boxHeight5,
+                                                          Dimens.boxHeight5,
                                                           Row(
                                                             children: [
                                                               SizedBox(
-                                                                  width: 150,
-                                                                  child: CustomRichText(
-                                                                      title:
-                                                                          'Gen Loss Due To Asset Damage')),
+                                                                width: 140,
+                                                                child: CustomRichText(
+                                                                    title:
+                                                                        'Asset Restoration Action Taken By: '),
+                                                              ),
                                                               Dimens.boxWidth10,
                                                               SizedBox(
-                                                                  width: MediaQuery.of(
-                                                                              context)
-                                                                          .size
-                                                                          .width /
-                                                                      5,
-                                                                  child: _buildGenLossAssetDamageTextField_web(
-                                                                      context)),
+                                                                width: MediaQuery.of(
+                                                                            context)
+                                                                        .size
+                                                                        .width /
+                                                                    5,
+                                                                child: Obx(
+                                                                  () =>
+                                                                      DropdownWebWidget(
+                                                                    dropdownList:
+                                                                        controller
+                                                                            .assetRestorationActionTakenByList,
+                                                                    isValueSelected:
+                                                                        controller
+                                                                            .isAssetRestorationActionTakenByListSelected
+                                                                            .value,
+                                                                    selectedValue:
+                                                                        controller
+                                                                            .selectedAssetRestorationActionTakenByList
+                                                                            .value,
+                                                                    onValueChanged:
+                                                                        controller
+                                                                            .onValueAssetRestorationActionTakenByChanged,
+                                                                  ),
+                                                                ),
+                                                              ),
                                                             ],
                                                           ),
 
@@ -1443,9 +1447,16 @@ class AddIncidentReportContentWeb extends GetView<AddIncidentReportController> {
                                                           CrossAxisAlignment
                                                               .start,
                                                       children: [
-                                                        Text(
-                                                          "Investigation",
-                                                          style: Styles.blue700,
+                                                        Padding(
+                                                          padding:
+                                                              const EdgeInsets
+                                                                      .only(
+                                                                  left: 20),
+                                                          child: Text(
+                                                            "Investigation",
+                                                            style:
+                                                                Styles.blue700,
+                                                          ),
                                                         ),
                                                         Dimens.boxHeight10,
                                                         Row(
@@ -1453,164 +1464,170 @@ class AddIncidentReportContentWeb extends GetView<AddIncidentReportController> {
                                                               CrossAxisAlignment
                                                                   .start,
                                                           children: [
-                                                            Column(
-                                                              crossAxisAlignment:
-                                                                  CrossAxisAlignment
-                                                                      .start,
-                                                              children: [
-                                                                Column(
-                                                                  crossAxisAlignment:
-                                                                      CrossAxisAlignment
-                                                                          .start,
-                                                                  children: [
-                                                                    Text(
-                                                                      'What task or type of job was being performed? ',
-                                                                      style: Styles
-                                                                          .black15,
-                                                                    ),
-                                                                    Dimens
-                                                                        .boxHeight3,
-                                                                    investigationTextfields(
-                                                                        context,
-                                                                        1)
-                                                                  ],
-                                                                ),
-                                                                Dimens
-                                                                    .boxHeight10,
-                                                                Column(
-                                                                  crossAxisAlignment:
-                                                                      CrossAxisAlignment
-                                                                          .start,
-                                                                  children: [
-                                                                    Text(
-                                                                      'Was the person involved in these activities trained and if so, when? ',
-                                                                      style: Styles
-                                                                          .black15,
-                                                                    ),
-                                                                    Dimens
-                                                                        .boxHeight3,
-                                                                    investigationTextfields(
-                                                                        context,
-                                                                        2)
-                                                                  ],
-                                                                ),
-                                                                Dimens
-                                                                    .boxHeight10,
-                                                                Column(
-                                                                  crossAxisAlignment:
-                                                                      CrossAxisAlignment
-                                                                          .start,
-                                                                  children: [
-                                                                    Text(
-                                                                      'Was the person authorized/licensed to carry out that type of work / use machinery? ',
-                                                                      style: Styles
-                                                                          .black15,
-                                                                    ),
-                                                                    Dimens
-                                                                        .boxHeight3,
-                                                                    investigationTextfields(
-                                                                        context,
-                                                                        3)
-                                                                  ],
-                                                                ),
-                                                                Dimens
-                                                                    .boxHeight10,
-                                                                Column(
-                                                                  crossAxisAlignment:
-                                                                      CrossAxisAlignment
-                                                                          .start,
-                                                                  children: [
-                                                                    Text(
-                                                                      'What instructions had been given? By Whom? ',
-                                                                      style: Styles
-                                                                          .black15,
-                                                                    ),
-                                                                    Dimens
-                                                                        .boxHeight3,
-                                                                    investigationTextfields(
-                                                                        context,
-                                                                        4)
-                                                                  ],
-                                                                ),
-                                                                Dimens
-                                                                    .boxHeight10,
-                                                                Column(
-                                                                  crossAxisAlignment:
-                                                                      CrossAxisAlignment
-                                                                          .start,
-                                                                  children: [
-                                                                    Text(
-                                                                      'What safety equipment and /protection was used/ available? ',
-                                                                      style: Styles
-                                                                          .black15,
-                                                                    ),
-                                                                    Dimens
-                                                                        .boxHeight3,
-                                                                    investigationTextfields(
-                                                                        context,
-                                                                        5)
-                                                                  ],
-                                                                ),
-                                                                Dimens
-                                                                    .boxHeight10,
-                                                                Column(
-                                                                  crossAxisAlignment:
-                                                                      CrossAxisAlignment
-                                                                          .start,
-                                                                  children: [
-                                                                    Text(
-                                                                      'Were correct safe procedures being observed? ',
-                                                                      style: Styles
-                                                                          .black15,
-                                                                    ),
-                                                                    Dimens
-                                                                        .boxHeight3,
-                                                                    investigationTextfields(
-                                                                        context,
-                                                                        6)
-                                                                  ],
-                                                                ),
-                                                                Dimens
-                                                                    .boxHeight10,
-                                                                Column(
-                                                                  crossAxisAlignment:
-                                                                      CrossAxisAlignment
-                                                                          .start,
-                                                                  children: [
-                                                                    Text(
-                                                                      'What unsafe condition contributed to the incident? ',
-                                                                      style: Styles
-                                                                          .black15,
-                                                                    ),
-                                                                    Dimens
-                                                                        .boxHeight3,
-                                                                    investigationTextfields(
-                                                                        context,
-                                                                        7)
-                                                                  ],
-                                                                ),
-                                                                Dimens
-                                                                    .boxHeight10,
-                                                                Column(
-                                                                  crossAxisAlignment:
-                                                                      CrossAxisAlignment
-                                                                          .start,
-                                                                  children: [
-                                                                    Text(
-                                                                      'Did unsafe act/s cause the incident? If yes. Mention the same ',
-                                                                      style: Styles
-                                                                          .black15,
-                                                                    ),
-                                                                    Dimens
-                                                                        .boxHeight3,
-                                                                    investigationTextfields(
-                                                                        context,
-                                                                        8)
-                                                                  ],
-                                                                ),
-                                                                Dimens
-                                                                    .boxHeight10,
-                                                              ],
+                                                            Padding(
+                                                              padding:
+                                                                  const EdgeInsets
+                                                                          .only(
+                                                                      left: 20),
+                                                              child: Column(
+                                                                crossAxisAlignment:
+                                                                    CrossAxisAlignment
+                                                                        .start,
+                                                                children: [
+                                                                  Column(
+                                                                    crossAxisAlignment:
+                                                                        CrossAxisAlignment
+                                                                            .start,
+                                                                    children: [
+                                                                      Text(
+                                                                        'What task or type of job was being performed? ',
+                                                                        style: Styles
+                                                                            .black15,
+                                                                      ),
+                                                                      Dimens
+                                                                          .boxHeight3,
+                                                                      investigationTextfields(
+                                                                          context,
+                                                                          1)
+                                                                    ],
+                                                                  ),
+                                                                  Dimens
+                                                                      .boxHeight10,
+                                                                  Column(
+                                                                    crossAxisAlignment:
+                                                                        CrossAxisAlignment
+                                                                            .start,
+                                                                    children: [
+                                                                      Text(
+                                                                        'Was the person involved in these activities trained and if so, when? ',
+                                                                        style: Styles
+                                                                            .black15,
+                                                                      ),
+                                                                      Dimens
+                                                                          .boxHeight3,
+                                                                      investigationTextfields(
+                                                                          context,
+                                                                          2)
+                                                                    ],
+                                                                  ),
+                                                                  Dimens
+                                                                      .boxHeight10,
+                                                                  Column(
+                                                                    crossAxisAlignment:
+                                                                        CrossAxisAlignment
+                                                                            .start,
+                                                                    children: [
+                                                                      Text(
+                                                                        'Was the person authorized/licensed to carry out that type of work / use machinery? ',
+                                                                        style: Styles
+                                                                            .black15,
+                                                                      ),
+                                                                      Dimens
+                                                                          .boxHeight3,
+                                                                      investigationTextfields(
+                                                                          context,
+                                                                          3)
+                                                                    ],
+                                                                  ),
+                                                                  Dimens
+                                                                      .boxHeight10,
+                                                                  Column(
+                                                                    crossAxisAlignment:
+                                                                        CrossAxisAlignment
+                                                                            .start,
+                                                                    children: [
+                                                                      Text(
+                                                                        'What instructions had been given? By Whom? ',
+                                                                        style: Styles
+                                                                            .black15,
+                                                                      ),
+                                                                      Dimens
+                                                                          .boxHeight3,
+                                                                      investigationTextfields(
+                                                                          context,
+                                                                          4)
+                                                                    ],
+                                                                  ),
+                                                                  Dimens
+                                                                      .boxHeight10,
+                                                                  Column(
+                                                                    crossAxisAlignment:
+                                                                        CrossAxisAlignment
+                                                                            .start,
+                                                                    children: [
+                                                                      Text(
+                                                                        'What safety equipment and /protection was used/ available? ',
+                                                                        style: Styles
+                                                                            .black15,
+                                                                      ),
+                                                                      Dimens
+                                                                          .boxHeight3,
+                                                                      investigationTextfields(
+                                                                          context,
+                                                                          5)
+                                                                    ],
+                                                                  ),
+                                                                  Dimens
+                                                                      .boxHeight10,
+                                                                  Column(
+                                                                    crossAxisAlignment:
+                                                                        CrossAxisAlignment
+                                                                            .start,
+                                                                    children: [
+                                                                      Text(
+                                                                        'Were correct safe procedures being observed? ',
+                                                                        style: Styles
+                                                                            .black15,
+                                                                      ),
+                                                                      Dimens
+                                                                          .boxHeight3,
+                                                                      investigationTextfields(
+                                                                          context,
+                                                                          6)
+                                                                    ],
+                                                                  ),
+                                                                  Dimens
+                                                                      .boxHeight10,
+                                                                  Column(
+                                                                    crossAxisAlignment:
+                                                                        CrossAxisAlignment
+                                                                            .start,
+                                                                    children: [
+                                                                      Text(
+                                                                        'What unsafe condition contributed to the incident? ',
+                                                                        style: Styles
+                                                                            .black15,
+                                                                      ),
+                                                                      Dimens
+                                                                          .boxHeight3,
+                                                                      investigationTextfields(
+                                                                          context,
+                                                                          7)
+                                                                    ],
+                                                                  ),
+                                                                  Dimens
+                                                                      .boxHeight10,
+                                                                  Column(
+                                                                    crossAxisAlignment:
+                                                                        CrossAxisAlignment
+                                                                            .start,
+                                                                    children: [
+                                                                      Text(
+                                                                        'Did unsafe act/s cause the incident? If yes. Mention the same ',
+                                                                        style: Styles
+                                                                            .black15,
+                                                                      ),
+                                                                      Dimens
+                                                                          .boxHeight3,
+                                                                      investigationTextfields(
+                                                                          context,
+                                                                          8)
+                                                                    ],
+                                                                  ),
+                                                                  Dimens
+                                                                      .boxHeight10,
+                                                                ],
+                                                              ),
                                                             ),
                                                           ],
                                                         ),
@@ -2066,8 +2083,12 @@ class AddIncidentReportContentWeb extends GetView<AddIncidentReportController> {
                                                                   style: Styles
                                                                       .black15,
                                                                 ),
-                                                                rootCauseTextfields(
-                                                                    context, 1)
+                                                                Expanded(
+                                                                  child:
+                                                                      rootCauseTextfields(
+                                                                          context,
+                                                                          1),
+                                                                )
                                                               ],
                                                             ),
                                                             Dimens.boxHeight5,
@@ -2078,8 +2099,10 @@ class AddIncidentReportContentWeb extends GetView<AddIncidentReportController> {
                                                                   style: Styles
                                                                       .black15,
                                                                 ),
-                                                                rootCauseTextfields(
-                                                                    context, 2)
+                                                                Expanded(
+                                                                    child: rootCauseTextfields(
+                                                                        context,
+                                                                        2))
                                                               ],
                                                             ),
                                                             Dimens.boxHeight5,
@@ -2090,8 +2113,10 @@ class AddIncidentReportContentWeb extends GetView<AddIncidentReportController> {
                                                                   style: Styles
                                                                       .black15,
                                                                 ),
-                                                                rootCauseTextfields(
-                                                                    context, 3)
+                                                                Expanded(
+                                                                    child: rootCauseTextfields(
+                                                                        context,
+                                                                        3))
                                                               ],
                                                             ),
                                                           ],
@@ -2137,8 +2162,10 @@ class AddIncidentReportContentWeb extends GetView<AddIncidentReportController> {
                                                                   style: Styles
                                                                       .black15,
                                                                 ),
-                                                                immediateCorrectionTextfields(
-                                                                    context, 1)
+                                                                Expanded(
+                                                                    child: immediateCorrectionTextfields(
+                                                                        context,
+                                                                        1))
                                                               ],
                                                             ),
                                                             Dimens.boxHeight5,
@@ -2149,8 +2176,10 @@ class AddIncidentReportContentWeb extends GetView<AddIncidentReportController> {
                                                                   style: Styles
                                                                       .black15,
                                                                 ),
-                                                                immediateCorrectionTextfields(
-                                                                    context, 2)
+                                                                Expanded(
+                                                                    child: immediateCorrectionTextfields(
+                                                                        context,
+                                                                        2))
                                                               ],
                                                             ),
                                                             Dimens.boxHeight5,
@@ -2161,8 +2190,10 @@ class AddIncidentReportContentWeb extends GetView<AddIncidentReportController> {
                                                                   style: Styles
                                                                       .black15,
                                                                 ),
-                                                                immediateCorrectionTextfields(
-                                                                    context, 3)
+                                                                Expanded(
+                                                                    child: immediateCorrectionTextfields(
+                                                                        context,
+                                                                        3))
                                                               ],
                                                             ),
                                                           ],
@@ -2333,6 +2364,7 @@ class AddIncidentReportContentWeb extends GetView<AddIncidentReportController> {
                                                           SizedBox(
                                                             height: 20,
                                                           ),
+
                                                           Column(
                                                             children: []
                                                               ..addAll(controller
@@ -2343,6 +2375,13 @@ class AddIncidentReportContentWeb extends GetView<AddIncidentReportController> {
                                                                             children: [
                                                                               // Text('${element.name}'),
                                                                               // Text('${element.required_by_date}')
+                                                                              // Obx(
+                                                                              //   () => ListView.builder(
+                                                                              //       itemCount: controller.investigationTeam.length,
+                                                                              //       itemBuilder: (context, index) {
+                                                                              //         return investigationTeamData('${controller.investigationTeam[index]}', '${element.name}', '${element.designation}', context);
+                                                                              //       }),
+                                                                              // )
 
                                                                               investigationTeamData('${element.srNumber}', '${element.name}', '${element.designation}', context),
                                                                             ],
@@ -2372,20 +2411,20 @@ class AddIncidentReportContentWeb extends GetView<AddIncidentReportController> {
                                                                 MainAxisAlignment
                                                                     .center,
                                                             children: [
-                                                              SizedBox(
-                                                                  width: MediaQuery.of(
-                                                                              context)
-                                                                          .size
-                                                                          .width /
-                                                                      3,
-                                                                  child:
-                                                                      CustomTextField(
-                                                                    textController:
-                                                                        controller
-                                                                            .investigationTeamSrNumberTextFieldController,
-                                                                    label:
-                                                                        'Serial Number',
-                                                                  )),
+                                                              // SizedBox(
+                                                              //     width: MediaQuery.of(
+                                                              //                 context)
+                                                              //             .size
+                                                              //             .width /
+                                                              //         3,
+                                                              //     child:
+                                                              //         CustomTextField(
+                                                              //       textController:
+                                                              //           controller
+                                                              //               .investigationTeamSrNumberTextFieldController,
+                                                              //       label:
+                                                              //           'Serial Number',
+                                                              //     )),
                                                               SizedBox(
                                                                   width: MediaQuery.of(
                                                                               context)
@@ -2451,6 +2490,8 @@ class AddIncidentReportContentWeb extends GetView<AddIncidentReportController> {
                                                                       .clear();
                                                                   // controller.isCheckedRequire
                                                                   //     .value = false;
+                                                                  print(
+                                                                      'Investigation Data${controller.investigationTeam.length}');
                                                                 },
                                                               )
                                                             ],
@@ -4198,7 +4239,7 @@ class AddIncidentReportContentWeb extends GetView<AddIncidentReportController> {
       height: MediaQuery.of(context).size.height * 0.040,
       // margin: Dimens.edgeInsets5,
       constraints: BoxConstraints(
-        maxWidth: MediaQuery.of(context).size.width / 4,
+        maxWidth: MediaQuery.of(context).size.width / 1.3,
         minWidth: 100,
       ),
       child: LoginCustomTextfield(

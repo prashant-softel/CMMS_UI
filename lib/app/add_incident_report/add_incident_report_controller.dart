@@ -1,5 +1,6 @@
 import 'dart:async';
 import 'dart:convert';
+import 'dart:math';
 
 import 'package:cmms/app/add_incident_report/add_incident_report_presenter.dart';
 import 'package:cmms/app/app.dart';
@@ -67,6 +68,10 @@ class AddIncidentReportController extends GetxController {
   RxList<String?> selectedIncidentInvestigationDoneByDataList = <String>[].obs;
   RxList<int?> selectedIncidentInvestigationDoneByIdList = <int>[].obs;
   int selectedIncidentInvestigationDoneById = 0;
+  RxInt counter = 0.obs;
+  void incrementCounter() {
+    counter++;
+  }
 
   /// Incident Investigation Verification Done By List
   RxList<EmployeeListModel> incidentInvestigationVerificationDoneByList =
@@ -222,7 +227,7 @@ class AddIncidentReportController extends GetxController {
   Rx<bool> isExactLoactionInvalid = false.obs;
   var exactLocationTextCtrlr = TextEditingController();
 
-  ///Supplier Action Part
+  ///Investigation Team Part
   var investigationTeam = <InvestigationTeam>[].obs;
   void updateInvestigationTeamText(
       String srNumber,
@@ -230,13 +235,15 @@ class AddIncidentReportController extends GetxController {
       // String required_by_data,
 
       String designation) {
+    // for (int i = 1; i <= investigationTeam.length; i++) {
     investigationTeam.add(InvestigationTeam(
-        srNumber: srNumber,
+        srNumber: '${investigationTeam.length + 1}.',
         name: name,
         // required_by_date: required_by_data,
         // is_required: is_required
 
         designation: designation));
+    // }
   }
 
 //RCA text
