@@ -1,6 +1,7 @@
 import 'dart:async';
 
 import 'package:cmms/app/app.dart';
+import 'package:cmms/app/navigators/app_pages.dart';
 import 'package:cmms/domain/models/facility_model.dart';
 import 'package:get/get.dart';
 import 'observation_list_presenter.dart';
@@ -64,5 +65,9 @@ class ObservationListController extends GetxController {
     if (facilityList.isNotEmpty) {
       selectedBlock.value = facilityList[0]?.name ?? '';
     }
+  }
+
+  void goToCreateObservation() {
+    Get.toNamed(Routes.createObservation);
   }
 }

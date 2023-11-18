@@ -1,5 +1,6 @@
 import 'package:cmms/app/app.dart';
 import 'package:cmms/app/mis_list_of_observation/observation_list_controller.dart';
+import 'package:cmms/app/widgets/custom_richtext.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -11,7 +12,41 @@ class ObservationListMobile extends GetView<ObservationListController> {
     return Scaffold(
       body: Container(
         child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
           children: [
+            Dimens.boxHeight10,
+            Padding(
+              padding: const EdgeInsets.only(left: 5, right: 5),
+              child: Row(
+                children: [
+                  SizedBox(
+                    width: MediaQuery.of(context).size.width / 1.15,
+                    child: TextField(
+                      style: TextStyle(
+                        fontSize: 15.0,
+                        height: 0.2,
+                        color: Colors.black,
+                      ),
+                      decoration: InputDecoration(
+                        contentPadding: EdgeInsets.only(top: 20, left: 20),
+                        hintText: 'Search',
+                        alignLabelWithHint: true,
+                      ),
+                    ),
+                  ),
+                  Icon(
+                    Icons.filter_alt,
+                    size: 40,
+                    color: ColorValues.appDarkGreyColor,
+                  ),
+                  // Icon(
+                  //   Icons.plus_one_sharp,
+                  //   color: ColorValues.appDarkGreyColor,
+                  // )
+                ],
+              ),
+            ),
+            Dimens.boxHeight10,
             Expanded(
               child: ListView.builder(
                   shrinkWrap: true,
@@ -189,7 +224,12 @@ class ObservationListMobile extends GetView<ObservationListController> {
                                                 color: ColorValues.addNewColor),
                                           ),
                                           Dimens.boxWidth10,
-                                          Icon(Icons.edit),
+                                          GestureDetector(
+                                              onTap: () {
+                                                controller
+                                                    .goToCreateObservation();
+                                              },
+                                              child: Icon(Icons.edit)),
                                         ],
                                       )
                                     ],
