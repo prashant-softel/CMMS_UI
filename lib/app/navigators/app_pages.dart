@@ -75,6 +75,7 @@ import 'package:cmms/app/mrs_view/view/mrs_view_screen.dart';
 import 'package:cmms/app/pm_plan_list/pm_plan_list_binding.dart';
 import 'package:cmms/app/request_goods_orders_list.dart/request_goods_orders_list_binding.dart';
 import 'package:cmms/app/transaction_report/view/transaction_report_list_screen.dart';
+import 'package:cmms/app/view_audit_plan/view_audit_plan_binding.dart';
 import 'package:cmms/app/view_mc_plan/view/view_mc_planning_screen.dart';
 import 'package:cmms/app/view_mc_plan/view_mc_planning_binding.dart';
 import 'package:cmms/app/view_request_orders/request_goods_orders_view_binding.dart';
@@ -228,6 +229,7 @@ import '../source_of_observation/view/source_of_obs_screen.dart';
 import '../transaction_report/transaction_report_list_binding.dart';
 import '../type_of_observation/type_of_obs_binding.dart';
 import '../type_of_observation/view/type_of_obs_screen.dart';
+import '../view_audit_plan/view/view_audit_plan_screen.dart';
 import '../view_request_orders/view/request_goods_orders_view_screen.dart';
 import '../receive_goods_order/receive_goods_order_binding.dart';
 import '../receive_goods_order/receive_goods_order_screen.dart';
@@ -960,11 +962,11 @@ class AppPages {
       binding: CheckListOfObservationBinding(),
     ),
 
-    // GetPage<dynamic>(
-    //   name: _Paths.viewAudit,
-    //   page: ViewAuditDetailScreen.new,
-    //   binding: ViewAuditDetailBinding(),
-    // ),
+    GetPage<dynamic>(
+      name: _Paths.viewAuditPlan,
+      page: ViewAuditPlanScreen.new,
+      binding: ViewAuditPlanBinding(),
+    ),
     // GetPage<dynamic>(
     //   name: _Paths.transactionReport,
     //   page: TransactionStockReportScreen.new,

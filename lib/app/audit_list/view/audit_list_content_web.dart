@@ -2,7 +2,6 @@ import 'package:cmms/app/audit_list/audit_list_controller.dart';
 import 'package:cmms/app/home/home_screen.dart';
 import 'package:cmms/app/navigators/app_pages.dart';
 import 'package:cmms/app/theme/dimens.dart';
-import 'package:cmms/app/widgets/custom_elevated_button.dart';
 import 'package:cmms/app/widgets/custom_richtext.dart';
 import 'package:cmms/app/widgets/date_picker.dart';
 import 'package:cmms/domain/models/audit_plan_list_model.dart';
@@ -68,11 +67,17 @@ class _AuditListContentWebState extends State<AuditListContentWeb> {
                             onTap: () {
                               Get.back();
                             },
-                            child: Text(" / AUDIT LIST",
-                                style: Styles.greyMediumLight12),
+                            child: controller.type.value == 3
+                                ? Text(" / MIS",
+                                    style: Styles.greyMediumLight12)
+                                : Text(" / AUDIT LIST",
+                                    style: Styles.greyMediumLight12),
                           ),
-                          Text(" / AUDIT LIST SCREEN",
-                              style: Styles.greyMediumLight12)
+                          controller.type.value == 3
+                              ? Text(" / OBSERVATION PLAN",
+                                  style: Styles.greyMediumLight12)
+                              : Text(" / AUDIT LIST SCREEN",
+                                  style: Styles.greyMediumLight12)
                         ],
                       ),
                     ),
@@ -97,10 +102,15 @@ class _AuditListContentWebState extends State<AuditListContentWeb> {
                                     mainAxisAlignment:
                                         MainAxisAlignment.spaceBetween,
                                     children: [
-                                      Text(
-                                        "Audit List Screen",
-                                        style: Styles.blackBold16,
-                                      ),
+                                      controller.type.value == 3
+                                          ? Text(
+                                              "Observation Plan",
+                                              style: Styles.blackBold14,
+                                            )
+                                          : Text(
+                                              "Audit List Screen",
+                                              style: Styles.blackBold16,
+                                            ),
                                       Spacer(),
                                       Row(
                                         children: [
@@ -130,8 +140,11 @@ class _AuditListContentWebState extends State<AuditListContentWeb> {
                                         icon: Icons.add,
                                         label: "Add New",
                                         onPressed: () {
+                                          controller.clearValue();
                                           Get.offNamed(Routes.createAudit,
-                                              arguments: {'type': 2});
+                                              arguments: {
+                                                'type': controller.type.value
+                                              });
                                         },
                                         color: ColorValues.addNewColor,
                                       ),
@@ -544,10 +557,14 @@ class AuditListListDataSource extends DataTableSource {
                           icon: Icons.remove_red_eye_outlined,
                           message: 'view',
                           onPress: () {
-                            int id = AuditPlanPlanningListDetails?.id ?? 0;
-                            if (id != 0) {
-                              // Get.toNamed(Routes.viewa,
-                              //     arguments: {'id': id});
+                            controller.clearStoreIdData();
+                            // controller.clearValue();
+                            int auditId = AuditPlanPlanningListDetails?.id ?? 0;
+                            if (auditId != 0) {
+                              Get.toNamed(Routes.viewAuditPlan, arguments: {
+                                'auditId': auditId,
+                                'type': controller.type.value
+                              });
                             }
                           },
                         ),
@@ -609,13 +626,15 @@ class AuditListListDataSource extends DataTableSource {
         );
       }).toList(),
       //   ],
-      // onSelectChanged: (_) {
-      //   final _flutterSecureStorage = const FlutterSecureStorage();
-
-      //   _flutterSecureStorage.delete(key: "UserId");
-      //   Get.toNamed(Routes.viewUserDetail,
-      //       arguments: {'userId': UserDetails?.id});
-      // },
+      onSelectChanged: (_) {
+        controller.clearStoreIdData();
+        // controller.clearValue();
+        int auditId = AuditPlanPlanningListDetails?.id ?? 0;
+        if (auditId != 0) {
+          Get.toNamed(Routes.viewAuditPlan,
+              arguments: {'auditId': auditId, 'type': controller.type.value});
+        }
+      },
     );
   }
 

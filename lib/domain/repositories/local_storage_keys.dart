@@ -13,6 +13,7 @@ abstract class LocalKeys {
   static const roType = 'roType';
   static const types = 'types';
   static const type = 'type';
+  static const auditId = 'auditId';
 
   static const roId = 'roId';
   static const permitId = 'permitId';

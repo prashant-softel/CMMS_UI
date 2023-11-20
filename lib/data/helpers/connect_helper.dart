@@ -1737,13 +1737,38 @@ class ConnectHelper {
       int? type,
       int? frequencyid,
       int? categoryId}) async {
-    var categoryIdsParam = (categoryId != 0) ? '&category_id=$categoryId' : 0;
+    var categoryIdsParam =
+        (categoryId != null) ? '&category_id=$categoryId' : 0;
     var frequencyIdsParam =
-        (frequencyid != 0) ? '&frequency_id=$frequencyid' : 0;
+        (frequencyid != null) ? '&frequency_id=$frequencyid' : 0;
 
     var responseModel = await apiWrapper.makeRequest(
       'CheckList/GetCheckList?facility_id=$facilityId&type=$type' +
           categoryIdsParam.toString() +
+          frequencyIdsParam.toString(),
+      Request.get,
+      null,
+      isLoading ?? false,
+      {
+        'Authorization': 'Bearer $auth',
+      },
+    );
+
+    return responseModel;
+  }
+
+  Future<ResponseModel> getPreventiveCheckListForAudit(
+      {required String auth,
+      bool? isLoading,
+      int? facilityId,
+      int? type,
+      int? frequencyid,
+      int? categoryId}) async {
+    var frequencyIdsParam =
+        (frequencyid != null) ? '&frequency_id=$frequencyid' : 0;
+
+    var responseModel = await apiWrapper.makeRequest(
+      'CheckList/GetCheckList?facility_id=$facilityId&type=$type' +
           frequencyIdsParam.toString(),
       Request.get,
       null,
@@ -6311,6 +6336,24 @@ class ConnectHelper {
       },
     );
 
+    return responseModel;
+  }
+
+  Future<ResponseModel> getAuditPlanDetails({
+    required String? auth,
+    int? auditPlanId,
+    bool? isLoading,
+  }) async {
+    var responseModel = await apiWrapper.makeRequest(
+      'AuditPlan/GetAuditPlanByID?id=$auditPlanId',
+      Request.get,
+      null,
+      isLoading ?? false,
+      {
+        'Content-Type': 'application/json',
+        'Authorization': 'Bearer $auth',
+      },
+    );
     return responseModel;
   }
 }
