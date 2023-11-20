@@ -188,6 +188,8 @@ class AddIncidentReportController extends GetxController {
 
   ///Equipment name List
   RxList<InventoryModel?> eqipmentNameList = <InventoryModel>[].obs;
+  Map<String, InventoryModel> dropdownMapperData = {};
+
   Rx<String> selectedEquipmentName = ''.obs;
   Rx<bool> isEquipmentNameSelected = true.obs;
   int selectedEquipmentnameId = 0;
@@ -218,6 +220,23 @@ class AddIncidentReportController extends GetxController {
 
   Rx<bool> isInsuranceAvailableInvalid = false.obs;
   var insuranceAvailableTextCtrlr = TextEditingController();
+  var testDataTextCtrlr = TextEditingController();
+
+  bool openbreaketimeDatePicker = false;
+
+  ///Propsed Row item
+  RxList<List<Map<String, String>>> rowItem = <List<Map<String, String>>>[].obs;
+  void addRowItem() {
+    rowItem.add([
+      {'key': "Action as per plan ", "value": ''},
+      {
+        "key": "Drop_down",
+        "value": 'Please Select',
+      },
+      {'key': "Target Date ", "value": ''},
+      {'key': "Remark", "value": ''},
+    ]);
+  }
 
 //Address textfield
   Rx<bool> isAddressInvalid = false.obs;
