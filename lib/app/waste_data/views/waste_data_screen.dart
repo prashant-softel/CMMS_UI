@@ -29,7 +29,7 @@ class WasteDataScreen extends StatelessWidget {
             )
           : AppBar(
               title: Text(
-                "STATUTORY",
+                "WASTE DATA",
                 style: TextStyle(
                   color: Color.fromARGB(255, 159, 156, 156),
                   fontSize: 16,
