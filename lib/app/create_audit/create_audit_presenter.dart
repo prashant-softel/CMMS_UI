@@ -14,11 +14,13 @@ class CreateAuditPresenter {
   Future<List<PreventiveCheckListModel?>?> getPreventiveCheckList({
     int? facilityId,
     int? type,
+    int? selectedfrequencyId,
     bool? isLoading,
   }) async =>
       await createAuditUsecase.getPreventiveCheckList(
         facilityId: facilityId ?? 0,
         type: type,
+        selectedfrequencyId: selectedfrequencyId,
         isLoading: isLoading ?? false,
       );
   Future<bool> createAuditNumber({

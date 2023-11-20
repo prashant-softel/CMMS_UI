@@ -41,16 +41,15 @@ class AuditListScreenController extends GetxController {
       DateFormat('yyyy-MM-dd').format(fromDate.value);
 
   final columnVisibility = ValueNotifier<Map<String, bool>>({
-    'Audit Plan ID': true,
+    'Plan ID': true,
     'Title': true,
     'Checklist': true,
     'Site Name': true,
-    'Start Date': true, 'Frequency Name': true,
-
-    // "search": true,
+    'Start Date': true,
+    'Frequency Name': true,
   });
   final Map<String, double> columnwidth = {
-    'Audit Plan ID': 153,
+    'Plan ID': 153,
     'Title': 320,
     'Checklist': 220,
     'Site Name': 200,
@@ -80,7 +79,7 @@ class AuditListScreenController extends GetxController {
     await setType();
 
     this.filterText = {
-      'Audit Plan ID': planIdFilterText,
+      'Plan ID': planIdFilterText,
       'Title': planTitleFilterText,
       'Checklist': noOfDaysFilterText,
       'Site Name': createdByFilterText,
@@ -134,5 +133,13 @@ class AuditListScreenController extends GetxController {
 
   void getAuditListByDate() {
     getAuditPlanList(facilityId, formattedTodate1, formattedFromdate1, true);
+  }
+
+  Future<void> clearValue() async {
+    auditListPresenter.clearValue();
+  }
+
+  void clearStoreIdData() {
+    auditListPresenter.clearStoreIdData();
   }
 }

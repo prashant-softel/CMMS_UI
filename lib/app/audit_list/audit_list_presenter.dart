@@ -20,4 +20,6 @@ class AuditListScreenPresenter {
   }
 
   Future<String?> getValue() async => await auditListUsecase.getValue();
+  void clearValue() async => auditListUsecase.clearValue();
+  void clearStoreIdData() async => auditListUsecase.clearStoreIdData();
 }

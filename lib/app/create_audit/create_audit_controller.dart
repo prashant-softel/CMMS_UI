@@ -36,14 +36,16 @@ class CreateAuditController extends GetxController {
   @override
   void onInit() async {
     try {
+      await setType();
+
       Future.delayed(Duration(seconds: 1), () {
         getFrequencyList();
       });
       facilityIdStreamSubscription = homecontroller.facilityId$.listen((event) {
         facilityId = event;
-        Future.delayed(Duration(seconds: 2), () {
-          getPreventiveCheckList(facilityId, 2);
-        });
+        // Future.delayed(Duration(seconds: 2), () {
+        //   getPreventiveCheckList(facilityId, type.value);
+        // });
       });
       super.onInit();
     } catch (e) {
@@ -61,6 +63,7 @@ class CreateAuditController extends GetxController {
         var dataFromPreviousScreen = Get.arguments;
 
         type.value = dataFromPreviousScreen['type'];
+        print({"typeeee", type.value});
         createAuditPresenter.saveValue(type: type.value.toString());
       } else {
         type.value = int.tryParse(_type) ?? 0;
@@ -90,6 +93,7 @@ class CreateAuditController extends GetxController {
               frequencyList.indexWhere((x) => x?.name == value);
           selectedfrequencyId = frequencyList[frequencyIndex]?.id ?? 0;
           selectedfrequency.value = value;
+          getPreventiveCheckList(facilityId, type.value, selectedfrequencyId);
         }
         break;
       case RxList<PreventiveCheckListModel>:
@@ -110,11 +114,12 @@ class CreateAuditController extends GetxController {
   }
 
   Future<void> getPreventiveCheckList(
-    facilityId,
-    type,
-  ) async {
+      facilityId, type, selectedfrequencyId) async {
     final list = await createAuditPresenter.getPreventiveCheckList(
-        facilityId: facilityId, type: type, isLoading: true);
+        facilityId: facilityId,
+        type: type,
+        selectedfrequencyId: selectedfrequencyId,
+        isLoading: true);
 
     if (list != null) {
       checkList.clear();

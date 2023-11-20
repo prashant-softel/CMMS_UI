@@ -1068,6 +1068,20 @@ class DataRepository extends DomainRepository {
           isLoading: isLoading ?? false,
           categoryId: categoryId,
           frequencyid: frequencyid);
+  Future<ResponseModel> getPreventiveCheckListForAudit(
+          {required String auth,
+          int? facilityId,
+          int? type,
+          bool? isLoading,
+          int? frequencyid,
+          int? categoryId}) async =>
+      await connectHelper.getPreventiveCheckListForAudit(
+          auth: auth,
+          facilityId: facilityId ?? 0,
+          type: type,
+          isLoading: isLoading ?? false,
+          categoryId: categoryId,
+          frequencyid: frequencyid);
 
   Future<ResponseModel> getModuleList({
     required String auth,
@@ -3096,6 +3110,18 @@ class DataRepository extends DomainRepository {
     return await connectHelper.getPmPlanDetails(
       auth: auth,
       pmPlanId: pmPlanId,
+      isLoading: isLoading,
+    );
+  }
+
+  Future<ResponseModel> getAuditPlanDetails({
+    String? auth,
+    int? auditPlanId,
+    bool? isLoading,
+  }) async {
+    return await connectHelper.getAuditPlanDetails(
+      auth: auth,
+      auditPlanId: auditPlanId,
       isLoading: isLoading,
     );
   }

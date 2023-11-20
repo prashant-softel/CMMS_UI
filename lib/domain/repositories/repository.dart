@@ -12,6 +12,7 @@ import 'package:cmms/domain/models/%20%20transaction_report_list_model.dart';
 import 'package:cmms/domain/models/add_inventory_details_model.dart';
 import 'package:cmms/domain/models/add_inventory_model.dart';
 import 'package:cmms/domain/models/add_user_model.dart';
+import 'package:cmms/domain/models/audit_plan_detail_model.dart';
 import 'package:cmms/domain/models/audit_plan_list_model.dart';
 import 'package:cmms/domain/models/business_list_model.dart';
 import 'package:cmms/domain/models/calibration_detail_model.dart';
@@ -4491,6 +4492,44 @@ class Repository {
     try {
       final auth = await getSecuredValue(LocalKeys.authToken);
       final res = await _dataRepository.getPreventiveCheckListForPm(
+          auth: auth,
+          facilityId: facilityId ?? 0,
+          type: type,
+          isLoading: isLoading ?? false,
+          categoryId: categoryId,
+          frequencyid: frequencyid);
+
+      if (!res.hasError) {
+        final jsonPreventiveCheckListModelModels = jsonDecode(res.data);
+        // print(res.data);
+        final List<PreventiveCheckListModel> _PreventiveCheckListModelList =
+            jsonPreventiveCheckListModelModels
+                .map<PreventiveCheckListModel>((m) =>
+                    PreventiveCheckListModel.fromJson(
+                        Map<String, dynamic>.from(m)))
+                .toList();
+
+        return _PreventiveCheckListModelList;
+      } else {
+        Utility.showDialog(
+            res.errorCode.toString() + ' getPreventiveCheckListForPm');
+        return [];
+      }
+    } catch (error) {
+      print(error.toString());
+      return [];
+    }
+  }
+
+  Future<List<PreventiveCheckListModel?>?> getPreventiveCheckListForAudit(
+      {int? type,
+      int? facilityId,
+      bool? isLoading,
+      int? frequencyid,
+      int? categoryId}) async {
+    try {
+      final auth = await getSecuredValue(LocalKeys.authToken);
+      final res = await _dataRepository.getPreventiveCheckListForAudit(
           auth: auth,
           facilityId: facilityId ?? 0,
           type: type,
@@ -9179,6 +9218,34 @@ class Repository {
       return false;
     }
   }
+
+  Future<AuditPlanDetailModel?> getAuditPlanDetails(
+    int? auditPlanId,
+    bool? isLoading,
+  ) async {
+    try {
+      final auth = await getSecuredValue(LocalKeys.authToken);
+      final res = await _dataRepository.getAuditPlanDetails(
+        auth: auth,
+        auditPlanId: auditPlanId,
+        isLoading: isLoading,
+      );
+      if (!res.hasError) {
+        final AuditPlanDetailModel _auditPlanDetailModel =
+            auditPlanDetailModelFromJson(res.data);
+        return _auditPlanDetailModel;
+      } //
+      else {
+        Utility.showDialog(res.errorCode.toString() + 'getPmPlanDetails');
+        return null;
+      }
+    } //
+    catch (error) {
+      print(error.toString());
+      return null;
+    }
+  }
+
   //end
   //end
 }
