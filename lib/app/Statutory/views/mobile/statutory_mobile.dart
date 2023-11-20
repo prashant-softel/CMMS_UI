@@ -1,7 +1,10 @@
 import 'package:cmms/app/Statutory/statutory_controller.dart';
 
+import 'package:cmms/app/theme/color_values.dart';
 import 'package:cmms/app/theme/dimens.dart';
+import 'package:cmms/app/widgets/custom_elevated_button.dart';
 import 'package:cmms/app/widgets/custom_richtext.dart';
+import 'package:cmms/app/widgets/stock_dropdown.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -22,7 +25,87 @@ class StatutoryMobile extends GetView<StatutoryController> {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Dimens.boxHeight10,
-                      CustomRichText(title: 'Checklist Name'),
+                      CustomRichText(title: 'Compliance'),
+                      Dimens.boxHeight10,
+                      TextField(
+                        style: TextStyle(
+                          fontSize: 15.0,
+                          height: 0.1,
+                          color: Colors.black,
+                        ),
+                        decoration: InputDecoration(
+                          hintText: 'Enter Checklist Name',
+                          alignLabelWithHint: true,
+                        ),
+                      ),
+                      Dimens.boxHeight10,
+                      CustomRichText(title: 'Status Of Application'),
+                      Dimens.boxHeight10,
+                      SizedBox(
+                        height: 45,
+                        child: Obx(
+                          () => DropdownWebStock(
+                            width: MediaQuery.of(context).size.width,
+                            dropdownList: controller.ownerList,
+                            isValueSelected:
+                                controller.isSelectedBusinessType.value,
+                            selectedValue:
+                                controller.selectedBusinessType.value,
+                            onValueChanged: controller.onValueChanged,
+                          ),
+                        ),
+                      ),
+                      Dimens.boxHeight10,
+                      CustomRichText(title: 'Date of received '),
+                      Dimens.boxHeight10,
+                      TextField(
+                        style: TextStyle(
+                          fontSize: 15.0,
+                          height: 0.1,
+                          color: Colors.black,
+                        ),
+                        decoration: InputDecoration(
+                          hintText: 'Select The Date',
+                          alignLabelWithHint: true,
+                          suffixIcon: GestureDetector(
+                            onTap: () {
+                              // Handle the tap on the suffix icon (e.g., show a date picker).
+                              // Add your logic here.
+                            },
+                            child: Icon(
+                              Icons.calendar_today,
+                              color: Colors
+                                  .grey, // You can customize the color as needed.
+                            ),
+                          ),
+                        ),
+                      ),
+                      Dimens.boxHeight10,
+                      CustomRichText(title: 'Validity (In months)'),
+                      Dimens.boxHeight10,
+                      TextField(
+                        style: TextStyle(
+                          fontSize: 15.0,
+                          height: 0.1,
+                          color: Colors.black,
+                        ),
+                        decoration: InputDecoration(
+                          hintText: 'Enter Checklist Name',
+                          alignLabelWithHint: true,
+                        ),
+                      ),
+                      Dimens.boxHeight20,
+                      Center(
+                        child: Container(
+                          height: 40,
+                          child: CustomElevatedButton(
+                            backgroundColor: ColorValues.submitColor,
+                            text: 'Submit',
+                            onPressed: () {},
+                          ),
+                        ),
+                      ),
+                      Dimens.boxHeight10,
                     ],
                   ),
                 ),
