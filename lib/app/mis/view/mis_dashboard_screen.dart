@@ -133,6 +133,11 @@ class MisDashboardScreen extends GetView<MisDashboardController> {
                             title: 'Statutory',
                             onTap: () {
                               controller.goToStatutoryScreen();
+                            }),
+                        createContentTile(
+                            title: 'Waste Data',
+                            onTap: () {
+                              controller.goToWasteDataScreen();
                             })
                       ],
                     ),

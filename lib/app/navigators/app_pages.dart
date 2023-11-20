@@ -138,6 +138,8 @@ import 'package:cmms/app/view_warranty_claim/view_warranty_claim_binding.dart';
 import 'package:cmms/app/warranty_certificates_list/warranty_certificates_list_binding.dart';
 import 'package:cmms/app/warranty_certificates_list/warranty_certificates_list_screen.dart';
 import 'package:cmms/app/warranty_claim_list/warranty_claim_binding.dart';
+import 'package:cmms/app/waste_data/views/waste_data_screen.dart';
+import 'package:cmms/app/waste_data/waste_data_binding.dart';
 import '../approve_return_mrs/approve_return_mrs_binding.dart';
 import '../approve_return_mrs/view/approve_return_mrs_screen.dart';
 import '../calibration_certificate/calibration_certificate_binding.dart';
@@ -973,6 +975,11 @@ class AppPages {
       name: _Paths.statutory,
       page: StatutoryScreen.new,
       binding: StatutoryBinding(),
+    ),
+    GetPage<dynamic>(
+      name: _Paths.wasteData,
+      page: WasteDataScreen.new,
+      binding: WasteDataBinding(),
     ),
 
     // GetPage<dynamic>(
