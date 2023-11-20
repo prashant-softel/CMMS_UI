@@ -124,11 +124,16 @@ class MisDashboardScreen extends GetView<MisDashboardController> {
                           },
                         ),
                         createContentTile(
-                          title: 'Check List Of observation',
+                          title: 'CheckList Inspection',
                           onTap: () {
                             controller.goToCheckListOfObservation();
                           },
-                        )
+                        ),
+                        createContentTile(
+                            title: 'Statutory',
+                            onTap: () {
+                              controller.goToStatutoryScreen();
+                            })
                       ],
                     ),
                     if (Responsive.isDesktop(context))
