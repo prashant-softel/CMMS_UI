@@ -1,5 +1,7 @@
 // coverage:ignore-file
 
+import 'package:cmms/app/Statutory/statutory_binding.dart';
+import 'package:cmms/app/Statutory/views/statutory_screen.dart';
 import 'package:cmms/app/add_escalation_matrix/add_escalation_matrix_binding.dart';
 import 'package:cmms/app/add_escalation_matrix/add_escalation_matrix_screen.dart';
 import 'package:cmms/app/add_incident_report/add_incident_report_binding.dart';
@@ -967,6 +969,12 @@ class AppPages {
       page: ViewAuditPlanScreen.new,
       binding: ViewAuditPlanBinding(),
     ),
+    GetPage<dynamic>(
+      name: _Paths.statutory,
+      page: StatutoryScreen.new,
+      binding: StatutoryBinding(),
+    ),
+
     // GetPage<dynamic>(
     //   name: _Paths.transactionReport,
     //   page: TransactionStockReportScreen.new,
