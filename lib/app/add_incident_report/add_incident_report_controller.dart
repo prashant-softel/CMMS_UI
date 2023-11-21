@@ -86,11 +86,15 @@ class AddIncidentReportController extends GetxController {
 
   /// Victim Name List
   RxList<EmployeeListModel> victimNameList = <EmployeeListModel>[].obs;
+  RxList<EmployeeListModel?> filteredVictimNameList = <EmployeeListModel>[].obs;
+  Map<dynamic, dynamic> employee_map = {};
+
   Rx<bool> isVictimNameListSelected = true.obs;
   Rx<String> selectedVictimNameList = ''.obs;
   RxList<String?> selectedVictimNameDataList = <String>[].obs;
   RxList<int?> selectedVictimNameIdList = <int>[].obs;
   int selectedVictimNameId = 0;
+  RxList<int?> selectedVictimIdList = <int>[2].obs;
 
   ///Risk Type List
   RxList<RiskTypeModel> riskTypeList = <RiskTypeModel>[].obs;
@@ -223,6 +227,9 @@ class AddIncidentReportController extends GetxController {
   var testDataTextCtrlr = TextEditingController();
 
   bool openbreaketimeDatePicker = false;
+
+  Rx<bool> isOtherVictimNameInvalid = false.obs;
+  var otherVictimNameTextCtrlr = TextEditingController();
 
   ///Propsed Row item
   RxList<List<Map<String, String>>> rowItem = <List<Map<String, String>>>[].obs;
@@ -570,9 +577,16 @@ class AddIncidentReportController extends GetxController {
 
   void victimNameSelected(_selectedVictimNameIds) {
     selectedVictimNameIdList.value = <int>[];
+    filteredVictimNameList.value = <EmployeeListModel>[];
+    late int emp_id = 0;
     for (var _selectedVictimId in _selectedVictimNameIds) {
       selectedVictimNameIdList.add(_selectedVictimId);
+      EmployeeListModel? e = victimNameList.firstWhere((element) {
+        return element.id == _selectedVictimId;
+      });
+      filteredVictimNameList.add(e);
     }
+    employee_map[emp_id] = selectedVictimNameIdList;
   }
 
   void getIncidentInvestigationDoneByList() async {
