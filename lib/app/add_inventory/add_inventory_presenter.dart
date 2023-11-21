@@ -170,4 +170,6 @@ class AddInventoryPresenter {
     return addInventoryUsecase.getSupplierList(
         isLoading: isLoading, BusinessType: BusinessType);
   }
+
+  Future<String?> getValue() async => await addInventoryUsecase.getValue();
 }

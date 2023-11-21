@@ -84,6 +84,9 @@ class AddInventoryUsecase {
     );
   }
 
+  Future<String?> getValue() async =>
+      await repository.getStringValue(LocalKeys.inventoryId);
+
   Future<List<BlockModel?>?> getBlocksList({
     String? auth,
     int? facilityId,

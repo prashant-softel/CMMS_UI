@@ -599,7 +599,7 @@ class AddInventoryScreen extends GetView<AddInventoryController> {
               SizedBox(
                 width: MediaQuery.of(context).size.width / 5,
               ),
-              controller.id == null
+              controller.inventoryId.value == null
                   ? Container(
                       height: 40,
                       child: CustomElevatedButton(

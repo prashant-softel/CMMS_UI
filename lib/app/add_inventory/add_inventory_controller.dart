@@ -188,61 +188,135 @@ class AddInventoryController extends GetxController {
       <AddInventoryDetailsModel?>[].obs;
 
   ///
-  int? id = 0;
+  Rx<int> inventoryId = 0.obs;
   @override
   void onInit() async {
-    id = Get.arguments;
-    print('Inventory Id:$id');
+    try {
+      await setUserId();
+      facilityIdStreamSubscription = homeController.facilityId$.listen((event) {
+        facilityId = event;
+        Future.delayed(Duration(seconds: 1), () {
+          getBlocksList(facilityId);
+        });
+        Future.delayed(Duration(seconds: 1), () {
+          getInventoryStatusList(isLoading: true, facilityId: facilityId);
+        });
+        Future.delayed(Duration(seconds: 1), () async {
+          await getuserAccessData();
+        });
+        Future.delayed(Duration(seconds: 1), () {
+          getFacilityList();
+        });
+        // Future.delayed(Duration(seconds: 1), () {
+        //   getInventoryList();
+        // });
+        Future.delayed(Duration(seconds: 1), () {
+          getFrequencyList();
+        });
+        Future.delayed(Duration(seconds: 1), () {
+          getWarrantyTypeList();
+        });
+        Future.delayed(Duration(seconds: 1), () {
+          getWarrantyUsageTermList();
+        });
+        Future.delayed(Duration(seconds: 1), () {
+          getUnitCurrencyList();
+        });
+        Future.delayed(Duration(seconds: 1), () {
+          getmanufacturerList();
+        });
+        Future.delayed(Duration(seconds: 1), () {
+          getSupplierList();
+        });
 
-    facilityIdStreamSubscription = homeController.facilityId$.listen((event) {
-      facilityId = event;
+        getInventoryCategoryList();
+        getInventoryTypeList(isLoading: true, facilityId: facilityId);
+        getInventoryCategoryList();
 
-      Future.delayed(Duration(seconds: 1), () {
-        getBlocksList(facilityId);
+        /////
+        Future.delayed(Duration(seconds: 1), () {
+          if (inventoryId != 0) {
+            Future.delayed(Duration(seconds: 1), () {
+              getAddInventoryDetail(id: inventoryId.value);
+              // getGoHistory(id: inventoryId.value);
+            });
+          }
+        });
       });
-      Future.delayed(Duration(seconds: 1), () {
-        getInventoryStatusList(isLoading: true, facilityId: facilityId);
-      });
-    });
-    if (id != null) {
-      Future.delayed(Duration(seconds: 1), () {
-        getAddInventoryDetail(id: id!);
-      });
-    }
-
-    Future.delayed(Duration(seconds: 1), () async {
-      await getuserAccessData();
-    });
-    Future.delayed(Duration(seconds: 1), () {
-      getFacilityList();
-    });
-    // Future.delayed(Duration(seconds: 1), () {
-    //   getInventoryList();
-    // });
-    Future.delayed(Duration(seconds: 1), () {
-      getFrequencyList();
-    });
-    Future.delayed(Duration(seconds: 1), () {
-      getWarrantyTypeList();
-    });
-    Future.delayed(Duration(seconds: 1), () {
-      getWarrantyUsageTermList();
-    });
-    Future.delayed(Duration(seconds: 1), () {
-      getUnitCurrencyList();
-    });
-    Future.delayed(Duration(seconds: 1), () {
-      getmanufacturerList();
-    });
-    Future.delayed(Duration(seconds: 1), () {
-      getSupplierList();
-    });
-
-    // await getTypePermitList();
-    await getInventoryCategoryList();
-    await getInventoryTypeList(isLoading: true, facilityId: facilityId);
-    await getInventoryCategoryList();
+    } catch (e) {}
     super.onInit();
+  }
+
+  // void onInit() async {
+  //   inventoryId = Get.arguments;
+  //   print('Inventory Id:$inventoryId');
+
+  //   facilityIdStreamSubscription = homeController.facilityId$.listen((event) {
+  //     facilityId = event;
+
+  //     Future.delayed(Duration(seconds: 1), () {
+  //       getBlocksList(facilityId);
+  //     });
+  //     Future.delayed(Duration(seconds: 1), () {
+  //       getInventoryStatusList(isLoading: true, facilityId: facilityId);
+  //     });
+  //   });
+
+  //   Future.delayed(Duration(seconds: 1), () async {
+  //     await getuserAccessData();
+  //   });
+  //   Future.delayed(Duration(seconds: 1), () {
+  //     getFacilityList();
+  //   });
+  //   // Future.delayed(Duration(seconds: 1), () {
+  //   //   getInventoryList();
+  //   // });
+  //   Future.delayed(Duration(seconds: 1), () {
+  //     getFrequencyList();
+  //   });
+  //   Future.delayed(Duration(seconds: 1), () {
+  //     getWarrantyTypeList();
+  //   });
+  //   Future.delayed(Duration(seconds: 1), () {
+  //     getWarrantyUsageTermList();
+  //   });
+  //   Future.delayed(Duration(seconds: 1), () {
+  //     getUnitCurrencyList();
+  //   });
+  //   Future.delayed(Duration(seconds: 1), () {
+  //     getmanufacturerList();
+  //   });
+  //   Future.delayed(Duration(seconds: 1), () {
+  //     getSupplierList();
+  //   });
+
+  //   // await getTypePermitList();
+  //   await getInventoryCategoryList();
+  //   await getInventoryTypeList(isLoading: true, facilityId: facilityId);
+  //   await getInventoryCategoryList();
+  //   super.onInit();
+  // }
+
+  Future<void> setUserId() async {
+    try {
+      final _inventoryId = await addInventoryPresenter.getValue();
+      // final _goType = await viewaddInventoryPresenter.getGoTypeValue();
+
+      if (_inventoryId == null ||
+          _inventoryId == '' ||
+          _inventoryId == "null") {
+        var dataFromPreviousScreen = Get.arguments;
+
+        inventoryId.value = dataFromPreviousScreen['inventoryId'];
+
+        // viewaddInventoryPresenter.saveValue(goId: inventoryId.value.toString());
+      } else {
+        inventoryId.value = int.tryParse(_inventoryId) ?? 0;
+      }
+    } catch (e) {
+      print(e.toString() + 'inventoryId');
+      //  Utility.showDialog(e.toString() + 'userId');
+    }
   }
 
   //
@@ -363,7 +437,7 @@ class AddInventoryController extends GetxController {
 
     AddInventoryRequestModel addInventoryRequestModel =
         AddInventoryRequestModel(
-            id: id,
+            id: inventoryId.value,
             name: _assetsNameCtrlr,
             description: _discriptionCtrlr,
             assetdescription: _assesDiscriptionCtrlr,

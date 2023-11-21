@@ -49,6 +49,8 @@ class ViewAddInventoryUsecase {
     );
   }
 
+  void saveValue({String? inventoryId}) async =>
+      _repository.saveValue(LocalKeys.inventoryId, inventoryId);
 // getmanufacturerList
   Future<List<ManufacturerModel>> getmanufacturerList({
     required bool isLoading,
@@ -59,6 +61,9 @@ class ViewAddInventoryUsecase {
       BusinessType: BusinessType,
     );
   }
+
+  Future<String?> getValue() async =>
+      await _repository.getStringValue(LocalKeys.inventoryId);
 
   //getSupplierNameModelList
   Future<List<SupplierNameModel>> getSupplierList({
@@ -102,13 +107,8 @@ class ViewAddInventoryUsecase {
   }
 
   Future<List<TypePermitModel?>?> getTypePermitList(
-    bool? isLoading,
-    int? facility_id
-    ) async =>
-      await _repository.getTypePermitList(
-        isLoading,
-        facility_id
-        );
+          bool? isLoading, int? facility_id) async =>
+      await _repository.getTypePermitList(isLoading, facility_id);
 
   Future<List<SafetyMeasureListModel>> getSafetyMeasureList(
       {required bool isLoading, required int? permit_type_id}) async {
