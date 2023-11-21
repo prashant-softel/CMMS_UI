@@ -4418,7 +4418,7 @@ class ConnectHelper {
       int? categoryId}) async {
     var categoryIdsParam = (categoryId != 0) ? '&categoryIds=$categoryId' : '';
     ResponseModel responseModel = await apiWrapper.makeRequest(
-      'Inventory/GetInventoryList?facilityId=$facilityId' + categoryIdsParam,
+      'Inventory/GetInventoryList?facilityId=$facilityId',
       Request.get,
       null,
       isLoading,

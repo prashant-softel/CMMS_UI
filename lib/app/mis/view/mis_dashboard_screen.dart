@@ -123,22 +123,22 @@ class MisDashboardScreen extends GetView<MisDashboardController> {
                             controller.goToCreateObservation();
                           },
                         ),
-                        createContentTile(
-                          title: 'CheckList Inspection',
-                          onTap: () {
-                            controller.goToCheckListOfObservation();
-                          },
-                        ),
-                        createContentTile(
-                            title: 'Statutory',
-                            onTap: () {
-                              controller.goToStatutoryScreen();
-                            }),
-                        createContentTile(
-                            title: 'Waste Data',
-                            onTap: () {
-                              controller.goToWasteDataScreen();
-                            })
+                        // createContentTile(
+                        //   title: 'CheckList Inspection',
+                        //   onTap: () {
+                        //     controller.goToCheckListOfObservation();
+                        //   },
+                        // ),
+                        // createContentTile(
+                        //     title: 'Statutory',
+                        //     onTap: () {
+                        //       controller.goToStatutoryScreen();
+                        //     }),
+                        // createContentTile(
+                        //     title: 'Waste Data',
+                        //     onTap: () {
+                        //       controller.goToWasteDataScreen();
+                        //     })
                       ],
                     ),
                     if (Responsive.isDesktop(context))
@@ -221,6 +221,61 @@ class MisDashboardScreen extends GetView<MisDashboardController> {
                               // );
                               controller.checkPoint();
                             }),
+                      ],
+                    ),
+                    Container(
+                      margin: EdgeInsets.only(left: 20),
+                      child: Row(
+                        children: [
+                          Text(
+                            "Other",
+                            style: TextStyle(
+                              color: Color.fromARGB(255, 159, 156, 156),
+                              fontSize: 16,
+                              fontWeight: FontWeight.w400,
+                            ),
+                          ),
+                          SizedBox(
+                              width:
+                                  10), // Add some space between the text and the line
+                          Expanded(
+                            child: Divider(
+                              color: Colors
+                                  .grey, // Customize the color of the line if needed
+                              height:
+                                  1, // Adjust the height of the line if needed
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                    GridView.count(
+                      shrinkWrap: true,
+                      primary: false,
+                      padding: Dimens.edgeInsets15,
+                      crossAxisSpacing: 70,
+                      mainAxisSpacing: 6,
+                      crossAxisCount: Responsive.isMobile(context) ? 2 : 5,
+                      childAspectRatio: Responsive.isMobile(context)
+                          ? (itemWidth / itemHeight)
+                          : (itemWidth / itemHeightWeb),
+                      children: <Widget>[
+                        // createContentTile(
+                        //   title: 'CheckList Inspection',
+                        //   onTap: () {
+                        //     controller.goToCheckListOfObservation();
+                        //   },
+                        // ),
+                        createContentTile(
+                            title: 'Statutory',
+                            onTap: () {
+                              controller.goToStatutoryScreen();
+                            }),
+                        createContentTile(
+                            title: 'Waste Data',
+                            onTap: () {
+                              controller.goToWasteDataScreen();
+                            })
                       ],
                     ),
                   ]),
