@@ -189,7 +189,7 @@ class CalibrationListContentWeb extends GetView<CalibrationListController> {
                                 ].map((column) {
                                   return TableViewColumn(
                                     label: column,
-                                    minWidth: Get.width * 0.16,
+                                    minWidth: Get.width * 0.12,
                                   );
                                 }).toList(),
                                 rows: [
@@ -235,12 +235,12 @@ class CalibrationListContentWeb extends GetView<CalibrationListController> {
                                 ].map((column) {
                                   return TableViewColumn(
                                     label: column,
-                                    minWidth: Get.width * 0.15,
+                                    minWidth: Get.width * 0.12,
                                   );
                                 }).toList(),
                                 rows: controller.calibrationList!
                                     .map((calibrationListListDetails) =>
-                                        TableViewRow(height: 100, cells: [
+                                        TableViewRow(height: 90, cells: [
                                           TableViewCell(
                                               child: Text(
                                             '${calibrationListListDetails?.category_name}',

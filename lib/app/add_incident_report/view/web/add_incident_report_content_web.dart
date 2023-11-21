@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:cmms/app/add_incident_report/add_incident_report_controller.dart';
 import 'package:cmms/app/app.dart';
 import 'package:cmms/app/controllers/file_upload_controller.dart';
@@ -12,6 +14,7 @@ import 'package:cmms/app/widgets/dropdown_web.dart';
 import 'package:cmms/app/widgets/file_upload_details_widget_web.dart';
 import 'package:cmms/app/widgets/file_upload_with_dropzone_widget.dart';
 import 'package:cmms/app/widgets/stock_dropdown.dart';
+import 'package:cmms/domain/models/employee_list_model.dart';
 import 'package:data_table_2/data_table_2.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -230,7 +233,7 @@ class AddIncidentReportContentWeb extends GetView<AddIncidentReportController> {
                                                                 buttonText:
                                                                     'Select Victim Name',
                                                                 title:
-                                                                    'Employees',
+                                                                    'Victim Name',
                                                                 // initialValue: [],
                                                                 initialValue: (controller
                                                                         .selectedVictimNameIdList
@@ -261,6 +264,7 @@ class AddIncidentReportContentWeb extends GetView<AddIncidentReportController> {
                                                                 },
                                                               ),
                                                             ),
+
                                                             // SizedBox(
                                                             //   width: MediaQuery.of(
                                                             //               context)
@@ -356,6 +360,37 @@ class AddIncidentReportContentWeb extends GetView<AddIncidentReportController> {
                                                             // ),
                                                           ],
                                                         ),
+
+                                                        controller.filteredVictimNameList
+                                                                    .firstWhere(
+                                                                      (e) =>
+                                                                          "${e!.id}" ==
+                                                                          "${2}",
+                                                                      orElse: () =>
+                                                                          EmployeeListModel(
+                                                                              name: ''),
+                                                                    )!
+                                                                    .id ==
+                                                                2
+                                                            ? Row(
+                                                                children: [
+                                                                  SizedBox(
+                                                                    width: 178,
+                                                                    child: CustomRichText(
+                                                                        title:
+                                                                            'Other Victim Name: '),
+                                                                  ),
+                                                                  SizedBox(
+                                                                      width: MediaQuery.of(context)
+                                                                              .size
+                                                                              .width /
+                                                                          5,
+                                                                      child: _buildOtherVictimNameTextField_web(
+                                                                          context))
+                                                                ],
+                                                              )
+                                                            : Dimens.box0,
+
                                                         Dimens.boxHeight5,
                                                         Row(
                                                           children: [
@@ -394,6 +429,7 @@ class AddIncidentReportContentWeb extends GetView<AddIncidentReportController> {
                                                             ),
                                                           ],
                                                         ),
+
                                                         Dimens.boxHeight5,
                                                         Row(
                                                           children: [
@@ -758,47 +794,38 @@ class AddIncidentReportContentWeb extends GetView<AddIncidentReportController> {
                                                               ),
                                                             ],
                                                           ),
-                                                          Dimens.boxHeight5,
+                                                          Dimens.boxHeight15,
+                                                          Padding(
+                                                            padding:
+                                                                const EdgeInsets
+                                                                        .only(
+                                                                    right: 297),
+                                                            child: CustomRichText(
+                                                                title:
+                                                                    'Incident Severity: '),
+                                                          ),
                                                           Row(
                                                             children: [
-                                                              CustomRichText(
-                                                                  title:
-                                                                      'Incident Severity: '),
-                                                              Dimens.boxWidth10,
-                                                              SizedBox(
-                                                                child: Column(
-                                                                  children: [
-                                                                    buildRadioButton(
-                                                                        'Critical',
-                                                                        Colors
-                                                                            .red,
-                                                                        Colors
-                                                                            .white,
-                                                                        context),
-                                                                    buildRadioButton(
-                                                                        'High',
-                                                                        Colors
-                                                                            .orange,
-                                                                        Colors
-                                                                            .white,
-                                                                        context),
-                                                                    buildRadioButton(
-                                                                        'Medium',
-                                                                        Colors
-                                                                            .yellow,
-                                                                        Colors
-                                                                            .white,
-                                                                        context),
-                                                                    buildRadioButton(
-                                                                        'Low',
-                                                                        Colors
-                                                                            .green,
-                                                                        Colors
-                                                                            .white,
-                                                                        context),
-                                                                  ],
-                                                                ),
-                                                              ),
+                                                              buildRadioButton(
+                                                                  'Critical',
+                                                                  Colors.red,
+                                                                  Colors.white,
+                                                                  context),
+                                                              buildRadioButton(
+                                                                  'High',
+                                                                  Colors.orange,
+                                                                  Colors.white,
+                                                                  context),
+                                                              buildRadioButton(
+                                                                  'Medium',
+                                                                  Colors.yellow,
+                                                                  Colors.white,
+                                                                  context),
+                                                              buildRadioButton(
+                                                                  'Low',
+                                                                  Colors.green,
+                                                                  Colors.white,
+                                                                  context),
                                                             ],
                                                           ),
 
@@ -3711,8 +3738,9 @@ class AddIncidentReportContentWeb extends GetView<AddIncidentReportController> {
     return Obx(() {
       return Container(
         height: 35,
-        width: MediaQuery.of(context).size.width / 5,
+        width: MediaQuery.of(context).size.width / 10,
         child: RadioListTile(
+          // contentPadding: EdgeInsets.all(5),
           dense: true,
           title: Container(
               color: color,
@@ -3720,7 +3748,7 @@ class AddIncidentReportContentWeb extends GetView<AddIncidentReportController> {
                 padding: const EdgeInsets.only(left: 10),
                 child: Text(
                   severity,
-                  style: TextStyle(color: color2),
+                  style: TextStyle(color: color2, fontSize: 11),
                 ),
               )),
           value: severity,
@@ -4674,6 +4702,100 @@ class AddIncidentReportContentWeb extends GetView<AddIncidentReportController> {
                 controller.isAddressInvalid.value = false;
               } else {
                 controller.isAddressInvalid.value = true;
+              }
+            },
+          ),
+        ),
+      ),
+    ]);
+  }
+
+  Widget _buildOtherVictimNameTextField_web(BuildContext context) {
+    return Column(//
+        children: [
+      // Align(
+      //   alignment: Alignment.centerLeft,
+      //   child: Padding(
+      //     padding: const EdgeInsets.only(left: 10),
+      //     child: RichText(
+      //       text:
+      //           TextSpan(text: 'Title: ', style: Styles.blackBold16, children: [
+      //         TextSpan(
+      //           text: '*',
+      //           style: TextStyle(
+      //             color: ColorValues.orangeColor,
+      //             fontWeight: FontWeight.bold,
+      //           ),
+      //         ),
+      //       ]),
+      //     ),
+      //   ),
+      // ),
+      Dimens.boxHeight5,
+      Container(
+        height: MediaQuery.of(context).size.height * 0.050,
+        width: Responsive.isDesktop(context)
+            ? MediaQuery.of(context).size.width / 1.44
+            : MediaQuery.of(context).size.width / 1.1,
+        decoration: BoxDecoration(
+          boxShadow: [
+            BoxShadow(
+              color: Colors.black26,
+              offset: const Offset(
+                5.0,
+                5.0,
+              ),
+              blurRadius: 5.0,
+              spreadRadius: 1.0,
+            ),
+            BoxShadow(
+              color: ColorValues.whiteColor,
+              offset: const Offset(0.0, 0.0),
+              blurRadius: 0.0,
+              spreadRadius: 0.0,
+            ),
+          ],
+          color: ColorValues.whiteColor,
+          borderRadius: BorderRadius.circular(5),
+        ),
+        child: SizedBox(
+          width: MediaQuery.of(context).size.width / 1.4,
+          child: TextField(
+            controller: controller.otherVictimNameTextCtrlr,
+            keyboardType: TextInputType.multiline,
+            autofocus: false,
+            decoration: InputDecoration(
+              fillColor: ColorValues.whiteColor,
+              filled: true,
+              contentPadding: Dimens.edgeInsets05_10,
+              border: InputBorder.none,
+              enabledBorder: InputBorder.none,
+              focusedBorder: InputBorder.none,
+              focusedErrorBorder: controller.isOtherVictimNameInvalid.value
+                  ? OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(5),
+                      borderSide: BorderSide(
+                        color: ColorValues.redColorDark,
+                      ),
+                    )
+                  : InputBorder.none,
+              errorBorder: controller.isOtherVictimNameInvalid.value
+                  ? OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(5),
+                      borderSide: BorderSide(
+                        color: ColorValues.redColorDark,
+                      ),
+                    )
+                  : null,
+              errorText: controller.isOtherVictimNameInvalid.value
+                  ? "Required field"
+                  : null,
+            ),
+            onChanged: (value) {
+              if (value.trim().length > 3) {
+                controller.isOtherVictimNameInvalid.value = false;
+              } else {
+                controller.isOtherVictimNameInvalid.value = true;
               }
             },
           ),
