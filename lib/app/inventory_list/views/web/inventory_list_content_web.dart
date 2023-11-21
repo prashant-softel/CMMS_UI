@@ -51,12 +51,12 @@ class InventoryListContentWeb extends GetView<InventoryListController> {
                 ),
                 Text(" / ASSETS LIST", style: Styles.greyMediumLight12),
                 Spacer(),
-                ActionButton(
-                  icon: Icons.download,
-                  label: 'exportAsset'.tr,
-                  onPressed: () {},
-                  color: ColorValues.appLightBlueColor,
-                ),
+                // ActionButton(
+                //   icon: Icons.download,
+                //   label: 'exportAsset'.tr,
+                //   onPressed: () {},
+                //   color: ColorValues.appLightBlueColor,
+                // ),
                 Dimens.boxWidth10,
                 ActionButton(
                   icon: Icons.upload,
@@ -78,38 +78,38 @@ class InventoryListContentWeb extends GetView<InventoryListController> {
                   color: ColorValues.appGreenColor,
                 ),
                 Dimens.boxWidth10,
-                ActionButton(
-                  icon: Icons.close,
-                  label: 'retireAsset'.tr,
-                  onPressed: () async {},
-                  color: ColorValues.appRedColor,
-                ),
+                // ActionButton(
+                //   icon: Icons.close,
+                //   label: 'retireAsset'.tr,
+                //   onPressed: () async {},
+                //   color: ColorValues.appRedColor,
+                // ),
               ],
             ),
           ),
 
-          Align(
-            alignment: Alignment.centerLeft,
-            child: Container(
-              width: 400,
-              child: TabBar(
-                tabs: [
-                  CustomTabBar(
-                    label: 'listView'.tr,
-                    icon: Icons.menu,
-                  ),
-                  // CustomTabBar(
-                  //   label: 'treeView'.tr,
-                  //   icon: Icons.account_tree_sharp,
-                  // ),
-                  // CustomTabBar(
-                  //   label: 'mapView'.tr,
-                  //   icon: Icons.location_on,
-                  // ),
-                ],
-              ),
-            ),
-          ),
+          // Align(
+          //   alignment: Alignment.centerLeft,
+          //   child: Container(
+          //     width: 400,
+          //     child: TabBar(
+          //       tabs: [
+          //         CustomTabBar(
+          //           label: 'listView'.tr,
+          //           icon: Icons.menu,
+          //         ),
+          //         // CustomTabBar(
+          //         //   label: 'treeView'.tr,
+          //         //   icon: Icons.account_tree_sharp,
+          //         // ),
+          //         // CustomTabBar(
+          //         //   label: 'mapView'.tr,
+          //         //   icon: Icons.location_on,
+          //         // ),
+          //       ],
+          //     ),
+          //   ),
+          // ),
 
           ///
           Row(
@@ -446,7 +446,7 @@ class InventoryListContentWeb extends GetView<InventoryListController> {
                                                       : Padding(
                                                           padding:
                                                               const EdgeInsets
-                                                                      .only(
+                                                                  .only(
                                                                   left: 25),
                                                           child: Text(
                                                               value.toString()),
