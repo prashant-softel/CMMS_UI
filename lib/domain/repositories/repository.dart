@@ -1111,6 +1111,41 @@ class Repository {
     }
   }
 
+  Future<List<InventoryModel>> getInventoryAssetsList({
+    required int? facility_id,
+    required bool isLoading,
+  }) async {
+    try {
+      final auth = await getSecuredValue(LocalKeys.authToken);
+
+      log(auth);
+      final res = await _dataRepository.getInventoryAssetsList(
+        facility_id: facility_id,
+        isLoading: isLoading,
+        auth: auth,
+      );
+      print('getinventoryList: ${res.data}');
+
+      if (!res.hasError) {
+        final jsoninventoryListModels = jsonDecode(res.data);
+        // print(res.data); `6
+        final List<InventoryModel> _inventoryModelList = jsoninventoryListModels
+            .map<InventoryModel>(
+                (m) => InventoryModel.fromJson(Map<String, dynamic>.from(m)))
+            .toList();
+
+        return _inventoryModelList.reversed.toList();
+      } //
+      else {
+        Utility.showDialog(res.errorCode.toString() + 'getInventoryList');
+        return [];
+      }
+    } catch (error) {
+      print(error.toString());
+      return [];
+    }
+  }
+
   Future<List<GoodsOrdersListModel>> getGoodsOrdersList({
     required int? facility_id,
     String? start_date,
@@ -2745,7 +2780,10 @@ class Repository {
     }
   }
 
+// inventory list
+
   ///Incident Report List
+
   Future<List<IncidentReportListModel>> getIncidentReportList({
     required int? facility_id,
     String? start_date,
