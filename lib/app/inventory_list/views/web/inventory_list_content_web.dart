@@ -59,20 +59,18 @@ class _InventoryWebState extends State<InventoryListContentWeb> {
                             Icons.home,
                             color: ColorValues.greyLightColor,
                           ),
-                          Text(
-                            "DASHBOARD",
-                            style: Styles.greyLight14,
-                          ),
+                          Text(" /DASHBOARD ", style: Styles.greyMediumLight12),
                           GestureDetector(
                             onTap: () {
-                              Get.offAllNamed(
-                                  Routes.stockManagementDashboardScreen);
+                              Get.back();
                             },
-                            child: Text(" / STOCK MANAGEMENT",
+                            child: Text(" / ASSETS",
                                 style: Styles.greyMediumLight12),
                           ),
-                          Text(" / GOODS ORDER LIST",
-                              style: Styles.greyMediumLight12)
+                          Text(
+                            "/ASSETS LIST",
+                            style: Styles.greyLight14,
+                          ),
                         ],
                       ),
                     ),
@@ -98,54 +96,43 @@ class _InventoryWebState extends State<InventoryListContentWeb> {
                                         MainAxisAlignment.spaceBetween,
                                     children: [
                                       Text(
-                                        "Goods Order List",
+                                        "ASSETS LIST",
                                         style: Styles.blackBold16,
                                       ),
                                       Spacer(),
-                                      Row(
-                                        children: [
-                                          CustomRichText(title: 'Date Range'),
-                                          Dimens.boxWidth10,
-                                          CustomTextFieldForStock(
-                                            width: MediaQuery.of(context)
-                                                    .size
-                                                    .width /
-                                                5,
-                                            numberTextField: true,
-                                            onTap: () {
-                                              controller
-                                                      .openFromDateToStartDatePicker =
-                                                  !controller
-                                                      .openFromDateToStartDatePicker;
-                                              controller.update(
-                                                  ['stock_Mangement_Date']);
-                                            },
-                                            hintText:
-                                                '${controller.formattedFromdate} - ${controller.formattedTodate}',
-                                          ),
-                                        ],
-                                      ),
+                                      // Row(
+                                      //   children: [
+                                      //     CustomRichText(title: 'Date Range'),
+                                      //     Dimens.boxWidth10,
+                                      //     CustomTextFieldForStock(
+                                      //       width: MediaQuery.of(context)
+                                      //               .size
+                                      //               .width /
+                                      //           5,
+                                      //       numberTextField: true,
+                                      //       onTap: () {
+                                      //         controller
+                                      //                 .openFromDateToStartDatePicker =
+                                      //             !controller
+                                      //                 .openFromDateToStartDatePicker;
+                                      //         controller.update(
+                                      //             ['stock_Mangement_Date']);
+                                      //       },
+                                      //       hintText:
+                                      //           '${controller.formattedFromdate} - ${controller.formattedTodate}',
+                                      //     ),
+                                      //   ],
+                                      // ),
                                       Dimens.boxWidth10,
-                                      varUserAccessModel.value.access_list!
-                                                  .where((e) =>
-                                                      e.feature_id ==
-                                                          UserAccessConstants
-                                                              .kGoodsFeatureId &&
-                                                      e.add ==
-                                                          UserAccessConstants
-                                                              .kHaveApproveAccess)
-                                                  .length >
-                                              0
-                                          ? ActionButton(
-                                              icon: Icons.add,
-                                              label: "Add New",
-                                              onPressed: () {
-                                                Get.offNamed(Routes
-                                                    .updateGoodsOrdersDetailsScreen);
-                                              },
-                                              color: ColorValues.addNewColor,
-                                            )
-                                          : Dimens.box0,
+                                      ActionButton(
+                                        icon: Icons.add,
+                                        label: "Add New",
+                                        onPressed: () {
+                                          Get.offNamed(Routes
+                                              .updateGoodsOrdersDetailsScreen);
+                                        },
+                                        color: ColorValues.addNewColor,
+                                      )
                                     ],
                                   ),
                                 ),
@@ -447,7 +434,7 @@ class InventoryListDataSource extends DataTableSource {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Text(
-                        ' GO ${InventoryListDetails?.id}',
+                        '${InventoryListDetails?.id}',
                       ),
                       Dimens.boxHeight10,
                       Align(
@@ -506,10 +493,20 @@ class InventoryListDataSource extends DataTableSource {
                           icon: Icons.edit,
                           message: 'Edit',
                           onPress: () {
-                            // controller.showAddInventoryDetails(
-                            //     id: int.tryParse('${record[2]}'));
-                            // print('AddInV:${record[2]}');
+                            controller.clearStoreData();
+                            int inventoryId = InventoryListDetails?.id ?? 0;
+                            if (inventoryId != 0) {
+                              Get.toNamed(Routes.addInventoryScreen,
+                                  arguments: {
+                                    'inventoryId': inventoryId,
+                                  });
+                            }
                           },
+                          // onPress: () {
+                          //   // controller.showAddInventoryDetails(
+                          //   //     id: int.tryParse('${record[2]}'));
+                          //   // print('AddInV:${record[2]}');
+                          // },
                         ),
                         //),
                       ])

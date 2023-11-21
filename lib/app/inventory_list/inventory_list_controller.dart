@@ -61,7 +61,7 @@ class InventoryListController extends GetxController {
   });
   final Map<String, double> columnwidth = {
     "Id": 153,
-    "Assets Name": 220,
+    "Assets Name": 320,
     "Serial No": 120,
     "Parrent Asset": 200,
     "Catergory": 223,
