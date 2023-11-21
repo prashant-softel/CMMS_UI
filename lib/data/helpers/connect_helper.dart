@@ -601,6 +601,23 @@ class ConnectHelper {
     return responseModel;
   }
 
+  Future<ResponseModel> getInventoryAssetsList({
+    required bool isLoading,
+    required String auth,
+    int? facility_id,
+  }) async {
+    ResponseModel responseModel = await apiWrapper.makeRequest(
+      'Inventory/GetInventoryList?facilityId=$facility_id',
+      Request.getMultiparts,
+      null,
+      isLoading,
+      {
+        'Authorization': 'Bearer $auth',
+      },
+    );
+    return responseModel;
+  }
+
   Future<ResponseModel> getEquipmentModelList({
     required bool isLoading,
     required String auth,
