@@ -222,6 +222,8 @@ class AddIncidentReportController extends GetxController {
   // Rx<bool> isJobDescriptionInvalid = false.obs;
   Rx<bool> isTitleTextInvalid = false.obs;
 
+  final Rx<DateTime?> selectedDate = DateTime.now().obs;
+
   Rx<bool> isInsuranceAvailableInvalid = false.obs;
   var insuranceAvailableTextCtrlr = TextEditingController();
   var testDataTextCtrlr = TextEditingController();
@@ -233,17 +235,6 @@ class AddIncidentReportController extends GetxController {
 
   ///Propsed Row item
   RxList<List<Map<String, String>>> rowItem = <List<Map<String, String>>>[].obs;
-  void addRowItem() {
-    rowItem.add([
-      {'key': "Action as per plan ", "value": ''},
-      {
-        "key": "Drop_down",
-        "value": 'Please Select',
-      },
-      {'key': "Target Date ", "value": ''},
-      {'key': "Remark", "value": ''},
-    ]);
-  }
 
 //Address textfield
   Rx<bool> isAddressInvalid = false.obs;
@@ -734,6 +725,19 @@ class AddIncidentReportController extends GetxController {
       rowsPerPage: 10,
     );
     update(['inventory_list']);
+    addRowItem();
+  }
+
+  void addRowItem() {
+    rowItem.add([
+      {'key': "Action as per plan ", "value": ''},
+      {
+        "key": "Drop_down",
+        "value": 'Please Select',
+      },
+      {'key': "Target Date ", "value": ''},
+      {'key': "Remark", "value": ''},
+    ]);
   }
 
   // Future<void> getuserAccessData() async {

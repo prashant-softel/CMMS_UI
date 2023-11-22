@@ -271,26 +271,58 @@ class BreakdownMaintenanceScreen
                           ? (itemWidth / itemHeight)
                           : (itemWidth / itemHeightWeb),
                       children: <Widget>[
-                        createContentTile(
-                            title: "Permit Type",
-                            onTap: () {
-                              controller.goToPermitTypeScreen();
-                            }),
-                        createContentTile(
-                            title: "Permit Type Checklist",
-                            onTap: () {
-                              controller.gotToSafetyQuestionsList();
-                            }),
-                        createContentTile(
-                            title: "TBT Type",
-                            onTap: () {
-                              controller.goToJobTypeList();
-                            }),
-                        createContentTile(
-                            title: "TBT SOP List",
-                            onTap: () {
-                              controller.goToJobSOPList();
-                            }),
+                        varUserAccessModel.value.access_list!
+                                    .where((e) =>
+                                        e.feature_id == 5 &&
+                                        e.view == 1 &&
+                                        e.add == 1)
+                                    .length >
+                                0
+                            ? createContentTile(
+                                title: "Permit Type",
+                                onTap: () {
+                                  controller.goToPermitTypeScreen();
+                                })
+                            : Dimens.box0,
+                        varUserAccessModel.value.access_list!
+                                    .where((e) =>
+                                        e.feature_id == 5 &&
+                                        e.view == 1 &&
+                                        e.add == 1)
+                                    .length >
+                                0
+                            ? createContentTile(
+                                title: "Permit Type Checklist",
+                                onTap: () {
+                                  controller.gotToSafetyQuestionsList();
+                                })
+                            : Dimens.box0,
+                        varUserAccessModel.value.access_list!
+                                    .where((e) =>
+                                        e.feature_id == 5 &&
+                                        e.view == 1 &&
+                                        e.add == 1)
+                                    .length >
+                                0
+                            ? createContentTile(
+                                title: "TBT Type",
+                                onTap: () {
+                                  controller.goToJobTypeList();
+                                })
+                            : Dimens.box0,
+                        varUserAccessModel.value.access_list!
+                                    .where((e) =>
+                                        e.feature_id == 5 &&
+                                        e.view == 1 &&
+                                        e.add == 1)
+                                    .length >
+                                0
+                            ? createContentTile(
+                                title: "TBT SOP List",
+                                onTap: () {
+                                  controller.goToJobSOPList();
+                                })
+                            : Dimens.box0
                       ],
                     ),
                   ]),
