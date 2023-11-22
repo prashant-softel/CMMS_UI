@@ -208,6 +208,7 @@ class AddInventoryController extends GetxController {
         getSupplierList();
         getInventoryCategoryList();
         getInventoryTypeList(isLoading: true, facilityId: facilityId);
+        getInventoryStatusList(isLoading: true);
         if (inventoryId != 0) {
           getAddInventoryDetail(id: inventoryId.value);
         }
@@ -558,10 +559,10 @@ class AddInventoryController extends GetxController {
 
   Future<void> getInventoryStatusList({
     required bool isLoading,
-    required int facilityId,
+    // required int facilityId,
   }) async {
-    final _statusList = await addInventoryPresenter.getInventoryStatusList(
-        facilityId: 45, isLoading: true);
+    final _statusList =
+        await addInventoryPresenter.getInventoryStatusList(isLoading: true);
 
     if (_statusList != null) {
       for (var status in _statusList) {
@@ -585,8 +586,8 @@ class AddInventoryController extends GetxController {
         typeNameList.add(type);
       }
 
-      selectedStatusName.value = statusNameList[0]?.name ?? '';
-      selectedStatusNameId = statusNameList[0]?.id ?? 0;
+      // selectedStatusName.value = statusNameList[0]?.name ?? '';
+      // selectedStatusNameId = statusNameList[0]?.id ?? 0;
     }
   }
 
@@ -759,6 +760,7 @@ class AddInventoryController extends GetxController {
           selectedStatusNameId = statusNameList[statusIndex]?.id ?? 0;
         }
         break;
+
       case RxList<InventoryTypeListModel>:
         {
           int typeNameIndex = typeNameList.indexWhere((x) => x?.name == value);

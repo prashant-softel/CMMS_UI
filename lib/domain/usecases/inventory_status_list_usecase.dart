@@ -24,7 +24,7 @@ class InventoryStatusListUsecase {
     bool? isLoading,
   }) async =>
       await repository.getInventoryStatusList(
-        facilityId,
+        // facilityId,
         isLoading,
       );
   Future<List<FrequencyModel?>?> getFrequencyList({

@@ -1839,7 +1839,7 @@ class ConnectHelper {
   Future<ResponseModel> getInventoryStatusList({
     required String auth,
     bool? isLoading,
-    int? facilityId,
+    // int? facilityId,
     int? type,
   }) async {
     var responseModel = await apiWrapper.makeRequest(
