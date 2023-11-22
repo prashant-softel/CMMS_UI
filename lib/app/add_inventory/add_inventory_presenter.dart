@@ -98,11 +98,11 @@ class AddInventoryPresenter {
       );
   Future<List<InventoryStatusListModel?>?> getInventoryStatusList({
     required bool isLoading,
-    required int facilityId,
+    // required int facilityId,
   }) async {
     return addInventoryUsecase.getInventoryStatusList(
       isLoading: isLoading,
-      facilityId: facilityId,
+      // facilityId: facilityId,
     );
   }
 

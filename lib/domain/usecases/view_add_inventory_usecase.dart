@@ -90,7 +90,7 @@ class ViewAddInventoryUsecase {
     required bool isLoading,
     required int facilityId,
   }) async {
-    return _repository.getInventoryStatusList(facilityId, isLoading);
+    return _repository.getInventoryStatusList(isLoading);
   }
 
   Future<List<FrequencyModel?>?> getFrequencyList({
