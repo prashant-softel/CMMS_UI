@@ -1,9 +1,5 @@
-import 'package:cmms/app/constant/constant.dart';
-import 'package:cmms/app/home/home_screen.dart';
 import 'package:cmms/app/navigators/app_pages.dart';
 import 'package:cmms/app/theme/dimens.dart';
-import 'package:cmms/app/utils/user_access_constants.dart';
-import 'package:cmms/app/widgets/custom_richtext.dart';
 import 'package:cmms/domain/models/inventory_model.dart';
 import 'package:data_table_2/data_table_2.dart';
 import 'package:flutter/material.dart';
@@ -11,9 +7,6 @@ import 'package:get/get.dart';
 
 import 'package:cmms/app/app.dart';
 import 'package:cmms/app/inventory_list/inventory_list_controller.dart';
-import 'package:cmms/app/navigators/app_pages.dart';
-import 'package:flutter/material.dart';
-import 'package:get/get.dart';
 
 class InventoryListContentWeb extends StatefulWidget {
   InventoryListContentWeb({
@@ -122,6 +115,16 @@ class _InventoryWebState extends State<InventoryListContentWeb> {
                                       //     ),
                                       //   ],
                                       // ),
+
+                                      ActionButton(
+                                        icon: Icons.upload,
+                                        label: 'importAsset'.tr,
+                                        onPressed: () {
+                                          Get.toNamed(Routes.importInventory,
+                                              arguments: 1);
+                                        },
+                                        color: ColorValues.appDarkBlueColor,
+                                      ),
                                       Dimens.boxWidth10,
                                       ActionButton(
                                         icon: Icons.add,
