@@ -195,107 +195,41 @@ class AddInventoryController extends GetxController {
       await setUserId();
       facilityIdStreamSubscription = homeController.facilityId$.listen((event) {
         facilityId = event;
-        Future.delayed(Duration(seconds: 1), () {
-          getBlocksList(facilityId);
-        });
-        Future.delayed(Duration(seconds: 1), () {
-          getInventoryStatusList(isLoading: true, facilityId: facilityId);
-        });
-        Future.delayed(Duration(seconds: 1), () async {
-          await getuserAccessData();
-        });
-        Future.delayed(Duration(seconds: 1), () {
-          getFacilityList();
-        });
-        Future.delayed(Duration(seconds: 1), () {
-          getInventoryList();
-        });
-        Future.delayed(Duration(seconds: 1), () {
-          getFrequencyList();
-        });
-        Future.delayed(Duration(seconds: 1), () {
-          getWarrantyTypeList();
-        });
-        Future.delayed(Duration(seconds: 1), () {
-          getWarrantyUsageTermList();
-        });
-        Future.delayed(Duration(seconds: 1), () {
-          getUnitCurrencyList();
-        });
-        Future.delayed(Duration(seconds: 1), () {
-          getmanufacturerList();
-        });
-        Future.delayed(Duration(seconds: 1), () {
-          getSupplierList();
-        });
+
+        getBlocksList(facilityId);
+
+        getInventoryStatusList(isLoading: true, facilityId: facilityId);
+
+        getuserAccessData();
+
+        getFacilityList();
+
+        getInventoryList();
+
+        getFrequencyList();
+
+        getWarrantyTypeList();
+
+        getWarrantyUsageTermList();
+
+        getUnitCurrencyList();
+
+        getmanufacturerList();
+
+        getSupplierList();
 
         getInventoryCategoryList();
         getInventoryTypeList(isLoading: true, facilityId: facilityId);
-        getInventoryCategoryList();
 
         /////
-        Future.delayed(Duration(seconds: 1), () {
-          if (inventoryId != 0) {
-            Future.delayed(Duration(seconds: 1), () {
-              getAddInventoryDetail(id: inventoryId.value);
-              // getGoHistory(id: inventoryId.value);
-            });
-          }
-        });
+
+        if (inventoryId != 0) {
+          getAddInventoryDetail(id: inventoryId.value);
+        }
       });
     } catch (e) {}
     super.onInit();
   }
-
-  // void onInit() async {
-  //   inventoryId = Get.arguments;
-  //   print('Inventory Id:$inventoryId');
-
-  //   facilityIdStreamSubscription = homeController.facilityId$.listen((event) {
-  //     facilityId = event;
-
-  //     Future.delayed(Duration(seconds: 1), () {
-  //       getBlocksList(facilityId);
-  //     });
-  //     Future.delayed(Duration(seconds: 1), () {
-  //       getInventoryStatusList(isLoading: true, facilityId: facilityId);
-  //     });
-  //   });
-
-  //   Future.delayed(Duration(seconds: 1), () async {
-  //     await getuserAccessData();
-  //   });
-  //   Future.delayed(Duration(seconds: 1), () {
-  //     getFacilityList();
-  //   });
-  //   // Future.delayed(Duration(seconds: 1), () {
-  //   //   getInventoryList();
-  //   // });
-  //   Future.delayed(Duration(seconds: 1), () {
-  //     getFrequencyList();
-  //   });
-  //   Future.delayed(Duration(seconds: 1), () {
-  //     getWarrantyTypeList();
-  //   });
-  //   Future.delayed(Duration(seconds: 1), () {
-  //     getWarrantyUsageTermList();
-  //   });
-  //   Future.delayed(Duration(seconds: 1), () {
-  //     getUnitCurrencyList();
-  //   });
-  //   Future.delayed(Duration(seconds: 1), () {
-  //     getmanufacturerList();
-  //   });
-  //   Future.delayed(Duration(seconds: 1), () {
-  //     getSupplierList();
-  //   });
-
-  //   // await getTypePermitList();
-  //   await getInventoryCategoryList();
-  //   await getInventoryTypeList(isLoading: true, facilityId: facilityId);
-  //   await getInventoryCategoryList();
-  //   super.onInit();
-  // }
 
   Future<void> setUserId() async {
     try {
@@ -687,17 +621,6 @@ class AddInventoryController extends GetxController {
     }
   }
 
-  // Future<void> getTypePermitList() async {
-  //   final _permitTypeList =
-  //       await addInventoryPresenter.getTypePermitList(facility_id: facilityId);
-
-  //   if (_permitTypeList != null) {
-  //     for (var permitType in _permitTypeList) {
-  //       typePermitList.add(permitType);
-  //     }
-  //   }
-  // }
-
   Future<void> getBlocksList(int _facilityId) async {
     blocksList.value = <BlockModel>[];
     final _blockList =
@@ -839,13 +762,6 @@ class AddInventoryController extends GetxController {
         break;
       case RxList<InventoryModel>:
         {
-          // for (var workAreaName in selectedWorkAreaNameList) {
-          //   int workAreaIndex =
-          //       workAreaList.indexWhere((x) => x?.name == workAreaName);
-          //   selectedWorkAreaIdList.add(workAreaIndex);
-          // }
-          // int workAreaIndex = workAreaList.indexWhere((x) => x?.name == value);
-          // selectedWarrentyNameId = frequencyList[workAreaIndex]?.id ?? 0;
           int eqipmentNameListIndex =
               eqipmentNameList.indexWhere((x) => x?.name == value);
           selectedEquipmentnameId =
@@ -855,13 +771,6 @@ class AddInventoryController extends GetxController {
         break;
       case RxList<InventoryCategoryModel>:
         {
-          // for (var equipCat in selectedEquipmentCategoryList) {
-          //   int equipCatIndex =
-          //       equipmentCategoryList.indexWhere((x) => x?.name == value);
-          //   selectedEquipmentCategoryIdList.add(equipCatIndex);
-          //   // selectedInventoryCategoryId = equipmentCategoryList[equipCatIndex]?.id ?? 0;
-          //   print('First Category Id:$selectedEquipmentCategoryList');
-          // }
           int equipCatIndex =
               equipmentCategoryList.indexWhere((x) => x?.name == value);
           selectedEquipmentCategoryNameId =
@@ -870,22 +779,12 @@ class AddInventoryController extends GetxController {
         break;
       case RxList<InventoryStatusListModel>:
         {
-          // for (var statusName in statusNameList) {
-          //   int statusIndex =
-          //       statusNameList.indexWhere((x) => x?.name == statusName);
-          //   selectedWorkAreaIdList.add(statusIndex);
-          // }
           int statusIndex = statusNameList.indexWhere((x) => x?.name == value);
           selectedStatusNameId = statusNameList[statusIndex]?.id ?? 0;
         }
         break;
       case RxList<InventoryTypeListModel>:
         {
-          // for (var typeName in typeNameList) {
-          //   int typeNameIndex =
-          //       typeNameList.indexWhere((x) => x?.name == typeName);
-          //   selectedWorkAreaIdList.add(typeNameIndex);
-          // }
           int typeNameIndex = typeNameList.indexWhere((x) => x?.name == value);
           selectedTypeNameId = typeNameList[typeNameIndex]?.id ?? 0;
         }
