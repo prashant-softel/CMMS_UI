@@ -795,37 +795,50 @@ class AddIncidentReportContentWeb extends GetView<AddIncidentReportController> {
                                                             ],
                                                           ),
                                                           Dimens.boxHeight15,
-                                                          Padding(
-                                                            padding:
-                                                                const EdgeInsets
-                                                                        .only(
-                                                                    right: 297),
-                                                            child: CustomRichText(
-                                                                title:
-                                                                    'Incident Severity: '),
-                                                          ),
-                                                          Row(
+                                                          Column(
                                                             children: [
-                                                              buildRadioButton(
-                                                                  'Critical',
-                                                                  Colors.red,
-                                                                  Colors.white,
-                                                                  context),
-                                                              buildRadioButton(
-                                                                  'High',
-                                                                  Colors.orange,
-                                                                  Colors.white,
-                                                                  context),
-                                                              buildRadioButton(
-                                                                  'Medium',
-                                                                  Colors.yellow,
-                                                                  Colors.white,
-                                                                  context),
-                                                              buildRadioButton(
-                                                                  'Low',
-                                                                  Colors.green,
-                                                                  Colors.white,
-                                                                  context),
+                                                              Padding(
+                                                                padding:
+                                                                    const EdgeInsets
+                                                                            .only(
+                                                                        right:
+                                                                            163),
+                                                                child: CustomRichText(
+                                                                    title:
+                                                                        'Incident Severity: '),
+                                                              ),
+                                                              Row(
+                                                                children: [
+                                                                  buildRadioButton(
+                                                                      'Critical',
+                                                                      Colors
+                                                                          .red,
+                                                                      Colors
+                                                                          .white,
+                                                                      context),
+                                                                  buildRadioButton(
+                                                                      'High',
+                                                                      Colors
+                                                                          .orange,
+                                                                      Colors
+                                                                          .white,
+                                                                      context),
+                                                                  buildRadioButton(
+                                                                      'Medium',
+                                                                      Colors
+                                                                          .yellow,
+                                                                      Colors
+                                                                          .white,
+                                                                      context),
+                                                                  buildRadioButton(
+                                                                      'Low',
+                                                                      Colors
+                                                                          .green,
+                                                                      Colors
+                                                                          .white,
+                                                                      context),
+                                                                ],
+                                                              ),
                                                             ],
                                                           ),
 
@@ -5249,7 +5262,9 @@ class AddPrposedAction extends StatelessWidget {
   });
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(
+    BuildContext context,
+  ) {
     return Obx(
       () => Container(
         margin: Dimens.edgeInsets20,
@@ -5449,10 +5464,14 @@ class AddPrposedAction extends StatelessWidget {
                                                 CrossAxisAlignment.start,
                                             children: [
                                               _buildTargetDateField_web(
-                                                  context,
-                                                  new TextEditingController(
-                                                      text: mapData["value"] ??
-                                                          ''))
+                                                context,
+                                                new TextEditingController(
+                                                    text:
+                                                        mapData["value"] ?? ''),
+                                                onChanged: (txt) {
+                                                  mapData["value"] = txt;
+                                                },
+                                              )
 
                                               // Container(
                                               //     decoration: BoxDecoration(
@@ -5473,31 +5492,7 @@ class AddPrposedAction extends StatelessWidget {
                                               //           BorderRadius.circular(
                                               //               5),
                                               //     ),
-                                              //     child:
-                                              //         // CustomTextFieldForStock(
-                                              //         //   width: MediaQuery.of(context)
-                                              //         //           .size
-                                              //         //           .width /
-                                              //         //       5,
-                                              //         //   numberTextField: true,
-                                              //         //   onTap: () {
-                                              //         //     controller
-                                              //         //             .openbreaketimeDatePicker =
-                                              //         //         !controller
-                                              //         //             .openbreaketimeDatePicker;
-                                              //         //     controller.update(
-                                              //         //         ['stock_Mangement']);
-                                              //         //   },
-                                              //         //   textController:
-                                              //         //       new TextEditingController(
-                                              //         //           text: mapData[
-                                              //         //                   "value"] ??
-                                              //         //               ''),
-                                              //         //   onChanged: (txt) {
-                                              //         //     mapData["value"] = txt;
-                                              //         //   },
-                                              //         // ),
-                                              //         LoginCustomTextfield(
+                                              //     child: LoginCustomTextfield(
                                               //       // ishint: controller
                                               //       //     .testDataTextCtrlr.text,
                                               //       ontap: () {
@@ -5507,8 +5502,11 @@ class AddPrposedAction extends StatelessWidget {
                                               //         //       text: mapData[
                                               //         //               "value"] ??
                                               //         //           ''),
+                                              //         //   onChanged: (txt) {
+                                              //         //     mapData["value"] =
+                                              //         //         txt;
+                                              //         //   },
                                               //         // );
-
                                               //       },
                                               //       maxLine: 1,
                                               //       textController:
@@ -5560,113 +5558,128 @@ class AddPrposedAction extends StatelessWidget {
   ///Target Date
 
   Widget _buildTargetDateField_web(
-      BuildContext context, TextEditingController textDateController) {
-    return Column(//
-        children: [
-      // Align(
-      //   alignment: Alignment.topLeft,
-      //   child: Padding(
-      //     padding: const EdgeInsets.only(right: 385),
-      //     child: RichText(
-      //       text: TextSpan(
-      //           text: position == 0 ? 'Start Date: ' : 'Valid Till: ',
-      //           style: Styles.blackBold16, children: []),
-      //     ),
-      //   ),
-      // ),
-      // Align(
-      //     alignment: Alignment.topLeft,
-      //     child: Padding(
-      //       padding: const EdgeInsets.only(right: 385),
-      //       child: CustomRichText(
-      //         title: position == 0 ? '$title1' : '$title2',
-      //       ),
-      //     )),
+      BuildContext context, TextEditingController textDateController,
+      {required Function(String) onChanged}) {
+    return StatefulBuilder(builder: ((context, setState) {
+      return Column(children: [
+        // Align(
+        //   alignment: Alignment.topLeft,
+        //   child: Padding(
+        //     padding: const EdgeInsets.only(right: 385),
+        //     child: RichText(
+        //       text: TextSpan(
+        //           text: position == 0 ? 'Start Date: ' : 'Valid Till: ',
+        //           style: Styles.blackBold16, children: []),
+        //     ),
+        //   ),
+        // ),
+        // Align(
+        //     alignment: Alignment.topLeft,
+        //     child: Padding(
+        //       padding: const EdgeInsets.only(right: 385),
+        //       child: CustomRichText(
+        //         title: position == 0 ? '$title1' : '$title2',
+        //       ),
+        //     )),
 
-      Container(
-        height: MediaQuery.of(context).size.height * 0.040,
-        decoration: BoxDecoration(
-          boxShadow: [
-            BoxShadow(
-              color: Colors.black26,
-              offset: const Offset(
-                5.0,
-                5.0,
+        Container(
+          height: MediaQuery.of(context).size.height * 0.040,
+          decoration: BoxDecoration(
+            boxShadow: [
+              BoxShadow(
+                color: Colors.black26,
+                offset: const Offset(
+                  5.0,
+                  5.0,
+                ),
+                blurRadius: 5.0,
+                spreadRadius: 1.0,
+              ), //BoxShadow
+              BoxShadow(
+                color: ColorValues.whiteColor,
+                offset: const Offset(0.0, 0.0),
+                blurRadius: 0.0,
+                spreadRadius: 0.0,
+              ), //BoxShadow
+            ],
+            color: ColorValues.whiteColor,
+            borderRadius: BorderRadius.circular(5),
+          ),
+          child: SizedBox(
+            width: Responsive.isDesktop(context)
+                ? MediaQuery.of(context).size.width / 3.9
+                : MediaQuery.of(context).size.width / 1.0,
+            child: TextField(
+              onTap: () {
+                setState(() {
+                  pickTargetDateTime_web(
+                    context,
+                    textDateController,
+                  );
+                });
+
+                // }
+
+                // : null;
+              },
+              controller: textDateController,
+              onChanged: (value) {
+                setState(
+                  () {
+                    textDateController.text = value;
+                    onChanged(value);
+                  },
+                );
+              },
+
+              // :null,
+              autofocus: false,
+              decoration: InputDecoration(
+                fillColor: ColorValues.whiteColor,
+                filled: true,
+                contentPadding: EdgeInsets.fromLTRB(5.0, 10.0, 5.0, 10.0),
+                border: InputBorder.none,
+                enabledBorder: InputBorder.none,
+                focusedBorder: InputBorder.none,
+                suffixIcon: Icon(Icons.calendar_month),
+
+                // focusedErrorBorder:
+                // hintText: '${position == 1 ? DateFormat.yMEd() : ''}',
+                //     controller.isJobTitleInvalid.value
+                //         ? OutlineInputBorder(
+                //             borderRadius:
+                //                 BorderRadius.circular(5),
+                //             borderSide: BorderSide(
+                //               color: ColorsValue.redColorDark,
+                //             ),
+                //           )
+                //         : InputBorder.none,
+                // errorBorder:
+                //     controller.isJobTitleInvalid.value
+                //         ? OutlineInputBorder(
+                //             borderRadius:
+                //                 BorderRadius.circular(5),
+                //             borderSide: BorderSide(
+                //               color: ColorsValue.redColorDark,
+                //             ),
+                //           )
+                //         : null,
+                // errorText: controller.isJobTitleInvalid.value
+                //     ? "Required field"
+                //     : null,
               ),
-              blurRadius: 5.0,
-              spreadRadius: 1.0,
-            ), //BoxShadow
-            BoxShadow(
-              color: ColorValues.whiteColor,
-              offset: const Offset(0.0, 0.0),
-              blurRadius: 0.0,
-              spreadRadius: 0.0,
-            ), //BoxShadow
-          ],
-          color: ColorValues.whiteColor,
-          borderRadius: BorderRadius.circular(5),
-        ),
-        child: SizedBox(
-          width: Responsive.isDesktop(context)
-              ? MediaQuery.of(context).size.width / 3.9
-              : MediaQuery.of(context).size.width / 1.0,
-          child: TextField(
-            onTap: () {
-              pickTargetDateTime_web(context, textDateController);
-
-              // : null;
-            },
-            controller: textDateController,
-            // onChanged: (value) {
-            //   textDateController.text = value;
-            // },
-
-            // :null,
-            autofocus: false,
-            decoration: InputDecoration(
-              fillColor: ColorValues.whiteColor,
-              filled: true,
-              contentPadding: EdgeInsets.fromLTRB(5.0, 10.0, 5.0, 10.0),
-              border: InputBorder.none,
-              enabledBorder: InputBorder.none,
-              focusedBorder: InputBorder.none,
-              suffixIcon: Icon(Icons.calendar_month),
-
-              // focusedErrorBorder:
-              // hintText: '${position == 1 ? DateFormat.yMEd() : ''}',
-              //     controller.isJobTitleInvalid.value
-              //         ? OutlineInputBorder(
-              //             borderRadius:
-              //                 BorderRadius.circular(5),
-              //             borderSide: BorderSide(
-              //               color: ColorsValue.redColorDark,
-              //             ),
-              //           )
-              //         : InputBorder.none,
-              // errorBorder:
-              //     controller.isJobTitleInvalid.value
-              //         ? OutlineInputBorder(
-              //             borderRadius:
-              //                 BorderRadius.circular(5),
-              //             borderSide: BorderSide(
-              //               color: ColorsValue.redColorDark,
-              //             ),
-              //           )
-              //         : null,
-              // errorText: controller.isJobTitleInvalid.value
-              //     ? "Required field"
-              //     : null,
             ),
           ),
         ),
-      ),
-    ]);
+      ]);
+    }));
   }
 
   //Start Date and valid Till
   Future pickTargetDateTime_web(
     BuildContext context,
     TextEditingController textcontroller,
+    // {required Function(String) onChanged}
   ) async {
     var dateTime = controller.selectedtargetDateTime.value;
 
@@ -5690,19 +5703,18 @@ class AddPrposedAction extends StatelessWidget {
     controller.selectedtargetDateTime.value;
 
     textcontroller
-      ..text = DateFormat("yyyy-MM-dd HH:mm").format(dateTime)
+      // ..text = DateFormat("yyyy-MM-dd HH:mm").format(dateTime)
       ..selection = TextSelection.fromPosition(
         TextPosition(
           offset: textcontroller.text.length,
           affinity: TextAffinity.upstream,
         ),
       );
+
     textcontroller.text = DateFormat("yyyy-MM-dd HH:mm").format(dateTime);
 
-    // controller.startDateTimeCtrlrBuffer =
-    //     DateFormat("yyyy-MM-dd'T'HH:mm:ss").format(dateTime);
-    controller.testDataTextCtrlr.text = textcontroller.text;
-    print('Incident reportDate & Time ${controller.testDataTextCtrlr.text}');
+    // controller.testDataTextCtrlr.text = textcontroller.text;
+    print('Incident reportDate & Time ${textcontroller.text}');
   }
 
   Future<DateTime?> pickTargetDate_web(
