@@ -161,6 +161,9 @@ abstract class Routes {
   static const viewAuditPlan = _Paths.viewAuditPlan;
   static const statutory = _Paths.statutory;
   static const wasteData = _Paths.wasteData;
+  static const checklistMisPlan = _Paths.checklistMisPlan;
+  static const createMisPlan = _Paths.createMisPlan;
+  static const viewMisPlan = _Paths.viewMisPlan;
 }
 
 abstract class _Paths {
@@ -315,6 +318,8 @@ abstract class _Paths {
   static const viewAuditPlan = '/viewAuditPlan';
   static const statutory = '/statutory';
   static const wasteData = '/wasteData';
+  static const checklistMisPlan = '/checklistMisPlan';
+  static const createMisPlan = '/createMisPlan';
 
-// static const editPermitWebScreen = '/edit-permit-web-screen';
+  static const viewMisPlan = '/viewMisPlan';
 }

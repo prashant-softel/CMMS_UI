@@ -3,8 +3,8 @@ import 'package:cmms/domain/repositories/repository.dart';
 
 import '../repositories/local_storage_keys.dart';
 
-class ViewAuditPlanUsecase {
-  ViewAuditPlanUsecase(this.repository);
+class ViewMisPlanUsecase {
+  ViewMisPlanUsecase(this.repository);
   Repository repository;
 
   Future<Map<String, dynamic>> pmPlanApprovedButton({

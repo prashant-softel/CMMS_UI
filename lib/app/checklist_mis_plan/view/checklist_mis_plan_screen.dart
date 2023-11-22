@@ -1,5 +1,5 @@
-import 'package:cmms/app/audit_list/audit_list_controller.dart';
-import 'package:cmms/app/audit_list/view/audit_list_content_web.dart';
+import 'package:cmms/app/checklist_mis_plan/checklist_mis_plan_controller.dart';
+import 'package:cmms/app/checklist_mis_plan/view/checklist_mis_plan_content_web.dart';
 
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -8,8 +8,8 @@ import '../../home/widgets/home_drawer.dart';
 import '../../theme/dimens.dart';
 import '../../utils/responsive.dart';
 
-class AuditListScreen extends GetView<AuditListScreenController> {
-  AuditListScreen({super.key});
+class ChecklistMisPlanScreen extends GetView<ChecklistMisPlanController> {
+  ChecklistMisPlanScreen({super.key});
 
   ///
   @override
@@ -40,7 +40,7 @@ class AuditListScreen extends GetView<AuditListScreenController> {
                   children: [
                     if (Responsive.isDesktop(context))
                       Expanded(
-                        child: AuditListContentWeb(),
+                        child: ChecklistMisPlanContentWeb(),
                       )
                   ],
                 ),

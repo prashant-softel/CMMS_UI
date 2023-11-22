@@ -1,15 +1,15 @@
 import 'package:cmms/domain/models/audit_plan_detail_model.dart';
-import 'package:cmms/domain/usecases/view_audit_plan_usecase.dart';
+import 'package:cmms/domain/usecases/view_mis_plan_usecase.dart';
 
-class ViewAuditPlanPresenter {
-  ViewAuditPlanPresenter(this.viewAuditPlanUsecase);
-  ViewAuditPlanUsecase viewAuditPlanUsecase;
+class ViewMisPlanPresenter {
+  ViewMisPlanPresenter(this.viewMisPlanUsecase);
+  ViewMisPlanUsecase viewMisPlanUsecase;
 
   Future<Map<String, dynamic>?> pmPlanApprovedButton({
     pmPlanApproveJsonString,
     required bool isLoading,
   }) async {
-    return viewAuditPlanUsecase.pmPlanApprovedButton(
+    return viewMisPlanUsecase.pmPlanApprovedButton(
       pmPlanApproveJsonString: pmPlanApproveJsonString,
       isLoading: isLoading,
     );
@@ -19,7 +19,7 @@ class ViewAuditPlanPresenter {
     pmPlanRejectJsonString,
     required bool isLoading,
   }) async {
-    return viewAuditPlanUsecase.pmPlanRejectButton(
+    return viewMisPlanUsecase.pmPlanRejectButton(
       pmPlanRejectJsonString: pmPlanRejectJsonString,
       isLoading: isLoading,
     );
@@ -29,20 +29,20 @@ class ViewAuditPlanPresenter {
     int? auditPlanId,
     bool? isLoading,
   }) async =>
-      await viewAuditPlanUsecase.getAuditPlanDetails(
+      await viewMisPlanUsecase.getAuditPlanDetails(
         auditPlanId: auditPlanId,
         isLoading: isLoading,
       );
   void saveValue({String? auditId}) async {
-    return viewAuditPlanUsecase.saveValue(auditId: auditId);
+    return viewMisPlanUsecase.saveValue(auditId: auditId);
   }
 
-  Future<String?> getValue() async => await viewAuditPlanUsecase.getValue();
+  Future<String?> getValue() async => await viewMisPlanUsecase.getValue();
 
   void saveTypeValue({String? type}) async {
-    return viewAuditPlanUsecase.saveTypeValue(type: type);
+    return viewMisPlanUsecase.saveTypeValue(type: type);
   }
 
   Future<String?> getTypeValue() async =>
-      await viewAuditPlanUsecase.getTypeValue();
+      await viewMisPlanUsecase.getTypeValue();
 }

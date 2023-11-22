@@ -1,5 +1,5 @@
 import 'package:cmms/app/utils/utility.dart';
-import 'package:cmms/app/view_audit_plan/view_audit_plan_presenter.dart';
+import 'package:cmms/app/view_mis_plan/view_mis_plan_presenter.dart';
 import 'package:cmms/domain/models/audit_plan_detail_model.dart';
 import 'package:cmms/domain/models/comment_model.dart';
 import 'package:cmms/domain/models/history_model.dart';
@@ -7,12 +7,12 @@ import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
 import '../home/home_controller.dart';
 
-class ViewAuditPlanController extends GetxController {
+class ViewMisPlanController extends GetxController {
   ///
-  ViewAuditPlanController(
-    this.viewAuditPlanPresenter,
+  ViewMisPlanController(
+    this.viewMisPlanPresenter,
   );
-  ViewAuditPlanPresenter viewAuditPlanPresenter;
+  ViewMisPlanPresenter viewMisPlanPresenter;
   final HomeController homecontroller = Get.find();
   TextEditingController approveCommentTextFieldCtrlr = TextEditingController();
   TextEditingController rejectCommentTextFieldCtrlr = TextEditingController();
@@ -29,7 +29,7 @@ class ViewAuditPlanController extends GetxController {
       if (auditId != 0) {
         print({"fghvjbggjhjgk", auditId});
 
-        await getAuditPlanDetails(auditPlanId: auditId.value, isloading: true);
+        //   await getAuditPlanDetails(auditPlanId: auditId.value, isloading: true);
       }
       super.onInit();
     } catch (e) {
@@ -39,8 +39,8 @@ class ViewAuditPlanController extends GetxController {
 
   Future<void> setauditPlanId() async {
     try {
-      final _auditId = await viewAuditPlanPresenter.getValue();
-      final _type = await viewAuditPlanPresenter.getTypeValue();
+      final _auditId = await viewMisPlanPresenter.getValue();
+      final _type = await viewMisPlanPresenter.getTypeValue();
 
       if (_auditId == null || _auditId == '' || _auditId == "null") {
         var dataFromPreviousScreen = Get.arguments;
@@ -48,8 +48,8 @@ class ViewAuditPlanController extends GetxController {
         auditId.value = dataFromPreviousScreen['auditId'];
         type.value = dataFromPreviousScreen['type'];
 
-        viewAuditPlanPresenter.saveValue(auditId: auditId.value.toString());
-        viewAuditPlanPresenter.saveTypeValue(type: type.value.toString());
+        viewMisPlanPresenter.saveValue(auditId: auditId.value.toString());
+        viewMisPlanPresenter.saveTypeValue(type: type.value.toString());
       } else {
         auditId.value = int.tryParse(_auditId) ?? 0;
         type.value = int.tryParse(_type ?? "") ?? 0;
@@ -60,7 +60,7 @@ class ViewAuditPlanController extends GetxController {
   }
 
   Future<void> getAuditPlanDetails({int? auditPlanId, bool? isloading}) async {
-    final _auditPlanDetailsModel = await viewAuditPlanPresenter
+    final _auditPlanDetailsModel = await viewMisPlanPresenter
         .getAuditPlanDetails(auditPlanId: auditPlanId, isLoading: isloading);
 
     if (_auditPlanDetailsModel != null) {
@@ -79,7 +79,7 @@ class ViewAuditPlanController extends GetxController {
       var pmPlanApproveJsonString = commentpmPlanAproveModel.toJson();
 
       Map<String, dynamic>? response =
-          await viewAuditPlanPresenter.pmPlanApprovedButton(
+          await viewMisPlanPresenter.pmPlanApprovedButton(
         pmPlanApproveJsonString: pmPlanApproveJsonString,
         isLoading: true,
       );
@@ -99,7 +99,7 @@ class ViewAuditPlanController extends GetxController {
       var pmPlanRejectJsonString = commentpmPlanRejectModel.toJson();
 
       Map<String, dynamic>? response =
-          await viewAuditPlanPresenter.pmPlanRejectButton(
+          await viewMisPlanPresenter.pmPlanRejectButton(
         pmPlanRejectJsonString: pmPlanRejectJsonString,
         isLoading: true,
       );
