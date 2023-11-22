@@ -5,6 +5,7 @@ import 'package:cmms/app/add_inventory/view/warranty_widget.dart';
 import 'package:cmms/app/app.dart';
 import 'package:cmms/app/controllers/file_upload_controller.dart';
 import 'package:cmms/app/home/widgets/header_widget.dart';
+import 'package:cmms/app/navigators/app_pages.dart';
 import 'package:cmms/app/widgets/custom_elevated_button.dart';
 import 'package:cmms/app/widgets/custom_richtext.dart';
 import 'package:cmms/app/widgets/custom_textField.dart';
@@ -87,13 +88,13 @@ class AddInventoryScreen extends GetView<AddInventoryController> {
                                     color: ColorValues.greyLightColor,
                                   ),
                                   Text(" /DASHBOARD ",
-                                      style: Styles.greyMediumLight12),
+                                      style: Styles.greyLight14),
                                   GestureDetector(
                                     onTap: () {
-                                      Get.back();
+                                      Get.offNamed(Routes.inventoryList);
                                     },
                                     child: Text(" / Assets",
-                                        style: Styles.greyMediumLight12),
+                                        style: Styles.greyLight14),
                                   ),
                                   Text(
                                     "/ ADD Assets",

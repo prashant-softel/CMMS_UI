@@ -59,13 +59,12 @@ class _InventoryWebState extends State<InventoryListContentWeb> {
                             Icons.home,
                             color: ColorValues.greyLightColor,
                           ),
-                          Text(" /DASHBOARD ", style: Styles.greyMediumLight12),
+                          Text(" /DASHBOARD", style: Styles.greyLight14),
                           GestureDetector(
                             onTap: () {
-                              Get.back();
+                              Get.offNamed(Routes.inventory);
                             },
-                            child: Text(" / ASSETS",
-                                style: Styles.greyMediumLight12),
+                            child: Text("/ ASSETS", style: Styles.greyLight14),
                           ),
                           Text(
                             "/ASSETS LIST",
