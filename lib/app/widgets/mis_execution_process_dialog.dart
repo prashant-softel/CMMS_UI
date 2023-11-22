@@ -27,7 +27,7 @@ class MisExecutionProcessDialog extends GetView {
         // contentPadding: EdgeInsets.zero,
         title: Center(
           child: Text(
-            "Observation of  ${controller.selectedItem?.name ?? ""}",
+            "Observation of ", // ${controller.selectedItem?.name ?? ""}",
             style: Styles.blue700,
           ),
         ),
@@ -102,103 +102,106 @@ class MisExecutionProcessDialog extends GetView {
                                 ),
                                 Expanded(
                                   child: DataTable2(
-                                    dataRowHeight: 100,
-                                    minWidth: 2000,
-                                    border: TableBorder.all(
-                                        color:
-                                            Color.fromARGB(255, 206, 229, 234)),
-                                    columns: [
-                                      DataColumn2(
-                                          fixedWidth: 100,
-                                          label: Text(
-                                            "Sr.No.",
-                                            style: TextStyle(
-                                                fontSize: 15,
-                                                fontWeight: FontWeight.bold),
-                                          )),
-                                      DataColumn2(
-                                          fixedWidth: 400,
-                                          label: Text(
-                                            "Check Point",
-                                            style: TextStyle(
-                                                fontSize: 15,
-                                                fontWeight: FontWeight.bold),
-                                          )),
-                                      DataColumn2(
-                                          fixedWidth: 400,
-                                          label: Text(
-                                            "Requirement",
-                                            style: TextStyle(
-                                                fontSize: 15,
-                                                fontWeight: FontWeight.bold),
-                                          )),
-                                      DataColumn2(
-                                          fixedWidth: 150,
-                                          label: Text(
-                                            "Weightage",
-                                            style: TextStyle(
-                                                fontSize: 15,
-                                                fontWeight: FontWeight.bold),
-                                          )),
-                                      // DataColumn2(
-                                      //     fixedWidth: 200,
-                                      //     label: Text(
-                                      //       "Upload Images",
-                                      //       style: TextStyle(
-                                      //           fontSize: 15,
-                                      //           fontWeight: FontWeight.bold),
+                                      dataRowHeight: 100,
+                                      minWidth: 2000,
+                                      border: TableBorder.all(
+                                          color: Color.fromARGB(
+                                              255, 206, 229, 234)),
+                                      columns: [
+                                        DataColumn2(
+                                            fixedWidth: 100,
+                                            label: Text(
+                                              "Sr.No.",
+                                              style: TextStyle(
+                                                  fontSize: 15,
+                                                  fontWeight: FontWeight.bold),
+                                            )),
+                                        DataColumn2(
+                                            fixedWidth: 400,
+                                            label: Text(
+                                              "Check Point",
+                                              style: TextStyle(
+                                                  fontSize: 15,
+                                                  fontWeight: FontWeight.bold),
+                                            )),
+                                        DataColumn2(
+                                            fixedWidth: 400,
+                                            label: Text(
+                                              "Requirement",
+                                              style: TextStyle(
+                                                  fontSize: 15,
+                                                  fontWeight: FontWeight.bold),
+                                            )),
+                                        DataColumn2(
+                                            fixedWidth: 150,
+                                            label: Text(
+                                              "Weightage",
+                                              style: TextStyle(
+                                                  fontSize: 15,
+                                                  fontWeight: FontWeight.bold),
+                                            )),
+                                        // DataColumn2(
+                                        //     fixedWidth: 200,
+                                        //     label: Text(
+                                        //       "Upload Images",
+                                        //       style: TextStyle(
+                                        //           fontSize: 15,
+                                        //           fontWeight: FontWeight.bold),
+                                        //     )),
+                                        DataColumn2(
+                                            fixedWidth: 200,
+                                            label: Text(
+                                              "CP ok ?",
+                                              style: TextStyle(
+                                                  fontSize: 15,
+                                                  fontWeight: FontWeight.bold),
+                                            )),
+                                        DataColumn2(
+                                            fixedWidth: 300,
+                                            label: Text(
+                                              "Observation",
+                                              style: TextStyle(
+                                                  fontSize: 15,
+                                                  fontWeight: FontWeight.bold),
+                                            )),
+                                      ],
+                                      rows: []
+                                      //  List<DataRow>.generate(
+                                      //   controller.selectedItem
+                                      //           ?.checklist_observation?.length ??
+                                      //       0,
+                                      //   (index) =>
+                                      //   DataRow(cells: [
+                                      //     DataCell(Text(
+                                      //       "jksdfjsdj",
                                       //     )),
-                                      DataColumn2(
-                                          fixedWidth: 200,
-                                          label: Text(
-                                            "CP ok ?",
-                                            style: TextStyle(
-                                                fontSize: 15,
-                                                fontWeight: FontWeight.bold),
-                                          )),
-                                      DataColumn2(
-                                          fixedWidth: 300,
-                                          label: Text(
-                                            "Observation",
-                                            style: TextStyle(
-                                                fontSize: 15,
-                                                fontWeight: FontWeight.bold),
-                                          )),
-                                    ],
-                                    rows: List<DataRow>.generate(
-                                      controller.selectedItem
-                                              ?.checklist_observation?.length ??
-                                          0,
-                                      (index) => DataRow(cells: [
-                                        DataCell(Text(
-                                          "jksdfjsdj",
-                                        )),
-                                        DataCell(Text(
-                                          "jksdfjsdj",
-                                        )),
-                                        DataCell(Text(
-                                          "jksdfjsdj",
-                                        )),
-                                        DataCell(Text(
-                                          "jksdfjsdj",
-                                        )),
-                                        DataCell(Text('???')),
-                                        DataCell(Padding(
-                                          padding: const EdgeInsets.all(8.0),
-                                          child: LoginCustomTextfield(
-                                            width: (Get.width * .4),
-                                            // textController:
-                                            // controller
-                                            //         .selectedItem
-                                            //         ?.checklist_observation?[index]
-                                            //         .observation_value_controller
-                                            //     as TextEditingController,
-                                            maxLine: 5,
-                                          ),
-                                        )),
-                                      ]),
-                                    ),
-                                  ),
+                                      //     DataCell(Text(
+                                      //       "jksdfjsdj",
+                                      //     )),
+                                      //     DataCell(Text(
+                                      //       "jksdfjsdj",
+                                      //     )),
+                                      //     DataCell(Text(
+                                      //       "jksdfjsdj",
+                                      //     )),
+                                      //     DataCell(Text('???')),
+                                      //     DataCell(Padding(
+                                      //       padding: const EdgeInsets.all(8.0),
+                                      //       child: LoginCustomTextfield(
+                                      //         width: (Get.width * .4),
+                                      //         // textController:
+                                      //         // controller
+                                      //         //         .selectedItem
+                                      //         //         ?.checklist_observation?[index]
+                                      //         //         .observation_value_controller
+                                      //         //     as TextEditingController,
+                                      //         maxLine: 5,
+                                      //       ),
+                                      //     )),
+                                      //   ]),
+                                      // ),
+
+                                      ),
                                 ),
                               ],
                             ),

@@ -28,8 +28,7 @@ class PreventiveMaintenanceExecutionController extends GetxController {
   Rx<int> scheduleId = 0.obs;
   RxBool isTouchable = true.obs;
   var isToggleOn = false.obs;
-  Rx<List<List<Map<String, String>>>> rowItem =
-      Rx<List<List<Map<String, String>>>>([]);
+  RxList<List<Map<String, String>>> rowItem = <List<Map<String, String>>>[].obs;
 
   Rx<PmtaskViewModel?> pmtaskViewModel = PmtaskViewModel().obs;
   RxList<ScheduleCheckPoint?>? scheduleCheckPoints =
@@ -66,7 +65,7 @@ class PreventiveMaintenanceExecutionController extends GetxController {
   }
 
   void addRowItem() {
-    rowItem.value.add([
+    rowItem.add([
       {"key": "Drop_down", "value": 'Please Select'},
       {'key': "Material_Type", "value": ''},
       {'key': "Issued_Qty", "value": ''},

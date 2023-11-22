@@ -25,7 +25,7 @@ class ViewMisPlanController extends GetxController {
   @override
   void onInit() async {
     try {
-      await setauditPlanId();
+      //   await setauditPlanId();
       if (auditId != 0) {
         print({"fghvjbggjhjgk", auditId});
 

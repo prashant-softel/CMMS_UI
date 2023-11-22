@@ -19,8 +19,8 @@ class CreateMrsController extends GetxController {
   StreamSubscription<int>? facilityIdStreamSubscription;
   int facilityId = 0;
   RxList<GetAssetItemsModel?> assetItemList = <GetAssetItemsModel>[].obs;
-  Rx<List<List<Map<String, String>>>> rowItem =
-      Rx<List<List<Map<String, String>>>>([]);
+  RxList<List<Map<String, String>>> rowItem = <List<Map<String, String>>>[].obs;
+
   Map<String, GetAssetItemsModel> dropdownMapperData = {};
   var activityCtrlr = TextEditingController();
   var remarkCtrlr = TextEditingController();
@@ -95,7 +95,7 @@ class CreateMrsController extends GetxController {
   }
 
   void addRowItem() {
-    rowItem.value.add([
+    rowItem.add([
       {"key": "Drop_down", "value": 'Please Select'},
       {'key': "Material_Type", "value": ''},
       {'key': "Image", "value": ''},
@@ -114,7 +114,7 @@ class CreateMrsController extends GetxController {
         DateFormat('yyyy-MM-dd').format(requestd_date.value);
 
     List<Equipments> items = [];
-    rowItem.value.forEach((element) {
+    rowItem.forEach((element) {
       Equipments item = Equipments(
         id: dropdownMapperData[element[0]["value"]]?.id,
         issued_qty:

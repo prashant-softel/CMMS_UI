@@ -162,11 +162,11 @@ class MisDashboardScreen extends GetView<MisDashboardController> {
                               onTap: () {
                                 controller.goToPlanListScreen();
                               }),
-                          createContentTile(
-                              title: 'MIS Task',
-                              onTap: () {
-                                controller.goTocreatePlanScreen();
-                              })
+                          // createContentTile(
+                          //     title: 'MIS Task',
+                          //     onTap: () {
+                          //       controller.goTocreatePlanScreen();
+                          //     })
                         ],
                       ),
                     if (Responsive.isDesktop(context))
