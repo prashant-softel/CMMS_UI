@@ -1,15 +1,16 @@
-import 'package:cmms/app/audit_list/audit_list_controller.dart';
-import 'package:cmms/app/audit_list/view/audit_list_content_web.dart';
-
+import 'package:cmms/app/home/widgets/home_drawer.dart';
+import 'package:cmms/app/theme/dimens.dart';
+import 'package:cmms/app/view_mis_plan/view/view_mis_plan_content_web.dart';
+import 'package:cmms/app/view_mis_plan/view_mis_plan_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+
 import '../../home/widgets/header_widget.dart';
-import '../../home/widgets/home_drawer.dart';
-import '../../theme/dimens.dart';
 import '../../utils/responsive.dart';
 
-class AuditListScreen extends GetView<AuditListScreenController> {
-  AuditListScreen({super.key});
+class ViewMisPlanScreen extends GetView<ViewMisPlanController> {
+  ViewMisPlanScreen({super.key});
+  final ViewMisPlanController controller = Get.find();
 
   ///
   @override
@@ -23,7 +24,7 @@ class AuditListScreen extends GetView<AuditListScreenController> {
               automaticallyImplyLeading: false,
             )
           : AppBar(
-              title: Text('Calibration History'),
+              title: Text('Preventive Check Point'),
               centerTitle: true,
               elevation: 0,
             ),
@@ -38,9 +39,15 @@ class AuditListScreen extends GetView<AuditListScreenController> {
               Expanded(
                 child: Column(
                   children: [
+                    // if (Responsive.isMobile(context) ||
+                    //     Responsive.isTablet(context))
+                    //   Expanded(
+                    //     child: ViewMisPlanWebMobile(),
+                    //   ),
+
                     if (Responsive.isDesktop(context))
                       Expanded(
-                        child: AuditListContentWeb(),
+                        child: ViewMisPlanWeb(),
                       )
                   ],
                 ),

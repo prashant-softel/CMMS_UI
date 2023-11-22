@@ -54,7 +54,7 @@ class MisDashboardController extends GetxController {
   void goToPlanListScreen() {
     misDashboardPresenter.clearValue();
 
-    Get.toNamed(Routes.auditListScreen, arguments: {"type": 3});
+    Get.toNamed(Routes.checklistMisPlan);
   }
 
   void goTocreatePlanScreen() {

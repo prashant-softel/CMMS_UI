@@ -25,9 +25,13 @@ import 'package:cmms/app/calibration_history/view/calibration_history_screen.dar
 import 'package:cmms/app/calibration_view/calibration_view_binding.dart';
 import 'package:cmms/app/check_list_of_observation/checklist_of_observation_binding.dart';
 import 'package:cmms/app/check_list_of_observation/views/checklist_of_observation_screen.dart';
+import 'package:cmms/app/checklist_mis_plan/checklist_mis_plan_binding.dart';
+import 'package:cmms/app/checklist_mis_plan/view/checklist_mis_plan_screen.dart';
 import 'package:cmms/app/create_audit/craete_audit_binding.dart';
 
 import 'package:cmms/app/create_audit/view/create_audit_screen.dart';
+import 'package:cmms/app/create_mis_plan/create_mis_plan_binding.dart';
+import 'package:cmms/app/create_mis_plan/view/create_mis_plan_screen.dart';
 import 'package:cmms/app/create_mrs/create_mrs_binding.dart';
 import 'package:cmms/app/create_mrs/view/create_mrs_screen.dart';
 import 'package:cmms/app/create_observation/views/create_observation_screen.dart';
@@ -78,6 +82,8 @@ import 'package:cmms/app/transaction_report/view/transaction_report_list_screen.
 import 'package:cmms/app/view_audit_plan/view_audit_plan_binding.dart';
 import 'package:cmms/app/view_mc_plan/view/view_mc_planning_screen.dart';
 import 'package:cmms/app/view_mc_plan/view_mc_planning_binding.dart';
+import 'package:cmms/app/view_mis_plan/view/view_mis_plan_screen.dart';
+import 'package:cmms/app/view_mis_plan/view_mis_plan_binding.dart';
 import 'package:cmms/app/view_request_orders/request_goods_orders_view_binding.dart';
 import 'package:cmms/app/role_access/role_access_binding.dart';
 import 'package:cmms/app/role_access/view/role_access_screen.dart';
@@ -967,10 +973,20 @@ class AppPages {
       page: ViewAuditPlanScreen.new,
       binding: ViewAuditPlanBinding(),
     ),
-    // GetPage<dynamic>(
-    //   name: _Paths.transactionReport,
-    //   page: TransactionStockReportScreen.new,
-    //   binding: TransactionStockReportBinding(),
-    // ),
+    GetPage<dynamic>(
+      name: _Paths.checklistMisPlan,
+      page: ChecklistMisPlanScreen.new,
+      binding: ChecklistMisPlanBinding(),
+    ),
+    GetPage<dynamic>(
+      name: _Paths.createMisPlan,
+      page: CreateMisPlanScreen.new,
+      binding: CreateMisPlanBinding(),
+    ),
+    GetPage<dynamic>(
+      name: _Paths.viewMisPlan,
+      page: ViewMisPlanScreen.new,
+      binding: ViewMisPlanBinding(),
+    ),
   ];
 }

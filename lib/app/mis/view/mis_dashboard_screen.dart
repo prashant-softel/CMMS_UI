@@ -148,12 +148,12 @@ class MisDashboardScreen extends GetView<MisDashboardController> {
                             : (itemWidth / itemHeightWeb),
                         children: <Widget>[
                           createContentTile(
-                              title: "Observation Plan",
+                              title: "Checklist Plan",
                               onTap: () {
                                 controller.goToPlanListScreen();
                               }),
                           createContentTile(
-                              title: 'Create Observation Plan',
+                              title: 'MIS Task',
                               onTap: () {
                                 controller.goTocreatePlanScreen();
                               })
@@ -165,7 +165,7 @@ class MisDashboardScreen extends GetView<MisDashboardController> {
                         child: Row(
                           children: [
                             Text(
-                              "Masters",
+                              "Checklist",
                               style: TextStyle(
                                 color: Color.fromARGB(255, 159, 156, 156),
                                 fontSize: 16,
