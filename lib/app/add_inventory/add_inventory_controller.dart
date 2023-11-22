@@ -197,32 +197,17 @@ class AddInventoryController extends GetxController {
         facilityId = event;
 
         getBlocksList(facilityId);
-
-        getInventoryStatusList(isLoading: true, facilityId: facilityId);
-
         getuserAccessData();
-
         getFacilityList();
-
         getInventoryList();
-
         getFrequencyList();
-
         getWarrantyTypeList();
-
         getWarrantyUsageTermList();
-
         getUnitCurrencyList();
-
         getmanufacturerList();
-
         getSupplierList();
-
         getInventoryCategoryList();
         getInventoryTypeList(isLoading: true, facilityId: facilityId);
-
-        /////
-
         if (inventoryId != 0) {
           getAddInventoryDetail(id: inventoryId.value);
         }
@@ -234,26 +219,20 @@ class AddInventoryController extends GetxController {
   Future<void> setUserId() async {
     try {
       final _inventoryId = await addInventoryPresenter.getValue();
-      // final _goType = await viewaddInventoryPresenter.getGoTypeValue();
-
       if (_inventoryId == null ||
           _inventoryId == '' ||
           _inventoryId == "null") {
         var dataFromPreviousScreen = Get.arguments;
 
         inventoryId.value = dataFromPreviousScreen['inventoryId'];
-
-        // viewaddInventoryPresenter.saveValue(goId: inventoryId.value.toString());
       } else {
         inventoryId.value = int.tryParse(_inventoryId) ?? 0;
       }
     } catch (e) {
       print(e.toString() + 'inventoryId');
-      //  Utility.showDialog(e.toString() + 'userId');
     }
   }
 
-  //
   void getUnitCurrencyList() async {
     unitCurrencyList.value = <CurrencyListModel>[];
     final _unitCUrrencyList = await addInventoryPresenter.getUnitCurrencyList(
@@ -269,9 +248,6 @@ class AddInventoryController extends GetxController {
   }
 
   Future<void> getAddInventoryDetail({required int id}) async {
-    // newPermitDetails!.value = <NewPermitListModel>[];
-    //  editAddInventoryDetailsList?.value = <AddInventoryDetailsModel>[];
-
     final _addInventoryDetails =
         await addInventoryPresenter.getAddInventoryDetail(id: id);
     print('Add Inventory Detail:$_addInventoryDetails');
