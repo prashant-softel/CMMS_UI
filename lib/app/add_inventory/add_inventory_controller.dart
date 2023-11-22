@@ -207,9 +207,9 @@ class AddInventoryController extends GetxController {
         Future.delayed(Duration(seconds: 1), () {
           getFacilityList();
         });
-        // Future.delayed(Duration(seconds: 1), () {
-        //   getInventoryList();
-        // });
+        Future.delayed(Duration(seconds: 1), () {
+          getInventoryList();
+        });
         Future.delayed(Duration(seconds: 1), () {
           getFrequencyList();
         });
@@ -478,24 +478,24 @@ class AddInventoryController extends GetxController {
     return true;
   }
 
-  // void getInventoryList() async {
-  //   eqipmentNameList.value = <InventoryModel>[];
-  //   final _inventoryList = await addInventoryPresenter.getInventoryList(
-  //     isLoading: true,
-  //     categoryIds: categoryIds,
-  //     facilityId: facilityId,
-  //   );
-  //   //  print('equipment Name List:$inventoryNameList');
-  //   for (var inventory_list in _inventoryList) {
-  //     eqipmentNameList.add(inventory_list);
-  //   }
-  //   inventoryList = _inventoryList;
-  //   paginationController = PaginationController(
-  //     rowCount: eqipmentNameList.length,
-  //     rowsPerPage: 10,
-  //   );
-  //   update(['inventory_list']);
-  // }
+  void getInventoryList() async {
+    eqipmentNameList.value = <InventoryModel>[];
+    final _inventoryList = await addInventoryPresenter.getInventoryList(
+      isLoading: true,
+      categoryIds: categoryIds,
+      facilityId: facilityId,
+    );
+    //  print('equipment Name List:$inventoryNameList');
+    for (var inventory_list in _inventoryList) {
+      eqipmentNameList.add(inventory_list);
+    }
+    inventoryList = _inventoryList;
+    paginationController = PaginationController(
+      rowCount: eqipmentNameList.length,
+      rowsPerPage: 10,
+    );
+    update(['inventory_list']);
+  }
 
   //
   Future<void> getFrequencyList() async {

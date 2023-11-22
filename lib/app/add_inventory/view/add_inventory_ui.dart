@@ -596,10 +596,7 @@ class AddInventoryScreen extends GetView<AddInventoryController> {
             // crossAxisAlignment: CrossAxisAlignment.end,
             children: [
               Spacer(),
-              SizedBox(
-                width: MediaQuery.of(context).size.width / 5,
-              ),
-              controller.inventoryId.value == null
+              controller.inventoryId.value == 0
                   ? Container(
                       height: 40,
                       child: CustomElevatedButton(

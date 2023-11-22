@@ -128,8 +128,8 @@ class _InventoryWebState extends State<InventoryListContentWeb> {
                                         icon: Icons.add,
                                         label: "Add New",
                                         onPressed: () {
-                                          Get.offNamed(Routes
-                                              .updateGoodsOrdersDetailsScreen);
+                                          Get.offNamed(
+                                              Routes.addInventoryScreen);
                                         },
                                         color: ColorValues.addNewColor,
                                       )
@@ -493,7 +493,6 @@ class InventoryListDataSource extends DataTableSource {
                           icon: Icons.edit,
                           message: 'Edit',
                           onPress: () {
-                            controller.clearStoreData();
                             int inventoryId = InventoryListDetails?.id ?? 0;
                             if (inventoryId != 0) {
                               Get.toNamed(Routes.addInventoryScreen,
