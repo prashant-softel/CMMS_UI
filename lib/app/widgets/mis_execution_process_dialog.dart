@@ -4,6 +4,7 @@ import 'package:cmms/app/utils/user_access_constants.dart';
 import 'package:cmms/app/widgets/custom_elevated_button.dart';
 import 'package:cmms/app/widgets/custom_swich_toggle.dart';
 import 'package:cmms/app/widgets/custom_textField.dart';
+import 'package:cmms/app/widgets/table_action_button.dart';
 import 'package:data_table_2/data_table_2.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -71,7 +72,7 @@ class MisExecutionProcessDialog extends GetView {
                                 //                 ?.checklist_observation?.length ??
                                 //             0) *
                                 //         80) +
-                                250,
+                                500,
                             width: MediaQuery.of(context).size.width / 1.2,
                             decoration: BoxDecoration(
                               border: Border.all(
@@ -94,7 +95,7 @@ class MisExecutionProcessDialog extends GetView {
                                   child: Row(
                                     children: [
                                       Text(
-                                        "jksdfjsdj", //   "  ${controller.selectedItem?.checklist_name ?? ""}",
+                                        "checkloist001", //   "  ${controller.selectedItem?.checklist_name ?? ""}",
                                         style: Styles.blue700,
                                       ),
                                     ],
@@ -102,106 +103,139 @@ class MisExecutionProcessDialog extends GetView {
                                 ),
                                 Expanded(
                                   child: DataTable2(
-                                      dataRowHeight: 100,
-                                      minWidth: 2000,
-                                      border: TableBorder.all(
-                                          color: Color.fromARGB(
-                                              255, 206, 229, 234)),
-                                      columns: [
-                                        DataColumn2(
-                                            fixedWidth: 100,
-                                            label: Text(
-                                              "Sr.No.",
-                                              style: TextStyle(
-                                                  fontSize: 15,
-                                                  fontWeight: FontWeight.bold),
-                                            )),
-                                        DataColumn2(
-                                            fixedWidth: 400,
-                                            label: Text(
-                                              "Check Point",
-                                              style: TextStyle(
-                                                  fontSize: 15,
-                                                  fontWeight: FontWeight.bold),
-                                            )),
-                                        DataColumn2(
-                                            fixedWidth: 400,
-                                            label: Text(
-                                              "Requirement",
-                                              style: TextStyle(
-                                                  fontSize: 15,
-                                                  fontWeight: FontWeight.bold),
-                                            )),
-                                        DataColumn2(
-                                            fixedWidth: 150,
-                                            label: Text(
-                                              "Weightage",
-                                              style: TextStyle(
-                                                  fontSize: 15,
-                                                  fontWeight: FontWeight.bold),
-                                            )),
-                                        // DataColumn2(
-                                        //     fixedWidth: 200,
-                                        //     label: Text(
-                                        //       "Upload Images",
-                                        //       style: TextStyle(
-                                        //           fontSize: 15,
-                                        //           fontWeight: FontWeight.bold),
-                                        //     )),
-                                        DataColumn2(
-                                            fixedWidth: 200,
-                                            label: Text(
-                                              "CP ok ?",
-                                              style: TextStyle(
-                                                  fontSize: 15,
-                                                  fontWeight: FontWeight.bold),
-                                            )),
-                                        DataColumn2(
-                                            fixedWidth: 300,
-                                            label: Text(
-                                              "Observation",
-                                              style: TextStyle(
-                                                  fontSize: 15,
-                                                  fontWeight: FontWeight.bold),
-                                            )),
+                                    dataRowHeight: 100,
+                                    minWidth: 2000,
+                                    border: TableBorder.all(
+                                        color:
+                                            Color.fromARGB(255, 206, 229, 234)),
+                                    columns: [
+                                      DataColumn2(
+                                          fixedWidth: 100,
+                                          label: Text(
+                                            "Sr.No.",
+                                            style: TextStyle(
+                                                fontSize: 15,
+                                                fontWeight: FontWeight.bold),
+                                          )),
+                                      DataColumn2(
+                                          fixedWidth: 400,
+                                          label: Text(
+                                            "Check Point",
+                                            style: TextStyle(
+                                                fontSize: 15,
+                                                fontWeight: FontWeight.bold),
+                                          )),
+                                      DataColumn2(
+                                          fixedWidth: 400,
+                                          label: Text(
+                                            "Requirement",
+                                            style: TextStyle(
+                                                fontSize: 15,
+                                                fontWeight: FontWeight.bold),
+                                          )),
+                                      // DataColumn2(
+                                      //     fixedWidth: 200,
+                                      //     label: Text(
+                                      //       "Upload Images",
+                                      //       style: TextStyle(
+                                      //           fontSize: 15,
+                                      //           fontWeight: FontWeight.bold),
+                                      //     )),
+                                      DataColumn2(
+                                          fixedWidth: 300,
+                                          label: Text(
+                                            "Observation",
+                                            style: TextStyle(
+                                                fontSize: 15,
+                                                fontWeight: FontWeight.bold),
+                                          )),
+                                    ],
+                                    rows: [
+                                      [
+                                        "1",
+                                        "checkpoint1",
+                                        "requirment",
+                                        //  "Upload_image",
+                                        "Observation",
                                       ],
-                                      rows: []
-                                      //  List<DataRow>.generate(
-                                      //   controller.selectedItem
-                                      //           ?.checklist_observation?.length ??
-                                      //       0,
-                                      //   (index) =>
-                                      //   DataRow(cells: [
-                                      //     DataCell(Text(
-                                      //       "jksdfjsdj",
-                                      //     )),
-                                      //     DataCell(Text(
-                                      //       "jksdfjsdj",
-                                      //     )),
-                                      //     DataCell(Text(
-                                      //       "jksdfjsdj",
-                                      //     )),
-                                      //     DataCell(Text(
-                                      //       "jksdfjsdj",
-                                      //     )),
-                                      //     DataCell(Text('???')),
-                                      //     DataCell(Padding(
-                                      //       padding: const EdgeInsets.all(8.0),
-                                      //       child: LoginCustomTextfield(
-                                      //         width: (Get.width * .4),
-                                      //         // textController:
-                                      //         // controller
-                                      //         //         .selectedItem
-                                      //         //         ?.checklist_observation?[index]
-                                      //         //         .observation_value_controller
-                                      //         //     as TextEditingController,
-                                      //         maxLine: 5,
-                                      //       ),
-                                      //     )),
-                                      //   ]),
-                                      // ),
-
-                                      ),
+                                      [
+                                        "2",
+                                        "checkpoint2",
+                                        "requirment",
+                                        // "Upload_image",
+                                        "Observation",
+                                      ],
+                                    ].map((record) {
+                                      return DataRow(
+                                        // height: 40,
+                                        cells: record.map((value) {
+                                          return DataCell(
+                                            //  child:
+                                            value == "Observation"
+                                                ? Padding(
+                                                    padding:
+                                                        const EdgeInsets.all(
+                                                            8.0),
+                                                    child: LoginCustomTextfield(
+                                                      width: (Get.width * .4),
+                                                      // textController:
+                                                      // controller
+                                                      //         .selectedItem
+                                                      //         ?.checklist_observation?[index]
+                                                      //         .observation_value_controller
+                                                      //     as TextEditingController,
+                                                      maxLine: 5,
+                                                    ),
+                                                  )
+                                                // : (value == "Upload_image")
+                                                //     ? TableActionButton(
+                                                //         color: ColorValues
+                                                //             .appDarkBlueColor,
+                                                //         icon: Icons
+                                                //             .remove_red_eye_outlined,
+                                                //         // label: '1 Files',
+                                                //         onPress: () {},
+                                                //       )
+                                                : Text(value),
+                                          );
+                                        }).toList(),
+                                      );
+                                    }).toList(),
+                                    //  List<DataRow>.generate(
+                                    //   controller.selectedItem
+                                    //           ?.checklist_observation?.length ??
+                                    //       0,
+                                    //   (index) =>
+                                    //   DataRow(cells: [
+                                    //     DataCell(Text(
+                                    //       "jksdfjsdj",
+                                    //     )),
+                                    //     DataCell(Text(
+                                    //       "jksdfjsdj",
+                                    //     )),
+                                    //     DataCell(Text(
+                                    //       "jksdfjsdj",
+                                    //     )),
+                                    //     DataCell(Text(
+                                    //       "jksdfjsdj",
+                                    //     )),
+                                    //     DataCell(Text('???')),
+                                    //     DataCell(Padding(
+                                    //       padding: const EdgeInsets.all(8.0),
+                                    //       child: LoginCustomTextfield(
+                                    //         width: (Get.width * .4),
+                                    //         // textController:
+                                    //         // controller
+                                    //         //         .selectedItem
+                                    //         //         ?.checklist_observation?[index]
+                                    //         //         .observation_value_controller
+                                    //         //     as TextEditingController,
+                                    //         maxLine: 5,
+                                    //       ),
+                                    //     )),
+                                    //   ]),
+                                    // ),
+                                  ),
                                 ),
                               ],
                             ),
