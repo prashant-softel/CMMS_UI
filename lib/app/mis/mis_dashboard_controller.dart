@@ -82,4 +82,12 @@ class MisDashboardController extends GetxController {
   void goToCheckListOfObservation() {
     Get.toNamed(Routes.checkListOfObservation);
   }
+
+  void goToStatutoryScreen() {
+    Get.toNamed(Routes.statutory);
+  }
+
+  void goToWasteDataScreen() {
+    Get.toNamed(Routes.wasteData);
+  }
 }

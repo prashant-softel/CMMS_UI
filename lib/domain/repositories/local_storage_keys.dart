@@ -9,6 +9,8 @@ abstract class LocalKeys {
   static const setUserAccess = 'set-user-access';
   static const jobId = 'jobId';
   static const goId = 'goId';
+  static const inventoryId = 'inventoryId';
+
   static const goType = 'goType';
   static const roType = 'roType';
   static const types = 'types';

@@ -159,6 +159,8 @@ abstract class Routes {
   static const createObservation = _Paths.createObservation;
   static const checkListOfObservation = _Paths.checkListOfObservation;
   static const viewAuditPlan = _Paths.viewAuditPlan;
+  static const statutory = _Paths.statutory;
+  static const wasteData = _Paths.wasteData;
   static const checklistMisPlan = _Paths.checklistMisPlan;
   static const createMisPlan = _Paths.createMisPlan;
   static const viewMisPlan = _Paths.viewMisPlan;
@@ -314,6 +316,8 @@ abstract class _Paths {
   static const createObservation = '/createObservation';
   static const checkListOfObservation = '/checkListOfObservation';
   static const viewAuditPlan = '/viewAuditPlan';
+  static const statutory = '/statutory';
+  static const wasteData = '/wasteData';
   static const checklistMisPlan = '/checklistMisPlan';
   static const createMisPlan = '/createMisPlan';
 

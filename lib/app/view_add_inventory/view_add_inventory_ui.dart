@@ -93,18 +93,13 @@ class ViewAddInventoryScreen extends GetView<ViewAddInventoryController> {
                                     onTap: () {
                                       Get.back();
                                     },
-                                    child: Text(" / INVENTORY",
+                                    child: Text(" / ASSETS",
                                         style: Styles.greyMediumLight12),
                                   ),
                                   Text(
-                                    "/ ADD INVENTORY",
+                                    "/VIEW ASSETS",
                                     style: Styles.greyLight14,
                                   ),
-                                  Spacer(),
-                                  Icon(
-                                    Icons.menu,
-                                    color: Colors.green,
-                                  )
                                 ],
                               ),
                             ),

@@ -455,6 +455,19 @@ class DataRepository extends DomainRepository {
   }
 
   @override
+  Future<ResponseModel> getInventoryAssetsList({
+    int? facility_id,
+    required bool isLoading,
+    required String auth,
+  }) async {
+    return await connectHelper.getInventoryAssetsList(
+      isLoading: isLoading,
+      auth: auth,
+      facility_id: facility_id,
+    );
+  }
+
+  @override
   Future<ResponseModel> getEquipmentModelList({
     int? facilityId,
     required bool isLoading,
