@@ -93,18 +93,13 @@ class AddInventoryScreen extends GetView<AddInventoryController> {
                                     onTap: () {
                                       Get.offNamed(Routes.inventoryList);
                                     },
-                                    child: Text(" / Assets",
+                                    child: Text(" /  ASSETS",
                                         style: Styles.greyLight14),
                                   ),
                                   Text(
-                                    "/ ADD Assets",
+                                    "/ ADD ASSETS",
                                     style: Styles.greyLight14,
                                   ),
-                                  Spacer(),
-                                  Icon(
-                                    Icons.menu,
-                                    color: Colors.green,
-                                  )
                                 ],
                               ),
                             ),
