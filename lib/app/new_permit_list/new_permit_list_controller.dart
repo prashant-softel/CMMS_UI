@@ -40,7 +40,7 @@ class NewPermitListController extends GetxController {
     "Requested By": true,
     "Approved By": true,
     "Status": true,
-    // "Status code": true,
+    "Status code": true,
 
     // "search": true,
   });
@@ -53,7 +53,7 @@ class NewPermitListController extends GetxController {
     "Requested By": 130,
     "Approved By": 150,
     "Status": 100,
-    // "Status code": 120,
+    "Status code": 120,
   };
   Map<String, RxString> filterText = {};
   void setColumnVisibility(String columnName, bool isVisible) {
@@ -175,7 +175,7 @@ class NewPermitListController extends GetxController {
       "Requested By": RequestByNameFilterText,
       "Approved By": ApprovedByNameFilterText,
       "Status": CurrentStatusShortFilterText,
-      // "Status code": PtwStatusFilterText,
+      "Status code": PtwStatusFilterText,
     };
     //homePresenter.generateToken();
     facilityIdStreamSubscription = controller.facilityId$.listen((event) {

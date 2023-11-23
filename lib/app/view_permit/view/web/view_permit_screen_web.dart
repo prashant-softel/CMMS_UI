@@ -1904,7 +1904,7 @@ class ViewPermitWebScreen extends GetView<ViewPermitController> {
                                     Dimens.boxHeight5,
 
                                     Padding(
-                                      padding: const EdgeInsets.only(left: 60),
+                                      padding: const EdgeInsets.only(left: 70),
                                       child: Row(
                                         mainAxisAlignment:
                                             MainAxisAlignment.start,
@@ -3928,29 +3928,23 @@ class ViewPermitWebScreen extends GetView<ViewPermitController> {
 
               ///Approve Button
               varUserAccessModel.value.access_list!
-                                  .where((e) =>
-                                      e.feature_id ==
-                                          UserAccessConstants
-                                              .kPermitFeatureId &&
-                                      e.approve ==
-                                          UserAccessConstants
-                                              .kHaveApproveAccess)
-                                  .length >
-                              0 &&
-                          controller.viewPermitDetailsModel.value?.ptwStatus ==
-                              PermitStatusConstants.PTW_CREATED //121
-                      ||
+                              .where((e) =>
+                                  e.feature_id ==
+                                      UserAccessConstants.kPermitFeatureId &&
+                                  e.approve ==
+                                      UserAccessConstants.kHaveApproveAccess)
+                              .length >
+                          0 &&
                       controller.viewPermitDetailsModel.value?.ptwStatus ==
-                          PermitStatusConstants.PTW_EXTEND_REQUESTED //133
+                          PermitStatusConstants.PTW_CREATED //121
+                  // ||
+                  // controller.viewPermitDetailsModel.value?.ptwStatus ==
+                  //     PermitStatusConstants.PTW_EXTEND_REQUESTED //133
                   ? Container(
                       height: 45,
                       child: CustomElevatedButton(
                         backgroundColor: ColorValues.appGreenColor,
-                        text: controller
-                                    .viewPermitDetailsModel.value?.ptwStatus ==
-                                PermitStatusConstants.PTW_EXTEND_REQUESTED //133
-                            ? "Extend Approve"
-                            : "Approve Permit",
+                        text: "Approve Permit",
                         icon: Icons.add,
                         onPressed: () {
                           // controller
@@ -3965,6 +3959,66 @@ class ViewPermitWebScreen extends GetView<ViewPermitController> {
                         },
                       ))
                   : Container(),
+
+              varUserAccessModel.value.access_list!
+                              .where((e) =>
+                                  e.feature_id ==
+                                      UserAccessConstants.kPermitFeatureId &&
+                                  e.approve ==
+                                      UserAccessConstants.kHaveApproveAccess)
+                              .length >
+                          0 &&
+                      controller.viewPermitDetailsModel.value?.ptwStatus ==
+                          PermitStatusConstants.PTW_EXTEND_REQUESTED //133
+                  ? Container(
+                      height: 45,
+                      child: CustomElevatedButton(
+                        backgroundColor: ColorValues.appGreenColor,
+                        text: "Extend Approve",
+                        icon: Icons.add,
+                        onPressed: () {
+                          // controller
+                          //     .createNewPermit();
+                          Get.dialog(PermitApprovedDialog(
+                            permitId: controller
+                                .viewPermitDetailsModel.value?.permitNo,
+                            ptwStatus:
+                                '${controller.viewPermitDetailsModel.value?.ptwStatus}',
+                            jobId: controller.jobId.value,
+                          ));
+                        },
+                      ))
+                  : Dimens.box0,
+              Dimens.boxWidth10,
+              varUserAccessModel.value.access_list!
+                              .where((e) =>
+                                  e.feature_id ==
+                                      UserAccessConstants.kPermitFeatureId &&
+                                  e.approve ==
+                                      UserAccessConstants.kHaveApproveAccess)
+                              .length >
+                          0 &&
+                      controller.viewPermitDetailsModel.value?.ptwStatus ==
+                          PermitStatusConstants.PTW_EXTEND_REQUESTED //133
+                  ? Container(
+                      height: 45,
+                      child: CustomElevatedButton(
+                        backgroundColor: ColorValues.appRedColor,
+                        text: "Extend Reject",
+                        icon: Icons.close,
+                        onPressed: () {
+                          // controller
+                          //     .createNewPermit();
+                          Get.dialog(PermitRejectDialog(
+                            permitId: controller
+                                .viewPermitDetailsModel.value?.permitNo,
+                            ptwStatus:
+                                '${controller.viewPermitDetailsModel.value?.ptwStatus}',
+                            jobId: controller.jobId.value,
+                          ));
+                        },
+                      ))
+                  : Dimens.box0,
               SizedBox(
                 width: 10,
               ),
@@ -4040,20 +4094,18 @@ class ViewPermitWebScreen extends GetView<ViewPermitController> {
 
               ///Reject Button
               varUserAccessModel.value.access_list!
-                                  .where((e) =>
-                                      e.feature_id ==
-                                          UserAccessConstants
-                                              .kPermitFeatureId &&
-                                      e.approve ==
-                                          UserAccessConstants
-                                              .kHaveApproveAccess)
-                                  .length >
-                              0 &&
-                          controller.viewPermitDetailsModel.value?.ptwStatus ==
-                              PermitStatusConstants.PTW_CREATED //121
-                      ||
+                              .where((e) =>
+                                  e.feature_id ==
+                                      UserAccessConstants.kPermitFeatureId &&
+                                  e.approve ==
+                                      UserAccessConstants.kHaveApproveAccess)
+                              .length >
+                          0 &&
                       controller.viewPermitDetailsModel.value?.ptwStatus ==
-                          PermitStatusConstants.PTW_EXTEND_REQUESTED //133
+                          PermitStatusConstants.PTW_CREATED //121
+                  // ||
+                  // controller.viewPermitDetailsModel.value?.ptwStatus ==
+                  //     PermitStatusConstants.PTW_EXTEND_REQUESTED //133
                   // ||
                   // controller.viewPermitDetailsModel.value?.ptwStatus == 130
                   // varUserAccessModel.value.access_list!
@@ -4068,11 +4120,7 @@ class ViewPermitWebScreen extends GetView<ViewPermitController> {
                       height: 45,
                       child: CustomElevatedButton(
                         backgroundColor: ColorValues.appRedColor,
-                        text: controller
-                                    .viewPermitDetailsModel.value?.ptwStatus ==
-                                PermitStatusConstants.PTW_EXTEND_REQUESTED //133
-                            ? "Extend Reject"
-                            : "Reject Permit",
+                        text: "Reject Permit",
                         icon: Icons.close,
                         onPressed: () {
                           // controller
@@ -4166,29 +4214,16 @@ class ViewPermitWebScreen extends GetView<ViewPermitController> {
               Dimens.boxWidth20,
               ////cancel approver
               varUserAccessModel.value.access_list!
-                                  .where((e) =>
-                                      e.feature_id ==
-                                          UserAccessConstants
-                                              .kPermitFeatureId &&
-                                      e.approve ==
-                                          UserAccessConstants
-                                              .kHaveApproveAccess)
-                                  .length >
-                              0 &&
-                          controller.viewPermitDetailsModel.value?.ptwStatus ==
-                              PermitStatusConstants.PTW_CANCEL_REQUESTED ||
-                      varUserAccessModel.value.access_list!
-                                  .where((e) =>
-                                      e.feature_id ==
-                                          UserAccessConstants
-                                              .kPermitFeatureId &&
-                                      e.approve ==
-                                          UserAccessConstants
-                                              .kHaveApproveAccess)
-                                  .length >
-                              0 &&
-                          controller.viewPermitDetailsModel.value?.ptwStatus ==
-                              PermitStatusConstants.PTW_CREATED
+                              .where((e) =>
+                                  e.feature_id ==
+                                      UserAccessConstants.kPermitFeatureId &&
+                                  e.approve ==
+                                      UserAccessConstants.kHaveApproveAccess)
+                              .length >
+                          0 &&
+                      controller.viewPermitDetailsModel.value?.ptwStatus ==
+                          PermitStatusConstants.PTW_CANCEL_REQUESTED
+
                   //130
                   ? Container(
                       height: 45,
@@ -4211,29 +4246,15 @@ class ViewPermitWebScreen extends GetView<ViewPermitController> {
                   : Dimens.box0,
               Dimens.boxWidth20,
               varUserAccessModel.value.access_list!
-                                  .where((e) =>
-                                      e.feature_id ==
-                                          UserAccessConstants
-                                              .kPermitFeatureId &&
-                                      e.approve ==
-                                          UserAccessConstants
-                                              .kHaveApproveAccess)
-                                  .length >
-                              0 &&
-                          controller.viewPermitDetailsModel.value?.ptwStatus ==
-                              PermitStatusConstants.PTW_CANCEL_REQUESTED ||
-                      varUserAccessModel.value.access_list!
-                                  .where((e) =>
-                                      e.feature_id ==
-                                          UserAccessConstants
-                                              .kPermitFeatureId &&
-                                      e.approve ==
-                                          UserAccessConstants
-                                              .kHaveApproveAccess)
-                                  .length >
-                              0 &&
-                          controller.viewPermitDetailsModel.value?.ptwStatus ==
-                              PermitStatusConstants.PTW_CREATED
+                              .where((e) =>
+                                  e.feature_id ==
+                                      UserAccessConstants.kPermitFeatureId &&
+                                  e.approve ==
+                                      UserAccessConstants.kHaveApproveAccess)
+                              .length >
+                          0 &&
+                      controller.viewPermitDetailsModel.value?.ptwStatus ==
+                          PermitStatusConstants.PTW_CANCEL_REQUESTED
                   //130
                   ? Container(
                       height: 45,
