@@ -13,7 +13,8 @@ class PermitMessageRejectDialog extends GetView {
   String? data;
   String? ptwStatus;
 
-  PermitMessageRejectDialog({super.key, this.createPermitData, this.data, this.ptwStatus});
+  PermitMessageRejectDialog(
+      {super.key, this.createPermitData, this.data, this.ptwStatus});
   final ViewPermitController _controller = Get.find();
 
   @override
@@ -44,11 +45,9 @@ class PermitMessageRejectDialog extends GetView {
                     color: ColorValues.greyLightColour,
                     thickness: 1,
                   ),
-                  Text(
-                    '${data}',
-                    style: TextStyle(color: Colors.green),
-                    textAlign: TextAlign.center
-                  ),
+                  Text('${data}',
+                      style: TextStyle(color: Colors.green),
+                      textAlign: TextAlign.center),
                   // SizedBox(height: 20,),
                   // Row(
                   //     mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -86,7 +85,7 @@ class PermitMessageRejectDialog extends GetView {
                 Get.offAllNamed(Routes.newPermitList);
                 // _controller.getNewPermitList(
                 //     _controller.facilityId, _controller.userId,_controller.formattedTodate, _controller.formattedFromdate, false, false, false);
-                Get.back();
+                // Get.back();
               },
               child: const Text('Ok'),
             ),
