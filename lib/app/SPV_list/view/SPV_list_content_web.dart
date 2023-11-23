@@ -1,6 +1,4 @@
-import 'package:clipboard/clipboard.dart';
 import 'package:cmms/app/app.dart';
-import 'package:cmms/app/constant/constant.dart';
 import 'package:cmms/app/SPV_list/SPV_list_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -435,50 +433,6 @@ class SPVListContentWeb extends GetView<SPVListController> {
                             ),
                             Row(
                               children: [
-                                // Container(
-                                //   height: 45,
-                                //   margin: EdgeInsets.only(left: 10),
-                                //   child: CustomElevatedButton(
-                                //       backgroundColor:
-                                //           ColorValues.appLightBlueColor,
-                                //       onPressed: () {
-                                //         FlutterClipboard.copy(controller
-                                //                 // .preventiveCheckList![0]
-                                //                 .toString())
-                                //             .then((value) {
-                                //           print("copy data");
-                                //         });
-                                //       },
-                                //       text: 'Copy'),
-                                // ),
-                                // Container(
-                                //   height: 45,
-                                //   margin: EdgeInsets.only(left: 10),
-                                //   child: CustomElevatedButton(
-                                //       backgroundColor:
-                                //           ColorValues.appLightBlueColor,
-                                //       onPressed: () {},
-                                //       text: 'Excel'),
-                                // ),
-                                // Container(
-                                //   height: 45,
-                                //   margin: EdgeInsets.only(left: 10),
-                                //   child: CustomElevatedButton(
-                                //       backgroundColor:
-                                //           ColorValues.appLightBlueColor,
-                                //       onPressed: () {},
-                                //       text: 'PDF'),
-                                // ),
-                                // Container(
-                                //   height: 45,
-                                //   margin: EdgeInsets.only(left: 10),
-                                //   child: CustomElevatedButton(
-                                //     backgroundColor:
-                                //         ColorValues.appLightBlueColor,
-                                //     onPressed: () {},
-                                //     text: 'columnVisibility'.tr,
-                                //   ),
-                                // ),
                                 Spacer(),
                                 Container(
                                   width: 200,
