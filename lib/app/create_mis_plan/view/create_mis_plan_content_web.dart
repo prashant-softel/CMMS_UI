@@ -108,47 +108,47 @@ class _CreateMisPlanWebState extends State<CreateMisPlanWeb> {
                                   color: ColorValues.greyLightColour,
                                 ),
                                 Dimens.boxHeight15,
-                                Row(
-                                  children: [
-                                    Spacer(),
-                                    SizedBox(
-                                        width: 180,
-                                        child: Padding(
-                                          padding:
-                                              const EdgeInsets.only(left: 120),
-                                          child:
-                                              CustomRichText(title: 'Title :'),
-                                        )),
-                                    Container(
-                                      decoration: BoxDecoration(
-                                        borderRadius: BorderRadius.circular(10),
-                                        border: Border.all(
-                                          color: Color.fromARGB(
-                                              255, 227, 224, 224),
-                                          width: 1,
-                                        ),
-                                        boxShadow: [
-                                          BoxShadow(
-                                            color: Color.fromARGB(
-                                                    255, 236, 234, 234)
-                                                .withOpacity(0.5),
-                                            spreadRadius: 2,
-                                            blurRadius: 5,
-                                            offset: Offset(0, 2),
-                                          ),
-                                        ],
-                                      ),
-                                      width:
-                                          (MediaQuery.of(context).size.width *
-                                              .3),
-                                      child: LoginCustomTextfield(
-                                        textController: controller.planTitleTc,
-                                      ),
-                                    ),
-                                    Spacer(),
-                                  ],
-                                ),
-                                Dimens.boxHeight10,
+                                // Row(
+                                //   children: [
+                                //     Spacer(),
+                                //     SizedBox(
+                                //         width: 180,
+                                //         child: Padding(
+                                //           padding:
+                                //               const EdgeInsets.only(left: 120),
+                                //           child:
+                                //               CustomRichText(title: 'Title :'),
+                                //         )),
+                                //     Container(
+                                //       decoration: BoxDecoration(
+                                //         borderRadius: BorderRadius.circular(10),
+                                //         border: Border.all(
+                                //           color: Color.fromARGB(
+                                //               255, 227, 224, 224),
+                                //           width: 1,
+                                //         ),
+                                //         boxShadow: [
+                                //           BoxShadow(
+                                //             color: Color.fromARGB(
+                                //                     255, 236, 234, 234)
+                                //                 .withOpacity(0.5),
+                                //             spreadRadius: 2,
+                                //             blurRadius: 5,
+                                //             offset: Offset(0, 2),
+                                //           ),
+                                //         ],
+                                //       ),
+                                //       width:
+                                //           (MediaQuery.of(context).size.width *
+                                //               .3),
+                                //       child: LoginCustomTextfield(
+                                //         textController: controller.planTitleTc,
+                                //       ),
+                                //     ),
+                                //     Spacer(),
+                                //   ],
+                                // ),
+                                // Dimens.boxHeight10,
                                 Row(
                                   children: [
                                     Spacer(),
