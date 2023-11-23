@@ -34,12 +34,11 @@ class _WarrantyTabWidgetState extends State<WarrantyTabWidget> {
               padding: const EdgeInsets.only(left: 20, right: 20),
               child: Column(
                 children: [
-                  Dimens.boxHeight10,
+                  Dimens.boxHeight5,
                   Text(
                     'Warranty',
                     style: Styles.blackBold18,
                   ),
-                  Dimens.boxHeight10,
                   Row(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
@@ -49,6 +48,7 @@ class _WarrantyTabWidgetState extends State<WarrantyTabWidget> {
                           Row(
                             children: [
                               CustomRichText(title: "Warranty Type"),
+                              SizedBox(width: 10),
                               SizedBox(
                                 child: DropdownWebWidget(
                                   boxShadow: [
@@ -68,7 +68,6 @@ class _WarrantyTabWidgetState extends State<WarrantyTabWidget> {
                                       spreadRadius: 0.0,
                                     ),
                                   ],
-                                  margin: Dimens.edgeInsets5,
                                   width: MediaQuery.of(context).size.width / 5,
                                   dropdownList: controller.warrantyNameList,
                                   isValueSelected:
@@ -80,10 +79,12 @@ class _WarrantyTabWidgetState extends State<WarrantyTabWidget> {
                               ),
                             ],
                           ),
+                          Dimens.boxHeight10,
                           Row(
                             children: [
                               CustomRichText(
                                   title: "Warranty Usages Term Type"),
+                              SizedBox(width: 10),
                               SizedBox(
                                 child: DropdownWebWidget(
                                   boxShadow: [
@@ -103,7 +104,6 @@ class _WarrantyTabWidgetState extends State<WarrantyTabWidget> {
                                       spreadRadius: 0.0,
                                     ),
                                   ],
-                                  margin: Dimens.edgeInsets5,
                                   width: MediaQuery.of(context).size.width / 5,
                                   dropdownList:
                                       controller.warrantyUsageTermNameList,
@@ -116,9 +116,11 @@ class _WarrantyTabWidgetState extends State<WarrantyTabWidget> {
                               ),
                             ],
                           ),
+                          Dimens.boxHeight10,
                           Row(
                             children: [
                               CustomRichText(title: "Description"),
+                              SizedBox(width: 10),
                               Container(
                                 decoration: BoxDecoration(
                                     border: Border.all(
@@ -127,7 +129,6 @@ class _WarrantyTabWidgetState extends State<WarrantyTabWidget> {
                                 )),
                                 height:
                                     MediaQuery.of(context).size.height * 0.040,
-                                margin: Dimens.edgeInsets5,
                                 constraints: BoxConstraints(
                                   maxWidth:
                                       MediaQuery.of(context).size.width / 5,
@@ -139,6 +140,24 @@ class _WarrantyTabWidgetState extends State<WarrantyTabWidget> {
                               ),
                             ],
                           ),
+                          Dimens.boxHeight10,
+                          Row(
+                            children: [
+                              CustomRichText(title: 'Start Date:'),
+                              SizedBox(width: 10),
+                              CustomTextFieldForStock(
+                                width: MediaQuery.of(context).size.width / 5,
+                                numberTextField: true,
+                                onTap: () {
+                                  controller.openStartDatePicker =
+                                      !controller.openStartDatePicker;
+                                  controller.update(['warranty_tab']);
+                                },
+                                textController: controller.startDateTc,
+                              ),
+                            ],
+                          ),
+                          Dimens.boxHeight10,
                         ],
                       ),
                       Spacer(),
@@ -147,6 +166,7 @@ class _WarrantyTabWidgetState extends State<WarrantyTabWidget> {
                           Row(
                             children: [
                               CustomRichText(title: "Warranty Provider"),
+                              SizedBox(width: 10),
                               SizedBox(
                                 child: DropdownWebWidget(
                                   boxShadow: [
@@ -166,7 +186,6 @@ class _WarrantyTabWidgetState extends State<WarrantyTabWidget> {
                                       spreadRadius: 0.0,
                                     ),
                                   ],
-                                  margin: Dimens.edgeInsets5,
                                   width: MediaQuery.of(context).size.width / 5,
                                   dropdownList:
                                       controller.manufacturerModelNameList,
@@ -179,9 +198,11 @@ class _WarrantyTabWidgetState extends State<WarrantyTabWidget> {
                               ),
                             ],
                           ),
+                          Dimens.boxHeight10,
                           Row(
                             children: [
                               CustomRichText(title: "Certificate Number"),
+                              SizedBox(width: 10),
                               Container(
                                 decoration: BoxDecoration(
                                     border: Border.all(
@@ -190,7 +211,6 @@ class _WarrantyTabWidgetState extends State<WarrantyTabWidget> {
                                 )),
                                 height:
                                     MediaQuery.of(context).size.height * 0.040,
-                                margin: Dimens.edgeInsets5,
                                 constraints: BoxConstraints(
                                   maxWidth:
                                       MediaQuery.of(context).size.width / 5,
@@ -204,16 +224,18 @@ class _WarrantyTabWidgetState extends State<WarrantyTabWidget> {
                                     textController:
                                         controller.certificateNoCtrlr),
                               ),
-                              Dimens.boxHeight10,
                             ],
                           ),
+                          Dimens.boxHeight10,
                           Container(
-                            margin: Dimens.edgeInsets5,
                             child: Row(
                               mainAxisSize: MainAxisSize.min,
                               children: [
-                                Text('Warranty certificate'),
-                                Dimens.boxWidth10,
+                                Text(
+                                  'Warranty certificate',
+                                  style: Styles.blackBold16,
+                                ),
+                                SizedBox(width: 10),
                                 ActionButton(
                                   label: 'Upload certification file',
                                   onPressed: () {},
@@ -223,6 +245,24 @@ class _WarrantyTabWidgetState extends State<WarrantyTabWidget> {
                               ],
                             ),
                           ),
+                          Dimens.boxHeight10,
+                          Row(
+                            children: [
+                              CustomRichText(title: '         Expire Date:'),
+                              SizedBox(width: 10),
+                              CustomTextFieldForStock(
+                                width: MediaQuery.of(context).size.width / 5,
+                                numberTextField: true,
+                                onTap: () {
+                                  controller.openExpiryDatePicker =
+                                      !controller.openExpiryDatePicker;
+                                  controller.update(['warranty_tab']);
+                                },
+                                textController: controller.expireDateTc,
+                              ),
+                            ],
+                          ),
+                          Dimens.boxHeight10,
                         ],
                       ),
                     ],
@@ -232,44 +272,11 @@ class _WarrantyTabWidgetState extends State<WarrantyTabWidget> {
                     child: Wrap(children: [
                       Stack(
                         children: [
-                          Column(
-                            children: [
-                              Container(
-                                width: double.infinity,
-                                child: Wrap(
-                                  children: [
-                                    CustomTextField(
-                                      // numberTextField: false,
-                                      // readOnly: true,
-                                      onTap: () {
-                                        controller.openStartDatePicker =
-                                            !controller.openStartDatePicker;
-                                        controller.update(['warranty_tab']);
-                                      },
-                                      label: 'Start Date: *',
-                                      textController: controller.startDateTc,
-                                    ),
-                                    CustomTextField(
-                                      // numberTextField: false,
-                                      // readOnly: true,
-                                      onTap: () {
-                                        controller.openExpiryDatePicker =
-                                            !controller.openExpiryDatePicker;
-                                        controller.update(['warranty_tab']);
-                                      },
-                                      label: 'Expire Date: *',
-                                      textController: controller.expireDateTc,
-                                    ),
-                                  ],
-                                ),
-                              ),
-                            ],
-                          ),
                           if (controller.openStartDatePicker)
                             Row(
                               children: [
                                 SizedBox(
-                                  width: 120,
+                                  width: 150,
                                 ),
                                 DatePickerWidget(
                                   minDate: DateTime(DateTime.now().year),
@@ -328,7 +335,7 @@ class _WarrantyTabWidgetState extends State<WarrantyTabWidget> {
                                   ),
                                 ),
                                 SizedBox(
-                                  width: 50,
+                                  width: 30,
                                 ),
                               ],
                             ),

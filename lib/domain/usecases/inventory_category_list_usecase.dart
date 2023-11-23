@@ -20,11 +20,11 @@ class InventoryCategoryListUsecase {
       );
   Future<List<InventoryStatusListModel?>?> getInventoryStatusList({
     int? type,
-    int? facilityId,
+    // int? facilityId,
     bool? isLoading,
   }) async =>
       await repository.getInventoryStatusList(
-        facilityId,
+        // facilityId,
         isLoading,
       );
   Future<List<FrequencyModel?>?> getFrequencyList({

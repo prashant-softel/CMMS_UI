@@ -164,6 +164,7 @@ abstract class Routes {
   static const checklistMisPlan = _Paths.checklistMisPlan;
   static const createMisPlan = _Paths.createMisPlan;
   static const viewMisPlan = _Paths.viewMisPlan;
+  static const misTask = _Paths.misTask;
 }
 
 abstract class _Paths {
@@ -322,4 +323,5 @@ abstract class _Paths {
   static const createMisPlan = '/createMisPlan';
 
   static const viewMisPlan = '/viewMisPlan';
+  static const misTask = '/misTask';
 }

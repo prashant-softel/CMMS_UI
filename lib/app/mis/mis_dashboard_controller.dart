@@ -63,6 +63,12 @@ class MisDashboardController extends GetxController {
     Get.toNamed(Routes.createAudit, arguments: {"type": 3});
   }
 
+  void goToMisTaskScreen() {
+    misDashboardPresenter.clearValue();
+
+    Get.toNamed(Routes.misTask, arguments: {"type": 3});
+  }
+
   void goToCreateObservation() {
     Get.toNamed(Routes.createObservation);
   }

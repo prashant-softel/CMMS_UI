@@ -4706,14 +4706,14 @@ class Repository {
   }
 
   Future<List<InventoryStatusListModel?>?> getInventoryStatusList(
-    int? facilityId,
+    // int? facilityId,
     bool? isLoading,
   ) async {
     try {
       final auth = await getSecuredValue(LocalKeys.authToken);
       final res = await _dataRepository.getInventoryStatusList(
         auth: auth,
-        facilityId: facilityId ?? 0,
+        // facilityId: facilityId ?? 0,
         isLoading: isLoading ?? false,
       );
 

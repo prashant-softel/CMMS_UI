@@ -1,6 +1,7 @@
 import 'package:cmms/app/audit_list/audit_list_controller.dart';
 import 'package:cmms/app/checklist_mis_plan/checklist_mis_plan_controller.dart';
 import 'package:cmms/app/home/home_screen.dart';
+import 'package:cmms/app/mis_task/mis_task_controller.dart';
 import 'package:cmms/app/navigators/app_pages.dart';
 import 'package:cmms/app/theme/dimens.dart';
 import 'package:cmms/app/widgets/custom_richtext.dart';
@@ -17,21 +18,19 @@ import '../../theme/styles.dart';
 import '../../widgets/action_button.dart';
 import '../../widgets/table_action_button.dart';
 
-class ChecklistMisPlanContentWeb extends StatefulWidget {
-  ChecklistMisPlanContentWeb({
+class MisTaskContentWeb extends StatefulWidget {
+  MisTaskContentWeb({
     Key? key,
   }) : super(key: key);
 
   @override
-  State<ChecklistMisPlanContentWeb> createState() =>
-      _ChecklistMisPlanContentWebState();
+  State<MisTaskContentWeb> createState() => _MisTaskContentWebState();
 }
 
-class _ChecklistMisPlanContentWebState
-    extends State<ChecklistMisPlanContentWeb> {
+class _MisTaskContentWebState extends State<MisTaskContentWeb> {
   @override
   Widget build(BuildContext context) {
-    return GetBuilder<ChecklistMisPlanController>(
+    return GetBuilder<MisTaskController>(
         id: 'stock_Mangement_Date',
         builder: (controller) {
           return Obx(
@@ -73,8 +72,7 @@ class _ChecklistMisPlanContentWebState
                               },
                               child: Text(" / MIS",
                                   style: Styles.greyMediumLight12)),
-                          Text(" / OBSERVATION PLAN",
-                              style: Styles.greyMediumLight12)
+                          Text(" / MIS TASK", style: Styles.greyMediumLight12)
                         ],
                       ),
                     ),
@@ -100,7 +98,7 @@ class _ChecklistMisPlanContentWebState
                                         MainAxisAlignment.spaceBetween,
                                     children: [
                                       Text(
-                                        "CheckList Plan",
+                                        "Mis Task",
                                         style: Styles.blackBold14,
                                       ),
                                       Spacer(),
@@ -127,21 +125,21 @@ class _ChecklistMisPlanContentWebState
                                           ),
                                         ],
                                       ),
-                                      Dimens.boxWidth10,
-                                      ActionButton(
-                                        icon: Icons.add,
-                                        label: "Add New",
-                                        onPressed: () {
-                                          // controller.clearValue();
-                                          Get.offNamed(
-                                            Routes.createMisPlan,
-                                            // arguments: {
-                                            //   'type': controller.type.value
-                                            // }
-                                          );
-                                        },
-                                        color: ColorValues.addNewColor,
-                                      ),
+                                      //  Dimens.boxWidth10,
+                                      // ActionButton(
+                                      //   icon: Icons.add,
+                                      //   label: "Add New",
+                                      //   onPressed: () {
+                                      //     // controller.clearValue();
+                                      //     Get.offNamed(
+                                      //       Routes.createMisPlan,
+                                      //       // arguments: {
+                                      //       //   'type': controller.type.value
+                                      //       // }
+                                      //     );
+                                      //   },
+                                      //   color: ColorValues.addNewColor,
+                                      // ),
                                     ],
                                   ),
                                 ),
@@ -286,12 +284,14 @@ class _ChecklistMisPlanContentWebState
                                     ),
                                     child: ScrollableTableView(
                                       columns: [
-                                        'Plan ID',
-                                        'Checklist',
-                                        'SOP Number',
-                                        'Start Date',
-                                        'Frequency Name',
-                                        "Action",
+                                        "Plan Id",
+                                        "Check List",
+                                        "SOP Number",
+                                        "Last Done Date",
+                                        "Due Date",
+                                        "Done Date",
+                                        "Order Frequency",
+                                        "Action"
                                       ].map((column) {
                                         return TableViewColumn(
                                           label: column,
@@ -303,7 +303,9 @@ class _ChecklistMisPlanContentWebState
                                           "0001",
                                           "Checklist001",
                                           "S1234590",
-                                          "2023-03-26 12:30",
+                                          "2023-03-26",
+                                          "2023-03-26",
+                                          "2023-03-26",
                                           "Weekly",
                                           "Action",
                                         ],
@@ -311,7 +313,9 @@ class _ChecklistMisPlanContentWebState
                                           "0001",
                                           "Checklist001",
                                           "S1234590",
-                                          "2023-03-26 12:30",
+                                          "2023-03-26",
+                                          "2023-03-26",
+                                          "2023-03-26",
                                           "Weekly",
                                           "Action",
                                         ],
@@ -319,7 +323,9 @@ class _ChecklistMisPlanContentWebState
                                           "0001",
                                           "Checklist001",
                                           "S1234590",
-                                          "2023-03-26 12:30",
+                                          "2023-03-26",
+                                          "2023-03-26",
+                                          "2023-03-26",
                                           "Weekly",
                                           "Action",
                                         ],
@@ -327,7 +333,9 @@ class _ChecklistMisPlanContentWebState
                                           "0001",
                                           "Checklist001",
                                           "S1234590",
-                                          "2023-03-26 12:30",
+                                          "2023-03-26",
+                                          "2023-03-26",
+                                          "2023-03-26",
                                           "Weekly",
                                           "Action",
                                         ],
@@ -335,7 +343,9 @@ class _ChecklistMisPlanContentWebState
                                           "0001",
                                           "Checklist001",
                                           "S1234590",
-                                          "2023-03-26 12:30",
+                                          "2023-03-26",
+                                          "2023-03-26",
+                                          "2023-03-26",
                                           "Weekly",
                                           "Action",
                                         ],
@@ -343,7 +353,9 @@ class _ChecklistMisPlanContentWebState
                                           "0001",
                                           "Checklist001",
                                           "S1234590",
-                                          "2023-03-26 12:30",
+                                          "2023-03-26",
+                                          "2023-03-26",
+                                          "2023-03-26",
                                           "Weekly",
                                           "Action",
                                         ],
@@ -351,7 +363,9 @@ class _ChecklistMisPlanContentWebState
                                           "0001",
                                           "Checklist001",
                                           "S1234590",
-                                          "2023-03-26 12:30",
+                                          "2023-03-26",
+                                          "2023-03-26",
+                                          "2023-03-26",
                                           "Weekly",
                                           "Action",
                                         ],
@@ -384,37 +398,6 @@ class _ChecklistMisPlanContentWebState
                                                               // }
                                                             );
                                                           }
-                                                        },
-                                                      ),
-                                                      TableActionButton(
-                                                        color: ColorValues
-                                                            .editColor,
-                                                        icon: Icons.edit,
-                                                        message: 'Edit',
-                                                        onPress: () {
-                                                          // int id =
-                                                          //     AuditPlanPlanningListDetails?.planId ?? 0;
-                                                          // if (id != 0) {
-                                                          //   Get.toNamed(Routes.AuditPlanPlanning,
-                                                          //       arguments: {"id": id});
-                                                          // }
-                                                        },
-                                                      ),
-                                                      TableActionButton(
-                                                        color: ColorValues
-                                                            .appGreenColor,
-                                                        icon: Icons.check,
-                                                        message:
-                                                            'Approve/Reject',
-                                                        onPress: () {
-                                                          // int id =
-                                                          //     AuditPlanPlanningListDetails?.planId ?? 0;
-                                                          // if (id != 0) {
-                                                          //   Get.toNamed(
-                                                          //     Routes.viewMcPlaning,
-                                                          //     arguments: {'id': id, "type": 1},
-                                                          //   );
-                                                          // }
                                                         },
                                                       ),
                                                     ])

@@ -72,7 +72,7 @@ class MisExecutionProcessDialog extends GetView {
                                 //                 ?.checklist_observation?.length ??
                                 //             0) *
                                 //         80) +
-                                500,
+                                400,
                             width: MediaQuery.of(context).size.width / 1.2,
                             decoration: BoxDecoration(
                               border: Border.all(

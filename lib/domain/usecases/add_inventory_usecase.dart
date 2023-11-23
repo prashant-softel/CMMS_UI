@@ -99,9 +99,9 @@ class AddInventoryUsecase {
       );
   Future<List<InventoryStatusListModel?>?> getInventoryStatusList({
     required bool isLoading,
-    required int facilityId,
+    // required int facilityId,
   }) async {
-    return repository.getInventoryStatusList(facilityId, isLoading);
+    return repository.getInventoryStatusList(isLoading);
   }
 
   Future<List<FrequencyModel?>?> getFrequencyList({

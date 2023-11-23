@@ -60,6 +60,8 @@ import 'package:cmms/app/mis/mis_dashboard_binding.dart';
 import 'package:cmms/app/mis/view/mis_dashboard_screen.dart';
 import 'package:cmms/app/mis_list_of_observation/observation_list_binding.dart';
 import 'package:cmms/app/mis_list_of_observation/views/observation_list_screen.dart';
+import 'package:cmms/app/mis_task/mis_task_binding.dart';
+import 'package:cmms/app/mis_task/view/mis_task_screen.dart';
 import 'package:cmms/app/module_cleaning_dashboard/module_binding.dart';
 import 'package:cmms/app/module_cleaning_execution/module_cleaning_list_execution_binding.dart';
 import 'package:cmms/app/module_cleaning_execution/view/module_cleaning_list_execution_screen.dart.dart';
@@ -988,11 +990,11 @@ class AppPages {
       binding: WasteDataBinding(),
     ),
 
-    // GetPage<dynamic>(
-    //   name: _Paths.transactionReport,
-    //   page: TransactionStockReportScreen.new,
-    //   binding: TransactionStockReportBinding(),
-    // ),
+    GetPage<dynamic>(
+      name: _Paths.misTask,
+      page: MisTaskScreen.new,
+      binding: MisTaskBinding(),
+    ),
     GetPage<dynamic>(
       name: _Paths.checklistMisPlan,
       page: ChecklistMisPlanScreen.new,
