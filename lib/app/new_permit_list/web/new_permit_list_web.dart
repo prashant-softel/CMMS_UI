@@ -569,9 +569,9 @@ class PermitListDataSource extends DataTableSource {
           (NewPermit?.approvedByName ?? '').toString().toLowerCase().contains(
               controller.ApprovedByNameFilterText.value.toLowerCase()) &&
           (NewPermit?.current_status_short ?? '').toString().toLowerCase().contains(
-              controller.CurrentStatusShortFilterText.value.toLowerCase());
-      //     &&
-      // (NewPermit?.ptwStatus ?? '').toString().toLowerCase().contains(controller.PtwStatusFilterText.value.toLowerCase());
+              controller.CurrentStatusShortFilterText.value.toLowerCase())
+          &&
+      (NewPermit?.ptwStatus ?? '').toString().toLowerCase().contains(controller.PtwStatusFilterText.value.toLowerCase());
     }).toList();
   }
 
@@ -592,6 +592,7 @@ class PermitListDataSource extends DataTableSource {
       '${PermitDetails?.approvedByName ?? ''}\n${PermitDetails?.approvedDatetime}',
       '${PermitDetails?.current_status_short ?? ''}',
       '${PermitDetails?.ptwStatus ?? ''}',
+
       'Actions',
     ];
     var cells = [];
@@ -1202,7 +1203,9 @@ class PermitListDataSource extends DataTableSource {
         );
       }).toList(),
       //   ],
-      onSelectChanged: (_) {},
+      onSelectChanged: (_) {
+        controller.viewNewPermitList(permitId: PermitDetails?.permitId);
+      },
     );
   }
 

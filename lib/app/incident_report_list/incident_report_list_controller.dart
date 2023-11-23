@@ -237,8 +237,8 @@ class IncidentReportListController extends GetxController {
 
     final list = await incidentReportPresenter.getIncidentReportList(
         isLoading: isLoading,
-        start_date: startDate, //// "2020-01-01",
-        end_date: endDate, ////   "2023-12-31",
+        start_date: "2020-01-01", //startDate,
+        end_date: "2023-12-31", //endDate,
         facility_id: facilityId);
     // print('incidentReportFacilityId$facilityId');
     // print('Incident Report List:$list');
