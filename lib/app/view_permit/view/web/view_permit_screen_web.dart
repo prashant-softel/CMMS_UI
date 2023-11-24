@@ -2,6 +2,7 @@ import 'package:cmms/app/app.dart';
 import 'package:cmms/app/constant/constant.dart';
 import 'package:cmms/app/controllers/file_upload_controller.dart';
 import 'package:cmms/app/home/widgets/header_widget.dart';
+import 'package:cmms/app/navigators/app_pages.dart';
 import 'package:cmms/app/new_permit_list/permit_status_constants.dart';
 import 'package:cmms/app/utils/user_access_constants.dart';
 import 'package:cmms/app/view_permit/view_permit_controller.dart';
@@ -1610,7 +1611,8 @@ class ViewPermitWebScreen extends GetView<ViewPermitController> {
 
                                               _flutterSecureStorage.delete(
                                                   key: "permitId");
-                                              Get.back();
+                                              Get.offAllNamed(
+                                                  Routes.newPermitList);
                                             },
                                             child: Text(" / NEW PERMIT LIST",
                                                 style:
