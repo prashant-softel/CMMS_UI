@@ -99,7 +99,7 @@ class SPVListContentWeb extends GetView<SPVListController> {
                                   crossAxisAlignment: CrossAxisAlignment.start,
                                   children: [
                                     Text(
-                                      "SPV LIST",
+                                      "ADD SPV",
                                       style: Styles.blackBold16,
                                     ),
                                     SizedBox(
