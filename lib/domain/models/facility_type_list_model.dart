@@ -15,13 +15,15 @@ class FacilityTypeListModel {
   FacilityTypeListModel({
     this.id,
     this.name,
-    this.address,
     this.spv,
+    this.address,
     this.city,
     this.state,
     this.country,
-    // this.blocks,
     this.pin,
+    this.owner,
+    this.operator,
+    this.customer,
   });
 
   int? id;
@@ -31,6 +33,9 @@ class FacilityTypeListModel {
   String? city;
   String? state;
   String? country;
+  String? owner;
+  String? operator;
+  String? customer;
   // int? blocks;
   int? pin;
 
@@ -45,17 +50,22 @@ class FacilityTypeListModel {
         country: json['country'],
         // blocks: json['blocks'],
         pin: json['pin'],
+        owner: json['owner'],
+        operator: json['operator'],
+        customer: json['customer'],
       );
 
   Map<String, dynamic> toJson() => {
         "id": id,
         "name": name,
-    "address": address,
-    "spv": spv,
+        "address": address,
+        "spv": spv,
         "city": city,
         "state": state,
         "country": country,
-        // "blocks": blocks,
         "pin": pin,
+        "owner": owner,
+        "operator": operator,
+        "customer": customer,
       };
 }

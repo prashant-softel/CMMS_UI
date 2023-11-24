@@ -19,8 +19,8 @@ import '../../domain/models/update_facility_type_model.dart';
 
 class FacilityTypeListController extends GetxController {
   FacilityTypeListController(
-      this.facilityTypeListPresenter,
-      );
+    this.facilityTypeListPresenter,
+  );
   FacilityTypeListPresenter facilityTypeListPresenter;
   final HomeController homecontroller = Get.find();
   FacilityTypeListModel? selectedItem;
@@ -28,17 +28,14 @@ class FacilityTypeListController extends GetxController {
   RxBool isCheckedRequire = false.obs;
   void requiretoggleCheckbox() {
     isCheckedRequire.value =
-    !isCheckedRequire.value; // Toggle the checkbox state
+        !isCheckedRequire.value; // Toggle the checkbox state
   }
 
   //checkbox
   RxBool isChecked = true.obs;
-  RxList<CountryModel?> countryList =
-      <CountryModel>[].obs;
-  RxList<CountryState?> stateList =
-      <CountryState>[].obs;
-  RxList<CityModel?> cityList =
-      <CityModel>[].obs;
+  RxList<CountryModel?> countryList = <CountryModel>[].obs;
+  RxList<CountryState?> stateList = <CountryState>[].obs;
+  RxList<CityModel?> cityList = <CityModel>[].obs;
   Rx<bool> isFormInvalid = false.obs;
 
   // Rx<String> selectedBusinessType = ''.obs;
@@ -92,8 +89,7 @@ class FacilityTypeListController extends GetxController {
   RxList<FacilityTypeListModel> facilityTypeList =
       <FacilityTypeListModel>[].obs;
 
-  RxList<FacilityTypeListModel> filteredData =
-      <FacilityTypeListModel>[].obs;
+  RxList<FacilityTypeListModel> filteredData = <FacilityTypeListModel>[].obs;
   Rx<bool> isfacilityTypeListSelected = true.obs;
   Rx<String> selectedSopPermit = ''.obs;
   RxList<String?> selectedSopPermitDataList = <String>[].obs;
@@ -102,7 +98,7 @@ class FacilityTypeListController extends GetxController {
   int selectedJobSOPId = 0;
 
   PaginationController facilityTypeListPaginationController =
-  PaginationController(
+      PaginationController(
     rowCount: 0,
     rowsPerPage: 10,
   );
@@ -170,7 +166,7 @@ class FacilityTypeListController extends GetxController {
     facilityTypeList.clear();
     facilityTypeList.value = <FacilityTypeListModel>[];
     final _facilityTypePermitList =
-    await facilityTypeListPresenter.getFacilityTypeList(
+        await facilityTypeListPresenter.getFacilityTypeList(
       isLoading: true,
       // categoryIds: categoryIds,
       // job_type_id: selectedJobSOPId,
@@ -180,7 +176,7 @@ class FacilityTypeListController extends GetxController {
       facilityTypeList.add(facilityType_list);
     }
     // selectedSopPermit.value = _facilityTypeList[0].name ?? '';
-  
+
     // supplierNameList = _supplierNameList;
     facilityTypeListPaginationController = PaginationController(
       rowCount: facilityTypeList.length,
@@ -229,7 +225,7 @@ class FacilityTypeListController extends GetxController {
 
     facilityTypeList.value = filteredData
         .where((item) =>
-        item.name!.toString().toLowerCase().contains(keyword.toLowerCase()))
+            item.name!.toString().toLowerCase().contains(keyword.toLowerCase()))
         .toList();
   }
 
@@ -258,7 +254,8 @@ class FacilityTypeListController extends GetxController {
   Future<void> getStateList(int selectedCountryId) async {
     stateList.clear();
     stateList.value = <CountryState>[];
-    final list = await facilityTypeListPresenter.getStateList(selectedCountryId : selectedCountryId);
+    final list = await facilityTypeListPresenter.getStateList(
+        selectedCountryId: selectedCountryId);
 
     if (list != null) {
       for (var _equipmentCategoryList in list) {
@@ -270,7 +267,8 @@ class FacilityTypeListController extends GetxController {
   Future<void> getCityList(int selectedStateId) async {
     cityList.clear();
     cityList.value = <CityModel>[];
-    final list = await facilityTypeListPresenter.getCityList(selectedStateId : selectedStateId);
+    final list = await facilityTypeListPresenter.getCityList(
+        selectedStateId: selectedStateId);
 
     if (list != null) {
       for (var _equipmentCategoryList in list) {
@@ -283,17 +281,16 @@ class FacilityTypeListController extends GetxController {
     switch (list.runtimeType) {
       case RxList<CountryModel>:
         {
-          int frequencyIndex =
-          countryList.indexWhere((x) => x?.name == value);
+          int frequencyIndex = countryList.indexWhere((x) => x?.name == value);
           selectedCountryId = countryList[frequencyIndex]?.id ?? 0;
           if (selectedCountryId > 0) {
             isSelectedCountryType.value = true;
           }
           selectedCountry.value = value;
           getStateList(selectedCountryId);
-          if(selectedStateId!=0 || selectedCityId!=0) {
-            selectedStateId=0;
-            selectedCityId=0;
+          if (selectedStateId != 0 || selectedCityId != 0) {
+            selectedStateId = 0;
+            selectedCityId = 0;
             selectedState = ''.obs;
             selectedCity = ''.obs;
             getStateList(selectedCountryId);
@@ -303,17 +300,16 @@ class FacilityTypeListController extends GetxController {
         break;
       case RxList<CountryState>:
         {
-          int frequencyIndex =
-          stateList.indexWhere((x) => x?.name == value);
+          int frequencyIndex = stateList.indexWhere((x) => x?.name == value);
           selectedStateId = stateList[frequencyIndex]?.id ?? 0;
           if (selectedStateId > 0) {
             isSelectedStateType.value = true;
           }
           selectedState.value = value;
           getCityList(selectedStateId);
-          if(selectedCityId!=0){
+          if (selectedCityId != 0) {
             // selectedStateId=0;
-            selectedCityId=0;
+            selectedCityId = 0;
             // selectedState = ''.obs;
             selectedCity = ''.obs;
             // getStateList(selectedCountryId);
@@ -323,11 +319,9 @@ class FacilityTypeListController extends GetxController {
         break;
       case RxList<CityModel>:
         {
-          int frequencyIndex =
-          cityList.indexWhere((x) => x?.name == value);
+          int frequencyIndex = cityList.indexWhere((x) => x?.name == value);
           selectedCityId = cityList[frequencyIndex]?.id ?? 0;
           selectedCity.value = value;
-
         }
         break;
 
@@ -338,7 +332,6 @@ class FacilityTypeListController extends GetxController {
         break;
     }
   }
-
 
   Future<void> getBusinessList(ListType) async {
     final list = await facilityTypeListPresenter.getBusinessList(
@@ -481,27 +474,28 @@ class FacilityTypeListController extends GetxController {
     isSelectedSpv.value = true;
     print("index received is : $indexId & SPV id  : $SpvId");
   }
-  void checkForm() {
 
-    if(selectedSpv.value == ''){
+  void checkForm() {
+    if (selectedSpv.value == '') {
       isSelectedSpv.value = false;
     }
 
-    if(selectedOperator.value == ''){
+    if (selectedOperator.value == '') {
       isSelectedOperator.value = false;
     }
 
-    if(selectedOwner.value == ''){
+    if (selectedOwner.value == '') {
       isSelectedOwner.value = false;
     }
 
-    if(selectedCustomer.value == ''){
+    if (selectedCustomer.value == '') {
       isSelectedCustomer.value = false;
     }
 
-    if(isNameInvalid.value == true || isSelectedSpv.value == false ||
-        isSelectedOwner.value == false || isSelectedCustomer.value == false
-    ){
+    if (isNameInvalid.value == true ||
+        isSelectedSpv.value == false ||
+        isSelectedOwner.value == false ||
+        isSelectedCustomer.value == false) {
       isFormInvalid.value = true;
     } else {
       isFormInvalid.value = false;
@@ -509,7 +503,7 @@ class FacilityTypeListController extends GetxController {
   }
 
   Future<bool> createFacilityType() async {
-    if (titleCtrlr.text.trim() == '' ) {
+    if (titleCtrlr.text.trim() == '') {
       isNameInvalid.value = true;
       isFormInvalid.value = true;
     }
@@ -519,14 +513,13 @@ class FacilityTypeListController extends GetxController {
       return false;
     }
 
-    print("title : ${titleCtrlr.text.trim()} , address: ${addressCtrlr.text.trim()} , zipcode : ${zipcodeCtrlr.text.trim()} , description : ${descriptionCtrlr.text.trim()}, countryid: $selectedCountry , stateId: $selectedState, cityId : $selectedCity, ownerId: $selectedOwner, customerId : $isSelectedCustomer, operatorId: $selectedOperator, spvId : $selectedSpv");
-    if
-    (titleCtrlr.text.trim() == '' ||
-
+    print(
+        "title : ${titleCtrlr.text.trim()} , address: ${addressCtrlr.text.trim()} , zipcode : ${zipcodeCtrlr.text.trim()} , description : ${descriptionCtrlr.text.trim()}, countryid: $selectedCountry , stateId: $selectedState, cityId : $selectedCity, ownerId: $selectedOwner, customerId : $isSelectedCustomer, operatorId: $selectedOperator, spvId : $selectedSpv");
+    if (titleCtrlr.text.trim() == '' ||
         selectedOwner == '' ||
         selectedCustomer == '' ||
-        selectedOperator == ''|| selectedSpv==''
-    ) {
+        selectedOperator == '' ||
+        selectedSpv == '') {
       Fluttertoast.showToast(
           msg: "Please enter required field", fontSize: 16.0);
       print("Fields are blank, please enter dat ato create");
@@ -534,7 +527,7 @@ class FacilityTypeListController extends GetxController {
       String _title = titleCtrlr.text.trim();
       String _address = addressCtrlr.text.trim();
       String? pin = zipcodeCtrlr.text.trim();
-      pin = (pin != "" ? zipcodeCtrlr.text.trim() : "0") ;
+      pin = (pin != "" ? zipcodeCtrlr.text.trim() : "0");
       int _zipcode = int.parse(pin);
       String _description = descriptionCtrlr.text.trim();
       CreateFacilityType createCheckpoint = CreateFacilityType(
@@ -547,7 +540,7 @@ class FacilityTypeListController extends GetxController {
         cityId: selectedCityId,
         stateId: selectedStateId,
         countryId: selectedCountryId,
-        zipcode: _zipcode ,
+        zipcode: _zipcode,
         description: _description,
         photoId: 0,
         latitude: 0.0,
@@ -555,7 +548,8 @@ class FacilityTypeListController extends GetxController {
         timezone: "default_hardcoded",
       );
       print("OUT ");
-      var facilitylistJsonString = createCheckpoint.toJson(); //createCheckPointToJson([createCheckpoint]);
+      var facilitylistJsonString = createCheckpoint
+          .toJson(); //createCheckPointToJson([createCheckpoint]);
 
       print({"checkpointJsonString", facilitylistJsonString});
       await facilityTypeListPresenter.createFacilityType(
@@ -601,15 +595,11 @@ class FacilityTypeListController extends GetxController {
     });
   }
 
-  void isDeleteDialog({
-    String? business_id ,
-    String? business
-  }) {
+  void isDeleteDialog({String? business_id, String? business}) {
     Get.dialog(
       AlertDialog(
         content: Column(mainAxisSize: MainAxisSize.min, children: [
           Icon(Icons.delete, size: 35, color: ColorValues.redColor),
-
           SizedBox(
             height: 10,
           ),
@@ -662,9 +652,9 @@ class FacilityTypeListController extends GetxController {
 
     UpdateFacilityTypeModel createChecklist = UpdateFacilityTypeModel(
       id: checklistId,
-      name : _name,
+      name: _name,
       description: _description,
-      zipcode : int.parse(_pin),
+      zipcode: int.parse(_pin),
       address: _address,
       countryId: selectedCountryId,
       cityId: selectedCityId,
@@ -678,8 +668,7 @@ class FacilityTypeListController extends GetxController {
       longitude: 0.0,
       timezone: "default",
     );
-    var businessTypeJsonString =
-    createChecklist.toJson();
+    var businessTypeJsonString = createChecklist.toJson();
 
     print({"businessTypeJsonString", businessTypeJsonString});
     await facilityTypeListPresenter.updateFacilityList(
@@ -688,7 +677,6 @@ class FacilityTypeListController extends GetxController {
     );
     return true;
   }
-
 
   Future<void> deleteFacility(String? business_id) async {
     {
