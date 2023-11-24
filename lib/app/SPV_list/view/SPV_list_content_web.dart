@@ -80,20 +80,20 @@ class SPVListContentWeb extends GetView<SPVListController> {
                   Container(
                     width: (Get.width * .3),
                     margin: EdgeInsets.only(left: 30, top: 30),
-                    height: Get.height / 2.4,
-                    child: Card(
+                    constraints: BoxConstraints(maxHeight: 220, minHeight: 200),
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(10),
                       color: Color.fromARGB(255, 251, 252, 253),
-                      elevation: 10,
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(10.0),
-                      ),
-                      child: Column(
-                        children: [
-                          // Text(
-                          //     '${varUserAccessModel.value.access_list!.where((e) => e.feature_id == 5 && e.add == 1).length}'),
-                          Padding(
-                            padding: const EdgeInsets.only(
-                                left: 10.0, right: 10, top: 10),
+                    ),
+                    // height: MediaQuery.of(context).size.width * 0.2,
+                    child: Column(
+                      children: [
+                        // Text(
+                        //     '${varUserAccessModel.value.access_list!.where((e) => e.feature_id == 5 && e.add == 1).length}'),
+                        Padding(
+                          padding: const EdgeInsets.only(
+                              left: 10.0, right: 10, top: 10),
+                          child: SingleChildScrollView(
                             child: Column(
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
@@ -346,60 +346,61 @@ class SPVListContentWeb extends GetView<SPVListController> {
                                   ),
                                 ]),
                           ),
-                          Row(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                              Container(
-                                  width: (Get.width * .1),
-                                  height: 40,
-                                  child: CustomElevatedButton(
-                                      backgroundColor: ColorValues.appRedColor,
-                                      onPressed: () {
-                                        controller.cleardata();
-                                      },
-                                      text: 'Cancel')),
-                              SizedBox(
-                                width: 10,
-                              ),
-                              Container(
-                                  width: (Get.width * .2) - 50,
-                                  height: 40,
-                                  child: controller.selectedItem == null
-                                      ? CustomElevatedButton(
-                                          backgroundColor:
-                                              ColorValues.appDarkBlueColor,
-                                          onPressed: () {
-                                            controller
-                                                .createSPVlist()
-                                                .then((value) {
-                                              print("CREATE");
-                                              print("value,$value");
-                                              if (value == true)
-                                                controller
-                                                    .issuccessCreatechecklist();
-                                            });
-                                          },
-                                          text: 'Create SPV ')
-                                      : CustomElevatedButton(
-                                          backgroundColor:
-                                              ColorValues.appDarkBlueColor,
-                                          onPressed: () {
-                                            controller
-                                                .updateSPV(
-                                                    controller.selectedItem?.id)
-                                                .then((value) {
-                                              print("UPDATE");
-                                              print("value,$value");
-                                              if (value == true)
-                                                controller
-                                                    .issuccessCreatechecklist();
-                                            });
-                                          },
-                                          text: 'Update')),
-                            ],
-                          ),
-                        ],
-                      ),
+                        ),
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            Container(
+                              width: (Get.width * .1),
+                              height: 40,
+                              child: CustomElevatedButton(
+                                  backgroundColor: ColorValues.appRedColor,
+                                  onPressed: () {
+                                    controller.cleardata();
+                                  },
+                                  text: 'Cancel'),
+                            ),
+                            SizedBox(
+                              width: 10,
+                            ),
+                            Container(
+                                width: (Get.width * .1),
+                                height: 40,
+                                child: controller.selectedItem == null
+                                    ? CustomElevatedButton(
+                                        backgroundColor:
+                                            ColorValues.appDarkBlueColor,
+                                        onPressed: () {
+                                          controller
+                                              .createSPVlist()
+                                              .then((value) {
+                                            print("CREATE");
+                                            print("value,$value");
+                                            if (value == true)
+                                              controller
+                                                  .issuccessCreatechecklist();
+                                          });
+                                        },
+                                        text: 'Create SPV ')
+                                    : CustomElevatedButton(
+                                        backgroundColor:
+                                            ColorValues.appDarkBlueColor,
+                                        onPressed: () {
+                                          controller
+                                              .updateSPV(
+                                                  controller.selectedItem?.id)
+                                              .then((value) {
+                                            print("UPDATE");
+                                            print("value,$value");
+                                            if (value == true)
+                                              controller
+                                                  .issuccessCreatechecklist();
+                                          });
+                                        },
+                                        text: 'Update')),
+                          ],
+                        ),
+                      ],
                     ),
                   ),
                   Dimens.boxWidth10,
