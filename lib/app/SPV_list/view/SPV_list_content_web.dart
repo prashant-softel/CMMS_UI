@@ -1,5 +1,7 @@
 import 'package:cmms/app/app.dart';
 import 'package:cmms/app/SPV_list/SPV_list_controller.dart';
+import 'package:cmms/app/navigators/app_pages.dart';
+import 'package:data_table_2/data_table_2.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:scrollable_table_view/scrollable_table_view.dart';
@@ -399,14 +401,8 @@ class SPVListContentWeb extends GetView<SPVListController> {
                         ],
                       ),
                     ),
-                  )
-                  // : Container(),
-                  // varUserAccessModel.value.access_list!
-                  //             .where((e) => e.feature_id == 5 && e.view == 0)
-                  //             .length >
-                  //         0
-                  // ?
-                  ,
+                  ),
+                  Dimens.boxWidth10,
                   Expanded(
                     child: Container(
                       width: Get.width * 7,
@@ -461,212 +457,390 @@ class SPVListContentWeb extends GetView<SPVListController> {
                             SizedBox(
                               height: 20,
                             ),
-                            controller.SPVList.isEmpty
-                                ? Expanded(
-                                    child: ScrollableTableView(
-                                      columns: [
-                                        "Id ",
-                                        "Name",
-                                        "Description",
-                                        "Action"
-                                      ].map((column) {
-                                        return TableViewColumn(
-                                          label: column,
-                                          minWidth: Get.width * 0.16,
-                                        );
-                                      }).toList(),
-                                      rows: [
-                                        ...List.generate(
-                                          controller.SPVList.length ?? 0,
-                                          (index) {
-                                            return ['', '', '', ''];
-                                          },
-                                        ),
-                                      ].map((record) {
-                                        return TableViewRow(
-                                          height: 60,
-                                          cells: record.map((value) {
-                                            return TableViewCell(
-                                              child: Text(value),
-                                            );
-                                          }).toList(),
-                                        );
-                                      }).toList(),
-                                    ),
-                                  )
-                                : Expanded(
-                                    child: ScrollableTableView(
-                                      paginationController: controller
-                                          .SPVListPaginationController,
-                                      columns: [
-                                        "Id ",
-                                        "Name",
-                                        "Description",
-                                        "Action"
-                                      ].map((column) {
-                                        return TableViewColumn(
-                                          minWidth: Get.width * 0.12,
-                                          label: column,
-                                        );
-                                      }).toList(),
-                                      rows: //
-                                          [
-                                        ...List.generate(
-                                          controller.SPVList.length,
-                                          (index) {
-                                            var SPVListDetails =
-                                                controller.SPVList[index];
-                                            return [
-                                              '${SPVListDetails.id}',
-                                              '${SPVListDetails.name}',
-                                              '${SPVListDetails.description}',
-                                              "Action"
-                                            ];
-                                          },
-                                        ),
-                                      ].map((_permitTypeList) {
-                                        return TableViewRow(
-                                            height: 45,
-                                            cells: _permitTypeList.map((value) {
-                                              return TableViewCell(
-                                                child: (value == 'Checkbox')
-                                                    ? Checkbox(
-                                                        value: controller
-                                                            .isChecked.value,
-                                                        onChanged: (val) {})
-                                                    : (value == "Action")
-                                                        ? Wrap(
-                                                            alignment: WrapAlignment
-                                                                .center, // Align buttons to the center
-                                                            children: [
-                                                                // varUserAccessModel.value.access_list!.where((e) => e.feature_id == 5 && e.edit == 1).length >
-                                                                //         0
-                                                                //     ?
-                                                                Container(
-                                                                  padding: EdgeInsets
-                                                                      .only(
-                                                                          bottom:
-                                                                              10),
-                                                                  child: Column(
-                                                                    children: [
-                                                                      Row(
-                                                                          mainAxisAlignment:
-                                                                              MainAxisAlignment.center,
-                                                                          children: [
-                                                                            TableActionButton(
-                                                                              color: ColorValues.editColor,
-                                                                              icon: Icons.edit,
-                                                                              message: 'Edit',
-                                                                              onPress: () {
-                                                                                controller.selectedItem = controller.SPVList.firstWhere((element) => "${element.id}" == _permitTypeList[0]);
+                            Expanded(
+                              child: DataTable2(
+                                dataRowHeight: 50,
+                                columnSpacing: 10,
+                                border: TableBorder.all(
+                                    color: Color.fromARGB(255, 206, 229, 234)),
+                                columns: [
+                                  DataColumn2(
+                                      fixedWidth: 100,
+                                      label: Text(
+                                        "Id",
+                                        style: TextStyle(
+                                            fontSize: 15,
+                                            fontWeight: FontWeight.bold),
+                                      )),
+                                  DataColumn2(
+                                      // fixedWidth: 150,
+                                      label: Text(
+                                    "Name",
+                                    style: TextStyle(
+                                        fontSize: 15,
+                                        fontWeight: FontWeight.bold),
+                                  )),
+                                  DataColumn2(
+                                      // fixedWidth: 300,
+                                      label: Text(
+                                    "Description",
+                                    style: TextStyle(
+                                        fontSize: 15,
+                                        fontWeight: FontWeight.bold),
+                                  )),
+                                  DataColumn2(
+                                      fixedWidth: 100,
+                                      label: Text(
+                                        'Action',
+                                        style: TextStyle(
+                                            fontSize: 15,
+                                            fontWeight: FontWeight.bold),
+                                      )),
+                                ],
+                                rows: List<DataRow>.generate(
+                                  controller.SPVList?.length ?? 0,
+                                  (index) => DataRow(cells: [
+                                    DataCell(Text(controller.SPVList?[index]?.id
+                                            .toString() ??
+                                        '')),
+                                    DataCell(Text(controller
+                                            .SPVList?[index]?.name
+                                            .toString() ??
+                                        '')),
+                                    DataCell(Text(controller
+                                            .SPVList?[index]?.description ??
+                                        '')),
+                                    DataCell(Row(
+                                      children: [
+                                        TableActionButton(
+                                            color: ColorValues.editColor,
+                                            icon: Icons.edit,
+                                            message: 'Edit',
+                                            onPress: () {
+                                              controller.selectedItem =
+                                                  controller.SPVList.firstWhere(
+                                                      (element) =>
+                                                          "${element.id}" ==
+                                                          controller
+                                                              .SPVList?[index]
+                                                              ?.id
+                                                              .toString());
 
-                                                                                controller.titleCtrlr.text = controller.selectedItem?.name ?? '';
-                                                                                controller.descriptionCtrlr.text = controller.selectedItem?.description ?? '';
-                                                                              },
-                                                                            ),
-                                                                            TableActionButton(
-                                                                              color: ColorValues.deleteColor,
-                                                                              icon: Icons.delete,
-                                                                              message: 'Delete',
-                                                                              onPress: () {
-                                                                                controller.isDeleteDialog(business_id: _permitTypeList[0], business: _permitTypeList[1]);
-                                                                              },
-                                                                            ),
-                                                                          ]),
-                                                                      // Container(
-                                                                      //   padding: EdgeInsets.only(
-                                                                      //       bottom:
-                                                                      //           10),
-                                                                      //   child:
-                                                                      // ),
-                                                                    ],
-                                                                  ),
-                                                                ),
-                                                                // : Container()
-                                                              ])
-                                                        : Align(
-                                                            // Align the text in the center
-                                                            alignment: Alignment
-                                                                .center,
-                                                            child: Text(value),
-                                                          ),
-                                              );
-                                            }).toList());
-                                      }).toList(),
-                                    ),
-                                  ),
-                            Padding(
-                              padding:
-                                  const EdgeInsets.symmetric(horizontal: 25),
-                              child: ValueListenableBuilder(
-                                  valueListenable:
-                                      controller.SPVListPaginationController,
-                                  builder: (context, value, child) {
-                                    return Row(children: [
-                                      Text(
-                                          "${controller.SPVListPaginationController.currentPage}  of ${controller.SPVListPaginationController.pageCount}"),
-                                      Row(children: [
-                                        IconButton(
-                                          onPressed: controller
-                                                      .SPVListPaginationController
-                                                      .currentPage <=
-                                                  1
-                                              ? null
-                                              : () {
+                                              controller.titleCtrlr.text =
                                                   controller
-                                                          .SPVListPaginationController
-                                                      .previous();
-                                                },
-                                          iconSize: 20,
-                                          splashRadius: 20,
-                                          icon: Icon(
-                                            Icons.arrow_back_ios_new_rounded,
-                                            color: controller
-                                                        .SPVListPaginationController
-                                                        .currentPage <=
-                                                    1
-                                                ? Colors.black26
-                                                : Theme.of(context)
-                                                    .primaryColor,
-                                          ),
+                                                          .selectedItem?.name ??
+                                                      '';
+                                              controller.descriptionCtrlr.text =
+                                                  controller.selectedItem
+                                                          ?.description ??
+                                                      '';
+                                              // int spvId = int.tryParse(
+                                              //         SPVList?.name ??
+                                              //             "") ??
+                                              //     0;
+                                              // if (spvId != 0) {
+                                              //   Get.toNamed(
+                                              //       Routes.SPVListScreen,
+                                              //       arguments: {"spvId": spvId});
+                                              // }
+                                              // controller.selectedItem =
+                                              //     controller.SPVList.firstWhere(
+                                              //         (element) =>
+                                              //             "${element.id}" ==
+                                              //             _permitTypeList[0]);
+                                              // controller.selectedItem =
+                                              //     controller.SPVList.firstWhere(
+                                              //         (element) =>
+                                              //             "${element.id}" ==
+                                              //             _permitTypeList[0]);
+                                            })
+                                        // : Container(),
+                                        ,
+                                        TableActionButton(
+                                          color: ColorValues.deleteColor,
+                                          icon: Icons.delete,
+                                          message: 'Delete',
+                                          onPress: () {
+                                            controller.isDeleteDialog(
+                                                business_id: controller
+                                                    .SPVList?[index]?.id
+                                                    .toString(),
+                                                business: controller
+                                                    .SPVList?[index]?.name);
+                                          },
                                         ),
-                                        IconButton(
-                                          onPressed: controller
-                                                      .SPVListPaginationController
-                                                      .currentPage >=
-                                                  controller
-                                                      .SPVListPaginationController
-                                                      .pageCount
-                                              ? null
-                                              : () {
-                                                  controller
-                                                          .SPVListPaginationController
-                                                      .next();
-                                                },
-                                          iconSize: 20,
-                                          splashRadius: 20,
-                                          icon: Icon(
-                                            Icons.arrow_forward_ios_rounded,
-                                            color: controller
-                                                        .SPVListPaginationController
-                                                        .currentPage >=
-                                                    controller
-                                                        .SPVListPaginationController
-                                                        .pageCount
-                                                ? Colors.black26
-                                                : Theme.of(context)
-                                                    .primaryColor,
-                                          ),
-                                        ),
-                                      ]),
-                                    ]);
-                                  }),
+                                      ],
+                                    )),
+                                  ]),
+                                ),
+                              ),
                             ),
                           ],
                         ),
                       ),
                     ),
-                  )
+                  ),
+
+                  // Expanded(
+                  //   child: Container(
+                  //     width: Get.width * 7,
+                  //     margin: EdgeInsets.only(left: 10, top: 30),
+                  //     height: Get.height,
+                  //     child: Card(
+                  //       color: Color.fromARGB(255, 251, 252, 253),
+                  //       elevation: 10,
+                  //       shape: RoundedRectangleBorder(
+                  //         borderRadius: BorderRadius.circular(10.0),
+                  //       ),
+                  //       child: Column(
+                  //         crossAxisAlignment: CrossAxisAlignment.start,
+                  //         children: [
+                  //           Padding(
+                  //             padding: const EdgeInsets.all(10.0),
+                  //             child: Text(
+                  //               "List of SPV",
+                  //               style: Styles.blackBold16,
+                  //             ),
+                  //           ),
+                  //           Divider(
+                  //             color: ColorValues.greyLightColour,
+                  //           ),
+                  //           Row(
+                  //             children: [
+                  //               Spacer(),
+                  //               Container(
+                  //                 width: 200,
+                  //                 height: 40,
+                  //                 margin: Dimens.edgeInsets0_0_16_0,
+                  //                 child: TextField(
+                  //                   onChanged: (value) =>
+                  //                       controller.search(value),
+                  //                   decoration: InputDecoration(
+                  //                     enabledBorder: const OutlineInputBorder(
+                  //                       borderSide: const BorderSide(
+                  //                           color: Colors.grey, width: 0.0),
+                  //                     ),
+                  //                     focusedBorder: const OutlineInputBorder(
+                  //                       borderSide: const BorderSide(
+                  //                           color: Colors.grey, width: 0.0),
+                  //                     ),
+                  //                     contentPadding: Dimens.edgeInsets10_0_0_0,
+                  //                     hintText: 'search'.tr,
+                  //                     hintStyle: Styles.grey12,
+                  //                   ),
+                  //                 ),
+                  //               ),
+                  //             ],
+                  //           ),
+                  //           SizedBox(
+                  //             height: 20,
+                  //           ),
+                  //           controller.SPVList.isEmpty
+                  //               ? Expanded(
+                  //                   child: ScrollableTableView(
+                  //                     columns: [
+                  //                       "Id ",
+                  //                       "Name",
+                  //                       "Description",
+                  //                       "Action"
+                  //                     ].map((column) {
+                  //                       return TableViewColumn(
+                  //                         label: column,
+                  //                         minWidth: Get.width * 0.16,
+                  //                       );
+                  //                     }).toList(),
+                  //                     rows: [
+                  //                       ...List.generate(
+                  //                         controller.SPVList.length ?? 0,
+                  //                         (index) {
+                  //                           return ['', '', '', ''];
+                  //                         },
+                  //                       ),
+                  //                     ].map((record) {
+                  //                       return TableViewRow(
+                  //                         height: 60,
+                  //                         cells: record.map((value) {
+                  //                           return TableViewCell(
+                  //                             child: Text(value),
+                  //                           );
+                  //                         }).toList(),
+                  //                       );
+                  //                     }).toList(),
+                  //                   ),
+                  //                 )
+                  //               : Expanded(
+                  //                   child: ScrollableTableView(
+                  //                     paginationController: controller
+                  //                         .SPVListPaginationController,
+                  //                     columns: [
+                  //                       "Id ",
+                  //                       "Name",
+                  //                       "Description",
+                  //                       "Action"
+                  //                     ].map((column) {
+                  //                       return TableViewColumn(
+                  //                         minWidth: Get.width * 0.12,
+                  //                         label: column,
+                  //                       );
+                  //                     }).toList(),
+                  //                     rows: [
+                  //                       ...List.generate(
+                  //                         controller.SPVList.length,
+                  //                         (index) {
+                  //                           var SPVListDetails =
+                  //                               controller.SPVList[index];
+                  //                           return [
+                  //                             '${SPVListDetails.id}',
+                  //                             '${SPVListDetails.name}',
+                  //                             '${SPVListDetails.description}',
+                  //                             "Action"
+                  //                           ];
+                  //                         },
+                  //                       ),
+                  //                     ].map((_permitTypeList) {
+                  //                       return TableViewRow(
+                  //                           height: 45,
+                  //                           cells: _permitTypeList.map((value) {
+                  //                             return TableViewCell(
+                  //                               child: (value == 'Checkbox')
+                  //                                   ? Checkbox(
+                  //                                       value: controller
+                  //                                           .isChecked.value,
+                  //                                       onChanged: (val) {})
+                  //                                   : (value == "Action")
+                  //                                       ? Wrap(
+                  //                                           alignment: WrapAlignment
+                  //                                               .center, // Align buttons to the center
+                  //                                           children: [
+                  //                                               // varUserAccessModel.value.access_list!.where((e) => e.feature_id == 5 && e.edit == 1).length >
+                  //                                               //         0
+                  //                                               //     ?
+                  //                                               Container(
+                  //                                                 padding: EdgeInsets
+                  //                                                     .only(
+                  //                                                         bottom:
+                  //                                                             10),
+                  //                                                 child: Column(
+                  //                                                   children: [
+                  //                                                     Row(
+                  //                                                         mainAxisAlignment:
+                  //                                                             MainAxisAlignment.center,
+                  //                                                         children: [
+                  //                                                           TableActionButton(
+                  //                                                             color: ColorValues.editColor,
+                  //                                                             icon: Icons.edit,
+                  //                                                             message: 'Edit',
+                  //                                                             onPress: () {
+                  //                                                               controller.selectedItem = controller.SPVList.firstWhere((element) => "${element.id}" == _permitTypeList[0]);
+
+                  //                                                               controller.titleCtrlr.text = controller.selectedItem?.name ?? '';
+                  //                                                               controller.descriptionCtrlr.text = controller.selectedItem?.description ?? '';
+                  //                                                             },
+                  //                                                           ),
+                  //                                                           TableActionButton(
+                  //                                                             color: ColorValues.deleteColor,
+                  //                                                             icon: Icons.delete,
+                  //                                                             message: 'Delete',
+                  //                                                             onPress: () {
+                  //                                                               controller.isDeleteDialog(business_id: _permitTypeList[0], business: _permitTypeList[1]);
+                  //                                                             },
+                  //                                                           ),
+                  //                                                         ]),
+                  //                                                     // Container(
+                  //                                                     //   padding: EdgeInsets.only(
+                  //                                                     //       bottom:
+                  //                                                     //           10),
+                  //                                                     //   child:
+                  //                                                     // ),
+                  //                                                   ],
+                  //                                                 ),
+                  //                                               ),
+                  //                                               // : Container()
+                  //                                             ])
+                  //                                       : Align(
+                  //                                           // Align the text in the center
+                  //                                           alignment: Alignment
+                  //                                               .center,
+                  //                                           child: Text(value),
+                  //                                         ),
+                  //                             );
+                  //                           }).toList());
+                  //                     }).toList(),
+                  //                   ),
+                  //                 ),
+                  //           Padding(
+                  //             padding:
+                  //                 const EdgeInsets.symmetric(horizontal: 25),
+                  //             child: ValueListenableBuilder(
+                  //                 valueListenable:
+                  //                     controller.SPVListPaginationController,
+                  //                 builder: (context, value, child) {
+                  //                   return Row(children: [
+                  //                     Text(
+                  //                         "${controller.SPVListPaginationController.currentPage}  of ${controller.SPVListPaginationController.pageCount}"),
+                  //                     Row(children: [
+                  //                       IconButton(
+                  //                         onPressed: controller
+                  //                                     .SPVListPaginationController
+                  //                                     .currentPage <=
+                  //                                 1
+                  //                             ? null
+                  //                             : () {
+                  //                                 controller
+                  //                                         .SPVListPaginationController
+                  //                                     .previous();
+                  //                               },
+                  //                         iconSize: 20,
+                  //                         splashRadius: 20,
+                  //                         icon: Icon(
+                  //                           Icons.arrow_back_ios_new_rounded,
+                  //                           color: controller
+                  //                                       .SPVListPaginationController
+                  //                                       .currentPage <=
+                  //                                   1
+                  //                               ? Colors.black26
+                  //                               : Theme.of(context)
+                  //                                   .primaryColor,
+                  //                         ),
+                  //                       ),
+                  //                       IconButton(
+                  //                         onPressed: controller
+                  //                                     .SPVListPaginationController
+                  //                                     .currentPage >=
+                  //                                 controller
+                  //                                     .SPVListPaginationController
+                  //                                     .pageCount
+                  //                             ? null
+                  //                             : () {
+                  //                                 controller
+                  //                                         .SPVListPaginationController
+                  //                                     .next();
+                  //                               },
+                  //                         iconSize: 20,
+                  //                         splashRadius: 20,
+                  //                         icon: Icon(
+                  //                           Icons.arrow_forward_ios_rounded,
+                  //                           color: controller
+                  //                                       .SPVListPaginationController
+                  //                                       .currentPage >=
+                  //                                   controller
+                  //                                       .SPVListPaginationController
+                  //                                       .pageCount
+                  //                               ? Colors.black26
+                  //                               : Theme.of(context)
+                  //                                   .primaryColor,
+                  //                         ),
+                  //                       ),
+                  //                     ]),
+                  //                   ]);
+                  //                 }),
+                  //           ),
+                  //         ],
+                  //       ),
+                  //     ),
+                  //   ),
+                  // )
+
                   // : Container()
                 ],
               ),
