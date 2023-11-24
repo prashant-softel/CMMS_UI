@@ -53,6 +53,7 @@ class SPVListController extends GetxController {
   Rx<bool> isTitleInvalid = false.obs;
   Rx<bool> isDescriptionInvalid = false.obs;
   RxList<SPVListModel> SPVList = <SPVListModel>[].obs;
+  RxList<SPVListModel> BufferSPVList = <SPVListModel>[].obs;
   Rx<bool> isSPVListSelected = true.obs;
   Rx<String> selectedSopPermit = ''.obs;
   RxList<String?> selectedSopPermitDataList = <String>[].obs;
@@ -65,17 +66,47 @@ class SPVListController extends GetxController {
     rowCount: 0,
     rowsPerPage: 10,
   );
+
   void search(String keyword) {
+    print('Keyword: $keyword');
+
     if (keyword.isEmpty) {
-      SPVList.value = filteredData;
+      print('SPVList length (empty keyword): ${SPVList.length}');
+      SPVList.value = BufferSPVList.value;
+
       return;
     }
 
-    SPVList.value = filteredData
-        .where((item) =>
-            item.name!.toString().toLowerCase().contains(keyword.toLowerCase()))
-        .toList();
+    // Use print statements to debug the filtering logic
+    List<SPVListModel> filteredList = BufferSPVList.where((item) =>
+        item.name?.toString().toLowerCase().contains(keyword.toLowerCase()) ??
+        false).toList();
+
+    print('Filtered list length: ${filteredList.length}');
+
+    SPVList.value = filteredList;
+    print('SPVList length (non-empty keyword): ${SPVList.length}');
   }
+  // void search(String keyword) {
+  //   print('Keyword: $keyword');
+
+  //   if (keyword.isEmpty) {
+  //     SPVList.value = filteredData.toList();
+  //     print('SPVList length (empty keyword): ${SPVList.length}');
+  //     return;
+  //   }
+
+  //   SPVList.value = filteredData
+  //       .where((item) =>
+  //           item.name
+  //               ?.toString()
+  //               .toLowerCase()
+  //               .contains(keyword.toLowerCase()) ??
+  //           false)
+  //       .toList();
+
+  //   print('SPVList length (non-empty keyword): ${SPVList.length}');
+  // }
 
   //Facility list / demo plant
   RxList<FacilityModel?> facilityList = <FacilityModel>[].obs;
@@ -103,6 +134,7 @@ class SPVListController extends GetxController {
 
   Future<void> getSPVList() async {
     SPVList.value = <SPVListModel>[];
+    BufferSPVList.value = <SPVListModel>[];
     final _spvList = await sPVListPresenter.getSPVList(
       isLoading: true,
       // categoryIds: categoryIds,
@@ -111,6 +143,7 @@ class SPVListController extends GetxController {
     );
     for (var facilityType_list in _spvList) {
       SPVList.add(facilityType_list);
+      BufferSPVList.add(facilityType_list);
     }
     // selectedSopPermit.value = _SPVList[0].name ?? '';
 
