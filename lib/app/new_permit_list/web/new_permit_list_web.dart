@@ -70,7 +70,8 @@ class _NewPermitListWebState extends State<NewPermitListWeb> {
                           ),
                           GestureDetector(
                             onTap: () {
-                              Get.back();
+                              // Get.back();
+                              Get.offAllNamed(Routes.breakdown);
                             },
                             child: Text(" / BREAKDOWN MAINTAINANCE",
                                 style: Styles.greyMediumLight12),
@@ -569,9 +570,8 @@ class PermitListDataSource extends DataTableSource {
           (NewPermit?.approvedByName ?? '').toString().toLowerCase().contains(
               controller.ApprovedByNameFilterText.value.toLowerCase()) &&
           (NewPermit?.current_status_short ?? '').toString().toLowerCase().contains(
-              controller.CurrentStatusShortFilterText.value.toLowerCase())
-          &&
-      (NewPermit?.ptwStatus ?? '').toString().toLowerCase().contains(controller.PtwStatusFilterText.value.toLowerCase());
+              controller.CurrentStatusShortFilterText.value.toLowerCase()) &&
+          (NewPermit?.ptwStatus ?? '').toString().toLowerCase().contains(controller.PtwStatusFilterText.value.toLowerCase());
     }).toList();
   }
 
