@@ -185,38 +185,6 @@ class FacilityTypeListController extends GetxController {
     update(['facility_type_list']);
   }
 
-  // dynamic onValueChangedCountry(RxList<CountryModel?> value, dynamic list) {
-  //   if(countryId>=0 && stateId>=0 && cityId>=0){
-  //     stateId =-1;
-  //     countryId = -1;
-  //     selectedState.value = '';
-  //     selectedCity.value = '';
-  //   }
-  //   print("onValueChange function. list : $list and value is :");
-  //   String newValue = list.toString();
-  //   print(" Selected Facility : ");
-  //
-  //   int indexId = countryList.indexWhere((x) => x?.name == newValue);
-  //   if (indexId > 0) {
-  //     countryId = countryList[indexId]?.id ?? -1;
-  //   }
-  //   print("index received is : $indexId & country id  : $countryId");
-  //   // print(selectedfacility);
-  //   // selectedFacilityId = facilityIds;
-  //   getStateList();
-  // }
-
-  // Future<void> getStateList() async {
-  //   final list = await facilityTypeListPresenter.getStateList(
-  //     country_code: countryId,
-  //   );
-  //
-  //   if (list != null) {
-  //     for (var _stateList in list) {
-  //       stateList.add(_stateList);
-  //     }
-  //   }
-  // }
   void search(String keyword) {
     if (keyword.isEmpty) {
       facilityTypeList.value = filteredData;
@@ -373,49 +341,6 @@ class FacilityTypeListController extends GetxController {
       }
     }
   }
-  //
-  // dynamic onValueChangedState(RxList<CountryState?> value, dynamic list) {
-  //   print("onValueChange function. list : $list and value is :");
-  //   String newValue = list.toString();
-  //   print(" Selected Facility : ");
-  //
-  //   int indexId = stateList.indexWhere((x) => x?.name == newValue);
-  //   if (indexId > 0) {
-  //     stateId = stateList[indexId]?.id ?? 0;
-  //   }
-  //   print("index received is : $indexId & country id  : $stateId");
-  //   // print(selectedfacility);
-  //   // selectedFacilityId = facilityIds;
-  //   getCityList();
-  // }
-
-  // Future<void> getCityList() async {
-  //   final list = await facilityTypeListPresenter.getCityList(
-  //     isLoading: true,
-  //     country_code: stateId,
-  //   );
-  //
-  //   if (list != null) {
-  //     for (var _stateList in list) {
-  //       cityList.add(_stateList);
-  //     }
-  //   }
-  // }
-
-  // dynamic onValueChangedCity(RxList<CityModel?> value, dynamic list) {
-  //   print("onValueChange function. list : $list and value is :");
-  //   String newValue = list.toString();
-  //   print(" Selected Facility : ");
-  //
-  //   int indexId = cityList.indexWhere((x) => x?.name == newValue);
-  //   if (indexId > 0) {
-  //     cityId = cityList[indexId]?.id ?? 0;
-  //   }
-  //   print("index received is : $indexId & city id  : $cityId");
-  //   // print(selectedfacility);
-  //   // selectedFacilityId = facilityIds;
-  //   // getBlockTypeList();
-  // }
 
   dynamic onValueChangedOwner(RxList<BusinessListModel?> value, dynamic list) {
     print("onValueChangeOwner function. list : $list and value is :");
@@ -609,7 +534,7 @@ class FacilityTypeListController extends GetxController {
                 style: Styles.blackBold16,
                 children: [
                   TextSpan(
-                    text: business,
+                    text: "[$business]",
                     style: TextStyle(
                       color: ColorValues.orangeColor,
                       fontWeight: FontWeight.bold,
