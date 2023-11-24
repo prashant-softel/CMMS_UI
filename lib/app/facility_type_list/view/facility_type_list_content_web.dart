@@ -4,6 +4,7 @@ import 'package:cmms/app/constant/constant.dart';
 import 'package:cmms/app/facility_type_list/facility_type_list_controller.dart';
 import 'package:cmms/app/navigators/app_pages.dart';
 import 'package:cmms/app/widgets/dropdown_web.dart';
+import 'package:data_table_2/data_table_2.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:cmms/app/widgets/custom_textfield.dart';
@@ -1104,7 +1105,7 @@ class FacilityTypeListContentWeb extends GetView<FacilityTypeListController> {
                                         ]),
                                   ),
                                   SizedBox(
-                                    height: 20,
+                                    height: 10,
                                   ),
                                   Row(
                                     mainAxisAlignment: MainAxisAlignment.center,
@@ -1160,10 +1161,6 @@ class FacilityTypeListContentWeb extends GetView<FacilityTypeListController> {
                                                   text: 'Update')),
                                     ],
                                   ),
-
-                                  SizedBox(
-                                    height: 10,
-                                  ),
                                 ],
                               ),
                             ),
@@ -1190,364 +1187,688 @@ class FacilityTypeListContentWeb extends GetView<FacilityTypeListController> {
                                 children: [
                                   Padding(
                                     padding: const EdgeInsets.all(10.0),
-                                    child: Text(
-                                      "List of Facilities",
-                                      style: Styles.blackBold16,
-                                    ),
-                                  ),
-                                  Divider(
-                                    color: ColorValues.greyLightColour,
-                                  ),
-                                  Row(
-                                    children: [
-                                      // Container(
-                                      //   width: (Get.width * .1) - 60,
-                                      //   margin: EdgeInsets.only(left: 10),
-                                      //   child: CustomElevatedButton(
-                                      //       backgroundColor:
-                                      //       ColorValues.appLightBlueColor,
-                                      //       onPressed: () {
-                                      //         FlutterClipboard.copy(controller
-                                      //         // .preventiveCheckList![0]
-                                      //             .toString())
-                                      //             .then((value) {
-                                      //           print("copy data");
-                                      //         });
-                                      //       },
-                                      //       text: 'Copy'),
-                                      // ),
-                                      // Container(
-                                      //   width: (Get.width * .1) - 60,
-                                      //   margin: EdgeInsets.only(left: 10),
-                                      //   child: CustomElevatedButton(
-                                      //       backgroundColor:
-                                      //       ColorValues.appLightBlueColor,
-                                      //       onPressed: () {},
-                                      //       text: 'Excel'),
-                                      // ),
-                                      // Container(
-                                      //   width: (Get.width * .1) - 70,
-                                      //   margin: EdgeInsets.only(left: 10),
-                                      //   child: CustomElevatedButton(
-                                      //       backgroundColor:
-                                      //       ColorValues.appLightBlueColor,
-                                      //       onPressed: () {},
-                                      //       text: 'PDF'),
-                                      // ),
-                                      // Container(
-                                      //   margin: EdgeInsets.only(left: 10),
-                                      //   child: CustomElevatedButton(
-                                      //     backgroundColor:
-                                      //     ColorValues.appLightBlueColor,
-                                      //     onPressed: () {},
-                                      //     text: 'columnVisibility'.tr,
-                                      //   ),
-                                      // ),
-                                      Spacer(),
-                                      Container(
-                                        width: 200,
-                                        height: 40,
-                                        margin: Dimens.edgeInsets0_0_16_0,
-                                        child: TextField(
-                                          onChanged: (value) =>
-                                              controller.search(value),
-                                          decoration: InputDecoration(
-                                            enabledBorder:
-                                                const OutlineInputBorder(
-                                              borderSide: const BorderSide(
-                                                  color: Colors.grey,
-                                                  width: 0.0),
+                                    child: Row(
+                                      children: [
+                                        Text(
+                                          "List of Facilities",
+                                          style: Styles.blackBold16,
+                                        ),
+                                        Spacer(),
+                                        Container(
+                                          width: 300,
+                                          height: 40,
+                                          margin: Dimens.edgeInsets0_0_16_0,
+                                          child: TextField(
+                                            style: TextStyle(
+                                              fontSize: 17.0,
+                                              height: 1.0,
+                                              color: Colors.black,
                                             ),
-                                            focusedBorder:
-                                                const OutlineInputBorder(
-                                              borderSide: const BorderSide(
+                                            onChanged: (value) =>
+                                                controller.search(value),
+                                            decoration: InputDecoration(
+                                              enabledBorder:
+                                                  const OutlineInputBorder(
+                                                borderSide: const BorderSide(
                                                   color: Colors.grey,
-                                                  width: 0.0),
+                                                  width: 0.0,
+                                                ),
+                                              ),
+                                              focusedBorder:
+                                                  const OutlineInputBorder(
+                                                borderSide: const BorderSide(
+                                                  color: Colors.grey,
+                                                  width: 0.0,
+                                                ),
+                                              ),
+                                              contentPadding:
+                                                  Dimens.edgeInsets05_10,
+                                              hintText: 'search'.tr,
+                                              hintStyle: Styles.grey16,
                                             ),
-                                            contentPadding:
-                                                Dimens.edgeInsets10_0_0_0,
-                                            hintText: 'search'.tr,
-                                            hintStyle: Styles.grey12,
                                           ),
                                         ),
-                                      ),
-                                    ],
+                                      ],
+                                    ),
                                   ),
+
+                                  // Row(
+                                  //   children: [
+                                  //     Spacer(),
+
+                                  //   ],
+                                  // ),
                                   SizedBox(
                                     height: 20,
                                   ),
-                                  controller.facilityTypeList.isEmpty
-                                      ? Expanded(
-                                          child: ScrollableTableView(
-                                            columns: [
-                                              "Sr.No.",
-                                              "Title",
-                                              "Address",
-                                              "SPV",
-                                              "City",
-                                              "State",
-                                              "Country",
-                                              "Pin",
-                                              "Blocks",
-                                              "Action"
-                                            ].map((column) {
-                                              return TableViewColumn(
-                                                label: column,
-                                                minWidth: Get.width * 0.16,
-                                              );
-                                            }).toList(),
-                                            rows: [
-                                              ...List.generate(
-                                                controller.facilityTypeList
-                                                        .length ??
-                                                    0,
-                                                (index) {
-                                                  return [
-                                                    '',
-                                                    '',
-                                                    '',
-                                                    '',
-                                                    '',
-                                                    '',
-                                                    '',
-                                                    '',
-                                                    '',
-                                                    '',
-                                                    ''
-                                                  ];
-                                                },
-                                              ),
-                                            ].map((record) {
-                                              return TableViewRow(
-                                                height: 60,
-                                                cells: record.map((value) {
-                                                  return TableViewCell(
-                                                    child: Text(value),
-                                                  );
-                                                }).toList(),
-                                              );
-                                            }).toList(),
-                                          ),
-                                        )
-                                      : Expanded(
-                                          child: ScrollableTableView(
-                                            paginationController: controller
-                                                .facilityTypeListPaginationController,
-                                            columns: [
-                                              "Sr.No.",
-                                              "Title",
-                                              "Address",
-                                              "SPV",
+                                  Expanded(
+                                    child: Obx(
+                                      () => DataTable2(
+                                        key: UniqueKey(),
+                                        dataRowHeight: 50,
+                                        columnSpacing: 10,
+                                        border: TableBorder.all(
+                                            color: Color.fromARGB(
+                                                255, 206, 229, 234)),
+                                        columns: [
+                                          DataColumn2(
+                                              fixedWidth: 50,
+                                              label: Text(
+                                                "Sr No",
+                                                style: TextStyle(
+                                                    fontSize: 15,
+                                                    fontWeight:
+                                                        FontWeight.bold),
+                                              )),
+                                          DataColumn2(
+                                              // fixedWidth: 150,
+                                              label: Text(
+                                            "Title",
+                                            style: TextStyle(
+                                                fontSize: 15,
+                                                fontWeight: FontWeight.bold),
+                                          )),
+                                          DataColumn2(
+                                              // fixedWidth: 300,
+                                              label: Text(
+                                            "Address",
+                                            style: TextStyle(
+                                                fontSize: 15,
+                                                fontWeight: FontWeight.bold),
+                                          )),
+                                          DataColumn2(
+                                              // fixedWidth: 150,
+                                              label: Text(
+                                            "SPV",
+                                            style: TextStyle(
+                                                fontSize: 15,
+                                                fontWeight: FontWeight.bold),
+                                          )),
+                                          DataColumn2(
+                                              // fixedWidth: 300,
+                                              label: Text(
+                                            "City",
+                                            style: TextStyle(
+                                                fontSize: 15,
+                                                fontWeight: FontWeight.bold),
+                                          )),
+                                          DataColumn2(
+                                              fixedWidth: 100,
+                                              label: Text(
+                                                "State",
+                                                style: TextStyle(
+                                                    fontSize: 15,
+                                                    fontWeight:
+                                                        FontWeight.bold),
+                                              )),
+                                          DataColumn2(
+                                              // fixedWidth: 150,
+                                              label: Text(
+                                            "Country",
+                                            style: TextStyle(
+                                                fontSize: 15,
+                                                fontWeight: FontWeight.bold),
+                                          )),
+                                          DataColumn2(
+                                              // fixedWidth: 300,
+                                              label: Text(
+                                            "Pin",
+                                            style: TextStyle(
+                                                fontSize: 15,
+                                                fontWeight: FontWeight.bold),
+                                          )),
+                                          DataColumn2(
+                                              fixedWidth: 100,
+                                              label: Text(
+                                                'Action',
+                                                style: TextStyle(
+                                                    fontSize: 15,
+                                                    fontWeight:
+                                                        FontWeight.bold),
+                                              )),
+                                        ],
+                                        rows: List<DataRow>.generate(
+                                          controller.facilityTypeList?.length ??
+                                              0,
+                                          (index) => DataRow(cells: [
+                                            DataCell(
+                                                Text((index + 1).toString())),
+                                            DataCell(Text(controller
+                                                    .facilityTypeList?[index]
+                                                    ?.name
+                                                    .toString() ??
+                                                '')),
+                                            DataCell(Text(controller
+                                                    .facilityTypeList?[index]
+                                                    ?.address ??
+                                                '')),
+                                            DataCell(Text(controller
+                                                    .facilityTypeList?[index]
+                                                    ?.spv ??
+                                                '')),
+                                            DataCell(Text(controller
+                                                    .facilityTypeList?[index]
+                                                    ?.city ??
+                                                '')),
+                                            DataCell(Text(controller
+                                                    .facilityTypeList?[index]
+                                                    ?.state ??
+                                                '')),
+                                            DataCell(Text(controller
+                                                    .facilityTypeList?[index]
+                                                    ?.country ??
+                                                '')),
+                                            DataCell(Text(controller
+                                                    .facilityTypeList?[index]
+                                                    ?.pin
+                                                    .toString() ??
+                                                '')),
+                                            DataCell(Row(
+                                              children: [
+                                                TableActionButton(
+                                                    color:
+                                                        ColorValues.editColor,
+                                                    icon: Icons.edit,
+                                                    message: 'Edit',
+                                                    onPress: () {
+                                                      controller.selectedItem = controller
+                                                          .facilityTypeList
+                                                          .firstWhere((element) =>
+                                                              "${element.id}" ==
+                                                              controller
+                                                                  .facilityTypeList?[
+                                                                      index]
+                                                                  ?.id
+                                                                  .toString());
 
-                                              "City",
-                                              "State",
-                                              "Country",
-                                              "Pin",
-                                              // "Blocks",
-                                              "Action"
-                                            ].map((column) {
-                                              if (column == "Action") {
-                                                return TableViewColumn(
-                                                  minWidth: Get.width *
-                                                      0.20, // Adjust the width as needed
-                                                  label: column,
-                                                );
-                                              } else {
-                                                return TableViewColumn(
-                                                  minWidth: Get.width * 0.13,
-                                                  label: column,
-                                                );
-                                              }
-                                            }).toList(),
-                                            rows: //
-                                                [
-                                              ...List.generate(
-                                                controller
-                                                    .facilityTypeList.length,
-                                                (index) {
-                                                  var facilityTypeListDetails =
+                                                      controller.titleCtrlr
+                                                          .text = controller
+                                                              .selectedItem
+                                                              ?.name ??
+                                                          '';
+                                                      controller.addressCtrlr
+                                                          .text = controller
+                                                              .selectedItem
+                                                              ?.address ??
+                                                          '';
+                                                      controller.zipcodeCtrlr
+                                                          .text = controller
+                                                              .selectedItem?.pin
+                                                              .toString() ??
+                                                          '';
+
+                                                      controller.selectedSpv
+                                                          .value = controller
+                                                              .selectedItem
+                                                              ?.spv ??
+                                                          '';
+                                                      controller.selectedOwner
+                                                          .value = controller
+                                                              .selectedItem
+                                                              ?.owner ??
+                                                          '';
                                                       controller
-                                                              .facilityTypeList[
-                                                          index];
-                                                  return [
-                                                    '${facilityTypeListDetails.id}',
-                                                    '${facilityTypeListDetails.name}',
-                                                    '${facilityTypeListDetails.address}',
-                                                    '${facilityTypeListDetails.spv}',
-                                                    '${facilityTypeListDetails.city}',
-                                                    '${facilityTypeListDetails.state}',
-                                                    '${facilityTypeListDetails.country}',
-                                                    '${facilityTypeListDetails.pin}',
-                                                    // '${facilityTypeListDetails.blocks}',
-                                                    "Action"
-                                                  ];
-                                                },
-                                              ),
-                                            ].map((_permitTypeList) {
-                                              return TableViewRow(
-                                                  height: 45,
-                                                  cells: _permitTypeList
-                                                      .map((value) {
-                                                    return TableViewCell(
-                                                      child: (value ==
-                                                              'Checkbox')
-                                                          ? Checkbox(
-                                                              value: controller
-                                                                  .isChecked
-                                                                  .value,
-                                                              onChanged:
-                                                                  (val) {})
-                                                          : (value == "Action")
-                                                              ? Wrap(
-                                                                  alignment:
-                                                                      WrapAlignment
-                                                                          .center, // Align buttons to the center
-                                                                  children: [
-                                                                      // varUserAccessModel.value.access_list!.where((e) => e.feature_id == 5 && e.edit == 1).length >
-                                                                      //         0
-                                                                      //     ?
-                                                                      Container(
-                                                                        padding:
-                                                                            EdgeInsets.only(bottom: 10),
-                                                                        child:
-                                                                            Column(
-                                                                          children: [
-                                                                            Container(
-                                                                              padding: EdgeInsets.only(bottom: 10),
-                                                                              child: Row(mainAxisAlignment: MainAxisAlignment.center, children: [
-                                                                                TableActionButton(
-                                                                                  color: ColorValues.appLightBlueColor,
-                                                                                  icon: Icons.visibility,
-                                                                                  message: 'View Blocks',
-                                                                                  onPress: () {},
-                                                                                ),
-                                                                                TableActionButton(
-                                                                                  color: ColorValues.editColor,
-                                                                                  icon: Icons.edit,
-                                                                                  message: 'Edit',
-                                                                                  onPress: () {
-                                                                                    print(_permitTypeList[0]);
-                                                                                    controller.selectedItem = controller.facilityTypeList.firstWhere((element) => "${element.id}" == _permitTypeList[0]);
+                                                          .selectedOperator
+                                                          .value = controller
+                                                              .selectedItem
+                                                              ?.operator ??
+                                                          '';
+                                                      controller
+                                                          .selectedCustomer
+                                                          .value = controller
+                                                              .selectedItem
+                                                              ?.customer ??
+                                                          '';
+                                                      controller.selectedCity
+                                                          .value = controller
+                                                              .selectedItem
+                                                              ?.city ??
+                                                          '';
+                                                      controller.selectedState
+                                                          .value = controller
+                                                              .selectedItem
+                                                              ?.state ??
+                                                          '';
+                                                      controller.selectedCountry
+                                                          .value = controller
+                                                              .selectedItem
+                                                              ?.country ??
+                                                          '';
 
-                                                                                    controller.titleCtrlr.text = controller.selectedItem?.name ?? '';
-                                                                                    controller.addressCtrlr.text = controller.selectedItem?.address ?? '';
-                                                                                    controller.zipcodeCtrlr.text = "${controller.selectedItem?.pin}";
-                                                                                    // controller.descriptionCtrlr.text = "${controller.selectedFacilityId?.description}";
+                                                      // controller.descriptionCtrlr
+                                                      //     .text = controller
+                                                      //         .selectedItem
+                                                      //         ?. ??
+                                                      //     '';
 
-                                                                                    controller.selectedCountry.value = controller.selectedItem?.country ?? "";
-                                                                                    controller.selectedState.value = controller.selectedItem?.state ?? "";
-                                                                                    controller.selectedCity.value = controller.selectedItem?.city ?? "";
-
-                                                                                    // controller.selectedOwner.value = controller.selectedFacilityId?.owner ?? "";
-                                                                                    // controller.selectedequipment.value = controller.selectedItem?.category_name ?? "";
-                                                                                    // controller.manpowerCtrlr.text = "${controller.selectedItem?.manPower}";
-                                                                                    // controller.selectedEquipmentId = controller.selectedItem?.category_id ?? 0;
-                                                                                    // controller.selectedfrequencyId = controller.selectedItem?.frequency_id ?? 0;
-                                                                                  },
-                                                                                ),
-                                                                                TableActionButton(
-                                                                                  color: ColorValues.deleteColor,
-                                                                                  icon: Icons.delete,
-                                                                                  message: 'Delete',
-                                                                                  onPress: () {
-                                                                                    // controller.selectedFacilityId = controller.facilityList.firstWhere((element) => "${element?.id}" == _permitTypeList[0]);
-                                                                                    controller.isDeleteDialog(business_id: _permitTypeList[0], business: _permitTypeList[1]);
-                                                                                  },
-                                                                                ),
-                                                                              ]),
-                                                                            ),
-                                                                          ],
-                                                                        ),
-                                                                      ),
-                                                                      // : Container()
-                                                                    ])
-                                                              : Align(
-                                                                  // Align the text in the center
-                                                                  alignment:
-                                                                      Alignment
-                                                                          .center,
-                                                                  child: Text(
-                                                                      value),
-                                                                ),
-                                                    );
-                                                  }).toList());
-                                            }).toList(),
-                                          ),
+                                                      // int spvId = int.tryParse(
+                                                      //         facilityTypeList?.name ??
+                                                      //             "") ??
+                                                      //     0;
+                                                      // if (spvId != 0) {
+                                                      //   Get.toNamed(
+                                                      //       Routes.SPVListScreen,
+                                                      //       arguments: {"spvId": spvId});
+                                                      // }
+                                                      // controller.selectedItem =
+                                                      //     controller.facilityTypeList.firstWhere(
+                                                      //         (element) =>
+                                                      //             "${element.id}" ==
+                                                      //             _permitTypeList[0]);
+                                                      // controller.selectedItem =
+                                                      //     controller.facilityTypeList.firstWhere(
+                                                      //         (element) =>
+                                                      //             "${element.id}" ==
+                                                      //             _permitTypeList[0]);
+                                                    })
+                                                // : Container(),
+                                                ,
+                                                TableActionButton(
+                                                  color:
+                                                      ColorValues.deleteColor,
+                                                  icon: Icons.delete,
+                                                  message: 'Delete',
+                                                  onPress: () {
+                                                    controller.isDeleteDialog(
+                                                        business_id: controller
+                                                            .facilityTypeList?[
+                                                                index]
+                                                            ?.id
+                                                            .toString(),
+                                                        business: controller
+                                                            .facilityTypeList?[
+                                                                index]
+                                                            ?.name);
+                                                  },
+                                                ),
+                                              ],
+                                            )),
+                                          ]),
                                         ),
-                                  Padding(
-                                    padding: const EdgeInsets.symmetric(
-                                        horizontal: 25),
-                                    child: ValueListenableBuilder(
-                                        valueListenable: controller
-                                            .facilityTypeListPaginationController,
-                                        builder: (context, value, child) {
-                                          return Row(children: [
-                                            Text(
-                                                "${controller.facilityTypeListPaginationController.currentPage}  of ${controller.facilityTypeListPaginationController.pageCount}"),
-                                            Row(children: [
-                                              IconButton(
-                                                onPressed: controller
-                                                            .facilityTypeListPaginationController
-                                                            .currentPage <=
-                                                        1
-                                                    ? null
-                                                    : () {
-                                                        controller
-                                                            .facilityTypeListPaginationController
-                                                            .previous();
-                                                      },
-                                                iconSize: 20,
-                                                splashRadius: 20,
-                                                icon: Icon(
-                                                  Icons
-                                                      .arrow_back_ios_new_rounded,
-                                                  color: controller
-                                                              .facilityTypeListPaginationController
-                                                              .currentPage <=
-                                                          1
-                                                      ? Colors.black26
-                                                      : Theme.of(context)
-                                                          .primaryColor,
-                                                ),
-                                              ),
-                                              IconButton(
-                                                onPressed: controller
-                                                            .facilityTypeListPaginationController
-                                                            .currentPage >=
-                                                        controller
-                                                            .facilityTypeListPaginationController
-                                                            .pageCount
-                                                    ? null
-                                                    : () {
-                                                        controller
-                                                            .facilityTypeListPaginationController
-                                                            .next();
-                                                      },
-                                                iconSize: 20,
-                                                splashRadius: 20,
-                                                icon: Icon(
-                                                  Icons
-                                                      .arrow_forward_ios_rounded,
-                                                  color: controller
-                                                              .facilityTypeListPaginationController
-                                                              .currentPage >=
-                                                          controller
-                                                              .facilityTypeListPaginationController
-                                                              .pageCount
-                                                      ? Colors.black26
-                                                      : Theme.of(context)
-                                                          .primaryColor,
-                                                ),
-                                              ),
-                                            ]),
-                                          ]);
-                                        }),
+                                      ),
+                                    ),
                                   ),
                                 ],
                               ),
                             ),
                           ),
                         )
+
+                      //  Expanded(
+                      //     child: Container(
+                      //       width: Get.width * 7,
+                      //       margin: EdgeInsets.only(left: 10, top: 30),
+                      //       height: Get.height,
+                      //       child: Card(
+                      //         color: Color.fromARGB(255, 251, 252, 253),
+                      //         elevation: 10,
+                      //         shape: RoundedRectangleBorder(
+                      //           borderRadius: BorderRadius.circular(10.0),
+                      //         ),
+                      //         child: Column(
+                      //           crossAxisAlignment: CrossAxisAlignment.start,
+                      //           children: [
+                      //             Padding(
+                      //               padding: const EdgeInsets.all(10.0),
+                      //               child: Text(
+                      //                 "List of Facilities",
+                      //                 style: Styles.blackBold16,
+                      //               ),
+                      //             ),
+                      //             Divider(
+                      //               color: ColorValues.greyLightColour,
+                      //             ),
+                      //             Row(
+                      //               children: [
+                      //                 // Container(
+                      //                 //   width: (Get.width * .1) - 60,
+                      //                 //   margin: EdgeInsets.only(left: 10),
+                      //                 //   child: CustomElevatedButton(
+                      //                 //       backgroundColor:
+                      //                 //       ColorValues.appLightBlueColor,
+                      //                 //       onPressed: () {
+                      //                 //         FlutterClipboard.copy(controller
+                      //                 //         // .preventiveCheckList![0]
+                      //                 //             .toString())
+                      //                 //             .then((value) {
+                      //                 //           print("copy data");
+                      //                 //         });
+                      //                 //       },
+                      //                 //       text: 'Copy'),
+                      //                 // ),
+                      //                 // Container(
+                      //                 //   width: (Get.width * .1) - 60,
+                      //                 //   margin: EdgeInsets.only(left: 10),
+                      //                 //   child: CustomElevatedButton(
+                      //                 //       backgroundColor:
+                      //                 //       ColorValues.appLightBlueColor,
+                      //                 //       onPressed: () {},
+                      //                 //       text: 'Excel'),
+                      //                 // ),
+                      //                 // Container(
+                      //                 //   width: (Get.width * .1) - 70,
+                      //                 //   margin: EdgeInsets.only(left: 10),
+                      //                 //   child: CustomElevatedButton(
+                      //                 //       backgroundColor:
+                      //                 //       ColorValues.appLightBlueColor,
+                      //                 //       onPressed: () {},
+                      //                 //       text: 'PDF'),
+                      //                 // ),
+                      //                 // Container(
+                      //                 //   margin: EdgeInsets.only(left: 10),
+                      //                 //   child: CustomElevatedButton(
+                      //                 //     backgroundColor:
+                      //                 //     ColorValues.appLightBlueColor,
+                      //                 //     onPressed: () {},
+                      //                 //     text: 'columnVisibility'.tr,
+                      //                 //   ),
+                      //                 // ),
+                      //                 Spacer(),
+                      //                 Container(
+                      //                   width: 200,
+                      //                   height: 40,
+                      //                   margin: Dimens.edgeInsets0_0_16_0,
+                      //                   child: TextField(
+                      //                     onChanged: (value) =>
+                      //                         controller.search(value),
+                      //                     decoration: InputDecoration(
+                      //                       enabledBorder:
+                      //                           const OutlineInputBorder(
+                      //                         borderSide: const BorderSide(
+                      //                             color: Colors.grey,
+                      //                             width: 0.0),
+                      //                       ),
+                      //                       focusedBorder:
+                      //                           const OutlineInputBorder(
+                      //                         borderSide: const BorderSide(
+                      //                             color: Colors.grey,
+                      //                             width: 0.0),
+                      //                       ),
+                      //                       contentPadding:
+                      //                           Dimens.edgeInsets10_0_0_0,
+                      //                       hintText: 'search'.tr,
+                      //                       hintStyle: Styles.grey12,
+                      //                     ),
+                      //                   ),
+                      //                 ),
+                      //               ],
+                      //             ),
+                      //             SizedBox(
+                      //               height: 20,
+                      //             ),
+                      //             controller.facilityTypeList.isEmpty
+                      //                 ? Expanded(
+                      //                     child: ScrollableTableView(
+                      //                       columns: [
+                      //                         "Sr.No.",
+                      //                         "Title",
+                      //                         "Address",
+                      //                         "SPV",
+                      //                         "City",
+                      //                         "State",
+                      //                         "Country",
+                      //                         "Pin",
+                      //                         "Blocks",
+                      //                         "Action"
+                      //                       ].map((column) {
+                      //                         return TableViewColumn(
+                      //                           label: column,
+                      //                           minWidth: Get.width * 0.16,
+                      //                         );
+                      //                       }).toList(),
+                      //                       rows: [
+                      //                         ...List.generate(
+                      //                           controller.facilityTypeList
+                      //                                   .length ??
+                      //                               0,
+                      //                           (index) {
+                      //                             return [
+                      //                               '',
+                      //                               '',
+                      //                               '',
+                      //                               '',
+                      //                               '',
+                      //                               '',
+                      //                               '',
+                      //                               '',
+                      //                               '',
+                      //                               '',
+                      //                               ''
+                      //                             ];
+                      //                           },
+                      //                         ),
+                      //                       ].map((record) {
+                      //                         return TableViewRow(
+                      //                           height: 60,
+                      //                           cells: record.map((value) {
+                      //                             return TableViewCell(
+                      //                               child: Text(value),
+                      //                             );
+                      //                           }).toList(),
+                      //                         );
+                      //                       }).toList(),
+                      //                     ),
+                      //                   )
+                      //                 : Expanded(
+                      //                     child: ScrollableTableView(
+                      //                       paginationController: controller
+                      //                           .facilityTypeListPaginationController,
+                      //                       columns: [
+                      //                         "Sr.No.",
+                      //                         "Title",
+                      //                         "Address",
+                      //                         "SPV",
+
+                      //                         "City",
+                      //                         "State",
+                      //                         "Country",
+                      //                         "Pin",
+                      //                         // "Blocks",
+                      //                         "Action"
+                      //                       ].map((column) {
+                      //                         if (column == "Action") {
+                      //                           return TableViewColumn(
+                      //                             minWidth: Get.width *
+                      //                                 0.20, // Adjust the width as needed
+                      //                             label: column,
+                      //                           );
+                      //                         } else {
+                      //                           return TableViewColumn(
+                      //                             minWidth: Get.width * 0.13,
+                      //                             label: column,
+                      //                           );
+                      //                         }
+                      //                       }).toList(),
+                      //                       rows: //
+                      //                           [
+                      //                         ...List.generate(
+                      //                           controller
+                      //                               .facilityTypeList.length,
+                      //                           (index) {
+                      //                             var facilityTypeListDetails =
+                      //                                 controller
+                      //                                         .facilityTypeList[
+                      //                                     index];
+                      //                             return [
+                      //                               '${facilityTypeListDetails.id}',
+                      //                               '${facilityTypeListDetails.name}',
+                      //                               '${facilityTypeListDetails.address}',
+                      //                               '${facilityTypeListDetails.spv}',
+                      //                               '${facilityTypeListDetails.city}',
+                      //                               '${facilityTypeListDetails.state}',
+                      //                               '${facilityTypeListDetails.country}',
+                      //                               '${facilityTypeListDetails.pin}',
+                      //                               // '${facilityTypeListDetails.blocks}',
+                      //                               "Action"
+                      //                             ];
+                      //                           },
+                      //                         ),
+                      //                       ].map((_permitTypeList) {
+                      //                         return TableViewRow(
+                      //                             height: 45,
+                      //                             cells: _permitTypeList
+                      //                                 .map((value) {
+                      //                               return TableViewCell(
+                      //                                 child: (value ==
+                      //                                         'Checkbox')
+                      //                                     ? Checkbox(
+                      //                                         value: controller
+                      //                                             .isChecked
+                      //                                             .value,
+                      //                                         onChanged:
+                      //                                             (val) {})
+                      //                                     : (value == "Action")
+                      //                                         ? Wrap(
+                      //                                             alignment:
+                      //                                                 WrapAlignment
+                      //                                                     .center, // Align buttons to the center
+                      //                                             children: [
+                      //                                                 // varUserAccessModel.value.access_list!.where((e) => e.feature_id == 5 && e.edit == 1).length >
+                      //                                                 //         0
+                      //                                                 //     ?
+                      //                                                 Container(
+                      //                                                   padding:
+                      //                                                       EdgeInsets.only(bottom: 10),
+                      //                                                   child:
+                      //                                                       Column(
+                      //                                                     children: [
+                      //                                                       Container(
+                      //                                                         padding: EdgeInsets.only(bottom: 10),
+                      //                                                         child: Row(mainAxisAlignment: MainAxisAlignment.center, children: [
+                      //                                                           TableActionButton(
+                      //                                                             color: ColorValues.appLightBlueColor,
+                      //                                                             icon: Icons.visibility,
+                      //                                                             message: 'View Blocks',
+                      //                                                             onPress: () {},
+                      //                                                           ),
+                      //                                                           TableActionButton(
+                      //                                                             color: ColorValues.editColor,
+                      //                                                             icon: Icons.edit,
+                      //                                                             message: 'Edit',
+                      //                                                             onPress: () {
+                      //                                                               print(_permitTypeList[0]);
+                      //                                                               controller.selectedItem = controller.facilityTypeList.firstWhere((element) => "${element.id}" == _permitTypeList[0]);
+
+                      //                                                               controller.titleCtrlr.text = controller.selectedItem?.name ?? '';
+                      //                                                               controller.addressCtrlr.text = controller.selectedItem?.address ?? '';
+                      //                                                               controller.zipcodeCtrlr.text = "${controller.selectedItem?.pin}";
+                      //                                                               // controller.descriptionCtrlr.text = "${controller.selectedFacilityId?.description}";
+
+                      //                                                               controller.selectedCountry.value = controller.selectedItem?.country ?? "";
+                      //                                                               controller.selectedState.value = controller.selectedItem?.state ?? "";
+                      //                                                               controller.selectedCity.value = controller.selectedItem?.city ?? "";
+
+                      //                                                               // controller.selectedOwner.value = controller.selectedFacilityId?.owner ?? "";
+                      //                                                               // controller.selectedequipment.value = controller.selectedItem?.category_name ?? "";
+                      //                                                               // controller.manpowerCtrlr.text = "${controller.selectedItem?.manPower}";
+                      //                                                               // controller.selectedEquipmentId = controller.selectedItem?.category_id ?? 0;
+                      //                                                               // controller.selectedfrequencyId = controller.selectedItem?.frequency_id ?? 0;
+                      //                                                             },
+                      //                                                           ),
+                      //                                                           TableActionButton(
+                      //                                                             color: ColorValues.deleteColor,
+                      //                                                             icon: Icons.delete,
+                      //                                                             message: 'Delete',
+                      //                                                             onPress: () {
+                      //                                                               // controller.selectedFacilityId = controller.facilityList.firstWhere((element) => "${element?.id}" == _permitTypeList[0]);
+                      //                                                               controller.isDeleteDialog(business_id: _permitTypeList[0], business: _permitTypeList[1]);
+                      //                                                             },
+                      //                                                           ),
+                      //                                                         ]),
+                      //                                                       ),
+                      //                                                     ],
+                      //                                                   ),
+                      //                                                 ),
+                      //                                                 // : Container()
+                      //                                               ])
+                      //                                         : Align(
+                      //                                             // Align the text in the center
+                      //                                             alignment:
+                      //                                                 Alignment
+                      //                                                     .center,
+                      //                                             child: Text(
+                      //                                                 value),
+                      //                                           ),
+                      //                               );
+                      //                             }).toList());
+                      //                       }).toList(),
+                      //                     ),
+                      //                   ),
+                      //             Padding(
+                      //               padding: const EdgeInsets.symmetric(
+                      //                   horizontal: 25),
+                      //               child: ValueListenableBuilder(
+                      //                   valueListenable: controller
+                      //                       .facilityTypeListPaginationController,
+                      //                   builder: (context, value, child) {
+                      //                     return Row(children: [
+                      //                       Text(
+                      //                           "${controller.facilityTypeListPaginationController.currentPage}  of ${controller.facilityTypeListPaginationController.pageCount}"),
+                      //                       Row(children: [
+                      //                         IconButton(
+                      //                           onPressed: controller
+                      //                                       .facilityTypeListPaginationController
+                      //                                       .currentPage <=
+                      //                                   1
+                      //                               ? null
+                      //                               : () {
+                      //                                   controller
+                      //                                       .facilityTypeListPaginationController
+                      //                                       .previous();
+                      //                                 },
+                      //                           iconSize: 20,
+                      //                           splashRadius: 20,
+                      //                           icon: Icon(
+                      //                             Icons
+                      //                                 .arrow_back_ios_new_rounded,
+                      //                             color: controller
+                      //                                         .facilityTypeListPaginationController
+                      //                                         .currentPage <=
+                      //                                     1
+                      //                                 ? Colors.black26
+                      //                                 : Theme.of(context)
+                      //                                     .primaryColor,
+                      //                           ),
+                      //                         ),
+                      //                         IconButton(
+                      //                           onPressed: controller
+                      //                                       .facilityTypeListPaginationController
+                      //                                       .currentPage >=
+                      //                                   controller
+                      //                                       .facilityTypeListPaginationController
+                      //                                       .pageCount
+                      //                               ? null
+                      //                               : () {
+                      //                                   controller
+                      //                                       .facilityTypeListPaginationController
+                      //                                       .next();
+                      //                                 },
+                      //                           iconSize: 20,
+                      //                           splashRadius: 20,
+                      //                           icon: Icon(
+                      //                             Icons
+                      //                                 .arrow_forward_ios_rounded,
+                      //                             color: controller
+                      //                                         .facilityTypeListPaginationController
+                      //                                         .currentPage >=
+                      //                                     controller
+                      //                                         .facilityTypeListPaginationController
+                      //                                         .pageCount
+                      //                                 ? Colors.black26
+                      //                                 : Theme.of(context)
+                      //                                     .primaryColor,
+                      //                           ),
+                      //                         ),
+                      //                       ]),
+                      //                     ]);
+                      //                   }),
+                      //             ),
+                      //           ],
+                      //         ),
+                      //       ),
+                      //     ),
+                      //   )
+
                       : Container()
                 ],
               ),
